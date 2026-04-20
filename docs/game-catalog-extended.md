@@ -1,0 +1,1410 @@
+# Cards and Such — Extended Game Catalog (Companion)
+
+A companion catalog to `game-catalog.md`, focused on the long tail: regional and folk card games, historical solitaires, international abstracts, obscure dice games, and niche puzzle families that the main catalog is unlikely to cover.
+
+Entry format:
+`- **Game Name** — 1-line description · Players: N · Complexity: L/M/H · Multiplayer: yes/opt/no`
+
+Complexity legend: **L** = light (rules learnable in a minute), **M** = medium, **H** = heavy / deep.
+Multiplayer legend: **yes** = requires 2+, **opt** = supports solo and multi, **no** = strictly single-player.
+
+---
+
+## Regional & Folk Card Games
+
+### Italian Tradition
+- **Briscola** — Classic 2-player Italian trick-taking on a 40-card deck; strongest card wins unless trumped · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Briscola Chiamata** — 5-player partnership Briscola where bidder names the partner via a secret card · Players: 5 · Complexity: M · Multiplayer: yes
+- **Briscolone** — No-trump Briscola with no briscola suit; pure card counting · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Scopa** — Capture matching totals from the table; sweep bonuses drive scoring · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Scopone Scientifico** — Four-player Scopa with all cards dealt; deep deduction · Players: 4 · Complexity: H · Multiplayer: yes
+- **Scopa d'Assi** — Scopa variant where every Ace sweeps the table · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Scopa di Quindici** — Capture by summing played card plus table to 15 rather than matching · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Cirulla** — Ligurian Scopa relative with 15-counting and bonus declarations · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Re-bello** — Northern Italian Scopa derivative with a "handsome king" bonus · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Sette e Mezzo** — Italian blackjack-like to 7½ using the 40-card deck · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Sette Bello** — Capture game prizing the seven of coins · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Tressette** — 40-card trick-taking partnership game with strict signalling conventions · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Tressette a Non Prendere** — Misère Tressette: the goal is to avoid taking tricks · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Tressette con il Morto** — Three-player Tressette with a dummy hand · Players: 3 · Complexity: M · Multiplayer: yes
+- **Calabresella** — Three-handed Neapolitan trick-taker where one declarer plays two opponents · Players: 3 · Complexity: H · Multiplayer: yes
+- **Terziglio** — Calabresella variant popular in Rome with Napoli bonuses · Players: 3 · Complexity: H · Multiplayer: yes
+- **Mercante in Fiera** — Fairground auction-lottery played with a double pack · Players: 6-20 · Complexity: L · Multiplayer: yes
+- **Madrasso** — Venetian 40-card partnership game with declarations · Players: 4 · Complexity: M · Multiplayer: yes
+- **Peppa** — Lombard climbing/shedding game similar to Asshole · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Asso Piglia Tutto** — "Ace takes all" capture variant of Scopa for beginners · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Bestia** — Central-Italian gambling game with pool and contracts · Players: 3-7 · Complexity: M · Multiplayer: yes
+- **Cucù** — Round-the-table card-swap game with forfeits · Players: 3-20 · Complexity: L · Multiplayer: yes
+- **Marafone / Beccaccino** — Romagna-style 40-card trick-taker with trump and accuse · Players: 4 · Complexity: M · Multiplayer: yes
+
+### Tarot & Tarock
+- **Tarocchini** — Bolognese 62-card tarot trick-taking with melds · Players: 4 · Complexity: H · Multiplayer: yes
+- **Ottocento** — Modern Bolognese tarocchini with scoring combinations · Players: 4 · Complexity: H · Multiplayer: yes
+- **Tarocco Piemontese** — Piedmontese 78-card tarot game with partnerships · Players: 3-5 · Complexity: H · Multiplayer: yes
+- **Mitigati** — Piedmontese tarot variant without the lowest pip cards · Players: 3-5 · Complexity: H · Multiplayer: yes
+- **Chiamare il Re** — Piemontese "Call the King" partnership tarot · Players: 5 · Complexity: H · Multiplayer: yes
+- **Mindil** — Ferrarese tarot variant with unusual bidding · Players: 4 · Complexity: H · Multiplayer: yes
+- **Tarot Nouveau (French Tarot)** — The 78-card French trick-taker with Excuse, Oudlers, and slam bonuses · Players: 3-5 · Complexity: H · Multiplayer: yes
+- **Petit au Bout** — Classic French Tarot bonus for winning the last trick with the trump 1 · Players: 3-5 · Complexity: H · Multiplayer: yes
+- **Königrufen** — Austrian "Call the King" tarock; chooses a partner by named card · Players: 4 · Complexity: H · Multiplayer: yes
+- **Zwanzigerrufen** — Four-player tarock variant where the bidder calls the 20 · Players: 4 · Complexity: H · Multiplayer: yes
+- **Neunzehnerrufen** — Three-player tarock with a called 19 · Players: 3 · Complexity: H · Multiplayer: yes
+- **Illustrated Tarock** — Austrian tarock played with a stripped 54-card pack · Players: 3 · Complexity: H · Multiplayer: yes
+- **Cego** — Baden-style tarock with an exchange pile ("cego") · Players: 3-4 · Complexity: H · Multiplayer: yes
+- **Droggn** — Tyrolean tarock three-hander with unusual bidding ladder · Players: 3 · Complexity: H · Multiplayer: yes
+- **Dreierles** — Württemberg tarock for three · Players: 3 · Complexity: H · Multiplayer: yes
+- **Tapp Tarock** — Austrian "tapp" tarock; bidder takes talon · Players: 3 · Complexity: H · Multiplayer: yes
+- **Point Tarock** — Two-deck Austrian tarock with declarations · Players: 3 · Complexity: H · Multiplayer: yes
+- **Taroky** — Czech national tarock with strong partnership play · Players: 4 · Complexity: H · Multiplayer: yes
+- **Ulti** — Hungarian 32-card tarock-style with named contracts · Players: 3 · Complexity: H · Multiplayer: yes
+- **Paskievics** — Hungarian tarokk variant with extra bonuses · Players: 4 · Complexity: H · Multiplayer: yes
+- **Magyar Tarokk** — Classic Hungarian 42-card tarokk · Players: 4 · Complexity: H · Multiplayer: yes
+- **Slovenian Tarok** — Distinct national tarok with Klop and Solo contracts · Players: 3-4 · Complexity: H · Multiplayer: yes
+- **Danish Tarok** — Stripped-pack tarok surviving in Jutland · Players: 3 · Complexity: H · Multiplayer: yes
+
+### German & Central European
+- **Skat** — The German national game; 3-player trick-taking with auctions and Ramsch · Players: 3 · Complexity: H · Multiplayer: yes
+- **Ramsch** — Anti-trick Skat side game where lowest score wins · Players: 3 · Complexity: M · Multiplayer: yes
+- **Bauernskat** — Simplified "farmer's Skat" with fewer contracts · Players: 3 · Complexity: M · Multiplayer: yes
+- **Officers' Skat** — Two-player Skat with open and closed columns · Players: 2 · Complexity: M · Multiplayer: yes
+- **Schafkopf** — Bavarian partnership trick-taker using a 32-card deck · Players: 4 · Complexity: H · Multiplayer: yes
+- **Kurze Karte Schafkopf** — Short-pack Schafkopf (24 cards) for faster play · Players: 4 · Complexity: M · Multiplayer: yes
+- **Wenz** — Schafkopf contract where only Jacks are trump · Players: 4 · Complexity: M · Multiplayer: yes
+- **Geier** — Schafkopf "Vulture" contract with only Obers as trump · Players: 4 · Complexity: M · Multiplayer: yes
+- **Solo Schafkopf** — Schafkopf solo contracts played alone against three · Players: 4 · Complexity: H · Multiplayer: yes
+- **Doppelkopf** — Double-pack German partnership game with hidden partners · Players: 4 · Complexity: H · Multiplayer: yes
+- **Doko Hochzeit** — "Wedding" contract in Doppelkopf revealing partners · Players: 4 · Complexity: H · Multiplayer: yes
+- **Doko Schwarze Sau** — Doppelkopf announcement affecting Queen of Clubs · Players: 4 · Complexity: H · Multiplayer: yes
+- **Watten** — Alpine 4-player trick game with permanent trumps and bluffing · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Blind Watten** — Watten with no critical cards visible · Players: 4 · Complexity: M · Multiplayer: yes
+- **Tiroler Watten** — Tyrolean Watten with different critical-card order · Players: 4 · Complexity: M · Multiplayer: yes
+- **Perlaggen** — South-Tyrolean trick-taker with complex signal play · Players: 4 · Complexity: H · Multiplayer: yes
+- **Bauerchen** — Saarland 4-player 20-card trick game · Players: 4 · Complexity: M · Multiplayer: yes
+- **Binokel** — Württemberg pinochle cousin with 48-card pack · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Gaigel** — Swabian 48-card marriage game · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Grasobern** — Bavarian penalty-avoidance trick game · Players: 4 · Complexity: M · Multiplayer: yes
+- **Mucken** — Franconian partnership Schafkopf-style with fixed trumps · Players: 4 · Complexity: M · Multiplayer: yes
+- **Préférence (Prefo)** — Central European 3-player trick-taker with bidding ladder · Players: 3 · Complexity: M · Multiplayer: yes
+- **Russian Preference** — Classic four-card-talon Preferans · Players: 3 · Complexity: H · Multiplayer: yes
+- **Sochinka** — Short Russian Preferans scoring variant · Players: 3 · Complexity: H · Multiplayer: yes
+- **Rostov Preferans** — Southern Russian variant with open misère · Players: 3 · Complexity: H · Multiplayer: yes
+- **Leningrad Preferans** — Baltic-influenced Preferans variant · Players: 3 · Complexity: H · Multiplayer: yes
+- **Gusarik** — Two-player Preferans offshoot · Players: 2 · Complexity: M · Multiplayer: yes
+- **Mariáš** — Czech 3-player trump game with marriages · Players: 3 · Complexity: M · Multiplayer: yes
+- **Licitovaný Mariáš** — Mariáš with bidding for higher contracts · Players: 3 · Complexity: H · Multiplayer: yes
+- **Voli Mariáš** — Czech "choice" Mariáš with declarer picks · Players: 3 · Complexity: M · Multiplayer: yes
+- **Sedma** — Czech/Slovak 7-takes-all capture game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Prší** — Czech shedding game akin to Crazy Eights · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Žolík** — Slovak Rummy with Jokers · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Kaiserspiel** — Swiss climbing card game with ranked roles · Players: 4-7 · Complexity: M · Multiplayer: yes
+- **Jass** — Swiss national trick-taker on 36-card pack · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Schieber Jass** — Partnership Jass with trump-pass option · Players: 4 · Complexity: M · Multiplayer: yes
+- **Coiffeur Jass** — Contract Jass where each trump is used once per match · Players: 4 · Complexity: M · Multiplayer: yes
+- **Differenzler Jass** — Jass bidding game where you predict your exact points · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Molotow Jass** — Misère Jass variant · Players: 4 · Complexity: M · Multiplayer: yes
+- **Chibre** — Western Swiss partnership Jass · Players: 4 · Complexity: M · Multiplayer: yes
+- **Sjavs** — Danish/Faroese trump game using a 32-card pack · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Gnav** — Scandinavian tile/card betting game on a 42-piece deck · Players: 3-10 · Complexity: L · Multiplayer: yes
+
+### Iberian, Latin & Lusophone
+- **Tute** — Spanish 40-card trick-taker with King-Queen marriages · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Tute Cabrero** — 3-player Tute where the "goat" plays alone · Players: 3 · Complexity: M · Multiplayer: yes
+- **Tute Subastado** — Auction Tute with bidding for trump · Players: 4 · Complexity: M · Multiplayer: yes
+- **Tute Habanero** — Cuban Tute variant with partnership switches · Players: 4 · Complexity: M · Multiplayer: yes
+- **Mus** — Basque 4-player bluffing/betting game with four bidding phases · Players: 4 · Complexity: H · Multiplayer: yes
+- **Chinchón** — Spanish Rummy-like to lay down sets and runs · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Conquián** — Mexican ancestor of Gin Rummy using the 40-card pack · Players: 2 · Complexity: M · Multiplayer: yes
+- **Escoba** — Spanish-language cousin of Scopa (capture to 15) · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Brisca** — Spanish Briscola variant · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Burro** — Latin American speed-swap game; loser spells "burro" · Players: 3-13 · Complexity: L · Multiplayer: yes
+- **Cuarenta** — Ecuadorian national partnership capture game to 40 · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Truco Argentino** — Argentine bluffing/trick game with song and envido · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Truco Uruguayo** — Uruguayan Truco with "flor" declaration · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Truco Paulista** — Brazilian partnership Truco with a "manilha" caller · Players: 4 · Complexity: M · Multiplayer: yes
+- **Truco Mineiro** — Minas Gerais Truco variant · Players: 4 · Complexity: M · Multiplayer: yes
+- **Truco Venezolano** — Venezuelan Truco with different bidding ladder · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Envido** — Truco sub-game for the highest two-card total · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Flor** — Three-of-a-suit declaration played in many Truco regions · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Chinchorro** — Chilean 40-card trick-taker with partnerships · Players: 4 · Complexity: M · Multiplayer: yes
+- **Carioca** — South American draw-and-discard rummy over 11 contracts · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Buraco** — Italo-Brazilian partnership Canasta cousin · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Buraco Fechado** — "Closed" Buraco with stricter opening melds · Players: 4 · Complexity: M · Multiplayer: yes
+- **Buraco Italiano** — Italian-style Buraco with pot bonuses · Players: 4 · Complexity: M · Multiplayer: yes
+- **Biriba** — Greek-Brazilian Rummy relative played in Cyprus too · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Continental Rummy** — Long-contract multi-hand South American rummy · Players: 2-12 · Complexity: M · Multiplayer: yes
+- **Shanghai Rum** — Ten-contract progressive rummy popular in Latin America · Players: 2-8 · Complexity: M · Multiplayer: yes
+- **Tonk** — Caribbean-American fast rummy with hit-and-knock · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Sueca** — Portuguese 4-player trick-taking partnership · Players: 4 · Complexity: M · Multiplayer: yes
+- **Bisca** — Portuguese Briscola cousin · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Solo Português** — Portuguese Solo (Ombre variant) · Players: 4 · Complexity: M · Multiplayer: yes
+- **Ombre** — Historical Spanish 3-hander ancestor of modern trick-takers · Players: 3 · Complexity: H · Multiplayer: yes
+- **Quadrille** — Four-hand Ombre variant popular in 18th-century Europe · Players: 4 · Complexity: H · Multiplayer: yes
+
+### French & Belgian
+- **Belote** — French national 32-card trick-taker with bonuses for marriages and sequences · Players: 4 · Complexity: M · Multiplayer: yes
+- **Belote Contrée** — Belote variant with contract bidding like Bridge · Players: 4 · Complexity: M · Multiplayer: yes
+- **Coinche** — Auction Belote popular in southern France · Players: 4 · Complexity: M · Multiplayer: yes
+- **Belote Bridgée** — Bridge-influenced Belote variant · Players: 4 · Complexity: H · Multiplayer: yes
+- **Belote à Deux** — Two-hand Belote · Players: 2 · Complexity: M · Multiplayer: yes
+- **Belote à Trois** — Three-hand Belote with talon · Players: 3 · Complexity: M · Multiplayer: yes
+- **Belote Découverte** — Open Belote with face-up columns · Players: 2 · Complexity: M · Multiplayer: yes
+- **Belote Tout Atout** — All-trump Belote contract · Players: 4 · Complexity: M · Multiplayer: yes
+- **Belote Sans Atout** — No-trump Belote contract · Players: 4 · Complexity: M · Multiplayer: yes
+- **Manille** — Pre-Belote French trick-taker using 10-as-highest ordering · Players: 4 · Complexity: M · Multiplayer: yes
+- **Manille Parlée** — Manille with open partnership communication · Players: 4 · Complexity: M · Multiplayer: yes
+- **Aluette** — Vendée four-player game with coded gestures and unusual pack · Players: 4 · Complexity: H · Multiplayer: yes
+- **Mistigri** — Historical 18th-century French trick game, ancestor of Old Maid · Players: 3-5 · Complexity: L · Multiplayer: yes
+- **Nain Jaune** — "Yellow Dwarf" French family stake-laying game on a board · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Barbu** — Multi-contract French trick-avoidance collection · Players: 4 · Complexity: H · Multiplayer: yes
+- **Bézique** — Classic 2-player marriage trick game on 64 cards · Players: 2 · Complexity: M · Multiplayer: yes
+- **Rubicon Bézique** — Bézique variant with higher target score · Players: 2 · Complexity: M · Multiplayer: yes
+- **Chinese Bezique** — Six-deck Bezique with huge meld potential · Players: 2 · Complexity: H · Multiplayer: yes
+- **Piquet** — Historical 2-hand French game of 32 cards, still played · Players: 2 · Complexity: H · Multiplayer: yes
+- **Écarté** — 19th-century 2-hand trick-taker on 32 cards · Players: 2 · Complexity: M · Multiplayer: yes
+- **Vingt-et-un** — Historical French blackjack; ancestor of modern 21 · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Whist Bridge** — Historical French Whist cousin with bidding · Players: 4 · Complexity: H · Multiplayer: yes
+- **Tarot à Cinq** — Five-handed French Tarot with called partner · Players: 5 · Complexity: H · Multiplayer: yes
+- **Jeu de la Guerre** — French "War" with rank-based battles and officers · Players: 2 · Complexity: L · Multiplayer: yes
+- **Le Truc** — Gascon Truc with flower and envido concepts · Players: 2-4 · Complexity: M · Multiplayer: yes
+
+### British & Irish Isles
+- **Whist** — The classic English 4-player trick-taker that seeded Bridge · Players: 4 · Complexity: M · Multiplayer: yes
+- **Solo Whist** — Whist with individual contracts: Proposal, Solo, Misère, Abundance · Players: 4 · Complexity: M · Multiplayer: yes
+- **German Whist** — Two-player Whist with drawn replacement cards · Players: 2 · Complexity: M · Multiplayer: yes
+- **Knockout Whist** — Whist with shrinking hands and last-player-standing · Players: 2-7 · Complexity: L · Multiplayer: yes
+- **Israeli Whist** — Bidding-variant Whist popular in Israel · Players: 4 · Complexity: M · Multiplayer: yes
+- **Minnesota Whist** — Misère/trump "grand" or "no trump" contracts · Players: 4 · Complexity: M · Multiplayer: yes
+- **Boston Whist** — 18th-century transitional Whist-Bridge with named contracts · Players: 4 · Complexity: H · Multiplayer: yes
+- **Bid Whist** — African-American partnership Whist with a kitty · Players: 4 · Complexity: M · Multiplayer: yes
+- **Spoil Five** — Irish national 5-card trick game · Players: 2-10 · Complexity: M · Multiplayer: yes
+- **Twenty-Five** — Irish partnership Spoil Five variant · Players: 2-9 · Complexity: M · Multiplayer: yes
+- **Forty-Five** — Irish-American Spoil Five cousin · Players: 2-10 · Complexity: M · Multiplayer: yes
+- **Auction Forty-Five** — Bidding version of Forty-Five popular in Nova Scotia · Players: 4-6 · Complexity: M · Multiplayer: yes
+- **Don** — Northern English partnership trick-taker using ranked 9-5-J-A-10 · Players: 4 · Complexity: M · Multiplayer: yes
+- **All Fours** — English 2-player trick game of High, Low, Jack, Game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Pitch (Setback)** — American descendent of All Fours with bidding · Players: 2-7 · Complexity: M · Multiplayer: yes
+- **California Jack** — Pitch variant with stock-drawing · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Cinch (Double Pedro)** — American trick game once called "the king of games" · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Pedro** — All Fours descendant using 5 of trumps for big points · Players: 4-6 · Complexity: M · Multiplayer: yes
+- **Smear** — Upper-Midwest All Fours variant with "smear" plays · Players: 2-8 · Complexity: M · Multiplayer: yes
+- **Nap (Napoleon)** — Simple trick-call game with fixed contracts · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Pope Joan** — Historical board-and-card staking game with wild 9 of diamonds · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Newmarket** — English family stop game on a layout · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Michigan** — American Newmarket with four boodle cards · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Tressette English** — English club adaptation of Tressette · Players: 4 · Complexity: M · Multiplayer: yes
+- **Bezique Anglaise** — English Bezique with six-deck variant · Players: 2 · Complexity: M · Multiplayer: yes
+
+### Eastern European & Slavic
+- **Durak (Podkidnoy)** — Russian "Throw-In Fool" shedding game · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Perevodnoy Durak** — "Passing Fool" Durak variant · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Perekidnoy Durak** — Durak variant where beating cards can be redirected · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Dvorovoy Durak** — Courtyard Durak played with limited trumps · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **1000 (Тысяча)** — Russian 3-player trick game to reach 1000 · Players: 3 · Complexity: M · Multiplayer: yes
+- **Kozel** — Russian "Goat" partnership trick-taker · Players: 4 · Complexity: M · Multiplayer: yes
+- **Bura** — Russian 36-card trick game with "bura" trump combos · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Zhelezka** — Russian baccarat-like gambling game · Players: 3-10 · Complexity: L · Multiplayer: yes
+- **Svoyi Kozyri** — "One's Own Trumps" Russian Durak variant · Players: 4 · Complexity: M · Multiplayer: yes
+- **Galbriz** — Baltic trick game with conventions · Players: 4 · Complexity: M · Multiplayer: yes
+- **Thousand Schnapsen** — Central European 3-player marriage game · Players: 3 · Complexity: M · Multiplayer: yes
+- **Schnapsen** — Austrian 2-player 20-card marriage game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Bauernschnapsen** — Four-player partnership Schnapsen · Players: 4 · Complexity: M · Multiplayer: yes
+- **Schnapsen mit Talon** — Schnapsen with exchange stock · Players: 2 · Complexity: M · Multiplayer: yes
+- **Sixty-Six** — German 24-card Schnapsen cousin · Players: 2 · Complexity: L · Multiplayer: yes
+- **Three-Two-Five (3-2-5)** — Indian trick game for three · Players: 3 · Complexity: M · Multiplayer: yes
+- **Twenty-Eight (28)** — South Indian 4-player bidding trick-taker · Players: 4-8 · Complexity: M · Multiplayer: yes
+- **Twenty-Nine (29)** — Eastern India / Bangladesh partnership trick-taker · Players: 4 · Complexity: M · Multiplayer: yes
+- **Literature** — Information-sharing "half suit" game popular in India · Players: 6-8 · Complexity: M · Multiplayer: yes
+- **Mendikot** — Indian partnership game to capture all Tens · Players: 4 · Complexity: M · Multiplayer: yes
+- **Dehla Pakad** — Hindi "Capture the Ten" partnership trick game · Players: 4 · Complexity: M · Multiplayer: yes
+- **Court Piece (Rang)** — Pakistani/Indian trump trick game with judge · Players: 4 · Complexity: M · Multiplayer: yes
+- **Seep** — North Indian capture game similar to Scopa · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Ganjifa** — Traditional Indian round-card trick game; many regional variants · Players: 2-6 · Complexity: M · Multiplayer: yes
+
+### East Asian
+- **Big Two (Choh Dai Di)** — Cantonese climbing game; shed your hand first · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Big Three** — Three-player Big Two variant · Players: 3 · Complexity: L · Multiplayer: yes
+- **Pusoy** — Filipino partnership Big Two · Players: 4 · Complexity: L · Multiplayer: yes
+- **Pusoy Dos** — Filipino Big Two with local combos · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Pusoy Chinese Poker** — 13-card arrange-3-hands poker popular in PH/HK · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Open-Face Chinese Poker** — Chinese Poker dealt one card at a time · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Pineapple OFC** — OFC variant with 3-card deals and fantasy-land · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Tien Len** — Vietnamese "Advance" climbing card game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Sâm Lốc** — Vietnamese Big Two with fixed 10-card hands · Players: 2-5 · Complexity: L · Multiplayer: yes
+- **Tam Cúc** — Vietnamese chess-card game using red/black pieces · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Tứ Sắc** — Vietnamese four-color matching game · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Chắn** — North Vietnamese matching/melding card game · Players: 4 · Complexity: H · Multiplayer: yes
+- **Tổ Tôm** — Ancient Vietnamese 120-card rummy-like · Players: 4-5 · Complexity: H · Multiplayer: yes
+- **Daifugō (Rich Man, Poor Man)** — Japanese class-shifting shedding game · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Daihinmin** — "Great Poor Man" Daifugō variant · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Hikifuda** — Historical Japanese Daifugō-like tile game · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Hanafuda (Koi-Koi)** — Japanese flower cards matching game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Hachi-Hachi** — Three-player Hanafuda game to 88 points · Players: 3 · Complexity: M · Multiplayer: yes
+- **Oicho-Kabu** — Japanese blackjack-like with Hanafuda · Players: 2-10 · Complexity: L · Multiplayer: yes
+- **Mushi-Fuda** — Japanese Hanafuda "insect cards" solitaire-style · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Go-Stop (Godori)** — Korean Hanafuda game with "stop or go" decisions · Players: 2-3 · Complexity: M · Multiplayer: yes
+- **Mattakija** — Korean Go-Stop with higher stakes rules · Players: 2-3 · Complexity: M · Multiplayer: yes
+- **Minhwatu** — Korean Hanafuda gambling variant · Players: 2-3 · Complexity: M · Multiplayer: yes
+- **Sueoji** — Korean card-matching shedding game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Tujeon** — Traditional Korean long-card gambling · Players: 2-8 · Complexity: M · Multiplayer: yes
+
+### Mahjong Family
+- **Riichi Mahjong** — Japanese standard rule-set with riichi declaration and yaku · Players: 4 · Complexity: H · Multiplayer: yes
+- **Riichi 3-Player (Sanma)** — Three-player Riichi with shortened pack · Players: 3 · Complexity: H · Multiplayer: yes
+- **Hong Kong Mahjong** — Popular Cantonese rule-set with fan scoring · Players: 4 · Complexity: H · Multiplayer: yes
+- **Hong Kong Old Style** — Traditional HK with fewer yaku · Players: 4 · Complexity: M · Multiplayer: yes
+- **Taiwanese 16-Tile Mahjong** — 16 tile hand with extra sets · Players: 4 · Complexity: H · Multiplayer: yes
+- **American Mahjong (NMJL)** — National League rules with Charleston and joker set · Players: 4 · Complexity: H · Multiplayer: yes
+- **Wright-Patterson Mahjong** — US military American Mahjong offshoot · Players: 4 · Complexity: H · Multiplayer: yes
+- **Singaporean Mahjong** — HK rules with animals tiles and flower bonuses · Players: 4 · Complexity: H · Multiplayer: yes
+- **Malaysian Mahjong** — Local HK-style variant with regional yaku · Players: 4 · Complexity: H · Multiplayer: yes
+- **Vietnamese Mahjong** — Local tile set including bonus jokers · Players: 4 · Complexity: H · Multiplayer: yes
+- **Filipino Mahjong** — Philippines 17-tile variant · Players: 4 · Complexity: H · Multiplayer: yes
+- **Thai Mahjong** — Thai rule-set including flower tiles and local yaku · Players: 4 · Complexity: H · Multiplayer: yes
+- **Chinese Classical Mahjong** — Original pre-1920 rules without modern fans · Players: 4 · Complexity: H · Multiplayer: yes
+- **Chinese Official (MCR)** — International competition standard · Players: 4 · Complexity: H · Multiplayer: yes
+- **Zung Jung** — Unified Chinese scoring rule-set · Players: 4 · Complexity: H · Multiplayer: yes
+- **Sichuan Bloody Mahjong** — Missing-suit rule popular in Sichuan · Players: 4 · Complexity: H · Multiplayer: yes
+- **Sichuan Xuezhan** — Aggressive three-suit Sichuan variant · Players: 4 · Complexity: H · Multiplayer: yes
+- **Wuhan Mahjong** — Hubei regional with "opening" rule · Players: 4 · Complexity: H · Multiplayer: yes
+- **Shanghai Mahjong** — Shanghai-specific scoring and joker rules · Players: 4 · Complexity: H · Multiplayer: yes
+- **Tianjin Mahjong** — Northern Chinese high-scoring variant · Players: 4 · Complexity: H · Multiplayer: yes
+- **Mahjong Solitaire (Shanghai)** — Single-player matching layout · Players: 1 · Complexity: L · Multiplayer: no
+- **Mahjong Titans** — Windows-era solitaire layout collection · Players: 1 · Complexity: L · Multiplayer: no
+- **Triple Mahjong** — Three-layer match solitaire · Players: 1 · Complexity: L · Multiplayer: no
+
+### American Classic & Partnership
+- **Pinochle (Auction)** — 2-4 player trick-and-meld game on a double 9-A pack · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Partnership Pinochle** — Four-hand partnership Pinochle · Players: 4 · Complexity: M · Multiplayer: yes
+- **Double-Deck Pinochle** — 80-card version with bigger melds · Players: 4 · Complexity: M · Multiplayer: yes
+- **Racehorse Pinochle** — Fast auction Pinochle variant · Players: 4 · Complexity: M · Multiplayer: yes
+- **Firehouse Pinochle** — Simple first-player-bids Pinochle · Players: 4 · Complexity: M · Multiplayer: yes
+- **Checkback Pinochle** — Communication-rich partnership Pinochle · Players: 4 · Complexity: M · Multiplayer: yes
+- **Sheepshead (Sheephead)** — Wisconsin 5-player Schafkopf descendant · Players: 5 · Complexity: M · Multiplayer: yes
+- **Jack of Diamonds Sheepshead** — Sheepshead variant using the J♦ partner rule · Players: 5 · Complexity: M · Multiplayer: yes
+- **Cross Sheepshead** — Variant where partners sit across · Players: 4 · Complexity: M · Multiplayer: yes
+- **Wizard** — 60-card bidding-for-tricks game with 4 Wizards and 4 Jesters · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Oh Hell!** — Exact-tricks bidding game; the misfire is the fun · Players: 3-7 · Complexity: L · Multiplayer: yes
+- **Romanian Whist** — Oh Hell! variant with shrinking-growing hands · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Blackout** — British Oh Hell! cousin · Players: 3-7 · Complexity: L · Multiplayer: yes
+- **Up and Down the River** — US Oh Hell! variant with rising/falling hand size · Players: 3-7 · Complexity: L · Multiplayer: yes
+- **Hand and Foot** — Four-deck Canasta relative played with hand and "foot" stack · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Cuban Canasta** — Canasta cousin with red 3 frozen pile rules · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Samba** — Three-deck Canasta with sequence melds · Players: 4-6 · Complexity: M · Multiplayer: yes
+- **Bolivia** — Samba cousin allowing wild canastas · Players: 4-6 · Complexity: M · Multiplayer: yes
+- **Brazilian Canasta** — Regional Canasta variant with extra bonuses · Players: 4 · Complexity: M · Multiplayer: yes
+- **Italian Canasta** — Uses stripped pack and specific meld bonuses · Players: 4 · Complexity: M · Multiplayer: yes
+- **Pennies from Heaven** — Canasta-family game with 7 "pennies" foot stack · Players: 4 · Complexity: M · Multiplayer: yes
+- **Tichu** — Chinese-German partnership climbing game with bombs · Players: 4 · Complexity: M · Multiplayer: yes
+- **The Great Dalmuti** — Tichu-like class shedding game with named roles · Players: 4-8 · Complexity: L · Multiplayer: yes
+- **Haggis** — Three-player Tichu offshoot by Sean Ross · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Ra-Sen-So** — Asian inspired climbing game variant · Players: 3-5 · Complexity: M · Multiplayer: yes
+- **Frank's Zoo** — Animal-hierarchy shedding game · Players: 3-7 · Complexity: L · Multiplayer: yes
+- **Gang of Four** — Big Two style shedding game with distinctive art · Players: 3-4 · Complexity: L · Multiplayer: yes
+- **Mü & More** — Doris and Frank shedding/trump-taking game · Players: 3-5 · Complexity: M · Multiplayer: yes
+- **Sticheln** — Unusual trick-taker where you score bad suits · Players: 3-6 · Complexity: M · Multiplayer: yes
+
+## Historical & Obscure Solitaire Variants
+
+### Patience Classics (single deck)
+- **Cruel** — Redeal-heavy single-deck patience with blocking tableau · Players: 1 · Complexity: M · Multiplayer: no
+- **Perseverance** — Cruel relative allowing limited shuffles · Players: 1 · Complexity: M · Multiplayer: no
+- **Accordion** — Compress 52 cards into one pile by matching 1st or 3rd prior · Players: 1 · Complexity: L · Multiplayer: no
+- **Methuselah** — Accordion with looser matching rules · Players: 1 · Complexity: L · Multiplayer: no
+- **Tower of London** — Accordion relative with three discard stacks · Players: 1 · Complexity: L · Multiplayer: no
+- **Beleaguered Castle** — Build foundations while dismantling four side "walls" · Players: 1 · Complexity: M · Multiplayer: no
+- **Citadel** — Beleaguered Castle starting with aces out and skipping unplayable cards · Players: 1 · Complexity: M · Multiplayer: no
+- **Streets and Alleys** — Beleaguered Castle without aces pre-seeded · Players: 1 · Complexity: M · Multiplayer: no
+- **Fortress** — Beleaguered Castle with 10-card rows · Players: 1 · Complexity: M · Multiplayer: no
+- **Stronghold** — Beleaguered Castle with free cell · Players: 1 · Complexity: M · Multiplayer: no
+- **Chessboard** — Free-cell-like patience with 64 tableau cells · Players: 1 · Complexity: M · Multiplayer: no
+- **Sultan of Turkey** — Double-deck with an 8-king wheel around a central King · Players: 1 · Complexity: M · Multiplayer: no
+- **Emperor** — Double-deck patience building up and down suit · Players: 1 · Complexity: M · Multiplayer: no
+- **Miss Milligan** — Two-deck classic with strict single-card moves · Players: 1 · Complexity: H · Multiplayer: no
+- **Miss Milligan Waving** — Miss Milligan allowing group moves · Players: 1 · Complexity: M · Multiplayer: no
+- **Napoleon at St. Helena** — Four-deck Forty Thieves ancestor · Players: 1 · Complexity: H · Multiplayer: no
+- **Rouge et Noir** — Alternating-color patience built in a Napoleon style · Players: 1 · Complexity: M · Multiplayer: no
+- **Napoleon's Square** — Square layout two-deck solitaire · Players: 1 · Complexity: M · Multiplayer: no
+- **Napoleon's Shoulder** — Layout resembling epaulettes with a center talon · Players: 1 · Complexity: M · Multiplayer: no
+- **Duchess de Luynes** — Patience requiring shuffled redeals · Players: 1 · Complexity: M · Multiplayer: no
+- **Westcliff** — Klondike cousin with ten columns and no restriction on empty columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Easthaven** — Klondike/Yukon hybrid with all-column deals from stock · Players: 1 · Complexity: M · Multiplayer: no
+- **Westhaven** — Easthaven with extra tableau row · Players: 1 · Complexity: M · Multiplayer: no
+- **Sly Fox** — Patience with tableau refill windows and an attic · Players: 1 · Complexity: M · Multiplayer: no
+- **Scorpion** — Spider cousin allowing any-rank moves but only suit-based building · Players: 1 · Complexity: M · Multiplayer: no
+- **Wasp** — Scorpion cousin with easier empty-column rules · Players: 1 · Complexity: M · Multiplayer: no
+- **Windmill** — Eight-pile cross solitaire built alternately up and down · Players: 1 · Complexity: M · Multiplayer: no
+- **Propeller** — Windmill variant with spinning reserve piles · Players: 1 · Complexity: M · Multiplayer: no
+- **Clock Patience** — Flip-till-you-bust clock-layout single-deck · Players: 1 · Complexity: L · Multiplayer: no
+- **Travelers Patience** — Clock patience variant allowing decisions · Players: 1 · Complexity: L · Multiplayer: no
+- **Sundial** — Fortune-telling clock patience variant · Players: 1 · Complexity: L · Multiplayer: no
+- **La Belle Lucie** — Fanned layout single-deck with three redeals · Players: 1 · Complexity: M · Multiplayer: no
+- **Super Flower Garden** — La Belle Lucie with any-card-on-space rule · Players: 1 · Complexity: M · Multiplayer: no
+- **Shamrocks** — La Belle Lucie with 3-card fans · Players: 1 · Complexity: M · Multiplayer: no
+- **Trefoil** — La Belle Lucie starting with aces foundation · Players: 1 · Complexity: M · Multiplayer: no
+- **Grandfather's Clock** — Foundations built into a Clock-face finish · Players: 1 · Complexity: M · Multiplayer: no
+- **Penguin** — FreeCell-adjacent patience using a "flippers" reserve · Players: 1 · Complexity: M · Multiplayer: no
+- **Yukon** — Klondike cousin allowing mid-column moves with cards on top · Players: 1 · Complexity: M · Multiplayer: no
+- **Yukon Cells** — Yukon with two free cells · Players: 1 · Complexity: M · Multiplayer: no
+- **Alaska** — Yukon relative built up-or-down by suit · Players: 1 · Complexity: M · Multiplayer: no
+- **Moosehide** — Yukon with reverse-color tableau rule · Players: 1 · Complexity: M · Multiplayer: no
+- **Russian Solitaire** — Yukon played strictly in suit · Players: 1 · Complexity: H · Multiplayer: no
+- **Klondike by Threes** — Standard Klondike dealing three cards per pass · Players: 1 · Complexity: M · Multiplayer: no
+- **Klondike by Ones** — Standard Klondike with one-card passes (easier) · Players: 1 · Complexity: L · Multiplayer: no
+- **Thumb and Pouch** — Klondike variant allowing any suit except matching · Players: 1 · Complexity: M · Multiplayer: no
+- **Vegas Klondike** — Klondike with betting rules and one pass · Players: 1 · Complexity: M · Multiplayer: no
+- **Whitehead** — Klondike cousin built same-color and all cards face-up · Players: 1 · Complexity: M · Multiplayer: no
+- **Agnes Sorel** — Klondike cousin with 7-column stock-driven layout · Players: 1 · Complexity: M · Multiplayer: no
+- **Agnes Bernauer** — Agnes Sorel with reserve row · Players: 1 · Complexity: M · Multiplayer: no
+- **Batsford** — Klondike cousin with open tableau and extra free cell · Players: 1 · Complexity: M · Multiplayer: no
+- **Double Klondike** — Two-deck Klondike on nine columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Triple Klondike** — Three-deck Klondike on thirteen columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Gargantua** — Historical two-deck Klondike · Players: 1 · Complexity: M · Multiplayer: no
+- **Chinese Klondike** — Klondike variant with alternating build · Players: 1 · Complexity: M · Multiplayer: no
+- **Somerset** — Linear-deal one-deck patience built down by color · Players: 1 · Complexity: M · Multiplayer: no
+- **Usk** — Somerset-like patience with free foundation order · Players: 1 · Complexity: M · Multiplayer: no
+- **Deuces** — Aces-to-Kings building starting from deuces · Players: 1 · Complexity: L · Multiplayer: no
+- **Demon (Canfield)** — Classic 13-card reserve patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Storehouse Canfield** — Canfield with aces pre-founded · Players: 1 · Complexity: M · Multiplayer: no
+- **Superior Canfield** — Canfield with visible reserve · Players: 1 · Complexity: M · Multiplayer: no
+- **Rainbow Canfield** — Canfield dealing one card at a time · Players: 1 · Complexity: M · Multiplayer: no
+- **Selective Canfield** — Canfield with player-chosen foundation · Players: 1 · Complexity: M · Multiplayer: no
+- **Eagle Wing** — Reserve-heavy Canfield cousin in wing shape · Players: 1 · Complexity: M · Multiplayer: no
+- **American Toad** — Toad-family two-deck with 20-card reserve · Players: 1 · Complexity: M · Multiplayer: no
+- **Toad in the Hole** — Small reserve two-deck Canfield-like · Players: 1 · Complexity: M · Multiplayer: no
+- **Duchess** — Compact patience with three reserve fans · Players: 1 · Complexity: M · Multiplayer: no
+- **Glenwood** — Patience with middle-rank foundation choice · Players: 1 · Complexity: M · Multiplayer: no
+- **Golf Solitaire** — Sequence-building patience across seven columns · Players: 1 · Complexity: L · Multiplayer: no
+- **Black Hole** — Compact golf variant with single foundation · Players: 1 · Complexity: L · Multiplayer: no
+- **All in a Row** — 17-pile Black Hole variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Hopscotch** — Golf-like with A-2-3 loop · Players: 1 · Complexity: L · Multiplayer: no
+- **Pyramid** — Remove pairs summing to 13 from a 28-card pyramid · Players: 1 · Complexity: L · Multiplayer: no
+- **Giza** — Pyramid with eight reserve fans · Players: 1 · Complexity: M · Multiplayer: no
+- **Apophis** — Pyramid cousin with three reserve piles · Players: 1 · Complexity: L · Multiplayer: no
+- **Relaxed Pyramid** — Pyramid allowing revisit of the waste · Players: 1 · Complexity: L · Multiplayer: no
+- **Tut's Tomb** — Pyramid with reserve and waste pairing · Players: 1 · Complexity: L · Multiplayer: no
+- **Monte Carlo** — Remove adjacent pair-rank cards from a layout · Players: 1 · Complexity: L · Multiplayer: no
+- **Nestor** — Remove pairs without buried cards beneath · Players: 1 · Complexity: L · Multiplayer: no
+- **Simple Pairs** — Remove pairs from a grid · Players: 1 · Complexity: L · Multiplayer: no
+- **Aces Up** — Discard non-ace high cards per suit; last ace stands · Players: 1 · Complexity: L · Multiplayer: no
+- **Idiot's Delight** — Aces Up cousin with strict rules · Players: 1 · Complexity: L · Multiplayer: no
+- **Four Seasons (Vanishing Cross)** — Cross layout building up and down · Players: 1 · Complexity: M · Multiplayer: no
+- **Florentine Patience** — Four Seasons cousin · Players: 1 · Complexity: M · Multiplayer: no
+- **Czarina** — Four Seasons with reserve pile · Players: 1 · Complexity: M · Multiplayer: no
+- **Carlton** — Patience with a diamond layout · Players: 1 · Complexity: M · Multiplayer: no
+- **Gate (La Porte)** — Patience where reserves frame the tableau like a gate · Players: 1 · Complexity: M · Multiplayer: no
+- **Matrimony** — Couple matching patience with widow · Players: 1 · Complexity: M · Multiplayer: no
+- **Salic Law** — Queen-to-King matriarchal patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Royal Cotillion** — Eight-foundation alternating-step patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Kings and Queens** — Patience building court pairs to foundations · Players: 1 · Complexity: M · Multiplayer: no
+- **Heads and Tails** — Alternating-direction foundation patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Nine Across** — Simple row-based patience · Players: 1 · Complexity: L · Multiplayer: no
+- **Above and Below** — Patience with two foundation rows · Players: 1 · Complexity: M · Multiplayer: no
+- **Little Spider** — 8-column mini two-deck Spider cousin · Players: 1 · Complexity: M · Multiplayer: no
+
+### Spider Family
+- **Spider 1-Suit** — Easiest Spider variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Spider 2-Suit** — Mid-difficulty Spider · Players: 1 · Complexity: M · Multiplayer: no
+- **Spider 4-Suit** — Standard full Spider · Players: 1 · Complexity: H · Multiplayer: no
+- **Spiderette** — Single-deck 7-column Spider · Players: 1 · Complexity: M · Multiplayer: no
+- **Will o' the Wisp** — Spiderette cousin with unique deal · Players: 1 · Complexity: M · Multiplayer: no
+- **Beetle** — Single-deck Spiderette with extra reserve · Players: 1 · Complexity: M · Multiplayer: no
+- **Simple Simon** — Single-deck Spider cousin built by suit · Players: 1 · Complexity: M · Multiplayer: no
+- **Rouge et Noir Spider** — Alternating color Spider · Players: 1 · Complexity: M · Multiplayer: no
+- **Mrs. Mop** — 13-column Spider on two decks · Players: 1 · Complexity: M · Multiplayer: no
+- **Gigantic Spider** — Three-deck Spider · Players: 1 · Complexity: H · Multiplayer: no
+- **Black Widow** — Spider variant allowing any-card moves · Players: 1 · Complexity: M · Multiplayer: no
+- **Relaxed Spider** — Spider with empty-column pre-built moves · Players: 1 · Complexity: M · Multiplayer: no
+
+### FreeCell Variants
+- **Classic FreeCell** — 4 cells, 4 foundations, 8 tableau · Players: 1 · Complexity: M · Multiplayer: no
+- **Baker's Game** — FreeCell built in suit · Players: 1 · Complexity: M · Multiplayer: no
+- **Eight Off** — FreeCell with 8 cells and 6 cards per column · Players: 1 · Complexity: M · Multiplayer: no
+- **Seahaven Towers** — FreeCell cousin with 10 tableau + 4 cells · Players: 1 · Complexity: M · Multiplayer: no
+- **Penguin FreeCell** — FreeCell layout with "flippers" reserve · Players: 1 · Complexity: M · Multiplayer: no
+- **ForeCell** — FreeCell with four face-down reserve cards · Players: 1 · Complexity: M · Multiplayer: no
+- **Bakers Dozen** — Thirteen-column patience without cells · Players: 1 · Complexity: M · Multiplayer: no
+- **Good Measure** — Baker's Dozen with 2 foundations pre-seeded · Players: 1 · Complexity: M · Multiplayer: no
+- **Spanish Patience** — Free-cell-influenced patience with rotating pile · Players: 1 · Complexity: M · Multiplayer: no
+- **Eight Cells** — FreeCell with 8 cells (win-rate 99%+) · Players: 1 · Complexity: L · Multiplayer: no
+- **Three-Cell FreeCell** — FreeCell with 3 cells (harder) · Players: 1 · Complexity: H · Multiplayer: no
+- **Two-Cell FreeCell** — FreeCell with 2 cells · Players: 1 · Complexity: H · Multiplayer: no
+- **One-Cell FreeCell** — FreeCell with 1 cell · Players: 1 · Complexity: H · Multiplayer: no
+- **Zero-Cell (Eight Off Free)** — FreeCell without cells · Players: 1 · Complexity: H · Multiplayer: no
+- **Double FreeCell** — Two-deck FreeCell · Players: 1 · Complexity: M · Multiplayer: no
+- **Triple FreeCell** — Three-deck FreeCell on 15 columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Challenge FreeCell** — Microsoft version with 2-card Kings · Players: 1 · Complexity: M · Multiplayer: no
+- **Super Challenge FreeCell** — Stricter empty-column rules · Players: 1 · Complexity: H · Multiplayer: no
+- **FreeCell 16x32** — Giant carpet mode with many decks · Players: 1 · Complexity: H · Multiplayer: no
+- **FreeCell Two Decks** — Solitaire City 2-deck numbering · Players: 1 · Complexity: M · Multiplayer: no
+- **FreeCell Two Suits** — Two-suit simplification · Players: 1 · Complexity: L · Multiplayer: no
+- **Bakers Dozen Relaxed** — Aces auto to foundation variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Flipper** — FreeCell/Penguin hybrid with movable "flipper" card · Players: 1 · Complexity: M · Multiplayer: no
+- **Stalactites** — FreeCell relative built by rank only · Players: 1 · Complexity: M · Multiplayer: no
+- **Seahaven Double** — Two-deck Seahaven Towers · Players: 1 · Complexity: M · Multiplayer: no
+- **Eight Off Double** — Two-deck Eight Off · Players: 1 · Complexity: M · Multiplayer: no
+- **Baker's Game Double** — Two-deck Baker's Game · Players: 1 · Complexity: M · Multiplayer: no
+
+### Two- and Three-Deck Patiences
+- **Forty Thieves** — The classic two-deck patience; strict by suit · Players: 1 · Complexity: H · Multiplayer: no
+- **Josephine** — Forty Thieves with group moves · Players: 1 · Complexity: M · Multiplayer: no
+- **Lucas** — Forty Thieves with aces pre-founded and 13 columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Maria** — Forty Thieves variant built alternating color · Players: 1 · Complexity: M · Multiplayer: no
+- **Streets** — Forty Thieves with alternating-color build · Players: 1 · Complexity: M · Multiplayer: no
+- **Number Ten** — Forty Thieves with 10-card reserve · Players: 1 · Complexity: M · Multiplayer: no
+- **Squadron** — Forty Thieves cousin with stock-and-talon · Players: 1 · Complexity: M · Multiplayer: no
+- **Deuces and Queens** — Double-deck with unusual foundation pair · Players: 1 · Complexity: M · Multiplayer: no
+- **Indian Patience** — Two-deck patience built by opposite suit · Players: 1 · Complexity: M · Multiplayer: no
+- **Double Klondike (Saratoga)** — Two-deck Klondike · Players: 1 · Complexity: M · Multiplayer: no
+- **Crescent** — Two-deck with 16 fans in an arc · Players: 1 · Complexity: M · Multiplayer: no
+- **Rank and File** — Crescent cousin built alternating color · Players: 1 · Complexity: M · Multiplayer: no
+- **Harp** — Double-deck Klondike with 9 columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Big Harp** — Harp with 13 columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Intelligence** — Two-deck patience with intelligent reshuffle · Players: 1 · Complexity: M · Multiplayer: no
+- **Martha** — Two-deck patience with all cards face up · Players: 1 · Complexity: M · Multiplayer: no
+- **Sly Fox Double** — Two-deck Sly Fox · Players: 1 · Complexity: M · Multiplayer: no
+- **Legion** — Two-deck ordered layout patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Diplomat** — Two-deck pyramid-shaped layout · Players: 1 · Complexity: M · Multiplayer: no
+- **Congress** — Two-deck patience with 8 reserve piles · Players: 1 · Complexity: M · Multiplayer: no
+- **Parliament** — Two-deck with center foundations · Players: 1 · Complexity: M · Multiplayer: no
+- **President's Cabinet** — Two-deck layout with 4 ministers · Players: 1 · Complexity: M · Multiplayer: no
+- **Senate** — Two-deck variant of Congress · Players: 1 · Complexity: M · Multiplayer: no
+- **Forty and Eight** — Two-deck Forty Thieves with eight suit-based piles · Players: 1 · Complexity: M · Multiplayer: no
+- **Busy Aces** — Two-deck patience with eight aces pre-founded · Players: 1 · Complexity: M · Multiplayer: no
+- **Limited** — Two-deck one-pass patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Zingara** — Two-deck building by suit · Players: 1 · Complexity: M · Multiplayer: no
+- **Corona** — Two-deck crown-shaped patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Quadrangle** — Two-deck patience with square layout · Players: 1 · Complexity: M · Multiplayer: no
+- **Rouge et Noir Double** — Double-deck alternating-color patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Belvedere** — Two-deck building in suit with reserve · Players: 1 · Complexity: M · Multiplayer: no
+- **British Blockade** — Two-deck patience with 12 columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Triple Line** — Three-deck linear patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Sultan Triple** — Three-deck Sultan of Turkey variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Emperor Triple** — Three-deck Emperor patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Grand Duchess** — Three-deck reserve-heavy patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Colorado** — Three-deck patience with 10 columns · Players: 1 · Complexity: M · Multiplayer: no
+- **Queen Victoria** — Three-deck patience with royal reserve · Players: 1 · Complexity: M · Multiplayer: no
+
+### Fortune-Telling & Oddity Patiences
+- **The Star** — Historical fortune-telling layout patience · Players: 1 · Complexity: L · Multiplayer: no
+- **Auld Lang Syne** — Four-pile "old acquaintances" discard game · Players: 1 · Complexity: L · Multiplayer: no
+- **Tam o' Shanter** — Auld Lang Syne with strict no-redeals · Players: 1 · Complexity: L · Multiplayer: no
+- **Sir Tommy** — Strategic Auld Lang Syne placing cards into four piles · Players: 1 · Complexity: L · Multiplayer: no
+- **Lady Palk** — Sir Tommy variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Calculation** — Foundation numbered 1,2,3,4 and built by steps · Players: 1 · Complexity: M · Multiplayer: no
+- **Pass The Waste** — Fortune-telling patience · Players: 1 · Complexity: L · Multiplayer: no
+- **Amazons** — Historical patience using only aces and face cards · Players: 1 · Complexity: L · Multiplayer: no
+- **Decade** — Form groups totaling 10/20/30 · Players: 1 · Complexity: L · Multiplayer: no
+- **Thirty-One** — Discard to 31 patience · Players: 1 · Complexity: L · Multiplayer: no
+- **Poker Solitaire** — Arrange 25 cards in a 5x5 poker grid · Players: 1 · Complexity: L · Multiplayer: no
+- **Cribbage Squares** — Cribbage scoring in a 4x4 grid · Players: 1 · Complexity: L · Multiplayer: no
+- **Cribbage Solitaire** — Play hand + crib against a cut-card baseline · Players: 1 · Complexity: L · Multiplayer: no
+- **Gaps** — Arrange cards in sorted rows using gap movement · Players: 1 · Complexity: M · Multiplayer: no
+- **Montana** — Gaps-family four-row ordering patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Spaces** — Gaps cousin · Players: 1 · Complexity: M · Multiplayer: no
+- **Paganini** — Gaps with build-by-rank rule · Players: 1 · Complexity: M · Multiplayer: no
+- **Red and Black** — Alternating-color foundation patience · Players: 1 · Complexity: L · Multiplayer: no
+- **Poker Patience (Solitaire)** — Lay 5x5 grid for best poker total · Players: 1 · Complexity: L · Multiplayer: no
+- **Sea Towers** — Seahaven cousin with tower reserves · Players: 1 · Complexity: M · Multiplayer: no
+- **Octagon** — Eight-sided layout patience · Players: 1 · Complexity: M · Multiplayer: no
+- **Royal Marriage** — Join King & Queen by discarding intervening cards · Players: 1 · Complexity: L · Multiplayer: no
+
+## Dice & Push-Your-Luck Games
+
+### Yacht / Yahtzee Family
+- **Yacht** — 1938 original; five dice, nine categories, no bonuses · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Generala** — South American Yacht cousin with Straights and Full Houses · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Generala Servida** — Generala variant won by first roll · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Generala Doble** — Generala with double-score bonuses · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Cameroon** — French Yacht variant with 12 categories and 4 bonus boxes · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Ship Captain Crew Mate (Ship of Fools)** — Roll 6-5-4 in order then maximize remaining pip total · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Balut** — Filipino/Danish Yacht family with 4 sections · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Yamb** — Balkan Yacht family with declaration columns · Players: 1+ · Complexity: M · Multiplayer: opt
+- **Kismet** — 1960s Yacht variant using colored dice for extra categories · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Challenge Yacht** — Yacht variant with rerolls limited to 2 · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Crag** — Dice poker scoring high rolls · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Cheerio** — Yacht cousin with high/low columns · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Open-Face Yahtzee** — Hand revealed each turn for deeper strategy · Players: 2+ · Complexity: M · Multiplayer: yes
+- **Triple Yahtzee** — Three columns scored simultaneously · Players: 1+ · Complexity: M · Multiplayer: opt
+- **Battle Yahtzee** — Head-to-head column scoring · Players: 2 · Complexity: L · Multiplayer: yes
+- **Yahtzee Free-for-All** — Competitive category claiming · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Jumbo Yahtzee** — Six-dice Yahtzee with extra categories · Players: 1+ · Complexity: M · Multiplayer: opt
+- **Maxi Yatzy** — Swedish 6-dice Yahtzee cousin · Players: 1+ · Complexity: M · Multiplayer: opt
+- **Yatzy** — Scandinavian Yahtzee variant · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Kniffel** — German Yahtzee variant · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Poker Dice** — Five-dice poker hand gambling · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Yahtzee with Boss Dice** — Variant including powered dice · Players: 1+ · Complexity: M · Multiplayer: opt
+
+### Push-Your-Luck & Pig Family
+- **Pig** — Bank your points or roll a 1 and bust · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Pig Dice (Two-Dice Pig)** — Two-dice version where double 1s wipe total · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Hog** — Pig where you must bet entire roll count each turn · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Skunk** — Classroom-friendly Pig variant with five columns · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Pass the Pigs** — Commercial push-your-luck with rubber pig dice · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Farkle** — Roll six dice, set scoring combos, bust on zero · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Zilch** — Farkle cousin · Players: 2+ · Complexity: L · Multiplayer: yes
+- **10,000** — Target-score Farkle with partial scoring sets · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Greed** — Office Farkle cousin with 5000-point target · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Cosmic Wimpout** — Cult eight-die push-your-luck with flash · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Going to Boston** — Three-dice keep-high push-your-luck · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Beat That** — Two-dice highest-number push-your-luck · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Can't Stop** — Sid Sackson classic columnar push-your-luck · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Zombie Dice** — Push-your-luck zombie brain-eating · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Martian Dice** — Push-your-luck alien abduction dice · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Dino Hunt Dice** — Push-your-luck dino capture · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Cthulhu Dice** — Mini press-your-luck with madness · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **King of Tokyo-like** — Roll-for-monster-attack push-your-luck · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **King of New York-like** — Variant adding destruction tracks · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Boggle Dice (Scribblish)** — Word-forming dice variant · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Kingdoms Dice** — Kingdom-scoring combo-dice game · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Kingdomino Duel** — Dice-rolling territory-tile game · Players: 2 · Complexity: L · Multiplayer: yes
+- **Rhino Hero Super Battle Dice** — Push-your-luck platform-stacker · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Sagrada** — Draft-dice to build a stained-glass pattern · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Welcome to Dino World** — Push-your-luck roll-and-write · Players: 1-99 · Complexity: L · Multiplayer: opt
+- **Qwixx** — Cross-off-numbers press-your-luck · Players: 2-5 · Complexity: L · Multiplayer: yes
+- **Tumblin-Dice** — Flick dice down a slope · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Dungeon Roll** — Solo dungeoneering dice push-your-luck · Players: 1-4 · Complexity: L · Multiplayer: opt
+- **Vegas / Las Vegas** — Dice-placement casino game · Players: 2-5 · Complexity: L · Multiplayer: yes
+- **Roll Through the Ages** — Civ-building dice · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Roll for the Galaxy** — Pool-management dice engine · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Dice Forge** — Dice-upgrading engine-builder · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Elder Sign** — Cthulhu investigator dice puzzle · Players: 1-8 · Complexity: M · Multiplayer: opt
+
+### Bluffing & Betting Dice
+- **Dudo** — Bolivian "Call My Bluff" liar dice · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Perudo** — Commercial Dudo variant with Palifico round · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Liar's Dice** — Classic 5-die-per-player bidding bluff · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Pirate's Dice** — Liar's Dice with pirate theme · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Mia** — German two-dice bluff game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Schummeln (Cheat Dice)** — German open-bluff dice game · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Sköne** — Scandinavian two-dice bluff · Players: 3+ · Complexity: L · Multiplayer: yes
+- **Meyer** — Scandinavian ranking-based dice bluff · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Bluff (Liar's Dice German)** — Commercial Liar's Dice with star face · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Hoss Hossen** — German farm bluff dice · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Schocken** — German three-dice pub game with bluff declarations · Players: 2-9 · Complexity: L · Multiplayer: yes
+- **Chicago (Dice)** — Accumulate totals through rounds 2-12 · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Chicago High-Low** — Chicago variant with split hi/lo scoring · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Drop Dead** — Roll six dice; 2s and 5s are "dead" · Players: 2+ · Complexity: L · Multiplayer: yes
+- **LCR (Left-Center-Right)** — Three-dice chip-passing game · Players: 3+ · Complexity: L · Multiplayer: yes
+- **Aces in the Pot** — Circle-passing 1s-and-6s dice game · Players: 3+ · Complexity: L · Multiplayer: yes
+- **Bunco** — Team-rotation dice game · Players: 12 · Complexity: L · Multiplayer: yes
+- **Sequences** — Dice sequence-matching game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Help Your Neighbor** — Roll to give away chips · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Mexen (Mexican)** — Scandinavian pub bluff dice · Players: 2-6 · Complexity: L · Multiplayer: yes
+
+### Casino & Historical Dice
+- **Chuck-a-Luck** — Three-dice carnival betting on numbers 1-6 · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Grand Hazard** — Three-dice historical casino game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Hazard** — Medieval craps ancestor · Players: 2+ · Complexity: M · Multiplayer: yes
+- **Bank Craps** — Standard casino craps · Players: 2+ · Complexity: M · Multiplayer: yes
+- **Crapless Craps** — Craps without 2, 3, 12 as losers · Players: 2+ · Complexity: M · Multiplayer: yes
+- **High Point Craps** — Simplified casino craps · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Die Rich** — UK casino three-dice game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Sic Bo** — Chinese three-dice casino betting · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Grand Sic Bo** — Lightning-style multiplied Sic Bo · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Tai Sai** — Chinese name for Sic Bo with alt layout · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Chō-han Bakuchi** — Japanese even/odd two-dice gambling · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Kitsune Bakuchi** — Japanese three-dice gambling · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Glückshaus** — Medieval German "house of fortune" betting · Players: 2+ · Complexity: L · Multiplayer: yes
+- **421 (Quatre Cent Vingt et Un)** — French bar dice game with special combos · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Zanzibar** — Swiss 1-4-6 three-dice bar game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Farrow's Game** — Historical American dice · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Under and Over Seven** — Over/under casino dice · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Birdcage (Chuck-a-Luck Cage)** — Wired-cage Chuck-a-Luck · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Klondike Dice** — Saloon poker-dice · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Liar Poker (Dice)** — Bluffing with dice arranged as poker hands · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Diceland Roulette** — Roulette simulated with 2d6 · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Barbooth (Barbotte)** — Greek/Montreal two-dice gambling · Players: 2 · Complexity: L · Multiplayer: yes
+- **Hooligan Dice** — English five-dice bar game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Toad in the Hole Dice** — Old English dice-and-box game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Shove Ha'penny Dice** — Pub dice hybrid of dice and shove ha'penny · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Passe-dix** — 12th-century three-dice game; high or low than 10 · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Knochel** — Historical European bone-dice gambling · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Dudak** — Turkish tavern dice · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Tabula** — Roman ancestor of backgammon using three dice · Players: 2 · Complexity: M · Multiplayer: yes
+- **Ludus Duodecim Scriptorum** — Roman "Twelve-line" dice race · Players: 2 · Complexity: M · Multiplayer: yes
+- **Board of Shangrila** — Himalayan dice race · Players: 2-4 · Complexity: L · Multiplayer: yes
+
+### Niche & Modern Dice
+- **Shut the Box** — Flip down 1-9 to match rolled dice total · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Canoga** — Variant of Shut the Box with scoring · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Trictrac** — 17th-century French backgammon-style · Players: 2 · Complexity: H · Multiplayer: yes
+- **Dice 10000** — Target-score push-your-luck · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Spin the Dice** — Variant using spinning wheel dice · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Grab** — Simple grab-the-dice contest · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Catch** — Dice catch-in-cup game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Horse Race** — Roll two dice, advance horse with that sum · Players: 2-12 · Complexity: L · Multiplayer: yes
+- **3-2-1 Countdown** — Collect 3-2-1 in a row on three dice · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Strike** — Arena dice elimination · Players: 2-5 · Complexity: L · Multiplayer: yes
+- **Button Men** — Custom-die dueling · Players: 2 · Complexity: M · Multiplayer: yes
+- **Dice Masters** — Collectible custom-die draft · Players: 2 · Complexity: M · Multiplayer: yes
+- **Quarriors** — Bag-building battle-dice · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Machi Koro** — Dice-triggered city-building · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Favor of the Pharaoh** — Dice pool Egyptian tableau · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Troyes Dice** — Roll-and-write Troyes adaptation · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **That's Pretty Clever!** — Roll-and-write with chaining scoring · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Ganz Schön Clever** — Original "Clever" dice sheet game · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Welcome to…** — Flip-and-write neighborhood-building · Players: 1-100 · Complexity: M · Multiplayer: opt
+- **Railroad Ink** — Roll-and-write network puzzle · Players: 1-6 · Complexity: M · Multiplayer: opt
+- **Cartographers Heroes** — Draw-and-write map game · Players: 1-100 · Complexity: M · Multiplayer: opt
+- **Rolling Realms** — Multi-minigame roll-and-write · Players: 1-6 · Complexity: M · Multiplayer: opt
+- **Fleet: The Dice Game** — Fishing fleet dice engine · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **On Tour** — USA-map flip-and-write · Players: 1-6 · Complexity: L · Multiplayer: opt
+- **Trails of Tucana** — Jungle-route roll-and-write · Players: 1-8 · Complexity: L · Multiplayer: opt
+
+## Abstract Games from Around the World
+
+### Chess-Family
+- **Shogi** — Japanese chess with drop-captured-pieces rule · Players: 2 · Complexity: H · Multiplayer: yes
+- **Minishogi** — 5x5 Shogi by Shigenobu Kusumoto · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tori Shogi** — 7x7 "Bird Shogi" · Players: 2 · Complexity: M · Multiplayer: yes
+- **Chu Shogi** — 12x12 medieval Shogi · Players: 2 · Complexity: H · Multiplayer: yes
+- **Dai Shogi** — 15x15 large Shogi · Players: 2 · Complexity: H · Multiplayer: yes
+- **Tenjiku Shogi** — 16x16 Shogi with "jumping general" · Players: 2 · Complexity: H · Multiplayer: yes
+- **Kyoto Shogi** — 5x5 Shogi where pieces swap promotions · Players: 2 · Complexity: M · Multiplayer: yes
+- **Dobutsu Shogi** — 3x4 animal Shogi for children · Players: 2 · Complexity: L · Multiplayer: yes
+- **Goro Goro Shogi** — Slightly larger child Shogi · Players: 2 · Complexity: L · Multiplayer: yes
+- **Xiangqi** — Chinese chess across a river · Players: 2 · Complexity: H · Multiplayer: yes
+- **Mini Xiangqi** — 7x7 Xiangqi · Players: 2 · Complexity: M · Multiplayer: yes
+- **Banqi (Dark Chess)** — Half-open Xiangqi variant on 4x8 grid · Players: 2 · Complexity: M · Multiplayer: yes
+- **Janggi** — Korean chess; similar to Xiangqi · Players: 2 · Complexity: H · Multiplayer: yes
+- **Makruk** — Thai chess with front-row pawns and Met piece · Players: 2 · Complexity: M · Multiplayer: yes
+- **Ouk Chatrang** — Cambodian chess, ancestor of Makruk · Players: 2 · Complexity: M · Multiplayer: yes
+- **Sittuyin** — Burmese chess with free piece setup · Players: 2 · Complexity: M · Multiplayer: yes
+- **Shatar** — Mongolian chess · Players: 2 · Complexity: M · Multiplayer: yes
+- **Hiashatar** — Larger Mongolian chess · Players: 2 · Complexity: M · Multiplayer: yes
+- **Chaturanga** — Ancient Indian chess ancestor · Players: 2 · Complexity: M · Multiplayer: yes
+- **Shatranj** — Medieval Persian/Arab chess · Players: 2 · Complexity: M · Multiplayer: yes
+- **Courier Chess** — Medieval European 12x8 chess precursor · Players: 2 · Complexity: H · Multiplayer: yes
+- **Grand Chess** — 10x10 modern chess variant · Players: 2 · Complexity: H · Multiplayer: yes
+- **Capablanca Chess** — 10x8 chess with Archbishop & Chancellor · Players: 2 · Complexity: H · Multiplayer: yes
+- **Fischer Random (Chess960)** — Randomized back-rank chess · Players: 2 · Complexity: H · Multiplayer: yes
+- **Crazyhouse** — Drop-captured-pieces western chess · Players: 2 · Complexity: H · Multiplayer: yes
+- **Bughouse** — Two-board team Crazyhouse · Players: 4 · Complexity: H · Multiplayer: yes
+- **Atomic Chess** — Captures create explosions · Players: 2 · Complexity: M · Multiplayer: yes
+- **King of the Hill** — Chess variant won by reaching the center · Players: 2 · Complexity: M · Multiplayer: yes
+- **Three-Check Chess** — Win chess by checking 3 times · Players: 2 · Complexity: M · Multiplayer: yes
+
+### Tafl Family
+- **Hnefatafl** — Viking unequal-sides strategy with defender-king escape · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tablut** — Sami Lappish Hnefatafl on 9x9 · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tawlbwrdd** — Welsh Tafl variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Ard Rí** — Scottish Tafl on 7x7 · Players: 2 · Complexity: M · Multiplayer: yes
+- **Brandubh** — Irish Tafl · Players: 2 · Complexity: L · Multiplayer: yes
+- **Alea Evangelii** — Large medieval Tafl on 19x19 · Players: 2 · Complexity: H · Multiplayer: yes
+- **Sea Battle Tafl** — Viking-age Baltic Tafl variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Magpie Tafl** — Modern simplification on 7x7 · Players: 2 · Complexity: L · Multiplayer: yes
+- **Copenhagen Hnefatafl** — Tournament-standard modern Hnefatafl ruleset · Players: 2 · Complexity: M · Multiplayer: yes
+- **Fetlar Hnefatafl** — Shetland variant ruleset · Players: 2 · Complexity: M · Multiplayer: yes
+
+### Mancala Family
+- **Oware** — Akan/Ashanti seed-sowing classic · Players: 2 · Complexity: M · Multiplayer: yes
+- **Ayoayo** — Yoruba Mancala variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Bao** — East African 4-row Mancala · Players: 2 · Complexity: H · Multiplayer: yes
+- **Bao la Kujifunza** — Simplified teaching version of Bao · Players: 2 · Complexity: M · Multiplayer: yes
+- **Kalah** — Western Mancala variant · Players: 2 · Complexity: L · Multiplayer: yes
+- **Congkak** — Malaysian/Indonesian Mancala · Players: 2 · Complexity: M · Multiplayer: yes
+- **Sungka** — Filipino Mancala · Players: 2 · Complexity: M · Multiplayer: yes
+- **Pallanguzhi** — Tamil Mancala · Players: 2 · Complexity: M · Multiplayer: yes
+- **Omweso** — Ugandan 4-row Mancala · Players: 2 · Complexity: H · Multiplayer: yes
+- **Toguz Kumalak** — Central Asian 9-pit Mancala · Players: 2 · Complexity: H · Multiplayer: yes
+- **Bohnenspiel** — German 6-pit Mancala · Players: 2 · Complexity: M · Multiplayer: yes
+- **Mangala** — Arabian Mancala ancestor · Players: 2 · Complexity: M · Multiplayer: yes
+
+### Checkers / Draughts Family
+- **Alquerque** — Medieval ancestor of checkers · Players: 2 · Complexity: M · Multiplayer: yes
+- **English Draughts** — Standard 8x8 checkers · Players: 2 · Complexity: M · Multiplayer: yes
+- **American Pool Checkers** — Russian-influenced US checkers · Players: 2 · Complexity: M · Multiplayer: yes
+- **International Draughts** — 10x10 long-move checkers · Players: 2 · Complexity: M · Multiplayer: yes
+- **Russian Draughts** — 8x8 with long-move kings · Players: 2 · Complexity: M · Multiplayer: yes
+- **Italian Draughts** — 8x8 can't capture kings with men · Players: 2 · Complexity: M · Multiplayer: yes
+- **Spanish Draughts** — 8x8 long-move with promotion rules · Players: 2 · Complexity: M · Multiplayer: yes
+- **Brazilian Draughts** — 8x8 International rules · Players: 2 · Complexity: M · Multiplayer: yes
+- **Turkish Draughts (Dama)** — Orthogonal-only checkers on 8x8 · Players: 2 · Complexity: M · Multiplayer: yes
+- **Canadian Checkers** — 12x12 International style · Players: 2 · Complexity: H · Multiplayer: yes
+- **Thai Checkers** — 8x8 Thai variant with men capturing forward only · Players: 2 · Complexity: M · Multiplayer: yes
+- **Suicide Checkers** — Must lose all pieces to win · Players: 2 · Complexity: M · Multiplayer: yes
+- **Dameo** — Christian Freeling design blending Draughts variants · Players: 2 · Complexity: M · Multiplayer: yes
+- **Croda** — Italian modern draughts variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Fanorona** — Malagasy "capture by approach or withdrawal" · Players: 2 · Complexity: M · Multiplayer: yes
+- **Zamma** — North African Alquerque cousin · Players: 2 · Complexity: M · Multiplayer: yes
+- **Yoté** — West African capture game on 5x6 grid · Players: 2 · Complexity: M · Multiplayer: yes
+- **Surakarta** — Indonesian loop-capture game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Seega** — Egyptian capture-by-custodian game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Yavalath** — Connect-four-by-threes but three is loss · Players: 2-3 · Complexity: L · Multiplayer: yes
+
+### Ancient & Historical
+- **Senet** — Ancient Egyptian race game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Royal Game of Ur** — Sumerian 4500-year-old race game · Players: 2 · Complexity: L · Multiplayer: yes
+- **Mehen** — Egyptian coiled-snake race game · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Patolli** — Aztec race game with beans · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Nyout** — Korean cross-shaped race game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Yut Nori** — Modern Korean Nyout · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Pachisi** — Indian cross-shaped race game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Chausar** — Ancient Indian Pachisi ancestor · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Chaupar** — Modern North Indian cross-race · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Nard** — Persian early backgammon · Players: 2 · Complexity: M · Multiplayer: yes
+- **Plakoto** — Greek backgammon variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Fevga** — Greek backgammon variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Moultezim** — Turkish backgammon variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Gioul** — Greek/Turkish backgammon variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Acey-Deucey** — US Navy backgammon variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Russian Backgammon** — Fully open-board start · Players: 2 · Complexity: M · Multiplayer: yes
+- **Hypergammon** — Three-checker-per-player speed backgammon · Players: 2 · Complexity: M · Multiplayer: yes
+- **Nackgammon** — Two checkers moved forward at start · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tâb** — Arabian stick-dice race game · Players: 2 · Complexity: L · Multiplayer: yes
+- **Liubo** — Ancient Chinese dice race (rules partially lost) · Players: 2 · Complexity: M · Multiplayer: yes
+- **Go (Weiqi)** — Classical Chinese territory game · Players: 2 · Complexity: H · Multiplayer: yes
+- **Go 9x9** — Small-board Go · Players: 2 · Complexity: M · Multiplayer: yes
+- **Go 13x13** — Mid-size Go · Players: 2 · Complexity: H · Multiplayer: yes
+- **Atari Go** — Children's first-capture Go · Players: 2 · Complexity: L · Multiplayer: yes
+- **Rengo** — Team Go with alternating moves · Players: 4 · Complexity: H · Multiplayer: yes
+- **Ponnuki** — Small-capture Go variant · Players: 2 · Complexity: L · Multiplayer: yes
+- **Gomoku** — Five-in-a-row on Go board · Players: 2 · Complexity: M · Multiplayer: yes
+- **Renju** — Professional Gomoku with opening restrictions · Players: 2 · Complexity: M · Multiplayer: yes
+- **Ninuki-Renju** — Gomoku with capturing pairs · Players: 2 · Complexity: M · Multiplayer: yes
+- **Pente** — Commercial Ninuki-Renju · Players: 2 · Complexity: L · Multiplayer: yes
+- **Connect5** — Simple five-in-a-row on grid · Players: 2 · Complexity: L · Multiplayer: yes
+- **Konane** — Hawaiian capture-by-jump game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Mu Torere** — Maori 8-point star game · Players: 2 · Complexity: L · Multiplayer: yes
+- **Terhuchu** — Bhutanese Tafl variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Sáhkku** — Sami tri-dice race game · Players: 2-3 · Complexity: M · Multiplayer: yes
+- **Tablan** — South Indian race game · Players: 2 · Complexity: L · Multiplayer: yes
+- **Daldøs** — Danish dice-race game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Nim** — Take stones, last to move wins (or loses) · Players: 2 · Complexity: L · Multiplayer: yes
+- **Fox and Geese** — Asymmetric cornering game · Players: 2 · Complexity: L · Multiplayer: yes
+- **Asalto** — Spanish Fox and Geese variant · Players: 2 · Complexity: L · Multiplayer: yes
+- **Halma** — 19th-century hop-your-pieces-across game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Chinese Checkers (Sternhalma)** — Hexagonal star Halma · Players: 2-6 · Complexity: L · Multiplayer: yes
+
+### Modern Abstracts
+- **Quoridor** — Block with walls while racing across the board · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Quarto** — Four-in-a-row with opponent-chosen pieces · Players: 2 · Complexity: L · Multiplayer: yes
+- **Quixo** — Sliding-cube 5-in-a-row · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Gobblet** — Nested-piece 4-in-a-row · Players: 2 · Complexity: L · Multiplayer: yes
+- **Pylos** — Pyramid-building marble game · Players: 2 · Complexity: L · Multiplayer: yes
+- **YINSH** — Movable ring 5-in-a-row · Players: 2 · Complexity: M · Multiplayer: yes
+- **Zertz** — Jumping marble Zertz rules · Players: 2 · Complexity: M · Multiplayer: yes
+- **Dvonn** — Stacking-stones movement abstract · Players: 2 · Complexity: M · Multiplayer: yes
+- **Gipf** — Entry point of Project Gipf series · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tamsk** — Timed-sandglass Gipf game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Pünct** — Project-Gipf line abstract · Players: 2 · Complexity: M · Multiplayer: yes
+- **TZAAR** — Capture-stacks abstract by Kris Burm · Players: 2 · Complexity: M · Multiplayer: yes
+- **Onitama** — Elegant 5x5 movement-card chess · Players: 2 · Complexity: L · Multiplayer: yes
+- **Hive** — Bug-themed boardless chess · Players: 2 · Complexity: M · Multiplayer: yes
+- **Santorini** — 3D building and move 2-player abstract · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Amazons** — Queens that fire arrows to block territory · Players: 2 · Complexity: M · Multiplayer: yes
+- **Lines of Action** — Move pieces to connect all in one group · Players: 2 · Complexity: M · Multiplayer: yes
+- **Breakthrough** — Simple pawns-only chess by Dan Troyka · Players: 2 · Complexity: L · Multiplayer: yes
+- **Clobber** — Capture-adjacent abstract by Michael Albert · Players: 2 · Complexity: L · Multiplayer: yes
+- **Pentalath** — Connect-5 hex game by Cameron Browne · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tumbleweed** — Territory line-of-sight game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Phutball (Philosopher's Football)** — Hop-stone football abstract · Players: 2 · Complexity: M · Multiplayer: yes
+- **Hex** — Connect-your-two-sides abstract · Players: 2 · Complexity: L · Multiplayer: yes
+- **Y** — Hex cousin with three sides · Players: 2 · Complexity: L · Multiplayer: yes
+- **TwixT** — Peg-and-link connection abstract · Players: 2 · Complexity: M · Multiplayer: yes
+- **Havannah** — Hex-based connection game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Rosanne** — Two-color hex abstract · Players: 2 · Complexity: M · Multiplayer: yes
+- **Shahrakan** — Persian-style new abstract · Players: 2 · Complexity: M · Multiplayer: yes
+- **Volcano** — Stacking pyramid abstract · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Martian Chess** — Pyramid-stack chess variant · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Homeworlds** — Pyramid-stack space abstract · Players: 2-4 · Complexity: H · Multiplayer: yes
+- **Icehouse** — Pyramid stacking original · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Zendo** — Inductive reasoning abstract · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Carrom (abstract)** — Flick-capture classic · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Crokinole** — Canadian flick-your-discs target · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Nine Men's Morris** — Classic mill-making abstract · Players: 2 · Complexity: L · Multiplayer: yes
+- **Twelve Men's Morris** — Morris on larger grid · Players: 2 · Complexity: L · Multiplayer: yes
+- **Lasca** — Stacking-Draughts by Lasker · Players: 2 · Complexity: M · Multiplayer: yes
+- **Dvonn Duo** — Two-player Dvonn variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Shobu** — Two-board push-off abstract · Players: 2 · Complexity: M · Multiplayer: yes
+- **Qawale** — Japanese-inspired stacking abstract · Players: 2 · Complexity: L · Multiplayer: yes
+
+## Deduction & Hidden-Info Games
+
+- **Bulls and Cows** — Guess opponent's 4-digit number with hit/miss feedback · Players: 2 · Complexity: L · Multiplayer: yes
+- **Mastermind** — Classic 4-peg 6-color deduction · Players: 2 · Complexity: L · Multiplayer: yes
+- **Mastermind 5-peg 8-color** — Extended Mastermind · Players: 2 · Complexity: M · Multiplayer: yes
+- **Mastermind 6-peg 10-color** — Advanced set · Players: 2 · Complexity: M · Multiplayer: yes
+- **Mastermind 4-peg duplicate-free** — No-repeats Mastermind · Players: 2 · Complexity: L · Multiplayer: yes
+- **Super Mastermind** — 5-peg 8-color official variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Word Mastermind (Jotto)** — Five-letter word deduction · Players: 2 · Complexity: M · Multiplayer: yes
+- **Lingo-Deduction** — TV-style word guess with feedback · Players: 2 · Complexity: L · Multiplayer: yes
+- **Black Box** — Hidden atoms deduced by ray scatter · Players: 1-2 · Complexity: M · Multiplayer: opt
+- **Sleuth** — Sid Sackson deduction classic · Players: 3-7 · Complexity: M · Multiplayer: yes
+- **Code 777** — Peek-at-others number-deduction · Players: 3-7 · Complexity: M · Multiplayer: yes
+- **Clue / Cluedo** — Murder mystery deduction · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Clue Jr.** — Simplified children's Clue · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Clue Master Detective** — Larger Clue with more suspects · Players: 3-10 · Complexity: M · Multiplayer: yes
+- **Clue Suspect** — Compact card version · Players: 3-10 · Complexity: L · Multiplayer: yes
+- **Mystery of the Abbey** — Medieval Clue-like with interrogation · Players: 3-6 · Complexity: M · Multiplayer: yes
+- **13 Clues** — See everyone else's cards; deduce your own · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Tobago** — Map-clue treasure deduction · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Cryptid** — Terrain-hint monster-hunt deduction · Players: 3-5 · Complexity: M · Multiplayer: yes
+- **Deception: Murder in Hong Kong** — Forensic clue giving by a hidden murderer · Players: 4-12 · Complexity: M · Multiplayer: yes
+- **Mysterium** — Ghost gives vague visions to psychics · Players: 2-7 · Complexity: L · Multiplayer: yes
+- **Dixit** — Abstract art matching clue game · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Hanabi** — Cooperative hidden-hand firework card game · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **The Mind** — Silent cooperative number-laying · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **The Crew** — Cooperative trick-taking deduction · Players: 3-5 · Complexity: M · Multiplayer: yes
+- **Kabul Spielcafe** — Number-deduction pub game · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Concept** — Icon-based charade deduction · Players: 4-12 · Complexity: L · Multiplayer: yes
+- **Decrypto** — Team codeword transmission deduction · Players: 3-8 · Complexity: M · Multiplayer: yes
+- **Codenames** — Two teams guess words from spymaster clues · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Codenames Duet** — Cooperative Codenames · Players: 2 · Complexity: L · Multiplayer: yes
+- **Codenames Pictures** — Picture-grid Codenames · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Codenames XXL** — Large-board edition · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Spyfall** — One player doesn't know the location · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Spyfall 2** — Sequel with multi-spy variant · Players: 3-12 · Complexity: L · Multiplayer: yes
+- **Chronicles of Crime** — App-driven crime scene deduction · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Awkward Guests** — Murder clue card deduction · Players: 1-8 · Complexity: M · Multiplayer: opt
+- **Deadly Dowagers** — Victorian-era murder deduction · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Turing Machine** — Pure logic code-cracking with punch cards · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Tempel des Schreckens** — Japanese Don't-Get-the-Trap push-your-luck deduction · Players: 3-10 · Complexity: L · Multiplayer: yes
+- **Poison Gifts** — Hidden-role poisoning deduction · Players: 4-8 · Complexity: M · Multiplayer: yes
+- **Inside Job** — Secret-role corporate deduction · Players: 3-7 · Complexity: M · Multiplayer: yes
+
+## Bluffing & Social Games
+
+- **BS / Cheat / I Doubt It** — Claim rank while discarding; others call bluff · Players: 3-10 · Complexity: L · Multiplayer: yes
+- **Verish' Ne Verish'** — Russian BS variant · Players: 3-10 · Complexity: L · Multiplayer: yes
+- **Dudo Classic** — Bolivian liar-dice base rules · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Perudo Palifico** — Round where 1s aren't wild after elimination · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Kemps** — Partner-signal four-card swap · Players: 4-6 · Complexity: L · Multiplayer: yes
+- **Spoons** — Grab-a-spoon four-of-a-kind racing · Players: 3-13 · Complexity: L · Multiplayer: yes
+- **Pig (Cards)** — Spoons without spoons · Players: 3-7 · Complexity: L · Multiplayer: yes
+- **Donkey** — Spoons variant with alphabet spelling · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Skull** — Place flower/skull; commit or challenge bid · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Skull and Roses Classic** — Original Skull set · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Coup** — 2-card hidden role bluffing · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Coup: Rebellion G54** — Expanded Coup with new roles · Players: 4-8 · Complexity: M · Multiplayer: yes
+- **Love Letter** — One-card hand-deduction micro-game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Love Letter: Premium** — 8-player Love Letter · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Resistance** — Mission-based hidden-role deduction · Players: 5-10 · Complexity: L · Multiplayer: yes
+- **Resistance: Avalon** — Arthurian Resistance with Merlin · Players: 5-10 · Complexity: M · Multiplayer: yes
+- **Secret Hitler** — Hidden fascist deduction · Players: 5-10 · Complexity: M · Multiplayer: yes
+- **Werewolf / Mafia** — Classic village-werewolf hidden-role · Players: 7-20 · Complexity: L · Multiplayer: yes
+- **One Night Ultimate Werewolf** — Single-round Werewolf · Players: 3-10 · Complexity: L · Multiplayer: yes
+- **Ultimate Werewolf** — Role-rich expanded Werewolf · Players: 5-30 · Complexity: M · Multiplayer: yes
+- **Blood on the Clocktower** — Clock-based social deduction · Players: 5-20 · Complexity: H · Multiplayer: yes
+- **Two Rooms and a Boom** — Two-room split team bluff · Players: 6-30 · Complexity: M · Multiplayer: yes
+- **Salem 1692** — Witch-hunt card bluffer · Players: 4-12 · Complexity: M · Multiplayer: yes
+- **The Chameleon** — Word-grid hidden-role clue · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Insider** — Hidden-role 20-questions · Players: 4-8 · Complexity: L · Multiplayer: yes
+- **A Fake Artist Goes to New York** — Drawing deduction · Players: 5-10 · Complexity: L · Multiplayer: yes
+- **Spyfall: Time Travel** — Location-deduction time-warp · Players: 3-8 · Complexity: L · Multiplayer: yes
+- **Shadows over Camelot** — Co-op with possible traitor · Players: 3-7 · Complexity: M · Multiplayer: yes
+- **Saboteur** — Hidden-role dwarven mining · Players: 3-10 · Complexity: L · Multiplayer: yes
+- **Bang!** — Wild-West hidden-role shootout · Players: 4-8 · Complexity: M · Multiplayer: yes
+
+## Solo Puzzle Games
+
+### Peg Solitaire & Physical Puzzles
+- **Peg Solitaire (English)** — 33-hole cross-shape peg puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Peg Solitaire (European)** — 37-hole octagonal variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Peg Solitaire (Asymmetric)** — Rectangular variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Triangle Peg Solitaire** — Cracker-Barrel style 15-peg triangle · Players: 1 · Complexity: L · Multiplayer: no
+- **Diamond Peg Solitaire** — 4-diagonal variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Wiegleb's Peg Solitaire** — 45-hole form · Players: 1 · Complexity: H · Multiplayer: no
+- **Hex Peg Solitaire** — Hexagonal-grid peg jump · Players: 1 · Complexity: M · Multiplayer: no
+- **Tower of Hanoi** — Classic 3-peg disk mover · Players: 1 · Complexity: L · Multiplayer: no
+- **Tower of Hanoi 4-peg** — Four-peg Frame-Stewart puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Tower of Hanoi n-peg** — Generalized n-peg Hanoi · Players: 1 · Complexity: H · Multiplayer: no
+- **Reve's Puzzle** — Four-peg Hanoi variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Bicolor Tower of Hanoi** — Paired-disk Hanoi · Players: 1 · Complexity: H · Multiplayer: no
+- **Chinese Rings (Baguenaudier)** — Ring-disentanglement puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Fifteen Puzzle** — 4x4 sliding-tile number puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Eight Puzzle** — 3x3 sliding tiles · Players: 1 · Complexity: L · Multiplayer: no
+- **Twenty-Four Puzzle** — 5x5 sliding · Players: 1 · Complexity: M · Multiplayer: no
+- **Thirty-Five Puzzle** — 6x6 sliding · Players: 1 · Complexity: M · Multiplayer: no
+- **Klotski** — Sliding-block escape puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Traffic Jam (Rush Hour)** — Slide-cars-out-the-exit puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Khun Pan** — Thai sliding puzzle variant · Players: 1 · Complexity: M · Multiplayer: no
+- **L'Âne Rouge** — French "Red Donkey" sliding puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Hua Rong Dao** — Chinese 4x5 sliding puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Lights Out 5x5** — Toggle-adjacent grid to all-off · Players: 1 · Complexity: L · Multiplayer: no
+- **Lights Out Deluxe** — 6x6 with colored states · Players: 1 · Complexity: M · Multiplayer: no
+- **Lights Out 2000** — Three-color 5x5 · Players: 1 · Complexity: M · Multiplayer: no
+- **Lights Out Cube** — 3D cube-face version · Players: 1 · Complexity: M · Multiplayer: no
+- **Kakuro** — Crossword-arithmetic puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Hashiwokakero (Bridges)** — Connect islands with bridges · Players: 1 · Complexity: M · Multiplayer: no
+- **Nurikabe** — Paint-regions-around-islands · Players: 1 · Complexity: M · Multiplayer: no
+- **Shikaku** — Rectangle-partition puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Heyawake** — "Divided-rooms" paint puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Masyu** — Pearl-path loop puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Slitherlink** — Draw a single loop by clue hints · Players: 1 · Complexity: M · Multiplayer: no
+- **Numberlink** — Connect number pairs by paths · Players: 1 · Complexity: M · Multiplayer: no
+- **Fillomino** — Fill grid with numbered regions · Players: 1 · Complexity: M · Multiplayer: no
+- **LITS** — Tetromino-in-region puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Yin-Yang** — Paint black/white regions · Players: 1 · Complexity: M · Multiplayer: no
+- **Akari (Light Up)** — Place bulbs to light every cell · Players: 1 · Complexity: M · Multiplayer: no
+- **Tents and Trees** — Pair tents to trees puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Minesweeper Classic** — Avoid mines revealing numbered cells · Players: 1 · Complexity: M · Multiplayer: no
+- **Minesweeper Hex** — Hex-grid Minesweeper · Players: 1 · Complexity: M · Multiplayer: no
+- **Picross / Nonogram** — Reveal-image-by-counts · Players: 1 · Complexity: M · Multiplayer: no
+- **Color Picross** — Multi-color nonogram · Players: 1 · Complexity: M · Multiplayer: no
+- **Kenken** — Arithmetic Sudoku cousin · Players: 1 · Complexity: M · Multiplayer: no
+- **Futoshiki** — Inequality-constraint Sudoku cousin · Players: 1 · Complexity: M · Multiplayer: no
+- **Str8ts** — Straight-run Sudoku cousin · Players: 1 · Complexity: M · Multiplayer: no
+- **Suguru** — Region-bounded number puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Hitori** — Paint-to-remove-duplicates grid puzzle · Players: 1 · Complexity: M · Multiplayer: no
+
+### Sudoku Extended Family
+- **Classic 9x9 Sudoku** — Standard number puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **4x4 Mini Sudoku** — Child-size Sudoku · Players: 1 · Complexity: L · Multiplayer: no
+- **6x6 Sudoku** — Beginner-intermediate Sudoku · Players: 1 · Complexity: L · Multiplayer: no
+- **12x12 Giant Sudoku** — Large-grid Sudoku · Players: 1 · Complexity: M · Multiplayer: no
+- **16x16 Sudoku** — Hexadecimal Sudoku · Players: 1 · Complexity: M · Multiplayer: no
+- **25x25 Sudoku** — Gargantuan Sudoku · Players: 1 · Complexity: H · Multiplayer: no
+- **Jigsaw Sudoku** — Irregular-region Sudoku · Players: 1 · Complexity: M · Multiplayer: no
+- **Hyper Sudoku** — 9x9 with 4 extra 3x3 regions · Players: 1 · Complexity: M · Multiplayer: no
+- **X-Sudoku (Diagonal)** — Diagonals must also contain 1-9 · Players: 1 · Complexity: M · Multiplayer: no
+- **Windoku** — Four extra shaded regions · Players: 1 · Complexity: M · Multiplayer: no
+- **Center-Dot Sudoku** — Nine marked cells must contain 1-9 · Players: 1 · Complexity: M · Multiplayer: no
+- **Sumoku** — Sum-based Sudoku variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Killer Sudoku** — Cage-summed Sudoku · Players: 1 · Complexity: M · Multiplayer: no
+- **Killer Sudoku Zero** — Killer with cages summing incl. 0 · Players: 1 · Complexity: M · Multiplayer: no
+- **Greater-Than Sudoku** — Inequality Sudoku · Players: 1 · Complexity: M · Multiplayer: no
+- **Consecutive Sudoku** — Dots mark neighbors differing by 1 · Players: 1 · Complexity: M · Multiplayer: no
+- **Kropki Sudoku** — Dots mark consecutive or 2:1 ratio · Players: 1 · Complexity: M · Multiplayer: no
+- **Thermo Sudoku** — Values rise along thermometer shapes · Players: 1 · Complexity: M · Multiplayer: no
+- **Arrow Sudoku** — Cell sums equal the circle at the arrow base · Players: 1 · Complexity: M · Multiplayer: no
+- **Little Killer Sudoku** — Diagonal-arrow sums · Players: 1 · Complexity: M · Multiplayer: no
+- **Sandwich Sudoku** — Constraint between 1 and 9 positions · Players: 1 · Complexity: M · Multiplayer: no
+- **German Whispers** — Differences of 5 along marked lines · Players: 1 · Complexity: M · Multiplayer: no
+- **Dutch Whispers** — Differences of 4 along lines · Players: 1 · Complexity: M · Multiplayer: no
+- **Renban Lines** — Consecutive-set along line · Players: 1 · Complexity: M · Multiplayer: no
+- **Palindrome Sudoku** — Line reads same both ways · Players: 1 · Complexity: M · Multiplayer: no
+- **Anti-Knight Sudoku** — No two knight-moves apart share a number · Players: 1 · Complexity: M · Multiplayer: no
+- **Anti-King Sudoku** — No king-moves repetition · Players: 1 · Complexity: M · Multiplayer: no
+- **Non-Consecutive Sudoku** — No adjacent cells differ by 1 · Players: 1 · Complexity: M · Multiplayer: no
+- **Odd-Even Sudoku** — Shaded cells must be even · Players: 1 · Complexity: L · Multiplayer: no
+- **Quad Sudoku** — Quadruple-clue variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Clone Sudoku** — Cloned regions repeat pattern · Players: 1 · Complexity: M · Multiplayer: no
+- **Samurai Sudoku** — Five overlapping 9x9 grids · Players: 1 · Complexity: H · Multiplayer: no
+- **Flower Sudoku** — Five-grid flower overlap · Players: 1 · Complexity: H · Multiplayer: no
+- **Butterfly Sudoku** — Four overlapping 9x9 grids · Players: 1 · Complexity: H · Multiplayer: no
+- **Triple Doku** — Three grids sharing a row · Players: 1 · Complexity: M · Multiplayer: no
+- **Shogun Sudoku** — 11-grid overlapping mega-Sudoku · Players: 1 · Complexity: H · Multiplayer: no
+- **Sudoku 3D** — Cube-surface Sudoku · Players: 1 · Complexity: H · Multiplayer: no
+- **Roman Sudoku** — Uses Roman numerals · Players: 1 · Complexity: L · Multiplayer: no
+- **Alphadoku** — 25-letter Sudoku · Players: 1 · Complexity: M · Multiplayer: no
+- **Word Sudoku** — 9-letter wordplay Sudoku · Players: 1 · Complexity: M · Multiplayer: no
+- **Skyscraper Sudoku** — Outside clues count visible skylines · Players: 1 · Complexity: M · Multiplayer: no
+- **Thermometer-Killer Hybrid Sudoku** — Multi-constraint hybrid · Players: 1 · Complexity: H · Multiplayer: no
+- **Miracle Sudoku** — 2-clue puzzle with combined anti-king/knight/non-consecutive rules · Players: 1 · Complexity: H · Multiplayer: no
+- **Chaos Construction Sudoku** — Boxes deducible from clues · Players: 1 · Complexity: H · Multiplayer: no
+- **Fog of War Sudoku** — Cells revealed only when filled correctly · Players: 1 · Complexity: M · Multiplayer: no
+- **Hakyuu (Ripple Effect)** — Region number-distance puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Kakurasu** — Inner-cells-sum puzzle · Players: 1 · Complexity: M · Multiplayer: no
+
+### Connect & Path Puzzles
+- **Flow Free** — Connect colored pairs with non-crossing paths · Players: 1 · Complexity: L · Multiplayer: no
+- **Flow Free: Bridges** — Flow with overpass bridges · Players: 1 · Complexity: M · Multiplayer: no
+- **Flow Free: Hexes** — Hex-grid Flow · Players: 1 · Complexity: M · Multiplayer: no
+- **Flow Free: Warps** — Flow with edge wrap-around · Players: 1 · Complexity: M · Multiplayer: no
+- **Unblock Me** — Rush Hour clone · Players: 1 · Complexity: L · Multiplayer: no
+- **Cut the Rope** — Physics rope puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **World of Goo-like** — Physics bridge-builder · Players: 1 · Complexity: M · Multiplayer: no
+- **Hocus** — Escher-like perspective navigation · Players: 1 · Complexity: M · Multiplayer: no
+- **Monument Valley-like** — Non-Euclidean perspective puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Maze of Galious-like** — Maze-explorer puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Sokoban** — Push-crates-to-goals warehouse puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Sokoban++** — Sokoban with multi-color goals · Players: 1 · Complexity: M · Multiplayer: no
+- **Sokoban-3D** — 3D volumetric Sokoban · Players: 1 · Complexity: H · Multiplayer: no
+- **Ice Puzzle (Slide-on-Ice)** — Slide player until hitting wall · Players: 1 · Complexity: L · Multiplayer: no
+- **Chip's Challenge-like** — Tile-based traps puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Stephen's Sausage Roll-like** — Grid-sausage rolling puzzle · Players: 1 · Complexity: H · Multiplayer: no
+- **Baba Is You-like** — Rewrite-the-rules word puzzle · Players: 1 · Complexity: H · Multiplayer: no
+- **Helltaker-like** — Step-limit grid puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Snakebird-like** — Grow-a-snake puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Cosmic Express-like** — Route-planning train puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Hexcells** — Hex-Minesweeper-puzzle series · Players: 1 · Complexity: M · Multiplayer: no
+- **Jelly no Puzzle-like** — Gravity-jelly grid puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Game About Squares-like** — Chain-moving squares puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Block Dude-like** — Push-and-climb puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Pipe Dream-like** — Place pipes before the water · Players: 1 · Complexity: L · Multiplayer: no
+- **Pipe Mania Endless** — Endless pipe laying variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Netwalk** — Rotate tiles to connect network · Players: 1 · Complexity: L · Multiplayer: no
+- **Tangram** — Arrange 7 shapes into silhouettes · Players: 1 · Complexity: L · Multiplayer: no
+- **Pentominoes** — Fit 12 5-square pieces · Players: 1 · Complexity: M · Multiplayer: no
+- **Hexominoes** — Fit 35 6-square pieces · Players: 1 · Complexity: H · Multiplayer: no
+- **Soma Cube** — 3D cube assembly · Players: 1 · Complexity: M · Multiplayer: no
+- **Calibron 12** — 12-rectangle tile assembly · Players: 1 · Complexity: M · Multiplayer: no
+- **IQ-Fit** — Commercial pentomino puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Smart Games "XYZ"-like** — Challenge-card spatial puzzle series · Players: 1 · Complexity: M · Multiplayer: no
+- **Ubongo** — Timed tile-fitting race · Players: 1-4 · Complexity: L · Multiplayer: opt
+- **FITS** — Tetris-shape drop planner · Players: 1-4 · Complexity: L · Multiplayer: opt
+- **NMBR 9** — Digit-stacking puzzle · Players: 1-4 · Complexity: L · Multiplayer: opt
+- **Patchwork** — Quilt-fitting 2-player puzzle · Players: 2 · Complexity: L · Multiplayer: yes
+- **Cascadia** — Habitat-tile drafting puzzle · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Calico** — Cat-quilt tile puzzle · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **The Isle of Cats** — Polyomino cat rescue · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Tiny Towns** — Small-grid building puzzle · Players: 1-6 · Complexity: L · Multiplayer: opt
+- **Barenpark** — Polyomino zoo construction · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Cottage Garden** — Polyomino flower garden · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Indian Summer** — Leaf-polyomino forest puzzle · Players: 1-4 · Complexity: M · Multiplayer: opt
+- **Nova Luna** — Tile round-track plan puzzle · Players: 1-4 · Complexity: M · Multiplayer: opt
+
+## Word Games
+
+### Spelling & Guessing
+- **Ghost** — Add letters to form a word; avoid completing · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Superghost** — Ghost allowing letters at either end · Players: 2+ · Complexity: M · Multiplayer: yes
+- **Xghost** — Ghost with wild letters · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Lexiclone** — Online multiplayer Ghost variant · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Pig (Word)** — Misspell to earn P-I-G letters · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Horse (Spelling)** — Horse-spelling letter avoidance · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Hangman** — Guess the word before stickman hangs · Players: 2 · Complexity: L · Multiplayer: yes
+- **Category Hangman** — Hangman restricted by category · Players: 2 · Complexity: L · Multiplayer: yes
+- **Bulls-and-Cows Words** — Letter-position guessing · Players: 2 · Complexity: L · Multiplayer: yes
+- **Jotto** — 5-letter word deduction game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Lingo** — 5-letter TV word-guess · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Lingo 4-letter** — Small-word variant · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Lingo 6-letter** — Extended Lingo · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Wordle-5** — Standard 5-letter daily Wordle · Players: 1 · Complexity: L · Multiplayer: no
+- **Wordle-4** — Four-letter variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Wordle-6** — Six-letter variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Wordle-7** — Seven-letter variant · Players: 1 · Complexity: L · Multiplayer: no
+- **Wordle-8** — Eight-letter variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Wordle-9** — Nine-letter variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Wordle-11** — Eleven-letter challenge · Players: 1 · Complexity: M · Multiplayer: no
+- **Dordle** — Two-word simultaneous Wordle · Players: 1 · Complexity: L · Multiplayer: no
+- **Quordle** — Four-word simultaneous Wordle · Players: 1 · Complexity: M · Multiplayer: no
+- **Octordle** — Eight-word simultaneous Wordle · Players: 1 · Complexity: M · Multiplayer: no
+- **Sedecordle** — Sixteen-word Wordle · Players: 1 · Complexity: H · Multiplayer: no
+- **Duotrigordle** — Thirty-two-word Wordle · Players: 1 · Complexity: H · Multiplayer: no
+- **Sexagintaquattuordle** — Sixty-four-word Wordle · Players: 1 · Complexity: H · Multiplayer: no
+- **Squardle** — 2D grid Wordle · Players: 1 · Complexity: M · Multiplayer: no
+- **Crosswordle** — Crossword-style Wordle · Players: 1 · Complexity: M · Multiplayer: no
+- **Absurdle** — Adversarial Wordle that fights your guesses · Players: 1 · Complexity: M · Multiplayer: no
+- **Hurdle** — Streak-of-Wordles variant · Players: 1 · Complexity: M · Multiplayer: no
+- **Byrdle** — Choral-music Wordle · Players: 1 · Complexity: L · Multiplayer: no
+- **Waffle** — Swap letters in a waffle grid · Players: 1 · Complexity: L · Multiplayer: no
+- **Worldle** — Guess-country daily geo puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Heardle** — Song-intro guessing · Players: 1 · Complexity: L · Multiplayer: no
+- **Framed** — Movie-still guessing · Players: 1 · Complexity: L · Multiplayer: no
+- **Contexto** — Semantic word-guess · Players: 1 · Complexity: L · Multiplayer: no
+- **Semantle** — Semantic-similarity Wordle · Players: 1 · Complexity: M · Multiplayer: no
+- **Redactle** — Guess-Wikipedia-article-by-words · Players: 1 · Complexity: M · Multiplayer: no
+- **Connections (NYT)** — Group 16 words into 4 themes · Players: 1 · Complexity: L · Multiplayer: no
+- **Strands (NYT)** — Word-search-plus-theme puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Spelling Bee (NYT)** — Honeycomb anagram-like · Players: 1 · Complexity: M · Multiplayer: no
+- **Letter Boxed (NYT)** — Chain letters around square · Players: 1 · Complexity: L · Multiplayer: no
+
+### Board & Tile Word Games
+- **Scrabble** — Classic tile crossword game · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Super Scrabble** — Larger 21x21 Scrabble board · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Scrabble Junior** — Children's Scrabble · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Duplicate Scrabble** — Same rack given to all players each turn · Players: 2-100 · Complexity: M · Multiplayer: yes
+- **Words With Friends** — Online Scrabble-like · Players: 2 · Complexity: M · Multiplayer: yes
+- **WordFeud** — Nordic Words With Friends cousin · Players: 2 · Complexity: M · Multiplayer: yes
+- **Upwords** — Scrabble with stacking for higher scores · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Bananagrams** — Race to form your own crossword · Players: 1-8 · Complexity: L · Multiplayer: opt
+- **Pairs in Pears** — Parallel-word variant of Bananagrams · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Appletters** — Apple-shaped word chain game · Players: 1-8 · Complexity: L · Multiplayer: opt
+- **Quiddler** — Card word-crafting game · Players: 1-8 · Complexity: L · Multiplayer: opt
+- **Letter Tycoon** — Economic word-formation · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Paperback** — Deck-building word game · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Hardback** — Deck-building word sequel · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Letterpress** — Mobile territory word game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Alphabear** — Word-forming bear-building mobile · Players: 1 · Complexity: L · Multiplayer: no
+- **Typeshift** — Column-shifting word puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **SpellTower** — Tower-crumbling word puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Bonza Word Puzzle** — Jigsaw-word puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Word Cookies** — Anagram-from-letters mobile · Players: 1 · Complexity: L · Multiplayer: no
+- **Wordscapes** — Anagram into crossword · Players: 1 · Complexity: L · Multiplayer: no
+- **Word Chums** — Scrabble-like social game · Players: 2 · Complexity: M · Multiplayer: yes
+- **Ruzzle** — Timed Boggle-on-mobile · Players: 2 · Complexity: L · Multiplayer: yes
+- **Boggle** — Dice-grid word search · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Big Boggle** — 5x5 Boggle · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Boggle Master** — 5x5 Boggle with longer rounds · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Boggle Deluxe** — Boggle with extra-letter dice · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Wordament** — Boggle-like mobile tournament · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Scattergories** — Category-list word generation · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Tapple** — Categorical alphabet race · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Stoplight** — Train-of-thought word challenge · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Lex-Go** — Linear word-building card game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Last Word** — Topic-word speed game · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Word on the Street** — Tug-of-war word game · Players: 2-10 · Complexity: L · Multiplayer: yes
+- **Blurble** — Shout-a-word speed game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Word Slam** — Two-team word guessing · Players: 4+ · Complexity: L · Multiplayer: yes
+- **Dabble** — Build five different-length words · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Anomia** — Rapid-category word race · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Just One** — Cooperative one-word clue · Players: 3-7 · Complexity: L · Multiplayer: yes
+- **Clueless** — One-word clue mystery · Players: 3-7 · Complexity: L · Multiplayer: yes
+
+### International Word Games
+- **Scrabble Français** — French Scrabble · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Scrabble Español** — Spanish Scrabble · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Scrabble Deutsch** — German Scrabble · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Scrabble Italiano** — Italian Scrabble · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Scrabble Nordic** — Scandinavian Scrabble · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Erudit** — Russian Scrabble · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Kelimelik** — Turkish Words-With-Friends · Players: 2 · Complexity: M · Multiplayer: yes
+- **Shiritori** — Japanese word chain · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Antakshari** — Indian song-chain word game · Players: 2-10 · Complexity: L · Multiplayer: yes
+- **Mots Croisés** — French-style crossword · Players: 1 · Complexity: M · Multiplayer: no
+- **Hanjie / Griddler** — Nonogram international name · Players: 1 · Complexity: M · Multiplayer: no
+- **Cryptogram** — Substitution-cipher word puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Word Ladder** — Change letters stepwise to transform words · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Double-Crostic** — Quote reconstruction word puzzle · Players: 1 · Complexity: M · Multiplayer: no
+- **Acrostic** — Theme-word-column crossword · Players: 1 · Complexity: M · Multiplayer: no
+- **Cryptic Crossword** — British-style pun crossword · Players: 1 · Complexity: H · Multiplayer: no
+- **American Crossword** — Straight-clue crossword · Players: 1 · Complexity: M · Multiplayer: no
+- **Swedish Crossword** — Picture-clue crossword · Players: 1 · Complexity: M · Multiplayer: no
+- **Barred Crossword** — Crossword with bars instead of black squares · Players: 1 · Complexity: M · Multiplayer: no
+- **Arroword** — French integrated-clue crossword · Players: 1 · Complexity: M · Multiplayer: no
+
+## Match-3 & Puzzle Variants
+
+- **Generic Bejeweled** — Swap adjacent gems for matches · Players: 1 · Complexity: L · Multiplayer: no
+- **Bejeweled-Blitz** — 60-second time-attack Bejeweled · Players: 1 · Complexity: L · Multiplayer: no
+- **Bejeweled-Twist** — Rotate 2x2 blocks for matches · Players: 1 · Complexity: L · Multiplayer: no
+- **Bejeweled-Stars** — Objective-based match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Candy Crush-like** — Drag-swap mobile match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Candy Crush Soda-like** — Soda-filling match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Candy Crush Jelly-like** — Spread-jelly match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Candy Crush Friends-like** — Character-powered match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Match-3 Hexagonal** — Hex-grid match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Match-3 Triangle** — Triangle-grid match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Puzzle & Dragons-like** — RPG-combo match-3 · Players: 1 · Complexity: M · Multiplayer: no
+- **Shariki** — Original pre-Bejeweled Russian match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Jewel Quest-like** — Gold-tile conversion match-3 · Players: 1 · Complexity: L · Multiplayer: no
+- **Puzzle Quest-like** — Match-3 RPG battling · Players: 1-2 · Complexity: M · Multiplayer: opt
+- **Columns** — Falling 3-gem column match-3 (Sega) · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Super Columns** — Two-column 3-gem columns · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Puyo Puyo** — Falling blob 4-chain puzzle · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Puyo Puyo Tsu** — Offset rules expanded Puyo · Players: 1-2 · Complexity: M · Multiplayer: opt
+- **Puyo Puyo Sun** — Sun-dropping Puyo variant · Players: 1-2 · Complexity: M · Multiplayer: opt
+- **Puyo Puyo Fever** — Fever Puyo variant · Players: 1-2 · Complexity: M · Multiplayer: opt
+- **Dr. Mario-like** — Virus-clearing falling pill puzzle · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Wario's Woods-like** — Push-bomb match puzzle · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Tetris Attack / Panel de Pon** — Swap-rows falling puzzle · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Pokémon Puzzle League** — Panel de Pon with Pokémon skins · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Magical Drop** — Pull-and-throw column match · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Money Idol Exchanger** — Coin-conversion puzzle · Players: 1-2 · Complexity: M · Multiplayer: opt
+- **Drop7** — Number-drop Tetris-match hybrid · Players: 1 · Complexity: L · Multiplayer: no
+- **Threes** — Combine-to-3s-then-3x puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **2048** — Power-of-2 merging puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **2048-Hex** — Hexagonal 2048 · Players: 1 · Complexity: L · Multiplayer: no
+- **2048-3D** — Cube-face 2048 · Players: 1 · Complexity: M · Multiplayer: no
+- **2048 x3** — Three-grid merge · Players: 1 · Complexity: L · Multiplayer: no
+- **1024** — Simpler 2048 · Players: 1 · Complexity: L · Multiplayer: no
+- **8192** — Harder 2048 · Players: 1 · Complexity: L · Multiplayer: no
+- **Fives / Twos** — Combine 5s puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Triple Town** — Three-of-a-kind upgrade puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Merge Dragons-like** — Merge-chain idle puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Merge Mansion-like** — Narrative merge game · Players: 1 · Complexity: L · Multiplayer: no
+- **Merge Magic!-like** — Fantasy merge game · Players: 1 · Complexity: L · Multiplayer: no
+- **Zoo Merge-like** — Animal-themed merge · Players: 1 · Complexity: L · Multiplayer: no
+- **Lumines** — Timeline-sweep block puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Meteos** — Launch-matching puzzle · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Zuma-like** — Stop-the-ball chain shooter · Players: 1 · Complexity: L · Multiplayer: no
+- **Luxor-like** — Ball-rolling chain match · Players: 1 · Complexity: L · Multiplayer: no
+- **Bubble Shooter** — Aim-and-pop bubble matcher · Players: 1 · Complexity: L · Multiplayer: no
+- **Bust-A-Move / Puzzle Bobble** — Arcade bubble shoot · Players: 1-2 · Complexity: L · Multiplayer: opt
+- **Snood-like** — Ascend-the-line shooter · Players: 1 · Complexity: L · Multiplayer: no
+- **Collapse!-like** — Rising-block removal puzzle · Players: 1 · Complexity: L · Multiplayer: no
+- **Chain Shot! / SameGame** — Remove groups same color · Players: 1 · Complexity: L · Multiplayer: no
+- **Clickomania** — Browser SameGame · Players: 1 · Complexity: L · Multiplayer: no
+- **Kuru Kuru Kururin-like** — Rotating-stick maze · Players: 1 · Complexity: M · Multiplayer: no
+
+## Endless Arcade Variants
+
+### Endless Runners
+- **Side-Scroll Runner** — Infinite horizontal auto-run with jump · Players: 1 · Complexity: L · Multiplayer: no
+- **3D Tunnel Runner** — Run into the screen dodging lanes · Players: 1 · Complexity: L · Multiplayer: no
+- **Temple-Style Runner** — Third-person chase with turns · Players: 1 · Complexity: L · Multiplayer: no
+- **Subway-Style Runner** — Lane-switch urban runner · Players: 1 · Complexity: L · Multiplayer: no
+- **Canabalt-Style Runner** — Vertical-gap rooftop jumper · Players: 1 · Complexity: L · Multiplayer: no
+- **Robot Unicorn Attack-Style** — Dash-through-stars runner · Players: 1 · Complexity: L · Multiplayer: no
+- **Gravity Runner** — Switch top/bottom gravity endless · Players: 1 · Complexity: L · Multiplayer: no
+- **VVVVVV-Style Flipper** — Gravity-flip platformer endless · Players: 1 · Complexity: M · Multiplayer: no
+- **Geometry Runner** — Rhythm-timed auto-jumper · Players: 1 · Complexity: M · Multiplayer: no
+- **Spike Dodger** — One-button spike-avoidance · Players: 1 · Complexity: L · Multiplayer: no
+- **Platform Gap Runner** — Classic gap-only runner · Players: 1 · Complexity: L · Multiplayer: no
+- **Cave Runner** — Flappy-Bird-like narrow cave · Players: 1 · Complexity: L · Multiplayer: no
+- **Rolling Ball Runner** — Ball-roll endless tube · Players: 1 · Complexity: L · Multiplayer: no
+- **Portal Runner** — Wormhole-switching endless · Players: 1 · Complexity: M · Multiplayer: no
+- **Color Switch-Style** — Color-match obstacle dodger · Players: 1 · Complexity: L · Multiplayer: no
+- **Sonic-Style Endless** — Speed-loop endless runner · Players: 1 · Complexity: L · Multiplayer: no
+- **Spy Mouse-Style** — Stealth lane runner · Players: 1 · Complexity: L · Multiplayer: no
+
+### Endless Jumpers
+- **Doodle-Jump-Style** — Auto-jump vertical tower · Players: 1 · Complexity: L · Multiplayer: no
+- **Icy-Tower-Style** — Combo-chain vertical stairs · Players: 1 · Complexity: L · Multiplayer: no
+- **Ninja Jumper** — Wall-bouncing vertical climb · Players: 1 · Complexity: L · Multiplayer: no
+- **Triangle Jumper** — Geometric platform vertical · Players: 1 · Complexity: L · Multiplayer: no
+- **Space Jumper** — Low-gravity vertical escape · Players: 1 · Complexity: L · Multiplayer: no
+- **Helicopter Jumper** — Tap-to-rise helicopter cave · Players: 1 · Complexity: L · Multiplayer: no
+- **Hoppers** — Platform-gap hopper · Players: 1 · Complexity: L · Multiplayer: no
+- **Stack Jumper** — Stack-block vertical · Players: 1 · Complexity: L · Multiplayer: no
+- **Disc Jumper** — Rotating disc vertical · Players: 1 · Complexity: L · Multiplayer: no
+- **Bounce Jumper** — Auto-bouncing ball · Players: 1 · Complexity: L · Multiplayer: no
+- **Lava Jumper** — Lava-rising platform escape · Players: 1 · Complexity: L · Multiplayer: no
+- **Crane Jumper** — Construction-crane vertical · Players: 1 · Complexity: L · Multiplayer: no
+- **Cloud Jumper** — Cloud-platform endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Reverse Gravity Jumper** — Upside-down vertical · Players: 1 · Complexity: L · Multiplayer: no
+
+### Endless Flyers
+- **Flappy-Bird-Style** — Tap-to-flap pipe dodger · Players: 1 · Complexity: L · Multiplayer: no
+- **Helicopter Flyer** — Tap-to-rise corridor flyer · Players: 1 · Complexity: L · Multiplayer: no
+- **Jetpack-Style** — Hold-to-rise corridor flyer · Players: 1 · Complexity: L · Multiplayer: no
+- **Submarine Flyer** — Underwater obstacle dodger · Players: 1 · Complexity: L · Multiplayer: no
+- **Rocket Flyer** — Build-speed vertical flyer · Players: 1 · Complexity: L · Multiplayer: no
+- **Paper-Plane Flyer** — Paper plane drift endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Glider** — Hang-glider thermal endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Dragon Flyer** — Dragon corridor flyer · Players: 1 · Complexity: L · Multiplayer: no
+- **Bat Flyer** — Cave-bat echolocation flyer · Players: 1 · Complexity: L · Multiplayer: no
+- **UFO Flyer** — Alien-abduction endless flyer · Players: 1 · Complexity: L · Multiplayer: no
+- **Bi-Plane Flyer** — Vintage plane obstacle flyer · Players: 1 · Complexity: L · Multiplayer: no
+- **Space Hornet Flyer** — Shoot-while-flying endless · Players: 1 · Complexity: L · Multiplayer: no
+
+### Wall-Jumpers & Rotation
+- **Wall Jumper** — Alternate-wall-cling climb · Players: 1 · Complexity: L · Multiplayer: no
+- **Ninja Wall** — Tap-to-switch-walls endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Super Hexagon-Style** — Rotating hex obstacle survival · Players: 1 · Complexity: M · Multiplayer: no
+- **Dancing Line-Style** — Line-direction rhythm avoider · Players: 1 · Complexity: L · Multiplayer: no
+- **Pivot** — Rotate-character-around-nail endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Orbit** — Planet-orbit endless swapper · Players: 1 · Complexity: L · Multiplayer: no
+- **Circle Rush** — Inside-the-ring obstacle dodger · Players: 1 · Complexity: L · Multiplayer: no
+- **Twin Circles** — Two concentric ring obstacle · Players: 1 · Complexity: L · Multiplayer: no
+- **Rotating Arrow** — Spin-and-stop peg game · Players: 1 · Complexity: L · Multiplayer: no
+- **Stickman Hook** — Swing-arc hook-throw endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Spider Swinger** — Web-swing endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Bungee Runner** — Bungee-rope swing endless · Players: 1 · Complexity: L · Multiplayer: no
+
+### Shooter & Defense Endless
+- **Endless Shoot-'Em-Up** — Vertical-scroll bullet hell endless · Players: 1 · Complexity: M · Multiplayer: no
+- **Endless Twin-Stick** — Omnidirectional shooter endless · Players: 1 · Complexity: M · Multiplayer: no
+- **Bullet-Heaven** — Vampire-Survivors-style auto-shooter · Players: 1 · Complexity: M · Multiplayer: no
+- **Endless Tower Defense** — Wave-after-wave TD · Players: 1 · Complexity: M · Multiplayer: no
+- **Endless Brick-Breaker** — Breakout-like endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Pinball** — Infinite pinball table · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Asteroids** — Rock-shooter survival · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Missile Command** — Incoming-missile defense · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Invaders** — Falling Space-Invaders · Players: 1 · Complexity: L · Multiplayer: no
+- **Lane Defender** — Single-lane waves shooter · Players: 1 · Complexity: L · Multiplayer: no
+
+### Stacking & Growing Endless
+- **Tower Stacker** — Align-blocks vertical endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Snake Classic** — Eat-food grow-tail endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Slither.io-Style** — Multiplayer snake arena · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Agar.io-Style** — Eat-and-grow cell arena · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Crossy Road-Style** — Frogger-style endless · Players: 1-4 · Complexity: L · Multiplayer: opt
+- **Frogger Endless** — Classic Frogger infinite · Players: 1 · Complexity: L · Multiplayer: no
+- **Skee-Ball Endless** — Roll-the-ball score-chase · Players: 1 · Complexity: L · Multiplayer: no
+- **Plinko Endless** — Drop-and-hope chain · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Fruit Ninja** — Swipe-fruit arcade · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Typing Attack** — Type-word survival · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Whack-a-Mole** — Tap moles increasing pace · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Catch** — Catch falling items · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Balance** — Balance-the-stack physics · Players: 1 · Complexity: L · Multiplayer: no
+- **Endless Tap-to-Count** — Hyper-casual tap speedrun · Players: 1 · Complexity: L · Multiplayer: no
+- **Color Ball Drop** — Color-match drop-through-ring endless · Players: 1 · Complexity: L · Multiplayer: no
+- **Paper-io-style** — Territory-claiming endless · Players: 1+ · Complexity: L · Multiplayer: opt
+
+## Real-World Sports Simulations
+
+### Darts Variants
+- **301** — Subtract from 301 double-out finish · Players: 2+ · Complexity: L · Multiplayer: yes
+- **501** — Standard league darts · Players: 2+ · Complexity: L · Multiplayer: yes
+- **701** — Extended darts variant · Players: 2+ · Complexity: L · Multiplayer: yes
+- **1001** — Long-form darts · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Double Out 501** — 501 requiring double to finish · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Masters Out** — Finish on double or triple · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Round the Clock** — Hit each number 1-20 in order · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Round the Board** — Hit 1-20 doubles or trebles · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Halve-It** — Missed target halves your score · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Cricket** — Close numbers 15-20 and bull · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Cut-Throat Cricket** — Cricket with penalty scoring · Players: 3+ · Complexity: L · Multiplayer: yes
+- **No-Score Cricket** — Cricket closing with no scoring · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Tactics Cricket** — Strategy Cricket with all numbers · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Wild West Cricket** — Cricket with wild numbers · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Mickey Mouse** — Kid's Cricket on 12-20 and bull · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Baseball (Darts)** — Nine innings of number-target · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Golf (Darts)** — Lowest-score-per-number golf · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Gotcha!** — Darts snipe-opponents-score game · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Shanghai** — Single-double-triple of each number · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Shanghai by Doubles** — Shanghai restricted to doubles · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Killer** — Claim number, then knock out others · Players: 2+ · Complexity: L · Multiplayer: yes
+- **English Killer** — Killer with life tracking · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Follow the Leader** — Match-the-leader target · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Legs and Sets** — Match-format darts structure · Players: 2 · Complexity: L · Multiplayer: yes
+- **Around the World** — Hit each number once quickly · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Tic-Tac-Toe Darts** — Claim tic-tac-toe squares by darts · Players: 2 · Complexity: L · Multiplayer: yes
+- **Scram** — Chase-and-block 2-player darts · Players: 2 · Complexity: L · Multiplayer: yes
+- **Chase the Dragon** — 12-20 & Bull sequential · Players: 2+ · Complexity: L · Multiplayer: yes
+
+### Pool & Billiards Variants
+- **One-Pocket** — Each player claims one pocket · Players: 2 · Complexity: M · Multiplayer: yes
+- **Rotation** — Pocket in numerical order · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Chinese 8-Ball** — Asian 8-ball on snooker-style cushions · Players: 2 · Complexity: M · Multiplayer: yes
+- **British 8-Ball** — Small-ball UK pub 8-ball · Players: 2 · Complexity: M · Multiplayer: yes
+- **American 9-Ball** — 1-9 ball sequence · Players: 2 · Complexity: M · Multiplayer: yes
+- **10-Ball** — 1-10 sequence with call shot · Players: 2 · Complexity: M · Multiplayer: yes
+- **7-Ball** — Hexagonal 7-ball · Players: 2 · Complexity: L · Multiplayer: yes
+- **14.1 Continuous (Straight Pool)** — Rack-after-rack continuous pool · Players: 2 · Complexity: M · Multiplayer: yes
+- **Bank Pool** — Every ball must be banked · Players: 2 · Complexity: M · Multiplayer: yes
+- **Russian Pyramid** — Russian big-ball precision pool · Players: 2 · Complexity: H · Multiplayer: yes
+- **Kaisa (Finnish Pyramid)** — Five-ball Russian-style pool · Players: 2 · Complexity: M · Multiplayer: yes
+- **Carom Billiards** — 3-cushion pocketless billiards · Players: 2 · Complexity: H · Multiplayer: yes
+- **Three-Cushion Billiards** — Must hit 3 cushions · Players: 2 · Complexity: H · Multiplayer: yes
+- **Artistic Billiards** — Choreographed trick shots · Players: 1 · Complexity: H · Multiplayer: no
+- **Snooker** — English 15-red precision game · Players: 2 · Complexity: H · Multiplayer: yes
+- **Six-Red Snooker** — Shortened snooker · Players: 2 · Complexity: M · Multiplayer: yes
+- **Power Snooker** — Time-limit snooker variant · Players: 2 · Complexity: M · Multiplayer: yes
+- **Chinese Snooker Billiards** — Variant fusing snooker and pool · Players: 2 · Complexity: M · Multiplayer: yes
+- **Bar Billiards** — Pub skill billiards with holes · Players: 2 · Complexity: M · Multiplayer: yes
+- **Bumper Pool** — Small-table pool with bumpers · Players: 2 · Complexity: L · Multiplayer: yes
+- **Cutthroat Pool** — 3-way 8-ball · Players: 3 · Complexity: L · Multiplayer: yes
+- **Killer Pool** — Knockout pool · Players: 2+ · Complexity: L · Multiplayer: yes
+
+### Bowling Variants
+- **Ten-Pin Bowling** — Standard American bowling · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Nine-Pin Bowling** — European 9-pin variant · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Candlepin Bowling** — Maine/New England thin-pin · Players: 1+ · Complexity: M · Multiplayer: opt
+- **Duckpin Bowling** — Small-pin small-ball bowling · Players: 1+ · Complexity: M · Multiplayer: opt
+- **Rubber Duckpin** — Rubber-banded pins · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Five-Pin Bowling** — Canadian 5-pin · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Skittles** — Traditional British ninepin · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Kegeln** — German pin bowling variant · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Bocce Skittles** — Italian indoor pin game · Players: 1+ · Complexity: L · Multiplayer: opt
+
+### Lawn & Yard Games
+- **Bocce** — Italian target ball game · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Pétanque** — French metal-ball throw · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Lyonnaise Boules** — Long-range French pétanque · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Boccia** — Paralympic precision-ball sport · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Kubb** — Swedish yard toss · Players: 2-12 · Complexity: L · Multiplayer: yes
+- **Mölkky** — Finnish skittle pin-throw · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Cornhole** — Bean-bag toss to hole · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Washer Toss** — Metal-washer toss game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Horseshoes** — Ringer-toss metal shoes · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Quoits** — Rope-ring pitch · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Varpa** — Swedish stone-throw sport · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Klootschieten** — Dutch ball-throwing · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Ladder Golf (Hillbilly Golf)** — Bola-wrap ladder game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Kan Jam** — Frisbee-slam can game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Spikeball (Roundnet)** — Net-slam four-person ball · Players: 4 · Complexity: L · Multiplayer: yes
+- **Crokinole** — Canadian flick-disc target · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Carrom** — South Asian flick-disc boardsport · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Finger Carrom** — Miniature carrom for 2 · Players: 2 · Complexity: L · Multiplayer: yes
+
+### Ice & Shuffleboard
+- **Curling** — Canadian/Scottish ice sport · Players: 2+ · Complexity: M · Multiplayer: yes
+- **Eisstockschiessen (Bavarian Curling)** — Alpine ice stock sport · Players: 2+ · Complexity: L · Multiplayer: yes
+- **Kubb Ice** — Winter kubb on ice · Players: 2-8 · Complexity: L · Multiplayer: yes
+- **Table Shuffleboard** — Long-table puck game · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Deck Shuffleboard** — Cruise-deck shuffleboard · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Sjoelbak** — Dutch table shuffleboard · Players: 2 · Complexity: L · Multiplayer: yes
+- **Novuss** — Latvian carrom-hybrid sport · Players: 2 · Complexity: L · Multiplayer: yes
+
+### Other Sports Sims
+- **Mini Golf Endless** — Randomized putt-putt holes · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Disc Golf** — Frisbee golf course · Players: 1+ · Complexity: L · Multiplayer: opt
+- **Air Hockey** — Puck-slam digital table · Players: 2 · Complexity: L · Multiplayer: yes
+- **Foosball-Sim** — Digital table football · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Table Tennis Sim** — Paddle-and-ball digital · Players: 2 · Complexity: L · Multiplayer: yes
+- **Speed-Chess-Clock Sport** — Blitz-timed abstract sport · Players: 2 · Complexity: M · Multiplayer: yes
+
