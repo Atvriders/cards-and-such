@@ -118,8 +118,9 @@ Authoritative server. Never trust client state for multiplayer games.
 5. On `isTerminal`, server writes a `scores` row (and updates `ratings` for Elo), broadcasts `{type: "terminal", result}`, closes the room after a short grace window.
 
 **Matchmaking (Phase 1 — intentionally simple):**
-- **Quick match:** one open room per game; first N players to arrive auto-start.
-- **Private room:** client creates a room, server returns a 4-char code; friends enter the code to join.
+- **Quick match — fixed-seat games (Connect 4):** one open room; starts immediately when it hits the exact required count (2).
+- **Quick match — flex-seat games (Uno-like, 2–4):** one open room; start timer begins when the 2nd player joins (30 s countdown, visible to all joined players); room auto-starts at countdown end or when `max` is reached, whichever comes first. New arrivals during countdown extend it by 5 s up to `max`.
+- **Private room:** client creates a room, server returns a 4-char code; friends enter the code to join; host presses Start (requires ≥ `min` seated).
 - No skill-based matching, no queues.
 
 **Single-player games** never open a room. They post finished-game scores via `POST /scores` with a JWT.
