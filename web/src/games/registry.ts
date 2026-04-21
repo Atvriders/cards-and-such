@@ -28,6 +28,7 @@ import { lightsOutPlugin } from "./lights-out/index.js";
 import { fifteenPuzzlePlugin } from "./fifteen/index.js";
 import { hangmanPlugin } from "./hangman/index.js";
 import { liarsDicePlugin } from "./liars-dice/index.js";
+import { breakoutPlugin } from "./breakout/index.js";
 
 export const GAMES: GamePlugin[] = [
   goFishPlugin as unknown as GamePlugin,
@@ -59,4 +60,5 @@ export const GAMES: GamePlugin[] = [
   fifteenPuzzlePlugin as unknown as GamePlugin,
   hangmanPlugin as unknown as GamePlugin,
   liarsDicePlugin as unknown as GamePlugin,
+  breakoutPlugin as unknown as GamePlugin,
 ];
