@@ -8,6 +8,7 @@ import { registerRateLimit } from "./http/plugins.js";
 import { attachWs, type WsHub } from "./ws/server.js";
 import { RoomRegistry } from "./rooms/registry.js";
 import { registerRoomsRoutes } from "./rooms/routes.js";
+import { registerConnect4 } from "./rooms/games/connect-4.js";
 
 declare module "fastify" {
   interface FastifyInstance {
@@ -33,6 +34,7 @@ export async function buildApp(config = loadConfig()): Promise<FastifyInstance> 
 
   app.get("/health", async () => ({ ok: true }));
 
+  registerConnect4();
   const rooms = new RoomRegistry();
   await registerRoomsRoutes(app, rooms);
 

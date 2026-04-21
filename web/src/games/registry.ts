@@ -7,6 +7,7 @@ import { ticTacToePlugin } from "./tic-tac-toe/index.js";
 import { checkersPlugin } from "./checkers/index.js";
 import { blackjackPlugin } from "./blackjack/index.js";
 import { videoPokerPlugin } from "./video-poker/index.js";
+import { connect4Plugin } from "./connect-4/index.js";
 
 export const GAMES: GamePlugin[] = [
   klondikePlugin as unknown as GamePlugin,
@@ -17,4 +18,5 @@ export const GAMES: GamePlugin[] = [
   checkersPlugin as unknown as GamePlugin,
   blackjackPlugin as unknown as GamePlugin,
   videoPokerPlugin as unknown as GamePlugin,
+  connect4Plugin as unknown as GamePlugin,
 ];

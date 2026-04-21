@@ -1,0 +1,17 @@
+.c4-root { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+.c4-status { font-size: 1.1rem; font-weight: 600; }
+.c4-red { color: #e04040; }
+.c4-yellow { color: #e8c040; }
+.c4-board { background: #2040a0; padding: 8px; border-radius: 10px; display: flex; flex-direction: column; gap: 6px; }
+.c4-row { display: flex; gap: 6px; }
+.c4-cell {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #0b0b12;
+  border: 0; padding: 0;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.c4-cell:hover:not(:disabled) { background: #141421; }
+.c4-cell.red { background: #e04040; }
+.c4-cell.yellow { background: #e8c040; }
+.c4-cell.win { box-shadow: 0 0 0 3px #6fffb0 inset; }
