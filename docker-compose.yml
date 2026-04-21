@@ -1,6 +1,7 @@
 services:
   server:
     image: ghcr.io/atvriders/cards-and-such-server:${IMAGE_TAG:-latest}
+    pull_policy: missing
     build:
       context: .
       dockerfile: server/Dockerfile
@@ -23,6 +24,7 @@ services:
 
   web:
     image: ghcr.io/atvriders/cards-and-such-web:${IMAGE_TAG:-latest}
+    pull_policy: missing
     build:
       context: .
       dockerfile: web/Dockerfile

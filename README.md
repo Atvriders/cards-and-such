@@ -30,7 +30,8 @@ the full Phase 1 design.
 ```bash
 npm install
 cp .env.example .env             # then fill in JWT_SECRET (openssl rand -hex 32)
-docker compose up -d             # pulls pre-built images from GHCR; brings up web (:8080) + server (:4000)
+docker compose up -d             # pulls pre-built images from GHCR on first run; uses local cache after
+docker compose pull              # refresh to the latest published image
 docker compose up -d --build     # rebuild images locally instead of pulling
 curl http://127.0.0.1:8080/api/health
 # then open http://127.0.0.1:8080/
