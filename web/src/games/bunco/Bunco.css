@@ -1,0 +1,18 @@
+.bunco {
+  display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif;
+}
+.bunco-info { display: flex; gap: 24px; font-size: 1rem; font-weight: bold; }
+.bunco-target { font-size: 1.2rem; background: #e8f4e8; padding: 4px 12px; border-radius: 20px; }
+.bunco-dice { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.bunco-controls { display: flex; gap: 12px; }
+.bunco-controls button { padding: 8px 20px; font-size: 1rem; cursor: pointer; border-radius: 4px; border: 1px solid #666; background: #fff; }
+.bunco-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+.bunco-last-roll { font-size: 1.1rem; }
+.bunco-bunco { font-size: 1.4rem; font-weight: bold; color: #b8860b; animation: bunco-flash 0.5s; }
+@keyframes bunco-flash { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.bunco-round-scores { width: 100%; max-width: 400px; border-collapse: collapse; }
+.bunco-round-scores th, .bunco-round-scores td { border: 1px solid #ccc; padding: 6px 10px; text-align: center; }
+.bunco-round-scores th { background: #f0f0f0; }
+.bunco-round-scores tr.active td { background: #e8f4e8; font-weight: bold; }
+.bunco-round-scores tr.total td { font-weight: bold; background: #e6f0ff; }
+.bunco-game-over { font-size: 1.4rem; font-weight: bold; color: #2a7a2a; }

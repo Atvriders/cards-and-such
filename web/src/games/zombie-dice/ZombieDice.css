@@ -1,0 +1,23 @@
+.zombie-dice {
+  display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif;
+}
+.zd-info { display: flex; gap: 32px; font-size: 1rem; }
+.zd-info .label { font-weight: bold; }
+.zd-info .value { font-size: 1.3rem; }
+.zd-shotguns { color: #c00; }
+.zd-roll-area { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.zd-die {
+  width: 60px; height: 60px; border-radius: 8px; border: 3px solid #333;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; font-size: 0.75rem; font-weight: bold; gap: 2px;
+}
+.zd-die.green { background: #d4edda; border-color: #2a7a2a; }
+.zd-die.yellow { background: #fff3cd; border-color: #b8860b; }
+.zd-die.red { background: #f8d7da; border-color: #c00; }
+.zd-die .face-icon { font-size: 1.4rem; }
+.zd-controls { display: flex; gap: 12px; }
+.zd-controls button { padding: 8px 20px; font-size: 1rem; cursor: pointer; border-radius: 4px; border: 1px solid #666; background: #fff; }
+.zd-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+.zd-bust { font-size: 1.2rem; font-weight: bold; color: #c00; }
+.zd-pool-key { font-size: 0.85rem; color: #666; }
+.zd-game-over { font-size: 1.4rem; font-weight: bold; color: #2a7a2a; }

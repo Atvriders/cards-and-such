@@ -1,0 +1,18 @@
+.ten-k {
+  display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif;
+}
+.ten-k-scores { display: flex; gap: 32px; font-size: 1rem; }
+.ten-k-scores .label { font-weight: bold; }
+.ten-k-scores .value { font-size: 1.3rem; }
+.ten-k-turn-score { font-size: 1.1rem; }
+.ten-k-dice { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.ten-k-controls { display: flex; gap: 12px; }
+.ten-k-controls button { padding: 8px 20px; font-size: 1rem; cursor: pointer; border-radius: 4px; border: 1px solid #666; background: #fff; }
+.ten-k-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+.ten-k-farkle { font-size: 1.2rem; font-weight: bold; color: #c00; }
+.ten-k-aside { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.ten-k-aside .aside-label { font-size: 0.85rem; color: #666; width: 100%; text-align: center; }
+.ten-k-bot { font-size: 0.95rem; color: #555; background: #f5f5f5; padding: 6px 12px; border-radius: 4px; }
+.ten-k-game-over { font-size: 1.4rem; font-weight: bold; }
+.ten-k-game-over.won { color: #2a7a2a; }
+.ten-k-game-over.lost { color: #c00; }

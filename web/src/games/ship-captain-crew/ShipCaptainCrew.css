@@ -1,0 +1,18 @@
+.scc {
+  display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif;
+}
+.scc-info { display: flex; gap: 24px; font-size: 1rem; font-weight: bold; }
+.scc-sequence { display: flex; gap: 12px; font-size: 1.1rem; align-items: center; }
+.scc-sequence .locked { color: #2a7a2a; font-weight: bold; }
+.scc-sequence .pending { color: #aaa; }
+.scc-dice { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.scc-controls { display: flex; gap: 12px; }
+.scc-controls button { padding: 8px 20px; font-size: 1rem; cursor: pointer; border-radius: 4px; border: 1px solid #666; background: #fff; }
+.scc-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+.scc-cargo { font-size: 1.1rem; }
+.scc-round-result { background: #f9f9f9; padding: 12px 20px; border-radius: 6px; border: 1px solid #ccc; text-align: center; }
+.scc-scoreboard { width: 100%; max-width: 400px; border-collapse: collapse; }
+.scc-scoreboard th, .scc-scoreboard td { border: 1px solid #ccc; padding: 6px 10px; text-align: center; }
+.scc-scoreboard th { background: #f0f0f0; }
+.scc-scoreboard tr.total td { font-weight: bold; background: #e6f0ff; }
+.scc-game-over { font-size: 1.4rem; font-weight: bold; color: #2a7a2a; }
