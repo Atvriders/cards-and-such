@@ -4,11 +4,13 @@ import { loadConfig, type Config } from "./config.js";
 import { openDb, type Db } from "./db/index.js";
 import { registerAuthRoutes } from "./auth/routes.js";
 import { registerRateLimit } from "./http/plugins.js";
+import { attachWs, type WsHub } from "./ws/server.js";
 
 declare module "fastify" {
   interface FastifyInstance {
     db: Db;
     config: Config;
+    ws: WsHub;
   }
 }
 
@@ -26,6 +28,14 @@ export async function buildApp(config = loadConfig()): Promise<FastifyInstance> 
   await registerAuthRoutes(app);
 
   app.get("/health", async () => ({ ok: true }));
+
+  // attachWs needs app.server (exists before ready) + app.config (decorated above).
+  // Both decorate and addHook must be called before ready().
+  const ws = attachWs(app);
+  app.decorate("ws", ws);
+  app.addHook("onClose", () => new Promise<void>((r) => ws.wss.close(() => r())));
+
+  await app.ready();
   return app;
 }
 
