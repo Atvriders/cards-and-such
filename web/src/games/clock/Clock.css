@@ -1,0 +1,117 @@
+.clock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+  align-items: center;
+}
+
+.clock-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.clock-face {
+  position: relative;
+  width: 340px;
+  height: 340px;
+}
+
+.clock-position {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.clock-position-label {
+  font-size: 10px;
+  color: #aaa;
+  text-align: center;
+}
+
+.clock-pile-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.clock-card {
+  width: 44px;
+  height: 60px;
+  border-radius: 4px;
+  border: 2px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.clock-card.face-down-card {
+  background: #1e3a6e;
+  color: transparent;
+}
+
+.clock-card.face-up-red {
+  background: #fff;
+  color: #c00;
+  border-color: #c00;
+}
+
+.clock-card.face-up-black {
+  background: #fff;
+  color: #111;
+  border-color: #333;
+}
+
+.clock-card.current-pile {
+  border-color: #ffcc00;
+  box-shadow: 0 0 8px #ffcc00aa;
+}
+
+.clock-pile-count {
+  font-size: 10px;
+  color: #aaa;
+}
+
+.clock-flip-btn {
+  padding: 8px 24px;
+  border: 1px solid #ffcc00;
+  border-radius: 6px;
+  background: #2a2a2a;
+  color: #ffcc00;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.clock-flip-btn:hover:not(:disabled) {
+  background: #3a3a1a;
+}
+
+.clock-flip-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.clock-result {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.clock-result.win {
+  color: #4caf50;
+}
+
+.clock-result.lose {
+  color: #f44336;
+}

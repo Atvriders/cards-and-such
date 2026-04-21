@@ -1,0 +1,46 @@
+.canfield {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.canfield-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.canfield-top-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.canfield-spacer {
+  flex: 1;
+}
+
+.canfield-tableau-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper,
+.reserve-wrapper {
+  cursor: pointer;
+}
+
+.stock-wrapper:hover,
+.reserve-wrapper:hover {
+  opacity: 0.85;
+}

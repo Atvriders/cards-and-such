@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { canfieldPlugin } from "./canfield/index.js";
+import { golfPlugin } from "./golf/index.js";
+import { yukonPlugin } from "./yukon/index.js";
+import { fortyThievesPlugin } from "./forty-thieves/index.js";
+import { scorpionPlugin } from "./scorpion/index.js";
+import { laBelleLuciePlugin } from "./la-belle-lucie/index.js";
+import { clockPlugin } from "./clock/index.js";
+import { monteCarloPlugin } from "./monte-carlo/index.js";
 import { goFishPlugin } from "./go-fish/index.js";
 import { warPlugin } from "./war/index.js";
 import { pigPlugin } from "./pig/index.js";
@@ -31,6 +39,14 @@ import { liarsDicePlugin } from "./liars-dice/index.js";
 import { breakoutPlugin } from "./breakout/index.js";
 
 export const GAMES: GamePlugin[] = [
+  canfieldPlugin as unknown as GamePlugin,
+  golfPlugin as unknown as GamePlugin,
+  yukonPlugin as unknown as GamePlugin,
+  fortyThievesPlugin as unknown as GamePlugin,
+  scorpionPlugin as unknown as GamePlugin,
+  laBelleLuciePlugin as unknown as GamePlugin,
+  clockPlugin as unknown as GamePlugin,
+  monteCarloPlugin as unknown as GamePlugin,
   goFishPlugin as unknown as GamePlugin,
   warPlugin as unknown as GamePlugin,
   klondikePlugin as unknown as GamePlugin,

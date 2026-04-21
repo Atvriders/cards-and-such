@@ -1,0 +1,85 @@
+.monte-carlo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.monte-carlo-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.monte-carlo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 64px);
+  grid-template-rows: repeat(5, 88px);
+  gap: 6px;
+}
+
+.monte-carlo-cell {
+  width: 64px;
+  height: 88px;
+  border-radius: 6px;
+  border: 2px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  transition: border-color 0.1s, box-shadow 0.1s;
+}
+
+.monte-carlo-cell.empty {
+  border-color: #2a2a2a;
+  background: #1a1a1a;
+  cursor: default;
+  opacity: 0.4;
+}
+
+.monte-carlo-cell.red {
+  background: #fff;
+  color: #c00;
+}
+
+.monte-carlo-cell.black {
+  background: #fff;
+  color: #111;
+}
+
+.monte-carlo-cell.selected {
+  border-color: #ffcc00;
+  box-shadow: 0 0 8px #ffcc00aa;
+}
+
+.monte-carlo-cell:not(.empty):hover {
+  border-color: #888;
+}
+
+.monte-carlo-stock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.mc-card-label {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.mc-rank {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mc-suit {
+  font-size: 14px;
+}
