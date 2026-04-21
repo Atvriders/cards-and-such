@@ -1,0 +1,93 @@
+.yahtzee {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.yahtzee-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.yahtzee-dice {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.yahtzee-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.yahtzee-controls button {
+  padding: 8px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: #fff;
+}
+
+.yahtzee-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.yahtzee-scorecard {
+  width: 100%;
+  max-width: 480px;
+  border-collapse: collapse;
+}
+
+.yahtzee-scorecard th,
+.yahtzee-scorecard td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.yahtzee-scorecard th {
+  background: #f0f0f0;
+}
+
+.yahtzee-scorecard td.potential {
+  color: #888;
+  font-style: italic;
+}
+
+.yahtzee-scorecard tr.used td {
+  color: #333;
+  background: #f9f9f9;
+}
+
+.yahtzee-scorecard tr.clickable td.score-cell {
+  cursor: pointer;
+  background: #e8f4e8;
+}
+
+.yahtzee-scorecard tr.clickable td.score-cell:hover {
+  background: #c8e8c8;
+}
+
+.yahtzee-scorecard tr.bonus td {
+  font-weight: bold;
+  background: #fffbe6;
+}
+
+.yahtzee-scorecard tr.total td {
+  font-weight: bold;
+  background: #e6f0ff;
+}
+
+.yahtzee-game-over {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2a7a2a;
+}

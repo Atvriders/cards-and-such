@@ -1,0 +1,110 @@
+.farkle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.farkle-scoreboard {
+  display: flex;
+  gap: 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.farkle-turn-score {
+  color: #2a6a2a;
+}
+
+.farkle-banked {
+  color: #333;
+}
+
+.farkle-target {
+  color: #666;
+  font-weight: normal;
+}
+
+.farkle-dice {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.farkle-set-aside {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 8px;
+  border: 1px dashed #aaa;
+  border-radius: 6px;
+  min-width: 200px;
+  min-height: 50px;
+}
+
+.farkle-set-aside-label {
+  font-size: 0.85rem;
+  color: #666;
+  align-self: flex-start;
+}
+
+.farkle-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.farkle-controls button {
+  padding: 8px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: #fff;
+}
+
+.farkle-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.farkle-controls .bank-btn {
+  background: #d4edda;
+  border-color: #28a745;
+}
+
+.farkle-controls .bank-btn:hover:not(:disabled) {
+  background: #b8dacc;
+}
+
+.farkle-selected-marker {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #28a745;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.farkle-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #c0392b;
+}
+
+.farkle-message.won {
+  color: #2a7a2a;
+}
+
+.farkle-turns {
+  color: #666;
+}
+
+.die.selected-farkle {
+  outline: 3px solid #28a745;
+  border-radius: 8px;
+}
