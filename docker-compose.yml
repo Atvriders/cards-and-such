@@ -1,5 +1,6 @@
 services:
   server:
+    image: ghcr.io/atvriders/cards-and-such-server:latest
     build:
       context: .
       dockerfile: server/Dockerfile
@@ -19,6 +20,7 @@ services:
       retries: 5
 
   web:
+    image: ghcr.io/atvriders/cards-and-such-web:latest
     build:
       context: .
       dockerfile: web/Dockerfile

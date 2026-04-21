@@ -29,7 +29,8 @@ the full Phase 1 design.
 
 ```bash
 npm install
-docker compose up -d --build     # brings up web (:8080) + server (:4000)
+docker compose up -d             # pulls pre-built images from GHCR; brings up web (:8080) + server (:4000)
+docker compose up -d --build     # rebuild images locally instead of pulling
 curl http://127.0.0.1:8080/api/health
 # then open http://127.0.0.1:8080/
 ```
