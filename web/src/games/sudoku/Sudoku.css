@@ -1,0 +1,140 @@
+.sudoku {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+.sudoku-info {
+  display: flex;
+  gap: 24px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 44px);
+  grid-template-rows: repeat(9, 44px);
+  border: 3px solid #222;
+  gap: 0;
+}
+
+.sudoku-cell {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  background: #fff;
+  transition: background 0.1s;
+}
+
+/* Thicker borders every 3 cells — right and bottom */
+.sudoku-cell[data-col="2"],
+.sudoku-cell[data-col="5"] {
+  border-right: 3px solid #222;
+}
+
+.sudoku-cell[data-row="2"],
+.sudoku-cell[data-row="5"] {
+  border-bottom: 3px solid #222;
+}
+
+.sudoku-cell.given {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.sudoku-cell.player {
+  color: #0057b8;
+}
+
+.sudoku-cell.selected {
+  background: #cce5ff;
+}
+
+.sudoku-cell.error {
+  background: #ffe0e0;
+  color: #c00;
+}
+
+.sudoku-cell.error.selected {
+  background: #ffb3b3;
+}
+
+.sudoku-cell.hint-group {
+  background: #e8f5e9;
+}
+
+.sudoku-numpad {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sudoku-numpad button {
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  background: #f5f5f5;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.sudoku-numpad button:hover {
+  background: #e0ecff;
+  border-color: #0057b8;
+}
+
+.sudoku-numpad button.erase {
+  font-size: 0.8rem;
+  color: #c00;
+  border-color: #c00;
+}
+
+.sudoku-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.sudoku-controls button {
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 2px solid #0057b8;
+  border-radius: 6px;
+  background: #0057b8;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.sudoku-controls button:hover:not(:disabled) {
+  background: #003d82;
+}
+
+.sudoku-controls button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.sudoku-game-over {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0057b8;
+  padding: 12px 24px;
+  border: 2px solid #0057b8;
+  border-radius: 8px;
+  background: #e0ecff;
+}
