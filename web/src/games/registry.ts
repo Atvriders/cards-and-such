@@ -51,6 +51,12 @@ import { presidentPlugin } from "./president/index.js";
 import { bsPlugin } from "./bs/index.js";
 import { egyptianRatscrewPlugin } from "./egyptian-ratscrew/index.js";
 import { speedPlugin } from "./speed/index.js";
+import { nineMensMorrisPlugin } from "./nine-mens-morris/index.js";
+import { mancalaPlugin } from "./mancala/index.js";
+import { mastermindPlugin } from "./mastermind/index.js";
+import { gomokuPlugin } from "./gomoku/index.js";
+import { dotsAndBoxesPlugin } from "./dots-and-boxes/index.js";
+import { battleshipPlugin } from "./battleship/index.js";
 
 export const GAMES: GamePlugin[] = [
   yachtPlugin as unknown as GamePlugin,
@@ -105,4 +111,10 @@ export const GAMES: GamePlugin[] = [
   bsPlugin as unknown as GamePlugin,
   egyptianRatscrewPlugin as unknown as GamePlugin,
   speedPlugin as unknown as GamePlugin,
+  nineMensMorrisPlugin as unknown as GamePlugin,
+  mancalaPlugin as unknown as GamePlugin,
+  mastermindPlugin as unknown as GamePlugin,
+  gomokuPlugin as unknown as GamePlugin,
+  dotsAndBoxesPlugin as unknown as GamePlugin,
+  battleshipPlugin as unknown as GamePlugin,
 ];

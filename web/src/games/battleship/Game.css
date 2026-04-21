@@ -1,0 +1,135 @@
+.battleship {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.battleship-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+}
+
+.battleship-status.win { color: #2a7d2e; }
+.battleship-status.loss { color: #b02020; }
+
+.battleship-grids {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.battleship-grid-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.battleship-grid-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.battleship-grid {
+  display: grid;
+  gap: 2px;
+  background: #1a4060;
+  border: 3px solid #1a4060;
+  border-radius: 4px;
+}
+
+.bs-cell {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: default;
+  transition: background 0.1s;
+  border-radius: 2px;
+  background: #3a7ab0;
+}
+
+.bs-cell.empty { background: #3a7ab0; }
+.bs-cell.ship { background: #aab0c0; }
+.bs-cell.hit { background: #c03030; color: #fff; }
+.bs-cell.miss { background: #6090c0; }
+.bs-cell.unknown { background: #3a7ab0; }
+.bs-cell.unknown.clickable { cursor: pointer; }
+.bs-cell.unknown.clickable:hover { background: #5090d0; }
+
+.battleship-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.battleship-ship-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.battleship-ship-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.battleship-ship-item.current {
+  font-weight: 700;
+  color: #2060c0;
+}
+
+.battleship-ship-item.placed {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.battleship-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bs-btn {
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.bs-btn.primary {
+  background: #2060c0;
+  color: #fff;
+}
+
+.bs-btn.primary:hover { background: #1040a0; }
+
+.bs-btn.secondary {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.bs-btn.secondary:hover { background: #ccc; }
+
+.battleship-score-info {
+  font-size: 0.85rem;
+  color: #666;
+}

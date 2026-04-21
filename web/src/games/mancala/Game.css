@@ -1,0 +1,99 @@
+.mancala {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.mancala-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+}
+
+.mancala-status.win { color: #2a7d2e; }
+.mancala-status.loss { color: #b02020; }
+
+.mancala-board {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #8b6040;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.mancala-store {
+  width: 60px;
+  height: 120px;
+  background: #f5e0c0;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  border: 3px solid #5a3a20;
+  flex-shrink: 0;
+}
+
+.mancala-store.my-store {
+  border-color: #2060c0;
+  background: #dde8ff;
+}
+
+.mancala-pits {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mancala-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mancala-pit {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #f5e0c0;
+  border: 3px solid #5a3a20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.mancala-pit:hover:not(:disabled) {
+  background: #e8f0ff;
+  transform: scale(1.05);
+}
+
+.mancala-pit:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.mancala-pit.active {
+  border-color: #2060c0;
+  background: #c8d8ff;
+}
+
+.mancala-pit.empty {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.mancala-pit.bot-pit {
+  border-color: #a02020;
+  background: #ffe0d0;
+}

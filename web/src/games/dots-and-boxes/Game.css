@@ -1,0 +1,130 @@
+.dab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.dab-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+}
+
+.dab-status.win { color: #2a7d2e; }
+.dab-status.loss { color: #b02020; }
+
+.dab-scores {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.dab-board {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.dab-row {
+  display: flex;
+  align-items: center;
+}
+
+.dab-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #333;
+  flex-shrink: 0;
+  z-index: 2;
+  position: relative;
+}
+
+.dab-h-edge {
+  width: 52px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.dab-h-edge-line {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: #ddd;
+  transition: background 0.15s;
+}
+
+.dab-h-edge:hover .dab-h-edge-line {
+  background: #99c4ff;
+}
+
+.dab-h-edge.drawn .dab-h-edge-line {
+  background: #2060c0;
+  cursor: default;
+}
+
+.dab-h-edge.drawn-bot .dab-h-edge-line {
+  background: #c02020;
+  cursor: default;
+}
+
+.dab-box-row {
+  display: flex;
+}
+
+.dab-v-edge {
+  width: 12px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.dab-v-edge-line {
+  width: 4px;
+  height: 100%;
+  border-radius: 2px;
+  background: #ddd;
+  transition: background 0.15s;
+}
+
+.dab-v-edge:hover .dab-v-edge-line {
+  background: #99c4ff;
+}
+
+.dab-v-edge.drawn .dab-v-edge-line {
+  background: #2060c0;
+  cursor: default;
+}
+
+.dab-v-edge.drawn-bot .dab-v-edge-line {
+  background: #c02020;
+  cursor: default;
+}
+
+.dab-box {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  transition: background 0.2s;
+}
+
+.dab-box.player { background: rgba(32, 96, 192, 0.35); }
+.dab-box.bot { background: rgba(192, 32, 32, 0.35); }
