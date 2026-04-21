@@ -6,6 +6,7 @@ import {
   type GlobalLeaderboardRow,
 } from "@cards/shared";
 import { z } from "zod";
+import { useToast } from "../platform/ui/Toast.js";
 import { OnlineNowPanel } from "./leaderboard/OnlineNowPanel.js";
 import "./LeaderboardPage.css";
 
@@ -34,21 +35,18 @@ export default function LeaderboardPage(): JSX.Element {
 function PerGamePanel(): JSX.Element {
   const [gameId, setGameId] = useState("klondike");
   const [rows, setRows] = useState<LeaderboardRow[]>([]);
-  const [err, setErr] = useState<string | null>(null);
   useEffect(() => {
-    setErr(null);
     fetch(`/api/leaderboard/game/${gameId}`)
       .then(async (r) => {
         if (!r.ok) throw new Error(`http_${r.status}`);
         const j = await r.json();
         setRows(z.array(LeaderboardRowSchema).parse(j));
       })
-      .catch((e: Error) => setErr(e.message));
+      .catch((e: Error) => useToast.getState().push("error", e.message));
   }, [gameId]);
   return (
     <div>
       <label>Game: <input value={gameId} onChange={(e) => setGameId(e.target.value)} aria-label="game id" /></label>
-      {err && <div role="alert">{err}</div>}
       <ol className="scores">
         {rows.map((r) => (
           <li key={`${r.rank}-${r.username}`}><span>{r.rank}. {r.username}</span><span>{r.score}</span></li>

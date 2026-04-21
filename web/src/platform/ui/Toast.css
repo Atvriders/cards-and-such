@@ -1,0 +1,6 @@
+.toast-host { position: fixed; top: 70px; right: 1rem; display: flex; flex-direction: column; gap: 0.5rem; z-index: 1000; max-width: 360px; }
+.toast { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-radius: 6px; background: #23233a; color: #f4f4fb; border-left: 3px solid #5a5af2; box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+.toast-error { border-left-color: #e04040; }
+.toast-success { border-left-color: #40c060; }
+.toast button { background: transparent; border: 0; color: inherit; cursor: pointer; padding: 0; font-size: 1rem; opacity: 0.7; }
+.toast button:hover { opacity: 1; }

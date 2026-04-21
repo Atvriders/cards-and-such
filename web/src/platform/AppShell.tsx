@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "./stores/auth.js";
+import { ToastHost } from "./ui/Toast.js";
 import "./AppShell.css";
 
 export default function AppShell(): JSX.Element {
@@ -19,6 +20,7 @@ export default function AppShell(): JSX.Element {
         </div>
       </header>
       <main><Outlet /></main>
+      <ToastHost />
     </div>
   );
 }

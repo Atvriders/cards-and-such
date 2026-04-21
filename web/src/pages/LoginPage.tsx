@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../platform/stores/auth.js";
 import { UsernameSchema } from "@cards/shared";
@@ -14,7 +14,7 @@ export default function LoginPage(): JSX.Element {
   const token = useAuth((s) => s.token);
   const navigate = useNavigate();
 
-  if (token) { setTimeout(() => navigate("/"), 0); }
+  useEffect(() => { if (token) navigate("/"); }, [token, navigate]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
