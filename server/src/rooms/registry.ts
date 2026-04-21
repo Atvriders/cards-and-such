@@ -69,6 +69,10 @@ export class RoomRegistry {
     room.members.push(member);
     if (room.phase === "waiting" && room.members.length >= room.def.minPlayers) {
       room.phase = "playing";
+      // Reinitialize game state with the actual number of joined players
+      // so turn order only cycles through real seats (not pre-allocated maxPlayers seats).
+      const seed = Math.floor(Math.random() * 2 ** 31);
+      room.state = room.def.initialState(seed, room.members.length);
     }
     return member;
   }
