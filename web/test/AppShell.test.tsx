@@ -17,10 +17,10 @@ describe("AppShell", () => {
     expect(screen.getByTestId("login-page")).toBeInTheDocument();
   });
 
-  it("shows the lobby placeholder when authenticated", () => {
+  it("shows the lobby when authenticated", () => {
     authenticate();
     render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
-    expect(screen.getByTestId("placeholder-home")).toBeInTheDocument();
+    expect(screen.getByTestId("lobby-empty")).toBeInTheDocument();
     expect(screen.getByTestId("current-user")).toHaveTextContent("alice");
   });
 

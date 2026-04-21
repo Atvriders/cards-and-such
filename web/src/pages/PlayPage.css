@@ -1,0 +1,13 @@
+.play-page { max-width: 1100px; margin: 0 auto; }
+.play-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
+.play-header h1 { margin: 0; }
+.back-link { color: #8f8fa3; text-decoration: none; }
+.back-link:hover { color: #c6c6d8; }
+.setup-panel, .end-panel { background: #14141f; border: 1px solid #23233a; border-radius: 8px; padding: 1.5rem; }
+.settings-form { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
+.settings-form label { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.settings-form label.boolean { justify-content: flex-start; }
+.settings-form input[type="number"], .settings-form select { padding: 0.5rem; border-radius: 4px; border: 1px solid #333; background: #16161e; color: inherit; font-size: 1rem; min-width: 120px; }
+.start-btn, .play-again-btn { padding: 0.75rem 1.5rem; border-radius: 6px; border: 0; background: #5a5af2; color: white; font-weight: 600; cursor: pointer; }
+.final-score { font-size: 2rem; font-weight: 700; margin: 1rem 0; }
+.play-not-found { text-align: center; padding: 4rem 1rem; color: #8f8fa3; }

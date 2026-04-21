@@ -1,0 +1,9 @@
+.lobby-page { max-width: 1100px; margin: 0 auto; }
+.lobby-page h1 { margin-top: 0; }
+.lobby-page h2 { margin: 1.5rem 0 0.75rem; font-size: 1.1rem; color: #c6c6d8; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; }
+.tile { display: block; padding: 1rem; background: #14141f; border: 1px solid #23233a; border-radius: 8px; color: inherit; text-decoration: none; transition: transform 0.15s, border-color 0.15s; }
+.tile:hover { transform: translateY(-2px); border-color: #5a5af2; }
+.tile-title { font-weight: 600; margin-bottom: 0.25rem; }
+.tile-desc { font-size: 0.85rem; color: #8f8fa3; }
+.lobby-empty { text-align: center; padding: 4rem 1rem; color: #8f8fa3; }
