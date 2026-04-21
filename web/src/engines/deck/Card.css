@@ -1,0 +1,26 @@
+.card {
+  --w: 60px;
+  --h: 84px;
+  width: var(--w); height: var(--h);
+  border-radius: 6px;
+  position: relative;
+  user-select: none;
+  cursor: default;
+  flex-shrink: 0;
+}
+.card.face-up {
+  background: #fafafa;
+  border: 1px solid #222;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+}
+.card.face-up.red { color: #c83737; }
+.card.face-up.black { color: #1e1e1e; }
+.card.face-down {
+  background: linear-gradient(135deg, #4040a8 0%, #2a2a6a 100%);
+  border: 1px solid #1a1a3a;
+}
+.card .corner { position: absolute; display: flex; flex-direction: column; align-items: center; line-height: 1; font-size: 0.75rem; font-weight: 700; }
+.card .corner.top-left { top: 4px; left: 6px; }
+.card .corner.bottom-right { bottom: 4px; right: 6px; transform: rotate(180deg); }
+.card .corner .suit { font-size: 0.85rem; }
+.card .center-suit { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
