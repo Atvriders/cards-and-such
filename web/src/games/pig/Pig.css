@@ -1,0 +1,129 @@
+.pig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.pig-scoreboard {
+  display: flex;
+  gap: 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.pig-human-score {
+  color: #2a6a2a;
+}
+
+.pig-bot-score {
+  color: #555;
+}
+
+.pig-target {
+  color: #888;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+.pig-turn-info {
+  font-size: 1rem;
+  color: #333;
+}
+
+.pig-turn-score {
+  font-weight: bold;
+  color: #1a5a8a;
+}
+
+.pig-die-area {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pig-message {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #c0392b;
+  min-height: 1.5em;
+}
+
+.pig-message.bot-msg {
+  color: #555;
+  font-weight: normal;
+}
+
+.pig-message.won {
+  color: #2a7a2a;
+  font-size: 1.3rem;
+}
+
+.pig-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.pig-controls button {
+  padding: 8px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: #fff;
+}
+
+.pig-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pig-controls .bank-btn {
+  background: #d4edda;
+  border-color: #28a745;
+}
+
+.pig-controls .bank-btn:hover:not(:disabled) {
+  background: #b8dacc;
+}
+
+.pig-progress {
+  width: 100%;
+  max-width: 400px;
+}
+
+.pig-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.pig-progress-label {
+  min-width: 36px;
+}
+
+.pig-progress-bar-bg {
+  flex: 1;
+  background: #eee;
+  border-radius: 4px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.pig-progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: #3a8a3a;
+  transition: width 0.3s;
+}
+
+.pig-progress-bar-fill.bot {
+  background: #888;
+}

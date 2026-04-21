@@ -1,4 +1,5 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { pigPlugin } from "./pig/index.js";
 import { klondikePlugin } from "./klondike/index.js";
 import { freecellPlugin } from "./freecell/index.js";
 import { yahtzeePlugin } from "./yahtzee/index.js";
@@ -24,6 +25,7 @@ export const GAMES: GamePlugin[] = [
   spiderPlugin as unknown as GamePlugin,
   yahtzeePlugin as unknown as GamePlugin,
   farklePlugin as unknown as GamePlugin,
+  pigPlugin as unknown as GamePlugin,
   ticTacToePlugin as unknown as GamePlugin,
   checkersPlugin as unknown as GamePlugin,
   blackjackPlugin as unknown as GamePlugin,
