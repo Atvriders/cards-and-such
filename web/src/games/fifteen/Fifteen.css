@@ -1,0 +1,72 @@
+.fifteen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.fifteen-info {
+  display: flex;
+  gap: 16px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.fifteen-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.fifteen-status.win {
+  color: #27ae60;
+}
+
+.fifteen-grid {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  background: #2c3e50;
+  border-radius: 8px;
+}
+
+.fifteen-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border: none;
+  transition: background 0.1s, transform 0.1s;
+  user-select: none;
+}
+
+.fifteen-tile.number {
+  background: #3498db;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.fifteen-tile.number:hover {
+  background: #2980b9;
+  transform: scale(0.97);
+}
+
+.fifteen-tile.empty {
+  background: #1a252f;
+  cursor: default;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.fifteen-tile.in-place {
+  background: #27ae60;
+}
+
+.fifteen-tile.in-place:hover {
+  background: #219a52;
+}

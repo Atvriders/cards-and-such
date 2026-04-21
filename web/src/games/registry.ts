@@ -23,6 +23,9 @@ import { memoryMatchPlugin } from "./memory-match/index.js";
 import { crazyEightsPlugin } from "./crazy-eights/index.js";
 import { pyramidPlugin } from "./pyramid/index.js";
 import { triPeaksPlugin } from "./tri-peaks/index.js";
+import { reversiPlugin } from "./reversi/index.js";
+import { lightsOutPlugin } from "./lights-out/index.js";
+import { fifteenPuzzlePlugin } from "./fifteen/index.js";
 
 export const GAMES: GamePlugin[] = [
   goFishPlugin as unknown as GamePlugin,
@@ -49,4 +52,7 @@ export const GAMES: GamePlugin[] = [
   crazyEightsPlugin as unknown as GamePlugin,
   pyramidPlugin as unknown as GamePlugin,
   triPeaksPlugin as unknown as GamePlugin,
+  reversiPlugin as unknown as GamePlugin,
+  lightsOutPlugin as unknown as GamePlugin,
+  fifteenPuzzlePlugin as unknown as GamePlugin,
 ];
