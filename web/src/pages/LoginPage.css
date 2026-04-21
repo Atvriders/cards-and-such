@@ -1,0 +1,11 @@
+.login-page { max-width: 420px; margin: 10vh auto; padding: 2rem; }
+.login-page h1 { font-size: 2rem; margin-bottom: 1.5rem; }
+.login-form { display: flex; flex-direction: column; gap: 1rem; }
+.login-form label { display: flex; flex-direction: column; gap: 0.25rem; }
+.login-form input { padding: 0.75rem; border-radius: 6px; border: 1px solid #333; background: #16161e; color: inherit; font-size: 1rem; }
+.mode-switch { display: flex; gap: 0.5rem; }
+.mode-switch button { flex: 1; padding: 0.5rem; border-radius: 6px; border: 1px solid #333; background: transparent; color: inherit; cursor: pointer; }
+.mode-switch button.on { background: #3a3a4e; }
+.login-form > button[type="submit"] { padding: 0.75rem; border-radius: 6px; border: 0; background: #5a5af2; color: white; font-weight: 600; cursor: pointer; }
+.login-form > button[type="submit"][disabled] { opacity: 0.6; cursor: default; }
+.error { color: #ff7070; }
