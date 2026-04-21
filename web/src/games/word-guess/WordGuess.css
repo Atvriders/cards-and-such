@@ -1,0 +1,154 @@
+.word-guess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+/* ── grid ── */
+.word-guess__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.word-guess__row {
+  display: flex;
+  gap: 6px;
+}
+
+.word-guess__tile {
+  width: 52px;
+  height: 52px;
+  border: 2px solid #888;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #222;
+  background: #fff;
+  transition: background 0.1s;
+}
+
+.word-guess__tile--filled {
+  border-color: #333;
+}
+
+.word-guess__tile--green {
+  background: #538d4e;
+  border-color: #538d4e;
+  color: #fff;
+}
+
+.word-guess__tile--yellow {
+  background: #b59f3b;
+  border-color: #b59f3b;
+  color: #fff;
+}
+
+.word-guess__tile--gray {
+  background: #3a3a3c;
+  border-color: #3a3a3c;
+  color: #fff;
+}
+
+/* ── error message ── */
+.word-guess__error {
+  height: 1.4rem;
+  font-size: 0.9rem;
+  color: #c00;
+  font-weight: bold;
+}
+
+/* ── keyboard ── */
+.word-guess__keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.word-guess__kb-row {
+  display: flex;
+  gap: 5px;
+}
+
+.word-guess__kb-key {
+  min-width: 36px;
+  height: 42px;
+  padding: 0 6px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #d3d6da;
+  color: #1a1a1b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.word-guess__kb-key--wide {
+  min-width: 56px;
+  font-size: 0.75rem;
+}
+
+.word-guess__kb-key--green {
+  background: #538d4e;
+  color: #fff;
+  border-color: #538d4e;
+}
+
+.word-guess__kb-key--yellow {
+  background: #b59f3b;
+  color: #fff;
+  border-color: #b59f3b;
+}
+
+.word-guess__kb-key--gray {
+  background: #3a3a3c;
+  color: #fff;
+  border-color: #3a3a3c;
+}
+
+.word-guess__kb-key:active {
+  opacity: 0.8;
+}
+
+/* ── overlay ── */
+.word-guess__overlay-wrap {
+  position: relative;
+}
+
+.word-guess__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 10px;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.word-guess__overlay h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.word-guess__overlay p {
+  margin: 0;
+  font-size: 1.1rem;
+}
