@@ -1,6 +1,11 @@
 import type { FastifyInstance } from "fastify";
+import { z } from "zod";
 import { GameIdSchema, ScoreSubmitSchema, type LeaderboardRow, type GlobalLeaderboardRow } from "@cards/shared";
 import { createJwt } from "../auth/jwt.js";
+
+const SettingsHashQSchema = z.object({
+  settingsHash: z.string().length(8).optional(),
+});
 
 export async function registerLeaderboardRoutes(app: FastifyInstance): Promise<void> {
   const jwt = createJwt(app.config.JWT_SECRET);
@@ -31,7 +36,9 @@ export async function registerLeaderboardRoutes(app: FastifyInstance): Promise<v
   }>("/leaderboard/game/:gameId", async (req, reply) => {
     const gid = GameIdSchema.safeParse(req.params.gameId);
     if (!gid.success) return reply.code(400).send({ error: "bad_game_id" });
-    const settingsHash = req.query.settingsHash ?? "default0";
+    const q = SettingsHashQSchema.safeParse(req.query);
+    if (!q.success) return reply.code(400).send({ error: "bad_settings_hash" });
+    const settingsHash = q.data.settingsHash ?? "default0";
     const rows = topScores.all(gid.data, settingsHash) as Array<{
       username: string; score: number; playedAt: number;
     }>;
