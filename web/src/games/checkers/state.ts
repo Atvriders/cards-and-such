@@ -9,7 +9,7 @@ export interface Piece {
 
 export interface CheckersSettings {
   mandatoryCapture: boolean;
-  flyingKings: boolean;
+  // TODO(plan-d): implement flyingKings (kings slide multiple squares in any direction)
   opponent: "bot" | "hot-seat";
   botDepth: "2" | "3" | "4";
 }

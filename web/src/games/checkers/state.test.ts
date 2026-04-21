@@ -5,7 +5,6 @@ import { Grid } from "../../engines/grid/index.js";
 
 const defaultSettings: CheckersSettings = {
   mandatoryCapture: true,
-  flyingKings: false,
   opponent: "hot-seat",
   botDepth: "2",
 };

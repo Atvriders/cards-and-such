@@ -10,11 +10,6 @@ export const checkersSettings = {
     label: "Mandatory Capture",
     default: true,
   },
-  flyingKings: {
-    kind: "boolean" as const,
-    label: "Flying Kings",
-    default: false,
-  },
   opponent: {
     kind: "enum" as const,
     label: "Opponent",
