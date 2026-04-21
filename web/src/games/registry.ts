@@ -63,6 +63,11 @@ import { wordLadderPlugin } from "./word-ladder/index.js";
 import { anagramPlugin } from "./anagram/index.js";
 import { make24Plugin } from "./make-24/index.js";
 import { pegSolitairePlugin } from "./peg-solitaire/index.js";
+import { pongPlugin } from "./pong/index.js";
+import { tetrisPlugin } from "./tetris-like/index.js";
+import { froggerPlugin } from "./frogger-like/index.js";
+import { asteroidsPlugin } from "./asteroids-like/index.js";
+import { spaceInvadersPlugin } from "./space-invaders-like/index.js";
 
 export const GAMES: GamePlugin[] = [
   yachtPlugin as unknown as GamePlugin,
@@ -129,4 +134,9 @@ export const GAMES: GamePlugin[] = [
   anagramPlugin as unknown as GamePlugin,
   make24Plugin as unknown as GamePlugin,
   pegSolitairePlugin as unknown as GamePlugin,
+  pongPlugin as unknown as GamePlugin,
+  tetrisPlugin as unknown as GamePlugin,
+  froggerPlugin as unknown as GamePlugin,
+  asteroidsPlugin as unknown as GamePlugin,
+  spaceInvadersPlugin as unknown as GamePlugin,
 ];

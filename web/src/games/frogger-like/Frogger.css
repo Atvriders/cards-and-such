@@ -1,0 +1,112 @@
+.frogger-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.frogger-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.frogger-board {
+  position: relative;
+  border: 2px solid #444;
+  display: grid;
+  gap: 1px;
+  background: #222;
+}
+
+.frogger-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border-radius: 2px;
+}
+
+.frogger-cell--safe {
+  background: #1a3a1a;
+}
+
+.frogger-cell--road {
+  background: #2a2a2a;
+}
+
+.frogger-cell--water {
+  background: #0a2a4a;
+}
+
+.frogger-cell--home-empty {
+  background: #0a4a2a;
+  border: 1px dashed #3a8a5a;
+}
+
+.frogger-cell--home-filled {
+  background: #1a7a3a;
+}
+
+.frogger-cell--car {
+  background: #b04040;
+}
+
+.frogger-cell--log {
+  background: #7a4a2a;
+}
+
+.frogger-cell--frog {
+  background: transparent;
+}
+
+.frogger-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+.frogger-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.frogger-overlay h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.frogger-overlay p {
+  margin: 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.frogger-lives {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.frogger-life {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #4caf50;
+  border-radius: 50%;
+}
+
+.frogger-life--lost {
+  background: #444;
+}

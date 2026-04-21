@@ -1,0 +1,73 @@
+.asteroids-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.asteroids-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #eee;
+}
+
+.asteroids-canvas-wrapper {
+  position: relative;
+}
+
+.asteroids-canvas {
+  display: block;
+  background: #000;
+  border: 2px solid #333;
+}
+
+.asteroids-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.asteroids-overlay h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.asteroids-overlay p {
+  margin: 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.asteroids-lives {
+  display: flex;
+  gap: 6px;
+}
+
+.asteroids-life {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.asteroids-life--lost {
+  background: #333;
+}
+
+.asteroids-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
