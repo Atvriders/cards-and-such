@@ -1,0 +1,106 @@
+.aces-up {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.aces-up-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.aces-up-columns {
+  display: flex;
+  gap: 8px;
+}
+
+.aces-up-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 84px;
+  width: 68px;
+}
+
+.aces-up-col-wrapper {
+  position: relative;
+  width: 68px;
+}
+
+.aces-up-col-stack {
+  position: relative;
+  min-height: 84px;
+}
+
+.aces-up-col-stack .pile-card {
+  position: absolute;
+}
+
+.aces-up-col-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aces-up-col-label {
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.aces-up-card-wrap {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: border-color 0.1s;
+  width: 64px;
+}
+
+.aces-up-card-wrap.discardable {
+  border-color: #f44;
+}
+
+.aces-up-card-wrap.moveable {
+  border-color: #4af;
+}
+
+.aces-up-card-wrap.empty-target {
+  border: 2px dashed #4f4;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 12px;
+}
+
+.aces-up-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.aces-up-btn {
+  padding: 6px 14px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.aces-up-btn:hover {
+  background: #444;
+}
+
+.aces-up-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

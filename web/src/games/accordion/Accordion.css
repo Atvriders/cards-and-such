@@ -1,0 +1,49 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.accordion-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.accordion-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.accordion-pile {
+  position: relative;
+  width: 56px;
+  height: 80px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: border-color 0.15s;
+}
+
+.accordion-pile.selected {
+  border-color: #4af;
+}
+
+.accordion-pile.legal-target {
+  border-color: #4f4;
+}
+
+.accordion-pile-count {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: #aaa;
+}

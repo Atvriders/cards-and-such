@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { accordionPlugin } from "./accordion/index.js";
+import { beleagueredCastlePlugin } from "./beleaguered-castle/index.js";
+import { streetsAndAlleysPlugin } from "./streets-and-alleys/index.js";
+import { penguinPlugin } from "./penguin/index.js";
+import { bakersGamePlugin } from "./bakers-game/index.js";
+import { westcliffPlugin } from "./westcliff/index.js";
+import { kingsInTheCornerPlugin } from "./kings-in-the-corner/index.js";
+import { acesUpPlugin } from "./aces-up/index.js";
 import { yachtPlugin } from "./yacht/index.js";
 import { balutPlugin } from "./balut/index.js";
 import { generalaPlugin } from "./generala/index.js";
@@ -87,6 +95,14 @@ import { casinoPlugin } from "./casino/index.js";
 import { fiveCrownsPlugin } from "./five-crowns/index.js";
 
 export const GAMES: GamePlugin[] = [
+  accordionPlugin as unknown as GamePlugin,
+  beleagueredCastlePlugin as unknown as GamePlugin,
+  streetsAndAlleysPlugin as unknown as GamePlugin,
+  penguinPlugin as unknown as GamePlugin,
+  bakersGamePlugin as unknown as GamePlugin,
+  westcliffPlugin as unknown as GamePlugin,
+  kingsInTheCornerPlugin as unknown as GamePlugin,
+  acesUpPlugin as unknown as GamePlugin,
   yachtPlugin as unknown as GamePlugin,
   balutPlugin as unknown as GamePlugin,
   generalaPlugin as unknown as GamePlugin,

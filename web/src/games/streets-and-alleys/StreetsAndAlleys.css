@@ -1,0 +1,44 @@
+.streets-and-alleys {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.streets-and-alleys-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.streets-and-alleys-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.streets-foundations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.streets-tableaux {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.streets-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  min-height: 84px;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}

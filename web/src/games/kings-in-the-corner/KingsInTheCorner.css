@@ -1,0 +1,134 @@
+.kitc {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+  max-width: 600px;
+}
+
+.kitc-info {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.kitc-turn-indicator {
+  color: #4af;
+}
+
+.kitc-board {
+  display: grid;
+  grid-template-columns: 68px 68px 68px 68px 68px;
+  grid-template-rows: 88px 88px 88px;
+  gap: 6px;
+  justify-content: center;
+}
+
+.kitc-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kitc-label {
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+}
+
+.kitc-pile {
+  position: relative;
+  width: 60px;
+  height: 84px;
+  border: 1px dashed #444;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.kitc-pile:hover {
+  border-color: #777;
+}
+
+.kitc-pile-count {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 10px;
+  color: #aaa;
+}
+
+.kitc-hand {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  min-height: 96px;
+}
+
+.kitc-hand-card {
+  cursor: pointer;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  transition: border-color 0.1s;
+}
+
+.kitc-hand-card.selected {
+  border-color: #4af;
+}
+
+.kitc-hand-card.legal {
+  border-color: #4f4;
+}
+
+.kitc-hand-label {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.kitc-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.kitc-btn {
+  padding: 6px 14px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.kitc-btn:hover {
+  background: #444;
+}
+
+.kitc-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.kitc-opponents {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.kitc-opp {
+  font-size: 12px;
+  color: #aaa;
+  background: #1e1e1e;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
