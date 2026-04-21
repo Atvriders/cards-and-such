@@ -1,0 +1,32 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me-please-32ch}
+      PORT: 4000
+      DB_PATH: /data/cards.db
+      CORS_ORIGIN: http://localhost:8080
+    volumes:
+      - cards_data:/data
+    ports:
+      - "4000:4000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:4000/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      server:
+        condition: service_healthy
+
+volumes:
+  cards_data:
