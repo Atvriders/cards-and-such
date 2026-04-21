@@ -7,7 +7,7 @@ describe("App", () => {
   it("renders the lobby at / when authenticated", () => {
     useAuth.setState({ username: "bob", token: "tok.tok.tok", expiresAt: Date.now() + 1000 * 60 });
     render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
-    expect(screen.getByTestId("lobby-empty")).toBeInTheDocument();
+    expect(screen.getByTestId("tile-klondike")).toBeInTheDocument();
     useAuth.getState().logout();
   });
 });

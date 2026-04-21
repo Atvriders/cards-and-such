@@ -20,7 +20,7 @@ describe("AppShell", () => {
   it("shows the lobby when authenticated", () => {
     authenticate();
     render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
-    expect(screen.getByTestId("lobby-empty")).toBeInTheDocument();
+    expect(screen.getByTestId("tile-klondike")).toBeInTheDocument();
     expect(screen.getByTestId("current-user")).toHaveTextContent("alice");
   });
 
