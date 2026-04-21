@@ -6,11 +6,12 @@ import {
 } from "@cards/shared";
 import { createJwt } from "../auth/jwt.js";
 import { PresenceRegistry } from "./presence.js";
+import type { RoomRegistry } from "../rooms/registry.js";
 
 export interface WsClient { socket: WebSocket; username: string }
 export interface WsHub { wss: WebSocketServer; presence: PresenceRegistry; }
 
-export function attachWs(app: FastifyInstance): WsHub {
+export function attachWs(app: FastifyInstance, rooms: RoomRegistry): WsHub {
   const jwt = createJwt(app.config.JWT_SECRET);
   const wss = new WebSocketServer({ server: app.server, path: "/ws" });
   const clients = new Map<WebSocket, WsClient>();
@@ -46,6 +47,41 @@ export function attachWs(app: FastifyInstance): WsHub {
 
       if (parsed.type === "subscribe" && parsed.channel === "lobby") {
         presence.subscribeLobby(socket);
+        return;
+      }
+
+      if (parsed.type === "room-join") {
+        const room = rooms.get(parsed.roomId);
+        if (!room) return sendError(socket, "room_not_found");
+        try {
+          const member = rooms.join(room, client.username, socket);
+          send(socket, { type: "room-joined", roomId: room.id, seat: member.seat });
+          rooms.broadcast(room);
+        } catch (e) {
+          sendError(socket, (e as Error).message);
+        }
+        return;
+      }
+
+      if (parsed.type === "room-action") {
+        const room = rooms.get(parsed.roomId);
+        if (!room) return sendError(socket, "room_not_found");
+        try {
+          rooms.dispatch(room, client.username, parsed.action);
+          rooms.broadcast(room);
+        } catch (e) {
+          sendError(socket, (e as Error).message);
+        }
+        return;
+      }
+
+      if (parsed.type === "room-leave") {
+        const room = rooms.get(parsed.roomId);
+        if (!room) return;
+        rooms.leave(room, client.username);
+        send(socket, { type: "room-left", roomId: parsed.roomId });
+        rooms.broadcast(room);
+        return;
       }
     });
 

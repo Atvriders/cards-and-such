@@ -6,6 +6,8 @@ import { registerAuthRoutes } from "./auth/routes.js";
 import { registerLeaderboardRoutes } from "./leaderboard/routes.js";
 import { registerRateLimit } from "./http/plugins.js";
 import { attachWs, type WsHub } from "./ws/server.js";
+import { RoomRegistry } from "./rooms/registry.js";
+import { registerRoomsRoutes } from "./rooms/routes.js";
 
 declare module "fastify" {
   interface FastifyInstance {
@@ -31,10 +33,13 @@ export async function buildApp(config = loadConfig()): Promise<FastifyInstance> 
 
   app.get("/health", async () => ({ ok: true }));
 
+  const rooms = new RoomRegistry();
+  await registerRoomsRoutes(app, rooms);
+
   // attachWs needs app.server (exists before ready) + app.config (decorated above).
   // Both decorate and addHook must be called before ready().
   // Note: attachWs registers its own onClose hook to close wss — no duplicate needed here.
-  const ws = attachWs(app);
+  const ws = attachWs(app, rooms);
   app.decorate("ws", ws);
 
   await app.ready();

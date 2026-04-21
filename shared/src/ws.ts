@@ -1,5 +1,13 @@
 import { z } from "zod";
 import { PresenceMessageSchema } from "./presence.js";
+import {
+  WsRoomJoinSchema,
+  WsRoomActionSchema,
+  WsRoomLeaveSchema,
+  WsRoomStateSchema,
+  WsRoomJoinedSchema,
+  WsRoomLeftSchema,
+} from "./rooms.js";
 
 export const WsAuthMessageSchema = z.object({
   type: z.literal("auth"),
@@ -14,6 +22,9 @@ export const WsSubscribeSchema = z.object({
 export const WsClientMessageSchema = z.discriminatedUnion("type", [
   WsAuthMessageSchema,
   WsSubscribeSchema,
+  WsRoomJoinSchema,
+  WsRoomActionSchema,
+  WsRoomLeaveSchema,
 ]);
 export type WsClientMessage = z.infer<typeof WsClientMessageSchema>;
 
@@ -27,5 +38,8 @@ export const WsServerMessageSchema = z.discriminatedUnion("type", [
   WsAuthOkSchema,
   PresenceMessageSchema,
   WsErrorSchema,
+  WsRoomStateSchema,
+  WsRoomJoinedSchema,
+  WsRoomLeftSchema,
 ]);
 export type WsServerMessage = z.infer<typeof WsServerMessageSchema>;
