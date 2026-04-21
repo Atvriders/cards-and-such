@@ -33,9 +33,6 @@ jobs:
       - run: npm ci --workspaces --include-workspace-root
       - name: Build & start stack
         run: docker compose up -d --build
-      - if: always()
-        name: Dump server logs
-        run: docker compose logs server || true
       - name: Wait for health
         run: |
           for i in {1..30}; do
