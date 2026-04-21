@@ -14,6 +14,7 @@ import { sudokuPlugin } from "./sudoku/index.js";
 import { snakePlugin } from "./snake/index.js";
 import { heartsPlugin } from "./hearts/index.js";
 import { wordGuessPlugin } from "./word-guess/index.js";
+import { minesweeperPlugin } from "./minesweeper/index.js";
 
 export const GAMES: GamePlugin[] = [
   klondikePlugin as unknown as GamePlugin,
@@ -31,4 +32,5 @@ export const GAMES: GamePlugin[] = [
   snakePlugin as unknown as GamePlugin,
   heartsPlugin as unknown as GamePlugin,
   wordGuessPlugin as unknown as GamePlugin,
+  minesweeperPlugin as unknown as GamePlugin,
 ];

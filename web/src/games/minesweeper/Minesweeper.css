@@ -1,0 +1,125 @@
+.minesweeper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+.minesweeper-topbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.minesweeper-topbar .mine-counter {
+  color: #c00;
+}
+
+.minesweeper-topbar .flag-mode-btn {
+  padding: 4px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  background: #f5f5f5;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.minesweeper-topbar .flag-mode-btn.active {
+  background: #fff3cd;
+  border-color: #e6a817;
+}
+
+.minesweeper-grid {
+  display: grid;
+  border: 3px solid #888;
+  gap: 0;
+  background: #bdbdbd;
+}
+
+.ms-cell {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+  transition: background 0.05s;
+  /* Classic raised look for hidden cells */
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+}
+
+.ms-cell:hover:not(:disabled) {
+  background: #d0d0d0;
+}
+
+.ms-cell:active:not(:disabled) {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.ms-cell.revealed {
+  background: #e0e0e0;
+  border: 1px solid #aaa;
+  cursor: default;
+}
+
+.ms-cell.revealed:disabled {
+  cursor: default;
+}
+
+.ms-cell.mine-hit {
+  background: #ff4444;
+  border: 1px solid #aaa;
+}
+
+.ms-cell.flagged {
+  background: #c0c0c0;
+}
+
+/* Number colors — classic Minesweeper */
+.ms-cell.n1 { color: #0000ff; }
+.ms-cell.n2 { color: #007b00; }
+.ms-cell.n3 { color: #ff0000; }
+.ms-cell.n4 { color: #00007b; }
+.ms-cell.n5 { color: #7b0000; }
+.ms-cell.n6 { color: #007b7b; }
+.ms-cell.n7 { color: #000000; }
+.ms-cell.n8 { color: #7b7b7b; }
+
+.minesweeper-overlay {
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.minesweeper-overlay.win {
+  background: #d4edda;
+  border: 2px solid #28a745;
+  color: #155724;
+}
+
+.minesweeper-overlay.lose {
+  background: #f8d7da;
+  border: 2px solid #dc3545;
+  color: #721c24;
+}
