@@ -1,0 +1,140 @@
+.caribbean-stud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a4d2e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+.cs-header {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+}
+
+.cs-result {
+  background: rgba(0,0,0,0.4);
+  padding: 0.4rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  min-height: 1.6rem;
+  text-align: center;
+  max-width: 580px;
+}
+
+.cs-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 580px;
+}
+
+.cs-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.2);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.cs-side-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+  font-weight: 700;
+}
+
+.cs-cards {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cs-hand-name {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  font-weight: 700;
+}
+
+.cs-dealer-note {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.cs-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cs-actions button {
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cs-actions button.fold {
+  background: #c0392b;
+  color: #fff;
+}
+
+.cs-actions button.fold:hover:not(:disabled) {
+  background: #e74c3c;
+}
+
+.cs-actions button.raise {
+  background: #4caf50;
+  color: #fff;
+}
+
+.cs-actions button.raise:hover:not(:disabled) {
+  background: #66bb6a;
+}
+
+.cs-actions button.deal {
+  background: #e8c84a;
+  color: #1a1a1a;
+}
+
+.cs-actions button.deal:hover:not(:disabled) {
+  background: #f5d85a;
+}
+
+.cs-actions button:disabled {
+  background: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+}
+
+.cs-game-over {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cs-raise-info {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-align: center;
+}

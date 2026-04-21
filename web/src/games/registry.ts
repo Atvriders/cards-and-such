@@ -68,6 +68,11 @@ import { tetrisPlugin } from "./tetris-like/index.js";
 import { froggerPlugin } from "./frogger-like/index.js";
 import { asteroidsPlugin } from "./asteroids-like/index.js";
 import { spaceInvadersPlugin } from "./space-invaders-like/index.js";
+import { baccaratPlugin } from "./baccarat/index.js";
+import { roulettePlugin } from "./roulette/index.js";
+import { crapsPlugin } from "./craps/index.js";
+import { slotsPlugin } from "./slots/index.js";
+import { caribbeanStudPlugin } from "./caribbean-stud/index.js";
 
 export const GAMES: GamePlugin[] = [
   yachtPlugin as unknown as GamePlugin,
@@ -139,4 +144,9 @@ export const GAMES: GamePlugin[] = [
   froggerPlugin as unknown as GamePlugin,
   asteroidsPlugin as unknown as GamePlugin,
   spaceInvadersPlugin as unknown as GamePlugin,
+  baccaratPlugin as unknown as GamePlugin,
+  roulettePlugin as unknown as GamePlugin,
+  crapsPlugin as unknown as GamePlugin,
+  slotsPlugin as unknown as GamePlugin,
+  caribbeanStudPlugin as unknown as GamePlugin,
 ];

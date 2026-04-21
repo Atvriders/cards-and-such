@@ -1,0 +1,114 @@
+.craps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #2d1a6b;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+.craps-header {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+}
+
+.craps-result {
+  background: rgba(0,0,0,0.4);
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 1.6rem;
+  text-align: center;
+  max-width: 500px;
+}
+
+.craps-dice {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.craps-die {
+  width: 70px;
+  height: 70px;
+  background: #fff;
+  color: #1a1a1a;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.craps-total {
+  font-size: 2rem;
+  font-weight: 900;
+  opacity: 0.9;
+}
+
+.craps-point-info {
+  background: rgba(255,220,50,0.2);
+  border: 2px solid rgba(255,220,50,0.6);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.craps-bet-info {
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.craps-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.craps-actions button {
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e8c84a;
+  color: #1a1a1a;
+  transition: background 0.15s;
+}
+
+.craps-actions button:hover:not(:disabled) {
+  background: #f5d85a;
+}
+
+.craps-actions button:disabled {
+  background: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+}
+
+.craps-game-over {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.die-pip {
+  font-size: 2.2rem;
+}
