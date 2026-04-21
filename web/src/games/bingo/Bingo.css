@@ -1,0 +1,153 @@
+.bingo-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #2a0a3a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.bingo-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.bingo-draw-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bingo-current-number {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffd700;
+  min-height: 3.5rem;
+  line-height: 1;
+}
+
+.bingo-draw-info {
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
+
+.bingo-draw-button {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #b04dff;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.bingo-draw-button:hover:not(:disabled) {
+  background: #c060ff;
+}
+
+.bingo-draw-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bingo-card-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.bingo-column-headers {
+  display: flex;
+  gap: 3px;
+}
+
+.bingo-col-header {
+  width: 52px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #b04dff;
+}
+
+.bingo-card {
+  display: grid;
+  grid-template-columns: repeat(5, 52px);
+  gap: 3px;
+}
+
+.bingo-cell {
+  width: 52px;
+  height: 52px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.bingo-cell.marked {
+  background: #b04dff;
+  border-color: #c060ff;
+}
+
+.bingo-cell.free {
+  background: #ffd700;
+  color: #000;
+  cursor: default;
+  font-size: 0.7rem;
+}
+
+.bingo-cell.callable {
+  background: rgba(255, 215, 0, 0.18);
+  border-color: #ffd700;
+  cursor: pointer;
+}
+
+.bingo-cell.callable:hover {
+  background: rgba(255, 215, 0, 0.3);
+}
+
+.bingo-opponents {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.bingo-opp {
+  background: rgba(0,0,0,0.3);
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+}
+
+.bingo-opp.won {
+  color: #ff6666;
+  font-weight: 700;
+}
+
+.bingo-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.6;
+}

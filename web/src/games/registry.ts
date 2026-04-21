@@ -93,6 +93,14 @@ import { euchrePlugin } from "./euchre/index.js";
 import { rummy500Plugin } from "./rummy-500/index.js";
 import { casinoPlugin } from "./casino/index.js";
 import { fiveCrownsPlugin } from "./five-crowns/index.js";
+import { highCardFlushPlugin } from "./high-card-flush/index.js";
+import { sevensPlugin } from "./sevens/index.js";
+import { bowlingPlugin } from "./bowling/index.js";
+import { horseshoesPlugin } from "./horseshoes/index.js";
+import { ticTacToe3DPlugin } from "./tictactoe-3d/index.js";
+import { numberGuesserPlugin } from "./number-guesser/index.js";
+import { bingoPlugin } from "./bingo/index.js";
+import { coinFlipStreakPlugin } from "./coin-flip-streak/index.js";
 
 export const GAMES: GamePlugin[] = [
   accordionPlugin as unknown as GamePlugin,
@@ -189,4 +197,12 @@ export const GAMES: GamePlugin[] = [
   rummy500Plugin as unknown as GamePlugin,
   casinoPlugin as unknown as GamePlugin,
   fiveCrownsPlugin as unknown as GamePlugin,
+  highCardFlushPlugin as unknown as GamePlugin,
+  sevensPlugin as unknown as GamePlugin,
+  bowlingPlugin as unknown as GamePlugin,
+  horseshoesPlugin as unknown as GamePlugin,
+  ticTacToe3DPlugin as unknown as GamePlugin,
+  numberGuesserPlugin as unknown as GamePlugin,
+  bingoPlugin as unknown as GamePlugin,
+  coinFlipStreakPlugin as unknown as GamePlugin,
 ];

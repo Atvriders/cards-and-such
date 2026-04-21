@@ -1,0 +1,98 @@
+.ttt3d-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0a1a2e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.ttt3d-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.ttt3d-status {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.ttt3d-layers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.ttt3d-layer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ttt3d-layer-label {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+
+.ttt3d-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 44px);
+  grid-template-rows: repeat(4, 44px);
+  gap: 3px;
+}
+
+.ttt3d-cell {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.ttt3d-cell:hover:not(.occupied) {
+  background: rgba(255,255,255,0.18);
+}
+
+.ttt3d-cell.occupied {
+  cursor: default;
+}
+
+.ttt3d-cell.X { color: #4daaff; }
+.ttt3d-cell.O { color: #ff7777; }
+.ttt3d-cell.winning { background: rgba(255, 220, 0, 0.25); border-color: #ffd700; }
+
+.ttt3d-legend {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.ttt3d-legend .x { color: #4daaff; font-weight: 700; }
+.ttt3d-legend .o { color: #ff7777; font-weight: 700; }
+
+.ttt3d-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+}

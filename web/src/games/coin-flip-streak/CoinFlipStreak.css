@@ -1,0 +1,157 @@
+.cfs-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  background: #1a1a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.cfs-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cfs-streak {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.cfs-streak .current { color: #ffd700; }
+.cfs-streak .best { color: #aaa; }
+
+.cfs-max {
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
+
+.cfs-coin {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 900;
+  transition: background 0.3s;
+}
+
+.cfs-coin.heads {
+  background: radial-gradient(circle, #ffd700 60%, #b8960a);
+  color: #333;
+}
+
+.cfs-coin.tails {
+  background: radial-gradient(circle, #aaa 60%, #555);
+  color: #fff;
+}
+
+.cfs-coin.pending {
+  background: rgba(255,255,255,0.1);
+  border: 3px dashed rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.3);
+}
+
+.cfs-result-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-height: 1.5rem;
+  text-align: center;
+}
+
+.cfs-result-label.correct { color: #4dff4d; }
+.cfs-result-label.wrong { color: #ff4444; }
+
+.cfs-predict-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.cfs-predict-buttons button {
+  padding: 0.65rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cfs-predict-buttons .heads-btn {
+  background: #ffd700;
+  color: #000;
+}
+
+.cfs-predict-buttons .tails-btn {
+  background: #888;
+  color: #fff;
+}
+
+.cfs-predict-buttons button:hover {
+  filter: brightness(1.15);
+}
+
+.cfs-predicted {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+}
+
+.cfs-flip-button {
+  padding: 0.7rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4444ff;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.cfs-flip-button:hover {
+  background: #5555ff;
+}
+
+.cfs-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  max-width: 320px;
+}
+
+.cfs-history-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.cfs-history-dot.correct { background: #4dff4d; color: #000; }
+.cfs-history-dot.wrong { background: #ff4444; color: #fff; }
+
+.cfs-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.6;
+}

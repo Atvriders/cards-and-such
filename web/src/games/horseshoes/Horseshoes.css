@@ -1,0 +1,142 @@
+.horseshoes-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #3a2a0a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.horseshoes-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.horseshoes-score {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.horseshoes-score .player { color: #4dff4d; }
+.horseshoes-score .bot { color: #ff6666; }
+
+.horseshoes-target {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.horseshoes-pit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 340px;
+}
+
+.horseshoes-peg {
+  width: 20px;
+  height: 20px;
+  background: #aaa;
+  border-radius: 50%;
+  border: 3px solid #888;
+  margin: 0.5rem;
+}
+
+.horseshoes-controls {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.horseshoes-control-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.horseshoes-control-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.horseshoes-slider {
+  width: 100%;
+  accent-color: #e8c84a;
+}
+
+.horseshoes-toss-button {
+  padding: 0.7rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e8c84a;
+  color: #000;
+  transition: background 0.15s;
+  align-self: center;
+}
+
+.horseshoes-toss-button:hover {
+  background: #f5d85a;
+}
+
+.horseshoes-result {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.horseshoes-result-title {
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.horseshoes-toss-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0;
+}
+
+.horseshoes-result-label {
+  opacity: 0.75;
+}
+
+.ringer { color: #ffd700; font-weight: 700; }
+.leaner { color: #a0c4ff; }
+.close { color: #b0e0b0; }
+.miss { color: rgba(255,255,255,0.4); }
+
+.horseshoes-net {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 0.4rem;
+}
+
+.horseshoes-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+}

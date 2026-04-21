@@ -1,0 +1,180 @@
+.sevens-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #1a2e4a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.sevens-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.sevens-status {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.sevens-board {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.sevens-board-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.sevens-suit-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.sevens-suit-label {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.sevens-board-card {
+  background: #fff;
+  color: #222;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.sevens-board-card.red { color: #c00; }
+.sevens-board-card.pivot { outline: 2px solid #ffd700; }
+
+.sevens-empty-slot {
+  border: 1px dashed rgba(255,255,255,0.2);
+  border-radius: 4px;
+  width: 28px;
+  height: 22px;
+}
+
+.sevens-hand-section {
+  width: 100%;
+  max-width: 560px;
+}
+
+.sevens-hand-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  margin-bottom: 0.4rem;
+}
+
+.sevens-hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sevens-card {
+  background: #fff;
+  color: #222;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+  border: 2px solid transparent;
+  user-select: none;
+}
+
+.sevens-card.red { color: #c00; }
+
+.sevens-card.playable {
+  border-color: #4dff4d;
+}
+
+.sevens-card.playable:hover {
+  transform: translateY(-3px);
+}
+
+.sevens-card.not-playable {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.sevens-opponents {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.sevens-opp {
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  text-align: center;
+}
+
+.sevens-opp.active {
+  border: 1px solid #4dff4d;
+}
+
+.sevens-log {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.sevens-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.sevens-actions button {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e8c84a;
+  color: #000;
+  transition: background 0.15s;
+}
+
+.sevens-actions button:hover:not(:disabled) {
+  background: #f5d85a;
+}
+
+.sevens-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sevens-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+}

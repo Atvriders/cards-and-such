@@ -1,0 +1,141 @@
+.hcf-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a3a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.hcf-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hcf-bankroll {
+  font-size: 1.1rem;
+  background: rgba(0,0,0,0.3);
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+}
+
+.hcf-round-info {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.hcf-hands {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
+}
+
+.hcf-hand-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 220px;
+}
+
+.hcf-hand-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+.hcf-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.hcf-card {
+  background: #fff;
+  color: #222;
+  border-radius: 6px;
+  padding: 4px 7px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-width: 36px;
+  text-align: center;
+}
+
+.hcf-card.red {
+  color: #c00;
+}
+
+.hcf-card.flush-best {
+  outline: 2px solid #ffd700;
+}
+
+.hcf-flush-summary {
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  text-align: center;
+}
+
+.hcf-result {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.hcf-result.win { color: #4dff4d; }
+.hcf-result.lose { color: #ff6666; }
+.hcf-result.draw { color: #ffcc44; }
+
+.hcf-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hcf-actions button {
+  padding: 0.65rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #4dcc4d;
+  color: #000;
+  transition: background 0.15s;
+}
+
+.hcf-actions button:hover:not(:disabled) {
+  background: #5de05d;
+}
+
+.hcf-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hcf-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.6;
+}
