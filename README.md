@@ -31,9 +31,12 @@ the full Phase 1 design.
 npm install
 cp .env.example .env             # then fill in JWT_SECRET (openssl rand -hex 32)
 docker compose up -d             # pulls the latest prebuilt images from GHCR and runs them
-curl http://127.0.0.1:8080/api/health
-# then open http://127.0.0.1:8080/
+curl http://127.0.0.1:3050/api/health
+# then open http://127.0.0.1:3050/
 ```
+
+The whole stack is served from a single port (3050 by default). Only nginx (`web`) is
+exposed on the host; the API server stays internal on the Docker network.
 
 The stack is pull-only — `docker-compose.yml` has no `build:` sections.
 Every `docker compose up` pulls the latest `ghcr.io/atvriders/cards-and-such-{server,web}:latest`
