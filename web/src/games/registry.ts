@@ -1,4 +1,6 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { goFishPlugin } from "./go-fish/index.js";
+import { warPlugin } from "./war/index.js";
 import { pigPlugin } from "./pig/index.js";
 import { klondikePlugin } from "./klondike/index.js";
 import { freecellPlugin } from "./freecell/index.js";
@@ -23,6 +25,8 @@ import { pyramidPlugin } from "./pyramid/index.js";
 import { triPeaksPlugin } from "./tri-peaks/index.js";
 
 export const GAMES: GamePlugin[] = [
+  goFishPlugin as unknown as GamePlugin,
+  warPlugin as unknown as GamePlugin,
   klondikePlugin as unknown as GamePlugin,
   freecellPlugin as unknown as GamePlugin,
   spiderPlugin as unknown as GamePlugin,

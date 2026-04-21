@@ -1,0 +1,204 @@
+.go-fish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #1a6b3a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+/* ── opponents row ── */
+.gf-opponents {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.gf-opponent {
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 90px;
+}
+
+.gf-opponent-name {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+
+.gf-opponent-cards {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gf-opp-stat {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* ── action log ── */
+.gf-log {
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 480px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  min-height: 2.5rem;
+  text-align: center;
+}
+
+/* ── player hand ── */
+.gf-your-hand {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gf-section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+.gf-rank-groups {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gf-rank-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0.3rem;
+  transition: background 0.15s, outline 0.15s;
+  background: rgba(0,0,0,0.15);
+}
+
+.gf-rank-group:hover {
+  background: rgba(255,255,100,0.2);
+  outline: 2px solid rgba(255,255,100,0.5);
+}
+
+.gf-rank-group.selected {
+  background: rgba(255,255,100,0.3);
+  outline: 2px solid rgba(255,255,100,0.9);
+}
+
+.gf-rank-group:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.gf-rank-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.gf-rank-cards {
+  display: flex;
+  gap: 0.15rem;
+}
+
+/* ── target picker ── */
+.gf-target-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+}
+
+.gf-target-picker h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.gf-target-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gf-target-buttons button {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e8c84a;
+  color: #1a1a1a;
+  transition: background 0.15s;
+}
+
+.gf-target-buttons button:hover {
+  background: #f5d85a;
+}
+
+.gf-cancel-btn {
+  background: rgba(255,255,255,0.15) !important;
+  color: #fff !important;
+  font-size: 0.8rem !important;
+}
+
+.gf-cancel-btn:hover {
+  background: rgba(255,255,255,0.25) !important;
+}
+
+/* ── books summary ── */
+.gf-books-summary {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* ── game over ── */
+.gf-game-over {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* ── ocean info ── */
+.gf-ocean {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ── not-your-turn notice ── */
+.gf-waiting {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-style: italic;
+}

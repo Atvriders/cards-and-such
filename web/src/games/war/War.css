@@ -1,0 +1,163 @@
+.war-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #6b1a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.war-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── decks ── */
+.war-decks {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 500px;
+}
+
+.war-deck-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.war-deck-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.war-deck-stack {
+  position: relative;
+  width: 60px;
+  height: 84px;
+}
+
+.war-deck-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.war-deck-count {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* ── vs divider ── */
+.war-vs {
+  font-size: 1.4rem;
+  font-weight: 900;
+  opacity: 0.6;
+  align-self: center;
+}
+
+/* ── battlefield ── */
+.war-battlefield {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.war-battlefield-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+.war-pile-count {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* ── result ── */
+.war-result {
+  background: rgba(0,0,0,0.4);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  min-height: 2rem;
+  line-height: 1.5;
+}
+
+/* ── rounds ── */
+.war-rounds {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* ── actions ── */
+.war-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.war-actions button {
+  padding: 0.65rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e8c84a;
+  color: #1a1a1a;
+  transition: background 0.15s;
+}
+
+.war-actions button:hover:not(:disabled) {
+  background: #f5d85a;
+}
+
+.war-actions button:disabled {
+  background: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+}
+
+.war-actions button.secondary {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.war-actions button.secondary:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ── game over ── */
+.war-game-over {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  text-align: center;
+  line-height: 1.6;
+}
