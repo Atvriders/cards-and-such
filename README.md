@@ -6,9 +6,24 @@ the full Phase 1 design.
 
 ## Status
 
-- **Plan A — Platform Foundation:** in progress
-- **Plan B — Single-Player Games:** not started
-- **Plan C — Multiplayer + Polish:** not started
+- **Plan A — Platform Foundation:** complete
+- **Plan B — Single-Player Games:** complete (8 games: Klondike, FreeCell, Blackjack, Video Poker, Yahtzee, Farkle, Tic-Tac-Toe, Checkers)
+- **Plan C — Multiplayer + Polish:** complete (Connect 4 online, Uno-like online)
+
+## Games
+
+10 launch games across single-player and online multiplayer:
+
+1. **Klondike Solitaire** — classic 7-column solitaire
+2. **FreeCell** — all cards face-up solitaire variant
+3. **Blackjack** — single-player vs. dealer
+4. **Video Poker** — Jacks-or-Better draw poker
+5. **Yahtzee** — 5-dice scoring game
+6. **Farkle** — press-your-luck dice game
+7. **Tic-Tac-Toe** — 3×3 grid, vs. minimax AI
+8. **Checkers** — 8×8 board, vs. minimax AI
+9. **Connect 4** — 7×6 online multiplayer
+10. **Uno-like (Shed)** — shedding card game, online multiplayer
 
 ## Local development
 
