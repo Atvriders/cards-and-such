@@ -1408,3 +1408,119 @@ Multiplayer legend: **yes** = requires 2+, **opt** = supports solo and multi, **
 - **Table Tennis Sim** — Paddle-and-ball digital · Players: 2 · Complexity: L · Multiplayer: yes
 - **Speed-Chess-Clock Sport** — Blitz-timed abstract sport · Players: 2 · Complexity: M · Multiplayer: yes
 
+## Tabletop / Classic Board Games (added post-audit)
+
+### Classic Family Board Games
+- **Monopoly-like real-estate trading** — Buy properties, charge rent, bankrupt opponents · Players: 2-8 · Complexity: M · Multiplayer: yes
+- **Monopoly Junior-like** — Simplified property trading for children · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Monopoly Deal-like card game** — Property-trading card version · Players: 2-5 · Complexity: L · Multiplayer: yes
+- **Monopoly Cheaters Edition-like** — Rule-bending property game · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Game of Life-like** — Spin-and-advance career/family sim · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Sorry-like** — Draw-card pawn-race with bumping · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Trouble-like** — Pop-o-matic bubble race with bumping · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Candy Land-like** — Color-card sweet-land race for young children · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Chutes and Ladders** — Snake-and-ladders virtue/vice race · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Clue / Cluedo-like murder mystery** — Deduce murderer, weapon, and room · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Risk-like world conquest** — Dice-combat territorial domination · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Stratego-like hidden-rank battle** — Hidden piece rank-combat · Players: 2 · Complexity: M · Multiplayer: yes
+- **Operation-like dexterity surgery** — Tweezer body-part removal without touching sides · Players: 1-6 · Complexity: L · Multiplayer: yes
+- **Battleship-like fleet hunt** — Grid-coordinate hidden fleet search · Players: 2 · Complexity: L · Multiplayer: yes
+- **Payday-like monthly budget** — Monthly bill-pay financial race · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Careers-like life goals** — Score fame money happiness to reach secret goal · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Masterpiece-like art auction** — Bid on paintings of secret value · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Aggravation-like** — Marble race with aggravation bumping · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Parcheesi / Ludo-like** — Classic cross-shaped home-race · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Uncle Wiggily-like** — Story-card children's race · Players: 2-4 · Complexity: L · Multiplayer: yes
+
+### Modern Hobby Board Games
+- **Catan-like resource trading** — Hex-tile settlement building with resource exchange · Players: 3-4 · Complexity: M · Multiplayer: yes
+- **Ticket to Ride-like route building** — Claim railway routes across a map · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Carcassonne-like tile laying** — Place terrain tiles and meeples to score regions · Players: 2-5 · Complexity: M · Multiplayer: yes
+- **Puerto Rico-like role selection** — Choose plantation roles to build a colonial economy · Players: 2-5 · Complexity: H · Multiplayer: yes
+- **Dominion-like deckbuilder** — Buy cards to build a winning deck each game · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Splendor-like gem development** — Collect gem tokens to buy development cards · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Azul-like pattern drafting** — Draft colored tiles to complete wall patterns · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **7 Wonders-like civilization drafting** — Draft cards to build a wonder across three ages · Players: 2-7 · Complexity: M · Multiplayer: yes
+- **Agricola-like worker placement** — Manage a farm by placing worker meeples each round · Players: 1-5 · Complexity: H · Multiplayer: yes
+- **Through the Ages-like civilization** — Card-draft civ builder across ancient to modern eras · Players: 2-4 · Complexity: H · Multiplayer: yes
+- **Power Grid-like network auction** — Bid on power plants and supply cities with energy · Players: 2-6 · Complexity: H · Multiplayer: yes
+- **Caylus-like castle building** — Worker placement on a road to build a medieval castle · Players: 2-5 · Complexity: H · Multiplayer: yes
+- **Le Havre-like port economy** — Take goods and build port structures to earn income · Players: 1-5 · Complexity: H · Multiplayer: yes
+- **Stone Age-like dice worker** — Roll dice to gather resources and feed your tribe · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Viticulture-like winery** — Manage a vineyard through seasons to fulfill wine orders · Players: 1-6 · Complexity: M · Multiplayer: yes
+- **Terra Mystica-like faction** — Build structures on terrain only your faction can terraform · Players: 2-5 · Complexity: H · Multiplayer: yes
+- **Everdell-like woodland worker** — Place workers and play cards to build a forest city · Players: 1-4 · Complexity: M · Multiplayer: yes
+- **Wingspan-like engine builder** — Attract birds to your wildlife preserve habitat · Players: 1-5 · Complexity: M · Multiplayer: yes
+- **Brass-like industrial network** — Build canals then rails in industrial-age England · Players: 2-4 · Complexity: H · Multiplayer: yes
+- **Great Western Trail-like cattle drive** — Herd cattle and build buildings on a trail to Kansas City · Players: 2-4 · Complexity: H · Multiplayer: yes
+- **Glass Road-like production wheel** — Rotate resource wheels to produce goods in rural Bavaria · Players: 1-4 · Complexity: M · Multiplayer: yes
+- **A Feast for Odin-like Viking puzzle** — Tetris-like tile placement across a Norse economy · Players: 1-4 · Complexity: H · Multiplayer: yes
+- **Terraforming Mars-like corporation** — Play project cards to raise oxygen, ocean, and temperature · Players: 1-5 · Complexity: H · Multiplayer: yes
+- **Gaia Project-like space faction** — Terraform planets and build federations across the galaxy · Players: 1-4 · Complexity: H · Multiplayer: yes
+
+### Party & Family Board Games
+- **Telestrations-like telephone drawing** — Pass sketchbooks and guess what was drawn before · Players: 4-8 · Complexity: L · Multiplayer: yes
+- **Pictionary-like drawing guessing** — Race to draw and guess words on teams · Players: 4-16 · Complexity: L · Multiplayer: yes
+- **Taboo-like word restriction** — Describe a word without using its forbidden taboo words · Players: 4-10 · Complexity: L · Multiplayer: yes
+- **Apples to Apples-like adjective matching** — Match noun cards to judge's adjective card · Players: 4-10 · Complexity: L · Multiplayer: yes
+- **Balderdash-like bluffing definitions** — Invent plausible fake definitions or facts to fool others · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Trivial Pursuit-like trivia** — Answer category questions to collect pie wedges · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Scattergories-like category lists** — Race to name items in categories starting with a rolled letter · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Outburst-like shouting lists** — Shout matching items from a hidden list in timed frenzy · Players: 4-12 · Complexity: L · Multiplayer: yes
+- **Loaded Questions-like guessing** — Guess who gave which answer to revealing questions · Players: 3-6 · Complexity: L · Multiplayer: yes
+- **Things-like anonymous answers** — Read anonymous answers to silly fill-in prompts and guess who said what · Players: 4-8 · Complexity: L · Multiplayer: yes
+- **Fibbage-like lie detection** — Write fake answers to obscure trivia and vote for the real one · Players: 2-8 · Complexity: L · Multiplayer: yes
+
+### Cooperative Board Games
+- **Pandemic-like disease outbreak** — Cooperate to cure four diseases before they spread globally · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Forbidden Island-like sinking map** — Cooperate to grab treasures before the island floods · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Flash Point-like firefighter** — Cooperate to rescue victims from a burning building · Players: 2-6 · Complexity: M · Multiplayer: yes
+- **Spirit Island-like invader defense** — Play spirits to drive colonial invaders off a sacred island · Players: 1-4 · Complexity: H · Multiplayer: yes
+- **Arkham Horror-like investigation** — Cooperate to close elder-god portals before the Ancient One awakens · Players: 1-8 · Complexity: H · Multiplayer: yes
+- **Mysterium-like ghost visions** — A ghost gives vision cards to help detectives solve a murder · Players: 2-7 · Complexity: M · Multiplayer: yes
+- **Shadows over Camelot-like** — Knights cooperate to complete quests while rooting out a traitor · Players: 3-7 · Complexity: M · Multiplayer: yes
+- **Zombicide-like undead survival** — Cooperate to survive and complete missions against zombie hordes · Players: 1-6 · Complexity: M · Multiplayer: yes
+- **Robinson Crusoe-like island survival** — Cooperate to survive on a deserted island through scenarios · Players: 1-4 · Complexity: H · Multiplayer: yes
+- **This War of Mine-like wartime survival** — Cooperate as civilians surviving a siege with moral choices · Players: 1-6 · Complexity: H · Multiplayer: yes
+
+### Social Deduction Board Games
+- **The Resistance-like hidden traitor** — Propose missions; spies secretly fail them to win · Players: 5-10 · Complexity: L · Multiplayer: yes
+- **Secret Hitler-like fascist infiltration** — Liberals identify and stop the hidden Hitler before fascist policies dominate · Players: 5-10 · Complexity: L · Multiplayer: yes
+- **Shadow Hunters-like hidden faction** — Players are secretly hunters, shadows, or neutrals seeking their win condition · Players: 4-8 · Complexity: M · Multiplayer: yes
+- **Two Rooms and a Boom-like** — Two-team hostage negotiation deduction with room swaps · Players: 6-30 · Complexity: L · Multiplayer: yes
+
+### Abstract Strategy (Tabletop)
+- **Abalone** — Push opponent's marbles off the hexagonal board · Players: 2 · Complexity: M · Multiplayer: yes
+- **Blokus-like polyomino placement** — Place tetromino pieces claiming territory without touching your own · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Pylos** — Stack balls in a pyramid, removing supporting layers to reuse pieces · Players: 2 · Complexity: M · Multiplayer: yes
+- **Pentago** — Connect five marbles while rotating board sections after each move · Players: 2 · Complexity: M · Multiplayer: yes
+- **Santorini-like** — Move workers and build towers to reach the third level first · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Hive-like insect strategy** — Surround the opponent's queen using interlocking insect pieces · Players: 2 · Complexity: M · Multiplayer: yes
+- **Gipf** — Place pieces in a row and remove sets of four in the GIPF series · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tamsk** — Race hourglasses across a hexagonal grid before time runs out · Players: 2 · Complexity: M · Multiplayer: yes
+- **Zèrtz** — Remove rings from the board while isolating opponent's marbles · Players: 2 · Complexity: M · Multiplayer: yes
+- **Dvonn** — Stack pieces and keep stacks connected to a DVONN piece · Players: 2 · Complexity: M · Multiplayer: yes
+- **Yinsh** — Place rings and flip pieces; remove a ring each time you score a row of five · Players: 2 · Complexity: M · Multiplayer: yes
+- **Punct** — Build connected bridges of three to link two edges of the board · Players: 2 · Complexity: M · Multiplayer: yes
+- **Quarto** — Place pieces your opponent hands you; four in a row sharing any attribute wins · Players: 2 · Complexity: M · Multiplayer: yes
+- **Quixo** — Slide cube rows to create five-in-a-row of your symbol · Players: 2-4 · Complexity: M · Multiplayer: yes
+- **Gess** — Flexible chess-like game using overlapping 3×3 pieces on a checkerboard · Players: 2 · Complexity: H · Multiplayer: yes
+- **Tumbling Down-like** — Remove blocks from a stack without toppling it · Players: 2-4 · Complexity: L · Multiplayer: yes
+
+### War & Strategy Board Games
+- **Axis & Allies-like** — WWII global combat with economies and combined-arms strategy · Players: 2-5 · Complexity: H · Multiplayer: yes
+- **Memoir '44-like** — Card-command WWII tactical scenarios with dice combat · Players: 2 · Complexity: M · Multiplayer: yes
+- **BattleLore-like fantasy warfare** — Command and Colors fantasy battle with lore cards · Players: 2 · Complexity: M · Multiplayer: yes
+- **Tide of Iron-like** — Squad-level WWII infantry and armor scenarios · Players: 2-4 · Complexity: H · Multiplayer: yes
+- **Combat Commander-like** — Card-driven tactical WWII squad scenarios · Players: 2 · Complexity: H · Multiplayer: yes
+- **Twilight Struggle-like cold war** — Two-player card-driven Cold War influence contest · Players: 2 · Complexity: H · Multiplayer: yes
+
+### Children's Tabletop Games
+- **Hi Ho Cherry-O-like** — Spin and pick cherries to fill your bucket first · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Don't Spill the Beans-like** — Add beans to a pot without tipping it over · Players: 2 · Complexity: L · Multiplayer: yes
+- **Don't Break the Ice-like** — Tap out ice blocks without dropping the polar bear · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Honey Bee Tree-like** — Pull sticks from a tree without dropping the bees · Players: 2-5 · Complexity: L · Multiplayer: yes
+- **Crocodile Dentist-like** — Press teeth hoping not to trigger the chomping jaw · Players: 2-6 · Complexity: L · Multiplayer: yes
+- **Pop Up Pirate-like** — Insert swords into the barrel until the pirate pops · Players: 2-4 · Complexity: L · Multiplayer: yes
+- **Gooey Louie-like** — Pick gooey boogers from Louie's nose without triggering the pop · Players: 2-4 · Complexity: L · Multiplayer: yes
+
