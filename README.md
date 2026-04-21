@@ -160,6 +160,3 @@ feeds the next iteration. Short-term focus (from the final code review):
 - Quick-match queue for Uno-like (auto-countdown, auto-start at min players).
 - Richer e2e coverage: special-card effects in Uno-like, win-detection paths in Checkers.
 
-## License
-
-MIT — see [LICENSE](LICENSE).
