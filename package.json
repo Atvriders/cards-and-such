@@ -1,0 +1,14 @@
+{
+  "name": "cards-and-such",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": ["shared", "server", "web"],
+  "scripts": {
+    "typecheck": "npm -ws --if-present run typecheck",
+    "test": "npm -ws --if-present run test",
+    "build": "npm -ws --if-present run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
