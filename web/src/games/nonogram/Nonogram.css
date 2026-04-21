@@ -1,0 +1,87 @@
+.nonogram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  user-select: none;
+}
+
+.nonogram-info {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.nonogram-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+.nonogram-status.win { color: #22a855; }
+
+.nonogram-wrapper {
+  display: grid;
+  gap: 0;
+}
+
+.nonogram-col-clues {
+  display: contents;
+}
+
+.nonogram-clue-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.65rem;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 1px;
+  color: #333;
+  font-weight: 600;
+}
+
+.nonogram-row {
+  display: contents;
+}
+
+.nonogram-row-clue {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  padding-right: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+
+.nonogram-cell {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #aaa;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: #555;
+  transition: background 0.08s;
+  box-sizing: border-box;
+}
+
+.nonogram-cell:hover { background: #e8f4ff; }
+.nonogram-cell.filled { background: #2b6cb0; border-color: #2b6cb0; }
+.nonogram-cell.marked { background: #fee2e2; color: #dc2626; }
+.nonogram-cell.won-filled { background: #22a855; border-color: #22a855; }
+
+.nonogram-hint {
+  font-size: 0.78rem;
+  color: #888;
+}

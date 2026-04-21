@@ -57,6 +57,12 @@ import { mastermindPlugin } from "./mastermind/index.js";
 import { gomokuPlugin } from "./gomoku/index.js";
 import { dotsAndBoxesPlugin } from "./dots-and-boxes/index.js";
 import { battleshipPlugin } from "./battleship/index.js";
+import { nonogramPlugin } from "./nonogram/index.js";
+import { wordSearchPlugin } from "./word-search/index.js";
+import { wordLadderPlugin } from "./word-ladder/index.js";
+import { anagramPlugin } from "./anagram/index.js";
+import { make24Plugin } from "./make-24/index.js";
+import { pegSolitairePlugin } from "./peg-solitaire/index.js";
 
 export const GAMES: GamePlugin[] = [
   yachtPlugin as unknown as GamePlugin,
@@ -117,4 +123,10 @@ export const GAMES: GamePlugin[] = [
   gomokuPlugin as unknown as GamePlugin,
   dotsAndBoxesPlugin as unknown as GamePlugin,
   battleshipPlugin as unknown as GamePlugin,
+  nonogramPlugin as unknown as GamePlugin,
+  wordSearchPlugin as unknown as GamePlugin,
+  wordLadderPlugin as unknown as GamePlugin,
+  anagramPlugin as unknown as GamePlugin,
+  make24Plugin as unknown as GamePlugin,
+  pegSolitairePlugin as unknown as GamePlugin,
 ];

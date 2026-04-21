@@ -1,0 +1,71 @@
+.peg-solitaire {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.peg-solitaire-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.peg-solitaire-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+.peg-solitaire-status.won { color: #22a855; }
+.peg-solitaire-status.stuck { color: #dc2626; }
+
+.peg-solitaire-board {
+  display: grid;
+  grid-template-columns: repeat(7, 48px);
+  grid-template-rows: repeat(7, 48px);
+  gap: 2px;
+}
+
+.peg-solitaire-cell {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.peg-solitaire-cell.invalid {
+  background: transparent;
+  border: none;
+  cursor: default;
+}
+
+.peg-solitaire-cell.empty {
+  background: #e5e7eb;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.peg-solitaire-cell.empty:hover { background: #d1fae5; }
+.peg-solitaire-cell.empty.target { background: #bbf7d0; outline: 2px solid #22c55e; }
+
+.peg-solitaire-cell.peg {
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: background 0.1s, transform 0.1s;
+}
+.peg-solitaire-cell.peg:hover { background: #2563eb; transform: scale(1.08); }
+.peg-solitaire-cell.peg.selected {
+  background: #f59e0b;
+  box-shadow: 0 0 0 3px #fbbf24;
+  transform: scale(1.12);
+}
+
+.peg-solitaire-hint {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}

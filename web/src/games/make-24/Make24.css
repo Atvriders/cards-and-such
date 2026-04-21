@@ -1,0 +1,94 @@
+.make-24 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.make-24-numbers {
+  display: flex;
+  gap: 12px;
+}
+
+.make-24-num {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #1e40af;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1e40af;
+  background: #eff6ff;
+  user-select: all;
+}
+
+.make-24-target {
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.make-24-target span {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #15803d;
+}
+
+.make-24-input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.make-24-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1.1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+  font-family: monospace;
+}
+.make-24-input:focus { border-color: #3b82f6; }
+
+.make-24-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.make-24-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.make-24-btn.submit { background: #3b82f6; color: #fff; }
+.make-24-btn.submit:hover { background: #2563eb; }
+.make-24-btn.clear { background: #f3f4f6; color: #374151; }
+.make-24-btn.clear:hover { background: #e5e7eb; }
+
+.make-24-error { color: #dc2626; font-size: 0.9rem; }
+.make-24-info { font-size: 0.85rem; color: #6b7280; }
+
+.make-24-status {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
+.make-24-ops {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-align: center;
+}

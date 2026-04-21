@@ -1,0 +1,116 @@
+.word-ladder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.word-ladder-header {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.word-ladder-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.word-ladder-word {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #1e40af;
+}
+
+.word-ladder-word.target { color: #15803d; }
+
+.word-ladder-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  align-items: center;
+}
+
+.word-ladder-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.word-ladder-step.start { color: #1e40af; }
+.word-ladder-step.middle { color: #374151; }
+.word-ladder-step.won-step { color: #15803d; }
+
+.word-ladder-arrow {
+  color: #9ca3af;
+  font-size: 0.8rem;
+}
+
+.word-ladder-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.word-ladder-tiles {
+  display: flex;
+  gap: 4px;
+}
+
+.word-ladder-tile {
+  width: 40px;
+  height: 48px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: #f9fafb;
+  color: #111827;
+}
+
+.word-ladder-tile.active { border-color: #3b82f6; background: #eff6ff; }
+
+.word-ladder-error {
+  color: #dc2626;
+  font-size: 0.85rem;
+}
+
+.word-ladder-status {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.word-ladder-status.won { color: #15803d; }
+.word-ladder-status.lost { color: #dc2626; }
+
+.word-ladder-submit {
+  padding: 8px 20px;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.word-ladder-submit:hover { background: #2563eb; }
+.word-ladder-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.word-ladder-moves {
+  font-size: 0.85rem;
+  color: #555;
+}

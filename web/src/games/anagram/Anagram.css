@@ -1,0 +1,106 @@
+.anagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.anagram-scrambled-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.anagram-scrambled {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: #1e40af;
+  background: #eff6ff;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.anagram-info {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.anagram-guesses {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  align-items: center;
+}
+
+.anagram-guess-row {
+  display: flex;
+  gap: 4px;
+}
+
+.anagram-guess-tile {
+  width: 36px;
+  height: 42px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: #f9fafb;
+}
+
+.anagram-guess-tile.correct { background: #22c55e; border-color: #22c55e; color: #fff; }
+.anagram-guess-tile.wrong { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.anagram-guess-tile.current { border-color: #3b82f6; background: #eff6ff; }
+
+.anagram-input-row {
+  display: flex;
+  gap: 4px;
+}
+
+.anagram-tile {
+  width: 36px;
+  height: 42px;
+  border: 2px solid #9ca3af;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: #fff;
+}
+
+.anagram-tile.active { border-color: #3b82f6; background: #eff6ff; }
+
+.anagram-submit-btn {
+  padding: 8px 20px;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.anagram-submit-btn:hover { background: #2563eb; }
+.anagram-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.anagram-status {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.anagram-status.won { color: #15803d; }
+.anagram-status.lost { color: #dc2626; }
+
+.anagram-hint {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
