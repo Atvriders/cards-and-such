@@ -6,7 +6,7 @@ import { registerAuthRoutes } from "./auth/routes.js";
 import { registerLeaderboardRoutes } from "./leaderboard/routes.js";
 import { registerRateLimit } from "./http/plugins.js";
 import { attachWs, type WsHub } from "./ws/server.js";
-import { RoomRegistry } from "./rooms/registry.js";
+import { RoomRegistry, type TerminalPersist } from "./rooms/registry.js";
 import { registerRoomsRoutes } from "./rooms/routes.js";
 import { registerConnect4 } from "./rooms/games/connect-4.js";
 import { registerUnoLike } from "./rooms/games/uno-like.js";
@@ -37,7 +37,46 @@ export async function buildApp(config = loadConfig()): Promise<FastifyInstance> 
 
   registerConnect4();
   registerUnoLike();
-  const rooms = new RoomRegistry();
+
+  const insertScore = db.prepare(
+    `INSERT INTO scores (game_id, username, score, settings_hash, played_at) VALUES (?, ?, ?, 'online00', ?)`,
+  );
+  const getRating = db.prepare(
+    `SELECT elo FROM ratings WHERE game_id = ? AND username = ?`,
+  );
+  const upsertRating = db.prepare(
+    `INSERT INTO ratings (game_id, username, elo, games_played) VALUES (?, ?, ?, 1)
+     ON CONFLICT(game_id, username) DO UPDATE SET elo = excluded.elo, games_played = games_played + 1`,
+  );
+
+  function eloExpected(a: number, b: number): number {
+    return 1 / (1 + Math.pow(10, (b - a) / 400));
+  }
+
+  const persist: TerminalPersist = (gameId, members, terminal) => {
+    const now = Date.now();
+    for (const m of members) {
+      const won = terminal.winner === m.seat;
+      const score = won ? terminal.score : 0;
+      insertScore.run(gameId, m.username, score, now);
+    }
+    // Elo only makes sense with exactly 2 members
+    if (members.length === 2 && terminal.winner !== "draw") {
+      const winner = members.find((x) => x.seat === terminal.winner)!;
+      const loser = members.find((x) => x.seat !== terminal.winner)!;
+      const wr = (getRating.get(gameId, winner.username) as { elo?: number } | undefined)?.elo ?? 1000;
+      const lr = (getRating.get(gameId, loser.username) as { elo?: number } | undefined)?.elo ?? 1000;
+      const K = 32;
+      const ew = eloExpected(wr, lr);
+      const el = eloExpected(lr, wr);
+      const newWr = Math.round(wr + K * (1 - ew));
+      const newLr = Math.round(lr + K * (0 - el));
+      upsertRating.run(gameId, winner.username, newWr);
+      upsertRating.run(gameId, loser.username, newLr);
+    }
+  };
+
+  const rooms = new RoomRegistry(persist);
   await registerRoomsRoutes(app, rooms);
 
   // attachWs needs app.server (exists before ready) + app.config (decorated above).

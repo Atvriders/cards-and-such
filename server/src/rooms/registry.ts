@@ -12,9 +12,19 @@ function roomCode(): string {
   return Array.from(randomBytes(4), (b) => alphabet[b % alphabet.length]!).join("");
 }
 
+export interface TerminalPersist {
+  (
+    gameId: string,
+    members: Array<{ seat: Seat; username: string }>,
+    terminal: { winner: Seat | "draw"; score: number },
+  ): void;
+}
+
 export class RoomRegistry {
   private readonly byId = new Map<string, Room>();
   private readonly byCode = new Map<string, Room>();
+
+  constructor(private readonly persist?: TerminalPersist) {}
 
   /** Create a room for the given gameId. Throws if the game isn't registered. */
   create(gameId: string): Room {
@@ -83,6 +93,13 @@ export class RoomRegistry {
     if (terminal) {
       room.phase = "ended";
       room.terminal = terminal;
+      if (this.persist) {
+        this.persist(
+          room.def.gameId,
+          room.members.map((m) => ({ seat: m.seat, username: m.username })),
+          terminal,
+        );
+      }
     }
   }
 
