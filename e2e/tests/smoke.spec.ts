@@ -6,7 +6,7 @@ test("user can claim a username, see the shell, and see themselves in Online Now
   await page.getByLabel(/username/i).fill(username);
   await page.getByRole("button", { name: /^claim$/i }).click();
 
-  await expect(page.getByTestId("placeholder-home")).toBeVisible();
+  await expect(page.getByTestId("tile-klondike")).toBeVisible();
   await expect(page.getByTestId("current-user")).toHaveText(username);
 
   await page.getByRole("link", { name: /leaderboard/i }).click();
