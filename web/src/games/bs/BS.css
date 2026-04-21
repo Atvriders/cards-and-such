@@ -1,0 +1,128 @@
+.bs-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #1b0000;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.bs-header { text-align: center; }
+.bs-header h2 { margin: 0 0 0.4rem; font-size: 1.5rem; color: #ef9a9a; }
+
+.bs-seats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.bs-seats .active {
+  color: #ffeb3b;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.bs-info {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.08);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+}
+
+.bs-claim-rank strong { color: #ef9a9a; }
+
+.bs-event {
+  background: rgba(255,255,255,0.07);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  max-width: 500px;
+}
+
+.bs-calling-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(244,67,54,0.15);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #c62828;
+}
+
+.bs-calling-label { font-size: 0.95rem; text-align: center; }
+
+.bs-calling-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.bs-status {
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+}
+
+.bs-hand-label { font-size: 0.85rem; opacity: 0.8; }
+
+.bs-hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  max-width: 700px;
+}
+
+.bs-card-slot {
+  transition: transform 0.1s;
+}
+
+.bs-card-slot.clickable { cursor: pointer; }
+.bs-card-slot.clickable:hover { transform: translateY(-4px); }
+.bs-card-slot.selected { transform: translateY(-10px); filter: drop-shadow(0 4px 8px #ef9a9a); }
+.bs-card-slot.selected.clickable:hover { transform: translateY(-12px); }
+
+.bs-actions { display: flex; gap: 1rem; }
+
+.bs-btn {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.bs-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.bs-btn { background: #c62828; color: #fff; }
+.bs-btn:not(:disabled):hover { background: #b71c1c; transform: translateY(-2px); }
+
+.play-btn { background: #1565c0; color: #fff; }
+.play-btn:not(:disabled):hover { background: #0d47a1; transform: translateY(-2px); }
+
+.pass-btn { background: #424242; color: #fff; }
+.pass-btn:not(:disabled):hover { background: #212121; transform: translateY(-2px); }
+
+.bs-result {
+  background: rgba(0,0,0,0.4);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.bs-result h2 { margin: 0 0 0.5rem; font-size: 1.6rem; }

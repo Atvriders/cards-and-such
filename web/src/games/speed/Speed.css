@@ -1,0 +1,163 @@
+.speed-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #37474f;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.speed-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.speed-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #b2ebf2;
+}
+
+.speed-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 1rem;
+  background: rgba(0,0,0,0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+}
+
+.speed-timer {
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #b2ebf2;
+}
+
+.speed-timer.urgent {
+  color: #f44336;
+  animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+  from { opacity: 1; }
+  to   { opacity: 0.5; }
+}
+
+.speed-score { opacity: 0.9; }
+.speed-stock { opacity: 0.7; }
+
+.speed-piles {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.speed-pile-btn {
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  min-width: 110px;
+}
+
+.speed-pile-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.speed-pile-btn.valid-target {
+  border-color: #4caf50;
+  background: rgba(76,175,80,0.15);
+}
+
+.speed-pile-btn.valid-target:not(:disabled):hover {
+  background: rgba(76,175,80,0.3);
+  transform: translateY(-4px);
+}
+
+.speed-pile-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.speed-pile-card {
+  width: 80px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speed-pile-empty { font-size: 1.5rem; opacity: 0.4; }
+
+.speed-pile-top-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.speed-hand-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.speed-hand-label { font-size: 0.85rem; opacity: 0.8; }
+
+.speed-hand {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.speed-card-slot {
+  transition: transform 0.1s;
+}
+
+.speed-card-slot.clickable { cursor: pointer; }
+.speed-card-slot.clickable:hover { transform: translateY(-4px); }
+.speed-card-slot.selected {
+  transform: translateY(-12px);
+  filter: drop-shadow(0 4px 10px #4caf50);
+}
+
+.speed-result {
+  background: rgba(0,0,0,0.4);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.speed-result h2 { margin: 0 0 0.5rem; font-size: 1.6rem; }
+
+.speed-btn {
+  margin-top: 0.75rem;
+  padding: 0.7rem 1.8rem;
+  background: #00838f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.speed-btn:hover { background: #006064; }

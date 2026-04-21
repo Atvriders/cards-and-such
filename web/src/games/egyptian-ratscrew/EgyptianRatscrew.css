@@ -1,0 +1,134 @@
+.ers-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #004d40;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.ers-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #80cbc4;
+}
+
+.ers-decks {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.ers-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 80px;
+}
+
+.ers-label { font-weight: 700; }
+.ers-count { font-size: 0.85rem; opacity: 0.8; }
+
+.ers-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ers-pile-label { font-size: 0.85rem; opacity: 0.8; }
+
+.ers-pile {
+  position: relative;
+  width: 100px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ers-pile.slap-ready {
+  animation: slap-pulse 0.3s infinite alternate;
+}
+
+@keyframes slap-pulse {
+  from { filter: drop-shadow(0 0 8px #ff6f00); }
+  to   { filter: drop-shadow(0 0 20px #ffeb3b); }
+}
+
+.ers-pile-prev {
+  position: absolute;
+  opacity: 0.5;
+  transform: translate(-4px, -4px);
+}
+
+.ers-pile-top { position: relative; z-index: 1; }
+
+.ers-pile-empty { font-size: 2rem; opacity: 0.4; }
+
+.ers-tribute {
+  background: rgba(255,160,0,0.2);
+  border: 1px solid #ff8f00;
+  color: #ffe082;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 400px;
+}
+
+.ers-slap-banner {
+  background: #bf360c;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 0.6rem 2rem;
+  border-radius: 8px;
+  animation: snap-pulse 0.35s infinite alternate;
+}
+
+@keyframes snap-pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+
+.ers-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.ers-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.ers-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.flip-btn { background: #00695c; color: #fff; }
+.flip-btn:not(:disabled):hover { background: #004d40; transform: translateY(-2px); }
+
+.slap-btn { background: #bf360c; color: #fff; font-size: 1.2rem; }
+.slap-btn:not(:disabled):hover { background: #870000; transform: translateY(-2px); }
+
+.ers-result {
+  background: rgba(0,0,0,0.4);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.ers-result h2 { margin: 0; font-size: 1.6rem; }

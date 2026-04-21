@@ -1,0 +1,158 @@
+.snap-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a237e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.snap-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #ffeb3b;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.snap-decks {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.snap-deck-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 80px;
+}
+
+.snap-deck-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.snap-deck-count {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.snap-deck-card {
+  cursor: default;
+}
+
+.snap-pile-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.snap-pile-label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.snap-pile-cards {
+  position: relative;
+  width: 100px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snap-pile-prev {
+  position: absolute;
+  opacity: 0.5;
+  transform: translate(-4px, -4px);
+}
+
+.snap-pile-top {
+  position: relative;
+  z-index: 1;
+}
+
+.snap-pile-empty {
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+.snap-snap-banner {
+  background: #f44336;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 900;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  animation: snap-pulse 0.4s infinite alternate;
+  text-align: center;
+}
+
+@keyframes snap-pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+.snap-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.snap-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.snap-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.snap-btn-flip {
+  background: #4caf50;
+  color: #fff;
+}
+
+.snap-btn-flip:not(:disabled):hover {
+  background: #388e3c;
+  transform: translateY(-2px);
+}
+
+.snap-btn-snap {
+  background: #f44336;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.snap-btn-snap:not(:disabled):hover {
+  background: #c62828;
+  transform: translateY(-2px);
+}
+
+.snap-result {
+  background: rgba(0,0,0,0.4);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.snap-result h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+}

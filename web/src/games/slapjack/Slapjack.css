@@ -1,0 +1,122 @@
+.slapjack-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #4a148c;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.slapjack-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #ce93d8;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.slapjack-decks {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.slapjack-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 80px;
+}
+
+.slapjack-label { font-weight: 700; }
+.slapjack-count { font-size: 0.85rem; opacity: 0.8; }
+
+.slapjack-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slapjack-pile-label { font-size: 0.85rem; opacity: 0.8; }
+
+.slapjack-pile {
+  width: 90px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: box-shadow 0.2s;
+}
+
+.slapjack-pile.jack-alert {
+  box-shadow: 0 0 20px 6px #ffeb3b;
+  animation: jack-glow 0.4s infinite alternate;
+}
+
+@keyframes jack-glow {
+  from { box-shadow: 0 0 10px 2px #ff9800; }
+  to   { box-shadow: 0 0 24px 8px #ffeb3b; }
+}
+
+.slapjack-pile-empty { font-size: 2rem; opacity: 0.4; }
+
+.slapjack-jack-banner {
+  background: #ff6f00;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 900;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  animation: snap-pulse 0.35s infinite alternate;
+}
+
+@keyframes snap-pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+
+.slapjack-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.slapjack-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.slapjack-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.flip-btn { background: #7b1fa2; color: #fff; }
+.flip-btn:not(:disabled):hover { background: #6a1b9a; transform: translateY(-2px); }
+
+.slap-btn { background: #e65100; color: #fff; font-size: 1.2rem; }
+.slap-btn:not(:disabled):hover { background: #bf360c; transform: translateY(-2px); }
+
+.slapjack-result {
+  background: rgba(0,0,0,0.4);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.slapjack-result h2 { margin: 0 0 0.5rem; font-size: 1.6rem; }
