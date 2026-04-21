@@ -11,3 +11,14 @@
 .start-btn, .play-again-btn { padding: 0.75rem 1.5rem; border-radius: 6px; border: 0; background: #5a5af2; color: white; font-weight: 600; cursor: pointer; }
 .final-score { font-size: 2rem; font-weight: 700; margin: 1rem 0; }
 .play-not-found { text-align: center; padding: 4rem 1rem; color: #8f8fa3; }
+.setup-panel .how-to-play { margin-bottom: 1.5rem; padding: 1rem 1.25rem; border-left: 3px solid #5a5af2; background: #0e0e16; border-radius: 4px; }
+.setup-panel .how-to-play h3 { margin: 0 0 0.5rem; font-size: 1rem; color: #c6c6d8; }
+.setup-panel .how-to-play p { margin: 0 0 0.5rem; line-height: 1.45; color: #a0a0b4; }
+.setup-panel .how-to-play p:last-child { margin-bottom: 0; }
+.help-button { background: transparent; color: #8f8fa3; border: 1px solid #333; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; margin-left: 0.75rem; padding: 0; font-size: 0.9rem; }
+.help-button:hover { color: #c6c6d8; border-color: #5a5af2; }
+.help-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 500; }
+.help-modal { background: #14141f; border: 1px solid #23233a; border-radius: 8px; padding: 1.5rem 2rem; max-width: 560px; max-height: 80vh; overflow-y: auto; }
+.help-modal h2 { margin-top: 0; }
+.help-modal p { line-height: 1.5; color: #c6c6d8; }
+.help-modal .close { float: right; background: transparent; color: #8f8fa3; border: 0; font-size: 1.3rem; cursor: pointer; margin-left: 1rem; }

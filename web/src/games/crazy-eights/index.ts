@@ -28,6 +28,19 @@ export const crazyEightsPlugin: GamePlugin<
   players: { min: 1, max: 1, multiplayer: false },
   description:
     "Match the top card by suit or rank. 8s are wild — declare the next suit.",
+  howToPlay: `Race to empty your hand before the bots do. Match the top discard card by suit or by rank, or play an 8 as a wild card to change the active suit.
+
+Matching: Play any card that shares the same suit or same rank as the top of the discard pile. For example, if the top card is a 7 of Hearts, you may play any Heart or any 7.
+
+Eights (wild): An 8 may be played on any card. After playing an 8 you declare the new active suit — choose strategically based on your remaining hand.
+
+Drawing: If you have no legal play, click Draw to take one card from the stock. If the drawn card is legal and the "Must play drawn card if legal" setting is on, it is played automatically; otherwise you choose whether to play it.
+
+Scoring: The game ends when a player empties their hand. Points in remaining hands count against losers (Eights = 50, face cards = 10, others = face value). Your score is 100 minus your final penalty total.
+
+Settings: Choose 1–3 opponents. Enable or disable the forced-play rule after drawing.
+
+Tips: Hold 8s in reserve and play them to deny opponents their suit. If you have many cards of one suit, declare it after playing an 8. Watch how many cards bots hold — attack the leader with suit changes.`,
   settings: crazyEightsSettings,
   initialState,
   reducer,

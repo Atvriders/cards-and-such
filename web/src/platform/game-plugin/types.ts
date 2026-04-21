@@ -31,6 +31,7 @@ export interface GamePlugin<State = unknown, Action = unknown, Schema extends Se
   category: GameCategory;
   players: { min: number; max: number; multiplayer: boolean };
   description: string;
+  howToPlay?: string;   // optional — markdown-ish plain text, paragraphs separated by \n\n
 
   settings: Schema;
   initialState: (seed: number, settings: SettingsOf<Schema>) => State;

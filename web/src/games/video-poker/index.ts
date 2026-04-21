@@ -35,6 +35,17 @@ export const videoPokerPlugin: GamePlugin<VideoPokerState, VideoPokerAction, typ
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Jacks-or-Better. Hold cards, draw replacements, win credits on qualifying hands.",
+  howToPlay: `Build the best 5-card poker hand. You are dealt 5 cards; choose which to keep, then draw replacements. You win credits on any hand with a pair of Jacks or better.
+
+Controls: Click any card to toggle it between HOLD and discard. Held cards are marked. Click Draw to replace the unmarked cards. Payouts are shown in the paytable panel.
+
+Winning hands (lowest to highest): Jacks or Better (pair of Jacks, Queens, Kings, or Aces), Two Pair, Three of a Kind, Straight, Flush, Full House, Four of a Kind, Straight Flush, Royal Flush.
+
+Settings: Choose bet size (1 or 5 credits), paytable (9/6 full-pay or 8/5), and hands per session. The 9/6 paytable pays 9× for a Full House and 6× for a Flush; 8/5 pays slightly less. Playing max bet (5 credits) upgrades the Royal Flush payout to 800× per credit — always bet max when possible.
+
+Scoring: Your score is your credit balance at the end of the session. Starting credits equals bet size × hands, so play tightly.
+
+Tips: On a dealt pair of Jacks or better, hold it and draw three. Prefer a four-card straight flush draw over a low pair. Never break a made flush or straight unless you have four to a royal.`,
   settings: videoPokerSettings,
   initialState: (seed: number, settings: VideoPokerSettingsType) => initialState(seed, settings),
   reducer,

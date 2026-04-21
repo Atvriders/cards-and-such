@@ -40,6 +40,17 @@ export const blackjackPlugin: GamePlugin<BlackjackState, BlackjackAction, typeof
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Beat the dealer to 21. Blackjack pays 3:2. Hit, Stand, Double, or Split.",
+  howToPlay: `Beat the dealer by getting a hand closer to 21 without going over (busting). Blackjack — an Ace plus a ten-value card — pays 3:2.
+
+Card values: numbered cards at face value, face cards (J/Q/K) = 10, Ace = 1 or 11.
+
+Actions: Hit to take another card. Stand to end your turn. Double Down to double your bet and take exactly one more card. Split when your first two cards match — they become two separate hands each with their own bet.
+
+Dealer rules: The dealer reveals the hidden card after you stand. The dealer must hit on 16 or below and stand on 17 or above (toggle "Dealer Hits Soft 17" to change behavior on soft 17).
+
+Settings: Choose the number of decks (1, 4, 6, or 8), your bet per hand (5/10/25/100 credits), and how many hands make a session. Your score equals your final chip total at session end.
+
+Tips: Basic strategy says always split Aces and 8s, never split 10s or 5s. Double down on 11 when the dealer shows 2–10. Stand on hard 17+. Never take insurance — the house edge is too high.`,
   settings: blackjackSettings,
   initialState: (seed: number, settings: BlackjackSettingsType) => initialState(seed, settings),
   reducer,

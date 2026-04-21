@@ -89,6 +89,19 @@ export const unoLikePlugin: GamePlugin<SPState, UnoLikeAction, typeof settings> 
   category: "cards",
   players: { min: 2, max: 4, multiplayer: true },
   description: "Shed your hand. Match by color, number, or action.",
+  howToPlay: `Be the first player to shed all cards from your hand. You play as seat 0; the bots play automatically after each of your turns.
+
+Matching: On your turn, play a card that matches the top discard by color or by card type/number. For example, a Blue 5 can be followed by any Blue card or any 5 of any color.
+
+Special cards: Skip — next player loses a turn. Reverse — changes the direction of play. Draw 2 — next player draws 2 and loses their turn (you can stack Draw 2s if you hold one). Wild — play on anything; you choose the new active color. Wild Draw 4 — like Wild, but next player draws 4; only legal when you hold no card matching the current color.
+
+If you cannot play, click Draw to take a card from the deck. If the drawn card is playable, you may immediately play it.
+
+Scoring: If you win (empty your hand first), you score 100. If a bot empties their hand first, you score 0.
+
+Settings: Set the number of opponents (1–3 bots). More opponents means more chaos and Draw cards directed at you.
+
+Tips: Save Wild Draw 4 cards for critical moments — playing them when you have other legal plays is against the rules and bots penalize it internally. Try to thin out high-value cards early.`,
   settings,
   initialState: initial,
   reducer,

@@ -6,6 +6,17 @@ import { defaultsOf } from "../platform/game-plugin/types.js";
 import { submitScore } from "../platform/game-plugin/submitScore.js";
 import "./PlayPage.css";
 
+function HowToPlayContent({ text }: { text: string }): JSX.Element {
+  return (
+    <div className="how-to-play">
+      <h3>How to play</h3>
+      {text.split("\n\n").map((para, i) => (
+        <p key={i}>{para}</p>
+      ))}
+    </div>
+  );
+}
+
 export default function PlayPage(): JSX.Element {
   const { gameId } = useParams<{ gameId: string }>();
   const plugin = useMemo(() => GAMES.find((g) => g.id === gameId), [gameId]);
@@ -28,6 +39,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [seed] = useState(() => Math.floor(Math.random() * 2 ** 31));
   const [state, setState] = useState(() => plugin.initialState(seed, settings));
   const [finalScore, setFinalScore] = useState<number | null>(null);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   const start = useCallback(() => {
     const next = plugin.initialState(seed, settings);
@@ -58,11 +70,29 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     <div className="play-page">
       <header className="play-header">
         <h1>{plugin.title}</h1>
-        <Link to="/" className="back-link">← Lobby</Link>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {plugin.howToPlay && phase === "playing" && (
+            <button className="help-button" onClick={() => setHelpOpen(true)} title="How to play">?</button>
+          )}
+          <Link to="/" className="back-link">← Lobby</Link>
+        </div>
       </header>
+
+      {helpOpen && plugin.howToPlay && (
+        <div className="help-modal-backdrop" onClick={() => setHelpOpen(false)}>
+          <div className="help-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="close" onClick={() => setHelpOpen(false)}>✕</button>
+            <h2>How to play — {plugin.title}</h2>
+            {plugin.howToPlay.split("\n\n").map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        </div>
+      )}
 
       {phase === "setup" && (
         <section className="setup-panel" data-testid="setup-panel">
+          {plugin.howToPlay && <HowToPlayContent text={plugin.howToPlay} />}
           <SettingsForm
             schema={plugin.settings}
             values={settings}
