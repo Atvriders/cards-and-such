@@ -1,8 +1,10 @@
 import { useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { KlondikeState, KlondikeAction, KlondikeSettings } from "./state.js";
+import { klondikeRuleset } from "./state.js";
 import { Pile } from "../../engines/tableau/Pile.js";
 import { useDragDrop } from "../../engines/tableau/useDragDrop.js";
+import { findAutoMove } from "../../engines/tableau/index.js";
 import "./Klondike.css";
 
 export function Klondike({
@@ -17,6 +19,22 @@ export function Klondike({
       dispatch({ type: "move", fromPile: from, toPile: to, count } as KlondikeAction);
     },
     [dispatch],
+  );
+
+  const handleCardClick = useCallback(
+    (pileId: string, indexFromTop: number) => {
+      const pile = state.piles.find((p) => p.id === pileId);
+      if (!pile) return;
+      const faceUpCount = pile.faceUpCount ?? (pile.kind === "tableau" ? 0 : pile.cards.length);
+      // count = number of face-up cards from clicked position upward (inclusive)
+      const count = indexFromTop + 1;
+      if (count > faceUpCount) return; // clicked a face-down card — shouldn't happen but guard anyway
+      const target = findAutoMove(state.piles, pileId, count, klondikeRuleset);
+      if (target) {
+        dispatch({ type: "move", fromPile: pileId, toPile: target, count } as KlondikeAction);
+      }
+    },
+    [state.piles, dispatch],
   );
 
   const handleStockClick = useCallback(() => {
@@ -64,6 +82,7 @@ export function Klondike({
             onCardDragStart={onDragStart}
             onDrop={(pileId) => onDrop(pileId, handleMove)}
             onDragOver={onDragOver}
+            onCardClick={handleCardClick}
           />
         </div>
 
@@ -89,6 +108,7 @@ export function Klondike({
               onCardDragStart={onDragStart}
               onDrop={(pileId) => onDrop(pileId, handleMove)}
               onDragOver={onDragOver}
+              onCardClick={handleCardClick}
             />
           </div>
         ))}

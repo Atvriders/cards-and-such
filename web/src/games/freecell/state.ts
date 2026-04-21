@@ -21,34 +21,36 @@ const CASCADE_IDS = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"] as const;
 const FREECELL_IDS = ["fc1", "fc2", "fc3", "fc4"] as const;
 const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"] as const;
 
-function makeRuleset(): Ruleset {
-  return {
-    canStack: (target, moving) => {
-      if (target.kind === "freecell") return freecellCellStack(target, moving);
-      if (target.kind === "foundation") return foundationStack(target, moving);
-      if (target.kind === "tableau") return klondikeTableauStack(target, moving);
-      return false;
-    },
-    canPickUp: (pile, count) => {
-      if (pile.kind === "freecell") return count === 1;
-      if (pile.kind === "foundation") return count === 1;
-      if (pile.kind === "tableau") {
-        // All picked cards must form a valid descending alt-color sequence
-        if (count > pile.cards.length) return false;
-        const cards = pile.cards.slice(pile.cards.length - count);
-        for (let i = 0; i < cards.length - 1; i++) {
-          const upper = cards[i]!;
-          const lower = cards[i + 1]!;
-          const upperIsRed = upper.suit === "♥" || upper.suit === "♦";
-          const lowerIsRed = lower.suit === "♥" || lower.suit === "♦";
-          if (upperIsRed === lowerIsRed) return false;
-          if (upper.rank !== lower.rank + 1) return false;
-        }
-        return true;
+export const freecellRuleset: Ruleset = {
+  canStack: (target, moving) => {
+    if (target.kind === "freecell") return freecellCellStack(target, moving);
+    if (target.kind === "foundation") return foundationStack(target, moving);
+    if (target.kind === "tableau") return klondikeTableauStack(target, moving);
+    return false;
+  },
+  canPickUp: (pile, count) => {
+    if (pile.kind === "freecell") return count === 1;
+    if (pile.kind === "foundation") return count === 1;
+    if (pile.kind === "tableau") {
+      // All picked cards must form a valid descending alt-color sequence
+      if (count > pile.cards.length) return false;
+      const cards = pile.cards.slice(pile.cards.length - count);
+      for (let i = 0; i < cards.length - 1; i++) {
+        const upper = cards[i]!;
+        const lower = cards[i + 1]!;
+        const upperIsRed = upper.suit === "♥" || upper.suit === "♦";
+        const lowerIsRed = lower.suit === "♥" || lower.suit === "♦";
+        if (upperIsRed === lowerIsRed) return false;
+        if (upper.rank !== lower.rank + 1) return false;
       }
-      return false;
-    },
-  };
+      return true;
+    }
+    return false;
+  },
+};
+
+function makeRuleset(): Ruleset {
+  return freecellRuleset;
 }
 
 function countEmptyFreeCells(piles: Pile[]): number {

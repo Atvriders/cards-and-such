@@ -8,9 +8,10 @@ interface Props {
   onDrop?: (pileId: string) => (e: React.DragEvent) => void;
   onDragOver?: (e: React.DragEvent) => void;
   onTopClick?: () => void;
+  onCardClick?: (pileId: string, indexFromTop: number) => void;
 }
 
-export function Pile({ pile, onCardDragStart, onDrop, onDragOver, onTopClick }: Props): JSX.Element {
+export function Pile({ pile, onCardDragStart, onDrop, onDragOver, onTopClick, onCardClick }: Props): JSX.Element {
   const faceUpCount = pile.faceUpCount ?? (pile.kind === "tableau" ? 0 : pile.cards.length);
 
   return (
@@ -36,7 +37,11 @@ export function Pile({ pile, onCardDragStart, onDrop, onDragOver, onTopClick }: 
               faceDown={!isFaceUp}
               draggable={isFaceUp && !!onCardDragStart}
               {...(onCardDragStart ? { onDragStart: onCardDragStart(pile.id, indexFromTop) } : {})}
-              {...(isTop && onTopClick ? { onClick: onTopClick } : {})}
+              {...(isFaceUp && onCardClick
+                ? { onClick: () => onCardClick(pile.id, indexFromTop), className: "clickable" }
+                : isTop && onTopClick
+                  ? { onClick: onTopClick }
+                  : {})}
             />
           </div>
         );

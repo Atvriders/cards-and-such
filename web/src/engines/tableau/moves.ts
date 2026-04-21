@@ -72,3 +72,58 @@ export const freecellCellStack = (target: Pile, moving: Card[]): boolean => {
 function rankVal(c: Card): number { return c.rank === 1 ? 1 : (c.rank as number); }
 
 export { rankVal };
+
+/**
+ * Find the best legal destination pile for a move from `fromPileId`, picking up
+ * `count` cards from the top. Priority: foundation → non-empty tableau → empty tableau → freecell.
+ * Returns the target pile id, or null if no legal move exists.
+ */
+export function findAutoMove(
+  piles: readonly Pile[],
+  fromPileId: string,
+  count: number,
+  ruleset: Ruleset,
+): string | null {
+  const target = piles.find((p) => p.id === fromPileId);
+  if (!target) return null;
+
+  // Pass 1: any foundation (single-card only, enforced by foundationStack).
+  for (const p of piles) {
+    if (p.kind === "foundation" && p.id !== fromPileId) {
+      if (canMove(piles, { fromPile: fromPileId, toPile: p.id, count }, ruleset)) {
+        return p.id;
+      }
+    }
+  }
+
+  // Pass 2: non-empty tableau.
+  for (const p of piles) {
+    if (p.kind === "tableau" && p.id !== fromPileId && p.cards.length > 0) {
+      if (canMove(piles, { fromPile: fromPileId, toPile: p.id, count }, ruleset)) {
+        return p.id;
+      }
+    }
+  }
+
+  // Pass 3: empty tableau.
+  for (const p of piles) {
+    if (p.kind === "tableau" && p.id !== fromPileId && p.cards.length === 0) {
+      if (canMove(piles, { fromPile: fromPileId, toPile: p.id, count }, ruleset)) {
+        return p.id;
+      }
+    }
+  }
+
+  // Pass 4: empty free cell (count=1 only).
+  if (count === 1) {
+    for (const p of piles) {
+      if (p.kind === "freecell" && p.cards.length === 0) {
+        if (canMove(piles, { fromPile: fromPileId, toPile: p.id, count }, ruleset)) {
+          return p.id;
+        }
+      }
+    }
+  }
+
+  return null;
+}

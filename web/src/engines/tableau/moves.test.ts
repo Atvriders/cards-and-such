@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canMove, applyMove, klondikeTableauStack, foundationStack } from "./moves.js";
+import { canMove, applyMove, klondikeTableauStack, foundationStack, findAutoMove } from "./moves.js";
 import type { Pile, Ruleset } from "./types.js";
 import type { Card } from "../deck/index.js";
 
@@ -70,5 +70,45 @@ describe("tableau moves — Klondike ruleset", () => {
     expect(t2.cards.map((c) => c.id)).toEqual(["♦10"]);
     // t2's remaining card was face-down (faceUpCount=1 but now top was removed); engine auto-reveals → 1
     expect(t2.faceUpCount).toBe(1);
+  });
+});
+
+describe("findAutoMove", () => {
+  it("prefers foundation when available", () => {
+    const piles: Pile[] = [
+      { id: "t1", kind: "tableau", cards: [card("♠", 1)], faceUpCount: 1 },
+      { id: "t2", kind: "tableau", cards: [card("♥", 2)], faceUpCount: 1 },
+      { id: "f1", kind: "foundation", cards: [] },
+    ];
+    expect(findAutoMove(piles, "t1", 1, klondikeRules)).toBe("f1");
+  });
+
+  it("picks a non-empty tableau over an empty one", () => {
+    const piles: Pile[] = [
+      { id: "t1", kind: "tableau", cards: [card("♥", 7)], faceUpCount: 1 },  // source — red 7
+      { id: "t2", kind: "tableau", cards: [card("♠", 8)], faceUpCount: 1 },  // black 8 — accepts red 7
+      { id: "t3", kind: "tableau", cards: [], faceUpCount: 0 },              // empty
+      { id: "f1", kind: "foundation", cards: [] },                             // not an Ace
+    ];
+    expect(findAutoMove(piles, "t1", 1, klondikeRules)).toBe("t2");
+  });
+
+  it("falls back to empty tableau when no other target", () => {
+    const piles: Pile[] = [
+      { id: "t1", kind: "tableau", cards: [card("♠", 13)], faceUpCount: 1 },
+      { id: "t2", kind: "tableau", cards: [card("♠", 7)], faceUpCount: 1 },
+      { id: "t3", kind: "tableau", cards: [], faceUpCount: 0 },
+      { id: "f1", kind: "foundation", cards: [] },
+    ];
+    expect(findAutoMove(piles, "t1", 1, klondikeRules)).toBe("t3");
+  });
+
+  it("returns null when no legal target exists", () => {
+    const piles: Pile[] = [
+      { id: "t1", kind: "tableau", cards: [card("♠", 5)], faceUpCount: 1 },
+      { id: "t2", kind: "tableau", cards: [card("♥", 13)], faceUpCount: 1 },
+      { id: "f1", kind: "foundation", cards: [] },
+    ];
+    expect(findAutoMove(piles, "t1", 1, klondikeRules)).toBe(null);
   });
 });

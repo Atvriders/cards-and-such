@@ -1,8 +1,10 @@
 import { useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { FreeCellState, FreeCellAction } from "./state.js";
+import { freecellRuleset } from "./state.js";
 import { Pile } from "../../engines/tableau/Pile.js";
 import { useDragDrop } from "../../engines/tableau/useDragDrop.js";
+import { findAutoMove } from "../../engines/tableau/index.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { freecellSettings } from "./index.js";
 import "./FreeCell.css";
@@ -21,6 +23,21 @@ export function FreeCell({
       dispatch({ type: "move", fromPile: from, toPile: to, count } as FreeCellAction);
     },
     [dispatch],
+  );
+
+  const handleCardClick = useCallback(
+    (pileId: string, indexFromTop: number) => {
+      const pile = state.piles.find((p) => p.id === pileId);
+      if (!pile) return;
+      const faceUpCount = pile.faceUpCount ?? (pile.kind === "tableau" ? 0 : pile.cards.length);
+      const count = indexFromTop + 1;
+      if (count > faceUpCount) return;
+      const target = findAutoMove(state.piles, pileId, count, freecellRuleset);
+      if (target) {
+        dispatch({ type: "move", fromPile: pileId, toPile: target, count } as FreeCellAction);
+      }
+    },
+    [state.piles, dispatch],
   );
 
   if (state.won) {
@@ -50,6 +67,7 @@ export function FreeCell({
               onCardDragStart={onDragStart}
               onDrop={(pileId) => onDrop(pileId, handleMove)}
               onDragOver={onDragOver}
+              onCardClick={handleCardClick}
             />
           </div>
         ))}
@@ -73,6 +91,7 @@ export function FreeCell({
               onCardDragStart={onDragStart}
               onDrop={(pileId) => onDrop(pileId, handleMove)}
               onDragOver={onDragOver}
+              onCardClick={handleCardClick}
             />
           </div>
         ))}

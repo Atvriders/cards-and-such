@@ -26,20 +26,22 @@ export type KlondikeAction =
 const TABLEAU_IDS = ["t1", "t2", "t3", "t4", "t5", "t6", "t7"] as const;
 const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"] as const;
 
+export const klondikeRuleset: Ruleset = {
+  canStack: (target, moving) =>
+    klondikeTableauStack(target, moving) || foundationStack(target, moving),
+  canPickUp: (pile, count) => {
+    if (pile.kind === "waste" || pile.kind === "freecell") return count === 1;
+    if (pile.kind === "foundation") return count === 1;
+    if (pile.kind === "tableau") {
+      const faceUp = pile.faceUpCount ?? 0;
+      return count <= faceUp;
+    }
+    return false;
+  },
+};
+
 function makeRuleset(): Ruleset {
-  return {
-    canStack: (target, moving) =>
-      klondikeTableauStack(target, moving) || foundationStack(target, moving),
-    canPickUp: (pile, count) => {
-      if (pile.kind === "waste" || pile.kind === "freecell") return count === 1;
-      if (pile.kind === "foundation") return count === 1;
-      if (pile.kind === "tableau") {
-        const faceUp = pile.faceUpCount ?? 0;
-        return count <= faceUp;
-      }
-      return false;
-    },
-  };
+  return klondikeRuleset;
 }
 
 export function initialState(
