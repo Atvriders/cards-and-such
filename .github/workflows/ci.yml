@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci --workspaces --include-workspace-root
+      - run: npm run typecheck
+      - run: npm -w @cards/shared run test
+      - run: npm -w @cards/server run test
+      - run: npm -w @cards/web run test
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: unit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci --workspaces --include-workspace-root
+      - name: Build & start stack
+        run: docker compose up -d --build
+      - name: Wait for health
+        run: |
+          for i in {1..30}; do
+            curl -sf http://127.0.0.1:8080/api/health && break
+            sleep 2
+          done
+      - run: npm -w @cards/e2e run test:install
+      - run: npm -w @cards/e2e run test
+      - if: always()
+        run: docker compose down
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: e2e/playwright-report
+          if-no-files-found: ignore
