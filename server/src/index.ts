@@ -3,6 +3,7 @@ import cors from "@fastify/cors";
 import { loadConfig, type Config } from "./config.js";
 import { openDb, type Db } from "./db/index.js";
 import { registerAuthRoutes } from "./auth/routes.js";
+import { registerLeaderboardRoutes } from "./leaderboard/routes.js";
 import { registerRateLimit } from "./http/plugins.js";
 import { attachWs, type WsHub } from "./ws/server.js";
 
@@ -26,6 +27,7 @@ export async function buildApp(config = loadConfig()): Promise<FastifyInstance> 
 
   await registerRateLimit(app);
   await registerAuthRoutes(app);
+  await registerLeaderboardRoutes(app);
 
   app.get("/health", async () => ({ ok: true }));
 
