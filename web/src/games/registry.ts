@@ -16,6 +16,7 @@ import { heartsPlugin } from "./hearts/index.js";
 import { wordGuessPlugin } from "./word-guess/index.js";
 import { minesweeperPlugin } from "./minesweeper/index.js";
 import { twoFortyEightPlugin } from "./twenty-forty-eight/index.js";
+import { memoryMatchPlugin } from "./memory-match/index.js";
 
 export const GAMES: GamePlugin[] = [
   klondikePlugin as unknown as GamePlugin,
@@ -35,4 +36,5 @@ export const GAMES: GamePlugin[] = [
   wordGuessPlugin as unknown as GamePlugin,
   minesweeperPlugin as unknown as GamePlugin,
   twoFortyEightPlugin as unknown as GamePlugin,
+  memoryMatchPlugin as unknown as GamePlugin,
 ];

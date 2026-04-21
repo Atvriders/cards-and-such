@@ -1,0 +1,71 @@
+.memory-match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: "Segoe UI", sans-serif;
+  user-select: none;
+}
+
+.memory-match-info {
+  display: flex;
+  gap: 24px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.memory-match-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.memory-match-cell {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.memory-match-cell:focus {
+  outline: none;
+}
+
+.memory-match-cell.hidden {
+  background: #2c3e50;
+  color: #4a5568;
+  border-color: #1a252f;
+}
+
+.memory-match-cell.hidden:hover:not(:disabled) {
+  background: #34495e;
+  transform: scale(1.05);
+}
+
+.memory-match-cell.flipped {
+  background: #ebf8ff;
+  border-color: #3182ce;
+}
+
+.memory-match-cell.matched {
+  background: #f0fff4;
+  border-color: #48bb78;
+  opacity: 0.7;
+  cursor: default;
+}
+
+.memory-match-game-over {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 12px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+}
