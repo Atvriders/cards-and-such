@@ -5,14 +5,16 @@ import {
   type WsServerMessage,
 } from "@cards/shared";
 import { createJwt } from "../auth/jwt.js";
+import { PresenceRegistry } from "./presence.js";
 
 export interface WsClient { socket: WebSocket; username: string }
-export interface WsHub { wss: WebSocketServer; clients: Map<WebSocket, WsClient>; }
+export interface WsHub { wss: WebSocketServer; presence: PresenceRegistry; }
 
 export function attachWs(app: FastifyInstance): WsHub {
   const jwt = createJwt(app.config.JWT_SECRET);
   const wss = new WebSocketServer({ server: app.server, path: "/ws" });
   const clients = new Map<WebSocket, WsClient>();
+  const presence = new PresenceRegistry();
 
   wss.on("connection", (socket) => {
     const authTimer = setTimeout(() => {
@@ -30,6 +32,7 @@ export function attachWs(app: FastifyInstance): WsHub {
           const claims = await jwt.verify(parsed.token);
           clearTimeout(authTimer);
           clients.set(socket, { socket, username: claims.sub });
+          presence.add({ socket, username: claims.sub, game: null });
           send(socket, { type: "auth_ok" });
         } catch {
           sendError(socket, "bad_token");
@@ -38,17 +41,27 @@ export function attachWs(app: FastifyInstance): WsHub {
         return;
       }
 
-      if (!clients.has(socket)) return sendError(socket, "not_authenticated");
-      // subscribe handled in Task 9.
+      const client = clients.get(socket);
+      if (!client) return sendError(socket, "not_authenticated");
+
+      if (parsed.type === "subscribe" && parsed.channel === "lobby") {
+        presence.subscribeLobby(socket);
+      }
     });
 
     socket.on("close", () => {
       clearTimeout(authTimer);
-      clients.delete(socket);
+      const client = clients.get(socket);
+      if (client) {
+        presence.remove(client.username);
+        clients.delete(socket);
+      }
+      presence.unsubscribeLobby(socket);
     });
   });
 
-  return { wss, clients };
+  app.addHook("onClose", () => new Promise<void>((r) => wss.close(() => r())));
+  return { wss, presence };
 }
 
 function send(socket: WebSocket, msg: WsServerMessage): void {
