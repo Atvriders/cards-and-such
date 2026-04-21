@@ -1,0 +1,13 @@
+.pile {
+  position: relative;
+  min-width: 68px;
+  min-height: 92px;
+}
+.pile-tableau { min-height: 400px; }
+.pile-card { position: absolute; left: 0; }
+.pile-card.stacked { top: 0; }
+.pile-empty {
+  position: absolute; inset: 0;
+  border: 2px dashed #2a2a42;
+  border-radius: 6px;
+}
