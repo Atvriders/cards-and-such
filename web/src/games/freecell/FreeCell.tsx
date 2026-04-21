@@ -29,7 +29,10 @@ export function FreeCell({
     (pileId: string, indexFromTop: number) => {
       const pile = state.piles.find((p) => p.id === pileId);
       if (!pile) return;
-      const faceUpCount = pile.faceUpCount ?? (pile.kind === "tableau" ? 0 : pile.cards.length);
+      // For non-tableau piles (freecells, foundations) all cards are effectively face-up;
+      // faceUpCount is always 0 on those piles by design, so we must not use it as a gate.
+      const faceUpCount =
+        pile.kind === "tableau" ? (pile.faceUpCount ?? 0) : pile.cards.length;
       const count = indexFromTop + 1;
       if (count > faceUpCount) return;
       const target = findAutoMove(state.piles, pileId, count, freecellRuleset);
