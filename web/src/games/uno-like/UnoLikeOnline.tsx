@@ -36,7 +36,7 @@ export default function UnoLikeOnline(): JSX.Element {
 
   return (
     <div className="uno-root">
-      <div className="uno-status">
+      <div className="uno-members">
         Room: {view.members.map((m) => m.username).join(", ")}
       </div>
       <div className="uno-status">

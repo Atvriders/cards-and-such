@@ -19,7 +19,7 @@ export default function Connect4Online(): JSX.Element {
 
   return (
     <div className="c4-root">
-      <div className="c4-status">
+      <div className="c4-members">
         Room members: {view.members.map((m) => `${m.username}${m.seat === mySeat ? " (you)" : ""}`).join(", ")}
       </div>
       <div className="c4-status">
