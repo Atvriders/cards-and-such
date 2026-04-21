@@ -20,6 +20,13 @@ export const yahtzeePlugin: GamePlugin<YahtzeeState, YahtzeeAction, typeof yahtz
   category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
   description: "13 rounds of 5-dice scoring across categories.",
+  howToPlay: `Fill all 13 scoring categories over 13 rounds to maximise your total. Each round you roll 5 dice up to 3 times, then assign the result to exactly one unused category.
+
+Click "Roll" to roll all 5 dice. Click any die to lock (keep) it, then roll again to reroll the rest. After 1–3 rolls, click an empty category to score it. Upper section (Ones through Sixes) scores the sum of matching faces. Lower section: Three/Four of a Kind scores the sum of all dice; Full House scores 25; Small Straight 30; Large Straight 40; Yahtzee 50; Chance scores the total of all dice. You must fill every category once — placing zeros in categories you can't satisfy is sometimes necessary. With Strict Yahtzee Bonus enabled, rolling a Yahtzee when the Yahtzee category is already scored (with 50) adds 100 bonus points to whatever category you choose.
+
+Scoring: final score = sum of all 13 categories + 35-point upper bonus if your upper section totals 63 or more. A perfect game is 375 (or 1575 with bonus Yahtzees).
+
+Tips: aim for 63+ in the upper section early. Save Chance for rounds where no other category fits.`,
   settings: yahtzeeSettings,
   initialState: (seed: number, settings: YahtzeeSettingsType) => initialState(seed, settings),
   reducer,

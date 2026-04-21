@@ -115,6 +115,13 @@ export const connect4Plugin: GamePlugin<SPState, Connect4Action, typeof settings
   category: "board",
   players: { min: 2, max: 2, multiplayer: true },
   description: "Drop discs. Connect four in a row — horizontally, vertically, or diagonally.",
+  howToPlay: `Connect four of your discs in a straight line — horizontally, vertically, or diagonally — before your opponent does. You are always the first player (seat 0).
+
+Click any column to drop your disc into it. Discs fall to the lowest empty row in that column. The 7-column × 6-row grid fills from the bottom up. In Bot mode the bot responds immediately; depth 2 uses a block-or-win heuristic (easier), depth 4 uses minimax with alpha-beta pruning (stronger). In Hot-seat mode a second human plays the second colour and scores are not tracked. Online multiplayer is also supported via room codes. The game ends when one player connects four or the board is completely full (draw).
+
+Scoring (vs bot or online): win = 100, draw = 50, loss = 0.
+
+Tips: control the centre column — it's part of more winning lines than any other column. Watch for threats on both diagonals as well as rows and columns. Block the bot's three-in-a-row before adding to your own.`,
   settings,
   initialState: initial,
   reducer,
