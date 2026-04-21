@@ -1,0 +1,74 @@
+.tictactoe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.tictactoe-info {
+  display: flex;
+  gap: 16px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.tictactoe-board-wrap {
+  border: 2px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tictactoe-board-wrap .board {
+  display: grid;
+  gap: 0;
+}
+
+.tictactoe-board-wrap .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #fff;
+  user-select: none;
+  transition: background 0.1s;
+}
+
+.tictactoe-board-wrap .cell:hover {
+  background: #f0f0f0;
+}
+
+.tictactoe-board-wrap .cell.highlight {
+  background: #ffe066;
+}
+
+.tictactoe-cell-x {
+  color: #e74c3c;
+}
+
+.tictactoe-cell-o {
+  color: #2980b9;
+}
+
+.tictactoe-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.tictactoe-status.win {
+  color: #27ae60;
+}
+
+.tictactoe-status.loss {
+  color: #e74c3c;
+}
+
+.tictactoe-status.draw {
+  color: #f39c12;
+}

@@ -3,10 +3,14 @@ import { klondikePlugin } from "./klondike/index.js";
 import { freecellPlugin } from "./freecell/index.js";
 import { yahtzeePlugin } from "./yahtzee/index.js";
 import { farklePlugin } from "./farkle/index.js";
+import { ticTacToePlugin } from "./tic-tac-toe/index.js";
+import { checkersPlugin } from "./checkers/index.js";
 
 export const GAMES: GamePlugin[] = [
   klondikePlugin as unknown as GamePlugin,
   freecellPlugin as unknown as GamePlugin,
   yahtzeePlugin as unknown as GamePlugin,
   farklePlugin as unknown as GamePlugin,
+  ticTacToePlugin as unknown as GamePlugin,
+  checkersPlugin as unknown as GamePlugin,
 ];

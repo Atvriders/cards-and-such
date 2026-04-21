@@ -1,0 +1,91 @@
+.checkers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.checkers-info {
+  display: flex;
+  gap: 16px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.checkers-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.checkers-status.win {
+  color: #27ae60;
+}
+
+.checkers-status.loss {
+  color: #e74c3c;
+}
+
+.checkers-board-wrap .board {
+  display: grid;
+  border: 2px solid #555;
+  gap: 0;
+}
+
+.checkers-board-wrap .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: opacity 0.1s;
+}
+
+.checkers-board-wrap .cell.dark-square {
+  background: #769656;
+}
+
+.checkers-board-wrap .cell.light-square {
+  background: #eeeed2;
+}
+
+.checkers-board-wrap .cell.selected-source {
+  outline: 3px solid #f1c40f;
+  outline-offset: -3px;
+}
+
+.checkers-board-wrap .cell.legal-target {
+  background: rgba(241, 196, 15, 0.5);
+}
+
+.checkers-board-wrap .cell.must-continue {
+  outline: 3px solid #e74c3c;
+  outline-offset: -3px;
+}
+
+.checkers-piece {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.3);
+  user-select: none;
+}
+
+.checkers-piece.red {
+  background: radial-gradient(circle at 35% 35%, #e74c3c, #922b21);
+  color: #fff;
+}
+
+.checkers-piece.black {
+  background: radial-gradient(circle at 35% 35%, #555, #111);
+  color: #fff;
+}
