@@ -1,0 +1,16 @@
+.die {
+  width: 64px; height: 64px;
+  padding: 0; border: 0; border-radius: 10px;
+  background: transparent; cursor: pointer;
+  transition: transform 0.15s;
+}
+.die svg rect { fill: #fafafa; stroke: #222; stroke-width: 2; }
+.die svg circle { fill: #222; }
+.die.kept svg rect { fill: #ffec99; stroke: #a48400; }
+.die.kept { transform: translateY(-4px); }
+.die.rolling { animation: tumble 0.4s linear; }
+@keyframes tumble {
+  0% { transform: rotate(0) scale(1); }
+  50% { transform: rotate(180deg) scale(0.85); }
+  100% { transform: rotate(360deg) scale(1); }
+}
