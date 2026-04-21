@@ -33,9 +33,9 @@ export async function buildApp(config = loadConfig()): Promise<FastifyInstance> 
 
   // attachWs needs app.server (exists before ready) + app.config (decorated above).
   // Both decorate and addHook must be called before ready().
+  // Note: attachWs registers its own onClose hook to close wss — no duplicate needed here.
   const ws = attachWs(app);
   app.decorate("ws", ws);
-  app.addHook("onClose", () => new Promise<void>((r) => ws.wss.close(() => r())));
 
   await app.ready();
   return app;

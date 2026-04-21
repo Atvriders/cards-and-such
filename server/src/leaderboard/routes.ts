@@ -31,7 +31,7 @@ export async function registerLeaderboardRoutes(app: FastifyInstance): Promise<v
   }>("/leaderboard/game/:gameId", async (req, reply) => {
     const gid = GameIdSchema.safeParse(req.params.gameId);
     if (!gid.success) return reply.code(400).send({ error: "bad_game_id" });
-    const settingsHash = req.query.settingsHash ?? "default00";
+    const settingsHash = req.query.settingsHash ?? "default0";
     const rows = topScores.all(gid.data, settingsHash) as Array<{
       username: string; score: number; playedAt: number;
     }>;

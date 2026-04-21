@@ -14,7 +14,7 @@ function seedUser(app: FastifyInstance, username: string): void {
 function seedScore(app: FastifyInstance, username: string, gameId: string, score: number): void {
   app.db.prepare(
     `INSERT INTO scores (game_id, username, score, settings_hash, played_at)
-     VALUES (?, ?, ?, 'default00', ?)`,
+     VALUES (?, ?, ?, 'default0', ?)`,
   ).run(gameId, username, score, Date.now());
 }
 
