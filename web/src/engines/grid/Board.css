@@ -1,0 +1,16 @@
+.board {
+  display: grid;
+  gap: 2px;
+  background: #23233a;
+  padding: 2px;
+  border-radius: 6px;
+  width: fit-content;
+}
+.board .cell {
+  background: #0b0b12;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.board .cell:hover { background: #141421; }
+.board .cell.highlight { background: #3a5a3a; }
