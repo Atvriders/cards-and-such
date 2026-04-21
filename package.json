@@ -2,7 +2,7 @@
   "name": "cards-and-such",
   "private": true,
   "version": "0.0.0",
-  "workspaces": ["shared", "server", "web"],
+  "workspaces": ["shared", "server", "web", "e2e"],
   "scripts": {
     "typecheck": "npm -ws --if-present run typecheck",
     "test": "npm -ws --if-present run test",
