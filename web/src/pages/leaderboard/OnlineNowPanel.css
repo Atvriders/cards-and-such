@@ -1,0 +1,6 @@
+.online-now { border: 1px solid #23233a; border-radius: 8px; padding: 1rem; min-width: 240px; max-height: 70vh; overflow-y: auto; }
+.online-now header { font-size: 1rem; margin-bottom: 0.75rem; }
+.online-now ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.online-now li { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 0.25rem 0.5rem; border-radius: 4px; }
+.online-now li:nth-child(odd) { background: #14141f; }
+.online-now .where { color: #8f8fa3; font-size: 0.8rem; }

@@ -1,0 +1,11 @@
+.leaderboard-layout { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; }
+.leaderboard-main h1 { margin-top: 0; }
+.tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.tabs button { background: transparent; color: inherit; border: 1px solid #333; border-radius: 4px; padding: 0.25rem 0.75rem; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: #2a2a42; }
+.scores { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.scores li { display: flex; justify-content: space-between; padding: 0.5rem 0.75rem; background: #14141f; border-radius: 4px; }
+.online-standalone { max-width: 420px; }
+@media (max-width: 720px) {
+  .leaderboard-layout { grid-template-columns: 1fr; }
+}
