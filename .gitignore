@@ -4,6 +4,7 @@ build/
 coverage/
 *.db
 *.db-journal
+*.tsbuildinfo
 .env
 .env.local
 .DS_Store
