@@ -1,0 +1,137 @@
+.hangman {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.hangman-figure {
+  width: 120px;
+  height: 140px;
+}
+
+.hangman-word {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.hangman-letter-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28px;
+}
+
+.hangman-letter-char {
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 36px;
+  line-height: 36px;
+  color: #222;
+}
+
+.hangman-letter-line {
+  width: 24px;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.hangman-status {
+  font-size: 1rem;
+  color: #555;
+}
+
+.hangman-keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 360px;
+}
+
+.hangman-key {
+  width: 38px;
+  height: 38px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.hangman-key:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hangman-key.correct {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.hangman-key.wrong {
+  background: #f8d7da;
+  border-color: #c82333;
+  color: #721c24;
+}
+
+.hangman-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  z-index: 10;
+}
+
+.hangman-overlay-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px 40px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.hangman-overlay-box h2 {
+  margin: 0 0 10px;
+  font-size: 1.6rem;
+}
+
+.hangman-overlay-box .hangman-target-reveal {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #333;
+  margin: 8px 0;
+}
+
+.hangman-overlay-box .hangman-score {
+  font-size: 1rem;
+  color: #555;
+}
+
+.hangman-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+  min-height: 520px;
+  width: 100%;
+}
