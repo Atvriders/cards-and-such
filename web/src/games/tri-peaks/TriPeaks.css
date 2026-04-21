@@ -1,0 +1,122 @@
+.tri-peaks-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+  min-width: 560px;
+}
+
+.tri-peaks-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #eee;
+}
+
+.tri-peaks-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.tri-peaks-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Row 0: 3 peaks with spacing between them */
+.tri-peaks-row-0 {
+  gap: 80px;
+}
+
+/* Row 1: 6 cards, grouped by peak */
+.tri-peaks-row-1 {
+  gap: 4px;
+}
+
+.tri-peaks-game .card {
+  width: 52px;
+  height: 74px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: transform 0.1s, border-color 0.1s;
+}
+
+.tri-peaks-game .card.playable {
+  cursor: pointer;
+}
+
+.tri-peaks-game .card.playable:hover {
+  transform: translateY(-4px);
+  border-color: #7eb3ff;
+}
+
+.tri-peaks-game .card.removed {
+  visibility: hidden;
+}
+
+.tri-peaks-game .card.unavailable {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.tri-peaks-bottom {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.tri-peaks-stock-area,
+.tri-peaks-current-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tri-peaks-area-label {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tri-peaks-empty-card {
+  width: 52px;
+  height: 74px;
+  border: 2px dashed #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 11px;
+}
+
+.tri-peaks-current-card .card {
+  border-color: #ffd700 !important;
+}
+
+.tri-peaks-status {
+  font-size: 16px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.tri-peaks-status.lost {
+  color: #f44336;
+}
+
+/* Row 1 peak gap styling — add space between peaks */
+.tri-peaks-row-1 .peak-gap {
+  width: 8px;
+}

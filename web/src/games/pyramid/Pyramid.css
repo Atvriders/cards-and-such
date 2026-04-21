@@ -1,0 +1,132 @@
+.pyramid-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+  min-width: 480px;
+}
+
+.pyramid-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #eee;
+}
+
+.pyramid-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pyramid-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.pyramid-cell {
+  position: relative;
+}
+
+.pyramid-game .card {
+  width: 56px;
+  height: 80px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: transform 0.1s, border-color 0.1s;
+}
+
+.pyramid-game .card.available:hover {
+  transform: translateY(-4px);
+}
+
+.pyramid-game .card.selected {
+  border-color: #ffd700 !important;
+  transform: translateY(-6px);
+}
+
+.pyramid-game .card.unavailable {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.pyramid-game .card.removed {
+  visibility: hidden;
+}
+
+.pyramid-bottom {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.pyramid-stock-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pyramid-waste-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pyramid-area-label {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pyramid-empty-card {
+  width: 56px;
+  height: 80px;
+  border: 2px dashed #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 11px;
+}
+
+.pyramid-redeal-btn {
+  padding: 6px 14px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.pyramid-redeal-btn:hover:not(:disabled) {
+  background: #444;
+}
+
+.pyramid-redeal-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pyramid-status {
+  font-size: 16px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.pyramid-status.lost {
+  color: #f44336;
+}

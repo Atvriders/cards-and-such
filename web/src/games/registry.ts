@@ -19,6 +19,8 @@ import { minesweeperPlugin } from "./minesweeper/index.js";
 import { twoFortyEightPlugin } from "./twenty-forty-eight/index.js";
 import { memoryMatchPlugin } from "./memory-match/index.js";
 import { crazyEightsPlugin } from "./crazy-eights/index.js";
+import { pyramidPlugin } from "./pyramid/index.js";
+import { triPeaksPlugin } from "./tri-peaks/index.js";
 
 export const GAMES: GamePlugin[] = [
   klondikePlugin as unknown as GamePlugin,
@@ -41,4 +43,6 @@ export const GAMES: GamePlugin[] = [
   twoFortyEightPlugin as unknown as GamePlugin,
   memoryMatchPlugin as unknown as GamePlugin,
   crazyEightsPlugin as unknown as GamePlugin,
+  pyramidPlugin as unknown as GamePlugin,
+  triPeaksPlugin as unknown as GamePlugin,
 ];
