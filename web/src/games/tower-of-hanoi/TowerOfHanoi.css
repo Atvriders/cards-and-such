@@ -1,0 +1,138 @@
+.tower-of-hanoi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.toh-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.toh-info strong { color: #333; }
+
+.toh-hint {
+  font-size: 0.85rem;
+  color: #7b4f00;
+}
+
+.toh-won {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 10px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+}
+
+.toh-pegs {
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+  padding: 12px;
+  background: #1a1a2e;
+  border-radius: 12px;
+}
+
+.toh-peg-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 8px 4px 4px;
+  transition: border-color 0.15s;
+  min-width: 120px;
+}
+
+.toh-peg-wrapper:hover {
+  border-color: rgba(255,255,255,0.25);
+}
+
+.toh-peg-wrapper.selected {
+  border-color: #f9ca24;
+}
+
+.toh-peg-label {
+  color: #a0aec0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.toh-stack {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 3px;
+  min-height: 160px;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.toh-pole {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: #718096;
+  border-radius: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toh-base {
+  width: 110px;
+  height: 10px;
+  background: #718096;
+  border-radius: 5px;
+  margin-top: 4px;
+}
+
+.toh-disk {
+  height: 22px;
+  border-radius: 11px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.6);
+  transition: width 0.1s;
+}
+
+.toh-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.toh-hint-btn {
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 2px solid #d69e2e;
+  border-radius: 8px;
+  background: transparent;
+  color: #d69e2e;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.toh-hint-btn:hover:not(:disabled) {
+  background: rgba(214, 158, 46, 0.1);
+}
+
+.toh-hint-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

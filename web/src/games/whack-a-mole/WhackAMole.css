@@ -1,0 +1,95 @@
+.whack-a-mole {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.wam-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.wam-info strong {
+  color: #333;
+}
+
+.wam-ended {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 10px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+}
+
+.wam-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.wam-hole {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: background 0.08s, transform 0.08s;
+  background: #5d4037;
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.wam-hole:focus { outline: none; }
+
+.wam-hole.empty {
+  background: #4e342e;
+  color: transparent;
+  cursor: default;
+}
+
+.wam-hole.mole {
+  background: #6d8b3a;
+  color: #fff;
+  cursor: pointer;
+  animation: pop-up 0.1s ease-out;
+}
+
+.wam-hole.mole:hover {
+  background: #558b2f;
+  transform: scale(1.05);
+}
+
+.wam-hole.mole:active {
+  transform: scale(0.92);
+}
+
+@keyframes pop-up {
+  from { transform: scale(0.6); opacity: 0.4; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.wam-timer-bar {
+  width: 280px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.wam-timer-fill {
+  height: 100%;
+  background: #e53e3e;
+  transition: width 0.1s linear;
+  border-radius: 5px;
+}

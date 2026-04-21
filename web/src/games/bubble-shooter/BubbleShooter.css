@@ -1,0 +1,111 @@
+.bubble-shooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.bs-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.bs-info strong { color: #333; }
+
+.bs-status {
+  font-size: 1.15rem;
+  font-weight: 700;
+  min-height: 1.5em;
+}
+
+.bs-status.won { color: #276749; }
+.bs-status.lost { color: #c53030; }
+
+.bs-board {
+  background: #1a1a2e;
+  border-radius: 10px;
+  padding: 8px;
+  position: relative;
+  cursor: crosshair;
+}
+
+.bs-grid {
+  display: grid;
+  gap: 2px;
+}
+
+.bs-cell {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  transition: background 0.1s;
+}
+
+.bs-cell.empty {
+  background: transparent;
+}
+
+.bs-cell.color-0 { background: #e53e3e; }
+.bs-cell.color-1 { background: #3182ce; }
+.bs-cell.color-2 { background: #38a169; }
+.bs-cell.color-3 { background: #d69e2e; }
+.bs-cell.color-4 { background: #805ad5; }
+
+.bs-shooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bs-current-bubble {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 8px rgba(255,255,255,0.4);
+}
+
+.bs-current-bubble.color-0 { background: #e53e3e; }
+.bs-current-bubble.color-1 { background: #3182ce; }
+.bs-current-bubble.color-2 { background: #38a169; }
+.bs-current-bubble.color-3 { background: #d69e2e; }
+.bs-current-bubble.color-4 { background: #805ad5; }
+
+.bs-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.bs-aim-label {
+  font-size: 0.85rem;
+  color: #555;
+  width: 90px;
+  text-align: right;
+}
+
+.bs-aim-slider {
+  width: 180px;
+}
+
+.bs-shoot-btn {
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #e53e3e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.bs-shoot-btn:hover:not(:disabled) { background: #c53030; }
+.bs-shoot-btn:disabled { background: #a0aec0; cursor: default; }

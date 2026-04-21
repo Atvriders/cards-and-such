@@ -73,6 +73,12 @@ import { roulettePlugin } from "./roulette/index.js";
 import { crapsPlugin } from "./craps/index.js";
 import { slotsPlugin } from "./slots/index.js";
 import { caribbeanStudPlugin } from "./caribbean-stud/index.js";
+import { whackAMolePlugin } from "./whack-a-mole/index.js";
+import { plinkoPlugin } from "./plinko/index.js";
+import { bubbleShooterPlugin } from "./bubble-shooter/index.js";
+import { towerOfHanoiPlugin } from "./tower-of-hanoi/index.js";
+import { reactionTimePlugin } from "./reaction-time/index.js";
+import { simonPlugin } from "./simon/index.js";
 
 export const GAMES: GamePlugin[] = [
   yachtPlugin as unknown as GamePlugin,
@@ -149,4 +155,10 @@ export const GAMES: GamePlugin[] = [
   crapsPlugin as unknown as GamePlugin,
   slotsPlugin as unknown as GamePlugin,
   caribbeanStudPlugin as unknown as GamePlugin,
+  whackAMolePlugin as unknown as GamePlugin,
+  plinkoPlugin as unknown as GamePlugin,
+  bubbleShooterPlugin as unknown as GamePlugin,
+  towerOfHanoiPlugin as unknown as GamePlugin,
+  reactionTimePlugin as unknown as GamePlugin,
+  simonPlugin as unknown as GamePlugin,
 ];
