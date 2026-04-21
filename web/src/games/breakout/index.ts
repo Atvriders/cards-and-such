@@ -27,6 +27,13 @@ export const breakoutPlugin: GamePlugin<BreakoutState, BreakoutAction, typeof br
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Brick-breaker. Bounce the ball, destroy all bricks, don't let it fall.",
+  howToPlay: `Destroy every brick by bouncing the ball off your paddle without letting it fall past the bottom.
+
+Move the paddle left and right using the mouse, or press the arrow keys / A and D. Press Space to release the ball at the start of a round and to pause mid-game. The ball bounces off the walls, the ceiling, and the paddle. Where the ball hits the paddle affects its angle — hitting the edge sends it off at a steeper angle, giving you directional control. Each brick destroyed earns 10 points. You have 3 lives; losing a life resets the ball to the paddle.
+
+Score accumulates from brick hits. Clearing all bricks wins the level and adds a lives × 100 bonus. Difficulty controls ball speed (easy, medium, hard). Brick rows can be set to 3, 5, or 7 — more rows means more bricks and a longer game.
+
+Tips: Keep the ball away from the sides where it can get trapped in a fast diagonal loop. Aim toward brick clusters near the top to break through and let the ball bounce inside the remaining wall for multiple hits. Never let the paddle stop moving — anticipate the ball's trajectory rather than reacting late.`,
   settings: breakoutSettings,
   initialState: (seed: number, settings: BreakoutSettingsType) => initialState(seed, settings),
   reducer,

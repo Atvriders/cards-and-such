@@ -32,6 +32,13 @@ export const snakePlugin: GamePlugin<SnakeState, SnakeAction, typeof snakeSettin
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Classic Snake. Eat food, grow, don't hit yourself.",
+  howToPlay: `Guide the snake to eat food and grow as long as possible without crashing.
+
+Use the arrow keys or WASD to turn the snake. Press Space to pause and resume. Each time the snake eats the red food tile it grows by one segment and a new food tile appears elsewhere on the grid. The game ends immediately if the snake runs into a wall or its own body.
+
+Score equals the current length of the snake — the longer you survive, the higher your score. The grid can be set to 15×15, 20×20, or 25×25. Speed can be slow, medium, or fast. Enable "Walls wrap around" to let the snake pass through walls and emerge on the opposite side, removing the wall-collision threat entirely.
+
+Tips: Plan your path ahead, especially at higher speeds. Favor looping paths that keep the center of the board open. On large grids at slow speed, focus on building length first before attempting riskier maneuvers near your own tail.`,
   settings: snakeSettings,
   initialState: (seed: number, settings: SnakeSettingsType) => initialState(seed, settings),
   reducer,
