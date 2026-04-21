@@ -79,6 +79,12 @@ import { bubbleShooterPlugin } from "./bubble-shooter/index.js";
 import { towerOfHanoiPlugin } from "./tower-of-hanoi/index.js";
 import { reactionTimePlugin } from "./reaction-time/index.js";
 import { simonPlugin } from "./simon/index.js";
+import { ginRummyPlugin } from "./gin-rummy/index.js";
+import { spadesPlugin } from "./spades/index.js";
+import { euchrePlugin } from "./euchre/index.js";
+import { rummy500Plugin } from "./rummy-500/index.js";
+import { casinoPlugin } from "./casino/index.js";
+import { fiveCrownsPlugin } from "./five-crowns/index.js";
 
 export const GAMES: GamePlugin[] = [
   yachtPlugin as unknown as GamePlugin,
@@ -161,4 +167,10 @@ export const GAMES: GamePlugin[] = [
   towerOfHanoiPlugin as unknown as GamePlugin,
   reactionTimePlugin as unknown as GamePlugin,
   simonPlugin as unknown as GamePlugin,
+  ginRummyPlugin as unknown as GamePlugin,
+  spadesPlugin as unknown as GamePlugin,
+  euchrePlugin as unknown as GamePlugin,
+  rummy500Plugin as unknown as GamePlugin,
+  casinoPlugin as unknown as GamePlugin,
+  fiveCrownsPlugin as unknown as GamePlugin,
 ];
