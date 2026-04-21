@@ -9,10 +9,12 @@ import { blackjackPlugin } from "./blackjack/index.js";
 import { videoPokerPlugin } from "./video-poker/index.js";
 import { connect4Plugin } from "./connect-4/index.js";
 import { unoLikePlugin } from "./uno-like/index.js";
+import { spiderPlugin } from "./spider/index.js";
 
 export const GAMES: GamePlugin[] = [
   klondikePlugin as unknown as GamePlugin,
   freecellPlugin as unknown as GamePlugin,
+  spiderPlugin as unknown as GamePlugin,
   yahtzeePlugin as unknown as GamePlugin,
   farklePlugin as unknown as GamePlugin,
   ticTacToePlugin as unknown as GamePlugin,
