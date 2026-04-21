@@ -1,0 +1,8 @@
+.shed-hand { display: flex; padding: 1rem 0.5rem; min-height: 100px; }
+.shed-hand-card { transition: transform 0.1s; cursor: pointer; }
+.shed-hand-card:hover, .shed-hand-card.selected { transform: translateY(-12px); }
+.shed-hand-back {
+  width: 60px; height: 84px; border-radius: 6px;
+  background: linear-gradient(135deg, #4040a8 0%, #2a2a6a 100%);
+  border: 1px solid #1a1a3a;
+}
