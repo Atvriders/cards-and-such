@@ -1,0 +1,19 @@
+# CI-only override — adds local build capability back on top of the
+# pull-only docker-compose.yml. Used by the e2e CI job to exercise the
+# current source tree without pulling the previous commit's image.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
+
+services:
+  server:
+    pull_policy: build
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+
+  web:
+    pull_policy: build
+    build:
+      context: .
+      dockerfile: web/Dockerfile

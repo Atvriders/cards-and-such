@@ -1,10 +1,7 @@
 services:
   server:
     image: ghcr.io/atvriders/cards-and-such-server:${IMAGE_TAG:-latest}
-    pull_policy: missing
-    build:
-      context: .
-      dockerfile: server/Dockerfile
+    pull_policy: always
     restart: unless-stopped
     environment:
       JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me-please-32ch}
@@ -24,10 +21,7 @@ services:
 
   web:
     image: ghcr.io/atvriders/cards-and-such-web:${IMAGE_TAG:-latest}
-    pull_policy: missing
-    build:
-      context: .
-      dockerfile: web/Dockerfile
+    pull_policy: always
     restart: unless-stopped
     ports:
       - "${WEB_PORT:-8080}:80"

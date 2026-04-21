@@ -30,11 +30,19 @@ the full Phase 1 design.
 ```bash
 npm install
 cp .env.example .env             # then fill in JWT_SECRET (openssl rand -hex 32)
-docker compose up -d             # pulls pre-built images from GHCR on first run; uses local cache after
-docker compose pull              # refresh to the latest published image
-docker compose up -d --build     # rebuild images locally instead of pulling
+docker compose up -d             # pulls the latest prebuilt images from GHCR and runs them
 curl http://127.0.0.1:8080/api/health
 # then open http://127.0.0.1:8080/
+```
+
+The stack is pull-only — `docker-compose.yml` has no `build:` sections.
+Every `docker compose up` pulls the latest `ghcr.io/atvriders/cards-and-such-{server,web}:latest`
+images. To pin a specific version, set `IMAGE_TAG=sha-<short>` in `.env`.
+
+### Building locally (only if you're changing server/web source)
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
 ```
 
 Every deploy-dependent value (secret, CORS origin, ports, image tag) is
