@@ -1,0 +1,15 @@
+.play-online-page { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+.play-online-page header { display: flex; justify-content: space-between; align-items: baseline; }
+.play-online-page header h1 { margin: 0; }
+.play-online-page .link-local { color: #8f8fa3; text-decoration: none; }
+.play-online-page .link-local:hover { color: #c6c6d8; }
+.option { background: #14141f; border: 1px solid #23233a; border-radius: 8px; padding: 1.25rem 1.5rem; }
+.option h2 { margin: 0 0 0.25rem; font-size: 1.1rem; }
+.option p { margin: 0 0 0.75rem; color: #8f8fa3; font-size: 0.9rem; }
+.option button { padding: 0.6rem 1.25rem; border-radius: 6px; border: 0; background: #5a5af2; color: white; font-weight: 600; cursor: pointer; }
+.option button[disabled] { opacity: 0.5; cursor: default; }
+.join-row { display: flex; gap: 0.5rem; }
+.join-row input { flex: 1; padding: 0.6rem; border-radius: 6px; border: 1px solid #333; background: #16161e; color: inherit; font-size: 1.2rem; letter-spacing: 0.3em; text-transform: uppercase; }
+.play-online-missing { text-align: center; padding: 4rem 1rem; color: #8f8fa3; }
+.play-online-room { text-align: center; padding: 4rem 1rem; color: #8f8fa3; }
+.error { color: #ff7070; }

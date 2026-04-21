@@ -36,6 +36,9 @@ export default function LobbyPage(): JSX.Element {
               <Link key={g.id} to={`/play/${g.id}`} className="tile" data-testid={`tile-${g.id}`}>
                 <div className="tile-title">{g.title}</div>
                 <div className="tile-desc">{g.description}</div>
+                {g.players.multiplayer && (
+                  <span className="tile-mp-badge" data-testid={`mp-badge-${g.id}`}>online</span>
+                )}
               </Link>
             ))}
           </div>

@@ -7,3 +7,4 @@
 .tile-title { font-weight: 600; margin-bottom: 0.25rem; }
 .tile-desc { font-size: 0.85rem; color: #8f8fa3; }
 .lobby-empty { text-align: center; padding: 4rem 1rem; color: #8f8fa3; }
+.tile-mp-badge { display: inline-block; margin-top: 0.5rem; background: #2a2a5a; color: #c4c4f2; border-radius: 3px; padding: 0.15rem 0.4rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }

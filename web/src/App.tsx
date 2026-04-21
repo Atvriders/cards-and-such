@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage.js";
 import LobbyPage from "./pages/LobbyPage.js";
 import PlayPage from "./pages/PlayPage.js";
 import LeaderboardPage from "./pages/LeaderboardPage.js";
+import PlayOnlinePage from "./pages/PlayOnlinePage.js";
 
 export default function App(): JSX.Element {
   return (
@@ -13,6 +14,8 @@ export default function App(): JSX.Element {
       <Route element={<RequireAuth><AppShell /></RequireAuth>}>
         <Route path="/" element={<LobbyPage />} />
         <Route path="/play/:gameId" element={<PlayPage />} />
+        <Route path="/play/:gameId/online" element={<PlayOnlinePage />} />
+        <Route path="/play/:gameId/online/:roomId" element={<PlayOnlinePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
