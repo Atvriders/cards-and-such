@@ -7,6 +7,7 @@ import PlayPage from "./pages/PlayPage.js";
 import LeaderboardPage from "./pages/LeaderboardPage.js";
 import PlayOnlinePage from "./pages/PlayOnlinePage.js";
 import Connect4Online from "./games/connect-4/Connect4Online.js";
+import UnoLikeOnline from "./games/uno-like/UnoLikeOnline.js";
 
 export default function App(): JSX.Element {
   return (
@@ -17,6 +18,7 @@ export default function App(): JSX.Element {
         <Route path="/play/:gameId" element={<PlayPage />} />
         <Route path="/play/:gameId/online" element={<PlayOnlinePage />} />
         <Route path="/play/connect-4/online/:roomId" element={<Connect4Online />} />
+        <Route path="/play/uno-like/online/:roomId" element={<UnoLikeOnline />} />
         <Route path="/play/:gameId/online/:roomId" element={<PlayOnlinePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Route>
