@@ -3,6 +3,7 @@ import cors from "@fastify/cors";
 import { loadConfig, type Config } from "./config.js";
 import { openDb, type Db } from "./db/index.js";
 import { registerAuthRoutes } from "./auth/routes.js";
+import { registerRateLimit } from "./http/plugins.js";
 
 declare module "fastify" {
   interface FastifyInstance {
@@ -21,6 +22,7 @@ export async function buildApp(config = loadConfig()): Promise<FastifyInstance> 
 
   await app.register(cors, { origin: config.CORS_ORIGIN, credentials: true });
 
+  await registerRateLimit(app);
   await registerAuthRoutes(app);
 
   app.get("/health", async () => ({ ok: true }));

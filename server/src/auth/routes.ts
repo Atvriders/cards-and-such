@@ -7,6 +7,9 @@ import {
 } from "@cards/shared";
 import { createJwt } from "./jwt.js";
 
+const CLAIM_LIMIT = { max: 20, timeWindow: "1 hour" };
+const RESUME_LIMIT = { max: 60, timeWindow: "1 hour" };
+
 export async function registerAuthRoutes(app: FastifyInstance): Promise<void> {
   const jwt = createJwt(app.config.JWT_SECRET);
   const insertUser = app.db.prepare(
@@ -16,7 +19,7 @@ export async function registerAuthRoutes(app: FastifyInstance): Promise<void> {
     "SELECT username FROM users WHERE username = ?",
   );
 
-  app.post("/auth/claim", async (req, reply) => {
+  app.post("/auth/claim", { config: { rateLimit: CLAIM_LIMIT } }, async (req, reply) => {
     const parsed = ClaimRequestSchema.safeParse(req.body);
     if (!parsed.success) {
       return reply.code(400).send({ error: parsed.error.errors[0]?.message ?? "bad_request" });
@@ -30,7 +33,7 @@ export async function registerAuthRoutes(app: FastifyInstance): Promise<void> {
     return AuthResponseSchema.parse(body);
   });
 
-  app.post("/auth/resume", async (req, reply) => {
+  app.post("/auth/resume", { config: { rateLimit: RESUME_LIMIT } }, async (req, reply) => {
     const parsed = ResumeRequestSchema.safeParse(req.body);
     if (!parsed.success) {
       return reply.code(400).send({ error: parsed.error.errors[0]?.message ?? "bad_request" });

@@ -40,4 +40,18 @@ describe("auth routes", () => {
     const res = await app.inject({ method: "POST", url: "/auth/resume", payload: { username: "ghost" } });
     expect(res.statusCode).toBe(404);
   });
+
+  it("claim rate-limits after 20 attempts per IP/hour", async () => {
+    for (let i = 0; i < 20; i++) {
+      await app.inject({
+        method: "POST", url: "/auth/claim",
+        payload: { username: `user${i}` },
+      });
+    }
+    const res = await app.inject({
+      method: "POST", url: "/auth/claim",
+      payload: { username: "user-over-limit" },
+    });
+    expect(res.statusCode).toBe(429);
+  });
 });
