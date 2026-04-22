@@ -1,0 +1,43 @@
+.maze-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.maze-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.maze-board {
+  position: relative;
+  background: #000;
+  border: 2px solid #222;
+  overflow: hidden;
+}
+
+.maze-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.maze-overlay h2 { margin: 0; font-size: 1.6rem; }
+.maze-overlay p { margin: 0; font-size: 1.1rem; }
+
+.maze-hint {
+  font-size: 0.8rem;
+  color: #888;
+}

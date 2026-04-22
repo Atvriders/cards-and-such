@@ -1,0 +1,81 @@
+.bouncer-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.bouncer-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.bouncer-playfield {
+  position: relative;
+  background: #111;
+  border: 2px solid #444;
+  overflow: hidden;
+  cursor: none;
+}
+
+.bouncer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.bouncer-overlay h2 { margin: 0; font-size: 1.6rem; }
+.bouncer-overlay p { margin: 0; font-size: 1.1rem; }
+
+.bouncer-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.bouncer-controls button {
+  padding: 7px 18px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: #fff;
+}
+
+.bouncer-controls button:hover {
+  background: #e8e8e8;
+}
+
+.bouncer-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+.bouncer-lives {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.bouncer-life {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.bouncer-life--lost {
+  background: #444;
+}

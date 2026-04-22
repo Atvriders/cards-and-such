@@ -1,0 +1,52 @@
+.mc-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.mc-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ddd;
+}
+
+.mc-canvas {
+  position: relative;
+  background: #0a0a1a;
+  border: 2px solid #334;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.mc-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  gap: 12px;
+}
+
+.mc-overlay h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.mc-overlay p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.mc-hint {
+  font-size: 0.8rem;
+  color: #888;
+}

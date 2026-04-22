@@ -138,6 +138,12 @@ import { rushHourPlugin } from "./rush-hour/index.js";
 import { sokobanPlugin } from "./sokoban/index.js";
 import { unrulyPlugin } from "./unruly/index.js";
 import { starBattlePlugin } from "./star-battle/index.js";
+import { missileCommandPlugin } from "./missile-command-like/index.js";
+import { mazeChasePlugin } from "./maze-chase/index.js";
+import { climbJumperPlugin } from "./climb-jumper/index.js";
+import { gravityLanderPlugin } from "./gravity-lander/index.js";
+import { endlessRunnerPlugin } from "./endless-runner/index.js";
+import { bouncerPlugin } from "./bouncer/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -279,4 +285,10 @@ export const GAMES: GamePlugin[] = [
   sokobanPlugin as unknown as GamePlugin,
   unrulyPlugin as unknown as GamePlugin,
   starBattlePlugin as unknown as GamePlugin,
+  missileCommandPlugin as unknown as GamePlugin,
+  mazeChasePlugin as unknown as GamePlugin,
+  climbJumperPlugin as unknown as GamePlugin,
+  gravityLanderPlugin as unknown as GamePlugin,
+  endlessRunnerPlugin as unknown as GamePlugin,
+  bouncerPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,65 @@
+.runner-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.runner-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.runner-canvas {
+  position: relative;
+  background: #e8f4ff;
+  border: 2px solid #aac;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.runner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.runner-overlay h2 { margin: 0; font-size: 1.6rem; }
+.runner-overlay p { margin: 0; font-size: 1.1rem; }
+
+.runner-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.runner-btn {
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid #aac;
+  background: #dde;
+  touch-action: none;
+}
+
+.runner-btn:active {
+  background: #bbc;
+}
+
+.runner-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
