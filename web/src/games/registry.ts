@@ -101,6 +101,14 @@ import { ticTacToe3DPlugin } from "./tictactoe-3d/index.js";
 import { numberGuesserPlugin } from "./number-guesser/index.js";
 import { bingoPlugin } from "./bingo/index.js";
 import { coinFlipStreakPlugin } from "./coin-flip-streak/index.js";
+import { spiderettePlugin } from "./spiderette/index.js";
+import { eightOffPlugin } from "./eight-off/index.js";
+import { missMilliganPlugin } from "./miss-milligan/index.js";
+import { crescentPlugin } from "./crescent/index.js";
+import { gatePlugin } from "./gate/index.js";
+import { yukonCellsPlugin } from "./yukon-cells/index.js";
+import { whiteheadPlugin } from "./whitehead/index.js";
+import { slyFoxPlugin } from "./sly-fox/index.js";
 
 export const GAMES: GamePlugin[] = [
   accordionPlugin as unknown as GamePlugin,
@@ -205,4 +213,12 @@ export const GAMES: GamePlugin[] = [
   numberGuesserPlugin as unknown as GamePlugin,
   bingoPlugin as unknown as GamePlugin,
   coinFlipStreakPlugin as unknown as GamePlugin,
+  spiderettePlugin as unknown as GamePlugin,
+  eightOffPlugin as unknown as GamePlugin,
+  missMilliganPlugin as unknown as GamePlugin,
+  crescentPlugin as unknown as GamePlugin,
+  gatePlugin as unknown as GamePlugin,
+  yukonCellsPlugin as unknown as GamePlugin,
+  whiteheadPlugin as unknown as GamePlugin,
+  slyFoxPlugin as unknown as GamePlugin,
 ];

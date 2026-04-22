@@ -1,0 +1,85 @@
+import { useCallback } from "react";
+import type { GameProps } from "../../platform/game-plugin/types.js";
+import type { SpideretteState, SpideretteAction, SpideretteSettings } from "./state.js";
+import { spideretteRuleset } from "./state.js";
+import { Pile } from "../../engines/tableau/Pile.js";
+import { useDragDrop } from "../../engines/tableau/useDragDrop.js";
+import { findAutoMove } from "../../engines/tableau/index.js";
+import "./Spiderette.css";
+
+export function Spiderette({
+  state,
+  dispatch,
+  onGameOver,
+}: GameProps<SpideretteState, SpideretteSettings>): JSX.Element {
+  const { onDragStart, onDragOver, onDrop } = useDragDrop();
+
+  const handleMove = useCallback(
+    (from: string, to: string, count: number) => {
+      dispatch({ type: "move", fromPile: from, toPile: to, count } as SpideretteAction);
+    },
+    [dispatch],
+  );
+
+  const handleCardClick = useCallback(
+    (pileId: string, indexFromTop: number) => {
+      const pile = state.piles.find((p) => p.id === pileId);
+      if (!pile) return;
+      const faceUpCount = pile.kind === "tableau" ? (pile.faceUpCount ?? 0) : pile.cards.length;
+      const count = indexFromTop + 1;
+      if (count > faceUpCount) return;
+      const target = findAutoMove(state.piles, pileId, count, spideretteRuleset);
+      if (target) {
+        dispatch({ type: "move", fromPile: pileId, toPile: target, count } as SpideretteAction);
+      }
+    },
+    [state.piles, dispatch],
+  );
+
+  const handleStockClick = useCallback(() => {
+    dispatch({ type: "deal-row" } as SpideretteAction);
+  }, [dispatch]);
+
+  if (state.won) onGameOver(state.score);
+
+  const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
+  const stock = getPile("stock");
+  const dealsRemaining = stock ? Math.floor(stock.cards.length / 7) : 0;
+
+  return (
+    <div className="spiderette">
+      <div className="spiderette-info">
+        <span>Moves: {state.movesMade}</span>
+        <span>Score: {state.score}</span>
+        <span>Suits: {state.completedSuits}/4</span>
+        <span>Deals left: {dealsRemaining}</span>
+      </div>
+
+      <div className="spiderette-top-row">
+        <div className="pile-wrapper stock-wrapper" onClick={handleStockClick}>
+          <Pile
+            pile={getPile("stock")}
+            onCardDragStart={onDragStart}
+            onDrop={(pileId) => onDrop(pileId, handleMove)}
+            onDragOver={onDragOver}
+          />
+        </div>
+        <div className="spiderette-spacer" />
+      </div>
+
+      <div className="spiderette-tableau-row">
+        {["t1", "t2", "t3", "t4", "t5", "t6", "t7"].map((id) => (
+          <div key={id} className="pile-wrapper">
+            <Pile
+              pile={getPile(id)}
+              onCardDragStart={onDragStart}
+              onDrop={(pileId) => onDrop(pileId, handleMove)}
+              onDragOver={onDragOver}
+              onCardClick={handleCardClick}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

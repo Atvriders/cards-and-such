@@ -1,0 +1,65 @@
+.crescent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.crescent-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.redeal-btn,
+.auto-move-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.redeal-btn:hover:not(:disabled),
+.auto-move-btn:hover {
+  background: #444;
+}
+
+.redeal-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.crescent-foundations {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.crescent-foundation-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.foundation-label {
+  font-size: 12px;
+  color: #aaa;
+  margin-right: 4px;
+}
+
+.crescent-tableau {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}

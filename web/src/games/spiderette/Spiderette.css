@@ -1,0 +1,39 @@
+.spiderette {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.spiderette-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.spiderette-top-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.spiderette-spacer {
+  flex: 1;
+}
+
+.spiderette-tableau-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper {
+  cursor: pointer;
+}

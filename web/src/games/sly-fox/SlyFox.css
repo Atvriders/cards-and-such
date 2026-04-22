@@ -1,0 +1,58 @@
+.sly-fox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.sly-fox-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sly-fox-main {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.sly-fox-tableau {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sly-fox-row {
+  display: flex;
+  gap: 6px;
+}
+
+.sly-fox-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sly-fox-foundations {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sly-fox-stock-area {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper {
+  cursor: pointer;
+}
