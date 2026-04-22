@@ -262,6 +262,14 @@ import { tressettePlugin } from "./tressette/index.js";
 import { schnapsenPlugin } from "./schnapsen/index.js";
 import { mariagePlugin } from "./mariage/index.js";
 import { preferansPlugin } from "./preferans/index.js";
+import { choHanPlugin } from "./cho-han/index.js";
+import { acesInThePotPlugin } from "./aces-in-the-pot/index.js";
+import { safeKeeperPlugin } from "./safe-keeper/index.js";
+import { underOver7Plugin } from "./under-over-7/index.js";
+import { bossDicePlugin } from "./boss-dice/index.js";
+import { fiveDiceShootoutPlugin } from "./five-dice-shootout/index.js";
+import { centennialPlugin } from "./centennial/index.js";
+import { gluckshausPlugin } from "./gluckshaus/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -527,4 +535,12 @@ export const GAMES: GamePlugin[] = [
   schnapsenPlugin as unknown as GamePlugin,
   mariagePlugin as unknown as GamePlugin,
   preferansPlugin as unknown as GamePlugin,
+  choHanPlugin as unknown as GamePlugin,
+  acesInThePotPlugin as unknown as GamePlugin,
+  safeKeeperPlugin as unknown as GamePlugin,
+  underOver7Plugin as unknown as GamePlugin,
+  bossDicePlugin as unknown as GamePlugin,
+  fiveDiceShootoutPlugin as unknown as GamePlugin,
+  centennialPlugin as unknown as GamePlugin,
+  gluckshausPlugin as unknown as GamePlugin,
 ];

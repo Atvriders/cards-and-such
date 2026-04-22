@@ -1,0 +1,20 @@
+.fds { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 16px; font-family: sans-serif; }
+.fds h2 { margin: 0; }
+.fds-info { display: flex; gap: 24px; font-size: 1.1rem; }
+.fds-message { background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px; padding: 10px 16px; text-align: center; max-width: 460px; }
+.fds-btn { padding: 10px 24px; font-size: 1rem; cursor: pointer; border-radius: 6px; border: 1px solid #555; background: #fff; }
+.fds-btn:hover { background: #e8f4e8; }
+.fds-rolls { display: flex; gap: 40px; justify-content: center; }
+.fds-player-roll, .fds-bot-roll { text-align: center; }
+.fds-player-roll h4, .fds-bot-roll h4 { margin: 0 0 4px; }
+.fds-dice { font-size: 1.6rem; display: flex; gap: 4px; justify-content: center; }
+.fds-sum { font-size: 1.1rem; font-weight: bold; }
+.fds-table { border-collapse: collapse; width: 100%; max-width: 420px; }
+.fds-table th, .fds-table td { border: 1px solid #ccc; padding: 5px 10px; text-align: center; }
+.fds-table th { background: #f0f0f0; }
+.fds-table .win-row td { background: #e8ffe8; }
+.fds-table .loss-row td { background: #ffe8e8; }
+.fds-game-over { font-size: 1.4rem; font-weight: bold; padding: 10px 24px; border-radius: 8px; }
+.fds-game-over.win { color: #2a7a2a; background: #e8ffe8; }
+.fds-game-over.loss { color: #7a2a2a; background: #ffe8e8; }
+.fds-game-over.tie { color: #555; background: #f0f0f0; }

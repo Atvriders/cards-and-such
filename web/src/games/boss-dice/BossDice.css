@@ -1,0 +1,19 @@
+.boss { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 16px; font-family: sans-serif; }
+.boss h2 { margin: 0; }
+.boss-info { display: flex; gap: 24px; font-size: 1.1rem; }
+.boss-sequence { display: flex; gap: 12px; font-size: 1.1rem; }
+.boss-seq-item { padding: 4px 10px; border-radius: 6px; border: 2px solid #ddd; background: #f5f5f5; }
+.boss-seq-item.locked { border-color: #2a7a2a; background: #e8ffe8; color: #2a7a2a; font-weight: bold; }
+.boss-dice-row { display: flex; gap: 8px; }
+.boss-die { font-size: 2rem; }
+.boss-die.kept { opacity: 0.5; }
+.boss-message { background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px; padding: 10px 16px; text-align: center; max-width: 460px; }
+.boss-buttons { display: flex; gap: 12px; }
+.boss-btn { padding: 10px 24px; font-size: 1rem; cursor: pointer; border-radius: 6px; border: 1px solid #555; background: #fff; }
+.boss-btn:hover { background: #e8f4e8; }
+.boss-btn:disabled { opacity: 0.4; cursor: default; }
+.boss-scores { display: flex; gap: 20px; font-size: 0.95rem; }
+.boss-game-over { font-size: 1.4rem; font-weight: bold; padding: 10px 24px; border-radius: 8px; }
+.boss-game-over.win { color: #2a7a2a; background: #e8ffe8; }
+.boss-game-over.loss { color: #7a2a2a; background: #ffe8e8; }
+.boss-game-over.tie { color: #555; background: #f0f0f0; }

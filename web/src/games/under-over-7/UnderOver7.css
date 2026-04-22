@@ -1,0 +1,16 @@
+.uo7 { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 16px; font-family: sans-serif; }
+.uo7 h2 { margin: 0; }
+.uo7-info { display: flex; gap: 24px; font-size: 1.1rem; }
+.uo7-message { background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px; padding: 10px 16px; text-align: center; max-width: 460px; }
+.uo7-buttons { display: flex; gap: 12px; }
+.uo7-btn { padding: 10px 24px; font-size: 1rem; cursor: pointer; border-radius: 6px; border: 1px solid #555; background: #fff; }
+.uo7-btn:hover { background: #e8f4e8; }
+.uo7-btn.under { border-color: #3a6bc4; color: #3a6bc4; }
+.uo7-btn.seven { border-color: #c47a3a; color: #c47a3a; font-weight: bold; }
+.uo7-btn.over { border-color: #c43a3a; color: #c43a3a; }
+.uo7-dice { font-size: 2rem; display: flex; gap: 8px; align-items: center; }
+.uo7-result { font-size: 1.3rem; font-weight: bold; padding: 8px 20px; border-radius: 8px; }
+.uo7-result.win { color: #2a7a2a; background: #e8ffe8; }
+.uo7-result.loss { color: #7a2a2a; background: #ffe8e8; }
+.uo7-game-over { font-size: 1.4rem; font-weight: bold; padding: 10px 24px; border-radius: 8px; background: #f0f0f0; }
+.uo7-odds { font-size: 0.85rem; color: #666; }
