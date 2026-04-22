@@ -1,0 +1,97 @@
+.crew {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  font-family: system-ui, sans-serif;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.crew-mission {
+  background: #f0f4ff;
+  border: 1px solid #c0d0ff;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.crew-trick-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.crew-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+.crew-card {
+  width: 44px;
+  height: 62px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+.crew-card--red { border-color: #e74c3c; color: #e74c3c; }
+.crew-card--yellow { border-color: #f1c40f; color: #b7950b; }
+.crew-card--green { border-color: #27ae60; color: #27ae60; }
+.crew-card--blue { border-color: #2980b9; color: #2980b9; }
+.crew-card--rocket { border-color: #8e44ad; color: #8e44ad; }
+.crew-card--empty { border-style: dashed; border-color: #ccc; background: #f9f9f9; color: #ccc; }
+
+.crew-card--clickable {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.crew-card--clickable:hover { transform: translateY(-4px); }
+.crew-card--selected { outline: 3px solid #f39c12; }
+.crew-card--task { background: #fffde7; }
+
+.crew-hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.crew-section h3 {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.crew-log {
+  max-height: 70px;
+  overflow-y: auto;
+  font-size: 0.75rem;
+  color: #666;
+  width: 100%;
+  border: 1px solid #eee;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.crew-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.crew-status--won { color: #27ae60; }
+.crew-status--lost { color: #e74c3c; }

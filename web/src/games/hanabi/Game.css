@@ -1,0 +1,189 @@
+.hanabi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  font-family: system-ui, sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hanabi-tokens {
+  display: flex;
+  gap: 16px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.hanabi-fireworks {
+  display: flex;
+  gap: 8px;
+}
+
+.hanabi-fw {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.hanabi-fw-bar {
+  width: 32px;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hanabi-fw-fill {
+  width: 100%;
+  transition: height 0.3s;
+}
+
+.hanabi-color-red .hanabi-fw-fill { background: #e74c3c; }
+.hanabi-color-yellow .hanabi-fw-fill { background: #f1c40f; }
+.hanabi-color-green .hanabi-fw-fill { background: #27ae60; }
+.hanabi-color-blue .hanabi-fw-fill { background: #2980b9; }
+.hanabi-color-white .hanabi-fw-fill { background: #bdc3c7; }
+
+.hanabi-section {
+  width: 100%;
+}
+
+.hanabi-section h3 {
+  font-size: 0.9rem;
+  margin: 0 0 6px 0;
+  color: #555;
+}
+
+.hanabi-hand {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.hanabi-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 72px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s;
+  background: white;
+}
+
+.hanabi-card:hover {
+  transform: translateY(-4px);
+}
+
+.hanabi-card--selected {
+  outline: 3px solid #f39c12;
+  transform: translateY(-6px);
+}
+
+.hanabi-card-color-red { border-color: #e74c3c; color: #e74c3c; }
+.hanabi-card-color-yellow { border-color: #f1c40f; color: #b7950b; background: #fef9e7; }
+.hanabi-card-color-green { border-color: #27ae60; color: #27ae60; }
+.hanabi-card-color-blue { border-color: #2980b9; color: #2980b9; }
+.hanabi-card-color-white { border-color: #999; color: #555; background: #f8f8f8; }
+
+.hanabi-card--back {
+  background: #34495e;
+  border-color: #2c3e50;
+  color: white;
+  font-size: 1rem;
+}
+
+.hanabi-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hanabi-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #3498db;
+  color: white;
+  font-weight: bold;
+}
+.hanabi-btn:hover { background: #2980b9; }
+.hanabi-btn:disabled { background: #bdc3c7; cursor: default; }
+.hanabi-btn--danger { background: #e74c3c; }
+.hanabi-btn--danger:hover { background: #c0392b; }
+
+.hanabi-clue-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.hanabi-clue-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.hanabi-clue-btn {
+  padding: 4px 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  cursor: pointer;
+  background: white;
+  font-size: 0.82rem;
+}
+.hanabi-clue-btn:hover { background: #eee; }
+.hanabi-clue-btn--selected { background: #3498db; color: white; border-color: #2980b9; }
+
+.hanabi-log {
+  width: 100%;
+  max-height: 80px;
+  overflow-y: auto;
+  font-size: 0.78rem;
+  color: #666;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 6px;
+  background: #fafafa;
+}
+
+.hanabi-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 8px;
+}
+
+.hanabi-overlay h2 { font-size: 2rem; margin: 0 0 8px; }
+.hanabi-overlay p { font-size: 1.2rem; margin: 0; }
+
+.hanabi-wrap { position: relative; }

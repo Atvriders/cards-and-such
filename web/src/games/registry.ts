@@ -192,6 +192,14 @@ import { ligrettoPlugin } from "./ligretto/index.js";
 import { spitPlugin } from "./spit/index.js";
 import { californiaSpeedPlugin } from "./california-speed/index.js";
 import { kempsPlugin } from "./kemps/index.js";
+import { hanabiPlugin } from "./hanabi/index.js";
+import { theCrewPlugin } from "./the-crew/index.js";
+import { justOnePlugin } from "./just-one/index.js";
+import { codenamesLitePlugin } from "./codenames-lite/index.js";
+import { spotItPlugin } from "./spot-it/index.js";
+import { setGamePlugin } from "./set-game/index.js";
+import { tangramPlugin } from "./tangram/index.js";
+import { chainReactionPlugin } from "./chain-reaction/index.js";
 
 export const GAMES: GamePlugin[] = [
   chessPlugin as unknown as GamePlugin,
@@ -387,4 +395,12 @@ export const GAMES: GamePlugin[] = [
   spitPlugin as unknown as GamePlugin,
   californiaSpeedPlugin as unknown as GamePlugin,
   kempsPlugin as unknown as GamePlugin,
+  hanabiPlugin as unknown as GamePlugin,
+  theCrewPlugin as unknown as GamePlugin,
+  justOnePlugin as unknown as GamePlugin,
+  codenamesLitePlugin as unknown as GamePlugin,
+  spotItPlugin as unknown as GamePlugin,
+  setGamePlugin as unknown as GamePlugin,
+  tangramPlugin as unknown as GamePlugin,
+  chainReactionPlugin as unknown as GamePlugin,
 ];
