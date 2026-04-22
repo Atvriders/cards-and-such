@@ -224,6 +224,12 @@ import { sultanPlugin } from "./sultan-of-turkey/index.js";
 import { grandfathersClockPlugin } from "./grandfathers-clock/index.js";
 import { scorpionTailPlugin } from "./scorpion-tail/index.js";
 import { carpetPlugin } from "./carpet/index.js";
+import { paiGowPokerPlugin } from "./pai-gow-poker/index.js";
+import { letItRidePlugin } from "./let-it-ride/index.js";
+import { threeCardPokerPlugin } from "./three-card-poker/index.js";
+import { redDogPlugin } from "./red-dog/index.js";
+import { casinoWarPlugin } from "./casino-war/index.js";
+import { sicBoPlugin } from "./sic-bo/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -451,4 +457,10 @@ export const GAMES: GamePlugin[] = [
   grandfathersClockPlugin as unknown as GamePlugin,
   scorpionTailPlugin as unknown as GamePlugin,
   carpetPlugin as unknown as GamePlugin,
+  paiGowPokerPlugin as unknown as GamePlugin,
+  letItRidePlugin as unknown as GamePlugin,
+  threeCardPokerPlugin as unknown as GamePlugin,
+  redDogPlugin as unknown as GamePlugin,
+  casinoWarPlugin as unknown as GamePlugin,
+  sicBoPlugin as unknown as GamePlugin,
 ];

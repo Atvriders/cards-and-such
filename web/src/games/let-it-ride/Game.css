@@ -1,0 +1,91 @@
+.lir-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.lir-bankroll { font-size: 1.2rem; font-weight: bold; }
+
+.lir-bets {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.lir-bet {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #b22222;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.lir-bet.pulled {
+  background: #888;
+  text-decoration: line-through;
+}
+
+.lir-cards {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.lir-card {
+  width: 48px;
+  height: 68px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+}
+
+.lir-card.red { color: #c00; }
+.lir-card.hidden { background: #2a5298; color: #2a5298; }
+
+.lir-section {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 14px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.lir-label { font-size: 0.85rem; color: #555; margin-bottom: 6px; }
+
+.lir-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.lir-btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+}
+
+.lir-btn.primary { background: #0066cc; }
+.lir-btn.secondary { background: #888; }
+.lir-btn:hover { opacity: 0.85; }
+.lir-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.lir-result { text-align: center; font-size: 1rem; color: #333; margin-top: 8px; }
