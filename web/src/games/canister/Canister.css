@@ -1,0 +1,31 @@
+.canister {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.canister-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.canister-top-row {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.canister-tableau {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}

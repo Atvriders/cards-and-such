@@ -1,0 +1,31 @@
+.simple-simon {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.simple-simon-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.simple-simon-foundations {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.simple-simon-tableau {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}

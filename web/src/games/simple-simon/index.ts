@@ -1,0 +1,31 @@
+import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { SimpleSimonState, SimpleSimonAction } from "./state.js";
+import { initialState, reducer, isTerminal } from "./state.js";
+import { SimpleSimon } from "./SimpleSimon.js";
+
+export const simpleSimonSettings = {} as const;
+
+type SimpleSimonSettings = SettingsOf<typeof simpleSimonSettings>;
+
+export const simpleSimonPlugin: GamePlugin<SimpleSimonState, SimpleSimonAction, typeof simpleSimonSettings> = {
+  id: "simple-simon",
+  title: "Simple Simon",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "No stock, no foundations to start. Build K→A same-suit sequences on the tableau.",
+  howToPlay: `Clear all 52 cards from the tableau by assembling complete King-to-Ace same-suit sequences.
+
+Deal: All 52 cards are dealt face-up across ten tableau columns — columns 1–4 receive 3 cards each, columns 5–6 receive 4 cards each, and columns 7–10 receive 8 cards each. There is no stock pile and no separate foundation — foundations appear only when a complete sequence is removed.
+
+Tableau: Build down by rank regardless of suit — any 6 may land on any 7. However, only same-suit sequences may be picked up and moved as a group. A single card may always be moved.
+
+Winning: When the top 13 cards of a tableau column form a complete same-suit sequence from King down to Ace, that sequence is automatically removed to a foundation. Remove all four suits to win.
+
+Strategy: Because only same-suit groups move, plan carefully before breaking apart useful sequences. Try to concentrate cards of the same suit in the same column. Empty columns are rare and precious — use them to maneuver large groups. The game rewards careful long-term planning over aggressive moves.`,
+  settings: simpleSimonSettings,
+  initialState: (seed: number, settings: SimpleSimonSettings) => initialState(seed, settings),
+  reducer,
+  isTerminal,
+  component: SimpleSimon,
+};

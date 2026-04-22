@@ -224,6 +224,14 @@ import { sultanPlugin } from "./sultan-of-turkey/index.js";
 import { grandfathersClockPlugin } from "./grandfathers-clock/index.js";
 import { scorpionTailPlugin } from "./scorpion-tail/index.js";
 import { carpetPlugin } from "./carpet/index.js";
+import { cruelPlugin } from "./cruel/index.js";
+import { fortyAndEightPlugin } from "./forty-and-eight/index.js";
+import { diplomatPlugin } from "./diplomat/index.js";
+import { congressPlugin } from "./congress/index.js";
+import { simpleSimonPlugin } from "./simple-simon/index.js";
+import { emperorPlugin } from "./emperor/index.js";
+import { perseverancePlugin } from "./perseverance/index.js";
+import { canisterPlugin } from "./canister/index.js";
 import { paiGowPokerPlugin } from "./pai-gow-poker/index.js";
 import { letItRidePlugin } from "./let-it-ride/index.js";
 import { threeCardPokerPlugin } from "./three-card-poker/index.js";
@@ -495,4 +503,12 @@ export const GAMES: GamePlugin[] = [
   fillominoPlugin as unknown as GamePlugin,
   aquariumPlugin as unknown as GamePlugin,
   tapaPlugin as unknown as GamePlugin,
+  cruelPlugin as unknown as GamePlugin,
+  fortyAndEightPlugin as unknown as GamePlugin,
+  diplomatPlugin as unknown as GamePlugin,
+  congressPlugin as unknown as GamePlugin,
+  simpleSimonPlugin as unknown as GamePlugin,
+  emperorPlugin as unknown as GamePlugin,
+  perseverancePlugin as unknown as GamePlugin,
+  canisterPlugin as unknown as GamePlugin,
 ];
