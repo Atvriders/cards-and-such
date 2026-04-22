@@ -294,6 +294,14 @@ import { atariGoPlugin } from "./atari-go/index.js";
 import { phutballPlugin } from "./phutball/index.js";
 import { dvonnLitePlugin } from "./dvonn-lite/index.js";
 import { dotsCapturePlugin } from "./dots-capture/index.js";
+import { europeanPegSolitairePlugin } from "./european-peg-solitaire/index.js";
+import { uncleWiggilyPlugin } from "./uncle-wiggily/index.js";
+import { lotto90Plugin } from "./lotto-90/index.js";
+import { klotskiPlugin } from "./klotski/index.js";
+import { coinCounterPlugin } from "./coin-counter/index.js";
+import { guessFlagPlugin } from "./guess-the-flag/index.js";
+import { oddOneOutPlugin } from "./odd-one-out/index.js";
+import { lightsOut3DPlugin } from "./lights-out-3d/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -591,4 +599,12 @@ export const GAMES: GamePlugin[] = [
   phutballPlugin as unknown as GamePlugin,
   dvonnLitePlugin as unknown as GamePlugin,
   dotsCapturePlugin as unknown as GamePlugin,
+  europeanPegSolitairePlugin as unknown as GamePlugin,
+  uncleWiggilyPlugin as unknown as GamePlugin,
+  lotto90Plugin as unknown as GamePlugin,
+  klotskiPlugin as unknown as GamePlugin,
+  coinCounterPlugin as unknown as GamePlugin,
+  guessFlagPlugin as unknown as GamePlugin,
+  oddOneOutPlugin as unknown as GamePlugin,
+  lightsOut3DPlugin as unknown as GamePlugin,
 ];

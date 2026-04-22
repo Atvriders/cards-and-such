@@ -1,0 +1,118 @@
+.coin-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.cc-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.cc-timer { font-weight: 700; color: #ef4444; }
+.cc-timer.ok { color: #22a855; }
+
+.cc-coins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 16px;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  min-height: 80px;
+  width: 100%;
+}
+
+.cc-coin-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cc-coin-icons {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 120px;
+}
+
+.cc-coin-icon { font-size: 1.5rem; }
+.cc-coin-label { font-size: 0.65rem; color: #6b7280; }
+
+.cc-question {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.cc-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cc-input {
+  width: 100px;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+.cc-input:focus { border-color: #3b82f6; }
+
+.cc-unit { font-size: 1rem; color: #6b7280; }
+
+.cc-btn {
+  padding: 8px 20px;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cc-btn:hover { background: #2563eb; }
+
+.cc-result {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+.cc-result.correct { background: #d1fae5; color: #15803d; }
+.cc-result.wrong { background: #fee2e2; color: #b91c1c; }
+
+.cc-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+}
+.cc-stat { display: flex; flex-direction: column; align-items: center; }
+.cc-stat-val { font-size: 1.1rem; font-weight: 700; }
+.cc-stat-lbl { font-size: 0.65rem; color: #9ca3af; }
+
+.cc-done {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.cc-legend {
+  font-size: 0.72rem;
+  color: #9ca3af;
+}

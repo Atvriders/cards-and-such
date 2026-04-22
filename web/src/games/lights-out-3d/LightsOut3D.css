@@ -1,0 +1,89 @@
+.lo3d {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.lo3d-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.lo3d-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+.lo3d-status.won { color: #22a855; }
+
+.lo3d-cube-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lo3d-layer-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+.lo3d-layer {
+  display: grid;
+  grid-template-columns: repeat(3, 52px);
+  grid-template-rows: repeat(3, 52px);
+  gap: 4px;
+}
+
+.lo3d-cell {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  border: 2px solid rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.lo3d-cell.on {
+  background: #fbbf24;
+  box-shadow: 0 0 12px rgba(251,191,36,0.7);
+  border-color: #d97706;
+}
+.lo3d-cell.on:hover {
+  background: #f59e0b;
+  transform: scale(1.05);
+}
+
+.lo3d-cell.off {
+  background: #374151;
+  border-color: #1f2937;
+}
+.lo3d-cell.off:hover {
+  background: #4b5563;
+  transform: scale(1.05);
+}
+
+.lo3d-layers-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.lo3d-layer-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lo3d-hint { font-size: 0.78rem; color: #9ca3af; text-align: center; max-width: 320px; }

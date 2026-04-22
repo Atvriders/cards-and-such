@@ -1,0 +1,129 @@
+.lotto90 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  user-select: none;
+}
+
+.lotto90-ball {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #60a5fa, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.lotto90-ball.empty {
+  background: #e5e7eb;
+  color: #9ca3af;
+  box-shadow: none;
+  font-size: 1rem;
+}
+
+.lotto90-info {
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+.lotto90-card {
+  display: grid;
+  grid-template-columns: repeat(5, 48px);
+  gap: 3px;
+}
+
+.lotto90-cell {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #f9fafb;
+  transition: background 0.2s, color 0.2s;
+}
+.lotto90-cell.hit {
+  background: #22c55e;
+  color: #fff;
+  border-color: #16a34a;
+}
+.lotto90-cell.new-hit {
+  background: #f59e0b;
+  color: #fff;
+  border-color: #d97706;
+}
+
+.lotto90-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.lotto90-line-row { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+
+.lotto90-line-btn {
+  padding: 3px 8px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 6px;
+  background: #f3f4f6;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+.lotto90-line-btn.ready {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  font-weight: 700;
+}
+.lotto90-line-btn.claimed {
+  background: #d1fae5;
+  border-color: #22c55e;
+  color: #15803d;
+}
+
+.lotto90-score {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.lotto90-draw-btn {
+  padding: 10px 32px;
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lotto90-draw-btn:hover { background: #1e40af; }
+.lotto90-draw-btn:disabled { background: #9ca3af; cursor: default; }
+
+.lotto90-fullhouse { font-size: 1.2rem; font-weight: 700; color: #d97706; }
+.lotto90-done { font-size: 1rem; font-weight: 600; color: #6b7280; }
+
+.lotto90-recent {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 300px;
+}
+.lotto90-drawn-num {
+  font-size: 0.7rem;
+  padding: 2px 5px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  color: #374151;
+}
+.lotto90-drawn-num.on-card { background: #bbf7d0; color: #15803d; }

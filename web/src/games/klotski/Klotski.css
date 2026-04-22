@@ -1,0 +1,111 @@
+.klotski {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  user-select: none;
+}
+
+.klotski-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.klotski-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+.klotski-status.won { color: #22a855; }
+
+.klotski-board-wrap {
+  position: relative;
+}
+
+.klotski-board {
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  grid-template-rows: repeat(5, 60px);
+  gap: 3px;
+  background: #6b7280;
+  border: 3px solid #374151;
+  border-radius: 4px;
+  padding: 3px;
+  position: relative;
+}
+
+.klotski-cell {
+  width: 60px;
+  height: 60px;
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+
+.klotski-block {
+  position: absolute;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.1s;
+  border: 2px solid rgba(0,0,0,0.2);
+  box-sizing: border-box;
+}
+
+.klotski-block.goal { background: #ef4444; }
+.klotski-block.vertical { background: #3b82f6; }
+.klotski-block.horizontal { background: #22c55e; }
+.klotski-block.square { background: #a78bfa; }
+
+.klotski-block.selected {
+  outline: 3px solid #f59e0b;
+  transform: scale(1.03);
+  z-index: 10;
+}
+
+.klotski-arrows {
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  grid-template-rows: repeat(3, 44px);
+  gap: 2px;
+}
+.klotski-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 6px;
+  background: #e5e7eb;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.klotski-arrow-btn:hover { background: #d1d5db; }
+.klotski-arrow-btn:disabled { opacity: 0.3; cursor: default; }
+.klotski-arrow-blank { background: transparent; }
+
+.klotski-exit {
+  position: absolute;
+  bottom: -12px;
+  left: calc(60px + 3px * 2 + 3px);
+  width: calc(2 * 60px + 3px);
+  height: 10px;
+  background: #fbbf24;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #78350f;
+}
+
+.klotski-hint { font-size: 0.78rem; color: #9ca3af; }
