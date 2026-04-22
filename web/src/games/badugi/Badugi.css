@@ -1,0 +1,42 @@
+.badugi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem;
+  background: #1a1a3d;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+}
+.bg-header { display: flex; gap: 1.5rem; font-size: 1rem; font-weight: 700; background: rgba(0,0,0,0.35); padding: 0.4rem 1.2rem; border-radius: 8px; }
+.bg-result { background: rgba(0,0,0,0.4); padding: 0.35rem 1rem; border-radius: 6px; font-size: 0.9rem; text-align: center; max-width: 560px; min-height: 1.4rem; }
+.bg-action-log { font-size: 0.8rem; opacity: 0.65; text-align: center; }
+.bg-table { display: flex; flex-direction: column; gap: 0.6rem; width: 100%; max-width: 560px; }
+.bg-side { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 0.7rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.bg-side-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.07em; opacity: 0.75; font-weight: 700; }
+.bg-cards { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.bg-card-wrapper { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; cursor: pointer; }
+.bg-card-wrapper.selected { filter: brightness(0.6) sepia(1) hue-rotate(320deg) saturate(3); }
+.bg-discard-label { font-size: 0.7rem; color: #ff6b6b; font-weight: 700; }
+.bg-hand-name { font-size: 0.85rem; font-weight: 700; opacity: 0.85; }
+.bg-pot { font-size: 1.1rem; font-weight: 700; background: rgba(0,0,0,0.3); padding: 0.3rem 1rem; border-radius: 6px; }
+.bg-phase { font-size: 0.8rem; background: rgba(255,255,255,0.12); padding: 0.2rem 0.8rem; border-radius: 4px; }
+.bg-draw-hint { font-size: 0.8rem; opacity: 0.7; text-align: center; }
+.bg-goal { font-size: 0.8rem; opacity: 0.65; font-style: italic; text-align: center; }
+.bg-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.bg-actions button { padding: 0.55rem 1.1rem; font-size: 0.95rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; transition: background 0.12s; }
+.bg-actions button:disabled { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); cursor: not-allowed; }
+.bg-actions .btn-deal { background: #e8c84a; color: #1a1a1a; }
+.bg-actions .btn-deal:hover:not(:disabled) { background: #f5d85a; }
+.bg-actions .btn-fold { background: #c0392b; color: #fff; }
+.bg-actions .btn-fold:hover:not(:disabled) { background: #e74c3c; }
+.bg-actions .btn-check { background: #2980b9; color: #fff; }
+.bg-actions .btn-check:hover:not(:disabled) { background: #3498db; }
+.bg-actions .btn-call { background: #16a085; color: #fff; }
+.bg-actions .btn-call:hover:not(:disabled) { background: #1abc9c; }
+.bg-actions .btn-raise { background: #4caf50; color: #fff; }
+.bg-actions .btn-raise:hover:not(:disabled) { background: #66bb6a; }
+.bg-actions .btn-draw { background: #9b59b6; color: #fff; }
+.bg-actions .btn-draw:hover:not(:disabled) { background: #af7ac5; }
+.bg-game-over { font-size: 1.4rem; font-weight: 700; padding: 0.8rem 1.5rem; background: rgba(0,0,0,0.5); border-radius: 10px; text-align: center; }

@@ -1,4 +1,10 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { texasHoldemPlugin } from "./texas-holdem/index.js";
+import { omahaHoldemPlugin } from "./omaha-holdem/index.js";
+import { sevenCardStudPlugin } from "./seven-card-stud/index.js";
+import { fiveCardDrawPlugin } from "./five-card-draw/index.js";
+import { razzPlugin } from "./razz/index.js";
+import { badugiPlugin } from "./badugi/index.js";
 import { chessPlugin } from "./chess/index.js";
 import { suicideChessPlugin } from "./suicide-chess/index.js";
 import { atomicChessPlugin } from "./atomic-chess/index.js";
@@ -208,6 +214,12 @@ import { drop7Plugin } from "./drop7-like/index.js";
 import { sameGamePlugin } from "./same-game/index.js";
 
 export const GAMES: GamePlugin[] = [
+  texasHoldemPlugin as unknown as GamePlugin,
+  omahaHoldemPlugin as unknown as GamePlugin,
+  sevenCardStudPlugin as unknown as GamePlugin,
+  fiveCardDrawPlugin as unknown as GamePlugin,
+  razzPlugin as unknown as GamePlugin,
+  badugiPlugin as unknown as GamePlugin,
   chessPlugin as unknown as GamePlugin,
   suicideChessPlugin as unknown as GamePlugin,
   atomicChessPlugin as unknown as GamePlugin,

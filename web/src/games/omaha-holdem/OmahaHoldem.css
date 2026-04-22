@@ -1,0 +1,38 @@
+.omaha-holdem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem;
+  background: #1a3d5c;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+}
+.oh-header { display: flex; gap: 1.5rem; font-size: 1rem; font-weight: 700; background: rgba(0,0,0,0.35); padding: 0.4rem 1.2rem; border-radius: 8px; }
+.oh-result { background: rgba(0,0,0,0.4); padding: 0.35rem 1rem; border-radius: 6px; font-size: 0.9rem; text-align: center; max-width: 600px; min-height: 1.4rem; }
+.oh-action-log { font-size: 0.8rem; opacity: 0.65; text-align: center; }
+.oh-table { display: flex; flex-direction: column; gap: 0.6rem; width: 100%; max-width: 620px; }
+.oh-side { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 0.7rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.oh-side-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.07em; opacity: 0.75; font-weight: 700; }
+.oh-cards { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+.oh-hand-name { font-size: 0.85rem; font-weight: 700; opacity: 0.85; }
+.oh-community { background: rgba(0,0,0,0.15); border-radius: 10px; padding: 0.5rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.oh-community-label { font-size: 0.75rem; opacity: 0.65; text-transform: uppercase; letter-spacing: 0.06em; }
+.oh-pot { font-size: 1.1rem; font-weight: 700; background: rgba(0,0,0,0.3); padding: 0.3rem 1rem; border-radius: 6px; }
+.oh-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.oh-actions button { padding: 0.55rem 1.1rem; font-size: 0.95rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; transition: background 0.12s; }
+.oh-actions button:disabled { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); cursor: not-allowed; }
+.oh-actions .btn-deal { background: #e8c84a; color: #1a1a1a; }
+.oh-actions .btn-deal:hover:not(:disabled) { background: #f5d85a; }
+.oh-actions .btn-fold { background: #c0392b; color: #fff; }
+.oh-actions .btn-fold:hover:not(:disabled) { background: #e74c3c; }
+.oh-actions .btn-check { background: #2980b9; color: #fff; }
+.oh-actions .btn-check:hover:not(:disabled) { background: #3498db; }
+.oh-actions .btn-call { background: #16a085; color: #fff; }
+.oh-actions .btn-call:hover:not(:disabled) { background: #1abc9c; }
+.oh-actions .btn-raise { background: #4caf50; color: #fff; }
+.oh-actions .btn-raise:hover:not(:disabled) { background: #66bb6a; }
+.oh-game-over { font-size: 1.4rem; font-weight: 700; padding: 0.8rem 1.5rem; background: rgba(0,0,0,0.5); border-radius: 10px; text-align: center; }
+.oh-phase-badge { font-size: 0.75rem; background: rgba(255,255,255,0.15); padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.oh-note { font-size: 0.75rem; opacity: 0.65; font-style: italic; }
