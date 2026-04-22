@@ -1,0 +1,84 @@
+.tile-match-rush {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: "Segoe UI", sans-serif;
+  user-select: none;
+}
+
+.tmr-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: #444;
+  font-weight: 600;
+}
+
+.tmr-timer {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #e53e3e;
+}
+
+.tmr-timer.safe {
+  color: #276749;
+}
+
+.tmr-combo {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #d97706;
+}
+
+.tmr-grid {
+  display: grid;
+  gap: 3px;
+  padding: 6px;
+  background: #1a2a1a;
+  border-radius: 8px;
+}
+
+.tmr-cell {
+  width: 42px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border-radius: 4px;
+  border: 2px solid #8b7355;
+  background: #fdf6e3;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.1s, box-shadow 0.1s;
+}
+
+.tmr-cell:focus { outline: none; }
+
+.tmr-cell.empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.tmr-cell.selected {
+  background: #dbeafe;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+
+.tmr-cell.tile:hover:not(:disabled) {
+  background: #fff9d6;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.tmr-status {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 2px solid #48bb78;
+  background: #f0fff4;
+  color: #276749;
+}

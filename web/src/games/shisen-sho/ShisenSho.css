@@ -1,0 +1,76 @@
+.shisen-sho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: "Segoe UI", sans-serif;
+  user-select: none;
+}
+
+.shisen-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.shisen-grid {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  background: #2d4a2d;
+  border-radius: 8px;
+}
+
+.shisen-cell {
+  width: 44px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  border-radius: 4px;
+  border: 2px solid #8b7355;
+  background: #fdf6e3;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.1s, box-shadow 0.1s;
+}
+
+.shisen-cell:focus { outline: none; }
+
+.shisen-cell.empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.shisen-cell.selected {
+  background: #dbeafe;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+
+.shisen-cell.tile:hover:not(:disabled) {
+  background: #fff9d6;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.shisen-status {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 6px;
+}
+
+.shisen-status.won {
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  color: #276749;
+}
+
+.shisen-status.lost {
+  background: #fff5f5;
+  border: 2px solid #fc8181;
+  color: #9b2c2c;
+}

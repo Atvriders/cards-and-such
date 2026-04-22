@@ -212,6 +212,12 @@ import { drMarioPlugin } from "./dr-mario-like/index.js";
 import { puyoPopPlugin } from "./puyo-pop-like/index.js";
 import { drop7Plugin } from "./drop7-like/index.js";
 import { sameGamePlugin } from "./same-game/index.js";
+import { mahjongTurtlePlugin } from "./mahjong-solitaire-turtle/index.js";
+import { mahjongDragonPlugin } from "./mahjong-solitaire-dragon/index.js";
+import { mahjongPyramidPlugin } from "./mahjong-solitaire-pyramid/index.js";
+import { shisenShoPlugin } from "./shisen-sho/index.js";
+import { pairsThemedPlugin } from "./pairs-themed/index.js";
+import { tileMatchRushPlugin } from "./tile-match-rush/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -427,4 +433,10 @@ export const GAMES: GamePlugin[] = [
   puyoPopPlugin as unknown as GamePlugin,
   drop7Plugin as unknown as GamePlugin,
   sameGamePlugin as unknown as GamePlugin,
+  mahjongTurtlePlugin as unknown as GamePlugin,
+  mahjongDragonPlugin as unknown as GamePlugin,
+  mahjongPyramidPlugin as unknown as GamePlugin,
+  shisenShoPlugin as unknown as GamePlugin,
+  pairsThemedPlugin as unknown as GamePlugin,
+  tileMatchRushPlugin as unknown as GamePlugin,
 ];
