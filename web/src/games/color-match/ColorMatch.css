@@ -1,0 +1,98 @@
+.color-match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.cm-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.cm-info strong { color: #333; }
+
+.cm-timer-bar {
+  width: 320px;
+  height: 8px;
+  background: #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cm-timer-fill {
+  height: 100%;
+  background: #e53e3e;
+  transition: width 0.1s linear;
+}
+
+.cm-target-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.cm-label { white-space: nowrap; }
+
+.cm-swatch {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.cm-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: transform 0.06s, box-shadow 0.06s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.cm-circle:hover {
+  transform: scale(1.04);
+}
+
+.cm-circle:active {
+  transform: scale(0.94);
+}
+
+.cm-circle.match {
+  box-shadow: 0 0 0 6px rgba(72,187,120,0.6), 0 4px 20px rgba(0,0,0,0.2);
+  animation: pulse-match 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-match {
+  from { box-shadow: 0 0 0 4px rgba(72,187,120,0.4); }
+  to   { box-shadow: 0 0 0 12px rgba(72,187,120,0.7); }
+}
+
+.cm-hint {
+  font-size: 0.85rem;
+  color: #718096;
+  text-align: center;
+}
+
+.cm-ended {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 10px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+}

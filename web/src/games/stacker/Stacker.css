@@ -1,0 +1,92 @@
+.stacker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.stk-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+  align-items: center;
+}
+
+.stk-info strong { color: #333; }
+
+.stk-gameover-label {
+  font-weight: 700;
+  color: #e53e3e;
+  font-size: 1.1rem;
+}
+
+.stk-arena {
+  position: relative;
+  background: #1a202c;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid #2d3748;
+}
+
+.stk-row {
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.2), 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.stk-moving {
+  position: absolute;
+  background: #f6e05e;
+  border-radius: 3px;
+  box-shadow: 0 0 12px rgba(246,224,94,0.6), inset 0 2px 4px rgba(255,255,255,0.3);
+  animation: stk-pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes stk-pulse {
+  from { box-shadow: 0 0 8px rgba(246,224,94,0.4); }
+  to   { box-shadow: 0 0 18px rgba(246,224,94,0.8); }
+}
+
+.stk-ended {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 10px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+  text-align: center;
+}
+
+.stk-hint {
+  font-size: 0.9rem;
+  color: #718096;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stk-hint kbd {
+  background: #edf2f7;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: monospace;
+}
+
+.stk-drop-btn {
+  font-size: 0.9rem;
+  padding: 4px 14px;
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.stk-drop-btn:hover { background: #c53030; }
+.stk-drop-btn:active { background: #9b2c2c; }

@@ -270,6 +270,14 @@ import { bossDicePlugin } from "./boss-dice/index.js";
 import { fiveDiceShootoutPlugin } from "./five-dice-shootout/index.js";
 import { centennialPlugin } from "./centennial/index.js";
 import { gluckshausPlugin } from "./gluckshaus/index.js";
+import { typingSpeedPlugin } from "./typing-speed/index.js";
+import { targetPracticePlugin } from "./target-practice/index.js";
+import { colorMatchPlugin } from "./color-match/index.js";
+import { mathChallengePlugin } from "./math-challenge/index.js";
+import { frogCatcherPlugin } from "./frog-catcher/index.js";
+import { fallingCatcherPlugin } from "./falling-catcher/index.js";
+import { duckShootPlugin } from "./duck-shoot/index.js";
+import { stackerPlugin } from "./stacker/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -543,4 +551,12 @@ export const GAMES: GamePlugin[] = [
   fiveDiceShootoutPlugin as unknown as GamePlugin,
   centennialPlugin as unknown as GamePlugin,
   gluckshausPlugin as unknown as GamePlugin,
+  typingSpeedPlugin as unknown as GamePlugin,
+  targetPracticePlugin as unknown as GamePlugin,
+  colorMatchPlugin as unknown as GamePlugin,
+  mathChallengePlugin as unknown as GamePlugin,
+  frogCatcherPlugin as unknown as GamePlugin,
+  fallingCatcherPlugin as unknown as GamePlugin,
+  duckShootPlugin as unknown as GamePlugin,
+  stackerPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,48 @@
+.frog-catcher {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.fc-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.fc-info strong { color: #333; }
+
+.fc-timer-bar {
+  width: 520px;
+  height: 8px;
+  background: #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.fc-timer-fill {
+  height: 100%;
+  background: #38a169;
+  transition: width 0.1s linear;
+}
+
+.fc-ended {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 10px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+}
+
+.fc-arena {
+  border-radius: 8px;
+  display: block;
+  max-width: 100%;
+}
