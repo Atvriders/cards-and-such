@@ -186,6 +186,12 @@ import { tutePlugin } from "./tute/index.js";
 import { conquianPlugin } from "./conquian/index.js";
 import { setbackPlugin } from "./setback/index.js";
 import { musPlugin } from "./mus/index.js";
+import { dutchBlitzPlugin } from "./dutch-blitz/index.js";
+import { nertzPlugin } from "./nertz/index.js";
+import { ligrettoPlugin } from "./ligretto/index.js";
+import { spitPlugin } from "./spit/index.js";
+import { californiaSpeedPlugin } from "./california-speed/index.js";
+import { kempsPlugin } from "./kemps/index.js";
 
 export const GAMES: GamePlugin[] = [
   chessPlugin as unknown as GamePlugin,
@@ -375,4 +381,10 @@ export const GAMES: GamePlugin[] = [
   conquianPlugin as unknown as GamePlugin,
   setbackPlugin as unknown as GamePlugin,
   musPlugin as unknown as GamePlugin,
+  dutchBlitzPlugin as unknown as GamePlugin,
+  nertzPlugin as unknown as GamePlugin,
+  ligrettoPlugin as unknown as GamePlugin,
+  spitPlugin as unknown as GamePlugin,
+  californiaSpeedPlugin as unknown as GamePlugin,
+  kempsPlugin as unknown as GamePlugin,
 ];

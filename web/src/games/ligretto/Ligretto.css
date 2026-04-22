@@ -1,0 +1,111 @@
+.ligretto-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #311b92;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.lig-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #b39ddb;
+  letter-spacing: 0.1em;
+}
+
+.lig-status { font-size: 0.95rem; color: #d1c4e9; }
+
+.lig-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #9575cd;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.lig-center-piles {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  min-height: 80px;
+  justify-content: center;
+}
+
+.lig-card {
+  width: 52px;
+  height: 72px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2px solid rgba(0,0,0,0.3);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s;
+}
+
+.lig-card:hover { transform: translateY(-2px); }
+.lig-card.selected { outline: 2px solid yellow; transform: translateY(-6px); }
+
+.lig-card.red { background: #ef9a9a; color: #b71c1c; }
+.lig-card.blue { background: #90caf9; color: #0d47a1; }
+.lig-card.green { background: #a5d6a7; color: #1b5e20; }
+.lig-card.yellow { background: #fff59d; color: #f57f17; }
+.lig-card.facedown { background: #555; color: #aaa; }
+.lig-card.empty {
+  background: transparent;
+  border: 2px dashed rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.3);
+  font-size: 0.7rem;
+  cursor: default;
+}
+.lig-card.empty:hover { transform: none; }
+
+.lig-player-area {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+}
+
+.lig-half { display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }
+
+.lig-row { display: flex; gap: 0.4rem; align-items: flex-end; }
+
+.lig-btn {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #4527a0;
+  color: #fff;
+}
+.lig-btn:hover:not(:disabled) { background: #311b92; }
+.lig-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.lig-btn.primary { background: #f57f17; }
+
+.lig-game-over {
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.lig-hint { font-size: 0.8rem; color: #ffcc02; min-height: 1.2em; }

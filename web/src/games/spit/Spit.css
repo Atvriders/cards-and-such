@@ -1,0 +1,113 @@
+.spit-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #b71c1c;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.spit-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #ffcdd2;
+}
+
+.spit-status { font-size: 0.95rem; color: #ffcdd2; }
+
+.spit-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #ef9a9a;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.spit-center {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.spit-card {
+  width: 56px;
+  height: 78px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 2px solid rgba(0,0,0,0.3);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s;
+  line-height: 1.2;
+}
+
+.spit-card:hover { transform: translateY(-2px); }
+
+.spit-card.red-suit { background: #ffcdd2; color: #b71c1c; }
+.spit-card.black-suit { background: #eceff1; color: #212121; }
+.spit-card.facedown { background: #6d4c41; color: #bcaaa4; font-size: 0.8rem; }
+.spit-card.empty { background: transparent; border: 2px dashed rgba(255,255,255,0.3); color: rgba(255,255,255,0.4); cursor: default; font-size: 0.7rem; }
+.spit-card.empty:hover { transform: none; }
+
+.spit-reserve {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.spit-btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: #c62828;
+  color: #fff;
+  transition: background 0.15s;
+}
+.spit-btn:hover:not(:disabled) { background: #7f0000; }
+.spit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.spit-btn.spit { background: #f57f17; color: #000; font-size: 1.2rem; padding: 0.7rem 2rem; }
+.spit-btn.primary { background: #f57f17; color: #000; }
+
+.spit-game-over {
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.spit-spit-banner {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #fff176;
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.6; }
+}
+
+.spit-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
