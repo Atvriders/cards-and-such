@@ -1,0 +1,30 @@
+.dots-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+.dots-status { font-size: 1.1rem; font-weight: bold; }
+.dots-info { font-size: 0.9rem; color: #555; margin-bottom: 4px; }
+.dots-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 56px);
+  grid-template-rows: repeat(7, 56px);
+  border: 2px solid #555;
+  background: #1a1a2e;
+}
+.dots-cell {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 28px;
+  background: #1a1a2e;
+  border: 1px solid #333;
+}
+.dots-cell:hover { background: #2d2d44; }
+.dots-cell.captured-w { opacity: 0.5; }
+.dots-cell.captured-b { opacity: 0.5; }

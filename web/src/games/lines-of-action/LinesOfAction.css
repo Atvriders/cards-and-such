@@ -1,0 +1,32 @@
+.loa-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+.loa-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.loa-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 52px);
+  grid-template-rows: repeat(8, 52px);
+  border: 2px solid #555;
+}
+.loa-cell {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 26px;
+  box-sizing: border-box;
+}
+.loa-cell.light { background: #f0d9b5; }
+.loa-cell.dark  { background: #b58863; }
+.loa-cell.selected { outline: 3px solid #ffe066; }
+.loa-cell.target { background: rgba(100,200,100,0.5); }

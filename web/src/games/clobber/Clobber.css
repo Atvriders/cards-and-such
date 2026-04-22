@@ -1,0 +1,32 @@
+.clobber-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+.clobber-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.clobber-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 52px);
+  grid-template-rows: repeat(8, 52px);
+  border: 2px solid #555;
+}
+.clobber-cell {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 26px;
+  box-sizing: border-box;
+}
+.clobber-cell.light { background: #f0d9b5; }
+.clobber-cell.dark  { background: #b58863; }
+.clobber-cell.selected { outline: 3px solid #ffe066; }
+.clobber-cell.target { background: rgba(100,200,100,0.5); }

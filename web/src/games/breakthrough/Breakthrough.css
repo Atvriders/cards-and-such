@@ -1,0 +1,33 @@
+.breakthrough-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+.breakthrough-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.breakthrough-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 52px);
+  grid-template-rows: repeat(8, 52px);
+  border: 2px solid #555;
+}
+.breakthrough-cell {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 28px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+.breakthrough-cell.light { background: #f0d9b5; }
+.breakthrough-cell.dark  { background: #b58863; }
+.breakthrough-cell.selected { outline: 3px solid #ffe066; }
+.breakthrough-cell.target { background: rgba(100,200,100,0.5); }

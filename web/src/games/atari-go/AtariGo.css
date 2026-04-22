@@ -1,0 +1,26 @@
+.atarigo-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+.atarigo-status { font-size: 1.1rem; font-weight: bold; }
+.atarigo-info { font-size: 0.9rem; color: #555; margin-bottom: 4px; }
+.atarigo-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 44px);
+  grid-template-rows: repeat(9, 44px);
+  background: #dcb063;
+  border: 2px solid #8b6914;
+}
+.atarigo-cell {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 28px;
+}
+.atarigo-cell:hover { background: rgba(0,0,0,0.06); }

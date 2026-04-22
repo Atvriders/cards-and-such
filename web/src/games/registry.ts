@@ -286,6 +286,14 @@ import { continentalRummyPlugin } from "./continental-rummy/index.js";
 import { contractRummyPlugin } from "./contract-rummy/index.js";
 import { fiveHundredRumPlugin } from "./five-hundred-rum/index.js";
 import { kalookiPlugin } from "./kalooki/index.js";
+import { breakthroughPlugin } from "./breakthrough/index.js";
+import { clobberPlugin } from "./clobber/index.js";
+import { linesOfActionPlugin } from "./lines-of-action/index.js";
+import { go9x9Plugin } from "./go-9x9/index.js";
+import { atariGoPlugin } from "./atari-go/index.js";
+import { phutballPlugin } from "./phutball/index.js";
+import { dvonnLitePlugin } from "./dvonn-lite/index.js";
+import { dotsCapturePlugin } from "./dots-capture/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -575,4 +583,12 @@ export const GAMES: GamePlugin[] = [
   contractRummyPlugin as unknown as GamePlugin,
   fiveHundredRumPlugin as unknown as GamePlugin,
   kalookiPlugin as unknown as GamePlugin,
+  breakthroughPlugin as unknown as GamePlugin,
+  clobberPlugin as unknown as GamePlugin,
+  linesOfActionPlugin as unknown as GamePlugin,
+  go9x9Plugin as unknown as GamePlugin,
+  atariGoPlugin as unknown as GamePlugin,
+  phutballPlugin as unknown as GamePlugin,
+  dvonnLitePlugin as unknown as GamePlugin,
+  dotsCapturePlugin as unknown as GamePlugin,
 ];

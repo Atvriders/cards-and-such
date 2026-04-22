@@ -1,0 +1,36 @@
+.dvonn-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+.dvonn-status { font-size: 1.1rem; font-weight: bold; }
+.dvonn-info { font-size: 0.9rem; color: #555; margin-bottom: 4px; }
+.dvonn-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 64px);
+  grid-template-rows: repeat(6, 64px);
+  border: 2px solid #555;
+  background: #c8a97e;
+}
+.dvonn-cell {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  box-sizing: border-box;
+  border: 1px solid #b08050;
+  background: #e8c898;
+  position: relative;
+}
+.dvonn-cell:hover { background: #f5dba0; }
+.dvonn-cell.selected { outline: 3px solid #ffe066; }
+.dvonn-cell.target { background: rgba(100,200,100,0.5); }
+.dvonn-cell .stack-icon { font-size: 20px; }
+.dvonn-cell .stack-height { font-size: 11px; color: #333; }
+.dvonn-cell.has-dvonn { border: 2px solid #e74c3c; }
