@@ -1,0 +1,87 @@
+.match3-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.match3-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.match3-board-wrapper {
+  position: relative;
+}
+
+.match3-board {
+  display: grid;
+  gap: 3px;
+  background: #222;
+  border: 2px solid #444;
+  padding: 3px;
+}
+
+.match3-cell {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s;
+  box-sizing: border-box;
+  border: 3px solid rgba(255,255,255,0.15);
+}
+
+.match3-cell:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.match3-cell--selected {
+  border: 3px solid #fff;
+  box-shadow: 0 0 8px rgba(255,255,255,0.8);
+  transform: scale(1.12);
+  z-index: 2;
+}
+
+.match3-cell--empty {
+  background: #1a1a1a;
+  cursor: default;
+}
+
+.match3-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+  border-radius: 4px;
+}
+
+.match3-overlay h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.match3-overlay p {
+  margin: 0;
+  color: #ccc;
+}
+
+.match3-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}

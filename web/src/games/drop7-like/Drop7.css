@@ -1,0 +1,106 @@
+.drop7-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.drop7-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.drop7-board-wrapper {
+  position: relative;
+}
+
+.drop7-board {
+  display: grid;
+  gap: 3px;
+  background: #222;
+  border: 2px solid #444;
+  padding: 4px;
+}
+
+.drop7-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.drop7-col:hover .drop7-cell {
+  outline: 2px solid rgba(255,255,255,0.2);
+}
+
+.drop7-cell {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  box-sizing: border-box;
+  transition: transform 0.1s;
+}
+
+.drop7-cell--empty {
+  background: #1a1a1a;
+  border-radius: 4px;
+  color: transparent;
+}
+
+.drop7-cell--blank {
+  background: #555;
+  border: 2px dashed #888;
+  color: transparent;
+}
+
+.drop7-next-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.drop7-next-disc {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.drop7-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.drop7-overlay h2 { margin: 0; font-size: 1.5rem; }
+.drop7-overlay p { margin: 0; color: #ccc; }
+
+.drop7-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}

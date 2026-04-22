@@ -200,6 +200,12 @@ import { spotItPlugin } from "./spot-it/index.js";
 import { setGamePlugin } from "./set-game/index.js";
 import { tangramPlugin } from "./tangram/index.js";
 import { chainReactionPlugin } from "./chain-reaction/index.js";
+import { match3Plugin } from "./match-3/index.js";
+import { columnsPlugin } from "./columns/index.js";
+import { drMarioPlugin } from "./dr-mario-like/index.js";
+import { puyoPopPlugin } from "./puyo-pop-like/index.js";
+import { drop7Plugin } from "./drop7-like/index.js";
+import { sameGamePlugin } from "./same-game/index.js";
 
 export const GAMES: GamePlugin[] = [
   chessPlugin as unknown as GamePlugin,
@@ -403,4 +409,10 @@ export const GAMES: GamePlugin[] = [
   setGamePlugin as unknown as GamePlugin,
   tangramPlugin as unknown as GamePlugin,
   chainReactionPlugin as unknown as GamePlugin,
+  match3Plugin as unknown as GamePlugin,
+  columnsPlugin as unknown as GamePlugin,
+  drMarioPlugin as unknown as GamePlugin,
+  puyoPopPlugin as unknown as GamePlugin,
+  drop7Plugin as unknown as GamePlugin,
+  sameGamePlugin as unknown as GamePlugin,
 ];
