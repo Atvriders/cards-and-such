@@ -1,0 +1,105 @@
+.kenken {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.kenken-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.kenken-status {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.kenken-status.win {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.kenken-grid-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.kenken-grid {
+  display: inline-grid;
+  gap: 0;
+  border: 2px solid #333;
+  background: #fff;
+}
+
+.kenken-cell {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  background: #fff;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+}
+
+.kenken-cell.selected {
+  background: #cce5ff;
+}
+
+.kenken-cell.error {
+  background: #ffe0e0;
+}
+
+.kenken-cell.selected.error {
+  background: #ffb3b3;
+}
+
+.kenken-cage-label {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: #333;
+  line-height: 1;
+}
+
+.kenken-cell-border-top { border-top: 2px solid #333; }
+.kenken-cell-border-right { border-right: 2px solid #333; }
+.kenken-cell-border-bottom { border-bottom: 2px solid #333; }
+.kenken-cell-border-left { border-left: 2px solid #333; }
+
+.kenken-numpad {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.kenken-numpad button {
+  width: 44px;
+  height: 44px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+
+.kenken-numpad button:hover {
+  background: #dde;
+}
+
+.kenken-numpad button.clear {
+  background: #fdd;
+  width: 60px;
+}

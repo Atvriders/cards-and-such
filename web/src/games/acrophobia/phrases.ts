@@ -1,0 +1,61 @@
+/** Each entry: acronym (computed from words), words (canonical answer) */
+export interface AcroPhraseEntry {
+  words: string[];  // canonical words — first letters form the acronym
+}
+
+export const PHRASES: AcroPhraseEntry[] = [
+  { words: ["Thank", "God", "It's", "Friday"] },
+  { words: ["As", "Soon", "As", "Possible"] },
+  { words: ["Be", "Right", "Back"] },
+  { words: ["On", "My", "Way"] },
+  { words: ["For", "Your", "Information"] },
+  { words: ["In", "My", "Opinion"] },
+  { words: ["By", "The", "Way"] },
+  { words: ["Rolling", "On", "The", "Floor", "Laughing"] },
+  { words: ["Laughing", "Out", "Loud"] },
+  { words: ["Oh", "My", "God"] },
+  { words: ["Talk", "To", "You", "Later"] },
+  { words: ["Not", "Safe", "For", "Work"] },
+  { words: ["Too", "Long", "Didn't", "Read"] },
+  { words: ["Frequently", "Asked", "Questions"] },
+  { words: ["Do", "It", "Yourself"] },
+  { words: ["Rest", "In", "Peace"] },
+  { words: ["To", "Be", "Continued"] },
+  { words: ["What", "You", "See", "Is", "What", "You", "Get"] },
+  { words: ["End", "Of", "Day"] },
+  { words: ["Point", "Of", "View"] },
+  { words: ["Face", "To", "Face"] },
+  { words: ["Head", "Of", "Household"] },
+  { words: ["Out", "Of", "Office"] },
+  { words: ["In", "Real", "Life"] },
+  { words: ["Greatest", "Of", "All", "Time"] },
+  { words: ["At", "The", "Moment"] },
+  { words: ["None", "Of", "Your", "Business"] },
+  { words: ["Mother", "Nature"] },
+  { words: ["Very", "Important", "Person"] },
+  { words: ["Artificial", "Intelligence"] },
+  { words: ["Mobile", "Network", "Operator"] },
+  { words: ["American", "Medical", "Association"] },
+  { words: ["Personal", "Computer"] },
+  { words: ["Random", "Access", "Memory"] },
+  { words: ["Central", "Processing", "Unit"] },
+  { words: ["Operating", "System"] },
+  { words: ["User", "Interface"] },
+  { words: ["Natural", "Language", "Processing"] },
+  { words: ["Machine", "Learning"] },
+  { words: ["Open", "Source", "Software"] },
+  { words: ["World", "Wide", "Web"] },
+  { words: ["Hyper", "Text", "Markup", "Language"] },
+  { words: ["Cascading", "Style", "Sheets"] },
+  { words: ["Application", "Programming", "Interface"] },
+  { words: ["Software", "Development", "Kit"] },
+  { words: ["Command", "Line", "Interface"] },
+  { words: ["Source", "Control", "Management"] },
+  { words: ["Continuous", "Integration"] },
+  { words: ["Read", "Evaluate", "Print", "Loop"] },
+  { words: ["Test", "Driven", "Development"] },
+];
+
+export function getAcronym(entry: AcroPhraseEntry): string {
+  return entry.words.map(w => w[0]!.toUpperCase()).join("");
+}

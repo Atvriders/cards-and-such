@@ -1,0 +1,196 @@
+.cc-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.cc-subtitle {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  text-align: center;
+}
+
+.cc-grid-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.cc-grid {
+  display: grid;
+  grid-template-columns: 120px repeat(3, 1fr);
+  grid-template-rows: 80px repeat(3, 90px);
+  gap: 4px;
+  min-width: 380px;
+}
+
+.cc-corner {
+  background: transparent;
+}
+
+.cc-col-header {
+  background: #2c3e50;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px;
+  line-height: 1.2;
+}
+
+.cc-row-header {
+  background: #2c3e50;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px;
+  line-height: 1.2;
+}
+
+.cc-cell {
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px;
+  text-align: center;
+  min-height: 80px;
+  transition: border-color 0.15s, background 0.15s;
+  word-break: break-word;
+  text-transform: uppercase;
+}
+
+.cc-cell.active {
+  border-color: #3498db;
+  background: #eaf4fb;
+}
+
+.cc-cell.hint-revealed {
+  background: #f0f4ff;
+  border-color: #5b7fdf;
+  cursor: default;
+  color: #5b7fdf;
+}
+
+.cc-cell.correct {
+  border-color: #27ae60;
+  background: #eafaf1;
+  color: #27ae60;
+}
+
+.cc-cell.wrong {
+  border-color: #e74c3c;
+  background: #fdedec;
+  color: #e74c3c;
+}
+
+.cc-cell.empty-wrong {
+  border-color: #e74c3c;
+  background: #fff5f5;
+}
+
+.cc-cell-placeholder {
+  color: #bdc3c7;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.cc-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cc-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cc-btn.submit {
+  background: #27ae60;
+  color: #fff;
+}
+
+.cc-btn.hint {
+  background: #f39c12;
+  color: #fff;
+}
+
+.cc-btn.clear {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.cc-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cc-keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+}
+
+.cc-keyboard input {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 12px;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.cc-keyboard input:focus {
+  border-color: #3498db;
+}
+
+.cc-result {
+  text-align: center;
+  padding: 16px;
+  border-radius: 12px;
+  width: 100%;
+  background: #f8f9fa;
+}
+
+.cc-result.won {
+  background: #eafaf1;
+}
+
+.cc-hints-info {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}

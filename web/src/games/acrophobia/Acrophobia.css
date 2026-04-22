@@ -1,0 +1,156 @@
+.acro-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.acro-header {
+  text-align: center;
+}
+
+.acro-header h2 {
+  margin: 0 0 4px;
+}
+
+.acro-acronym {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 12px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.acro-hint {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  text-align: center;
+}
+
+.acro-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.acro-slot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.acro-slot-letter {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #2c3e50;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.acro-slot-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+  cursor: pointer;
+  background: #fff;
+  min-height: 38px;
+}
+
+.acro-slot-input.active {
+  border-color: #3498db;
+  background: #eaf4fb;
+}
+
+.acro-slot-input.correct {
+  border-color: #27ae60;
+  background: #eafaf1;
+}
+
+.acro-slot-input.wrong {
+  border-color: #e74c3c;
+  background: #fdedec;
+}
+
+.acro-slot-length {
+  font-size: 0.8rem;
+  color: #95a5a6;
+  width: 60px;
+  text-align: right;
+}
+
+.acro-keyboard-hint {
+  font-size: 0.85rem;
+  color: #95a5a6;
+}
+
+.acro-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.acro-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.acro-btn.submit {
+  background: #27ae60;
+  color: #fff;
+}
+
+.acro-btn.next {
+  background: #3498db;
+  color: #fff;
+}
+
+.acro-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.acro-result {
+  text-align: center;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  width: 100%;
+}
+
+.acro-result.won {
+  background: #eafaf1;
+}
+
+.acro-result h3 {
+  margin: 0 0 8px;
+}
+
+.acro-canonical {
+  font-size: 1rem;
+  color: #2c3e50;
+  margin: 8px 0;
+}
+
+.acro-score-line {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.acro-total-score {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #27ae60;
+}

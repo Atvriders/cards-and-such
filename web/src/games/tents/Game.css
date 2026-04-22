@@ -1,0 +1,115 @@
+.tents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.tents-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.tents-status {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.tents-status.win {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.tents-wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+}
+
+.tents-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.tents-row-clue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.tents-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.tents-grid-row {
+  display: flex;
+}
+
+.tents-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: #f9f9f9;
+}
+
+.tents-cell.tree {
+  background: #2d7a2d;
+  color: #fff;
+  cursor: default;
+}
+
+.tents-cell.tent {
+  background: #e8f4c8;
+  color: #5a7a00;
+}
+
+.tents-cell.x {
+  background: #f0f0f0;
+  color: #bbb;
+}
+
+.tents-col-clues {
+  display: flex;
+  flex-direction: row;
+}
+
+.tents-col-clue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.tents-btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.tents-btn-row button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+
+.tents-btn-row button:hover {
+  background: #dde;
+}
+
+.tents-clue-ok { color: #27ae60; }
+.tents-clue-over { color: #c0392b; }

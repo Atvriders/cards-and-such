@@ -144,6 +144,12 @@ import { climbJumperPlugin } from "./climb-jumper/index.js";
 import { gravityLanderPlugin } from "./gravity-lander/index.js";
 import { endlessRunnerPlugin } from "./endless-runner/index.js";
 import { bouncerPlugin } from "./bouncer/index.js";
+import { bogglePlugin } from "./boggle/index.js";
+import { acrophobiaPlugin } from "./acrophobia/index.js";
+import { wordPokerPlugin } from "./word-poker/index.js";
+import { crossCluesPlugin } from "./cross-clues/index.js";
+import { codewordsPlugin } from "./codewords/index.js";
+import { letterBoxedPlugin } from "./letter-boxed/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -291,4 +297,10 @@ export const GAMES: GamePlugin[] = [
   gravityLanderPlugin as unknown as GamePlugin,
   endlessRunnerPlugin as unknown as GamePlugin,
   bouncerPlugin as unknown as GamePlugin,
+  bogglePlugin as unknown as GamePlugin,
+  acrophobiaPlugin as unknown as GamePlugin,
+  wordPokerPlugin as unknown as GamePlugin,
+  crossCluesPlugin as unknown as GamePlugin,
+  codewordsPlugin as unknown as GamePlugin,
+  letterBoxedPlugin as unknown as GamePlugin,
 ];
