@@ -168,6 +168,12 @@ import { sorryPlugin } from "./sorry/index.js";
 import { troublePlugin } from "./trouble/index.js";
 import { snakesAndLaddersPlugin } from "./snakes-and-ladders/index.js";
 import { ratRacePlugin } from "./rat-race/index.js";
+import { hnefataflPlugin } from "./hnefatafl/index.js";
+import { fanoronaPlugin } from "./fanorona/index.js";
+import { alquerquePlugin } from "./alquerque/index.js";
+import { konanePlugin } from "./konane/index.js";
+import { owarePlugin } from "./oware/index.js";
+import { tablutPlugin } from "./tablut/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -339,4 +345,10 @@ export const GAMES: GamePlugin[] = [
   troublePlugin as unknown as GamePlugin,
   snakesAndLaddersPlugin as unknown as GamePlugin,
   ratRacePlugin as unknown as GamePlugin,
+  hnefataflPlugin as unknown as GamePlugin,
+  fanoronaPlugin as unknown as GamePlugin,
+  alquerquePlugin as unknown as GamePlugin,
+  konanePlugin as unknown as GamePlugin,
+  owarePlugin as unknown as GamePlugin,
+  tablutPlugin as unknown as GamePlugin,
 ];

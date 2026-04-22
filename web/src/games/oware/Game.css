@@ -1,0 +1,89 @@
+.oware-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.oware-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+  text-align: center;
+}
+.oware-status.win { color: #27ae60; }
+.oware-status.loss { color: #e74c3c; }
+.oware-status.draw { color: #e67e22; }
+
+.oware-scoreboard {
+  display: flex;
+  gap: 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.oware-score-you { color: #2c6e49; }
+.oware-score-bot { color: #8B1A1A; }
+
+.oware-board {
+  background: #8B5E3C;
+  border: 4px solid #5a3e1b;
+  border-radius: 40px;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.oware-row {
+  display: flex;
+  gap: 8px;
+}
+
+.oware-pit {
+  width: 72px;
+  height: 72px;
+  background: #c8a96e;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #5a3e1b;
+  transition: background 0.15s, transform 0.1s;
+  cursor: default;
+}
+
+.oware-pit.clickable {
+  cursor: pointer;
+  background: #d4b87a;
+}
+.oware-pit.clickable:hover {
+  background: #e8cc8a;
+  transform: scale(1.05);
+}
+
+.oware-pit.last-sowed {
+  border-color: #f1c40f;
+  border-width: 3px;
+}
+
+.oware-seeds {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2c1a00;
+  line-height: 1;
+}
+
+.oware-pit-label {
+  font-size: 0.65rem;
+  color: #5a3e1b;
+  margin-top: 2px;
+}
+
+.oware-hint {
+  font-size: 0.85rem;
+  color: #888;
+}

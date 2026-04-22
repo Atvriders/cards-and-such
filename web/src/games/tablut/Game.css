@@ -1,0 +1,60 @@
+.tablut-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.tablut-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+.tablut-status.win { color: #27ae60; }
+.tablut-status.loss { color: #e74c3c; }
+
+.tablut-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+}
+.leg-def { color: #2c6e49; }
+.leg-king { color: #8B6914; }
+.leg-atk { color: #8B1A1A; }
+
+.tablut-board {
+  display: grid;
+  border: 3px solid #555;
+}
+
+.tablut-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.tablut-cell.light { background: #f0d9b5; }
+.tablut-cell.dark { background: #b58863; }
+.tablut-cell.throne { background: #9e7c3a; border: 2px solid #6b4e1a; }
+.tablut-cell.edge { border: 1px solid rgba(231,76,60,0.3); }
+.tablut-cell.selected { outline: 3px solid #f1c40f; outline-offset: -3px; }
+.tablut-cell.target { background: rgba(241, 196, 15, 0.4); }
+
+.piece {
+  font-size: 1.3rem;
+  line-height: 1;
+  user-select: none;
+}
+.piece.defender { color: #2c6e49; }
+.piece.king { color: #8B6914; font-size: 1.5rem; }
+.piece.attacker { color: #8B1A1A; }
+
+.tablut-counts {
+  font-size: 0.9rem;
+  color: #555;
+}

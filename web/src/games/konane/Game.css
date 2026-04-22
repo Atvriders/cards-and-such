@@ -1,0 +1,62 @@
+.konane-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.konane-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+  text-align: center;
+}
+.konane-status.win { color: #27ae60; }
+.konane-status.loss { color: #e74c3c; }
+
+.konane-counts { font-size: 0.9rem; color: #555; }
+
+.konane-board-wrap .board {
+  display: grid;
+  gap: 0;
+  border: 3px solid #333;
+}
+
+.konane-board-wrap .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #d4a855;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.konane-piece {
+  font-size: 1.8rem;
+  line-height: 1;
+  user-select: none;
+}
+.konane-piece.black { color: #1a1a1a; }
+.konane-piece.white { color: #f0f0f0; text-shadow: 0 0 2px #888; }
+.konane-piece.selected { color: #e67e22; }
+.konane-piece.removable { opacity: 0.7; outline: 2px dashed #e74c3c; border-radius: 50%; }
+
+.konane-target {
+  font-size: 1.4rem;
+  color: rgba(46, 204, 113, 0.7);
+  user-select: none;
+}
+
+.konane-end-btn {
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+}
+.konane-end-btn:hover { background: #2980b9; }
