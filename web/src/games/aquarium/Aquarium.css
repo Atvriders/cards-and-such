@@ -1,0 +1,29 @@
+.aquarium {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 16px; font-family: sans-serif; user-select: none;
+}
+.aquarium-title { font-size: 1.5rem; font-weight: bold; }
+.aquarium-status { font-size: 0.95rem; color: #555; }
+.aquarium-status.win { color: #27ae60; font-weight: bold; }
+.aquarium-wrap { display: flex; flex-direction: column; }
+.aquarium-top-row { display: flex; }
+.aquarium-row { display: flex; }
+.aquarium-clue {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; font-weight: bold; color: #c0392b;
+  box-sizing: border-box;
+}
+.aquarium-clue.ok { color: #27ae60; }
+.aquarium-cell {
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #ccc; box-sizing: border-box; cursor: pointer;
+  font-size: 0.9rem; color: #777;
+}
+.aquarium-cell.water { color: #1565c0; font-size: 1rem; }
+.aquarium-btns { display: flex; gap: 8px; }
+.aquarium-btns button {
+  padding: 8px 18px; font-size: 0.95rem; border: 1.5px solid #aaa;
+  border-radius: 6px; cursor: pointer; background: #f5f5f5;
+}
+.aquarium-btns button:hover { background: #dde; }
+.aquarium-legend { font-size: 0.8rem; color: #777; }

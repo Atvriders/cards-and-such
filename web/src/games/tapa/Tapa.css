@@ -1,0 +1,27 @@
+.tapa {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 16px; font-family: sans-serif; user-select: none;
+}
+.tapa-title { font-size: 1.5rem; font-weight: bold; }
+.tapa-status { font-size: 0.95rem; color: #555; }
+.tapa-status.win { color: #27ae60; font-weight: bold; }
+.tapa-grid { display: grid; border: 2px solid #333; }
+.tapa-cell {
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #ccc; box-sizing: border-box; cursor: pointer;
+  font-size: 0.9rem; background: #f9f9f9;
+}
+.tapa-cell.clue {
+  background: #ecf0f1; cursor: default;
+}
+.tapa-clue-label { font-weight: bold; font-size: 0.8rem; color: #c0392b; }
+.tapa-clue-label.ok { color: #27ae60; }
+.tapa-cell.shaded { background: #333; color: #333; }
+.tapa-cell.dot { background: #f0f0f0; color: #aaa; font-size: 1.3rem; }
+.tapa-btns { display: flex; gap: 8px; }
+.tapa-btns button {
+  padding: 8px 18px; font-size: 0.95rem; border: 1.5px solid #aaa;
+  border-radius: 6px; cursor: pointer; background: #f5f5f5;
+}
+.tapa-btns button:hover { background: #dde; }
+.tapa-legend { font-size: 0.8rem; color: #777; }

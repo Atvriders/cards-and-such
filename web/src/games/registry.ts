@@ -238,6 +238,14 @@ import { primeClimbPlugin } from "./prime-climb/index.js";
 import { rummikubPlugin } from "./rummikub/index.js";
 import { quixoPlugin } from "./quixo/index.js";
 import { quartoPlugin } from "./quarto/index.js";
+import { akariPlugin } from "./akari/index.js";
+import { yajilinPlugin } from "./yajilin/index.js";
+import { shikakuPlugin } from "./shikaku/index.js";
+import { heyawakePlugin } from "./heyawake/index.js";
+import { cavePlugin } from "./cave/index.js";
+import { fillominoPlugin } from "./fillomino/index.js";
+import { aquariumPlugin } from "./aquarium/index.js";
+import { tapaPlugin } from "./tapa/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -479,4 +487,12 @@ export const GAMES: GamePlugin[] = [
   rummikubPlugin as unknown as GamePlugin,
   quixoPlugin as unknown as GamePlugin,
   quartoPlugin as unknown as GamePlugin,
+  akariPlugin as unknown as GamePlugin,
+  yajilinPlugin as unknown as GamePlugin,
+  shikakuPlugin as unknown as GamePlugin,
+  heyawakePlugin as unknown as GamePlugin,
+  cavePlugin as unknown as GamePlugin,
+  fillominoPlugin as unknown as GamePlugin,
+  aquariumPlugin as unknown as GamePlugin,
+  tapaPlugin as unknown as GamePlugin,
 ];

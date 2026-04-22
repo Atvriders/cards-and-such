@@ -1,0 +1,24 @@
+.cave {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 16px; font-family: sans-serif; user-select: none;
+}
+.cave-title { font-size: 1.5rem; font-weight: bold; }
+.cave-status { font-size: 0.95rem; color: #555; }
+.cave-status.win { color: #27ae60; font-weight: bold; }
+.cave-grid { display: grid; border: 2px solid #333; }
+.cave-cell {
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #ccc; box-sizing: border-box; cursor: pointer;
+  font-size: 1rem; background: #f9f9f9;
+}
+.cave-cell.shaded { background: #333; color: #333; }
+.cave-cell.dot { background: #f0f0f0; color: #aaa; font-size: 1.3rem; }
+.cave-clue { font-weight: bold; font-size: 0.85rem; color: #c0392b; }
+.cave-clue.ok { color: #27ae60; }
+.cave-btns { display: flex; gap: 8px; }
+.cave-btns button {
+  padding: 8px 18px; font-size: 0.95rem; border: 1.5px solid #aaa;
+  border-radius: 6px; cursor: pointer; background: #f5f5f5;
+}
+.cave-btns button:hover { background: #dde; }
+.cave-legend { font-size: 0.8rem; color: #777; }
