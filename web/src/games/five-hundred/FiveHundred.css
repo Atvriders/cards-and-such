@@ -1,0 +1,165 @@
+.fivehundred {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #3e2723;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.fivehundred-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.fivehundred-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fivehundred-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 80px;
+}
+
+.fivehundred-seat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.fivehundred-seat.active .fivehundred-seat-label { opacity: 1; color: #ffe082; }
+
+.fivehundred-card-back {
+  width: 30px;
+  height: 42px;
+  background: #5d4037;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.fivehundred-card-backs { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; }
+
+.fivehundred-bid-panel {
+  background: rgba(0,0,0,0.4);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fivehundred-bid-panel h3 { margin: 0; font-size: 1rem; }
+
+.fivehundred-bid-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.fivehundred-bid-btn {
+  padding: 0.3rem 0.7rem;
+  border: none;
+  border-radius: 6px;
+  background: #795548;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.fivehundred-bid-btn:hover { background: #a1887f; }
+.fivehundred-bid-btn.pass { background: #444; }
+.fivehundred-bid-btn.pass:hover { background: #666; }
+
+.fivehundred-trick-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.fivehundred-trick-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.fivehundred-trick-cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.fivehundred-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.fivehundred-trick-slot-label { font-size: 0.65rem; opacity: 0.6; }
+
+.fivehundred-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  min-height: 1.5rem;
+  text-align: center;
+}
+
+.fivehundred-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.fivehundred-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.fivehundred-player-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fivehundred-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.fivehundred-player-hand .card:hover:not(.dim) { transform: translateY(-6px); }
+.fivehundred-player-hand .card.dim { opacity: 0.35; cursor: default; }
+
+.fivehundred-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fivehundred-result h2 { margin: 0; font-size: 1.4rem; }

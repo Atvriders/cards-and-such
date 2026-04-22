@@ -1,0 +1,98 @@
+.pinochle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #1a237e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.pinochle-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.pinochle-melds {
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.pinochle-melds h4 { margin: 0 0 0.3rem; font-size: 0.85rem; opacity: 0.8; }
+.pinochle-meld-list { display: flex; flex-wrap: wrap; gap: 0.3rem; justify-content: center; }
+.pinochle-meld-item {
+  background: rgba(255,255,255,0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.pinochle-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pinochle-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 80px;
+}
+
+.pinochle-seat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.pinochle-seat.active .pinochle-seat-label { opacity: 1; color: #ffe082; }
+
+.pinochle-card-back {
+  width: 30px;
+  height: 42px;
+  background: #283593;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.pinochle-card-backs { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; }
+.pinochle-tricks-badge { font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 1px 6px; border-radius: 10px; }
+
+.pinochle-trick-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.pinochle-trick-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.pinochle-trick-cards { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; min-height: 80px; align-items: center; }
+.pinochle-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.pinochle-trick-slot-label { font-size: 0.65rem; opacity: 0.6; }
+
+.pinochle-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.9rem; min-height: 1.5rem; text-align: center; }
+
+.pinochle-player-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 100%; }
+.pinochle-player-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.pinochle-player-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.pinochle-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.pinochle-player-hand .card:hover:not(.dim) { transform: translateY(-6px); }
+.pinochle-player-hand .card.dim { opacity: 0.35; cursor: default; }
+
+.pinochle-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; display: flex; flex-direction: column; gap: 0.5rem; }
+.pinochle-result h2 { margin: 0; font-size: 1.4rem; }
+.pinochle-score-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.pinochle-score-box { background: rgba(255,255,255,0.1); padding: 0.4rem 0.8rem; border-radius: 6px; }

@@ -1,0 +1,109 @@
+.ninetynine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #212121;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.ninetynine-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ninetynine-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ninetynine-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 80px;
+}
+
+.ninetynine-seat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.ninetynine-seat.active .ninetynine-seat-label { opacity: 1; color: #ffe082; }
+
+.ninetynine-card-back {
+  width: 30px;
+  height: 42px;
+  background: #424242;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.ninetynine-card-backs { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; }
+.ninetynine-bid-badge { font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 1px 6px; border-radius: 10px; }
+
+/* Bidding phase */
+.ninetynine-bid-phase {
+  background: rgba(0,0,0,0.4);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.ninetynine-bid-phase h3 { margin: 0; font-size: 1rem; text-align: center; }
+.ninetynine-bid-phase p { margin: 0; font-size: 0.85rem; opacity: 0.8; text-align: center; }
+
+.ninetynine-selected-info {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.ninetynine-confirm-btn {
+  padding: 0.4rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #ffd600;
+  color: #000;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ninetynine-confirm-btn:disabled { background: #555; color: #999; cursor: default; }
+
+/* Trick area */
+.ninetynine-trick-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.ninetynine-trick-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.ninetynine-trick-cards { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; min-height: 80px; align-items: center; }
+.ninetynine-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ninetynine-trick-slot-label { font-size: 0.65rem; opacity: 0.6; }
+
+.ninetynine-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.9rem; min-height: 1.5rem; text-align: center; }
+
+.ninetynine-player-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 100%; }
+.ninetynine-player-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.ninetynine-player-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.ninetynine-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.ninetynine-player-hand .card:hover { transform: translateY(-6px); }
+.ninetynine-player-hand .card.dim { opacity: 0.35; cursor: default; }
+.ninetynine-player-hand .card.selected { outline: 3px solid #ffd600; transform: translateY(-8px); }
+
+.ninetynine-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; display: flex; flex-direction: column; gap: 0.5rem; }
+.ninetynine-result h2 { margin: 0; font-size: 1.4rem; }
+.ninetynine-scores-row { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+.ninetynine-score-box { background: rgba(255,255,255,0.1); padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.9rem; }

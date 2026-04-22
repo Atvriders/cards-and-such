@@ -150,6 +150,12 @@ import { wordPokerPlugin } from "./word-poker/index.js";
 import { crossCluesPlugin } from "./cross-clues/index.js";
 import { codewordsPlugin } from "./codewords/index.js";
 import { letterBoxedPlugin } from "./letter-boxed/index.js";
+import { whistPlugin } from "./whist/index.js";
+import { fiveHundredPlugin } from "./five-hundred/index.js";
+import { pinochlePlugin } from "./pinochle/index.js";
+import { sheepsheadPlugin } from "./sheepshead/index.js";
+import { wizardPlugin } from "./wizard/index.js";
+import { ninetyNinePlugin } from "./ninety-nine/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -303,4 +309,10 @@ export const GAMES: GamePlugin[] = [
   crossCluesPlugin as unknown as GamePlugin,
   codewordsPlugin as unknown as GamePlugin,
   letterBoxedPlugin as unknown as GamePlugin,
+  whistPlugin as unknown as GamePlugin,
+  fiveHundredPlugin as unknown as GamePlugin,
+  pinochlePlugin as unknown as GamePlugin,
+  sheepsheadPlugin as unknown as GamePlugin,
+  wizardPlugin as unknown as GamePlugin,
+  ninetyNinePlugin as unknown as GamePlugin,
 ];
