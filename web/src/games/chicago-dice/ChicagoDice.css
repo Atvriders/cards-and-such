@@ -1,0 +1,56 @@
+.chicago {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+.chicago-header {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.chicago-header h2 { margin: 0; }
+.chicago-totals { display: flex; gap: 20px; font-size: 1.1rem; }
+.chicago-target { font-size: 1.1rem; }
+.chicago-message {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 16px;
+  text-align: center;
+  max-width: 480px;
+}
+.chicago-btn {
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #fff;
+}
+.chicago-btn:hover { background: #e8f4e8; }
+.chicago-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 500px;
+}
+.chicago-table th,
+.chicago-table td {
+  border: 1px solid #ccc;
+  padding: 5px 8px;
+  text-align: center;
+}
+.chicago-table th { background: #f0f0f0; }
+.chicago-table tr.active td { background: #fffbe6; }
+.chicago-table td.scored { color: #2a7a2a; font-weight: bold; }
+.chicago-game-over {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: 8px;
+}
+.chicago-game-over.win { color: #2a7a2a; background: #e8ffe8; }
+.chicago-game-over.loss { color: #7a2a2a; background: #ffe8e8; }
+.chicago-game-over.tie { color: #555; background: #f0f0f0; }

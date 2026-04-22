@@ -1,4 +1,10 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { cameroonPlugin } from "./cameroon/index.js";
+import { kismetPlugin } from "./kismet/index.js";
+import { miaPlugin } from "./mia/index.js";
+import { chicagoDicePlugin } from "./chicago-dice/index.js";
+import { shutTheBoxPlugin } from "./shut-the-box/index.js";
+import { dicePokerPlugin } from "./dice-poker/index.js";
 import { accordionPlugin } from "./accordion/index.js";
 import { beleagueredCastlePlugin } from "./beleaguered-castle/index.js";
 import { streetsAndAlleysPlugin } from "./streets-and-alleys/index.js";
@@ -117,6 +123,12 @@ import { pentagoPlugin } from "./pentago/index.js";
 import { amazonsPlugin } from "./amazons/index.js";
 
 export const GAMES: GamePlugin[] = [
+  cameroonPlugin as unknown as GamePlugin,
+  kismetPlugin as unknown as GamePlugin,
+  miaPlugin as unknown as GamePlugin,
+  chicagoDicePlugin as unknown as GamePlugin,
+  shutTheBoxPlugin as unknown as GamePlugin,
+  dicePokerPlugin as unknown as GamePlugin,
   accordionPlugin as unknown as GamePlugin,
   beleagueredCastlePlugin as unknown as GamePlugin,
   streetsAndAlleysPlugin as unknown as GamePlugin,

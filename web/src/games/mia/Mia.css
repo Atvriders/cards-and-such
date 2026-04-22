@@ -1,0 +1,60 @@
+.mia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.mia h2 { margin: 0; font-size: 1.4rem; }
+.mia-lives {
+  display: flex;
+  gap: 40px;
+  font-size: 1.2rem;
+}
+.life { color: #c00; font-size: 1.4rem; }
+.life.lost { color: #ccc; }
+.mia-message {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.95rem;
+  min-height: 48px;
+}
+.mia-btn {
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #fff;
+  transition: background 0.1s;
+}
+.mia-btn:hover:not(:disabled) { background: #e8f4e8; }
+.mia-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.mia-declare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.mia-declare select {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+.mia-actual { font-size: 1rem; }
+.mia-waiting { font-style: italic; color: #666; }
+.mia-game-over {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+.mia-game-over.win { color: #2a7a2a; background: #e8ffe8; border: 1px solid #2a7a2a; }
+.mia-game-over.loss { color: #7a2a2a; background: #ffe8e8; border: 1px solid #7a2a2a; }
