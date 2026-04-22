@@ -1,0 +1,37 @@
+.intl-draughts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.intl-draughts-info { font-size: 0.9rem; color: #555; display: flex; gap: 12px; }
+.intl-draughts-status { font-size: 1.2rem; font-weight: bold; min-height: 1.6em; color: #333; }
+.intl-draughts-status.win  { color: #27ae60; }
+.intl-draughts-status.loss { color: #e74c3c; }
+
+.intl-draughts-board-wrap .board { display: grid; border: 2px solid #555; gap: 0; }
+.intl-draughts-board-wrap .cell  { display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+.id-dark-square  { background: #769656; }
+.id-light-square { background: #eeeed2; }
+.id-dark-square.selected-source  { outline: 3px solid #f1c40f; outline-offset: -3px; }
+.id-dark-square.legal-target     { background: rgba(241, 196, 15, 0.5); }
+.id-dark-square.must-continue    { outline: 3px solid #e74c3c; outline-offset: -3px; }
+
+.id-piece {
+  width: 72%;
+  height: 72%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  user-select: none;
+}
+
+.id-piece.white { background: radial-gradient(circle at 35% 35%, #ecf0f1, #bdc3c7); color: #333; border: 2px solid #999; }
+.id-piece.black { background: radial-gradient(circle at 35% 35%, #555, #111); color: #fff; border: 2px solid rgba(255,255,255,0.2); }

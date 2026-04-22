@@ -1,4 +1,10 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { chessPlugin } from "./chess/index.js";
+import { suicideChessPlugin } from "./suicide-chess/index.js";
+import { atomicChessPlugin } from "./atomic-chess/index.js";
+import { internationalDraughtsPlugin } from "./international-draughts/index.js";
+import { chineseCheckersPlugin } from "./chinese-checkers/index.js";
+import { halmaPlugin } from "./halma/index.js";
 import { cameroonPlugin } from "./cameroon/index.js";
 import { kismetPlugin } from "./kismet/index.js";
 import { miaPlugin } from "./mia/index.js";
@@ -182,6 +188,12 @@ import { setbackPlugin } from "./setback/index.js";
 import { musPlugin } from "./mus/index.js";
 
 export const GAMES: GamePlugin[] = [
+  chessPlugin as unknown as GamePlugin,
+  suicideChessPlugin as unknown as GamePlugin,
+  atomicChessPlugin as unknown as GamePlugin,
+  internationalDraughtsPlugin as unknown as GamePlugin,
+  chineseCheckersPlugin as unknown as GamePlugin,
+  halmaPlugin as unknown as GamePlugin,
   cameroonPlugin as unknown as GamePlugin,
   kismetPlugin as unknown as GamePlugin,
   miaPlugin as unknown as GamePlugin,

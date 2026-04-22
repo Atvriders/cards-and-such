@@ -1,0 +1,79 @@
+.suicide-chess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.suicide-chess-info {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.suicide-chess-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.suicide-chess-status.win  { color: #27ae60; }
+.suicide-chess-status.loss { color: #e74c3c; }
+.suicide-chess-status.draw { color: #e67e22; }
+
+.suicide-square-light { background: #f0d9b5; }
+.suicide-square-dark  { background: #b58863; }
+.suicide-square-light.selected-source { background: #f6f669; }
+.suicide-square-dark.selected-source  { background: #baca2b; }
+.suicide-square-light.legal-target    { background: rgba(20,85,30,0.5); }
+.suicide-square-dark.legal-target     { background: rgba(20,85,30,0.5); }
+.suicide-square-light.must-capture    { background: rgba(231,76,60,0.3); }
+.suicide-square-dark.must-capture     { background: rgba(192,57,43,0.3); }
+
+.suicide-piece {
+  font-size: 2.2rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.suicide-promotion-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.suicide-promotion-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.suicide-promotion-choices {
+  display: flex;
+  gap: 8px;
+}
+
+.suicide-promotion-btn {
+  font-size: 2.2rem;
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.suicide-promotion-btn:hover {
+  border-color: #f1c40f;
+  background: #fffde7;
+}

@@ -1,0 +1,44 @@
+.halma {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.halma-info { font-size: 0.9rem; color: #555; }
+.halma-status { font-size: 1.2rem; font-weight: bold; min-height: 1.6em; color: #333; }
+.halma-status.win  { color: #27ae60; }
+.halma-status.loss { color: #e74c3c; }
+
+.halma-board {
+  display: grid;
+  border: 2px solid #555;
+  background: #d4a57a;
+}
+
+.halma-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.halma-cell-normal  { background: #f4d8b0; }
+.halma-cell-player-camp { background: #ffe0d0; }
+.halma-cell-bot-camp    { background: #d0e0ff; }
+
+.halma-cell.selected-source { background: #f6f669; }
+.halma-cell.legal-target    { background: rgba(100, 200, 100, 0.5); }
+
+.halma-piece {
+  width: 74%;
+  height: 74%;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.halma-piece.player { background: radial-gradient(circle at 35% 35%, #e74c3c, #922b21); }
+.halma-piece.bot    { background: radial-gradient(circle at 35% 35%, #3498db, #1a5276); }

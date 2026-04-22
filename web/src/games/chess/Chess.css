@@ -1,0 +1,121 @@
+.chess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.chess-info {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.chess-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.chess-status.win { color: #27ae60; }
+.chess-status.loss { color: #e74c3c; }
+.chess-status.draw { color: #e67e22; }
+.chess-status.check { color: #c0392b; }
+
+.chess-board-wrap {
+  position: relative;
+}
+
+.chess-board-wrap .board {
+  display: grid;
+  border: 2px solid #555;
+  gap: 0;
+}
+
+.chess-board-wrap .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+
+.chess-square-light { background: #f0d9b5; }
+.chess-square-dark  { background: #b58863; }
+.chess-square-light.selected-source { background: #f6f669; }
+.chess-square-dark.selected-source  { background: #baca2b; }
+.chess-square-light.legal-target    { background: rgba(20,85,30,0.5); }
+.chess-square-dark.legal-target     { background: rgba(20,85,30,0.5); }
+.chess-square-light.in-check        { background: #e74c3c; }
+.chess-square-dark.in-check         { background: #c0392b; }
+
+.chess-piece {
+  font-size: 2.2rem;
+  line-height: 1;
+  user-select: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.chess-promotion-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.chess-promotion-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.chess-promotion-box h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.chess-promotion-choices {
+  display: flex;
+  gap: 8px;
+}
+
+.chess-promotion-btn {
+  font-size: 2.2rem;
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 6px 10px;
+  transition: border-color 0.15s;
+}
+
+.chess-promotion-btn:hover {
+  border-color: #f1c40f;
+  background: #fffde7;
+}
+
+.chess-coords {
+  display: flex;
+  gap: 0;
+}
+
+.chess-rank-label, .chess-file-label {
+  font-size: 0.7rem;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

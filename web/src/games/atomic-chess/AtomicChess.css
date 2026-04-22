@@ -1,0 +1,78 @@
+.atomic-chess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.atomic-chess-info { font-size: 0.9rem; color: #555; }
+
+.atomic-chess-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.atomic-chess-status.win  { color: #27ae60; }
+.atomic-chess-status.loss { color: #e74c3c; }
+.atomic-chess-status.draw { color: #e67e22; }
+
+.atomic-square-light { background: #f0d9b5; }
+.atomic-square-dark  { background: #b58863; }
+.atomic-square-light.selected-source { background: #f6f669; }
+.atomic-square-dark.selected-source  { background: #baca2b; }
+.atomic-square-light.legal-target    { background: rgba(20,85,30,0.5); }
+.atomic-square-dark.legal-target     { background: rgba(20,85,30,0.5); }
+.atomic-square-light.explosion       { background: #ff6b35; animation: explode 0.5s ease-out; }
+.atomic-square-dark.explosion        { background: #e55a2b; animation: explode 0.5s ease-out; }
+
+@keyframes explode {
+  0%   { background: #ff0000; transform: scale(1.1); }
+  100% { background: inherit; transform: scale(1); }
+}
+
+.atomic-piece {
+  font-size: 2.2rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.atomic-promotion-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.atomic-promotion-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.atomic-promotion-choices { display: flex; gap: 8px; }
+
+.atomic-promotion-btn {
+  font-size: 2.2rem;
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.atomic-promotion-btn:hover {
+  border-color: #f1c40f;
+  background: #fffde7;
+}

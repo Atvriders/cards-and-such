@@ -1,0 +1,51 @@
+.cc-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.cc-info { font-size: 0.9rem; color: #555; }
+.cc-status { font-size: 1.2rem; font-weight: bold; min-height: 1.6em; color: #333; }
+.cc-status.win  { color: #27ae60; }
+.cc-status.loss { color: #e74c3c; }
+
+.cc-board {
+  background: #2c2c2c;
+  border-radius: 12px;
+  padding: 12px;
+  overflow: auto;
+}
+
+.cc-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px 0;
+}
+
+.cc-cell {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #444;
+  border: 1px solid #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1px;
+  transition: transform 0.1s;
+  flex-shrink: 0;
+}
+
+.cc-cell:hover { transform: scale(1.15); }
+
+.cc-cell.player-peg { background: radial-gradient(circle at 35% 35%, #e74c3c, #922b21); border-color: #e74c3c; }
+.cc-cell.bot-peg    { background: radial-gradient(circle at 35% 35%, #3498db, #1a5276); border-color: #3498db; }
+.cc-cell.selected   { background: radial-gradient(circle at 35% 35%, #f1c40f, #d4ac0d); border-color: #f39c12; box-shadow: 0 0 8px #f1c40f; }
+.cc-cell.reachable  { background: rgba(241, 196, 15, 0.3); border-color: #f1c40f; }
+.cc-cell.player-goal { border-color: rgba(231, 76, 60, 0.4); }
+.cc-cell.bot-goal   { border-color: rgba(52, 152, 219, 0.4); }
