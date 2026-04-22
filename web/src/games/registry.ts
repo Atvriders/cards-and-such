@@ -254,6 +254,14 @@ import { cavePlugin } from "./cave/index.js";
 import { fillominoPlugin } from "./fillomino/index.js";
 import { aquariumPlugin } from "./aquarium/index.js";
 import { tapaPlugin } from "./tapa/index.js";
+import { skatPlugin } from "./skat/index.js";
+import { klaverjasPlugin } from "./klaverjas/index.js";
+import { doppelkopfPlugin } from "./doppelkopf/index.js";
+import { belotePlugin } from "./belote/index.js";
+import { tressettePlugin } from "./tressette/index.js";
+import { schnapsenPlugin } from "./schnapsen/index.js";
+import { mariagePlugin } from "./mariage/index.js";
+import { preferansPlugin } from "./preferans/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -511,4 +519,12 @@ export const GAMES: GamePlugin[] = [
   emperorPlugin as unknown as GamePlugin,
   perseverancePlugin as unknown as GamePlugin,
   canisterPlugin as unknown as GamePlugin,
+  skatPlugin as unknown as GamePlugin,
+  klaverjasPlugin as unknown as GamePlugin,
+  doppelkopfPlugin as unknown as GamePlugin,
+  belotePlugin as unknown as GamePlugin,
+  tressettePlugin as unknown as GamePlugin,
+  schnapsenPlugin as unknown as GamePlugin,
+  mariagePlugin as unknown as GamePlugin,
+  preferansPlugin as unknown as GamePlugin,
 ];

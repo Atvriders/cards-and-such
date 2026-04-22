@@ -1,0 +1,11 @@
+.schnapsen { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 480px; margin: 0 auto; }
+.schnapsen-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; font-size: 0.9rem; }
+.schnapsen-trump { background: #fffbe6; border: 1px solid #f0c040; border-radius: 6px; padding: 6px 12px; font-size: 0.9rem; text-align: center; }
+.schnapsen-message { font-size: 0.95rem; text-align: center; color: #333; background: #f5f5f5; border-radius: 6px; padding: 8px 12px; width: 100%; }
+.schnapsen-trick { display: flex; gap: 16px; min-height: 80px; align-items: center; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 12px; width: 100%; }
+.schnapsen-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.schnapsen-card { cursor: pointer; border: 2px solid #ccc; border-radius: 6px; padding: 8px 12px; background: white; font-size: 1rem; transition: border-color 0.15s, transform 0.1s; text-align: center; min-width: 44px; }
+.schnapsen-card:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.schnapsen-card.trump { border-color: #e53935; }
+.schnapsen-label { font-size: 0.8rem; color: #666; margin-bottom: 4px; text-align: center; }
+.schnapsen-stock { font-size: 0.85rem; color: #555; background: #e3f2fd; border-radius: 6px; padding: 4px 10px; }
