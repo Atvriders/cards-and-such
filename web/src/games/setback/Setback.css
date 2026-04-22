@@ -1,0 +1,22 @@
+.setback { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 540px; margin: 0 auto; }
+.setback-header { display: flex; gap: 12px; font-weight: bold; flex-wrap: wrap; justify-content: center; font-size: 0.9rem; }
+.setback-bots { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.setback-seat { text-align: center; }
+.setback-card-backs { display: flex; gap: 4px; justify-content: center; }
+.setback-card-back { width: 28px; height: 44px; background: repeating-linear-gradient(135deg, #c62828, #c62828 4px, #b71c1c 4px, #b71c1c 8px); border-radius: 4px; }
+.setback-trick { display: flex; gap: 12px; min-height: 80px; align-items: center; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 12px; flex-wrap: wrap; }
+.setback-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.setback-card { cursor: pointer; border: 2px solid #ccc; border-radius: 6px; padding: 8px 12px; background: white; font-size: 1rem; transition: border-color 0.15s, transform 0.1s; }
+.setback-card:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.setback-card.trump { border-color: #e53935; }
+.setback-card.illegal { opacity: 0.4; cursor: default; }
+.setback-label { font-size: 0.85rem; color: #555; }
+.setback-message { font-size: 0.95rem; text-align: center; color: #333; }
+.setback-done { font-size: 1.1rem; font-weight: bold; color: #1a73e8; }
+.setback-bid-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.setback-bid-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; background: #1a73e8; color: white; }
+.setback-bid-btn:hover { background: #1557b0; }
+.setback-bid-btn.pass { background: #757575; }
+.setback-suits { display: flex; gap: 8px; }
+.setback-suit-btn { padding: 8px 16px; border: 2px solid #ccc; border-radius: 6px; cursor: pointer; font-size: 1.2rem; background: white; }
+.setback-suit-btn:hover { border-color: #1a73e8; }

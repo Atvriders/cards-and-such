@@ -174,6 +174,12 @@ import { alquerquePlugin } from "./alquerque/index.js";
 import { konanePlugin } from "./konane/index.js";
 import { owarePlugin } from "./oware/index.js";
 import { tablutPlugin } from "./tablut/index.js";
+import { briscolaPlugin } from "./briscola/index.js";
+import { scopaPlugin } from "./scopa/index.js";
+import { tutePlugin } from "./tute/index.js";
+import { conquianPlugin } from "./conquian/index.js";
+import { setbackPlugin } from "./setback/index.js";
+import { musPlugin } from "./mus/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -351,4 +357,10 @@ export const GAMES: GamePlugin[] = [
   konanePlugin as unknown as GamePlugin,
   owarePlugin as unknown as GamePlugin,
   tablutPlugin as unknown as GamePlugin,
+  briscolaPlugin as unknown as GamePlugin,
+  scopaPlugin as unknown as GamePlugin,
+  tutePlugin as unknown as GamePlugin,
+  conquianPlugin as unknown as GamePlugin,
+  setbackPlugin as unknown as GamePlugin,
+  musPlugin as unknown as GamePlugin,
 ];

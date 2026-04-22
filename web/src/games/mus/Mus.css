@@ -1,0 +1,19 @@
+.mus { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 480px; margin: 0 auto; }
+.mus-header { font-weight: bold; text-align: center; font-size: 1.1rem; }
+.mus-hands { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.mus-player-area { text-align: center; }
+.mus-bot-area { text-align: center; }
+.mus-hand { display: flex; gap: 6px; justify-content: center; }
+.mus-card { border: 2px solid #ccc; border-radius: 6px; padding: 8px 12px; background: white; font-size: 1.1rem; }
+.mus-card.juego { border-color: #43a047; background: #e8f5e9; }
+.mus-card-back { width: 36px; height: 52px; background: repeating-linear-gradient(45deg, #37474f, #37474f 5px, #263238 5px, #263238 10px); border-radius: 4px; display: inline-block; }
+.mus-label { font-size: 0.85rem; color: #555; margin-bottom: 4px; }
+.mus-value { font-size: 0.8rem; color: #1a73e8; font-weight: bold; }
+.mus-message { font-size: 0.95rem; text-align: center; color: #333; }
+.mus-done { font-size: 1rem; font-weight: bold; color: #1a73e8; text-align: center; }
+.mus-bid-area { display: flex; gap: 8px; flex-direction: column; align-items: center; }
+.mus-bid-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.mus-bid-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; background: #1a73e8; color: white; }
+.mus-bid-btn:hover { background: #1557b0; }
+.mus-bid-btn.pass { background: #757575; }
+.mus-scores { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }

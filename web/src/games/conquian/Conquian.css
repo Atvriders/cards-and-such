@@ -1,0 +1,20 @@
+.conquian { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 540px; margin: 0 auto; }
+.conquian-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.conquian-area { display: flex; gap: 24px; align-items: flex-start; justify-content: center; }
+.conquian-discard { text-align: center; }
+.conquian-card { cursor: pointer; border: 2px solid #ccc; border-radius: 6px; padding: 8px 12px; background: white; font-size: 1.1rem; transition: border-color 0.15s, transform 0.1s; display: inline-block; }
+.conquian-card:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.conquian-card.selected { border-color: #e53935; background: #fff3e0; }
+.conquian-card.drawn { border-color: #43a047; background: #e8f5e9; }
+.conquian-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.conquian-melds { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.conquian-meld-group { border: 1px solid #43a047; border-radius: 6px; padding: 4px 8px; background: #f1f8e9; display: flex; gap: 4px; }
+.conquian-label { font-size: 0.85rem; color: #555; }
+.conquian-message { font-size: 0.95rem; text-align: center; color: #333; }
+.conquian-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }
+.conquian-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.conquian-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; background: #1a73e8; color: white; }
+.conquian-btn:hover { background: #1557b0; }
+.conquian-btn.secondary { background: #757575; }
+.conquian-btn.danger { background: #e53935; }
+.conquian-card-back { width: 32px; height: 48px; background: repeating-linear-gradient(45deg, #7b1fa2, #7b1fa2 5px, #6a1b9a 5px, #6a1b9a 10px); border-radius: 4px; display: inline-block; }
