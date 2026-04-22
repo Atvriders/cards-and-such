@@ -1,0 +1,34 @@
+.fhr {
+  display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+  padding: 1rem; background: #0d3b1e; min-height: 100%; color: #fff;
+  font-family: sans-serif; box-sizing: border-box;
+}
+.fhr-header {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
+}
+.fhr-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.9rem; text-align: center; }
+.fhr-area { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+.fhr-pile { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; font-size: 0.75rem; text-transform: uppercase; }
+.fhr-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.fhr-hand .card { cursor: pointer; transition: transform 0.1s; }
+.fhr-hand .card.selected { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(255,235,59,0.7); }
+.fhr-hand .card:hover { transform: translateY(-5px); }
+.fhr-btn {
+  padding: 0.4rem 1rem; background: #1b5e20; color: #fff;
+  border: 2px solid #66bb6a; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+}
+.fhr-btn:hover:not(:disabled) { background: #2e7d32; }
+.fhr-btn:disabled { opacity: 0.4; cursor: default; }
+.fhr-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.fhr-table-melds { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.fhr-meld-group {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: rgba(255,255,255,0.08); padding: 4px; border-radius: 6px; font-size: 0.65rem;
+}
+.fhr-meld-cards { display: flex; gap: 2px; }
+.fhr-card-back { width: 28px; height: 40px; background: #1b5e20; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); }
+.fhr-label { font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; }
+.fhr-score-bar { width: 100%; max-width: 400px; background: rgba(0,0,0,0.3); border-radius: 4px; height: 8px; }
+.fhr-score-fill { height: 100%; background: #66bb6a; border-radius: 4px; transition: width 0.3s; }
+.fhr-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; max-width: 480px; }

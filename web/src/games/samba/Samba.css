@@ -1,0 +1,81 @@
+.samba {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #3e2723;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.samba-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.samba-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.samba-area {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.samba-pile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+.samba-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.samba-hand .card { cursor: pointer; transition: transform 0.1s; }
+.samba-hand .card.selected { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(255,235,59,0.7); }
+.samba-hand .card:hover { transform: translateY(-5px); }
+.samba-btn {
+  padding: 0.4rem 1rem;
+  background: #4e342e;
+  color: #fff;
+  border: 2px solid #a1887f;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.samba-btn:hover:not(:disabled) { background: #6d4c41; }
+.samba-btn:disabled { opacity: 0.4; cursor: default; }
+.samba-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.samba-table-melds { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.samba-meld-group {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: rgba(255,255,255,0.08); padding: 4px; border-radius: 6px; font-size: 0.65rem;
+}
+.samba-meld-cards { display: flex; gap: 2px; }
+.samba-card-back {
+  width: 28px; height: 40px; background: #4e342e;
+  border-radius: 4px; border: 1px solid rgba(255,255,255,0.3);
+}
+.samba-label { font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; }
+.samba-result {
+  background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; max-width: 480px;
+}

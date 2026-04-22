@@ -278,6 +278,14 @@ import { frogCatcherPlugin } from "./frog-catcher/index.js";
 import { fallingCatcherPlugin } from "./falling-catcher/index.js";
 import { duckShootPlugin } from "./duck-shoot/index.js";
 import { stackerPlugin } from "./stacker/index.js";
+import { handAndFootPlugin } from "./hand-and-foot/index.js";
+import { canastaPlugin } from "./canasta/index.js";
+import { sambaPlugin } from "./samba/index.js";
+import { boliviaPlugin } from "./bolivia/index.js";
+import { continentalRummyPlugin } from "./continental-rummy/index.js";
+import { contractRummyPlugin } from "./contract-rummy/index.js";
+import { fiveHundredRumPlugin } from "./five-hundred-rum/index.js";
+import { kalookiPlugin } from "./kalooki/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -559,4 +567,12 @@ export const GAMES: GamePlugin[] = [
   fallingCatcherPlugin as unknown as GamePlugin,
   duckShootPlugin as unknown as GamePlugin,
   stackerPlugin as unknown as GamePlugin,
+  handAndFootPlugin as unknown as GamePlugin,
+  canastaPlugin as unknown as GamePlugin,
+  sambaPlugin as unknown as GamePlugin,
+  boliviaPlugin as unknown as GamePlugin,
+  continentalRummyPlugin as unknown as GamePlugin,
+  contractRummyPlugin as unknown as GamePlugin,
+  fiveHundredRumPlugin as unknown as GamePlugin,
+  kalookiPlugin as unknown as GamePlugin,
 ];

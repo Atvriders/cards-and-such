@@ -1,0 +1,44 @@
+.contract-rummy {
+  display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+  padding: 1rem; background: #1b0000; min-height: 100%; color: #fff;
+  font-family: sans-serif; box-sizing: border-box;
+}
+.contract-header {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
+}
+.contract-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.9rem; text-align: center; }
+.contract-info {
+  background: rgba(183,28,28,0.3); border: 1px solid rgba(183,28,28,0.5);
+  padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.85rem; text-align: center;
+}
+.contract-area { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+.contract-pile { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; font-size: 0.75rem; text-transform: uppercase; }
+.contract-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.contract-hand .card { cursor: pointer; transition: transform 0.1s; }
+.contract-hand .card.selected { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(255,235,59,0.7); }
+.contract-hand .card.dim { opacity: 0.35; }
+.contract-hand .card:hover:not(.dim) { transform: translateY(-5px); }
+.contract-groups { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin: 0.5rem 0; }
+.contract-group {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: rgba(183,28,28,0.2); padding: 6px; border-radius: 8px; min-width: 80px;
+}
+.contract-group-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
+.contract-group-cards { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; }
+.contract-table-melds { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.contract-meld-group {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: rgba(255,255,255,0.08); padding: 4px; border-radius: 6px; font-size: 0.65rem;
+}
+.contract-meld-cards { display: flex; gap: 2px; }
+.contract-btn {
+  padding: 0.4rem 1rem; background: #b71c1c; color: #fff;
+  border: 2px solid #ef9a9a; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+}
+.contract-btn:hover:not(:disabled) { background: #c62828; }
+.contract-btn:disabled { opacity: 0.4; cursor: default; }
+.contract-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.contract-card-back { width: 28px; height: 40px; background: #b71c1c; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); }
+.contract-label { font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; }
+.contract-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; max-width: 480px; }

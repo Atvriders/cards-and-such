@@ -1,0 +1,133 @@
+.canasta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #004d40;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.canasta-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.canasta-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.canasta-area {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.canasta-pile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.canasta-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.canasta-hand .card {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.canasta-hand .card.selected {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 12px rgba(255,235,59,0.7);
+}
+
+.canasta-hand .card:hover { transform: translateY(-5px); }
+
+.canasta-btn {
+  padding: 0.4rem 1rem;
+  background: #00695c;
+  color: #fff;
+  border: 2px solid #4db6ac;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.canasta-btn:hover:not(:disabled) { background: #00897b; }
+.canasta-btn:disabled { opacity: 0.4; cursor: default; }
+
+.canasta-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.canasta-table-melds {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.canasta-meld-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255,255,255,0.08);
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+}
+
+.canasta-meld-cards {
+  display: flex;
+  gap: 2px;
+}
+
+.canasta-card-back {
+  width: 28px;
+  height: 40px;
+  background: #00695c;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.canasta-label {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.canasta-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 480px;
+}

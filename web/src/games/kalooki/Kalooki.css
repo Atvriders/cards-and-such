@@ -1,0 +1,34 @@
+.kalooki {
+  display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+  padding: 1rem; background: #263238; min-height: 100%; color: #fff;
+  font-family: sans-serif; box-sizing: border-box;
+}
+.kalooki-header {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
+}
+.kalooki-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.9rem; text-align: center; }
+.kalooki-area { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+.kalooki-pile { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; font-size: 0.75rem; text-transform: uppercase; }
+.kalooki-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.kalooki-hand .card { cursor: pointer; transition: transform 0.1s; }
+.kalooki-hand .card.selected { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(255,235,59,0.7); }
+.kalooki-hand .card:hover { transform: translateY(-5px); }
+.kalooki-btn {
+  padding: 0.4rem 1rem; background: #37474f; color: #fff;
+  border: 2px solid #90a4ae; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+}
+.kalooki-btn:hover:not(:disabled) { background: #455a64; }
+.kalooki-btn:disabled { opacity: 0.4; cursor: default; }
+.kalooki-btn.kalooki-special { background: #6a1b9a; border-color: #ce93d8; }
+.kalooki-btn.kalooki-special:hover:not(:disabled) { background: #7b1fa2; }
+.kalooki-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.kalooki-table-melds { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.kalooki-meld-group {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: rgba(255,255,255,0.08); padding: 4px; border-radius: 6px; font-size: 0.65rem;
+}
+.kalooki-meld-cards { display: flex; gap: 2px; }
+.kalooki-card-back { width: 28px; height: 40px; background: #37474f; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); }
+.kalooki-label { font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; }
+.kalooki-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; max-width: 480px; }
