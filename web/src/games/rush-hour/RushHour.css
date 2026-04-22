@@ -1,0 +1,118 @@
+.rush-hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+.rush-hour-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.rush-hour-grid {
+  position: relative;
+  width: 264px;
+  height: 264px;
+  border: 4px solid #333;
+  background: #e8e0d5;
+  box-sizing: border-box;
+}
+
+.rush-hour-cell {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
+.rush-hour-exit {
+  position: absolute;
+  right: -20px;
+  top: 88px; /* row 2 * 44px */
+  width: 20px;
+  height: 44px;
+  background: #4caf50;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.rush-hour-block {
+  position: absolute;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.75rem;
+  box-sizing: border-box;
+  border: 2px solid rgba(0,0,0,0.3);
+  transition: box-shadow 0.1s, opacity 0.1s;
+}
+
+.rush-hour-block.player {
+  background: #e53935;
+  color: #fff;
+}
+
+.rush-hour-block.other {
+  background: #1565c0;
+  color: #fff;
+}
+
+.rush-hour-block.selected {
+  box-shadow: 0 0 0 3px #ffeb3b;
+  z-index: 10;
+}
+
+.rush-hour-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.rush-hour-controls button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 2px solid #1565c0;
+  border-radius: 6px;
+  background: #1565c0;
+  color: #fff;
+  transition: background 0.1s;
+}
+
+.rush-hour-controls button:hover:not(:disabled) {
+  background: #0d47a1;
+}
+
+.rush-hour-controls button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.rush-hour-move-hint {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.rush-hour-game-over {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2e7d32;
+  padding: 12px 24px;
+  border: 2px solid #2e7d32;
+  border-radius: 8px;
+  background: #e8f5e9;
+}

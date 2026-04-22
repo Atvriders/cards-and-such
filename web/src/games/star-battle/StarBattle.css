@@ -1,0 +1,79 @@
+.star-battle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+.star-battle-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.star-battle-grid {
+  display: inline-grid;
+  border: 3px solid #222;
+  gap: 0;
+}
+
+.star-battle-cell {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: background 0.1s;
+  background: #fff;
+}
+
+.star-battle-cell.region-border-right  { border-right:  2px solid #222; }
+.star-battle-cell.region-border-bottom { border-bottom: 2px solid #222; }
+
+.star-battle-cell.has-star {
+  color: #f5a623;
+}
+
+.star-battle-cell.has-dot {
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.star-battle-cell.error {
+  background: #ffe0e0;
+}
+
+.star-battle-legend {
+  font-size: 0.82rem;
+  color: #666;
+  text-align: center;
+}
+
+.star-battle-game-over {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f5a623;
+  padding: 12px 24px;
+  border: 2px solid #f5a623;
+  border-radius: 8px;
+  background: #fff8e7;
+}
+
+/* Region color backgrounds - subtle tints */
+.star-battle-cell.reg-0 { background: #fffde7; }
+.star-battle-cell.reg-1 { background: #e8f5e9; }
+.star-battle-cell.reg-2 { background: #e3f2fd; }
+.star-battle-cell.reg-3 { background: #fce4ec; }
+.star-battle-cell.reg-4 { background: #f3e5f5; }
+.star-battle-cell.reg-5 { background: #e0f7fa; }
+.star-battle-cell.reg-6 { background: #fff3e0; }
+.star-battle-cell.reg-7 { background: #f1f8e9; }
+
+.star-battle-cell.error { background: #ffe0e0 !important; }

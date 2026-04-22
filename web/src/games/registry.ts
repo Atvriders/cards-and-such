@@ -127,6 +127,17 @@ import { nurikabePlugin } from "./nurikabe/index.js";
 import { hidatoPlugin } from "./hidato/index.js";
 import { futoshikiPlugin } from "./futoshiki/index.js";
 import { cryptogramPlugin } from "./cryptogram/index.js";
+import { kakuroPlugin } from "./kakuro/index.js";
+import { kenkenPlugin } from "./kenken/index.js";
+import { tentsPlugin } from "./tents/index.js";
+import { skyscrapersPlugin } from "./skyscrapers/index.js";
+import { hitoriPlugin } from "./hitori/index.js";
+import { masyuPlugin } from "./masyu/index.js";
+import { killerSudokuPlugin } from "./killer-sudoku/index.js";
+import { rushHourPlugin } from "./rush-hour/index.js";
+import { sokobanPlugin } from "./sokoban/index.js";
+import { unrulyPlugin } from "./unruly/index.js";
+import { starBattlePlugin } from "./star-battle/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -257,4 +268,15 @@ export const GAMES: GamePlugin[] = [
   hidatoPlugin as unknown as GamePlugin,
   futoshikiPlugin as unknown as GamePlugin,
   cryptogramPlugin as unknown as GamePlugin,
+  kakuroPlugin as unknown as GamePlugin,
+  kenkenPlugin as unknown as GamePlugin,
+  tentsPlugin as unknown as GamePlugin,
+  skyscrapersPlugin as unknown as GamePlugin,
+  hitoriPlugin as unknown as GamePlugin,
+  masyuPlugin as unknown as GamePlugin,
+  killerSudokuPlugin as unknown as GamePlugin,
+  rushHourPlugin as unknown as GamePlugin,
+  sokobanPlugin as unknown as GamePlugin,
+  unrulyPlugin as unknown as GamePlugin,
+  starBattlePlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,85 @@
+.unruly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+.unruly-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.unruly-grid {
+  display: inline-grid;
+  border: 3px solid #222;
+  gap: 0;
+}
+
+.unruly-cell {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: background 0.1s;
+}
+
+.unruly-cell.empty {
+  background: #f8f8f8;
+  color: transparent;
+}
+
+.unruly-cell.black {
+  background: #222;
+  color: #fff;
+}
+
+.unruly-cell.white {
+  background: #fff;
+  color: #222;
+  border-color: #888;
+}
+
+.unruly-cell.given {
+  opacity: 0.9;
+}
+
+.unruly-cell.given.black {
+  background: #000;
+}
+
+.unruly-cell.given.white {
+  background: #eee;
+}
+
+.unruly-cell.error {
+  outline: 3px solid #e53935;
+  outline-offset: -2px;
+}
+
+.unruly-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.unruly-game-over {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0057b8;
+  padding: 12px 24px;
+  border: 2px solid #0057b8;
+  border-radius: 8px;
+  background: #e0ecff;
+}

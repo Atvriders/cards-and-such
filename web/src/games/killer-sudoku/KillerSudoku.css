@@ -1,0 +1,110 @@
+.killer-sudoku {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+.killer-sudoku-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.killer-sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 44px);
+  grid-template-rows: repeat(9, 44px);
+  border: 3px solid #222;
+}
+
+.killer-sudoku-cell {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background: #fff;
+  transition: background 0.1s;
+}
+
+.killer-sudoku-cell[data-col="2"],
+.killer-sudoku-cell[data-col="5"] {
+  border-right: 3px solid #222;
+}
+
+.killer-sudoku-cell[data-row="2"],
+.killer-sudoku-cell[data-row="5"] {
+  border-bottom: 3px solid #222;
+}
+
+.killer-sudoku-cell .cage-sum {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 0.55rem;
+  color: #666;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.killer-sudoku-cell.selected {
+  background: #cce5ff;
+}
+
+.killer-sudoku-cell.error {
+  background: #ffe0e0;
+  color: #c00;
+}
+
+.killer-sudoku-cell.highlight {
+  background: #e8f5e9;
+}
+
+.killer-sudoku-numpad {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.killer-sudoku-numpad button {
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  background: #f5f5f5;
+  transition: background 0.1s;
+}
+
+.killer-sudoku-numpad button:hover {
+  background: #e0ecff;
+  border-color: #0057b8;
+}
+
+.killer-sudoku-numpad button.erase {
+  font-size: 0.8rem;
+  color: #c00;
+  border-color: #c00;
+}
+
+.killer-sudoku-game-over {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0057b8;
+  padding: 12px 24px;
+  border: 2px solid #0057b8;
+  border-radius: 8px;
+  background: #e0ecff;
+}
