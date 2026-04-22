@@ -1,0 +1,129 @@
+.dudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.dudo-scoreboard {
+  display: flex;
+  gap: 32px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.dudo-player-info { color: #2a6a2a; }
+.dudo-bot-info { color: #555; }
+
+.dudo-roll-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dudo-roll-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.dudo-roll {
+  display: flex;
+  gap: 6px;
+}
+
+.dudo-die {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: #fff;
+}
+
+.dudo-die.wild {
+  border-color: #e05c00;
+  color: #e05c00;
+}
+
+.dudo-bid-display {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #333;
+  min-height: 1.5em;
+  text-align: center;
+}
+
+.dudo-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.dudo-bid-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dudo-bid-row label { font-size: 0.9rem; color: #555; }
+
+.dudo-bid-row select {
+  padding: 5px 8px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  border: 1px solid #888;
+}
+
+.dudo-btn-row {
+  display: flex;
+  gap: 10px;
+}
+
+.dudo-bid-btn {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #5a85c0;
+  background: #e0eaff;
+  cursor: pointer;
+}
+
+.dudo-bid-btn:hover { background: #c0d0f0; }
+
+.dudo-dudo-btn {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #c0392b;
+  background: #fde;
+  cursor: pointer;
+}
+
+.dudo-dudo-btn:hover { background: #f8c4c0; }
+.dudo-dudo-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.dudo-message {
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.dudo-message.win { color: #2a7a2a; font-weight: bold; font-size: 1.1rem; }
+.dudo-message.lose { color: #c0392b; font-weight: bold; }
+
+.dudo-wild-note {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}

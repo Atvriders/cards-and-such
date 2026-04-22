@@ -1,0 +1,116 @@
+.tenzi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.tenzi-header {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+}
+
+.tenzi-target-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tenzi-target-btn {
+  width: 44px;
+  height: 44px;
+  border: 2px solid #888;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tenzi-target-btn:hover {
+  background: #f0f8ff;
+  border-color: #3a8aee;
+}
+
+.tenzi-target-btn.active {
+  border-color: #f0a500;
+  background: #fff8e8;
+}
+
+.tenzi-dice-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 360px;
+}
+
+.tenzi-die {
+  width: 38px;
+  height: 38px;
+  border: 2px solid #888;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: #fff;
+}
+
+.tenzi-die.locked {
+  border-color: #3a8a3a;
+  background: #e0f8e0;
+  color: #2a6a2a;
+}
+
+.tenzi-stats {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.tenzi-roll-btn {
+  padding: 10px 28px;
+  font-size: 1.05rem;
+  border-radius: 6px;
+  border: 1px solid #5a85c0;
+  background: #e0eaff;
+  cursor: pointer;
+}
+
+.tenzi-roll-btn:hover:not(:disabled) {
+  background: #c8d8f8;
+}
+
+.tenzi-roll-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tenzi-message {
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.tenzi-message.done {
+  color: #2a7a2a;
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+
+.tenzi-progress {
+  font-size: 0.85rem;
+  color: #888;
+}

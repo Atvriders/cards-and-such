@@ -1,0 +1,161 @@
+.perudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.perudo-players {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.perudo-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  min-width: 80px;
+}
+
+.perudo-player.active {
+  border-color: #f0a500;
+  background: #fff8e8;
+}
+
+.perudo-player-name {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.perudo-dice-icons {
+  display: flex;
+  gap: 3px;
+}
+
+.perudo-die-icon {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #666;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  background: #fff;
+}
+
+.perudo-your-roll {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px;
+  background: #f0f4ff;
+  border-radius: 8px;
+  border: 1px solid #c0c8e8;
+}
+
+.perudo-die {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: #fff;
+}
+
+.perudo-die.wild {
+  border-color: #e05c00;
+  color: #e05c00;
+}
+
+.perudo-bid-display {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  min-height: 1.5em;
+}
+
+.perudo-bid-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.perudo-bid-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.perudo-bid-row label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.perudo-bid-row select {
+  padding: 5px 8px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  border: 1px solid #888;
+}
+
+.perudo-bid-btn {
+  padding: 9px 22px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #5a85c0;
+  background: #e0eaff;
+  cursor: pointer;
+}
+
+.perudo-bid-btn:hover {
+  background: #c0d0f0;
+}
+
+.perudo-dudo-btn {
+  padding: 9px 22px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #c0392b;
+  background: #fde;
+  cursor: pointer;
+}
+
+.perudo-dudo-btn:hover {
+  background: #f8c4c0;
+}
+
+.perudo-message {
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.perudo-message.win { color: #2a7a2a; font-weight: bold; font-size: 1.1rem; }
+.perudo-message.lose { color: #c0392b; font-weight: bold; }
+
+.perudo-wild-note {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}

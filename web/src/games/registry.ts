@@ -156,6 +156,12 @@ import { pinochlePlugin } from "./pinochle/index.js";
 import { sheepsheadPlugin } from "./sheepshead/index.js";
 import { wizardPlugin } from "./wizard/index.js";
 import { ninetyNinePlugin } from "./ninety-nine/index.js";
+import { cantStopPlugin } from "./cant-stop/index.js";
+import { perudoPlugin } from "./perudo/index.js";
+import { dudoPlugin } from "./dudo/index.js";
+import { kingdomsDicePlugin } from "./kingdoms-dice/index.js";
+import { tenziPlugin } from "./tenzi/index.js";
+import { beatThatPlugin } from "./beat-that/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -315,4 +321,10 @@ export const GAMES: GamePlugin[] = [
   sheepsheadPlugin as unknown as GamePlugin,
   wizardPlugin as unknown as GamePlugin,
   ninetyNinePlugin as unknown as GamePlugin,
+  cantStopPlugin as unknown as GamePlugin,
+  perudoPlugin as unknown as GamePlugin,
+  dudoPlugin as unknown as GamePlugin,
+  kingdomsDicePlugin as unknown as GamePlugin,
+  tenziPlugin as unknown as GamePlugin,
+  beatThatPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,165 @@
+.beat-that {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.beat-that-scoreboard {
+  display: flex;
+  gap: 24px;
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+.beat-that-player-wins { color: #2a6a2a; }
+.beat-that-bot-wins { color: #555; }
+
+.beat-that-round-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.beat-that-dice-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.beat-that-dice-row {
+  display: flex;
+  gap: 8px;
+}
+
+.beat-that-die {
+  width: 44px;
+  height: 44px;
+  border: 2px solid #888;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: #fff;
+  cursor: default;
+  user-select: none;
+}
+
+.beat-that-die.clickable {
+  cursor: pointer;
+  border-color: #5a85c0;
+}
+
+.beat-that-die.clickable:hover {
+  background: #e0eaff;
+}
+
+.beat-that-die.in-arrangement {
+  border-color: #3a8a3a;
+  background: #e0f8e0;
+}
+
+.beat-that-number {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #2a5a9a;
+  letter-spacing: 4px;
+}
+
+.beat-that-number.bot {
+  color: #888;
+}
+
+.beat-that-arrangement-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.beat-that-arrangement-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.beat-that-arrangement-slots {
+  display: flex;
+  gap: 8px;
+}
+
+.beat-that-slot {
+  width: 44px;
+  height: 44px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: #f8f8f8;
+}
+
+.beat-that-slot.filled {
+  border: 2px solid #3a8a3a;
+  background: #e0f8e0;
+  color: #2a6a2a;
+  cursor: pointer;
+}
+
+.beat-that-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.beat-that-controls button {
+  padding: 9px 22px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #666;
+  background: #fff;
+  cursor: pointer;
+}
+
+.beat-that-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.beat-that-controls .submit-btn {
+  background: #d4edda;
+  border-color: #28a745;
+}
+
+.beat-that-controls .submit-btn:hover:not(:disabled) {
+  background: #b8dacc;
+}
+
+.beat-that-round-result {
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #f0f4ff;
+  border: 1px solid #c0c8e8;
+  text-align: center;
+}
+
+.beat-that-round-result .winner { font-weight: bold; color: #2a6a2a; }
+.beat-that-round-result .loser { font-weight: bold; color: #c0392b; }
+
+.beat-that-message {
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.beat-that-message.win { color: #2a7a2a; font-weight: bold; font-size: 1.1rem; }
+.beat-that-message.lose { color: #c0392b; font-weight: bold; }

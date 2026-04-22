@@ -1,0 +1,150 @@
+.cant-stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.cant-stop-board {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.cant-stop-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.cant-stop-col-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #555;
+  margin-top: 4px;
+}
+
+.cant-stop-slot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: #f5f5f5;
+}
+
+.cant-stop-slot.claimed {
+  background: #3a8a3a;
+  border-color: #2a6a2a;
+}
+
+.cant-stop-slot.banked {
+  background: #6aabde;
+  border-color: #3a7aae;
+}
+
+.cant-stop-slot.runner {
+  background: #f0a500;
+  border-color: #c07800;
+}
+
+.cant-stop-dice {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  min-height: 60px;
+  align-items: center;
+}
+
+.cant-stop-splits {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cant-stop-splits button {
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 2px solid #888;
+  background: #fff;
+  cursor: pointer;
+}
+
+.cant-stop-splits button:hover {
+  background: #eee;
+}
+
+.cant-stop-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.cant-stop-controls button {
+  padding: 9px 22px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #666;
+  background: #fff;
+  cursor: pointer;
+}
+
+.cant-stop-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cant-stop-controls .bank-btn {
+  background: #d4edda;
+  border-color: #28a745;
+}
+
+.cant-stop-controls .bank-btn:hover:not(:disabled) {
+  background: #b8dacc;
+}
+
+.cant-stop-message {
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.cant-stop-message.win {
+  color: #2a7a2a;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.cant-stop-message.bust {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.cant-stop-legend {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.cant-stop-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cant-stop-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.cant-stop-legend-dot.claimed { background: #3a8a3a; }
+.cant-stop-legend-dot.runner { background: #f0a500; }
+.cant-stop-legend-dot.banked { background: #6aabde; }
