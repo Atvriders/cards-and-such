@@ -1,0 +1,61 @@
+.amazons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.amazons-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+}
+
+.amazons-status.win { color: #2a7d2e; }
+.amazons-status.loss { color: #b02020; }
+
+.amazons-board {
+  display: grid;
+  grid-template-columns: repeat(10, 46px);
+  grid-template-rows: repeat(10, 46px);
+  border: 2px solid #555;
+  overflow: auto;
+  max-width: 100vw;
+}
+
+.amz-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: background 0.1s;
+  user-select: none;
+}
+
+.amz-cell.light { background: #f0e8d0; }
+.amz-cell.dark  { background: #b8a060; }
+.amz-cell.highlighted { background: #90e090 !important; }
+.amz-cell.selected { background: #60a0ff !important; }
+.amz-cell.moved { background: #80c0ff !important; }
+
+.amz-queen.human { color: #2040c0; }
+.amz-queen.bot   { color: #c02020; }
+.amz-arrow { color: #555; font-size: 0.9rem; }
+
+.amazons-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.amz-leg { }
+.human-leg { color: #2040c0; font-weight: 600; }
+.bot-leg   { color: #c02020; font-weight: 600; }
+
+.amazons-moves { font-size: 0.8rem; color: #666; }

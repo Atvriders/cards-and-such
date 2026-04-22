@@ -1,0 +1,143 @@
+.pentago {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.pentago-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+}
+
+.pentago-status.win { color: #2a7d2e; }
+.pentago-status.loss { color: #b02020; }
+
+.pentago-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pentago-board {
+  display: grid;
+  grid-template-columns: repeat(3, 52px) 4px repeat(3, 52px);
+  grid-template-rows: repeat(3, 52px) 4px repeat(3, 52px);
+  gap: 2px;
+  background: #8b6020;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* The board uses 6 cols + 1 gap col */
+/* CSS grid for pentago: we need a divider. Use a simpler flat grid with borders */
+.pentago-board {
+  display: grid;
+  grid-template-columns: repeat(6, 50px);
+  grid-template-rows: repeat(6, 50px);
+  gap: 3px;
+  background: #c8a030;
+  padding: 8px;
+  border-radius: 6px;
+  border: 3px solid #8b5e10;
+}
+
+.pent-cell {
+  background: #d4a840;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid #a07820;
+  transition: background 0.1s;
+}
+
+.pent-cell:hover { background: #e0b850; }
+
+.pent-cell.last-placed { border-color: #f0c040; box-shadow: 0 0 6px #f0c04088; }
+
+/* Quadrant separators via borders */
+.pent-cell.top.left { border-right: none; border-bottom: none; }
+.pent-cell.top.right { border-left: none; border-bottom: none; }
+.pent-cell.bottom.left { border-right: none; border-top: none; }
+.pent-cell.bottom.right { border-left: none; border-top: none; }
+
+/* Thicker border between quadrants */
+.pent-cell[class*="top"][data-col="2"] { border-right: 3px solid #8b5e10 !important; }
+.pent-cell[class*="bottom"][data-col="2"] { border-right: 3px solid #8b5e10 !important; }
+.pent-cell[class*="left"][data-row="2"] { border-bottom: 3px solid #8b5e10 !important; }
+.pent-cell[class*="right"][data-row="2"] { border-bottom: 3px solid #8b5e10 !important; }
+
+.pent-marble {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pent-marble.black { background: radial-gradient(circle at 35% 35%, #555, #111); }
+.pent-marble.white { background: radial-gradient(circle at 35% 35%, #fff, #ccc); border: 1px solid #aaa; }
+
+.pent-hint {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  pointer-events: none;
+}
+
+.pentago-rotations {
+  background: #f5f0e8;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pent-rot-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.pent-rot-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pent-rot-name {
+  width: 110px;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.pent-rot-btn {
+  padding: 4px 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.pent-rot-btn:hover { background: #e8e8e8; }
+
+.pentago-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.black-leg { color: #222; font-weight: 600; }
+.white-leg { color: #888; font-weight: 600; }

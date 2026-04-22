@@ -109,6 +109,12 @@ import { gatePlugin } from "./gate/index.js";
 import { yukonCellsPlugin } from "./yukon-cells/index.js";
 import { whiteheadPlugin } from "./whitehead/index.js";
 import { slyFoxPlugin } from "./sly-fox/index.js";
+import { hexPlugin } from "./hex/index.js";
+import { abalonePlugin } from "./abalone/index.js";
+import { santoriniPlugin } from "./santorini/index.js";
+import { blokusDuoPlugin } from "./blokus-duo/index.js";
+import { pentagoPlugin } from "./pentago/index.js";
+import { amazonsPlugin } from "./amazons/index.js";
 
 export const GAMES: GamePlugin[] = [
   accordionPlugin as unknown as GamePlugin,
@@ -221,4 +227,10 @@ export const GAMES: GamePlugin[] = [
   yukonCellsPlugin as unknown as GamePlugin,
   whiteheadPlugin as unknown as GamePlugin,
   slyFoxPlugin as unknown as GamePlugin,
+  hexPlugin as unknown as GamePlugin,
+  abalonePlugin as unknown as GamePlugin,
+  santoriniPlugin as unknown as GamePlugin,
+  blokusDuoPlugin as unknown as GamePlugin,
+  pentagoPlugin as unknown as GamePlugin,
+  amazonsPlugin as unknown as GamePlugin,
 ];
