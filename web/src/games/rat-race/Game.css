@@ -1,0 +1,158 @@
+.rat-race {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.race-status { font-size: 1.1rem; font-weight: 700; min-height: 1.5em; color: #333; }
+.race-status.win { color: #2a7d2e; }
+.race-status.loss { color: #b02020; }
+
+.rat-card-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.rat-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  font-weight: 600;
+  font-size: 1rem;
+  min-width: 220px;
+}
+.card-move { background: #e0f0e0; border-color: #4a8a4a; color: #2a6a2a; }
+.card-back { background: #f0e0e0; border-color: #a04040; color: #802020; }
+.card-skip { background: #e8e0f0; border-color: #7060a0; color: #504080; }
+.card-extra { background: #fff0c0; border-color: #a08000; color: #806000; }
+.card-teleport { background: #e0e8ff; border-color: #4060c0; color: #2040a0; }
+
+.card-emoji { font-size: 1.4rem; }
+.card-text { font-size: 0.95rem; }
+
+.draw-btn {
+  padding: 10px 24px;
+  background: #2060c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.draw-btn:hover { background: #1050a0; }
+.skip-btn { background: #888; }
+.skip-btn:hover { background: #555; }
+
+.confirm-btn {
+  padding: 8px 20px;
+  background: #4a9a4a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.confirm-btn:hover { background: #2a7a2a; }
+
+.rat-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.rat-track-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.track-label.color-blue { color: #2060c0; }
+.track-label.color-red { color: #c02020; }
+.track-label.color-green { color: #206020; }
+.track-label.color-orange { color: #c07000; }
+
+.skip-badge {
+  font-size: 0.6rem;
+  background: #c02020;
+  color: #fff;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.track-bar {
+  flex: 1;
+  height: 28px;
+  background: #e8e8e8;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+.track-fill {
+  height: 100%;
+  border-radius: 14px;
+  transition: width 0.3s ease;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.track-fill.color-blue { background: #2060c0; }
+.track-fill.color-red { background: #c02020; }
+.track-fill.color-green { background: #206020; }
+.track-fill.color-orange { background: #c07000; }
+
+.track-token-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  transition: left 0.3s ease;
+  z-index: 2;
+}
+.track-token-marker.color-blue { background: #2060c0; }
+.track-token-marker.color-red { background: #c02020; }
+.track-token-marker.color-green { background: #206020; }
+.track-token-marker.color-orange { background: #c07000; }
+
+.track-tokens { display: none; }
+
+.track-pos {
+  font-size: 0.8rem;
+  color: #666;
+  min-width: 40px;
+  text-align: right;
+}
+
+.race-legend { font-size: 0.72rem; color: #888; text-align: center; max-width: 400px; }

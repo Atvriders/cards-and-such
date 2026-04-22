@@ -162,6 +162,12 @@ import { dudoPlugin } from "./dudo/index.js";
 import { kingdomsDicePlugin } from "./kingdoms-dice/index.js";
 import { tenziPlugin } from "./tenzi/index.js";
 import { beatThatPlugin } from "./beat-that/index.js";
+import { parcheesiPlugin } from "./parcheesi/index.js";
+import { ludoPlugin } from "./ludo/index.js";
+import { sorryPlugin } from "./sorry/index.js";
+import { troublePlugin } from "./trouble/index.js";
+import { snakesAndLaddersPlugin } from "./snakes-and-ladders/index.js";
+import { ratRacePlugin } from "./rat-race/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -327,4 +333,10 @@ export const GAMES: GamePlugin[] = [
   kingdomsDicePlugin as unknown as GamePlugin,
   tenziPlugin as unknown as GamePlugin,
   beatThatPlugin as unknown as GamePlugin,
+  parcheesiPlugin as unknown as GamePlugin,
+  ludoPlugin as unknown as GamePlugin,
+  sorryPlugin as unknown as GamePlugin,
+  troublePlugin as unknown as GamePlugin,
+  snakesAndLaddersPlugin as unknown as GamePlugin,
+  ratRacePlugin as unknown as GamePlugin,
 ];

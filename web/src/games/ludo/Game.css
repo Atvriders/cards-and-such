@@ -1,0 +1,109 @@
+.ludo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.race-status { font-size: 1.1rem; font-weight: 700; min-height: 1.5em; color: #333; }
+.race-status.win { color: #2a7d2e; }
+.race-status.loss { color: #b02020; }
+
+.ludo-die-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.die-face {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #555;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: #fff;
+}
+
+.roll-btn {
+  padding: 8px 18px;
+  background: #2060c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.roll-btn:hover { background: #1050a0; }
+
+.ludo-players {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.ludo-player-panel {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-width: 160px;
+  background: #fafafa;
+}
+.ludo-player-panel.active-turn { border-width: 3px; }
+.ludo-player-panel.color-blue { border-color: #2060c0; }
+.ludo-player-panel.color-red { border-color: #c02020; }
+.ludo-player-panel.color-green { border-color: #206020; }
+.ludo-player-panel.color-orange { border-color: #c07000; }
+
+.player-label { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+.color-blue .player-label { color: #2060c0; }
+.color-red .player-label { color: #c02020; }
+.color-green .player-label { color: #206020; }
+.color-orange .player-label { color: #c07000; }
+
+.pawn-list { display: flex; flex-direction: column; gap: 4px; }
+.pawn-entry { display: flex; align-items: center; gap: 6px; }
+
+.pawn-token {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.pawn-token.color-blue { background: #2060c0; }
+.pawn-token.color-red { background: #c02020; }
+.pawn-token.color-green { background: #206020; }
+.pawn-token.color-orange { background: #c07000; }
+.pawn-token.finished { opacity: 0.5; }
+
+.pawn-pos { font-size: 0.8rem; color: #555; min-width: 48px; }
+
+.move-btn {
+  padding: 2px 7px;
+  background: #2060c0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.move-btn:hover { background: #1050a0; }
+
+.race-legend { font-size: 0.72rem; color: #888; text-align: center; max-width: 400px; }
