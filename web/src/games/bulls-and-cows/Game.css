@@ -1,0 +1,94 @@
+.bac {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: monospace;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.bac-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.bac-status {
+  font-size: 1rem;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #e8f0fe;
+}
+.bac-status.win { background: #d4edda; color: #155724; }
+.bac-status.loss { background: #f8d7da; color: #721c24; }
+
+.bac-history {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bac-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+.bac-row-num { color: #888; width: 18px; text-align: right; }
+.bac-row-guess {
+  flex: 1;
+  font-size: 1.3rem;
+  letter-spacing: 6px;
+  font-weight: 700;
+}
+.bac-row-feedback {
+  font-size: 0.85rem;
+  color: #333;
+  white-space: nowrap;
+}
+.bac-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.bac-display {
+  font-size: 2rem;
+  letter-spacing: 10px;
+  font-weight: 700;
+  min-height: 2.5rem;
+  padding: 4px 8px;
+  border-bottom: 3px solid #2060c0;
+  min-width: 120px;
+  text-align: center;
+}
+.bac-numpad {
+  display: grid;
+  grid-template-columns: repeat(5, 44px);
+  gap: 6px;
+}
+.bac-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: #dee2e6;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.bac-btn:hover { background: #adb5bd; }
+.bac-btn.submit { background: #2060c0; color: white; }
+.bac-btn.submit:hover { background: #174ea6; }
+.bac-btn.back { background: #6c757d; color: white; }
+.bac-secret {
+  font-size: 1.6rem;
+  letter-spacing: 8px;
+  font-weight: 700;
+  padding: 8px;
+  background: #fff3cd;
+  border-radius: 8px;
+}

@@ -121,6 +121,12 @@ import { santoriniPlugin } from "./santorini/index.js";
 import { blokusDuoPlugin } from "./blokus-duo/index.js";
 import { pentagoPlugin } from "./pentago/index.js";
 import { amazonsPlugin } from "./amazons/index.js";
+import { bullsAndCowsPlugin } from "./bulls-and-cows/index.js";
+import { slitherlinkPlugin } from "./slitherlink/index.js";
+import { nurikabePlugin } from "./nurikabe/index.js";
+import { hidatoPlugin } from "./hidato/index.js";
+import { futoshikiPlugin } from "./futoshiki/index.js";
+import { cryptogramPlugin } from "./cryptogram/index.js";
 
 export const GAMES: GamePlugin[] = [
   cameroonPlugin as unknown as GamePlugin,
@@ -245,4 +251,10 @@ export const GAMES: GamePlugin[] = [
   blokusDuoPlugin as unknown as GamePlugin,
   pentagoPlugin as unknown as GamePlugin,
   amazonsPlugin as unknown as GamePlugin,
+  bullsAndCowsPlugin as unknown as GamePlugin,
+  slitherlinkPlugin as unknown as GamePlugin,
+  nurikabePlugin as unknown as GamePlugin,
+  hidatoPlugin as unknown as GamePlugin,
+  futoshikiPlugin as unknown as GamePlugin,
+  cryptogramPlugin as unknown as GamePlugin,
 ];

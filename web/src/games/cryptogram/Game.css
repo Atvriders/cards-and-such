@@ -1,0 +1,184 @@
+.crypto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.crypto-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.crypto-status {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.crypto-status.win {
+  color: #2e7d32;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.crypto-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  max-width: 600px;
+}
+
+.crypto-word {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+.crypto-letter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 22px;
+}
+
+.crypto-letter.clickable {
+  cursor: pointer;
+}
+
+.crypto-letter.clickable:hover .crypto-cipher {
+  color: #1565c0;
+}
+
+.crypto-letter.selected .crypto-cipher {
+  color: #c62828;
+  font-weight: 700;
+}
+
+.crypto-letter.revealed .crypto-plain {
+  color: #2e7d32;
+  font-weight: 700;
+}
+
+.crypto-plain {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  min-height: 22px;
+  letter-spacing: 1px;
+}
+
+.crypto-cipher {
+  font-size: 0.75rem;
+  color: #888;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  text-align: center;
+  padding-top: 1px;
+}
+
+.crypto-sel-label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.crypto-alpha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  max-width: 380px;
+}
+
+.crypto-alpha-btn {
+  width: 34px;
+  height: 34px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #1565c0;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.crypto-alpha-btn:hover {
+  background: #1976d2;
+}
+
+.crypto-alpha-btn.disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.crypto-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.crypto-action-btn {
+  padding: 7px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #546e7a;
+  color: #fff;
+}
+
+.crypto-action-btn:hover {
+  background: #607d8b;
+}
+
+.crypto-action-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.crypto-action-btn.hint {
+  background: #f57c00;
+}
+
+.crypto-action-btn.hint:hover {
+  background: #fb8c00;
+}
+
+.crypto-reveal {
+  text-align: center;
+  padding: 12px;
+  background: #e8f5e9;
+  border-radius: 8px;
+  border: 1px solid #a5d6a7;
+  max-width: 560px;
+}
+
+.crypto-reveal-label {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.crypto-reveal-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1b5e20;
+  text-transform: capitalize;
+}
+
+.crypto-hint {
+  font-size: 0.8rem;
+  color: #888;
+  max-width: 400px;
+  text-align: center;
+}

@@ -1,0 +1,41 @@
+.slither {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: monospace;
+}
+.slither-title { font-size: 1.4rem; font-weight: 700; }
+.slither-status {
+  font-size: 0.95rem;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #e8f0fe;
+}
+.slither-status.win { background: #d4edda; color: #155724; }
+.slither-grid-wrap { overflow: auto; }
+.slither-svg { display: block; }
+.slither-edge {
+  stroke: #ccc;
+  stroke-width: 4;
+  stroke-linecap: round;
+  cursor: pointer;
+  transition: stroke 0.1s;
+}
+.slither-edge:hover { stroke: #aaa; }
+.slither-edge.active { stroke: #2060c0; }
+.slither-edge.win-active { stroke: #28a745; }
+.slither-dot { fill: #333; }
+.slither-clue {
+  font-size: 14px;
+  fill: #444;
+  font-family: monospace;
+  font-weight: 700;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+.slither-hint {
+  font-size: 0.85rem;
+  color: #666;
+}

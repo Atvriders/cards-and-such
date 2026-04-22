@@ -1,0 +1,113 @@
+.hidato {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.hidato-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.hidato-status {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.hidato-status.win {
+  color: #2e7d32;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.hidato-grid {
+  display: grid;
+  gap: 3px;
+}
+
+.hidato-cell {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #888;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: #1a1a2e;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.hidato-cell:hover:not(.blocked):not(.given) {
+  background: #e3f2fd;
+}
+
+.hidato-cell.blocked {
+  background: #333;
+  border-color: #333;
+  cursor: default;
+}
+
+.hidato-cell.given {
+  background: #dde;
+  cursor: default;
+  color: #333;
+}
+
+.hidato-cell.selected {
+  background: #bbdefb;
+  border-color: #1565c0;
+}
+
+.hidato-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.hidato-number-input {
+  width: 70px;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border: 2px solid #888;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.hidato-btn {
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #1565c0;
+  color: #fff;
+  font-weight: 600;
+}
+
+.hidato-btn:hover {
+  background: #1976d2;
+}
+
+.hidato-btn.clear {
+  background: #c62828;
+}
+
+.hidato-btn.clear:hover {
+  background: #e53935;
+}
+
+.hidato-hint {
+  font-size: 0.8rem;
+  color: #888;
+  max-width: 360px;
+  text-align: center;
+}

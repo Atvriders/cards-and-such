@@ -1,0 +1,141 @@
+.futoshiki {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.futoshiki-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.futoshiki-status {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.futoshiki-status.win {
+  color: #2e7d32;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.futoshiki-grid-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.futoshiki-grid-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.futoshiki-ineq-v-row {
+  /* intentionally displayed below each row */
+}
+
+.futoshiki-cell-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.futoshiki-cell {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #888;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: #1a1a2e;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.futoshiki-cell:hover:not(.given) {
+  background: #e3f2fd;
+}
+
+.futoshiki-cell.given {
+  background: #dde;
+  cursor: default;
+  color: #333;
+}
+
+.futoshiki-cell.selected {
+  background: #bbdefb;
+  border-color: #1565c0;
+}
+
+.futoshiki-ineq-h {
+  width: 24px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #c62828;
+}
+
+.futoshiki-ineq-v {
+  width: 44px;
+  height: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #c62828;
+  line-height: 20px;
+}
+
+.futoshiki-ineq-h-spacer {
+  width: 24px;
+}
+
+.futoshiki-numpad {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.futoshiki-num-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #1565c0;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.futoshiki-num-btn:hover {
+  background: #1976d2;
+}
+
+.futoshiki-num-btn.clear {
+  background: #c62828;
+}
+
+.futoshiki-num-btn.clear:hover {
+  background: #e53935;
+}
+
+.futoshiki-hint {
+  font-size: 0.8rem;
+  color: #888;
+  max-width: 380px;
+  text-align: center;
+}
