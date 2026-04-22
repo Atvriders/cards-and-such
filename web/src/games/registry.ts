@@ -218,6 +218,12 @@ import { mahjongPyramidPlugin } from "./mahjong-solitaire-pyramid/index.js";
 import { shisenShoPlugin } from "./shisen-sho/index.js";
 import { pairsThemedPlugin } from "./pairs-themed/index.js";
 import { tileMatchRushPlugin } from "./tile-match-rush/index.js";
+import { russianSolitairePlugin } from "./russian-solitaire/index.js";
+import { bakersDozPlugin } from "./bakers-dozen/index.js";
+import { sultanPlugin } from "./sultan-of-turkey/index.js";
+import { grandfathersClockPlugin } from "./grandfathers-clock/index.js";
+import { scorpionTailPlugin } from "./scorpion-tail/index.js";
+import { carpetPlugin } from "./carpet/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -439,4 +445,10 @@ export const GAMES: GamePlugin[] = [
   shisenShoPlugin as unknown as GamePlugin,
   pairsThemedPlugin as unknown as GamePlugin,
   tileMatchRushPlugin as unknown as GamePlugin,
+  russianSolitairePlugin as unknown as GamePlugin,
+  bakersDozPlugin as unknown as GamePlugin,
+  sultanPlugin as unknown as GamePlugin,
+  grandfathersClockPlugin as unknown as GamePlugin,
+  scorpionTailPlugin as unknown as GamePlugin,
+  carpetPlugin as unknown as GamePlugin,
 ];

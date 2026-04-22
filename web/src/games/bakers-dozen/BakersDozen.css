@@ -1,0 +1,45 @@
+.bakers-dozen {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.bakers-dozen-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bakers-dozen-info button {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.bakers-dozen-info button:hover {
+  background: #444;
+}
+
+.bakers-dozen-foundations {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.bakers-dozen-tableau {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}

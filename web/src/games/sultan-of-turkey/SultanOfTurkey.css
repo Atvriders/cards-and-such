@@ -1,0 +1,72 @@
+.sultan {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.sultan-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sultan-main {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.sultan-stock-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.sultan-stock-btn {
+  padding: 4px 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.sultan-stock-btn:hover {
+  background: #444;
+}
+
+.sultan-foundations {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-width: 400px;
+}
+
+.sultan-reserve {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sultan-waste-area {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.sultan-label {
+  font-size: 10px;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 2px;
+}

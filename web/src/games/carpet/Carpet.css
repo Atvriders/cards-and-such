@@ -1,0 +1,55 @@
+.carpet {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.carpet-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.carpet-top-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.carpet-stock-area {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.carpet-foundations {
+  display: flex;
+  gap: 6px;
+}
+
+.carpet-cells {
+  display: flex;
+  gap: 6px;
+}
+
+.carpet-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  width: fit-content;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.carpet-section-label {
+  font-size: 10px;
+  color: #aaa;
+  margin-bottom: 4px;
+}

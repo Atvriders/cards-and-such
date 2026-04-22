@@ -1,0 +1,59 @@
+.grandfathers-clock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.grandfathers-clock-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.grandfathers-clock-info button {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.grandfathers-clock-info button:hover {
+  background: #444;
+}
+
+.grandfathers-clock-main {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.grandfathers-clock-clock {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  width: 280px;
+}
+
+.grandfathers-clock-tableau {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  max-width: 500px;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.clock-label {
+  font-size: 10px;
+  color: #aaa;
+  text-align: center;
+}
