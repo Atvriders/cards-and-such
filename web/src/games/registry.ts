@@ -230,6 +230,14 @@ import { threeCardPokerPlugin } from "./three-card-poker/index.js";
 import { redDogPlugin } from "./red-dog/index.js";
 import { casinoWarPlugin } from "./casino-war/index.js";
 import { sicBoPlugin } from "./sic-bo/index.js";
+import { rockPaperScissorsPlugin } from "./rock-paper-scissors/index.js";
+import { nimPlugin } from "./nim/index.js";
+import { truelPlugin } from "./truel/index.js";
+import { secretNumberPlugin } from "./secret-number/index.js";
+import { primeClimbPlugin } from "./prime-climb/index.js";
+import { rummikubPlugin } from "./rummikub/index.js";
+import { quixoPlugin } from "./quixo/index.js";
+import { quartoPlugin } from "./quarto/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -463,4 +471,12 @@ export const GAMES: GamePlugin[] = [
   redDogPlugin as unknown as GamePlugin,
   casinoWarPlugin as unknown as GamePlugin,
   sicBoPlugin as unknown as GamePlugin,
+  rockPaperScissorsPlugin as unknown as GamePlugin,
+  nimPlugin as unknown as GamePlugin,
+  truelPlugin as unknown as GamePlugin,
+  secretNumberPlugin as unknown as GamePlugin,
+  primeClimbPlugin as unknown as GamePlugin,
+  rummikubPlugin as unknown as GamePlugin,
+  quixoPlugin as unknown as GamePlugin,
+  quartoPlugin as unknown as GamePlugin,
 ];

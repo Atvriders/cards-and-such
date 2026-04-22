@@ -1,0 +1,112 @@
+.nim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.nim-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  min-height: 1.6em;
+}
+.nim-status.win { color: #27ae60; }
+.nim-status.loss { color: #e74c3c; }
+
+.nim-piles {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nim-pile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.nim-stones {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  min-height: 120px;
+  align-items: center;
+}
+
+.nim-stone {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #888, #444);
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.nim-pile-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nim-pile-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nim-pile-btn:hover:not(:disabled) { background: #eee; }
+.nim-pile-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.nim-pile-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.nim-pile-count {
+  font-size: 1rem;
+  font-weight: bold;
+  min-width: 24px;
+  text-align: center;
+}
+
+.nim-take-btn {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #e74c3c;
+  color: #fff;
+  cursor: pointer;
+}
+.nim-take-btn:hover:not(:disabled) { background: #c0392b; }
+.nim-take-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.nim-restart {
+  padding: 8px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #3498db;
+  color: #fff;
+  cursor: pointer;
+}
+.nim-restart:hover { background: #2980b9; }
+
+.nim-info {
+  color: #777;
+  font-size: 0.9rem;
+}

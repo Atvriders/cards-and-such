@@ -1,0 +1,174 @@
+.pc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.pc-board {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.pc-player-side, .pc-bot-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pc-player-side h3, .pc-bot-side h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.pc-pawns {
+  display: flex;
+  gap: 12px;
+}
+
+.pc-pawn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pc-pawn-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.15s;
+}
+
+.pc-player-side .pc-pawn-circle {
+  background: #3498db;
+}
+
+.pc-bot-side .pc-pawn-circle {
+  background: #e74c3c;
+  cursor: default;
+}
+
+.pc-pawn-circle.selected {
+  border-color: #f39c12;
+  box-shadow: 0 0 0 2px #f39c12;
+}
+
+.pc-pawn-circle.at-target {
+  background: #27ae60;
+}
+
+.pc-pawn-label {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.pc-dice {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.pc-die {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #555;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.pc-die.used {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pc-die:hover:not(.used) {
+  background: #eaf2ff;
+  border-color: #3498db;
+}
+
+.pc-die.chosen-die {
+  border-color: #3498db;
+  background: #eaf2ff;
+}
+
+.pc-ops {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pc-op-btn {
+  width: 42px;
+  height: 42px;
+  font-size: 1.3rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.pc-op-btn:hover:not(:disabled) { background: #f0f0f0; border-color: #888; }
+.pc-op-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pc-status {
+  font-size: 1rem;
+  color: #333;
+  min-height: 1.4em;
+  text-align: center;
+}
+.pc-status.win { color: #27ae60; font-weight: bold; font-size: 1.2rem; }
+.pc-status.loss { color: #e74c3c; font-weight: bold; font-size: 1.2rem; }
+
+.pc-roll-btn {
+  padding: 8px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #27ae60;
+  color: #fff;
+  cursor: pointer;
+}
+.pc-roll-btn:hover { background: #1e8449; }
+.pc-roll-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pc-restart {
+  padding: 8px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #3498db;
+  color: #fff;
+  cursor: pointer;
+}
+.pc-restart:hover { background: #2980b9; }
+
+.pc-hint {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+}

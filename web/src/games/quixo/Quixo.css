@@ -1,0 +1,107 @@
+.quixo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.quixo-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  min-height: 1.6em;
+  text-align: center;
+}
+.quixo-status.win { color: #27ae60; }
+.quixo-status.loss { color: #e74c3c; }
+
+.quixo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 64px);
+  grid-template-rows: repeat(5, 64px);
+  gap: 3px;
+}
+
+.quixo-cell {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: #fff;
+  cursor: default;
+  user-select: none;
+  transition: all 0.1s;
+}
+
+.quixo-cell.edge {
+  cursor: pointer;
+}
+
+.quixo-cell.edge:hover {
+  background: #f0f4ff;
+  border-color: #3498db;
+}
+
+.quixo-cell.selected {
+  background: #d6eaf8;
+  border-color: #2980b9;
+  border-width: 3px;
+}
+
+.quixo-cell.winning {
+  background: #ffe066;
+  border-color: #f39c12;
+}
+
+.quixo-cell.x { color: #e74c3c; }
+.quixo-cell.o { color: #2980b9; }
+.quixo-cell.inner { opacity: 0.6; }
+
+.quixo-dirs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.quixo-dir-btn {
+  padding: 8px 20px;
+  font-size: 1.1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.quixo-dir-btn:hover:not(:disabled) {
+  background: #d6eaf8;
+  border-color: #2980b9;
+}
+
+.quixo-dir-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.quixo-hint {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.quixo-restart {
+  padding: 8px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #3498db;
+  color: #fff;
+  cursor: pointer;
+}
+.quixo-restart:hover { background: #2980b9; }
