@@ -318,6 +318,14 @@ import { easthavenPlugin } from "./easthaven/index.js";
 import { klondikeByThreesPlugin } from "./klondike-by-threes/index.js";
 import { aceOfThePilePlugin } from "./ace-of-the-pile/index.js";
 import { relaxedSpiderPlugin } from "./relaxed-spider/index.js";
+import { spellingBeePlugin } from "./spelling-bee/index.js";
+import { crosswordMiniPlugin } from "./crossword-mini/index.js";
+import { textTwistPlugin } from "./text-twist/index.js";
+import { acrosticPlugin } from "./acrostic/index.js";
+import { bananagramsPlugin } from "./bananagrams/index.js";
+import { quordlePlugin } from "./quordle/index.js";
+import { wordChainPlugin } from "./word-chain/index.js";
+import { wordConstructionPlugin } from "./word-construction/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -639,4 +647,12 @@ export const GAMES: GamePlugin[] = [
   klondikeByThreesPlugin as unknown as GamePlugin,
   aceOfThePilePlugin as unknown as GamePlugin,
   relaxedSpiderPlugin as unknown as GamePlugin,
+  spellingBeePlugin as unknown as GamePlugin,
+  crosswordMiniPlugin as unknown as GamePlugin,
+  textTwistPlugin as unknown as GamePlugin,
+  acrosticPlugin as unknown as GamePlugin,
+  bananagramsPlugin as unknown as GamePlugin,
+  quordlePlugin as unknown as GamePlugin,
+  wordChainPlugin as unknown as GamePlugin,
+  wordConstructionPlugin as unknown as GamePlugin,
 ];
