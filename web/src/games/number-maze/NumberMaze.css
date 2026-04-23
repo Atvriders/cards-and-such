@@ -1,0 +1,126 @@
+.nm-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #111827;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.nm-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #34d399;
+}
+
+.nm-info {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.nm-grid {
+  display: grid;
+  gap: 4px;
+}
+
+.nm-cell {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  transition: background 0.2s;
+}
+
+.nm-cell.current {
+  background: #1d4ed8;
+  border-color: #60a5fa;
+  box-shadow: 0 0 12px rgba(96,165,250,0.5);
+}
+
+.nm-cell.exit {
+  background: #065f46;
+  border-color: #34d399;
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #34d399;
+  letter-spacing: 0.05em;
+}
+
+.nm-cell.visited {
+  background: rgba(255,255,255,0.12);
+  color: #9ca3af;
+}
+
+.nm-cell.start {
+  border-color: #fbbf24;
+}
+
+.nm-instruction {
+  font-size: 1rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.nm-arrow-pad {
+  display: grid;
+  grid-template-areas:
+    ". up ."
+    "left . right"
+    ". down .";
+  gap: 4px;
+}
+
+.nm-arrow {
+  width: 52px;
+  height: 52px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #374151;
+  color: #fff;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.nm-arrow.up { grid-area: up; }
+.nm-arrow.down { grid-area: down; }
+.nm-arrow.left { grid-area: left; }
+.nm-arrow.right { grid-area: right; }
+
+.nm-arrow:not(:disabled):hover {
+  background: #4b5563;
+  transform: scale(1.1);
+}
+
+.nm-arrow:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.nm-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.nm-game-over.win { color: #34d399; }
+.nm-game-over.lose { color: #f87171; }
+.nm-final { font-size: 0.9rem; opacity: 0.8; }

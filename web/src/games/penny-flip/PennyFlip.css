@@ -1,0 +1,138 @@
+.pf-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a1a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.pf-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffd700;
+}
+
+.pf-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pf-correct { color: #4dff4d; }
+.pf-wrong { color: #ff4444; }
+
+.pf-coin {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 900;
+  transition: background 0.25s;
+}
+
+.pf-coin.heads { background: radial-gradient(circle, #ffd700 60%, #b8960a); color: #333; }
+.pf-coin.tails { background: radial-gradient(circle, #aaa 60%, #555); color: #fff; }
+.pf-coin.pending {
+  background: rgba(255,255,255,0.08);
+  border: 3px dashed rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.3);
+}
+
+.pf-result-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-height: 1.4rem;
+}
+.pf-result-label.correct { color: #4dff4d; }
+.pf-result-label.wrong { color: #ff4444; }
+
+.pf-predict-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.pf-predict-buttons button {
+  padding: 0.6rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.pf-predict-buttons .heads-btn { background: #ffd700; color: #000; }
+.pf-predict-buttons .tails-btn { background: #888; color: #fff; }
+.pf-predict-buttons button:hover { filter: brightness(1.15); }
+
+.pf-predicted {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.35rem 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+}
+
+.pf-flip-button {
+  padding: 0.65rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4444ff;
+  color: #fff;
+  transition: filter 0.15s;
+}
+.pf-flip-button:hover { filter: brightness(1.2); }
+
+.pf-remaining {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.pf-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.pf-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.pf-dot.correct { background: #4dff4d; color: #000; }
+.pf-dot.wrong { background: #ff4444; color: #fff; }
+.pf-dot.empty { background: rgba(255,255,255,0.1); }
+
+.pf-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.pf-score-label { font-size: 0.9rem; opacity: 0.8; }

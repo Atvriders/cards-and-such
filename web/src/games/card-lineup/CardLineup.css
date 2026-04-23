@@ -1,0 +1,99 @@
+.cl-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a2035;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.cl-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffd700;
+}
+
+.cl-stats {
+  display: flex;
+  gap: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cl-instruction {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  text-align: center;
+  min-height: 1.2rem;
+}
+
+.cl-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 460px;
+}
+
+.cl-card {
+  width: 68px;
+  height: 96px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.cl-card.red { color: #cc0000; }
+.cl-card.black { color: #111; }
+
+.cl-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.cl-card.selected {
+  border-color: #ffd700;
+  box-shadow: 0 0 0 2px #ffd700;
+  transform: translateY(-6px);
+}
+
+.cl-card.solved {
+  border-color: #4dff4d;
+  cursor: default;
+}
+
+.cl-card-top { align-self: flex-start; font-size: 0.75rem; font-weight: 700; }
+.cl-card-mid { font-size: 1.3rem; }
+.cl-card-bot { align-self: flex-end; font-size: 0.75rem; font-weight: 700; transform: rotate(180deg); }
+
+.cl-goal {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.cl-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.cl-final-score { font-size: 0.9rem; opacity: 0.8; }

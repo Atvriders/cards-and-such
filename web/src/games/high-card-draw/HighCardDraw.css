@@ -1,0 +1,138 @@
+.hcd-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0d3b1e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.hcd-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffd700;
+}
+
+.hcd-score {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hcd-score-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.hcd-score-col.player .hcd-score-val { color: #4dff4d; }
+.hcd-score-col.bot .hcd-score-val { color: #ff6666; }
+
+.hcd-score-name { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.hcd-score-val { font-size: 2rem; font-weight: 900; }
+.hcd-score-goal { font-size: 0.8rem; opacity: 0.6; }
+
+.hcd-table {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hcd-player-area, .hcd-bot-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hcd-label { font-size: 0.8rem; opacity: 0.7; text-transform: uppercase; }
+
+.hcd-card {
+  width: 80px;
+  height: 112px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.hcd-card.red { color: #cc0000; }
+.hcd-card.black { color: #111; }
+
+.hcd-card-back {
+  background: #1a1a8a;
+  color: transparent;
+  font-size: 2rem;
+  justify-content: center;
+}
+
+.hcd-card-empty {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.3);
+  font-size: 2rem;
+  border-style: dashed;
+  justify-content: center;
+}
+
+.hcd-rank-top { align-self: flex-start; font-size: 0.85rem; }
+.hcd-rank-mid { font-size: 1.4rem; }
+.hcd-rank-bot { align-self: flex-end; font-size: 0.85rem; transform: rotate(180deg); }
+
+.hcd-vs {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffd700;
+}
+
+.hcd-result {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.4rem 1.2rem;
+  border-radius: 6px;
+}
+
+.hcd-result.player { background: rgba(77,255,77,0.2); color: #4dff4d; }
+.hcd-result.bot { background: rgba(255,102,102,0.2); color: #ff6666; }
+.hcd-result.tie { background: rgba(255,255,255,0.1); color: #ccc; }
+
+.hcd-draw-btn {
+  padding: 0.7rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4444ff;
+  color: #fff;
+  transition: filter 0.15s;
+}
+
+.hcd-draw-btn:hover { filter: brightness(1.2); }
+
+.hcd-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.hcd-final { font-size: 0.9rem; opacity: 0.8; }
+
+.hcd-remaining { font-size: 0.75rem; opacity: 0.4; }

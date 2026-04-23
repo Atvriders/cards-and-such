@@ -358,6 +358,14 @@ import { operationGamePlugin } from "./operation-game/index.js";
 import { guessWhoPlugin } from "./guess-who/index.js";
 import { chutesLaddersKidsPlugin } from "./chutes-ladders-kids/index.js";
 import { connectLightsPlugin } from "./connect-lights/index.js";
+import { rollASixPlugin } from "./roll-a-six/index.js";
+import { highCardDrawPlugin } from "./high-card-draw/index.js";
+import { pennyFlipPlugin } from "./penny-flip/index.js";
+import { oddDicePlugin } from "./odd-dice/index.js";
+import { mathBingoPlugin } from "./math-bingo/index.js";
+import { balloonPopPlugin } from "./balloon-pop/index.js";
+import { cardLineupPlugin } from "./card-lineup/index.js";
+import { numberMazePlugin } from "./number-maze/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -719,4 +727,12 @@ export const GAMES: GamePlugin[] = [
   guessWhoPlugin as unknown as GamePlugin,
   chutesLaddersKidsPlugin as unknown as GamePlugin,
   connectLightsPlugin as unknown as GamePlugin,
+  rollASixPlugin as unknown as GamePlugin,
+  highCardDrawPlugin as unknown as GamePlugin,
+  pennyFlipPlugin as unknown as GamePlugin,
+  oddDicePlugin as unknown as GamePlugin,
+  mathBingoPlugin as unknown as GamePlugin,
+  balloonPopPlugin as unknown as GamePlugin,
+  cardLineupPlugin as unknown as GamePlugin,
+  numberMazePlugin as unknown as GamePlugin,
 ];

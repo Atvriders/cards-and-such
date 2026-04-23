@@ -1,0 +1,120 @@
+.ras-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  background: #1a1a2e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.ras-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffd700;
+}
+
+.ras-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.ras-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.ras-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+.ras-stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.ras-die {
+  font-size: 5rem;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  transition: background 0.2s;
+}
+
+.ras-die.six { background: #1a6b1a; }
+.ras-die.other { background: rgba(255,255,255,0.08); }
+.ras-die.empty {
+  background: rgba(255,255,255,0.05);
+  border: 3px dashed rgba(255,255,255,0.2);
+  font-size: 2rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.ras-result {
+  font-size: 1.3rem;
+  font-weight: 700;
+  min-height: 1.6rem;
+}
+
+.ras-result.yes { color: #4dff4d; }
+.ras-result.no { color: #aaa; }
+
+.ras-progress {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 260px;
+}
+
+.ras-pip {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.ras-pip.filled { background: #ffd700; }
+.ras-pip.empty { background: rgba(255,255,255,0.15); }
+
+.ras-roll-btn {
+  padding: 0.7rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4444ff;
+  color: #fff;
+  transition: filter 0.15s;
+}
+
+.ras-roll-btn:hover { filter: brightness(1.2); }
+
+.ras-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.ras-score-label {
+  font-size: 1rem;
+  opacity: 0.8;
+}

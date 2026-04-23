@@ -1,0 +1,84 @@
+.bp-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0f0f23;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.bp-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ff6b9d;
+}
+
+.bp-score {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.bp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bp-row {
+  display: flex;
+  gap: 3px;
+}
+
+.bp-cell {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.1s;
+  user-select: none;
+}
+
+.bp-cell.empty {
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  cursor: default;
+}
+
+.bp-cell.popable:hover {
+  transform: scale(1.15);
+  filter: brightness(1.3);
+}
+
+.bp-cell:not(.popable):not(.empty) {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.bp-game-over {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.bp-final-score { font-size: 0.9rem; opacity: 0.8; }
+
+.bp-hint {
+  font-size: 0.75rem;
+  opacity: 0.4;
+  text-align: center;
+}

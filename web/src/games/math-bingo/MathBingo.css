@@ -1,0 +1,126 @@
+.mb-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: #0f172a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.mb-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+.mb-problem-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 60px;
+}
+
+.mb-problem {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.mb-problem-placeholder {
+  font-size: 1rem;
+  opacity: 0.4;
+}
+
+.mb-feedback {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.8rem;
+  border-radius: 5px;
+}
+
+.mb-feedback.match { color: #4dff4d; background: rgba(77,255,77,0.1); }
+.mb-feedback.no-match { color: #ff6666; background: rgba(255,102,102,0.1); }
+
+.mb-card {
+  display: grid;
+  grid-template-columns: repeat(5, 52px);
+  gap: 4px;
+}
+
+.mb-col-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #38bdf8;
+  height: 28px;
+}
+
+.mb-cell {
+  width: 52px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s;
+  cursor: default;
+  user-select: none;
+}
+
+.mb-cell.marked {
+  background: #0369a1;
+  border-color: #38bdf8;
+  color: #fff;
+}
+
+.mb-cell.free {
+  background: #15803d;
+  border-color: #4ade80;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.mb-info {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.mb-draw-btn {
+  padding: 0.65rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #0369a1;
+  color: #fff;
+  transition: filter 0.15s;
+}
+
+.mb-draw-btn:hover { filter: brightness(1.2); }
+
+.mb-game-over {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.mb-score { font-size: 0.9rem; opacity: 0.8; }
