@@ -1,0 +1,27 @@
+.bigtwo { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#1b3a2d; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.bigtwo-header { text-align:center; }
+.bigtwo-header h2 { margin:0 0 .4rem; font-size:1.5rem; }
+.bigtwo-seats { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; opacity:.85; }
+.bigtwo-active { color:#ffd54f; font-weight:900; text-decoration:underline; }
+.bigtwo-pile { background:rgba(0,0,0,.3); padding:.5rem 1rem; border-radius:8px; text-align:center; min-width:180px; }
+.bigtwo-pile-label { font-size:.8rem; opacity:.8; margin-bottom:.3rem; }
+.bigtwo-cards { display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap; }
+.bigtwo-new-round { color:#ffd54f; font-size:.9rem; }
+.bigtwo-status { font-size:1rem; font-weight:700; background:rgba(0,0,0,.25); padding:.4rem 1rem; border-radius:6px; }
+.bigtwo-hand-label { font-size:.85rem; opacity:.8; }
+.bigtwo-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.bigtwo-slot { transition:transform .1s; }
+.bigtwo-slot.clickable { cursor:pointer; }
+.bigtwo-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(255,213,79,.8)); }
+.bigtwo-slot.clickable:hover { transform:translateY(-4px); }
+.bigtwo-slot.sel.clickable:hover { transform:translateY(-12px); }
+.bigtwo-actions { display:flex; gap:1rem; }
+.bigtwo-btn { padding:.7rem 1.8rem; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; transition:background .15s,transform .1s; }
+.bigtwo-btn:disabled { opacity:.4; cursor:not-allowed; }
+.bigtwo-btn.play { background:#2e7d32; color:#fff; }
+.bigtwo-btn.play:not(:disabled):hover { background:#1b5e20; transform:translateY(-2px); }
+.bigtwo-btn.pass { background:#616161; color:#fff; }
+.bigtwo-btn.pass:not(:disabled):hover { background:#424242; transform:translateY(-2px); }
+.bigtwo-result { background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; text-align:center; }
+.bigtwo-result h3 { margin:0 0 .8rem; }
+.bigtwo-you { color:#ffd54f; font-weight:700; }

@@ -1,0 +1,33 @@
+.presidents { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#212121; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.presidents-header { text-align:center; }
+.presidents-header h2 { margin:0 0 .3rem; }
+.presidents-score { font-size:.85rem; opacity:.8; }
+.presidents-titles { display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center; font-size:.8rem; margin-top:.3rem; }
+.presidents-you { color:#ffd54f; font-weight:700; }
+.presidents-seats { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; opacity:.85; }
+.presidents-active { color:#ffd54f; font-weight:900; text-decoration:underline; }
+.presidents-pile { background:rgba(0,0,0,.3); padding:.5rem 1rem; border-radius:8px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:.3rem; min-width:180px; }
+.presidents-pile-label { font-size:.8rem; opacity:.8; }
+.presidents-pile-cards { display:flex; gap:.4rem; }
+.presidents-new-round { color:#ffd54f; font-size:.9rem; }
+.presidents-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.presidents-slot { transition:transform .1s; }
+.presidents-slot.clickable { cursor:pointer; }
+.presidents-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(255,213,79,.8)); }
+.presidents-slot.clickable:hover { transform:translateY(-4px); }
+.presidents-actions { display:flex; gap:1rem; }
+.presidents-btn { padding:.6rem 1.4rem; border:none; border-radius:8px; font-size:.95rem; font-weight:700; cursor:pointer; transition:background .15s; }
+.presidents-btn:disabled { opacity:.4; cursor:not-allowed; }
+.presidents-btn.play { background:#1565c0; color:#fff; }
+.presidents-btn.play:not(:disabled):hover { background:#0d47a1; }
+.presidents-btn.pass { background:#616161; color:#fff; }
+.presidents-btn.pass:not(:disabled):hover { background:#424242; }
+.presidents-btn.confirm { background:#2e7d32; color:#fff; }
+.presidents-btn.confirm:not(:disabled):hover { background:#1b5e20; }
+.presidents-btn.next { background:#6a1b9a; color:#fff; }
+.presidents-btn.next:hover { background:#4a148c; }
+.presidents-swap { display:flex; flex-direction:column; align-items:center; gap:.75rem; width:100%; }
+.presidents-swap-info { background:rgba(255,235,59,.15); color:#ffd54f; padding:.5rem 1rem; border-radius:8px; text-align:center; }
+.presidents-round-end, .presidents-done { text-align:center; background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; }
+.presidents-round-result { font-size:1.1rem; margin-bottom:1rem; }
+.presidents-done h3 { margin:0 0 .5rem; font-size:1.5rem; color:#ffd54f; }

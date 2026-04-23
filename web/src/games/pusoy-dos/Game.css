@@ -1,0 +1,27 @@
+.pusoy { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#4a0e0e; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.pusoy-header { text-align:center; }
+.pusoy-header h2 { margin:0 0 .4rem; }
+.pusoy-seats { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; opacity:.85; }
+.pusoy-active { color:#ffd54f; font-weight:900; text-decoration:underline; }
+.pusoy-pile { background:rgba(0,0,0,.3); padding:.5rem 1rem; border-radius:8px; text-align:center; min-width:180px; }
+.pusoy-pile-label { font-size:.8rem; opacity:.8; margin-bottom:.3rem; }
+.pusoy-cards { display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap; }
+.pusoy-new-round { color:#ffd54f; font-size:.9rem; }
+.pusoy-status { font-size:1rem; font-weight:700; background:rgba(0,0,0,.25); padding:.4rem 1rem; border-radius:6px; }
+.pusoy-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.pusoy-slot { transition:transform .1s; }
+.pusoy-slot.click { cursor:pointer; }
+.pusoy-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(255,213,79,.8)); }
+.pusoy-slot.click:hover { transform:translateY(-4px); }
+.pusoy-slot.sel.click:hover { transform:translateY(-12px); }
+.pusoy-actions { display:flex; gap:1rem; }
+.pusoy-btn { padding:.7rem 1.8rem; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; transition:background .15s; }
+.pusoy-btn:disabled { opacity:.4; cursor:not-allowed; }
+.pusoy-btn.play { background:#b71c1c; color:#fff; }
+.pusoy-btn.play:not(:disabled):hover { background:#7f0000; }
+.pusoy-btn.pass { background:#616161; color:#fff; }
+.pusoy-btn.pass:not(:disabled):hover { background:#424242; }
+.pusoy-result { background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; text-align:center; }
+.pusoy-result h3 { margin:0 0 .8rem; }
+.pusoy-you { color:#ffd54f; font-weight:700; }
+.pusoy-pts { margin-top:.5rem; color:#a5d6a7; font-weight:700; }

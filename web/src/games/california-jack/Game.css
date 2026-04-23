@@ -1,0 +1,28 @@
+.cj { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#4a148c; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.cj-header { text-align:center; }
+.cj-header h2 { margin:0 0 .3rem; }
+.cj-scores { font-size:.85rem; opacity:.8; }
+.cj-trump { font-size:.85rem; opacity:.8; }
+.cj-info { background:rgba(0,0,0,.25); padding:.4rem .8rem; border-radius:6px; font-size:.85rem; text-align:center; }
+.cj-table { display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+.cj-trick-area { display:flex; gap:2rem; align-items:center; }
+.cj-trick-slot { display:flex; flex-direction:column; align-items:center; gap:.2rem; }
+.cj-trick-label { font-size:.75rem; opacity:.7; }
+.cj-empty-trick { width:60px; height:80px; border:2px dashed rgba(255,255,255,.3); border-radius:6px; }
+.cj-bot-hand-count { font-size:.8rem; opacity:.7; }
+.cj-bot-led { background:rgba(255,235,59,.15); color:#ffd54f; padding:.3rem .7rem; border-radius:5px; font-size:.85rem; }
+.cj-hand-label { font-size:.85rem; opacity:.8; }
+.cj-hand { display:flex; flex-wrap:wrap; gap:.4rem; justify-content:center; max-width:600px; }
+.cj-slot { transition:transform .1s; }
+.cj-slot.clickable { cursor:pointer; }
+.cj-slot.clickable:hover { transform:translateY(-4px); }
+.cj-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(255,235,59,.8)); }
+.cj-slot.trump { filter:drop-shadow(0 0 4px rgba(255,235,59,.5)); }
+.cj-slot.sel.trump { filter:drop-shadow(0 4px 8px rgba(255,235,59,.9)); }
+.cj-btn { padding:.7rem 2rem; background:#7b1fa2; border:none; border-radius:8px; color:#fff; font-size:1rem; font-weight:700; cursor:pointer; transition:background .15s; }
+.cj-btn:disabled { opacity:.4; cursor:not-allowed; }
+.cj-btn:not(:disabled):hover { background:#6a1b9a; }
+.cj-scoring { text-align:center; display:flex; flex-direction:column; gap:.5rem; align-items:center; background:rgba(0,0,0,.3); padding:1rem; border-radius:8px; }
+.cj-scoring-result { font-size:.9rem; opacity:.9; }
+.cj-done { text-align:center; background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; }
+.cj-done h3 { margin:0 0 .5rem; font-size:1.4rem; color:#ffd54f; }

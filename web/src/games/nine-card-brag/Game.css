@@ -1,0 +1,36 @@
+.brag { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#1a1a2e; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.brag-header { text-align:center; }
+.brag-header h2 { margin:0 0 .3rem; }
+.brag-score { font-size:.9rem; opacity:.8; }
+.brag-info { background:rgba(255,255,255,.1); padding:.5rem 1rem; border-radius:6px; font-size:.9rem; }
+.brag-hand { display:flex; flex-wrap:wrap; gap:.4rem; justify-content:center; max-width:600px; }
+.brag-slot { transition:transform .1s; }
+.brag-slot.clickable { cursor:pointer; }
+.brag-slot.clickable:hover { transform:translateY(-4px); }
+.brag-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(100,200,255,.8)); }
+.brag-slot.placed { opacity:.4; }
+.brag-group { display:flex; align-items:center; gap:.5rem; background:rgba(0,0,0,.3); padding:.4rem .8rem; border-radius:8px; flex-wrap:wrap; }
+.brag-group-label { font-size:.8rem; opacity:.8; white-space:nowrap; }
+.brag-group-cards { display:flex; gap:.3rem; }
+.brag-arrange-actions { display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center; }
+.brag-btn { padding:.6rem 1.4rem; border:none; border-radius:8px; font-size:.95rem; font-weight:700; cursor:pointer; transition:background .15s; }
+.brag-btn:disabled { opacity:.4; cursor:not-allowed; }
+.brag-btn.confirm { background:#1565c0; color:#fff; }
+.brag-btn.confirm:not(:disabled):hover { background:#0d47a1; }
+.brag-btn.reveal { background:#2e7d32; color:#fff; }
+.brag-btn.reveal:hover { background:#1b5e20; }
+.brag-btn.reset { background:#6d4c41; color:#fff; }
+.brag-btn.reset:hover { background:#4e342e; }
+.brag-btn.next { background:#6a1b9a; color:#fff; }
+.brag-btn.next:hover { background:#4a148c; }
+.brag-result-label { font-size:1.1rem; font-weight:700; }
+.brag-comparison { display:flex; flex-direction:column; gap:.75rem; width:100%; max-width:680px; }
+.brag-round-row { display:flex; align-items:center; gap:.5rem; justify-content:center; flex-wrap:wrap; background:rgba(0,0,0,.25); padding:.5rem; border-radius:8px; }
+.brag-hand-col { display:flex; flex-direction:column; align-items:center; gap:.3rem; }
+.brag-hand-label { font-size:.75rem; opacity:.8; }
+.brag-cards { display:flex; gap:.3rem; }
+.brag-vs { font-weight:900; font-size:1rem; padding:.2rem .6rem; border-radius:4px; min-width:50px; text-align:center; }
+.brag-vs.win { background:#2e7d32; }
+.brag-vs.lose { background:#b71c1c; }
+.brag-vs.tie { background:#616161; }
+.brag-final { font-size:1.4rem; font-weight:900; color:#ffd54f; }

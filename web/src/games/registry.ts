@@ -406,6 +406,14 @@ import { gizaPlugin } from "./giza/index.js";
 import { alhambraPlugin } from "./alhambra/index.js";
 import { pouncePlugin } from "./pounce/index.js";
 import { capriciesePlugin } from "./capricieuse/index.js";
+import { bigTwoPlugin } from "./big-two/index.js";
+import { tienLenPlugin } from "./tien-len/index.js";
+import { pusoyDosPlugin } from "./pusoy-dos/index.js";
+import { nineCardBragPlugin } from "./nine-card-brag/index.js";
+import { presidentsPlugin } from "./presidents/index.js";
+import { rideTheBusPlugin } from "./ride-the-bus/index.js";
+import { pokerSquares2PPlugin } from "./poker-squares-2p/index.js";
+import { californiaJackPlugin } from "./california-jack/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -815,4 +823,12 @@ export const GAMES: GamePlugin[] = [
   alhambraPlugin as unknown as GamePlugin,
   pouncePlugin as unknown as GamePlugin,
   capriciesePlugin as unknown as GamePlugin,
+  bigTwoPlugin as unknown as GamePlugin,
+  tienLenPlugin as unknown as GamePlugin,
+  pusoyDosPlugin as unknown as GamePlugin,
+  nineCardBragPlugin as unknown as GamePlugin,
+  presidentsPlugin as unknown as GamePlugin,
+  rideTheBusPlugin as unknown as GamePlugin,
+  pokerSquares2PPlugin as unknown as GamePlugin,
+  californiaJackPlugin as unknown as GamePlugin,
 ];

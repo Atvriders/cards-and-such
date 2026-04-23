@@ -1,0 +1,26 @@
+.tienlen { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#1a237e; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.tienlen-header { text-align:center; }
+.tienlen-header h2 { margin:0 0 .4rem; }
+.tienlen-seats { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; opacity:.85; }
+.tienlen-active { color:#ffcc02; font-weight:900; text-decoration:underline; }
+.tienlen-pile { background:rgba(0,0,0,.3); padding:.5rem 1rem; border-radius:8px; text-align:center; min-width:180px; }
+.tienlen-pile-label { font-size:.8rem; opacity:.8; margin-bottom:.3rem; }
+.tienlen-cards { display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap; }
+.tienlen-new-round { color:#ffcc02; font-size:.9rem; }
+.tienlen-status { font-size:1rem; font-weight:700; background:rgba(0,0,0,.25); padding:.4rem 1rem; border-radius:6px; }
+.tienlen-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.tienlen-slot { transition:transform .1s; }
+.tienlen-slot.click { cursor:pointer; }
+.tienlen-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(255,204,2,.8)); }
+.tienlen-slot.click:hover { transform:translateY(-4px); }
+.tienlen-slot.sel.click:hover { transform:translateY(-12px); }
+.tienlen-actions { display:flex; gap:1rem; }
+.tienlen-btn { padding:.7rem 1.8rem; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; transition:background .15s; }
+.tienlen-btn:disabled { opacity:.4; cursor:not-allowed; }
+.tienlen-btn.play { background:#0d47a1; color:#fff; }
+.tienlen-btn.play:not(:disabled):hover { background:#01579b; }
+.tienlen-btn.pass { background:#616161; color:#fff; }
+.tienlen-btn.pass:not(:disabled):hover { background:#424242; }
+.tienlen-result { background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; text-align:center; }
+.tienlen-result h3 { margin:0 0 .8rem; }
+.tienlen-you { color:#ffcc02; font-weight:700; }
