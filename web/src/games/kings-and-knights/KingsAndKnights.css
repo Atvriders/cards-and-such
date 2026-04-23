@@ -1,0 +1,59 @@
+.kk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.kk-title { font-size: 1.5rem; font-weight: bold; }
+.kk-status { font-size: 0.95rem; color: #555; }
+.kk-status.win { color: #27ae60; font-weight: bold; }
+.kk-info { font-size: 0.85rem; color: #777; }
+.kk-board {
+  display: grid;
+  border: 2px solid #333;
+}
+.kk-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  font-size: 1.4rem;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.kk-cell.light { background: #f0d9b5; }
+.kk-cell.dark  { background: #b58863; }
+.kk-cell.conflict { background: #ffccbc !important; }
+.kk-cell.clue { cursor: default; opacity: 0.85; }
+.kk-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.kk-toolbar button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f0f0f0;
+}
+.kk-toolbar button.active {
+  background: #c8e6c9;
+  border-color: #388e3c;
+  font-weight: bold;
+}
+.kk-btns button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.kk-btns button:hover { background: #dde; }

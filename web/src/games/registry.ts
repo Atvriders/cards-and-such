@@ -382,6 +382,14 @@ import { tapRunnerPlugin } from "./tap-runner/index.js";
 import { meteorDodgerPlugin } from "./meteor-dodger/index.js";
 import { paddleBallPlugin } from "./paddle-ball-juggle/index.js";
 import { ringThrowerPlugin } from "./ring-thrower/index.js";
+import { rikudoPlugin } from "./rikudo/index.js";
+import { kingsAndKnightsPlugin } from "./kings-and-knights/index.js";
+import { battleshipSolitairePlugin } from "./battleship-solitaire/index.js";
+import { trainTracksPlugin } from "./train-tracks/index.js";
+import { stitchesPlugin } from "./stitches/index.js";
+import { rangePlugin } from "./range/index.js";
+import { shakashakaPlugin } from "./shakashaka/index.js";
+import { crossTheStreamsPlugin } from "./cross-the-streams/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -767,4 +775,12 @@ export const GAMES: GamePlugin[] = [
   meteorDodgerPlugin as unknown as GamePlugin,
   paddleBallPlugin as unknown as GamePlugin,
   ringThrowerPlugin as unknown as GamePlugin,
+  rikudoPlugin as unknown as GamePlugin,
+  kingsAndKnightsPlugin as unknown as GamePlugin,
+  battleshipSolitairePlugin as unknown as GamePlugin,
+  trainTracksPlugin as unknown as GamePlugin,
+  stitchesPlugin as unknown as GamePlugin,
+  rangePlugin as unknown as GamePlugin,
+  shakashakaPlugin as unknown as GamePlugin,
+  crossTheStreamsPlugin as unknown as GamePlugin,
 ];

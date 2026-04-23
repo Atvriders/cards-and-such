@@ -1,0 +1,77 @@
+.stitches {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.stitches-title { font-size: 1.5rem; font-weight: bold; }
+.stitches-status { font-size: 0.95rem; color: #555; }
+.stitches-status.win { color: #27ae60; font-weight: bold; }
+.stitches-col-clues { display: flex; margin-left: 28px; }
+.stitches-col-clue {
+  width: 52px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #555;
+  padding-bottom: 4px;
+}
+.stitches-row-area { display: flex; }
+.stitches-row-clues { display: flex; flex-direction: column; }
+.stitches-row-clue {
+  height: 52px;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #555;
+  padding-right: 4px;
+  box-sizing: border-box;
+}
+.stitches-grid {
+  position: relative;
+  display: grid;
+}
+.stitches-cell {
+  width: 52px;
+  height: 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid rgba(0,0,0,0.3);
+}
+.stitches-stitch-h {
+  position: absolute;
+  height: 6px;
+  background: #e74c3c;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.stitches-stitch-v {
+  position: absolute;
+  width: 6px;
+  background: #e74c3c;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.stitches-btns { display: flex; gap: 8px; }
+.stitches-btns button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.stitches-btns button:hover { background: #dde; }
+.stitches-hint { font-size: 0.8rem; color: #888; }

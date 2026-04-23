@@ -1,0 +1,73 @@
+.rikudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.rikudo-title { font-size: 1.5rem; font-weight: bold; }
+.rikudo-status { font-size: 0.95rem; color: #555; }
+.rikudo-status.win { color: #27ae60; font-weight: bold; }
+.rikudo-grid {
+  display: grid;
+  border: 2px solid #333;
+  gap: 0;
+}
+.rikudo-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #f9f9f9;
+  transition: background 0.1s;
+}
+.rikudo-cell.clue {
+  background: #dce8f8;
+  color: #1a5fa8;
+  cursor: default;
+}
+.rikudo-cell.selected {
+  background: #fffde7;
+  outline: 2px solid #f39c12;
+  outline-offset: -2px;
+}
+.rikudo-cell.error { background: #ffccbc; color: #c62828; }
+.rikudo-cell.filled { color: #2c3e50; }
+.rikudo-numpad {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+.rikudo-numpad button {
+  width: 40px;
+  height: 40px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f0f0f0;
+}
+.rikudo-numpad button:hover { background: #d0d0ff; }
+.rikudo-numpad button.clear-btn {
+  background: #ffe0e0;
+  border-color: #e57373;
+}
+.rikudo-btns { display: flex; gap: 8px; margin-top: 4px; }
+.rikudo-btns button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.rikudo-btns button:hover { background: #dde; }
