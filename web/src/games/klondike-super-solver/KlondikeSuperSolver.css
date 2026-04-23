@@ -1,0 +1,14 @@
+.kss { display: flex; flex-direction: column; gap: 10px; padding: 16px; user-select: none; }
+.kss-info { display: flex; gap: 14px; font-size: 14px; font-weight: 600; flex-wrap: wrap; align-items: center; }
+.kss-hint { padding: 8px 12px; background: #1a3a1a; border: 1px solid #3a8a3a; border-radius: 6px; font-size: 13px; color: #8f8; }
+.kss-top { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+.kss-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.kss-btn { padding: 5px 10px; border: 1px solid #555; border-radius: 4px; background: #2a2a2a; color: #eee; cursor: pointer; font-size: 12px; }
+.kss-btn:hover { background: #444; }
+.kss-btn:disabled { opacity: 0.4; cursor: default; }
+.kss-tableau { display: flex; gap: 8px; flex-wrap: nowrap; }
+.kss-col { display: flex; flex-direction: column; gap: 2px; min-width: 60px; cursor: pointer; }
+.kss-col:hover { background: rgba(255,255,255,0.06); border-radius: 4px; }
+.kss-area { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: #aaa; }
+.kss-placeholder { width: 60px; height: 84px; border: 2px dashed #444; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 10px; }
+.kss-foundations { display: flex; gap: 8px; }

@@ -342,6 +342,14 @@ import { agramPlugin } from "./agram/index.js";
 import { scatPlugin } from "./scat/index.js";
 import { doubleDummyWhistPlugin } from "./double-dummy-whist/index.js";
 import { twentyNinePlugin } from "./twenty-nine/index.js";
+import { auldLangSynePlugin } from "./auld-lang-syne/index.js";
+import { klondikeSuperSolverPlugin } from "./klondike-super-solver/index.js";
+import { calculationPlugin } from "./calculation/index.js";
+import { pokerSolitairePlugin } from "./poker-solitaire/index.js";
+import { pyramidGolfPlugin } from "./pyramid-golf/index.js";
+import { nestorPlugin } from "./nestor/index.js";
+import { fortyEightOneDeckPlugin } from "./forty-eight-one-deck/index.js";
+import { dozenPlugin } from "./dozen/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -687,4 +695,12 @@ export const GAMES: GamePlugin[] = [
   scatPlugin as unknown as GamePlugin,
   doubleDummyWhistPlugin as unknown as GamePlugin,
   twentyNinePlugin as unknown as GamePlugin,
+  auldLangSynePlugin as unknown as GamePlugin,
+  klondikeSuperSolverPlugin as unknown as GamePlugin,
+  calculationPlugin as unknown as GamePlugin,
+  pokerSolitairePlugin as unknown as GamePlugin,
+  pyramidGolfPlugin as unknown as GamePlugin,
+  nestorPlugin as unknown as GamePlugin,
+  fortyEightOneDeckPlugin as unknown as GamePlugin,
+  dozenPlugin as unknown as GamePlugin,
 ];

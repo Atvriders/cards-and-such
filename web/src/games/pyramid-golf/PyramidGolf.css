@@ -1,0 +1,14 @@
+.pyramid-golf { display: flex; flex-direction: column; gap: 12px; padding: 16px; user-select: none; }
+.pg-info { display: flex; gap: 14px; font-size: 14px; font-weight: 600; }
+.pg-pyramid { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.pg-row { display: flex; gap: 6px; justify-content: center; }
+.pg-cell { cursor: pointer; opacity: 1; transition: opacity 0.1s; }
+.pg-cell.removed { opacity: 0; pointer-events: none; }
+.pg-cell.blocked { opacity: 0.4; cursor: default; }
+.pg-cell.selected .card { outline: 3px solid #4af; border-radius: 6px; }
+.pg-bottom { display: flex; gap: 20px; align-items: flex-start; margin-top: 8px; }
+.pg-area { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; color: #aaa; }
+.pg-placeholder { width: 60px; height: 84px; border: 2px dashed #444; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 10px; }
+.pg-btn { padding: 4px 10px; border: 1px solid #555; border-radius: 4px; background: #2a2a2a; color: #eee; cursor: pointer; font-size: 12px; }
+.pg-btn:hover { background: #444; }
+.pg-btn:disabled { opacity: 0.4; cursor: default; }
