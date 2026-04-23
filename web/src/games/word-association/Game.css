@@ -1,0 +1,125 @@
+.wordassoc-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.wordassoc-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.wordassoc-timer {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #e74c3c;
+}
+
+.wordassoc-timer.urgent { animation: pulse 0.5s infinite alternate; }
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
+
+.wordassoc-chain-label {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  text-align: center;
+}
+
+.wordassoc-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ecf0f1;
+  border-radius: 12px;
+  min-height: 60px;
+  background: #fafafa;
+}
+
+.wordassoc-word {
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.wordassoc-word.starter {
+  background: #8e44ad;
+}
+
+.wordassoc-arrow {
+  color: #bdc3c7;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.wordassoc-input-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.wordassoc-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.wordassoc-input:focus { border-color: #3498db; }
+
+.wordassoc-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #3498db;
+  color: #fff;
+}
+
+.wordassoc-error {
+  color: #e74c3c;
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.wordassoc-score {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.wordassoc-done {
+  text-align: center;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.wordassoc-final-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 12px;
+}

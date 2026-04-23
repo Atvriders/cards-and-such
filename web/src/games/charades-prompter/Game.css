@@ -1,0 +1,111 @@
+.charades-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.charades-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.charades-timer {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #e74c3c;
+}
+
+.charades-timer.urgent { animation: pulse 0.5s infinite alternate; }
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
+
+.charades-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.charades-completed { color: #27ae60; }
+.charades-skipped { color: #e74c3c; }
+
+.charades-card {
+  width: 100%;
+  padding: 40px 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+}
+
+.charades-card-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.charades-card-word {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.charades-hint {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  text-align: center;
+  font-style: italic;
+}
+
+.charades-actions {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.charades-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.charades-btn:active { transform: scale(0.97); }
+
+.charades-btn.complete {
+  background: #27ae60;
+  color: #fff;
+}
+
+.charades-btn.skip {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.charades-done {
+  text-align: center;
+  padding: 28px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  width: 100%;
+}

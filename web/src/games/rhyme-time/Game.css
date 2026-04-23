@@ -1,0 +1,131 @@
+.rhyme-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.rhyme-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.rhyme-timer {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #e74c3c;
+}
+
+.rhyme-timer.urgent { animation: pulse 0.5s infinite alternate; }
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
+
+.rhyme-score {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.rhyme-prompt-section {
+  text-align: center;
+}
+
+.rhyme-prompt-label {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-bottom: 4px;
+}
+
+.rhyme-prompt-word {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #2c3e50;
+}
+
+.rhyme-ending-hint {
+  font-size: 1rem;
+  color: #8e44ad;
+  font-weight: 600;
+}
+
+.rhyme-found {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  min-height: 50px;
+  padding: 10px;
+  border: 1px solid #ecf0f1;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.rhyme-found-word {
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #27ae60;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.rhyme-input-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.rhyme-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.rhyme-input:focus { border-color: #8e44ad; }
+
+.rhyme-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #8e44ad;
+  color: #fff;
+}
+
+.rhyme-error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.rhyme-done {
+  text-align: center;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.rhyme-done-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}

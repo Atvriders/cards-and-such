@@ -1,0 +1,139 @@
+.pictionary-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.pictionary-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.pictionary-timer {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #e74c3c;
+}
+
+.pictionary-timer.urgent { animation: pulse 0.5s infinite alternate; }
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
+
+.pictionary-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pictionary-completed { color: #27ae60; }
+.pictionary-skipped { color: #e74c3c; }
+
+.pictionary-card {
+  width: 100%;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: #fff;
+  text-align: center;
+  padding: 12px 24px 36px;
+  user-select: none;
+}
+
+.pictionary-category-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pictionary-cat-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.25);
+}
+
+.pictionary-diff-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pictionary-diff-badge.easy { background: rgba(39,174,96,0.4); }
+.pictionary-diff-badge.medium { background: rgba(241,196,15,0.4); }
+.pictionary-diff-badge.hard { background: rgba(231,76,60,0.4); }
+
+.pictionary-card-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.pictionary-card-word {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.pictionary-hint {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  text-align: center;
+  font-style: italic;
+}
+
+.pictionary-actions {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.pictionary-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.pictionary-btn:active { transform: scale(0.97); }
+
+.pictionary-btn.complete {
+  background: #27ae60;
+  color: #fff;
+}
+
+.pictionary-btn.skip {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.pictionary-done {
+  text-align: center;
+  padding: 28px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  width: 100%;
+}

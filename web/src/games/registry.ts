@@ -366,6 +366,14 @@ import { mathBingoPlugin } from "./math-bingo/index.js";
 import { balloonPopPlugin } from "./balloon-pop/index.js";
 import { cardLineupPlugin } from "./card-lineup/index.js";
 import { numberMazePlugin } from "./number-maze/index.js";
+import { generalTriviaPlugin } from "./general-trivia/index.js";
+import { twoTruthsLiePlugin } from "./two-truths-lie/index.js";
+import { wouldYouRatherPlugin } from "./would-you-rather/index.js";
+import { triviaTowerPlugin } from "./trivia-tower/index.js";
+import { wordAssociationPlugin } from "./word-association/index.js";
+import { rhymeTimePlugin } from "./rhyme-time/index.js";
+import { charadesPlugin } from "./charades-prompter/index.js";
+import { pictionaryPlugin } from "./pictionary-prompter/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -735,4 +743,12 @@ export const GAMES: GamePlugin[] = [
   balloonPopPlugin as unknown as GamePlugin,
   cardLineupPlugin as unknown as GamePlugin,
   numberMazePlugin as unknown as GamePlugin,
+  generalTriviaPlugin as unknown as GamePlugin,
+  twoTruthsLiePlugin as unknown as GamePlugin,
+  wouldYouRatherPlugin as unknown as GamePlugin,
+  triviaTowerPlugin as unknown as GamePlugin,
+  wordAssociationPlugin as unknown as GamePlugin,
+  rhymeTimePlugin as unknown as GamePlugin,
+  charadesPlugin as unknown as GamePlugin,
+  pictionaryPlugin as unknown as GamePlugin,
 ];
