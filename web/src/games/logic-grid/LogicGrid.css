@@ -1,0 +1,67 @@
+.logic-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.logic-grid-title { font-size: 1.4rem; font-weight: bold; }
+.logic-grid-status { font-size: 0.9rem; color: #555; }
+.logic-grid-status.win { color: #27ae60; font-weight: bold; }
+
+.logic-grid-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.logic-grid-table-wrap { overflow-x: auto; }
+
+.logic-grid-table {
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+.logic-grid-table th,
+.logic-grid-table td {
+  border: 1px solid #bbb;
+  padding: 3px 5px;
+  text-align: center;
+  min-width: 28px;
+  height: 28px;
+}
+.logic-grid-table th { background: #e8eaf6; font-weight: 600; }
+.logic-grid-table .entity-label { background: #fce4ec; font-weight: 600; text-align: left; padding: 2px 6px; }
+.logic-grid-table .attr-group { background: #e8f5e9; }
+
+.mark-cell { cursor: pointer; }
+.mark-cell.yes { background: #c8e6c9; color: #2e7d32; font-weight: bold; font-size: 1rem; }
+.mark-cell.no { background: #ffcdd2; color: #c62828; font-size: 0.9rem; }
+.mark-cell:hover { background: #e3f2fd; }
+.mark-cell.yes:hover { background: #a5d6a7; }
+.mark-cell.no:hover { background: #ef9a9a; }
+
+.logic-grid-clues {
+  max-width: 320px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.logic-grid-clues h3 { margin: 0 0 8px; font-size: 1rem; }
+.logic-grid-clues ol { margin: 0; padding-left: 18px; }
+.logic-grid-clues li { font-size: 0.82rem; margin-bottom: 4px; line-height: 1.4; }
+
+.logic-grid-btns { display: flex; gap: 8px; }
+.logic-grid-btns button {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.logic-grid-btns button:hover { background: #dde; }

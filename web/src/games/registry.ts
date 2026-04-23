@@ -326,6 +326,14 @@ import { bananagramsPlugin } from "./bananagrams/index.js";
 import { quordlePlugin } from "./quordle/index.js";
 import { wordChainPlugin } from "./word-chain/index.js";
 import { wordConstructionPlugin } from "./word-construction/index.js";
+import { logicGridPlugin } from "./logic-grid/index.js";
+import { bridgesPlugin } from "./bridges/index.js";
+import { dominoPlacementPlugin } from "./domino-placement/index.js";
+import { kropkiPlugin } from "./kropki/index.js";
+import { thermometerPlugin } from "./thermometer/index.js";
+import { numberlinkPlugin } from "./numberlink/index.js";
+import { kakurasuPlugin } from "./kakurasu/index.js";
+import { laserMazePlugin } from "./laser-maze/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -655,4 +663,12 @@ export const GAMES: GamePlugin[] = [
   quordlePlugin as unknown as GamePlugin,
   wordChainPlugin as unknown as GamePlugin,
   wordConstructionPlugin as unknown as GamePlugin,
+  logicGridPlugin as unknown as GamePlugin,
+  bridgesPlugin as unknown as GamePlugin,
+  dominoPlacementPlugin as unknown as GamePlugin,
+  kropkiPlugin as unknown as GamePlugin,
+  thermometerPlugin as unknown as GamePlugin,
+  numberlinkPlugin as unknown as GamePlugin,
+  kakurasuPlugin as unknown as GamePlugin,
+  laserMazePlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,71 @@
+.kropki {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.kropki-title { font-size: 1.4rem; font-weight: bold; }
+.kropki-status { font-size: 0.9rem; color: #555; }
+.kropki-status.win { color: #27ae60; font-weight: bold; }
+
+.kropki-grid-wrap { position: relative; display: inline-block; }
+
+.kropki-grid {
+  display: grid;
+  border: 2px solid #333;
+}
+
+.kropki-cell {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+}
+.kropki-cell.given {
+  background: #e8eaf6;
+  cursor: default;
+  color: #1a237e;
+}
+.kropki-cell.wrong { background: #ffcdd2; }
+.kropki-cell:hover:not(.given) { background: #e3f2fd; }
+
+.kropki-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 3;
+  pointer-events: none;
+}
+.kropki-dot.right { right: -5px; top: 50%; transform: translateY(-50%); }
+.kropki-dot.down { bottom: -5px; left: 50%; transform: translateX(-50%); }
+.kropki-dot.white { background: #fff; border: 2px solid #333; }
+.kropki-dot.black { background: #333; }
+
+.kropki-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: #555;
+}
+.kropki-btns { display: flex; gap: 8px; }
+.kropki-btns button {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.kropki-btns button:hover { background: #dde; }

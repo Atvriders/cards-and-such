@@ -1,0 +1,75 @@
+.kakurasu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.kakurasu-title { font-size: 1.4rem; font-weight: bold; }
+.kakurasu-status { font-size: 0.9rem; color: #555; }
+.kakurasu-status.win { color: #27ae60; font-weight: bold; }
+
+.kakurasu-board { display: inline-block; }
+
+.kakurasu-header { display: flex; }
+.kakurasu-corner { width: 44px; height: 44px; }
+.kakurasu-col-label {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #666;
+  gap: 2px;
+}
+.kakurasu-col-label .val { font-size: 0.65rem; color: #aaa; }
+.kakurasu-col-label .clue { font-weight: bold; color: #1565c0; font-size: 0.9rem; }
+.kakurasu-col-label .cur { font-size: 0.75rem; color: #e53935; }
+
+.kakurasu-row { display: flex; }
+.kakurasu-row-label {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+  gap: 2px;
+}
+.kakurasu-row-label .val { font-size: 0.65rem; color: #aaa; }
+.kakurasu-row-label .clue { font-weight: bold; color: #1565c0; font-size: 0.9rem; }
+.kakurasu-row-label .cur { font-size: 0.75rem; color: #e53935; }
+
+.kakurasu-cell {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: #f5f5f5;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+.kakurasu-cell:hover { background: #e3f2fd; }
+.kakurasu-cell.shaded { background: #1565c0; color: #fff; font-weight: bold; }
+.kakurasu-cell.shaded:hover { background: #1976d2; }
+
+.kakurasu-btns { display: flex; gap: 8px; }
+.kakurasu-btns button {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.kakurasu-btns button:hover { background: #dde; }
+.kakurasu-hint { font-size: 0.78rem; color: #888; max-width: 360px; text-align: center; }

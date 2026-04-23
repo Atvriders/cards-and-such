@@ -1,0 +1,93 @@
+.laser-maze {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.laser-maze-title { font-size: 1.4rem; font-weight: bold; }
+.laser-maze-status { font-size: 0.9rem; color: #555; }
+.laser-maze-status.win { color: #27ae60; font-weight: bold; }
+
+.laser-maze-grid {
+  display: grid;
+  border: 2px solid #333;
+  background: #1a1a2e;
+}
+
+.lm-cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #333;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #eee;
+}
+.lm-cell.wall { background: #555; cursor: default; }
+.lm-cell.emitter { background: #e53935; cursor: default; font-size: 1rem; color: #fff; }
+.lm-cell.target { background: #43a047; cursor: default; }
+.lm-cell.lit { background: rgba(255,255,0,0.15); }
+.lm-cell.lit.target { background: #43a047; }
+.lm-cell:hover:not(.wall):not(.emitter):not(.target) { background: rgba(255,255,255,0.08); }
+
+.lm-mirror-fixed { color: #80cbc4; }
+.lm-mirror-placed { color: #ffeb3b; }
+
+.laser-line {
+  position: absolute;
+  background: rgba(255,80,80,0.7);
+  pointer-events: none;
+  border-radius: 2px;
+}
+.laser-line.h {
+  height: 3px;
+  left: 0; right: 0;
+  top: 50%; transform: translateY(-50%);
+}
+.laser-line.v {
+  width: 3px;
+  top: 0; bottom: 0;
+  left: 50%; transform: translateX(-50%);
+}
+
+.laser-maze-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.lm-mirror-btn {
+  padding: 8px 16px;
+  font-size: 1.1rem;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.lm-mirror-btn.selected { border-color: #1565c0; background: #e3f2fd; }
+.lm-mirror-btn.erase { background: #ffebee; border-color: #e53935; }
+
+.laser-maze-btns { display: flex; gap: 8px; }
+.laser-maze-btns button {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.laser-maze-btns button:hover { background: #dde; }
+.laser-maze-info {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: #888;
+}
+.laser-maze-hint { font-size: 0.78rem; color: #888; max-width: 360px; text-align: center; }
