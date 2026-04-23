@@ -1,0 +1,32 @@
+.minishogi-game {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+.minishogi-status { font-size: 1.1rem; font-weight: bold; min-height: 1.5em; color: #333; }
+.minishogi-status.win { color: #27ae60; }
+.minishogi-status.loss { color: #e74c3c; }
+.minishogi-board { position: relative; background: #f5deb3; border: 3px solid #8b4513; }
+.minishogi-cell {
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  border: 1px solid #8b4513; cursor: pointer; box-sizing: border-box;
+}
+.minishogi-cell.selected { background: rgba(255,215,0,0.5); }
+.minishogi-cell.target { background: rgba(0,200,0,0.2); }
+.minishogi-piece {
+  width: 88%; height: 88%; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; font-size: 0.7rem; font-weight: bold;
+  border: 1.5px solid #333; user-select: none;
+}
+.minishogi-piece.sente { background: #deb887; color: #1a1a1a; }
+.minishogi-piece.gote { background: #c8a97e; color: #1a1a1a; transform: rotate(180deg); }
+.minishogi-piece.promoted { color: #c0392b; }
+.minishogi-hand {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 6px;
+  background: #e8d5a3; border: 2px solid #8b4513; border-radius: 4px; min-height: 36px;
+  min-width: 240px;
+}
+.minishogi-hand-piece {
+  padding: 3px 8px; border: 1.5px solid #555; border-radius: 4px;
+  font-size: 0.7rem; cursor: pointer; background: #deb887;
+}
+.minishogi-hand-piece.selected-drop { background: rgba(255,215,0,0.8); }

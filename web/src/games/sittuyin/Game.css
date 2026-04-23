@@ -1,0 +1,14 @@
+.sittuyin-game { display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;font-family:system-ui,sans-serif; }
+.sittuyin-status { font-size:1.1rem;font-weight:bold;min-height:1.5em;color:#333; }
+.sittuyin-status.win { color:#27ae60; }
+.sittuyin-status.loss { color:#e74c3c; }
+.sittuyin-board { display:grid;grid-template-columns:repeat(8,54px);border:3px solid #4a148c; }
+.sittuyin-cell { width:54px;height:54px;display:flex;align-items:center;justify-content:center;cursor:pointer; }
+.sittuyin-cell.light { background:#f3e5f5; }
+.sittuyin-cell.dark { background:#9c27b0; }
+.sittuyin-cell.selected { background:#f1c40f!important; }
+.sittuyin-cell.target { background:rgba(76,175,80,0.4)!important; }
+.sittuyin-piece { width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:bold;border:2px solid;user-select:none; }
+.sittuyin-piece.white { background:#ffe0b2;color:#4a148c;border-color:#e65100; }
+.sittuyin-piece.black { background:#4a148c;color:#f3e5f5;border-color:#1a0050; }
+.target-dot { width:14px;height:14px;background:rgba(76,175,80,0.7);border-radius:50%; }

@@ -1,0 +1,33 @@
+.shogi-game {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+.shogi-status { font-size: 1.1rem; font-weight: bold; min-height: 1.5em; color: #333; }
+.shogi-status.win { color: #27ae60; }
+.shogi-status.loss { color: #e74c3c; }
+.shogi-board-wrap { position: relative; background: #f5deb3; border: 3px solid #8b4513; }
+.shogi-cell {
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  border: 1px solid #8b4513; cursor: pointer; box-sizing: border-box;
+}
+.shogi-cell.selected { background: rgba(255,215,0,0.5); }
+.shogi-cell.target { background: rgba(0,200,0,0.2); }
+.shogi-piece {
+  width: 90%; height: 90%; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; font-size: 0.6rem; font-weight: bold;
+  border: 1.5px solid #333; user-select: none;
+}
+.shogi-piece.sente { background: #deb887; color: #1a1a1a; transform: rotate(0deg); }
+.shogi-piece.gote { background: #c8a97e; color: #1a1a1a; transform: rotate(180deg); }
+.shogi-piece.promoted { color: #c0392b; }
+.shogi-hand {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 6px;
+  background: #e8d5a3; border: 2px solid #8b4513; border-radius: 4px; min-height: 40px;
+  width: 360px;
+}
+.shogi-hand-piece {
+  padding: 4px 8px; border: 1.5px solid #555; border-radius: 4px;
+  font-size: 0.7rem; cursor: pointer; user-select: none; background: #deb887;
+}
+.shogi-hand-piece.selected-drop { background: rgba(255,215,0,0.8); border-color: #f39c12; }
+.shogi-hand-label { font-size: 0.75rem; color: #666; margin-bottom: 4px; }

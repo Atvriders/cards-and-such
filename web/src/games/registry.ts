@@ -185,6 +185,14 @@ import { fanoronaPlugin } from "./fanorona/index.js";
 import { alquerquePlugin } from "./alquerque/index.js";
 import { konanePlugin } from "./konane/index.js";
 import { owarePlugin } from "./oware/index.js";
+import { xiangqiPlugin } from "./xiangqi/index.js";
+import { shogiPlugin } from "./shogi/index.js";
+import { miniShogiPlugin } from "./mini-shogi/index.js";
+import { makrukPlugin } from "./makruk/index.js";
+import { sittuyinPlugin } from "./sittuyin/index.js";
+import { janggiPlugin } from "./janggi/index.js";
+import { baoPlugin } from "./bao/index.js";
+import { sungkaPlugin } from "./sungka/index.js";
 import { tablutPlugin } from "./tablut/index.js";
 import { briscolaPlugin } from "./briscola/index.js";
 import { scopaPlugin } from "./scopa/index.js";
@@ -498,6 +506,14 @@ export const GAMES: GamePlugin[] = [
   alquerquePlugin as unknown as GamePlugin,
   konanePlugin as unknown as GamePlugin,
   owarePlugin as unknown as GamePlugin,
+  xiangqiPlugin as unknown as GamePlugin,
+  shogiPlugin as unknown as GamePlugin,
+  miniShogiPlugin as unknown as GamePlugin,
+  makrukPlugin as unknown as GamePlugin,
+  sittuyinPlugin as unknown as GamePlugin,
+  janggiPlugin as unknown as GamePlugin,
+  baoPlugin as unknown as GamePlugin,
+  sungkaPlugin as unknown as GamePlugin,
   tablutPlugin as unknown as GamePlugin,
   briscolaPlugin as unknown as GamePlugin,
   scopaPlugin as unknown as GamePlugin,

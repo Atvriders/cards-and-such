@@ -1,0 +1,15 @@
+.makruk-game { display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;font-family:system-ui,sans-serif; }
+.makruk-status { font-size:1.1rem;font-weight:bold;min-height:1.5em;color:#333; }
+.makruk-status.win { color:#27ae60; }
+.makruk-status.loss { color:#e74c3c; }
+.makruk-board { display:grid;grid-template-columns:repeat(8,56px);border:3px solid #5d4037; }
+.makruk-cell { width:56px;height:56px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative; }
+.makruk-cell.light { background:#f5e6ca; }
+.makruk-cell.dark { background:#8d6e63; }
+.makruk-cell.selected { background:#f1c40f!important; }
+.makruk-cell.target { background:rgba(39,174,96,0.35)!important; }
+.makruk-piece { width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:bold;border:2px solid;user-select:none; }
+.makruk-piece.white { background:#fff;color:#2c3e50;border-color:#bbb; }
+.makruk-piece.black { background:#2c3e50;color:#ecf0f1;border-color:#1a252f; }
+.makruk-piece.promoted { border-color:#c0392b;color:#c0392b; }
+.target-dot { width:14px;height:14px;background:rgba(39,174,96,0.6);border-radius:50%; }

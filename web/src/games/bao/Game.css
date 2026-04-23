@@ -1,0 +1,18 @@
+.bao-game { display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:system-ui,sans-serif; }
+.bao-status { font-size:1.1rem;font-weight:bold;min-height:1.5em;color:#333; }
+.bao-status.win { color:#27ae60; }
+.bao-status.loss { color:#e74c3c; }
+.bao-board { display:flex;flex-direction:column;gap:4px;background:#4e342e;padding:12px;border-radius:8px;border:3px solid #3e2723; }
+.bao-row { display:flex;align-items:center;gap:6px; }
+.bao-store { width:56px;height:96px;background:#795548;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:bold;color:#fff;border:2px solid #5d4037; }
+.bao-pits { display:flex;gap:6px; }
+.bao-pit {
+  width:56px;height:56px;background:#795548;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;font-weight:bold;color:#fff;border:2px solid #5d4037;
+  transition:background 0.15s;
+}
+.bao-pit:hover { background:#8d6e63; }
+.bao-pit.active { background:#8d6e63; }
+.bao-pit.last-sow { border-color:#f1c40f; }
+.bao-pit.empty { opacity:0.5;cursor:default; }
+.bao-scores { display:flex;gap:24px;font-size:0.95rem;color:#555; }

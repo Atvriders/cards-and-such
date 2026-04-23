@@ -1,0 +1,17 @@
+.sungka-game { display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:system-ui,sans-serif; }
+.sungka-status { font-size:1.1rem;font-weight:bold;min-height:1.5em;color:#333; }
+.sungka-status.win { color:#27ae60; }
+.sungka-status.loss { color:#e74c3c; }
+.sungka-board { display:flex;align-items:center;gap:6px;background:#1b5e20;padding:14px;border-radius:12px;border:3px solid #0a3d10; }
+.sungka-head { width:60px;height:110px;background:#388e3c;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:bold;color:#fff;border:2px solid #1b5e20; }
+.sungka-pits { display:flex;flex-direction:column;gap:6px; }
+.sungka-pit-row { display:flex;gap:6px; }
+.sungka-pit {
+  width:56px;height:56px;background:#388e3c;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;font-weight:bold;color:#fff;border:2px solid #1b5e20;
+  transition:background 0.15s;
+}
+.sungka-pit.clickable:hover { background:#43a047; }
+.sungka-pit.last-sow { border-color:#f1c40f; }
+.sungka-pit.empty { opacity:0.45;cursor:default; }
+.sungka-scores { font-size:0.9rem;color:#555; }
