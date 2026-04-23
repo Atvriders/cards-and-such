@@ -1,0 +1,65 @@
+.alhambra {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.alhambra-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.alhambra-auto-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.alhambra-auto-btn:hover {
+  background: #444;
+}
+
+.alhambra-foundations {
+  display: flex;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+.alhambra-found-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.alhambra-found-label {
+  font-size: 11px;
+  color: #888;
+  writing-mode: vertical-rl;
+}
+
+.alhambra-tableau-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.alhambra-stock-waste {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin-left: 16px;
+}
+
+.alhambra-pile-wrapper {
+  flex-shrink: 0;
+}

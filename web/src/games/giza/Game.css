@@ -1,0 +1,144 @@
+.giza {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.giza-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.giza-selecting {
+  color: #f0b030;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.giza-pyramids {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.giza-pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.giza-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.giza-card {
+  width: 52px;
+  height: 72px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  gap: 2px;
+}
+
+.giza-card.red {
+  color: #e55;
+}
+
+.giza-card.blocked {
+  opacity: 0.45;
+}
+
+.giza-card.accessible {
+  border-color: #666;
+}
+
+.giza-card.accessible.clickable {
+  cursor: pointer;
+}
+
+.giza-card.accessible.clickable:hover {
+  border-color: #aaa;
+  background: #2a2a2a;
+}
+
+.giza-card.selected {
+  border-color: #f0b030;
+  box-shadow: 0 0 8px #f0b030;
+}
+
+.giza-empty-slot {
+  width: 52px;
+  height: 72px;
+}
+
+.giza-bottom {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.giza-stock {
+  width: 60px;
+  height: 84px;
+  border: 2px dashed #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.giza-stock.empty {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.giza-stock-back {
+  width: 52px;
+  height: 72px;
+  background: #1a4a8a;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aac;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.giza-foundations {
+  display: flex;
+  gap: 8px;
+}
+
+.giza-foundation {
+  width: 60px;
+  height: 84px;
+}
+
+.giza-foundation-empty {
+  width: 52px;
+  height: 72px;
+  border: 1px dashed #444;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 20px;
+}

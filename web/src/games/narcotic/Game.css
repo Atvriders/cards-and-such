@@ -1,0 +1,126 @@
+.narcotic {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.narcotic-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.narcotic-area {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.narcotic-stock {
+  width: 72px;
+  height: 100px;
+  border: 2px dashed #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.narcotic-stock.empty {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.narcotic-card-back {
+  width: 60px;
+  height: 88px;
+  background: #1a4a8a;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aac;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.narcotic-pile {
+  position: relative;
+  min-width: 80px;
+  min-height: 100px;
+}
+
+.narcotic-pile-stack {
+  position: relative;
+  height: 240px;
+}
+
+.narcotic-pile-card {
+  position: absolute;
+  left: 0;
+}
+
+.narcotic-empty-slot {
+  color: #555;
+  font-size: 12px;
+  padding: 8px;
+  border: 1px dashed #444;
+  border-radius: 4px;
+  min-width: 60px;
+  text-align: center;
+}
+
+.narcotic-card {
+  width: 60px;
+  height: 84px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-weight: bold;
+  transition: box-shadow 0.15s;
+}
+
+.narcotic-card.red {
+  color: #e55;
+}
+
+.narcotic-card.highlight {
+  border-color: #f0b030;
+  box-shadow: 0 0 6px #f0b030;
+}
+
+.narcotic-card.clickable {
+  cursor: pointer;
+}
+
+.narcotic-card.clickable:hover {
+  box-shadow: 0 0 10px #f0b030;
+}
+
+.narcotic-rank {
+  font-size: 18px;
+}
+
+.narcotic-suit {
+  font-size: 16px;
+}
+
+.narcotic-hint {
+  font-size: 13px;
+  color: #f0b030;
+  font-style: italic;
+}
+
+.narcotic-stuck {
+  font-size: 14px;
+  color: #e55;
+}

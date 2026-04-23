@@ -1,0 +1,64 @@
+.pounce {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.pounce-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pounce-auto-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.pounce-auto-btn:hover {
+  background: #444;
+}
+
+.pounce-foundations {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.pounce-main-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.pounce-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pounce-section-label {
+  font-size: 12px;
+  color: #888;
+  font-weight: 600;
+}
+
+.pounce-stock-waste {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.pounce-pile-wrapper {
+  flex-shrink: 0;
+}

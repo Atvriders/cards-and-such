@@ -398,6 +398,14 @@ import { fifteensPlugin } from "./fifteens/index.js";
 import { napoleonsTombPlugin } from "./napoleons-tomb/index.js";
 import { quickTickPlugin } from "./quick-tick/index.js";
 import { paperTossPlugin } from "./paper-toss/index.js";
+import { brainiacPlugin } from "./brainiac/index.js";
+import { narcoticPlugin } from "./narcotic/index.js";
+import { bisleyPlugin } from "./bisley/index.js";
+import { kingsPlugin } from "./kings/index.js";
+import { gizaPlugin } from "./giza/index.js";
+import { alhambraPlugin } from "./alhambra/index.js";
+import { pouncePlugin } from "./pounce/index.js";
+import { capriciesePlugin } from "./capricieuse/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -799,4 +807,12 @@ export const GAMES: GamePlugin[] = [
   napoleonsTombPlugin as unknown as GamePlugin,
   quickTickPlugin as unknown as GamePlugin,
   paperTossPlugin as unknown as GamePlugin,
+  brainiacPlugin as unknown as GamePlugin,
+  narcoticPlugin as unknown as GamePlugin,
+  bisleyPlugin as unknown as GamePlugin,
+  kingsPlugin as unknown as GamePlugin,
+  gizaPlugin as unknown as GamePlugin,
+  alhambraPlugin as unknown as GamePlugin,
+  pouncePlugin as unknown as GamePlugin,
+  capriciesePlugin as unknown as GamePlugin,
 ];
