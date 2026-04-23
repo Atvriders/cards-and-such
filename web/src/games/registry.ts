@@ -374,6 +374,14 @@ import { wordAssociationPlugin } from "./word-association/index.js";
 import { rhymeTimePlugin } from "./rhyme-time/index.js";
 import { charadesPlugin } from "./charades-prompter/index.js";
 import { pictionaryPlugin } from "./pictionary-prompter/index.js";
+import { flappyBirdPlugin } from "./flappy-bird-like/index.js";
+import { doodleJumpPlugin } from "./doodle-jump-like/index.js";
+import { helicopterPlugin } from "./helicopter-game/index.js";
+import { wallJumperPlugin } from "./wall-jumper/index.js";
+import { tapRunnerPlugin } from "./tap-runner/index.js";
+import { meteorDodgerPlugin } from "./meteor-dodger/index.js";
+import { paddleBallPlugin } from "./paddle-ball-juggle/index.js";
+import { ringThrowerPlugin } from "./ring-thrower/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -751,4 +759,12 @@ export const GAMES: GamePlugin[] = [
   rhymeTimePlugin as unknown as GamePlugin,
   charadesPlugin as unknown as GamePlugin,
   pictionaryPlugin as unknown as GamePlugin,
+  flappyBirdPlugin as unknown as GamePlugin,
+  doodleJumpPlugin as unknown as GamePlugin,
+  helicopterPlugin as unknown as GamePlugin,
+  wallJumperPlugin as unknown as GamePlugin,
+  tapRunnerPlugin as unknown as GamePlugin,
+  meteorDodgerPlugin as unknown as GamePlugin,
+  paddleBallPlugin as unknown as GamePlugin,
+  ringThrowerPlugin as unknown as GamePlugin,
 ];

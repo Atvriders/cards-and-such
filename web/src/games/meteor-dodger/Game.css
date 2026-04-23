@@ -1,0 +1,48 @@
+.meteor-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.meteor-canvas {
+  border: 2px solid #246;
+  display: block;
+}
+
+.arcade-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 10px;
+}
+.arcade-overlay h2 { margin: 0; font-size: 1.8rem; }
+.arcade-overlay p  { margin: 0; font-size: 1.2rem; }
+
+.arcade-controls { display: flex; gap: 8px; }
+
+.arcade-btn {
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid #aac;
+  background: #dde;
+  touch-action: none;
+}
+.arcade-btn:active { background: #bbc; }
+
+.arcade-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
