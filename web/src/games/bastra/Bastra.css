@@ -1,0 +1,146 @@
+.bastra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #3e1a00;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.bastra-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.bastra-table-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bastra-table-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.bastra-table-cards {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.bastra-table-cards .card { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
+.bastra-table-cards .card:hover { transform: translateY(-4px); }
+.bastra-table-cards .card.selected { box-shadow: 0 0 0 3px #ffeb3b; transform: translateY(-6px); }
+
+.bastra-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  min-height: 1.5rem;
+  text-align: center;
+  max-width: 440px;
+}
+
+.bastra-bot-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.bastra-bot-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.bastra-card-back {
+  width: 32px;
+  height: 45px;
+  background: #7b3f00;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: inline-block;
+}
+
+.bastra-card-backs { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; }
+
+.bastra-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.bastra-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.bastra-player-hand {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bastra-player-hand .card { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
+.bastra-player-hand .card:hover { transform: translateY(-4px); }
+.bastra-player-hand .card.selected { box-shadow: 0 0 0 3px #ffeb3b; transform: translateY(-6px); }
+
+.bastra-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bastra-btn {
+  background: #bf360c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.15s;
+}
+
+.bastra-btn:hover:not(:disabled) { background: #e64a19; }
+.bastra-btn:disabled { opacity: 0.4; cursor: default; }
+
+.bastra-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bastra-result h2 { margin: 0; font-size: 1.4rem; }

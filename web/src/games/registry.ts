@@ -334,6 +334,14 @@ import { thermometerPlugin } from "./thermometer/index.js";
 import { numberlinkPlugin } from "./numberlink/index.js";
 import { kakurasuPlugin } from "./kakurasu/index.js";
 import { laserMazePlugin } from "./laser-maze/index.js";
+import { cuckooPlugin } from "./cuckoo/index.js";
+import { germanWhistPlugin } from "./german-whist/index.js";
+import { knockOutWhistPlugin } from "./knock-out-whist/index.js";
+import { bastraPlugin } from "./bastra/index.js";
+import { agramPlugin } from "./agram/index.js";
+import { scatPlugin } from "./scat/index.js";
+import { doubleDummyWhistPlugin } from "./double-dummy-whist/index.js";
+import { twentyNinePlugin } from "./twenty-nine/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -671,4 +679,12 @@ export const GAMES: GamePlugin[] = [
   numberlinkPlugin as unknown as GamePlugin,
   kakurasuPlugin as unknown as GamePlugin,
   laserMazePlugin as unknown as GamePlugin,
+  cuckooPlugin as unknown as GamePlugin,
+  germanWhistPlugin as unknown as GamePlugin,
+  knockOutWhistPlugin as unknown as GamePlugin,
+  bastraPlugin as unknown as GamePlugin,
+  agramPlugin as unknown as GamePlugin,
+  scatPlugin as unknown as GamePlugin,
+  doubleDummyWhistPlugin as unknown as GamePlugin,
+  twentyNinePlugin as unknown as GamePlugin,
 ];

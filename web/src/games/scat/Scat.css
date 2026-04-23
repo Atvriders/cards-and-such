@@ -1,0 +1,186 @@
+.scat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #1a1a3a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.scat-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.scat-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.scat-bot-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+}
+
+.scat-bot-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.scat-card-back {
+  width: 34px;
+  height: 48px;
+  background: #283593;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: inline-block;
+}
+
+.scat-card-backs { display: flex; gap: 4px; }
+
+.scat-middle {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.scat-pile-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.scat-pile-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.scat-pile-count {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+
+.scat-pile-empty {
+  width: 50px;
+  height: 70px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  opacity: 0.4;
+}
+
+.scat-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  min-height: 1.5rem;
+  text-align: center;
+  max-width: 420px;
+}
+
+.scat-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.scat-btn {
+  background: #4527a0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.15s;
+}
+
+.scat-btn:hover:not(:disabled) { background: #512da8; }
+.scat-btn:disabled { opacity: 0.35; cursor: default; }
+
+.scat-btn.knock { background: #b71c1c; }
+.scat-btn.knock:hover:not(:disabled) { background: #c62828; }
+
+.scat-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.scat-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.scat-player-hand {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.scat-player-hand .card { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
+.scat-player-hand .card:hover { transform: translateY(-4px); }
+.scat-player-hand .card.selected { box-shadow: 0 0 0 3px #ffeb3b; transform: translateY(-6px); }
+.scat-player-hand .card.dim { opacity: 0.35; }
+
+.scat-drawn-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.scat-drawn-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffe082;
+}
+
+.scat-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.scat-result h2 { margin: 0; font-size: 1.4rem; }

@@ -1,0 +1,134 @@
+.german-whist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #1a3a2a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.gw-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.gw-bot-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.gw-bot-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.gw-card-back {
+  width: 32px;
+  height: 45px;
+  background: #1b5e20;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: inline-block;
+}
+
+.gw-card-backs { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; }
+
+.gw-stock-area {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.gw-stock-label {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.gw-trick-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.gw-trick-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.gw-trick-cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.gw-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.gw-trick-slot-label { font-size: 0.65rem; opacity: 0.6; }
+
+.gw-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  min-height: 1.5rem;
+  text-align: center;
+  max-width: 420px;
+}
+
+.gw-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.gw-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.gw-player-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gw-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.gw-player-hand .card:hover:not(.dim) { transform: translateY(-6px); }
+.gw-player-hand .card.dim { opacity: 0.35; cursor: default; }
+
+.gw-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gw-result h2 { margin: 0; font-size: 1.4rem; }
