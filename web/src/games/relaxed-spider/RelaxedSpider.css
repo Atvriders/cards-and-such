@@ -1,0 +1,30 @@
+.relaxed-spider {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.rs-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rs-top-row,
+.rs-tableau-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper {
+  cursor: pointer;
+}

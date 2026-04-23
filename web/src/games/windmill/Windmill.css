@@ -1,0 +1,35 @@
+.windmill {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.windmill-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.windmill-top-row,
+.windmill-mid-row,
+.windmill-bot-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.windmill-spacer {
+  flex: 1;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper {
+  cursor: pointer;
+}

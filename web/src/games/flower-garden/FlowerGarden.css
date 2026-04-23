@@ -1,0 +1,48 @@
+.flower-garden {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.fg-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auto-move-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.auto-move-btn:hover {
+  background: #444;
+}
+
+.fg-top-row,
+.fg-tableau-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.fg-spacer {
+  flex: 1;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.garden-wrapper {
+  cursor: pointer;
+}

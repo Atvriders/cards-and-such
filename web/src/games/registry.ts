@@ -302,6 +302,14 @@ import { coinCounterPlugin } from "./coin-counter/index.js";
 import { guessFlagPlugin } from "./guess-the-flag/index.js";
 import { oddOneOutPlugin } from "./odd-one-out/index.js";
 import { lightsOut3DPlugin } from "./lights-out-3d/index.js";
+import { windmillPlugin } from "./windmill/index.js";
+import { seaTowersPlugin } from "./sea-towers/index.js";
+import { thumbAndPouchPlugin } from "./thumb-and-pouch/index.js";
+import { flowerGardenPlugin } from "./flower-garden/index.js";
+import { easthavenPlugin } from "./easthaven/index.js";
+import { klondikeByThreesPlugin } from "./klondike-by-threes/index.js";
+import { aceOfThePilePlugin } from "./ace-of-the-pile/index.js";
+import { relaxedSpiderPlugin } from "./relaxed-spider/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -607,4 +615,12 @@ export const GAMES: GamePlugin[] = [
   guessFlagPlugin as unknown as GamePlugin,
   oddOneOutPlugin as unknown as GamePlugin,
   lightsOut3DPlugin as unknown as GamePlugin,
+  windmillPlugin as unknown as GamePlugin,
+  seaTowersPlugin as unknown as GamePlugin,
+  thumbAndPouchPlugin as unknown as GamePlugin,
+  flowerGardenPlugin as unknown as GamePlugin,
+  easthavenPlugin as unknown as GamePlugin,
+  klondikeByThreesPlugin as unknown as GamePlugin,
+  aceOfThePilePlugin as unknown as GamePlugin,
+  relaxedSpiderPlugin as unknown as GamePlugin,
 ];
