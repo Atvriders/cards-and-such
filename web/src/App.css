@@ -1,2 +1,7 @@
 :root { color-scheme: dark; }
 body { margin: 0; font-family: system-ui, sans-serif; background: #0b0b12; color: #f4f4fb; }
+
+/* Default button text color: dark, so any button with a light background
+   (common pattern: background: #fff with no color set) is readable by default.
+   Buttons that explicitly set `color` keep their own style. */
+button { color: #1a1a1a; }
