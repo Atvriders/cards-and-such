@@ -1,0 +1,22 @@
+.lcr { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif; }
+.lcr-header { font-size: 1.1rem; font-weight: bold; display: flex; gap: 24px; }
+.lcr-winner { color: #2a7a2a; }
+.lcr-players { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.lcr-player { border: 2px solid #ccc; border-radius: 8px; padding: 12px 16px; text-align: center; min-width: 100px; }
+.lcr-player.active { border-color: #4a90e2; background: #eaf2ff; }
+.lcr-player.winner { border-color: #2a7a2a; background: #e8f8e8; }
+.lcr-player-label { font-weight: bold; margin-bottom: 8px; }
+.lcr-chips { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; min-height: 20px; margin-bottom: 4px; }
+.lcr-chip { width: 16px; height: 16px; border-radius: 50%; background: #f5a623; border: 1px solid #c8820a; display: inline-block; }
+.lcr-out { color: #999; font-style: italic; font-size: 0.85rem; }
+.lcr-chip-count { font-size: 0.85rem; color: #555; }
+.lcr-dice { display: flex; gap: 10px; }
+.lcr-die { width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold; border: 2px solid #999; }
+.face-l { background: #e74c3c; color: #fff; }
+.face-r { background: #3498db; color: #fff; }
+.face-c { background: #f39c12; color: #fff; }
+.face-dot { background: #ecf0f1; color: #555; }
+.lcr-controls button { padding: 10px 24px; font-size: 1rem; cursor: pointer; border-radius: 6px; border: none; background: #4a90e2; color: #fff; }
+.lcr-controls button:hover { background: #357abd; }
+.lcr-waiting { color: #888; font-style: italic; }
+.lcr-legend { font-size: 0.8rem; color: #777; }

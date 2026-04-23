@@ -390,6 +390,14 @@ import { stitchesPlugin } from "./stitches/index.js";
 import { rangePlugin } from "./range/index.js";
 import { shakashakaPlugin } from "./shakashaka/index.js";
 import { crossTheStreamsPlugin } from "./cross-the-streams/index.js";
+import { lcrPlugin } from "./lcr/index.js";
+import { snakesRacePlugin } from "./snakes-race/index.js";
+import { rollRightPlugin } from "./roll-right/index.js";
+import { diddlerPlugin } from "./diddler/index.js";
+import { fifteensPlugin } from "./fifteens/index.js";
+import { napoleonsTombPlugin } from "./napoleons-tomb/index.js";
+import { quickTickPlugin } from "./quick-tick/index.js";
+import { paperTossPlugin } from "./paper-toss/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -783,4 +791,12 @@ export const GAMES: GamePlugin[] = [
   rangePlugin as unknown as GamePlugin,
   shakashakaPlugin as unknown as GamePlugin,
   crossTheStreamsPlugin as unknown as GamePlugin,
+  lcrPlugin as unknown as GamePlugin,
+  snakesRacePlugin as unknown as GamePlugin,
+  rollRightPlugin as unknown as GamePlugin,
+  diddlerPlugin as unknown as GamePlugin,
+  fifteensPlugin as unknown as GamePlugin,
+  napoleonsTombPlugin as unknown as GamePlugin,
+  quickTickPlugin as unknown as GamePlugin,
+  paperTossPlugin as unknown as GamePlugin,
 ];

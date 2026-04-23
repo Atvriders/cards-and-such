@@ -1,0 +1,20 @@
+.fifteens { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif; }
+.fifteens-status { font-size: 1rem; color: #555; }
+.fifteens-cards { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.fifteens-card { width: 64px; height: 90px; border-radius: 8px; border: 2px solid #bbb; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; user-select: none; transition: border-color 0.15s, background 0.15s; font-size: 1.1rem; font-weight: bold; }
+.fifteens-card.selected { border-color: #4a90e2; background: #eaf2ff; }
+.fifteens-card.hearts, .fifteens-card.diamonds { color: #c0392b; }
+.fifteens-card.spades, .fifteens-card.clubs { color: #222; }
+.fifteens-card:hover { border-color: #4a90e2; }
+.fifteens-card-rank { font-size: 1.3rem; }
+.fifteens-card-suit { font-size: 1rem; }
+.fifteens-deck-info { font-size: 0.9rem; color: #777; }
+.fifteens-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.fifteens-controls button { padding: 10px 22px; font-size: 1rem; cursor: pointer; border-radius: 6px; border: none; background: #4a90e2; color: #fff; }
+.fifteens-controls button:hover { background: #357abd; }
+.fifteens-controls button:disabled { background: #aaa; cursor: default; }
+.fifteens-message { font-size: 1.2rem; font-weight: bold; }
+.fifteens-message.won { color: #2a7a2a; }
+.fifteens-message.lost { color: #c0392b; }
+.fifteens-sum { font-size: 0.95rem; color: #555; }
+.fifteens-sum.valid { color: #2a7a2a; font-weight: bold; }

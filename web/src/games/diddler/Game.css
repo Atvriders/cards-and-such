@@ -1,0 +1,26 @@
+.diddler { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif; }
+.diddler-scores { display: flex; gap: 32px; font-size: 1.1rem; font-weight: bold; }
+.diddler-score-item { text-align: center; }
+.diddler-score-item.leading { color: #2a7a2a; }
+.diddler-score-label { font-size: 0.82rem; color: #555; margin-bottom: 2px; }
+.diddler-score-value { font-size: 1.8rem; }
+.diddler-goal { font-size: 0.8rem; color: #999; }
+.diddler-dice-row { display: flex; gap: 10px; justify-content: center; }
+.diddler-die { width: 48px; height: 48px; border-radius: 8px; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; background: #fff; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.diddler-die:hover { border-color: #4a90e2; background: #eaf2ff; }
+.diddler-die.placed { border-color: #e67e22; background: #fef5ea; cursor: default; }
+.diddler-die.available { border-color: #27ae60; background: #e8f8e8; }
+.diddler-slot { width: 48px; height: 48px; border-radius: 8px; border: 2px dashed #aaa; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; cursor: pointer; background: #f9f9f9; transition: border-color 0.15s; }
+.diddler-slot.filled { border-color: #e67e22; background: #fef5ea; cursor: pointer; }
+.diddler-slot:empty-content { color: #bbb; }
+.diddler-arrange-label { font-size: 0.9rem; color: #555; }
+.diddler-number { font-size: 2rem; font-weight: bold; letter-spacing: 4px; color: #333; }
+.diddler-result { text-align: center; padding: 12px 20px; border-radius: 8px; background: #f0f0f0; font-size: 0.95rem; }
+.diddler-controls button { padding: 10px 22px; font-size: 1rem; cursor: pointer; border-radius: 6px; border: none; background: #4a90e2; color: #fff; }
+.diddler-controls button:hover { background: #357abd; }
+.diddler-controls button:disabled { background: #aaa; cursor: default; }
+.diddler-winner { font-size: 1.3rem; font-weight: bold; color: #2a7a2a; }
+.diddler-hint { font-size: 0.8rem; color: #999; }
+.diddler-slots-row { display: flex; gap: 10px; justify-content: center; align-items: center; }
+.diddler-section { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.diddler-section-label { font-size: 0.85rem; font-weight: bold; color: #555; }

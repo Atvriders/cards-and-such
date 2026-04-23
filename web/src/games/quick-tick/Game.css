@@ -1,0 +1,21 @@
+.quick-tick { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px; font-family: sans-serif; user-select: none; }
+.qt-score { font-size: 1.4rem; font-weight: bold; }
+.qt-progress { font-size: 0.9rem; color: #777; }
+.qt-clock-area { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.qt-clock { width: 140px; height: 140px; border-radius: 50%; border: 6px solid #333; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; font-weight: bold; background: #fff; cursor: pointer; transition: background 0.08s, border-color 0.08s; position: relative; }
+.qt-clock.tick { background: #ffe082; border-color: #f39c12; }
+.qt-clock.perfect { background: #a5d6a7; border-color: #2a7a2a; }
+.qt-clock.good { background: #b3e0ff; border-color: #1565c0; }
+.qt-clock.miss { background: #ffcdd2; border-color: #c0392b; }
+.qt-clock-inner { font-size: 1.1rem; }
+.qt-feedback { font-size: 1.2rem; font-weight: bold; min-height: 1.5em; text-align: center; }
+.qt-feedback.perfect { color: #2a7a2a; }
+.qt-feedback.good { color: #1565c0; }
+.qt-feedback.miss { color: #c0392b; }
+.qt-timing { font-size: 0.85rem; color: #888; }
+.qt-controls button { padding: 12px 28px; font-size: 1.1rem; cursor: pointer; border-radius: 8px; border: none; background: #4a90e2; color: #fff; }
+.qt-controls button:hover { background: #357abd; }
+.qt-done { font-size: 1.5rem; font-weight: bold; color: #2a7a2a; text-align: center; }
+.qt-hint { font-size: 0.8rem; color: #aaa; text-align: center; max-width: 300px; }
+.qt-bar { width: 280px; height: 12px; background: #eee; border-radius: 6px; overflow: hidden; }
+.qt-bar-fill { height: 100%; background: #4a90e2; border-radius: 6px; transition: width 0.1s linear; }

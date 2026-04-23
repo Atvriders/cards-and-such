@@ -1,0 +1,20 @@
+.roll-right { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif; }
+.rr-scores { display: flex; gap: 32px; font-size: 1.1rem; font-weight: bold; }
+.rr-score-item { text-align: center; }
+.rr-score-item.active { color: #4a90e2; }
+.rr-score-label { font-size: 0.85rem; color: #555; margin-bottom: 2px; }
+.rr-score-value { font-size: 1.6rem; }
+.rr-goal { font-size: 0.85rem; color: #999; }
+.rr-dice { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.rr-die { width: 52px; height: 52px; border-radius: 8px; border: 3px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: bold; cursor: default; background: #fff; transition: border-color 0.15s, background 0.15s; }
+.rr-die.kept { border-color: #2a7a2a; background: #e8f8e8; cursor: pointer; }
+.rr-die.selectable { cursor: pointer; }
+.rr-die.selectable:hover { border-color: #4a90e2; background: #eaf2ff; }
+.rr-turn-info { font-size: 0.95rem; color: #555; min-height: 1.4em; }
+.rr-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.rr-controls button { padding: 10px 22px; font-size: 1rem; cursor: pointer; border-radius: 6px; border: none; background: #4a90e2; color: #fff; }
+.rr-controls button:hover { background: #357abd; }
+.rr-controls button:disabled { background: #aaa; cursor: default; }
+.rr-bot-label { color: #888; font-style: italic; font-size: 0.95rem; }
+.rr-winner { font-size: 1.3rem; font-weight: bold; color: #2a7a2a; }
+.rr-hint { font-size: 0.8rem; color: #999; }
