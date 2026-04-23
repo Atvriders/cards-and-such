@@ -1,0 +1,69 @@
+.hiho-game {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 12px;
+  font-family: sans-serif;
+}
+.hiho-status {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+  min-height: 36px;
+}
+.hiho-status.win { background: #d4edda; color: #155724; }
+.hiho-status.loss { background: #f8d7da; color: #721c24; }
+.hiho-spin-result {
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 8px 0;
+}
+.hiho-spin-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #27ae60;
+  color: white;
+  cursor: pointer;
+}
+.hiho-spin-btn:hover { background: #219a52; }
+.hiho-players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+.hiho-player {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+}
+.hiho-player-name {
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+.hiho-tree { margin-bottom: 4px; }
+.hiho-label { font-size: 0.75rem; color: #666; }
+.hiho-cherries { display: flex; flex-wrap: wrap; gap: 1px; margin-top: 2px; }
+.hiho-cherry { font-size: 1rem; }
+.hiho-cherry.gone { opacity: 0.15; filter: grayscale(1); }
+.hiho-bucket { margin-top: 4px; }
+.hiho-bucket-bar-bg {
+  background: #ddd;
+  border-radius: 4px;
+  height: 8px;
+  margin-top: 2px;
+}
+.hiho-bucket-bar-fill {
+  height: 8px;
+  border-radius: 4px;
+  transition: width 0.3s;
+}

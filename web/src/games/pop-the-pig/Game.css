@@ -1,0 +1,63 @@
+.pig-game {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: sans-serif;
+  text-align: center;
+}
+.pig-emoji {
+  font-size: 4rem;
+  margin-bottom: 8px;
+}
+.pig-status {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+  min-height: 36px;
+}
+.pig-status.win { background: #d4edda; color: #155724; }
+.pig-status.loss { background: #f8d7da; color: #721c24; }
+.pig-bar-wrap { margin: 12px 0; }
+.pig-bar-bg {
+  background: #ddd;
+  border-radius: 8px;
+  height: 24px;
+  overflow: hidden;
+  border: 2px solid #bbb;
+}
+.pig-bar-fill {
+  height: 100%;
+  background: #f9ca24;
+  transition: width 0.4s;
+  border-radius: 6px;
+}
+.pig-bar-fill.danger { background: #e74c3c; }
+.pig-bar-label { font-size: 0.85rem; margin-top: 4px; color: #555; }
+.pig-roll { font-size: 1.1rem; margin: 8px 0; }
+.pig-roll-btn {
+  margin: 10px auto;
+  padding: 12px 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #e74c3c;
+  color: white;
+  cursor: pointer;
+  display: block;
+}
+.pig-roll-btn:hover { background: #c0392b; }
+.pig-players {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+.pig-player { padding: 4px 10px; border-radius: 12px; background: #f0f0f0; }
+.pig-player.active { background: #fff3cd; font-weight: bold; }
+.pig-player.loser { background: #f8d7da; color: #721c24; font-weight: bold; }

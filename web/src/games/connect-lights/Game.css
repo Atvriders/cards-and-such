@@ -1,0 +1,72 @@
+.cl-lights-game {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: sans-serif;
+  text-align: center;
+  background: #1a1a2e;
+  border-radius: 12px;
+  color: white;
+}
+.cl-lights-header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+.cl-lights-cleared {
+  color: #ffe066;
+  font-weight: bold;
+  animation: pop 0.4s ease;
+}
+@keyframes pop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+.cl-lights-over {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+.cl-lights-hint {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+.cl-lights-path-hint {
+  font-size: 0.8rem;
+  color: #ffe066;
+  margin-top: 8px;
+}
+.cl-lights-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  padding: 8px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+.cl-light {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.15s;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+.cl-light:hover:not(.disabled) {
+  transform: scale(1.1);
+}
+.cl-light.selected {
+  transform: scale(1.15);
+  border-color: white;
+}
+.cl-light.in-path {
+  border-color: rgba(255,255,255,0.6);
+}
+.cl-light.disabled {
+  cursor: default;
+  opacity: 0.7;
+}

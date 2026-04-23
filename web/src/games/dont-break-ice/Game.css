@@ -1,0 +1,70 @@
+.dbi-game {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 12px;
+  font-family: sans-serif;
+  text-align: center;
+}
+.dbi-status {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+  min-height: 36px;
+}
+.dbi-status.win { background: #d4edda; color: #155724; }
+.dbi-status.loss { background: #f8d7da; color: #721c24; }
+.dbi-info {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  color: #555;
+}
+.dbi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(4, 80px);
+  gap: 4px;
+  margin: 0 auto;
+  width: fit-content;
+}
+.dbi-cube {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background: #cce5ff;
+  border: 2px solid #74c0fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.dbi-cube:hover:not(.removed) {
+  background: #a5d8ff;
+}
+.dbi-cube.support {
+  background: #b2f2bb;
+  border-color: #40c057;
+}
+.dbi-cube.support:hover {
+  background: #8ce99a;
+}
+.dbi-cube.removed {
+  background: transparent;
+  border: 2px dashed #ddd;
+  cursor: default;
+  font-size: 0;
+}
+.dbi-cube.last-removed {
+  border-color: #e74c3c;
+}
+.dbi-hint {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 10px;
+}

@@ -1,0 +1,103 @@
+.gw-game {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 12px;
+  font-family: sans-serif;
+}
+.gw-status {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+  min-height: 36px;
+}
+.gw-status.win { background: #d4edda; color: #155724; }
+.gw-status.loss { background: #f8d7da; color: #721c24; }
+.gw-meta {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+.gw-last-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f0f4ff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+.gw-answer { font-weight: bold; padding: 2px 8px; border-radius: 4px; }
+.gw-answer.yes { background: #d4edda; color: #155724; }
+.gw-answer.no { background: #f8d7da; color: #721c24; }
+.gw-mode-tabs { display: flex; gap: 8px; margin-bottom: 8px; }
+.gw-tab {
+  padding: 6px 16px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.gw-tab.active { border-color: #3498db; background: #ebf5fb; font-weight: bold; }
+.gw-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px;
+}
+.gw-q-btn {
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.85rem;
+}
+.gw-q-btn:hover { background: #e8f4f8; }
+.gw-guess-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.gw-char-btn {
+  padding: 6px 14px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.gw-char-btn.eliminated { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
+.gw-char-btn:hover:not(.eliminated) { background: #d4edda; }
+.gw-board { margin-top: 12px; }
+.gw-board-title { font-size: 0.8rem; font-weight: bold; color: #888; margin-bottom: 6px; letter-spacing: 1px; }
+.gw-char-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+.gw-char-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 4px;
+  font-size: 0.65rem;
+  background: #fafafa;
+  transition: opacity 0.2s;
+}
+.gw-char-card.elim { opacity: 0.2; text-decoration: line-through; }
+.gw-char-name { font-weight: bold; font-size: 0.75rem; margin-bottom: 2px; }
+.gw-char-attr { color: #666; line-height: 1.3; }

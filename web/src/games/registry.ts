@@ -350,6 +350,14 @@ import { pyramidGolfPlugin } from "./pyramid-golf/index.js";
 import { nestorPlugin } from "./nestor/index.js";
 import { fortyEightOneDeckPlugin } from "./forty-eight-one-deck/index.js";
 import { dozenPlugin } from "./dozen/index.js";
+import { candyLandPlugin } from "./candy-land/index.js";
+import { hiHoCherryOPlugin } from "./hi-ho-cherry-o/index.js";
+import { dontBreakIcePlugin } from "./dont-break-ice/index.js";
+import { popThePigPlugin } from "./pop-the-pig/index.js";
+import { operationGamePlugin } from "./operation-game/index.js";
+import { guessWhoPlugin } from "./guess-who/index.js";
+import { chutesLaddersKidsPlugin } from "./chutes-ladders-kids/index.js";
+import { connectLightsPlugin } from "./connect-lights/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -703,4 +711,12 @@ export const GAMES: GamePlugin[] = [
   nestorPlugin as unknown as GamePlugin,
   fortyEightOneDeckPlugin as unknown as GamePlugin,
   dozenPlugin as unknown as GamePlugin,
+  candyLandPlugin as unknown as GamePlugin,
+  hiHoCherryOPlugin as unknown as GamePlugin,
+  dontBreakIcePlugin as unknown as GamePlugin,
+  popThePigPlugin as unknown as GamePlugin,
+  operationGamePlugin as unknown as GamePlugin,
+  guessWhoPlugin as unknown as GamePlugin,
+  chutesLaddersKidsPlugin as unknown as GamePlugin,
+  connectLightsPlugin as unknown as GamePlugin,
 ];
