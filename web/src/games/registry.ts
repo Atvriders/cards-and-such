@@ -508,6 +508,10 @@ import { laserDodgePlugin } from "./laser-dodge/index.js";
 import { bubblePopChainPlugin } from "./bubble-pop-chain/index.js";
 import { whackAVirusPlugin } from "./whack-a-virus/index.js";
 import { tunnelRunnerPlugin } from "./tunnel-runner/index.js";
+import { wordScramblePlugin } from "./word-scramble/index.js";
+import { categoryQuizPlugin } from "./category-quiz/index.js";
+import { missingLettersPlugin } from "./missing-letters/index.js";
+import { synonymMatchPlugin } from "./synonym-match/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1019,4 +1023,8 @@ export const GAMES: GamePlugin[] = [
   bubblePopChainPlugin as unknown as GamePlugin,
   whackAVirusPlugin as unknown as GamePlugin,
   tunnelRunnerPlugin as unknown as GamePlugin,
+  wordScramblePlugin as unknown as GamePlugin,
+  categoryQuizPlugin as unknown as GamePlugin,
+  missingLettersPlugin as unknown as GamePlugin,
+  synonymMatchPlugin as unknown as GamePlugin,
 ];
