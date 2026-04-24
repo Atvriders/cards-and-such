@@ -1,0 +1,48 @@
+.tr-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.tr-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.tr-canvas-wrap {
+  position: relative;
+  border: 2px solid #445;
+  cursor: none;
+  overflow: hidden;
+}
+
+.tr-canvas {
+  display: block;
+}
+
+.tr-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.tr-overlay h2 { margin: 0; font-size: 1.6rem; }
+.tr-overlay p { margin: 0; font-size: 1.1rem; }
+
+.tr-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}

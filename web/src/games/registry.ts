@@ -500,6 +500,14 @@ import { pegSolitairePlusPlugin } from "./peg-solitaire-plus/index.js";
 import { logicGatesSimPlugin } from "./logic-gates-sim/index.js";
 import { cipherCrackPlugin } from "./cipher-crack/index.js";
 import { binaryPuzzlePlugin } from "./binary-puzzle/index.js";
+import { colorMatchDashPlugin } from "./color-match-dash/index.js";
+import { rhythmTapPlugin } from "./rhythm-tap/index.js";
+import { stackTowerPlugin } from "./stack-tower/index.js";
+import { planeDodgePlugin } from "./plane-dodge/index.js";
+import { laserDodgePlugin } from "./laser-dodge/index.js";
+import { bubblePopChainPlugin } from "./bubble-pop-chain/index.js";
+import { whackAVirusPlugin } from "./whack-a-virus/index.js";
+import { tunnelRunnerPlugin } from "./tunnel-runner/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1003,4 +1011,12 @@ export const GAMES: GamePlugin[] = [
   logicGatesSimPlugin as unknown as GamePlugin,
   cipherCrackPlugin as unknown as GamePlugin,
   binaryPuzzlePlugin as unknown as GamePlugin,
+  colorMatchDashPlugin as unknown as GamePlugin,
+  rhythmTapPlugin as unknown as GamePlugin,
+  stackTowerPlugin as unknown as GamePlugin,
+  planeDodgePlugin as unknown as GamePlugin,
+  laserDodgePlugin as unknown as GamePlugin,
+  bubblePopChainPlugin as unknown as GamePlugin,
+  whackAVirusPlugin as unknown as GamePlugin,
+  tunnelRunnerPlugin as unknown as GamePlugin,
 ];

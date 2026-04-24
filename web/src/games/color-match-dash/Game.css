@@ -1,0 +1,91 @@
+.cmd-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.cmd-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.cmd-playfield {
+  position: relative;
+  background: #111;
+  border: 2px solid #555;
+  overflow: hidden;
+}
+
+.cmd-lane-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,0.1);
+}
+
+.cmd-falling {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.cmd-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.cmd-button {
+  width: 90px;
+  height: 50px;
+  border-radius: 8px;
+  border: 3px solid rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  transition: transform 0.1s, opacity 0.1s;
+}
+
+.cmd-button:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.cmd-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.cmd-overlay h2 { margin: 0; font-size: 1.6rem; }
+.cmd-overlay p { margin: 0; font-size: 1.1rem; }
+
+.cmd-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}

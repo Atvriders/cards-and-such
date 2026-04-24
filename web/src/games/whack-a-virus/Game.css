@@ -1,0 +1,127 @@
+.wav-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.wav-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.wav-grid {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  background: #1a2a1a;
+  border: 2px solid #354;
+  border-radius: 12px;
+}
+
+.wav-slot {
+  width: 88px;
+  height: 88px;
+  border-radius: 12px;
+  background: #243424;
+  border: 2px solid #354;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wav-slot--empty {
+  cursor: default;
+}
+
+.wav-virus {
+  font-size: 3rem;
+  line-height: 1;
+  animation: wav-pop-in 0.15s ease-out;
+  transition: transform 0.1s;
+}
+
+.wav-virus:active { transform: scale(0.8); }
+
+.wav-virus--fast { filter: hue-rotate(120deg); }
+.wav-virus--bonus { filter: hue-rotate(240deg); }
+.wav-virus--whacked {
+  animation: wav-pop-out 0.2s ease-in forwards;
+}
+
+.wav-timer-ring {
+  position: absolute;
+  bottom: 3px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.wav-timer-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: #4f4;
+  transition: width 0.1s linear;
+}
+
+.wav-timer-fill--warn { background: #f84; }
+.wav-timer-fill--crit { background: #f44; }
+
+@keyframes wav-pop-in {
+  from { transform: scale(0.3); opacity: 0.3; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes wav-pop-out {
+  from { transform: scale(1); opacity: 1; }
+  to   { transform: scale(1.4); opacity: 0; }
+}
+
+.wav-progress {
+  width: 100%;
+  max-width: 400px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.wav-progress-bar {
+  height: 100%;
+  background: #5af;
+  border-radius: 3px;
+}
+
+.wav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+  z-index: 10;
+}
+
+.wav-overlay h2 { margin: 0; font-size: 1.6rem; }
+.wav-overlay p { margin: 0; font-size: 1.1rem; }
+
+.wav-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+  max-width: 400px;
+}

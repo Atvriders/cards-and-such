@@ -3,12 +3,13 @@ import { GAMES } from "../games/registry.js";
 import type { GameCategory } from "../platform/game-plugin/types.js";
 import "./LobbyPage.css";
 
-const CATEGORY_ORDER: GameCategory[] = ["solitaire", "cards", "dice", "board"];
+const CATEGORY_ORDER: GameCategory[] = ["solitaire", "cards", "dice", "board", "arcade"];
 const CATEGORY_LABELS: Record<GameCategory, string> = {
   solitaire: "Solitaire",
   cards: "Cards",
   dice: "Dice",
   board: "Board",
+  arcade: "Arcade",
 };
 
 export default function LobbyPage(): JSX.Element {
@@ -21,7 +22,7 @@ export default function LobbyPage(): JSX.Element {
     );
   }
   const byCategory: Record<GameCategory, typeof GAMES> = {
-    solitaire: [], cards: [], dice: [], board: [],
+    solitaire: [], cards: [], dice: [], board: [], arcade: [],
   };
   for (const g of GAMES) byCategory[g.category].push(g);
 

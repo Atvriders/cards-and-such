@@ -23,7 +23,7 @@ export interface GameProps<State, Settings> {
   onGameOver: (score: number) => void;
 }
 
-export type GameCategory = "solitaire" | "cards" | "dice" | "board";
+export type GameCategory = "solitaire" | "cards" | "dice" | "board" | "arcade";
 
 export interface GamePlugin<State = unknown, Action = unknown, Schema extends SettingSchema = SettingSchema> {
   id: string;
