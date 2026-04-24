@@ -1,0 +1,31 @@
+.gomokupro-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.gomokupro-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+.gomokupro-status.win { color: #27ae60; }
+.gomokupro-status.loss { color: #e74c3c; }
+
+.gomokupro-info {
+  font-size: 0.8rem;
+  color: #888;
+  max-width: 500px;
+  text-align: center;
+}
+
+.gomokupro-svg {
+  background: #d4a855;
+  border: 3px solid #8B6914;
+  border-radius: 4px;
+  cursor: crosshair;
+}

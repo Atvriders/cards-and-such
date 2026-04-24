@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { agonPlugin } from "./agon/index.js";
+import { turkishDraughtsPlugin } from "./turkish-draughts/index.js";
+import { armenianDraughtsPlugin } from "./armenian-draughts/index.js";
+import { foxAndGeesePlugin } from "./fox-and-geese/index.js";
+import { kharbagaPlugin } from "./kharbaga/index.js";
+import { gomokuProPlugin } from "./gomoku-pro/index.js";
+import { fiveFieldKonoPlugin } from "./five-field-kono/index.js";
+import { baghChalPlugin } from "./bagh-chal/index.js";
 import { farmManagerPlugin } from "./farm-manager/index.js";
 import { stockTickerPlugin } from "./stock-ticker/index.js";
 import { storehousePlugin } from "./storehouse/index.js";
@@ -1059,4 +1067,12 @@ export const GAMES: GamePlugin[] = [
   napoleonAtSaintHelenaPlugin as unknown as GamePlugin,
   fourSeasonsPlugin as unknown as GamePlugin,
   deucesSolitairePlugin as unknown as GamePlugin,
+  agonPlugin as unknown as GamePlugin,
+  turkishDraughtsPlugin as unknown as GamePlugin,
+  armenianDraughtsPlugin as unknown as GamePlugin,
+  foxAndGeesePlugin as unknown as GamePlugin,
+  kharbagaPlugin as unknown as GamePlugin,
+  gomokuProPlugin as unknown as GamePlugin,
+  fiveFieldKonoPlugin as unknown as GamePlugin,
+  baghChalPlugin as unknown as GamePlugin,
 ];

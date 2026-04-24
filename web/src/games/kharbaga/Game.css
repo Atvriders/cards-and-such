@@ -1,0 +1,64 @@
+.kharbaga-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.kharbaga-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+.kharbaga-status.win { color: #27ae60; }
+.kharbaga-status.loss { color: #e74c3c; }
+
+.kharbaga-counts {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.kharbaga-board {
+  position: relative;
+  border: 3px solid #5a3a10;
+  border-radius: 4px;
+  background: #d4a855;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.kharbaga-cell {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b88830;
+  cursor: pointer;
+  box-sizing: border-box;
+  background: #d4a855;
+  transition: background 0.1s;
+}
+
+.kharbaga-cell:hover { background: #e0b870; }
+.kharbaga-cell.selected { background: #ffe066; }
+.kharbaga-cell.target { background: #a8e6a0; }
+
+.kharbaga-piece {
+  font-size: 2.6rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.kharbaga-piece.white {
+  color: #f5f5f5;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+.kharbaga-piece.black {
+  color: #1a1a1a;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,35 @@
+.agon-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.agon-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+.agon-status.win { color: #27ae60; }
+.agon-status.loss { color: #e74c3c; }
+
+.agon-svg {
+  border: 2px solid #555;
+  border-radius: 6px;
+  background: #2d2d2d;
+}
+
+.agon-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: #555;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.agon-legend-white { color: #888; }
+.agon-legend-black { color: #222; }

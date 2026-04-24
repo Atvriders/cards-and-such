@@ -1,0 +1,52 @@
+.foxgeese-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.foxgeese-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+.foxgeese-status.win { color: #27ae60; }
+.foxgeese-status.loss { color: #e74c3c; }
+
+.foxgeese-info {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.foxgeese-board {
+  position: relative;
+  border: 3px solid #555;
+  border-radius: 4px;
+  background: #5a8a3a;
+}
+
+.foxgeese-cell {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4a7a2a;
+  cursor: pointer;
+  box-sizing: border-box;
+  background: #6ab04a;
+  transition: background 0.1s;
+}
+
+.foxgeese-cell:hover { background: #7ac05a; }
+.foxgeese-cell.invalid { background: #3a6a1a; cursor: default; border-color: #3a6a1a; }
+.foxgeese-cell.selected { background: #ffe066; }
+.foxgeese-cell.target { background: #a8e6a0; }
+
+.foxgeese-piece {
+  font-size: 2rem;
+  user-select: none;
+  line-height: 1;
+}
