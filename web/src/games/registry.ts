@@ -422,6 +422,14 @@ import { familyFeudPlugin } from "./family-feud/index.js";
 import { lightningRoundPlugin } from "./lightning-round/index.js";
 import { millionairePlugin } from "./millionaire/index.js";
 import { cashCabPlugin } from "./cash-cab/index.js";
+import { timesTablesPlugin } from "./times-tables/index.js";
+import { divisionDrillPlugin } from "./division-drill/index.js";
+import { fractionMatcherPlugin } from "./fraction-matcher/index.js";
+import { sequencePredictorPlugin } from "./sequence-predictor/index.js";
+import { unitConverterQuizPlugin } from "./unit-converter-quiz/index.js";
+import { percentCalculatorPlugin } from "./percent-calculator/index.js";
+import { geographyQuizPlugin } from "./geography-quiz/index.js";
+import { chemistryQuizPlugin } from "./chemistry-quiz/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -847,4 +855,12 @@ export const GAMES: GamePlugin[] = [
   lightningRoundPlugin as unknown as GamePlugin,
   millionairePlugin as unknown as GamePlugin,
   cashCabPlugin as unknown as GamePlugin,
+  timesTablesPlugin as unknown as GamePlugin,
+  divisionDrillPlugin as unknown as GamePlugin,
+  fractionMatcherPlugin as unknown as GamePlugin,
+  sequencePredictorPlugin as unknown as GamePlugin,
+  unitConverterQuizPlugin as unknown as GamePlugin,
+  percentCalculatorPlugin as unknown as GamePlugin,
+  geographyQuizPlugin as unknown as GamePlugin,
+  chemistryQuizPlugin as unknown as GamePlugin,
 ];

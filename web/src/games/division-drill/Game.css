@@ -1,0 +1,102 @@
+.dd-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 420px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+  padding: 16px;
+}
+
+.dd-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.dd-header strong { color: #2d3748; }
+
+.dd-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dd-progress-fill {
+  height: 100%;
+  background: #805ad5;
+  transition: width 0.2s;
+}
+
+.dd-problem {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #2d3748;
+  padding: 24px 40px;
+  background: #faf5ff;
+  border: 2px solid #e9d8fd;
+  border-radius: 16px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.dd-feedback {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 6px;
+  min-height: 32px;
+}
+
+.dd-feedback.correct { color: #276749; background: #f0fff4; border: 1px solid #9ae6b4; }
+.dd-feedback.wrong   { color: #c53030; background: #fff5f5; border: 1px solid #feb2b2; }
+
+.dd-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.dd-input {
+  flex: 1;
+  font-size: 1.5rem;
+  padding: 10px 14px;
+  border: 2px solid #e9d8fd;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.dd-input:focus { border-color: #805ad5; }
+
+.dd-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #805ad5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dd-btn:hover { background: #6b46c1; }
+
+.dd-done {
+  text-align: center;
+  padding: 24px;
+  background: #faf5ff;
+  border: 2px solid #e9d8fd;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.dd-done h2 { font-size: 1.6rem; color: #6b46c1; margin: 0 0 8px; }
+.dd-done p  { font-size: 1.1rem; color: #555; margin: 0; }

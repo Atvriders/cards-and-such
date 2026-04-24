@@ -1,0 +1,123 @@
+.fm-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+  padding: 16px;
+}
+
+.fm-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.fm-header strong { color: #2d3748; }
+
+.fm-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fm-progress-fill {
+  height: 100%;
+  background: #d69e2e;
+  transition: width 0.2s;
+}
+
+.fm-question {
+  font-size: 1.1rem;
+  color: #4a5568;
+  text-align: center;
+}
+
+.fm-fraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #2d3748;
+  background: #fffff0;
+  border: 2px solid #f6e05e;
+  border-radius: 16px;
+  padding: 16px 40px;
+  line-height: 1;
+}
+
+.fm-fraction-bar {
+  width: 100%;
+  height: 4px;
+  background: #2d3748;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+.fm-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.fm-choice {
+  padding: 12px 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  text-align: center;
+}
+
+.fm-choice:hover:not(:disabled) { border-color: #d69e2e; background: #fffff0; }
+.fm-choice.selected { border-color: #d69e2e; background: #fffff0; }
+.fm-choice.correct  { border-color: #38a169; background: #f0fff4; }
+.fm-choice.wrong    { border-color: #e53e3e; background: #fff5f5; }
+
+.fm-feedback {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 8px;
+}
+
+.fm-feedback.correct { color: #276749; background: #f0fff4; }
+.fm-feedback.wrong   { color: #c53030; background: #fff5f5; }
+
+.fm-actions { display: flex; gap: 10px; }
+
+.fm-btn {
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fm-btn.submit { background: #d69e2e; color: #fff; }
+.fm-btn.submit:disabled { opacity: 0.4; cursor: not-allowed; }
+.fm-btn.next   { background: #3182ce; color: #fff; }
+
+.fm-done {
+  text-align: center;
+  padding: 24px;
+  background: #fffff0;
+  border: 2px solid #f6e05e;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.fm-done h2 { font-size: 1.6rem; color: #b7791f; margin: 0 0 8px; }
+.fm-done p  { font-size: 1.1rem; color: #555; margin: 0; }
