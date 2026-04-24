@@ -50,10 +50,11 @@ describe("LeafBlower", () => {
     s = {
       ...s,
       combo: 5,
-      leaves: [{ id: 0, x: 50, y: 50, speed: 200, size: 1, caught: false, fallen: false, emoji: "🍂" }],
+      leaves: [{ id: 0, x: 50, y: 90, speed: 200, size: 1, caught: false, fallen: false, emoji: "🍂" }],
     };
-    // Tick enough to push leaf past the ground
-    s = reducer(s, { type: "tick", deltaMs: 1000 });
+    // Tick multiple times to push leaf past the ground (dt capped at 200ms=0.2s per tick)
+    // After 1 tick: y = 90 + 200*0.2 = 130 > 105 → fallen
+    s = reducer(s, { type: "tick", deltaMs: 200 });
     expect(s.combo).toBe(0);
     expect(s.missed).toBeGreaterThan(0);
   });
