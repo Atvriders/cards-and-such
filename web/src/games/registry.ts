@@ -544,6 +544,14 @@ import { casinoWarMultiPlugin } from "./casino-war-multi/index.js";
 import { kenoMiniPlugin } from "./keno-mini/index.js";
 import { fanTanPlugin } from "./fan-tan/index.js";
 import { dragonTigerPlugin } from "./dragon-tiger/index.js";
+import { floodItPlugin } from "./flood-it/index.js";
+import { colorLinesPlugin } from "./color-lines/index.js";
+import { dominosaPlugin } from "./dominosa/index.js";
+import { kyodaiPlugin } from "./kyodai/index.js";
+import { pipeManiaPlugin } from "./pipe-mania/index.js";
+import { hexMatch3Plugin } from "./hex-match-3/index.js";
+import { rotateMatchPlugin } from "./rotate-match/index.js";
+import { triangleMatchPlugin } from "./triangle-match/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1091,4 +1099,12 @@ export const GAMES: GamePlugin[] = [
   rollThroughAgesPlugin as unknown as GamePlugin,
   macaoDicePlugin as unknown as GamePlugin,
   helanGarPlugin as unknown as GamePlugin,
+  floodItPlugin as unknown as GamePlugin,
+  colorLinesPlugin as unknown as GamePlugin,
+  dominosaPlugin as unknown as GamePlugin,
+  kyodaiPlugin as unknown as GamePlugin,
+  pipeManiaPlugin as unknown as GamePlugin,
+  hexMatch3Plugin as unknown as GamePlugin,
+  rotateMatchPlugin as unknown as GamePlugin,
+  triangleMatchPlugin as unknown as GamePlugin,
 ];
