@@ -1,0 +1,27 @@
+.colony-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 440px; margin: 0 auto; font-family: system-ui, sans-serif; background: #0a0e1a; color: #e0e8ff; min-height: 100%; }
+.colony-header { display: flex; justify-content: space-between; align-items: center; background: #1a2040; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+.colony-title { font-weight: 700; font-size: 1.1rem; }
+.colony-day { color: #8899bb; font-size: 0.9rem; }
+.colony-col { font-weight: 700; color: #80cbc4; }
+.colony-resources { display: flex; flex-direction: column; gap: 8px; background: #1a2040; border-radius: 8px; padding: 10px; }
+.colony-res-row { display: grid; grid-template-columns: 80px 1fr 36px; align-items: center; gap: 8px; font-size: 0.9rem; }
+.colony-bar-bg { background: #2a3560; border-radius: 4px; height: 10px; overflow: hidden; }
+.colony-bar { height: 100%; border-radius: 4px; transition: width 0.2s; }
+.colony-val { text-align: right; font-size: 0.85rem; color: #8899bb; }
+.colony-actions { display: flex; flex-direction: column; gap: 8px; }
+.colony-prompt { font-size: 0.9rem; color: #8899bb; font-weight: 700; }
+.colony-action-btn { display: flex; flex-direction: column; align-items: flex-start; padding: 10px 14px; background: #1a2040; border: 2px solid #2a3560; border-radius: 8px; cursor: pointer; color: #e0e8ff; text-align: left; gap: 2px; }
+.colony-action-btn:hover { background: #243060; border-color: #4a5580; }
+.colony-action-label { font-weight: 700; font-size: 0.95rem; }
+.colony-action-desc { font-size: 0.78rem; color: #8899bb; }
+.colony-event { display: flex; flex-direction: column; gap: 10px; }
+.colony-event-msg { background: #1a2040; border-left: 4px solid #f9a825; padding: 8px 12px; border-radius: 4px; font-size: 0.9rem; color: #ffd54f; }
+.colony-event-quiet { color: #8899bb; font-size: 0.9rem; font-style: italic; padding: 4px 0; }
+.colony-next-btn { padding: 10px 20px; background: #2979ff; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.colony-next-btn:hover { background: #1565c0; }
+.colony-done { text-align: center; padding: 16px; background: #1a2040; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+.colony-survived { color: #69f0ae; font-weight: 700; font-size: 1.1rem; }
+.colony-dead { color: #ef5350; font-weight: 700; font-size: 1.1rem; }
+.colony-score { font-size: 1rem; color: #8899bb; }
+.colony-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #2a3560; border-radius: 6px; padding: 6px; }
+.colony-log-line { font-size: 0.72rem; color: #8899bb; }

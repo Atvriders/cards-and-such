@@ -1,0 +1,22 @@
+.pirate-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 500px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.pirate-header { display: flex; justify-content: space-between; align-items: center; background: #263238; color: #fff; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+.pirate-title { font-weight: 700; font-size: 1.1rem; }
+.pirate-gold { font-weight: 700; color: #ffd54f; }
+.pirate-status { background: #fff9c4; border-left: 4px solid #f9a825; padding: 8px 12px; border-radius: 4px; font-size: 0.9rem; min-height: 36px; }
+.pirate-grid { display: grid; gap: 4px; }
+.pirate-cell { background: #e0f7fa; border: 2px solid #b2ebf2; border-radius: 8px; padding: 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.pirate-cell.here { border-color: #e65100; background: #fff3e0; }
+.pirate-cell.dug { background: #f5f5f5; border-color: #bdbdbd; }
+.pirate-cell-icon { font-size: 1.4rem; }
+.pirate-cell-name { font-size: 0.65rem; color: #555; text-align: center; line-height: 1.1; }
+.pirate-cell-prob { font-size: 0.7rem; color: #1565c0; font-weight: 700; }
+.pirate-sail-btn { padding: 3px 6px; background: #1565c0; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 0.7rem; width: 100%; }
+.pirate-sail-btn:hover:not(:disabled) { background: #0d47a1; }
+.pirate-sail-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.pirate-dig-btn { padding: 3px 6px; background: #e65100; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: 700; width: 100%; }
+.pirate-dig-btn:hover { background: #bf360c; }
+.pirate-done { text-align: center; padding: 16px; background: #263238; color: #fff; border-radius: 8px; }
+.pirate-final { font-size: 1.2rem; margin-bottom: 8px; }
+.pirate-result { font-size: 1rem; color: #ffd54f; }
+.pirate-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.pirate-log-line { font-size: 0.72rem; color: #666; }

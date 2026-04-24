@@ -470,6 +470,14 @@ import { trucoPaulistaPlugin } from "./truco-paulista/index.js";
 import { tarneebPlugin } from "./tarneeb/index.js";
 import { tonkPlugin } from "./tonk/index.js";
 import { kachuufiPlugin } from "./kachuufi/index.js";
+import { lemonadeStandPlugin } from "./lemonade-stand/index.js";
+import { farmTycoonPlugin } from "./farm-tycoon/index.js";
+import { stockMarketMiniPlugin } from "./stock-market-mini/index.js";
+import { cityBuilderMicroPlugin } from "./city-builder-micro/index.js";
+import { zooKeeperPlugin } from "./zoo-keeper/index.js";
+import { islandSurvivalPlugin } from "./island-survival/index.js";
+import { piratesBountyPlugin } from "./pirates-bounty/index.js";
+import { spaceColonyPlugin } from "./space-colony/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -943,4 +951,12 @@ export const GAMES: GamePlugin[] = [
   tarneebPlugin as unknown as GamePlugin,
   tonkPlugin as unknown as GamePlugin,
   kachuufiPlugin as unknown as GamePlugin,
+  lemonadeStandPlugin as unknown as GamePlugin,
+  farmTycoonPlugin as unknown as GamePlugin,
+  stockMarketMiniPlugin as unknown as GamePlugin,
+  cityBuilderMicroPlugin as unknown as GamePlugin,
+  zooKeeperPlugin as unknown as GamePlugin,
+  islandSurvivalPlugin as unknown as GamePlugin,
+  piratesBountyPlugin as unknown as GamePlugin,
+  spaceColonyPlugin as unknown as GamePlugin,
 ];
