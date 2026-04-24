@@ -1,0 +1,37 @@
+.westcliff-easy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.westcliff-easy-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.westcliff-easy-top-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.westcliff-easy-spacer {
+  flex: 1;
+}
+
+.westcliff-easy-columns {
+  display: flex;
+  gap: 8px;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper {
+  cursor: pointer;
+}

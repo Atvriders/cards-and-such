@@ -1,4 +1,10 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { farmManagerPlugin } from "./farm-manager/index.js";
+import { stockTickerPlugin } from "./stock-ticker/index.js";
+import { storehousePlugin } from "./storehouse/index.js";
+import { milliganCellPlugin } from "./milligan-cell/index.js";
+import { doubleFreeCellPlugin } from "./double-freecell/index.js";
+import { westcliffEasyPlugin } from "./westcliff-easy/index.js";
 import { numberMemoryPlugin } from "./number-memory/index.js";
 import { colorSequencePlugin } from "./color-sequence/index.js";
 import { imageMemoryPlugin } from "./image-memory/index.js";
@@ -975,4 +981,10 @@ export const GAMES: GamePlugin[] = [
   basketballFTPlugin as unknown as GamePlugin,
   fieldGoalPlugin as unknown as GamePlugin,
   tennisServePlugin as unknown as GamePlugin,
+  farmManagerPlugin as unknown as GamePlugin,
+  stockTickerPlugin as unknown as GamePlugin,
+  storehousePlugin as unknown as GamePlugin,
+  milliganCellPlugin as unknown as GamePlugin,
+  doubleFreeCellPlugin as unknown as GamePlugin,
+  westcliffEasyPlugin as unknown as GamePlugin,
 ];
