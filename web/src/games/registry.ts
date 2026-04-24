@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { galaxyFormationPlugin } from "./galaga-like/index.js";
+import { tunnelDigPlugin } from "./dig-dug-like/index.js";
+import { qJumpPlugin } from "./qbert-like/index.js";
+import { barrelJumperPlugin } from "./donkey-kong-like/index.js";
+import { skyJoustPlugin } from "./joust-like/index.js";
+import { skyDefenderPlugin } from "./defender-like/index.js";
+import { iceBlocksPlugin } from "./pengo-like/index.js";
+import { lunarDescentPlugin } from "./lunar-lander-like/index.js";
 import { dropDeadPlugin } from "./drop-dead/index.js";
 import { mexicoDicePlugin } from "./mexico-dice/index.js";
 import { zilchPlugin } from "./zilch/index.js";
@@ -1127,4 +1135,12 @@ export const GAMES: GamePlugin[] = [
   fishingVillagePlugin as unknown as GamePlugin,
   codeBreakerPlugin as unknown as GamePlugin,
   roundTheClockPlugin as unknown as GamePlugin,
+  galaxyFormationPlugin as unknown as GamePlugin,
+  tunnelDigPlugin as unknown as GamePlugin,
+  qJumpPlugin as unknown as GamePlugin,
+  barrelJumperPlugin as unknown as GamePlugin,
+  skyJoustPlugin as unknown as GamePlugin,
+  skyDefenderPlugin as unknown as GamePlugin,
+  iceBlocksPlugin as unknown as GamePlugin,
+  lunarDescentPlugin as unknown as GamePlugin,
 ];

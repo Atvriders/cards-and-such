@@ -1,0 +1,60 @@
+.barreljumper-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.barreljumper-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.barreljumper-playfield {
+  position: relative;
+  background: #111;
+  border: 2px solid #444;
+  overflow: hidden;
+}
+
+.barreljumper-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.barreljumper-overlay h2 { margin: 0; font-size: 1.6rem; }
+.barreljumper-overlay p { margin: 0; font-size: 1.1rem; }
+
+.barreljumper-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+.barreljumper-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.barreljumper-controls button {
+  padding: 7px 18px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: #f4f4f4;
+}
+
+.barreljumper-controls button:hover { background: #ddd; }

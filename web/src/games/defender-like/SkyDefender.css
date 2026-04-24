@@ -1,0 +1,61 @@
+.skydefender-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.skydefender-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.skydefender-playfield {
+  position: relative;
+  background: #000;
+  border: 2px solid #224;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.skydefender-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.skydefender-overlay h2 { margin: 0; font-size: 1.6rem; }
+.skydefender-overlay p { margin: 0; font-size: 1.1rem; }
+
+.skydefender-hint {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+.skydefender-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.skydefender-controls button {
+  padding: 7px 18px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: #f4f4f4;
+}
+
+.skydefender-controls button:hover { background: #ddd; }
