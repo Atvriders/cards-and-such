@@ -1,0 +1,82 @@
+.nonogram5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+.nonogram5-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #555;
+}
+.nonogram5-status {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+.nonogram5-status.win {
+  color: #2a9d2a;
+}
+.nonogram5-grid {
+  display: inline-grid;
+  gap: 1px;
+  background: #999;
+  border: 2px solid #555;
+}
+.nonogram5-clue-cell {
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: #333;
+  width: 28px;
+  height: 20px;
+}
+.nonogram5-row-clue {
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #333;
+  width: 36px;
+  height: 28px;
+}
+.nonogram5-cell {
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  user-select: none;
+  transition: background 0.1s;
+}
+.nonogram5-cell:hover {
+  background: #dde;
+}
+.nonogram5-cell.filled {
+  background: #2c4a8c;
+  color: #2c4a8c;
+}
+.nonogram5-cell.marked {
+  background: #f5f5f5;
+  color: #999;
+}
+.nonogram5-cell.won-filled {
+  background: #2a9d2a;
+}
+.nonogram5-hint {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}

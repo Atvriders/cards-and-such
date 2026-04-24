@@ -1,0 +1,65 @@
+.battleship-solo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+.battleship-solo-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #555;
+}
+.battleship-solo-status {
+  font-size: 16px;
+  font-weight: bold;
+}
+.battleship-solo-status.win { color: #2a9d2a; }
+.battleship-solo-status.lose { color: #c0392b; }
+.battleship-solo-grid {
+  display: inline-grid;
+  gap: 2px;
+  background: #aac;
+  border: 2px solid #556;
+  padding: 2px;
+}
+.battleship-solo-cell {
+  width: 32px;
+  height: 32px;
+  background: #d0e8f8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 2px;
+  transition: background 0.1s;
+  user-select: none;
+}
+.battleship-solo-cell:hover {
+  background: #b0d0f0;
+}
+.battleship-solo-cell.miss {
+  background: #8fb5d0;
+  color: #fff;
+  cursor: default;
+}
+.battleship-solo-cell.hit {
+  background: #e07a30;
+  cursor: default;
+}
+.battleship-solo-cell.sunk {
+  background: #c0392b;
+  color: #fff;
+  cursor: default;
+}
+.battleship-solo-cell.revealed {
+  background: #2c8c4a;
+  cursor: default;
+}
+.battleship-solo-hint {
+  font-size: 12px;
+  color: #888;
+}

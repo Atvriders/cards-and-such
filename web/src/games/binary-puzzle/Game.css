@@ -1,0 +1,83 @@
+.binary-puzzle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+.binary-puzzle-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #555;
+}
+.binary-puzzle-status {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+.binary-puzzle-status.win { color: #2a9d2a; }
+.binary-puzzle-grid {
+  display: inline-grid;
+  gap: 2px;
+  background: #888;
+  border: 2px solid #666;
+  padding: 2px;
+}
+.binary-puzzle-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  user-select: none;
+  transition: background 0.1s;
+}
+.binary-puzzle-cell.empty {
+  background: #f0f0f0;
+  color: transparent;
+}
+.binary-puzzle-cell.empty:hover {
+  background: #e0e8f8;
+}
+.binary-puzzle-cell.zero {
+  background: #d0e8f8;
+  color: #2c4a8c;
+}
+.binary-puzzle-cell.one {
+  background: #2c4a8c;
+  color: #fff;
+}
+.binary-puzzle-cell.clue {
+  cursor: default;
+}
+.binary-puzzle-cell.clue.zero {
+  background: #a0c8e8;
+  border: 2px solid #6090c0;
+}
+.binary-puzzle-cell.clue.one {
+  background: #1a2f60;
+  border: 2px solid #0a1840;
+}
+.binary-puzzle-rules {
+  font-size: 12px;
+  color: #666;
+  text-align: left;
+  background: #f8f8f0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  max-width: 320px;
+}
+.binary-puzzle-rules li {
+  margin-bottom: 4px;
+}
+.binary-puzzle-hint {
+  font-size: 12px;
+  color: #888;
+}

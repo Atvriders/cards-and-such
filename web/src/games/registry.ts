@@ -492,6 +492,14 @@ import { golf18Plugin } from "./golf-18/index.js";
 import { basketballFTPlugin } from "./basketball-free-throws/index.js";
 import { fieldGoalPlugin } from "./field-goal-kicker/index.js";
 import { tennisServePlugin } from "./tennis-serve/index.js";
+import { nonogram5x5Plugin } from "./nonogram-5x5/index.js";
+import { battleshipSoloPlugin } from "./battleship-solo/index.js";
+import { lightSwitchPuzzlePlugin } from "./light-switch-puzzle/index.js";
+import { numberChainPlugin } from "./number-chain/index.js";
+import { pegSolitairePlusPlugin } from "./peg-solitaire-plus/index.js";
+import { logicGatesSimPlugin } from "./logic-gates-sim/index.js";
+import { cipherCrackPlugin } from "./cipher-crack/index.js";
+import { binaryPuzzlePlugin } from "./binary-puzzle/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -987,4 +995,12 @@ export const GAMES: GamePlugin[] = [
   milliganCellPlugin as unknown as GamePlugin,
   doubleFreeCellPlugin as unknown as GamePlugin,
   westcliffEasyPlugin as unknown as GamePlugin,
+  nonogram5x5Plugin as unknown as GamePlugin,
+  battleshipSoloPlugin as unknown as GamePlugin,
+  lightSwitchPuzzlePlugin as unknown as GamePlugin,
+  numberChainPlugin as unknown as GamePlugin,
+  pegSolitairePlusPlugin as unknown as GamePlugin,
+  logicGatesSimPlugin as unknown as GamePlugin,
+  cipherCrackPlugin as unknown as GamePlugin,
+  binaryPuzzlePlugin as unknown as GamePlugin,
 ];

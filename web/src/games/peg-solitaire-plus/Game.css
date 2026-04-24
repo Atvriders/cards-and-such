@@ -1,0 +1,70 @@
+.peg-sol-plus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+.peg-sol-plus-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #555;
+}
+.peg-sol-plus-status {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+.peg-sol-plus-status.win { color: #2a9d2a; }
+.peg-sol-plus-status.stuck { color: #c0392b; }
+.peg-sol-plus-grid {
+  display: inline-grid;
+  gap: 3px;
+  padding: 4px;
+  background: #c8a87a;
+  border-radius: 8px;
+}
+.peg-sol-plus-cell {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s;
+}
+.peg-sol-plus-cell.invalid {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+.peg-sol-plus-cell.peg {
+  background: #7a4a1c;
+  border: 2px solid #5a3010;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.peg-sol-plus-cell.peg:hover {
+  background: #9a6a3c;
+}
+.peg-sol-plus-cell.peg.selected {
+  background: #e06020;
+  border-color: #a03010;
+  box-shadow: 0 0 8px #e06020;
+}
+.peg-sol-plus-cell.hole {
+  background: #a07848;
+  border: 2px solid #8a6030;
+  opacity: 0.5;
+}
+.peg-sol-plus-cell.hole:hover {
+  opacity: 0.8;
+}
+.peg-sol-plus-hint {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}

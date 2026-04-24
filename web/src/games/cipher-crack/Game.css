@@ -1,0 +1,123 @@
+.cipher-crack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: monospace;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.cipher-crack-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #555;
+  font-family: sans-serif;
+}
+.cipher-crack-status {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: #333;
+}
+.cipher-crack-status.win { color: #2a9d2a; }
+.cipher-crack-ciphertext {
+  background: #f0f0e8;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #333;
+  line-height: 1.8;
+  width: 100%;
+}
+.cipher-crack-decoded {
+  background: #e8f8e8;
+  border: 1px solid #9cc;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #2c6a2c;
+  line-height: 1.8;
+  width: 100%;
+  min-height: 48px;
+}
+.cipher-crack-word {
+  display: inline-block;
+  margin: 0 6px;
+}
+.cipher-crack-char {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20px;
+}
+.cipher-crack-plain-char {
+  font-size: 16px;
+  color: #2a9d2a;
+  height: 20px;
+  font-weight: bold;
+}
+.cipher-crack-cipher-char {
+  font-size: 14px;
+  color: #555;
+  border-bottom: 1px solid #aaa;
+}
+.cipher-crack-mapping {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  width: 100%;
+}
+.cipher-crack-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.cipher-crack-cipher-btn {
+  width: 30px;
+  height: 24px;
+  background: #e0e0f0;
+  border: 1px solid #9090c0;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.cipher-crack-cipher-btn.selected {
+  background: #9090c0;
+  color: #fff;
+}
+.cipher-crack-cipher-btn.correct {
+  background: #a8d8a8;
+  border-color: #2a9d2a;
+}
+.cipher-crack-plain-input {
+  width: 24px;
+  height: 22px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: monospace;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  background: #fff;
+  text-transform: uppercase;
+}
+.cipher-crack-hint {
+  font-size: 12px;
+  color: #888;
+  font-family: sans-serif;
+  text-align: center;
+}
