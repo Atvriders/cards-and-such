@@ -1,0 +1,103 @@
+.qwixx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.qwixx-score-bar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.qwixx-penalties { color: #c0392b; font-size: 0.9rem; }
+
+.qwixx-dice-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.qwixx-die {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+}
+
+.qwixx-die.white  { background: #f0f0f0; border-color: #aaa; }
+.qwixx-die.red    { background: #ffc2c2; border-color: #c0392b; color: #8b0000; }
+.qwixx-die.yellow { background: #fff5b0; border-color: #c8a000; color: #7a6000; }
+.qwixx-die.blue   { background: #b0d0ff; border-color: #2a6ad4; color: #0a2a6a; }
+.qwixx-die.green  { background: #b0f0b0; border-color: #2a8a2a; color: #0a4a0a; }
+
+.qwixx-rows { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+
+.qwixx-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.qwixx-row.locked { opacity: 0.5; }
+
+.qwixx-cell {
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  background: #f9f9f9;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.qwixx-cell:disabled { cursor: default; opacity: 0.6; }
+
+.qwixx-row-red .qwixx-cell.checked     { background: #ffc2c2; border-color: #c0392b; }
+.qwixx-row-yellow .qwixx-cell.checked  { background: #fff5b0; border-color: #c8a000; }
+.qwixx-row-blue .qwixx-cell.checked    { background: #b0d0ff; border-color: #2a6ad4; }
+.qwixx-row-green .qwixx-cell.checked   { background: #b0f0b0; border-color: #2a8a2a; }
+
+.qwixx-cell.white-markable  { border-color: #888; background: #e8e8e8; }
+.qwixx-cell.color-markable  { border-color: #ff8800; background: #fff0d0; }
+
+.qwixx-lock { font-size: 1rem; margin-left: 4px; }
+
+.qwixx-gameover {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1a5a8a;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #e8f0fd;
+}
+
+.qwixx-controls { margin-top: 4px; }
+
+.qwixx-btn {
+  padding: 9px 22px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #fff;
+  cursor: pointer;
+}
+
+.qwixx-btn:hover { background: #f0f0f0; }
+.qwixx-btn.penalty-btn { border-color: #c0392b; color: #c0392b; }
+
+.qwixx-hint {
+  font-size: 0.82rem;
+  color: #666;
+  text-align: center;
+}

@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { dropDeadPlugin } from "./drop-dead/index.js";
+import { mexicoDicePlugin } from "./mexico-dice/index.js";
+import { zilchPlugin } from "./zilch/index.js";
+import { twentySixPlugin } from "./twenty-six/index.js";
+import { qwixxPlugin } from "./qwixx/index.js";
+import { rollThroughAgesPlugin } from "./roll-through-ages/index.js";
+import { macaoDicePlugin } from "./macao-dice/index.js";
+import { helanGarPlugin } from "./helan-gar/index.js";
 import { agonPlugin } from "./agon/index.js";
 import { turkishDraughtsPlugin } from "./turkish-draughts/index.js";
 import { armenianDraughtsPlugin } from "./armenian-draughts/index.js";
@@ -1075,4 +1083,12 @@ export const GAMES: GamePlugin[] = [
   gomokuProPlugin as unknown as GamePlugin,
   fiveFieldKonoPlugin as unknown as GamePlugin,
   baghChalPlugin as unknown as GamePlugin,
+  dropDeadPlugin as unknown as GamePlugin,
+  mexicoDicePlugin as unknown as GamePlugin,
+  zilchPlugin as unknown as GamePlugin,
+  twentySixPlugin as unknown as GamePlugin,
+  qwixxPlugin as unknown as GamePlugin,
+  rollThroughAgesPlugin as unknown as GamePlugin,
+  macaoDicePlugin as unknown as GamePlugin,
+  helanGarPlugin as unknown as GamePlugin,
 ];

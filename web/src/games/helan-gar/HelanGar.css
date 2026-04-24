@@ -1,0 +1,104 @@
+.helan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.helan-header {
+  display: flex;
+  gap: 20px;
+  font-size: 1.1rem;
+  align-items: center;
+}
+
+.helan-stages {
+  display: flex;
+  gap: 6px;
+}
+
+.helan-stage-pip {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  background: #f9f9f9;
+}
+
+.helan-stage-pip.passed { background: #d4edda; border-color: #28a745; color: #2a7a2a; }
+.helan-stage-pip.current { background: #fff5b0; border-color: #c8a000; color: #7a6000; }
+.helan-stage-pip.future { opacity: 0.5; }
+
+.helan-current-stage {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #444;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.helan-stage-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #7a4800;
+}
+
+.helan-target strong { color: #c0392b; }
+
+.helan-dice {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.helan-plus { font-size: 1.5rem; color: #888; }
+.helan-sum { font-size: 1.5rem; font-weight: bold; color: #333; }
+
+.helan-die { transition: color 0.2s; }
+.helan-die.hit { color: #2a7a2a; }
+
+.helan-msg {
+  font-size: 0.95rem;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-align: center;
+  max-width: 320px;
+}
+
+.helan-msg.hit  { color: #2a7a2a; background: #e8f5e8; }
+.helan-msg.miss { color: #c0392b; background: #fde8e8; }
+
+.helan-gameover {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.helan-gameover.win  { color: #2a7a2a; background: #e8f5e8; }
+.helan-gameover.lose { color: #c0392b; background: #fde8e8; }
+
+.helan-controls { display: flex; gap: 10px; }
+
+.helan-btn {
+  padding: 9px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #fff;
+  cursor: pointer;
+}
+
+.helan-btn:hover { background: #f0f0f0; }
+.helan-btn-next { background: #fff5b0; border-color: #c8a000; }

@@ -1,0 +1,96 @@
+.mexico {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.mexico-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.mexico-lives.player { color: #c0392b; }
+.mexico-lives.bot { color: #555; }
+.mexico-round { font-weight: bold; font-size: 1rem; }
+
+.mexico-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.mexico-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.mexico-dice {
+  display: flex;
+  gap: 12px;
+}
+
+.mexico-die {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.mexico-hand-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1a3a6a;
+}
+
+.mexico-result {
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 16px;
+  border-radius: 6px;
+  max-width: 360px;
+}
+
+.mexico-result.win { color: #2a7a2a; background: #e8f5e8; }
+.mexico-result.lose { color: #c0392b; background: #fde8e8; }
+.mexico-result.tie { color: #555; background: #f5f5f5; }
+
+.mexico-gameover {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.mexico-gameover.win { color: #2a7a2a; }
+.mexico-gameover.lose { color: #c0392b; }
+
+.mexico-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mexico-controls button {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #666;
+  background: #fff;
+  cursor: pointer;
+}
+
+.mexico-controls button:hover { background: #f0f0f0; }
+
+.mexico-controls .keep-btn {
+  background: #d4edda;
+  border-color: #28a745;
+}
