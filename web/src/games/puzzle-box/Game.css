@@ -1,0 +1,127 @@
+.pb-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1e1e2e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.pb-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #c084fc;
+}
+
+.pb-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  text-transform: capitalize;
+}
+
+.pb-stats {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #aabbff;
+}
+
+.pb-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 10px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  border: 2px solid rgba(192,132,252,0.2);
+}
+
+.pb-tile {
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.08s;
+  position: relative;
+  overflow: hidden;
+}
+
+.pb-tile.filled {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+
+.pb-tile.filled:hover {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.pb-tile.empty {
+  background: rgba(255,255,255,0.04);
+  cursor: default;
+  border: 2px dashed rgba(255,255,255,0.1);
+}
+
+.pb-tile.won.filled {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.pb-tile-label {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.pb-tile-color {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+}
+
+.pb-victory {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pb-victory-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.pb-score {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.pb-restart-btn {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #7c3aed;
+  color: #fff;
+  transition: filter 0.15s;
+}
+
+.pb-restart-btn:hover { filter: brightness(1.15); }
+
+.pb-hint {
+  font-size: 0.75rem;
+  opacity: 0.45;
+  text-align: center;
+}

@@ -454,6 +454,14 @@ import { loaSmallPlugin } from "./loa-small/index.js";
 import { tumbleweedPlugin } from "./tumbleweed/index.js";
 import { pentalathPlugin } from "./pentalath/index.js";
 import { slitherPlugin } from "./slither/index.js";
+import { fortuneTellerPlugin } from "./fortune-teller/index.js";
+import { magic8BallPlugin } from "./magic-8-ball/index.js";
+import { coinCollectorPlugin } from "./coin-collector/index.js";
+import { diceLadderPlugin } from "./dice-ladder/index.js";
+import { leafBlowerPlugin } from "./leaf-blower/index.js";
+import { puzzleBoxPlugin } from "./puzzle-box/index.js";
+import { cardSpinnerPlugin } from "./card-spinner/index.js";
+import { rollEmPlugin } from "./roll-em/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -911,4 +919,12 @@ export const GAMES: GamePlugin[] = [
   quickCountingPlugin as unknown as GamePlugin,
   oddShapeOutPlugin as unknown as GamePlugin,
   faceRecognitionPlugin as unknown as GamePlugin,
+  fortuneTellerPlugin as unknown as GamePlugin,
+  magic8BallPlugin as unknown as GamePlugin,
+  coinCollectorPlugin as unknown as GamePlugin,
+  diceLadderPlugin as unknown as GamePlugin,
+  leafBlowerPlugin as unknown as GamePlugin,
+  puzzleBoxPlugin as unknown as GamePlugin,
+  cardSpinnerPlugin as unknown as GamePlugin,
+  rollEmPlugin as unknown as GamePlugin,
 ];

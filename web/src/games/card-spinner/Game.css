@@ -1,0 +1,188 @@
+.cs-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: #0a0a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.cs-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd700;
+}
+
+.cs-stats {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+}
+
+.cs-stats .pos { color: #4dff88; }
+.cs-stats .neg { color: #ff4466; }
+
+.cs-card-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-card {
+  width: 110px;
+  height: 160px;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+  font-size: 2.5rem;
+}
+
+.cs-card-corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.cs-top { top: 8px; left: 10px; }
+.cs-bot { bottom: 8px; right: 10px; transform: rotate(180deg); }
+.cs-card-center { font-size: 2.2rem; }
+
+.cs-card-back {
+  width: 110px;
+  height: 160px;
+  background: linear-gradient(135deg, #1a1a6e, #4a0080);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+}
+
+.cs-bets-placed {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.cs-bet-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(255,215,0,0.2);
+  border: 1px solid rgba(255,215,0,0.4);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.cs-remove-bet {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ff8080;
+  font-size: 0.9rem;
+  padding: 0;
+  line-height: 1;
+}
+
+.cs-result {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+}
+
+.cs-result.win { color: #4dff88; background: rgba(77,255,136,0.1); }
+.cs-result.loss { color: #ff4466; background: rgba(255,68,102,0.1); }
+
+.cs-bet-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.cs-bet-group {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.cs-bet-label {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cs-bet-row {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.cs-ranks { gap: 0.2rem; }
+
+.cs-bet-btn {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  transition: background 0.1s;
+}
+
+.cs-bet-btn:hover { background: rgba(255,255,255,0.18); }
+
+.cs-bet-btn.color-red { color: #ff6666; border-color: #ff6666; }
+.cs-bet-btn.color-black { color: #aaa; border-color: #aaa; }
+
+.cs-spin-btn, .cs-next-btn {
+  width: 100%;
+  max-width: 200px;
+  padding: 0.65rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #6633ff;
+  color: #fff;
+  transition: filter 0.15s;
+}
+
+.cs-next-btn { background: #3366ff; }
+.cs-spin-btn:hover, .cs-next-btn:hover { filter: brightness(1.15); }
+
+.cs-game-over {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}

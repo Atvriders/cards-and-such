@@ -1,0 +1,143 @@
+.re-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: #1a1400;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.re-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd700;
+}
+
+.re-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.re-dice-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.re-die {
+  width: 64px;
+  height: 64px;
+  font-size: 2.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.1s, box-shadow 0.1s;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+
+.re-die:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.re-die.kept {
+  background: rgba(255,215,0,0.25);
+  box-shadow: 0 0 12px rgba(255,215,0,0.5);
+  border: 2px solid rgba(255,215,0,0.6);
+}
+
+.re-hand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffd700;
+  min-height: 1.5rem;
+}
+
+.re-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.re-btn {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.roll-btn { background: #cc8800; color: #fff; }
+.end-btn { background: #335599; color: #fff; }
+.re-btn:hover { filter: brightness(1.15); }
+
+.re-last-result {
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.re-vs-row {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  flex-wrap: wrap;
+}
+
+.re-vs-row.win { color: #4dff88; }
+.re-vs-row.loss { color: #ff8880; }
+
+.re-history {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.re-history-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  margin-bottom: 2px;
+}
+
+.re-history-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+}
+
+.re-history-row.win { color: #4dff88; }
+.re-history-row.loss { color: #ff8880; }
+
+.re-game-over {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}

@@ -1,0 +1,119 @@
+.cc-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: #111;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.cc-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffd700;
+}
+
+.cc-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.cc-grid {
+  display: grid;
+  gap: 2px;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 4px;
+  background: rgba(255,255,255,0.03);
+}
+
+.cc-cell {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: background 0.1s;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.cc-cell.player {
+  box-shadow: 0 0 12px rgba(51,85,255,0.6);
+}
+
+.cc-player {
+  font-size: 1.2rem;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.8);
+}
+
+.cc-coin {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cc-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cc-ctrl-row {
+  display: flex;
+  gap: 4px;
+}
+
+.cc-ctrl-row button {
+  width: 48px;
+  height: 48px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transition: background 0.1s;
+}
+
+.cc-ctrl-row button:hover { background: rgba(255,255,255,0.22); }
+
+.cc-hint {
+  font-size: 0.7rem;
+  opacity: 0.4;
+  margin-top: 0.2rem;
+}
+
+.cc-game-over {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.cc-restart-btn {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ffd700;
+  color: #111;
+  transition: filter 0.15s;
+}
+
+.cc-restart-btn:hover { filter: brightness(1.1); }

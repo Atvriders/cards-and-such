@@ -1,0 +1,129 @@
+.dl-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: #1a1a2e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.dl-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd700;
+}
+
+.dl-stats {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.dl-ladder {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  max-width: 240px;
+}
+
+.dl-rung {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  min-height: 28px;
+  position: relative;
+}
+
+.dl-rung.current {
+  background: rgba(51,85,255,0.25);
+  border-color: rgba(100,130,255,0.5);
+  box-shadow: 0 0 8px rgba(51,85,255,0.4);
+}
+
+.dl-rung.top {
+  background: rgba(255,215,0,0.15);
+  border-color: rgba(255,215,0,0.4);
+}
+
+.dl-rung-num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  opacity: 0.7;
+  min-width: 40px;
+}
+
+.dl-player {
+  color: #ffd700;
+  font-size: 1rem;
+}
+
+.dl-top-label {
+  font-size: 0.65rem;
+  color: #ffd700;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-left: auto;
+}
+
+.dl-dice-display {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 2.2rem;
+}
+
+.dl-die { line-height: 1; }
+
+.dl-roll-sum {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #aaccff;
+}
+
+.dl-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dl-btn {
+  padding: 0.65rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.15s;
+  min-width: 160px;
+}
+
+.dl-btn:hover { filter: brightness(1.15); }
+
+.roll-btn { background: #3355ff; color: #fff; }
+.up-btn { background: #33cc66; color: #000; }
+.down-btn { background: #cc3333; color: #fff; }
+
+.dl-game-over {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.dl-score { font-size: 0.9rem; opacity: 0.7; }
