@@ -1,0 +1,214 @@
+.bourre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #b71c1c;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.br-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.br-trump-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.br-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.br-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.br-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 80px;
+  transition: opacity 0.2s;
+}
+
+.br-seat.folded {
+  opacity: 0.4;
+}
+
+.br-seat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.br-seat.active .br-seat-label {
+  opacity: 1;
+  color: #ef9a9a;
+}
+
+.br-card-backs {
+  display: flex;
+  gap: 2px;
+}
+
+.br-card-back {
+  width: 24px;
+  height: 36px;
+  background: #c62828;
+  border-radius: 3px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.br-seat-info {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.br-fold-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.br-fold-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.br-btn {
+  padding: 0.5rem 1.2rem;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.br-btn.stay {
+  background: #2e7d32;
+}
+
+.br-btn.stay:hover {
+  background: #388e3c;
+}
+
+.br-btn.fold {
+  background: #37474f;
+}
+
+.br-btn.fold:hover {
+  background: #455a64;
+}
+
+.br-trick-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.br-trick-cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.br-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.br-trick-name {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.br-empty {
+  opacity: 0.4;
+  font-size: 0.85rem;
+}
+
+.br-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.br-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.br-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.br-player-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.br-player-hand .card {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.br-player-hand .card:hover:not(.dim) {
+  transform: translateY(-6px);
+}
+
+.br-player-hand .card.dim {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.br-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.br-result h2 { margin: 0; font-size: 1.4rem; }

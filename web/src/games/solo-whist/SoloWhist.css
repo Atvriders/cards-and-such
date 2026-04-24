@@ -1,0 +1,195 @@
+.solo-whist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #212121;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.sw-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(255,255,255,0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.sw-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.sw-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sw-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 80px;
+}
+
+.sw-seat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.sw-seat.active .sw-seat-label {
+  opacity: 1;
+  color: #ffcc02;
+}
+
+.sw-card-backs {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  max-width: 120px;
+}
+
+.sw-card-back {
+  width: 20px;
+  height: 30px;
+  background: #424242;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.sw-seat-info {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.sw-bid-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sw-bid-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sw-btn {
+  padding: 0.4rem 0.9rem;
+  background: #37474f;
+  color: #fff;
+  border: 2px solid #90a4ae;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sw-btn:hover { background: #455a64; }
+.sw-btn.pass { background: #b71c1c; border-color: #ef9a9a; }
+.sw-btn.pass:hover { background: #c62828; }
+
+.sw-trick-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sw-trick-cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.sw-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sw-trick-name {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.sw-empty {
+  opacity: 0.4;
+  font-size: 0.85rem;
+}
+
+.sw-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.sw-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sw-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.sw-player-hand {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sw-player-hand .card {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.sw-player-hand .card:hover:not(.dim) {
+  transform: translateY(-6px);
+}
+
+.sw-player-hand .card.dim {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.sw-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sw-result h2 { margin: 0; font-size: 1.4rem; }

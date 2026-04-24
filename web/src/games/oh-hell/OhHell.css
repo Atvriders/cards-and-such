@@ -1,0 +1,202 @@
+.oh-hell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #0d47a1;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.oh-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.oh-trump-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.oh-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.oh-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.oh-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 80px;
+}
+
+.oh-seat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.oh-seat.active .oh-seat-label {
+  opacity: 1;
+  color: #90caf9;
+}
+
+.oh-card-backs {
+  display: flex;
+  gap: 2px;
+}
+
+.oh-card-back {
+  width: 24px;
+  height: 36px;
+  background: #1565c0;
+  border-radius: 3px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.oh-seat-info {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.oh-bid-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.oh-bid-buttons {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.oh-btn {
+  padding: 0.4rem 0.7rem;
+  background: #1565c0;
+  color: #fff;
+  border: 2px solid #90caf9;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  min-width: 36px;
+}
+
+.oh-btn:hover {
+  background: #1976d2;
+}
+
+.oh-trick-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.oh-trick-cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.oh-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.oh-trick-name {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.oh-empty {
+  opacity: 0.4;
+  font-size: 0.85rem;
+}
+
+.oh-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.oh-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.oh-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.oh-player-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.oh-player-hand .card {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.oh-player-hand .card:hover:not(.dim) {
+  transform: translateY(-6px);
+}
+
+.oh-player-hand .card.dim {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.oh-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.oh-result h2 { margin: 0; font-size: 1.4rem; }

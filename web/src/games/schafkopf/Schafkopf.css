@@ -1,0 +1,164 @@
+.schafkopf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #1b5e20;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.sk-header {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.sk-bots-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sk-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 80px;
+}
+
+.sk-seat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.sk-seat.active .sk-seat-label {
+  opacity: 1;
+  color: #a5d6a7;
+}
+
+.sk-card-backs {
+  display: flex;
+  gap: 2px;
+}
+
+.sk-card-back {
+  width: 26px;
+  height: 38px;
+  background: #2e7d32;
+  border-radius: 3px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.sk-seat-info {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.sk-trick-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sk-trick-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.sk-trick-cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.sk-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sk-trick-name {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.sk-empty {
+  opacity: 0.4;
+  font-size: 0.85rem;
+}
+
+.sk-status {
+  background: rgba(0,0,0,0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.sk-player-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sk-player-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.sk-player-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sk-player-hand .card {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.sk-player-hand .card:hover:not(.dim) {
+  transform: translateY(-6px);
+}
+
+.sk-player-hand .card.dim {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.sk-result {
+  background: rgba(0,0,0,0.6);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sk-result h2 { margin: 0; font-size: 1.4rem; }
