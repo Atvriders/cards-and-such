@@ -610,6 +610,14 @@ import { mineDelverPlugin } from "./mine-delver/index.js";
 import { cursedCryptPlugin } from "./cursed-crypt/index.js";
 import { dragonHuntPlugin } from "./dragon-hunt/index.js";
 import { wizardTowerPlugin } from "./wizard-tower/index.js";
+import { neverHaveIEverPlugin } from "./never-have-i-ever/index.js";
+import { truthOrDarePlugin } from "./truth-or-dare/index.js";
+import { mostLikelyToPlugin } from "./most-likely-to/index.js";
+import { hotSeatPlugin } from "./hot-seat/index.js";
+import { storyBuilderPlugin } from "./story-builder/index.js";
+import { fiveSecondRulePlugin } from "./five-second-rule/index.js";
+import { headsUpPlugin } from "./heads-up/index.js";
+import { hotTakePlugin } from "./hot-take/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1223,4 +1231,12 @@ export const GAMES: GamePlugin[] = [
   cursedCryptPlugin as unknown as GamePlugin,
   dragonHuntPlugin as unknown as GamePlugin,
   wizardTowerPlugin as unknown as GamePlugin,
+  neverHaveIEverPlugin as unknown as GamePlugin,
+  truthOrDarePlugin as unknown as GamePlugin,
+  mostLikelyToPlugin as unknown as GamePlugin,
+  hotSeatPlugin as unknown as GamePlugin,
+  storyBuilderPlugin as unknown as GamePlugin,
+  fiveSecondRulePlugin as unknown as GamePlugin,
+  headsUpPlugin as unknown as GamePlugin,
+  hotTakePlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,103 @@
+.ht-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ht-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.ht-tally {
+  display: flex;
+  gap: 16px;
+}
+
+.ht-agree-count { color: #27ae60; font-weight: 700; }
+.ht-disagree-count { color: #e74c3c; font-weight: 700; }
+
+.ht-card {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: #fff;
+  border-radius: 20px;
+  padding: 40px 28px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.5;
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 6px 20px rgba(243,156,18,0.4);
+}
+
+.ht-badge {
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.ht-buttons {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.ht-btn-agree {
+  flex: 1;
+  padding: 18px;
+  border-radius: 14px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #27ae60;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ht-btn-disagree {
+  flex: 1;
+  padding: 18px;
+  border-radius: 14px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #e74c3c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ht-btn-skip {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  background: none;
+  font-size: 0.9rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.ht-done {
+  text-align: center;
+  background: #fef9e7;
+  border-radius: 18px;
+  padding: 32px;
+  width: 100%;
+}
+
+.ht-done h2 { color: #f39c12; margin: 0 0 12px; }

@@ -1,0 +1,79 @@
+.nhie-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.nhie-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.nhie-count {
+  font-weight: 700;
+  color: #e74c3c;
+}
+
+.nhie-card {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: #fff;
+  border-radius: 20px;
+  padding: 40px 28px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(231,76,60,0.35);
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nhie-buttons {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.nhie-btn {
+  flex: 1;
+  padding: 18px;
+  border-radius: 14px;
+  border: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.nhie-btn:active { transform: scale(0.97); }
+
+.nhie-btn-did {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.nhie-btn-never {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+.nhie-done {
+  text-align: center;
+  background: #fff5f5;
+  border-radius: 18px;
+  padding: 32px;
+  width: 100%;
+}
+
+.nhie-done h2 { color: #e74c3c; margin: 0 0 12px; }

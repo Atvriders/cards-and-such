@@ -1,0 +1,75 @@
+.mlt-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mlt-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.mlt-card {
+  background: linear-gradient(135deg, #8e44ad, #6c3483);
+  color: #fff;
+  border-radius: 20px;
+  padding: 40px 28px;
+  text-align: center;
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 6px 20px rgba(142,68,173,0.35);
+}
+
+.mlt-prefix {
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.mlt-prompt {
+  font-size: 1.4rem;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.mlt-hint {
+  font-size: 0.9rem;
+  color: #888;
+  text-align: center;
+}
+
+.mlt-next-btn {
+  padding: 14px 36px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #8e44ad;
+  color: #fff;
+  cursor: pointer;
+}
+
+.mlt-done {
+  text-align: center;
+  background: #f5eef8;
+  border-radius: 18px;
+  padding: 32px;
+  width: 100%;
+}
+
+.mlt-done h2 { color: #8e44ad; margin: 0 0 12px; }
