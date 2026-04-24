@@ -1,0 +1,25 @@
+.tp-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 480px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.tp-header { display: flex; justify-content: space-between; align-items: center; background: #fff3e0; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+.tp-title { font-weight: 700; font-size: 1.1rem; }
+.tp-turn { color: #888; font-size: 0.9rem; }
+.tp-gold { font-weight: 700; color: #e65100; }
+.tp-phase { font-size: 0.85rem; color: #555; background: #ffe0b2; padding: 2px 8px; border-radius: 12px; }
+.tp-event { background: #fffde7; border: 1px solid #f9a825; border-radius: 6px; padding: 8px 12px; font-size: 0.9rem; color: #5f4339; }
+.tp-goods { display: flex; flex-direction: column; gap: 6px; }
+.tp-good-row { display: flex; align-items: center; gap: 8px; background: #fafafa; border: 1px solid #eee; border-radius: 6px; padding: 6px 10px; flex-wrap: wrap; }
+.tp-good-name { font-weight: 600; min-width: 80px; }
+.tp-price { color: #e65100; min-width: 40px; font-size: 0.9rem; }
+.tp-inv { color: #555; min-width: 55px; font-size: 0.85rem; }
+.tp-btns { display: flex; gap: 4px; margin-left: auto; }
+.tp-btn { padding: 3px 8px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 600; }
+.tp-buy { background: #c8e6c9; color: #1b5e20; }
+.tp-buy:hover:not(:disabled) { background: #a5d6a7; }
+.tp-sell { background: #ffccbc; color: #bf360c; }
+.tp-sell:hover:not(:disabled) { background: #ffab91; }
+.tp-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.tp-advance { padding: 10px 20px; background: #e65100; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.tp-advance:hover { background: #bf360c; }
+.tp-done { text-align: center; padding: 16px; background: #fff3e0; border-radius: 8px; font-size: 1.1rem; }
+.tp-score-label { font-size: 1rem; color: #555; margin-top: 8px; }
+.tp-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.tp-log-line { font-size: 0.75rem; color: #777; }

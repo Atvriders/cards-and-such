@@ -1,0 +1,31 @@
+.dd-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 500px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.dd-header { display: flex; justify-content: space-between; align-items: center; background: #311b92; color: #fff; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+.dd-title { font-weight: 700; font-size: 1.1rem; }
+.dd-room { font-size: 0.9rem; opacity: 0.8; }
+.dd-energy { font-weight: 700; color: #ffeb3b; }
+.dd-combatants { display: flex; align-items: center; gap: 12px; }
+.dd-player, .dd-enemy { flex: 1; }
+.dd-vs { font-weight: 900; color: #b71c1c; font-size: 1.2rem; }
+.dd-cname { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+.dd-hp-bar { height: 10px; background: #eee; border-radius: 5px; overflow: hidden; margin-bottom: 4px; }
+.dd-hp-fill { height: 100%; border-radius: 5px; transition: width 0.3s; }
+.dd-player-fill { background: #4caf50; }
+.dd-enemy-fill { background: #f44336; }
+.dd-stats { font-size: 0.8rem; color: #555; }
+.dd-hand { display: flex; flex-wrap: wrap; gap: 6px; }
+.dd-card { padding: 8px; background: #ede7f6; border: 2px solid #9c27b0; border-radius: 8px; cursor: pointer; text-align: left; min-width: 90px; flex: 1; }
+.dd-card:hover:not(.dd-card-disabled) { background: #d1c4e9; border-color: #6a1b9a; }
+.dd-card-disabled { opacity: 0.4; cursor: not-allowed; }
+.dd-card-name { font-weight: 700; font-size: 0.85rem; }
+.dd-card-cost { font-size: 0.75rem; color: #7b1fa2; font-weight: 600; }
+.dd-card-desc { font-size: 0.75rem; color: #555; margin-top: 2px; }
+.dd-end-turn { padding: 10px 20px; background: #4a148c; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.dd-end-turn:hover { background: #6a1b9a; }
+.dd-reward { text-align: center; padding: 16px; background: #e8f5e9; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+.dd-heal-note { font-size: 0.85rem; color: #2e7d32; }
+.dd-next { padding: 10px 20px; background: #2e7d32; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.dd-next:hover { background: #1b5e20; }
+.dd-done { text-align: center; padding: 20px; background: #fff9c4; border-radius: 8px; font-size: 1.1rem; font-weight: 700; }
+.dd-dead { text-align: center; padding: 16px; background: #ffebee; border-radius: 8px; font-size: 1rem; color: #b71c1c; }
+.dd-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.dd-log-line { font-size: 0.75rem; color: #666; }

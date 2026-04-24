@@ -1,0 +1,22 @@
+.fv-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 460px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.fv-header { display: flex; justify-content: space-between; align-items: center; background: #e3f2fd; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+.fv-title { font-weight: 700; font-size: 1.1rem; }
+.fv-day { font-size: 0.9rem; color: #777; }
+.fv-weather { font-size: 0.85rem; }
+.fv-coins { font-weight: 700; color: #1565c0; }
+.fv-status { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.85rem; font-weight: 600; }
+.fv-stat { }
+.fv-inventory { display: flex; flex-wrap: wrap; gap: 6px; min-height: 28px; }
+.fv-fish-tag { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 12px; padding: 3px 8px; font-size: 0.8rem; }
+.fv-actions { display: flex; flex-direction: column; gap: 6px; }
+.fv-action-btn { padding: 10px 14px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; text-align: left; }
+.fv-action-btn:hover { background: #e3f2fd; border-color: #90caf9; }
+.fv-action-label { font-weight: 600; font-size: 0.9rem; margin-bottom: 2px; }
+.fv-action-desc { font-size: 0.78rem; color: #666; }
+.fv-result { background: #e3f2fd; border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.fv-result-text { font-size: 0.95rem; font-weight: 500; }
+.fv-next-day { padding: 10px 20px; background: #1565c0; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; align-self: flex-start; }
+.fv-next-day:hover { background: #0d47a1; }
+.fv-done { text-align: center; padding: 16px; background: #e3f2fd; border-radius: 8px; font-size: 1rem; display: flex; flex-direction: column; gap: 8px; }
+.fv-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.fv-log-line { font-size: 0.75rem; color: #777; }

@@ -1,0 +1,27 @@
+.td-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 480px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.td-header { display: flex; justify-content: space-between; align-items: center; background: #1a237e; color: #fff; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+.td-title { font-weight: 700; font-size: 1.1rem; }
+.td-wave { font-size: 0.85rem; opacity: 0.8; }
+.td-gold { font-weight: 700; color: #ffd740; }
+.td-hp { font-weight: 700; color: #69f0ae; }
+.td-base-bar { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+.td-base-fill { height: 100%; background: #43a047; border-radius: 4px; transition: width 0.3s; }
+.td-towers-palette { display: flex; gap: 6px; flex-wrap: wrap; }
+.td-tower-btn { padding: 5px 10px; background: #e8eaf6; border: 1px solid #c5cae9; border-radius: 6px; cursor: pointer; font-size: 0.82rem; }
+.td-tower-btn:hover:not(:disabled) { background: #c5cae9; }
+.td-tower-selected { background: #3949ab !important; color: #fff !important; border-color: #1a237e !important; }
+.td-tower-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.td-hint { font-size: 0.8rem; color: #3949ab; background: #e8eaf6; padding: 4px 10px; border-radius: 6px; }
+.td-grid { display: grid; gap: 2px; }
+.td-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; border-radius: 2px; cursor: pointer; border: 1px solid transparent; }
+.td-cell-grass { background: #c8e6c9; }
+.td-cell-path { background: #d7ccc8; }
+.td-cell-base { background: #fff9c4; }
+.td-cell-arrow,.td-cell-cannon,.td-cell-slow,.td-cell-lightning { background: #e8eaf6; border-color: #7986cb; }
+.td-cell-hover { background: #b3e5fc !important; border-color: #0288d1 !important; }
+.td-start-wave { padding: 10px 20px; background: #c62828; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.td-start-wave:hover { background: #b71c1c; }
+.td-done { text-align: center; padding: 14px; background: #e8f5e9; border-radius: 8px; font-weight: 700; }
+.td-lost { text-align: center; padding: 14px; background: #ffebee; border-radius: 8px; color: #b71c1c; font-weight: 700; }
+.td-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.td-log-line { font-size: 0.75rem; color: #666; }

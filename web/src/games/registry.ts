@@ -552,6 +552,14 @@ import { pipeManiaPlugin } from "./pipe-mania/index.js";
 import { hexMatch3Plugin } from "./hex-match-3/index.js";
 import { rotateMatchPlugin } from "./rotate-match/index.js";
 import { triangleMatchPlugin } from "./triangle-match/index.js";
+import { tradingPostPlugin } from "./trading-post/index.js";
+import { resourceChainPlugin } from "./resource-chain/index.js";
+import { dungeonDelvePlugin } from "./dungeon-delve/index.js";
+import { kingdomBuilderPlugin } from "./kingdom-builder/index.js";
+import { alchemyShopPlugin } from "./alchemy-shop/index.js";
+import { spyHeistPlugin } from "./spy-heist/index.js";
+import { towerDefenseMiniPlugin } from "./tower-defense-mini/index.js";
+import { fishingVillagePlugin } from "./fishing-village/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1107,4 +1115,12 @@ export const GAMES: GamePlugin[] = [
   hexMatch3Plugin as unknown as GamePlugin,
   rotateMatchPlugin as unknown as GamePlugin,
   triangleMatchPlugin as unknown as GamePlugin,
+  tradingPostPlugin as unknown as GamePlugin,
+  resourceChainPlugin as unknown as GamePlugin,
+  dungeonDelvePlugin as unknown as GamePlugin,
+  kingdomBuilderPlugin as unknown as GamePlugin,
+  alchemyShopPlugin as unknown as GamePlugin,
+  spyHeistPlugin as unknown as GamePlugin,
+  towerDefenseMiniPlugin as unknown as GamePlugin,
+  fishingVillagePlugin as unknown as GamePlugin,
 ];

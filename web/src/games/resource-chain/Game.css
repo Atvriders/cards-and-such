@@ -1,0 +1,25 @@
+.rc-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 480px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.rc-header { display: flex; justify-content: space-between; align-items: center; background: #e8f5e9; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+.rc-title { font-weight: 700; font-size: 1.1rem; }
+.rc-turn { color: #888; font-size: 0.9rem; }
+.rc-coins { font-weight: 700; color: #2e7d32; }
+.rc-demand { font-size: 0.85rem; background: #c8e6c9; padding: 2px 8px; border-radius: 12px; color: #1b5e20; }
+.rc-resources { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.rc-res-row { display: flex; justify-content: space-between; background: #f9fbe7; border: 1px solid #dce775; border-radius: 6px; padding: 6px 10px; font-size: 0.9rem; font-weight: 600; }
+.rc-actions { display: flex; flex-direction: column; gap: 8px; }
+.rc-action-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.rc-action-label { font-size: 0.8rem; color: #555; min-width: 180px; }
+.rc-btns { display: flex; gap: 4px; }
+.rc-btn { padding: 4px 8px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 600; }
+.rc-buy { background: #bbdefb; color: #0d47a1; }
+.rc-buy:hover:not(:disabled) { background: #90caf9; }
+.rc-process { background: #fff9c4; color: #f57f17; }
+.rc-process:hover:not(:disabled) { background: #fff176; }
+.rc-sell { background: #ffccbc; color: #bf360c; }
+.rc-sell:hover:not(:disabled) { background: #ffab91; }
+.rc-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.rc-advance { padding: 10px 20px; background: #2e7d32; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; margin-top: 4px; }
+.rc-advance:hover { background: #1b5e20; }
+.rc-done { text-align: center; padding: 16px; background: #e8f5e9; border-radius: 8px; font-size: 1.1rem; display: flex; flex-direction: column; gap: 8px; }
+.rc-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.rc-log-line { font-size: 0.75rem; color: #777; }
