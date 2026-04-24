@@ -560,6 +560,8 @@ import { alchemyShopPlugin } from "./alchemy-shop/index.js";
 import { spyHeistPlugin } from "./spy-heist/index.js";
 import { towerDefenseMiniPlugin } from "./tower-defense-mini/index.js";
 import { fishingVillagePlugin } from "./fishing-village/index.js";
+import { codeBreakerPlugin } from "./code-breaker/index.js";
+import { roundTheClockPlugin } from "./round-the-clock/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1123,4 +1125,6 @@ export const GAMES: GamePlugin[] = [
   spyHeistPlugin as unknown as GamePlugin,
   towerDefenseMiniPlugin as unknown as GamePlugin,
   fishingVillagePlugin as unknown as GamePlugin,
+  codeBreakerPlugin as unknown as GamePlugin,
+  roundTheClockPlugin as unknown as GamePlugin,
 ];
