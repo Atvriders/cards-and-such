@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { additionSprintPlugin } from "./addition-sprint/index.js";
+import { subtractionSprintPlugin } from "./subtraction-sprint/index.js";
+import { algebraSolveXPlugin } from "./algebra-solve-x/index.js";
+import { orderOfOpsPlugin } from "./order-of-ops/index.js";
+import { primeFactorPlugin } from "./prime-factor/index.js";
+import { exponentDrillPlugin } from "./exponent-drill/index.js";
+import { romanNumeralsPlugin } from "./roman-numerals/index.js";
+import { numberBondsPlugin } from "./number-bonds/index.js";
 import { cannonShotPlugin } from "./cannon-shot/index.js";
 import { archeryTargetPlugin } from "./archery-target/index.js";
 import { dartThrowPlugin } from "./dart-throw/index.js";
@@ -1175,4 +1183,12 @@ export const GAMES: GamePlugin[] = [
   marbleDropPlugin as unknown as GamePlugin,
   catapultCastlePlugin as unknown as GamePlugin,
   skeeBallPlugin as unknown as GamePlugin,
+  additionSprintPlugin as unknown as GamePlugin,
+  subtractionSprintPlugin as unknown as GamePlugin,
+  algebraSolveXPlugin as unknown as GamePlugin,
+  orderOfOpsPlugin as unknown as GamePlugin,
+  primeFactorPlugin as unknown as GamePlugin,
+  exponentDrillPlugin as unknown as GamePlugin,
+  romanNumeralsPlugin as unknown as GamePlugin,
+  numberBondsPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,108 @@
+.ax-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 440px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+  padding: 16px;
+}
+
+.ax-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.ax-header strong { color: #2d3748; }
+
+.ax-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ax-progress-fill {
+  height: 100%;
+  background: #805ad5;
+  transition: width 0.2s;
+}
+
+.ax-problem {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #2d3748;
+  padding: 24px 40px;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.ax-label {
+  font-size: 0.9rem;
+  color: #718096;
+  margin-top: -10px;
+}
+
+.ax-feedback {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 6px;
+  min-height: 32px;
+}
+
+.ax-feedback.correct { color: #276749; background: #f0fff4; border: 1px solid #9ae6b4; }
+.ax-feedback.wrong   { color: #c53030; background: #fff5f5; border: 1px solid #feb2b2; }
+
+.ax-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.ax-input {
+  flex: 1;
+  font-size: 1.5rem;
+  padding: 10px 14px;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.ax-input:focus { border-color: #805ad5; }
+
+.ax-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #805ad5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ax-btn:hover { background: #6b46c1; }
+
+.ax-done {
+  text-align: center;
+  padding: 24px;
+  background: #f0fff4;
+  border: 2px solid #9ae6b4;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.ax-done h2 { font-size: 1.6rem; color: #276749; margin: 0 0 8px; }
+.ax-done p  { font-size: 1.1rem; color: #555; margin: 0; }
