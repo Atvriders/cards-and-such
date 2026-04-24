@@ -1,0 +1,29 @@
+.dw-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+.dw-header { display: flex; gap: 20px; font-size: 1rem; font-weight: bold; }
+.dw-hand { display: flex; gap: 10px; justify-content: center; }
+.dw-card-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+.dw-card-wrap.held .dw-card { border: 3px solid #0066cc; box-shadow: 0 0 8px #0066cc; }
+.dw-card {
+  width: 60px; height: 84px; border: 1px solid #aaa; border-radius: 8px;
+  background: white; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; font-size: 1.3rem; box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+}
+.dw-card.red { color: #c00; }
+.dw-card.wild { background: #fff8dc; border-color: gold; }
+.dw-held-label { font-size: 0.75rem; font-weight: bold; color: #0066cc; height: 14px; }
+.dw-rank { text-align: center; font-size: 1rem; font-weight: bold; color: #333; }
+.dw-result { font-size: 1.1rem; color: #006622; font-weight: bold; }
+.dw-actions { display: flex; gap: 10px; }
+.dw-actions button { padding: 8px 20px; border-radius: 6px; border: none; font-size: 1rem; cursor: pointer; background: #0066cc; color: white; }
+.dw-actions button:hover { opacity: 0.85; }
+.dw-game-over { font-size: 1.1rem; font-weight: bold; color: #c00; }
+.dw-paytable { font-size: 0.8rem; border-collapse: collapse; }
+.dw-paytable td, .dw-paytable th { border: 1px solid #ddd; padding: 3px 8px; }
+.dw-paytable th { background: #f0f0f0; }

@@ -1,0 +1,40 @@
+.mr-root {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px; padding: 16px; font-family: sans-serif;
+}
+.mr-header { display: flex; gap: 20px; font-size: 1rem; font-weight: bold; }
+.mr-wheel {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  max-width: 260px; justify-content: center;
+}
+.mr-num {
+  width: 40px; height: 40px; border-radius: 50%; border: 2px solid #333;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 0.9rem; cursor: pointer; user-select: none;
+  transition: transform 0.1s;
+}
+.mr-num:hover { transform: scale(1.15); }
+.mr-num.green { background: #1a7a1a; color: white; }
+.mr-num.red { background: #cc1111; color: white; }
+.mr-num.black { background: #222; color: white; }
+.mr-num.landed { box-shadow: 0 0 12px 4px gold; border-color: gold; }
+.mr-outside {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+}
+.mr-outside button {
+  padding: 6px 12px; border-radius: 6px; border: none;
+  font-size: 0.85rem; cursor: pointer; background: #555; color: white;
+}
+.mr-outside button:hover { opacity: 0.85; }
+.mr-actions { display: flex; gap: 10px; }
+.mr-actions button {
+  padding: 8px 20px; border-radius: 6px; border: none;
+  font-size: 1rem; cursor: pointer;
+}
+.mr-actions button.spin { background: #cc2200; color: white; }
+.mr-actions button.clear { background: #888; color: white; }
+.mr-actions button.next { background: #0066cc; color: white; }
+.mr-actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+.mr-result { font-size: 1rem; color: #333; text-align: center; }
+.mr-bets { font-size: 0.85rem; color: #555; }
+.mr-game-over { font-size: 1.1rem; font-weight: bold; color: #c00; }

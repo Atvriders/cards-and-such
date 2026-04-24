@@ -512,6 +512,14 @@ import { wordScramblePlugin } from "./word-scramble/index.js";
 import { categoryQuizPlugin } from "./category-quiz/index.js";
 import { missingLettersPlugin } from "./missing-letters/index.js";
 import { synonymMatchPlugin } from "./synonym-match/index.js";
+import { deucesWildPlugin } from "./deuces-wild/index.js";
+import { doubleBonusPokerPlugin } from "./double-bonus-poker/index.js";
+import { miniRoulettePlugin } from "./mini-roulette/index.js";
+import { highLowCasinoPlugin } from "./high-low-casino/index.js";
+import { casinoWarMultiPlugin } from "./casino-war-multi/index.js";
+import { kenoMiniPlugin } from "./keno-mini/index.js";
+import { fanTanPlugin } from "./fan-tan/index.js";
+import { dragonTigerPlugin } from "./dragon-tiger/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1027,4 +1035,12 @@ export const GAMES: GamePlugin[] = [
   categoryQuizPlugin as unknown as GamePlugin,
   missingLettersPlugin as unknown as GamePlugin,
   synonymMatchPlugin as unknown as GamePlugin,
+  deucesWildPlugin as unknown as GamePlugin,
+  doubleBonusPokerPlugin as unknown as GamePlugin,
+  miniRoulettePlugin as unknown as GamePlugin,
+  highLowCasinoPlugin as unknown as GamePlugin,
+  casinoWarMultiPlugin as unknown as GamePlugin,
+  kenoMiniPlugin as unknown as GamePlugin,
+  fanTanPlugin as unknown as GamePlugin,
+  dragonTigerPlugin as unknown as GamePlugin,
 ];

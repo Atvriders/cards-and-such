@@ -1,0 +1,33 @@
+.km-root {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 16px; font-family: sans-serif;
+}
+.km-header { display: flex; gap: 16px; font-size: 1rem; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.km-board {
+  display: grid; grid-template-columns: repeat(8, 1fr);
+  gap: 5px; max-width: 340px;
+}
+.km-num {
+  width: 36px; height: 36px; border-radius: 50%; border: 2px solid #aaa;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: bold; cursor: pointer;
+  background: #f5f5f5; transition: all 0.1s;
+}
+.km-num:hover { background: #e0e0e0; }
+.km-num.picked { background: #0066cc; color: white; border-color: #0066cc; }
+.km-num.drawn { border-color: #228822; }
+.km-num.hit { background: #228822; color: white; border-color: #228822; }
+.km-num.picked.not-drawn { background: #cc2200; color: white; border-color: #cc2200; }
+.km-result { font-size: 1rem; font-weight: bold; color: #333; text-align: center; }
+.km-actions { display: flex; gap: 10px; }
+.km-actions button {
+  padding: 8px 20px; border-radius: 6px; border: none;
+  font-size: 1rem; cursor: pointer; color: white;
+}
+.km-actions button.draw { background: #cc2200; }
+.km-actions button.next { background: #0066cc; }
+.km-actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+.km-game-over { font-size: 1.1rem; font-weight: bold; color: #c00; }
+.km-paytable { font-size: 0.8rem; border-collapse: collapse; }
+.km-paytable td, .km-paytable th { border: 1px solid #ddd; padding: 3px 8px; }
+.km-paytable th { background: #f0f0f0; }

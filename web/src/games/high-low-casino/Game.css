@@ -1,0 +1,29 @@
+.hl-root {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px; padding: 16px; font-family: sans-serif;
+}
+.hl-header { display: flex; gap: 20px; font-size: 1rem; font-weight: bold; }
+.hl-cards { display: flex; gap: 24px; align-items: center; justify-content: center; }
+.hl-card {
+  width: 70px; height: 98px; border: 1px solid #aaa; border-radius: 10px;
+  background: white; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; font-size: 1.6rem; box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+.hl-card.red { color: #c00; }
+.hl-card.placeholder { background: #ddd; color: #999; font-size: 1rem; }
+.hl-arrow { font-size: 2rem; color: #888; }
+.hl-streak { font-size: 1.1rem; font-weight: bold; color: #c60; }
+.hl-result { font-size: 0.95rem; color: #333; text-align: center; max-width: 340px; }
+.hl-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.hl-actions button {
+  padding: 8px 18px; border-radius: 6px; border: none;
+  font-size: 1rem; cursor: pointer; color: white;
+}
+.hl-actions button.higher { background: #228822; }
+.hl-actions button.lower { background: #cc2200; }
+.hl-actions button.same { background: #888; }
+.hl-actions button.bank { background: #c60; }
+.hl-actions button.deal { background: #0066cc; }
+.hl-actions button:hover { opacity: 0.85; }
+.hl-game-over { font-size: 1.1rem; font-weight: bold; color: #c00; }
+.hl-multipliers { font-size: 0.8rem; color: #555; }
