@@ -1,0 +1,90 @@
+.ts-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a1a10;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.ts-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
+.ts-stats { display: flex; gap: 0.8rem; font-size: 0.82rem; opacity: 0.85; flex-wrap: wrap; justify-content: center; }
+
+.ts-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+.ts-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.ts-dot-ace { background: #ffd700; color: #000; }
+.ts-dot-in { background: #4caf50; }
+.ts-dot-fault { background: #ff9800; color: #000; }
+.ts-dot-double-fault { background: #e53935; }
+.ts-dot-empty { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); }
+
+.ts-aim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0,0,0,0.35);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 340px;
+}
+.ts-serve-label { font-size: 0.82rem; text-align: center; color: #ffd54f; }
+.ts-wind { font-size: 0.8rem; opacity: 0.75; }
+.ts-aim label { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; }
+.ts-aim input[type=range] { width: 100%; accent-color: #ffd700; }
+
+.ts-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ffd700;
+  color: #000;
+  margin-top: 0.25rem;
+}
+.ts-btn:hover { background: #ffe44d; }
+
+.ts-result-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+.ts-result-box.ace { background: rgba(255,215,0,0.25); color: #ffd700; }
+.ts-result-box.in { background: rgba(76,175,80,0.2); color: #81c784; }
+.ts-result-box.fault { background: rgba(229,57,53,0.2); color: #ef9a9a; }
+
+.ts-game-over {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.7;
+}

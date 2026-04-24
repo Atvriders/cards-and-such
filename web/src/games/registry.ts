@@ -478,6 +478,14 @@ import { zooKeeperPlugin } from "./zoo-keeper/index.js";
 import { islandSurvivalPlugin } from "./island-survival/index.js";
 import { piratesBountyPlugin } from "./pirates-bounty/index.js";
 import { spaceColonyPlugin } from "./space-colony/index.js";
+import { pool8BallPlugin } from "./pool-8ball/index.js";
+import { billiards9BallPlugin } from "./billiards-9ball/index.js";
+import { shuffleboardPlugin } from "./shuffleboard/index.js";
+import { miniGolfPlugin } from "./mini-golf/index.js";
+import { golf18Plugin } from "./golf-18/index.js";
+import { basketballFTPlugin } from "./basketball-free-throws/index.js";
+import { fieldGoalPlugin } from "./field-goal-kicker/index.js";
+import { tennisServePlugin } from "./tennis-serve/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -959,4 +967,12 @@ export const GAMES: GamePlugin[] = [
   islandSurvivalPlugin as unknown as GamePlugin,
   piratesBountyPlugin as unknown as GamePlugin,
   spaceColonyPlugin as unknown as GamePlugin,
+  pool8BallPlugin as unknown as GamePlugin,
+  billiards9BallPlugin as unknown as GamePlugin,
+  shuffleboardPlugin as unknown as GamePlugin,
+  miniGolfPlugin as unknown as GamePlugin,
+  golf18Plugin as unknown as GamePlugin,
+  basketballFTPlugin as unknown as GamePlugin,
+  fieldGoalPlugin as unknown as GamePlugin,
+  tennisServePlugin as unknown as GamePlugin,
 ];

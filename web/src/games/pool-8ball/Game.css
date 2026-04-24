@@ -1,0 +1,118 @@
+.pool-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a3a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.pool-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pool-info-row {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.pool-ball-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 340px;
+}
+
+.pool-ball {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s;
+}
+.pool-ball:hover:not(:disabled) { transform: scale(1.12); }
+.pool-ball.solid { background: #e6a020; color: #000; }
+.pool-ball.stripe { background: linear-gradient(#e6a020 40%, #fff 40%, #fff 60%, #e6a020 60%); color: #000; }
+.pool-ball.eight { background: #111; color: #fff; }
+.pool-ball.pocketed { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.1); cursor: default; }
+.pool-ball.selected { border-color: #4ef; box-shadow: 0 0 8px #4ef; }
+.pool-ball:disabled { opacity: 0.45; cursor: default; }
+
+.pool-prompt { font-size: 0.9rem; opacity: 0.75; }
+
+.pool-aim-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.pool-aim-label { font-weight: 700; font-size: 0.95rem; }
+
+.pool-aim-section label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.pool-aim-section input[type=range] {
+  width: 100%;
+  accent-color: #4ef;
+}
+
+.pool-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #4ef;
+  color: #000;
+  margin-top: 0.25rem;
+}
+.pool-btn:hover { background: #7ff; }
+
+.pool-result {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background: rgba(0,0,0,0.4);
+  border-radius: 8px;
+  max-width: 320px;
+}
+
+.pool-game-over {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.6;
+}

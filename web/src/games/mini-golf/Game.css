@@ -1,0 +1,96 @@
+.mg-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0a2a0a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.mg-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
+.mg-meta { font-size: 0.85rem; opacity: 0.8; }
+
+.mg-scorecard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+.mg-hole-cell {
+  width: 36px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 4px 2px;
+  font-size: 0.75rem;
+}
+.mg-hole-num { opacity: 0.6; font-size: 0.65rem; }
+.mg-hole-score { font-weight: 700; }
+.mg-hole-cell.under { background: rgba(50,200,50,0.3); }
+.mg-hole-cell.over { background: rgba(200,50,50,0.3); }
+.mg-hole-cell.par { background: rgba(255,255,255,0.12); }
+.mg-hole-cell.current { background: rgba(78,240,255,0.25); border: 1px solid #4ef; }
+.mg-hole-cell.pending { background: rgba(255,255,255,0.05); }
+
+.mg-dist-bar-wrap {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.mg-dist-bar {
+  height: 100%;
+  background: #4ef;
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.mg-aim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0,0,0,0.35);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
+.mg-aim label { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; }
+.mg-aim input[type=range] { width: 100%; accent-color: #4ef; }
+.mg-hint { font-size: 0.75rem; opacity: 0.65; }
+
+.mg-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #4ef;
+  color: #000;
+}
+.mg-btn:hover { background: #7ff; }
+
+.mg-result {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+  max-width: 320px;
+}
+
+.mg-game-over {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.6;
+}

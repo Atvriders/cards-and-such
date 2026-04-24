@@ -1,0 +1,85 @@
+.nine-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a2a3a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.nine-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
+.nine-meta { font-size: 0.85rem; opacity: 0.75; }
+
+.nine-rack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.nine-ball {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  border: 2px solid transparent;
+  transition: transform 0.1s;
+}
+.nine-ball.target { border-color: #4ef; box-shadow: 0 0 10px #4ef; transform: scale(1.1); }
+.nine-ball.pocketed { background: rgba(255,255,255,0.08) !important; color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.1); }
+
+.nine-aim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
+.nine-rule { font-size: 0.8rem; opacity: 0.75; text-align: center; margin: 0; }
+.nine-aim label { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; }
+.nine-aim input[type=range] { width: 100%; accent-color: #4ef; }
+
+.nine-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #4ef;
+  color: #000;
+}
+.nine-btn:hover { background: #7ff; }
+
+.nine-result {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+  max-width: 320px;
+}
+.nine-result.win { background: rgba(0,200,100,0.25); }
+
+.nine-win {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,200,100,0.2);
+  border-radius: 10px;
+}
