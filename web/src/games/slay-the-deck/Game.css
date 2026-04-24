@@ -1,0 +1,27 @@
+.std-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 480px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.std-header { display: flex; justify-content: space-between; background: #1a237e; color: #e8eaf6; border-radius: 8px; padding: 8px 12px; font-size: 0.85rem; flex-wrap: wrap; gap: 4px; }
+.std-title { font-weight: 700; color: #90caf9; font-size: 1rem; }
+.std-energy { color: #ffcc02; font-weight: 700; }
+.std-combatants { display: flex; gap: 10px; }
+.std-side { flex: 1; background: #f5f5f5; border-radius: 8px; padding: 10px; border: 1px solid #ddd; }
+.std-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+.std-bar { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
+.std-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+.std-pfill { background: #4caf50; }
+.std-efill { background: #f44336; }
+.std-sub { font-size: 0.75rem; color: #777; }
+.std-hand { display: flex; flex-wrap: wrap; gap: 6px; }
+.std-card { padding: 8px; background: #e3f2fd; border: 2px solid #1565c0; border-radius: 8px; cursor: pointer; min-width: 82px; flex: 1; text-align: left; }
+.std-card:hover:not(.std-disabled) { background: #bbdefb; }
+.std-disabled { opacity: 0.4; cursor: not-allowed; }
+.std-card-name { font-weight: 700; font-size: 0.8rem; }
+.std-card-cost { font-size: 0.72rem; color: #1565c0; }
+.std-card-desc { font-size: 0.72rem; color: #555; margin-top: 2px; }
+.std-end-btn { padding: 10px 20px; background: #283593; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+.std-end-btn:hover { background: #3949ab; }
+.std-next-btn { padding: 10px 20px; background: #2e7d32; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+.std-log { display: flex; flex-direction: column; gap: 2px; max-height: 80px; overflow-y: auto; border: 1px solid #eee; border-radius: 4px; padding: 4px; }
+.std-log-line { font-size: 0.72rem; color: #666; }
+.std-end { text-align: center; padding: 14px; border-radius: 8px; font-weight: 700; }
+.std-won { background: #e8f5e9; color: #2e7d32; }
+.std-dead { background: #ffebee; color: #b71c1c; }

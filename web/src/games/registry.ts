@@ -602,6 +602,14 @@ import { towerDefenseMiniPlugin } from "./tower-defense-mini/index.js";
 import { fishingVillagePlugin } from "./fishing-village/index.js";
 import { codeBreakerPlugin } from "./code-breaker/index.js";
 import { roundTheClockPlugin } from "./round-the-clock/index.js";
+import { gridRoguePlugin } from "./grid-rogue/index.js";
+import { cardCrawlerPlugin } from "./card-crawler/index.js";
+import { diceDungeonPlugin } from "./dice-dungeon/index.js";
+import { slayTheDeckPlugin } from "./slay-the-deck/index.js";
+import { mineDelverPlugin } from "./mine-delver/index.js";
+import { cursedCryptPlugin } from "./cursed-crypt/index.js";
+import { dragonHuntPlugin } from "./dragon-hunt/index.js";
+import { wizardTowerPlugin } from "./wizard-tower/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1207,4 +1215,12 @@ export const GAMES: GamePlugin[] = [
   rainbowSortPlugin as unknown as GamePlugin,
   alphabetCatchPlugin as unknown as GamePlugin,
   numberOrderPlugin as unknown as GamePlugin,
+  gridRoguePlugin as unknown as GamePlugin,
+  cardCrawlerPlugin as unknown as GamePlugin,
+  diceDungeonPlugin as unknown as GamePlugin,
+  slayTheDeckPlugin as unknown as GamePlugin,
+  mineDelverPlugin as unknown as GamePlugin,
+  cursedCryptPlugin as unknown as GamePlugin,
+  dragonHuntPlugin as unknown as GamePlugin,
+  wizardTowerPlugin as unknown as GamePlugin,
 ];
