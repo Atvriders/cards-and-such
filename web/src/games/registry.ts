@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { numberMemoryPlugin } from "./number-memory/index.js";
+import { colorSequencePlugin } from "./color-sequence/index.js";
+import { imageMemoryPlugin } from "./image-memory/index.js";
+import { dualNBackPlugin } from "./dual-n-back/index.js";
+import { patternRecallPlugin } from "./pattern-recall/index.js";
+import { quickCountingPlugin } from "./quick-counting/index.js";
+import { oddShapeOutPlugin } from "./odd-shape-out/index.js";
+import { faceRecognitionPlugin } from "./face-recognition/index.js";
 import { texasHoldemPlugin } from "./texas-holdem/index.js";
 import { omahaHoldemPlugin } from "./omaha-holdem/index.js";
 import { sevenCardStudPlugin } from "./seven-card-stud/index.js";
@@ -895,4 +903,12 @@ export const GAMES: GamePlugin[] = [
   tumbleweedPlugin as unknown as GamePlugin,
   pentalathPlugin as unknown as GamePlugin,
   slitherPlugin as unknown as GamePlugin,
+  numberMemoryPlugin as unknown as GamePlugin,
+  colorSequencePlugin as unknown as GamePlugin,
+  imageMemoryPlugin as unknown as GamePlugin,
+  dualNBackPlugin as unknown as GamePlugin,
+  patternRecallPlugin as unknown as GamePlugin,
+  quickCountingPlugin as unknown as GamePlugin,
+  oddShapeOutPlugin as unknown as GamePlugin,
+  faceRecognitionPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,130 @@
+.fr-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.fr-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.fr-header strong { color: #333; }
+
+.fr-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.fr-desc { color: #666; text-align: center; max-width: 320px; }
+
+.fr-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Face card */
+.fr-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px 16px;
+  min-width: 80px;
+}
+
+.fr-face-hair { font-size: 1.6rem; }
+.fr-face-skin {
+  font-size: 2.4rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fr-face-eyes {
+  position: absolute;
+  font-size: 0.9rem;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fr-face-extra { font-size: 1.4rem; }
+
+/* Timer bar */
+.fr-timer-bar {
+  width: 200px;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.fr-timer-fill {
+  height: 100%;
+  background: #3182ce;
+  border-radius: 3px;
+  animation: fr-drain linear forwards;
+  width: 100%;
+}
+
+@keyframes fr-drain {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+/* Choice grid */
+.fr-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.fr-choice-btn {
+  background: none;
+  border: 3px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  padding: 4px;
+  transition: border-color 0.1s, transform 0.08s;
+}
+
+.fr-choice-btn:hover {
+  border-color: #90cdf4;
+  transform: scale(1.04);
+}
+
+/* Result */
+.fr-result {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.fr-result.correct { color: #276749; }
+.fr-result.wrong { color: #c53030; }
+
+.fr-btn-primary {
+  padding: 10px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.fr-btn-primary:hover { background: #2c5282; }

@@ -1,0 +1,112 @@
+.qc-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+  min-width: 280px;
+}
+
+.qc-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.qc-header strong { color: #333; }
+
+.qc-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.qc-desc { color: #666; text-align: center; max-width: 300px; }
+
+.qc-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.qc-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 360px;
+  justify-content: center;
+  font-size: 1.4rem;
+  padding: 16px;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  min-width: 200px;
+  min-height: 80px;
+}
+
+.qc-dot { line-height: 1.2; }
+
+.qc-input-display {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #1a202c;
+  min-height: 72px;
+  min-width: 120px;
+  text-align: center;
+  border-bottom: 3px solid #3182ce;
+}
+
+.qc-placeholder { color: #a0aec0; }
+
+.qc-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.qc-key {
+  width: 64px;
+  height: 52px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.qc-key:hover { background: #ebf8ff; border-color: #90cdf4; }
+.qc-key-del { background: #fff5f5; border-color: #fed7d7; color: #c53030; }
+.qc-key-del:hover { background: #fed7d7; }
+.qc-key-ok { background: #ebf8ff; border-color: #90cdf4; color: #2b6cb0; font-size: 1rem; }
+.qc-key-ok:hover:not(:disabled) { background: #bee3f8; }
+.qc-key-ok:disabled { opacity: 0.4; cursor: default; }
+
+.qc-result {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.qc-result.correct { color: #276749; }
+.qc-result.wrong { color: #c53030; }
+
+.qc-answer { font-size: 1rem; color: #555; }
+.qc-answer strong { color: #333; }
+
+.qc-btn-primary {
+  padding: 10px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.qc-btn-primary:hover { background: #2c5282; }

@@ -1,0 +1,82 @@
+.cs-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.cs-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.cs-info strong { color: #333; }
+
+.cs-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+  color: #555;
+}
+
+.cs-status.failed { color: #c53030; }
+.cs-status.complete { color: #276749; }
+
+.cs-board {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  background: #1a1a2e;
+  border-radius: 16px;
+  justify-content: center;
+}
+
+.cs-btn {
+  width: 72px;
+  height: 72px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: filter 0.08s, transform 0.08s;
+  filter: brightness(0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-btn.active {
+  filter: brightness(1.2) saturate(1.3);
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(255,255,255,0.5);
+}
+
+.cs-btn:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.cs-btn:disabled { cursor: default; }
+
+.cs-red    { background: #e53e3e; }
+.cs-green  { background: #38a169; }
+.cs-blue   { background: #3182ce; }
+.cs-yellow { background: #d69e2e; }
+.cs-purple { background: #805ad5; }
+
+.cs-start-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.cs-start-btn:hover { background: #2c5282; }

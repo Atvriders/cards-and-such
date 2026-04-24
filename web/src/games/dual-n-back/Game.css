@@ -1,0 +1,142 @@
+.dnb-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.dnb-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.dnb-header strong { color: #333; }
+
+.dnb-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.dnb-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2d3748;
+  margin: 0;
+}
+
+.dnb-desc {
+  color: #666;
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.5;
+}
+
+.dnb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px;
+  background: #2d3748;
+  border-radius: 12px;
+}
+
+.dnb-cell {
+  width: 80px;
+  height: 80px;
+  background: #4a5568;
+  border-radius: 8px;
+  transition: background 0.1s, box-shadow 0.1s;
+}
+
+.dnb-cell.active {
+  background: #f6ad55;
+  box-shadow: 0 0 20px rgba(246,173,85,0.7);
+}
+
+.dnb-sound {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dnb-letter {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #3182ce;
+  letter-spacing: 0.05em;
+}
+
+.dnb-letter-blank {
+  font-size: 3rem;
+  color: #a0aec0;
+}
+
+.dnb-respond {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.dnb-prompt {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  margin: 0;
+}
+
+.dnb-btn-row {
+  display: flex;
+  gap: 12px;
+}
+
+.dnb-match-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.dnb-match-btn.pressed {
+  background: #bee3f8;
+  border-color: #3182ce;
+  color: #2b6cb0;
+}
+
+.dnb-match-btn:hover { background: #ebf8ff; border-color: #90cdf4; }
+
+.dnb-btn-primary {
+  padding: 10px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.dnb-btn-primary:hover { background: #2c5282; }
+
+.dnb-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+}
+
+.dnb-stats strong { color: #2d3748; }

@@ -1,0 +1,127 @@
+.nm-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+  min-width: 280px;
+}
+
+.nm-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.nm-header strong { color: #333; }
+
+.nm-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.nm-desc { color: #666; text-align: center; max-width: 300px; }
+
+.nm-label {
+  font-size: 1rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.nm-number {
+  font-size: 2.8rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #2b6cb0;
+  font-variant-numeric: tabular-nums;
+}
+
+.nm-timer-bar {
+  width: 260px;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.nm-timer-fill {
+  height: 100%;
+  background: #3182ce;
+  border-radius: 3px;
+  animation: nm-drain linear forwards;
+  width: 100%;
+}
+
+@keyframes nm-drain {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.nm-input-display {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #1a202c;
+  min-height: 60px;
+  min-width: 240px;
+  text-align: center;
+  border-bottom: 3px solid #3182ce;
+  padding-bottom: 4px;
+}
+
+.nm-placeholder { color: #a0aec0; }
+
+.nm-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.nm-key {
+  width: 64px;
+  height: 52px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.nm-key:hover { background: #ebf8ff; border-color: #90cdf4; }
+.nm-key-del { background: #fff5f5; border-color: #fed7d7; color: #c53030; }
+.nm-key-del:hover { background: #fed7d7; }
+.nm-key-ok { background: #ebf8ff; border-color: #90cdf4; color: #2b6cb0; font-size: 1rem; }
+.nm-key-ok:hover:not(:disabled) { background: #bee3f8; }
+.nm-key-ok:disabled { opacity: 0.4; cursor: default; }
+
+.nm-result {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.nm-result.correct { color: #276749; }
+.nm-result.wrong { color: #c53030; }
+
+.nm-answer { font-size: 1rem; color: #555; }
+.nm-answer strong { color: #333; }
+
+.nm-btn-primary {
+  padding: 10px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.nm-btn-primary:hover { background: #2c5282; }

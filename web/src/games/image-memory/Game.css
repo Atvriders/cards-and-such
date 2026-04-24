@@ -1,0 +1,117 @@
+.im-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.im-header {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.im-header strong { color: #333; }
+
+.im-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.im-desc { color: #666; text-align: center; max-width: 320px; }
+
+.im-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.im-grid {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+}
+
+.im-icon-btn {
+  width: 72px;
+  height: 72px;
+  font-size: 2rem;
+  border: 3px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: border-color 0.1s, transform 0.1s, background 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.im-icon-btn:hover:not(:disabled) {
+  border-color: #90cdf4;
+  background: #ebf8ff;
+}
+
+.im-icon-btn.flashing {
+  border-color: #f6ad55;
+  background: #fefce8;
+  transform: scale(1.15);
+  box-shadow: 0 0 14px rgba(246,173,85,0.6);
+}
+
+.im-icon-btn.done {
+  border-color: #68d391;
+  background: #f0fff4;
+  opacity: 0.6;
+}
+
+.im-icon-btn:disabled {
+  cursor: default;
+}
+
+.im-result {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.im-result.correct { color: #276749; }
+.im-result.partial { color: #d69e2e; }
+
+.im-order-display {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.im-order-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 2px solid transparent;
+}
+
+.im-order-icon.ok { border-color: #68d391; background: #f0fff4; }
+.im-order-icon.miss { border-color: #fc8181; background: #fff5f5; }
+
+.im-btn-primary {
+  padding: 10px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.im-btn-primary:hover { background: #2c5282; }
