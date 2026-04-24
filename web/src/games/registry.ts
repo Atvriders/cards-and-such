@@ -626,6 +626,14 @@ import { storyBuilderPlugin } from "./story-builder/index.js";
 import { fiveSecondRulePlugin } from "./five-second-rule/index.js";
 import { headsUpPlugin } from "./heads-up/index.js";
 import { hotTakePlugin } from "./hot-take/index.js";
+import { arrowSudokuPlugin } from "./arrow-sudoku/index.js";
+import { mosaicPuzzlePlugin } from "./mosaic-puzzle/index.js";
+import { nurimisakiPlugin } from "./nurimisaki/index.js";
+import { castleWallPlugin } from "./castle-wall/index.js";
+import { galaxiesPuzzlePlugin } from "./galaxies-puzzle/index.js";
+import { corralPuzzlePlugin } from "./corral-puzzle/index.js";
+import { countryRoadPlugin } from "./country-road/index.js";
+import { pearlPuzzlePlugin } from "./pearl-puzzle/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1255,4 +1263,12 @@ export const GAMES: GamePlugin[] = [
   zhengPlugin as unknown as GamePlugin,
   newmarketPlugin as unknown as GamePlugin,
   michiganPlugin as unknown as GamePlugin,
+  arrowSudokuPlugin as unknown as GamePlugin,
+  mosaicPuzzlePlugin as unknown as GamePlugin,
+  nurimisakiPlugin as unknown as GamePlugin,
+  castleWallPlugin as unknown as GamePlugin,
+  galaxiesPuzzlePlugin as unknown as GamePlugin,
+  corralPuzzlePlugin as unknown as GamePlugin,
+  countryRoadPlugin as unknown as GamePlugin,
+  pearlPuzzlePlugin as unknown as GamePlugin,
 ];

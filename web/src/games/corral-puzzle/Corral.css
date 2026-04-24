@@ -1,0 +1,27 @@
+.corral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.corral-title { font-size: 1.5rem; font-weight: bold; }
+.corral-status { font-size: 0.95rem; color: #555; }
+.corral-status.win { color: #27ae60; font-weight: bold; }
+.corral-canvas-wrapper {
+  border: 2px solid #333;
+  cursor: pointer;
+  position: relative;
+}
+.corral-btns { display: flex; gap: 8px; }
+.corral-btns button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.corral-btns button:hover { background: #dde; }

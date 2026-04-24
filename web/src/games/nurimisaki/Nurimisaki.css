@@ -1,0 +1,50 @@
+.nurimisaki {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.nurimisaki-title { font-size: 1.5rem; font-weight: bold; }
+.nurimisaki-status { font-size: 0.95rem; color: #555; }
+.nurimisaki-status.win { color: #27ae60; font-weight: bold; }
+.nurimisaki-grid {
+  display: grid;
+  border: 2px solid #333;
+}
+.nm-cell {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #ddd;
+  position: relative;
+}
+.nm-cell.white { background: #fff; }
+.nm-cell.black { background: #222; color: transparent; }
+.nm-cell.clue {
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #1565c0;
+  color: #1565c0;
+  z-index: 1;
+}
+.nm-cell.clue.black { background: #1565c0; color: #fff; border-color: #0d47a1; }
+.nurimisaki-btns { display: flex; gap: 8px; }
+.nurimisaki-btns button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.nurimisaki-btns button:hover { background: #dde; }

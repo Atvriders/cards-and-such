@@ -1,0 +1,42 @@
+.country-road {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.country-road-title { font-size: 1.5rem; font-weight: bold; }
+.country-road-status { font-size: 0.95rem; color: #555; }
+.country-road-status.win { color: #27ae60; font-weight: bold; }
+.country-road-grid {
+  display: grid;
+  border: 2px solid #333;
+}
+.cr-cell {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #333;
+}
+.cr-cell.road { background: #a5d6a7; border-color: #388e3c; }
+.cr-cell.won-cell { background: #c8e6c9; }
+.country-road-btns { display: flex; gap: 8px; }
+.country-road-btns button {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: 1.5px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+.country-road-btns button:hover { background: #dde; }
