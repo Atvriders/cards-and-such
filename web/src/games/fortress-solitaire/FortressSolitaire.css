@@ -1,0 +1,44 @@
+.fortress {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.fortress-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.fortress-auto-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.fortress-auto-btn:hover {
+  background: #444;
+}
+
+.fortress-foundations {
+  display: flex;
+  gap: 8px;
+}
+
+.fortress-columns {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}

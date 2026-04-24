@@ -1,0 +1,69 @@
+.corners {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.corners-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.corners-auto-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.corners-auto-btn:hover {
+  background: #444;
+}
+
+.corners-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.corners-center {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.corners-foundations {
+  display: flex;
+  gap: 8px;
+}
+
+.corners-stock-row {
+  display: flex;
+  gap: 8px;
+}
+
+.corners-bottom-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.corners-corner-spacer {
+  flex: 1;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper {
+  cursor: pointer;
+}

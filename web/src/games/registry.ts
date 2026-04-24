@@ -36,6 +36,14 @@ import { beleagueredCastlePlugin } from "./beleaguered-castle/index.js";
 import { streetsAndAlleysPlugin } from "./streets-and-alleys/index.js";
 import { penguinPlugin } from "./penguin/index.js";
 import { bakersGamePlugin } from "./bakers-game/index.js";
+import { fortressSolitairePlugin } from "./fortress-solitaire/index.js";
+import { seaHavenTowersPlugin } from "./sea-haven-towers/index.js";
+import { canfieldStorehousePlugin } from "./canfield-storehouse/index.js";
+import { cornersSolitairePlugin } from "./corners-solitaire/index.js";
+import { kingAlbertPlugin } from "./king-albert/index.js";
+import { napoleonAtSaintHelenaPlugin } from "./napoleon-at-saint-helena/index.js";
+import { fourSeasonsPlugin } from "./four-seasons/index.js";
+import { deucesSolitairePlugin } from "./deuces-solitaire/index.js";
 import { westcliffPlugin } from "./westcliff/index.js";
 import { kingsInTheCornerPlugin } from "./kings-in-the-corner/index.js";
 import { acesUpPlugin } from "./aces-up/index.js";
@@ -1043,4 +1051,12 @@ export const GAMES: GamePlugin[] = [
   kenoMiniPlugin as unknown as GamePlugin,
   fanTanPlugin as unknown as GamePlugin,
   dragonTigerPlugin as unknown as GamePlugin,
+  fortressSolitairePlugin as unknown as GamePlugin,
+  seaHavenTowersPlugin as unknown as GamePlugin,
+  canfieldStorehousePlugin as unknown as GamePlugin,
+  cornersSolitairePlugin as unknown as GamePlugin,
+  kingAlbertPlugin as unknown as GamePlugin,
+  napoleonAtSaintHelenaPlugin as unknown as GamePlugin,
+  fourSeasonsPlugin as unknown as GamePlugin,
+  deucesSolitairePlugin as unknown as GamePlugin,
 ];

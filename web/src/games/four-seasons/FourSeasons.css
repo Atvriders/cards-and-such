@@ -1,0 +1,68 @@
+.four-seasons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.four-seasons-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.four-seasons-auto-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.four-seasons-auto-btn:hover {
+  background: #444;
+}
+
+.four-seasons-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.four-seasons-cross {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.four-seasons-cross-middle {
+  display: flex;
+  gap: 8px;
+}
+
+.four-seasons-bottom {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.four-seasons-stock-area {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}
+
+.stock-wrapper {
+  cursor: pointer;
+}
