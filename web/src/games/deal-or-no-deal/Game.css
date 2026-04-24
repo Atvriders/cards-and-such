@@ -1,0 +1,144 @@
+.dond-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.dond-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.dond-title-badge {
+  font-weight: 700;
+  color: #e74c3c;
+  font-size: 1rem;
+}
+
+.dond-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.dond-case {
+  height: 72px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.dond-case:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.dond-case.available {
+  background: #2c3e50;
+  color: #f39c12;
+}
+
+.dond-case.player {
+  background: #f39c12;
+  color: #fff;
+}
+
+.dond-case.eliminated {
+  background: #ecf0f1;
+  color: #bdc3c7;
+  cursor: not-allowed;
+  font-size: 0.75rem;
+}
+
+.dond-case.selectable {
+  background: #e74c3c;
+  color: #fff;
+  animation: dond-pulse 1s infinite alternate;
+}
+
+@keyframes dond-pulse {
+  from { opacity: 1; }
+  to { opacity: 0.75; }
+}
+
+.dond-case-label { font-size: 0.7rem; opacity: 0.8; }
+
+.dond-bank {
+  width: 100%;
+  background: linear-gradient(135deg, #1a5276, #2980b9);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.dond-bank-title { font-size: 0.9rem; opacity: 0.8; margin-bottom: 4px; }
+.dond-bank-amount { font-size: 2.5rem; font-weight: 900; color: #f1c40f; }
+.dond-bank-actions { display: flex; gap: 12px; justify-content: center; margin-top: 16px; }
+
+.dond-btn {
+  padding: 12px 28px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dond-btn.deal { background: #27ae60; color: #fff; }
+.dond-btn.no-deal { background: #e74c3c; color: #fff; }
+.dond-btn.reveal { background: #f39c12; color: #fff; }
+
+.dond-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  width: 100%;
+}
+
+.dond-amount-tag {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dond-amount-tag.active { background: #2c3e50; color: #f1c40f; }
+.dond-amount-tag.gone { background: #ecf0f1; color: #bdc3c7; text-decoration: line-through; }
+
+.dond-done {
+  text-align: center;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.dond-done-amount {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #f39c12;
+}
+
+.dond-instruction {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+}

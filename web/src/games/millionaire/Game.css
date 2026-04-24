@@ -1,0 +1,243 @@
+.mil-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.mil-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.mil-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #d4af37;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(212,175,55,0.4);
+}
+
+.mil-score-box {
+  background: #1a1a2e;
+  color: #d4af37;
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 6px 18px;
+  border-radius: 10px;
+  border: 1px solid #d4af37;
+}
+
+.mil-ladder {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 3px;
+}
+
+.mil-ladder-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.mil-ladder-row.current {
+  background: #d4af37;
+  color: #1a1a2e;
+  opacity: 1;
+  font-size: 0.9rem;
+}
+
+.mil-ladder-row.passed {
+  opacity: 0.7;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.mil-ladder-row.safety {
+  color: #e67e22;
+  opacity: 0.8;
+}
+
+.mil-ladder-num { width: 18px; text-align: right; }
+.mil-ladder-prize { margin-left: auto; }
+
+.mil-question-card {
+  width: 100%;
+  background: linear-gradient(135deg, #0d1b2a, #1a3a5c);
+  border: 2px solid #d4af37;
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mil-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.mil-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 2px solid #4a6fa5;
+  background: #0d1b2a;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.mil-option:hover:not(:disabled) {
+  border-color: #d4af37;
+  background: #1a3a5c;
+}
+
+.mil-option:disabled { opacity: 0.25; cursor: not-allowed; }
+
+.mil-option-letter {
+  background: #4a6fa5;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.mil-lifelines {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mil-lifeline-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #d4af37;
+  background: #1a1a2e;
+  color: #d4af37;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mil-lifeline-btn:hover:not(:disabled) { background: #d4af37; color: #1a1a2e; }
+.mil-lifeline-btn:disabled { opacity: 0.3; cursor: not-allowed; border-color: #555; color: #555; }
+
+.mil-walk-btn {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 2px solid #e74c3c;
+  background: transparent;
+  color: #e74c3c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mil-walk-btn:hover { background: #e74c3c; color: #fff; }
+
+.mil-overlay {
+  width: 100%;
+  background: #1a3a5c;
+  border: 2px solid #d4af37;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.mil-overlay h3 { color: #d4af37; margin-bottom: 12px; }
+
+.mil-audience-bars {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  height: 80px;
+  margin-bottom: 8px;
+}
+
+.mil-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 52px;
+}
+
+.mil-bar {
+  width: 40px;
+  background: #d4af37;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s;
+}
+
+.mil-bar-label { font-size: 0.75rem; color: #ccc; }
+.mil-bar-pct { font-size: 0.8rem; color: #d4af37; font-weight: 700; }
+
+.mil-phone-text {
+  font-style: italic;
+  color: #aed6f1;
+  font-size: 1rem;
+  margin: 8px 0;
+}
+
+.mil-dismiss-btn {
+  margin-top: 12px;
+  padding: 8px 22px;
+  border-radius: 8px;
+  border: none;
+  background: #27ae60;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mil-end {
+  text-align: center;
+  padding: 28px 16px;
+}
+
+.mil-end h2 { font-size: 1.6rem; margin-bottom: 8px; }
+.mil-end-prize {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #d4af37;
+  background: #1a1a2e;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 14px;
+  margin: 10px 0;
+}

@@ -414,6 +414,14 @@ import { presidentsPlugin } from "./presidents/index.js";
 import { rideTheBusPlugin } from "./ride-the-bus/index.js";
 import { pokerSquares2PPlugin } from "./poker-squares-2p/index.js";
 import { californiaJackPlugin } from "./california-jack/index.js";
+import { wheelSpinPlugin } from "./wheel-spin/index.js";
+import { priceGuessPlugin } from "./price-guess/index.js";
+import { dealOrNoDealPlugin } from "./deal-or-no-deal/index.js";
+import { jeopardyLikePlugin } from "./jeopardy-like/index.js";
+import { familyFeudPlugin } from "./family-feud/index.js";
+import { lightningRoundPlugin } from "./lightning-round/index.js";
+import { millionairePlugin } from "./millionaire/index.js";
+import { cashCabPlugin } from "./cash-cab/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -831,4 +839,12 @@ export const GAMES: GamePlugin[] = [
   rideTheBusPlugin as unknown as GamePlugin,
   pokerSquares2PPlugin as unknown as GamePlugin,
   californiaJackPlugin as unknown as GamePlugin,
+  wheelSpinPlugin as unknown as GamePlugin,
+  priceGuessPlugin as unknown as GamePlugin,
+  dealOrNoDealPlugin as unknown as GamePlugin,
+  jeopardyLikePlugin as unknown as GamePlugin,
+  familyFeudPlugin as unknown as GamePlugin,
+  lightningRoundPlugin as unknown as GamePlugin,
+  millionairePlugin as unknown as GamePlugin,
+  cashCabPlugin as unknown as GamePlugin,
 ];
