@@ -1,0 +1,56 @@
+.ap-game {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px;
+  font-family: sans-serif;
+  text-align: center;
+}
+.ap-status {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+}
+.ap-status.win { background: #d4edda; color: #155724; }
+.ap-status.loss { background: #f8d7da; color: #721c24; }
+.ap-info { font-size: 0.9rem; color: #555; margin-bottom: 10px; }
+.ap-basket {
+  font-size: 2rem;
+  margin: 8px 0;
+}
+.ap-pbar-bg {
+  background: #ddd;
+  border-radius: 8px;
+  height: 16px;
+  margin: 4px auto 12px;
+  max-width: 300px;
+}
+.ap-pbar-fill {
+  background: #e74c3c;
+  height: 16px;
+  border-radius: 8px;
+  transition: width 0.3s;
+}
+.ap-trees {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.ap-tree {
+  width: 80px;
+  padding: 10px 6px;
+  border-radius: 10px;
+  background: #e8f5e9;
+  border: 2px solid #81c784;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s, transform 0.1s;
+}
+.ap-tree:hover:not(.empty) { background: #c8e6c9; transform: scale(1.05); }
+.ap-tree.empty { background: #f5f5f5; border-color: #ccc; cursor: default; color: #aaa; }
+.ap-tree-icon { font-size: 2rem; }
+.ap-apple-count { font-weight: bold; margin-top: 4px; }

@@ -7,6 +7,14 @@ import { primeFactorPlugin } from "./prime-factor/index.js";
 import { exponentDrillPlugin } from "./exponent-drill/index.js";
 import { romanNumeralsPlugin } from "./roman-numerals/index.js";
 import { numberBondsPlugin } from "./number-bonds/index.js";
+import { memoryPairsKidsPlugin } from "./memory-pairs-kids/index.js";
+import { countingBearsPlugin } from "./counting-bears/index.js";
+import { applePickingPlugin } from "./apple-picking/index.js";
+import { farmyardMatchPlugin } from "./farmyard-match/index.js";
+import { treasureHuntPlugin } from "./treasure-hunt/index.js";
+import { rainbowSortPlugin } from "./rainbow-sort/index.js";
+import { alphabetCatchPlugin } from "./alphabet-catch/index.js";
+import { numberOrderPlugin } from "./number-order/index.js";
 import { cannonShotPlugin } from "./cannon-shot/index.js";
 import { archeryTargetPlugin } from "./archery-target/index.js";
 import { dartThrowPlugin } from "./dart-throw/index.js";
@@ -1191,4 +1199,12 @@ export const GAMES: GamePlugin[] = [
   exponentDrillPlugin as unknown as GamePlugin,
   romanNumeralsPlugin as unknown as GamePlugin,
   numberBondsPlugin as unknown as GamePlugin,
+  memoryPairsKidsPlugin as unknown as GamePlugin,
+  countingBearsPlugin as unknown as GamePlugin,
+  applePickingPlugin as unknown as GamePlugin,
+  farmyardMatchPlugin as unknown as GamePlugin,
+  treasureHuntPlugin as unknown as GamePlugin,
+  rainbowSortPlugin as unknown as GamePlugin,
+  alphabetCatchPlugin as unknown as GamePlugin,
+  numberOrderPlugin as unknown as GamePlugin,
 ];

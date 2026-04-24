@@ -1,0 +1,54 @@
+.cb-game {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px;
+  font-family: sans-serif;
+  text-align: center;
+}
+.cb-status {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+}
+.cb-status.correct { background: #d4edda; color: #155724; }
+.cb-status.wrong { background: #f8d7da; color: #721c24; }
+.cb-progress { font-size: 0.85rem; color: #666; margin-bottom: 10px; }
+.cb-bears {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 12px 0;
+}
+.cb-bear {
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 2px solid rgba(0,0,0,0.15);
+}
+.cb-choices {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.cb-choice-btn {
+  width: 56px;
+  height: 56px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 2px solid #4a90d9;
+  border-radius: 10px;
+  background: #eaf4ff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.cb-choice-btn:hover { background: #4a90d9; color: white; }

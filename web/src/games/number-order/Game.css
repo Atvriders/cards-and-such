@@ -1,0 +1,42 @@
+.no-game {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px;
+  font-family: sans-serif;
+  text-align: center;
+}
+.no-status {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+}
+.no-status.win { background: #d4edda; color: #155724; }
+.no-status.wrong { background: #fff3cd; color: #856404; }
+.no-info { font-size: 0.85rem; color: #555; margin-bottom: 10px; }
+.no-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 12px 0;
+}
+.no-num {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  border: 2px solid #4a90d9;
+  background: #eaf4ff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.no-num:hover:not(.tapped) { background: #4a90d9; color: white; transform: scale(1.05); }
+.no-num.tapped { background: #d4edda; border-color: #28a745; color: #155724; cursor: default; }
+.no-score { margin-top: 14px; font-size: 1.1rem; font-weight: bold; color: #155724; }
