@@ -1,0 +1,30 @@
+.newmarket { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#0d3020; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.newmarket-header { text-align:center; }
+.newmarket-header h2 { margin:0 0 .4rem; font-size:1.5rem; }
+.newmarket-chips { font-size:1rem; color:#ffd54f; font-weight:700; }
+.newmarket-board { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; background:rgba(0,0,0,.3); padding:.75rem; border-radius:8px; }
+.newmarket-boodle { display:flex; flex-direction:column; align-items:center; gap:.3rem; }
+.newmarket-boodle-label { font-size:.75rem; opacity:.7; }
+.newmarket-boodle-pot { font-size:1rem; font-weight:700; color:#ffd54f; }
+.newmarket-boodle-card { font-size:1.3rem; }
+.newmarket-sequence { background:rgba(0,0,0,.3); padding:.5rem 1rem; border-radius:8px; text-align:center; min-height:80px; }
+.newmarket-sequence-label { font-size:.8rem; opacity:.8; margin-bottom:.3rem; }
+.newmarket-seq-cards { display:flex; gap:.3rem; flex-wrap:wrap; justify-content:center; }
+.newmarket-status { font-size:1rem; font-weight:700; background:rgba(0,0,0,.25); padding:.4rem 1rem; border-radius:6px; text-align:center; }
+.newmarket-hand-label { font-size:.85rem; opacity:.8; }
+.newmarket-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.newmarket-slot { transition:transform .1s; cursor:pointer; }
+.newmarket-slot:hover { transform:translateY(-4px); }
+.newmarket-slot.playable { filter:drop-shadow(0 0 6px rgba(100,255,100,.6)); }
+.newmarket-slot.boodle { filter:drop-shadow(0 0 8px rgba(255,215,0,.9)); }
+.newmarket-actions { display:flex; gap:.75rem; }
+.newmarket-btn { padding:.6rem 1.4rem; border:none; border-radius:8px; font-size:.9rem; font-weight:700; cursor:pointer; transition:background .15s,transform .1s; }
+.newmarket-btn:disabled { opacity:.4; cursor:not-allowed; }
+.newmarket-btn.bet { background:#1b5e20; color:#fff; }
+.newmarket-btn.bet:not(:disabled):hover { background:#003300; transform:translateY(-2px); }
+.newmarket-btn.pass { background:#616161; color:#fff; }
+.newmarket-btn.pass:not(:disabled):hover { background:#424242; transform:translateY(-2px); }
+.newmarket-betting { background:rgba(0,0,0,.4); padding:1rem; border-radius:8px; text-align:center; }
+.newmarket-result { background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; text-align:center; }
+.newmarket-result h3 { margin:0 0 .8rem; }
+.newmarket-final { font-size:1.2rem; color:#ffd54f; font-weight:700; }

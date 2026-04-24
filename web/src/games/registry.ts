@@ -486,6 +486,14 @@ import { pouncePlugin } from "./pounce/index.js";
 import { capriciesePlugin } from "./capricieuse/index.js";
 import { bigTwoPlugin } from "./big-two/index.js";
 import { tienLenPlugin } from "./tien-len/index.js";
+import { daifugoPlugin } from "./daifugo/index.js";
+import { tichuPlugin } from "./tichu/index.js";
+import { lastCardPlugin } from "./last-card/index.js";
+import { maoPlugin } from "./mao/index.js";
+import { stopTheBusPlugin } from "./stop-the-bus/index.js";
+import { zhengPlugin } from "./zheng-shangyou/index.js";
+import { newmarketPlugin } from "./newmarket/index.js";
+import { michiganPlugin } from "./michigan/index.js";
 import { pusoyDosPlugin } from "./pusoy-dos/index.js";
 import { nineCardBragPlugin } from "./nine-card-brag/index.js";
 import { presidentsPlugin } from "./presidents/index.js";
@@ -1239,4 +1247,12 @@ export const GAMES: GamePlugin[] = [
   fiveSecondRulePlugin as unknown as GamePlugin,
   headsUpPlugin as unknown as GamePlugin,
   hotTakePlugin as unknown as GamePlugin,
+  daifugoPlugin as unknown as GamePlugin,
+  tichuPlugin as unknown as GamePlugin,
+  lastCardPlugin as unknown as GamePlugin,
+  maoPlugin as unknown as GamePlugin,
+  stopTheBusPlugin as unknown as GamePlugin,
+  zhengPlugin as unknown as GamePlugin,
+  newmarketPlugin as unknown as GamePlugin,
+  michiganPlugin as unknown as GamePlugin,
 ];

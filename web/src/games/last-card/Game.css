@@ -1,0 +1,31 @@
+.lastcard { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#1a3a1a; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.lastcard-header { text-align:center; }
+.lastcard-header h2 { margin:0 0 .4rem; font-size:1.5rem; }
+.lastcard-info { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; opacity:.85; }
+.lastcard-pile { display:flex; gap:1.5rem; align-items:center; background:rgba(0,0,0,.3); padding:.5rem 1.5rem; border-radius:8px; }
+.lastcard-pile-label { font-size:.8rem; opacity:.8; }
+.lastcard-suit-indicator { font-size:1.5rem; font-weight:700; }
+.lastcard-status { font-size:1rem; font-weight:700; background:rgba(0,0,0,.25); padding:.4rem 1rem; border-radius:6px; text-align:center; }
+.lastcard-hand-label { font-size:.85rem; opacity:.8; }
+.lastcard-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.lastcard-slot { transition:transform .1s; position:relative; }
+.lastcard-slot.clickable { cursor:pointer; }
+.lastcard-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(100,200,100,.8)); }
+.lastcard-slot.clickable:hover { transform:translateY(-4px); }
+.lastcard-slot.sel.clickable:hover { transform:translateY(-12px); }
+.lastcard-slot.dimmed { opacity:.4; }
+.lastcard-actions { display:flex; gap:.75rem; flex-wrap:wrap; justify-content:center; }
+.lastcard-btn { padding:.6rem 1.4rem; border:none; border-radius:8px; font-size:.9rem; font-weight:700; cursor:pointer; transition:background .15s,transform .1s; }
+.lastcard-btn:disabled { opacity:.4; cursor:not-allowed; }
+.lastcard-btn.play { background:#2e7d32; color:#fff; }
+.lastcard-btn.play:not(:disabled):hover { background:#1b5e20; transform:translateY(-2px); }
+.lastcard-btn.draw { background:#1565c0; color:#fff; }
+.lastcard-btn.draw:not(:disabled):hover { background:#0d47a1; transform:translateY(-2px); }
+.lastcard-btn.lastcall { background:#e65100; color:#fff; font-size:.8rem; }
+.lastcard-btn.lastcall:not(:disabled):hover { background:#bf360c; transform:translateY(-2px); }
+.lastcard-suit-picker { display:flex; gap:.5rem; align-items:center; font-size:.9rem; }
+.lastcard-suit-btn { background:rgba(255,255,255,.2); border:2px solid rgba(255,255,255,.4); border-radius:6px; padding:.3rem .7rem; font-size:1.2rem; cursor:pointer; color:#fff; }
+.lastcard-suit-btn:hover { background:rgba(255,255,255,.35); }
+.lastcard-result { background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; text-align:center; }
+.lastcard-result h3 { margin:0 0 .8rem; }
+.lastcard-win { color:#a5d6a7; font-size:1.2rem; font-weight:700; }

@@ -1,0 +1,29 @@
+.tichu { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#2a1a4e; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.tichu-header { text-align:center; }
+.tichu-header h2 { margin:0 0 .4rem; font-size:1.5rem; }
+.tichu-teams { display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; }
+.tichu-team { background:rgba(255,255,255,.1); padding:.3rem .8rem; border-radius:6px; }
+.tichu-seats { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; opacity:.85; }
+.tichu-active { color:#ce93d8; font-weight:900; text-decoration:underline; }
+.tichu-pile { background:rgba(0,0,0,.3); padding:.5rem 1rem; border-radius:8px; text-align:center; min-width:180px; }
+.tichu-pile-label { font-size:.8rem; opacity:.8; margin-bottom:.3rem; }
+.tichu-cards { display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap; }
+.tichu-new-round { color:#ce93d8; font-size:.9rem; }
+.tichu-status { font-size:1rem; font-weight:700; background:rgba(0,0,0,.25); padding:.4rem 1rem; border-radius:6px; }
+.tichu-hand-label { font-size:.85rem; opacity:.8; }
+.tichu-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.tichu-slot { transition:transform .1s; }
+.tichu-slot.clickable { cursor:pointer; }
+.tichu-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(206,147,216,.8)); }
+.tichu-slot.clickable:hover { transform:translateY(-4px); }
+.tichu-slot.sel.clickable:hover { transform:translateY(-12px); }
+.tichu-actions { display:flex; gap:1rem; }
+.tichu-btn { padding:.7rem 1.8rem; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; transition:background .15s,transform .1s; }
+.tichu-btn:disabled { opacity:.4; cursor:not-allowed; }
+.tichu-btn.play { background:#6a1b9a; color:#fff; }
+.tichu-btn.play:not(:disabled):hover { background:#4a148c; transform:translateY(-2px); }
+.tichu-btn.pass { background:#616161; color:#fff; }
+.tichu-btn.pass:not(:disabled):hover { background:#424242; transform:translateY(-2px); }
+.tichu-result { background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; text-align:center; }
+.tichu-result h3 { margin:0 0 .8rem; }
+.tichu-you { color:#ce93d8; font-weight:700; }

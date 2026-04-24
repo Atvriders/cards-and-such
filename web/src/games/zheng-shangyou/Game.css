@@ -1,0 +1,27 @@
+.zheng { display:flex; flex-direction:column; align-items:center; gap:.75rem; padding:1rem; background:#3a1500; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
+.zheng-header { text-align:center; }
+.zheng-header h2 { margin:0 0 .4rem; font-size:1.5rem; }
+.zheng-seats { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:.85rem; opacity:.85; }
+.zheng-active { color:#ffb74d; font-weight:900; text-decoration:underline; }
+.zheng-pile { background:rgba(0,0,0,.3); padding:.5rem 1rem; border-radius:8px; text-align:center; min-width:200px; }
+.zheng-pile-label { font-size:.8rem; opacity:.8; margin-bottom:.3rem; }
+.zheng-cards { display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap; }
+.zheng-new-round { color:#ffb74d; font-size:.9rem; }
+.zheng-status { font-size:1rem; font-weight:700; background:rgba(0,0,0,.25); padding:.4rem 1rem; border-radius:6px; }
+.zheng-hand-label { font-size:.85rem; opacity:.8; }
+.zheng-hand { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; max-width:700px; }
+.zheng-slot { transition:transform .1s; }
+.zheng-slot.clickable { cursor:pointer; }
+.zheng-slot.sel { transform:translateY(-10px); filter:drop-shadow(0 4px 8px rgba(255,183,77,.8)); }
+.zheng-slot.clickable:hover { transform:translateY(-4px); }
+.zheng-slot.sel.clickable:hover { transform:translateY(-12px); }
+.zheng-actions { display:flex; gap:1rem; }
+.zheng-btn { padding:.7rem 1.8rem; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; transition:background .15s,transform .1s; }
+.zheng-btn:disabled { opacity:.4; cursor:not-allowed; }
+.zheng-btn.play { background:#bf360c; color:#fff; }
+.zheng-btn.play:not(:disabled):hover { background:#7f2700; transform:translateY(-2px); }
+.zheng-btn.pass { background:#616161; color:#fff; }
+.zheng-btn.pass:not(:disabled):hover { background:#424242; transform:translateY(-2px); }
+.zheng-result { background:rgba(0,0,0,.4); padding:1.5rem; border-radius:12px; text-align:center; }
+.zheng-result h3 { margin:0 0 .8rem; }
+.zheng-you { color:#ffb74d; font-weight:700; }
