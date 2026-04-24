@@ -1,0 +1,28 @@
+.surakarta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.sura-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+  text-align: center;
+}
+.sura-status.win { color: #2a7d2e; }
+.sura-status.loss { color: #b02020; }
+
+.sura-svg { max-width: 100vw; overflow: visible; }
+
+.sura-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+}
+.sura-black { color: #222; font-weight: 600; }
+.sura-white { color: #888; font-weight: 600; }

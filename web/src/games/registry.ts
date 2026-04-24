@@ -438,6 +438,14 @@ import { bonus6Plugin } from "./bonus-6/index.js";
 import { anteUpBlackjackPlugin } from "./ante-up-blackjack/index.js";
 import { casinoHoldemPlugin } from "./casino-holdem/index.js";
 import { mississippiStudPlugin } from "./mississippi-stud/index.js";
+import { surakartaPlugin } from "./surakarta/index.js";
+import { yotePlugin } from "./yote/index.js";
+import { muTorerePlugin } from "./mu-torere/index.js";
+import { shobuPlugin } from "./shobu/index.js";
+import { loaSmallPlugin } from "./loa-small/index.js";
+import { tumbleweedPlugin } from "./tumbleweed/index.js";
+import { pentalathPlugin } from "./pentalath/index.js";
+import { slitherPlugin } from "./slither/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -879,4 +887,12 @@ export const GAMES: GamePlugin[] = [
   anteUpBlackjackPlugin as unknown as GamePlugin,
   casinoHoldemPlugin as unknown as GamePlugin,
   mississippiStudPlugin as unknown as GamePlugin,
+  surakartaPlugin as unknown as GamePlugin,
+  yotePlugin as unknown as GamePlugin,
+  muTorerePlugin as unknown as GamePlugin,
+  shobuPlugin as unknown as GamePlugin,
+  loaSmallPlugin as unknown as GamePlugin,
+  tumbleweedPlugin as unknown as GamePlugin,
+  pentalathPlugin as unknown as GamePlugin,
+  slitherPlugin as unknown as GamePlugin,
 ];

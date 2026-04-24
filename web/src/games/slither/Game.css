@@ -1,0 +1,16 @@
+.slither {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+.sli-status { font-size: 1rem; font-weight: 600; color: #333; min-height: 1.4em; text-align: center; }
+.sli-status.win { color: #2a7d2e; }
+.sli-status.loss { color: #b02020; }
+.sli-chains { display: flex; gap: 24px; font-size: 0.9rem; color: #555; }
+.sli-svg { max-width: 100vw; }
+.sli-legend { display: flex; gap: 20px; font-size: 0.85rem; flex-wrap: wrap; justify-content: center; }
+.sli-dark { color: #222; font-weight: 600; }
+.sli-light { color: #888; font-weight: 600; }
