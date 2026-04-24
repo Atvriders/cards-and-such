@@ -462,6 +462,14 @@ import { leafBlowerPlugin } from "./leaf-blower/index.js";
 import { puzzleBoxPlugin } from "./puzzle-box/index.js";
 import { cardSpinnerPlugin } from "./card-spinner/index.js";
 import { rollEmPlugin } from "./roll-em/index.js";
+import { trucoPlugin } from "./truco/index.js";
+import { escobaPlugin } from "./escoba/index.js";
+import { chinchonPlugin } from "./chinchon/index.js";
+import { durakPlugin } from "./durak/index.js";
+import { trucoPaulistaPlugin } from "./truco-paulista/index.js";
+import { tarneebPlugin } from "./tarneeb/index.js";
+import { tonkPlugin } from "./tonk/index.js";
+import { kachuufiPlugin } from "./kachuufi/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -927,4 +935,12 @@ export const GAMES: GamePlugin[] = [
   puzzleBoxPlugin as unknown as GamePlugin,
   cardSpinnerPlugin as unknown as GamePlugin,
   rollEmPlugin as unknown as GamePlugin,
+  trucoPlugin as unknown as GamePlugin,
+  escobaPlugin as unknown as GamePlugin,
+  chinchonPlugin as unknown as GamePlugin,
+  durakPlugin as unknown as GamePlugin,
+  trucoPaulistaPlugin as unknown as GamePlugin,
+  tarneebPlugin as unknown as GamePlugin,
+  tonkPlugin as unknown as GamePlugin,
+  kachuufiPlugin as unknown as GamePlugin,
 ];

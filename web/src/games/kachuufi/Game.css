@@ -1,0 +1,20 @@
+.kachuufi { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 600px; margin: 0 auto; }
+.kachuufi-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.kachuufi-table { display: flex; gap: 32px; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 16px; min-width: 240px; }
+.kachuufi-slot { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.kachuufi-card { border: 2px solid #ccc; border-radius: 6px; padding: 8px 14px; background: white; font-size: 1.1rem; min-width: 50px; text-align: center; }
+.kachuufi-card.empty { color: #aaa; }
+.kachuufi-card.played { border-color: #1a73e8; }
+.kachuufi-card.bot { border-color: #e53935; }
+.kachuufi-card.hand { cursor: pointer; transition: transform 0.1s, border-color 0.15s; }
+.kachuufi-card.hand:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.kachuufi-card.trump-card { border-color: #f57c00; background: #fff8e1; }
+.kachuufi-hand { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.kachuufi-label { font-size: 0.85rem; color: #555; }
+.kachuufi-message { font-size: 0.95rem; text-align: center; color: #333; }
+.kachuufi-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }
+.kachuufi-bid { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; background: #f5f5f5; padding: 16px; border-radius: 8px; }
+.kachuufi-bid label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.kachuufi-bid select { padding: 6px; border-radius: 4px; border: 1px solid #ccc; }
+.kachuufi-btn { padding: 8px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.95rem; background: #1a73e8; color: white; }
+.kachuufi-btn:hover { background: #1557b0; }

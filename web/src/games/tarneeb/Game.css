@@ -1,0 +1,20 @@
+.tarneeb { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 600px; margin: 0 auto; }
+.tarneeb-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.tarneeb-table { display: flex; gap: 32px; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 16px; min-width: 240px; }
+.tarneeb-played { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tarneeb-card { border: 2px solid #ccc; border-radius: 6px; padding: 8px 14px; background: white; font-size: 1.1rem; min-width: 50px; text-align: center; }
+.tarneeb-card.empty { color: #aaa; }
+.tarneeb-card.played { border-color: #1a73e8; }
+.tarneeb-card.bot { border-color: #e53935; }
+.tarneeb-card.hand { cursor: pointer; transition: transform 0.1s, border-color 0.15s; }
+.tarneeb-card.hand:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.tarneeb-card.trump-card { border-color: #f57c00; background: #fff8e1; }
+.tarneeb-hand { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.tarneeb-label { font-size: 0.85rem; color: #555; }
+.tarneeb-message { font-size: 0.95rem; text-align: center; color: #333; }
+.tarneeb-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }
+.tarneeb-bid { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; background: #f5f5f5; padding: 16px; border-radius: 8px; }
+.tarneeb-bid label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.tarneeb-bid select { padding: 6px; border-radius: 4px; border: 1px solid #ccc; }
+.tarneeb-btn { padding: 8px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.95rem; background: #1a73e8; color: white; }
+.tarneeb-btn:hover { background: #1557b0; }

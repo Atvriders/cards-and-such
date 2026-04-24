@@ -1,0 +1,20 @@
+.durak { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 540px; margin: 0 auto; }
+.durak-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.durak-table { display: flex; gap: 24px; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 16px; min-width: 200px; }
+.durak-slot { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.durak-card { border: 2px solid #ccc; border-radius: 6px; padding: 10px 16px; background: white; font-size: 1.2rem; min-width: 56px; text-align: center; position: relative; }
+.durak-card.empty { color: #aaa; }
+.durak-card.played { border-color: #1a73e8; }
+.durak-card.hand { cursor: pointer; transition: transform 0.1s, border-color 0.15s; }
+.durak-card.hand:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.durak-card.trump { border-color: #f57c00; background: #fff8e1; }
+.durak-card.disabled { opacity: 0.5; cursor: default; }
+.durak-trump-mark { font-size: 0.6rem; position: absolute; top: 2px; right: 4px; color: #f57c00; }
+.durak-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.durak-label { font-size: 0.85rem; color: #555; }
+.durak-message { font-size: 0.95rem; text-align: center; color: #333; }
+.durak-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }
+.durak-actions { display: flex; gap: 8px; }
+.durak-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; background: #1a73e8; color: white; }
+.durak-btn:hover { background: #1557b0; }
+.durak-btn.danger { background: #e53935; }

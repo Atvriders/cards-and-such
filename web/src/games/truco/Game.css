@@ -1,0 +1,15 @@
+.truco { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 520px; margin: 0 auto; }
+.truco-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.truco-table { display: flex; gap: 32px; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 16px; min-width: 240px; }
+.truco-played { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.truco-card { border: 2px solid #ccc; border-radius: 6px; padding: 10px 16px; background: white; font-size: 1.2rem; min-width: 56px; text-align: center; }
+.truco-card.empty { color: #aaa; }
+.truco-card.played { border-color: #1a73e8; }
+.truco-card.bot { border-color: #e53935; }
+.truco-card.hand { cursor: pointer; transition: transform 0.1s, border-color 0.15s; }
+.truco-card.hand:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.truco-card.disabled { cursor: default; opacity: 0.6; }
+.truco-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.truco-label { font-size: 0.85rem; color: #555; }
+.truco-message { font-size: 0.95rem; text-align: center; color: #333; }
+.truco-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }

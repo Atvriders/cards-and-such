@@ -1,0 +1,16 @@
+.escoba { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 560px; margin: 0 auto; }
+.escoba-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.escoba-table { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 12px; min-height: 70px; }
+.escoba-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.escoba-card { cursor: pointer; border: 2px solid #ccc; border-radius: 6px; padding: 8px 12px; background: white; font-size: 1rem; transition: border-color 0.15s, transform 0.1s; }
+.escoba-card:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.escoba-card.selected { border-color: #e53935; background: #fff3e0; }
+.escoba-card.capturable { border-color: #43a047; background: #f1f8e9; }
+.escoba-card.coins { background: #fffde7; }
+.escoba-label { font-size: 0.85rem; color: #555; text-align: center; }
+.escoba-message { font-size: 0.95rem; text-align: center; color: #333; }
+.escoba-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }
+.escoba-actions { display: flex; gap: 8px; }
+.escoba-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; background: #1a73e8; color: white; }
+.escoba-btn:hover { background: #1557b0; }
+.escoba-btn.danger { background: #e53935; }

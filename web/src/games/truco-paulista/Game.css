@@ -1,0 +1,18 @@
+.truco-paulista { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 520px; margin: 0 auto; }
+.tp-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.tp-note { font-size: 0.8rem; color: #7b1fa2; background: #f3e5f5; padding: 4px 12px; border-radius: 12px; }
+.tp-table { display: flex; gap: 32px; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 16px; min-width: 240px; }
+.tp-played { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tp-card { border: 2px solid #ccc; border-radius: 6px; padding: 10px 16px; background: white; font-size: 1.2rem; min-width: 56px; text-align: center; position: relative; }
+.tp-card.empty { color: #aaa; }
+.tp-card.played { border-color: #1a73e8; }
+.tp-card.bot { border-color: #e53935; }
+.tp-card.hand { cursor: pointer; transition: transform 0.1s, border-color 0.15s; }
+.tp-card.hand:hover { border-color: #1a73e8; transform: translateY(-4px); }
+.tp-card.manilha { border-color: #7b1fa2; background: #f3e5f5; }
+.tp-card.disabled { cursor: default; opacity: 0.6; }
+.tp-manilha-mark { font-size: 0.6rem; position: absolute; top: 2px; right: 4px; color: #7b1fa2; font-weight: bold; }
+.tp-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tp-label { font-size: 0.85rem; color: #555; }
+.tp-message { font-size: 0.95rem; text-align: center; color: #333; }
+.tp-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }

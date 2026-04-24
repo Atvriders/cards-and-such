@@ -1,0 +1,21 @@
+.tonk { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 560px; margin: 0 auto; }
+.tonk-header { display: flex; gap: 16px; font-weight: bold; flex-wrap: wrap; justify-content: center; }
+.tonk-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tonk-card { cursor: pointer; border: 2px solid #ccc; border-radius: 6px; padding: 8px 12px; background: white; font-size: 1rem; transition: border-color 0.15s, transform 0.1s; display: flex; flex-direction: column; align-items: center; }
+.tonk-card:hover { transform: translateY(-4px); }
+.tonk-card.meld { border-color: #43a047; background: #f1f8e9; }
+.tonk-card.dead { border-color: #e53935; background: #fff8f8; }
+.tonk-card.selected { border-color: #fb8c00; background: #fff3e0; }
+.tonk-val { font-size: 0.7rem; color: #888; }
+.tonk-label { font-size: 0.85rem; color: #555; }
+.tonk-message { font-size: 0.95rem; text-align: center; color: #333; }
+.tonk-done { font-size: 1.2rem; font-weight: bold; color: #1a73e8; }
+.tonk-draw-actions, .tonk-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tonk-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; background: #1a73e8; color: white; }
+.tonk-btn:hover { background: #1557b0; }
+.tonk-btn.secondary { background: #7b1fa2; }
+.tonk-btn.danger { background: #e53935; }
+.tonk-btn.success { background: #2e7d32; }
+.tonk-legend { display: flex; gap: 16px; font-size: 0.8rem; }
+.legend-meld { color: #43a047; }
+.legend-dead { color: #e53935; }
