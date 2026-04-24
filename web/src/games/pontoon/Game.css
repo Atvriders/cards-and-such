@@ -1,0 +1,100 @@
+.pontoon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a3a6e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+.pontoon-header {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+}
+
+.pontoon-result {
+  background: rgba(0,0,0,0.4);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.pontoon-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.pontoon-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.pontoon-hand {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pontoon-value {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.pontoon-special {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffe040;
+}
+
+.pontoon-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pontoon-actions button {
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e8c84a;
+  color: #1a1a1a;
+  transition: background 0.15s;
+}
+
+.pontoon-actions button:hover:not(:disabled) { background: #f5d85a; }
+.pontoon-actions button:disabled {
+  background: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+}
+.pontoon-actions button.primary { background: #1e7fc9; color: #fff; }
+.pontoon-actions button.primary:hover:not(:disabled) { background: #3095e0; }
+
+.pontoon-game-over {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  text-align: center;
+}

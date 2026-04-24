@@ -1,0 +1,99 @@
+.keno {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #0d2040;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+.keno-header {
+  display: flex;
+  gap: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.4);
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+}
+
+.keno-instruction {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.keno-result {
+  font-size: 1rem;
+  font-weight: 700;
+  background: rgba(255,200,0,0.15);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.keno-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.keno-num {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background 0.1s;
+  user-select: none;
+}
+
+.keno-num:hover { background: rgba(255,255,255,0.18); }
+.keno-num.picked { background: #1e7fc9; border-color: #4ba8e8; }
+.keno-num.drawn { background: rgba(255,200,0,0.25); border-color: #ffe040; }
+.keno-num.match { background: #4caf50; border-color: #80e080; }
+.keno-num.drawn.picked { background: #4caf50; border-color: #80e080; }
+
+.keno-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.keno-actions button {
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #1e7fc9;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.keno-actions button:hover:not(:disabled) { background: #3095e0; }
+.keno-actions button:disabled {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+}
+
+.keno-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  text-align: center;
+}

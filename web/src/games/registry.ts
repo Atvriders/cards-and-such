@@ -430,6 +430,14 @@ import { unitConverterQuizPlugin } from "./unit-converter-quiz/index.js";
 import { percentCalculatorPlugin } from "./percent-calculator/index.js";
 import { geographyQuizPlugin } from "./geography-quiz/index.js";
 import { chemistryQuizPlugin } from "./chemistry-quiz/index.js";
+import { blackjackSwitchPlugin } from "./blackjack-switch/index.js";
+import { spanish21Plugin } from "./spanish-21/index.js";
+import { pontoonPlugin } from "./pontoon/index.js";
+import { videoKenoPlugin } from "./video-keno/index.js";
+import { bonus6Plugin } from "./bonus-6/index.js";
+import { anteUpBlackjackPlugin } from "./ante-up-blackjack/index.js";
+import { casinoHoldemPlugin } from "./casino-holdem/index.js";
+import { mississippiStudPlugin } from "./mississippi-stud/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -863,4 +871,12 @@ export const GAMES: GamePlugin[] = [
   percentCalculatorPlugin as unknown as GamePlugin,
   geographyQuizPlugin as unknown as GamePlugin,
   chemistryQuizPlugin as unknown as GamePlugin,
+  blackjackSwitchPlugin as unknown as GamePlugin,
+  spanish21Plugin as unknown as GamePlugin,
+  pontoonPlugin as unknown as GamePlugin,
+  videoKenoPlugin as unknown as GamePlugin,
+  bonus6Plugin as unknown as GamePlugin,
+  anteUpBlackjackPlugin as unknown as GamePlugin,
+  casinoHoldemPlugin as unknown as GamePlugin,
+  mississippiStudPlugin as unknown as GamePlugin,
 ];
