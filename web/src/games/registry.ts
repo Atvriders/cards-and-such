@@ -1,4 +1,12 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { cannonShotPlugin } from "./cannon-shot/index.js";
+import { archeryTargetPlugin } from "./archery-target/index.js";
+import { dartThrowPlugin } from "./dart-throw/index.js";
+import { axeThrowPlugin } from "./axe-throw/index.js";
+import { pendulumDropPlugin } from "./pendulum-drop/index.js";
+import { marbleDropPlugin } from "./marble-drop/index.js";
+import { catapultCastlePlugin } from "./catapult-castle/index.js";
+import { skeeBallPlugin } from "./skee-ball/index.js";
 import { schafkopfPlugin } from "./schafkopf/index.js";
 import { ohHellPlugin } from "./oh-hell/index.js";
 import { bourrePlugin } from "./bourre/index.js";
@@ -1159,4 +1167,12 @@ export const GAMES: GamePlugin[] = [
   piquetPlugin as unknown as GamePlugin,
   soloWhistPlugin as unknown as GamePlugin,
   bostonPlugin as unknown as GamePlugin,
+  cannonShotPlugin as unknown as GamePlugin,
+  archeryTargetPlugin as unknown as GamePlugin,
+  dartThrowPlugin as unknown as GamePlugin,
+  axeThrowPlugin as unknown as GamePlugin,
+  pendulumDropPlugin as unknown as GamePlugin,
+  marbleDropPlugin as unknown as GamePlugin,
+  catapultCastlePlugin as unknown as GamePlugin,
+  skeeBallPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,33 @@
+.marble-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: sans-serif;
+}
+.marble-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.marble-canvas {
+  border: 2px solid #999;
+  border-radius: 4px;
+  cursor: crosshair;
+  display: block;
+  max-width: 100%;
+}
+.marble-hint { font-size: 13px; color: #555; }
+.marble-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.marble-overlay h2 { font-size: 32px; margin: 0; }
+.marble-overlay p { font-size: 20px; }

@@ -1,0 +1,51 @@
+.axe-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: sans-serif;
+}
+.axe-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.axe-hit { color: #22aa44; }
+.axe-miss { color: #cc2222; }
+.axe-canvas {
+  border: 2px solid #555;
+  display: block;
+  max-width: 100%;
+}
+.axe-controls {
+  display: flex;
+  gap: 12px;
+}
+.axe-throw-btn {
+  padding: 10px 36px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #7a3a00;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.axe-throw-btn:disabled { background: #555; cursor: not-allowed; }
+.axe-hint {
+  font-size: 13px;
+  color: #aaa;
+}
+.axe-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.axe-overlay h2 { font-size: 32px; margin: 0; }
+.axe-overlay p { font-size: 20px; }

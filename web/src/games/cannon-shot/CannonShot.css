@@ -1,0 +1,66 @@
+.cannon-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: sans-serif;
+}
+.cannon-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.cannon-hit { color: #22aa44; }
+.cannon-miss { color: #cc2222; }
+.cannon-canvas {
+  border: 2px solid #333;
+  border-radius: 4px;
+  display: block;
+  max-width: 100%;
+}
+.cannon-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+}
+.cannon-controls label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+}
+.cannon-controls input[type="range"] {
+  flex: 1;
+}
+.cannon-fire-btn {
+  padding: 10px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #cc2222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cannon-fire-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+.cannon-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.cannon-overlay h2 { font-size: 32px; margin: 0; }
+.cannon-overlay p { font-size: 20px; }

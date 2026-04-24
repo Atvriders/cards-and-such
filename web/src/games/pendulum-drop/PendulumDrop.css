@@ -1,0 +1,45 @@
+.pend-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: sans-serif;
+}
+.pend-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.pend-good { color: #22aa44; }
+.pend-ok { color: #cc8800; }
+.pend-canvas {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  display: block;
+  max-width: 100%;
+}
+.pend-release-btn {
+  padding: 10px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #884400;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.pend-release-btn:disabled { background: #999; cursor: not-allowed; }
+.pend-hint { font-size: 13px; color: #555; }
+.pend-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.pend-overlay h2 { font-size: 32px; margin: 0; }
+.pend-overlay p { font-size: 20px; }

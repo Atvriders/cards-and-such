@@ -1,0 +1,51 @@
+.archery-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.archery-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.archery-good { color: #22aa44; }
+.archery-ok { color: #cc8800; }
+.archery-canvas {
+  border: 2px solid #555;
+  border-radius: 4px;
+  cursor: crosshair;
+  touch-action: none;
+  max-width: 100%;
+}
+.archery-hint {
+  font-size: 13px;
+  color: #555;
+}
+.archery-power-bar {
+  width: 300px;
+  height: 12px;
+  background: #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.archery-power-fill {
+  height: 100%;
+  background: linear-gradient(to right, #22aa44, #cc2222);
+  transition: width 0.05s;
+}
+.archery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.archery-overlay h2 { font-size: 32px; margin: 0; }
+.archery-overlay p { font-size: 20px; }

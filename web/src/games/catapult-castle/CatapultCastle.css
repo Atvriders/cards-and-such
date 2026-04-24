@@ -1,0 +1,60 @@
+.catapult-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: sans-serif;
+}
+.catapult-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.catapult-hit { color: #cc4400; }
+.catapult-canvas {
+  border: 2px solid #555;
+  border-radius: 4px;
+  display: block;
+  max-width: 100%;
+}
+.catapult-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 480px;
+  align-items: center;
+}
+.catapult-controls label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+}
+.catapult-controls input[type="range"] { flex: 1; }
+.catapult-fire-btn {
+  padding: 10px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #884400;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.catapult-fire-btn:disabled { background: #999; cursor: not-allowed; }
+.catapult-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.catapult-overlay h2 { font-size: 28px; margin: 0; }
+.catapult-overlay p { font-size: 20px; }
