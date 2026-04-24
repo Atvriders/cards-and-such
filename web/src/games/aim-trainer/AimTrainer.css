@@ -1,0 +1,53 @@
+.aim-trainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.at-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.at-info strong { color: #333; }
+
+.at-arena {
+  position: relative;
+  background: #1a202c;
+  border-radius: 12px;
+  cursor: crosshair;
+  overflow: hidden;
+  border: 2px solid #2d3748;
+}
+
+.at-target {
+  position: absolute;
+  background: radial-gradient(circle at 40% 35%, #fc8181, #e53e3e 60%, #c53030);
+  border: 3px solid #fff;
+  box-shadow: 0 0 12px rgba(229, 62, 62, 0.6);
+  cursor: crosshair;
+  animation: target-pop 0.12s ease-out;
+}
+
+@keyframes target-pop {
+  from { transform: scale(0.3); opacity: 0.5; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.at-ended {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 12px 28px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+  text-align: center;
+}

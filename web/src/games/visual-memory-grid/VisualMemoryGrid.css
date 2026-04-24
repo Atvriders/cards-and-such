@@ -1,0 +1,110 @@
+.visual-memory-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.vmg-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.vmg-info strong { color: #333; }
+
+.vmg-phase-label {
+  font-size: 1rem;
+  color: #718096;
+  font-weight: 600;
+}
+
+.vmg-grid {
+  display: grid;
+  gap: 6px;
+}
+
+.vmg-cell {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: #edf2f7;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.vmg-cell:hover {
+  background: #e2e8f0;
+}
+
+.vmg-cell-lit {
+  background: #3182ce;
+  border-color: #2c5282;
+}
+
+.vmg-cell-selected {
+  background: #3182ce;
+  border-color: #2c5282;
+}
+
+.vmg-cell-correct-reveal {
+  background: #48bb78;
+  border-color: #276749;
+}
+
+.vmg-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.vmg-feedback.correct { color: #276749; background: #f0fff4; border: 2px solid #48bb78; }
+.vmg-feedback.wrong   { color: #c53030; background: #fff5f5; border: 2px solid #fc8181; }
+
+.vmg-next-btn {
+  padding: 8px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #3182ce;
+  color: #fff;
+  cursor: pointer;
+}
+
+.vmg-submit-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #48bb78;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.vmg-submit-btn:hover:not(:disabled) { background: #276749; }
+.vmg-submit-btn:disabled { background: #a0aec0; cursor: default; }
+
+.vmg-ended {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2b6cb0;
+  padding: 16px 32px;
+  border: 2px solid #63b3ed;
+  border-radius: 10px;
+  background: #ebf8ff;
+}

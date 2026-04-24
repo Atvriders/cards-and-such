@@ -634,6 +634,14 @@ import { galaxiesPuzzlePlugin } from "./galaxies-puzzle/index.js";
 import { corralPuzzlePlugin } from "./corral-puzzle/index.js";
 import { countryRoadPlugin } from "./country-road/index.js";
 import { pearlPuzzlePlugin } from "./pearl-puzzle/index.js";
+import { typingWordsPlugin } from "./typing-words/index.js";
+import { typingQuotesPlugin } from "./typing-quotes/index.js";
+import { verbalMemoryPlugin } from "./verbal-memory/index.js";
+import { chimpTestPlugin } from "./chimp-test/index.js";
+import { stroopTestPlugin } from "./stroop-test/index.js";
+import { digitSpanPlugin } from "./digit-span/index.js";
+import { aimTrainerPlugin } from "./aim-trainer/index.js";
+import { visualMemoryGridPlugin } from "./visual-memory-grid/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1271,4 +1279,12 @@ export const GAMES: GamePlugin[] = [
   corralPuzzlePlugin as unknown as GamePlugin,
   countryRoadPlugin as unknown as GamePlugin,
   pearlPuzzlePlugin as unknown as GamePlugin,
+  typingWordsPlugin as unknown as GamePlugin,
+  typingQuotesPlugin as unknown as GamePlugin,
+  verbalMemoryPlugin as unknown as GamePlugin,
+  chimpTestPlugin as unknown as GamePlugin,
+  stroopTestPlugin as unknown as GamePlugin,
+  digitSpanPlugin as unknown as GamePlugin,
+  aimTrainerPlugin as unknown as GamePlugin,
+  visualMemoryGridPlugin as unknown as GamePlugin,
 ];

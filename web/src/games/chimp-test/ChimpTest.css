@@ -1,0 +1,101 @@
+.chimp-test {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.ct-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ct-info strong { color: #333; }
+
+.ct-feedback {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 6px;
+  min-height: 28px;
+}
+
+.ct-feedback.wrong   { color: #c53030; background: #fff5f5; border: 1px solid #fc8181; }
+.ct-feedback.correct { color: #276749; background: #f0fff4; border: 1px solid #48bb78; }
+
+.ct-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 64px);
+  grid-template-rows: repeat(5, 64px);
+  gap: 6px;
+}
+
+.ct-cell {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.08s;
+  background: #3182ce;
+  color: #fff;
+}
+
+.ct-cell:hover { background: #2c5282; transform: scale(1.06); }
+
+.ct-cell.ct-empty {
+  background: #edf2f7;
+  cursor: default;
+}
+
+.ct-cell.ct-empty:hover { background: #edf2f7; transform: none; }
+
+.ct-cell.ct-clicked {
+  background: #48bb78;
+  cursor: default;
+}
+
+.ct-cell.ct-clicked:hover { background: #48bb78; transform: none; }
+
+.ct-start-btn {
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #e53e3e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.ct-start-btn:hover { background: #c53030; }
+
+.ct-instruction {
+  font-size: 1.1rem;
+  color: #555;
+  padding: 8px 16px;
+  background: #ebf8ff;
+  border-radius: 8px;
+  border: 1px solid #bee3f8;
+}
+
+.ct-ended {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2b6cb0;
+  padding: 16px 32px;
+  border: 2px solid #63b3ed;
+  border-radius: 10px;
+  background: #ebf8ff;
+}

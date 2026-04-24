@@ -1,0 +1,78 @@
+.typing-quotes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 640px;
+  margin: 0 auto;
+  user-select: none;
+}
+
+.tq-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tq-info strong { color: #333; }
+
+.tq-quote {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.tq-char.pending { color: #aaa; }
+.tq-char.correct { color: #276749; }
+.tq-char.wrong   { color: #c53030; background: #fff5f5; border-radius: 2px; }
+
+.tq-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tq-progress-fill {
+  height: 100%;
+  background: #48bb78;
+  transition: width 0.08s linear;
+}
+
+.tq-input {
+  width: 100%;
+  min-height: 80px;
+  font-size: 1rem;
+  padding: 12px;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  resize: none;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.tq-input:focus { border-color: #3182ce; }
+
+.tq-ended {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #276749;
+  padding: 10px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+  text-align: center;
+}
