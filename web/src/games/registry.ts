@@ -864,6 +864,14 @@ import { prefixSuffixPlugin } from "./prefix-suffix/index.js";
 import { grammarFixPlugin } from "./grammar-fix/index.js";
 import { anagramPairPlugin } from "./anagram-pair/index.js";
 import { rhymeFinderPlugin } from "./rhyme-finder/index.js";
+import { kalahPlugin } from "./kalah/index.js";
+import { brandubPlugin } from "./brandub/index.js";
+import { tawlbwrddPlugin } from "./tawlbwrdd/index.js";
+import { connect6Plugin } from "./connect6/index.js";
+import { havannahPlugin } from "./havannah/index.js";
+import { hareAndHoundsPlugin } from "./hare-and-hounds/index.js";
+import { wolfAndSheepPlugin } from "./wolf-and-sheep/index.js";
+import { cathedralGamePlugin } from "./cathedral-game/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1731,4 +1739,12 @@ export const GAMES: GamePlugin[] = [
   grammarFixPlugin as unknown as GamePlugin,
   anagramPairPlugin as unknown as GamePlugin,
   rhymeFinderPlugin as unknown as GamePlugin,
+  kalahPlugin as unknown as GamePlugin,
+  brandubPlugin as unknown as GamePlugin,
+  tawlbwrddPlugin as unknown as GamePlugin,
+  connect6Plugin as unknown as GamePlugin,
+  havannahPlugin as unknown as GamePlugin,
+  hareAndHoundsPlugin as unknown as GamePlugin,
+  wolfAndSheepPlugin as unknown as GamePlugin,
+  cathedralGamePlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,39 @@
+.havannah {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+.havannah-status { font-size: 1rem; font-weight: 600; color: #333; min-height: 1.4em; }
+.havannah-status.win { color: #2a7d2e; }
+.havannah-status.loss { color: #b02020; }
+.havannah-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.havannah-row {
+  display: flex;
+  gap: 2px;
+}
+.havannah-hex {
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  background: #d4a843;
+  border: 1px solid #7a5a20;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.1s;
+}
+.havannah-hex.corner { background: #c06020; border-color: #804010; }
+.havannah-hex.edge { background: #d4c080; }
+.havannah-hex:hover { background: #e8d870; }
+.havannah-hex.p0 { background: #1a1a1a; color: white; cursor: default; }
+.havannah-hex.p1 { background: #f0f0f0; color: #333; cursor: default; }
+.havannah-hex.last { outline: 3px solid #e05000; }
+.havannah-legend { font-size: 0.8rem; color: #555; max-width: 320px; text-align: center; }

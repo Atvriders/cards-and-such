@@ -1,0 +1,39 @@
+.tawlbwrdd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+.tawlbwrdd-status { font-size: 1rem; font-weight: 600; color: #333; min-height: 1.4em; }
+.tawlbwrdd-status.win { color: #2a7d2e; }
+.tawlbwrdd-status.loss { color: #b02020; }
+.tawlbwrdd-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(11, 44px);
+  grid-template-rows: repeat(11, 44px);
+  border: 2px solid #444;
+  gap: 1px;
+  background: #444;
+}
+.tb-cell {
+  background: #c8a96e;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.1s;
+  position: relative;
+}
+.tb-cell.corner { background: #7a5a2a; }
+.tb-cell.throne { background: #9a7a3a; }
+.tb-cell.selected { background: #a0d0ff; }
+.tb-cell.legal { background: #d0f0c0; }
+.tb-cell.legal::after {
+  content: ""; position: absolute;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(40,140,40,0.5);
+}
+.tb-cell:hover { background: #d8c080; }
+.tawlbwrdd-legend { font-size: 0.75rem; color: #555; }

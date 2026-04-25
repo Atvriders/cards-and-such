@@ -1,0 +1,47 @@
+.kalah {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+.kalah-status { font-size: 1rem; font-weight: 600; color: #333; min-height: 1.4em; }
+.kalah-status.win { color: #2a7d2e; }
+.kalah-status.loss { color: #b02020; }
+.kalah-board {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #7a5230;
+  border-radius: 16px;
+  padding: 12px;
+}
+.kalah-store {
+  width: 60px; height: 130px;
+  background: #f5e0c0;
+  border-radius: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; font-weight: 700; color: #333;
+  border: 3px solid #4a2a10;
+  flex-shrink: 0;
+}
+.kalah-store.my-store { border-color: #1a50aa; background: #dde8ff; }
+.kalah-pits { display: flex; flex-direction: column; gap: 8px; }
+.kalah-row { display: flex; gap: 8px; }
+.kalah-pit {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: #f5e0c0;
+  border: 3px solid #4a2a10;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 700; color: #333;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.kalah-pit:hover:not(:disabled) { background: #e8f0ff; transform: scale(1.05); }
+.kalah-pit:disabled { cursor: default; opacity: 0.6; }
+.kalah-pit.active { border-color: #1a50aa; background: #c8d8ff; }
+.kalah-pit.empty { opacity: 0.45; cursor: default; }
+.kalah-pit.bot-pit { border-color: #882020; background: #ffe0d0; }
+.kalah-score { font-size: 0.8rem; color: #666; }

@@ -1,0 +1,29 @@
+.wolf-sheep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+.wolf-sheep-status { font-size: 1rem; font-weight: 600; color: #333; min-height: 1.4em; }
+.wolf-sheep-status.win { color: #2a7d2e; }
+.wolf-sheep-status.loss { color: #b02020; }
+.wolf-sheep-board {
+  display: inline-grid;
+  grid-template-columns: repeat(8, 56px);
+  grid-template-rows: repeat(8, 56px);
+  border: 2px solid #333;
+}
+.ws-cell {
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.ws-cell.light { background: #f0d9b5; }
+.ws-cell.dark { background: #b58863; }
+.ws-cell.legal { background: #8bc34a; cursor: pointer; }
+.ws-cell.selected { background: #ffeb3b; }
+.wolf-sheep-legend { font-size: 0.8rem; color: #555; }

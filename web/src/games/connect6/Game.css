@@ -1,0 +1,52 @@
+.connect6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  font-family: system-ui, sans-serif;
+}
+.connect6-status { font-size: 1rem; font-weight: 600; color: #333; min-height: 1.4em; }
+.connect6-status.win { color: #2a7d2e; }
+.connect6-status.loss { color: #b02020; }
+.connect6-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(19, 28px);
+  grid-template-rows: repeat(19, 28px);
+  background: #c8940a;
+  border: 2px solid #7a5a00;
+  gap: 0;
+}
+.connect6-cell {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+}
+.connect6-cell::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  transform: translate(-50%, -50%);
+  border-right: 1px solid #7a5a00;
+  border-bottom: 1px solid #7a5a00;
+}
+.connect6-cell:hover::after {
+  content: "";
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+}
+.connect6-stone {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+.connect6-stone.black { background: radial-gradient(circle at 35% 35%, #555, #000); box-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+.connect6-stone.white { background: radial-gradient(circle at 35% 35%, #fff, #ccc); box-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
+.connect6-stone.last { outline: 3px solid #e05000; outline-offset: 1px; border-radius: 50%; }
+.connect6-info { font-size: 0.8rem; color: #555; }
