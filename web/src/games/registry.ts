@@ -949,6 +949,14 @@ import { paintingPuzzlePlugin } from "./painting-puzzle/index.js";
 import { triathlonMiniPlugin } from "./triathlon-mini/index.js";
 import { marathonPacerPlugin } from "./marathon-pacer/index.js";
 import { poleClimbingPlugin } from "./pole-climbing/index.js";
+import { trampolineBouncePlugin } from "./trampoline-bounce/index.js";
+import { seesawBalancePlugin } from "./seesaw-balance/index.js";
+import { boomerangTossPlugin } from "./boomerang-toss/index.js";
+import { bottleSpinPlugin } from "./bottle-spin/index.js";
+import { diceRunnerPlugin } from "./dice-runner/index.js";
+import { rollAndAddPlugin } from "./roll-and-add/index.js";
+import { cardSharkPlugin } from "./card-shark/index.js";
+import { matchThreeSagaPlugin } from "./match-three-saga/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1901,4 +1909,12 @@ export const GAMES: GamePlugin[] = [
   triathlonMiniPlugin as unknown as GamePlugin,
   marathonPacerPlugin as unknown as GamePlugin,
   poleClimbingPlugin as unknown as GamePlugin,
+  trampolineBouncePlugin as unknown as GamePlugin,
+  seesawBalancePlugin as unknown as GamePlugin,
+  boomerangTossPlugin as unknown as GamePlugin,
+  bottleSpinPlugin as unknown as GamePlugin,
+  diceRunnerPlugin as unknown as GamePlugin,
+  rollAndAddPlugin as unknown as GamePlugin,
+  cardSharkPlugin as unknown as GamePlugin,
+  matchThreeSagaPlugin as unknown as GamePlugin,
 ];

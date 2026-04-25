@@ -1,0 +1,99 @@
+.trampoline-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.trampoline-header {
+  display: flex;
+  gap: 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.trampoline-field {
+  position: relative;
+  background: linear-gradient(180deg, #87ceeb 0%, #e0f7ff 70%, #c8f0c0 100%);
+  border: 2px solid #555;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.bounce-window {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 220, 80, 0.18);
+  border-top: 2px dashed #00cc44;
+  border-bottom: 2px dashed #00cc44;
+  pointer-events: none;
+}
+
+.trampoline-mat {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  height: 16px;
+  background: linear-gradient(90deg, #e07030, #ff9944, #e07030);
+  border-radius: 4px;
+  border: 2px solid #a04010;
+}
+
+.trampoline-jumper {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle, #4488ff 60%, #2255cc 100%);
+  border-radius: 50%;
+  border: 3px solid #1133aa;
+  transition: background 0.1s;
+}
+
+.trampoline-jumper.in-window {
+  background: radial-gradient(circle, #44ff88 60%, #00cc44 100%);
+  border-color: #008833;
+}
+
+.trampoline-jumper.missed {
+  background: radial-gradient(circle, #ff4444 60%, #cc0000 100%);
+  border-color: #880000;
+}
+
+.trampoline-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trampoline-message {
+  background: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.trampoline-prompt {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  pointer-events: none;
+}
+
+.trampoline-hint {
+  font-size: 0.8rem;
+  color: #666;
+}

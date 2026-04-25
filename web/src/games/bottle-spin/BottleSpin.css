@@ -1,0 +1,54 @@
+.bottle-spin-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.bottle-spin-header {
+  display: flex;
+  gap: 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.bottle-spin-svg {
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff8e8 60%, #ffe0a0 100%);
+}
+
+.bottle-spin-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bspin-btn {
+  padding: 12px 36px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #3366cc;
+  color: #fff;
+}
+
+.bspin-btn:hover {
+  opacity: 0.85;
+}
+
+.bspin-stop {
+  background: #cc2200;
+}
+
+.bspin-over {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}

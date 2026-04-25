@@ -1,0 +1,107 @@
+.card-shark-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.cs-header {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.cs-cards {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.cs-card-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: bold;
+}
+
+.cs-value {
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.cs-arrow {
+  font-size: 2rem;
+  color: #888;
+}
+
+.cs-result {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 6px 16px;
+  border-radius: 8px;
+}
+
+.cs-result-correct {
+  background: #ccffcc;
+  color: #226622;
+}
+
+.cs-result-wrong {
+  background: #ffcccc;
+  color: #882222;
+}
+
+.cs-result-tie {
+  background: #ffffcc;
+  color: #666600;
+}
+
+.cs-controls {
+  display: flex;
+  gap: 20px;
+}
+
+.cs-btn {
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.cs-btn-higher {
+  background: #2266cc;
+}
+
+.cs-btn-lower {
+  background: #cc4422;
+}
+
+.cs-btn:hover {
+  opacity: 0.85;
+}
+
+.cs-over {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.cs-hint {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
