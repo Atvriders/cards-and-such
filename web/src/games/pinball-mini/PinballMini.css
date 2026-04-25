@@ -1,0 +1,86 @@
+.pinball-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.pinball-header {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.pinball-field {
+  position: relative;
+  background: #0d0d2b;
+  border: 3px solid #333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.pinball-ball {
+  position: absolute;
+  background: #ffeb3b;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffeb3b;
+  transform: translate(-50%, -50%);
+}
+
+.pinball-bumper {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+  transition: background 0.1s;
+}
+
+.pinball-bumper--idle {
+  background: #7c4dff;
+  box-shadow: 0 0 10px #7c4dff;
+}
+
+.pinball-bumper--hit {
+  background: #ff4081;
+  box-shadow: 0 0 16px #ff4081;
+}
+
+.pinball-paddle {
+  position: absolute;
+  background: #4fc3f7;
+  border-radius: 6px;
+  box-shadow: 0 0 6px #4fc3f7;
+}
+
+.pinball-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.pinball-controls button {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 2px solid #333;
+  background: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pinball-controls button:hover { background: #e0e0e0; }
+
+.pinball-hint {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.pinball-overlay h2 { font-size: 1.8rem; margin: 0; }

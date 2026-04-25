@@ -1,0 +1,77 @@
+.sub-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.sub-header {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.sub-grid {
+  display: inline-grid;
+  gap: 3px;
+  background: #1565c0;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.sub-cell {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: background 0.15s;
+}
+
+.sub-cell--unknown {
+  background: #1976d2;
+  border: 1px solid #1565c0;
+}
+
+.sub-cell--unknown:hover {
+  background: #42a5f5;
+}
+
+.sub-cell--miss {
+  background: #0d47a1;
+  color: #90caf9;
+  cursor: default;
+  font-size: 0.7rem;
+}
+
+.sub-cell--hit {
+  background: #ff7043;
+  cursor: default;
+}
+
+.sub-cell--sunk {
+  background: #b71c1c;
+  cursor: default;
+}
+
+.sub-status {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.sub-overlay h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.sub-hint {
+  font-size: 0.8rem;
+  color: #888;
+}

@@ -764,6 +764,14 @@ import { demonPlugin } from "./demon/index.js";
 import { coloradoPlugin } from "./colorado/index.js";
 import { algerianPatiencePlugin } from "./algerian-patience/index.js";
 import { interregnumPlugin } from "./interregnum/index.js";
+import { boxerKnockoutPlugin } from "./boxer-knockout/index.js";
+import { tankBattlePlugin } from "./tank-battle/index.js";
+import { pixelRunnerPlugin } from "./pixel-runner/index.js";
+import { castleDefenderPlugin } from "./castle-defender/index.js";
+import { submarineHuntPlugin } from "./submarine-hunt/index.js";
+import { pinballMiniPlugin } from "./pinball-mini/index.js";
+import { ufoRescuePlugin } from "./ufo-rescue/index.js";
+import { motorcycleJumpPlugin } from "./motorcycle-jump/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1531,4 +1539,12 @@ export const GAMES: GamePlugin[] = [
   coloradoPlugin as unknown as GamePlugin,
   algerianPatiencePlugin as unknown as GamePlugin,
   interregnumPlugin as unknown as GamePlugin,
+  boxerKnockoutPlugin as unknown as GamePlugin,
+  tankBattlePlugin as unknown as GamePlugin,
+  pixelRunnerPlugin as unknown as GamePlugin,
+  castleDefenderPlugin as unknown as GamePlugin,
+  submarineHuntPlugin as unknown as GamePlugin,
+  pinballMiniPlugin as unknown as GamePlugin,
+  ufoRescuePlugin as unknown as GamePlugin,
+  motorcycleJumpPlugin as unknown as GamePlugin,
 ];

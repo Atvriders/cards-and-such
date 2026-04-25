@@ -1,0 +1,93 @@
+.ufo-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.ufo-header {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.ufo-field {
+  position: relative;
+  background: #0a0020;
+  border: 3px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ufo-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #3e2723;
+  border-top: 3px solid #795548;
+}
+
+.ufo-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, white 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.2;
+}
+
+.ufo-ship {
+  position: absolute;
+  font-size: 2rem;
+  transform: translate(-50%, 0);
+  transition: left 0.05s, top 0.05s;
+}
+
+.ufo-beam {
+  position: absolute;
+  background: linear-gradient(to bottom, rgba(255,255,100,0.5), rgba(255,255,100,0.1));
+  width: 24px;
+  transform: translateX(-50%);
+}
+
+.ufo-human {
+  position: absolute;
+  font-size: 1rem;
+  transform: translate(-50%, 0);
+  transition: top 0.1s;
+}
+
+.ufo-human--rescued {
+  opacity: 0.3;
+}
+
+.ufo-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.ufo-controls button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 2px solid #333;
+  background: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.ufo-controls button:hover { background: #e0e0e0; }
+.ufo-controls button.active { background: #ffee58; }
+
+.ufo-hint {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.ufo-overlay h2 { font-size: 1.8rem; margin: 0; }
