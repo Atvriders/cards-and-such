@@ -1,0 +1,12 @@
+.triplets { display: flex; flex-direction: column; gap: 12px; padding: 16px; user-select: none; }
+.tri-info { display: flex; gap: 16px; font-size: 14px; font-weight: 600; align-items: center; }
+.tri-grid { display: grid; grid-template-columns: repeat(6, 70px); gap: 8px; }
+.tri-pile { display: flex; flex-direction: column; gap: 2px; align-items: center; }
+.tri-placeholder { width: 60px; height: 84px; border: 2px dashed #333; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #444; font-size: 10px; }
+.tri-selected { outline: 3px solid #f0c040; border-radius: 4px; }
+.tri-card-wrap { cursor: pointer; }
+.tri-card-wrap:hover { opacity: 0.85; }
+.tri-btn { padding: 4px 12px; border: 1px solid #555; border-radius: 4px; background: #2a2a2a; color: #eee; cursor: pointer; font-size: 12px; }
+.tri-btn:hover { background: #444; }
+.tri-btn:disabled { opacity: 0.4; cursor: default; }
+.tri-label { font-size: 10px; color: #aaa; }

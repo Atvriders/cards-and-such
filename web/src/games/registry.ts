@@ -816,6 +816,14 @@ import { targetShooterPlugin } from "./target-shooter/index.js";
 import { marbleRollPlugin } from "./marble-roll/index.js";
 import { cupFlipPlugin } from "./cup-flip/index.js";
 import { slingshotLaunchPlugin } from "./slingshot-launch/index.js";
+import { australianPatiencePlugin } from "./australian-patience/index.js";
+import { betsyRossPlugin } from "./betsy-ross/index.js";
+import { florentinePlugin } from "./florentine-patience/index.js";
+import { fourLeafCloverPlugin } from "./four-leaf-clover/index.js";
+import { kingsRowPlugin } from "./kings-row/index.js";
+import { precedencePlugin } from "./precedence/index.js";
+import { tripletsPlugin } from "./triplets/index.js";
+import { paganiniPlugin } from "./paganini/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1635,4 +1643,12 @@ export const GAMES: GamePlugin[] = [
   marbleRollPlugin as unknown as GamePlugin,
   cupFlipPlugin as unknown as GamePlugin,
   slingshotLaunchPlugin as unknown as GamePlugin,
+  australianPatiencePlugin as unknown as GamePlugin,
+  betsyRossPlugin as unknown as GamePlugin,
+  florentinePlugin as unknown as GamePlugin,
+  fourLeafCloverPlugin as unknown as GamePlugin,
+  kingsRowPlugin as unknown as GamePlugin,
+  precedencePlugin as unknown as GamePlugin,
+  tripletsPlugin as unknown as GamePlugin,
+  paganiniPlugin as unknown as GamePlugin,
 ];
