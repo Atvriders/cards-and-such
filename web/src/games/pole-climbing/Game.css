@@ -1,0 +1,25 @@
+.pole-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 360px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.pole-header { display: flex; justify-content: space-between; align-items: center; background: #fbe9e7; border-radius: 8px; padding: 8px 12px; }
+.pole-title { font-weight: 700; font-size: 1.1rem; }
+.pole-score { font-weight: 700; color: #bf360c; }
+.pole-arena { display: flex; gap: 16px; align-items: flex-end; justify-content: center; margin: 8px 0; }
+.pole-visual { width: 24px; background: #8d6e63; border-radius: 4px; position: relative; min-height: 200px; }
+.pole-climber { position: absolute; left: 50%; transform: translateX(-50%); font-size: 1.4rem; transition: bottom 0.1s; }
+.pole-obstacle { position: absolute; font-size: 1rem; }
+.pole-obstacle.left { left: -16px; }
+.pole-obstacle.right { right: -16px; }
+.pole-bars { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.pole-bar-row { display: flex; align-items: center; gap: 6px; }
+.pole-bar-label { font-size: 0.8rem; width: 56px; color: #555; }
+.pole-bar { flex: 1; height: 12px; background: #eee; border-radius: 6px; overflow: hidden; }
+.pole-bar-fill { height: 100%; border-radius: 6px; transition: width 0.05s; }
+.pole-stats { font-size: 0.83rem; color: #555; text-align: center; }
+.pole-controls { display: flex; gap: 8px; }
+.pole-btn { flex: 1; padding: 16px 0; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.pole-btn.left { background: #ef5350; color: #fff; }
+.pole-btn.left:hover { background: #c62828; }
+.pole-btn.right { background: #42a5f5; color: #fff; }
+.pole-btn.right:hover { background: #1565c0; }
+.pole-btn:active { transform: scale(0.97); }
+.pole-done { text-align: center; padding: 16px; background: #fbe9e7; border-radius: 8px; }
+.pole-done-score { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }

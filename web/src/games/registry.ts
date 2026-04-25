@@ -941,6 +941,14 @@ import { iceCreamStandPlugin } from "./ice-cream-stand/index.js";
 import { fireworkShowPlugin } from "./firework-show/index.js";
 import { swimmingLapsPlugin } from "./swimming-laps/index.js";
 import { kiteFightPlugin } from "./kite-fight/index.js";
+import { tacoTruckPlugin } from "./taco-truck/index.js";
+import { pastaShopPlugin } from "./pasta-shop/index.js";
+import { donutShopPlugin } from "./donut-shop/index.js";
+import { bridgeBuilderPuzzlePlugin } from "./bridge-builder-puzzle/index.js";
+import { paintingPuzzlePlugin } from "./painting-puzzle/index.js";
+import { triathlonMiniPlugin } from "./triathlon-mini/index.js";
+import { marathonPacerPlugin } from "./marathon-pacer/index.js";
+import { poleClimbingPlugin } from "./pole-climbing/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1885,4 +1893,12 @@ export const GAMES: GamePlugin[] = [
   fireworkShowPlugin as unknown as GamePlugin,
   swimmingLapsPlugin as unknown as GamePlugin,
   kiteFightPlugin as unknown as GamePlugin,
+  tacoTruckPlugin as unknown as GamePlugin,
+  pastaShopPlugin as unknown as GamePlugin,
+  donutShopPlugin as unknown as GamePlugin,
+  bridgeBuilderPuzzlePlugin as unknown as GamePlugin,
+  paintingPuzzlePlugin as unknown as GamePlugin,
+  triathlonMiniPlugin as unknown as GamePlugin,
+  marathonPacerPlugin as unknown as GamePlugin,
+  poleClimbingPlugin as unknown as GamePlugin,
 ];
