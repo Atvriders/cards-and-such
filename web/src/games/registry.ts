@@ -840,6 +840,14 @@ import { samuraiDicePlugin } from "./samurai-dice/index.js";
 import { diceBaseballPlugin } from "./dice-baseball/index.js";
 import { diceGolfPlugin } from "./dice-golf/index.js";
 import { straightOrBustPlugin } from "./straight-or-bust/index.js";
+import { mateIn1Plugin } from "./mate-in-1/index.js";
+import { mateIn2Plugin } from "./mate-in-2/index.js";
+import { mateIn3Plugin } from "./mate-in-3/index.js";
+import { chessTacticsPlugin } from "./chess-tactics/index.js";
+import { chessEndgameKrPlugin } from "./chess-endgame-kr/index.js";
+import { chessEndgameKqkPlugin } from "./chess-endgame-kqk/index.js";
+import { pawnPromotionPuzzlePlugin } from "./pawn-promotion-puzzle/index.js";
+import { chessBackRankPlugin } from "./chess-back-rank/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1683,4 +1691,12 @@ export const GAMES: GamePlugin[] = [
   diceBaseballPlugin as unknown as GamePlugin,
   diceGolfPlugin as unknown as GamePlugin,
   straightOrBustPlugin as unknown as GamePlugin,
+  mateIn1Plugin as unknown as GamePlugin,
+  mateIn2Plugin as unknown as GamePlugin,
+  mateIn3Plugin as unknown as GamePlugin,
+  chessTacticsPlugin as unknown as GamePlugin,
+  chessEndgameKrPlugin as unknown as GamePlugin,
+  chessEndgameKqkPlugin as unknown as GamePlugin,
+  pawnPromotionPuzzlePlugin as unknown as GamePlugin,
+  chessBackRankPlugin as unknown as GamePlugin,
 ];
