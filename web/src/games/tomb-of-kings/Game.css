@@ -1,0 +1,29 @@
+.tok-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 480px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.tok-header { background: #4a148c; color: #fff; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+.tok-title { font-weight: 700; font-size: 1.1rem; }
+.tok-stats { font-size: 0.82rem; display: flex; gap: 10px; }
+.tok-hp-bar { height: 8px; background: #333; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+.tok-hp-fill { height: 100%; background: #4caf50; border-radius: 4px; transition: width 0.3s; }
+.tok-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.tok-cell { width: 100%; aspect-ratio: 1; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; border: 1px solid #ddd; background: #9e9e9e; }
+.tok-cell-hidden { background: #4a4a5a; border-color: #3a3a4a; }
+.tok-cell-start { background: #81c784; border-color: #388e3c; }
+.tok-cell-exit { background: #fff176; border-color: #f9a825; }
+.tok-cell-treasure { background: #ffd54f; border-color: #ff8f00; }
+.tok-cell-trap { background: #ef9a9a; border-color: #c62828; }
+.tok-cell-monster { background: #ce93d8; border-color: #6a1b9a; }
+.tok-cell-shrine { background: #80cbc4; border-color: #00695c; }
+.tok-cell-empty { background: #f5f5f5; border-color: #ccc; }
+.tok-cell-wall { background: #424242; border-color: #212121; }
+.tok-cell-player { background: #1565c0; border-color: #0d47a1; color: #fff; font-weight: 700; }
+.tok-controls { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; max-width: 160px; margin: 0 auto; }
+.tok-btn { padding: 8px; background: #311b92; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+.tok-btn:hover { background: #4527a0; }
+.tok-btn-empty { background: transparent; cursor: default; }
+.tok-log { max-height: 80px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.tok-log-line { font-size: 0.75rem; color: #555; }
+.tok-done { text-align: center; padding: 20px; background: #fff9c4; border-radius: 8px; font-weight: 700; }
+.tok-dead { text-align: center; padding: 16px; background: #ffebee; border-radius: 8px; color: #b71c1c; }
+.tok-legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.72rem; }
+.tok-legend-item { display: flex; align-items: center; gap: 3px; }
+.tok-legend-dot { width: 12px; height: 12px; border-radius: 2px; border: 1px solid #aaa; }

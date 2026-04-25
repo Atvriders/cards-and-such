@@ -848,6 +848,14 @@ import { chessEndgameKrPlugin } from "./chess-endgame-kr/index.js";
 import { chessEndgameKqkPlugin } from "./chess-endgame-kqk/index.js";
 import { pawnPromotionPuzzlePlugin } from "./pawn-promotion-puzzle/index.js";
 import { chessBackRankPlugin } from "./chess-back-rank/index.js";
+import { textAdventureMiniPlugin } from "./text-adventure-mini/index.js";
+import { cyoaFantasyPlugin } from "./cyoa-fantasy/index.js";
+import { cyoaHorrorPlugin } from "./cyoa-horror/index.js";
+import { questTavernPlugin } from "./quest-tavern/index.js";
+import { monsterSlayerPlugin } from "./monster-slayer/index.js";
+import { lootGoblinPlugin } from "./loot-goblin/index.js";
+import { arenaChampionPlugin } from "./arena-champion/index.js";
+import { tombOfKingsPlugin } from "./tomb-of-kings/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1699,4 +1707,12 @@ export const GAMES: GamePlugin[] = [
   chessEndgameKqkPlugin as unknown as GamePlugin,
   pawnPromotionPuzzlePlugin as unknown as GamePlugin,
   chessBackRankPlugin as unknown as GamePlugin,
+  textAdventureMiniPlugin as unknown as GamePlugin,
+  cyoaFantasyPlugin as unknown as GamePlugin,
+  cyoaHorrorPlugin as unknown as GamePlugin,
+  questTavernPlugin as unknown as GamePlugin,
+  monsterSlayerPlugin as unknown as GamePlugin,
+  lootGoblinPlugin as unknown as GamePlugin,
+  arenaChampionPlugin as unknown as GamePlugin,
+  tombOfKingsPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,25 @@
+.qt-wrap { display: flex; flex-direction: column; gap: 10px; padding: 16px; max-width: 540px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.qt-header { background: #4e342e; color: #ffcc80; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+.qt-title { font-weight: 700; font-size: 1.1rem; }
+.qt-stats { font-size: 0.85rem; display: flex; gap: 12px; }
+.qt-section { font-weight: 600; font-size: 0.85rem; color: #4e342e; border-bottom: 2px solid #bcaaa4; padding-bottom: 3px; margin-bottom: 6px; }
+.qt-list { display: flex; flex-direction: column; gap: 6px; }
+.qt-card { background: #fbe9e7; border: 1px solid #bcaaa4; border-radius: 8px; padding: 8px 10px; font-size: 0.82rem; }
+.qt-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.qt-card-name { font-weight: 600; }
+.qt-card-detail { color: #795548; }
+.qt-card-desc { color: #5d4037; font-size: 0.78rem; }
+.qt-btn { padding: 4px 10px; background: #6d4c41; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+.qt-btn:hover { background: #4e342e; }
+.qt-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.qt-quest-btn { padding: 4px 8px; background: #2e7d32; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem; margin: 2px; }
+.qt-quest-btn:hover { background: #1b5e20; }
+.qt-end-day { width: 100%; padding: 10px; background: #4e342e; color: #ffcc80; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 1rem; }
+.qt-end-day:hover { background: #3e2723; }
+.qt-log { background: #f5f5f5; border-radius: 6px; padding: 8px; max-height: 90px; overflow-y: auto; }
+.qt-log-line { font-size: 0.75rem; color: #555; }
+.qt-done { text-align: center; padding: 20px; background: #e8f5e9; border-radius: 8px; }
+.qt-done-title { font-size: 1.1rem; font-weight: 700; color: #2e7d32; margin-bottom: 6px; }
+.qt-done-stats { font-size: 0.85rem; color: #444; }
+.qt-active { background: #e8f5e9; border-color: #a5d6a7; }
+.qt-active-line { font-size: 0.78rem; color: #2e7d32; }

@@ -1,0 +1,11 @@
+.ta-wrap { display: flex; flex-direction: column; gap: 14px; padding: 16px; max-width: 520px; margin: 0 auto; font-family: Georgia, serif; }
+.ta-header { background: #1a237e; color: #fff; border-radius: 8px; padding: 10px 14px; font-weight: 700; font-size: 1.1rem; }
+.ta-breadcrumb { font-size: 0.72rem; color: #888; }
+.ta-scene { background: #f5f0e8; border: 1px solid #c8b89a; border-radius: 8px; padding: 14px; font-size: 0.95rem; line-height: 1.55; color: #3e2a10; min-height: 100px; }
+.ta-choices { display: flex; flex-direction: column; gap: 8px; }
+.ta-choice { padding: 10px 14px; background: #fff; border: 2px solid #8d6e63; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-family: Georgia, serif; text-align: left; color: #3e2a10; transition: background 0.15s; }
+.ta-choice:hover { background: #efebe9; border-color: #5d4037; }
+.ta-done { text-align: center; padding: 20px; background: #e8f5e9; border-radius: 8px; }
+.ta-done-title { font-size: 1.1rem; font-weight: 700; color: #2e7d32; margin-bottom: 6px; }
+.ta-score { font-size: 0.9rem; color: #555; }
+.ta-visited { font-size: 0.72rem; color: #aaa; margin-top: 4px; }
