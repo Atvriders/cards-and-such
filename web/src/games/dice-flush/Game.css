@@ -1,0 +1,12 @@
+.dice-game-wrap { display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px;font-family:sans-serif;max-width:480px;margin:0 auto; }
+.dice-game-header { display:flex;justify-content:space-between;width:100%;font-size:0.95rem; }
+.dice-row { display:flex;gap:12px;justify-content:center; }
+.die { width:60px;height:60px;border:3px solid #555;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;background:#fff;box-shadow:2px 4px 8px rgba(0,0,0,0.15); }
+.dice-btns { display:flex;gap:16px; }
+.dice-btn { padding:12px 28px;border-radius:8px;border:none;font-size:1.1rem;font-weight:700;cursor:pointer;background:#3498db;color:#fff; }
+.dice-btn.even { background:#27ae60; }
+.dice-btn.odd { background:#e74c3c; }
+.dice-btn:hover { opacity:0.85; }
+.result-msg { font-size:1.2rem;font-weight:700;padding:8px 20px;border-radius:8px; }
+.result-msg.correct { color:#27ae60; }
+.result-msg.wrong { color:#e74c3c; }

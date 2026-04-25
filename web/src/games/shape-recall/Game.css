@@ -1,0 +1,3 @@
+.memory-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;font-family:sans-serif;max-width:440px;margin:0 auto; }
+.memory-header { display:flex;justify-content:space-between;width:100%;font-size:1rem;font-weight:700; }
+.memory-btn { padding:10px 28px;border-radius:8px;border:none;background:#3498db;color:#fff;font-size:1rem;font-weight:700;cursor:pointer; }

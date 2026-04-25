@@ -969,6 +969,38 @@ import { ticTacToeToroidalPlugin } from "./tic-tac-toe-toroidal/index.js";
 import { numericTicTacToePlugin } from "./numeric-tic-tac-toe/index.js";
 import { chessPuzzleForkPlugin } from "./chess-puzzle-fork/index.js";
 import { gomokuTacticPlugin } from "./gomoku-tactic/index.js";
+import { weatherQuizPlugin } from "./weather-quiz/index.js";
+import { musicDecadeQuizPlugin } from "./music-decade-quiz/index.js";
+import { tvShowQuizPlugin } from "./tv-show-quiz/index.js";
+import { videoGameQuizPlugin } from "./video-game-quiz/index.js";
+import { countryFlagQuizPlugin } from "./country-flag-quiz/index.js";
+import { capitalsQuizPlugin } from "./capitals-quiz/index.js";
+import { instrumentsQuizPlugin } from "./instruments-quiz/index.js";
+import { planetsQuizPlugin } from "./planets-quiz/index.js";
+import { highestCardBetPlugin } from "./highest-card-bet/index.js";
+import { lowestCardBetPlugin } from "./lowest-card-bet/index.js";
+import { cardColorGuessPlugin } from "./card-color-guess/index.js";
+import { cardSuitGuessPlugin } from "./card-suit-guess/index.js";
+import { evensOrOddsDicePlugin } from "./evens-or-odds-dice/index.js";
+import { total7OrNotPlugin } from "./total-7-or-not/index.js";
+import { diceFlushPlugin } from "./dice-flush/index.js";
+import { threeOfAKindRollPlugin } from "./three-of-a-kind-roll/index.js";
+import { ticTacToeLargePlugin } from "./tic-tac-toe-large/index.js";
+import { ticTacToeCornersWinPlugin } from "./tic-tac-toe-corners-win/index.js";
+import { ticTacToe3InRowPlugin } from "./tic-tac-toe-3-in-row/index.js";
+import { gomokuMiniPlugin } from "./gomoku-mini/index.js";
+import { targetGrabPlugin } from "./target-grab/index.js";
+import { flySwatterPlugin } from "./fly-swatter/index.js";
+import { balloonDartsPlugin } from "./balloon-darts/index.js";
+import { dunkTankPlugin } from "./dunk-tank/index.js";
+import { ringTossProPlugin } from "./ring-toss-pro/index.js";
+import { basketTossPlugin } from "./basket-toss/index.js";
+import { paperArrowPlugin } from "./paper-arrow/index.js";
+import { waterPistolPlugin } from "./water-pistol/index.js";
+import { colorRecallPlugin } from "./color-recall/index.js";
+import { shapeRecallPlugin } from "./shape-recall/index.js";
+import { numberRecallPlugin } from "./number-recall/index.js";
+import { positionRecallPlugin } from "./position-recall/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1941,4 +1973,36 @@ export const GAMES: GamePlugin[] = [
   numericTicTacToePlugin as unknown as GamePlugin,
   chessPuzzleForkPlugin as unknown as GamePlugin,
   gomokuTacticPlugin as unknown as GamePlugin,
+  weatherQuizPlugin as unknown as GamePlugin,
+  musicDecadeQuizPlugin as unknown as GamePlugin,
+  tvShowQuizPlugin as unknown as GamePlugin,
+  videoGameQuizPlugin as unknown as GamePlugin,
+  countryFlagQuizPlugin as unknown as GamePlugin,
+  capitalsQuizPlugin as unknown as GamePlugin,
+  instrumentsQuizPlugin as unknown as GamePlugin,
+  planetsQuizPlugin as unknown as GamePlugin,
+  highestCardBetPlugin as unknown as GamePlugin,
+  lowestCardBetPlugin as unknown as GamePlugin,
+  cardColorGuessPlugin as unknown as GamePlugin,
+  cardSuitGuessPlugin as unknown as GamePlugin,
+  evensOrOddsDicePlugin as unknown as GamePlugin,
+  total7OrNotPlugin as unknown as GamePlugin,
+  diceFlushPlugin as unknown as GamePlugin,
+  threeOfAKindRollPlugin as unknown as GamePlugin,
+  ticTacToeLargePlugin as unknown as GamePlugin,
+  ticTacToeCornersWinPlugin as unknown as GamePlugin,
+  ticTacToe3InRowPlugin as unknown as GamePlugin,
+  gomokuMiniPlugin as unknown as GamePlugin,
+  targetGrabPlugin as unknown as GamePlugin,
+  flySwatterPlugin as unknown as GamePlugin,
+  balloonDartsPlugin as unknown as GamePlugin,
+  dunkTankPlugin as unknown as GamePlugin,
+  ringTossProPlugin as unknown as GamePlugin,
+  basketTossPlugin as unknown as GamePlugin,
+  paperArrowPlugin as unknown as GamePlugin,
+  waterPistolPlugin as unknown as GamePlugin,
+  colorRecallPlugin as unknown as GamePlugin,
+  shapeRecallPlugin as unknown as GamePlugin,
+  numberRecallPlugin as unknown as GamePlugin,
+  positionRecallPlugin as unknown as GamePlugin,
 ];

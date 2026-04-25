@@ -1,0 +1,13 @@
+.ttt-wrap { display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px;font-family:sans-serif; }
+.ttt-header { font-size:1.1rem;font-weight:600; }
+.ttt-status { padding:6px 16px;background:#f0f0f0;border-radius:8px; }
+.ttt-board { display:grid;gap:4px; }
+.ttt-board.large { grid-template-columns:repeat(5,56px); }
+.ttt-board.corners { grid-template-columns:repeat(3,72px); }
+.ttt-board.mini { grid-template-columns:repeat(7,44px); }
+.ttt-cell { width:100%;aspect-ratio:1;border:2px solid #bdc3c7;border-radius:6px;background:#fff;font-size:1.4rem;font-weight:900;cursor:pointer;transition:background 0.1s; }
+.ttt-cell:hover:not(:disabled) { background:#eaf4fb; }
+.ttt-cell.X { color:#e74c3c; }
+.ttt-cell.O { color:#3498db; }
+.ttt-cell:disabled { cursor:default; }
+.ttt-reset { padding:10px 28px;border-radius:8px;border:none;background:#3498db;color:#fff;font-size:1rem;font-weight:700;cursor:pointer; }

@@ -1,0 +1,14 @@
+.card-game-wrap { display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px;font-family:sans-serif;max-width:500px;margin:0 auto; }
+.card-game-header { display:flex;justify-content:space-between;width:100%;font-size:1rem; }
+.card-game-cards { display:flex;align-items:center;gap:20px;margin:10px 0; }
+.playing-card { width:80px;height:110px;border:2px solid #555;border-radius:10px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;box-shadow:2px 4px 8px rgba(0,0,0,0.15); }
+.playing-card.card-win { border-color:#27ae60;background:#eafaf1; }
+.playing-card.card-lose { border-color:#e74c3c;background:#fdedec; }
+.card-game-bets { display:flex;flex-wrap:wrap;gap:10px;justify-content:center; }
+.bet-btn { padding:10px 20px;border-radius:8px;border:none;background:#3498db;color:#fff;font-size:1rem;font-weight:700;cursor:pointer; }
+.bet-btn.all-in { background:#e74c3c; }
+.bet-btn:hover { opacity:0.85; }
+.result-msg { font-size:1.3rem;font-weight:700;padding:8px 20px;border-radius:8px; }
+.result-msg.win { color:#27ae60; }
+.result-msg.lose { color:#e74c3c; }
+.result-msg.tie { color:#f39c12; }
