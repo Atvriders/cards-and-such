@@ -1,0 +1,24 @@
+.iw-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0a0a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.iw-title { font-size: 1.5rem; font-weight: 900; letter-spacing: 0.06em; color: #a080ff; }
+.iw-progress-bar { width: 100%; max-width: 320px; background: rgba(255,255,255,0.1); border-radius: 8px; height: 18px; overflow: hidden; }
+.iw-progress-fill { height: 100%; background: linear-gradient(90deg, #4020a0, #a080ff); border-radius: 8px; transition: width 0.2s; }
+.iw-stats { display: flex; gap: 1.5rem; font-size: 0.95rem; flex-wrap: wrap; justify-content: center; }
+.iw-mana { color: #c0a0ff; font-weight: 700; }
+.iw-cast-btn { width: 110px; height: 110px; border-radius: 50%; border: none; background: linear-gradient(135deg, #200a50, #5030b0); font-size: 2.8rem; cursor: pointer; transition: transform 0.1s; box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
+.iw-cast-btn:active { transform: scale(0.92); }
+.iw-info { display: flex; gap: 1.5rem; font-size: 0.8rem; color: #aaa; }
+.iw-btn { padding: 0.55rem 1.2rem; font-size: 0.88rem; font-weight: 700; border: 2px solid #a080ff; border-radius: 8px; background: #100825; color: #a080ff; cursor: pointer; transition: background 0.15s; }
+.iw-btn:hover:not(:disabled) { background: #200e40; }
+.iw-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.iw-game-over { font-size: 1.2rem; font-weight: 700; text-align: center; padding: 1rem 2rem; background: rgba(160,128,255,0.12); border-radius: 10px; color: #a080ff; }

@@ -715,6 +715,14 @@ import { panagramPlugin } from "./panagram/index.js";
 import { lastLetterPlugin } from "./last-letter/index.js";
 import { phrasePuzzlePlugin } from "./phrase-puzzle/index.js";
 import { wordHuntPlugin } from "./word-hunt/index.js";
+import { idleFarmerPlugin } from "./idle-farmer/index.js";
+import { idleWizardPlugin } from "./idle-wizard/index.js";
+import { idleBlacksmithPlugin } from "./idle-blacksmith/index.js";
+import { idleWarriorPlugin } from "./idle-warrior/index.js";
+import { idleBakerPlugin } from "./idle-baker/index.js";
+import { gemClickerPlugin } from "./gem-clicker/index.js";
+import { goldRushIdlePlugin } from "./gold-rush-idle/index.js";
+import { prestigeClickerPlugin } from "./prestige-clicker/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1433,4 +1441,12 @@ export const GAMES: GamePlugin[] = [
   oilTycoonPlugin as unknown as GamePlugin,
   factoryLinePlugin as unknown as GamePlugin,
   gameDevStudioPlugin as unknown as GamePlugin,
+  idleFarmerPlugin as unknown as GamePlugin,
+  idleWizardPlugin as unknown as GamePlugin,
+  idleBlacksmithPlugin as unknown as GamePlugin,
+  idleWarriorPlugin as unknown as GamePlugin,
+  idleBakerPlugin as unknown as GamePlugin,
+  gemClickerPlugin as unknown as GamePlugin,
+  goldRushIdlePlugin as unknown as GamePlugin,
+  prestigeClickerPlugin as unknown as GamePlugin,
 ];
