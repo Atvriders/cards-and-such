@@ -1,0 +1,64 @@
+.dice-tennis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  font-family: sans-serif;
+  background: #5d4037;
+  color: #efebe9;
+  border-radius: 12px;
+  min-width: 300px;
+}
+.dt-scoreboard {
+  display: flex;
+  gap: 4px;
+  background: #4e342e;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.dt-score-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 70px;
+}
+.dt-score-sep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #a1887f;
+  font-size: 0.75rem;
+  width: 60px;
+  margin-top: 20px;
+}
+.dt-label { font-size: 0.85rem; color: #bcaaa4; }
+.dt-sets { font-size: 1.4rem; font-weight: bold; color: #ffd54f; }
+.dt-games { font-size: 1rem; }
+.dt-points { font-size: 0.9rem; color: #ffcc80; }
+.dt-court-info { font-size: 0.85rem; color: #bcaaa4; }
+.dt-rally { font-size: 0.9rem; min-height: 1.3em; text-align: center; }
+.dt-dice { font-size: 1.4rem; display: flex; gap: 6px; }
+.dt-controls { display: flex; gap: 8px; }
+.dt-controls button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #795548;
+  color: #efebe9;
+  font-size: 0.85rem;
+}
+.dt-controls button:hover { background: #8d6e63; }
+.dt-result { font-size: 1rem; font-weight: bold; color: #ffd54f; }
+.dt-restart {
+  padding: 7px 18px;
+  background: #4e342e;
+  color: #efebe9;
+  border: 1px solid #8d6e63;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.dt-restart:hover { background: #5d4037; }

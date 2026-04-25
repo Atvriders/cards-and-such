@@ -915,6 +915,14 @@ import { ultimateTicTacToePlugin } from "./ultimate-tic-tac-toe/index.js";
 import { diceFootballPlugin } from "./dice-football/index.js";
 import { diceBasketballPlugin } from "./dice-basketball/index.js";
 import { kartTournamentPlugin } from "./kart-tournament/index.js";
+import { racingStuntsPlugin } from "./racing-stunts/index.js";
+import { bikeRacePlugin } from "./bike-race/index.js";
+import { timeTrialPlugin } from "./time-trial/index.js";
+import { pirateShipCannonPlugin } from "./pirate-ship-cannon/index.js";
+import { ufoShooterPlugin } from "./ufo-shooter/index.js";
+import { diceSoccerPlugin } from "./dice-soccer/index.js";
+import { diceTennisPlugin } from "./dice-tennis/index.js";
+import { diceHockeyPlugin } from "./dice-hockey/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1833,4 +1841,12 @@ export const GAMES: GamePlugin[] = [
   diceFootballPlugin as unknown as GamePlugin,
   diceBasketballPlugin as unknown as GamePlugin,
   kartTournamentPlugin as unknown as GamePlugin,
+  racingStuntsPlugin as unknown as GamePlugin,
+  bikeRacePlugin as unknown as GamePlugin,
+  timeTrialPlugin as unknown as GamePlugin,
+  pirateShipCannonPlugin as unknown as GamePlugin,
+  ufoShooterPlugin as unknown as GamePlugin,
+  diceSoccerPlugin as unknown as GamePlugin,
+  diceTennisPlugin as unknown as GamePlugin,
+  diceHockeyPlugin as unknown as GamePlugin,
 ];
