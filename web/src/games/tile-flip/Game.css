@@ -1,0 +1,63 @@
+.tile-flip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.tile-flip-info {
+  display: flex;
+  gap: 16px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.tile-flip-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  min-height: 1.5em;
+}
+
+.tile-flip-status.win { color: #27ae60; }
+
+.tile-flip-boards {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.tile-flip-board-label {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.tile-flip-grid {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  background: #ccc;
+  border-radius: 6px;
+}
+
+.tile-flip-cell {
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.1s, transform 0.1s;
+}
+
+.tile-flip-cell:hover { opacity: 0.85; transform: scale(0.95); }
+.tile-flip-cell[data-v="0"] { background: #e74c3c; }
+.tile-flip-cell[data-v="1"] { background: #3498db; }
+.tile-flip-cell[data-v="2"] { background: #f1c40f; }
+.tile-flip-cell[data-v="3"] { background: #27ae60; }
+
+.tile-flip-cell.readonly { cursor: default; }
+.tile-flip-cell.readonly:hover { opacity: 1; transform: none; }

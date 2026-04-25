@@ -1,0 +1,63 @@
+.connect-pipes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.connect-pipes-info {
+  display: flex;
+  gap: 16px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.connect-pipes-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  min-height: 1.5em;
+}
+
+.connect-pipes-status.win {
+  color: #27ae60;
+}
+
+.connect-pipes-grid {
+  display: grid;
+  gap: 2px;
+  background: #222;
+  border-radius: 6px;
+  padding: 6px;
+}
+
+.connect-pipes-cell {
+  width: 54px;
+  height: 54px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #fff;
+  transition: background 0.1s;
+  position: relative;
+}
+
+.connect-pipes-cell.endpoint {
+  border: 3px solid rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+.connect-pipes-cell[data-color="red"] { background: #e74c3c; }
+.connect-pipes-cell[data-color="blue"] { background: #3498db; }
+.connect-pipes-cell[data-color="green"] { background: #27ae60; }
+.connect-pipes-cell[data-color="yellow"] { background: #f1c40f; }
+.connect-pipes-cell[data-color="orange"] { background: #e67e22; }
+.connect-pipes-cell[data-color="purple"] { background: #9b59b6; }

@@ -1,0 +1,104 @@
+.dice-football {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.dice-football-scoreboard {
+  display: flex;
+  gap: 24px;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.dice-football-field {
+  width: 100%;
+  background: #27ae60;
+  border-radius: 8px;
+  padding: 10px;
+  position: relative;
+}
+
+.dice-football-yard-line {
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+  position: relative;
+  margin: 4px 0;
+}
+
+.dice-football-ball {
+  width: 24px;
+  height: 14px;
+  background: #8B4513;
+  border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  transform: translateX(-50%);
+  border: 2px solid #fff;
+  transition: left 0.3s;
+}
+
+.dice-football-info {
+  font-size: 0.9rem;
+  color: #333;
+  text-align: center;
+}
+
+.dice-football-last-play {
+  background: #f8f9fa;
+  border-left: 4px solid #3498db;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #333;
+  min-height: 2.5em;
+  width: 100%;
+}
+
+.dice-football-dice {
+  display: flex;
+  gap: 8px;
+  font-size: 1.5rem;
+}
+
+.dice-football-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dice-football-controls button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dice-football-controls button.run { background: #e67e22; color: #fff; }
+.dice-football-controls button.pass { background: #3498db; color: #fff; }
+.dice-football-controls button.kick { background: #9b59b6; color: #fff; }
+.dice-football-controls button:hover { opacity: 0.85; }
+.dice-football-controls button:disabled { opacity: 0.4; cursor: default; }
+
+.dice-football-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.dice-football-status.win { color: #27ae60; }
+.dice-football-status.lose { color: #e74c3c; }

@@ -907,6 +907,14 @@ import { peekPlugin } from "./peek/index.js";
 import { salicLawPlugin } from "./salic-law/index.js";
 import { sevenUpPlugin } from "./seven-up/index.js";
 import { tournamentPlugin } from "./tournament/index.js";
+import { connectPipesProPlugin } from "./connect-pipes-pro/index.js";
+import { tileFlipPlugin } from "./tile-flip/index.js";
+import { colorFlowPlugin } from "./flowfree-clone/index.js";
+import { crosswordProPlugin } from "./crossword-pro/index.js";
+import { ultimateTicTacToePlugin } from "./ultimate-tic-tac-toe/index.js";
+import { diceFootballPlugin } from "./dice-football/index.js";
+import { diceBasketballPlugin } from "./dice-basketball/index.js";
+import { kartTournamentPlugin } from "./kart-tournament/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1817,4 +1825,12 @@ export const GAMES: GamePlugin[] = [
   salicLawPlugin as unknown as GamePlugin,
   sevenUpPlugin as unknown as GamePlugin,
   tournamentPlugin as unknown as GamePlugin,
+  connectPipesProPlugin as unknown as GamePlugin,
+  tileFlipPlugin as unknown as GamePlugin,
+  colorFlowPlugin as unknown as GamePlugin,
+  crosswordProPlugin as unknown as GamePlugin,
+  ultimateTicTacToePlugin as unknown as GamePlugin,
+  diceFootballPlugin as unknown as GamePlugin,
+  diceBasketballPlugin as unknown as GamePlugin,
+  kartTournamentPlugin as unknown as GamePlugin,
 ];

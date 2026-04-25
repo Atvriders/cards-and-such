@@ -1,0 +1,85 @@
+.ultimate-ttt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.ultimate-ttt-info {
+  display: flex;
+  gap: 16px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.ultimate-ttt-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  min-height: 1.5em;
+}
+
+.ultimate-ttt-status.win { color: #27ae60; }
+.ultimate-ttt-status.lose { color: #e74c3c; }
+.ultimate-ttt-status.draw { color: #888; }
+
+.ultimate-ttt-meta {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 6px;
+  padding: 6px;
+  background: #555;
+  border-radius: 8px;
+}
+
+.ultimate-ttt-miniboard {
+  display: grid;
+  grid-template-columns: repeat(3, 40px);
+  gap: 2px;
+  background: #888;
+  border-radius: 4px;
+  padding: 4px;
+  position: relative;
+}
+
+.ultimate-ttt-miniboard.active {
+  background: #3498db;
+}
+
+.ultimate-ttt-miniboard.won-x { background: rgba(231,76,60,0.7); }
+.ultimate-ttt-miniboard.won-o { background: rgba(41,128,185,0.7); }
+.ultimate-ttt-miniboard.won-draw { background: rgba(100,100,100,0.7); }
+
+.ultimate-ttt-cell {
+  width: 40px;
+  height: 40px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.ultimate-ttt-cell:hover:not(:disabled) { background: #ddd; }
+.ultimate-ttt-cell.x { color: #e74c3c; }
+.ultimate-ttt-cell.o { color: #2980b9; }
+
+.ultimate-ttt-board-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  background: rgba(255,255,255,0.6);
+  border-radius: 4px;
+  pointer-events: none;
+}
