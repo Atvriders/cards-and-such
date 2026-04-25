@@ -899,6 +899,14 @@ import { magicianTrickPlugin } from "./magician-trick/index.js";
 import { clownTossPlugin } from "./clown-toss/index.js";
 import { acrobatFlipPlugin } from "./acrobat-flip/index.js";
 import { desertTrekPlugin } from "./desert-trek/index.js";
+import { archwayPlugin } from "./archway/index.js";
+import { babettePlugin } from "./babette/index.js";
+import { frogSolitairePlugin } from "./frog-solitaire/index.js";
+import { lastMonarchPlugin } from "./last-monarch/index.js";
+import { peekPlugin } from "./peek/index.js";
+import { salicLawPlugin } from "./salic-law/index.js";
+import { sevenUpPlugin } from "./seven-up/index.js";
+import { tournamentPlugin } from "./tournament/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1801,4 +1809,12 @@ export const GAMES: GamePlugin[] = [
   clownTossPlugin as unknown as GamePlugin,
   acrobatFlipPlugin as unknown as GamePlugin,
   desertTrekPlugin as unknown as GamePlugin,
+  archwayPlugin as unknown as GamePlugin,
+  babettePlugin as unknown as GamePlugin,
+  frogSolitairePlugin as unknown as GamePlugin,
+  lastMonarchPlugin as unknown as GamePlugin,
+  peekPlugin as unknown as GamePlugin,
+  salicLawPlugin as unknown as GamePlugin,
+  sevenUpPlugin as unknown as GamePlugin,
+  tournamentPlugin as unknown as GamePlugin,
 ];

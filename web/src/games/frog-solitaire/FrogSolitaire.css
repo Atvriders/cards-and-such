@@ -1,0 +1,81 @@
+.frog-solitaire {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  user-select: none;
+}
+
+.frog-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.frog-foundations {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.frog-play-area {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.frog-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.frog-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+}
+
+.frog-stock {
+  cursor: pointer;
+}
+
+.frog-stock:hover { opacity: 0.85; }
+
+.frog-card {
+  width: 52px;
+  height: 72px;
+  border: 1.5px solid #999;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  cursor: pointer;
+  gap: 2px;
+}
+
+.frog-card.red { color: #c0392b; }
+.frog-card.black { color: #1a1a1a; }
+.frog-card.frog-empty {
+  background: #e8e8e8;
+  color: #aaa;
+  font-size: 11px;
+  cursor: default;
+}
+
+.frog-card.frog-back {
+  background: #2c7be5;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.frog-card.frog-back:hover { opacity: 0.85; }

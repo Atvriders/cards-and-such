@@ -1,0 +1,94 @@
+.babette {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.bab-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bab-top {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.bab-foundations {
+  display: flex;
+  gap: 6px;
+}
+
+.bab-hand-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bab-tableau {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.bab-col {
+  position: relative;
+  width: 56px;
+  min-height: 110px;
+  cursor: pointer;
+}
+
+.bab-col:hover { opacity: 0.85; }
+
+.bab-col-card {
+  position: absolute;
+  left: 0;
+}
+
+.bab-card {
+  width: 52px;
+  height: 72px;
+  border: 1.5px solid #999;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+.bab-card.red { color: #c0392b; }
+.bab-card.black { color: #1a1a1a; }
+.bab-card.bab-empty {
+  background: #e8e8e8;
+  color: #aaa;
+  font-size: 12px;
+  cursor: default;
+}
+
+.bab-draw-btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: #2c7be5;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bab-draw-btn:disabled {
+  background: #aaa;
+  cursor: default;
+}

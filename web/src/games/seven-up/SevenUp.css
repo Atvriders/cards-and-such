@@ -1,0 +1,102 @@
+.seven-up {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.su-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.su-top {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.su-stock-area {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.su-stock { cursor: pointer; }
+.su-stock:hover { opacity: 0.85; }
+
+.su-foundations {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.su-found-row {
+  display: flex;
+  gap: 6px;
+}
+
+.su-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+}
+
+.su-tableau {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.su-col {
+  position: relative;
+  width: 52px;
+  min-height: 120px;
+}
+
+.su-col-card {
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+}
+
+.su-card {
+  width: 50px;
+  height: 68px;
+  border: 1.5px solid #999;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12);
+}
+
+.su-card.red { color: #c0392b; }
+.su-card.black { color: #1a1a1a; }
+.su-card.dim { opacity: 0.6; }
+
+.su-card.su-back {
+  background: #3a4a6b;
+  color: #fff;
+  font-size: 22px;
+}
+
+.su-card.su-recycle {
+  background: #27ae60;
+  color: #fff;
+  font-size: 22px;
+}
+
+.su-card.su-empty {
+  background: #e8e8e8;
+  color: #aaa;
+  font-size: 11px;
+}

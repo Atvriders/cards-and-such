@@ -1,0 +1,72 @@
+.last-monarch {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  user-select: none;
+}
+
+.lm-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.lm-win {
+  color: #27ae60;
+  font-size: 15px;
+}
+
+.lm-stuck {
+  color: #c0392b;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.lm-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.lm-gap {
+  width: 48px;
+  height: 68px;
+}
+
+.lm-card {
+  width: 48px;
+  height: 68px;
+  border: 1.5px solid #999;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.lm-card.red { color: #c0392b; }
+.lm-card.black { color: #1a1a1a; }
+
+.lm-card.legal {
+  border-color: #2c7be5;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px #2c7be580;
+}
+
+.lm-card.legal:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(44, 123, 229, 0.4);
+}
+
+.lm-card.king {
+  background: #fffde7;
+  border-color: #f9a825;
+}

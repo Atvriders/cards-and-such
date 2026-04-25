@@ -1,0 +1,79 @@
+.peek {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.peek-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.peek-foundations {
+  display: flex;
+  gap: 6px;
+}
+
+.peek-tableau {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.peek-col {
+  position: relative;
+  width: 52px;
+  min-height: 90px;
+  cursor: pointer;
+}
+
+.peek-col:hover { opacity: 0.85; }
+
+.peek-col-card {
+  position: absolute;
+  left: 0;
+}
+
+.peek-card {
+  width: 48px;
+  height: 68px;
+  border: 1.5px solid #999;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12);
+}
+
+.peek-card.red { color: #c0392b; }
+.peek-card.black { color: #1a1a1a; }
+.peek-card.highlight { border-color: #2c7be5; }
+.peek-card.peek-empty {
+  background: #e8e8e8;
+  border-color: #ccc;
+}
+
+.peek-deal-btn {
+  align-self: flex-start;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: #2c7be5;
+  color: #fff;
+  cursor: pointer;
+}
+
+.peek-deal-btn:disabled {
+  background: #aaa;
+  cursor: default;
+}

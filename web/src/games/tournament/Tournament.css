@@ -1,0 +1,101 @@
+.tournament {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.tourn-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tourn-top {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.tourn-found-section {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tourn-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  width: 30px;
+}
+
+.tourn-stock-area {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.tourn-stock { cursor: pointer; }
+.tourn-stock:hover { opacity: 0.85; }
+
+.tourn-reserve {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tourn-tableau {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tourn-col {
+  position: relative;
+  width: 52px;
+  min-height: 180px;
+  cursor: pointer;
+}
+
+.tourn-col:hover { opacity: 0.85; }
+
+.tourn-stacked {
+  position: absolute;
+  left: 0;
+}
+
+.tourn-card {
+  width: 50px;
+  height: 68px;
+  border: 1.5px solid #999;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+.tourn-card.red { color: #c0392b; }
+.tourn-card.black { color: #1a1a1a; }
+.tourn-card.tourn-empty {
+  background: #e8e8e8;
+  color: #aaa;
+  font-size: 11px;
+  cursor: default;
+}
+.tourn-card.tourn-back {
+  background: #3a4a6b;
+  color: #fff;
+  font-size: 18px;
+}
