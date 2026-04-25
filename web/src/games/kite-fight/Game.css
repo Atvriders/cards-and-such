@@ -1,0 +1,19 @@
+.kf-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 440px; margin: 0 auto; font-family: system-ui, sans-serif; align-items: center; }
+.kf-header { display: flex; justify-content: space-between; width: 100%; background: #e8f5e9; border-radius: 8px; padding: 8px 14px; }
+.kf-title { font-weight: 700; }
+.kf-round { color: #2e7d32; font-size: 0.9rem; }
+.kf-score { font-weight: 700; color: #1b5e20; }
+.kf-wind { text-align: center; font-size: 0.85rem; background: #c8e6c9; border-radius: 6px; padding: 4px 12px; }
+.kf-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 2px; background: #81c784; border-radius: 10px; padding: 6px; width: 100%; }
+.kf-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: #a5d6a7; border-radius: 4px; font-size: 1rem; }
+.kf-cell.player { background: #fff9c4; }
+.kf-cell.opponent { background: #ffccbc; }
+.kf-cell.empty { background: #c8e6c9; }
+.kf-message { font-size: 0.85rem; color: #333; text-align: center; min-height: 20px; }
+.kf-controls { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; width: 180px; }
+.kf-btn { padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 700; background: #388e3c; color: #fff; }
+.kf-btn:hover { background: #1b5e20; }
+.kf-btn.confirm { width: 100%; background: #1b5e20; padding: 10px; font-size: 0.95rem; }
+.kf-btn.empty-btn { background: transparent; cursor: default; }
+.kf-legend { display: flex; gap: 12px; font-size: 0.75rem; color: #555; }
+.kf-done { text-align: center; background: #e8f5e9; border-radius: 8px; padding: 16px; font-size: 1.1rem; font-weight: 700; }

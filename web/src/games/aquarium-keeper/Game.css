@@ -1,0 +1,26 @@
+.aqk-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 440px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.aqk-header { display: flex; justify-content: space-between; background: #e0f7fa; border-radius: 8px; padding: 8px 14px; }
+.aqk-title { font-weight: 700; font-size: 1.1rem; }
+.aqk-day { color: #666; font-size: 0.9rem; }
+.aqk-score { font-weight: 700; color: #006064; }
+.aqk-meters { display: flex; flex-direction: column; gap: 6px; }
+.aqk-meter-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+.aqk-meter-label { width: 80px; }
+.aqk-meter-bar { flex: 1; height: 12px; background: #eee; border-radius: 6px; overflow: hidden; }
+.aqk-meter-fill { height: 100%; border-radius: 6px; transition: width 0.3s; }
+.aqk-meter-val { width: 36px; text-align: right; font-size: 0.8rem; color: #555; }
+.aqk-tank { background: linear-gradient(180deg, #b3e5fc 0%, #e0f7fa 100%); border-radius: 12px; padding: 12px; border: 2px solid #81d4fa; display: flex; flex-direction: column; gap: 8px; }
+.aqk-fish-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+.aqk-fish-info { display: flex; gap: 6px; align-items: center; }
+.aqk-fish-health { font-size: 0.75rem; color: #555; }
+.aqk-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.aqk-btn { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.82rem; font-weight: 600; }
+.aqk-btn.water { background: #0288d1; color: #fff; }
+.aqk-btn.food { background: #388e3c; color: #fff; }
+.aqk-btn.temp-up { background: #e64a19; color: #fff; }
+.aqk-btn.temp-down { background: #1565c0; color: #fff; }
+.aqk-btn.next { background: #006064; color: #fff; width: 100%; padding: 10px; font-size: 0.95rem; }
+.aqk-btn:hover { opacity: 0.85; }
+.aqk-temp { text-align: center; font-size: 0.85rem; color: #555; }
+.aqk-events { font-size: 0.78rem; color: #c62828; }
+.aqk-done { text-align: center; background: #e0f7fa; border-radius: 8px; padding: 16px; font-size: 1.1rem; font-weight: 700; }
