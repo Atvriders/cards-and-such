@@ -1,0 +1,68 @@
+.af-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0f0800;
+  min-height: 100%;
+  color: #d4a56a;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.af-title { font-size: 1.5rem; font-weight: bold; color: #c8860a; }
+.af-stats, .af-roles {
+  display: flex;
+  gap: 14px;
+  font-size: 0.9rem;
+  background: #1a1000;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #5a3a00;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.af-log {
+  min-height: 40px;
+  text-align: center;
+  color: #e8c88a;
+  font-size: 0.9rem;
+  background: #1a1000;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 100%;
+}
+.af-section { font-weight: bold; color: #c8860a; align-self: flex-start; }
+.af-btn-row { display: flex; gap: 8px; }
+.af-btn {
+  padding: 8px 14px;
+  background: #1a1000;
+  color: #d4a56a;
+  border: 1px solid #5a3a00;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.af-btn:hover { background: #2a2000; }
+.af-dig-btn {
+  padding: 8px 20px;
+  background: #2a1800;
+  color: #a0c86a;
+  border: 1px solid #4a5a00;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.af-dig-btn:hover { background: #3a2800; }
+.af-end-btn {
+  padding: 10px 32px;
+  background: #8b5e00;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.af-end-btn:hover { background: #a07010; }
+.af-result { font-size: 1.2rem; font-weight: bold; color: #c8860a; padding: 12px 20px; background: #1a1000; border-radius: 8px; }

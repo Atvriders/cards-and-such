@@ -1,0 +1,80 @@
+.ag-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #1a1206;
+  min-height: 100%;
+  color: #f5deb3;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.ag-title { font-size: 1.6rem; font-weight: bold; color: #ffd700; }
+.ag-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 0.95rem;
+  background: #2a2010;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #8b7536;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ag-item {
+  background: #2a2010;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  padding: 14px 20px;
+  text-align: center;
+  width: 100%;
+}
+.ag-item-name { font-size: 1.2rem; font-weight: bold; color: #ffd700; }
+.ag-item-value { font-size: 0.95rem; color: #adf; margin-top: 4px; }
+.ag-current-bid { font-size: 1rem; color: #ffa; margin-top: 4px; }
+.ag-log {
+  min-height: 40px;
+  text-align: center;
+  color: #e0c97a;
+  font-size: 0.9rem;
+  background: #2a2010;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 100%;
+}
+.ag-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.ag-raise-row { display: flex; gap: 8px; justify-content: center; }
+.ag-raise-btn {
+  padding: 8px 16px;
+  background: #3a5020;
+  color: #afa;
+  border: 1px solid #4a8030;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.ag-raise-btn:hover { background: #4a7030; }
+.ag-pass-btn {
+  padding: 8px 24px;
+  background: #5a2020;
+  color: #faa;
+  border: 1px solid #8b3030;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  align-self: center;
+}
+.ag-pass-btn:hover { background: #7a2020; }
+.ag-next-btn {
+  padding: 10px 32px;
+  background: #8b7536;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.ag-next-btn:hover { background: #a08040; }
+.ag-result { font-size: 1.3rem; font-weight: bold; color: #ffd700; }

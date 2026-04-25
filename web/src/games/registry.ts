@@ -624,6 +624,10 @@ import { alchemyShopPlugin } from "./alchemy-shop/index.js";
 import { spyHeistPlugin } from "./spy-heist/index.js";
 import { towerDefenseMiniPlugin } from "./tower-defense-mini/index.js";
 import { fishingVillagePlugin } from "./fishing-village/index.js";
+import { antFarmPlugin } from "./ant-farm/index.js";
+import { auctionGamePlugin } from "./auction-game/index.js";
+import { pizzaRushPlugin } from "./pizza-rush/index.js";
+import { stockDayTraderPlugin } from "./stock-day-trader/index.js";
 import { codeBreakerPlugin } from "./code-breaker/index.js";
 import { roundTheClockPlugin } from "./round-the-clock/index.js";
 import { gridRoguePlugin } from "./grid-rogue/index.js";
@@ -1595,4 +1599,8 @@ export const GAMES: GamePlugin[] = [
   dragonEggHatchPlugin as unknown as GamePlugin,
   robotArenaPlugin as unknown as GamePlugin,
   marsColonyPlugin as unknown as GamePlugin,
+  antFarmPlugin as unknown as GamePlugin,
+  auctionGamePlugin as unknown as GamePlugin,
+  pizzaRushPlugin as unknown as GamePlugin,
+  stockDayTraderPlugin as unknown as GamePlugin,
 ];

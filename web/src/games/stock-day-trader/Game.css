@@ -1,0 +1,84 @@
+.dt-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: monospace;
+  background: #020c14;
+  min-height: 100%;
+  color: #a0e8a0;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.dt-title { font-size: 1.5rem; font-weight: bold; color: #00ff88; }
+.dt-stats {
+  display: flex;
+  gap: 14px;
+  font-size: 0.85rem;
+  background: #061820;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid #00aa44;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.dt-log {
+  min-height: 36px;
+  text-align: center;
+  color: #80e8c0;
+  font-size: 0.85rem;
+  background: #061820;
+  border-radius: 6px;
+  padding: 6px 12px;
+  width: 100%;
+}
+.dt-stocks { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.dt-stock {
+  background: #061820;
+  border: 1px solid #00aa44;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.dt-ticker { font-size: 1rem; font-weight: bold; color: #00ff88; min-width: 44px; }
+.dt-price { font-size: 0.95rem; min-width: 110px; }
+.dt-up { color: #00ff88; }
+.dt-down { color: #ff4444; }
+.dt-shares { font-size: 0.85rem; color: #80e8c0; min-width: 70px; }
+.dt-actions { display: flex; gap: 4px; }
+.dt-buy-btn {
+  padding: 4px 8px;
+  background: #003020;
+  color: #00ff88;
+  border: 1px solid #00aa44;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.dt-buy-btn:hover { background: #005030; }
+.dt-sell-btn {
+  padding: 4px 8px;
+  background: #200000;
+  color: #ff8888;
+  border: 1px solid #aa2200;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.dt-sell-btn:hover { background: #400000; }
+.dt-next-btn {
+  padding: 10px 32px;
+  background: #00aa44;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: monospace;
+}
+.dt-next-btn:hover { background: #00cc66; }
+.dt-result { font-size: 1.3rem; font-weight: bold; color: #00ff88; }
