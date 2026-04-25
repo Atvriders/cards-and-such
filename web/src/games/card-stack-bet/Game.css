@@ -1,0 +1,18 @@
+.csb-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; font-family: sans-serif; max-width: 420px; margin: 0 auto; }
+.csb-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.csb-coins { font-weight: 700; color: #f39c12; font-size: 1.2rem; }
+.csb-top { font-size: 1.1rem; color: #2c3e50; }
+.csb-card { font-size: 1.6rem; padding: 0 6px; }
+.csb-body { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.csb-bid-row { display: flex; gap: 8px; align-items: center; }
+.csb-input { width: 70px; padding: 8px; font-size: 1rem; border: 2px solid #bdc3c7; border-radius: 8px; text-align: center; }
+.csb-btn { padding: 10px 18px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.csb-btn.high { background: #27ae60; color: #fff; }
+.csb-btn.low { background: #e74c3c; color: #fff; }
+.csb-btn.next { background: #3498db; color: #fff; }
+.csb-reveal { font-size: 1.1rem; }
+.csb-result { font-size: 1.5rem; font-weight: 900; }
+.csb-result.win { color: #27ae60; }
+.csb-result.lose { color: #e74c3c; }
+.csb-result.tie { color: #f39c12; }
+.csb-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

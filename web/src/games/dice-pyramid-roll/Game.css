@@ -1,0 +1,16 @@
+.dpr-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px; font-family: sans-serif; max-width: 420px; margin: 0 auto; }
+.dpr-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.dpr-score { font-weight: 700; color: #e74c3c; font-size: 1.2rem; }
+.dpr-target { font-size: 1.1rem; color: #2c3e50; }
+.dpr-dice { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.dpr-die { font-size: 3rem; background: #ecf0f1; border: 2px solid #bdc3c7; border-radius: 10px; padding: 6px; cursor: default; transition: border-color 0.15s, background 0.15s; }
+.dpr-die.used { opacity: 0.3; }
+.dpr-die.pickable { border-color: #e74c3c; cursor: pointer; }
+.dpr-die.pickable:hover { background: #fdecea; }
+.dpr-hint { font-size: 0.95rem; color: #888; }
+.dpr-feedback { font-size: 1.2rem; font-weight: 700; color: #27ae60; }
+.dpr-actions { display: flex; gap: 10px; align-items: center; }
+.dpr-btn { padding: 10px 24px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.dpr-btn.roll { background: #e74c3c; color: #fff; }
+.dpr-btn.next { background: #27ae60; color: #fff; }
+.dpr-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

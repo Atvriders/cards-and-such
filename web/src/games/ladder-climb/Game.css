@@ -1,0 +1,13 @@
+.lc-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; font-family: sans-serif; max-width: 420px; margin: 0 auto; }
+.lc-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.lc-score { font-weight: 700; color: #8e44ad; font-size: 1.2rem; }
+.lc-bar { position: relative; width: 100%; height: 40px; background: #ecf0f1; border-radius: 8px; overflow: visible; }
+.lc-grip-zone { position: absolute; top: 0; bottom: 0; left: 40%; width: 20%; background: rgba(142,68,173,0.35); border-radius: 4px; }
+.lc-marker { position: absolute; top: 4px; bottom: 4px; width: 6px; background: #8e44ad; border-radius: 3px; transform: translateX(-50%); transition: left 0.05s linear; }
+.lc-hint { font-size: 0.9rem; color: #888; }
+.lc-feedback { font-size: 1.2rem; font-weight: 700; padding: 8px 20px; border-radius: 8px; }
+.lc-feedback.ok { background: #eafaf1; color: #1e8449; }
+.lc-feedback.fall { background: #fdedec; color: #c0392b; }
+.lc-btn { padding: 12px 32px; background: #8e44ad; color: #fff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+.lc-btn.next { background: #27ae60; }
+.lc-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

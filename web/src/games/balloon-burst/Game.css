@@ -1,0 +1,12 @@
+.bb-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; font-family: sans-serif; max-width: 380px; margin: 0 auto; }
+.bb-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.bb-score { font-weight: 700; color: #e74c3c; font-size: 1.2rem; }
+.bb-stage { display: flex; align-items: center; justify-content: center; height: 150px; width: 100%; }
+.bb-balloon { border-radius: 50%; cursor: pointer; transition: width 0.07s, height 0.07s, background 0.3s; }
+.bb-result { font-size: 1.5rem; font-weight: 900; }
+.bb-result.pop { color: #27ae60; }
+.bb-result.burst { color: #e74c3c; }
+.bb-hint { font-size: 0.95rem; color: #888; }
+.bb-btn { padding: 12px 32px; background: #e74c3c; color: #fff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+.bb-btn.pop { background: #3498db; }
+.bb-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

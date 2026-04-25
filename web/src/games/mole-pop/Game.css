@@ -1,0 +1,10 @@
+.mp-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px; font-family: sans-serif; max-width: 360px; margin: 0 auto; }
+.mp-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.mp-score { font-weight: 700; color: #795548; font-size: 1.2rem; }
+.mp-timer { height: 8px; background: #795548; border-radius: 4px; transition: width 0.1s linear; align-self: flex-start; }
+.mp-grid { display: grid; grid-template-columns: repeat(3, 90px); gap: 12px; }
+.mp-hole { width: 90px; height: 90px; border: 3px solid #795548; border-radius: 50%; background: #efebe9; font-size: 2rem; cursor: pointer; transition: background 0.1s; }
+.mp-hole.active { background: #bcaaa4; border-color: #4e342e; animation: pop 0.15s ease; }
+@keyframes pop { 0% { transform: scale(0.8); } 100% { transform: scale(1); } }
+.mp-hint { font-size: 0.9rem; color: #888; }
+.mp-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

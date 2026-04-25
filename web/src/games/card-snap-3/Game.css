@@ -1,0 +1,17 @@
+.cs3-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; font-family: sans-serif; max-width: 420px; margin: 0 auto; }
+.cs3-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.cs3-score { font-weight: 700; color: #e67e22; font-size: 1.2rem; }
+.cs3-history { display: flex; gap: 10px; min-height: 60px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.cs3-empty { color: #aaa; font-style: italic; }
+.cs3-card { font-size: 1.6rem; font-weight: 900; padding: 8px 14px; border: 2px solid #bdc3c7; border-radius: 8px; background: #fff; }
+.cs3-alert { font-size: 1.1rem; font-weight: 700; color: #c0392b; animation: pulse 0.5s infinite alternate; }
+@keyframes pulse { from { opacity: 1; } to { opacity: 0.4; } }
+.cs3-feedback { font-size: 1.2rem; font-weight: 700; padding: 8px 20px; border-radius: 8px; }
+.cs3-feedback.correct { background: #eafaf1; color: #1e8449; }
+.cs3-feedback.wrong { background: #fdedec; color: #c0392b; }
+.cs3-actions { display: flex; gap: 16px; }
+.cs3-btn { padding: 12px 28px; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+.cs3-btn.flip { background: #3498db; color: #fff; }
+.cs3-btn.snap { background: #bdc3c7; color: #fff; }
+.cs3-btn.snap.hot { background: #c0392b; animation: pulse 0.5s infinite alternate; }
+.cs3-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

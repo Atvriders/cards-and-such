@@ -1,0 +1,15 @@
+.cbf-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 24px; font-family: sans-serif; max-width: 420px; margin: 0 auto; }
+.cbf-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.cbf-coins { font-weight: 700; color: #f39c12; font-size: 1.2rem; }
+.cbf-body { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+.cbf-hint { text-align: center; color: #555; font-size: 1rem; }
+.cbf-bid-row { display: flex; gap: 10px; align-items: center; }
+.cbf-input { width: 80px; padding: 8px; font-size: 1rem; border: 2px solid #bdc3c7; border-radius: 8px; text-align: center; }
+.cbf-btn { padding: 10px 24px; background: #3498db; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.cbf-btn.next { background: #27ae60; }
+.cbf-card { font-size: 3.5rem; font-weight: 900; padding: 20px 32px; border: 3px solid #2c3e50; border-radius: 12px; background: #fff; color: #2c3e50; }
+.cbf-card.red { color: #e74c3c; border-color: #e74c3c; }
+.cbf-result { font-size: 1.4rem; font-weight: 900; }
+.cbf-result.win { color: #27ae60; }
+.cbf-result.lose { color: #e74c3c; }
+.cbf-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

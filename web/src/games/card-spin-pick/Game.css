@@ -1,0 +1,15 @@
+.csp-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; font-family: sans-serif; max-width: 460px; margin: 0 auto; }
+.csp-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.csp-score { font-weight: 700; color: #8e44ad; font-size: 1.2rem; }
+.csp-hint { font-size: 1.05rem; color: #555; text-align: center; font-weight: 600; }
+.csp-cards { display: flex; gap: 12px; justify-content: center; }
+.csp-card { width: 72px; height: 96px; border: 2px solid #bdc3c7; border-radius: 10px; background: #ecf0f1; font-size: 1.1rem; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transition: border-color 0.15s, background 0.15s; }
+.csp-card:hover:not(:disabled) { border-color: #8e44ad; background: #f5eef8; }
+.csp-card.picked { border-color: #8e44ad; background: #f5eef8; }
+.csp-card.spun { border-color: #f39c12; background: #fef9e7; }
+.csp-label { font-size: 0.75rem; color: #999; }
+.csp-btn { padding: 12px 32px; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+.csp-btn.spin { background: #8e44ad; color: #fff; }
+.csp-btn.spin:disabled { opacity: 0.4; cursor: not-allowed; }
+.csp-btn.next { background: #27ae60; color: #fff; }
+.csp-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

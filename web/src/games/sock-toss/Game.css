@@ -1,0 +1,14 @@
+.sock-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px; font-family: sans-serif; max-width: 360px; margin: 0 auto; }
+.sock-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.sock-score { font-weight: 700; color: #16a085; font-size: 1.2rem; }
+.sock-lane { position: relative; width: 80px; height: 200px; background: #ecf0f1; border-radius: 8px; overflow: hidden; margin: 0 auto; }
+.sock-basket { position: absolute; left: 0; right: 0; background: rgba(22,160,133,0.4); border-left: 3px solid #16a085; border-right: 3px solid #16a085; }
+.sock-ball { position: absolute; left: 50%; transform: translateX(-50%); font-size: 1.8rem; transition: bottom 0.05s linear; }
+.sock-feedback { font-size: 1.2rem; font-weight: 700; padding: 8px 18px; border-radius: 8px; }
+.sock-feedback.basket { background: #eafaf1; color: #1e8449; }
+.sock-feedback.rim { background: #fef9e7; color: #b7950b; }
+.sock-feedback.floor { background: #fdedec; color: #c0392b; }
+.sock-btn { padding: 12px 32px; background: #16a085; color: #fff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+.sock-btn.next { background: #27ae60; }
+.sock-hint { font-size: 0.9rem; color: #888; text-align: center; }
+.sock-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

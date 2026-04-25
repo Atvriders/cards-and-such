@@ -1,0 +1,13 @@
+.ds9-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px; font-family: sans-serif; max-width: 380px; margin: 0 auto; }
+.ds9-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.ds9-score { font-weight: 700; color: #d35400; font-size: 1.2rem; }
+.ds9-info { display: flex; gap: 20px; font-size: 1rem; color: #2c3e50; }
+.ds9-dice { display: flex; gap: 16px; justify-content: center; }
+.ds9-die { font-size: 4rem; line-height: 1; }
+.ds9-die.hit { color: #27ae60; }
+.ds9-feedback { font-size: 1.2rem; font-weight: 700; padding: 8px 20px; border-radius: 8px; }
+.ds9-feedback.hit { background: #eafaf1; color: #1e8449; }
+.ds9-feedback.miss { background: #fdedec; color: #c0392b; }
+.ds9-btn { padding: 12px 36px; background: #d35400; color: #fff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+.ds9-target { font-size: 0.9rem; color: #888; }
+.ds9-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

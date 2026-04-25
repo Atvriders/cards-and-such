@@ -1,0 +1,17 @@
+.dcb-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; font-family: sans-serif; max-width: 380px; margin: 0 auto; }
+.dcb-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.dcb-coins { font-weight: 700; color: #e67e22; font-size: 1.2rem; }
+.dcb-die { font-size: 5rem; line-height: 1; }
+.dcb-die.dim { color: #bdc3c7; }
+.dcb-body { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.dcb-hint { color: #555; font-size: 1rem; }
+.dcb-row { display: flex; gap: 8px; align-items: center; }
+.dcb-input { width: 70px; padding: 8px; font-size: 1rem; border: 2px solid #bdc3c7; border-radius: 8px; text-align: center; }
+.dcb-btn { padding: 10px 18px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.dcb-btn.odd { background: #3498db; color: #fff; }
+.dcb-btn.even { background: #9b59b6; color: #fff; }
+.dcb-btn.next { background: #27ae60; color: #fff; }
+.dcb-result { font-size: 1.5rem; font-weight: 900; }
+.dcb-result.win { color: #27ae60; }
+.dcb-result.lose { color: #e74c3c; }
+.dcb-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

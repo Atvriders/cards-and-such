@@ -1,0 +1,19 @@
+.dt25-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px; font-family: sans-serif; max-width: 420px; margin: 0 auto; }
+.dt25-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.dt25-score { font-weight: 700; color: #16a085; font-size: 1.2rem; }
+.dt25-target { font-size: 1.1rem; color: #2c3e50; }
+.dt25-dice { display: flex; gap: 10px; justify-content: center; }
+.dt25-die { font-size: 3.5rem; background: #ecf0f1; border: 2px solid #bdc3c7; border-radius: 10px; padding: 6px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.dt25-die.kept { border-color: #16a085; background: #e8f8f5; }
+.dt25-die.final { cursor: default; }
+.dt25-die:disabled { cursor: default; }
+.dt25-sum { font-size: 1.05rem; color: #555; }
+.dt25-hint { font-size: 0.9rem; color: #888; }
+.dt25-actions { display: flex; gap: 10px; }
+.dt25-btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.dt25-btn.roll { background: #3498db; color: #fff; }
+.dt25-btn.roll:disabled { opacity: 0.4; cursor: not-allowed; }
+.dt25-btn.score { background: #16a085; color: #fff; }
+.dt25-btn.score:disabled { opacity: 0.4; cursor: not-allowed; }
+.dt25-btn.next { background: #27ae60; color: #fff; }
+.dt25-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }

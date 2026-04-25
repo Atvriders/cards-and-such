@@ -1,4 +1,34 @@
 import type { GamePlugin } from "../platform/game-plugin/types.js";
+import { insectsQuizPlugin } from "./insects-quiz/index.js";
+import { fishQuizPlugin } from "./fish-quiz/index.js";
+import { mammalsQuizPlugin } from "./mammals-quiz/index.js";
+import { reptilesQuizPlugin } from "./reptiles-quiz/index.js";
+import { oceansQuizPlugin } from "./oceans-quiz/index.js";
+import { desertsQuizPlugin } from "./deserts-quiz/index.js";
+import { mountainsQuizPlugin } from "./mountains-quiz/index.js";
+import { riversQuizPlugin } from "./rivers-quiz/index.js";
+import { citiesQuizPlugin } from "./cities-quiz/index.js";
+import { monumentsQuizPlugin } from "./monuments-quiz/index.js";
+import { cardBidFlipPlugin } from "./card-bid-flip/index.js";
+import { cardPyramidGrabPlugin } from "./card-pyramid-grab/index.js";
+import { cardSnap3Plugin } from "./card-snap-3/index.js";
+import { cardStackBetPlugin } from "./card-stack-bet/index.js";
+import { cardSpinPickPlugin } from "./card-spin-pick/index.js";
+import { diceCoinBetPlugin } from "./dice-coin-bet/index.js";
+import { diceTarget25Plugin } from "./dice-target-25/index.js";
+import { dicePyramidRollPlugin } from "./dice-pyramid-roll/index.js";
+import { diceStreak9Plugin } from "./dice-streak-9/index.js";
+import { diceBingoMiniPlugin } from "./dice-bingo-mini/index.js";
+import { arrowHitPlugin } from "./arrow-hit/index.js";
+import { balloonBurstPlugin } from "./balloon-burst/index.js";
+import { fishingCastPlugin } from "./fishing-cast/index.js";
+import { ladderClimbPlugin } from "./ladder-climb/index.js";
+import { lavaLeapPlugin } from "./lava-leap/index.js";
+import { molePopPlugin } from "./mole-pop/index.js";
+import { ringerCoinPlugin } from "./ringer-coin/index.js";
+import { snowballThrowPlugin } from "./snowball-throw/index.js";
+import { sockTossPlugin } from "./sock-toss/index.js";
+import { pickleJarPlugin } from "./pickle-jar/index.js";
 import { additionSprintPlugin } from "./addition-sprint/index.js";
 import { subtractionSprintPlugin } from "./subtraction-sprint/index.js";
 import { algebraSolveXPlugin } from "./algebra-solve-x/index.js";
@@ -2037,4 +2067,34 @@ export const GAMES: GamePlugin[] = [
   monkeyBananaPlugin as unknown as GamePlugin,
   cribbageSquarePlugin as unknown as GamePlugin,
   decadeSolitairePlugin as unknown as GamePlugin,
+  insectsQuizPlugin as unknown as GamePlugin,
+  fishQuizPlugin as unknown as GamePlugin,
+  mammalsQuizPlugin as unknown as GamePlugin,
+  reptilesQuizPlugin as unknown as GamePlugin,
+  oceansQuizPlugin as unknown as GamePlugin,
+  desertsQuizPlugin as unknown as GamePlugin,
+  mountainsQuizPlugin as unknown as GamePlugin,
+  riversQuizPlugin as unknown as GamePlugin,
+  citiesQuizPlugin as unknown as GamePlugin,
+  monumentsQuizPlugin as unknown as GamePlugin,
+  cardBidFlipPlugin as unknown as GamePlugin,
+  cardPyramidGrabPlugin as unknown as GamePlugin,
+  cardSnap3Plugin as unknown as GamePlugin,
+  cardStackBetPlugin as unknown as GamePlugin,
+  cardSpinPickPlugin as unknown as GamePlugin,
+  diceCoinBetPlugin as unknown as GamePlugin,
+  diceTarget25Plugin as unknown as GamePlugin,
+  dicePyramidRollPlugin as unknown as GamePlugin,
+  diceStreak9Plugin as unknown as GamePlugin,
+  diceBingoMiniPlugin as unknown as GamePlugin,
+  arrowHitPlugin as unknown as GamePlugin,
+  balloonBurstPlugin as unknown as GamePlugin,
+  fishingCastPlugin as unknown as GamePlugin,
+  ladderClimbPlugin as unknown as GamePlugin,
+  lavaLeapPlugin as unknown as GamePlugin,
+  molePopPlugin as unknown as GamePlugin,
+  pickleJarPlugin as unknown as GamePlugin,
+  ringerCoinPlugin as unknown as GamePlugin,
+  snowballThrowPlugin as unknown as GamePlugin,
+  sockTossPlugin as unknown as GamePlugin,
 ];

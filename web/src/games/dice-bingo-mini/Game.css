@@ -1,0 +1,10 @@
+.dbm-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px; font-family: sans-serif; max-width: 360px; margin: 0 auto; }
+.dbm-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
+.dbm-score { font-weight: 700; color: #1abc9c; font-size: 1.2rem; }
+.dbm-die { font-size: 4rem; line-height: 1; }
+.dbm-card { display: grid; grid-template-columns: repeat(3, 64px); grid-template-rows: repeat(3, 64px); gap: 6px; }
+.dbm-cell { display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 900; border: 2px solid #bdc3c7; border-radius: 8px; background: #ecf0f1; color: #2c3e50; transition: background 0.2s, border-color 0.2s; }
+.dbm-cell.marked { background: #1abc9c; border-color: #16a085; color: #fff; }
+.dbm-info { font-size: 1rem; color: #555; }
+.dbm-btn { padding: 12px 36px; background: #1abc9c; color: #fff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+.dbm-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }
