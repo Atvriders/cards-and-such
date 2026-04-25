@@ -1,0 +1,30 @@
+.bake-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 460px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.bake-header { display: flex; justify-content: space-between; align-items: center; background: #fce4ec; border-radius: 8px; padding: 8px 12px; }
+.bake-title { font-weight: 700; font-size: 1.1rem; }
+.bake-day { color: #888; font-size: 0.9rem; }
+.bake-cash { font-weight: 700; color: #880e4f; font-size: 1rem; }
+.bake-info { display: flex; gap: 8px; font-size: 0.83rem; align-items: center; }
+.bake-badge { background: #f8bbd0; border-radius: 4px; padding: 4px 8px; }
+.bake-oven-btn { padding: 4px 10px; background: #e91e63; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+.bake-oven-btn:disabled { background: #ccc; cursor: default; }
+.bake-items { display: flex; flex-direction: column; gap: 8px; }
+.bake-item-row { background: #fafafa; border-radius: 6px; padding: 8px; display: flex; flex-direction: column; gap: 4px; }
+.bake-item-title { font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; }
+.bake-item-controls { display: flex; gap: 8px; align-items: center; font-size: 0.83rem; }
+.bake-item-controls input[type=range] { flex: 1; }
+.bake-featured-btn { padding: 3px 8px; background: #ddd; border: none; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+.bake-featured-btn.active { background: #e91e63; color: #fff; }
+.bake-capacity { font-size: 0.82rem; color: #888; }
+.bake-btn { padding: 10px 20px; background: #880e4f; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.bake-btn:hover { background: #560027; }
+.bake-results-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; font-size: 0.82rem; border-collapse: collapse; }
+.bake-results-grid div { padding: 3px 6px; border-bottom: 1px solid #eee; }
+.bake-results-grid .header { font-weight: 700; color: #555; }
+.bake-totals { font-size: 0.95rem; display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.bake-profit { font-weight: 700; }
+.bake-profit.pos { color: #2e7d32; }
+.bake-profit.neg { color: #c62828; }
+.bake-done { text-align: center; padding: 16px; background: #fce4ec; border-radius: 8px; }
+.bake-final { font-size: 1.2rem; margin-bottom: 8px; }
+.bake-log { display: flex; flex-direction: column; gap: 2px; max-height: 100px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.bake-log-line { font-size: 0.72rem; color: #666; }

@@ -1,0 +1,31 @@
+.factory-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 440px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.factory-header { display: flex; justify-content: space-between; align-items: center; background: #263238; color: #fff; border-radius: 8px; padding: 8px 12px; }
+.factory-title { font-weight: 700; font-size: 1.1rem; }
+.factory-shift { color: #90a4ae; font-size: 0.9rem; }
+.factory-cash { font-weight: 700; color: #80cbc4; font-size: 1rem; }
+.factory-order { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 8px 12px; border-radius: 4px; font-size: 0.9rem; }
+.factory-order-progress { height: 8px; background: #c8e6c9; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+.factory-order-bar { height: 100%; background: #2e7d32; transition: width 0.3s; }
+.factory-stats { display: flex; gap: 8px; font-size: 0.83rem; flex-wrap: wrap; }
+.factory-badge { background: #37474f; color: #fff; border-radius: 4px; padding: 4px 8px; }
+.factory-plan { display: flex; flex-direction: column; gap: 10px; }
+.factory-plan label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.factory-plan input[type=range] { width: 100%; }
+.factory-products { display: flex; gap: 6px; flex-wrap: wrap; }
+.factory-prod-btn { padding: 6px 12px; border: 2px solid #ddd; border-radius: 6px; cursor: pointer; background: #fff; font-size: 0.85rem; }
+.factory-prod-btn.active { border-color: #263238; background: #eceff1; font-weight: 700; }
+.factory-invest { display: flex; gap: 8px; flex-wrap: wrap; }
+.factory-invest-btn { padding: 6px 12px; background: #37474f; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.82rem; }
+.factory-invest-btn:disabled { background: #ccc; color: #666; cursor: default; }
+.factory-invest-btn.active { background: #00695c; }
+.factory-btn { padding: 10px 20px; background: #263238; color: #80cbc4; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.factory-btn:hover { background: #000; }
+.factory-results { display: flex; flex-direction: column; gap: 6px; }
+.factory-result-row { font-size: 0.95rem; padding: 4px 0; border-bottom: 1px solid #eee; }
+.factory-result-row.profit { font-weight: 700; font-size: 1rem; }
+.factory-result-row.profit.pos { color: #2e7d32; }
+.factory-result-row.profit.neg { color: #c62828; }
+.factory-done { text-align: center; padding: 16px; background: #263238; color: #fff; border-radius: 8px; }
+.factory-final { font-size: 1.2rem; margin-bottom: 8px; color: #80cbc4; }
+.factory-log { display: flex; flex-direction: column; gap: 2px; max-height: 110px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.factory-log-line { font-size: 0.72rem; color: #666; }

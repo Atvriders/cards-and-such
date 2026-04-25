@@ -1,0 +1,28 @@
+.cafe-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 440px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.cafe-header { display: flex; justify-content: space-between; align-items: center; background: #efebe9; border-radius: 8px; padding: 8px 12px; }
+.cafe-title { font-weight: 700; font-size: 1.1rem; }
+.cafe-day { color: #888; font-size: 0.9rem; }
+.cafe-cash { font-weight: 700; color: #4e342e; font-size: 1rem; }
+.cafe-upgrades { display: flex; gap: 8px; font-size: 0.83rem; }
+.cafe-upgrade-item { background: #d7ccc8; border-radius: 4px; padding: 4px 8px; }
+.cafe-plan { display: flex; flex-direction: column; gap: 10px; }
+.cafe-plan label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.cafe-plan input[type=range] { width: 100%; }
+.cafe-drinks { display: flex; gap: 6px; flex-wrap: wrap; }
+.cafe-drink-btn { padding: 6px 12px; border: 2px solid #ddd; border-radius: 6px; cursor: pointer; background: #fff; font-size: 0.85rem; }
+.cafe-drink-btn.active { border-color: #4e342e; background: #efebe9; font-weight: 700; }
+.cafe-invest { display: flex; gap: 8px; }
+.cafe-invest-btn { padding: 6px 14px; background: #795548; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.83rem; }
+.cafe-invest-btn:disabled { background: #ccc; cursor: default; }
+.cafe-cost-preview { font-size: 0.82rem; color: #888; }
+.cafe-btn { padding: 10px 20px; background: #4e342e; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+.cafe-btn:hover { background: #3e2723; }
+.cafe-results { display: flex; flex-direction: column; gap: 6px; }
+.cafe-result-row { font-size: 0.95rem; padding: 4px 0; border-bottom: 1px solid #eee; }
+.cafe-result-row.profit { font-weight: 700; font-size: 1rem; }
+.cafe-result-row.profit.pos { color: #2e7d32; }
+.cafe-result-row.profit.neg { color: #c62828; }
+.cafe-done { text-align: center; padding: 16px; background: #efebe9; border-radius: 8px; }
+.cafe-final { font-size: 1.2rem; margin-bottom: 8px; }
+.cafe-log { display: flex; flex-direction: column; gap: 2px; max-height: 110px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
+.cafe-log-line { font-size: 0.72rem; color: #666; }

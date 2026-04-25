@@ -560,6 +560,14 @@ import { lemonadeStandPlugin } from "./lemonade-stand/index.js";
 import { farmTycoonPlugin } from "./farm-tycoon/index.js";
 import { stockMarketMiniPlugin } from "./stock-market-mini/index.js";
 import { cityBuilderMicroPlugin } from "./city-builder-micro/index.js";
+import { restaurantTycoonPlugin } from "./restaurant-tycoon/index.js";
+import { coffeeShopPlugin } from "./coffee-shop/index.js";
+import { hotelTycoonPlugin } from "./hotel-tycoon/index.js";
+import { airlineSimPlugin } from "./airline-sim/index.js";
+import { bakeryShopPlugin } from "./bakery-shop/index.js";
+import { oilTycoonPlugin } from "./oil-tycoon/index.js";
+import { factoryLinePlugin } from "./factory-line/index.js";
+import { gameDevStudioPlugin } from "./game-dev-studio/index.js";
 import { zooKeeperPlugin } from "./zoo-keeper/index.js";
 import { islandSurvivalPlugin } from "./island-survival/index.js";
 import { piratesBountyPlugin } from "./pirates-bounty/index.js";
@@ -1417,4 +1425,12 @@ export const GAMES: GamePlugin[] = [
   lastLetterPlugin as unknown as GamePlugin,
   phrasePuzzlePlugin as unknown as GamePlugin,
   wordHuntPlugin as unknown as GamePlugin,
+  restaurantTycoonPlugin as unknown as GamePlugin,
+  coffeeShopPlugin as unknown as GamePlugin,
+  hotelTycoonPlugin as unknown as GamePlugin,
+  airlineSimPlugin as unknown as GamePlugin,
+  bakeryShopPlugin as unknown as GamePlugin,
+  oilTycoonPlugin as unknown as GamePlugin,
+  factoryLinePlugin as unknown as GamePlugin,
+  gameDevStudioPlugin as unknown as GamePlugin,
 ];

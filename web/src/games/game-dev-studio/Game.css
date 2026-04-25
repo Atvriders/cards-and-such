@@ -1,0 +1,35 @@
+.gds-wrap { display: flex; flex-direction: column; gap: 12px; padding: 16px; max-width: 440px; margin: 0 auto; font-family: system-ui, sans-serif; }
+.gds-header { display: flex; justify-content: space-between; align-items: center; background: #1a1a2e; color: #fff; border-radius: 8px; padding: 8px 12px; }
+.gds-title { font-weight: 700; font-size: 1.1rem; }
+.gds-month { color: #a0aec0; font-size: 0.9rem; }
+.gds-cash { font-weight: 700; color: #68d391; font-size: 1rem; }
+.gds-project { background: #2d3748; color: #e2e8f0; border-radius: 6px; padding: 8px 12px; font-size: 0.9rem; }
+.gds-project strong { color: #90cdf4; }
+.gds-progress { height: 8px; background: #4a5568; border-radius: 4px; overflow: hidden; margin-top: 6px; }
+.gds-progress-bar { height: 100%; background: #68d391; }
+.gds-hype-bar { height: 8px; background: #4a5568; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+.gds-hype-fill { height: 100%; background: #f6ad55; }
+.gds-stats { display: flex; gap: 8px; font-size: 0.83rem; flex-wrap: wrap; }
+.gds-badge { background: #2d3748; color: #e2e8f0; border-radius: 4px; padding: 4px 8px; }
+.gds-plan { display: flex; flex-direction: column; gap: 10px; }
+.gds-plan label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.gds-plan input[type=range] { width: 100%; }
+.gds-genres { display: flex; gap: 6px; flex-wrap: wrap; }
+.gds-genre-btn { padding: 5px 10px; border: 2px solid #4a5568; border-radius: 6px; cursor: pointer; background: #2d3748; color: #e2e8f0; font-size: 0.82rem; }
+.gds-genre-btn.active { border-color: #90cdf4; font-weight: 700; }
+.gds-genre-btn:disabled { opacity: 0.5; cursor: default; }
+.gds-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.gds-btn { padding: 10px 16px; background: #2b6cb0; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 700; flex: 1; }
+.gds-btn:hover { background: #1a365d; }
+.gds-btn.launch { background: #22543d; }
+.gds-btn.launch:hover { background: #276749; }
+.gds-qc-btn { padding: 6px 12px; background: #4a5568; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.82rem; }
+.gds-qc-btn.active { background: #6b46c1; }
+.gds-results { display: flex; flex-direction: column; gap: 6px; }
+.gds-result-row { font-size: 0.95rem; padding: 4px 0; border-bottom: 1px solid #2d3748; }
+.gds-launch-box { background: #1c4532; color: #d4edda; border-radius: 8px; padding: 12px; }
+.gds-launch-title { font-weight: 700; margin-bottom: 4px; }
+.gds-done { text-align: center; padding: 16px; background: #1a1a2e; color: #fff; border-radius: 8px; }
+.gds-done-cash { font-size: 1.2rem; color: #68d391; margin-bottom: 8px; }
+.gds-log { display: flex; flex-direction: column; gap: 2px; max-height: 110px; overflow-y: auto; border: 1px solid #2d3748; border-radius: 6px; padding: 6px; }
+.gds-log-line { font-size: 0.72rem; color: #666; }
