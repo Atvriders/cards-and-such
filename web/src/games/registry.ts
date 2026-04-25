@@ -674,6 +674,14 @@ import { seegaPlugin } from "./seega/index.js";
 import { frisianDraughtsPlugin } from "./frisian-draughts/index.js";
 import { russianDraughtsPlugin } from "./russian-draughts/index.js";
 import { poolCheckersPlugin } from "./pool-checkers/index.js";
+import { eggCatcherPlugin } from "./egg-catcher/index.js";
+import { fishFeederPlugin } from "./fish-feeder/index.js";
+import { ninjaHopPlugin } from "./ninja-hop/index.js";
+import { samuraiSlicePlugin } from "./samurai-slice/index.js";
+import { caveFlyerPlugin } from "./cave-flyer/index.js";
+import { dodgeCarsPlugin } from "./dodge-cars/index.js";
+import { parachuteDropPlugin } from "./parachute-drop/index.js";
+import { swarmShootPlugin } from "./swarm-shoot/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1351,4 +1359,12 @@ export const GAMES: GamePlugin[] = [
   frisianDraughtsPlugin as unknown as GamePlugin,
   russianDraughtsPlugin as unknown as GamePlugin,
   poolCheckersPlugin as unknown as GamePlugin,
+  eggCatcherPlugin as unknown as GamePlugin,
+  fishFeederPlugin as unknown as GamePlugin,
+  ninjaHopPlugin as unknown as GamePlugin,
+  samuraiSlicePlugin as unknown as GamePlugin,
+  caveFlyerPlugin as unknown as GamePlugin,
+  dodgeCarsPlugin as unknown as GamePlugin,
+  parachuteDropPlugin as unknown as GamePlugin,
+  swarmShootPlugin as unknown as GamePlugin,
 ];

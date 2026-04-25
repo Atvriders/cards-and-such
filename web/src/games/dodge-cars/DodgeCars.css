@@ -1,0 +1,61 @@
+.dodge-cars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.dc-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.dc-road {
+  position: relative;
+  background: linear-gradient(180deg, #555 0%, #444 50%, #555 100%);
+  border: 2px solid #222;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dc-lane-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: repeating-linear-gradient(180deg, #fff 0px, #fff 24px, transparent 24px, transparent 48px);
+  opacity: 0.5;
+}
+.dc-car {
+  position: absolute;
+  pointer-events: none;
+}
+.dc-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+.dc-btn-row {
+  display: flex;
+  gap: 20px;
+}
+.dc-btn-row button {
+  padding: 8px 22px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  background: #222;
+  color: #eee;
+  border: 2px solid #666;
+  cursor: pointer;
+}
+.dc-hint {
+  font-size: 0.8rem;
+  color: #666;
+}

@@ -1,0 +1,62 @@
+.ninja-hop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.nh-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.nh-field {
+  position: relative;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.nh-player {
+  position: absolute;
+  font-size: 28px;
+  pointer-events: none;
+  z-index: 2;
+}
+.nh-platform {
+  position: absolute;
+  height: 10px;
+  background: #4ecdc4;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(78,205,196,0.4);
+}
+.nh-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.4rem;
+}
+.nh-controls {
+  display: flex;
+  gap: 12px;
+}
+.nh-controls button {
+  padding: 8px 18px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 2px solid #4ecdc4;
+  background: #1a1a2e;
+  color: #4ecdc4;
+  cursor: pointer;
+}
+.nh-hint {
+  font-size: 0.8rem;
+  color: #666;
+}

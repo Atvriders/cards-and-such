@@ -1,0 +1,49 @@
+.egg-catcher {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  font-family: sans-serif;
+}
+.ec-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.ec-field {
+  position: relative;
+  background: linear-gradient(180deg, #87ceeb 0%, #c8e6ff 60%, #a8d8a0 100%);
+  border: 2px solid #555;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: none;
+}
+.ec-egg {
+  position: absolute;
+  font-size: 24px;
+  line-height: 1;
+  pointer-events: none;
+}
+.ec-basket {
+  position: absolute;
+  height: 36px;
+  background: #8B4513;
+  border-radius: 0 0 20px 20px;
+  border: 3px solid #5C2D0A;
+}
+.ec-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.ec-hint {
+  font-size: 0.8rem;
+  color: #666;
+}

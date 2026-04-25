@@ -1,0 +1,59 @@
+.parachute-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+  user-select: none;
+}
+.pd-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.pd-sky {
+  position: relative;
+  background: linear-gradient(180deg, #87ceeb 0%, #b0d8f0 70%, #d4e8a0 95%, #6db34a 100%);
+  border: 2px solid #555;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: none;
+}
+.pd-parachutist {
+  position: absolute;
+  font-size: 28px;
+  pointer-events: none;
+}
+.pd-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: #4a8c2a;
+}
+.pd-zone {
+  position: absolute;
+  bottom: 0;
+  height: 52px;
+  background: rgba(255,255,100,0.5);
+  border: 3px dashed #f0f000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.pd-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.4rem;
+}
+.pd-hint {
+  font-size: 0.8rem;
+  color: #666;
+}
