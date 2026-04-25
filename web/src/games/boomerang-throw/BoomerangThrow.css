@@ -1,0 +1,106 @@
+.boomerang-throw {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.bt-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.bt-info strong { color: #222; }
+
+.bt-arena {
+  position: relative;
+  width: 300px;
+  height: 260px;
+  background: linear-gradient(to bottom, #87ceeb 55%, #8fbc8f 55%);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #aaa;
+}
+
+.bt-boomerang {
+  position: absolute;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+  transition: none;
+}
+
+.bt-player {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+}
+
+.bt-charge-bar, .bt-catch-bar {
+  width: 220px;
+  height: 16px;
+  background: #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+}
+
+.bt-charge-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.02s;
+}
+
+.bt-catch-fill {
+  height: 100%;
+  border-radius: 8px;
+  background: #fc8181;
+  transition: width 0.02s;
+}
+
+.bt-catch-center {
+  position: relative;
+  width: 220px;
+  height: 16px;
+}
+
+.bt-catch-zone {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 40px;
+  height: 16px;
+  background: rgba(72, 187, 120, 0.4);
+  border: 2px solid #48bb78;
+  border-radius: 4px;
+  transform: translateX(-50%);
+}
+
+.bt-result {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 8px;
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  color: #276749;
+}
+
+.bt-btn {
+  padding: 8px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #d69e2e;
+  color: #fff;
+}
+
+.bt-btn:hover { background: #b7791f; }
+.bt-label { font-size: 0.8rem; color: #888; text-align: center; }

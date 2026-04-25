@@ -1,0 +1,90 @@
+.paper-airplane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.pa-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.pa-info strong { color: #222; }
+
+.pa-arena {
+  position: relative;
+  width: 360px;
+  height: 220px;
+  background: linear-gradient(to bottom, #87ceeb 60%, #90ee90 60%);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #aaa;
+}
+
+.pa-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 33%;
+  background: #5a8a3c;
+}
+
+.pa-target {
+  position: absolute;
+  bottom: 28%;
+  font-size: 1.5rem;
+  transform: translateX(-50%);
+}
+
+.pa-plane {
+  position: absolute;
+  font-size: 1.6rem;
+  transform-origin: center center;
+  transition: none;
+}
+
+.pa-angle-bar {
+  width: 220px;
+  height: 14px;
+  background: #ddd;
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+}
+
+.pa-angle-fill {
+  height: 100%;
+  background: linear-gradient(to right, #63b3ed, #f6ad55, #fc8181);
+  border-radius: 7px;
+  transition: width 0.02s;
+}
+
+.pa-result {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 8px;
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  color: #276749;
+}
+
+.pa-btn {
+  padding: 8px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #3182ce;
+  color: #fff;
+}
+
+.pa-btn:hover { background: #2b6cb0; }
+.pa-hint { font-size: 0.85rem; color: #888; }

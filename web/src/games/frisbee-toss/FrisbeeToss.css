@@ -1,0 +1,74 @@
+.frisbee-toss {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.ft-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.ft-info strong { color: #222; }
+
+.ft-arena {
+  position: relative;
+  width: 320px;
+  height: 240px;
+  background: linear-gradient(to bottom, #87ceeb 50%, #90ee90 50%);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #aaa;
+}
+
+.ft-ring {
+  position: absolute;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+.ft-frisbee {
+  position: absolute;
+  font-size: 1.8rem;
+  transform: translate(-50%, -50%);
+  transition: none;
+}
+
+.ft-aim-line {
+  position: absolute;
+  bottom: 0;
+  width: 3px;
+  height: 60px;
+  background: rgba(255,100,100,0.7);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.ft-result {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 8px;
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  color: #276749;
+}
+
+.ft-btn {
+  padding: 8px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #d69e2e;
+  color: #fff;
+}
+
+.ft-btn:hover { background: #b7791f; }
+.ft-hint { font-size: 0.85rem; color: #888; }

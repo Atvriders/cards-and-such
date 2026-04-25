@@ -1,0 +1,83 @@
+.bottle-flip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.bf-info {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.bf-info strong { color: #222; }
+
+.bf-arena {
+  position: relative;
+  width: 260px;
+  height: 320px;
+  background: linear-gradient(to bottom, #87ceeb 0%, #87ceeb 70%, #5a3e1b 70%, #5a3e1b 100%);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #aaa;
+}
+
+.bf-bottle {
+  position: absolute;
+  left: 50%;
+  transform-origin: center bottom;
+  font-size: 2.8rem;
+  transition: none;
+}
+
+.bf-power-bar {
+  width: 200px;
+  height: 18px;
+  background: #ddd;
+  border-radius: 9px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+}
+
+.bf-power-fill {
+  height: 100%;
+  border-radius: 9px;
+  transition: width 0.02s linear;
+}
+
+.bf-result {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 8px;
+}
+
+.bf-result.success {
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  color: #276749;
+}
+
+.bf-result.miss {
+  background: #fff5f5;
+  border: 2px solid #fc8181;
+  color: #c53030;
+}
+
+.bf-btn {
+  padding: 8px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #3182ce;
+  color: #fff;
+}
+
+.bf-btn:hover { background: #2b6cb0; }
+.bf-hint { font-size: 0.85rem; color: #888; }

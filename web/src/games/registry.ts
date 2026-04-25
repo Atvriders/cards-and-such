@@ -808,6 +808,14 @@ import { boggleProPlugin } from "./boggle-pro/index.js";
 import { slotMachineProPlugin } from "./slot-machine-pro/index.js";
 import { diceStackPlugin } from "./dice-stack/index.js";
 import { towerBuilderPlugin } from "./tower-builder/index.js";
+import { bottleFlipPlugin } from "./bottle-flip/index.js";
+import { paperAirplanePlugin } from "./paper-airplane/index.js";
+import { frisbeeTossPlugin } from "./frisbee-toss/index.js";
+import { boomerangThrowPlugin } from "./boomerang-throw/index.js";
+import { targetShooterPlugin } from "./target-shooter/index.js";
+import { marbleRollPlugin } from "./marble-roll/index.js";
+import { cupFlipPlugin } from "./cup-flip/index.js";
+import { slingshotLaunchPlugin } from "./slingshot-launch/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1619,4 +1627,12 @@ export const GAMES: GamePlugin[] = [
   slotMachineProPlugin as unknown as GamePlugin,
   diceStackPlugin as unknown as GamePlugin,
   towerBuilderPlugin as unknown as GamePlugin,
+  bottleFlipPlugin as unknown as GamePlugin,
+  paperAirplanePlugin as unknown as GamePlugin,
+  frisbeeTossPlugin as unknown as GamePlugin,
+  boomerangThrowPlugin as unknown as GamePlugin,
+  targetShooterPlugin as unknown as GamePlugin,
+  marbleRollPlugin as unknown as GamePlugin,
+  cupFlipPlugin as unknown as GamePlugin,
+  slingshotLaunchPlugin as unknown as GamePlugin,
 ];
