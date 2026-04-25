@@ -1,0 +1,15 @@
+.ccs-wrap { display:flex; flex-direction:column; align-items:center; gap:20px; padding:24px 16px; font-family:sans-serif; user-select:none; max-width:400px; margin:0 auto; }
+.ccs-info { display:flex; gap:16px; font-size:.9rem; color:#555; flex-wrap:wrap; justify-content:center; }
+.ccs-card { width:90px; height:120px; border:2px solid #aaa; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; font-weight:bold; background:#fff; }
+.ccs-card.red { color:#c0392b; }
+.ccs-card.black { color:#2c3e50; }
+.ccs-btns { display:flex; gap:12px; }
+.ccs-btn { padding:12px 24px; font-size:1rem; font-weight:bold; border:none; border-radius:8px; cursor:pointer; }
+.ccs-btn.red { background:#c0392b; color:#fff; }
+.ccs-btn.black { background:#2c3e50; color:#fff; }
+.ccs-feedback { font-size:1rem; font-weight:bold; }
+.ccs-feedback.win { color:#28a745; }
+.ccs-feedback.loss { color:#dc3545; }
+.ccs-done { text-align:center; }
+.ccs-done h2 { font-size:1.8rem; margin:0 0 8px; }
+.ccs-final { font-size:1.3rem; color:#4a6fa5; font-weight:bold; }

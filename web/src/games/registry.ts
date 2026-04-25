@@ -1077,6 +1077,36 @@ import { eggDropPlugin } from "./egg-drop/index.js";
 import { gemGrabPlugin } from "./gem-grab/index.js";
 import { hatTossPlugin } from "./hat-toss/index.js";
 import { hulaHoopPlugin } from "./hula-hoop/index.js";
+import { spicesQuizPlugin } from "./spices-quiz/index.js";
+import { drinksQuizPlugin } from "./drinks-quiz/index.js";
+import { snacksQuizPlugin } from "./snacks-quiz/index.js";
+import { festivalsQuizPlugin } from "./festivals-quiz/index.js";
+import { religionsQuizPlugin } from "./religions-quiz/index.js";
+import { sportsRulesQuizPlugin } from "./sports-rules-quiz/index.js";
+import { olympicEventsQuizPlugin } from "./olympic-events-quiz/index.js";
+import { transportationQuizPlugin } from "./transportation-quiz/index.js";
+import { architectureQuizPlugin } from "./architecture-quiz/index.js";
+import { dictatorsQuizPlugin } from "./dictators-quiz/index.js";
+import { cardFlipThreePlugin } from "./card-flip-three/index.js";
+import { cardPickBetPlugin } from "./card-pick-bet/index.js";
+import { cardColorStreakPlugin } from "./card-color-streak/index.js";
+import { cardPileStackPlugin } from "./card-pile-stack/index.js";
+import { cardHotColdPlugin } from "./card-hot-cold/index.js";
+import { dicePyramidStackPlugin } from "./dice-pyramid-stack/index.js";
+import { diceBullseyeRollPlugin } from "./dice-bullseye-roll/index.js";
+import { diceSequence3Plugin } from "./dice-sequence-3/index.js";
+import { diceFlushRollPlugin } from "./dice-flush-roll/index.js";
+import { diceUpDownGamePlugin } from "./dice-up-down-game/index.js";
+import { iceSkaterPlugin } from "./ice-skater/index.js";
+import { kiteRunnerPlugin } from "./kite-runner/index.js";
+import { knightChargePlugin } from "./knight-charge/index.js";
+import { leafRakePlugin } from "./leaf-rake/index.js";
+import { lemonSqueezePlugin } from "./lemon-squeeze/index.js";
+import { melonSmashPlugin } from "./melon-smash/index.js";
+import { nailHammerPlugin } from "./nail-hammer/index.js";
+import { oilPumpPlugin } from "./oil-pump/index.js";
+import { pencilSharpenPlugin } from "./pencil-sharpen/index.js";
+import { pizzaCutPlugin } from "./pizza-cut/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2157,4 +2187,34 @@ export const GAMES: GamePlugin[] = [
   gemGrabPlugin as unknown as GamePlugin,
   hatTossPlugin as unknown as GamePlugin,
   hulaHoopPlugin as unknown as GamePlugin,
+  spicesQuizPlugin as unknown as GamePlugin,
+  drinksQuizPlugin as unknown as GamePlugin,
+  snacksQuizPlugin as unknown as GamePlugin,
+  festivalsQuizPlugin as unknown as GamePlugin,
+  religionsQuizPlugin as unknown as GamePlugin,
+  sportsRulesQuizPlugin as unknown as GamePlugin,
+  olympicEventsQuizPlugin as unknown as GamePlugin,
+  transportationQuizPlugin as unknown as GamePlugin,
+  architectureQuizPlugin as unknown as GamePlugin,
+  dictatorsQuizPlugin as unknown as GamePlugin,
+  cardFlipThreePlugin as unknown as GamePlugin,
+  cardPickBetPlugin as unknown as GamePlugin,
+  cardColorStreakPlugin as unknown as GamePlugin,
+  cardPileStackPlugin as unknown as GamePlugin,
+  cardHotColdPlugin as unknown as GamePlugin,
+  dicePyramidStackPlugin as unknown as GamePlugin,
+  diceBullseyeRollPlugin as unknown as GamePlugin,
+  diceSequence3Plugin as unknown as GamePlugin,
+  diceFlushRollPlugin as unknown as GamePlugin,
+  diceUpDownGamePlugin as unknown as GamePlugin,
+  iceSkaterPlugin as unknown as GamePlugin,
+  kiteRunnerPlugin as unknown as GamePlugin,
+  knightChargePlugin as unknown as GamePlugin,
+  leafRakePlugin as unknown as GamePlugin,
+  lemonSqueezePlugin as unknown as GamePlugin,
+  melonSmashPlugin as unknown as GamePlugin,
+  nailHammerPlugin as unknown as GamePlugin,
+  oilPumpPlugin as unknown as GamePlugin,
+  pencilSharpenPlugin as unknown as GamePlugin,
+  pizzaCutPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,16 @@
+.cps-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 16px; font-family:sans-serif; user-select:none; max-width:440px; margin:0 auto; }
+.cps-info { display:flex; gap:20px; font-size:.9rem; color:#555; }
+.cps-total { font-size:2rem; font-weight:900; color:#2c3e50; }
+.cps-total.bust { color:#dc3545; }
+.cps-pile { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; min-height:60px; }
+.cps-mini-card { width:52px; height:72px; border:2px solid #aaa; border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:bold; }
+.cps-mini-card.red { color:#c0392b; }
+.cps-mini-card.black { color:#2c3e50; }
+.cps-btns { display:flex; gap:12px; }
+.cps-btn { padding:12px 24px; font-size:1rem; font-weight:bold; border:none; border-radius:8px; cursor:pointer; }
+.cps-btn.draw { background:#4a6fa5; color:#fff; }
+.cps-btn.bank { background:#28a745; color:#fff; }
+.cps-btn:disabled { opacity:.5; cursor:default; }
+.cps-done { text-align:center; }
+.cps-done h2 { font-size:1.8rem; margin:0 0 8px; }
+.cps-final { font-size:1.3rem; color:#4a6fa5; font-weight:bold; }
