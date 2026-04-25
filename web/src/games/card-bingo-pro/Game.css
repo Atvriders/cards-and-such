@@ -1,0 +1,151 @@
+.cbp-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0d1117;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.cbp-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffd700;
+}
+
+.cbp-hud {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.cbp-last {
+  color: #ffd700;
+  font-size: 1.1rem;
+}
+
+.cbp-cards-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cbp-card {
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 6px;
+  background: rgba(255,255,255,0.03);
+}
+
+.cbp-card.bingo-card {
+  border-color: #ffd700;
+  box-shadow: 0 0 16px rgba(255,215,0,0.4);
+}
+
+.cbp-col-labels {
+  display: grid;
+  grid-template-columns: repeat(5, 40px);
+  gap: 3px;
+  margin-bottom: 3px;
+}
+
+.cbp-col-label {
+  text-align: center;
+  font-weight: 900;
+  font-size: 0.9rem;
+  color: #ffd700;
+}
+
+.cbp-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 40px);
+  gap: 3px;
+}
+
+.cbp-cell {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ccc;
+}
+
+.cbp-cell.marked {
+  background: rgba(77,255,77,0.25);
+  border-color: #4dff4d;
+  color: #4dff4d;
+}
+
+.cbp-cell.free {
+  background: rgba(255,215,0,0.2);
+  border-color: #ffd700;
+  color: #ffd700;
+  font-size: 0.6rem;
+}
+
+.cbp-cell.just-drawn {
+  background: rgba(255,159,28,0.35);
+  border-color: #ff9f1c;
+  color: #ff9f1c;
+}
+
+.cbp-drawn-list {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 360px;
+}
+
+.cbp-drawn-num {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.cbp-draw-btn {
+  padding: 0.7rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #ffd700;
+  color: #000;
+  transition: filter 0.15s;
+}
+
+.cbp-draw-btn:hover { filter: brightness(1.1); }
+
+.cbp-result {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-align: center;
+  color: #ffd700;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+}
+
+.cbp-result-sub {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #aaa;
+  margin-top: 0.3rem;
+}

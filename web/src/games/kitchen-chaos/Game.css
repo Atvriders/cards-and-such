@@ -1,0 +1,149 @@
+.kc-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a0a0a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.kc-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ff6b35;
+}
+
+.kc-hud {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.kc-orders {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.kc-order {
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  min-width: 130px;
+  transition: border-color 0.15s;
+}
+
+.kc-order:hover { border-color: rgba(255,255,255,0.3); }
+.kc-order.selected { border-color: #ff6b35; background: rgba(255,107,53,0.1); }
+.kc-order.urgent { border-color: #ff4444; animation: pulse 0.5s infinite alternate; }
+
+@keyframes pulse {
+  from { box-shadow: 0 0 4px #ff4444; }
+  to { box-shadow: 0 0 12px #ff4444; }
+}
+
+.kc-order-header {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #aaa;
+  margin-bottom: 0.4rem;
+}
+
+.kc-recipe {
+  display: flex;
+  gap: 4px;
+  font-size: 1.4rem;
+}
+
+.kc-ing { opacity: 0.5; transition: opacity 0.15s; }
+.kc-ing.done { opacity: 1; }
+
+.kc-assembled {
+  font-size: 0.75rem;
+  color: #ccc;
+  margin-top: 0.3rem;
+}
+
+.kc-workbench {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.kc-workbench-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.kc-ingredients {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.kc-ing-btn {
+  padding: 0.45rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.kc-ing-btn:hover { background: rgba(255,255,255,0.22); }
+
+.kc-serve-btn {
+  padding: 0.6rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4dff4d;
+  color: #000;
+  transition: filter 0.15s;
+}
+
+.kc-serve-btn:hover { filter: brightness(1.1); }
+
+.kc-hint {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.kc-gameover {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.kc-sub {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #aaa;
+}

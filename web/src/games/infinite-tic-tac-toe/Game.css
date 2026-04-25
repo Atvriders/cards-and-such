@@ -1,0 +1,78 @@
+.ittt-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  background: #1a1a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.ittt-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.ittt-sub {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.ittt-turn {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.ittt-board {
+  display: grid;
+  grid-template-columns: repeat(5, 64px);
+  gap: 6px;
+}
+
+.ittt-cell {
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  font-size: 1.6rem;
+  font-weight: 900;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.ittt-cell:hover:not(:disabled) {
+  background: rgba(255,255,255,0.15);
+}
+
+.ittt-cell:disabled { cursor: default; }
+
+.ittt-cell.x { color: #4daaff; border-color: #4daaff; background: rgba(77,170,255,0.1); }
+.ittt-cell.o { color: #ff6b6b; border-color: #ff6b6b; background: rgba(255,107,107,0.1); }
+
+.ittt-cell.fading {
+  opacity: 0.4;
+  border-style: dashed;
+}
+
+.ittt-result {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.ittt-score {
+  font-size: 1rem;
+  opacity: 0.8;
+}

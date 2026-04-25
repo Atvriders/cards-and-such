@@ -1,0 +1,127 @@
+.lp-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a1a1a;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.lp-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ff9f1c;
+}
+
+.lp-hud {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.lp-target {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.lp-target-letter {
+  font-size: 1.5rem;
+  color: #ff9f1c;
+  font-weight: 900;
+}
+
+.lp-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 56px);
+  gap: 6px;
+}
+
+.lp-cell {
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ccc;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.lp-cell:hover:not(:disabled) {
+  background: rgba(255,159,28,0.2);
+  border-color: #ff9f1c;
+}
+
+.lp-cell.painted {
+  background: rgba(255,159,28,0.35);
+  border-color: #ff9f1c;
+  color: #fff;
+}
+
+.lp-cell.correct-cell {
+  background: rgba(77,255,77,0.25) !important;
+  border-color: #4dff4d !important;
+  color: #4dff4d !important;
+}
+
+.lp-cell.wrong-cell {
+  background: rgba(255,68,68,0.25) !important;
+  border-color: #ff4444 !important;
+  color: #ff4444 !important;
+}
+
+.lp-cell:disabled {
+  cursor: default;
+}
+
+.lp-submit-btn {
+  padding: 0.6rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ff9f1c;
+  color: #000;
+  transition: filter 0.15s;
+}
+
+.lp-submit-btn:hover { filter: brightness(1.15); }
+
+.lp-result {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4dff4d;
+}
+
+.lp-next-btn {
+  padding: 0.5rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4444ff;
+  color: #fff;
+}
+
+.lp-gameover {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+}
