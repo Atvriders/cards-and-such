@@ -1,0 +1,20 @@
+.bg-wrap { max-width: 460px; margin: 0 auto; font-family: sans-serif; padding: 12px; }
+.bg-header { display: flex; justify-content: space-between; align-items: center; background: #1a237e; color: #fff; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; }
+.bg-title { font-size: 1.1rem; font-weight: bold; }
+.bg-score { color: #ffee58; font-weight: bold; font-size: 1.1rem; }
+.bg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+.bg-cell { aspect-ratio: 1; background: #283593; border: 2px solid #3949ab; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: bold; color: #fff; }
+.bg-input-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.bg-input { flex: 1; padding: 8px 12px; border: 2px solid #3949ab; border-radius: 6px; background: #1a1a2e; color: #fff; font-size: 1rem; text-transform: uppercase; }
+.bg-submit-btn { padding: 8px 16px; background: #1565c0; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.bg-actions { display: flex; gap: 8px; margin-bottom: 10px; }
+.bg-pass-btn { flex: 1; padding: 8px; background: #424242; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+.bg-end-btn { flex: 1; padding: 8px; background: #b71c1c; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+.bg-feedback { padding: 8px 12px; border-radius: 6px; margin-bottom: 10px; font-weight: bold; text-align: center; }
+.bg-valid { background: #1b5e20; color: #a5d6a7; }
+.bg-invalid { background: #b71c1c; color: #ef9a9a; }
+.bg-words { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.bg-word-chip { background: #283593; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem; }
+.bg-done { text-align: center; padding: 20px; }
+.bg-final { font-size: 1.5rem; font-weight: bold; color: #ffee58; margin-bottom: 8px; }
+.bg-turns { font-size: 0.8rem; color: #aaa; margin-bottom: 6px; }

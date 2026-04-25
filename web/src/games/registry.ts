@@ -800,6 +800,14 @@ import { wizardSpellCastPlugin } from "./wizard-spell-cast/index.js";
 import { dragonEggHatchPlugin } from "./dragon-egg-hatch/index.js";
 import { robotArenaPlugin } from "./robot-arena/index.js";
 import { marsColonyPlugin } from "./mars-colony/index.js";
+import { taxiDriverPlugin } from "./taxi-driver/index.js";
+import { foragerGamePlugin } from "./forager-game/index.js";
+import { spaceTraderPlugin } from "./space-trader/index.js";
+import { bountyHunterPlugin } from "./bounty-hunter/index.js";
+import { boggleProPlugin } from "./boggle-pro/index.js";
+import { slotMachineProPlugin } from "./slot-machine-pro/index.js";
+import { diceStackPlugin } from "./dice-stack/index.js";
+import { towerBuilderPlugin } from "./tower-builder/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1603,4 +1611,12 @@ export const GAMES: GamePlugin[] = [
   auctionGamePlugin as unknown as GamePlugin,
   pizzaRushPlugin as unknown as GamePlugin,
   stockDayTraderPlugin as unknown as GamePlugin,
+  taxiDriverPlugin as unknown as GamePlugin,
+  foragerGamePlugin as unknown as GamePlugin,
+  spaceTraderPlugin as unknown as GamePlugin,
+  bountyHunterPlugin as unknown as GamePlugin,
+  boggleProPlugin as unknown as GamePlugin,
+  slotMachineProPlugin as unknown as GamePlugin,
+  diceStackPlugin as unknown as GamePlugin,
+  towerBuilderPlugin as unknown as GamePlugin,
 ];

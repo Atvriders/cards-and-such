@@ -1,0 +1,25 @@
+.forager-wrap { max-width: 480px; margin: 0 auto; font-family: sans-serif; padding: 12px; }
+.forager-header { display: flex; justify-content: space-between; align-items: center; background: #2d4a1e; color: #d4e8b0; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; }
+.forager-title { font-size: 1.1rem; font-weight: bold; }
+.forager-season { font-size: 0.85rem; background: #4a7c30; padding: 2px 8px; border-radius: 4px; }
+.forager-stats { display: flex; gap: 12px; margin-bottom: 10px; }
+.forager-stat-box { flex: 1; background: #1a2e0e; border: 1px solid #4a7c30; border-radius: 6px; padding: 6px 10px; text-align: center; }
+.forager-stat-label { font-size: 0.7rem; color: #8aad60; }
+.forager-stat-val { font-size: 1.1rem; font-weight: bold; color: #d4e8b0; }
+.forager-resources { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.forager-res-btn { padding: 10px; border: 2px solid #4a7c30; border-radius: 8px; background: #1a2e0e; color: #d4e8b0; cursor: pointer; text-align: left; }
+.forager-res-btn:hover:not(:disabled) { border-color: #8aad60; background: #2d4a1e; }
+.forager-res-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.forager-res-name { font-weight: bold; }
+.forager-res-info { font-size: 0.75rem; color: #8aad60; margin-top: 2px; }
+.forager-res-season { font-size: 0.7rem; color: #f9a825; }
+.forager-rest-btn { width: 100%; padding: 8px; background: #4a7c30; color: #fff; border: none; border-radius: 6px; cursor: pointer; margin-bottom: 10px; }
+.forager-haul { background: #1a2e0e; border: 1px solid #4a7c30; border-radius: 8px; padding: 12px; margin-bottom: 10px; text-align: center; }
+.forager-haul-val { font-size: 1.3rem; font-weight: bold; color: #8aad60; }
+.forager-next-btn { width: 100%; padding: 10px; background: #2d6a4f; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+.forager-done { text-align: center; padding: 20px; color: #d4e8b0; }
+.forager-final { font-size: 1.5rem; font-weight: bold; color: #8aad60; margin-bottom: 8px; }
+.forager-cache { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px; }
+.forager-cache-item { background: #1a2e0e; border: 1px solid #4a7c30; border-radius: 6px; padding: 6px; text-align: center; font-size: 0.8rem; }
+.forager-log { max-height: 100px; overflow-y: auto; margin-top: 10px; border: 1px solid #333; border-radius: 6px; padding: 6px; }
+.forager-log-line { font-size: 0.75rem; color: #8aad60; padding: 2px 0; }

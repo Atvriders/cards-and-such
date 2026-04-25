@@ -1,0 +1,24 @@
+.bh-wrap { max-width: 460px; margin: 0 auto; font-family: sans-serif; padding: 12px; color: #e0e0e0; }
+.bh-header { display: flex; justify-content: space-between; align-items: center; background: #1a0a00; border: 1px solid #8d3900; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; }
+.bh-title { font-size: 1.1rem; font-weight: bold; color: #ff9800; }
+.bh-credits { color: #66bb6a; font-weight: bold; }
+.bh-health-bar { height: 10px; background: #333; border-radius: 5px; margin-bottom: 12px; overflow: hidden; }
+.bh-health-fill { height: 100%; background: linear-gradient(90deg, #f44336 0%, #ff9800 50%, #4caf50 100%); transition: width 0.3s; }
+.bh-target { background: #1a0a00; border: 2px solid #8d3900; border-radius: 10px; padding: 16px; margin-bottom: 12px; text-align: center; }
+.bh-target-name { font-size: 1.4rem; font-weight: bold; color: #ff9800; }
+.bh-bounty { font-size: 1.1rem; color: #66bb6a; margin: 6px 0; }
+.bh-ratings { display: flex; justify-content: center; gap: 16px; margin-top: 8px; }
+.bh-rating { font-size: 0.85rem; }
+.bh-actions { display: flex; gap: 10px; margin-bottom: 10px; }
+.bh-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+.bh-pursue { background: #c62828; color: #fff; }
+.bh-pursue:hover { background: #e53935; }
+.bh-skip { background: #424242; color: #fff; }
+.bh-skip:hover { background: #616161; }
+.bh-result { background: #1a1a1a; border: 1px solid #555; border-radius: 8px; padding: 12px; margin-bottom: 10px; text-align: center; }
+.bh-result-text { font-size: 1rem; color: #ff9800; }
+.bh-next-btn { width: 100%; padding: 10px; background: #4a148c; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.bh-done { text-align: center; padding: 20px; }
+.bh-final { font-size: 1.5rem; font-weight: bold; color: #ff9800; margin-bottom: 8px; }
+.bh-log { max-height: 100px; overflow-y: auto; border: 1px solid #333; border-radius: 6px; padding: 6px; margin-top: 10px; }
+.bh-log-line { font-size: 0.75rem; color: #aaa; padding: 2px 0; }
