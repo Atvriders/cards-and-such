@@ -1,0 +1,163 @@
+.einstein {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.einstein-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.einstein-won {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #27ae60;
+  background: #eafaf1;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.einstein-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.einstein-grid-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.einstein-section {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 6px;
+  border: 1px solid #dee2e6;
+}
+
+.einstein-cat-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6c757d;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.einstein-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.einstein-header-row,
+.einstein-row {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.einstein-corner {
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.einstein-col-head {
+  width: 36px;
+  text-align: center;
+  font-size: 0.7rem;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.einstein-row-head {
+  width: 72px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #333;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.einstein-cell {
+  width: 36px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.1s;
+  color: #888;
+}
+
+.einstein-cell:hover { background: #e9ecef; }
+
+.einstein-cell.cell-yes {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.einstein-cell.cell-no {
+  background: #f8d7da;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.einstein-clues {
+  min-width: 220px;
+  max-width: 280px;
+  background: #fff3cd;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid #ffc107;
+}
+
+.einstein-clues-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 6px;
+}
+
+.einstein-clue-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #533f03;
+}
+
+.einstein-clue-list li {
+  margin-bottom: 2px;
+}
+
+.einstein-reset-btn {
+  margin-top: 10px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.einstein-reset-btn:hover { background: #ccc; }

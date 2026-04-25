@@ -1,0 +1,154 @@
+.prisoner-hat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ph-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.ph-scenario {
+  font-size: 0.9rem;
+  color: #333;
+  text-align: center;
+  line-height: 1.6;
+  background: #f0f4ff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid #b8c7ff;
+}
+
+.ph-prisoners {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ph-prisoner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  min-width: 80px;
+}
+
+.ph-hat {
+  width: 36px;
+  height: 28px;
+  border-radius: 8px 8px 0 0;
+  border: 2px solid rgba(0,0,0,0.2);
+}
+
+.ph-hat-white { background: #f5f5f5; }
+.ph-hat-black { background: #222; }
+
+.ph-prisoner-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.ph-prisoner-sees {
+  font-size: 0.72rem;
+  color: #888;
+}
+
+.ph-prisoner-says {
+  font-size: 0.75rem;
+  color: #555;
+  font-style: italic;
+}
+
+.ph-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.ph-option-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 2px solid #ced4da;
+  background: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.1s;
+}
+
+.ph-option-btn:hover { border-color: #2060c0; background: #e8eeff; }
+.ph-option-btn.selected { border-color: #2060c0; background: #dce8ff; font-weight: 600; }
+
+.ph-submit-btn {
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  background: #2060c0;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: center;
+}
+
+.ph-submit-btn:disabled { background: #aaa; cursor: default; }
+.ph-submit-btn:not(:disabled):hover { background: #1040a0; }
+
+.ph-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.ph-correct { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+.ph-wrong { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+
+.ph-result-verdict {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.ph-explanation {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.ph-next-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #e0e0e0;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ph-next-btn:hover { background: #ccc; }
+
+.ph-score {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}

@@ -1,0 +1,140 @@
+.monty-hall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.mh-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.mh-phase-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+}
+
+.mh-doors {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mh-door {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 120px;
+  padding: 16px 10px;
+  background: #6b4c2a;
+  border-radius: 10px;
+  border: 3px solid #4a2e12;
+  transition: all 0.2s;
+}
+
+.mh-door.door-picked { border-color: #2060c0; box-shadow: 0 0 0 3px #a0c0ff; }
+.mh-door.door-goat { background: #8a8a8a; border-color: #666; }
+.mh-door.door-car { background: #1a5c2a; border-color: #0d3a1a; }
+.mh-door.door-win { background: #1a5c2a; border-color: #f0c040; box-shadow: 0 0 0 3px #f0c040; }
+.mh-door.door-lose { background: #8a3030; border-color: #5a1010; }
+
+.mh-door-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f5e6c8;
+}
+
+.mh-door-icon {
+  font-size: 1.8rem;
+  min-height: 2rem;
+}
+
+.mh-pick-btn {
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: none;
+  background: #f5e6c8;
+  color: #4a2e12;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mh-pick-btn:hover { background: #ffe4a0; }
+
+.mh-decision {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: #fff3cd;
+  border-radius: 10px;
+  border: 1px solid #ffc107;
+}
+
+.mh-decision-info {
+  font-size: 0.9rem;
+  color: #533f03;
+  text-align: center;
+}
+
+.mh-decision-btns {
+  display: flex;
+  gap: 12px;
+}
+
+.mh-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.mh-btn.switch { background: #e74c3c; color: #fff; }
+.mh-btn.switch:hover { background: #c0392b; }
+.mh-btn.stay { background: #27ae60; color: #fff; }
+.mh-btn.stay:hover { background: #1e8449; }
+.mh-btn.next { background: #2060c0; color: #fff; }
+.mh-btn.next:hover { background: #1040a0; }
+
+.mh-result-row {
+  display: flex;
+  justify-content: center;
+}
+
+.mh-stats {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px 16px;
+  border: 1px solid #dee2e6;
+  min-width: 260px;
+}
+
+.mh-stats-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.mh-stats-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #333;
+  padding: 2px 0;
+}

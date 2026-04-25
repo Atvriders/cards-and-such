@@ -1,0 +1,130 @@
+.digit-deduce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.dd-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.dd-verdict {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.dd-win { background: #d4edda; color: #155724; }
+.dd-lose { background: #f8d7da; color: #721c24; }
+
+.dd-clues {
+  background: #fff3cd;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid #ffc107;
+  width: 100%;
+}
+
+.dd-clues-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 4px;
+}
+
+.dd-clue-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  color: #533f03;
+  line-height: 1.7;
+}
+
+.dd-entries {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dd-entry-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dd-entry-label {
+  font-size: 0.72rem;
+  color: #888;
+  font-weight: 600;
+}
+
+.dd-entry-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.dd-inc, .dd-dec {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: #888;
+  padding: 2px 6px;
+}
+
+.dd-inc:hover, .dd-dec:hover { color: #2060c0; }
+
+.dd-digit {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #f0e68c;
+  font-size: 1.4rem;
+  font-weight: 800;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #444;
+  transition: border-color 0.15s;
+}
+
+.dd-digit.blank { color: #555; font-size: 1rem; }
+.dd-digit.correct { border-color: #27ae60; background: #1a4a2a; }
+.dd-digit.wrong { border-color: #e74c3c; background: #4a1a1a; }
+
+.dd-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.dd-btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.dd-btn.submit { background: #2060c0; color: #fff; }
+.dd-btn.submit:disabled { background: #aaa; cursor: default; }
+.dd-btn.submit:not(:disabled):hover { background: #1040a0; }
+.dd-btn.reset { background: #27ae60; color: #fff; }
+.dd-btn.reset:hover { background: #1e8449; }
+.dd-btn.clear { background: #e0e0e0; color: #333; }
+.dd-btn.clear:hover { background: #ccc; }

@@ -772,6 +772,14 @@ import { submarineHuntPlugin } from "./submarine-hunt/index.js";
 import { pinballMiniPlugin } from "./pinball-mini/index.js";
 import { ufoRescuePlugin } from "./ufo-rescue/index.js";
 import { motorcycleJumpPlugin } from "./motorcycle-jump/index.js";
+import { einsteinPuzzlePlugin } from "./einstein-puzzle/index.js";
+import { weighingPuzzlePlugin } from "./weighing-puzzle/index.js";
+import { prisonerHatPlugin } from "./prisoner-hat/index.js";
+import { montyHallPlugin } from "./monty-hall/index.js";
+import { seatingPuzzlePlugin } from "./seating-puzzle/index.js";
+import { safeCrackerPlugin } from "./safe-cracker/index.js";
+import { riddleMachinePlugin } from "./riddle-machine/index.js";
+import { digitDeducePlugin } from "./digit-deduce/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1547,4 +1555,12 @@ export const GAMES: GamePlugin[] = [
   pinballMiniPlugin as unknown as GamePlugin,
   ufoRescuePlugin as unknown as GamePlugin,
   motorcycleJumpPlugin as unknown as GamePlugin,
+  einsteinPuzzlePlugin as unknown as GamePlugin,
+  weighingPuzzlePlugin as unknown as GamePlugin,
+  prisonerHatPlugin as unknown as GamePlugin,
+  montyHallPlugin as unknown as GamePlugin,
+  seatingPuzzlePlugin as unknown as GamePlugin,
+  safeCrackerPlugin as unknown as GamePlugin,
+  riddleMachinePlugin as unknown as GamePlugin,
+  digitDeducePlugin as unknown as GamePlugin,
 ];

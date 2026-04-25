@@ -1,0 +1,179 @@
+.safe-cracker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.sc-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sc-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  letter-spacing: 0.05em;
+}
+
+.sc-safe-icon {
+  font-size: 1.5rem;
+}
+
+.sc-subtitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+}
+
+.sc-history {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  background: #1a1a2e;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 60px;
+}
+
+.sc-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sc-row-num {
+  color: #888;
+  font-size: 0.75rem;
+  width: 16px;
+  text-align: right;
+}
+
+.sc-digits {
+  display: flex;
+  gap: 4px;
+}
+
+.sc-digit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #2c2c50;
+  border-radius: 6px;
+  color: #f0e68c;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: monospace;
+}
+
+.sc-hints {
+  display: flex;
+  gap: 8px;
+  margin-left: 4px;
+}
+
+.sc-exact {
+  color: #50fa7b;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.sc-misplaced {
+  color: #ffb86c;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.sc-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 12px;
+  border: 2px solid #dee2e6;
+  width: 100%;
+}
+
+.sc-input-label {
+  font-size: 0.82rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.sc-input-digits {
+  display: flex;
+  gap: 8px;
+}
+
+.sc-digit-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sc-up-btn, .sc-down-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: #888;
+  padding: 2px 4px;
+}
+
+.sc-up-btn:hover, .sc-down-btn:hover { color: #2060c0; }
+
+.sc-input-digit {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #f0e68c;
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #444;
+}
+
+.sc-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sc-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: background 0.1s;
+}
+
+.sc-btn.submit { background: #2060c0; color: #fff; }
+.sc-btn.submit:hover { background: #1040a0; }
+.sc-btn.clear { background: #e0e0e0; color: #333; }
+.sc-btn.clear:hover { background: #ccc; }
+
+.sc-legend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.75rem;
+}
