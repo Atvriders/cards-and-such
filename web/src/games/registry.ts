@@ -699,6 +699,14 @@ import { mythologyQuizPlugin } from "./mythology-quiz/index.js";
 import { spaceQuizPlugin } from "./space-quiz/index.js";
 import { foodQuizPlugin } from "./food-quiz/index.js";
 import { animalQuizPlugin } from "./animal-quiz/index.js";
+import { phrazlePlugin } from "./phrazle/index.js";
+import { connectionsPlugin } from "./connections-clone/index.js";
+import { compoundWordPlugin } from "./compound-word/index.js";
+import { wordPyramidPlugin } from "./word-pyramid/index.js";
+import { panagramPlugin } from "./panagram/index.js";
+import { lastLetterPlugin } from "./last-letter/index.js";
+import { phrasePuzzlePlugin } from "./phrase-puzzle/index.js";
+import { wordHuntPlugin } from "./word-hunt/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1401,4 +1409,12 @@ export const GAMES: GamePlugin[] = [
   spaceQuizPlugin as unknown as GamePlugin,
   foodQuizPlugin as unknown as GamePlugin,
   animalQuizPlugin as unknown as GamePlugin,
+  phrazlePlugin as unknown as GamePlugin,
+  connectionsPlugin as unknown as GamePlugin,
+  compoundWordPlugin as unknown as GamePlugin,
+  wordPyramidPlugin as unknown as GamePlugin,
+  panagramPlugin as unknown as GamePlugin,
+  lastLetterPlugin as unknown as GamePlugin,
+  phrasePuzzlePlugin as unknown as GamePlugin,
+  wordHuntPlugin as unknown as GamePlugin,
 ];

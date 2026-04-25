@@ -1,0 +1,89 @@
+.wordhunt-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.wordhunt-title { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; }
+
+.wordhunt-header { display: flex; justify-content: space-between; width: 100%; }
+.wordhunt-score { font-size: 1.1rem; font-weight: 700; color: #27ae60; }
+.wordhunt-timer { font-size: 1.4rem; font-weight: 900; color: #e74c3c; }
+.wordhunt-timer.urgent { animation: wh-pulse 0.5s infinite alternate; }
+@keyframes wh-pulse { from { opacity: 1; } to { opacity: 0.2; } }
+
+.wordhunt-category {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #8e44ad;
+  text-align: center;
+}
+
+.wordhunt-hint {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  text-align: center;
+  font-style: italic;
+}
+
+.wordhunt-found {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid #ecf0f1;
+  border-radius: 10px;
+  background: #fafafa;
+  justify-content: center;
+}
+
+.wordhunt-chip {
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #27ae60;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.wordhunt-input-row { display: flex; gap: 8px; width: 100%; }
+.wordhunt-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  outline: none;
+}
+.wordhunt-input:focus { border-color: #8e44ad; }
+.wordhunt-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: #8e44ad;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.wordhunt-message { font-size: 0.9rem; font-weight: 600; color: #27ae60; min-height: 1.2em; }
+.wordhunt-message.bad { color: #e74c3c; }
+
+.wordhunt-stats { font-size: 0.85rem; color: #7f8c8d; }
+
+.wordhunt-done {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  width: 100%;
+}

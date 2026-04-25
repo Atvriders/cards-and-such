@@ -1,0 +1,85 @@
+.lastletter-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.lastletter-title { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; }
+
+.lastletter-header { display: flex; justify-content: space-between; width: 100%; }
+
+.lastletter-timer {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #e74c3c;
+}
+.lastletter-timer.urgent { animation: ll-pulse 0.5s infinite alternate; }
+@keyframes ll-pulse { from { opacity: 1; } to { opacity: 0.2; } }
+
+.lastletter-score { font-size: 1.1rem; font-weight: 700; color: #27ae60; }
+
+.lastletter-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ecf0f1;
+  border-radius: 10px;
+  background: #fafafa;
+  min-height: 50px;
+  justify-content: center;
+}
+
+.ll-word {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: #3498db;
+  color: #fff;
+}
+.ll-word.starter { background: #8e44ad; }
+.ll-arrow { color: #bdc3c7; font-size: 1rem; line-height: 1.8rem; }
+
+.lastletter-needed {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f39c12;
+}
+
+.lastletter-input-row { display: flex; gap: 8px; width: 100%; }
+.lastletter-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+.lastletter-input:focus { border-color: #3498db; }
+.lastletter-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: #3498db;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.lastletter-error { color: #e74c3c; font-size: 0.9rem; font-weight: 600; min-height: 1.2em; }
+
+.lastletter-done {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  width: 100%;
+}

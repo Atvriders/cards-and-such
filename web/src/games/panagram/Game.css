@@ -1,0 +1,94 @@
+.panagram-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.panagram-title { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; }
+
+.panagram-found-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+  min-height: 32px;
+  padding: 6px;
+  border: 1px solid #ecf0f1;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.panagram-word-chip {
+  background: #3498db;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.panagram-word-chip.pangram { background: #f39c12; }
+
+.panagram-current {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  min-height: 2rem;
+  color: #2c3e50;
+}
+
+.panagram-hive {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.panagram-hex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 900;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  transition: transform 0.1s;
+}
+.panagram-hex:active { transform: scale(0.93); }
+.panagram-hex.center { background: #f1c40f; color: #333; }
+.panagram-hex.outer { background: #ecf0f1; color: #2c3e50; }
+.panagram-hex.empty { visibility: hidden; cursor: default; }
+
+.panagram-btns { display: flex; gap: 10px; }
+.panagram-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.9rem;
+}
+.panagram-btn.secondary { background: #bdc3c7; color: #333; }
+.panagram-btn.end { background: #e74c3c; }
+
+.panagram-message { font-size: 1rem; font-weight: 700; color: #27ae60; min-height: 1.2em; }
+.panagram-message.bad { color: #e74c3c; }
+
+.panagram-score { font-size: 1.1rem; font-weight: 700; color: #8e44ad; }
+
+.panagram-done {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  width: 100%;
+}

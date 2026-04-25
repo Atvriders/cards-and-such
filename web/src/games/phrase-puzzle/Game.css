@@ -1,0 +1,101 @@
+.phrasepuzzle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.phrasepuzzle-title { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; }
+.phrasepuzzle-progress { font-size: 0.85rem; color: #7f8c8d; }
+.phrasepuzzle-score { font-size: 1.1rem; font-weight: 700; color: #27ae60; }
+
+.phrasepuzzle-card {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #ecf0f1;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.phrasepuzzle-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8e44ad;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.phrasepuzzle-hint {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.phrasepuzzle-phrase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 2px;
+  align-items: flex-end;
+  line-height: 2.2;
+}
+
+.pp-word { display: flex; gap: 2px; align-items: flex-end; margin-right: 8px; }
+
+.pp-letter {
+  width: 22px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #2c3e50;
+  line-height: 1.4;
+  color: #2c3e50;
+}
+
+.pp-blank {
+  width: 22px;
+  height: 28px;
+  border: none;
+  border-bottom: 2px solid #3498db;
+  background: transparent;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  outline: none;
+  color: #2980b9;
+  padding: 0;
+}
+.pp-blank:focus { border-bottom-color: #e74c3c; }
+.pp-blank.correct { border-bottom-color: #27ae60; color: #27ae60; }
+.pp-blank.wrong { border-bottom-color: #e74c3c; color: #e74c3c; }
+
+.phrasepuzzle-btns { display: flex; gap: 10px; }
+.phrasepuzzle-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.95rem;
+}
+.phrasepuzzle-btn.next { background: #27ae60; }
+
+.phrasepuzzle-message { font-size: 0.95rem; font-weight: 700; color: #27ae60; min-height: 1.2em; text-align: center; }
+.phrasepuzzle-message.bad { color: #e74c3c; }
+
+.phrasepuzzle-done {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  width: 100%;
+}
