@@ -1047,6 +1047,36 @@ import { frogLeapPlugin } from "./frog-leap/index.js";
 import { monkeyBananaPlugin } from "./monkey-banana/index.js";
 import { cribbageSquarePlugin } from "./cribbage-square/index.js";
 import { decadeSolitairePlugin } from "./decade-solitaire/index.js";
+import { treesQuizPlugin } from "./trees-quiz/index.js";
+import { herbsQuizPlugin } from "./herbs-quiz/index.js";
+import { fruitsQuizPlugin } from "./fruits-quiz/index.js";
+import { vegetablesQuizPlugin } from "./vegetables-quiz/index.js";
+import { danceQuizPlugin } from "./dance-quiz/index.js";
+import { paintersQuizPlugin } from "./painters-quiz/index.js";
+import { composersQuizPlugin } from "./composers-quiz/index.js";
+import { philosophersQuizPlugin } from "./philosophers-quiz/index.js";
+import { warsQuizPlugin } from "./wars-quiz/index.js";
+import { treatiesQuizPlugin } from "./treaties-quiz/index.js";
+import { cardRankGuessPlugin } from "./card-rank-guess/index.js";
+import { cardPairPickPlugin } from "./card-pair-pick/index.js";
+import { cardPileBetPlugin } from "./card-pile-bet/index.js";
+import { cardShuffleBetPlugin } from "./card-shuffle-bet/index.js";
+import { cardLowHigh3Plugin } from "./card-low-high-3/index.js";
+import { diceTwinBetPlugin } from "./dice-twin-bet/index.js";
+import { dice100TargetPlugin } from "./dice-100-target/index.js";
+import { diceDoubleTroublePlugin } from "./dice-double-trouble/index.js";
+import { dicePipAddPlugin } from "./dice-pip-add/index.js";
+import { diceMirrorRollPlugin } from "./dice-mirror-roll/index.js";
+import { appleTossPlugin } from "./apple-toss/index.js";
+import { bananaPeelPlugin } from "./banana-peel/index.js";
+import { birdShootPlugin } from "./bird-shoot/index.js";
+import { candyGrabPlugin } from "./candy-grab/index.js";
+import { coinPopPlugin } from "./coin-pop/index.js";
+import { donutGrabPlugin } from "./donut-grab/index.js";
+import { eggDropPlugin } from "./egg-drop/index.js";
+import { gemGrabPlugin } from "./gem-grab/index.js";
+import { hatTossPlugin } from "./hat-toss/index.js";
+import { hulaHoopPlugin } from "./hula-hoop/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2097,4 +2127,34 @@ export const GAMES: GamePlugin[] = [
   ringerCoinPlugin as unknown as GamePlugin,
   snowballThrowPlugin as unknown as GamePlugin,
   sockTossPlugin as unknown as GamePlugin,
+  treesQuizPlugin as unknown as GamePlugin,
+  herbsQuizPlugin as unknown as GamePlugin,
+  fruitsQuizPlugin as unknown as GamePlugin,
+  vegetablesQuizPlugin as unknown as GamePlugin,
+  danceQuizPlugin as unknown as GamePlugin,
+  paintersQuizPlugin as unknown as GamePlugin,
+  composersQuizPlugin as unknown as GamePlugin,
+  philosophersQuizPlugin as unknown as GamePlugin,
+  warsQuizPlugin as unknown as GamePlugin,
+  treatiesQuizPlugin as unknown as GamePlugin,
+  cardRankGuessPlugin as unknown as GamePlugin,
+  cardPairPickPlugin as unknown as GamePlugin,
+  cardPileBetPlugin as unknown as GamePlugin,
+  cardShuffleBetPlugin as unknown as GamePlugin,
+  cardLowHigh3Plugin as unknown as GamePlugin,
+  diceTwinBetPlugin as unknown as GamePlugin,
+  dice100TargetPlugin as unknown as GamePlugin,
+  diceDoubleTroublePlugin as unknown as GamePlugin,
+  dicePipAddPlugin as unknown as GamePlugin,
+  diceMirrorRollPlugin as unknown as GamePlugin,
+  appleTossPlugin as unknown as GamePlugin,
+  bananaPeelPlugin as unknown as GamePlugin,
+  birdShootPlugin as unknown as GamePlugin,
+  candyGrabPlugin as unknown as GamePlugin,
+  coinPopPlugin as unknown as GamePlugin,
+  donutGrabPlugin as unknown as GamePlugin,
+  eggDropPlugin as unknown as GamePlugin,
+  gemGrabPlugin as unknown as GamePlugin,
+  hatTossPlugin as unknown as GamePlugin,
+  hulaHoopPlugin as unknown as GamePlugin,
 ];
