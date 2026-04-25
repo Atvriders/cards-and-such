@@ -1,0 +1,65 @@
+.little-spider {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.little-spider-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.deal-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.deal-btn:hover { background: #444; }
+.deal-btn:disabled { opacity: 0.4; cursor: default; }
+
+.auto-move-btn {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.auto-move-btn:hover {
+  background: #444;
+}
+
+.little-spider-foundations {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.foundation-label {
+  font-size: 11px;
+  text-align: center;
+  color: #888;
+  margin-top: 2px;
+}
+
+.little-spider-tableau {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.pile-wrapper {
+  flex-shrink: 0;
+}

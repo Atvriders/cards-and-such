@@ -1,0 +1,144 @@
+.osmosis {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.osmosis-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.osmosis-main {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.osmosis-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.osmosis-stock-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.osmosis-foundations {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.osmosis-reserve {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.osmosis-card {
+  width: 60px;
+  height: 84px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #1a3a1a;
+  color: #eee;
+  flex-shrink: 0;
+}
+
+.osmosis-card.red { color: #f44; }
+.osmosis-card.empty {
+  background: #111;
+  border: 2px dashed #444;
+  color: #444;
+  cursor: default;
+}
+.osmosis-card.face-down {
+  background: #1a2a4a;
+  color: transparent;
+  cursor: default;
+}
+.osmosis-card.stock-card {
+  cursor: pointer;
+  background: #1a2a4a;
+}
+.osmosis-card:hover:not(.empty):not(.face-down) {
+  border-color: #aaa;
+}
+
+.recycle-btn {
+  padding: 4px 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 12px;
+}
+.recycle-btn:hover { background: #444; }
+.recycle-btn:disabled { opacity: 0.4; cursor: default; }
+
+.osmosis-foundation-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.foundation-suit-label {
+  width: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+.foundation-suit-label.red { color: #f44; }
+
+.osmosis-foundation-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  max-width: 320px;
+}
+
+.osmosis-mini-card {
+  width: 28px;
+  height: 36px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  background: #1a3a1a;
+  color: #eee;
+}
+.osmosis-mini-card.red { color: #f44; }
+
+.osmosis-foundation-drop {
+  min-width: 60px;
+  min-height: 84px;
+  border: 2px dashed #555;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #666;
+  background: #111;
+}
+.osmosis-foundation-drop:hover { border-color: #aaa; }

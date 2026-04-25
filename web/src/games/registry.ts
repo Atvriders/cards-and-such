@@ -658,6 +658,14 @@ import { rgbMixerPlugin } from "./rgb-mixer/index.js";
 import { keyboardWarriorPlugin } from "./keyboard-warrior/index.js";
 import { dicePredictionPlugin } from "./dice-prediction/index.js";
 import { breathGaugePlugin } from "./breath-gauge/index.js";
+import { osmosisPlugin } from "./osmosis/index.js";
+import { shamrocksPlugin } from "./shamrocks/index.js";
+import { terracePlugin } from "./terrace/index.js";
+import { marthaPlugin } from "./martha/index.js";
+import { littleSpiderPlugin } from "./little-spider/index.js";
+import { quadrillePlugin } from "./quadrille/index.js";
+import { rankAndFilePlugin } from "./rank-and-file/index.js";
+import { royalCotillionPlugin } from "./royal-cotillion/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1319,4 +1327,12 @@ export const GAMES: GamePlugin[] = [
   keyboardWarriorPlugin as unknown as GamePlugin,
   dicePredictionPlugin as unknown as GamePlugin,
   breathGaugePlugin as unknown as GamePlugin,
+  osmosisPlugin as unknown as GamePlugin,
+  shamrocksPlugin as unknown as GamePlugin,
+  terracePlugin as unknown as GamePlugin,
+  marthaPlugin as unknown as GamePlugin,
+  littleSpiderPlugin as unknown as GamePlugin,
+  quadrillePlugin as unknown as GamePlugin,
+  rankAndFilePlugin as unknown as GamePlugin,
+  royalCotillionPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,119 @@
+.quadrille {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+}
+
+.quadrille-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recycle-btn {
+  padding: 4px 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 12px;
+}
+.recycle-btn:hover { background: #444; }
+.recycle-btn:disabled { opacity: 0.4; cursor: default; }
+
+.quadrille-main {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.quadrille-stock-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quadrille-card {
+  width: 60px;
+  height: 84px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #1a3a1a;
+  color: #eee;
+  flex-shrink: 0;
+}
+
+.quadrille-card.red { color: #f44; }
+.quadrille-card.empty {
+  background: #111;
+  border: 2px dashed #444;
+  color: #555;
+  font-size: 12px;
+  cursor: default;
+}
+.quadrille-card.stock {
+  background: #1a2a4a;
+  cursor: pointer;
+}
+.quadrille-card:hover:not(.empty) { border-color: #aaa; }
+
+.quadrille-foundations-grid {
+  display: grid;
+  grid-template-columns: 60px 60px 60px;
+  gap: 6px;
+  align-items: center;
+}
+
+.quadrille-suit-row {
+  display: contents;
+}
+
+.quadrille-six {
+  width: 60px;
+  height: 84px;
+  border: 2px solid #aa0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  background: #2a2a00;
+  color: #eee;
+}
+.quadrille-six.red { color: #f44; }
+
+.quadrille-foundation-btn {
+  width: 60px;
+  height: 84px;
+  border: 2px dashed #555;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #888;
+  background: #111;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.quadrille-foundation-btn.red { color: #f66; }
+.quadrille-foundation-btn:hover { border-color: #aaa; }
+.quadrille-foundation-btn .top-card {
+  font-size: 16px;
+  font-weight: bold;
+}
