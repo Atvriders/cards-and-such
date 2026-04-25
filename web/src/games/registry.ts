@@ -856,6 +856,14 @@ import { monsterSlayerPlugin } from "./monster-slayer/index.js";
 import { lootGoblinPlugin } from "./loot-goblin/index.js";
 import { arenaChampionPlugin } from "./arena-champion/index.js";
 import { tombOfKingsPlugin } from "./tomb-of-kings/index.js";
+import { acronymQuizPlugin } from "./acronym-quiz/index.js";
+import { idiomQuizPlugin } from "./idiom-quiz/index.js";
+import { homophoneMatchPlugin } from "./homophone-match/index.js";
+import { silentLettersPlugin } from "./silent-letters/index.js";
+import { prefixSuffixPlugin } from "./prefix-suffix/index.js";
+import { grammarFixPlugin } from "./grammar-fix/index.js";
+import { anagramPairPlugin } from "./anagram-pair/index.js";
+import { rhymeFinderPlugin } from "./rhyme-finder/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1715,4 +1723,12 @@ export const GAMES: GamePlugin[] = [
   lootGoblinPlugin as unknown as GamePlugin,
   arenaChampionPlugin as unknown as GamePlugin,
   tombOfKingsPlugin as unknown as GamePlugin,
+  acronymQuizPlugin as unknown as GamePlugin,
+  idiomQuizPlugin as unknown as GamePlugin,
+  homophoneMatchPlugin as unknown as GamePlugin,
+  silentLettersPlugin as unknown as GamePlugin,
+  prefixSuffixPlugin as unknown as GamePlugin,
+  grammarFixPlugin as unknown as GamePlugin,
+  anagramPairPlugin as unknown as GamePlugin,
+  rhymeFinderPlugin as unknown as GamePlugin,
 ];

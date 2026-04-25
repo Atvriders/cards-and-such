@@ -1,0 +1,108 @@
+.aq-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 16px;
+  font-family: sans-serif;
+  user-select: none;
+  min-height: 420px;
+  max-width: 520px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.aq-progress {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.aq-acronym {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #2c3e50;
+  background: #f0f4ff;
+  border-radius: 10px;
+  padding: 18px 32px;
+  text-align: center;
+}
+
+.aq-prompt {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.aq-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.aq-choice {
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.aq-choice:hover:not(:disabled) {
+  border-color: #4a6fa5;
+  background: #f0f4ff;
+}
+
+.aq-choice.correct {
+  border-color: #28a745;
+  background: #d4edda;
+  color: #155724;
+}
+
+.aq-choice.wrong {
+  border-color: #dc3545;
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.aq-choice:disabled {
+  cursor: default;
+}
+
+.aq-next {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #4a6fa5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.aq-next:hover {
+  background: #3a5f95;
+}
+
+.aq-score {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.aq-done {
+  text-align: center;
+}
+
+.aq-done h2 {
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+}
+
+.aq-done .aq-final {
+  font-size: 1.3rem;
+  color: #4a6fa5;
+  font-weight: bold;
+}
