@@ -824,6 +824,14 @@ import { kingsRowPlugin } from "./kings-row/index.js";
 import { precedencePlugin } from "./precedence/index.js";
 import { tripletsPlugin } from "./triplets/index.js";
 import { paganiniPlugin } from "./paganini/index.js";
+import { danceArrowsPlugin } from "./dance-arrows/index.js";
+import { melodyRepeaterPlugin } from "./melody-repeater/index.js";
+import { morseTapPlugin } from "./morse-tap/index.js";
+import { sequenceFlashPlugin } from "./sequence-flash/index.js";
+import { drumPadPlugin } from "./drum-pad/index.js";
+import { mosaicCopyPlugin } from "./mosaic-copy/index.js";
+import { repeatAfterMePlugin } from "./repeat-after-me/index.js";
+import { rhythmLadderPlugin } from "./rhythm-ladder/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1651,4 +1659,12 @@ export const GAMES: GamePlugin[] = [
   precedencePlugin as unknown as GamePlugin,
   tripletsPlugin as unknown as GamePlugin,
   paganiniPlugin as unknown as GamePlugin,
+  danceArrowsPlugin as unknown as GamePlugin,
+  melodyRepeaterPlugin as unknown as GamePlugin,
+  morseTapPlugin as unknown as GamePlugin,
+  sequenceFlashPlugin as unknown as GamePlugin,
+  drumPadPlugin as unknown as GamePlugin,
+  mosaicCopyPlugin as unknown as GamePlugin,
+  repeatAfterMePlugin as unknown as GamePlugin,
+  rhythmLadderPlugin as unknown as GamePlugin,
 ];

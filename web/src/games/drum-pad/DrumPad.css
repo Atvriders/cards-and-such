@@ -1,0 +1,96 @@
+.drum-pad-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.dp-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.dp-info strong { color: #333; }
+
+.dp-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+  color: #555;
+}
+
+.dp-status.failed { color: #c53030; }
+.dp-status.complete { color: #276749; }
+
+.dp-pattern-preview {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 2rem;
+}
+
+.dp-beat-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.dp-pads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dp-pad {
+  width: 110px;
+  height: 110px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--pad-color) 20%, #f7fafc);
+  color: var(--pad-color);
+  cursor: pointer;
+  transition: background 0.1s, transform 0.08s;
+}
+
+.dp-pad:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--pad-color) 35%, #f7fafc);
+  border-color: var(--pad-color);
+}
+
+.dp-pad.active {
+  background: var(--pad-color);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.dp-pad:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.dp-start-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #c53030;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.dp-start-btn:hover { background: #9b2c2c; }

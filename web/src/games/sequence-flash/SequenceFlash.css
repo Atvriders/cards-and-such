@@ -1,0 +1,76 @@
+.sequence-flash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.sf-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.sf-info strong { color: #333; }
+
+.sf-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+  color: #555;
+}
+
+.sf-status.failed { color: #c53030; }
+.sf-status.complete { color: #276749; }
+
+.sf-grid {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  background: #2d3748;
+  border-radius: 12px;
+}
+
+.sf-cell {
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 10px;
+  background: #4a5568;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.08s;
+}
+
+.sf-cell:hover:not(:disabled) {
+  background: #718096;
+}
+
+.sf-cell.flashing {
+  background: #f6e05e;
+  transform: scale(1.06);
+}
+
+.sf-cell.tapped {
+  background: #68d391;
+}
+
+.sf-cell:disabled {
+  cursor: default;
+}
+
+.sf-start-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #f6e05e;
+  color: #744210;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.sf-start-btn:hover { background: #ecc94b; }

@@ -1,0 +1,129 @@
+.morse-tap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.mt-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.mt-info strong { color: #333; }
+
+.mt-letter-display {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #1a202c;
+  min-width: 80px;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.mt-letter-display.showing { color: #3182ce; }
+
+.mt-flash-area {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mt-flash-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  transition: background 0.1s, width 0.1s;
+}
+
+.mt-flash-dot.active {
+  background: #f6ad55;
+}
+
+.mt-flash-dot.dash {
+  width: 80px;
+  border-radius: 20px;
+  background: #f6ad55;
+}
+
+.mt-status {
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+  color: #555;
+  text-align: center;
+  max-width: 320px;
+}
+
+.mt-status.failed { color: #c53030; }
+.mt-status.complete { color: #276749; }
+
+.mt-input-display {
+  display: flex;
+  gap: 8px;
+  min-height: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mt-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  border: 2px solid #bee3f8;
+}
+
+.mt-placeholder {
+  font-size: 0.9rem;
+  color: #a0aec0;
+}
+
+.mt-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.mt-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.mt-btn.dot { background: #f6ad55; color: #744210; }
+.mt-btn.dot:hover:not(:disabled) { background: #ed8936; }
+.mt-btn.dash { background: #f6ad55; color: #744210; font-size: 1.3rem; }
+.mt-btn.dash:hover:not(:disabled) { background: #ed8936; }
+.mt-btn.submit { background: #38a169; color: #fff; }
+.mt-btn.submit:hover:not(:disabled) { background: #276749; }
+.mt-btn:disabled { opacity: 0.5; cursor: default; }
+
+.mt-start-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #f6ad55;
+  color: #744210;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.mt-start-btn:hover { background: #ed8936; }

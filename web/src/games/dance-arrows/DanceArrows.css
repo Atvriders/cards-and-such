@@ -1,0 +1,99 @@
+.dance-arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.da-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.da-info strong { color: #333; }
+
+.da-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+  color: #555;
+}
+
+.da-status.failed { color: #c53030; }
+.da-status.complete { color: #276749; }
+
+.da-sequence-preview {
+  display: flex;
+  gap: 6px;
+  min-height: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.da-preview-arrow {
+  font-size: 1.2rem;
+  color: #a0aec0;
+  transition: color 0.1s;
+}
+
+.da-preview-arrow.active { color: #e53e3e; font-size: 1.5rem; }
+.da-preview-arrow.done { color: #38a169; }
+.da-preview-arrow.current { color: #3182ce; font-size: 1.4rem; }
+
+.da-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.da-row {
+  display: flex;
+  gap: 8px;
+}
+
+.da-btn {
+  width: 72px;
+  height: 72px;
+  font-size: 1.8rem;
+  border: 3px solid #cbd5e0;
+  border-radius: 12px;
+  background: #edf2f7;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s, transform 0.08s;
+}
+
+.da-btn:hover:not(:disabled) {
+  background: #bee3f8;
+  border-color: #3182ce;
+}
+
+.da-btn.active {
+  background: #3182ce;
+  border-color: #2b6cb0;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.da-btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.da-start-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  background: #e53e3e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.da-start-btn:hover { background: #c53030; }
