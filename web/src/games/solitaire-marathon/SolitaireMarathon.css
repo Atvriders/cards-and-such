@@ -1,0 +1,136 @@
+.solitaire-marathon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.sol-marathon-info {
+  display: flex;
+  gap: 20px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.sol-marathon-area {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.sol-marathon-deck-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sol-marathon-card-back {
+  width: 70px;
+  height: 100px;
+  border: 2px solid #555;
+  border-radius: 8px;
+  background: #1a3a5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sol-marathon-card-back.empty {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.sol-marathon-pile-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sol-marathon-pile {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  max-width: 320px;
+  min-height: 110px;
+  border: 2px dashed #444;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.sol-marathon-card {
+  width: 60px;
+  height: 86px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.sol-marathon-card.red {
+  color: #c0392b;
+}
+
+.sol-marathon-card.black {
+  color: #222;
+}
+
+.sol-marathon-top-cards {
+  display: flex;
+  gap: 8px;
+}
+
+.sol-marathon-collect-btn {
+  padding: 8px 18px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 2px solid #2ecc71;
+  background: #1a5c2a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sol-marathon-collect-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sol-marathon-status {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e67e22;
+}
+
+.sol-marathon-hint {
+  font-size: 0.82rem;
+  color: #888;
+  text-align: center;
+  max-width: 360px;
+}
+
+.sol-marathon-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.sol-marathon-buttons button {
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 2px solid #555;
+  background: #2c3e50;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+}

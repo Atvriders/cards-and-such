@@ -1,0 +1,112 @@
+.toh7 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.toh7-info {
+  display: flex;
+  gap: 20px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.toh7-won {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.toh7-pegs {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.toh7-peg-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.15s;
+}
+
+.toh7-peg-wrapper.selected {
+  border-color: #f39c12;
+}
+
+.toh7-stack {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: relative;
+  min-height: 180px;
+  width: 140px;
+}
+
+.toh7-pole {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  background: #7f8c8d;
+  border-radius: 3px;
+}
+
+.toh7-disk {
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 1px;
+  position: relative;
+  z-index: 1;
+  transition: width 0.1s;
+}
+
+.toh7-base {
+  height: 8px;
+  width: 130px;
+  background: #7f8c8d;
+  border-radius: 4px;
+  margin-top: 2px;
+}
+
+.toh7-peg-label {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.toh7-hint-box {
+  font-size: 0.85rem;
+  color: #f39c12;
+  font-style: italic;
+}
+
+.toh7-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.toh7-buttons button {
+  padding: 7px 18px;
+  border-radius: 6px;
+  border: 2px solid #555;
+  background: #2c3e50;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+}

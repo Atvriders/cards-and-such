@@ -1,0 +1,75 @@
+.safe-driver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: monospace;
+}
+
+.safe-driver-hud {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.safe-driver-road {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(20, 20px);
+  border: 2px solid #555;
+  background: #1a1a2e;
+  gap: 1px;
+}
+
+.safe-driver-cell {
+  width: 64px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.safe-driver-cell.player {
+  background: #2ecc71;
+  border-radius: 4px;
+}
+
+.safe-driver-cell.player.crash {
+  background: #e74c3c;
+}
+
+.safe-driver-cell.obstacle {
+  background: #e74c3c;
+  border-radius: 3px;
+}
+
+.safe-driver-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.safe-driver-controls button {
+  padding: 10px 24px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: 2px solid #555;
+  background: #2c3e50;
+  color: #fff;
+  cursor: pointer;
+}
+
+.safe-driver-controls button:hover {
+  background: #3d5166;
+}
+
+.safe-driver-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.safe-driver-status.over {
+  color: #e74c3c;
+}

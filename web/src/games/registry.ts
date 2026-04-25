@@ -872,6 +872,14 @@ import { havannahPlugin } from "./havannah/index.js";
 import { hareAndHoundsPlugin } from "./hare-and-hounds/index.js";
 import { wolfAndSheepPlugin } from "./wolf-and-sheep/index.js";
 import { cathedralGamePlugin } from "./cathedral-game/index.js";
+import { safeDriverPlugin } from "./safe-driver/index.js";
+import { submarineSonarPlugin } from "./submarine-sonar/index.js";
+import { nimMultiPlugin } from "./nim-multi/index.js";
+import { tripleDicePlugin } from "./triple-dice/index.js";
+import { rollAndWriteProPlugin } from "./roll-and-write-pro/index.js";
+import { solitaireMarathonPlugin } from "./solitaire-marathon/index.js";
+import { towerOfHanoi7Plugin } from "./tower-of-hanoi-7/index.js";
+import { swarmDefensePlugin } from "./swarm-defense/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1747,4 +1755,12 @@ export const GAMES: GamePlugin[] = [
   hareAndHoundsPlugin as unknown as GamePlugin,
   wolfAndSheepPlugin as unknown as GamePlugin,
   cathedralGamePlugin as unknown as GamePlugin,
+  safeDriverPlugin as unknown as GamePlugin,
+  submarineSonarPlugin as unknown as GamePlugin,
+  nimMultiPlugin as unknown as GamePlugin,
+  tripleDicePlugin as unknown as GamePlugin,
+  rollAndWriteProPlugin as unknown as GamePlugin,
+  solitaireMarathonPlugin as unknown as GamePlugin,
+  towerOfHanoi7Plugin as unknown as GamePlugin,
+  swarmDefensePlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,98 @@
+.swarm-defense {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: monospace;
+}
+
+.sd-hud {
+  display: flex;
+  gap: 16px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sd-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 36px);
+  grid-template-rows: repeat(9, 32px);
+  gap: 2px;
+  border: 2px solid #444;
+  padding: 4px;
+  background: #111;
+}
+
+.sd-cell {
+  width: 36px;
+  height: 32px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  background: #1a1a1a;
+  position: relative;
+  cursor: pointer;
+}
+
+.sd-cell.tower {
+  background: #1a4a2a;
+  border: 1px solid #2ecc71;
+}
+
+.sd-cell.base-row {
+  background: #2a1a1a;
+  border-top: 2px solid #e74c3c;
+}
+
+.sd-cell.selected-col {
+  border: 1px dashed #f39c12;
+}
+
+.sd-enemy {
+  font-size: 0.9rem;
+  position: absolute;
+}
+
+.sd-tower-icon {
+  font-size: 1rem;
+}
+
+.sd-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sd-controls button {
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 2px solid #555;
+  background: #2c3e50;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.sd-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sd-hint {
+  font-size: 0.8rem;
+  color: #aaa;
+  text-align: center;
+  max-width: 400px;
+}
+
+.sd-game-over {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e74c3c;
+}

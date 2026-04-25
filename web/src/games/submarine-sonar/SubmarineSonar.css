@@ -1,0 +1,67 @@
+.submarine-sonar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: monospace;
+}
+
+.submarine-sonar-hud {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.submarine-sonar-grid {
+  display: grid;
+  gap: 3px;
+}
+
+.submarine-sonar-cell {
+  width: 44px;
+  height: 44px;
+  border: 2px solid #555;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: #1a2a3a;
+  transition: background 0.15s;
+}
+
+.submarine-sonar-cell:hover {
+  background: #2a3a4a;
+}
+
+.submarine-sonar-cell.miss {
+  background: #2c3e50;
+  color: #7f8c8d;
+  cursor: default;
+}
+
+.submarine-sonar-cell.hit {
+  background: #e67e22;
+  color: #fff;
+  cursor: default;
+}
+
+.submarine-sonar-cell.sunk {
+  background: #e74c3c;
+  color: #fff;
+  cursor: default;
+}
+
+.submarine-sonar-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.submarine-sonar-hint {
+  font-size: 0.85rem;
+  color: #aaa;
+}

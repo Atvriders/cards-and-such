@@ -1,0 +1,78 @@
+.triple-dice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.triple-dice-info {
+  display: flex;
+  gap: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.triple-dice-dice-row {
+  display: flex;
+  gap: 14px;
+}
+
+.triple-dice-die {
+  width: 64px;
+  height: 64px;
+  border: 3px solid #555;
+  border-radius: 12px;
+  background: #fff;
+  color: #222;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+}
+
+.triple-dice-die.kept {
+  border-color: #f39c12;
+  background: #fef9e7;
+}
+
+.triple-dice-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.triple-dice-buttons button {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 2px solid #555;
+  background: #2c3e50;
+  color: #fff;
+  cursor: pointer;
+}
+
+.triple-dice-buttons button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.triple-dice-round-result {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.triple-dice-final {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e67e22;
+}
+
+.triple-dice-hint {
+  font-size: 0.82rem;
+  color: #888;
+}
