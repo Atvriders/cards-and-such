@@ -888,6 +888,17 @@ import { wizardCardDuelPlugin } from "./wizard-card-duel/index.js";
 import { alienCardBattlePlugin } from "./alien-card-battle/index.js";
 import { dotGridPuzzlePlugin } from "./dot-grid-puzzle/index.js";
 import { foodTruckTycoonPlugin } from "./food-truck-tycoon/index.js";
+import { forestTrekPlugin } from "./forest-trek/index.js";
+import { mountainClimbPlugin } from "./mountain-climb/index.js";
+import { frozenRiverPlugin } from "./frozen-river/index.js";
+import { cardBlastPlugin } from "./card-blast/index.js";
+import { volcanoEscapePlugin } from "./volcano-escape/index.js";
+import { coralReefPlugin } from "./coral-reef/index.js";
+import { circusJugglePlugin } from "./circus-juggle/index.js";
+import { magicianTrickPlugin } from "./magician-trick/index.js";
+import { clownTossPlugin } from "./clown-toss/index.js";
+import { acrobatFlipPlugin } from "./acrobat-flip/index.js";
+import { desertTrekPlugin } from "./desert-trek/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1779,4 +1790,15 @@ export const GAMES: GamePlugin[] = [
   alienCardBattlePlugin as unknown as GamePlugin,
   dotGridPuzzlePlugin as unknown as GamePlugin,
   foodTruckTycoonPlugin as unknown as GamePlugin,
+  forestTrekPlugin as unknown as GamePlugin,
+  mountainClimbPlugin as unknown as GamePlugin,
+  frozenRiverPlugin as unknown as GamePlugin,
+  cardBlastPlugin as unknown as GamePlugin,
+  volcanoEscapePlugin as unknown as GamePlugin,
+  coralReefPlugin as unknown as GamePlugin,
+  circusJugglePlugin as unknown as GamePlugin,
+  magicianTrickPlugin as unknown as GamePlugin,
+  clownTossPlugin as unknown as GamePlugin,
+  acrobatFlipPlugin as unknown as GamePlugin,
+  desertTrekPlugin as unknown as GamePlugin,
 ];

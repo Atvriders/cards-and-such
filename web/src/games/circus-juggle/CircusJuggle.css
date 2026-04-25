@@ -1,0 +1,44 @@
+.circus-juggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: linear-gradient(180deg, #1a237e 0%, #283593 100%);
+  min-height: 300px;
+  border-radius: 10px;
+  color: #fff;
+}
+.cj-stats { display: flex; gap: 16px; font-size: 0.85rem; }
+.cj-stage {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #311b92;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cj-ball {
+  position: absolute;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: bottom 0.2s;
+  transform: translateX(-50%);
+  user-select: none;
+}
+.cj-ball:hover { filter: brightness(1.3); }
+.cj-ball.catchable { filter: drop-shadow(0 0 8px #ffeb3b); }
+.cj-result { font-size: 0.9rem; min-height: 1.2em; color: #ffeb3b; }
+.cj-message { font-size: 0.85rem; color: #b0bec5; }
+.cj-controls { display: flex; gap: 10px; }
+.cj-controls button {
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  border: 1px solid #7986cb;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #3949ab;
+  color: #fff;
+}
+.cj-controls button:hover { background: #5c6bc0; }

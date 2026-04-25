@@ -1,0 +1,33 @@
+.clown-toss {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  background: #fff8e1;
+  border-radius: 10px;
+}
+.ct-stats { display: flex; gap: 16px; font-size: 0.9rem; color: #5d4037; }
+.ct-pegs { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.ct-peg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 10px 14px;
+  border: 2px solid #ff8f00;
+  border-radius: 10px;
+  background: #fff;
+  transition: transform 0.1s, background 0.1s;
+  min-width: 64px;
+}
+.ct-peg:hover { background: #fff9c4; transform: scale(1.05); }
+.ct-peg:disabled { opacity: 0.5; cursor: default; }
+.ct-peg-emoji { font-size: 2rem; }
+.ct-peg-pts { font-size: 0.75rem; color: #f57f17; font-weight: bold; }
+.ct-peg-rings { font-size: 0.75rem; color: #1565c0; }
+.ct-last { font-size: 0.9rem; color: #e65100; min-height: 1.2em; }
+.ct-message { font-size: 0.85rem; color: #555; }
+.ct-ring { font-size: 1.5rem; }

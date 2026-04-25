@@ -1,0 +1,49 @@
+.card-blast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+.cb-stats { display: flex; gap: 16px; font-size: 0.9rem; color: #555; }
+.cb-hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 380px;
+}
+.cb-card {
+  width: 52px;
+  height: 72px;
+  border: 2px solid #888;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: transform 0.1s, border-color 0.1s;
+}
+.cb-card:hover { transform: translateY(-4px); }
+.cb-card.selected { border-color: #f57f17; background: #fff9c4; transform: translateY(-8px); }
+.cb-card .suit { font-size: 1.2rem; }
+.cb-card.red { color: #c62828; }
+.cb-card.black { color: #212121; }
+.cb-blast { font-size: 1rem; font-weight: bold; color: #1565c0; min-height: 1.4em; }
+.cb-message { font-size: 0.85rem; color: #555; }
+.cb-actions { display: flex; gap: 10px; }
+.cb-actions button {
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  border: 1px solid #888;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e3f2fd;
+}
+.cb-actions button:hover { background: #bbdefb; }
+.cb-actions button:disabled { opacity: 0.5; cursor: default; }

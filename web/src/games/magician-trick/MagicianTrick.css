@@ -1,0 +1,43 @@
+.magician-trick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  font-family: sans-serif;
+  background: #1a1a2e;
+  border-radius: 12px;
+  color: #fff;
+  min-height: 300px;
+}
+.mt-stats { display: flex; gap: 16px; font-size: 0.85rem; color: #b0bec5; }
+.mt-cups { display: flex; gap: 20px; justify-content: center; }
+.mt-cup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.mt-cup:hover { transform: translateY(-4px); }
+.mt-cup-emoji { font-size: 2.8rem; }
+.mt-cup.selected .mt-cup-emoji { filter: drop-shadow(0 0 8px #ffeb3b); }
+.mt-cup.correct .mt-cup-emoji { filter: drop-shadow(0 0 10px #4caf50); }
+.mt-cup.wrong .mt-cup-emoji { filter: drop-shadow(0 0 10px #f44336); }
+.mt-ball { font-size: 1.2rem; }
+.mt-label { font-size: 0.75rem; color: #78909c; }
+.mt-message { font-size: 0.95rem; color: #ffeb3b; text-align: center; min-height: 1.4em; }
+.mt-btn {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  border: 1px solid #7986cb;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #3949ab;
+  color: #fff;
+}
+.mt-btn:hover { background: #5c6bc0; }
+.mt-result { font-size: 0.9rem; }
+.mt-win { color: #a5d6a7; }
+.mt-lose { color: #ef9a9a; }
