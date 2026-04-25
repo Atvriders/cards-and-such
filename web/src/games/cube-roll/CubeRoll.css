@@ -1,0 +1,83 @@
+.cube-roll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.cube-roll-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.cube-roll-target {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e67e22;
+}
+
+.cube-roll-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.cube-roll-status.win { color: #27ae60; }
+
+.cube-roll-grid {
+  display: grid;
+  gap: 2px;
+  background: #2c3e50;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.cube-roll-cell {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.cube-roll-cell.empty { background: #ecf0f1; }
+.cube-roll-cell.goal { background: #f39c12; color: #fff; }
+.cube-roll-cell.cube { background: #3498db; color: #fff; font-size: 1.2rem; }
+.cube-roll-cell.cube.goal { background: #27ae60; }
+
+.cube-roll-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 48px);
+  gap: 4px;
+}
+
+.cube-roll-btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cube-roll-btn:hover { background: #2980b9; }
+.cube-roll-btn:disabled { background: #bdc3c7; cursor: default; }
+.cube-roll-btn.empty-btn { background: transparent; cursor: default; }
+
+.cube-roll-die {
+  font-size: 0.85rem;
+  color: #666;
+}

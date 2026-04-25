@@ -1,0 +1,57 @@
+.wire-connect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.wire-connect-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.wire-connect-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.wire-connect-status.win { color: #27ae60; }
+
+.wire-connect-grid {
+  display: grid;
+  gap: 2px;
+  background: #2c3e50;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.wire-tile {
+  width: 64px;
+  height: 64px;
+  background: #34495e;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wire-tile.source { background: #c0392b; }
+.wire-tile.lit { background: #2c3e50; }
+.wire-tile.fixed { cursor: default; }
+
+.wire-tile:hover:not(.fixed) { background: #3d5369; }
+
+.wire-tile svg {
+  width: 56px;
+  height: 56px;
+  position: absolute;
+}

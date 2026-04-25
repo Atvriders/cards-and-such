@@ -1,0 +1,75 @@
+.tube-color {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.tube-color-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.tube-color-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.tube-color-status.win { color: #27ae60; }
+
+.tube-color-rack {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tube-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.tube {
+  width: 36px;
+  height: 140px;
+  border: 2px solid #7f8c8d;
+  border-top: none;
+  border-radius: 0 0 18px 18px;
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: hidden;
+  position: relative;
+}
+
+.tube.selected {
+  border-color: #e74c3c;
+  border-top: 2px solid #e74c3c;
+  border-radius: 4px 4px 18px 18px;
+  box-shadow: 0 0 0 2px #e74c3c44;
+}
+
+.tube.complete {
+  border-color: #27ae60;
+}
+
+.tube-segment {
+  width: 100%;
+  flex-shrink: 0;
+  height: 33px;
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+.tube-label {
+  font-size: 0.7rem;
+  color: #999;
+}

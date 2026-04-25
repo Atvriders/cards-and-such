@@ -1,0 +1,80 @@
+.mirror-maze {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.mirror-maze-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.mirror-maze-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.mirror-maze-status.win { color: #27ae60; }
+
+.mirror-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mirror-tool-btn {
+  padding: 6px 14px;
+  border: 2px solid #7f8c8d;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  background: #ecf0f1;
+  cursor: pointer;
+}
+
+.mirror-tool-btn.active {
+  border-color: #e74c3c;
+  background: #fdecea;
+}
+
+.mirror-grid {
+  display: grid;
+  gap: 1px;
+  background: #2c3e50;
+  padding: 3px;
+  border-radius: 6px;
+}
+
+.mirror-cell {
+  width: 56px;
+  height: 56px;
+  background: #ecf0f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  border-radius: 2px;
+}
+
+.mirror-cell.source { background: #2980b9; color: #fff; }
+.mirror-cell.target { background: #f39c12; }
+.mirror-cell.lit { background: #ffeaa7; }
+.mirror-cell.fixed-mirror { cursor: default; color: #c0392b; font-weight: bold; }
+.mirror-cell.placed-mirror { color: #27ae60; }
+
+.mirror-laser-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #e74c3c;
+  border-radius: 50%;
+  pointer-events: none;
+}

@@ -1,0 +1,90 @@
+.tilt-maze {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.tilt-maze-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.tilt-maze-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.tilt-maze-status.win { color: #27ae60; }
+
+.tilt-maze-board {
+  position: relative;
+  background: #ecf0f1;
+  border: 3px solid #2c3e50;
+  border-radius: 4px;
+}
+
+.tilt-maze-cell {
+  position: absolute;
+  box-sizing: border-box;
+  background: #ecf0f1;
+}
+
+.tilt-maze-cell.goal {
+  background: #f39c12;
+  border-radius: 50%;
+}
+
+.tilt-maze-ball {
+  position: absolute;
+  background: #3498db;
+  border-radius: 50%;
+  transition: top 0.15s, left 0.15s;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.tilt-maze-ball.on-goal {
+  background: #27ae60;
+}
+
+.tilt-maze-hwall {
+  position: absolute;
+  background: #2c3e50;
+  z-index: 3;
+}
+
+.tilt-maze-vwall {
+  position: absolute;
+  background: #2c3e50;
+  z-index: 3;
+}
+
+.tilt-maze-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 48px);
+  gap: 4px;
+}
+
+.tilt-btn {
+  background: #2c3e50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tilt-btn:hover { background: #34495e; }
+.tilt-btn:disabled { background: #bdc3c7; cursor: default; }
+.tilt-btn.empty-slot { background: transparent; }

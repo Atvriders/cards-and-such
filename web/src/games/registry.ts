@@ -739,6 +739,14 @@ import { hokmPlugin } from "./hokm/index.js";
 import { ultiPlugin } from "./ulti/index.js";
 import { klopPlugin } from "./klop/index.js";
 import { sjavsPlugin } from "./sjavs/index.js";
+import { cubeRollPlugin } from "./cube-roll/index.js";
+import { tiltMazePlugin } from "./tilt-maze/index.js";
+import { tubeColorPlugin } from "./tube-color/index.js";
+import { wireConnectPlugin } from "./wire-connect/index.js";
+import { mirrorMazePlugin } from "./mirror-maze/index.js";
+import { gearPuzzlePlugin } from "./gear-puzzle/index.js";
+import { pentominoPuzzlePlugin } from "./pentomino-puzzle/index.js";
+import { parkingPuzzlePlugin } from "./parking-puzzle/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1481,4 +1489,12 @@ export const GAMES: GamePlugin[] = [
   ultiPlugin as unknown as GamePlugin,
   klopPlugin as unknown as GamePlugin,
   sjavsPlugin as unknown as GamePlugin,
+  cubeRollPlugin as unknown as GamePlugin,
+  tiltMazePlugin as unknown as GamePlugin,
+  tubeColorPlugin as unknown as GamePlugin,
+  wireConnectPlugin as unknown as GamePlugin,
+  mirrorMazePlugin as unknown as GamePlugin,
+  gearPuzzlePlugin as unknown as GamePlugin,
+  pentominoPuzzlePlugin as unknown as GamePlugin,
+  parkingPuzzlePlugin as unknown as GamePlugin,
 ];

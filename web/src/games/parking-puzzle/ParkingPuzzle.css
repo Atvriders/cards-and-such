@@ -1,0 +1,103 @@
+.parking-puzzle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.parking-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.parking-status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-height: 1.6em;
+  color: #333;
+}
+
+.parking-status.win { color: #27ae60; }
+
+.parking-board-wrap {
+  position: relative;
+}
+
+.parking-board {
+  display: grid;
+  gap: 2px;
+  background: #7f8c8d;
+  padding: 3px;
+  border-radius: 6px;
+  position: relative;
+}
+
+.parking-cell {
+  width: 56px;
+  height: 56px;
+  background: #bdc3c7;
+  border-radius: 3px;
+}
+
+.parking-car {
+  position: absolute;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: outline 0.1s;
+  user-select: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.parking-car.selected {
+  outline: 3px solid #fff;
+  z-index: 5;
+}
+
+.parking-car.target { background: #e74c3c; }
+.parking-car.normal { background: #3498db; }
+
+.parking-car:nth-child(even).normal { background: #2ecc71; }
+
+.parking-exit {
+  position: absolute;
+  right: -20px;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.parking-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.park-btn {
+  padding: 8px 16px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.park-btn:hover { background: #2980b9; }
+.park-btn:disabled { background: #bdc3c7; cursor: default; }
+
+.parking-hint {
+  font-size: 0.85rem;
+  color: #888;
+  text-align: center;
+}
