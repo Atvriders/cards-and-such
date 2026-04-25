@@ -1,0 +1,35 @@
+.eeh-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #e8f5e9;
+  min-height: 100%;
+}
+.eeh-title { font-size: 1.5rem; font-weight: bold; color: #6a1b9a; }
+.eeh-stats { display: flex; gap: 20px; font-size: 1rem; color: #333; }
+.eeh-grid { display: flex; flex-direction: column; gap: 4px; }
+.eeh-row { display: flex; gap: 4px; }
+.eeh-cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #a5d6a7;
+  background: #c8e6c9;
+  transition: background 0.1s;
+  user-select: none;
+}
+.eeh-cell.hidden:hover { background: #a5d6a7; }
+.eeh-cell.egg { background: #fff9c4; border-color: #f9a825; cursor: default; }
+.eeh-cell.miss { background: #ffcdd2; border-color: #e57373; cursor: default; }
+.eeh-end { font-size: 1.2rem; font-weight: bold; padding: 8px 16px; border-radius: 8px; }
+.eeh-end.won { color: #2e7d32; background: #c8e6c9; }
+.eeh-end.lost { color: #b71c1c; background: #ffcdd2; }
+.eeh-hint { color: #666; font-size: 0.9rem; }

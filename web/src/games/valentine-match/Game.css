@@ -1,0 +1,33 @@
+.vm-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #fce4ec;
+  min-height: 100%;
+}
+.vm-title { font-size: 1.5rem; font-weight: bold; color: #c2185b; }
+.vm-stats { display: flex; gap: 16px; font-size: 1rem; color: #333; flex-wrap: wrap; justify-content: center; }
+.vm-combo { color: #e91e63; font-weight: bold; animation: pulse 0.5s ease-in-out; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+.vm-grid { display: grid; gap: 8px; }
+.vm-card {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: #f48fb1;
+  border: 2px solid #e91e63;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.15s;
+  user-select: none;
+}
+.vm-card:hover:not(.matched) { transform: scale(1.08); }
+.vm-card.flipped { background: #fff; border-color: #c2185b; }
+.vm-card.matched { background: #f8bbd0; border-color: #f48fb1; opacity: 0.6; cursor: default; }
+.vm-win { font-size: 1.3rem; color: #c2185b; font-weight: bold; }

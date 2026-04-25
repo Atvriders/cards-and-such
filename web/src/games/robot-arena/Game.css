@@ -1,0 +1,56 @@
+.ra-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0a0f1a;
+  min-height: 100%;
+  color: #7ec8e3;
+}
+.ra-title { font-size: 1.5rem; font-weight: bold; color: #00bcd4; }
+.ra-stats { display: flex; gap: 16px; font-size: 1rem; flex-wrap: wrap; justify-content: center; }
+.ra-log { font-size: 0.95rem; color: #ffd54f; min-height: 24px; }
+.ra-grid {
+  display: grid;
+  gap: 3px;
+  background: #0d1b2a;
+  border: 2px solid #1565c0;
+  padding: 4px;
+  border-radius: 8px;
+}
+.ra-cell {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: #0d1b2a;
+  border: 1px solid #1565c0;
+  border-radius: 4px;
+}
+.ra-cell.player { background: #0d2a1b; border-color: #00e676; }
+.ra-cell.enemy { background: #2a0d0d; border-color: #e53935; }
+.ra-controls { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ra-dpad { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ra-dpad-row { display: flex; gap: 4px; align-items: center; }
+.ra-btn {
+  width: 52px;
+  height: 52px;
+  font-size: 1.2rem;
+  background: #1565c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.ra-btn:hover { background: #1e88e5; }
+.ra-btn.ra-attack { background: #e65100; width: 52px; height: 52px; }
+.ra-btn.ra-attack:hover { background: #ff6d00; }
+.ra-hint { color: #546e7a; font-size: 0.8rem; }
+.ra-result { font-size: 1.2rem; font-weight: bold; padding: 10px 20px; border-radius: 8px; }
+.ra-result.won { color: #00e676; background: #0d2a1b; }
+.ra-result.lost { color: #ff5252; background: #2a0d0d; }

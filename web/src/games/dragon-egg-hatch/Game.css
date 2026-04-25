@@ -1,0 +1,49 @@
+.deh-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0d1117;
+  min-height: 100%;
+  color: #e6a817;
+}
+.deh-title { font-size: 1.5rem; font-weight: bold; color: #ff6b2b; }
+.deh-stats { display: flex; gap: 24px; font-size: 1rem; color: #aaa; }
+.deh-hint { color: #888; font-size: 0.9rem; }
+.deh-eggs { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 16px; }
+.deh-egg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 90px;
+  height: 110px;
+  border-radius: 16px;
+  background: #1e2a3a;
+  border: 2px solid #3a4a5a;
+  cursor: pointer;
+  justify-content: center;
+  transition: transform 0.1s;
+}
+.deh-egg.glowing {
+  border-color: #ffd700;
+  background: #2a3a1a;
+  animation: pulse-egg 0.4s infinite alternate;
+  cursor: pointer;
+}
+@keyframes pulse-egg { from{box-shadow:0 0 8px #ffd700} to{box-shadow:0 0 24px #ffd700, 0 0 40px #ff8c00} }
+.deh-egg.hatched { border-color: #4caf50; background: #1a2a1a; cursor: default; }
+.deh-egg.cracked { border-color: #555; opacity: 0.5; cursor: default; }
+.deh-egg.missed { border-color: #333; opacity: 0.35; cursor: default; }
+.deh-emoji { font-size: 3rem; }
+.deh-pts { font-size: 0.85rem; color: #4caf50; font-weight: bold; min-height: 18px; }
+.deh-result {
+  font-size: 1.1rem;
+  text-align: center;
+  color: #e6a817;
+  background: #1e2a3a;
+  padding: 12px 20px;
+  border-radius: 10px;
+}

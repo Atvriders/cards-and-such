@@ -788,6 +788,14 @@ import { garbageCardPlugin } from "./garbage-card/index.js";
 import { pigCardPlugin } from "./pig-card/index.js";
 import { playOrPayPlugin } from "./play-or-pay/index.js";
 import { snipSnapSnoremPlugin } from "./snip-snap-snorem/index.js";
+import { christmasCookiePlugin } from "./christmas-cookie/index.js";
+import { easterEggHuntPlugin } from "./easter-egg-hunt/index.js";
+import { halloweenPumpkinPlugin } from "./halloween-pumpkin/index.js";
+import { valentineMatchPlugin } from "./valentine-match/index.js";
+import { wizardSpellCastPlugin } from "./wizard-spell-cast/index.js";
+import { dragonEggHatchPlugin } from "./dragon-egg-hatch/index.js";
+import { robotArenaPlugin } from "./robot-arena/index.js";
+import { marsColonyPlugin } from "./mars-colony/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1579,4 +1587,12 @@ export const GAMES: GamePlugin[] = [
   pigCardPlugin as unknown as GamePlugin,
   playOrPayPlugin as unknown as GamePlugin,
   snipSnapSnoremPlugin as unknown as GamePlugin,
+  christmasCookiePlugin as unknown as GamePlugin,
+  easterEggHuntPlugin as unknown as GamePlugin,
+  halloweenPumpkinPlugin as unknown as GamePlugin,
+  valentineMatchPlugin as unknown as GamePlugin,
+  wizardSpellCastPlugin as unknown as GamePlugin,
+  dragonEggHatchPlugin as unknown as GamePlugin,
+  robotArenaPlugin as unknown as GamePlugin,
+  marsColonyPlugin as unknown as GamePlugin,
 ];
