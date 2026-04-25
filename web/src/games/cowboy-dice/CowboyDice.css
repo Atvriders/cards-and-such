@@ -1,0 +1,118 @@
+.cowboy-dice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #1a0e00;
+  color: #f0e0b0;
+  min-height: 100%;
+}
+
+.cowboy-dice h2 {
+  margin: 0;
+  color: #e8a020;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.cowboy-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+}
+
+.cowboy-header span {
+  font-weight: bold;
+  color: #f0c040;
+}
+
+.cowboy-dice-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cowboy-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.cowboy-controls button {
+  padding: 8px 22px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 1px solid #6a4a10;
+  background: #2a1800;
+  color: #f0e0b0;
+  cursor: pointer;
+}
+
+.cowboy-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.cowboy-controls button:hover:not(:disabled) {
+  background: #3a2808;
+}
+
+.cowboy-scorecard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 14px;
+  width: 100%;
+  max-width: 440px;
+  font-size: 0.85rem;
+}
+
+.cowboy-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #1a0c00;
+  border: 1px solid #3a2800;
+}
+
+.cowboy-score-row.scored {
+  color: #80cc60;
+  border-color: #335522;
+}
+
+.cowboy-score-row.upper-section {
+  border-left: 3px solid #8a6020;
+}
+
+.cowboy-score-row button {
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  border-radius: 4px;
+  border: 1px solid #6a4a10;
+  background: #2a1800;
+  color: #f0d080;
+  cursor: pointer;
+}
+
+.cowboy-score-row button:hover {
+  background: #3a2808;
+}
+
+.cowboy-bonus {
+  font-size: 0.85rem;
+  color: #e0c040;
+}
+
+.cowboy-total {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #a0e060;
+}
+
+.cowboy-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffe050;
+}

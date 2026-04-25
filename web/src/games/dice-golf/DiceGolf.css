@@ -1,0 +1,138 @@
+.dice-golf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #06120a;
+  color: #c8e8b0;
+  min-height: 100%;
+}
+
+.dice-golf h2 {
+  margin: 0;
+  color: #44cc66;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.golf-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+}
+
+.golf-header span {
+  font-weight: bold;
+  color: #88ee88;
+}
+
+.golf-hole-info {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #aaeebb;
+}
+
+.golf-progress {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.golf-progress-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #446644;
+  background: transparent;
+}
+
+.golf-progress-dot.filled {
+  background: #44cc66;
+  border-color: #22aa44;
+}
+
+.golf-dice-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.golf-controls button {
+  padding: 10px 28px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #335533;
+  background: #0a2010;
+  color: #aaeebb;
+  cursor: pointer;
+}
+
+.golf-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.golf-controls button:hover:not(:disabled) {
+  background: #1a3020;
+}
+
+.golf-result {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffee66;
+}
+
+.golf-scorecard {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 3px;
+  font-size: 0.75rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.golf-scorecard-header, .golf-scorecard-par, .golf-scorecard-strokes {
+  text-align: center;
+  padding: 3px 2px;
+  border-radius: 2px;
+}
+
+.golf-scorecard-header {
+  color: #88aa88;
+  font-weight: bold;
+}
+
+.golf-scorecard-par {
+  color: #88cc88;
+  background: #0a180e;
+}
+
+.golf-scorecard-strokes {
+  color: #ffee88;
+  background: #141a08;
+  font-weight: bold;
+}
+
+.golf-scorecard-strokes.birdie { color: #44ffaa; }
+.golf-scorecard-strokes.eagle  { color: #00eeff; }
+.golf-scorecard-strokes.bogey  { color: #ff8844; }
+.golf-scorecard-strokes.double-bogey { color: #ff4444; }
+
+.golf-totals {
+  font-size: 0.95rem;
+  color: #88ddaa;
+}
+
+.golf-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #88ffaa;
+}
+
+.golf-shot-legend {
+  font-size: 0.78rem;
+  color: #557755;
+  text-align: center;
+}

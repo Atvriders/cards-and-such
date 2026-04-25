@@ -1,0 +1,109 @@
+.medieval-dice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #1a1208;
+  color: #e8d5a0;
+  min-height: 100%;
+}
+
+.medieval-dice h2 {
+  margin: 0;
+  color: #c8a840;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.medieval-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+}
+
+.medieval-header span {
+  font-weight: bold;
+  color: #f0c840;
+}
+
+.medieval-dice-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.medieval-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.medieval-controls button {
+  padding: 8px 22px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 1px solid #5a4a10;
+  background: #2a1f08;
+  color: #e8d5a0;
+  cursor: pointer;
+}
+
+.medieval-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.medieval-controls button:hover:not(:disabled) {
+  background: #3a2f18;
+}
+
+.medieval-scorecard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+  width: 100%;
+  max-width: 420px;
+  font-size: 0.88rem;
+}
+
+.medieval-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #201808;
+  border: 1px solid #3a2a08;
+}
+
+.medieval-score-row.scored {
+  color: #88cc66;
+  border-color: #446622;
+}
+
+.medieval-score-row button {
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #5a4a10;
+  background: #2a1f08;
+  color: #e0cc80;
+  cursor: pointer;
+}
+
+.medieval-score-row button:hover {
+  background: #3a2f18;
+}
+
+.medieval-total {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #a0e860;
+}
+
+.medieval-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffcc44;
+}

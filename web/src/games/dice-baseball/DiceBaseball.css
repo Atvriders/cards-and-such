@@ -1,0 +1,122 @@
+.dice-baseball {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0a1a05;
+  color: #d0e8c0;
+  min-height: 100%;
+}
+
+.dice-baseball h2 {
+  margin: 0;
+  color: #66cc44;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.baseball-scoreboard {
+  display: flex;
+  gap: 28px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.baseball-scoreboard span {
+  color: #aaee88;
+}
+
+.baseball-diamond {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.diamond-base {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background: #224;
+  border: 2px solid #448;
+  transform: rotate(45deg);
+}
+
+.diamond-base.occupied {
+  background: #ffcc44;
+  border-color: #eeaa22;
+}
+
+.diamond-home { left: 50px; top: 90px; }
+.diamond-first { left: 90px; top: 50px; }
+.diamond-second { left: 50px; top: 10px; }
+.diamond-third { left: 10px; top: 50px; }
+
+.baseball-outs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.out-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #558;
+  background: transparent;
+}
+
+.out-dot.filled {
+  background: #ee4444;
+  border-color: #cc2222;
+}
+
+.baseball-dice-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.baseball-controls button {
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #335522;
+  background: #112200;
+  color: #aaeea0;
+  cursor: pointer;
+}
+
+.baseball-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.baseball-controls button:hover:not(:disabled) {
+  background: #223310;
+}
+
+.baseball-result {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffee66;
+}
+
+.baseball-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #88ffaa;
+}
+
+.baseball-result-label {
+  font-size: 0.85rem;
+  color: #88aa88;
+}
+
+.baseball-inning-info {
+  font-size: 0.9rem;
+  color: #80aa70;
+}

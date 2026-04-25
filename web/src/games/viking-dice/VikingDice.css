@@ -1,0 +1,104 @@
+.viking-dice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #1a0f05;
+  color: #e8d5a0;
+  min-height: 100%;
+}
+
+.viking-dice h2 {
+  margin: 0;
+  color: #d4a017;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.viking-header {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+}
+
+.viking-header span {
+  font-weight: bold;
+  color: #f0c040;
+}
+
+.viking-roll-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.viking-die {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 1.6rem;
+  border: 2px solid #5a4a20;
+  background: #2a1f08;
+}
+
+.viking-die.axe { border-color: #cc4444; background: #3a1010; }
+.viking-die.shield { border-color: #4488cc; background: #102040; }
+.viking-die.skull { border-color: #888; background: #222; }
+
+.viking-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.viking-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.viking-controls button {
+  padding: 8px 22px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 1px solid #5a4a20;
+  background: #2a1f08;
+  color: #e8d5a0;
+  cursor: pointer;
+}
+
+.viking-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.viking-controls button:hover:not(:disabled) {
+  background: #3a2f18;
+}
+
+.viking-controls .bank-btn {
+  background: #1a3a1a;
+  border-color: #44aa44;
+}
+
+.viking-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ff6644;
+}
+
+.viking-message.won {
+  color: #66dd44;
+}
+
+.viking-indicators {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+}

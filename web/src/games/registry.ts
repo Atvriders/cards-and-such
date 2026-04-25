@@ -832,6 +832,14 @@ import { drumPadPlugin } from "./drum-pad/index.js";
 import { mosaicCopyPlugin } from "./mosaic-copy/index.js";
 import { repeatAfterMePlugin } from "./repeat-after-me/index.js";
 import { rhythmLadderPlugin } from "./rhythm-ladder/index.js";
+import { cosmicDicePlugin } from "./cosmic-dice/index.js";
+import { vikingDicePlugin } from "./viking-dice/index.js";
+import { medievalDicePlugin } from "./medieval-dice/index.js";
+import { cowboyDicePlugin } from "./cowboy-dice/index.js";
+import { samuraiDicePlugin } from "./samurai-dice/index.js";
+import { diceBaseballPlugin } from "./dice-baseball/index.js";
+import { diceGolfPlugin } from "./dice-golf/index.js";
+import { straightOrBustPlugin } from "./straight-or-bust/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1667,4 +1675,12 @@ export const GAMES: GamePlugin[] = [
   mosaicCopyPlugin as unknown as GamePlugin,
   repeatAfterMePlugin as unknown as GamePlugin,
   rhythmLadderPlugin as unknown as GamePlugin,
+  cosmicDicePlugin as unknown as GamePlugin,
+  vikingDicePlugin as unknown as GamePlugin,
+  medievalDicePlugin as unknown as GamePlugin,
+  cowboyDicePlugin as unknown as GamePlugin,
+  samuraiDicePlugin as unknown as GamePlugin,
+  diceBaseballPlugin as unknown as GamePlugin,
+  diceGolfPlugin as unknown as GamePlugin,
+  straightOrBustPlugin as unknown as GamePlugin,
 ];
