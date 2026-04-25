@@ -1,0 +1,59 @@
+.gravity-maze-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  font-family: monospace;
+  color: #ddd;
+  position: relative;
+}
+.gravity-maze-header {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+  color: #aaa;
+}
+.gravity-maze-header strong {
+  color: #ffdd00;
+}
+.gravity-maze-svg {
+  border: 2px solid #1a2a40;
+  border-radius: 4px;
+}
+.gravity-maze-controls {
+  display: flex;
+  gap: 8px;
+}
+.gravity-maze-controls button {
+  background: #1a2a40;
+  color: #aaccff;
+  border: 1px solid #3355aa;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 13px;
+}
+.gravity-maze-controls button:hover {
+  background: #223355;
+}
+.gravity-maze-hint {
+  font-size: 12px;
+  color: #556677;
+}
+.gravity-maze-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.92);
+  border: 2px solid #00ff88;
+  border-radius: 8px;
+  padding: 20px 32px;
+  text-align: center;
+  color: #fff;
+  z-index: 10;
+}
+.gravity-maze-overlay h2 { margin: 0 0 8px; color: #00ff88; }
+.gravity-maze-overlay p { margin: 0; color: #aaa; }

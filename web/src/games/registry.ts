@@ -747,6 +747,14 @@ import { mirrorMazePlugin } from "./mirror-maze/index.js";
 import { gearPuzzlePlugin } from "./gear-puzzle/index.js";
 import { pentominoPuzzlePlugin } from "./pentomino-puzzle/index.js";
 import { parkingPuzzlePlugin } from "./parking-puzzle/index.js";
+import { classicMazePlugin } from "./classic-maze/index.js";
+import { fogMazePlugin } from "./fog-maze/index.js";
+import { keyMazePlugin } from "./key-maze/index.js";
+import { iceSlideMazePlugin } from "./ice-slide-maze/index.js";
+import { teleportMazePlugin } from "./teleport-maze/index.js";
+import { ghostMazePlugin } from "./ghost-maze/index.js";
+import { gravityMazePlugin } from "./gravity-maze/index.js";
+import { coloredTileMazePlugin } from "./colored-tile-maze/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1497,4 +1505,12 @@ export const GAMES: GamePlugin[] = [
   gearPuzzlePlugin as unknown as GamePlugin,
   pentominoPuzzlePlugin as unknown as GamePlugin,
   parkingPuzzlePlugin as unknown as GamePlugin,
+  classicMazePlugin as unknown as GamePlugin,
+  fogMazePlugin as unknown as GamePlugin,
+  keyMazePlugin as unknown as GamePlugin,
+  iceSlideMazePlugin as unknown as GamePlugin,
+  teleportMazePlugin as unknown as GamePlugin,
+  ghostMazePlugin as unknown as GamePlugin,
+  gravityMazePlugin as unknown as GamePlugin,
+  coloredTileMazePlugin as unknown as GamePlugin,
 ];
