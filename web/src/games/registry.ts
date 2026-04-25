@@ -690,6 +690,15 @@ import { caveFlyerPlugin } from "./cave-flyer/index.js";
 import { dodgeCarsPlugin } from "./dodge-cars/index.js";
 import { parachuteDropPlugin } from "./parachute-drop/index.js";
 import { swarmShootPlugin } from "./swarm-shoot/index.js";
+import { moviesTriviaPlugin } from "./movies-trivia/index.js";
+import { musicTriviaPlugin } from "./music-trivia/index.js";
+import { sportsTriviaPlugin } from "./sports-trivia/index.js";
+import { scienceTriviaPlugin } from "./science-trivia/index.js";
+import { historyTriviaPlugin } from "./history-trivia/index.js";
+import { mythologyQuizPlugin } from "./mythology-quiz/index.js";
+import { spaceQuizPlugin } from "./space-quiz/index.js";
+import { foodQuizPlugin } from "./food-quiz/index.js";
+import { animalQuizPlugin } from "./animal-quiz/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1383,4 +1392,13 @@ export const GAMES: GamePlugin[] = [
   dodgeCarsPlugin as unknown as GamePlugin,
   parachuteDropPlugin as unknown as GamePlugin,
   swarmShootPlugin as unknown as GamePlugin,
+  moviesTriviaPlugin as unknown as GamePlugin,
+  musicTriviaPlugin as unknown as GamePlugin,
+  sportsTriviaPlugin as unknown as GamePlugin,
+  scienceTriviaPlugin as unknown as GamePlugin,
+  historyTriviaPlugin as unknown as GamePlugin,
+  mythologyQuizPlugin as unknown as GamePlugin,
+  spaceQuizPlugin as unknown as GamePlugin,
+  foodQuizPlugin as unknown as GamePlugin,
+  animalQuizPlugin as unknown as GamePlugin,
 ];
