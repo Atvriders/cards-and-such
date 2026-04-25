@@ -1,0 +1,90 @@
+.ffs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.ffs-header {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.ffs-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.ffs-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: bold;
+}
+
+.ffs-dice {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.ffs-die {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #555;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: #fff;
+}
+
+.ffs-result {
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.ffs-result.win {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ffs-result.lose {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.ffs-result.push {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.ffs-controls button {
+  padding: 10px 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #666;
+  background: #fff;
+  margin: 4px;
+}
+
+.ffs-controls button.primary {
+  background: #3498db;
+  color: #fff;
+  border-color: #2980b9;
+}
+
+.ffs-score {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2a7a2a;
+}

@@ -723,6 +723,14 @@ import { idleBakerPlugin } from "./idle-baker/index.js";
 import { gemClickerPlugin } from "./gem-clicker/index.js";
 import { goldRushIdlePlugin } from "./gold-rush-idle/index.js";
 import { prestigeClickerPlugin } from "./prestige-clicker/index.js";
+import { klondikeDicePlugin } from "./klondike-dice/index.js";
+import { goingToBostonPlugin } from "./going-to-boston/index.js";
+import { cosmicWimpoutPlugin } from "./cosmic-wimpout/index.js";
+import { cragPlugin } from "./crag/index.js";
+import { crownAndAnchorPlugin } from "./crown-and-anchor/index.js";
+import { fourFiveSixPlugin } from "./four-five-six/index.js";
+import { streetCrapsPlugin } from "./street-craps/index.js";
+import { pirateDicePlugin } from "./pirate-dice/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1449,4 +1457,12 @@ export const GAMES: GamePlugin[] = [
   gemClickerPlugin as unknown as GamePlugin,
   goldRushIdlePlugin as unknown as GamePlugin,
   prestigeClickerPlugin as unknown as GamePlugin,
+  klondikeDicePlugin as unknown as GamePlugin,
+  goingToBostonPlugin as unknown as GamePlugin,
+  cosmicWimpoutPlugin as unknown as GamePlugin,
+  cragPlugin as unknown as GamePlugin,
+  crownAndAnchorPlugin as unknown as GamePlugin,
+  fourFiveSixPlugin as unknown as GamePlugin,
+  streetCrapsPlugin as unknown as GamePlugin,
+  pirateDicePlugin as unknown as GamePlugin,
 ];

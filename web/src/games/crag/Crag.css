@@ -1,0 +1,99 @@
+.crag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.crag-header {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.crag-dice {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.crag-die {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #555;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.crag-die.kept {
+  border-color: #28a745;
+  background: #f0fff4;
+  outline: 3px solid #28a745;
+}
+
+.crag-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.crag-controls button {
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #666;
+  background: #fff;
+}
+
+.crag-scorecard {
+  width: 100%;
+  max-width: 420px;
+  border-collapse: collapse;
+}
+
+.crag-scorecard th,
+.crag-scorecard td {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.crag-scorecard th {
+  background: #f4f4f4;
+}
+
+.crag-scorecard .cat-row:hover {
+  background: #e8f5e9;
+  cursor: pointer;
+}
+
+.crag-scorecard .cat-row.scored {
+  color: #888;
+  cursor: default;
+  background: #fafafa;
+}
+
+.crag-scorecard .cat-row.scored:hover {
+  background: #fafafa;
+}
+
+.crag-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2a7a2a;
+}
+
+.crag-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2a7a2a;
+}

@@ -1,0 +1,121 @@
+.ca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.ca-coins {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #c0392b;
+}
+
+.ca-symbols {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ca-symbol-btn {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+  border: 3px solid #ccc;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.1s, background 0.1s;
+}
+
+.ca-symbol-btn.selected {
+  border-color: #e74c3c;
+  background: #fdecea;
+}
+
+.ca-symbol-btn span {
+  font-size: 0.6rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.ca-dice {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.ca-die {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #555;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: #fff;
+}
+
+.ca-die.match {
+  border-color: #28a745;
+  background: #e8f8e8;
+}
+
+.ca-result {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.ca-result.win {
+  color: #27ae60;
+}
+
+.ca-result.lose {
+  color: #c0392b;
+}
+
+.ca-bet-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.ca-bet-row input {
+  width: 60px;
+  font-size: 1rem;
+  padding: 4px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+.ca-controls button {
+  padding: 10px 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #666;
+  background: #fff;
+  margin: 4px;
+}
+
+.ca-controls button.roll-btn {
+  background: #c0392b;
+  color: #fff;
+  border-color: #922b21;
+}
+
+.ca-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #c0392b;
+}
