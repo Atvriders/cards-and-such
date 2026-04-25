@@ -1,0 +1,101 @@
+.ccm-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a0a00;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.ccm-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #f5c542;
+}
+
+.ccm-progress-bar {
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.ccm-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f5c542, #ff8800);
+  border-radius: 8px;
+  transition: width 0.2s;
+}
+
+.ccm-cookie-count {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f5c542;
+}
+
+.ccm-goal {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.ccm-cookie-btn {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: none;
+  background: radial-gradient(circle, #c8a250 50%, #7a5b1a);
+  font-size: 3.5rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+  box-shadow: 0 4px 20px rgba(200,162,80,0.4);
+}
+
+.ccm-cookie-btn:active {
+  transform: scale(0.92);
+}
+
+.ccm-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.ccm-upgrade-btn {
+  padding: 0.6rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4a3200;
+  color: #f5c542;
+  border: 2px solid #f5c542;
+  transition: background 0.15s;
+}
+
+.ccm-upgrade-btn:hover:not(:disabled) {
+  background: #6a4800;
+}
+
+.ccm-upgrade-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ccm-game-over {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(245,197,66,0.15);
+  border-radius: 10px;
+  color: #f5c542;
+}

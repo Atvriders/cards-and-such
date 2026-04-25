@@ -650,6 +650,14 @@ import { longJumpPlugin } from "./long-jump/index.js";
 import { discusPlugin } from "./discus/index.js";
 import { curlingPlugin } from "./curling/index.js";
 import { darts501Plugin } from "./darts-501/index.js";
+import { cookieClickerMiniPlugin } from "./cookie-clicker-mini/index.js";
+import { idleMinerPlugin } from "./idle-miner/index.js";
+import { bpmTapPlugin } from "./bpm-tap/index.js";
+import { hexColorGuessPlugin } from "./hex-color-guess/index.js";
+import { rgbMixerPlugin } from "./rgb-mixer/index.js";
+import { keyboardWarriorPlugin } from "./keyboard-warrior/index.js";
+import { dicePredictionPlugin } from "./dice-prediction/index.js";
+import { breathGaugePlugin } from "./breath-gauge/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1303,4 +1311,12 @@ export const GAMES: GamePlugin[] = [
   discusPlugin as unknown as GamePlugin,
   curlingPlugin as unknown as GamePlugin,
   darts501Plugin as unknown as GamePlugin,
+  cookieClickerMiniPlugin as unknown as GamePlugin,
+  idleMinerPlugin as unknown as GamePlugin,
+  bpmTapPlugin as unknown as GamePlugin,
+  hexColorGuessPlugin as unknown as GamePlugin,
+  rgbMixerPlugin as unknown as GamePlugin,
+  keyboardWarriorPlugin as unknown as GamePlugin,
+  dicePredictionPlugin as unknown as GamePlugin,
+  breathGaugePlugin as unknown as GamePlugin,
 ];
