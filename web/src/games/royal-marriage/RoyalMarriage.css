@@ -1,0 +1,90 @@
+.royal-marriage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.rm-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rm-stock-area {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.rm-stock-btn {
+  padding: 6px 16px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.rm-stock-btn:hover:not(:disabled) {
+  background: #444;
+}
+
+.rm-stock-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.rm-stock-count {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.rm-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.rm-card {
+  width: 62px;
+  height: 88px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  background: #1a2a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.rm-card.red {
+  color: #e44;
+}
+
+.rm-card.black {
+  color: #eee;
+}
+
+.rm-card.selected {
+  border-color: #4af;
+  background: #1a2a3a;
+}
+
+.rm-card.special {
+  border-color: #fa0;
+}
+
+.rm-hint {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+}

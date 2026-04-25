@@ -1,0 +1,98 @@
+.algerian-patience {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.ap-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ap-label {
+  font-size: 11px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.ap-top {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.ap-foundations {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ap-stock-waste {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ap-tableau {
+  display: flex;
+  gap: 8px;
+}
+
+.ap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ap-card {
+  width: 62px;
+  height: 86px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  background: #1a2a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+
+.ap-card.red { color: #e44; }
+.ap-card.black { color: #eee; }
+.ap-card.selected { border-color: #4af; background: #1a2a3a; }
+.ap-card.up-foundation { border-color: #2a5; }
+.ap-card.down-foundation { border-color: #a52; }
+
+.ap-empty {
+  width: 62px;
+  height: 86px;
+  border: 2px dashed #444;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.ap-btn {
+  padding: 5px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+.ap-btn:hover:not(:disabled) { background: #444; }
+.ap-btn:disabled { opacity: 0.4; cursor: not-allowed; }

@@ -1,0 +1,100 @@
+.jubilee {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  user-select: none;
+}
+
+.jubilee-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.jubilee-top {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.jubilee-section-label {
+  font-size: 11px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.jubilee-foundations {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.jubilee-stock-waste {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.jubilee-tableau {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.jubilee-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 62px;
+}
+
+.jubilee-card {
+  width: 60px;
+  height: 82px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  background: #1a2a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.jubilee-card.red { color: #e44; }
+.jubilee-card.black { color: #eee; }
+.jubilee-card.selected { border-color: #4af; background: #1a2a3a; }
+
+.jubilee-empty {
+  width: 60px;
+  height: 82px;
+  border: 2px dashed #444;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.jubilee-draw-btn {
+  padding: 6px 14px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.jubilee-draw-btn:hover:not(:disabled) { background: #444; }
+.jubilee-draw-btn:disabled { opacity: 0.4; cursor: not-allowed; }

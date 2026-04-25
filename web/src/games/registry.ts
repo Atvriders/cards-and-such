@@ -755,6 +755,15 @@ import { teleportMazePlugin } from "./teleport-maze/index.js";
 import { ghostMazePlugin } from "./ghost-maze/index.js";
 import { gravityMazePlugin } from "./gravity-maze/index.js";
 import { coloredTileMazePlugin } from "./colored-tile-maze/index.js";
+import { wishPlugin } from "./wish/index.js";
+import { royalMarriagePlugin } from "./royal-marriage/index.js";
+import { jubileePlugin } from "./jubilee/index.js";
+import { intelligencePlugin } from "./intelligence/index.js";
+import { eagleWingPlugin } from "./eagle-wing/index.js";
+import { demonPlugin } from "./demon/index.js";
+import { coloradoPlugin } from "./colorado/index.js";
+import { algerianPatiencePlugin } from "./algerian-patience/index.js";
+import { interregnumPlugin } from "./interregnum/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1513,4 +1522,13 @@ export const GAMES: GamePlugin[] = [
   ghostMazePlugin as unknown as GamePlugin,
   gravityMazePlugin as unknown as GamePlugin,
   coloredTileMazePlugin as unknown as GamePlugin,
+  wishPlugin as unknown as GamePlugin,
+  royalMarriagePlugin as unknown as GamePlugin,
+  jubileePlugin as unknown as GamePlugin,
+  intelligencePlugin as unknown as GamePlugin,
+  eagleWingPlugin as unknown as GamePlugin,
+  demonPlugin as unknown as GamePlugin,
+  coloradoPlugin as unknown as GamePlugin,
+  algerianPatiencePlugin as unknown as GamePlugin,
+  interregnumPlugin as unknown as GamePlugin,
 ];
