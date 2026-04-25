@@ -731,6 +731,14 @@ import { crownAndAnchorPlugin } from "./crown-and-anchor/index.js";
 import { fourFiveSixPlugin } from "./four-five-six/index.js";
 import { streetCrapsPlugin } from "./street-craps/index.js";
 import { pirateDicePlugin } from "./pirate-dice/index.js";
+import { napoleonCardPlugin } from "./napoleon-card/index.js";
+import { ecartePlugin } from "./ecarte/index.js";
+import { tarockPlugin } from "./tarock/index.js";
+import { pidroPlugin } from "./pidro/index.js";
+import { hokmPlugin } from "./hokm/index.js";
+import { ultiPlugin } from "./ulti/index.js";
+import { klopPlugin } from "./klop/index.js";
+import { sjavsPlugin } from "./sjavs/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1465,4 +1473,12 @@ export const GAMES: GamePlugin[] = [
   fourFiveSixPlugin as unknown as GamePlugin,
   streetCrapsPlugin as unknown as GamePlugin,
   pirateDicePlugin as unknown as GamePlugin,
+  napoleonCardPlugin as unknown as GamePlugin,
+  ecartePlugin as unknown as GamePlugin,
+  tarockPlugin as unknown as GamePlugin,
+  pidroPlugin as unknown as GamePlugin,
+  hokmPlugin as unknown as GamePlugin,
+  ultiPlugin as unknown as GamePlugin,
+  klopPlugin as unknown as GamePlugin,
+  sjavsPlugin as unknown as GamePlugin,
 ];

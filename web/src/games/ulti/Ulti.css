@@ -1,0 +1,26 @@
+.ulti { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1rem; background: #37474f; min-height: 100%; color: #fff; font-family: sans-serif; box-sizing: border-box; }
+.ul-header { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700; }
+.ul-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.ul-bots-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+.ul-seat { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; min-width: 80px; }
+.ul-seat.active .ul-seat-label { color: #b0bec5; }
+.ul-seat-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.ul-card-backs { display: flex; gap: 2px; }
+.ul-card-back { width: 24px; height: 36px; background: #546e7a; border-radius: 3px; border: 2px solid rgba(255,255,255,0.3); }
+.ul-bid-area { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.ul-bid-buttons { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.ul-btn { padding: 0.4rem 0.7rem; background: #546e7a; color: #fff; border: 2px solid #b0bec5; border-radius: 6px; font-size: 0.9rem; font-weight: 700; cursor: pointer; min-width: 44px; }
+.ul-btn:hover { background: #607d8b; }
+.ul-trick-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.ul-trick-cards { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; min-height: 80px; align-items: center; }
+.ul-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ul-trick-name { font-size: 0.65rem; opacity: 0.6; }
+.ul-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.85rem; text-align: center; }
+.ul-player-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.ul-player-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.ul-player-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.ul-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.ul-player-hand .card:hover { transform: translateY(-6px); }
+.ul-player-hand .card.dim { opacity: 0.35; cursor: default; }
+.ul-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; }
+.ul-result h2 { margin: 0; font-size: 1.4rem; }

@@ -1,0 +1,26 @@
+.pidro { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1rem; background: #bf360c; min-height: 100%; color: #fff; font-family: sans-serif; box-sizing: border-box; }
+.pid-header { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700; }
+.pid-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.pid-bots-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+.pid-seat { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; min-width: 80px; }
+.pid-seat.active .pid-seat-label { color: #ffcc80; }
+.pid-seat-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.pid-card-backs { display: flex; gap: 2px; }
+.pid-card-back { width: 24px; height: 36px; background: #d84315; border-radius: 3px; border: 2px solid rgba(255,255,255,0.3); }
+.pid-bid-area { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.pid-bid-buttons { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.pid-btn { padding: 0.4rem 0.7rem; background: #d84315; color: #fff; border: 2px solid #ffcc80; border-radius: 6px; font-size: 0.9rem; font-weight: 700; cursor: pointer; min-width: 44px; }
+.pid-btn:hover { background: #e64a19; }
+.pid-trick-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.pid-trick-cards { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; min-height: 80px; align-items: center; }
+.pid-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.pid-trick-name { font-size: 0.65rem; opacity: 0.6; }
+.pid-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.85rem; text-align: center; }
+.pid-player-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.pid-player-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.pid-player-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.pid-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.pid-player-hand .card:hover { transform: translateY(-6px); }
+.pid-player-hand .card.dim { opacity: 0.35; cursor: default; }
+.pid-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; }
+.pid-result h2 { margin: 0; font-size: 1.4rem; }

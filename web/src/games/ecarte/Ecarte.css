@@ -1,0 +1,33 @@
+.ecarte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #2e7d32;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.ec-header { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700; }
+.ec-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.ec-trick-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.ec-trick-cards { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; min-height: 80px; align-items: center; }
+.ec-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ec-trick-name { font-size: 0.65rem; opacity: 0.6; }
+.ec-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.85rem; text-align: center; }
+.ec-player-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.ec-player-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.ec-player-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.ec-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.ec-player-hand .card:hover { transform: translateY(-6px); }
+.ec-player-hand .card.selected { transform: translateY(-10px); outline: 3px solid #ffeb3b; border-radius: 4px; }
+.ec-player-hand .card.dim { opacity: 0.4; cursor: default; }
+.ec-action-row { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.ec-btn { padding: 0.5rem 1.2rem; background: #1b5e20; color: #fff; border: 2px solid #a5d6a7; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
+.ec-btn:hover { background: #388e3c; }
+.ec-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; }
+.ec-result h2 { margin: 0; font-size: 1.4rem; }
+.ec-bot-hand { display: flex; gap: 2px; justify-content: center; }
+.ec-card-back { width: 24px; height: 36px; background: #1b5e20; border-radius: 3px; border: 2px solid rgba(255,255,255,0.3); }

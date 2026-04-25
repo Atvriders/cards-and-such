@@ -1,0 +1,22 @@
+.klop { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1rem; background: #1a237e; min-height: 100%; color: #fff; font-family: sans-serif; box-sizing: border-box; }
+.kl-header { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700; }
+.kl-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.kl-bots-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+.kl-seat { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; min-width: 80px; }
+.kl-seat.active .kl-seat-label { color: #9fa8da; }
+.kl-seat-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.kl-card-backs { display: flex; gap: 2px; }
+.kl-card-back { width: 24px; height: 36px; background: #283593; border-radius: 3px; border: 2px solid rgba(255,255,255,0.3); }
+.kl-trick-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.kl-trick-cards { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; min-height: 80px; align-items: center; }
+.kl-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.kl-trick-name { font-size: 0.65rem; opacity: 0.6; }
+.kl-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.85rem; text-align: center; }
+.kl-player-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.kl-player-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+.kl-player-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.kl-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.kl-player-hand .card:hover { transform: translateY(-6px); }
+.kl-player-hand .card.dim { opacity: 0.35; cursor: default; }
+.kl-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; }
+.kl-result h2 { margin: 0; font-size: 1.4rem; }
