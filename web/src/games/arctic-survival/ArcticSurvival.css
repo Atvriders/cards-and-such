@@ -1,0 +1,138 @@
+.arctic-survival {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  max-width: 400px;
+  margin: 0 auto;
+  background: #e3f2fd;
+  border-radius: 10px;
+}
+
+.as-header {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #1565c0;
+}
+
+.as-day {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.as-stats {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.as-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.as-stat-row span { width: 60px; }
+
+.as-bar-bg {
+  flex: 1;
+  height: 16px;
+  background: #ccc;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.as-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.3s;
+}
+
+.as-bar-label {
+  position: absolute;
+  right: 6px;
+  top: 0;
+  font-size: 0.7rem;
+  line-height: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+.as-event {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #1565c0;
+  background: #bbdefb;
+  padding: 6px 12px;
+  border-radius: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.as-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.as-actions button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 2px solid #1565c0;
+  background: #fff;
+  color: #1565c0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.as-actions button:hover { background: #e3f2fd; }
+
+.as-log {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #555;
+  min-height: 60px;
+}
+
+.as-log p { margin: 2px 0; }
+
+.as-gameover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.as-result {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1565c0;
+}
+
+.as-score {
+  font-size: 1rem;
+  color: #333;
+}
+
+.as-gameover button {
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 2px solid #1565c0;
+  background: #e3f2fd;
+  color: #1565c0;
+  cursor: pointer;
+  font-weight: bold;
+}

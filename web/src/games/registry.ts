@@ -624,6 +624,8 @@ import { alchemyShopPlugin } from "./alchemy-shop/index.js";
 import { spyHeistPlugin } from "./spy-heist/index.js";
 import { towerDefenseMiniPlugin } from "./tower-defense-mini/index.js";
 import { fishingVillagePlugin } from "./fishing-village/index.js";
+import { arcticSurvivalPlugin } from "./arctic-survival/index.js";
+import { jungleExplorerPlugin } from "./jungle-explorer/index.js";
 import { antFarmPlugin } from "./ant-farm/index.js";
 import { auctionGamePlugin } from "./auction-game/index.js";
 import { pizzaRushPlugin } from "./pizza-rush/index.js";
@@ -1849,4 +1851,6 @@ export const GAMES: GamePlugin[] = [
   diceSoccerPlugin as unknown as GamePlugin,
   diceTennisPlugin as unknown as GamePlugin,
   diceHockeyPlugin as unknown as GamePlugin,
+  arcticSurvivalPlugin as unknown as GamePlugin,
+  jungleExplorerPlugin as unknown as GamePlugin,
 ];
