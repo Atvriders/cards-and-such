@@ -1,0 +1,101 @@
+.hsh-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0c2340;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.hsh-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; color: #90caf9; }
+.hsh-scoreboard { display: flex; gap: 1.5rem; font-size: 0.9rem; }
+
+.hsh-net {
+  position: relative;
+  width: 200px;
+  height: 90px;
+  border: 3px solid #ccc;
+  background: rgba(144,202,249,0.08);
+  border-radius: 2px;
+}
+.hsh-puck-aim {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #000;
+  border: 2px solid #90caf9;
+  transform: translate(-50%, 50%);
+  transition: left 0.1s, bottom 0.1s;
+}
+.hsh-goalie {
+  position: absolute;
+  bottom: 0;
+  width: 22px;
+  height: 50px;
+  background: rgba(229,57,53,0.75);
+  border-radius: 3px;
+  transform: translateX(-50%);
+  transition: left 0.3s;
+}
+
+.hsh-history {
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+}
+.hsh-dot { width: 24px; height: 24px; border-radius: 50%; }
+.hsh-dot.goal { background: #42a5f5; }
+.hsh-dot.saved { background: #ef5350; }
+.hsh-dot.empty { background: rgba(255,255,255,0.12); border: 1px dashed rgba(255,255,255,0.25); }
+
+.hsh-controls {
+  background: rgba(0,0,0,0.35);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+.hsh-controls label { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; }
+.hsh-controls input[type=range] { width: 100%; accent-color: #90caf9; }
+
+.hsh-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #42a5f5;
+  color: #000;
+  margin-top: 0.25rem;
+}
+.hsh-btn:hover { background: #64b5f6; }
+
+.hsh-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+.hsh-result.goal { background: rgba(66,165,245,0.25); color: #90caf9; }
+.hsh-result.saved { background: rgba(239,83,80,0.2); color: #ef9a9a; }
+
+.hsh-game-over {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.7;
+}

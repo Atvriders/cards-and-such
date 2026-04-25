@@ -1,0 +1,114 @@
+.lj-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #3e2723;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.lj-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; color: #ffcc80; }
+.lj-scoreboard { display: flex; gap: 1.5rem; font-size: 0.9rem; }
+
+.lj-track {
+  position: relative;
+  width: 280px;
+  height: 36px;
+  background: #8d6e63;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid #a1887f;
+}
+.lj-board {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: #fff;
+}
+.lj-pit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  background: #d4c9a8;
+  border-left: 2px solid #bcaaa4;
+}
+.lj-athlete {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  transition: left 0.1s;
+}
+
+.lj-attempts {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.lj-chip {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.lj-chip.jump { background: #6d4c41; color: #ffcc80; }
+.lj-chip.foul { background: #c62828; color: #fff; }
+.lj-chip.empty { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+
+.lj-controls {
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+.lj-controls label { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; }
+.lj-controls input[type=range] { width: 100%; accent-color: #ffcc80; }
+
+.lj-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ffcc80;
+  color: #3e2723;
+  margin-top: 0.25rem;
+}
+.lj-btn:hover { background: #ffe082; }
+
+.lj-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+.lj-result.good { background: rgba(255,204,128,0.2); color: #ffcc80; }
+.lj-result.foul { background: rgba(198,40,40,0.2); color: #ef9a9a; }
+
+.lj-game-over {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.7;
+}

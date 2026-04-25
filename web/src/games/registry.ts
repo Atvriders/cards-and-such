@@ -642,6 +642,14 @@ import { stroopTestPlugin } from "./stroop-test/index.js";
 import { digitSpanPlugin } from "./digit-span/index.js";
 import { aimTrainerPlugin } from "./aim-trainer/index.js";
 import { visualMemoryGridPlugin } from "./visual-memory-grid/index.js";
+import { homeRunDerbyPlugin } from "./home-run-derby/index.js";
+import { soccerPenaltyPlugin } from "./soccer-penalty/index.js";
+import { hockeyShootoutPlugin } from "./hockey-shootout/index.js";
+import { pingPongRallyPlugin } from "./ping-pong-rally/index.js";
+import { longJumpPlugin } from "./long-jump/index.js";
+import { discusPlugin } from "./discus/index.js";
+import { curlingPlugin } from "./curling/index.js";
+import { darts501Plugin } from "./darts-501/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1287,4 +1295,12 @@ export const GAMES: GamePlugin[] = [
   digitSpanPlugin as unknown as GamePlugin,
   aimTrainerPlugin as unknown as GamePlugin,
   visualMemoryGridPlugin as unknown as GamePlugin,
+  homeRunDerbyPlugin as unknown as GamePlugin,
+  soccerPenaltyPlugin as unknown as GamePlugin,
+  hockeyShootoutPlugin as unknown as GamePlugin,
+  pingPongRallyPlugin as unknown as GamePlugin,
+  longJumpPlugin as unknown as GamePlugin,
+  discusPlugin as unknown as GamePlugin,
+  curlingPlugin as unknown as GamePlugin,
+  darts501Plugin as unknown as GamePlugin,
 ];

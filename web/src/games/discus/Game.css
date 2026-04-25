@@ -1,0 +1,110 @@
+.dsc-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #1a237e;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.dsc-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; color: #ce93d8; }
+.dsc-scoreboard { display: flex; gap: 1.5rem; font-size: 0.9rem; }
+.dsc-wind { font-size: 0.8rem; opacity: 0.8; }
+
+.dsc-sector {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  overflow: hidden;
+}
+.dsc-sector-arc {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid #ce93d8;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  clip-path: polygon(0 100%, 100% 100%, 80% 0, 20% 0);
+  background: rgba(206,147,216,0.08);
+}
+.dsc-disc-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4rem;
+}
+
+.dsc-attempts {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.dsc-chip {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.dsc-chip.throw { background: rgba(206,147,216,0.25); color: #ce93d8; }
+.dsc-chip.foul { background: #c62828; color: #fff; }
+.dsc-chip.empty { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.35); }
+
+.dsc-controls {
+  background: rgba(0,0,0,0.35);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+.dsc-controls label { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; }
+.dsc-controls input[type=range] { width: 100%; accent-color: #ce93d8; }
+
+.dsc-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ce93d8;
+  color: #1a237e;
+  margin-top: 0.25rem;
+}
+.dsc-btn:hover { background: #ba68c8; color: #fff; }
+
+.dsc-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+.dsc-result.good { background: rgba(206,147,216,0.2); color: #ce93d8; }
+.dsc-result.foul { background: rgba(198,40,40,0.2); color: #ef9a9a; }
+
+.dsc-game-over {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.7;
+}

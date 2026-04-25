@@ -1,0 +1,87 @@
+.hrd-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #0d2137;
+  min-height: 100%;
+  color: #fff;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.hrd-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; color: #f9a825; }
+.hrd-scoreboard { display: flex; gap: 1.5rem; font-size: 0.9rem; opacity: 0.9; }
+.hrd-scoreboard .hr-count { color: #f9a825; font-weight: 700; }
+
+.hrd-history {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hrd-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.hrd-dot.hr { background: #f9a825; color: #000; }
+.hrd-dot.hit { background: #43a047; color: #fff; }
+.hrd-dot.out { background: #c62828; color: #fff; }
+
+.hrd-field {
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+.hrd-wind { font-size: 0.8rem; opacity: 0.75; }
+.hrd-field label { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; }
+.hrd-field input[type=range] { width: 100%; accent-color: #f9a825; }
+
+.hrd-btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f9a825;
+  color: #000;
+  margin-top: 0.25rem;
+}
+.hrd-btn:hover { background: #fbc02d; }
+
+.hrd-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+.hrd-result.hr { background: rgba(249,168,37,0.25); color: #f9a825; }
+.hrd-result.hit { background: rgba(67,160,71,0.2); color: #81c784; }
+.hrd-result.out { background: rgba(198,40,40,0.2); color: #ef9a9a; }
+
+.hrd-game-over {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  line-height: 1.7;
+}
