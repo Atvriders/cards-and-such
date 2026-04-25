@@ -1,0 +1,56 @@
+.parliament {
+  display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+  padding: 1rem; background: #2c1654; min-height: 100%; color: #fff;
+  font-family: sans-serif; box-sizing: border-box;
+}
+.parl-title { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; }
+
+.parl-opponents { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.parl-opponent {
+  background: rgba(0,0,0,0.3); border-radius: 8px; padding: 0.5rem 1rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem; min-width: 80px;
+}
+.parl-opp-name { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.85; }
+
+.parl-board {
+  display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.25); border-radius: 10px; padding: 0.6rem 1.2rem; width: 100%; max-width: 460px;
+}
+.parl-suit-row {
+  display: flex; align-items: center; gap: 0.3rem;
+  background: rgba(255,255,255,0.05); border-radius: 6px; padding: 0.3rem 0.6rem;
+}
+.parl-suit-icon { font-size: 1.1rem; min-width: 1.4rem; }
+.parl-suit-range { font-size: 0.8rem; opacity: 0.8; }
+
+.parl-log {
+  background: rgba(0,0,0,0.35); border-radius: 8px; padding: 0.5rem 1rem;
+  width: 100%; max-width: 480px; font-size: 0.88rem; line-height: 1.5;
+  min-height: 2.4rem; text-align: center;
+}
+
+.parl-hand { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 100%; }
+.parl-hand-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.75; }
+.parl-cards { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+
+.parl-card-btn {
+  background: none; border: 2px solid transparent; border-radius: 8px;
+  cursor: pointer; padding: 0.2rem; transition: border-color 0.15s, transform 0.15s;
+}
+.parl-card-btn.playable { border-color: rgba(180,255,100,0.5); }
+.parl-card-btn.playable:hover { border-color: #c8ff64; transform: translateY(-4px); }
+.parl-card-btn:disabled { cursor: not-allowed; opacity: 0.4; }
+
+.parl-actions { display: flex; gap: 0.75rem; }
+.parl-btn {
+  padding: 0.55rem 1.4rem; font-size: 0.95rem; font-weight: 700;
+  border: none; border-radius: 7px; cursor: pointer;
+  background: rgba(255,255,255,0.15); color: #fff; transition: background 0.15s;
+}
+.parl-btn:hover { background: rgba(255,255,255,0.25); }
+.parl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.parl-game-over {
+  font-size: 1.5rem; font-weight: 700; padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5); border-radius: 10px; text-align: center;
+}

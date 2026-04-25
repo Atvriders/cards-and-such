@@ -1,0 +1,56 @@
+.karma-card {
+  display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+  padding: 1rem; background: #3d1a4a; min-height: 100%; color: #fff;
+  font-family: sans-serif; box-sizing: border-box;
+}
+.karma-title { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; }
+
+.karma-opponents { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.karma-opponent {
+  background: rgba(0,0,0,0.3); border-radius: 8px; padding: 0.5rem 1rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem; min-width: 90px;
+}
+.karma-opp-name { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.85; }
+
+.karma-pile {
+  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.25); border-radius: 10px; padding: 0.6rem 1.2rem;
+}
+.karma-pile-label { font-size: 0.8rem; opacity: 0.75; }
+
+.karma-log {
+  background: rgba(0,0,0,0.35); border-radius: 8px; padding: 0.5rem 1rem;
+  width: 100%; max-width: 500px; font-size: 0.88rem; line-height: 1.5;
+  min-height: 2.4rem; text-align: center;
+}
+
+.karma-zone { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; width: 100%; }
+.karma-zone-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.75; }
+.karma-cards { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+
+.karma-card-btn {
+  background: none; border: 2px solid transparent; border-radius: 8px;
+  cursor: pointer; padding: 0.2rem; transition: border-color 0.15s, transform 0.15s;
+}
+.karma-card-btn:hover:not(:disabled) { border-color: #e070f0; transform: translateY(-4px); }
+.karma-card-btn.selected { border-color: #e070f0; background: rgba(200,80,220,0.2); }
+.karma-card-btn:disabled { cursor: not-allowed; opacity: 0.4; }
+
+.karma-swap-hint { font-size: 0.82rem; opacity: 0.75; font-style: italic; }
+.karma-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.karma-btn {
+  padding: 0.55rem 1.4rem; font-size: 0.95rem; font-weight: 700;
+  border: none; border-radius: 7px; cursor: pointer;
+  background: #9b4fc5; color: #fff; transition: background 0.15s;
+}
+.karma-btn:hover { background: #b362dc; }
+.karma-btn.secondary { background: rgba(255,255,255,0.15); }
+.karma-btn.secondary:hover { background: rgba(255,255,255,0.25); }
+.karma-btn.danger { background: #c44; }
+.karma-btn.danger:hover { background: #d55; }
+.karma-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.karma-game-over {
+  font-size: 1.5rem; font-weight: 700; padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5); border-radius: 10px; text-align: center;
+}

@@ -780,6 +780,14 @@ import { seatingPuzzlePlugin } from "./seating-puzzle/index.js";
 import { safeCrackerPlugin } from "./safe-cracker/index.js";
 import { riddleMachinePlugin } from "./riddle-machine/index.js";
 import { digitDeducePlugin } from "./digit-deduce/index.js";
+import { spoonsPlugin } from "./spoons/index.js";
+import { palacePlugin } from "./palace/index.js";
+import { parliamentPlugin } from "./parliament/index.js";
+import { karmaCardPlugin } from "./karma-card/index.js";
+import { garbageCardPlugin } from "./garbage-card/index.js";
+import { pigCardPlugin } from "./pig-card/index.js";
+import { playOrPayPlugin } from "./play-or-pay/index.js";
+import { snipSnapSnoremPlugin } from "./snip-snap-snorem/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1563,4 +1571,12 @@ export const GAMES: GamePlugin[] = [
   safeCrackerPlugin as unknown as GamePlugin,
   riddleMachinePlugin as unknown as GamePlugin,
   digitDeducePlugin as unknown as GamePlugin,
+  spoonsPlugin as unknown as GamePlugin,
+  palacePlugin as unknown as GamePlugin,
+  parliamentPlugin as unknown as GamePlugin,
+  karmaCardPlugin as unknown as GamePlugin,
+  garbageCardPlugin as unknown as GamePlugin,
+  pigCardPlugin as unknown as GamePlugin,
+  playOrPayPlugin as unknown as GamePlugin,
+  snipSnapSnoremPlugin as unknown as GamePlugin,
 ];

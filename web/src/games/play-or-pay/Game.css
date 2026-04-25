@@ -1,0 +1,64 @@
+.play-or-pay {
+  display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+  padding: 1rem; background: #1a3a2a; min-height: 100%; color: #fff;
+  font-family: sans-serif; box-sizing: border-box;
+}
+.pop-title { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; }
+
+.pop-opponents { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.pop-opponent {
+  background: rgba(0,0,0,0.3); border-radius: 8px; padding: 0.5rem 0.9rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem; min-width: 80px;
+}
+.pop-opp-name { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.85; }
+
+.pop-sequences {
+  display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.25); border-radius: 10px; padding: 0.6rem 1.2rem; width: 100%; max-width: 480px;
+}
+.pop-suit-info {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.06); border-radius: 6px; padding: 0.3rem 0.7rem;
+}
+.pop-suit-sym { font-size: 1.1rem; min-width: 1.3rem; }
+.pop-suit-next { font-size: 0.82rem; opacity: 0.85; }
+
+.pop-chips {
+  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: center;
+  background: rgba(0,0,0,0.2); border-radius: 10px; padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+.pop-pot { font-size: 0.9rem; opacity: 0.85; }
+
+.pop-log {
+  background: rgba(0,0,0,0.35); border-radius: 8px; padding: 0.5rem 1rem;
+  width: 100%; max-width: 480px; font-size: 0.88rem; line-height: 1.5;
+  min-height: 2.4rem; text-align: center;
+}
+
+.pop-hand { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 100%; }
+.pop-hand-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.75; }
+.pop-cards { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.pop-card-btn {
+  background: none; border: 2px solid transparent; border-radius: 8px;
+  cursor: pointer; padding: 0.2rem; transition: border-color 0.15s, transform 0.15s;
+}
+.pop-card-btn.playable { border-color: rgba(80,220,120,0.5); }
+.pop-card-btn.playable:hover { border-color: #50dc78; transform: translateY(-4px); }
+.pop-card-btn:disabled { cursor: not-allowed; opacity: 0.4; }
+
+.pop-actions { display: flex; gap: 0.75rem; }
+.pop-btn {
+  padding: 0.55rem 1.4rem; font-size: 0.95rem; font-weight: 700;
+  border: none; border-radius: 7px; cursor: pointer;
+  background: #4a9eff; color: #fff; transition: background 0.15s;
+}
+.pop-btn:hover { background: #6ab5ff; }
+.pop-btn.pay-btn { background: #c87a20; }
+.pop-btn.pay-btn:hover { background: #e09030; }
+.pop-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pop-game-over {
+  font-size: 1.5rem; font-weight: 700; padding: 1rem 2rem;
+  background: rgba(0,0,0,0.5); border-radius: 10px; text-align: center;
+}
