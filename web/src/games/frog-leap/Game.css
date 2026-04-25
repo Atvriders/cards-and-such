@@ -1,0 +1,7 @@
+.frog-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:sans-serif;max-width:560px;margin:0 auto; }
+.frog-header { display:flex;justify-content:space-between;width:100%;font-size:1.1rem;font-weight:700; }
+.frog-pond { position:relative;width:100%;height:320px;background:linear-gradient(135deg,#1a6b3a,#2d8653);border-radius:16px;overflow:hidden; }
+.frog-icon { position:absolute;transform:translate(-50%,-50%);font-size:2rem;pointer-events:none;transition:all 0.3s; }
+.lily-pad { position:absolute;transform:translate(-50%,-50%);background:none;border:none;font-size:2rem;cursor:pointer;padding:0;transition:transform 0.15s; }
+.lily-pad:hover:not(:disabled) { transform:translate(-50%,-50%) scale(1.2); }
+.lily-pad.current { opacity:0.5;cursor:default; }

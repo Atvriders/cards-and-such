@@ -1,0 +1,12 @@
+.wand-wrap { display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px;font-family:sans-serif;max-width:500px;margin:0 auto; }
+.wand-header { display:flex;justify-content:space-between;width:100%;font-size:1.1rem;font-weight:700; }
+.wand-urgent { color:#e74c3c;animation:pulse 0.5s infinite alternate; }
+@keyframes pulse { from { opacity:1; } to { opacity:0.4; } }
+.wand-spell { display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0; }
+.wand-orb { display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;color:#fff;font-weight:900;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s; }
+.wand-orb.done { transform:scale(0.9);opacity:0.7; }
+.wand-orb.active { transform:scale(1.1);box-shadow:0 0 12px rgba(0,0,0,0.3); }
+.wand-btns { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.wand-color-btn { padding:10px 16px;border-radius:8px;border:none;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;min-width:80px; }
+.wand-color-btn:hover { opacity:0.85;transform:scale(1.05); }
+.wand-btn { padding:10px 24px;border-radius:8px;border:none;background:#9b59b6;color:#fff;font-weight:700;font-size:1rem;cursor:pointer; }

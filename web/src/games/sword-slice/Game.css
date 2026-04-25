@@ -1,0 +1,5 @@
+.slice-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:sans-serif;max-width:600px;margin:0 auto;user-select:none; }
+.slice-header { display:flex;justify-content:space-between;width:100%;font-size:1.1rem;font-weight:700; }
+.slice-arena { position:relative;width:100%;height:320px;background:#1a1a2e;border-radius:12px;overflow:hidden;cursor:crosshair; }
+.slice-target { position:absolute;transform:translate(-50%,-50%);border-radius:50%;border:none;background:rgba(255,200,0,0.9);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.1s;box-shadow:0 0 12px rgba(255,200,0,0.6); }
+.slice-target:hover { transform:translate(-50%,-50%) scale(1.1); }

@@ -1001,6 +1001,22 @@ import { colorRecallPlugin } from "./color-recall/index.js";
 import { shapeRecallPlugin } from "./shape-recall/index.js";
 import { numberRecallPlugin } from "./number-recall/index.js";
 import { positionRecallPlugin } from "./position-recall/index.js";
+import { birdsQuizPlugin } from "./birds-quiz/index.js";
+import { plantsQuizPlugin } from "./plants-quiz/index.js";
+import { gemstonesQuizPlugin } from "./gemstones-quiz/index.js";
+import { occupationsQuizPlugin } from "./occupations-quiz/index.js";
+import { cardUpDownPlugin } from "./card-up-down/index.js";
+import { redOrBlackPlugin } from "./red-or-black/index.js";
+import { aceFinderPlugin } from "./ace-finder/index.js";
+import { doubleOrNothingDicePlugin } from "./double-or-nothing-dice/index.js";
+import { climbTheLadderDicePlugin } from "./climb-the-ladder-dice/index.js";
+import { sumTargetDicePlugin } from "./sum-target-dice/index.js";
+import { swordSlicePlugin } from "./sword-slice/index.js";
+import { magicWandCastPlugin } from "./magic-wand-cast/index.js";
+import { frogLeapPlugin } from "./frog-leap/index.js";
+import { monkeyBananaPlugin } from "./monkey-banana/index.js";
+import { cribbageSquarePlugin } from "./cribbage-square/index.js";
+import { decadeSolitairePlugin } from "./decade-solitaire/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2005,4 +2021,20 @@ export const GAMES: GamePlugin[] = [
   shapeRecallPlugin as unknown as GamePlugin,
   numberRecallPlugin as unknown as GamePlugin,
   positionRecallPlugin as unknown as GamePlugin,
+  birdsQuizPlugin as unknown as GamePlugin,
+  plantsQuizPlugin as unknown as GamePlugin,
+  gemstonesQuizPlugin as unknown as GamePlugin,
+  occupationsQuizPlugin as unknown as GamePlugin,
+  cardUpDownPlugin as unknown as GamePlugin,
+  redOrBlackPlugin as unknown as GamePlugin,
+  aceFinderPlugin as unknown as GamePlugin,
+  doubleOrNothingDicePlugin as unknown as GamePlugin,
+  climbTheLadderDicePlugin as unknown as GamePlugin,
+  sumTargetDicePlugin as unknown as GamePlugin,
+  swordSlicePlugin as unknown as GamePlugin,
+  magicWandCastPlugin as unknown as GamePlugin,
+  frogLeapPlugin as unknown as GamePlugin,
+  monkeyBananaPlugin as unknown as GamePlugin,
+  cribbageSquarePlugin as unknown as GamePlugin,
+  decadeSolitairePlugin as unknown as GamePlugin,
 ];

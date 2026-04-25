@@ -1,0 +1,7 @@
+.csq-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:16px;font-family:sans-serif;max-width:500px;margin:0 auto; }
+.csq-header { display:flex;justify-content:space-between;width:100%;font-size:1rem;font-weight:600; }
+.csq-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%; }
+.csq-cell { padding:10px 4px;border:2px solid #bdc3c7;border-radius:8px;background:#fff;font-size:0.95rem;font-weight:700;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center; }
+.csq-cell.empty { cursor:pointer;background:#f4f6f7;color:#3498db;font-size:1.2rem; }
+.csq-cell.empty:hover { background:#eaf4fb;border-color:#3498db; }
+.csq-cell:disabled { cursor:default; }
