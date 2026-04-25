@@ -1,0 +1,81 @@
+.dice-archery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #1a1005;
+  color: #e8d8b0;
+  min-height: 100%;
+}
+
+.dice-archery h2 {
+  margin: 0;
+  color: #e8a030;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.da-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+}
+.da-info b { color: #ffcc66; }
+
+.da-target {
+  width: 140px;
+  height: 140px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.da-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: background 0.2s;
+}
+
+.ring-5 { width: 140px; height: 140px; background: #2a2a2a; }
+.ring-4 { width: 116px; height: 116px; background: #3a2a1a; }
+.ring-3 { width: 92px;  height: 92px;  background: #4a3a2a; }
+.ring-2 { width: 68px;  height: 68px;  background: #5a4a3a; }
+.ring-1 { width: 44px;  height: 44px;  background: #6a5a4a; }
+.ring-0 { width: 20px;  height: 20px;  background: #ffd700; }
+
+.da-ring.hit { outline: 3px solid #ff4444; }
+
+.da-dice-row {
+  display: flex;
+  gap: 14px;
+}
+
+.da-result {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffee66;
+}
+
+.da-btn {
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #442200;
+  background: #331100;
+  color: #ffcc66;
+  cursor: pointer;
+}
+.da-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.da-btn:hover:not(:disabled) { background: #442200; }
+
+.da-hint { font-size: 0.8rem; color: #998866; }
+
+.da-gameover {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #88ffaa;
+}

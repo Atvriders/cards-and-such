@@ -1,0 +1,96 @@
+.clock-tournament {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0d1505;
+  color: #d0e8c0;
+  min-height: 100%;
+}
+
+.clock-tournament h2 {
+  margin: 0;
+  color: #66cc44;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+}
+
+.ct-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+}
+.ct-info b { color: #aaffaa; }
+
+.ct-clock-face {
+  display: grid;
+  grid-template-columns: repeat(4, 72px);
+  gap: 6px;
+}
+
+.ct-pile {
+  background: #112211;
+  border: 2px solid #224422;
+  border-radius: 6px;
+  padding: 4px;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.ct-pile.current {
+  border-color: #88ff44;
+  background: #1a3310;
+}
+
+.ct-pile.center {
+  background: #221100;
+  border-color: #664400;
+}
+
+.ct-pile-label {
+  color: #88aa66;
+  font-weight: bold;
+}
+
+.ct-pile-card {
+  font-size: 0.85rem;
+  color: #ffee88;
+  font-weight: bold;
+  min-height: 18px;
+}
+
+.ct-pile-done {
+  color: #668855;
+  font-size: 0.65rem;
+}
+
+.ct-win {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffee00;
+  text-shadow: 0 0 8px #ff8800;
+}
+
+.ct-lose {
+  font-size: 1rem;
+  color: #ff6666;
+}
+
+.ct-gameover {
+  font-size: 1rem;
+  color: #88ffaa;
+}
+
+.ct-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #224422;
+  background: #112210;
+  color: #88ee66;
+  cursor: pointer;
+}
+.ct-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.ct-btn:hover:not(:disabled) { background: #1a3318; }

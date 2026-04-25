@@ -1,0 +1,102 @@
+.numeric-ttt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0a101e;
+  color: #c8d8f0;
+  min-height: 100%;
+}
+
+.numeric-ttt h2 {
+  margin: 0;
+  color: #66aaff;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.nttt-rule {
+  font-size: 0.8rem;
+  color: #8899bb;
+}
+
+.nttt-pickers {
+  display: flex;
+  gap: 24px;
+}
+
+.nttt-picker-label {
+  font-size: 0.75rem;
+  color: #8899bb;
+  margin-bottom: 4px;
+}
+
+.nttt-nums {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.nttt-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 2px solid #336;
+  background: #112244;
+  color: #aaccff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nttt-num.selected {
+  border-color: #88aaff;
+  background: #2244aa;
+}
+
+.nttt-num.ai {
+  background: #441122;
+  color: #ffaaaa;
+  border-color: #662233;
+  cursor: default;
+}
+
+.nttt-num:disabled { opacity: 0.5; cursor: default; }
+
+.nttt-selected {
+  font-size: 0.9rem;
+  color: #ffee88;
+}
+.nttt-selected b { color: #ffcc44; }
+
+.nttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 6px;
+}
+
+.nttt-cell {
+  width: 80px;
+  height: 80px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid #334;
+  background: #11122a;
+  color: #c8d8f0;
+  cursor: pointer;
+}
+
+.nttt-cell.odd { color: #66aaff; background: #112233; }
+.nttt-cell.even { color: #ff8888; background: #221122; }
+.nttt-cell:disabled { cursor: default; }
+.nttt-cell:hover:not(:disabled) { background: #222244; }
+
+.nttt-win { font-size: 1.3rem; font-weight: bold; color: #88ff88; }
+.nttt-lose { font-size: 1.3rem; font-weight: bold; color: #ff8888; }
+.nttt-draw { font-size: 1.3rem; font-weight: bold; color: #ffee66; }

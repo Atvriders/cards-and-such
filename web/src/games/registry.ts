@@ -957,6 +957,18 @@ import { diceRunnerPlugin } from "./dice-runner/index.js";
 import { rollAndAddPlugin } from "./roll-and-add/index.js";
 import { cardSharkPlugin } from "./card-shark/index.js";
 import { matchThreeSagaPlugin } from "./match-three-saga/index.js";
+import { wallBouncePlugin } from "./wall-bounce/index.js";
+import { diceArcheryPlugin } from "./dice-archery/index.js";
+import { diceDartsPlugin } from "./dice-darts/index.js";
+import { dicePoolMatchPlugin } from "./dice-pool-match/index.js";
+import { rollingThunderDicePlugin } from "./rolling-thunder-dice/index.js";
+import { bingoCallPlugin } from "./bingo-call/index.js";
+import { cardFlipPuzzlePlugin } from "./card-flip-puzzle/index.js";
+import { solitaireClockTournamentPlugin } from "./solitaire-clock-tournament/index.js";
+import { ticTacToeToroidalPlugin } from "./tic-tac-toe-toroidal/index.js";
+import { numericTicTacToePlugin } from "./numeric-tic-tac-toe/index.js";
+import { chessPuzzleForkPlugin } from "./chess-puzzle-fork/index.js";
+import { gomokuTacticPlugin } from "./gomoku-tactic/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1917,4 +1929,16 @@ export const GAMES: GamePlugin[] = [
   rollAndAddPlugin as unknown as GamePlugin,
   cardSharkPlugin as unknown as GamePlugin,
   matchThreeSagaPlugin as unknown as GamePlugin,
+  wallBouncePlugin as unknown as GamePlugin,
+  diceArcheryPlugin as unknown as GamePlugin,
+  diceDartsPlugin as unknown as GamePlugin,
+  dicePoolMatchPlugin as unknown as GamePlugin,
+  rollingThunderDicePlugin as unknown as GamePlugin,
+  bingoCallPlugin as unknown as GamePlugin,
+  cardFlipPuzzlePlugin as unknown as GamePlugin,
+  solitaireClockTournamentPlugin as unknown as GamePlugin,
+  ticTacToeToroidalPlugin as unknown as GamePlugin,
+  numericTicTacToePlugin as unknown as GamePlugin,
+  chessPuzzleForkPlugin as unknown as GamePlugin,
+  gomokuTacticPlugin as unknown as GamePlugin,
 ];

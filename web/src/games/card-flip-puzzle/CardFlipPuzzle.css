@@ -1,0 +1,77 @@
+.card-flip-puzzle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0f1a0f;
+  color: #c8e0c8;
+  min-height: 100%;
+}
+
+.card-flip-puzzle h2 {
+  margin: 0;
+  color: #55cc55;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+}
+
+.cfp-info {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+}
+.cfp-info b { color: #88ff88; }
+
+.cfp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 64px);
+  gap: 8px;
+}
+
+.cfp-card {
+  width: 64px;
+  height: 80px;
+  border-radius: 8px;
+  border: 2px solid #224422;
+  background: #112211;
+  color: #556655;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cfp-card.face-up {
+  background: #f8f0e0;
+  color: #222;
+  border-color: #aaa;
+}
+
+.cfp-card.matched {
+  background: #224422;
+  color: #66cc66;
+  border-color: #336633;
+  cursor: default;
+}
+
+.cfp-card.mismatch {
+  background: #442222;
+  color: #ff8888;
+  border-color: #663333;
+}
+
+.cfp-card:disabled { cursor: default; }
+
+.cfp-hint {
+  font-size: 0.85rem;
+  color: #ff9966;
+}
+
+.cfp-gameover {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #88ffaa;
+}

@@ -1,0 +1,56 @@
+.gomoku-tactic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #f5e6c8;
+  color: #332200;
+  min-height: 100%;
+}
+
+.gomoku-tactic h2 {
+  margin: 0;
+  color: #663300;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+}
+
+.gt-info {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+}
+
+.gt-info b { color: #660000; }
+
+.gt-board {
+  display: grid;
+  border: 2px solid #997755;
+  background: #d4a84b;
+  gap: 0;
+}
+
+.gt-cell {
+  width: 36px;
+  height: 36px;
+  background: #d4a84b;
+  border: 1px solid #b8955a;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.gt-cell.black { color: #000; cursor: default; }
+.gt-cell.white { color: #fff; cursor: default; text-shadow: 0 0 2px #000; }
+.gt-cell.win { background: #ffffaa; }
+.gt-cell:disabled { cursor: default; }
+.gt-cell:hover:not(:disabled) { background: #e0b865; }
+
+.gt-win { font-size: 1.3rem; font-weight: bold; color: #004400; }
+.gt-lose { font-size: 1.3rem; font-weight: bold; color: #880000; }
+.gt-draw { font-size: 1.3rem; font-weight: bold; color: #555500; }

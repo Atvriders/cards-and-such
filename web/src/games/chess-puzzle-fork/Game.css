@@ -1,0 +1,79 @@
+.cp-puzzle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+.cp-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.cp-title { font-size: 1.3rem; font-weight: bold; color: #333; }
+.cp-progress { font-size: 0.9rem; color: #666; }
+.cp-score-line { font-size: 0.9rem; color: #555; }
+.cp-score-line b { color: #8e44ad; }
+.cp-message {
+  font-size: 1.05rem;
+  font-weight: 600;
+  min-height: 1.5em;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: #333;
+  background: #f5f5f5;
+}
+.cp-msg-solved { background: #d4edda; color: #155724; }
+.cp-msg-wrong  { background: #f8d7da; color: #721c24; }
+.cp-msg-complete { background: #d1ecf1; color: #0c5460; }
+.cp-board-wrap { position: relative; }
+.cp-board {
+  display: grid;
+  border: 2px solid #555;
+}
+.cp-sq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+.cp-sq-light { background: #f0d9b5; }
+.cp-sq-dark  { background: #b58863; }
+.cp-sq-light.cp-sq-sel { background: #f6f669; }
+.cp-sq-dark.cp-sq-sel  { background: #baca2b; }
+.cp-sq-light.cp-sq-tgt { background: rgba(20,85,30,0.5); }
+.cp-sq-dark.cp-sq-tgt  { background: rgba(20,85,30,0.5); }
+.cp-piece {
+  font-size: 2rem;
+  line-height: 1;
+  user-select: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.cp-coord {
+  position: absolute;
+  font-size: 0.6rem;
+  font-weight: bold;
+  pointer-events: none;
+}
+.cp-rank { top: 2px; left: 3px; }
+.cp-file { bottom: 2px; right: 3px; }
+.cp-sq-light .cp-coord { color: #b58863; }
+.cp-sq-dark .cp-coord  { color: #f0d9b5; }
+.cp-actions { display: flex; gap: 10px; margin-top: 4px; }
+.cp-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #e74c3c;
+  color: #fff;
+  transition: background 0.15s;
+}
+.cp-btn:hover { background: #c0392b; }
+.cp-btn-next { background: #27ae60; }
+.cp-btn-next:hover { background: #1e8449; }

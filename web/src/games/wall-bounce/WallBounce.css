@@ -1,0 +1,85 @@
+.wall-bounce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0d1b2a;
+  color: #c8dff0;
+  min-height: 100%;
+}
+
+.wall-bounce h2 {
+  margin: 0;
+  color: #44aaee;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.wb-info {
+  display: flex;
+  gap: 24px;
+  font-size: 1rem;
+}
+
+.wb-info b { color: #88ccff; }
+
+.wb-targets {
+  display: flex;
+  gap: 12px;
+}
+
+.wb-target {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 1.4rem;
+  border: 2px solid #336;
+}
+
+.wb-target.up {
+  background: #1a3a6a;
+  color: #44aaff;
+}
+
+.wb-target.down {
+  background: #0a1a0a;
+  color: #44aa44;
+}
+
+.wb-last {
+  font-size: 0.95rem;
+  color: #ffee88;
+}
+
+.wb-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.wb-controls input[type=range] { width: 200px; }
+
+.wb-controls button {
+  padding: 10px 32px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #225;
+  background: #112244;
+  color: #88ccff;
+  cursor: pointer;
+}
+
+.wb-controls button:disabled { opacity: 0.35; cursor: not-allowed; }
+.wb-controls button:hover:not(:disabled) { background: #1a3366; }
+
+.wb-gameover {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #88ffaa;
+}

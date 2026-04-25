@@ -1,0 +1,74 @@
+.dice-darts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: sans-serif;
+  background: #0e0a1a;
+  color: #d8c8f0;
+  min-height: 100%;
+}
+
+.dice-darts h2 {
+  margin: 0;
+  color: #aa66ff;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.dd-score-display {
+  text-align: center;
+}
+
+.dd-score-value {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffee66;
+}
+
+.dd-score-label {
+  font-size: 0.8rem;
+  color: #9988aa;
+}
+
+.dd-info {
+  font-size: 0.95rem;
+}
+
+.dd-info b { color: #cc99ff; }
+
+.dd-dice-row {
+  display: flex;
+  gap: 12px;
+}
+
+.dd-result {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #88ffcc;
+}
+
+.dd-result.bust {
+  color: #ff6666;
+}
+
+.dd-btn {
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #443366;
+  background: #221133;
+  color: #cc99ff;
+  cursor: pointer;
+}
+.dd-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.dd-btn:hover:not(:disabled) { background: #332244; }
+
+.dd-hint { font-size: 0.8rem; color: #887799; }
+
+.dd-gameover {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #88ffaa;
+}
