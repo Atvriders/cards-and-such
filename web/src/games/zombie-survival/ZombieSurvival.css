@@ -1,0 +1,89 @@
+.zombie-survival {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: monospace;
+  background: #1a0f0f;
+  color: #e0d0c0;
+}
+
+.zs-hud {
+  display: flex;
+  gap: 14px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #e74c3c;
+}
+
+.zs-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 44px);
+  grid-template-rows: repeat(7, 40px);
+  gap: 2px;
+  border: 2px solid #553333;
+  background: #0d0808;
+  padding: 4px;
+}
+
+.zs-cell {
+  width: 44px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: #1a0f0f;
+  border-radius: 2px;
+}
+
+.zs-cell.barricade-row {
+  background: #2a1a00;
+  border-bottom: 2px solid #8b6914;
+}
+
+.zs-cell.player-row {
+  background: #0a1a0a;
+}
+
+.zs-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.zs-controls button {
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid #553;
+  background: #1a1500;
+  color: #e0d080;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+.zs-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.zs-controls button:hover:not(:disabled) {
+  background: #2a2000;
+}
+
+.zs-hint {
+  font-size: 0.75rem;
+  color: #664;
+  text-align: center;
+}
+
+.zs-game-over {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e74c3c;
+}

@@ -1,0 +1,116 @@
+.gladiator-arena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: serif;
+  background: #1a0a00;
+  color: #e8d5a3;
+  min-height: 300px;
+}
+
+.ga-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffd700;
+  letter-spacing: 2px;
+}
+
+.ga-fighters {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ga-fighter {
+  background: #2a1500;
+  border: 2px solid #8b6914;
+  border-radius: 8px;
+  padding: 10px 16px;
+  min-width: 130px;
+  text-align: center;
+}
+
+.ga-fighter-name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-bottom: 6px;
+}
+
+.ga-hp-bar-bg {
+  background: #333;
+  border-radius: 4px;
+  height: 10px;
+  width: 120px;
+  overflow: hidden;
+  margin: 4px auto;
+}
+
+.ga-hp-bar {
+  background: #e74c3c;
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.ga-stat {
+  font-size: 0.8rem;
+  color: #c8a87a;
+}
+
+.ga-log {
+  background: #0f0800;
+  border: 1px solid #5a3a00;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 100%;
+  max-width: 380px;
+  font-size: 0.8rem;
+  min-height: 80px;
+  color: #d4c090;
+}
+
+.ga-log p {
+  margin: 2px 0;
+}
+
+.ga-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ga-controls button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 2px solid #8b6914;
+  background: #2a1500;
+  color: #ffd700;
+  cursor: pointer;
+  font-family: serif;
+  font-size: 0.9rem;
+}
+
+.ga-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ga-controls button:hover:not(:disabled) {
+  background: #3a2000;
+}
+
+.ga-round {
+  font-size: 0.9rem;
+  color: #c8a87a;
+}
+
+.ga-game-over {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e74c3c;
+}

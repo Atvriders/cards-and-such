@@ -1,0 +1,82 @@
+.space-arena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: monospace;
+  background: #0a0a1a;
+  color: #fff;
+  min-height: 300px;
+}
+
+.sa-hud {
+  display: flex;
+  gap: 16px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #7ec8e3;
+}
+
+.sa-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 40px);
+  grid-template-rows: repeat(7, 36px);
+  gap: 2px;
+  background: #111130;
+  border: 2px solid #333366;
+  padding: 4px;
+}
+
+.sa-cell {
+  width: 40px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: #0d0d2a;
+  border-radius: 2px;
+}
+
+.sa-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sa-controls button {
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid #446;
+  background: #1a1a3a;
+  color: #7ec8e3;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+.sa-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.sa-controls button:hover:not(:disabled) {
+  background: #2a2a5a;
+}
+
+.sa-game-over {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-top: 8px;
+}
+
+.sa-hint {
+  font-size: 0.75rem;
+  color: #556;
+  text-align: center;
+}

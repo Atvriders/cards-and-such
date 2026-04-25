@@ -1,0 +1,116 @@
+.alien-card-battle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: monospace;
+  background: #030a1a;
+  color: #80e8ff;
+  min-height: 300px;
+}
+
+.acb-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #00e5ff;
+  letter-spacing: 3px;
+}
+
+.acb-scores {
+  display: flex;
+  gap: 30px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.acb-hand {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.acb-card {
+  width: 80px;
+  min-height: 100px;
+  border: 2px solid #005577;
+  border-radius: 8px;
+  background: #050f22;
+  color: #80e8ff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  padding: 6px;
+  text-align: center;
+  gap: 4px;
+}
+
+.acb-card.selected {
+  background: #003355;
+  border-color: #00e5ff;
+  box-shadow: 0 0 8px #00e5ff;
+}
+
+.acb-card:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.acb-card-str {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.acb-card-abil {
+  font-size: 0.6rem;
+  color: #00aabb;
+  text-transform: uppercase;
+}
+
+.acb-result {
+  font-size: 0.85rem;
+  color: #80e8ff;
+  text-align: center;
+  max-width: 380px;
+  background: #050f22;
+  border: 1px solid #005577;
+  border-radius: 6px;
+  padding: 8px;
+  min-height: 50px;
+}
+
+.acb-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.acb-controls button {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 2px solid #005577;
+  background: #050f22;
+  color: #00e5ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+
+.acb-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.acb-game-over {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #00e5ff;
+}

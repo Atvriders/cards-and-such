@@ -880,6 +880,14 @@ import { rollAndWriteProPlugin } from "./roll-and-write-pro/index.js";
 import { solitaireMarathonPlugin } from "./solitaire-marathon/index.js";
 import { towerOfHanoi7Plugin } from "./tower-of-hanoi-7/index.js";
 import { swarmDefensePlugin } from "./swarm-defense/index.js";
+import { spaceArenaPlugin } from "./space-arena/index.js";
+import { gladiatorArenaPlugin } from "./gladiator-arena/index.js";
+import { slimeDefensePlugin } from "./slime-defense/index.js";
+import { zombieSurvivalPlugin } from "./zombie-survival/index.js";
+import { wizardCardDuelPlugin } from "./wizard-card-duel/index.js";
+import { alienCardBattlePlugin } from "./alien-card-battle/index.js";
+import { dotGridPuzzlePlugin } from "./dot-grid-puzzle/index.js";
+import { foodTruckTycoonPlugin } from "./food-truck-tycoon/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1763,4 +1771,12 @@ export const GAMES: GamePlugin[] = [
   solitaireMarathonPlugin as unknown as GamePlugin,
   towerOfHanoi7Plugin as unknown as GamePlugin,
   swarmDefensePlugin as unknown as GamePlugin,
+  spaceArenaPlugin as unknown as GamePlugin,
+  gladiatorArenaPlugin as unknown as GamePlugin,
+  slimeDefensePlugin as unknown as GamePlugin,
+  zombieSurvivalPlugin as unknown as GamePlugin,
+  wizardCardDuelPlugin as unknown as GamePlugin,
+  alienCardBattlePlugin as unknown as GamePlugin,
+  dotGridPuzzlePlugin as unknown as GamePlugin,
+  foodTruckTycoonPlugin as unknown as GamePlugin,
 ];

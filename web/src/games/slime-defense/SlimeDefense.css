@@ -1,0 +1,105 @@
+.slime-defense {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.sld-hud {
+  display: flex;
+  gap: 16px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #2ecc71;
+}
+
+.sld-lanes {
+  display: flex;
+  gap: 6px;
+}
+
+.sld-lane {
+  width: 60px;
+  height: 240px;
+  background: #e8f5e9;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.sld-lane.selected {
+  border-color: #f39c12;
+  background: #fff8e1;
+}
+
+.sld-lane.trapped {
+  border-color: #e74c3c;
+  background: #fdecea;
+}
+
+.sld-trap-icon {
+  position: absolute;
+  bottom: 4px;
+  font-size: 1.2rem;
+}
+
+.sld-base-label {
+  position: absolute;
+  bottom: 0;
+  font-size: 0.65rem;
+  color: #e74c3c;
+  font-weight: bold;
+  background: rgba(255,255,255,0.8);
+  width: 100%;
+  text-align: center;
+}
+
+.sld-slime {
+  position: absolute;
+  font-size: 1.1rem;
+  transition: bottom 0.3s;
+}
+
+.sld-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sld-controls button {
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 2px solid #2ecc71;
+  background: #f0fff4;
+  color: #1a6b3a;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.sld-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sld-game-over {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.sld-hint {
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
+}
