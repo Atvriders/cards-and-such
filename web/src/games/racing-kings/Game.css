@@ -1,0 +1,18 @@
+.rk-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: system-ui, sans-serif; }
+.rk-info { display: flex; gap: 16px; font-size: 0.9rem; color: #555; }
+.rk-status { font-size: 1.1rem; font-weight: bold; min-height: 1.6em; color: #333; }
+.rk-status.win { color: #27ae60; }
+.rk-status.loss { color: #e74c3c; }
+.rk-status.draw { color: #e67e22; }
+.rk-status.check { color: #2980b9; }
+.rk-goal-label { font-size: 0.85rem; color: #e67e22; font-weight: bold; }
+.rk-cell { transition: background 0.1s; }
+.rk-sq-light { background: #f0d9b5; }
+.rk-sq-dark  { background: #b58863; }
+.rk-sq-light.rk-goal { background: #ffe066; }
+.rk-sq-dark.rk-goal  { background: #ffc200; }
+.rk-sq-light.selected-source { background: #f6f669; }
+.rk-sq-dark.selected-source  { background: #baca2b; }
+.rk-sq-light.legal-target    { background: rgba(20,85,30,0.5); }
+.rk-sq-dark.legal-target     { background: rgba(20,85,30,0.5); }
+.rk-piece { font-size: 2.2rem; line-height: 1; user-select: none; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }

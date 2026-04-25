@@ -1,0 +1,21 @@
+.ac-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: system-ui, sans-serif; }
+.ac-info { display: flex; gap: 16px; font-size: 0.9rem; color: #555; }
+.ac-status { font-size: 1.1rem; font-weight: bold; min-height: 1.6em; color: #333; }
+.ac-status.win { color: #27ae60; }
+.ac-status.loss { color: #e74c3c; }
+.ac-status.draw { color: #e67e22; }
+.ac-status.check { color: #8e44ad; }
+.ac-cell { transition: background 0.1s; }
+.ac-sq-light { background: #f0d9b5; }
+.ac-sq-dark  { background: #b58863; }
+.ac-sq-light.selected-source { background: #f6f669; }
+.ac-sq-dark.selected-source  { background: #baca2b; }
+.ac-sq-light.legal-target    { background: rgba(142,68,173,0.4); }
+.ac-sq-dark.legal-target     { background: rgba(142,68,173,0.5); }
+.ac-piece { font-size: 2.2rem; line-height: 1; user-select: none; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.ac-promo-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.ac-promo-box { background: #fff; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.ac-promo-box h3 { margin: 0; }
+.ac-promo-choices { display: flex; gap: 8px; }
+.ac-promo-btn { font-size: 2.2rem; background: none; border: 2px solid #ccc; border-radius: 6px; cursor: pointer; padding: 6px 10px; }
+.ac-promo-btn:hover { border-color: #8e44ad; background: #f5eef8; }

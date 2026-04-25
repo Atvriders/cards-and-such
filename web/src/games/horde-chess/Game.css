@@ -1,0 +1,22 @@
+.hd-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: system-ui, sans-serif; }
+.hd-info { display: flex; gap: 16px; font-size: 0.9rem; color: #555; }
+.hd-status { font-size: 1.1rem; font-weight: bold; min-height: 1.6em; color: #333; }
+.hd-status.win { color: #27ae60; }
+.hd-status.loss { color: #e74c3c; }
+.hd-status.draw { color: #e67e22; }
+.hd-cell { transition: background 0.1s; }
+.hd-sq-light { background: #f0d9b5; }
+.hd-sq-dark  { background: #b58863; }
+.hd-sq-light.selected-source { background: #f6f669; }
+.hd-sq-dark.selected-source  { background: #baca2b; }
+.hd-sq-light.legal-target    { background: rgba(20,85,30,0.5); }
+.hd-sq-dark.legal-target     { background: rgba(20,85,30,0.5); }
+.hd-sq-light.hd-bking        { background: #e8cce8; }
+.hd-sq-dark.hd-bking         { background: #c8a0c8; }
+.hd-piece { font-size: 2.0rem; line-height: 1; user-select: none; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.hd-promo-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.hd-promo-box { background: #fff; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.hd-promo-box h3 { margin: 0; }
+.hd-promo-choices { display: flex; gap: 8px; }
+.hd-promo-btn { font-size: 2.2rem; background: none; border: 2px solid #ccc; border-radius: 6px; cursor: pointer; padding: 6px 10px; }
+.hd-promo-btn:hover { border-color: #f1c40f; background: #fffde7; }

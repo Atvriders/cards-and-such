@@ -1,0 +1,30 @@
+.ch-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px; font-family: system-ui, sans-serif; }
+.ch-info { display: flex; gap: 16px; font-size: 0.9rem; color: #555; }
+.ch-status { font-size: 1.1rem; font-weight: bold; min-height: 1.6em; color: #333; }
+.ch-status.win { color: #27ae60; }
+.ch-status.loss { color: #e74c3c; }
+.ch-status.draw { color: #e67e22; }
+.ch-status.check { color: #c0392b; }
+.ch-status.drop { color: #2980b9; }
+.ch-pocket { display: flex; align-items: center; gap: 8px; min-height: 2.2rem; background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; padding: 4px 10px; }
+.ch-pocket-label { font-size: 0.8rem; color: #888; }
+.ch-pocket-piece { font-size: 1.4rem; }
+.ch-pocket-btn { font-size: 1.4rem; background: none; border: 2px solid #ccc; border-radius: 6px; cursor: pointer; padding: 2px 6px; transition: border-color 0.15s, background 0.15s; }
+.ch-pocket-btn.selected { border-color: #2980b9; background: #dbeffe; }
+.ch-pocket-btn:hover { border-color: #f1c40f; background: #fffde7; }
+.ch-cell { transition: background 0.1s; }
+.ch-sq-light { background: #f0d9b5; }
+.ch-sq-dark  { background: #b58863; }
+.ch-sq-light.selected-source { background: #f6f669; }
+.ch-sq-dark.selected-source  { background: #baca2b; }
+.ch-sq-light.legal-target    { background: rgba(20,85,30,0.5); }
+.ch-sq-dark.legal-target     { background: rgba(20,85,30,0.5); }
+.ch-sq-light.in-check        { background: #e74c3c; }
+.ch-sq-dark.in-check         { background: #c0392b; }
+.ch-piece { font-size: 2.0rem; line-height: 1; user-select: none; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.ch-promo-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.ch-promo-box { background: #fff; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.ch-promo-box h3 { margin: 0; }
+.ch-promo-choices { display: flex; gap: 8px; }
+.ch-promo-btn { font-size: 2.2rem; background: none; border: 2px solid #ccc; border-radius: 6px; cursor: pointer; padding: 6px 10px; }
+.ch-promo-btn:hover { border-color: #f1c40f; background: #fffde7; }

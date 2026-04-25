@@ -78,6 +78,14 @@ import { badugiPlugin } from "./badugi/index.js";
 import { chessPlugin } from "./chess/index.js";
 import { suicideChessPlugin } from "./suicide-chess/index.js";
 import { atomicChessPlugin } from "./atomic-chess/index.js";
+import { chess960Plugin } from "./chess960/index.js";
+import { racingKingsPlugin } from "./racing-kings/index.js";
+import { hordeChessPlugin } from "./horde-chess/index.js";
+import { threeCheckPlugin } from "./three-check/index.js";
+import { crazyhousePlugin } from "./crazyhouse/index.js";
+import { kingOfTheHillPlugin } from "./king-of-the-hill/index.js";
+import { antichessPlugin } from "./antichess/index.js";
+import { progressiveChessPlugin } from "./progressive-chess/index.js";
 import { internationalDraughtsPlugin } from "./international-draughts/index.js";
 import { chineseCheckersPlugin } from "./chinese-checkers/index.js";
 import { halmaPlugin } from "./halma/index.js";
@@ -693,6 +701,14 @@ export const GAMES: GamePlugin[] = [
   chessPlugin as unknown as GamePlugin,
   suicideChessPlugin as unknown as GamePlugin,
   atomicChessPlugin as unknown as GamePlugin,
+  chess960Plugin as unknown as GamePlugin,
+  racingKingsPlugin as unknown as GamePlugin,
+  hordeChessPlugin as unknown as GamePlugin,
+  threeCheckPlugin as unknown as GamePlugin,
+  crazyhousePlugin as unknown as GamePlugin,
+  kingOfTheHillPlugin as unknown as GamePlugin,
+  antichessPlugin as unknown as GamePlugin,
+  progressiveChessPlugin as unknown as GamePlugin,
   internationalDraughtsPlugin as unknown as GamePlugin,
   chineseCheckersPlugin as unknown as GamePlugin,
   halmaPlugin as unknown as GamePlugin,
