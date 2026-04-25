@@ -666,6 +666,14 @@ import { littleSpiderPlugin } from "./little-spider/index.js";
 import { quadrillePlugin } from "./quadrille/index.js";
 import { rankAndFilePlugin } from "./rank-and-file/index.js";
 import { royalCotillionPlugin } from "./royal-cotillion/index.js";
+import { senetPlugin } from "./senet/index.js";
+import { royalGameOfUrPlugin } from "./royal-game-of-ur/index.js";
+import { morabarabaPlugin } from "./morabaraba/index.js";
+import { picariaPlugin } from "./picaria/index.js";
+import { seegaPlugin } from "./seega/index.js";
+import { frisianDraughtsPlugin } from "./frisian-draughts/index.js";
+import { russianDraughtsPlugin } from "./russian-draughts/index.js";
+import { poolCheckersPlugin } from "./pool-checkers/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -1335,4 +1343,12 @@ export const GAMES: GamePlugin[] = [
   quadrillePlugin as unknown as GamePlugin,
   rankAndFilePlugin as unknown as GamePlugin,
   royalCotillionPlugin as unknown as GamePlugin,
+  senetPlugin as unknown as GamePlugin,
+  royalGameOfUrPlugin as unknown as GamePlugin,
+  morabarabaPlugin as unknown as GamePlugin,
+  picariaPlugin as unknown as GamePlugin,
+  seegaPlugin as unknown as GamePlugin,
+  frisianDraughtsPlugin as unknown as GamePlugin,
+  russianDraughtsPlugin as unknown as GamePlugin,
+  poolCheckersPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,64 @@
+.fd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.fd-status {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+  text-align: center;
+}
+.fd-status.win { color: #2a7d2e; }
+.fd-status.loss { color: #b02020; }
+
+.fd-board {
+  display: grid;
+  grid-template-columns: repeat(10, 36px);
+  grid-template-rows: repeat(10, 36px);
+  border: 3px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fd-cell {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.fd-cell.dark { background: #8b4513; }
+.fd-cell.light { background: #f0d9b5; }
+.fd-cell.dark.selectable { background: #b06030; cursor: pointer; }
+.fd-cell.dark.selectable:hover { background: #d07040; }
+.fd-cell.dark.selected { background: #ffaa00; }
+.fd-cell.dark.target { background: #5050a0; cursor: pointer; }
+
+.fd-piece {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+.fd-piece.W { background: #eee; border: 2px solid #999; color: #333; }
+.fd-piece.B { background: #222; border: 2px solid #888; color: #ccc; }
+
+.fd-info {
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  gap: 16px;
+}

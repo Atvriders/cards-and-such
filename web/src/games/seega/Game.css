@@ -1,0 +1,74 @@
+.seega {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.seega-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+  text-align: center;
+}
+.seega-status.win { color: #2a7d2e; }
+.seega-status.loss { color: #b02020; }
+
+.seega-board {
+  display: grid;
+  grid-template-columns: repeat(5, 52px);
+  grid-template-rows: repeat(5, 52px);
+  gap: 2px;
+  background: #5a3a10;
+  border: 3px solid #3a2000;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.seega-cell {
+  width: 52px;
+  height: 52px;
+  border-radius: 4px;
+  background: #e0c070;
+  border: 2px solid #8a6020;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.seega-cell.center {
+  background: #b08040;
+  border-color: #5a3000;
+}
+
+.seega-cell.selectable {
+  border-color: #1a60c0;
+  background: #c8d8ff;
+  cursor: pointer;
+}
+.seega-cell.selectable:hover { background: #a0c0ff; transform: scale(1.05); }
+.seega-cell.selected { border-color: #ff8000; background: #ffe0a0; }
+.seega-cell.target { border-color: #1a60c0; background: #d0e8ff; cursor: pointer; }
+.seega-cell.target:hover { background: #b0d0ff; }
+.seega-cell.buf { border-color: #20a020; background: #d0ffe0; }
+
+.seega-piece {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+.seega-piece.P { background: #e0c040; border: 2px solid #806000; }
+.seega-piece.B { background: #222; border: 2px solid #888; }
+
+.seega-info {
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  gap: 16px;
+}

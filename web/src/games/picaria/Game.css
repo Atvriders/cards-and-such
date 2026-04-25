@@ -1,0 +1,64 @@
+.picaria {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.picaria-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  min-height: 1.4em;
+  text-align: center;
+}
+.picaria-status.win { color: #2a7d2e; }
+.picaria-status.loss { color: #b02020; }
+
+.picaria-board {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  background: #e8d0a0;
+  border: 3px solid #7a4010;
+  border-radius: 8px;
+}
+
+.picaria-board svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+.picaria-point {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #7a4010;
+  background: #f5e0b0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  z-index: 2;
+}
+
+.picaria-point:hover { background: #ffe0a0; }
+.picaria-point.selectable { border-color: #1a60c0; background: #c8d8ff; }
+.picaria-point.selected { border-color: #ff8000; background: #ffe0a0; box-shadow: 0 0 0 3px #ff8000; }
+.picaria-point.target { border-color: #1a60c0; background: #d0e8ff; }
+
+.picaria-piece {
+  width: 24px; height: 24px; border-radius: 50%;
+}
+.picaria-piece.P { background: #e0c040; border: 2px solid #806000; }
+.picaria-piece.B { background: #222; border: 2px solid #888; }
+
+.picaria-info { font-size: 0.85rem; color: #666; }
