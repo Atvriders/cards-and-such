@@ -654,6 +654,21 @@ import { alchemyShopPlugin } from "./alchemy-shop/index.js";
 import { spyHeistPlugin } from "./spy-heist/index.js";
 import { towerDefenseMiniPlugin } from "./tower-defense-mini/index.js";
 import { fishingVillagePlugin } from "./fishing-village/index.js";
+import { beersQuizPlugin } from "./beers-quiz/index.js";
+import { cardBidStreakPlugin } from "./card-bid-streak/index.js";
+import { cardFlipStreakPlugin } from "./card-flip-streak/index.js";
+import { cardHigh3Plugin } from "./card-high-3/index.js";
+import { cardLow3Plugin } from "./card-low-3/index.js";
+import { cardPickStreakPlugin } from "./card-pick-streak/index.js";
+import { cidersQuizPlugin } from "./ciders-quiz/index.js";
+import { cocktailsQuizPlugin } from "./cocktails-quiz/index.js";
+import { danceStylesQuizPlugin } from "./dance-styles-quiz/index.js";
+import { drinksTypesQuizPlugin } from "./drinks-types-quiz/index.js";
+import { fashionErasQuizPlugin } from "./fashion-eras-quiz/index.js";
+import { hairstylesQuizPlugin } from "./hairstyles-quiz/index.js";
+import { philosopherViewsQuizPlugin } from "./philosopher-views-quiz/index.js";
+import { religionsSymbolsQuizPlugin } from "./religions-symbols-quiz/index.js";
+import { winesQuizPlugin } from "./wines-quiz/index.js";
 import { arcticSurvivalPlugin } from "./arctic-survival/index.js";
 import { jungleExplorerPlugin } from "./jungle-explorer/index.js";
 import { rocketLaunchArcadePlugin } from "./rocket-launch-arcade/index.js";
@@ -2217,4 +2232,19 @@ export const GAMES: GamePlugin[] = [
   oilPumpPlugin as unknown as GamePlugin,
   pencilSharpenPlugin as unknown as GamePlugin,
   pizzaCutPlugin as unknown as GamePlugin,
+  beersQuizPlugin as unknown as GamePlugin,
+  cardBidStreakPlugin as unknown as GamePlugin,
+  cardFlipStreakPlugin as unknown as GamePlugin,
+  cardHigh3Plugin as unknown as GamePlugin,
+  cardLow3Plugin as unknown as GamePlugin,
+  cardPickStreakPlugin as unknown as GamePlugin,
+  cidersQuizPlugin as unknown as GamePlugin,
+  cocktailsQuizPlugin as unknown as GamePlugin,
+  danceStylesQuizPlugin as unknown as GamePlugin,
+  drinksTypesQuizPlugin as unknown as GamePlugin,
+  fashionErasQuizPlugin as unknown as GamePlugin,
+  hairstylesQuizPlugin as unknown as GamePlugin,
+  philosopherViewsQuizPlugin as unknown as GamePlugin,
+  religionsSymbolsQuizPlugin as unknown as GamePlugin,
+  winesQuizPlugin as unknown as GamePlugin,
 ];
