@@ -1,0 +1,16 @@
+import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { NoodleGrabState, NoodleGrabAction, NoodleGrabSettings } from "./state.js";
+import { initialState, reducer, isTerminal } from "./state.js";
+import { NoodleGrabGame } from "./Game.js";
+const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+type S = SettingsOf<typeof settings>;
+export const noodleGrabPlugin: GamePlugin<NoodleGrabState, NoodleGrabAction, typeof settings> = {
+  id:"noodle-grab", title:"Noodle Grab", category:"arcade",
+  players:{ min:1, max:1, multiplayer:false },
+  description:"Grab noodles from the pot at exactly the right speed for top scores!",
+  howToPlay:`Noodle Grab is a speed-precision food arcade game. Each round grab noodles from the pot at the exact right speed — determined by the round's hidden target. Set the slider and press Grab! The closer your power matches the target, the more points up to 100 per round. Ten rounds of noodle-grabbing action. Check your diff after each round and calibrate. A flawless 1000-point run means you grabbed every batch perfectly!`,
+  settings,
+  initialState:(seed:number,s:S)=>initialState(seed,s as NoodleGrabSettings),
+  reducer,isTerminal,component:NoodleGrabGame,
+};

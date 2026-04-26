@@ -1,0 +1,11 @@
+.arc-wrap { display:flex; flex-direction:column; align-items:center; gap:16px; padding:24px 16px; font-family:sans-serif; user-select:none; max-width:420px; margin:0 auto; width:100%; }
+.arc-display { font-size:3rem; text-align:center; }
+.arc-info { font-size:0.9rem; color:#555; }
+.arc-score { font-size:1.1rem; font-weight:bold; color:#2c3e50; }
+.arc-slider { width:100%; }
+.arc-btn { padding:10px 24px; font-size:1rem; font-weight:bold; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#e07b00; }
+.arc-btn:hover { background:#b85e00; }
+.arc-result { font-size:1.1rem; font-weight:bold; padding:8px 20px; border-radius:8px; background:#f0f4ff; }
+.arc-done { text-align:center; }
+.arc-done h2 { font-size:1.6rem; margin:0 0 8px; }
+.arc-final { font-size:1.3rem; color:#e07b00; font-weight:bold; }

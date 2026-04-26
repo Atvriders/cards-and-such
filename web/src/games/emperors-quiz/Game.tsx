@@ -1,0 +1,28 @@
+import { useEffect } from "react";
+import type { GameProps } from "../../platform/game-plugin/types.js";
+import type { EmperorsQuizState, EmperorsQuizAction, EmperorsQuizSettings } from "./state.js";
+import { isTerminal } from "./state.js";
+import "./Game.css";
+
+export function EmperorsQuizGame({ state, dispatch, onGameOver }: GameProps<EmperorsQuizState, EmperorsQuizSettings>): JSX.Element {
+  const terminal = isTerminal(state);
+  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
+  const entry = state.entries[state.current];
+  return (
+    <div className="hq-wrap">
+      <div className="hq-progress">Question {state.current + 1} of {state.entries.length}</div>
+      <div className="hq-score">Score: {state.score}</div>
+      {!state.done && entry ? (<>
+        <div className="hq-question">{entry.question}</div>
+        <div className="hq-choices">
+          {entry.choices.map((choice, i) => {
+            let cls = "hq-choice";
+            if (state.selected !== null) { if (choice === entry.answer) cls += " correct"; else if (state.selected === i) cls += " wrong"; }
+            return <button key={i} className={cls} disabled={state.selected !== null} onClick={() => dispatch({ type:"select", index:i } as EmperorsQuizAction)}>{choice}</button>;
+          })}
+        </div>
+        {state.selected !== null && <button className="hq-next" onClick={() => dispatch({ type:"next" } as EmperorsQuizAction)}>{state.current + 1 < state.entries.length ? "Next" : "Finish"}</button>}
+      </>) : <div className="hq-done"><h2>Quiz Complete!</h2><div className="hq-final">Score: {state.score} / {state.entries.length * 10}</div></div>}
+    </div>
+  );
+}

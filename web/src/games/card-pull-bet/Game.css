@@ -1,0 +1,15 @@
+.cm-wrap { display:flex; flex-direction:column; align-items:center; gap:16px; padding:24px 16px; font-family:sans-serif; user-select:none; max-width:420px; margin:0 auto; width:100%; }
+.cm-card { font-size:2.5rem; font-weight:900; padding:20px 32px; background:#fff; border:3px solid #4a6fa5; border-radius:12px; text-align:center; }
+.cm-info { font-size:0.9rem; color:#555; }
+.cm-coins { font-size:1.1rem; font-weight:bold; color:#2c3e50; }
+.cm-bid-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center; }
+.cm-bid-row input { width:70px; padding:8px; font-size:1rem; border:2px solid #ccc; border-radius:6px; text-align:center; }
+.cm-btn { padding:10px 20px; font-size:1rem; font-weight:bold; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#4a6fa5; }
+.cm-btn:hover { background:#3a5f95; }
+.cm-result { font-size:1.2rem; font-weight:bold; padding:8px 20px; border-radius:8px; }
+.cm-result.win { background:#d4edda; color:#155724; }
+.cm-result.lose { background:#f8d7da; color:#721c24; }
+.cm-result.tie { background:#fff3cd; color:#856404; }
+.cm-done { text-align:center; }
+.cm-done h2 { font-size:1.6rem; margin:0 0 8px; }
+.cm-final { font-size:1.3rem; color:#4a6fa5; font-weight:bold; }
