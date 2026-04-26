@@ -1,0 +1,13 @@
+.dg-wrap { display:flex; flex-direction:column; align-items:center; gap:16px; padding:24px; font-family:sans-serif; max-width:400px; margin:0 auto; }
+.dg-header { display:flex; justify-content:space-between; width:100%; font-size:1rem; color:#555; }
+.dg-score { font-weight:700; color:#27ae60; }
+.dg-dice { display:flex; gap:12px; }
+.dg-die { width:64px; height:64px; border:3px solid #2c3e50; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:900; background:#fff; color:#2c3e50; }
+.dg-msg { font-size:1.1rem; font-weight:600; color:#27ae60; }
+.dg-msg.bad { color:#e74c3c; }
+.dg-btn { padding:10px 28px; border-radius:8px; border:none; background:#3498db; color:#fff; font-size:1rem; font-weight:700; cursor:pointer; }
+.dg-btn:hover { background:#2980b9; }
+.dg-btn.green { background:#27ae60; }
+.dg-btn.red { background:#e74c3c; }
+.dg-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:16px; }
+.dg-label { font-size:0.9rem; color:#888; }
