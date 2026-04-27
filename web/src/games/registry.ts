@@ -1232,6 +1232,8 @@ import { milkshakeMixPlugin } from "./milkshake-mix/index.js";
 import { muffinPopPlugin } from "./muffin-pop/index.js";
 import { noodleGrabPlugin } from "./noodle-grab/index.js";
 import { oliveGrabPlugin } from "./olive-grab/index.js";
+import { classicalMusicQuizPlugin } from "./classical-music-quiz/index.js";
+import { modernArtQuizPlugin } from "./modern-art-quiz/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2467,4 +2469,6 @@ export const GAMES: GamePlugin[] = [
   muffinPopPlugin as unknown as GamePlugin,
   noodleGrabPlugin as unknown as GamePlugin,
   oliveGrabPlugin as unknown as GamePlugin,
+  classicalMusicQuizPlugin as unknown as GamePlugin,
+  modernArtQuizPlugin as unknown as GamePlugin,
 ];
