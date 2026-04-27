@@ -1,0 +1,18 @@
+.dm-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:560px; margin:0 auto; }
+.dm-info { font-size:0.95rem; color:#555; }
+.dm-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.dm-ships { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; width:100%; }
+.dm-ship { display:flex; flex-direction:column; gap:8px; padding:12px; border:2px solid #bdc3c7; border-radius:10px; background:#fff; cursor:pointer; min-width:140px; }
+.dm-ship:hover:not(:disabled) { border-color:#3498db; background:#eaf4fb; }
+.dm-ship.picked { border-color:#27ae60; background:#eafaf1; }
+.dm-ship:disabled { cursor:default; }
+.dm-ship-name { font-weight:700; color:#2c3e50; }
+.dm-ship-sum { font-weight:700; color:#27ae60; }
+.dm-die { font-size:1.4rem; font-weight:900; padding:6px 10px; background:#f8f9fa; border:2px solid #34495e; border-radius:6px; min-width:36px; text-align:center; color:#2c3e50; }
+.dm-row { display:flex; gap:6px; justify-content:center; }
+.dm-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.dm-btn.alt { background:#e67e22; }
+.dm-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
+.dm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.dm-done h2 { margin:0 0 8px; }
+.dm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

@@ -1,0 +1,50 @@
+import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
+export interface NarutoQuizSettings { questions: "10" | "20"; }
+export interface NarutoQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
+export type NarutoQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
+const ALL_QUESTIONS: QuizQuestion[] = [
+  { question: "What is the name of Naruto's signature jutsu?", choices: ["Chidori", "Rasengan", "Amaterasu", "Kamui"], correct: 1 },
+  { question: "Who is Naruto's father?", choices: ["Hiruzen Sarutobi", "Jiraiya", "Minato Namikaze", "Hashirama Senju"], correct: 2 },
+  { question: "What village is Naruto from?", choices: ["Sand", "Mist", "Cloud", "Leaf"], correct: 3 },
+  { question: "Sasuke's clan is the?", choices: ["Hyuga", "Uchiha", "Senju", "Aburame"], correct: 1 },
+  { question: "What tailed beast is sealed in Naruto?", choices: ["One-Tails", "Five-Tails", "Nine-Tails", "Eight-Tails"], correct: 2 },
+  { question: "Kakashi's sharingan was given to him by?", choices: ["Itachi", "Obito", "Madara", "Shisui"], correct: 1 },
+  { question: "Sakura's primary teacher was?", choices: ["Tsunade", "Kakashi", "Kurenai", "Anko"], correct: 0 },
+  { question: "Who is the leader of Akatsuki publicly?", choices: ["Pain", "Itachi", "Kisame", "Tobi"], correct: 0 },
+  { question: "Rock Lee's specialty is?", choices: ["Genjutsu", "Ninjutsu", "Taijutsu", "Sealing"], correct: 2 },
+  { question: "Hinata belongs to which clan?", choices: ["Uchiha", "Hyuga", "Nara", "Yamanaka"], correct: 1 },
+  { question: "Gaara is from which village?", choices: ["Sand", "Leaf", "Stone", "Mist"], correct: 0 },
+  { question: "What weapon does Asuma wield?", choices: ["Sword", "Chakra blades", "Bow", "Spear"], correct: 1 },
+  { question: "The First Hokage's name?", choices: ["Tobirama", "Hashirama", "Hiruzen", "Minato"], correct: 1 },
+  { question: "Itachi's signature genjutsu is?", choices: ["Tsukuyomi", "Izanami", "Susanoo", "Amaterasu"], correct: 0 },
+  { question: "Shikamaru's specialty technique uses?", choices: ["Bugs", "Shadows", "Fire", "Mind transfer"], correct: 1 },
+  { question: "Who killed Jiraiya?", choices: ["Itachi", "Madara", "Pain", "Orochimaru"], correct: 2 },
+  { question: "Naruto's mother is?", choices: ["Kushina Uzumaki", "Mikoto Uchiha", "Tsunade", "Mei Terumi"], correct: 0 },
+  { question: "Who is Konohamaru's grandfather?", choices: ["Minato", "Hiruzen", "Hashirama", "Tobirama"], correct: 1 },
+  { question: "Ino's clan technique works on?", choices: ["Body", "Mind", "Shadow", "Bones"], correct: 1 },
+  { question: "Choji uses which clan technique?", choices: ["Multi-Size", "Bug Swarm", "Fang Over Fang", "Shadow Possession"], correct: 0 },
+  { question: "What is Sasuke's brother's name?", choices: ["Madara", "Itachi", "Obito", "Shisui"], correct: 1 },
+  { question: "Kurama is the?", choices: ["One-Tails", "Five-Tails", "Nine-Tails", "Three-Tails"], correct: 2 },
+  { question: "Who taught Naruto the Rasengan?", choices: ["Kakashi", "Jiraiya", "Minato", "Tsunade"], correct: 1 },
+  { question: "Neji is from which clan?", choices: ["Inuzuka", "Hyuga", "Aburame", "Akimichi"], correct: 1 },
+  { question: "Kisame's sword is named?", choices: ["Kubikiribocho", "Samehada", "Kusanagi", "Sword of Totsuka"], correct: 1 },
+];
+function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
+export function initialState(seed: number, settings: NarutoQuizSettings): NarutoQuizState {
+  const rng=mulberry32(seed); const count=parseInt(settings.questions,10);
+  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,Math.min(count,ALL_QUESTIONS.length));
+  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
+  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+}
+export function reducer(state: NarutoQuizState, action: NarutoQuizAction): NarutoQuizState {
+  if(state.phase==="done")return state;
+  switch(action.type){
+    case"select":return state.submitted?state:{...state,selected:action.choice};
+    case"submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
+    case"tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
+    case"next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
+    default:return state;
+  }
+}
+export function isTerminal(state: NarutoQuizState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
