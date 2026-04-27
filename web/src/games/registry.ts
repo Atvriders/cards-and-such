@@ -1409,6 +1409,41 @@ import { chaiChasePlugin } from "./chai-chase/index.js";
 import { coffeeCollectPlugin } from "./coffee-collect/index.js";
 import { bobaBouncePlugin } from "./boba-bounce/index.js";
 import { smoothieSwipePlugin } from "./smoothie-swipe/index.js";
+import { friendsShowQuizPlugin } from "./friends-show-quiz/index.js";
+import { officeShowQuizPlugin } from "./office-show-quiz/index.js";
+import { seinfeldQuizPlugin } from "./seinfeld-quiz/index.js";
+import { simpsonsQuizPlugin } from "./simpsons-quiz/index.js";
+import { familyGuyQuizPlugin } from "./family-guy-quiz/index.js";
+import { southParkQuizPlugin } from "./south-park-quiz/index.js";
+import { gotQuizPlugin } from "./got-quiz/index.js";
+import { breakingBadQuizPlugin } from "./breaking-bad-quiz/index.js";
+import { strangerThingsQuizPlugin } from "./stranger-things-quiz/index.js";
+import { lostShowQuizPlugin } from "./lost-show-quiz/index.js";
+import { marioQuizPlugin } from "./mario-quiz/index.js";
+import { zeldaQuizPlugin } from "./zelda-quiz/index.js";
+import { pokemonQuizPlugin } from "./pokemon-quiz/index.js";
+import { sonicQuizPlugin } from "./sonic-quiz/index.js";
+import { finalFantasyQuizPlugin } from "./final-fantasy-quiz/index.js";
+import { mortalKombatQuizPlugin } from "./mortal-kombat-quiz/index.js";
+import { streetfighterQuizPlugin } from "./streetfighter-quiz/index.js";
+import { metalGearQuizPlugin } from "./metal-gear-quiz/index.js";
+import { acesUpMiniPlugin } from "./aces-up-mini/index.js";
+import { fourFoursPlugin } from "./four-fours/index.js";
+import { redRallyPlugin } from "./red-rally/index.js";
+import { blackBashPlugin } from "./black-bash/index.js";
+import { evenEddyPlugin } from "./even-eddy/index.js";
+import { oddOlliePlugin } from "./odd-ollie/index.js";
+import { cardClockPlugin } from "./card-clock/index.js";
+import { diceTargetPlugin } from "./dice-target/index.js";
+import { diceFlushMiniPlugin } from "./dice-flush-mini/index.js";
+import { diceStackMiniPlugin } from "./dice-stack-mini/index.js";
+import { dicePyramidPlugin } from "./dice-pyramid/index.js";
+import { diceArrowPlugin } from "./dice-arrow/index.js";
+import { chipsChompPlugin } from "./chips-chomp/index.js";
+import { popcornPopPlugin } from "./popcorn-pop/index.js";
+import { pretzelPinchPlugin } from "./pretzel-pinch/index.js";
+import { nachosNowPlugin } from "./nachos-now/index.js";
+import { crackerCrunchPlugin } from "./cracker-crunch/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2821,4 +2856,39 @@ export const GAMES: GamePlugin[] = [
   coffeeCollectPlugin as unknown as GamePlugin,
   bobaBouncePlugin as unknown as GamePlugin,
   smoothieSwipePlugin as unknown as GamePlugin,
+  friendsShowQuizPlugin as unknown as GamePlugin,
+  officeShowQuizPlugin as unknown as GamePlugin,
+  seinfeldQuizPlugin as unknown as GamePlugin,
+  simpsonsQuizPlugin as unknown as GamePlugin,
+  familyGuyQuizPlugin as unknown as GamePlugin,
+  southParkQuizPlugin as unknown as GamePlugin,
+  gotQuizPlugin as unknown as GamePlugin,
+  breakingBadQuizPlugin as unknown as GamePlugin,
+  strangerThingsQuizPlugin as unknown as GamePlugin,
+  lostShowQuizPlugin as unknown as GamePlugin,
+  marioQuizPlugin as unknown as GamePlugin,
+  zeldaQuizPlugin as unknown as GamePlugin,
+  pokemonQuizPlugin as unknown as GamePlugin,
+  sonicQuizPlugin as unknown as GamePlugin,
+  finalFantasyQuizPlugin as unknown as GamePlugin,
+  mortalKombatQuizPlugin as unknown as GamePlugin,
+  streetfighterQuizPlugin as unknown as GamePlugin,
+  metalGearQuizPlugin as unknown as GamePlugin,
+  acesUpMiniPlugin as unknown as GamePlugin,
+  fourFoursPlugin as unknown as GamePlugin,
+  redRallyPlugin as unknown as GamePlugin,
+  blackBashPlugin as unknown as GamePlugin,
+  evenEddyPlugin as unknown as GamePlugin,
+  oddOlliePlugin as unknown as GamePlugin,
+  cardClockPlugin as unknown as GamePlugin,
+  diceTargetPlugin as unknown as GamePlugin,
+  diceFlushMiniPlugin as unknown as GamePlugin,
+  diceStackMiniPlugin as unknown as GamePlugin,
+  dicePyramidPlugin as unknown as GamePlugin,
+  diceArrowPlugin as unknown as GamePlugin,
+  chipsChompPlugin as unknown as GamePlugin,
+  popcornPopPlugin as unknown as GamePlugin,
+  pretzelPinchPlugin as unknown as GamePlugin,
+  nachosNowPlugin as unknown as GamePlugin,
+  crackerCrunchPlugin as unknown as GamePlugin,
 ];
