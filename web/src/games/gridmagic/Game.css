@@ -1,0 +1,21 @@
+.gm-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.gm-info { font-size:0.95rem; color:#555; }
+.gm-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.gm-grid { display:grid; grid-template-columns:repeat(3,80px); gap:6px; }
+.gm-cell { aspect-ratio:1; font-size:1.6rem; font-weight:900; border:2px solid #34495e; background:#fff; border-radius:8px; cursor:default; }
+.gm-cell.blank { background:#fffbe6; cursor:pointer; border-color:#f39c12; color:#b9770e; }
+.gm-cell.blank.selected { border-color:#27ae60; background:#eafaf1; }
+.gm-bank-label { font-size:0.95rem; color:#555; }
+.gm-bank { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.gm-bank-btn { padding:10px 18px; font-size:1.2rem; font-weight:800; border:2px solid #3498db; background:#fff; color:#2980b9; border-radius:8px; cursor:pointer; }
+.gm-bank-btn:hover { background:#eaf4fb; }
+.gm-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; }
+.gm-btn.submit { background:#27ae60; }
+.gm-btn.next { background:#3498db; }
+.gm-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.gm-feedback { font-size:1.1rem; font-weight:700; padding:8px 18px; border-radius:8px; }
+.gm-feedback.ok { background:#eafaf1; color:#1e8449; }
+.gm-feedback.no { background:#fdedec; color:#c0392b; }
+.gm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.gm-done h2 { margin:0 0 8px; }
+.gm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

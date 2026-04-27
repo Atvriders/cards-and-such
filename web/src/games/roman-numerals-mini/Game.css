@@ -1,0 +1,17 @@
+.rn-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.rn-info { font-size:0.95rem; color:#555; }
+.rn-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.rn-roman { font-size:3rem; font-weight:900; color:#2c3e50; padding:10px 30px; letter-spacing:0.05em; }
+.rn-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; width:100%; max-width:300px; }
+.rn-cell { padding:18px; font-size:1.6rem; font-weight:900; border:2px solid #34495e; background:#fff; border-radius:10px; cursor:pointer; }
+.rn-cell:hover:not(:disabled) { background:#eaf4fb; }
+.rn-cell.selected { background:#eaf4fb; border-color:#3498db; }
+.rn-cell.correct { background:#eafaf1; border-color:#27ae60; color:#1e8449; }
+.rn-cell.wrong { background:#fdedec; border-color:#e74c3c; color:#c0392b; }
+.rn-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; }
+.rn-btn.submit { background:#27ae60; }
+.rn-btn.next { background:#3498db; }
+.rn-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.rn-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.rn-done h2 { margin:0 0 8px; }
+.rn-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

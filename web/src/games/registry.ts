@@ -1724,6 +1724,41 @@ import { waspWhipPlugin } from "./wasp-whip/index.js";
 import { caterpillarCatchPlugin } from "./caterpillar-catch/index.js";
 import { fireflyFlashPlugin } from "./firefly-flash/index.js";
 import { dragonflyDartPlugin } from "./dragonfly-dart/index.js";
+import { numlinksPlugin } from "./numlinks/index.js";
+import { gridmagicPlugin } from "./gridmagic/index.js";
+import { additionRacePlugin } from "./addition-race/index.js";
+import { subtractionRacePlugin } from "./subtraction-race/index.js";
+import { multiplicationRacePlugin } from "./multiplication-race/index.js";
+import { divisionRacePlugin } from "./division-race/index.js";
+import { findPrimePlugin } from "./find-prime/index.js";
+import { findCompositePlugin } from "./find-composite/index.js";
+import { numwordMatchPlugin } from "./numword-match/index.js";
+import { romanNumeralsMiniPlugin } from "./roman-numerals-mini/index.js";
+import { stateCapitalsMiniPlugin } from "./state-capitals-mini/index.js";
+import { countryCapitalsMiniPlugin } from "./country-capitals-mini/index.js";
+import { mountainQuizPlugin } from "./mountain-quiz/index.js";
+import { desertQuizPlugin } from "./desert-quiz/index.js";
+import { lakeQuizPlugin } from "./lake-quiz/index.js";
+import { islandQuizPlugin } from "./island-quiz/index.js";
+import { volcanoQuizPlugin } from "./volcano-quiz/index.js";
+import { nationalParksQuizPlugin } from "./national-parks-quiz/index.js";
+import { cardStackStressPlugin } from "./card-stack-stress/index.js";
+import { cardCleanSweepPlugin } from "./card-clean-sweep/index.js";
+import { cardTradeUpPlugin } from "./card-trade-up/index.js";
+import { cardHoldEmPlugin } from "./card-hold-em/index.js";
+import { cardDiscardDownPlugin } from "./card-discard-down/index.js";
+import { cardBouncerPlugin } from "./card-bouncer/index.js";
+import { cardClutchPlugin } from "./card-clutch/index.js";
+import { diceFrenzyMiniPlugin } from "./dice-frenzy-mini/index.js";
+import { diceFrenzyTallPlugin } from "./dice-frenzy-tall/index.js";
+import { dicePaddlePlugin } from "./dice-paddle/index.js";
+import { diceLeapPlugin } from "./dice-leap/index.js";
+import { diceBridgePlugin } from "./dice-bridge/index.js";
+import { fireworkTapPlugin } from "./firework-tap/index.js";
+import { pumpkinPopPlugin } from "./pumpkin-pop/index.js";
+import { sparklerSnagPlugin } from "./sparkler-snag/index.js";
+import { confettiCatchPlugin } from "./confetti-catch/index.js";
+import { lanternLiftPlugin } from "./lantern-lift/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3451,4 +3486,39 @@ export const GAMES: GamePlugin[] = [
   caterpillarCatchPlugin as unknown as GamePlugin,
   fireflyFlashPlugin as unknown as GamePlugin,
   dragonflyDartPlugin as unknown as GamePlugin,
+  numlinksPlugin as unknown as GamePlugin,
+  gridmagicPlugin as unknown as GamePlugin,
+  additionRacePlugin as unknown as GamePlugin,
+  subtractionRacePlugin as unknown as GamePlugin,
+  multiplicationRacePlugin as unknown as GamePlugin,
+  divisionRacePlugin as unknown as GamePlugin,
+  findPrimePlugin as unknown as GamePlugin,
+  findCompositePlugin as unknown as GamePlugin,
+  numwordMatchPlugin as unknown as GamePlugin,
+  romanNumeralsMiniPlugin as unknown as GamePlugin,
+  stateCapitalsMiniPlugin as unknown as GamePlugin,
+  countryCapitalsMiniPlugin as unknown as GamePlugin,
+  mountainQuizPlugin as unknown as GamePlugin,
+  desertQuizPlugin as unknown as GamePlugin,
+  lakeQuizPlugin as unknown as GamePlugin,
+  islandQuizPlugin as unknown as GamePlugin,
+  volcanoQuizPlugin as unknown as GamePlugin,
+  nationalParksQuizPlugin as unknown as GamePlugin,
+  cardStackStressPlugin as unknown as GamePlugin,
+  cardCleanSweepPlugin as unknown as GamePlugin,
+  cardTradeUpPlugin as unknown as GamePlugin,
+  cardHoldEmPlugin as unknown as GamePlugin,
+  cardDiscardDownPlugin as unknown as GamePlugin,
+  cardBouncerPlugin as unknown as GamePlugin,
+  cardClutchPlugin as unknown as GamePlugin,
+  diceFrenzyMiniPlugin as unknown as GamePlugin,
+  diceFrenzyTallPlugin as unknown as GamePlugin,
+  dicePaddlePlugin as unknown as GamePlugin,
+  diceLeapPlugin as unknown as GamePlugin,
+  diceBridgePlugin as unknown as GamePlugin,
+  fireworkTapPlugin as unknown as GamePlugin,
+  pumpkinPopPlugin as unknown as GamePlugin,
+  sparklerSnagPlugin as unknown as GamePlugin,
+  confettiCatchPlugin as unknown as GamePlugin,
+  lanternLiftPlugin as unknown as GamePlugin,
 ];

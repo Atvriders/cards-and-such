@@ -1,0 +1,15 @@
+.db-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.db-info { font-size:0.95rem; color:#555; }
+.db-bridge { display:flex; gap:4px; }
+.db-segment { font-size:2rem; color:#bbb; }
+.db-segment.built { color:#27ae60; }
+.db-row { display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center; }
+.db-die { font-size:2rem; font-weight:900; padding:14px 20px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:70px; text-align:center; color:#2c3e50; }
+.db-result { font-size:1.05rem; font-weight:700; padding:6px 12px; border-radius:8px; }
+.db-result.ok { background:#eafaf1; color:#1e8449; }
+.db-result.no { background:#fdedec; color:#c0392b; }
+.db-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#27ae60; }
+.db-btn.alt { background:#3498db; }
+.db-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.db-done h2 { margin:0 0 8px; }
+.db-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

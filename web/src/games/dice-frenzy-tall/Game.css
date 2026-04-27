@@ -1,0 +1,16 @@
+.dft-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.dft-info { font-size:0.95rem; color:#555; }
+.dft-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.dft-row { display:flex; gap:10px; }
+.dft-die { font-size:1.6rem; font-weight:900; width:60px; height:60px; border:2px solid #34495e; background:#fff; border-radius:8px; cursor:pointer; color:#2c3e50; }
+.dft-die.selected { background:#fffbe6; border-color:#f39c12; color:#b9770e; }
+.dft-die:disabled { cursor:not-allowed; }
+.dft-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#27ae60; }
+.dft-btn.alt { background:#3498db; }
+.dft-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.dft-feedback { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; }
+.dft-feedback.ok { background:#eafaf1; color:#1e8449; }
+.dft-feedback.no { background:#fdedec; color:#c0392b; }
+.dft-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.dft-done h2 { margin:0 0 8px; }
+.dft-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

@@ -1,0 +1,18 @@
+.cs-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.cs-info { font-size:0.95rem; color:#555; }
+.cs-row { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+.cs-card { font-weight:900; padding:10px 16px; background:#fff; border:2px solid #34495e; border-radius:8px; text-align:center; }
+.cs-card.sm { font-size:1rem; min-width:50px; }
+.cs-card.big { font-size:2rem; min-width:90px; padding:18px 24px; }
+.cs-card.red { color:#c0392b; }
+.cs-card.black { color:#2c3e50; }
+.cs-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#27ae60; }
+.cs-btn:hover { background:#1e8449; }
+.cs-btn.alt { background:#3498db; }
+.cs-btn.alt:hover { background:#2980b9; }
+.cs-feedback { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; }
+.cs-feedback.ok { background:#eafaf1; color:#1e8449; }
+.cs-feedback.no { background:#fdedec; color:#c0392b; }
+.cs-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.cs-done h2 { margin:0 0 8px; }
+.cs-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

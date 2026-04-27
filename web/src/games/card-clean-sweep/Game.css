@@ -1,0 +1,14 @@
+.ccs-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.ccs-info { font-size:0.95rem; color:#555; }
+.ccs-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.ccs-card { font-size:2.2rem; font-weight:900; padding:18px 26px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:90px; text-align:center; }
+.ccs-card.red { color:#c0392b; }
+.ccs-card.black { color:#2c3e50; }
+.ccs-card.face { box-shadow:0 0 12px #f1c40f; border-color:#f1c40f; }
+.ccs-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#27ae60; }
+.ccs-btn:hover { background:#1e8449; }
+.ccs-btn.alt { background:#3498db; }
+.ccs-feedback { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
+.ccs-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.ccs-done h2 { margin:0 0 8px; }
+.ccs-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

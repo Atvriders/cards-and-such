@@ -1,0 +1,17 @@
+.fc2-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.fc2-info { font-size:0.95rem; color:#555; }
+.fc2-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.fc2-prompt { font-size:1.1rem; font-weight:700; color:#2c3e50; }
+.fc2-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; width:100%; max-width:300px; }
+.fc2-cell { padding:18px; font-size:1.6rem; font-weight:900; border:2px solid #34495e; background:#fff; border-radius:10px; cursor:pointer; }
+.fc2-cell:hover:not(:disabled) { background:#eaf4fb; }
+.fc2-cell.selected { background:#eaf4fb; border-color:#3498db; }
+.fc2-cell.correct { background:#eafaf1; border-color:#27ae60; color:#1e8449; }
+.fc2-cell.wrong { background:#fdedec; border-color:#e74c3c; color:#c0392b; }
+.fc2-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; }
+.fc2-btn.submit { background:#27ae60; }
+.fc2-btn.next { background:#3498db; }
+.fc2-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.fc2-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.fc2-done h2 { margin:0 0 8px; }
+.fc2-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

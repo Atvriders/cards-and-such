@@ -1,0 +1,11 @@
+.mr-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.mr-info { font-size:0.95rem; color:#555; }
+.mr-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.mr-timer { font-size:1.6rem; font-weight:900; color:#e74c3c; }
+.mr-question { font-size:2.4rem; font-weight:900; color:#2c3e50; padding:14px 24px; }
+.mr-choices { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; width:100%; max-width:360px; }
+.mr-choice { padding:14px; font-size:1.4rem; font-weight:800; border:2px solid #34495e; background:#fff; border-radius:10px; cursor:pointer; }
+.mr-choice:hover { background:#eaf4fb; }
+.mr-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.mr-done h2 { margin:0 0 8px; }
+.mr-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

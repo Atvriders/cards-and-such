@@ -1,0 +1,15 @@
+.ctu-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.ctu-info { font-size:0.95rem; color:#555; }
+.ctu-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.ctu-row { display:flex; gap:20px; justify-content:center; }
+.ctu-col { display:flex; flex-direction:column; align-items:center; gap:6px; }
+.ctu-label { font-size:0.85rem; color:#777; }
+.ctu-card { font-size:2rem; font-weight:900; padding:18px 24px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:90px; text-align:center; }
+.ctu-card.red { color:#c0392b; }
+.ctu-card.black { color:#2c3e50; }
+.ctu-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#27ae60; }
+.ctu-btn:hover { background:#1e8449; }
+.ctu-btn.alt { background:#3498db; }
+.ctu-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.ctu-done h2 { margin:0 0 8px; }
+.ctu-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
