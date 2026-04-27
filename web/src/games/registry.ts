@@ -1514,6 +1514,41 @@ import { ramenRushPlugin } from "./ramen-rush/index.js";
 import { tempuraTapPlugin } from "./tempura-tap/index.js";
 import { baoBashPlugin } from "./bao-bash/index.js";
 import { mochiMashPlugin } from "./mochi-mash/index.js";
+import { chessHistoryQuizPlugin } from "./chess-history-quiz/index.js";
+import { pokerHistoryQuizPlugin } from "./poker-history-quiz/index.js";
+import { cardMagicQuizPlugin } from "./card-magic-quiz/index.js";
+import { gardeningQuizPlugin } from "./gardening-quiz/index.js";
+import { cookingTechniquesQuizPlugin } from "./cooking-techniques-quiz/index.js";
+import { winePairingQuizPlugin } from "./wine-pairing-quiz/index.js";
+import { coffeeBrewingQuizPlugin } from "./coffee-brewing-quiz/index.js";
+import { photographyQuizPlugin } from "./photography-quiz/index.js";
+import { paintingTechniquesQuizPlugin } from "./painting-techniques-quiz/index.js";
+import { potteryQuizPlugin } from "./pottery-quiz/index.js";
+import { parisQuizPlugin } from "./paris-quiz/index.js";
+import { tokyoQuizPlugin } from "./tokyo-quiz/index.js";
+import { nycQuizPlugin } from "./nyc-quiz/index.js";
+import { londonQuizPlugin } from "./london-quiz/index.js";
+import { romeQuizPlugin } from "./rome-quiz/index.js";
+import { dubaiQuizPlugin } from "./dubai-quiz/index.js";
+import { sydneyQuizPlugin } from "./sydney-quiz/index.js";
+import { rioQuizPlugin } from "./rio-quiz/index.js";
+import { sevenSevensPlugin } from "./seven-sevens/index.js";
+import { sixShootPlugin } from "./six-shoot/index.js";
+import { fiveFingersPlugin } from "./five-fingers/index.js";
+import { fourFaceoffPlugin } from "./four-faceoff/index.js";
+import { twoTwosomePlugin } from "./two-twosome/index.js";
+import { threeTriosPlugin } from "./three-trios/index.js";
+import { cardCascadePlugin } from "./card-cascade/index.js";
+import { diceBingoLinePlugin } from "./dice-bingo-line/index.js";
+import { diceMarathonPlugin } from "./dice-marathon/index.js";
+import { diceTallyPlugin } from "./dice-tally/index.js";
+import { diceCricketPlugin } from "./dice-cricket/index.js";
+import { diceShootoutPlugin } from "./dice-shootout/index.js";
+import { flowerPluckPlugin } from "./flower-pluck/index.js";
+import { weedWhackPlugin } from "./weed-whack/index.js";
+import { seedSprinklePlugin } from "./seed-sprinkle/index.js";
+import { beeBuzzPlugin } from "./bee-buzz/index.js";
+import { butterflyNetPlugin } from "./butterfly-net/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3031,4 +3066,39 @@ export const GAMES: GamePlugin[] = [
   tempuraTapPlugin as unknown as GamePlugin,
   baoBashPlugin as unknown as GamePlugin,
   mochiMashPlugin as unknown as GamePlugin,
+  chessHistoryQuizPlugin as unknown as GamePlugin,
+  pokerHistoryQuizPlugin as unknown as GamePlugin,
+  cardMagicQuizPlugin as unknown as GamePlugin,
+  gardeningQuizPlugin as unknown as GamePlugin,
+  cookingTechniquesQuizPlugin as unknown as GamePlugin,
+  winePairingQuizPlugin as unknown as GamePlugin,
+  coffeeBrewingQuizPlugin as unknown as GamePlugin,
+  photographyQuizPlugin as unknown as GamePlugin,
+  paintingTechniquesQuizPlugin as unknown as GamePlugin,
+  potteryQuizPlugin as unknown as GamePlugin,
+  parisQuizPlugin as unknown as GamePlugin,
+  tokyoQuizPlugin as unknown as GamePlugin,
+  nycQuizPlugin as unknown as GamePlugin,
+  londonQuizPlugin as unknown as GamePlugin,
+  romeQuizPlugin as unknown as GamePlugin,
+  dubaiQuizPlugin as unknown as GamePlugin,
+  sydneyQuizPlugin as unknown as GamePlugin,
+  rioQuizPlugin as unknown as GamePlugin,
+  sevenSevensPlugin as unknown as GamePlugin,
+  sixShootPlugin as unknown as GamePlugin,
+  fiveFingersPlugin as unknown as GamePlugin,
+  fourFaceoffPlugin as unknown as GamePlugin,
+  twoTwosomePlugin as unknown as GamePlugin,
+  threeTriosPlugin as unknown as GamePlugin,
+  cardCascadePlugin as unknown as GamePlugin,
+  diceBingoLinePlugin as unknown as GamePlugin,
+  diceMarathonPlugin as unknown as GamePlugin,
+  diceTallyPlugin as unknown as GamePlugin,
+  diceCricketPlugin as unknown as GamePlugin,
+  diceShootoutPlugin as unknown as GamePlugin,
+  flowerPluckPlugin as unknown as GamePlugin,
+  weedWhackPlugin as unknown as GamePlugin,
+  seedSprinklePlugin as unknown as GamePlugin,
+  beeBuzzPlugin as unknown as GamePlugin,
+  butterflyNetPlugin as unknown as GamePlugin,
 ];
