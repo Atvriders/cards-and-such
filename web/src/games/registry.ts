@@ -1304,6 +1304,41 @@ import { cocoaCascadePlugin } from "./cocoa-cascade/index.js";
 import { frappeFlipPlugin } from "./frappe-flip/index.js";
 import { latteLeapPlugin } from "./latte-leap/index.js";
 import { mochaMarchPlugin } from "./mocha-march/index.js";
+import { astronomyQuizPlugin } from "./astronomy-quiz/index.js";
+import { chemistryLabQuizPlugin } from "./chemistry-lab-quiz/index.js";
+import { physicsQuizPlugin } from "./physics-quiz/index.js";
+import { biologyQuizPlugin } from "./biology-quiz/index.js";
+import { anatomyQuizPlugin } from "./anatomy-quiz/index.js";
+import { botanyQuizPlugin } from "./botany-quiz/index.js";
+import { zoologyQuizPlugin } from "./zoology-quiz/index.js";
+import { marineBioQuizPlugin } from "./marine-bio-quiz/index.js";
+import { geologyQuizPlugin } from "./geology-quiz/index.js";
+import { meteorologyQuizPlugin } from "./meteorology-quiz/index.js";
+import { computerHistoryQuizPlugin } from "./computer-history-quiz/index.js";
+import { programmingLangsQuizPlugin } from "./programming-langs-quiz/index.js";
+import { internetHistoryQuizPlugin } from "./internet-history-quiz/index.js";
+import { gamingHistoryQuizPlugin } from "./gaming-history-quiz/index.js";
+import { cybersecQuizPlugin } from "./cybersec-quiz/index.js";
+import { osQuizPlugin } from "./os-quiz/index.js";
+import { aiHistoryQuizPlugin } from "./ai-history-quiz/index.js";
+import { siliconValleyQuizPlugin } from "./silicon-valley-quiz/index.js";
+import { straightSearchPlugin } from "./straight-search/index.js";
+import { flushFinderPlugin } from "./flush-finder/index.js";
+import { pairPickupPlugin } from "./pair-pickup/index.js";
+import { kingsCourtPlugin } from "./kings-court/index.js";
+import { queensQuestPlugin } from "./queens-quest/index.js";
+import { jacksJamboreePlugin } from "./jacks-jamboree/index.js";
+import { tensTallyPlugin } from "./tens-tally/index.js";
+import { diceHandPokerPlugin } from "./dice-hand-poker/index.js";
+import { farkleMiniPlugin } from "./farkle-mini/index.js";
+import { pigClassicPlugin } from "./pig-classic/index.js";
+import { dice21Plugin } from "./dice-21/index.js";
+import { mexicanDicePlugin } from "./mexican-dice/index.js";
+import { lollipopLiftPlugin } from "./lollipop-lift/index.js";
+import { gumballGrabPlugin } from "./gumball-grab/index.js";
+import { taffyTapPlugin } from "./taffy-tap/index.js";
+import { nougatNetPlugin } from "./nougat-net/index.js";
+import { caramelCatchPlugin } from "./caramel-catch/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2611,4 +2646,39 @@ export const GAMES: GamePlugin[] = [
   frappeFlipPlugin as unknown as GamePlugin,
   latteLeapPlugin as unknown as GamePlugin,
   mochaMarchPlugin as unknown as GamePlugin,
+  astronomyQuizPlugin as unknown as GamePlugin,
+  chemistryLabQuizPlugin as unknown as GamePlugin,
+  physicsQuizPlugin as unknown as GamePlugin,
+  biologyQuizPlugin as unknown as GamePlugin,
+  anatomyQuizPlugin as unknown as GamePlugin,
+  botanyQuizPlugin as unknown as GamePlugin,
+  zoologyQuizPlugin as unknown as GamePlugin,
+  marineBioQuizPlugin as unknown as GamePlugin,
+  geologyQuizPlugin as unknown as GamePlugin,
+  meteorologyQuizPlugin as unknown as GamePlugin,
+  computerHistoryQuizPlugin as unknown as GamePlugin,
+  programmingLangsQuizPlugin as unknown as GamePlugin,
+  internetHistoryQuizPlugin as unknown as GamePlugin,
+  gamingHistoryQuizPlugin as unknown as GamePlugin,
+  cybersecQuizPlugin as unknown as GamePlugin,
+  osQuizPlugin as unknown as GamePlugin,
+  aiHistoryQuizPlugin as unknown as GamePlugin,
+  siliconValleyQuizPlugin as unknown as GamePlugin,
+  straightSearchPlugin as unknown as GamePlugin,
+  flushFinderPlugin as unknown as GamePlugin,
+  pairPickupPlugin as unknown as GamePlugin,
+  kingsCourtPlugin as unknown as GamePlugin,
+  queensQuestPlugin as unknown as GamePlugin,
+  jacksJamboreePlugin as unknown as GamePlugin,
+  tensTallyPlugin as unknown as GamePlugin,
+  diceHandPokerPlugin as unknown as GamePlugin,
+  farkleMiniPlugin as unknown as GamePlugin,
+  pigClassicPlugin as unknown as GamePlugin,
+  dice21Plugin as unknown as GamePlugin,
+  mexicanDicePlugin as unknown as GamePlugin,
+  lollipopLiftPlugin as unknown as GamePlugin,
+  gumballGrabPlugin as unknown as GamePlugin,
+  taffyTapPlugin as unknown as GamePlugin,
+  nougatNetPlugin as unknown as GamePlugin,
+  caramelCatchPlugin as unknown as GamePlugin,
 ];
