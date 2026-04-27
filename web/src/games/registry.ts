@@ -1594,6 +1594,31 @@ import { nineteen80sQuizPlugin } from "./1980s-quiz/index.js";
 import { nineteen90sQuizPlugin } from "./1990s-quiz/index.js";
 import { twoThousandsQuizPlugin } from "./2000s-quiz/index.js";
 import { twentyTensQuizPlugin } from "./2010s-quiz/index.js";
+import { basketballRulesQuizPlugin } from "./basketball-rules-quiz/index.js";
+import { footballRulesQuizPlugin } from "./football-rules-quiz/index.js";
+import { baseballRulesQuizPlugin } from "./baseball-rules-quiz/index.js";
+import { hockeyRulesQuizPlugin } from "./hockey-rules-quiz/index.js";
+import { soccerRulesQuizPlugin } from "./soccer-rules-quiz/index.js";
+import { tennisRulesQuizPlugin } from "./tennis-rules-quiz/index.js";
+import { cricketRulesQuizPlugin } from "./cricket-rules-quiz/index.js";
+import { rugbyRulesQuizPlugin } from "./rugby-rules-quiz/index.js";
+import { cardCallPlugin } from "./card-call/index.js";
+import { cardPilePlugin } from "./card-pile/index.js";
+import { cardPyramidBuildPlugin } from "./card-pyramid-build/index.js";
+import { pipPinchPlugin } from "./pip-pinch/index.js";
+import { cardCollectorPlugin } from "./card-collector/index.js";
+import { faceCollectorPlugin } from "./face-collector/index.js";
+import { rankCollectorPlugin } from "./rank-collector/index.js";
+import { dicePickupPlugin } from "./dice-pickup/index.js";
+import { diceRelayPlugin } from "./dice-relay/index.js";
+import { diceStreakPlugin } from "./dice-streak/index.js";
+import { diceSpinnerPlugin } from "./dice-spinner/index.js";
+import { diceStadiumPlugin } from "./dice-stadium/index.js";
+import { crabCatchPlugin } from "./crab-catch/index.js";
+import { octopusTapPlugin } from "./octopus-tap/index.js";
+import { jellyfishJabPlugin } from "./jellyfish-jab/index.js";
+import { sharkSwatPlugin } from "./shark-swat/index.js";
+import { whaleWavePlugin } from "./whale-wave/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3191,4 +3216,29 @@ export const GAMES: GamePlugin[] = [
   nineteen90sQuizPlugin as unknown as GamePlugin,
   twoThousandsQuizPlugin as unknown as GamePlugin,
   twentyTensQuizPlugin as unknown as GamePlugin,
+  basketballRulesQuizPlugin as unknown as GamePlugin,
+  footballRulesQuizPlugin as unknown as GamePlugin,
+  baseballRulesQuizPlugin as unknown as GamePlugin,
+  hockeyRulesQuizPlugin as unknown as GamePlugin,
+  soccerRulesQuizPlugin as unknown as GamePlugin,
+  tennisRulesQuizPlugin as unknown as GamePlugin,
+  cricketRulesQuizPlugin as unknown as GamePlugin,
+  rugbyRulesQuizPlugin as unknown as GamePlugin,
+  cardCallPlugin as unknown as GamePlugin,
+  cardPilePlugin as unknown as GamePlugin,
+  cardPyramidBuildPlugin as unknown as GamePlugin,
+  pipPinchPlugin as unknown as GamePlugin,
+  cardCollectorPlugin as unknown as GamePlugin,
+  faceCollectorPlugin as unknown as GamePlugin,
+  rankCollectorPlugin as unknown as GamePlugin,
+  dicePickupPlugin as unknown as GamePlugin,
+  diceRelayPlugin as unknown as GamePlugin,
+  diceStreakPlugin as unknown as GamePlugin,
+  diceSpinnerPlugin as unknown as GamePlugin,
+  diceStadiumPlugin as unknown as GamePlugin,
+  crabCatchPlugin as unknown as GamePlugin,
+  octopusTapPlugin as unknown as GamePlugin,
+  jellyfishJabPlugin as unknown as GamePlugin,
+  sharkSwatPlugin as unknown as GamePlugin,
+  whaleWavePlugin as unknown as GamePlugin,
 ];
