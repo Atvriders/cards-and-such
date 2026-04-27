@@ -1479,6 +1479,41 @@ import { piePopPlugin } from "./pie-pop/index.js";
 import { croissantCatchPlugin } from "./croissant-catch/index.js";
 import { bagelBashPlugin } from "./bagel-bash/index.js";
 import { donutDashPlugin } from "./donut-dash/index.js";
+import { pizzaQuizPlugin } from "./pizza-quiz/index.js";
+import { sushiQuizPlugin } from "./sushi-quiz/index.js";
+import { pastaQuizPlugin } from "./pasta-quiz/index.js";
+import { bbqQuizPlugin } from "./bbq-quiz/index.js";
+import { tacosQuizPlugin } from "./tacos-quiz/index.js";
+import { dimSumQuizPlugin } from "./dim-sum-quiz/index.js";
+import { curryQuizPlugin } from "./curry-quiz/index.js";
+import { cheeseQuizPlugin } from "./cheese-quiz/index.js";
+import { breadQuizPlugin } from "./bread-quiz/index.js";
+import { dessertQuizPlugin } from "./dessert-quiz/index.js";
+import { dogsBreedsQuizPlugin } from "./dogs-breeds-quiz/index.js";
+import { catsBreedsQuizPlugin } from "./cats-breeds-quiz/index.js";
+import { birdsWorldQuizPlugin } from "./birds-world-quiz/index.js";
+import { reptilesWorldQuizPlugin } from "./reptiles-world-quiz/index.js";
+import { insectsWorldQuizPlugin } from "./insects-world-quiz/index.js";
+import { dinosaursQuizPlugin } from "./dinosaurs-quiz/index.js";
+import { horsesQuizPlugin } from "./horses-quiz/index.js";
+import { endangeredSpeciesQuizPlugin } from "./endangered-species-quiz/index.js";
+import { pipFivePlugin } from "./pip-five/index.js";
+import { pipTenPlugin } from "./pip-ten/index.js";
+import { faceFlushPlugin } from "./face-flush/index.js";
+import { pipFlushPlugin } from "./pip-flush/index.js";
+import { dualDealPlugin } from "./dual-deal/index.js";
+import { tripleDealPlugin } from "./triple-deal/index.js";
+import { quintDealPlugin } from "./quint-deal/index.js";
+import { diceRoulettePlugin } from "./dice-roulette/index.js";
+import { diceBlackjackPlugin } from "./dice-blackjack/index.js";
+import { diceBaccaratPlugin } from "./dice-baccarat/index.js";
+import { diceKenoPlugin } from "./dice-keno/index.js";
+import { diceCrapsMiniPlugin } from "./dice-craps-mini/index.js";
+import { dumplingDancePlugin } from "./dumpling-dance/index.js";
+import { ramenRushPlugin } from "./ramen-rush/index.js";
+import { tempuraTapPlugin } from "./tempura-tap/index.js";
+import { baoBashPlugin } from "./bao-bash/index.js";
+import { mochiMashPlugin } from "./mochi-mash/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2961,4 +2996,39 @@ export const GAMES: GamePlugin[] = [
   croissantCatchPlugin as unknown as GamePlugin,
   bagelBashPlugin as unknown as GamePlugin,
   donutDashPlugin as unknown as GamePlugin,
+  pizzaQuizPlugin as unknown as GamePlugin,
+  sushiQuizPlugin as unknown as GamePlugin,
+  pastaQuizPlugin as unknown as GamePlugin,
+  bbqQuizPlugin as unknown as GamePlugin,
+  tacosQuizPlugin as unknown as GamePlugin,
+  dimSumQuizPlugin as unknown as GamePlugin,
+  curryQuizPlugin as unknown as GamePlugin,
+  cheeseQuizPlugin as unknown as GamePlugin,
+  breadQuizPlugin as unknown as GamePlugin,
+  dessertQuizPlugin as unknown as GamePlugin,
+  dogsBreedsQuizPlugin as unknown as GamePlugin,
+  catsBreedsQuizPlugin as unknown as GamePlugin,
+  birdsWorldQuizPlugin as unknown as GamePlugin,
+  reptilesWorldQuizPlugin as unknown as GamePlugin,
+  insectsWorldQuizPlugin as unknown as GamePlugin,
+  dinosaursQuizPlugin as unknown as GamePlugin,
+  horsesQuizPlugin as unknown as GamePlugin,
+  endangeredSpeciesQuizPlugin as unknown as GamePlugin,
+  pipFivePlugin as unknown as GamePlugin,
+  pipTenPlugin as unknown as GamePlugin,
+  faceFlushPlugin as unknown as GamePlugin,
+  pipFlushPlugin as unknown as GamePlugin,
+  dualDealPlugin as unknown as GamePlugin,
+  tripleDealPlugin as unknown as GamePlugin,
+  quintDealPlugin as unknown as GamePlugin,
+  diceRoulettePlugin as unknown as GamePlugin,
+  diceBlackjackPlugin as unknown as GamePlugin,
+  diceBaccaratPlugin as unknown as GamePlugin,
+  diceKenoPlugin as unknown as GamePlugin,
+  diceCrapsMiniPlugin as unknown as GamePlugin,
+  dumplingDancePlugin as unknown as GamePlugin,
+  ramenRushPlugin as unknown as GamePlugin,
+  tempuraTapPlugin as unknown as GamePlugin,
+  baoBashPlugin as unknown as GamePlugin,
+  mochiMashPlugin as unknown as GamePlugin,
 ];
