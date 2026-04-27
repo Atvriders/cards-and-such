@@ -1584,6 +1584,16 @@ import { antAttackPlugin } from "./ant-attack/index.js";
 import { mouseMashPlugin } from "./mouse-mash/index.js";
 import { bunnyBouncePlugin } from "./bunny-bounce/index.js";
 import { chickChasePlugin } from "./chick-chase/index.js";
+import { nineteen20sQuizPlugin } from "./1920s-quiz/index.js";
+import { nineteen30sQuizPlugin } from "./1930s-quiz/index.js";
+import { nineteen40sQuizPlugin } from "./1940s-quiz/index.js";
+import { nineteen50sQuizPlugin } from "./1950s-quiz/index.js";
+import { nineteen60sQuizPlugin } from "./1960s-quiz/index.js";
+import { nineteen70sQuizPlugin } from "./1970s-quiz/index.js";
+import { nineteen80sQuizPlugin } from "./1980s-quiz/index.js";
+import { nineteen90sQuizPlugin } from "./1990s-quiz/index.js";
+import { twoThousandsQuizPlugin } from "./2000s-quiz/index.js";
+import { twentyTensQuizPlugin } from "./2010s-quiz/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3171,4 +3181,14 @@ export const GAMES: GamePlugin[] = [
   mouseMashPlugin as unknown as GamePlugin,
   bunnyBouncePlugin as unknown as GamePlugin,
   chickChasePlugin as unknown as GamePlugin,
+  nineteen20sQuizPlugin as unknown as GamePlugin,
+  nineteen30sQuizPlugin as unknown as GamePlugin,
+  nineteen40sQuizPlugin as unknown as GamePlugin,
+  nineteen50sQuizPlugin as unknown as GamePlugin,
+  nineteen60sQuizPlugin as unknown as GamePlugin,
+  nineteen70sQuizPlugin as unknown as GamePlugin,
+  nineteen80sQuizPlugin as unknown as GamePlugin,
+  nineteen90sQuizPlugin as unknown as GamePlugin,
+  twoThousandsQuizPlugin as unknown as GamePlugin,
+  twentyTensQuizPlugin as unknown as GamePlugin,
 ];
