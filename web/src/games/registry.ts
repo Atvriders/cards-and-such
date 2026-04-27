@@ -1689,6 +1689,41 @@ import { starfishSnapPlugin } from "./starfish-snap/index.js";
 import { clamClapPlugin } from "./clam-clap/index.js";
 import { lobsterLeapPlugin } from "./lobster-leap/index.js";
 import { coralClickPlugin } from "./coral-click/index.js";
+import { miniPyramidSolitairePlugin } from "./mini-pyramid-solitaire/index.js";
+import { miniTripeaksPlugin } from "./mini-tripeaks/index.js";
+import { miniSpider1suitPlugin } from "./mini-spider-1suit/index.js";
+import { miniCanfieldPlugin } from "./mini-canfield/index.js";
+import { miniYukonPlugin } from "./mini-yukon/index.js";
+import { miniBakerDozenPlugin } from "./mini-baker-dozen/index.js";
+import { miniEightOffPlugin } from "./mini-eight-off/index.js";
+import { miniEmperorPlugin } from "./mini-emperor/index.js";
+import { miniRussianBankPlugin } from "./mini-russian-bank/index.js";
+import { miniPokerSquarePlugin } from "./mini-poker-square/index.js";
+import { animalTracksQuizPlugin } from "./animal-tracks-quiz/index.js";
+import { birdSongsQuizPlugin } from "./bird-songs-quiz/index.js";
+import { wildCatsQuizPlugin } from "./wild-cats-quiz/index.js";
+import { whalesDolphinsQuizPlugin } from "./whales-dolphins-quiz/index.js";
+import { bearSpeciesQuizPlugin } from "./bear-species-quiz/index.js";
+import { primatesQuizPlugin } from "./primates-quiz/index.js";
+import { snakesQuizPlugin } from "./snakes-quiz/index.js";
+import { spidersQuizPlugin } from "./spiders-quiz/index.js";
+import { redPairPickupPlugin } from "./red-pair-pickup/index.js";
+import { blackPairPickupPlugin } from "./black-pair-pickup/index.js";
+import { cardStairwayPlugin } from "./card-stairway/index.js";
+import { cardDownstairsPlugin } from "./card-downstairs/index.js";
+import { cardEqualityPlugin } from "./card-equality/index.js";
+import { cardMixmatchPlugin } from "./card-mixmatch/index.js";
+import { cardHourglassPlugin } from "./card-hourglass/index.js";
+import { diceGridPlugin } from "./dice-grid/index.js";
+import { diceSpinwheelPlugin } from "./dice-spinwheel/index.js";
+import { diceAimPlugin } from "./dice-aim/index.js";
+import { diceBowlingPlugin } from "./dice-bowling/index.js";
+import { diceGridironPlugin } from "./dice-gridiron/index.js";
+import { beeBashPlugin } from "./bee-bash/index.js";
+import { waspWhipPlugin } from "./wasp-whip/index.js";
+import { caterpillarCatchPlugin } from "./caterpillar-catch/index.js";
+import { fireflyFlashPlugin } from "./firefly-flash/index.js";
+import { dragonflyDartPlugin } from "./dragonfly-dart/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3381,4 +3416,39 @@ export const GAMES: GamePlugin[] = [
   clamClapPlugin as unknown as GamePlugin,
   lobsterLeapPlugin as unknown as GamePlugin,
   coralClickPlugin as unknown as GamePlugin,
+  miniPyramidSolitairePlugin as unknown as GamePlugin,
+  miniTripeaksPlugin as unknown as GamePlugin,
+  miniSpider1suitPlugin as unknown as GamePlugin,
+  miniCanfieldPlugin as unknown as GamePlugin,
+  miniYukonPlugin as unknown as GamePlugin,
+  miniBakerDozenPlugin as unknown as GamePlugin,
+  miniEightOffPlugin as unknown as GamePlugin,
+  miniEmperorPlugin as unknown as GamePlugin,
+  miniRussianBankPlugin as unknown as GamePlugin,
+  miniPokerSquarePlugin as unknown as GamePlugin,
+  animalTracksQuizPlugin as unknown as GamePlugin,
+  birdSongsQuizPlugin as unknown as GamePlugin,
+  wildCatsQuizPlugin as unknown as GamePlugin,
+  whalesDolphinsQuizPlugin as unknown as GamePlugin,
+  bearSpeciesQuizPlugin as unknown as GamePlugin,
+  primatesQuizPlugin as unknown as GamePlugin,
+  snakesQuizPlugin as unknown as GamePlugin,
+  spidersQuizPlugin as unknown as GamePlugin,
+  redPairPickupPlugin as unknown as GamePlugin,
+  blackPairPickupPlugin as unknown as GamePlugin,
+  cardStairwayPlugin as unknown as GamePlugin,
+  cardDownstairsPlugin as unknown as GamePlugin,
+  cardEqualityPlugin as unknown as GamePlugin,
+  cardMixmatchPlugin as unknown as GamePlugin,
+  cardHourglassPlugin as unknown as GamePlugin,
+  diceGridPlugin as unknown as GamePlugin,
+  diceSpinwheelPlugin as unknown as GamePlugin,
+  diceAimPlugin as unknown as GamePlugin,
+  diceBowlingPlugin as unknown as GamePlugin,
+  diceGridironPlugin as unknown as GamePlugin,
+  beeBashPlugin as unknown as GamePlugin,
+  waspWhipPlugin as unknown as GamePlugin,
+  caterpillarCatchPlugin as unknown as GamePlugin,
+  fireflyFlashPlugin as unknown as GamePlugin,
+  dragonflyDartPlugin as unknown as GamePlugin,
 ];
