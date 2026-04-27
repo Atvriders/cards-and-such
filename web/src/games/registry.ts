@@ -1619,6 +1619,41 @@ import { octopusTapPlugin } from "./octopus-tap/index.js";
 import { jellyfishJabPlugin } from "./jellyfish-jab/index.js";
 import { sharkSwatPlugin } from "./shark-swat/index.js";
 import { whaleWavePlugin } from "./whale-wave/index.js";
+import { japanCultureQuizPlugin } from "./japan-culture-quiz/index.js";
+import { chinaHistoryQuizPlugin } from "./china-history-quiz/index.js";
+import { indiaCultureQuizPlugin } from "./india-culture-quiz/index.js";
+import { franceCultureQuizPlugin } from "./france-culture-quiz/index.js";
+import { italyCultureQuizPlugin } from "./italy-culture-quiz/index.js";
+import { spainCultureQuizPlugin } from "./spain-culture-quiz/index.js";
+import { germanyCultureQuizPlugin } from "./germany-culture-quiz/index.js";
+import { mexicoCultureQuizPlugin } from "./mexico-culture-quiz/index.js";
+import { brazilCultureQuizPlugin } from "./brazil-culture-quiz/index.js";
+import { australiaCultureQuizPlugin } from "./australia-culture-quiz/index.js";
+import { mentalMathQuizPlugin } from "./mental-math-quiz/index.js";
+import { geometryQuizPlugin } from "./geometry-quiz/index.js";
+import { algebraQuizPlugin } from "./algebra-quiz/index.js";
+import { logicPuzzlesQuizPlugin } from "./logic-puzzles-quiz/index.js";
+import { statisticsQuizPlugin } from "./statistics-quiz/index.js";
+import { probabilityQuizPlugin } from "./probability-quiz/index.js";
+import { numberTheoryQuizPlugin } from "./number-theory-quiz/index.js";
+import { puzzleMindQuizPlugin } from "./puzzle-mind-quiz/index.js";
+import { miniPokerPlugin } from "./mini-poker/index.js";
+import { cardTargetSumPlugin } from "./card-target-sum/index.js";
+import { miniBlackjackPlugin } from "./mini-blackjack/index.js";
+import { cardClockBuildPlugin } from "./card-clock-build/index.js";
+import { miniWarPlugin } from "./mini-war/index.js";
+import { miniRummyPlugin } from "./mini-rummy/index.js";
+import { miniSpitPlugin } from "./mini-spit/index.js";
+import { miniYahtzeePlugin } from "./mini-yahtzee/index.js";
+import { miniTenziPlugin } from "./mini-tenzi/index.js";
+import { miniMexicanPlugin } from "./mini-mexican/index.js";
+import { miniShutBoxPlugin } from "./mini-shut-box/index.js";
+import { miniCeeLoPlugin } from "./mini-cee-lo/index.js";
+import { acornGrabPlugin } from "./acorn-grab/index.js";
+import { mushroomMashPlugin } from "./mushroom-mash/index.js";
+import { pineconePopPlugin } from "./pinecone-pop/index.js";
+import { squirrelSpotPlugin } from "./squirrel-spot/index.js";
+import { owlHootPlugin } from "./owl-hoot/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3241,4 +3276,39 @@ export const GAMES: GamePlugin[] = [
   jellyfishJabPlugin as unknown as GamePlugin,
   sharkSwatPlugin as unknown as GamePlugin,
   whaleWavePlugin as unknown as GamePlugin,
+  japanCultureQuizPlugin as unknown as GamePlugin,
+  chinaHistoryQuizPlugin as unknown as GamePlugin,
+  indiaCultureQuizPlugin as unknown as GamePlugin,
+  franceCultureQuizPlugin as unknown as GamePlugin,
+  italyCultureQuizPlugin as unknown as GamePlugin,
+  spainCultureQuizPlugin as unknown as GamePlugin,
+  germanyCultureQuizPlugin as unknown as GamePlugin,
+  mexicoCultureQuizPlugin as unknown as GamePlugin,
+  brazilCultureQuizPlugin as unknown as GamePlugin,
+  australiaCultureQuizPlugin as unknown as GamePlugin,
+  mentalMathQuizPlugin as unknown as GamePlugin,
+  geometryQuizPlugin as unknown as GamePlugin,
+  algebraQuizPlugin as unknown as GamePlugin,
+  logicPuzzlesQuizPlugin as unknown as GamePlugin,
+  statisticsQuizPlugin as unknown as GamePlugin,
+  probabilityQuizPlugin as unknown as GamePlugin,
+  numberTheoryQuizPlugin as unknown as GamePlugin,
+  puzzleMindQuizPlugin as unknown as GamePlugin,
+  miniPokerPlugin as unknown as GamePlugin,
+  cardTargetSumPlugin as unknown as GamePlugin,
+  miniBlackjackPlugin as unknown as GamePlugin,
+  cardClockBuildPlugin as unknown as GamePlugin,
+  miniWarPlugin as unknown as GamePlugin,
+  miniRummyPlugin as unknown as GamePlugin,
+  miniSpitPlugin as unknown as GamePlugin,
+  miniYahtzeePlugin as unknown as GamePlugin,
+  miniTenziPlugin as unknown as GamePlugin,
+  miniMexicanPlugin as unknown as GamePlugin,
+  miniShutBoxPlugin as unknown as GamePlugin,
+  miniCeeLoPlugin as unknown as GamePlugin,
+  acornGrabPlugin as unknown as GamePlugin,
+  mushroomMashPlugin as unknown as GamePlugin,
+  pineconePopPlugin as unknown as GamePlugin,
+  squirrelSpotPlugin as unknown as GamePlugin,
+  owlHootPlugin as unknown as GamePlugin,
 ];
