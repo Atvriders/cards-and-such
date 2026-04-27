@@ -1339,6 +1339,41 @@ import { gumballGrabPlugin } from "./gumball-grab/index.js";
 import { taffyTapPlugin } from "./taffy-tap/index.js";
 import { nougatNetPlugin } from "./nougat-net/index.js";
 import { caramelCatchPlugin } from "./caramel-catch/index.js";
+import { worldCapitalsQuizPlugin } from "./world-capitals-quiz/index.js";
+import { usStatesQuizPlugin } from "./us-states-quiz/index.js";
+import { europeanCitiesQuizPlugin } from "./european-cities-quiz/index.js";
+import { africanGeographyQuizPlugin } from "./african-geography-quiz/index.js";
+import { asianGeographyQuizPlugin } from "./asian-geography-quiz/index.js";
+import { southAmericaQuizPlugin } from "./south-america-quiz/index.js";
+import { oceaniaQuizPlugin } from "./oceania-quiz/index.js";
+import { caribbeanQuizPlugin } from "./caribbean-quiz/index.js";
+import { worldFlagsQuizPlugin } from "./world-flags-quiz/index.js";
+import { worldRiversQuizPlugin } from "./world-rivers-quiz/index.js";
+import { shakespeareQuizPlugin } from "./shakespeare-quiz/index.js";
+import { classicNovelsQuizPlugin } from "./classic-novels-quiz/index.js";
+import { americanLitQuizPlugin } from "./american-lit-quiz/index.js";
+import { britishLitQuizPlugin } from "./british-lit-quiz/index.js";
+import { russianLitQuizPlugin } from "./russian-lit-quiz/index.js";
+import { mysteryNovelsQuizPlugin } from "./mystery-novels-quiz/index.js";
+import { sciFiNovelsQuizPlugin } from "./sci-fi-novels-quiz/index.js";
+import { fantasyNovelsQuizPlugin } from "./fantasy-novels-quiz/index.js";
+import { nineNinePlugin } from "./nine-nine/index.js";
+import { eightEatersPlugin } from "./eight-eaters/index.js";
+import { lowTidePlugin } from "./low-tide/index.js";
+import { highTidePlugin } from "./high-tide/index.js";
+import { colorClashPlugin } from "./color-clash/index.js";
+import { suitShufflePlugin } from "./suit-shuffle/index.js";
+import { rankRumblePlugin } from "./rank-rumble/index.js";
+import { rollAndWritePlugin } from "./roll-and-write/index.js";
+import { diceBingoPlugin } from "./dice-bingo/index.js";
+import { buncoMiniPlugin } from "./bunco-mini/index.js";
+import { diceKingPlugin } from "./dice-king/index.js";
+import { diceClutchPlugin } from "./dice-clutch/index.js";
+import { cucumberCatchPlugin } from "./cucumber-catch/index.js";
+import { tomatoTossPlugin } from "./tomato-toss/index.js";
+import { pepperPopPlugin } from "./pepper-pop/index.js";
+import { spinachSpinPlugin } from "./spinach-spin/index.js";
+import { kaleKombatPlugin } from "./kale-kombat/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2681,4 +2716,39 @@ export const GAMES: GamePlugin[] = [
   taffyTapPlugin as unknown as GamePlugin,
   nougatNetPlugin as unknown as GamePlugin,
   caramelCatchPlugin as unknown as GamePlugin,
+  worldCapitalsQuizPlugin as unknown as GamePlugin,
+  usStatesQuizPlugin as unknown as GamePlugin,
+  europeanCitiesQuizPlugin as unknown as GamePlugin,
+  africanGeographyQuizPlugin as unknown as GamePlugin,
+  asianGeographyQuizPlugin as unknown as GamePlugin,
+  southAmericaQuizPlugin as unknown as GamePlugin,
+  oceaniaQuizPlugin as unknown as GamePlugin,
+  caribbeanQuizPlugin as unknown as GamePlugin,
+  worldFlagsQuizPlugin as unknown as GamePlugin,
+  worldRiversQuizPlugin as unknown as GamePlugin,
+  shakespeareQuizPlugin as unknown as GamePlugin,
+  classicNovelsQuizPlugin as unknown as GamePlugin,
+  americanLitQuizPlugin as unknown as GamePlugin,
+  britishLitQuizPlugin as unknown as GamePlugin,
+  russianLitQuizPlugin as unknown as GamePlugin,
+  mysteryNovelsQuizPlugin as unknown as GamePlugin,
+  sciFiNovelsQuizPlugin as unknown as GamePlugin,
+  fantasyNovelsQuizPlugin as unknown as GamePlugin,
+  nineNinePlugin as unknown as GamePlugin,
+  eightEatersPlugin as unknown as GamePlugin,
+  lowTidePlugin as unknown as GamePlugin,
+  highTidePlugin as unknown as GamePlugin,
+  colorClashPlugin as unknown as GamePlugin,
+  suitShufflePlugin as unknown as GamePlugin,
+  rankRumblePlugin as unknown as GamePlugin,
+  rollAndWritePlugin as unknown as GamePlugin,
+  diceBingoPlugin as unknown as GamePlugin,
+  buncoMiniPlugin as unknown as GamePlugin,
+  diceKingPlugin as unknown as GamePlugin,
+  diceClutchPlugin as unknown as GamePlugin,
+  cucumberCatchPlugin as unknown as GamePlugin,
+  tomatoTossPlugin as unknown as GamePlugin,
+  pepperPopPlugin as unknown as GamePlugin,
+  spinachSpinPlugin as unknown as GamePlugin,
+  kaleKombatPlugin as unknown as GamePlugin,
 ];
