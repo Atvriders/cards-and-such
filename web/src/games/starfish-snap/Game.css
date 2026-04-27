@@ -1,0 +1,11 @@
+.ar-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
+.ar-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.ar-info { font-size:0.95rem; color:#555; }
+.ar-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.ar-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
+.ar-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#ffe4b5,#deb887); border:3px solid #8b6914; border-radius:14px; overflow:hidden; }
+.ar-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
+.ar-target:hover { transform:scale(1.15); }
+.ar-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
+.ar-done h2 { margin:0 0 8px; }
+.ar-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

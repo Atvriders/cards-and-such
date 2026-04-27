@@ -1654,6 +1654,41 @@ import { mushroomMashPlugin } from "./mushroom-mash/index.js";
 import { pineconePopPlugin } from "./pinecone-pop/index.js";
 import { squirrelSpotPlugin } from "./squirrel-spot/index.js";
 import { owlHootPlugin } from "./owl-hoot/index.js";
+import { christmasQuizPlugin } from "./christmas-quiz/index.js";
+import { halloweenQuizPlugin } from "./halloween-quiz/index.js";
+import { easterQuizPlugin } from "./easter-quiz/index.js";
+import { thanksgivingQuizPlugin } from "./thanksgiving-quiz/index.js";
+import { valentinesQuizPlugin } from "./valentines-quiz/index.js";
+import { newYearQuizPlugin } from "./new-year-quiz/index.js";
+import { hanukkahQuizPlugin } from "./hanukkah-quiz/index.js";
+import { diwaliQuizPlugin } from "./diwali-quiz/index.js";
+import { chineseNewYearQuizPlugin } from "./chinese-new-year-quiz/index.js";
+import { mardiGrasQuizPlugin } from "./mardi-gras-quiz/index.js";
+import { carsHistoryQuizPlugin } from "./cars-history-quiz/index.js";
+import { motorcyclesQuizPlugin } from "./motorcycles-quiz/index.js";
+import { aircraftQuizPlugin } from "./aircraft-quiz/index.js";
+import { shipsQuizPlugin } from "./ships-quiz/index.js";
+import { trainsQuizPlugin } from "./trains-quiz/index.js";
+import { spaceVehiclesQuizPlugin } from "./space-vehicles-quiz/index.js";
+import { formula1QuizPlugin } from "./formula1-quiz/index.js";
+import { nASCARQuizPlugin } from "./nascar-quiz/index.js";
+import { cardTossPlugin } from "./card-toss/index.js";
+import { cardStormPlugin } from "./card-storm/index.js";
+import { cardCollectFlushPlugin } from "./card-collect-flush/index.js";
+import { cardPairQuestPlugin } from "./card-pair-quest/index.js";
+import { cardTrioQuestPlugin } from "./card-trio-quest/index.js";
+import { cardQuadQuestPlugin } from "./card-quad-quest/index.js";
+import { cardCouponPlugin } from "./card-coupon/index.js";
+import { diceRelayMiniPlugin } from "./dice-relay-mini/index.js";
+import { diceCoinFlipPlugin } from "./dice-coin-flip/index.js";
+import { diceSnakeLadderPlugin } from "./dice-snake-ladder/index.js";
+import { diceCheckersPlugin } from "./dice-checkers/index.js";
+import { diceMonopolyPlugin } from "./dice-monopoly/index.js";
+import { seahorseSpinPlugin } from "./seahorse-spin/index.js";
+import { starfishSnapPlugin } from "./starfish-snap/index.js";
+import { clamClapPlugin } from "./clam-clap/index.js";
+import { lobsterLeapPlugin } from "./lobster-leap/index.js";
+import { coralClickPlugin } from "./coral-click/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3311,4 +3346,39 @@ export const GAMES: GamePlugin[] = [
   pineconePopPlugin as unknown as GamePlugin,
   squirrelSpotPlugin as unknown as GamePlugin,
   owlHootPlugin as unknown as GamePlugin,
+  christmasQuizPlugin as unknown as GamePlugin,
+  halloweenQuizPlugin as unknown as GamePlugin,
+  easterQuizPlugin as unknown as GamePlugin,
+  thanksgivingQuizPlugin as unknown as GamePlugin,
+  valentinesQuizPlugin as unknown as GamePlugin,
+  newYearQuizPlugin as unknown as GamePlugin,
+  hanukkahQuizPlugin as unknown as GamePlugin,
+  diwaliQuizPlugin as unknown as GamePlugin,
+  chineseNewYearQuizPlugin as unknown as GamePlugin,
+  mardiGrasQuizPlugin as unknown as GamePlugin,
+  carsHistoryQuizPlugin as unknown as GamePlugin,
+  motorcyclesQuizPlugin as unknown as GamePlugin,
+  aircraftQuizPlugin as unknown as GamePlugin,
+  shipsQuizPlugin as unknown as GamePlugin,
+  trainsQuizPlugin as unknown as GamePlugin,
+  spaceVehiclesQuizPlugin as unknown as GamePlugin,
+  formula1QuizPlugin as unknown as GamePlugin,
+  nASCARQuizPlugin as unknown as GamePlugin,
+  cardTossPlugin as unknown as GamePlugin,
+  cardStormPlugin as unknown as GamePlugin,
+  cardCollectFlushPlugin as unknown as GamePlugin,
+  cardPairQuestPlugin as unknown as GamePlugin,
+  cardTrioQuestPlugin as unknown as GamePlugin,
+  cardQuadQuestPlugin as unknown as GamePlugin,
+  cardCouponPlugin as unknown as GamePlugin,
+  diceRelayMiniPlugin as unknown as GamePlugin,
+  diceCoinFlipPlugin as unknown as GamePlugin,
+  diceSnakeLadderPlugin as unknown as GamePlugin,
+  diceCheckersPlugin as unknown as GamePlugin,
+  diceMonopolyPlugin as unknown as GamePlugin,
+  seahorseSpinPlugin as unknown as GamePlugin,
+  starfishSnapPlugin as unknown as GamePlugin,
+  clamClapPlugin as unknown as GamePlugin,
+  lobsterLeapPlugin as unknown as GamePlugin,
+  coralClickPlugin as unknown as GamePlugin,
 ];
