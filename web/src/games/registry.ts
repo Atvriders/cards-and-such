@@ -1234,6 +1234,41 @@ import { noodleGrabPlugin } from "./noodle-grab/index.js";
 import { oliveGrabPlugin } from "./olive-grab/index.js";
 import { classicalMusicQuizPlugin } from "./classical-music-quiz/index.js";
 import { modernArtQuizPlugin } from "./modern-art-quiz/index.js";
+import { jazzQuizPlugin } from "./jazz-quiz/index.js";
+import { rockMusicQuizPlugin } from "./rock-music-quiz/index.js";
+import { popMusicQuizPlugin } from "./pop-music-quiz/index.js";
+import { hipHopQuizPlugin } from "./hip-hop-quiz/index.js";
+import { countryMusicQuizPlugin } from "./country-music-quiz/index.js";
+import { electronicMusicQuizPlugin } from "./electronic-music-quiz/index.js";
+import { folkMusicQuizPlugin } from "./folk-music-quiz/index.js";
+import { bluesQuizPlugin } from "./blues-quiz/index.js";
+import { reggaeQuizPlugin } from "./reggae-quiz/index.js";
+import { gospelMusicQuizPlugin } from "./gospel-music-quiz/index.js";
+import { operaQuizPlugin } from "./opera-quiz/index.js";
+import { broadwayQuizPlugin } from "./broadway-quiz/index.js";
+import { balletQuizPlugin } from "./ballet-quiz/index.js";
+import { streetArtQuizPlugin } from "./street-art-quiz/index.js";
+import { sculptureQuizPlugin } from "./sculpture-quiz/index.js";
+import { quartetMatchPlugin } from "./quartet-match/index.js";
+import { evenEvensPlugin } from "./even-evens/index.js";
+import { oddOddsPlugin } from "./odd-odds/index.js";
+import { faceFeastPlugin } from "./face-feast/index.js";
+import { pipPursePlugin } from "./pip-purse/index.js";
+import { redRoulettePlugin } from "./red-roulette/index.js";
+import { blackBidderPlugin } from "./black-bidder/index.js";
+import { suitStackPlugin } from "./suit-stack/index.js";
+import { pairPursuitPlugin } from "./pair-pursuit/index.js";
+import { overUnderPlugin } from "./over-under/index.js";
+import { straightShotPlugin } from "./straight-shot/index.js";
+import { doubleDownPlugin } from "./double-down/index.js";
+import { tripleTossPlugin } from "./triple-toss/index.js";
+import { centipedeRollPlugin } from "./centipede-roll/index.js";
+import { parityPopPlugin } from "./parity-pop/index.js";
+import { peachPopPlugin } from "./peach-pop/index.js";
+import { pretzelPluckPlugin } from "./pretzel-pluck/index.js";
+import { radishRushPlugin } from "./radish-rush/index.js";
+import { salamiSlicePlugin } from "./salami-slice/index.js";
+import { tangerineTossPlugin } from "./tangerine-toss/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2471,4 +2506,39 @@ export const GAMES: GamePlugin[] = [
   oliveGrabPlugin as unknown as GamePlugin,
   classicalMusicQuizPlugin as unknown as GamePlugin,
   modernArtQuizPlugin as unknown as GamePlugin,
+  jazzQuizPlugin as unknown as GamePlugin,
+  rockMusicQuizPlugin as unknown as GamePlugin,
+  popMusicQuizPlugin as unknown as GamePlugin,
+  hipHopQuizPlugin as unknown as GamePlugin,
+  countryMusicQuizPlugin as unknown as GamePlugin,
+  electronicMusicQuizPlugin as unknown as GamePlugin,
+  folkMusicQuizPlugin as unknown as GamePlugin,
+  bluesQuizPlugin as unknown as GamePlugin,
+  reggaeQuizPlugin as unknown as GamePlugin,
+  gospelMusicQuizPlugin as unknown as GamePlugin,
+  operaQuizPlugin as unknown as GamePlugin,
+  broadwayQuizPlugin as unknown as GamePlugin,
+  balletQuizPlugin as unknown as GamePlugin,
+  streetArtQuizPlugin as unknown as GamePlugin,
+  sculptureQuizPlugin as unknown as GamePlugin,
+  quartetMatchPlugin as unknown as GamePlugin,
+  evenEvensPlugin as unknown as GamePlugin,
+  oddOddsPlugin as unknown as GamePlugin,
+  faceFeastPlugin as unknown as GamePlugin,
+  pipPursePlugin as unknown as GamePlugin,
+  redRoulettePlugin as unknown as GamePlugin,
+  blackBidderPlugin as unknown as GamePlugin,
+  suitStackPlugin as unknown as GamePlugin,
+  pairPursuitPlugin as unknown as GamePlugin,
+  overUnderPlugin as unknown as GamePlugin,
+  straightShotPlugin as unknown as GamePlugin,
+  doubleDownPlugin as unknown as GamePlugin,
+  tripleTossPlugin as unknown as GamePlugin,
+  centipedeRollPlugin as unknown as GamePlugin,
+  parityPopPlugin as unknown as GamePlugin,
+  peachPopPlugin as unknown as GamePlugin,
+  pretzelPluckPlugin as unknown as GamePlugin,
+  radishRushPlugin as unknown as GamePlugin,
+  salamiSlicePlugin as unknown as GamePlugin,
+  tangerineTossPlugin as unknown as GamePlugin,
 ];
