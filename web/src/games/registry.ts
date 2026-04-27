@@ -1269,6 +1269,41 @@ import { pretzelPluckPlugin } from "./pretzel-pluck/index.js";
 import { radishRushPlugin } from "./radish-rush/index.js";
 import { salamiSlicePlugin } from "./salami-slice/index.js";
 import { tangerineTossPlugin } from "./tangerine-toss/index.js";
+import { greekMythQuizPlugin } from "./greek-myth-quiz/index.js";
+import { norseMythQuizPlugin } from "./norse-myth-quiz/index.js";
+import { egyptianMythQuizPlugin } from "./egyptian-myth-quiz/index.js";
+import { celticMythQuizPlugin } from "./celtic-myth-quiz/index.js";
+import { hinduMythQuizPlugin } from "./hindu-myth-quiz/index.js";
+import { buddhismQuizPlugin } from "./buddhism-quiz/index.js";
+import { worldReligionsQuizPlugin } from "./world-religions-quiz/index.js";
+import { easternPhilosophyQuizPlugin } from "./eastern-philosophy-quiz/index.js";
+import { westernPhilosophyQuizPlugin } from "./western-philosophy-quiz/index.js";
+import { ethicsQuizPlugin } from "./ethics-quiz/index.js";
+import { nbaLegendsQuizPlugin } from "./nba-legends-quiz/index.js";
+import { nflLegendsQuizPlugin } from "./nfl-legends-quiz/index.js";
+import { mlbLegendsQuizPlugin } from "./mlb-legends-quiz/index.js";
+import { soccerStarsQuizPlugin } from "./soccer-stars-quiz/index.js";
+import { tennisGreatsQuizPlugin } from "./tennis-greats-quiz/index.js";
+import { boxingLegendsQuizPlugin } from "./boxing-legends-quiz/index.js";
+import { olympicQuizPlugin } from "./olympic-quiz/index.js";
+import { golfGreatsQuizPlugin } from "./golf-greats-quiz/index.js";
+import { triadTowerPlugin } from "./triad-tower/index.js";
+import { royalRumblePlugin } from "./royal-rumble/index.js";
+import { aceAlleyPlugin } from "./ace-alley/index.js";
+import { sevenStreakPlugin } from "./seven-streak/index.js";
+import { pipPyramidPlugin } from "./pip-pyramid/index.js";
+import { redRiverPlugin } from "./red-river/index.js";
+import { blackBridgePlugin } from "./black-bridge/index.js";
+import { luckySixPlugin } from "./lucky-six/index.js";
+import { crapsLightPlugin } from "./craps-light/index.js";
+import { yahtzeeMiniPlugin } from "./yahtzee-mini/index.js";
+import { diceDuelPlugin } from "./dice-duel/index.js";
+import { snakeEyesHuntPlugin } from "./snake-eyes-hunt/index.js";
+import { juiceJamboreePlugin } from "./juice-jamboree/index.js";
+import { cocoaCascadePlugin } from "./cocoa-cascade/index.js";
+import { frappeFlipPlugin } from "./frappe-flip/index.js";
+import { latteLeapPlugin } from "./latte-leap/index.js";
+import { mochaMarchPlugin } from "./mocha-march/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -2541,4 +2576,39 @@ export const GAMES: GamePlugin[] = [
   radishRushPlugin as unknown as GamePlugin,
   salamiSlicePlugin as unknown as GamePlugin,
   tangerineTossPlugin as unknown as GamePlugin,
+  greekMythQuizPlugin as unknown as GamePlugin,
+  norseMythQuizPlugin as unknown as GamePlugin,
+  egyptianMythQuizPlugin as unknown as GamePlugin,
+  celticMythQuizPlugin as unknown as GamePlugin,
+  hinduMythQuizPlugin as unknown as GamePlugin,
+  buddhismQuizPlugin as unknown as GamePlugin,
+  worldReligionsQuizPlugin as unknown as GamePlugin,
+  easternPhilosophyQuizPlugin as unknown as GamePlugin,
+  westernPhilosophyQuizPlugin as unknown as GamePlugin,
+  ethicsQuizPlugin as unknown as GamePlugin,
+  nbaLegendsQuizPlugin as unknown as GamePlugin,
+  nflLegendsQuizPlugin as unknown as GamePlugin,
+  mlbLegendsQuizPlugin as unknown as GamePlugin,
+  soccerStarsQuizPlugin as unknown as GamePlugin,
+  tennisGreatsQuizPlugin as unknown as GamePlugin,
+  boxingLegendsQuizPlugin as unknown as GamePlugin,
+  olympicQuizPlugin as unknown as GamePlugin,
+  golfGreatsQuizPlugin as unknown as GamePlugin,
+  triadTowerPlugin as unknown as GamePlugin,
+  royalRumblePlugin as unknown as GamePlugin,
+  aceAlleyPlugin as unknown as GamePlugin,
+  sevenStreakPlugin as unknown as GamePlugin,
+  pipPyramidPlugin as unknown as GamePlugin,
+  redRiverPlugin as unknown as GamePlugin,
+  blackBridgePlugin as unknown as GamePlugin,
+  luckySixPlugin as unknown as GamePlugin,
+  crapsLightPlugin as unknown as GamePlugin,
+  yahtzeeMiniPlugin as unknown as GamePlugin,
+  diceDuelPlugin as unknown as GamePlugin,
+  snakeEyesHuntPlugin as unknown as GamePlugin,
+  juiceJamboreePlugin as unknown as GamePlugin,
+  cocoaCascadePlugin as unknown as GamePlugin,
+  frappeFlipPlugin as unknown as GamePlugin,
+  latteLeapPlugin as unknown as GamePlugin,
+  mochaMarchPlugin as unknown as GamePlugin,
 ];
