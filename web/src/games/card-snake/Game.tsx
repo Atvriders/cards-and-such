@@ -1,0 +1,25 @@
+import { useEffect } from "react";
+import type { GameProps } from "../../platform/game-plugin/types.js";
+import type { CardSnakeState, CardSnakeAction, CardSnakeSettings } from "./state.js";
+import { isTerminal, cardName, isRed, TOTAL_DRAWS } from "./state.js";
+import "./Game.css";
+
+export function CardSnakeGame({ state, dispatch, onGameOver }: GameProps<CardSnakeState, CardSnakeSettings>): JSX.Element {
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  if (state.phase === "done") {
+    return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><div>Best snake: {state.bestRun}</div><div className="cm-final">{state.score} pts</div></div></div>;
+  }
+  const last = state.drawn[state.drawn.length - 1];
+  return (
+    <div className="cm-wrap">
+      <div className="cm-info">Draw {state.draws} / {TOTAL_DRAWS} — Run: {state.currentRun} — Best: {state.bestRun}</div>
+      {last !== undefined && (
+        <div className="cm-row">
+          <div className={`cm-card ${isRed(last) ? "red" : "black"}`}>{cardName(last)}</div>
+        </div>
+      )}
+      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSnakeAction)}>Draw</button>
+    </div>
+  );
+}

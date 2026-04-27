@@ -1549,6 +1549,41 @@ import { weedWhackPlugin } from "./weed-whack/index.js";
 import { seedSprinklePlugin } from "./seed-sprinkle/index.js";
 import { beeBuzzPlugin } from "./bee-buzz/index.js";
 import { butterflyNetPlugin } from "./butterfly-net/index.js";
+import { carBrandsQuizPlugin } from "./car-brands-quiz/index.js";
+import { techBrandsQuizPlugin } from "./tech-brands-quiz/index.js";
+import { fashionBrandsQuizPlugin } from "./fashion-brands-quiz/index.js";
+import { sodaBrandsQuizPlugin } from "./soda-brands-quiz/index.js";
+import { sneakerBrandsQuizPlugin } from "./sneaker-brands-quiz/index.js";
+import { airlineBrandsQuizPlugin } from "./airline-brands-quiz/index.js";
+import { bankBrandsQuizPlugin } from "./bank-brands-quiz/index.js";
+import { cerealBrandsQuizPlugin } from "./cereal-brands-quiz/index.js";
+import { fastFoodBrandsQuizPlugin } from "./fast-food-brands-quiz/index.js";
+import { cosmeticBrandsQuizPlugin } from "./cosmetic-brands-quiz/index.js";
+import { usPresidentsQuizPlugin } from "./us-presidents-quiz/index.js";
+import { britishMonarchsQuizPlugin } from "./british-monarchs-quiz/index.js";
+import { worldDictatorsQuizPlugin } from "./world-dictators-quiz/index.js";
+import { nobelLaureatesQuizPlugin } from "./nobel-laureates-quiz/index.js";
+import { inventorsQuizPlugin } from "./inventors-quiz/index.js";
+import { nasaAstronautsQuizPlugin } from "./nasa-astronauts-quiz/index.js";
+import { entrepreneursQuizPlugin } from "./entrepreneurs-quiz/index.js";
+import { civilRightsQuizPlugin } from "./civil-rights-quiz/index.js";
+import { redKingPlugin } from "./red-king/index.js";
+import { blackKingPlugin } from "./black-king/index.js";
+import { redQueenPlugin } from "./red-queen/index.js";
+import { blackQueenPlugin } from "./black-queen/index.js";
+import { fourColorFlushPlugin } from "./four-color-flush/index.js";
+import { cardSnakePlugin } from "./card-snake/index.js";
+import { cardLadderPlugin } from "./card-ladder/index.js";
+import { diceShootPlugin } from "./dice-shoot/index.js";
+import { diceMirrorPlugin } from "./dice-mirror/index.js";
+import { diceStairPlugin } from "./dice-stair/index.js";
+import { diceRainbowPlugin } from "./dice-rainbow/index.js";
+import { diceFortunePlugin } from "./dice-fortune/index.js";
+import { frogFlickPlugin } from "./frog-flick/index.js";
+import { antAttackPlugin } from "./ant-attack/index.js";
+import { mouseMashPlugin } from "./mouse-mash/index.js";
+import { bunnyBouncePlugin } from "./bunny-bounce/index.js";
+import { chickChasePlugin } from "./chick-chase/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3101,4 +3136,39 @@ export const GAMES: GamePlugin[] = [
   seedSprinklePlugin as unknown as GamePlugin,
   beeBuzzPlugin as unknown as GamePlugin,
   butterflyNetPlugin as unknown as GamePlugin,
+  carBrandsQuizPlugin as unknown as GamePlugin,
+  techBrandsQuizPlugin as unknown as GamePlugin,
+  fashionBrandsQuizPlugin as unknown as GamePlugin,
+  sodaBrandsQuizPlugin as unknown as GamePlugin,
+  sneakerBrandsQuizPlugin as unknown as GamePlugin,
+  airlineBrandsQuizPlugin as unknown as GamePlugin,
+  bankBrandsQuizPlugin as unknown as GamePlugin,
+  cerealBrandsQuizPlugin as unknown as GamePlugin,
+  fastFoodBrandsQuizPlugin as unknown as GamePlugin,
+  cosmeticBrandsQuizPlugin as unknown as GamePlugin,
+  usPresidentsQuizPlugin as unknown as GamePlugin,
+  britishMonarchsQuizPlugin as unknown as GamePlugin,
+  worldDictatorsQuizPlugin as unknown as GamePlugin,
+  nobelLaureatesQuizPlugin as unknown as GamePlugin,
+  inventorsQuizPlugin as unknown as GamePlugin,
+  nasaAstronautsQuizPlugin as unknown as GamePlugin,
+  entrepreneursQuizPlugin as unknown as GamePlugin,
+  civilRightsQuizPlugin as unknown as GamePlugin,
+  redKingPlugin as unknown as GamePlugin,
+  blackKingPlugin as unknown as GamePlugin,
+  redQueenPlugin as unknown as GamePlugin,
+  blackQueenPlugin as unknown as GamePlugin,
+  fourColorFlushPlugin as unknown as GamePlugin,
+  cardSnakePlugin as unknown as GamePlugin,
+  cardLadderPlugin as unknown as GamePlugin,
+  diceShootPlugin as unknown as GamePlugin,
+  diceMirrorPlugin as unknown as GamePlugin,
+  diceStairPlugin as unknown as GamePlugin,
+  diceRainbowPlugin as unknown as GamePlugin,
+  diceFortunePlugin as unknown as GamePlugin,
+  frogFlickPlugin as unknown as GamePlugin,
+  antAttackPlugin as unknown as GamePlugin,
+  mouseMashPlugin as unknown as GamePlugin,
+  bunnyBouncePlugin as unknown as GamePlugin,
+  chickChasePlugin as unknown as GamePlugin,
 ];
