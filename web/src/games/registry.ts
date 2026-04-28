@@ -1936,6 +1936,41 @@ import { mangoTapPlugin } from "./mango-tap/index.js";
 import { pineapplePopPlugin } from "./pineapple-pop/index.js";
 import { palmFrondPlugin } from "./palm-frond/index.js";
 import { surfSpikePlugin } from "./surf-spike/index.js";
+import { snlQuizPlugin } from "./snl-quiz/index.js";
+import { montyPythonQuizPlugin } from "./monty-python-quiz/index.js";
+import { melBrooksQuizPlugin } from "./mel-brooks-quiz/index.js";
+import { mrBeanQuizPlugin } from "./mr-bean-quiz/index.js";
+import { jimCarreyQuizPlugin } from "./jim-carrey-quiz/index.js";
+import { adamSandlerQuizPlugin } from "./adam-sandler-quiz/index.js";
+import { willFerrellQuizPlugin } from "./will-ferrell-quiz/index.js";
+import { comedyCentralQuizPlugin } from "./comedy-central-quiz/index.js";
+import { britishComedyQuizPlugin } from "./british-comedy-quiz/index.js";
+import { standUpComedyQuizPlugin } from "./stand-up-comedy-quiz/index.js";
+import { kubrickQuizPlugin } from "./kubrick-quiz/index.js";
+import { tarantinoQuizPlugin } from "./tarantino-quiz/index.js";
+import { nolanQuizPlugin } from "./nolan-quiz/index.js";
+import { scorseseQuizPlugin } from "./scorsese-quiz/index.js";
+import { coppolaQuizPlugin } from "./coppola-quiz/index.js";
+import { spielbergQuizPlugin } from "./spielberg-quiz/index.js";
+import { hitchcockQuizPlugin } from "./hitchcock-quiz/index.js";
+import { kurosawaQuizPlugin } from "./kurosawa-quiz/index.js";
+import { cardMountainPlugin } from "./card-mountain/index.js";
+import { cardRiverPlugin } from "./card-river/index.js";
+import { cardIslandPlugin } from "./card-island/index.js";
+import { cardStormMiniPlugin } from "./card-storm-mini/index.js";
+import { cardCanyonPlugin } from "./card-canyon/index.js";
+import { cardBridgeBuildPlugin } from "./card-bridge-build/index.js";
+import { cardCastleBuildPlugin } from "./card-castle-build/index.js";
+import { diceBazaarPlugin } from "./dice-bazaar/index.js";
+import { diceMuseumPlugin } from "./dice-museum/index.js";
+import { diceCourtroomPlugin } from "./dice-courtroom/index.js";
+import { diceLaboratoryPlugin } from "./dice-laboratory/index.js";
+import { diceArenaPlugin } from "./dice-arena/index.js";
+import { starSnapPlugin } from "./star-snap/index.js";
+import { cometCatchPlugin } from "./comet-catch/index.js";
+import { nebulaNudgePlugin } from "./nebula-nudge/index.js";
+import { planetPopPlugin } from "./planet-pop/index.js";
+import { meteorBashPlugin } from "./meteor-bash/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -3873,4 +3908,39 @@ export const GAMES: GamePlugin[] = [
   pineapplePopPlugin as unknown as GamePlugin,
   palmFrondPlugin as unknown as GamePlugin,
   surfSpikePlugin as unknown as GamePlugin,
+  snlQuizPlugin as unknown as GamePlugin,
+  montyPythonQuizPlugin as unknown as GamePlugin,
+  melBrooksQuizPlugin as unknown as GamePlugin,
+  mrBeanQuizPlugin as unknown as GamePlugin,
+  jimCarreyQuizPlugin as unknown as GamePlugin,
+  adamSandlerQuizPlugin as unknown as GamePlugin,
+  willFerrellQuizPlugin as unknown as GamePlugin,
+  comedyCentralQuizPlugin as unknown as GamePlugin,
+  britishComedyQuizPlugin as unknown as GamePlugin,
+  standUpComedyQuizPlugin as unknown as GamePlugin,
+  kubrickQuizPlugin as unknown as GamePlugin,
+  tarantinoQuizPlugin as unknown as GamePlugin,
+  nolanQuizPlugin as unknown as GamePlugin,
+  scorseseQuizPlugin as unknown as GamePlugin,
+  coppolaQuizPlugin as unknown as GamePlugin,
+  spielbergQuizPlugin as unknown as GamePlugin,
+  hitchcockQuizPlugin as unknown as GamePlugin,
+  kurosawaQuizPlugin as unknown as GamePlugin,
+  cardMountainPlugin as unknown as GamePlugin,
+  cardRiverPlugin as unknown as GamePlugin,
+  cardIslandPlugin as unknown as GamePlugin,
+  cardStormMiniPlugin as unknown as GamePlugin,
+  cardCanyonPlugin as unknown as GamePlugin,
+  cardBridgeBuildPlugin as unknown as GamePlugin,
+  cardCastleBuildPlugin as unknown as GamePlugin,
+  diceBazaarPlugin as unknown as GamePlugin,
+  diceMuseumPlugin as unknown as GamePlugin,
+  diceCourtroomPlugin as unknown as GamePlugin,
+  diceLaboratoryPlugin as unknown as GamePlugin,
+  diceArenaPlugin as unknown as GamePlugin,
+  starSnapPlugin as unknown as GamePlugin,
+  cometCatchPlugin as unknown as GamePlugin,
+  nebulaNudgePlugin as unknown as GamePlugin,
+  planetPopPlugin as unknown as GamePlugin,
+  meteorBashPlugin as unknown as GamePlugin,
 ];
