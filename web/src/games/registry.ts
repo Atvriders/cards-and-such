@@ -1759,6 +1759,35 @@ import { pumpkinPopPlugin } from "./pumpkin-pop/index.js";
 import { sparklerSnagPlugin } from "./sparkler-snag/index.js";
 import { confettiCatchPlugin } from "./confetti-catch/index.js";
 import { lanternLiftPlugin } from "./lantern-lift/index.js";
+import { ticTacToeBlitzPlugin } from "./tic-tac-toe-blitz/index.js";
+import { connectFourMiniPlugin } from "./connect-four-mini/index.js";
+import { nimGamePlugin } from "./nim-game/index.js";
+import { eightQueensMiniPlugin } from "./eight-queens-mini/index.js";
+import { worldCupQuizPlugin } from "./world-cup-quiz/index.js";
+import { superBowlQuizPlugin } from "./super-bowl-quiz/index.js";
+import { ncaaBasketballQuizPlugin } from "./ncaa-basketball-quiz/index.js";
+import { worldSeriesQuizPlugin } from "./world-series-quiz/index.js";
+import { stanleyCupQuizPlugin } from "./stanley-cup-quiz/index.js";
+import { wimbledonQuizPlugin } from "./wimbledon-quiz/index.js";
+import { kentuckyDerbyQuizPlugin } from "./kentucky-derby-quiz/index.js";
+import { daytona500QuizPlugin } from "./daytona-500-quiz/index.js";
+import { cardBingoPlugin } from "./card-bingo/index.js";
+import { cardTracePlugin } from "./card-trace/index.js";
+import { cardRoulettePlugin } from "./card-roulette/index.js";
+import { cardPaddlePlugin } from "./card-paddle/index.js";
+import { cardTowerFallPlugin } from "./card-tower-fall/index.js";
+import { cardFishingPlugin } from "./card-fishing/index.js";
+import { cardShootoutPlugin } from "./card-shootout/index.js";
+import { diceShrinePlugin } from "./dice-shrine/index.js";
+import { diceStormPlugin } from "./dice-storm/index.js";
+import { diceQuestPlugin } from "./dice-quest/index.js";
+import { diceBullseyePlugin } from "./dice-bullseye/index.js";
+import { diceTournamentPlugin } from "./dice-tournament/index.js";
+import { ufoUplinkPlugin } from "./ufo-uplink/index.js";
+import { asteroidAimPlugin } from "./asteroid-aim/index.js";
+import { robotRescuePlugin } from "./robot-rescue/index.js";
+import { rocketRumblePlugin } from "./rocket-rumble/index.js";
+import { laserLockPlugin } from "./laser-lock/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3521,4 +3550,33 @@ export const GAMES: GamePlugin[] = [
   sparklerSnagPlugin as unknown as GamePlugin,
   confettiCatchPlugin as unknown as GamePlugin,
   lanternLiftPlugin as unknown as GamePlugin,
+  ticTacToeBlitzPlugin as unknown as GamePlugin,
+  connectFourMiniPlugin as unknown as GamePlugin,
+  nimGamePlugin as unknown as GamePlugin,
+  eightQueensMiniPlugin as unknown as GamePlugin,
+  worldCupQuizPlugin as unknown as GamePlugin,
+  superBowlQuizPlugin as unknown as GamePlugin,
+  ncaaBasketballQuizPlugin as unknown as GamePlugin,
+  worldSeriesQuizPlugin as unknown as GamePlugin,
+  stanleyCupQuizPlugin as unknown as GamePlugin,
+  wimbledonQuizPlugin as unknown as GamePlugin,
+  kentuckyDerbyQuizPlugin as unknown as GamePlugin,
+  daytona500QuizPlugin as unknown as GamePlugin,
+  cardBingoPlugin as unknown as GamePlugin,
+  cardTracePlugin as unknown as GamePlugin,
+  cardRoulettePlugin as unknown as GamePlugin,
+  cardPaddlePlugin as unknown as GamePlugin,
+  cardTowerFallPlugin as unknown as GamePlugin,
+  cardFishingPlugin as unknown as GamePlugin,
+  cardShootoutPlugin as unknown as GamePlugin,
+  diceShrinePlugin as unknown as GamePlugin,
+  diceStormPlugin as unknown as GamePlugin,
+  diceQuestPlugin as unknown as GamePlugin,
+  diceBullseyePlugin as unknown as GamePlugin,
+  diceTournamentPlugin as unknown as GamePlugin,
+  ufoUplinkPlugin as unknown as GamePlugin,
+  asteroidAimPlugin as unknown as GamePlugin,
+  robotRescuePlugin as unknown as GamePlugin,
+  rocketRumblePlugin as unknown as GamePlugin,
+  laserLockPlugin as unknown as GamePlugin,
 ];

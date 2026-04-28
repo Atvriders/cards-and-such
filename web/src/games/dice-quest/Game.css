@@ -1,0 +1,14 @@
+.rg-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.rg-info { font-size:0.95rem; color:#555; }
+.rg-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.rg-display { font-size:2rem; font-weight:900; padding:16px 28px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; min-width:160px; color:#2c3e50; }
+.rg-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.rg-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.rg-btn:hover:not(:disabled) { background:#2980b9; }
+.rg-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.rg-btn.alt { background:#e67e22; }
+.rg-btn.alt:hover { background:#ca6f1e; }
+.rg-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
+.rg-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.rg-done h2 { margin:0 0 8px; }
+.rg-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
