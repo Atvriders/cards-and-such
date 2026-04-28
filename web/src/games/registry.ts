@@ -2365,6 +2365,41 @@ import { latinSquareMiniPlugin } from "./latin-square-mini/index.js";
 import { kurodokoPlugin } from "./kurodoko/index.js";
 import { sashiganePlugin } from "./sashigane/index.js";
 import { fobidoshiPlugin } from "./fobidoshi/index.js";
+import { koiKoiPlugin } from "./koi-koi-quiz/index.js";
+import { hachiHachiPlugin } from "./hachi-hachi-quiz/index.js";
+import { hanaAwasePlugin } from "./hana-awase-quiz/index.js";
+import { mushifudaPlugin } from "./mushifuda-quiz/index.js";
+import { sakuraPlugin } from "./sakura-quiz/index.js";
+import { goStopPlugin } from "./go-stop-quiz/index.js";
+import { hwatuPlugin } from "./hwatu-quiz/index.js";
+import { irohaKarutaPlugin } from "./iroha-karuta-quiz/index.js";
+import { hyakuninIsshuPlugin } from "./hyakunin-isshu-quiz/index.js";
+import { utaGarutaPlugin } from "./uta-garuta-quiz/index.js";
+import { obakeKarutaPlugin } from "./obake-karuta-quiz/index.js";
+import { kyogiKarutaPlugin } from "./kyogi-karuta-quiz/index.js";
+import { captureGoPlugin } from "./capture-go-quiz/index.js";
+import { ponnukiGoPlugin } from "./ponnuki-go-quiz/index.js";
+import { tozanGoPlugin } from "./tozan-go-quiz/index.js";
+import { badukPlugin } from "./baduk-quiz/index.js";
+import { renjuPlugin } from "./renju-quiz/index.js";
+import { omokPlugin } from "./omok-quiz/index.js";
+import { ninukiRenjuPlugin } from "./ninuki-renju-quiz/index.js";
+import { gonuPlugin } from "./gonu-quiz/index.js";
+import { yutNoriPlugin } from "./yut-nori-quiz/index.js";
+import { ddakjiPlugin } from "./ddakji-quiz/index.js";
+import { tamCucPlugin } from "./tam-cuc-quiz/index.js";
+import { phanPlugin } from "./phan-quiz/index.js";
+import { riichiMahjongPlugin } from "./riichi-mahjong-quiz/index.js";
+import { taiwaneseMahjongPlugin } from "./taiwanese-mahjong-quiz/index.js";
+import { cantoneseMahjongPlugin } from "./cantonese-mahjong-quiz/index.js";
+import { singaporeMahjongPlugin } from "./singapore-mahjong-quiz/index.js";
+import { mcrMahjongPlugin } from "./mcr-mahjong-quiz/index.js";
+import { hasamiShogiPlugin } from "./hasami-shogi-quiz/index.js";
+import { chuShogiPlugin } from "./chu-shogi-quiz/index.js";
+import { douDiZhuPlugin } from "./dou-di-zhu-quiz/index.js";
+import { seotdaPlugin } from "./seotda-quiz/index.js";
+import { sutdaPlugin } from "./sutda-quiz/index.js";
+import { hanamikojiPlugin } from "./hanamikoji-quiz/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4731,4 +4766,39 @@ export const GAMES: GamePlugin[] = [
   kurodokoPlugin as unknown as GamePlugin,
   sashiganePlugin as unknown as GamePlugin,
   fobidoshiPlugin as unknown as GamePlugin,
+  koiKoiPlugin as unknown as GamePlugin,
+  hachiHachiPlugin as unknown as GamePlugin,
+  hanaAwasePlugin as unknown as GamePlugin,
+  mushifudaPlugin as unknown as GamePlugin,
+  sakuraPlugin as unknown as GamePlugin,
+  goStopPlugin as unknown as GamePlugin,
+  hwatuPlugin as unknown as GamePlugin,
+  irohaKarutaPlugin as unknown as GamePlugin,
+  hyakuninIsshuPlugin as unknown as GamePlugin,
+  utaGarutaPlugin as unknown as GamePlugin,
+  obakeKarutaPlugin as unknown as GamePlugin,
+  kyogiKarutaPlugin as unknown as GamePlugin,
+  captureGoPlugin as unknown as GamePlugin,
+  ponnukiGoPlugin as unknown as GamePlugin,
+  tozanGoPlugin as unknown as GamePlugin,
+  badukPlugin as unknown as GamePlugin,
+  renjuPlugin as unknown as GamePlugin,
+  omokPlugin as unknown as GamePlugin,
+  ninukiRenjuPlugin as unknown as GamePlugin,
+  gonuPlugin as unknown as GamePlugin,
+  yutNoriPlugin as unknown as GamePlugin,
+  ddakjiPlugin as unknown as GamePlugin,
+  tamCucPlugin as unknown as GamePlugin,
+  phanPlugin as unknown as GamePlugin,
+  riichiMahjongPlugin as unknown as GamePlugin,
+  taiwaneseMahjongPlugin as unknown as GamePlugin,
+  cantoneseMahjongPlugin as unknown as GamePlugin,
+  singaporeMahjongPlugin as unknown as GamePlugin,
+  mcrMahjongPlugin as unknown as GamePlugin,
+  hasamiShogiPlugin as unknown as GamePlugin,
+  chuShogiPlugin as unknown as GamePlugin,
+  douDiZhuPlugin as unknown as GamePlugin,
+  seotdaPlugin as unknown as GamePlugin,
+  sutdaPlugin as unknown as GamePlugin,
+  hanamikojiPlugin as unknown as GamePlugin,
 ];
