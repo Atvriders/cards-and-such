@@ -2470,6 +2470,41 @@ import { harvestDiceGardenPlugin } from "./harvest-dice-garden/index.js";
 import { secondChanceGridPlugin } from "./second-chance-grid/index.js";
 import { nochMalCrossPlugin } from "./noch-mal-cross/index.js";
 import { pointsSaladRollPlugin } from "./points-salad-roll/index.js";
+import { wordleMiniPlugin } from "./wordle-mini/index.js";
+import { dordleMiniPlugin } from "./dordle-mini/index.js";
+import { octordleMiniPlugin } from "./octordle-mini/index.js";
+import { sedecordleMiniPlugin } from "./sedecordle-mini/index.js";
+import { duotrigordlePlugin } from "./duotrigordle/index.js";
+import { waffleSwapPlugin } from "./waffle-swap/index.js";
+import { nerdleEquationPlugin } from "./nerdle-equation/index.js";
+import { worldleCountryPlugin } from "./worldle-country/index.js";
+import { globleCountryPlugin } from "./globle-country/index.js";
+import { semantleCluePlugin } from "./semantle-clue/index.js";
+import { contextoCluePlugin } from "./contexto-clue/index.js";
+import { absurdleMiniPlugin } from "./absurdle-mini/index.js";
+import { squardleMiniPlugin } from "./squardle-mini/index.js";
+import { crosswordleMiniPlugin } from "./crosswordle-mini/index.js";
+import { typeshiftMiniPlugin } from "./typeshift-mini/index.js";
+import { spelltowerMiniPlugin } from "./spelltower-mini/index.js";
+import { alphabearMiniPlugin } from "./alphabear-mini/index.js";
+import { wordamentMiniPlugin } from "./wordament-mini/index.js";
+import { ruzzleMiniPlugin } from "./ruzzle-mini/index.js";
+import { wordCookiesPlugin } from "./word-cookies/index.js";
+import { wordscapesMiniPlugin } from "./wordscapes-mini/index.js";
+import { bonzaJigsawPlugin } from "./bonza-jigsaw/index.js";
+import { shiritoriChainPlugin } from "./shiritori-chain/index.js";
+import { kelimelikMiniPlugin } from "./kelimelik-mini/index.js";
+import { eruditMiniPlugin } from "./erudit-mini/index.js";
+import { quiddlerMiniPlugin } from "./quiddler-mini/index.js";
+import { dabbleWordsPlugin } from "./dabble-words/index.js";
+import { tappleLettersPlugin } from "./tapple-letters/index.js";
+import { blurbleShoutPlugin } from "./blurble-shout/index.js";
+import { lastLetterChainPlugin } from "./last-letter-chain/index.js";
+import { wordBingoMiniPlugin } from "./word-bingo-mini/index.js";
+import { tribondCluePlugin } from "./tribond-clue/index.js";
+import { catchphraseCluePlugin } from "./catchphrase-clue/index.js";
+import { textTwistMiniPlugin } from "./text-twist-mini/index.js";
+import { anagramMagicPlugin } from "./anagram-magic/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4941,4 +4976,39 @@ export const GAMES: GamePlugin[] = [
   secondChanceGridPlugin as unknown as GamePlugin,
   nochMalCrossPlugin as unknown as GamePlugin,
   pointsSaladRollPlugin as unknown as GamePlugin,
+  wordleMiniPlugin as unknown as GamePlugin,
+  dordleMiniPlugin as unknown as GamePlugin,
+  octordleMiniPlugin as unknown as GamePlugin,
+  sedecordleMiniPlugin as unknown as GamePlugin,
+  duotrigordlePlugin as unknown as GamePlugin,
+  waffleSwapPlugin as unknown as GamePlugin,
+  nerdleEquationPlugin as unknown as GamePlugin,
+  worldleCountryPlugin as unknown as GamePlugin,
+  globleCountryPlugin as unknown as GamePlugin,
+  semantleCluePlugin as unknown as GamePlugin,
+  contextoCluePlugin as unknown as GamePlugin,
+  absurdleMiniPlugin as unknown as GamePlugin,
+  squardleMiniPlugin as unknown as GamePlugin,
+  crosswordleMiniPlugin as unknown as GamePlugin,
+  typeshiftMiniPlugin as unknown as GamePlugin,
+  spelltowerMiniPlugin as unknown as GamePlugin,
+  alphabearMiniPlugin as unknown as GamePlugin,
+  wordamentMiniPlugin as unknown as GamePlugin,
+  ruzzleMiniPlugin as unknown as GamePlugin,
+  wordCookiesPlugin as unknown as GamePlugin,
+  wordscapesMiniPlugin as unknown as GamePlugin,
+  bonzaJigsawPlugin as unknown as GamePlugin,
+  shiritoriChainPlugin as unknown as GamePlugin,
+  kelimelikMiniPlugin as unknown as GamePlugin,
+  eruditMiniPlugin as unknown as GamePlugin,
+  quiddlerMiniPlugin as unknown as GamePlugin,
+  dabbleWordsPlugin as unknown as GamePlugin,
+  tappleLettersPlugin as unknown as GamePlugin,
+  blurbleShoutPlugin as unknown as GamePlugin,
+  lastLetterChainPlugin as unknown as GamePlugin,
+  wordBingoMiniPlugin as unknown as GamePlugin,
+  tribondCluePlugin as unknown as GamePlugin,
+  catchphraseCluePlugin as unknown as GamePlugin,
+  textTwistMiniPlugin as unknown as GamePlugin,
+  anagramMagicPlugin as unknown as GamePlugin,
 ];
