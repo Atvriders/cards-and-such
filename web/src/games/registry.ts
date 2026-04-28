@@ -2435,6 +2435,41 @@ import { diceThroneBattlePlugin } from "./dice-throne-battle/index.js";
 import { dungeonFighterThrowPlugin } from "./dungeon-fighter-throw/index.js";
 import { seasonsElementalPlugin } from "./seasons-elemental/index.js";
 import { sagradaWindowPlugin } from "./sagrada-window/index.js";
+import { carcassonneBasePlugin } from "./carcassonne-base/index.js";
+import { kingdominoBasePlugin } from "./kingdomino-base/index.js";
+import { queendominoBasePlugin } from "./queendomino-base/index.js";
+import { kingdominoOriginsPlugin } from "./kingdomino-origins/index.js";
+import { isleOfSkyePlugin } from "./isle-of-skye/index.js";
+import { honshuBasePlugin } from "./honshu/index.js";
+import { patchworkBasePlugin } from "./patchwork-base/index.js";
+import { barenparkBasePlugin } from "./barenpark-base/index.js";
+import { azulBasePlugin } from "./azul-base/index.js";
+import { azulSummerPavilionPlugin } from "./azul-summer-pavilion/index.js";
+import { tokaidoBasePlugin } from "./tokaido-base/index.js";
+import { nmbr9StackPlugin } from "./nmbr9-stack/index.js";
+import { tinyTownsGridPlugin } from "./tiny-towns-grid/index.js";
+import { cascadiaHabitatPlugin } from "./cascadia-habitat/index.js";
+import { calicoQuiltPlugin } from "./calico-quilt/index.js";
+import { karubaExplorerPlugin } from "./karuba-explorer/index.js";
+import { hiveQueenPlugin } from "./hive-queen/index.js";
+import { qwixxDeluxePlugin } from "./qwixx-deluxe/index.js";
+import { qwixxGemixxtPlugin } from "./qwixx-gemixxt/index.js";
+import { railroadInkBluePlugin } from "./railroad-ink-blue/index.js";
+import { railroadInkRedPlugin } from "./railroad-ink-red/index.js";
+import { welcomeToSuburbPlugin } from "./welcome-to-suburb/index.js";
+import { cartographersBasePlugin } from "./cartographers-base/index.js";
+import { rollingAmericaPlugin } from "./rolling-america/index.js";
+import { silverAndGoldPlugin } from "./silver-and-gold/index.js";
+import { cleverDicePlugin } from "./clever-dice/index.js";
+import { onTourRoadsPlugin } from "./on-tour-roads/index.js";
+import { corinthMarketPlugin } from "./corinth-market/index.js";
+import { threeSistersGardenPlugin } from "./three-sisters-garden/index.js";
+import { hadriansWallRomanPlugin } from "./hadrians-wall-roman/index.js";
+import { trek12HimalayaPlugin } from "./trek-12-himalaya/index.js";
+import { harvestDiceGardenPlugin } from "./harvest-dice-garden/index.js";
+import { secondChanceGridPlugin } from "./second-chance-grid/index.js";
+import { nochMalCrossPlugin } from "./noch-mal-cross/index.js";
+import { pointsSaladRollPlugin } from "./points-salad-roll/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4871,4 +4906,39 @@ export const GAMES: GamePlugin[] = [
   dungeonFighterThrowPlugin as unknown as GamePlugin,
   seasonsElementalPlugin as unknown as GamePlugin,
   sagradaWindowPlugin as unknown as GamePlugin,
+  carcassonneBasePlugin as unknown as GamePlugin,
+  kingdominoBasePlugin as unknown as GamePlugin,
+  queendominoBasePlugin as unknown as GamePlugin,
+  kingdominoOriginsPlugin as unknown as GamePlugin,
+  isleOfSkyePlugin as unknown as GamePlugin,
+  honshuBasePlugin as unknown as GamePlugin,
+  patchworkBasePlugin as unknown as GamePlugin,
+  barenparkBasePlugin as unknown as GamePlugin,
+  azulBasePlugin as unknown as GamePlugin,
+  azulSummerPavilionPlugin as unknown as GamePlugin,
+  tokaidoBasePlugin as unknown as GamePlugin,
+  nmbr9StackPlugin as unknown as GamePlugin,
+  tinyTownsGridPlugin as unknown as GamePlugin,
+  cascadiaHabitatPlugin as unknown as GamePlugin,
+  calicoQuiltPlugin as unknown as GamePlugin,
+  karubaExplorerPlugin as unknown as GamePlugin,
+  hiveQueenPlugin as unknown as GamePlugin,
+  qwixxDeluxePlugin as unknown as GamePlugin,
+  qwixxGemixxtPlugin as unknown as GamePlugin,
+  railroadInkBluePlugin as unknown as GamePlugin,
+  railroadInkRedPlugin as unknown as GamePlugin,
+  welcomeToSuburbPlugin as unknown as GamePlugin,
+  cartographersBasePlugin as unknown as GamePlugin,
+  rollingAmericaPlugin as unknown as GamePlugin,
+  silverAndGoldPlugin as unknown as GamePlugin,
+  cleverDicePlugin as unknown as GamePlugin,
+  onTourRoadsPlugin as unknown as GamePlugin,
+  corinthMarketPlugin as unknown as GamePlugin,
+  threeSistersGardenPlugin as unknown as GamePlugin,
+  hadriansWallRomanPlugin as unknown as GamePlugin,
+  trek12HimalayaPlugin as unknown as GamePlugin,
+  harvestDiceGardenPlugin as unknown as GamePlugin,
+  secondChanceGridPlugin as unknown as GamePlugin,
+  nochMalCrossPlugin as unknown as GamePlugin,
+  pointsSaladRollPlugin as unknown as GamePlugin,
 ];
