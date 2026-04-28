@@ -2715,6 +2715,41 @@ import { endlessWhackMolePlugin } from "./endless-whack-mole/index.js";
 import { endlessCatchPlugin } from "./endless-catch/index.js";
 import { endlessTapCountPlugin } from "./endless-tap-count/index.js";
 import { laneDefenderMiniPlugin } from "./lane-defender-mini/index.js";
+import { telestrationsQuizPlugin } from "./telestrations-quiz/index.js";
+import { reverseCharadesQuizPlugin } from "./reverse-charades-quiz/index.js";
+import { trivialPursuitEightiesQuizPlugin } from "./trivial-pursuit-eighties-quiz/index.js";
+import { applesToApplesQuizPlugin } from "./apples-to-apples-quiz/index.js";
+import { monikersQuizPlugin } from "./monikers-quiz/index.js";
+import { fibbageQuizPlugin } from "./fibbage-quiz/index.js";
+import { drawfulQuizPlugin } from "./drawful-quiz/index.js";
+import { quiplashQuizPlugin } from "./quiplash-quiz/index.js";
+import { dixitQuizPlugin } from "./dixit-quiz/index.js";
+import { witsWagersQuizPlugin } from "./wits-wagers-quiz/index.js";
+import { crewDeepSeaCoopPlugin } from "./crew-deep-sea-coop/index.js";
+import { forbiddenIslandCoopPlugin } from "./forbidden-island-coop/index.js";
+import { forbiddenDesertCoopPlugin } from "./forbidden-desert-coop/index.js";
+import { forbiddenSkyCoopPlugin } from "./forbidden-sky-coop/index.js";
+import { spiritIslandCoopPlugin } from "./spirit-island-coop/index.js";
+import { arkhamLcgCoopPlugin } from "./arkham-lcg-coop/index.js";
+import { lotrLcgCoopPlugin } from "./lotr-lcg-coop/index.js";
+import { marvelChampionsCoopPlugin } from "./marvel-champions-coop/index.js";
+import { hogwartsBattleCoopPlugin } from "./hogwarts-battle-coop/index.js";
+import { aeonsEndCoopPlugin } from "./aeons-end-coop/index.js";
+import { sentinelsMultiverseCoopPlugin } from "./sentinels-multiverse-coop/index.js";
+import { magicMazeCoopPlugin } from "./magic-maze-coop/index.js";
+import { flashpointRescueCoopPlugin } from "./flashpoint-rescue-coop/index.js";
+import { ironswornVowsPlugin } from "./ironsworn-vows/index.js";
+import { starforgedSagaPlugin } from "./starforged-saga/index.js";
+import { thousandYearVampirePlugin } from "./thousand-year-vampire/index.js";
+import { forTheQueenSagaPlugin } from "./for-the-queen-saga/index.js";
+import { wretchedLogPlugin } from "./wretched-log/index.js";
+import { aloneAmongStarsTalePlugin } from "./alone-among-stars-tale/index.js";
+import { notoriousBountyPlugin } from "./notorious-bounty/index.js";
+import { apothecariaWitchPlugin } from "./apothecaria-witch/index.js";
+import { wanderhomeJourneyPlugin } from "./wanderhome-journey/index.js";
+import { quillLettersPlugin } from "./quill-letters/index.js";
+import { sigilWizardPlugin } from "./sigil-wizard/index.js";
+import { cartaExplorerPlugin } from "./carta-explorer/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5431,4 +5466,39 @@ export const GAMES: GamePlugin[] = [
   diceVolleyballPlugin as unknown as GamePlugin,
   diceSquashPlugin as unknown as GamePlugin,
   diceBadmintonPlugin as unknown as GamePlugin,
+  telestrationsQuizPlugin as unknown as GamePlugin,
+  reverseCharadesQuizPlugin as unknown as GamePlugin,
+  trivialPursuitEightiesQuizPlugin as unknown as GamePlugin,
+  applesToApplesQuizPlugin as unknown as GamePlugin,
+  monikersQuizPlugin as unknown as GamePlugin,
+  fibbageQuizPlugin as unknown as GamePlugin,
+  drawfulQuizPlugin as unknown as GamePlugin,
+  quiplashQuizPlugin as unknown as GamePlugin,
+  dixitQuizPlugin as unknown as GamePlugin,
+  witsWagersQuizPlugin as unknown as GamePlugin,
+  crewDeepSeaCoopPlugin as unknown as GamePlugin,
+  forbiddenIslandCoopPlugin as unknown as GamePlugin,
+  forbiddenDesertCoopPlugin as unknown as GamePlugin,
+  forbiddenSkyCoopPlugin as unknown as GamePlugin,
+  spiritIslandCoopPlugin as unknown as GamePlugin,
+  arkhamLcgCoopPlugin as unknown as GamePlugin,
+  lotrLcgCoopPlugin as unknown as GamePlugin,
+  marvelChampionsCoopPlugin as unknown as GamePlugin,
+  hogwartsBattleCoopPlugin as unknown as GamePlugin,
+  aeonsEndCoopPlugin as unknown as GamePlugin,
+  sentinelsMultiverseCoopPlugin as unknown as GamePlugin,
+  magicMazeCoopPlugin as unknown as GamePlugin,
+  flashpointRescueCoopPlugin as unknown as GamePlugin,
+  ironswornVowsPlugin as unknown as GamePlugin,
+  starforgedSagaPlugin as unknown as GamePlugin,
+  thousandYearVampirePlugin as unknown as GamePlugin,
+  forTheQueenSagaPlugin as unknown as GamePlugin,
+  wretchedLogPlugin as unknown as GamePlugin,
+  aloneAmongStarsTalePlugin as unknown as GamePlugin,
+  notoriousBountyPlugin as unknown as GamePlugin,
+  apothecariaWitchPlugin as unknown as GamePlugin,
+  wanderhomeJourneyPlugin as unknown as GamePlugin,
+  quillLettersPlugin as unknown as GamePlugin,
+  sigilWizardPlugin as unknown as GamePlugin,
+  cartaExplorerPlugin as unknown as GamePlugin,
 ];
