@@ -1830,6 +1830,41 @@ import { life1dPlugin } from "./life-1d/index.js";
 import { brainOfBrianPlugin } from "./brain-of-brian/index.js";
 import { monopolyMiniPlugin } from "./monopoly-mini/index.js";
 import { riskMiniPlugin } from "./risk-mini/index.js";
+import { americanCivilWarQuizPlugin } from "./american-civil-war-quiz/index.js";
+import { revolutionaryWarQuizPlugin } from "./revolutionary-war-quiz/index.js";
+import { napoleonicWarsQuizPlugin } from "./napoleonic-wars-quiz/index.js";
+import { vietnamWarQuizPlugin } from "./vietnam-war-quiz/index.js";
+import { koreanWarQuizPlugin } from "./korean-war-quiz/index.js";
+import { pacificWarQuizPlugin } from "./pacific-war-quiz/index.js";
+import { easternFrontQuizPlugin } from "./eastern-front-quiz/index.js";
+import { gulfWarQuizPlugin } from "./gulf-war-quiz/index.js";
+import { crusadesQuizPlugin } from "./crusades-quiz/index.js";
+import { q100YearsWarQuizPlugin } from "./100-years-war-quiz/index.js";
+import { discoEraQuizPlugin } from "./disco-era-quiz/index.js";
+import { grungeEraQuizPlugin } from "./grunge-era-quiz/index.js";
+import { raveEraQuizPlugin } from "./rave-era-quiz/index.js";
+import { mtvEraQuizPlugin } from "./mtv-era-quiz/index.js";
+import { streamingEraQuizPlugin } from "./streaming-era-quiz/index.js";
+import { memeEraQuizPlugin } from "./meme-era-quiz/index.js";
+import { boyBandsQuizPlugin } from "./boy-bands-quiz/index.js";
+import { girlGroupsQuizPlugin } from "./girl-groups-quiz/index.js";
+import { cardMashPlugin } from "./card-mash/index.js";
+import { cardCupPlugin } from "./card-cup/index.js";
+import { cardJamPlugin } from "./card-jam/index.js";
+import { cardSpikePlugin } from "./card-spike/index.js";
+import { cardYankPlugin } from "./card-yank/index.js";
+import { cardZipPlugin } from "./card-zip/index.js";
+import { cardFanPlugin } from "./card-fan/index.js";
+import { diceClutterPlugin } from "./dice-clutter/index.js";
+import { diceTrailPlugin } from "./dice-trail/index.js";
+import { diceBakePlugin } from "./dice-bake/index.js";
+import { diceBlockadePlugin } from "./dice-blockade/index.js";
+import { diceMysticPlugin } from "./dice-mystic/index.js";
+import { roboSnapPlugin } from "./robo-snap/index.js";
+import { mechMashPlugin } from "./mech-mash/index.js";
+import { cogClickPlugin } from "./cog-click/index.js";
+import { gearGrabPlugin } from "./gear-grab/index.js";
+import { circuitCapPlugin } from "./circuit-cap/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3663,4 +3698,39 @@ export const GAMES: GamePlugin[] = [
   brainOfBrianPlugin as unknown as GamePlugin,
   monopolyMiniPlugin as unknown as GamePlugin,
   riskMiniPlugin as unknown as GamePlugin,
+  americanCivilWarQuizPlugin as unknown as GamePlugin,
+  revolutionaryWarQuizPlugin as unknown as GamePlugin,
+  napoleonicWarsQuizPlugin as unknown as GamePlugin,
+  vietnamWarQuizPlugin as unknown as GamePlugin,
+  koreanWarQuizPlugin as unknown as GamePlugin,
+  pacificWarQuizPlugin as unknown as GamePlugin,
+  easternFrontQuizPlugin as unknown as GamePlugin,
+  gulfWarQuizPlugin as unknown as GamePlugin,
+  crusadesQuizPlugin as unknown as GamePlugin,
+  q100YearsWarQuizPlugin as unknown as GamePlugin,
+  discoEraQuizPlugin as unknown as GamePlugin,
+  grungeEraQuizPlugin as unknown as GamePlugin,
+  raveEraQuizPlugin as unknown as GamePlugin,
+  mtvEraQuizPlugin as unknown as GamePlugin,
+  streamingEraQuizPlugin as unknown as GamePlugin,
+  memeEraQuizPlugin as unknown as GamePlugin,
+  boyBandsQuizPlugin as unknown as GamePlugin,
+  girlGroupsQuizPlugin as unknown as GamePlugin,
+  cardMashPlugin as unknown as GamePlugin,
+  cardCupPlugin as unknown as GamePlugin,
+  cardJamPlugin as unknown as GamePlugin,
+  cardSpikePlugin as unknown as GamePlugin,
+  cardYankPlugin as unknown as GamePlugin,
+  cardZipPlugin as unknown as GamePlugin,
+  cardFanPlugin as unknown as GamePlugin,
+  diceClutterPlugin as unknown as GamePlugin,
+  diceTrailPlugin as unknown as GamePlugin,
+  diceBakePlugin as unknown as GamePlugin,
+  diceBlockadePlugin as unknown as GamePlugin,
+  diceMysticPlugin as unknown as GamePlugin,
+  roboSnapPlugin as unknown as GamePlugin,
+  mechMashPlugin as unknown as GamePlugin,
+  cogClickPlugin as unknown as GamePlugin,
+  gearGrabPlugin as unknown as GamePlugin,
+  circuitCapPlugin as unknown as GamePlugin,
 ];
