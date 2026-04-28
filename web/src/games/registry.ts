@@ -2190,6 +2190,41 @@ import { openFaceChinesePlugin } from "./open-face-chinese/index.js";
 import { pineappleOfcPlugin } from "./pineapple-ofc/index.js";
 import { fantasylandOfcPlugin } from "./fantasyland-ofc/index.js";
 import { closedChinesePokerPlugin } from "./closed-chinese-poker/index.js";
+import { mahjongSpiderLayoutPlugin } from "./mahjong-spider-layout/index.js";
+import { mahjongWheelLayoutPlugin } from "./mahjong-wheel-layout/index.js";
+import { mahjongTheatreLayoutPlugin } from "./mahjong-theatre-layout/index.js";
+import { mahjongButterflyLayoutPlugin } from "./mahjong-butterfly-layout/index.js";
+import { mahjongLadybugLayoutPlugin } from "./mahjong-ladybug-layout/index.js";
+import { mahjongArenaLayoutPlugin } from "./mahjong-arena-layout/index.js";
+import { mahjongFourWindsPlugin } from "./mahjong-four-winds/index.js";
+import { mahjongCathedralPlugin } from "./mahjong-cathedral/index.js";
+import { mahjongBridgePlugin } from "./mahjong-bridge/index.js";
+import { mahjongCrabPlugin } from "./mahjong-crab/index.js";
+import { mahjongImperialPlugin } from "./mahjong-imperial/index.js";
+import { mahjongFortressPlugin } from "./mahjong-fortress/index.js";
+import { mahjongPagodaPlugin } from "./mahjong-pagoda/index.js";
+import { mahjongFishPlugin } from "./mahjong-fish/index.js";
+import { mahjongCherryBlossomPlugin } from "./mahjong-cherry-blossom/index.js";
+import { mahjongSnakePlugin } from "./mahjong-snake/index.js";
+import { mahjongRabbitPlugin } from "./mahjong-rabbit/index.js";
+import { mahjongChristmasTreePlugin } from "./mahjong-christmas-tree/index.js";
+import { mahjongHeartPlugin } from "./mahjong-heart/index.js";
+import { mahjongScorpionLayoutPlugin } from "./mahjong-scorpion-layout/index.js";
+import { mahjongMeteorPlugin } from "./mahjong-meteor/index.js";
+import { mahjongAncientPlugin } from "./mahjong-ancient/index.js";
+import { mahjongDynastyPlugin } from "./mahjong-dynasty/index.js";
+import { mahjongSeasonsCyclePlugin } from "./mahjong-seasons-cycle/index.js";
+import { mahjongTimeAttackPlugin } from "./mahjong-time-attack/index.js";
+import { mahjongChallengeModePlugin } from "./mahjong-challenge-mode/index.js";
+import { mahjongConnectPlugin } from "./mahjong-connect/index.js";
+import { onetConnectClassicPlugin } from "./onet-connect-classic/index.js";
+import { shisenShoGravityPlugin } from "./shisen-sho-gravity/index.js";
+import { shisenShoExtendedPlugin } from "./shisen-sho-extended/index.js";
+import { shanghaiMahjongPlugin } from "./shanghai-mahjong/index.js";
+import { shanghaiDynastyPlugin } from "./shanghai-dynasty/index.js";
+import { mahjongTrailsPlugin } from "./mahjong-trails/index.js";
+import { mahjongQuestPlugin } from "./mahjong-quest/index.js";
+import { butterflyPuzzleTilesPlugin } from "./butterfly-puzzle-tiles/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4381,4 +4416,39 @@ export const GAMES: GamePlugin[] = [
   pineappleOfcPlugin as unknown as GamePlugin,
   fantasylandOfcPlugin as unknown as GamePlugin,
   closedChinesePokerPlugin as unknown as GamePlugin,
+  mahjongSpiderLayoutPlugin as unknown as GamePlugin,
+  mahjongWheelLayoutPlugin as unknown as GamePlugin,
+  mahjongTheatreLayoutPlugin as unknown as GamePlugin,
+  mahjongButterflyLayoutPlugin as unknown as GamePlugin,
+  mahjongLadybugLayoutPlugin as unknown as GamePlugin,
+  mahjongArenaLayoutPlugin as unknown as GamePlugin,
+  mahjongFourWindsPlugin as unknown as GamePlugin,
+  mahjongCathedralPlugin as unknown as GamePlugin,
+  mahjongBridgePlugin as unknown as GamePlugin,
+  mahjongCrabPlugin as unknown as GamePlugin,
+  mahjongImperialPlugin as unknown as GamePlugin,
+  mahjongFortressPlugin as unknown as GamePlugin,
+  mahjongPagodaPlugin as unknown as GamePlugin,
+  mahjongFishPlugin as unknown as GamePlugin,
+  mahjongCherryBlossomPlugin as unknown as GamePlugin,
+  mahjongSnakePlugin as unknown as GamePlugin,
+  mahjongRabbitPlugin as unknown as GamePlugin,
+  mahjongChristmasTreePlugin as unknown as GamePlugin,
+  mahjongHeartPlugin as unknown as GamePlugin,
+  mahjongScorpionLayoutPlugin as unknown as GamePlugin,
+  mahjongMeteorPlugin as unknown as GamePlugin,
+  mahjongAncientPlugin as unknown as GamePlugin,
+  mahjongDynastyPlugin as unknown as GamePlugin,
+  mahjongSeasonsCyclePlugin as unknown as GamePlugin,
+  mahjongTimeAttackPlugin as unknown as GamePlugin,
+  mahjongChallengeModePlugin as unknown as GamePlugin,
+  mahjongConnectPlugin as unknown as GamePlugin,
+  onetConnectClassicPlugin as unknown as GamePlugin,
+  shisenShoGravityPlugin as unknown as GamePlugin,
+  shisenShoExtendedPlugin as unknown as GamePlugin,
+  shanghaiMahjongPlugin as unknown as GamePlugin,
+  shanghaiDynastyPlugin as unknown as GamePlugin,
+  mahjongTrailsPlugin as unknown as GamePlugin,
+  mahjongQuestPlugin as unknown as GamePlugin,
+  butterflyPuzzleTilesPlugin as unknown as GamePlugin,
 ];
