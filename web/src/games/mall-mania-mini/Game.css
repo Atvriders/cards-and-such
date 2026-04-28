@@ -1,0 +1,19 @@
+.mm-wrap { max-width: 480px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.mm-stats { display: flex; gap: 14px; }
+.mm-stats > div { background: #f3f4f6; padding: 5px 10px; border-radius: 6px; font-size: 0.9rem; }
+.mm-grid { display: grid; gap: 4px; width: 100%; max-width: 360px; }
+.mm-cell { aspect-ratio: 1 / 1; border-radius: 6px; padding: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.65rem; text-align: center; }
+.mm-cell.mm-deal { background: #bbf7d0; }
+.mm-cell.mm-fair { background: #fef9c3; }
+.mm-cell.mm-splurge { background: #fed7aa; }
+.mm-cell.mm-freebie { background: #c7d2fe; }
+.mm-cell.mm-dud { background: #fecaca; }
+.mm-cell.mm-here { outline: 3px solid #ef4444; font-weight: 800; }
+.mm-name { font-weight: 700; }
+.mm-price { font-size: 0.7rem; color: #555; }
+.mm-btn { padding: 9px 18px; border: 0; border-radius: 8px; cursor: pointer; background: #ec4899; color: #fff; font-weight: 700; }
+.mm-decide { background: #fef3c7; padding: 10px 14px; border-radius: 8px; text-align: center; }
+.mm-buttons { display: flex; gap: 8px; margin-top: 6px; justify-content: center; }
+.mm-buttons button { padding: 7px 14px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700; background: #2563eb; color: #fff; }
+.mm-buttons button:disabled { background: #9ca3af; cursor: not-allowed; }
+.mm-done { background: #ecfccb; padding: 14px 22px; border-radius: 10px; font-weight: 800; }

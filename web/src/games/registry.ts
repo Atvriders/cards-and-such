@@ -1818,6 +1818,18 @@ import { kittenClickPlugin } from "./kitten-click/index.js";
 import { goldfishGrabPlugin } from "./goldfish-grab/index.js";
 import { parrotPopPlugin } from "./parrot-pop/index.js";
 import { hamsterHopPlugin } from "./hamster-hop/index.js";
+import { gameOfLifeClassicPlugin } from "./game-of-life-classic/index.js";
+import { gameOfLifeConwayPlugin } from "./game-of-life-conway/index.js";
+import { careersMiniPlugin } from "./careers-mini/index.js";
+import { paydayMiniPlugin } from "./payday-mini/index.js";
+import { pursuitMiniPlugin } from "./pursuit-mini/index.js";
+import { mallManiaMiniPlugin } from "./mall-mania-mini/index.js";
+import { startupLifeMiniPlugin } from "./startup-life-mini/index.js";
+import { langtonsAntMiniPlugin } from "./langtons-ant-mini/index.js";
+import { life1dPlugin } from "./life-1d/index.js";
+import { brainOfBrianPlugin } from "./brain-of-brian/index.js";
+import { monopolyMiniPlugin } from "./monopoly-mini/index.js";
+import { riskMiniPlugin } from "./risk-mini/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3639,4 +3651,16 @@ export const GAMES: GamePlugin[] = [
   goldfishGrabPlugin as unknown as GamePlugin,
   parrotPopPlugin as unknown as GamePlugin,
   hamsterHopPlugin as unknown as GamePlugin,
+  gameOfLifeClassicPlugin as unknown as GamePlugin,
+  gameOfLifeConwayPlugin as unknown as GamePlugin,
+  careersMiniPlugin as unknown as GamePlugin,
+  paydayMiniPlugin as unknown as GamePlugin,
+  pursuitMiniPlugin as unknown as GamePlugin,
+  mallManiaMiniPlugin as unknown as GamePlugin,
+  startupLifeMiniPlugin as unknown as GamePlugin,
+  langtonsAntMiniPlugin as unknown as GamePlugin,
+  life1dPlugin as unknown as GamePlugin,
+  brainOfBrianPlugin as unknown as GamePlugin,
+  monopolyMiniPlugin as unknown as GamePlugin,
+  riskMiniPlugin as unknown as GamePlugin,
 ];

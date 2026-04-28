@@ -1,0 +1,10 @@
+.sl-wrap { max-width: 520px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.sl-stats { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.sl-stats > div { background: #f3f4f6; padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; }
+.sl-val { width: 100%; text-align: center; font-size: 0.9rem; }
+.sl-bar { width: 100%; height: 14px; background: #e5e7eb; border-radius: 7px; overflow: hidden; margin-top: 6px; }
+.sl-fill { height: 100%; background: linear-gradient(90deg, #6366f1, #ec4899); transition: width 0.3s; }
+.sl-btn { padding: 9px 18px; border: 0; border-radius: 8px; cursor: pointer; background: #ec4899; color: #fff; font-weight: 700; }
+.sl-event { background: #fef3c7; padding: 10px 14px; border-radius: 8px; display: flex; gap: 12px; align-items: center; }
+.sl-event button { padding: 6px 14px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700; background: #1f2937; color: #fff; }
+.sl-done { background: #ecfccb; padding: 14px 22px; border-radius: 10px; text-align: center; font-weight: 800; }

@@ -1,0 +1,12 @@
+.cm-wrap { max-width: 600px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.cm-head { font-size: 1rem; }
+.cm-stats { display: flex; gap: 14px; font-size: 0.9rem; }
+.cm-stats > div { background: #f3f4f6; padding: 5px 10px; border-radius: 6px; }
+.cm-board { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; width: 100%; }
+.cm-cell { aspect-ratio: 1 / 1; background: #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+.cm-cell.cm-here { background: #f97316; color: #fff; font-weight: 800; }
+.cm-info { font-size: 0.85rem; color: #555; }
+.cm-btn { padding: 9px 18px; border: 0; border-radius: 8px; cursor: pointer; background: #3b82f6; color: #fff; font-weight: 700; }
+.cm-btn.alt { background: #f59e0b; }
+.cm-event { background: #fef3c7; padding: 10px 14px; border-radius: 8px; text-align: center; }
+.cm-done { background: #ecfccb; padding: 14px 20px; border-radius: 10px; text-align: center; font-weight: 700; }

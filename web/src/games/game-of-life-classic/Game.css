@@ -1,0 +1,23 @@
+.golc-wrap { max-width: 720px; margin: 0 auto; padding: 16px; font-family: sans-serif; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+.golc-stats { display: flex; gap: 16px; }
+.golc-stat { background: #f3f4f6; padding: 6px 14px; border-radius: 8px; font-size: 0.95rem; }
+.golc-board { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; width: 100%; }
+.golc-cell { aspect-ratio: 1 / 1; border-radius: 6px; padding: 4px; font-size: 0.65rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; color: #333; background: #e5e7eb; }
+.golc-cell.golc-start { background: #d1fae5; }
+.golc-cell.golc-job, .golc-cell.golc-promotion { background: #bfdbfe; }
+.golc-cell.golc-payday { background: #fde68a; }
+.golc-cell.golc-expense, .golc-cell.golc-taxes { background: #fecaca; }
+.golc-cell.golc-marry, .golc-cell.golc-baby { background: #fbcfe8; }
+.golc-cell.golc-vacation { background: #c7d2fe; }
+.golc-cell.golc-lottery { background: #fef08a; }
+.golc-cell.golc-retire { background: #a7f3d0; }
+.golc-cell.golc-here { outline: 3px solid #ef4444; box-shadow: 0 0 0 2px #fff inset; font-weight: 700; }
+.golc-num { font-weight: 700; }
+.golc-pin { font-size: 0.55rem; background: #ef4444; color: #fff; padding: 1px 4px; border-radius: 4px; margin-top: 2px; }
+.golc-btn { padding: 10px 22px; font-size: 1rem; font-weight: 700; border: 0; border-radius: 8px; cursor: pointer; background: #3498db; color: #fff; }
+.golc-btn.alt { background: #e67e22; }
+.golc-event { background: #fff7ed; border-radius: 10px; padding: 10px 16px; text-align: center; }
+.golc-event-title { font-weight: 800; }
+.golc-event-body { margin: 4px 0 8px; font-size: 0.95rem; }
+.golc-done { background: #f0fdf4; padding: 18px; border-radius: 12px; text-align: center; }
+.golc-final { font-size: 1.3rem; font-weight: 900; color: #16a34a; margin-top: 6px; }

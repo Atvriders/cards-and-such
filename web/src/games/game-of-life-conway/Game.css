@@ -1,0 +1,11 @@
+.conway-wrap { max-width: 480px; margin: 0 auto; padding: 16px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.conway-stats { display: flex; gap: 16px; font-size: 0.95rem; }
+.conway-grid { display: grid; gap: 2px; width: 100%; max-width: 360px; background: #1f2937; padding: 4px; border-radius: 8px; }
+.conway-cell { aspect-ratio: 1 / 1; border: 0; border-radius: 3px; background: #374151; cursor: pointer; padding: 0; }
+.conway-cell.conway-on { background: #34d399; }
+.conway-cell:disabled { cursor: default; }
+.conway-controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.conway-controls button { padding: 8px 14px; font-size: 0.9rem; font-weight: 700; border: 0; border-radius: 6px; cursor: pointer; background: #6366f1; color: #fff; }
+.conway-controls .conway-step { background: #16a34a; }
+.conway-controls .conway-finish { background: #dc2626; }
+.conway-done { background: #f0fdf4; padding: 14px 22px; border-radius: 10px; font-weight: 800; color: #16a34a; }

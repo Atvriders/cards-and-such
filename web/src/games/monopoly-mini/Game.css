@@ -1,0 +1,17 @@
+.mp-wrap { max-width: 480px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.mp-stats { display: flex; gap: 14px; }
+.mp-stats > div { background: #f3f4f6; padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; }
+.mp-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; width: 100%; max-width: 360px; }
+.mp-cell { aspect-ratio: 1 / 1; border-radius: 6px; padding: 5px; font-size: 0.7rem; background: #fde68a; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+.mp-cell.mp-p { background: #93c5fd; }
+.mp-cell.mp-c { background: #fca5a5; }
+.mp-price { color: #555; }
+.mp-tok { position: absolute; top: 2px; right: 2px; padding: 1px 4px; border-radius: 3px; font-size: 0.6rem; color: #fff; }
+.mp-tok.mp-p { background: #2563eb; }
+.mp-tok.mp-c { background: #dc2626; left: 2px; right: auto; }
+.mp-msg { font-size: 0.85rem; min-height: 1.5em; text-align: center; }
+.mp-btn { padding: 9px 18px; border: 0; border-radius: 8px; cursor: pointer; background: #2563eb; color: #fff; font-weight: 700; }
+.mp-btn.alt { background: #f59e0b; }
+.mp-buttons { display: flex; gap: 8px; }
+.mp-buttons button { padding: 7px 14px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700; background: #16a34a; color: #fff; }
+.mp-done { background: #ecfccb; padding: 12px 18px; border-radius: 10px; font-weight: 800; }

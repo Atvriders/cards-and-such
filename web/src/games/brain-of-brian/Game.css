@@ -1,0 +1,12 @@
+.bb-wrap { max-width: 480px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.bb-stats { font-size: 0.95rem; }
+.bb-grid { display: grid; gap: 2px; width: 100%; max-width: 360px; background: #1f2937; padding: 4px; border-radius: 6px; }
+.bb-cell { aspect-ratio: 1 / 1; border: 0; border-radius: 3px; padding: 0; cursor: pointer; }
+.bb-cell.bb-0 { background: #374151; }
+.bb-cell.bb-1 { background: #34d399; }
+.bb-cell.bb-2 { background: #60a5fa; }
+.bb-cell:disabled { cursor: default; }
+.bb-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.bb-controls button { padding: 7px 14px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700; background: #6366f1; color: #fff; }
+.bb-controls .bb-step { background: #16a34a; }
+.bb-controls .bb-finish { background: #dc2626; }
