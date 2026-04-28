@@ -2645,6 +2645,41 @@ import { cloneSudokuMiniPlugin } from "./clone-sudoku-mini/index.js";
 import { windokuMiniPlugin } from "./windoku-mini/index.js";
 import { chaosSudokuMiniPlugin } from "./chaos-sudoku-mini/index.js";
 import { towerOfHanoiMiniPlugin } from "./tower-of-hanoi-mini/index.js";
+import { bejeweledBlitzPlugin } from "./bejeweled-blitz/index.js";
+import { bejeweledTwistPlugin } from "./bejeweled-twist/index.js";
+import { sharikiPlugin } from "./shariki/index.js";
+import { jewelQuestArcadePlugin } from "./jewel-quest-arcade/index.js";
+import { columnsMiniPlugin } from "./columns-mini/index.js";
+import { pillDropMiniPlugin } from "./pill-drop-mini/index.js";
+import { magicalDropMiniPlugin } from "./magical-drop-mini/index.js";
+import { moneyIdolMiniPlugin } from "./money-idol-mini/index.js";
+import { threesPuzzlePlugin } from "./threes-puzzle/index.js";
+import { game2048Plugin } from "./game-2048/index.js";
+import { game1024Plugin } from "./game-1024/index.js";
+import { tripleTownMiniPlugin } from "./triple-town-mini/index.js";
+import { luminesMiniPlugin } from "./lumines-mini/index.js";
+import { samegameMiniPlugin } from "./samegame-mini/index.js";
+import { clickomaniaMiniPlugin } from "./clickomania-mini/index.js";
+import { spikeDodgerPlugin } from "./spike-dodger/index.js";
+import { canabaltMiniPlugin } from "./canabalt-mini/index.js";
+import { caveRunnerPlugin } from "./cave-runner/index.js";
+import { helicopterFlyerPlugin } from "./helicopter-flyer/index.js";
+import { paperPlaneMiniPlugin } from "./paper-plane-mini/index.js";
+import { batFlyerPlugin } from "./bat-flyer/index.js";
+import { ufoFlyerPlugin } from "./ufo-flyer/index.js";
+import { ninjaWallMiniPlugin } from "./ninja-wall-mini/index.js";
+import { circleRushPlugin } from "./circle-rush/index.js";
+import { orbitArcadePlugin } from "./orbit-arcade/index.js";
+import { towerStackerMiniPlugin } from "./tower-stacker-mini/index.js";
+import { colorBallDropPlugin } from "./color-ball-drop/index.js";
+import { colorReactionPlugin } from "./color-reaction/index.js";
+import { circleTrackerPlugin } from "./circle-tracker/index.js";
+import { reactionTestProPlugin } from "./reaction-test-pro/index.js";
+import { simonPatternPlugin } from "./simon-pattern/index.js";
+import { endlessWhackMolePlugin } from "./endless-whack-mole/index.js";
+import { endlessCatchPlugin } from "./endless-catch/index.js";
+import { endlessTapCountPlugin } from "./endless-tap-count/index.js";
+import { laneDefenderMiniPlugin } from "./lane-defender-mini/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5291,4 +5326,39 @@ export const GAMES: GamePlugin[] = [
   windokuMiniPlugin as unknown as GamePlugin,
   chaosSudokuMiniPlugin as unknown as GamePlugin,
   towerOfHanoiMiniPlugin as unknown as GamePlugin,
+  bejeweledBlitzPlugin as unknown as GamePlugin,
+  bejeweledTwistPlugin as unknown as GamePlugin,
+  sharikiPlugin as unknown as GamePlugin,
+  jewelQuestArcadePlugin as unknown as GamePlugin,
+  columnsMiniPlugin as unknown as GamePlugin,
+  pillDropMiniPlugin as unknown as GamePlugin,
+  magicalDropMiniPlugin as unknown as GamePlugin,
+  moneyIdolMiniPlugin as unknown as GamePlugin,
+  threesPuzzlePlugin as unknown as GamePlugin,
+  game2048Plugin as unknown as GamePlugin,
+  game1024Plugin as unknown as GamePlugin,
+  tripleTownMiniPlugin as unknown as GamePlugin,
+  luminesMiniPlugin as unknown as GamePlugin,
+  samegameMiniPlugin as unknown as GamePlugin,
+  clickomaniaMiniPlugin as unknown as GamePlugin,
+  spikeDodgerPlugin as unknown as GamePlugin,
+  canabaltMiniPlugin as unknown as GamePlugin,
+  caveRunnerPlugin as unknown as GamePlugin,
+  helicopterFlyerPlugin as unknown as GamePlugin,
+  paperPlaneMiniPlugin as unknown as GamePlugin,
+  batFlyerPlugin as unknown as GamePlugin,
+  ufoFlyerPlugin as unknown as GamePlugin,
+  ninjaWallMiniPlugin as unknown as GamePlugin,
+  circleRushPlugin as unknown as GamePlugin,
+  orbitArcadePlugin as unknown as GamePlugin,
+  towerStackerMiniPlugin as unknown as GamePlugin,
+  colorBallDropPlugin as unknown as GamePlugin,
+  colorReactionPlugin as unknown as GamePlugin,
+  circleTrackerPlugin as unknown as GamePlugin,
+  reactionTestProPlugin as unknown as GamePlugin,
+  simonPatternPlugin as unknown as GamePlugin,
+  endlessWhackMolePlugin as unknown as GamePlugin,
+  endlessCatchPlugin as unknown as GamePlugin,
+  endlessTapCountPlugin as unknown as GamePlugin,
+  laneDefenderMiniPlugin as unknown as GamePlugin,
 ];

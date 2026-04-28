@@ -1,0 +1,12 @@
+.rx-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:540px; margin:0 auto; user-select:none; }
+.rx-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.rx-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
+.rx-score { font-size:1.2rem; font-weight:800; color:#ca8a04; }
+.rx-info { font-size:0.95rem; color:#555; }
+.rx-prompt { font-size:1rem; color:#333; padding:8px; background:#fff5; border-radius:8px; }
+.rx-stage { width:100%; height:280px; display:flex; align-items:center; justify-content:center; font-size:5rem; cursor:pointer; background:linear-gradient(180deg,#fef9c3,#fde047); border:3px solid #ca8a04; border-radius:14px; transition:background 0.15s; }
+.rx-stage.go { background:#a3e635; }
+.rx-stage.nogo { background:#fca5a5; }
+.rx-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
+.rx-done h2 { margin:0 0 8px; }
+.rx-final { font-size:1.4rem; color:#ca8a04; font-weight:900; }

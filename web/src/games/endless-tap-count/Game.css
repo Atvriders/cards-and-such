@@ -1,0 +1,11 @@
+.cl-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
+.cl-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.cl-info { font-size:0.95rem; color:#555; }
+.cl-score { font-size:1.2rem; font-weight:800; color:#9333ea; }
+.cl-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
+.cl-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#f3e8ff,#c4b5fd); border:3px solid #9333ea; border-radius:14px; overflow:hidden; }
+.cl-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; background:transparent; border:none; }
+.cl-target:hover { transform:scale(1.15); }
+.cl-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
+.cl-done h2 { margin:0 0 8px; }
+.cl-final { font-size:1.4rem; color:#9333ea; font-weight:900; }
