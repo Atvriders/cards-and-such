@@ -1971,6 +1971,41 @@ import { cometCatchPlugin } from "./comet-catch/index.js";
 import { nebulaNudgePlugin } from "./nebula-nudge/index.js";
 import { planetPopPlugin } from "./planet-pop/index.js";
 import { meteorBashPlugin } from "./meteor-bash/index.js";
+import { musicTheoryQuizPlugin } from "./music-theory-quiz/index.js";
+import { musicNotationQuizPlugin } from "./music-notation-quiz/index.js";
+import { musicalInstrumentsQuizPlugin } from "./musical-instruments-quiz/index.js";
+import { keysAndModesQuizPlugin } from "./keys-and-modes-quiz/index.js";
+import { chordProgressionsQuizPlugin } from "./chord-progressions-quiz/index.js";
+import { composersClassicalQuizPlugin } from "./composers-classical-quiz/index.js";
+import { composersRomanticQuizPlugin } from "./composers-romantic-quiz/index.js";
+import { composersModernQuizPlugin } from "./composers-modern-quiz/index.js";
+import { recordingTechQuizPlugin } from "./recording-tech-quiz/index.js";
+import { synthesizersQuizPlugin } from "./synthesizers-quiz/index.js";
+import { salemTrialsQuizPlugin } from "./salem-trials-quiz/index.js";
+import { nurembergTrialsQuizPlugin } from "./nuremberg-trials-quiz/index.js";
+import { ojTrialQuizPlugin } from "./oj-trial-quiz/index.js";
+import { assassinationsQuizPlugin } from "./assassinations-quiz/index.js";
+import { unsolvedMysteriesQuizPlugin } from "./unsolved-mysteries-quiz/index.js";
+import { mafiaQuizPlugin } from "./mafia-quiz/index.js";
+import { piratesQuizPlugin } from "./pirates-quiz/index.js";
+import { outlawsQuizPlugin } from "./outlaws-quiz/index.js";
+import { cardCliffJumpPlugin } from "./card-cliff-jump/index.js";
+import { cardLeapFrogPlugin } from "./card-leap-frog/index.js";
+import { cardPuzzlePlugin } from "./card-puzzle/index.js";
+import { cardSnakeLinePlugin } from "./card-snake-line/index.js";
+import { cardSweepPlugin } from "./card-sweep/index.js";
+import { cardCastleDefensePlugin } from "./card-castle-defense/index.js";
+import { cardTreasureHuntPlugin } from "./card-treasure-hunt/index.js";
+import { diceVillagePlugin } from "./dice-village/index.js";
+import { diceTradeRoutePlugin } from "./dice-trade-route/index.js";
+import { diceHarvestPlugin } from "./dice-harvest/index.js";
+import { diceRailroadPlugin } from "./dice-railroad/index.js";
+import { dicePiratePlugin } from "./dice-pirate/index.js";
+import { brickBashPlugin } from "./brick-bash/index.js";
+import { nailTapPlugin } from "./nail-tap/index.js";
+import { woodWhackPlugin } from "./wood-whack/index.js";
+import { concreteCrunchPlugin } from "./concrete-crunch/index.js";
+import { craneClickPlugin } from "./crane-click/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -3943,4 +3978,39 @@ export const GAMES: GamePlugin[] = [
   nebulaNudgePlugin as unknown as GamePlugin,
   planetPopPlugin as unknown as GamePlugin,
   meteorBashPlugin as unknown as GamePlugin,
+  musicTheoryQuizPlugin as unknown as GamePlugin,
+  musicNotationQuizPlugin as unknown as GamePlugin,
+  musicalInstrumentsQuizPlugin as unknown as GamePlugin,
+  keysAndModesQuizPlugin as unknown as GamePlugin,
+  chordProgressionsQuizPlugin as unknown as GamePlugin,
+  composersClassicalQuizPlugin as unknown as GamePlugin,
+  composersRomanticQuizPlugin as unknown as GamePlugin,
+  composersModernQuizPlugin as unknown as GamePlugin,
+  recordingTechQuizPlugin as unknown as GamePlugin,
+  synthesizersQuizPlugin as unknown as GamePlugin,
+  salemTrialsQuizPlugin as unknown as GamePlugin,
+  nurembergTrialsQuizPlugin as unknown as GamePlugin,
+  ojTrialQuizPlugin as unknown as GamePlugin,
+  assassinationsQuizPlugin as unknown as GamePlugin,
+  unsolvedMysteriesQuizPlugin as unknown as GamePlugin,
+  mafiaQuizPlugin as unknown as GamePlugin,
+  piratesQuizPlugin as unknown as GamePlugin,
+  outlawsQuizPlugin as unknown as GamePlugin,
+  cardCliffJumpPlugin as unknown as GamePlugin,
+  cardLeapFrogPlugin as unknown as GamePlugin,
+  cardPuzzlePlugin as unknown as GamePlugin,
+  cardSnakeLinePlugin as unknown as GamePlugin,
+  cardSweepPlugin as unknown as GamePlugin,
+  cardCastleDefensePlugin as unknown as GamePlugin,
+  cardTreasureHuntPlugin as unknown as GamePlugin,
+  diceVillagePlugin as unknown as GamePlugin,
+  diceTradeRoutePlugin as unknown as GamePlugin,
+  diceHarvestPlugin as unknown as GamePlugin,
+  diceRailroadPlugin as unknown as GamePlugin,
+  dicePiratePlugin as unknown as GamePlugin,
+  brickBashPlugin as unknown as GamePlugin,
+  nailTapPlugin as unknown as GamePlugin,
+  woodWhackPlugin as unknown as GamePlugin,
+  concreteCrunchPlugin as unknown as GamePlugin,
+  craneClickPlugin as unknown as GamePlugin,
 ];
