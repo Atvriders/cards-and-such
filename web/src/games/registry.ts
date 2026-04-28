@@ -2041,6 +2041,41 @@ import { screwGrabPlugin } from "./screw-grab/index.js";
 import { wrenchWhackPlugin } from "./wrench-whack/index.js";
 import { sawSnapPlugin } from "./saw-snap/index.js";
 import { paintPopPlugin } from "./paint-pop/index.js";
+import { summerOlympicsQuizPlugin } from "./summer-olympics-quiz/index.js";
+import { winterOlympicsQuizPlugin } from "./winter-olympics-quiz/index.js";
+import { paralympicsQuizPlugin } from "./paralympics-quiz/index.js";
+import { trackFieldQuizPlugin } from "./track-field-quiz/index.js";
+import { swimmingEventsQuizPlugin } from "./swimming-events-quiz/index.js";
+import { gymnasticsQuizPlugin } from "./gymnastics-quiz/index.js";
+import { figureSkatingQuizPlugin } from "./figure-skating-quiz/index.js";
+import { bobsledQuizPlugin } from "./bobsled-quiz/index.js";
+import { boxingRulesQuizPlugin } from "./boxing-rules-quiz/index.js";
+import { wrestlingRulesQuizPlugin } from "./wrestling-rules-quiz/index.js";
+import { eiffelTowerQuizPlugin } from "./eiffel-tower-quiz/index.js";
+import { pyramidsQuizPlugin } from "./pyramids-quiz/index.js";
+import { greatWallQuizPlugin } from "./great-wall-quiz/index.js";
+import { colosseumQuizPlugin } from "./colosseum-quiz/index.js";
+import { tajMahalQuizPlugin } from "./taj-mahal-quiz/index.js";
+import { parthenonQuizPlugin } from "./parthenon-quiz/index.js";
+import { statueLibertyQuizPlugin } from "./statue-liberty-quiz/index.js";
+import { christRedeemerQuizPlugin } from "./christ-redeemer-quiz/index.js";
+import { cardFlagPolePlugin } from "./card-flag-pole/index.js";
+import { cardMountainClimbPlugin } from "./card-mountain-climb/index.js";
+import { cardStadiumPlugin } from "./card-stadium/index.js";
+import { cardArenaMiniPlugin } from "./card-arena-mini/index.js";
+import { cardParkPlugin } from "./card-park/index.js";
+import { cardZooPlugin } from "./card-zoo/index.js";
+import { cardMuseumPlugin } from "./card-museum/index.js";
+import { diceCookingPlugin } from "./dice-cooking/index.js";
+import { dicePaintingPlugin } from "./dice-painting/index.js";
+import { diceMusicMiniPlugin } from "./dice-music-mini/index.js";
+import { dicePhotographyPlugin } from "./dice-photography/index.js";
+import { diceArcheologyPlugin } from "./dice-archeology/index.js";
+import { carChasePlugin } from "./car-chase/index.js";
+import { bikeBashPlugin } from "./bike-bash/index.js";
+import { truckTapPlugin } from "./truck-tap/index.js";
+import { busBashPlugin } from "./bus-bash/index.js";
+import { trainTapPlugin } from "./train-tap/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4083,4 +4118,39 @@ export const GAMES: GamePlugin[] = [
   wrenchWhackPlugin as unknown as GamePlugin,
   sawSnapPlugin as unknown as GamePlugin,
   paintPopPlugin as unknown as GamePlugin,
+  summerOlympicsQuizPlugin as unknown as GamePlugin,
+  winterOlympicsQuizPlugin as unknown as GamePlugin,
+  paralympicsQuizPlugin as unknown as GamePlugin,
+  trackFieldQuizPlugin as unknown as GamePlugin,
+  swimmingEventsQuizPlugin as unknown as GamePlugin,
+  gymnasticsQuizPlugin as unknown as GamePlugin,
+  figureSkatingQuizPlugin as unknown as GamePlugin,
+  bobsledQuizPlugin as unknown as GamePlugin,
+  boxingRulesQuizPlugin as unknown as GamePlugin,
+  wrestlingRulesQuizPlugin as unknown as GamePlugin,
+  eiffelTowerQuizPlugin as unknown as GamePlugin,
+  pyramidsQuizPlugin as unknown as GamePlugin,
+  greatWallQuizPlugin as unknown as GamePlugin,
+  colosseumQuizPlugin as unknown as GamePlugin,
+  tajMahalQuizPlugin as unknown as GamePlugin,
+  parthenonQuizPlugin as unknown as GamePlugin,
+  statueLibertyQuizPlugin as unknown as GamePlugin,
+  christRedeemerQuizPlugin as unknown as GamePlugin,
+  cardFlagPolePlugin as unknown as GamePlugin,
+  cardMountainClimbPlugin as unknown as GamePlugin,
+  cardStadiumPlugin as unknown as GamePlugin,
+  cardArenaMiniPlugin as unknown as GamePlugin,
+  cardParkPlugin as unknown as GamePlugin,
+  cardZooPlugin as unknown as GamePlugin,
+  cardMuseumPlugin as unknown as GamePlugin,
+  diceCookingPlugin as unknown as GamePlugin,
+  dicePaintingPlugin as unknown as GamePlugin,
+  diceMusicMiniPlugin as unknown as GamePlugin,
+  dicePhotographyPlugin as unknown as GamePlugin,
+  diceArcheologyPlugin as unknown as GamePlugin,
+  carChasePlugin as unknown as GamePlugin,
+  bikeBashPlugin as unknown as GamePlugin,
+  truckTapPlugin as unknown as GamePlugin,
+  busBashPlugin as unknown as GamePlugin,
+  trainTapPlugin as unknown as GamePlugin,
 ];

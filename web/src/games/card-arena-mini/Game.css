@@ -1,0 +1,14 @@
+.cam-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:560px; margin:0 auto; }
+.cam-info { font-size:0.95rem; color:#555; }
+.cam-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.cam-card { font-size:1.6rem; font-weight:900; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:60px; text-align:center; }
+.cam-card.red { color:#c0392b; }
+.cam-card.black { color:#2c3e50; }
+.cam-row { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+.cam-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.cam-btn:hover:not(:disabled) { background:#2980b9; }
+.cam-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.cam-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
+.cam-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.cam-done h2 { margin:0 0 8px; }
+.cam-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
