@@ -1,0 +1,21 @@
+.cm-wrap, .dm-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:560px; margin:0 auto; }
+.cm-info, .dm-info { font-size:0.95rem; color:#555; }
+.cm-score, .dm-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.cm-card { font-size:1rem; font-weight:700; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:80px; text-align:center; color:#2c3e50; }
+.cm-card.you { border-color:#3498db; color:#2980b9; }
+.cm-card.foe { border-color:#c0392b; color:#c0392b; }
+.cm-card.clank { border-color:#c0392b; color:#c0392b; background:#fff0f0; }
+.cm-card.loot { border-color:#27ae60; color:#27ae60; background:#f0fff4; }
+.cm-row, .dm-row { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.dm-die { font-size:1.6rem; font-weight:900; min-width:50px; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
+.cm-btn, .dm-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.cm-btn:hover:not(:disabled), .dm-btn:hover:not(:disabled) { background:#2980b9; }
+.cm-btn:disabled, .dm-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.cm-btn.alt, .dm-btn.alt { background:#e67e22; }
+.cm-btn.alt:hover, .dm-btn.alt:hover { background:#ca6f1e; }
+.cm-result, .dm-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
+.cm-rule, .dm-rule { font-size:0.95rem; font-weight:600; color:#8e44ad; padding:4px 10px; background:#f5eef8; border-radius:6px; }
+.cm-label { font-size:0.9rem; font-weight:700; color:#555; }
+.cm-done, .dm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.cm-done h2, .dm-done h2 { margin:0 0 8px; }
+.cm-final, .dm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

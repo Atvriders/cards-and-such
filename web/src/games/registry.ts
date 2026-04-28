@@ -2400,6 +2400,41 @@ import { douDiZhuPlugin } from "./dou-di-zhu-quiz/index.js";
 import { seotdaPlugin } from "./seotda-quiz/index.js";
 import { sutdaPlugin } from "./sutda-quiz/index.js";
 import { hanamikojiPlugin } from "./hanamikoji-quiz/index.js";
+import { dominionDeckPlugin } from "./dominion-deck/index.js";
+import { ascensionGodslayerPlugin } from "./ascension-godslayer/index.js";
+import { starRealmsDuelPlugin } from "./star-realms-duel/index.js";
+import { heroRealmsQuestPlugin } from "./hero-realms-quest/index.js";
+import { clankDungeonLootPlugin } from "./clank-dungeon-loot/index.js";
+import { fridayIslandSurvivalPlugin } from "./friday-island-survival/index.js";
+import { paperbackLettersPlugin } from "./paperback-letters/index.js";
+import { hardbackNovelPlugin } from "./hardback-novel/index.js";
+import { valeriaCardKingdomsPlugin } from "./valeria-card-kingdoms/index.js";
+import { tinyEpicDungeonMiniPlugin } from "./tiny-epic-dungeon-mini/index.js";
+import { mysticValeCraftPlugin } from "./mystic-vale-craft/index.js";
+import { legendaryHeroesPlugin } from "./legendary-heroes/index.js";
+import { munchkinMiniPlugin } from "./munchkin-mini/index.js";
+import { fluxxFantasyRulesPlugin } from "./fluxx-fantasy-rules/index.js";
+import { valleyOfKingsTombPlugin } from "./valley-of-kings-tomb/index.js";
+import { doomlingsCatastrophePlugin } from "./doomlings-catastrophe/index.js";
+import { bargainQuestShopPlugin } from "./bargain-quest-shop/index.js";
+import { welcomeToDungeonPlugin } from "./welcome-to-dungeon/index.js";
+import { resArcanaEssencePlugin } from "./res-arcana-essence/index.js";
+import { cartographerHeroesPlugin } from "./cartographer-heroes/index.js";
+import { everdellWoodlandPlugin } from "./everdell-woodland/index.js";
+import { wingspanAviaryPlugin } from "./wingspan-aviary/index.js";
+import { questElDoradoPlugin } from "./quest-el-dorado/index.js";
+import { dungeonRollDelvePlugin } from "./dungeon-roll-delve/index.js";
+import { quarriorsDiceDeckbuildPlugin } from "./quarriors-dice-deckbuild/index.js";
+import { tinyEpicGalaxiesMiniPlugin } from "./tiny-epic-galaxies-mini/index.js";
+import { dragonwoodCapturePlugin } from "./dragonwood-capture/index.js";
+import { rollPlayerCharacterPlugin } from "./roll-player-character/index.js";
+import { rollForGalaxyMiniPlugin } from "./roll-for-galaxy-mini/index.js";
+import { oneDeckDungeonMiniPlugin } from "./one-deck-dungeon-mini/index.js";
+import { ashesPhoenixbornPlugin } from "./ashes-phoenixborn/index.js";
+import { diceThroneBattlePlugin } from "./dice-throne-battle/index.js";
+import { dungeonFighterThrowPlugin } from "./dungeon-fighter-throw/index.js";
+import { seasonsElementalPlugin } from "./seasons-elemental/index.js";
+import { sagradaWindowPlugin } from "./sagrada-window/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4801,4 +4836,39 @@ export const GAMES: GamePlugin[] = [
   seotdaPlugin as unknown as GamePlugin,
   sutdaPlugin as unknown as GamePlugin,
   hanamikojiPlugin as unknown as GamePlugin,
+  dominionDeckPlugin as unknown as GamePlugin,
+  ascensionGodslayerPlugin as unknown as GamePlugin,
+  starRealmsDuelPlugin as unknown as GamePlugin,
+  heroRealmsQuestPlugin as unknown as GamePlugin,
+  clankDungeonLootPlugin as unknown as GamePlugin,
+  fridayIslandSurvivalPlugin as unknown as GamePlugin,
+  paperbackLettersPlugin as unknown as GamePlugin,
+  hardbackNovelPlugin as unknown as GamePlugin,
+  valeriaCardKingdomsPlugin as unknown as GamePlugin,
+  tinyEpicDungeonMiniPlugin as unknown as GamePlugin,
+  mysticValeCraftPlugin as unknown as GamePlugin,
+  legendaryHeroesPlugin as unknown as GamePlugin,
+  munchkinMiniPlugin as unknown as GamePlugin,
+  fluxxFantasyRulesPlugin as unknown as GamePlugin,
+  valleyOfKingsTombPlugin as unknown as GamePlugin,
+  doomlingsCatastrophePlugin as unknown as GamePlugin,
+  bargainQuestShopPlugin as unknown as GamePlugin,
+  welcomeToDungeonPlugin as unknown as GamePlugin,
+  resArcanaEssencePlugin as unknown as GamePlugin,
+  cartographerHeroesPlugin as unknown as GamePlugin,
+  everdellWoodlandPlugin as unknown as GamePlugin,
+  wingspanAviaryPlugin as unknown as GamePlugin,
+  questElDoradoPlugin as unknown as GamePlugin,
+  dungeonRollDelvePlugin as unknown as GamePlugin,
+  quarriorsDiceDeckbuildPlugin as unknown as GamePlugin,
+  tinyEpicGalaxiesMiniPlugin as unknown as GamePlugin,
+  dragonwoodCapturePlugin as unknown as GamePlugin,
+  rollPlayerCharacterPlugin as unknown as GamePlugin,
+  rollForGalaxyMiniPlugin as unknown as GamePlugin,
+  oneDeckDungeonMiniPlugin as unknown as GamePlugin,
+  ashesPhoenixbornPlugin as unknown as GamePlugin,
+  diceThroneBattlePlugin as unknown as GamePlugin,
+  dungeonFighterThrowPlugin as unknown as GamePlugin,
+  seasonsElementalPlugin as unknown as GamePlugin,
+  sagradaWindowPlugin as unknown as GamePlugin,
 ];
