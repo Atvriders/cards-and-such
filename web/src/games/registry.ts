@@ -1865,6 +1865,41 @@ import { mechMashPlugin } from "./mech-mash/index.js";
 import { cogClickPlugin } from "./cog-click/index.js";
 import { gearGrabPlugin } from "./gear-grab/index.js";
 import { circuitCapPlugin } from "./circuit-cap/index.js";
+import { medievalLifeQuizPlugin } from "./medieval-life-quiz/index.js";
+import { feudalJapanQuizPlugin } from "./feudal-japan-quiz/index.js";
+import { ottomanEmpireQuizPlugin } from "./ottoman-empire-quiz/index.js";
+import { byzantineQuizPlugin } from "./byzantine-quiz/index.js";
+import { mongolEmpireQuizPlugin } from "./mongol-empire-quiz/index.js";
+import { mayanQuizPlugin } from "./mayan-quiz/index.js";
+import { incanQuizPlugin } from "./incan-quiz/index.js";
+import { aztecQuizPlugin } from "./aztec-quiz/index.js";
+import { vikingQuizPlugin } from "./viking-quiz/index.js";
+import { prehistoricQuizPlugin } from "./prehistoric-quiz/index.js";
+import { medicalDiscoveriesQuizPlugin } from "./medical-discoveries-quiz/index.js";
+import { physicsDiscoveriesQuizPlugin } from "./physics-discoveries-quiz/index.js";
+import { spaceDiscoveriesQuizPlugin } from "./space-discoveries-quiz/index.js";
+import { inventorsToolsQuizPlugin } from "./inventors-tools-quiz/index.js";
+import { transportInventionsQuizPlugin } from "./transport-inventions-quiz/index.js";
+import { communicationInventionsQuizPlugin } from "./communication-inventions-quiz/index.js";
+import { foodInventionsQuizPlugin } from "./food-inventions-quiz/index.js";
+import { weaponInventionsQuizPlugin } from "./weapon-inventions-quiz/index.js";
+import { cardCliffPlugin } from "./card-cliff/index.js";
+import { cardJunglePlugin } from "./card-jungle/index.js";
+import { cardOceanPlugin } from "./card-ocean/index.js";
+import { cardVolcanoPlugin } from "./card-volcano/index.js";
+import { cardGlacierPlugin } from "./card-glacier/index.js";
+import { cardTemplePlugin } from "./card-temple/index.js";
+import { cardSavannaPlugin } from "./card-savanna/index.js";
+import { diceQuestMiniPlugin } from "./dice-quest-mini/index.js";
+import { dicePortalPlugin } from "./dice-portal/index.js";
+import { diceTreasurePlugin } from "./dice-treasure/index.js";
+import { diceMountainPlugin } from "./dice-mountain/index.js";
+import { diceCavePlugin } from "./dice-cave/index.js";
+import { golfBallTapPlugin } from "./golf-ball-tap/index.js";
+import { tennisBallTapPlugin } from "./tennis-ball-tap/index.js";
+import { baseballTapPlugin } from "./baseball-tap/index.js";
+import { soccerBallTapPlugin } from "./soccer-ball-tap/index.js";
+import { bowlingPinTapPlugin } from "./bowling-pin-tap/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3733,4 +3768,39 @@ export const GAMES: GamePlugin[] = [
   cogClickPlugin as unknown as GamePlugin,
   gearGrabPlugin as unknown as GamePlugin,
   circuitCapPlugin as unknown as GamePlugin,
+  medievalLifeQuizPlugin as unknown as GamePlugin,
+  feudalJapanQuizPlugin as unknown as GamePlugin,
+  ottomanEmpireQuizPlugin as unknown as GamePlugin,
+  byzantineQuizPlugin as unknown as GamePlugin,
+  mongolEmpireQuizPlugin as unknown as GamePlugin,
+  mayanQuizPlugin as unknown as GamePlugin,
+  incanQuizPlugin as unknown as GamePlugin,
+  aztecQuizPlugin as unknown as GamePlugin,
+  vikingQuizPlugin as unknown as GamePlugin,
+  prehistoricQuizPlugin as unknown as GamePlugin,
+  medicalDiscoveriesQuizPlugin as unknown as GamePlugin,
+  physicsDiscoveriesQuizPlugin as unknown as GamePlugin,
+  spaceDiscoveriesQuizPlugin as unknown as GamePlugin,
+  inventorsToolsQuizPlugin as unknown as GamePlugin,
+  transportInventionsQuizPlugin as unknown as GamePlugin,
+  communicationInventionsQuizPlugin as unknown as GamePlugin,
+  foodInventionsQuizPlugin as unknown as GamePlugin,
+  weaponInventionsQuizPlugin as unknown as GamePlugin,
+  cardCliffPlugin as unknown as GamePlugin,
+  cardJunglePlugin as unknown as GamePlugin,
+  cardOceanPlugin as unknown as GamePlugin,
+  cardVolcanoPlugin as unknown as GamePlugin,
+  cardGlacierPlugin as unknown as GamePlugin,
+  cardTemplePlugin as unknown as GamePlugin,
+  cardSavannaPlugin as unknown as GamePlugin,
+  diceQuestMiniPlugin as unknown as GamePlugin,
+  dicePortalPlugin as unknown as GamePlugin,
+  diceTreasurePlugin as unknown as GamePlugin,
+  diceMountainPlugin as unknown as GamePlugin,
+  diceCavePlugin as unknown as GamePlugin,
+  golfBallTapPlugin as unknown as GamePlugin,
+  tennisBallTapPlugin as unknown as GamePlugin,
+  baseballTapPlugin as unknown as GamePlugin,
+  soccerBallTapPlugin as unknown as GamePlugin,
+  bowlingPinTapPlugin as unknown as GamePlugin,
 ];
