@@ -2076,6 +2076,41 @@ import { bikeBashPlugin } from "./bike-bash/index.js";
 import { truckTapPlugin } from "./truck-tap/index.js";
 import { busBashPlugin } from "./bus-bash/index.js";
 import { trainTapPlugin } from "./train-tap/index.js";
+import { vintageCarsQuizPlugin } from "./vintage-cars-quiz/index.js";
+import { muscleCarsQuizPlugin } from "./muscle-cars-quiz/index.js";
+import { supercarsQuizPlugin } from "./supercars-quiz/index.js";
+import { trucksHistoryQuizPlugin } from "./trucks-history-quiz/index.js";
+import { schoolBusesQuizPlugin } from "./school-buses-quiz/index.js";
+import { subwaysQuizPlugin } from "./subways-quiz/index.js";
+import { bulletTrainsQuizPlugin } from "./bullet-trains-quiz/index.js";
+import { helicoptersQuizPlugin } from "./helicopters-quiz/index.js";
+import { submarinesQuizPlugin } from "./submarines-quiz/index.js";
+import { cruiseShipsQuizPlugin } from "./cruise-ships-quiz/index.js";
+import { dogCareQuizPlugin } from "./dog-care-quiz/index.js";
+import { catCareQuizPlugin } from "./cat-care-quiz/index.js";
+import { aquariumQuizPlugin } from "./aquarium-quiz/index.js";
+import { birdCareQuizPlugin } from "./bird-care-quiz/index.js";
+import { reptileCareQuizPlugin } from "./reptile-care-quiz/index.js";
+import { horseCareQuizPlugin } from "./horse-care-quiz/index.js";
+import { farmAnimalQuizPlugin } from "./farm-animal-quiz/index.js";
+import { wildlifeQuizPlugin } from "./wildlife-quiz/index.js";
+import { cardGroceryPlugin } from "./card-grocery/index.js";
+import { cardPharmacyPlugin } from "./card-pharmacy/index.js";
+import { cardRestaurantPlugin } from "./card-restaurant/index.js";
+import { cardCoffeePlugin } from "./card-coffee/index.js";
+import { cardBakeryPlugin } from "./card-bakery/index.js";
+import { cardFlowerShopPlugin } from "./card-flower-shop/index.js";
+import { cardBookshopPlugin } from "./card-bookshop/index.js";
+import { diceTrapezePlugin } from "./dice-trapeze/index.js";
+import { diceCircusPlugin } from "./dice-circus/index.js";
+import { diceMagicPlugin } from "./dice-magic/index.js";
+import { diceOrchestraPlugin } from "./dice-orchestra/index.js";
+import { diceBallroomPlugin } from "./dice-ballroom/index.js";
+import { pencilPopPlugin } from "./pencil-pop/index.js";
+import { eraserTapPlugin } from "./eraser-tap/index.js";
+import { staplerSnapPlugin } from "./stapler-snap/index.js";
+import { paperclipPinchPlugin } from "./paperclip-pinch/index.js";
+import { rulerRumblePlugin } from "./ruler-rumble/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4153,4 +4188,39 @@ export const GAMES: GamePlugin[] = [
   truckTapPlugin as unknown as GamePlugin,
   busBashPlugin as unknown as GamePlugin,
   trainTapPlugin as unknown as GamePlugin,
+  vintageCarsQuizPlugin as unknown as GamePlugin,
+  muscleCarsQuizPlugin as unknown as GamePlugin,
+  supercarsQuizPlugin as unknown as GamePlugin,
+  trucksHistoryQuizPlugin as unknown as GamePlugin,
+  schoolBusesQuizPlugin as unknown as GamePlugin,
+  subwaysQuizPlugin as unknown as GamePlugin,
+  bulletTrainsQuizPlugin as unknown as GamePlugin,
+  helicoptersQuizPlugin as unknown as GamePlugin,
+  submarinesQuizPlugin as unknown as GamePlugin,
+  cruiseShipsQuizPlugin as unknown as GamePlugin,
+  dogCareQuizPlugin as unknown as GamePlugin,
+  catCareQuizPlugin as unknown as GamePlugin,
+  aquariumQuizPlugin as unknown as GamePlugin,
+  birdCareQuizPlugin as unknown as GamePlugin,
+  reptileCareQuizPlugin as unknown as GamePlugin,
+  horseCareQuizPlugin as unknown as GamePlugin,
+  farmAnimalQuizPlugin as unknown as GamePlugin,
+  wildlifeQuizPlugin as unknown as GamePlugin,
+  cardGroceryPlugin as unknown as GamePlugin,
+  cardPharmacyPlugin as unknown as GamePlugin,
+  cardRestaurantPlugin as unknown as GamePlugin,
+  cardCoffeePlugin as unknown as GamePlugin,
+  cardBakeryPlugin as unknown as GamePlugin,
+  cardFlowerShopPlugin as unknown as GamePlugin,
+  cardBookshopPlugin as unknown as GamePlugin,
+  diceTrapezePlugin as unknown as GamePlugin,
+  diceCircusPlugin as unknown as GamePlugin,
+  diceMagicPlugin as unknown as GamePlugin,
+  diceOrchestraPlugin as unknown as GamePlugin,
+  diceBallroomPlugin as unknown as GamePlugin,
+  pencilPopPlugin as unknown as GamePlugin,
+  eraserTapPlugin as unknown as GamePlugin,
+  staplerSnapPlugin as unknown as GamePlugin,
+  paperclipPinchPlugin as unknown as GamePlugin,
+  rulerRumblePlugin as unknown as GamePlugin,
 ];
