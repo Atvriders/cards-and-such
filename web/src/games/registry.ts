@@ -2260,6 +2260,41 @@ import { capablancaChessPlugin } from "./capablanca-chess/index.js";
 import { gothicChessPlugin } from "./gothic-chess/index.js";
 import { omegaChessPlugin } from "./omega-chess/index.js";
 import { seirawanChessPlugin } from "./seirawan-chess/index.js";
+import { klondikeDealOnePlugin } from "./klondike-deal-one/index.js";
+import { agnesSorelPlugin } from "./agnes-sorel/index.js";
+import { athenaPlugin } from "./athena/index.js";
+import { blindHookeyPlugin } from "./blind-hookey/index.js";
+import { westhavenPlugin } from "./westhaven/index.js";
+import { demonPatiencePlugin } from "./demon-patience/index.js";
+import { doubleKlondikePlugin } from "./double-klondike/index.js";
+import { tripleKlondikePlugin } from "./triple-klondike/index.js";
+import { freecellClassicPlugin } from "./freecell-classic/index.js";
+import { seahavenTowersPlugin } from "./seahaven-towers/index.js";
+import { stalactitesPlugin } from "./stalactites/index.js";
+import { goodMeasurePlugin } from "./good-measure/index.js";
+import { spanishPatiencePlugin } from "./spanish-patience/index.js";
+import { spiderOneSuitPlugin } from "./spider-one-suit/index.js";
+import { spiderTwoSuitsPlugin } from "./spider-two-suits/index.js";
+import { waspPlugin } from "./wasp/index.js";
+import { spidikePlugin } from "./spidike/index.js";
+import { blackWidowPlugin } from "./black-widow/index.js";
+import { willOWispPlugin } from "./will-o-wisp/index.js";
+import { tutTombPlugin } from "./tut-tomb/index.js";
+import { gizaPyramidPlugin } from "./giza-pyramid/index.js";
+import { apophisPlugin } from "./apophis/index.js";
+import { triPeaksContinuousPlugin } from "./tri-peaks-continuous/index.js";
+import { golfParPlugin } from "./golf-par/index.js";
+import { allInARowPlugin } from "./all-in-a-row/index.js";
+import { clockPatiencePlugin } from "./clock-patience/index.js";
+import { montanaGapsPlugin } from "./montana-gaps/index.js";
+import { canfieldChameleonPlugin } from "./canfield-chameleon/index.js";
+import { storehouseCanfieldPlugin } from "./storehouse-canfield/index.js";
+import { sirTommyPlugin } from "./sir-tommy/index.js";
+import { fortressPlugin } from "./fortress/index.js";
+import { bouquetPlugin } from "./bouquet/index.js";
+import { accordionSolitairePlugin } from "./accordion-solitaire/index.js";
+import { alaskaSolitairePlugin } from "./alaska-solitaire/index.js";
+import { stonewallPlugin } from "./stonewall/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4521,4 +4556,39 @@ export const GAMES: GamePlugin[] = [
   gothicChessPlugin as unknown as GamePlugin,
   omegaChessPlugin as unknown as GamePlugin,
   seirawanChessPlugin as unknown as GamePlugin,
+  klondikeDealOnePlugin as unknown as GamePlugin,
+  agnesSorelPlugin as unknown as GamePlugin,
+  athenaPlugin as unknown as GamePlugin,
+  blindHookeyPlugin as unknown as GamePlugin,
+  westhavenPlugin as unknown as GamePlugin,
+  demonPatiencePlugin as unknown as GamePlugin,
+  doubleKlondikePlugin as unknown as GamePlugin,
+  tripleKlondikePlugin as unknown as GamePlugin,
+  freecellClassicPlugin as unknown as GamePlugin,
+  seahavenTowersPlugin as unknown as GamePlugin,
+  stalactitesPlugin as unknown as GamePlugin,
+  goodMeasurePlugin as unknown as GamePlugin,
+  spanishPatiencePlugin as unknown as GamePlugin,
+  spiderOneSuitPlugin as unknown as GamePlugin,
+  spiderTwoSuitsPlugin as unknown as GamePlugin,
+  waspPlugin as unknown as GamePlugin,
+  spidikePlugin as unknown as GamePlugin,
+  blackWidowPlugin as unknown as GamePlugin,
+  willOWispPlugin as unknown as GamePlugin,
+  tutTombPlugin as unknown as GamePlugin,
+  gizaPyramidPlugin as unknown as GamePlugin,
+  apophisPlugin as unknown as GamePlugin,
+  triPeaksContinuousPlugin as unknown as GamePlugin,
+  golfParPlugin as unknown as GamePlugin,
+  allInARowPlugin as unknown as GamePlugin,
+  clockPatiencePlugin as unknown as GamePlugin,
+  montanaGapsPlugin as unknown as GamePlugin,
+  canfieldChameleonPlugin as unknown as GamePlugin,
+  storehouseCanfieldPlugin as unknown as GamePlugin,
+  sirTommyPlugin as unknown as GamePlugin,
+  fortressPlugin as unknown as GamePlugin,
+  bouquetPlugin as unknown as GamePlugin,
+  accordionSolitairePlugin as unknown as GamePlugin,
+  alaskaSolitairePlugin as unknown as GamePlugin,
+  stonewallPlugin as unknown as GamePlugin,
 ];
