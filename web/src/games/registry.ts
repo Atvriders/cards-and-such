@@ -2225,6 +2225,41 @@ import { shanghaiDynastyPlugin } from "./shanghai-dynasty/index.js";
 import { mahjongTrailsPlugin } from "./mahjong-trails/index.js";
 import { mahjongQuestPlugin } from "./mahjong-quest/index.js";
 import { butterflyPuzzleTilesPlugin } from "./butterfly-puzzle-tiles/index.js";
+import { bughousePlugin } from "./bughouse/index.js";
+import { losingChessPlugin } from "./losing-chess/index.js";
+import { threeCheckChessPlugin } from "./three-check-chess/index.js";
+import { fogOfWarChessPlugin } from "./fog-of-war-chess/index.js";
+import { fourPlayerChessTeamsPlugin } from "./four-player-chess-teams/index.js";
+import { fourPlayerChessFfaPlugin } from "./four-player-chess-ffa/index.js";
+import { threePlayerChessPlugin } from "./three-player-chess/index.js";
+import { fischerCrazyhousePlugin } from "./fischer-crazyhouse/index.js";
+import { hexChessMccooeyPlugin } from "./hex-chess-mccooey/index.js";
+import { hexChessGlinskiPlugin } from "./hex-chess-glinski/index.js";
+import { hexChessShafranPlugin } from "./hex-chess-shafran/index.js";
+import { circularChessPlugin } from "./circular-chess/index.js";
+import { aliceChessPlugin } from "./alice-chess/index.js";
+import { knightmateChessPlugin } from "./knightmate-chess/index.js";
+import { losAlamosChessPlugin } from "./los-alamos-chess/index.js";
+import { microchessPlugin } from "./microchess/index.js";
+import { minichess5x5Plugin } from "./minichess-5x5/index.js";
+import { cylinderChessPlugin } from "./cylinder-chess/index.js";
+import { toroidalChessPlugin } from "./toroidal-chess/index.js";
+import { darkChessPlugin } from "./dark-chess/index.js";
+import { scottishProgressivePlugin } from "./scottish-progressive/index.js";
+import { rifleChessPlugin } from "./rifle-chess/index.js";
+import { leganChessPlugin } from "./legan-chess/index.js";
+import { preChessPlugin } from "./pre-chess/index.js";
+import { marseillaisChessPlugin } from "./marseillais-chess/index.js";
+import { transcendentalChessPlugin } from "./transcendental-chess/index.js";
+import { pocketKnightChessPlugin } from "./pocket-knight-chess/index.js";
+import { spartanChessPlugin } from "./spartan-chess/index.js";
+import { almostChessPlugin } from "./almost-chess/index.js";
+import { embassyChessPlugin } from "./embassy-chess/index.js";
+import { grandChessPlugin } from "./grand-chess/index.js";
+import { capablancaChessPlugin } from "./capablanca-chess/index.js";
+import { gothicChessPlugin } from "./gothic-chess/index.js";
+import { omegaChessPlugin } from "./omega-chess/index.js";
+import { seirawanChessPlugin } from "./seirawan-chess/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4451,4 +4486,39 @@ export const GAMES: GamePlugin[] = [
   mahjongTrailsPlugin as unknown as GamePlugin,
   mahjongQuestPlugin as unknown as GamePlugin,
   butterflyPuzzleTilesPlugin as unknown as GamePlugin,
+  bughousePlugin as unknown as GamePlugin,
+  losingChessPlugin as unknown as GamePlugin,
+  threeCheckChessPlugin as unknown as GamePlugin,
+  fogOfWarChessPlugin as unknown as GamePlugin,
+  fourPlayerChessTeamsPlugin as unknown as GamePlugin,
+  fourPlayerChessFfaPlugin as unknown as GamePlugin,
+  threePlayerChessPlugin as unknown as GamePlugin,
+  fischerCrazyhousePlugin as unknown as GamePlugin,
+  hexChessMccooeyPlugin as unknown as GamePlugin,
+  hexChessGlinskiPlugin as unknown as GamePlugin,
+  hexChessShafranPlugin as unknown as GamePlugin,
+  circularChessPlugin as unknown as GamePlugin,
+  aliceChessPlugin as unknown as GamePlugin,
+  knightmateChessPlugin as unknown as GamePlugin,
+  losAlamosChessPlugin as unknown as GamePlugin,
+  microchessPlugin as unknown as GamePlugin,
+  minichess5x5Plugin as unknown as GamePlugin,
+  cylinderChessPlugin as unknown as GamePlugin,
+  toroidalChessPlugin as unknown as GamePlugin,
+  darkChessPlugin as unknown as GamePlugin,
+  scottishProgressivePlugin as unknown as GamePlugin,
+  rifleChessPlugin as unknown as GamePlugin,
+  leganChessPlugin as unknown as GamePlugin,
+  preChessPlugin as unknown as GamePlugin,
+  marseillaisChessPlugin as unknown as GamePlugin,
+  transcendentalChessPlugin as unknown as GamePlugin,
+  pocketKnightChessPlugin as unknown as GamePlugin,
+  spartanChessPlugin as unknown as GamePlugin,
+  almostChessPlugin as unknown as GamePlugin,
+  embassyChessPlugin as unknown as GamePlugin,
+  grandChessPlugin as unknown as GamePlugin,
+  capablancaChessPlugin as unknown as GamePlugin,
+  gothicChessPlugin as unknown as GamePlugin,
+  omegaChessPlugin as unknown as GamePlugin,
+  seirawanChessPlugin as unknown as GamePlugin,
 ];
