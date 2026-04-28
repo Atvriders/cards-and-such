@@ -1901,6 +1901,41 @@ import { baseballTapPlugin } from "./baseball-tap/index.js";
 import { soccerBallTapPlugin } from "./soccer-ball-tap/index.js";
 import { bowlingPinTapPlugin } from "./bowling-pin-tap/index.js";
 
+import { eurovisionQuizPlugin } from "./eurovision-quiz/index.js";
+import { grammyAwardsQuizPlugin } from "./grammy-awards-quiz/index.js";
+import { billboardHitsQuizPlugin } from "./billboard-hits-quiz/index.js";
+import { mtvMusicAwardsQuizPlugin } from "./mtv-music-awards-quiz/index.js";
+import { americanIdolQuizPlugin } from "./american-idol-quiz/index.js";
+import { voiceShowQuizPlugin } from "./voice-show-quiz/index.js";
+import { xfactorQuizPlugin } from "./xfactor-quiz/index.js";
+import { karaokeClassicsQuizPlugin } from "./karaoke-classics-quiz/index.js";
+import { oneHitWondersQuizPlugin } from "./one-hit-wonders-quiz/index.js";
+import { summerHitsQuizPlugin } from "./summer-hits-quiz/index.js";
+import { appleHistoryQuizPlugin } from "./apple-history-quiz/index.js";
+import { microsoftHistoryQuizPlugin } from "./microsoft-history-quiz/index.js";
+import { googleHistoryQuizPlugin } from "./google-history-quiz/index.js";
+import { facebookHistoryQuizPlugin } from "./facebook-history-quiz/index.js";
+import { amazonHistoryQuizPlugin } from "./amazon-history-quiz/index.js";
+import { netflixHistoryQuizPlugin } from "./netflix-history-quiz/index.js";
+import { teslaHistoryQuizPlugin } from "./tesla-history-quiz/index.js";
+import { spacexHistoryQuizPlugin } from "./spacex-history-quiz/index.js";
+import { cardTornadoPlugin } from "./card-tornado/index.js";
+import { cardFloodPlugin } from "./card-flood/index.js";
+import { cardMeteorPlugin } from "./card-meteor/index.js";
+import { cardEclipsePlugin } from "./card-eclipse/index.js";
+import { cardAuroraPlugin } from "./card-aurora/index.js";
+import { cardMiragePlugin } from "./card-mirage/index.js";
+import { cardLighthousePlugin } from "./card-lighthouse/index.js";
+import { diceTemplePlugin } from "./dice-temple/index.js";
+import { diceCastlePlugin } from "./dice-castle/index.js";
+import { diceTowerMiniPlugin } from "./dice-tower-mini/index.js";
+import { diceGalaxyPlugin } from "./dice-galaxy/index.js";
+import { diceTyphoonPlugin } from "./dice-typhoon/index.js";
+import { coconutCrackPlugin } from "./coconut-crack/index.js";
+import { mangoTapPlugin } from "./mango-tap/index.js";
+import { pineapplePopPlugin } from "./pineapple-pop/index.js";
+import { palmFrondPlugin } from "./palm-frond/index.js";
+import { surfSpikePlugin } from "./surf-spike/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -3803,4 +3838,39 @@ export const GAMES: GamePlugin[] = [
   baseballTapPlugin as unknown as GamePlugin,
   soccerBallTapPlugin as unknown as GamePlugin,
   bowlingPinTapPlugin as unknown as GamePlugin,
+  eurovisionQuizPlugin as unknown as GamePlugin,
+  grammyAwardsQuizPlugin as unknown as GamePlugin,
+  billboardHitsQuizPlugin as unknown as GamePlugin,
+  mtvMusicAwardsQuizPlugin as unknown as GamePlugin,
+  americanIdolQuizPlugin as unknown as GamePlugin,
+  voiceShowQuizPlugin as unknown as GamePlugin,
+  xfactorQuizPlugin as unknown as GamePlugin,
+  karaokeClassicsQuizPlugin as unknown as GamePlugin,
+  oneHitWondersQuizPlugin as unknown as GamePlugin,
+  summerHitsQuizPlugin as unknown as GamePlugin,
+  appleHistoryQuizPlugin as unknown as GamePlugin,
+  microsoftHistoryQuizPlugin as unknown as GamePlugin,
+  googleHistoryQuizPlugin as unknown as GamePlugin,
+  facebookHistoryQuizPlugin as unknown as GamePlugin,
+  amazonHistoryQuizPlugin as unknown as GamePlugin,
+  netflixHistoryQuizPlugin as unknown as GamePlugin,
+  teslaHistoryQuizPlugin as unknown as GamePlugin,
+  spacexHistoryQuizPlugin as unknown as GamePlugin,
+  cardTornadoPlugin as unknown as GamePlugin,
+  cardFloodPlugin as unknown as GamePlugin,
+  cardMeteorPlugin as unknown as GamePlugin,
+  cardEclipsePlugin as unknown as GamePlugin,
+  cardAuroraPlugin as unknown as GamePlugin,
+  cardMiragePlugin as unknown as GamePlugin,
+  cardLighthousePlugin as unknown as GamePlugin,
+  diceTemplePlugin as unknown as GamePlugin,
+  diceCastlePlugin as unknown as GamePlugin,
+  diceTowerMiniPlugin as unknown as GamePlugin,
+  diceGalaxyPlugin as unknown as GamePlugin,
+  diceTyphoonPlugin as unknown as GamePlugin,
+  coconutCrackPlugin as unknown as GamePlugin,
+  mangoTapPlugin as unknown as GamePlugin,
+  pineapplePopPlugin as unknown as GamePlugin,
+  palmFrondPlugin as unknown as GamePlugin,
+  surfSpikePlugin as unknown as GamePlugin,
 ];
