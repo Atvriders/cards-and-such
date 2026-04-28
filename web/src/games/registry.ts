@@ -2575,6 +2575,41 @@ import { knockRummyRPlugin } from "./knock-rummy-r/index.js";
 import { threeThirteenRPlugin } from "./three-thirteen-r/index.js";
 import { boathouseRPlugin } from "./boathouse-r/index.js";
 import { scalaFortyRPlugin } from "./scala-forty-r/index.js";
+import { generalaServidaPlugin } from "./generala-servida/index.js";
+import { generalaDoblePlugin } from "./generala-doble/index.js";
+import { yambDicePlugin } from "./yamb-dice/index.js";
+import { tripleYahtzeePlugin } from "./triple-yahtzee/index.js";
+import { battleYahtzeePlugin } from "./battle-yahtzee/index.js";
+import { jumboYahtzeePlugin } from "./jumbo-yahtzee/index.js";
+import { maxiYatzyPlugin } from "./maxi-yatzy/index.js";
+import { kniffelPlugin } from "./kniffel/index.js";
+import { pigTwoDicePlugin } from "./pig-two-dice/index.js";
+import { hogDicePlugin } from "./hog-dice/index.js";
+import { skunkDicePlugin } from "./skunk-dice/index.js";
+import { dice10000Plugin } from "./dice-10000/index.js";
+import { dinoHuntDicePlugin } from "./dino-hunt-dice/index.js";
+import { cthulhuDicePlugin } from "./cthulhu-dice/index.js";
+import { buncoDicePlugin } from "./bunco-dice/index.js";
+import { helpingNeighborPlugin } from "./helping-neighbor/index.js";
+import { passeDixPlugin } from "./passe-dix/index.js";
+import { zanzibarDicePlugin } from "./zanzibar-dice/index.js";
+import { barboothPlugin } from "./barbooth/index.js";
+import { hooliganDicePlugin } from "./hooligan-dice/index.js";
+import { glucksshausPlugin } from "./glucksshaus/index.js";
+import { dice421Plugin } from "./dice-421/index.js";
+import { craplessCrapsPlugin } from "./crapless-craps/index.js";
+import { highPointCrapsPlugin } from "./high-point-craps/index.js";
+import { bankCrapsPlugin } from "./bank-craps/index.js";
+import { brandubhPlugin } from "./brandubh/index.js";
+import { ardRiPlugin } from "./ard-ri/index.js";
+import { magpieTaflPlugin } from "./magpie-tafl/index.js";
+import { zammaPlugin } from "./zamma/index.js";
+import { dameoPlugin } from "./dameo/index.js";
+import { yavalathPlugin } from "./yavalath/index.js";
+import { ponnukiPlugin } from "./ponnuki/index.js";
+import { tablanPlugin } from "./tablan/index.js";
+import { daldosPlugin } from "./daldos/index.js";
+import { pallanguzhiPlugin } from "./pallanguzhi/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5151,4 +5186,39 @@ export const GAMES: GamePlugin[] = [
   threeThirteenRPlugin as unknown as GamePlugin,
   boathouseRPlugin as unknown as GamePlugin,
   scalaFortyRPlugin as unknown as GamePlugin,
+  generalaServidaPlugin as unknown as GamePlugin,
+  generalaDoblePlugin as unknown as GamePlugin,
+  yambDicePlugin as unknown as GamePlugin,
+  tripleYahtzeePlugin as unknown as GamePlugin,
+  battleYahtzeePlugin as unknown as GamePlugin,
+  jumboYahtzeePlugin as unknown as GamePlugin,
+  maxiYatzyPlugin as unknown as GamePlugin,
+  kniffelPlugin as unknown as GamePlugin,
+  pigTwoDicePlugin as unknown as GamePlugin,
+  hogDicePlugin as unknown as GamePlugin,
+  skunkDicePlugin as unknown as GamePlugin,
+  dice10000Plugin as unknown as GamePlugin,
+  dinoHuntDicePlugin as unknown as GamePlugin,
+  cthulhuDicePlugin as unknown as GamePlugin,
+  buncoDicePlugin as unknown as GamePlugin,
+  helpingNeighborPlugin as unknown as GamePlugin,
+  passeDixPlugin as unknown as GamePlugin,
+  zanzibarDicePlugin as unknown as GamePlugin,
+  barboothPlugin as unknown as GamePlugin,
+  hooliganDicePlugin as unknown as GamePlugin,
+  glucksshausPlugin as unknown as GamePlugin,
+  dice421Plugin as unknown as GamePlugin,
+  craplessCrapsPlugin as unknown as GamePlugin,
+  highPointCrapsPlugin as unknown as GamePlugin,
+  bankCrapsPlugin as unknown as GamePlugin,
+  brandubhPlugin as unknown as GamePlugin,
+  ardRiPlugin as unknown as GamePlugin,
+  magpieTaflPlugin as unknown as GamePlugin,
+  zammaPlugin as unknown as GamePlugin,
+  dameoPlugin as unknown as GamePlugin,
+  yavalathPlugin as unknown as GamePlugin,
+  ponnukiPlugin as unknown as GamePlugin,
+  tablanPlugin as unknown as GamePlugin,
+  daldosPlugin as unknown as GamePlugin,
+  pallanguzhiPlugin as unknown as GamePlugin,
 ];
