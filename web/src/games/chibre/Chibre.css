@@ -1,0 +1,18 @@
+.chibre-game { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1rem; background: #1a3a52; min-height: 100%; color: #fff; font-family: sans-serif; box-sizing: border-box; }
+.chibre-header { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; background: rgba(0,0,0,0.35); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700; }
+.chibre-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.chibre-bot-row { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.chibre-card-backs { display: flex; gap: 2px; }
+.chibre-card-back { width: 24px; height: 36px; background: #0d2a44; border-radius: 3px; border: 2px solid rgba(255,255,255,0.3); }
+.chibre-trick { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.chibre-trick-cards { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; min-height: 80px; align-items: center; }
+.chibre-trick-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.chibre-trick-name { font-size: 0.65rem; opacity: 0.6; }
+.chibre-status { background: rgba(0,0,0,0.4); padding: 0.3rem 1rem; border-radius: 6px; font-size: 0.85rem; text-align: center; }
+.chibre-player-area { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.chibre-player-hand { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; max-width: 92vw; }
+.chibre-player-hand .card { cursor: pointer; transition: transform 0.1s; }
+.chibre-player-hand .card:hover { transform: translateY(-6px); }
+.chibre-player-hand .card.dim { opacity: 0.4; cursor: default; }
+.chibre-result { background: rgba(0,0,0,0.6); padding: 1.5rem 2rem; border-radius: 10px; text-align: center; }
+.chibre-result h2 { margin: 0; font-size: 1.4rem; }

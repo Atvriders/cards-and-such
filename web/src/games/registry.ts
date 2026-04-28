@@ -2505,6 +2505,41 @@ import { tribondCluePlugin } from "./tribond-clue/index.js";
 import { catchphraseCluePlugin } from "./catchphrase-clue/index.js";
 import { textTwistMiniPlugin } from "./text-twist-mini/index.js";
 import { anagramMagicPlugin } from "./anagram-magic/index.js";
+import { blackLadyPlugin } from "./black-lady/index.js";
+import { omnibusHeartsPlugin } from "./omnibus-hearts/index.js";
+import { spotHeartsPlugin } from "./spot-hearts/index.js";
+import { cancellationHeartsPlugin } from "./cancellation-hearts/index.js";
+import { cutthroatSpadesPlugin } from "./cutthroat-spades/index.js";
+import { mirrorSpadesPlugin } from "./mirror-spades/index.js";
+import { whizSpadesPlugin } from "./whiz-spades/index.js";
+import { bidWhistPlugin } from "./bid-whist/index.js";
+import { knockoutWhistPlugin } from "./knockout-whist/index.js";
+import { bidEuchrePlugin } from "./bid-euchre/index.js";
+import { pepperPlugin } from "./pepper/index.js";
+import { fourHundredPlugin } from "./four-hundred/index.js";
+import { doubleDeckPinochlePlugin } from "./double-deck-pinochle/index.js";
+import { cutthroatPinochlePlugin } from "./cutthroat-pinochle/index.js";
+import { preferencePlugin } from "./preference/index.js";
+import { coinchePlugin } from "./coinche/index.js";
+import { briscolaChiamataPlugin } from "./briscola-chiamata/index.js";
+import { scoponePlugin } from "./scopone/index.js";
+import { madrassoPlugin } from "./madrasso/index.js";
+import { marafonePlugin } from "./marafone/index.js";
+import { sedmaPlugin } from "./sedma/index.js";
+import { schieberJassPlugin } from "./schieber-jass/index.js";
+import { differenzlerJassPlugin } from "./differenzler-jass/index.js";
+import { chibrePlugin } from "./chibre/index.js";
+import { spoilFivePlugin } from "./spoil-five/index.js";
+import { fortyFivePlugin } from "./forty-five/index.js";
+import { foxInForestPlugin } from "./fox-in-forest/index.js";
+import { sixtySixPlugin } from "./sixty-six/index.js";
+import { rookPlugin } from "./rook/index.js";
+import { bowerPlugin } from "./bower/index.js";
+import { mendikotPlugin } from "./mendikot/index.js";
+import { courtPiecePlugin } from "./court-piece/index.js";
+import { seepPlugin } from "./seep/index.js";
+import { goStopCardPlugin } from "./go-stop/index.js";
+import { wattenPlugin } from "./watten/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5011,4 +5046,39 @@ export const GAMES: GamePlugin[] = [
   catchphraseCluePlugin as unknown as GamePlugin,
   textTwistMiniPlugin as unknown as GamePlugin,
   anagramMagicPlugin as unknown as GamePlugin,
+  blackLadyPlugin as unknown as GamePlugin,
+  omnibusHeartsPlugin as unknown as GamePlugin,
+  spotHeartsPlugin as unknown as GamePlugin,
+  cancellationHeartsPlugin as unknown as GamePlugin,
+  cutthroatSpadesPlugin as unknown as GamePlugin,
+  mirrorSpadesPlugin as unknown as GamePlugin,
+  whizSpadesPlugin as unknown as GamePlugin,
+  bidWhistPlugin as unknown as GamePlugin,
+  knockoutWhistPlugin as unknown as GamePlugin,
+  bidEuchrePlugin as unknown as GamePlugin,
+  pepperPlugin as unknown as GamePlugin,
+  fourHundredPlugin as unknown as GamePlugin,
+  doubleDeckPinochlePlugin as unknown as GamePlugin,
+  cutthroatPinochlePlugin as unknown as GamePlugin,
+  preferencePlugin as unknown as GamePlugin,
+  coinchePlugin as unknown as GamePlugin,
+  briscolaChiamataPlugin as unknown as GamePlugin,
+  scoponePlugin as unknown as GamePlugin,
+  madrassoPlugin as unknown as GamePlugin,
+  marafonePlugin as unknown as GamePlugin,
+  sedmaPlugin as unknown as GamePlugin,
+  schieberJassPlugin as unknown as GamePlugin,
+  differenzlerJassPlugin as unknown as GamePlugin,
+  chibrePlugin as unknown as GamePlugin,
+  spoilFivePlugin as unknown as GamePlugin,
+  fortyFivePlugin as unknown as GamePlugin,
+  foxInForestPlugin as unknown as GamePlugin,
+  sixtySixPlugin as unknown as GamePlugin,
+  rookPlugin as unknown as GamePlugin,
+  bowerPlugin as unknown as GamePlugin,
+  mendikotPlugin as unknown as GamePlugin,
+  courtPiecePlugin as unknown as GamePlugin,
+  seepPlugin as unknown as GamePlugin,
+  goStopCardPlugin as unknown as GamePlugin,
+  wattenPlugin as unknown as GamePlugin,
 ];
