@@ -1,0 +1,16 @@
+import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { CardFlowerPickupState, CardFlowerPickupAction, CardFlowerPickupSettings } from "./state.js";
+import { initialState, reducer, isTerminal } from "./state.js";
+import { CardFlowerPickupGame } from "./Game.js";
+const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+type S = SettingsOf<typeof settings>;
+export const cardFlowerPickupPlugin: GamePlugin<CardFlowerPickupState, CardFlowerPickupAction, typeof settings> = {
+  id:"card-flower-pickup", title:"Card Flower Pickup", category:"cards",
+  players:{ min:1, max:1, multiplayer:false },
+  description:"Same-suit bouquet scoring across draws.",
+  howToPlay:"Card Flower Pickup is a quick card-draw game with a same-suit bonus. 🌸 Each draw flips one card from a fresh 52-card deck. The card's rank gives you points: numbers (2-10) score their face value, Jack is 11, Queen is 12, King is 13, and Ace is 14.\n\nIf your new card matches the suit of the previous card, you score a bonus 5 points on top — chains of same-suit draws can rack up extra fast. The deck reshuffles each draw, so suits aren't depleting; you're just betting the seeded RNG sends you matching cards.\n\nYou play 12 draws total. Each draw shows the card and points; press Next to continue. There's no decision making — it's pure draw-and-tally fun. Average runs land near 100-130 points; lucky players riding suit streaks push 160+. The best part is the simple, clean shop-themed atmosphere with each draw.",
+  settings,
+  initialState:(seed:number,s:S)=>initialState(seed,s as CardFlowerPickupSettings),
+  reducer,isTerminal,component:CardFlowerPickupGame,
+};
