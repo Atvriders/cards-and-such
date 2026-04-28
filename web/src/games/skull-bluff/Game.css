@@ -1,0 +1,20 @@
+.bluff-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px;font-family:sans-serif;max-width:560px;margin:0 auto;}
+.bluff-header{display:flex;justify-content:space-between;width:100%;}
+.bluff-score{font-weight:700;color:#27ae60;}
+.bluff-claim{background:#fff8e1;border:2px solid #f1c40f;border-radius:12px;padding:18px;width:100%;text-align:center;}
+.bluff-cpu-line{color:#7d6608;font-weight:600;}
+.bluff-claim-text{font-size:1.4rem;font-weight:800;color:#2c3e50;margin:8px 0;}
+.bluff-tell{color:#c0392b;font-style:italic;font-size:0.95rem;}
+.bluff-tell.calm{color:#27ae60;}
+.bluff-actions{display:flex;gap:14px;}
+.bluff-btn{padding:12px 28px;border-radius:10px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
+.bluff-btn.trust{background:#27ae60;color:#fff;}
+.bluff-btn.call{background:#e74c3c;color:#fff;}
+.bluff-btn.next{background:#3498db;color:#fff;}
+.bluff-result{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;}
+.bluff-reveal{font-size:1.05rem;}
+.bluff-feedback{padding:8px 18px;border-radius:8px;font-weight:700;}
+.bluff-feedback.ok{background:#eafaf1;color:#1e8449;}
+.bluff-feedback.no{background:#fdedec;color:#c0392b;}
+.bluff-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
+.bluff-final{font-size:1.7rem;font-weight:900;color:#27ae60;}

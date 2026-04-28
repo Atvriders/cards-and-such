@@ -1,0 +1,9 @@
+.lo5-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:540px;margin:0 auto;}
+.lo5-header{font-size:1.1rem;font-weight:700;color:#2c3e50;}
+.lo5-grid{display:grid;gap:5px;background:#1c2833;padding:10px;border-radius:10px;}
+.lo5-cell{background:#34495e;border:2px solid #2c3e50;border-radius:6px;cursor:pointer;}
+.lo5-cell.on{background:#f1c40f;border-color:#f39c12;box-shadow:0 0 12px rgba(241,196,15,0.6);}
+.lo5-cell:hover{opacity:0.85;}
+.lo5-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;}
+.lo5-final{font-size:1.4rem;color:#27ae60;font-weight:900;margin:8px 0;}
+.lo5-btn{padding:10px 24px;border-radius:8px;border:none;background:#3498db;color:#fff;font-weight:700;cursor:pointer;}

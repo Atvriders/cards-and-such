@@ -2610,6 +2610,41 @@ import { ponnukiPlugin } from "./ponnuki/index.js";
 import { tablanPlugin } from "./tablan/index.js";
 import { daldosPlugin } from "./daldos/index.js";
 import { pallanguzhiPlugin } from "./pallanguzhi/index.js";
+import { cheatBsPlugin } from "./cheat-bs/index.js";
+import { palificoPlugin } from "./palifico/index.js";
+import { skullBluffPlugin } from "./skull-bluff/index.js";
+import { coupBluffPlugin } from "./coup-bluff/index.js";
+import { loveLetterMiniPlugin } from "./love-letter-mini/index.js";
+import { resistanceQuizPlugin } from "./resistance-quiz/index.js";
+import { avalonQuizPlugin } from "./avalon-quiz/index.js";
+import { secretHitlerQuizPlugin } from "./secret-hitler-quiz/index.js";
+import { werewolfQuizPlugin } from "./werewolf-quiz/index.js";
+import { saboteurMiniPlugin } from "./saboteur-mini/index.js";
+import { thirteenCluesPlugin } from "./thirteen-clues/index.js";
+import { cryptidMiniPlugin } from "./cryptid-mini/index.js";
+import { deceptionHkPlugin } from "./deception-hk/index.js";
+import { turingMachinePuzzlePlugin } from "./turing-machine-puzzle/index.js";
+import { tempelDeductionPlugin } from "./tempel-deduction/index.js";
+import { sleuthMiniPlugin } from "./sleuth-mini/index.js";
+import { code777MiniPlugin } from "./code-777-mini/index.js";
+import { clueMiniPlugin } from "./clue-mini/index.js";
+import { lingoDeductionPlugin } from "./lingo-deduction/index.js";
+import { chameleonBluffPlugin } from "./chameleon-bluff/index.js";
+import { insiderQuizPlugin } from "./insider-quiz/index.js";
+import { superMastermindPlugin } from "./super-mastermind/index.js";
+import { jottoPlugin } from "./jotto/index.js";
+import { blackBoxMiniPlugin } from "./black-box-mini/index.js";
+import { chineseRingsPlugin } from "./chinese-rings/index.js";
+import { fifteenTilesLogicPlugin } from "./fifteen-tiles-logic/index.js";
+import { eightPuzzlePlugin } from "./eight-puzzle/index.js";
+import { huaRongDaoPlugin } from "./hua-rong-dao/index.js";
+import { lightsOut5x5Plugin } from "./lights-out-5x5/index.js";
+import { hashiwokakeroMiniPlugin } from "./hashiwokakero-mini/index.js";
+import { colorPicrossMiniPlugin } from "./color-picross-mini/index.js";
+import { cloneSudokuMiniPlugin } from "./clone-sudoku-mini/index.js";
+import { windokuMiniPlugin } from "./windoku-mini/index.js";
+import { chaosSudokuMiniPlugin } from "./chaos-sudoku-mini/index.js";
+import { towerOfHanoiMiniPlugin } from "./tower-of-hanoi-mini/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5221,4 +5256,39 @@ export const GAMES: GamePlugin[] = [
   tablanPlugin as unknown as GamePlugin,
   daldosPlugin as unknown as GamePlugin,
   pallanguzhiPlugin as unknown as GamePlugin,
+  cheatBsPlugin as unknown as GamePlugin,
+  palificoPlugin as unknown as GamePlugin,
+  skullBluffPlugin as unknown as GamePlugin,
+  coupBluffPlugin as unknown as GamePlugin,
+  loveLetterMiniPlugin as unknown as GamePlugin,
+  resistanceQuizPlugin as unknown as GamePlugin,
+  avalonQuizPlugin as unknown as GamePlugin,
+  secretHitlerQuizPlugin as unknown as GamePlugin,
+  werewolfQuizPlugin as unknown as GamePlugin,
+  saboteurMiniPlugin as unknown as GamePlugin,
+  thirteenCluesPlugin as unknown as GamePlugin,
+  cryptidMiniPlugin as unknown as GamePlugin,
+  deceptionHkPlugin as unknown as GamePlugin,
+  turingMachinePuzzlePlugin as unknown as GamePlugin,
+  tempelDeductionPlugin as unknown as GamePlugin,
+  sleuthMiniPlugin as unknown as GamePlugin,
+  code777MiniPlugin as unknown as GamePlugin,
+  clueMiniPlugin as unknown as GamePlugin,
+  lingoDeductionPlugin as unknown as GamePlugin,
+  chameleonBluffPlugin as unknown as GamePlugin,
+  insiderQuizPlugin as unknown as GamePlugin,
+  superMastermindPlugin as unknown as GamePlugin,
+  jottoPlugin as unknown as GamePlugin,
+  blackBoxMiniPlugin as unknown as GamePlugin,
+  chineseRingsPlugin as unknown as GamePlugin,
+  fifteenTilesLogicPlugin as unknown as GamePlugin,
+  eightPuzzlePlugin as unknown as GamePlugin,
+  huaRongDaoPlugin as unknown as GamePlugin,
+  lightsOut5x5Plugin as unknown as GamePlugin,
+  hashiwokakeroMiniPlugin as unknown as GamePlugin,
+  colorPicrossMiniPlugin as unknown as GamePlugin,
+  cloneSudokuMiniPlugin as unknown as GamePlugin,
+  windokuMiniPlugin as unknown as GamePlugin,
+  chaosSudokuMiniPlugin as unknown as GamePlugin,
+  towerOfHanoiMiniPlugin as unknown as GamePlugin,
 ];
