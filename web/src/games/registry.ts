@@ -2155,6 +2155,41 @@ import { giftGrabPlugin } from "./gift-grab/index.js";
 import { cakeClutchPlugin } from "./cake-clutch/index.js";
 import { candleCapPlugin } from "./candle-cap/index.js";
 import { maskMashPlugin } from "./mask-mash/index.js";
+import { holdemNoLimitPlugin } from "./holdem-no-limit/index.js";
+import { holdemPotLimitPlugin } from "./holdem-pot-limit/index.js";
+import { holdemFixedLimitPlugin } from "./holdem-fixed-limit/index.js";
+import { holdemSpreadLimitPlugin } from "./holdem-spread-limit/index.js";
+import { omahaHiPlugin } from "./omaha-hi/index.js";
+import { omahaHiLoPlugin } from "./omaha-hi-lo/index.js";
+import { omahaFiveCardHiPlugin } from "./omaha-five-card-hi/index.js";
+import { omahaFiveCardHiLoPlugin } from "./omaha-five-card-hi-lo/index.js";
+import { courchevelPokerPlugin } from "./courchevel-poker/index.js";
+import { courchevelHiLoPlugin } from "./courchevel-hi-lo/index.js";
+import { sevenStudHiLoPlugin } from "./seven-stud-hi-lo/index.js";
+import { fiveStudPokerPlugin } from "./five-stud-poker/index.js";
+import { twoSevenTripleDrawPlugin } from "./two-seven-triple-draw/index.js";
+import { twoSevenSingleDrawPlugin } from "./two-seven-single-draw/index.js";
+import { aceFiveTripleDrawPlugin } from "./ace-five-triple-draw/index.js";
+import { badeucyPokerPlugin } from "./badeucy-poker/index.js";
+import { badaceyPokerPlugin } from "./badacey-poker/index.js";
+import { pineapplePokerPlugin } from "./pineapple-poker/index.js";
+import { crazyPineapplePlugin } from "./crazy-pineapple/index.js";
+import { lazyPineapplePlugin } from "./lazy-pineapple/index.js";
+import { superHoldemPlugin } from "./super-holdem/index.js";
+import { doubleFlopHoldemPlugin } from "./double-flop-holdem/index.js";
+import { doubleBoardBombPotPlugin } from "./double-board-bomb-pot/index.js";
+import { svitenSpecialPlugin } from "./sviten-special/index.js";
+import { horseMixPlugin } from "./horse-mix/index.js";
+import { hoseMixPlugin } from "./hose-mix/index.js";
+import { eightGameMixPlugin } from "./eight-game-mix/index.js";
+import { tenGameMixPlugin } from "./ten-game-mix/index.js";
+import { dealersChoicePokerPlugin } from "./dealers-choice-poker/index.js";
+import { headsUpSngPlugin } from "./heads-up-sng/index.js";
+import { shortDeckHoldemPlugin } from "./short-deck-holdem/index.js";
+import { openFaceChinesePlugin } from "./open-face-chinese/index.js";
+import { pineappleOfcPlugin } from "./pineapple-ofc/index.js";
+import { fantasylandOfcPlugin } from "./fantasyland-ofc/index.js";
+import { closedChinesePokerPlugin } from "./closed-chinese-poker/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4311,4 +4346,39 @@ export const GAMES: GamePlugin[] = [
   cakeClutchPlugin as unknown as GamePlugin,
   candleCapPlugin as unknown as GamePlugin,
   maskMashPlugin as unknown as GamePlugin,
+  holdemNoLimitPlugin as unknown as GamePlugin,
+  holdemPotLimitPlugin as unknown as GamePlugin,
+  holdemFixedLimitPlugin as unknown as GamePlugin,
+  holdemSpreadLimitPlugin as unknown as GamePlugin,
+  omahaHiPlugin as unknown as GamePlugin,
+  omahaHiLoPlugin as unknown as GamePlugin,
+  omahaFiveCardHiPlugin as unknown as GamePlugin,
+  omahaFiveCardHiLoPlugin as unknown as GamePlugin,
+  courchevelPokerPlugin as unknown as GamePlugin,
+  courchevelHiLoPlugin as unknown as GamePlugin,
+  sevenStudHiLoPlugin as unknown as GamePlugin,
+  fiveStudPokerPlugin as unknown as GamePlugin,
+  twoSevenTripleDrawPlugin as unknown as GamePlugin,
+  twoSevenSingleDrawPlugin as unknown as GamePlugin,
+  aceFiveTripleDrawPlugin as unknown as GamePlugin,
+  badeucyPokerPlugin as unknown as GamePlugin,
+  badaceyPokerPlugin as unknown as GamePlugin,
+  pineapplePokerPlugin as unknown as GamePlugin,
+  crazyPineapplePlugin as unknown as GamePlugin,
+  lazyPineapplePlugin as unknown as GamePlugin,
+  superHoldemPlugin as unknown as GamePlugin,
+  doubleFlopHoldemPlugin as unknown as GamePlugin,
+  doubleBoardBombPotPlugin as unknown as GamePlugin,
+  svitenSpecialPlugin as unknown as GamePlugin,
+  horseMixPlugin as unknown as GamePlugin,
+  hoseMixPlugin as unknown as GamePlugin,
+  eightGameMixPlugin as unknown as GamePlugin,
+  tenGameMixPlugin as unknown as GamePlugin,
+  dealersChoicePokerPlugin as unknown as GamePlugin,
+  headsUpSngPlugin as unknown as GamePlugin,
+  shortDeckHoldemPlugin as unknown as GamePlugin,
+  openFaceChinesePlugin as unknown as GamePlugin,
+  pineappleOfcPlugin as unknown as GamePlugin,
+  fantasylandOfcPlugin as unknown as GamePlugin,
+  closedChinesePokerPlugin as unknown as GamePlugin,
 ];
