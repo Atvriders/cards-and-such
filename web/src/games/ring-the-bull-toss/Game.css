@@ -1,0 +1,12 @@
+.pb-wrap { max-width: 480px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.pb-title { margin: 0; font-size: 1.1rem; }
+.pb-stats { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.pb-stats > div { background: #f3f4f6; padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; }
+.pb-pts { background: #fef9c3 !important; color: #92400e; font-weight: 700; }
+.pb-board { width: 220px; height: 220px; background: radial-gradient(circle, #fff 10%, #fde68a 30%, #fbbf24 50%, #ef4444 70%, #7f1d1d 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(0,0,0,0.3); }
+.pb-target { width: 80%; height: 80%; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.pb-bullseye { background: #1f2937; color: #fff; padding: 8px 14px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; }
+.pb-btn { padding: 9px 22px; border: 0; border-radius: 8px; cursor: pointer; background: #ef4444; color: #fff; font-weight: 700; }
+.pb-btn.alt { background: #1f2937; }
+.pb-btn:hover { opacity: 0.9; }
+.pb-done { background: #ecfccb; padding: 14px 22px; border-radius: 10px; text-align: center; font-weight: 800; }

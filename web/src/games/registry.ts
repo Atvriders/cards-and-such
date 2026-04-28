@@ -2750,6 +2750,41 @@ import { wanderhomeJourneyPlugin } from "./wanderhome-journey/index.js";
 import { quillLettersPlugin } from "./quill-letters/index.js";
 import { sigilWizardPlugin } from "./sigil-wizard/index.js";
 import { cartaExplorerPlugin } from "./carta-explorer/index.js";
+import { stockpileSharesPlugin } from "./stockpile-shares/index.js";
+import { bullBearMarketPlugin } from "./bull-bear-market/index.js";
+import { acquireHotelsPlugin } from "./acquire-hotels/index.js";
+import { farmageddonCropsPlugin } from "./farmageddon-crops/index.js";
+import { coffeeTradersMiniPlugin } from "./coffee-traders-mini/index.js";
+import { baronsEnginePlugin } from "./barons-engine/index.js";
+import { splendorGemsPlugin } from "./splendor-gems/index.js";
+import { spiceRoadTraderPlugin } from "./spice-road-trader/index.js";
+import { brassCanalsPlugin } from "./brass-canals/index.js";
+import { monopolyDealMiniPlugin } from "./monopoly-deal-mini/index.js";
+import { ponziCollapsePlugin } from "./ponzi-collapse/index.js";
+import { alturienMarketPlugin } from "./alturien-market/index.js";
+import { scovillePeppersPlugin } from "./scoville-peppers/index.js";
+import { charteredCompaniesPlugin } from "./chartered-companies/index.js";
+import { tinyEpicWesternPlugin } from "./tiny-epic-western-mini/index.js";
+import { shoveHapennyPlugin } from "./shove-hapenny/index.js";
+import { shipCaptainCrewPlugin } from "./bar-dice-ship-captain/index.js";
+import { midnightBarDicePlugin } from "./bar-dice-midnight/index.js";
+import { threesBarDicePlugin } from "./bar-dice-threes/index.js";
+import { coinDribblePlugin } from "./coin-dribble-pub/index.js";
+import { shuffleQuarterPlugin } from "./shuffle-quarter-pub/index.js";
+import { ringboardTossPlugin } from "./ringboard-toss/index.js";
+import { ringTheBullPlugin } from "./ring-the-bull-toss/index.js";
+import { quoitsTossPlugin } from "./quoits-toss/index.js";
+import { spoofBiddingPlugin } from "./spoof-bidding/index.js";
+import { sushiGoConveyorPlugin } from "./sushi-go-conveyor/index.js";
+import { sevenWondersDraftPlugin } from "./seven-wonders-draft/index.js";
+import { bibliosTomesPlugin } from "./biblios-tomes/index.js";
+import { ethnosAlliesPlugin } from "./ethnos-allies/index.js";
+import { fairyTaleDraftPlugin } from "./fairy-tale-draft/index.js";
+import { betweenTwoCitiesPlugin } from "./between-two-cities/index.js";
+import { pointSaladVegPlugin } from "./point-salad-veg/index.js";
+import { tidesOfTimePlugin } from "./tides-of-time-draft/index.js";
+import { bunnyKingdomPlugin } from "./bunny-kingdom-draft/index.js";
+import { innovationAgesPlugin } from "./innovation-ages/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5501,4 +5536,39 @@ export const GAMES: GamePlugin[] = [
   quillLettersPlugin as unknown as GamePlugin,
   sigilWizardPlugin as unknown as GamePlugin,
   cartaExplorerPlugin as unknown as GamePlugin,
+  stockpileSharesPlugin as unknown as GamePlugin,
+  bullBearMarketPlugin as unknown as GamePlugin,
+  acquireHotelsPlugin as unknown as GamePlugin,
+  farmageddonCropsPlugin as unknown as GamePlugin,
+  coffeeTradersMiniPlugin as unknown as GamePlugin,
+  baronsEnginePlugin as unknown as GamePlugin,
+  splendorGemsPlugin as unknown as GamePlugin,
+  spiceRoadTraderPlugin as unknown as GamePlugin,
+  brassCanalsPlugin as unknown as GamePlugin,
+  monopolyDealMiniPlugin as unknown as GamePlugin,
+  ponziCollapsePlugin as unknown as GamePlugin,
+  alturienMarketPlugin as unknown as GamePlugin,
+  scovillePeppersPlugin as unknown as GamePlugin,
+  charteredCompaniesPlugin as unknown as GamePlugin,
+  tinyEpicWesternPlugin as unknown as GamePlugin,
+  shoveHapennyPlugin as unknown as GamePlugin,
+  shipCaptainCrewPlugin as unknown as GamePlugin,
+  midnightBarDicePlugin as unknown as GamePlugin,
+  threesBarDicePlugin as unknown as GamePlugin,
+  coinDribblePlugin as unknown as GamePlugin,
+  shuffleQuarterPlugin as unknown as GamePlugin,
+  ringboardTossPlugin as unknown as GamePlugin,
+  ringTheBullPlugin as unknown as GamePlugin,
+  quoitsTossPlugin as unknown as GamePlugin,
+  spoofBiddingPlugin as unknown as GamePlugin,
+  sushiGoConveyorPlugin as unknown as GamePlugin,
+  sevenWondersDraftPlugin as unknown as GamePlugin,
+  bibliosTomesPlugin as unknown as GamePlugin,
+  ethnosAlliesPlugin as unknown as GamePlugin,
+  fairyTaleDraftPlugin as unknown as GamePlugin,
+  betweenTwoCitiesPlugin as unknown as GamePlugin,
+  pointSaladVegPlugin as unknown as GamePlugin,
+  tidesOfTimePlugin as unknown as GamePlugin,
+  bunnyKingdomPlugin as unknown as GamePlugin,
+  innovationAgesPlugin as unknown as GamePlugin,
 ];
