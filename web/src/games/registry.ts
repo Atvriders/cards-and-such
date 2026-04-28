@@ -2540,6 +2540,41 @@ import { courtPiecePlugin } from "./court-piece/index.js";
 import { seepPlugin } from "./seep/index.js";
 import { goStopCardPlugin } from "./go-stop/index.js";
 import { wattenPlugin } from "./watten/index.js";
+import { mauMauPlugin } from "./mau-mau/index.js";
+import { switchSheddingPlugin } from "./switch-shedding/index.js";
+import { lastCallSheddingPlugin } from "./last-call-shedding/index.js";
+import { shitheadSheddingPlugin } from "./shithead-shedding/index.js";
+import { tycoonShedPlugin } from "./tycoon-shed/index.js";
+import { scumShedPlugin } from "./scum-shed/index.js";
+import { capitalismShedPlugin } from "./capitalism-shed/index.js";
+import { chineseTenShedPlugin } from "./chinese-ten-shed/index.js";
+import { happyFamiliesShedPlugin } from "./happy-families-shed/index.js";
+import { phaseTenShedPlugin } from "./phase-ten-shed/index.js";
+import { skipBoShedPlugin } from "./skip-bo-shed/index.js";
+import { golfSixShedPlugin } from "./golf-six-shed/index.js";
+import { doubleExposureBjPlugin } from "./double-exposure-bj/index.js";
+import { superFun21BjPlugin } from "./super-fun-21-bj/index.js";
+import { freeBetBjPlugin } from "./free-bet-bj/index.js";
+import { perfectPairsBjPlugin } from "./perfect-pairs-bj/index.js";
+import { vegasStripBjPlugin } from "./vegas-strip-bj/index.js";
+import { chineseBjPlugin } from "./chinese-bj/index.js";
+import { miniBaccaratCasPlugin } from "./mini-baccarat-cas/index.js";
+import { ezBaccaratCasPlugin } from "./ez-baccarat-cas/index.js";
+import { inBetweenCasPlugin } from "./in-between-cas/index.js";
+import { andarBaharCasPlugin } from "./andar-bahar-cas/index.js";
+import { teenPattiCasPlugin } from "./teen-patti-cas/index.js";
+import { aceyDeuceyCasPlugin } from "./acey-deucey-cas/index.js";
+import { oklahomaGinRPlugin } from "./oklahoma-gin-r/index.js";
+import { straightGinRPlugin } from "./straight-gin-r/index.js";
+import { kalukiRPlugin } from "./kaluki-r/index.js";
+import { shanghaiRPlugin } from "./shanghai-r/index.js";
+import { liverpoolRPlugin } from "./liverpool-r/index.js";
+import { indianRPlugin } from "./indian-r/index.js";
+import { poolRummyRPlugin } from "./pool-rummy-r/index.js";
+import { knockRummyRPlugin } from "./knock-rummy-r/index.js";
+import { threeThirteenRPlugin } from "./three-thirteen-r/index.js";
+import { boathouseRPlugin } from "./boathouse-r/index.js";
+import { scalaFortyRPlugin } from "./scala-forty-r/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5081,4 +5116,39 @@ export const GAMES: GamePlugin[] = [
   seepPlugin as unknown as GamePlugin,
   goStopCardPlugin as unknown as GamePlugin,
   wattenPlugin as unknown as GamePlugin,
+  mauMauPlugin as unknown as GamePlugin,
+  switchSheddingPlugin as unknown as GamePlugin,
+  lastCallSheddingPlugin as unknown as GamePlugin,
+  shitheadSheddingPlugin as unknown as GamePlugin,
+  tycoonShedPlugin as unknown as GamePlugin,
+  scumShedPlugin as unknown as GamePlugin,
+  capitalismShedPlugin as unknown as GamePlugin,
+  chineseTenShedPlugin as unknown as GamePlugin,
+  happyFamiliesShedPlugin as unknown as GamePlugin,
+  phaseTenShedPlugin as unknown as GamePlugin,
+  skipBoShedPlugin as unknown as GamePlugin,
+  golfSixShedPlugin as unknown as GamePlugin,
+  doubleExposureBjPlugin as unknown as GamePlugin,
+  superFun21BjPlugin as unknown as GamePlugin,
+  freeBetBjPlugin as unknown as GamePlugin,
+  perfectPairsBjPlugin as unknown as GamePlugin,
+  vegasStripBjPlugin as unknown as GamePlugin,
+  chineseBjPlugin as unknown as GamePlugin,
+  miniBaccaratCasPlugin as unknown as GamePlugin,
+  ezBaccaratCasPlugin as unknown as GamePlugin,
+  inBetweenCasPlugin as unknown as GamePlugin,
+  andarBaharCasPlugin as unknown as GamePlugin,
+  teenPattiCasPlugin as unknown as GamePlugin,
+  aceyDeuceyCasPlugin as unknown as GamePlugin,
+  oklahomaGinRPlugin as unknown as GamePlugin,
+  straightGinRPlugin as unknown as GamePlugin,
+  kalukiRPlugin as unknown as GamePlugin,
+  shanghaiRPlugin as unknown as GamePlugin,
+  liverpoolRPlugin as unknown as GamePlugin,
+  indianRPlugin as unknown as GamePlugin,
+  poolRummyRPlugin as unknown as GamePlugin,
+  knockRummyRPlugin as unknown as GamePlugin,
+  threeThirteenRPlugin as unknown as GamePlugin,
+  boathouseRPlugin as unknown as GamePlugin,
+  scalaFortyRPlugin as unknown as GamePlugin,
 ];
