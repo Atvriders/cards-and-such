@@ -2330,6 +2330,41 @@ import { scoreFourPlugin } from "./score-four/index.js";
 import { gobbletMiniPlugin } from "./gobblet-mini/index.js";
 import { tapatanPlugin } from "./tapatan/index.js";
 import { shisimaPlugin } from "./shisima/index.js";
+import { miracleSudokuMiniPlugin } from "./miracle-sudoku-mini/index.js";
+import { thermoSudokuMiniPlugin } from "./thermo-sudoku-mini/index.js";
+import { jigsawSudokuMiniPlugin } from "./jigsaw-sudoku-mini/index.js";
+import { hyperSudokuMiniPlugin } from "./hyper-sudoku-mini/index.js";
+import { antiKnightSudokuMiniPlugin } from "./anti-knight-sudoku-mini/index.js";
+import { antiKingSudokuMiniPlugin } from "./anti-king-sudoku-mini/index.js";
+import { nonConsecutiveSudokuPlugin } from "./non-consecutive-sudoku/index.js";
+import { consecutivePairsSudokuPlugin } from "./consecutive-pairs-sudoku/index.js";
+import { germanWhispersSudokuPlugin } from "./german-whispers-sudoku/index.js";
+import { dutchWhispersSudokuPlugin } from "./dutch-whispers-sudoku/index.js";
+import { renbanSudokuPlugin } from "./renban-sudoku/index.js";
+import { oddEvenSudokuPlugin } from "./odd-even-sudoku/index.js";
+import { littleKillerSudokuPlugin } from "./little-killer-sudoku/index.js";
+import { palindromeSudokuPlugin } from "./palindrome-sudoku/index.js";
+import { sandwichSudokuPlugin } from "./sandwich-sudoku/index.js";
+import { xSudokuMiniPlugin } from "./x-sudoku-mini/index.js";
+import { asteriskSudokuPlugin } from "./asterisk-sudoku/index.js";
+import { centerDotSudokuPlugin } from "./center-dot-sudoku/index.js";
+import { sudokuMini4x4Plugin } from "./sudoku-mini-4x4/index.js";
+import { sudokuMini6x6Plugin } from "./sudoku-mini-6x6/index.js";
+import { suguruMiniPlugin } from "./suguru-mini/index.js";
+import { numbrixMiniPlugin } from "./numbrix-mini/index.js";
+import { rippleEffectPlugin } from "./ripple-effect/index.js";
+import { str8tsMiniPlugin } from "./str8ts-mini/index.js";
+import { numberLinkMiniPlugin } from "./number-link-mini/index.js";
+import { magnetsPuzzlePlugin } from "./magnets-puzzle/index.js";
+import { litsPuzzlePlugin } from "./lits-puzzle/index.js";
+import { binairoMiniPlugin } from "./binairo-mini/index.js";
+import { takuzuMiniPlugin } from "./takuzu-mini/index.js";
+import { yinYangPuzzlePlugin } from "./yin-yang-puzzle/index.js";
+import { magicSquareQuizPlugin } from "./magic-square-quiz/index.js";
+import { latinSquareMiniPlugin } from "./latin-square-mini/index.js";
+import { kurodokoPlugin } from "./kurodoko/index.js";
+import { sashiganePlugin } from "./sashigane/index.js";
+import { fobidoshiPlugin } from "./fobidoshi/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4661,4 +4696,39 @@ export const GAMES: GamePlugin[] = [
   gobbletMiniPlugin as unknown as GamePlugin,
   tapatanPlugin as unknown as GamePlugin,
   shisimaPlugin as unknown as GamePlugin,
+  miracleSudokuMiniPlugin as unknown as GamePlugin,
+  thermoSudokuMiniPlugin as unknown as GamePlugin,
+  jigsawSudokuMiniPlugin as unknown as GamePlugin,
+  hyperSudokuMiniPlugin as unknown as GamePlugin,
+  antiKnightSudokuMiniPlugin as unknown as GamePlugin,
+  antiKingSudokuMiniPlugin as unknown as GamePlugin,
+  nonConsecutiveSudokuPlugin as unknown as GamePlugin,
+  consecutivePairsSudokuPlugin as unknown as GamePlugin,
+  germanWhispersSudokuPlugin as unknown as GamePlugin,
+  dutchWhispersSudokuPlugin as unknown as GamePlugin,
+  renbanSudokuPlugin as unknown as GamePlugin,
+  oddEvenSudokuPlugin as unknown as GamePlugin,
+  littleKillerSudokuPlugin as unknown as GamePlugin,
+  palindromeSudokuPlugin as unknown as GamePlugin,
+  sandwichSudokuPlugin as unknown as GamePlugin,
+  xSudokuMiniPlugin as unknown as GamePlugin,
+  asteriskSudokuPlugin as unknown as GamePlugin,
+  centerDotSudokuPlugin as unknown as GamePlugin,
+  sudokuMini4x4Plugin as unknown as GamePlugin,
+  sudokuMini6x6Plugin as unknown as GamePlugin,
+  suguruMiniPlugin as unknown as GamePlugin,
+  numbrixMiniPlugin as unknown as GamePlugin,
+  rippleEffectPlugin as unknown as GamePlugin,
+  str8tsMiniPlugin as unknown as GamePlugin,
+  numberLinkMiniPlugin as unknown as GamePlugin,
+  magnetsPuzzlePlugin as unknown as GamePlugin,
+  litsPuzzlePlugin as unknown as GamePlugin,
+  binairoMiniPlugin as unknown as GamePlugin,
+  takuzuMiniPlugin as unknown as GamePlugin,
+  yinYangPuzzlePlugin as unknown as GamePlugin,
+  magicSquareQuizPlugin as unknown as GamePlugin,
+  latinSquareMiniPlugin as unknown as GamePlugin,
+  kurodokoPlugin as unknown as GamePlugin,
+  sashiganePlugin as unknown as GamePlugin,
+  fobidoshiPlugin as unknown as GamePlugin,
 ];
