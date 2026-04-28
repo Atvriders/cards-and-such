@@ -1,0 +1,13 @@
+.dpb-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:480px;margin:0 auto; }
+.dpb-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
+.dpb-score { color:#27ae60; }
+.dpb-board { width:100%;min-height:180px;background:radial-gradient(circle,#9b59b6,#5b2c87);color:#fff;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px; }
+.dpb-dice { font-size:3.6rem;letter-spacing:6px; }
+.dpb-mult { font-size:1.05rem;font-weight:700; }
+.dpb-points { font-size:1.6rem;font-weight:900;color:#f1c40f; }
+.dpb-empty { font-size:1.3rem;font-weight:700; }
+.dpb-btn { padding:12px 32px;border-radius:8px;border:none;font-weight:800;font-size:1.1rem;cursor:pointer; }
+.dpb-btn.launch { background:#e74c3c;color:#fff; }
+.dpb-btn.next { background:#3498db;color:#fff; }
+.dpb-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.dpb-final { font-size:1.8rem;color:#27ae60;font-weight:900; }

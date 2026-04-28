@@ -1,0 +1,9 @@
+.lo-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:380px;margin:0 auto; }
+.lo-header { font-size:1.1rem;font-weight:700;color:#2c3e50; }
+.lo-grid { display:grid;grid-template-columns:repeat(3,80px);grid-template-rows:repeat(3,80px);gap:6px;background:#1c2833;padding:10px;border-radius:10px; }
+.lo-cell { background:#34495e;border:2px solid #2c3e50;border-radius:8px;cursor:pointer; }
+.lo-cell.on { background:#f1c40f;border-color:#f39c12;box-shadow:0 0 16px rgba(241,196,15,0.7); }
+.lo-cell:hover { opacity:0.85; }
+.lo-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.lo-final { font-size:1.4rem;color:#27ae60;font-weight:900;margin:8px 0; }
+.lo-btn { padding:10px 24px;border-radius:8px;border:none;background:#3498db;color:#fff;font-weight:700;cursor:pointer; }

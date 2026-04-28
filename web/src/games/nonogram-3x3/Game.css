@@ -1,0 +1,11 @@
+.ng-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:420px;margin:0 auto; }
+.ng-header { font-size:1.1rem;font-weight:700;color:#2c3e50; }
+.ng-board { display:grid;grid-template-columns:50px repeat(3,60px);grid-template-rows:50px repeat(3,60px);gap:4px; }
+.ng-corner { }
+.ng-clue { display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.95rem;color:#34495e;background:#ecf0f1;border-radius:6px; }
+.ng-cell { background:#fff;border:2px solid #95a5a6;border-radius:6px;cursor:pointer; }
+.ng-cell.on { background:#2c3e50; }
+.ng-cell:hover { opacity:0.85; }
+.ng-btn { padding:10px 24px;border-radius:8px;border:none;background:#3498db;color:#fff;font-weight:700;cursor:pointer; }
+.ng-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.ng-final { font-size:1.4rem;color:#27ae60;font-weight:900;margin:8px 0; }

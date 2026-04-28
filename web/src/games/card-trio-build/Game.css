@@ -1,0 +1,14 @@
+.ctb-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:560px;margin:0 auto; }
+.ctb-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
+.ctb-score { color:#27ae60; }
+.ctb-hand { display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:80px; }
+.ctb-card { width:50px;height:70px;border:2px solid #2c3e50;border-radius:6px;background:#fff;font-weight:900;font-size:1.3rem;cursor:pointer;color:#2c3e50; }
+.ctb-card:hover { background:#fff5e6; }
+.ctb-actions { display:flex;flex-wrap:wrap;gap:8px;justify-content:center; }
+.ctb-btn { padding:10px 18px;border-radius:8px;border:none;font-weight:700;cursor:pointer; }
+.ctb-btn.draw { background:#3498db;color:#fff; }
+.ctb-btn.build { background:#27ae60;color:#fff; }
+.ctb-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.ctb-tip { font-size:0.85rem;color:#7f8c8d; }
+.ctb-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.ctb-final { font-size:1.6rem;color:#27ae60;font-weight:900;margin-top:8px; }

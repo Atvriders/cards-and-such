@@ -1,0 +1,11 @@
+.ms-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:420px;margin:0 auto; }
+.ms-header { font-size:1rem;font-weight:700;color:#2c3e50; }
+.ms-grid { display:grid;grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:6px;background:#5d6d7e;padding:8px;border-radius:10px; }
+.ms-cell { font-size:1.6rem;font-weight:900;background:#ecf0f1;border:2px solid #bdc3c7;border-radius:8px;cursor:pointer;color:#2c3e50; }
+.ms-cell.filled { background:#d5f5e3; }
+.ms-pool { display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:320px; }
+.ms-pool-btn { width:40px;height:40px;font-size:1.1rem;font-weight:800;background:#fff;border:2px solid #bdc3c7;border-radius:6px;cursor:pointer; }
+.ms-pool-btn.sel { background:#f9e79f;border-color:#d4ac0d; }
+.ms-btn { padding:10px 24px;border-radius:8px;border:none;background:#3498db;color:#fff;font-weight:700;cursor:pointer; }
+.ms-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.ms-final { font-size:1.4rem;color:#27ae60;font-weight:900;margin:8px 0; }

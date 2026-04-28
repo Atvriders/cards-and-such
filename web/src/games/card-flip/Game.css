@@ -1,0 +1,9 @@
+.cf-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:480px;margin:0 auto; }
+.cf-header { display:flex;justify-content:space-between;width:100%;font-weight:700;font-size:0.95rem; }
+.cf-score { color:#27ae60; }
+.cf-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%; }
+.cf-card { aspect-ratio:3/4;font-size:1.6rem;background:#3498db;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:800;transition:background 0.2s; }
+.cf-card.revealed { background:#fff;color:#2c3e50;border:2px solid #2c3e50; }
+.cf-card.matched { background:#27ae60;color:#fff;cursor:default; }
+.cf-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.cf-final { font-size:1.6rem;color:#27ae60;font-weight:900;margin-top:8px; }

@@ -1,0 +1,13 @@
+.cw3-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:sans-serif;max-width:480px;margin:0 auto; }
+.cw3-header { font-size:1rem;font-weight:700;color:#2c3e50; }
+.cw3-grid { display:grid;grid-template-columns:repeat(3,60px);grid-template-rows:repeat(3,60px);gap:3px;background:#2c3e50;padding:3px; }
+.cw3-cell { font-size:1.4rem;font-weight:900;background:#fff;border:none;cursor:pointer;color:#2c3e50; }
+.cw3-cell.sel { background:#f9e79f; }
+.cw3-clues { display:flex;gap:18px;font-size:0.9rem; }
+.cw3-clues ol { margin:6px 0;padding-left:20px; }
+.cw3-keys { display:grid;grid-template-columns:repeat(7,32px);gap:3px; }
+.cw3-key { width:32px;height:32px;font-size:0.9rem;background:#ecf0f1;border:1px solid #bdc3c7;border-radius:4px;cursor:pointer; }
+.cw3-key:hover { background:#d6eaf8; }
+.cw3-btn { padding:10px 24px;border-radius:8px;border:none;background:#3498db;color:#fff;font-weight:700;cursor:pointer; }
+.cw3-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.cw3-final { font-size:1.4rem;color:#27ae60;font-weight:900;margin:8px 0; }

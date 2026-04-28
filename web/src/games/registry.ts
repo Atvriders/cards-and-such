@@ -1788,6 +1788,36 @@ import { asteroidAimPlugin } from "./asteroid-aim/index.js";
 import { robotRescuePlugin } from "./robot-rescue/index.js";
 import { rocketRumblePlugin } from "./rocket-rumble/index.js";
 import { laserLockPlugin } from "./laser-lock/index.js";
+import { slidePuzzle3x3Plugin } from "./slide-puzzle-3x3/index.js";
+import { lightsOutMiniPlugin } from "./lights-out-mini/index.js";
+import { nonogram3x3Plugin } from "./nonogram-3x3/index.js";
+import { magicSquare3Plugin } from "./magic-square-3/index.js";
+import { crosswordMini3x3Plugin } from "./crossword-mini-3x3/index.js";
+import { thaiCuisineQuiz2Plugin } from "./thai-cuisine-quiz-2/index.js";
+import { vietnameseCuisineQuizPlugin } from "./vietnamese-cuisine-quiz/index.js";
+import { koreanCuisineQuiz2Plugin } from "./korean-cuisine-quiz-2/index.js";
+import { chineseRegionalCuisineQuizPlugin } from "./chinese-regional-cuisine-quiz/index.js";
+import { mexicanCuisineQuiz2Plugin } from "./mexican-cuisine-quiz-2/index.js";
+import { peruvianCuisineQuizPlugin } from "./peruvian-cuisine-quiz/index.js";
+import { moroccanCuisineQuizPlugin } from "./moroccan-cuisine-quiz/index.js";
+import { lebaneseCuisineQuizPlugin } from "./lebanese-cuisine-quiz/index.js";
+import { ethiopianCuisineQuizPlugin } from "./ethiopian-cuisine-quiz/index.js";
+import { nordicCuisineQuizPlugin } from "./nordic-cuisine-quiz/index.js";
+import { cardShovelPlugin } from "./card-shovel/index.js";
+import { cardSpiralPlugin } from "./card-spiral/index.js";
+import { cardDominoPlugin } from "./card-domino/index.js";
+import { cardFlipPlugin } from "./card-flip/index.js";
+import { cardTrioBuildPlugin } from "./card-trio-build/index.js";
+import { dicePinballPlugin } from "./dice-pinball/index.js";
+import { diceRocketPlugin } from "./dice-rocket/index.js";
+import { diceShootMiniPlugin } from "./dice-shoot-mini/index.js";
+import { diceRollCallPlugin } from "./dice-roll-call/index.js";
+import { diceHotDicePlugin } from "./dice-hot-dice/index.js";
+import { puppyTapPlugin } from "./puppy-tap/index.js";
+import { kittenClickPlugin } from "./kitten-click/index.js";
+import { goldfishGrabPlugin } from "./goldfish-grab/index.js";
+import { parrotPopPlugin } from "./parrot-pop/index.js";
+import { hamsterHopPlugin } from "./hamster-hop/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -3579,4 +3609,34 @@ export const GAMES: GamePlugin[] = [
   robotRescuePlugin as unknown as GamePlugin,
   rocketRumblePlugin as unknown as GamePlugin,
   laserLockPlugin as unknown as GamePlugin,
+  slidePuzzle3x3Plugin as unknown as GamePlugin,
+  lightsOutMiniPlugin as unknown as GamePlugin,
+  nonogram3x3Plugin as unknown as GamePlugin,
+  magicSquare3Plugin as unknown as GamePlugin,
+  crosswordMini3x3Plugin as unknown as GamePlugin,
+  thaiCuisineQuiz2Plugin as unknown as GamePlugin,
+  vietnameseCuisineQuizPlugin as unknown as GamePlugin,
+  koreanCuisineQuiz2Plugin as unknown as GamePlugin,
+  chineseRegionalCuisineQuizPlugin as unknown as GamePlugin,
+  mexicanCuisineQuiz2Plugin as unknown as GamePlugin,
+  peruvianCuisineQuizPlugin as unknown as GamePlugin,
+  moroccanCuisineQuizPlugin as unknown as GamePlugin,
+  lebaneseCuisineQuizPlugin as unknown as GamePlugin,
+  ethiopianCuisineQuizPlugin as unknown as GamePlugin,
+  nordicCuisineQuizPlugin as unknown as GamePlugin,
+  cardShovelPlugin as unknown as GamePlugin,
+  cardSpiralPlugin as unknown as GamePlugin,
+  cardDominoPlugin as unknown as GamePlugin,
+  cardFlipPlugin as unknown as GamePlugin,
+  cardTrioBuildPlugin as unknown as GamePlugin,
+  dicePinballPlugin as unknown as GamePlugin,
+  diceRocketPlugin as unknown as GamePlugin,
+  diceShootMiniPlugin as unknown as GamePlugin,
+  diceRollCallPlugin as unknown as GamePlugin,
+  diceHotDicePlugin as unknown as GamePlugin,
+  puppyTapPlugin as unknown as GamePlugin,
+  kittenClickPlugin as unknown as GamePlugin,
+  goldfishGrabPlugin as unknown as GamePlugin,
+  parrotPopPlugin as unknown as GamePlugin,
+  hamsterHopPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,14 @@
+.cs-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:18px;font-family:sans-serif;max-width:560px;margin:0 auto;user-select:none; }
+.cs-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
+.cs-score { color:#27ae60; }
+.cs-card { width:120px;height:170px;background:#fff;border:3px solid #2c3e50;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;font-weight:900;color:#2c3e50; }
+.cs-card.red { color:#e74c3c; }
+.cs-buckets { display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%; }
+.cs-bucket { display:flex;flex-direction:column;align-items:center;padding:14px 4px;background:#ecf0f1;border:2px solid #bdc3c7;border-radius:10px;cursor:pointer;color:#2c3e50; }
+.cs-bucket.red { color:#e74c3c; }
+.cs-bucket:hover { background:#d6eaf8; }
+.cs-bucket-glyph { font-size:2rem;font-weight:900; }
+.cs-bucket-name { font-size:0.85rem;font-weight:700; }
+.cs-bucket-count { font-size:1.2rem;font-weight:900;color:#27ae60; }
+.cs-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.cs-final { font-size:1.6rem;color:#27ae60;font-weight:900;margin-top:8px; }

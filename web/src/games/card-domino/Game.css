@@ -1,0 +1,11 @@
+.cd-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:640px;margin:0 auto; }
+.cd-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
+.cd-score { color:#27ae60; }
+.cd-chain { display:flex;flex-wrap:wrap;gap:4px;min-height:50px;justify-content:center;background:#ecf0f1;padding:8px;border-radius:8px;width:100%;border:2px dashed #95a5a6; }
+.cd-hand { display:flex;flex-wrap:wrap;gap:6px;justify-content:center; }
+.cd-card { width:48px;height:66px;border:2px solid #2c3e50;border-radius:6px;background:#fff;font-weight:800;font-size:1.2rem;cursor:pointer;color:#2c3e50; }
+.cd-card.mini { width:34px;height:46px;font-size:0.95rem;cursor:default; }
+.cd-card:hover { background:#d6eaf8; }
+.cd-btn.skip { padding:10px 22px;border-radius:8px;border:none;background:#e67e22;color:#fff;font-weight:700;cursor:pointer; }
+.cd-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.cd-final { font-size:1.6rem;color:#27ae60;font-weight:900;margin-top:8px; }
