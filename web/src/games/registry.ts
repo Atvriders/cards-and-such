@@ -2295,6 +2295,41 @@ import { bouquetPlugin } from "./bouquet/index.js";
 import { accordionSolitairePlugin } from "./accordion-solitaire/index.js";
 import { alaskaSolitairePlugin } from "./alaska-solitaire/index.js";
 import { stonewallPlugin } from "./stonewall/index.js";
+import { nackgammonPlugin } from "./nackgammon/index.js";
+import { hypergammonPlugin } from "./hypergammon/index.js";
+import { longGammonPlugin } from "./long-gammon/index.js";
+import { chouettePlugin } from "./chouette/index.js";
+import { portesPlugin } from "./portes/index.js";
+import { plakotoPlugin } from "./plakoto/index.js";
+import { fevgaPlugin } from "./fevga/index.js";
+import { aceyDeuceyPlugin } from "./acey-deucey/index.js";
+import { blastPointBackgammonPlugin } from "./blast-point-backgammon/index.js";
+import { mahbusaPlugin } from "./mahbusa/index.js";
+import { gulBaraPlugin } from "./gul-bara/index.js";
+import { gioulPlugin } from "./gioul/index.js";
+import { longNardiPlugin } from "./long-nardi/index.js";
+import { duelingDiceBackgammonPlugin } from "./dueling-dice-backgammon/index.js";
+import { jacobyRulePlugin } from "./jacoby-rule/index.js";
+import { crawfordRulePlugin } from "./crawford-rule/index.js";
+import { menschArgerePlugin } from "./mensch-argere/index.js";
+import { aggravationPlugin } from "./aggravation/index.js";
+import { frustrationPopPlugin } from "./frustration-pop/index.js";
+import { fiaScandiPlugin } from "./fia-scandi/index.js";
+import { connectFivePlugin } from "./connect-five/index.js";
+import { connectSixPlugin } from "./connect-six/index.js";
+import { connectFourPopoutPlugin } from "./connect-four-popout/index.js";
+import { connectFour3dPlugin } from "./connect-four-3d/index.js";
+import { kakugoPlugin } from "./kakugo/index.js";
+import { swap2OpeningPlugin } from "./swap2-opening/index.js";
+import { notaktoPlugin } from "./notakto/index.js";
+import { wildTicTacToePlugin } from "./wild-tic-tac-toe/index.js";
+import { ticTacToe4x4Plugin } from "./tic-tac-toe-4x4/index.js";
+import { qubicPlugin } from "./qubic/index.js";
+import { threeDTicTacToePlugin } from "./3d-tic-tac-toe-3/index.js";
+import { scoreFourPlugin } from "./score-four/index.js";
+import { gobbletMiniPlugin } from "./gobblet-mini/index.js";
+import { tapatanPlugin } from "./tapatan/index.js";
+import { shisimaPlugin } from "./shisima/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4591,4 +4626,39 @@ export const GAMES: GamePlugin[] = [
   accordionSolitairePlugin as unknown as GamePlugin,
   alaskaSolitairePlugin as unknown as GamePlugin,
   stonewallPlugin as unknown as GamePlugin,
+  nackgammonPlugin as unknown as GamePlugin,
+  hypergammonPlugin as unknown as GamePlugin,
+  longGammonPlugin as unknown as GamePlugin,
+  chouettePlugin as unknown as GamePlugin,
+  portesPlugin as unknown as GamePlugin,
+  plakotoPlugin as unknown as GamePlugin,
+  fevgaPlugin as unknown as GamePlugin,
+  aceyDeuceyPlugin as unknown as GamePlugin,
+  blastPointBackgammonPlugin as unknown as GamePlugin,
+  mahbusaPlugin as unknown as GamePlugin,
+  gulBaraPlugin as unknown as GamePlugin,
+  gioulPlugin as unknown as GamePlugin,
+  longNardiPlugin as unknown as GamePlugin,
+  duelingDiceBackgammonPlugin as unknown as GamePlugin,
+  jacobyRulePlugin as unknown as GamePlugin,
+  crawfordRulePlugin as unknown as GamePlugin,
+  menschArgerePlugin as unknown as GamePlugin,
+  aggravationPlugin as unknown as GamePlugin,
+  frustrationPopPlugin as unknown as GamePlugin,
+  fiaScandiPlugin as unknown as GamePlugin,
+  connectFivePlugin as unknown as GamePlugin,
+  connectSixPlugin as unknown as GamePlugin,
+  connectFourPopoutPlugin as unknown as GamePlugin,
+  connectFour3dPlugin as unknown as GamePlugin,
+  kakugoPlugin as unknown as GamePlugin,
+  swap2OpeningPlugin as unknown as GamePlugin,
+  notaktoPlugin as unknown as GamePlugin,
+  wildTicTacToePlugin as unknown as GamePlugin,
+  ticTacToe4x4Plugin as unknown as GamePlugin,
+  qubicPlugin as unknown as GamePlugin,
+  threeDTicTacToePlugin as unknown as GamePlugin,
+  scoreFourPlugin as unknown as GamePlugin,
+  gobbletMiniPlugin as unknown as GamePlugin,
+  tapatanPlugin as unknown as GamePlugin,
+  shisimaPlugin as unknown as GamePlugin,
 ];

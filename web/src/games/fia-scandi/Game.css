@@ -1,0 +1,24 @@
+.race-wrap { display:flex; flex-direction:column; gap:10px; padding:14px; max-width:680px; margin:0 auto; font-family:sans-serif; }
+.race-status { font-size:1.05rem; font-weight:700; color:#2c3e50; }
+.race-dice-row { display:flex; gap:10px; align-items:center; }
+.die { background:#ecf0f1; padding:6px 10px; border-radius:8px; font-weight:700; min-width:60px; text-align:center; }
+.die[data-used="true"] { opacity:0.45; text-decoration:line-through; }
+.race-btn { background:#3498db; color:white; border:none; padding:6px 14px; border-radius:8px; cursor:pointer; font-weight:700; }
+.race-btn:hover { background:#2980b9; }
+.race-board { overflow-x:auto; }
+.race-track { display:flex; gap:2px; padding:6px; background:#34495e; border-radius:6px; }
+.race-cell { min-width:32px; min-height:54px; background:#ecf0f1; display:flex; flex-direction:column; align-items:center; padding:2px; font-size:0.7rem; }
+.race-num { color:#7f8c8d; font-size:0.6rem; }
+.race-tokens { display:flex; flex-direction:column; gap:1px; }
+.race-tok { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:800; color:white; }
+.race-tok.p { background:#e74c3c; }
+.race-tok.c { background:#2c3e50; }
+.race-checkers { background:#f8f9fa; padding:8px; border-radius:6px; }
+.race-label { font-weight:700; margin-bottom:4px; }
+.race-pickrow { display:flex; gap:6px; flex-wrap:wrap; }
+.race-pick { display:flex; gap:4px; align-items:center; background:white; padding:4px 6px; border-radius:5px; font-size:0.85rem; }
+.race-pick.done { opacity:0.5; }
+.race-pick button { background:#27ae60; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer; font-size:0.78rem; }
+.race-pick button:hover { background:#229954; }
+.race-info { color:#7f8c8d; font-size:0.85rem; }
+.race-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
