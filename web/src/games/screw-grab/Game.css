@@ -1,0 +1,11 @@
+.fc-wrap { display:flex;flex-direction:column;gap:14px;padding:20px;font-family:sans-serif;max-width:640px;margin:0 auto; }
+.fc-header { display:flex;justify-content:space-between;align-items:center; }
+.fc-info { font-size:0.95rem;color:#555; }
+.fc-timer { font-size:1.4rem;font-weight:900;color:#e74c3c; }
+.fc-score { font-size:1.1rem;font-weight:700;color:#27ae60; }
+.fc-board { position:relative; height:360px; background:#f4f6f8; border:2px solid #bdc3c7; border-radius:14px; overflow:hidden; }
+.fc-target { position:absolute; font-size:2.8rem; cursor:pointer; user-select:none; }
+.fc-target:hover { transform:translate(-50%,-50%) scale(1.1) !important; }
+.fc-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.fc-done h2 { margin:0 0 8px; }
+.fc-final { font-size:1.4rem; color:#27ae60; font-weight:900; margin-top:6px; }

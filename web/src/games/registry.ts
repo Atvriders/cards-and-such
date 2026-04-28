@@ -2006,6 +2006,41 @@ import { nailTapPlugin } from "./nail-tap/index.js";
 import { woodWhackPlugin } from "./wood-whack/index.js";
 import { concreteCrunchPlugin } from "./concrete-crunch/index.js";
 import { craneClickPlugin } from "./crane-click/index.js";
+import { titanicQuizPlugin } from "./titanic-quiz/index.js";
+import { hindenburgQuizPlugin } from "./hindenburg-quiz/index.js";
+import { chernobylQuizPlugin } from "./chernobyl-quiz/index.js";
+import { pompeiiQuizPlugin } from "./pompeii-quiz/index.js";
+import { sanFranciscoQuakeQuizPlugin } from "./san-francisco-quake-quiz/index.js";
+import { mtStHelensQuizPlugin } from "./mt-st-helens-quiz/index.js";
+import { katrinaQuizPlugin } from "./katrina-quiz/index.js";
+import { bhopalQuizPlugin } from "./bhopal-quiz/index.js";
+import { fukushimaQuizPlugin } from "./fukushima-quiz/index.js";
+import { apollo1QuizPlugin } from "./apollo-1-quiz/index.js";
+import { everestQuizPlugin } from "./everest-quiz/index.js";
+import { sevenSummitsQuizPlugin } from "./seven-summits-quiz/index.js";
+import { polarQuizPlugin } from "./polar-quiz/index.js";
+import { desertTrekQuizPlugin } from "./desert-trek-quiz/index.js";
+import { caveExploreQuizPlugin } from "./cave-explore-quiz/index.js";
+import { deepSeaQuizPlugin } from "./deep-sea-quiz/index.js";
+import { extremeSportsQuizPlugin } from "./extreme-sports-quiz/index.js";
+import { survivalQuizPlugin } from "./survival-quiz/index.js";
+import { cardTunnelPlugin } from "./card-tunnel/index.js";
+import { cardBridgeCrossPlugin } from "./card-bridge-cross/index.js";
+import { cardTowerStackPlugin } from "./card-tower-stack/index.js";
+import { cardFountainPlugin } from "./card-fountain/index.js";
+import { cardStatuePlugin } from "./card-statue/index.js";
+import { cardTrainTrackPlugin } from "./card-train-track/index.js";
+import { cardLanternLightPlugin } from "./card-lantern-light/index.js";
+import { diceBlacksmithPlugin } from "./dice-blacksmith/index.js";
+import { diceBakeryPlugin } from "./dice-bakery/index.js";
+import { diceFarmPlugin } from "./dice-farm/index.js";
+import { diceFisheryPlugin } from "./dice-fishery/index.js";
+import { diceMinePlugin } from "./dice-mine/index.js";
+import { hammerTapPlugin } from "./hammer-tap/index.js";
+import { screwGrabPlugin } from "./screw-grab/index.js";
+import { wrenchWhackPlugin } from "./wrench-whack/index.js";
+import { sawSnapPlugin } from "./saw-snap/index.js";
+import { paintPopPlugin } from "./paint-pop/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -4013,4 +4048,39 @@ export const GAMES: GamePlugin[] = [
   woodWhackPlugin as unknown as GamePlugin,
   concreteCrunchPlugin as unknown as GamePlugin,
   craneClickPlugin as unknown as GamePlugin,
+  titanicQuizPlugin as unknown as GamePlugin,
+  hindenburgQuizPlugin as unknown as GamePlugin,
+  chernobylQuizPlugin as unknown as GamePlugin,
+  pompeiiQuizPlugin as unknown as GamePlugin,
+  sanFranciscoQuakeQuizPlugin as unknown as GamePlugin,
+  mtStHelensQuizPlugin as unknown as GamePlugin,
+  katrinaQuizPlugin as unknown as GamePlugin,
+  bhopalQuizPlugin as unknown as GamePlugin,
+  fukushimaQuizPlugin as unknown as GamePlugin,
+  apollo1QuizPlugin as unknown as GamePlugin,
+  everestQuizPlugin as unknown as GamePlugin,
+  sevenSummitsQuizPlugin as unknown as GamePlugin,
+  polarQuizPlugin as unknown as GamePlugin,
+  desertTrekQuizPlugin as unknown as GamePlugin,
+  caveExploreQuizPlugin as unknown as GamePlugin,
+  deepSeaQuizPlugin as unknown as GamePlugin,
+  extremeSportsQuizPlugin as unknown as GamePlugin,
+  survivalQuizPlugin as unknown as GamePlugin,
+  cardTunnelPlugin as unknown as GamePlugin,
+  cardBridgeCrossPlugin as unknown as GamePlugin,
+  cardTowerStackPlugin as unknown as GamePlugin,
+  cardFountainPlugin as unknown as GamePlugin,
+  cardStatuePlugin as unknown as GamePlugin,
+  cardTrainTrackPlugin as unknown as GamePlugin,
+  cardLanternLightPlugin as unknown as GamePlugin,
+  diceBlacksmithPlugin as unknown as GamePlugin,
+  diceBakeryPlugin as unknown as GamePlugin,
+  diceFarmPlugin as unknown as GamePlugin,
+  diceFisheryPlugin as unknown as GamePlugin,
+  diceMinePlugin as unknown as GamePlugin,
+  hammerTapPlugin as unknown as GamePlugin,
+  screwGrabPlugin as unknown as GamePlugin,
+  wrenchWhackPlugin as unknown as GamePlugin,
+  sawSnapPlugin as unknown as GamePlugin,
+  paintPopPlugin as unknown as GamePlugin,
 ];
