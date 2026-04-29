@@ -2960,6 +2960,41 @@ import { pokerPatiencePlugin } from "./poker-patience/index.js";
 import { quiddlerCardsPlugin } from "./quiddler-cards/index.js";
 import { milleBornesPlugin } from "./mille-bornes/index.js";
 import { eleusisPlugin } from "./eleusis/index.js";
+import { anacondaPokerPlugin } from "./anaconda/index.js";
+import { followTheQueenPlugin } from "./follow-the-queen/index.js";
+import { chicagoHighPokerPlugin } from "./chicago-high-poker/index.js";
+import { chicagoLowPokerPlugin } from "./chicago-low-poker/index.js";
+import { baseballPokerPlugin } from "./baseball-poker/index.js";
+import { nightBaseballPlugin } from "./night-baseball/index.js";
+import { crissCrossPokerPlugin } from "./criss-cross-poker/index.js";
+import { ironCrossPokerPlugin } from "./iron-cross-poker/index.js";
+import { ticTacToePokerPlugin } from "./tic-tac-toe-poker/index.js";
+import { spitInTheOceanPlugin } from "./spit-in-the-ocean/index.js";
+import { cincinnatiPokerPlugin } from "./cincinnati-poker/index.js";
+import { drPepperPokerPlugin } from "./dr-pepper-poker/index.js";
+import { acesAndFacesPlugin } from "./aces-and-faces/index.js";
+import { jacksOrBetterPlugin } from "./jacks-or-better/index.js";
+import { jokerPokerVpPlugin } from "./joker-poker-vp/index.js";
+import { bonusPokerDeluxePlugin } from "./bonus-poker-deluxe/index.js";
+import { doubleDoubleBonusPlugin } from "./double-double-bonus/index.js";
+import { sevensWildPlugin } from "./sevens-wild/index.js";
+import { tensOrBetterPlugin } from "./tens-or-better/index.js";
+import { looseDeucesWildPlugin } from "./loose-deuces-wild/index.js";
+import { fourCardPokerPlugin } from "./four-card-poker/index.js";
+import { ultimateHoldemPlugin } from "./ultimate-holdem/index.js";
+import { headsUpHoldemCasPlugin } from "./heads-up-holdem-cas/index.js";
+import { ezBaccaratPokerPlugin } from "./ez-baccarat-poker/index.js";
+import { bigOPloPlugin } from "./big-o-plo/index.js";
+import { plo6PokerPlugin } from "./plo6-poker/index.js";
+import { potLimitOmahaPlugin } from "./pot-limit-omaha/index.js";
+import { royalHoldemPlugin } from "./royal-holdem/index.js";
+import { drawmahaPokerPlugin } from "./drawmaha/index.js";
+import { fusionPokerPlugin } from "./fusion-poker/index.js";
+import { manilaPokerPlugin } from "./manila-poker/index.js";
+import { sokoPokerPlugin } from "./soko-poker/index.js";
+import { mexicanPokerPlugin } from "./mexican-poker/index.js";
+import { potLimitBadugiPlugin } from "./pot-limit-badugi/index.js";
+import { kuhnPokerPlugin } from "./kuhn-poker/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5921,4 +5956,39 @@ export const GAMES: GamePlugin[] = [
   quiddlerCardsPlugin as unknown as GamePlugin,
   milleBornesPlugin as unknown as GamePlugin,
   eleusisPlugin as unknown as GamePlugin,
+  anacondaPokerPlugin as unknown as GamePlugin,
+  followTheQueenPlugin as unknown as GamePlugin,
+  chicagoHighPokerPlugin as unknown as GamePlugin,
+  chicagoLowPokerPlugin as unknown as GamePlugin,
+  baseballPokerPlugin as unknown as GamePlugin,
+  nightBaseballPlugin as unknown as GamePlugin,
+  crissCrossPokerPlugin as unknown as GamePlugin,
+  ironCrossPokerPlugin as unknown as GamePlugin,
+  ticTacToePokerPlugin as unknown as GamePlugin,
+  spitInTheOceanPlugin as unknown as GamePlugin,
+  cincinnatiPokerPlugin as unknown as GamePlugin,
+  drPepperPokerPlugin as unknown as GamePlugin,
+  acesAndFacesPlugin as unknown as GamePlugin,
+  jacksOrBetterPlugin as unknown as GamePlugin,
+  jokerPokerVpPlugin as unknown as GamePlugin,
+  bonusPokerDeluxePlugin as unknown as GamePlugin,
+  doubleDoubleBonusPlugin as unknown as GamePlugin,
+  sevensWildPlugin as unknown as GamePlugin,
+  tensOrBetterPlugin as unknown as GamePlugin,
+  looseDeucesWildPlugin as unknown as GamePlugin,
+  fourCardPokerPlugin as unknown as GamePlugin,
+  ultimateHoldemPlugin as unknown as GamePlugin,
+  headsUpHoldemCasPlugin as unknown as GamePlugin,
+  ezBaccaratPokerPlugin as unknown as GamePlugin,
+  bigOPloPlugin as unknown as GamePlugin,
+  plo6PokerPlugin as unknown as GamePlugin,
+  potLimitOmahaPlugin as unknown as GamePlugin,
+  royalHoldemPlugin as unknown as GamePlugin,
+  drawmahaPokerPlugin as unknown as GamePlugin,
+  fusionPokerPlugin as unknown as GamePlugin,
+  manilaPokerPlugin as unknown as GamePlugin,
+  sokoPokerPlugin as unknown as GamePlugin,
+  mexicanPokerPlugin as unknown as GamePlugin,
+  potLimitBadugiPlugin as unknown as GamePlugin,
+  kuhnPokerPlugin as unknown as GamePlugin,
 ];
