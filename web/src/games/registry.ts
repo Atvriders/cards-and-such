@@ -2925,6 +2925,41 @@ import { hyperBackgammonPlugin } from "./hyper-backgammon/index.js";
 import { wythoffsGamePlugin } from "./wythoffs-game/index.js";
 import { chompGamePlugin } from "./chomp-game/index.js";
 import { simEdgesPlugin } from "./sim-edges/index.js";
+import { cribbageMiniPlugin } from "./cribbage-mini/index.js";
+import { threeHandCribbagePlugin } from "./three-hand-cribbage/index.js";
+import { fourHandCribbagePlugin } from "./four-hand-cribbage/index.js";
+import { fiveCardCribbagePlugin } from "./five-card-cribbage/index.js";
+import { sevenCardCribbagePlugin } from "./seven-card-cribbage/index.js";
+import { cribbageSquaresSoliPlugin } from "./cribbage-squares-soli/index.js";
+import { speedCribbagePlugin } from "./speed-cribbage/index.js";
+import { mugginsPlugin } from "./muggins/index.js";
+import { peaceCardsPlugin } from "./peace-cards/index.js";
+import { beggarMyNeighbourPlugin } from "./beggar-my-neighbour/index.js";
+import { menagerieCardsPlugin } from "./menagerie-cards/index.js";
+import { bsCheatPlugin } from "./bs-cheat/index.js";
+import { iDoubtItPlugin } from "./i-doubt-it/index.js";
+import { bluffCardsPlugin } from "./bluff-cards/index.js";
+import { kittyWhistPlugin } from "./kitty-whist/index.js";
+import { concentrationCardsPlugin } from "./concentration-cards/index.js";
+import { pelmanismPlugin } from "./pelmanism/index.js";
+import { hymnCountPlugin } from "./hymn-count/index.js";
+import { goBoomPlugin } from "./go-boom/index.js";
+import { royalCasinoPlugin } from "./royal-casino/index.js";
+import { drawCasinoPlugin } from "./draw-casino/index.js";
+import { spadeCasinoPlugin } from "./spade-casino/index.js";
+import { zwickerPlugin } from "./zwicker/index.js";
+import { tablanettePlugin } from "./tablanette/index.js";
+import { scopaDi15Plugin } from "./scopa-di-15/index.js";
+import { scopaDAssiPlugin } from "./scopa-d-assi/index.js";
+import { escobaMiniPlugin } from "./escoba-mini/index.js";
+import { ciceraPlugin } from "./cicera/index.js";
+import { hanafudaKoiKoiPlugin } from "./hanafuda-koi-koi/index.js";
+import { hachiHachiPlugin } from "./hachi-hachi/index.js";
+import { mattatakPlugin } from "./mattatak/index.js";
+import { pokerPatiencePlugin } from "./poker-patience/index.js";
+import { quiddlerCardsPlugin } from "./quiddler-cards/index.js";
+import { milleBornesPlugin } from "./mille-bornes/index.js";
+import { eleusisPlugin } from "./eleusis/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5851,4 +5886,39 @@ export const GAMES: GamePlugin[] = [
   wythoffsGamePlugin as unknown as GamePlugin,
   chompGamePlugin as unknown as GamePlugin,
   simEdgesPlugin as unknown as GamePlugin,
+  cribbageMiniPlugin as unknown as GamePlugin,
+  threeHandCribbagePlugin as unknown as GamePlugin,
+  fourHandCribbagePlugin as unknown as GamePlugin,
+  fiveCardCribbagePlugin as unknown as GamePlugin,
+  sevenCardCribbagePlugin as unknown as GamePlugin,
+  cribbageSquaresSoliPlugin as unknown as GamePlugin,
+  speedCribbagePlugin as unknown as GamePlugin,
+  mugginsPlugin as unknown as GamePlugin,
+  peaceCardsPlugin as unknown as GamePlugin,
+  beggarMyNeighbourPlugin as unknown as GamePlugin,
+  menagerieCardsPlugin as unknown as GamePlugin,
+  bsCheatPlugin as unknown as GamePlugin,
+  iDoubtItPlugin as unknown as GamePlugin,
+  bluffCardsPlugin as unknown as GamePlugin,
+  kittyWhistPlugin as unknown as GamePlugin,
+  concentrationCardsPlugin as unknown as GamePlugin,
+  pelmanismPlugin as unknown as GamePlugin,
+  hymnCountPlugin as unknown as GamePlugin,
+  goBoomPlugin as unknown as GamePlugin,
+  royalCasinoPlugin as unknown as GamePlugin,
+  drawCasinoPlugin as unknown as GamePlugin,
+  spadeCasinoPlugin as unknown as GamePlugin,
+  zwickerPlugin as unknown as GamePlugin,
+  tablanettePlugin as unknown as GamePlugin,
+  scopaDi15Plugin as unknown as GamePlugin,
+  scopaDAssiPlugin as unknown as GamePlugin,
+  escobaMiniPlugin as unknown as GamePlugin,
+  ciceraPlugin as unknown as GamePlugin,
+  hanafudaKoiKoiPlugin as unknown as GamePlugin,
+  hachiHachiPlugin as unknown as GamePlugin,
+  mattatakPlugin as unknown as GamePlugin,
+  pokerPatiencePlugin as unknown as GamePlugin,
+  quiddlerCardsPlugin as unknown as GamePlugin,
+  milleBornesPlugin as unknown as GamePlugin,
+  eleusisPlugin as unknown as GamePlugin,
 ];
