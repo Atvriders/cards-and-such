@@ -2295,6 +2295,41 @@ import { capablancaChessPlugin } from "./capablanca-chess/index.js";
 import { gothicChessPlugin } from "./gothic-chess/index.js";
 import { omegaChessPlugin } from "./omega-chess/index.js";
 import { seirawanChessPlugin } from "./seirawan-chess/index.js";
+import { dianaChessPlugin } from "./diana-chess/index.js";
+import { randomChessPlugin } from "./random-chess/index.js";
+import { maharajahSepoysPlugin } from "./maharajah-sepoys/index.js";
+import { peasantsRevoltPlugin } from "./peasants-revolt/index.js";
+import { asymmetricChessPlugin } from "./asymmetric-chess/index.js";
+import { betzaArmiesPlugin } from "./betza-armies/index.js";
+import { courierChessPlugin } from "./courier-chess/index.js";
+import { chaturangaPlugin } from "./chaturanga/index.js";
+import { microShogiPlugin } from "./micro-shogi/index.js";
+import { daiShogiPlugin } from "./dai-shogi/index.js";
+import { toriShogiPlugin } from "./tori-shogi/index.js";
+import { annanShogiPlugin } from "./annan-shogi/index.js";
+import { waShogiPlugin } from "./wa-shogi/index.js";
+import { heianShogiPlugin } from "./heian-shogi/index.js";
+import { xiangqiBlindPlugin } from "./xiangqi-blind/index.js";
+import { canadianCheckersPlugin } from "./canadian-checkers/index.js";
+import { giveawayCheckersPlugin } from "./giveaway-checkers/index.js";
+import { gothicCheckersPlugin } from "./gothic-checkers/index.js";
+import { vertexCheckersPlugin } from "./vertex-checkers/index.js";
+import { reversiTimedPlugin } from "./reversi-timed/index.js";
+import { antiOthelloPlugin } from "./anti-othello/index.js";
+import { reversiRandomStartPlugin } from "./reversi-random-start/index.js";
+import { camelotPlugin } from "./camelot/index.js";
+import { chineseCheckers2pPlugin } from "./chinese-checkers-2p/index.js";
+import { saltaPlugin } from "./salta/index.js";
+import { go19x19Plugin } from "./go-19x19/index.js";
+import { go13x13Plugin } from "./go-13x13/index.js";
+import { toroidalGoPlugin } from "./toroidal-go/index.js";
+import { phantomGoPlugin } from "./phantom-go/index.js";
+import { pairGoPlugin } from "./pair-go/index.js";
+import { rengoPlugin } from "./rengo/index.js";
+import { oneColorGoPlugin } from "./one-color-go/index.js";
+import { keryoPentePlugin } from "./keryo-pente/index.js";
+import { twixtPlugin } from "./twixt/index.js";
+import { hexGamePlugin } from "./hex-game/index.js";
 import { klondikeDealOnePlugin } from "./klondike-deal-one/index.js";
 import { agnesSorelPlugin } from "./agnes-sorel/index.js";
 import { athenaPlugin } from "./athena/index.js";
@@ -5291,6 +5326,41 @@ export const GAMES: GamePlugin[] = [
   gothicChessPlugin as unknown as GamePlugin,
   omegaChessPlugin as unknown as GamePlugin,
   seirawanChessPlugin as unknown as GamePlugin,
+  dianaChessPlugin as unknown as GamePlugin,
+  randomChessPlugin as unknown as GamePlugin,
+  maharajahSepoysPlugin as unknown as GamePlugin,
+  peasantsRevoltPlugin as unknown as GamePlugin,
+  asymmetricChessPlugin as unknown as GamePlugin,
+  betzaArmiesPlugin as unknown as GamePlugin,
+  courierChessPlugin as unknown as GamePlugin,
+  chaturangaPlugin as unknown as GamePlugin,
+  microShogiPlugin as unknown as GamePlugin,
+  daiShogiPlugin as unknown as GamePlugin,
+  toriShogiPlugin as unknown as GamePlugin,
+  annanShogiPlugin as unknown as GamePlugin,
+  waShogiPlugin as unknown as GamePlugin,
+  heianShogiPlugin as unknown as GamePlugin,
+  xiangqiBlindPlugin as unknown as GamePlugin,
+  canadianCheckersPlugin as unknown as GamePlugin,
+  giveawayCheckersPlugin as unknown as GamePlugin,
+  gothicCheckersPlugin as unknown as GamePlugin,
+  vertexCheckersPlugin as unknown as GamePlugin,
+  reversiTimedPlugin as unknown as GamePlugin,
+  antiOthelloPlugin as unknown as GamePlugin,
+  reversiRandomStartPlugin as unknown as GamePlugin,
+  camelotPlugin as unknown as GamePlugin,
+  chineseCheckers2pPlugin as unknown as GamePlugin,
+  saltaPlugin as unknown as GamePlugin,
+  go19x19Plugin as unknown as GamePlugin,
+  go13x13Plugin as unknown as GamePlugin,
+  toroidalGoPlugin as unknown as GamePlugin,
+  phantomGoPlugin as unknown as GamePlugin,
+  pairGoPlugin as unknown as GamePlugin,
+  rengoPlugin as unknown as GamePlugin,
+  oneColorGoPlugin as unknown as GamePlugin,
+  keryoPentePlugin as unknown as GamePlugin,
+  twixtPlugin as unknown as GamePlugin,
+  hexGamePlugin as unknown as GamePlugin,
   klondikeDealOnePlugin as unknown as GamePlugin,
   agnesSorelPlugin as unknown as GamePlugin,
   athenaPlugin as unknown as GamePlugin,
