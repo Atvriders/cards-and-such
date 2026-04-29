@@ -1,0 +1,16 @@
+import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GState, GAction } from "./state.js";
+import { initialState, reducer, isTerminal } from "./state.js";
+import { MichiganRumStopsRGame } from "./Game.js";
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+type S = SettingsOf<typeof settings>;
+export const michiganRumStopsRPlugin: GamePlugin<GState, GAction, typeof settings> = {
+  id: "michigan-rum-stops-r", title: "Michigan Rum", category: "cards",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "500 Rum with Michigan stops-style rank scoring.",
+  howToPlay: "Michigan Rum is a 500 Rum variant that incorporates 'stops' — special premium ranks that reward big bonuses when captured. This simulator runs five rounds; each deals a seven-card hand which the engine auto-melds into the best sets and runs.\n\nA set is three or more cards of the same rank; a run is three or more consecutive same-suit cards. Each meld scores twenty base points plus five for every card past three. Cards outside melds form deadwood — aces one, face cards ten, others pip value — yielding only a small consolation when no melds form.\n\nGoing out clean (zero deadwood) adds the twenty-five-point Michigan stops bonus, simulating the premium-card capture reward. Across five rounds, expected totals run fifty to one-fifty. Click 'Auto-score' to evaluate the round and 'Next' to deal again. Michigan Rum rewards seeds where ranks cluster — especially around the high or low end where the strongest melds form — and clean-finish hands feel especially celebratory.",
+  settings,
+  initialState: (seed: number, _s: S) => initialState(seed, { dummy: false }),
+  reducer, isTerminal, component: MichiganRumStopsRGame,
+};

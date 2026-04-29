@@ -1,0 +1,12 @@
+.dm-wrap { padding: 16px; color: #e6e6e6; background: #142136; min-height: 380px; font-family: system-ui, sans-serif; border-radius: 8px; }
+.dm-info { font-size: 14px; opacity: 0.8; margin-bottom: 4px; }
+.dm-score { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+.dm-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.dm-card { padding: 8px 10px; border-radius: 6px; background: #1f3656; min-width: 36px; text-align: center; font-weight: 600; }
+.dm-card.red { color: #ff8a8a; }
+.dm-card.black { color: #cfd8e3; }
+.dm-btn { padding: 8px 14px; border-radius: 6px; border: 0; background: #2a7af0; color: #fff; cursor: pointer; font-weight: 600; margin-right: 8px; }
+.dm-btn.alt { background: #2aa56b; }
+.dm-result { margin: 10px 0; font-size: 14px; }
+.dm-final { font-size: 28px; font-weight: 800; }
+.dm-done { text-align: center; padding: 30px; }
