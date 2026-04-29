@@ -1,0 +1,10 @@
+.pb-wrap { max-width: 480px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.pb-title { margin: 0; font-size: 1.1rem; }
+.pb-stats { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.pb-stats > div { background: #f3f4f6; padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; }
+.pb-board { width: 240px; height: 110px; background: linear-gradient(135deg, #b08d57, #5d3a1a); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(0,0,0,0.2); }
+.pb-result { color: #fff; font-weight: 700; text-align: center; font-size: 0.95rem; padding: 0 10px; }
+.pb-final { font-size: 0.95rem; }
+.pb-btn { padding: 9px 22px; border: 0; border-radius: 8px; cursor: pointer; background: #ef4444; color: #fff; font-weight: 700; }
+.pb-btn.alt { background: #1f2937; }
+.pb-btn:hover { opacity: 0.9; }
