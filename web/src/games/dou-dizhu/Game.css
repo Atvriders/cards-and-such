@@ -1,0 +1,10 @@
+.dou-dizhu-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:580px; margin:0 auto; user-select:none; }
+.dou-dizhu-info { font-size:0.95rem; color:#555; }
+.dou-dizhu-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.dou-dizhu-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#9b59b6; }
+.dou-dizhu-btn:hover:not(:disabled) { background:#8e44ad; }
+.dou-dizhu-btn.alt { background:#e67e22; }
+.dou-dizhu-result { font-size:1rem; font-weight:700; padding:8px 14px; border-radius:8px; background:#f6eafd; text-align:center; }
+.dou-dizhu-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.dou-dizhu-done h2 { margin:0 0 8px; }
+.dou-dizhu-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

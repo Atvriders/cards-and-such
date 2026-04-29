@@ -1,0 +1,10 @@
+.duplicate-bridge-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:580px; margin:0 auto; user-select:none; }
+.duplicate-bridge-info { font-size:0.95rem; color:#555; }
+.duplicate-bridge-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.duplicate-bridge-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.duplicate-bridge-btn:hover:not(:disabled) { background:#2980b9; }
+.duplicate-bridge-btn.alt { background:#e67e22; }
+.duplicate-bridge-result { font-size:1rem; font-weight:700; padding:8px 14px; border-radius:8px; background:#f0f4ff; text-align:center; }
+.duplicate-bridge-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.duplicate-bridge-done h2 { margin:0 0 8px; }
+.duplicate-bridge-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

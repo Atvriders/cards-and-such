@@ -1,0 +1,10 @@
+.tarocchi-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:580px; margin:0 auto; user-select:none; }
+.tarocchi-info { font-size:0.95rem; color:#555; }
+.tarocchi-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.tarocchi-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.tarocchi-btn:hover:not(:disabled) { background:#2980b9; }
+.tarocchi-btn.alt { background:#e67e22; }
+.tarocchi-result { font-size:1rem; font-weight:700; padding:8px 14px; border-radius:8px; background:#f0f4ff; text-align:center; }
+.tarocchi-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.tarocchi-done h2 { margin:0 0 8px; }
+.tarocchi-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
