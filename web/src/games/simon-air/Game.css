@@ -1,0 +1,16 @@
+.simonair-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:sans-serif;max-width:640px;margin:0 auto;}
+.simonair-info{font-weight:600;color:#34495e;}
+.simonair-score{font-weight:700;color:#27ae60;}
+.simonair-prompt{font-size:1.1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;padding:8px;}
+.simonair-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
+.simonair-cell{padding:14px 12px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:0.95rem;text-align:center;}
+.simonair-cell:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
+.simonair-cell.selected{border-color:#3498db;background:#eaf4fb;}
+.simonair-cell.correct{border-color:#27ae60;background:#eafaf1;}
+.simonair-cell.wrong{border-color:#e74c3c;background:#fdedec;}
+.simonair-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
+.simonair-btn.submit{background:#8e44ad;color:#fff;}
+.simonair-btn.next{background:#3498db;color:#fff;}
+.simonair-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.simonair-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
+.simonair-final{font-size:1.7rem;font-weight:900;color:#27ae60;}

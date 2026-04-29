@@ -1,0 +1,19 @@
+.dixitclue-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:640px;margin:0 auto;}
+.dixitclue-header{display:flex;justify-content:space-between;width:100%;}
+.dixitclue-score{font-weight:700;color:#27ae60;}
+.dixitclue-scenario{font-size:1.05rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;}
+.dixitclue-clues{align-self:flex-start;background:#f4f6f7;border-left:4px solid #34495e;border-radius:6px;padding:10px 18px 10px 32px;width:100%;box-sizing:border-box;}
+.dixitclue-clues li{margin:4px 0;color:#34495e;}
+.dixitclue-options{display:flex;flex-direction:column;gap:8px;width:100%;}
+.dixitclue-option{padding:10px 14px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;text-align:left;}
+.dixitclue-option:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
+.dixitclue-option.selected{border-color:#3498db;background:#eaf4fb;}
+.dixitclue-option.correct{border-color:#27ae60;background:#eafaf1;}
+.dixitclue-option.wrong{border-color:#e74c3c;background:#fdedec;}
+.dixitclue-actions{display:flex;gap:12px;}
+.dixitclue-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
+.dixitclue-btn.submit{background:#8e44ad;color:#fff;}
+.dixitclue-btn.next{background:#3498db;color:#fff;}
+.dixitclue-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.dixitclue-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
+.dixitclue-final{font-size:1.7rem;font-weight:900;color:#27ae60;}

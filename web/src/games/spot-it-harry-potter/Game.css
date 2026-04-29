@@ -1,0 +1,16 @@
+.spotitharrypotter-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:sans-serif;max-width:640px;margin:0 auto;}
+.spotitharrypotter-info{font-weight:600;color:#34495e;}
+.spotitharrypotter-score{font-weight:700;color:#27ae60;}
+.spotitharrypotter-prompt{font-size:1.1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;padding:8px;}
+.spotitharrypotter-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
+.spotitharrypotter-cell{padding:14px 12px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:0.95rem;text-align:center;}
+.spotitharrypotter-cell:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
+.spotitharrypotter-cell.selected{border-color:#3498db;background:#eaf4fb;}
+.spotitharrypotter-cell.correct{border-color:#27ae60;background:#eafaf1;}
+.spotitharrypotter-cell.wrong{border-color:#e74c3c;background:#fdedec;}
+.spotitharrypotter-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
+.spotitharrypotter-btn.submit{background:#8e44ad;color:#fff;}
+.spotitharrypotter-btn.next{background:#3498db;color:#fff;}
+.spotitharrypotter-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.spotitharrypotter-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
+.spotitharrypotter-final{font-size:1.7rem;font-weight:900;color:#27ae60;}
