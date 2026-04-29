@@ -2995,6 +2995,41 @@ import { sokoPokerPlugin } from "./soko-poker/index.js";
 import { mexicanPokerPlugin } from "./mexican-poker/index.js";
 import { potLimitBadugiPlugin } from "./pot-limit-badugi/index.js";
 import { kuhnPokerPlugin } from "./kuhn-poker/index.js";
+import { klondikeThreesStandardPlugin } from "./klondike-threes-standard/index.js";
+import { klondikeThreesNoRedealPlugin } from "./klondike-threes-no-redeal/index.js";
+import { klondikeDealOneNoRedealPlugin } from "./klondike-deal-one-no-redeal/index.js";
+import { cassetteAgnesBernauerPlugin } from "./cassette-agnes-bernauer/index.js";
+import { spadesSolitairePlugin } from "./spades-solitaire/index.js";
+import { blindHookeySolitairePlugin } from "./blind-hookey-solitaire/index.js";
+import { bakersKlondikePlugin } from "./bakers-klondike/index.js";
+import { fascinationPatiencePlugin } from "./fascination-patience/index.js";
+import { freecellTwoDeckPlugin } from "./freecell-two-deck/index.js";
+import { tripleFreecellPlugin } from "./triple-freecell/index.js";
+import { spiderFourSuitsPlugin } from "./spider-four-suits/index.js";
+import { willOTheWispPlugin } from "./will-o-the-wisp/index.js";
+import { pyramidSolitaireClassicPlugin } from "./pyramid-solitaire-classic/index.js";
+import { pyramidNoRedealPlugin } from "./pyramid-no-redeal/index.js";
+import { pharaohsPyramidPlugin } from "./pharaohs-pyramid/index.js";
+import { triPeaksSolitairePlugin } from "./tri-peaks-solitaire/index.js";
+import { golfSolitairePlugin } from "./golf-solitaire/index.js";
+import { golfParVariantPlugin } from "./golf-par-variant/index.js";
+import { blackHoleSolPlugin } from "./black-hole/index.js";
+import { clockDoubleDeckPlugin } from "./clock-double-deck/index.js";
+import { gapsTwoDeckPlugin } from "./gaps-two-deck/index.js";
+import { labyrinthSolPlugin } from "./labyrinth/index.js";
+import { americanToadPlugin } from "./american-toad/index.js";
+import { rainbowSolitairePlugin } from "./rainbow-solitaire/index.js";
+import { ladyOfTheManorPlugin } from "./lady-of-the-manor/index.js";
+import { fortressCastellanPlugin } from "./fortress-castellan/index.js";
+import { laBelleLucieFanPlugin } from "./la-belle-lucie-fan/index.js";
+import { threeShufflesAndADrawPlugin } from "./three-shuffles-and-a-draw/index.js";
+import { crescentSolitairePlugin } from "./crescent-solitaire/index.js";
+import { acesUpFiringSquadPlugin } from "./aces-up-firing-squad/index.js";
+import { doubleDeckFreecellPlugin } from "./double-deck-freecell/index.js";
+import { parallelsSolPlugin } from "./parallels/index.js";
+import { addictionSolPlugin } from "./addiction-solitaire/index.js";
+import { alaskaSolPlugin } from "./alaska/index.js";
+import { somersetSolPlugin } from "./somerset/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5991,4 +6026,39 @@ export const GAMES: GamePlugin[] = [
   mexicanPokerPlugin as unknown as GamePlugin,
   potLimitBadugiPlugin as unknown as GamePlugin,
   kuhnPokerPlugin as unknown as GamePlugin,
+  klondikeThreesStandardPlugin as unknown as GamePlugin,
+  klondikeThreesNoRedealPlugin as unknown as GamePlugin,
+  klondikeDealOneNoRedealPlugin as unknown as GamePlugin,
+  cassetteAgnesBernauerPlugin as unknown as GamePlugin,
+  spadesSolitairePlugin as unknown as GamePlugin,
+  blindHookeySolitairePlugin as unknown as GamePlugin,
+  bakersKlondikePlugin as unknown as GamePlugin,
+  fascinationPatiencePlugin as unknown as GamePlugin,
+  freecellTwoDeckPlugin as unknown as GamePlugin,
+  tripleFreecellPlugin as unknown as GamePlugin,
+  spiderFourSuitsPlugin as unknown as GamePlugin,
+  willOTheWispPlugin as unknown as GamePlugin,
+  pyramidSolitaireClassicPlugin as unknown as GamePlugin,
+  pyramidNoRedealPlugin as unknown as GamePlugin,
+  pharaohsPyramidPlugin as unknown as GamePlugin,
+  triPeaksSolitairePlugin as unknown as GamePlugin,
+  golfSolitairePlugin as unknown as GamePlugin,
+  golfParVariantPlugin as unknown as GamePlugin,
+  blackHoleSolPlugin as unknown as GamePlugin,
+  clockDoubleDeckPlugin as unknown as GamePlugin,
+  gapsTwoDeckPlugin as unknown as GamePlugin,
+  labyrinthSolPlugin as unknown as GamePlugin,
+  americanToadPlugin as unknown as GamePlugin,
+  rainbowSolitairePlugin as unknown as GamePlugin,
+  ladyOfTheManorPlugin as unknown as GamePlugin,
+  fortressCastellanPlugin as unknown as GamePlugin,
+  laBelleLucieFanPlugin as unknown as GamePlugin,
+  threeShufflesAndADrawPlugin as unknown as GamePlugin,
+  crescentSolitairePlugin as unknown as GamePlugin,
+  acesUpFiringSquadPlugin as unknown as GamePlugin,
+  doubleDeckFreecellPlugin as unknown as GamePlugin,
+  parallelsSolPlugin as unknown as GamePlugin,
+  addictionSolPlugin as unknown as GamePlugin,
+  alaskaSolPlugin as unknown as GamePlugin,
+  somersetSolPlugin as unknown as GamePlugin,
 ];
