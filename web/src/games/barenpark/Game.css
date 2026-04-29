@@ -1,0 +1,10 @@
+.tp-wrap { max-width: 360px; margin: 0 auto; padding: 1rem; text-align: center; color: #eee; }
+.tp-info { font-weight: 700; margin-bottom: .4rem; }
+.tp-next { display: inline-flex; align-items: center; gap: .5rem; margin: 0 0 .8rem; }
+.tp-next-tile { display: inline-block; width: 32px; height: 32px; line-height: 32px; border-radius: 4px; color: #fff; font-weight: 800; }
+.tp-grid { display: grid; gap: 4px; justify-content: center; margin: 0 auto; }
+.tp-cell { width: 40px; height: 40px; background: #2c3e50; color: #ecf0f1; font-weight: 700; border: 1px solid #34495e; border-radius: 4px; cursor: pointer; }
+.tp-cell.filled { color: #fff; }
+.tp-cell.empty:hover { background: #34495e; }
+.tp-done { padding: 1rem; }
+.tp-final { font-size: 1.6rem; font-weight: 900; color: #f39c12; margin-top: .4rem; }

@@ -1,0 +1,11 @@
+.g-wrap { max-width: 480px; margin: 0 auto; padding: 1rem; text-align: center; color: #eee; }
+.g-header { display: flex; justify-content: space-between; padding: .5rem; background: #222; border-radius: 6px; margin-bottom: 1rem; }
+.g-score { font-weight: 700; color: #f39c12; }
+.g-dice { display: flex; justify-content: center; gap: .5rem; margin: 1rem 0; flex-wrap: wrap; }
+.g-gain { color: #2ecc71; font-weight: 700; margin: .5rem 0; }
+.g-controls { margin: 1rem 0; }
+.g-btn { padding: .8rem 1.4rem; background: #3498db; color: #fff; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+.g-btn:hover { background: #2980b9; }
+.g-final { font-size: 1.6rem; font-weight: 900; color: #f39c12; }
+.g-card { display: inline-block; min-width: 3rem; padding: .8rem .6rem; background: #fff; color: #111; font-weight: 800; border-radius: 6px; font-size: 1.2rem; margin: .25rem; }
+.g-card.red { color: #c0392b; }
