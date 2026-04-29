@@ -1,0 +1,12 @@
+.lch-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: sans-serif; max-width: 560px; margin: 0 auto; }
+.lch-info { font-size: 0.95rem; color: #555; text-align: center; }
+.lch-score { font-size: 1.1rem; font-weight: 700; color: #27ae60; }
+.lch-board { display: grid; gap: 4px; padding: 8px; background: #34495e; border-radius: 10px; }
+.lch-cell { aspect-ratio: 1; min-width: 36px; min-height: 36px; background: #ecf0f1; border-radius: 5px; cursor: pointer; transition: background 0.15s; border: none; font-weight: 900; font-size: 1rem; }
+.lch-cell.p { background: #e74c3c; color: #fff; }
+.lch-cell.c { background: #2c3e50; color: #fff; }
+.lch-cell:hover:not(:disabled) { background: #bdc3c7; }
+.lch-cell:disabled { cursor: not-allowed; }
+.lch-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 14px; }
+.lch-done h2 { margin: 0 0 8px; }
+.lch-final { font-size: 1.4rem; color: #27ae60; font-weight: 900; }

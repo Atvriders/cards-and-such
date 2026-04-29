@@ -2890,6 +2890,41 @@ import { carnivalBalloonDartPlugin } from "./carnival-balloon-dart/index.js";
 import { paperFootballFlickPlugin } from "./paper-football-flick/index.js";
 import { coinFlickingPlugin } from "./coin-flicking/index.js";
 import { tiddlywinksFlickPlugin } from "./tiddlywinks-flick/index.js";
+import { misereTicTacToePlugin } from "./misere-tic-tac-toe/index.js";
+import { orderAndChaosPlugin } from "./order-and-chaos/index.js";
+import { fiveInARowPlugin } from "./five-in-a-row/index.js";
+import { penteCapturePlugin } from "./pente-capture/index.js";
+import { renjuGamePlugin } from "./renju-game/index.js";
+import { brazilianDraughtsPlugin } from "./brazilian-draughts/index.js";
+import { italianDraughtsPlugin } from "./italian-draughts/index.js";
+import { spanishDraughtsPlugin } from "./spanish-draughts/index.js";
+import { losingCheckersPlugin } from "./losing-checkers/index.js";
+import { damaTurkishPlugin } from "./dama-turkish/index.js";
+import { sternhalmaGamePlugin } from "./sternhalma-game/index.js";
+import { minichess4x4Plugin } from "./minichess-4x4/index.js";
+import { minichess6x6Plugin } from "./minichess-6x6/index.js";
+import { minishogi5x5Plugin } from "./minishogi-5x5/index.js";
+import { kyotoShogiPlugin } from "./kyoto-shogi/index.js";
+import { animalShogiPlugin } from "./animal-shogi/index.js";
+import { shatranjArabicPlugin } from "./shatranj-arabic/index.js";
+import { grandOthelloMiniPlugin } from "./grand-othello-mini/index.js";
+import { twelveMensMorrisPlugin } from "./twelve-mens-morris/index.js";
+import { sixMensMorrisPlugin } from "./six-mens-morris/index.js";
+import { threeMensMorrisPlugin } from "./three-mens-morris/index.js";
+import { lascaStackPlugin } from "./lasca-stack/index.js";
+import { toguzKorgoolPlugin } from "./toguz-korgool/index.js";
+import { congkakGamePlugin } from "./congkak-game/index.js";
+import { bantumiGamePlugin } from "./bantumi-game/index.js";
+import { ayoMancalaPlugin } from "./ayo-mancala/index.js";
+import { gonnectGamePlugin } from "./gonnect-game/index.js";
+import { yGamePlugin } from "./y-game/index.js";
+import { pylosPyramidPlugin } from "./pylos-pyramid/index.js";
+import { tumblingBlocksPlugin } from "./tumbling-blocks/index.js";
+import { nardeRussianPlugin } from "./narde-russian/index.js";
+import { hyperBackgammonPlugin } from "./hyper-backgammon/index.js";
+import { wythoffsGamePlugin } from "./wythoffs-game/index.js";
+import { chompGamePlugin } from "./chomp-game/index.js";
+import { simEdgesPlugin } from "./sim-edges/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5781,4 +5816,39 @@ export const GAMES: GamePlugin[] = [
   paperFootballFlickPlugin as unknown as GamePlugin,
   coinFlickingPlugin as unknown as GamePlugin,
   tiddlywinksFlickPlugin as unknown as GamePlugin,
+  misereTicTacToePlugin as unknown as GamePlugin,
+  orderAndChaosPlugin as unknown as GamePlugin,
+  fiveInARowPlugin as unknown as GamePlugin,
+  penteCapturePlugin as unknown as GamePlugin,
+  renjuGamePlugin as unknown as GamePlugin,
+  brazilianDraughtsPlugin as unknown as GamePlugin,
+  italianDraughtsPlugin as unknown as GamePlugin,
+  spanishDraughtsPlugin as unknown as GamePlugin,
+  losingCheckersPlugin as unknown as GamePlugin,
+  damaTurkishPlugin as unknown as GamePlugin,
+  sternhalmaGamePlugin as unknown as GamePlugin,
+  minichess4x4Plugin as unknown as GamePlugin,
+  minichess6x6Plugin as unknown as GamePlugin,
+  minishogi5x5Plugin as unknown as GamePlugin,
+  kyotoShogiPlugin as unknown as GamePlugin,
+  animalShogiPlugin as unknown as GamePlugin,
+  shatranjArabicPlugin as unknown as GamePlugin,
+  grandOthelloMiniPlugin as unknown as GamePlugin,
+  twelveMensMorrisPlugin as unknown as GamePlugin,
+  sixMensMorrisPlugin as unknown as GamePlugin,
+  threeMensMorrisPlugin as unknown as GamePlugin,
+  lascaStackPlugin as unknown as GamePlugin,
+  toguzKorgoolPlugin as unknown as GamePlugin,
+  congkakGamePlugin as unknown as GamePlugin,
+  bantumiGamePlugin as unknown as GamePlugin,
+  ayoMancalaPlugin as unknown as GamePlugin,
+  gonnectGamePlugin as unknown as GamePlugin,
+  yGamePlugin as unknown as GamePlugin,
+  pylosPyramidPlugin as unknown as GamePlugin,
+  tumblingBlocksPlugin as unknown as GamePlugin,
+  nardeRussianPlugin as unknown as GamePlugin,
+  hyperBackgammonPlugin as unknown as GamePlugin,
+  wythoffsGamePlugin as unknown as GamePlugin,
+  chompGamePlugin as unknown as GamePlugin,
+  simEdgesPlugin as unknown as GamePlugin,
 ];

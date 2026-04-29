@@ -1,0 +1,36 @@
+import { useEffect } from "react";
+import type { GameProps } from "../../platform/game-plugin/types.js";
+import type { GameState, GameAction, GameSettings } from "./state.js";
+import { isTerminal, SIZE } from "./state.js";
+import "./Game.css";
+
+export function PylosPyramidGame({ state, dispatch, onGameOver }: GameProps<GameState, GameSettings>): JSX.Element {
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  if (state.phase === "done") {
+    const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
+    return (
+      <div className="pyl-wrap">
+        <div className="pyl-done"><h2>{msg}</h2><div className="pyl-final">{state.score} pts</div></div>
+      </div>
+    );
+  }
+  return (
+    <div className="pyl-wrap">
+      <div className="pyl-info">Pylos: click an empty cell to place your piece. Move {state.moves}.</div>
+      <div className="pyl-score">Captures: {state.captures}</div>
+      <div className="pyl-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
+        {Array.from({ length: SIZE * SIZE }).map((_, i) => {
+          const v = state.board[i];
+          const cls = v === "P" ? "p" : v === "C" ? "c" : "";
+          const disabled = false ? v !== "P" : v !== null;
+          return (
+            <button key={i} className={`pyl-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
+              {v ?? ""}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

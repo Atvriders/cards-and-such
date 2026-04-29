@@ -1,0 +1,12 @@
+.mc6-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: sans-serif; max-width: 560px; margin: 0 auto; }
+.mc6-info { font-size: 0.95rem; color: #555; text-align: center; }
+.mc6-score { font-size: 1.1rem; font-weight: 700; color: #27ae60; }
+.mc6-board { display: grid; gap: 4px; padding: 8px; background: #34495e; border-radius: 10px; }
+.mc6-cell { aspect-ratio: 1; min-width: 36px; min-height: 36px; background: #ecf0f1; border-radius: 5px; cursor: pointer; transition: background 0.15s; border: none; font-weight: 900; font-size: 1rem; }
+.mc6-cell.p { background: #e74c3c; color: #fff; }
+.mc6-cell.c { background: #2c3e50; color: #fff; }
+.mc6-cell:hover:not(:disabled) { background: #bdc3c7; }
+.mc6-cell:disabled { cursor: not-allowed; }
+.mc6-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 14px; }
+.mc6-done h2 { margin: 0 0 8px; }
+.mc6-final { font-size: 1.4rem; color: #27ae60; font-weight: 900; }
