@@ -1,0 +1,17 @@
+.g-cockbluf-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:560px; margin:0 auto; }
+.g-cockbluf-info { font-size:0.95rem; color:#555; }
+.g-cockbluf-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.g-cockbluf-prompt { font-size:1.15rem; font-weight:700; padding:12px 16px; background:#fffceb; border:2px solid #f1c40f; border-radius:10px; text-align:center; color:#222; }
+.g-cockbluf-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
+.g-cockbluf-cell { padding:14px 12px; font-size:1rem; font-weight:600; border:2px solid #34495e; border-radius:10px; background:#fff; color:#2c3e50; cursor:pointer; }
+.g-cockbluf-cell:hover:not(:disabled) { background:#ecf0f1; }
+.g-cockbluf-cell.selected { background:#3498db; color:#fff; border-color:#2980b9; }
+.g-cockbluf-cell.correct { background:#27ae60; color:#fff; border-color:#1e8449; }
+.g-cockbluf-cell.wrong { background:#e74c3c; color:#fff; border-color:#c0392b; }
+.g-cockbluf-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; }
+.g-cockbluf-btn.submit { background:#3498db; }
+.g-cockbluf-btn.submit:disabled { background:#95a5a6; cursor:not-allowed; }
+.g-cockbluf-btn.next { background:#e67e22; }
+.g-cockbluf-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.g-cockbluf-done h2 { margin:0 0 8px; }
+.g-cockbluf-final { font-size:1.4rem; color:#27ae60; font-weight:900; }

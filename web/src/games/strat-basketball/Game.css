@@ -1,0 +1,12 @@
+.g-strabask-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.g-strabask-info { font-size:0.95rem; color:#555; }
+.g-strabask-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.g-strabask-die { font-size:2.2rem; font-weight:900; min-width:60px; padding:12px 16px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
+.g-strabask-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.g-strabask-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.g-strabask-btn:hover { background:#2980b9; }
+.g-strabask-btn.alt { background:#e67e22; }
+.g-strabask-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
+.g-strabask-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.g-strabask-done h2 { margin:0 0 8px; }
+.g-strabask-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
