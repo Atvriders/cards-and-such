@@ -1,0 +1,12 @@
+.dice-baseball-highlights-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;font-family:sans-serif;max-width:520px;margin:0 auto; }
+.dice-baseball-highlights-info { font-size:0.95rem;color:#555; }
+.dice-baseball-highlights-score { font-size:1.2rem;font-weight:800;color:#27ae60; }
+.dice-baseball-highlights-die { font-size:2.2rem;font-weight:900;min-width:60px;padding:12px 16px;background:#fff;border:2px solid #34495e;border-radius:10px;text-align:center;color:#2c3e50; }
+.dice-baseball-highlights-row { display:flex;flex-wrap:wrap;gap:10px;justify-content:center; }
+.dice-baseball-highlights-btn { padding:10px 22px;font-size:1rem;font-weight:700;border:none;border-radius:8px;cursor:pointer;color:#fff;background:#3498db; }
+.dice-baseball-highlights-btn:hover { background:#2980b9; }
+.dice-baseball-highlights-btn.alt { background:#e67e22; }
+.dice-baseball-highlights-result { font-size:1.05rem;font-weight:700;padding:8px 18px;border-radius:8px;background:#f0f4ff; }
+.dice-baseball-highlights-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.dice-baseball-highlights-done h2 { margin:0 0 8px; }
+.dice-baseball-highlights-final { font-size:1.4rem;color:#27ae60;font-weight:900; }
