@@ -2855,6 +2855,41 @@ import { faceToFacePlugin } from "./face-to-face/index.js";
 import { klaskMagneticPlugin } from "./klask-magnetic/index.js";
 import { spitSpeedPlugin } from "./spit-speed/index.js";
 import { spoonsGrabPlugin } from "./spoons-grab/index.js";
+import { wordLadderMiniPlugin } from "./word-ladder-mini/index.js";
+import { wordSearchMiniPlugin } from "./word-search-mini/index.js";
+import { miniCrosswordPlugin } from "./mini-crossword/index.js";
+import { acrosticPuzzlePlugin } from "./acrostic-puzzle/index.js";
+import { codewordsMiniPlugin } from "./codewords-mini/index.js";
+import { arrowwordPlugin } from "./arrowword/index.js";
+import { crossnumbersPlugin } from "./crossnumbers/index.js";
+import { fillInKakuroPlugin } from "./fill-in-kakuro/index.js";
+import { wordHuntMiniPlugin } from "./word-hunt-mini/index.js";
+import { boggle4x4Plugin } from "./boggle-4x4/index.js";
+import { boggle5x5Plugin } from "./boggle-5x5/index.js";
+import { ghostWordPlugin } from "./ghost-word/index.js";
+import { shiritoriPlugin } from "./shiritori/index.js";
+import { categoriesLetterPlugin } from "./categories-letter/index.js";
+import { wordWheelPlugin } from "./word-wheel/index.js";
+import { wordFlowerPlugin } from "./word-flower/index.js";
+import { wordChainsPlugin } from "./word-chains/index.js";
+import { secretMessagePlugin } from "./secret-message/index.js";
+import { caesarCipherPlugin } from "./caesar-cipher/index.js";
+import { vowelLessPlugin } from "./vowel-less/index.js";
+import { missingVowelsPlugin } from "./missing-vowels/index.js";
+import { connectionsMiniPlugin } from "./connections-mini/index.js";
+import { strandsMiniPlugin } from "./strands-mini/index.js";
+import { wouldYouRatherPickPlugin } from "./would-you-rather-pick/index.js";
+import { truthOrDarePickPlugin } from "./truth-or-dare-pick/index.js";
+import { neverHaveIEverPickPlugin } from "./never-have-i-ever-pick/index.js";
+import { twoTruthsLiePickPlugin } from "./two-truths-lie-pick/index.js";
+import { spyfallMiniPlugin } from "./spyfall-mini/index.js";
+import { coconutShyTossPlugin } from "./coconut-shy-toss/index.js";
+import { carnivalDuckShootPlugin } from "./carnival-duck-shoot/index.js";
+import { carnivalBallTossPlugin } from "./carnival-ball-toss/index.js";
+import { carnivalBalloonDartPlugin } from "./carnival-balloon-dart/index.js";
+import { paperFootballFlickPlugin } from "./paper-football-flick/index.js";
+import { coinFlickingPlugin } from "./coin-flicking/index.js";
+import { tiddlywinksFlickPlugin } from "./tiddlywinks-flick/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5711,4 +5746,39 @@ export const GAMES: GamePlugin[] = [
   bigBenPlugin as unknown as GamePlugin,
   labyrinthPatiencePlugin as unknown as GamePlugin,
   zodiacPatiencePlugin as unknown as GamePlugin,
+  wordLadderMiniPlugin as unknown as GamePlugin,
+  wordSearchMiniPlugin as unknown as GamePlugin,
+  miniCrosswordPlugin as unknown as GamePlugin,
+  acrosticPuzzlePlugin as unknown as GamePlugin,
+  codewordsMiniPlugin as unknown as GamePlugin,
+  arrowwordPlugin as unknown as GamePlugin,
+  crossnumbersPlugin as unknown as GamePlugin,
+  fillInKakuroPlugin as unknown as GamePlugin,
+  wordHuntMiniPlugin as unknown as GamePlugin,
+  boggle4x4Plugin as unknown as GamePlugin,
+  boggle5x5Plugin as unknown as GamePlugin,
+  ghostWordPlugin as unknown as GamePlugin,
+  shiritoriPlugin as unknown as GamePlugin,
+  categoriesLetterPlugin as unknown as GamePlugin,
+  wordWheelPlugin as unknown as GamePlugin,
+  wordFlowerPlugin as unknown as GamePlugin,
+  wordChainsPlugin as unknown as GamePlugin,
+  secretMessagePlugin as unknown as GamePlugin,
+  caesarCipherPlugin as unknown as GamePlugin,
+  vowelLessPlugin as unknown as GamePlugin,
+  missingVowelsPlugin as unknown as GamePlugin,
+  connectionsMiniPlugin as unknown as GamePlugin,
+  strandsMiniPlugin as unknown as GamePlugin,
+  wouldYouRatherPickPlugin as unknown as GamePlugin,
+  truthOrDarePickPlugin as unknown as GamePlugin,
+  neverHaveIEverPickPlugin as unknown as GamePlugin,
+  twoTruthsLiePickPlugin as unknown as GamePlugin,
+  spyfallMiniPlugin as unknown as GamePlugin,
+  coconutShyTossPlugin as unknown as GamePlugin,
+  carnivalDuckShootPlugin as unknown as GamePlugin,
+  carnivalBallTossPlugin as unknown as GamePlugin,
+  carnivalBalloonDartPlugin as unknown as GamePlugin,
+  paperFootballFlickPlugin as unknown as GamePlugin,
+  coinFlickingPlugin as unknown as GamePlugin,
+  tiddlywinksFlickPlugin as unknown as GamePlugin,
 ];
