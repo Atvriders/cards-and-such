@@ -1,0 +1,11 @@
+.orangetap-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
+.orangetap-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.orangetap-info { font-size:0.95rem; color:#555; }
+.orangetap-score { font-size:1.2rem; font-weight:800; color:#ba4a00; }
+.orangetap-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
+.orangetap-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#fdebd0,#f5b041); border:3px solid #7e5109; border-radius:14px; overflow:hidden; }
+.orangetap-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
+.orangetap-target:hover { transform:scale(1.15); }
+.orangetap-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
+.orangetap-done h2 { margin:0 0 8px; }
+.orangetap-final { font-size:1.4rem; color:#ba4a00; font-weight:900; }

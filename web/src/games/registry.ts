@@ -3315,6 +3315,46 @@ import { akariMiniPlugin } from "./akari-mini/index.js";
 import { galaxiesMiniPlugin } from "./galaxies-mini/index.js";
 import { snakeLogicPlugin } from "./snake-logic/index.js";
 import { queensPuzzlePlugin } from "./queens-puzzle/index.js";
+import { appleTapPlugin } from "./apple-tap/index.js";
+import { cherryBurstPlugin } from "./cherry-burst/index.js";
+import { grapePopPlugin } from "./grape-pop/index.js";
+import { melonMashPlugin } from "./melon-mash/index.js";
+import { lemonZapPlugin } from "./lemon-zap/index.js";
+import { kiwiClickerPlugin } from "./kiwi-clicker/index.js";
+import { pumpkinSmashPlugin } from "./pumpkin-smash/index.js";
+import { bubbleBurstArcadePlugin } from "./bubble-burst-arcade/index.js";
+import { starTapperPlugin } from "./star-tapper/index.js";
+import { meteorTapPlugin } from "./meteor-tap/index.js";
+import { cometClickerPlugin } from "./comet-clicker/index.js";
+import { lightningTapPlugin } from "./lightning-tap/index.js";
+import { snowflakeSnapPlugin } from "./snowflake-snap/index.js";
+import { acornTapPlugin } from "./acorn-tap/index.js";
+import { bananaBashPlugin } from "./banana-bash/index.js";
+import { papayaPopPlugin } from "./papaya-pop/index.js";
+import { blueberryBurstPlugin } from "./blueberry-burst/index.js";
+import { orangeTapPlugin } from "./orange-tap/index.js";
+import { limeTapPlugin } from "./lime-tap/index.js";
+import { moonTapPlugin } from "./moon-tap/index.js";
+import { synonymQuizPlugin } from "./synonym-quiz/index.js";
+import { antonymQuizPlugin } from "./antonym-quiz/index.js";
+import { homonymQuizPlugin } from "./homonym-quiz/index.js";
+import { rhymeQuizPlugin } from "./rhyme-quiz/index.js";
+import { prefixQuizPlugin } from "./prefix-quiz/index.js";
+import { suffixQuizPlugin } from "./suffix-quiz/index.js";
+import { vocabularyBuilderPlugin } from "./vocabulary-builder/index.js";
+import { wordRootsQuizPlugin } from "./word-roots-quiz/index.js";
+import { proverbQuizPlugin } from "./proverb-quiz/index.js";
+import { palindromeQuizPlugin } from "./palindrome-quiz/index.js";
+import { portmanteauQuizPlugin } from "./portmanteau-quiz/index.js";
+import { onomatopoeiaQuizPlugin } from "./onomatopoeia-quiz/index.js";
+import { alliterationQuizPlugin } from "./alliteration-quiz/index.js";
+import { oxymoronQuizPlugin } from "./oxymoron-quiz/index.js";
+import { metaphorQuizPlugin } from "./metaphor-quiz/index.js";
+import { simileQuizPlugin } from "./simile-quiz/index.js";
+import { hyperboleQuizPlugin } from "./hyperbole-quiz/index.js";
+import { abbreviationQuizPlugin } from "./abbreviation-quiz/index.js";
+import { acronymDefineQuizPlugin } from "./acronym-define-quiz/index.js";
+import { spellingQuizPlugin } from "./spelling-quiz/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -6630,5 +6670,45 @@ export const GAMES: GamePlugin[] = [
   akariMiniPlugin as unknown as GamePlugin,
   galaxiesMiniPlugin as unknown as GamePlugin,
   snakeLogicPlugin as unknown as GamePlugin,
+  appleTapPlugin as unknown as GamePlugin,
+  cherryBurstPlugin as unknown as GamePlugin,
+  grapePopPlugin as unknown as GamePlugin,
+  melonMashPlugin as unknown as GamePlugin,
+  lemonZapPlugin as unknown as GamePlugin,
+  kiwiClickerPlugin as unknown as GamePlugin,
+  pumpkinSmashPlugin as unknown as GamePlugin,
+  bubbleBurstArcadePlugin as unknown as GamePlugin,
+  starTapperPlugin as unknown as GamePlugin,
+  meteorTapPlugin as unknown as GamePlugin,
+  cometClickerPlugin as unknown as GamePlugin,
+  lightningTapPlugin as unknown as GamePlugin,
+  snowflakeSnapPlugin as unknown as GamePlugin,
+  acornTapPlugin as unknown as GamePlugin,
+  bananaBashPlugin as unknown as GamePlugin,
+  papayaPopPlugin as unknown as GamePlugin,
+  blueberryBurstPlugin as unknown as GamePlugin,
+  orangeTapPlugin as unknown as GamePlugin,
+  limeTapPlugin as unknown as GamePlugin,
+  moonTapPlugin as unknown as GamePlugin,
+  synonymQuizPlugin as unknown as GamePlugin,
+  antonymQuizPlugin as unknown as GamePlugin,
+  homonymQuizPlugin as unknown as GamePlugin,
+  rhymeQuizPlugin as unknown as GamePlugin,
+  prefixQuizPlugin as unknown as GamePlugin,
+  suffixQuizPlugin as unknown as GamePlugin,
+  vocabularyBuilderPlugin as unknown as GamePlugin,
+  wordRootsQuizPlugin as unknown as GamePlugin,
+  proverbQuizPlugin as unknown as GamePlugin,
+  palindromeQuizPlugin as unknown as GamePlugin,
+  portmanteauQuizPlugin as unknown as GamePlugin,
+  onomatopoeiaQuizPlugin as unknown as GamePlugin,
+  alliterationQuizPlugin as unknown as GamePlugin,
+  oxymoronQuizPlugin as unknown as GamePlugin,
+  metaphorQuizPlugin as unknown as GamePlugin,
+  simileQuizPlugin as unknown as GamePlugin,
+  hyperboleQuizPlugin as unknown as GamePlugin,
+  abbreviationQuizPlugin as unknown as GamePlugin,
+  acronymDefineQuizPlugin as unknown as GamePlugin,
+  spellingQuizPlugin as unknown as GamePlugin,
   queensPuzzlePlugin as unknown as GamePlugin,
 ];

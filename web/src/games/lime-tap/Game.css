@@ -1,0 +1,11 @@
+.limetap-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
+.limetap-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.limetap-info { font-size:0.95rem; color:#555; }
+.limetap-score { font-size:1.2rem; font-weight:800; color:#196f3d; }
+.limetap-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
+.limetap-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#d5f5e3,#7dcea0); border:3px solid #196f3d; border-radius:14px; overflow:hidden; }
+.limetap-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
+.limetap-target:hover { transform:scale(1.15); }
+.limetap-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
+.limetap-done h2 { margin:0 0 8px; }
+.limetap-final { font-size:1.4rem; color:#196f3d; font-weight:900; }

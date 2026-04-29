@@ -1,0 +1,11 @@
+.bubbleburstarcade-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
+.bubbleburstarcade-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.bubbleburstarcade-info { font-size:0.95rem; color:#555; }
+.bubbleburstarcade-score { font-size:1.2rem; font-weight:800; color:#1f618d; }
+.bubbleburstarcade-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
+.bubbleburstarcade-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#d6eaf8,#7fb3d5); border:3px solid #1a5276; border-radius:14px; overflow:hidden; }
+.bubbleburstarcade-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
+.bubbleburstarcade-target:hover { transform:scale(1.15); }
+.bubbleburstarcade-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
+.bubbleburstarcade-done h2 { margin:0 0 8px; }
+.bubbleburstarcade-final { font-size:1.4rem; color:#1f618d; font-weight:900; }

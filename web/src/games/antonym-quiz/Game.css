@@ -1,0 +1,25 @@
+.antonymquiz-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:20px; font-family:sans-serif; max-width:640px; margin:0 auto; }
+.antonymquiz-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.antonymquiz-progress { font-size:0.95rem; color:#555; }
+.antonymquiz-score { font-size:1.1rem; font-weight:700; color:#27ae60; }
+.antonymquiz-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; min-width:40px; text-align:center; }
+.antonymquiz-timer.urgent { animation:pulse 0.5s infinite alternate; }
+@keyframes pulse { from { opacity:1; } to { opacity:0.4; } }
+.antonymquiz-question { font-size:1.25rem; font-weight:600; text-align:center; color:#2c3e50; line-height:1.4; }
+.antonymquiz-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
+.antonymquiz-choice { display:flex; align-items:center; gap:12px; padding:12px 16px; border:2px solid #bdc3c7; border-radius:10px; background:#fff; cursor:pointer; font-size:1rem; transition:border-color 0.15s, background 0.15s; text-align:left; }
+.antonymquiz-choice:hover:not(:disabled) { border-color:#3498db; background:#eaf4fb; }
+.antonymquiz-choice.selected { border-color:#3498db; background:#eaf4fb; }
+.antonymquiz-choice.correct { border-color:#27ae60; background:#eafaf1; }
+.antonymquiz-choice.wrong { border-color:#e74c3c; background:#fdedec; }
+.antonymquiz-choice-letter { font-weight:900; font-size:1.1rem; color:#95a5a6; min-width:24px; }
+.antonymquiz-actions { display:flex; gap:12px; }
+.antonymquiz-btn { padding:10px 28px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; }
+.antonymquiz-btn.submit { background:#27ae60; color:#fff; }
+.antonymquiz-btn.next { background:#3498db; color:#fff; }
+.antonymquiz-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.antonymquiz-feedback { font-size:1.1rem; font-weight:700; padding:10px 24px; border-radius:8px; }
+.antonymquiz-feedback.correct { background:#eafaf1; color:#1e8449; }
+.antonymquiz-feedback.wrong { background:#fdedec; color:#c0392b; }
+.antonymquiz-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:16px; width:100%; }
+.antonymquiz-done h2 { margin-bottom:8px; }

@@ -1,0 +1,25 @@
+.vocabularybuilder-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:20px; font-family:sans-serif; max-width:640px; margin:0 auto; }
+.vocabularybuilder-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.vocabularybuilder-progress { font-size:0.95rem; color:#555; }
+.vocabularybuilder-score { font-size:1.1rem; font-weight:700; color:#27ae60; }
+.vocabularybuilder-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; min-width:40px; text-align:center; }
+.vocabularybuilder-timer.urgent { animation:pulse 0.5s infinite alternate; }
+@keyframes pulse { from { opacity:1; } to { opacity:0.4; } }
+.vocabularybuilder-question { font-size:1.25rem; font-weight:600; text-align:center; color:#2c3e50; line-height:1.4; }
+.vocabularybuilder-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
+.vocabularybuilder-choice { display:flex; align-items:center; gap:12px; padding:12px 16px; border:2px solid #bdc3c7; border-radius:10px; background:#fff; cursor:pointer; font-size:1rem; transition:border-color 0.15s, background 0.15s; text-align:left; }
+.vocabularybuilder-choice:hover:not(:disabled) { border-color:#3498db; background:#eaf4fb; }
+.vocabularybuilder-choice.selected { border-color:#3498db; background:#eaf4fb; }
+.vocabularybuilder-choice.correct { border-color:#27ae60; background:#eafaf1; }
+.vocabularybuilder-choice.wrong { border-color:#e74c3c; background:#fdedec; }
+.vocabularybuilder-choice-letter { font-weight:900; font-size:1.1rem; color:#95a5a6; min-width:24px; }
+.vocabularybuilder-actions { display:flex; gap:12px; }
+.vocabularybuilder-btn { padding:10px 28px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; }
+.vocabularybuilder-btn.submit { background:#27ae60; color:#fff; }
+.vocabularybuilder-btn.next { background:#3498db; color:#fff; }
+.vocabularybuilder-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.vocabularybuilder-feedback { font-size:1.1rem; font-weight:700; padding:10px 24px; border-radius:8px; }
+.vocabularybuilder-feedback.correct { background:#eafaf1; color:#1e8449; }
+.vocabularybuilder-feedback.wrong { background:#fdedec; color:#c0392b; }
+.vocabularybuilder-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:16px; width:100%; }
+.vocabularybuilder-done h2 { margin-bottom:8px; }

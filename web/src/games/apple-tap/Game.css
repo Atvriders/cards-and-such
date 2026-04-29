@@ -1,0 +1,11 @@
+.appletap-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
+.appletap-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
+.appletap-info { font-size:0.95rem; color:#555; }
+.appletap-score { font-size:1.2rem; font-weight:800; color:#c0392b; }
+.appletap-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
+.appletap-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#fde8e8,#f5b7b1); border:3px solid #a83229; border-radius:14px; overflow:hidden; }
+.appletap-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
+.appletap-target:hover { transform:scale(1.15); }
+.appletap-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
+.appletap-done h2 { margin:0 0 8px; }
+.appletap-final { font-size:1.4rem; color:#c0392b; font-weight:900; }

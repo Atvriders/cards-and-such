@@ -1,0 +1,22 @@
+import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { BananaBashState, BananaBashAction, BananaBashSettings } from "./state.js";
+import { initialState, reducer, isTerminal } from "./state.js";
+import { BananaBashGame } from "./Game.js";
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+type S = SettingsOf<typeof settings>;
+export const bananaBashPlugin: GamePlugin<BananaBashState, BananaBashAction, typeof settings> = {
+  id: "banana-bash", title: "Banana Bash", category: "arcade",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Bash bananas drifting across the jungle in 30 seconds.",
+  howToPlay: `Banana Bash is a 30-second clicker arcade. Ripe yellow bananas drift across the jungle in six lanes; tap them as fast as you can to bash them for 10 points each. Bananas linger a few ticks before drifting off — miss too many and your score will suffer.
+
+The board ticks roughly every three quarters of a second, spawning fresh bananas in random lanes. The screen quickly fills with curvy targets, so practice your hand-eye coordination and aim true.
+
+There is no skill ceiling: the more bananas you bash in 30 seconds, the higher your score. Beginner runs land near 150-250 points; sharp tappers pushing 400+ are showing real reflex talent. The countdown clock ticks in the top right; when it hits zero, your final score is locked in.
+
+Bash those bananas and rule the jungle!`,
+  settings,
+  initialState: (seed: number, s: S) => initialState(seed, s as BananaBashSettings),
+  reducer, isTerminal, component: BananaBashGame,
+};
