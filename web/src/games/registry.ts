@@ -2260,6 +2260,41 @@ import { shanghaiDynastyPlugin } from "./shanghai-dynasty/index.js";
 import { mahjongTrailsPlugin } from "./mahjong-trails/index.js";
 import { mahjongQuestPlugin } from "./mahjong-quest/index.js";
 import { butterflyPuzzleTilesPlugin } from "./butterfly-puzzle-tiles/index.js";
+import { mahjongTurtle3dLayoutPlugin } from "./mahjong-turtle-3d-layout/index.js";
+import { mahjongIshidoLayoutPlugin } from "./mahjong-ishido-layout/index.js";
+import { mahjongShanghaiDynastyLayoutPlugin } from "./mahjong-shanghai-dynasty-layout/index.js";
+import { mahjongDimensionsLayoutPlugin } from "./mahjong-dimensions-layout/index.js";
+import { mahjongEpicLayoutPlugin } from "./mahjong-epic-layout/index.js";
+import { mahjongEastRoundLayoutPlugin } from "./mahjong-east-round-layout/index.js";
+import { mahjongSouthRoundLayoutPlugin } from "./mahjong-south-round-layout/index.js";
+import { mahjongFullGameLayoutPlugin } from "./mahjong-full-game-layout/index.js";
+import { mahjongTenhouLayoutPlugin } from "./mahjong-tenhou-layout/index.js";
+import { mahjongSoulLayoutPlugin } from "./mahjong-soul-layout/index.js";
+import { mahjongQuadLayoutPlugin } from "./mahjong-quad-layout/index.js";
+import { mahjongTsumogiriLayoutPlugin } from "./mahjong-tsumogiri-layout/index.js";
+import { mahjongSichuanLayoutPlugin } from "./mahjong-sichuan-layout/index.js";
+import { mahjongGuangdongLayoutPlugin } from "./mahjong-guangdong-layout/index.js";
+import { mahjongShanghaineseLayoutPlugin } from "./mahjong-shanghainese-layout/index.js";
+import { mahjongOnlineFfaLayoutPlugin } from "./mahjong-online-ffa-layout/index.js";
+import { mahjongVietnameseLayoutPlugin } from "./mahjong-vietnamese-layout/index.js";
+import { mahjongKoreanHwatooLayoutPlugin } from "./mahjong-korean-hwatoo-layout/index.js";
+import { mahjongEuropeanClassicalLayoutPlugin } from "./mahjong-european-classical-layout/index.js";
+import { mahjongRiichiMinefieldLayoutPlugin } from "./mahjong-riichi-minefield-layout/index.js";
+import { mahjongSanmaLayoutPlugin } from "./mahjong-sanma-layout/index.js";
+import { mahjongAmericanNmjlLayoutPlugin } from "./mahjong-american-nmjl-layout/index.js";
+import { mahjongHongKongLayoutPlugin } from "./mahjong-hong-kong-layout/index.js";
+import { mahjongStandardChineseLayoutPlugin } from "./mahjong-standard-chinese-layout/index.js";
+import { mahjongRiichiJapaneseLayoutPlugin } from "./mahjong-riichi-japanese-layout/index.js";
+import { mahjongTaiwaneseLayoutPlugin } from "./mahjong-taiwanese-layout/index.js";
+import { mahjongSingaporeanLayoutPlugin } from "./mahjong-singaporean-layout/index.js";
+import { mahjongHonorTilesLayoutPlugin } from "./mahjong-honor-tiles-layout/index.js";
+import { mahjongJokersFlowersLayoutPlugin } from "./mahjong-jokers-flowers-layout/index.js";
+import { mahjongTileTowerLayoutPlugin } from "./mahjong-tile-tower-layout/index.js";
+import { mahjongFlowerBonusLayoutPlugin } from "./mahjong-flower-bonus-layout/index.js";
+import { mahjongDoublePyramidLayoutPlugin } from "./mahjong-double-pyramid-layout/index.js";
+import { mahjongCrossLayoutPlugin } from "./mahjong-cross-layout/index.js";
+import { mahjongDiamondLayoutPlugin } from "./mahjong-diamond-layout/index.js";
+import { mahjongRectangleLayoutPlugin } from "./mahjong-rectangle-layout/index.js";
 import { bughousePlugin } from "./bughouse/index.js";
 import { losingChessPlugin } from "./losing-chess/index.js";
 import { threeCheckChessPlugin } from "./three-check-chess/index.js";
@@ -5291,6 +5326,41 @@ export const GAMES: GamePlugin[] = [
   mahjongTrailsPlugin as unknown as GamePlugin,
   mahjongQuestPlugin as unknown as GamePlugin,
   butterflyPuzzleTilesPlugin as unknown as GamePlugin,
+  mahjongTurtle3dLayoutPlugin as unknown as GamePlugin,
+  mahjongIshidoLayoutPlugin as unknown as GamePlugin,
+  mahjongShanghaiDynastyLayoutPlugin as unknown as GamePlugin,
+  mahjongDimensionsLayoutPlugin as unknown as GamePlugin,
+  mahjongEpicLayoutPlugin as unknown as GamePlugin,
+  mahjongEastRoundLayoutPlugin as unknown as GamePlugin,
+  mahjongSouthRoundLayoutPlugin as unknown as GamePlugin,
+  mahjongFullGameLayoutPlugin as unknown as GamePlugin,
+  mahjongTenhouLayoutPlugin as unknown as GamePlugin,
+  mahjongSoulLayoutPlugin as unknown as GamePlugin,
+  mahjongQuadLayoutPlugin as unknown as GamePlugin,
+  mahjongTsumogiriLayoutPlugin as unknown as GamePlugin,
+  mahjongSichuanLayoutPlugin as unknown as GamePlugin,
+  mahjongGuangdongLayoutPlugin as unknown as GamePlugin,
+  mahjongShanghaineseLayoutPlugin as unknown as GamePlugin,
+  mahjongOnlineFfaLayoutPlugin as unknown as GamePlugin,
+  mahjongVietnameseLayoutPlugin as unknown as GamePlugin,
+  mahjongKoreanHwatooLayoutPlugin as unknown as GamePlugin,
+  mahjongEuropeanClassicalLayoutPlugin as unknown as GamePlugin,
+  mahjongRiichiMinefieldLayoutPlugin as unknown as GamePlugin,
+  mahjongSanmaLayoutPlugin as unknown as GamePlugin,
+  mahjongAmericanNmjlLayoutPlugin as unknown as GamePlugin,
+  mahjongHongKongLayoutPlugin as unknown as GamePlugin,
+  mahjongStandardChineseLayoutPlugin as unknown as GamePlugin,
+  mahjongRiichiJapaneseLayoutPlugin as unknown as GamePlugin,
+  mahjongTaiwaneseLayoutPlugin as unknown as GamePlugin,
+  mahjongSingaporeanLayoutPlugin as unknown as GamePlugin,
+  mahjongHonorTilesLayoutPlugin as unknown as GamePlugin,
+  mahjongJokersFlowersLayoutPlugin as unknown as GamePlugin,
+  mahjongTileTowerLayoutPlugin as unknown as GamePlugin,
+  mahjongFlowerBonusLayoutPlugin as unknown as GamePlugin,
+  mahjongDoublePyramidLayoutPlugin as unknown as GamePlugin,
+  mahjongCrossLayoutPlugin as unknown as GamePlugin,
+  mahjongDiamondLayoutPlugin as unknown as GamePlugin,
+  mahjongRectangleLayoutPlugin as unknown as GamePlugin,
   bughousePlugin as unknown as GamePlugin,
   losingChessPlugin as unknown as GamePlugin,
   threeCheckChessPlugin as unknown as GamePlugin,
