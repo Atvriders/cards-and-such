@@ -1,0 +1,20 @@
+import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { DudakDiceState, DudakDiceAction, DudakDiceSettings } from "./state.js";
+import { initialState, reducer, isTerminal } from "./state.js";
+import { DudakDiceGame } from "./Game.js";
+const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+type S = SettingsOf<typeof settings>;
+export const dudakDicePlugin: GamePlugin<DudakDiceState, DudakDiceAction, typeof settings> = {
+  id: "dudak-dice",
+  title: "Dudak Dice",
+  category: "dice",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Turkish tavern dice — predict Lip (low pair), Top (high), or Mid.",
+  howToPlay: "Dudak (Turkish for \"lip\") is a tavern dice game named for the rim of the dice cup. Two dice roll each round and you predict which of three regions the result lands in: Lip (any pair from 1-1 through 3-3, the low pairs), Top (sum of 10 or higher), or Mid (everything else).\n\nLip occurs on 3 of 36 outcomes (8.3%) and pays 50. Top occurs on 6 of 36 outcomes (16.7%) and pays 25. Mid covers 27 of 36 outcomes (75%) and pays 6. Expected value: Lip 4.2, Top 4.2, Mid 4.5 — almost identical, making each call viable.\n\nThe game runs 12 rounds. Mid is the steady payer; Top hits often enough to keep the score line climbing; Lip is the spike. Average expected score lands near 60 points. A run of Lips lifts the score sharply. There are no rerolls — pure prediction across the seeded sequence determines your final total.",
+  settings,
+  initialState: (seed: number, s: S) => initialState(seed, s as DudakDiceSettings),
+  reducer,
+  isTerminal,
+  component: DudakDiceGame,
+};
