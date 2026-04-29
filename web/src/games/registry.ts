@@ -2785,6 +2785,41 @@ import { pointSaladVegPlugin } from "./point-salad-veg/index.js";
 import { tidesOfTimePlugin } from "./tides-of-time-draft/index.js";
 import { bunnyKingdomPlugin } from "./bunny-kingdom-draft/index.js";
 import { innovationAgesPlugin } from "./innovation-ages/index.js";
+import { presidentsMemoryPlugin } from "./presidents-memory/index.js";
+import { monetMemoryPlugin } from "./monet-memory/index.js";
+import { flagsMemoryPlugin } from "./flags-memory/index.js";
+import { spotItClassicPlugin } from "./spot-it-classic/index.js";
+import { setShapesPlugin } from "./set-shapes/index.js";
+import { speedPairsPlugin } from "./speed-pairs/index.js";
+import { zenMatchingPlugin } from "./zen-matching/index.js";
+import { blinkMatchPlugin } from "./blink-match/index.js";
+import { warObservePlugin } from "./war-observe/index.js";
+import { kimsGamePlugin } from "./kims-game/index.js";
+import { trayMemoryPlugin } from "./tray-memory/index.js";
+import { observerCardPlugin } from "./observer-card/index.js";
+import { wheresWaldoCardPlugin } from "./wheres-waldo-card/index.js";
+import { iSpyCardPlugin } from "./i-spy-card/index.js";
+import { brainbowPlugin } from "./brainbow/index.js";
+import { swishCardsPlugin } from "./swish-cards/index.js";
+import { colorBrainPlugin } from "./color-brain/index.js";
+import { mapMemoryPlugin } from "./map-memory/index.js";
+import { sherlookDiffPlugin } from "./sherlook-diff/index.js";
+import { halliGalliPlugin } from "./halli-galli/index.js";
+import { framedFilmPlugin } from "./framed-film/index.js";
+import { cinematrixYrPlugin } from "./cinematrix-yr/index.js";
+import { bandleAudioPlugin } from "./bandle-audio/index.js";
+import { gamedlePixelPlugin } from "./gamedle-pixel/index.js";
+import { poeltlNbaPlugin } from "./poeltl-nba/index.js";
+import { squirdlePokePlugin } from "./squirdle-poke/index.js";
+import { taylordleTsPlugin } from "./taylordle-ts/index.js";
+import { fluxxRulesPlugin } from "./fluxx-rules/index.js";
+import { guillotineHeadsPlugin } from "./guillotine-heads/index.js";
+import { abandonArtichokesPlugin } from "./abandon-artichokes/index.js";
+import { kakerlakenPokerPlugin } from "./kakerlaken-poker/index.js";
+import { faceToFacePlugin } from "./face-to-face/index.js";
+import { klaskMagneticPlugin } from "./klask-magnetic/index.js";
+import { spitSpeedPlugin } from "./spit-speed/index.js";
+import { spoonsGrabPlugin } from "./spoons-grab/index.js";
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -5571,4 +5606,39 @@ export const GAMES: GamePlugin[] = [
   tidesOfTimePlugin as unknown as GamePlugin,
   bunnyKingdomPlugin as unknown as GamePlugin,
   innovationAgesPlugin as unknown as GamePlugin,
+  presidentsMemoryPlugin as unknown as GamePlugin,
+  monetMemoryPlugin as unknown as GamePlugin,
+  flagsMemoryPlugin as unknown as GamePlugin,
+  spotItClassicPlugin as unknown as GamePlugin,
+  setShapesPlugin as unknown as GamePlugin,
+  speedPairsPlugin as unknown as GamePlugin,
+  zenMatchingPlugin as unknown as GamePlugin,
+  blinkMatchPlugin as unknown as GamePlugin,
+  warObservePlugin as unknown as GamePlugin,
+  kimsGamePlugin as unknown as GamePlugin,
+  trayMemoryPlugin as unknown as GamePlugin,
+  observerCardPlugin as unknown as GamePlugin,
+  wheresWaldoCardPlugin as unknown as GamePlugin,
+  iSpyCardPlugin as unknown as GamePlugin,
+  brainbowPlugin as unknown as GamePlugin,
+  swishCardsPlugin as unknown as GamePlugin,
+  colorBrainPlugin as unknown as GamePlugin,
+  mapMemoryPlugin as unknown as GamePlugin,
+  sherlookDiffPlugin as unknown as GamePlugin,
+  halliGalliPlugin as unknown as GamePlugin,
+  framedFilmPlugin as unknown as GamePlugin,
+  cinematrixYrPlugin as unknown as GamePlugin,
+  bandleAudioPlugin as unknown as GamePlugin,
+  gamedlePixelPlugin as unknown as GamePlugin,
+  poeltlNbaPlugin as unknown as GamePlugin,
+  squirdlePokePlugin as unknown as GamePlugin,
+  taylordleTsPlugin as unknown as GamePlugin,
+  fluxxRulesPlugin as unknown as GamePlugin,
+  guillotineHeadsPlugin as unknown as GamePlugin,
+  abandonArtichokesPlugin as unknown as GamePlugin,
+  kakerlakenPokerPlugin as unknown as GamePlugin,
+  faceToFacePlugin as unknown as GamePlugin,
+  klaskMagneticPlugin as unknown as GamePlugin,
+  spitSpeedPlugin as unknown as GamePlugin,
+  spoonsGrabPlugin as unknown as GamePlugin,
 ];
