@@ -2801,7 +2801,7 @@ import { scovillePeppersPlugin } from "./scoville-peppers/index.js";
 import { charteredCompaniesPlugin } from "./chartered-companies/index.js";
 import { tinyEpicWesternPlugin } from "./tiny-epic-western-mini/index.js";
 import { shoveHapennyPlugin } from "./shove-hapenny/index.js";
-import { shipCaptainCrewPlugin } from "./bar-dice-ship-captain/index.js";
+import { barDiceShipCaptainPlugin } from "./bar-dice-ship-captain/index.js";
 import { midnightBarDicePlugin } from "./bar-dice-midnight/index.js";
 import { threesBarDicePlugin } from "./bar-dice-threes/index.js";
 import { coinDribblePlugin } from "./coin-dribble-pub/index.js";
@@ -5622,7 +5622,7 @@ export const GAMES: GamePlugin[] = [
   charteredCompaniesPlugin as unknown as GamePlugin,
   tinyEpicWesternPlugin as unknown as GamePlugin,
   shoveHapennyPlugin as unknown as GamePlugin,
-  shipCaptainCrewPlugin as unknown as GamePlugin,
+  barDiceShipCaptainPlugin as unknown as GamePlugin,
   midnightBarDicePlugin as unknown as GamePlugin,
   threesBarDicePlugin as unknown as GamePlugin,
   coinDribblePlugin as unknown as GamePlugin,

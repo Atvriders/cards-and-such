@@ -6,7 +6,7 @@ import { ShipCaptainCrewGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const shipCaptainCrewPlugin: GamePlugin<ShipCaptainCrewState, ShipCaptainCrewAction, typeof settings> = {
+export const barDiceShipCaptainPlugin: GamePlugin<ShipCaptainCrewState, ShipCaptainCrewAction, typeof settings> = {
   id: "bar-dice-ship-captain",
   title: "Ship Captain Crew",
   category: "board",
