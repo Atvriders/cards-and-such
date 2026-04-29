@@ -4211,6 +4211,47 @@ import { go9Plugin } from "./go-9/index.js";
 import { renjuClassicPlugin } from "./renju/index.js";
 import { ninukiRenjuClassicPlugin } from "./ninuki-renju/index.js";
 import { pentePlugin } from "./pente/index.js";
+import { tavliPortesRacePlugin } from "./tavli-portes-race/index.js";
+import { plakotoTavliPlugin } from "./plakoto-tavli/index.js";
+import { fevgaTavliPlugin } from "./fevga-tavli/index.js";
+import { tapaMiniRacePlugin } from "./tapa-mini-race/index.js";
+import { longGammonMiniPlugin } from "./long-gammon-mini/index.js";
+import { hypergammonMiniPlugin } from "./hypergammon-mini/index.js";
+import { gulbaraRacePlugin } from "./gulbara-race/index.js";
+import { gioulRacePlugin } from "./gioul-race/index.js";
+import { nardiRussianRacePlugin } from "./nardi-russian-race/index.js";
+import { pachisiClassicPlugin } from "./pachisi-classic/index.js";
+import { ludoMiniRacePlugin } from "./ludo-mini-race/index.js";
+import { troubleMiniPlugin } from "./trouble-mini/index.js";
+import { sorryClassicPlugin } from "./sorry-classic/index.js";
+import { sorrySlidersPlugin } from "./sorry-sliders/index.js";
+import { frustrationMiniPlugin } from "./frustration-mini/index.js";
+import { fiaMiniPlugin } from "./fia-mini/index.js";
+import { parchisMiniPlugin } from "./parchis-mini/index.js";
+import { patolliMiniPlugin } from "./patolli-mini/index.js";
+import { urGameMiniPlugin } from "./ur-game-mini/index.js";
+import { senetMiniPlugin } from "./senet-mini/index.js";
+import { connectFourClassicPlugin } from "./connect-four-classic/index.js";
+import { connectSixClassicPlugin } from "./connect-six-classic/index.js";
+import { gomokuClassicPlugin } from "./gomoku-classic/index.js";
+import { notaktoMiniPlugin } from "./notakto-mini/index.js";
+import { wildTicMiniPlugin } from "./wild-tic-mini/index.js";
+import { quartoClassicPlugin } from "./quarto-classic/index.js";
+import { quixoMiniPlugin } from "./quixo-mini/index.js";
+import { gobbletClassicPlugin } from "./gobblet-classic/index.js";
+import { morrisSixClPlugin } from "./morris-six-cl/index.js";
+import { morrisTwelveClPlugin } from "./morris-twelve-cl/index.js";
+import { morrisThreeClPlugin } from "./morris-three-cl/index.js";
+import { picariaClassicPlugin } from "./picaria-classic/index.js";
+import { tapatanClassicPlugin } from "./tapatan-classic/index.js";
+import { shisimaClassicPlugin } from "./shisima-classic/index.js";
+import { daraClassicPlugin } from "./dara-classic/index.js";
+import { kakugoMiniPlugin } from "./kakugo-mini/index.js";
+import { swap2MiniPlugin } from "./swap2-mini/index.js";
+import { scoreFourClassicPlugin } from "./score-four-classic/index.js";
+import { pentagoMiniPlugin } from "./pentago-mini/index.js";
+import { ultimateTicTacMiniPlugin } from "./ultimate-tic-tac-mini/index.js";
+
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
   omahaHoldemPlugin as unknown as GamePlugin,
@@ -8423,4 +8464,44 @@ export const GAMES: GamePlugin[] = [
   renjuClassicPlugin as unknown as GamePlugin,
   ninukiRenjuClassicPlugin as unknown as GamePlugin,
   pentePlugin as unknown as GamePlugin,
+  tavliPortesRacePlugin as unknown as GamePlugin,
+  plakotoTavliPlugin as unknown as GamePlugin,
+  fevgaTavliPlugin as unknown as GamePlugin,
+  tapaMiniRacePlugin as unknown as GamePlugin,
+  longGammonMiniPlugin as unknown as GamePlugin,
+  hypergammonMiniPlugin as unknown as GamePlugin,
+  gulbaraRacePlugin as unknown as GamePlugin,
+  gioulRacePlugin as unknown as GamePlugin,
+  nardiRussianRacePlugin as unknown as GamePlugin,
+  pachisiClassicPlugin as unknown as GamePlugin,
+  ludoMiniRacePlugin as unknown as GamePlugin,
+  troubleMiniPlugin as unknown as GamePlugin,
+  sorryClassicPlugin as unknown as GamePlugin,
+  sorrySlidersPlugin as unknown as GamePlugin,
+  frustrationMiniPlugin as unknown as GamePlugin,
+  fiaMiniPlugin as unknown as GamePlugin,
+  parchisMiniPlugin as unknown as GamePlugin,
+  patolliMiniPlugin as unknown as GamePlugin,
+  urGameMiniPlugin as unknown as GamePlugin,
+  senetMiniPlugin as unknown as GamePlugin,
+  connectFourClassicPlugin as unknown as GamePlugin,
+  connectSixClassicPlugin as unknown as GamePlugin,
+  gomokuClassicPlugin as unknown as GamePlugin,
+  notaktoMiniPlugin as unknown as GamePlugin,
+  wildTicMiniPlugin as unknown as GamePlugin,
+  quartoClassicPlugin as unknown as GamePlugin,
+  quixoMiniPlugin as unknown as GamePlugin,
+  gobbletClassicPlugin as unknown as GamePlugin,
+  morrisSixClPlugin as unknown as GamePlugin,
+  morrisTwelveClPlugin as unknown as GamePlugin,
+  morrisThreeClPlugin as unknown as GamePlugin,
+  picariaClassicPlugin as unknown as GamePlugin,
+  tapatanClassicPlugin as unknown as GamePlugin,
+  shisimaClassicPlugin as unknown as GamePlugin,
+  daraClassicPlugin as unknown as GamePlugin,
+  kakugoMiniPlugin as unknown as GamePlugin,
+  swap2MiniPlugin as unknown as GamePlugin,
+  scoreFourClassicPlugin as unknown as GamePlugin,
+  pentagoMiniPlugin as unknown as GamePlugin,
+  ultimateTicTacMiniPlugin as unknown as GamePlugin,
 ];
