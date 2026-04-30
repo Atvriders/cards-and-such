@@ -13,17 +13,120 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
+.play-header-titleblock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
 .play-header h1 {
   margin: 0;
-  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.85rem);
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.95rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  background: linear-gradient(90deg, #f1f5f9 0%, #c7cdfe 100%);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  background: linear-gradient(90deg, #f1f5f9 0%, #c7cdfe 60%, #a78bfa 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+/* Category breadcrumb pill */
+.play-category {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.18rem 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c7cdfe;
+  background: rgba(129, 140, 248, 0.12);
+  border: 1px solid rgba(129, 140, 248, 0.30);
+  border-radius: 999px;
+}
+.play-category--solitaire { color: #b6f3d8; background: rgba(52,211,153,0.12); border-color: rgba(52,211,153,0.30); }
+.play-category--cards     { color: #c7cdfe; background: rgba(129,140,248,0.12); border-color: rgba(129,140,248,0.30); }
+.play-category--dice      { color: #fde7a7; background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.30); }
+.play-category--board     { color: #c4eaf7; background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.30); }
+.play-category--arcade    { color: #fec7d0; background: rgba(251,113,133,0.12); border-color: rgba(251,113,133,0.30); }
+
+.play-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Round icon-only buttons (help, settings) */
+.play-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: #94a3b8;
+  background: rgba(22, 25, 39, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.20);
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    background 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+.play-iconbtn:hover {
+  color: #f1f5f9;
+  border-color: rgba(129, 140, 248, 0.55);
+  background: rgba(129, 140, 248, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px -6px rgba(129, 140, 248, 0.45);
+}
+.play-iconbtn:active { transform: translateY(0); }
+.play-iconbtn:focus-visible {
+  outline: none;
+  border-color: rgba(129, 140, 248, 0.65);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.18);
+}
+
+/* Pill back button */
+.play-backbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 0.4rem 0.95rem 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.20);
+  background: rgba(22, 25, 39, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition:
+    color 140ms cubic-bezier(0.25, 1, 0.5, 1),
+    background 140ms cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 140ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 140ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+.play-backbtn:hover {
+  color: #f1f5f9;
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.35);
+  transform: translateY(-1px);
+}
+.play-backbtn:active { transform: translateY(0); }
+.play-backbtn svg { transition: transform 160ms cubic-bezier(0.25, 1, 0.5, 1); }
+.play-backbtn:hover svg { transform: translateX(-2px); }
+
+/* Backwards-compat: keep the original .back-link / .help-button styles
+   in case any other code still references them. */
 .back-link {
   color: #94a3b8;
   text-decoration: none;
@@ -54,6 +157,12 @@
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.05) inset,
     0 12px 24px -10px rgba(0, 0, 0, 0.50);
+  animation: panel-fade-in 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panel-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
 }
 
 /* Settings form */
@@ -242,5 +351,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .help-modal-backdrop, .help-modal { animation: none; }
+  .setup-panel, .end-panel { animation: none; }
   .start-btn, .play-again-btn, .back-link, .help-button { transition: none; }
 }

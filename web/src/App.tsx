@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AppShell from "./platform/AppShell.js";
 import { RequireAuth } from "./platform/RequireAuth.js";
 import LoginPage from "./pages/LoginPage.js";
+import "./styles/games.css";
 import LobbyPage from "./pages/LobbyPage.js";
 import PlayPage from "./pages/PlayPage.js";
 import LeaderboardPage from "./pages/LeaderboardPage.js";
