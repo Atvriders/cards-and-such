@@ -1,23 +1,2 @@
-.g-wrap { max-width: 480px; margin: 0 auto; padding: 1rem; text-align: center; color: #eee; }
-.g-header { display: flex; justify-content: space-between; padding: .5rem; background: #222; border-radius: 6px; margin-bottom: 1rem; }
-.g-score { font-weight: 700; color: #f39c12; }
-.g-dice { display: flex; justify-content: center; gap: .5rem; margin: 1rem 0; flex-wrap: wrap; }
-.g-die { display: inline-block; min-width: 2.4rem; padding: .6rem .8rem; background: #fff; color: #111; font-weight: 800; border-radius: 6px; font-size: 1.4rem; }
-.g-gain { color: #2ecc71; font-weight: 700; margin: .5rem 0; }
-.g-controls { margin: 1rem 0; }
-.g-btn { padding: .8rem 1.4rem; background: #3498db; color: #fff; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
-.g-btn:hover { background: #2980b9; }
-.g-final { font-size: 1.6rem; font-weight: 900; color: #f39c12; }
-.g-card { display: inline-block; min-width: 3rem; padding: .8rem .6rem; background: #fff; color: #111; font-weight: 800; border-radius: 6px; font-size: 1.2rem; margin: .25rem; }
-.g-card.red { color: #c0392b; }
-.g-grid { display: grid; grid-template-columns: repeat(3, 60px); gap: 4px; justify-content: center; margin: 1rem auto; }
-.g-cell { width: 60px; height: 60px; background: #2c3e50; color: #ecf0f1; font-size: 1.6rem; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #34495e; border-radius: 4px; }
-.g-cell.x { background: #3498db; }
-.g-cell.o { background: #e74c3c; }
-.g-cell:hover:not(.x):not(.o) { background: #34495e; }
-.g-q { margin: 1rem 0; padding: 1rem; background: #2c3e50; border-radius: 6px; }
-.g-options { display: flex; flex-direction: column; gap: .5rem; margin: 1rem 0; }
-.g-opt { padding: .6rem 1rem; background: #34495e; color: #fff; border: none; border-radius: 6px; cursor: pointer; text-align: left; }
-.g-opt:hover { background: #455d72; }
-.g-opt.right { background: #27ae60; }
-.g-opt.wrong { background: #c0392b; }
+/* Modernized via shared blackjack/casino engine — see web/src/engines/blackjack/blackjack.css */
+@import "../../engines/blackjack/blackjack.css";

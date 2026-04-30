@@ -1,14 +1,2 @@
-.trick-game { padding: 14px; background: #102134; color: #e6e6e6; min-height: 380px; font-family: system-ui, sans-serif; border-radius: 8px; }
-.trick-header { display: flex; gap: 14px; font-size: 13px; margin-bottom: 10px; opacity: 0.85; }
-.trick-bot-row, .trick-player-area { margin: 10px 0; }
-.trick-label { font-size: 12px; opacity: 0.6; margin-bottom: 4px; }
-.trick-card-backs { display: flex; gap: 3px; }
-.trick-card-back { width: 22px; height: 30px; background: #1d3a59; border-radius: 3px; }
-.trick-area { background: #1a2b44; padding: 10px; border-radius: 6px; min-height: 90px; margin: 10px 0; }
-.trick-cards { display: flex; gap: 12px; }
-.trick-slot { display: flex; flex-direction: column; align-items: center; }
-.trick-name { font-size: 11px; opacity: 0.7; margin-bottom: 4px; }
-.trick-status { font-size: 13px; padding: 6px 0; }
-.trick-player-hand { display: flex; gap: 4px; flex-wrap: wrap; }
-.trick-result { margin-top: 12px; padding: 14px; background: #1a2b44; border-radius: 6px; text-align: center; }
-.dim { opacity: 0.4; }
+/* Modernized via shared trick engine — see web/src/engines/trick/trick.css */
+@import "../../engines/trick/trick.css";

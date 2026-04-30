@@ -1,10 +1,2 @@
-.skip-bo-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:580px; margin:0 auto; user-select:none; }
-.skip-bo-info { font-size:0.95rem; color:#555; }
-.skip-bo-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.skip-bo-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#9b59b6; }
-.skip-bo-btn:hover:not(:disabled) { background:#8e44ad; }
-.skip-bo-btn.alt { background:#e67e22; }
-.skip-bo-result { font-size:1rem; font-weight:700; padding:8px 14px; border-radius:8px; background:#f6eafd; text-align:center; }
-.skip-bo-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.skip-bo-done h2 { margin:0 0 8px; }
-.skip-bo-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+/* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
+@import "../../engines/shed/shed.css";

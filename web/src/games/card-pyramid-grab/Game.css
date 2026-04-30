@@ -1,14 +1,2 @@
-.cpg-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: sans-serif; max-width: 480px; margin: 0 auto; }
-.cpg-header { display: flex; justify-content: space-between; width: 100%; font-size: 1rem; color: #555; }
-.cpg-score { font-weight: 700; color: #9b59b6; font-size: 1.2rem; }
-.cpg-hint { color: #777; font-size: 0.95rem; }
-.cpg-rows { display: flex; flex-direction: column; gap: 8px; width: 100%; align-items: center; }
-.cpg-row { display: flex; gap: 8px; justify-content: center; }
-.cpg-card { width: 54px; height: 72px; border: 2px solid #bdc3c7; border-radius: 8px; background: #ecf0f1; font-size: 0.85rem; font-weight: 700; cursor: default; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #2c3e50; transition: border-color 0.15s, background 0.15s; }
-.cpg-card.pickable { border-color: #9b59b6; background: #f5eef8; cursor: pointer; }
-.cpg-card.pickable:hover { background: #e8daef; }
-.cpg-card.revealed { border-color: #27ae60; background: #eafaf1; }
-.cpg-row.done .cpg-card { opacity: 0.5; }
-.cpg-row.future .cpg-card { opacity: 0.4; }
-.cpg-btn { padding: 10px 28px; background: #9b59b6; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
-.cpg-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 16px; width: 100%; }
+/* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
+@import "../../engines/shed/shed.css";

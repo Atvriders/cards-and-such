@@ -1,13 +1,2 @@
-.coop-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.coop-info { font-size:0.95rem; color:#555; }
-.coop-target { font-size:1.1rem; font-weight:800; color:#2c3e50; }
-.coop-die { font-size:1.4rem; font-weight:900; padding:12px 18px; background:#fff; border:2px solid #34495e; border-radius:10px; color:#2c3e50; min-width:120px; text-align:center; }
-.coop-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
-.coop-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.coop-btn:hover:not(:disabled) { background:#2980b9; }
-.coop-btn.alt { background:#27ae60; }
-.coop-btn.alt:hover { background:#229954; }
-.coop-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
-.coop-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.coop-done h2 { margin:0 0 8px; }
-.coop-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
+@import "../../engines/poker/poker.css";

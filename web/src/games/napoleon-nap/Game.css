@@ -1,10 +1,2 @@
-.napoleon-nap-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:580px; margin:0 auto; user-select:none; }
-.napoleon-nap-info { font-size:0.95rem; color:#555; }
-.napoleon-nap-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.napoleon-nap-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.napoleon-nap-btn:hover:not(:disabled) { background:#2980b9; }
-.napoleon-nap-btn.alt { background:#e67e22; }
-.napoleon-nap-result { font-size:1rem; font-weight:700; padding:8px 14px; border-radius:8px; background:#f0f4ff; text-align:center; }
-.napoleon-nap-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.napoleon-nap-done h2 { margin:0 0 8px; }
-.napoleon-nap-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+/* Modern trick-taking engine — see web/src/engines/trick/trick.css */
+@import "../../engines/trick/trick.css";

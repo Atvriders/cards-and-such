@@ -1,18 +1,2 @@
-.cc-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.cc-info { font-size:0.95rem; color:#555; }
-.cc-info.clutch { font-size:1.4rem; font-weight:900; color:#e74c3c; animation:pulse 0.5s infinite alternate; }
-@keyframes pulse { from { opacity:1; } to { opacity:0.5; } }
-.cc-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.cc-prompt { font-size:1.05rem; color:#2c3e50; }
-.cc-row { display:flex; gap:14px; }
-.cc-card { font-size:2.2rem; font-weight:900; padding:18px 26px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:90px; text-align:center; }
-.cc-card.red { color:#c0392b; }
-.cc-card.black { color:#2c3e50; }
-.cc-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#27ae60; }
-.cc-btn.alt { background:#3498db; }
-.cc-feedback { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; }
-.cc-feedback.ok { background:#eafaf1; color:#1e8449; }
-.cc-feedback.no { background:#fdedec; color:#c0392b; }
-.cc-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.cc-done h2 { margin:0 0 8px; }
-.cc-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+/* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
+@import "../../engines/shed/shed.css";

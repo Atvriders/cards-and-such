@@ -1,0 +1,541 @@
+/*
+ * Shared modern trick-taking engine.
+ *
+ * Used by ~50 trick-taking games (Hearts, Spades, Euchre, Bridge, Skat,
+ * Pinochle, Whist, Briscola, Scopone, Tarot, etc.). Each game uses its
+ * own prefix (`.hearts-*`, `.spades-*`, `.euchre-*`, `.bezique-*`, ...);
+ * this engine reaches all of them with attribute selectors so a single
+ * @import upgrades the whole family without touching TSX.
+ *
+ * Targeted attribute groups:
+ *   [class$="-game"], [class$="-wrap"]                      outer
+ *   [class$="-header"]                                       HUD strip
+ *   [class$="-status"], [class$="-info"]                     status line
+ *   [class$="-trick"], [class$="-trick-cards"]               trick area
+ *   [class$="-player-hand"], [class$="-hand"]                player hand
+ *   [class$="-bot-row"]                                      opponent row
+ *   [class$="-card-back"], [class$="-card-backs"]            back-of-card stack
+ *   [class$="-result"], [class$="-done"]                     end panel
+ *   .card                                                    card face
+ */
+
+/* ---------- Outer felt-table wrap (deep navy) ---------- */
+[class$="-game"][class*="-"][class],
+[class$="-wrap"][class*="-"][class] {
+  /* These compound selectors anchor to game-level wrappers; the root
+     game class always carries a `-game` or `-wrap` suffix. */
+}
+
+/* Base wrapper styling */
+.black-lady-game,
+.scopone-game,
+.bid-euchre-game,
+.bid-whist-game,
+.briscola-chiamata-game,
+.cancellation-hearts-game,
+.cutthroat-pinochle-game,
+.cutthroat-spades-game,
+.double-deck-pinochle-game,
+.knockout-whist-game,
+.mirror-spades-game,
+.omnibus-hearts-game,
+.spot-hearts-game,
+.whiz-spades-game,
+.trick-game,
+.barbu-wrap,
+.bridge-contract-wrap,
+.duplicate-bridge-wrap,
+.french-tarot-wrap,
+.honeymoon-bridge-wrap,
+.minibridge-wrap,
+.napoleon-nap-wrap,
+.rubber-bridge-wrap,
+.rubicon-bezique-wrap,
+.suicide-spades-wrap,
+.bezique,
+.briscola,
+.ecarte,
+.euchre,
+.german-whist,
+.hearts,
+.napoleon,
+.napoleon-card,
+.napoleons-tomb,
+.pinochle,
+.piquet,
+.preferans,
+.skat,
+.solo-whist,
+.spades,
+.tressette,
+.whist,
+.bridges,
+.kow,
+.ddw {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3, 12px) !important;
+  padding: var(--sp-5, 20px) var(--sp-4, 16px) !important;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: var(--r-lg, 18px);
+  position: relative;
+  isolation: isolate;
+  color: #f1f5f9 !important;
+  user-select: none;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.10), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.55), transparent 60%),
+    linear-gradient(180deg, #1e3a5f 0%, #142849 55%, #0a1830 100%) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.10) inset,
+    0 30px 60px -28px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+/* Headers / status strips */
+[class$="-header"],
+[class$="-status"] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  font-variant-numeric: tabular-nums;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.10) inset,
+    0 6px 16px -10px rgba(0, 0, 0, 0.5);
+}
+
+[class$="-label"] {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+/* Bot / opponent rows */
+[class$="-bot-row"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Card back stacks (compact face-down deck) */
+[class$="-card-backs"] {
+  display: flex;
+  gap: 2px;
+}
+
+[class$="-card-back"] {
+  width: 26px;
+  height: 38px;
+  background:
+    repeating-linear-gradient(45deg, #1e3a5f 0 4px, #2a4878 4px 8px);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Trick (center play area) */
+[class$="-trick"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent 70%);
+  min-width: 180px;
+  position: relative;
+}
+
+[class$="-trick-cards"] {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 96px;
+  align-items: center;
+}
+
+[class$="-trick-slot"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+[class$="-trick-name"] {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* Player hand */
+[class$="-player-area"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+[class$="-player-hand"],
+[class$="-hand"] {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 95vw;
+  padding: 6px 4px 10px;
+}
+
+/* Card face — the only universal class is `.card` (already used by these games) */
+.black-lady-game .card,
+.scopone-game .card,
+.bid-euchre-game .card,
+.bid-whist-game .card,
+.briscola-chiamata-game .card,
+.cancellation-hearts-game .card,
+.cutthroat-pinochle-game .card,
+.cutthroat-spades-game .card,
+.double-deck-pinochle-game .card,
+.knockout-whist-game .card,
+.mirror-spades-game .card,
+.omnibus-hearts-game .card,
+.spot-hearts-game .card,
+.whiz-spades-game .card,
+.trick-game .card,
+.barbu-wrap .card,
+.bridge-contract-wrap .card,
+.duplicate-bridge-wrap .card,
+.french-tarot-wrap .card,
+.honeymoon-bridge-wrap .card,
+.minibridge-wrap .card,
+.napoleon-nap-wrap .card,
+.rubber-bridge-wrap .card,
+.rubicon-bezique-wrap .card,
+.suicide-spades-wrap .card,
+.bezique .card,
+.briscola .card,
+.ecarte .card,
+.euchre .card,
+.german-whist .card,
+.hearts .card,
+.napoleon .card,
+.napoleon-card .card,
+.napoleons-tomb .card,
+.pinochle .card,
+.piquet .card,
+.preferans .card,
+.skat .card,
+.solo-whist .card,
+.spades .card,
+.tressette .card,
+.whist .card,
+.bridges .card,
+.kow .card,
+.ddw .card {
+  font-family: Georgia, "Times New Roman", "Hoefler Text", serif;
+  font-size: 1.4rem !important;
+  font-weight: 900;
+  padding: 10px 12px !important;
+  min-width: 50px;
+  min-height: 72px;
+  width: auto !important;
+  height: auto !important;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f1e2 100%) !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(0, 0, 0, 0.20) !important;
+  border-radius: 8px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  letter-spacing: -0.02em;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 6px 14px -6px rgba(0, 0, 0, 0.55),
+    0 12px 28px -16px rgba(0, 0, 0, 0.55) !important;
+  transition:
+    transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 150ms ease-out !important;
+  animation: trick-deal 360ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  cursor: pointer;
+}
+
+[class$="-player-hand"] .card:hover,
+[class$="-hand"] .card:hover {
+  transform: translateY(-7px) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 12px 24px -8px rgba(0, 0, 0, 0.6),
+    0 22px 38px -16px rgba(0, 0, 0, 0.55) !important;
+  z-index: 3;
+}
+
+.card.dim {
+  opacity: 0.4 !important;
+  cursor: default !important;
+  filter: grayscale(0.4);
+}
+
+.card.lead,
+.card.trump {
+  border-color: #fbbf24 !important;
+  box-shadow:
+    0 0 0 2px #fbbf24,
+    0 0 18px rgba(251, 191, 36, 0.6),
+    0 6px 14px -6px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Result panel */
+[class$="-result"],
+[class$="-done"] {
+  background: linear-gradient(180deg, #ffffff, #f8fafc) !important;
+  color: #1f2937 !important;
+  padding: 24px 28px !important;
+  border-radius: 18px !important;
+  text-align: center;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 24px 50px -22px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(15, 23, 42, 0.08) !important;
+  animation: trick-bounce 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+[class$="-result"] h2,
+[class$="-done"] h2 {
+  margin: 0 0 8px !important;
+  font-size: 1.5rem !important;
+  font-weight: 900;
+  color: #1e293b;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Animations ---------- */
+@keyframes trick-deal {
+  0%   { transform: translate(-20px, -16px) rotate(-8deg) scale(0.8); opacity: 0; }
+  60%  { transform: translate(0, 3px) rotate(2deg) scale(1.03); opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes trick-bounce {
+  0%   { transform: translateY(16px) scale(0.94); opacity: 0; }
+  60%  { transform: translateY(-3px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 540px) {
+  [class$="-game"], [class$="-wrap"] {
+    padding: 14px 10px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+  }
+  .card {
+    font-size: 1.15rem !important;
+    padding: 8px 10px !important;
+    min-width: 42px;
+    min-height: 60px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  [class$="-result"],
+  [class$="-done"] {
+    animation: none !important;
+    transition: none !important;
+  }
+  [class$="-player-hand"] .card:hover,
+  [class$="-hand"] .card:hover {
+    transform: none !important;
+  }
+}
+
+/* ---------- Drafting card-game prefixes (.dr-*, .bz-*) ---------- */
+/* Used by ~70 card-drafting variants (Biblios, Among Stars, Apiary,
+   Blood Rage, Fairy Tale, Seven Wonders, Wingspan, etc.). */
+.dr-wrap,
+.bz-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3, 12px);
+  padding: var(--sp-5, 20px) var(--sp-4, 16px);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: var(--r-lg, 18px);
+  color: #f1f5f9;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.10), transparent 55%),
+    linear-gradient(180deg, #1f2937 0%, #111827 55%, #0b1220 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 30px 60px -28px rgba(0, 0, 0, 0.65);
+}
+.dr-title,
+.bz-title { margin: 0; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.01em; }
+.dr-stats,
+.bz-stats { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.dr-stats > div,
+.bz-stats > div {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-variant-numeric: tabular-nums;
+}
+.dr-prompt {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+}
+.dr-offer { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.dr-card {
+  width: 86px;
+  height: 116px;
+  background: linear-gradient(180deg, #ffffff 0%, #f5efe2 100%);
+  color: #1a1a1a;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 6px 14px -6px rgba(0, 0, 0, 0.5),
+    0 12px 24px -16px rgba(0, 0, 0, 0.55);
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 150ms ease-out;
+}
+.dr-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 12px 22px -8px rgba(0, 0, 0, 0.6);
+}
+.dr-rank { font-size: 1.6rem; font-weight: 900; color: #1e1b4b; }
+.dr-suit { font-size: 0.85rem; color: #6b7280; }
+.bz-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.bz-actions > button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 10px;
+  color: #fff;
+  font-family: inherit;
+  background: linear-gradient(180deg, #6366f1 0%, #4338ca 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.30) inset,
+    0 8px 18px -8px rgba(67, 56, 202, 0.7);
+  transition: transform 120ms ease-out, filter 120ms ease-out;
+}
+.bz-actions > button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+}
+.bz-actions > button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+.dr-event,
+.bz-event {
+  background: linear-gradient(180deg, rgba(254, 243, 199, 0.95), rgba(253, 230, 138, 0.92));
+  color: #422006;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid rgba(180, 83, 9, 0.25);
+  box-shadow: 0 6px 14px -6px rgba(180, 83, 9, 0.3);
+}
+.dr-event button,
+.bz-event button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-family: inherit;
+  background: linear-gradient(180deg, #1f2937, #111827);
+  color: #fff;
+  box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.5);
+}
+.dr-event button:hover,
+.bz-event button:hover { filter: brightness(1.1); }
+.dr-done,
+.bz-done {
+  text-align: center;
+  padding: 22px 26px;
+  border-radius: 14px;
+  font-weight: 800;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  color: #14532d;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 24px 50px -22px rgba(0, 0, 0, 0.6);
+}
+.dr-tab {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 480px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+@media (max-width: 540px) {
+  .dr-wrap, .bz-wrap { padding: 14px 10px; gap: 10px; border-radius: 14px; }
+  .dr-card { width: 72px; height: 100px; }
+  .dr-rank { font-size: 1.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dr-card, .dr-event, .bz-event, .dr-done, .bz-done {
+    animation: none !important;
+    transition: none !important;
+  }
+  .dr-card:hover { transform: none !important; }
+}

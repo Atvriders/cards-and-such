@@ -1,25 +1,2 @@
-.rtb { display:flex; flex-direction:column; align-items:center; gap:.9rem; padding:1rem; background:#01579b; min-height:100%; color:#fff; font-family:sans-serif; box-sizing:border-box; }
-.rtb-header { text-align:center; }
-.rtb-header h2 { margin:0 0 .3rem; }
-.rtb-progress { font-size:.85rem; opacity:.8; }
-.rtb-revealed { background:rgba(0,0,0,.25); padding:.5rem 1rem; border-radius:8px; text-align:center; }
-.rtb-revealed-label { font-size:.8rem; opacity:.8; margin-bottom:.4rem; }
-.rtb-revealed-cards { display:flex; gap:.4rem; justify-content:center; min-height:60px; align-items:center; }
-.rtb-question { display:flex; flex-direction:column; align-items:center; gap:.75rem; }
-.rtb-q-label { font-size:1.1rem; text-align:center; }
-.rtb-answers { display:flex; gap:.75rem; flex-wrap:wrap; justify-content:center; }
-.rtb-answer-btn { padding:.8rem 1.5rem; background:#0288d1; border:2px solid #81d4fa; border-radius:10px; color:#fff; font-size:1rem; font-weight:700; cursor:pointer; transition:background .15s,transform .1s; }
-.rtb-answer-btn:hover { background:#0277bd; transform:scale(1.05); }
-.rtb-hint { font-size:.85rem; opacity:.8; background:rgba(0,0,0,.2); padding:.3rem .7rem; border-radius:5px; }
-.rtb-reveal { display:flex; flex-direction:column; align-items:center; gap:.6rem; }
-.rtb-reveal-result { font-size:1.2rem; font-weight:900; padding:.5rem 1.2rem; border-radius:8px; }
-.rtb-reveal-result.correct { background:#2e7d32; }
-.rtb-reveal-result.wrong { background:#b71c1c; }
-.rtb-reveal-detail { font-size:.9rem; opacity:.8; }
-.rtb-btn { padding:.7rem 1.8rem; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; }
-.rtb-btn.next { background:#f57c00; color:#fff; }
-.rtb-btn.next:hover { background:#e65100; }
-.rtb-round-end, .rtb-done { text-align:center; background:rgba(0,0,0,.3); padding:1.5rem; border-radius:12px; }
-.rtb-round-summary { margin-bottom:1rem; font-size:1rem; }
-.rtb-done h3 { margin:0 0 .5rem; font-size:1.4rem; color:#ffd54f; }
-.rtb-score-label { font-size:1.2rem; font-weight:700; color:#ffd54f; margin:.4rem 0; }
+/* Modernized via shared blackjack/casino engine — see web/src/engines/blackjack/blackjack.css */
+@import "../../engines/blackjack/blackjack.css";
