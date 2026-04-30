@@ -1,0 +1,484 @@
+/* =====================================================================
+   Cards and Such — Shared Games Stylesheet
+   ---------------------------------------------------------------------
+   Opt-in classes any game can use without touching its own CSS file.
+   Imported globally from App.tsx (after App.css). All custom properties
+   are inherited from App.css :root.
+
+   These classes are SAFE additions — none of the existing per-game
+   CSS files (.trivia-*, .rg-*, .qz-*, etc.) reference these names, so
+   nothing is overridden. Games can adopt incrementally.
+
+   Available classes:
+     Layout       .game-shell  .game-info  .game-row  .game-col
+     Buttons      .game-button (default)
+                  .game-button--primary  .game-button--secondary
+                  .game-button--ghost   .game-button--danger
+                  .game-button--success .game-button--icon
+                  .game-button--sm   .game-button--lg
+     Indicators   .game-badge  .game-badge--primary  .game-badge--success
+                  .game-badge--warning  .game-badge--danger
+     Grids        .game-grid  .game-grid-2 ... .game-grid-8
+     Cards        .game-card-face  .game-card-face--red
+                  .game-card-face--back  .game-card-face--lg
+     Dice         .game-dice  .game-dice--rolling  .game-dice-face-N
+     Tiles        .game-tile  .game-tile--active  .game-tile--selected
+                  .game-tile--disabled
+     Animations   .fade-in  .pulse  .shake  .flip  .bounce-in  .slide-up
+   ===================================================================== */
+
+/* =====================================================================
+   Layout primitives
+   ===================================================================== */
+.game-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  color: var(--text-100);
+  user-select: none;
+  animation: gs-fade-in var(--dur-slow) var(--ease-out-expo);
+}
+
+.game-info {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-200);
+  background:
+    linear-gradient(180deg, rgba(36, 40, 60, 0.55) 0%, rgba(22, 25, 39, 0.65) 100%);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-sm), var(--sh-inset);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+.game-info .label {
+  font-size: 0.7rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-500);
+}
+.game-info .value {
+  font-size: 1.1rem;
+  font-weight: var(--weight-bold);
+  color: var(--text-100);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.game-info .value--score   { color: var(--success); }
+.game-info .value--timer   { color: var(--danger);  }
+.game-info .value--moves   { color: var(--primary); }
+.game-info .value--accent  { color: var(--violet);  }
+
+.game-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: center;
+  justify-content: center;
+}
+.game-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  align-items: center;
+}
+
+/* =====================================================================
+   Buttons (game-* — independent from .btn so games can pick either)
+   ===================================================================== */
+.game-button {
+  --gb-bg: linear-gradient(180deg, rgba(36, 40, 60, 0.95) 0%, rgba(22, 25, 39, 0.95) 100%);
+  --gb-bg-hover: linear-gradient(180deg, rgba(48, 52, 76, 0.98) 0%, rgba(32, 36, 54, 0.98) 100%);
+  --gb-fg: var(--text-100);
+  --gb-border: var(--border-strong);
+  --gb-shadow: var(--sh-sm);
+  --gb-glow: transparent;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--gb-fg);
+  background: var(--gb-bg);
+  border: 1px solid var(--gb-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--gb-shadow), var(--sh-inset), 0 0 0 0 var(--gb-glow);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart),
+    color var(--dur-fast) var(--ease-out-quart);
+}
+.game-button:hover:not(:disabled) {
+  background: var(--gb-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--sh-md), var(--sh-inset), 0 0 22px -6px var(--gb-glow);
+}
+.game-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--sh-xs), var(--sh-inset);
+}
+.game-button:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft), var(--sh-sm), var(--sh-inset);
+}
+.game-button:disabled,
+.game-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.game-button--primary {
+  --gb-bg: linear-gradient(180deg, #7c83f7 0%, #5b63e9 100%);
+  --gb-bg-hover: linear-gradient(180deg, #8c93ff 0%, #6b73f6 100%);
+  --gb-fg: #ffffff;
+  --gb-border: rgba(99, 102, 241, 0.7);
+  --gb-shadow: 0 8px 20px -8px var(--primary-glow);
+  --gb-glow: var(--primary-glow);
+}
+.game-button--success {
+  --gb-bg: linear-gradient(180deg, #43e3a8 0%, #1fbb84 100%);
+  --gb-bg-hover: linear-gradient(180deg, #56e9b3 0%, #2bc78f 100%);
+  --gb-fg: #052015;
+  --gb-border: rgba(34, 197, 94, 0.55);
+  --gb-shadow: 0 8px 20px -8px rgba(34, 197, 94, 0.5);
+  --gb-glow: rgba(52, 211, 153, 0.45);
+}
+.game-button--danger {
+  --gb-bg: linear-gradient(180deg, #fb7a8a 0%, #e9495f 100%);
+  --gb-bg-hover: linear-gradient(180deg, #ff8c9a 0%, #f25d72 100%);
+  --gb-fg: #ffffff;
+  --gb-border: rgba(244, 63, 94, 0.55);
+  --gb-shadow: 0 8px 20px -8px rgba(244, 63, 94, 0.5);
+  --gb-glow: rgba(251, 113, 133, 0.45);
+}
+.game-button--secondary {
+  --gb-bg: rgba(148, 163, 184, 0.10);
+  --gb-bg-hover: rgba(148, 163, 184, 0.18);
+  --gb-fg: var(--text-100);
+  --gb-border: var(--border-strong);
+  --gb-shadow: none;
+}
+.game-button--ghost {
+  --gb-bg: transparent;
+  --gb-bg-hover: rgba(148, 163, 184, 0.10);
+  --gb-fg: var(--text-200);
+  --gb-border: transparent;
+  --gb-shadow: none;
+}
+.game-button--icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border-radius: 999px;
+}
+.game-button--sm { padding: 0.4rem 0.85rem; font-size: 0.85rem; }
+.game-button--lg { padding: 0.85rem 1.6rem; font-size: 1.05rem; }
+
+/* =====================================================================
+   Badges / pills
+   ===================================================================== */
+.game-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.22rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-200);
+  background: var(--surface-3);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.game-badge--primary { color: #c7cdfe; background: var(--primary-soft); border-color: rgba(129,140,248,0.35); }
+.game-badge--success { color: #b6f3d8; background: var(--success-soft); border-color: rgba(52,211,153,0.35); }
+.game-badge--warning { color: #fde7a7; background: var(--warning-soft); border-color: rgba(251,191,36,0.35); }
+.game-badge--danger  { color: #fec7d0; background: var(--danger-soft);  border-color: rgba(251,113,133,0.35); }
+
+/* =====================================================================
+   Responsive grid utilities
+   ===================================================================== */
+.game-grid {
+  display: grid;
+  gap: var(--sp-3);
+  width: 100%;
+}
+.game-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.game-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.game-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.game-grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.game-grid-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.game-grid-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.game-grid-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+
+/* Auto-fit grid: use --min to set min cell width (default 96px). */
+.game-grid-auto {
+  --min: 96px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
+}
+
+@media (max-width: 640px) {
+  .game-grid-5,
+  .game-grid-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .game-grid-7,
+  .game-grid-8 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* =====================================================================
+   Playing card face — premium look
+   ===================================================================== */
+.game-card-face {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 88px;
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: var(--weight-bold);
+  color: var(--card-black);
+  background: var(--card-face);
+  border: 1px solid var(--card-face-border);
+  border-radius: 9px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.10) inset,
+    0 6px 14px -6px rgba(0, 0, 0, 0.55),
+    0 1px 3px rgba(0, 0, 0, 0.35);
+  user-select: none;
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.game-card-face:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.75) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.12) inset,
+    0 14px 26px -10px rgba(0, 0, 0, 0.6),
+    0 4px 8px rgba(0, 0, 0, 0.35);
+}
+.game-card-face--red { color: var(--card-red); }
+.game-card-face--lg { width: 86px; height: 120px; font-size: 1.55rem; border-radius: 12px; }
+.game-card-face--sm { width: 48px; height: 66px; font-size: 1rem; border-radius: 7px; }
+.game-card-face--back {
+  color: transparent;
+  background:
+    var(--card-back-pattern),
+    var(--card-back);
+  background-size: 16px 16px, auto;
+  border-color: rgba(20, 16, 56, 0.65);
+}
+.game-card-face .corner {
+  position: absolute;
+  font-size: 0.78rem;
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+.game-card-face .corner.tl { top: 4px; left: 6px; }
+.game-card-face .corner.br { bottom: 4px; right: 6px; transform: rotate(180deg); }
+
+/* =====================================================================
+   Dice — simulated 3D with face dots
+   ===================================================================== */
+.game-dice {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+  width: 56px;
+  height: 56px;
+  padding: 8px;
+  font-family: var(--font-sans);
+  background:
+    linear-gradient(135deg, #fefefe 0%, #d6dce6 100%);
+  border: 1px solid rgba(15, 23, 42, 0.35);
+  border-radius: 12px;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.85) inset,
+    0 -3px 0 rgba(15, 23, 42, 0.18) inset,
+    0 8px 16px -6px rgba(0, 0, 0, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  user-select: none;
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.game-dice .dot {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #2a3447 0%, #0f172a 80%);
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) inset;
+}
+.game-dice .dot--hidden { background: transparent; box-shadow: none; }
+.game-dice--rolling { animation: gs-dice-roll 360ms var(--ease-out-expo); }
+.game-dice--lg { width: 84px; height: 84px; padding: 12px; gap: 6px; border-radius: 16px; }
+.game-dice--sm { width: 40px; height: 40px; padding: 6px; gap: 3px; border-radius: 9px; }
+
+/* Dot positions for face values (use .game-dice with .game-dice-face-N) */
+.game-dice-face-1 .dot:nth-child(5) { background: radial-gradient(circle at 30% 30%, #2a3447 0%, #0f172a 80%); }
+.game-dice-face-1 .dot:not(:nth-child(5)) { background: transparent; box-shadow: none; }
+
+.game-dice-face-2 .dot:nth-child(1),
+.game-dice-face-2 .dot:nth-child(9) { background: radial-gradient(circle at 30% 30%, #2a3447 0%, #0f172a 80%); }
+.game-dice-face-2 .dot:not(:nth-child(1)):not(:nth-child(9)) { background: transparent; box-shadow: none; }
+
+.game-dice-face-3 .dot:nth-child(1),
+.game-dice-face-3 .dot:nth-child(5),
+.game-dice-face-3 .dot:nth-child(9) { background: radial-gradient(circle at 30% 30%, #2a3447 0%, #0f172a 80%); }
+.game-dice-face-3 .dot:not(:nth-child(1)):not(:nth-child(5)):not(:nth-child(9)) { background: transparent; box-shadow: none; }
+
+.game-dice-face-4 .dot:nth-child(1),
+.game-dice-face-4 .dot:nth-child(3),
+.game-dice-face-4 .dot:nth-child(7),
+.game-dice-face-4 .dot:nth-child(9) { background: radial-gradient(circle at 30% 30%, #2a3447 0%, #0f172a 80%); }
+.game-dice-face-4 .dot:not(:nth-child(1)):not(:nth-child(3)):not(:nth-child(7)):not(:nth-child(9)) { background: transparent; box-shadow: none; }
+
+.game-dice-face-5 .dot:nth-child(1),
+.game-dice-face-5 .dot:nth-child(3),
+.game-dice-face-5 .dot:nth-child(5),
+.game-dice-face-5 .dot:nth-child(7),
+.game-dice-face-5 .dot:nth-child(9) { background: radial-gradient(circle at 30% 30%, #2a3447 0%, #0f172a 80%); }
+.game-dice-face-5 .dot:not(:nth-child(1)):not(:nth-child(3)):not(:nth-child(5)):not(:nth-child(7)):not(:nth-child(9)) { background: transparent; box-shadow: none; }
+
+.game-dice-face-6 .dot:nth-child(2),
+.game-dice-face-6 .dot:nth-child(5),
+.game-dice-face-6 .dot:nth-child(8) { background: transparent; box-shadow: none; }
+
+/* =====================================================================
+   Generic tile / cell — for grids, boards, picker buttons
+   ===================================================================== */
+.game-tile {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: var(--weight-semibold);
+  color: var(--text-100);
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-xs), var(--sh-inset);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.game-tile:hover:not(.game-tile--disabled) {
+  transform: translateY(-2px);
+  background: var(--surface-3);
+  border-color: var(--border-focus);
+  box-shadow: var(--sh-md), var(--sh-inset);
+}
+.game-tile:active:not(.game-tile--disabled) { transform: translateY(0); box-shadow: var(--sh-xs), var(--sh-inset); }
+.game-tile--active   { border-color: var(--primary); background: var(--primary-soft); color: #e0e3ff; }
+.game-tile--selected { border-color: var(--primary); background: var(--primary-soft); box-shadow: 0 0 0 1px var(--primary), var(--sh-md), var(--sh-inset); }
+.game-tile--success  { border-color: var(--success); background: var(--success-soft); color: #cbfbe2; }
+.game-tile--danger   { border-color: var(--danger);  background: var(--danger-soft);  color: #ffd5dd; }
+.game-tile--disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* =====================================================================
+   Animations (canonical names — most common requests)
+   ===================================================================== */
+@keyframes gs-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes gs-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+@keyframes gs-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px) rotate(-1deg); }
+  40%      { transform: translateX(5px)  rotate(0.8deg); }
+  60%      { transform: translateX(-4px) rotate(-0.6deg); }
+  80%      { transform: translateX(3px)  rotate(0.4deg); }
+}
+@keyframes gs-flip {
+  0%   { transform: perspective(800px) rotateY(0); }
+  100% { transform: perspective(800px) rotateY(360deg); }
+}
+@keyframes gs-bounce-in {
+  0%   { opacity: 0; transform: scale(0.6); }
+  60%  { opacity: 1; transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+@keyframes gs-slide-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes gs-dice-roll {
+  0%   { transform: rotate(0deg)   scale(1); }
+  35%  { transform: rotate(220deg) scale(1.08); }
+  70%  { transform: rotate(360deg) scale(0.95); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.fade-in   { animation: gs-fade-in var(--dur-slow) var(--ease-out-expo); }
+.pulse     { animation: gs-pulse 1.4s var(--ease-in-out) infinite; }
+.shake     { animation: gs-shake 480ms var(--ease-out-expo); }
+.flip      { animation: gs-flip var(--dur-slower) var(--ease-out-expo); transform-style: preserve-3d; backface-visibility: hidden; }
+.bounce-in { animation: gs-bounce-in 460ms var(--ease-spring); }
+.slide-up  { animation: gs-slide-up var(--dur-slow) var(--ease-out-expo); }
+
+/* =====================================================================
+   Mobile tightening for the new shared classes
+   ===================================================================== */
+@media (max-width: 640px) {
+  .game-shell { padding: var(--sp-3); gap: var(--sp-3); }
+  .game-info  { padding: 0.55rem 0.75rem; font-size: 0.88rem; }
+  .game-info .value { font-size: 1rem; }
+  .game-card-face    { width: 54px; height: 76px; font-size: 1.05rem; }
+  .game-card-face--lg{ width: 70px; height: 100px; font-size: 1.3rem; }
+  .game-dice         { width: 48px; height: 48px; padding: 6px; gap: 3px; }
+  .game-dice--lg     { width: 64px; height: 64px; padding: 9px; gap: 4px; }
+}
+
+/* =====================================================================
+   Reduced motion
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .pulse, .shake, .flip, .bounce-in, .slide-up,
+  .game-dice--rolling, .game-shell { animation: none !important; }
+}

@@ -1,0 +1,211 @@
+/* =====================================================================
+   Cards and Such — Reusable Component Utilities
+   ---------------------------------------------------------------------
+   This file collects the cross-cutting building blocks that the design
+   spec calls out (`.panel`, `.btn`, `.btn-primary`, `.btn-secondary`,
+   `.btn-ghost`, `.input`, `.badge`). They are deliberately additive:
+   - All canonical tokens come from `App.css`.
+   - We never override existing per-game CSS (no `.trivia-*`, `.qz-*`,
+     etc. selectors live here).
+   - Variants in this file mirror the polished primitives that already
+     ship in `App.css`, but are duplicated here so this file is a
+     self-contained "modern UI kit" reference.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   Spec-aligned alias tokens
+   The product spec uses simpler names (`--color-bg`, `--color-accent`,
+   `--radius-md`, `--shadow-card`, etc.). Map them onto the canonical
+   palette so any new component written against the spec works without
+   editing App.css again.
+   --------------------------------------------------------------------- */
+:root {
+  /* Surface aliases */
+  --color-bg: var(--bg-0);
+  --color-bg-elevated: var(--surface-1);
+  --color-bg-card: var(--surface-2);
+  --color-border: var(--border-soft);
+  --color-border-strong: var(--border-strong);
+
+  /* Text aliases */
+  --color-text: var(--text-100);
+  --color-text-muted: var(--text-400);
+  --color-text-subtle: var(--text-500);
+
+  /* Accent aliases */
+  --color-accent: var(--primary);
+  --color-accent-hover: var(--violet);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* Card-specific aliases (used by future card visuals) */
+  --color-card-red: var(--card-red);
+  --color-card-black: var(--card-black);
+  --color-card-face: #fafaf6;
+
+  /* Radius aliases */
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-pill: var(--r-pill);
+
+  /* Shadow aliases */
+  --shadow-sm: var(--sh-sm);
+  --shadow-md: var(--sh-md);
+  --shadow-lg: var(--sh-lg);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.4),
+                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Motion aliases */
+  --transition-fast: var(--dur-fast) var(--ease-out-quart);
+  --transition-base: var(--dur-base) var(--ease-out-quart);
+  --transition-medium: var(--dur-base) var(--ease-out-quart);
+  --transition-slow: var(--dur-slow) var(--ease-out-expo);
+
+  /* Spec-aligned typography scale */
+  --font-xs:  0.75rem;   /* 12px */
+  --font-sm:  0.85rem;   /* 13.6px */
+  --font-md:  0.95rem;   /* 15.2px */
+  --font-lg:  1.1rem;    /* 17.6px */
+  --font-xl:  1.35rem;   /* 21.6px */
+  --font-2xl: 1.75rem;   /* 28px */
+
+  /* Spec-aligned colour aliases that some games may reach for */
+  --color-primary:        var(--primary);
+  --color-primary-hover:  var(--violet);
+  --color-surface:        var(--surface-1);
+  --color-surface-hover:  var(--surface-2);
+
+  /* Glow shadow alias */
+  --shadow-glow: var(--sh-glow);
+}
+
+/* =====================================================================
+   .panel — generic raised content surface
+   ===================================================================== */
+.panel,
+.panel-card {
+  padding: var(--sp-6);
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md), var(--sh-inset);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+.panel-raised {
+  padding: var(--sp-6);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg), var(--sh-inset);
+}
+
+/* =====================================================================
+   .btn — opt-in button system (mirrors App.css and adds .btn-secondary)
+   ---------------------------------------------------------------------
+   Already defined in App.css for backwards compatibility; we re-declare
+   only the new variant `.btn-secondary` here so the component module is
+   the canonical reference for future games. Existing variants in
+   App.css continue to win because order-of-import keeps both sets live.
+   ===================================================================== */
+.btn-secondary {
+  --btn-bg: var(--surface-2);
+  --btn-bg-hover: var(--surface-3);
+  --btn-fg: var(--text-100);
+  --btn-border: var(--border-strong);
+  --btn-shadow: var(--sh-sm);
+}
+
+/* =====================================================================
+   .input — text/number input look (mirrors App.css)
+   ===================================================================== */
+.input-modern {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font: inherit;
+  color: var(--text-100);
+  background: rgba(10, 12, 22, 0.72);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  outline: none;
+  transition:
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart);
+}
+.input-modern::placeholder { color: var(--text-500); }
+.input-modern:hover  { border-color: var(--border-focus); }
+.input-modern:focus  {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  background: rgba(10, 12, 22, 0.92);
+}
+
+/* =====================================================================
+   .container — centered max-width content area (used by new pages)
+   ===================================================================== */
+.container,
+.container-md {
+  width: 100%;
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 var(--sp-4);
+}
+.container-sm { max-width: 720px; margin: 0 auto; padding: 0 var(--sp-4); }
+.container-lg { max-width: 1280px; margin: 0 auto; padding: 0 var(--sp-4); }
+
+/* =====================================================================
+   Frosted glass card preset — identical surface treatment to AppShell
+   header / lobby tiles so new components match without copying CSS.
+   ===================================================================== */
+.glass {
+  background: rgba(22, 25, 39, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset,
+              0 12px 24px -10px rgba(0, 0, 0, 0.50);
+}
+
+/* =====================================================================
+   Type scale — opt-in display sizes for hero / section headings
+   ===================================================================== */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+.t-h1     { font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.95rem); font-weight: 700; letter-spacing: -0.02em; }
+.t-h2     { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.015em; }
+.t-h3     { font-size: 1.1rem;  font-weight: 600; letter-spacing: -0.01em;  }
+.t-body   { font-size: 0.95rem; line-height: 1.55; }
+.t-small  { font-size: 0.85rem; line-height: 1.5;  color: var(--text-400); }
+.t-mono   { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.t-num    { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.t-muted  { color: var(--text-400); }
+.t-subtle { color: var(--text-500); }
+.t-gradient {
+  background: linear-gradient(90deg, #f1f5f9 0%, #c7cdfe 60%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* =====================================================================
+   Smooth game-start fade-in — opt-in animation hook
+   ===================================================================== */
+@keyframes ui-fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.fade-in-up { animation: ui-fade-in-up var(--dur-slow) var(--ease-out-expo) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up { animation: none; }
+}

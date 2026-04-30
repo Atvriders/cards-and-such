@@ -6,7 +6,13 @@
    are not modified — the utility classes below (.quiz-shell, .dice-shell,
    .choice-btn, etc.) are opt-in for new games and never override
    existing per-game selectors.
+
+   Cross-cutting building blocks (.panel, .btn-secondary, .container,
+   .glass, type scale, alias tokens) live in styles/components.css —
+   imported below so they're globally available.
    ===================================================================== */
+
+@import "./styles/components.css";
 
 :root {
   color-scheme: dark;
@@ -62,11 +68,23 @@
                         radial-gradient(circle at 75% 75%, rgba(255,255,255,0.10) 0 1px, transparent 2px);
 
   /* ---------- Typography ---------- */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, "Inter", "Noto Sans", sans-serif;
-  --font-display: var(--font-sans);
+  /* Prefer Inter (when locally installed), then a polished system stack. */
+  --font-sans: "Inter", "Inter var", ui-sans-serif, system-ui, -apple-system,
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+               "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  --font-display: "Inter Display", "Inter", var(--font-sans);
   --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", "Cascadia Code",
                "Roboto Mono", "Menlo", monospace;
+
+  /* ---------- Spacing scale (canonical aliases) ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
 
   --weight-regular: 400;
   --weight-medium: 500;
@@ -127,6 +145,29 @@
   /* ---------- Layout ---------- */
   --header-h: 60px;
   --container-w: 1180px;
+
+  /* ---------- Spec-aligned base aliases (modern design system) ----------
+     These short, intuitive names mirror the canonical token palette so
+     new code (and existing per-game CSS) can opt into the design system
+     without learning the legacy variable names. */
+  --bg-base:           var(--bg-0);
+  --bg-surface:        var(--surface-1);
+  --bg-elevated:       var(--surface-raised);
+  --color-primary:     var(--primary);
+  --color-primary-hover: var(--primary-strong);
+  --color-success:     var(--success);
+  --color-danger:      var(--danger);
+  --text-primary:      var(--text-100);
+  --text-muted:        var(--text-400);
+  --border-color:      var(--border-soft);
+  --shadow-sm:         var(--sh-sm);
+  --shadow-md:         var(--sh-md);
+  --shadow-lg:         var(--sh-lg);
+  --radius-sm:         var(--r-sm);
+  --radius-md:         var(--r-md);
+  --radius-lg:         var(--r-lg);
+  --transition-fast:   var(--dur-fast) var(--ease-out-quart);
+  --font-stack:        var(--font-sans);
 }
 
 /* =====================================================================
@@ -144,6 +185,7 @@ body {
   font-weight: var(--weight-regular);
   font-size: 15px;
   line-height: var(--leading-normal);
+  letter-spacing: -0.005em;
   color: var(--text-100);
   background-color: var(--bg-0);
   background-image: var(--bg-grad);
@@ -151,7 +193,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01" on, "cv02" on, "cv11" on, "kern" on;
 }
+
+/* Subtle fixed grain layer — adds tactile depth without affecting layout. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+#root { position: relative; z-index: 1; min-height: 100vh; }
 
 /* Headers */
 h1, h2, h3, h4, h5, h6 {
@@ -313,6 +370,23 @@ button { color: #1a1a1a; font-family: inherit; }
   border: 1px solid var(--border-soft);
   border-radius: var(--r-lg);
   box-shadow: var(--sh-md), var(--sh-inset);
+}
+
+/* =====================================================================
+   .ui-card — opt-in elevated content surface (spec-aligned utility)
+   ---------------------------------------------------------------------
+   IMPORTANT: this utility is named `.ui-card` (not `.card`) because the
+   playing-card engine in engines/deck/Card.css already owns `.card` for
+   its own face-up / face-down playing-card visuals. The aliased token
+   names below match the spec exactly so consumer code can opt in via
+   `<div class="ui-card">…</div>` for a generic elevated panel.
+   ===================================================================== */
+.ui-card {
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-md), var(--sh-inset);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  border: 1px solid var(--border-color);
 }
 
 .badge {
@@ -715,6 +789,285 @@ button { color: #1a1a1a; font-family: inherit; }
   .cas-clicker-stage { height: 300px; }
   .cas-timer-ring    { --size: 48px; --thickness: 5px; }
   .cas-score-badge   { padding: 0.32rem 0.75rem; font-size: 0.95rem; }
+}
+
+/* =====================================================================
+   Global polish layer — elevates the flat per-game class patterns that
+   are duplicated across ~1500 generated games (.trivia-*, .qz-*, .nlp-*,
+   .cm-*, .fc-*, .banana-*, etc.). We use slightly higher specificity
+   (body .selector) so this stylesheet wins over the per-game Game.css
+   that imports later. None of the existing game logic is modified —
+   only the visual surface.
+
+   Strategy: replace flat white #fff cards with the dark glassy surface,
+   tighten transitions, add subtle shadows + rounded corners, give choice
+   buttons a clean hover lift, and unify the timer / score look with
+   the canonical token palette.
+   ===================================================================== */
+
+/* ----- Generic "wrap" container shared across hundreds of quiz/clicker
+   games. The per-game variants use color: #2c3e50 + sans-serif. We
+   override the font to the modern stack and lighten the text so it
+   reads against the dark backdrop. Per-game padding/gap is preserved. */
+body .trivia-wrap,
+body .qz-wrap,
+body .nlp-wrap,
+body .cm-wrap,
+body .fc-wrap,
+body .dm-wrap,
+body .rw-wrap,
+body .race-wrap,
+body .dr-wrap,
+body .bz-wrap,
+body .coop-wrap,
+body .ab-wrap,
+body .tp-wrap,
+body .banana-wrap {
+  font-family: var(--font-sans);
+  color: var(--text-100);
+}
+
+/* ----- Question / heading text inside the per-game quizzes — was a
+   dark slate (#2c3e50) which is invisible on the dark theme. Promote
+   to the bright primary text. */
+body .trivia-question,
+body .qz-question,
+body .nlp-question,
+body .cm-question,
+body .fc-question {
+  color: var(--text-100);
+  letter-spacing: -0.01em;
+}
+
+/* ----- Timer / score pills shared across hundreds of files: keep
+   semantic colour but use canonical accent shades for better contrast. */
+body .trivia-timer,
+body .qz-timer,
+body .nlp-timer,
+body .cm-timer,
+body .fc-timer { color: var(--danger); font-variant-numeric: tabular-nums; }
+body .trivia-score,
+body .qz-score,
+body .nlp-score,
+body .cm-score,
+body .fc-score { color: var(--success); font-variant-numeric: tabular-nums; }
+body .trivia-progress,
+body .qz-progress,
+body .nlp-progress,
+body .cm-progress,
+body .fc-progress { color: var(--text-400); }
+
+/* ----- Choice buttons — the workhorse interaction across 800+ trivia
+   games. Default per-game style is flat white with grey border. We
+   give them a glassy dark surface, smooth lift on hover, and stronger
+   focus ring. The .selected/.correct/.wrong states are re-coloured
+   into the token palette so feedback reads clearly. */
+body .trivia-choice,
+body .qz-choice,
+body .nlp-choice,
+body .cm-choice,
+body .fc-choice {
+  color: var(--text-100);
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-xs), var(--sh-inset);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart),
+    color var(--dur-fast) var(--ease-out-quart);
+}
+body .trivia-choice:hover:not(:disabled),
+body .qz-choice:hover:not(:disabled),
+body .nlp-choice:hover:not(:disabled),
+body .cm-choice:hover:not(:disabled),
+body .fc-choice:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--surface-2);
+  border-color: var(--border-focus);
+  box-shadow: var(--sh-md), var(--sh-inset);
+}
+body .trivia-choice:active:not(:disabled),
+body .qz-choice:active:not(:disabled),
+body .nlp-choice:active:not(:disabled),
+body .cm-choice:active:not(:disabled),
+body .fc-choice:active:not(:disabled) { transform: translateY(0); }
+body .trivia-choice:focus-visible,
+body .qz-choice:focus-visible,
+body .nlp-choice:focus-visible,
+body .cm-choice:focus-visible,
+body .fc-choice:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft), var(--sh-sm);
+}
+body .trivia-choice.selected,
+body .qz-choice.selected,
+body .nlp-choice.selected,
+body .cm-choice.selected,
+body .fc-choice.selected {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  color: #e0e3ff;
+}
+body .trivia-choice.correct,
+body .qz-choice.correct,
+body .nlp-choice.correct,
+body .cm-choice.correct,
+body .fc-choice.correct {
+  border-color: var(--success);
+  background: var(--success-soft);
+  color: #cbfbe2;
+  animation: ui-correct-pop 320ms var(--ease-spring);
+}
+body .trivia-choice.wrong,
+body .qz-choice.wrong,
+body .nlp-choice.wrong,
+body .cm-choice.wrong,
+body .fc-choice.wrong {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  color: #ffd5dd;
+  animation: ui-wrong-shake 320ms var(--ease-out-expo);
+}
+body .trivia-choice-letter,
+body .qz-choice-letter,
+body .nlp-choice-letter,
+body .cm-choice-letter,
+body .fc-choice-letter {
+  color: var(--text-300);
+  background: var(--surface-3);
+  border-radius: var(--r-pill);
+  width: 1.85rem;
+  height: 1.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@keyframes ui-correct-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+@keyframes ui-wrong-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  50%      { transform: translateX(4px); }
+  75%      { transform: translateX(-2px); }
+}
+
+/* ----- Action buttons (submit / next) used across the same family of
+   games. Replace the flat solid #27ae60 / #3498db with token-driven
+   gradients for a polished look. */
+body .trivia-btn,
+body .qz-btn,
+body .nlp-btn,
+body .cm-btn,
+body .fc-btn {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  font-family: inherit;
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.005em;
+  box-shadow: var(--sh-sm), var(--sh-inset);
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+body .trivia-btn:hover:not(:disabled),
+body .qz-btn:hover:not(:disabled),
+body .nlp-btn:hover:not(:disabled),
+body .cm-btn:hover:not(:disabled),
+body .fc-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--sh-md), var(--sh-inset);
+}
+body .trivia-btn:active:not(:disabled),
+body .qz-btn:active:not(:disabled),
+body .nlp-btn:active:not(:disabled),
+body .cm-btn:active:not(:disabled),
+body .fc-btn:active:not(:disabled) { transform: translateY(0); box-shadow: var(--sh-xs); }
+body .trivia-btn.submit,
+body .qz-btn.submit,
+body .nlp-btn.submit,
+body .cm-btn.submit,
+body .fc-btn.submit {
+  background: linear-gradient(180deg, #43e3a8 0%, #1fbb84 100%);
+  border-color: rgba(34, 197, 94, 0.55);
+  color: #052015;
+}
+body .trivia-btn.next,
+body .qz-btn.next,
+body .nlp-btn.next,
+body .cm-btn.next,
+body .fc-btn.next {
+  background: linear-gradient(180deg, #7c83f7 0%, #5b63e9 100%);
+  border-color: rgba(99, 102, 241, 0.7);
+  color: #ffffff;
+}
+
+/* ----- Feedback banner — was flat pastel; promote to glass tint. */
+body .trivia-feedback,
+body .qz-feedback,
+body .nlp-feedback {
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-soft);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+body .trivia-feedback.correct,
+body .qz-feedback.correct,
+body .nlp-feedback.correct {
+  background: var(--success-soft);
+  border-color: rgba(52, 211, 153, 0.35);
+  color: #cbfbe2;
+}
+body .trivia-feedback.wrong,
+body .qz-feedback.wrong,
+body .nlp-feedback.wrong {
+  background: var(--danger-soft);
+  border-color: rgba(251, 113, 133, 0.35);
+  color: #ffd5dd;
+}
+
+/* ----- "Done" / results panel — was flat #f8f9fa light card. Make it
+   glassy and centred. */
+body .trivia-done,
+body .qz-done,
+body .nlp-done,
+body .cm-done,
+body .fc-done {
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md), var(--sh-inset);
+  color: var(--text-100);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+/* ----- Arcade-style flat-emoji buttons (banana-* + similar in clicker
+   games). Many use solid neon backgrounds — keep their flavour, but
+   give them a subtle drop-shadow + spring-y hover. */
+body .banana-arena,
+body .banana-stage {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md), 0 0 0 1px rgba(129, 140, 248, 0.10) inset;
+}
+body .banana-btn {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+  transition: transform 0.15s var(--ease-spring), filter 0.15s var(--ease-out-quart);
+}
+body .banana-btn:hover {
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55));
 }
 
 /* =====================================================================

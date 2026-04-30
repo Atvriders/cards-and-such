@@ -7,31 +7,32 @@
   --h: 90px;
   width: var(--w);
   height: var(--h);
-  border-radius: 10px;
+  border-radius: 8px;
   position: relative;
   user-select: none;
   cursor: default;
   flex-shrink: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  transition:
-    transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-sans, "Inter", "Inter var", ui-sans-serif, system-ui,
+               -apple-system, "Segoe UI", Roboto, sans-serif);
+  font-feature-settings: "ss01" on, "tnum" on, "kern" on;
+  -webkit-font-smoothing: antialiased;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   will-change: transform;
 }
 
 /* ----- Face-up ----- */
 .card.face-up {
-  background: linear-gradient(180deg, #ffffff 0%, #eff2f7 100%);
+  background: linear-gradient(180deg, #fefefe 0%, #f4f4f8 100%);
   border: 1px solid rgba(15, 23, 42, 0.55);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
     0 0 0 1px rgba(255, 255, 255, 0.35) inset,
-    0 1px 2px rgba(0, 0, 0, 0.25),
-    0 6px 12px -4px rgba(0, 0, 0, 0.45);
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.10);
 }
-.card.face-up.red   { color: #d92d4a; }
-.card.face-up.black { color: #0f172a; }
+/* Richer red and warm-true-black for classic table feel. */
+.card.face-up.red   { color: #c8102e; }
+.card.face-up.black { color: #1a1a1a; }
 
 /* ----- Face-down ----- */
 .card.face-down {
@@ -71,7 +72,13 @@
 }
 .card .corner.top-left      { top: 5px;    left: 6px; }
 .card .corner.bottom-right  { bottom: 5px; right: 6px; transform: rotate(180deg); }
-.card .corner .rank         { font-size: 0.92rem; font-weight: 800; line-height: 1; }
+.card .corner .rank         {
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1;
+  font-family: "Georgia", "Times New Roman", serif;
+  letter-spacing: 0;
+}
 .card .corner .suit         { font-size: 0.85rem; line-height: 1; margin-top: 1px; }
 
 /* ----- Center suit ornament ----- */
@@ -89,11 +96,11 @@
 /* ----- Hover lift (only when explicitly clickable) ----- */
 .card.face-up.clickable { cursor: pointer; }
 .card.face-up.clickable:hover {
-  transform: translateY(-3px) rotate(-0.3deg);
+  transform: translateY(-2px);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
     0 0 0 1px rgba(255, 255, 255, 0.35) inset,
-    0 4px 8px rgba(0, 0, 0, 0.30),
+    0 6px 10px rgba(0, 0, 0, 0.28),
     0 14px 24px -8px rgba(0, 0, 0, 0.55);
 }
 .card.face-down.clickable:hover {
