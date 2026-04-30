@@ -1,11 +1,1 @@
-.melonmash-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
-.melonmash-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
-.melonmash-info { font-size:0.95rem; color:#555; }
-.melonmash-score { font-size:1.2rem; font-weight:800; color:#229954; }
-.melonmash-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
-.melonmash-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#d5f5e3,#82e0aa); border:3px solid #196f3d; border-radius:14px; overflow:hidden; }
-.melonmash-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
-.melonmash-target:hover { transform:scale(1.15); }
-.melonmash-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
-.melonmash-done h2 { margin:0 0 8px; }
-.melonmash-final { font-size:1.4rem; color:#229954; font-weight:900; }
+@import "../../engines/clicker/clicker.css";

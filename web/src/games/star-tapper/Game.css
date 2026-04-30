@@ -1,11 +1,1 @@
-.startapper-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
-.startapper-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
-.startapper-info { font-size:0.95rem; color:#555; }
-.startapper-score { font-size:1.2rem; font-weight:800; color:#b7950b; }
-.startapper-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
-.startapper-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#283149,#0c1024); border:3px solid #1c2233; border-radius:14px; overflow:hidden; }
-.startapper-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
-.startapper-target:hover { transform:scale(1.15); }
-.startapper-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
-.startapper-done h2 { margin:0 0 8px; }
-.startapper-final { font-size:1.4rem; color:#b7950b; font-weight:900; }
+@import "../../engines/clicker/clicker.css";

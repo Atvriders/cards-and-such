@@ -1,11 +1,1 @@
-.bananabash-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
-.bananabash-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
-.bananabash-info { font-size:0.95rem; color:#555; }
-.bananabash-score { font-size:1.2rem; font-weight:800; color:#9a7d0a; }
-.bananabash-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
-.bananabash-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#fcf3cf,#f4d03f); border:3px solid #7d6608; border-radius:14px; overflow:hidden; }
-.bananabash-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
-.bananabash-target:hover { transform:scale(1.15); }
-.bananabash-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
-.bananabash-done h2 { margin:0 0 8px; }
-.bananabash-final { font-size:1.4rem; color:#9a7d0a; font-weight:900; }
+@import "../../engines/clicker/clicker.css";

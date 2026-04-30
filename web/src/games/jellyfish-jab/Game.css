@@ -1,11 +1,1 @@
-.jj-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:680px; margin:0 auto; user-select:none; }
-.jj-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
-.jj-info { font-size:0.95rem; color:#555; }
-.jj-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.jj-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
-.jj-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#e0c3fc,#8ec5fc); border:3px solid #5a4a8a; border-radius:14px; overflow:hidden; }
-.jj-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; }
-.jj-target:hover { transform:scale(1.15); }
-.jj-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
-.jj-done h2 { margin:0 0 8px; }
-.jj-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+@import "../../engines/clicker/clicker.css";
