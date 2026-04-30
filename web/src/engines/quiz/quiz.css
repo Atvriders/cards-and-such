@@ -434,3 +434,514 @@
     transition: none !important;
   }
 }
+
+/* =====================================================================
+ * Compatibility shim: nonstandard quiz DOMs.
+ *
+ * ~75 quiz games never adopted the canonical `.trivia-*` class names.
+ * Instead they use short namespace prefixes per family:
+ *   .cq-*  cuisine quizzes (african, american, asian, brazilian, ...)
+ *   .hq-*  history quizzes (ancient-egypt, civil-war, vikings, ww1, ...)
+ *   .qz-*  beverage / lifestyle (beers, ciders, cocktails, wines, ...)
+ *   .gq-*  geography-quiz
+ *   .nlp-* magic-square-quiz
+ *   .uc-*  unit-converter-quiz
+ *   .quiz-wrap (avalon, insider, resistance, secret-hitler, werewolf)
+ *   .<topic>quiz-* per-game prefixes for the language/grammar quizzes
+ *   .g-*   shared with non-quiz games — gated via `:has(.g-q)` to only
+ *          target the 7 g-* quizzes (drawful-2-quiz, fake-artist-quiz,
+ *          geek-out-quiz, patently-stupid-quiz, taco-cat-goat-quiz,
+ *          throw-throw-burrito-quiz, trial-trolley-quiz).
+ *
+ * Approach: explicit prefix lists alias each nonstandard class to the
+ * matching engine rule. Conservative — every selector is unambiguously
+ * a quiz selector.
+ * ===================================================================== */
+
+/* ---- shim: container / wrap ---- */
+.cq-wrap, .hq-wrap, .qz-wrap, .gq-wrap, .nlp-wrap, .uc-wrap, .quiz-wrap,
+.abbreviationquiz-wrap, .acronymdefinequiz-wrap, .alliterationquiz-wrap,
+.antonymquiz-wrap, .homonymquiz-wrap, .hyperbolequiz-wrap,
+.metaphorquiz-wrap, .onomatopoeiaquiz-wrap, .oxymoronquiz-wrap,
+.palindromequiz-wrap, .portmanteauquiz-wrap, .prefixquiz-wrap,
+.proverbquiz-wrap, .rhymequiz-wrap, .similequiz-wrap,
+.spellingquiz-wrap, .suffixquiz-wrap, .synonymquiz-wrap,
+.wordrootsquiz-wrap,
+.g-wrap:has(.g-q), .g-wrap:has(.g-options) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sp-5, 20px);
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--sp-6, 24px);
+  font-family: var(--font-sans, system-ui, -apple-system, "Segoe UI", sans-serif);
+  color: var(--text-100, #f1f5f9);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    var(--surface-1, rgba(22, 25, 39, 0.72));
+  border: 1px solid var(--border-soft, rgba(148, 163, 184, 0.10));
+  border-radius: var(--r-lg, 16px);
+  box-shadow: var(--sh-md, 0 8px 24px rgba(0, 0, 0, 0.35));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: trivia-fade-in 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---- shim: header bar ---- */
+.cq-header, .hq-header, .qz-header, .gq-header, .nlp-header, .uc-header,
+.abbreviationquiz-header, .acronymdefinequiz-header, .alliterationquiz-header,
+.antonymquiz-header, .homonymquiz-header, .hyperbolequiz-header,
+.metaphorquiz-header, .onomatopoeiaquiz-header, .oxymoronquiz-header,
+.palindromequiz-header, .portmanteauquiz-header, .prefixquiz-header,
+.proverbquiz-header, .rhymequiz-header, .similequiz-header,
+.spellingquiz-header, .suffixquiz-header, .synonymquiz-header,
+.wordrootsquiz-header,
+.g-wrap:has(.g-q) .g-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: var(--sp-3, 12px);
+  padding-bottom: var(--sp-3, 12px);
+  border-bottom: 1px solid var(--border-soft, rgba(148, 163, 184, 0.10));
+}
+
+/* ---- shim: progress text ---- */
+.cq-progress, .hq-progress, .qz-progress, .gq-progress, .nlp-progress,
+.uc-progress,
+.abbreviationquiz-progress, .acronymdefinequiz-progress, .alliterationquiz-progress,
+.antonymquiz-progress, .homonymquiz-progress, .hyperbolequiz-progress,
+.metaphorquiz-progress, .onomatopoeiaquiz-progress, .oxymoronquiz-progress,
+.palindromequiz-progress, .portmanteauquiz-progress, .prefixquiz-progress,
+.proverbquiz-progress, .rhymequiz-progress, .similequiz-progress,
+.spellingquiz-progress, .suffixquiz-progress, .synonymquiz-progress,
+.wordrootsquiz-progress {
+  font-size: var(--font-sm, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-400, #94a3b8);
+}
+
+/* ---- shim: score ---- */
+.cq-score, .hq-score, .qz-score, .gq-score, .nlp-score, .uc-score,
+.abbreviationquiz-score, .acronymdefinequiz-score, .alliterationquiz-score,
+.antonymquiz-score, .homonymquiz-score, .hyperbolequiz-score,
+.metaphorquiz-score, .onomatopoeiaquiz-score, .oxymoronquiz-score,
+.palindromequiz-score, .portmanteauquiz-score, .prefixquiz-score,
+.proverbquiz-score, .rhymequiz-score, .similequiz-score,
+.spellingquiz-score, .suffixquiz-score, .synonymquiz-score,
+.wordrootsquiz-score,
+.g-wrap:has(.g-q) .g-score {
+  font-size: var(--font-lg, 1.1rem);
+  font-weight: 800;
+  color: var(--success, #34d399);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 18px rgba(52, 211, 153, 0.25);
+}
+
+/* ---- shim: progress bar (decorative track + fill) ---- */
+.cq-progress-bar, .hq-progress-bar, .qz-progress-bar, .gq-progress-bar,
+.nlp-progress-bar, .uc-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: var(--surface-2, rgba(28, 32, 50, 0.78));
+  border-radius: 999px;
+  overflow: hidden;
+}
+.cq-progress-fill, .hq-progress-fill, .qz-progress-fill, .gq-progress-fill,
+.nlp-progress-fill, .uc-progress-fill {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary, #818cf8), var(--success, #34d399));
+  border-radius: inherit;
+  transition: width 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---- shim: question ---- */
+.cq-question, .hq-question, .qz-question, .gq-question, .nlp-question,
+.uc-question,
+.abbreviationquiz-question, .acronymdefinequiz-question, .alliterationquiz-question,
+.antonymquiz-question, .homonymquiz-question, .hyperbolequiz-question,
+.metaphorquiz-question, .onomatopoeiaquiz-question, .oxymoronquiz-question,
+.palindromequiz-question, .portmanteauquiz-question, .prefixquiz-question,
+.proverbquiz-question, .rhymequiz-question, .similequiz-question,
+.spellingquiz-question, .suffixquiz-question, .synonymquiz-question,
+.wordrootsquiz-question,
+.g-wrap:has(.g-q) .g-q {
+  font-size: var(--font-xl, 1.35rem);
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--text-100, #f1f5f9);
+  padding: var(--sp-3, 12px) var(--sp-4, 16px) var(--sp-6, 24px);
+  letter-spacing: -0.005em;
+  background: transparent;
+  border: 0;
+  animation: trivia-slide-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---- shim: choices container ---- */
+.cq-choices, .hq-choices, .qz-choices, .gq-choices, .nlp-choices, .uc-choices,
+.abbreviationquiz-choices, .acronymdefinequiz-choices, .alliterationquiz-choices,
+.antonymquiz-choices, .homonymquiz-choices, .hyperbolequiz-choices,
+.metaphorquiz-choices, .onomatopoeiaquiz-choices, .oxymoronquiz-choices,
+.palindromequiz-choices, .portmanteauquiz-choices, .prefixquiz-choices,
+.proverbquiz-choices, .rhymequiz-choices, .similequiz-choices,
+.spellingquiz-choices, .suffixquiz-choices, .synonymquiz-choices,
+.wordrootsquiz-choices,
+.g-wrap:has(.g-q) .g-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3, 12px);
+  width: 100%;
+}
+
+/* ---- shim: individual choice button ---- */
+.cq-choice, .hq-choice, .qz-choice, .gq-choice, .nlp-choice, .uc-choice,
+.abbreviationquiz-choice, .acronymdefinequiz-choice, .alliterationquiz-choice,
+.antonymquiz-choice, .homonymquiz-choice, .hyperbolequiz-choice,
+.metaphorquiz-choice, .onomatopoeiaquiz-choice, .oxymoronquiz-choice,
+.palindromequiz-choice, .portmanteauquiz-choice, .prefixquiz-choice,
+.proverbquiz-choice, .rhymequiz-choice, .similequiz-choice,
+.spellingquiz-choice, .suffixquiz-choice, .synonymquiz-choice,
+.wordrootsquiz-choice,
+.g-wrap:has(.g-q) .g-opt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3, 12px);
+  width: 100%;
+  padding: var(--sp-3, 12px) var(--sp-4, 16px);
+  font-size: var(--font-md, 0.95rem);
+  font-weight: 600;
+  text-align: left;
+  color: var(--text-100, #f1f5f9);
+  background: var(--surface-2, rgba(28, 32, 50, 0.78));
+  border: 1.5px solid var(--border-soft, rgba(148, 163, 184, 0.10));
+  border-radius: var(--r-md, 10px);
+  cursor: pointer;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.cq-choice:hover:not(:disabled), .hq-choice:hover:not(:disabled),
+.qz-choice:hover:not(:disabled), .gq-choice:hover:not(:disabled),
+.nlp-choice:hover:not(:disabled), .uc-choice:hover:not(:disabled),
+.abbreviationquiz-choice:hover:not(:disabled),
+.acronymdefinequiz-choice:hover:not(:disabled),
+.alliterationquiz-choice:hover:not(:disabled),
+.antonymquiz-choice:hover:not(:disabled),
+.homonymquiz-choice:hover:not(:disabled),
+.hyperbolequiz-choice:hover:not(:disabled),
+.metaphorquiz-choice:hover:not(:disabled),
+.onomatopoeiaquiz-choice:hover:not(:disabled),
+.oxymoronquiz-choice:hover:not(:disabled),
+.palindromequiz-choice:hover:not(:disabled),
+.portmanteauquiz-choice:hover:not(:disabled),
+.prefixquiz-choice:hover:not(:disabled),
+.proverbquiz-choice:hover:not(:disabled),
+.rhymequiz-choice:hover:not(:disabled),
+.similequiz-choice:hover:not(:disabled),
+.spellingquiz-choice:hover:not(:disabled),
+.suffixquiz-choice:hover:not(:disabled),
+.synonymquiz-choice:hover:not(:disabled),
+.wordrootsquiz-choice:hover:not(:disabled),
+.g-wrap:has(.g-q) .g-opt:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--surface-3, rgba(36, 40, 60, 0.82));
+  border-color: var(--border-strong, rgba(148, 163, 184, 0.20));
+  box-shadow: var(--sh-md, 0 8px 20px rgba(0, 0, 0, 0.35));
+}
+
+/* selected state */
+.cq-choice.selected, .hq-choice.selected, .qz-choice.selected,
+.gq-choice.selected, .nlp-choice.selected, .uc-choice.selected,
+.abbreviationquiz-choice.selected, .acronymdefinequiz-choice.selected,
+.alliterationquiz-choice.selected, .antonymquiz-choice.selected,
+.homonymquiz-choice.selected, .hyperbolequiz-choice.selected,
+.metaphorquiz-choice.selected, .onomatopoeiaquiz-choice.selected,
+.oxymoronquiz-choice.selected, .palindromequiz-choice.selected,
+.portmanteauquiz-choice.selected, .prefixquiz-choice.selected,
+.proverbquiz-choice.selected, .rhymequiz-choice.selected,
+.similequiz-choice.selected, .spellingquiz-choice.selected,
+.suffixquiz-choice.selected, .synonymquiz-choice.selected,
+.wordrootsquiz-choice.selected {
+  border-color: var(--primary, #818cf8);
+  background: var(--primary-soft, rgba(129, 140, 248, 0.16));
+  color: var(--text-100, #f1f5f9);
+  box-shadow:
+    0 0 0 1px var(--primary, #818cf8) inset,
+    0 6px 18px -6px var(--primary-glow, rgba(129, 140, 248, 0.45));
+}
+
+/* correct state — also covers .g-opt.right used by g-* quizzes */
+.cq-choice.correct, .hq-choice.correct, .qz-choice.correct,
+.gq-choice.correct, .nlp-choice.correct, .uc-choice.correct,
+.abbreviationquiz-choice.correct, .acronymdefinequiz-choice.correct,
+.alliterationquiz-choice.correct, .antonymquiz-choice.correct,
+.homonymquiz-choice.correct, .hyperbolequiz-choice.correct,
+.metaphorquiz-choice.correct, .onomatopoeiaquiz-choice.correct,
+.oxymoronquiz-choice.correct, .palindromequiz-choice.correct,
+.portmanteauquiz-choice.correct, .prefixquiz-choice.correct,
+.proverbquiz-choice.correct, .rhymequiz-choice.correct,
+.similequiz-choice.correct, .spellingquiz-choice.correct,
+.suffixquiz-choice.correct, .synonymquiz-choice.correct,
+.wordrootsquiz-choice.correct,
+.g-wrap:has(.g-q) .g-opt.right {
+  border-color: var(--success, #34d399);
+  background: var(--success-soft, rgba(52, 211, 153, 0.16));
+  color: var(--text-100, #f1f5f9);
+  animation: trivia-flash-correct 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* wrong state */
+.cq-choice.wrong, .hq-choice.wrong, .qz-choice.wrong,
+.gq-choice.wrong, .nlp-choice.wrong, .uc-choice.wrong,
+.abbreviationquiz-choice.wrong, .acronymdefinequiz-choice.wrong,
+.alliterationquiz-choice.wrong, .antonymquiz-choice.wrong,
+.homonymquiz-choice.wrong, .hyperbolequiz-choice.wrong,
+.metaphorquiz-choice.wrong, .onomatopoeiaquiz-choice.wrong,
+.oxymoronquiz-choice.wrong, .palindromequiz-choice.wrong,
+.portmanteauquiz-choice.wrong, .prefixquiz-choice.wrong,
+.proverbquiz-choice.wrong, .rhymequiz-choice.wrong,
+.similequiz-choice.wrong, .spellingquiz-choice.wrong,
+.suffixquiz-choice.wrong, .synonymquiz-choice.wrong,
+.wordrootsquiz-choice.wrong,
+.g-wrap:has(.g-q) .g-opt.wrong {
+  border-color: var(--danger, #fb7185);
+  background: var(--danger-soft, rgba(251, 113, 133, 0.16));
+  color: var(--text-100, #f1f5f9);
+  animation: trivia-flash-wrong 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cq-choice:disabled, .hq-choice:disabled, .qz-choice:disabled,
+.gq-choice:disabled, .nlp-choice:disabled, .uc-choice:disabled,
+.abbreviationquiz-choice:disabled, .acronymdefinequiz-choice:disabled,
+.alliterationquiz-choice:disabled, .antonymquiz-choice:disabled,
+.homonymquiz-choice:disabled, .hyperbolequiz-choice:disabled,
+.metaphorquiz-choice:disabled, .onomatopoeiaquiz-choice:disabled,
+.oxymoronquiz-choice:disabled, .palindromequiz-choice:disabled,
+.portmanteauquiz-choice:disabled, .prefixquiz-choice:disabled,
+.proverbquiz-choice:disabled, .rhymequiz-choice:disabled,
+.similequiz-choice:disabled, .spellingquiz-choice:disabled,
+.suffixquiz-choice:disabled, .synonymquiz-choice:disabled,
+.wordrootsquiz-choice:disabled,
+.g-wrap:has(.g-q) .g-opt:disabled {
+  cursor: default;
+}
+
+/* ---- shim: choice letter badge ---- */
+.cq-choice-letter, .hq-choice-letter, .qz-choice-letter,
+.gq-choice-letter, .nlp-choice-letter, .uc-choice-letter,
+.nlp-letter, .uc-letter, .gq-letter,
+.abbreviationquiz-choice-letter, .acronymdefinequiz-choice-letter,
+.alliterationquiz-choice-letter, .antonymquiz-choice-letter,
+.homonymquiz-choice-letter, .hyperbolequiz-choice-letter,
+.metaphorquiz-choice-letter, .onomatopoeiaquiz-choice-letter,
+.oxymoronquiz-choice-letter, .palindromequiz-choice-letter,
+.portmanteauquiz-choice-letter, .prefixquiz-choice-letter,
+.proverbquiz-choice-letter, .rhymequiz-choice-letter,
+.similequiz-choice-letter, .spellingquiz-choice-letter,
+.suffixquiz-choice-letter, .synonymquiz-choice-letter,
+.wordrootsquiz-choice-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  font-weight: 900;
+  font-size: var(--font-sm, 0.85rem);
+  color: var(--text-400, #94a3b8);
+  background: var(--bg-1, #0c0e18);
+  border: 1px solid var(--border-soft, rgba(148, 163, 184, 0.10));
+  border-radius: var(--r-sm, 6px);
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+/* ---- shim: actions row ---- */
+.cq-actions, .hq-actions, .qz-actions, .gq-actions, .nlp-actions, .uc-actions,
+.abbreviationquiz-actions, .acronymdefinequiz-actions, .alliterationquiz-actions,
+.antonymquiz-actions, .homonymquiz-actions, .hyperbolequiz-actions,
+.metaphorquiz-actions, .onomatopoeiaquiz-actions, .oxymoronquiz-actions,
+.palindromequiz-actions, .portmanteauquiz-actions, .prefixquiz-actions,
+.proverbquiz-actions, .rhymequiz-actions, .similequiz-actions,
+.spellingquiz-actions, .suffixquiz-actions, .synonymquiz-actions,
+.wordrootsquiz-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-3, 12px);
+  margin-top: var(--sp-2, 8px);
+}
+
+/* ---- shim: next / submit buttons (.cq-next, .hq-next, etc + .g-btn) ---- */
+.cq-next, .hq-next, .qz-next, .gq-next, .nlp-next, .uc-next,
+.abbreviationquiz-next, .acronymdefinequiz-next, .alliterationquiz-next,
+.antonymquiz-next, .homonymquiz-next, .hyperbolequiz-next,
+.metaphorquiz-next, .onomatopoeiaquiz-next, .oxymoronquiz-next,
+.palindromequiz-next, .portmanteauquiz-next, .prefixquiz-next,
+.proverbquiz-next, .rhymequiz-next, .similequiz-next,
+.spellingquiz-next, .suffixquiz-next, .synonymquiz-next,
+.wordrootsquiz-next,
+.g-wrap:has(.g-q) .g-btn {
+  padding: var(--sp-3, 12px) var(--sp-6, 24px);
+  font-size: var(--font-md, 0.95rem);
+  font-weight: 800;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  border-radius: var(--r-md, 10px);
+  cursor: pointer;
+  color: #062a1f;
+  background: linear-gradient(135deg, var(--success, #34d399), #22c55e);
+  border-color: #22c55e;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 160ms ease,
+    background 160ms ease,
+    opacity 160ms ease;
+  outline: none;
+}
+
+.cq-next:hover:not(:disabled), .hq-next:hover:not(:disabled),
+.qz-next:hover:not(:disabled), .gq-next:hover:not(:disabled),
+.nlp-next:hover:not(:disabled), .uc-next:hover:not(:disabled),
+.abbreviationquiz-next:hover:not(:disabled),
+.acronymdefinequiz-next:hover:not(:disabled),
+.alliterationquiz-next:hover:not(:disabled),
+.antonymquiz-next:hover:not(:disabled),
+.homonymquiz-next:hover:not(:disabled),
+.hyperbolequiz-next:hover:not(:disabled),
+.metaphorquiz-next:hover:not(:disabled),
+.onomatopoeiaquiz-next:hover:not(:disabled),
+.oxymoronquiz-next:hover:not(:disabled),
+.palindromequiz-next:hover:not(:disabled),
+.portmanteauquiz-next:hover:not(:disabled),
+.prefixquiz-next:hover:not(:disabled),
+.proverbquiz-next:hover:not(:disabled),
+.rhymequiz-next:hover:not(:disabled),
+.similequiz-next:hover:not(:disabled),
+.spellingquiz-next:hover:not(:disabled),
+.suffixquiz-next:hover:not(:disabled),
+.synonymquiz-next:hover:not(:disabled),
+.wordrootsquiz-next:hover:not(:disabled),
+.g-wrap:has(.g-q) .g-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--sh-md, 0 8px 20px rgba(0, 0, 0, 0.35));
+}
+
+/* ---- shim: done / final score panel ---- */
+.cq-done, .hq-done, .qz-done, .gq-done, .nlp-done, .uc-done,
+.abbreviationquiz-done, .acronymdefinequiz-done, .alliterationquiz-done,
+.antonymquiz-done, .homonymquiz-done, .hyperbolequiz-done,
+.metaphorquiz-done, .onomatopoeiaquiz-done, .oxymoronquiz-done,
+.palindromequiz-done, .portmanteauquiz-done, .prefixquiz-done,
+.proverbquiz-done, .rhymequiz-done, .similequiz-done,
+.spellingquiz-done, .suffixquiz-done, .synonymquiz-done,
+.wordrootsquiz-done {
+  width: 100%;
+  text-align: center;
+  padding: var(--sp-8, 32px) var(--sp-6, 24px);
+  background:
+    radial-gradient(ellipse at top, var(--primary-soft, rgba(129, 140, 248, 0.16)), transparent 60%),
+    var(--surface-2, rgba(28, 32, 50, 0.78));
+  border: 1px solid var(--border-soft, rgba(148, 163, 184, 0.10));
+  border-radius: var(--r-lg, 16px);
+  animation: trivia-fade-in 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---- shim: final score line (cq-final / hq-final / etc + g-final) ---- */
+.cq-final, .hq-final, .qz-final, .gq-final, .nlp-final, .uc-final,
+.quiz-final,
+.abbreviationquiz-final, .acronymdefinequiz-final, .alliterationquiz-final,
+.antonymquiz-final, .homonymquiz-final, .hyperbolequiz-final,
+.metaphorquiz-final, .onomatopoeiaquiz-final, .oxymoronquiz-final,
+.palindromequiz-final, .portmanteauquiz-final, .prefixquiz-final,
+.proverbquiz-final, .rhymequiz-final, .similequiz-final,
+.spellingquiz-final, .suffixquiz-final, .synonymquiz-final,
+.wordrootsquiz-final,
+.g-wrap:has(.g-final) .g-final {
+  font-size: var(--font-2xl, 1.75rem);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--text-100, #f1f5f9);
+  background: linear-gradient(135deg, var(--primary, #818cf8), var(--success, #34d399));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---- shim: timer (matches cq-timer / hq-timer / etc) ---- */
+.cq-timer, .hq-timer, .qz-timer, .gq-timer, .nlp-timer, .uc-timer,
+.abbreviationquiz-timer, .acronymdefinequiz-timer, .alliterationquiz-timer,
+.antonymquiz-timer, .homonymquiz-timer, .hyperbolequiz-timer,
+.metaphorquiz-timer, .onomatopoeiaquiz-timer, .oxymoronquiz-timer,
+.palindromequiz-timer, .portmanteauquiz-timer, .prefixquiz-timer,
+.proverbquiz-timer, .rhymequiz-timer, .similequiz-timer,
+.spellingquiz-timer, .suffixquiz-timer, .synonymquiz-timer,
+.wordrootsquiz-timer {
+  font-size: var(--font-xl, 1.35rem);
+  font-weight: 900;
+  min-width: 56px;
+  text-align: center;
+  padding: 4px 12px;
+  border-radius: var(--r-md, 10px);
+  font-variant-numeric: tabular-nums;
+  background: var(--surface-2, rgba(28, 32, 50, 0.78));
+  border: 1px solid var(--border-soft, rgba(148, 163, 184, 0.10));
+  color: var(--text-100, #f1f5f9);
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+/* ---- shim: mobile tweaks for shim selectors ---- */
+@media (max-width: 600px) {
+  .cq-wrap, .hq-wrap, .qz-wrap, .gq-wrap, .nlp-wrap, .uc-wrap, .quiz-wrap,
+  .abbreviationquiz-wrap, .acronymdefinequiz-wrap, .alliterationquiz-wrap,
+  .antonymquiz-wrap, .homonymquiz-wrap, .hyperbolequiz-wrap,
+  .metaphorquiz-wrap, .onomatopoeiaquiz-wrap, .oxymoronquiz-wrap,
+  .palindromequiz-wrap, .portmanteauquiz-wrap, .prefixquiz-wrap,
+  .proverbquiz-wrap, .rhymequiz-wrap, .similequiz-wrap,
+  .spellingquiz-wrap, .suffixquiz-wrap, .synonymquiz-wrap,
+  .wordrootsquiz-wrap,
+  .g-wrap:has(.g-q) {
+    padding: var(--sp-4, 16px);
+    gap: var(--sp-4, 16px);
+    border-radius: var(--r-md, 10px);
+  }
+  .cq-question, .hq-question, .qz-question, .gq-question, .nlp-question,
+  .uc-question,
+  .abbreviationquiz-question, .acronymdefinequiz-question, .alliterationquiz-question,
+  .antonymquiz-question, .homonymquiz-question, .hyperbolequiz-question,
+  .metaphorquiz-question, .onomatopoeiaquiz-question, .oxymoronquiz-question,
+  .palindromequiz-question, .portmanteauquiz-question, .prefixquiz-question,
+  .proverbquiz-question, .rhymequiz-question, .similequiz-question,
+  .spellingquiz-question, .suffixquiz-question, .synonymquiz-question,
+  .wordrootsquiz-question,
+  .g-wrap:has(.g-q) .g-q {
+    font-size: var(--font-lg, 1.1rem);
+    padding: var(--sp-2, 8px) 0 var(--sp-4, 16px);
+  }
+  .cq-choice, .hq-choice, .qz-choice, .gq-choice, .nlp-choice, .uc-choice,
+  .abbreviationquiz-choice, .acronymdefinequiz-choice, .alliterationquiz-choice,
+  .antonymquiz-choice, .homonymquiz-choice, .hyperbolequiz-choice,
+  .metaphorquiz-choice, .onomatopoeiaquiz-choice, .oxymoronquiz-choice,
+  .palindromequiz-choice, .portmanteauquiz-choice, .prefixquiz-choice,
+  .proverbquiz-choice, .rhymequiz-choice, .similequiz-choice,
+  .spellingquiz-choice, .suffixquiz-choice, .synonymquiz-choice,
+  .wordrootsquiz-choice,
+  .g-wrap:has(.g-q) .g-opt {
+    padding: var(--sp-3, 12px);
+    font-size: var(--font-sm, 0.85rem);
+  }
+}
