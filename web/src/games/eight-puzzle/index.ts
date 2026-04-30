@@ -4,23 +4,23 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { EightPuzzleGame } from "./Game.js";
 
 const settings = {
-  puzzles: { kind: "enum" as const, label: "Puzzles", options: ["8"] as const, default: "8" as const },
+  dummy: { kind: "boolean" as const, label: "dummy", default: false },
 } as const;
 type S = SettingsOf<typeof settings>;
 
 export const eightPuzzlePlugin: GamePlugin<EightPuzzleState, EightPuzzleAction, typeof settings> = {
   id: "eight-puzzle",
-  title: "Eight Puzzle Logic",
+  title: "Eight Puzzle",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: `3×3 sliding-tile puzzle: pick the next optimal tile to slide.`,
-  howToPlay: `The Eight Puzzle is the 3×3 cousin of the Fifteen Puzzle — eight numbered tiles plus one empty cell. It's the canonical AI search problem and a great pencil-and-paper logic exercise.
+  description: "Classic 3x3 sliding-tile puzzle: arrange 1-8 with one blank cell.",
+  howToPlay: `The Eight Puzzle is the 3x3 cousin of the Fifteen Puzzle: eight numbered tiles plus one blank cell. It is the canonical AI search problem and a fast, satisfying logic exercise.
 
-In this solo puzzle adaptation, each puzzle shows a partially-scrambled 3×3 board and asks which tile slides next on the optimal solution path. Pick from candidate tiles.
+Click any tile orthogonally adjacent to the blank to slide it into the gap. Tiles already in their goal home position turn green so you can track progress at a glance.
 
-Eight puzzles per session, 100 points each (800 max).
+Tips: solve top-row-then-left-column first. The "last two of a row" trick rotates three tiles using the blank. Optimal eight-puzzle solutions average around 22 moves from a fully-shuffled start; the worst-case is 31 moves.
 
-Tips: solve top-row-then-left-column first. The "last two of a row" setup involves rotating three tiles using the empty cell. Optimal Eight-Puzzle solutions average around 22 moves from a fully-shuffled start; the worst case is 31 moves. Recognise patterns: when the empty is adjacent to a tile that wants to move toward its goal, that's almost always the right move.`,
+Scoring: 500 points minus 5 per move with a 50-point floor. Random walks from solved guarantee every shuffle is solvable.`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as EightPuzzleSettings),
   reducer,

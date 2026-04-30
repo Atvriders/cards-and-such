@@ -1,11 +1,144 @@
-.nim-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:480px; margin:0 auto; }
-.nim-info { font-size:1rem; color:#555; }
-.nim-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.nim-sticks { display:flex; flex-wrap:wrap; gap:4px; padding:14px; background:#fff; border:2px solid #34495e; border-radius:10px; min-height:60px; max-width:340px; justify-content:center; }
-.nim-stick { font-size:1.8rem; }
-.nim-row { display:flex; gap:10px; }
-.nim-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.nim-btn:hover:not(:disabled) { background:#2980b9; }
-.nim-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.nim-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.nim-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+/* Nim Game — unique class prefix `nimg-` */
+
+.nimg-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  max-width: 540px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+.nimg-info {
+  font-size: 0.95rem;
+  color: #4b5563;
+  letter-spacing: 0.01em;
+}
+
+.nimg-stats {
+  display: flex;
+  gap: 14px;
+}
+
+.nimg-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 18px;
+  background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  min-width: 96px;
+}
+
+.nimg-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+.nimg-value {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.nimg-pile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 22px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #d97706;
+  border-radius: 14px;
+  min-height: 110px;
+  width: 100%;
+  justify-content: center;
+  box-shadow: inset 0 2px 6px rgba(180, 83, 9, 0.15);
+}
+
+.nimg-stick {
+  display: inline-block;
+  width: 6px;
+  height: 60px;
+  background: linear-gradient(180deg, #b45309 0%, #78350f 100%);
+  border-radius: 3px;
+  box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.2);
+  animation: nimg-pop 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes nimg-pop {
+  from { transform: translateY(-12px) scale(0.6); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.nimg-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.nimg-btn {
+  font-family: "Inter", system-ui, sans-serif;
+  padding: 11px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.3);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.nimg-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35);
+}
+
+.nimg-btn:active:not(:disabled) { transform: translateY(0); }
+
+.nimg-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.nimg-banner {
+  text-align: center;
+  padding: 28px 32px;
+  border-radius: 16px;
+  border: 2px solid #e5e7eb;
+}
+
+.nimg-banner.win {
+  background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: #10b981;
+}
+
+.nimg-banner.lose {
+  background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #ef4444;
+}
+
+.nimg-title {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.nimg-final {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #059669;
+  margin-bottom: 4px;
+}
+
+.nimg-sub {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 12px;
+}

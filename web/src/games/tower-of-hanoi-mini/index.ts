@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { TowerOfHanoiMiniGame } from "./Game.js";
 
 const settings = {
-  discs: { kind: "enum" as const, label: "Discs", options: ["3", "4", "5"] as const, default: "3" as const },
+  discs: { kind: "enum" as const, label: "Discs", options: ["3", "4", "5"] as const, default: "4" as const },
 } as const;
 type S = SettingsOf<typeof settings>;
 

@@ -1,11 +1,159 @@
-.ms-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:420px;margin:0 auto; }
-.ms-header { font-size:1rem;font-weight:700;color:#2c3e50; }
-.ms-grid { display:grid;grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:6px;background:#5d6d7e;padding:8px;border-radius:10px; }
-.ms-cell { font-size:1.6rem;font-weight:900;background:#ecf0f1;border:2px solid #bdc3c7;border-radius:8px;cursor:pointer;color:#2c3e50; }
-.ms-cell.filled { background:#d5f5e3; }
-.ms-pool { display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:320px; }
-.ms-pool-btn { width:40px;height:40px;font-size:1.1rem;font-weight:800;background:#fff;border:2px solid #bdc3c7;border-radius:6px;cursor:pointer; }
-.ms-pool-btn.sel { background:#f9e79f;border-color:#d4ac0d; }
-.ms-btn { padding:10px 24px;border-radius:8px;border:none;background:#3498db;color:#fff;font-weight:700;cursor:pointer; }
-.ms-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
-.ms-final { font-size:1.4rem;color:#27ae60;font-weight:900;margin:8px 0; }
+/* Magic Square 3 — unique class prefix `ms3-` */
+
+.ms3-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px;
+  max-width: 460px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+.ms3-info {
+  font-size: 0.95rem;
+  color: #4b5563;
+  text-align: center;
+}
+
+.ms3-stat { font-size: 1rem; color: #4b5563; }
+.ms3-stat b {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 800;
+  color: #111827;
+}
+
+.ms3-board {
+  display: grid;
+  grid-template-columns: 36px repeat(3, 76px) 36px;
+  grid-template-rows: 36px repeat(3, 76px);
+  gap: 6px;
+  padding: 8px;
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+  border: 2px solid #8b5cf6;
+  border-radius: 12px;
+}
+
+.ms3-corner { background: transparent; }
+.ms3-corner.small {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #6b21a8;
+}
+
+.ms3-sum {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #6b21a8;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+}
+
+.ms3-sum.ok { background: #bbf7d0; color: #14532d; box-shadow: 0 0 0 2px #22c55e inset; }
+.ms3-sum.bad { background: #fecaca; color: #7f1d1d; box-shadow: 0 0 0 2px #ef4444 inset; }
+
+.ms3-cell {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: #fff;
+  border: 2px solid #c4b5fd;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #312e81;
+  transition: transform 0.12s, background 0.15s;
+}
+
+.ms3-cell:hover { background: #f5f3ff; }
+
+.ms3-cell.filled {
+  background: linear-gradient(180deg, #ede9fe 0%, #ddd6fe 100%);
+  border-color: #8b5cf6;
+}
+
+.ms3-num {
+  display: inline-block;
+  animation: ms3-pop 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes ms3-pop {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.ms3-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.ms3-pool-btn {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  width: 44px;
+  height: 44px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: #fff;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #1e293b;
+  transition: transform 0.12s, background 0.15s, border-color 0.15s;
+}
+
+.ms3-pool-btn:hover:not(:disabled):not(.sel) { background: #f1f5f9; transform: translateY(-1px); }
+
+.ms3-pool-btn.sel {
+  background: linear-gradient(180deg, #fde68a 0%, #fbbf24 100%);
+  border-color: #d97706;
+  color: #78350f;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+}
+
+.ms3-pool-btn.used { opacity: 0.25; cursor: not-allowed; }
+
+.ms3-hint { font-size: 0.85rem; color: #6b7280; text-align: center; }
+
+.ms3-banner {
+  text-align: center;
+  padding: 28px 32px;
+  background: linear-gradient(180deg, #faf5ff 0%, #ede9fe 100%);
+  border: 2px solid #8b5cf6;
+  border-radius: 16px;
+}
+
+.ms3-title { margin: 0 0 6px; font-size: 1.7rem; font-weight: 800; color: #4c1d95; }
+
+.ms3-final {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #6d28d9;
+  margin: 8px 0 14px;
+}
+
+.ms3-btn {
+  font-family: "Inter", system-ui, sans-serif;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);
+  transition: transform 0.12s;
+}
+
+.ms3-btn:hover { transform: translateY(-1px); }

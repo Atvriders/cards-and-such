@@ -1,18 +1,155 @@
+/* Ship Captain Crew — class prefix `scc-` */
+
 .scc {
-  display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; font-family: sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+  color: #1f2937;
 }
-.scc-info { display: flex; gap: 24px; font-size: 1rem; font-weight: bold; }
-.scc-sequence { display: flex; gap: 12px; font-size: 1.1rem; align-items: center; }
-.scc-sequence .locked { color: #2a7a2a; font-weight: bold; }
-.scc-sequence .pending { color: #aaa; }
-.scc-dice { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.scc-controls { display: flex; gap: 12px; }
-.scc-controls button { padding: 8px 20px; font-size: 1rem; cursor: pointer; border-radius: 4px; border: 1px solid #666; background: #fff; }
-.scc-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
-.scc-cargo { font-size: 1.1rem; }
-.scc-round-result { background: #f9f9f9; padding: 12px 20px; border-radius: 6px; border: 1px solid #ccc; text-align: center; }
-.scc-scoreboard { width: 100%; max-width: 400px; border-collapse: collapse; }
-.scc-scoreboard th, .scc-scoreboard td { border: 1px solid #ccc; padding: 6px 10px; text-align: center; }
-.scc-scoreboard th { background: #f0f0f0; }
-.scc-scoreboard tr.total td { font-weight: bold; background: #e6f0ff; }
-.scc-game-over { font-size: 1.4rem; font-weight: bold; color: #2a7a2a; }
+
+.scc-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+  border: 1px solid #67e8f9;
+  border-radius: 12px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 600;
+  color: #155e75;
+}
+
+.scc-sequence {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+}
+.scc-sequence span:not(.locked):not(.pending) { color: #6b7280; }
+.scc-sequence .locked {
+  color: #15803d;
+  font-weight: 700;
+  background: #dcfce7;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.scc-sequence .pending {
+  color: #9ca3af;
+  font-weight: 500;
+  padding: 4px 10px;
+}
+
+.scc-board {
+  background: linear-gradient(180deg, #082f49 0%, #0c4a6e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.scc-dice {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.scc-cargo {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  color: #fef3c7;
+  font-size: 1.05rem;
+}
+.scc-cargo strong {
+  color: #fbbf24;
+  font-size: 1.4rem;
+  margin-left: 6px;
+}
+
+.scc-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.scc-controls button {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #06b6d4 0%, #0e7490 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(6, 182, 212, 0.4);
+  transition: transform 80ms ease;
+}
+.scc-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #94a3b8;
+  box-shadow: none;
+}
+.scc-controls button:hover:not(:disabled) { transform: translateY(-1px); }
+
+.scc-round-result {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px 18px;
+  text-align: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.scc-round-result strong { color: #0e7490; }
+
+.scc-scoreboard {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.92rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.scc-scoreboard th, .scc-scoreboard td {
+  padding: 8px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+.scc-scoreboard th {
+  background: #ecfeff;
+  color: #155e75;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.78rem;
+}
+.scc-scoreboard tr.total td {
+  font-weight: 700;
+  background: #cffafe;
+  color: #0e7490;
+}
+
+.scc-game-over {
+  text-align: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 16px;
+  background: linear-gradient(135deg, #cffafe 0%, #67e8f9 100%);
+  border-radius: 12px;
+  color: #0e7490;
+}

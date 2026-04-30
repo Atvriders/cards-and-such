@@ -1,1 +1,193 @@
-@import "../../engines/dicemini/dicemini.css";
+/* Pig Classic — class prefix `pig-` */
+
+.pig-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+.pig-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+  border: 1px solid #f9a8d4;
+  border-radius: 14px;
+}
+
+.pig-stat { display: flex; flex-direction: column; align-items: flex-start; }
+.pig-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: #9d174d;
+}
+.pig-stat-value {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.1;
+}
+.pig-stat-target {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-left: 2px;
+}
+.pig-stat-turn .pig-stat-value { color: #be185d; }
+
+.pig-progress {
+  height: 8px;
+  background: #fce7f3;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.pig-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ec4899 0%, #be185d 100%);
+  transition: width 220ms ease;
+  border-radius: 999px;
+}
+
+.pig-arena {
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.pig-die-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+.pig-die-stage.danger { animation: pig-shake 0.4s; }
+@keyframes pig-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.pig-die-placeholder {
+  color: #c7d2fe;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.pig-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.pig-chip {
+  background: #4f46e5;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.pig-history-sum {
+  color: #fbbf24;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.pig-bust {
+  background: #fee2e2;
+  color: #7f1d1d;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.pig-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.pig-btn {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+.pig-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pig-btn-roll {
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(236, 72, 153, 0.4);
+}
+.pig-btn-roll:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(236, 72, 153, 0.55); }
+
+.pig-btn-bank {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
+}
+.pig-btn-bank:hover:not(:disabled) { transform: translateY(-1px); }
+
+.pig-help {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  padding-top: 6px;
+  border-top: 1px dashed #e5e7eb;
+}
+
+.pig-done {
+  text-align: center;
+  padding: 36px 20px;
+  border-radius: 16px;
+}
+.pig-done.win {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fbcfe8 100%);
+  border: 1px solid #f9a8d4;
+}
+.pig-done.lose {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 1px solid #d1d5db;
+}
+.pig-done h2 { margin: 0 0 12px; color: #9d174d; font-size: 1.6rem; }
+.pig-final {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: #be185d;
+}
+.pig-final-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9d174d;
+}
+.pig-meta {
+  margin-top: 14px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  color: #6b7280;
+  font-size: 0.9rem;
+}

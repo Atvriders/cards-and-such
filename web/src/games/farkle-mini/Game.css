@@ -1,1 +1,187 @@
-@import "../../engines/dicemini/dicemini.css";
+/* Farkle Mini — unique class prefix `farkle-` */
+
+.farkle-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+.farkle-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 1px solid #fdba74;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(180, 83, 9, 0.12);
+}
+
+.farkle-round {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #9a3412;
+  letter-spacing: 0.02em;
+}
+
+.farkle-totals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.farkle-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 12px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #fed7aa;
+}
+
+.farkle-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #92400e;
+  font-weight: 600;
+}
+
+.farkle-stat-value {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.1;
+}
+
+.farkle-stat-bank .farkle-stat-value { color: #b45309; }
+.farkle-stat-pending .farkle-stat-value { color: #16a34a; }
+
+.farkle-board {
+  min-height: 110px;
+  padding: 16px;
+  background: linear-gradient(180deg, #064e3b 0%, #022c22 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.farkle-prompt {
+  color: #d1fae5;
+  font-style: italic;
+  text-align: center;
+}
+
+.farkle-dice {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.farkle-die-wrap {
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.farkle-die-wrap.kept { opacity: 0.55; cursor: default; }
+.farkle-die-wrap.picked { transform: translateY(-4px); }
+
+.farkle-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.farkle-btn {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+
+.farkle-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.farkle-btn-primary {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.4);
+}
+.farkle-btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(234, 88, 12, 0.5); }
+
+.farkle-btn-bank {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
+}
+.farkle-btn-bank:hover:not(:disabled) { transform: translateY(-1px); }
+
+.farkle-result {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.farkle-result-win {
+  background: #dcfce7;
+  color: #14532d;
+  border: 1px solid #86efac;
+}
+
+.farkle-result-bust {
+  background: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fca5a5;
+}
+
+.farkle-help {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  padding-top: 6px;
+  border-top: 1px dashed #e5e7eb;
+}
+.farkle-help b { color: #1f2937; }
+
+.farkle-done {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fff7ed 0%, #fde68a 100%);
+  border-radius: 16px;
+}
+.farkle-done h2 { margin: 0 0 12px; color: #92400e; font-size: 1.5rem; }
+.farkle-final {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #b45309;
+}
+.farkle-final-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #92400e;
+}

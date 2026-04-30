@@ -1,1 +1,164 @@
-@import "../../engines/dicemini/dicemini.css";
+/* Mini Tenzi — class prefix `tenzi-` */
+
+.tenzi-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+.tenzi-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+  border: 1px solid #a78bfa;
+  border-radius: 14px;
+}
+
+.tenzi-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.tenzi-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5b21b6;
+  font-weight: 600;
+}
+.tenzi-stat-value {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.1;
+}
+.tenzi-target-pip {
+  display: flex;
+  align-items: center;
+}
+.tenzi-target-pip .die {
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+}
+
+.tenzi-board {
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.tenzi-dice {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  justify-items: center;
+}
+
+.tenzi-die {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: transform 120ms ease, box-shadow 200ms ease;
+  position: relative;
+}
+.tenzi-die:hover { transform: translateY(-3px); }
+.tenzi-die.match::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 16px;
+  border: 2px solid #34d399;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.tenzi-die.held::after {
+  border-color: #fbbf24;
+  opacity: 0.95;
+  border-width: 3px;
+}
+
+.tenzi-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.tenzi-btn {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 12px 32px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.4);
+  transition: transform 80ms ease, box-shadow 120ms ease;
+}
+.tenzi-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.55); }
+
+.tenzi-help {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  padding-top: 6px;
+  border-top: 1px dashed #e5e7eb;
+}
+
+.tenzi-done {
+  text-align: center;
+  padding: 36px 20px;
+  border-radius: 16px;
+}
+.tenzi-done.win {
+  background: linear-gradient(135deg, #ede9fe 0%, #c4b5fd 100%);
+  border: 1px solid #8b5cf6;
+}
+.tenzi-done.lose {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 1px solid #d1d5db;
+}
+.tenzi-done h2 { margin: 0 0 12px; color: #5b21b6; font-size: 1.6rem; }
+.tenzi-final {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #6d28d9;
+}
+.tenzi-final-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5b21b6;
+}
+.tenzi-meta {
+  margin-top: 14px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+  .tenzi-header { grid-template-columns: repeat(2, 1fr); }
+  .tenzi-dice { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+}

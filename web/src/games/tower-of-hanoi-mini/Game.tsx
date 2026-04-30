@@ -4,36 +4,66 @@ import type { TowerOfHanoiMiniState, TowerOfHanoiMiniAction, TowerOfHanoiMiniSet
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
+const DISC_COLOURS = [
+  "#ef4444", "#f59e0b", "#10b981", "#3b82f6", "#8b5cf6",
+];
+
 export function TowerOfHanoiMiniGame({ state, dispatch, onGameOver }: GameProps<TowerOfHanoiMiniState, TowerOfHanoiMiniSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  const optimal = (1 << state.discs) - 1;
 
   if (state.phase === "done") {
     return (
-      <div className="hanoi-wrap">
-        <div className="hanoi-done">
-          <h2>Tower Built!</h2>
-          <p>Moves: {state.moves} (optimal: {(1 << state.discs) - 1})</p>
-          <p className="hanoi-final">{t?.score} pts</p>
-          <button className="hanoi-btn" onClick={() => dispatch({ type: "reset" } as TowerOfHanoiMiniAction)}>Play Again</button>
+      <div className="toh-wrap">
+        <div className="toh-banner">
+          <h2 className="toh-title">Tower Built!</h2>
+          <div className="toh-stat">Moves: <b>{state.moves}</b> · Optimal: <b>{optimal}</b></div>
+          <div className="toh-final">{t?.score} pts</div>
+          <button className="toh-btn primary" onClick={() => dispatch({ type: "reset" } as TowerOfHanoiMiniAction)}>
+            Play Again
+          </button>
         </div>
       </div>
     );
   }
+
   return (
-    <div className="hanoi-wrap">
-      <div className="hanoi-info">Move all discs to right peg. Smaller on bigger only. Moves: {state.moves}</div>
-      <div className="hanoi-board">
+    <div className="toh-wrap">
+      <div className="toh-info">
+        Move the entire stack from the left peg to the right peg. Smaller discs only on bigger ones.
+      </div>
+      <div className="toh-bar">
+        <div className="toh-stat">Moves: <b>{state.moves}</b></div>
+        <div className="toh-stat">Optimal: <b>{optimal}</b></div>
+        <button className="toh-btn small" onClick={() => dispatch({ type: "reset" } as TowerOfHanoiMiniAction)}>Reset</button>
+      </div>
+      <div className="toh-board">
         {state.pegs.map((peg, i) => (
-          <div key={i} className={`hanoi-peg ${state.selected === i ? "sel" : ""}`} onClick={() => dispatch({ type: "tap", peg: i } as TowerOfHanoiMiniAction)}>
-            <div className="hanoi-rod" />
-            <div className="hanoi-base" />
-            <div className="hanoi-discs">
+          <button
+            key={i}
+            type="button"
+            className={`toh-peg${state.selected === i ? " sel" : ""}`}
+            onClick={() => dispatch({ type: "tap", peg: i } as TowerOfHanoiMiniAction)}
+          >
+            <div className="toh-rod" />
+            <div className="toh-base" />
+            <div className="toh-discs">
               {peg.map((d, j) => (
-                <div key={j} className="hanoi-disc" style={{ width: `${20 + d * 18}px` }}>{d}</div>
+                <div
+                  key={`${d}-${j}`}
+                  className="toh-disc"
+                  style={{
+                    width: `${30 + d * 22}px`,
+                    background: `linear-gradient(180deg, ${DISC_COLOURS[d - 1] ?? "#3b82f6"} 0%, color-mix(in srgb, ${DISC_COLOURS[d - 1] ?? "#3b82f6"} 60%, #000) 100%)`,
+                  }}
+                >
+                  <span>{d}</span>
+                </div>
               ))}
             </div>
-          </div>
+            <div className="toh-label">{["A", "B", "C"][i]}</div>
+          </button>
         ))}
       </div>
     </div>

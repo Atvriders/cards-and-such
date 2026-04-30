@@ -1,11 +1,121 @@
-.ng-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:420px;margin:0 auto; }
-.ng-header { font-size:1.1rem;font-weight:700;color:#2c3e50; }
-.ng-board { display:grid;grid-template-columns:50px repeat(3,60px);grid-template-rows:50px repeat(3,60px);gap:4px; }
-.ng-corner { }
-.ng-clue { display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.95rem;color:#34495e;background:#ecf0f1;border-radius:6px; }
-.ng-cell { background:#fff;border:2px solid #95a5a6;border-radius:6px;cursor:pointer; }
-.ng-cell.on { background:#2c3e50; }
-.ng-cell:hover { opacity:0.85; }
-.ng-btn { padding:10px 24px;border-radius:8px;border:none;background:#3498db;color:#fff;font-weight:700;cursor:pointer; }
-.ng-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
-.ng-final { font-size:1.4rem;color:#27ae60;font-weight:900;margin:8px 0; }
+/* Nonogram 3x3 — unique class prefix `ng3-` */
+
+.ng3-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px;
+  max-width: 460px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+.ng3-info {
+  font-size: 0.95rem;
+  color: #4b5563;
+  text-align: center;
+}
+
+.ng3-stat { font-size: 0.95rem; color: #4b5563; }
+.ng3-stat b {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 800;
+  color: #111827;
+}
+
+.ng3-board {
+  display: grid;
+  grid-template-columns: 56px repeat(3, 64px);
+  grid-template-rows: 56px repeat(3, 64px);
+  gap: 4px;
+  padding: 8px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 2px solid #ea580c;
+  border-radius: 12px;
+}
+
+.ng3-corner { background: transparent; }
+
+.ng3-clue {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #7c2d12;
+  background: #fff;
+  border: 2px solid #fdba74;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ng3-cell {
+  background: #fff;
+  border: 2px solid #fdba74;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.14s, transform 0.1s;
+}
+
+.ng3-cell:hover { background: #fff7ed; }
+
+.ng3-cell.on {
+  background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
+  border-color: #44403c;
+  animation: ng3-fill 200ms ease-out;
+}
+
+@keyframes ng3-fill {
+  from { transform: scale(0.7); }
+  to   { transform: scale(1); }
+}
+
+.ng3-msg {
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 10px;
+  color: #92400e;
+}
+
+.ng3-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ng3-btn {
+  font-family: "Inter", system-ui, sans-serif;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.12s;
+}
+
+.ng3-btn.primary { background: linear-gradient(180deg, #f97316 0%, #ea580c 100%); }
+.ng3-btn.secondary { background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%); }
+.ng3-btn:hover { transform: translateY(-1px); }
+
+.ng3-banner {
+  text-align: center;
+  padding: 28px 32px;
+  background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 2px solid #10b981;
+  border-radius: 16px;
+}
+
+.ng3-title { margin: 0 0 6px; font-size: 1.7rem; font-weight: 800; color: #064e3b; }
+
+.ng3-final {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #059669;
+  margin: 8px 0 14px;
+}

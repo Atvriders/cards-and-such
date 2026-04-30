@@ -1,9 +1,9 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import type { DieFace } from "../../engines/dice/index.js";
 
-// Pig Classic: Roll a single die. Each roll adds to your turn total
-// unless you roll a 1 — then your turn total is wiped and turn ends.
-// Bank to add turn total to score. Race to TARGET (default 100).
-// Score returned is total banked when the user reaches target, or banked at end.
+// Pig Classic — solo race to 100. Roll 1 die, sum to turn-total.
+// Roll a 1: turn-total wiped (pigged), turn ends. Bank: lock in turn-total.
+// Up to 30 turns to reach 100.
 
 export const TARGET = 100;
 export const MAX_TURNS = 30;
@@ -15,37 +15,87 @@ export interface PigClassicState {
   turn: number;
   turnTotal: number;
   totalScore: number;
-  lastRoll: number;
+  lastRoll: DieFace | 0;     // 0 = no roll yet
+  rollHistory: (DieFace)[];   // rolls this turn
   phase: "playing" | "done";
   lastWasOne: boolean;
+  bestTurn: number;           // largest single-turn bank ever
 }
 
 export type PigClassicAction = { type: "roll" } | { type: "bank" };
 
 export function initialState(seed: number, _settings: PigClassicSettings): PigClassicState {
-  return { rngSeed: seed, turn: 1, turnTotal: 0, totalScore: 0, lastRoll: 0, phase: "playing", lastWasOne: false };
+  return {
+    rngSeed: seed,
+    turn: 1,
+    turnTotal: 0,
+    totalScore: 0,
+    lastRoll: 0,
+    rollHistory: [],
+    phase: "playing",
+    lastWasOne: false,
+    bestTurn: 0,
+  };
 }
 
 export function reducer(state: PigClassicState, action: PigClassicAction): PigClassicState {
   if (state.phase === "done") return state;
+
   if (action.type === "roll") {
     const rng = mulberry32(state.rngSeed);
-    const r = 1 + Math.floor(rng() * 6);
+    const r = (1 + Math.floor(rng() * 6)) as DieFace;
     const nextSeed = Math.floor(rng() * 2 ** 31);
     if (r === 1) {
       const turn = state.turn + 1;
       const done = turn > MAX_TURNS;
-      return { ...state, rngSeed: nextSeed, turnTotal: 0, lastRoll: r, lastWasOne: true, turn, phase: done ? "done" : "playing" };
+      return {
+        ...state,
+        rngSeed: nextSeed,
+        turnTotal: 0,
+        lastRoll: r,
+        rollHistory: [],
+        lastWasOne: true,
+        turn,
+        phase: done ? "done" : "playing",
+      };
     }
-    return { ...state, rngSeed: nextSeed, turnTotal: state.turnTotal + r, lastRoll: r, lastWasOne: false };
+    return {
+      ...state,
+      rngSeed: nextSeed,
+      turnTotal: state.turnTotal + r,
+      lastRoll: r,
+      rollHistory: [...state.rollHistory, r],
+      lastWasOne: false,
+    };
   }
+
   if (action.type === "bank") {
+    if (state.turnTotal === 0) return state;
     const newScore = state.totalScore + state.turnTotal;
-    if (newScore >= TARGET) return { ...state, totalScore: newScore, turnTotal: 0, phase: "done" };
+    const newBest = Math.max(state.bestTurn, state.turnTotal);
+    if (newScore >= TARGET) {
+      return {
+        ...state,
+        totalScore: newScore,
+        turnTotal: 0,
+        rollHistory: [],
+        bestTurn: newBest,
+        phase: "done",
+      };
+    }
     const turn = state.turn + 1;
     const done = turn > MAX_TURNS;
-    return { ...state, totalScore: newScore, turnTotal: 0, turn, phase: done ? "done" : "playing" };
+    return {
+      ...state,
+      totalScore: newScore,
+      turnTotal: 0,
+      rollHistory: [],
+      bestTurn: newBest,
+      turn,
+      phase: done ? "done" : "playing",
+    };
   }
+
   return state;
 }
 
