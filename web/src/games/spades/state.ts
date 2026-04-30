@@ -21,6 +21,7 @@ export interface SpadesState {
   teamScore: readonly [number, number];  // team 0 (seats 0&2), team 1 (seats 1&3)
   teamBags: readonly [number, number];
   nilBidders: readonly boolean[];        // which seats bid nil
+  spadesBroken: boolean;
   message: string;
 }
 
@@ -54,9 +55,9 @@ export function legalPlays(state: SpadesState, seat: number): Card[] {
   const trick = state.currentTrick;
 
   if (trick.length === 0) {
-    // Leading: can't lead spades unless broken or only spades
+    // Leading: can't lead spades unless broken or hand is only spades
     const nonSpades = hand.filter(c => c.suit !== "♠");
-    // For simplicity, allow spades always (some versions restrict first lead)
+    if (!state.spadesBroken && nonSpades.length > 0) return nonSpades;
     return [...hand];
   }
 
@@ -191,7 +192,8 @@ function applyCard(state: SpadesState, seat: number, card: Card, rng: () => numb
   );
   const newTrick = [...state.currentTrick, { seat, card }];
 
-  let s: SpadesState = { ...state, hands: newHands, currentTrick: newTrick };
+  const justBroken = state.spadesBroken || card.suit === "♠";
+  let s: SpadesState = { ...state, hands: newHands, currentTrick: newTrick, spadesBroken: justBroken };
 
   if (newTrick.length === 4) {
     const winner = trickWinner(newTrick);
@@ -234,14 +236,16 @@ export function reducer(state: SpadesState, action: SpadesAction): SpadesState {
 
     // Apply player bid
     const newBids = state.bids.map((b, i) => i === 0 ? action.amount : b);
-    let s: SpadesState = { ...state, rngSeed: nextSeed, bids: newBids, turn: 1 };
+    const newNil = state.nilBidders.map((n, i) => i === 0 ? action.amount === 0 : n);
+    let s: SpadesState = { ...state, rngSeed: nextSeed, bids: newBids, nilBidders: newNil, turn: 1 };
 
     // Bots bid
     while (s.turn !== 0 && s.bids[s.turn] === null) {
       const botSeat = s.turn;
       const bid = botBid(s.hands[botSeat]!, s.settings.botBidding, botRng);
       const updatedBids = s.bids.map((b, i) => i === botSeat ? bid : b);
-      s = { ...s, bids: updatedBids, turn: (botSeat + 1) % 4 };
+      const updatedNil = s.nilBidders.map((n, i) => i === botSeat ? bid === 0 : n);
+      s = { ...s, bids: updatedBids, nilBidders: updatedNil, turn: (botSeat + 1) % 4 };
     }
 
     // All bids in — start playing
@@ -310,6 +314,7 @@ export function initialState(seed: number, settings: SpadesSettings): SpadesStat
     teamScore: [0, 0],
     teamBags: [0, 0],
     nilBidders: [false, false, false, false],
+    spadesBroken: false,
     message: "Enter your bid (0 = Nil). Spades are always trump.",
   };
 }

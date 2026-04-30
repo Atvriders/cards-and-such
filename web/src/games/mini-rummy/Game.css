@@ -1,27 +1,155 @@
-.dm-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:580px; margin:0 auto; user-select:none; }
-.dm-info { font-size:0.95rem; color:#555; }
-.dm-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.dm-die { font-size:2.4rem; font-weight:900; min-width:64px; padding:12px 16px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.dm-card { font-size:1.6rem; font-weight:900; padding:14px 18px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:60px; text-align:center; }
-.dm-card.red { color:#c0392b; } .dm-card.black { color:#2c3e50; }
-.dm-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.dm-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.dm-btn:hover:not(:disabled) { background:#2980b9; }
-.dm-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.dm-btn.alt { background:#e67e22; }
-.dm-btn.alt:hover { background:#ca6f1e; }
-.dm-btn.danger { background:#e74c3c; }
-.dm-btn.success { background:#27ae60; }
-.dm-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
-.dm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.dm-done h2 { margin:0 0 8px; }
-.dm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
-.dm-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#1b3a1b,#0f2f0f); border:3px solid #5a3a18; border-radius:14px; overflow:hidden; }
-.dm-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; background:transparent; border:none; }
-.dm-target:hover { transform:scale(1.15); }
-.dm-grid { display:grid; gap:8px; }
-.dm-cell { padding:12px; border:2px solid #bdc3c7; border-radius:8px; background:#fff; text-align:center; font-weight:700; cursor:pointer; }
-.dm-cell:hover:not(:disabled) { background:#eaf4fb; }
-.dm-cell:disabled { opacity:0.5; cursor:not-allowed; }
-.dm-cell.selected { background:#3498db; color:#fff; }
-.dm-cell.locked { background:#bdc3c7; }
+.rummy-mini-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 760px;
+  margin: 0 auto;
+  user-select: none;
+}
+.rummy-mini-hud {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #1c2440, #0f1428);
+  color: #c5d2ff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+}
+.rummy-mini-stat b { color: #ffd86a; font-weight: 800; }
+.rummy-mini-cpu, .rummy-mini-you {
+  background: #131a2c;
+  border: 1px solid #2a3552;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.rummy-mini-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a9bd0;
+  margin-bottom: 6px;
+}
+.rummy-mini-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.rummy-mini-card-tight {
+  margin-left: -28px;
+}
+.rummy-mini-card-tight:first-child { margin-left: 0; }
+.rummy-mini-center {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  background: radial-gradient(ellipse at center, #154f33, #0a2c1d 75%);
+  border: 2px solid #2c5b3e;
+  border-radius: 14px;
+  padding: 14px;
+}
+.rummy-mini-pile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.rummy-mini-pile-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  color: #b1d6c1;
+  text-transform: uppercase;
+}
+.rummy-mini-pile-count {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #ffd86a;
+}
+.rummy-mini-slot {
+  width: 70px;
+  height: 100px;
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
+.rummy-mini-hand {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.rummy-mini-card-slot {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: transform 0.1s, border-color 0.2s, background 0.2s;
+}
+.rummy-mini-card-slot:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 216, 106, 0.4);
+}
+.rummy-mini-card-slot.selected {
+  border-color: #ffd86a;
+  background: rgba(255, 216, 106, 0.12);
+  transform: translateY(-6px);
+}
+.rummy-mini-card-slot.melded {
+  background: rgba(108, 240, 148, 0.18);
+  border-color: rgba(108, 240, 148, 0.5);
+}
+.rummy-mini-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.rummy-mini-btn {
+  padding: 9px 18px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: #2c7da0;
+  transition: transform 0.1s, background 0.2s;
+}
+.rummy-mini-btn:hover:not(:disabled) { background: #1f5d7a; transform: translateY(-1px); }
+.rummy-mini-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.rummy-mini-btn.primary { background: #2c8a4f; }
+.rummy-mini-btn.primary:hover:not(:disabled) { background: #1f6b3b; }
+.rummy-mini-btn.alt { background: #c69216; color: #2c1305; }
+.rummy-mini-btn.warn { background: #c8442a; }
+.rummy-mini-thinking {
+  font-family: "JetBrains Mono", monospace;
+  color: #ffd86a;
+  font-size: 0.92rem;
+  font-style: italic;
+}
+.rummy-mini-done {
+  text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  background: #131a2c;
+  color: #fff;
+  border: 2px solid #2a3552;
+}
+.rummy-mini-done.player { border-color: #6cf094; color: #6cf094; }
+.rummy-mini-done.cpu { border-color: #ff7f7f; color: #ff7f7f; }
+.rummy-mini-done h2 { margin: 0; font-family: "Inter", sans-serif; }
+.rummy-mini-log {
+  background: #0c1820;
+  color: #9bbfcc;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-height: 110px;
+  overflow-y: auto;
+}
+.rummy-mini-log-line { padding: 2px 0; }

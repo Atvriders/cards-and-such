@@ -1,2 +1,198 @@
-/* Modern trick-taking engine — see web/src/engines/trick/trick.css */
-@import "../../engines/trick/trick.css";
+.hearts-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 880px;
+  margin: 0 auto;
+  user-select: none;
+}
+.hearts-hud {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: linear-gradient(180deg, #2c0a14, #160407);
+  color: #ffd6da;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.86rem;
+  border: 1px solid #5a0e1c;
+}
+.hearts-hud b { color: #ff7790; font-weight: 800; }
+.hearts-bots {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  background: #1c0d12;
+  border: 1px solid #4d1623;
+  border-radius: 12px;
+  padding: 10px;
+}
+.hearts-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.hearts-seat.active {
+  border-color: #ff7790;
+  background: rgba(255, 119, 144, 0.08);
+}
+.hearts-seat-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #f3b8c0;
+  text-transform: uppercase;
+}
+.hearts-card-row {
+  display: flex;
+}
+.hearts-card-tight {
+  margin-left: -38px;
+}
+.hearts-card-tight:first-child { margin-left: 0; }
+.hearts-pts {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #ffd6da;
+  background: rgba(255, 119, 144, 0.18);
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.hearts-trick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: radial-gradient(ellipse at center, #4d1623, #1c0d12 80%);
+  border: 2px solid #6a1f30;
+  border-radius: 14px;
+  padding: 14px;
+}
+.hearts-trick-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.76rem;
+  color: #f3b8c0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.hearts-trick-cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 110px;
+  align-items: center;
+}
+.hearts-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.hearts-trick-seat {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  color: #f3b8c0;
+}
+.hearts-empty {
+  color: #8a4d59;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+}
+.hearts-status {
+  text-align: center;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+  color: #ffd6da;
+  padding: 8px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+}
+.hearts-pass {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #1c0d12;
+  border: 1px solid #6a1f30;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.hearts-pass-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #f3b8c0;
+  text-transform: uppercase;
+}
+.hearts-you {
+  background: #1c0d12;
+  border: 1px solid #6a1f30;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.hearts-hand {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.hearts-card-slot {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: transform 0.1s, border-color 0.2s;
+}
+.hearts-card-slot:hover { transform: translateY(-3px); }
+.hearts-card-slot.legal { border-color: rgba(108, 240, 148, 0.5); box-shadow: 0 0 10px rgba(108, 240, 148, 0.18); }
+.hearts-card-slot.illegal { opacity: 0.5; cursor: not-allowed; }
+.hearts-card-slot.selected { border-color: #ffd86a; background: rgba(255, 216, 106, 0.15); transform: translateY(-6px); }
+.hearts-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.hearts-btn {
+  padding: 9px 18px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: #6a1f30;
+  transition: transform 0.1s, background 0.2s;
+}
+.hearts-btn:hover:not(:disabled) { background: #4d1623; transform: translateY(-1px); }
+.hearts-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.hearts-btn.primary { background: #c8442a; }
+.hearts-btn.alt { background: #324a5e; }
+.hearts-result {
+  background: #1c0d12;
+  border: 2px solid #6a1f30;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  color: #ffd6da;
+}
+.hearts-result h2 { margin: 0; font-family: "Inter", sans-serif; }
+.hearts-result-scores {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.92rem;
+}
+.hearts-moon {
+  color: #ffd86a;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+}

@@ -1,27 +1,166 @@
-.dm-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:580px; margin:0 auto; user-select:none; }
-.dm-info { font-size:0.95rem; color:#555; }
-.dm-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.dm-die { font-size:2.4rem; font-weight:900; min-width:64px; padding:12px 16px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.dm-card { font-size:1.6rem; font-weight:900; padding:14px 18px; background:#fff; border:2px solid #34495e; border-radius:10px; min-width:60px; text-align:center; }
-.dm-card.red { color:#c0392b; } .dm-card.black { color:#2c3e50; }
-.dm-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.dm-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.dm-btn:hover:not(:disabled) { background:#2980b9; }
-.dm-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.dm-btn.alt { background:#e67e22; }
-.dm-btn.alt:hover { background:#ca6f1e; }
-.dm-btn.danger { background:#e74c3c; }
-.dm-btn.success { background:#27ae60; }
-.dm-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
-.dm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.dm-done h2 { margin:0 0 8px; }
-.dm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
-.dm-board { position:relative; width:100%; height:380px; background:linear-gradient(180deg,#1b3a1b,#0f2f0f); border:3px solid #5a3a18; border-radius:14px; overflow:hidden; }
-.dm-target { position:absolute; font-size:2.4rem; cursor:pointer; transition:transform 0.1s; line-height:1; background:transparent; border:none; }
-.dm-target:hover { transform:scale(1.15); }
-.dm-grid { display:grid; gap:8px; }
-.dm-cell { padding:12px; border:2px solid #bdc3c7; border-radius:8px; background:#fff; text-align:center; font-weight:700; cursor:pointer; }
-.dm-cell:hover:not(:disabled) { background:#eaf4fb; }
-.dm-cell:disabled { opacity:0.5; cursor:not-allowed; }
-.dm-cell.selected { background:#3498db; color:#fff; }
-.dm-cell.locked { background:#bdc3c7; }
+.spit-mini-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 760px;
+  margin: 0 auto;
+  user-select: none;
+}
+.spit-mini-hud {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #2a0f3b, #160622);
+  color: #e2c9ff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  border: 1px solid #4d2370;
+}
+.spit-mini-stat b { color: #ffd86a; font-weight: 800; }
+.spit-mini-cpu, .spit-mini-you {
+  background: #161b30;
+  border: 1px solid #2c3458;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.spit-mini-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9aa9d4;
+  margin-bottom: 6px;
+}
+.spit-mini-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.spit-mini-card-tight {
+  margin-left: -22px;
+}
+.spit-mini-card-tight:first-child { margin-left: 0; }
+.spit-mini-center {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  align-items: center;
+  background: radial-gradient(ellipse at center, #3a164f, #1b0827 80%);
+  border: 2px solid #6a3299;
+  border-radius: 14px;
+  padding: 14px;
+}
+.spit-mini-pile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px dashed transparent;
+  transition: border-color 0.15s, background 0.15s;
+}
+.spit-mini-pile:hover {
+  border-color: rgba(255, 216, 106, 0.5);
+  background: rgba(255, 216, 106, 0.06);
+}
+.spit-mini-pile-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  color: #d6b6f5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.spit-mini-spit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+}
+.spit-mini-tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #ffd86a;
+  letter-spacing: 0.16em;
+}
+.spit-mini-slot {
+  width: 70px;
+  height: 100px;
+  border: 2px dashed rgba(255,255,255,0.18);
+  border-radius: 8px;
+}
+.spit-mini-hand {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.spit-mini-card-slot {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: transform 0.1s, border-color 0.2s;
+}
+.spit-mini-card-slot:hover { transform: translateY(-3px); }
+.spit-mini-card-slot.selected {
+  border-color: #ffd86a;
+  background: rgba(255, 216, 106, 0.14);
+  transform: translateY(-6px);
+}
+.spit-mini-card-slot.playable {
+  border-color: #6cf094;
+  box-shadow: 0 0 12px rgba(108, 240, 148, 0.3);
+}
+.spit-mini-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.spit-mini-btn {
+  padding: 9px 18px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: #6a3299;
+  transition: transform 0.1s, background 0.2s;
+}
+.spit-mini-btn:hover:not(:disabled) { background: #4d2370; transform: translateY(-1px); }
+.spit-mini-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.spit-mini-btn.primary { background: #d63d72; font-size: 1.2rem; padding: 12px 26px; }
+.spit-mini-btn.primary:hover { background: #a82a55; }
+.spit-mini-btn.alt { background: #2c7da0; }
+.spit-mini-btn.warn { background: #c8442a; }
+.spit-mini-done {
+  text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  background: #161b30;
+  color: #fff;
+  border: 2px solid #2c3458;
+}
+.spit-mini-done.player { border-color: #6cf094; color: #6cf094; }
+.spit-mini-done.cpu { border-color: #ff7f7f; color: #ff7f7f; }
+.spit-mini-done.tie { border-color: #ffd86a; color: #ffd86a; }
+.spit-mini-done h2 { margin: 0; font-family: "Inter", sans-serif; }
+.spit-mini-log {
+  background: #0c1820;
+  color: #b09bcc;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+.spit-mini-log-line { padding: 2px 0; }

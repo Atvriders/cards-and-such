@@ -1,2 +1,175 @@
-/* Modern poker-table engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+.pokermini-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 760px;
+  margin: 0 auto;
+  user-select: none;
+}
+.pokermini-hud {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: linear-gradient(180deg, #2c1305, #160803);
+  color: #f7d27a;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.86rem;
+  border: 1px solid #5a3514;
+}
+.pokermini-stat b { color: #fff; font-weight: 800; }
+.pokermini-cpu, .pokermini-you {
+  background:
+    radial-gradient(ellipse at center, #186a3b, #0f4d2a 70%, #0a2e1a 100%);
+  border: 2px solid #5a3514;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.pokermini-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #f7e6c0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.pokermini-rank {
+  background: #f7d27a;
+  color: #2c1305;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-weight: 900;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.82rem;
+}
+.pokermini-hand {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 110px;
+}
+.pokermini-slot {
+  width: 70px;
+  height: 100px;
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
+.pokermini-card-wrap {
+  position: relative;
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: transform 0.1s, border-color 0.2s;
+}
+.pokermini-card-wrap.selectable { cursor: pointer; }
+.pokermini-card-wrap.selectable:hover { transform: translateY(-3px); }
+.pokermini-card-wrap.discard {
+  border-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.18);
+  transform: translateY(-6px);
+}
+.pokermini-x {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e74c3c;
+  color: #fff;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 800;
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.pokermini-felt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 38px;
+}
+.pokermini-result {
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  background: rgba(0,0,0,0.5);
+  color: #ffe9a8;
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 1px solid #f7d27a;
+  text-align: center;
+}
+.pokermini-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.pokermini-bet {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #5a3514;
+}
+.pokermini-bet label {
+  color: #f7d27a;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+}
+.pokermini-bet input {
+  width: 70px;
+  padding: 5px 8px;
+  font-family: "JetBrains Mono", monospace;
+  border: 1px solid #5a3514;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.pokermini-btn {
+  padding: 10px 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: #2c7da0;
+  transition: transform 0.1s, background 0.2s;
+}
+.pokermini-btn:hover:not(:disabled) { background: #1f5d7a; transform: translateY(-1px); }
+.pokermini-btn.primary { background: #c69216; color: #2c1305; }
+.pokermini-btn.primary:hover:not(:disabled) { background: #a8780f; }
+.pokermini-btn.alt { background: #324a5e; }
+.pokermini-btn.warn { background: #c8442a; }
+.pokermini-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.pokermini-done {
+  text-align: center;
+  padding: 14px;
+  background: #2c1305;
+  border: 1px solid #5a3514;
+  border-radius: 10px;
+  color: #f7d27a;
+}
+.pokermini-done h2 { margin: 0 0 6px; font-family: "Inter", sans-serif; }
+.pokermini-log {
+  background: #0c1820;
+  color: #9bbfcc;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-height: 110px;
+  overflow-y: auto;
+}
+.pokermini-log-line { padding: 2px 0; }
