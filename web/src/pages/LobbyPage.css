@@ -513,11 +513,11 @@
   opacity: 1;
   transform: scaleY(1);
 }
-.tile--cat-solitaire { --tile-accent: #818cf8; }
-.tile--cat-cards     { --tile-accent: #fbbf24; }
-.tile--cat-dice      { --tile-accent: #fb7185; }
-.tile--cat-board     { --tile-accent: #34d399; }
-.tile--cat-arcade    { --tile-accent: #38bdf8; }
+.tile--cat-s { --tile-accent: #818cf8; }
+.tile--cat-c     { --tile-accent: #fbbf24; }
+.tile--cat-d      { --tile-accent: #fb7185; }
+.tile--cat-b     { --tile-accent: #34d399; }
+.tile--cat-a    { --tile-accent: #38bdf8; }
 
 /* Sweeping highlight that crosses the card on hover. */
 .tile-sheen {
@@ -616,11 +616,11 @@
   letter-spacing: 0;
 }
 /* Per-category accent tints — semantic colour cues. */
-.tile-cat-solitaire { color: #c7cdfe; background: rgba(129, 140, 248, 0.14); border-color: rgba(129, 140, 248, 0.30); }
-.tile-cat-cards     { color: #fde7a7; background: rgba(251, 191, 36, 0.14);  border-color: rgba(251, 191, 36, 0.30); }
-.tile-cat-dice      { color: #fec7d0; background: rgba(251, 113, 133, 0.14); border-color: rgba(251, 113, 133, 0.30); }
-.tile-cat-board     { color: #b6f3d8; background: rgba(52, 211, 153, 0.14);  border-color: rgba(52, 211, 153, 0.30); }
-.tile-cat-arcade    { color: #bae6fd; background: rgba(56, 189, 248, 0.14);  border-color: rgba(56, 189, 248, 0.30); }
+.tile-cat-s { color: #c7cdfe; background: rgba(129, 140, 248, 0.14); border-color: rgba(129, 140, 248, 0.30); }
+.tile-cat-c     { color: #fde7a7; background: rgba(251, 191, 36, 0.14);  border-color: rgba(251, 191, 36, 0.30); }
+.tile-cat-d      { color: #fec7d0; background: rgba(251, 113, 133, 0.14); border-color: rgba(251, 113, 133, 0.30); }
+.tile-cat-b     { color: #b6f3d8; background: rgba(52, 211, 153, 0.14);  border-color: rgba(52, 211, 153, 0.30); }
+.tile-cat-a    { color: #bae6fd; background: rgba(56, 189, 248, 0.14);  border-color: rgba(56, 189, 248, 0.30); }
 
 .tile-title {
   font-weight: var(--weight-semibold);

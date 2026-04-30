@@ -136,9 +136,11 @@
 }
 
 /* ---------- Hand / cards row ---------- */
-[class$="-hand"][class*="-"],
-[class$="-cards"][class*="-"],
-[class$="-hands"][class*="-"] {
+/* Excluded: lobby/shell/picker classes that happen to end in -cards/-hand
+   but live outside any game frame. */
+[class$="-hand"][class*="-"]:not([class*="tile"]):not([class*="lobby"]),
+[class$="-cards"][class*="-"]:not([class*="tile"]):not([class*="lobby"]):not([class*="theme"]),
+[class$="-hands"][class*="-"]:not([class*="tile"]):not([class*="lobby"]) {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -169,9 +171,11 @@
 }
 
 /* ---------- Card faces (in casino games) ---------- */
-[class$="-hand"][class*="-"] > div,
-[class$="-cards"][class*="-"] > div,
-[class$="-card"][class*="-"]:not([class*="-cards"]):not([class*="-card-"]) {
+/* Excluded: lobby tile children (a `tile--cat-c` lobby tile would otherwise
+   match `[class$="-c"]`-ish patterns and turn its title/desc/foot into card faces). */
+[class$="-hand"][class*="-"]:not([class*="tile"]):not([class*="lobby"]) > div,
+[class$="-cards"][class*="-"]:not([class*="tile"]):not([class*="lobby"]):not([class*="theme"]) > div,
+[class$="-card"][class*="-"]:not([class*="-cards"]):not([class*="-card-"]):not([class*="tile"]):not([class*="lobby"]):not([class*="theme"]) {
   font-family: Georgia, "Times New Roman", "Hoefler Text", serif;
   font-size: 1.5rem;
   font-weight: 900;

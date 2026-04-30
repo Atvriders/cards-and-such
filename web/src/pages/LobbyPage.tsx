@@ -25,6 +25,17 @@ const CATEGORY_GLYPHS: Record<GameCategory, string> = {
   arcade: "✦",
 };
 
+// Short suffixes used in className modifiers — chosen to NOT collide with
+// engine attribute selectors that match `[class$="-cards"]`, `[class$="-board"]`,
+// etc. Pure cosmetic; semantics still come from g.category.
+const CATEGORY_TAG: Record<GameCategory, string> = {
+  solitaire: "s",
+  cards: "c",
+  dice: "d",
+  board: "b",
+  arcade: "a",
+};
+
 const FEATURED_IDS = [
   "klondike",
   "freecell",
@@ -496,13 +507,13 @@ function GameCard({ game: g }: { game: GamePlugin }): JSX.Element {
   return (
     <Link
       to={`/play/${g.id}`}
-      className={`tile tile--cat-${g.category}`}
+      className={`tile tile--cat-${CATEGORY_TAG[g.category]}`}
       data-testid={`tile-${g.id}`}
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
       <div className="tile-meta">
-        <span className={`tile-cat tile-cat-${g.category}`}>
+        <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
           <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
           {CATEGORY_LABELS[g.category]}
         </span>
@@ -553,7 +564,7 @@ function FamilyCard({
     <button
       type="button"
       onClick={onClick}
-      className={`tile tile--cat-${category} tile--family`}
+      className={`tile tile--cat-${CATEGORY_TAG[category]} tile--family`}
       data-testid={testIdOverride ?? `tile-${family.id}`}
       aria-haspopup="dialog"
       aria-label={`${family.label} — ${memberCount} variants`}
@@ -561,7 +572,7 @@ function FamilyCard({
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
       <div className="tile-meta">
-        <span className={`tile-cat tile-cat-${category}`}>
+        <span className={`tile-cat tile-cat-${CATEGORY_TAG[category]}`}>
           <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[category]}</span>
           {CATEGORY_LABELS[category]}
         </span>
@@ -611,14 +622,14 @@ function FeaturedTile({
       <button
         type="button"
         onClick={() => onOpenFamily(familyId)}
-        className={`tile tile--cat-${g.category} tile--featured tile--family`}
+        className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured tile--family`}
         data-testid={`tile-${familyId}`}
         aria-haspopup="dialog"
       >
         <span className="tile-stripe" aria-hidden="true" />
         <span className="tile-sheen" aria-hidden="true" />
         <div className="tile-meta">
-          <span className={`tile-cat tile-cat-${g.category}`}>
+          <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
             <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
             {CATEGORY_LABELS[g.category]}
           </span>
@@ -635,13 +646,13 @@ function FeaturedTile({
   return (
     <Link
       to={`/play/${g.id}`}
-      className={`tile tile--cat-${g.category} tile--featured`}
+      className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured`}
       data-testid={`feat-tile-${g.id}`}
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
       <div className="tile-meta">
-        <span className={`tile-cat tile-cat-${g.category}`}>
+        <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
           <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
           {CATEGORY_LABELS[g.category]}
         </span>
