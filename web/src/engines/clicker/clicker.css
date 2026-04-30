@@ -8,12 +8,16 @@
  * Single-class-per-element DOM, so `[class$="-suffix"]` selectors cleanly
  * reach every game without coupling to any one prefix.
  *
+ * Every broad attribute selector is hardened with :not() exclusions so it
+ * cannot bleed onto shell/lobby/play-page/theme-picker classes that share
+ * the same suffix (e.g. .play-iconbtn, .mp-board, .lobby-grid).
+ *
  * Anything inside `@media (prefers-reduced-motion: reduce)` strips the
  * pulse / spawn / pop motion for vestibular-sensitive users.
  */
 
 /* ---------- Outer wrap ---------- */
-[class$="-wrap"] {
+[class$="-wrap"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +33,7 @@
 }
 
 /* ---------- HUD ---------- */
-[class$="-header"] {
+[class$="-header"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,14 +50,14 @@
   font-variant-numeric: tabular-nums;
 }
 
-[class$="-info"] {
+[class$="-info"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 0.95rem;
   font-weight: 600;
   color: #475569;
   letter-spacing: 0.01em;
 }
 
-[class$="-score"] {
+[class$="-score"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.35rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
@@ -65,7 +69,7 @@
   font-family: "SF Mono", "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
 }
 
-[class$="-timer"] {
+[class$="-timer"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.45rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
@@ -80,7 +84,7 @@
 }
 
 /* ---------- Stage / board ---------- */
-[class$="-board"] {
+[class$="-board"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   position: relative;
   width: 100%;
   min-height: 400px;
@@ -101,7 +105,7 @@
 }
 
 /* Subtle scanlines + grid for arcade depth */
-[class$="-board"]::before {
+[class$="-board"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"])::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -114,7 +118,7 @@
   opacity: 0.55;
 }
 
-[class$="-board"]::after {
+[class$="-board"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"])::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -131,7 +135,7 @@
 }
 
 /* ---------- Targets ---------- */
-[class$="-target"] {
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   position: absolute;
   font-size: 2.6rem;
   line-height: 1;
@@ -153,26 +157,26 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-[class$="-target"]:hover {
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):hover {
   animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
              clicker-pulse 0.9s ease-in-out 320ms infinite;
   filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45))
           drop-shadow(0 0 12px rgba(255, 255, 255, 0.35));
 }
 
-[class$="-target"]:active {
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):active {
   transform: translate(-50%, -50%) scale(0.86) !important;
   transition: transform 80ms ease-out;
 }
 
-[class$="-target"]:focus-visible {
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):focus-visible {
   outline: 2px solid #60a5fa;
   outline-offset: 4px;
   border-radius: 50%;
 }
 
 /* Sparkle particle on hover */
-[class$="-target"]::before {
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"])::before {
   content: "";
   position: absolute;
   inset: -8px;
@@ -184,20 +188,20 @@
   z-index: -1;
 }
 
-[class$="-target"]:hover::before {
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):hover::before {
   opacity: 1;
   animation: clicker-flash 1.2s ease-out infinite;
 }
 
 /* Hit / pop class (some games may toggle this) */
-[class$="-target"].hit,
-[class$="-target"].popping {
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).hit,
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).popping {
   animation: clicker-pop 280ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
   pointer-events: none;
 }
 
 /* ---------- Game over ---------- */
-[class$="-done"] {
+[class$="-done"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   text-align: center;
   padding: 32px 28px;
   border-radius: 18px;
@@ -211,7 +215,7 @@
   animation: clicker-bounce 480ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-[class$="-done"] h2 {
+[class$="-done"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) h2 {
   margin: 0 0 12px;
   font-size: 1.7rem;
   font-weight: 900;
@@ -222,7 +226,7 @@
   color: transparent;
 }
 
-[class$="-final"] {
+[class$="-final"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 2rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
@@ -298,7 +302,7 @@
 
 /* The hover-pulse uses a non-translated variant for elements without
    the centering transform (timers, etc.). */
-[class$="-timer"] {
+[class$="-timer"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   animation-name: clicker-timer-pulse;
 }
 
@@ -309,40 +313,40 @@
 
 /* ---------- Mobile / responsive ---------- */
 @media (max-width: 540px) {
-  [class$="-wrap"] {
+  [class$="-wrap"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     padding: var(--sp-3, 12px);
     gap: 10px;
   }
-  [class$="-header"] {
+  [class$="-header"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     padding: 8px 12px;
     font-size: 0.9rem;
   }
-  [class$="-board"] {
+  [class$="-board"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     height: 360px;
     min-height: 360px;
     border-radius: 14px;
   }
-  [class$="-target"] {
+  [class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     font-size: 2.2rem;
     min-width: 52px;
     min-height: 52px;
   }
-  [class$="-score"] { font-size: 1.2rem; }
-  [class$="-timer"] { font-size: 1.25rem; }
+  [class$="-score"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) { font-size: 1.2rem; }
+  [class$="-timer"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) { font-size: 1.25rem; }
 }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  [class$="-target"],
-  [class$="-target"]:hover,
-  [class$="-target"].hit,
-  [class$="-target"].popping,
-  [class$="-timer"],
-  [class$="-done"] {
+  [class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):hover,
+  [class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).hit,
+  [class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).popping,
+  [class$="-timer"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-done"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     animation: none !important;
     transition: none !important;
   }
-  [class$="-target"]::before {
+  [class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"])::before {
     display: none;
   }
 }

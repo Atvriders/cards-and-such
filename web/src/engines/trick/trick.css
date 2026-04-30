@@ -20,8 +20,8 @@
  */
 
 /* ---------- Outer felt-table wrap (deep navy) ---------- */
-[class$="-game"][class*="-"][class],
-[class$="-wrap"][class*="-"][class] {
+[class$="-game"][class*="-"][class]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-wrap"][class*="-"][class]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   /* These compound selectors anchor to game-level wrappers; the root
      game class always carries a `-game` or `-wrap` suffix. */
 }
@@ -99,8 +99,8 @@
 }
 
 /* Headers / status strips */
-[class$="-header"],
-[class$="-status"] {
+[class$="-header"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-status"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -121,7 +121,7 @@
     0 6px 16px -10px rgba(0, 0, 0, 0.5);
 }
 
-[class$="-label"] {
+[class$="-label"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -129,7 +129,7 @@
 }
 
 /* Bot / opponent rows */
-[class$="-bot-row"] {
+[class$="-bot-row"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,12 +139,12 @@
 }
 
 /* Card back stacks (compact face-down deck) */
-[class$="-card-backs"] {
+[class$="-card-backs"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   gap: 2px;
 }
 
-[class$="-card-back"] {
+[class$="-card-back"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   width: 26px;
   height: 38px;
   background:
@@ -157,7 +157,7 @@
 }
 
 /* Trick (center play area) */
-[class$="-trick"] {
+[class$="-trick"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,7 +170,7 @@
   position: relative;
 }
 
-[class$="-trick-cards"] {
+[class$="-trick-cards"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -179,14 +179,14 @@
   align-items: center;
 }
 
-[class$="-trick-slot"] {
+[class$="-trick-slot"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3px;
 }
 
-[class$="-trick-name"] {
+[class$="-trick-name"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -194,15 +194,15 @@
 }
 
 /* Player hand */
-[class$="-player-area"] {
+[class$="-player-area"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
 }
 
-[class$="-player-hand"],
-[class$="-hand"] {
+[class$="-player-hand"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-hand"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
@@ -287,8 +287,8 @@
   cursor: pointer;
 }
 
-[class$="-player-hand"] .card:hover,
-[class$="-hand"] .card:hover {
+[class$="-player-hand"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) .card:hover,
+[class$="-hand"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) .card:hover {
   transform: translateY(-7px) !important;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.85) inset,
@@ -313,8 +313,8 @@
 }
 
 /* Result panel */
-[class$="-result"],
-[class$="-done"] {
+[class$="-result"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-done"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   background: linear-gradient(180deg, #ffffff, #f8fafc) !important;
   color: #1f2937 !important;
   padding: 24px 28px !important;
@@ -327,8 +327,8 @@
   animation: trick-bounce 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-[class$="-result"] h2,
-[class$="-done"] h2 {
+[class$="-result"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) h2,
+[class$="-done"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) h2 {
   margin: 0 0 8px !important;
   font-size: 1.5rem !important;
   font-weight: 900;
@@ -351,7 +351,8 @@
 
 /* ---------- Mobile ---------- */
 @media (max-width: 540px) {
-  [class$="-game"], [class$="-wrap"] {
+  [class$="-game"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-wrap"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     padding: 14px 10px !important;
     gap: 10px !important;
     border-radius: 14px !important;
@@ -367,13 +368,13 @@
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .card,
-  [class$="-result"],
-  [class$="-done"] {
+  [class$="-result"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-done"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     animation: none !important;
     transition: none !important;
   }
-  [class$="-player-hand"] .card:hover,
-  [class$="-hand"] .card:hover {
+  [class$="-player-hand"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) .card:hover,
+  [class$="-hand"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) .card:hover {
     transform: none !important;
   }
 }

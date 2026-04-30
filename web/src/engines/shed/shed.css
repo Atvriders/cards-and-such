@@ -272,7 +272,7 @@
  * escoba, fifteens, daifugo, pusoy-dos, big-two, mighty, mao,
  * palace, presidents, scum, shithead, parliament, hanabi, etc.).
  * ----------------------------------------------------------------*/
-[class$="-wrap"]:not([class*="dm-"]):not([class*="dr-"]):not([class*="bz-"]):not([class*="g-wrap"]):not([class*="coop-"]) {
+[class$="-wrap"]:not([class*="dm-"]):not([class*="dr-"]):not([class*="bz-"]):not([class*="g-wrap"]):not([class*="coop-"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -292,7 +292,7 @@
     0 1px 0 rgba(255, 255, 255, 0.08) inset,
     0 30px 60px -28px rgba(0, 0, 0, 0.65);
 }
-[class$="-info"]:not([class*="dm-"]):not([class*="bz-"]) {
+[class$="-info"]:not([class*="dm-"]):not([class*="bz-"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -306,7 +306,7 @@
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.10);
 }
-[class$="-score"]:not([class*="dm-"]):not([class*="g-score"]) {
+[class$="-score"]:not([class*="dm-"]):not([class*="g-score"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.45rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
@@ -317,7 +317,7 @@
   color: transparent;
   text-shadow: 0 0 22px rgba(251, 191, 36, 0.30);
 }
-[class$="-row"]:not([class*="dm-"]) {
+[class$="-row"]:not([class*="dm-"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -325,7 +325,7 @@
   align-items: flex-end;
   padding: 6px 4px;
 }
-[class$="-btn"]:not([class*="dm-btn"]):not([class*="g-btn"]):not([class*="coop-btn"]):not([class*="bet-btn"]):not([class*="dt-deal-btn"]):not([class*="fold-btn"]):not(.surrender-btn) {
+[class$="-btn"]:not([class*="dm-btn"]):not([class*="g-btn"]):not([class*="coop-btn"]):not([class*="bet-btn"]):not([class*="dt-deal-btn"]):not([class*="fold-btn"]):not(.surrender-btn):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   appearance: none;
   -webkit-appearance: none;
   border: none;
@@ -344,20 +344,20 @@
     0 0 0 1px rgba(0, 0, 0, 0.20);
   transition: transform 120ms ease-out, filter 120ms ease-out;
 }
-[class$="-btn"]:not([class*="dm-btn"]):not([class*="g-btn"]):not([class*="coop-btn"]):hover:not(:disabled) {
+[class$="-btn"]:not([class*="dm-btn"]):not([class*="g-btn"]):not([class*="coop-btn"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):hover:not(:disabled) {
   transform: translateY(-1px);
   filter: brightness(1.07);
 }
-[class$="-btn"]:not([class*="dm-btn"]):not([class*="g-btn"]):not([class*="coop-btn"]):disabled {
+[class$="-btn"]:not([class*="dm-btn"]):not([class*="g-btn"]):not([class*="coop-btn"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):disabled {
   opacity: 0.45;
   cursor: not-allowed;
   filter: grayscale(0.4);
 }
-[class$="-btn"][class*=".alt"],
-[class$="-btn"].alt {
+[class$="-btn"][class*=".alt"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-btn"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).alt {
   background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%) !important;
 }
-[class$="-result"]:not([class*="dm-"]):not([class*="bjs-"]):not([class*="aubj-"]):not([class*="pontoon-"]):not([class*="s21-"]):not([class*="tcp-"]):not([class*="cw-"]):not([class*="dt-"]):not([class*="dr-"]):not([class*="bz-"]):not([class*="lir-"]):not([class*="rd-"]):not([class*="rtb-"]):not([class*="msstud-"]):not([class*="ft-"]):not([class*="pai-gow-"]) {
+[class$="-result"]:not([class*="dm-"]):not([class*="bjs-"]):not([class*="aubj-"]):not([class*="pontoon-"]):not([class*="s21-"]):not([class*="tcp-"]):not([class*="cw-"]):not([class*="dt-"]):not([class*="dr-"]):not([class*="bz-"]):not([class*="lir-"]):not([class*="rd-"]):not([class*="rtb-"]):not([class*="msstud-"]):not([class*="ft-"]):not([class*="pai-gow-"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.05rem;
   font-weight: 700;
   padding: 10px 18px;
@@ -368,7 +368,7 @@
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
-[class$="-done"]:not([class*="dm-"]):not([class*="dr-"]):not([class*="bz-"]):not([class*="coop-"]) {
+[class$="-done"]:not([class*="dm-"]):not([class*="dr-"]):not([class*="bz-"]):not([class*="coop-"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   text-align: center;
   padding: 26px;
   border-radius: 16px;
@@ -380,12 +380,12 @@
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
     0 24px 50px -22px rgba(0, 0, 0, 0.6);
 }
-[class$="-done"] h2 {
+[class$="-done"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) h2 {
   margin: 0 0 8px;
   font-weight: 900;
   letter-spacing: -0.02em;
 }
-[class$="-final"]:not([class*="dm-"]):not([class*="g-final"]):not([class*="coop-"]) {
+[class$="-final"]:not([class*="dm-"]):not([class*="g-final"]):not([class*="coop-"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.7rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
@@ -395,7 +395,7 @@
   color: transparent;
   font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
 }
-[class$="-feedback"] {
+[class$="-feedback"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 0.95rem;
   font-weight: 600;
   padding: 8px 14px;

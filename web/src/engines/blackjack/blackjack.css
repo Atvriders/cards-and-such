@@ -18,6 +18,10 @@
  *   [class$="-result"], [class$="-game-over"], [class$="-special"]
  *   [class$="-vs"]                                           dealer-vs-player
  *
+ * Every broad attribute selector is hardened with :not() exclusions so it
+ * cannot bleed onto shell/lobby/play-page/theme-picker classes that share
+ * the same suffix (e.g. .play-iconbtn, .tile--cat-cards, .lobby-grid).
+ *
  * Felt-table dark green/maroon, glassy HUD, modern card faces, gradient
  * buttons, win/loss overlay. Mobile responsive + reduced-motion safe.
  */
@@ -40,8 +44,8 @@
 .choldem-root,
 .cwm-root,
 .bonus-root,
-[class$="-root"][class*="-"],
-[class$="-table"][class*="-"] {
+[class$="-root"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-table"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +72,7 @@
 }
 
 /* ---------- HUD strip ---------- */
-[class$="-header"][class*="-"] {
+[class$="-header"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -88,10 +92,10 @@
 }
 
 /* ---------- Section panels (bonus, paytable, side-bet) ---------- */
-[class$="-section"][class*="-"],
-[class$="-bonus"][class*="-"],
-[class$="-paytable"][class*="-"],
-[class$="-special"][class*="-"],
+[class$="-section"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-bonus"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-paytable"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-special"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
 .bjs-hand-group {
   display: flex;
   flex-direction: column;
@@ -111,20 +115,20 @@
 }
 
 /* ---------- Labels & values ---------- */
-[class$="-label"][class*="-"] {
+[class$="-label"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   opacity: 0.78;
   color: rgba(255, 255, 255, 0.85);
 }
-[class$="-value"][class*="-"] {
+[class$="-value"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.05rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   color: #fef3c7;
 }
-[class$="-bankroll"][class*="-"] {
+[class$="-bankroll"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.2rem;
   font-weight: 900;
   font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
@@ -138,9 +142,9 @@
 /* ---------- Hand / cards row ---------- */
 /* Excluded: lobby/shell/picker classes that happen to end in -cards/-hand
    but live outside any game frame. */
-[class$="-hand"][class*="-"]:not([class*="tile"]):not([class*="lobby"]),
-[class$="-cards"][class*="-"]:not([class*="tile"]):not([class*="lobby"]):not([class*="theme"]),
-[class$="-hands"][class*="-"]:not([class*="tile"]):not([class*="lobby"]) {
+[class$="-hand"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-cards"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-hands"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -150,7 +154,7 @@
 }
 
 /* ---------- Dealer-vs-player split ---------- */
-[class$="-vs"][class*="-"] {
+[class$="-vs"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.1rem;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.65);
@@ -173,9 +177,9 @@
 /* ---------- Card faces (in casino games) ---------- */
 /* Excluded: lobby tile children (a `tile--cat-c` lobby tile would otherwise
    match `[class$="-c"]`-ish patterns and turn its title/desc/foot into card faces). */
-[class$="-hand"][class*="-"]:not([class*="tile"]):not([class*="lobby"]) > div,
-[class$="-cards"][class*="-"]:not([class*="tile"]):not([class*="lobby"]):not([class*="theme"]) > div,
-[class$="-card"][class*="-"]:not([class*="-cards"]):not([class*="-card-"]):not([class*="tile"]):not([class*="lobby"]):not([class*="theme"]) {
+[class$="-hand"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) > div,
+[class$="-cards"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) > div,
+[class$="-card"][class*="-"]:not([class*="-cards"]):not([class*="-card-"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-family: Georgia, "Times New Roman", "Hoefler Text", serif;
   font-size: 1.5rem;
   font-weight: 900;
@@ -198,14 +202,14 @@
   transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
   animation: bj-deal 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-[class*="-card"].red,
-[class*="-card"][class*="-h"],
-[class*="-card"][class*="-d"] {
+[class*="-card"].red:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class*="-card"][class*="-h"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class*="-card"][class*="-d"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   color: #c8102e;
 }
-[class$="-card"][class*="hidden"],
-[class$="-card"][class*="back"],
-[class$="-card"][class*="empty"] {
+[class$="-card"][class*="hidden"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-card"][class*="back"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-card"][class*="empty"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   background: linear-gradient(135deg, #1e3a8a 0%, #0c1a4d 100%);
   color: transparent;
   background-image:
@@ -214,18 +218,18 @@
 }
 
 /* ---------- Action buttons ---------- */
-[class$="-actions"][class*="-"],
-[class$="-bets"][class*="-"] {
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-bets"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
   margin: 6px 0;
 }
-[class$="-actions"][class*="-"] button,
-[class$="-bets"][class*="-"] button,
-[class$="-deal-btn"][class*="-"],
-[class$="-btn"][class*="-"]:not([class*=".dm-btn"]):not([class*=".g-btn"]):not([class*=".coop-btn"]) {
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button,
+[class$="-bets"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button,
+[class$="-deal-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+[class$="-btn"][class*="-"]:not([class*=".dm-btn"]):not([class*=".g-btn"]):not([class*=".coop-btn"]):not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   appearance: none;
   -webkit-appearance: none;
   border: none;
@@ -245,45 +249,45 @@
     0 0 0 1px rgba(0, 0, 0, 0.20);
   transition: transform 120ms ease-out, filter 120ms ease-out;
 }
-[class$="-actions"][class*="-"] button:hover:not(:disabled),
-[class$="-bets"][class*="-"] button:hover:not(:disabled),
-[class$="-btn"][class*="-"]:hover:not(:disabled) {
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:hover:not(:disabled),
+[class$="-bets"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:hover:not(:disabled),
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):hover:not(:disabled) {
   transform: translateY(-1px);
   filter: brightness(1.07);
 }
-[class$="-actions"][class*="-"] button:active:not(:disabled),
-[class$="-btn"][class*="-"]:active:not(:disabled) {
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:active:not(:disabled),
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):active:not(:disabled) {
   transform: translateY(1px);
   filter: brightness(0.95);
 }
-[class$="-actions"][class*="-"] button:disabled,
-[class$="-bets"][class*="-"] button:disabled,
-[class$="-btn"][class*="-"]:disabled {
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:disabled,
+[class$="-bets"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:disabled,
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):disabled {
   opacity: 0.45;
   cursor: not-allowed;
   filter: grayscale(0.4);
 }
-[class$="-actions"][class*="-"] button.primary,
-[class$="-btn"][class*="-"].primary {
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button.primary,
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).primary {
   background: linear-gradient(180deg, #34d399 0%, #059669 100%);
   color: #fff;
 }
-[class$="-actions"][class*="-"] button.danger,
-[class$="-btn"][class*="-"].danger,
-[class$="-actions"][class*="-"] button.fold-btn,
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button.danger,
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).danger,
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button.fold-btn,
 .fold-btn,
 .surrender-btn {
   background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
   color: #fff;
 }
-[class$="-actions"][class*="-"] button.secondary,
-[class$="-btn"][class*="-"].secondary {
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button.secondary,
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]).secondary {
   background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%);
   color: #fff;
 }
 
 /* ---------- Result + game-over overlay ---------- */
-[class$="-result"][class*="-"] {
+[class$="-result"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.05rem;
   font-weight: 700;
   padding: 10px 18px;
@@ -297,7 +301,7 @@
   font-variant-numeric: tabular-nums;
   animation: bj-float 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-[class$="-game-over"][class*="-"] {
+[class$="-game-over"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   text-align: center;
   padding: 28px 26px;
   border-radius: 18px;
@@ -313,7 +317,7 @@
     0 0 0 1px rgba(15, 23, 42, 0.08);
   animation: bj-bounce 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-[class$="-switch-prompt"][class*="-"] {
+[class$="-switch-prompt"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 1.1rem;
   font-weight: 700;
   background: linear-gradient(180deg, rgba(251, 191, 36, 0.30), rgba(251, 191, 36, 0.15));
@@ -322,7 +326,7 @@
   text-align: center;
   border: 1px solid rgba(251, 191, 36, 0.4);
 }
-[class$="-phase-label"][class*="-"] {
+[class$="-phase-label"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -351,21 +355,22 @@
 @media (max-width: 540px) {
   .bjs, .aubj, .pontoon, .s21, .tcp-root, .pai-gow-root, .msstud,
   .cw-root, .dt-root, .lir-root, .rd-root, .rtb-root, .ft-draw,
-  [class$="-root"][class*="-"], [class$="-table"][class*="-"] {
+  [class$="-root"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-table"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
     padding: 14px 12px;
     gap: 10px;
     border-radius: 14px;
   }
-  [class$="-header"][class*="-"] { gap: 0.9rem; padding: 6px 12px; font-size: 0.92rem; }
+  [class$="-header"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) { gap: 0.9rem; padding: 6px 12px; font-size: 0.92rem; }
 }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  [class$="-card"][class*="-"],
-  [class$="-result"][class*="-"],
-  [class$="-game-over"][class*="-"],
-  [class$="-hand"][class*="-"] > div,
-  [class$="-cards"][class*="-"] > div {
+  [class$="-card"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-result"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-game-over"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]),
+  [class$="-hand"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) > div,
+  [class$="-cards"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) > div {
     animation: none !important;
     transition: none !important;
   }
