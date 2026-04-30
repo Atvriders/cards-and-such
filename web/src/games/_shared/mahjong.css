@@ -1,83 +1,292 @@
+/* ============================================================
+   Shared Mahjong Engine Styles
+   Used by ~175 mahjong layouts (turtle, wheel, butterfly,
+   fortress, dragon, koi-fish, zen-garden, etc.)
+   Engine logic lives in mahjongEngine.ts — this file is purely
+   visual polish: tactile tiles, jade table, 3D depth, anims.
+   ============================================================ */
+
 .mahjong-shared {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  font-family: "Segoe UI", sans-serif;
+  gap: 16px;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
   user-select: none;
+  padding: 12px;
+  --tile-w: 36px;
+  --tile-h: 44px;
+  --tile-radius: 8px;
+  --tile-face: linear-gradient(180deg, #fffdf6 0%, #fbf6e1 55%, #f0ead4 100%);
+  --tile-edge: rgba(120, 90, 40, 0.55);
+  --suit-red: #b91c1c;
+  --suit-green: #166534;
+  --suit-blue: #1e3a8a;
+  --accent: #38bdf8;
 }
 
-.mahjong-shared .mahjong-info {
+/* ----------------------------- HUD ----------------------------- */
+
+.mahjong-shared .mahjong-info,
+.mahjong-shared .mahjong-hud {
   display: flex;
-  gap: 20px;
+  gap: 22px;
   font-size: 0.85rem;
-  color: #555;
+  color: #f5f3e7;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(20, 28, 18, 0.78), rgba(12, 18, 10, 0.85));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
+
+.mahjong-shared .mahjong-info span,
+.mahjong-shared .mahjong-hud span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------- BOARD ----------------------------- */
 
 .mahjong-shared .mahjong-board {
   position: relative;
   overflow: auto;
   max-width: 100%;
+  padding: 18px;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(110, 170, 100, 0.18), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(40, 80, 50, 0.25), transparent 60%),
+    linear-gradient(135deg, #1f2a1a 0%, #2d3d24 50%, #1a261b 100%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.012) 0 2px,
+      rgba(0, 0, 0, 0.025) 2px 4px
+    );
+  background-blend-mode: normal, normal, normal, overlay;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.06),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.4);
+  animation: boardEntry 0.55s ease-out both;
 }
+
+/* ---------------------------- TILE ----------------------------- */
 
 .mahjong-shared .mahjong-tile {
   position: absolute;
-  width: 32px;
-  height: 40px;
+  width: var(--tile-w);
+  height: var(--tile-h);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
-  border-radius: 4px;
-  border: 2px solid #8b7355;
-  background: #fdf6e3;
+  font-size: 1.25rem;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 700;
+  border-radius: var(--tile-radius);
+  border: 1px solid var(--tile-edge);
+  background: var(--tile-face);
+  color: #2b2418;
   cursor: pointer;
   box-sizing: border-box;
-  transition: box-shadow 0.1s, transform 0.1s;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  padding: 0;
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    filter 0.18s ease,
+    background 0.18s ease;
+  /* 3D depth: top highlight + bottom edge darkening + drop shadow */
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.28),
+    0 1px 0 rgba(0, 0, 0, 0.18),
+    inset 0 -3px 4px rgba(120, 90, 40, 0.18),
+    inset 0 2px 3px rgba(255, 255, 255, 0.7),
+    inset 1px 0 0 rgba(255, 255, 255, 0.45),
+    inset -1px 0 0 rgba(0, 0, 0, 0.12);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.55);
+  animation: tileFlip 0.45s cubic-bezier(0.2, 0.85, 0.3, 1.05) both;
 }
 
 .mahjong-shared .mahjong-tile:focus { outline: none; }
+.mahjong-shared .mahjong-tile:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
+/* Suit coloring — engine emits emoji tiles, so we tint via :is() ranges using
+   attribute selectors on aria-label content. Falls back to neutral ink. */
+.mahjong-shared .mahjong-tile[aria-label*="🀄"],
+.mahjong-shared .mahjong-tile[aria-label*="🌸"],
+.mahjong-shared .mahjong-tile[aria-label*="🌺"] {
+  color: var(--suit-red);
+}
+.mahjong-shared .mahjong-tile[aria-label*="🀅"],
+.mahjong-shared .mahjong-tile[aria-label*="🍀"] {
+  color: var(--suit-green);
+}
+.mahjong-shared .mahjong-tile[aria-label*="🀆"],
+.mahjong-shared .mahjong-tile[aria-label*="🀀"],
+.mahjong-shared .mahjong-tile[aria-label*="🀁"],
+.mahjong-shared .mahjong-tile[aria-label*="🀂"],
+.mahjong-shared .mahjong-tile[aria-label*="🀃"] {
+  color: var(--suit-blue);
+}
+
+/* Free / clickable */
 .mahjong-shared .mahjong-tile.free {
-  background: #fffef0;
-  border-color: #6b5228;
+  background:
+    linear-gradient(180deg, #fffef7 0%, #fdf7e0 55%, #f3edd6 100%);
 }
 
 .mahjong-shared .mahjong-tile.free:hover {
-  background: #fff9d6;
-  box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
   transform: translateY(-1px);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.35),
+    0 0 14px rgba(250, 230, 150, 0.45),
+    inset 0 -3px 4px rgba(120, 90, 40, 0.18),
+    inset 0 2px 3px rgba(255, 255, 255, 0.85),
+    inset 1px 0 0 rgba(255, 255, 255, 0.55),
+    inset -1px 0 0 rgba(0, 0, 0, 0.12);
+  filter: brightness(1.04);
 }
 
+.mahjong-shared .mahjong-tile.free:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 3px rgba(120, 90, 40, 0.18),
+    inset 0 1px 2px rgba(255, 255, 255, 0.55);
+}
+
+/* Selected — accent border + lift */
 .mahjong-shared .mahjong-tile.selected {
-  background: #dbeafe;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px #93c5fd;
+  background: linear-gradient(180deg, #e6f4ff 0%, #c9e6ff 100%);
+  border-color: #2563eb;
+  transform: translateY(-3px) scale(1.03);
+  z-index: 999;
+  box-shadow:
+    0 0 0 2px #38bdf8,
+    0 10px 18px rgba(56, 189, 248, 0.45),
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -3px 4px rgba(60, 100, 160, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.9);
 }
 
-.mahjong-shared .mahjong-tile.blocked {
-  background: #d1c4a8;
-  border-color: #a89070;
+/* Locked / blocked / covered tiles — desaturated, no hover */
+.mahjong-shared .mahjong-tile.blocked,
+.mahjong-shared .mahjong-tile.locked {
   cursor: not-allowed;
-  opacity: 0.7;
+  filter: brightness(0.62) saturate(0.5);
+  opacity: 0.85;
 }
 
-.mahjong-shared .mahjong-status {
-  font-size: 1.1rem;
+.mahjong-shared .mahjong-tile.blocked:hover,
+.mahjong-shared .mahjong-tile.locked:hover {
+  transform: none;
+  filter: brightness(0.62) saturate(0.5);
+}
+
+/* Matched — fade & scale out */
+.mahjong-shared .mahjong-tile.matched {
+  animation: tileMatch 0.32s ease-in forwards;
+  pointer-events: none;
+}
+
+/* -------------------- STATUS / GAME-OVER ----------------------- */
+
+.mahjong-shared .mahjong-status,
+.mahjong-shared .mahjong-final {
+  font-size: 1.05rem;
   font-weight: 700;
-  padding: 8px 20px;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  animation: tileFlip 0.4s ease-out both;
 }
 
-.mahjong-shared .mahjong-status.won {
-  background: #f0fff4;
+.mahjong-shared .mahjong-status.won,
+.mahjong-shared .mahjong-final.won {
+  background: linear-gradient(180deg, #f0fff4, #d8f5e0);
   border: 2px solid #48bb78;
-  color: #276749;
+  color: #1f5a3a;
 }
 
-.mahjong-shared .mahjong-status.lost {
-  background: #fff5f5;
+.mahjong-shared .mahjong-status.lost,
+.mahjong-shared .mahjong-final.lost {
+  background: linear-gradient(180deg, #fff5f5, #fbdada);
   border: 2px solid #fc8181;
-  color: #9b2c2c;
+  color: #8a2424;
+}
+
+/* --------------------- ANIMATIONS ------------------------------ */
+
+@keyframes tileFlip {
+  0%   { transform: rotateY(80deg) scale(0.85); opacity: 0; }
+  60%  { transform: rotateY(-8deg) scale(1.02); opacity: 1; }
+  100% { transform: rotateY(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes tileMatch {
+  0%   { transform: scale(1); opacity: 1; filter: brightness(1.4); }
+  50%  { transform: scale(1.18); opacity: 0.7; filter: brightness(1.6); }
+  100% { transform: scale(0.4); opacity: 0; filter: brightness(2); }
+}
+
+@keyframes boardEntry {
+  0%   { opacity: 0; transform: translateY(14px) scale(0.985); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --------------------- RESPONSIVE ------------------------------ */
+
+@media (max-width: 640px) {
+  .mahjong-shared {
+    gap: 10px;
+    padding: 6px;
+  }
+  .mahjong-shared .mahjong-board {
+    padding: 10px;
+    border-radius: 12px;
+  }
+  .mahjong-shared .mahjong-tile {
+    font-size: 1.05rem;
+  }
+  .mahjong-shared .mahjong-info,
+  .mahjong-shared .mahjong-hud {
+    font-size: 0.78rem;
+    padding: 8px 14px;
+    gap: 14px;
+  }
+}
+
+/* --------------------- REDUCED MOTION -------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .mahjong-shared .mahjong-board,
+  .mahjong-shared .mahjong-tile,
+  .mahjong-shared .mahjong-status,
+  .mahjong-shared .mahjong-final {
+    animation: none !important;
+  }
+  .mahjong-shared .mahjong-tile,
+  .mahjong-shared .mahjong-tile.free:hover,
+  .mahjong-shared .mahjong-tile.selected {
+    transition: none;
+    transform: none;
+  }
+  .mahjong-shared .mahjong-tile.matched {
+    opacity: 0;
+  }
 }
