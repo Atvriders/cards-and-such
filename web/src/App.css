@@ -188,7 +188,9 @@ body {
   letter-spacing: -0.005em;
   color: var(--text-100);
   background-color: var(--bg-0);
-  background-image: var(--bg-grad);
+  /* `--theme-bg` is set by themes.ts (applyTheme) on :root and falls back
+     to the original `--bg-grad` if no theme has been chosen yet. */
+  background-image: var(--theme-bg, var(--bg-grad));
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1068,6 +1070,37 @@ body .banana-btn {
 }
 body .banana-btn:hover {
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55));
+}
+
+/* =====================================================================
+   Theme felt overrides — opt-in via the `data-theme` attribute on :root.
+   ---------------------------------------------------------------------
+   `themes.ts` sets `document.documentElement.dataset.theme = <id>` and a
+   `--theme-felt` CSS variable. Engines paint their own emerald/navy/wine
+   felts as defaults; when a theme is active we override the felt-table
+   wrap backgrounds (`.sol-wrap`, `.dm-wrap`, `.cm-wrap`, …) so the user's
+   choice flows site-wide without touching every engine CSS individually.
+   The `--theme-felt` value already contains the radial highlights/shadows
+   so it's a complete drop-in for the original `background:` declaration.
+   ===================================================================== */
+:root[data-theme] body .sol-wrap,
+:root[data-theme] body .dm-wrap,
+:root[data-theme] body .cm-wrap,
+:root[data-theme] body .bj-wrap,
+:root[data-theme] body .blackjack-wrap,
+:root[data-theme] body .casino-wrap,
+:root[data-theme] body .poker-wrap,
+:root[data-theme] body .rummy-wrap,
+:root[data-theme] body .shed-wrap,
+:root[data-theme] body .trick-wrap,
+:root[data-theme] body .quiz-wrap,
+:root[data-theme] body .clicker-wrap,
+:root[data-theme] body .dr-wrap,
+:root[data-theme] body .bz-wrap,
+:root[data-theme] body .coop-wrap,
+:root[data-theme] body .ab-wrap,
+:root[data-theme] body .tp-wrap {
+  background: var(--theme-felt) !important;
 }
 
 /* =====================================================================

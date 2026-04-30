@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "./stores/auth.js";
 import { ToastHost } from "./ui/Toast.js";
+import ThemePicker from "./ui/ThemePicker.js";
 import "./AppShell.css";
 
 export default function AppShell(): JSX.Element {
@@ -15,6 +16,7 @@ export default function AppShell(): JSX.Element {
           <NavLink to="/leaderboard">Leaderboard</NavLink>
         </nav>
         <div className="user">
+          <ThemePicker />
           <span data-testid="current-user">{username}</span>
           <button onClick={logout} aria-label="logout">Sign out</button>
         </div>
