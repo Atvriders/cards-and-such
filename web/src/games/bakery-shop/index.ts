@@ -6,7 +6,7 @@ import { BakeryShop } from "./Game.js";
 export const bakeryShopPlugin = {
   id: "bakery-shop",
   title: "Bakery Shop",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Run a bakery over 25 days — bake croissants, muffins, cakes and more. Set quantities, prices, and feature items!",
   howToPlay: `Bakery Shop puts you in charge of a small artisan bakery for 25 days. Each morning, decide how many of each item to bake and what to charge before opening your doors.

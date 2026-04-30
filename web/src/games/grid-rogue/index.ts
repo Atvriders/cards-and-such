@@ -6,7 +6,7 @@ import { GridRogue } from "./Game.js";
 export const gridRoguePlugin = {
   id: "grid-rogue",
   title: "Grid Rogue",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Navigate a 10×10 ASCII dungeon, fight monsters, collect gold, and reach the exit across 5 floors.",
   howToPlay: `Grid Rogue is an ASCII-style turn-based dungeon crawler on a 10×10 grid. You start at the top-left corner and must reach the exit (X) at the bottom-right to advance to the next floor. There are 5 floors total — escape them all to win.

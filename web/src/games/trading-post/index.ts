@@ -6,7 +6,7 @@ import { TradingPost } from "./Game.js";
 export const tradingPostPlugin = {
   id: "trading-post",
   title: "Trading Post",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Buy low, sell high across 10 turns. React to market events and maximize your gold!",
   howToPlay: `Trading Post is a buy-low-sell-high merchant simulation played over 10 turns. You start with 200 gold and must trade five goods — Silk, Spice, Iron, Grain, and Gems — to build the largest fortune possible.

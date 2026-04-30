@@ -6,7 +6,7 @@ import { FishingVillage } from "./Game.js";
 export const fishingVillagePlugin = {
   id: "fishing-village",
   title: "Fishing Village",
-  category: "simulation",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Manage a fishing village over 14 days. Fish, sell, repair, and rest to maximize your end-season coins!",
   howToPlay: `Fishing Village is a daily-decision simulation spanning 14 days. Each day you choose one action that determines how you build your fortune as a seaside fisher.

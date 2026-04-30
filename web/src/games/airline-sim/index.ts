@@ -6,7 +6,7 @@ import { AirlineSim } from "./Game.js";
 export const airlineSimPlugin = {
   id: "airline-sim",
   title: "Airline Sim",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Build a small airline into a major carrier — manage routes, fleet, fuel costs, and safety over 16 quarters!",
   howToPlay: `Airline Sim puts you in the cockpit of a startup airline for 16 quarters (4 years). Starting with 2 planes and $1000, expand your fleet and optimize routes to build a profitable carrier.

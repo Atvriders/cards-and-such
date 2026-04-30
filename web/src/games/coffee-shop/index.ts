@@ -6,7 +6,7 @@ import { CoffeeShop } from "./Game.js";
 export const coffeeShopPlugin = {
   id: "coffee-shop",
   title: "Coffee Shop",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Brew and sell coffee drinks over 28 days. Set batch size, price, and invest in upgrades!",
   howToPlay: `Coffee Shop puts you behind the counter of a small café for 28 days. Each day you decide how many cups to prepare, what to charge, and which drink to feature — then see how many you sell.

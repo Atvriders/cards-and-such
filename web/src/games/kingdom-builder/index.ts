@@ -6,7 +6,7 @@ import { KingdomBuilder } from "./Game.js";
 export const kingdomBuilderPlugin = {
   id: "kingdom-builder",
   title: "Kingdom Builder",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Place tiles on a 5×5 grid to score points. Cluster matching tiles and build combos!",
   howToPlay: `Kingdom Builder is a tile-placement strategy game played on a 5×5 grid. You place 15 tiles drawn from a pool to maximize your score before the grid fills up.

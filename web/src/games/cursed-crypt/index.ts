@@ -6,7 +6,7 @@ import { CursedCrypt } from "./Game.js";
 export const cursedCryptPlugin = {
   id: "cursed-crypt",
   title: "Cursed Crypt",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "A 6-room linear dungeon delve with binary choices. Fight, dodge traps, and loot your way to the Lich!",
   howToPlay: `Cursed Crypt is a choice-driven dungeon delve through six rooms: five randomized encounters and the fearsome Lich boss at the end.

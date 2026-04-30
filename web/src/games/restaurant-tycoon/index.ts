@@ -6,7 +6,7 @@ import { RestaurantTycoon } from "./Game.js";
 export const restaurantTycoonPlugin = {
   id: "restaurant-tycoon",
   title: "Restaurant Tycoon",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Run your own restaurant — manage staff, set the menu price, and build your reputation over 30 days!",
   howToPlay: `Restaurant Tycoon puts you in charge of a dining establishment for 30 days. Your goal is to maximize profit by balancing staff, pricing, and marketing.

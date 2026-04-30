@@ -6,7 +6,7 @@ import { ResourceChain } from "./Game.js";
 export const resourceChainPlugin = {
   id: "resource-chain",
   title: "Resource Chain",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Build a production chain from seeds to bread. Manage supply and sell at peak demand!",
   howToPlay: `Resource Chain is a production management game played over 20 turns. You control a supply chain from raw seeds all the way to baked bread, and your goal is to accumulate as many coins as possible.

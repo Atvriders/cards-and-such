@@ -6,7 +6,7 @@ import { GameDevStudio } from "./Game.js";
 export const gameDevStudioPlugin = {
   id: "game-dev-studio",
   title: "Game Dev Studio",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Run a small game studio over 24 months — manage a dev team, build hype, choose genres, and ship games that sell!",
   howToPlay: `Game Dev Studio puts you in charge of an indie game development company for 24 months. Your goal is to release games that earn strong reviews and high sales.

@@ -6,7 +6,7 @@ import { HotelTycoon } from "./Game.js";
 export const hotelTycoonPlugin = {
   id: "hotel-tycoon",
   title: "Hotel Tycoon",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Manage a hotel over 20 weeks — set nightly rates, expand rooms, upgrade amenities and maximize occupancy!",
   howToPlay: `Hotel Tycoon puts you in charge of a small hotel for 20 weeks. Starting with 10 rooms and $600, grow your hotel into a thriving business by managing rates, capacity, and guest experience.

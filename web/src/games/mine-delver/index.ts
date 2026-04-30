@@ -6,7 +6,7 @@ import { MineDelver } from "./Game.js";
 export const mineDelverPlugin = {
   id: "mine-delver",
   title: "Mine Delver",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Dig through 10 rows of the mine, collect ore and gems, avoid monsters and lava, reach the ladder!",
   howToPlay: `Mine Delver is a digging roguelike. The mine is an 8×10 grid of hidden tiles. You start above the top row and must dig your way down row by row to find the escape ladder at the bottom.

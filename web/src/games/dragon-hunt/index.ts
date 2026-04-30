@@ -6,7 +6,7 @@ import { DragonHunt } from "./Game.js";
 export const dragonHuntPlugin = {
   id: "dragon-hunt",
   title: "Dragon Hunt",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Scale a tower of 8 floors, managing HP and mana across Strike, Spellfire, Ward, and Rest actions.",
   howToPlay: `Dragon Hunt is a turn-based dungeon scaler. You must defeat 8 guardians on your way up a cursed tower — Guard, Knight, Mage, Warlord, Demon, Lich, Wyvern, and finally the Dragon itself.

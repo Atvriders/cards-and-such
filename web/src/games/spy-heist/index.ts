@@ -6,7 +6,7 @@ import { SpyHeist } from "./Game.js";
 export const spyHeistPlugin = {
   id: "spy-heist",
   title: "Spy Heist",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Plan a 6-stage heist. Choose your approach wisely — too much heat and you're caught!",
   howToPlay: `Spy Heist is a risk-management heist game with 6 stages. Each stage presents three tactical choices with different success rates, loot rewards, and detection risks.

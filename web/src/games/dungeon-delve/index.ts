@@ -6,7 +6,7 @@ import { DungeonDelve } from "./Game.js";
 export const dungeonDelvePlugin = {
   id: "dungeon-delve",
   title: "Dungeon Delve",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Fight through 10 dungeon rooms using a deck of 20 cards. Block, attack, heal — survive to the end!",
   howToPlay: `Dungeon Delve is a card-based dungeon crawler. You fight through 10 increasingly dangerous rooms using a 20-card deck of combat abilities.

@@ -6,7 +6,7 @@ import { TowerDefenseMini } from "./Game.js";
 export const towerDefenseMiniPlugin = {
   id: "tower-defense-mini",
   title: "Tower Defense Mini",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Place towers on a 8×6 grid to stop 10 waves of enemies from reaching your base!",
   howToPlay: `Tower Defense Mini is a classic tower defense game on a compact 8×6 grid. Enemies follow a winding path toward your base — your job is to stop them with strategically placed towers.

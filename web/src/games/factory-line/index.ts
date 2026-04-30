@@ -6,7 +6,7 @@ import { FactoryLine } from "./Game.js";
 export const factoryLinePlugin = {
   id: "factory-line",
   title: "Factory Line",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Manage a factory floor over 24 shifts — fill production orders, upgrade machines, control quality and maximize profit!",
   howToPlay: `Factory Line puts you in charge of a small manufacturing plant for 24 production shifts. Your goal is to fulfill customer orders and maximize profit.

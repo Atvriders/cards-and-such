@@ -6,7 +6,7 @@ import { AlchemyShop } from "./Game.js";
 export const alchemyShopPlugin = {
   id: "alchemy-shop",
   title: "Alchemy Shop",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Buy ingredients, combine them into potions, and fulfill 8 customer orders before time runs out!",
   howToPlay: `Alchemy Shop is an order-fulfillment strategy game. You run a potion shop and must complete 8 customer orders by combining the right ingredients. Each turn you manage your budget, stock ingredients, and brew potions.

@@ -6,7 +6,7 @@ import { OilTycoon } from "./Game.js";
 export const oilTycoonPlugin = {
   id: "oil-tycoon",
   title: "Oil Tycoon",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Drill, refine, and sell oil over 20 quarters. React to market prices, prospect new wells, and build your fortune!",
   howToPlay: `Oil Tycoon puts you in charge of a small petroleum company over 20 quarters (5 years). Starting with 2 wells and $800, grow your operation by drilling new wells and refining your production.

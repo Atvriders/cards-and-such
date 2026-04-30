@@ -6,7 +6,7 @@ import { WizardTower } from "./Game.js";
 export const wizardTowerPlugin = {
   id: "wizard-tower",
   title: "Wizard Tower",
-  category: "strategy",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Cast spell combos to defeat 5 waves of monsters. Chain spells for bonus damage!",
   howToPlay: `Wizard Tower puts you in the role of a mage defending a tower against five waves of monsters. Each wave brings new enemies to defeat using your arsenal of six spells.
