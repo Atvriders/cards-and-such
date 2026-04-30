@@ -35,7 +35,30 @@
   -webkit-backdrop-filter: blur(10px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
-.pyramid-info span { letter-spacing: 0.02em; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5); }
+.pyramid-info span {
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+  font-feature-settings: "tnum" on, "zero" on;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.pyramid-info span + span::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--theme-accent, rgba(129, 140, 248, 0.55));
+  box-shadow: 0 0 6px var(--theme-accent, rgba(129, 140, 248, 0.55));
+  animation: hud-dot-pulse 2.4s ease-in-out infinite;
+}
+@keyframes hud-dot-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50%      { opacity: 1.0; transform: scale(1.15); }
+}
 
 .pyramid-grid {
   display: flex;

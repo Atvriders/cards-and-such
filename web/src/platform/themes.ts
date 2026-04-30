@@ -45,16 +45,22 @@ export const THEMES: Theme[] = [
   {
     id: "emerald",
     label: "Emerald Felt",
-    swatch: "linear-gradient(180deg, #1f5e3e 0%, #1a4f33 100%)",
+    /* Vivid classic-billiard green tuned to the reference solitaire screenshot.
+       Slightly brighter & warmer than before; pairs with the new vignette. */
+    swatch: "linear-gradient(180deg, #2c8a55 0%, #20693f 100%)",
     bgGradient:
-      "radial-gradient(1100px 600px at 50% -10%, rgba(16, 185, 129, 0.18), transparent 60%)," +
+      "radial-gradient(1100px 600px at 50% -10%, rgba(34, 197, 94, 0.22), transparent 60%)," +
       "radial-gradient(900px 500px at 50% 120%, rgba(0, 0, 0, 0.55), transparent 60%)," +
-      "linear-gradient(180deg, #134a31 0%, #0d3823 100%)",
+      "linear-gradient(180deg, #1a6c3f 0%, #0f4527 100%)",
+    /* Felt now layers a faint fiber texture (repeating linear gradients) on top
+       of the lit gradient, so the table reads as woven cloth, not flat color. */
     feltGradient:
-      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.10), transparent 55%)," +
-      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.45), transparent 60%)," +
-      "linear-gradient(180deg, #1f5e3e 0%, #1a4f33 60%, #143d28 100%)",
-    accent: "rgba(34, 197, 94, 0.45)",
+      "repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 4px)," +
+      "repeating-linear-gradient(-45deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 4px)," +
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.14), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.55), transparent 60%)," +
+      "linear-gradient(180deg, #2c8a55 0%, #20693f 60%, #16502d 100%)",
+    accent: "rgba(74, 222, 128, 0.50)",
   },
   {
     id: "midnight",

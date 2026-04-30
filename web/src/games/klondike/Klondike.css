@@ -8,18 +8,32 @@
   user-select: none;
   border-radius: 16px;
   background:
+    /* Vignette: dark inner shadow at edges so the felt feels recessed. */
     radial-gradient(ellipse at top, rgba(16, 80, 56, 0.85) 0%, rgba(8, 36, 28, 0.95) 60%, rgba(4, 20, 16, 1) 100%),
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0 2px, transparent 2px 6px);
+    /* Subtle felt fiber weave (~0.03 opacity). */
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.030) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.030) 0 1px, transparent 1px 5px);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    inset 0 0 60px rgba(0, 0, 0, 0.35),
+    inset 0 0 80px rgba(0, 0, 0, 0.55),
     0 12px 36px -12px rgba(0, 0, 0, 0.55);
   min-height: 600px;
   position: relative;
   overflow: hidden;
 }
+/* Pronounced vignette ring — adds the "recessed table" feel on top of any theme. */
+.klondike::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+.klondike > * { position: relative; z-index: 1; }
 
-/* Glassy HUD strip. */
+/* Glassy HUD strip with classic-monospace numerals. */
 .klondike-info {
   display: flex;
   gap: 14px;
@@ -38,6 +52,27 @@
 .klondike-info span {
   letter-spacing: 0.02em;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+  font-feature-settings: "tnum" on, "zero" on;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Animated separator dot between Moves / Score / (Time). */
+.klondike-info span + span::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--theme-accent, rgba(129, 140, 248, 0.55));
+  box-shadow: 0 0 6px var(--theme-accent, rgba(129, 140, 248, 0.55));
+  animation: hud-dot-pulse 2.4s ease-in-out infinite;
+}
+@keyframes hud-dot-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50%      { opacity: 1.0; transform: scale(1.15); }
 }
 
 .auto-move-btn {
