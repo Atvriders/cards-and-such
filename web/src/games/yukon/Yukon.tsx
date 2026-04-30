@@ -42,7 +42,7 @@ export function Yukon({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className="yukon">
+    <div className={`yukon${state.won ? " has-won" : ""}`}>
       <div className="yukon-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>
@@ -57,7 +57,7 @@ export function Yukon({
       <div className="yukon-top-row">
         <div className="yukon-spacer" />
         {["f1", "f2", "f3", "f4"].map((id) => (
-          <div key={id} className="pile-wrapper">
+          <div key={id} className="pile-wrapper foundation-wrapper">
             <Pile
               pile={getPile(id)}
               onCardDragStart={onDragStart}

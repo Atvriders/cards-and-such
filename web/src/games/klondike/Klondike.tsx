@@ -57,7 +57,7 @@ export function Klondike({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className="klondike">
+    <div className={`klondike${state.won ? " has-won" : ""}`}>
       <div className="klondike-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>
@@ -92,7 +92,7 @@ export function Klondike({
         <div className="klondike-spacer" />
 
         {["f1", "f2", "f3", "f4"].map((id) => (
-          <div key={id} className="pile-wrapper">
+          <div key={id} className="pile-wrapper foundation-wrapper">
             <Pile
               pile={getPile(id)}
               onCardDragStart={onDragStart}

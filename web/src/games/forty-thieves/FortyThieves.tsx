@@ -47,7 +47,7 @@ export function FortyThieves({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className="forty-thieves">
+    <div className={`forty-thieves${state.won ? " has-won" : ""}`}>
       <div className="forty-thieves-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>
@@ -76,7 +76,7 @@ export function FortyThieves({
         <div className="forty-thieves-spacer" />
 
         {["f1","f2","f3","f4","f5","f6","f7","f8"].map((id) => (
-          <div key={id} className="pile-wrapper">
+          <div key={id} className="pile-wrapper foundation-wrapper">
             <Pile
               pile={getPile(id)}
               onCardDragStart={onDragStart}

@@ -50,7 +50,7 @@ export function FreeCell({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className="freecell">
+    <div className={`freecell${state.won ? " has-won" : ""}`}>
       <div className="freecell-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>
@@ -64,7 +64,7 @@ export function FreeCell({
 
       <div className="freecell-top-row">
         {["fc1", "fc2", "fc3", "fc4"].map((id) => (
-          <div key={id} className="pile-wrapper">
+          <div key={id} className="pile-wrapper freecell-wrapper">
             <Pile
               pile={getPile(id)}
               onCardDragStart={onDragStart}
@@ -75,7 +75,7 @@ export function FreeCell({
           </div>
         ))}
         {["f1", "f2", "f3", "f4"].map((id) => (
-          <div key={id} className="pile-wrapper">
+          <div key={id} className="pile-wrapper foundation-wrapper">
             <Pile
               pile={getPile(id)}
               onCardDragStart={onDragStart}
