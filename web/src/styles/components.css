@@ -209,3 +209,68 @@
 @media (prefers-reduced-motion: reduce) {
   .fade-in-up { animation: none; }
 }
+
+/* =====================================================================
+   CSS-only tooltip — opt-in via [data-tooltip="..."]
+   ---------------------------------------------------------------------
+   - Renders a dark rounded pill 8px below the host element on hover or
+     keyboard focus, with a subtle fade-in (~100ms).
+   - Pure CSS, no JS. Works for any element that can take a pseudo
+     element (button, a, span, etc.).
+   - Anchor must be (or be made) `position: relative` so the pseudo
+     element lays out correctly.
+   ===================================================================== */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, -2px);
+  padding: 0.32rem 0.55rem;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  color: #f1f5f9;
+  background: rgba(8, 10, 18, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 50;
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.55);
+  transition:
+    opacity 100ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 140ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-tooltip]::after { transition: none; }
+}
+
+/* =====================================================================
+   Auto-move button shared layout — every per-game tableau exposes a
+   "Send to foundation" button using a class ending in `-auto-btn` or
+   the generic `.auto-move-btn`. Give them a uniform inline-flex layout
+   so the inline SVG glyph and label align cleanly. Color-only theming
+   is left to each per-game stylesheet.
+   ===================================================================== */
+button.auto-move-btn,
+button[class$="-auto-btn"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+button.auto-move-btn > svg,
+button[class$="-auto-btn"] > svg {
+  color: currentColor;
+  flex: none;
+}
