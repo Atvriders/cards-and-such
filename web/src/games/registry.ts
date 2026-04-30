@@ -2681,7 +2681,7 @@ import { kurodokoPlugin } from "./kurodoko/index.js";
 import { sashiganePlugin } from "./sashigane/index.js";
 import { fobidoshiPlugin } from "./fobidoshi/index.js";
 import { koiKoiPlugin } from "./koi-koi-quiz/index.js";
-import { hachiHachiPlugin } from "./hachi-hachi-quiz/index.js";
+import { hachiHachiQuizPlugin } from "./hachi-hachi-quiz/index.js";
 import { hanaAwasePlugin } from "./hana-awase-quiz/index.js";
 import { mushifudaPlugin } from "./mushifuda-quiz/index.js";
 import { sakuraPlugin } from "./sakura-quiz/index.js";
@@ -6899,7 +6899,7 @@ export const GAMES: GamePlugin[] = [
   sashiganePlugin as unknown as GamePlugin,
   fobidoshiPlugin as unknown as GamePlugin,
   koiKoiPlugin as unknown as GamePlugin,
-  hachiHachiPlugin as unknown as GamePlugin,
+  hachiHachiQuizPlugin as unknown as GamePlugin,
   hanaAwasePlugin as unknown as GamePlugin,
   mushifudaPlugin as unknown as GamePlugin,
   sakuraPlugin as unknown as GamePlugin,
