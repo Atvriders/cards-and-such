@@ -1,8 +1,47 @@
-.shed-hand { display: flex; padding: 1rem 0.5rem; min-height: 100px; }
-.shed-hand-card { transition: transform 0.1s; cursor: pointer; }
-.shed-hand-card:hover, .shed-hand-card.selected { transform: translateY(-12px); }
+/* Shedding-game hand: a fanned row of cards with smooth hover lift. */
+
+.shed-hand {
+  display: flex;
+  padding: 1rem 0.5rem;
+  min-height: 100px;
+  gap: 0.25rem;
+}
+.shed-hand-card {
+  transition:
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter   180ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  will-change: transform;
+}
+.shed-hand-card:hover,
+.shed-hand-card.selected {
+  transform: translateY(-14px);
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
+}
 .shed-hand-back {
-  width: 60px; height: 84px; border-radius: 6px;
-  background: linear-gradient(135deg, #4040a8 0%, #2a2a6a 100%);
-  border: 1px solid #1a1a3a;
+  width: 64px;
+  height: 90px;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.10) 0 1px, transparent 2px) 0 0/12px 12px,
+    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.10) 0 1px, transparent 2px) 0 0/12px 12px,
+    linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2a1d6e 100%);
+  border: 1px solid rgba(15, 12, 50, 0.85);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.10) inset,
+    0 0 0 2px rgba(255, 255, 255, 0.06) inset,
+    0 6px 14px -4px rgba(0, 0, 0, 0.55);
+  position: relative;
+}
+.shed-hand-back::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 6px;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shed-hand-card { transition: none; }
 }

@@ -1,7 +1,725 @@
-:root { color-scheme: dark; }
-body { margin: 0; font-family: system-ui, sans-serif; background: #0b0b12; color: #f4f4fb; }
+/* =====================================================================
+   Cards and Such — Global Design Foundation
+   ---------------------------------------------------------------------
+   This file is the single source of truth for visual tokens and shared
+   styles. Individual game CSS files use their own prefixed classes and
+   are not modified — the utility classes below (.quiz-shell, .dice-shell,
+   .choice-btn, etc.) are opt-in for new games and never override
+   existing per-game selectors.
+   ===================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* ---------- Color: backgrounds (deep slate) ---------- */
+  --bg-0: #07080f;            /* page base */
+  --bg-1: #0c0e18;            /* slightly lifted */
+  --bg-2: #11142010;          /* tinted */
+  --bg-grad:
+    radial-gradient(1200px 700px at 12% -10%, rgba(99, 102, 241, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 110% 10%, rgba(168, 85, 247, 0.16), transparent 60%),
+    radial-gradient(800px 500px at 50% 110%, rgba(16, 185, 129, 0.10), transparent 60%),
+    linear-gradient(180deg, #07080f 0%, #0a0c16 100%);
+
+  /* ---------- Color: surfaces (glassy elevated) ---------- */
+  --surface-1: rgba(22, 25, 39, 0.72);
+  --surface-2: rgba(28, 32, 50, 0.78);
+  --surface-3: rgba(36, 40, 60, 0.82);
+  --surface-raised: rgba(20, 22, 36, 0.92);
+  --border-soft: rgba(148, 163, 184, 0.10);
+  --border-strong: rgba(148, 163, 184, 0.20);
+  --border-focus: rgba(129, 140, 248, 0.65);
+  --hairline: rgba(255, 255, 255, 0.06);
+
+  /* ---------- Color: text (slate ramp) ---------- */
+  --text-100: #f1f5f9;        /* primary */
+  --text-200: #e2e8f0;
+  --text-300: #cbd5e1;
+  --text-400: #94a3b8;        /* secondary */
+  --text-500: #64748b;        /* muted */
+
+  /* ---------- Color: accents ---------- */
+  --primary: #818cf8;          /* indigo-400 */
+  --primary-strong: #6366f1;   /* indigo-500 */
+  --primary-soft: rgba(129, 140, 248, 0.16);
+  --primary-glow: rgba(129, 140, 248, 0.45);
+  --violet: #a78bfa;
+  --success: #34d399;
+  --success-soft: rgba(52, 211, 153, 0.16);
+  --danger:  #fb7185;
+  --danger-soft: rgba(251, 113, 133, 0.16);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.16);
+  --info: #38bdf8;
+
+  /* ---------- Card / suit colors ---------- */
+  --card-face: linear-gradient(180deg, #fefefe 0%, #eef0f5 100%);
+  --card-face-border: rgba(15, 23, 42, 0.55);
+  --card-red: #d92d4a;
+  --card-black: #0f172a;
+  --card-back: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2a1d6e 100%);
+  --card-back-pattern: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.10) 0 1px, transparent 2px),
+                        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.10) 0 1px, transparent 2px);
+
+  /* ---------- Typography ---------- */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Inter", "Noto Sans", sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", "Cascadia Code",
+               "Roboto Mono", "Menlo", monospace;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-loose: 1.65;
+
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+
+  /* ---------- Radii ---------- */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 22px;
+  --r-2xl: 28px;
+  --r-pill: 999px;
+
+  /* ---------- Shadows (layered) ---------- */
+  --sh-xs: 0 1px 2px rgba(0, 0, 0, 0.30);
+  --sh-sm: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.20);
+  --sh-md: 0 6px 14px -4px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --sh-lg: 0 18px 38px -10px rgba(0, 0, 0, 0.55), 0 6px 14px -4px rgba(0, 0, 0, 0.30);
+  --sh-xl: 0 32px 70px -16px rgba(0, 0, 0, 0.65), 0 12px 28px -10px rgba(0, 0, 0, 0.40);
+  --sh-glow: 0 0 0 1px var(--primary-glow), 0 12px 28px -10px var(--primary-glow);
+  --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* ---------- Motion ---------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --dur-instant: 80ms;
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 360ms;
+  --dur-slower: 560ms;
+
+  /* ---------- Spacing scale ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* ---------- Layout ---------- */
+  --header-h: 60px;
+  --container-w: 1180px;
+}
+
+/* =====================================================================
+   Base / reset polish
+   ===================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  font-size: 15px;
+  line-height: var(--leading-normal);
+  color: var(--text-100);
+  background-color: var(--bg-0);
+  background-image: var(--bg-grad);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-100);
+  margin: 0 0 0.5em;
+}
+h1 { font-size: clamp(1.6rem, 1.4rem + 1vw, 2.1rem); }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; }
+
+p { line-height: var(--leading-normal); margin: 0 0 0.75em; }
+
+a { color: var(--primary); text-decoration: none; transition: color var(--dur-fast) var(--ease-out-quart); }
+a:hover { color: var(--violet); }
+
+/* Selection */
+::selection { background: var(--primary-soft); color: var(--text-100); }
 
 /* Default button text color: dark, so any button with a light background
    (common pattern: background: #fff with no color set) is readable by default.
    Buttons that explicitly set `color` keep their own style. */
-button { color: #1a1a1a; }
+button { color: #1a1a1a; font-family: inherit; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.18);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background-color: rgba(148, 163, 184, 0.32); background-clip: padding-box; }
+
+/* =====================================================================
+   Reusable button system (.btn primary/ghost/etc.) — opt-in
+   ===================================================================== */
+.btn {
+  --btn-bg: var(--surface-2);
+  --btn-bg-hover: var(--surface-3);
+  --btn-fg: var(--text-100);
+  --btn-border: var(--border-strong);
+  --btn-shadow: var(--sh-sm);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--r-pill);
+  box-shadow: var(--btn-shadow), var(--sh-inset);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart),
+    color var(--dur-fast) var(--ease-out-quart);
+}
+.btn:hover { background: var(--btn-bg-hover); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); box-shadow: var(--sh-xs); }
+.btn:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft), var(--sh-sm);
+}
+.btn[disabled], .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-primary {
+  --btn-bg: linear-gradient(180deg, #7c83f7 0%, #5b63e9 100%);
+  --btn-bg-hover: linear-gradient(180deg, #8c93ff 0%, #6b73f6 100%);
+  --btn-fg: #ffffff;
+  --btn-border: rgba(99, 102, 241, 0.7);
+  --btn-shadow: 0 8px 20px -8px var(--primary-glow), var(--sh-sm);
+}
+
+.btn-success {
+  --btn-bg: linear-gradient(180deg, #43e3a8 0%, #1fbb84 100%);
+  --btn-bg-hover: linear-gradient(180deg, #56e9b3 0%, #2bc78f 100%);
+  --btn-fg: #052015;
+  --btn-border: rgba(34, 197, 94, 0.55);
+}
+
+.btn-danger {
+  --btn-bg: linear-gradient(180deg, #fb7a8a 0%, #e9495f 100%);
+  --btn-bg-hover: linear-gradient(180deg, #ff8c9a 0%, #f25d72 100%);
+  --btn-fg: #ffffff;
+  --btn-border: rgba(244, 63, 94, 0.55);
+}
+
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-bg-hover: rgba(148, 163, 184, 0.10);
+  --btn-fg: var(--text-200);
+  --btn-border: transparent;
+  --btn-shadow: none;
+}
+
+.btn-sm { padding: 0.35rem 0.8rem; font-size: 0.85rem; }
+.btn-lg { padding: 0.8rem 1.5rem; font-size: 1.05rem; }
+
+/* =====================================================================
+   Inputs — opt-in modern look
+   ===================================================================== */
+.input,
+.field-input {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font: inherit;
+  color: var(--text-100);
+  background: rgba(10, 12, 22, 0.72);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  outline: none;
+  transition:
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart);
+}
+.input::placeholder, .field-input::placeholder { color: var(--text-500); }
+.input:hover, .field-input:hover { border-color: var(--border-focus); }
+.input:focus, .field-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  background: rgba(10, 12, 22, 0.92);
+}
+
+/* =====================================================================
+   Surfaces / cards / panels — opt-in
+   ===================================================================== */
+.surface {
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md), var(--sh-inset);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+.surface-raised { background: var(--surface-raised); box-shadow: var(--sh-lg), var(--sh-inset); }
+.panel {
+  padding: var(--sp-6);
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md), var(--sh-inset);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.18rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-200);
+  background: var(--surface-3);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-pill);
+}
+.badge-primary { color: #c7cdfe; background: var(--primary-soft); border-color: rgba(129,140,248,0.35); }
+.badge-success { color: #b6f3d8; background: var(--success-soft); border-color: rgba(52,211,153,0.35); }
+.badge-warning { color: #fde7a7; background: var(--warning-soft); border-color: rgba(251,191,36,0.35); }
+.badge-danger  { color: #fec7d0; background: var(--danger-soft);  border-color: rgba(251,113,133,0.35); }
+
+/* Subtle divider */
+.hr {
+  height: 1px; border: 0; background: var(--hairline); margin: var(--sp-5) 0;
+}
+
+/* =====================================================================
+   Shared shell utility classes — opt-in by future games
+   ===================================================================== */
+
+/* Generic "centered game container" */
+.game-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  max-width: 760px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  color: var(--text-100);
+  user-select: none;
+}
+
+.quiz-shell      { composes: game-shell; }
+.dice-shell      { composes: game-shell; }
+.card-shell      { composes: game-shell; max-width: 900px; }
+.solitaire-shell { composes: game-shell; max-width: 1100px; }
+.arcade-shell    { composes: game-shell; max-width: 820px; }
+
+/* Plain CSS doesn't actually `composes:` — define each explicitly so they
+   work without a CSS-modules pipeline. */
+.quiz-shell, .dice-shell, .card-shell, .solitaire-shell, .arcade-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  color: var(--text-100);
+  user-select: none;
+}
+.quiz-shell, .dice-shell, .arcade-shell { max-width: 760px; }
+.card-shell { max-width: 900px; }
+.solitaire-shell { max-width: 1100px; }
+
+/* Game-shell HUD bar (score / timer / progress) */
+.shell-hud {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 0.6rem 0.9rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.shell-hud .hud-info  { font-size: 0.9rem; color: var(--text-400); }
+.shell-hud .hud-score { font-size: 1.1rem; font-weight: var(--weight-bold); color: var(--success); font-variant-numeric: tabular-nums; }
+.shell-hud .hud-timer { font-size: 1.25rem; font-weight: var(--weight-bold); color: var(--danger); font-variant-numeric: tabular-nums; min-width: 2.5ch; text-align: center; }
+.shell-hud .hud-timer.urgent { animation: hud-pulse 0.55s infinite alternate; }
+@keyframes hud-pulse { from { opacity: 1; transform: scale(1); } to { opacity: 0.45; transform: scale(0.94); } }
+
+/* Multiple-choice button (used by quiz-shell games) */
+.choice-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 1.05rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: var(--weight-medium);
+  text-align: left;
+  color: var(--text-100);
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  box-shadow: var(--sh-xs);
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
+}
+.choice-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--border-focus);
+  background: var(--surface-2);
+  box-shadow: var(--sh-md);
+}
+.choice-btn:active:not(:disabled) { transform: translateY(0); }
+.choice-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.choice-btn.selected { border-color: var(--primary); background: var(--primary-soft); }
+.choice-btn.correct  { border-color: var(--success); background: var(--success-soft); color: #cbfbe2; }
+.choice-btn.wrong    { border-color: var(--danger);  background: var(--danger-soft);  color: #ffd5dd; }
+.choice-btn-letter {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.85rem; height: 1.85rem;
+  font-weight: var(--weight-bold); font-size: 0.95rem;
+  color: var(--text-300);
+  background: var(--surface-3);
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+}
+
+/* Clickable arcade target (emoji) */
+.target-emoji {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  line-height: 1;
+  cursor: pointer;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+  transition: transform var(--dur-fast) var(--ease-spring), filter var(--dur-fast) var(--ease-out-quart);
+  user-select: none;
+}
+.target-emoji:hover { transform: scale(1.18); filter: drop-shadow(0 6px 10px rgba(0,0,0,0.55)); }
+.target-emoji:active { transform: scale(0.92); }
+
+/* =====================================================================
+   .cas-quiz — opt-in modern quiz layout (named for new games)
+   ---------------------------------------------------------------------
+   Layout:
+     <div class="cas-quiz">
+       <header class="cas-quiz-header">…score / progress / timer…</header>
+       <div   class="cas-quiz-timerbar"><span style="width:65%"></span></div>
+       <div   class="cas-quiz-question">…question text…</div>
+       <div   class="cas-quiz-choices">
+         <button class="choice-btn"…/>  <!-- existing class works -->
+       </div>
+     </div>
+   ===================================================================== */
+.cas-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  color: var(--text-100);
+  user-select: none;
+  animation: cas-fade-in var(--dur-slow) var(--ease-out-expo);
+}
+.cas-quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  font-size: 0.92rem;
+  color: var(--text-400);
+}
+.cas-quiz-header .progress { color: var(--text-400); font-variant-numeric: tabular-nums; }
+.cas-quiz-header .score    { color: var(--success); font-weight: var(--weight-bold); font-variant-numeric: tabular-nums; }
+.cas-quiz-header .timer    { color: var(--danger);  font-weight: var(--weight-bold); font-variant-numeric: tabular-nums; min-width: 2.5ch; text-align: right; }
+.cas-quiz-header .timer.urgent { animation: hud-pulse 0.55s infinite alternate; }
+
+.cas-quiz-timerbar {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: var(--surface-1);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+}
+.cas-quiz-timerbar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--success) 0%, var(--primary) 60%, var(--danger) 100%);
+  border-radius: var(--r-pill);
+  transition: width var(--dur-base) linear;
+}
+
+.cas-quiz-question {
+  padding: var(--sp-5) var(--sp-5);
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  text-align: center;
+  color: var(--text-100);
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md), var(--sh-inset);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.cas-quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* =====================================================================
+   .cas-clicker — opt-in modern arcade clicker layout
+   ---------------------------------------------------------------------
+   Layout:
+     <div class="cas-clicker">
+       <div class="cas-clicker-hud">
+         <span class="cas-score-badge">42</span>
+         <div   class="cas-timer-ring" style="--p:65"><span>12s</span></div>
+       </div>
+       <div   class="cas-clicker-stage">…targets absolutely positioned…</div>
+     </div>
+   ===================================================================== */
+.cas-clicker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  color: var(--text-100);
+  user-select: none;
+}
+.cas-clicker-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.cas-score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.95rem;
+  font-size: 1.05rem;
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: #052015;
+  background: linear-gradient(180deg, #43e3a8 0%, #1fbb84 100%);
+  border: 1px solid rgba(34, 197, 94, 0.55);
+  border-radius: var(--r-pill);
+  box-shadow: 0 8px 16px -8px rgba(34, 197, 94, 0.5), var(--sh-inset);
+}
+
+/* Timer ring: set --p (0..100) inline to render progress conic */
+.cas-timer-ring {
+  --p: 100;
+  --size: 56px;
+  --thickness: 6px;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background:
+    conic-gradient(var(--primary) calc(var(--p) * 1%), rgba(148, 163, 184, 0.15) 0);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px -6px var(--primary-glow);
+}
+.cas-timer-ring::before {
+  content: "";
+  position: absolute;
+  inset: var(--thickness);
+  background: var(--bg-0);
+  border-radius: 50%;
+}
+.cas-timer-ring > span {
+  position: relative;
+  font-size: 0.92rem;
+  font-weight: var(--weight-bold);
+  color: var(--text-100);
+  font-variant-numeric: tabular-nums;
+}
+.cas-timer-ring.urgent { background: conic-gradient(var(--danger) calc(var(--p) * 1%), rgba(148, 163, 184, 0.15) 0); animation: hud-pulse 0.55s infinite alternate; }
+
+.cas-clicker-stage {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-soft);
+  background:
+    radial-gradient(700px 320px at 50% 0%, rgba(99, 102, 241, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(11, 13, 24, 0.85) 0%, rgba(7, 8, 15, 0.85) 100%);
+  overflow: hidden;
+  box-shadow: var(--sh-md), var(--sh-inset);
+}
+
+/* =====================================================================
+   Animations: score popup, fade-in, win shake/celebration, particle burst
+   ===================================================================== */
+@keyframes cas-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes cas-score-pop {
+  0%   { transform: translate(-50%, 0)    scale(0.85); opacity: 0; }
+  20%  { transform: translate(-50%, -10px) scale(1.12); opacity: 1; }
+  100% { transform: translate(-50%, -52px) scale(0.95); opacity: 0; }
+}
+@keyframes cas-celebrate-shake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  15%      { transform: translate3d(-6px, 0, 0) rotate(-1.2deg); }
+  30%      { transform: translate3d(5px, 0, 0)  rotate(1.0deg);  }
+  45%      { transform: translate3d(-4px, 0, 0) rotate(-0.7deg); }
+  60%      { transform: translate3d(3px, 0, 0)  rotate(0.5deg);  }
+  75%      { transform: translate3d(-2px, 0, 0) rotate(-0.3deg); }
+}
+@keyframes cas-glow-pulse {
+  from { box-shadow: 0 0 0 0 rgba(129, 140, 248, 0.55), var(--sh-md); }
+  to   { box-shadow: 0 0 0 14px rgba(129, 140, 248, 0),  var(--sh-md); }
+}
+@keyframes cas-burst {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(0.4); }
+  to   { opacity: 0; transform: translate(-50%, -50%) scale(2.4); }
+}
+
+/* Floating "+5" / "-2" popup. Position the parent `position: relative`
+   and use inline `--popup-color` to override (e.g. red for misses). */
+.cas-score-popup {
+  --popup-color: var(--success);
+  position: absolute;
+  left: 50%;
+  top: 0;
+  pointer-events: none;
+  font-weight: var(--weight-bold);
+  font-size: 1.1rem;
+  color: var(--popup-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  font-variant-numeric: tabular-nums;
+  animation: cas-score-pop 900ms var(--ease-out-expo) forwards;
+}
+.cas-score-popup.miss { --popup-color: var(--danger); }
+
+/* Apply to a winning panel — tasteful one-shot shake. */
+.cas-celebrate { animation: cas-celebrate-shake 700ms var(--ease-out-expo); }
+
+/* Soft pulsing glow ring around an element. */
+.cas-pulse { animation: cas-glow-pulse 1.6s var(--ease-out-quart) infinite; }
+
+/* Click-burst ripple — apply to a `<span>` overlay positioned at click site. */
+.cas-burst {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(129,140,248,0.0) 70%);
+  pointer-events: none;
+  animation: cas-burst 480ms var(--ease-out-expo) forwards;
+}
+
+/* Generic round-fade entry — apply to question card / new round container. */
+.cas-fade-in { animation: cas-fade-in var(--dur-slow) var(--ease-out-expo); }
+
+/* =====================================================================
+   Mobile responsiveness — tighten common game-wrap classes used by the
+   ~1500 generated games (additive, only narrows padding/gap on phones).
+   ===================================================================== */
+@media (max-width: 640px) {
+  .trivia-wrap, .qz-wrap, .nlp-wrap,
+  .dm-wrap, .fc-wrap, .cm-wrap,
+  .sol-wrap, .rw-wrap, .race-wrap,
+  .dr-wrap, .bz-wrap, .coop-wrap, .ab-wrap, .tp-wrap,
+  .game-shell, .quiz-shell, .dice-shell, .card-shell,
+  .solitaire-shell, .arcade-shell,
+  .cas-quiz, .cas-clicker {
+    padding: var(--sp-3) var(--sp-3);
+    gap: var(--sp-3);
+  }
+  .cas-quiz-question { padding: var(--sp-4); font-size: 1rem; }
+  .cas-clicker-stage { height: 300px; }
+  .cas-timer-ring    { --size: 48px; --thickness: 5px; }
+  .cas-score-badge   { padding: 0.32rem 0.75rem; font-size: 0.95rem; }
+}
+
+/* =====================================================================
+   Reduced-motion respect
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

@@ -26,9 +26,25 @@ export function Die({ value, kept, rolling, onClick }: Props): JSX.Element {
       aria-label={`die showing ${value}${kept ? " (kept)" : ""}`}
       aria-pressed={!!kept}
     >
-      <svg viewBox="0 0 100 100">
-        <rect x="4" y="4" width="92" height="92" rx="16" />
-        {pips.map(([cx, cy], i) => <circle key={i} cx={cx} cy={cy} r="8" />)}
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <linearGradient id="die-face-gradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="100%" stopColor="#dbe2ec" />
+          </linearGradient>
+          <radialGradient id="die-face-highlight" cx="30%" cy="22%" r="65%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.85)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </radialGradient>
+        </defs>
+        {/* main face */}
+        <rect x="4" y="4" width="92" height="92" rx="18" fill="url(#die-face-gradient)" />
+        {/* glossy highlight */}
+        <rect x="4" y="4" width="92" height="92" rx="18" fill="url(#die-face-highlight)" />
+        {/* pips */}
+        {pips.map(([cx, cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r="8" />
+        ))}
       </svg>
     </button>
   );
