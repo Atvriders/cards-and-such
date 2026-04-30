@@ -1,21 +1,2 @@
-.skat { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; font-family: sans-serif; max-width: 520px; margin: 0 auto; }
-.skat-header { display: flex; gap: 12px; font-weight: bold; flex-wrap: wrap; justify-content: center; font-size: 0.9rem; }
-.skat-message { font-size: 0.95rem; text-align: center; color: #333; background: #f5f5f5; border-radius: 6px; padding: 8px 12px; width: 100%; }
-.skat-trick { display: flex; gap: 12px; min-height: 80px; align-items: center; justify-content: center; background: #e8f5e9; border-radius: 8px; padding: 12px; width: 100%; }
-.skat-hand { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.skat-card { cursor: pointer; border: 2px solid #ccc; border-radius: 6px; padding: 8px 10px; background: white; font-size: 1rem; transition: border-color 0.15s, transform 0.1s; text-align: center; min-width: 44px; }
-.skat-card:hover { border-color: #1a73e8; transform: translateY(-4px); }
-.skat-card.trump { border-color: #e53935; }
-.skat-card.jack { border-color: #7b1fa2; font-weight: bold; }
-.skat-card.selected { border-color: #f57c00; background: #fff3e0; }
-.skat-label { font-size: 0.8rem; color: #666; margin-bottom: 4px; text-align: center; }
-.skat-section { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.skat-bid-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.skat-btn { padding: 8px 16px; border: none; border-radius: 6px; background: #1a73e8; color: white; cursor: pointer; font-size: 0.9rem; }
-.skat-btn:hover { background: #1557b0; }
-.skat-btn.pass { background: #757575; }
-.skat-btn.pass:hover { background: #424242; }
-.skat-trump-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.skat-trump-btn { padding: 8px 14px; border: 2px solid #ccc; border-radius: 6px; background: white; cursor: pointer; font-size: 1rem; }
-.skat-trump-btn:hover { border-color: #e53935; }
-.skat-skat { display: flex; gap: 8px; justify-content: center; align-items: center; }
+/* Modern trick-taking engine — see web/src/engines/trick/trick.css */
+@import "../../engines/trick/trick.css";
