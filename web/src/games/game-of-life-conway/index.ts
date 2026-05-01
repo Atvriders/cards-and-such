@@ -1,9 +1,16 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { ConwayState, ConwayAction, ConwaySettings } from "./state.js";
+import type { ConwayState, ConwayAction, ConwaySettings, GridSize } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GameOfLifeConwayGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = {
+  size: {
+    kind: "enum" as const,
+    label: "Grid size",
+    options: ["8", "12", "16"] as const,
+    default: "12",
+  },
+} as const;
 type S = SettingsOf<typeof settings>;
 
 export const gameOfLifeConwayPlugin: GamePlugin<ConwayState, ConwayAction, typeof settings> = {
@@ -11,23 +18,29 @@ export const gameOfLifeConwayPlugin: GamePlugin<ConwayState, ConwayAction, typeo
   title: "Game of Life (Conway)",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Conway's Game of Life on an 8x8 grid. Toggle cells, step generations, and watch patterns evolve.",
+  description: "Conway's cellular automaton on a 12x12 grid (8/12/16 configurable). Toggle cells, step, run, watch patterns evolve.",
   howToPlay: `Conway's Game of Life is the most famous cellular automaton ever invented. This is a one-player interactive sim, not a quiz.
 
-Rules of survival on the 8x8 grid:
+Survival rules on the grid:
 — A live cell with 2 or 3 live neighbors stays alive.
 — A live cell with fewer than 2 (lonely) or more than 3 (crowded) dies.
 — A dead cell with exactly 3 live neighbors becomes alive.
 
 How to play:
-1. Click any cell to toggle it on or off, or press a preset button (Glider, Blinker, Random) to seed a starting pattern.
-2. Press Step to advance one generation. Watch live cells appear, propagate, oscillate, or die out.
-3. Press Reset to clear the grid back to empty.
-4. Press Finish to end your run and lock in your score.
+1. Click cells to toggle them, or seed a preset (Glider, Blinker, Pulsar, R-pentomino, Random).
+2. Press Step to advance one generation, or Run to auto-step every 200ms (Run again to pause).
+3. Clear wipes cells but keeps your peak. Reset starts a fresh run from zero.
+4. Press Finish when you're happy with the run to lock in the score.
 
-Your final score is the sum of live cells across every generation, plus 2 points per generation. The longer you keep activity alive, the higher you score. A well-placed glider or random seed can run for dozens of generations on the small board before everything stabilizes or vanishes.`,
+Your score is peak live cells x generations survived. Long-lived patterns score highest — a glider floats for many turns; the R-pentomino explodes chaotically; pulsar oscillates forever (period 3) on a 16x16 board.
+
+Pick the grid size in settings (8/12/16). Pulsar needs at least 13 — on smaller boards a toad oscillator is substituted.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ConwaySettings),
+  initialState: (seed: number, s: S) => {
+    const sizeNum = (parseInt(s.size, 10) || 12) as GridSize;
+    const cs: ConwaySettings = { size: sizeNum };
+    return initialState(seed, cs);
+  },
   reducer,
   isTerminal,
   component: GameOfLifeConwayGame,

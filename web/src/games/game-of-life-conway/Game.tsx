@@ -1,46 +1,139 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { ConwayState, ConwayAction, ConwaySettings } from "./state.js";
-import { isTerminal, liveCount, score, SIZE } from "./state.js";
+import type { ConwayState, ConwayAction, ConwaySettings, Pattern } from "./state.js";
+import { isTerminal, liveCount, score } from "./state.js";
 import "./Game.css";
+
+const PRESET_BUTTONS: { key: Pattern; label: string }[] = [
+  { key: "glider", label: "Glider" },
+  { key: "blinker", label: "Blinker" },
+  { key: "pulsar", label: "Pulsar" },
+  { key: "rpentomino", label: "R-pent" },
+  { key: "random", label: "Random" },
+];
 
 export function GameOfLifeConwayGame({ state, dispatch, onGameOver }: GameProps<ConwayState, ConwaySettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
+  // Auto-run loop: dispatch step every 200ms when isRunning is true.
+  const dispatchRef = useRef(dispatch);
+  dispatchRef.current = dispatch;
+  useEffect(() => {
+    if (!state.isRunning || state.phase === "done") return;
+    const id = window.setInterval(() => {
+      dispatchRef.current({ type: "step" } as ConwayAction);
+    }, 200);
+    return () => window.clearInterval(id);
+  }, [state.isRunning, state.phase]);
+
   const live = liveCount(state.grid);
+  const size = state.size;
+
   return (
-    <div className="conway-wrap">
-      <div className="conway-stats">
-        <div>Gen <b>{state.generation}</b></div>
-        <div>Live <b>{live}</b></div>
-        <div>Score <b>{score(state)}</b></div>
+    <div className="golconway-wrap">
+      <div className="golconway-hud">
+        <div className="golconway-stat">
+          <span className="golconway-stat-label">Generation</span>
+          <span className="golconway-stat-value">{state.generation}</span>
+        </div>
+        <div className="golconway-stat">
+          <span className="golconway-stat-label">Live</span>
+          <span className="golconway-stat-value">{live}</span>
+        </div>
+        <div className="golconway-stat">
+          <span className="golconway-stat-label">Peak</span>
+          <span className="golconway-stat-value">{state.maxLive}</span>
+        </div>
+        <div className="golconway-stat golconway-stat-score">
+          <span className="golconway-stat-label">Score</span>
+          <span className="golconway-stat-value">{score(state)}</span>
+        </div>
       </div>
-      <div className="conway-grid" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
+
+      <div
+        className="golconway-grid"
+        style={{ gridTemplateColumns: `repeat(${size}, 1fr)` }}
+        data-running={state.isRunning ? "true" : "false"}
+      >
         {state.grid.map((v, i) => (
           <button
             key={i}
-            className={`conway-cell${v ? " conway-on" : ""}`}
-            onClick={() => state.phase === "editing" && dispatch({ type: "toggle", idx: i } as ConwayAction)}
-            disabled={state.phase !== "editing"}
+            type="button"
+            aria-label={v ? "alive" : "dead"}
+            aria-pressed={v ? true : false}
+            className={`golconway-cell${v ? " golconway-on" : ""}`}
+            onClick={() => dispatch({ type: "toggle", idx: i } as ConwayAction)}
+            disabled={state.isRunning || state.phase === "done"}
           />
         ))}
       </div>
-      <div className="conway-controls">
-        {state.phase === "editing" && (
-          <>
-            <button onClick={() => dispatch({ type: "preset", preset: "glider" } as ConwayAction)}>Glider</button>
-            <button onClick={() => dispatch({ type: "preset", preset: "blinker" } as ConwayAction)}>Blinker</button>
-            <button onClick={() => dispatch({ type: "preset", preset: "random" } as ConwayAction)}>Random</button>
-          </>
-        )}
-        <button className="conway-step" onClick={() => dispatch({ type: "step" } as ConwayAction)}>Step</button>
-        <button onClick={() => dispatch({ type: "reset" } as ConwayAction)}>Reset</button>
-        {state.phase === "running" && (
-          <button className="conway-finish" onClick={() => dispatch({ type: "finish" } as ConwayAction)}>Finish</button>
-        )}
+
+      <div className="golconway-controls">
+        <button
+          type="button"
+          className="golconway-btn golconway-btn-step"
+          onClick={() => dispatch({ type: "step" } as ConwayAction)}
+          disabled={state.isRunning || state.phase === "done"}
+        >
+          Step
+        </button>
+        <button
+          type="button"
+          className={`golconway-btn ${state.isRunning ? "golconway-btn-pause" : "golconway-btn-run"}`}
+          onClick={() => dispatch({ type: "toggleRun" } as ConwayAction)}
+          disabled={state.phase === "done"}
+        >
+          {state.isRunning ? "Pause" : "Run"}
+        </button>
+        <button
+          type="button"
+          className="golconway-btn golconway-btn-clear"
+          onClick={() => dispatch({ type: "clear" } as ConwayAction)}
+          disabled={state.isRunning || state.phase === "done"}
+        >
+          Clear
+        </button>
+        <button
+          type="button"
+          className="golconway-btn golconway-btn-reset"
+          onClick={() => dispatch({ type: "reset" } as ConwayAction)}
+          disabled={state.phase === "done"}
+        >
+          Reset
+        </button>
+        <button
+          type="button"
+          className="golconway-btn golconway-btn-finish"
+          onClick={() => dispatch({ type: "finish" } as ConwayAction)}
+          disabled={state.phase === "done"}
+        >
+          Finish
+        </button>
       </div>
+
+      <div className="golconway-presets">
+        <span className="golconway-presets-label">Patterns:</span>
+        {PRESET_BUTTONS.map((p) => (
+          <button
+            key={p.key}
+            type="button"
+            className="golconway-preset"
+            onClick={() => dispatch({ type: "preset", preset: p.key } as ConwayAction)}
+            disabled={state.isRunning || state.phase === "done"}
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+
       {state.phase === "done" && (
-        <div className="conway-done">Final score: {score(state)}</div>
+        <div className="golconway-done">
+          <div className="golconway-done-title">Run complete</div>
+          <div className="golconway-done-line">Generations survived: <b>{state.generation}</b></div>
+          <div className="golconway-done-line">Peak live cells: <b>{state.maxLive}</b></div>
+          <div className="golconway-done-score">Final score: {score(state)}</div>
+        </div>
       )}
     </div>
   );

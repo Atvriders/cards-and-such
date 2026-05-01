@@ -8,14 +8,14 @@ type S = SettingsOf<typeof settings>;
 export const connectFourMiniPlugin: GamePlugin<ConnectFourMiniState, ConnectFourMiniAction, typeof settings> = {
   id:"connect-four-mini", title:"Connect Four Mini", category:"board",
   players:{ min:1, max:1, multiplayer:false },
-  description:"5x5 Connect Four against a random CPU. Connect 4 in a row to win.",
-  howToPlay:`Connect Four Mini is a compact 5×5 version of the classic. You play red against a random-CPU yellow. Click a column to drop your piece — gravity pulls it to the lowest empty cell. The first player to connect four pieces in a row, column, or diagonal wins.
+  description:"6x6 Connect Four against a CPU. Connect 4 in a row to win.",
+  howToPlay:`Connect Four Mini is a compact 6×6 version of the classic. You play red against a yellow CPU. Click a column header to drop your piece — gravity pulls it to the lowest empty cell. The first player to align four pieces in a row, column, or diagonal wins.
 
-A win earns 100 points. A draw (board full with no four-in-a-row) earns 25. A CPU win scores zero. The board is small enough that real strategic play is rewarded — center columns control more diagonals, and stacking around opponent threats blocks easy wins.
+A win earns 100 points plus a small bonus per piece placed. A draw (board full with no four-in-a-row) earns 25. A CPU loss scores zero. On the smaller board, real strategy is rewarded — center columns control more lines, and stacking around opponent threats blocks easy wins.
 
-The CPU drops pieces in random valid columns, so it makes occasional good moves but no real plan. Outsmarting it should be doable; aim to set up double-threat positions where two diagonals or rows can complete next turn.
+The CPU plays a basic strategy: it takes any immediate winning move, blocks your immediate winning move, and otherwise drops a random legal piece. Setting up a double threat (two ways to win on the next move) reliably beats it.
 
-Connect Four Mini is one full match — once the board is decided, your final score is locked. Play sharp, claim the center, and chain those four!`,
+Connect Four Mini is one full match. Hit "New Game" any time to start over with a fresh board.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ConnectFourMiniSettings),
   reducer,isTerminal,component:ConnectFourMiniGame,

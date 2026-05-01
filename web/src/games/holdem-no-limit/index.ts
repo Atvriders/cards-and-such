@@ -1,16 +1,37 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HoldemNoLimitState, HoldemNoLimitAction, HoldemNoLimitSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HoldemNoLimitGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = {
+  startingStack: {
+    kind: "enum" as const,
+    label: "Starting Stack",
+    options: ["500", "1000", "2000"] as const,
+    default: "1000",
+  },
+  blinds: {
+    kind: "enum" as const,
+    label: "Blinds",
+    options: ["5/10", "10/20", "25/50"] as const,
+    default: "10/20",
+  },
+} as const;
+
 type S = SettingsOf<typeof settings>;
+
 export const holdemNoLimitPlugin: GamePlugin<HoldemNoLimitState, HoldemNoLimitAction, typeof settings> = {
-  id:"holdem-no-limit", title:"Hold'em No-Limit Solo", category:"cards",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Solo Texas Hold'em No-Limit: deal seven cards (two hole + five board) and score the best five-card poker hand.",
-  howToPlay:"Hold'em No-Limit Solo gives you the classic Texas Hold'em deal experience without the betting drama. Press Deal each round to receive seven random cards from a fresh 52-card deck — these stand in for your two hole cards plus the five-card community board.\n\nThe seven cards are evaluated by automatically picking the best five-card poker hand among all combinations. Hand values: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nThere are eight rounds total, each one independent. Because Hold'em uses seven total cards, you'll see far more pairs, two-pair, and trips than in a five-card draw — typical scores climb fast.\n\nIn real No-Limit Hold'em the bet sizing is unbounded, meaning a single all-in can break a tournament; here the analog is the variance: a single straight flush can carry your whole session. Press Next after each round and chase that seven-card high score!",
+  id: "holdem-no-limit",
+  title: "Hold'em No-Limit",
+  category: "cards",
+  players: { min: 1, max: 1, multiplayer: false },
+  description:
+    "Heads-up Texas Hold'em No-Limit vs CPU. Two hole cards, five community cards (flop, turn, river), unlimited bet sizing, showdown for the pot.",
+  howToPlay:
+    "Real Texas Hold'em No-Limit, you vs the CPU. Each hand: blinds are posted (small / big), each player is dealt two hole cards, and four betting rounds follow — pre-flop, flop (3 community cards), turn (1 more), river (1 more).\n\nOn each turn you can FOLD, CHECK (when no bet is owed), CALL the outstanding bet, or RAISE — the slider lets you size any amount from the legal minimum up to your full stack (all-in). The CPU uses Monte-Carlo equity estimation: weak hands fold, marginal ones call, strong ones raise — with a touch of randomness so it's not robotic.\n\nAt showdown the best 5-card hand from each player's 7 cards (2 hole + 5 community) wins the pot. If your opponent folds, you scoop the pot uncalled. The button alternates each hand. The match ends when one stack hits zero.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as HoldemNoLimitSettings),
-  reducer,isTerminal,component:HoldemNoLimitGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as HoldemNoLimitSettings),
+  reducer,
+  isTerminal,
+  component: HoldemNoLimitGame,
 };

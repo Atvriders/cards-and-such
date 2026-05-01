@@ -1,2 +1,370 @@
-/* Modern poker-table engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+/* ------------------------------------------------------------------ */
+/* Texas Hold'em No-Limit — heads-up vs CPU                            */
+/* All classes are scoped under `holdem-` to avoid bleed.              */
+/* Re-uses .card from web/src/engines/deck/Card.tsx for hole/community */
+/* ------------------------------------------------------------------ */
+
+.holdem-wrap {
+  --felt-1: #0a4f3a;
+  --felt-2: #064229;
+  --felt-rim: #2a1a0a;
+  --gold: #d8b86a;
+  --gold-bright: #f3d488;
+  --chip-red: #c8102e;
+  --chip-blue: #2547a8;
+  --chip-green: #2a9d5b;
+  --chip-black: #1a1a1a;
+  --ink: #f7f1e1;
+  --ink-dim: rgba(247, 241, 225, 0.65);
+  --danger: #d64545;
+  --good: #2a9d5b;
+
+  font-family: "Inter", "Inter var", ui-sans-serif, system-ui, -apple-system,
+               "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "ss01" on, "tnum" on, "kern" on;
+  -webkit-font-smoothing: antialiased;
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px;
+  color: var(--ink);
+  background: radial-gradient(ellipse at center, #1a1f2c 0%, #0b0e16 100%);
+}
+
+.holdem-table {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px;
+  align-items: center;
+  justify-items: center;
+  border-radius: 280px / 180px;
+  background:
+    radial-gradient(ellipse at 50% 35%, var(--felt-1) 0%, var(--felt-2) 70%, #042217 100%);
+  border: 14px solid var(--felt-rim);
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 2px rgba(216, 184, 106, 0.35),
+    0 30px 80px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 2px rgba(0, 0, 0, 0.4);
+  padding: 36px 28px;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  min-height: 540px;
+}
+/* subtle felt weave */
+.holdem-table::before {
+  content: "";
+  position: absolute; inset: 14px;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient( 45deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 6px);
+  pointer-events: none;
+  border-radius: 270px / 170px;
+}
+
+.holdem-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+}
+.holdem-seat-cpu    { padding-top: 4px; }
+.holdem-seat-player { padding-bottom: 4px; }
+
+.holdem-seat-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 184, 106, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.holdem-seat-name {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+  color: var(--gold-bright);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.holdem-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f5e4b6, #c8a25a);
+  color: #2b1a04;
+  font-weight: 800;
+  font-size: 0.7rem;
+  font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  border: 1px solid #6b4d1c;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.holdem-stack {
+  font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.holdem-bet {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--gold-bright);
+  background: linear-gradient(180deg, rgba(216, 184, 106, 0.16), rgba(0, 0, 0, 0.3));
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 184, 106, 0.4);
+}
+
+.holdem-hole {
+  display: flex;
+  gap: 10px;
+}
+.holdem-hole .holdem-card,
+.holdem-hole .holdem-card-slot { transform-origin: center; }
+.holdem-card-tilt { transform: rotate(4deg); }
+.holdem-seat-cpu .holdem-card-tilt { transform: rotate(-4deg); }
+
+.holdem-card-slot {
+  width: 64px;
+  height: 90px;
+  border-radius: 8px;
+  border: 1.5px dashed rgba(216, 184, 106, 0.32);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+/* Center area */
+.holdem-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+  width: 100%;
+}
+.holdem-pot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.holdem-pot-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  font-weight: 700;
+}
+.holdem-pot-amount {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--gold-bright);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.45);
+  padding: 4px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 184, 106, 0.35);
+  min-width: 100px;
+  text-align: center;
+}
+.holdem-community {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 14px;
+  border: 1px solid rgba(216, 184, 106, 0.18);
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+.holdem-community .holdem-card {
+  animation: holdem-card-deal 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes holdem-card-deal {
+  from { transform: translateY(-12px) rotate(-6deg); opacity: 0; }
+  to   { transform: translateY(0)     rotate(0);    opacity: 1; }
+}
+
+.holdem-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 4px;
+}
+.holdem-action-line {
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+.holdem-result-line {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  background: rgba(0, 0, 0, 0.55);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 184, 106, 0.5);
+  box-shadow: 0 0 0 2px rgba(216, 184, 106, 0.18);
+}
+.holdem-phase-line {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.holdem-hand-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--gold-bright);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: capitalize;
+}
+
+/* ----- Action bar ----- */
+.holdem-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 8px 4px;
+}
+
+.holdem-btn {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, #2a3245, #161b29);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.4);
+  min-width: 110px;
+}
+.holdem-btn:hover:not(:disabled)  { transform: translateY(-1px); filter: brightness(1.08); }
+.holdem-btn:active:not(:disabled) { transform: translateY(1px); filter: brightness(0.95); }
+.holdem-btn:disabled              { opacity: 0.45; cursor: not-allowed; }
+
+.holdem-btn-primary {
+  background: linear-gradient(180deg, #f3d488, #b8893c);
+  color: #2b1a04;
+  border-color: #6b4d1c;
+}
+.holdem-btn-fold  { background: linear-gradient(180deg, #5a2630, #2a1015); border-color: #722834; }
+.holdem-btn-check { background: linear-gradient(180deg, #2a3a4f, #14202f); }
+.holdem-btn-call  { background: linear-gradient(180deg, #1f5d3f, #0d3724); border-color: #2a7a51; }
+.holdem-btn-raise { background: linear-gradient(180deg, #b86b1a, #6b3a08); border-color: #d8861f; color: #fff8e8; }
+.holdem-btn-quick {
+  font-size: 0.78rem;
+  padding: 6px 12px;
+  min-width: 60px;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+}
+.holdem-btn-cancel { background: linear-gradient(180deg, #3a3a44, #1c1c22); }
+.holdem-btn-confirm {
+  background: linear-gradient(180deg, #f3d488, #b8893c);
+  color: #2b1a04;
+  border-color: #6b4d1c;
+}
+
+/* Raise panel */
+.holdem-raise-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(216, 184, 106, 0.38);
+  border-radius: 14px;
+  padding: 12px 14px;
+  width: 100%;
+  max-width: 520px;
+}
+.holdem-raise-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.holdem-raise-amount {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--gold-bright);
+  text-align: center;
+}
+.holdem-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2a3a4f, #b8893c);
+  outline: none;
+  cursor: pointer;
+}
+.holdem-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f3d488, #b8893c);
+  border: 2px solid #2b1a04;
+  cursor: grab;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.holdem-slider::-moz-range-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f3d488, #b8893c);
+  border: 2px solid #2b1a04;
+  cursor: grab;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.holdem-gameover {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(216, 184, 106, 0.4);
+}
+
+/* Smaller screens */
+@media (max-width: 720px) {
+  .holdem-table { padding: 24px 14px; min-height: 480px; border-radius: 200px / 140px; }
+  .holdem-btn { padding: 10px 14px; min-width: 90px; font-size: 0.86rem; }
+  .holdem-pot-amount { font-size: 1.3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holdem-community .holdem-card { animation: none; }
+}
