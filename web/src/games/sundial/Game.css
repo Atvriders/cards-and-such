@@ -1,9 +1,11 @@
-.sundial-root { padding: 12px; min-height: 480px; background: #2c2c44; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.sundial-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
-.sundial-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+/* Themed sundial CSS.  Felt: twilight indigo | Accent: solar gold */
+.sundial-root { padding: 12px; min-height: 480px; background: radial-gradient(circle at 50% 35%, #3a3a5e 0%, #1a1a30 70%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; }
+.sundial-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; color: #ffd966; letter-spacing: 0.04em; }
+.sundial-auto { background: #ffd966; color: #1a1a30; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 700; }
+.sundial-auto:disabled { opacity: 0.4; cursor: default; }
 .sundial-rings { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; padding: 12px 0; }
 .sundial-slot { display: flex; flex-direction: column; align-items: center; }
-.sundial-slot-label { font-size: 12px; opacity: 0.7; }
+.sundial-slot-label { font-size: 12px; color: #ffd966; opacity: 0.85; }
 .sundial-slot-cards { min-width: 60px; min-height: 90px; }
-.sundial-empty { width: 60px; height: 90px; background: rgba(255,255,255,0.05); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
-.sundial-held { padding-top: 12px; display: flex; gap: 8px; align-items: center; }
+.sundial-empty { width: 60px; height: 90px; background: rgba(255,217,102,0.07); border: 1px dashed rgba(255,217,102,0.35); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #ffd966; }
+.sundial-held { padding-top: 12px; display: flex; gap: 8px; align-items: center; color: #ffd966; }

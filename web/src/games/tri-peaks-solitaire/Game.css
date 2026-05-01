@@ -1,7 +1,8 @@
-.tri-peaks-solitaire-root { padding: 12px; min-height: 480px; background: #1d3b2c; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.tri-peaks-solitaire-info { display: flex; gap: 12px; padding-bottom: 8px; font-size: 14px; align-items: center; }
-.tri-peaks-solitaire-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.tri-peaks-solitaire-board { display: flex; gap: 6px; padding: 8px 0; flex-wrap: wrap; }
+/* Themed tri-peaks-solitaire CSS.  Felt: alpine pine | Accent: snowcap */
+.tri-peaks-solitaire-root { padding: 12px; min-height: 480px; background: linear-gradient(180deg, #2a5a40 0%, #103024 60%, #061a12 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; }
+.tri-peaks-solitaire-info { display: flex; gap: 12px; padding-bottom: 8px; font-size: 14px; align-items: center; color: #e6e0c8; letter-spacing: 0.04em; }
+.tri-peaks-solitaire-auto { background: #e6e0c8; color: #103024; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 700; }
+.tri-peaks-solitaire-board { display: flex; gap: 6px; padding: 8px 0; flex-wrap: wrap; justify-content: center; }
 .tri-peaks-solitaire-col { display: flex; flex-direction: column; gap: 4px; }
 .tri-peaks-solitaire-cell { min-width: 60px; min-height: 90px; }
-.tri-peaks-solitaire-waste { padding: 12px 0; }
+.tri-peaks-solitaire-waste { padding: 12px 0; border-top: 1px solid rgba(230,224,200,0.2); }

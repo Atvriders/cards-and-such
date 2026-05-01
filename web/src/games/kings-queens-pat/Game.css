@@ -1,9 +1,11 @@
-.kings-queens-pat-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.kings-queens-pat-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.kings-queens-pat-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.kings-queens-pat-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for kings-queens-pat.  Felt: #54163a | Accent: #f1d670 */
+.kings-queens-pat-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #54163a 0%, color-mix(in srgb, #54163a 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.kings-queens-pat-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #f1d670; letter-spacing: 0.02em; }
+.kings-queens-pat-auto { background: #f1d670; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.kings-queens-pat-auto:hover { filter: brightness(1.1); }
 .kings-queens-pat-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .kings-queens-pat-spacer { flex: 1; min-width: 12px; }
 .kings-queens-pat-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.kings-queens-pat-col, .kings-queens-pat-stock, .kings-queens-pat-waste, .kings-queens-pat-foundation { min-width: 60px; min-height: 90px; }
-.kings-queens-pat-root.has-won { box-shadow: inset 0 0 60px gold; }
+.kings-queens-pat-col, .kings-queens-pat-stock, .kings-queens-pat-waste, .kings-queens-pat-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.kings-queens-pat-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #f1d670 40%, transparent); }
+.kings-queens-pat-root.has-won { box-shadow: inset 0 0 60px #f1d670, inset 0 0 0 1px #f1d670; }

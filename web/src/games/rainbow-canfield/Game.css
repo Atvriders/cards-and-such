@@ -1,9 +1,11 @@
-.rainbow-canfield-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.rainbow-canfield-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.rainbow-canfield-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.rainbow-canfield-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for rainbow-canfield.  Felt: #2a2658 | Accent: #e478b9 */
+.rainbow-canfield-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #2a2658 0%, color-mix(in srgb, #2a2658 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.rainbow-canfield-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #e478b9; letter-spacing: 0.02em; }
+.rainbow-canfield-auto { background: #e478b9; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.rainbow-canfield-auto:hover { filter: brightness(1.1); }
 .rainbow-canfield-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .rainbow-canfield-spacer { flex: 1; min-width: 12px; }
 .rainbow-canfield-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.rainbow-canfield-col, .rainbow-canfield-stock, .rainbow-canfield-waste, .rainbow-canfield-foundation { min-width: 60px; min-height: 90px; }
-.rainbow-canfield-root.has-won { box-shadow: inset 0 0 60px gold; }
+.rainbow-canfield-col, .rainbow-canfield-stock, .rainbow-canfield-waste, .rainbow-canfield-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.rainbow-canfield-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #e478b9 40%, transparent); }
+.rainbow-canfield-root.has-won { box-shadow: inset 0 0 60px #e478b9, inset 0 0 0 1px #e478b9; }

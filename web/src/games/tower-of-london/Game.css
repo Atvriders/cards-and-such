@@ -1,9 +1,11 @@
-.tower-of-london-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.tower-of-london-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.tower-of-london-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.tower-of-london-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for tower-of-london.  Felt: #5a1a1a | Accent: #d4af37 */
+.tower-of-london-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #5a1a1a 0%, color-mix(in srgb, #5a1a1a 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.tower-of-london-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #d4af37; letter-spacing: 0.02em; }
+.tower-of-london-auto { background: #d4af37; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.tower-of-london-auto:hover { filter: brightness(1.1); }
 .tower-of-london-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .tower-of-london-spacer { flex: 1; min-width: 12px; }
 .tower-of-london-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.tower-of-london-col, .tower-of-london-stock, .tower-of-london-waste, .tower-of-london-foundation { min-width: 60px; min-height: 90px; }
-.tower-of-london-root.has-won { box-shadow: inset 0 0 60px gold; }
+.tower-of-london-col, .tower-of-london-stock, .tower-of-london-waste, .tower-of-london-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.tower-of-london-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #d4af37 40%, transparent); }
+.tower-of-london-root.has-won { box-shadow: inset 0 0 60px #d4af37, inset 0 0 0 1px #d4af37; }

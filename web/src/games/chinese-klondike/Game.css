@@ -1,9 +1,11 @@
-.chinese-klondike-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.chinese-klondike-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.chinese-klondike-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.chinese-klondike-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for chinese-klondike.  Felt: #5a0f0f | Accent: #f1c40f */
+.chinese-klondike-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #5a0f0f 0%, color-mix(in srgb, #5a0f0f 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.chinese-klondike-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #f1c40f; letter-spacing: 0.02em; }
+.chinese-klondike-auto { background: #f1c40f; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.chinese-klondike-auto:hover { filter: brightness(1.1); }
 .chinese-klondike-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .chinese-klondike-spacer { flex: 1; min-width: 12px; }
 .chinese-klondike-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.chinese-klondike-col, .chinese-klondike-stock, .chinese-klondike-waste, .chinese-klondike-foundation { min-width: 60px; min-height: 90px; }
-.chinese-klondike-root.has-won { box-shadow: inset 0 0 60px gold; }
+.chinese-klondike-col, .chinese-klondike-stock, .chinese-klondike-waste, .chinese-klondike-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.chinese-klondike-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #f1c40f 40%, transparent); }
+.chinese-klondike-root.has-won { box-shadow: inset 0 0 60px #f1c40f, inset 0 0 0 1px #f1c40f; }

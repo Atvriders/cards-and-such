@@ -1,9 +1,11 @@
-.raglan-patience-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.raglan-patience-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.raglan-patience-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.raglan-patience-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for raglan-patience.  Felt: #3a2a16 | Accent: #cd9b48 */
+.raglan-patience-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #3a2a16 0%, color-mix(in srgb, #3a2a16 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.raglan-patience-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #cd9b48; letter-spacing: 0.02em; }
+.raglan-patience-auto { background: #cd9b48; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.raglan-patience-auto:hover { filter: brightness(1.1); }
 .raglan-patience-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .raglan-patience-spacer { flex: 1; min-width: 12px; }
 .raglan-patience-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.raglan-patience-col, .raglan-patience-stock, .raglan-patience-waste, .raglan-patience-foundation { min-width: 60px; min-height: 90px; }
-.raglan-patience-root.has-won { box-shadow: inset 0 0 60px gold; }
+.raglan-patience-col, .raglan-patience-stock, .raglan-patience-waste, .raglan-patience-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.raglan-patience-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #cd9b48 40%, transparent); }
+.raglan-patience-root.has-won { box-shadow: inset 0 0 60px #cd9b48, inset 0 0 0 1px #cd9b48; }

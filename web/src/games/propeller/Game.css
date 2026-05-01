@@ -1,9 +1,11 @@
-.propeller-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.propeller-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.propeller-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.propeller-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for propeller.  Felt: #0e3a3a | Accent: #a0c4c4 */
+.propeller-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #0e3a3a 0%, color-mix(in srgb, #0e3a3a 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.propeller-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #a0c4c4; letter-spacing: 0.02em; }
+.propeller-auto { background: #a0c4c4; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.propeller-auto:hover { filter: brightness(1.1); }
 .propeller-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .propeller-spacer { flex: 1; min-width: 12px; }
 .propeller-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.propeller-col, .propeller-stock, .propeller-waste, .propeller-foundation { min-width: 60px; min-height: 90px; }
-.propeller-root.has-won { box-shadow: inset 0 0 60px gold; }
+.propeller-col, .propeller-stock, .propeller-waste, .propeller-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.propeller-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #a0c4c4 40%, transparent); }
+.propeller-root.has-won { box-shadow: inset 0 0 60px #a0c4c4, inset 0 0 0 1px #a0c4c4; }

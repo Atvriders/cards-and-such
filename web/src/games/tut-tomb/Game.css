@@ -1,9 +1,10 @@
-.tut-tomb-root { padding: 12px; min-height: 480px; background: #2a1d3d; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.tut-tomb-info { display: flex; gap: 14px; padding-bottom: 8px; font-size: 14px; align-items: center; }
-.tut-tomb-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+/* Themed tut-tomb CSS.  Felt: dusk tomb | Accent: dimmer gold */
+.tut-tomb-root { padding: 12px; min-height: 480px; background: linear-gradient(165deg, #2a1c0a 0%, #120902 100%); color: #fff; border-radius: 10px; font-family: "Palatino Linotype", "Book Antiqua", serif; }
+.tut-tomb-info { display: flex; gap: 14px; padding-bottom: 8px; font-size: 14px; align-items: center; color: #dca841; letter-spacing: 0.04em; }
+.tut-tomb-auto { background: #dca841; color: #2a1c0a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 700; }
 .tut-tomb-pyramid { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0; }
 .tut-tomb-row { display: flex; gap: 6px; }
 .tut-tomb-cell { min-width: 60px; min-height: 90px; }
-.tut-tomb-gap { width: 60px; height: 90px; background: rgba(255,255,255,0.05); border-radius: 4px; }
+.tut-tomb-gap { width: 60px; height: 90px; background: rgba(220,168,65,0.06); border: 1px dashed rgba(220,168,65,0.3); border-radius: 4px; }
 .tut-tomb-bottom { display: flex; gap: 18px; padding-top: 12px; align-items: center; }
 .tut-tomb-stock-pile, .tut-tomb-waste-pile { min-width: 60px; min-height: 90px; }

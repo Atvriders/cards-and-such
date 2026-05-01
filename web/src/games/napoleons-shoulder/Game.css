@@ -1,9 +1,11 @@
-.napoleons-shoulder-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.napoleons-shoulder-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.napoleons-shoulder-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.napoleons-shoulder-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for napoleons-shoulder.  Felt: #1c4a72 | Accent: #e1c46c */
+.napoleons-shoulder-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #1c4a72 0%, color-mix(in srgb, #1c4a72 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.napoleons-shoulder-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #e1c46c; letter-spacing: 0.02em; }
+.napoleons-shoulder-auto { background: #e1c46c; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.napoleons-shoulder-auto:hover { filter: brightness(1.1); }
 .napoleons-shoulder-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .napoleons-shoulder-spacer { flex: 1; min-width: 12px; }
 .napoleons-shoulder-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.napoleons-shoulder-col, .napoleons-shoulder-stock, .napoleons-shoulder-waste, .napoleons-shoulder-foundation { min-width: 60px; min-height: 90px; }
-.napoleons-shoulder-root.has-won { box-shadow: inset 0 0 60px gold; }
+.napoleons-shoulder-col, .napoleons-shoulder-stock, .napoleons-shoulder-waste, .napoleons-shoulder-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.napoleons-shoulder-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #e1c46c 40%, transparent); }
+.napoleons-shoulder-root.has-won { box-shadow: inset 0 0 60px #e1c46c, inset 0 0 0 1px #e1c46c; }

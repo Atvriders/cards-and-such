@@ -1,9 +1,11 @@
-.agnes-sorel-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.agnes-sorel-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.agnes-sorel-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.agnes-sorel-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for agnes-sorel.  Felt: #0a4d2c | Accent: #f6c177 */
+.agnes-sorel-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #0a4d2c 0%, color-mix(in srgb, #0a4d2c 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.agnes-sorel-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #f6c177; letter-spacing: 0.02em; }
+.agnes-sorel-auto { background: #f6c177; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.agnes-sorel-auto:hover { filter: brightness(1.1); }
 .agnes-sorel-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .agnes-sorel-spacer { flex: 1; min-width: 12px; }
 .agnes-sorel-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.agnes-sorel-col, .agnes-sorel-stock, .agnes-sorel-waste, .agnes-sorel-foundation { min-width: 60px; min-height: 90px; }
-.agnes-sorel-root.has-won { box-shadow: inset 0 0 60px gold; }
+.agnes-sorel-col, .agnes-sorel-stock, .agnes-sorel-waste, .agnes-sorel-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.agnes-sorel-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #f6c177 40%, transparent); }
+.agnes-sorel-root.has-won { box-shadow: inset 0 0 60px #f6c177, inset 0 0 0 1px #f6c177; }

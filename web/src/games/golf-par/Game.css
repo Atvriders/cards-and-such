@@ -1,7 +1,8 @@
-.golf-par-root { padding: 12px; min-height: 480px; background: #1d3b2c; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.golf-par-info { display: flex; gap: 12px; padding-bottom: 8px; font-size: 14px; align-items: center; }
-.golf-par-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+/* Themed golf-par CSS.  Felt: putting green | Accent: scorecard */
+.golf-par-root { padding: 12px; min-height: 480px; background: linear-gradient(180deg, #167a35 0%, #0c4d24 60%, #052614 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; }
+.golf-par-info { display: flex; gap: 12px; padding-bottom: 8px; font-size: 14px; align-items: center; color: #ece5b8; letter-spacing: 0.03em; }
+.golf-par-auto { background: #ece5b8; color: #0c4d24; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 700; }
 .golf-par-board { display: flex; gap: 6px; padding: 8px 0; flex-wrap: wrap; }
 .golf-par-col { display: flex; flex-direction: column; gap: 4px; }
 .golf-par-cell { min-width: 60px; min-height: 90px; }
-.golf-par-waste { padding: 12px 0; }
+.golf-par-waste { padding: 12px 0; border-top: 1px solid rgba(236,229,184,0.2); }

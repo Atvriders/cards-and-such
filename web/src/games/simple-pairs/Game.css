@@ -1,6 +1,7 @@
-.simple-pairs-root { padding: 12px; min-height: 480px; background: #14322c; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.simple-pairs-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
-.simple-pairs-grid { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; }
+/* Themed simple-pairs CSS.  Felt: slate sapphire | Accent: pale steel */
+.simple-pairs-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #2a4a64 0%, #122230 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; }
+.simple-pairs-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; color: #d8e8f4; letter-spacing: 0.04em; }
+.simple-pairs-grid { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; align-items: center; }
 .simple-pairs-row { display: flex; gap: 6px; }
-.simple-pairs-cell { width: 60px; height: 90px; cursor: pointer; }
-.simple-pairs-cell.selected { box-shadow: 0 0 0 3px gold; }
+.simple-pairs-cell { width: 60px; height: 90px; cursor: pointer; border-radius: 4px; }
+.simple-pairs-cell.selected { box-shadow: 0 0 0 3px #d8e8f4; }

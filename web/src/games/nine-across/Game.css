@@ -1,9 +1,11 @@
-.nine-across-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.nine-across-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.nine-across-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.nine-across-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for nine-across.  Felt: #0c4f3a | Accent: #bfe5c9 */
+.nine-across-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #0c4f3a 0%, color-mix(in srgb, #0c4f3a 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.nine-across-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #bfe5c9; letter-spacing: 0.02em; }
+.nine-across-auto { background: #bfe5c9; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.nine-across-auto:hover { filter: brightness(1.1); }
 .nine-across-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .nine-across-spacer { flex: 1; min-width: 12px; }
 .nine-across-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.nine-across-col, .nine-across-stock, .nine-across-waste, .nine-across-foundation { min-width: 60px; min-height: 90px; }
-.nine-across-root.has-won { box-shadow: inset 0 0 60px gold; }
+.nine-across-col, .nine-across-stock, .nine-across-waste, .nine-across-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.nine-across-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #bfe5c9 40%, transparent); }
+.nine-across-root.has-won { box-shadow: inset 0 0 60px #bfe5c9, inset 0 0 0 1px #bfe5c9; }

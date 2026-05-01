@@ -1,9 +1,11 @@
-.duchess-luynes-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.duchess-luynes-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.duchess-luynes-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.duchess-luynes-auto:hover { background: rgba(255,255,255,0.32); }
+/* Themed solitaire-family CSS for duchess-luynes.  Felt: #3d1a3d | Accent: #dfc1d8 */
+.duchess-luynes-root { padding: 12px; min-height: 480px; background: linear-gradient(160deg, #3d1a3d 0%, color-mix(in srgb, #3d1a3d 70%, #000) 100%); color: #fff; border-radius: 10px; font-family: system-ui, sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04); }
+.duchess-luynes-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; color: #dfc1d8; letter-spacing: 0.02em; }
+.duchess-luynes-auto { background: #dfc1d8; color: #1a1a1a; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 600; }
+.duchess-luynes-auto:hover { filter: brightness(1.1); }
 .duchess-luynes-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
 .duchess-luynes-spacer { flex: 1; min-width: 12px; }
 .duchess-luynes-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.duchess-luynes-col, .duchess-luynes-stock, .duchess-luynes-waste, .duchess-luynes-foundation { min-width: 60px; min-height: 90px; }
-.duchess-luynes-root.has-won { box-shadow: inset 0 0 60px gold; }
+.duchess-luynes-col, .duchess-luynes-stock, .duchess-luynes-waste, .duchess-luynes-foundation { min-width: 60px; min-height: 90px; border-radius: 4px; }
+.duchess-luynes-foundation { box-shadow: inset 0 0 0 1px color-mix(in srgb, #dfc1d8 40%, transparent); }
+.duchess-luynes-root.has-won { box-shadow: inset 0 0 60px #dfc1d8, inset 0 0 0 1px #dfc1d8; }

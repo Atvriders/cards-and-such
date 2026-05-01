@@ -1,9 +1,10 @@
-.big-ben-root { padding: 12px; min-height: 480px; background: #2c2c44; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.big-ben-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
-.big-ben-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.big-ben-rings { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; padding: 12px 0; }
+/* Themed big-ben CSS.  Felt: London midnight | Accent: clock gold */
+.big-ben-root { padding: 12px; min-height: 480px; background: linear-gradient(180deg, #10222e 0%, #061018 100%); color: #fff; border-radius: 10px; font-family: "Georgia", serif; }
+.big-ben-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; color: #d4a236; letter-spacing: 0.05em; }
+.big-ben-auto { background: #d4a236; color: #10222e; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: 700; }
+.big-ben-rings { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; padding: 12px 0; border-top: 1px solid rgba(212,162,54,0.25); border-bottom: 1px solid rgba(212,162,54,0.25); }
 .big-ben-slot { display: flex; flex-direction: column; align-items: center; }
-.big-ben-slot-label { font-size: 12px; opacity: 0.7; }
+.big-ben-slot-label { font-size: 12px; color: #d4a236; opacity: 0.9; }
 .big-ben-slot-cards { min-width: 60px; min-height: 90px; }
-.big-ben-empty { width: 60px; height: 90px; background: rgba(255,255,255,0.05); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
-.big-ben-held { padding-top: 12px; display: flex; gap: 8px; align-items: center; }
+.big-ben-empty { width: 60px; height: 90px; background: rgba(212,162,54,0.07); border: 1px dashed rgba(212,162,54,0.35); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #d4a236; }
+.big-ben-held { padding-top: 12px; display: flex; gap: 8px; align-items: center; color: #d4a236; }
