@@ -1,16 +1,25 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SevenStudHiLoState, SevenStudHiLoAction, SevenStudHiLoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SevenStudHiLoGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = {
+  startingBankroll: { kind: "enum" as const, label: "Starting Stack", options: ["500", "1000", "5000"] as const, default: "1000" },
+  ante: { kind: "enum" as const, label: "Ante", options: ["5", "10", "25"] as const, default: "10" },
+} as const;
 type S = SettingsOf<typeof settings>;
+
 export const sevenStudHiLoPlugin: GamePlugin<SevenStudHiLoState, SevenStudHiLoAction, typeof settings> = {
-  id:"seven-stud-hi-lo", title:"7-Card Stud Hi-Lo Solo", category:"cards",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Solo Seven-Card Stud Hi-Lo: seven cards dealt, best five-card poker hand scored.",
-  howToPlay:"7-Card Stud Hi-Lo Solo (8-or-Better) translates the classic stud deal into a quick solo poker rating round. Press Deal each round to receive seven random cards from a 52-card deck — the seven cards a player would have at showdown in real Stud.\n\nThe best five-card poker hand is scored: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nIn real 7-Card Stud Hi-Lo, the pot is split between best high and qualifying low (eight or better). This solo deals you the seven cards and scores the high half — the most reliable point earner.\n\nEight rounds. Stud's seven-card spread produces about the same hand distribution as Hold'em — expect plenty of two pair and trips. Press Next between rounds.",
+  id: "seven-stud-hi-lo",
+  title: "7-Card Stud Hi-Lo",
+  category: "cards",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Heads-up 7-Card Stud 8-or-Better: split pot between best high and qualifying low.",
+  howToPlay:
+    "7-Card Stud Hi-Lo splits the pot between best high hand and best A-5 low (8-or-better). Each player receives 7 cards over 5 streets:\n\n- 3rd street: 2 down + 1 up (door card)\n- 4th, 5th, 6th street: 1 up each\n- 7th street (river): 1 down\n\nBest 5 of your 7 for high; if a qualifying low (5 cards 8 or below, no pair) exists, half the pot goes to the best low. Different cards may be used for each half.\n\nUse Fold/Check/Call/Raise.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as SevenStudHiLoSettings),
-  reducer,isTerminal,component:SevenStudHiLoGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as SevenStudHiLoSettings),
+  reducer,
+  isTerminal,
+  component: SevenStudHiLoGame,
 };

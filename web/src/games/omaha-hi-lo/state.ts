@@ -1,57 +1,97 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 7;
-export const CARDS_PER_HAND = 9;
-export interface OmahaHiLoSettings { dummy: boolean; }
-export interface OmahaHiLoState { rngSeed: number; round: number; hand: number[]; rank: string; rankPts: number; score: number; phase: "deal" | "scored" | "done"; }
-export type OmahaHiLoAction = { type: "deal" } | { type: "next" };
+import type { Card } from "../../engines/deck/index.js";
+import { newDeck } from "../../engines/deck/index.js";
+import type { PGState, PGAction, PGConfig } from "../_shared/poker-game.js";
+import { pgInitialState, pgReducer, pgIsTerminal } from "../_shared/poker-game.js";
+import { bestOmaha, compareHands, compareLow, handStrength } from "../_shared/poker.js";
 
-export function cardName(c: number): string { const r=["2","3","4","5","6","7","8","9","10","J","Q","K","A"]; const s=["♠","♥","♦","♣"]; return r[c%13]!+s[Math.floor(c/13)]!; }
-export function isRed(c: number): boolean { const s=Math.floor(c/13); return s===1||s===2; }
-function dealHand(rng:()=>number, n:number): number[] { const u=new Set<number>(); const out:number[]=[]; while(out.length<n){const c=Math.floor(rng()*52); if(!u.has(c)){u.add(c); out.push(c);}} return out; }
-
-function rateFiveCards(hand5: number[]): { rank: string; pts: number } {
-  const ranks = hand5.map(c=>c%13).sort((a,b)=>a-b);
-  const suits = hand5.map(c=>Math.floor(c/13));
-  const counts: Record<number,number> = {}; for(const r of ranks) counts[r]=(counts[r]||0)+1;
-  const cv = Object.values(counts).sort((a,b)=>b-a);
-  const flush = suits.every(s=>s===suits[0]);
-  let straight = true; for(let i=1;i<5;i++) if(ranks[i]!==ranks[i-1]!+1) straight=false;
-  // ace-low wheel A-2-3-4-5 = 0,1,2,3,12
-  if(!straight && ranks[0]===0 && ranks[1]===1 && ranks[2]===2 && ranks[3]===3 && ranks[4]===12) straight=true;
-  if(straight && flush) return { rank: "Straight Flush", pts: 200 };
-  if(cv[0]===4) return { rank: "Four of a Kind", pts: 150 };
-  if(cv[0]===3 && cv[1]===2) return { rank: "Full House", pts: 100 };
-  if(flush) return { rank: "Flush", pts: 80 };
-  if(straight) return { rank: "Straight", pts: 70 };
-  if(cv[0]===3) return { rank: "Three of a Kind", pts: 50 };
-  if(cv[0]===2 && cv[1]===2) return { rank: "Two Pair", pts: 30 };
-  if(cv[0]===2) return { rank: "Pair", pts: 10 };
-  return { rank: "High Card", pts: 0 };
+export interface OmahaHiLoSettings {
+  startingBankroll: "500" | "1000" | "5000";
+  smallBlind: "5" | "10" | "25";
 }
-function bestFiveOf(cards: number[]): { rank: string; pts: number } {
-  if (cards.length <= 5) return rateFiveCards(cards.length === 5 ? cards : [...cards, ...Array(5-cards.length).fill(cards[0]||0)]);
-  // pick best 5-card subset (combinatorial; cards.length max ~17 -> C(17,5)=6188 ok)
-  let best: { rank: string; pts: number } = { rank: "High Card", pts: 0 };
-  const n = cards.length;
-  for (let a=0;a<n-4;a++) for (let b=a+1;b<n-3;b++) for (let c=b+1;c<n-2;c++) for (let d=c+1;d<n-1;d++) for (let e=d+1;e<n;e++) {
-    const r = rateFiveCards([cards[a]!,cards[b]!,cards[c]!,cards[d]!,cards[e]!]);
-    if (r.pts > best.pts) best = r;
+
+export type OmahaHiLoState = PGState<OmahaHiLoSettings>;
+export type OmahaHiLoAction = PGAction;
+
+export const TOTAL_HANDS = 8;
+
+function preflopOmahaStrength(hole: Card[]): number {
+  const ranks = hole.map((c) => (c.rank === 1 ? 14 : c.rank)).sort((a, b) => b - a);
+  let s = 0.2 + (ranks[0]! - 2) / 30;
+  const counts = new Map<number, number>();
+  for (const r of ranks) counts.set(r, (counts.get(r) ?? 0) + 1);
+  for (const c of counts.values()) if (c >= 2) s += 0.1;
+  const lows = hole.filter((c) => c.rank === 1 || c.rank === 2 || c.rank === 3 || c.rank === 4).length;
+  s += lows * 0.04;
+  return Math.min(0.95, s);
+}
+
+/** Omaha Hi-Lo: best A-5 8-or-better low using EXACTLY 2 hole + 3 community. */
+export function bestOmahaLow(hole: Card[], community: Card[]): { ok: boolean; ranks: number[] } {
+  if (community.length < 3 || hole.length < 2) return { ok: false, ranks: [] };
+  let best: { ok: boolean; ranks: number[] } | null = null;
+  for (let i = 0; i < hole.length - 1; i++) {
+    for (let j = i + 1; j < hole.length; j++) {
+      for (let a = 0; a < community.length - 2; a++) {
+        for (let b = a + 1; b < community.length - 1; b++) {
+          for (let c = b + 1; c < community.length; c++) {
+            const five = [hole[i]!, hole[j]!, community[a]!, community[b]!, community[c]!];
+            const vals = five.map((x) => (x.rank === 1 ? 1 : x.rank));
+            if (new Set(vals).size !== 5) continue;
+            if (vals.some((v) => v > 8)) continue;
+            const sorted = [...vals].sort((x, y) => y - x);
+            if (!best) best = { ok: true, ranks: sorted };
+            else {
+              for (let k = 0; k < 5; k++) {
+                if (sorted[k]! < best.ranks[k]!) { best = { ok: true, ranks: sorted }; break; }
+                if (sorted[k]! > best.ranks[k]!) break;
+              }
+            }
+          }
+        }
+      }
+    }
   }
-  return best;
+  return best ?? { ok: false, ranks: [] };
 }
-export function initialState(seed: number, _s: OmahaHiLoSettings): OmahaHiLoState { return { rngSeed: seed, round: 1, hand: [], rank: "", rankPts: 0, score: 0, phase: "deal" }; }
+
+const cfg: PGConfig<OmahaHiLoSettings> = {
+  totalHands: TOTAL_HANDS,
+  startingStack: (s) => parseInt(s.startingBankroll, 10),
+  smallBlind: (s) => parseInt(s.smallBlind, 10),
+  holeCount: 4,
+  buildDeck: () => newDeck(1),
+  judge: (player, cpu, community) => {
+    if (community.length < 5) return { winner: "split", tag: "incomplete" };
+    const ph = bestOmaha(player.hole, community);
+    const ch = bestOmaha(cpu.hole, community);
+    const plOm = bestOmahaLow(player.hole, community);
+    const clOm = bestOmahaLow(cpu.hole, community);
+    const highCmp = compareHands(ph, ch);
+    const lowCmp = compareLow(plOm, clOm);
+    if (!plOm.ok && !clOm.ok) {
+      // No qualifying low — high takes whole pot
+      if (highCmp > 0) return { winner: "player", tag: `${ph.class} (no low)` };
+      if (highCmp < 0) return { winner: "cpu", tag: `${ch.class} (no low)` };
+      return { winner: "split", tag: `tied ${ph.class}` };
+    }
+    // Both halves
+    if (highCmp > 0 && lowCmp >= 0) return { winner: "player", tag: `scoop ${ph.class}` };
+    if (highCmp < 0 && lowCmp <= 0) return { winner: "cpu", tag: `scoop ${ch.class}` };
+    return { winner: "split", tag: `hi/lo split` };
+  },
+  cpuStrength: (cpu, community) => {
+    if (community.length === 0) return preflopOmahaStrength(cpu.hole);
+    return handStrength(bestOmaha(cpu.hole, community));
+  },
+};
+
+export function initialState(seed: number, settings: OmahaHiLoSettings): OmahaHiLoState {
+  return pgInitialState(seed, settings, cfg);
+}
 export function reducer(state: OmahaHiLoState, action: OmahaHiLoAction): OmahaHiLoState {
-  if (state.phase === "done") return state;
-  if (action.type === "deal") {
-    if (state.phase !== "deal") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand = dealHand(rng, CARDS_PER_HAND);
-    const next = Math.floor(rng()*2**31);
-    const r = bestFiveOf(hand);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: next, hand, rank: r.rank, rankPts: r.pts, score: state.score + r.pts, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") { if (state.phase !== "scored") return state; return { ...state, round: state.round+1, hand:[], rank:"", rankPts:0, phase:"deal" }; }
-  return state;
+  return pgReducer(state, action, cfg);
 }
-export function isTerminal(state: OmahaHiLoState): { score: number } | null { return state.phase === "done" ? { score: state.score } : null; }
+export function isTerminal(state: OmahaHiLoState): { score: number } | null {
+  return pgIsTerminal(state);
+}
+export { bestOmaha };

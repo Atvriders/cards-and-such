@@ -1,23 +1,35 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { FiveStudPokerState, FiveStudPokerAction, FiveStudPokerSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, CARDS_PER_HAND, cardName, isRed } from "./state.js";
+import { isTerminal, bestFiveStud, TOTAL_HANDS } from "./state.js";
+import { StudTable } from "../_shared/StudTable.js";
 import "./Game.css";
+
 export function FiveStudPokerGame({ state, dispatch, onGameOver }: GameProps<FiveStudPokerState, FiveStudPokerSettings>): JSX.Element {
-  const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
+  const ante = parseInt(state.settings.ante, 10);
+  const dis = (a: FiveStudPokerAction): void => dispatch(a);
+
+  const playerLabel = state.player.cards.length >= 2
+    ? bestFiveStud(state.player.cards).class : undefined;
+  const cpuLabel = state.showdownReveal && state.cpu.cards.length >= 2
+    ? bestFiveStud(state.cpu.cards).class : undefined;
+
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.hand.length > 0 && (
-        <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      )}
-      {state.phase === "deal" && <button className="dm-btn" onClick={() => dispatch({ type: "deal" } as FiveStudPokerAction)}>Deal {CARDS_PER_HAND} cards</button>}
-      {state.phase === "scored" && <>
-        <div className="dm-result">{state.rank} — +{state.rankPts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as FiveStudPokerAction)}>Next</button>
-      </>}
-    </div>
+    <StudTable
+      prefix="fivestud-"
+      state={state}
+      totalHands={TOTAL_HANDS}
+      smallBet={ante * 2}
+      playerHandLabel={playerLabel}
+      cpuHandLabel={cpuLabel}
+      onDeal={() => dis({ type: "deal" })}
+      onFold={() => dis({ type: "fold" })}
+      onCheck={() => dis({ type: "check" })}
+      onCall={() => dis({ type: "call" })}
+      onRaise={(amount) => dis({ type: "raise", amount })}
+    />
   );
 }

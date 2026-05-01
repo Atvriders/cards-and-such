@@ -1,23 +1,37 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CrazyPineappleState, CrazyPineappleAction, CrazyPineappleSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, CARDS_PER_HAND, cardName, isRed } from "./state.js";
+import { isTerminal, bestFive, TOTAL_HANDS } from "./state.js";
+import { PokerTable } from "../_shared/PokerTable.js";
 import "./Game.css";
+
 export function CrazyPineappleGame({ state, dispatch, onGameOver }: GameProps<CrazyPineappleState, CrazyPineappleSettings>): JSX.Element {
-  const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
+  const sb = parseInt(state.settings.smallBlind, 10);
+  const dis = (a: CrazyPineappleAction): void => dispatch(a);
+
+  const playerBest = state.player.hole.length >= 2 && state.community.length >= 3
+    ? bestFive([...state.player.hole, ...state.community]) : null;
+  const cpuBest = state.showdownReveal && state.cpu.hole.length >= 2 && state.community.length >= 3
+    ? bestFive([...state.cpu.hole, ...state.community]) : null;
+
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.hand.length > 0 && (
-        <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      )}
-      {state.phase === "deal" && <button className="dm-btn" onClick={() => dispatch({ type: "deal" } as CrazyPineappleAction)}>Deal {CARDS_PER_HAND} cards</button>}
-      {state.phase === "scored" && <>
-        <div className="dm-result">{state.rank} — +{state.rankPts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as CrazyPineappleAction)}>Next</button>
-      </>}
-    </div>
+    <PokerTable
+      prefix="crazypineap-"
+      state={state}
+      totalHands={TOTAL_HANDS}
+      smallBlind={sb}
+      playerHandLabel={playerBest?.class}
+      cpuHandLabel={cpuBest?.class}
+      discardPrompt="Tap a hole card to discard (after flop)."
+      onDeal={() => dis({ type: "deal" })}
+      onFold={() => dis({ type: "fold" })}
+      onCheck={() => dis({ type: "check" })}
+      onCall={() => dis({ type: "call" })}
+      onRaise={(amount) => dis({ type: "raise", amount })}
+      onDiscard={(index) => dis({ type: "discard", index })}
+    />
   );
 }

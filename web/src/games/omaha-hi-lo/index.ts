@@ -1,16 +1,25 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OmahaHiLoState, OmahaHiLoAction, OmahaHiLoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OmahaHiLoGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = {
+  startingBankroll: { kind: "enum" as const, label: "Starting Stack", options: ["500", "1000", "5000"] as const, default: "1000" },
+  smallBlind: { kind: "enum" as const, label: "Small Blind", options: ["5", "10", "25"] as const, default: "10" },
+} as const;
 type S = SettingsOf<typeof settings>;
+
 export const omahaHiLoPlugin: GamePlugin<OmahaHiLoState, OmahaHiLoAction, typeof settings> = {
-  id:"omaha-hi-lo", title:"Omaha Hi-Lo Solo", category:"cards",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Solo Omaha Hi-Lo: deal nine cards, score best high hand.",
-  howToPlay:"Omaha Hi-Lo Solo (8-or-Better) brings the split-pot Omaha experience to a solo deal. Press Deal each round and you'll receive nine cards (four hole + five community) from a 52-card deck.\n\nThe high hand is scored automatically using standard poker rankings: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nIn live Omaha Hi-Lo, half the pot goes to the best high and half to the best low (eight or better required). This solo version focuses on the high half — the dominant scoring concept — but expect more middle-range hands because some cards are pulled toward low-qualifying values.\n\nSeven rounds total. Watch for big hands every time a board pair appears. Press Next between rounds and aim for a record session!",
+  id: "omaha-hi-lo",
+  title: "Omaha Hi-Lo",
+  category: "cards",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Heads-up Omaha 8-or-Better: split pot between best high and best 8-or-better low.",
+  howToPlay:
+    "Omaha Hi-Lo (also called Omaha 8-or-Better) is a split-pot variant. Half the pot goes to the best high hand and half to the best A-5 lowball hand 8-or-better. Players use EXACTLY 2 of their 4 hole cards and EXACTLY 3 community cards — the same 2+3 rule applies for both halves and you can use different cards for each.\n\nIf no qualifying low exists, the high hand wins the entire pot.\n\nUse Fold/Check/Call/Raise; the bet slider sizes raises in small-blind increments.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as OmahaHiLoSettings),
-  reducer,isTerminal,component:OmahaHiLoGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as OmahaHiLoSettings),
+  reducer,
+  isTerminal,
+  component: OmahaHiLoGame,
 };

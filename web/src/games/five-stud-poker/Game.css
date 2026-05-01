@@ -1,2 +1,38 @@
-/* Modern poker-table engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap");
+
+.fivestud-felt {
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(ellipse at center, #1e3a5f 0%, #0d1f33 70%, #040a14 100%);
+  min-height: 600px;
+  padding: 1.25rem;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  gap: 0.75rem;
+  color: #f5f1d9;
+  border-radius: 12px;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.45);
+}
+.fivestud-hud { display: flex; justify-content: center; gap: 1.5rem; font-family: "JetBrains Mono", monospace; font-size: 0.85rem; letter-spacing: 0.05em; }
+.fivestud-stat { background: rgba(0, 0, 0, 0.3); padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid rgba(245, 241, 217, 0.2); }
+.fivestud-seat { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 0.4rem; }
+.fivestud-name { font-weight: 700; letter-spacing: 0.04em; background: rgba(0, 0, 0, 0.4); padding: 0.35rem 0.85rem; border-radius: 999px; border: 1px solid rgba(245, 241, 217, 0.25); }
+.fivestud-stack { font-family: "JetBrains Mono", monospace; color: #ffd76b; margin-left: 0.4rem; }
+.fivestud-bet { font-family: "JetBrains Mono", monospace; color: #8edcff; margin-left: 0.4rem; font-size: 0.85em; }
+.fivestud-cards { display: flex; gap: 0.4rem; justify-content: center; flex-wrap: wrap; }
+.fivestud-handname { font-style: italic; color: #ffe9a3; font-size: 0.9rem; text-transform: capitalize; }
+.fivestud-board { display: grid; grid-template-rows: auto 1fr auto; justify-items: center; gap: 0.5rem; padding: 0.75rem; border: 2px dashed rgba(245, 241, 217, 0.18); border-radius: 100px / 50px; background: rgba(0, 0, 0, 0.18); }
+.fivestud-pot { font-family: "JetBrains Mono", monospace; font-size: 1.05rem; color: #ffd76b; letter-spacing: 0.06em; }
+.fivestud-msg { font-size: 0.9rem; font-style: italic; opacity: 0.85; min-height: 1.2em; text-align: center; }
+.fivestud-placeholder { width: 60px; height: 84px; border: 2px dashed rgba(245, 241, 217, 0.25); border-radius: 6px; }
+.fivestud-actions { display: flex; gap: 0.6rem; justify-content: center; align-items: center; flex-wrap: wrap; background: rgba(0, 0, 0, 0.3); padding: 0.6rem 1rem; border-radius: 12px; }
+.fivestud-btn { font-family: "Inter", sans-serif; font-weight: 600; background: linear-gradient(180deg, #f5f1d9 0%, #d6cf99 100%); color: #2a1d05; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: transform 0.1s, filter 0.15s; }
+.fivestud-btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
+.fivestud-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.fivestud-fold { background: linear-gradient(180deg, #d76b6b 0%, #8b3030 100%); color: #fff; }
+.fivestud-deal { background: linear-gradient(180deg, #ffd76b 0%, #c89a1a 100%); font-size: 1.05rem; padding: 0.6rem 1.5rem; }
+.fivestud-raise { display: flex; align-items: center; gap: 0.5rem; }
+.fivestud-raise input[type="range"] { width: 140px; }
+.fivestud-raisebtn { background: linear-gradient(180deg, #6bd7a8 0%, #2c8a5c 100%); color: #042414; }
+.fivestud-gameover { text-align: center; font-family: "JetBrains Mono", monospace; font-size: 1.2rem; color: #ffd76b; padding: 0.75rem; background: rgba(0, 0, 0, 0.5); border-radius: 8px; }
+.fivestud-discardable { box-shadow: 0 0 0 3px #ffd76b, 0 0 12px rgba(255, 215, 107, 0.5); cursor: pointer; }
+.fivestud-discardprompt { font-family: "JetBrains Mono", monospace; font-size: 0.9rem; color: #ffd76b; padding: 0.5rem 1rem; border: 1px dashed #ffd76b; border-radius: 8px; }

@@ -1,16 +1,25 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PineapplePokerState, PineapplePokerAction, PineapplePokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PineapplePokerGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = {
+  startingBankroll: { kind: "enum" as const, label: "Starting Stack", options: ["500", "1000", "5000"] as const, default: "1000" },
+  smallBlind: { kind: "enum" as const, label: "Small Blind", options: ["5", "10", "25"] as const, default: "10" },
+} as const;
 type S = SettingsOf<typeof settings>;
+
 export const pineapplePokerPlugin: GamePlugin<PineapplePokerState, PineapplePokerAction, typeof settings> = {
-  id:"pineapple-poker", title:"Pineapple Solo", category:"cards",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Solo Pineapple: deal seven cards (three hole + four community), best five-card hand scored.",
-  howToPlay:"Pineapple Solo brings the cheeky Hold'em variant to a solo seeded deal. In real Pineapple, you receive THREE hole cards and discard one before the flop, then play four community cards. Press Deal each round to receive seven random cards (three hole + four board); the best five-card poker hand is scored.\n\nHand values: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nThe discard rule in live Pineapple makes premium starting hands more frequent than vanilla Hold'em. Here the seven-card pool reflects the fact that you've effectively pre-selected your best two hole cards.\n\nEight rounds. Expect averages noticeably higher than five-card games. Press Next after each scored round and chase that rare Straight Flush.",
+  id: "pineapple-poker",
+  title: "Pineapple",
+  category: "cards",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Heads-up Pineapple: 3 hole cards, discard 1 before the flop, then play like Hold'em.",
+  howToPlay:
+    "Pineapple is a Hold'em variant where each player receives THREE hole cards. Before the flop is dealt, you must discard one — leaving the standard 2 hole cards used through the rest of the hand. Click on a hole card to discard it.\n\nFrom there it plays exactly like Texas Hold'em: flop, turn, river, betting on each street, then showdown. Your final hand uses your best 5 cards from the 2 hole + 5 board (any combination).\n\nUse Fold/Check/Call/Raise. Beat the CPU over 8 hands.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as PineapplePokerSettings),
-  reducer,isTerminal,component:PineapplePokerGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as PineapplePokerSettings),
+  reducer,
+  isTerminal,
+  component: PineapplePokerGame,
 };
