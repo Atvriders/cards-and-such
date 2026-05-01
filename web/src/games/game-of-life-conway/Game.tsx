@@ -27,6 +27,20 @@ export function GameOfLifeConwayGame({ state, dispatch, onGameOver }: GameProps<
     return () => window.clearInterval(id);
   }, [state.isRunning, state.phase]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "done") return;
+      if (e.key === " ") { e.preventDefault(); dispatch({ type: "toggleRun" } as ConwayAction); }
+      else if ((e.key === "s" || e.key === "S") && !state.isRunning) { e.preventDefault(); dispatch({ type: "step" } as ConwayAction); }
+      else if ((e.key === "c" || e.key === "C") && !state.isRunning) { e.preventDefault(); dispatch({ type: "clear" } as ConwayAction); }
+      else if (e.key === "r" || e.key === "R") { e.preventDefault(); dispatch({ type: "reset" } as ConwayAction); }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.isRunning]);
+
   const live = liveCount(state.grid);
   const size = state.size;
 
@@ -60,7 +74,7 @@ export function GameOfLifeConwayGame({ state, dispatch, onGameOver }: GameProps<
           <button
             key={i}
             type="button"
-            aria-label={v ? "alive" : "dead"}
+            aria-label={`Cell row ${Math.floor(i / size) + 1} col ${(i % size) + 1}, ${v ? "alive" : "dead"}`}
             aria-pressed={v ? true : false}
             className={`golconway-cell${v ? " golconway-on" : ""}`}
             onClick={() => dispatch({ type: "toggle", idx: i } as ConwayAction)}
@@ -73,6 +87,7 @@ export function GameOfLifeConwayGame({ state, dispatch, onGameOver }: GameProps<
         <button
           type="button"
           className="golconway-btn golconway-btn-step"
+          aria-label="Step one generation (S)"
           onClick={() => dispatch({ type: "step" } as ConwayAction)}
           disabled={state.isRunning || state.phase === "done"}
         >
@@ -81,6 +96,7 @@ export function GameOfLifeConwayGame({ state, dispatch, onGameOver }: GameProps<
         <button
           type="button"
           className={`golconway-btn ${state.isRunning ? "golconway-btn-pause" : "golconway-btn-run"}`}
+          aria-label={state.isRunning ? "Pause simulation (Space)" : "Run simulation (Space)"}
           onClick={() => dispatch({ type: "toggleRun" } as ConwayAction)}
           disabled={state.phase === "done"}
         >

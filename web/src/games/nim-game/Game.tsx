@@ -8,6 +8,28 @@ export function NimGameGame({ state, dispatch, onGameOver }: GameProps<NimGameSt
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "done") {
+        if (e.key === "Enter" || e.key === "r" || e.key === "R") {
+          e.preventDefault(); dispatch({ type: "reset" } as NimGameAction);
+        }
+        return;
+      }
+      if (/^[1-3]$/.test(e.key)) {
+        const n = parseInt(e.key, 10);
+        if (n <= state.sticks) {
+          e.preventDefault();
+          dispatch({ type: "take", n } as NimGameAction);
+        }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.sticks]);
+
   if (state.phase === "done") {
     const won = state.result === "P";
     return (
@@ -53,6 +75,7 @@ export function NimGameGame({ state, dispatch, onGameOver }: GameProps<NimGameSt
           <button
             key={n}
             className="nimg-btn"
+            aria-label={`Take ${n} stick${n > 1 ? "s" : ""} (key ${n})`}
             disabled={n > state.sticks}
             onClick={() => dispatch({ type: "take", n } as NimGameAction)}
           >

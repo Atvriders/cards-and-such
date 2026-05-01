@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import type React from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { FarkleMiniState, FarkleMiniAction, FarkleMiniSettings } from "./state.js";
 import { isTerminal, TOTAL_ROUNDS } from "./state.js";
@@ -26,6 +27,33 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
     (state.dice.filter((d) => d.status === "picked").length === 0 || state.pendingScore > 0);
   const canRoll = state.phase === "decide" && state.pendingScore > 0;
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "r" || e.key === "R") {
+        if (state.phase === "rollReady" || canRoll) {
+          e.preventDefault();
+          dispatch({ type: "roll" } as FarkleMiniAction);
+        }
+      } else if ((e.key === "b" || e.key === "B") && canBank) {
+        e.preventDefault();
+        dispatch({ type: "bank" } as FarkleMiniAction);
+      } else if ((e.key === "n" || e.key === "N") && state.phase === "scored") {
+        e.preventDefault();
+        dispatch({ type: "next" } as FarkleMiniAction);
+      } else if (state.phase === "decide" && /^[1-6]$/.test(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        if (idx < state.dice.length && state.dice[idx]?.status !== "kept") {
+          e.preventDefault();
+          dispatch({ type: "togglePick", idx } as FarkleMiniAction);
+        }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, canRoll, canBank, state.dice]);
+
   return (
     <div className="farkle-wrap farkle-theme">
       <header className="farkle-header">
@@ -52,17 +80,30 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
         )}
         {state.dice.length > 0 && (
           <div className="farkle-dice">
-            {state.dice.map((d, i) => (
-              <div
-                key={i}
-                className={`farkle-die-wrap ${d.status}`}
-                onClick={() => state.phase === "decide" && d.status !== "kept"
-                  ? dispatch({ type: "togglePick", idx: i } as FarkleMiniAction)
-                  : undefined}
-              >
-                <Die value={d.value} kept={d.status === "picked"} />
-              </div>
-            ))}
+            {state.dice.map((d, i) => {
+              const interactive = state.phase === "decide" && d.status !== "kept";
+              const toggle = () => dispatch({ type: "togglePick", idx: i } as FarkleMiniAction);
+              return (
+                <div
+                  key={i}
+                  className={`farkle-die-wrap ${d.status}`}
+                  {...(interactive
+                    ? {
+                        role: "button",
+                        tabIndex: 0,
+                        "aria-label": `Toggle die ${i + 1} showing ${d.value}`,
+                        "aria-pressed": d.status === "picked",
+                        onClick: toggle,
+                        onKeyDown: (e: React.KeyboardEvent) => {
+                          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+                        },
+                      }
+                    : {})}
+                >
+                  <Die value={d.value} kept={d.status === "picked"} />
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

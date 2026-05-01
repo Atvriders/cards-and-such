@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { MiniYahtzeeState, MiniYahtzeeAction, MiniYahtzeeSettings, Category } from "./state.js";
 import {
@@ -26,6 +26,23 @@ export function MiniYahtzeeGame({
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
   const canRoll = state.rollsUsed < 3 && state.phase === "playing";
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if ((e.key === "r" || e.key === "R") && canRoll) {
+        e.preventDefault();
+        dispatch({ type: "roll" } as MiniYahtzeeAction);
+      } else if (["1", "2", "3", "4", "5"].includes(e.key) && state.rollsUsed > 0) {
+        e.preventDefault();
+        const idx = parseInt(e.key, 10) - 1;
+        if (idx < state.dice.length) dispatch({ type: "toggle", idx } as MiniYahtzeeAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, canRoll, state.rollsUsed, state.dice.length]);
   const hasRolled = state.rollsUsed > 0;
   const upper = upperSubtotal(state.scores);
   const bonus = upperBonus(state.scores);
@@ -33,12 +50,24 @@ export function MiniYahtzeeGame({
   function row(cat: Category) {
     const used = cat in state.scores;
     const preview = !used && hasRolled ? computeCategoryScore(state.dice, cat) : null;
+    const clickable = !used && preview !== null;
+    const score = () => dispatch({ type: "score", category: cat } as MiniYahtzeeAction);
     return (
-      <tr key={cat} className={used ? "yahtz-used" : preview !== null ? "yahtz-clickable" : ""}>
+      <tr key={cat} className={used ? "yahtz-used" : clickable ? "yahtz-clickable" : ""}>
         <td className="yahtz-label">{CATEGORY_LABELS[cat]}</td>
         <td
-          className={`yahtz-cell ${used ? "yahtz-cell-used" : preview !== null ? "yahtz-cell-preview" : "yahtz-cell-blank"}`}
-          onClick={used || preview === null ? undefined : () => dispatch({ type: "score", category: cat } as MiniYahtzeeAction)}
+          className={`yahtz-cell ${used ? "yahtz-cell-used" : clickable ? "yahtz-cell-preview" : "yahtz-cell-blank"}`}
+          {...(clickable
+            ? {
+                role: "button",
+                tabIndex: 0,
+                "aria-label": `Score ${CATEGORY_LABELS[cat]} for ${preview}`,
+                onClick: score,
+                onKeyDown: (e: ReactKeyboardEvent) => {
+                  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); score(); }
+                },
+              }
+            : {})}
         >
           {used ? state.scores[cat] : preview !== null ? preview : "-"}
         </td>

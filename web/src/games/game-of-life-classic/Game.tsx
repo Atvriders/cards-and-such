@@ -29,6 +29,22 @@ export function GameOfLifeClassicGame({ state, dispatch, onGameOver }: GameProps
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "spinning" && (e.key === "s" || e.key === "S" || e.key === " ")) {
+        e.preventDefault(); onSpin();
+      } else if (state.phase === "resolved" && (e.key === "n" || e.key === "N" || e.key === "Enter")) {
+        e.preventDefault(); dispatch({ type: "next" } as ClassicAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+    // onSpin is intentionally referenced via closure
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, state.phase]);
+
   const [spinning, setSpinning] = useState(false);
   const [spinDisplay, setSpinDisplay] = useState<number>(state.lastSpin ?? 1);
   const dispatchRef = useRef(dispatch);
@@ -130,6 +146,7 @@ export function GameOfLifeClassicGame({ state, dispatch, onGameOver }: GameProps
             <button
               type="button"
               className="golclassic-btn golclassic-btn-spin"
+              aria-label="Spin spinner (S)"
               onClick={onSpin}
               disabled={spinning}
             >
@@ -156,6 +173,7 @@ export function GameOfLifeClassicGame({ state, dispatch, onGameOver }: GameProps
               <button
                 type="button"
                 className="golclassic-btn golclassic-btn-next"
+                aria-label="Next turn (N)"
                 onClick={() => dispatch({ type: "next" } as ClassicAction)}
               >
                 Next Turn &rarr;

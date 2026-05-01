@@ -9,6 +9,22 @@ export function MiniWarGame({ state, dispatch, onGameOver }: GameProps<MiniWarSt
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "ready" && (e.key === "f" || e.key === "F" || e.key === " " || e.key === "Enter")) {
+        e.preventDefault(); dispatch({ type: "flip" } as MiniWarAction);
+      } else if (state.phase === "war" && (e.key === "b" || e.key === "B" || e.key === " " || e.key === "Enter")) {
+        e.preventDefault(); dispatch({ type: "warFlip" } as MiniWarAction);
+      } else if (state.phase === "reveal" && (e.key === "n" || e.key === "N" || e.key === " " || e.key === "Enter")) {
+        e.preventDefault(); dispatch({ type: "next" } as MiniWarAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase]);
+
   const playerTop = state.playerPlayed[state.playerPlayed.length - 1];
   const cpuTop = state.cpuPlayed[state.cpuPlayed.length - 1];
 
@@ -39,14 +55,14 @@ export function MiniWarGame({ state, dispatch, onGameOver }: GameProps<MiniWarSt
 
       <div className="war-center">
         {state.phase === "ready" && (
-          <button className="war-btn primary" onClick={() => dispatch({ type: "flip" } as MiniWarAction)}>
+          <button className="war-btn primary" aria-label="Flip card (F)" onClick={() => dispatch({ type: "flip" } as MiniWarAction)}>
             Flip!
           </button>
         )}
         {state.phase === "war" && (
           <>
             <div className="war-banner">⚔ WAR! depth {state.warDepth}</div>
-            <button className="war-btn danger" onClick={() => dispatch({ type: "warFlip" } as MiniWarAction)}>
+            <button className="war-btn danger" aria-label="Battle (B)" onClick={() => dispatch({ type: "warFlip" } as MiniWarAction)}>
               Battle (3 down, 1 up)
             </button>
           </>
@@ -58,7 +74,7 @@ export function MiniWarGame({ state, dispatch, onGameOver }: GameProps<MiniWarSt
               {state.result === "cpu" && "CPU takes the round."}
               {state.result === "tie" && "Tie."}
             </div>
-            <button className="war-btn primary" onClick={() => dispatch({ type: "next" } as MiniWarAction)}>
+            <button className="war-btn primary" aria-label="Next round (N)" onClick={() => dispatch({ type: "next" } as MiniWarAction)}>
               Next round
             </button>
           </>

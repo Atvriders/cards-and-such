@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { FortyThievesState, FortyThievesAction, FortyThievesSettings } from "./state.js";
 import { fortyThievesRuleset } from "./state.js";
@@ -44,6 +44,19 @@ export function FortyThieves({
 
   if (state.won) onGameOver(state.score);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "d" || e.key === "D" || e.key === " ") {
+        e.preventDefault();
+        handleStockClick();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [handleStockClick]);
+
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
@@ -55,7 +68,15 @@ export function FortyThieves({
       </div>
 
       <div className="forty-thieves-top-row">
-        <div className="pile-wrapper stock-wrapper" onClick={handleStockClick} title="Click to draw">
+        <div
+          className="pile-wrapper stock-wrapper"
+          role="button"
+          tabIndex={0}
+          aria-label="Draw from stock"
+          onClick={handleStockClick}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleStockClick(); } }}
+          title="Click to draw"
+        >
           <Pile
             pile={getPile("stock")}
             onDrop={(pileId) => onDrop(pileId, handleMove)}

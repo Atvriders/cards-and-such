@@ -17,6 +17,19 @@ export function Sudoku({
     }
   }, [terminal, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if ((e.key === "h" || e.key === "H") && !terminal) {
+        e.preventDefault();
+        dispatch({ type: "hint" } as SudokuAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, terminal]);
+
   const handleCellClick = useCallback(
     (idx: number) => {
       if (terminal) return;
@@ -130,7 +143,12 @@ export function Sudoku({
               className={className}
               data-row={row}
               data-col={col}
+              role="button"
+              tabIndex={isGiven ? -1 : 0}
+              aria-label={`Row ${row + 1} column ${col + 1}${val !== 0 ? `, ${val}` : ", empty"}${isGiven ? ", given" : ""}${isError ? ", error" : ""}`}
+              aria-selected={isSelected}
               onClick={() => handleCellClick(idx)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleCellClick(idx); } }}
             >
               {val !== 0 ? val : ""}
             </div>
@@ -140,17 +158,17 @@ export function Sudoku({
 
       <div className="sudokunews-numpad">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((d) => (
-          <button key={d} onClick={() => handleDigit(d)} disabled={!!terminal}>
+          <button key={d} aria-label={`Enter digit ${d}`} onClick={() => handleDigit(d)} disabled={!!terminal}>
             {d}
           </button>
         ))}
-        <button className="erase" onClick={() => handleDigit(0)} disabled={!!terminal}>
+        <button className="erase" aria-label="Erase cell" onClick={() => handleDigit(0)} disabled={!!terminal}>
           ✕
         </button>
       </div>
 
       <div className="sudokunews-controls">
-        <button onClick={handleHint} disabled={!!terminal}>
+        <button aria-label="Hint (H)" onClick={handleHint} disabled={!!terminal}>
           Hint
         </button>
       </div>

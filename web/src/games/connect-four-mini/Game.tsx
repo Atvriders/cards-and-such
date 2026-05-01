@@ -33,6 +33,21 @@ export function ConnectFourMiniGame({
 
   const reset = () => dispatch({ type: "reset" } as ConnectFourMiniAction);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (/^[1-9]$/.test(e.key)) {
+        const col = parseInt(e.key, 10) - 1;
+        if (col < COLS) { e.preventDefault(); drop(col); }
+      } else if (e.key === "r" || e.key === "R") {
+        e.preventDefault(); reset();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [state.phase, state.turn, fullCols]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const playerLabel =
     state.phase === "done"
       ? state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw"
@@ -76,7 +91,15 @@ export function ConnectFourMiniGame({
               const isLastDrop = last && last.row === r && last.col === c;
               const dropDist = isLastDrop ? r + 1 : 0;
               return (
-                <div key={idx} className="c4mini-slot" onClick={() => drop(c)}>
+                <div
+                  key={idx}
+                  className="c4mini-slot"
+                  role="button"
+                  tabIndex={-1}
+                  aria-label={`Column ${c + 1} row ${r + 1}${v ? `, ${v === "P" ? "your" : "cpu"} disc` : ", empty"}`}
+                  onClick={() => drop(c)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); drop(c); } }}
+                >
                   <div className="c4mini-slot-inner">
                     {v && (
                       <div
@@ -93,7 +116,7 @@ export function ConnectFourMiniGame({
       </div>
 
       <div className="c4mini-controls">
-        <button className="c4mini-btn" onClick={reset}>
+        <button className="c4mini-btn" aria-label={state.phase === "done" ? "New Game (R)" : "Restart (R)"} onClick={reset}>
           {state.phase === "done" ? "New Game" : "Restart"}
         </button>
         <div className="c4mini-legend">

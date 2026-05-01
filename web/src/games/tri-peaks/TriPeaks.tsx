@@ -21,6 +21,19 @@ export function TriPeaks({
     }
   }, [terminal, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "d" || e.key === "D" || e.key === " ") {
+        e.preventDefault();
+        if (state.stock.length > 0) dispatch({ type: "draw" } as TriPeaksAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.stock.length]);
+
   function handleCardClick(row: number, col: number): void {
     dispatch({ type: "play", row, col } as TriPeaksAction);
   }

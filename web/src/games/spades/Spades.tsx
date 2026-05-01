@@ -15,6 +15,19 @@ export function Spades({ state, dispatch, onGameOver }: GameProps<SpadesState, S
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "bidding" && state.turn === 0 && /^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+        (dispatch as (a: SpadesAction) => void)({ type: "bid", amount: parseInt(e.key, 10) });
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.turn]);
+
   const { hands, bids, tricks, currentTrick, turn, phase, teamScore, teamBags, message, spadesBroken } = state;
   const done = phase === "done";
 
@@ -68,6 +81,7 @@ export function Spades({ state, dispatch, onGameOver }: GameProps<SpadesState, S
               <button
                 key={i}
                 className="spades-bid-btn"
+                aria-label={`Bid ${i === 0 ? "Nil" : i} ${i <= 9 ? `(key ${i})` : ""}`}
                 onClick={() => (dispatch as (a: SpadesAction) => void)({ type: "bid", amount: i })}
               >
                 {i === 0 ? "Nil" : String(i)}
@@ -88,13 +102,19 @@ export function Spades({ state, dispatch, onGameOver }: GameProps<SpadesState, S
               const sd = order[a.suit] - order[b.suit];
               return sd !== 0 ? sd : a.rank - b.rank;
             })
-            .map(card => {
+            .map((card, idx) => {
               const legal = legalIds.has(card.id);
+              const play = () => legal && (dispatch as (a: SpadesAction) => void)({ type: "play", cardId: card.id });
               return (
                 <div
                   key={card.id}
                   className={`spades-card-slot ${legal ? "legal" : "illegal"}`}
-                  onClick={() => legal && (dispatch as (a: SpadesAction) => void)({ type: "play", cardId: card.id })}
+                  role="button"
+                  tabIndex={legal ? 0 : -1}
+                  aria-label={`Card ${idx + 1}${legal ? "" : ", not playable"}`}
+                  aria-disabled={!legal}
+                  onClick={play}
+                  onKeyDown={(e) => { if (legal && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); play(); } }}
                 >
                   <Card card={card} />
                 </div>

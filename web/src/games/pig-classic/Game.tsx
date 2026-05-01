@@ -9,6 +9,23 @@ export function PigClassicGame({ state, dispatch, onGameOver }: GameProps<PigCla
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase !== "playing") return;
+      if (e.key === "r" || e.key === "R" || e.key === " ") {
+        e.preventDefault();
+        dispatch({ type: "roll" } as PigClassicAction);
+      } else if ((e.key === "b" || e.key === "B") && state.turnTotal > 0) {
+        e.preventDefault();
+        dispatch({ type: "bank" } as PigClassicAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.turnTotal]);
+
   if (state.phase === "done") {
     const reachedTarget = state.totalScore >= TARGET;
     return (
@@ -69,11 +86,12 @@ export function PigClassicGame({ state, dispatch, onGameOver }: GameProps<PigCla
       </div>
 
       <div className="pig-controls">
-        <button className="pig-btn pig-btn-roll" onClick={() => dispatch({ type: "roll" } as PigClassicAction)}>
+        <button className="pig-btn pig-btn-roll" aria-label="Roll die (R)" onClick={() => dispatch({ type: "roll" } as PigClassicAction)}>
           Roll Die
         </button>
         <button
           className="pig-btn pig-btn-bank"
+          aria-label={`Bank ${state.turnTotal} points (B)`}
           disabled={state.turnTotal === 0}
           onClick={() => dispatch({ type: "bank" } as PigClassicAction)}
         >

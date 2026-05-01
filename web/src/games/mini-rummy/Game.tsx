@@ -17,6 +17,22 @@ export function MiniRummyGame({ state, dispatch, onGameOver }: GameProps<MiniRum
     }
   }, [state.phase, dispatch]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "draw" && state.turn === "player") {
+        if (e.key === "d" || e.key === "D") { e.preventDefault(); dispatch({ type: "drawDeck" } as MiniRummyAction); }
+        else if (e.key === "t" || e.key === "T") { e.preventDefault(); dispatch({ type: "drawDiscard" } as MiniRummyAction); }
+      } else if (state.phase === "discard") {
+        if (e.key === "x" || e.key === "X" || e.key === "Enter") { e.preventDefault(); dispatch({ type: "discard" } as MiniRummyAction); }
+        else if (e.key === "k" || e.key === "K") { e.preventDefault(); dispatch({ type: "knock" } as MiniRummyAction); }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.turn]);
+
   const { melds: pMelds, deadwood: pDead } = bestMelds(state.player);
   const meldedIds = new Set(pMelds.flat().map((c) => c.id));
 
@@ -40,12 +56,26 @@ export function MiniRummyGame({ state, dispatch, onGameOver }: GameProps<MiniRum
       </div>
 
       <div className="rummy-mini-center">
-        <div className="rummy-mini-pile" onClick={() => state.phase === "draw" && state.turn === "player" && dispatch({ type: "drawDeck" } as MiniRummyAction)}>
+        <div
+          className="rummy-mini-pile"
+          role="button"
+          tabIndex={0}
+          aria-label={`Draw from stock (${state.deck.length} cards)`}
+          onClick={() => state.phase === "draw" && state.turn === "player" && dispatch({ type: "drawDeck" } as MiniRummyAction)}
+          onKeyDown={(e) => { if ((e.key === "Enter" || e.key === " ") && state.phase === "draw" && state.turn === "player") { e.preventDefault(); dispatch({ type: "drawDeck" } as MiniRummyAction); } }}
+        >
           <div className="rummy-mini-pile-label">Stock</div>
           {state.deck.length > 0 ? <Card faceDown /> : <div className="rummy-mini-slot" />}
           <div className="rummy-mini-pile-count">{state.deck.length}</div>
         </div>
-        <div className="rummy-mini-pile" onClick={() => state.phase === "draw" && state.turn === "player" && dispatch({ type: "drawDiscard" } as MiniRummyAction)}>
+        <div
+          className="rummy-mini-pile"
+          role="button"
+          tabIndex={0}
+          aria-label={`Take from discard pile (${state.discard.length} cards)`}
+          onClick={() => state.phase === "draw" && state.turn === "player" && dispatch({ type: "drawDiscard" } as MiniRummyAction)}
+          onKeyDown={(e) => { if ((e.key === "Enter" || e.key === " ") && state.phase === "draw" && state.turn === "player") { e.preventDefault(); dispatch({ type: "drawDiscard" } as MiniRummyAction); } }}
+        >
           <div className="rummy-mini-pile-label">Discard</div>
           {topDiscard ? <Card card={topDiscard} /> : <div className="rummy-mini-slot" />}
           <div className="rummy-mini-pile-count">{state.discard.length}</div>
@@ -62,7 +92,12 @@ export function MiniRummyGame({ state, dispatch, onGameOver }: GameProps<MiniRum
               <div
                 key={c.id}
                 className={`rummy-mini-card-slot ${isSelected ? "selected" : ""} ${isMelded ? "melded" : ""}`}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select card${isSelected ? " (currently selected)" : ""}`}
+                aria-pressed={isSelected}
                 onClick={() => dispatch({ type: "select", id: c.id } as MiniRummyAction)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); dispatch({ type: "select", id: c.id } as MiniRummyAction); } }}
               >
                 <Card card={c} />
               </div>

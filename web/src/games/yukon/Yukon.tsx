@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { YukonState, YukonAction, YukonSettings } from "./state.js";
 import { yukonRuleset } from "./state.js";
@@ -38,6 +38,19 @@ export function Yukon({
   );
 
   if (state.won) onGameOver(state.score);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "a" || e.key === "A") {
+        e.preventDefault();
+        dispatch({ type: "auto-move-to-foundation" } as YukonAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch]);
 
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 

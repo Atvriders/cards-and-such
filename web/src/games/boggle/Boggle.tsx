@@ -24,6 +24,21 @@ export function Boggle({ state, dispatch, onGameOver }: GameProps<BoggleState, B
     };
   }, [state.done, dispatch]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.done) return;
+      if (e.key === "Enter") {
+        e.preventDefault(); dispatch({ type: "submitWord" } as BoggleAction);
+      } else if (e.key === "Escape" || e.key === "Backspace") {
+        e.preventDefault(); dispatch({ type: "clearPath" } as BoggleAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.done]);
+
   const { grid, gridSize, currentPath, foundWords, score, timeLeft, done, error } = state;
 
   const currentWord = currentPath.map(i => grid[i]!).join("");
@@ -51,7 +66,12 @@ export function Boggle({ state, dispatch, onGameOver }: GameProps<BoggleState, B
             <div
               key={i}
               className={`bgl-cell${isFirst ? " first" : isSelected ? " selected" : ""}`}
+              role="button"
+              tabIndex={done ? -1 : 0}
+              aria-label={`Letter ${letter} at position ${i + 1}${isSelected ? `, selected (${pathIdx + 1})` : ""}`}
+              aria-pressed={isSelected}
               onClick={() => !done && dispatch({ type: "selectCell", index: i } as BoggleAction)}
+              onKeyDown={(e) => { if (!done && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); dispatch({ type: "selectCell", index: i } as BoggleAction); } }}
             >
               {letter}
             </div>

@@ -1,5 +1,5 @@
 // Shared poker table renderer for heads-up community-card variants.
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Card as CardT } from "../../engines/deck/index.js";
 import { Card } from "../../engines/deck/Card.js";
 import type { PGState } from "./poker-game.js";
@@ -38,6 +38,26 @@ export function PokerTable<S>(p: PokerTableProps<S>): JSX.Element {
   const canRaise = canAct && state.player.stack > toCall;
 
   const cls = (suffix: string): string => `${prefix}${suffix}`;
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      const dealable = (state.phase === "preflop" && state.player.hole.length === 0) || state.phase === "showdown";
+      if (dealable && (e.key === "d" || e.key === "D" || e.key === "Enter")) {
+        e.preventDefault();
+        p.onDeal();
+        return;
+      }
+      if (!canAct) return;
+      if (e.key === "f" || e.key === "F") { e.preventDefault(); p.onFold(); }
+      else if ((e.key === "c" || e.key === "C") && canCheck) { e.preventDefault(); p.onCheck(); }
+      else if ((e.key === "c" || e.key === "C") && canCall) { e.preventDefault(); p.onCall(); }
+      else if ((e.key === "r" || e.key === "R") && canRaise) { e.preventDefault(); p.onRaise(Math.min(Math.max(raiseAmt, minRaise), maxRaise)); }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [state.phase, state.player.hole.length, canAct, canCheck, canCall, canRaise, raiseAmt, minRaise, maxRaise, p]);
 
   return (
     <div className={cls("felt")}>
@@ -105,9 +125,9 @@ export function PokerTable<S>(p: PokerTableProps<S>): JSX.Element {
           </div>
         ) : (
           <>
-            <button className={`${cls("btn")} ${cls("fold")}`} onClick={p.onFold} disabled={!canAct}>Fold</button>
-            <button className={cls("btn")} onClick={p.onCheck} disabled={!canCheck}>Check</button>
-            <button className={cls("btn")} onClick={p.onCall} disabled={!canCall}>
+            <button className={`${cls("btn")} ${cls("fold")}`} aria-label="Fold (F)" onClick={p.onFold} disabled={!canAct}>Fold</button>
+            <button className={cls("btn")} aria-label="Check (C)" onClick={p.onCheck} disabled={!canCheck}>Check</button>
+            <button className={cls("btn")} aria-label={`Call ${toCall > 0 ? `$${toCall}` : ""} (C)`} onClick={p.onCall} disabled={!canCall}>
               Call {toCall > 0 ? `$${toCall}` : ""}
             </button>
             <div className={cls("raise")}>
@@ -120,7 +140,7 @@ export function PokerTable<S>(p: PokerTableProps<S>): JSX.Element {
                 onChange={(e) => setRaiseAmt(parseInt(e.target.value, 10))}
                 disabled={!canRaise}
               />
-              <button className={`${cls("btn")} ${cls("raisebtn")}`} onClick={() => p.onRaise(raiseAmt)} disabled={!canRaise}>
+              <button className={`${cls("btn")} ${cls("raisebtn")}`} aria-label={`Raise $${raiseAmt} (R)`} onClick={() => p.onRaise(raiseAmt)} disabled={!canRaise}>
                 Raise ${raiseAmt}
               </button>
             </div>

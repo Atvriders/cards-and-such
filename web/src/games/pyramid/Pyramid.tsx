@@ -21,6 +21,22 @@ export function Pyramid({
     }
   }, [terminal, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "d" || e.key === "D" || e.key === " ") {
+        e.preventDefault();
+        if (state.stock.length > 0) dispatch({ type: "draw" } as PyramidAction);
+      } else if (e.key === "r" || e.key === "R") {
+        e.preventDefault();
+        dispatch({ type: "redeal" } as PyramidAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.stock.length]);
+
   function isSelected(row: number, col: number): boolean {
     return (
       state.selected !== null &&
@@ -100,7 +116,15 @@ export function Pyramid({
           {state.stock.length > 0 ? (
             <Card faceDown onClick={handleStockClick} />
           ) : (
-            <div className="pyramid-empty-card" onClick={handleRedeal} style={{ cursor: state.redealsRemaining > 0 && state.waste.length > 0 ? "pointer" : "default" }}>
+            <div
+              className="pyramid-empty-card"
+              role="button"
+              tabIndex={0}
+              aria-label="Redeal stock"
+              onClick={handleRedeal}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleRedeal(); } }}
+              style={{ cursor: state.redealsRemaining > 0 && state.waste.length > 0 ? "pointer" : "default" }}
+            >
               empty
             </div>
           )}

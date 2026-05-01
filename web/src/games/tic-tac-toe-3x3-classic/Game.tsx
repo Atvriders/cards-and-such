@@ -10,6 +10,25 @@ export function ConnectGame({
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase !== "playing" || state.turn !== "P") return;
+      if (/^[1-9]$/.test(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        const r = Math.floor(idx / COLS);
+        const c = idx % COLS;
+        if (idx < ROWS * COLS && state.board[idx] === null) {
+          e.preventDefault();
+          dispatch({ type: "place", row: r, col: c } as ConnectAction);
+        }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.turn, state.board]);
+
   const status =
     state.phase === "done"
       ? state.result === "P"
@@ -40,7 +59,7 @@ export function ConnectGame({
               className={`tttclassic-cell ${v === "P" ? "tttclassic-cell-x" : v === "C" ? "tttclassic-cell-o" : ""} ${isWin ? "tttclassic-cell-win" : ""}`}
               disabled={v !== null || state.phase === "done"}
               onClick={() => dispatch({ type: "place", row: r, col: c } as ConnectAction)}
-              aria-label={`row ${r} col ${c}`}
+              aria-label={`Row ${r + 1} column ${c + 1} (key ${idx + 1})${v ? `, ${v === "P" ? "X" : "O"}` : ", empty"}`}
             >
               {v === "P" ? "X" : v === "C" ? "O" : ""}
             </button>

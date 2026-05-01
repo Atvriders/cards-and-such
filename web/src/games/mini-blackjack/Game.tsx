@@ -10,6 +10,26 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const [betInput, setBetInput] = useState<number>(MIN_BET);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "player") {
+        if (e.key === "h" || e.key === "H") { e.preventDefault(); dispatch({ type: "hit" } as MiniBlackjackAction); }
+        else if (e.key === "s" || e.key === "S") { e.preventDefault(); dispatch({ type: "stand" } as MiniBlackjackAction); }
+        else if ((e.key === "d" || e.key === "D") && state.player.length === 2 && state.bankroll >= state.bet) {
+          e.preventDefault(); dispatch({ type: "double" } as MiniBlackjackAction);
+        }
+      } else if (state.phase === "settle" && (e.key === "Enter" || e.key === "n" || e.key === "N")) {
+        e.preventDefault(); dispatch({ type: "next" } as MiniBlackjackAction);
+      } else if (state.phase === "betting" && (e.key === "Enter" || e.key === "d" || e.key === "D")) {
+        e.preventDefault(); dispatch({ type: "deal", bet: betInput } as MiniBlackjackAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.player.length, state.bankroll, state.bet, betInput]);
+
   const playerTotal = handTotal(state.player);
   const dealerVisible = state.dealerHoleHidden ? state.dealer.slice(0, 1) : state.dealer;
   const dealerTotal = state.dealerHoleHidden && state.dealer.length > 0 ? `${handTotal(state.dealer.slice(0,1))}+?` : String(handTotal(state.dealer));
@@ -69,9 +89,9 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
       <div className="bj-mini-actions">
         {state.phase === "player" && (
           <>
-            <button className="bj-mini-btn primary" onClick={() => dispatch({ type: "hit" } as MiniBlackjackAction)}>Hit</button>
-            <button className="bj-mini-btn alt" onClick={() => dispatch({ type: "stand" } as MiniBlackjackAction)}>Stand</button>
-            {canDouble && <button className="bj-mini-btn warn" onClick={() => dispatch({ type: "double" } as MiniBlackjackAction)}>Double</button>}
+            <button className="bj-mini-btn primary" aria-label="Hit (H)" onClick={() => dispatch({ type: "hit" } as MiniBlackjackAction)}>Hit</button>
+            <button className="bj-mini-btn alt" aria-label="Stand (S)" onClick={() => dispatch({ type: "stand" } as MiniBlackjackAction)}>Stand</button>
+            {canDouble && <button className="bj-mini-btn warn" aria-label="Double (D)" onClick={() => dispatch({ type: "double" } as MiniBlackjackAction)}>Double</button>}
           </>
         )}
         {state.phase === "settle" && (

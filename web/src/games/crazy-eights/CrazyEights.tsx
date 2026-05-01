@@ -25,6 +25,21 @@ export function CrazyEights({ state, dispatch, onGameOver }: Props): JSX.Element
     }
   }, [state.winner, state.finalPenalties, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.turn !== 0 || state.winner !== null) return;
+      if ((e.key === "d" || e.key === "D") && !state.pendingDraw) {
+        e.preventDefault(); (dispatch as (a: CrazyEightsAction) => void)({ type: "draw" });
+      } else if (e.key === "p" || e.key === "P") {
+        e.preventDefault(); (dispatch as (a: CrazyEightsAction) => void)({ type: "pass" });
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.turn, state.winner, state.pendingDraw]);
+
   const myHand = state.hands[0] ?? [];
   const isMyTurn = state.turn === 0 && state.winner === null;
   const canPass = isMyTurn && state.pendingDraw && !myHand.some((c) => isPlayable(c, state.discardTop, state.activeSuit));
@@ -79,18 +94,26 @@ export function CrazyEights({ state, dispatch, onGameOver }: Props): JSX.Element
           )}
         </div>
         <div className="crazy8-actions">
-          <button className="crazy8-btn primary" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "draw" })} disabled={!isMyTurn || state.pendingDraw}>Draw</button>
-          <button className="crazy8-btn alt" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "pass" })} disabled={!canPass}>Pass</button>
+          <button className="crazy8-btn primary" aria-label="Draw card (D)" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "draw" })} disabled={!isMyTurn || state.pendingDraw}>Draw</button>
+          <button className="crazy8-btn alt" aria-label="Pass turn (P)" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "pass" })} disabled={!canPass}>Pass</button>
         </div>
       </div>
 
       <div className="crazy8-hand">
         <div className="crazy8-hand-label">Your hand</div>
         <div className="crazy8-hand-row">
-          {myHand.map((card) => {
+          {myHand.map((card, idx) => {
             const legal = isPlayable(card, state.discardTop, state.activeSuit);
             return (
-              <div key={card.id} className={`crazy8-card-slot ${legal ? "legal" : "illegal"}`} onClick={() => isMyTurn && handleCardClick(card)}>
+              <div
+                key={card.id}
+                className={`crazy8-card-slot ${legal ? "legal" : "illegal"}`}
+                role="button"
+                tabIndex={isMyTurn ? 0 : -1}
+                aria-label={`Card ${idx + 1}${legal ? "" : ", not playable"}`}
+                onClick={() => isMyTurn && handleCardClick(card)}
+                onKeyDown={(e) => { if (isMyTurn && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); handleCardClick(card); } }}
+              >
                 <Card card={card} />
               </div>
             );

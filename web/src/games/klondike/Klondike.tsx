@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { KlondikeState, KlondikeAction, KlondikeSettings } from "./state.js";
 import { klondikeRuleset } from "./state.js";
@@ -54,6 +54,22 @@ export function Klondike({
     onGameOver(state.score);
   }
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "a" || e.key === "A") {
+        e.preventDefault();
+        dispatch({ type: "auto-move-to-foundation" } as KlondikeAction);
+      } else if (e.key === " " || e.key === "d" || e.key === "D") {
+        e.preventDefault();
+        handleStockClick();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, handleStockClick]);
+
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
@@ -78,7 +94,14 @@ export function Klondike({
       </div>
 
       <div className="klondike-top-row">
-        <div className="pile-wrapper stock-wrapper" onClick={handleStockClick}>
+        <div
+          className="pile-wrapper stock-wrapper"
+          role="button"
+          tabIndex={0}
+          aria-label="Draw from stock"
+          onClick={handleStockClick}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleStockClick(); } }}
+        >
           <Pile
             pile={getPile("stock")}
             onCardDragStart={onDragStart}

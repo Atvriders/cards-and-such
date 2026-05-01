@@ -41,6 +41,25 @@ export function HoldemNoLimitGame({ state, dispatch, onGameOver }:
 
   const send = (a: HoldemNoLimitAction): void => dispatch(a);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if ((state.phase === "idle" || state.phase === "showdown") && state.phase !== ("done" as typeof state.phase) && (e.key === "d" || e.key === "D" || e.key === "Enter")) {
+        e.preventDefault();
+        send({ type: "deal" });
+        return;
+      }
+      if (!canAct || showRaise) return;
+      if (e.key === "f" || e.key === "F") { e.preventDefault(); send({ type: "fold" }); }
+      else if ((e.key === "c" || e.key === "C") && canCheck) { e.preventDefault(); send({ type: "check" }); }
+      else if ((e.key === "c" || e.key === "C") && canCall) { e.preventDefault(); send({ type: "call" }); }
+      else if ((e.key === "r" || e.key === "R") && canRaise && minR <= maxR) { e.preventDefault(); setShowRaise(true); }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [canAct, canCheck, canCall, canRaise, showRaise, minR, maxR, state.phase]);
+
   const dealLabel = state.phase === "idle"
     ? "Deal cards"
     : state.phase === "showdown"
@@ -145,16 +164,17 @@ export function HoldemNoLimitGame({ state, dispatch, onGameOver }:
 
         {canAct && !showRaise && (
           <>
-            <button className="holdem-btn holdem-btn-fold" onClick={() => send({ type: "fold" })}>
+            <button className="holdem-btn holdem-btn-fold" aria-label="Fold (F)" onClick={() => send({ type: "fold" })}>
               FOLD
             </button>
             {canCheck ? (
-              <button className="holdem-btn holdem-btn-check" onClick={() => send({ type: "check" })}>
+              <button className="holdem-btn holdem-btn-check" aria-label="Check (C)" onClick={() => send({ type: "check" })}>
                 CHECK
               </button>
             ) : (
               <button
                 className="holdem-btn holdem-btn-call"
+                aria-label={`Call $${callAmount(state)} (C)`}
                 disabled={!canCall}
                 onClick={() => send({ type: "call" })}
               >
@@ -164,6 +184,7 @@ export function HoldemNoLimitGame({ state, dispatch, onGameOver }:
             {canRaise && minR <= maxR && (
               <button
                 className="holdem-btn holdem-btn-raise"
+                aria-label={state.cpuBet > state.playerBet ? "Raise (R)" : "Bet (R)"}
                 onClick={() => { setRaiseTo(Math.max(minR, Math.min(maxR, raiseTo))); setShowRaise(true); }}
               >
                 {state.cpuBet > state.playerBet ? "RAISE" : "BET"}

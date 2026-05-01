@@ -67,15 +67,16 @@ export function WordleMiniGame({ state, dispatch, onGameOver }: GameProps<Wordle
       <div className="wm-keyboard">
         {KEY_ROWS.map((row, ri) => (
           <div className="wm-krow" key={ri}>
-            {ri === 2 && <button className="wm-key wm-wide" onClick={() => dispatch({ type: "enter" } as WordleMiniAction)}>ENTER</button>}
+            {ri === 2 && <button className="wm-key wm-wide" aria-label="Submit guess (Enter)" onClick={() => dispatch({ type: "enter" } as WordleMiniAction)}>ENTER</button>}
             {row.split("").map(ch => (
               <button
                 key={ch}
                 className={`wm-key ${keyStatus[ch] ? "wm-k-" + keyStatus[ch] : ""}`}
+                aria-label={`Letter ${ch}${keyStatus[ch] ? `, ${keyStatus[ch]}` : ""}`}
                 onClick={() => dispatch({ type: "key", ch } as WordleMiniAction)}
               >{ch}</button>
             ))}
-            {ri === 2 && <button className="wm-key wm-wide" onClick={() => dispatch({ type: "backspace" } as WordleMiniAction)}>DEL</button>}
+            {ri === 2 && <button className="wm-key wm-wide" aria-label="Backspace" onClick={() => dispatch({ type: "backspace" } as WordleMiniAction)}>DEL</button>}
           </div>
         ))}
       </div>

@@ -84,6 +84,23 @@ export function MonopolyMiniGame({ state, dispatch, onGameOver }: GameProps<Mono
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "rolling" && state.isPlayer && (e.key === "r" || e.key === "R" || e.key === " ")) {
+        e.preventDefault(); dispatch({ type: "roll" } as MonopolyAction);
+      } else if (state.phase === "deciding") {
+        if (e.key === "b" || e.key === "B") { e.preventDefault(); dispatch({ type: "buy" } as MonopolyAction); }
+        else if (e.key === "s" || e.key === "S") { e.preventDefault(); dispatch({ type: "skip" } as MonopolyAction); }
+      } else if (state.phase === "ai" && (e.key === "Enter" || e.key === "n" || e.key === "N")) {
+        e.preventDefault(); dispatch({ type: "ai" } as MonopolyAction);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.isPlayer]);
+
   const pSq = BOARD[state.pPos]!;
   const cSq = BOARD[state.cPos]!;
   const recentLog = state.log.slice(-4);
@@ -218,6 +235,7 @@ export function MonopolyMiniGame({ state, dispatch, onGameOver }: GameProps<Mono
         {state.phase === "rolling" && state.isPlayer && (
           <button
             className="monopolymini-btn monopolymini-btn-primary"
+            aria-label="Roll Dice (R)"
             onClick={() => dispatch({ type: "roll" } as MonopolyAction)}
           >
             Roll Dice

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SpiderState, SpiderAction, SpiderSettings } from "./state.js";
 import { spiderRuleset } from "./state.js";
@@ -44,6 +44,19 @@ export function Spider({
     onGameOver(state.score);
   }
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "d" || e.key === "D" || e.key === " ") {
+        e.preventDefault();
+        handleStockClick();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [handleStockClick]);
+
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
   const stock = getPile("stock");
   const stockCount = stock ? stock.cards.length : 0;
@@ -61,7 +74,11 @@ export function Spider({
       <div className="spider-top-row">
         <div
           className="pile-wrapper stock-wrapper"
+          role="button"
+          tabIndex={0}
+          aria-label={`Deal a row (${dealsRemaining} remaining)`}
           onClick={handleStockClick}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleStockClick(); } }}
           title={`Deal a row (${dealsRemaining} remaining)`}
         >
           <Pile

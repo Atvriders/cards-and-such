@@ -94,20 +94,27 @@ export function Hearts({ state, dispatch, onGameOver }: GameProps<HeartsState, H
       <div className="hearts-you">
         <div className="hearts-pass-label">Your hand — {penalties[0]} pts taken</div>
         <div className="hearts-hand">
-          {sortedHand.map(card => {
+          {sortedHand.map((card, idx) => {
             const isSel = passSelection.includes(card.id);
             const playable = phase === "playing" && legalIds.has(card.id);
+            const interactive = phase === "passing" || playable;
             const cls = phase === "passing"
               ? (isSel ? "selected" : "")
               : (playable ? "legal" : "illegal");
+            const handleClick = () => {
+              if (phase === "passing") (dispatch as (a: HeartsAction) => void)({ type: "togglePass", cardId: card.id });
+              else if (playable) (dispatch as (a: HeartsAction) => void)({ type: "play", cardId: card.id });
+            };
             return (
               <div
                 key={card.id}
                 className={`hearts-card-slot ${cls}`}
-                onClick={() => {
-                  if (phase === "passing") (dispatch as (a: HeartsAction) => void)({ type: "togglePass", cardId: card.id });
-                  else if (playable) (dispatch as (a: HeartsAction) => void)({ type: "play", cardId: card.id });
-                }}
+                role="button"
+                tabIndex={interactive ? 0 : -1}
+                aria-label={`Card ${idx + 1}${isSel ? ", selected to pass" : ""}${!playable && phase === "playing" ? ", not playable" : ""}`}
+                aria-pressed={isSel}
+                onClick={handleClick}
+                onKeyDown={(e) => { if (interactive && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); handleClick(); } }}
               >
                 <Card card={card} />
               </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type React from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { MiniPokerState, MiniPokerAction, MiniPokerSettings } from "./state.js";
 import { isTerminal, rankHand, ANTE } from "./state.js";
@@ -9,6 +10,29 @@ export function MiniPokerGame({ state, dispatch, onGameOver }: GameProps<MiniPok
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const [betInput, setBetInput] = useState<number>(10);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      const dis = dispatch as (a: MiniPokerAction) => void;
+      if (state.phase === "ante" && (e.key === "d" || e.key === "D" || e.key === "Enter")) {
+        e.preventDefault(); dis({ type: "deal" });
+      } else if (state.phase === "draw") {
+        if (e.key === "f" || e.key === "F") { e.preventDefault(); dis({ type: "fold" }); }
+        else if (e.key === "Enter" || e.key === "g" || e.key === "G") { e.preventDefault(); dis({ type: "draw" }); }
+        else if (/^[1-5]$/.test(e.key)) {
+          const idx = parseInt(e.key, 10) - 1;
+          const card = state.player[idx];
+          if (card) { e.preventDefault(); dis({ type: "toggle", cardId: card.id }); }
+        }
+      } else if (state.phase === "showdown" && (e.key === "Enter" || e.key === "n" || e.key === "N")) {
+        e.preventDefault(); dis({ type: "next" });
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase, state.player]);
 
   const playerRank = state.player.length === 5 ? rankHand(state.player) : null;
   const cpuRank = state.cpu.length === 5 ? rankHand(state.cpu) : null;
@@ -40,13 +64,24 @@ export function MiniPokerGame({ state, dispatch, onGameOver }: GameProps<MiniPok
         <div className="pokermini-label">You {playerRank ? <span className="pokermini-rank">{playerRank.name}</span> : null}</div>
         <div className="pokermini-hand">
           {state.player.length === 0 && <div className="pokermini-slot" />}
-          {state.player.map((c) => {
+          {state.player.map((c, idx) => {
             const isSel = state.selected.includes(c.id);
+            const interactive = state.phase === "draw";
+            const toggle = () => (dispatch as (a: MiniPokerAction) => void)({ type: "toggle", cardId: c.id });
             return (
               <div
                 key={c.id}
                 className={`pokermini-card-wrap selectable ${isSel ? "discard" : ""}`}
-                onClick={() => state.phase === "draw" && (dispatch as (a: MiniPokerAction) => void)({ type: "toggle", cardId: c.id })}
+                {...(interactive
+                  ? {
+                      role: "button",
+                      tabIndex: 0,
+                      "aria-label": `${isSel ? "Cancel discard of" : "Mark for discard"} card ${idx + 1}`,
+                      "aria-pressed": isSel,
+                      onClick: toggle,
+                      onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } },
+                    }
+                  : {})}
               >
                 <Card card={c} />
                 {isSel && <div className="pokermini-x">discard</div>}

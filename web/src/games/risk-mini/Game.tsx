@@ -94,6 +94,24 @@ export function RiskMiniGame({ state, dispatch, onGameOver }: GameProps<RiskStat
   const fortifyMax = state.selected !== null ? Math.max(1, state.armies[state.selected]! - 1) : 1;
   const fortifyAmtClamped = Math.min(fortifyAmt, fortifyMax);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (state.phase === "attack-roll" && (e.key === "r" || e.key === "R")) {
+        e.preventDefault(); dispatch({ type: "rollAttack" } as RiskActionAll);
+      } else if (state.phase === "reinforce" && (e.key === "Enter" || e.key === "n" || e.key === "N")) {
+        e.preventDefault(); dispatch({ type: "endReinforce" } as RiskActionAll);
+      } else if ((state.phase === "attack-from" || state.phase === "attack-to") && (e.key === "Escape" || e.key === "n" || e.key === "N")) {
+        e.preventDefault(); dispatch({ type: "endAttack" } as RiskActionAll);
+      } else if ((state.phase === "fortify-from" || state.phase === "fortify-to") && (e.key === "Escape" || e.key === "n" || e.key === "N")) {
+        e.preventDefault(); dispatch({ type: "endFortify" } as RiskActionAll);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [dispatch, state.phase]);
+
   return (
     <div className="riskmini-wrap">
       <div className="riskmini-hud">
@@ -156,8 +174,10 @@ export function RiskMiniGame({ state, dispatch, onGameOver }: GameProps<RiskStat
             return (
               <g key={i} className={`riskmini-terr ${ownerCls} ${stateCls} ${interactCls}`}
                 onClick={() => onTerrClick(i)}
-                role="gridcell"
-                aria-label={`${TERRITORY_NAMES[i]} ${state.owner[i] === "p" ? "yours" : "CPU"} ${a} armies`}>
+                onKeyDown={(e) => { if (clickable && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onTerrClick(i); } }}
+                tabIndex={clickable ? 0 : -1}
+                role={clickable ? "button" : "gridcell"}
+                aria-label={`${TERRITORY_NAMES[i]}, ${state.owner[i] === "p" ? "yours" : "CPU"}, ${a} armies${clickable ? " (press Enter)" : ""}`}>
                 <polygon points={hexPoints(cx, cy, TERR_R).join(" ")}
                   className="riskmini-terr-hex" />
                 <text x={cx} y={cy - 12} className="riskmini-terr-name" textAnchor="middle">
