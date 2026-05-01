@@ -103,6 +103,206 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "light"
     ],
     "correct": 2
+  },
+  {
+    "question": "Synonym for SAD?",
+    "choices": [
+      "cheerful",
+      "gloomy",
+      "lively",
+      "bright"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for SMALL?",
+    "choices": [
+      "large",
+      "tiny",
+      "broad",
+      "tall"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for STRONG?",
+    "choices": [
+      "frail",
+      "powerful",
+      "weak",
+      "thin"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for QUIET?",
+    "choices": [
+      "loud",
+      "noisy",
+      "silent",
+      "busy"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for RICH?",
+    "choices": [
+      "poor",
+      "broke",
+      "wealthy",
+      "tired"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for TIRED?",
+    "choices": [
+      "alert",
+      "weary",
+      "active",
+      "fresh"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for FUNNY?",
+    "choices": [
+      "dull",
+      "boring",
+      "amusing",
+      "serious"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for STRANGE?",
+    "choices": [
+      "normal",
+      "common",
+      "odd",
+      "plain"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for BEGIN?",
+    "choices": [
+      "finish",
+      "stop",
+      "start",
+      "end"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for END?",
+    "choices": [
+      "finish",
+      "open",
+      "begin",
+      "start"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Synonym for HELP?",
+    "choices": [
+      "hinder",
+      "block",
+      "assist",
+      "ignore"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for ANSWER?",
+    "choices": [
+      "question",
+      "reply",
+      "ask",
+      "doubt"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for SHOUT?",
+    "choices": [
+      "whisper",
+      "yell",
+      "mumble",
+      "sigh"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for QUICK?",
+    "choices": [
+      "slow",
+      "lazy",
+      "rapid",
+      "still"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for LARGE?",
+    "choices": [
+      "tiny",
+      "huge",
+      "narrow",
+      "short"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for HARD (difficult)?",
+    "choices": [
+      "soft",
+      "tough",
+      "easy",
+      "light"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for OLD?",
+    "choices": [
+      "new",
+      "young",
+      "ancient",
+      "fresh"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Synonym for SHINY?",
+    "choices": [
+      "dull",
+      "gleaming",
+      "rough",
+      "dim"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for CALM?",
+    "choices": [
+      "wild",
+      "peaceful",
+      "tense",
+      "loud"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Synonym for HONEST?",
+    "choices": [
+      "lying",
+      "fake",
+      "truthful",
+      "sneaky"
+    ],
+    "correct": 2
   }
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

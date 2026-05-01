@@ -5,7 +5,7 @@ export interface HomonymPickState { questions: QuizQuestion[]; currentIndex: num
 export type HomonymPickAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "BARK — homonym pair?",
+    "question": "BARK \u2014 homonym pair?",
     "choices": [
       "bark of dog / bark of tree",
       "bark of cat / leaf",
@@ -15,7 +15,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "BAT — pair?",
+    "question": "BAT \u2014 pair?",
     "choices": [
       "winged mammal / cricket bat",
       "drum / song",
@@ -25,7 +25,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "LIGHT — pair?",
+    "question": "LIGHT \u2014 pair?",
     "choices": [
       "weight / illumination",
       "color / sound",
@@ -35,7 +35,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "PEN — pair?",
+    "question": "PEN \u2014 pair?",
     "choices": [
       "writing tool / animal enclosure",
       "cat / dog",
@@ -45,7 +45,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "SPRING — pair?",
+    "question": "SPRING \u2014 pair?",
     "choices": [
       "coil / season",
       "summer / fall",
@@ -55,7 +55,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "RING — pair?",
+    "question": "RING \u2014 pair?",
     "choices": [
       "jewelry / sound",
       "cat / dog",
@@ -65,7 +65,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "FAIR — pair?",
+    "question": "FAIR \u2014 pair?",
     "choices": [
       "just / festival",
       "cat / dog",
@@ -75,7 +75,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "LEFT — pair?",
+    "question": "LEFT \u2014 pair?",
     "choices": [
       "direction / departed",
       "up / down",
@@ -85,7 +85,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "TIRE — pair?",
+    "question": "TIRE \u2014 pair?",
     "choices": [
       "rubber wheel / fatigue",
       "cat / dog",
@@ -95,12 +95,212 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "WAVE — pair?",
+    "question": "WAVE \u2014 pair?",
     "choices": [
-      "water / hand gesture",
+      "water swell / hand gesture",
       "cat / dog",
       "red / blue",
       "up / down"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "MATCH \u2014 pair?",
+    "choices": [
+      "fire stick / contest",
+      "cat / dog",
+      "red / blue",
+      "loud / soft"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "PARK \u2014 pair?",
+    "choices": [
+      "green space / to stop a car",
+      "cat / dog",
+      "run / walk",
+      "hot / cold"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "BANK \u2014 pair?",
+    "choices": [
+      "money place / river edge",
+      "cat / dog",
+      "tall / short",
+      "open / shut"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "ROCK \u2014 pair?",
+    "choices": [
+      "stone / sway gently",
+      "cat / dog",
+      "fast / slow",
+      "loud / quiet"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "CLUB \u2014 pair?",
+    "choices": [
+      "heavy stick / group of people",
+      "cat / dog",
+      "red / green",
+      "up / down"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "FILE \u2014 pair?",
+    "choices": [
+      "folder / nail tool",
+      "cat / dog",
+      "tall / short",
+      "wet / dry"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "MEAN \u2014 pair?",
+    "choices": [
+      "unkind / average",
+      "cat / dog",
+      "fast / slow",
+      "red / blue"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "BOW \u2014 pair?",
+    "choices": [
+      "weapon / bend forward",
+      "cat / dog",
+      "wet / dry",
+      "tall / short"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "DUCK \u2014 pair?",
+    "choices": [
+      "bird / lower head",
+      "cat / dog",
+      "hot / cold",
+      "up / down"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "JAM \u2014 pair?",
+    "choices": [
+      "fruit spread / traffic snarl",
+      "cat / dog",
+      "red / blue",
+      "fast / slow"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "KIND \u2014 pair?",
+    "choices": [
+      "caring / type",
+      "cat / dog",
+      "wet / dry",
+      "loud / soft"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "LEAVES \u2014 pair?",
+    "choices": [
+      "foliage / departs",
+      "cat / dog",
+      "tall / short",
+      "red / blue"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "LIE \u2014 pair?",
+    "choices": [
+      "recline / falsehood",
+      "cat / dog",
+      "loud / quiet",
+      "tall / short"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "MINE \u2014 pair?",
+    "choices": [
+      "belongs to me / dig site",
+      "cat / dog",
+      "fast / slow",
+      "red / blue"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "POUND \u2014 pair?",
+    "choices": [
+      "weight / strike heavily",
+      "cat / dog",
+      "wet / dry",
+      "tall / short"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "ROSE \u2014 pair?",
+    "choices": [
+      "flower / stood up",
+      "cat / dog",
+      "red / blue",
+      "hot / cold"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "SAW \u2014 pair?",
+    "choices": [
+      "cutting tool / past tense of see",
+      "cat / dog",
+      "loud / quiet",
+      "tall / short"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "SEAL \u2014 pair?",
+    "choices": [
+      "sea animal / close tightly",
+      "cat / dog",
+      "fast / slow",
+      "wet / dry"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "TRUNK \u2014 pair?",
+    "choices": [
+      "tree base / car storage",
+      "cat / dog",
+      "tall / short",
+      "red / blue"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "WELL \u2014 pair?",
+    "choices": [
+      "water hole / in good health",
+      "cat / dog",
+      "loud / quiet",
+      "wet / dry"
     ],
     "correct": 0
   }

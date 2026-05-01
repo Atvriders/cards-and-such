@@ -103,6 +103,206 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "heavy"
     ],
     "correct": 2
+  },
+  {
+    "question": "Antonym of HAPPY?",
+    "choices": [
+      "joyful",
+      "merry",
+      "sad",
+      "glad"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of BIG?",
+    "choices": [
+      "huge",
+      "vast",
+      "small",
+      "wide"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of STRONG?",
+    "choices": [
+      "sturdy",
+      "tough",
+      "weak",
+      "firm"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of BRAVE?",
+    "choices": [
+      "bold",
+      "fearless",
+      "cowardly",
+      "daring"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of CLEAN?",
+    "choices": [
+      "pure",
+      "tidy",
+      "dirty",
+      "spotless"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of WIN?",
+    "choices": [
+      "earn",
+      "gain",
+      "lose",
+      "achieve"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of LOVE?",
+    "choices": [
+      "adore",
+      "cherish",
+      "hate",
+      "like"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of GOOD?",
+    "choices": [
+      "fine",
+      "great",
+      "bad",
+      "kind"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of EASY?",
+    "choices": [
+      "simple",
+      "plain",
+      "hard",
+      "light"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of EARLY?",
+    "choices": [
+      "soon",
+      "prompt",
+      "late",
+      "ahead"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of RICH?",
+    "choices": [
+      "wealthy",
+      "loaded",
+      "poor",
+      "lavish"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of TALL?",
+    "choices": [
+      "high",
+      "lofty",
+      "short",
+      "long"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of NOISY?",
+    "choices": [
+      "loud",
+      "blaring",
+      "quiet",
+      "harsh"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of WET?",
+    "choices": [
+      "damp",
+      "soaked",
+      "dry",
+      "moist"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of SOFT?",
+    "choices": [
+      "plush",
+      "tender",
+      "hard",
+      "fluffy"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of FRIEND?",
+    "choices": [
+      "pal",
+      "buddy",
+      "enemy",
+      "ally"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of START?",
+    "choices": [
+      "begin",
+      "launch",
+      "stop",
+      "open"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of REMEMBER?",
+    "choices": [
+      "recall",
+      "recollect",
+      "forget",
+      "know"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of ACCEPT?",
+    "choices": [
+      "take",
+      "receive",
+      "reject",
+      "admit"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Antonym of PRESENT?",
+    "choices": [
+      "here",
+      "current",
+      "absent",
+      "now"
+    ],
+    "correct": 2
   }
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

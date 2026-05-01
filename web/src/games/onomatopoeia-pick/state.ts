@@ -55,7 +55,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Splash word — onomatopoeia?",
+    "question": "Splash word \u2014 onomatopoeia?",
     "choices": [
       "splash",
       "walked",
@@ -103,6 +103,206 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "cluck"
     ],
     "correct": 2
+  },
+  {
+    "question": "Dog sound?",
+    "choices": [
+      "bark",
+      "tree",
+      "table",
+      "chair"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Duck sound?",
+    "choices": [
+      "meow",
+      "quack",
+      "neigh",
+      "baa"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sheep sound?",
+    "choices": [
+      "moo",
+      "oink",
+      "baa",
+      "buzz"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Horse sound?",
+    "choices": [
+      "neigh",
+      "purr",
+      "roar",
+      "tweet"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Lion sound?",
+    "choices": [
+      "squeak",
+      "roar",
+      "chirp",
+      "hoot"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mouse sound?",
+    "choices": [
+      "squeak",
+      "moo",
+      "growl",
+      "bark"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Owl sound?",
+    "choices": [
+      "hoot",
+      "buzz",
+      "moo",
+      "purr"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Bird sound?",
+    "choices": [
+      "tweet",
+      "growl",
+      "oink",
+      "moo"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Clock sound?",
+    "choices": [
+      "tick",
+      "table",
+      "chair",
+      "house"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Heart sound?",
+    "choices": [
+      "thump",
+      "study",
+      "read",
+      "sleep"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Fire sound?",
+    "choices": [
+      "crackle",
+      "table",
+      "house",
+      "tall"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Water drip sound?",
+    "choices": [
+      "plop",
+      "tall",
+      "wide",
+      "green"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Glass breaking sound?",
+    "choices": [
+      "smash",
+      "tree",
+      "house",
+      "blue"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Whip sound?",
+    "choices": [
+      "crack",
+      "study",
+      "tall",
+      "soft"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Sneeze sound?",
+    "choices": [
+      "achoo",
+      "table",
+      "blue",
+      "jump"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Cough sound?",
+    "choices": [
+      "ahem",
+      "study",
+      "house",
+      "tree"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Knock on door sound?",
+    "choices": [
+      "rap",
+      "tall",
+      "blue",
+      "soft"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Cat purr sound?",
+    "choices": [
+      "purr",
+      "tall",
+      "house",
+      "read"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Wind sound?",
+    "choices": [
+      "whoosh",
+      "tall",
+      "blue",
+      "soft"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Explosion sound?",
+    "choices": [
+      "boom",
+      "tree",
+      "study",
+      "tall"
+    ],
+    "correct": 0
   }
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

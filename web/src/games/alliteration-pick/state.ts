@@ -47,7 +47,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   {
     "question": "Pick the alliteration.",
     "choices": [
-      "bright bright birds",
+      "bright bouncing balls",
       "fish swims",
       "read book",
       "strong wind"
@@ -87,7 +87,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   {
     "question": "Which is alliteration?",
     "choices": [
-      "soft snow falling",
+      "soft snow swirling",
       "rough road",
       "steep hill",
       "green grass"
@@ -101,6 +101,206 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "cats sleep",
       "dogs bark",
       "birds sing"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "bouncing baby boy",
+      "tall tree",
+      "open door",
+      "red apple"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "cool cucumbers crunch",
+      "warm bread",
+      "sweet candy",
+      "salty chips"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "dizzy dragons dance",
+      "purple sky",
+      "loud noise",
+      "green field"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "fluttering flags fly",
+      "open window",
+      "broken cup",
+      "wet floor"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "greedy goblins grin",
+      "smart girl",
+      "loud bell",
+      "green leaf"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "humble honeybees hum",
+      "tall tower",
+      "wild river",
+      "bright moon"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "jumping jaguars jolt",
+      "open box",
+      "fast train",
+      "warm coat"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "kind kittens knead",
+      "wet rock",
+      "old man",
+      "sharp pencil"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "mighty mountains move",
+      "warm soup",
+      "hard chair",
+      "thick fog"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "nimble ninjas nudge",
+      "old story",
+      "bright lamp",
+      "soft pillow"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "proud pirates plunder",
+      "old book",
+      "soft rug",
+      "warm hat"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "quiet queens quilt",
+      "loud train",
+      "fast bird",
+      "green hat"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "roaring rivers rush",
+      "warm bread",
+      "tall fence",
+      "red car"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "sneaky snakes slither",
+      "old hat",
+      "wet street",
+      "loud horn"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "tiny turtles tiptoe",
+      "hot stove",
+      "wet floor",
+      "soft cloud"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "vain villains vanish",
+      "blue lake",
+      "old tree",
+      "warm fire"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "whispering willows wave",
+      "loud bell",
+      "fast horse",
+      "dark room"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "zealous zebras zigzag",
+      "bright lamp",
+      "old coat",
+      "wet rock"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is alliteration?",
+    "choices": [
+      "clever crabs creep",
+      "tall tree",
+      "warm hat",
+      "loud horn"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pick alliteration.",
+    "choices": [
+      "frisky foxes frolic",
+      "bright sun",
+      "warm bread",
+      "old chair"
     ],
     "correct": 0
   }
