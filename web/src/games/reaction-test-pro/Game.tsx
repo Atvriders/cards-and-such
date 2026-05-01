@@ -15,28 +15,28 @@ export function ReactionTestProGame({ state, dispatch, onGameOver }: GameProps<R
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="rtprx-wrap">
-        <div className="rtprx-done">
+      <div className="rxtstp-wrap">
+        <div className="rxtstp-done">
           <h2>Time's Up!</h2>
-          <div className="rtprx-stats">Hits: {state.hits} / Misses: {state.misses}</div>
-          <div className="rtprx-final">{state.score} pts</div>
+          <div className="rxtstp-stats">Hits: {state.hits} / Misses: {state.misses}</div>
+          <div className="rxtstp-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="rtprx-wrap">
-      <div className="rtprx-header">
-        <span className="rtprx-info">Hits: {state.hits}</span>
-        <span className="rtprx-timer">{state.ticksRemaining}s</span>
-        <span className="rtprx-score">{state.score} pts</span>
+    <div className="rxtstp-wrap">
+      <div className="rxtstp-header">
+        <span className="rxtstp-info">Hits: {state.hits}</span>
+        <span className="rxtstp-timer">{state.ticksRemaining}s</span>
+        <span className="rxtstp-score">{state.score} pts</span>
       </div>
-      <div className="rtprx-prompt">Pro reflexes — tap GO instantly!</div>
+      <div className="rxtstp-prompt">Pro reflexes — tap GO instantly!</div>
       <button
-        className={`rtprx-stage ${state.isGo ? "go" : "nogo"}`}
+        className={`rxtstp-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as ReactionTestProAction)}
         aria-label="react">{state.isGo ? "⚡" : "🛑"}</button>
-      <div className="rtprx-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
+      <div className="rxtstp-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
     </div>
   );
 }

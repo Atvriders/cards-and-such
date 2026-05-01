@@ -1,25 +1,84 @@
-.simrx-wrap {
+.smnptn-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 14px;
   padding: 22px; max-width: 540px; margin: 0 auto; user-select: none;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
-.simrx-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.simrx-info { font-size: 0.95rem; color: #475569; font-family: 'Inter', sans-serif; }
-.simrx-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
-.simrx-score { font-size: 1.2rem; font-weight: 800; color: #1e40af; font-family: 'JetBrains Mono', monospace; }
-.simrx-prompt { text-align: center; font-size: 1.05rem; color: #334155; font-weight: 600; font-family: 'Inter', sans-serif; }
-.simrx-stage {
+.smnptn-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.smnptn-info { font-size: 0.95rem; color: #475569; font-family: 'Inter', sans-serif; }
+.smnptn-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
+.smnptn-score { font-size: 1.2rem; font-weight: 800; color: #1e40af; font-family: 'JetBrains Mono', monospace; }
+.smnptn-prompt { text-align: center; font-size: 1.05rem; color: #334155; font-weight: 600; font-family: 'Inter', sans-serif; }
+.smnptn-stage {
   width: 240px; height: 240px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 4rem; cursor: pointer; border: none;
   transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
   font-family: 'Inter', sans-serif;
 }
-.simrx-stage.go { background: #22c55e; box-shadow: 0 0 40px #22c55eaa, inset 0 0 20px rgba(255,255,255,0.3); }
-.simrx-stage.nogo { background: #94a3b8; box-shadow: 0 0 24px rgba(0,0,0,0.2); opacity: 0.85; }
-.simrx-stage:active { transform: scale(0.97); }
-.simrx-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.simrx-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
-.simrx-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.simrx-stats { font-family: 'Inter', sans-serif; color: #475569; }
-.simrx-final { font-size: 1.6rem; color: #1e40af; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.smnptn-stage.go { background: #22c55e; box-shadow: 0 0 40px #22c55eaa, inset 0 0 20px rgba(255,255,255,0.3); }
+.smnptn-stage.nogo { background: #94a3b8; box-shadow: 0 0 24px rgba(0,0,0,0.2); opacity: 0.85; }
+.smnptn-stage:active { transform: scale(0.97); }
+.smnptn-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.smnptn-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.smnptn-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.smnptn-stats { font-family: 'Inter', sans-serif; color: #475569; }
+.smnptn-final { font-size: 1.6rem; color: #1e40af; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+
+/* === Themed palette overrides === */
+.smnptn-wrap {
+  background: #020617;
+  color: #f8fafc;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  border-radius: 18px;
+  padding: 18px;
+}
+.smnptn-header { color: #f8fafc; }
+.smnptn-info { color: #f8fafc; opacity: 0.85; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.smnptn-timer { color: #facc15; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 6px #facc1566; }
+.smnptn-score { color: #22c55e; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 4px #22c55e55; }
+.smnptn-target, .smnptn-hint, .smnptn-stats { color: #ef4444; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.smnptn-grid {
+  background: radial-gradient(circle at 50% 50%,#1e293b,#020617);
+  border: 3px solid #22c55e;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
+}
+.smnptn-cell {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 2px solid transparent;
+}
+.smnptn-cell.sel,
+.smnptn-cell.selected,
+.smnptn-cell.active {
+  border-color: #facc15;
+  box-shadow: 0 0 14px #facc15;
+}
+.smnptn-btn,
+.smnptn-pad {
+  background: #22c55e;
+  color: #fff;
+  border: 2px solid #22c55e;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.smnptn-btn:hover, .smnptn-pad:hover { transform: translateY(-1px); background: #ef4444; color: #f8fafc; }
+.smnptn-done {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 2px solid #22c55e;
+  border-radius: 16px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+.smnptn-done h2 { color: #facc15; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.smnptn-final { color: #22c55e; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 8px #22c55e55; }
+.smnptn-controls,
+.smnptn-track,
+.smnptn-next,
+.smnptn-player,
+.smnptn-obstacle { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.smnptn-track { background: radial-gradient(circle at 50% 50%,#1e293b,#020617); border: 3px solid #22c55e; border-radius: 16px; }
+.smnptn-player { color: #facc15; }
+.smnptn-obstacle { color: #ef4444; }

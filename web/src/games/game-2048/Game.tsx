@@ -28,48 +28,48 @@ export function Game2048Game({ state, dispatch, onGameOver }: GameProps<Game2048
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="gamsl-wrap">
-        <div className="gamsl-done">
+      <div className="g2048-wrap">
+        <div className="g2048-done">
           <h2>Game Over</h2>
-          <div className="gamsl-stats">Best tile: {state.best} • Moves: {state.moves}</div>
-          <div className="gamsl-final">{state.score} pts</div>
+          <div className="g2048-stats">Best tile: {state.best} • Moves: {state.moves}</div>
+          <div className="g2048-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   if (state.phase === "won") {
     return (
-      <div className="gamsl-wrap">
-        <div className="gamsl-done">
+      <div className="g2048-wrap">
+        <div className="g2048-done">
           <h2>You reached {TARGET}!</h2>
-          <div className="gamsl-stats">Moves: {state.moves}</div>
-          <div className="gamsl-final">{state.score} pts</div>
+          <div className="g2048-stats">Moves: {state.moves}</div>
+          <div className="g2048-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   function tap(dir: Direction): void { dispatch({ type: "slide", dir } as Game2048Action); }
   return (
-    <div className="gamsl-wrap">
-      <div className="gamsl-header">
-        <span className="gamsl-info">Moves: {state.moves}</span>
-        <span className="gamsl-target">Target: {TARGET}</span>
-        <span className="gamsl-score">{state.score}</span>
+    <div className="g2048-wrap">
+      <div className="g2048-header">
+        <span className="g2048-info">Moves: {state.moves}</span>
+        <span className="g2048-target">Target: {TARGET}</span>
+        <span className="g2048-score">{state.score}</span>
       </div>
-      <div className="gamsl-grid">
+      <div className="g2048-grid">
         {state.grid.flat().map((v, i) => (
-          <div key={i} className="gamsl-cell" style={{ background: v ? (TILE_COLORS[v] ?? "#3c3a32") : "rgba(238,228,218,0.35)", color: v <= 4 ? "#776e65" : "#f9f6f2" }}>
+          <div key={i} className="g2048-cell" style={{ background: v ? (TILE_COLORS[v] ?? "#3c3a32") : "rgba(238,228,218,0.35)", color: v <= 4 ? "#776e65" : "#f9f6f2" }}>
             {v ? v : ""}
           </div>
         ))}
       </div>
-      <div className="gamsl-pad">
-        <div></div><button className="gamsl-btn" onClick={() => tap("up")}>↑</button><div></div>
-        <button className="gamsl-btn" onClick={() => tap("left")}>←</button>
-        <button className="gamsl-btn" onClick={() => tap("down")}>↓</button>
-        <button className="gamsl-btn" onClick={() => tap("right")}>→</button>
+      <div className="g2048-pad">
+        <div></div><button className="g2048-btn" onClick={() => tap("up")}>↑</button><div></div>
+        <button className="g2048-btn" onClick={() => tap("left")}>←</button>
+        <button className="g2048-btn" onClick={() => tap("down")}>↓</button>
+        <button className="g2048-btn" onClick={() => tap("right")}>→</button>
       </div>
-      <div className="gamsl-hint">Use arrow keys or WASD</div>
+      <div className="g2048-hint">Use arrow keys or WASD</div>
     </div>
   );
 }

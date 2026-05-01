@@ -28,41 +28,41 @@ export function BatFlyerGame({ state, dispatch, onGameOver }: GameProps<BatFlyer
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="batrn-wrap">
-        <div className="batrn-done">
+      <div className="btfly-wrap">
+        <div className="btfly-done">
           <h2>Crashed!</h2>
-          <div className="batrn-stats">Survived {state.ticks} ticks</div>
-          <div className="batrn-final">{state.score} pts</div>
+          <div className="btfly-stats">Survived {state.ticks} ticks</div>
+          <div className="btfly-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="batrn-wrap">
-      <div className="batrn-header">
-        <span className="batrn-info">Survived: {state.ticks}</span>
-        <span className="batrn-score">{state.score} pts</span>
+    <div className="btfly-wrap">
+      <div className="btfly-header">
+        <span className="btfly-info">Survived: {state.ticks}</span>
+        <span className="btfly-score">{state.score} pts</span>
       </div>
-      <div className="batrn-track">
+      <div className="btfly-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`batrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`btfly-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as BatFlyerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="batrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="btfly-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="batrn-obstacle"
+              <span key={o.id} className="btfly-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="batrn-controls">
-        <button className="batrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as BatFlyerAction)}>↑ Up</button>
-        <button className="batrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as BatFlyerAction)}>↓ Down</button>
+      <div className="btfly-controls">
+        <button className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as BatFlyerAction)}>↑ Up</button>
+        <button className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as BatFlyerAction)}>↓ Down</button>
       </div>
-      <div className="batrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="btfly-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

@@ -28,41 +28,41 @@ export function ColorBallDropGame({ state, dispatch, onGameOver }: GameProps<Col
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="cbdrn-wrap">
-        <div className="cbdrn-done">
+      <div className="clrbll-wrap">
+        <div className="clrbll-done">
           <h2>Crashed!</h2>
-          <div className="cbdrn-stats">Survived {state.ticks} ticks</div>
-          <div className="cbdrn-final">{state.score} pts</div>
+          <div className="clrbll-stats">Survived {state.ticks} ticks</div>
+          <div className="clrbll-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="cbdrn-wrap">
-      <div className="cbdrn-header">
-        <span className="cbdrn-info">Survived: {state.ticks}</span>
-        <span className="cbdrn-score">{state.score} pts</span>
+    <div className="clrbll-wrap">
+      <div className="clrbll-header">
+        <span className="clrbll-info">Survived: {state.ticks}</span>
+        <span className="clrbll-score">{state.score} pts</span>
       </div>
-      <div className="cbdrn-track">
+      <div className="clrbll-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`cbdrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`clrbll-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as ColorBallDropAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="cbdrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="clrbll-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="cbdrn-obstacle"
+              <span key={o.id} className="clrbll-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="cbdrn-controls">
-        <button className="cbdrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ColorBallDropAction)}>↑ Up</button>
-        <button className="cbdrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ColorBallDropAction)}>↓ Down</button>
+      <div className="clrbll-controls">
+        <button className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ColorBallDropAction)}>↑ Up</button>
+        <button className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ColorBallDropAction)}>↓ Down</button>
       </div>
-      <div className="cbdrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="clrbll-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

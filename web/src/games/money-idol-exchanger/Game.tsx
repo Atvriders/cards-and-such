@@ -16,20 +16,20 @@ export function MoneyIdolExchangerGame({ state, dispatch, onGameOver }: GameProp
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return <div className="mnyidl-wrap"><div className="mnyidl-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="mnyidl-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="mnyidl-wrap">
+      <div className="mnyidl-header">
+        <span className="mnyidl-info">Matches: {state.matches}</span>
+        <span className="mnyidl-timer">{state.ticksRemaining}s</span>
+        <span className="mnyidl-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="mnyidl-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`mnyidl-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as MoneyIdolExchangerAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

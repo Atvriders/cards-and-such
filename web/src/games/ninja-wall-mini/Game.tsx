@@ -28,41 +28,41 @@ export function NinjaWallMiniGame({ state, dispatch, onGameOver }: GameProps<Nin
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="nwmrn-wrap">
-        <div className="nwmrn-done">
+      <div className="njwll-wrap">
+        <div className="njwll-done">
           <h2>Crashed!</h2>
-          <div className="nwmrn-stats">Survived {state.ticks} ticks</div>
-          <div className="nwmrn-final">{state.score} pts</div>
+          <div className="njwll-stats">Survived {state.ticks} ticks</div>
+          <div className="njwll-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="nwmrn-wrap">
-      <div className="nwmrn-header">
-        <span className="nwmrn-info">Survived: {state.ticks}</span>
-        <span className="nwmrn-score">{state.score} pts</span>
+    <div className="njwll-wrap">
+      <div className="njwll-header">
+        <span className="njwll-info">Survived: {state.ticks}</span>
+        <span className="njwll-score">{state.score} pts</span>
       </div>
-      <div className="nwmrn-track">
+      <div className="njwll-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`nwmrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`njwll-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as NinjaWallMiniAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="nwmrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="njwll-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="nwmrn-obstacle"
+              <span key={o.id} className="njwll-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="nwmrn-controls">
-        <button className="nwmrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as NinjaWallMiniAction)}>↑ Up</button>
-        <button className="nwmrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as NinjaWallMiniAction)}>↓ Down</button>
+      <div className="njwll-controls">
+        <button className="njwll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as NinjaWallMiniAction)}>↑ Up</button>
+        <button className="njwll-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as NinjaWallMiniAction)}>↓ Down</button>
       </div>
-      <div className="nwmrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="njwll-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

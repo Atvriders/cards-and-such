@@ -28,41 +28,41 @@ export function DoodleJumpArcadeGame({ state, dispatch, onGameOver }: GameProps<
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="djarn-wrap">
-        <div className="djarn-done">
+      <div className="ddljmp-wrap">
+        <div className="ddljmp-done">
           <h2>Crashed!</h2>
-          <div className="djarn-stats">Survived {state.ticks} ticks</div>
-          <div className="djarn-final">{state.score} pts</div>
+          <div className="ddljmp-stats">Survived {state.ticks} ticks</div>
+          <div className="ddljmp-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="djarn-wrap">
-      <div className="djarn-header">
-        <span className="djarn-info">Survived: {state.ticks}</span>
-        <span className="djarn-score">{state.score} pts</span>
+    <div className="ddljmp-wrap">
+      <div className="ddljmp-header">
+        <span className="ddljmp-info">Survived: {state.ticks}</span>
+        <span className="ddljmp-score">{state.score} pts</span>
       </div>
-      <div className="djarn-track">
+      <div className="ddljmp-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`djarn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`ddljmp-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as DoodleJumpArcadeAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="djarn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="ddljmp-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="djarn-obstacle"
+              <span key={o.id} className="ddljmp-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="djarn-controls">
-        <button className="djarn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction)}>↑ Up</button>
-        <button className="djarn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as DoodleJumpArcadeAction)}>↓ Down</button>
+      <div className="ddljmp-controls">
+        <button className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction)}>↑ Up</button>
+        <button className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as DoodleJumpArcadeAction)}>↓ Down</button>
       </div>
-      <div className="djarn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="ddljmp-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

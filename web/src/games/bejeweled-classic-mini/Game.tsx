@@ -17,27 +17,27 @@ export function BejeweledClassicMiniGame({ state, dispatch, onGameOver }: GamePr
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="bcmm3-wrap">
-        <div className="bcmm3-done">
+      <div className="bjcls-wrap">
+        <div className="bjcls-done">
           <h2>Time's Up!</h2>
-          <div className="bcmm3-stats">Matches: {state.matches}</div>
-          <div className="bcmm3-final">{state.score} pts</div>
+          <div className="bjcls-stats">Matches: {state.matches}</div>
+          <div className="bjcls-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="bcmm3-wrap">
-      <div className="bcmm3-header">
-        <span className="bcmm3-info">Matches: {state.matches}</span>
-        <span className="bcmm3-timer">{state.ticksRemaining}s</span>
-        <span className="bcmm3-score">{state.score} pts</span>
+    <div className="bjcls-wrap">
+      <div className="bjcls-header">
+        <span className="bjcls-info">Matches: {state.matches}</span>
+        <span className="bjcls-timer">{state.ticksRemaining}s</span>
+        <span className="bjcls-score">{state.score} pts</span>
       </div>
-      <div className="bcmm3-grid">
+      <div className="bjcls-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`bcmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`bjcls-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as BejeweledClassicMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

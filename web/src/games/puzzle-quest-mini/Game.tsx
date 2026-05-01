@@ -17,27 +17,27 @@ export function PuzzleQuestMiniGame({ state, dispatch, onGameOver }: GameProps<P
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="pqmm3-wrap">
-        <div className="pqmm3-done">
+      <div className="pzqst-wrap">
+        <div className="pzqst-done">
           <h2>Time's Up!</h2>
-          <div className="pqmm3-stats">Matches: {state.matches}</div>
-          <div className="pqmm3-final">{state.score} pts</div>
+          <div className="pzqst-stats">Matches: {state.matches}</div>
+          <div className="pzqst-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="pqmm3-wrap">
-      <div className="pqmm3-header">
-        <span className="pqmm3-info">Matches: {state.matches}</span>
-        <span className="pqmm3-timer">{state.ticksRemaining}s</span>
-        <span className="pqmm3-score">{state.score} pts</span>
+    <div className="pzqst-wrap">
+      <div className="pzqst-header">
+        <span className="pzqst-info">Matches: {state.matches}</span>
+        <span className="pzqst-timer">{state.ticksRemaining}s</span>
+        <span className="pzqst-score">{state.score} pts</span>
       </div>
-      <div className="pqmm3-grid">
+      <div className="pzqst-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`pqmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`pzqst-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuzzleQuestMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

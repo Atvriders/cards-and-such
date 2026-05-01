@@ -28,41 +28,41 @@ export function SpikeDodgerGame({ state, dispatch, onGameOver }: GameProps<Spike
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="spirn-wrap">
-        <div className="spirn-done">
+      <div className="spkdg-wrap">
+        <div className="spkdg-done">
           <h2>Crashed!</h2>
-          <div className="spirn-stats">Survived {state.ticks} ticks</div>
-          <div className="spirn-final">{state.score} pts</div>
+          <div className="spkdg-stats">Survived {state.ticks} ticks</div>
+          <div className="spkdg-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="spirn-wrap">
-      <div className="spirn-header">
-        <span className="spirn-info">Survived: {state.ticks}</span>
-        <span className="spirn-score">{state.score} pts</span>
+    <div className="spkdg-wrap">
+      <div className="spkdg-header">
+        <span className="spkdg-info">Survived: {state.ticks}</span>
+        <span className="spkdg-score">{state.score} pts</span>
       </div>
-      <div className="spirn-track">
+      <div className="spkdg-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`spirn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`spkdg-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as SpikeDodgerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="spirn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="spkdg-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="spirn-obstacle"
+              <span key={o.id} className="spkdg-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="spirn-controls">
-        <button className="spirn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SpikeDodgerAction)}>↑ Up</button>
-        <button className="spirn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SpikeDodgerAction)}>↓ Down</button>
+      <div className="spkdg-controls">
+        <button className="spkdg-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SpikeDodgerAction)}>↑ Up</button>
+        <button className="spkdg-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SpikeDodgerAction)}>↓ Down</button>
       </div>
-      <div className="spirn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="spkdg-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

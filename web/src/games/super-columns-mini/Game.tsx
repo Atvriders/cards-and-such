@@ -17,27 +17,27 @@ export function SuperColumnsMiniGame({ state, dispatch, onGameOver }: GameProps<
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="scmm3-wrap">
-        <div className="scmm3-done">
+      <div className="spcolmn-wrap">
+        <div className="spcolmn-done">
           <h2>Time's Up!</h2>
-          <div className="scmm3-stats">Matches: {state.matches}</div>
-          <div className="scmm3-final">{state.score} pts</div>
+          <div className="spcolmn-stats">Matches: {state.matches}</div>
+          <div className="spcolmn-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="scmm3-wrap">
-      <div className="scmm3-header">
-        <span className="scmm3-info">Matches: {state.matches}</span>
-        <span className="scmm3-timer">{state.ticksRemaining}s</span>
-        <span className="scmm3-score">{state.score} pts</span>
+    <div className="spcolmn-wrap">
+      <div className="spcolmn-header">
+        <span className="spcolmn-info">Matches: {state.matches}</span>
+        <span className="spcolmn-timer">{state.ticksRemaining}s</span>
+        <span className="spcolmn-score">{state.score} pts</span>
       </div>
-      <div className="scmm3-grid">
+      <div className="spcolmn-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`scmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`spcolmn-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as SuperColumnsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

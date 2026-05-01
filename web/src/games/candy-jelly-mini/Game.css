@@ -1,29 +1,88 @@
-.cjmm3-wrap {
+.cdjly-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   padding: 18px; max-width: 640px; margin: 0 auto; user-select: none;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: #1e293b;
 }
-.cjmm3-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.cjmm3-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
-.cjmm3-score { font-size: 1.2rem; font-weight: 800; color: #a21caf; font-family: 'JetBrains Mono', monospace; }
-.cjmm3-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.cjmm3-grid {
+.cdjly-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.cdjly-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
+.cdjly-score { font-size: 1.2rem; font-weight: 800; color: #a21caf; font-family: 'JetBrains Mono', monospace; }
+.cdjly-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.cdjly-grid {
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;
   width: 100%; max-width: 480px; padding: 10px;
   background: linear-gradient(180deg, #fce7f3, #f0abfc);
   border: 3px solid #a21caf; border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
-.cjmm3-cell {
+.cdjly-cell {
   aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
   font-size: 1.8rem; cursor: pointer; background: #ffffffcc;
   border: 2px solid transparent; border-radius: 10px;
   transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
-.cjmm3-cell:hover { transform: scale(1.06); }
-.cjmm3-cell.sel { border-color: #a21caf; background: #ffffff; box-shadow: 0 0 12px #a21caf; transform: scale(1.08); }
-.cjmm3-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-.cjmm3-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.cjmm3-stats { font-family: 'Inter', sans-serif; color: #64748b; }
-.cjmm3-final { font-size: 1.6rem; color: #a21caf; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.cdjly-cell:hover { transform: scale(1.06); }
+.cdjly-cell.sel { border-color: #a21caf; background: #ffffff; box-shadow: 0 0 12px #a21caf; transform: scale(1.08); }
+.cdjly-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.cdjly-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.cdjly-stats { font-family: 'Inter', sans-serif; color: #64748b; }
+.cdjly-final { font-size: 1.6rem; color: #a21caf; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+
+/* === Themed palette overrides === */
+.cdjly-wrap {
+  background: #fff0f5;
+  color: #7a1a4a;
+  font-family: 'Fredoka', 'Comic Neue', cursive;
+  border-radius: 18px;
+  padding: 18px;
+}
+.cdjly-header { color: #7a1a4a; }
+.cdjly-info { color: #7a1a4a; opacity: 0.85; font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdjly-timer { color: #ff6b9d; font-family: 'Fredoka', 'Comic Neue', cursive; text-shadow: 0 0 6px #ff6b9d66; }
+.cdjly-score { color: #ff2d92; font-family: 'Fredoka', 'Comic Neue', cursive; text-shadow: 0 0 4px #ff2d9255; }
+.cdjly-target, .cdjly-hint, .cdjly-stats { color: #06d6a0; font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdjly-grid {
+  background: linear-gradient(135deg,#ffb3d9,#a0f0e0);
+  border: 3px solid #ff2d92;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
+}
+.cdjly-cell {
+  background: #ffffff;
+  color: #7a1a4a;
+  border: 2px solid transparent;
+}
+.cdjly-cell.sel,
+.cdjly-cell.selected,
+.cdjly-cell.active {
+  border-color: #ff6b9d;
+  box-shadow: 0 0 14px #ff6b9d;
+}
+.cdjly-btn,
+.cdjly-pad {
+  background: #ff2d92;
+  color: #fff;
+  border: 2px solid #ff2d92;
+  font-family: 'Fredoka', 'Comic Neue', cursive;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.cdjly-btn:hover, .cdjly-pad:hover { transform: translateY(-1px); background: #06d6a0; color: #7a1a4a; }
+.cdjly-done {
+  background: #ffe0ec;
+  color: #7a1a4a;
+  border: 2px solid #ff2d92;
+  border-radius: 16px;
+  font-family: 'Fredoka', 'Comic Neue', cursive;
+}
+.cdjly-done h2 { color: #ff6b9d; font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdjly-final { color: #ff2d92; font-family: 'Fredoka', 'Comic Neue', cursive; text-shadow: 0 0 8px #ff2d9255; }
+.cdjly-controls,
+.cdjly-track,
+.cdjly-next,
+.cdjly-player,
+.cdjly-obstacle { font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdjly-track { background: linear-gradient(135deg,#ffb3d9,#a0f0e0); border: 3px solid #ff2d92; border-radius: 16px; }
+.cdjly-player { color: #ff6b9d; }
+.cdjly-obstacle { color: #06d6a0; }

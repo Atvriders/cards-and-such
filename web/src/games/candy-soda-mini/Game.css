@@ -1,29 +1,88 @@
-.csmm3-wrap {
+.cdsoda-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   padding: 18px; max-width: 640px; margin: 0 auto; user-select: none;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: #1e293b;
 }
-.csmm3-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.csmm3-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
-.csmm3-score { font-size: 1.2rem; font-weight: 800; color: #0891b2; font-family: 'JetBrains Mono', monospace; }
-.csmm3-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.csmm3-grid {
+.cdsoda-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.cdsoda-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
+.cdsoda-score { font-size: 1.2rem; font-weight: 800; color: #0891b2; font-family: 'JetBrains Mono', monospace; }
+.cdsoda-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.cdsoda-grid {
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;
   width: 100%; max-width: 480px; padding: 10px;
   background: linear-gradient(180deg, #cffafe, #67e8f9);
   border: 3px solid #0891b2; border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
-.csmm3-cell {
+.cdsoda-cell {
   aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
   font-size: 1.8rem; cursor: pointer; background: #ffffffcc;
   border: 2px solid transparent; border-radius: 10px;
   transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
-.csmm3-cell:hover { transform: scale(1.06); }
-.csmm3-cell.sel { border-color: #0891b2; background: #ffffff; box-shadow: 0 0 12px #0891b2; transform: scale(1.08); }
-.csmm3-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-.csmm3-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.csmm3-stats { font-family: 'Inter', sans-serif; color: #64748b; }
-.csmm3-final { font-size: 1.6rem; color: #0891b2; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.cdsoda-cell:hover { transform: scale(1.06); }
+.cdsoda-cell.sel { border-color: #0891b2; background: #ffffff; box-shadow: 0 0 12px #0891b2; transform: scale(1.08); }
+.cdsoda-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.cdsoda-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.cdsoda-stats { font-family: 'Inter', sans-serif; color: #64748b; }
+.cdsoda-final { font-size: 1.6rem; color: #0891b2; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+
+/* === Themed palette overrides === */
+.cdsoda-wrap {
+  background: #fff0f5;
+  color: #7a1a4a;
+  font-family: 'Fredoka', 'Comic Neue', cursive;
+  border-radius: 18px;
+  padding: 18px;
+}
+.cdsoda-header { color: #7a1a4a; }
+.cdsoda-info { color: #7a1a4a; opacity: 0.85; font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdsoda-timer { color: #ff6b9d; font-family: 'Fredoka', 'Comic Neue', cursive; text-shadow: 0 0 6px #ff6b9d66; }
+.cdsoda-score { color: #ff2d92; font-family: 'Fredoka', 'Comic Neue', cursive; text-shadow: 0 0 4px #ff2d9255; }
+.cdsoda-target, .cdsoda-hint, .cdsoda-stats { color: #06d6a0; font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdsoda-grid {
+  background: linear-gradient(135deg,#ffb3d9,#a0f0e0);
+  border: 3px solid #ff2d92;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
+}
+.cdsoda-cell {
+  background: #ffffff;
+  color: #7a1a4a;
+  border: 2px solid transparent;
+}
+.cdsoda-cell.sel,
+.cdsoda-cell.selected,
+.cdsoda-cell.active {
+  border-color: #ff6b9d;
+  box-shadow: 0 0 14px #ff6b9d;
+}
+.cdsoda-btn,
+.cdsoda-pad {
+  background: #ff2d92;
+  color: #fff;
+  border: 2px solid #ff2d92;
+  font-family: 'Fredoka', 'Comic Neue', cursive;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.cdsoda-btn:hover, .cdsoda-pad:hover { transform: translateY(-1px); background: #06d6a0; color: #7a1a4a; }
+.cdsoda-done {
+  background: #ffe0ec;
+  color: #7a1a4a;
+  border: 2px solid #ff2d92;
+  border-radius: 16px;
+  font-family: 'Fredoka', 'Comic Neue', cursive;
+}
+.cdsoda-done h2 { color: #ff6b9d; font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdsoda-final { color: #ff2d92; font-family: 'Fredoka', 'Comic Neue', cursive; text-shadow: 0 0 8px #ff2d9255; }
+.cdsoda-controls,
+.cdsoda-track,
+.cdsoda-next,
+.cdsoda-player,
+.cdsoda-obstacle { font-family: 'Fredoka', 'Comic Neue', cursive; }
+.cdsoda-track { background: linear-gradient(135deg,#ffb3d9,#a0f0e0); border: 3px solid #ff2d92; border-radius: 16px; }
+.cdsoda-player { color: #ff6b9d; }
+.cdsoda-obstacle { color: #06d6a0; }

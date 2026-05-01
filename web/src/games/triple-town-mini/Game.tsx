@@ -12,25 +12,25 @@ export function TripleTownMiniGame({ state, dispatch, onGameOver }: GameProps<Tr
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     return (
-      <div className="ttmmg-wrap">
-        <div className="ttmmg-done">
+      <div className="tttwn-wrap">
+        <div className="tttwn-done">
           <h2>Board Full!</h2>
-          <div className="ttmmg-stats">Best tier: {state.best} • Moves: {state.movesUsed}</div>
-          <div className="ttmmg-final">{state.score} pts</div>
+          <div className="tttwn-stats">Best tier: {state.best} • Moves: {state.movesUsed}</div>
+          <div className="tttwn-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="ttmmg-wrap">
-      <div className="ttmmg-header">
-        <span className="ttmmg-info">Moves: {state.movesUsed}/{MAX_MOVES}</span>
-        <span className="ttmmg-next" style={{ background: TIER_COLOR[state.next] }}>{TIER_ICON[state.next]}</span>
-        <span className="ttmmg-score">{state.score}</span>
+    <div className="tttwn-wrap">
+      <div className="tttwn-header">
+        <span className="tttwn-info">Moves: {state.movesUsed}/{MAX_MOVES}</span>
+        <span className="tttwn-next" style={{ background: TIER_COLOR[state.next] }}>{TIER_ICON[state.next]}</span>
+        <span className="tttwn-score">{state.score}</span>
       </div>
-      <div className="ttmmg-grid">
+      <div className="tttwn-grid">
         {state.grid.map((row, r) => row.map((v, c) => (
-          <button key={`${r}-${c}`} className="ttmmg-cell"
+          <button key={`${r}-${c}`} className="tttwn-cell"
             disabled={v !== 0}
             style={{ background: v ? TIER_COLOR[v] : "#f1f5f9" }}
             onClick={() => dispatch({ type: "place", row: r, col: c } as TripleTownMiniAction)}>
@@ -38,7 +38,7 @@ export function TripleTownMiniGame({ state, dispatch, onGameOver }: GameProps<Tr
           </button>
         )))}
       </div>
-      <div className="ttmmg-hint">Place tiles next to matching ones to merge into higher tiers</div>
+      <div className="tttwn-hint">Place tiles next to matching ones to merge into higher tiers</div>
     </div>
   );
 }

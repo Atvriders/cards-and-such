@@ -28,41 +28,41 @@ export function CaveRunnerGame({ state, dispatch, onGameOver }: GameProps<CaveRu
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="cavrn-wrap">
-        <div className="cavrn-done">
+      <div className="cvrnr-wrap">
+        <div className="cvrnr-done">
           <h2>Crashed!</h2>
-          <div className="cavrn-stats">Survived {state.ticks} ticks</div>
-          <div className="cavrn-final">{state.score} pts</div>
+          <div className="cvrnr-stats">Survived {state.ticks} ticks</div>
+          <div className="cvrnr-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="cavrn-wrap">
-      <div className="cavrn-header">
-        <span className="cavrn-info">Survived: {state.ticks}</span>
-        <span className="cavrn-score">{state.score} pts</span>
+    <div className="cvrnr-wrap">
+      <div className="cvrnr-header">
+        <span className="cvrnr-info">Survived: {state.ticks}</span>
+        <span className="cvrnr-score">{state.score} pts</span>
       </div>
-      <div className="cavrn-track">
+      <div className="cvrnr-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`cavrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`cvrnr-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as CaveRunnerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="cavrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="cvrnr-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="cavrn-obstacle"
+              <span key={o.id} className="cvrnr-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="cavrn-controls">
-        <button className="cavrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CaveRunnerAction)}>↑ Up</button>
-        <button className="cavrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CaveRunnerAction)}>↓ Down</button>
+      <div className="cvrnr-controls">
+        <button className="cvrnr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CaveRunnerAction)}>↑ Up</button>
+        <button className="cvrnr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CaveRunnerAction)}>↓ Down</button>
       </div>
-      <div className="cavrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="cvrnr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

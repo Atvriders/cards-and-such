@@ -17,27 +17,27 @@ export function BejeweledTwistGame({ state, dispatch, onGameOver }: GameProps<Be
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="bejm3-wrap">
-        <div className="bejm3-done">
+      <div className="bjtwst-wrap">
+        <div className="bjtwst-done">
           <h2>Time's Up!</h2>
-          <div className="bejm3-stats">Matches: {state.matches}</div>
-          <div className="bejm3-final">{state.score} pts</div>
+          <div className="bjtwst-stats">Matches: {state.matches}</div>
+          <div className="bjtwst-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="bejm3-wrap">
-      <div className="bejm3-header">
-        <span className="bejm3-info">Matches: {state.matches}</span>
-        <span className="bejm3-timer">{state.ticksRemaining}s</span>
-        <span className="bejm3-score">{state.score} pts</span>
+    <div className="bjtwst-wrap">
+      <div className="bjtwst-header">
+        <span className="bjtwst-info">Matches: {state.matches}</span>
+        <span className="bjtwst-timer">{state.ticksRemaining}s</span>
+        <span className="bjtwst-score">{state.score} pts</span>
       </div>
-      <div className="bejm3-grid">
+      <div className="bjtwst-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`bejm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`bjtwst-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as BejeweledTwistAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

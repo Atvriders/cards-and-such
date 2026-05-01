@@ -1,29 +1,88 @@
-.lumm3-wrap {
+.lumns-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   padding: 18px; max-width: 640px; margin: 0 auto; user-select: none;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: #f8fafc;
 }
-.lumm3-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.lumm3-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
-.lumm3-score { font-size: 1.2rem; font-weight: 800; color: #22d3ee; font-family: 'JetBrains Mono', monospace; }
-.lumm3-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.lumm3-grid {
+.lumns-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.lumns-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
+.lumns-score { font-size: 1.2rem; font-weight: 800; color: #22d3ee; font-family: 'JetBrains Mono', monospace; }
+.lumns-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.lumns-grid {
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;
   width: 100%; max-width: 480px; padding: 10px;
   background: linear-gradient(180deg, #1e293b, #334155);
   border: 3px solid #22d3ee; border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
-.lumm3-cell {
+.lumns-cell {
   aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
   font-size: 1.8rem; cursor: pointer; background: rgba(15,23,42,0.7);
   border: 2px solid transparent; border-radius: 10px;
   transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
-.lumm3-cell:hover { transform: scale(1.06); }
-.lumm3-cell.sel { border-color: #22d3ee; background: #0f172a; box-shadow: 0 0 12px #22d3ee; transform: scale(1.08); }
-.lumm3-done { text-align: center; padding: 28px; background: #0f172a; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-.lumm3-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.lumm3-stats { font-family: 'Inter', sans-serif; color: #64748b; }
-.lumm3-final { font-size: 1.6rem; color: #22d3ee; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.lumns-cell:hover { transform: scale(1.06); }
+.lumns-cell.sel { border-color: #22d3ee; background: #0f172a; box-shadow: 0 0 12px #22d3ee; transform: scale(1.08); }
+.lumns-done { text-align: center; padding: 28px; background: #0f172a; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.lumns-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.lumns-stats { font-family: 'Inter', sans-serif; color: #64748b; }
+.lumns-final { font-size: 1.6rem; color: #22d3ee; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+
+/* === Themed palette overrides === */
+.lumns-wrap {
+  background: #000010;
+  color: #00ffea;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  border-radius: 18px;
+  padding: 18px;
+}
+.lumns-header { color: #00ffea; }
+.lumns-info { color: #00ffea; opacity: 0.85; font-family: 'Press Start 2P', 'VT323', monospace; }
+.lumns-timer { color: #ffea00; font-family: 'Press Start 2P', 'VT323', monospace; text-shadow: 0 0 6px #ffea0066; }
+.lumns-score { color: #ff007f; font-family: 'Press Start 2P', 'VT323', monospace; text-shadow: 0 0 4px #ff007f55; }
+.lumns-target, .lumns-hint, .lumns-stats { color: #00ffea; font-family: 'Press Start 2P', 'VT323', monospace; }
+.lumns-grid {
+  background: linear-gradient(180deg,#0a0a25,#1a0033);
+  border: 3px solid #00ffea;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
+}
+.lumns-cell {
+  background: #001a2c;
+  color: #00ffea;
+  border: 2px solid transparent;
+}
+.lumns-cell.sel,
+.lumns-cell.selected,
+.lumns-cell.active {
+  border-color: #ffea00;
+  box-shadow: 0 0 14px #ffea00;
+}
+.lumns-btn,
+.lumns-pad {
+  background: #ff007f;
+  color: #fff;
+  border: 2px solid #00ffea;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.lumns-btn:hover, .lumns-pad:hover { transform: translateY(-1px); background: #00ffea; color: #00ffea; }
+.lumns-done {
+  background: #0a0a25;
+  color: #00ffea;
+  border: 2px solid #00ffea;
+  border-radius: 16px;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+}
+.lumns-done h2 { color: #ffea00; font-family: 'Press Start 2P', 'VT323', monospace; }
+.lumns-final { color: #ff007f; font-family: 'Press Start 2P', 'VT323', monospace; text-shadow: 0 0 8px #ff007f55; }
+.lumns-controls,
+.lumns-track,
+.lumns-next,
+.lumns-player,
+.lumns-obstacle { font-family: 'Press Start 2P', 'VT323', monospace; }
+.lumns-track { background: linear-gradient(180deg,#0a0a25,#1a0033); border: 3px solid #00ffea; border-radius: 16px; }
+.lumns-player { color: #ffea00; }
+.lumns-obstacle { color: #00ffea; }

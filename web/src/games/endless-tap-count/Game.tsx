@@ -28,41 +28,41 @@ export function EndlessTapCountGame({ state, dispatch, onGameOver }: GameProps<E
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="etcrn-wrap">
-        <div className="etcrn-done">
+      <div className="etptcnt-wrap">
+        <div className="etptcnt-done">
           <h2>Crashed!</h2>
-          <div className="etcrn-stats">Survived {state.ticks} ticks</div>
-          <div className="etcrn-final">{state.score} pts</div>
+          <div className="etptcnt-stats">Survived {state.ticks} ticks</div>
+          <div className="etptcnt-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="etcrn-wrap">
-      <div className="etcrn-header">
-        <span className="etcrn-info">Survived: {state.ticks}</span>
-        <span className="etcrn-score">{state.score} pts</span>
+    <div className="etptcnt-wrap">
+      <div className="etptcnt-header">
+        <span className="etptcnt-info">Survived: {state.ticks}</span>
+        <span className="etptcnt-score">{state.score} pts</span>
       </div>
-      <div className="etcrn-track">
+      <div className="etptcnt-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`etcrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`etptcnt-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as EndlessTapCountAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="etcrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="etptcnt-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="etcrn-obstacle"
+              <span key={o.id} className="etptcnt-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="etcrn-controls">
-        <button className="etcrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessTapCountAction)}>↑ Up</button>
-        <button className="etcrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessTapCountAction)}>↓ Down</button>
+      <div className="etptcnt-controls">
+        <button className="etptcnt-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessTapCountAction)}>↑ Up</button>
+        <button className="etptcnt-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessTapCountAction)}>↓ Down</button>
       </div>
-      <div className="etcrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="etptcnt-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

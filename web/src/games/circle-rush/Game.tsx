@@ -28,41 +28,41 @@ export function CircleRushGame({ state, dispatch, onGameOver }: GameProps<Circle
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="cirrn-wrap">
-        <div className="cirrn-done">
+      <div className="crrsh-wrap">
+        <div className="crrsh-done">
           <h2>Crashed!</h2>
-          <div className="cirrn-stats">Survived {state.ticks} ticks</div>
-          <div className="cirrn-final">{state.score} pts</div>
+          <div className="crrsh-stats">Survived {state.ticks} ticks</div>
+          <div className="crrsh-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="cirrn-wrap">
-      <div className="cirrn-header">
-        <span className="cirrn-info">Survived: {state.ticks}</span>
-        <span className="cirrn-score">{state.score} pts</span>
+    <div className="crrsh-wrap">
+      <div className="crrsh-header">
+        <span className="crrsh-info">Survived: {state.ticks}</span>
+        <span className="crrsh-score">{state.score} pts</span>
       </div>
-      <div className="cirrn-track">
+      <div className="crrsh-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`cirrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`crrsh-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as CircleRushAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="cirrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="crrsh-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="cirrn-obstacle"
+              <span key={o.id} className="crrsh-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="cirrn-controls">
-        <button className="cirrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CircleRushAction)}>↑ Up</button>
-        <button className="cirrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CircleRushAction)}>↓ Down</button>
+      <div className="crrsh-controls">
+        <button className="crrsh-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CircleRushAction)}>↑ Up</button>
+        <button className="crrsh-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CircleRushAction)}>↓ Down</button>
       </div>
-      <div className="cirrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="crrsh-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

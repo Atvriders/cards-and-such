@@ -17,27 +17,27 @@ export function ColumnsMiniGame({ state, dispatch, onGameOver }: GameProps<Colum
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="colm3-wrap">
-        <div className="colm3-done">
+      <div className="colmn-wrap">
+        <div className="colmn-done">
           <h2>Time's Up!</h2>
-          <div className="colm3-stats">Matches: {state.matches}</div>
-          <div className="colm3-final">{state.score} pts</div>
+          <div className="colmn-stats">Matches: {state.matches}</div>
+          <div className="colmn-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="colm3-wrap">
-      <div className="colm3-header">
-        <span className="colm3-info">Matches: {state.matches}</span>
-        <span className="colm3-timer">{state.ticksRemaining}s</span>
-        <span className="colm3-score">{state.score} pts</span>
+    <div className="colmn-wrap">
+      <div className="colmn-header">
+        <span className="colmn-info">Matches: {state.matches}</span>
+        <span className="colmn-timer">{state.ticksRemaining}s</span>
+        <span className="colmn-score">{state.score} pts</span>
       </div>
-      <div className="colm3-grid">
+      <div className="colmn-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`colm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`colmn-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as ColumnsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

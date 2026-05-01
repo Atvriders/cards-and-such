@@ -17,27 +17,27 @@ export function BejeweledStarsMiniGame({ state, dispatch, onGameOver }: GameProp
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="bsmm3-wrap">
-        <div className="bsmm3-done">
+      <div className="bjstr-wrap">
+        <div className="bjstr-done">
           <h2>Time's Up!</h2>
-          <div className="bsmm3-stats">Matches: {state.matches}</div>
-          <div className="bsmm3-final">{state.score} pts</div>
+          <div className="bjstr-stats">Matches: {state.matches}</div>
+          <div className="bjstr-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="bsmm3-wrap">
-      <div className="bsmm3-header">
-        <span className="bsmm3-info">Matches: {state.matches}</span>
-        <span className="bsmm3-timer">{state.ticksRemaining}s</span>
-        <span className="bsmm3-score">{state.score} pts</span>
+    <div className="bjstr-wrap">
+      <div className="bjstr-header">
+        <span className="bjstr-info">Matches: {state.matches}</span>
+        <span className="bjstr-timer">{state.ticksRemaining}s</span>
+        <span className="bjstr-score">{state.score} pts</span>
       </div>
-      <div className="bsmm3-grid">
+      <div className="bjstr-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`bsmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`bjstr-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as BejeweledStarsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

@@ -17,27 +17,27 @@ export function PuyoTsuMiniGame({ state, dispatch, onGameOver }: GameProps<PuyoT
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="ptmm3-wrap">
-        <div className="ptmm3-done">
+      <div className="pyotsu-wrap">
+        <div className="pyotsu-done">
           <h2>Time's Up!</h2>
-          <div className="ptmm3-stats">Matches: {state.matches}</div>
-          <div className="ptmm3-final">{state.score} pts</div>
+          <div className="pyotsu-stats">Matches: {state.matches}</div>
+          <div className="pyotsu-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="ptmm3-wrap">
-      <div className="ptmm3-header">
-        <span className="ptmm3-info">Matches: {state.matches}</span>
-        <span className="ptmm3-timer">{state.ticksRemaining}s</span>
-        <span className="ptmm3-score">{state.score} pts</span>
+    <div className="pyotsu-wrap">
+      <div className="pyotsu-header">
+        <span className="pyotsu-info">Matches: {state.matches}</span>
+        <span className="pyotsu-timer">{state.ticksRemaining}s</span>
+        <span className="pyotsu-score">{state.score} pts</span>
       </div>
-      <div className="ptmm3-grid">
+      <div className="pyotsu-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`ptmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`pyotsu-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuyoTsuMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

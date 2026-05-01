@@ -1,37 +1,96 @@
-.djarn-wrap {
+.ddljmp-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 14px;
   padding: 20px; max-width: 720px; margin: 0 auto; user-select: none;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: #0f172a;
 }
-.djarn-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.djarn-info { font-size: 1rem; font-family: 'JetBrains Mono', monospace; color: #475569; }
-.djarn-score { font-size: 1.4rem; font-weight: 900; color: #16a34a; font-family: 'JetBrains Mono', monospace; }
-.djarn-track {
+.ddljmp-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.ddljmp-info { font-size: 1rem; font-family: 'JetBrains Mono', monospace; color: #475569; }
+.ddljmp-score { font-size: 1.4rem; font-weight: 900; color: #16a34a; font-family: 'JetBrains Mono', monospace; }
+.ddljmp-track {
   display: flex; flex-direction: column; gap: 6px; width: 100%;
   padding: 12px; border-radius: 14px;
   background: linear-gradient(180deg, #fef3c7, #fcd34d);
   border: 3px solid #16a34a;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
-.djarn-lane {
+.ddljmp-lane {
   position: relative; height: 70px; border-radius: 10px;
   background: rgba(255,255,255,0.7); border: 2px solid transparent; cursor: pointer;
   transition: border-color 0.12s, background 0.12s;
 }
-.djarn-lane.active { border-color: #16a34a; box-shadow: inset 0 0 12px #16a34a55; }
-.djarn-player { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 2rem; }
-.djarn-obstacle { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 1.8rem; transition: left 0.1s linear; }
-.djarn-controls { display: flex; gap: 12px; }
-.djarn-btn {
+.ddljmp-lane.active { border-color: #16a34a; box-shadow: inset 0 0 12px #16a34a55; }
+.ddljmp-player { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 2rem; }
+.ddljmp-obstacle { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 1.8rem; transition: left 0.1s linear; }
+.ddljmp-controls { display: flex; gap: 12px; }
+.ddljmp-btn {
   padding: 10px 22px; font-size: 1rem; font-weight: 700;
   background: #16a34a; color: white; border: none; border-radius: 10px;
   cursor: pointer; font-family: 'Inter', sans-serif;
   transition: transform 0.1s, filter 0.1s;
 }
-.djarn-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.djarn-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.djarn-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-.djarn-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.djarn-stats { font-family: 'Inter', sans-serif; color: #475569; }
-.djarn-final { font-size: 1.6rem; color: #16a34a; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.ddljmp-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.ddljmp-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.ddljmp-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+.ddljmp-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.ddljmp-stats { font-family: 'Inter', sans-serif; color: #475569; }
+.ddljmp-final { font-size: 1.6rem; color: #16a34a; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+
+/* === Themed palette overrides === */
+.ddljmp-wrap {
+  background: #bfe8ff;
+  color: #0c3a6b;
+  font-family: 'Patrick Hand', 'Caveat', cursive;
+  border-radius: 18px;
+  padding: 18px;
+}
+.ddljmp-header { color: #0c3a6b; }
+.ddljmp-info { color: #0c3a6b; opacity: 0.85; font-family: 'Patrick Hand', 'Caveat', cursive; }
+.ddljmp-timer { color: #fb923c; font-family: 'Patrick Hand', 'Caveat', cursive; text-shadow: 0 0 6px #fb923c66; }
+.ddljmp-score { color: #0ea5e9; font-family: 'Patrick Hand', 'Caveat', cursive; text-shadow: 0 0 4px #0ea5e955; }
+.ddljmp-target, .ddljmp-hint, .ddljmp-stats { color: #fef08a; font-family: 'Patrick Hand', 'Caveat', cursive; }
+.ddljmp-grid {
+  background: linear-gradient(180deg,#bfe8ff,#7dd3fc);
+  border: 3px solid #0ea5e9;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
+}
+.ddljmp-cell {
+  background: #ffffff;
+  color: #0c3a6b;
+  border: 2px solid transparent;
+}
+.ddljmp-cell.sel,
+.ddljmp-cell.selected,
+.ddljmp-cell.active {
+  border-color: #fb923c;
+  box-shadow: 0 0 14px #fb923c;
+}
+.ddljmp-btn,
+.ddljmp-pad {
+  background: #0ea5e9;
+  color: #fff;
+  border: 2px solid #0ea5e9;
+  font-family: 'Patrick Hand', 'Caveat', cursive;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.ddljmp-btn:hover, .ddljmp-pad:hover { transform: translateY(-1px); background: #fef08a; color: #0c3a6b; }
+.ddljmp-done {
+  background: #dff3ff;
+  color: #0c3a6b;
+  border: 2px solid #0ea5e9;
+  border-radius: 16px;
+  font-family: 'Patrick Hand', 'Caveat', cursive;
+}
+.ddljmp-done h2 { color: #fb923c; font-family: 'Patrick Hand', 'Caveat', cursive; }
+.ddljmp-final { color: #0ea5e9; font-family: 'Patrick Hand', 'Caveat', cursive; text-shadow: 0 0 8px #0ea5e955; }
+.ddljmp-controls,
+.ddljmp-track,
+.ddljmp-next,
+.ddljmp-player,
+.ddljmp-obstacle { font-family: 'Patrick Hand', 'Caveat', cursive; }
+.ddljmp-track { background: linear-gradient(180deg,#bfe8ff,#7dd3fc); border: 3px solid #0ea5e9; border-radius: 16px; }
+.ddljmp-player { color: #fb923c; }
+.ddljmp-obstacle { color: #fef08a; }

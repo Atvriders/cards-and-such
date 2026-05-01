@@ -17,27 +17,27 @@ export function PillDropMiniGame({ state, dispatch, onGameOver }: GameProps<Pill
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="pdmm3-wrap">
-        <div className="pdmm3-done">
+      <div className="plldrp-wrap">
+        <div className="plldrp-done">
           <h2>Time's Up!</h2>
-          <div className="pdmm3-stats">Matches: {state.matches}</div>
-          <div className="pdmm3-final">{state.score} pts</div>
+          <div className="plldrp-stats">Matches: {state.matches}</div>
+          <div className="plldrp-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="pdmm3-wrap">
-      <div className="pdmm3-header">
-        <span className="pdmm3-info">Matches: {state.matches}</span>
-        <span className="pdmm3-timer">{state.ticksRemaining}s</span>
-        <span className="pdmm3-score">{state.score} pts</span>
+    <div className="plldrp-wrap">
+      <div className="plldrp-header">
+        <span className="plldrp-info">Matches: {state.matches}</span>
+        <span className="plldrp-timer">{state.ticksRemaining}s</span>
+        <span className="plldrp-score">{state.score} pts</span>
       </div>
-      <div className="pdmm3-grid">
+      <div className="plldrp-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`pdmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`plldrp-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PillDropMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

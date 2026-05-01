@@ -28,41 +28,41 @@ export function SideScrollRunnerGame({ state, dispatch, onGameOver }: GameProps<
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="ssrrn-wrap">
-        <div className="ssrrn-done">
+      <div className="ssrnr-wrap">
+        <div className="ssrnr-done">
           <h2>Crashed!</h2>
-          <div className="ssrrn-stats">Survived {state.ticks} ticks</div>
-          <div className="ssrrn-final">{state.score} pts</div>
+          <div className="ssrnr-stats">Survived {state.ticks} ticks</div>
+          <div className="ssrnr-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="ssrrn-wrap">
-      <div className="ssrrn-header">
-        <span className="ssrrn-info">Survived: {state.ticks}</span>
-        <span className="ssrrn-score">{state.score} pts</span>
+    <div className="ssrnr-wrap">
+      <div className="ssrnr-header">
+        <span className="ssrnr-info">Survived: {state.ticks}</span>
+        <span className="ssrnr-score">{state.score} pts</span>
       </div>
-      <div className="ssrrn-track">
+      <div className="ssrnr-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`ssrrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`ssrnr-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as SideScrollRunnerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="ssrrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="ssrnr-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="ssrrn-obstacle"
+              <span key={o.id} className="ssrnr-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="ssrrn-controls">
-        <button className="ssrrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SideScrollRunnerAction)}>↑ Up</button>
-        <button className="ssrrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SideScrollRunnerAction)}>↓ Down</button>
+      <div className="ssrnr-controls">
+        <button className="ssrnr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SideScrollRunnerAction)}>↑ Up</button>
+        <button className="ssrnr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SideScrollRunnerAction)}>↓ Down</button>
       </div>
-      <div className="ssrrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="ssrnr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

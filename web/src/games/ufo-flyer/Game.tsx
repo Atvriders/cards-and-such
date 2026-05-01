@@ -28,41 +28,41 @@ export function UfoFlyerGame({ state, dispatch, onGameOver }: GameProps<UfoFlyer
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="uforn-wrap">
-        <div className="uforn-done">
+      <div className="uflyr-wrap">
+        <div className="uflyr-done">
           <h2>Crashed!</h2>
-          <div className="uforn-stats">Survived {state.ticks} ticks</div>
-          <div className="uforn-final">{state.score} pts</div>
+          <div className="uflyr-stats">Survived {state.ticks} ticks</div>
+          <div className="uflyr-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="uforn-wrap">
-      <div className="uforn-header">
-        <span className="uforn-info">Survived: {state.ticks}</span>
-        <span className="uforn-score">{state.score} pts</span>
+    <div className="uflyr-wrap">
+      <div className="uflyr-header">
+        <span className="uflyr-info">Survived: {state.ticks}</span>
+        <span className="uflyr-score">{state.score} pts</span>
       </div>
-      <div className="uforn-track">
+      <div className="uflyr-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`uforn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`uflyr-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as UfoFlyerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="uforn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="uflyr-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="uforn-obstacle"
+              <span key={o.id} className="uflyr-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="uforn-controls">
-        <button className="uforn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as UfoFlyerAction)}>↑ Up</button>
-        <button className="uforn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as UfoFlyerAction)}>↓ Down</button>
+      <div className="uflyr-controls">
+        <button className="uflyr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as UfoFlyerAction)}>↑ Up</button>
+        <button className="uflyr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as UfoFlyerAction)}>↓ Down</button>
       </div>
-      <div className="uforn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="uflyr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

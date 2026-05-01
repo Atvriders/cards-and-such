@@ -17,27 +17,27 @@ export function PuzzleDragonsMiniGame({ state, dispatch, onGameOver }: GameProps
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="pdmm3-wrap">
-        <div className="pdmm3-done">
+      <div className="pzdrg-wrap">
+        <div className="pzdrg-done">
           <h2>Time's Up!</h2>
-          <div className="pdmm3-stats">Matches: {state.matches}</div>
-          <div className="pdmm3-final">{state.score} pts</div>
+          <div className="pzdrg-stats">Matches: {state.matches}</div>
+          <div className="pzdrg-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="pdmm3-wrap">
-      <div className="pdmm3-header">
-        <span className="pdmm3-info">Matches: {state.matches}</span>
-        <span className="pdmm3-timer">{state.ticksRemaining}s</span>
-        <span className="pdmm3-score">{state.score} pts</span>
+    <div className="pzdrg-wrap">
+      <div className="pzdrg-header">
+        <span className="pzdrg-info">Matches: {state.matches}</span>
+        <span className="pzdrg-timer">{state.ticksRemaining}s</span>
+        <span className="pzdrg-score">{state.score} pts</span>
       </div>
-      <div className="pdmm3-grid">
+      <div className="pzdrg-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`pdmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`pzdrg-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuzzleDragonsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

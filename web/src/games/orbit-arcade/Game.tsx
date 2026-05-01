@@ -28,41 +28,41 @@ export function OrbitArcadeGame({ state, dispatch, onGameOver }: GameProps<Orbit
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="orbrn-wrap">
-        <div className="orbrn-done">
+      <div className="orbtr-wrap">
+        <div className="orbtr-done">
           <h2>Crashed!</h2>
-          <div className="orbrn-stats">Survived {state.ticks} ticks</div>
-          <div className="orbrn-final">{state.score} pts</div>
+          <div className="orbtr-stats">Survived {state.ticks} ticks</div>
+          <div className="orbtr-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="orbrn-wrap">
-      <div className="orbrn-header">
-        <span className="orbrn-info">Survived: {state.ticks}</span>
-        <span className="orbrn-score">{state.score} pts</span>
+    <div className="orbtr-wrap">
+      <div className="orbtr-header">
+        <span className="orbtr-info">Survived: {state.ticks}</span>
+        <span className="orbtr-score">{state.score} pts</span>
       </div>
-      <div className="orbrn-track">
+      <div className="orbtr-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`orbrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`orbtr-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as OrbitArcadeAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="orbrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="orbtr-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="orbrn-obstacle"
+              <span key={o.id} className="orbtr-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="orbrn-controls">
-        <button className="orbrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as OrbitArcadeAction)}>↑ Up</button>
-        <button className="orbrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as OrbitArcadeAction)}>↓ Down</button>
+      <div className="orbtr-controls">
+        <button className="orbtr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as OrbitArcadeAction)}>↑ Up</button>
+        <button className="orbtr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as OrbitArcadeAction)}>↓ Down</button>
       </div>
-      <div className="orbrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="orbtr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

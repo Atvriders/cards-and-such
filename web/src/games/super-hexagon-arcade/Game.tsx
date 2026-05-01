@@ -28,41 +28,41 @@ export function SuperHexagonArcadeGame({ state, dispatch, onGameOver }: GameProp
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="sharn-wrap">
-        <div className="sharn-done">
+      <div className="sphxgn-wrap">
+        <div className="sphxgn-done">
           <h2>Crashed!</h2>
-          <div className="sharn-stats">Survived {state.ticks} ticks</div>
-          <div className="sharn-final">{state.score} pts</div>
+          <div className="sphxgn-stats">Survived {state.ticks} ticks</div>
+          <div className="sphxgn-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="sharn-wrap">
-      <div className="sharn-header">
-        <span className="sharn-info">Survived: {state.ticks}</span>
-        <span className="sharn-score">{state.score} pts</span>
+    <div className="sphxgn-wrap">
+      <div className="sphxgn-header">
+        <span className="sphxgn-info">Survived: {state.ticks}</span>
+        <span className="sphxgn-score">{state.score} pts</span>
       </div>
-      <div className="sharn-track">
+      <div className="sphxgn-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`sharn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`sphxgn-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as SuperHexagonArcadeAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="sharn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="sphxgn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="sharn-obstacle"
+              <span key={o.id} className="sphxgn-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="sharn-controls">
-        <button className="sharn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SuperHexagonArcadeAction)}>↑ Up</button>
-        <button className="sharn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SuperHexagonArcadeAction)}>↓ Down</button>
+      <div className="sphxgn-controls">
+        <button className="sphxgn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SuperHexagonArcadeAction)}>↑ Up</button>
+        <button className="sphxgn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SuperHexagonArcadeAction)}>↓ Down</button>
       </div>
-      <div className="sharn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="sphxgn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

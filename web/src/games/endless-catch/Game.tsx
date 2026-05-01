@@ -28,41 +28,41 @@ export function EndlessCatchGame({ state, dispatch, onGameOver }: GameProps<Endl
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="endrn-wrap">
-        <div className="endrn-done">
+      <div className="encatch-wrap">
+        <div className="encatch-done">
           <h2>Crashed!</h2>
-          <div className="endrn-stats">Survived {state.ticks} ticks</div>
-          <div className="endrn-final">{state.score} pts</div>
+          <div className="encatch-stats">Survived {state.ticks} ticks</div>
+          <div className="encatch-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="endrn-wrap">
-      <div className="endrn-header">
-        <span className="endrn-info">Survived: {state.ticks}</span>
-        <span className="endrn-score">{state.score} pts</span>
+    <div className="encatch-wrap">
+      <div className="encatch-header">
+        <span className="encatch-info">Survived: {state.ticks}</span>
+        <span className="encatch-score">{state.score} pts</span>
       </div>
-      <div className="endrn-track">
+      <div className="encatch-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`endrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`encatch-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as EndlessCatchAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="endrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="encatch-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="endrn-obstacle"
+              <span key={o.id} className="encatch-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="endrn-controls">
-        <button className="endrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessCatchAction)}>↑ Up</button>
-        <button className="endrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessCatchAction)}>↓ Down</button>
+      <div className="encatch-controls">
+        <button className="encatch-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessCatchAction)}>↑ Up</button>
+        <button className="encatch-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessCatchAction)}>↓ Down</button>
       </div>
-      <div className="endrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="encatch-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

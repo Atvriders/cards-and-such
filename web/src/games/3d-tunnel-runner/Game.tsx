@@ -28,41 +28,41 @@ export function ThreedTunnelRunnerGame({ state, dispatch, onGameOver }: GameProp
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="tdtrrn-wrap">
-        <div className="tdtrrn-done">
+      <div className="tdtnl-wrap">
+        <div className="tdtnl-done">
           <h2>Crashed!</h2>
-          <div className="tdtrrn-stats">Survived {state.ticks} ticks</div>
-          <div className="tdtrrn-final">{state.score} pts</div>
+          <div className="tdtnl-stats">Survived {state.ticks} ticks</div>
+          <div className="tdtnl-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="tdtrrn-wrap">
-      <div className="tdtrrn-header">
-        <span className="tdtrrn-info">Survived: {state.ticks}</span>
-        <span className="tdtrrn-score">{state.score} pts</span>
+    <div className="tdtnl-wrap">
+      <div className="tdtnl-header">
+        <span className="tdtnl-info">Survived: {state.ticks}</span>
+        <span className="tdtnl-score">{state.score} pts</span>
       </div>
-      <div className="tdtrrn-track">
+      <div className="tdtnl-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`tdtrrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`tdtnl-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as ThreedTunnelRunnerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="tdtrrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="tdtnl-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="tdtrrn-obstacle"
+              <span key={o.id} className="tdtnl-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="tdtrrn-controls">
-        <button className="tdtrrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ThreedTunnelRunnerAction)}>↑ Up</button>
-        <button className="tdtrrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ThreedTunnelRunnerAction)}>↓ Down</button>
+      <div className="tdtnl-controls">
+        <button className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ThreedTunnelRunnerAction)}>↑ Up</button>
+        <button className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ThreedTunnelRunnerAction)}>↓ Down</button>
       </div>
-      <div className="tdtrrn-hint">Use arrow keys / WASD — dodge the {OBSTACLE_ICON} pulses</div>
+      <div className="tdtnl-hint">Use arrow keys / WASD — dodge the {OBSTACLE_ICON} pulses</div>
     </div>
   );
 }

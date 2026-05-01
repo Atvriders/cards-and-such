@@ -28,41 +28,41 @@ export function IcyTowerArcadeGame({ state, dispatch, onGameOver }: GameProps<Ic
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="itarn-wrap">
-        <div className="itarn-done">
+      <div className="icytwr-wrap">
+        <div className="icytwr-done">
           <h2>Crashed!</h2>
-          <div className="itarn-stats">Survived {state.ticks} ticks</div>
-          <div className="itarn-final">{state.score} pts</div>
+          <div className="icytwr-stats">Survived {state.ticks} ticks</div>
+          <div className="icytwr-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="itarn-wrap">
-      <div className="itarn-header">
-        <span className="itarn-info">Survived: {state.ticks}</span>
-        <span className="itarn-score">{state.score} pts</span>
+    <div className="icytwr-wrap">
+      <div className="icytwr-header">
+        <span className="icytwr-info">Survived: {state.ticks}</span>
+        <span className="icytwr-score">{state.score} pts</span>
       </div>
-      <div className="itarn-track">
+      <div className="icytwr-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`itarn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`icytwr-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as IcyTowerArcadeAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="itarn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="icytwr-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="itarn-obstacle"
+              <span key={o.id} className="icytwr-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="itarn-controls">
-        <button className="itarn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as IcyTowerArcadeAction)}>↑ Up</button>
-        <button className="itarn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as IcyTowerArcadeAction)}>↓ Down</button>
+      <div className="icytwr-controls">
+        <button className="icytwr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as IcyTowerArcadeAction)}>↑ Up</button>
+        <button className="icytwr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as IcyTowerArcadeAction)}>↓ Down</button>
       </div>
-      <div className="itarn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="icytwr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

@@ -28,41 +28,41 @@ export function PaperPlaneMiniGame({ state, dispatch, onGameOver }: GameProps<Pa
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="ppmrn-wrap">
-        <div className="ppmrn-done">
+      <div className="pprpln-wrap">
+        <div className="pprpln-done">
           <h2>Crashed!</h2>
-          <div className="ppmrn-stats">Survived {state.ticks} ticks</div>
-          <div className="ppmrn-final">{state.score} pts</div>
+          <div className="pprpln-stats">Survived {state.ticks} ticks</div>
+          <div className="pprpln-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="ppmrn-wrap">
-      <div className="ppmrn-header">
-        <span className="ppmrn-info">Survived: {state.ticks}</span>
-        <span className="ppmrn-score">{state.score} pts</span>
+    <div className="pprpln-wrap">
+      <div className="pprpln-header">
+        <span className="pprpln-info">Survived: {state.ticks}</span>
+        <span className="pprpln-score">{state.score} pts</span>
       </div>
-      <div className="ppmrn-track">
+      <div className="pprpln-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`ppmrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`pprpln-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as PaperPlaneMiniAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="ppmrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="pprpln-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="ppmrn-obstacle"
+              <span key={o.id} className="pprpln-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="ppmrn-controls">
-        <button className="ppmrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as PaperPlaneMiniAction)}>↑ Up</button>
-        <button className="ppmrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as PaperPlaneMiniAction)}>↓ Down</button>
+      <div className="pprpln-controls">
+        <button className="pprpln-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as PaperPlaneMiniAction)}>↑ Up</button>
+        <button className="pprpln-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as PaperPlaneMiniAction)}>↓ Down</button>
       </div>
-      <div className="ppmrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="pprpln-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

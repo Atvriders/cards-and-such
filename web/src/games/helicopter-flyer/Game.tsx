@@ -28,41 +28,41 @@ export function HelicopterFlyerGame({ state, dispatch, onGameOver }: GameProps<H
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="helrn-wrap">
-        <div className="helrn-done">
+      <div className="hlcpt-wrap">
+        <div className="hlcpt-done">
           <h2>Crashed!</h2>
-          <div className="helrn-stats">Survived {state.ticks} ticks</div>
-          <div className="helrn-final">{state.score} pts</div>
+          <div className="hlcpt-stats">Survived {state.ticks} ticks</div>
+          <div className="hlcpt-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="helrn-wrap">
-      <div className="helrn-header">
-        <span className="helrn-info">Survived: {state.ticks}</span>
-        <span className="helrn-score">{state.score} pts</span>
+    <div className="hlcpt-wrap">
+      <div className="hlcpt-header">
+        <span className="hlcpt-info">Survived: {state.ticks}</span>
+        <span className="hlcpt-score">{state.score} pts</span>
       </div>
-      <div className="helrn-track">
+      <div className="hlcpt-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`helrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`hlcpt-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as HelicopterFlyerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="helrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="hlcpt-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="helrn-obstacle"
+              <span key={o.id} className="hlcpt-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="helrn-controls">
-        <button className="helrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as HelicopterFlyerAction)}>↑ Up</button>
-        <button className="helrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as HelicopterFlyerAction)}>↓ Down</button>
+      <div className="hlcpt-controls">
+        <button className="hlcpt-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as HelicopterFlyerAction)}>↑ Up</button>
+        <button className="hlcpt-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as HelicopterFlyerAction)}>↓ Down</button>
       </div>
-      <div className="helrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="hlcpt-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

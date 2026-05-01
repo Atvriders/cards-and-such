@@ -15,28 +15,28 @@ export function ColorReactionGame({ state, dispatch, onGameOver }: GameProps<Col
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="colrx-wrap">
-        <div className="colrx-done">
+      <div className="clrrct-wrap">
+        <div className="clrrct-done">
           <h2>Time's Up!</h2>
-          <div className="colrx-stats">Hits: {state.hits} / Misses: {state.misses}</div>
-          <div className="colrx-final">{state.score} pts</div>
+          <div className="clrrct-stats">Hits: {state.hits} / Misses: {state.misses}</div>
+          <div className="clrrct-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="colrx-wrap">
-      <div className="colrx-header">
-        <span className="colrx-info">Hits: {state.hits}</span>
-        <span className="colrx-timer">{state.ticksRemaining}s</span>
-        <span className="colrx-score">{state.score} pts</span>
+    <div className="clrrct-wrap">
+      <div className="clrrct-header">
+        <span className="clrrct-info">Hits: {state.hits}</span>
+        <span className="clrrct-timer">{state.ticksRemaining}s</span>
+        <span className="clrrct-score">{state.score} pts</span>
       </div>
-      <div className="colrx-prompt">Tap when the stage turns GREEN. Avoid tapping red!</div>
+      <div className="clrrct-prompt">Tap when the stage turns GREEN. Avoid tapping red!</div>
       <button
-        className={`colrx-stage ${state.isGo ? "go" : "nogo"}`}
+        className={`clrrct-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as ColorReactionAction)}
         aria-label="react">{state.isGo ? "🟢" : "🔴"}</button>
-      <div className="colrx-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
+      <div className="clrrct-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
     </div>
   );
 }

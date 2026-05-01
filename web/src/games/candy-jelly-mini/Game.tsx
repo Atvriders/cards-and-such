@@ -17,27 +17,27 @@ export function CandyJellyMiniGame({ state, dispatch, onGameOver }: GameProps<Ca
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="cjmm3-wrap">
-        <div className="cjmm3-done">
+      <div className="cdjly-wrap">
+        <div className="cdjly-done">
           <h2>Time's Up!</h2>
-          <div className="cjmm3-stats">Matches: {state.matches}</div>
-          <div className="cjmm3-final">{state.score} pts</div>
+          <div className="cdjly-stats">Matches: {state.matches}</div>
+          <div className="cdjly-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="cjmm3-wrap">
-      <div className="cjmm3-header">
-        <span className="cjmm3-info">Matches: {state.matches}</span>
-        <span className="cjmm3-timer">{state.ticksRemaining}s</span>
-        <span className="cjmm3-score">{state.score} pts</span>
+    <div className="cdjly-wrap">
+      <div className="cdjly-header">
+        <span className="cdjly-info">Matches: {state.matches}</span>
+        <span className="cdjly-timer">{state.ticksRemaining}s</span>
+        <span className="cdjly-score">{state.score} pts</span>
       </div>
-      <div className="cjmm3-grid">
+      <div className="cdjly-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`cjmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`cdjly-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as CandyJellyMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

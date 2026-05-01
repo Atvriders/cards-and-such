@@ -17,27 +17,27 @@ export function PuyoFeverMiniGame({ state, dispatch, onGameOver }: GameProps<Puy
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="pfmm3-wrap">
-        <div className="pfmm3-done">
+      <div className="pyofvr-wrap">
+        <div className="pyofvr-done">
           <h2>Time's Up!</h2>
-          <div className="pfmm3-stats">Matches: {state.matches}</div>
-          <div className="pfmm3-final">{state.score} pts</div>
+          <div className="pyofvr-stats">Matches: {state.matches}</div>
+          <div className="pyofvr-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="pfmm3-wrap">
-      <div className="pfmm3-header">
-        <span className="pfmm3-info">Matches: {state.matches}</span>
-        <span className="pfmm3-timer">{state.ticksRemaining}s</span>
-        <span className="pfmm3-score">{state.score} pts</span>
+    <div className="pyofvr-wrap">
+      <div className="pyofvr-header">
+        <span className="pyofvr-info">Matches: {state.matches}</span>
+        <span className="pyofvr-timer">{state.ticksRemaining}s</span>
+        <span className="pyofvr-score">{state.score} pts</span>
       </div>
-      <div className="pfmm3-grid">
+      <div className="pyofvr-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`pfmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`pyofvr-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuyoFeverMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

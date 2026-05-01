@@ -28,41 +28,41 @@ export function CanabaltMiniGame({ state, dispatch, onGameOver }: GameProps<Cana
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="canrn-wrap">
-        <div className="canrn-done">
+      <div className="cnblt-wrap">
+        <div className="cnblt-done">
           <h2>Crashed!</h2>
-          <div className="canrn-stats">Survived {state.ticks} ticks</div>
-          <div className="canrn-final">{state.score} pts</div>
+          <div className="cnblt-stats">Survived {state.ticks} ticks</div>
+          <div className="cnblt-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="canrn-wrap">
-      <div className="canrn-header">
-        <span className="canrn-info">Survived: {state.ticks}</span>
-        <span className="canrn-score">{state.score} pts</span>
+    <div className="cnblt-wrap">
+      <div className="cnblt-header">
+        <span className="cnblt-info">Survived: {state.ticks}</span>
+        <span className="cnblt-score">{state.score} pts</span>
       </div>
-      <div className="canrn-track">
+      <div className="cnblt-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`canrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`cnblt-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as CanabaltMiniAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="canrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="cnblt-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="canrn-obstacle"
+              <span key={o.id} className="cnblt-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="canrn-controls">
-        <button className="canrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CanabaltMiniAction)}>↑ Up</button>
-        <button className="canrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CanabaltMiniAction)}>↓ Down</button>
+      <div className="cnblt-controls">
+        <button className="cnblt-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CanabaltMiniAction)}>↑ Up</button>
+        <button className="cnblt-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CanabaltMiniAction)}>↓ Down</button>
       </div>
-      <div className="canrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="cnblt-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

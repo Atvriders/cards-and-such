@@ -17,27 +17,27 @@ export function PuyoSunMiniGame({ state, dispatch, onGameOver }: GameProps<PuyoS
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="psmm3-wrap">
-        <div className="psmm3-done">
+      <div className="pyosun-wrap">
+        <div className="pyosun-done">
           <h2>Time's Up!</h2>
-          <div className="psmm3-stats">Matches: {state.matches}</div>
-          <div className="psmm3-final">{state.score} pts</div>
+          <div className="pyosun-stats">Matches: {state.matches}</div>
+          <div className="pyosun-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="psmm3-wrap">
-      <div className="psmm3-header">
-        <span className="psmm3-info">Matches: {state.matches}</span>
-        <span className="psmm3-timer">{state.ticksRemaining}s</span>
-        <span className="psmm3-score">{state.score} pts</span>
+    <div className="pyosun-wrap">
+      <div className="pyosun-header">
+        <span className="pyosun-info">Matches: {state.matches}</span>
+        <span className="pyosun-timer">{state.ticksRemaining}s</span>
+        <span className="pyosun-score">{state.score} pts</span>
       </div>
-      <div className="psmm3-grid">
+      <div className="pyosun-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`psmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`pyosun-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuyoSunMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

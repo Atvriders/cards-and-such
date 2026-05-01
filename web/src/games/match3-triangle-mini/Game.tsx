@@ -17,27 +17,27 @@ export function Match3TriangleMiniGame({ state, dispatch, onGameOver }: GameProp
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="mtmm3-wrap">
-        <div className="mtmm3-done">
+      <div className="m3tri-wrap">
+        <div className="m3tri-done">
           <h2>Time's Up!</h2>
-          <div className="mtmm3-stats">Matches: {state.matches}</div>
-          <div className="mtmm3-final">{state.score} pts</div>
+          <div className="m3tri-stats">Matches: {state.matches}</div>
+          <div className="m3tri-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="mtmm3-wrap">
-      <div className="mtmm3-header">
-        <span className="mtmm3-info">Matches: {state.matches}</span>
-        <span className="mtmm3-timer">{state.ticksRemaining}s</span>
-        <span className="mtmm3-score">{state.score} pts</span>
+    <div className="m3tri-wrap">
+      <div className="m3tri-header">
+        <span className="m3tri-info">Matches: {state.matches}</span>
+        <span className="m3tri-timer">{state.ticksRemaining}s</span>
+        <span className="m3tri-score">{state.score} pts</span>
       </div>
-      <div className="mtmm3-grid">
+      <div className="m3tri-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`mtmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`m3tri-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as Match3TriangleMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

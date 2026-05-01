@@ -28,41 +28,41 @@ export function TowerStackerGame({ state, dispatch, onGameOver }: GameProps<Towe
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="towrn-wrap">
-        <div className="towrn-done">
+      <div className="twstk-wrap">
+        <div className="twstk-done">
           <h2>Crashed!</h2>
-          <div className="towrn-stats">Survived {state.ticks} ticks</div>
-          <div className="towrn-final">{state.score} pts</div>
+          <div className="twstk-stats">Survived {state.ticks} ticks</div>
+          <div className="twstk-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="towrn-wrap">
-      <div className="towrn-header">
-        <span className="towrn-info">Survived: {state.ticks}</span>
-        <span className="towrn-score">{state.score} pts</span>
+    <div className="twstk-wrap">
+      <div className="twstk-header">
+        <span className="twstk-info">Survived: {state.ticks}</span>
+        <span className="twstk-score">{state.score} pts</span>
       </div>
-      <div className="towrn-track">
+      <div className="twstk-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`towrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`twstk-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as TowerStackerAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="towrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="twstk-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="towrn-obstacle"
+              <span key={o.id} className="twstk-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="towrn-controls">
-        <button className="towrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerAction)}>↑ Up</button>
-        <button className="towrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as TowerStackerAction)}>↓ Down</button>
+      <div className="twstk-controls">
+        <button className="twstk-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerAction)}>↑ Up</button>
+        <button className="twstk-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as TowerStackerAction)}>↓ Down</button>
       </div>
-      <div className="towrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="twstk-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

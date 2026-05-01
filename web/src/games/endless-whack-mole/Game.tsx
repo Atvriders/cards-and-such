@@ -28,41 +28,41 @@ export function EndlessWhackMoleGame({ state, dispatch, onGameOver }: GameProps<
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="ewmrn-wrap">
-        <div className="ewmrn-done">
+      <div className="ewmole-wrap">
+        <div className="ewmole-done">
           <h2>Crashed!</h2>
-          <div className="ewmrn-stats">Survived {state.ticks} ticks</div>
-          <div className="ewmrn-final">{state.score} pts</div>
+          <div className="ewmole-stats">Survived {state.ticks} ticks</div>
+          <div className="ewmole-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="ewmrn-wrap">
-      <div className="ewmrn-header">
-        <span className="ewmrn-info">Survived: {state.ticks}</span>
-        <span className="ewmrn-score">{state.score} pts</span>
+    <div className="ewmole-wrap">
+      <div className="ewmole-header">
+        <span className="ewmole-info">Survived: {state.ticks}</span>
+        <span className="ewmole-score">{state.score} pts</span>
       </div>
-      <div className="ewmrn-track">
+      <div className="ewmole-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`ewmrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`ewmole-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as EndlessWhackMoleAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="ewmrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="ewmole-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="ewmrn-obstacle"
+              <span key={o.id} className="ewmole-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="ewmrn-controls">
-        <button className="ewmrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessWhackMoleAction)}>↑ Up</button>
-        <button className="ewmrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessWhackMoleAction)}>↓ Down</button>
+      <div className="ewmole-controls">
+        <button className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessWhackMoleAction)}>↑ Up</button>
+        <button className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessWhackMoleAction)}>↓ Down</button>
       </div>
-      <div className="ewmrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="ewmole-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

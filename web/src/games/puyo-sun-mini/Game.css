@@ -1,29 +1,88 @@
-.psmm3-wrap {
+.pyosun-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   padding: 18px; max-width: 640px; margin: 0 auto; user-select: none;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: #1e293b;
 }
-.psmm3-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.psmm3-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
-.psmm3-score { font-size: 1.2rem; font-weight: 800; color: #ca8a04; font-family: 'JetBrains Mono', monospace; }
-.psmm3-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.psmm3-grid {
+.pyosun-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.pyosun-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
+.pyosun-score { font-size: 1.2rem; font-weight: 800; color: #ca8a04; font-family: 'JetBrains Mono', monospace; }
+.pyosun-info { font-size: 0.95rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.pyosun-grid {
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;
   width: 100%; max-width: 480px; padding: 10px;
   background: linear-gradient(180deg, #fef9c3, #fde047);
   border: 3px solid #ca8a04; border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
-.psmm3-cell {
+.pyosun-cell {
   aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
   font-size: 1.8rem; cursor: pointer; background: #ffffffcc;
   border: 2px solid transparent; border-radius: 10px;
   transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
-.psmm3-cell:hover { transform: scale(1.06); }
-.psmm3-cell.sel { border-color: #ca8a04; background: #ffffff; box-shadow: 0 0 12px #ca8a04; transform: scale(1.08); }
-.psmm3-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-.psmm3-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.psmm3-stats { font-family: 'Inter', sans-serif; color: #64748b; }
-.psmm3-final { font-size: 1.6rem; color: #ca8a04; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.pyosun-cell:hover { transform: scale(1.06); }
+.pyosun-cell.sel { border-color: #ca8a04; background: #ffffff; box-shadow: 0 0 12px #ca8a04; transform: scale(1.08); }
+.pyosun-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 16px; width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.pyosun-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.pyosun-stats { font-family: 'Inter', sans-serif; color: #64748b; }
+.pyosun-final { font-size: 1.6rem; color: #ca8a04; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+
+/* === Themed palette overrides === */
+.pyosun-wrap {
+  background: #1a1a3a;
+  color: #fff8dc;
+  font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif;
+  border-radius: 18px;
+  padding: 18px;
+}
+.pyosun-header { color: #fff8dc; }
+.pyosun-info { color: #fff8dc; opacity: 0.85; font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif; }
+.pyosun-timer { color: #ffe14a; font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif; text-shadow: 0 0 6px #ffe14a66; }
+.pyosun-score { color: #ff5b8a; font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif; text-shadow: 0 0 4px #ff5b8a55; }
+.pyosun-target, .pyosun-hint, .pyosun-stats { color: #5be1ff; font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif; }
+.pyosun-grid {
+  background: linear-gradient(135deg,#3d3d8f,#5b1a8a);
+  border: 3px solid #ff5b8a;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
+}
+.pyosun-cell {
+  background: rgba(255,255,255,0.1);
+  color: #fff8dc;
+  border: 2px solid transparent;
+}
+.pyosun-cell.sel,
+.pyosun-cell.selected,
+.pyosun-cell.active {
+  border-color: #ffe14a;
+  box-shadow: 0 0 14px #ffe14a;
+}
+.pyosun-btn,
+.pyosun-pad {
+  background: #ff5b8a;
+  color: #fff;
+  border: 2px solid #ff5b8a;
+  font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.pyosun-btn:hover, .pyosun-pad:hover { transform: translateY(-1px); background: #5be1ff; color: #fff8dc; }
+.pyosun-done {
+  background: #2d2d5f;
+  color: #fff8dc;
+  border: 2px solid #ff5b8a;
+  border-radius: 16px;
+  font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif;
+}
+.pyosun-done h2 { color: #ffe14a; font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif; }
+.pyosun-final { color: #ff5b8a; font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif; text-shadow: 0 0 8px #ff5b8a55; }
+.pyosun-controls,
+.pyosun-track,
+.pyosun-next,
+.pyosun-player,
+.pyosun-obstacle { font-family: 'M PLUS Rounded 1c', 'Mochiy Pop One', sans-serif; }
+.pyosun-track { background: linear-gradient(135deg,#3d3d8f,#5b1a8a); border: 3px solid #ff5b8a; border-radius: 16px; }
+.pyosun-player { color: #ffe14a; }
+.pyosun-obstacle { color: #5be1ff; }

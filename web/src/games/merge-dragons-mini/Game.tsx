@@ -12,25 +12,25 @@ export function MergeDragonsMiniGame({ state, dispatch, onGameOver }: GameProps<
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     return (
-      <div className="mdmmg-wrap">
-        <div className="mdmmg-done">
+      <div className="mrgdrg-wrap">
+        <div className="mrgdrg-done">
           <h2>Board Full!</h2>
-          <div className="mdmmg-stats">Best tier: {state.best} • Moves: {state.movesUsed}</div>
-          <div className="mdmmg-final">{state.score} pts</div>
+          <div className="mrgdrg-stats">Best tier: {state.best} • Moves: {state.movesUsed}</div>
+          <div className="mrgdrg-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="mdmmg-wrap">
-      <div className="mdmmg-header">
-        <span className="mdmmg-info">Moves: {state.movesUsed}/{MAX_MOVES}</span>
-        <span className="mdmmg-next" style={{ background: TIER_COLOR[state.next] }}>{TIER_ICON[state.next]}</span>
-        <span className="mdmmg-score">{state.score}</span>
+    <div className="mrgdrg-wrap">
+      <div className="mrgdrg-header">
+        <span className="mrgdrg-info">Moves: {state.movesUsed}/{MAX_MOVES}</span>
+        <span className="mrgdrg-next" style={{ background: TIER_COLOR[state.next] }}>{TIER_ICON[state.next]}</span>
+        <span className="mrgdrg-score">{state.score}</span>
       </div>
-      <div className="mdmmg-grid">
+      <div className="mrgdrg-grid">
         {state.grid.map((row, r) => row.map((v, c) => (
-          <button key={`${r}-${c}`} className="mdmmg-cell"
+          <button key={`${r}-${c}`} className="mrgdrg-cell"
             disabled={v !== 0}
             style={{ background: v ? TIER_COLOR[v] : "#f1f5f9" }}
             onClick={() => dispatch({ type: "place", row: r, col: c } as MergeDragonsMiniAction)}>
@@ -38,7 +38,7 @@ export function MergeDragonsMiniGame({ state, dispatch, onGameOver }: GameProps<
           </button>
         )))}
       </div>
-      <div className="mdmmg-hint">Place tiles next to matching ones to merge into higher tiers</div>
+      <div className="mrgdrg-hint">Place tiles next to matching ones to merge into higher tiers</div>
     </div>
   );
 }

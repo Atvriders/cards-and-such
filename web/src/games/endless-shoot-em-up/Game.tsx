@@ -28,41 +28,41 @@ export function EndlessShootEmUpGame({ state, dispatch, onGameOver }: GameProps<
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="eseurn-wrap">
-        <div className="eseurn-done">
+      <div className="esemup-wrap">
+        <div className="esemup-done">
           <h2>Crashed!</h2>
-          <div className="eseurn-stats">Survived {state.ticks} ticks</div>
-          <div className="eseurn-final">{state.score} pts</div>
+          <div className="esemup-stats">Survived {state.ticks} ticks</div>
+          <div className="esemup-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="eseurn-wrap">
-      <div className="eseurn-header">
-        <span className="eseurn-info">Survived: {state.ticks}</span>
-        <span className="eseurn-score">{state.score} pts</span>
+    <div className="esemup-wrap">
+      <div className="esemup-header">
+        <span className="esemup-info">Survived: {state.ticks}</span>
+        <span className="esemup-score">{state.score} pts</span>
       </div>
-      <div className="eseurn-track">
+      <div className="esemup-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`eseurn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`esemup-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as EndlessShootEmUpAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="eseurn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="esemup-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="eseurn-obstacle"
+              <span key={o.id} className="esemup-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="eseurn-controls">
-        <button className="eseurn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessShootEmUpAction)}>↑ Up</button>
-        <button className="eseurn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessShootEmUpAction)}>↓ Down</button>
+      <div className="esemup-controls">
+        <button className="esemup-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessShootEmUpAction)}>↑ Up</button>
+        <button className="esemup-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessShootEmUpAction)}>↓ Down</button>
       </div>
-      <div className="eseurn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="esemup-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

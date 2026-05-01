@@ -17,27 +17,27 @@ export function CandySodaMiniGame({ state, dispatch, onGameOver }: GameProps<Can
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="csmm3-wrap">
-        <div className="csmm3-done">
+      <div className="cdsoda-wrap">
+        <div className="cdsoda-done">
           <h2>Time's Up!</h2>
-          <div className="csmm3-stats">Matches: {state.matches}</div>
-          <div className="csmm3-final">{state.score} pts</div>
+          <div className="cdsoda-stats">Matches: {state.matches}</div>
+          <div className="cdsoda-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="csmm3-wrap">
-      <div className="csmm3-header">
-        <span className="csmm3-info">Matches: {state.matches}</span>
-        <span className="csmm3-timer">{state.ticksRemaining}s</span>
-        <span className="csmm3-score">{state.score} pts</span>
+    <div className="cdsoda-wrap">
+      <div className="cdsoda-header">
+        <span className="cdsoda-info">Matches: {state.matches}</span>
+        <span className="cdsoda-timer">{state.ticksRemaining}s</span>
+        <span className="cdsoda-score">{state.score} pts</span>
       </div>
-      <div className="csmm3-grid">
+      <div className="cdsoda-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`csmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`cdsoda-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as CandySodaMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

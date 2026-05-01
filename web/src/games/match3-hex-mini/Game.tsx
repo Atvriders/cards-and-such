@@ -17,27 +17,27 @@ export function Match3HexMiniGame({ state, dispatch, onGameOver }: GameProps<Mat
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="mhmm3-wrap">
-        <div className="mhmm3-done">
+      <div className="m3hex-wrap">
+        <div className="m3hex-done">
           <h2>Time's Up!</h2>
-          <div className="mhmm3-stats">Matches: {state.matches}</div>
-          <div className="mhmm3-final">{state.score} pts</div>
+          <div className="m3hex-stats">Matches: {state.matches}</div>
+          <div className="m3hex-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="mhmm3-wrap">
-      <div className="mhmm3-header">
-        <span className="mhmm3-info">Matches: {state.matches}</span>
-        <span className="mhmm3-timer">{state.ticksRemaining}s</span>
-        <span className="mhmm3-score">{state.score} pts</span>
+    <div className="m3hex-wrap">
+      <div className="m3hex-header">
+        <span className="m3hex-info">Matches: {state.matches}</span>
+        <span className="m3hex-timer">{state.ticksRemaining}s</span>
+        <span className="m3hex-score">{state.score} pts</span>
       </div>
-      <div className="mhmm3-grid">
+      <div className="m3hex-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`mhmm3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`m3hex-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as Match3HexMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

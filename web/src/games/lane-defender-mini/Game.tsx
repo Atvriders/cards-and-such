@@ -28,41 +28,41 @@ export function LaneDefenderMiniGame({ state, dispatch, onGameOver }: GameProps<
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="ldmrn-wrap">
-        <div className="ldmrn-done">
+      <div className="lndfm-wrap">
+        <div className="lndfm-done">
           <h2>Crashed!</h2>
-          <div className="ldmrn-stats">Survived {state.ticks} ticks</div>
-          <div className="ldmrn-final">{state.score} pts</div>
+          <div className="lndfm-stats">Survived {state.ticks} ticks</div>
+          <div className="lndfm-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="ldmrn-wrap">
-      <div className="ldmrn-header">
-        <span className="ldmrn-info">Survived: {state.ticks}</span>
-        <span className="ldmrn-score">{state.score} pts</span>
+    <div className="lndfm-wrap">
+      <div className="lndfm-header">
+        <span className="lndfm-info">Survived: {state.ticks}</span>
+        <span className="lndfm-score">{state.score} pts</span>
       </div>
-      <div className="ldmrn-track">
+      <div className="lndfm-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`ldmrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`lndfm-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as LaneDefenderMiniAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="ldmrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="lndfm-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="ldmrn-obstacle"
+              <span key={o.id} className="lndfm-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="ldmrn-controls">
-        <button className="ldmrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as LaneDefenderMiniAction)}>↑ Up</button>
-        <button className="ldmrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as LaneDefenderMiniAction)}>↓ Down</button>
+      <div className="lndfm-controls">
+        <button className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as LaneDefenderMiniAction)}>↑ Up</button>
+        <button className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as LaneDefenderMiniAction)}>↓ Down</button>
       </div>
-      <div className="ldmrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="lndfm-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

@@ -1,25 +1,84 @@
-.cirrx-wrap {
+.crtrkr-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 14px;
   padding: 22px; max-width: 540px; margin: 0 auto; user-select: none;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
-.cirrx-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.cirrx-info { font-size: 0.95rem; color: #475569; font-family: 'Inter', sans-serif; }
-.cirrx-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
-.cirrx-score { font-size: 1.2rem; font-weight: 800; color: #1e40af; font-family: 'JetBrains Mono', monospace; }
-.cirrx-prompt { text-align: center; font-size: 1.05rem; color: #334155; font-weight: 600; font-family: 'Inter', sans-serif; }
-.cirrx-stage {
+.crtrkr-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.crtrkr-info { font-size: 0.95rem; color: #475569; font-family: 'Inter', sans-serif; }
+.crtrkr-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
+.crtrkr-score { font-size: 1.2rem; font-weight: 800; color: #1e40af; font-family: 'JetBrains Mono', monospace; }
+.crtrkr-prompt { text-align: center; font-size: 1.05rem; color: #334155; font-weight: 600; font-family: 'Inter', sans-serif; }
+.crtrkr-stage {
   width: 240px; height: 240px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 4rem; cursor: pointer; border: none;
   transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
   font-family: 'Inter', sans-serif;
 }
-.cirrx-stage.go { background: #3b82f6; box-shadow: 0 0 40px #3b82f6aa, inset 0 0 20px rgba(255,255,255,0.3); }
-.cirrx-stage.nogo { background: #1f2937; box-shadow: 0 0 24px rgba(0,0,0,0.2); opacity: 0.85; }
-.cirrx-stage:active { transform: scale(0.97); }
-.cirrx-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.cirrx-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
-.cirrx-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.cirrx-stats { font-family: 'Inter', sans-serif; color: #475569; }
-.cirrx-final { font-size: 1.6rem; color: #1e40af; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+.crtrkr-stage.go { background: #3b82f6; box-shadow: 0 0 40px #3b82f6aa, inset 0 0 20px rgba(255,255,255,0.3); }
+.crtrkr-stage.nogo { background: #1f2937; box-shadow: 0 0 24px rgba(0,0,0,0.2); opacity: 0.85; }
+.crtrkr-stage:active { transform: scale(0.97); }
+.crtrkr-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.crtrkr-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.crtrkr-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.crtrkr-stats { font-family: 'Inter', sans-serif; color: #475569; }
+.crtrkr-final { font-size: 1.6rem; color: #1e40af; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+
+/* === Themed palette overrides === */
+.crtrkr-wrap {
+  background: #020617;
+  color: #f8fafc;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  border-radius: 18px;
+  padding: 18px;
+}
+.crtrkr-header { color: #f8fafc; }
+.crtrkr-info { color: #f8fafc; opacity: 0.85; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.crtrkr-timer { color: #facc15; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 6px #facc1566; }
+.crtrkr-score { color: #22c55e; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 4px #22c55e55; }
+.crtrkr-target, .crtrkr-hint, .crtrkr-stats { color: #ef4444; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.crtrkr-grid {
+  background: radial-gradient(circle at 50% 50%,#1e293b,#020617);
+  border: 3px solid #22c55e;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
+}
+.crtrkr-cell {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 2px solid transparent;
+}
+.crtrkr-cell.sel,
+.crtrkr-cell.selected,
+.crtrkr-cell.active {
+  border-color: #facc15;
+  box-shadow: 0 0 14px #facc15;
+}
+.crtrkr-btn,
+.crtrkr-pad {
+  background: #22c55e;
+  color: #fff;
+  border: 2px solid #22c55e;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.crtrkr-btn:hover, .crtrkr-pad:hover { transform: translateY(-1px); background: #ef4444; color: #f8fafc; }
+.crtrkr-done {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 2px solid #22c55e;
+  border-radius: 16px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+.crtrkr-done h2 { color: #facc15; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.crtrkr-final { color: #22c55e; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 8px #22c55e55; }
+.crtrkr-controls,
+.crtrkr-track,
+.crtrkr-next,
+.crtrkr-player,
+.crtrkr-obstacle { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.crtrkr-track { background: radial-gradient(circle at 50% 50%,#1e293b,#020617); border: 3px solid #22c55e; border-radius: 16px; }
+.crtrkr-player { color: #facc15; }
+.crtrkr-obstacle { color: #ef4444; }

@@ -28,41 +28,41 @@ export function TowerStackerMiniGame({ state, dispatch, onGameOver }: GameProps<
   }, [dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="tsmrn-wrap">
-        <div className="tsmrn-done">
+      <div className="twstkm-wrap">
+        <div className="twstkm-done">
           <h2>Crashed!</h2>
-          <div className="tsmrn-stats">Survived {state.ticks} ticks</div>
-          <div className="tsmrn-final">{state.score} pts</div>
+          <div className="twstkm-stats">Survived {state.ticks} ticks</div>
+          <div className="twstkm-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="tsmrn-wrap">
-      <div className="tsmrn-header">
-        <span className="tsmrn-info">Survived: {state.ticks}</span>
-        <span className="tsmrn-score">{state.score} pts</span>
+    <div className="twstkm-wrap">
+      <div className="twstkm-header">
+        <span className="twstkm-info">Survived: {state.ticks}</span>
+        <span className="twstkm-score">{state.score} pts</span>
       </div>
-      <div className="tsmrn-track">
+      <div className="twstkm-track">
         {Array.from({ length: LANES }).map((_, lane) => (
-          <button key={lane} className={`tsmrn-lane${state.playerLane === lane ? " active" : ""}`}
+          <button key={lane} className={`twstkm-lane${state.playerLane === lane ? " active" : ""}`}
             onClick={() => dispatch({ type: "setLane", lane } as TowerStackerMiniAction)}
             aria-label={`lane ${lane}`}>
             {state.playerLane === lane && (
-              <span className="tsmrn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+              <span className="twstkm-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
             )}
             {state.obstacles.filter(o => o.lane === lane).map(o => (
-              <span key={o.id} className="tsmrn-obstacle"
+              <span key={o.id} className="twstkm-obstacle"
                 style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
             ))}
           </button>
         ))}
       </div>
-      <div className="tsmrn-controls">
-        <button className="tsmrn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerMiniAction)}>↑ Up</button>
-        <button className="tsmrn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as TowerStackerMiniAction)}>↓ Down</button>
+      <div className="twstkm-controls">
+        <button className="twstkm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerMiniAction)}>↑ Up</button>
+        <button className="twstkm-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as TowerStackerMiniAction)}>↓ Down</button>
       </div>
-      <div className="tsmrn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
+      <div className="twstkm-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

@@ -17,27 +17,27 @@ export function ClickomaniaMiniGame({ state, dispatch, onGameOver }: GameProps<C
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="clim3-wrap">
-        <div className="clim3-done">
+      <div className="clkmn-wrap">
+        <div className="clkmn-done">
           <h2>Time's Up!</h2>
-          <div className="clim3-stats">Matches: {state.matches}</div>
-          <div className="clim3-final">{state.score} pts</div>
+          <div className="clkmn-stats">Matches: {state.matches}</div>
+          <div className="clkmn-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="clim3-wrap">
-      <div className="clim3-header">
-        <span className="clim3-info">Matches: {state.matches}</span>
-        <span className="clim3-timer">{state.ticksRemaining}s</span>
-        <span className="clim3-score">{state.score} pts</span>
+    <div className="clkmn-wrap">
+      <div className="clkmn-header">
+        <span className="clkmn-info">Matches: {state.matches}</span>
+        <span className="clkmn-timer">{state.ticksRemaining}s</span>
+        <span className="clkmn-score">{state.score} pts</span>
       </div>
-      <div className="clim3-grid">
+      <div className="clkmn-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`clim3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`clkmn-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as ClickomaniaMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );
