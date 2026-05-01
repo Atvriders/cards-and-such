@@ -1,33 +1,59 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { TicTacToeCardsState, TicTacToeCardsAction } from "./state.js";
-import { isTerminal, cardName, isRed } from "./state.js";
+import type { TicTacToeCardsState, TicTacToeCardsAction, TicTacToeCardsSettings } from "./state.js";
+import { isTerminal, RANK_NAMES, SUIT_GLYPH, isRedSuit } from "./state.js";
 import "./Game.css";
 
-export function TicTacToeCards({ state, dispatch, onGameOver }: GameProps<TicTacToeCardsState, { rounds: "10" }>): JSX.Element {
-  const terminal = isTerminal(state);
-  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
+export function TicTacToeCards({
+  state, dispatch, onGameOver,
+}: GameProps<TicTacToeCardsState, TicTacToeCardsSettings>): JSX.Element {
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
-  if (state.phase === "gameover") return (
-    <div className="g-wrap"><h2>Game Over</h2><p className="g-final">Final Score: {state.score}</p></div>
-  );
+  const status =
+    state.phase === "done"
+      ? state.result === "P" ? "Three reds win — you took the round!"
+        : state.result === "C" ? "Three blacks lined up — CPU wins"
+        : "Draw"
+      : "Place a Hearts/Diamonds card. CPU plays Spades/Clubs.";
 
   return (
-    <div className="g-wrap">
-      <div className="g-header">
-        <span>Round {state.round} / {state.maxRounds}</span>
-        <span className="g-score">Score: {state.score}</span>
+    <div className="tttcards-wrap">
+      <div className="tttcards-header">
+        <h2 className="tttcards-title">Tic-Tac-Toe Cards</h2>
+        <div className="tttcards-info">3-in-a-row of your color (red) wins. Cards are randomly drawn.</div>
+        <div className="tttcards-status">{status}</div>
+        <div className="tttcards-score">Score: {state.score}</div>
       </div>
-      {state.hand.length > 0 && (
-        <div className="g-dice">
-          {state.hand.map((c, i) => <span key={i} className={"g-card " + (isRed(c) ? "red" : "")}>{cardName(c)}</span>)}
+      <div className="tttcards-board">
+        {Array.from({ length: 9 }).map((_, idx) => {
+          const c = state.board[idx];
+          const isWin = state.winLine?.includes(idx);
+          const empty = c === null;
+          const colorClass = c ? (isRedSuit(c.suit) ? "tttcards-cell-red" : "tttcards-cell-black") : "";
+          return (
+            <button
+              key={idx}
+              className={`tttcards-cell ${colorClass} ${isWin ? "tttcards-cell-win" : ""}`}
+              disabled={!empty || state.phase === "done"}
+              onClick={() => dispatch({ type: "place", idx } as TicTacToeCardsAction)}
+              aria-label={`cell ${idx}`}
+            >
+              {c ? (
+                <span className="tttcards-card">
+                  <span className="tttcards-rank">{RANK_NAMES[c.rank]}</span>
+                  <span className="tttcards-suit">{SUIT_GLYPH[c.suit]}</span>
+                </span>
+              ) : null}
+            </button>
+          );
+        })}
+      </div>
+      {state.phase === "done" && (
+        <div className="tttcards-final">
+          {state.result === "P" ? "Victory!" : state.result === "C" ? "Defeat" : "Tie"} — {state.score} pts
         </div>
       )}
-      {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
-      <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as TicTacToeCardsAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as TicTacToeCardsAction)}>Next Round</button>}
-      </div>
     </div>
   );
 }

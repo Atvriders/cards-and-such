@@ -1,1 +1,134 @@
-@import "../../engines/dicemini/dicemini.css";
+.yahtz-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 560px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+.yahtz-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+  font-family: "JetBrains Mono", monospace;
+}
+.yahtz-info {
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 600;
+}
+.yahtz-total {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #047857;
+}
+.yahtz-dice {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 12px;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  border-radius: 14px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.yahtz-controls {
+  display: flex;
+  gap: 10px;
+}
+.yahtz-btn {
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Inter", system-ui, sans-serif;
+  transition: background 0.15s, transform 0.05s;
+}
+.yahtz-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+.yahtz-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.yahtz-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+.yahtz-card {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  font-family: "Inter", system-ui, sans-serif;
+}
+.yahtz-card th, .yahtz-card td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+.yahtz-card th {
+  background: #1e293b;
+  color: #f8fafc;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.yahtz-card .yahtz-section-head td {
+  background: #1e293b;
+  color: #f8fafc;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.yahtz-cell {
+  text-align: right;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  width: 80px;
+}
+.yahtz-cell-used { color: #047857; }
+.yahtz-cell-preview {
+  background: #fef3c7;
+  cursor: pointer;
+  color: #92400e;
+}
+.yahtz-cell-preview:hover { background: #fde68a; }
+.yahtz-cell-blank { color: #94a3b8; }
+.yahtz-bonus-row td {
+  background: #f1f5f9;
+  font-weight: 700;
+  font-style: italic;
+}
+.yahtz-total-row td {
+  background: #047857;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+.yahtz-gameover {
+  padding: 14px 22px;
+  background: #047857;
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+.yahtz-hint {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+  font-style: italic;
+}

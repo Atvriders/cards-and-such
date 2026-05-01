@@ -1,2 +1,93 @@
-/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+.tttcards-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+.tttcards-header { text-align: center; }
+.tttcards-title {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #14532d;
+  letter-spacing: 0.02em;
+}
+.tttcards-info {
+  font-size: 0.9rem;
+  color: #475569;
+  font-style: italic;
+}
+.tttcards-status {
+  margin-top: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #15803d;
+}
+.tttcards-score {
+  margin-top: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  color: #b45309;
+  font-weight: 700;
+}
+.tttcards-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 380px;
+  background: #14532d;
+  padding: 12px;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(20, 83, 45, 0.4);
+}
+.tttcards-cell {
+  aspect-ratio: 0.7;
+  background: #fffbeb;
+  border: 2px solid #fde68a;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "JetBrains Mono", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: background 0.12s, transform 0.05s;
+}
+.tttcards-cell:hover:not(:disabled) {
+  background: #fef3c7;
+  transform: scale(1.03);
+}
+.tttcards-cell:disabled { cursor: not-allowed; }
+.tttcards-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 900;
+}
+.tttcards-rank { font-size: 1.3rem; line-height: 1; }
+.tttcards-suit { font-size: 1.8rem; line-height: 1; margin-top: 2px; }
+.tttcards-cell-red .tttcards-card { color: #dc2626; }
+.tttcards-cell-black .tttcards-card { color: #0f172a; }
+.tttcards-cell-win {
+  background: #fef9c3 !important;
+  outline: 3px solid #f59e0b;
+  animation: tttcards-glow 1.2s ease-in-out infinite alternate;
+}
+@keyframes tttcards-glow {
+  from { box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+  to   { box-shadow: 0 0 14px rgba(245, 158, 11, 0.7); }
+}
+.tttcards-final {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #14532d;
+  padding: 10px 18px;
+  background: #d1fae5;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+}

@@ -1,102 +1,147 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const ROWS = 9;
-export const COLS = 9;
-export const TARGET = 3;
-export const MODE: "place" | "gravity" = "place";
+// Ultimate Tic-Tac-Toe mini: 3x3 super-grid where each cell holds a mini 3x3 TTT.
+// Player must play in the mini-board indicated by their opponent's last move.
+// Win a mini-board by 3-in-a-row inside it; win overall by 3-in-a-row of mini-board winners.
 
-export interface ConnectSettings { dummy: boolean }
-export type Cell = "P" | "C" | null;
+export interface ConnectSettings { dummy: boolean; }
+export type Mark = "P" | "C";
+export type Cell = Mark | null;
 
 export interface ConnectState {
   rngSeed: number;
-  board: Cell[];
-  turn: "P" | "C";
-  result: "P" | "C" | "draw" | null;
+  cells: Cell[];                 // 81 cells (9 minis × 9 cells)
+  miniWinners: (Mark | "draw" | null)[];
+  activeMini: number;            // mini-board index to play in, or -1 = any
+  turn: Mark;
+  result: Mark | "draw" | null;
   score: number;
   phase: "playing" | "done";
   pieces: number;
 }
 
-export type ConnectAction = { type: "place"; row: number; col: number };
+export type ConnectAction = { type: "place"; mini: number; cell: number };
 
-function topRow(b: Cell[], col: number): number {
-  for (let r = ROWS - 1; r >= 0; r--) if (b[r * COLS + col] === null) return r;
-  return -1;
-}
+const LINES: ReadonlyArray<readonly [number, number, number]> = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6],
+];
 
-function checkWin(b: Cell[]): Cell | "draw" {
-  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-    const v = b[r * COLS + c]; if (!v) continue;
-    for (const d of dirs) {
-      const dr = d[0]!, dc = d[1]!;
-      let ok = true;
-      for (let k = 0; k < TARGET; k++) {
-        const rr = r + dr * k, cc = c + dc * k;
-        if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) { ok = false; break; }
-        if (b[rr * COLS + cc] !== v) { ok = false; break; }
-      }
-      if (ok) return v;
-    }
+function lineWinner(arr: (Mark | "draw" | null)[]): Mark | null {
+  for (const [a, b, c] of LINES) {
+    const v = arr[a];
+    if ((v === "P" || v === "C") && arr[b] === v && arr[c] === v) return v;
   }
-  if (b.every(x => x !== null)) return "draw";
   return null;
 }
 
-export function initialState(seed: number, _s: ConnectSettings): ConnectState {
-  return { rngSeed: seed, board: Array(ROWS * COLS).fill(null), turn: "P", result: null, score: 0, phase: "playing", pieces: 0 };
+function miniWinner(cells: Cell[], offset: number): Mark | "draw" | null {
+  const sub: Cell[] = [];
+  for (let i = 0; i < 9; i++) sub.push(cells[offset * 9 + i]!);
+  for (const [a, b, c] of LINES) {
+    const v = sub[a];
+    if (v && sub[b] === v && sub[c] === v) return v;
+  }
+  if (sub.every((x) => x !== null)) return "draw";
+  return null;
 }
 
-function legalForGravity(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let c = 0; c < COLS; c++) {
-    const r = topRow(b, c);
-    if (r >= 0) out.push({ row: r, col: c });
+export function legalMoves(state: ConnectState): { mini: number; cell: number }[] {
+  const out: { mini: number; cell: number }[] = [];
+  const minisToTry: number[] = state.activeMini >= 0 && state.miniWinners[state.activeMini] === null
+    ? [state.activeMini]
+    : Array.from({ length: 9 }, (_, i) => i).filter((i) => state.miniWinners[i] === null);
+  for (const m of minisToTry) {
+    for (let c = 0; c < 9; c++) {
+      if (state.cells[m * 9 + c] === null) out.push({ mini: m, cell: c });
+    }
   }
   return out;
 }
 
-function legalForFree(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (b[r * COLS + c] === null) out.push({ row: r, col: c });
-  return out;
+function applyMove(state: ConnectState, mini: number, cell: number, mark: Mark): ConnectState {
+  const cells = state.cells.slice();
+  cells[mini * 9 + cell] = mark;
+  const miniWinners = state.miniWinners.slice();
+  if (miniWinners[mini] === null) {
+    miniWinners[mini] = miniWinner(cells, mini);
+  }
+  let activeMini = cell;
+  if (miniWinners[activeMini] !== null) activeMini = -1;
+  const overall = lineWinner(miniWinners);
+  let result: Mark | "draw" | null = null;
+  if (overall) result = overall;
+  else if (miniWinners.every((w) => w !== null)) result = "draw";
+  const phase: "playing" | "done" = result ? "done" : "playing";
+  return {
+    ...state,
+    cells,
+    miniWinners,
+    activeMini,
+    turn: mark === "P" ? "C" : "P",
+    result,
+    phase,
+    pieces: state.pieces + 1,
+  };
+}
+
+function cpuPick(state: ConnectState, rng: () => number): { mini: number; cell: number } | null {
+  const moves = legalMoves(state);
+  if (moves.length === 0) return null;
+  for (const m of moves) {
+    const t = applyMove(state, m.mini, m.cell, "C");
+    if (t.miniWinners[m.mini] === "C" && state.miniWinners[m.mini] !== "C") return m;
+  }
+  for (const m of moves) {
+    const t = applyMove(state, m.mini, m.cell, "P");
+    if (t.miniWinners[m.mini] === "P" && state.miniWinners[m.mini] !== "P") return m;
+  }
+  return moves[Math.floor(rng() * moves.length)]!;
+}
+
+export function initialState(seed: number, _s: ConnectSettings): ConnectState {
+  return {
+    rngSeed: seed >>> 0,
+    cells: Array(81).fill(null),
+    miniWinners: Array(9).fill(null),
+    activeMini: -1,
+    turn: "P",
+    result: null,
+    score: 0,
+    phase: "playing",
+    pieces: 0,
+  };
 }
 
 export function reducer(state: ConnectState, action: ConnectAction): ConnectState {
-  if (state.phase === "done" || state.result) return state;
+  if (state.phase === "done") return state;
   if (action.type !== "place") return state;
   if (state.turn !== "P") return state;
+  if (action.mini < 0 || action.mini >= 9 || action.cell < 0 || action.cell >= 9) return state;
+  if (state.cells[action.mini * 9 + action.cell] !== null) return state;
+  if (state.miniWinners[action.mini] !== null) return state;
+  if (state.activeMini >= 0 && state.activeMini !== action.mini) return state;
 
-  const { row, col } = action;
-  if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return state;
-  if (state.board[row * COLS + col] !== null) return state;
-
-  if (MODE === "gravity") {
-    const expectedRow = topRow(state.board, col);
-    if (expectedRow !== row) return state;
+  let next = applyMove(state, action.mini, action.cell, "P");
+  if (next.phase === "done") {
+    const score = next.result === "P" ? state.score + 100 + next.pieces
+      : next.result === "draw" ? state.score + 25 + next.pieces
+      : state.score;
+    return { ...next, score };
   }
-
-  const nb = state.board.slice();
-  nb[row * COLS + col] = "P";
-  let pieces = state.pieces + 1;
-  let result = checkWin(nb);
-  if (result === "P") return { ...state, board: nb, result: "P", score: state.score + 100 + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
-
   const rng = mulberry32(state.rngSeed);
-  const legal = MODE === "gravity" ? legalForGravity(nb) : legalForFree(nb);
-  if (legal.length > 0) {
-    const pick = legal[Math.floor(rng() * legal.length)]!;
-    nb[pick.row * COLS + pick.col] = "C";
-    pieces += 1;
-  }
+  const pick = cpuPick(next, rng);
   const seed2 = Math.floor(rng() * 2 ** 31);
-  result = checkWin(nb);
-  if (result === "C") return { ...state, rngSeed: seed2, board: nb, result: "C", score: state.score + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, rngSeed: seed2, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
-
-  return { ...state, rngSeed: seed2, board: nb, turn: "P", pieces };
+  if (!pick) return { ...next, rngSeed: seed2 };
+  next = applyMove(next, pick.mini, pick.cell, "C");
+  if (next.phase === "done") {
+    const score = next.result === "C" ? state.score + next.pieces
+      : next.result === "draw" ? state.score + 25 + next.pieces
+      : state.score;
+    return { ...next, rngSeed: seed2, score };
+  }
+  return { ...next, rngSeed: seed2 };
 }
 
 export function isTerminal(state: ConnectState): { score: number } | null {

@@ -1,10 +1,82 @@
-.cn-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; padding:14px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.cn-board { display:grid; gap:3px; padding:8px; background:#34495e; border-radius:10px; max-width:480px; }
-.cn-cell { aspect-ratio:1; min-width:24px; background:#ecf0f1; border-radius:50%; cursor:pointer; transition:background 0.15s; border:none; }
-.cn-cell.p { background:#e74c3c; }
-.cn-cell.c { background:#3498db; }
-.cn-cell:hover:not(:disabled) { background:#bdc3c7; }
-.cn-info { font-size:0.95rem; color:#555; text-align:center; }
-.cn-score { font-size:1.05rem; font-weight:700; color:#27ae60; }
-.cn-done { text-align:center; padding:20px; background:#f8f9fa; border-radius:14px; }
-.cn-final { font-size:1.2rem; color:#27ae60; font-weight:800; }
+.ttt4-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 520px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+.ttt4-header { text-align: center; }
+.ttt4-title {
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+.ttt4-info {
+  font-size: 0.9rem;
+  color: #475569;
+  font-style: italic;
+}
+.ttt4-status {
+  margin-top: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4338ca;
+}
+.ttt4-score {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  color: #047857;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.ttt4-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  width: 460px;
+  background: #134e4a;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(19, 78, 74, 0.3);
+}
+.ttt4-cell {
+  aspect-ratio: 1;
+  background: #f0fdfa;
+  border: 2px solid #5eead4;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 2.2rem;
+  font-weight: 900;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #0f172a;
+  transition: background 0.12s, transform 0.05s;
+}
+.ttt4-cell:hover:not(:disabled) {
+  background: #ccfbf1;
+  transform: scale(1.04);
+}
+.ttt4-cell:disabled { cursor: not-allowed; }
+.ttt4-cell-x { color: #0d9488; background: #ccfbf1; }
+.ttt4-cell-o { color: #be185d; background: #fce7f3; }
+.ttt4-cell-win {
+  background: #fde68a !important;
+  animation: ttt4-glow 1.2s ease-in-out infinite alternate;
+}
+@keyframes ttt4-glow {
+  from { box-shadow: 0 0 0 rgba(251, 191, 36, 0); }
+  to   { box-shadow: 0 0 14px rgba(251, 191, 36, 0.7); }
+}
+.ttt4-final {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #047857;
+  padding: 10px 18px;
+  background: #ecfdf5;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+}

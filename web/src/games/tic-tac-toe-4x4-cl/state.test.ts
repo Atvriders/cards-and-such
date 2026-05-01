@@ -1,31 +1,38 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROWS, COLS, TARGET } from "./state.js";
+import { initialState, reducer, isTerminal, checkWin, ROWS, COLS, TARGET } from "./state.js";
+import type { Cell } from "./state.js";
+
 const S = { dummy: false };
 
-describe("tic-tac-toe-4x4-cl", () => {
-  it("starts in playing phase with empty board", () => {
+describe("Tic-Tac-Toe 4x4 CL", () => {
+  it("4x4 board, target 4", () => {
+    expect(ROWS).toBe(4); expect(COLS).toBe(4); expect(TARGET).toBe(4);
+  });
+
+  it("starts empty playing", () => {
     const s = initialState(1, S);
     expect(s.phase).toBe("playing");
-    expect(s.board.length).toBe(ROWS * COLS);
-    expect(s.board.every(c => c === null)).toBe(true);
+    expect(s.board.every((c) => c === null)).toBe(true);
   });
-  it("constants are sensible", () => {
-    expect(ROWS).toBeGreaterThanOrEqual(3);
-    expect(COLS).toBeGreaterThanOrEqual(3);
-    expect(TARGET).toBeGreaterThanOrEqual(3);
+
+  it("place + CPU response", () => {
+    const s = reducer(initialState(1, S), { type: "place", row: 0, col: 0 });
+    expect(s.board[0]).toBe("P");
+    expect(s.board.filter((c) => c === "C").length).toBe(1);
   });
+
+  it("checkWin sees a vertical 4-in-a-row", () => {
+    const b: Cell[] = Array(16).fill(null);
+    b[0] = "C"; b[4] = "C"; b[8] = "C"; b[12] = "C";
+    expect(checkWin(b).winner).toBe("C");
+  });
+
   it("isTerminal null at start", () => {
-    expect(isTerminal(initialState(2, S))).toBeNull();
+    expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("place action records a player piece on the board", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "place", row: ROWS - 1, col: 0 });
-    const pCount = s1.board.filter(c => c === "P").length;
-    expect(pCount).toBeGreaterThanOrEqual(1);
-  });
-  it("invalid action does not crash", () => {
-    const s0 = initialState(4, S);
-    const s1 = reducer(s0, { type: "place", row: -5, col: -5 });
-    expect(s1.phase).toBe("playing");
+
+  it("rejects out-of-range", () => {
+    const s0 = initialState(1, S);
+    expect(reducer(s0, { type: "place", row: -1, col: 0 })).toBe(s0);
   });
 });

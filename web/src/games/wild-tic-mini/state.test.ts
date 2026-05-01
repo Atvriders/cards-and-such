@@ -1,31 +1,37 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROWS, COLS, TARGET } from "./state.js";
+import { initialState, reducer, isTerminal, findCompletedLine, ROWS, COLS } from "./state.js";
+import type { Cell } from "./state.js";
+
 const S = { dummy: false };
 
-describe("wild-tic-mini", () => {
-  it("starts in playing phase with empty board", () => {
+describe("Wild Tic Mini", () => {
+  it("starts empty, default mark X", () => {
     const s = initialState(1, S);
     expect(s.phase).toBe("playing");
-    expect(s.board.length).toBe(ROWS * COLS);
-    expect(s.board.every(c => c === null)).toBe(true);
+    expect(s.pendingMark).toBe("X");
+    expect(s.board.length).toBe(9);
   });
-  it("constants are sensible", () => {
-    expect(ROWS).toBeGreaterThanOrEqual(3);
-    expect(COLS).toBeGreaterThanOrEqual(3);
-    expect(TARGET).toBeGreaterThanOrEqual(3);
+
+  it("selectMark + place uses chosen mark", () => {
+    let s = initialState(1, S);
+    s = reducer(s, { type: "selectMark", mark: "O" });
+    s = reducer(s, { type: "place", row: 1, col: 1 });
+    expect(s.board[4]).toBe("O");
   });
+
+  it("findCompletedLine on column", () => {
+    const b: Cell[] = [null, "X", null, null, "X", null, null, "X", null];
+    expect(findCompletedLine(b)?.mark).toBe("X");
+  });
+
   it("isTerminal null at start", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("place action records a player piece on the board", () => {
+
+  it("3x3 board", () => { expect(ROWS).toBe(3); expect(COLS).toBe(3); });
+
+  it("invalid placement is rejected", () => {
     const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: ROWS - 1, col: 0 });
-    const pCount = s1.board.filter(c => c === "P").length;
-    expect(pCount).toBeGreaterThanOrEqual(1);
-  });
-  it("invalid action does not crash", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: -5, col: -5 });
-    expect(s1.phase).toBe("playing");
+    expect(reducer(s0, { type: "place", row: 9, col: 9 })).toBe(s0);
   });
 });

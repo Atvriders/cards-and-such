@@ -1,31 +1,41 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROWS, COLS, TARGET } from "./state.js";
+import { initialState, reducer, isTerminal, findThreeLine, ROWS, COLS, TARGET } from "./state.js";
+import type { Cell } from "./state.js";
+
 const S = { dummy: false };
 
-describe("notakto-mini", () => {
-  it("starts in playing phase with empty board", () => {
+describe("Notakto Mini", () => {
+  it("4x4 board, 3-in-a-row", () => {
+    expect(ROWS).toBe(4); expect(COLS).toBe(4); expect(TARGET).toBe(3);
+  });
+
+  it("starts empty in playing phase", () => {
     const s = initialState(1, S);
     expect(s.phase).toBe("playing");
-    expect(s.board.length).toBe(ROWS * COLS);
-    expect(s.board.every(c => c === null)).toBe(true);
+    expect(s.board.length).toBe(16);
   });
-  it("constants are sensible", () => {
-    expect(ROWS).toBeGreaterThanOrEqual(3);
-    expect(COLS).toBeGreaterThanOrEqual(3);
-    expect(TARGET).toBeGreaterThanOrEqual(3);
+
+  it("findThreeLine spots 3 X's of either player", () => {
+    const b: Cell[] = Array(16).fill(null);
+    b[0] = "P"; b[1] = "C"; b[2] = "P";
+    expect(findThreeLine(b)).toEqual([0, 1, 2]);
   });
+
+  it("player making 3-in-a-row LOSES (result=C)", () => {
+    let s = initialState(99, S);
+    // Manually craft a state where placing at idx 2 completes a line
+    s = { ...s, board: ["P", "C", null, null, null, null, null, null, null, null, null, null, null, null, null, null] };
+    const after = reducer(s, { type: "place", row: 0, col: 2 });
+    expect(after.phase).toBe("done");
+    expect(after.result).toBe("C");
+  });
+
   it("isTerminal null at start", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("place action records a player piece on the board", () => {
+
+  it("rejects out-of-range", () => {
     const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: ROWS - 1, col: 0 });
-    const pCount = s1.board.filter(c => c === "P").length;
-    expect(pCount).toBeGreaterThanOrEqual(1);
-  });
-  it("invalid action does not crash", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: -5, col: -5 });
-    expect(s1.phase).toBe("playing");
+    expect(reducer(s0, { type: "place", row: -1, col: 0 })).toBe(s0);
   });
 });

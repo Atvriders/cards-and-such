@@ -1,80 +1,144 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface TicTacToeCardsSettings { rounds: "10"; }
+// Tic-Tac-Toe Cards: 3x3 board where player plays Hearts (red) and CPU plays Spades (black).
+// Each placement reveals a face-up card from a shuffled deck. 3-in-a-row of suit color wins.
+// On a win, the winning line's card ranks form a bonus.
+
+export interface TicTacToeCardsSettings { dummy: boolean; }
+
+export type Suit = "S" | "H" | "D" | "C"; // S/C = black, H/D = red
+export type Rank = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export interface CardOnBoard { suit: Suit; rank: Rank; owner: "P" | "C"; }
+export type Cell = CardOnBoard | null;
 
 export interface TicTacToeCardsState {
   rngSeed: number;
+  board: Cell[];
+  // simple "deck": draw cards by sequence of seeded random
+  turn: "P" | "C";
+  result: "P" | "C" | "draw" | null;
   score: number;
-  round: number;
-  maxRounds: number;
-  hand: number[];
-  lastGain: number;
-  phase: "ready" | "dealt" | "gameover";
+  phase: "playing" | "done";
+  winLine: number[] | null;
+  pieces: number;
 }
 
-export type TicTacToeCardsAction = { type: "deal" } | { type: "next" };
+export type TicTacToeCardsAction = { type: "place"; idx: number };
 
-export function cardName(c: number): string {
-  const ranks = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
-  const suits = ["S","H","D","C"];
-  return ranks[c % 13]! + suits[Math.floor(c / 13)]!;
-}
+const LINES: ReadonlyArray<readonly [number, number, number]> = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6],
+];
 
-export function isRed(c: number): boolean { const s = Math.floor(c / 13); return s === 1 || s === 2; }
-
-function deal5(seed: number): { hand: number[]; nextSeed: number } {
-  const rng = mulberry32(seed);
-  const used = new Set<number>();
-  const hand: number[] = [];
-  while (hand.length < 5) {
-    const c = Math.floor(rng() * 52);
-    if (!used.has(c)) { used.add(c); hand.push(c); }
+export function checkWin(b: Cell[]): { winner: "P" | "C" | "draw" | null; line: number[] | null } {
+  for (const [a, bi, c] of LINES) {
+    const va = b[a], vb = b[bi], vc = b[c];
+    if (va && vb && vc && va.owner === vb.owner && va.owner === vc.owner) {
+      return { winner: va.owner, line: [a, bi, c] };
+    }
   }
-  return { hand, nextSeed: (seed + 9001) >>> 0 };
+  if (b.every((x) => x !== null)) return { winner: "draw", line: null };
+  return { winner: null, line: null };
 }
 
-export function scoreHand(hand: number[]): number {
-  if (hand.length === 0) return 0;
-  const ranks = hand.map(c => c % 13);
-  const suits = hand.map(c => Math.floor(c / 13));
-  const counts: Record<number, number> = {};
-  for (const r of ranks) counts[r] = (counts[r] ?? 0) + 1;
-  const cs = Object.values(counts).sort((a, b) => b - a);
-  const flush = suits.every(s => s === suits[0]);
-  const sorted = [...new Set(ranks)].sort((a, b) => a - b);
-  let straight = sorted.length === 5;
-  if (straight) for (let i = 1; i < 5; i++) if (sorted[i]! - sorted[i-1]! !== 1) { straight = false; break; }
-  if (flush && straight) return 200;
-  if (cs[0] === 4) return 150;
-  if (cs[0] === 3 && cs[1] === 2) return 100;
-  if (flush) return 80;
-  if (straight) return 60;
-  if (cs[0] === 3) return 40;
-  if (cs[0] === 2 && cs[1] === 2) return 25;
-  if (cs[0] === 2) return 10;
-  return 1;
+export const RANK_NAMES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"] as const;
+export const SUIT_GLYPH: Record<Suit, string> = { S: "♠", H: "♥", D: "♦", C: "♣" };
+export function isRedSuit(s: Suit): boolean { return s === "H" || s === "D"; }
+
+function drawCard(rng: () => number, owner: "P" | "C"): CardOnBoard {
+  // Player draws Hearts/Diamonds (red), CPU draws Spades/Clubs (black).
+  const suits: Suit[] = owner === "P" ? ["H", "D"] : ["S", "C"];
+  const suit = suits[Math.floor(rng() * suits.length)]!;
+  const rank = Math.floor(rng() * 13) as Rank;
+  return { suit, rank, owner };
+}
+
+function legalMoves(b: Cell[]): number[] {
+  const out: number[] = [];
+  for (let i = 0; i < b.length; i++) if (b[i] === null) out.push(i);
+  return out;
+}
+
+function cpuMove(b: Cell[], rng: () => number): number {
+  const empties = legalMoves(b);
+  if (empties.length === 0) return -1;
+  // Win: any C 3-in-a-row?
+  for (const i of empties) {
+    const t = b.slice();
+    t[i] = { suit: "S", rank: 0, owner: "C" };
+    if (checkWin(t).winner === "C") return i;
+  }
+  // Block player
+  for (const i of empties) {
+    const t = b.slice();
+    t[i] = { suit: "H", rank: 0, owner: "P" };
+    if (checkWin(t).winner === "P") return i;
+  }
+  if (empties.includes(4)) return 4;
+  return empties[Math.floor(rng() * empties.length)]!;
 }
 
 export function initialState(seed: number, _s: TicTacToeCardsSettings): TicTacToeCardsState {
-  return { rngSeed: seed >>> 0, score: 0, round: 1, maxRounds: 10, hand: [], lastGain: 0, phase: "ready" };
+  return {
+    rngSeed: seed >>> 0,
+    board: Array(9).fill(null),
+    turn: "P",
+    result: null,
+    score: 0,
+    phase: "playing",
+    winLine: null,
+    pieces: 0,
+  };
+}
+
+function lineRankBonus(b: Cell[], line: number[]): number {
+  let s = 0;
+  for (const i of line) {
+    const c = b[i];
+    if (c) s += c.rank + 2; // 2..14
+  }
+  return s;
 }
 
 export function reducer(state: TicTacToeCardsState, action: TicTacToeCardsAction): TicTacToeCardsState {
-  if (state.phase === "gameover") return state;
-  if (action.type === "deal") {
-    if (state.phase !== "ready") return state;
-    const { hand, nextSeed } = deal5(state.rngSeed);
-    const gain = scoreHand(hand);
-    return { ...state, hand, rngSeed: nextSeed, lastGain: gain, score: state.score + gain, phase: "dealt" };
+  if (state.phase === "done") return state;
+  if (action.type !== "place") return state;
+  if (state.turn !== "P") return state;
+  if (action.idx < 0 || action.idx >= 9) return state;
+  if (state.board[action.idx] !== null) return state;
+
+  const rng = mulberry32(state.rngSeed);
+  const pCard = drawCard(rng, "P");
+  const nb = state.board.slice();
+  nb[action.idx] = pCard;
+  let pieces = state.pieces + 1;
+  let res = checkWin(nb);
+  if (res.winner === "P" && res.line) {
+    const bonus = lineRankBonus(nb, res.line);
+    return { ...state, board: nb, result: "P", winLine: res.line, score: state.score + 100 + pieces + bonus, phase: "done", pieces };
   }
-  if (action.type === "next") {
-    if (state.phase !== "dealt") return state;
-    if (state.round >= state.maxRounds) return { ...state, phase: "gameover" };
-    return { ...state, round: state.round + 1, hand: [], lastGain: 0, phase: "ready" };
+  if (res.winner === "draw") {
+    return { ...state, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
   }
-  return state;
+  // CPU move
+  const m = cpuMove(nb, rng);
+  const seed2 = Math.floor(rng() * 2 ** 31);
+  if (m >= 0) {
+    const cCard = drawCard(rng, "C");
+    nb[m] = cCard;
+    pieces += 1;
+  }
+  res = checkWin(nb);
+  if (res.winner === "C" && res.line) {
+    return { ...state, rngSeed: seed2, board: nb, result: "C", winLine: res.line, score: state.score + pieces, phase: "done", pieces };
+  }
+  if (res.winner === "draw") {
+    return { ...state, rngSeed: seed2, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
+  }
+  return { ...state, rngSeed: seed2, board: nb, turn: "P", pieces };
 }
 
 export function isTerminal(state: TicTacToeCardsState): { score: number } | null {
-  return state.phase === "gameover" ? { score: state.score } : null;
+  return state.phase === "done" ? { score: state.score } : null;
 }

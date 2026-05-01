@@ -1,21 +1,20 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { TicTacToeCardsState, TicTacToeCardsAction } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { TicTacToeCardsState, TicTacToeCardsAction, TicTacToeCardsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TicTacToeCards } from "./Game.js";
 
-const settings = {
-  rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
-} as const;
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+type S = SettingsOf<typeof settings>;
 
 export const ticTacToeCardsPlugin: GamePlugin<TicTacToeCardsState, TicTacToeCardsAction, typeof settings> = {
   id: "tic-tac-toe-cards",
   title: "Tic-Tac-Toe Cards",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "3x3 community grid; rows, columns, and diagonals form 8 mini-boards.",
-  howToPlay: "Tic-Tac-Toe Cards is a single-player card-combo game. 3x3 community grid; rows, columns, and diagonals form 8 mini-boards. Each round you receive a five-card hand from a shuffled 52-card deck and score points based on the strongest poker-style combo present.\n\nSpecial rule: 5 from a 3x3 community grid form a hand; we pick highest scoring line.\n\nPress Deal to receive a new five-card hand. The score for that hand is computed instantly using the variant's scoring table — pairs, two-pair, three-of-a-kind, straight, flush, full house, four-of-a-kind, straight flush. Bonus or wild rules adjust the totals up.\n\nPlay continues for ten rounds, accumulating points. The deck reshuffles each round so high cards are always available. Aim for the highest possible cumulative score by riding lucky deals.\n\nThe seed determines the entire shuffle sequence, so you can replay an identical run by entering the same seed. After ten rounds, your final score is locked in. Single-player only — no CPU opponent. A bite-sized poker variant perfect for short play sessions.",
+  description: "Card-themed Tic-Tac-Toe. You play red (Hearts/Diamonds), CPU plays black (Spades/Clubs).",
+  howToPlay: "Tic-Tac-Toe Cards is a playing-card themed twist on classic Tic-Tac-Toe. The 3x3 board fills with face-up cards rather than X/O symbols.\n\nClick any empty cell to place your piece — a randomly drawn red card (Hearts or Diamonds). The CPU answers with a randomly drawn black card (Spades or Clubs). The first side to align three same-color cards in a row, column, or diagonal wins.\n\nThe CPU runs basic AI: it takes any winning move, blocks your imminent wins, prefers the center, and otherwise plays randomly. A win scores 100 points plus a bonus equal to the rank-sum of your winning line, plus a small per-piece bonus. A draw is 25 points; a loss is zero.\n\nThe card art adds visual flavor without affecting line-detection logic — only color (suit-color) matters for the win, exactly like X/O. Try to set up double threats so the CPU can only block one.",
   settings,
-  initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
+  initialState: (seed: number, s: S) => initialState(seed, s as TicTacToeCardsSettings),
   reducer,
   isTerminal,
   component: TicTacToeCards,
