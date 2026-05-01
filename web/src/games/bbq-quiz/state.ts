@@ -4,306 +4,36 @@ export interface BBQQuizSettings { questions: "10" | "20"; }
 export interface BBQQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type BBQQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Texas BBQ is most famous for?",
-    "choices": [
-      "Beef brisket",
-      "Pulled pork",
-      "Whole hog",
-      "Burnt ends"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Burnt ends originated in?",
-    "choices": [
-      "Kansas City",
-      "Memphis",
-      "Texas",
-      "Carolinas"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Memphis is famous for?",
-    "choices": [
-      "Dry-rubbed ribs",
-      "Beef brisket",
-      "Mustard pork",
-      "Whole hog"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Eastern Carolina BBQ traditionally cooks?",
-    "choices": [
-      "Whole hog",
-      "Brisket",
-      "Burnt ends",
-      "Tri-tip"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "South Carolina is known for what unique sauce?",
-    "choices": [
-      "Mustard",
-      "Vinegar",
-      "Ketchup",
-      "Cream"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Western North Carolina sauce is?",
-    "choices": [
-      "Vinegar/tomato",
-      "Mustard",
-      "Mayo",
-      "White wine"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Alabama is famous for what BBQ sauce?",
-    "choices": [
-      "White (mayo)",
-      "Vinegar",
-      "Mustard",
-      "Soy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "St. Louis-style ribs are?",
-    "choices": [
-      "Trimmed spareribs",
-      "Baby backs",
-      "Country style",
-      "Beef ribs"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Baby back ribs come from?",
-    "choices": [
-      "Loin",
-      "Belly",
-      "Shoulder",
-      "Leg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pulled pork comes from which cut?",
-    "choices": [
-      "Shoulder/butt",
-      "Loin",
-      "Belly",
-      "Brisket"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Brisket comes from the?",
-    "choices": [
-      "Cow's chest",
-      "Cow's loin",
-      "Cow's leg",
-      "Cow's rib"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tri-tip is associated with which regional style?",
-    "choices": [
-      "Santa Maria",
-      "Memphis",
-      "Kansas City",
-      "Texas"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The 'point' of a brisket is?",
-    "choices": [
-      "Fattier end",
-      "Leaner end",
-      "Trimmed off",
-      "Center cut"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The 'flat' of a brisket is?",
-    "choices": [
-      "Leaner end",
-      "Fattier end",
-      "Trimmed off",
-      "Center cut"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Low-and-slow temps are typically?",
-    "choices": [
-      "225-250F",
-      "350-400F",
-      "500F+",
-      "100F"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Brisket is usually pulled at internal temp around?",
-    "choices": [
-      "200-205F",
-      "160F",
-      "145F",
-      "250F"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pork ribs are 'done' around?",
-    "choices": [
-      "195-203F",
-      "145F",
-      "165F",
-      "250F"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hickory wood imparts?",
-    "choices": [
-      "Strong/savory",
-      "Mild/sweet",
-      "Citrus",
-      "Floral"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Apple wood is typically?",
-    "choices": [
-      "Mild/sweet",
-      "Strong/bitter",
-      "Sour",
-      "Smoky-strong"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mesquite is associated with?",
-    "choices": [
-      "Texas",
-      "Carolinas",
-      "Memphis",
-      "KC"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pecan wood flavor is?",
-    "choices": [
-      "Mild nutty",
-      "Strong bitter",
-      "Sour",
-      "Pungent"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A 'rub' is?",
-    "choices": [
-      "Dry seasoning",
-      "Liquid sauce",
-      "Marinade",
-      "Brine"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A 'mop' sauce is?",
-    "choices": [
-      "Thin baste",
-      "Thick glaze",
-      "Dry powder",
-      "Dip"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Texas Crutch refers to?",
-    "choices": [
-      "Wrapping in foil",
-      "Spritzing",
-      "Resting",
-      "Trimming"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The 'stall' happens around?",
-    "choices": [
-      "150-170F",
-      "100F",
-      "200F",
-      "225F"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pellet smokers burn?",
-    "choices": [
-      "Wood pellets",
-      "Charcoal",
-      "Gas",
-      "Electricity only"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Offset smokers feature a?",
-    "choices": [
-      "Side firebox",
-      "Top firebox",
-      "Center firebox",
-      "No firebox"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "KCBS is a major BBQ?",
-    "choices": [
-      "Sanctioning body",
-      "Sauce brand",
-      "Restaurant",
-      "Wood type"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Competition meats commonly include?",
-    "choices": [
-      "Brisket/ribs/pork/chicken",
-      "Brisket only",
-      "Ribs only",
-      "Fish only"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The 'bark' on smoked meat is?",
-    "choices": [
-      "Crusty exterior",
-      "Inside",
-      "Sauce",
-      "Fat layer"
-    ],
-    "correct": 0
-  }
+  { question: "What region is BBQ most associated with in the US?", choices: ["South","Northeast","West","Midwest"], correct: 0 },
+  { question: "What are the four major US BBQ regions?", choices: ["Texas, Memphis, Carolina, Kansas City","Just Texas","Multiple","Just four major"], correct: 3 },
+  { question: "What meat is Texas BBQ famous for?", choices: ["Beef brisket","Pork ribs","Chicken","Both beef and ribs"], correct: 0 },
+  { question: "What style is North Carolina BBQ?", choices: ["Vinegar-based pork","Tomato","Both","Just pork"], correct: 2 },
+  { question: "What's Memphis BBQ known for?", choices: ["Pulled pork, dry rub ribs","Just ribs","Both","Wet and dry"], correct: 2 },
+  { question: "What's Kansas City BBQ known for?", choices: ["Sweet tomato sauce, varied meats","Just sauce","Both","Just KC"], correct: 2 },
+  { question: "What's South Carolina BBQ unique mustard sauce called?", choices: ["Carolina Gold (mustard-based)","Just mustard","Both","Just yellow"], correct: 2 },
+  { question: "What's a smoker?", choices: ["Slow cooks meat with smoke","Just smokes","Both","Just oven"], correct: 2 },
+  { question: "What's wood typically used for smoking?", choices: ["Hickory, oak, mesquite, pecan","Just hickory","Multiple","All listed"], correct: 3 },
+  { question: "What's the best wood for Texas brisket?", choices: ["Post oak","Hickory","Mesquite","All used"], correct: 0 },
+  { question: "What's a brisket?", choices: ["Beef chest cut","Just beef","Both","Just brisket"], correct: 2 },
+  { question: "What temperature is brisket cooked to (typically)?", choices: ["Around 200-205F","Just 165","Both","Higher"], correct: 0 },
+  { question: "How long does brisket take to cook?", choices: ["~12+ hours","~2 hours","~6 hours","~20 hours"], correct: 0 },
+  { question: "What's the bark on BBQ?", choices: ["Crusty seasoned exterior","Just outside","Both","Just crust"], correct: 2 },
+  { question: "What's the smoke ring?", choices: ["Pink layer just under bark","Just discoloration","Both","Just ring"], correct: 2 },
+  { question: "What causes the smoke ring?", choices: ["Nitrogen dioxide reaction","Just smoke","Both","Just chemistry"], correct: 2 },
+  { question: "What's a dry rub?", choices: ["Spice mix applied to meat","Just spices","Both","Just rub"], correct: 2 },
+  { question: "What's mopping or basting?", choices: ["Liquid applied during cooking","Just sauce","Both","Just method"], correct: 2 },
+  { question: "What's burnt ends?", choices: ["Crispy point of brisket","Just ends","Both","Just KC delicacy"], correct: 2 },
+  { question: "What's a Boston butt?", choices: ["Pork shoulder cut","Just pork","Both","Just shoulder"], correct: 2 },
+  { question: "What's pulled pork from?", choices: ["Slow-smoked pork shoulder","Just pork","Both","Just pulled"], correct: 2 },
+  { question: "What are baby back ribs?", choices: ["Smaller pork ribs from upper back","Just ribs","Both","Just baby back"], correct: 2 },
+  { question: "What are spare ribs?", choices: ["Larger pork ribs from belly","Just ribs","Both","Just spare"], correct: 2 },
+  { question: "What's St. Louis style ribs?", choices: ["Trimmed spare ribs","Just trimmed","Both","Just style"], correct: 2 },
+  { question: "What's the 3-2-1 method?", choices: ["3hr smoke, 2hr wrapped, 1hr unwrapped (for ribs)","Just method","Both","Just timing"], correct: 2 },
+  { question: "What sauce style is the Carolinas (NC east) known for?", choices: ["Vinegar and pepper","Tomato","Both","Just vinegar"], correct: 0 },
+  { question: "What's hot links?", choices: ["Spicy sausage","Just sausage","Both","Just hot"], correct: 2 },
+  { question: "What's a BBQ pit?", choices: ["Cooking apparatus / area","Just cooker","Both","Just pit"], correct: 2 },
+  { question: "What's low and slow?", choices: ["Low temp, long cook","Just low temp","Both","Just method"], correct: 2 },
+  { question: "What's the ideal smoking temperature?", choices: ["~225-275F","Just 200","Both","Just range"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: BBQQuizSettings): BBQQuizState {

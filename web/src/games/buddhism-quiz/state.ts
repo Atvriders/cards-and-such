@@ -4,306 +4,36 @@ export interface BuddhismQuizSettings { questions: "10" | "20" | "30"; }
 export interface BuddhismQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type BuddhismQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who founded Buddhism?",
-    "choices": [
-      "Mahavira",
-      "Confucius",
-      "Siddhartha Gautama",
-      "Lao Tzu"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What does 'Buddha' literally mean?",
-    "choices": [
-      "Teacher",
-      "Awakened One",
-      "Holy One",
-      "Wanderer"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "In which country was the Buddha born?",
-    "choices": [
-      "India",
-      "Nepal",
-      "Sri Lanka",
-      "Tibet"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Under which tree did the Buddha attain enlightenment?",
-    "choices": [
-      "Banyan",
-      "Bodhi (fig)",
-      "Sal",
-      "Pine"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "How many Noble Truths are there?",
-    "choices": [
-      "3",
-      "4",
-      "5",
-      "8"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "How many steps in the Eightfold Path?",
-    "choices": [
-      "6",
-      "7",
-      "8",
-      "10"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What is the cycle of rebirth called?",
-    "choices": [
-      "Karma",
-      "Samsara",
-      "Dukkha",
-      "Nirvana"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the goal of Buddhist practice?",
-    "choices": [
-      "Heaven",
-      "Nirvana",
-      "Reincarnation",
-      "Dharma"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is 'dukkha'?",
-    "choices": [
-      "Joy",
-      "Suffering",
-      "Knowledge",
-      "Compassion"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What does 'karma' refer to?",
-    "choices": [
-      "Desire",
-      "Action and its consequences",
-      "Suffering",
-      "Meditation"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which is NOT a school of Buddhism?",
-    "choices": [
-      "Theravada",
-      "Mahayana",
-      "Vajrayana",
-      "Vedanta"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Which Buddhism is dominant in Tibet?",
-    "choices": [
-      "Theravada",
-      "Pure Land",
-      "Vajrayana",
-      "Zen"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which school is dominant in Sri Lanka and Thailand?",
-    "choices": [
-      "Theravada",
-      "Mahayana",
-      "Vajrayana",
-      "Nichiren"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which Mahayana school is famous in Japan for sitting meditation?",
-    "choices": [
-      "Pure Land",
-      "Nichiren",
-      "Zen",
-      "Shingon"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who is the future Buddha to come?",
-    "choices": [
-      "Amitabha",
-      "Maitreya",
-      "Vairocana",
-      "Tara"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the bodhisattva of compassion (Avalokitesvara, in Chinese)?",
-    "choices": [
-      "Manjushri",
-      "Guanyin",
-      "Samantabhadra",
-      "Ksitigarbha"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the bodhisattva of wisdom?",
-    "choices": [
-      "Manjushri",
-      "Maitreya",
-      "Tara",
-      "Akshobhya"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the spiritual leader of Tibetan Buddhism's Gelug school?",
-    "choices": [
-      "Pope",
-      "Dalai Lama",
-      "Imam",
-      "Bhante"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is a 'sangha'?",
-    "choices": [
-      "A monastery",
-      "The Buddhist community",
-      "A scripture",
-      "A meditation"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What are the Three Jewels (Triple Gem)?",
-    "choices": [
-      "Buddha, Dharma, Sangha",
-      "Buddha, Karma, Nirvana",
-      "Mind, Body, Spirit",
-      "Wisdom, Faith, Compassion"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the first precept for lay Buddhists?",
-    "choices": [
-      "Do not kill",
-      "Do not steal",
-      "Do not lie",
-      "Do not drink alcohol"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the Pali Canon written in?",
-    "choices": [
-      "Sanskrit",
-      "Pali",
-      "Tibetan",
-      "Chinese"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mahayana scriptures are typically in which language?",
-    "choices": [
-      "Pali",
-      "Sanskrit",
-      "Persian",
-      "Hebrew"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which sutra is famous for emptiness ('form is emptiness')?",
-    "choices": [
-      "Lotus Sutra",
-      "Heart Sutra",
-      "Diamond Sutra",
-      "Avatamsaka"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What does 'mantra' refer to?",
-    "choices": [
-      "Statue",
-      "Sacred sound or phrase",
-      "Sacred text",
-      "Sacred place"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the Buddha of infinite light in Pure Land Buddhism?",
-    "choices": [
-      "Vairocana",
-      "Amitabha",
-      "Akshobhya",
-      "Maitreya"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Where did the Buddha die?",
-    "choices": [
-      "Lumbini",
-      "Bodh Gaya",
-      "Sarnath",
-      "Kushinagar"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Where did the Buddha give his first sermon?",
-    "choices": [
-      "Sarnath",
-      "Bodh Gaya",
-      "Lumbini",
-      "Rajgir"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is meditation called in Pali?",
-    "choices": [
-      "Bhavana",
-      "Yoga",
-      "Tapas",
-      "Puja"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is 'anatta'?",
-    "choices": [
-      "Compassion",
-      "Non-self",
-      "Karma",
-      "Impermanence"
-    ],
-    "correct": 1
-  }
+  { question: "Who founded Buddhism?", choices: ["Siddhartha Gautama (Buddha)","Confucius","Lao Tzu","Mahavira"], correct: 0 },
+  { question: "What does Buddha mean?", choices: ["Enlightened/Awakened one","Teacher","Both","Just enlightened"], correct: 2 },
+  { question: "In what country was Buddha born?", choices: ["Nepal","India","Tibet","Sri Lanka"], correct: 0 },
+  { question: "In what century did Buddha live (approximately)?", choices: ["6th-5th century BCE","1st century CE","8th century BCE","2nd century BCE"], correct: 0 },
+  { question: "What are the Four Noble Truths?", choices: ["Truth of suffering, cause, cessation, path","Just suffering","Both","Just truths"], correct: 2 },
+  { question: "What's the first Noble Truth?", choices: ["Life involves suffering (dukkha)","Path","Cessation","Cause"], correct: 0 },
+  { question: "What's the second Noble Truth?", choices: ["Cause of suffering is craving","Just suffering","Both","Path"], correct: 0 },
+  { question: "What's the third Noble Truth?", choices: ["Suffering can cease (Nirvana)","Just cessation","Both","Path"], correct: 0 },
+  { question: "What's the fourth Noble Truth?", choices: ["Eightfold Path leads to cessation","Just path","Both","Just direction"], correct: 2 },
+  { question: "How many parts to the Eightfold Path?", choices: ["8","4","6","10"], correct: 0 },
+  { question: "What's the goal of Buddhism?", choices: ["Nirvana","Heaven","Both","Just liberation"], correct: 2 },
+  { question: "What's Nirvana?", choices: ["Liberation from suffering and rebirth","Just heaven","Both","Just bliss"], correct: 2 },
+  { question: "What's karma in Buddhism?", choices: ["Action and consequence affecting rebirth","Just fate","Both","Just deed"], correct: 2 },
+  { question: "What's reincarnation in Buddhism?", choices: ["Cycle of rebirth (samsara)","Just rebirth","Both","Just samsara"], correct: 2 },
+  { question: "What's the Sangha?", choices: ["Buddhist monastic community","Just community","Both","Just monks"], correct: 2 },
+  { question: "What's the Tripitaka?", choices: ["Three Baskets of Buddhist scripture","Just scripture","Both","Holy book"], correct: 2 },
+  { question: "What three Buddhist branches?", choices: ["Theravada, Mahayana, Vajrayana","Just two","All three","Three main"], correct: 3 },
+  { question: "What's Theravada Buddhism?", choices: ["Older school, Sri Lanka, SE Asia","Just older","Both","Just school"], correct: 2 },
+  { question: "What's Mahayana Buddhism?", choices: ["Larger vehicle, East Asia","Just larger","Both","Different"], correct: 2 },
+  { question: "What's Vajrayana / Tibetan Buddhism?", choices: ["Diamond vehicle, Tibet","Just Tibetan","Both","Different"], correct: 2 },
+  { question: "What's a Bodhisattva?", choices: ["One who delays Nirvana to help others","Just helper","Both","Just figure"], correct: 2 },
+  { question: "Who's the Dalai Lama?", choices: ["Spiritual leader of Tibetan Buddhism","Just monk","Both","Just leader"], correct: 2 },
+  { question: "What's meditation in Buddhism?", choices: ["Mental discipline including mindfulness","Just sitting","Both","Just thought"], correct: 2 },
+  { question: "What's Zen Buddhism's emphasis?", choices: ["Direct experience/meditation","Just meditation","Both","Different"], correct: 2 },
+  { question: "What's a koan?", choices: ["Zen paradoxical statement","Just question","Both","Just statement"], correct: 2 },
+  { question: "What's the Lotus Sutra?", choices: ["Important Mahayana scripture","Just scripture","Both","Just text"], correct: 2 },
+  { question: "What's the Bodhi Tree?", choices: ["Where Buddha attained enlightenment","Just tree","Both","Sacred tree"], correct: 2 },
+  { question: "What's the Wheel of Dharma?", choices: ["Symbol of Buddha's teaching","Just wheel","Both","Symbol"], correct: 2 },
+  { question: "What's compassion called in Buddhism?", choices: ["Karuna","Metta (loving-kindness)","Both important","Just compassion"], correct: 2 },
+  { question: "What's Buddhism's first precept?", choices: ["No killing","No stealing","No lying","Just precept"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: BuddhismQuizSettings): BuddhismQuizState {

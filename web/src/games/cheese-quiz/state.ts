@@ -4,306 +4,36 @@ export interface CheeseQuizSettings { questions: "10" | "20"; }
 export interface CheeseQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type CheeseQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Parmigiano-Reggiano is from which country?",
-    "choices": [
-      "Italy",
-      "France",
-      "Spain",
-      "Greece"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Parmigiano-Reggiano is made from?",
-    "choices": [
-      "Cow milk",
-      "Goat milk",
-      "Sheep milk",
-      "Buffalo milk"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pecorino is made from?",
-    "choices": [
-      "Sheep milk",
-      "Cow milk",
-      "Goat milk",
-      "Buffalo milk"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Manchego is from which country?",
-    "choices": [
-      "Spain",
-      "Italy",
-      "Portugal",
-      "France"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Manchego is made from?",
-    "choices": [
-      "Sheep milk",
-      "Cow milk",
-      "Goat milk",
-      "Buffalo milk"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cheddar originated in?",
-    "choices": [
-      "England",
-      "France",
-      "Italy",
-      "Holland"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Brie is from?",
-    "choices": [
-      "France",
-      "Italy",
-      "Switzerland",
-      "Belgium"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Camembert is also from?",
-    "choices": [
-      "France",
-      "Italy",
-      "Spain",
-      "Germany"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Brie and Camembert are which style?",
-    "choices": [
-      "Soft-ripened",
-      "Hard",
-      "Blue",
-      "Washed-rind"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Roquefort is which style?",
-    "choices": [
-      "Blue",
-      "Hard",
-      "Soft",
-      "Stretched curd"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Roquefort is made from?",
-    "choices": [
-      "Sheep milk",
-      "Cow milk",
-      "Goat milk",
-      "Buffalo milk"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Stilton is from?",
-    "choices": [
-      "England",
-      "France",
-      "Italy",
-      "Holland"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Gorgonzola is from?",
-    "choices": [
-      "Italy",
-      "France",
-      "Spain",
-      "Greece"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mozzarella di bufala uses milk from?",
-    "choices": [
-      "Water buffalo",
-      "Sheep",
-      "Cow",
-      "Goat"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Halloumi is famous for being?",
-    "choices": [
-      "Grillable",
-      "Spicy",
-      "Sweet",
-      "Bitter"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Halloumi is from which region?",
-    "choices": [
-      "Cyprus",
-      "Greece",
-      "Italy",
-      "France"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Feta is from?",
-    "choices": [
-      "Greece",
-      "Italy",
-      "Spain",
-      "Turkey"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Feta is made from?",
-    "choices": [
-      "Sheep/goat milk",
-      "Cow milk only",
-      "Buffalo only",
-      "Yak"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Gruyere is from?",
-    "choices": [
-      "Switzerland",
-      "France",
-      "Italy",
-      "Germany"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Emmental is famous for?",
-    "choices": [
-      "Holes",
-      "Blue veins",
-      "Black rind",
-      "Smoky flavor"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Gouda is from?",
-    "choices": [
-      "Netherlands",
-      "Belgium",
-      "Germany",
-      "France"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Edam is from?",
-    "choices": [
-      "Netherlands",
-      "Belgium",
-      "Germany",
-      "Switzerland"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Limburger is famous for?",
-    "choices": [
-      "Strong odor",
-      "Blue veins",
-      "Holes",
-      "Black rind"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Epoisses is what style?",
-    "choices": [
-      "Washed-rind",
-      "Hard",
-      "Blue",
-      "Stretched curd"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Taleggio is what style?",
-    "choices": [
-      "Washed-rind",
-      "Hard",
-      "Blue",
-      "Stretched curd"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Provolone is what style?",
-    "choices": [
-      "Stretched curd",
-      "Soft",
-      "Blue",
-      "Hard aged"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Aged cheddar wheels are typically aged?",
-    "choices": [
-      "6 months to 5+ years",
-      "2 weeks",
-      "1 week",
-      "20+ years"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cottage cheese is which style?",
-    "choices": [
-      "Fresh curd",
-      "Aged",
-      "Blue",
-      "Smoked"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mascarpone is famous in which dessert?",
-    "choices": [
-      "Tiramisu",
-      "Crème brûlée",
-      "Cheesecake",
-      "Trifle"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ricotta is made from?",
-    "choices": [
-      "Whey",
-      "Curd",
-      "Cream only",
-      "Buttermilk"
-    ],
-    "correct": 0
-  }
+  { question: "What country is famous for the most cheese variety?", choices: ["France","Italy","Switzerland","All produce many"], correct: 0 },
+  { question: "What's cheddar cheese from?", choices: ["Cheddar village in Somerset, England","Just England","Both","Just cheddar"], correct: 2 },
+  { question: "What's Parmigiano-Reggiano?", choices: ["Hard Italian aged cow's milk cheese","Just Italian","Both","Just parmesan"], correct: 2 },
+  { question: "What's Parmesan vs Parmigiano-Reggiano?", choices: ["Parm-Reg is PDO Italian; parmesan is generic","Just naming","Both","Just protected"], correct: 2 },
+  { question: "What's Roquefort?", choices: ["French blue sheep's milk cheese","Just blue","Both","Just French"], correct: 2 },
+  { question: "What's mozzarella?", choices: ["Italian fresh stretched-curd cheese","Just Italian","Both","Just mozzarella"], correct: 2 },
+  { question: "What's the original mozzarella made from?", choices: ["Buffalo milk","Cow milk","Both used","Just buffalo"], correct: 0 },
+  { question: "What's Brie?", choices: ["French soft surface-ripened cheese","Just French","Both","Just Brie"], correct: 2 },
+  { question: "What's Camembert?", choices: ["French soft cheese, similar to Brie","Just soft","Both","Just Camembert"], correct: 2 },
+  { question: "What's feta?", choices: ["Greek brined cheese","Just brined","Both","Just feta"], correct: 2 },
+  { question: "What's halloumi?", choices: ["Cypriot semi-hard, grills well","Just Cypriot","Both","Just halloumi"], correct: 2 },
+  { question: "What's gouda?", choices: ["Dutch semi-hard cheese","Just Dutch","Both","Just gouda"], correct: 2 },
+  { question: "What's gruyere?", choices: ["Swiss hard cheese","Just Swiss","Both","Just gruyere"], correct: 2 },
+  { question: "What's Emmental?", choices: ["Swiss cheese with holes","Just Swiss","Both","Just holey"], correct: 2 },
+  { question: "What's blue cheese?", choices: ["Cheese with mold veins","Just mold","Both","Just blue"], correct: 2 },
+  { question: "What's Stilton?", choices: ["English blue cheese","Just blue","Both","Just Stilton"], correct: 2 },
+  { question: "What's Gorgonzola?", choices: ["Italian blue cheese","Just Italian","Both","Just Gorgonzola"], correct: 2 },
+  { question: "What's mascarpone?", choices: ["Italian cream cheese","Just cream","Both","Just mascarpone"], correct: 2 },
+  { question: "What's ricotta?", choices: ["Italian whey cheese","Just whey","Both","Just ricotta"], correct: 2 },
+  { question: "What's manchego?", choices: ["Spanish sheep's milk cheese","Just Spanish","Both","Just manchego"], correct: 2 },
+  { question: "What's a wheel of cheese?", choices: ["Round form of cheese","Just round","Both","Just wheel"], correct: 2 },
+  { question: "What's cheese aging?", choices: ["Maturing cheese for flavor","Just aging","Both","Just maturing"], correct: 2 },
+  { question: "What's whey?", choices: ["Liquid byproduct of cheesemaking","Just liquid","Both","Just whey"], correct: 2 },
+  { question: "What's curds?", choices: ["Solid coagulated milk","Just solid","Both","Just curds"], correct: 2 },
+  { question: "What's rennet?", choices: ["Enzyme to coagulate milk","Just enzyme","Both","Just rennet"], correct: 2 },
+  { question: "What's a soft cheese?", choices: ["Spreadable, fresh or surface-ripened","Just soft","Both","Just type"], correct: 2 },
+  { question: "What's a hard cheese?", choices: ["Aged firm cheese","Just aged","Both","Just type"], correct: 2 },
+  { question: "What's Swiss cheese famous for?", choices: ["Holes from CO2 bacteria","Just holes","Both","Just Swiss"], correct: 2 },
+  { question: "What's American cheese?", choices: ["Processed cheese","Just processed","Both","Just American"], correct: 2 },
+  { question: "What's the rind of cheese?", choices: ["Outer coating, often inedible or special","Just outside","Both","Just rind"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CheeseQuizSettings): CheeseQuizState {

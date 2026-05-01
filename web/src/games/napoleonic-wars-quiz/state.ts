@@ -4,126 +4,36 @@ export interface NapoleonicWarsQuizSettings { questions: "10" | "20" | "30"; }
 export interface NapoleonicWarsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type NapoleonicWarsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Battle of Waterloo year?",
-    "choices": [
-      "1812",
-      "1814",
-      "1815",
-      "1820"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Wellington commanded which army?",
-    "choices": [
-      "French",
-      "Anglo-Allied",
-      "Prussian",
-      "Russian"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Napoleon's first exile was to?",
-    "choices": [
-      "St. Helena",
-      "Elba",
-      "Corsica",
-      "Sicily"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Battle of Austerlitz year?",
-    "choices": [
-      "1805",
-      "1807",
-      "1809",
-      "1812"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "French invasion of Russia occurred in?",
-    "choices": [
-      "1810",
-      "1812",
-      "1814",
-      "1815"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Napoleon was crowned Emperor in?",
-    "choices": [
-      "1799",
-      "1802",
-      "1804",
-      "1806"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Battle of Trafalgar was a victory for?",
-    "choices": [
-      "France",
-      "Britain",
-      "Spain",
-      "Russia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who led the British navy at Trafalgar?",
-    "choices": [
-      "Wellington",
-      "Nelson",
-      "Churchill",
-      "Rodney"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Napoleon's final exile was to?",
-    "choices": [
-      "Elba",
-      "Corsica",
-      "St. Helena",
-      "Malta"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who was Tsar during the Russian Campaign?",
-    "choices": [
-      "Peter the Great",
-      "Nicholas I",
-      "Alexander I",
-      "Nicholas II"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Battle of Borodino fought near?",
-    "choices": [
-      "Paris",
-      "Moscow",
-      "Berlin",
-      "Vienna"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Battle of Leipzig (1813) was also called the?",
-    "choices": [
-      "Battle of the Nations",
-      "Battle of Three Emperors",
-      "Battle of the Spurs",
-      "Battle of the Marne"
-    ],
-    "correct": 0
-  }
+  { question: "Who was the French Emperor during the Napoleonic Wars?", choices: ["Louis XVI","Napoleon Bonaparte","Louis XVIII","Charles X"], correct: 1 },
+  { question: "In what year did Napoleon become Emperor?", choices: ["1799","1801","1804","1812"], correct: 2 },
+  { question: "At what battle was Napoleon decisively defeated in 1815?", choices: ["Leipzig","Austerlitz","Waterloo","Borodino"], correct: 2 },
+  { question: "Who commanded the Anglo-allied army at Waterloo?", choices: ["Nelson","Wellington","Blucher","Pitt"], correct: 1 },
+  { question: "Which Prussian general arrived to support at Waterloo?", choices: ["Bulow","Blucher","Gneisenau","Yorck"], correct: 1 },
+  { question: "What naval battle in 1805 destroyed French/Spanish fleets?", choices: ["Trafalgar","Nile","Copenhagen","Navarino"], correct: 0 },
+  { question: "Who was the British naval commander killed at Trafalgar?", choices: ["Hood","Nelson","Collingwood","Howe"], correct: 1 },
+  { question: "What 1805 battle was Napoleon's masterpiece against Russia/Austria?", choices: ["Jena","Austerlitz","Wagram","Friedland"], correct: 1 },
+  { question: "Napoleon's catastrophic invasion of which country was 1812?", choices: ["Spain","Russia","Prussia","Austria"], correct: 1 },
+  { question: "What Russian general's strategy frustrated Napoleon in 1812?", choices: ["Kutuzov","Bagration","Barclay de Tolly","Tormasov"], correct: 0 },
+  { question: "What battle outside Moscow in 1812?", choices: ["Smolensk","Borodino","Maloyaroslavets","Leipzig"], correct: 1 },
+  { question: "What 1813 battle was called the Battle of the Nations?", choices: ["Leipzig","Dresden","Lutzen","Bautzen"], correct: 0 },
+  { question: "To what island was Napoleon first exiled?", choices: ["St. Helena","Elba","Corsica","Sardinia"], correct: 1 },
+  { question: "To what island was Napoleon finally exiled?", choices: ["St. Helena","Elba","Corsica","Madeira"], correct: 0 },
+  { question: "How long was Napoleon's return known as?", choices: ["Hundred Days","Six Months","One Year","Three Years"], correct: 0 },
+  { question: "What 1812 war was fought between US and Britain partly due to Napoleonic blockades?", choices: ["War of 1812","Anglo-American War","War of Independence","First Barbary War"], correct: 0 },
+  { question: "What system did Napoleon impose to economically isolate Britain?", choices: ["Anti-Britain Pact","Continental System","Berlin Edict","Trade Embargo"], correct: 1 },
+  { question: "What was Napoleon's birthplace?", choices: ["Paris","Marseille","Corsica","Sardinia"], correct: 2 },
+  { question: "What was Napoleon's first wife's name?", choices: ["Josephine","Marie Louise","Marie Antoinette","Eugenie"], correct: 0 },
+  { question: "What 1798 battle in Egypt did Napoleon win?", choices: ["Pyramids","Aboukir","Heliopolis","Alexandria"], correct: 0 },
+  { question: "What naval defeat ended Napoleon's Egyptian campaign?", choices: ["Battle of the Nile","Trafalgar","Copenhagen","Aboukir Bay (Battle of the Nile)"], correct: 3 },
+  { question: "What treaty in 1807 made Russia ally with France?", choices: ["Tilsit","Pressburg","Schonbrunn","Amiens"], correct: 0 },
+  { question: "What 1806 victory crushed Prussia?", choices: ["Jena-Auerstedt","Austerlitz","Friedland","Eylau"], correct: 0 },
+  { question: "What insurrection began in Spain against French rule in 1808?", choices: ["Peninsular War","Carlist War","Spanish Civil War","War of Succession"], correct: 0 },
+  { question: "Who led the British in the Peninsular War?", choices: ["Wellington","Moore","Beresford","All commanded at times"], correct: 3 },
+  { question: "What scientific expedition did Napoleon take with him to Egypt?", choices: ["Savants","Royal Society","Academy","Geographers"], correct: 0 },
+  { question: "What stone discovered in Egypt led to deciphering hieroglyphics?", choices: ["Rosetta Stone","Pyramid Stone","Memphis Stone","Alexandria Stone"], correct: 0 },
+  { question: "What's the name of Napoleon's legal code?", choices: ["Code Napoleon","Code Civile","Civil Code of France","All names used"], correct: 3 },
+  { question: "What woman did Napoleon marry to ally with Austria?", choices: ["Marie Louise","Marie Antoinette","Eugenie","Louise"], correct: 0 },
+  { question: "How did Napoleon die?", choices: ["Battle wound","Stomach cancer (likely)","Old age","Poisoning (theory)"], correct: 1 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: NapoleonicWarsQuizSettings): NapoleonicWarsQuizState {

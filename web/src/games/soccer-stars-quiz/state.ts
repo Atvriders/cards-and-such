@@ -4,306 +4,36 @@ export interface SoccerStarsQuizSettings { questions: "10" | "20" | "30"; }
 export interface SoccerStarsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type SoccerStarsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "How many World Cups did Pelé win?",
-    "choices": [
-      "1",
-      "2",
-      "3",
-      "4"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Pelé played most of his club career at?",
-    "choices": [
-      "Santos",
-      "Cosmos",
-      "Flamengo",
-      "Botafogo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Maradona played for which national team?",
-    "choices": [
-      "Argentina",
-      "Brazil",
-      "Uruguay",
-      "Chile"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Maradona's famous 1986 goal vs England is known as?",
-    "choices": [
-      "Hand of God",
-      "Goal of the Century",
-      "God's Goal",
-      "Diego Pass"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lionel Messi has won how many Ballon d'Or awards (as of 2024)?",
-    "choices": [
-      "6",
-      "7",
-      "8",
-      "9"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who won the 2022 World Cup?",
-    "choices": [
-      "France",
-      "Argentina",
-      "Brazil",
-      "Croatia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Cristiano Ronaldo's birth country?",
-    "choices": [
-      "Brazil",
-      "Spain",
-      "Portugal",
-      "Argentina"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Ronaldinho played mostly at?",
-    "choices": [
-      "Barcelona",
-      "Real Madrid",
-      "AC Milan",
-      "PSG"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Zinedine Zidane won the World Cup with?",
-    "choices": [
-      "France",
-      "Italy",
-      "Spain",
-      "Brazil"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Zidane's club glory was at?",
-    "choices": [
-      "Real Madrid",
-      "Barcelona",
-      "Juventus",
-      "All three"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Who is 'Der Kaiser'?",
-    "choices": [
-      "Beckenbauer",
-      "Müller",
-      "Klinsmann",
-      "Matthäus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is England's all-time leading goalscorer (men)?",
-    "choices": [
-      "Bobby Charlton",
-      "Wayne Rooney",
-      "Harry Kane",
-      "Gary Lineker"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Bobby Charlton played for?",
-    "choices": [
-      "Manchester United",
-      "Liverpool",
-      "Arsenal",
-      "Tottenham"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cruyff played mostly at Ajax and?",
-    "choices": [
-      "Barcelona",
-      "Real Madrid",
-      "PSV",
-      "Inter"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Total Football style is associated with?",
-    "choices": [
-      "Netherlands",
-      "Italy",
-      "England",
-      "Argentina"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many Ballon d'Or has Ronaldo won (as of 2024)?",
-    "choices": [
-      "3",
-      "5",
-      "7",
-      "8"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Garrincha played for which country?",
-    "choices": [
-      "Brazil",
-      "Argentina",
-      "Uruguay",
-      "Portugal"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who scored the World Cup 1966 final hat-trick for England?",
-    "choices": [
-      "Geoff Hurst",
-      "Bobby Moore",
-      "Bobby Charlton",
-      "Roger Hunt"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bobby Moore captained England to a World Cup in?",
-    "choices": [
-      "1966",
-      "1970",
-      "1958",
-      "1982"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Eusébio played for which country?",
-    "choices": [
-      "Portugal",
-      "Brazil",
-      "Mozambique (born), Portugal (national)",
-      "Spain"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Iniesta scored the winning goal in which World Cup final?",
-    "choices": [
-      "2010",
-      "2006",
-      "2014",
-      "2018"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Spain's tiki-taka peak was around?",
-    "choices": [
-      "2008-2012",
-      "2002-2006",
-      "2014-2018",
-      "1998-2002"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mbappe plays internationally for?",
-    "choices": [
-      "France",
-      "Cameroon",
-      "Algeria",
-      "Senegal"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Neymar plays for which country?",
-    "choices": [
-      "Brazil",
-      "Argentina",
-      "Portugal",
-      "Spain"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Buffon is a legendary?",
-    "choices": [
-      "Goalkeeper",
-      "Defender",
-      "Midfielder",
-      "Striker"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Beckenbauer led Germany to a World Cup as both player and?",
-    "choices": [
-      "Coach",
-      "President",
-      "Sponsor",
-      "Owner"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Modric won the Ballon d'Or in?",
-    "choices": [
-      "2018",
-      "2016",
-      "2014",
-      "2012"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Andres Iniesta and Xavi were the heart of which club's golden era?",
-    "choices": [
-      "Barcelona",
-      "Real Madrid",
-      "Bayern",
-      "Juventus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Roberto Baggio missed a famous PK in which final?",
-    "choices": [
-      "1994 World Cup",
-      "1998 World Cup",
-      "Euro 1996",
-      "Euro 2000"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cristiano Ronaldo's first European club?",
-    "choices": [
-      "Manchester United",
-      "Sporting CP",
-      "Real Madrid",
-      "Juventus"
-    ],
-    "correct": 1
-  }
+  { question: "Who's widely considered the greatest soccer player ever (debate)?", choices: ["Pele or Maradona or Messi","Just one","Multiple","All cited"], correct: 3 },
+  { question: "How many World Cups did Pele win?", choices: ["3","2","4","1"], correct: 0 },
+  { question: "In what country was Pele born?", choices: ["Brazil","Argentina","Portugal","Just Brazil"], correct: 2 },
+  { question: "In what year did Diego Maradona's Hand of God happen?", choices: ["1986","1990","1982","1994"], correct: 0 },
+  { question: "Where did Maradona's Hand of God score?", choices: ["1986 World Cup vs England","Just England game","Both","Quarterfinals"], correct: 2 },
+  { question: "How many Ballon d'Or has Lionel Messi won?", choices: ["8","7","6","9"], correct: 0 },
+  { question: "How many Ballon d'Or has Cristiano Ronaldo won?", choices: ["5","6","4","7"], correct: 0 },
+  { question: "What clubs has Messi played for?", choices: ["Barcelona, PSG, Inter Miami","Just Barcelona","Multiple","Just two"], correct: 2 },
+  { question: "What clubs has Ronaldo played for?", choices: ["Sporting, Man United, Real Madrid, Juventus, Man United again, Al-Nassr","Just MUFC and RM","Multiple","Just Real"], correct: 2 },
+  { question: "In what year did Messi win the World Cup?", choices: ["2022","2018","2014","2010"], correct: 0 },
+  { question: "What country does Messi play for?", choices: ["Argentina","Brazil","Spain","Just Argentina"], correct: 2 },
+  { question: "What country does Ronaldo play for?", choices: ["Portugal","Spain","Brazil","Just Portugal"], correct: 2 },
+  { question: "Who scored 5 World Cup-winning goals in one tournament for Brazil 1970?", choices: ["Pele","Various","Both","Just Pele"], correct: 2 },
+  { question: "Who's Johan Cruyff?", choices: ["Dutch legend","Just Dutch","Both","Coach also"], correct: 2 },
+  { question: "What's the Cruyff Turn?", choices: ["Famous dribbling move","Just turn","Both","Skill"], correct: 2 },
+  { question: "Who's Zinedine Zidane?", choices: ["French legend","Just French","Both","Coach also"], correct: 2 },
+  { question: "What did Zidane famously do in 2006 World Cup final?", choices: ["Headbutt Materazzi","Score winner","Both happened in his final tournament","Just headbutt"], correct: 0 },
+  { question: "What country won 2014 World Cup?", choices: ["Germany","Brazil","Argentina","Spain"], correct: 0 },
+  { question: "What country won 2018 World Cup?", choices: ["France","Croatia","Belgium","Brazil"], correct: 0 },
+  { question: "What country won 2022 World Cup?", choices: ["Argentina","France","Brazil","Croatia"], correct: 0 },
+  { question: "Who's the all-time top World Cup scorer?", choices: ["Miroslav Klose","Ronaldo (Brazilian)","Both close","Just Klose"], correct: 0 },
+  { question: "How many World Cup goals does Klose have?", choices: ["16","15","17","14"], correct: 0 },
+  { question: "What's the world's most-watched sport tournament?", choices: ["FIFA World Cup","Olympics","Both global","Just WC"], correct: 2 },
+  { question: "How often is the World Cup held?", choices: ["Every 4 years","Every 2 years","Every year","Every 5 years"], correct: 0 },
+  { question: "Who's known as El Diego?", choices: ["Maradona","Just Maradona","Both","Diego Forlan"], correct: 0 },
+  { question: "What position did Pele play primarily?", choices: ["Forward","Midfielder","Both","Just forward"], correct: 2 },
+  { question: "What's the highest-scoring soccer game?", choices: ["Various lopsided matches","Just records","Both","Many"], correct: 0 },
+  { question: "What club is Ronaldo most identified with?", choices: ["Real Madrid","Manchester United","Both","Just Real"], correct: 2 },
+  { question: "What club is Messi most identified with?", choices: ["Barcelona","PSG","Both","Just Barca"], correct: 2 },
+  { question: "What's UEFA Champions League?", choices: ["Top European club competition","Just league","Both","Just continental"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SoccerStarsQuizSettings): SoccerStarsQuizState {

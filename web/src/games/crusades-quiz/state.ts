@@ -4,126 +4,36 @@ export interface CrusadesQuizSettings { questions: "10" | "20" | "30"; }
 export interface CrusadesQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type CrusadesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "First Crusade was called by?",
-    "choices": [
-      "Pope Urban II",
-      "Pope Innocent III",
-      "Pope Gregory VII",
-      "Pope Leo IX"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First Crusade year?",
-    "choices": [
-      "1054",
-      "1066",
-      "1095",
-      "1099"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Jerusalem captured by Crusaders in?",
-    "choices": [
-      "1095",
-      "1099",
-      "1187",
-      "1204"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Saladin retook Jerusalem in?",
-    "choices": [
-      "1099",
-      "1187",
-      "1192",
-      "1204"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Third Crusade leader?",
-    "choices": [
-      "Frederick I",
-      "Richard I",
-      "Saladin",
-      "All three"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Fourth Crusade infamously sacked?",
-    "choices": [
-      "Cairo",
-      "Constantinople",
-      "Damascus",
-      "Antioch"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Knights Templar founded in?",
-    "choices": [
-      "1099",
-      "1119",
-      "1187",
-      "1200"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Children's Crusade was in?",
-    "choices": [
-      "1095",
-      "1212",
-      "1244",
-      "1291"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Acre fell in?",
-    "choices": [
-      "1187",
-      "1191",
-      "1244",
-      "1291"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Albigensian Crusade targeted?",
-    "choices": [
-      "Muslims",
-      "Jews",
-      "Cathars",
-      "Mongols"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Krak des Chevaliers was a?",
-    "choices": [
-      "City",
-      "Castle",
-      "Battle",
-      "Treaty"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Saladin was leader of?",
-    "choices": [
-      "Seljuks",
-      "Ayyubids",
-      "Mamluks",
-      "Ottomans"
-    ],
-    "correct": 1
-  }
+  { question: "Who called the First Crusade in 1095?", choices: ["Pope Gregory VII","Pope Urban II","Pope Innocent III","Pope Clement III"], correct: 1 },
+  { question: "At what council was the First Crusade preached?", choices: ["Nicaea","Clermont","Lateran","Trent"], correct: 1 },
+  { question: "What city was the main goal of the First Crusade?", choices: ["Constantinople","Jerusalem","Antioch","Damascus"], correct: 1 },
+  { question: "In what year was Jerusalem captured by the First Crusade?", choices: ["1095","1099","1187","1204"], correct: 1 },
+  { question: "Who was the first ruler of Jerusalem after the conquest?", choices: ["Godfrey of Bouillon","Bohemond","Raymond IV","Baldwin I"], correct: 0 },
+  { question: "What Muslim leader recaptured Jerusalem in 1187?", choices: ["Saladin","Baybars","Suleyman","Nur al-Din"], correct: 0 },
+  { question: "What 1187 battle preceded Saladin's capture of Jerusalem?", choices: ["Hattin","Acre","Arsuf","Jaffa"], correct: 0 },
+  { question: "Who led the Third Crusade for England?", choices: ["Henry II","Richard the Lionheart","King John","Edward I"], correct: 1 },
+  { question: "Who was the King of France during the Third Crusade?", choices: ["Philip II Augustus","Louis IX","Louis VII","Charles V"], correct: 0 },
+  { question: "What Holy Roman Emperor drowned during the Third Crusade?", choices: ["Frederick I Barbarossa","Frederick II","Henry VI","Otto IV"], correct: 0 },
+  { question: "What city did the Fourth Crusade infamously sack in 1204?", choices: ["Antioch","Jerusalem","Constantinople","Damascus"], correct: 2 },
+  { question: "How many major Crusades are typically counted?", choices: ["5","7","9","12"], correct: 2 },
+  { question: "What knightly order began as protectors of pilgrims?", choices: ["Templars","Hospitallers","Teutonic Knights","All did"], correct: 3 },
+  { question: "What 1212 movement attempted to take the Holy Land?", choices: ["Children's Crusade","Peasants' Crusade","Shepherds' Crusade","Albigensian Crusade"], correct: 0 },
+  { question: "What Crusade went against Cathars in southern France?", choices: ["Albigensian","Wendish","Northern","Reconquista"], correct: 0 },
+  { question: "What French king led the Seventh Crusade?", choices: ["Philip Augustus","Louis IX","Charles V","Philip IV"], correct: 1 },
+  { question: "What Egyptian dynasty ruled when Crusaders attacked Egypt?", choices: ["Fatimid then Ayyubid","Mamluk","Both at different times","Abbasid"], correct: 2 },
+  { question: "What 1291 city's fall ended Crusader presence in Holy Land?", choices: ["Acre","Tripoli","Tyre","Antioch"], correct: 0 },
+  { question: "What is the Latin name for the Crusader states?", choices: ["Outremer","Levante","Latinopolis","Latin Kingdom"], correct: 0 },
+  { question: "What cross symbol did Crusaders wear?", choices: ["Latin cross","Maltese cross","Cross of Lorraine","Various forms"], correct: 3 },
+  { question: "What was the People's Crusade?", choices: ["A peasant army that preceded the First Crusade","A 14th-century event","A campaign in Spain","A folkloric tale"], correct: 0 },
+  { question: "What Italian city-state ferried the Fourth Crusade?", choices: ["Venice","Genoa","Pisa","Naples"], correct: 0 },
+  { question: "What was Saladin's actual name?", choices: ["Yusuf ibn Ayyub","Hassan ibn Ali","Khalid","Mahmud"], correct: 0 },
+  { question: "What Muslim dynasty did Saladin found?", choices: ["Ayyubid","Fatimid","Abbasid","Seljuk"], correct: 0 },
+  { question: "What 1192 treaty granted pilgrim access to Jerusalem after the Third Crusade?", choices: ["Treaty of Ramla","Treaty of Jaffa","Treaty of Acre","Truce of God"], correct: 1 },
+  { question: "What was the chief weapon of medieval knights?", choices: ["Lance","Sword","Mace","All used"], correct: 3 },
+  { question: "What seafaring republic competed with Venice during the era?", choices: ["Genoa","Pisa","Both","Florence"], correct: 2 },
+  { question: "What Christian power led the Fifth Crusade?", choices: ["Hungary","Holy Roman Empire","Both","Papal states"], correct: 2 },
+  { question: "What Mamluk leader expelled the Crusaders?", choices: ["Baybars and others","Saladin","Suleyman","Mehmed II"], correct: 0 },
+  { question: "What was the Latin Empire of Constantinople?", choices: ["A Crusader state replacing Byzantium","Byzantine territory","An Italian colony","A papal state"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CrusadesQuizSettings): CrusadesQuizState {

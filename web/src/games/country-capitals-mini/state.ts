@@ -4,246 +4,36 @@ export interface CountryCapitalsMiniSettings { questions: "10" | "20"; }
 export interface CountryCapitalsMiniState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type CountryCapitalsMiniAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Capital of France?",
-    "choices": [
-      "Lyon",
-      "Paris",
-      "Marseille",
-      "Nice"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Germany?",
-    "choices": [
-      "Munich",
-      "Hamburg",
-      "Berlin",
-      "Frankfurt"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Italy?",
-    "choices": [
-      "Milan",
-      "Rome",
-      "Naples",
-      "Florence"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Spain?",
-    "choices": [
-      "Barcelona",
-      "Seville",
-      "Madrid",
-      "Valencia"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Japan?",
-    "choices": [
-      "Osaka",
-      "Kyoto",
-      "Tokyo",
-      "Yokohama"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of China?",
-    "choices": [
-      "Shanghai",
-      "Beijing",
-      "Hong Kong",
-      "Guangzhou"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of India?",
-    "choices": [
-      "Mumbai",
-      "Kolkata",
-      "New Delhi",
-      "Bangalore"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Brazil?",
-    "choices": [
-      "Rio de Janeiro",
-      "S\u00e3o Paulo",
-      "Bras\u00edlia",
-      "Salvador"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Australia?",
-    "choices": [
-      "Sydney",
-      "Melbourne",
-      "Brisbane",
-      "Canberra"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Capital of Canada?",
-    "choices": [
-      "Toronto",
-      "Vancouver",
-      "Montreal",
-      "Ottawa"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Capital of Egypt?",
-    "choices": [
-      "Alexandria",
-      "Cairo",
-      "Giza",
-      "Luxor"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of South Africa (executive)?",
-    "choices": [
-      "Cape Town",
-      "Johannesburg",
-      "Pretoria",
-      "Durban"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Russia?",
-    "choices": [
-      "St Petersburg",
-      "Moscow",
-      "Kazan",
-      "Sochi"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of South Korea?",
-    "choices": [
-      "Busan",
-      "Seoul",
-      "Incheon",
-      "Daegu"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Mexico?",
-    "choices": [
-      "Guadalajara",
-      "Mexico City",
-      "Monterrey",
-      "Puebla"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Argentina?",
-    "choices": [
-      "C\u00f3rdoba",
-      "Buenos Aires",
-      "Mendoza",
-      "Rosario"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Turkey?",
-    "choices": [
-      "Istanbul",
-      "Ankara",
-      "Izmir",
-      "Bursa"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Greece?",
-    "choices": [
-      "Thessaloniki",
-      "Athens",
-      "Sparta",
-      "Patras"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Portugal?",
-    "choices": [
-      "Porto",
-      "Lisbon",
-      "Faro",
-      "Coimbra"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Netherlands?",
-    "choices": [
-      "Rotterdam",
-      "Amsterdam",
-      "The Hague",
-      "Utrecht"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Sweden?",
-    "choices": [
-      "Gothenburg",
-      "Stockholm",
-      "Malm\u00f6",
-      "Uppsala"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Norway?",
-    "choices": [
-      "Bergen",
-      "Oslo",
-      "Trondheim",
-      "Stavanger"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Thailand?",
-    "choices": [
-      "Phuket",
-      "Bangkok",
-      "Chiang Mai",
-      "Pattaya"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Vietnam?",
-    "choices": [
-      "Ho Chi Minh City",
-      "Hanoi",
-      "Da Nang",
-      "Hue"
-    ],
-    "correct": 1
-  }
+  { question: "Capital of France?", choices: ["Lyon","Paris","Marseille","Nice"], correct: 1 },
+  { question: "Capital of Japan?", choices: ["Osaka","Kyoto","Tokyo","Sapporo"], correct: 2 },
+  { question: "Capital of Germany?", choices: ["Munich","Berlin","Hamburg","Cologne"], correct: 1 },
+  { question: "Capital of Italy?", choices: ["Milan","Rome","Naples","Florence"], correct: 1 },
+  { question: "Capital of Spain?", choices: ["Barcelona","Madrid","Seville","Valencia"], correct: 1 },
+  { question: "Capital of UK?", choices: ["Manchester","London","Birmingham","Liverpool"], correct: 1 },
+  { question: "Capital of Russia?", choices: ["St. Petersburg","Moscow","Kazan","Sochi"], correct: 1 },
+  { question: "Capital of China?", choices: ["Shanghai","Beijing","Hong Kong","Guangzhou"], correct: 1 },
+  { question: "Capital of India?", choices: ["Mumbai","New Delhi","Kolkata","Chennai"], correct: 1 },
+  { question: "Capital of Australia?", choices: ["Sydney","Canberra","Melbourne","Perth"], correct: 1 },
+  { question: "Capital of Canada?", choices: ["Toronto","Ottawa","Montreal","Vancouver"], correct: 1 },
+  { question: "Capital of Mexico?", choices: ["Guadalajara","Mexico City","Monterrey","Cancun"], correct: 1 },
+  { question: "Capital of Brazil?", choices: ["Sao Paulo","Brasilia","Rio de Janeiro","Salvador"], correct: 1 },
+  { question: "Capital of Argentina?", choices: ["Cordoba","Buenos Aires","Rosario","Mendoza"], correct: 1 },
+  { question: "Capital of Egypt?", choices: ["Alexandria","Cairo","Giza","Luxor"], correct: 1 },
+  { question: "Capital of South Africa (administrative)?", choices: ["Johannesburg","Pretoria","Cape Town","Durban"], correct: 1 },
+  { question: "Capital of South Korea?", choices: ["Busan","Seoul","Incheon","Daegu"], correct: 1 },
+  { question: "Capital of Thailand?", choices: ["Bangkok","Chiang Mai","Phuket","Pattaya"], correct: 0 },
+  { question: "Capital of Vietnam?", choices: ["Ho Chi Minh","Hanoi","Hue","Da Nang"], correct: 1 },
+  { question: "Capital of Indonesia?", choices: ["Jakarta","Surabaya","Bandung","Bali"], correct: 0 },
+  { question: "Capital of Greece?", choices: ["Thessaloniki","Athens","Patras","Crete"], correct: 1 },
+  { question: "Capital of Turkey?", choices: ["Istanbul","Ankara","Izmir","Bursa"], correct: 1 },
+  { question: "Capital of Saudi Arabia?", choices: ["Mecca","Riyadh","Jeddah","Medina"], correct: 1 },
+  { question: "Capital of Iran?", choices: ["Tehran","Isfahan","Shiraz","Tabriz"], correct: 0 },
+  { question: "Capital of Pakistan?", choices: ["Karachi","Lahore","Islamabad","Peshawar"], correct: 2 },
+  { question: "Capital of Norway?", choices: ["Oslo","Bergen","Trondheim","Stavanger"], correct: 0 },
+  { question: "Capital of Sweden?", choices: ["Gothenburg","Stockholm","Malmo","Uppsala"], correct: 1 },
+  { question: "Capital of Portugal?", choices: ["Porto","Lisbon","Faro","Coimbra"], correct: 1 },
+  { question: "Capital of Netherlands?", choices: ["Rotterdam","The Hague","Amsterdam","Utrecht"], correct: 2 },
+  { question: "Capital of New Zealand?", choices: ["Auckland","Wellington","Christchurch","Hamilton"], correct: 1 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CountryCapitalsMiniSettings): CountryCapitalsMiniState {

@@ -4,306 +4,36 @@ export interface WesternPhilosophyQuizSettings { questions: "10" | "20" | "30"; 
 export interface WesternPhilosophyQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type WesternPhilosophyQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who wrote 'The Republic'?",
-    "choices": [
-      "Plato",
-      "Aristotle",
-      "Socrates",
-      "Cicero"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who taught Plato?",
-    "choices": [
-      "Aristotle",
-      "Pythagoras",
-      "Socrates",
-      "Heraclitus"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who taught Aristotle?",
-    "choices": [
-      "Plato",
-      "Socrates",
-      "Diogenes",
-      "Epicurus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who wrote 'Meditations'?",
-    "choices": [
-      "Marcus Aurelius",
-      "Cicero",
-      "Seneca",
-      "Epictetus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "'I think, therefore I am' was said by?",
-    "choices": [
-      "Hume",
-      "Locke",
-      "Descartes",
-      "Kant"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who wrote 'Critique of Pure Reason'?",
-    "choices": [
-      "Hegel",
-      "Kant",
-      "Schopenhauer",
-      "Wittgenstein"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who wrote 'Thus Spoke Zarathustra'?",
-    "choices": [
-      "Marx",
-      "Nietzsche",
-      "Freud",
-      "Heidegger"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who founded modern empiricism with 'An Essay Concerning Human Understanding'?",
-    "choices": [
-      "Locke",
-      "Hobbes",
-      "Berkeley",
-      "Hume"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who wrote 'A Treatise of Human Nature'?",
-    "choices": [
-      "Hume",
-      "Locke",
-      "Berkeley",
-      "Mill"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who wrote 'Leviathan'?",
-    "choices": [
-      "Locke",
-      "Hobbes",
-      "Rousseau",
-      "Spinoza"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who wrote 'The Social Contract'?",
-    "choices": [
-      "Locke",
-      "Hobbes",
-      "Rousseau",
-      "Voltaire"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who wrote 'On Liberty'?",
-    "choices": [
-      "Mill",
-      "Locke",
-      "Bentham",
-      "Kant"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who founded utilitarianism?",
-    "choices": [
-      "Bentham",
-      "Mill",
-      "Sidgwick",
-      "Kant"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who wrote 'Being and Time'?",
-    "choices": [
-      "Sartre",
-      "Heidegger",
-      "Husserl",
-      "Camus"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who wrote 'Being and Nothingness'?",
-    "choices": [
-      "Camus",
-      "Beauvoir",
-      "Sartre",
-      "Marcel"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who wrote 'The Second Sex'?",
-    "choices": [
-      "Beauvoir",
-      "Arendt",
-      "Murdoch",
-      "Anscombe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who founded phenomenology?",
-    "choices": [
-      "Husserl",
-      "Heidegger",
-      "Sartre",
-      "Merleau-Ponty"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who wrote 'Tractatus Logico-Philosophicus'?",
-    "choices": [
-      "Frege",
-      "Russell",
-      "Wittgenstein",
-      "Quine"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who wrote 'A Theory of Justice'?",
-    "choices": [
-      "Nozick",
-      "Rawls",
-      "Rorty",
-      "Sen"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who wrote 'Anarchy, State, and Utopia'?",
-    "choices": [
-      "Nozick",
-      "Rawls",
-      "Hayek",
-      "Friedman"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hegel's philosophical method is often called?",
-    "choices": [
-      "Empirical",
-      "Dialectical",
-      "Pragmatic",
-      "Existential"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Marx is known for which kind of materialism?",
-    "choices": [
-      "Naive",
-      "Historical/dialectical",
-      "Atomic",
-      "Spiritual"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who said 'God is dead'?",
-    "choices": [
-      "Marx",
-      "Nietzsche",
-      "Freud",
-      "Sartre"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who founded Stoicism?",
-    "choices": [
-      "Zeno of Citium",
-      "Epicurus",
-      "Diogenes",
-      "Pyrrho"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who founded Epicureanism?",
-    "choices": [
-      "Zeno",
-      "Epicurus",
-      "Plotinus",
-      "Pyrrho"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Plotinus is the central figure of?",
-    "choices": [
-      "Stoicism",
-      "Skepticism",
-      "Neoplatonism",
-      "Cynicism"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "St. Augustine wrote?",
-    "choices": [
-      "Confessions",
-      "Summa Theologica",
-      "Consolation of Philosophy",
-      "City of Heaven"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Aquinas wrote?",
-    "choices": [
-      "Confessions",
-      "Summa Theologica",
-      "Discourse on Method",
-      "Ethics"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Spinoza's major work is?",
-    "choices": [
-      "Ethics",
-      "Method",
-      "Discourse",
-      "Letters"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pragmatism is associated with which American philosopher?",
-    "choices": [
-      "William James",
-      "Bertrand Russell",
-      "A.J. Ayer",
-      "Quine"
-    ],
-    "correct": 0
-  }
+  { question: "Who's known as the father of Western philosophy?", choices: ["Socrates","Plato","Aristotle","Thales"], correct: 0 },
+  { question: "Who taught Plato?", choices: ["Socrates","Aristotle","Both","Just Socrates"], correct: 0 },
+  { question: "Who taught Aristotle?", choices: ["Plato","Socrates","Both","Just Plato"], correct: 0 },
+  { question: "Who did Aristotle famously tutor?", choices: ["Alexander the Great","Plato","Just Alexander","Both"], correct: 0 },
+  { question: "What's Plato's most famous work?", choices: ["The Republic","Apology","Both major","Phaedo"], correct: 2 },
+  { question: "What's Aristotle's logical work?", choices: ["Organon","Metaphysics","Politics","Ethics"], correct: 0 },
+  { question: "What's the Allegory of the Cave from?", choices: ["Plato's Republic","Aristotle","Both","Just Plato"], correct: 0 },
+  { question: "What did Socrates famously say about wisdom?", choices: ["I know that I know nothing","Know thyself","Both attributed","Just first"], correct: 2 },
+  { question: "How did Socrates die?", choices: ["Hemlock execution by Athens","Battle","Old age","Sickness"], correct: 0 },
+  { question: "What's Stoicism's main teaching?", choices: ["Virtue, accept what cannot change","Just acceptance","Both","Just virtue"], correct: 2 },
+  { question: "Who was Marcus Aurelius?", choices: ["Roman emperor and Stoic philosopher","Just emperor","Both","Just philosopher"], correct: 2 },
+  { question: "What's Marcus Aurelius's book?", choices: ["Meditations","Stoic philosophy","Both","Just title"], correct: 0 },
+  { question: "Who wrote Confessions?", choices: ["Augustine","Aquinas","Both","Just Augustine"], correct: 0 },
+  { question: "Who wrote Summa Theologica?", choices: ["Aquinas","Augustine","Both","Just Aquinas"], correct: 0 },
+  { question: "Who said 'I think therefore I am'?", choices: ["Descartes","Kant","Hume","Locke"], correct: 0 },
+  { question: "What's Descartes's Latin phrase?", choices: ["Cogito ergo sum","Just Cogito","Both","Just sum"], correct: 2 },
+  { question: "Who wrote Leviathan?", choices: ["Thomas Hobbes","John Locke","Rousseau","Both"], correct: 0 },
+  { question: "Who wrote Two Treatises of Government?", choices: ["John Locke","Hobbes","Rousseau","Mill"], correct: 0 },
+  { question: "Who wrote The Social Contract?", choices: ["Rousseau","Locke","Hobbes","Mill"], correct: 0 },
+  { question: "Who wrote Critique of Pure Reason?", choices: ["Kant","Hegel","Hume","Schopenhauer"], correct: 0 },
+  { question: "What's Kant's categorical imperative?", choices: ["Act so action could be universal law","Just duty","Both","Just rule"], correct: 2 },
+  { question: "Who wrote The Phenomenology of Spirit?", choices: ["Hegel","Kant","Schopenhauer","Marx"], correct: 0 },
+  { question: "Who said 'God is dead'?", choices: ["Nietzsche","Hegel","Kierkegaard","Sartre"], correct: 0 },
+  { question: "Who wrote Thus Spoke Zarathustra?", choices: ["Nietzsche","Heidegger","Sartre","Both"], correct: 0 },
+  { question: "Who wrote Being and Time?", choices: ["Heidegger","Sartre","Nietzsche","Husserl"], correct: 0 },
+  { question: "Who's the founder of phenomenology?", choices: ["Husserl","Heidegger","Sartre","All related"], correct: 0 },
+  { question: "Who wrote Being and Nothingness?", choices: ["Sartre","Heidegger","Camus","Both Sartre"], correct: 0 },
+  { question: "Who's the existentialist that wrote The Stranger?", choices: ["Camus","Sartre","Both existentialists","Just Camus"], correct: 0 },
+  { question: "Who founded utilitarianism formally?", choices: ["Jeremy Bentham","JS Mill","Both","Just Mill"], correct: 0 },
+  { question: "Who wrote On Liberty?", choices: ["JS Mill","Bentham","Both","Just Mill"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: WesternPhilosophyQuizSettings): WesternPhilosophyQuizState {

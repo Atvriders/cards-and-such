@@ -4,306 +4,36 @@ export interface MlbLegendsQuizSettings { questions: "10" | "20" | "30"; }
 export interface MlbLegendsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type MlbLegendsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who is the MLB career home run leader?",
-    "choices": [
-      "Babe Ruth",
-      "Hank Aaron",
-      "Barry Bonds",
-      "Albert Pujols"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who held the career home run record for decades after Ruth?",
-    "choices": [
-      "Hank Aaron",
-      "Willie Mays",
-      "Mickey Mantle",
-      "Sammy Sosa"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Babe Ruth's nickname?",
-    "choices": [
-      "The Bambino",
-      "The Splendid Splinter",
-      "The Iron Horse",
-      "The Yankee Clipper"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the 'Yankee Clipper'?",
-    "choices": [
-      "Babe Ruth",
-      "Joe DiMaggio",
-      "Lou Gehrig",
-      "Mickey Mantle"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lou Gehrig's nickname?",
-    "choices": [
-      "The Iron Horse",
-      "The Splendid Splinter",
-      "The Mick",
-      "The Big Train"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ted Williams's nickname?",
-    "choices": [
-      "The Splendid Splinter",
-      "The Iron Horse",
-      "Mr. October",
-      "The Kid (also)"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Reggie Jackson is famously?",
-    "choices": [
-      "Mr. October",
-      "The Iron Horse",
-      "The Big Hurt",
-      "The Hammer"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hank Aaron's nickname?",
-    "choices": [
-      "The Hammer",
-      "The Bambino",
-      "The Mick",
-      "Charlie Hustle"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pete Rose is nicknamed?",
-    "choices": [
-      "Charlie Hustle",
-      "The Stinger",
-      "The Blade",
-      "Joltin' Joe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who said 'Say hey'? (Hint: famous Giants outfielder)",
-    "choices": [
-      "Willie Mays",
-      "Hank Aaron",
-      "Mickey Mantle",
-      "Joe DiMaggio"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mike Trout plays for?",
-    "choices": [
-      "Angels",
-      "Yankees",
-      "Dodgers",
-      "Astros"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Derek Jeter played his career for?",
-    "choices": [
-      "Yankees",
-      "Red Sox",
-      "Marlins",
-      "Mets"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many career hits does Pete Rose have (record)?",
-    "choices": [
-      "3,000",
-      "3,500",
-      "4,256",
-      "4,500"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Cy Young's career win total?",
-    "choices": [
-      "511",
-      "500",
-      "450",
-      "400"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who broke the color barrier in 1947?",
-    "choices": [
-      "Jackie Robinson",
-      "Larry Doby",
-      "Roy Campanella",
-      "Hank Thompson"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Jackie Robinson played for?",
-    "choices": [
-      "Dodgers",
-      "Giants",
-      "Cardinals",
-      "Yankees"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sandy Koufax played for?",
-    "choices": [
-      "Dodgers",
-      "Giants",
-      "Pirates",
-      "Reds"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Nolan Ryan holds the career strikeouts record at?",
-    "choices": [
-      "5,714",
-      "6,000",
-      "5,000",
-      "4,500"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cal Ripken Jr.'s consecutive games played streak?",
-    "choices": [
-      "2,632",
-      "2,000",
-      "1,500",
-      "3,000"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who hit 73 home runs in 2001?",
-    "choices": [
-      "Mark McGwire",
-      "Sammy Sosa",
-      "Barry Bonds",
-      "Albert Pujols"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who hit 70 in 1998?",
-    "choices": [
-      "Mark McGwire",
-      "Sammy Sosa",
-      "Barry Bonds",
-      "Ken Griffey Jr."
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ken Griffey Jr. was known for?",
-    "choices": [
-      "Sweet swing",
-      "Long beard",
-      "Submarine pitches",
-      "Knuckleball"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Greg Maddux played mostly for?",
-    "choices": [
-      "Braves and Cubs",
-      "Yankees",
-      "Red Sox",
-      "Astros"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tom Seaver is associated with?",
-    "choices": [
-      "Mets",
-      "Yankees",
-      "Cubs",
-      "Red Sox"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mariano Rivera was known as?",
-    "choices": [
-      "Greatest closer ever",
-      "Greatest starter ever",
-      "Greatest hitter ever",
-      "Greatest CF ever"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Albert Pujols played most of his career for?",
-    "choices": [
-      "Cardinals",
-      "Angels",
-      "Dodgers",
-      "Marlins"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ichiro Suzuki primarily played for?",
-    "choices": [
-      "Mariners",
-      "Marlins",
-      "Yankees",
-      "All three (yes, but mostly Mariners)"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Roberto Clemente played for?",
-    "choices": [
-      "Pirates",
-      "Cubs",
-      "Cardinals",
-      "Reds"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Stan Musial played for?",
-    "choices": [
-      "Cardinals",
-      "Cubs",
-      "Pirates",
-      "Reds"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Yogi Berra was a famous?",
-    "choices": [
-      "Catcher",
-      "Pitcher",
-      "Outfielder",
-      "Shortstop"
-    ],
-    "correct": 0
-  }
+  { question: "Who's the all-time MLB home run leader?", choices: ["Barry Bonds (762)","Hank Aaron","Babe Ruth","Albert Pujols"], correct: 0 },
+  { question: "Who held the record before Barry Bonds?", choices: ["Hank Aaron (755)","Babe Ruth","Just Aaron","Both"], correct: 0 },
+  { question: "Who held the record before Hank Aaron?", choices: ["Babe Ruth (714)","Just Ruth","Both","Maris"], correct: 0 },
+  { question: "Who's the MLB single-season HR record holder?", choices: ["Barry Bonds (73)","Mark McGwire (70)","Aaron Judge (62 AL)","Bonds"], correct: 0 },
+  { question: "Who's known as the Sultan of Swat?", choices: ["Babe Ruth","Just Ruth","Both","DiMaggio"], correct: 2 },
+  { question: "What team is most associated with Babe Ruth?", choices: ["Yankees","Red Sox","Both teams","Just Yankees"], correct: 2 },
+  { question: "How many World Series titles do the Yankees have?", choices: ["27","30","25","23"], correct: 0 },
+  { question: "Who's known as Mr. October?", choices: ["Reggie Jackson","Just Reggie","Both","Berra"], correct: 2 },
+  { question: "Who broke the color barrier in baseball?", choices: ["Jackie Robinson","Larry Doby (AL)","Both","Just Jackie in NL"], correct: 2 },
+  { question: "In what year did Jackie Robinson debut?", choices: ["1947","1942","1950","1937"], correct: 0 },
+  { question: "Who's the all-time hits leader?", choices: ["Pete Rose (4,256)","Ty Cobb","Just Rose","Both"], correct: 0 },
+  { question: "Who has the most career strikeouts as pitcher?", choices: ["Nolan Ryan","Randy Johnson","Just Ryan","Both"], correct: 2 },
+  { question: "How many no-hitters did Nolan Ryan throw?", choices: ["7","6","5","8"], correct: 0 },
+  { question: "Who's known as the Iron Horse?", choices: ["Lou Gehrig","Cal Ripken Jr","Just Gehrig","Both"], correct: 0 },
+  { question: "Who's known as Iron Man (consecutive games)?", choices: ["Cal Ripken Jr","Lou Gehrig","Both","Different terms"], correct: 2 },
+  { question: "How many consecutive games did Cal Ripken play?", choices: ["2,632","2,500","2,800","2,200"], correct: 0 },
+  { question: "Whose record did Cal Ripken break?", choices: ["Lou Gehrig's","Babe Ruth's","Joe DiMaggio's","Just Gehrig"], correct: 2 },
+  { question: "What's Joe DiMaggio's famous streak?", choices: ["56-game hitting streak","Just streak","Both","Records"], correct: 2 },
+  { question: "Who's known as the Splendid Splinter?", choices: ["Ted Williams","Joe DiMaggio","Just Williams","Both"], correct: 0 },
+  { question: "Who's the last MLB hitter to hit .400?", choices: ["Ted Williams (1941)","Just Williams","Both","DiMaggio"], correct: 2 },
+  { question: "Who's known as Mr. Cub?", choices: ["Ernie Banks","Sammy Sosa","Just Banks","Both"], correct: 0 },
+  { question: "Who's known as the Say Hey Kid?", choices: ["Willie Mays","Just Mays","Both","Hank Aaron"], correct: 2 },
+  { question: "Who made the famous over-the-shoulder catch in 1954 World Series?", choices: ["Willie Mays","Just Mays","Both","DiMaggio"], correct: 2 },
+  { question: "Who's the all-time RBI leader?", choices: ["Hank Aaron","Albert Pujols","Babe Ruth","Just Aaron"], correct: 0 },
+  { question: "Who's the all-time pitcher wins leader?", choices: ["Cy Young (511)","Just Cy Young","Both","Walter Johnson"], correct: 0 },
+  { question: "What award is named for Cy Young?", choices: ["Pitcher of the year award","Just Cy Young","Both","Pitching honor"], correct: 2 },
+  { question: "Who's known as the Big Unit?", choices: ["Randy Johnson","Just Randy Johnson","Both","Roger Clemens"], correct: 0 },
+  { question: "Who's the Greek God of Walks?", choices: ["Kevin Youkilis","Joey Votto","Just Youk (per Moneyball)","Both"], correct: 2 },
+  { question: "Who's the MLB stolen base leader?", choices: ["Rickey Henderson","Just Rickey","Both","Lou Brock"], correct: 0 },
+  { question: "Who's the modern triple-crown winner (2012)?", choices: ["Miguel Cabrera","Mike Trout","Just Cabrera","Both"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MlbLegendsQuizSettings): MlbLegendsQuizState {

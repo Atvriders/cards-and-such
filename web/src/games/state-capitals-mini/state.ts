@@ -4,246 +4,36 @@ export interface StateCapitalsMiniSettings { questions: "10" | "20"; }
 export interface StateCapitalsMiniState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type StateCapitalsMiniAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Capital of California?",
-    "choices": [
-      "Los Angeles",
-      "Sacramento",
-      "San Francisco",
-      "San Diego"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Texas?",
-    "choices": [
-      "Houston",
-      "Dallas",
-      "Austin",
-      "San Antonio"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Florida?",
-    "choices": [
-      "Miami",
-      "Orlando",
-      "Tallahassee",
-      "Tampa"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of New York?",
-    "choices": [
-      "New York City",
-      "Albany",
-      "Buffalo",
-      "Rochester"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Illinois?",
-    "choices": [
-      "Chicago",
-      "Peoria",
-      "Springfield",
-      "Rockford"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Arizona?",
-    "choices": [
-      "Phoenix",
-      "Tucson",
-      "Mesa",
-      "Flagstaff"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Capital of Washington?",
-    "choices": [
-      "Seattle",
-      "Spokane",
-      "Tacoma",
-      "Olympia"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Capital of Massachusetts?",
-    "choices": [
-      "Worcester",
-      "Boston",
-      "Cambridge",
-      "Springfield"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Pennsylvania?",
-    "choices": [
-      "Philadelphia",
-      "Pittsburgh",
-      "Harrisburg",
-      "Erie"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Ohio?",
-    "choices": [
-      "Cleveland",
-      "Cincinnati",
-      "Columbus",
-      "Toledo"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Georgia?",
-    "choices": [
-      "Savannah",
-      "Atlanta",
-      "Augusta",
-      "Macon"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of North Carolina?",
-    "choices": [
-      "Charlotte",
-      "Raleigh",
-      "Durham",
-      "Greensboro"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Michigan?",
-    "choices": [
-      "Detroit",
-      "Lansing",
-      "Grand Rapids",
-      "Ann Arbor"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Virginia?",
-    "choices": [
-      "Richmond",
-      "Norfolk",
-      "Virginia Beach",
-      "Arlington"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Capital of New Jersey?",
-    "choices": [
-      "Newark",
-      "Trenton",
-      "Jersey City",
-      "Atlantic City"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Colorado?",
-    "choices": [
-      "Aurora",
-      "Denver",
-      "Boulder",
-      "Colorado Springs"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Oregon?",
-    "choices": [
-      "Portland",
-      "Eugene",
-      "Salem",
-      "Bend"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Tennessee?",
-    "choices": [
-      "Memphis",
-      "Knoxville",
-      "Nashville",
-      "Chattanooga"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Wisconsin?",
-    "choices": [
-      "Milwaukee",
-      "Madison",
-      "Green Bay",
-      "Kenosha"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Minnesota?",
-    "choices": [
-      "Minneapolis",
-      "Duluth",
-      "Saint Paul",
-      "Rochester"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Hawaii?",
-    "choices": [
-      "Hilo",
-      "Honolulu",
-      "Kailua",
-      "Kahului"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of Alaska?",
-    "choices": [
-      "Anchorage",
-      "Fairbanks",
-      "Juneau",
-      "Sitka"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Capital of Nevada?",
-    "choices": [
-      "Las Vegas",
-      "Reno",
-      "Henderson",
-      "Carson City"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Capital of Kentucky?",
-    "choices": [
-      "Louisville",
-      "Lexington",
-      "Frankfort",
-      "Bowling Green"
-    ],
-    "correct": 2
-  }
+  { question: "What is the capital of California?", choices: ["Los Angeles","San Francisco","Sacramento","San Diego"], correct: 2 },
+  { question: "What is the capital of Texas?", choices: ["Houston","Dallas","Austin","San Antonio"], correct: 2 },
+  { question: "What is the capital of New York state?", choices: ["New York City","Albany","Buffalo","Rochester"], correct: 1 },
+  { question: "What is the capital of Florida?", choices: ["Miami","Orlando","Tampa","Tallahassee"], correct: 3 },
+  { question: "What is the capital of Illinois?", choices: ["Chicago","Springfield","Peoria","Rockford"], correct: 1 },
+  { question: "What is the capital of Pennsylvania?", choices: ["Philadelphia","Pittsburgh","Harrisburg","Erie"], correct: 2 },
+  { question: "What is the capital of Ohio?", choices: ["Cleveland","Cincinnati","Columbus","Toledo"], correct: 2 },
+  { question: "What is the capital of Michigan?", choices: ["Detroit","Lansing","Grand Rapids","Ann Arbor"], correct: 1 },
+  { question: "What is the capital of Georgia?", choices: ["Savannah","Atlanta","Augusta","Macon"], correct: 1 },
+  { question: "What is the capital of North Carolina?", choices: ["Charlotte","Raleigh","Greensboro","Asheville"], correct: 1 },
+  { question: "What is the capital of Massachusetts?", choices: ["Worcester","Boston","Springfield","Cambridge"], correct: 1 },
+  { question: "What is the capital of Washington state?", choices: ["Seattle","Spokane","Tacoma","Olympia"], correct: 3 },
+  { question: "What is the capital of Oregon?", choices: ["Portland","Salem","Eugene","Bend"], correct: 1 },
+  { question: "What is the capital of Arizona?", choices: ["Tucson","Phoenix","Mesa","Flagstaff"], correct: 1 },
+  { question: "What is the capital of Colorado?", choices: ["Boulder","Denver","Colorado Springs","Aspen"], correct: 1 },
+  { question: "What is the capital of Wisconsin?", choices: ["Milwaukee","Madison","Green Bay","Eau Claire"], correct: 1 },
+  { question: "What is the capital of Minnesota?", choices: ["Minneapolis","St. Paul","Duluth","Rochester"], correct: 1 },
+  { question: "What is the capital of Tennessee?", choices: ["Memphis","Knoxville","Nashville","Chattanooga"], correct: 2 },
+  { question: "What is the capital of Missouri?", choices: ["St. Louis","Kansas City","Jefferson City","Springfield"], correct: 2 },
+  { question: "What is the capital of Virginia?", choices: ["Norfolk","Virginia Beach","Richmond","Roanoke"], correct: 2 },
+  { question: "What is the capital of Kentucky?", choices: ["Louisville","Lexington","Frankfort","Bowling Green"], correct: 2 },
+  { question: "What is the capital of Louisiana?", choices: ["New Orleans","Baton Rouge","Shreveport","Lafayette"], correct: 1 },
+  { question: "What is the capital of Alaska?", choices: ["Anchorage","Juneau","Fairbanks","Sitka"], correct: 1 },
+  { question: "What is the capital of Hawaii?", choices: ["Hilo","Honolulu","Kailua","Waikiki"], correct: 1 },
+  { question: "What is the capital of Nevada?", choices: ["Las Vegas","Reno","Carson City","Henderson"], correct: 2 },
+  { question: "What is the capital of Indiana?", choices: ["Indianapolis","Fort Wayne","Evansville","South Bend"], correct: 0 },
+  { question: "What is the capital of Maryland?", choices: ["Baltimore","Annapolis","Frederick","Rockville"], correct: 1 },
+  { question: "What is the capital of New Jersey?", choices: ["Newark","Trenton","Jersey City","Atlantic City"], correct: 1 },
+  { question: "What is the capital of South Carolina?", choices: ["Charleston","Columbia","Greenville","Myrtle Beach"], correct: 1 },
+  { question: "What is the capital of Iowa?", choices: ["Cedar Rapids","Davenport","Des Moines","Iowa City"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: StateCapitalsMiniSettings): StateCapitalsMiniState {

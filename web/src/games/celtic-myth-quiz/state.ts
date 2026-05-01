@@ -4,306 +4,36 @@ export interface CelticMythQuizSettings { questions: "10" | "20" | "30"; }
 export interface CelticMythQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type CelticMythQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who is the Celtic goddess of fire and poetry?",
-    "choices": [
-      "Brigid",
-      "Morrigan",
-      "Danu",
-      "Rhiannon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the horned god of the wild?",
-    "choices": [
-      "Lugh",
-      "Cernunnos",
-      "Dagda",
-      "Manannan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the divine race of Irish myth?",
-    "choices": [
-      "Fomorians",
-      "Tuatha Dé Danann",
-      "Aos Sí",
-      "Milesians"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the Welsh goddess linked to horses and the otherworld?",
-    "choices": [
-      "Arianrhod",
-      "Rhiannon",
-      "Blodeuwedd",
-      "Cerridwen"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the Irish god of the sea?",
-    "choices": [
-      "Lugh",
-      "Manannan mac Lir",
-      "Nuada",
-      "Bran"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the Irish 'Great God' chieftain with a magical cauldron?",
-    "choices": [
-      "Lugh",
-      "Dagda",
-      "Bres",
-      "Ogma"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the name of the cauldron of plenty?",
-    "choices": [
-      "Cauldron of the Dagda",
-      "Cauldron of Cerridwen",
-      "Cauldron of Bran",
-      "Cauldron of Annwn"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the warrior queen and shape-shifting goddess of war?",
-    "choices": [
-      "Brigid",
-      "Morrigan",
-      "Boann",
-      "Macha"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which hero is famous for going mad in battle ('warp spasm')?",
-    "choices": [
-      "Cuchulainn",
-      "Finn",
-      "Bran",
-      "Pwyll"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who leads the Fianna warriors?",
-    "choices": [
-      "Cuchulainn",
-      "Finn mac Cumhaill",
-      "Conchobar",
-      "Lugh"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which youthful master of all crafts is known as 'Long Arm'?",
-    "choices": [
-      "Lugh",
-      "Dagda",
-      "Ogma",
-      "Goibniu"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the Welsh otherworld realm?",
-    "choices": [
-      "Annwn",
-      "Tír na nÓg",
-      "Mag Mell",
-      "Avalon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the Irish 'Land of Youth'?",
-    "choices": [
-      "Annwn",
-      "Tír na nÓg",
-      "Mag Mell",
-      "Hy-Brasil"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is Cuchulainn's invincible spear called?",
-    "choices": [
-      "Gae Bulg",
-      "Fragarach",
-      "Caladbolg",
-      "Brionac"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the king's truth sword Fragarach also called?",
-    "choices": [
-      "The Whisperer",
-      "The Answerer",
-      "The Sun-Sword",
-      "The Truth-Strike"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the Welsh shape-shifting witch with a cauldron of inspiration?",
-    "choices": [
-      "Cerridwen",
-      "Rhiannon",
-      "Branwen",
-      "Modron"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bran the Blessed is a giant king of which Welsh tale collection?",
-    "choices": [
-      "The Dindshenchas",
-      "The Mabinogion",
-      "The Tain",
-      "The Senchas Mar"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the Irish epic about a cattle raid?",
-    "choices": [
-      "Tain Bo Cuailnge",
-      "Fenian Cycle",
-      "Lebor Gabala",
-      "Cath Maige Tuired"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the Celtic god of light and craftsmanship known by the inscription 'Lugus'?",
-    "choices": [
-      "Lugh",
-      "Belenus",
-      "Taranis",
-      "Toutatis"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which festival on May 1 marks summer's start?",
-    "choices": [
-      "Imbolc",
-      "Beltane",
-      "Lughnasadh",
-      "Samhain"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which festival on November 1 honors the dead?",
-    "choices": [
-      "Imbolc",
-      "Beltane",
-      "Lughnasadh",
-      "Samhain"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Imbolc is sacred to which goddess?",
-    "choices": [
-      "Brigid",
-      "Morrigan",
-      "Danu",
-      "Rhiannon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who are the chaotic, often monstrous foes of the Tuatha Dé?",
-    "choices": [
-      "Fomorians",
-      "Milesians",
-      "Fir Bolg",
-      "Sídhe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What are the Irish 'fairy folk' descended from the Tuatha Dé Danann?",
-    "choices": [
-      "Aos Sí",
-      "Pictish",
-      "Galli",
-      "Cruithni"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the divine king of the Tuatha Dé who lost a hand?",
-    "choices": [
-      "Nuada",
-      "Lugh",
-      "Bres",
-      "Dagda"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the Welsh trickster magician of the Mabinogion?",
-    "choices": [
-      "Math",
-      "Gwydion",
-      "Pryderi",
-      "Manawydan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the woman made of flowers in the Mabinogion?",
-    "choices": [
-      "Rhiannon",
-      "Branwen",
-      "Blodeuwedd",
-      "Arianrhod"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What is Avalon known as in Arthurian legend?",
-    "choices": [
-      "Isle of Apples",
-      "Isle of Bards",
-      "Isle of Mists",
-      "Isle of Saints"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Druids served as which role?",
-    "choices": [
-      "Priests and seers",
-      "Warrior chiefs",
-      "Slaves",
-      "Foreign envoys"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What animal often represents Cernunnos?",
-    "choices": [
-      "Boar",
-      "Stag",
-      "Wolf",
-      "Eagle"
-    ],
-    "correct": 1
-  }
+  { question: "What people primarily had Celtic mythology?", choices: ["Celts of Ireland, Scotland, Wales, Brittany","Just Irish","Both","Just Welsh"], correct: 2 },
+  { question: "What's a Banshee?", choices: ["Wailing female spirit foretelling death","Just female","Both","Just spirit"], correct: 2 },
+  { question: "What's a Leprechaun?", choices: ["Irish fairy associated with shoes","Just small fairy","Both","Just Irish"], correct: 2 },
+  { question: "What's a Selkie?", choices: ["Seal-shapeshifter","Just seal","Both","Sea creature"], correct: 2 },
+  { question: "What's the Tuatha De Danann?", choices: ["Irish mythological race of gods/people","Just gods","Both","Just race"], correct: 2 },
+  { question: "Who's the Celtic god of light and skill?", choices: ["Lugh","Dagda","Brigid","Cernunnos"], correct: 0 },
+  { question: "Who's the horned Celtic god?", choices: ["Cernunnos","Lugh","Dagda","Brigid"], correct: 0 },
+  { question: "Who's the Celtic mother/healing goddess?", choices: ["Brigid","Danu","Both important","Morrigan"], correct: 2 },
+  { question: "Who's the war goddess (often a crow)?", choices: ["Morrigan","Brigid","Danu","Lugh"], correct: 0 },
+  { question: "What's the Cauldron of the Dagda?", choices: ["Magical pot of plenty","Just cauldron","Both","Bottomless"], correct: 2 },
+  { question: "Who's the Welsh sea god?", choices: ["Manawydan or Lir's son Manannan","Just Manannan","Both","Just Welsh"], correct: 2 },
+  { question: "What's the Irish epic about Cu Chulainn?", choices: ["Tain Bo Cuailnge","Mabinogion","Both Irish/Welsh","Just Tain"], correct: 0 },
+  { question: "What's the Welsh medieval myth collection?", choices: ["The Mabinogion","Just stories","Both","Welsh tales"], correct: 2 },
+  { question: "Who's Cu Chulainn?", choices: ["Irish hero","Welsh hero","Both","Just Irish"], correct: 0 },
+  { question: "What's the spear of Lugh?", choices: ["One of the four treasures of Tuatha","Just spear","Both","Magical"], correct: 2 },
+  { question: "What are the four treasures of the Tuatha De Danann?", choices: ["Cauldron, Spear, Stone, Sword","Just four objects","Both","Magical items"], correct: 2 },
+  { question: "What's Samhain?", choices: ["Celtic festival, Halloween origin","Winter","Both","Just festival"], correct: 2 },
+  { question: "What's Beltane?", choices: ["Celtic May Day festival","Just May","Both","Spring"], correct: 2 },
+  { question: "What's Imbolc?", choices: ["Early February festival, Brigid","Just February","Both","Spring"], correct: 2 },
+  { question: "What's Lughnasadh?", choices: ["August festival of Lugh","Harvest","Both","Just August"], correct: 2 },
+  { question: "What's a Druid?", choices: ["Celtic priest/wise person","Just priest","Both","Just druid"], correct: 2 },
+  { question: "What plant was sacred to Druids?", choices: ["Mistletoe and oak","Just oak","Both","Just mistletoe"], correct: 2 },
+  { question: "Who's Arthur in Celtic-British myth?", choices: ["Legendary king","Just king","Both","Real and myth"], correct: 2 },
+  { question: "What's Excalibur?", choices: ["King Arthur's sword","Just sword","Both","Magic"], correct: 2 },
+  { question: "Who's the Lady of the Lake?", choices: ["Gives Arthur Excalibur","Just lake","Both","Magic"], correct: 2 },
+  { question: "What's the Holy Grail in Celtic-Christian myth?", choices: ["Sacred cup of Christ","Just cup","Both","Magic"], correct: 2 },
+  { question: "Who's Merlin?", choices: ["Wizard advisor to Arthur","Just wizard","Both","King"], correct: 2 },
+  { question: "What's a faerie circle?", choices: ["Mushroom ring associated with fairies","Just mushroom","Both","Just circle"], correct: 2 },
+  { question: "What's a Pooka (Puca)?", choices: ["Shape-shifting Irish trickster","Just animal","Both","Just trickster"], correct: 2 },
+  { question: "What's the Otherworld?", choices: ["Celtic afterlife/realm","Heaven","Both","Just realm"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CelticMythQuizSettings): CelticMythQuizState {

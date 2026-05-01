@@ -4,156 +4,36 @@ export interface FeudalJapanQuizSettings { questions: "10" | "20" | "30"; }
 export interface FeudalJapanQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type FeudalJapanQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "The samurai code of honor was called?",
-    "choices": [
-      "Zen",
-      "Bushido",
-      "Kabuki",
-      "Sumo"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was the supreme military leader called?",
-    "choices": [
-      "Emperor",
-      "Shogun",
-      "Daimyo",
-      "Ronin"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A masterless samurai was a?",
-    "choices": [
-      "Daimyo",
-      "Ronin",
-      "Ninja",
-      "Geisha"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tokugawa shogunate ruled from which year onward?",
-    "choices": [
-      "1192",
-      "1603",
-      "1700",
-      "1850"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Feudal lords in Japan were called?",
-    "choices": [
-      "Daimyo",
-      "Shogun",
-      "Sensei",
-      "Bonze"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The capital of the Tokugawa shogunate was?",
-    "choices": [
-      "Kyoto",
-      "Edo (Tokyo)",
-      "Osaka",
-      "Nara"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sword most associated with samurai?",
-    "choices": [
-      "Wakizashi",
-      "Katana",
-      "Tanto",
-      "Naginata"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sakoku policy refers to?",
-    "choices": [
-      "Open trade",
-      "National isolation",
-      "Tax reform",
-      "Religion"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Meiji Restoration ended feudalism in?",
-    "choices": [
-      "1853",
-      "1868",
-      "1900",
-      "1920"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tea ceremony master Sen no Rikyu lived in the?",
-    "choices": [
-      "12th century",
-      "16th century",
-      "19th century",
-      "20th century"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ninja are also known as?",
-    "choices": [
-      "Shinobi",
-      "Senpai",
-      "Sensei",
-      "Sumo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Battle of Sekigahara (1600) led to?",
-    "choices": [
-      "Mongol defeat",
-      "Tokugawa supremacy",
-      "Meiji rule",
-      "Heian era"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Heian period is famous for?",
-    "choices": [
-      "War",
-      "Court literature like Tale of Genji",
-      "Industry",
-      "Maritime trade"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Samurai ritual suicide was called?",
-    "choices": [
-      "Seppuku",
-      "Hara",
-      "Kabuki",
-      "Bushido"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Japanese feudal castle keep is called?",
-    "choices": [
-      "Tenshu",
-      "Pagoda",
-      "Torii",
-      "Dojo"
-    ],
-    "correct": 0
-  }
+  { question: "What were Japanese warriors called?", choices: ["Samurai","Ninja","Ronin","Sumo"], correct: 0 },
+  { question: "What was the samurai code of ethics called?", choices: ["Bushido","Zen","Wabi-sabi","Mottainai"], correct: 0 },
+  { question: "What was the ruling military government called?", choices: ["Shogunate","Caliphate","Daimyate","Sultanate"], correct: 0 },
+  { question: "What was the title of the military ruler of Japan?", choices: ["Shogun","Daimyo","Emperor","Samurai"], correct: 0 },
+  { question: "What were regional feudal lords called?", choices: ["Daimyo","Shogun","Samurai","Ronin"], correct: 0 },
+  { question: "What was a samurai without a master called?", choices: ["Ronin","Ninja","Ashigaru","Bushi"], correct: 0 },
+  { question: "Who founded the Tokugawa shogunate?", choices: ["Tokugawa Ieyasu","Toyotomi Hideyoshi","Oda Nobunaga","Minamoto no Yoritomo"], correct: 0 },
+  { question: "In what year was the Tokugawa shogunate founded?", choices: ["1192","1338","1603","1868"], correct: 2 },
+  { question: "What 1600 battle established Tokugawa power?", choices: ["Sekigahara","Nagashino","Okehazama","Anegawa"], correct: 0 },
+  { question: "What policy isolated Japan from the world?", choices: ["Sakoku","Bushido","Bakufu","Han"], correct: 0 },
+  { question: "What was the main samurai sword?", choices: ["Katana","Wakizashi","Naginata","Tanto"], correct: 0 },
+  { question: "What was the samurai's pair of swords called?", choices: ["Daisho","Bokken","Shinai","Nodachi"], correct: 0 },
+  { question: "What 1868 restoration ended feudalism?", choices: ["Meiji Restoration","Tokugawa Restoration","Edo Restoration","Heian Restoration"], correct: 0 },
+  { question: "What city did the Tokugawa shoguns rule from?", choices: ["Edo (Tokyo)","Kyoto","Kamakura","Osaka"], correct: 0 },
+  { question: "What was the imperial capital throughout the era?", choices: ["Kyoto","Tokyo","Kamakura","Osaka"], correct: 0 },
+  { question: "What name is given to the Heian era?", choices: ["794-1185","600-794","1185-1333","1336-1573"], correct: 0 },
+  { question: "What was the Sengoku period?", choices: ["Warring States 1467-1615","Heian era","Asuka era","Showa era"], correct: 0 },
+  { question: "What was a shoji?", choices: ["Sliding paper door","Sword","Flag","Pottery"], correct: 0 },
+  { question: "What was a katana made of?", choices: ["Folded steel","Iron","Bronze","Gold-plated steel"], correct: 0 },
+  { question: "What was hara-kiri (seppuku)?", choices: ["Ritual suicide","Tea ceremony","Sword fighting","Battle tactic"], correct: 0 },
+  { question: "What was a stealthy spy/assassin called?", choices: ["Ninja or shinobi","Samurai","Ronin","Daimyo"], correct: 0 },
+  { question: "What were the three great unifiers of Japan?", choices: ["Oda Nobunaga, Toyotomi Hideyoshi, Tokugawa Ieyasu","Ashikaga, Hojo, Minamoto","Imperial trinity","Three shogun"], correct: 0 },
+  { question: "What religion brought Zen Buddhism to samurai?", choices: ["Buddhism","Shinto","Both","Confucianism"], correct: 0 },
+  { question: "What is the native Japanese religion?", choices: ["Shinto","Buddhism","Daoism","Confucianism"], correct: 0 },
+  { question: "What were the four classes in Tokugawa society?", choices: ["Samurai, peasants, artisans, merchants","Nobles, knights, peasants, slaves","Lords, monks, peasants, beggars","Imperial, military, civil, serf"], correct: 0 },
+  { question: "What were Japanese castles built of (typically)?", choices: ["Stone bases with wood","All stone","All wood","Mud and brick"], correct: 0 },
+  { question: "What event in 1853 forced Japan to open?", choices: ["Perry's Black Ships","British arrival","Russian fleet","Dutch demands"], correct: 0 },
+  { question: "What was a samurai's stipend in?", choices: ["Rice (koku)","Gold","Silver","Land deeds"], correct: 0 },
+  { question: "What was the highest mountain in Japan, sacred to samurai culture?", choices: ["Mount Fuji","Mount Tate","Mount Hotaka","Mount Yari"], correct: 0 },
+  { question: "What dish came from Edo period eat-on-the-go culture?", choices: ["Sushi","Tempura","Soba","All from Edo era"], correct: 3 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: FeudalJapanQuizSettings): FeudalJapanQuizState {

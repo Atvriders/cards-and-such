@@ -4,226 +4,36 @@ export interface IslandQuizSettings { questions: "10" | "20"; }
 export interface IslandQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type IslandQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "World's largest island?",
-    "choices": [
-      "New Guinea",
-      "Borneo",
-      "Madagascar",
-      "Greenland"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Largest island in the Mediterranean?",
-    "choices": [
-      "Sardinia",
-      "Sicily",
-      "Corsica",
-      "Cyprus"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The island of Madagascar is off the coast of which continent?",
-    "choices": [
-      "South America",
-      "Asia",
-      "Africa",
-      "Antarctica"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Borneo is divided among which countries?",
-    "choices": [
-      "Indonesia, Malaysia, Brunei",
-      "Indonesia, Philippines, Vietnam",
-      "Malaysia, Singapore, Thailand",
-      "India, Sri Lanka, Bangladesh"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Iceland is in which ocean?",
-    "choices": [
-      "Pacific",
-      "Atlantic",
-      "Arctic",
-      "Indian"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Largest island of Japan?",
-    "choices": [
-      "Hokkaido",
-      "Honshu",
-      "Kyushu",
-      "Shikoku"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Easter Island belongs to which country?",
-    "choices": [
-      "Chile",
-      "Peru",
-      "Ecuador",
-      "France"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which is NOT one of the British Isles?",
-    "choices": [
-      "Ireland",
-      "Isle of Man",
-      "Iceland",
-      "Great Britain"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Hawaii is in which ocean?",
-    "choices": [
-      "Atlantic",
-      "Indian",
-      "Arctic",
-      "Pacific"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Which island contains the country of Cuba?",
-    "choices": [
-      "Cuba (itself)",
-      "Hispaniola",
-      "Jamaica",
-      "Puerto Rico"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hispaniola is shared by which two countries?",
-    "choices": [
-      "Cuba and Jamaica",
-      "Haiti and Dominican Republic",
-      "Puerto Rico and Cuba",
-      "Bahamas and Cuba"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Gal\u00e1pagos Islands belong to which country?",
-    "choices": [
-      "Peru",
-      "Ecuador",
-      "Colombia",
-      "Mexico"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Largest island in the Caribbean?",
-    "choices": [
-      "Jamaica",
-      "Cuba",
-      "Hispaniola",
-      "Puerto Rico"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which large island is north of Australia?",
-    "choices": [
-      "Java",
-      "New Guinea",
-      "Sumatra",
-      "Sulawesi"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Falkland Islands are in which ocean?",
-    "choices": [
-      "Atlantic",
-      "Pacific",
-      "Indian",
-      "Southern"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Greenland is autonomous within which country?",
-    "choices": [
-      "Norway",
-      "Denmark",
-      "Iceland",
-      "Sweden"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which UK city is on the Isle of Wight?",
-    "choices": [
-      "Newport",
-      "Cardiff",
-      "Belfast",
-      "Liverpool"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which island is the home of komodo dragons?",
-    "choices": [
-      "Bali",
-      "Komodo",
-      "Java",
-      "Sumatra"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tasmania is part of which country?",
-    "choices": [
-      "New Zealand",
-      "Australia",
-      "Indonesia",
-      "Papua New Guinea"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Canary Islands belong to which country?",
-    "choices": [
-      "Portugal",
-      "Morocco",
-      "Spain",
-      "Italy"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which chain includes Honolulu?",
-    "choices": [
-      "Aleutian Islands",
-      "Hawaiian Islands",
-      "Marshall Islands",
-      "Mariana Islands"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which island is shared by Indonesia and Papua New Guinea?",
-    "choices": [
-      "Borneo",
-      "Java",
-      "Sumatra",
-      "New Guinea"
-    ],
-    "correct": 3
-  }
+  { question: "What is the largest island in the world?", choices: ["New Guinea","Borneo","Greenland","Madagascar"], correct: 2 },
+  { question: "What is the second-largest island in the world?", choices: ["Greenland","New Guinea","Borneo","Madagascar"], correct: 1 },
+  { question: "What is the largest island in the Mediterranean?", choices: ["Sardinia","Cyprus","Sicily","Corsica"], correct: 2 },
+  { question: "In which country is Sicily?", choices: ["Greece","Italy","Tunisia","Malta"], correct: 1 },
+  { question: "What is the largest island in Africa?", choices: ["Zanzibar","Madagascar","Mauritius","Reunion"], correct: 1 },
+  { question: "What is the largest island in the Caribbean?", choices: ["Hispaniola","Cuba","Jamaica","Puerto Rico"], correct: 1 },
+  { question: "Which country owns Greenland?", choices: ["Norway","Denmark","Iceland","Canada"], correct: 1 },
+  { question: "What three countries share the island of Borneo?", choices: ["Indonesia, Malaysia, Brunei","Philippines, Malaysia, Indonesia","Indonesia, Singapore, Brunei","Malaysia, Brunei, Thailand"], correct: 0 },
+  { question: "What is the largest of Japan's main islands?", choices: ["Hokkaido","Honshu","Kyushu","Shikoku"], correct: 1 },
+  { question: "What island country lies south of Florida?", choices: ["Cuba","Bahamas","Haiti","Jamaica"], correct: 0 },
+  { question: "What is the largest island of the Philippines?", choices: ["Mindanao","Luzon","Visayas","Palawan"], correct: 1 },
+  { question: "What is Britain's largest island?", choices: ["Ireland","Great Britain","Isle of Man","Wight"], correct: 1 },
+  { question: "What is the largest island in Oceania?", choices: ["Tasmania","South Island NZ","New Guinea","North Island NZ"], correct: 2 },
+  { question: "What is the only island country in Central America?", choices: ["Belize","Cuba","None","Bahamas (sometimes counted)"], correct: 2 },
+  { question: "What island country is east of Madagascar?", choices: ["Comoros","Seychelles","Mauritius","Mayotte"], correct: 2 },
+  { question: "What island chain is part of Spain in the Atlantic?", choices: ["Balearics","Azores","Canary Islands","Madeira"], correct: 2 },
+  { question: "What island chain is Portugal's in the Atlantic?", choices: ["Canary","Madeira and Azores","Cape Verde","Faroe"], correct: 1 },
+  { question: "What island country is famous for its volcanic activity and is in the North Atlantic?", choices: ["Greenland","Iceland","Faroe Islands","Norway"], correct: 1 },
+  { question: "What is the largest island of Indonesia by area?", choices: ["Java","Sumatra","Borneo","Sulawesi"], correct: 2 },
+  { question: "What is the most populous island in the world?", choices: ["Honshu","Java","Luzon","Great Britain"], correct: 1 },
+  { question: "Which two countries share the island of Hispaniola?", choices: ["Cuba and Haiti","Dominican Republic and Haiti","Haiti and Jamaica","DR and Puerto Rico"], correct: 1 },
+  { question: "What is the largest island in the Atlantic Ocean?", choices: ["Iceland","Great Britain","Cuba","Newfoundland"], correct: 1 },
+  { question: "What islands does Charles Darwin visit famously off Ecuador?", choices: ["Falklands","Galapagos","Easter","San Andres"], correct: 1 },
+  { question: "What is the largest island in the Indian Ocean?", choices: ["Sri Lanka","Madagascar","Borneo","Sumatra"], correct: 1 },
+  { question: "What island state is the only U.S. state made up of islands?", choices: ["Alaska","Hawaii","Florida","Rhode Island"], correct: 1 },
+  { question: "Which Caribbean island is also the world's third-most populous Caribbean nation?", choices: ["Jamaica","Cuba","Hispaniola","Puerto Rico"], correct: 0 },
+  { question: "What island chain stretches from Russia toward Japan?", choices: ["Aleutian","Kuril","Ryukyu","Mariana"], correct: 1 },
+  { question: "What is the largest island in the Pacific?", choices: ["Honshu","New Guinea","Borneo","Sumatra"], correct: 1 },
+  { question: "What is the southernmost island country?", choices: ["New Zealand","Tasmania","South Georgia","South Africa (continent)"], correct: 0 },
+  { question: "What is the largest of the Greek islands?", choices: ["Rhodes","Lesbos","Crete","Corfu"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: IslandQuizSettings): IslandQuizState {

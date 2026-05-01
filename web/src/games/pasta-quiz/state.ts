@@ -4,306 +4,36 @@ export interface PastaQuizSettings { questions: "10" | "20"; }
 export interface PastaQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type PastaQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Spaghetti shape is best described as?",
-    "choices": [
-      "Long thin string",
-      "Tube",
-      "Spiral",
-      "Bow"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Penne is shaped like?",
-    "choices": [
-      "Tube cut diagonally",
-      "Long ribbon",
-      "Spiral",
-      "Shell"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Fusilli is what shape?",
-    "choices": [
-      "Spiral",
-      "Tube",
-      "Long",
-      "Stuffed"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Farfalle means?",
-    "choices": [
-      "Butterflies",
-      "Bows",
-      "Shells",
-      "Tubes"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Rigatoni differs from penne in being?",
-    "choices": [
-      "Bigger ridged tube",
-      "Shorter",
-      "Smoother",
-      "Twisted"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Linguine is shaped like?",
-    "choices": [
-      "Flat narrow ribbon",
-      "Round string",
-      "Tube",
-      "Bow"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Fettuccine is wider than?",
-    "choices": [
-      "Tagliatelle",
-      "Linguine",
-      "Pappardelle",
-      "Vermicelli"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Pappardelle is best described as?",
-    "choices": [
-      "Wide flat ribbons",
-      "Tube",
-      "Spiral",
-      "Tiny grain"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Orzo resembles which grain?",
-    "choices": [
-      "Rice",
-      "Barley",
-      "Wheat",
-      "Quinoa"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bucatini is unique because it has?",
-    "choices": [
-      "Hollow center",
-      "Spiral",
-      "Bows",
-      "Filling"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ravioli is typically?",
-    "choices": [
-      "Stuffed",
-      "Fried",
-      "Long",
-      "Tube"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tortellini originated in?",
-    "choices": [
-      "Bologna region",
-      "Naples",
-      "Sicily",
-      "Venice"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cacio e pepe sauce uses?",
-    "choices": [
-      "Pecorino & black pepper",
-      "Tomato",
-      "Cream",
-      "Pesto"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bolognese sauce is a slow-cooked?",
-    "choices": [
-      "Meat ragu",
-      "Tomato cream",
-      "Pesto",
-      "Garlic oil"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pesto Genovese contains?",
-    "choices": [
-      "Basil/pine nuts/cheese",
-      "Tomato/basil",
-      "Cream/pancetta",
-      "Olive oil/garlic only"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Carbonara is made with?",
-    "choices": [
-      "Eggs/cheese/guanciale",
-      "Cream/bacon",
-      "Tomato/cream",
-      "Pesto/cream"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Arrabbiata sauce is famously?",
-    "choices": [
-      "Spicy",
-      "Creamy",
-      "Sweet",
-      "Cold"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Amatriciana includes?",
-    "choices": [
-      "Tomato/guanciale/cheese",
-      "Cream/mushroom",
-      "Pesto/garlic",
-      "Cheese only"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Vongole sauce contains?",
-    "choices": [
-      "Clams",
-      "Octopus",
-      "Shrimp",
-      "Crab"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Gnocchi are typically made from?",
-    "choices": [
-      "Potato",
-      "Rice",
-      "Corn",
-      "Yam"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Orecchiette means?",
-    "choices": [
-      "Little ears",
-      "Little stars",
-      "Little bows",
-      "Little tubes"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Conchiglie are shaped like?",
-    "choices": [
-      "Shells",
-      "Bows",
-      "Spirals",
-      "Stars"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cannelloni are large?",
-    "choices": [
-      "Tubes filled",
-      "Sheets layered",
-      "Spirals",
-      "Tiny grains"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lasagna is built with?",
-    "choices": [
-      "Layered sheets",
-      "Long strings",
-      "Tubes",
-      "Bows"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Vermicelli is thinner than?",
-    "choices": [
-      "Spaghetti",
-      "Bucatini",
-      "Linguine",
-      "Pappardelle"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Capellini is also known as?",
-    "choices": [
-      "Angel hair",
-      "Bow tie",
-      "Star",
-      "Shell"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pici is a thick hand-rolled pasta from?",
-    "choices": [
-      "Tuscany",
-      "Sicily",
-      "Veneto",
-      "Campania"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Trofie pasta is famously paired with?",
-    "choices": [
-      "Pesto",
-      "Tomato",
-      "Cream",
-      "Vongole"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Al dente means?",
-    "choices": [
-      "To the tooth",
-      "Well done",
-      "Boiled",
-      "Soft"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Italian families often serve pasta as a?",
-    "choices": [
-      "First course (primo)",
-      "Main course",
-      "Dessert",
-      "Side"
-    ],
-    "correct": 0
-  }
+  { question: "What country is pasta most associated with?", choices: ["Italy","China","Greece","France"], correct: 0 },
+  { question: "What's spaghetti?", choices: ["Long thin pasta","Short tube","Flat ribbon","Stuffed"], correct: 0 },
+  { question: "What's penne?", choices: ["Tube cut diagonally","Long","Stuffed","Flat"], correct: 0 },
+  { question: "What's farfalle?", choices: ["Bow-tie shape","Long","Tube","Stuffed"], correct: 0 },
+  { question: "What's fusilli?", choices: ["Spiral/corkscrew","Tube","Flat","Long"], correct: 0 },
+  { question: "What's rigatoni?", choices: ["Ridged tube pasta","Smooth","Flat","Long"], correct: 0 },
+  { question: "What's fettuccine?", choices: ["Flat ribbon","Round long","Tube","Stuffed"], correct: 0 },
+  { question: "What's linguine?", choices: ["Flat narrow noodle","Round","Tube","Stuffed"], correct: 0 },
+  { question: "What's lasagna?", choices: ["Wide flat sheets","Stuffed","Tube","Long"], correct: 0 },
+  { question: "What's ravioli?", choices: ["Stuffed pasta squares","Just stuffed","Both","Just stuffed shape"], correct: 2 },
+  { question: "What's tortellini?", choices: ["Stuffed ring-shaped pasta","Just stuffed","Both","Different shape"], correct: 2 },
+  { question: "What's gnocchi?", choices: ["Potato dumplings (sometimes flour)","Just dumplings","Both","Just gnocchi"], correct: 2 },
+  { question: "What's orzo?", choices: ["Rice-shaped pasta","Just orzo","Both","Just rice"], correct: 2 },
+  { question: "What's bucatini?", choices: ["Hollow long pasta","Solid round","Both","Just bucatini"], correct: 2 },
+  { question: "What's pappardelle?", choices: ["Wide ribbons","Narrow","Both","Just wide"], correct: 2 },
+  { question: "What's tagliatelle?", choices: ["Long flat ribbons","Wide","Both","Narrow ribbons"], correct: 2 },
+  { question: "What's al dente?", choices: ["Cooked but firm","Just cooked","Both","Soft"], correct: 2 },
+  { question: "What's the typical sauce for spaghetti carbonara?", choices: ["Egg, cheese, guanciale, pepper","Just egg","Both","Cream-based"], correct: 2 },
+  { question: "What region is carbonara from?", choices: ["Lazio (Rome)","Just Rome","Both","Sicily"], correct: 2 },
+  { question: "What's cacio e pepe?", choices: ["Cheese and pepper","Just cheese","Both","Just spicy"], correct: 2 },
+  { question: "What cheese is in cacio e pepe?", choices: ["Pecorino Romano","Just pecorino","Both","Parmesan"], correct: 2 },
+  { question: "What's amatriciana?", choices: ["Tomato, guanciale, pecorino","Just tomato","Both","Just sauce"], correct: 2 },
+  { question: "What's pesto from?", choices: ["Genoa, Liguria","Just Italy","Both","Just region"], correct: 2 },
+  { question: "What's in classic pesto?", choices: ["Basil, garlic, pine nuts, olive oil, pecorino/parmesan","Just basil","Both","Multiple ingredients"], correct: 2 },
+  { question: "What's bolognese?", choices: ["Meat ragu sauce from Bologna","Just meat","Both","Just sauce"], correct: 2 },
+  { question: "What pasta traditionally pairs with bolognese in Italy?", choices: ["Tagliatelle (not spaghetti)","Spaghetti","Both used","Just tagliatelle"], correct: 2 },
+  { question: "What's mac and cheese (Italian roots)?", choices: ["Pasta with cheese sauce","Just American","Both","Modern dish"], correct: 2 },
+  { question: "What durum wheat product is most pasta?", choices: ["Semolina","Just semolina","Both","Whole wheat"], correct: 2 },
+  { question: "What's fresh pasta vs dried?", choices: ["Fresh has eggs (often), shorter cook","Dry has long shelf life","Both","Different uses"], correct: 2 },
+  { question: "What's the best way to season pasta water?", choices: ["Salty like the sea","Just salt","Both","Lots of salt"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PastaQuizSettings): PastaQuizState {

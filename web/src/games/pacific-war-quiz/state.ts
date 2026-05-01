@@ -4,126 +4,36 @@ export interface PacificWarQuizSettings { questions: "10" | "20" | "30"; }
 export interface PacificWarQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type PacificWarQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Pearl Harbor attack year?",
-    "choices": [
-      "1939",
-      "1940",
-      "1941",
-      "1942"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Battle of Midway year?",
-    "choices": [
-      "1941",
-      "1942",
-      "1943",
-      "1944"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Atomic bomb dropped on Hiroshima?",
-    "choices": [
-      "1944",
-      "1945",
-      "1946",
-      "1947"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "US Pacific commander?",
-    "choices": [
-      "Eisenhower",
-      "Nimitz",
-      "Patton",
-      "Bradley"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Japan surrendered aboard which ship?",
-    "choices": [
-      "USS Arizona",
-      "USS Missouri",
-      "USS Enterprise",
-      "USS Iowa"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Battle of Iwo Jima year?",
-    "choices": [
-      "1944",
-      "1945",
-      "1946",
-      "1947"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Doolittle Raid hit?",
-    "choices": [
-      "Berlin",
-      "Tokyo",
-      "Manila",
-      "Hong Kong"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bataan Death March occurred in?",
-    "choices": [
-      "China",
-      "Philippines",
-      "Burma",
-      "Indonesia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Battle of Coral Sea year?",
-    "choices": [
-      "1941",
-      "1942",
-      "1943",
-      "1944"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Kamikaze means?",
-    "choices": [
-      "Sun warrior",
-      "Divine wind",
-      "Rising sun",
-      "Storm fist"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "MacArthur returned to which country?",
-    "choices": [
-      "Korea",
-      "Japan",
-      "Philippines",
-      "China"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Yamamoto died in?",
-    "choices": [
-      "Air ambush",
-      "Sea battle",
-      "Island assault",
-      "Disease"
-    ],
-    "correct": 0
-  }
+  { question: "What 1941 attack drew the U.S. into WWII Pacific?", choices: ["Pearl Harbor","Wake Island","Midway","Singapore"], correct: 0 },
+  { question: "What date was the Pearl Harbor attack?", choices: ["Dec 5 1941","Dec 7 1941","Dec 8 1941","Dec 11 1941"], correct: 1 },
+  { question: "What 1942 battle is considered Pacific War's turning point?", choices: ["Coral Sea","Midway","Guadalcanal","Iwo Jima"], correct: 1 },
+  { question: "Who commanded U.S. forces in the Southwest Pacific?", choices: ["Nimitz","MacArthur","Halsey","Spruance"], correct: 1 },
+  { question: "Who commanded U.S. Pacific Fleet?", choices: ["Nimitz","King","MacArthur","Halsey"], correct: 0 },
+  { question: "What 1944 battle was the largest naval battle in history?", choices: ["Coral Sea","Midway","Leyte Gulf","Philippine Sea"], correct: 2 },
+  { question: "What island was first atomic bomb dropped on?", choices: ["Hiroshima","Nagasaki","Tokyo","Yokohama"], correct: 0 },
+  { question: "What date was Hiroshima bombed?", choices: ["Aug 6 1945","Aug 9 1945","Aug 14 1945","Aug 2 1945"], correct: 0 },
+  { question: "What was the second atomic bomb city?", choices: ["Hiroshima","Nagasaki","Kyoto","Tokyo"], correct: 1 },
+  { question: "What name was given to the U.S. island-hopping strategy?", choices: ["Island-Hopping","Leapfrogging","Pacific Crawl","Both first two terms"], correct: 3 },
+  { question: "What 1945 battle saw heavy U.S. casualties on a small island?", choices: ["Iwo Jima","Tarawa","Saipan","Peleliu"], correct: 0 },
+  { question: "What island was the last major battle before Japan?", choices: ["Iwo Jima","Okinawa","Saipan","Luzon"], correct: 1 },
+  { question: "What plane dropped the first atomic bomb?", choices: ["B-17","B-24","B-29","B-25"], correct: 2 },
+  { question: "What was the B-29 that dropped Hiroshima's bomb called?", choices: ["Enola Gay","Bockscar","Memphis Belle","Big Stink"], correct: 0 },
+  { question: "What plane attacked Pearl Harbor most famously?", choices: ["A6M Zero","Aichi D3A","Nakajima B5N","All did"], correct: 3 },
+  { question: "What U.S. Navy carrier was sunk at Coral Sea?", choices: ["Lexington","Yorktown","Hornet","Wasp"], correct: 0 },
+  { question: "What carrier was sunk at Midway by Japan?", choices: ["Yorktown","Lexington","Hornet","Wasp"], correct: 0 },
+  { question: "How many Japanese carriers were lost at Midway?", choices: ["2","3","4","5"], correct: 2 },
+  { question: "What 1942 6-month battle in the Solomons?", choices: ["Coral Sea","Guadalcanal","New Guinea","Tarawa"], correct: 1 },
+  { question: "What date did Japan formally surrender?", choices: ["Aug 15 1945","Sep 2 1945","Aug 14 1945","Aug 6 1945"], correct: 1 },
+  { question: "Where was Japan's surrender ceremony held?", choices: ["USS Missouri","USS Iowa","USS Enterprise","USS Yorktown"], correct: 0 },
+  { question: "What's the name of Japanese suicide aircraft?", choices: ["Kamikaze","Banzai","Bushido","Tokko"], correct: 0 },
+  { question: "What was the iconic photograph from Iwo Jima?", choices: ["Flag raising on Mount Suribachi","Marines on beach","Carrier landing","Kamikaze hit"], correct: 0 },
+  { question: "What 1942 raid bombed Tokyo for first time?", choices: ["Doolittle Raid","Tokyo Express","Inferno","B-29 Raid"], correct: 0 },
+  { question: "What pilot led the Doolittle Raid?", choices: ["Jimmy Doolittle","Curtis LeMay","Hap Arnold","George Marshall"], correct: 0 },
+  { question: "What heroic submarine commander surfaced near Japan?", choices: ["Dick O'Kane","Eugene Fluckey","Sam Dealey","All decorated"], correct: 3 },
+  { question: "What island was the 'gateway to Japan' battle of April-June 1945?", choices: ["Iwo Jima","Okinawa","Saipan","Tinian"], correct: 1 },
+  { question: "What Japanese battleship was the largest ever built?", choices: ["Yamato","Musashi","Both same class","Nagato"], correct: 2 },
+  { question: "What was Japan's southern advance theater?", choices: ["Solomons","Indonesia","Burma","All part of it"], correct: 3 },
+  { question: "What 1942 battle prevented Japanese capture of Port Moresby?", choices: ["Coral Sea","Midway","Guadalcanal","Bismarck Sea"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PacificWarQuizSettings): PacificWarQuizState {

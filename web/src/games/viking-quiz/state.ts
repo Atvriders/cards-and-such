@@ -4,156 +4,36 @@ export interface VikingQuizSettings { questions: "10" | "20" | "30"; }
 export interface VikingQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type VikingQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Vikings originated from?",
-    "choices": [
-      "Britain",
-      "Scandinavia",
-      "Iberia",
-      "Russia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Viking Age is roughly?",
-    "choices": [
-      "200-500 CE",
-      "793-1066 CE",
-      "1100-1300 CE",
-      "1300-1500 CE"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First major raid traditionally noted at?",
-    "choices": [
-      "York",
-      "Lindisfarne (793)",
-      "Paris",
-      "Dublin"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Viking ship known for shallow draft?",
-    "choices": [
-      "Trireme",
-      "Longship",
-      "Galleon",
-      "Cog"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Erik the Red colonized?",
-    "choices": [
-      "Iceland",
-      "Greenland",
-      "Newfoundland",
-      "Britain"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Leif Erikson is associated with reaching?",
-    "choices": [
-      "Greenland",
-      "Vinland (North America)",
-      "Iberia",
-      "Sicily"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Norse mythology's chief god?",
-    "choices": [
-      "Thor",
-      "Odin",
-      "Loki",
-      "Freyr"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Asgard is the home of?",
-    "choices": [
-      "Giants",
-      "Aesir gods",
-      "Humans",
-      "Dwarfs"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Viking parliament/assembly?",
-    "choices": [
-      "Senate",
-      "Thing (Þing)",
-      "Witan",
-      "Cortes"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Battle of Hastings (1066) involved?",
-    "choices": [
-      "Vikings only",
-      "Normans (Viking-descended) vs Anglo-Saxons",
-      "Romans",
-      "Celts"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Runes were?",
-    "choices": [
-      "Coins",
-      "Norse alphabet characters",
-      "Songs",
-      "Cooking pots"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Danelaw was?",
-    "choices": [
-      "Viking law in northern/eastern England",
-      "A king",
-      "A weapon",
-      "A god"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Vikings traded along which Russian rivers?",
-    "choices": [
-      "Volga and Dnieper",
-      "Thames",
-      "Rhine",
-      "Po"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Viking warriors who fought in trance state?",
-    "choices": [
-      "Berserkers",
-      "Hoplites",
-      "Janissaries",
-      "Hussars"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sagas were?",
-    "choices": [
-      "Epic prose narratives",
-      "Cooking books",
-      "Maps",
-      "Coins"
-    ],
-    "correct": 0
-  }
+  { question: "From what region did Vikings originate?", choices: ["Scandinavia","Iberia","British Isles","Central Europe"], correct: 0 },
+  { question: "What were the three main Viking homelands?", choices: ["Norway, Sweden, Denmark","Iceland, Norway, Sweden","Denmark, Iceland, Norway","Norway only"], correct: 0 },
+  { question: "What was the typical Viking longship feature?", choices: ["Long, shallow draft, dragon prow","Tall mast","Iron hull","Steam"], correct: 0 },
+  { question: "In what year did Vikings raid Lindisfarne?", choices: ["793","843","911","1066"], correct: 0 },
+  { question: "What Viking explored Newfoundland around 1000 AD?", choices: ["Leif Erikson","Erik the Red","Bjorn Ironside","Ragnar"], correct: 0 },
+  { question: "What did Vikings call North America?", choices: ["Vinland","Greenland","Markland","Both Vinland and Markland used"], correct: 3 },
+  { question: "What land did Erik the Red colonize?", choices: ["Greenland","Iceland","Newfoundland","Faroe Islands"], correct: 0 },
+  { question: "What was the Norse pantheon's chief god?", choices: ["Odin","Thor","Loki","Freyr"], correct: 0 },
+  { question: "What was the Norse god of thunder?", choices: ["Thor","Odin","Loki","Tyr"], correct: 0 },
+  { question: "What Norse afterlife is for warriors?", choices: ["Valhalla","Helheim","Asgard","Folkvangr"], correct: 0 },
+  { question: "Who chose slain warriors for Valhalla?", choices: ["Valkyries","Norns","Disir","Aesir"], correct: 0 },
+  { question: "What was the Norse end-of-world prophesied event?", choices: ["Ragnarok","Yggdrasil","Midgard","Bifrost"], correct: 0 },
+  { question: "What was the Viking writing system?", choices: ["Runes","Cyrillic","Latin","Hieroglyphs"], correct: 0 },
+  { question: "What kingdom in England was overrun by Vikings 9th century?", choices: ["Northumbria","Wessex","Mercia","All raided"], correct: 3 },
+  { question: "Who fought back against Vikings successfully in England?", choices: ["Alfred the Great","Athelstan","Edward","All of them"], correct: 3 },
+  { question: "What 1066 battle did Vikings (Norwegians) lose?", choices: ["Stamford Bridge","Hastings","Hastings","Senlac"], correct: 0 },
+  { question: "Who was the Norwegian king at Stamford Bridge?", choices: ["Harald Hardrada","Harold Godwinson","Cnut","Olaf"], correct: 0 },
+  { question: "Who became the first Norman king of England in 1066?", choices: ["William the Conqueror","Harold Godwinson","Cnut","Edward"], correct: 0 },
+  { question: "What were Viking explorers of rivers in Russia called?", choices: ["Varangians","Rus","Both","Vikings only"], correct: 2 },
+  { question: "What major medieval city was founded with Viking heritage in Russia?", choices: ["Kyiv (Kievan Rus founded by Varangians per legend)","Moscow","Novgorod founded by Vikings","Both Kyiv and Novgorod"], correct: 3 },
+  { question: "What is a Viking burial ship called when buried with the dead?", choices: ["Ship burial","Pyre","Cairn","Mound"], correct: 0 },
+  { question: "What was a famous Viking ship burial site in Norway?", choices: ["Oseberg","Gokstad","Both","Tune"], correct: 2 },
+  { question: "What Norse weapon was iconic?", choices: ["Sword and battle-axe","Spear","Bow","All used"], correct: 3 },
+  { question: "What's a berserker?", choices: ["Frenzied Viking warrior","Religious leader","Peaceful farmer","Trader"], correct: 0 },
+  { question: "What was the Norse council/assembly called?", choices: ["Thing","Althing","Both","Wapentake"], correct: 2 },
+  { question: "What famous Viking hairdo and culture-detail myth is FALSE?", choices: ["They wore horned helmets","They had longships","They explored","They had runes"], correct: 0 },
+  { question: "What was Yggdrasil?", choices: ["World tree","Sea serpent","Sword","Magic ring"], correct: 0 },
+  { question: "What Viking saga is famous from Iceland?", choices: ["Njal's Saga, Egil's Saga, etc.","The Iliad","Beowulf","Volsung Saga"], correct: 0 },
+  { question: "Who is Loki in Norse myth?", choices: ["Trickster god","God of war","God of sea","God of dawn"], correct: 0 },
+  { question: "In what year did the Viking Age conventionally end?", choices: ["1066","1100","911","1014"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: VikingQuizSettings): VikingQuizState {

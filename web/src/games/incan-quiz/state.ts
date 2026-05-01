@@ -4,156 +4,36 @@ export interface IncanQuizSettings { questions: "10" | "20" | "30"; }
 export interface IncanQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type IncanQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Inca Empire was centered in?",
-    "choices": [
-      "Mexico",
-      "Peru/Andes",
-      "Brazil",
-      "Colombia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital of the Inca Empire?",
-    "choices": [
-      "Lima",
-      "Cusco",
-      "Quito",
-      "Machu Picchu"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca road network length was?",
-    "choices": [
-      "1,000 km",
-      "Over 30,000 km",
-      "5,000 km",
-      "100,000 km"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Quipus were used for?",
-    "choices": [
-      "Music",
-      "Recording numerical data with knots",
-      "Cooking",
-      "War"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Last great Inca emperor (before conquest)?",
-    "choices": [
-      "Pachacuti",
-      "Atahualpa",
-      "Manco Capac",
-      "Tupac Amaru"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Spanish conqueror of the Incas?",
-    "choices": [
-      "Cortes",
-      "Pizarro",
-      "Balboa",
-      "Magellan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca royal estate famous archaeological site?",
-    "choices": [
-      "Tikal",
-      "Machu Picchu",
-      "Teotihuacan",
-      "Chichen Itza"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca staple crops?",
-    "choices": [
-      "Wheat and rye",
-      "Potatoes and maize",
-      "Rice and millet",
-      "Beans only"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca sun god?",
-    "choices": [
-      "Viracocha",
-      "Inti",
-      "Chasca",
-      "Mama Killa"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca year of conquest?",
-    "choices": [
-      "1492",
-      "1532-1533",
-      "1607",
-      "1700"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca terraced agriculture used?",
-    "choices": [
-      "Drainage stones and canals",
-      "Pure flat land",
-      "Hydroponics",
-      "Crop rotation only"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Quechua is?",
-    "choices": [
-      "A god",
-      "A language family of the Andes",
-      "A tool",
-      "A city"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca emperor was titled?",
-    "choices": [
-      "Sapa Inca",
-      "Tlatoani",
-      "Khan",
-      "Caesar"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mit'a was a system of?",
-    "choices": [
-      "Marriage",
-      "Labor tribute",
-      "Tax in money",
-      "Education"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Inca expansion height under?",
-    "choices": [
-      "Pachacuti",
-      "Atahualpa",
-      "Manco",
-      "Huayna Capac"
-    ],
-    "correct": 0
-  }
+  { question: "What region did the Inca Empire dominate?", choices: ["Andean South America","Mesoamerica","Caribbean","Amazon Basin"], correct: 0 },
+  { question: "What was the Inca capital?", choices: ["Cusco","Machu Picchu","Quito","Lima"], correct: 0 },
+  { question: "What was the Inca name for their empire?", choices: ["Tawantinsuyu","Inka","Andean","Cuzco"], correct: 0 },
+  { question: "Who was the Inca founder figure?", choices: ["Manco Capac","Pachacuti","Atahualpa","Tupac"], correct: 0 },
+  { question: "Who was the great Inca emperor that expanded the empire (1438-1471)?", choices: ["Pachacuti","Manco","Huayna Capac","Tupac Inca Yupanqui"], correct: 0 },
+  { question: "Who was the last Inca emperor before Spanish conquest?", choices: ["Atahualpa","Huascar","Manco","Tupac"], correct: 0 },
+  { question: "In what year did Pizarro capture Atahualpa?", choices: ["1532","1492","1521","1519"], correct: 0 },
+  { question: "Who led the Spanish conquest of Peru?", choices: ["Francisco Pizarro","Hernan Cortes","Diego de Almagro","Pedro de Valdivia"], correct: 0 },
+  { question: "What system of knotted strings did Inca use for records?", choices: ["Quipu","Codex","Wampum","Khipus"], correct: 0 },
+  { question: "What language did Inca speak?", choices: ["Quechua","Aymara","Spanish","Both Quechua and Aymara"], correct: 0 },
+  { question: "What Inca site is in the Andes above the Sacred Valley?", choices: ["Machu Picchu","Cusco","Lima","Trujillo"], correct: 0 },
+  { question: "Who rediscovered Machu Picchu in 1911?", choices: ["Hiram Bingham","Heinrich Schliemann","Percy Fawcett","Carter"], correct: 0 },
+  { question: "What was the Inca road system called?", choices: ["Qhapaq Nan","Camino Real","Inca Trail","Royal Road"], correct: 0 },
+  { question: "How long was the Inca road system roughly?", choices: ["40,000 km","10,000 km","20,000 km","5,000 km"], correct: 0 },
+  { question: "What was the Inca Sun god?", choices: ["Inti","Viracocha","Pachamama","Mama Quilla"], correct: 0 },
+  { question: "What was the Inca creator god?", choices: ["Viracocha","Inti","Pachamama","Mama Killa"], correct: 0 },
+  { question: "What was the Inca earth-mother deity?", choices: ["Pachamama","Mama Killa","Inti","Mama Cocha"], correct: 0 },
+  { question: "What Inca staple food allowed high-altitude farming?", choices: ["Potato","Corn","Quinoa","All staples"], correct: 3 },
+  { question: "What animal did Inca domesticate for wool/transport?", choices: ["Llama","Alpaca","Both","Vicuna"], correct: 2 },
+  { question: "What was the Inca currency or trade good (essentially they had no money)?", choices: ["Trade by barter","Gold","Silver","Cocoa beans"], correct: 0 },
+  { question: "What Inca metalwork was famous?", choices: ["Gold and silver work","Bronze weapons","Iron tools","Copper alone"], correct: 0 },
+  { question: "What 1572 event killed the last Inca royal claimant?", choices: ["Execution of Tupac Amaru I","Pizarro killed last royal","Battle of Cuzco","Vilcabamba fell"], correct: 0 },
+  { question: "What was the Inca army's main weapon?", choices: ["Sling, club, bola","Sword","Bow","Spear"], correct: 0 },
+  { question: "What Inca region/quarter was the four-part division?", choices: ["Suyu","Chinchaysuyu","Tawantinsuyu's parts","Antisuyu"], correct: 2 },
+  { question: "What's the Inca terrace farming system called?", choices: ["Andenes","Chinampas","Milpa","Waru waru"], correct: 0 },
+  { question: "What Inca temple in Cusco was covered in gold?", choices: ["Coricancha","Sacsayhuaman","Qenqo","Tambomachay"], correct: 0 },
+  { question: "What Inca fortress is above Cusco?", choices: ["Sacsayhuaman","Ollantaytambo","Pisac","All Inca sites"], correct: 0 },
+  { question: "What Inca disease devastated population pre-Pizarro?", choices: ["Smallpox","Cholera","Plague","Measles"], correct: 0 },
+  { question: "What 1781-1783 rebellion took the name Tupac Amaru II?", choices: ["Tupac Amaru II rebellion","Tahuantinsuyu","Cusco rebellion","Inca Restoration"], correct: 0 },
+  { question: "What sacred shape was the Inca city of Cusco said to resemble?", choices: ["A puma","A condor","A llama","A serpent"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: IncanQuizSettings): IncanQuizState {

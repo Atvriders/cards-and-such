@@ -4,306 +4,36 @@ export interface NorseMythQuizSettings { questions: "10" | "20" | "30"; }
 export interface NorseMythQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type NorseMythQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who is the chief of the Norse gods?",
-    "choices": [
-      "Thor",
-      "Odin",
-      "Loki",
-      "Tyr"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is Thor's hammer called?",
-    "choices": [
-      "Gungnir",
-      "Mjolnir",
-      "Gram",
-      "Skofnung"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the trickster god?",
-    "choices": [
-      "Odin",
-      "Loki",
-      "Heimdall",
-      "Freyr"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the doom of the gods called?",
-    "choices": [
-      "Asgard",
-      "Midgard",
-      "Ragnarok",
-      "Yggdrasil"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What is the world tree called?",
-    "choices": [
-      "Yggdrasil",
-      "Bifrost",
-      "Asgard",
-      "Niflheim"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who guards the rainbow bridge?",
-    "choices": [
-      "Tyr",
-      "Heimdall",
-      "Bragi",
-      "Vidar"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the goddess of love and fertility?",
-    "choices": [
-      "Frigg",
-      "Freya",
-      "Sif",
-      "Idun"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the realm of humans called?",
-    "choices": [
-      "Asgard",
-      "Midgard",
-      "Vanaheim",
-      "Jotunheim"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is Odin's wife?",
-    "choices": [
-      "Frigg",
-      "Freya",
-      "Sif",
-      "Skadi"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the wolf foretold to kill Odin at Ragnarok?",
-    "choices": [
-      "Fenrir",
-      "Geri",
-      "Freki",
-      "Skoll"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many ravens does Odin keep?",
-    "choices": [
-      "1",
-      "2",
-      "3",
-      "4"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What are Odin's ravens named?",
-    "choices": [
-      "Geri and Freki",
-      "Huginn and Muninn",
-      "Sleipnir and Gulltop",
-      "Skoll and Hati"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Loki is the parent of which giant serpent?",
-    "choices": [
-      "Nidhogg",
-      "Jormungandr",
-      "Fafnir",
-      "Naga"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the warriors' afterlife hall ruled by Odin?",
-    "choices": [
-      "Folkvangr",
-      "Valhalla",
-      "Helheim",
-      "Asgard"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What weapon does Odin wield?",
-    "choices": [
-      "Mjolnir",
-      "Gungnir",
-      "Gram",
-      "Naegling"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sleipnir, Odin's horse, has how many legs?",
-    "choices": [
-      "4",
-      "6",
-      "8",
-      "10"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who is Thor's wife?",
-    "choices": [
-      "Sif",
-      "Freya",
-      "Frigg",
-      "Idun"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the god of poetry?",
-    "choices": [
-      "Bragi",
-      "Heimdall",
-      "Vidar",
-      "Forseti"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who keeps the apples of youth?",
-    "choices": [
-      "Sif",
-      "Idun",
-      "Skadi",
-      "Var"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which god is associated with summer and sunshine?",
-    "choices": [
-      "Tyr",
-      "Freyr",
-      "Heimdall",
-      "Bragi"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which god lost a hand to bind Fenrir?",
-    "choices": [
-      "Tyr",
-      "Vidar",
-      "Bragi",
-      "Forseti"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the ship made from dead men's nails?",
-    "choices": [
-      "Skidbladnir",
-      "Naglfar",
-      "Ringhorn",
-      "Hringhorni"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What two clans of gods exist in Norse myth?",
-    "choices": [
-      "Aesir and Vanir",
-      "Aesir and Jotunn",
-      "Vanir and Alfar",
-      "Asynjur and Aesir"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who was the first man in Norse creation?",
-    "choices": [
-      "Ask",
-      "Buri",
-      "Ymir",
-      "Mimir"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the giant from whose body the world was formed?",
-    "choices": [
-      "Surtr",
-      "Ymir",
-      "Thrym",
-      "Geirrod"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which fire giant burns the world at Ragnarok?",
-    "choices": [
-      "Surtr",
-      "Hel",
-      "Loki",
-      "Hrym"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is queen of the dead?",
-    "choices": [
-      "Hel",
-      "Skadi",
-      "Sigyn",
-      "Frigg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where is the dwarves' realm?",
-    "choices": [
-      "Svartalfheim",
-      "Alfheim",
-      "Niflheim",
-      "Muspelheim"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the home of the gods?",
-    "choices": [
-      "Asgard",
-      "Midgard",
-      "Vanaheim",
-      "Jotunheim"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Loki's offspring Hel rules over which realm?",
-    "choices": [
-      "Asgard",
-      "Helheim",
-      "Muspelheim",
-      "Alfheim"
-    ],
-    "correct": 1
-  }
+  { question: "Who is the chief Norse god?", choices: ["Odin","Thor","Loki","Freyr"], correct: 0 },
+  { question: "Who's Thor's father?", choices: ["Odin","Loki","Freyr","Tyr"], correct: 0 },
+  { question: "What's Thor's hammer called?", choices: ["Mjolnir","Stormbreaker","Gungnir","Mistilteinn"], correct: 0 },
+  { question: "What's Odin's spear?", choices: ["Gungnir","Mjolnir","Stormbreaker","Vingnir"], correct: 0 },
+  { question: "How many ravens does Odin have?", choices: ["2 (Huginn and Muninn)","3","1","4"], correct: 0 },
+  { question: "What are Huginn and Muninn?", choices: ["Odin's ravens (Thought and Memory)","Wolves","Both","Just ravens"], correct: 2 },
+  { question: "What are Geri and Freki?", choices: ["Odin's wolves","Ravens","Just wolves","Eagle"], correct: 0 },
+  { question: "What is Valhalla?", choices: ["Odin's hall for slain warriors","Underworld","Both","Just hall"], correct: 2 },
+  { question: "What are Valkyries?", choices: ["Choosers of the slain","Just warriors","Both","Goddesses"], correct: 2 },
+  { question: "What's the Norse afterlife for non-heroes?", choices: ["Hel","Niflheim","Both used","Just Hel"], correct: 2 },
+  { question: "What's Loki's role?", choices: ["Trickster god","Warrior","Healer","Just god"], correct: 0 },
+  { question: "Who are Loki's monstrous children?", choices: ["Fenrir, Jormungandr, Hel","Just one","Both","Three"], correct: 2 },
+  { question: "What is Fenrir?", choices: ["Giant wolf, Loki's child","Snake","Both","Just wolf"], correct: 2 },
+  { question: "What is Jormungandr?", choices: ["World Serpent","Wolf","Both","Just snake"], correct: 2 },
+  { question: "What is Yggdrasil?", choices: ["World Tree","Just tree","Both","Magic tree"], correct: 2 },
+  { question: "What's Ragnarok?", choices: ["End of the world","Just battle","Both","Doomsday"], correct: 2 },
+  { question: "Who fights Jormungandr in Ragnarok?", choices: ["Thor","Odin","Loki","Freyr"], correct: 0 },
+  { question: "Who fights Fenrir in Ragnarok?", choices: ["Odin","Thor","Loki","Tyr"], correct: 0 },
+  { question: "What sword does Freyr give up?", choices: ["His magical sword for Gerd","Gungnir","Mjolnir","Mistilteinn"], correct: 0 },
+  { question: "Who are the two main Norse god families?", choices: ["Aesir and Vanir","Just Aesir","Both","Just Vanir"], correct: 2 },
+  { question: "Who's the goddess of love and beauty?", choices: ["Freyja","Frigg","Both involved","Just Freyja"], correct: 2 },
+  { question: "Who's Odin's wife?", choices: ["Frigg","Freyja","Both","Just Frigg"], correct: 0 },
+  { question: "What's the Norse rainbow bridge?", choices: ["Bifrost","Yggdrasil","Both","Just bridge"], correct: 2 },
+  { question: "Who guards Bifrost?", choices: ["Heimdall","Odin","Thor","Loki"], correct: 0 },
+  { question: "What are the Norns?", choices: ["Goddesses of fate","Warriors","Both","Just norns"], correct: 2 },
+  { question: "How many Norns are there primarily?", choices: ["3 (Urd, Verdandi, Skuld)","2","4","Many"], correct: 0 },
+  { question: "What's the Norse word for giants?", choices: ["Jotnar","Trolls","Both","Just giants"], correct: 2 },
+  { question: "What is Asgard?", choices: ["Realm of gods","Mortal world","Underworld","Giant realm"], correct: 0 },
+  { question: "What is Midgard?", choices: ["Mortal world","Asgard","Both","Just Earth"], correct: 2 },
+  { question: "What's the eight-legged horse?", choices: ["Sleipnir (Odin's)","Just any horse","Both","Just Sleipnir"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: NorseMythQuizSettings): NorseMythQuizState {

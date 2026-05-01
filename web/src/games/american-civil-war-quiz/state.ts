@@ -4,126 +4,36 @@ export interface AmericanCivilWarQuizSettings { questions: "10" | "20" | "30"; }
 export interface AmericanCivilWarQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type AmericanCivilWarQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "In what year did the American Civil War begin?",
-    "choices": [
-      "1859",
-      "1861",
-      "1863",
-      "1865"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who commanded the Confederate Army of Northern Virginia?",
-    "choices": [
-      "Stonewall Jackson",
-      "P.G.T. Beauregard",
-      "Robert E. Lee",
-      "Jefferson Davis"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The Battle of Gettysburg occurred in what month and year?",
-    "choices": [
-      "June 1862",
-      "July 1863",
-      "August 1864",
-      "April 1865"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which document freed slaves in Confederate states?",
-    "choices": [
-      "Bill of Rights",
-      "Emancipation Proclamation",
-      "13th Amendment",
-      "Missouri Compromise"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was Union General-in-Chief at war's end?",
-    "choices": [
-      "George McClellan",
-      "William Sherman",
-      "Ulysses S. Grant",
-      "George Meade"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Where did Lee surrender to Grant?",
-    "choices": [
-      "Antietam",
-      "Vicksburg",
-      "Appomattox Court House",
-      "Fort Sumter"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which battle was the Civil War's bloodiest single day?",
-    "choices": [
-      "Antietam",
-      "Shiloh",
-      "Bull Run",
-      "Chancellorsville"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lincoln's famous address occurred at?",
-    "choices": [
-      "Antietam",
-      "Vicksburg",
-      "Gettysburg",
-      "Atlanta"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What state seceded first in 1860?",
-    "choices": [
-      "Virginia",
-      "Georgia",
-      "South Carolina",
-      "Mississippi"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who was Confederate President?",
-    "choices": [
-      "Robert E. Lee",
-      "Jefferson Davis",
-      "Stonewall Jackson",
-      "Alexander Stephens"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sherman's March to the Sea ended in?",
-    "choices": [
-      "Atlanta",
-      "Charleston",
-      "Savannah",
-      "Richmond"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The CSS Virginia (Merrimack) fought the?",
-    "choices": [
-      "USS Cairo",
-      "USS Monitor",
-      "USS Hartford",
-      "USS Constitution"
-    ],
-    "correct": 1
-  }
+  { question: "In what year did the American Civil War begin?", choices: ["1860","1861","1862","1859"], correct: 1 },
+  { question: "Where did the Civil War officially begin?", choices: ["Bull Run","Fort Sumter","Antietam","Gettysburg"], correct: 1 },
+  { question: "Who was the Confederate States' president?", choices: ["Abraham Lincoln","Robert E. Lee","Jefferson Davis","Stonewall Jackson"], correct: 2 },
+  { question: "Who commanded the Union army in 1864?", choices: ["McClellan","Sherman","Ulysses S. Grant","Meade"], correct: 2 },
+  { question: "Who commanded the main Confederate army?", choices: ["Robert E. Lee","Stonewall Jackson","James Longstreet","J.E.B. Stuart"], correct: 0 },
+  { question: "At what battle is the Civil War's bloodiest single day?", choices: ["Gettysburg","Antietam","Shiloh","Chancellorsville"], correct: 1 },
+  { question: "Where was the surrender ceremony in 1865?", choices: ["Richmond","Atlanta","Appomattox Court House","Petersburg"], correct: 2 },
+  { question: "In what year did the Civil War end?", choices: ["1864","1865","1866","1867"], correct: 1 },
+  { question: "What document declared slaves free in Confederate states (1863)?", choices: ["13th Amendment","Gettysburg Address","Emancipation Proclamation","Homestead Act"], correct: 2 },
+  { question: "How many states seceded to form the Confederacy?", choices: ["9","11","13","15"], correct: 1 },
+  { question: "Who delivered the Gettysburg Address?", choices: ["Lincoln","Grant","Sherman","Davis"], correct: 0 },
+  { question: "In what state was the Battle of Gettysburg fought?", choices: ["Maryland","Virginia","Pennsylvania","West Virginia"], correct: 2 },
+  { question: "What was Sherman's famous 1864 campaign?", choices: ["Overland","March to the Sea","Anaconda","Peninsula"], correct: 1 },
+  { question: "What naval blockade strategy did Union employ?", choices: ["Trent Plan","Anaconda Plan","Cobra Plan","Trident Plan"], correct: 1 },
+  { question: "Which battle ended Lee's invasion of the North in 1863?", choices: ["Vicksburg","Chickamauga","Gettysburg","Bull Run"], correct: 2 },
+  { question: "What 1863 siege gave the Union control of the Mississippi?", choices: ["Vicksburg","New Orleans","Charleston","Memphis"], correct: 0 },
+  { question: "Who killed Abraham Lincoln?", choices: ["John Wilkes Booth","Lewis Powell","David Herold","George Atzerodt"], correct: 0 },
+  { question: "In what theater building was Lincoln shot?", choices: ["Tremont","Ford's","National","Wallack's"], correct: 1 },
+  { question: "What was the most famous Confederate ironclad?", choices: ["Monitor","Virginia (Merrimack)","Tennessee","Albemarle"], correct: 1 },
+  { question: "What was the most famous Union ironclad?", choices: ["Monitor","Virginia","Galena","New Ironsides"], correct: 0 },
+  { question: "What 1862 act gave land to settlers?", choices: ["Homestead Act","Morrill Act","Pacific Railway Act","Land Ordinance"], correct: 0 },
+  { question: "What was the term for Northern Democrats opposed to the war?", choices: ["Carpetbaggers","Copperheads","Scalawags","Bushwhackers"], correct: 1 },
+  { question: "What general led the Confederate cavalry, killed at Yellow Tavern?", choices: ["Forrest","Stuart","Mosby","Hampton"], correct: 1 },
+  { question: "What 1864 battle was Sherman's first major target?", choices: ["Atlanta","Chattanooga","Savannah","Nashville"], correct: 0 },
+  { question: "What constitutional amendment abolished slavery?", choices: ["12th","13th","14th","15th"], correct: 1 },
+  { question: "Who succeeded Lincoln as president?", choices: ["Andrew Johnson","Hannibal Hamlin","Schuyler Colfax","Salmon Chase"], correct: 0 },
+  { question: "In which state was the First Battle of Bull Run fought?", choices: ["Virginia","Maryland","Tennessee","Kentucky"], correct: 0 },
+  { question: "What was the largest naval battle of the war?", choices: ["Hampton Roads","Mobile Bay","Memphis","New Orleans"], correct: 1 },
+  { question: "Who was the most famous Confederate cavalry commander in the West?", choices: ["Forrest","Morgan","Wheeler","All known"], correct: 0 },
+  { question: "What name was given to the prison camp in Georgia?", choices: ["Andersonville","Belle Isle","Libby","Salisbury"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: AmericanCivilWarQuizSettings): AmericanCivilWarQuizState {

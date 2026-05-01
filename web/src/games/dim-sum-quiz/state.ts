@@ -4,306 +4,36 @@ export interface DimSumQuizSettings { questions: "10" | "20"; }
 export interface DimSumQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type DimSumQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Har gow is filled with?",
-    "choices": [
-      "Shrimp",
-      "Pork",
-      "Beef",
-      "Vegetable"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Siu mai is open-topped and contains?",
-    "choices": [
-      "Pork & shrimp",
-      "Vegetable",
-      "Tofu",
-      "Chicken"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Char siu bao is a bun filled with?",
-    "choices": [
-      "BBQ pork",
-      "Beef",
-      "Lotus paste",
-      "Custard"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Xiao long bao originated in?",
-    "choices": [
-      "Shanghai",
-      "Guangzhou",
-      "Beijing",
-      "Sichuan"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Xiao long bao are famous for?",
-    "choices": [
-      "Hot soup inside",
-      "Crispy crust",
-      "Sweet filling",
-      "Cold filling"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cheong fun is a?",
-    "choices": [
-      "Rice noodle roll",
-      "Wheat noodle",
-      "Egg noodle",
-      "Dumpling"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lo mai gai is wrapped in?",
-    "choices": [
-      "Lotus leaf",
-      "Banana leaf",
-      "Cabbage",
-      "Pastry"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lo mai gai is mostly?",
-    "choices": [
-      "Sticky rice",
-      "Wheat noodle",
-      "Egg pastry",
-      "Tofu"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Turnip cake is also known as?",
-    "choices": [
-      "Lo bak go",
-      "Char siu bao",
-      "Wonton",
-      "Cheong fun"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Yum cha literally means?",
-    "choices": [
-      "Drink tea",
-      "Eat dumplings",
-      "Steam basket",
-      "Fried bun"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dim sum literally means?",
-    "choices": [
-      "Touch the heart",
-      "Big plate",
-      "Hot food",
-      "Tiny food"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dim sum is associated with which Chinese region?",
-    "choices": [
-      "Cantonese",
-      "Sichuan",
-      "Beijing",
-      "Hunan"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dumplings are typically steamed in?",
-    "choices": [
-      "Bamboo baskets",
-      "Iron pots",
-      "Glass bowls",
-      "Clay pots"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Egg tarts (dan tat) have origins linking to?",
-    "choices": [
-      "Portuguese",
-      "French",
-      "British",
-      "Dutch"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A custard bun is also known as?",
-    "choices": [
-      "Lai wong bao",
-      "Char siu bao",
-      "Cha siu",
-      "Dou sha"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mango pudding is typically served as?",
-    "choices": [
-      "Dessert",
-      "Soup",
-      "Main",
-      "Tea"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Phoenix talons are actually?",
-    "choices": [
-      "Chicken feet",
-      "Duck wings",
-      "Quail eggs",
-      "Pork ears"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Spring rolls are typically?",
-    "choices": [
-      "Fried",
-      "Steamed",
-      "Boiled",
-      "Raw"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Wonton soup features?",
-    "choices": [
-      "Filled dumplings in broth",
-      "Plain noodles",
-      "Egg drop",
-      "Hot pot"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pork ribs (pai gwat) are typically?",
-    "choices": [
-      "Steamed with black bean",
-      "Grilled",
-      "BBQ",
-      "Fried"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sticky rice in lotus leaf is?",
-    "choices": [
-      "Lo mai gai",
-      "Char siu bao",
-      "Cheong fun",
-      "Har gow"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chiu Chow style dumplings often contain?",
-    "choices": [
-      "Peanuts",
-      "Seafood only",
-      "Chocolate",
-      "Cheese"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sesame balls (jin deui) are filled with?",
-    "choices": [
-      "Lotus or red bean paste",
-      "Ground meat",
-      "Vegetables",
-      "Custard"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sesame balls are coated in?",
-    "choices": [
-      "Sesame seeds",
-      "Coconut",
-      "Sugar",
-      "Flour"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Fried taro dumplings have a crispy?",
-    "choices": [
-      "Lacy exterior",
-      "Hard shell",
-      "Crumbly crust",
-      "Smooth glaze"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Fung jow is the dim sum for?",
-    "choices": [
-      "Chicken feet",
-      "Pork ribs",
-      "Rice rolls",
-      "Custard"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A traditional dim sum cart is?",
-    "choices": [
-      "Pushed by servers",
-      "Self-serve",
-      "Robotic",
-      "Buffet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bamboo baskets stack to?",
-    "choices": [
-      "Cook in tiers",
-      "Decorate",
-      "Cool food",
-      "Dry food"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tea most commonly served with dim sum?",
-    "choices": [
-      "Pu-erh",
-      "Green sencha",
-      "English Breakfast",
-      "Earl Grey"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Most dim sum is best eaten?",
-    "choices": [
-      "Right after steaming",
-      "Cold",
-      "Reheated",
-      "Frozen"
-    ],
-    "correct": 0
-  }
+  { question: "What region is dim sum from?", choices: ["Cantonese (Hong Kong/Guangdong)","Just China","Both","Just southern China"], correct: 2 },
+  { question: "What does dim sum literally mean?", choices: ["Touch the heart","Small bites","Both interpretations","Just the heart"], correct: 2 },
+  { question: "What's yum cha?", choices: ["Drinking tea (with dim sum)","Just tea","Both","Just yum cha"], correct: 2 },
+  { question: "What's har gow?", choices: ["Crystal shrimp dumplings","Just dumplings","Both","Just shrimp"], correct: 2 },
+  { question: "What's siu mai?", choices: ["Open-top pork/shrimp dumplings","Just dumpling","Both","Just open"], correct: 2 },
+  { question: "What's char siu bao?", choices: ["BBQ pork buns","Just bun","Both","Just char siu"], correct: 2 },
+  { question: "What's char siu?", choices: ["Cantonese BBQ pork","Just BBQ","Both","Just pork"], correct: 2 },
+  { question: "What's xiao long bao?", choices: ["Soup dumplings (Shanghainese, often served at dim sum)","Just dumplings","Both","Just XLB"], correct: 2 },
+  { question: "What's the iconic feature of XLB?", choices: ["Liquid soup inside","Just dumpling","Both","Just soup"], correct: 2 },
+  { question: "What's egg tart?", choices: ["Sweet baked custard tart","Just tart","Both","Just egg"], correct: 2 },
+  { question: "What's the difference between Hong Kong and Portuguese egg tarts?", choices: ["HK has smoother, Portuguese has caramelized top","Just style","Both","Just difference"], correct: 2 },
+  { question: "What's congee?", choices: ["Rice porridge","Just porridge","Both","Just rice"], correct: 2 },
+  { question: "What's chicken feet (a dim sum classic)?", choices: ["Phoenix talons / Fung Zao","Just feet","Both","Just chicken"], correct: 2 },
+  { question: "What's cheung fun?", choices: ["Rice noodle rolls","Just rolls","Both","Just rice"], correct: 2 },
+  { question: "What's typically inside cheung fun?", choices: ["Shrimp, beef, BBQ pork, etc.","Just shrimp","Multiple fillings","All listed"], correct: 2 },
+  { question: "What's lo mai gai?", choices: ["Sticky rice in lotus leaf","Just rice","Both","Just dish"], correct: 2 },
+  { question: "What's turnip cake?", choices: ["Pan-fried daikon cake","Just cake","Both","Just turnip"], correct: 2 },
+  { question: "What's the daikon called in Chinese?", choices: ["Lo bak","Just radish","Both","Just daikon"], correct: 2 },
+  { question: "What's mango pudding?", choices: ["Sweet mango dessert","Just dessert","Both","Just mango"], correct: 2 },
+  { question: "What tea is most common with dim sum?", choices: ["Pu-erh, jasmine, oolong","Multiple teas","All listed","Just tea"], correct: 2 },
+  { question: "What are pushcarts in dim sum service?", choices: ["Cart service used historically","Just cart","Both","Just service"], correct: 2 },
+  { question: "What's modern service?", choices: ["Order from menu","Just menu","Both","Both cart and menu"], correct: 3 },
+  { question: "What's a wonton?", choices: ["Filled dumpling, often in soup","Just dumpling","Both","Just wonton"], correct: 2 },
+  { question: "What's dumpling skin made of?", choices: ["Wheat flour or wheat starch","Just flour","Both","Just dough"], correct: 2 },
+  { question: "What's the typical dim sum meal time?", choices: ["Brunch","Just brunch","Both","Lunch and brunch"], correct: 3 },
+  { question: "What's a pork bun's color?", choices: ["White (steamed) or shiny brown (baked)","Just white","Both","Variations"], correct: 2 },
+  { question: "What's the iconic dim sum cart's purpose?", choices: ["Bringing variety of dishes","Just service","Both","Just cart"], correct: 2 },
+  { question: "What's siu yuk?", choices: ["Crispy roast pork","Just pork","Both","Just roast"], correct: 2 },
+  { question: "What's a steamer basket called?", choices: ["Bamboo steamer","Just steamer","Both","Just bamboo"], correct: 2 },
+  { question: "What's the word 'dim sum' in Mandarin?", choices: ["Dianxin","Just dim sum","Both names","Just dianxin"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: DimSumQuizSettings): DimSumQuizState {

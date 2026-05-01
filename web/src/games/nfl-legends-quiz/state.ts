@@ -4,306 +4,36 @@ export interface NflLegendsQuizSettings { questions: "10" | "20" | "30"; }
 export interface NflLegendsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type NflLegendsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "How many Super Bowls did Tom Brady win?",
-    "choices": [
-      "5",
-      "6",
-      "7",
-      "8"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Joe Montana won how many Super Bowls?",
-    "choices": [
-      "3",
-      "4",
-      "5",
-      "6"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Jerry Rice is regarded as the greatest at which position?",
-    "choices": [
-      "QB",
-      "WR",
-      "RB",
-      "TE"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Jerry Rice spent most of his career with?",
-    "choices": [
-      "49ers",
-      "Cowboys",
-      "Patriots",
-      "Packers"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Peyton Manning won Super Bowls with which two teams?",
-    "choices": [
-      "Colts and Broncos",
-      "Colts only",
-      "Broncos only",
-      "Giants and Colts"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Eli Manning won how many Super Bowls?",
-    "choices": [
-      "1",
-      "2",
-      "3",
-      "4"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Walter Payton played for which team?",
-    "choices": [
-      "Bears",
-      "Packers",
-      "Lions",
-      "Vikings"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Emmitt Smith is the all-time leading rusher; he played for?",
-    "choices": [
-      "Cowboys (mostly)",
-      "Eagles",
-      "Giants",
-      "Redskins"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who held the season passing-yards record before being eclipsed?",
-    "choices": [
-      "Dan Marino (long held)",
-      "Tom Brady (eclipsed Marino)",
-      "Peyton Manning (most recent of these eclipsed)",
-      "All three set records"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Who is nicknamed 'Sweetness'?",
-    "choices": [
-      "Walter Payton",
-      "Barry Sanders",
-      "Jim Brown",
-      "Marshall Faulk"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Barry Sanders played for which team?",
-    "choices": [
-      "Lions",
-      "Packers",
-      "Vikings",
-      "Bears"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Jim Brown played for which team?",
-    "choices": [
-      "Browns",
-      "Steelers",
-      "Giants",
-      "Bears"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lawrence Taylor played for?",
-    "choices": [
-      "Giants",
-      "Eagles",
-      "Redskins",
-      "Cowboys"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who was the dominant QB of the 80s 49ers?",
-    "choices": [
-      "Joe Montana",
-      "Steve Young",
-      "John Brodie",
-      "Jeff Garcia"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Reggie White played mostly for which two teams?",
-    "choices": [
-      "Eagles and Packers",
-      "Cowboys and 49ers",
-      "Bears and Vikings",
-      "Giants and Falcons"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Brett Favre was famous on which team?",
-    "choices": [
-      "Packers",
-      "Vikings",
-      "Jets",
-      "All three"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "John Elway played his career for?",
-    "choices": [
-      "Broncos",
-      "Raiders",
-      "Chiefs",
-      "Cowboys"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dan Marino played for?",
-    "choices": [
-      "Dolphins",
-      "Jets",
-      "Patriots",
-      "Bills"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the all-time NFL touchdown receptions leader?",
-    "choices": [
-      "Jerry Rice",
-      "Randy Moss",
-      "Larry Fitzgerald",
-      "Terrell Owens"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Randy Moss famously played for?",
-    "choices": [
-      "Vikings",
-      "Patriots",
-      "Raiders",
-      "All three"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Who is the NFL's all-time sack leader (since stat tracked)?",
-    "choices": [
-      "Bruce Smith",
-      "Reggie White",
-      "Lawrence Taylor",
-      "Deacon Jones"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Deacon Jones popularized which term?",
-    "choices": [
-      "Sack",
-      "Blitz",
-      "Pick six",
-      "Audible"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is Patrick Mahomes's main team?",
-    "choices": [
-      "Chiefs",
-      "Cowboys",
-      "Cardinals",
-      "Raiders"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Aaron Rodgers played most of his career for?",
-    "choices": [
-      "Packers",
-      "Jets",
-      "Bears",
-      "Giants"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Drew Brees set passing records with?",
-    "choices": [
-      "Saints",
-      "Chargers",
-      "Cowboys",
-      "Falcons"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who coached the Patriots dynasty?",
-    "choices": [
-      "Bill Belichick",
-      "Bill Parcells",
-      "Tom Coughlin",
-      "Mike Tomlin"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Vince Lombardi coached which Super Bowl winners?",
-    "choices": [
-      "Packers",
-      "Cowboys",
-      "Chiefs",
-      "Browns"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Joe Namath guaranteed and won which Super Bowl?",
-    "choices": [
-      "Super Bowl III",
-      "Super Bowl I",
-      "Super Bowl V",
-      "Super Bowl X"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is Deion Sanders known as?",
-    "choices": [
-      "Prime Time",
-      "Neon Deion",
-      "Coach Prime",
-      "All of the above"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Tom Brady was drafted in which round?",
-    "choices": [
-      "1st",
-      "3rd",
-      "6th",
-      "Undrafted"
-    ],
-    "correct": 2
-  }
+  { question: "Who's the NFL's all-time leading passer?", choices: ["Tom Brady","Drew Brees","Peyton Manning","Brett Favre"], correct: 0 },
+  { question: "How many Super Bowl wins does Tom Brady have?", choices: ["7","6","5","8"], correct: 0 },
+  { question: "Who's regarded as the GOAT QB?", choices: ["Tom Brady","Joe Montana","Peyton Manning","Multiple candidates"], correct: 0 },
+  { question: "Who held the single-season passing TD record before Brady (50)?", choices: ["Peyton Manning (55)","Tom Brady","Both","Mahomes"], correct: 0 },
+  { question: "Who's the NFL's all-time leading rusher?", choices: ["Emmitt Smith","Walter Payton","Barry Sanders","Adrian Peterson"], correct: 0 },
+  { question: "Who's known as Sweetness?", choices: ["Walter Payton","Barry Sanders","Jim Brown","Just Payton"], correct: 2 },
+  { question: "What team did Joe Montana win Super Bowls with?", choices: ["49ers","Chiefs","Both","Just 49ers"], correct: 2 },
+  { question: "How many Super Bowls did Montana win?", choices: ["4","3","5","2"], correct: 0 },
+  { question: "Who's Jerry Rice's team primarily?", choices: ["49ers","Raiders","Both","Just 49ers"], correct: 2 },
+  { question: "What position did Jerry Rice play?", choices: ["Wide receiver","Running back","TE","QB"], correct: 0 },
+  { question: "How many TD receptions does Jerry Rice have (most all-time)?", choices: ["~197","~150","~120","~250"], correct: 0 },
+  { question: "Who's the NFL's career sacks leader?", choices: ["Bruce Smith","Reggie White","Both close","Deacon Jones"], correct: 0 },
+  { question: "What position did Lawrence Taylor play?", choices: ["Linebacker","Defensive end","Both","Just LB"], correct: 2 },
+  { question: "What team did Lawrence Taylor play for?", choices: ["NY Giants","Eagles","Cowboys","49ers"], correct: 0 },
+  { question: "Who's known as Mean Joe Greene?", choices: ["Steelers DT","Just DL","Both","Just lineman"], correct: 2 },
+  { question: "What team did Mean Joe play for?", choices: ["Pittsburgh Steelers","Cowboys","Bears","49ers"], correct: 0 },
+  { question: "How many Super Bowls have the Steelers won?", choices: ["6","5","7","4"], correct: 0 },
+  { question: "Who's the Patriots' head coach during their dynasty?", choices: ["Bill Belichick","Tom Coughlin","Andy Reid","Mike Tomlin"], correct: 0 },
+  { question: "Who's the Cowboys' all-time leading rusher?", choices: ["Emmitt Smith","Tony Dorsett","Both Hall of Fame","Just Smith"], correct: 0 },
+  { question: "What team did Brett Favre play most for?", choices: ["Green Bay Packers","Vikings","Jets","All three"], correct: 0 },
+  { question: "Who's known as The Bus?", choices: ["Jerome Bettis","Eddie George","Just Bettis","Both"], correct: 0 },
+  { question: "Who's known as Megatron?", choices: ["Calvin Johnson","Andre Johnson","Antonio Brown","Larry Fitzgerald"], correct: 0 },
+  { question: "Who's Lawrence Taylor's defensive coordinator famously?", choices: ["Bill Parcells (head coach)","Just LT","Both Parcells and Bill Belichick","Multiple"], correct: 2 },
+  { question: "What's the NFL's iconic team Cowboys nickname?", choices: ["America's Team","Just Cowboys","Both","Big D"], correct: 2 },
+  { question: "Who's known as Prime Time?", choices: ["Deion Sanders","Charles Woodson","Just Deion","Both"], correct: 0 },
+  { question: "What position did Deion Sanders play primarily?", choices: ["Cornerback","Receiver also","Both","Just CB"], correct: 2 },
+  { question: "How many MVPs did Peyton Manning win?", choices: ["5","4","3","6"], correct: 0 },
+  { question: "Who's Jim Brown?", choices: ["Browns RB legend","Just RB","Both","Star of 50s-60s"], correct: 2 },
+  { question: "How many years did Jim Brown play?", choices: ["9","12","10","15"], correct: 0 },
+  { question: "Who's Dan Marino?", choices: ["Dolphins QB legend","Hall of Fame","Both","Just QB"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: NflLegendsQuizSettings): NflLegendsQuizState {

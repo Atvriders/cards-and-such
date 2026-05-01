@@ -4,306 +4,36 @@ export interface GreekMythQuizSettings { questions: "10" | "20" | "30"; }
 export interface GreekMythQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type GreekMythQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who is the king of the Olympian gods?",
-    "choices": [
-      "Zeus",
-      "Poseidon",
-      "Hades",
-      "Apollo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which hero completed the Twelve Labors?",
-    "choices": [
-      "Theseus",
-      "Heracles",
-      "Perseus",
-      "Achilles"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the Greek goddess of wisdom?",
-    "choices": [
-      "Hera",
-      "Aphrodite",
-      "Athena",
-      "Artemis"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who flew too close to the sun?",
-    "choices": [
-      "Daedalus",
-      "Icarus",
-      "Bellerophon",
-      "Phaeton"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which monster had snakes for hair?",
-    "choices": [
-      "Chimera",
-      "Medusa",
-      "Hydra",
-      "Sphinx"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was the messenger god?",
-    "choices": [
-      "Hermes",
-      "Apollo",
-      "Ares",
-      "Dionysus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What was the home of the Olympian gods?",
-    "choices": [
-      "Mount Olympus",
-      "Mount Ida",
-      "Mount Pelion",
-      "Mount Etna"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who killed the Minotaur?",
-    "choices": [
-      "Heracles",
-      "Perseus",
-      "Theseus",
-      "Jason"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who was the goddess of love?",
-    "choices": [
-      "Hera",
-      "Aphrodite",
-      "Demeter",
-      "Hestia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who guarded the underworld with three heads?",
-    "choices": [
-      "Cerberus",
-      "Ladon",
-      "Argus",
-      "Typhon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who turned everything he touched into gold?",
-    "choices": [
-      "Sisyphus",
-      "Tantalus",
-      "Midas",
-      "Croesus"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which goddess sprung fully grown from Zeus's head?",
-    "choices": [
-      "Aphrodite",
-      "Athena",
-      "Artemis",
-      "Hera"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was the Titan that held up the sky?",
-    "choices": [
-      "Prometheus",
-      "Atlas",
-      "Cronus",
-      "Hyperion"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What musical instrument did Orpheus famously play?",
-    "choices": [
-      "Flute",
-      "Lyre",
-      "Harp",
-      "Pipes"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the god of the sea?",
-    "choices": [
-      "Zeus",
-      "Hades",
-      "Poseidon",
-      "Apollo"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What kind of creature was Pegasus?",
-    "choices": [
-      "Lion",
-      "Horse",
-      "Eagle",
-      "Bull"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who led the Argonauts in search of the Golden Fleece?",
-    "choices": [
-      "Theseus",
-      "Achilles",
-      "Jason",
-      "Heracles"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who was the goddess of the hunt?",
-    "choices": [
-      "Athena",
-      "Artemis",
-      "Demeter",
-      "Persephone"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What woman's face launched a thousand ships?",
-    "choices": [
-      "Helen",
-      "Cassandra",
-      "Andromache",
-      "Penelope"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who was the wife of Zeus?",
-    "choices": [
-      "Demeter",
-      "Hera",
-      "Hestia",
-      "Leto"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who solved the riddle of the Sphinx?",
-    "choices": [
-      "Perseus",
-      "Oedipus",
-      "Theseus",
-      "Bellerophon"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which creature was half-man, half-horse?",
-    "choices": [
-      "Centaur",
-      "Satyr",
-      "Faun",
-      "Minotaur"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who tricked Hades and was punished to roll a boulder forever?",
-    "choices": [
-      "Tantalus",
-      "Sisyphus",
-      "Prometheus",
-      "Ixion"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who fought Hector outside the walls of Troy?",
-    "choices": [
-      "Achilles",
-      "Odysseus",
-      "Ajax",
-      "Diomedes"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who was the hero of the Odyssey?",
-    "choices": [
-      "Achilles",
-      "Odysseus",
-      "Hector",
-      "Paris"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was the god of war?",
-    "choices": [
-      "Apollo",
-      "Ares",
-      "Hermes",
-      "Hephaestus"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who opened a jar releasing all evils into the world?",
-    "choices": [
-      "Eve",
-      "Pandora",
-      "Psyche",
-      "Ariadne"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What were the three sisters of Fate called?",
-    "choices": [
-      "Furies",
-      "Muses",
-      "Moirai",
-      "Horae"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who was the mortal mother of Heracles?",
-    "choices": [
-      "Alcmene",
-      "Danae",
-      "Leda",
-      "Semele"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who built the Trojan horse plan?",
-    "choices": [
-      "Achilles",
-      "Odysseus",
-      "Agamemnon",
-      "Menelaus"
-    ],
-    "correct": 1
-  }
+  { question: "Who is the king of the Greek gods?", choices: ["Zeus","Apollo","Hades","Ares"], correct: 0 },
+  { question: "Who is the queen of the Greek gods?", choices: ["Hera","Aphrodite","Athena","Artemis"], correct: 0 },
+  { question: "Who's the god of the sea?", choices: ["Poseidon","Zeus","Hades","Apollo"], correct: 0 },
+  { question: "Who's the god of the underworld?", choices: ["Hades","Poseidon","Apollo","Hermes"], correct: 0 },
+  { question: "Who's the goddess of love?", choices: ["Aphrodite","Hera","Athena","Artemis"], correct: 0 },
+  { question: "Who's the goddess of wisdom?", choices: ["Athena","Hera","Aphrodite","Artemis"], correct: 0 },
+  { question: "Who's the god of war?", choices: ["Ares","Hades","Apollo","Hermes"], correct: 0 },
+  { question: "Who's the god of music and prophecy?", choices: ["Apollo","Hermes","Dionysus","Ares"], correct: 0 },
+  { question: "Who's the goddess of the hunt?", choices: ["Artemis","Athena","Aphrodite","Hera"], correct: 0 },
+  { question: "Who's the messenger of the gods?", choices: ["Hermes","Apollo","Ares","Iris"], correct: 0 },
+  { question: "Who's the god of fire and forge?", choices: ["Hephaestus","Apollo","Ares","Hermes"], correct: 0 },
+  { question: "Who's the god of wine?", choices: ["Dionysus","Apollo","Hermes","Pan"], correct: 0 },
+  { question: "What does the Trojan Horse symbolize?", choices: ["Greek deception in Troy War","Just a horse","Both","Just symbol"], correct: 2 },
+  { question: "Who was Helen of Troy?", choices: ["Most beautiful woman, cause of Trojan War","Just queen","Both","Just beauty"], correct: 2 },
+  { question: "Who killed Hector?", choices: ["Achilles","Paris","Odysseus","Ajax"], correct: 0 },
+  { question: "Who killed Achilles?", choices: ["Paris (with Apollo's help)","Hector","Just Paris","Both"], correct: 0 },
+  { question: "What was Achilles' weak spot?", choices: ["His heel","His back","His arm","His knee"], correct: 0 },
+  { question: "Who's the hero of the Odyssey?", choices: ["Odysseus","Achilles","Hector","Paris"], correct: 0 },
+  { question: "How long did Odysseus take to return home?", choices: ["10 years","5 years","20 years","2 years"], correct: 0 },
+  { question: "Who's Odysseus's wife?", choices: ["Penelope","Calypso","Circe","Helen"], correct: 0 },
+  { question: "What hero killed the Minotaur?", choices: ["Theseus","Hercules","Perseus","Jason"], correct: 0 },
+  { question: "What did Theseus use to find his way out of the labyrinth?", choices: ["Thread (Ariadne's)","Map","Sword","Magic"], correct: 0 },
+  { question: "Who killed Medusa?", choices: ["Perseus","Theseus","Hercules","Bellerophon"], correct: 0 },
+  { question: "How many Labors did Hercules perform?", choices: ["12","10","7","9"], correct: 0 },
+  { question: "Who flew too close to the sun?", choices: ["Icarus","Daedalus","Phaethon","Helios"], correct: 0 },
+  { question: "What was Pandora's gift that brought evil?", choices: ["The box (jar) she opened","Apple","Mirror","Sword"], correct: 0 },
+  { question: "Who tried to ferry souls across Styx?", choices: ["Charon","Hades","Hermes","Persephone"], correct: 0 },
+  { question: "Who's the three-headed dog guarding the underworld?", choices: ["Cerberus","Orthrus","Hydra","Just Cerberus"], correct: 0 },
+  { question: "What was the Trojan War triggered by?", choices: ["Paris taking Helen","Greek invasion","Both","Just dispute"], correct: 2 },
+  { question: "Who's the seer who couldn't be believed?", choices: ["Cassandra","Tiresias","Apollo","Pythia"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: GreekMythQuizSettings): GreekMythQuizState {

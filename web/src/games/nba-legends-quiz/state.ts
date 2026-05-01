@@ -4,306 +4,36 @@ export interface NbaLegendsQuizSettings { questions: "10" | "20" | "30"; }
 export interface NbaLegendsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type NbaLegendsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who won 6 NBA Finals MVPs?",
-    "choices": [
-      "LeBron James",
-      "Magic Johnson",
-      "Michael Jordan",
-      "Larry Bird"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which Lakers legend wore #24 (and #8)?",
-    "choices": [
-      "Magic Johnson",
-      "Kobe Bryant",
-      "Shaquille O'Neal",
-      "Wilt Chamberlain"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Wilt Chamberlain famously scored how many points in one game?",
-    "choices": [
-      "81",
-      "100",
-      "61",
-      "73"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who scored 81 points in a single game in 2006?",
-    "choices": [
-      "LeBron James",
-      "Kobe Bryant",
-      "Allen Iverson",
-      "Tracy McGrady"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Larry Bird played for which franchise?",
-    "choices": [
-      "Lakers",
-      "Celtics",
-      "Pacers",
-      "Bucks"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Magic Johnson played for which franchise?",
-    "choices": [
-      "Lakers",
-      "Celtics",
-      "76ers",
-      "Nuggets"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many championships did Michael Jordan win?",
-    "choices": [
-      "3",
-      "4",
-      "5",
-      "6"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Which player is the NBA all-time leading scorer (career)?",
-    "choices": [
-      "Kareem Abdul-Jabbar",
-      "Karl Malone",
-      "Kobe Bryant",
-      "LeBron James"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Who is the NBA's career assists leader?",
-    "choices": [
-      "Magic Johnson",
-      "Jason Kidd",
-      "John Stockton",
-      "Steve Nash"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who is the NBA's career rebounds leader?",
-    "choices": [
-      "Bill Russell",
-      "Wilt Chamberlain",
-      "Kareem",
-      "Hakeem"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bill Russell won how many NBA championships?",
-    "choices": [
-      "8",
-      "9",
-      "10",
-      "11"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Who played in 14 All-Star games in a 20-year career as a center for Houston?",
-    "choices": [
-      "David Robinson",
-      "Hakeem Olajuwon",
-      "Patrick Ewing",
-      "Shaquille O'Neal"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is Shaquille O'Neal's first NBA team?",
-    "choices": [
-      "Lakers",
-      "Magic",
-      "Heat",
-      "Suns"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tim Duncan won championships with which team?",
-    "choices": [
-      "Lakers",
-      "Spurs",
-      "Mavericks",
-      "Rockets"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who has the most regular-season MVPs?",
-    "choices": [
-      "LeBron",
-      "Jordan",
-      "Kareem",
-      "Russell"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "How many NBA MVPs does Kareem Abdul-Jabbar have?",
-    "choices": [
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Stephen Curry is famous for revolutionizing?",
-    "choices": [
-      "Defense",
-      "Three-point shooting",
-      "Post play",
-      "Free throws"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Curry plays for which team?",
-    "choices": [
-      "Warriors",
-      "Lakers",
-      "Celtics",
-      "Suns"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is nicknamed 'The King'?",
-    "choices": [
-      "LeBron James",
-      "Kobe Bryant",
-      "Michael Jordan",
-      "Magic Johnson"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which Greek star won MVPs with Milwaukee?",
-    "choices": [
-      "Giannis Antetokounmpo",
-      "Vassilis Spanoulis",
-      "Theofanis Christodoulou",
-      "Jakob Tsakalidis"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bill Russell played for which franchise?",
-    "choices": [
-      "Celtics",
-      "Lakers",
-      "Bulls",
-      "Pistons"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tim Duncan's nickname is?",
-    "choices": [
-      "Big Fundamental",
-      "The Mailman",
-      "The Admiral",
-      "The Glove"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Karl Malone's nickname is?",
-    "choices": [
-      "The Mailman",
-      "The Admiral",
-      "The Worm",
-      "The Round Mound"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dennis Rodman led the league in?",
-    "choices": [
-      "Scoring",
-      "Assists",
-      "Rebounds",
-      "Blocks"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who was Michael Jordan's longtime teammate, sometimes 'Robin'?",
-    "choices": [
-      "Scottie Pippen",
-      "Dennis Rodman",
-      "Toni Kukoc",
-      "Horace Grant"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Allen Iverson played mostly for which team?",
-    "choices": [
-      "76ers",
-      "Pistons",
-      "Nuggets",
-      "Knicks"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dirk Nowitzki played his entire career for?",
-    "choices": [
-      "Mavericks",
-      "Spurs",
-      "Rockets",
-      "Wizards"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which team did Kevin Durant win his first championship with?",
-    "choices": [
-      "Thunder",
-      "Warriors",
-      "Nets",
-      "Suns"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the youngest MVP in NBA history?",
-    "choices": [
-      "LeBron James",
-      "Kobe Bryant",
-      "Derrick Rose",
-      "Allen Iverson"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who won the 1994 and 1995 Finals MVP?",
-    "choices": [
-      "Hakeem Olajuwon",
-      "Patrick Ewing",
-      "David Robinson",
-      "Charles Barkley"
-    ],
-    "correct": 0
-  }
+  { question: "Who is widely considered the NBA's GOAT?", choices: ["Michael Jordan (debate with LeBron)","Just MJ","Both candidates","Just LeBron"], correct: 2 },
+  { question: "How many NBA championships did Michael Jordan win?", choices: ["6","5","7","4"], correct: 0 },
+  { question: "With what team did Jordan win his championships?", choices: ["Chicago Bulls","Lakers","Just Bulls","Heat"], correct: 2 },
+  { question: "Who's the all-time leading scorer in NBA history?", choices: ["LeBron James","Kareem Abdul-Jabbar","Karl Malone","Jordan"], correct: 0 },
+  { question: "Who held the previous all-time scoring record?", choices: ["Kareem Abdul-Jabbar","Karl Malone","Wilt","Jordan"], correct: 0 },
+  { question: "Who has the most NBA championships as a player?", choices: ["Bill Russell (11)","Sam Jones","Both","Just Russell"], correct: 2 },
+  { question: "How many championships did Bill Russell win?", choices: ["11","10","8","9"], correct: 0 },
+  { question: "Who scored 100 points in a single NBA game?", choices: ["Wilt Chamberlain","Jordan","Kobe","Just Wilt"], correct: 2 },
+  { question: "In what year did Wilt score 100?", choices: ["1962","1972","1982","1969"], correct: 0 },
+  { question: "Who's known as the Black Mamba?", choices: ["Kobe Bryant","LeBron","Jordan","Iverson"], correct: 0 },
+  { question: "How many championships did Kobe win?", choices: ["5","4","6","3"], correct: 0 },
+  { question: "Who's Magic Johnson's longtime rival?", choices: ["Larry Bird","Michael Jordan","Just Bird","Both"], correct: 2 },
+  { question: "What position did Magic Johnson play (mostly)?", choices: ["Point guard","Center","Forward","Guard"], correct: 0 },
+  { question: "What's Larry Bird's team?", choices: ["Boston Celtics","Lakers","Just Celtics","Both"], correct: 2 },
+  { question: "What's Magic Johnson's team?", choices: ["LA Lakers","Celtics","Just Lakers","Both"], correct: 2 },
+  { question: "Who's known as The Admiral?", choices: ["David Robinson","Tim Duncan","Patrick Ewing","Hakeem"], correct: 0 },
+  { question: "Who's known as Hakeem the Dream?", choices: ["Hakeem Olajuwon","David Robinson","Patrick Ewing","Bill Walton"], correct: 0 },
+  { question: "What team did Hakeem win championships with?", choices: ["Houston Rockets","Lakers","Bulls","Spurs"], correct: 0 },
+  { question: "What position did Wilt Chamberlain play?", choices: ["Center","Forward","Guard","Both center and forward"], correct: 0 },
+  { question: "How many MVPs did MJ win?", choices: ["5","6","4","3"], correct: 0 },
+  { question: "How many MVPs did Kareem win?", choices: ["6","5","4","7"], correct: 0 },
+  { question: "How many Finals MVPs did MJ win?", choices: ["6","5","4","3"], correct: 0 },
+  { question: "What's LeBron James's first team?", choices: ["Cleveland Cavaliers","Heat","Lakers","Spurs"], correct: 0 },
+  { question: "How many NBA championships does LeBron have?", choices: ["4","3","5","6"], correct: 0 },
+  { question: "Who's the only player to win MVP, championship, and Finals MVP all in same team move? (multiple did)", choices: ["LeBron, KD have done feats","Just LeBron","Both","Just KD"], correct: 0 },
+  { question: "What's Tim Duncan's team?", choices: ["San Antonio Spurs","Lakers","Bulls","Just Spurs"], correct: 2 },
+  { question: "How many championships did Duncan win?", choices: ["5","4","3","6"], correct: 0 },
+  { question: "Who's Shaq's nickname?", choices: ["The Big Aristotle, Diesel, etc.","Just Shaq","Both","Many nicknames"], correct: 0 },
+  { question: "Who's known as The Glove?", choices: ["Gary Payton","Allen Iverson","Iverson","Both"], correct: 0 },
+  { question: "Who's known as Mr. Clutch?", choices: ["Jerry West","Robert Horry","Both","Just West"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: NbaLegendsQuizSettings): NbaLegendsQuizState {

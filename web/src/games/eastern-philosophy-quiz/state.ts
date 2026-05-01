@@ -4,306 +4,36 @@ export interface EasternPhilosophyQuizSettings { questions: "10" | "20" | "30"; 
 export interface EasternPhilosophyQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type EasternPhilosophyQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who founded Confucianism?",
-    "choices": [
-      "Lao Tzu",
-      "Confucius",
-      "Mencius",
-      "Zhuangzi"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is traditionally said to have founded Daoism?",
-    "choices": [
-      "Confucius",
-      "Lao Tzu",
-      "Han Feizi",
-      "Mozi"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the central text of Daoism?",
-    "choices": [
-      "Tao Te Ching",
-      "Analects",
-      "Book of Changes",
-      "Zhuangzi"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the central collection of Confucius's sayings?",
-    "choices": [
-      "Mencius",
-      "Analects",
-      "Book of Rites",
-      "Doctrine of the Mean"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What concept means effortless action in Daoism?",
-    "choices": [
-      "Wuwei",
-      "Ren",
-      "Li",
-      "Yi"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What Confucian virtue is humaneness or benevolence?",
-    "choices": [
-      "Yi",
-      "Li",
-      "Ren",
-      "Zhi"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What term means propriety/ritual in Confucian thought?",
-    "choices": [
-      "Ren",
-      "Li",
-      "Yi",
-      "De"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mozi taught the doctrine of?",
-    "choices": [
-      "Filial piety",
-      "Universal love",
-      "Strict legalism",
-      "Quietism"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Han Feizi is most associated with?",
-    "choices": [
-      "Daoism",
-      "Mohism",
-      "Legalism",
-      "Confucianism"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What is the Yin-Yang principle about?",
-    "choices": [
-      "Conflict",
-      "Complementary opposites",
-      "Static order",
-      "Pure spirit"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who developed Indian Yoga philosophy in sutras?",
-    "choices": [
-      "Patanjali",
-      "Shankara",
-      "Ramanuja",
-      "Nagarjuna"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Adi Shankara is associated with which school?",
-    "choices": [
-      "Advaita Vedanta",
-      "Visistadvaita",
-      "Dvaita",
-      "Mimamsa"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Nagarjuna is famous in Buddhist philosophy for?",
-    "choices": [
-      "Madhyamaka (emptiness)",
-      "Yogacara (mind-only)",
-      "Theravada",
-      "Vinaya"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Yogacara school taught primacy of?",
-    "choices": [
-      "Form",
-      "Mind/consciousness",
-      "Substance",
-      "Numbers"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the great Korean Zen master Wonhyo associated with?",
-    "choices": [
-      "7th c. Korea",
-      "17th c. Japan",
-      "11th c. China",
-      "19th c. Tibet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Zen's emphasis is on?",
-    "choices": [
-      "Memorization",
-      "Direct experience",
-      "Devotion to icons",
-      "Logic"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who founded the Chan/Zen school in China (legendary)?",
-    "choices": [
-      "Bodhidharma",
-      "Huineng",
-      "Linji",
-      "Dogen"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dogen founded which school in Japan?",
-    "choices": [
-      "Soto Zen",
-      "Rinzai Zen",
-      "Pure Land",
-      "Nichiren"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What does 'koan' mean?",
-    "choices": [
-      "Riddle for awakening",
-      "Sutra",
-      "Mantra",
-      "Mudra"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mencius believed human nature is?",
-    "choices": [
-      "Evil",
-      "Good",
-      "Neutral",
-      "Indifferent"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Xunzi believed human nature is?",
-    "choices": [
-      "Good",
-      "Evil",
-      "Neutral",
-      "Divine"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Zhuangzi is famous for the 'butterfly' parable about?",
-    "choices": [
-      "Reality and dreaming",
-      "Filial piety",
-      "Government",
-      "War"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "I Ching means?",
-    "choices": [
-      "Book of Songs",
-      "Book of Changes",
-      "Book of Documents",
-      "Book of Rites"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sun Tzu wrote which classic?",
-    "choices": [
-      "The Art of War",
-      "Analects",
-      "Mencius",
-      "Five Classics"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What does 'qi' refer to?",
-    "choices": [
-      "Vital energy",
-      "Stone",
-      "Honor",
-      "Family"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Neo-Confucianism's leading thinker was?",
-    "choices": [
-      "Wang Yangming",
-      "Zhu Xi",
-      "Han Yu",
-      "Sima Qian"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Wang Yangming taught the unity of?",
-    "choices": [
-      "Knowledge and action",
-      "Ruler and minister",
-      "Heaven and earth",
-      "Father and son"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Bushido code is primarily associated with?",
-    "choices": [
-      "Japanese samurai ethics",
-      "Indian sages",
-      "Chinese sages",
-      "Tibetan monks"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the Japanese philosopher of Kyoto School?",
-    "choices": [
-      "Nishida Kitaro",
-      "Yukio Mishima",
-      "Soseki Natsume",
-      "Kobo Abe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "'Satori' refers to?",
-    "choices": [
-      "Sudden enlightenment",
-      "Long meditation",
-      "Burial rite",
-      "Pilgrimage"
-    ],
-    "correct": 0
-  }
+  { question: "Who was Confucius?", choices: ["Chinese philosopher (551-479 BCE)","Just teacher","Both","Just Chinese"], correct: 2 },
+  { question: "What's Confucianism's main concern?", choices: ["Social harmony, ethics, virtue","Just ethics","Both","Just family"], correct: 2 },
+  { question: "Who founded Taoism (traditionally)?", choices: ["Lao Tzu","Confucius","Buddha","Mencius"], correct: 0 },
+  { question: "What's Taoism's main text?", choices: ["Tao Te Ching","Analects","Just Zhuangzi","Both Tao Te Ching and Zhuangzi"], correct: 3 },
+  { question: "What's the Tao?", choices: ["The Way / cosmic principle","Just way","Both","Just life"], correct: 2 },
+  { question: "What's wu wei?", choices: ["Non-action / effortless action","Just inaction","Both","Just doing"], correct: 2 },
+  { question: "What's Yin and Yang?", choices: ["Complementary opposites","Just opposites","Both","Just dualism"], correct: 2 },
+  { question: "What's Confucius's main book?", choices: ["The Analects","Mencius","Tao Te Ching","Book of Changes"], correct: 0 },
+  { question: "What's filial piety?", choices: ["Respect for parents/elders","Just respect","Both","Just family"], correct: 2 },
+  { question: "What does ren mean (Confucian)?", choices: ["Benevolence/humanity","Just kindness","Both","Just virtue"], correct: 2 },
+  { question: "What does li mean (Confucian)?", choices: ["Ritual propriety","Just ritual","Both","Just behavior"], correct: 2 },
+  { question: "Who was Mencius?", choices: ["Confucian philosopher","Taoist","Both","Just Confucian"], correct: 0 },
+  { question: "Who was Zhuangzi?", choices: ["Taoist philosopher","Confucian","Both","Just Taoist"], correct: 0 },
+  { question: "What's the butterfly dream associated with?", choices: ["Zhuangzi","Lao Tzu","Confucius","Mencius"], correct: 0 },
+  { question: "What's Buddhism's main goal?", choices: ["Nirvana / enlightenment","Just enlightenment","Both","Just liberation"], correct: 2 },
+  { question: "What's the Eightfold Path?", choices: ["Buddhist guide to ending suffering","Just guide","Both","Just path"], correct: 2 },
+  { question: "What's the Bhagavad Gita's central teaching?", choices: ["Duty (dharma) and yoga paths","Just duty","Both","Just yoga"], correct: 2 },
+  { question: "What's karma in Eastern thought?", choices: ["Action and consequence","Just deed","Both","Just fate"], correct: 2 },
+  { question: "What's reincarnation?", choices: ["Cycle of rebirth","Just rebirth","Both","Just samsara"], correct: 2 },
+  { question: "What's moksha in Hinduism?", choices: ["Liberation from samsara","Just freedom","Both","Just nirvana"], correct: 2 },
+  { question: "What's Zen Buddhism's emphasis?", choices: ["Direct experience, meditation","Just meditation","Both","Just experience"], correct: 2 },
+  { question: "What's a koan?", choices: ["Zen paradox for meditation","Just question","Both","Just statement"], correct: 2 },
+  { question: "What's Bushido?", choices: ["Samurai code of honor","Just code","Both","Just samurai"], correct: 2 },
+  { question: "What's the I Ching?", choices: ["Book of Changes / divination","Just divination","Both","Just book"], correct: 2 },
+  { question: "What's Legalism in Chinese philosophy?", choices: ["Strict laws/punishment school","Just law","Both","Just rules"], correct: 2 },
+  { question: "Who was Han Feizi?", choices: ["Legalist philosopher","Confucian","Both","Just Legalist"], correct: 0 },
+  { question: "What's Mohism?", choices: ["School emphasizing universal love","Just love","Both","Just school"], correct: 2 },
+  { question: "Who founded Mohism?", choices: ["Mozi","Mencius","Confucius","Lao Tzu"], correct: 0 },
+  { question: "What's the Five Classics?", choices: ["Confucian foundational texts","Just texts","Both","Just classics"], correct: 2 },
+  { question: "What's the Four Books?", choices: ["Neo-Confucian core texts","Just books","Both","Just four"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: EasternPhilosophyQuizSettings): EasternPhilosophyQuizState {

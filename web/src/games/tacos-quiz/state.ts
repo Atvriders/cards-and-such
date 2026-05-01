@@ -4,306 +4,36 @@ export interface TacosQuizSettings { questions: "10" | "20"; }
 export interface TacosQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type TacosQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Al pastor is made with what meat?",
-    "choices": [
-      "Pork",
-      "Beef",
-      "Chicken",
-      "Lamb"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Al pastor's cooking style was inspired by?",
-    "choices": [
-      "Lebanese shawarma",
-      "Argentine asado",
-      "Spanish paella",
-      "Italian rotisserie"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Carnitas means?",
-    "choices": [
-      "Little meats",
-      "Sliced meat",
-      "Burnt meat",
-      "Smoked meat"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Carnitas is a slow-cooked?",
-    "choices": [
-      "Pork",
-      "Beef",
-      "Lamb",
-      "Chicken"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Barbacoa is traditionally cooked?",
-    "choices": [
-      "In a pit/underground",
-      "On a grill",
-      "On stove",
-      "In oven"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Suadero comes from which animal?",
-    "choices": [
-      "Beef belly",
-      "Pork shoulder",
-      "Chicken thigh",
-      "Lamb leg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lengua means?",
-    "choices": [
-      "Tongue",
-      "Ear",
-      "Cheek",
-      "Brain"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cabeza means?",
-    "choices": [
-      "Head",
-      "Heart",
-      "Liver",
-      "Leg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cochinita pibil is a specialty of?",
-    "choices": [
-      "Yucatan",
-      "Oaxaca",
-      "Sonora",
-      "Guerrero"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cochinita pibil uses what marinade?",
-    "choices": [
-      "Achiote",
-      "Chipotle",
-      "Mole",
-      "Tequila"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Baja-style tacos famously feature?",
-    "choices": [
-      "Battered fish",
-      "Beef brisket",
-      "Pulled pork",
-      "Carne asada"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Carne asada is typically?",
-    "choices": [
-      "Grilled beef",
-      "Slow-cooked pork",
-      "Stewed chicken",
-      "Fried fish"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tacos de canasta are?",
-    "choices": [
-      "Steamed in basket",
-      "Grilled",
-      "Smoked",
-      "Deep fried"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A trompo is the?",
-    "choices": [
-      "Vertical spit",
-      "Frying pan",
-      "Outdoor grill",
-      "Spice mix"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pineapple is often paired with?",
-    "choices": [
-      "Al pastor",
-      "Lengua",
-      "Birria",
-      "Pescado"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Birria is traditionally made with?",
-    "choices": [
-      "Goat or beef",
-      "Pork",
-      "Chicken",
-      "Fish"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Quesabirria is birria with?",
-    "choices": [
-      "Cheese",
-      "Avocado",
-      "Beans",
-      "Rice"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tortillas are typically made from?",
-    "choices": [
-      "Corn or flour",
-      "Rice",
-      "Wheat",
-      "Potato"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mexico City favors which tortilla?",
-    "choices": [
-      "Corn",
-      "Flour",
-      "Rice",
-      "Mixed"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Northern Mexico favors which tortilla?",
-    "choices": [
-      "Flour",
-      "Corn",
-      "Rice",
-      "Mixed"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Classic taco toppings (Mexico City) are?",
-    "choices": [
-      "Onion/cilantro",
-      "Lettuce/cheese",
-      "Cabbage/sour cream",
-      "Tomato/lettuce"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Salsa verde uses?",
-    "choices": [
-      "Tomatillos",
-      "Tomatoes",
-      "Mango",
-      "Pineapple"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Salsa roja uses?",
-    "choices": [
-      "Red chiles",
-      "Tomatillos",
-      "Avocado",
-      "Mango"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pico de gallo is?",
-    "choices": [
-      "Fresh chopped salsa",
-      "Cooked sauce",
-      "Cream",
-      "Marinade"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Guacamole's main ingredient is?",
-    "choices": [
-      "Avocado",
-      "Tomato",
-      "Cilantro",
-      "Lime"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tacos dorados are?",
-    "choices": [
-      "Fried/crispy",
-      "Steamed",
-      "Grilled",
-      "Boiled"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tinga is a stew of?",
-    "choices": [
-      "Shredded chicken",
-      "Beef",
-      "Pork",
-      "Fish"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chicharron is?",
-    "choices": [
-      "Fried pork skin",
-      "Beef jerky",
-      "Smoked sausage",
-      "Lamb leg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pescado is which protein?",
-    "choices": [
-      "Fish",
-      "Shrimp",
-      "Octopus",
-      "Squid"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Camaron is which protein?",
-    "choices": [
-      "Shrimp",
-      "Fish",
-      "Crab",
-      "Squid"
-    ],
-    "correct": 0
-  }
+  { question: "What country are tacos from?", choices: ["Mexico","Spain","Peru","Just Mexico"], correct: 2 },
+  { question: "What's a corn tortilla?", choices: ["Flatbread from masa","Just corn","Both","Just tortilla"], correct: 2 },
+  { question: "What's a flour tortilla?", choices: ["Wheat-based flatbread","Just flour","Both","Northern Mexican"], correct: 2 },
+  { question: "What's masa?", choices: ["Corn dough (nixtamalized)","Just corn","Both","Just dough"], correct: 2 },
+  { question: "What's nixtamalization?", choices: ["Treating corn with alkaline solution","Just process","Both","Just chemistry"], correct: 2 },
+  { question: "What's al pastor?", choices: ["Pork on vertical spit","Just pork","Both","Just style"], correct: 2 },
+  { question: "What's al pastor's origin influence?", choices: ["Lebanese shawarma","Just Mexican","Both","Just influence"], correct: 2 },
+  { question: "What fruit is on al pastor?", choices: ["Pineapple","Just pineapple","Both","Just fruit"], correct: 2 },
+  { question: "What's carne asada?", choices: ["Grilled beef","Just beef","Both","Just grilled"], correct: 2 },
+  { question: "What's carnitas?", choices: ["Pork cooked in own fat","Just pork","Both","Just braised"], correct: 2 },
+  { question: "What's barbacoa?", choices: ["Slow-cooked meat traditionally pit-smoked","Just meat","Both","Just method"], correct: 2 },
+  { question: "What's birria?", choices: ["Stewed meat (beef or goat)","Just stew","Both","Just dish"], correct: 2 },
+  { question: "What region is birria from?", choices: ["Jalisco","Just Mexico","Both","Just region"], correct: 0 },
+  { question: "What's the popular birria taco style with consomme?", choices: ["Quesabirria with dipping consomme","Just birria","Both","Variant"], correct: 2 },
+  { question: "What's lengua?", choices: ["Beef tongue","Just tongue","Both","Just lengua"], correct: 2 },
+  { question: "What's tripa?", choices: ["Tripe / intestines","Just tripe","Both","Just innards"], correct: 2 },
+  { question: "What's chorizo?", choices: ["Spicy sausage","Just sausage","Both","Just spicy"], correct: 2 },
+  { question: "What's pico de gallo?", choices: ["Tomato, onion, cilantro, lime salsa","Just salsa","Both","Just fresh"], correct: 2 },
+  { question: "What's salsa verde made of?", choices: ["Tomatillos and chiles","Just green","Both","Just sauce"], correct: 2 },
+  { question: "What's a tomatillo?", choices: ["Green husk tomato relative","Just green tomato","Both","Different fruit"], correct: 2 },
+  { question: "What's guacamole?", choices: ["Avocado dip","Just avocado","Both","Just dip"], correct: 2 },
+  { question: "What's traditional taco garnish?", choices: ["Cilantro and onion","Just cilantro","Both","Just garnish"], correct: 2 },
+  { question: "What's a hard shell taco?", choices: ["Tex-Mex variant, fried tortilla","Just hard","Both","Tex-Mex"], correct: 2 },
+  { question: "What's a Mexico City taco specialty?", choices: ["Tacos al pastor","Just al pastor","Both","Just CDMX"], correct: 2 },
+  { question: "What state is birria from?", choices: ["Jalisco","Just region","Both","Just Jalisco"], correct: 0 },
+  { question: "What's a flauta?", choices: ["Rolled crispy taco","Just rolled","Both","Just flauta"], correct: 2 },
+  { question: "What's a taco al carbon?", choices: ["Charcoal-grilled meat tacos","Just grilled","Both","Just al carbon"], correct: 2 },
+  { question: "What's a Mission burrito?", choices: ["Large SF-style burrito (not tacos but related)","Just burrito","Both","Just Mission"], correct: 2 },
+  { question: "What's elote?", choices: ["Mexican grilled corn (street food)","Just corn","Both","Just elote"], correct: 2 },
+  { question: "What's a quesadilla?", choices: ["Tortilla with cheese folded","Just cheese","Both","Just quesadilla"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: TacosQuizSettings): TacosQuizState {

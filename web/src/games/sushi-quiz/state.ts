@@ -4,306 +4,36 @@ export interface SushiQuizSettings { questions: "10" | "20"; }
 export interface SushiQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type SushiQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Sushi rice is seasoned with which trio?",
-    "choices": [
-      "Vinegar/sugar/salt",
-      "Soy/mirin/sake",
-      "Miso/dashi/oil",
-      "Vinegar/wasabi/oil"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Nigiri is best described as?",
-    "choices": [
-      "Rice ball with fish on top",
-      "Roll with seaweed",
-      "Fish only",
-      "Rice in a cone"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Maguro refers to which fish?",
-    "choices": [
-      "Salmon",
-      "Tuna",
-      "Yellowtail",
-      "Eel"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sake nigiri is topped with?",
-    "choices": [
-      "Tuna",
-      "Salmon",
-      "Mackerel",
-      "Squid"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Hamachi is the Japanese name for?",
-    "choices": [
-      "Yellowtail",
-      "Eel",
-      "Octopus",
-      "Sea urchin"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Unagi is what?",
-    "choices": [
-      "Freshwater eel",
-      "Saltwater eel",
-      "Squid",
-      "Octopus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tako is which seafood?",
-    "choices": [
-      "Squid",
-      "Octopus",
-      "Eel",
-      "Crab"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ikura is?",
-    "choices": [
-      "Salmon roe",
-      "Tuna roe",
-      "Cod roe",
-      "Crab roe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Uni is the Japanese word for?",
-    "choices": [
-      "Sea urchin",
-      "Squid",
-      "Octopus",
-      "Eel"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Gari refers to?",
-    "choices": [
-      "Pickled ginger",
-      "Wasabi",
-      "Soy sauce",
-      "Daikon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Wasabi is traditionally?",
-    "choices": [
-      "Horseradish",
-      "Hot pepper",
-      "Mustard",
-      "Ginger"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Nori is?",
-    "choices": [
-      "Seaweed",
-      "Rice",
-      "Fish",
-      "Egg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tamago is sushi made with?",
-    "choices": [
-      "Egg",
-      "Fish",
-      "Tofu",
-      "Vegetable"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Maki rolls are wrapped in?",
-    "choices": [
-      "Nori",
-      "Soy paper",
-      "Cucumber",
-      "Egg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Uramaki has rice on the?",
-    "choices": [
-      "Inside",
-      "Outside",
-      "Top only",
-      "Bottom only"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Temaki is a?",
-    "choices": [
-      "Hand cone",
-      "Sashimi plate",
-      "Pressed sushi",
-      "Soup"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chirashi means?",
-    "choices": [
-      "Scattered",
-      "Rolled",
-      "Pressed",
-      "Boiled"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Oshizushi is?",
-    "choices": [
-      "Pressed/box sushi",
-      "Hand-rolled",
-      "Cone",
-      "Inside-out"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sashimi is?",
-    "choices": [
-      "Sliced raw fish",
-      "Rolled fish",
-      "Cooked fish",
-      "Smoked fish"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Itamae is the title for a?",
-    "choices": [
-      "Sushi chef",
-      "Server",
-      "Apprentice",
-      "Customer"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Shari refers to?",
-    "choices": [
-      "Sushi rice",
-      "Wasabi",
-      "Roe",
-      "Salmon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Edomae sushi originated in?",
-    "choices": [
-      "Tokyo",
-      "Kyoto",
-      "Osaka",
-      "Hokkaido"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Toro is from which fish?",
-    "choices": [
-      "Salmon",
-      "Tuna belly",
-      "Mackerel",
-      "Sea bream"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "O-toro vs chu-toro: chu-toro is?",
-    "choices": [
-      "Less fatty",
-      "More fatty",
-      "Cooked",
-      "Smoked"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Saba is?",
-    "choices": [
-      "Mackerel",
-      "Sea bass",
-      "Sardine",
-      "Eel"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tai is?",
-    "choices": [
-      "Sea bream",
-      "Snapper",
-      "Halibut",
-      "Cod"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ebi nigiri uses?",
-    "choices": [
-      "Shrimp",
-      "Crab",
-      "Lobster",
-      "Octopus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "California roll typically contains?",
-    "choices": [
-      "Avocado/crab/cucumber",
-      "Tuna only",
-      "Eel/cucumber",
-      "Tempura/avocado"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A spider roll uses?",
-    "choices": [
-      "Soft-shell crab",
-      "Octopus",
-      "Eel",
-      "Mackerel"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sushi rice should be served at what temperature?",
-    "choices": [
-      "Hot",
-      "Body temp",
-      "Cold",
-      "Frozen"
-    ],
-    "correct": 1
-  }
+  { question: "What country is sushi from?", choices: ["Japan","China","Korea","Vietnam"], correct: 0 },
+  { question: "What's nigiri?", choices: ["Vinegared rice with fish on top","Roll","Bowl","Soup"], correct: 0 },
+  { question: "What's maki?", choices: ["Rolled sushi","Pressed","Bowl","Just maki"], correct: 0 },
+  { question: "What's sashimi?", choices: ["Raw fish without rice","Sushi","Both","Cooked"], correct: 0 },
+  { question: "What's the rice in sushi seasoned with?", choices: ["Vinegar, sugar, salt","Just vinegar","Both","Rice wine"], correct: 2 },
+  { question: "What's nori?", choices: ["Seaweed sheet","Just seaweed","Both","Type of fish"], correct: 2 },
+  { question: "What's wasabi?", choices: ["Japanese horseradish","Just spicy paste","Both","Mustard"], correct: 2 },
+  { question: "What's the brined ginger served with sushi called?", choices: ["Gari","Wasabi","Both","Soy"], correct: 0 },
+  { question: "What's a California Roll?", choices: ["Crab, avocado, cucumber inside-out","Just roll","Both","Western invention"], correct: 2 },
+  { question: "What's an inside-out roll called?", choices: ["Uramaki","Maki","Both","Hosomaki"], correct: 0 },
+  { question: "What's a thin roll called?", choices: ["Hosomaki","Futomaki","Both","Uramaki"], correct: 0 },
+  { question: "What's a thick roll called?", choices: ["Futomaki","Hosomaki","Both","Uramaki"], correct: 0 },
+  { question: "What's a hand roll called?", choices: ["Temaki","Maki","Both","Hosomaki"], correct: 0 },
+  { question: "What's a piece of nigiri sushi typically?", choices: ["Fish + rice","Just rice","Both","Various toppings"], correct: 3 },
+  { question: "What's tuna in Japanese?", choices: ["Maguro","Saba","Toro is fatty tuna","Just Maguro"], correct: 3 },
+  { question: "What's salmon in Japanese sushi?", choices: ["Sake or shake","Just sake","Both","Just shake"], correct: 2 },
+  { question: "What's the fatty tuna belly?", choices: ["Toro","Just toro","Both","Otoro and chutoro"], correct: 2 },
+  { question: "What's the most prized tuna?", choices: ["Otoro (fattiest)","Toro","Both","Just otoro"], correct: 2 },
+  { question: "What's chirashi sushi?", choices: ["Bowl with rice and toppings scattered","Just bowl","Both","Rice with fish"], correct: 2 },
+  { question: "What's a sushi chef called?", choices: ["Itamae","Sushi-shokunin","Both","Just itamae"], correct: 2 },
+  { question: "What's omakase?", choices: ["Chef's choice","Just chef chooses","Both","Tasting menu"], correct: 2 },
+  { question: "What's edomae sushi?", choices: ["Tokyo style with fresh fish","Just Tokyo","Both","Original style"], correct: 2 },
+  { question: "What's the soy sauce called?", choices: ["Shoyu","Just soy","Both","Different"], correct: 2 },
+  { question: "What's the ratio of rice grains to fish in nigiri?", choices: ["Just enough to support fish","Just rice","Both","Standard"], correct: 3 },
+  { question: "What's a gunkanmaki?", choices: ["Battleship roll - rice with seaweed wall","Just gunkan","Both","Variety"], correct: 2 },
+  { question: "What's commonly served on gunkan?", choices: ["Roe, uni","Just toppings","Both","Variety"], correct: 2 },
+  { question: "What's uni?", choices: ["Sea urchin gonads","Just urchin","Both","Delicacy"], correct: 2 },
+  { question: "What's ikura?", choices: ["Salmon roe","Just roe","Both","Eggs"], correct: 2 },
+  { question: "What's tobiko?", choices: ["Flying fish roe","Just roe","Both","Tiny eggs"], correct: 2 },
+  { question: "What's the order of eating in omakase?", choices: ["Light to rich","Just light","Both","Chef decides"], correct: 3 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SushiQuizSettings): SushiQuizState {

@@ -4,306 +4,36 @@ export interface EgyptianMythQuizSettings { questions: "10" | "20" | "30"; }
 export interface EgyptianMythQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type EgyptianMythQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who is the Egyptian sun god?",
-    "choices": [
-      "Ra",
-      "Osiris",
-      "Anubis",
-      "Set"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the jackal-headed god of mummification?",
-    "choices": [
-      "Horus",
-      "Anubis",
-      "Set",
-      "Ptah"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the goddess of magic and motherhood?",
-    "choices": [
-      "Hathor",
-      "Isis",
-      "Bastet",
-      "Nut"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the falcon-headed sky god?",
-    "choices": [
-      "Thoth",
-      "Horus",
-      "Khonsu",
-      "Shu"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the god of the underworld?",
-    "choices": [
-      "Set",
-      "Anubis",
-      "Osiris",
-      "Geb"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who killed Osiris?",
-    "choices": [
-      "Horus",
-      "Set",
-      "Apep",
-      "Sobek"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which goddess is depicted as a cow or with cow horns?",
-    "choices": [
-      "Bastet",
-      "Hathor",
-      "Sekhmet",
-      "Wadjet"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the cat goddess?",
-    "choices": [
-      "Bastet",
-      "Hathor",
-      "Mut",
-      "Nut"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the ibis-headed god of writing?",
-    "choices": [
-      "Ptah",
-      "Khnum",
-      "Thoth",
-      "Atum"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What is the Egyptian symbol of life?",
-    "choices": [
-      "Ankh",
-      "Djed",
-      "Was",
-      "Eye of Ra"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the goddess of the sky?",
-    "choices": [
-      "Nut",
-      "Isis",
-      "Maat",
-      "Tefnut"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the god of the earth, lying below Nut?",
-    "choices": [
-      "Geb",
-      "Shu",
-      "Atum",
-      "Ra"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the god of chaos and storms?",
-    "choices": [
-      "Apep",
-      "Set",
-      "Sobek",
-      "Anubis"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the goddess of truth and order?",
-    "choices": [
-      "Maat",
-      "Isis",
-      "Hathor",
-      "Bastet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the crocodile god?",
-    "choices": [
-      "Sobek",
-      "Set",
-      "Khepri",
-      "Apep"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What did Anubis weigh against the heart in judgment?",
-    "choices": [
-      "A coin",
-      "A feather",
-      "A scarab",
-      "A scale"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What was the feather called?",
-    "choices": [
-      "Maat's feather",
-      "Isis's feather",
-      "Ra's feather",
-      "Nut's feather"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the lion-headed warrior goddess?",
-    "choices": [
-      "Bastet",
-      "Sekhmet",
-      "Mut",
-      "Tefnut"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the scarab god of the rising sun?",
-    "choices": [
-      "Khepri",
-      "Atum",
-      "Aten",
-      "Khnum"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the wife of Osiris?",
-    "choices": [
-      "Hathor",
-      "Isis",
-      "Bastet",
-      "Nephthys"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the son of Isis and Osiris?",
-    "choices": [
-      "Anubis",
-      "Horus",
-      "Set",
-      "Thoth"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is the great serpent of chaos?",
-    "choices": [
-      "Apep",
-      "Wadjet",
-      "Ammit",
-      "Khepri"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What hybrid demon devours the wicked dead?",
-    "choices": [
-      "Apep",
-      "Ammit",
-      "Set",
-      "Sobek"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What does the Eye of Horus symbolize?",
-    "choices": [
-      "Death",
-      "Protection",
-      "War",
-      "Famine"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the patron god of Memphis and craftsmen?",
-    "choices": [
-      "Ptah",
-      "Thoth",
-      "Anubis",
-      "Sokar"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is the ram-headed creator at Elephantine?",
-    "choices": [
-      "Khnum",
-      "Khonsu",
-      "Min",
-      "Banebdjedet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pharaohs were considered the living form of which god?",
-    "choices": [
-      "Ra",
-      "Horus",
-      "Anubis",
-      "Set"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who is the boat that carries Ra across the sky?",
-    "choices": [
-      "Solar Bark",
-      "Atum's Skiff",
-      "Wadjet's Boat",
-      "Ka-boat"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What word describes Egyptian writing in pictures?",
-    "choices": [
-      "Cuneiform",
-      "Hieroglyphs",
-      "Demotic",
-      "Coptic"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was the sole god under Akhenaten's reform?",
-    "choices": [
-      "Aten",
-      "Amun",
-      "Ra",
-      "Ptah"
-    ],
-    "correct": 0
-  }
+  { question: "Who's the Egyptian sun god?", choices: ["Ra","Osiris","Anubis","Horus"], correct: 0 },
+  { question: "Who's the god of the dead?", choices: ["Osiris","Anubis","Both have roles","Set"], correct: 2 },
+  { question: "Who's the jackal-headed god of mummification?", choices: ["Anubis","Osiris","Set","Thoth"], correct: 0 },
+  { question: "Who's the falcon-headed god?", choices: ["Horus","Ra","Set","Thoth"], correct: 0 },
+  { question: "Who's the god of chaos and storms?", choices: ["Set","Ra","Anubis","Horus"], correct: 0 },
+  { question: "Who's the goddess of magic and motherhood?", choices: ["Isis","Hathor","Bastet","Sekhmet"], correct: 0 },
+  { question: "Who's the cat goddess?", choices: ["Bastet","Sekhmet","Both feline","Just Bastet"], correct: 2 },
+  { question: "Who's the lion-headed war goddess?", choices: ["Sekhmet","Bastet","Both","Just Sekhmet"], correct: 0 },
+  { question: "Who's the wisdom god with ibis head?", choices: ["Thoth","Anubis","Horus","Ra"], correct: 0 },
+  { question: "What's Osiris's wife?", choices: ["Isis","Hathor","Nephthys","Maat"], correct: 0 },
+  { question: "Who killed Osiris?", choices: ["Set","Horus","Anubis","Just Set"], correct: 2 },
+  { question: "Who avenged Osiris?", choices: ["Horus","Isis","Both","Just Horus"], correct: 0 },
+  { question: "Whose feather is used to weigh hearts?", choices: ["Maat","Isis","Hathor","Bastet"], correct: 0 },
+  { question: "What's the symbol of Maat's feather weighing against?", choices: ["Heart","Soul","Both","Just heart"], correct: 2 },
+  { question: "What's the Eye of Horus?", choices: ["Symbol of protection/healing","Just an eye","Both","Curse"], correct: 2 },
+  { question: "What's the ankh?", choices: ["Symbol of life","Death","Both","Just symbol"], correct: 2 },
+  { question: "What's the Book of the Dead?", choices: ["Funerary text guide","Just spells","Both","Hieroglyphs"], correct: 2 },
+  { question: "What's a pharaoh's tomb traditionally?", choices: ["Pyramid (early) or Valley of the Kings tomb","Just pyramid","Both","Just tomb"], correct: 2 },
+  { question: "What's a sarcophagus?", choices: ["Stone coffin","Wooden box","Both","Just box"], correct: 0 },
+  { question: "What's mummification?", choices: ["Preserving body for afterlife","Just embalming","Both","Just preservation"], correct: 2 },
+  { question: "What organ was left in mummy?", choices: ["Heart","Brain","Both removed","Lungs"], correct: 0 },
+  { question: "What was removed first in mummification?", choices: ["Brain (often through nose)","Heart","Lungs","Liver"], correct: 0 },
+  { question: "What's a canopic jar?", choices: ["Held internal organs","Stored food","Both","Just jar"], correct: 0 },
+  { question: "What god is Apep?", choices: ["Serpent of chaos opposing Ra","Sun god","Both","Just enemy"], correct: 2 },
+  { question: "What's the Field of Reeds?", choices: ["Egyptian afterlife paradise","Just field","Both","Just heaven"], correct: 2 },
+  { question: "Who's the dwarf god of household and protection?", choices: ["Bes","Anubis","Thoth","Khonsu"], correct: 0 },
+  { question: "Who's the moon god?", choices: ["Khonsu","Thoth (also wisdom)","Both","Just Khonsu"], correct: 2 },
+  { question: "Who's the falcon god of pharaohs?", choices: ["Horus","Ra","Both falcon","Just Horus"], correct: 0 },
+  { question: "What's Ra's solar boat called?", choices: ["Solar barque","Mandjet (day) and Mesektet (night)","Both","Just barque"], correct: 2 },
+  { question: "What was the cult center of Amun?", choices: ["Thebes","Memphis","Heliopolis","Abydos"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: EgyptianMythQuizSettings): EgyptianMythQuizState {

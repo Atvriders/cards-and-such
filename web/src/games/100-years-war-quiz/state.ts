@@ -4,126 +4,36 @@ export interface Q100YearsWarQuizSettings { questions: "10" | "20" | "30"; }
 export interface Q100YearsWarQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type Q100YearsWarQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Hundred Years' War lasted?",
-    "choices": [
-      "100 years",
-      "101 years",
-      "116 years",
-      "150 years"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "It started in?",
-    "choices": [
-      "1337",
-      "1346",
-      "1415",
-      "1453"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Battle of Agincourt year?",
-    "choices": [
-      "1346",
-      "1415",
-      "1429",
-      "1453"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Joan of Arc was burned at the stake in?",
-    "choices": [
-      "1429",
-      "1430",
-      "1431",
-      "1453"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "English king at Agincourt?",
-    "choices": [
-      "Edward III",
-      "Henry IV",
-      "Henry V",
-      "Henry VI"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Battle of Crecy year?",
-    "choices": [
-      "1337",
-      "1346",
-      "1356",
-      "1415"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "English longbow was famous at?",
-    "choices": [
-      "Sluys",
-      "Crecy",
-      "Agincourt",
-      "All of these"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Battle of Poitiers year?",
-    "choices": [
-      "1346",
-      "1356",
-      "1415",
-      "1429"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Joan of Arc lifted siege of?",
-    "choices": [
-      "Paris",
-      "Orleans",
-      "Calais",
-      "Bordeaux"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "War ended in?",
-    "choices": [
-      "1415",
-      "1429",
-      "1453",
-      "1485"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "French dauphin became which king?",
-    "choices": [
-      "Charles V",
-      "Charles VI",
-      "Charles VII",
-      "Louis XI"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Treaty ending the war was?",
-    "choices": [
-      "Troyes",
-      "Bretigny",
-      "Picquigny",
-      "No formal treaty"
-    ],
-    "correct": 3
-  }
+  { question: "Between which two countries was the Hundred Years' War fought?", choices: ["England and France","Spain and Portugal","France and Spain","England and Scotland"], correct: 0 },
+  { question: "In what year did the Hundred Years' War start?", choices: ["1314","1337","1356","1380"], correct: 1 },
+  { question: "In what year did the war end?", choices: ["1415","1429","1453","1485"], correct: 2 },
+  { question: "How many years did the war actually last?", choices: ["100","116","75","150"], correct: 1 },
+  { question: "Who was the English king when war began?", choices: ["Edward III","Henry V","Richard II","Edward I"], correct: 0 },
+  { question: "What 1346 battle was a major English victory?", choices: ["Crecy","Poitiers","Agincourt","Sluys"], correct: 0 },
+  { question: "What 1356 battle captured the French king?", choices: ["Crecy","Poitiers","Agincourt","Verneuil"], correct: 1 },
+  { question: "What 1415 battle is the war's most famous English victory?", choices: ["Crecy","Poitiers","Agincourt","Castillon"], correct: 2 },
+  { question: "Who led England at Agincourt?", choices: ["Henry V","Edward III","Richard II","Henry IV"], correct: 0 },
+  { question: "What weapon was crucial to English victories?", choices: ["Longbow","Crossbow","Lance","Poleaxe"], correct: 0 },
+  { question: "What French heroine helped lift the siege of Orleans in 1429?", choices: ["Joan of Arc","Catherine of Aragon","Eleanor of Aquitaine","Anne of Brittany"], correct: 0 },
+  { question: "How did Joan of Arc die?", choices: ["Burned at stake","Beheaded","In battle","Hanged"], correct: 0 },
+  { question: "In what year was Joan of Arc executed?", choices: ["1429","1431","1435","1437"], correct: 1 },
+  { question: "What city's siege did Joan famously lift?", choices: ["Paris","Orleans","Reims","Bordeaux"], correct: 1 },
+  { question: "What 1453 battle effectively ended the war?", choices: ["Castillon","Formigny","Patay","Verneuil"], correct: 0 },
+  { question: "What French dynasty ruled during the war?", choices: ["Valois","Capet","Bourbon","Carolingian"], correct: 0 },
+  { question: "What English dynasty ruled during much of the war?", choices: ["Plantagenet","Tudor","Lancaster","Both Plantagenet branches"], correct: 3 },
+  { question: "What disease devastated Europe during the war?", choices: ["Black Death","Smallpox","Cholera","Typhus"], correct: 0 },
+  { question: "What in what year did the Black Death first hit Europe?", choices: ["1330s","1346","1347","1380s"], correct: 2 },
+  { question: "What was the war initially fought over?", choices: ["French throne and territories","Religion","Trade","Colonies"], correct: 0 },
+  { question: "What 1360 treaty paused the war?", choices: ["Bretigny","Picquigny","Troyes","Amiens"], correct: 0 },
+  { question: "What 1420 treaty made the English king heir to French throne?", choices: ["Troyes","Bretigny","Arras","Amiens"], correct: 0 },
+  { question: "Who became French King after the Treaty of Troyes was overturned?", choices: ["Charles VII","Henry VI","Louis XI","Philip VI"], correct: 0 },
+  { question: "What was Charles VII nicknamed?", choices: ["The Victorious","The Bold","The Fair","The Mad"], correct: 0 },
+  { question: "What region of France was the war's main battleground?", choices: ["Aquitaine and Northern France","Provence","Brittany","Normandy"], correct: 0 },
+  { question: "What English territory remained French after the war?", choices: ["Normandy","Aquitaine","Both lost to France","Calais (English till 1558)"], correct: 2 },
+  { question: "What French city remained English until 1558?", choices: ["Calais","Bordeaux","Paris","Rouen"], correct: 0 },
+  { question: "What innovation in warfare appeared by war's end?", choices: ["Cannons","Gunpowder weapons","Both","Crossbows"], correct: 2 },
+  { question: "What free company plagued France between active campaigns?", choices: ["Mercenary bands (routiers)","Monastic orders","Knights Templar","Crusaders"], correct: 0 },
+  { question: "What princely Burgundian state often allied with England?", choices: ["Burgundy","Brittany","Flanders","All shifted alliances"], correct: 3 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: Q100YearsWarQuizSettings): Q100YearsWarQuizState {

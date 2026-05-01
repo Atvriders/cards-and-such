@@ -4,246 +4,36 @@ export interface MountainQuizSettings { questions: "10" | "20"; }
 export interface MountainQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type MountainQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Tallest mountain on Earth (above sea level)?",
-    "choices": [
-      "K2",
-      "Mount Everest",
-      "Mount Kilimanjaro",
-      "Denali"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mount Everest is in which range?",
-    "choices": [
-      "Andes",
-      "Himalayas",
-      "Alps",
-      "Rockies"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tallest mountain in Africa?",
-    "choices": [
-      "Mount Kenya",
-      "Mount Kilimanjaro",
-      "Atlas Mountains",
-      "Drakensberg"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mount Fuji is in which country?",
-    "choices": [
-      "China",
-      "Japan",
-      "Korea",
-      "Vietnam"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in North America?",
-    "choices": [
-      "Mount Whitney",
-      "Denali",
-      "Mount Logan",
-      "Mount Rainier"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "K2 is on the border of which countries?",
-    "choices": [
-      "India and Nepal",
-      "Pakistan and China",
-      "Afghanistan and Tajikistan",
-      "India and Bhutan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in South America?",
-    "choices": [
-      "Aconcagua",
-      "Cotopaxi",
-      "Huascar\u00e1n",
-      "Chimborazo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Matterhorn is in which range?",
-    "choices": [
-      "Pyrenees",
-      "Carpathians",
-      "Alps",
-      "Apennines"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mount Olympus is in which country?",
-    "choices": [
-      "Italy",
-      "Greece",
-      "Turkey",
-      "Cyprus"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest mountain in the British Isles?",
-    "choices": [
-      "Scafell Pike",
-      "Snowdon",
-      "Ben Nevis",
-      "Carrauntoohil"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Highest mountain in Antarctica?",
-    "choices": [
-      "Vinson Massif",
-      "Mount Sidley",
-      "Mount Erebus",
-      "Mount Tyree"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mount Rushmore is in which US state?",
-    "choices": [
-      "Montana",
-      "Wyoming",
-      "South Dakota",
-      "Colorado"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Highest peak in Europe (counting Caucasus)?",
-    "choices": [
-      "Mont Blanc",
-      "Mount Elbrus",
-      "Matterhorn",
-      "Mount Etna"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak entirely within the Alps?",
-    "choices": [
-      "Matterhorn",
-      "Mont Blanc",
-      "Eiger",
-      "Jungfrau"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in Australia (mainland)?",
-    "choices": [
-      "Mount Kosciuszko",
-      "Mount Bogong",
-      "Mount Townsend",
-      "Mount Ossa"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What range divides Europe and Asia?",
-    "choices": [
-      "Caucasus",
-      "Urals",
-      "Carpathians",
-      "Balkans"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mount Vesuvius is near which city?",
-    "choices": [
-      "Rome",
-      "Naples",
-      "Milan",
-      "Athens"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in the Rocky Mountains?",
-    "choices": [
-      "Mount Whitney",
-      "Mount Elbert",
-      "Pikes Peak",
-      "Mount Massive"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Annapurna is located in which country?",
-    "choices": [
-      "India",
-      "Nepal",
-      "Bhutan",
-      "Tibet"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What does 'sierra' mean in Spanish (mountain term)?",
-    "choices": [
-      "Snow",
-      "Saw (range)",
-      "Stone",
-      "Summit"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in the Andes?",
-    "choices": [
-      "Aconcagua",
-      "Cerro Torre",
-      "Huascar\u00e1n",
-      "Ojos del Salado"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mont Blanc is on the border of which countries?",
-    "choices": [
-      "France and Italy",
-      "France and Switzerland",
-      "Italy and Switzerland",
-      "Austria and Italy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which range is in Tanzania?",
-    "choices": [
-      "Atlas",
-      "Drakensberg",
-      "Kilimanjaro range",
-      "Ahaggar"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mount St. Helens is in which US state?",
-    "choices": [
-      "Oregon",
-      "Washington",
-      "California",
-      "Idaho"
-    ],
-    "correct": 1
-  }
+  { question: "What is the highest mountain in the world?", choices: ["K2","Kangchenjunga","Mount Everest","Lhotse"], correct: 2 },
+  { question: "In which mountain range is K2?", choices: ["Himalayas","Karakoram","Hindu Kush","Pamir"], correct: 1 },
+  { question: "What is the highest mountain in Africa?", choices: ["Mount Kenya","Mount Stanley","Kilimanjaro","Ras Dashen"], correct: 2 },
+  { question: "What is the highest peak in North America?", choices: ["Mount Whitney","Denali","Mount Logan","Pico de Orizaba"], correct: 1 },
+  { question: "What is the highest mountain in Europe?", choices: ["Mont Blanc","Matterhorn","Mount Elbrus","Grossglockner"], correct: 2 },
+  { question: "What is the highest peak in South America?", choices: ["Aconcagua","Huascaran","Chimborazo","Ojos del Salado"], correct: 0 },
+  { question: "What is the highest mountain in Australia?", choices: ["Mount Bartle Frere","Mount Kosciuszko","Mount Ossa","Mount Bogong"], correct: 1 },
+  { question: "What is the highest mountain in Antarctica?", choices: ["Vinson Massif","Mount Erebus","Mount Sidley","Mount Tyree"], correct: 0 },
+  { question: "What is the highest mountain in Japan?", choices: ["Mount Tate","Mount Fuji","Mount Hotaka","Mount Yari"], correct: 1 },
+  { question: "How tall is Mount Everest (approximately, in meters)?", choices: ["7,500","8,849","9,200","6,400"], correct: 1 },
+  { question: "What is the second highest mountain in the world?", choices: ["K2","Kangchenjunga","Lhotse","Makalu"], correct: 0 },
+  { question: "What is the highest mountain in the contiguous U.S.?", choices: ["Mount Rainier","Mount Whitney","Mount Elbert","Mount Shasta"], correct: 1 },
+  { question: "Which range stretches along the western U.S. and Canada?", choices: ["Appalachians","Rockies","Sierra Nevada","Cascades"], correct: 1 },
+  { question: "What is the highest peak in the Alps?", choices: ["Matterhorn","Mont Blanc","Eiger","Jungfrau"], correct: 1 },
+  { question: "On which mountain did Sir Edmund Hillary first reach the summit in 1953?", choices: ["K2","Annapurna","Everest","Lhotse"], correct: 2 },
+  { question: "What is the volcanic peak in Tanzania famed for snowy slopes near the equator?", choices: ["Mount Kenya","Kilimanjaro","Stanley","Meru"], correct: 1 },
+  { question: "In which country is the Matterhorn located?", choices: ["Switzerland and Italy","France","Austria","Germany"], correct: 0 },
+  { question: "What range separates Europe from Asia?", choices: ["Caucasus","Urals","Carpathians","Pyrenees"], correct: 1 },
+  { question: "What is the highest mountain in the British Isles?", choices: ["Snowdon","Ben Nevis","Scafell Pike","Carrauntoohil"], correct: 1 },
+  { question: "What is the highest peak in the Andes?", choices: ["Aconcagua","Huascaran","Ojos del Salado","Sajama"], correct: 0 },
+  { question: "What is the highest mountain in New Zealand?", choices: ["Mount Tasman","Aoraki / Mount Cook","Mount Aspiring","Mitre Peak"], correct: 1 },
+  { question: "What is the world's tallest mountain measured from base to peak (mostly underwater)?", choices: ["Everest","Mauna Kea","K2","Aconcagua"], correct: 1 },
+  { question: "How many of the world's 8000m peaks are there?", choices: ["10","14","16","20"], correct: 1 },
+  { question: "On which mountain do four U.S. presidents have carved faces?", choices: ["Mount Rainier","Mount Rushmore","Mount McKinley","Mount Hood"], correct: 1 },
+  { question: "What is Africa's most active volcano?", choices: ["Kilimanjaro","Mount Kenya","Nyiragongo","Mount Cameroon"], correct: 2 },
+  { question: "What is the highest peak in Mexico?", choices: ["Popocatepetl","Iztaccihuatl","Pico de Orizaba","La Malinche"], correct: 2 },
+  { question: "What is the highest peak in Spain (mainland)?", choices: ["Pico de Veleta","Mulhacen","Aneto","Teide"], correct: 1 },
+  { question: "What is the highest peak in Spain (including Canary Islands)?", choices: ["Mulhacen","Teide","Aneto","Pico Posets"], correct: 1 },
+  { question: "Which mountain is associated with Noah's Ark in the Bible?", choices: ["Mount Sinai","Mount Ararat","Mount Hermon","Mount Olympus"], correct: 1 },
+  { question: "What is the home of the Greek gods?", choices: ["Mount Etna","Mount Olympus","Mount Athos","Mount Parnassus"], correct: 1 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MountainQuizSettings): MountainQuizState {

@@ -4,306 +4,36 @@ export interface OlympicQuizSettings { questions: "10" | "20" | "30"; }
 export interface OlympicQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type OlympicQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who has the most Olympic gold medals all-time?",
-    "choices": [
-      "Michael Phelps",
-      "Larissa Latynina",
-      "Mark Spitz",
-      "Carl Lewis"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many Olympic gold medals does Phelps have?",
-    "choices": [
-      "18",
-      "20",
-      "23",
-      "25"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Usain Bolt's 100m world record (s)?",
-    "choices": [
-      "9.58",
-      "9.69",
-      "9.74",
-      "9.84"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bolt represents?",
-    "choices": [
-      "Jamaica",
-      "USA",
-      "UK",
-      "Trinidad"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Nadia Comaneci scored the first perfect 10 in?",
-    "choices": [
-      "1976 Montreal",
-      "1980 Moscow",
-      "1972 Munich",
-      "1984 LA"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Comaneci represented?",
-    "choices": [
-      "Romania",
-      "Russia",
-      "Hungary",
-      "Bulgaria"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the first modern Olympics held?",
-    "choices": [
-      "Athens 1896",
-      "Paris 1900",
-      "St. Louis 1904",
-      "London 1908"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who founded the modern Olympics?",
-    "choices": [
-      "Pierre de Coubertin",
-      "Avery Brundage",
-      "Juan Antonio Samaranch",
-      "Henri de Baillet-Latour"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 2020 Olympics held (postponed to 2021)?",
-    "choices": [
-      "Tokyo",
-      "Rio",
-      "Paris",
-      "Beijing"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where are the 2024 Olympics held?",
-    "choices": [
-      "Paris",
-      "Los Angeles",
-      "Brisbane",
-      "Tokyo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How often are the Summer Olympics held?",
-    "choices": [
-      "Every 4 years",
-      "Every 2 years",
-      "Every 5 years",
-      "Every 3 years"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which Olympics introduced the Olympic torch relay?",
-    "choices": [
-      "1936 Berlin",
-      "1932 LA",
-      "1948 London",
-      "1924 Paris"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who won 9 Olympic gold medals as a sprinter at 100m, 200m and 4x100m relay over 3 Games?",
-    "choices": [
-      "Usain Bolt (8 due to relay loss)",
-      "Carl Lewis",
-      "Jesse Owens",
-      "Justin Gatlin"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Carl Lewis won how many Olympic gold medals?",
-    "choices": [
-      "9",
-      "8",
-      "10",
-      "7"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mark Spitz famously won how many golds in 1972?",
-    "choices": [
-      "7",
-      "8",
-      "9",
-      "6"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 2016 Olympics?",
-    "choices": [
-      "Rio",
-      "Beijing",
-      "Athens",
-      "Sydney"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 2008 Olympics?",
-    "choices": [
-      "Beijing",
-      "Athens",
-      "Sydney",
-      "Atlanta"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 1996 Olympics?",
-    "choices": [
-      "Atlanta",
-      "Sydney",
-      "Athens",
-      "LA"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Jesse Owens won 4 golds in?",
-    "choices": [
-      "1936 Berlin",
-      "1924 Paris",
-      "1948 London",
-      "1928 Amsterdam"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Larissa Latynina excelled in?",
-    "choices": [
-      "Gymnastics",
-      "Swimming",
-      "Track",
-      "Skating"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Winter Olympics started in?",
-    "choices": [
-      "1924",
-      "1900",
-      "1908",
-      "1936"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Norway dominates which Winter sport in Olympic history?",
-    "choices": [
-      "Cross-country skiing",
-      "Bobsled",
-      "Curling",
-      "Ice dance"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 2014 Winter Olympics?",
-    "choices": [
-      "Sochi",
-      "Vancouver",
-      "PyeongChang",
-      "Turin"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 2010 Winter Olympics?",
-    "choices": [
-      "Vancouver",
-      "Turin",
-      "Salt Lake City",
-      "Sochi"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 2018 Winter Olympics?",
-    "choices": [
-      "PyeongChang",
-      "Sochi",
-      "Beijing",
-      "Vancouver"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where were the 2022 Winter Olympics?",
-    "choices": [
-      "Beijing",
-      "PyeongChang",
-      "Sochi",
-      "Tokyo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Simone Biles competes in?",
-    "choices": [
-      "Gymnastics",
-      "Swimming",
-      "Track",
-      "Skating"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Florence Griffith-Joyner ran for?",
-    "choices": [
-      "USA",
-      "Jamaica",
-      "UK",
-      "Cuba"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who lit the 1996 Atlanta torch?",
-    "choices": [
-      "Muhammad Ali",
-      "Carl Lewis",
-      "Mary Lou Retton",
-      "Janet Evans"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who won the most golds at the 2008 Beijing Games?",
-    "choices": [
-      "Michael Phelps",
-      "Usain Bolt",
-      "Yelena Isinbayeva",
-      "Yang Wei"
-    ],
-    "correct": 0
-  }
+  { question: "In what country did the ancient Olympics begin?", choices: ["Greece","Rome","Egypt","Persia"], correct: 0 },
+  { question: "In what year did modern Olympics begin?", choices: ["1896","1900","1888","1904"], correct: 0 },
+  { question: "Where were the first modern Olympics held?", choices: ["Athens","Paris","London","Rome"], correct: 0 },
+  { question: "How often are Summer Olympics held?", choices: ["Every 4 years","Every 2 years","Every year","Every 5 years"], correct: 0 },
+  { question: "How often are Winter Olympics held?", choices: ["Every 4 years","Every 2 years","Every year","Same as summer (since 1994 staggered)"], correct: 0 },
+  { question: "Who founded modern Olympics?", choices: ["Pierre de Coubertin","Just Coubertin","Both","French baron"], correct: 2 },
+  { question: "What's the Olympic motto?", choices: ["Faster, Higher, Stronger - Together","Just three","Both","Just motto"], correct: 2 },
+  { question: "What's the Olympic flag?", choices: ["Five interlocking rings on white","Just rings","Both","Just symbol"], correct: 2 },
+  { question: "What do the 5 rings represent?", choices: ["Five continents","Just rings","Both","Just symbolism"], correct: 2 },
+  { question: "What colors are the rings?", choices: ["Blue, yellow, black, green, red","Just colors","Both","Just five"], correct: 2 },
+  { question: "Who's the most decorated Olympian?", choices: ["Michael Phelps","Just Phelps","Both","Just swimmer"], correct: 2 },
+  { question: "How many Olympic medals does Phelps have?", choices: ["28","23","24","30"], correct: 0 },
+  { question: "How many gold medals does Phelps have?", choices: ["23","20","25","18"], correct: 0 },
+  { question: "Who's the fastest man (100m record)?", choices: ["Usain Bolt","Just Bolt","Both","Other"], correct: 2 },
+  { question: "What's Bolt's 100m record?", choices: ["9.58","9.69","9.79","9.49"], correct: 0 },
+  { question: "How many gold medals does Bolt have?", choices: ["8","9","7","10"], correct: 0 },
+  { question: "What's the marathon distance?", choices: ["42.195 km","26.2 miles","Both","Just 42 km"], correct: 2 },
+  { question: "In what year did Tokyo first host Summer Olympics?", choices: ["1964","1968","1972","1960"], correct: 0 },
+  { question: "Where were 2020 Summer Olympics held (held 2021)?", choices: ["Tokyo","London","Rio","Beijing"], correct: 0 },
+  { question: "Where were 2024 Olympics held?", choices: ["Paris","LA","Brisbane","Tokyo"], correct: 0 },
+  { question: "Where will 2028 Olympics be held?", choices: ["Los Angeles","Brisbane","Paris","London"], correct: 0 },
+  { question: "What's the Olympic torch relay?", choices: ["Carrying flame from Olympia to host","Just relay","Both","Tradition"], correct: 2 },
+  { question: "What's the Decathlon?", choices: ["10 events over 2 days","Just 10","Both","Track and field combined"], correct: 2 },
+  { question: "What's the Heptathlon?", choices: ["Women's 7-event combined","Just 7","Both","Multi-event"], correct: 2 },
+  { question: "What's the Iron Curtain era boycott Olympics?", choices: ["1980 Moscow (US-led boycott), 1984 LA (Soviet boycott)","Just one","Both","Both boycotts"], correct: 3 },
+  { question: "What 1972 Olympics had a tragedy?", choices: ["Munich (Israeli athletes killed)","Just Munich","Both","Just terror"], correct: 2 },
+  { question: "What sport debuted at Tokyo 2020?", choices: ["Skateboarding, Surfing, Sport Climbing, Karate","Just one","Multiple","All listed"], correct: 3 },
+  { question: "What was the original modern Olympic sports list size?", choices: ["~9 sports","~5","~15","~20"], correct: 0 },
+  { question: "Who lit the torch at Atlanta 1996?", choices: ["Muhammad Ali","Just Ali","Both","Boxer"], correct: 2 },
+  { question: "What's the Paralympics?", choices: ["Olympics for athletes with disabilities","Just disability sport","Both","After Olympics"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: OlympicQuizSettings): OlympicQuizState {

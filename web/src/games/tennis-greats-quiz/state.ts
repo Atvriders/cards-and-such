@@ -4,306 +4,36 @@ export interface TennisGreatsQuizSettings { questions: "10" | "20" | "30"; }
 export interface TennisGreatsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type TennisGreatsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "How many Grand Slams has Roger Federer won?",
-    "choices": [
-      "18",
-      "20",
-      "22",
-      "24"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Rafael Nadal is best known on which surface?",
-    "choices": [
-      "Clay",
-      "Grass",
-      "Hard",
-      "Carpet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many French Open titles has Nadal won?",
-    "choices": [
-      "12",
-      "13",
-      "14",
-      "15"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Novak Djokovic comes from?",
-    "choices": [
-      "Croatia",
-      "Serbia",
-      "Slovenia",
-      "Russia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Serena Williams has how many singles Slams?",
-    "choices": [
-      "21",
-      "22",
-      "23",
-      "24"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Steffi Graf won how many singles Slams?",
-    "choices": [
-      "18",
-      "20",
-      "22",
-      "24"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Martina Navratilova won how many Wimbledon singles titles?",
-    "choices": [
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who was Bjorn Borg's biggest rival?",
-    "choices": [
-      "McEnroe",
-      "Connors",
-      "Lendl",
-      "Becker"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pete Sampras finished with how many singles Slams?",
-    "choices": [
-      "12",
-      "13",
-      "14",
-      "15"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who is 'Big Mac'?",
-    "choices": [
-      "John McEnroe",
-      "Pete Sampras",
-      "Andre Agassi",
-      "Boris Becker"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Andre Agassi's career grand slam includes wins on?",
-    "choices": [
-      "All four surfaces (all four Slams)",
-      "Two Slams",
-      "Three Slams",
-      "Just Wimbledon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who has won the most Wimbledon men's singles titles in the Open Era?",
-    "choices": [
-      "Federer",
-      "Sampras",
-      "Djokovic",
-      "Nadal"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Margaret Court won how many Slams (singles)?",
-    "choices": [
-      "20",
-      "22",
-      "24",
-      "26"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Billie Jean King is famous for the?",
-    "choices": [
-      "Battle of the Sexes",
-      "First Open Era win",
-      "Founding the WTA",
-      "All of the above"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Chris Evert's signature surface?",
-    "choices": [
-      "Clay",
-      "Grass",
-      "Hard",
-      "Carpet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Boris Becker won Wimbledon at age?",
-    "choices": [
-      "17",
-      "19",
-      "21",
-      "23"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who was the first man to win all four Slams in a calendar year (Open Era)?",
-    "choices": [
-      "Rod Laver",
-      "Don Budge",
-      "No one in Open Era (Laver did it pre-and-post)",
-      "Jimmy Connors"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Rod Laver is from?",
-    "choices": [
-      "USA",
-      "UK",
-      "Australia",
-      "Germany"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "How many Slams has Djokovic won (as of 2024)?",
-    "choices": [
-      "20",
-      "22",
-      "24",
-      "25"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who plays in 'Murray Mound' fame at Wimbledon?",
-    "choices": [
-      "Andy Murray",
-      "Henman",
-      "Cash",
-      "Krajicek"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Justine Henin retired with how many Slams?",
-    "choices": [
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Stefan Edberg played which style?",
-    "choices": [
-      "Serve and volley",
-      "Baseline",
-      "Counterpunch",
-      "All-court"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ivan Lendl was famous for his?",
-    "choices": [
-      "Topspin forehand",
-      "Net play",
-      "Slice",
-      "Lefty serve"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Maria Sharapova won her first Slam at age?",
-    "choices": [
-      "17",
-      "19",
-      "21",
-      "23"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who is Naomi Osaka's first Slam title?",
-    "choices": [
-      "US Open 2018",
-      "French Open",
-      "Australian Open",
-      "Wimbledon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who are the 'Big Three' of men's tennis?",
-    "choices": [
-      "Federer, Nadal, Djokovic",
-      "Sampras, Agassi, Becker",
-      "Borg, Connors, McEnroe",
-      "Edberg, Lendl, Wilander"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Court speed at Roland Garros is?",
-    "choices": [
-      "Slow (clay)",
-      "Fast (grass)",
-      "Medium (hard)",
-      "Fastest (carpet)"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Court speed at Wimbledon is?",
-    "choices": [
-      "Fast (grass)",
-      "Slow (clay)",
-      "Medium (hard)",
-      "Slowest (carpet)"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Australian Open is played in?",
-    "choices": [
-      "Melbourne",
-      "Sydney",
-      "Brisbane",
-      "Perth"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who has the most weeks at world No. 1 in men's tennis history?",
-    "choices": [
-      "Federer",
-      "Nadal",
-      "Djokovic",
-      "Sampras"
-    ],
-    "correct": 2
-  }
+  { question: "Who has the most men's Grand Slam titles?", choices: ["Novak Djokovic","Rafael Nadal","Roger Federer","All close (Big Three)"], correct: 0 },
+  { question: "How many Grand Slams has Djokovic won?", choices: ["24+","20","22","18"], correct: 0 },
+  { question: "How many Grand Slams has Nadal won?", choices: ["22","20","18","24"], correct: 0 },
+  { question: "How many Grand Slams has Federer won?", choices: ["20","19","21","18"], correct: 0 },
+  { question: "Who's known as the King of Clay?", choices: ["Rafael Nadal","Just Nadal","Both","Bjorn Borg"], correct: 0 },
+  { question: "How many French Open titles has Nadal won?", choices: ["14","13","15","12"], correct: 0 },
+  { question: "Who has the most women's Grand Slams?", choices: ["Margaret Court (24)","Serena Williams (23)","Just Court (incl pre-Open era)","Both"], correct: 3 },
+  { question: "How many Grand Slams has Serena Williams won?", choices: ["23","20","25","18"], correct: 0 },
+  { question: "Who's Steffi Graf?", choices: ["German tennis legend","22 Slams","Both","Just German"], correct: 2 },
+  { question: "What's a calendar Slam?", choices: ["Winning all 4 Slams in one calendar year","Just one slam","Both","Just achievement"], correct: 2 },
+  { question: "Who's the only player to win calendar Slam in Open era (women)?", choices: ["Steffi Graf (1988 + Olympic Gold)","Margaret Court","Both","Just Graf 88"], correct: 0 },
+  { question: "What's the four Grand Slam tournaments?", choices: ["Australian, French, Wimbledon, US Open","Just Wimbledon","Both","Just four"], correct: 2 },
+  { question: "What's Wimbledon's surface?", choices: ["Grass","Clay","Hard","Carpet"], correct: 0 },
+  { question: "What's French Open's surface?", choices: ["Clay","Grass","Hard","Carpet"], correct: 0 },
+  { question: "What's Australian Open and US Open's surface?", choices: ["Hard","Grass","Clay","Just Hard - both"], correct: 3 },
+  { question: "Who's Bjorn Borg?", choices: ["Swedish legend, 11 Slams","Just Swede","Both","Just Borg"], correct: 2 },
+  { question: "Who's John McEnroe?", choices: ["American legend, 7 Slams","Just American","Both","Just American"], correct: 2 },
+  { question: "Who's Pete Sampras?", choices: ["American with 14 Slams","Just American","Both","Just Pete"], correct: 2 },
+  { question: "Who's Andre Agassi?", choices: ["American with 8 Slams","Career Slam","Both","Just Andre"], correct: 2 },
+  { question: "What's a career Grand Slam?", choices: ["Winning all 4 in career","Just achievement","Both","Just career"], correct: 2 },
+  { question: "Who's Martina Navratilova?", choices: ["Czech-American legend","18 Slams","Both","Just Czech"], correct: 2 },
+  { question: "Who's Chris Evert?", choices: ["American legend with 18 Slams","Just American","Both","Rival of Navratilova"], correct: 2 },
+  { question: "What did Billie Jean King do?", choices: ["Champion and women's rights pioneer","Just champion","Both","Just rights"], correct: 2 },
+  { question: "What's the Battle of the Sexes (1973)?", choices: ["BJK vs Bobby Riggs","Just match","Both","Just exhibition"], correct: 2 },
+  { question: "Who was Australian Open women's GOAT considered?", choices: ["Margaret Court","Serena","Both","Just Court"], correct: 0 },
+  { question: "What's Wimbledon's traditional dress code?", choices: ["All white","Just colors","Both","Various colors"], correct: 0 },
+  { question: "What's a tiebreaker?", choices: ["First to 7 (with 2 lead)","Just tiebreaker","Both","Just rule"], correct: 2 },
+  { question: "What's an ace in tennis?", choices: ["Unreturned serve","Just point","Both","Just serve"], correct: 2 },
+  { question: "How many sets to win Grand Slam men's match?", choices: ["Best of 5","Best of 3","Both formats","Just 5"], correct: 0 },
+  { question: "How many sets to win women's Grand Slam match?", choices: ["Best of 3","Best of 5","Both","Just 3"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: TennisGreatsQuizSettings): TennisGreatsQuizState {

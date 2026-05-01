@@ -4,156 +4,36 @@ export interface ByzantineQuizSettings { questions: "10" | "20" | "30"; }
 export interface ByzantineQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ByzantineQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Byzantine Empire was the eastern half of the?",
-    "choices": [
-      "Persian Empire",
-      "Roman Empire",
-      "Greek city-states",
-      "Mongol Empire"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Capital city of the Byzantine Empire?",
-    "choices": [
-      "Rome",
-      "Constantinople",
-      "Athens",
-      "Alexandria"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Justinian's law code is called?",
-    "choices": [
-      "Twelve Tables",
-      "Corpus Juris Civilis",
-      "Magna Carta",
-      "Code Napoleon"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Hagia Sophia was built under?",
-    "choices": [
-      "Constantine",
-      "Justinian",
-      "Heraclius",
-      "Basil II"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Greek fire was a?",
-    "choices": [
-      "Festival",
-      "Naval incendiary weapon",
-      "Religion",
-      "Coin"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Empire fell in?",
-    "choices": [
-      "1099",
-      "1453",
-      "1517",
-      "1204"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Iconoclasm was about?",
-    "choices": [
-      "Idol-worship debate",
-      "Imperial succession",
-      "Tax",
-      "Trade"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Theodora was empress and wife of?",
-    "choices": [
-      "Constantine",
-      "Justinian",
-      "Heraclius",
-      "Basil"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Byzantine state religion was?",
-    "choices": [
-      "Catholic Christianity",
-      "Eastern Orthodox Christianity",
-      "Islam",
-      "Paganism"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Schism of 1054 separated which churches?",
-    "choices": [
-      "Coptic and Orthodox",
-      "Catholic and Orthodox",
-      "Lutheran and Catholic",
-      "Anglican and Catholic"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Fourth Crusade (1204) sacked?",
-    "choices": [
-      "Jerusalem",
-      "Constantinople",
-      "Cairo",
-      "Baghdad"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Byzantine emperors used the title?",
-    "choices": [
-      "Caesar only",
-      "Basileus",
-      "Pharaoh",
-      "Sultan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Currency of Byzantium widely used?",
-    "choices": [
-      "Denarius",
-      "Solidus / nomisma",
-      "Ducat",
-      "Florin"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Komnenos dynasty ruled in the?",
-    "choices": [
-      "6th century",
-      "11th-12th centuries",
-      "14th century",
-      "15th century"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Last Byzantine emperor was?",
-    "choices": [
-      "Constantine XI",
-      "Justinian II",
-      "Basil II",
-      "Heraclius"
-    ],
-    "correct": 0
-  }
+  { question: "What was the Byzantine Empire's capital?", choices: ["Constantinople","Rome","Antioch","Thessalonica"], correct: 0 },
+  { question: "Who founded Constantinople in 330 AD?", choices: ["Constantine the Great","Diocletian","Theodosius","Justinian"], correct: 0 },
+  { question: "In what year did Constantinople fall to the Ottomans?", choices: ["1204","1453","1492","1522"], correct: 1 },
+  { question: "Who was the most famous Byzantine emperor (527-565)?", choices: ["Justinian I","Constantine","Heraclius","Basil II"], correct: 0 },
+  { question: "What was Justinian's legal compilation called?", choices: ["Corpus Juris Civilis","Digest","Novellae","Codex"], correct: 0 },
+  { question: "What famous church did Justinian build?", choices: ["Hagia Sophia","St. Peter's","St. Mark's","Notre Dame"], correct: 0 },
+  { question: "Who was Justinian's empress and political partner?", choices: ["Theodora","Irene","Helena","Pulcheria"], correct: 0 },
+  { question: "What major Byzantine general expanded the empire under Justinian?", choices: ["Belisarius","Narses","Both","Theodoric"], correct: 2 },
+  { question: "What schism in 1054 separated the Byzantine church from Rome?", choices: ["Great Schism","East-West Schism","Both terms","Filioque schism"], correct: 2 },
+  { question: "What language did the Byzantines mostly speak?", choices: ["Greek","Latin","Aramaic","Persian"], correct: 0 },
+  { question: "What religious image controversy hit Byzantium 8th-9th c.?", choices: ["Iconoclasm","Arianism","Monophysitism","Pelagianism"], correct: 0 },
+  { question: "What was the Byzantine secret weapon at sea?", choices: ["Greek fire","Catapult","Trireme","Cannon"], correct: 0 },
+  { question: "What tribe sacked Rome but was defeated by Belisarius in Italy?", choices: ["Ostrogoths","Visigoths","Vandals","All defeated by Byzantines"], correct: 3 },
+  { question: "What Russian state was Christianized from Byzantium in 988?", choices: ["Kievan Rus","Novgorod","Moscow","All later"], correct: 0 },
+  { question: "What ruler oversaw conversion of Kievan Rus to Christianity?", choices: ["Vladimir the Great","Yaroslav","Olga","Igor"], correct: 0 },
+  { question: "Who saw to the conversion of the Slavs and brought them Cyrillic alphabet?", choices: ["Cyril and Methodius","Constantine","Basil","John Chrysostom"], correct: 0 },
+  { question: "What 1071 battle was a Byzantine disaster against Seljuk Turks?", choices: ["Manzikert","Yarmouk","Kosovo","Pliska"], correct: 0 },
+  { question: "What 1204 event devastated Byzantium?", choices: ["Fourth Crusade","First Crusade","Mongol Invasion","Plague"], correct: 0 },
+  { question: "What dynasty ruled at empire's height?", choices: ["Macedonian","Komnenian","Palaiologos","Justinian"], correct: 0 },
+  { question: "What emperor was nicknamed 'Bulgar-slayer'?", choices: ["Basil II","Constantine V","Leo III","Justinian II"], correct: 0 },
+  { question: "What Byzantine emperor was last to rule before fall of Constantinople?", choices: ["Constantine XI","John VIII","Manuel II","Andronikos III"], correct: 0 },
+  { question: "What was the Byzantine currency, often gold?", choices: ["Solidus / nomisma","Denarius","Drachma","Ducat"], correct: 0 },
+  { question: "What was a Byzantine theme?", choices: ["Military and administrative province","Hymn type","Religious order","Tax form"], correct: 0 },
+  { question: "What art style is associated with Byzantium?", choices: ["Mosaic","Fresco","Both","Sculpture"], correct: 2 },
+  { question: "What sea did Byzantium control most heavily?", choices: ["Mediterranean and Aegean","Black","Both","Caspian"], correct: 2 },
+  { question: "What Byzantine title meant 'first among emperors'?", choices: ["Basileus","Augustus","Imperator","Despotes"], correct: 0 },
+  { question: "What was the bureaucratic class called?", choices: ["Logothetes / civil servants","Senators","Tribunes","Strategos"], correct: 0 },
+  { question: "What was iconography in Byzantine art?", choices: ["Religious icon painting","Map making","Statuary","Calligraphy"], correct: 0 },
+  { question: "What Renaissance was sparked by Greek scholars fleeing 1453?", choices: ["Italian Renaissance had Byzantine influence","Northern","Carolingian","Macedonian"], correct: 0 },
+  { question: "What's the Byzantine successor state 1204-1261?", choices: ["Empire of Nicaea","Trebizond","Both with Epirus","Both Nicaea and Trebizond"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ByzantineQuizSettings): ByzantineQuizState {

@@ -4,306 +4,36 @@ export interface DessertQuizSettings { questions: "10" | "20"; }
 export interface DessertQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type DessertQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Tiramisu is from?",
-    "choices": [
-      "Italy",
-      "France",
-      "Spain",
-      "Greece"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tiramisu's main flavor is?",
-    "choices": [
-      "Coffee",
-      "Chocolate",
-      "Vanilla",
-      "Lemon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mascarpone in tiramisu is a type of?",
-    "choices": [
-      "Cheese",
-      "Cream",
-      "Yogurt",
-      "Butter"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Crème brûlée is famous for its?",
-    "choices": [
-      "Burnt sugar top",
-      "Custard ribbon",
-      "Pour spout",
-      "Layered cream"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Crème brûlée is from?",
-    "choices": [
-      "France",
-      "Italy",
-      "Spain",
-      "Belgium"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Panna cotta means?",
-    "choices": [
-      "Cooked cream",
-      "Sweet cream",
-      "Whipped cream",
-      "Sour cream"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Panna cotta is set with?",
-    "choices": [
-      "Gelatin",
-      "Eggs",
-      "Flour",
-      "Cornstarch"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cheesecake's most American style is?",
-    "choices": [
-      "New York",
-      "Boston",
-      "Chicago",
-      "Atlanta"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pavlova is named after?",
-    "choices": [
-      "A Russian ballerina",
-      "A Russian tsar",
-      "A Russian admiral",
-      "A Russian poet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pavlova is essentially a?",
-    "choices": [
-      "Meringue dessert",
-      "Cake",
-      "Pie",
-      "Mousse"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sachertorte is from?",
-    "choices": [
-      "Vienna",
-      "Paris",
-      "Berlin",
-      "Prague"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sachertorte's icing is?",
-    "choices": [
-      "Dark chocolate",
-      "White chocolate",
-      "Butter cream",
-      "Caramel"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Black Forest cake is from?",
-    "choices": [
-      "Germany",
-      "Switzerland",
-      "Austria",
-      "France"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Black Forest cake's signature fruit is?",
-    "choices": [
-      "Cherry",
-      "Strawberry",
-      "Raspberry",
-      "Blueberry"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Opera cake is from?",
-    "choices": [
-      "France",
-      "Italy",
-      "Austria",
-      "Germany"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Croissants originated in?",
-    "choices": [
-      "Austria (Vienna)",
-      "France",
-      "Italy",
-      "Germany"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Croissants are made with which dough?",
-    "choices": [
-      "Laminated",
-      "Yeast bread",
-      "Choux",
-      "Shortcrust"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Eclairs are made from which dough?",
-    "choices": [
-      "Choux",
-      "Puff",
-      "Shortcrust",
-      "Brioche"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mille-feuille means?",
-    "choices": [
-      "Thousand sheets",
-      "Sweet leaves",
-      "White flower",
-      "Light layer"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Macarons are made from?",
-    "choices": [
-      "Almond flour/egg whites",
-      "Wheat flour/cream",
-      "Cornmeal/sugar",
-      "Buckwheat/butter"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mochi is made from?",
-    "choices": [
-      "Glutinous rice",
-      "Wheat flour",
-      "Tapioca",
-      "Coconut"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dorayaki is filled with?",
-    "choices": [
-      "Red bean paste",
-      "Custard",
-      "Cream",
-      "Chocolate"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bingsu is a dessert from?",
-    "choices": [
-      "Korea",
-      "Japan",
-      "China",
-      "Vietnam"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Halo-halo is from?",
-    "choices": [
-      "Philippines",
-      "Japan",
-      "Thailand",
-      "Vietnam"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Baklava is layered with?",
-    "choices": [
-      "Phyllo dough",
-      "Puff pastry",
-      "Choux",
-      "Shortcrust"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Baklava is sweetened with?",
-    "choices": [
-      "Honey/syrup",
-      "Powdered sugar",
-      "Maple",
-      "Stevia"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Brownies originated in?",
-    "choices": [
-      "United States",
-      "England",
-      "France",
-      "Italy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "S'mores combine?",
-    "choices": [
-      "Marshmallow/chocolate/graham",
-      "Marshmallow/peanut butter",
-      "Cookie/jam",
-      "Pretzel/caramel"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pecan pie is associated with?",
-    "choices": [
-      "Southern US",
-      "New England",
-      "Midwest",
-      "West Coast"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Apple pie is famously American but originated in?",
-    "choices": [
-      "Europe",
-      "Africa",
-      "Asia",
-      "Polynesia"
-    ],
-    "correct": 0
-  }
+  { question: "What's tiramisu?", choices: ["Italian coffee-flavored dessert","Just dessert","Both","Just Italian"], correct: 2 },
+  { question: "What's the cheese in tiramisu?", choices: ["Mascarpone","Cream cheese","Both used","Just mascarpone"], correct: 3 },
+  { question: "What's creme brulee?", choices: ["French custard with caramelized sugar top","Just custard","Both","Just French"], correct: 2 },
+  { question: "What technique makes creme brulee's top?", choices: ["Torch caramelization","Just torch","Both","Just sugar"], correct: 2 },
+  { question: "What's panna cotta?", choices: ["Italian cooked cream dessert","Just cream","Both","Just dessert"], correct: 2 },
+  { question: "What's a souffle?", choices: ["French baked egg dish","Just souffle","Both","Just dish"], correct: 2 },
+  { question: "What's a chocolate souffle?", choices: ["Hot puffy chocolate dessert","Just chocolate","Both","Just souffle"], correct: 2 },
+  { question: "What's macaron?", choices: ["French meringue cookie sandwich","Just cookie","Both","Just macaron"], correct: 2 },
+  { question: "What's a macaroon?", choices: ["Coconut cookie","Just coconut","Both","Different from macaron"], correct: 2 },
+  { question: "What's baklava?", choices: ["Layered phyllo with nuts and syrup","Just layered","Both","Just baklava"], correct: 2 },
+  { question: "What culture is baklava from?", choices: ["Middle East/Mediterranean","Just region","Both","Just origin"], correct: 2 },
+  { question: "What's gelato?", choices: ["Italian ice cream (lower fat, denser)","Just ice cream","Both","Just gelato"], correct: 2 },
+  { question: "What's the difference between gelato and ice cream?", choices: ["Gelato has less fat, less air","Just less fat","Both","Just denser"], correct: 2 },
+  { question: "What's flan?", choices: ["Custard with caramel sauce","Just custard","Both","Just flan"], correct: 2 },
+  { question: "What's pavlova?", choices: ["Meringue dessert with fruit","Just meringue","Both","Just pavlova"], correct: 2 },
+  { question: "What countries claim pavlova?", choices: ["Australia and New Zealand","Just Australia","Both","Just NZ"], correct: 0 },
+  { question: "What's a New York cheesecake?", choices: ["Dense baked cream cheese cake","Just baked","Both","Just cheesecake"], correct: 2 },
+  { question: "What's chocolate truffle?", choices: ["Chocolate ganache rolled","Just chocolate","Both","Just truffle"], correct: 2 },
+  { question: "What's a profiterole?", choices: ["Cream-filled choux pastry","Just choux","Both","Just profiterole"], correct: 2 },
+  { question: "What's an eclair?", choices: ["Long choux pastry filled with cream","Just pastry","Both","Just eclair"], correct: 2 },
+  { question: "What's choux pastry?", choices: ["Hollow pastry from cooked dough","Just pastry","Both","Just choux"], correct: 2 },
+  { question: "What's a cannoli?", choices: ["Sicilian fried tube with ricotta","Just tube","Both","Just cannoli"], correct: 2 },
+  { question: "What's a churro?", choices: ["Fried dough stick","Just fried","Both","Just churro"], correct: 2 },
+  { question: "What country are churros associated with?", choices: ["Spain and Mexico","Just Spain","Both","Just Mexico"], correct: 2 },
+  { question: "What's mochi?", choices: ["Japanese rice cake","Just rice","Both","Just mochi"], correct: 2 },
+  { question: "What's mochi ice cream?", choices: ["Ice cream wrapped in mochi","Just mochi","Both","Just ice cream"], correct: 2 },
+  { question: "What's Black Forest cake?", choices: ["German chocolate cherry layered cake","Just German","Both","Just cake"], correct: 2 },
+  { question: "What's red velvet cake?", choices: ["Reddish chocolate cake with cream cheese frosting","Just cake","Both","Just red velvet"], correct: 2 },
+  { question: "What's an opera cake?", choices: ["French layered almond/coffee/chocolate","Just French","Both","Just opera"], correct: 2 },
+  { question: "What's mille-feuille?", choices: ["French puff pastry with pastry cream","Just puff","Both","Just mille-feuille"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: DessertQuizSettings): DessertQuizState {

@@ -4,226 +4,36 @@ export interface DesertQuizSettings { questions: "10" | "20"; }
 export interface DesertQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type DesertQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "World's largest hot desert?",
-    "choices": [
-      "Gobi",
-      "Kalahari",
-      "Sahara",
-      "Arabian"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "World's largest desert overall (any kind)?",
-    "choices": [
-      "Sahara",
-      "Antarctic Desert",
-      "Arctic Desert",
-      "Australian"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Gobi Desert is in which countries?",
-    "choices": [
-      "Iran and Iraq",
-      "Mongolia and China",
-      "India and Pakistan",
-      "Russia and Kazakhstan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Atacama Desert is in which country?",
-    "choices": [
-      "Argentina",
-      "Peru",
-      "Chile",
-      "Bolivia"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The Mojave Desert is mostly in which US state?",
-    "choices": [
-      "Arizona",
-      "California",
-      "Nevada",
-      "New Mexico"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Kalahari Desert is in which region?",
-    "choices": [
-      "West Africa",
-      "Southern Africa",
-      "North Africa",
-      "East Africa"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Death Valley is in which desert?",
-    "choices": [
-      "Mojave",
-      "Sonoran",
-      "Great Basin",
-      "Chihuahuan"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Sahara stretches across roughly how many countries?",
-    "choices": [
-      "3",
-      "5",
-      "11",
-      "20"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The Thar Desert is shared by which two countries?",
-    "choices": [
-      "Egypt and Sudan",
-      "Algeria and Morocco",
-      "India and Pakistan",
-      "Iran and Afghanistan"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What is the driest non-polar place on Earth?",
-    "choices": [
-      "Mojave",
-      "Atacama",
-      "Sahara",
-      "Gobi"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Namib Desert is in which country?",
-    "choices": [
-      "Namibia",
-      "Botswana",
-      "South Africa",
-      "Angola"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Sonoran Desert is famous for which cactus?",
-    "choices": [
-      "Prickly pear",
-      "Saguaro",
-      "Barrel cactus",
-      "Joshua tree"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Patagonian Desert is mostly in which country?",
-    "choices": [
-      "Chile",
-      "Argentina",
-      "Peru",
-      "Brazil"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which desert is on the Arabian Peninsula?",
-    "choices": [
-      "Rub' al Khali",
-      "Atacama",
-      "Karakum",
-      "Taklamakan"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Karakum Desert is mostly in which country?",
-    "choices": [
-      "Iran",
-      "Afghanistan",
-      "Turkmenistan",
-      "Uzbekistan"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The Australian Outback contains which large desert?",
-    "choices": [
-      "Great Victoria Desert",
-      "Karoo",
-      "Negev",
-      "Sechura"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Negev Desert is in which country?",
-    "choices": [
-      "Egypt",
-      "Israel",
-      "Jordan",
-      "Syria"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Taklamakan Desert is in which country?",
-    "choices": [
-      "Mongolia",
-      "Russia",
-      "China",
-      "Kazakhstan"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "How is desert defined (rainfall)?",
-    "choices": [
-      "Less than 250mm/yr",
-      "Less than 1000mm/yr",
-      "Less than 50mm/yr",
-      "More than 250mm/yr"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Chihuahuan Desert spans which two countries?",
-    "choices": [
-      "US and Mexico",
-      "Mexico and Guatemala",
-      "US and Canada",
-      "Mexico and Belize"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What does 'oasis' refer to in a desert?",
-    "choices": [
-      "Sandstorm",
-      "Rocky outcrop",
-      "Fertile spot with water",
-      "Desert mountain"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The Wadi Rum desert is in which country?",
-    "choices": [
-      "Saudi Arabia",
-      "Jordan",
-      "UAE",
-      "Oman"
-    ],
-    "correct": 1
-  }
+  { question: "What is the largest hot desert in the world?", choices: ["Gobi","Kalahari","Sahara","Arabian"], correct: 2 },
+  { question: "What is the largest desert overall (including cold deserts)?", choices: ["Sahara","Antarctica","Arctic","Gobi"], correct: 1 },
+  { question: "In which country is the Atacama Desert?", choices: ["Peru","Chile","Bolivia","Argentina"], correct: 1 },
+  { question: "What is the driest non-polar desert?", choices: ["Sahara","Atacama","Gobi","Namib"], correct: 1 },
+  { question: "The Gobi Desert spans which two countries?", choices: ["China and Russia","China and Mongolia","Mongolia and Kazakhstan","India and Pakistan"], correct: 1 },
+  { question: "In which country is the Mojave Desert?", choices: ["Mexico","USA","Argentina","Chile"], correct: 1 },
+  { question: "What desert is famous for the Empty Quarter (Rub al Khali)?", choices: ["Sahara","Arabian","Thar","Kalahari"], correct: 1 },
+  { question: "In which countries is the Kalahari Desert?", choices: ["Egypt and Libya","Botswana, Namibia, South Africa","Angola, DRC","Mozambique, Zambia"], correct: 1 },
+  { question: "The Namib Desert is found primarily in which country?", choices: ["Angola","Namibia","South Africa","Botswana"], correct: 1 },
+  { question: "What desert is the Sahara's eastern extension into the Arabian peninsula?", choices: ["Thar","Arabian","Negev","Karakum"], correct: 1 },
+  { question: "Where is the Thar (Great Indian) Desert?", choices: ["India and Pakistan","India only","Bangladesh","Nepal"], correct: 0 },
+  { question: "What is the largest desert in Australia?", choices: ["Gibson","Tanami","Great Sandy","Great Victoria"], correct: 3 },
+  { question: "What desert is in Turkmenistan and Uzbekistan?", choices: ["Karakum","Kyzylkum","Both","Aralkum"], correct: 2 },
+  { question: "What desert covers most of Egypt's western half?", choices: ["Sinai","Western Desert","Eastern Desert","Negev"], correct: 1 },
+  { question: "What is the smallest desert in the world by some measures?", choices: ["Carcross","Antarctic","Atacama","Patagonian"], correct: 0 },
+  { question: "In which U.S. state is Death Valley?", choices: ["Nevada","Arizona","California","Utah"], correct: 2 },
+  { question: "What range borders the Mojave to the west?", choices: ["Rocky Mountains","Sierra Nevada","Cascades","Coast Range"], correct: 1 },
+  { question: "What is the largest desert in South America?", choices: ["Atacama","Patagonian","Sechura","Monte"], correct: 1 },
+  { question: "What desert covers parts of Iran's center?", choices: ["Dasht-e Kavir","Karakum","Negev","Thar"], correct: 0 },
+  { question: "What sand dune is the highest in the world (in Namibia)?", choices: ["Dune 7","Big Daddy","Dune 45","Erg Chebbi"], correct: 0 },
+  { question: "What desert is in Israel and Egypt's Sinai?", choices: ["Negev","Arabian","Sinai","Both Negev and Sinai"], correct: 3 },
+  { question: "What is the dominant desert plant in the American Southwest?", choices: ["Cactus","Palm","Olive","Bamboo"], correct: 0 },
+  { question: "What animal is famously called the ship of the desert?", choices: ["Horse","Donkey","Camel","Yak"], correct: 2 },
+  { question: "What is an oasis?", choices: ["A fertile area in a desert","A type of cactus","A sand dune","A desert wind"], correct: 0 },
+  { question: "What is the saltiest natural body of water surrounded by desert (and below sea level)?", choices: ["Caspian","Dead Sea","Aral Sea","Lake Eyre"], correct: 1 },
+  { question: "What is the typical annual rainfall threshold for a desert (in mm)?", choices: ["100","250","500","1000"], correct: 1 },
+  { question: "Which is a cold desert?", choices: ["Sahara","Gobi","Kalahari","Thar"], correct: 1 },
+  { question: "What is the largest desert in North America (excluding Arctic)?", choices: ["Sonoran","Mojave","Chihuahuan","Great Basin"], correct: 2 },
+  { question: "What desert flower famously blooms after rare rains in Atacama?", choices: ["Desert rose","Llareta","Anana","Desierto florido (multiple species)"], correct: 3 },
+  { question: "What desert formation is a long, narrow ridge of sand?", choices: ["Erg","Reg","Wadi","Yardang"], correct: 3 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: DesertQuizSettings): DesertQuizState {
