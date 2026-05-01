@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const wonderPackExtraPlugin: GamePlugin<WonderPackExtraState, WonderPackExtraAction, typeof settings> = {
   id: "wonder-pack-extra",
-  title: "7 Wonders: Wonder Pack",
+  title: "Wonder Pack",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Four new wonders extending variety of wonder boards.",
-  howToPlay: "7 Wonders: Wonder Pack is a draft of four extra wonder cards spread across eight rounds. Suits are the new wonders — Stonehenge, Manneken Pis, Abu Simbel, and Great Wall.\n\nEach round, three cards appear: pick one and the CPU takes the highest-rank remaining. Build a wonder progress tableau.\n\nScoring per tableau:\n- Sum of card ranks (1-9 each).\n- +10 per wonder with 3+ stages built.\n- +15 additional per wonder with 5+ stages built.\n- +5 per same-rank pair; +10 per triplet.\n- +25 if you outscore the CPU.\n\nStrategy: Wonder Pack rewards completing a single wonder — three Stonehenge cards is +10. The greedy CPU takes the highest-rank wonder card, leaving mid-tier for your dedicated build. Aim for 60-100 points. 7 Wonders: Wonder Pack expands the seven-civilization race with four new cultural icons. Eight rounds. One wonder rises.",
+  description: "Card-drafting: pick one of 3 each round, build combos.",
+  howToPlay: "Wonder Pack is a card-drafting game over 8 rounds. Each round, 3 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Petra, Stonehenge, Manneken, Abu Simbel, Roma. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as WonderPackExtraSettings),
   reducer,

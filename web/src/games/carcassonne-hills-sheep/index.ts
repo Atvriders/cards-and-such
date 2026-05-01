@@ -2,15 +2,17 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { CarcassonneHillsSheepState, CarcassonneHillsSheepAction, CarcassonneHillsSheepSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CarcassonneHillsSheepGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const carcassonneHillsSheepPlugin: GamePlugin<CarcassonneHillsSheepState, CarcassonneHillsSheepAction, typeof settings> = {
   id: "carcassonne-hills-sheep",
   title: "Carcassonne: Hills & Sheep",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Hills, sheep, vineyards, wolves, and barn tile placement.",
-  howToPlay: "Carcassonne: Hills & Sheep introduces stacking hill tiles, shepherding mechanics, and wine vineyards. In this 5x5 adaptation you place 15 themed tiles representing hills, sheep, vineyards, wolves, and barns. Click any empty cell to place the next queued tile. Each placement scores 1 base point plus 1 for each orthogonally adjacent same-type tile. Sheep cluster well into flocks, and vineyards score in groups historically — simulated here by adjacency. Wolves are a thematic risk that here simply count as their own type for adjacency. Strategy: identify the upcoming queue and decide whether to extend an existing cluster or start a new one. With five types over 15 tiles you'll see roughly three of each, so two strong clusters is a realistic target. After all 15 placements the game scores final. A respectable score is 25-35; clusterers reach 40+.",
+  description: "Tile placement: place 18 tiles on a 6x6 grid; score by adjacency.",
+  howToPlay: "Carcassonne: Hills & Sheep is a tile-placement game on a 6x6 grid. A randomized queue of 18 tiles is generated. Each turn the next tile from the queue is shown; click any empty cell to place it. Tile types are: Hill, Sheep, Wolf, Vineyard, Pasture. Each orthogonal pair of same-type tiles scores +2. Same-type connected clusters of 3+ score a +4 bonus, clusters of 5+ score an additional +8. Strategy: place tiles next to existing same-type neighbors to grow clusters efficiently. Don't waste placements in isolated corners. The grid has 36 cells but you only place 18 tiles, so plan compact clusters.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CarcassonneHillsSheepSettings),
   reducer,

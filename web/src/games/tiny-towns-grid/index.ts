@@ -2,30 +2,17 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { TinyTownsGridState, TinyTownsGridAction, TinyTownsGridSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TinyTownsGridGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const tinyTownsGridPlugin: GamePlugin<TinyTownsGridState, TinyTownsGridAction, typeof settings> = {
   id: "tiny-towns-grid",
-  title: "Tiny Towns",
+  title: "Tiny Towns Grid",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Resource-and-build village placement on a 4x4 grid.",
-  howToPlay: `Tiny Towns is a tableau-building game where you place resources and convert them into buildings on a 4x4 personal grid. In this adaptation you draw 16 random items and place them in any empty cell of the 4x4 (16-cell) grid.
-
-Items are one of five types: wood, brick, glass, stone, and wheat.
-
-Click any empty cell to place the next item from the queue.
-
-Scoring (at end):
-• Each adjacent matching pair: +2 points (orthogonally adjacent items of the same type).
-• Each cell that is fully surrounded (4 different types as orthogonal neighbors): +6 points.
-• Each completed row of 4 (any items): +3 points.
-• Each completed column of 4 (any items): +3 points.
-• Bonus +5 if the entire 4x4 grid is filled.
-
-With 16 items and 16 cells you'll fill every cell — automatic +5. Then optimize matching pairs (group same types) and at least one fully-surrounded cell.
-
-A top score reaches 35-45. The center cells are easier to surround than corners, so save your variety for the middle.`,
+  description: "Tile placement: place 12 tiles on a 4x4 grid; score by adjacency.",
+  howToPlay: "Tiny Towns Grid is a tile-placement game on a 4x4 grid. A randomized queue of 12 tiles is generated. Each turn the next tile from the queue is shown; click any empty cell to place it. Tile types are: Cottage, Tavern, Chapel, Well, Farm. Each orthogonal pair of same-type tiles scores +2. Same-type connected clusters of 3+ score a +4 bonus, clusters of 5+ score an additional +8. Strategy: place tiles next to existing same-type neighbors to grow clusters efficiently. Don't waste placements in isolated corners. The grid has 16 cells but you only place 12 tiles, so plan compact clusters.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as TinyTownsGridSettings),
   reducer,

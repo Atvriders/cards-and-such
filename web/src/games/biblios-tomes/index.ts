@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const bibliosTomesPlugin: GamePlugin<BibliosTomesState, BibliosTomesAction, typeof settings> = {
   id: "biblios-tomes",
-  title: "Biblios Tomes",
+  title: "Biblios: Tomes",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Draft cards and auction. Monks collect illuminated tomes.",
-  howToPlay: "Biblios Tomes is a card-drafting tableau-building game inspired by Biblios. You play a monk gathering illuminated manuscripts of four kinds: golden suns, silver moons, ruby stars, emerald leaves. Each round, three card offers appear; you pick one, then the CPU takes the highest-rank remaining. Eight rounds total. Score by combining suits and ranks: three same-suit earn +10, five same-suit earn another +15, two of same rank earn +5, three of same rank earn +10. Raw ranks sum too. Final score equals tableau total plus +25 bonus if you beat the CPU. Strategy: balance is hard, early rounds let you grab a suit lead, but the CPU's greedy rank-grabbing means high-rank cards rarely make it to you. Aim for low-cost suit-focused cards in early rounds, then high-rank cards once your suit bonuses are locked. Targets: 70-110 with bonus.",
+  description: "Card-drafting: pick one of 3 each round, build combos.",
+  howToPlay: "Biblios: Tomes is a card-drafting game over 8 rounds. Each round, 3 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Manuscript, Pigment, Forbidden, Scribe, Holy. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as BibliosTomesSettings),
   reducer,

@@ -1,41 +1,48 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal, GRID_SIZE, TOTAL_TILES, NUM_TYPES } from "./state.js";
+
 const S = { dummy: false };
-describe("SagradaWindow", () => {
-  it("starts in initial phase with score 0", () => {
+
+describe("Sagrada: Window tile placement", () => {
+  it("initial state has empty cells and a queue", () => {
     const s = initialState(1, S);
-    expect(s.score).toBe(0);
-    expect(s.round).toBe(1);
+    expect(s.cells.length).toBe(GRID_SIZE * GRID_SIZE);
+    expect(s.queue.length).toBe(TOTAL_TILES);
+    expect(s.placed).toBe(0);
+    expect(s.phase).toBe("playing");
   });
-  it("first roll produces items and possibly score", () => {
-    const s = reducer(initialState(1, S), { type: "roll" });
-    expect(s.rolls.length).toBeGreaterThanOrEqual(1);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+
+  it("placing a tile advances state", () => {
+    const s = reducer(initialState(2, S), { type: "place", index: 0 });
+    expect(s.cells[0]).toBeGreaterThanOrEqual(0);
+    expect(s.cells[0]).toBeLessThan(NUM_TYPES);
+    expect(s.placed).toBe(1);
   });
-  it("isTerminal null at start", () => {
-    expect(isTerminal(initialState(1, S))).toBeNull();
+
+  it("rejects placement on filled cell", () => {
+    const s1 = reducer(initialState(3, S), { type: "place", index: 0 });
+    const s2 = reducer(s1, { type: "place", index: 0 });
+    expect(s2).toBe(s1);
   });
-  it("game ends after total rounds", () => {
-    let s = initialState(7, S);
-    for (let i = 0; i < TOTAL_ROUNDS; i++) {
-      s = reducer(s, { type: "roll" });
-      if (s.phase === "scored") s = reducer(s, { type: "next" });
+
+  it("ends after TOTAL_TILES placements", () => {
+    let s = initialState(4, S);
+    let cell = 0;
+    while (s.phase !== "done" && cell < s.cells.length) {
+      if ((s.cells[cell] ?? -1) < 0) s = reducer(s, { type: "place", index: cell });
+      cell++;
     }
     expect(s.phase).toBe("done");
     expect(isTerminal(s)).not.toBeNull();
-    expect(isTerminal(s)?.score).toBeGreaterThanOrEqual(0);
   });
-  it("non-negative score across multiple seeds", () => {
-    for (const seed of [1, 42, 1234]) {
-      let s = initialState(seed, S);
-      for (let i = 0; i < TOTAL_ROUNDS; i++) {
-        s = reducer(s, { type: "roll" });
-        if (s.phase === "scored") s = reducer(s, { type: "next" });
-      }
-      expect(s.score).toBeGreaterThanOrEqual(0);
+
+  it("score is non-negative", () => {
+    let s = initialState(5, S);
+    let cell = 0;
+    while (s.phase !== "done" && cell < s.cells.length) {
+      if ((s.cells[cell] ?? -1) < 0) s = reducer(s, { type: "place", index: cell });
+      cell++;
     }
-  });
-  it("TOTAL_ROUNDS is 10", () => {
-    expect(TOTAL_ROUNDS).toBe(10);
+    expect(s.score).toBeGreaterThanOrEqual(0);
   });
 });

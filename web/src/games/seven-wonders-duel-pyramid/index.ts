@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const sevenWondersDuelPyramidPlugin: GamePlugin<SevenWondersDuelPyramidState, SevenWondersDuelPyramidAction, typeof settings> = {
   id: "seven-wonders-duel-pyramid",
-  title: "7 Wonders Duel: Pyramid",
+  title: "Seven Wonders Duel: Pyramid",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Two-player pyramid card-acquisition homage.",
-  howToPlay: "7 Wonders Duel: Pyramid is a homage to the two-player Antoine Bauza and Bruno Cathala game, where cards are arranged in a pyramid layout and players take turns picking accessible cards. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau across the four suits. Three of one suit earn +10 (a science set); five earn an additional +15 (a science victory). Pairs of rank earn +5 (a military advance); three-of-a-kind +10 (a military victory). Raw ranks sum as commerce. Score equals tableau total plus +25 for beating the CPU. Strategy: head-to-head focus rewards denying the CPU's preferred suit. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 3 each round, build combos.",
+  howToPlay: "Seven Wonders Duel: Pyramid is a card-drafting game over 9 rounds. Each round, 3 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Brown, Grey, Yellow, Red, Green. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SevenWondersDuelPyramidSettings),
   reducer,

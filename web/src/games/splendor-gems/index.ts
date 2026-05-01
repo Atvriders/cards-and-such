@@ -9,10 +9,10 @@ type S = SettingsOf<typeof settings>;
 export const splendorGemsPlugin: GamePlugin<SplendorGemsState, SplendorGemsAction, typeof settings> = {
   id: "splendor-gems",
   title: "Splendor Gems",
-  category: "board",
+  category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Gem-token economy. Buy gems to fund noble investments.",
-  howToPlay: "Splendor Gems is a ten-turn engine builder loosely inspired by Splendor's gem economy. You begin with $200 cash. Each turn pick: Invest $40 to buy a Gem, Save (5% interest), Hire a Noble for $70 (representing a prestigious patron), or Trade a Gem for a $30-50 market price. After actions, each Gem pays $8 prestige dividend and each Noble pays $13 in noble support. Mid-screen flavor describes gem-buying decisions and patrons arriving. Score equals net worth at turn 10. The math: Gems pay 20% on cost, Nobles pay 19%, but saving compounds at 5% so engine-building always wins. Strategy: stack gems early (cheap) then buy 1-2 nobles late. Aim for 5-6 Gems plus 2 Nobles for $700-900. Pure noble buys are too slow; pure gem stacking caps at around $650.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Splendor Gems is a card-drafting game over 8 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Emerald, Sapphire, Ruby, Diamond, Onyx. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SplendorGemsSettings),
   reducer,

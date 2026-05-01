@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const splendorMerchantPlugin: GamePlugin<SplendorMerchantState, SplendorMerchantAction, typeof settings> = {
   id: "splendor-merchant",
-  title: "Splendor Merchant",
+  title: "Splendor: Merchant",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Gem token economy — buy cards fund expensive purchases.",
-  howToPlay: "Splendor Merchant is a gem-token economy distillation across ten turns. You start with $200 cash, no Gem cards, and no Noble cards. Each turn, pick one action: Buy a Gem Card for $40, Save your cash for 5% interest, Court a Noble for $60, or Sell a Gem Card for $30-50.\n\nAfter your action, every Gem Card earns $8 in prestige and every Noble earns $12 in royal favor. A flavor event reflects the market. Your final score is net worth — cash plus cost-basis value of gem cards and nobles. The Splendor genre rewards efficient card chains where cheap cards fund expensive ones. Buy the cheap card. Buy the better card. Crown yourself with prestige.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Splendor: Merchant is a card-drafting game over 9 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Silk, Spice, Gem, Gold, Salt. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SplendorMerchantSettings),
   reducer,

@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const sevenWondersArchitectsDraftPlugin: GamePlugin<SevenWondersArchitectsDraftState, SevenWondersArchitectsDraftAction, typeof settings> = {
   id: "seven-wonders-architects-draft",
-  title: "7 Wonders Architects",
+  title: "Seven Wonders: Architects",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Streamlined draft with progress tokens.",
-  howToPlay: "7 Wonders Architects is a homage to Antoine Bauza's streamlined version of the 7 Wonders system, where money is removed and progress tokens drive strategic differentiation. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau. Three of one suit earn +10 (a progress token); five earn an additional +15 (a wonder stage). Pairs of rank earn +5 (a small bonus); three-of-a-kind +10 (a wonder-completion). Raw ranks sum as construction. Score equals tableau total plus +25 for beating the CPU. Strategy: simpler expansions reward commitment to a single suit. Watch the CPU and deny their pile when close to a +10. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 3 each round, build combos.",
+  howToPlay: "Seven Wonders: Architects is a card-drafting game over 8 rounds. Each round, 3 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 4 suits: Stone, Wood, Cat, Progress. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SevenWondersArchitectsDraftSettings),
   reducer,

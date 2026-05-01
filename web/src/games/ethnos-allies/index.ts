@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const ethnosAlliesPlugin: GamePlugin<EthnosAlliesState, EthnosAlliesAction, typeof settings> = {
   id: "ethnos-allies",
-  title: "Ethnos Allies",
+  title: "Ethnos: Allies",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Draft monster allies. Control regions, trigger sudden scoring.",
-  howToPlay: "Ethnos Allies is a card-drafting region-control game inspired by Ethnos. You draft cards representing four ally types: sun-warriors, moon-mystics, star-merchants, leaf-rangers. Each round, three offers appear; you pick one, the CPU takes the highest-rank remaining. Eight rounds total. Score by combining suit and rank patterns: three same-type allies earn +10 bonus, five earn another +15, pairs of same rank earn +5, triples earn +10. Raw rank sums also count. Final score equals tableau total plus +25 bonus if you beat the CPU. Strategy: in Ethnos, suit focus controls regions; here it controls bonuses. Lock a suit lead by taking the same type twice in early rounds even if rank-low. Then take high-rank cards in mid-late game. Aim for 70-110 with bonus.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Ethnos: Allies is a card-drafting game over 9 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 6 suits: Centaur, Dwarf, Elf, Giant, Wizard, Troll. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as EthnosAlliesSettings),
   reducer,

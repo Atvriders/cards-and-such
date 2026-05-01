@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const wonderfulWorldCorruptionPlugin: GamePlugin<WonderfulWorldCorruptionState, WonderfulWorldCorruptionAction, typeof settings> = {
   id: "wonderful-world-corruption",
-  title: "Wonderful World: Corruption",
+  title: "IWW: Corruption",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Corruption-track draft homage.",
-  howToPlay: "Wonderful World: Corruption is a homage to Frederic Guerard's expansion that adds corruption-level cards and an ascension path to It's a Wonderful World. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau. Three of one suit earn +10 (a corruption tier); five earn an additional +15 (an ascension milestone). Pairs of rank earn +5 (a clean recycle); three-of-a-kind +10 (an ascension chain). Raw ranks sum as empire points. Score equals tableau total plus +25 for beating the CPU. Strategy: corruption pushes you toward extreme strategies; commit hard to one suit, even if it costs short-term tempo. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 3 each round, build combos.",
+  howToPlay: "IWW: Corruption is a card-drafting game over 8 rounds. Each round, 3 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 4 suits: Bribe, Spy, Agent, Mole. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as WonderfulWorldCorruptionSettings),
   reducer,

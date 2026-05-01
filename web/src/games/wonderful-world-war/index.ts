@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const wonderfulWorldWarPlugin: GamePlugin<WonderfulWorldWarState, WonderfulWorldWarAction, typeof settings> = {
   id: "wonderful-world-war",
-  title: "Wonderful World: War or Peace",
+  title: "IWW: War",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Conflict-track draft with co-op shift.",
-  howToPlay: "Wonderful World: War or Peace is a homage to the Frederic Guerard expansion that adds a conflict scoring track and a cooperation-vs-competition shift. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau. Three of one suit earn +10 (a war milestone); five earn an additional +15 (a peace treaty). Pairs of rank earn +5 (a small skirmish); three-of-a-kind +10 (a major engagement). Raw ranks sum as empire points. Score equals tableau total plus +25 for beating the CPU. Strategy: war-style commits to one suit are powerful but block the peace bonus from diverse picks. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "IWW: War is a card-drafting game over 9 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 4 suits: Infantry, Tank, Plane, Navy. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as WonderfulWorldWarSettings),
   reducer,

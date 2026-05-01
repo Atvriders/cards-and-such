@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const sevenWondersEdificePlugin: GamePlugin<SevenWondersEdificeState, SevenWondersEdificeAction, typeof settings> = {
   id: "seven-wonders-edifice",
-  title: "7 Wonders: Edifice",
+  title: "Seven Wonders: Edifice",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Building projects shared draft with public bonuses.",
-  howToPlay: "7 Wonders: Edifice is a homage to the Antoine Bauza expansion that adds shared building projects across the four ages, granting collective benefits or imposing penalties. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau. Three of one suit earn +10 (a project completion); five earn an additional +15 (the apex of the edifice). Pairs of rank earn +5 (a project contribution); three-of-a-kind +10 (a project lead). Raw ranks sum as building stones. Score equals tableau total plus +25 for beating the CPU. Strategy: the Edifice expansion rewards committing labor to one project; commit early to one suit. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 3 each round, build combos.",
+  howToPlay: "Seven Wonders: Edifice is a card-drafting game over 9 rounds. Each round, 3 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 4 suits: Pillar, Stone, Marble, Brick. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SevenWondersEdificeSettings),
   reducer,

@@ -1,49 +1,76 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SeasonsMagesDraftState, SeasonsMagesDraftAction, SeasonsMagesDraftSettings } from "./state.js";
-import { isTerminal, score, TOTAL_ROUNDS, suitName, rankName } from "./state.js";
+import { isTerminal, score, TOTAL_ROUNDS, OFFER_SIZE, suitName, rankName, SUIT_NAMES } from "./state.js";
 import "./Game.css";
 
 export function SeasonsMagesDraftGame({ state, dispatch, onGameOver }: GameProps<SeasonsMagesDraftState, SeasonsMagesDraftSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  const finalScore = score(state);
   return (
-    <div className="dr-wrap">
-      <h3 className="dr-title">Seasons: Mages</h3>
-      <div className="dr-stats">
-        <div>Round <b>{state.round}/{TOTAL_ROUNDS}</b></div>
-        <div>You <b>{state.myScore}</b></div>
-        <div>CPU <b>{state.cpuScore}</b></div>
+    <div className="smd-wrap">
+      <h3 className="smd-title">Seasons: Mages</h3>
+      <div className="smd-stats">
+        <div className="smd-stat"><span>Round</span><b>{state.round}/9</b></div>
+        <div className="smd-stat"><span>You</span><b>{state.myScore}</b></div>
+        <div className="smd-stat"><span>CPU</span><b>{state.cpuScore}</b></div>
       </div>
       {state.phase === "drafting" && (
         <>
-          <div className="dr-prompt">Pick a card:</div>
-          <div className="dr-offer">
+          <div className="smd-prompt">Pick one of 4 cards. CPU takes the highest remaining.</div>
+          <div className="smd-offer">
             {state.offer.map((c, i) => (
-              <button key={i} className="dr-card" onClick={() => dispatch({ type: "pick", idx: i } as SeasonsMagesDraftAction)}>
-                <div className="dr-rank">{rankName(c.rank)}</div>
-                <div className="dr-suit">{suitName(c.suit)}</div>
+              <button key={c.id + ":" + i} className={"smd-card smd-suit-" + c.suit} onClick={() => dispatch({ type: "pick", idx: i } as SeasonsMagesDraftAction)}>
+                <div className="smd-rank">{rankName(c.rank)}</div>
+                <div className="smd-suit">{suitName(c.suit)}</div>
               </button>
             ))}
           </div>
         </>
       )}
       {state.phase === "round-done" && (
-        <div className="dr-event">
-          <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as SeasonsMagesDraftAction)}>Next Round</button>
+        <div className="smd-event">
+          <div className="smd-event-line">{state.lastEvent}</div>
+          <button className="smd-next" onClick={() => dispatch({ type: "next" } as SeasonsMagesDraftAction)}>Next Round &raquo;</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="dr-done">
-          <h3>{state.myScore > state.cpuScore ? "Win! +25 bonus" : state.myScore === state.cpuScore ? "Tie" : "Lost"}</h3>
-          <div>You: {state.myScore} | CPU: {state.cpuScore}</div>
-          <div>Score: {score(state)}</div>
+        <div className="smd-done">
+          <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
+          <div className="smd-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
+          <div className="smd-final-score">Final score: <b>{finalScore}</b></div>
         </div>
       )}
-      <div className="dr-tab">
-        <div><b>Your tableau:</b> {state.myTableau.map(c => rankName(c.rank) + suitName(c.suit)[0]).join(" ")}</div>
-        <div><b>CPU tableau:</b> {state.cpuTableau.map(c => rankName(c.rank) + suitName(c.suit)[0]).join(" ")}</div>
+      <div className="smd-tableaus">
+        <div className="smd-tab">
+          <div className="smd-tab-label">Your tableau</div>
+          <div className="smd-tab-row">
+            {state.myTableau.map((c, i) => (
+              <div key={i} className={"smd-mini smd-suit-" + c.suit}>
+                <span className="smd-mini-rank">{rankName(c.rank)}</span>
+                <span className="smd-mini-suit">{suitName(c.suit).slice(0,3)}</span>
+              </div>
+            ))}
+            {state.myTableau.length === 0 && <div className="smd-empty">(none yet)</div>}
+          </div>
+        </div>
+        <div className="smd-tab">
+          <div className="smd-tab-label">CPU tableau</div>
+          <div className="smd-tab-row">
+            {state.cpuTableau.map((c, i) => (
+              <div key={i} className={"smd-mini smd-suit-" + c.suit}>
+                <span className="smd-mini-rank">{rankName(c.rank)}</span>
+                <span className="smd-mini-suit">{suitName(c.suit).slice(0,3)}</span>
+              </div>
+            ))}
+            {state.cpuTableau.length === 0 && <div className="smd-empty">(none yet)</div>}
+          </div>
+        </div>
+      </div>
+      <div className="smd-legend">
+        Suits: {SUIT_NAMES.map((n, i) => <span key={i} className={"smd-leg smd-suit-" + i}>{n}</span>)}
+        <span className="smd-rule">3 same suit +10 &middot; 5 same suit +20 &middot; pair +5 &middot; trip +12</span>
       </div>
     </div>
   );

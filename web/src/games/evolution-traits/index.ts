@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const evolutionTraitsPlugin: GamePlugin<EvolutionTraitsState, EvolutionTraitsAction, typeof settings> = {
   id: "evolution-traits",
-  title: "Evolution: Traits Draft",
+  title: "Evolution: Traits",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Draft trait cards to shape species diet and defense.",
-  howToPlay: "Evolution: Traits Draft is an eight-round draft where you shape a species via trait cards. Suits are diet/defense families — Carnivore, Herbivore, Defensive, and Pack.\n\nEach round, three cards appear: pick one and the CPU takes the highest-rank remaining. Build a species tableau across rounds.\n\nScoring per tableau:\n- Sum of trait ranks (1-9 each).\n- +10 per trait family with 3+ traits.\n- +15 additional per family with 5+ traits.\n- +5 per same-rank pair; +10 per triplet.\n- +25 if you outscore the CPU.\n\nStrategy: Evolution rewards locking a niche — three Carnivore traits is a +10 even at low ranks. The greedy CPU takes rank-9, leaving mid-tier traits for your set-building. Carnivore-3 in your set beats splashing Pack-8. Aim for 60-100 points. Evolution: Traits Draft is the franchise's adaptation race compressed into eight tense decisions. Adapt or perish.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Evolution: Traits is a card-drafting game over 8 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Carnivore, Herbivore, Climbing, Burrow, Pack. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as EvolutionTraitsSettings),
   reducer,

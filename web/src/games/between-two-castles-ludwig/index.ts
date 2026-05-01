@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const betweenTwoCastlesLudwigPlugin: GamePlugin<BetweenTwoCastlesLudwigState, BetweenTwoCastlesLudwigAction, typeof settings> = {
   id: "between-two-castles-ludwig",
-  title: "Between Two Castles: Ludwig",
+  title: "Between Two Castles",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Hybrid draft-placement; rooms drafted then shared castle built.",
-  howToPlay: "Between Two Castles: Ludwig is a card draft of castle rooms across eight rounds. Suits represent room types — Bedchamber, Hall, Garden, and Tower.\n\nEach round, three cards appear: pick one and the CPU takes the highest-rank remaining. Build a castle tableau where adjacency (set count) drives scoring.\n\nScoring per tableau:\n- Sum of room ranks (1-9 each).\n- +10 per room type with 3+ rooms (wing complete).\n- +15 additional per room type with 5+ rooms.\n- +5 per same-rank pair; +10 per triplet.\n- +25 if you outscore the CPU.\n\nStrategy: Ludwig rewards connected wings — three Garden rooms earns +10 even at low ranks. The greedy CPU takes rank-9, leaving rank-2-7 in your wing for cheap picks. Lock a wing early; chase rank later. Aim for 60-100 points. Between Two Castles: Ludwig captures the hybrid draft-placement of its tableau cousin in a quick eight-round drafting flow.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Between Two Castles is a card-drafting game over 9 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Throne, Garden, Bedroom, Kitchen, Hallway. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as BetweenTwoCastlesLudwigSettings),
   reducer,

@@ -1,44 +1,53 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { TokaidoCrossroadsState, TokaidoCrossroadsAction, TokaidoCrossroadsSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_TILES } from "./state.js";
+import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const TILE_COLORS = ["#e67e22","#3498db","#27ae60","#9b59b6","#f1c40f"];
-const TILE_LABELS = ["I","T","P","E","S"];
+const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
 
 export function TokaidoCrossroadsGame({ state, dispatch, onGameOver }: GameProps<TokaidoCrossroadsState, TokaidoCrossroadsSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="tp-wrap">
-        <div className="tp-done">
-          <h2>Done!</h2>
-          <div className="tp-final">{state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
-  const next = state.queue[state.placed] ?? 0;
+  const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="tp-wrap">
-      <div className="tp-info">Tile {state.placed + 1} / {TOTAL_TILES}</div>
-      <div className="tp-next">
-        Next:
-        <span className="tp-next-tile" style={{ background: TILE_COLORS[next] }}>{TILE_LABELS[next]}</span>
+    <div className="tokc-wrap">
+      <h3 className="tokc-title">Tokaido: Crossroads</h3>
+      <div className="tokc-meta">
+        <div className="tokc-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
+        <div className="tokc-meta-item"><span>Score</span><b>{state.score}</b></div>
+        <div className="tokc-meta-item"><span>Phase</span><b>{state.phase}</b></div>
       </div>
-      <div className="tp-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 40px)` }}>
+      {state.phase !== "done" && next >= 0 && (
+        <div className="tokc-next">
+          Next tile:
+          <span className="tokc-next-tile" style={{ background: PALETTE[next % PALETTE.length] }}>{typeName(next)}</span>
+        </div>
+      )}
+      <div className="tokc-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
         {state.cells.map((v, i) => (
           <button
             key={i}
-            className={`tp-cell${v < 0 ? " empty" : " filled"}`}
-            style={v >= 0 ? { background: TILE_COLORS[v] } : undefined}
-            onClick={() => v < 0 && dispatch({ type: "place", index: i } as TokaidoCrossroadsAction)}
-            disabled={v >= 0}
-          >{v >= 0 ? TILE_LABELS[v] : ""}</button>
+            className={"tokc-cell " + (v < 0 ? "tokc-empty" : "tokc-filled")}
+            style={v >= 0 ? { background: PALETTE[v % PALETTE.length], color: "#fff" } : undefined}
+            onClick={() => v < 0 && state.phase !== "done" && dispatch({ type: "place", index: i } as TokaidoCrossroadsAction)}
+            disabled={v >= 0 || state.phase === "done"}
+            aria-label={v >= 0 ? typeName(v) : "empty cell"}
+          >{v >= 0 ? typeName(v).slice(0, 2) : ""}</button>
         ))}
       </div>
+      {state.phase === "done" && (
+        <div className="tokc-done">
+          <h3>Done!</h3>
+          <div className="tokc-final">{state.score} pts</div>
+        </div>
+      )}
+      <div className="tokc-legend">
+        {TYPE_NAMES.map((n, i) => (
+          <span key={i} className="tokc-leg" style={{ background: PALETTE[i % PALETTE.length] }}>{n}</span>
+        ))}
+      </div>
+      <div className="tokc-rules">Place tiles adjacent to same-type tiles for +2 each. Clusters of 3+ score +4 bonus, 5+ +8.</div>
     </div>
   );
 }

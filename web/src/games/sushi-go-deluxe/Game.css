@@ -1,2 +1,37 @@
-/* Modernized via shared trick engine — see web/src/engines/trick/trick.css */
-@import "../../engines/trick/trick.css";
+.sgd-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: 'Inter', system-ui, sans-serif; max-width: 720px; margin: 0 auto; color: #1c2833; }
+.sgd-title { margin: 0; font-size: 1.4rem; font-weight: 800; color: #c0392b; letter-spacing: 0.02em; }
+.sgd-stats { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9rem; }
+.sgd-stat { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; background: #f8f9fa; border-radius: 8px; min-width: 70px; }
+.sgd-stat span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; }
+.sgd-stat b { font-size: 1.15rem; color: #c0392b; }
+.sgd-prompt { font-size: 0.92rem; color: #566573; }
+.sgd-offer { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.sgd-card { width: 96px; height: 132px; border: 2px solid #c0392b; border-radius: 12px; background: linear-gradient(160deg, #fff 0%, #fafafa 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease; padding: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.sgd-card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.18); }
+.sgd-rank { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 900; color: #c0392b; }
+.sgd-suit { font-size: 0.78rem; font-weight: 700; color: #34495e; text-align: center; }
+.sgd-event { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 14px; background: #f4f6f7; border-radius: 10px; }
+.sgd-event-line { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #34495e; }
+.sgd-next { padding: 8px 18px; background: #c0392b; color: #fff; border: 0; border-radius: 6px; font-weight: 700; cursor: pointer; }
+.sgd-next:hover { filter: brightness(1.1); }
+.sgd-done { text-align: center; padding: 20px; background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border-radius: 14px; border: 2px solid #c0392b; min-width: 280px; }
+.sgd-done h3 { margin: 0 0 8px; color: #c0392b; }
+.sgd-final { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #566573; }
+.sgd-final-score { margin-top: 10px; font-size: 1.1rem; }
+.sgd-final-score b { color: #c0392b; font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; }
+.sgd-tableaus { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.sgd-tab { background: #fdfefe; border: 1px solid #ecf0f1; border-radius: 8px; padding: 8px 10px; }
+.sgd-tab-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; margin-bottom: 4px; font-weight: 700; }
+.sgd-tab-row { display: flex; gap: 6px; flex-wrap: wrap; min-height: 44px; align-items: center; }
+.sgd-mini { display: flex; flex-direction: column; align-items: center; padding: 4px 6px; border-radius: 5px; min-width: 36px; background: #fff; border: 1px solid #d6eaf8; font-family: 'JetBrains Mono', monospace; }
+.sgd-mini-rank { font-size: 0.95rem; font-weight: 800; color: #1b4f72; }
+.sgd-mini-suit { font-size: 0.65rem; color: #7f8c8d; }
+.sgd-empty { font-size: 0.78rem; color: #bdc3c7; font-style: italic; }
+.sgd-legend { font-size: 0.75rem; color: #7f8c8d; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: 6px 8px; }
+.sgd-leg { padding: 2px 8px; border-radius: 4px; font-weight: 700; background: #ecf0f1; color: #34495e; }
+.sgd-rule { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #95a5a6; }
+.sgd-suit-0 { border-color: #3498db; } .sgd-suit-0 .sgd-mini-rank, .sgd-suit-0.sgd-leg { background: #3498db; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.sgd-suit-1 { border-color: #9b59b6; } .sgd-suit-1 .sgd-mini-rank, .sgd-suit-1.sgd-leg { background: #9b59b6; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.sgd-suit-2 { border-color: #e74c3c; } .sgd-suit-2 .sgd-mini-rank, .sgd-suit-2.sgd-leg { background: #e74c3c; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.sgd-suit-3 { border-color: #27ae60; } .sgd-suit-3 .sgd-mini-rank, .sgd-suit-3.sgd-leg { background: #27ae60; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.sgd-suit-4 { border-color: #f39c12; } .sgd-suit-4 .sgd-mini-rank, .sgd-suit-4.sgd-leg { background: #f39c12; color: #fff; border-radius: 4px; padding: 1px 4px; }

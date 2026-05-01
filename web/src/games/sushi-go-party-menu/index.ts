@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const sushiGoPartyMenuPlugin: GamePlugin<SushiGoPartyMenuState, SushiGoPartyMenuAction, typeof settings> = {
   id: "sushi-go-party-menu",
-  title: "Sushi Go Party: Menu",
+  title: "Sushi Go Party Menu",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Expanded conveyor card draft with menu selection.",
-  howToPlay: "Sushi Go Party: Menu is a homage to the Sushi Go Party expansion of Phil Walker-Harding's conveyor-belt drafting game, where the menu of card types is selected from a pool before play. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau of suns, moons, stars, and leaves. Sets of three of one suit earn +10 bonus; five of one suit earn an additional +15 bonus. Pairs of the same rank earn +5; three-of-a-kind +10. Raw rank totals are summed too. Score equals tableau total plus a +25 bonus for beating the CPU. The Party menu's larger card pool is represented by aggressive bonus stacking for committing to a single suit early. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Sushi Go Party Menu is a card-drafting game over 10 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Maki, Nigiri, Tempura, Sashimi, Roll. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SushiGoPartyMenuSettings),
   reducer,

@@ -1,26 +1,31 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, score, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal, score, TOTAL_ROUNDS, OFFER_SIZE, NUM_SUITS } from "./state.js";
 
 const S = { dummy: false };
 
-describe("SevenWondersArchitectsDraft", () => {
-  it("starts with 3-card offer and round 1", () => {
+describe("Seven Wonders: Architects draft", () => {
+  it("starts with a full offer and round 1", () => {
     const s = initialState(1, S);
-    expect(s.offer.length).toBe(3);
+    expect(s.offer.length).toBe(OFFER_SIZE);
     expect(s.round).toBe(1);
     expect(s.phase).toBe("drafting");
   });
-  it("pick adds to my tableau", () => {
-    const s = reducer(initialState(1, S), { type: "pick", idx: 0 });
-    expect(s.myTableau.length).toBeGreaterThanOrEqual(1);
-    expect(s.cpuTableau.length).toBeGreaterThanOrEqual(1);
-  });
-  it("pick advances round or ends", () => {
-    const s = reducer(initialState(1, S), { type: "pick", idx: 0 });
+
+  it("pick adds one card to each tableau", () => {
+    const s = reducer(initialState(2, S), { type: "pick", idx: 0 });
+    expect(s.myTableau.length).toBe(1);
+    expect(s.cpuTableau.length).toBe(1);
     expect(["round-done", "done"]).toContain(s.phase);
   });
-  it("ends after TOTAL_ROUNDS", () => {
-    let s = initialState(7, S);
+
+  it("ignores out-of-range pick", () => {
+    const s0 = initialState(3, S);
+    const s = reducer(s0, { type: "pick", idx: 99 });
+    expect(s).toBe(s0);
+  });
+
+  it("ends after TOTAL_ROUNDS picks", () => {
+    let s = initialState(4, S);
     for (let i = 0; i < TOTAL_ROUNDS * 2 + 5; i++) {
       if (s.phase === "drafting") s = reducer(s, { type: "pick", idx: 0 });
       else if (s.phase === "round-done") s = reducer(s, { type: "next" });
@@ -28,14 +33,19 @@ describe("SevenWondersArchitectsDraft", () => {
     }
     expect(s.phase).toBe("done");
     expect(isTerminal(s)).not.toBeNull();
+    expect(score(s)).toBeGreaterThanOrEqual(0);
   });
-  it("score is non-negative", () => {
-    let s = initialState(3, S);
-    for (let i = 0; i < TOTAL_ROUNDS * 2 + 3; i++) {
+
+  it("tableaux are within suit and rank bounds", () => {
+    let s = initialState(5, S);
+    for (let i = 0; i < TOTAL_ROUNDS * 2 + 5 && s.phase !== "done"; i++) {
       if (s.phase === "drafting") s = reducer(s, { type: "pick", idx: 0 });
       else if (s.phase === "round-done") s = reducer(s, { type: "next" });
-      if (s.phase === "done") break;
     }
-    expect(score(s)).toBeGreaterThanOrEqual(0);
+    for (const c of s.myTableau) {
+      expect(c.suit).toBeGreaterThanOrEqual(0);
+      expect(c.suit).toBeLessThan(NUM_SUITS);
+      expect(c.rank).toBeGreaterThanOrEqual(1);
+    }
   });
 });

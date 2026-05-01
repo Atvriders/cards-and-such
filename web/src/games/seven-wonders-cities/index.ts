@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const sevenWondersCitiesPlugin: GamePlugin<SevenWondersCitiesState, SevenWondersCitiesAction, typeof settings> = {
   id: "seven-wonders-cities",
-  title: "7 Wonders: Cities",
+  title: "Seven Wonders: Cities",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Spy and diplomat themed draft with diplomacy.",
-  howToPlay: "7 Wonders: Cities is a homage to Antoine Bauza's Cities expansion, adding spies, diplomats, and debt to the drafting structure. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau across four suits. Three of one suit earn +10 (a city guild); five earn an additional +15 (the city wonder stage). Pairs of rank earn +5 (diplomat tokens); three-of-a-kind +10 (spy network). Raw ranks sum as commerce. Score equals tableau total plus a +25 bonus for beating the CPU. Strategy: this expansion rewards mixed strategies — debt-style aggression by stealing high-rank cards from the CPU's preferred suit can prevent their guild bonus. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 3 each round, build combos.",
+  howToPlay: "Seven Wonders: Cities is a card-drafting game over 9 rounds. Each round, 3 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Diplomat, Treason, Black Market, Treasury, Spy. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SevenWondersCitiesSettings),
   reducer,

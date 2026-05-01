@@ -1,2 +1,36 @@
-/* Modernized via shared trick engine — see web/src/engines/trick/trick.css */
-@import "../../engines/trick/trick.css";
+.evc-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: 'Inter', system-ui, sans-serif; max-width: 720px; margin: 0 auto; color: #1c2833; }
+.evc-title { margin: 0; font-size: 1.4rem; font-weight: 800; color: #5dade2; letter-spacing: 0.02em; }
+.evc-stats { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9rem; }
+.evc-stat { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; background: #f8f9fa; border-radius: 8px; min-width: 70px; }
+.evc-stat span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; }
+.evc-stat b { font-size: 1.15rem; color: #5dade2; }
+.evc-prompt { font-size: 0.92rem; color: #566573; }
+.evc-offer { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.evc-card { width: 96px; height: 132px; border: 2px solid #5dade2; border-radius: 12px; background: linear-gradient(160deg, #fff 0%, #fafafa 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease; padding: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.evc-card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.18); }
+.evc-rank { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 900; color: #5dade2; }
+.evc-suit { font-size: 0.78rem; font-weight: 700; color: #34495e; text-align: center; }
+.evc-event { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 14px; background: #f4f6f7; border-radius: 10px; }
+.evc-event-line { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #34495e; }
+.evc-next { padding: 8px 18px; background: #5dade2; color: #fff; border: 0; border-radius: 6px; font-weight: 700; cursor: pointer; }
+.evc-next:hover { filter: brightness(1.1); }
+.evc-done { text-align: center; padding: 20px; background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border-radius: 14px; border: 2px solid #5dade2; min-width: 280px; }
+.evc-done h3 { margin: 0 0 8px; color: #5dade2; }
+.evc-final { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #566573; }
+.evc-final-score { margin-top: 10px; font-size: 1.1rem; }
+.evc-final-score b { color: #5dade2; font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; }
+.evc-tableaus { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.evc-tab { background: #fdfefe; border: 1px solid #ecf0f1; border-radius: 8px; padding: 8px 10px; }
+.evc-tab-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; margin-bottom: 4px; font-weight: 700; }
+.evc-tab-row { display: flex; gap: 6px; flex-wrap: wrap; min-height: 44px; align-items: center; }
+.evc-mini { display: flex; flex-direction: column; align-items: center; padding: 4px 6px; border-radius: 5px; min-width: 36px; background: #fff; border: 1px solid #d6eaf8; font-family: 'JetBrains Mono', monospace; }
+.evc-mini-rank { font-size: 0.95rem; font-weight: 800; color: #1b4f72; }
+.evc-mini-suit { font-size: 0.65rem; color: #7f8c8d; }
+.evc-empty { font-size: 0.78rem; color: #bdc3c7; font-style: italic; }
+.evc-legend { font-size: 0.75rem; color: #7f8c8d; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: 6px 8px; }
+.evc-leg { padding: 2px 8px; border-radius: 4px; font-weight: 700; background: #ecf0f1; color: #34495e; }
+.evc-rule { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #95a5a6; }
+.evc-suit-0 { border-color: #3498db; } .evc-suit-0 .evc-mini-rank, .evc-suit-0.evc-leg { background: #3498db; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.evc-suit-1 { border-color: #9b59b6; } .evc-suit-1 .evc-mini-rank, .evc-suit-1.evc-leg { background: #9b59b6; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.evc-suit-2 { border-color: #e74c3c; } .evc-suit-2 .evc-mini-rank, .evc-suit-2.evc-leg { background: #e74c3c; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.evc-suit-3 { border-color: #27ae60; } .evc-suit-3 .evc-mini-rank, .evc-suit-3.evc-leg { background: #27ae60; color: #fff; border-radius: 4px; padding: 1px 4px; }

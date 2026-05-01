@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const sevenWondersBabelPlugin: GamePlugin<SevenWondersBabelState, SevenWondersBabelAction, typeof settings> = {
   id: "seven-wonders-babel",
-  title: "7 Wonders: Babel",
+  title: "Seven Wonders: Babel",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Tower of Babel draft with shared law tiles.",
-  howToPlay: "7 Wonders: Babel is a homage to Antoine Bauza's Babel expansion, where a Tower of Babel grows over the four suits and law tiles affect all civilizations. Each round three cards appear: pick one, the CPU takes the highest of the rest. Across eight rounds you build a tableau. Three of one suit earn +10 (a tower tier); five earn an additional +15 (the cap-stone). Pairs of rank earn +5 (a law tile); three-of-a-kind +10 (a great-law tile). Raw ranks sum as tribute. Score equals tableau total plus +25 for beating the CPU. Strategy: in Babel, the shared mechanic incentivizes hoarding one suit; use that pressure deliberately, or refuse it for diversified tribute. Aim for 70-110 with the bonus.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Seven Wonders: Babel is a card-drafting game over 8 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 4 suits: Tower, Law, Garden, Tongue. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SevenWondersBabelSettings),
   reducer,

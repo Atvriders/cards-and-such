@@ -1,49 +1,41 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const DICE_COUNT = 4;
-export interface SagradaWindowSettings { dummy: boolean; }
-export interface SagradaWindowState {
-  rngSeed: number;
-  round: number;
-  rolls: number[];
-  bonus: number;
-  lastPts: number;
-  score: number;
-  phase: "rolling" | "scored" | "done";
-}
-export type SagradaWindowAction = { type: "roll" } | { type: "next" };
+import type { TileState, TileAction, TileConfig } from "../_shared/tile-engine.js";
+import {
+  initialTileState,
+  tileReducer,
+  tileIsTerminal,
+} from "../_shared/tile-engine.js";
+
+export const TYPE_NAMES = ["Glass","Lead","Pane","Frame"] as const;
+export const GRID_SIZE = 5;
+export const CELL_COUNT = 25;
+export const TOTAL_TILES = 16;
+export const NUM_TYPES = 4;
+
+export const CONFIG: TileConfig = {
+  gridSize: GRID_SIZE,
+  totalTiles: TOTAL_TILES,
+  numTypes: NUM_TYPES,
+  adjacencyPts: 2,
+  clusterBonus: [{ size: 3, pts: 4 }, { size: 5, pts: 8 }],
+  completionBonus: 0,
+};
+
+export type SagradaWindowState = TileState;
+export type SagradaWindowAction = TileAction;
+export interface SagradaWindowSettings { dummy: boolean }
+
+export function typeName(t: number): string { return TYPE_NAMES[t] ?? "?"; }
+
 export function initialState(seed: number, _s: SagradaWindowSettings): SagradaWindowState {
-  return { rngSeed: seed, round: 1, rolls: [], bonus: 0, lastPts: 0, score: 0, phase: "rolling" };
+  void mulberry32;
+  return initialTileState(seed, CONFIG);
 }
-export function scoreRoll(rolls: number[]): { base: number; bonus: number } {
-  const base = rolls.reduce((a,b)=>a+b,0);
-  const counts = new Map<number, number>();
-  for (const r of rolls) counts.set(r, (counts.get(r) ?? 0) + 1);
-  let bonus = 0;
-  for (const c of counts.values()) {
-    if (c >= 4) bonus += 15; else if (c >= 3) bonus += 8; else if (c >= 2) bonus += 4;
-  }
-  return { base, bonus };
-}
+
 export function reducer(state: SagradaWindowState, action: SagradaWindowAction): SagradaWindowState {
-  if (state.phase === "done") return state;
-  if (action.type === "roll") {
-    if (state.phase !== "rolling") return state;
-    const rng = mulberry32(state.rngSeed);
-    const rolls: number[] = [];
-    for (let i = 0; i < DICE_COUNT; i++) rolls.push(1 + Math.floor(rng() * 6));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const { base, bonus } = scoreRoll(rolls);
-    const total = base + bonus;
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, rolls, bonus, lastPts: total, score: state.score + total, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, rolls: [], bonus: 0, lastPts: 0, phase: "rolling" };
-  }
-  return state;
+  return tileReducer(state, action);
 }
+
 export function isTerminal(state: SagradaWindowState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return tileIsTerminal(state);
 }

@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const bloodRageCardLitePlugin: GamePlugin<BloodRageCardLiteState, BloodRageCardLiteAction, typeof settings> = {
   id: "blood-rage-card-lite",
-  title: "Blood Rage: Card Lite",
+  title: "Blood Rage: Lite",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Simplified Blood Rage using only draft cards.",
-  howToPlay: "Blood Rage: Card Lite is a simplified Blood Rage draft using only the card layer (no minis or board). Eight rounds of Viking ability picks.\n\nEach round, three cards appear: pick one and the CPU takes the highest-rank remaining. Suits are clans — Bear, Wolf, Raven, and Serpent.\n\nScoring per tableau:\n- Sum of card ranks (1-9 each).\n- +10 per clan with 3+ cards (clan bonus).\n- +15 additional per clan with 5+ cards.\n- +5 per same-rank pair; +10 per triplet.\n- +25 if you outscore the CPU at Ragnarok.\n\nStrategy: Blood Rage rewards clan loyalty — three Bear cards earns +10. The greedy CPU will gobble rank-9, but consistent clan-2 picks build your bonuses. Bear-rank-7 may net more than splash Bear-9-Wolf-9-Raven-9. Aim for 60-100 points. Blood Rage: Card Lite is the franchise distilled into eight aggressive draft rounds. Pick your clan, defend your honor, embrace the apocalypse.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Blood Rage: Lite is a card-drafting game over 8 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 4 suits: Bear, Wolf, Raven, Serpent. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as BloodRageCardLiteSettings),
   reducer,

@@ -1,2 +1,36 @@
-/* Modernized via shared trick engine — see web/src/engines/trick/trick.css */
-@import "../../engines/trick/trick.css";
+.swe-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: 'Inter', system-ui, sans-serif; max-width: 720px; margin: 0 auto; color: #1c2833; }
+.swe-title { margin: 0; font-size: 1.4rem; font-weight: 800; color: #7f8c8d; letter-spacing: 0.02em; }
+.swe-stats { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9rem; }
+.swe-stat { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; background: #f8f9fa; border-radius: 8px; min-width: 70px; }
+.swe-stat span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; }
+.swe-stat b { font-size: 1.15rem; color: #7f8c8d; }
+.swe-prompt { font-size: 0.92rem; color: #566573; }
+.swe-offer { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.swe-card { width: 96px; height: 132px; border: 2px solid #7f8c8d; border-radius: 12px; background: linear-gradient(160deg, #fff 0%, #fafafa 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease; padding: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.swe-card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.18); }
+.swe-rank { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 900; color: #7f8c8d; }
+.swe-suit { font-size: 0.78rem; font-weight: 700; color: #34495e; text-align: center; }
+.swe-event { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 14px; background: #f4f6f7; border-radius: 10px; }
+.swe-event-line { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #34495e; }
+.swe-next { padding: 8px 18px; background: #7f8c8d; color: #fff; border: 0; border-radius: 6px; font-weight: 700; cursor: pointer; }
+.swe-next:hover { filter: brightness(1.1); }
+.swe-done { text-align: center; padding: 20px; background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border-radius: 14px; border: 2px solid #7f8c8d; min-width: 280px; }
+.swe-done h3 { margin: 0 0 8px; color: #7f8c8d; }
+.swe-final { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #566573; }
+.swe-final-score { margin-top: 10px; font-size: 1.1rem; }
+.swe-final-score b { color: #7f8c8d; font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; }
+.swe-tableaus { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.swe-tab { background: #fdfefe; border: 1px solid #ecf0f1; border-radius: 8px; padding: 8px 10px; }
+.swe-tab-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; margin-bottom: 4px; font-weight: 700; }
+.swe-tab-row { display: flex; gap: 6px; flex-wrap: wrap; min-height: 44px; align-items: center; }
+.swe-mini { display: flex; flex-direction: column; align-items: center; padding: 4px 6px; border-radius: 5px; min-width: 36px; background: #fff; border: 1px solid #d6eaf8; font-family: 'JetBrains Mono', monospace; }
+.swe-mini-rank { font-size: 0.95rem; font-weight: 800; color: #1b4f72; }
+.swe-mini-suit { font-size: 0.65rem; color: #7f8c8d; }
+.swe-empty { font-size: 0.78rem; color: #bdc3c7; font-style: italic; }
+.swe-legend { font-size: 0.75rem; color: #7f8c8d; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: 6px 8px; }
+.swe-leg { padding: 2px 8px; border-radius: 4px; font-weight: 700; background: #ecf0f1; color: #34495e; }
+.swe-rule { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #95a5a6; }
+.swe-suit-0 { border-color: #3498db; } .swe-suit-0 .swe-mini-rank, .swe-suit-0.swe-leg { background: #3498db; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.swe-suit-1 { border-color: #9b59b6; } .swe-suit-1 .swe-mini-rank, .swe-suit-1.swe-leg { background: #9b59b6; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.swe-suit-2 { border-color: #e74c3c; } .swe-suit-2 .swe-mini-rank, .swe-suit-2.swe-leg { background: #e74c3c; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.swe-suit-3 { border-color: #27ae60; } .swe-suit-3 .swe-mini-rank, .swe-suit-3.swe-leg { background: #27ae60; color: #fff; border-radius: 4px; padding: 1px 4px; }

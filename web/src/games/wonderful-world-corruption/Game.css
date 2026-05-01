@@ -1,2 +1,36 @@
-/* Modernized via shared trick engine — see web/src/engines/trick/trick.css */
-@import "../../engines/trick/trick.css";
+.iwwc-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: 'Inter', system-ui, sans-serif; max-width: 720px; margin: 0 auto; color: #1c2833; }
+.iwwc-title { margin: 0; font-size: 1.4rem; font-weight: 800; color: #7f8c8d; letter-spacing: 0.02em; }
+.iwwc-stats { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9rem; }
+.iwwc-stat { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; background: #f8f9fa; border-radius: 8px; min-width: 70px; }
+.iwwc-stat span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; }
+.iwwc-stat b { font-size: 1.15rem; color: #7f8c8d; }
+.iwwc-prompt { font-size: 0.92rem; color: #566573; }
+.iwwc-offer { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.iwwc-card { width: 96px; height: 132px; border: 2px solid #7f8c8d; border-radius: 12px; background: linear-gradient(160deg, #fff 0%, #fafafa 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease; padding: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.iwwc-card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.18); }
+.iwwc-rank { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 900; color: #7f8c8d; }
+.iwwc-suit { font-size: 0.78rem; font-weight: 700; color: #34495e; text-align: center; }
+.iwwc-event { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 14px; background: #f4f6f7; border-radius: 10px; }
+.iwwc-event-line { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #34495e; }
+.iwwc-next { padding: 8px 18px; background: #7f8c8d; color: #fff; border: 0; border-radius: 6px; font-weight: 700; cursor: pointer; }
+.iwwc-next:hover { filter: brightness(1.1); }
+.iwwc-done { text-align: center; padding: 20px; background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border-radius: 14px; border: 2px solid #7f8c8d; min-width: 280px; }
+.iwwc-done h3 { margin: 0 0 8px; color: #7f8c8d; }
+.iwwc-final { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #566573; }
+.iwwc-final-score { margin-top: 10px; font-size: 1.1rem; }
+.iwwc-final-score b { color: #7f8c8d; font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; }
+.iwwc-tableaus { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.iwwc-tab { background: #fdfefe; border: 1px solid #ecf0f1; border-radius: 8px; padding: 8px 10px; }
+.iwwc-tab-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; margin-bottom: 4px; font-weight: 700; }
+.iwwc-tab-row { display: flex; gap: 6px; flex-wrap: wrap; min-height: 44px; align-items: center; }
+.iwwc-mini { display: flex; flex-direction: column; align-items: center; padding: 4px 6px; border-radius: 5px; min-width: 36px; background: #fff; border: 1px solid #d6eaf8; font-family: 'JetBrains Mono', monospace; }
+.iwwc-mini-rank { font-size: 0.95rem; font-weight: 800; color: #1b4f72; }
+.iwwc-mini-suit { font-size: 0.65rem; color: #7f8c8d; }
+.iwwc-empty { font-size: 0.78rem; color: #bdc3c7; font-style: italic; }
+.iwwc-legend { font-size: 0.75rem; color: #7f8c8d; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: 6px 8px; }
+.iwwc-leg { padding: 2px 8px; border-radius: 4px; font-weight: 700; background: #ecf0f1; color: #34495e; }
+.iwwc-rule { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #95a5a6; }
+.iwwc-suit-0 { border-color: #3498db; } .iwwc-suit-0 .iwwc-mini-rank, .iwwc-suit-0.iwwc-leg { background: #3498db; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.iwwc-suit-1 { border-color: #9b59b6; } .iwwc-suit-1 .iwwc-mini-rank, .iwwc-suit-1.iwwc-leg { background: #9b59b6; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.iwwc-suit-2 { border-color: #e74c3c; } .iwwc-suit-2 .iwwc-mini-rank, .iwwc-suit-2.iwwc-leg { background: #e74c3c; color: #fff; border-radius: 4px; padding: 1px 4px; }
+.iwwc-suit-3 { border-color: #27ae60; } .iwwc-suit-3 .iwwc-mini-rank, .iwwc-suit-3.iwwc-leg { background: #27ae60; color: #fff; border-radius: 4px; padding: 1px 4px; }

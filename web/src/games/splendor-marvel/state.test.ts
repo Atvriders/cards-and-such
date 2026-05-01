@@ -1,40 +1,51 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, score, TOTAL_TURNS } from "./state.js";
+import { initialState, reducer, isTerminal, score, TOTAL_ROUNDS, OFFER_SIZE, NUM_SUITS } from "./state.js";
 
 const S = { dummy: false };
 
-describe("SplendorMarvel", () => {
-  it("starts in choosing phase with positive cash", () => {
+describe("Splendor: Marvel draft", () => {
+  it("starts with a full offer and round 1", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("choosing");
-    expect(s.cash).toBeGreaterThanOrEqual(0);
-    expect(s.turn).toBe(1);
+    expect(s.offer.length).toBe(OFFER_SIZE);
+    expect(s.round).toBe(1);
+    expect(s.phase).toBe("drafting");
   });
-  it("invest action triggers state change", () => {
-    const s = reducer(initialState(1, S), { type: "invest" });
-    expect(["resolved", "done"]).toContain(s.phase);
+
+  it("pick adds one card to each tableau", () => {
+    const s = reducer(initialState(2, S), { type: "pick", idx: 0 });
+    expect(s.myTableau.length).toBe(1);
+    expect(s.cpuTableau.length).toBe(1);
+    expect(["round-done", "done"]).toContain(s.phase);
   });
-  it("save action keeps cash >= initial", () => {
-    const s = reducer(initialState(1, S), { type: "save" });
-    expect(s.cash).toBeGreaterThanOrEqual(initialState(1, S).cash);
+
+  it("ignores out-of-range pick", () => {
+    const s0 = initialState(3, S);
+    const s = reducer(s0, { type: "pick", idx: 99 });
+    expect(s).toBe(s0);
   });
-  it("ends after TOTAL_TURNS", () => {
-    let s = initialState(7, S);
-    for (let i = 0; i < TOTAL_TURNS * 2 + 5; i++) {
-      if (s.phase === "choosing") s = reducer(s, { type: "save" });
-      else if (s.phase === "resolved") s = reducer(s, { type: "next" });
+
+  it("ends after TOTAL_ROUNDS picks", () => {
+    let s = initialState(4, S);
+    for (let i = 0; i < TOTAL_ROUNDS * 2 + 5; i++) {
+      if (s.phase === "drafting") s = reducer(s, { type: "pick", idx: 0 });
+      else if (s.phase === "round-done") s = reducer(s, { type: "next" });
       if (s.phase === "done") break;
     }
     expect(s.phase).toBe("done");
     expect(isTerminal(s)).not.toBeNull();
-  });
-  it("score is non-negative", () => {
-    let s = initialState(3, S);
-    for (let i = 0; i < TOTAL_TURNS * 2 + 3; i++) {
-      if (s.phase === "choosing") s = reducer(s, { type: "save" });
-      else if (s.phase === "resolved") s = reducer(s, { type: "next" });
-      if (s.phase === "done") break;
-    }
     expect(score(s)).toBeGreaterThanOrEqual(0);
+  });
+
+  it("tableaux are within suit and rank bounds", () => {
+    let s = initialState(5, S);
+    for (let i = 0; i < TOTAL_ROUNDS * 2 + 5 && s.phase !== "done"; i++) {
+      if (s.phase === "drafting") s = reducer(s, { type: "pick", idx: 0 });
+      else if (s.phase === "round-done") s = reducer(s, { type: "next" });
+    }
+    for (const c of s.myTableau) {
+      expect(c.suit).toBeGreaterThanOrEqual(0);
+      expect(c.suit).toBeLessThan(NUM_SUITS);
+      expect(c.rank).toBeGreaterThanOrEqual(1);
+    }
   });
 });

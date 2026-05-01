@@ -2,28 +2,17 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { AzulSummerPavilionState, AzulSummerPavilionAction, AzulSummerPavilionSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AzulSummerPavilionGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const azulSummerPavilionPlugin: GamePlugin<AzulSummerPavilionState, AzulSummerPavilionAction, typeof settings> = {
   id: "azul-summer-pavilion",
   title: "Azul: Summer Pavilion",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Star-pattern Azul variant on a 6x6 grid.",
-  howToPlay: `Azul: Summer Pavilion uses a star-shaped board where each color rotates as the wild each round. In this adaptation, you place 18 random colored tiles on a 6x6 grid (six colors instead of five: blue, yellow, red, black, white, gold).
-
-Click any empty cell to place the next tile from the queue.
-
-Scoring (at end):
-• Each tile placed adjacent (orthogonally) to a tile of the same color: +2 points
-• Each tile placed adjacent to a tile of any different color: +1 point
-• Each fully-filled row (6 cells): +5 points
-• Each fully-filled column (6 cells): +5 points
-• Bonus +8 per color that has 3+ tiles placed.
-
-This variant rewards both clustering AND mixing. Place same-colors next to each other for big adjacency, but spread enough to qualify for the 3+ color bonus across as many colors as possible.
-
-A strong Summer Pavilion run scores 45-65 points. With 18 tiles on 36 cells you'll cover half the board, so prioritize a single completed row for the bonus and color clusters elsewhere.`,
+  description: "Tile placement: place 18 tiles on a 6x6 grid; score by adjacency.",
+  howToPlay: "Azul: Summer Pavilion is a tile-placement game on a 6x6 grid. A randomized queue of 18 tiles is generated. Each turn the next tile from the queue is shown; click any empty cell to place it. Tile types are: Sun, Star, Diamond, Pearl, Ruby, Sapphire. Each orthogonal pair of same-type tiles scores +2. Same-type connected clusters of 3+ score a +4 bonus, clusters of 5+ score an additional +8. Strategy: place tiles next to existing same-type neighbors to grow clusters efficiently. Don't waste placements in isolated corners. The grid has 36 cells but you only place 18 tiles, so plan compact clusters.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AzulSummerPavilionSettings),
   reducer,

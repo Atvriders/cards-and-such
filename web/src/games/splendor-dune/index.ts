@@ -8,11 +8,11 @@ type S = SettingsOf<typeof settings>;
 
 export const splendorDunePlugin: GamePlugin<SplendorDuneState, SplendorDuneAction, typeof settings> = {
   id: "splendor-dune",
-  title: "Splendor Dune",
-  category: "board",
+  title: "Splendor: Dune",
+  category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Dune-themed Splendor mini: 10 turns of trading Spice with Mentats.",
-  howToPlay: "Splendor Dune reskins the gem-economy classic into the desert world of Arrakis. You begin with $200 solaris, no Spice cards, and no Mentats. Each turn, pick one action: Buy a Spice card for $40, Save your cash for 5% interest, Hire a Mentat for $60, or Sell a Spice card back for a roughly $30-50 payout. After your action, every Spice card earns you $8 from melange demand and every Mentat earns you $12 from political insight. A Dune event flavors the turn. Your final score is your net worth — cash plus the cost-basis value of your spice cards and mentats. The strategic balance: spice cards yield reliable income but tie up capital, mentats amplify your wins but cost more, and saving is slow but safe. Aim for a balanced spice empire by turn 10. He who controls the spice controls the universe — and the leaderboards.",
+  description: "Card-drafting: pick one of 4 each round, build combos.",
+  howToPlay: "Splendor: Dune is a card-drafting game over 9 rounds. Each round, 4 cards are revealed; pick one and the CPU greedily takes the highest-rank remaining. Cards belong to 5 suits: Spice, Worm, Fremen, House, Water. Score by combining suits and ranks: 3 of the same suit earns +10, 5 of the same suit earns another +20; pairs of the same rank earn +5, three-of-a-kind earns +12. Raw rank values sum into your tableau total. Final score equals your tableau plus a +25 bonus if you beat the CPU. Strategy: focus 1-2 suits to lock multiple suit bonuses; the CPU greedily grabs high-rank cards, so undervalued same-suit picks slip through.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SplendorDuneSettings),
   reducer,

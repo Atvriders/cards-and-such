@@ -1,73 +1,52 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import type { DraftCard, DraftState, DraftAction, DraftConfig } from "../_shared/draft-engine.js";
+import {
+  initialDraftState,
+  draftReducer,
+  draftIsTerminal,
+  draftFinalScore,
+} from "../_shared/draft-engine.js";
 
-export const TOTAL_TURNS = 10;
-export const ASSET_COST = 40;
-export const HIRE_COST = 70;
+export const SUIT_NAMES = ["Emerald","Sapphire","Ruby","Diamond","Onyx"] as const;
+export const TOTAL_ROUNDS = 8;
+export const OFFER_SIZE = 4;
+export const NUM_SUITS = 5;
+export const RANK_MAX = 9;
 
-export interface SplendorGemsSettings { dummy: boolean; }
-export interface SplendorGemsState {
-  rngSeed: number;
-  turn: number;
-  cash: number;
-  assets: number;
-  workers: number;
-  lastEvent: string | null;
-  lastDelta: number;
-  phase: "choosing" | "resolved" | "done";
+export const CONFIG: DraftConfig = {
+  rounds: TOTAL_ROUNDS,
+  offerSize: OFFER_SIZE,
+  numSuits: NUM_SUITS,
+  rankMin: 1,
+  rankMax: RANK_MAX,
+  suitBonus: [{ count: 3, pts: 10 }, { count: 5, pts: 20 }],
+  rankBonus: [{ count: 2, pts: 5 }, { count: 3, pts: 12 }],
+  winBonus: 25,
+  completionBonus: 0,
+};
+
+export type SplendorGemsState = DraftState;
+export type SplendorGemsAction = DraftAction;
+export interface SplendorGemsSettings { dummy: boolean }
+export type { DraftCard };
+
+export function suitName(s: number): string { return SUIT_NAMES[s] ?? "?"; }
+export function rankName(r: number): string { return String(r); }
+
+export function initialState(seed: number, _settings: SplendorGemsSettings): SplendorGemsState {
+  // ensure deterministic re-init across re-mounts using mulberry32 seed
+  void mulberry32;
+  return initialDraftState(seed, CONFIG);
 }
-export type SplendorGemsAction = { type: "invest" } | { type: "save" } | { type: "hire" } | { type: "trade" } | { type: "next" };
-
-export function initialState(seed: number, _s: SplendorGemsSettings): SplendorGemsState {
-  return { rngSeed: seed, turn: 1, cash: 200, assets: 0, workers: 0, lastEvent: null, lastDelta: 0, phase: "choosing" };
-}
-
-const EVENT_LINES = ["Sapphire vein found","Ruby trader visits","Emerald rush","Diamond mine boost","Onyx import surge","Royal patronage"];
 
 export function reducer(state: SplendorGemsState, action: SplendorGemsAction): SplendorGemsState {
-  if (state.phase === "done") return state;
-  if (state.phase === "choosing") {
-    const rng = mulberry32(state.rngSeed);
-    const r = rng();
-    const ev = Math.floor(rng() * 6);
-    const next = Math.floor(rng() * 2 ** 31);
-    let cash = state.cash, assets = state.assets, workers = state.workers, evt = "", delta = 0;
-    if (action.type === "invest") {
-      if (cash >= ASSET_COST) {
-        cash -= ASSET_COST; assets += 1; evt = "Bought 1 Gems (-$" + ASSET_COST + ")"; delta = -ASSET_COST;
-      } else { evt = "Not enough cash to invest"; }
-    } else if (action.type === "save") {
-      const interest = Math.floor(cash * 0.05);
-      cash += interest; evt = "Saved at bank (+$" + interest + " interest)"; delta = interest;
-    } else if (action.type === "hire") {
-      if (cash >= HIRE_COST) {
-        cash -= HIRE_COST; workers += 1; evt = "Hired Noble (-$" + HIRE_COST + ")"; delta = -HIRE_COST;
-      } else { evt = "Not enough cash to hire"; }
-    } else if (action.type === "trade") {
-      if (assets >= 1) {
-        const market = 30 + Math.floor(r * 20);
-        cash += market; assets -= 1; evt = "Traded 1 Gems (+$" + market + ")"; delta = market;
-      } else { evt = "No Gems to trade"; }
-    } else { return state; }
-    const div = assets * 8;
-    cash += div;
-    const pay = workers * 13;
-    cash += pay;
-    const flavor = EVENT_LINES.length > 0 ? EVENT_LINES[ev % EVENT_LINES.length] : "";
-    if (div > 0) evt += " | Dividends +$" + div;
-    if (pay > 0) evt += " | Workers earned +$" + pay;
-    if (flavor) evt += " | " + flavor;
-    delta += div + pay;
-    const isLast = state.turn >= TOTAL_TURNS;
-    return { ...state, rngSeed: next, cash, assets, workers, lastEvent: evt, lastDelta: delta, phase: isLast ? "done" : "resolved" };
-  }
-  if (action.type === "next" && state.phase === "resolved") {
-    return { ...state, turn: state.turn + 1, phase: "choosing", lastEvent: null, lastDelta: 0 };
-  }
-  return state;
+  return draftReducer(state, action);
 }
 
-export function score(s: SplendorGemsState): number {
-  const net = s.cash + s.assets * ASSET_COST + s.workers * HIRE_COST;
-  return Math.max(0, net);
+export function score(state: SplendorGemsState): number {
+  return draftFinalScore(state);
 }
-export function isTerminal(s: SplendorGemsState): { score: number } | null { return s.phase === "done" ? { score: score(s) } : null; }
+
+export function isTerminal(state: SplendorGemsState): { score: number } | null {
+  return draftIsTerminal(state);
+}
