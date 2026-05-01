@@ -4,206 +4,36 @@ export interface PolarQuizSettings { questions: "10" | "20" | "30"; }
 export interface PolarQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type PolarQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Who reached the South Pole first?",
-    "choices": [
-      "Scott",
-      "Amundsen",
-      "Shackleton",
-      "Byrd"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Year of first South Pole reach?",
-    "choices": [
-      "1909",
-      "1911",
-      "1913",
-      "1915"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Amundsen was from?",
-    "choices": [
-      "Sweden",
-      "Norway",
-      "Denmark",
-      "Iceland"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Scott's expedition ship?",
-    "choices": [
-      "Endurance",
-      "Discovery",
-      "Terra Nova",
-      "Fram"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Amundsen's ship?",
-    "choices": [
-      "Fram",
-      "Maud",
-      "Belgica",
-      "Gjøa"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Shackleton's famous ship?",
-    "choices": [
-      "Endurance",
-      "Discovery",
-      "Quest",
-      "Nimrod"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Year Endurance was crushed by ice?",
-    "choices": [
-      "1912",
-      "1915",
-      "1918",
-      "1922"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Year Endurance wreck was found?",
-    "choices": [
-      "2010",
-      "2015",
-      "2022",
-      "2024"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Who claimed first to North Pole (1909)?",
-    "choices": [
-      "Cook",
-      "Peary",
-      "Both",
-      "Amundsen"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Scott died on the way back from the Pole in?",
-    "choices": [
-      "1911",
-      "1912",
-      "1913",
-      "1914"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Cause of Scott's deaths?",
-    "choices": [
-      "Avalanche",
-      "Cold/starvation",
-      "Crevasse",
-      "Mutiny"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Amundsen relied on?",
-    "choices": [
-      "Ponies",
-      "Dogs",
-      "Tractors",
-      "Skis only"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Scott relied largely on?",
-    "choices": [
-      "Dogs",
-      "Tractors and ponies",
-      "Aircraft",
-      "Snowmobiles"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Northwest Passage first traversed by?",
-    "choices": [
-      "Cook",
-      "Amundsen",
-      "Franklin",
-      "Hudson"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lost expedition leader (1845)?",
-    "choices": [
-      "Franklin",
-      "Frobisher",
-      "Davis",
-      "Ross"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Continent under Antarctic Treaty?",
-    "choices": [
-      "Yes",
-      "No",
-      "Partial",
-      "Disputed"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "South Pole permanent station?",
-    "choices": [
-      "Amundsen-Scott",
-      "Vostok",
-      "McMurdo",
-      "Mawson"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Coldest temperature recorded on Earth?",
-    "choices": [
-      "-50°C",
-      "-89°C",
-      "-100°C",
-      "-120°C"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First woman to solo across Antarctica?",
-    "choices": [
-      "Felicity Aston",
-      "Liv Arnesen",
-      "Ann Bancroft",
-      "Reinhold"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Antarctic Treaty year?",
-    "choices": [
-      "1949",
-      "1959",
-      "1969",
-      "1979"
-    ],
-    "correct": 1
-  }
+  { question: "Northernmost point on Earth?", choices: ["North Pole", "Greenland", "Svalbard", "Alert"], correct: 0 },
+  { question: "Southernmost point on Earth?", choices: ["McMurdo", "South Pole", "Vinson", "Ross"], correct: 1 },
+  { question: "Continent at the South Pole?", choices: ["Antarctica", "South America", "Australia", "None"], correct: 0 },
+  { question: "North Pole sits on?", choices: ["Land", "Sea ice over Arctic Ocean", "Tundra", "Glacier"], correct: 1 },
+  { question: "Antarctica is mostly?", choices: ["Forest", "Ice cap", "Desert sand", "Tundra"], correct: 1 },
+  { question: "Antarctica's average ice thickness?", choices: ["~100 m", "~1,900 m", "~5,000 m", "~10,000 m"], correct: 1 },
+  { question: "Which is colder on average?", choices: ["North Pole", "South Pole", "Equal", "Depends only on season"], correct: 1 },
+  { question: "Coldest temperature ever recorded on Earth?", choices: ["-50 \u00b0C", "-89.2 \u00b0C", "-100 \u00b0C", "-150 \u00b0C"], correct: 1 },
+  { question: "Site of that coldest record?", choices: ["Vostok Station", "McMurdo", "Alert", "Eureka"], correct: 0 },
+  { question: "First confirmed expedition to South Pole (1911)?", choices: ["Scott", "Amundsen", "Shackleton", "Mawson"], correct: 1 },
+  { question: "Amundsen's nationality?", choices: ["British", "Norwegian", "Swedish", "Danish"], correct: 1 },
+  { question: "Tragic British expedition led by?", choices: ["Scott", "Shackleton", "Ross", "Cook"], correct: 0 },
+  { question: "Shackleton's ship in 1914 Endurance expedition?", choices: ["Discovery", "Endurance", "Terra Nova", "Beagle"], correct: 1 },
+  { question: "Shackleton's ship sank because of?", choices: ["Storm", "Crushed by ice", "Fire", "Reef"], correct: 1 },
+  { question: "First flight over North Pole credited to?", choices: ["Byrd", "Lindbergh", "Earhart", "Peary"], correct: 0 },
+  { question: "Russian icebreaker reached North Pole first by ship in?", choices: ["1977", "1990", "2000", "2010"], correct: 0 },
+  { question: "Year Antarctic Treaty signed?", choices: ["1949", "1959", "1969", "1989"], correct: 1 },
+  { question: "Antarctic Treaty bans?", choices: ["Tourism", "Military activity", "Research", "Penguins"], correct: 1 },
+  { question: "Largest desert on Earth?", choices: ["Sahara", "Antarctica", "Gobi", "Atacama"], correct: 1 },
+  { question: "Penguins are found at the?", choices: ["North Pole", "South Pole", "Both", "Neither"], correct: 1 },
+  { question: "Polar bears live at the?", choices: ["North Pole", "South Pole", "Both", "Neither"], correct: 0 },
+  { question: "Aurora at the North Pole is called?", choices: ["Borealis", "Australis", "Polaris", "Solaris"], correct: 0 },
+  { question: "Aurora at the South Pole is called?", choices: ["Borealis", "Australis", "Polaris", "Solaris"], correct: 1 },
+  { question: "Magnetic North vs True North differ?", choices: ["No", "Yes", "Only at equator", "Only on Tuesdays"], correct: 1 },
+  { question: "Sun behavior at poles in winter?", choices: ["Polar day", "Polar night", "Eclipse", "Normal"], correct: 1 },
+  { question: "Inuit term 'iglu' means?", choices: ["Hunt", "House", "Bear", "Snow"], correct: 1 },
+  { question: "Sastrugi are?", choices: ["Wind-carved snow ridges", "Sled dogs", "Snowshoes", "Crampons"], correct: 0 },
+  { question: "Crevasses are?", choices: ["Cracks in glaciers", "Mountain peaks", "Frozen lakes", "Salt flats"], correct: 0 },
+  { question: "Largest research base on Antarctica?", choices: ["McMurdo", "Vostok", "Amundsen-Scott", "Concordia"], correct: 0 },
+  { question: "Number of countries that have year-round Antarctic stations (approx)?", choices: ["5", "20", "30", "100"], correct: 2 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PolarQuizSettings): PolarQuizState {

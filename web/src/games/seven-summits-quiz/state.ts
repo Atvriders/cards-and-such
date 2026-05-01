@@ -4,206 +4,36 @@ export interface SevenSummitsQuizSettings { questions: "10" | "20" | "30"; }
 export interface SevenSummitsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type SevenSummitsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Highest peak in Asia?",
-    "choices": [
-      "K2",
-      "Everest",
-      "Lhotse",
-      "Manaslu"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in South America?",
-    "choices": [
-      "Aconcagua",
-      "Huascarán",
-      "Chimborazo",
-      "Ojos del Salado"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Highest peak in North America?",
-    "choices": [
-      "Logan",
-      "Denali",
-      "Whitney",
-      "Pico de Orizaba"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in Africa?",
-    "choices": [
-      "Kenya",
-      "Kilimanjaro",
-      "Stanley",
-      "Margherita"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in Europe?",
-    "choices": [
-      "Mont Blanc",
-      "Elbrus",
-      "Matterhorn",
-      "Triglav"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in Antarctica?",
-    "choices": [
-      "Sidley",
-      "Vinson",
-      "Kirkpatrick",
-      "Tyree"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Highest peak in Australia (Bass list)?",
-    "choices": [
-      "Kosciuszko",
-      "Townsend",
-      "Bogong",
-      "Twynam"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Highest peak in Oceania (Messner list)?",
-    "choices": [
-      "Carstensz Pyramid",
-      "Mauna Kea",
-      "Kosciuszko",
-      "Cook"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Aconcagua is in?",
-    "choices": [
-      "Chile",
-      "Argentina",
-      "Peru",
-      "Bolivia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Denali is in?",
-    "choices": [
-      "Yukon",
-      "Alaska",
-      "BC",
-      "Alberta"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Kilimanjaro country?",
-    "choices": [
-      "Kenya",
-      "Tanzania",
-      "Uganda",
-      "Rwanda"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Elbrus country?",
-    "choices": [
-      "Russia",
-      "Georgia",
-      "Turkey",
-      "Ukraine"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Carstensz is in?",
-    "choices": [
-      "Australia",
-      "Indonesia",
-      "PNG",
-      "Philippines"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Approximate height of Everest?",
-    "choices": [
-      "7,000 m",
-      "8,000 m",
-      "8,849 m",
-      "9,500 m"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Aconcagua height?",
-    "choices": [
-      "~5,000 m",
-      "~6,961 m",
-      "~8,000 m",
-      "~7,500 m"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Denali height?",
-    "choices": [
-      "~4,000 m",
-      "~6,190 m",
-      "~5,000 m",
-      "~8,000 m"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Kilimanjaro height?",
-    "choices": [
-      "~3,000 m",
-      "~5,895 m",
-      "~7,000 m",
-      "~6,500 m"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First person to complete the Seven Summits?",
-    "choices": [
-      "Dick Bass",
-      "Reinhold Messner",
-      "Pat Morrow",
-      "Ed Viesturs"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Year Bass completed?",
-    "choices": [
-      "1985",
-      "1990",
-      "1995",
-      "1980"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bass list uses which Australian peak?",
-    "choices": [
-      "Kosciuszko",
-      "Carstensz",
-      "Cook",
-      "Wilhelm"
-    ],
-    "correct": 0
-  }
+  { question: "How many continents in the Seven Summits list?", choices: ["5", "6", "7", "8"], correct: 2 },
+  { question: "Highest peak in Asia (Seven Summits)?", choices: ["K2", "Everest", "Kangchenjunga", "Lhotse"], correct: 1 },
+  { question: "Highest peak in South America?", choices: ["Aconcagua", "Huascar\u00e1n", "Chimborazo", "Ojos del Salado"], correct: 0 },
+  { question: "Country of Aconcagua?", choices: ["Chile", "Peru", "Argentina", "Bolivia"], correct: 2 },
+  { question: "Highest peak in North America?", choices: ["Mt. Whitney", "Denali", "Logan", "Pico de Orizaba"], correct: 1 },
+  { question: "Former name of Denali?", choices: ["Mt. McKinley", "Mt. Hubbard", "Mt. Foraker", "Mt. Roosevelt"], correct: 0 },
+  { question: "Highest peak in Africa?", choices: ["Mt. Kenya", "Kilimanjaro", "Ras Dashen", "Stanley"], correct: 1 },
+  { question: "Country of Kilimanjaro?", choices: ["Kenya", "Tanzania", "Uganda", "Ethiopia"], correct: 1 },
+  { question: "Highest peak in Europe?", choices: ["Mont Blanc", "Elbrus", "Matterhorn", "Dufourspitze"], correct: 1 },
+  { question: "Country of Mt. Elbrus?", choices: ["Georgia", "Russia", "Turkey", "Ukraine"], correct: 1 },
+  { question: "Highest peak in Antarctica?", choices: ["Mt. Erebus", "Vinson Massif", "Mt. Tyree", "Sidley"], correct: 1 },
+  { question: "Highest peak in Oceania (Carstensz list)?", choices: ["Mt. Wilhelm", "Carstensz Pyramid", "Mauna Kea", "Mt. Cook"], correct: 1 },
+  { question: "Carstensz Pyramid country?", choices: ["Australia", "Indonesia", "PNG", "Fiji"], correct: 1 },
+  { question: "Highest peak in Australia (Kosciuszko list)?", choices: ["Mt. Kosciuszko", "Mt. Cook", "Mt. Townsend", "Mt. Bogong"], correct: 0 },
+  { question: "First to complete Seven Summits (Bass list)?", choices: ["Pat Morrow", "Dick Bass", "Reinhold Messner", "Junko Tabei"], correct: 1 },
+  { question: "First to complete Messner list (with Carstensz)?", choices: ["Pat Morrow", "Dick Bass", "Messner", "Norgay"], correct: 0 },
+  { question: "Approx height of Aconcagua?", choices: ["~5,000 m", "~6,961 m", "~7,800 m", "~8,200 m"], correct: 1 },
+  { question: "Approx height of Denali?", choices: ["~5,000 m", "~6,190 m", "~7,200 m", "~8,000 m"], correct: 1 },
+  { question: "Approx height of Kilimanjaro?", choices: ["~4,500 m", "~5,895 m", "~6,500 m", "~7,200 m"], correct: 1 },
+  { question: "Approx height of Vinson Massif?", choices: ["~3,500 m", "~4,892 m", "~5,500 m", "~6,500 m"], correct: 1 },
+  { question: "Approx height of Elbrus?", choices: ["~5,642 m", "~6,000 m", "~4,500 m", "~7,000 m"], correct: 0 },
+  { question: "Approx height of Carstensz Pyramid?", choices: ["~4,000 m", "~4,884 m", "~5,500 m", "~6,200 m"], correct: 1 },
+  { question: "Kilimanjaro is what type of mountain?", choices: ["Volcano (dormant)", "Folded", "Plateau", "Plug"], correct: 0 },
+  { question: "Aconcagua is in which range?", choices: ["Rockies", "Andes", "Atlas", "Urals"], correct: 1 },
+  { question: "Which Seven Summit is closest to ocean?", choices: ["Denali", "Vinson", "Kilimanjaro", "Carstensz"], correct: 3 },
+  { question: "First woman to complete Seven Summits?", choices: ["Junko Tabei", "Wanda Rutkiewicz", "Vera Komarkova", "Sharon Wood"], correct: 0 },
+  { question: "Most popular guided Seven Summit?", choices: ["Vinson", "Kilimanjaro", "Everest", "Aconcagua"], correct: 1 },
+  { question: "Which Seven Summit has the worst weather statistically?", choices: ["Vinson", "Denali", "Aconcagua", "Carstensz"], correct: 1 },
+  { question: "Mountain on the equator in this list?", choices: ["Kilimanjaro", "Carstensz Pyramid", "Both", "Neither"], correct: 2 },
+  { question: "Which Seven Summit is technically hardest (rock)?", choices: ["Carstensz Pyramid", "Kilimanjaro", "Elbrus", "Kosciuszko"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SevenSummitsQuizSettings): SevenSummitsQuizState {

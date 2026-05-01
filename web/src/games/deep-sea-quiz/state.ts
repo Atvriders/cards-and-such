@@ -4,206 +4,36 @@ export interface DeepSeaQuizSettings { questions: "10" | "20" | "30"; }
 export interface DeepSeaQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type DeepSeaQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Deepest known place on Earth?",
-    "choices": [
-      "Java Trench",
-      "Mariana Trench",
-      "Puerto Rico Trench",
-      "Tonga Trench"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Specific deepest point?",
-    "choices": [
-      "Sirena Deep",
-      "Challenger Deep",
-      "Horizon Deep",
-      "Galathea Deep"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Approximate Challenger Deep depth?",
-    "choices": [
-      "~4,000 m",
-      "~7,000 m",
-      "~11,000 m",
-      "~15,000 m"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "First manned dive there year?",
-    "choices": [
-      "1950",
-      "1960",
-      "1970",
-      "1980"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Vessel used in 1960?",
-    "choices": [
-      "Trieste",
-      "Alvin",
-      "Nautile",
-      "Mir"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pilots in 1960 dive?",
-    "choices": [
-      "Walsh & Piccard",
-      "Cousteau & Calypso",
-      "Cameron & Ballard",
-      "Diehl & Wilson"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "James Cameron's solo dive year?",
-    "choices": [
-      "2010",
-      "2012",
-      "2014",
-      "2016"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Cameron's vessel?",
-    "choices": [
-      "Deepsea Challenger",
-      "Trieste II",
-      "Limiting Factor",
-      "Alvin"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pressure at Challenger Deep?",
-    "choices": [
-      "~100 atm",
-      "~1100 atm",
-      "~10,000 atm",
-      "~100,000 atm"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ballard discovered Titanic in?",
-    "choices": [
-      "1975",
-      "1985",
-      "1995",
-      "2005"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ballard's later find?",
-    "choices": [
-      "Bismarck",
-      "Yamato",
-      "HMS Hood",
-      "All of these"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Famous deep-sea submersible (USA)?",
-    "choices": [
-      "Alvin",
-      "Mir",
-      "Nautile",
-      "Shinkai"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Russian deep submersible?",
-    "choices": [
-      "Mir",
-      "Nautile",
-      "Alvin",
-      "Pisces"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hydrothermal vents discovered in?",
-    "choices": [
-      "1957",
-      "1977",
-      "1997",
-      "2007"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Energy at vents from?",
-    "choices": [
-      "Sunlight",
-      "Chemosynthesis",
-      "Geothermal heat",
-      "Tides"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Vent communities feature giant?",
-    "choices": [
-      "Tubeworms",
-      "Octopus",
-      "Squid",
-      "Coral"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Giant squid first photographed live in?",
-    "choices": [
-      "1990",
-      "2004",
-      "2010",
-      "2020"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ocean depth zones — abyssal is up to?",
-    "choices": [
-      "~4,000 m",
-      "~6,000 m",
-      "~10,000 m",
-      "~15,000 m"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Hadal zone starts at?",
-    "choices": [
-      "~3,000 m",
-      "~6,000 m",
-      "~9,000 m",
-      "~12,000 m"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Marianas is in which ocean?",
-    "choices": [
-      "Atlantic",
-      "Pacific",
-      "Indian",
-      "Arctic"
-    ],
-    "correct": 1
-  }
+  { question: "Deepest known point of ocean?", choices: ["Mariana Trench", "Tonga Trench", "Java Trench", "Puerto Rico Trench"], correct: 0 },
+  { question: "Approx depth of Challenger Deep?", choices: ["~6,000 m", "~8,000 m", "~10,935 m", "~15,000 m"], correct: 2 },
+  { question: "Mariana Trench is in which ocean?", choices: ["Atlantic", "Pacific", "Indian", "Arctic"], correct: 1 },
+  { question: "Earliest manned dive to Challenger Deep (1960)?", choices: ["Trieste", "Alvin", "Nautile", "Limiting Factor"], correct: 0 },
+  { question: "Pilots of 1960 Trieste dive?", choices: ["Piccard & Walsh", "Cousteau & Beebe", "Cameron & Walsh", "Earle & Beebe"], correct: 0 },
+  { question: "Director who solo-dove to Challenger Deep in 2012?", choices: ["Spielberg", "Cameron", "Bigelow", "Nolan"], correct: 1 },
+  { question: "Pressure at the deepest ocean is roughly?", choices: ["~10x surface", "~100x", "~1,000x", "~16,000 psi"], correct: 3 },
+  { question: "Photic zone is the?", choices: ["Sunlit upper ocean", "Pitch black", "Hot vents", "Surface foam"], correct: 0 },
+  { question: "Aphotic zone begins around?", choices: ["~50 m", "~200 m", "~1,000 m", "~4,000 m"], correct: 1 },
+  { question: "Bioluminescence is common in?", choices: ["Tropical reefs", "Deep sea", "Polar lakes", "Mangroves"], correct: 1 },
+  { question: "Deep-sea anglerfish lure is?", choices: ["Bioluminescent", "Magnetic", "Acidic", "Electric"], correct: 0 },
+  { question: "Hydrothermal vents discovered in?", choices: ["1850s", "1977", "2001", "2020"], correct: 1 },
+  { question: "Vent ecosystems use which energy?", choices: ["Photosynthesis", "Chemosynthesis", "Tidal", "Wind"], correct: 1 },
+  { question: "Vent tube worms host?", choices: ["Algae", "Bacteria", "Zooplankton", "Krill"], correct: 1 },
+  { question: "Giant squid live mostly in?", choices: ["Coral reefs", "Deep sea", "Estuaries", "Lakes"], correct: 1 },
+  { question: "Cousteau invented (with Gagnan) the?", choices: ["Aqua-Lung", "Sonar", "Submarine", "Bathysphere"], correct: 0 },
+  { question: "Beebe & Barton's 1934 vehicle was the?", choices: ["Bathysphere", "Bathyscaphe", "Submarine", "Snorkel"], correct: 0 },
+  { question: "HOV Alvin is operated by?", choices: ["WHOI", "NOAA", "JAMSTEC", "IFREMER"], correct: 0 },
+  { question: "Famous shipwreck explored by Alvin?", choices: ["Titanic", "Andrea Doria", "Lusitania", "Bismarck"], correct: 0 },
+  { question: "Year Titanic wreck found?", choices: ["1965", "1985", "2005", "2020"], correct: 1 },
+  { question: "Discoverer of Titanic wreck?", choices: ["Ballard", "Cousteau", "Cameron", "Earle"], correct: 0 },
+  { question: "Mid-ocean ridge total length?", choices: ["~10,000 km", "~65,000 km", "~100,000 km", "~200,000 km"], correct: 1 },
+  { question: "Average ocean depth?", choices: ["~500 m", "~3,700 m", "~7,000 m", "~10,000 m"], correct: 1 },
+  { question: "How much of the ocean is mapped in detail (approx)?", choices: ["100%", "~20%", "~25%", "~50%"], correct: 1 },
+  { question: "Deep-sea pressure at 1,000 m approx?", choices: ["~10 atm", "~50 atm", "~100 atm", "~500 atm"], correct: 2 },
+  { question: "What is the abyssal plain?", choices: ["Coral garden", "Flat deep ocean floor", "Trench", "Reef"], correct: 1 },
+  { question: "Most species in deep sea are?", choices: ["Discovered", "Undiscovered", "Mammals", "Fish only"], correct: 1 },
+  { question: "Deepest fish observed (~8,300 m+)?", choices: ["Hagfish", "Snailfish", "Tuna", "Eel"], correct: 1 },
+  { question: "Submersible Deepsea Challenger reached?", choices: ["Mariana Trench", "Tonga", "Puerto Rico", "Java"], correct: 0 },
+  { question: "Marine snow is?", choices: ["Real snow", "Falling organic particles", "Salt crystals", "Plankton ice"], correct: 1 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: DeepSeaQuizSettings): DeepSeaQuizState {

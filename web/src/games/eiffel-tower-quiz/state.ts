@@ -5,7 +5,7 @@ export interface EiffelTowerQuizState { questions: QuizQuestion[]; currentIndex:
 export type EiffelTowerQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Where is the Eiffel Tower located?", choices: ["London", "Paris", "Berlin", "Rome"], correct: 1 },
-  { question: "Who designed the Eiffel Tower?", choices: ["Antoni Gaudí", "Gustave Eiffel", "Le Corbusier", "Frank Lloyd Wright"], correct: 1 },
+  { question: "Who designed the Eiffel Tower?", choices: ["Antoni Gaud\u00ed", "Gustave Eiffel", "Le Corbusier", "Frank Lloyd Wright"], correct: 1 },
   { question: "In what year was the Eiffel Tower completed?", choices: ["1879", "1889", "1899", "1905"], correct: 1 },
   { question: "How tall is the Eiffel Tower (with antennas)?", choices: ["~200m", "~330m", "~450m", "~650m"], correct: 1 },
   { question: "What was the Eiffel Tower built for?", choices: ["1889 World's Fair", "Paris Olympics", "Napoleon's coronation", "WWI memorial"], correct: 0 },
@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "How many lights illuminate the Eiffel Tower at night?", choices: ["~5,000", "~20,000", "~40,000", "~100,000"], correct: 1 },
   { question: "Light show at Eiffel Tower runs for how long each hour?", choices: ["5 minutes", "10 minutes", "30 minutes", "Continuous"], correct: 0 },
   { question: "How many elevators are in the tower?", choices: ["3", "5", "9", "12"], correct: 2 },
-  { question: "Which Paris park is the Eiffel Tower next to?", choices: ["Bois de Vincennes", "Champ de Mars", "Tuileries", "Luxembourg Gardens"], correct: 1 }
+  { question: "Which Paris park is the Eiffel Tower next to?", choices: ["Bois de Vincennes", "Champ de Mars", "Tuileries", "Luxembourg Gardens"], correct: 1 },
+  { question: "How many levels are open to the public?", choices: ["1", "2", "3", "5"], correct: 2 },
+  { question: "Which French river is the Eiffel Tower near?", choices: ["Rh\u00f4ne", "Loire", "Seine", "Garonne"], correct: 2 },
+  { question: "What was Eiffel's company famous for before the tower?", choices: ["Rail bridges", "Cathedrals", "Castles", "Lighthouses"], correct: 0 },
+  { question: "What internal frame did Eiffel design for the Statue of Liberty?", choices: ["Wood", "Iron skeleton", "Concrete", "Steel cables"], correct: 1 },
+  { question: "How many rivets hold the Eiffel Tower together?", choices: ["~250,000", "~1.5 million", "~2.5 million", "~10 million"], correct: 2 },
+  { question: "Hitler ordered the tower destroyed in?", choices: ["1940", "1942", "1944", "1945"], correct: 2 },
+  { question: "Who refused that destruction order?", choices: ["De Gaulle", "Dietrich von Choltitz", "P\u00e9tain", "Eisenhower"], correct: 1 },
+  { question: "During WWII, what did the French do to the elevator cables?", choices: ["Cut them", "Stole them", "Painted them", "Reinforced them"], correct: 0 },
+  { question: "Which Olympics opened with cauldron near the Eiffel Tower?", choices: ["1900", "1924", "2024", "Both 1924 & 2024"], correct: 3 },
+  { question: "What sits beneath the tower's first floor today?", choices: ["Ice rink (seasonal)", "Train station", "Cinema", "Library"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: EiffelTowerQuizSettings): EiffelTowerQuizState {

@@ -4,206 +4,36 @@ export interface ExtremeSportsQuizSettings { questions: "10" | "20" | "30"; }
 export interface ExtremeSportsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ExtremeSportsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "BASE jumping stands for?",
-    "choices": [
-      "Buildings, Antennas, Spans, Earth",
-      "Big, Adventurous, Sky, Earth",
-      "Ballistic, Aero, Skydive, Earth",
-      "None"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Alex Honnold famously free-soloed?",
-    "choices": [
-      "Half Dome",
-      "El Capitan",
-      "Devils Tower",
-      "Smith Rock"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Year of the El Capitan free solo?",
-    "choices": [
-      "2015",
-      "2017",
-      "2019",
-      "2021"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Documentary about it?",
-    "choices": [
-      "Free Solo",
-      "Meru",
-      "Valley Uprising",
-      "Touching the Void"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Big-wave surf spot in Portugal?",
-    "choices": [
-      "Praia do Norte",
-      "Mavericks",
-      "Jaws",
-      "Teahupoo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "California big-wave spot?",
-    "choices": [
-      "Mavericks",
-      "Pipeline",
-      "Cortes",
-      "Cloudbreak"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tony Hawk landed first 900 in?",
-    "choices": [
-      "1995",
-      "1999",
-      "2003",
-      "2007"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "X Games started in?",
-    "choices": [
-      "1992",
-      "1995",
-      "1999",
-      "2002"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Wingsuit flying invented (modern) in?",
-    "choices": [
-      "1960s",
-      "1970s",
-      "1990s",
-      "2010s"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Felix Baumgartner stratosphere jump year?",
-    "choices": [
-      "2008",
-      "2010",
-      "2012",
-      "2014"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "His altitude (km)?",
-    "choices": [
-      "~12 km",
-      "~24 km",
-      "~39 km",
-      "~50 km"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Highest skydive (held by)?",
-    "choices": [
-      "Baumgartner",
-      "Eustace",
-      "Kittinger",
-      "Andreev"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Banff Mountain Film Festival is in?",
-    "choices": [
-      "USA",
-      "Canada",
-      "UK",
-      "Italy"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Red Bull Rampage is what?",
-    "choices": [
-      "BMX",
-      "MTB",
-      "Skate",
-      "Surf"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Slopestyle is part of which sport?",
-    "choices": [
-      "Snowboarding",
-      "Skiing",
-      "Both",
-      "Skateboarding"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Tonik 'Travis' Pastrana competes in?",
-    "choices": [
-      "Motocross/rally",
-      "Surf",
-      "Climb",
-      "Sky"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Highline involves?",
-    "choices": [
-      "Tightrope/slackline up high",
-      "Wingsuit",
-      "Skydive",
-      "BASE"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Volcano boarding popular in?",
-    "choices": [
-      "Nicaragua",
-      "Iceland",
-      "Hawaii",
-      "Italy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Free solo means?",
-    "choices": [
-      "No ropes",
-      "No partner",
-      "No music",
-      "No fees"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "World's tallest waterfall (canyon spot)?",
-    "choices": [
-      "Angel Falls",
-      "Niagara",
-      "Yosemite",
-      "Iguazu"
-    ],
-    "correct": 0
-  }
+  { question: "BASE in BASE jumping stands for?", choices: ["Building, Antenna, Span, Earth", "Base, Air, Speed, Edge", "Bridge, Air, Sky, Earth", "Boats, Anchors, Sky, Earth"], correct: 0 },
+  { question: "Wingsuit jumping is most similar to?", choices: ["Skydiving", "Hang gliding", "Both", "Neither"], correct: 2 },
+  { question: "Free solo climbing means?", choices: ["No partner", "No ropes/protection", "Indoor", "On ice"], correct: 1 },
+  { question: "Documentary 'Free Solo' featured?", choices: ["Honnold", "Caldwell", "Croft", "Hill"], correct: 0 },
+  { question: "Honnold's iconic free solo route on?", choices: ["The Nose", "Freerider (El Cap)", "Half Dome", "Triple Direct"], correct: 1 },
+  { question: "BMX & skate halfpipe pioneer?", choices: ["Tony Hawk", "Travis Pastrana", "Bob Burnquist", "Mat Hoffman"], correct: 0 },
+  { question: "First documented 900 in skating by?", choices: ["Tony Hawk", "Hoffman", "Macdonald", "Margera"], correct: 0 },
+  { question: "Big-wave surfing spot Nazar\u00e9 is in?", choices: ["Spain", "Portugal", "Brazil", "Hawaii"], correct: 1 },
+  { question: "Biggest big-wave hub in Hawaii?", choices: ["Pipeline", "Jaws/Pe'ahi", "Waikiki", "Honolulu"], correct: 1 },
+  { question: "Highline is balancing on?", choices: ["Rope", "Slackline at height", "Wire", "Plank"], correct: 1 },
+  { question: "Speed flying combines?", choices: ["Skiing & paragliding", "Skydive & glide", "Surfing & wing", "Skate & rail"], correct: 0 },
+  { question: "Ice climbing tools are called?", choices: ["Picks", "Ice axes", "Crampons (feet)", "All of these"], correct: 3 },
+  { question: "Bouldering grade scale (V-scale) max common difficulty?", choices: ["V5", "V10", "V17", "V25"], correct: 2 },
+  { question: "First V17 ascent claimed by?", choices: ["Sharma", "Megos", "Ondra", "Schubert"], correct: 1 },
+  { question: "Cliff diving World Series highest platforms (approx)?", choices: ["~10 m", "~27 m", "~40 m", "~60 m"], correct: 1 },
+  { question: "Largest extreme sports event?", choices: ["X Games", "Olympics", "Tour de France", "World Cup"], correct: 0 },
+  { question: "First X Games held in?", choices: ["1985", "1995", "2005", "2015"], correct: 1 },
+  { question: "Sport: down-snowy-slope at high speed on board?", choices: ["Snowboarding", "Skiing", "Both", "Neither"], correct: 0 },
+  { question: "'Big-mountain freeride' is mainly which sport?", choices: ["Surfing", "Skiing/snowboarding", "Cycling", "Climbing"], correct: 1 },
+  { question: "Iditarod is a race using?", choices: ["Sled dogs", "Reindeer", "Horses", "Drones"], correct: 0 },
+  { question: "Iditarod is in which US state?", choices: ["Alaska", "Wyoming", "Montana", "Maine"], correct: 0 },
+  { question: "Tour Divide bike race spans?", choices: ["100 km", "1,000 km", "~4,400 km", "~10,000 km"], correct: 2 },
+  { question: "Volcano boarding is on?", choices: ["Ash slopes", "Lava", "Magma", "Glacier"], correct: 0 },
+  { question: "Volcano boarding hub: Cerro Negro is in?", choices: ["Nicaragua", "Costa Rica", "Mexico", "Colombia"], correct: 0 },
+  { question: "Parkour was developed primarily in?", choices: ["UK", "France", "USA", "Brazil"], correct: 1 },
+  { question: "'Run, jump, climb' founder of parkour?", choices: ["David Belle", "S\u00e9bastien Foucan", "Both", "Neither"], correct: 2 },
+  { question: "Drop-in skateboard ramp is called?", choices: ["Halfpipe", "Vert ramp", "Both", "Neither"], correct: 2 },
+  { question: "Largest cliff jump (free-fall) record over?", choices: ["10 m", "30 m", "58 m", "80 m"], correct: 2 },
+  { question: "Wingsuit BASE jump fatality rate is?", choices: ["Very low", "Roughly 0.05%/jump", "Roughly 0% if trained", "Higher than tandem"], correct: 1 },
+  { question: "Most important rule of all extreme sports?", choices: ["Speed", "Risk management & training", "Audience", "Music"], correct: 1 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ExtremeSportsQuizSettings): ExtremeSportsQuizState {
