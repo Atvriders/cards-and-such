@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "The vi chord in C major is?", choices: ["A minor","D minor","E minor","F minor"], correct: 0 },
   { question: "A iio (in minor) is?", choices: ["Diminished","Major","Augmented","Half-diminished"], correct: 0 },
   { question: "A common rock 'I-bVII-IV' uses?", choices: ["Mixolydian flavor","Dorian flavor","Lydian flavor","Phrygian flavor"], correct: 0 },
+  { question: "In C major, the IV chord is?", choices: ["F","G","Am","Dm"], correct: 0 },
+  { question: "A 'V7-I' resolution typically resolves the tritone via?", choices: ["Stepwise contrary motion","Parallel motion","Octaves","Skips of a fifth"], correct: 0 },
+  { question: "A 'pedal point' is?", choices: ["A sustained bass note under changing harmonies","A type of cadence","A modulation","An ornament"], correct: 0 },
+  { question: "Common chords in a 'minor blues' typically include?", choices: ["i, iv, v","I, IV, V","ii, V, I","vi, ii, V"], correct: 0 },
+  { question: "The 'Amen' cadence in church music is what type?", choices: ["Plagal (IV-I)","Authentic (V-I)","Half","Deceptive"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ChordProgressionsQuizSettings): ChordProgressionsQuizState {

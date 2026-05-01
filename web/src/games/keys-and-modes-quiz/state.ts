@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "The dominant of A minor is?", choices: ["E","D","C","G"], correct: 0 },
   { question: "E major has how many sharps?", choices: ["3","4","5","6"], correct: 1 },
   { question: "The relative major of D minor is?", choices: ["F major","C major","B♭ major","E♭ major"], correct: 0 },
+  { question: "C# major has how many sharps?", choices: ["5","6","7","8"], correct: 2 },
+  { question: "Cb major has how many flats?", choices: ["5","6","7","8"], correct: 2 },
+  { question: "The Phrygian mode is built on which scale degree?", choices: ["2","3","4","5"], correct: 1 },
+  { question: "Which mode is sometimes called the 'gypsy' or 'Spanish' sounding mode?", choices: ["Lydian","Phrygian","Mixolydian","Locrian"], correct: 1 },
+  { question: "The relative minor of F major is?", choices: ["D minor","A minor","E minor","G minor"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: KeysAndModesQuizSettings): KeysAndModesQuizState {

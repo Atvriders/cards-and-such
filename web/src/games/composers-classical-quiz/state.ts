@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "How many piano concertos did Mozart write?", choices: ["12","17","27","41"], correct: 2 },
   { question: "The 'Hammerklavier' is a Beethoven?", choices: ["Symphony","Sonata","Concerto","Opera"], correct: 1 },
   { question: "Mozart's last symphony number is?", choices: ["35","39","41","45"], correct: 2 },
+  { question: "Mozart's opera Cosi fan tutte premiered around which year?", choices: ["1780","1790","1800","1810"], correct: 1 },
+  { question: "Beethoven's only opera is?", choices: ["Fidelio","Don Giovanni","Tannhäuser","Norma"], correct: 0 },
+  { question: "Haydn spent decades in service to which palace?", choices: ["Schönbrunn","Eszterháza","Sanssouci","Versailles"], correct: 1 },
+  { question: "Beethoven's 5th Symphony famously opens in?", choices: ["C minor","C major","E-flat major","D minor"], correct: 0 },
+  { question: "C.P.E. Bach was a son of which composer?", choices: ["J.S. Bach","Handel","Vivaldi","Telemann"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ComposersClassicalQuizSettings): ComposersClassicalQuizState {

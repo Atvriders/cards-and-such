@@ -24,6 +24,15 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question:"Which percussion instrument uses tension-tuned skin?", choices:["Xylophone","Glockenspiel","Timpani","Marimba"], correct:2 },
   { question:"The koto is a traditional zither instrument from?", choices:["Korea","China","Japan","Vietnam"], correct:2 },
   { question:"Which instrument is played by drawing a bow across strings?", choices:["Banjo","Lute","Mandolin","Cello"], correct:3 },
+  { question: "The harmonica is also known as the?", choices: ["Mouth organ","Pan flute","Reed pipe","Wind chime"], correct: 0 },
+  { question: "The pipa is a traditional lute from?", choices: ["Japan","China","Korea","Vietnam"], correct: 1 },
+  { question: "Which instrument has a triangular wooden body and three strings (in its Russian form)?", choices: ["Mandolin","Balalaika","Lute","Bouzouki"], correct: 1 },
+  { question: "The cor anglais is also known as the?", choices: ["English horn","French horn","Alpine horn","Post horn"], correct: 0 },
+  { question: "A celesta produces sound by hammers striking?", choices: ["Strings","Metal plates","Wooden bars","Glass tubes"], correct: 1 },
+  { question: "The hurdy-gurdy produces sound by?", choices: ["A rosined wheel turning against strings","Plucking","Air through reeds","Hammered keys"], correct: 0 },
+  { question: "A standard concert flute is held?", choices: ["Vertically","Transversely (sideways)","On the lap","Between knees"], correct: 1 },
+  { question: "The continuous tone of bagpipes comes from?", choices: ["Drone pipes","The chanter only","The bag alone","An electric oscillator"], correct: 0 },
+  { question: "An erhu is a Chinese?", choices: ["Two-stringed bowed instrument","Flute","Drum","Lute"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: ()=>number): T[] { const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: InstrumentsQuizSettings): InstrumentsQuizState {

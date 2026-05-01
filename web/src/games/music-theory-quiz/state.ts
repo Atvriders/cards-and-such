@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "A whole step equals?", choices: ["1 semitone","2 semitones","3 semitones","4 semitones"], correct: 1 },
   { question: "The subdominant of G major is?", choices: ["D","C","A","F"], correct: 1 },
   { question: "What is enharmonic to F#?", choices: ["Gb","G","E#","F"], correct: 0 },
+  { question: "How many semitones are in a tritone?", choices: ["4","5","6","7"], correct: 2 },
+  { question: "Which note is enharmonic to Db?", choices: ["C#","D#","E","C"], correct: 0 },
+  { question: "A minor 7th interval spans how many semitones?", choices: ["8","9","10","11"], correct: 2 },
+  { question: "What is the 'tonic' of a scale?", choices: ["The 1st note","The 5th note","The 7th note","The leading tone"], correct: 0 },
+  { question: "A 'syncopation' emphasizes?", choices: ["Strong beats","Weak/off-beats","Downbeats only","Rests only"], correct: 1 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MusicTheoryQuizSettings): MusicTheoryQuizState {

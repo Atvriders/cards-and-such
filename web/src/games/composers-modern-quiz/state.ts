@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Tan Dun composed score for?", choices: ["Crouching Tiger, Hidden Dragon","Star Wars","Jaws","E.T."], correct: 0 },
   { question: "Kaija Saariaho is from?", choices: ["Finland","Sweden","Norway","Denmark"], correct: 0 },
   { question: "Schoenberg's pupil included?", choices: ["Berg and Webern","Stravinsky and Bartók","Cage and Reich","Glass and Adams"], correct: 0 },
+  { question: "Erik Satie composed?", choices: ["Gymnopédies","Bolero","La Mer","The Planets"], correct: 0 },
+  { question: "Holst's suite The Planets has how many movements?", choices: ["5","7","9","11"], correct: 1 },
+  { question: "Edgard Varèse pioneered?", choices: ["Electronic music / organized sound","Twelve-tone","Minimalism","Romanticism"], correct: 0 },
+  { question: "Karlheinz Stockhausen worked at the WDR studio in?", choices: ["Cologne","Berlin","Munich","Hamburg"], correct: 0 },
+  { question: "Hans Zimmer is best known for composing?", choices: ["Concert symphonies","Film scores","Operas","String quartets"], correct: 1 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ComposersModernQuizSettings): ComposersModernQuizState {

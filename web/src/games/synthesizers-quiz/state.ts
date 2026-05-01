@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "A 'patch' is?", choices: ["Cable","Sound preset/program","Module","Filter"], correct: 1 },
   { question: "A 'sequencer' does what?", choices: ["Records knob moves","Plays note pattern","Filters audio","Reduces noise"], correct: 1 },
   { question: "The Korg MS-20 is famous for its?", choices: ["Aggressive filter","Polyphony","Wavetable","Digital sound"], correct: 0 },
+  { question: "An LFO is a?", choices: ["Low-Frequency Oscillator","Linear Filter Output","Loop Feedback Oscillator","Light Filter Object"], correct: 0 },
+  { question: "The Roland TR-909 is a?", choices: ["Drum machine","Synth keyboard","Mixer","Sampler"], correct: 0 },
+  { question: "A 'patch cable' on a modular synth carries?", choices: ["Control voltage / audio signals","AC power only","MIDI only","Optical signal"], correct: 0 },
+  { question: "The Hammond organ uses what method?", choices: ["Tonewheels","FM","Wavetable","Sampling"], correct: 0 },
+  { question: "Subtractive synthesis starts with a harmonically rich waveform and?", choices: ["Filters out frequencies","Adds sine waves","Modulates frequencies","Samples audio"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SynthesizersQuizSettings): SynthesizersQuizState {

@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "A 'mezzo forte' (mf) is?", choices: ["Very loud","Moderately loud","Very soft","Moderately soft"], correct: 1 },
   { question: "Number of lines on a standard staff?", choices: ["4","5","6","7"], correct: 1 },
   { question: "The grand staff combines which two clefs?", choices: ["Treble + alto","Treble + bass","Bass + tenor","Alto + tenor"], correct: 1 },
+  { question: "A semibreve is also called a?", choices: ["Whole note","Half note","Quarter note","Eighth note"], correct: 0 },
+  { question: "How many beats does a dotted quarter receive in 4/4?", choices: ["1","1.5","2","2.5"], correct: 1 },
+  { question: "The 'segno' symbol marks?", choices: ["The end","A repeat sign location","Tempo","Dynamic"], correct: 1 },
+  { question: "A double sharp raises a note by?", choices: ["1 semitone","2 semitones","3 semitones","Half a semitone"], correct: 1 },
+  { question: "The bass clef is also called?", choices: ["F clef","G clef","C clef","D clef"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MusicNotationQuizSettings): MusicNotationQuizState {

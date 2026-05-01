@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which is NOT a woodwind?", choices: ["Saxophone","Flute","French horn","Bassoon"], correct: 2 },
   { question: "A vibraphone uses?", choices: ["Strings","Bars with motorized vibrato","Reeds","Pipes"], correct: 1 },
   { question: "Castanets originate from?", choices: ["France","Spain","Italy","Greece"], correct: 1 },
+  { question: "The contrabassoon plays an octave below the?", choices: ["Oboe","Bassoon","Clarinet","Flute"], correct: 1 },
+  { question: "The Hammond B-3 is a type of?", choices: ["Organ","Piano","Synth","Harpsichord"], correct: 0 },
+  { question: "The English horn is pitched in?", choices: ["F","Bb","Eb","C"], correct: 0 },
+  { question: "The cajon is a percussion instrument from?", choices: ["Brazil","Peru","Mexico","Cuba"], correct: 1 },
+  { question: "The Hardanger fiddle is from?", choices: ["Sweden","Finland","Norway","Iceland"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MusicalInstrumentsQuizSettings): MusicalInstrumentsQuizState {

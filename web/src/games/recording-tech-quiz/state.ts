@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "A 'plate reverb' uses?", choices: ["Springs","A metal plate","Tape","Digital algorithm"], correct: 1 },
   { question: "Phantom power is typically?", choices: ["12V","24V","48V","96V"], correct: 2 },
   { question: "Pro Tools is a?", choices: ["DAW","Mic","Console","Reverb unit"], correct: 0 },
+  { question: "The Shure SM57 is a famous?", choices: ["Dynamic mic","Condenser mic","Ribbon mic","Lavalier"], correct: 0 },
+  { question: "AAC and MP3 are types of?", choices: ["Lossy audio compression","Lossless codecs","File systems","Tape formats"], correct: 0 },
+  { question: "A 'limiter' is essentially?", choices: ["A compressor with very high ratio","An EQ","A reverb","A delay"], correct: 0 },
+  { question: "Bit depth of standard CD audio is?", choices: ["8-bit","16-bit","24-bit","32-bit"], correct: 1 },
+  { question: "The XLR connector typically carries?", choices: ["Balanced audio","Unbalanced audio","Power only","MIDI"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: RecordingTechQuizSettings): RecordingTechQuizState {

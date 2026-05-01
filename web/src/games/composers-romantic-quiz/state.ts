@@ -29,6 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Mussorgsky composed?", choices: ["Pictures at an Exhibition","La Mer","Bolero","Daphnis"], correct: 0 },
   { question: "Smetana composed the cycle?", choices: ["Má vlast","The Planets","Symphonie Espagnole","Romeo & Juliet"], correct: 0 },
   { question: "Rachmaninoff wrote how many piano concertos?", choices: ["2","3","4","5"], correct: 2 },
+  { question: "Grieg was from which country?", choices: ["Norway","Sweden","Denmark","Finland"], correct: 0 },
+  { question: "Sibelius is most associated with?", choices: ["Sweden","Finland","Norway","Russia"], correct: 1 },
+  { question: "Puccini composed which opera?", choices: ["La Bohème","Carmen","The Magic Flute","Don Giovanni"], correct: 0 },
+  { question: "Wagner's 'leitmotif' is?", choices: ["A recurring musical theme tied to a character/idea","A type of cadence","A vocal ornament","A tempo marking"], correct: 0 },
+  { question: "Tchaikovsky wrote how many ballets?", choices: ["1","2","3","4"], correct: 2 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ComposersRomanticQuizSettings): ComposersRomanticQuizState {
