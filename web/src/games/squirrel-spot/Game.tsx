@@ -3,27 +3,37 @@ import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SquirrelSpotState, SquirrelSpotAction, SquirrelSpotSettings } from "./state.js";
 import { isTerminal, LANES } from "./state.js";
 import "./Game.css";
+
 export function SquirrelSpotGame({ state, dispatch, onGameOver }: GameProps<SquirrelSpotState, SquirrelSpotSettings>): JSX.Element {
-  const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
     if (state.phase !== "playing") { if (tickRef.current) clearInterval(tickRef.current); return; }
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as SquirrelSpotAction), 750);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") {
+    return <div className="sqs-wrap"><div className="sqs-done"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="sqs-final">{state.score} pts</div></div></div>;
+  }
   return (
-    <div className="dm-wrap">
-      <div className="dm-row" style={{ justifyContent:"space-between", width:"100%" }}>
-        <span style={{ fontSize:"0.9rem", color:"#555" }}>Clicked: {state.clicked}</span>
-        <span style={{ fontSize:"1.4rem", fontWeight:900, color:"#e74c3c" }}>{state.ticksRemaining}s</span>
-        <span className="dm-score">{state.score} pts</span>
+    <div className="sqs-wrap">
+      <div className="sqs-header">
+        <span className="sqs-info">Clicked: {state.clicked}</span>
+        <span className="sqs-timer">{state.ticksRemaining}s</span>
+        <span className="sqs-score">{state.score} pts</span>
       </div>
-      <div className="dm-board" style={{ background:"linear-gradient(180deg,#4a3a1f,#2a1f0f)" }}>
-        {state.targets.map(t => {
-          const x = (t.lane + 0.5) / LANES * 100;
-          const y = 20 + ((t.ticksLeft * 23) % 70);
-          return <button key={t.id} className="dm-target" style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", color:"#fff" }} onClick={() => dispatch({ type:"click", id:t.id } as SquirrelSpotAction)} aria-label="squirrel-spot">🐿</button>;
+      <div className="sqs-board" style={{ background: "linear-gradient(180deg,#a16207,#422006)" }}>
+        {state.targets.map(p => {
+          const x = (p.lane + 0.5) / LANES * 100;
+          const y = 20 + ((p.ticksLeft * 23) % 70);
+          return (
+            <button key={p.id}
+              className="sqs-target"
+              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
+              onClick={() => dispatch({ type:"click", id:p.id } as SquirrelSpotAction)}
+              aria-label="squirrel-spot">🐿️</button>
+          );
         })}
       </div>
     </div>

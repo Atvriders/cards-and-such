@@ -23,14 +23,14 @@ export function WhaleWaveGame({ state, dispatch, onGameOver }: GameProps<WhaleWa
         <span className="ww-timer">{state.ticksRemaining}s</span>
         <span className="ww-score">{state.score} pts</span>
       </div>
-      <div className="ww-board">
+      <div className="ww-board" style={{ background: "linear-gradient(180deg,#7dd3fc,#0c4a6e)" }}>
         {state.critters.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
               className="ww-target"
-              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
+              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as WhaleWaveAction)}
               aria-label="whale-wave">🐳</button>
           );

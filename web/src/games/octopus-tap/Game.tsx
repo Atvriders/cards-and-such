@@ -23,14 +23,14 @@ export function OctopusTapGame({ state, dispatch, onGameOver }: GameProps<Octopu
         <span className="ot-timer">{state.ticksRemaining}s</span>
         <span className="ot-score">{state.score} pts</span>
       </div>
-      <div className="ot-board">
+      <div className="ot-board" style={{ background: "linear-gradient(180deg,#c4b5fd,#5b21b6)" }}>
         {state.critters.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
               className="ot-target"
-              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
+              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as OctopusTapAction)}
               aria-label="octopus-tap">🐙</button>
           );

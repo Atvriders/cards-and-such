@@ -23,14 +23,14 @@ export function CrabCatchGame({ state, dispatch, onGameOver }: GameProps<CrabCat
         <span className="cc-timer">{state.ticksRemaining}s</span>
         <span className="cc-score">{state.score} pts</span>
       </div>
-      <div className="cc-board">
+      <div className="cc-board" style={{ background: "linear-gradient(180deg,#fed7aa,#7c2d12)" }}>
         {state.critters.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
               className="cc-target"
-              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
+              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CrabCatchAction)}
               aria-label="crab-catch">🦀</button>
           );

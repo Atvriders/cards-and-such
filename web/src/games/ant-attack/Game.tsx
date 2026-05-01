@@ -14,25 +14,25 @@ export function AntAttackGame({ state, dispatch, onGameOver }: GameProps<AntAtta
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="aa-wrap"><div className="aa-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="aa-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">Caught: {state.popped}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="aa-wrap">
+      <div className="aa-header">
+        <span className="aa-info">Caught: {state.popped}</span>
+        <span className="aa-timer">{state.ticksRemaining}s</span>
+        <span className="aa-score">{state.score} pts</span>
       </div>
-      <div className="fc-board" style={{ background: "linear-gradient(180deg,#fcd34d,#f59e0b)" }}>
+      <div className="aa-board" style={{ background: "linear-gradient(180deg,#fcd34d,#92400e)" }}>
         {state.critters.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="aa-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as AntAttackAction)}
-              aria-label="🐜">🐜</button>
+              aria-label="ant-attack">🐜</button>
           );
         })}
       </div>

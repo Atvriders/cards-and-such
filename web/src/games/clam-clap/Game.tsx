@@ -3,6 +3,7 @@ import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ClamClapState, ClamClapAction, ClamClapSettings } from "./state.js";
 import { isTerminal, LANES } from "./state.js";
 import "./Game.css";
+
 export function ClamClapGame({ state, dispatch, onGameOver }: GameProps<ClamClapState, ClamClapSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
@@ -13,25 +14,25 @@ export function ClamClapGame({ state, dispatch, onGameOver }: GameProps<ClamClap
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="ar-wrap"><div className="ar-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="ar-final">{state.score} pts</div></div></div>;
+    return <div className="clc-wrap"><div className="clc-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="clc-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="ar-wrap">
-      <div className="ar-header">
-        <span className="ar-info">Caught: {state.popped}</span>
-        <span className="ar-timer">{state.ticksRemaining}s</span>
-        <span className="ar-score">{state.score} pts</span>
+    <div className="clc-wrap">
+      <div className="clc-header">
+        <span className="clc-info">Caught: {state.popped}</span>
+        <span className="clc-timer">{state.ticksRemaining}s</span>
+        <span className="clc-score">{state.score} pts</span>
       </div>
-      <div className="ar-board">
+      <div className="clc-board" style={{ background: "linear-gradient(180deg,#fce7f3,#075985)" }}>
         {state.critters.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ar-target"
-              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
+              className="clc-target"
+              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ClamClapAction)}
-              aria-label="critter">🦪</button>
+              aria-label="clam-clap">🦪</button>
           );
         })}
       </div>

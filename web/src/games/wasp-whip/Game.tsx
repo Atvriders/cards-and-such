@@ -10,29 +10,29 @@ export function WaspWhipGame({ state, dispatch, onGameOver }: GameProps<WaspWhip
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
     if (state.phase !== "playing") { if (tickRef.current) clearInterval(tickRef.current); return; }
-    tickRef.current = setInterval(() => dispatch({ type:"tick" } as WaspWhipAction), 750);
+    tickRef.current = setInterval(() => dispatch({ type: "tick" } as WaspWhipAction), 750);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="ar-wrap"><div className="ar-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="ar-final">{state.score} pts</div></div></div>;
+    return <div className="wsp-wrap"><div className="wsp-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="wsp-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="ar-wrap">
-      <div className="ar-header">
-        <span className="ar-info">Caught: {state.popped}</span>
-        <span className="ar-timer">{state.ticksRemaining}s</span>
-        <span className="ar-score">{state.score} pts</span>
+    <div className="wsp-wrap">
+      <div className="wsp-header">
+        <span className="wsp-info">Caught: {state.popped}</span>
+        <span className="wsp-timer">{state.ticksRemaining}s</span>
+        <span className="wsp-score">{state.score} pts</span>
       </div>
-      <div className="ar-board">
+      <div className="wsp-board" style={{ background: "linear-gradient(180deg,#fde047,#854d0e)" }}>
         {state.bugs.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ar-target"
-              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background: "transparent", border: "none" }}
+              className="wsp-target"
+              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as WaspWhipAction)}
-              aria-label="bug">🦟</button>
+              aria-label="wasp-whip">🦟</button>
           );
         })}
       </div>

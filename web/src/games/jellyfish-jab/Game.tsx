@@ -23,14 +23,14 @@ export function JellyfishJabGame({ state, dispatch, onGameOver }: GameProps<Jell
         <span className="jj-timer">{state.ticksRemaining}s</span>
         <span className="jj-score">{state.score} pts</span>
       </div>
-      <div className="jj-board">
+      <div className="jj-board" style={{ background: "linear-gradient(180deg,#bae6fd,#1e3a8a)" }}>
         {state.critters.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
               className="jj-target"
-              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
+              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as JellyfishJabAction)}
               aria-label="jellyfish-jab">🪼</button>
           );
