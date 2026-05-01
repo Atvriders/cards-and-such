@@ -4,7 +4,7 @@ import type { CarcassonneBaseState, CarcassonneBaseAction, CarcassonneBaseSettin
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7d6608", "#196f3d", "#7b241c", "#9c6f1a", "#5d4037", "#1e8449", "#a04000", "#4a235a"];
 
 export function CarcassonneBaseGame({ state, dispatch, onGameOver }: GameProps<CarcassonneBaseState, CarcassonneBaseSettings>): JSX.Element {
   const t = isTerminal(state);

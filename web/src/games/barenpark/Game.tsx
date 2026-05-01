@@ -4,7 +4,7 @@ import type { BarenparkState, BarenparkAction, BarenparkSettings } from "./state
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#196f3d", "#229954", "#7b3f00", "#5d4037", "#d4ac0d", "#a04000", "#34495e", "#7d6608"];
 
 export function BarenparkGame({ state, dispatch, onGameOver }: GameProps<BarenparkState, BarenparkSettings>): JSX.Element {
   const t = isTerminal(state);

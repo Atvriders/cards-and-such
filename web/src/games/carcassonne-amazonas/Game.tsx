@@ -4,7 +4,7 @@ import type { CarcassonneAmazonasState, CarcassonneAmazonasAction, CarcassonneAm
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#0e6251", "#117a65", "#117864", "#229954", "#52be80", "#7dcea0", "#82e0aa", "#a9dfbf"];
 
 export function CarcassonneAmazonasGame({ state, dispatch, onGameOver }: GameProps<CarcassonneAmazonasState, CarcassonneAmazonasSettings>): JSX.Element {
   const t = isTerminal(state);

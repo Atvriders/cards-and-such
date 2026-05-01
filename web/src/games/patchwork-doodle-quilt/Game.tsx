@@ -4,7 +4,7 @@ import type { PatchworkDoodleQuiltState, PatchworkDoodleQuiltAction, PatchworkDo
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#f5cba7", "#d2b4de", "#aed6f1", "#a9dfbf", "#f9e79f", "#e8a89e", "#a9cce3", "#fad7a0"];
 
 export function PatchworkDoodleQuiltGame({ state, dispatch, onGameOver }: GameProps<PatchworkDoodleQuiltState, PatchworkDoodleQuiltSettings>): JSX.Element {
   const t = isTerminal(state);

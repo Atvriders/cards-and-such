@@ -4,7 +4,7 @@ import type { PatchworkState, PatchworkAction, PatchworkSettings } from "./state
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#e8a89e", "#a9dfbf", "#aed6f1", "#f9e79f", "#d2b4de", "#f5cba7", "#abebc6", "#fadbd8"];
 
 export function PatchworkGame({ state, dispatch, onGameOver }: GameProps<PatchworkState, PatchworkSettings>): JSX.Element {
   const t = isTerminal(state);

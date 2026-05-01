@@ -4,7 +4,7 @@ import type { TinyTownsState, TinyTownsAction, TinyTownsSettings } from "./state
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7b3f00", "#9c6f1a", "#5d4037", "#a04000", "#7b7d7d", "#196f3d", "#34495e", "#d4ac0d"];
 
 export function TinyTownsGame({ state, dispatch, onGameOver }: GameProps<TinyTownsState, TinyTownsSettings>): JSX.Element {
   const t = isTerminal(state);

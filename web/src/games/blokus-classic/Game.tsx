@@ -4,7 +4,7 @@ import type { BlokusClassicState, BlokusClassicAction, BlokusClassicSettings } f
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#c0392b", "#2980b9", "#27ae60", "#f1c40f", "#8e44ad", "#d35400", "#16a085", "#2c3e50"];
 
 export function BlokusClassicGame({ state, dispatch, onGameOver }: GameProps<BlokusClassicState, BlokusClassicSettings>): JSX.Element {
   const t = isTerminal(state);

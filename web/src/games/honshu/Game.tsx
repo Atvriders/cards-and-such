@@ -4,7 +4,7 @@ import type { HonshuState, HonshuAction, HonshuSettings } from "./state.js";
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7b241c", "#1f618d", "#196f3d", "#d4ac0d", "#5d4037", "#cb4335", "#7d3c98", "#34495e"];
 
 export function HonshuGame({ state, dispatch, onGameOver }: GameProps<HonshuState, HonshuSettings>): JSX.Element {
   const t = isTerminal(state);

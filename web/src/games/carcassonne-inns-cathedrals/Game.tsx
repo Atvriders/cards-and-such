@@ -4,7 +4,7 @@ import type { CarcassonneInnsCathedralsState, CarcassonneInnsCathedralsAction, C
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7b241c", "#922b21", "#cb4335", "#d4ac0d", "#7d6608", "#5d4037", "#196f3d", "#34495e"];
 
 export function CarcassonneInnsCathedralsGame({ state, dispatch, onGameOver }: GameProps<CarcassonneInnsCathedralsState, CarcassonneInnsCathedralsSettings>): JSX.Element {
   const t = isTerminal(state);

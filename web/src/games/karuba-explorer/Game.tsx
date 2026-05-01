@@ -4,7 +4,7 @@ import type { KarubaExplorerState, KarubaExplorerAction, KarubaExplorerSettings 
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#196f3d", "#229954", "#7b3f00", "#9c6f1a", "#d4ac0d", "#cb4335", "#5d4037", "#117864"];
 
 export function KarubaExplorerGame({ state, dispatch, onGameOver }: GameProps<KarubaExplorerState, KarubaExplorerSettings>): JSX.Element {
   const t = isTerminal(state);

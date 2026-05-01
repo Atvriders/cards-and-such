@@ -4,7 +4,7 @@ import type { FjordsClaimState, FjordsClaimAction, FjordsClaimSettings } from ".
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#1f618d", "#2874a6", "#5dade2", "#566573", "#34495e", "#196f3d", "#7b3f00", "#1c2833"];
 
 export function FjordsClaimGame({ state, dispatch, onGameOver }: GameProps<FjordsClaimState, FjordsClaimSettings>): JSX.Element {
   const t = isTerminal(state);

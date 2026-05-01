@@ -4,7 +4,7 @@ import type { CarcassonneTradersBuildersState, CarcassonneTradersBuildersAction,
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7b3f00", "#9c6f1a", "#a04000", "#196f3d", "#1e8449", "#7d6608", "#5d4037", "#cb6c0d"];
 
 export function CarcassonneTradersBuildersGame({ state, dispatch, onGameOver }: GameProps<CarcassonneTradersBuildersState, CarcassonneTradersBuildersSettings>): JSX.Element {
   const t = isTerminal(state);

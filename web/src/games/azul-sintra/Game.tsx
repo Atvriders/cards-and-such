@@ -4,7 +4,7 @@ import type { AzulSintraState, AzulSintraAction, AzulSintraSettings } from "./st
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#21618c", "#2874a6", "#5dade2", "#aed6f1", "#1abc9c", "#117864", "#7d6608", "#34495e"];
 
 export function AzulSintraGame({ state, dispatch, onGameOver }: GameProps<AzulSintraState, AzulSintraSettings>): JSX.Element {
   const t = isTerminal(state);

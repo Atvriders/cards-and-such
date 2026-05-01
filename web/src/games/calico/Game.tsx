@@ -4,7 +4,7 @@ import type { CalicoState, CalicoAction, CalicoSettings } from "./state.js";
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#cb4335", "#d4ac0d", "#a569bd", "#1abc9c", "#5d4037", "#1f618d", "#196f3d", "#a04000"];
 
 export function CalicoGame({ state, dispatch, onGameOver }: GameProps<CalicoState, CalicoSettings>): JSX.Element {
   const t = isTerminal(state);

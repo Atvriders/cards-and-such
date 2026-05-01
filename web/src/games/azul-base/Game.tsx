@@ -4,7 +4,7 @@ import type { AzulBaseState, AzulBaseAction, AzulBaseSettings } from "./state.js
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#1f618d", "#2874a6", "#5dade2", "#aed6f1", "#d4ac0d", "#f1c40f", "#7b241c", "#1abc9c"];
 
 export function AzulBaseGame({ state, dispatch, onGameOver }: GameProps<AzulBaseState, AzulBaseSettings>): JSX.Element {
   const t = isTerminal(state);

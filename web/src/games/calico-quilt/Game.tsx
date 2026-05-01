@@ -4,7 +4,7 @@ import type { CalicoQuiltState, CalicoQuiltAction, CalicoQuiltSettings } from ".
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#e8a89e", "#f7dc6f", "#d2b4de", "#a9dfbf", "#a9cce3", "#f5cba7", "#fad7a0", "#abebc6"];
 
 export function CalicoQuiltGame({ state, dispatch, onGameOver }: GameProps<CalicoQuiltState, CalicoQuiltSettings>): JSX.Element {
   const t = isTerminal(state);

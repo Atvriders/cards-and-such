@@ -4,7 +4,7 @@ import type { IngeniousState, IngeniousAction, IngeniousSettings } from "./state
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7b241c", "#a04000", "#d4ac0d", "#196f3d", "#1f618d", "#7d3c98", "#cb4335", "#117864"];
 
 export function IngeniousGame({ state, dispatch, onGameOver }: GameProps<IngeniousState, IngeniousSettings>): JSX.Element {
   const t = isTerminal(state);

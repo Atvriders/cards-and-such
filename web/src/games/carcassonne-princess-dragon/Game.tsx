@@ -4,7 +4,7 @@ import type { CarcassonnePrincessDragonState, CarcassonnePrincessDragonAction, C
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7d3c98", "#6c3483", "#a569bd", "#cb4335", "#922b21", "#d4ac0d", "#1abc9c", "#1f618d"];
 
 export function CarcassonnePrincessDragonGame({ state, dispatch, onGameOver }: GameProps<CarcassonnePrincessDragonState, CarcassonnePrincessDragonSettings>): JSX.Element {
   const t = isTerminal(state);

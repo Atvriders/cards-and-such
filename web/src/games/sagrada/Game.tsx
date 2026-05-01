@@ -4,7 +4,7 @@ import type { SagradaState, SagradaAction, SagradaSettings } from "./state.js";
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7b241c", "#1f618d", "#196f3d", "#d4ac0d", "#7d3c98", "#cb4335", "#117864", "#34495e"];
 
 export function SagradaGame({ state, dispatch, onGameOver }: GameProps<SagradaState, SagradaSettings>): JSX.Element {
   const t = isTerminal(state);

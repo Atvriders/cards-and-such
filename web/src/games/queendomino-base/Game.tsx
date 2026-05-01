@@ -4,7 +4,7 @@ import type { QueendominoBaseState, QueendominoBaseAction, QueendominoBaseSettin
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#6c3483", "#7d3c98", "#d4ac0d", "#a04000", "#196f3d", "#1f618d", "#922b21", "#34495e"];
 
 export function QueendominoBaseGame({ state, dispatch, onGameOver }: GameProps<QueendominoBaseState, QueendominoBaseSettings>): JSX.Element {
   const t = isTerminal(state);

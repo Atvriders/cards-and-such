@@ -4,7 +4,7 @@ import type { QueendominoTaxState, QueendominoTaxAction, QueendominoTaxSettings 
 import { isTerminal, GRID_SIZE, TOTAL_TILES, TYPE_NAMES, typeName } from "./state.js";
 import "./Game.css";
 
-const PALETTE = ["#3498db", "#27ae60", "#e74c3c", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"];
+const PALETTE = ["#7d6608", "#9c6f1a", "#7d3c98", "#6c3483", "#a04000", "#196f3d", "#34495e", "#5d4037"];
 
 export function QueendominoTaxGame({ state, dispatch, onGameOver }: GameProps<QueendominoTaxState, QueendominoTaxSettings>): JSX.Element {
   const t = isTerminal(state);

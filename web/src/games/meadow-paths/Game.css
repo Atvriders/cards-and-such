@@ -1,19 +1,19 @@
 .mdp-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: 'Inter', system-ui, sans-serif; max-width: 760px; margin: 0 auto; color: #1c2833; }
-.mdp-title { margin: 0; font-size: 1.4rem; font-weight: 800; color: #196f3d; letter-spacing: 0.02em; }
+.mdp-title { margin: 0; font-size: 1.4rem; font-weight: 800; color: #229954; letter-spacing: 0.02em; }
 .mdp-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; }
 .mdp-meta-item { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; background: #f4f6f7; border-radius: 8px; min-width: 80px; }
 .mdp-meta-item span { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; }
-.mdp-meta-item b { font-size: 1.05rem; color: #196f3d; }
+.mdp-meta-item b { font-size: 1.05rem; color: #229954; }
 .mdp-next { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.95rem; color: #34495e; }
 .mdp-next-tile { display: inline-flex; min-width: 48px; height: 38px; padding: 0 10px; align-items: center; justify-content: center; color: #fff; border-radius: 7px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
 .mdp-grid { display: grid; gap: 4px; padding: 10px; background: #ecf0f1; border-radius: 10px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.06); }
 .mdp-cell { width: 44px; height: 44px; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer; font-weight: 800; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; display: flex; align-items: center; justify-content: center; padding: 0; transition: transform 80ms ease, box-shadow 80ms ease; }
 .mdp-empty { background: #fff; color: #d5dbdb; }
-.mdp-empty:hover { background: #196f3d; color: #fff; transform: scale(1.08); box-shadow: 0 2px 6px rgba(0,0,0,0.18); }
+.mdp-empty:hover { background: #229954; color: #fff; transform: scale(1.08); box-shadow: 0 2px 6px rgba(0,0,0,0.18); }
 .mdp-filled { cursor: default; box-shadow: 0 2px 4px rgba(0,0,0,0.12); }
-.mdp-done { text-align: center; padding: 20px; background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border-radius: 14px; border: 2px solid #196f3d; min-width: 240px; }
-.mdp-done h3 { margin: 0 0 6px; color: #196f3d; }
-.mdp-final { font-size: 1.6rem; color: #196f3d; font-weight: 900; font-family: 'JetBrains Mono', monospace; }
+.mdp-done { text-align: center; padding: 20px; background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border-radius: 14px; border: 2px solid #229954; min-width: 240px; }
+.mdp-done h3 { margin: 0 0 6px; color: #229954; }
+.mdp-final { font-size: 1.6rem; color: #229954; font-weight: 900; font-family: 'JetBrains Mono', monospace; }
 .mdp-legend { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
 .mdp-leg { padding: 3px 9px; border-radius: 5px; font-size: 0.72rem; color: #fff; font-weight: 700; }
 .mdp-rules { font-size: 0.78rem; color: #7f8c8d; text-align: center; max-width: 520px; font-family: 'JetBrains Mono', monospace; }
