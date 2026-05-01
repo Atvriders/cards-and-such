@@ -1,19 +1,19 @@
-.sfv-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #0a0e1f 0%, #11182b 100%); border-radius: 14px; color: #cbd5e1; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.sfv-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #050816 0%, #0a0e1f 100%); border-radius: 14px; color: #dbeafe; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
 .sfv-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #1e2a4a; }
-.sfv-progress { font-size:0.9rem; color: #1e2a4a; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+.sfv-progress { font-size:0.9rem; color: #64748b; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
 .sfv-score { font-size:1.05rem; font-weight:800; color: #60a5fa; font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .sfv-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #93c5fd; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
 .sfv-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
-.sfv-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #1e2a4a; border-radius:10px; background: #11182b; cursor:pointer; font-size:1rem; text-align:left; color: #cbd5e1; font-family: 'Inter', inherit; transition: all 0.15s; }
-.sfv-choice:hover:not(:disabled) { border-color: #60a5fa; background: #0a0e1f; transform: translateY(-1px); }
+.sfv-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #1e2a4a; border-radius:10px; background: #0c1224; cursor:pointer; font-size:1rem; text-align:left; color: #dbeafe; font-family: 'Inter', inherit; transition: all 0.15s; }
+.sfv-choice:hover:not(:disabled) { border-color: #60a5fa; background: #050816; transform: translateY(-1px); }
 .sfv-choice:disabled { cursor: default; opacity: 0.7; }
-.sfv-choice.selected { border-color: #60a5fa; background: #0a0e1f; box-shadow: inset 0 0 0 1px #60a5fa; }
+.sfv-choice.selected { border-color: #60a5fa; background: #050816; box-shadow: inset 0 0 0 1px #60a5fa; }
 .sfv-choice-letter { font-weight:900; font-size:1.05rem; color: #60a5fa; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .sfv-actions { display:flex; gap:12px; }
 .sfv-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; font-family: 'Inter', inherit; transition: opacity 0.15s; }
 .sfv-btn.next { background: #60a5fa; }
 .sfv-btn:hover { opacity: 0.85; }
-.sfv-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #0a0e1f; color: #93c5fd; border-left: 3px solid #60a5fa; }
-.sfv-done { text-align:center; padding:32px 24px; background: #0a0e1f; border-radius:12px; width: 100%; border: 1.5px solid #1e2a4a; }
+.sfv-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #0c1224; color: #93c5fd; border-left: 3px solid #60a5fa; }
+.sfv-done { text-align:center; padding:32px 24px; background: #0c1224; border-radius:12px; width: 100%; border: 1.5px solid #1e2a4a; }
 .sfv-done h2 { margin:0 0 12px; color: #93c5fd; font-family: 'Inter', inherit; }
 .sfv-final { font-size: 2rem; font-weight: 900; color: #60a5fa; font-family: 'JetBrains Mono', ui-monospace, monospace; }

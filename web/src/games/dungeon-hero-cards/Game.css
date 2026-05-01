@@ -1,19 +1,19 @@
-.dhc-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #1a0e0a 0%, #261612 100%); border-radius: 14px; color: #fef3c7; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
-.dhc-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #4a2410; }
-.dhc-progress { font-size:0.9rem; color: #4a2410; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
-.dhc-score { font-size:1.05rem; font-weight:800; color: #f59e0b; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.dhc-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #1a0d05 0%, #2c1809 100%); border-radius: 14px; color: #fde68a; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.dhc-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #7c2d12; }
+.dhc-progress { font-size:0.9rem; color: #a07142; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+.dhc-score { font-size:1.05rem; font-weight:800; color: #ea580c; font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .dhc-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #fbbf24; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
 .dhc-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
-.dhc-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #4a2410; border-radius:10px; background: #261612; cursor:pointer; font-size:1rem; text-align:left; color: #fef3c7; font-family: 'Inter', inherit; transition: all 0.15s; }
-.dhc-choice:hover:not(:disabled) { border-color: #f59e0b; background: #1a0e0a; transform: translateY(-1px); }
+.dhc-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #7c2d12; border-radius:10px; background: #21110a; cursor:pointer; font-size:1rem; text-align:left; color: #fde68a; font-family: 'Inter', inherit; transition: all 0.15s; }
+.dhc-choice:hover:not(:disabled) { border-color: #ea580c; background: #1a0d05; transform: translateY(-1px); }
 .dhc-choice:disabled { cursor: default; opacity: 0.7; }
-.dhc-choice.selected { border-color: #f59e0b; background: #1a0e0a; box-shadow: inset 0 0 0 1px #f59e0b; }
-.dhc-choice-letter { font-weight:900; font-size:1.05rem; color: #f59e0b; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.dhc-choice.selected { border-color: #ea580c; background: #1a0d05; box-shadow: inset 0 0 0 1px #ea580c; }
+.dhc-choice-letter { font-weight:900; font-size:1.05rem; color: #ea580c; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .dhc-actions { display:flex; gap:12px; }
 .dhc-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; font-family: 'Inter', inherit; transition: opacity 0.15s; }
-.dhc-btn.next { background: #f59e0b; }
+.dhc-btn.next { background: #ea580c; }
 .dhc-btn:hover { opacity: 0.85; }
-.dhc-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #1a0e0a; color: #fbbf24; border-left: 3px solid #f59e0b; }
-.dhc-done { text-align:center; padding:32px 24px; background: #1a0e0a; border-radius:12px; width: 100%; border: 1.5px solid #4a2410; }
-.dhc-done h2 { margin:0 0 12px; color: #fbbf24; font-family: 'Inter', inherit; }
-.dhc-final { font-size: 2rem; font-weight: 900; color: #f59e0b; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.dhc-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #21110a; color: #fb923c; border-left: 3px solid #ea580c; }
+.dhc-done { text-align:center; padding:32px 24px; background: #21110a; border-radius:12px; width: 100%; border: 1.5px solid #7c2d12; }
+.dhc-done h2 { margin:0 0 12px; color: #fb923c; font-family: 'Inter', inherit; }
+.dhc-final { font-size: 2rem; font-weight: 900; color: #ea580c; font-family: 'JetBrains Mono', ui-monospace, monospace; }

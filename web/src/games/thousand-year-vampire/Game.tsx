@@ -7,7 +7,7 @@ const LABELS = ["A", "B", "C", "D"];
 export function ThousandYearVampireGame({ state, dispatch, onGameOver }: GameProps<ThousandYearVampireState, ThousandYearVampireSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="tyv-wrap"><div className="tyv-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#8e44ad" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="tyv-wrap"><div className="tyv-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#b91c1c" }}>{state.score} pts</p></div></div>;
   const p = state.prompts[state.index]!;
   const isResult = state.phase === "result";
   return (

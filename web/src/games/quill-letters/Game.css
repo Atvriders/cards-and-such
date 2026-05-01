@@ -1,19 +1,19 @@
-.qll-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #fefce8 0%, #fefdf2 100%); border-radius: 14px; color: #422006; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
-.qll-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #ca8a04; }
-.qll-progress { font-size:0.9rem; color: #ca8a04; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
-.qll-score { font-size:1.05rem; font-weight:800; color: #92400e; font-family: 'JetBrains Mono', ui-monospace, monospace; }
-.qll-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #713f12; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
+.qll-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #fdf6e3 0%, #f0e6c8 100%); border-radius: 14px; color: #3a2a14; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.qll-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #c8a96a; }
+.qll-progress { font-size:0.9rem; color: #8a7244; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+.qll-score { font-size:1.05rem; font-weight:800; color: #7c2d12; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.qll-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #5b3a1a; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
 .qll-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
-.qll-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #ca8a04; border-radius:10px; background: #fefdf2; cursor:pointer; font-size:1rem; text-align:left; color: #422006; font-family: 'Inter', inherit; transition: all 0.15s; }
-.qll-choice:hover:not(:disabled) { border-color: #92400e; background: #fefce8; transform: translateY(-1px); }
+.qll-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #c8a96a; border-radius:10px; background: #fff9e8; cursor:pointer; font-size:1rem; text-align:left; color: #3a2a14; font-family: 'Inter', inherit; transition: all 0.15s; }
+.qll-choice:hover:not(:disabled) { border-color: #7c2d12; background: #fdf6e3; transform: translateY(-1px); }
 .qll-choice:disabled { cursor: default; opacity: 0.7; }
-.qll-choice.selected { border-color: #92400e; background: #fefce8; box-shadow: inset 0 0 0 1px #92400e; }
-.qll-choice-letter { font-weight:900; font-size:1.05rem; color: #92400e; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.qll-choice.selected { border-color: #7c2d12; background: #fdf6e3; box-shadow: inset 0 0 0 1px #7c2d12; }
+.qll-choice-letter { font-weight:900; font-size:1.05rem; color: #7c2d12; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .qll-actions { display:flex; gap:12px; }
 .qll-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; font-family: 'Inter', inherit; transition: opacity 0.15s; }
-.qll-btn.next { background: #92400e; }
+.qll-btn.next { background: #7c2d12; }
 .qll-btn:hover { opacity: 0.85; }
-.qll-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #fefce8; color: #713f12; border-left: 3px solid #92400e; }
-.qll-done { text-align:center; padding:32px 24px; background: #fefce8; border-radius:12px; width: 100%; border: 1.5px solid #ca8a04; }
-.qll-done h2 { margin:0 0 12px; color: #713f12; font-family: 'Inter', inherit; }
-.qll-final { font-size: 2rem; font-weight: 900; color: #92400e; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.qll-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #fff9e8; color: #b45309; border-left: 3px solid #7c2d12; }
+.qll-done { text-align:center; padding:32px 24px; background: #fff9e8; border-radius:12px; width: 100%; border: 1.5px solid #c8a96a; }
+.qll-done h2 { margin:0 0 12px; color: #b45309; font-family: 'Inter', inherit; }
+.qll-final { font-size: 2rem; font-weight: 900; color: #7c2d12; font-family: 'JetBrains Mono', ui-monospace, monospace; }

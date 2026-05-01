@@ -1,19 +1,19 @@
-.ftd-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #1a0820 0%, #2a0e3a 100%); border-radius: 14px; color: #fce8ff; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
-.ftd-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #5b1769; }
-.ftd-progress { font-size:0.9rem; color: #5b1769; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
-.ftd-score { font-size:1.05rem; font-weight:800; color: #f0abfc; font-family: 'JetBrains Mono', ui-monospace, monospace; }
-.ftd-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #e879f9; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
+.ftd-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #1a0612 0%, #2c0a1f 100%); border-radius: 14px; color: #fce7f3; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.ftd-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #7c1d4f; }
+.ftd-progress { font-size:0.9rem; color: #c084a0; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+.ftd-score { font-size:1.05rem; font-weight:800; color: #facc15; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.ftd-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #f9a8d4; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
 .ftd-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
-.ftd-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #5b1769; border-radius:10px; background: #2a0e3a; cursor:pointer; font-size:1rem; text-align:left; color: #fce8ff; font-family: 'Inter', inherit; transition: all 0.15s; }
-.ftd-choice:hover:not(:disabled) { border-color: #f0abfc; background: #1a0820; transform: translateY(-1px); }
+.ftd-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #7c1d4f; border-radius:10px; background: #21081a; cursor:pointer; font-size:1rem; text-align:left; color: #fce7f3; font-family: 'Inter', inherit; transition: all 0.15s; }
+.ftd-choice:hover:not(:disabled) { border-color: #facc15; background: #1a0612; transform: translateY(-1px); }
 .ftd-choice:disabled { cursor: default; opacity: 0.7; }
-.ftd-choice.selected { border-color: #f0abfc; background: #1a0820; box-shadow: inset 0 0 0 1px #f0abfc; }
-.ftd-choice-letter { font-weight:900; font-size:1.05rem; color: #f0abfc; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.ftd-choice.selected { border-color: #facc15; background: #1a0612; box-shadow: inset 0 0 0 1px #facc15; }
+.ftd-choice-letter { font-weight:900; font-size:1.05rem; color: #facc15; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .ftd-actions { display:flex; gap:12px; }
 .ftd-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; font-family: 'Inter', inherit; transition: opacity 0.15s; }
-.ftd-btn.next { background: #f0abfc; }
+.ftd-btn.next { background: #facc15; }
 .ftd-btn:hover { opacity: 0.85; }
-.ftd-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #1a0820; color: #e879f9; border-left: 3px solid #f0abfc; }
-.ftd-done { text-align:center; padding:32px 24px; background: #1a0820; border-radius:12px; width: 100%; border: 1.5px solid #5b1769; }
-.ftd-done h2 { margin:0 0 12px; color: #e879f9; font-family: 'Inter', inherit; }
-.ftd-final { font-size: 2rem; font-weight: 900; color: #f0abfc; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.ftd-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #21081a; color: #fde047; border-left: 3px solid #facc15; }
+.ftd-done { text-align:center; padding:32px 24px; background: #21081a; border-radius:12px; width: 100%; border: 1.5px solid #7c1d4f; }
+.ftd-done h2 { margin:0 0 12px; color: #fde047; font-family: 'Inter', inherit; }
+.ftd-final { font-size: 2rem; font-weight: 900; color: #facc15; font-family: 'JetBrains Mono', ui-monospace, monospace; }

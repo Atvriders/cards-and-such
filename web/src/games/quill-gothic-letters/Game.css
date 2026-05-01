@@ -1,19 +1,19 @@
-.qlg-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #1a0a0a 0%, #2a1010 100%); border-radius: 14px; color: #fef2f2; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
-.qlg-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #4a1212; }
-.qlg-progress { font-size:0.9rem; color: #4a1212; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+.qlg-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #0e0a14 0%, #1c1226 100%); border-radius: 14px; color: #e9d5ff; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.qlg-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #3a1f44; }
+.qlg-progress { font-size:0.9rem; color: #8b6ba1; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
 .qlg-score { font-size:1.05rem; font-weight:800; color: #b91c1c; font-family: 'JetBrains Mono', ui-monospace, monospace; }
-.qlg-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #f87171; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
+.qlg-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #d8b4fe; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
 .qlg-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
-.qlg-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #4a1212; border-radius:10px; background: #2a1010; cursor:pointer; font-size:1rem; text-align:left; color: #fef2f2; font-family: 'Inter', inherit; transition: all 0.15s; }
-.qlg-choice:hover:not(:disabled) { border-color: #b91c1c; background: #1a0a0a; transform: translateY(-1px); }
+.qlg-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #3a1f44; border-radius:10px; background: #160e1c; cursor:pointer; font-size:1rem; text-align:left; color: #e9d5ff; font-family: 'Inter', inherit; transition: all 0.15s; }
+.qlg-choice:hover:not(:disabled) { border-color: #b91c1c; background: #0e0a14; transform: translateY(-1px); }
 .qlg-choice:disabled { cursor: default; opacity: 0.7; }
-.qlg-choice.selected { border-color: #b91c1c; background: #1a0a0a; box-shadow: inset 0 0 0 1px #b91c1c; }
+.qlg-choice.selected { border-color: #b91c1c; background: #0e0a14; box-shadow: inset 0 0 0 1px #b91c1c; }
 .qlg-choice-letter { font-weight:900; font-size:1.05rem; color: #b91c1c; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .qlg-actions { display:flex; gap:12px; }
 .qlg-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; font-family: 'Inter', inherit; transition: opacity 0.15s; }
 .qlg-btn.next { background: #b91c1c; }
 .qlg-btn:hover { opacity: 0.85; }
-.qlg-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #1a0a0a; color: #f87171; border-left: 3px solid #b91c1c; }
-.qlg-done { text-align:center; padding:32px 24px; background: #1a0a0a; border-radius:12px; width: 100%; border: 1.5px solid #4a1212; }
-.qlg-done h2 { margin:0 0 12px; color: #f87171; font-family: 'Inter', inherit; }
+.qlg-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #160e1c; color: #ef4444; border-left: 3px solid #b91c1c; }
+.qlg-done { text-align:center; padding:32px 24px; background: #160e1c; border-radius:12px; width: 100%; border: 1.5px solid #3a1f44; }
+.qlg-done h2 { margin:0 0 12px; color: #ef4444; font-family: 'Inter', inherit; }
 .qlg-final { font-size: 2rem; font-weight: 900; color: #b91c1c; font-family: 'JetBrains Mono', ui-monospace, monospace; }

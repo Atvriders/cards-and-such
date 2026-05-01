@@ -7,7 +7,7 @@ const LABELS = ["A", "B", "C", "D"];
 export function AloneAmongStarsCardGame({ state, dispatch, onGameOver }: GameProps<AloneAmongStarsCardState, AloneAmongStarsCardSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="aasc-wrap"><div className="aasc-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#8e44ad" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="aasc-wrap"><div className="aasc-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#34d399" }}>{state.score} pts</p></div></div>;
   const p = state.prompts[state.index]!;
   const isResult = state.phase === "result";
   return (
