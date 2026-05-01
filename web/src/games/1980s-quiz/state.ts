@@ -5,152 +5,302 @@ export interface Nineteen80sQuizState { questions: QuizQuestion[]; currentIndex:
 export type Nineteen80sQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "MTV launched in what year?",
+    "question": "Which Berlin landmark fell on November 9, 1989?",
     "choices": [
-      "1979",
-      "1981",
-      "1983",
-      "1985"
+      "Brandenburg Gate",
+      "Berlin Wall",
+      "Checkpoint Charlie",
+      "Reichstag"
     ],
     "correct": 1
   },
   {
     "question": "Who was U.S. President for most of the 1980s?",
     "choices": [
-      "Carter",
-      "Reagan",
-      "Bush Sr.",
-      "Clinton"
+      "Jimmy Carter",
+      "Ronald Reagan",
+      "George H.W. Bush",
+      "Bill Clinton"
     ],
     "correct": 1
   },
   {
-    "question": "Michael Jackson's 1982 album was?",
+    "question": "Which space shuttle exploded shortly after launch in January 1986?",
     "choices": [
+      "Columbia",
+      "Challenger",
+      "Discovery",
+      "Atlantis"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 1986 nuclear disaster occurred at which Soviet plant?",
+    "choices": [
+      "Three Mile Island",
+      "Fukushima",
+      "Chernobyl",
+      "Mayak"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Michael Jackson's best-selling 1982 album was titled?",
+    "choices": [
+      "Bad",
       "Off the Wall",
       "Thriller",
-      "Bad",
       "Dangerous"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "The Berlin Wall fell in?",
+    "question": "Which UK PM led the country through most of the 1980s?",
     "choices": [
-      "1987",
-      "1989",
-      "1991",
-      "1993"
+      "John Major",
+      "Margaret Thatcher",
+      "James Callaghan",
+      "Tony Blair"
     ],
     "correct": 1
   },
   {
-    "question": "Which arcade game featured a yellow circle eating dots?",
+    "question": "Madonna's 1984 hit single about being a virgin was?",
     "choices": [
-      "Galaga",
-      "Pac-Man",
-      "Donkey Kong",
-      "Defender"
+      "Material Girl",
+      "Like a Virgin",
+      "Holiday",
+      "Lucky Star"
     ],
     "correct": 1
   },
   {
-    "question": "Madonna's debut album was released in?",
+    "question": "Which 1985 charity concert was organized by Bob Geldof?",
     "choices": [
-      "1981",
-      "1983",
-      "1985",
-      "1987"
+      "Farm Aid",
+      "Live Aid",
+      "Concert for Bangladesh",
+      "Hands Across America"
     ],
     "correct": 1
   },
   {
-    "question": "Which 1985 film featured a DeLorean time machine?",
+    "question": "Who became Soviet leader in 1985, introducing glasnost?",
     "choices": [
-      "The Terminator",
-      "Back to the Future",
-      "WarGames",
-      "Brazil"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The 1986 disaster at Chernobyl was a?",
-    "choices": [
-      "Earthquake",
-      "Nuclear meltdown",
-      "Plane crash",
-      "Hurricane"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "IBM PC was introduced in?",
-    "choices": [
-      "1979",
-      "1981",
-      "1983",
-      "1985"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which Soviet leader started Perestroika?",
-    "choices": [
-      "Brezhnev",
       "Andropov",
+      "Chernenko",
       "Gorbachev",
       "Yeltsin"
     ],
     "correct": 2
   },
   {
-    "question": "Live Aid concert took place in?",
+    "question": "Which Pixar parent company released the Macintosh in 1984?",
     "choices": [
-      "1983",
-      "1985",
-      "1987",
-      "1989"
+      "IBM",
+      "Apple",
+      "Microsoft",
+      "Commodore"
     ],
     "correct": 1
   },
   {
-    "question": "The Rubik's Cube became a worldwide craze in?",
+    "question": "The 1982 film 'E.T.' was directed by?",
     "choices": [
-      "1979",
-      "1981",
-      "1983",
-      "1985"
+      "George Lucas",
+      "Steven Spielberg",
+      "Ron Howard",
+      "Richard Donner"
     ],
     "correct": 1
   },
   {
-    "question": "Which 1984 film featured Eddie Murphy as Axel Foley?",
+    "question": "Which Falklands War occurred in 1982 between the UK and?",
     "choices": [
-      "48 Hours",
-      "Trading Places",
-      "Beverly Hills Cop",
-      "Coming to America"
+      "Chile",
+      "Brazil",
+      "Argentina",
+      "Uruguay"
     ],
     "correct": 2
   },
   {
-    "question": "Princess Diana married Prince Charles in?",
+    "question": "MTV launched in what year, kicking off the music video era?",
     "choices": [
-      "1979",
+      "1980",
       "1981",
-      "1983",
-      "1985"
+      "1982",
+      "1983"
     ],
     "correct": 1
   },
   {
-    "question": "Which arcade hit had ghosts named Blinky, Pinky, Inky, and Clyde?",
+    "question": "Which 1989 protest at Tiananmen Square ended in violence?",
     "choices": [
-      "Galaga",
-      "Centipede",
-      "Pac-Man",
-      "Frogger"
+      "Anti-war protest",
+      "Pro-democracy protest",
+      "Labor strike",
+      "Religious march"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Prince's 1984 film and album shared what title?",
+    "choices": [
+      "1999",
+      "Purple Rain",
+      "Sign o' the Times",
+      "Parade"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Rubik's Cube became a global craze in which decade?",
+    "choices": [
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1980 John Lennon album was released just before his death?",
+    "choices": [
+      "Imagine",
+      "Double Fantasy",
+      "Mind Games",
+      "Walls and Bridges"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who was the first woman appointed to the U.S. Supreme Court (1981)?",
+    "choices": [
+      "Ruth Bader Ginsburg",
+      "Sandra Day O'Connor",
+      "Sonia Sotomayor",
+      "Elena Kagan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1989 Tim Burton film starred Michael Keaton as a superhero?",
+    "choices": [
+      "Beetlejuice",
+      "Batman",
+      "Superman",
+      "Edward Scissorhands"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "CNN, the first 24-hour news channel, launched in?",
+    "choices": [
+      "1979",
+      "1980",
+      "1981",
+      "1982"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Iran-Contra affair came to light during which presidency?",
+    "choices": [
+      "Carter",
+      "Reagan",
+      "Bush",
+      "Clinton"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1985 'New Coke' company famously reverted within months?",
+    "choices": [
+      "Pepsi",
+      "Coca-Cola",
+      "Dr Pepper",
+      "RC Cola"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which boxer was undisputed heavyweight champion in 1987?",
+    "choices": [
+      "Muhammad Ali",
+      "Mike Tyson",
+      "Larry Holmes",
+      "Evander Holyfield"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who shot John Lennon outside the Dakota apartments in 1980?",
+    "choices": [
+      "John Hinckley Jr.",
+      "Mark David Chapman",
+      "Sirhan Sirhan",
+      "Lee Harvey Oswald"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Bhopal disaster of 1984 occurred in which country?",
+    "choices": [
+      "Pakistan",
+      "Bangladesh",
+      "India",
+      "Sri Lanka"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 1989 video game console launched the Game Boy?",
+    "choices": [
+      "Sega Genesis",
+      "Nintendo Game Boy",
+      "Atari Lynx",
+      "TurboGrafx-16"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mikhail Gorbachev's policy of openness was called?",
+    "choices": [
+      "Perestroika",
+      "Glasnost",
+      "Détente",
+      "Solidarity"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1980 horror film by Stanley Kubrick starred Jack Nicholson?",
+    "choices": [
+      "The Exorcist",
+      "The Shining",
+      "Halloween",
+      "Poltergeist"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Exxon Valdez oil spill struck which U.S. state in 1989?",
+    "choices": [
+      "California",
+      "Alaska",
+      "Louisiana",
+      "Texas"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pac-Man was released in arcades in?",
+    "choices": [
+      "1978",
+      "1979",
+      "1980",
+      "1981"
     ],
     "correct": 2
   }

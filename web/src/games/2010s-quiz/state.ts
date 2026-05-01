@@ -5,152 +5,302 @@ export interface TwentyTensQuizState { questions: QuizQuestion[]; currentIndex: 
 export type TwentyTensQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Instagram was founded in?",
+    "question": "Who was elected U.S. President in 2016?",
     "choices": [
-      "2008",
+      "Hillary Clinton",
+      "Donald Trump",
+      "Bernie Sanders",
+      "Ted Cruz"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2011 al-Qaeda leader was killed by US Navy SEALs?",
+    "choices": [
+      "Ayman al-Zawahiri",
+      "Osama bin Laden",
+      "Abu Bakr al-Baghdadi",
+      "Anwar al-Awlaki"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which UK referendum result in 2016 led to leaving the EU?",
+    "choices": [
+      "Scexit",
+      "Brexit",
+      "Frexit",
+      "Grexit"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Instagram was launched in?",
+    "choices": [
+      "2009",
       "2010",
-      "2012",
-      "2014"
+      "2011",
+      "2012"
     ],
     "correct": 1
   },
   {
-    "question": "Which 2012 film began Marvel's team-up era?",
+    "question": "Which 2012 Disney company acquired Lucasfilm?",
     "choices": [
-      "Iron Man",
-      "Thor",
-      "The Avengers",
-      "Captain America"
+      "Pixar",
+      "Marvel",
+      "Disney",
+      "Fox"
     ],
     "correct": 2
   },
   {
-    "question": "Bitcoin was created (whitepaper) by?",
+    "question": "The Arab Spring uprisings began in late 2010 in which country?",
     "choices": [
-      "Vitalik Buterin",
-      "Satoshi Nakamoto",
-      "Charlie Lee",
-      "Roger Ver"
+      "Egypt",
+      "Tunisia",
+      "Libya",
+      "Syria"
     ],
     "correct": 1
   },
   {
-    "question": "Trump was elected President in?",
+    "question": "Which 2011 royal wedding featured Prince William and?",
     "choices": [
-      "2014",
-      "2016",
-      "2018",
-      "2020"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "TikTok launched globally in?",
-    "choices": [
-      "2014",
-      "2016",
-      "2018",
-      "2020"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which streaming series featured a girl named Eleven?",
-    "choices": [
-      "Stranger Things",
-      "The OA",
-      "Black Mirror",
-      "Dark"
+      "Kate Middleton",
+      "Meghan Markle",
+      "Pippa Middleton",
+      "Eugenie"
     ],
     "correct": 0
   },
   {
-    "question": "Brexit referendum took place in?",
+    "question": "Which 2015 climate accord was signed in Paris?",
     "choices": [
-      "2014",
-      "2016",
-      "2018",
-      "2020"
+      "Kyoto Protocol",
+      "Paris Agreement",
+      "Copenhagen Accord",
+      "Doha Amendment"
     ],
     "correct": 1
   },
   {
-    "question": "Which Marvel film concluded the Infinity Saga in 2019?",
+    "question": "Which 2010 oil spill polluted the Gulf of Mexico?",
     "choices": [
-      "Avengers Infinity War",
-      "Avengers Endgame",
-      "Far From Home",
-      "Black Widow"
+      "Exxon Valdez",
+      "Deepwater Horizon",
+      "Prestige",
+      "Sea Empress"
     ],
     "correct": 1
   },
   {
-    "question": "Greta Thunberg is famous for activism on?",
+    "question": "Pope Benedict XVI was succeeded in 2013 by?",
     "choices": [
-      "Civil rights",
-      "Climate change",
-      "Gun control",
-      "Animal rights"
+      "John Paul III",
+      "Francis",
+      "Leo XIV",
+      "Pius XIII"
     ],
     "correct": 1
   },
   {
-    "question": "Which K-pop group's 'Gangnam Style' went viral in 2012?",
+    "question": "Which 2010 Apple device popularized tablets?",
     "choices": [
-      "BTS",
-      "Psy",
-      "Big Bang",
-      "EXO"
+      "iPhone 4",
+      "iPad",
+      "Apple Watch",
+      "MacBook Air"
     ],
     "correct": 1
   },
   {
-    "question": "Which 2017 horror film by Jordan Peele won an Oscar?",
+    "question": "North Korea's leader since 2011 is?",
     "choices": [
-      "Us",
-      "Get Out",
-      "Hereditary",
-      "It"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Hubble Space Telescope's successor is the?",
-    "choices": [
-      "Spitzer",
-      "Kepler",
-      "James Webb",
-      "Chandra"
+      "Kim Il-sung",
+      "Kim Jong-il",
+      "Kim Jong-un",
+      "Kim Yo-jong"
     ],
     "correct": 2
   },
   {
-    "question": "Which 2014 ALS fundraising challenge went viral?",
+    "question": "Which 2014 World Cup did Germany win in Brazil?",
     "choices": [
-      "Mannequin Challenge",
-      "Ice Bucket Challenge",
+      "FIFA World Cup",
+      "Copa America",
+      "Euro",
+      "Confederations Cup"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Snapchat launched in?",
+    "choices": [
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2012 American TV show featured a meth-cooking chemistry teacher (finale year)?",
+    "choices": [
+      "Mad Men",
+      "Breaking Bad",
+      "The Sopranos",
+      "Better Call Saul"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2017 movement against sexual harassment went viral on social media?",
+    "choices": [
+      "#TimesUp",
+      "#MeToo",
+      "#BlackLivesMatter",
+      "#Resist"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2015 Cuban-U.S. event restored diplomatic relations?",
+    "choices": [
+      "Trade embargo lift",
+      "Diplomatic restoration",
+      "Bay of Pigs apology",
+      "Castro visit"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2019 Notre-Dame event in Paris shocked the world?",
+    "choices": [
+      "Bombing",
+      "Fire",
+      "Earthquake",
+      "Flood"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2016 Brazilian city hosted the Summer Olympics?",
+    "choices": [
+      "São Paulo",
+      "Rio de Janeiro",
+      "Brasília",
+      "Salvador"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2014 viral fundraiser involved dumping ice water?",
+    "choices": [
+      "ALS Ice Bucket Challenge",
       "Cinnamon Challenge",
-      "Kiki Challenge"
+      "Mannequin Challenge",
+      "Tide Pod Challenge"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which 2017 solar event swept across the United States?",
+    "choices": [
+      "Total solar eclipse",
+      "Annular eclipse",
+      "Lunar eclipse",
+      "Aurora storm"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Bitcoin was created by the pseudonymous?",
+    "choices": [
+      "Vitalik Buterin",
+      "Satoshi Nakamoto",
+      "Charlie Lee",
+      "Hal Finney"
     ],
     "correct": 1
   },
   {
-    "question": "Which app launched in 2011 with disappearing photos?",
+    "question": "Which 2019 finale concluded HBO's Game of Thrones?",
     "choices": [
-      "Instagram",
-      "Snapchat",
-      "WhatsApp",
-      "Vine"
+      "Season 7",
+      "Season 8",
+      "Season 9",
+      "Season 10"
     ],
     "correct": 1
   },
   {
-    "question": "The Black Panther film starred?",
+    "question": "Which 2010s app, founded 2009, popularized ride-sharing?",
     "choices": [
-      "Will Smith",
-      "Chadwick Boseman",
-      "Idris Elba",
-      "Michael B. Jordan"
+      "Lyft",
+      "Uber",
+      "Grab",
+      "Bolt"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Higgs boson was confirmed at CERN in?",
+    "choices": [
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 2019 climate activist addressed the UN at age 16?",
+    "choices": [
+      "Greta Thunberg",
+      "Malala Yousafzai",
+      "Vanessa Nakate",
+      "Autumn Peltier"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which 2014 Russian annexation drew international sanctions?",
+    "choices": [
+      "Crimea",
+      "Donbas",
+      "Abkhazia",
+      "South Ossetia"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which 2018 royal wedding featured Prince Harry and?",
+    "choices": [
+      "Meghan Markle",
+      "Kate Middleton",
+      "Pippa Middleton",
+      "Eugenie"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Marvel's 'Avengers: Endgame' was released in?",
+    "choices": [
+      "2017",
+      "2018",
+      "2019",
+      "2020"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 2013 NSA leaker fled to Russia?",
+    "choices": [
+      "Julian Assange",
+      "Edward Snowden",
+      "Chelsea Manning",
+      "Reality Winner"
     ],
     "correct": 1
   }

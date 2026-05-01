@@ -5,54 +5,64 @@ export interface Nineteen70sQuizState { questions: QuizQuestion[]; currentIndex:
 export type Nineteen70sQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Which scandal led to Nixon's resignation?",
+    "question": "Which scandal led to U.S. President Nixon's resignation in 1974?",
     "choices": [
       "Iran-Contra",
       "Watergate",
       "Whitewater",
-      "Lewinsky"
+      "Teapot Dome"
     ],
     "correct": 1
   },
   {
-    "question": "When did Nixon resign as President?",
-    "choices": [
-      "1972",
-      "1974",
-      "1976",
-      "1978"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The original Star Wars film was released in?",
-    "choices": [
-      "1975",
-      "1977",
-      "1979",
-      "1981"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which 1977 film helped launch the disco craze?",
-    "choices": [
-      "Grease",
-      "Saturday Night Fever",
-      "Rocky",
-      "Annie Hall"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Vietnam War ended in?",
+    "question": "In what year did Saigon fall, ending the Vietnam War?",
     "choices": [
       "1973",
+      "1974",
       "1975",
-      "1977",
-      "1979"
+      "1976"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 1977 George Lucas film became a cultural phenomenon?",
+    "choices": [
+      "Close Encounters of the Third Kind",
+      "Star Wars",
+      "Saturday Night Fever",
+      "Rocky"
     ],
     "correct": 1
+  },
+  {
+    "question": "Who became the first non-Italian Pope in over 400 years in 1978?",
+    "choices": [
+      "John Paul I",
+      "John Paul II",
+      "Paul VI",
+      "Benedict XVI"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which British monarch celebrated her Silver Jubilee in 1977?",
+    "choices": [
+      "Queen Mary",
+      "Queen Elizabeth II",
+      "Princess Margaret",
+      "Queen Victoria II"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Margaret Thatcher became UK Prime Minister in what year?",
+    "choices": [
+      "1977",
+      "1978",
+      "1979",
+      "1980"
+    ],
+    "correct": 2
   },
   {
     "question": "Which band released 'Bohemian Rhapsody' in 1975?",
@@ -65,37 +75,27 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "The first Apple computer, Apple I, debuted in?",
+    "question": "The Iran hostage crisis began in November of which year?",
     "choices": [
-      "1974",
-      "1976",
+      "1977",
       "1978",
+      "1979",
       "1980"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "Pol Pot ruled which country in the 1970s?",
+    "question": "What 1979 nuclear accident occurred in Pennsylvania?",
     "choices": [
-      "Vietnam",
-      "Cambodia",
-      "Laos",
-      "Thailand"
+      "Chernobyl",
+      "Three Mile Island",
+      "Fukushima",
+      "Hanford"
     ],
     "correct": 1
   },
   {
-    "question": "Three Mile Island was a 1979 incident involving?",
-    "choices": [
-      "Plane crash",
-      "Nuclear accident",
-      "Oil spill",
-      "Earthquake"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which 1972 game became a video game pioneer?",
+    "question": "Which 1972 video game by Atari was a major arcade hit?",
     "choices": [
       "Asteroids",
       "Space Invaders",
@@ -105,17 +105,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Margaret Thatcher became UK PM in?",
+    "question": "Apple Computer was founded in what year?",
     "choices": [
+      "1974",
       "1975",
-      "1977",
-      "1979",
-      "1981"
+      "1976",
+      "1977"
     ],
     "correct": 2
   },
   {
-    "question": "Which 1976 boxing film won Best Picture Oscar?",
+    "question": "Which 1976 film starring Sylvester Stallone won Best Picture?",
     "choices": [
       "Rocky",
       "Network",
@@ -125,17 +125,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "The Iran Hostage Crisis began in?",
-    "choices": [
-      "1977",
-      "1979",
-      "1981",
-      "1983"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Punk band Sex Pistols' lead singer was?",
+    "question": "Who was the lead singer of the Sex Pistols?",
     "choices": [
       "Sid Vicious",
       "Johnny Rotten",
@@ -145,12 +135,172 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Steve Jobs and Steve Wozniak founded Apple in?",
+    "question": "Pol Pot's Khmer Rouge ruled which country in the late 1970s?",
+    "choices": [
+      "Vietnam",
+      "Cambodia",
+      "Laos",
+      "Thailand"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which Saturday Night Fever star helped define disco era fashion?",
+    "choices": [
+      "John Travolta",
+      "Robert De Niro",
+      "Al Pacino",
+      "Burt Reynolds"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The first test-tube baby, Louise Brown, was born in what year?",
+    "choices": [
+      "1976",
+      "1977",
+      "1978",
+      "1979"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who succeeded Nixon as U.S. President in 1974?",
+    "choices": [
+      "Jimmy Carter",
+      "Gerald Ford",
+      "Spiro Agnew",
+      "Ronald Reagan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1975 Steven Spielberg film created the summer blockbuster?",
+    "choices": [
+      "Close Encounters",
+      "Jaws",
+      "1941",
+      "The Sugarland Express"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "OPEC's 1973 oil embargo was triggered by which conflict?",
+    "choices": [
+      "Six-Day War",
+      "Yom Kippur War",
+      "Iran-Iraq War",
+      "Suez Crisis"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Elvis Presley died in what year?",
+    "choices": [
+      "1975",
+      "1976",
+      "1977",
+      "1978"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which Swedish pop group won Eurovision in 1974 with 'Waterloo'?",
+    "choices": [
+      "ABBA",
+      "Roxette",
+      "Ace of Base",
+      "A-ha"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who painted himself onto the cover of his 1977 album 'Low'?",
+    "choices": [
+      "David Bowie",
+      "Iggy Pop",
+      "Lou Reed",
+      "Brian Eno"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Camp David Accords were signed in 1978 between Israel and?",
+    "choices": [
+      "Jordan",
+      "Egypt",
+      "Syria",
+      "Lebanon"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1972 Francis Ford Coppola film won Best Picture?",
+    "choices": [
+      "Chinatown",
+      "The Godfather",
+      "The Conversation",
+      "Apocalypse Now"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mao Zedong died in what year?",
     "choices": [
       "1974",
+      "1975",
       "1976",
+      "1977"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 1979 Soviet invasion began the Cold War's last major proxy conflict?",
+    "choices": [
+      "Hungary",
+      "Czechoslovakia",
+      "Afghanistan",
+      "Poland"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Pink Floyd's 1973 landmark concept album was titled?",
+    "choices": [
+      "Animals",
+      "Wish You Were Here",
+      "The Dark Side of the Moon",
+      "The Wall"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which Olympics were marred by a Palestinian terrorist attack in 1972?",
+    "choices": [
+      "Mexico City",
+      "Munich",
+      "Montreal",
+      "Moscow"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Sony Walkman portable cassette player launched in?",
+    "choices": [
+      "1977",
       "1978",
+      "1979",
       "1980"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which Beatles member was assassinated in December 1980 (just after the decade)?",
+    "choices": [
+      "Paul McCartney",
+      "John Lennon",
+      "George Harrison",
+      "Ringo Starr"
     ],
     "correct": 1
   }
