@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Authors Library Mahogany */
+.au-shed, .au-shed.dm-wrap {
+  background: linear-gradient(180deg,#3b1f0e 0%,#7c4a25 50%,#1c0e05 100%) !important;
+  color: #fef3c7;
+  --shed-theme-accent: #fde68a;
+  --shed-theme-accent2: #fbbf24;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #3b1f0e;
+  --shed-theme-btn-bg: #fbbf24;
+  --shed-theme-btn-text: #3b1f0e;
+  --shed-theme-text: #fef3c7;
+}
+.au-shed .dm-info,
+.au-shed .dm-score,
+.au-shed .dm-result,
+.au-shed .dm-final,
+.au-shed .dm-done h2,
+.au-shed .au-shed-info,
+.au-shed .au-shed-score,
+.au-shed .au-shed-result,
+.au-shed .au-shed-final,
+.au-shed .au-shed-done h2,
+.au-shed.au-shed-wrap .au-shed-info,
+.au-shed.au-shed-wrap .au-shed-score,
+.au-shed.au-shed-wrap .au-shed-result,
+.au-shed.au-shed-wrap .au-shed-final,
+.au-shed.au-shed-wrap .au-shed-done h2 {
+  color: #fef3c7;
+}
+.au-shed .dm-card,
+.au-shed .au-shed-card {
+  background: #fffbeb;
+  color: #3b1f0e;
+  border-color: #fbbf24;
+}
+.au-shed .dm-btn,
+.au-shed .au-shed-btn {
+  background: #fbbf24 !important;
+  color: #3b1f0e !important;
+  border-color: #fde68a !important;
+  box-shadow: 0 0 0 1px #fbbf24 inset, 0 4px 12px -4px #fbbf2466;
+}
+.au-shed .dm-btn:hover:not(:disabled),
+.au-shed .au-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.au-shed .dm-btn.alt,
+.au-shed .au-shed-btn.alt {
+  background: #fbbf24 !important;
+  color: #fffbeb !important;
+}
+.au-shed .dm-btn:focus-visible,
+.au-shed .au-shed-btn:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

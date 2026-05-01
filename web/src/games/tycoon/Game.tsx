@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function TycoonGame({ state, dispatch, onGameOver }: GameProps<TycoonState, TycoonSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="tycoon-wrap"><div className="tycoon-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="tycoon-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="tycoon-wrap ty-shed"><div className="tycoon-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="tycoon-final">{state.score} pts</div></div></div>;
   return (
-    <div className="tycoon-wrap">
+    <div className="tycoon-wrap ty-shed">
       <div className="tycoon-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="tycoon-score">{state.score} pts</div>
       <div className="tycoon-info">You: {state.you} cards · CPU: {state.cpu} cards</div>

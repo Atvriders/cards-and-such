@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Wall Street Money Green */
+.capsh-shed, .capsh-shed.dm-wrap {
+  background: linear-gradient(180deg,#022c22 0%,#065f46 55%,#011a14 100%) !important;
+  color: #d1fae5;
+  --shed-theme-accent: #fde68a;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #f0fdf4;
+  --shed-theme-card-text: #064e3b;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #022c22;
+  --shed-theme-text: #d1fae5;
+}
+.capsh-shed .dm-info,
+.capsh-shed .dm-score,
+.capsh-shed .dm-result,
+.capsh-shed .dm-final,
+.capsh-shed .dm-done h2,
+.capsh-shed .capsh-shed-info,
+.capsh-shed .capsh-shed-score,
+.capsh-shed .capsh-shed-result,
+.capsh-shed .capsh-shed-final,
+.capsh-shed .capsh-shed-done h2,
+.capsh-shed.capsh-shed-wrap .capsh-shed-info,
+.capsh-shed.capsh-shed-wrap .capsh-shed-score,
+.capsh-shed.capsh-shed-wrap .capsh-shed-result,
+.capsh-shed.capsh-shed-wrap .capsh-shed-final,
+.capsh-shed.capsh-shed-wrap .capsh-shed-done h2 {
+  color: #d1fae5;
+}
+.capsh-shed .dm-card,
+.capsh-shed .capsh-shed-card {
+  background: #f0fdf4;
+  color: #064e3b;
+  border-color: #facc15;
+}
+.capsh-shed .dm-btn,
+.capsh-shed .capsh-shed-btn {
+  background: #facc15 !important;
+  color: #022c22 !important;
+  border-color: #fde68a !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.capsh-shed .dm-btn:hover:not(:disabled),
+.capsh-shed .capsh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.capsh-shed .dm-btn.alt,
+.capsh-shed .capsh-shed-btn.alt {
+  background: #facc15 !important;
+  color: #f0fdf4 !important;
+}
+.capsh-shed .dm-btn:focus-visible,
+.capsh-shed .capsh-shed-btn:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

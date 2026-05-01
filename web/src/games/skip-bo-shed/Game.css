@@ -1,2 +1,62 @@
 /* Modern shedding engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Skip-Bo Beach Coral */
+.sbsh-shed, .sbsh-shed.dm-wrap {
+  background: linear-gradient(180deg,#7c2d12 0%,#ea580c 50%,#431407 100%) !important;
+  color: #fff7ed;
+  --shed-theme-accent: #fef3c7;
+  --shed-theme-accent2: #fcd34d;
+  --shed-theme-card-bg: #fff7ed;
+  --shed-theme-card-text: #7c2d12;
+  --shed-theme-btn-bg: #fcd34d;
+  --shed-theme-btn-text: #7c2d12;
+  --shed-theme-text: #fff7ed;
+}
+.sbsh-shed .dm-info,
+.sbsh-shed .dm-score,
+.sbsh-shed .dm-result,
+.sbsh-shed .dm-final,
+.sbsh-shed .dm-done h2,
+.sbsh-shed .sbsh-shed-info,
+.sbsh-shed .sbsh-shed-score,
+.sbsh-shed .sbsh-shed-result,
+.sbsh-shed .sbsh-shed-final,
+.sbsh-shed .sbsh-shed-done h2,
+.sbsh-shed.sbsh-shed-wrap .sbsh-shed-info,
+.sbsh-shed.sbsh-shed-wrap .sbsh-shed-score,
+.sbsh-shed.sbsh-shed-wrap .sbsh-shed-result,
+.sbsh-shed.sbsh-shed-wrap .sbsh-shed-final,
+.sbsh-shed.sbsh-shed-wrap .sbsh-shed-done h2 {
+  color: #fff7ed;
+}
+.sbsh-shed .dm-card,
+.sbsh-shed .sbsh-shed-card {
+  background: #fff7ed;
+  color: #7c2d12;
+  border-color: #fcd34d;
+}
+.sbsh-shed .dm-btn,
+.sbsh-shed .sbsh-shed-btn {
+  background: #fcd34d !important;
+  color: #7c2d12 !important;
+  border-color: #fef3c7 !important;
+  box-shadow: 0 0 0 1px #fcd34d inset, 0 4px 12px -4px #fcd34d66;
+}
+.sbsh-shed .dm-btn:hover:not(:disabled),
+.sbsh-shed .sbsh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.sbsh-shed .dm-btn.alt,
+.sbsh-shed .sbsh-shed-btn.alt {
+  background: #fcd34d !important;
+  color: #fff7ed !important;
+}
+.sbsh-shed .dm-btn:focus-visible,
+.sbsh-shed .sbsh-shed-btn:focus-visible {
+  outline: 2px solid #fef3c7;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

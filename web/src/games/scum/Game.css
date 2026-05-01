@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: President Scum Maroon */
+.sc-shed, .sc-shed.dm-wrap {
+  background: linear-gradient(180deg,#3b0a0a 0%,#7e1f3a 50%,#180408 100%) !important;
+  color: #ffe4e6;
+  --shed-theme-accent: #fda4af;
+  --shed-theme-accent2: #f43f5e;
+  --shed-theme-card-bg: #fff1f2;
+  --shed-theme-card-text: #3b0a0a;
+  --shed-theme-btn-bg: #f43f5e;
+  --shed-theme-btn-text: #fff1f2;
+  --shed-theme-text: #ffe4e6;
+}
+.sc-shed .dm-info,
+.sc-shed .dm-score,
+.sc-shed .dm-result,
+.sc-shed .dm-final,
+.sc-shed .dm-done h2,
+.sc-shed .sc-shed-info,
+.sc-shed .sc-shed-score,
+.sc-shed .sc-shed-result,
+.sc-shed .sc-shed-final,
+.sc-shed .sc-shed-done h2,
+.sc-shed.sc-shed-wrap .sc-shed-info,
+.sc-shed.sc-shed-wrap .sc-shed-score,
+.sc-shed.sc-shed-wrap .sc-shed-result,
+.sc-shed.sc-shed-wrap .sc-shed-final,
+.sc-shed.sc-shed-wrap .sc-shed-done h2 {
+  color: #ffe4e6;
+}
+.sc-shed .dm-card,
+.sc-shed .sc-shed-card {
+  background: #fff1f2;
+  color: #3b0a0a;
+  border-color: #f43f5e;
+}
+.sc-shed .dm-btn,
+.sc-shed .sc-shed-btn {
+  background: #f43f5e !important;
+  color: #fff1f2 !important;
+  border-color: #fda4af !important;
+  box-shadow: 0 0 0 1px #f43f5e inset, 0 4px 12px -4px #f43f5e66;
+}
+.sc-shed .dm-btn:hover:not(:disabled),
+.sc-shed .sc-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.sc-shed .dm-btn.alt,
+.sc-shed .sc-shed-btn.alt {
+  background: #f43f5e !important;
+  color: #fff1f2 !important;
+}
+.sc-shed .dm-btn:focus-visible,
+.sc-shed .sc-shed-btn:focus-visible {
+  outline: 2px solid #fda4af;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

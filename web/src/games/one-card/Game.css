@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: One Card Sunset */
+.oc-shed, .oc-shed.dm-wrap {
+  background: linear-gradient(180deg,#7c2d12 0%,#f97316 50%,#431407 100%) !important;
+  color: #fff7ed;
+  --shed-theme-accent: #fef9c3;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fff7ed;
+  --shed-theme-card-text: #7c2d12;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #7c2d12;
+  --shed-theme-text: #fff7ed;
+}
+.oc-shed .dm-info,
+.oc-shed .dm-score,
+.oc-shed .dm-result,
+.oc-shed .dm-final,
+.oc-shed .dm-done h2,
+.oc-shed .oc-shed-info,
+.oc-shed .oc-shed-score,
+.oc-shed .oc-shed-result,
+.oc-shed .oc-shed-final,
+.oc-shed .oc-shed-done h2,
+.oc-shed.oc-shed-wrap .oc-shed-info,
+.oc-shed.oc-shed-wrap .oc-shed-score,
+.oc-shed.oc-shed-wrap .oc-shed-result,
+.oc-shed.oc-shed-wrap .oc-shed-final,
+.oc-shed.oc-shed-wrap .oc-shed-done h2 {
+  color: #fff7ed;
+}
+.oc-shed .dm-card,
+.oc-shed .oc-shed-card {
+  background: #fff7ed;
+  color: #7c2d12;
+  border-color: #facc15;
+}
+.oc-shed .dm-btn,
+.oc-shed .oc-shed-btn {
+  background: #facc15 !important;
+  color: #7c2d12 !important;
+  border-color: #fef9c3 !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.oc-shed .dm-btn:hover:not(:disabled),
+.oc-shed .oc-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.oc-shed .dm-btn.alt,
+.oc-shed .oc-shed-btn.alt {
+  background: #facc15 !important;
+  color: #fff7ed !important;
+}
+.oc-shed .dm-btn:focus-visible,
+.oc-shed .oc-shed-btn:focus-visible {
+  outline: 2px solid #fef9c3;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

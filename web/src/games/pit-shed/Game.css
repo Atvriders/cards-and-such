@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Pit Trading Floor Frenzy */
+.pit-shed-css, .pit-shed-css.dm-wrap {
+  background: linear-gradient(180deg,#7c2d12 0%,#ea580c 50%,#431407 100%) !important;
+  color: #fff7ed;
+  --shed-theme-accent: #fef9c3;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fff7ed;
+  --shed-theme-card-text: #7c2d12;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #7c2d12;
+  --shed-theme-text: #fff7ed;
+}
+.pit-shed-css .dm-info,
+.pit-shed-css .dm-score,
+.pit-shed-css .dm-result,
+.pit-shed-css .dm-final,
+.pit-shed-css .dm-done h2,
+.pit-shed-css .pit-shed-css-info,
+.pit-shed-css .pit-shed-css-score,
+.pit-shed-css .pit-shed-css-result,
+.pit-shed-css .pit-shed-css-final,
+.pit-shed-css .pit-shed-css-done h2,
+.pit-shed-css.pit-shed-css-wrap .pit-shed-css-info,
+.pit-shed-css.pit-shed-css-wrap .pit-shed-css-score,
+.pit-shed-css.pit-shed-css-wrap .pit-shed-css-result,
+.pit-shed-css.pit-shed-css-wrap .pit-shed-css-final,
+.pit-shed-css.pit-shed-css-wrap .pit-shed-css-done h2 {
+  color: #fff7ed;
+}
+.pit-shed-css .dm-card,
+.pit-shed-css .pit-shed-css-card {
+  background: #fff7ed;
+  color: #7c2d12;
+  border-color: #facc15;
+}
+.pit-shed-css .dm-btn,
+.pit-shed-css .pit-shed-css-btn {
+  background: #facc15 !important;
+  color: #7c2d12 !important;
+  border-color: #fef9c3 !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.pit-shed-css .dm-btn:hover:not(:disabled),
+.pit-shed-css .pit-shed-css-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.pit-shed-css .dm-btn.alt,
+.pit-shed-css .pit-shed-css-btn.alt {
+  background: #facc15 !important;
+  color: #fff7ed !important;
+}
+.pit-shed-css .dm-btn:focus-visible,
+.pit-shed-css .pit-shed-css-btn:focus-visible {
+  outline: 2px solid #fef9c3;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

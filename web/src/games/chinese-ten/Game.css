@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Chinese Ten Lantern Red */
+.ct-shed, .ct-shed.dm-wrap {
+  background: linear-gradient(180deg,#7f1d1d 0%,#b91c1c 50%,#3b0a0a 100%) !important;
+  color: #fef9c3;
+  --shed-theme-accent: #fde047;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #7f1d1d;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #7f1d1d;
+  --shed-theme-text: #fef9c3;
+}
+.ct-shed .dm-info,
+.ct-shed .dm-score,
+.ct-shed .dm-result,
+.ct-shed .dm-final,
+.ct-shed .dm-done h2,
+.ct-shed .ct-shed-info,
+.ct-shed .ct-shed-score,
+.ct-shed .ct-shed-result,
+.ct-shed .ct-shed-final,
+.ct-shed .ct-shed-done h2,
+.ct-shed.ct-shed-wrap .ct-shed-info,
+.ct-shed.ct-shed-wrap .ct-shed-score,
+.ct-shed.ct-shed-wrap .ct-shed-result,
+.ct-shed.ct-shed-wrap .ct-shed-final,
+.ct-shed.ct-shed-wrap .ct-shed-done h2 {
+  color: #fef9c3;
+}
+.ct-shed .dm-card,
+.ct-shed .ct-shed-card {
+  background: #fffbeb;
+  color: #7f1d1d;
+  border-color: #facc15;
+}
+.ct-shed .dm-btn,
+.ct-shed .ct-shed-btn {
+  background: #facc15 !important;
+  color: #7f1d1d !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.ct-shed .dm-btn:hover:not(:disabled),
+.ct-shed .ct-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.ct-shed .dm-btn.alt,
+.ct-shed .ct-shed-btn.alt {
+  background: #facc15 !important;
+  color: #fffbeb !important;
+}
+.ct-shed .dm-btn:focus-visible,
+.ct-shed .ct-shed-btn:focus-visible {
+  outline: 2px solid #fde047;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

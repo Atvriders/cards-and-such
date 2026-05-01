@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Phase Ten Bookworm Cyan */
+.p10sh-shed, .p10sh-shed.dm-wrap {
+  background: linear-gradient(180deg,#082f49 0%,#0369a1 55%,#031420 100%) !important;
+  color: #e0f2fe;
+  --shed-theme-accent: #fde047;
+  --shed-theme-accent2: #fb923c;
+  --shed-theme-card-bg: #f0f9ff;
+  --shed-theme-card-text: #082f49;
+  --shed-theme-btn-bg: #fb923c;
+  --shed-theme-btn-text: #082f49;
+  --shed-theme-text: #e0f2fe;
+}
+.p10sh-shed .dm-info,
+.p10sh-shed .dm-score,
+.p10sh-shed .dm-result,
+.p10sh-shed .dm-final,
+.p10sh-shed .dm-done h2,
+.p10sh-shed .p10sh-shed-info,
+.p10sh-shed .p10sh-shed-score,
+.p10sh-shed .p10sh-shed-result,
+.p10sh-shed .p10sh-shed-final,
+.p10sh-shed .p10sh-shed-done h2,
+.p10sh-shed.p10sh-shed-wrap .p10sh-shed-info,
+.p10sh-shed.p10sh-shed-wrap .p10sh-shed-score,
+.p10sh-shed.p10sh-shed-wrap .p10sh-shed-result,
+.p10sh-shed.p10sh-shed-wrap .p10sh-shed-final,
+.p10sh-shed.p10sh-shed-wrap .p10sh-shed-done h2 {
+  color: #e0f2fe;
+}
+.p10sh-shed .dm-card,
+.p10sh-shed .p10sh-shed-card {
+  background: #f0f9ff;
+  color: #082f49;
+  border-color: #fb923c;
+}
+.p10sh-shed .dm-btn,
+.p10sh-shed .p10sh-shed-btn {
+  background: #fb923c !important;
+  color: #082f49 !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 0 0 1px #fb923c inset, 0 4px 12px -4px #fb923c66;
+}
+.p10sh-shed .dm-btn:hover:not(:disabled),
+.p10sh-shed .p10sh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.p10sh-shed .dm-btn.alt,
+.p10sh-shed .p10sh-shed-btn.alt {
+  background: #fb923c !important;
+  color: #f0f9ff !important;
+}
+.p10sh-shed .dm-btn:focus-visible,
+.p10sh-shed .p10sh-shed-btn:focus-visible {
+  outline: 2px solid #fde047;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

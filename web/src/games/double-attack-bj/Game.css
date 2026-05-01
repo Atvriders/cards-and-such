@@ -1,16 +1,161 @@
-.da-bj-wrap { display:flex; flex-direction:column; gap:0.6rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; align-items: center; }
-.da-bj-title { font-size:1.2rem; font-weight:700; color:#ef5350; }
-.da-bj-info { font-size:0.85rem; opacity:0.75; }
-.da-bj-score { font-size:1.6rem; font-weight:800; color:#ef5350; }
-.da-bj-row { display:flex; gap:0.4rem; flex-wrap:wrap; justify-content:center; }
-.da-bj-card { width:3.2rem; height:4.5rem; border-radius:6px; background:#fff; color:#222; font-weight:700; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 4px rgba(0,0,0,0.4); }
-.da-bj-card.red { color:#c62828; }
-.da-bj-card.black { color:#222; }
-.da-bj-card.back { background: repeating-linear-gradient(45deg, #ef5350 0 4px, #112 4px 8px); color:#fff; }
-.da-bj-actions { display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; }
-.da-bj-btn { background:#ef5350; color:#000; padding:0.5rem 1rem; border:none; border-radius:6px; font-weight:700; cursor:pointer; }
-.da-bj-btn:hover { filter: brightness(1.15); }
-.da-bj-btn.alt { background:#444; color:#fff; }
-.da-bj-result { font-size:1rem; font-weight:600; padding:0.5rem 1rem; background: rgba(0,0,0,0.3); border-radius: 6px; }
-.da-bj-done { text-align:center; padding:1.5rem; background: rgba(0,0,0,0.4); border-radius:8px; border:2px solid #ef5350; }
-.da-bj-final { font-size:2rem; font-weight:900; color:#ef5350; }
+/*
+ * Crimson Double Attack
+ * Unique class prefix: .da-bj-*
+ * Themed palette generated for distinctive per-game visual identity.
+ */
+
+.da-bj-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.1rem 1rem 1.4rem;
+  min-height: 100%;
+  align-items: center;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #fff0f1;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(ellipse at 50% 110%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, #1c0407 0%, #06010a 100%);
+  position: relative;
+  isolation: isolate;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 2px #ffb84d55 inset,
+    0 0 32px -10px rgba(255,77,87,0.5) inset,
+    0 18px 40px -22px rgba(0,0,0,0.7);
+}
+.da-bj-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+.da-bj-wrap > * { position: relative; z-index: 1; }
+
+.da-bj-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ff4d57;
+  text-shadow: 0 0 14px rgba(255,77,87,0.5);
+}
+.da-bj-info {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #d8a4a8;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+  border: 1px solid #ffb84d40;
+}
+.da-bj-score {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #ff4d57;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(255,77,87,0.5);
+}
+
+.da-bj-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.da-bj-card {
+  width: 3.4rem;
+  height: 4.7rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff 0%, #f0eee4 100%);
+  color: #1a1a1a;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.6) inset,
+    0 -1px 0 rgba(0,0,0,0.15) inset,
+    0 4px 10px -2px rgba(0,0,0,0.55),
+    0 0 0 1px #ffb84d55;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+.da-bj-card.red { color: #b71c1c; }
+.da-bj-card.black { color: #1a1a1a; }
+.da-bj-card.back {
+  background:
+    repeating-linear-gradient(45deg, #ff4d57 0 4px, #06010a 4px 8px);
+  color: #fff0f1;
+}
+
+.da-bj-actions {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.da-bj-btn {
+  background: linear-gradient(180deg, #ff4d57 0%, #ffb84d 100%);
+  color: #1a0306;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 -1px 0 rgba(0,0,0,0.25) inset,
+    0 4px 12px -4px rgba(255,77,87,0.5);
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.da-bj-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.da-bj-btn:active { transform: translateY(0); filter: brightness(0.95); }
+.da-bj-btn.alt {
+  background: linear-gradient(180deg, #3a0a10 0%, #06010a 100%);
+  color: #fff0f1;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08) inset,
+    0 -1px 0 rgba(0,0,0,0.4) inset,
+    0 0 0 1px #ffb84d55;
+}
+
+.da-bj-result {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border: 1px solid #ff4d5788;
+  color: #fff0f1;
+  text-align: center;
+}
+
+.da-bj-done {
+  text-align: center;
+  padding: 1.6rem 1.4rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, #ff4d5733, transparent 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border-radius: 12px;
+  border: 2px solid #ff4d57;
+  box-shadow: 0 0 28px -6px rgba(255,77,87,0.5);
+}
+
+.da-bj-final {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #ff4d57;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 22px rgba(255,77,87,0.5);
+}

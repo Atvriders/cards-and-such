@@ -1,2 +1,161 @@
-/* Modern casino-table engine — see web/src/engines/casino/casino.css */
-@import "../../engines/casino/casino.css";
+/*
+ * Obsidian Fortune Crimson
+ * Unique class prefix: .fpg-c-*
+ * Themed palette generated for distinctive per-game visual identity.
+ */
+
+.fpg-c-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.1rem 1rem 1.4rem;
+  min-height: 100%;
+  align-items: center;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #fce6e0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(ellipse at 50% 110%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, #0a0204 0%, #000000 100%);
+  position: relative;
+  isolation: isolate;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 2px #ffd54a55 inset,
+    0 0 32px -10px rgba(255,82,82,0.55) inset,
+    0 18px 40px -22px rgba(0,0,0,0.7);
+}
+.fpg-c-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+.fpg-c-wrap > * { position: relative; z-index: 1; }
+
+.fpg-c-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ff5252;
+  text-shadow: 0 0 14px rgba(255,82,82,0.55);
+}
+.fpg-c-info {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #c0a0a0;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+  border: 1px solid #ffd54a40;
+}
+.fpg-c-score {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #ff5252;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(255,82,82,0.55);
+}
+
+.fpg-c-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fpg-c-card {
+  width: 3.4rem;
+  height: 4.7rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff 0%, #f0eee4 100%);
+  color: #1a1a1a;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.6) inset,
+    0 -1px 0 rgba(0,0,0,0.15) inset,
+    0 4px 10px -2px rgba(0,0,0,0.55),
+    0 0 0 1px #ffd54a55;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+.fpg-c-card.red { color: #b71c1c; }
+.fpg-c-card.black { color: #1a1a1a; }
+.fpg-c-card.back {
+  background:
+    repeating-linear-gradient(45deg, #ff5252 0 4px, #000000 4px 8px);
+  color: #fce6e0;
+}
+
+.fpg-c-actions {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fpg-c-btn {
+  background: linear-gradient(180deg, #ff5252 0%, #ffd54a 100%);
+  color: #0a0000;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 -1px 0 rgba(0,0,0,0.25) inset,
+    0 4px 12px -4px rgba(255,82,82,0.55);
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.fpg-c-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.fpg-c-btn:active { transform: translateY(0); filter: brightness(0.95); }
+.fpg-c-btn.alt {
+  background: linear-gradient(180deg, #2a0608 0%, #000000 100%);
+  color: #fce6e0;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08) inset,
+    0 -1px 0 rgba(0,0,0,0.4) inset,
+    0 0 0 1px #ffd54a55;
+}
+
+.fpg-c-result {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border: 1px solid #ff525288;
+  color: #fce6e0;
+  text-align: center;
+}
+
+.fpg-c-done {
+  text-align: center;
+  padding: 1.6rem 1.4rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, #ff525233, transparent 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border-radius: 12px;
+  border: 2px solid #ff5252;
+  box-shadow: 0 0 28px -6px rgba(255,82,82,0.55);
+}
+
+.fpg-c-final {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #ff5252;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 22px rgba(255,82,82,0.55);
+}

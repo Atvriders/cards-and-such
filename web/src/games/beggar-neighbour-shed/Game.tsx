@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function BeggarNeighbourShedGame({ state, dispatch, onGameOver }: GameProps<BeggarNeighbourShedState, BeggarNeighbourShedSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><h3>Beggar My Neighbour</h3><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="dm-wrap bnesh-shed"><h3>Beggar My Neighbour</h3><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="dm-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap bnesh-shed">
       <h3>Beggar My Neighbour</h3>
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="dm-score">{state.score} pts</div>

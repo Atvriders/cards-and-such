@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Golf Six Card Bermuda */
+.g6c-shed, .g6c-shed.dm-wrap {
+  background: linear-gradient(180deg,#134e4a 0%,#0f766e 55%,#042f2e 100%) !important;
+  color: #ccfbf1;
+  --shed-theme-accent: #fef08a;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #f0fdfa;
+  --shed-theme-card-text: #134e4a;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #134e4a;
+  --shed-theme-text: #ccfbf1;
+}
+.g6c-shed .dm-info,
+.g6c-shed .dm-score,
+.g6c-shed .dm-result,
+.g6c-shed .dm-final,
+.g6c-shed .dm-done h2,
+.g6c-shed .g6c-shed-info,
+.g6c-shed .g6c-shed-score,
+.g6c-shed .g6c-shed-result,
+.g6c-shed .g6c-shed-final,
+.g6c-shed .g6c-shed-done h2,
+.g6c-shed.g6c-shed-wrap .g6c-shed-info,
+.g6c-shed.g6c-shed-wrap .g6c-shed-score,
+.g6c-shed.g6c-shed-wrap .g6c-shed-result,
+.g6c-shed.g6c-shed-wrap .g6c-shed-final,
+.g6c-shed.g6c-shed-wrap .g6c-shed-done h2 {
+  color: #ccfbf1;
+}
+.g6c-shed .dm-card,
+.g6c-shed .g6c-shed-card {
+  background: #f0fdfa;
+  color: #134e4a;
+  border-color: #facc15;
+}
+.g6c-shed .dm-btn,
+.g6c-shed .g6c-shed-btn {
+  background: #facc15 !important;
+  color: #134e4a !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.g6c-shed .dm-btn:hover:not(:disabled),
+.g6c-shed .g6c-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.g6c-shed .dm-btn.alt,
+.g6c-shed .g6c-shed-btn.alt {
+  background: #facc15 !important;
+  color: #f0fdfa !important;
+}
+.g6c-shed .dm-btn:focus-visible,
+.g6c-shed .g6c-shed-btn:focus-visible {
+  outline: 2px solid #fef08a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

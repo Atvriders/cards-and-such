@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Zheng Shangyou Climbing Jade */
+.zsy-shed, .zsy-shed.dm-wrap {
+  background: linear-gradient(180deg,#064e3b 0%,#10b981 50%,#022c22 100%) !important;
+  color: #d1fae5;
+  --shed-theme-accent: #fef08a;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #ecfdf5;
+  --shed-theme-card-text: #064e3b;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #064e3b;
+  --shed-theme-text: #d1fae5;
+}
+.zsy-shed .dm-info,
+.zsy-shed .dm-score,
+.zsy-shed .dm-result,
+.zsy-shed .dm-final,
+.zsy-shed .dm-done h2,
+.zsy-shed .zsy-shed-info,
+.zsy-shed .zsy-shed-score,
+.zsy-shed .zsy-shed-result,
+.zsy-shed .zsy-shed-final,
+.zsy-shed .zsy-shed-done h2,
+.zsy-shed.zsy-shed-wrap .zsy-shed-info,
+.zsy-shed.zsy-shed-wrap .zsy-shed-score,
+.zsy-shed.zsy-shed-wrap .zsy-shed-result,
+.zsy-shed.zsy-shed-wrap .zsy-shed-final,
+.zsy-shed.zsy-shed-wrap .zsy-shed-done h2 {
+  color: #d1fae5;
+}
+.zsy-shed .dm-card,
+.zsy-shed .zsy-shed-card {
+  background: #ecfdf5;
+  color: #064e3b;
+  border-color: #facc15;
+}
+.zsy-shed .dm-btn,
+.zsy-shed .zsy-shed-btn {
+  background: #facc15 !important;
+  color: #064e3b !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.zsy-shed .dm-btn:hover:not(:disabled),
+.zsy-shed .zsy-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.zsy-shed .dm-btn.alt,
+.zsy-shed .zsy-shed-btn.alt {
+  background: #facc15 !important;
+  color: #ecfdf5 !important;
+}
+.zsy-shed .dm-btn:focus-visible,
+.zsy-shed .zsy-shed-btn:focus-visible {
+  outline: 2px solid #fef08a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

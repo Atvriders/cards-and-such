@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Beat Neighbour Cottage Russet */
+.bnsh-shed, .bnsh-shed.dm-wrap {
+  background: linear-gradient(180deg,#451a03 0%,#9a3412 50%,#1c0a02 100%) !important;
+  color: #fff7ed;
+  --shed-theme-accent: #fed7aa;
+  --shed-theme-accent2: #f97316;
+  --shed-theme-card-bg: #fff7ed;
+  --shed-theme-card-text: #451a03;
+  --shed-theme-btn-bg: #f97316;
+  --shed-theme-btn-text: #fff7ed;
+  --shed-theme-text: #fff7ed;
+}
+.bnsh-shed .dm-info,
+.bnsh-shed .dm-score,
+.bnsh-shed .dm-result,
+.bnsh-shed .dm-final,
+.bnsh-shed .dm-done h2,
+.bnsh-shed .bnsh-shed-info,
+.bnsh-shed .bnsh-shed-score,
+.bnsh-shed .bnsh-shed-result,
+.bnsh-shed .bnsh-shed-final,
+.bnsh-shed .bnsh-shed-done h2,
+.bnsh-shed.bnsh-shed-wrap .bnsh-shed-info,
+.bnsh-shed.bnsh-shed-wrap .bnsh-shed-score,
+.bnsh-shed.bnsh-shed-wrap .bnsh-shed-result,
+.bnsh-shed.bnsh-shed-wrap .bnsh-shed-final,
+.bnsh-shed.bnsh-shed-wrap .bnsh-shed-done h2 {
+  color: #fff7ed;
+}
+.bnsh-shed .dm-card,
+.bnsh-shed .bnsh-shed-card {
+  background: #fff7ed;
+  color: #451a03;
+  border-color: #f97316;
+}
+.bnsh-shed .dm-btn,
+.bnsh-shed .bnsh-shed-btn {
+  background: #f97316 !important;
+  color: #fff7ed !important;
+  border-color: #fed7aa !important;
+  box-shadow: 0 0 0 1px #f97316 inset, 0 4px 12px -4px #f9731666;
+}
+.bnsh-shed .dm-btn:hover:not(:disabled),
+.bnsh-shed .bnsh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.bnsh-shed .dm-btn.alt,
+.bnsh-shed .bnsh-shed-btn.alt {
+  background: #f97316 !important;
+  color: #fff7ed !important;
+}
+.bnsh-shed .dm-btn:focus-visible,
+.bnsh-shed .bnsh-shed-btn:focus-visible {
+  outline: 2px solid #fed7aa;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

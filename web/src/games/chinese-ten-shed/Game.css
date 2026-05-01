@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Chinese Ten Imperial Red */
+.ct10sh-shed, .ct10sh-shed.dm-wrap {
+  background: linear-gradient(180deg,#450a0a 0%,#991b1b 50%,#1f0808 100%) !important;
+  color: #fef9c3;
+  --shed-theme-accent: #fef08a;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #991b1b;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #450a0a;
+  --shed-theme-text: #fef9c3;
+}
+.ct10sh-shed .dm-info,
+.ct10sh-shed .dm-score,
+.ct10sh-shed .dm-result,
+.ct10sh-shed .dm-final,
+.ct10sh-shed .dm-done h2,
+.ct10sh-shed .ct10sh-shed-info,
+.ct10sh-shed .ct10sh-shed-score,
+.ct10sh-shed .ct10sh-shed-result,
+.ct10sh-shed .ct10sh-shed-final,
+.ct10sh-shed .ct10sh-shed-done h2,
+.ct10sh-shed.ct10sh-shed-wrap .ct10sh-shed-info,
+.ct10sh-shed.ct10sh-shed-wrap .ct10sh-shed-score,
+.ct10sh-shed.ct10sh-shed-wrap .ct10sh-shed-result,
+.ct10sh-shed.ct10sh-shed-wrap .ct10sh-shed-final,
+.ct10sh-shed.ct10sh-shed-wrap .ct10sh-shed-done h2 {
+  color: #fef9c3;
+}
+.ct10sh-shed .dm-card,
+.ct10sh-shed .ct10sh-shed-card {
+  background: #fffbeb;
+  color: #991b1b;
+  border-color: #facc15;
+}
+.ct10sh-shed .dm-btn,
+.ct10sh-shed .ct10sh-shed-btn {
+  background: #facc15 !important;
+  color: #450a0a !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.ct10sh-shed .dm-btn:hover:not(:disabled),
+.ct10sh-shed .ct10sh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.ct10sh-shed .dm-btn.alt,
+.ct10sh-shed .ct10sh-shed-btn.alt {
+  background: #facc15 !important;
+  color: #fffbeb !important;
+}
+.ct10sh-shed .dm-btn:focus-visible,
+.ct10sh-shed .ct10sh-shed-btn:focus-visible {
+  outline: 2px solid #fef08a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

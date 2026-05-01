@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Scum Sewer Slate */
+.scsh-shed, .scsh-shed.dm-wrap {
+  background: linear-gradient(180deg,#020617 0%,#1e293b 55%,#0a0f1f 100%) !important;
+  color: #cffafe;
+  --shed-theme-accent: #22d3ee;
+  --shed-theme-accent2: #06b6d4;
+  --shed-theme-card-bg: #ecfeff;
+  --shed-theme-card-text: #0c4a6e;
+  --shed-theme-btn-bg: #06b6d4;
+  --shed-theme-btn-text: #020617;
+  --shed-theme-text: #cffafe;
+}
+.scsh-shed .dm-info,
+.scsh-shed .dm-score,
+.scsh-shed .dm-result,
+.scsh-shed .dm-final,
+.scsh-shed .dm-done h2,
+.scsh-shed .scsh-shed-info,
+.scsh-shed .scsh-shed-score,
+.scsh-shed .scsh-shed-result,
+.scsh-shed .scsh-shed-final,
+.scsh-shed .scsh-shed-done h2,
+.scsh-shed.scsh-shed-wrap .scsh-shed-info,
+.scsh-shed.scsh-shed-wrap .scsh-shed-score,
+.scsh-shed.scsh-shed-wrap .scsh-shed-result,
+.scsh-shed.scsh-shed-wrap .scsh-shed-final,
+.scsh-shed.scsh-shed-wrap .scsh-shed-done h2 {
+  color: #cffafe;
+}
+.scsh-shed .dm-card,
+.scsh-shed .scsh-shed-card {
+  background: #ecfeff;
+  color: #0c4a6e;
+  border-color: #06b6d4;
+}
+.scsh-shed .dm-btn,
+.scsh-shed .scsh-shed-btn {
+  background: #06b6d4 !important;
+  color: #020617 !important;
+  border-color: #22d3ee !important;
+  box-shadow: 0 0 0 1px #06b6d4 inset, 0 4px 12px -4px #06b6d466;
+}
+.scsh-shed .dm-btn:hover:not(:disabled),
+.scsh-shed .scsh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.scsh-shed .dm-btn.alt,
+.scsh-shed .scsh-shed-btn.alt {
+  background: #06b6d4 !important;
+  color: #ecfeff !important;
+}
+.scsh-shed .dm-btn:focus-visible,
+.scsh-shed .scsh-shed-btn:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

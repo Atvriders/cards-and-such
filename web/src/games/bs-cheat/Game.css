@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: BS Cheat Smoky Plum */
+.bsc2-shed, .bsc2-shed.dm-wrap {
+  background: linear-gradient(180deg,#3b0764 0%,#7e22ce 50%,#1a0440 100%) !important;
+  color: #fae8ff;
+  --shed-theme-accent: #f0abfc;
+  --shed-theme-accent2: #c084fc;
+  --shed-theme-card-bg: #fdf4ff;
+  --shed-theme-card-text: #3b0764;
+  --shed-theme-btn-bg: #c084fc;
+  --shed-theme-btn-text: #3b0764;
+  --shed-theme-text: #fae8ff;
+}
+.bsc2-shed .dm-info,
+.bsc2-shed .dm-score,
+.bsc2-shed .dm-result,
+.bsc2-shed .dm-final,
+.bsc2-shed .dm-done h2,
+.bsc2-shed .bsc2-shed-info,
+.bsc2-shed .bsc2-shed-score,
+.bsc2-shed .bsc2-shed-result,
+.bsc2-shed .bsc2-shed-final,
+.bsc2-shed .bsc2-shed-done h2,
+.bsc2-shed.bsc2-shed-wrap .bsc2-shed-info,
+.bsc2-shed.bsc2-shed-wrap .bsc2-shed-score,
+.bsc2-shed.bsc2-shed-wrap .bsc2-shed-result,
+.bsc2-shed.bsc2-shed-wrap .bsc2-shed-final,
+.bsc2-shed.bsc2-shed-wrap .bsc2-shed-done h2 {
+  color: #fae8ff;
+}
+.bsc2-shed .dm-card,
+.bsc2-shed .bsc2-shed-card {
+  background: #fdf4ff;
+  color: #3b0764;
+  border-color: #c084fc;
+}
+.bsc2-shed .dm-btn,
+.bsc2-shed .bsc2-shed-btn {
+  background: #c084fc !important;
+  color: #3b0764 !important;
+  border-color: #f0abfc !important;
+  box-shadow: 0 0 0 1px #c084fc inset, 0 4px 12px -4px #c084fc66;
+}
+.bsc2-shed .dm-btn:hover:not(:disabled),
+.bsc2-shed .bsc2-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.bsc2-shed .dm-btn.alt,
+.bsc2-shed .bsc2-shed-btn.alt {
+  background: #c084fc !important;
+  color: #fdf4ff !important;
+}
+.bsc2-shed .dm-btn:focus-visible,
+.bsc2-shed .bsc2-shed-btn:focus-visible {
+  outline: 2px solid #f0abfc;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

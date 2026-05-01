@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Seven Twenty Seven Roulette Green */
+.s727-shed, .s727-shed.dm-wrap {
+  background: linear-gradient(180deg,#052e16 0%,#15803d 55%,#022c1b 100%) !important;
+  color: #dcfce7;
+  --shed-theme-accent: #fde047;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #f0fdf4;
+  --shed-theme-card-text: #052e16;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #052e16;
+  --shed-theme-text: #dcfce7;
+}
+.s727-shed .dm-info,
+.s727-shed .dm-score,
+.s727-shed .dm-result,
+.s727-shed .dm-final,
+.s727-shed .dm-done h2,
+.s727-shed .s727-shed-info,
+.s727-shed .s727-shed-score,
+.s727-shed .s727-shed-result,
+.s727-shed .s727-shed-final,
+.s727-shed .s727-shed-done h2,
+.s727-shed.s727-shed-wrap .s727-shed-info,
+.s727-shed.s727-shed-wrap .s727-shed-score,
+.s727-shed.s727-shed-wrap .s727-shed-result,
+.s727-shed.s727-shed-wrap .s727-shed-final,
+.s727-shed.s727-shed-wrap .s727-shed-done h2 {
+  color: #dcfce7;
+}
+.s727-shed .dm-card,
+.s727-shed .s727-shed-card {
+  background: #f0fdf4;
+  color: #052e16;
+  border-color: #facc15;
+}
+.s727-shed .dm-btn,
+.s727-shed .s727-shed-btn {
+  background: #facc15 !important;
+  color: #052e16 !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.s727-shed .dm-btn:hover:not(:disabled),
+.s727-shed .s727-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.s727-shed .dm-btn.alt,
+.s727-shed .s727-shed-btn.alt {
+  background: #facc15 !important;
+  color: #f0fdf4 !important;
+}
+.s727-shed .dm-btn:focus-visible,
+.s727-shed .s727-shed-btn:focus-visible {
+  outline: 2px solid #fde047;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

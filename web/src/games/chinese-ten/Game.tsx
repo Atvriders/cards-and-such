@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function ChineseTenGame({ state, dispatch, onGameOver }: GameProps<ChineseTenState, ChineseTenSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="chinese-ten-wrap"><div className="chinese-ten-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="chinese-ten-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="chinese-ten-wrap ct-shed"><div className="chinese-ten-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="chinese-ten-final">{state.score} pts</div></div></div>;
   return (
-    <div className="chinese-ten-wrap">
+    <div className="chinese-ten-wrap ct-shed">
       <div className="chinese-ten-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="chinese-ten-score">{state.score} pts</div>
       <div className="chinese-ten-info">You: {state.you} cards · CPU: {state.cpu} cards</div>

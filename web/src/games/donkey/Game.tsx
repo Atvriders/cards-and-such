@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function DonkeyGame({ state, dispatch, onGameOver }: GameProps<DonkeyState, DonkeySettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="donkey-wrap"><div className="donkey-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="donkey-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="donkey-wrap dk-shed"><div className="donkey-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="donkey-final">{state.score} pts</div></div></div>;
   return (
-    <div className="donkey-wrap">
+    <div className="donkey-wrap dk-shed">
       <div className="donkey-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="donkey-score">{state.score} pts</div>
       <div className="donkey-info">You: {state.you} cards · CPU: {state.cpu} cards</div>

@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Happy Families Pastel Pink */
+.hf-shed, .hf-shed.dm-wrap {
+  background: linear-gradient(180deg,#fce7f3 0%,#fbcfe8 50%,#f9a8d4 100%) !important;
+  color: #831843;
+  --shed-theme-accent: #be185d;
+  --shed-theme-accent2: #db2777;
+  --shed-theme-card-bg: #ffffff;
+  --shed-theme-card-text: #831843;
+  --shed-theme-btn-bg: #db2777;
+  --shed-theme-btn-text: #fce7f3;
+  --shed-theme-text: #831843;
+}
+.hf-shed .dm-info,
+.hf-shed .dm-score,
+.hf-shed .dm-result,
+.hf-shed .dm-final,
+.hf-shed .dm-done h2,
+.hf-shed .hf-shed-info,
+.hf-shed .hf-shed-score,
+.hf-shed .hf-shed-result,
+.hf-shed .hf-shed-final,
+.hf-shed .hf-shed-done h2,
+.hf-shed.hf-shed-wrap .hf-shed-info,
+.hf-shed.hf-shed-wrap .hf-shed-score,
+.hf-shed.hf-shed-wrap .hf-shed-result,
+.hf-shed.hf-shed-wrap .hf-shed-final,
+.hf-shed.hf-shed-wrap .hf-shed-done h2 {
+  color: #831843;
+}
+.hf-shed .dm-card,
+.hf-shed .hf-shed-card {
+  background: #ffffff;
+  color: #831843;
+  border-color: #db2777;
+}
+.hf-shed .dm-btn,
+.hf-shed .hf-shed-btn {
+  background: #db2777 !important;
+  color: #fce7f3 !important;
+  border-color: #be185d !important;
+  box-shadow: 0 0 0 1px #db2777 inset, 0 4px 12px -4px #db277766;
+}
+.hf-shed .dm-btn:hover:not(:disabled),
+.hf-shed .hf-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.hf-shed .dm-btn.alt,
+.hf-shed .hf-shed-btn.alt {
+  background: #db2777 !important;
+  color: #ffffff !important;
+}
+.hf-shed .dm-btn:focus-visible,
+.hf-shed .hf-shed-btn:focus-visible {
+  outline: 2px solid #be185d;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

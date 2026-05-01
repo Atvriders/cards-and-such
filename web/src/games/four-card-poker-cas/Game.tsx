@@ -5,23 +5,23 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function FourCardPokerCasGame({ state, dispatch, onGameOver }: GameProps<FourCardPokerCasState, FourCardPokerCasSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><h3>Four Card Poker (Casino)</h3><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="fcp-c-wrap"><h3>Four Card Poker (Casino)</h3><div className="fcp-c-done"><h2>Done!</h2><div className="fcp-c-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
+    <div className="fcp-c-wrap">
       <h3>Four Card Poker (Casino)</h3>
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
+      <div className="fcp-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="fcp-c-score">{state.score} pts</div>
       {state.cardA !== null && state.cardB !== null && state.cardC !== null && (
-        <div className="dm-row">
-          <div className={`dm-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>
-          <div className={`dm-card ${isRed(state.cardB) ? "red" : "black"}`}>{cardName(state.cardB)}</div>
-          <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
+        <div className="fcp-c-row">
+          <div className={`fcp-c-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>
+          <div className={`fcp-c-card ${isRed(state.cardB) ? "red" : "black"}`}>{cardName(state.cardB)}</div>
+          <div className={`fcp-c-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as FourCardPokerCasAction)}>Play</button>}
+      {state.phase === "ready" && <button className="fcp-c-btn" onClick={() => dispatch({ type: "play" } as FourCardPokerCasAction)}>Play</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as FourCardPokerCasAction)}>Next</button>
+        <div className="fcp-c-result">{state.result}</div>
+        <button className="fcp-c-btn alt" onClick={() => dispatch({ type: "next" } as FourCardPokerCasAction)}>Next</button>
       </>}
     </div>
   );

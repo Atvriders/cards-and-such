@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Golf 6 Greens Sage */
+.g6sh-shed, .g6sh-shed.dm-wrap {
+  background: linear-gradient(180deg,#14532d 0%,#16a34a 55%,#052e16 100%) !important;
+  color: #dcfce7;
+  --shed-theme-accent: #fef9c3;
+  --shed-theme-accent2: #eab308;
+  --shed-theme-card-bg: #f7fee7;
+  --shed-theme-card-text: #14532d;
+  --shed-theme-btn-bg: #eab308;
+  --shed-theme-btn-text: #14532d;
+  --shed-theme-text: #dcfce7;
+}
+.g6sh-shed .dm-info,
+.g6sh-shed .dm-score,
+.g6sh-shed .dm-result,
+.g6sh-shed .dm-final,
+.g6sh-shed .dm-done h2,
+.g6sh-shed .g6sh-shed-info,
+.g6sh-shed .g6sh-shed-score,
+.g6sh-shed .g6sh-shed-result,
+.g6sh-shed .g6sh-shed-final,
+.g6sh-shed .g6sh-shed-done h2,
+.g6sh-shed.g6sh-shed-wrap .g6sh-shed-info,
+.g6sh-shed.g6sh-shed-wrap .g6sh-shed-score,
+.g6sh-shed.g6sh-shed-wrap .g6sh-shed-result,
+.g6sh-shed.g6sh-shed-wrap .g6sh-shed-final,
+.g6sh-shed.g6sh-shed-wrap .g6sh-shed-done h2 {
+  color: #dcfce7;
+}
+.g6sh-shed .dm-card,
+.g6sh-shed .g6sh-shed-card {
+  background: #f7fee7;
+  color: #14532d;
+  border-color: #eab308;
+}
+.g6sh-shed .dm-btn,
+.g6sh-shed .g6sh-shed-btn {
+  background: #eab308 !important;
+  color: #14532d !important;
+  border-color: #fef9c3 !important;
+  box-shadow: 0 0 0 1px #eab308 inset, 0 4px 12px -4px #eab30866;
+}
+.g6sh-shed .dm-btn:hover:not(:disabled),
+.g6sh-shed .g6sh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.g6sh-shed .dm-btn.alt,
+.g6sh-shed .g6sh-shed-btn.alt {
+  background: #eab308 !important;
+  color: #f7fee7 !important;
+}
+.g6sh-shed .dm-btn:focus-visible,
+.g6sh-shed .g6sh-shed-btn:focus-visible {
+  outline: 2px solid #fef9c3;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

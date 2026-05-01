@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Capitalism Emerald Bills */
+.cap-shed, .cap-shed.dm-wrap {
+  background: linear-gradient(180deg,#064e3b 0%,#10b981 50%,#022c22 100%) !important;
+  color: #ecfdf5;
+  --shed-theme-accent: #fef08a;
+  --shed-theme-accent2: #eab308;
+  --shed-theme-card-bg: #ecfdf5;
+  --shed-theme-card-text: #064e3b;
+  --shed-theme-btn-bg: #eab308;
+  --shed-theme-btn-text: #064e3b;
+  --shed-theme-text: #ecfdf5;
+}
+.cap-shed .dm-info,
+.cap-shed .dm-score,
+.cap-shed .dm-result,
+.cap-shed .dm-final,
+.cap-shed .dm-done h2,
+.cap-shed .cap-shed-info,
+.cap-shed .cap-shed-score,
+.cap-shed .cap-shed-result,
+.cap-shed .cap-shed-final,
+.cap-shed .cap-shed-done h2,
+.cap-shed.cap-shed-wrap .cap-shed-info,
+.cap-shed.cap-shed-wrap .cap-shed-score,
+.cap-shed.cap-shed-wrap .cap-shed-result,
+.cap-shed.cap-shed-wrap .cap-shed-final,
+.cap-shed.cap-shed-wrap .cap-shed-done h2 {
+  color: #ecfdf5;
+}
+.cap-shed .dm-card,
+.cap-shed .cap-shed-card {
+  background: #ecfdf5;
+  color: #064e3b;
+  border-color: #eab308;
+}
+.cap-shed .dm-btn,
+.cap-shed .cap-shed-btn {
+  background: #eab308 !important;
+  color: #064e3b !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 0 1px #eab308 inset, 0 4px 12px -4px #eab30866;
+}
+.cap-shed .dm-btn:hover:not(:disabled),
+.cap-shed .cap-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.cap-shed .dm-btn.alt,
+.cap-shed .cap-shed-btn.alt {
+  background: #eab308 !important;
+  color: #ecfdf5 !important;
+}
+.cap-shed .dm-btn:focus-visible,
+.cap-shed .cap-shed-btn:focus-visible {
+  outline: 2px solid #fef08a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Tractor Field Olive */
+.tr-shed, .tr-shed.dm-wrap {
+  background: linear-gradient(180deg,#3f6212 0%,#65a30d 55%,#1a2e05 100%) !important;
+  color: #ecfccb;
+  --shed-theme-accent: #fde68a;
+  --shed-theme-accent2: #f59e0b;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #3f6212;
+  --shed-theme-btn-bg: #f59e0b;
+  --shed-theme-btn-text: #1a2e05;
+  --shed-theme-text: #ecfccb;
+}
+.tr-shed .dm-info,
+.tr-shed .dm-score,
+.tr-shed .dm-result,
+.tr-shed .dm-final,
+.tr-shed .dm-done h2,
+.tr-shed .tr-shed-info,
+.tr-shed .tr-shed-score,
+.tr-shed .tr-shed-result,
+.tr-shed .tr-shed-final,
+.tr-shed .tr-shed-done h2,
+.tr-shed.tr-shed-wrap .tr-shed-info,
+.tr-shed.tr-shed-wrap .tr-shed-score,
+.tr-shed.tr-shed-wrap .tr-shed-result,
+.tr-shed.tr-shed-wrap .tr-shed-final,
+.tr-shed.tr-shed-wrap .tr-shed-done h2 {
+  color: #ecfccb;
+}
+.tr-shed .dm-card,
+.tr-shed .tr-shed-card {
+  background: #fffbeb;
+  color: #3f6212;
+  border-color: #f59e0b;
+}
+.tr-shed .dm-btn,
+.tr-shed .tr-shed-btn {
+  background: #f59e0b !important;
+  color: #1a2e05 !important;
+  border-color: #fde68a !important;
+  box-shadow: 0 0 0 1px #f59e0b inset, 0 4px 12px -4px #f59e0b66;
+}
+.tr-shed .dm-btn:hover:not(:disabled),
+.tr-shed .tr-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.tr-shed .dm-btn.alt,
+.tr-shed .tr-shed-btn.alt {
+  background: #f59e0b !important;
+  color: #fffbeb !important;
+}
+.tr-shed .dm-btn:focus-visible,
+.tr-shed .tr-shed-btn:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

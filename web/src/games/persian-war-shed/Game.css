@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Persian War Saffron */
+.pw-shed, .pw-shed.dm-wrap {
+  background: linear-gradient(180deg,#7c2d12 0%,#c2410c 50%,#3b1106 100%) !important;
+  color: #ffedd5;
+  --shed-theme-accent: #fef9c3;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fff7ed;
+  --shed-theme-card-text: #7c2d12;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #7c2d12;
+  --shed-theme-text: #ffedd5;
+}
+.pw-shed .dm-info,
+.pw-shed .dm-score,
+.pw-shed .dm-result,
+.pw-shed .dm-final,
+.pw-shed .dm-done h2,
+.pw-shed .pw-shed-info,
+.pw-shed .pw-shed-score,
+.pw-shed .pw-shed-result,
+.pw-shed .pw-shed-final,
+.pw-shed .pw-shed-done h2,
+.pw-shed.pw-shed-wrap .pw-shed-info,
+.pw-shed.pw-shed-wrap .pw-shed-score,
+.pw-shed.pw-shed-wrap .pw-shed-result,
+.pw-shed.pw-shed-wrap .pw-shed-final,
+.pw-shed.pw-shed-wrap .pw-shed-done h2 {
+  color: #ffedd5;
+}
+.pw-shed .dm-card,
+.pw-shed .pw-shed-card {
+  background: #fff7ed;
+  color: #7c2d12;
+  border-color: #facc15;
+}
+.pw-shed .dm-btn,
+.pw-shed .pw-shed-btn {
+  background: #facc15 !important;
+  color: #7c2d12 !important;
+  border-color: #fef9c3 !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.pw-shed .dm-btn:hover:not(:disabled),
+.pw-shed .pw-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.pw-shed .dm-btn.alt,
+.pw-shed .pw-shed-btn.alt {
+  background: #facc15 !important;
+  color: #fff7ed !important;
+}
+.pw-shed .dm-btn:focus-visible,
+.pw-shed .pw-shed-btn:focus-visible {
+  outline: 2px solid #fef9c3;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

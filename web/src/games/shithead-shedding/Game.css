@@ -1,2 +1,62 @@
 /* Modern shedding engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Toilet Olive */
+.shsh-shed, .shsh-shed.dm-wrap {
+  background: linear-gradient(180deg,#1a2e05 0%,#365314 55%,#0a1f00 100%) !important;
+  color: #ecfccb;
+  --shed-theme-accent: #bef264;
+  --shed-theme-accent2: #84cc16;
+  --shed-theme-card-bg: #f7fee7;
+  --shed-theme-card-text: #1a2e05;
+  --shed-theme-btn-bg: #84cc16;
+  --shed-theme-btn-text: #1a2e05;
+  --shed-theme-text: #ecfccb;
+}
+.shsh-shed .dm-info,
+.shsh-shed .dm-score,
+.shsh-shed .dm-result,
+.shsh-shed .dm-final,
+.shsh-shed .dm-done h2,
+.shsh-shed .shsh-shed-info,
+.shsh-shed .shsh-shed-score,
+.shsh-shed .shsh-shed-result,
+.shsh-shed .shsh-shed-final,
+.shsh-shed .shsh-shed-done h2,
+.shsh-shed.shsh-shed-wrap .shsh-shed-info,
+.shsh-shed.shsh-shed-wrap .shsh-shed-score,
+.shsh-shed.shsh-shed-wrap .shsh-shed-result,
+.shsh-shed.shsh-shed-wrap .shsh-shed-final,
+.shsh-shed.shsh-shed-wrap .shsh-shed-done h2 {
+  color: #ecfccb;
+}
+.shsh-shed .dm-card,
+.shsh-shed .shsh-shed-card {
+  background: #f7fee7;
+  color: #1a2e05;
+  border-color: #84cc16;
+}
+.shsh-shed .dm-btn,
+.shsh-shed .shsh-shed-btn {
+  background: #84cc16 !important;
+  color: #1a2e05 !important;
+  border-color: #bef264 !important;
+  box-shadow: 0 0 0 1px #84cc16 inset, 0 4px 12px -4px #84cc1666;
+}
+.shsh-shed .dm-btn:hover:not(:disabled),
+.shsh-shed .shsh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.shsh-shed .dm-btn.alt,
+.shsh-shed .shsh-shed-btn.alt {
+  background: #84cc16 !important;
+  color: #f7fee7 !important;
+}
+.shsh-shed .dm-btn:focus-visible,
+.shsh-shed .shsh-shed-btn:focus-visible {
+  outline: 2px solid #bef264;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Snip Snap Snap Coral */
+.ssn-shed, .ssn-shed.dm-wrap {
+  background: linear-gradient(180deg,#831843 0%,#be185d 50%,#3b0a1e 100%) !important;
+  color: #fce7f3;
+  --shed-theme-accent: #fef3c7;
+  --shed-theme-accent2: #fcd34d;
+  --shed-theme-card-bg: #fdf2f8;
+  --shed-theme-card-text: #831843;
+  --shed-theme-btn-bg: #fcd34d;
+  --shed-theme-btn-text: #831843;
+  --shed-theme-text: #fce7f3;
+}
+.ssn-shed .dm-info,
+.ssn-shed .dm-score,
+.ssn-shed .dm-result,
+.ssn-shed .dm-final,
+.ssn-shed .dm-done h2,
+.ssn-shed .ssn-shed-info,
+.ssn-shed .ssn-shed-score,
+.ssn-shed .ssn-shed-result,
+.ssn-shed .ssn-shed-final,
+.ssn-shed .ssn-shed-done h2,
+.ssn-shed.ssn-shed-wrap .ssn-shed-info,
+.ssn-shed.ssn-shed-wrap .ssn-shed-score,
+.ssn-shed.ssn-shed-wrap .ssn-shed-result,
+.ssn-shed.ssn-shed-wrap .ssn-shed-final,
+.ssn-shed.ssn-shed-wrap .ssn-shed-done h2 {
+  color: #fce7f3;
+}
+.ssn-shed .dm-card,
+.ssn-shed .ssn-shed-card {
+  background: #fdf2f8;
+  color: #831843;
+  border-color: #fcd34d;
+}
+.ssn-shed .dm-btn,
+.ssn-shed .ssn-shed-btn {
+  background: #fcd34d !important;
+  color: #831843 !important;
+  border-color: #fef3c7 !important;
+  box-shadow: 0 0 0 1px #fcd34d inset, 0 4px 12px -4px #fcd34d66;
+}
+.ssn-shed .dm-btn:hover:not(:disabled),
+.ssn-shed .ssn-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.ssn-shed .dm-btn.alt,
+.ssn-shed .ssn-shed-btn.alt {
+  background: #fcd34d !important;
+  color: #fdf2f8 !important;
+}
+.ssn-shed .dm-btn:focus-visible,
+.ssn-shed .ssn-shed-btn:focus-visible {
+  outline: 2px solid #fef3c7;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

@@ -18,3 +18,27 @@
 .durak-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; background: #1a73e8; color: white; }
 .durak-btn:hover { background: #1557b0; }
 .durak-btn.danger { background: #e53935; }
+
+/* === SHED-THEME START === */
+/* Theme: Durak Russian Crimson */
+.durak {
+  background: linear-gradient(180deg,#7f1d1d 0%,#b91c1c 50%,#3b0a0a 100%);
+  color: #fef9c3;
+  border-radius: 18px;
+  padding: 20px 16px;
+  box-shadow: 0 30px 60px -28px rgba(0,0,0,0.65), 0 0 0 1px rgba(0,0,0,0.35);
+}
+.durak-header { color: #fef9c3; }
+.durak-table { background: #facc1522 !important; border: 1px solid #fde04755; }
+.durak-card { background: #fffbeb; color: #7f1d1d; border-color: #facc15; }
+.durak-card.played { border-color: #fde047 !important; }
+.durak-card.trump { border-color: #fde047 !important; background: #fde04722 !important; color: #7f1d1d; }
+.durak-card.hand:hover { border-color: #fde047 !important; }
+.durak-trump-mark { color: #fde047 !important; }
+.durak-label { color: #fef9c3; opacity: 0.85; }
+.durak-message { color: #fef9c3; }
+.durak-done { color: #fde047 !important; }
+.durak-btn { background: #facc15 !important; color: #7f1d1d !important; }
+.durak-btn:hover { filter: brightness(1.1); }
+.durak-btn.danger { background: #facc15 !important; color: #fffbeb !important; }
+/* === SHED-THEME END === */

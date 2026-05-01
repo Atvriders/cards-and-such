@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Beggar Cobblestone Brown */
+.bmn-shed, .bmn-shed.dm-wrap {
+  background: linear-gradient(180deg,#292524 0%,#57534e 50%,#0c0a09 100%) !important;
+  color: #f5f5f4;
+  --shed-theme-accent: #fde68a;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fafaf9;
+  --shed-theme-card-text: #292524;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #292524;
+  --shed-theme-text: #f5f5f4;
+}
+.bmn-shed .dm-info,
+.bmn-shed .dm-score,
+.bmn-shed .dm-result,
+.bmn-shed .dm-final,
+.bmn-shed .dm-done h2,
+.bmn-shed .bmn-shed-info,
+.bmn-shed .bmn-shed-score,
+.bmn-shed .bmn-shed-result,
+.bmn-shed .bmn-shed-final,
+.bmn-shed .bmn-shed-done h2,
+.bmn-shed.bmn-shed-wrap .bmn-shed-info,
+.bmn-shed.bmn-shed-wrap .bmn-shed-score,
+.bmn-shed.bmn-shed-wrap .bmn-shed-result,
+.bmn-shed.bmn-shed-wrap .bmn-shed-final,
+.bmn-shed.bmn-shed-wrap .bmn-shed-done h2 {
+  color: #f5f5f4;
+}
+.bmn-shed .dm-card,
+.bmn-shed .bmn-shed-card {
+  background: #fafaf9;
+  color: #292524;
+  border-color: #facc15;
+}
+.bmn-shed .dm-btn,
+.bmn-shed .bmn-shed-btn {
+  background: #facc15 !important;
+  color: #292524 !important;
+  border-color: #fde68a !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.bmn-shed .dm-btn:hover:not(:disabled),
+.bmn-shed .bmn-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.bmn-shed .dm-btn.alt,
+.bmn-shed .bmn-shed-btn.alt {
+  background: #facc15 !important;
+  color: #fafaf9 !important;
+}
+.bmn-shed .dm-btn:focus-visible,
+.bmn-shed .bmn-shed-btn:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

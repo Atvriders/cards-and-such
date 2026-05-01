@@ -19,3 +19,29 @@
 .ch-final-title{margin:0 0 8px;color:#dc2626}
 .ch-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#dc2626}
 .ch-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}
+
+/* === SHED-THEME START === */
+/* Theme: Cheat Spy Magenta */
+.ch-wrap {
+  background: linear-gradient(180deg,#500724 0%,#9d174d 50%,#220210 100%) !important;
+  color: #fce7f3 !important;
+  border-radius: 18px;
+  box-shadow: 0 30px 60px -28px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.ch-wrap .ch-header { color: #fbcfe8; }
+.ch-wrap .ch-card,
+.ch-wrap .ch-tile,
+.ch-wrap .ch-cell {
+  background: #fdf2f8;
+  color: #500724;
+  border-color: #ec4899;
+}
+.ch-wrap button,
+.ch-wrap .ch-btn {
+  background: #ec4899 !important;
+  color: #fce7f3 !important;
+  border-color: #fbcfe8 !important;
+}
+.ch-wrap button:hover,
+.ch-wrap .ch-btn:hover { filter: brightness(1.08); }
+/* === SHED-THEME END === */

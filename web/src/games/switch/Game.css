@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: British Switch Teal */
+.sw-shed, .sw-shed.dm-wrap {
+  background: linear-gradient(180deg,#042f2e 0%,#0f766e 55%,#022c22 100%) !important;
+  color: #ccfbf1;
+  --shed-theme-accent: #5eead4;
+  --shed-theme-accent2: #14b8a6;
+  --shed-theme-card-bg: #ecfeff;
+  --shed-theme-card-text: #042f2e;
+  --shed-theme-btn-bg: #14b8a6;
+  --shed-theme-btn-text: #022c22;
+  --shed-theme-text: #ccfbf1;
+}
+.sw-shed .dm-info,
+.sw-shed .dm-score,
+.sw-shed .dm-result,
+.sw-shed .dm-final,
+.sw-shed .dm-done h2,
+.sw-shed .sw-shed-info,
+.sw-shed .sw-shed-score,
+.sw-shed .sw-shed-result,
+.sw-shed .sw-shed-final,
+.sw-shed .sw-shed-done h2,
+.sw-shed.sw-shed-wrap .sw-shed-info,
+.sw-shed.sw-shed-wrap .sw-shed-score,
+.sw-shed.sw-shed-wrap .sw-shed-result,
+.sw-shed.sw-shed-wrap .sw-shed-final,
+.sw-shed.sw-shed-wrap .sw-shed-done h2 {
+  color: #ccfbf1;
+}
+.sw-shed .dm-card,
+.sw-shed .sw-shed-card {
+  background: #ecfeff;
+  color: #042f2e;
+  border-color: #14b8a6;
+}
+.sw-shed .dm-btn,
+.sw-shed .sw-shed-btn {
+  background: #14b8a6 !important;
+  color: #022c22 !important;
+  border-color: #5eead4 !important;
+  box-shadow: 0 0 0 1px #14b8a6 inset, 0 4px 12px -4px #14b8a666;
+}
+.sw-shed .dm-btn:hover:not(:disabled),
+.sw-shed .sw-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.sw-shed .dm-btn.alt,
+.sw-shed .sw-shed-btn.alt {
+  background: #14b8a6 !important;
+  color: #ecfeff !important;
+}
+.sw-shed .dm-btn:focus-visible,
+.sw-shed .sw-shed-btn:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

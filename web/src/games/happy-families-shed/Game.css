@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Happy Families Storybook */
+.hfsh-shed, .hfsh-shed.dm-wrap {
+  background: linear-gradient(180deg,#fff7ed 0%,#fed7aa 55%,#fde68a 100%) !important;
+  color: #7c2d12;
+  --shed-theme-accent: #ea580c;
+  --shed-theme-accent2: #dc2626;
+  --shed-theme-card-bg: #ffffff;
+  --shed-theme-card-text: #7c2d12;
+  --shed-theme-btn-bg: #ea580c;
+  --shed-theme-btn-text: #fff7ed;
+  --shed-theme-text: #7c2d12;
+}
+.hfsh-shed .dm-info,
+.hfsh-shed .dm-score,
+.hfsh-shed .dm-result,
+.hfsh-shed .dm-final,
+.hfsh-shed .dm-done h2,
+.hfsh-shed .hfsh-shed-info,
+.hfsh-shed .hfsh-shed-score,
+.hfsh-shed .hfsh-shed-result,
+.hfsh-shed .hfsh-shed-final,
+.hfsh-shed .hfsh-shed-done h2,
+.hfsh-shed.hfsh-shed-wrap .hfsh-shed-info,
+.hfsh-shed.hfsh-shed-wrap .hfsh-shed-score,
+.hfsh-shed.hfsh-shed-wrap .hfsh-shed-result,
+.hfsh-shed.hfsh-shed-wrap .hfsh-shed-final,
+.hfsh-shed.hfsh-shed-wrap .hfsh-shed-done h2 {
+  color: #7c2d12;
+}
+.hfsh-shed .dm-card,
+.hfsh-shed .hfsh-shed-card {
+  background: #ffffff;
+  color: #7c2d12;
+  border-color: #dc2626;
+}
+.hfsh-shed .dm-btn,
+.hfsh-shed .hfsh-shed-btn {
+  background: #ea580c !important;
+  color: #fff7ed !important;
+  border-color: #ea580c !important;
+  box-shadow: 0 0 0 1px #dc2626 inset, 0 4px 12px -4px #dc262666;
+}
+.hfsh-shed .dm-btn:hover:not(:disabled),
+.hfsh-shed .hfsh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.hfsh-shed .dm-btn.alt,
+.hfsh-shed .hfsh-shed-btn.alt {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+}
+.hfsh-shed .dm-btn:focus-visible,
+.hfsh-shed .hfsh-shed-btn:focus-visible {
+  outline: 2px solid #ea580c;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

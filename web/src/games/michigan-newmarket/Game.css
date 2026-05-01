@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Newmarket Race Royal */
+.mnm-shed, .mnm-shed.dm-wrap {
+  background: linear-gradient(180deg,#172554 0%,#1d4ed8 50%,#0a1230 100%) !important;
+  color: #dbeafe;
+  --shed-theme-accent: #fde047;
+  --shed-theme-accent2: #f59e0b;
+  --shed-theme-card-bg: #eff6ff;
+  --shed-theme-card-text: #172554;
+  --shed-theme-btn-bg: #fde047;
+  --shed-theme-btn-text: #172554;
+  --shed-theme-text: #dbeafe;
+}
+.mnm-shed .dm-info,
+.mnm-shed .dm-score,
+.mnm-shed .dm-result,
+.mnm-shed .dm-final,
+.mnm-shed .dm-done h2,
+.mnm-shed .mnm-shed-info,
+.mnm-shed .mnm-shed-score,
+.mnm-shed .mnm-shed-result,
+.mnm-shed .mnm-shed-final,
+.mnm-shed .mnm-shed-done h2,
+.mnm-shed.mnm-shed-wrap .mnm-shed-info,
+.mnm-shed.mnm-shed-wrap .mnm-shed-score,
+.mnm-shed.mnm-shed-wrap .mnm-shed-result,
+.mnm-shed.mnm-shed-wrap .mnm-shed-final,
+.mnm-shed.mnm-shed-wrap .mnm-shed-done h2 {
+  color: #dbeafe;
+}
+.mnm-shed .dm-card,
+.mnm-shed .mnm-shed-card {
+  background: #eff6ff;
+  color: #172554;
+  border-color: #f59e0b;
+}
+.mnm-shed .dm-btn,
+.mnm-shed .mnm-shed-btn {
+  background: #fde047 !important;
+  color: #172554 !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 0 0 1px #f59e0b inset, 0 4px 12px -4px #f59e0b66;
+}
+.mnm-shed .dm-btn:hover:not(:disabled),
+.mnm-shed .mnm-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.mnm-shed .dm-btn.alt,
+.mnm-shed .mnm-shed-btn.alt {
+  background: #f59e0b !important;
+  color: #eff6ff !important;
+}
+.mnm-shed .dm-btn:focus-visible,
+.mnm-shed .mnm-shed-btn:focus-visible {
+  outline: 2px solid #fde047;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

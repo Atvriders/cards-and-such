@@ -26,7 +26,7 @@ export function TienLenGame({ state, dispatch, onGameOver }: GameProps<TienLenSt
   const places = ["1st", "2nd", "3rd", "4th"] as const;
 
   return (
-    <div className="tienlen">
+    <div className="tienlen tl-shed">
       <div className="tienlen-header">
         <h2>Tien Len</h2>
         <div className="tienlen-seats">

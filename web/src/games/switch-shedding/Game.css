@@ -1,2 +1,62 @@
 /* Modern shedding engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Royal Switch Plum */
+.swsh-shed, .swsh-shed.dm-wrap {
+  background: linear-gradient(180deg,#3b0764 0%,#581c87 50%,#1e1b4b 100%) !important;
+  color: #fae8ff;
+  --shed-theme-accent: #f0abfc;
+  --shed-theme-accent2: #c084fc;
+  --shed-theme-card-bg: #fdf4ff;
+  --shed-theme-card-text: #3b0764;
+  --shed-theme-btn-bg: #c084fc;
+  --shed-theme-btn-text: #1e1b4b;
+  --shed-theme-text: #fae8ff;
+}
+.swsh-shed .dm-info,
+.swsh-shed .dm-score,
+.swsh-shed .dm-result,
+.swsh-shed .dm-final,
+.swsh-shed .dm-done h2,
+.swsh-shed .swsh-shed-info,
+.swsh-shed .swsh-shed-score,
+.swsh-shed .swsh-shed-result,
+.swsh-shed .swsh-shed-final,
+.swsh-shed .swsh-shed-done h2,
+.swsh-shed.swsh-shed-wrap .swsh-shed-info,
+.swsh-shed.swsh-shed-wrap .swsh-shed-score,
+.swsh-shed.swsh-shed-wrap .swsh-shed-result,
+.swsh-shed.swsh-shed-wrap .swsh-shed-final,
+.swsh-shed.swsh-shed-wrap .swsh-shed-done h2 {
+  color: #fae8ff;
+}
+.swsh-shed .dm-card,
+.swsh-shed .swsh-shed-card {
+  background: #fdf4ff;
+  color: #3b0764;
+  border-color: #c084fc;
+}
+.swsh-shed .dm-btn,
+.swsh-shed .swsh-shed-btn {
+  background: #c084fc !important;
+  color: #1e1b4b !important;
+  border-color: #f0abfc !important;
+  box-shadow: 0 0 0 1px #c084fc inset, 0 4px 12px -4px #c084fc66;
+}
+.swsh-shed .dm-btn:hover:not(:disabled),
+.swsh-shed .swsh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.swsh-shed .dm-btn.alt,
+.swsh-shed .swsh-shed-btn.alt {
+  background: #c084fc !important;
+  color: #fdf4ff !important;
+}
+.swsh-shed .dm-btn:focus-visible,
+.swsh-shed .swsh-shed-btn:focus-visible {
+  outline: 2px solid #f0abfc;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

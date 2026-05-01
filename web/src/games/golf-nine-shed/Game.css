@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Golf 9 Bunker Sand */
+.g9sh-shed, .g9sh-shed.dm-wrap {
+  background: linear-gradient(180deg,#365314 0%,#65a30d 55%,#1a2e05 100%) !important;
+  color: #ecfccb;
+  --shed-theme-accent: #fef08a;
+  --shed-theme-accent2: #fb923c;
+  --shed-theme-card-bg: #f7fee7;
+  --shed-theme-card-text: #365314;
+  --shed-theme-btn-bg: #fb923c;
+  --shed-theme-btn-text: #1a2e05;
+  --shed-theme-text: #ecfccb;
+}
+.g9sh-shed .dm-info,
+.g9sh-shed .dm-score,
+.g9sh-shed .dm-result,
+.g9sh-shed .dm-final,
+.g9sh-shed .dm-done h2,
+.g9sh-shed .g9sh-shed-info,
+.g9sh-shed .g9sh-shed-score,
+.g9sh-shed .g9sh-shed-result,
+.g9sh-shed .g9sh-shed-final,
+.g9sh-shed .g9sh-shed-done h2,
+.g9sh-shed.g9sh-shed-wrap .g9sh-shed-info,
+.g9sh-shed.g9sh-shed-wrap .g9sh-shed-score,
+.g9sh-shed.g9sh-shed-wrap .g9sh-shed-result,
+.g9sh-shed.g9sh-shed-wrap .g9sh-shed-final,
+.g9sh-shed.g9sh-shed-wrap .g9sh-shed-done h2 {
+  color: #ecfccb;
+}
+.g9sh-shed .dm-card,
+.g9sh-shed .g9sh-shed-card {
+  background: #f7fee7;
+  color: #365314;
+  border-color: #fb923c;
+}
+.g9sh-shed .dm-btn,
+.g9sh-shed .g9sh-shed-btn {
+  background: #fb923c !important;
+  color: #1a2e05 !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 0 1px #fb923c inset, 0 4px 12px -4px #fb923c66;
+}
+.g9sh-shed .dm-btn:hover:not(:disabled),
+.g9sh-shed .g9sh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.g9sh-shed .dm-btn.alt,
+.g9sh-shed .g9sh-shed-btn.alt {
+  background: #fb923c !important;
+  color: #f7fee7 !important;
+}
+.g9sh-shed .dm-btn:focus-visible,
+.g9sh-shed .g9sh-shed-btn:focus-visible {
+  outline: 2px solid #fef08a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

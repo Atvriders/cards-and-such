@@ -1,2 +1,62 @@
 /* Modern shedding engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Oktoberfest Blue */
+.mm-shed, .mm-shed.dm-wrap {
+  background: linear-gradient(180deg,#0b1d4a 0%,#1d3a8c 55%,#0a1230 100%) !important;
+  color: #fff7e0;
+  --shed-theme-accent: #fbbf24;
+  --shed-theme-accent2: #f59e0b;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #1d3a8c;
+  --shed-theme-btn-bg: #fbbf24;
+  --shed-theme-btn-text: #0b1d4a;
+  --shed-theme-text: #fff7e0;
+}
+.mm-shed .dm-info,
+.mm-shed .dm-score,
+.mm-shed .dm-result,
+.mm-shed .dm-final,
+.mm-shed .dm-done h2,
+.mm-shed .mm-shed-info,
+.mm-shed .mm-shed-score,
+.mm-shed .mm-shed-result,
+.mm-shed .mm-shed-final,
+.mm-shed .mm-shed-done h2,
+.mm-shed.mm-shed-wrap .mm-shed-info,
+.mm-shed.mm-shed-wrap .mm-shed-score,
+.mm-shed.mm-shed-wrap .mm-shed-result,
+.mm-shed.mm-shed-wrap .mm-shed-final,
+.mm-shed.mm-shed-wrap .mm-shed-done h2 {
+  color: #fff7e0;
+}
+.mm-shed .dm-card,
+.mm-shed .mm-shed-card {
+  background: #fffbeb;
+  color: #1d3a8c;
+  border-color: #f59e0b;
+}
+.mm-shed .dm-btn,
+.mm-shed .mm-shed-btn {
+  background: #fbbf24 !important;
+  color: #0b1d4a !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 0 1px #f59e0b inset, 0 4px 12px -4px #f59e0b66;
+}
+.mm-shed .dm-btn:hover:not(:disabled),
+.mm-shed .mm-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.mm-shed .dm-btn.alt,
+.mm-shed .mm-shed-btn.alt {
+  background: #f59e0b !important;
+  color: #fffbeb !important;
+}
+.mm-shed .dm-btn:focus-visible,
+.mm-shed .mm-shed-btn:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

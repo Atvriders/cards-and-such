@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Pub Shithead Brown */
+.shit-shed, .shit-shed.dm-wrap {
+  background: linear-gradient(180deg,#1c1410 0%,#44291a 55%,#0f0a06 100%) !important;
+  color: #fef3c7;
+  --shed-theme-accent: #f59e0b;
+  --shed-theme-accent2: #d97706;
+  --shed-theme-card-bg: #fef9e7;
+  --shed-theme-card-text: #1c1410;
+  --shed-theme-btn-bg: #d97706;
+  --shed-theme-btn-text: #1c1410;
+  --shed-theme-text: #fef3c7;
+}
+.shit-shed .dm-info,
+.shit-shed .dm-score,
+.shit-shed .dm-result,
+.shit-shed .dm-final,
+.shit-shed .dm-done h2,
+.shit-shed .shit-shed-info,
+.shit-shed .shit-shed-score,
+.shit-shed .shit-shed-result,
+.shit-shed .shit-shed-final,
+.shit-shed .shit-shed-done h2,
+.shit-shed.shit-shed-wrap .shit-shed-info,
+.shit-shed.shit-shed-wrap .shit-shed-score,
+.shit-shed.shit-shed-wrap .shit-shed-result,
+.shit-shed.shit-shed-wrap .shit-shed-final,
+.shit-shed.shit-shed-wrap .shit-shed-done h2 {
+  color: #fef3c7;
+}
+.shit-shed .dm-card,
+.shit-shed .shit-shed-card {
+  background: #fef9e7;
+  color: #1c1410;
+  border-color: #d97706;
+}
+.shit-shed .dm-btn,
+.shit-shed .shit-shed-btn {
+  background: #d97706 !important;
+  color: #1c1410 !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 0 1px #d97706 inset, 0 4px 12px -4px #d9770666;
+}
+.shit-shed .dm-btn:hover:not(:disabled),
+.shit-shed .shit-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.shit-shed .dm-btn.alt,
+.shit-shed .shit-shed-btn.alt {
+  background: #d97706 !important;
+  color: #fef9e7 !important;
+}
+.shit-shed .dm-btn:focus-visible,
+.shit-shed .shit-shed-btn:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Blitz 31 Casino Velvet */
+.b31-shed, .b31-shed.dm-wrap {
+  background: linear-gradient(180deg,#450a0a 0%,#7f1d1d 50%,#1f0408 100%) !important;
+  color: #fee2e2;
+  --shed-theme-accent: #fde68a;
+  --shed-theme-accent2: #fbbf24;
+  --shed-theme-card-bg: #fef2f2;
+  --shed-theme-card-text: #450a0a;
+  --shed-theme-btn-bg: #fbbf24;
+  --shed-theme-btn-text: #450a0a;
+  --shed-theme-text: #fee2e2;
+}
+.b31-shed .dm-info,
+.b31-shed .dm-score,
+.b31-shed .dm-result,
+.b31-shed .dm-final,
+.b31-shed .dm-done h2,
+.b31-shed .b31-shed-info,
+.b31-shed .b31-shed-score,
+.b31-shed .b31-shed-result,
+.b31-shed .b31-shed-final,
+.b31-shed .b31-shed-done h2,
+.b31-shed.b31-shed-wrap .b31-shed-info,
+.b31-shed.b31-shed-wrap .b31-shed-score,
+.b31-shed.b31-shed-wrap .b31-shed-result,
+.b31-shed.b31-shed-wrap .b31-shed-final,
+.b31-shed.b31-shed-wrap .b31-shed-done h2 {
+  color: #fee2e2;
+}
+.b31-shed .dm-card,
+.b31-shed .b31-shed-card {
+  background: #fef2f2;
+  color: #450a0a;
+  border-color: #fbbf24;
+}
+.b31-shed .dm-btn,
+.b31-shed .b31-shed-btn {
+  background: #fbbf24 !important;
+  color: #450a0a !important;
+  border-color: #fde68a !important;
+  box-shadow: 0 0 0 1px #fbbf24 inset, 0 4px 12px -4px #fbbf2466;
+}
+.b31-shed .dm-btn:hover:not(:disabled),
+.b31-shed .b31-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.b31-shed .dm-btn.alt,
+.b31-shed .b31-shed-btn.alt {
+  background: #fbbf24 !important;
+  color: #fef2f2 !important;
+}
+.b31-shed .dm-btn:focus-visible,
+.b31-shed .b31-shed-btn:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

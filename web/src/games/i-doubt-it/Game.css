@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: I Doubt It Question Indigo */
+.idi-shed, .idi-shed.dm-wrap {
+  background: linear-gradient(180deg,#1e1b4b 0%,#4338ca 50%,#0a081f 100%) !important;
+  color: #e0e7ff;
+  --shed-theme-accent: #fbbf24;
+  --shed-theme-accent2: #f59e0b;
+  --shed-theme-card-bg: #eef2ff;
+  --shed-theme-card-text: #1e1b4b;
+  --shed-theme-btn-bg: #fbbf24;
+  --shed-theme-btn-text: #1e1b4b;
+  --shed-theme-text: #e0e7ff;
+}
+.idi-shed .dm-info,
+.idi-shed .dm-score,
+.idi-shed .dm-result,
+.idi-shed .dm-final,
+.idi-shed .dm-done h2,
+.idi-shed .idi-shed-info,
+.idi-shed .idi-shed-score,
+.idi-shed .idi-shed-result,
+.idi-shed .idi-shed-final,
+.idi-shed .idi-shed-done h2,
+.idi-shed.idi-shed-wrap .idi-shed-info,
+.idi-shed.idi-shed-wrap .idi-shed-score,
+.idi-shed.idi-shed-wrap .idi-shed-result,
+.idi-shed.idi-shed-wrap .idi-shed-final,
+.idi-shed.idi-shed-wrap .idi-shed-done h2 {
+  color: #e0e7ff;
+}
+.idi-shed .dm-card,
+.idi-shed .idi-shed-card {
+  background: #eef2ff;
+  color: #1e1b4b;
+  border-color: #f59e0b;
+}
+.idi-shed .dm-btn,
+.idi-shed .idi-shed-btn {
+  background: #fbbf24 !important;
+  color: #1e1b4b !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 0 1px #f59e0b inset, 0 4px 12px -4px #f59e0b66;
+}
+.idi-shed .dm-btn:hover:not(:disabled),
+.idi-shed .idi-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.idi-shed .dm-btn.alt,
+.idi-shed .idi-shed-btn.alt {
+  background: #f59e0b !important;
+  color: #eef2ff !important;
+}
+.idi-shed .dm-btn:focus-visible,
+.idi-shed .idi-shed-btn:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

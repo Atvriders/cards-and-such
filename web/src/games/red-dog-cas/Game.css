@@ -1,2 +1,161 @@
-/* Modern casino-table engine — see web/src/engines/casino/casino.css */
-@import "../../engines/casino/casino.css";
+/*
+ * Scarlet Bone Red Dog
+ * Unique class prefix: .rd-c-*
+ * Themed palette generated for distinctive per-game visual identity.
+ */
+
+.rd-c-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.1rem 1rem 1.4rem;
+  min-height: 100%;
+  align-items: center;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #ffeede;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(ellipse at 50% 110%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, #2c0306 0%, #0d0102 100%);
+  position: relative;
+  isolation: isolate;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 2px #ff404055 inset,
+    0 0 32px -10px rgba(255,64,64,0.5) inset,
+    0 18px 40px -22px rgba(0,0,0,0.7);
+}
+.rd-c-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+.rd-c-wrap > * { position: relative; z-index: 1; }
+
+.rd-c-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ffb38a;
+  text-shadow: 0 0 14px rgba(255,64,64,0.5);
+}
+.rd-c-info {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #dca8a0;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+  border: 1px solid #ff404040;
+}
+.rd-c-score {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #ffb38a;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(255,64,64,0.5);
+}
+
+.rd-c-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rd-c-card {
+  width: 3.4rem;
+  height: 4.7rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff 0%, #f0eee4 100%);
+  color: #1a1a1a;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.6) inset,
+    0 -1px 0 rgba(0,0,0,0.15) inset,
+    0 4px 10px -2px rgba(0,0,0,0.55),
+    0 0 0 1px #ff404055;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+.rd-c-card.red { color: #b71c1c; }
+.rd-c-card.black { color: #1a1a1a; }
+.rd-c-card.back {
+  background:
+    repeating-linear-gradient(45deg, #ff4040 0 4px, #0d0102 4px 8px);
+  color: #ffeede;
+}
+
+.rd-c-actions {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rd-c-btn {
+  background: linear-gradient(180deg, #ffb38a 0%, #ff4040 100%);
+  color: #1a0203;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 -1px 0 rgba(0,0,0,0.25) inset,
+    0 4px 12px -4px rgba(255,64,64,0.5);
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.rd-c-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.rd-c-btn:active { transform: translateY(0); filter: brightness(0.95); }
+.rd-c-btn.alt {
+  background: linear-gradient(180deg, #4a080c 0%, #0d0102 100%);
+  color: #ffeede;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08) inset,
+    0 -1px 0 rgba(0,0,0,0.4) inset,
+    0 0 0 1px #ff404055;
+}
+
+.rd-c-result {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border: 1px solid #ffb38a88;
+  color: #ffeede;
+  text-align: center;
+}
+
+.rd-c-done {
+  text-align: center;
+  padding: 1.6rem 1.4rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, #ffb38a33, transparent 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border-radius: 12px;
+  border: 2px solid #ffb38a;
+  box-shadow: 0 0 28px -6px rgba(255,64,64,0.5);
+}
+
+.rd-c-final {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #ffb38a;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 22px rgba(255,64,64,0.5);
+}

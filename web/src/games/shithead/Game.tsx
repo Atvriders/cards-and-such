@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function ShitheadGame({ state, dispatch, onGameOver }: GameProps<ShitheadState, ShitheadSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="shithead-wrap"><div className="shithead-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="shithead-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="shithead-wrap shit-shed"><div className="shithead-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="shithead-final">{state.score} pts</div></div></div>;
   return (
-    <div className="shithead-wrap">
+    <div className="shithead-wrap shit-shed">
       <div className="shithead-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="shithead-score">{state.score} pts</div>
       <div className="shithead-info">You: {state.you} cards · CPU: {state.cpu} cards</div>

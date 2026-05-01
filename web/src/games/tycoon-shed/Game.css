@@ -1,2 +1,62 @@
 /* Modern shedding engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Tokyo Tycoon Gold */
+.tysh-shed, .tysh-shed.dm-wrap {
+  background: linear-gradient(180deg,#1a0e00 0%,#7c2d12 50%,#0c0500 100%) !important;
+  color: #fef3c7;
+  --shed-theme-accent: #fcd34d;
+  --shed-theme-accent2: #f59e0b;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #7c2d12;
+  --shed-theme-btn-bg: #fcd34d;
+  --shed-theme-btn-text: #1a0e00;
+  --shed-theme-text: #fef3c7;
+}
+.tysh-shed .dm-info,
+.tysh-shed .dm-score,
+.tysh-shed .dm-result,
+.tysh-shed .dm-final,
+.tysh-shed .dm-done h2,
+.tysh-shed .tysh-shed-info,
+.tysh-shed .tysh-shed-score,
+.tysh-shed .tysh-shed-result,
+.tysh-shed .tysh-shed-final,
+.tysh-shed .tysh-shed-done h2,
+.tysh-shed.tysh-shed-wrap .tysh-shed-info,
+.tysh-shed.tysh-shed-wrap .tysh-shed-score,
+.tysh-shed.tysh-shed-wrap .tysh-shed-result,
+.tysh-shed.tysh-shed-wrap .tysh-shed-final,
+.tysh-shed.tysh-shed-wrap .tysh-shed-done h2 {
+  color: #fef3c7;
+}
+.tysh-shed .dm-card,
+.tysh-shed .tysh-shed-card {
+  background: #fffbeb;
+  color: #7c2d12;
+  border-color: #f59e0b;
+}
+.tysh-shed .dm-btn,
+.tysh-shed .tysh-shed-btn {
+  background: #fcd34d !important;
+  color: #1a0e00 !important;
+  border-color: #fcd34d !important;
+  box-shadow: 0 0 0 1px #f59e0b inset, 0 4px 12px -4px #f59e0b66;
+}
+.tysh-shed .dm-btn:hover:not(:disabled),
+.tysh-shed .tysh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.tysh-shed .dm-btn.alt,
+.tysh-shed .tysh-shed-btn.alt {
+  background: #f59e0b !important;
+  color: #fffbeb !important;
+}
+.tysh-shed .dm-btn:focus-visible,
+.tysh-shed .tysh-shed-btn:focus-visible {
+  outline: 2px solid #fcd34d;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

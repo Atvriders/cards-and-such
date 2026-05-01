@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function MichiganNewmarketGame({ state, dispatch, onGameOver }: GameProps<MichiganNewmarketState, MichiganNewmarketSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="michigan-newmarket-wrap"><div className="michigan-newmarket-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="michigan-newmarket-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="michigan-newmarket-wrap mnm-shed"><div className="michigan-newmarket-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="michigan-newmarket-final">{state.score} pts</div></div></div>;
   return (
-    <div className="michigan-newmarket-wrap">
+    <div className="michigan-newmarket-wrap mnm-shed">
       <div className="michigan-newmarket-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="michigan-newmarket-score">{state.score} pts</div>
       <div className="michigan-newmarket-info">You: {state.you} cards · CPU: {state.cpu} cards</div>

@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function BlackPeterGame({ state, dispatch, onGameOver }: GameProps<BlackPeterState, BlackPeterSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="black-peter-wrap"><div className="black-peter-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="black-peter-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="black-peter-wrap bp-shed"><div className="black-peter-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="black-peter-final">{state.score} pts</div></div></div>;
   return (
-    <div className="black-peter-wrap">
+    <div className="black-peter-wrap bp-shed">
       <div className="black-peter-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="black-peter-score">{state.score} pts</div>
       <div className="black-peter-info">You: {state.you} cards · CPU: {state.cpu} cards</div>

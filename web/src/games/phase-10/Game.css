@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Phase 10 Neon Party */
+.p10-shed, .p10-shed.dm-wrap {
+  background: linear-gradient(180deg,#1e003a 0%,#5b0a89 50%,#0d0020 100%) !important;
+  color: #fdf4ff;
+  --shed-theme-accent: #22d3ee;
+  --shed-theme-accent2: #ec4899;
+  --shed-theme-card-bg: #fdf4ff;
+  --shed-theme-card-text: #5b0a89;
+  --shed-theme-btn-bg: #ec4899;
+  --shed-theme-btn-text: #fdf4ff;
+  --shed-theme-text: #fdf4ff;
+}
+.p10-shed .dm-info,
+.p10-shed .dm-score,
+.p10-shed .dm-result,
+.p10-shed .dm-final,
+.p10-shed .dm-done h2,
+.p10-shed .p10-shed-info,
+.p10-shed .p10-shed-score,
+.p10-shed .p10-shed-result,
+.p10-shed .p10-shed-final,
+.p10-shed .p10-shed-done h2,
+.p10-shed.p10-shed-wrap .p10-shed-info,
+.p10-shed.p10-shed-wrap .p10-shed-score,
+.p10-shed.p10-shed-wrap .p10-shed-result,
+.p10-shed.p10-shed-wrap .p10-shed-final,
+.p10-shed.p10-shed-wrap .p10-shed-done h2 {
+  color: #fdf4ff;
+}
+.p10-shed .dm-card,
+.p10-shed .p10-shed-card {
+  background: #fdf4ff;
+  color: #5b0a89;
+  border-color: #ec4899;
+}
+.p10-shed .dm-btn,
+.p10-shed .p10-shed-btn {
+  background: #ec4899 !important;
+  color: #fdf4ff !important;
+  border-color: #22d3ee !important;
+  box-shadow: 0 0 0 1px #ec4899 inset, 0 4px 12px -4px #ec489966;
+}
+.p10-shed .dm-btn:hover:not(:disabled),
+.p10-shed .p10-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.p10-shed .dm-btn.alt,
+.p10-shed .p10-shed-btn.alt {
+  background: #ec4899 !important;
+  color: #fdf4ff !important;
+}
+.p10-shed .dm-btn:focus-visible,
+.p10-shed .p10-shed-btn:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

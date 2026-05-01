@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Authors Quill Ink */
+.ausH-shed, .ausH-shed.dm-wrap {
+  background: linear-gradient(180deg,#1c1917 0%,#44403c 50%,#0c0a09 100%) !important;
+  color: #fafaf9;
+  --shed-theme-accent: #fde68a;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fafaf9;
+  --shed-theme-card-text: #1c1917;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #1c1917;
+  --shed-theme-text: #fafaf9;
+}
+.ausH-shed .dm-info,
+.ausH-shed .dm-score,
+.ausH-shed .dm-result,
+.ausH-shed .dm-final,
+.ausH-shed .dm-done h2,
+.ausH-shed .ausH-shed-info,
+.ausH-shed .ausH-shed-score,
+.ausH-shed .ausH-shed-result,
+.ausH-shed .ausH-shed-final,
+.ausH-shed .ausH-shed-done h2,
+.ausH-shed.ausH-shed-wrap .ausH-shed-info,
+.ausH-shed.ausH-shed-wrap .ausH-shed-score,
+.ausH-shed.ausH-shed-wrap .ausH-shed-result,
+.ausH-shed.ausH-shed-wrap .ausH-shed-final,
+.ausH-shed.ausH-shed-wrap .ausH-shed-done h2 {
+  color: #fafaf9;
+}
+.ausH-shed .dm-card,
+.ausH-shed .ausH-shed-card {
+  background: #fafaf9;
+  color: #1c1917;
+  border-color: #facc15;
+}
+.ausH-shed .dm-btn,
+.ausH-shed .ausH-shed-btn {
+  background: #facc15 !important;
+  color: #1c1917 !important;
+  border-color: #fde68a !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.ausH-shed .dm-btn:hover:not(:disabled),
+.ausH-shed .ausH-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.ausH-shed .dm-btn.alt,
+.ausH-shed .ausH-shed-btn.alt {
+  background: #facc15 !important;
+  color: #fafaf9 !important;
+}
+.ausH-shed .dm-btn:focus-visible,
+.ausH-shed .ausH-shed-btn:focus-visible {
+  outline: 2px solid #fde68a;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

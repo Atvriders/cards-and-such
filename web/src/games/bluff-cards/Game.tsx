@@ -7,10 +7,10 @@ export function BluffCardsGame({ state, dispatch, onGameOver }: GameProps<BluffC
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap bf-shed"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap bf-shed">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.you !== null && state.cpu !== null && (

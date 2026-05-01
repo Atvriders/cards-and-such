@@ -1,2 +1,62 @@
 /* Modern shedding engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Last Call Crimson */
+.lcs-shed, .lcs-shed.dm-wrap {
+  background: linear-gradient(180deg,#450a0a 0%,#7f1d1d 55%,#1c0707 100%) !important;
+  color: #fee2e2;
+  --shed-theme-accent: #fca5a5;
+  --shed-theme-accent2: #ef4444;
+  --shed-theme-card-bg: #fef2f2;
+  --shed-theme-card-text: #450a0a;
+  --shed-theme-btn-bg: #ef4444;
+  --shed-theme-btn-text: #fff5f5;
+  --shed-theme-text: #fee2e2;
+}
+.lcs-shed .dm-info,
+.lcs-shed .dm-score,
+.lcs-shed .dm-result,
+.lcs-shed .dm-final,
+.lcs-shed .dm-done h2,
+.lcs-shed .lcs-shed-info,
+.lcs-shed .lcs-shed-score,
+.lcs-shed .lcs-shed-result,
+.lcs-shed .lcs-shed-final,
+.lcs-shed .lcs-shed-done h2,
+.lcs-shed.lcs-shed-wrap .lcs-shed-info,
+.lcs-shed.lcs-shed-wrap .lcs-shed-score,
+.lcs-shed.lcs-shed-wrap .lcs-shed-result,
+.lcs-shed.lcs-shed-wrap .lcs-shed-final,
+.lcs-shed.lcs-shed-wrap .lcs-shed-done h2 {
+  color: #fee2e2;
+}
+.lcs-shed .dm-card,
+.lcs-shed .lcs-shed-card {
+  background: #fef2f2;
+  color: #450a0a;
+  border-color: #ef4444;
+}
+.lcs-shed .dm-btn,
+.lcs-shed .lcs-shed-btn {
+  background: #ef4444 !important;
+  color: #fff5f5 !important;
+  border-color: #fca5a5 !important;
+  box-shadow: 0 0 0 1px #ef4444 inset, 0 4px 12px -4px #ef444466;
+}
+.lcs-shed .dm-btn:hover:not(:disabled),
+.lcs-shed .lcs-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.lcs-shed .dm-btn.alt,
+.lcs-shed .lcs-shed-btn.alt {
+  background: #ef4444 !important;
+  color: #fef2f2 !important;
+}
+.lcs-shed .dm-btn:focus-visible,
+.lcs-shed .lcs-shed-btn:focus-visible {
+  outline: 2px solid #fca5a5;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

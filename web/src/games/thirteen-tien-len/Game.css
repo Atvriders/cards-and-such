@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Thirteen Tien Len Bamboo */
+.ttl-shed, .ttl-shed.dm-wrap {
+  background: linear-gradient(180deg,#14532d 0%,#15803d 50%,#052e16 100%) !important;
+  color: #dcfce7;
+  --shed-theme-accent: #fde047;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #f0fdf4;
+  --shed-theme-card-text: #14532d;
+  --shed-theme-btn-bg: #facc15;
+  --shed-theme-btn-text: #14532d;
+  --shed-theme-text: #dcfce7;
+}
+.ttl-shed .dm-info,
+.ttl-shed .dm-score,
+.ttl-shed .dm-result,
+.ttl-shed .dm-final,
+.ttl-shed .dm-done h2,
+.ttl-shed .ttl-shed-info,
+.ttl-shed .ttl-shed-score,
+.ttl-shed .ttl-shed-result,
+.ttl-shed .ttl-shed-final,
+.ttl-shed .ttl-shed-done h2,
+.ttl-shed.ttl-shed-wrap .ttl-shed-info,
+.ttl-shed.ttl-shed-wrap .ttl-shed-score,
+.ttl-shed.ttl-shed-wrap .ttl-shed-result,
+.ttl-shed.ttl-shed-wrap .ttl-shed-final,
+.ttl-shed.ttl-shed-wrap .ttl-shed-done h2 {
+  color: #dcfce7;
+}
+.ttl-shed .dm-card,
+.ttl-shed .ttl-shed-card {
+  background: #f0fdf4;
+  color: #14532d;
+  border-color: #facc15;
+}
+.ttl-shed .dm-btn,
+.ttl-shed .ttl-shed-btn {
+  background: #facc15 !important;
+  color: #14532d !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.ttl-shed .dm-btn:hover:not(:disabled),
+.ttl-shed .ttl-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.ttl-shed .dm-btn.alt,
+.ttl-shed .ttl-shed-btn.alt {
+  background: #facc15 !important;
+  color: #f0fdf4 !important;
+}
+.ttl-shed .dm-btn:focus-visible,
+.ttl-shed .ttl-shed-btn:focus-visible {
+  outline: 2px solid #fde047;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

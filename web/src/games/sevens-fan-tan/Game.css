@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Sevens Fan Tan Jade */
+.sft-shed, .sft-shed.dm-wrap {
+  background: linear-gradient(180deg,#064e3b 0%,#047857 50%,#022c22 100%) !important;
+  color: #d1fae5;
+  --shed-theme-accent: #fef9c3;
+  --shed-theme-accent2: #eab308;
+  --shed-theme-card-bg: #f0fdfa;
+  --shed-theme-card-text: #064e3b;
+  --shed-theme-btn-bg: #eab308;
+  --shed-theme-btn-text: #022c22;
+  --shed-theme-text: #d1fae5;
+}
+.sft-shed .dm-info,
+.sft-shed .dm-score,
+.sft-shed .dm-result,
+.sft-shed .dm-final,
+.sft-shed .dm-done h2,
+.sft-shed .sft-shed-info,
+.sft-shed .sft-shed-score,
+.sft-shed .sft-shed-result,
+.sft-shed .sft-shed-final,
+.sft-shed .sft-shed-done h2,
+.sft-shed.sft-shed-wrap .sft-shed-info,
+.sft-shed.sft-shed-wrap .sft-shed-score,
+.sft-shed.sft-shed-wrap .sft-shed-result,
+.sft-shed.sft-shed-wrap .sft-shed-final,
+.sft-shed.sft-shed-wrap .sft-shed-done h2 {
+  color: #d1fae5;
+}
+.sft-shed .dm-card,
+.sft-shed .sft-shed-card {
+  background: #f0fdfa;
+  color: #064e3b;
+  border-color: #eab308;
+}
+.sft-shed .dm-btn,
+.sft-shed .sft-shed-btn {
+  background: #eab308 !important;
+  color: #022c22 !important;
+  border-color: #fef9c3 !important;
+  box-shadow: 0 0 0 1px #eab308 inset, 0 4px 12px -4px #eab30866;
+}
+.sft-shed .dm-btn:hover:not(:disabled),
+.sft-shed .sft-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.sft-shed .dm-btn.alt,
+.sft-shed .sft-shed-btn.alt {
+  background: #eab308 !important;
+  color: #f0fdfa !important;
+}
+.sft-shed .dm-btn:focus-visible,
+.sft-shed .sft-shed-btn:focus-visible {
+  outline: 2px solid #fef9c3;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

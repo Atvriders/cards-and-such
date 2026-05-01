@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Beggar Lantern Amber */
+.bnesh-shed, .bnesh-shed.dm-wrap {
+  background: linear-gradient(180deg,#451a03 0%,#b45309 50%,#1c0a02 100%) !important;
+  color: #fffbeb;
+  --shed-theme-accent: #fef3c7;
+  --shed-theme-accent2: #f59e0b;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #451a03;
+  --shed-theme-btn-bg: #f59e0b;
+  --shed-theme-btn-text: #451a03;
+  --shed-theme-text: #fffbeb;
+}
+.bnesh-shed .dm-info,
+.bnesh-shed .dm-score,
+.bnesh-shed .dm-result,
+.bnesh-shed .dm-final,
+.bnesh-shed .dm-done h2,
+.bnesh-shed .bnesh-shed-info,
+.bnesh-shed .bnesh-shed-score,
+.bnesh-shed .bnesh-shed-result,
+.bnesh-shed .bnesh-shed-final,
+.bnesh-shed .bnesh-shed-done h2,
+.bnesh-shed.bnesh-shed-wrap .bnesh-shed-info,
+.bnesh-shed.bnesh-shed-wrap .bnesh-shed-score,
+.bnesh-shed.bnesh-shed-wrap .bnesh-shed-result,
+.bnesh-shed.bnesh-shed-wrap .bnesh-shed-final,
+.bnesh-shed.bnesh-shed-wrap .bnesh-shed-done h2 {
+  color: #fffbeb;
+}
+.bnesh-shed .dm-card,
+.bnesh-shed .bnesh-shed-card {
+  background: #fffbeb;
+  color: #451a03;
+  border-color: #f59e0b;
+}
+.bnesh-shed .dm-btn,
+.bnesh-shed .bnesh-shed-btn {
+  background: #f59e0b !important;
+  color: #451a03 !important;
+  border-color: #fef3c7 !important;
+  box-shadow: 0 0 0 1px #f59e0b inset, 0 4px 12px -4px #f59e0b66;
+}
+.bnesh-shed .dm-btn:hover:not(:disabled),
+.bnesh-shed .bnesh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.bnesh-shed .dm-btn.alt,
+.bnesh-shed .bnesh-shed-btn.alt {
+  background: #f59e0b !important;
+  color: #fffbeb !important;
+}
+.bnesh-shed .dm-btn:focus-visible,
+.bnesh-shed .bnesh-shed-btn:focus-visible {
+  outline: 2px solid #fef3c7;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

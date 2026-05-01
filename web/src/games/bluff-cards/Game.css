@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Bluff Smoke Slate */
+.bf-shed, .bf-shed.dm-wrap {
+  background: linear-gradient(180deg,#0f172a 0%,#334155 50%,#020617 100%) !important;
+  color: #e2e8f0;
+  --shed-theme-accent: #67e8f9;
+  --shed-theme-accent2: #22d3ee;
+  --shed-theme-card-bg: #f1f5f9;
+  --shed-theme-card-text: #0f172a;
+  --shed-theme-btn-bg: #22d3ee;
+  --shed-theme-btn-text: #0f172a;
+  --shed-theme-text: #e2e8f0;
+}
+.bf-shed .dm-info,
+.bf-shed .dm-score,
+.bf-shed .dm-result,
+.bf-shed .dm-final,
+.bf-shed .dm-done h2,
+.bf-shed .bf-shed-info,
+.bf-shed .bf-shed-score,
+.bf-shed .bf-shed-result,
+.bf-shed .bf-shed-final,
+.bf-shed .bf-shed-done h2,
+.bf-shed.bf-shed-wrap .bf-shed-info,
+.bf-shed.bf-shed-wrap .bf-shed-score,
+.bf-shed.bf-shed-wrap .bf-shed-result,
+.bf-shed.bf-shed-wrap .bf-shed-final,
+.bf-shed.bf-shed-wrap .bf-shed-done h2 {
+  color: #e2e8f0;
+}
+.bf-shed .dm-card,
+.bf-shed .bf-shed-card {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #22d3ee;
+}
+.bf-shed .dm-btn,
+.bf-shed .bf-shed-btn {
+  background: #22d3ee !important;
+  color: #0f172a !important;
+  border-color: #67e8f9 !important;
+  box-shadow: 0 0 0 1px #22d3ee inset, 0 4px 12px -4px #22d3ee66;
+}
+.bf-shed .dm-btn:hover:not(:disabled),
+.bf-shed .bf-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.bf-shed .dm-btn.alt,
+.bf-shed .bf-shed-btn.alt {
+  background: #22d3ee !important;
+  color: #f1f5f9 !important;
+}
+.bf-shed .dm-btn:focus-visible,
+.bf-shed .bf-shed-btn:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

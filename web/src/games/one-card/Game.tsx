@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function OneCardGame({ state, dispatch, onGameOver }: GameProps<OneCardState, OneCardSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="one-card-wrap"><div className="one-card-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="one-card-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="one-card-wrap oc-shed"><div className="one-card-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="one-card-final">{state.score} pts</div></div></div>;
   return (
-    <div className="one-card-wrap">
+    <div className="one-card-wrap oc-shed">
       <div className="one-card-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="one-card-score">{state.score} pts</div>
       <div className="one-card-info">You: {state.you} cards · CPU: {state.cpu} cards</div>

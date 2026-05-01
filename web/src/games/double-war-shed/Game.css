@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Double War Battlefield Steel */
+.dw-shed, .dw-shed.dm-wrap {
+  background: linear-gradient(180deg,#1f2937 0%,#4b5563 50%,#0f1116 100%) !important;
+  color: #f3f4f6;
+  --shed-theme-accent: #f87171;
+  --shed-theme-accent2: #dc2626;
+  --shed-theme-card-bg: #f9fafb;
+  --shed-theme-card-text: #1f2937;
+  --shed-theme-btn-bg: #dc2626;
+  --shed-theme-btn-text: #f9fafb;
+  --shed-theme-text: #f3f4f6;
+}
+.dw-shed .dm-info,
+.dw-shed .dm-score,
+.dw-shed .dm-result,
+.dw-shed .dm-final,
+.dw-shed .dm-done h2,
+.dw-shed .dw-shed-info,
+.dw-shed .dw-shed-score,
+.dw-shed .dw-shed-result,
+.dw-shed .dw-shed-final,
+.dw-shed .dw-shed-done h2,
+.dw-shed.dw-shed-wrap .dw-shed-info,
+.dw-shed.dw-shed-wrap .dw-shed-score,
+.dw-shed.dw-shed-wrap .dw-shed-result,
+.dw-shed.dw-shed-wrap .dw-shed-final,
+.dw-shed.dw-shed-wrap .dw-shed-done h2 {
+  color: #f3f4f6;
+}
+.dw-shed .dm-card,
+.dw-shed .dw-shed-card {
+  background: #f9fafb;
+  color: #1f2937;
+  border-color: #dc2626;
+}
+.dw-shed .dm-btn,
+.dw-shed .dw-shed-btn {
+  background: #dc2626 !important;
+  color: #f9fafb !important;
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 1px #dc2626 inset, 0 4px 12px -4px #dc262666;
+}
+.dw-shed .dm-btn:hover:not(:disabled),
+.dw-shed .dw-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.dw-shed .dm-btn.alt,
+.dw-shed .dw-shed-btn.alt {
+  background: #dc2626 !important;
+  color: #f9fafb !important;
+}
+.dw-shed .dm-btn:focus-visible,
+.dw-shed .dw-shed-btn:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Daifugo Imperial Red */
+.ty-shed, .ty-shed.dm-wrap {
+  background: linear-gradient(180deg,#450a0a 0%,#9f1239 55%,#1f0408 100%) !important;
+  color: #fff1f2;
+  --shed-theme-accent: #fde047;
+  --shed-theme-accent2: #facc15;
+  --shed-theme-card-bg: #fff7ed;
+  --shed-theme-card-text: #9f1239;
+  --shed-theme-btn-bg: #fde047;
+  --shed-theme-btn-text: #450a0a;
+  --shed-theme-text: #fff1f2;
+}
+.ty-shed .dm-info,
+.ty-shed .dm-score,
+.ty-shed .dm-result,
+.ty-shed .dm-final,
+.ty-shed .dm-done h2,
+.ty-shed .ty-shed-info,
+.ty-shed .ty-shed-score,
+.ty-shed .ty-shed-result,
+.ty-shed .ty-shed-final,
+.ty-shed .ty-shed-done h2,
+.ty-shed.ty-shed-wrap .ty-shed-info,
+.ty-shed.ty-shed-wrap .ty-shed-score,
+.ty-shed.ty-shed-wrap .ty-shed-result,
+.ty-shed.ty-shed-wrap .ty-shed-final,
+.ty-shed.ty-shed-wrap .ty-shed-done h2 {
+  color: #fff1f2;
+}
+.ty-shed .dm-card,
+.ty-shed .ty-shed-card {
+  background: #fff7ed;
+  color: #9f1239;
+  border-color: #facc15;
+}
+.ty-shed .dm-btn,
+.ty-shed .ty-shed-btn {
+  background: #fde047 !important;
+  color: #450a0a !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 0 0 1px #facc15 inset, 0 4px 12px -4px #facc1566;
+}
+.ty-shed .dm-btn:hover:not(:disabled),
+.ty-shed .ty-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.ty-shed .dm-btn.alt,
+.ty-shed .ty-shed-btn.alt {
+  background: #facc15 !important;
+  color: #fff7ed !important;
+}
+.ty-shed .dm-btn:focus-visible,
+.ty-shed .ty-shed-btn:focus-visible {
+  outline: 2px solid #fde047;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

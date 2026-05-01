@@ -1,2 +1,62 @@
 /* Modernized via shared shed engine — see web/src/engines/shed/shed.css */
 @import "../../engines/shed/shed.css";
+
+/* === SHED-THEME START === */
+/* Theme: Donkey Barnyard Tan */
+.dk-shed, .dk-shed.dm-wrap {
+  background: linear-gradient(180deg,#451a03 0%,#92400e 50%,#1c0a02 100%) !important;
+  color: #fef3c7;
+  --shed-theme-accent: #fef3c7;
+  --shed-theme-accent2: #fcd34d;
+  --shed-theme-card-bg: #fffbeb;
+  --shed-theme-card-text: #451a03;
+  --shed-theme-btn-bg: #fcd34d;
+  --shed-theme-btn-text: #451a03;
+  --shed-theme-text: #fef3c7;
+}
+.dk-shed .dm-info,
+.dk-shed .dm-score,
+.dk-shed .dm-result,
+.dk-shed .dm-final,
+.dk-shed .dm-done h2,
+.dk-shed .dk-shed-info,
+.dk-shed .dk-shed-score,
+.dk-shed .dk-shed-result,
+.dk-shed .dk-shed-final,
+.dk-shed .dk-shed-done h2,
+.dk-shed.dk-shed-wrap .dk-shed-info,
+.dk-shed.dk-shed-wrap .dk-shed-score,
+.dk-shed.dk-shed-wrap .dk-shed-result,
+.dk-shed.dk-shed-wrap .dk-shed-final,
+.dk-shed.dk-shed-wrap .dk-shed-done h2 {
+  color: #fef3c7;
+}
+.dk-shed .dm-card,
+.dk-shed .dk-shed-card {
+  background: #fffbeb;
+  color: #451a03;
+  border-color: #fcd34d;
+}
+.dk-shed .dm-btn,
+.dk-shed .dk-shed-btn {
+  background: #fcd34d !important;
+  color: #451a03 !important;
+  border-color: #fef3c7 !important;
+  box-shadow: 0 0 0 1px #fcd34d inset, 0 4px 12px -4px #fcd34d66;
+}
+.dk-shed .dm-btn:hover:not(:disabled),
+.dk-shed .dk-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.dk-shed .dm-btn.alt,
+.dk-shed .dk-shed-btn.alt {
+  background: #fcd34d !important;
+  color: #fffbeb !important;
+}
+.dk-shed .dm-btn:focus-visible,
+.dk-shed .dk-shed-btn:focus-visible {
+  outline: 2px solid #fef3c7;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

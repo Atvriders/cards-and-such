@@ -5,23 +5,23 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function CasinoHoldemCasGame({ state, dispatch, onGameOver }: GameProps<CasinoHoldemCasState, CasinoHoldemCasSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><h3>Casino Hold'em (Casino)</h3><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="ch-c-wrap"><h3>Casino Hold'em (Casino)</h3><div className="ch-c-done"><h2>Done!</h2><div className="ch-c-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
+    <div className="ch-c-wrap">
       <h3>Casino Hold'em (Casino)</h3>
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
+      <div className="ch-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="ch-c-score">{state.score} pts</div>
       {state.cardA !== null && state.cardB !== null && state.cardC !== null && (
-        <div className="dm-row">
-          <div className={`dm-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>
-          <div className={`dm-card ${isRed(state.cardB) ? "red" : "black"}`}>{cardName(state.cardB)}</div>
-          <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
+        <div className="ch-c-row">
+          <div className={`ch-c-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>
+          <div className={`ch-c-card ${isRed(state.cardB) ? "red" : "black"}`}>{cardName(state.cardB)}</div>
+          <div className={`ch-c-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as CasinoHoldemCasAction)}>Play</button>}
+      {state.phase === "ready" && <button className="ch-c-btn" onClick={() => dispatch({ type: "play" } as CasinoHoldemCasAction)}>Play</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as CasinoHoldemCasAction)}>Next</button>
+        <div className="ch-c-result">{state.result}</div>
+        <button className="ch-c-btn alt" onClick={() => dispatch({ type: "next" } as CasinoHoldemCasAction)}>Next</button>
       </>}
     </div>
   );

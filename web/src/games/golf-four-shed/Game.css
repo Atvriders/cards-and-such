@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Golf 4 Fairway Mint */
+.g4sh-shed, .g4sh-shed.dm-wrap {
+  background: linear-gradient(180deg,#064e3b 0%,#059669 55%,#022c22 100%) !important;
+  color: #d1fae5;
+  --shed-theme-accent: #fef3c7;
+  --shed-theme-accent2: #f59e0b;
+  --shed-theme-card-bg: #ecfdf5;
+  --shed-theme-card-text: #064e3b;
+  --shed-theme-btn-bg: #f59e0b;
+  --shed-theme-btn-text: #022c22;
+  --shed-theme-text: #d1fae5;
+}
+.g4sh-shed .dm-info,
+.g4sh-shed .dm-score,
+.g4sh-shed .dm-result,
+.g4sh-shed .dm-final,
+.g4sh-shed .dm-done h2,
+.g4sh-shed .g4sh-shed-info,
+.g4sh-shed .g4sh-shed-score,
+.g4sh-shed .g4sh-shed-result,
+.g4sh-shed .g4sh-shed-final,
+.g4sh-shed .g4sh-shed-done h2,
+.g4sh-shed.g4sh-shed-wrap .g4sh-shed-info,
+.g4sh-shed.g4sh-shed-wrap .g4sh-shed-score,
+.g4sh-shed.g4sh-shed-wrap .g4sh-shed-result,
+.g4sh-shed.g4sh-shed-wrap .g4sh-shed-final,
+.g4sh-shed.g4sh-shed-wrap .g4sh-shed-done h2 {
+  color: #d1fae5;
+}
+.g4sh-shed .dm-card,
+.g4sh-shed .g4sh-shed-card {
+  background: #ecfdf5;
+  color: #064e3b;
+  border-color: #f59e0b;
+}
+.g4sh-shed .dm-btn,
+.g4sh-shed .g4sh-shed-btn {
+  background: #f59e0b !important;
+  color: #022c22 !important;
+  border-color: #fef3c7 !important;
+  box-shadow: 0 0 0 1px #f59e0b inset, 0 4px 12px -4px #f59e0b66;
+}
+.g4sh-shed .dm-btn:hover:not(:disabled),
+.g4sh-shed .g4sh-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.g4sh-shed .dm-btn.alt,
+.g4sh-shed .g4sh-shed-btn.alt {
+  background: #f59e0b !important;
+  color: #ecfdf5 !important;
+}
+.g4sh-shed .dm-btn:focus-visible,
+.g4sh-shed .g4sh-shed-btn:focus-visible {
+  outline: 2px solid #fef3c7;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

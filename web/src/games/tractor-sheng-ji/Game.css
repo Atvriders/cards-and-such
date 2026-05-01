@@ -1,2 +1,62 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* === SHED-THEME START === */
+/* Theme: Sheng Ji Sky Jade */
+.tsj-shed, .tsj-shed.dm-wrap {
+  background: linear-gradient(180deg,#0c4a6e 0%,#0284c7 50%,#082f49 100%) !important;
+  color: #e0f2fe;
+  --shed-theme-accent: #a7f3d0;
+  --shed-theme-accent2: #10b981;
+  --shed-theme-card-bg: #f0fdfa;
+  --shed-theme-card-text: #0c4a6e;
+  --shed-theme-btn-bg: #10b981;
+  --shed-theme-btn-text: #082f49;
+  --shed-theme-text: #e0f2fe;
+}
+.tsj-shed .dm-info,
+.tsj-shed .dm-score,
+.tsj-shed .dm-result,
+.tsj-shed .dm-final,
+.tsj-shed .dm-done h2,
+.tsj-shed .tsj-shed-info,
+.tsj-shed .tsj-shed-score,
+.tsj-shed .tsj-shed-result,
+.tsj-shed .tsj-shed-final,
+.tsj-shed .tsj-shed-done h2,
+.tsj-shed.tsj-shed-wrap .tsj-shed-info,
+.tsj-shed.tsj-shed-wrap .tsj-shed-score,
+.tsj-shed.tsj-shed-wrap .tsj-shed-result,
+.tsj-shed.tsj-shed-wrap .tsj-shed-final,
+.tsj-shed.tsj-shed-wrap .tsj-shed-done h2 {
+  color: #e0f2fe;
+}
+.tsj-shed .dm-card,
+.tsj-shed .tsj-shed-card {
+  background: #f0fdfa;
+  color: #0c4a6e;
+  border-color: #10b981;
+}
+.tsj-shed .dm-btn,
+.tsj-shed .tsj-shed-btn {
+  background: #10b981 !important;
+  color: #082f49 !important;
+  border-color: #a7f3d0 !important;
+  box-shadow: 0 0 0 1px #10b981 inset, 0 4px 12px -4px #10b98166;
+}
+.tsj-shed .dm-btn:hover:not(:disabled),
+.tsj-shed .tsj-shed-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.tsj-shed .dm-btn.alt,
+.tsj-shed .tsj-shed-btn.alt {
+  background: #10b981 !important;
+  color: #f0fdfa !important;
+}
+.tsj-shed .dm-btn:focus-visible,
+.tsj-shed .tsj-shed-btn:focus-visible {
+  outline: 2px solid #a7f3d0;
+  outline-offset: 3px;
+}
+/* === SHED-THEME END === */

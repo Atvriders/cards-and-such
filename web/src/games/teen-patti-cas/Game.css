@@ -1,2 +1,161 @@
-/* Modern casino-table engine — see web/src/engines/casino/casino.css */
-@import "../../engines/casino/casino.css";
+/*
+ * Marigold Emerald Teen Patti
+ * Unique class prefix: .tp-c-*
+ * Themed palette generated for distinctive per-game visual identity.
+ */
+
+.tp-c-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.1rem 1rem 1.4rem;
+  min-height: 100%;
+  align-items: center;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #fff3d2;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(ellipse at 50% 110%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, #072e22 0%, #02100b 100%);
+  position: relative;
+  isolation: isolate;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 2px #5fe0a855 inset,
+    0 0 32px -10px rgba(255,176,34,0.5) inset,
+    0 18px 40px -22px rgba(0,0,0,0.7);
+}
+.tp-c-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+.tp-c-wrap > * { position: relative; z-index: 1; }
+
+.tp-c-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ffb022;
+  text-shadow: 0 0 14px rgba(255,176,34,0.5);
+}
+.tp-c-info {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #a8d8c2;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+  border: 1px solid #5fe0a840;
+}
+.tp-c-score {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #ffb022;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(255,176,34,0.5);
+}
+
+.tp-c-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tp-c-card {
+  width: 3.4rem;
+  height: 4.7rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff 0%, #f0eee4 100%);
+  color: #1a1a1a;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.6) inset,
+    0 -1px 0 rgba(0,0,0,0.15) inset,
+    0 4px 10px -2px rgba(0,0,0,0.55),
+    0 0 0 1px #5fe0a855;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+.tp-c-card.red { color: #b71c1c; }
+.tp-c-card.black { color: #1a1a1a; }
+.tp-c-card.back {
+  background:
+    repeating-linear-gradient(45deg, #ffb022 0 4px, #02100b 4px 8px);
+  color: #fff3d2;
+}
+
+.tp-c-actions {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tp-c-btn {
+  background: linear-gradient(180deg, #ffb022 0%, #5fe0a8 100%);
+  color: #0d1208;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 -1px 0 rgba(0,0,0,0.25) inset,
+    0 4px 12px -4px rgba(255,176,34,0.5);
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.tp-c-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.tp-c-btn:active { transform: translateY(0); filter: brightness(0.95); }
+.tp-c-btn.alt {
+  background: linear-gradient(180deg, #0a4a36 0%, #02100b 100%);
+  color: #fff3d2;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08) inset,
+    0 -1px 0 rgba(0,0,0,0.4) inset,
+    0 0 0 1px #5fe0a855;
+}
+
+.tp-c-result {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border: 1px solid #ffb02288;
+  color: #fff3d2;
+  text-align: center;
+}
+
+.tp-c-done {
+  text-align: center;
+  padding: 1.6rem 1.4rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, #ffb02233, transparent 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+  border-radius: 12px;
+  border: 2px solid #ffb022;
+  box-shadow: 0 0 28px -6px rgba(255,176,34,0.5);
+}
+
+.tp-c-final {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #ffb022;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 22px rgba(255,176,34,0.5);
+}
