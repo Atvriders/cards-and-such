@@ -1,42 +1,81 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("Klondike (No Redeal)", () => {
-  it("starts in playing phase with full hand", () => {
-    const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+import { initialState, reducer, isTerminal } from "./state.js";
+import type { KlondikeNoRedealState, KlondikeNoRedealSettings } from "./state.js";
+import { SUITS, RANKS } from "../../engines/deck/index.js";
+import type { Suit, Rank } from "../../engines/deck/index.js";
+import type { Pile } from "../../engines/tableau/types.js";
+
+const S: KlondikeNoRedealSettings = {};
+
+describe("Klondike (No Redeal) initialState", () => {
+  it("has 52 cards across all piles", () => {
+    const s = initialState(42, S);
+    expect(s.piles.reduce((sum, p) => sum + p.cards.length, 0)).toBe(52);
   });
-  it("keep advances round and never lowers score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
-  });
-  it("discard advances round and gives at least 1 point", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
-  });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
+
+  it("tableau columns are sized 1..7 with one face-up", () => {
+    const s = initialState(7, S);
+    for (let i = 1; i <= 7; i++) {
+      const p = s.piles.find((pp) => pp.id === `t${i}`)!;
+      expect(p.cards.length).toBe(i);
+      expect(p.faceUpCount).toBe(1);
     }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
   });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
+
+  it("stock holds the remaining 24 cards", () => {
+    const s = initialState(1, S);
+    expect(s.piles.find((p) => p.id === "stock")!.cards.length).toBe(24);
   });
-  it("swap exchanges hand card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+});
+
+describe("Klondike (No Redeal) draw", () => {
+  it("draw moves one card to waste", () => {
+    const s = initialState(42, S);
+    const next = reducer(s, { type: "draw" });
+    expect(next.piles.find((p) => p.id === "stock")!.cards.length).toBe(23);
+    expect(next.piles.find((p) => p.id === "waste")!.cards.length).toBe(1);
+  });
+
+  it("does not recycle waste — there is no recycle action", () => {
+    let cur = initialState(42, S);
+    while (cur.piles.find((p) => p.id === "stock")!.cards.length > 0) {
+      cur = reducer(cur, { type: "draw" });
+    }
+    // No "recycle" action exists; draws on empty stock are no-ops
+    const same = reducer(cur, { type: "draw" });
+    expect(same).toBe(cur);
+    expect(same.piles.find((p) => p.id === "stock")!.cards.length).toBe(0);
+  });
+
+  it("after exhausting stock, waste keeps every card (single pass)", () => {
+    let cur = initialState(42, S);
+    const stockLen = cur.piles.find((p) => p.id === "stock")!.cards.length;
+    for (let i = 0; i < stockLen; i++) {
+      cur = reducer(cur, { type: "draw" });
+    }
+    expect(cur.piles.find((p) => p.id === "waste")!.cards.length).toBe(stockLen);
+  });
+});
+
+describe("Klondike (No Redeal) isTerminal", () => {
+  it("returns null at start", () => {
+    expect(isTerminal(initialState(42, S))).toBeNull();
+  });
+
+  it("returns score when all 52 cards on foundations", () => {
+    const piles: Pile[] = [];
+    let idx = 0;
+    for (let fi = 0; fi < 4; fi++) {
+      piles.push({
+        id: `f${fi + 1}`,
+        kind: "foundation",
+        cards: RANKS.map((r) => ({ suit: SUITS[fi]! as Suit, rank: r as Rank, id: `knr${idx++}` })),
+      });
+    }
+    for (let i = 1; i <= 7; i++) piles.push({ id: `t${i}`, kind: "tableau", cards: [], faceUpCount: 0 });
+    piles.push({ id: "stock", kind: "stock", cards: [] });
+    piles.push({ id: "waste", kind: "waste", cards: [] });
+    const won: KlondikeNoRedealState = { piles, score: 250, movesMade: 50, won: true, settings: S };
+    expect(isTerminal(won)!.score).toBe(250);
   });
 });

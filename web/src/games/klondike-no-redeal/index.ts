@@ -1,16 +1,26 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { KlondikeNoRedealState, KlondikeNoRedealAction, KlondikeNoRedealSettings } from "./state.js";
+import type { KlondikeNoRedealState, KlondikeNoRedealAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KlondikeNoRedealGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
-type S = SettingsOf<typeof settings>;
-export const klondikeNoRedealPlugin: GamePlugin<KlondikeNoRedealState, KlondikeNoRedealAction, typeof settings> = {
-  id:"klondike-no-redeal", title:"Klondike (No Redeal)", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Classic Klondike with a single pass through the stock.",
-  howToPlay:"Klondike (No Redeal) is a ten-round solitaire micro-variant inspired by Klondike (No Redeal): no redeal stock; faces and runs reward keep. Each round you receive a fresh five-card hand drawn from a single seeded 52-card deck. You then choose one of three actions: Keep & Score locks the visible hand and awards points based on face cards, pairs, ascending runs, and same-suit flushes; Discard Hand abandons the hand for a flat one-point consolation and rolls into the next round; and Swap consumes the next card from the deck to replace any single card in the hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay.",
-  settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as KlondikeNoRedealSettings),
-  reducer,isTerminal,component:KlondikeNoRedealGame,
-};
+
+export const klondikeNoRedealPlugin: GamePlugin<KlondikeNoRedealState, KlondikeNoRedealAction, Record<string, never>> = {
+  id: "klondike-no-redeal",
+  title: "Klondike (No Redeal)",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Klondike with a single pass through the stock — no recycling.",
+  howToPlay: `Klondike (No Redeal) plays exactly like classic Klondike but you only get a single pass through the stock — once all cards are turned over to the waste, that's it. There is no recycling.
+
+Setup: Seven tableau columns hold 1–7 cards (only the top card of each face-up). The remaining 24 cards form the stock. Foundations sit empty, ready to be filled Ace to King by suit.
+
+Moves: Build down on tableau in alternating colors. Empty columns accept Kings only. Move single cards or full alt-color sequences. Click a card to auto-route it to the best legal destination. Drag the stock to flip one card to the waste — there is no draw-3 here, just one card per click.
+
+Goal: Move all 52 cards to the four foundations. With no second pass through the stock, this is meaningfully harder than standard Klondike. You must make every waste card count.
+
+Tips: Be very deliberate when emptying the stock — each card you fail to play is one you'll never see again. Empty a tableau column for Kings as early as you can.`,
+  settings: {} as const,
+  initialState: (seed: number) => initialState(seed, {}),
+  reducer,
+  isTerminal,
+  component: KlondikeNoRedealGame,
+} as unknown as GamePlugin;

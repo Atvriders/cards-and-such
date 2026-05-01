@@ -1,42 +1,69 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("SeahavenTowers", () => {
-  it("starts in playing phase with full hand", () => {
-    const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+import { initialState, isTerminal, seahavenTowersRuleset } from "./state.js";
+import type { SeahavenTowersState, SeahavenTowersSettings } from "./state.js";
+import { SUITS, RANKS } from "../../engines/deck/index.js";
+import type { Suit, Rank } from "../../engines/deck/index.js";
+import type { Pile } from "../../engines/tableau/types.js";
+
+const S: SeahavenTowersSettings = {};
+
+describe("Seahaven Towers initialState", () => {
+  it("has 52 cards (10 columns × 5 + 2 in cells)", () => {
+    expect(initialState(42, S).piles.reduce((sum, p) => sum + p.cards.length, 0)).toBe(52);
   });
-  it("keep action increases round and may add score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
-  });
-  it("discard advances round and gives at least 1 point", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
-  });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
+
+  it("10 columns of 5 face-up cards each", () => {
+    const s = initialState(7, S);
+    for (let i = 1; i <= 10; i++) {
+      const p = s.piles.find((pp) => pp.id === `c${i}`)!;
+      expect(p.cards.length).toBe(5);
+      expect(p.faceUpCount).toBe(5);
     }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
   });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
+
+  it("2 cells (fc2, fc3) start with cards, 2 (fc1, fc4) are empty", () => {
+    const s = initialState(7, S);
+    expect(s.piles.find((p) => p.id === "fc1")!.cards.length).toBe(0);
+    expect(s.piles.find((p) => p.id === "fc2")!.cards.length).toBe(1);
+    expect(s.piles.find((p) => p.id === "fc3")!.cards.length).toBe(1);
+    expect(s.piles.find((p) => p.id === "fc4")!.cards.length).toBe(0);
   });
-  it("swap exchanges hand card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+});
+
+describe("Seahaven Towers rules", () => {
+  it("tableau builds suited descending — same suit required", () => {
+    const target: Pile = { id: "c1", kind: "tableau", cards: [{ suit: "♠", rank: 7, id: "x" }], faceUpCount: 1 };
+    expect(seahavenTowersRuleset.canStack(target, [{ suit: "♠", rank: 6, id: "y" }])).toBe(true);
+    // Different suit — rejected (key Seahaven rule)
+    expect(seahavenTowersRuleset.canStack(target, [{ suit: "♥", rank: 6, id: "z" }])).toBe(false);
+  });
+
+  it("only Kings fill empty columns", () => {
+    const empty: Pile = { id: "c1", kind: "tableau", cards: [], faceUpCount: 0 };
+    expect(seahavenTowersRuleset.canStack(empty, [{ suit: "♠", rank: 13, id: "k" }])).toBe(true);
+    expect(seahavenTowersRuleset.canStack(empty, [{ suit: "♠", rank: 1, id: "a" }])).toBe(false);
+    expect(seahavenTowersRuleset.canStack(empty, [{ suit: "♠", rank: 5, id: "5" }])).toBe(false);
+  });
+});
+
+describe("Seahaven Towers isTerminal", () => {
+  it("returns null at start", () => {
+    expect(isTerminal(initialState(42, S))).toBeNull();
+  });
+
+  it("returns score when all 52 on foundations", () => {
+    const piles: Pile[] = [];
+    let idx = 0;
+    for (let fi = 0; fi < 4; fi++) {
+      piles.push({
+        id: `f${fi + 1}`,
+        kind: "foundation",
+        cards: RANKS.map((r) => ({ suit: SUITS[fi]! as Suit, rank: r as Rank, id: `sht${idx++}` })),
+      });
+    }
+    for (let i = 1; i <= 10; i++) piles.push({ id: `c${i}`, kind: "tableau", cards: [], faceUpCount: 0 });
+    for (let i = 1; i <= 4; i++) piles.push({ id: `fc${i}`, kind: "freecell", cards: [] });
+    const won: SeahavenTowersState = { piles, score: 520, movesMade: 100, won: true, settings: S };
+    expect(isTerminal(won)!.score).toBe(520);
   });
 });

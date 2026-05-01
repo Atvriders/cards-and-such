@@ -1,1 +1,35 @@
-@import "../../engines/solmini/solmini.css";
+.vegas-klondike {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  user-select: none;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at top, rgba(110, 16, 30, 0.85), rgba(40, 5, 12, 0.95));
+  min-height: 600px;
+}
+.vk-info {
+  display: flex; gap: 16px; align-items: center;
+  font-size: 14px; font-weight: 700;
+  color: #fef3c7;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.vk-auto-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid rgba(245, 158, 11, 0.55);
+  border-radius: 6px;
+  background: rgba(180, 83, 9, 0.4);
+  color: #fef3c7; cursor: pointer; font-size: 13px;
+}
+.vk-auto-btn:hover { background: rgba(217, 119, 6, 0.6); }
+.vk-top-row, .vk-tableau-row { display: flex; gap: 10px; flex-wrap: nowrap; }
+.vk-spacer { flex: 1; }
+.vegas-klondike .pile-wrapper { flex-shrink: 0; }
+.vk-stock-wrapper { cursor: pointer; }
+.vk-stock-wrapper:hover { filter: brightness(1.08); }
+@media (max-width: 720px) {
+  .vegas-klondike { padding: 10px; gap: 10px; }
+  .vk-top-row, .vk-tableau-row { gap: 4px; overflow-x: auto; }
+}

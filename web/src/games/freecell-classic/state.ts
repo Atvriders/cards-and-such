@@ -1,116 +1,164 @@
+import type { Pile } from "../../engines/tableau/types.js";
+import { canMove, applyMove, klondikeTableauStack, foundationStack, freecellCellStack } from "../../engines/tableau/moves.js";
+import type { Ruleset } from "../../engines/tableau/types.js";
+import { newDeck, shuffle } from "../../engines/deck/index.js";
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const ROUNDS = 10;
-export const HAND_SIZE = 5;
-
-export interface FreecellClassicSettings { dummy: boolean; }
+export interface FreecellClassicSettings {
+  _dummy?: undefined;
+}
 
 export interface FreecellClassicState {
-  rngSeed: number;
-  deck: number[];
-  pos: number;
-  hand: number[];
-  round: number;
+  piles: Pile[];
   score: number;
-  phase: "playing" | "done";
-  log: string[];
+  movesMade: number;
+  won: boolean;
+  settings: FreecellClassicSettings;
 }
 
 export type FreecellClassicAction =
-  | { type: "keep" }
-  | { type: "discard"; index: number }
-  | { type: "swap"; index: number }
-  | { type: "noop" };
+  | { type: "move"; fromPile: string; toPile: string; count: number }
+  | { type: "auto-move-to-foundation" };
 
-export function cardName(c: number): string {
-  const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
-  const suits = ["♠","♥","♦","♣"];
-  return ranks[c % 13]! + suits[Math.floor(c / 13) % 4]!;
+const CASCADE_IDS = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"] as const;
+const FREECELL_IDS = ["fc1", "fc2", "fc3", "fc4"] as const;
+const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"] as const;
+
+export const freecellClassicRuleset: Ruleset = {
+  canStack: (target, moving) => {
+    if (target.kind === "freecell") return freecellCellStack(target, moving);
+    if (target.kind === "foundation") return foundationStack(target, moving);
+    if (target.kind === "tableau") return klondikeTableauStack(target, moving);
+    return false;
+  },
+  canPickUp: (pile, count) => {
+    if (pile.kind === "freecell") return count === 1;
+    if (pile.kind === "foundation") return count === 1;
+    if (pile.kind === "tableau") {
+      if (count > pile.cards.length) return false;
+      const cards = pile.cards.slice(pile.cards.length - count);
+      for (let i = 0; i < cards.length - 1; i++) {
+        const upper = cards[i]!;
+        const lower = cards[i + 1]!;
+        const upperIsRed = upper.suit === "♥" || upper.suit === "♦";
+        const lowerIsRed = lower.suit === "♥" || lower.suit === "♦";
+        if (upperIsRed === lowerIsRed) return false;
+        if (upper.rank !== lower.rank + 1) return false;
+      }
+      return true;
+    }
+    return false;
+  },
+};
+
+function countEmptyFreeCells(piles: Pile[]): number {
+  return FREECELL_IDS.filter((id) => {
+    const p = piles.find((pp) => pp.id === id);
+    return p && p.cards.length === 0;
+  }).length;
 }
 
-export function cardRank(c: number): number { return (c % 13) + 1; }
-export function cardSuit(c: number): number { return Math.floor(c / 13) % 4; }
-
-function shuffle(rng: () => number, n: number): number[] {
-  const a: number[] = [];
-  for (let i = 0; i < n; i++) a.push(i);
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+function countEmptyCascades(piles: Pile[], excludeId?: string): number {
+  return CASCADE_IDS.filter((id) => {
+    if (id === excludeId) return false;
+    const p = piles.find((pp) => pp.id === id);
+    return p && p.cards.length === 0;
+  }).length;
 }
 
-function deal(deck: number[], pos: number): { hand: number[]; pos: number } {
-  const hand = deck.slice(pos, pos + HAND_SIZE);
-  return { hand, pos: pos + HAND_SIZE };
+function maxMoveable(piles: Pile[], toPileId: string): number {
+  const emptyCells = countEmptyFreeCells(piles);
+  const emptyCascades = countEmptyCascades(piles, toPileId);
+  return (1 + emptyCells) * Math.pow(2, emptyCascades);
 }
 
-function scoreHand(hand: number[]): { score: number; reason: string } {
-  // Reward face cards, pairs, and ascending runs.
-  let score = 0;
-  const reasons: string[] = [];
-  const faces = hand.filter((c) => cardRank(c) >= 11).length;
-  if (faces >= 1) { score += faces * 5; reasons.push(`${faces} face`); }
-  const ranks = hand.map(cardRank).sort((a, b) => a - b);
-  const ranksAll = hand.map(cardRank);
-  const counts: Record<number, number> = {};
-  for (const r of ranksAll) counts[r] = (counts[r] || 0) + 1;
-  const pairs = Object.values(counts).filter((v) => v >= 2).length;
-  if (pairs >= 1) { score += pairs * 10; reasons.push(`${pairs} pair`); }
-  let asc = 1, best = 1;
-  for (let i = 1; i < ranks.length; i++) {
-    if (ranks[i]! === ranks[i - 1]! + 1) { asc++; best = Math.max(best, asc); } else if (ranks[i]! !== ranks[i - 1]!) { asc = 1; }
-  }
-  if (best >= 3) { score += best * 4; reasons.push(`run${best}`); }
-  const suits = new Set(hand.map(cardSuit));
-  if (suits.size === 1) { score += 12; reasons.push("flush"); }
-  if (score === 0) score = 1;
-  return { score, reason: reasons.join(",") || "weak" };
-}
-
-export function initialState(seed: number, _s: FreecellClassicSettings): FreecellClassicState {
+export function initialState(seed: number, settings: FreecellClassicSettings): FreecellClassicState {
   const rng = mulberry32(seed);
-  const deck = shuffle(rng, 52);
-  const { hand, pos } = deal(deck, 0);
-  return { rngSeed: seed, deck, pos, hand, round: 0, score: 0, phase: "playing", log: [] };
+  const deck = shuffle(newDeck(), rng);
+  const piles: Pile[] = [];
+  // 8 cascades: first 4 get 7, last 4 get 6 — all face-up
+  let idx = 0;
+  for (let i = 0; i < 8; i++) {
+    const count = i < 4 ? 7 : 6;
+    piles.push({ id: CASCADE_IDS[i]!, kind: "tableau", cards: deck.slice(idx, idx + count), faceUpCount: count });
+    idx += count;
+  }
+  for (const id of FREECELL_IDS) piles.push({ id, kind: "freecell", cards: [] });
+  for (const id of FOUNDATION_IDS) piles.push({ id, kind: "foundation", cards: [] });
+  return { piles, score: 52, movesMade: 0, won: false, settings };
+}
+
+function getPile(piles: Pile[], id: string): Pile | undefined {
+  return piles.find((p) => p.id === id);
+}
+
+function totalOnFoundations(piles: Pile[]): number {
+  return FOUNDATION_IDS.reduce((sum, id) => {
+    const p = piles.find((pp) => pp.id === id);
+    return sum + (p?.cards.length ?? 0);
+  }, 0);
 }
 
 export function reducer(state: FreecellClassicState, action: FreecellClassicAction): FreecellClassicState {
-  if (state.phase === "done") return state;
-  if (action.type === "noop") return state;
-  if (action.type === "keep") {
-    const { score, reason } = scoreHand(state.hand);
-    const newScore = state.score + score;
-    const round = state.round + 1;
-    const log = [...state.log, `R${round}: keep +${score} (${reason})`];
-    if (round >= ROUNDS || state.pos + HAND_SIZE > state.deck.length) {
-      return { ...state, score: newScore, round, phase: "done", log };
+  if (state.won) return state;
+
+  switch (action.type) {
+    case "move": {
+      const { fromPile, toPile, count } = action;
+      const max = maxMoveable(state.piles, toPile);
+      if (count > max) return state;
+      if (!canMove(state.piles, { fromPile, toPile, count }, freecellClassicRuleset)) return state;
+      const newPiles = applyMove(state.piles, { fromPile, toPile, count });
+      const total = totalOnFoundations(newPiles);
+      const newMoves = state.movesMade + 1;
+      return {
+        ...state,
+        piles: newPiles,
+        movesMade: newMoves,
+        score: Math.max(0, 52 - newMoves),
+        won: total === 52,
+      };
     }
-    const next = state.deck.slice(state.pos, state.pos + HAND_SIZE);
-    return { ...state, score: newScore, round, hand: next, pos: state.pos + HAND_SIZE, log };
-  }
-  if (action.type === "discard") {
-    if (action.index < 0 || action.index >= state.hand.length) return state;
-    const round = state.round + 1;
-    const log = [...state.log, `R${round}: discard`];
-    if (round >= ROUNDS || state.pos + HAND_SIZE > state.deck.length) {
-      return { ...state, round, phase: "done", log, score: state.score + 1 };
+
+    case "auto-move-to-foundation": {
+      let piles = state.piles;
+      let moves = state.movesMade;
+      let moved = true;
+      while (moved) {
+        moved = false;
+        for (const sid of [...CASCADE_IDS, ...FREECELL_IDS]) {
+          const sp = getPile(piles, sid);
+          if (!sp || sp.cards.length === 0) continue;
+          for (const fid of FOUNDATION_IDS) {
+            const move = { fromPile: sid, toPile: fid, count: 1 };
+            if (canMove(piles, move, freecellClassicRuleset)) {
+              piles = applyMove(piles, move);
+              moves += 1;
+              moved = true;
+              break;
+            }
+          }
+          if (moved) break;
+        }
+      }
+      if (piles === state.piles) return state;
+      const total = totalOnFoundations(piles);
+      return {
+        ...state,
+        piles,
+        movesMade: moves,
+        score: Math.max(0, 52 - moves),
+        won: total === 52,
+      };
     }
-    const next = state.deck.slice(state.pos, state.pos + HAND_SIZE);
-    return { ...state, round, hand: next, pos: state.pos + HAND_SIZE, log: [...log], score: state.score + 1 };
+
+    default:
+      return state;
   }
-  if (action.type === "swap") {
-    if (action.index < 0 || action.index >= state.hand.length) return state;
-    if (state.pos >= state.deck.length) return state;
-    const swapCard = state.deck[state.pos]!;
-    const newHand = [...state.hand];
-    newHand[action.index] = swapCard;
-    return { ...state, hand: newHand, pos: state.pos + 1 };
-  }
-  return state;
 }
 
 export function isTerminal(state: FreecellClassicState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const total = totalOnFoundations(state.piles);
+  if (total !== 52) return null;
+  return { score: Math.max(0, state.score) };
 }

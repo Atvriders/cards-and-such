@@ -1,35 +1,70 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SpiderOneSuitState, SpiderOneSuitAction, SpiderOneSuitSettings } from "./state.js";
-import { isTerminal, cardName, ROUNDS } from "./state.js";
+import { spiderOneSuitRuleset } from "./state.js";
+import { Pile } from "../../engines/tableau/Pile.js";
+import { useDragDrop } from "../../engines/tableau/useDragDrop.js";
+import { findAutoMove } from "../../engines/tableau/index.js";
 import "./Game.css";
 
-export function SpiderOneSuitGame({ state, dispatch, onGameOver }: GameProps<SpiderOneSuitState, SpiderOneSuitSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    const rating = state.score >= 120 ? "Excellent" : state.score >= 80 ? "Good" : state.score >= 40 ? "Fair" : "Pass";
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div className="sol-final">{state.score} pts</div><div>{rating}</div></div></div>;
-  }
+export function SpiderOneSuitGame({
+  state,
+  dispatch,
+  onGameOver,
+}: GameProps<SpiderOneSuitState, SpiderOneSuitSettings>): JSX.Element {
+  const { onDragStart, onDragOver, onDrop } = useDragDrop();
+
+  const handleMove = useCallback(
+    (from: string, to: string, count: number) => {
+      dispatch({ type: "move", fromPile: from, toPile: to, count } as SpiderOneSuitAction);
+    },
+    [dispatch],
+  );
+
+  const handleCardClick = useCallback(
+    (pileId: string, indexFromTop: number) => {
+      const pile = state.piles.find((p) => p.id === pileId);
+      if (!pile) return;
+      const faceUpCount = pile.faceUpCount ?? (pile.kind === "tableau" ? 0 : pile.cards.length);
+      const count = indexFromTop + 1;
+      if (count > faceUpCount) return;
+      const target = findAutoMove(state.piles, pileId, count, spiderOneSuitRuleset);
+      if (target) dispatch({ type: "move", fromPile: pileId, toPile: target, count } as SpiderOneSuitAction);
+    },
+    [state.piles, dispatch],
+  );
+
+  const handleStockClick = useCallback(() => dispatch({ type: "deal-row" } as SpiderOneSuitAction), [dispatch]);
+
+  if (state.won) onGameOver(state.score);
+
+  const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
+  const stock = getPile("stock");
+  const dealsRemaining = Math.floor(stock.cards.length / 10);
+
   return (
-    <div className="sol-wrap">
-      <div className="sol-header">
-        <span className="sol-info">Round: {state.round + 1} / {ROUNDS}</span>
-        <span className="sol-score">{state.score} pts</span>
+    <div className="sp1">
+      <div className="sp1-info">
+        <span>Moves: {state.movesMade}</span>
+        <span>Score: {state.score}</span>
+        <span>Suits: {state.completedSuits}/8</span>
+        <span>Deals left: {dealsRemaining}</span>
       </div>
-      <div className="sol-board">
-        {state.hand.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "swap", index: i } as SpiderOneSuitAction)}>
-            {cardName(c)}
-          </button>
+      <div className="sp1-top-row">
+        <div className="pile-wrapper sp1-stock-wrapper" onClick={handleStockClick} title={`Deal a row (${dealsRemaining} remaining)`}>
+          <Pile pile={getPile("stock")} onDrop={(id) => onDrop(id, handleMove)} onDragOver={onDragOver} />
+        </div>
+        <div className="sp1-spacer" />
+        <div className="pile-wrapper sp1-completed-wrapper" title={`${state.completedSuits} suits completed`}>
+          <Pile pile={getPile("completed")} onDrop={(id) => onDrop(id, handleMove)} onDragOver={onDragOver} />
+        </div>
+      </div>
+      <div className="sp1-tableau-row">
+        {["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10"].map((id) => (
+          <div key={id} className="pile-wrapper">
+            <Pile pile={getPile(id)} onCardDragStart={onDragStart} onDrop={(pid) => onDrop(pid, handleMove)} onDragOver={onDragOver} onCardClick={handleCardClick} />
+          </div>
         ))}
-      </div>
-      <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SpiderOneSuitAction)}>Keep & Score</button>
-        <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as SpiderOneSuitAction)}>Discard Hand</button>
-      </div>
-      <div className="sol-log">
-        {state.log.slice(-3).map((l, i) => (<div key={i}>{l}</div>))}
       </div>
     </div>
   );

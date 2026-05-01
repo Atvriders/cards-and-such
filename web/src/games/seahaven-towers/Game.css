@@ -1,1 +1,27 @@
-@import "../../engines/solmini/solmini.css";
+.sht {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  user-select: none;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at top, rgba(15, 60, 100, 0.85), rgba(5, 20, 35, 0.95));
+  min-height: 600px;
+}
+.sht-info { display: flex; gap: 16px; align-items: center; font-size: 14px; font-weight: 600; color: #e0f2fe; }
+.sht-auto-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid rgba(56, 189, 248, 0.55);
+  border-radius: 6px;
+  background: rgba(14, 116, 144, 0.4);
+  color: #fff; cursor: pointer; font-size: 13px;
+}
+.sht-auto-btn:hover { background: rgba(8, 145, 178, 0.6); }
+.sht-top-row, .sht-tableau-row { display: flex; gap: 8px; flex-wrap: nowrap; }
+.sht-spacer { flex: 1; }
+.sht .pile-wrapper { flex-shrink: 0; }
+@media (max-width: 900px) {
+  .sht { padding: 10px; gap: 8px; }
+  .sht-top-row, .sht-tableau-row { gap: 4px; overflow-x: auto; }
+}

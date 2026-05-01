@@ -1,16 +1,32 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { SeahavenTowersState, SeahavenTowersAction, SeahavenTowersSettings } from "./state.js";
+import type { SeahavenTowersState, SeahavenTowersAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SeahavenTowersGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
-type S = SettingsOf<typeof settings>;
-export const seahavenTowersPlugin: GamePlugin<SeahavenTowersState, SeahavenTowersAction, typeof settings> = {
-  id:"seahaven-towers", title:"Seahaven Towers", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"A 10-round solitaire micro-variant inspired by Seahaven Towers micro with by-suit feel and free-cell pacing.",
-  howToPlay:"Seahaven Towers is a compact 10-round solitaire micro-variant inspired by Seahaven Towers micro with by-suit feel and free-cell pacing. Each round you receive a fresh hand of five cards drawn from a single seeded deck. You then choose one of three actions: Keep & Score locks the current hand and awards points based on face cards, pairs, ascending runs, and same-suit flushes; Discard Hand abandons it for a flat one-point consolation and rolls into the next round; Swap consumes the next deck card to replace any single card in the visible hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay.",
-  settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as SeahavenTowersSettings),
-  reducer,isTerminal,component:SeahavenTowersGame,
-};
+
+export const seahavenTowersPlugin: GamePlugin<SeahavenTowersState, SeahavenTowersAction, Record<string, never>> = {
+  id: "seahaven-towers",
+  title: "Seahaven Towers",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "FreeCell variant: 10 columns, 4 cells, suited descending tableau, only Kings fill empties.",
+  howToPlay: `Seahaven Towers is a FreeCell-family variant invented for the original Macintosh.
+
+Setup: 10 tableau columns of 5 cards each (50 cards). The remaining 2 cards go into the middle two of 4 cells. Foundations start empty.
+
+Tableau rule: Build down by SAME SUIT (not alternating colors). This is the key difference from FreeCell — sequences must be suited.
+
+Empty columns: Only Kings can fill an empty tableau column.
+
+Cells: Each of the 4 cells holds exactly one card.
+
+Foundations: Build up by suit Ace to King.
+
+Multi-card moves: Limited by (1 + empty cells) × 2^(empty columns), as in FreeCell.
+
+Tips: Suited builds and the King-only empty rule make this much harder than classic FreeCell. Plan carefully — opening an empty column without a King ready is a wasted move.`,
+  settings: {} as const,
+  initialState: (seed: number) => initialState(seed, {}),
+  reducer,
+  isTerminal,
+  component: SeahavenTowersGame,
+} as unknown as GamePlugin;

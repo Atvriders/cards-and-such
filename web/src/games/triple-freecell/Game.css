@@ -1,1 +1,28 @@
-@import "../../engines/solmini/solmini.css";
+.tfc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  user-select: none;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at top, rgba(20, 70, 90, 0.85), rgba(8, 28, 40, 0.95));
+  min-height: 600px;
+}
+.tfc-info { display: flex; gap: 14px; align-items: center; font-size: 13px; font-weight: 600; color: #f1f5f9; }
+.tfc-auto-btn {
+  margin-left: auto;
+  padding: 5px 10px;
+  border: 1px solid rgba(99, 102, 241, 0.55);
+  border-radius: 6px;
+  background: rgba(67, 56, 202, 0.4);
+  color: #fff; cursor: pointer; font-size: 12px;
+}
+.tfc-auto-btn:hover { background: rgba(99, 102, 241, 0.6); }
+.tfc-top-row { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+.tfc-cells, .tfc-foundations { display: flex; gap: 4px; flex-wrap: wrap; }
+.tfc-cascade-row { display: flex; gap: 3px; flex-wrap: nowrap; overflow-x: auto; }
+.tfc .pile-wrapper { flex-shrink: 0; }
+@media (max-width: 1100px) {
+  .tfc { padding: 8px; gap: 6px; }
+  .tfc-cascade-row { gap: 2px; }
+}

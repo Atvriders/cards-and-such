@@ -1,42 +1,76 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("SpiderFourSuits", () => {
-  it("starts in playing phase with a hand", () => {
+import { initialState, reducer, isTerminal, spiderFourSuitsRuleset } from "./state.js";
+import type { SpiderFourSuitsState, SpiderFourSuitsSettings } from "./state.js";
+import type { Pile } from "../../engines/tableau/types.js";
+
+const S: SpiderFourSuitsSettings = {};
+
+describe("Spider Four Suits initialState", () => {
+  it("has 104 cards (two full decks)", () => {
+    expect(initialState(42, S).piles.reduce((sum, p) => sum + p.cards.length, 0)).toBe(104);
+  });
+
+  it("has all four suits", () => {
+    const s = initialState(7, S);
+    const suits = new Set<string>();
+    for (const p of s.piles) for (const c of p.cards) suits.add(c.suit);
+    expect(suits.size).toBe(4);
+  });
+
+  it("10 columns, first 4 with 6 cards, last 6 with 5", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
-  });
-  it("keep advances round and never decreases score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
-  });
-  it("discard advances round and gives at least 1 point", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
-  });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
+    for (let i = 1; i <= 10; i++) {
+      const p = s.piles.find((pp) => pp.id === `t${i}`)!;
+      expect(p.cards.length).toBe(i <= 4 ? 6 : 5);
     }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
   });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
+});
+
+describe("Spider Four Suits rules", () => {
+  it("only same-suit descending sequences can be picked up together", () => {
+    // Top of pile is ♠5, ♠4 — pickable as 2.
+    const pile: Pile = {
+      id: "t1",
+      kind: "tableau",
+      cards: [
+        { suit: "♠", rank: 5, id: "a" },
+        { suit: "♠", rank: 4, id: "b" },
+      ],
+      faceUpCount: 2,
+    };
+    expect(spiderFourSuitsRuleset.canPickUp(pile, 2)).toBe(true);
+
+    // Mixed suits: ♥5 → ♠4 — NOT pickable
+    const mixed: Pile = {
+      id: "t1",
+      kind: "tableau",
+      cards: [
+        { suit: "♥", rank: 5, id: "x" },
+        { suit: "♠", rank: 4, id: "y" },
+      ],
+      faceUpCount: 2,
+    };
+    expect(spiderFourSuitsRuleset.canPickUp(mixed, 2)).toBe(false);
   });
-  it("swap exchanges card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+
+  it("any card can be placed on a higher rank (mixed suits OK for placement)", () => {
+    const target: Pile = { id: "t1", kind: "tableau", cards: [{ suit: "♠", rank: 6, id: "x" }], faceUpCount: 1 };
+    expect(spiderFourSuitsRuleset.canStack(target, [{ suit: "♥", rank: 5, id: "y" }])).toBe(true);
+  });
+});
+
+describe("Spider Four Suits reducer", () => {
+  it("deal-row distributes 10 cards", () => {
+    const s = initialState(42, S);
+    const next = reducer(s, { type: "deal-row" });
+    expect(next.piles.find((p) => p.id === "stock")!.cards.length).toBe(40);
+  });
+});
+
+describe("Spider Four Suits isTerminal", () => {
+  it("returns score on win", () => {
+    const s = initialState(42, S);
+    const won: SpiderFourSuitsState = { ...s, completedSuits: 8, won: true, score: 380, movesMade: 200 };
+    expect(isTerminal(won)!.score).toBe(380);
   });
 });

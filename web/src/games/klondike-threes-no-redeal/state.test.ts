@@ -1,42 +1,69 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("KlondikeThreesNoRedeal", () => {
-  it("starts in playing phase with a hand", () => {
-    const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+import { initialState, reducer, isTerminal } from "./state.js";
+import type { KlondikeThreesNoRedealState, KlondikeThreesNoRedealSettings } from "./state.js";
+import { SUITS, RANKS } from "../../engines/deck/index.js";
+import type { Suit, Rank } from "../../engines/deck/index.js";
+import type { Pile } from "../../engines/tableau/types.js";
+
+const S: KlondikeThreesNoRedealSettings = {};
+
+describe("Klondike Threes (No Redeal) initialState", () => {
+  it("has 52 cards across all piles", () => {
+    expect(initialState(42, S).piles.reduce((sum, p) => sum + p.cards.length, 0)).toBe(52);
   });
-  it("keep advances round and never decreases score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
+  it("stock has 24, tableau totals 28", () => {
+    const s = initialState(7, S);
+    expect(s.piles.find((p) => p.id === "stock")!.cards.length).toBe(24);
   });
-  it("discard advances round and gives at least 1 point", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
+});
+
+describe("Klondike Threes (No Redeal) draw", () => {
+  it("draw flips 3 cards to waste", () => {
+    const s = initialState(42, S);
+    const next = reducer(s, { type: "draw" });
+    expect(next.piles.find((p) => p.id === "waste")!.cards.length).toBe(3);
+    expect(next.piles.find((p) => p.id === "stock")!.cards.length).toBe(21);
   });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
+
+  it("there is no recycle action — once empty, stock stays empty", () => {
+    let cur = initialState(42, S);
+    while (cur.piles.find((p) => p.id === "stock")!.cards.length > 0) {
+      cur = reducer(cur, { type: "draw" });
     }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
+    // Draw again: no-op
+    const same = reducer(cur, { type: "draw" });
+    expect(same.piles.find((p) => p.id === "stock")!.cards.length).toBe(0);
   });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
+
+  it("waste accumulates the entire stock after exhaustion", () => {
+    let cur = initialState(42, S);
+    const stockLen = cur.piles.find((p) => p.id === "stock")!.cards.length;
+    while (cur.piles.find((p) => p.id === "stock")!.cards.length > 0) {
+      cur = reducer(cur, { type: "draw" });
+    }
+    expect(cur.piles.find((p) => p.id === "waste")!.cards.length).toBe(stockLen);
   });
-  it("swap exchanges card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+});
+
+describe("Klondike Threes (No Redeal) isTerminal", () => {
+  it("returns null at start", () => {
+    expect(isTerminal(initialState(42, S))).toBeNull();
+  });
+
+  it("returns score when all 52 on foundations", () => {
+    const piles: Pile[] = [];
+    let idx = 0;
+    for (let fi = 0; fi < 4; fi++) {
+      piles.push({
+        id: `f${fi + 1}`,
+        kind: "foundation",
+        cards: RANKS.map((r) => ({ suit: SUITS[fi]! as Suit, rank: r as Rank, id: `k3nr${idx++}` })),
+      });
+    }
+    for (let i = 1; i <= 7; i++) piles.push({ id: `t${i}`, kind: "tableau", cards: [], faceUpCount: 0 });
+    piles.push({ id: "stock", kind: "stock", cards: [] });
+    piles.push({ id: "waste", kind: "waste", cards: [] });
+    const won: KlondikeThreesNoRedealState = { piles, score: 200, movesMade: 50, won: true, settings: S };
+    expect(isTerminal(won)!.score).toBe(200);
   });
 });

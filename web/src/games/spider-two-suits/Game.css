@@ -1,1 +1,22 @@
-@import "../../engines/solmini/solmini.css";
+.sp2 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at top, rgba(60, 25, 80, 0.85), rgba(25, 8, 35, 0.95));
+  min-height: 600px;
+}
+.sp2-info { display: flex; gap: 16px; align-items: center; font-size: 14px; font-weight: 600; color: #f1f5f9; }
+.sp2-top-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: nowrap; }
+.sp2-spacer { flex: 1; }
+.sp2-tableau-row { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; }
+.sp2 .pile-wrapper { flex-shrink: 0; }
+.sp2-stock-wrapper { cursor: pointer; transition: transform 120ms ease, filter 120ms ease; }
+.sp2-stock-wrapper:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.sp2-completed-wrapper { cursor: default; }
+@media (max-width: 900px) {
+  .sp2 { padding: 10px; gap: 8px; }
+  .sp2-tableau-row { gap: 4px; }
+}

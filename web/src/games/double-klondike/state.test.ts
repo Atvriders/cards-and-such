@@ -1,42 +1,76 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("DoubleKlondike", () => {
-  it("starts in playing phase with full hand", () => {
-    const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+import { initialState, reducer, isTerminal } from "./state.js";
+import type { DoubleKlondikeState, DoubleKlondikeSettings } from "./state.js";
+import { SUITS, RANKS } from "../../engines/deck/index.js";
+import type { Suit, Rank } from "../../engines/deck/index.js";
+import type { Pile } from "../../engines/tableau/types.js";
+
+const S: DoubleKlondikeSettings = {};
+
+describe("Double Klondike initialState", () => {
+  it("uses two decks (104 cards total)", () => {
+    expect(initialState(42, S).piles.reduce((sum, p) => sum + p.cards.length, 0)).toBe(104);
   });
-  it("keep action increases round and may add score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
-  });
-  it("discard advances round and gives at least 1 point", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
-  });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
+
+  it("has 9 tableau columns of sizes 1..9", () => {
+    const s = initialState(7, S);
+    for (let i = 1; i <= 9; i++) {
+      const p = s.piles.find((pp) => pp.id === `t${i}`)!;
+      expect(p.cards.length).toBe(i);
+      expect(p.faceUpCount).toBe(1);
     }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
   });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
+
+  it("has 8 foundation piles", () => {
+    const s = initialState(1, S);
+    const founds = s.piles.filter((p) => p.kind === "foundation");
+    expect(founds.length).toBe(8);
   });
-  it("swap exchanges hand card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+
+  it("stock holds 104 - 45 = 59 cards", () => {
+    expect(initialState(1, S).piles.find((p) => p.id === "stock")!.cards.length).toBe(59);
+  });
+});
+
+describe("Double Klondike actions", () => {
+  it("draw moves one card to waste", () => {
+    const s = initialState(42, S);
+    const next = reducer(s, { type: "draw" });
+    expect(next.piles.find((p) => p.id === "waste")!.cards.length).toBe(1);
+  });
+
+  it("recycle returns waste to empty stock", () => {
+    let cur = initialState(42, S);
+    while (cur.piles.find((p) => p.id === "stock")!.cards.length > 0) {
+      cur = reducer(cur, { type: "draw" });
+    }
+    const wasteLen = cur.piles.find((p) => p.id === "waste")!.cards.length;
+    const r = reducer(cur, { type: "recycle" });
+    expect(r.piles.find((p) => p.id === "stock")!.cards.length).toBe(wasteLen);
+    expect(r.piles.find((p) => p.id === "waste")!.cards.length).toBe(0);
+  });
+});
+
+describe("Double Klondike isTerminal", () => {
+  it("requires 104 cards on foundations", () => {
+    expect(isTerminal(initialState(42, S))).toBeNull();
+  });
+
+  it("returns score when all 104 on foundations (8 piles × 13 cards)", () => {
+    const piles: Pile[] = [];
+    let idx = 0;
+    for (let fi = 0; fi < 8; fi++) {
+      const suit = SUITS[fi % 4]! as Suit;
+      piles.push({
+        id: `f${fi + 1}`,
+        kind: "foundation",
+        cards: RANKS.map((r) => ({ suit, rank: r as Rank, id: `dk${idx++}` })),
+      });
+    }
+    for (let i = 1; i <= 9; i++) piles.push({ id: `t${i}`, kind: "tableau", cards: [], faceUpCount: 0 });
+    piles.push({ id: "stock", kind: "stock", cards: [] });
+    piles.push({ id: "waste", kind: "waste", cards: [] });
+    const won: DoubleKlondikeState = { piles, score: 1040, movesMade: 200, won: true, settings: S };
+    expect(isTerminal(won)!.score).toBe(1040);
   });
 });

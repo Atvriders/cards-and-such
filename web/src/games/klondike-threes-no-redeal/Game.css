@@ -1,1 +1,29 @@
-@import "../../engines/solmini/solmini.css";
+.k3nr {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  user-select: none;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at top, rgba(60, 30, 80, 0.85), rgba(28, 12, 38, 0.95));
+  min-height: 600px;
+}
+.k3nr-info { display: flex; gap: 16px; align-items: center; font-size: 14px; font-weight: 600; color: #f1f5f9; }
+.k3nr-auto-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid rgba(99, 102, 241, 0.55);
+  border-radius: 6px;
+  background: rgba(67, 56, 202, 0.4);
+  color: #fff; cursor: pointer; font-size: 13px;
+}
+.k3nr-auto-btn:hover { background: rgba(99, 102, 241, 0.6); }
+.k3nr-top-row, .k3nr-tableau-row { display: flex; gap: 10px; flex-wrap: nowrap; }
+.k3nr-spacer { flex: 1; }
+.k3nr .pile-wrapper { flex-shrink: 0; }
+.k3nr-stock-wrapper { cursor: pointer; }
+.k3nr-stock-wrapper:hover { filter: brightness(1.08); }
+@media (max-width: 720px) {
+  .k3nr { padding: 10px; gap: 10px; }
+  .k3nr-top-row, .k3nr-tableau-row { gap: 4px; overflow-x: auto; }
+}

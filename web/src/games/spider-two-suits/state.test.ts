@@ -1,42 +1,50 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("SpiderTwoSuits", () => {
-  it("starts in playing phase with full hand", () => {
+import { initialState, reducer, isTerminal } from "./state.js";
+import type { SpiderTwoSuitsState, SpiderTwoSuitsSettings } from "./state.js";
+
+const S: SpiderTwoSuitsSettings = {};
+
+describe("Spider Two Suits initialState", () => {
+  it("has 104 cards (4 decks of spades + hearts)", () => {
+    expect(initialState(42, S).piles.reduce((sum, p) => sum + p.cards.length, 0)).toBe(104);
+  });
+
+  it("uses only spades and hearts", () => {
+    const s = initialState(7, S);
+    let other = 0;
+    for (const p of s.piles) for (const c of p.cards) if (c.suit !== "♠" && c.suit !== "♥") other++;
+    expect(other).toBe(0);
+  });
+
+  it("10 columns, first 4 with 6 cards, last 6 with 5", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
-  });
-  it("keep action increases round and may add score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
-  });
-  it("discard advances round and gives at least 1 point", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
-  });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
+    for (let i = 1; i <= 10; i++) {
+      const p = s.piles.find((pp) => pp.id === `t${i}`)!;
+      expect(p.cards.length).toBe(i <= 4 ? 6 : 5);
     }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
   });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
+
+  it("stock holds remaining 50", () => {
+    expect(initialState(1, S).piles.find((p) => p.id === "stock")!.cards.length).toBe(50);
   });
-  it("swap exchanges hand card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+});
+
+describe("Spider Two Suits reducer", () => {
+  it("deal-row distributes cards", () => {
+    const s = initialState(42, S);
+    const next = reducer(s, { type: "deal-row" });
+    expect(next.piles.find((p) => p.id === "stock")!.cards.length).toBe(40);
+  });
+});
+
+describe("Spider Two Suits isTerminal", () => {
+  it("returns null until 8 suits complete", () => {
+    expect(isTerminal(initialState(42, S))).toBeNull();
+  });
+
+  it("returns score on win", () => {
+    const s = initialState(42, S);
+    const won: SpiderTwoSuitsState = { ...s, completedSuits: 8, won: true, score: 460, movesMade: 130 };
+    expect(isTerminal(won)!.score).toBe(460);
   });
 });

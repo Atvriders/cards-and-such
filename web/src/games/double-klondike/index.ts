@@ -1,16 +1,30 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { DoubleKlondikeState, DoubleKlondikeAction, DoubleKlondikeSettings } from "./state.js";
+import type { DoubleKlondikeState, DoubleKlondikeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DoubleKlondikeGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
-type S = SettingsOf<typeof settings>;
-export const doubleKlondikePlugin: GamePlugin<DoubleKlondikeState, DoubleKlondikeAction, typeof settings> = {
-  id:"double-klondike", title:"Double Klondike", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"A 10-round solitaire micro-variant inspired by two-deck-feel Klondike micro with extra column rhythm.",
-  howToPlay:"Double Klondike is a compact 10-round solitaire micro-variant inspired by two-deck-feel Klondike micro with extra column rhythm. Each round you receive a fresh hand of five cards drawn from a single seeded deck. You then choose one of three actions: Keep & Score locks the current hand and awards points based on face cards, pairs, ascending runs, and same-suit flushes; Discard Hand abandons it for a flat one-point consolation and rolls into the next round; Swap consumes the next deck card to replace any single card in the visible hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay.",
-  settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as DoubleKlondikeSettings),
-  reducer,isTerminal,component:DoubleKlondikeGame,
-};
+
+export const doubleKlondikePlugin: GamePlugin<DoubleKlondikeState, DoubleKlondikeAction, Record<string, never>> = {
+  id: "double-klondike",
+  title: "Double Klondike",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Two-deck Klondike with 9 tableau columns and 8 foundations.",
+  howToPlay: `Double Klondike uses two standard 52-card decks (104 cards) shuffled together.
+
+Setup: 9 tableau columns are dealt with 1–9 cards (top card face-up). The remaining 59 cards form the stock. 8 foundation piles await — two complete A→K runs per suit.
+
+Tableau: Build down in alternating colors. Move single cards or valid alt-color sequences. Empty columns accept Kings only.
+
+Stock: Draw one card at a time to the waste. Click again on empty stock to recycle (unlimited redeals).
+
+Goal: Move all 104 cards onto the 8 foundations, each going Ace through King in a single suit.
+
+Scoring: +10 per foundation, +5 waste-to-tableau.
+
+Tips: With two decks there are eight Aces to find — plan for both copies of each rank. Rather than rushing low cards to foundations, keep one or two on the tableau as targets for opposite-color builds.`,
+  settings: {} as const,
+  initialState: (seed: number) => initialState(seed, {}),
+  reducer,
+  isTerminal,
+  component: DoubleKlondikeGame,
+} as unknown as GamePlugin;

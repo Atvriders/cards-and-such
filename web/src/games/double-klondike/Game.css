@@ -1,1 +1,30 @@
-@import "../../engines/solmini/solmini.css";
+.dk {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  user-select: none;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at top, rgba(20, 80, 56, 0.85), rgba(8, 30, 22, 0.95));
+  min-height: 600px;
+}
+.dk-info { display: flex; gap: 16px; align-items: center; font-size: 14px; font-weight: 600; color: #f1f5f9; }
+.dk-auto-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid rgba(99, 102, 241, 0.55);
+  border-radius: 6px;
+  background: rgba(67, 56, 202, 0.4);
+  color: #fff; cursor: pointer; font-size: 13px;
+}
+.dk-auto-btn:hover { background: rgba(99, 102, 241, 0.6); }
+.dk-top-row, .dk-tableau-row { display: flex; gap: 8px; flex-wrap: nowrap; }
+.dk-foundations { display: flex; gap: 6px; flex-wrap: wrap; }
+.dk-spacer { flex: 1; }
+.dk .pile-wrapper { flex-shrink: 0; }
+.dk-stock-wrapper { cursor: pointer; }
+.dk-stock-wrapper:hover { filter: brightness(1.08); }
+@media (max-width: 900px) {
+  .dk { padding: 10px; gap: 8px; }
+  .dk-top-row, .dk-tableau-row { gap: 4px; overflow-x: auto; }
+}

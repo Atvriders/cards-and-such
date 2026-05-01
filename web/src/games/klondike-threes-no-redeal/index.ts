@@ -1,16 +1,28 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { KlondikeThreesNoRedealState, KlondikeThreesNoRedealAction, KlondikeThreesNoRedealSettings } from "./state.js";
+import type { KlondikeThreesNoRedealState, KlondikeThreesNoRedealAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KlondikeThreesNoRedealGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
-type S = SettingsOf<typeof settings>;
-export const klondikeThreesNoRedealPlugin: GamePlugin<KlondikeThreesNoRedealState, KlondikeThreesNoRedealAction, typeof settings> = {
-  id:"klondike-threes-no-redeal", title:"Klondike by Threes (No Redeal)", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Stock dealt in threes with no redeal allowed; harder for committed plays.",
-  howToPlay:"Klondike by Threes (No Redeal) is a compact 10-round solitaire micro-variant inspired by Klondike by Threes (No Redeal): Stock dealt in threes with no redeal allowed; harder for committed plays. Each round you receive a fresh hand of five cards drawn from a single seeded deck. You then choose one of three actions. Keep & Score locks the current hand and awards points based on the variant's special bonus rule. Discard Hand abandons it for a flat one-point consolation and rolls into the next round. Swap consumes the next deck card to replace any single card in the visible hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay. Compress carefully and the bonus rule will reward you.",
-  settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as KlondikeThreesNoRedealSettings),
-  reducer,isTerminal,component:KlondikeThreesNoRedealGame,
-};
+
+export const klondikeThreesNoRedealPlugin: GamePlugin<KlondikeThreesNoRedealState, KlondikeThreesNoRedealAction, Record<string, never>> = {
+  id: "klondike-threes-no-redeal",
+  title: "Klondike by Threes (No Redeal)",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Klondike with draw-3 and a single pass through the stock — no recycling.",
+  howToPlay: `Klondike by Threes (No Redeal) combines the two hardest Klondike rules: only the top of every triple-flip is playable, AND you only get a single pass through the stock.
+
+Setup: 7 tableau columns (1–7 cards, top face-up), 24-card stock, 4 foundations.
+
+Draw: Click the stock to flip three cards face-up to the waste. Only the top of those three is immediately playable. Once the stock is empty, no recycling — that's the only pass you get.
+
+Tableau: Build down in alternating colors. Move single cards or valid alt-color sequences. Empty columns accept Kings only.
+
+Scoring: Standard Klondike scoring — +10 to foundation, +5 waste-to-tableau, +5 reveals.
+
+Tips: This is one of the toughest single-deck variants. Plan your stock pulls carefully — each card you fail to play is permanently buried.`,
+  settings: {} as const,
+  initialState: (seed: number) => initialState(seed, {}),
+  reducer,
+  isTerminal,
+  component: KlondikeThreesNoRedealGame,
+} as unknown as GamePlugin;

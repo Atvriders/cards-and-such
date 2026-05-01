@@ -1,16 +1,26 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { SpiderTwoSuitsState, SpiderTwoSuitsAction, SpiderTwoSuitsSettings } from "./state.js";
+import type { SpiderTwoSuitsState, SpiderTwoSuitsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SpiderTwoSuitsGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
-type S = SettingsOf<typeof settings>;
-export const spiderTwoSuitsPlugin: GamePlugin<SpiderTwoSuitsState, SpiderTwoSuitsAction, typeof settings> = {
-  id:"spider-two-suits", title:"Spider Two Suits", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"A 10-round solitaire micro-variant inspired by two-suit Spider micro with mixed-suit rhythm.",
-  howToPlay:"Spider Two Suits is a compact 10-round solitaire micro-variant inspired by two-suit Spider micro with mixed-suit rhythm. Each round you receive a fresh hand of five cards drawn from a single seeded deck. You then choose one of three actions: Keep & Score locks the current hand and awards points based on face cards, pairs, ascending runs, and same-suit flushes; Discard Hand abandons it for a flat one-point consolation and rolls into the next round; Swap consumes the next deck card to replace any single card in the visible hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay.",
-  settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as SpiderTwoSuitsSettings),
-  reducer,isTerminal,component:SpiderTwoSuitsGame,
-};
+
+export const spiderTwoSuitsPlugin: GamePlugin<SpiderTwoSuitsState, SpiderTwoSuitsAction, Record<string, never>> = {
+  id: "spider-two-suits",
+  title: "Spider (Two Suits)",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Spider with two suits — 4 copies of spades + 4 copies of hearts (104 cards).",
+  howToPlay: `Spider (Two Suits) is the medium-difficulty Spider — only spades and hearts are in play (4 copies of each, 104 cards total).
+
+Setup: 10 columns. First 4 with 6 cards, last 6 with 5. 50-card stock for 5 deal-rows.
+
+Tableau: Build down by rank, mixing suits is allowed for moves but only same-suit K→A runs are auto-removed.
+
+Goal: Build 8 complete K→A runs, all in the same suit per run. Each completes and is removed automatically.
+
+Tips: Two suits adds real difficulty over the one-suit version — when a hearts 8 lands on a spades 9, the run cannot be lifted as a unit. Plan to disentangle suit clusters using empty columns and the stock deals.`,
+  settings: {} as const,
+  initialState: (seed: number) => initialState(seed, {}),
+  reducer,
+  isTerminal,
+  component: SpiderTwoSuitsGame,
+} as unknown as GamePlugin;
