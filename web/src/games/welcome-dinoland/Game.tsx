@@ -9,23 +9,23 @@ export function WelcomeDinolandGame({ state, dispatch, onGameOver }: GameProps<W
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="wdl-wrap">
-      <header className="wdl-head">
-        <h2 className="wdl-title">Welcome to Dinoland</h2>
-        <div className="wdl-meta">
+    <div className="wdino-wrap">
+      <header className="wdino-head">
+        <h2 className="wdino-title">Welcome to Dinoland</h2>
+        <div className="wdino-meta">
           <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="wdl-score">{state.score} pts</span>
+          <span className="wdino-score">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "placing" && state.lastRoll !== null && (
-        <div className="wdl-die-area">
-          <div className="wdl-die">{state.lastRoll}</div>
-          <div className="wdl-hint">Place this number into a row, keeping each row strictly ascending.</div>
+        <div className="wdino-die-area">
+          <div className="wdino-die">{state.lastRoll}</div>
+          <div className="wdino-hint">Place this number into a row, keeping each row strictly ascending.</div>
         </div>
       )}
-      <div className="wdl-board">
+      <div className="wdino-board">
         {Array.from({ length: ROW_COUNT }).map((_, r) => (
-          <div key={r} className="wdl-row">
+          <div key={r} className="wdino-row">
             {Array.from({ length: ROW_LEN }).map((__, c) => {
               const idx = r * ROW_LEN + c;
               const val = state.values[idx];
@@ -33,7 +33,7 @@ export function WelcomeDinolandGame({ state, dispatch, onGameOver }: GameProps<W
               return (
                 <button
                   key={c}
-                  className={`wdl-slot${val !== null ? " wdl-filled" : ""}${canPlace ? " wdl-legal" : ""}`}
+                  className={`wdino-slot${val !== null ? " wdino-filled" : ""}${canPlace ? " wdino-legal" : ""}`}
                   disabled={val !== null || !canPlace}
                   onClick={() => dispatch({ type: "place", index: idx } as WelcomeDinolandAction)}
                 >{val ?? ""}</button>
@@ -42,17 +42,17 @@ export function WelcomeDinolandGame({ state, dispatch, onGameOver }: GameProps<W
           </div>
         ))}
       </div>
-      <div className="wdl-controls">
+      <div className="wdino-controls">
         {state.phase === "rolling" && (
-          <button className="wdl-btn wdl-primary" onClick={() => dispatch({ type: "roll" } as WelcomeDinolandAction)}>Roll</button>
+          <button className="wdino-btn wdino-primary" onClick={() => dispatch({ type: "roll" } as WelcomeDinolandAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wdl-btn wdl-skip" onClick={() => dispatch({ type: "skip" } as WelcomeDinolandAction)}>Skip (−1)</button>
+          <button className="wdino-btn wdino-skip" onClick={() => dispatch({ type: "skip" } as WelcomeDinolandAction)}>Skip (−1)</button>
         )}
-        <button className="wdl-btn wdl-reset" onClick={() => dispatch({ type: "reset" } as WelcomeDinolandAction)}>Reset</button>
+        <button className="wdino-btn wdino-reset" onClick={() => dispatch({ type: "reset" } as WelcomeDinolandAction)}>Reset</button>
       </div>
-      {state.phase === "done" && <div className="wdl-done">Final: <b>{final}</b></div>}
-      <div className="wdl-rules">Roll of 1 = fossil = +5 special</div>
+      {state.phase === "done" && <div className="wdino-done">Final: <b>{final}</b></div>}
+      <div className="wdino-rules">Roll of 1 = fossil = +5 special</div>
     </div>
   );
 }

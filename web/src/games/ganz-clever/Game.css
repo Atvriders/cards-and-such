@@ -1,39 +1,46 @@
+/* Ganz Schon Clever - the original — pastel mint and warm yellow. Prefix .gcl- is unique to this game. */
 .gcl-wrap {
   font-family: 'Inter', system-ui, sans-serif;
-  max-width: 460px; margin: 0 auto; padding: 20px;
+  max-width: 480px; margin: 0 auto; padding: 22px;
   display: flex; flex-direction: column; align-items: center; gap: 14px;
-  background: #fef9e7; border-radius: 16px; color: #1a202c;
+  background: #ecfdf5;
+  
+  border-radius: 16px; color: #064e3b;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
-.gcl-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.gcl-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #f39c12; }
-.gcl-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #555; }
-.gcl-score { color: #f39c12; font-weight: 800; }
-.gcl-dice { display: flex; gap: 6px; }
+.gcl-head { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.gcl-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #10b981;  }
+.gcl-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #047857; }
+.gcl-score { color: #10b981; font-weight: 800; }
+.gcl-dice { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .gcl-die {
-  width: 44px; height: 44px; background: #fff; border: 2px solid #f39c12; border-radius: 8px;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #f39c12;
-  cursor: pointer;
+  width: 50px; height: 50px; background: #10b981; color: #fff;
+  border-radius: 10px; display: grid; place-items: center; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 800;
+  border: 2px solid transparent; transition: transform 80ms, border-color 80ms;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.16);
 }
-.gcl-die-on { background: #f39c12; color: #fff; }
-.gcl-die:disabled { opacity: 0.65; cursor: not-allowed; }
+.gcl-die:hover { transform: translateY(-1px); }
+.gcl-die.gcl-die-on { border-color: #10b981; transform: translateY(-2px); }
 .gcl-tracks { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.gcl-track { display: flex; align-items: center; gap: 8px; padding: 8px; border: 2px solid #ddd; border-radius: 10px; background: #fff; }
-.gcl-cells { display: flex; gap: 4px; flex: 1; }
+.gcl-track { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.gcl-track-btn { padding: 6px 10px; border-radius: 6px; border: 1px solid #10b98166; background: #fff; color: #064e3b; font-family: inherit; font-weight: 700; cursor: pointer; }
+.gcl-cells { display: flex; gap: 4px; flex-wrap: wrap; }
 .gcl-cell {
-  width: 32px; height: 32px; border: 1px solid #ddd; border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700;
-  display: grid; place-items: center; color: #333;
+  width: 36px; height: 36px; border: 2px solid #10b98166; border-radius: 6px;
+  background: #fff; color: #064e3b;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms, background 120ms;
 }
-.gcl-fill { color: #fff; border-color: transparent; }
-.gcl-track-btn {
-  font-family: inherit; font-size: 0.78rem; font-weight: 700; color: #fff;
-  border: 0; padding: 6px 10px; border-radius: 6px; cursor: pointer; min-width: 70px;
-}
-.gcl-track-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.gcl-controls { display: flex; gap: 10px; }
-.gcl-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.gcl-primary { background: #f39c12; color: #fff; }
+.gcl-cell:hover:not(:disabled) { transform: translateY(-1px); }
+.gcl-cell:disabled { cursor: not-allowed; }
+.gcl-cell.gcl-fill { background: #10b981; color: #fff; border-color: #10b981; }
+.gcl-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.gcl-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.gcl-primary { background: #10b981; color: #fff; }
+.gcl-primary:hover { filter: brightness(1.08); }
 .gcl-skip { background: #95a5a6; color: #fff; }
-.gcl-reset { background: #e5e7eb; color: #1a202c; }
-.gcl-done { color: #f39c12; padding: 12px 18px; border-radius: 10px; font-weight: 800; font-size: 1.1rem; background: #fff; }
-.gcl-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.gcl-reset { background: #e5e7eb; color: #064e3b; }
+.gcl-done { font-size: 1.15rem; font-weight: 800; color: #10b981; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.gcl-rules { font-size: 0.78rem; color: #047857; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

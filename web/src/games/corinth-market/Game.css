@@ -1,39 +1,46 @@
+/* Corinth Market - Mediterranean sun-baked terracotta market. Prefix .com- is unique to this game. */
 .com-wrap {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex; flex-direction: column; gap: 14px; align-items: center;
-  padding: 20px; max-width: 460px; margin: 0 auto;
-  background: #f4ecf7; border-radius: 16px; color: #1a202c;
+  padding: 22px; max-width: 460px; margin: 0 auto;
+  background: #fff7ed;
+  
+  border-radius: 16px;
+  color: #7c2d12;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
 .com-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.com-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #7d3c98; letter-spacing: -0.01em; }
-.com-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #666; }
-.com-meta-score { color: #7d3c98; font-weight: 800; }
-.com-die-area { display: flex; align-items: center; gap: 10px; }
+.com-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #c2410c; letter-spacing: -0.01em;  }
+.com-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #9a3412; }
+.com-meta-roll { color: #7c2d12; }
+.com-meta-score { color: #c2410c; font-weight: 800; }
+.com-die-area { display: flex; align-items: center; gap: 12px; }
 .com-die {
-  width: 56px; height: 56px; border-radius: 12px; background: #7d3c98; color: #fff;
-  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 800;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+  width: 58px; height: 58px; border-radius: 12px; background: #c2410c; color: #fff;
+  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
-.com-hint { font-size: 0.85rem; color: #666; max-width: 200px; }
-.com-grid { display: grid; gap: 6px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; }
+.com-hint { font-size: 0.83rem; color: #9a3412; max-width: 220px; text-align: center; }
+.com-grid { display: grid; gap: 6px; padding: 10px; background: rgba(194,65,12,0.07); border-radius: 12px; }
 .com-cell {
   width: 56px; height: 56px; border: 2px solid transparent; border-radius: 8px;
-  background: #fff; color: #222;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700;
-  cursor: pointer; transition: transform 0.08s, border-color 0.08s;
+  background: #fff; color: #7c2d12;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms ease, border-color 80ms ease, background 120ms ease;
 }
-.com-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #7d3c98; }
+.com-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #c2410c; }
 .com-cell:disabled { cursor: not-allowed; }
-.com-z0 { box-shadow: inset 0 0 0 3px #7d3c9833; }
-.com-z1 { box-shadow: inset 0 0 0 3px #9b59b633; }
-.com-z2 { box-shadow: inset 0 0 0 3px #bb8fce33; }
-.com-z3 { box-shadow: inset 0 0 0 3px #d2b4de33; }
-.com-on { color: #fff; background: #7d3c98; border-color: #7d3c98; }
+.com-z0 { box-shadow: inset 0 0 0 3px #c2410c66; }
+.com-z1 { box-shadow: inset 0 0 0 3px #0ea5e966; }
+.com-z2 { box-shadow: inset 0 0 0 3px #15803d66; }
+.com-z3 { box-shadow: inset 0 0 0 3px #fbbf2466; }
+.com-on { color: #fff; background: #c2410c; border-color: #c2410c; }
 .com-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.com-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.com-btn-primary { background: #7d3c98; color: #fff; }
+.com-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.com-btn-primary { background: #c2410c; color: #fff; }
 .com-btn-primary:hover { filter: brightness(1.08); }
 .com-btn-skip { background: #95a5a6; color: #fff; }
-.com-btn-reset { background: #e5e7eb; color: #1a202c; }
-.com-done { font-size: 1.1rem; font-weight: 800; color: #7d3c98; padding: 12px 18px; background: #fff; border-radius: 10px; }
-.com-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.com-btn-reset { background: #e5e7eb; color: #7c2d12; }
+.com-done { font-size: 1.15rem; font-weight: 800; color: #c2410c; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.com-rules { font-size: 0.78rem; color: #9a3412; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

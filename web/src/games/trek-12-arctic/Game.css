@@ -1,31 +1,43 @@
+/* Trek 12 Arctic - polar arctic — pale blue + aurora teal. Prefix .tar- is unique to this game. */
 .tar-wrap {
   font-family: 'Inter', system-ui, sans-serif;
-  max-width: 480px; margin: 0 auto; padding: 20px;
+  max-width: 480px; margin: 0 auto; padding: 22px;
   display: flex; flex-direction: column; align-items: center; gap: 14px;
-  background: #eaf2f8; border-radius: 16px;
+  background: #f0f9ff;
+  
+  border-radius: 16px; color: #0c4a6e;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
 .tar-head { display: flex; flex-direction: column; gap: 6px; align-items: center; }
-.tar-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #aed6f1; }
-.tar-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #555; }
-.tar-score { color: #aed6f1; font-weight: 800; }
-.tar-dice-area { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.tar-die { width: 44px; height: 44px; background: #aed6f1; color: #fff; border-radius: 8px; display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 800; }
-.tar-ops { display: flex; gap: 4px; }
-.tar-op { font-family: inherit; font-size: 0.8rem; font-weight: 700; padding: 6px 10px; border-radius: 6px; border: 1px solid #aed6f1; background: #fff; color: #aed6f1; cursor: pointer; }
-.tar-op-on { background: #aed6f1; color: #fff; }
-.tar-preview { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #aed6f1; }
-.tar-chain { display: grid; grid-template-columns: repeat(6, 56px); gap: 6px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; }
-.tar-node {
-  width: 56px; height: 56px; border: 2px solid #ddd; border-radius: 50%;
-  background: #fff; color: #888; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700;
-  cursor: pointer;
+.tar-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #06b6d4;  }
+.tar-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #0e7490; }
+.tar-score { color: #06b6d4; font-weight: 800; }
+.tar-dice-area { display: flex; gap: 10px; align-items: center; }
+.tar-die {
+  width: 54px; height: 54px; background: #06b6d4; color: #fff;
+  border-radius: 12px; display: grid; place-items: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 800;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.2);
 }
-.tar-legal { border-color: #aed6f1; color: #aed6f1; }
-.tar-on { background: #aed6f1; color: #fff; border-color: #aed6f1; }
-.tar-controls { display: flex; gap: 10px; }
-.tar-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.tar-primary { background: #aed6f1; color: #fff; }
+.tar-preview { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #0c4a6e; padding: 8px 14px; background: #fff; border-radius: 8px; border: 1px dashed #06b6d466; }
+.tar-ops { display: flex; gap: 6px; }
+.tar-op { padding: 6px 12px; border: 1px solid #06b6d466; border-radius: 6px; background: #fff; color: #0c4a6e; font-family: inherit; font-weight: 700; cursor: pointer; }
+.tar-op.tar-op-on { background: #06b6d4; color: #fff; border-color: #06b6d4; }
+.tar-chain { display: grid; grid-template-columns: repeat(5, 50px); gap: 6px; padding: 10px; background: rgba(6,182,212,0.08); border-radius: 10px; }
+.tar-node {
+  width: 50px; height: 50px; border-radius: 50%; border: 2px solid #06b6d466; background: #fff; color: #0c4a6e;
+  font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800; cursor: pointer;
+  transition: transform 80ms, background 120ms;
+}
+.tar-node:hover:not(:disabled) { transform: translateY(-1px); }
+.tar-node:disabled { cursor: not-allowed; opacity: 0.65; }
+.tar-node.tar-on { background: #06b6d4; color: #fff; border-color: #06b6d4; }
+.tar-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.tar-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.tar-primary { background: #06b6d4; color: #fff; }
+.tar-primary:hover { filter: brightness(1.08); }
 .tar-skip { background: #95a5a6; color: #fff; }
-.tar-reset { background: #e5e7eb; color: #1a202c; }
-.tar-done { background: #fff; color: #aed6f1; padding: 12px 18px; border-radius: 10px; font-weight: 800; font-size: 1.1rem; }
-.tar-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.tar-reset { background: #e5e7eb; color: #0c4a6e; }
+.tar-done { font-size: 1.15rem; font-weight: 800; color: #06b6d4; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.tar-rules { font-size: 0.78rem; color: #0e7490; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

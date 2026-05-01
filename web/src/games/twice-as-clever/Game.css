@@ -1,39 +1,46 @@
+/* Twice As Clever - english edition — burnt orange dice on cream. Prefix .tac- is unique to this game. */
 .tac-wrap {
   font-family: 'Inter', system-ui, sans-serif;
-  max-width: 460px; margin: 0 auto; padding: 20px;
+  max-width: 480px; margin: 0 auto; padding: 22px;
   display: flex; flex-direction: column; align-items: center; gap: 14px;
-  background: #ebf5fb; border-radius: 16px; color: #1a202c;
+  background: #fff7ed;
+  
+  border-radius: 16px; color: #7c2d12;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
-.tac-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.tac-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #3498db; }
-.tac-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #555; }
-.tac-score { color: #3498db; font-weight: 800; }
-.tac-dice { display: flex; gap: 6px; }
+.tac-head { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.tac-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #ea580c;  }
+.tac-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #9a3412; }
+.tac-score { color: #ea580c; font-weight: 800; }
+.tac-dice { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .tac-die {
-  width: 44px; height: 44px; background: #fff; border: 2px solid #3498db; border-radius: 8px;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #3498db;
-  cursor: pointer;
+  width: 50px; height: 50px; background: #ea580c; color: #fff;
+  border-radius: 10px; display: grid; place-items: center; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 800;
+  border: 2px solid transparent; transition: transform 80ms, border-color 80ms;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.16);
 }
-.tac-die-on { background: #3498db; color: #fff; }
-.tac-die:disabled { opacity: 0.65; cursor: not-allowed; }
+.tac-die:hover { transform: translateY(-1px); }
+.tac-die.tac-die-on { border-color: #ea580c; transform: translateY(-2px); }
 .tac-tracks { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.tac-track { display: flex; align-items: center; gap: 8px; padding: 8px; border: 2px solid #ddd; border-radius: 10px; background: #fff; }
-.tac-cells { display: flex; gap: 4px; flex: 1; }
+.tac-track { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.tac-track-btn { padding: 6px 10px; border-radius: 6px; border: 1px solid #ea580c66; background: #fff; color: #7c2d12; font-family: inherit; font-weight: 700; cursor: pointer; }
+.tac-cells { display: flex; gap: 4px; flex-wrap: wrap; }
 .tac-cell {
-  width: 32px; height: 32px; border: 1px solid #ddd; border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700;
-  display: grid; place-items: center; color: #333;
+  width: 36px; height: 36px; border: 2px solid #ea580c66; border-radius: 6px;
+  background: #fff; color: #7c2d12;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms, background 120ms;
 }
-.tac-fill { color: #fff; border-color: transparent; }
-.tac-track-btn {
-  font-family: inherit; font-size: 0.78rem; font-weight: 700; color: #fff;
-  border: 0; padding: 6px 10px; border-radius: 6px; cursor: pointer; min-width: 70px;
-}
-.tac-track-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.tac-controls { display: flex; gap: 10px; }
-.tac-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.tac-primary { background: #3498db; color: #fff; }
+.tac-cell:hover:not(:disabled) { transform: translateY(-1px); }
+.tac-cell:disabled { cursor: not-allowed; }
+.tac-cell.tac-fill { background: #ea580c; color: #fff; border-color: #ea580c; }
+.tac-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.tac-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.tac-primary { background: #ea580c; color: #fff; }
+.tac-primary:hover { filter: brightness(1.08); }
 .tac-skip { background: #95a5a6; color: #fff; }
-.tac-reset { background: #e5e7eb; color: #1a202c; }
-.tac-done { color: #3498db; padding: 12px 18px; border-radius: 10px; font-weight: 800; font-size: 1.1rem; background: #fff; }
-.tac-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.tac-reset { background: #e5e7eb; color: #7c2d12; }
+.tac-done { font-size: 1.15rem; font-weight: 800; color: #ea580c; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.tac-rules { font-size: 0.78rem; color: #9a3412; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

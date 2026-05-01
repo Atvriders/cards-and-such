@@ -1,31 +1,43 @@
+/* Trek 12 Jungle - amazon jungle — vine green + canopy gold. Prefix .tjg- is unique to this game. */
 .tjg-wrap {
   font-family: 'Inter', system-ui, sans-serif;
-  max-width: 480px; margin: 0 auto; padding: 20px;
+  max-width: 480px; margin: 0 auto; padding: 22px;
   display: flex; flex-direction: column; align-items: center; gap: 14px;
-  background: #e8f8f0; border-radius: 16px;
+  background: #f0fdf4;
+  
+  border-radius: 16px; color: #14532d;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
 .tjg-head { display: flex; flex-direction: column; gap: 6px; align-items: center; }
-.tjg-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #27ae60; }
-.tjg-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #555; }
-.tjg-score { color: #27ae60; font-weight: 800; }
-.tjg-dice-area { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.tjg-die { width: 44px; height: 44px; background: #27ae60; color: #fff; border-radius: 8px; display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 800; }
-.tjg-ops { display: flex; gap: 4px; }
-.tjg-op { font-family: inherit; font-size: 0.8rem; font-weight: 700; padding: 6px 10px; border-radius: 6px; border: 1px solid #27ae60; background: #fff; color: #27ae60; cursor: pointer; }
-.tjg-op-on { background: #27ae60; color: #fff; }
-.tjg-preview { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #27ae60; }
-.tjg-chain { display: grid; grid-template-columns: repeat(6, 56px); gap: 6px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; }
-.tjg-node {
-  width: 56px; height: 56px; border: 2px solid #ddd; border-radius: 50%;
-  background: #fff; color: #888; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700;
-  cursor: pointer;
+.tjg-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #16a34a;  }
+.tjg-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #15803d; }
+.tjg-score { color: #16a34a; font-weight: 800; }
+.tjg-dice-area { display: flex; gap: 10px; align-items: center; }
+.tjg-die {
+  width: 54px; height: 54px; background: #16a34a; color: #fff;
+  border-radius: 12px; display: grid; place-items: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 800;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.2);
 }
-.tjg-legal { border-color: #27ae60; color: #27ae60; }
-.tjg-on { background: #27ae60; color: #fff; border-color: #27ae60; }
-.tjg-controls { display: flex; gap: 10px; }
-.tjg-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.tjg-primary { background: #27ae60; color: #fff; }
+.tjg-preview { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #14532d; padding: 8px 14px; background: #fff; border-radius: 8px; border: 1px dashed #16a34a66; }
+.tjg-ops { display: flex; gap: 6px; }
+.tjg-op { padding: 6px 12px; border: 1px solid #16a34a66; border-radius: 6px; background: #fff; color: #14532d; font-family: inherit; font-weight: 700; cursor: pointer; }
+.tjg-op.tjg-op-on { background: #16a34a; color: #fff; border-color: #16a34a; }
+.tjg-chain { display: grid; grid-template-columns: repeat(5, 50px); gap: 6px; padding: 10px; background: rgba(22,163,74,0.08); border-radius: 10px; }
+.tjg-node {
+  width: 50px; height: 50px; border-radius: 50%; border: 2px solid #16a34a66; background: #fff; color: #14532d;
+  font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800; cursor: pointer;
+  transition: transform 80ms, background 120ms;
+}
+.tjg-node:hover:not(:disabled) { transform: translateY(-1px); }
+.tjg-node:disabled { cursor: not-allowed; opacity: 0.65; }
+.tjg-node.tjg-on { background: #16a34a; color: #fff; border-color: #16a34a; }
+.tjg-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.tjg-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.tjg-primary { background: #16a34a; color: #fff; }
+.tjg-primary:hover { filter: brightness(1.08); }
 .tjg-skip { background: #95a5a6; color: #fff; }
-.tjg-reset { background: #e5e7eb; color: #1a202c; }
-.tjg-done { background: #fff; color: #27ae60; padding: 12px 18px; border-radius: 10px; font-weight: 800; font-size: 1.1rem; }
-.tjg-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.tjg-reset { background: #e5e7eb; color: #14532d; }
+.tjg-done { font-size: 1.15rem; font-weight: 800; color: #16a34a; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.tjg-rules { font-size: 0.78rem; color: #15803d; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

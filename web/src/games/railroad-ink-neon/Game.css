@@ -1,39 +1,46 @@
+/* Railroad Ink Neon - synthwave neon tracks on midnight grid. Prefix .rin- is unique to this game. */
 .rin-wrap {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex; flex-direction: column; gap: 14px; align-items: center;
-  padding: 20px; max-width: 460px; margin: 0 auto;
-  background: #1a1a2e; border-radius: 16px; color: #f4f4f8;
+  padding: 22px; max-width: 460px; margin: 0 auto;
+  background: #0c0a1f;
+  
+  border-radius: 16px;
+  color: #f0abfc;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid #22d3ee44;
 }
 .rin-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.rin-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #ff0080; letter-spacing: -0.01em; }
-.rin-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #aab; }
-.rin-meta-score { color: #ff0080; font-weight: 800; }
-.rin-die-area { display: flex; align-items: center; gap: 10px; }
+.rin-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #22d3ee; letter-spacing: -0.01em; text-shadow: 0 0 12px #22d3ee88; }
+.rin-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #c084fc; }
+.rin-meta-roll { color: #f0abfc; }
+.rin-meta-score { color: #22d3ee; font-weight: 800; }
+.rin-die-area { display: flex; align-items: center; gap: 12px; }
 .rin-die {
-  width: 56px; height: 56px; border-radius: 12px; background: #ff0080; color: #fff;
-  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 800;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+  width: 58px; height: 58px; border-radius: 12px; background: #22d3ee; color: #0c0a1f;
+  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 800;
+  box-shadow: 0 6px 18px rgba(34,211,238,0.55);
 }
-.rin-hint { font-size: 0.85rem; color: #aab; max-width: 200px; }
-.rin-grid { display: grid; gap: 6px; padding: 8px; background: #0e1321; border-radius: 10px; }
+.rin-hint { font-size: 0.83rem; color: #c084fc; max-width: 220px; text-align: center; }
+.rin-grid { display: grid; gap: 6px; padding: 10px; background: #0c0a1f; border-radius: 12px; }
 .rin-cell {
   width: 56px; height: 56px; border: 2px solid transparent; border-radius: 8px;
-  background: #202336; color: #fff;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700;
-  cursor: pointer; transition: transform 0.08s, border-color 0.08s;
+  background: #1e1b4b; color: #f0abfc;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms ease, border-color 80ms ease, background 120ms ease;
 }
-.rin-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #ff0080; }
+.rin-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #22d3ee; }
 .rin-cell:disabled { cursor: not-allowed; }
-.rin-z0 { box-shadow: inset 0 0 0 3px #ff008033; }
-.rin-z1 { box-shadow: inset 0 0 0 3px #00ffea33; }
-.rin-z2 { box-shadow: inset 0 0 0 3px #ffe60033; }
-.rin-z3 { box-shadow: inset 0 0 0 3px #9d00ff33; }
-.rin-on { color: #fff; background: #ff0080; border-color: #ff0080; }
+.rin-z0 { box-shadow: inset 0 0 0 3px #22d3ee66; }
+.rin-z1 { box-shadow: inset 0 0 0 3px #f0abfc66; }
+.rin-z2 { box-shadow: inset 0 0 0 3px #fbbf2466; }
+.rin-z3 { box-shadow: inset 0 0 0 3px #34d39966; }
+.rin-on { color: #0c0a1f; background: #22d3ee; border-color: #22d3ee; }
 .rin-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.rin-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.rin-btn-primary { background: #ff0080; color: #fff; }
+.rin-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.rin-btn-primary { background: #22d3ee; color: #0c0a1f; }
 .rin-btn-primary:hover { filter: brightness(1.08); }
 .rin-btn-skip { background: #95a5a6; color: #fff; }
-.rin-btn-reset { background: #3a3f55; color: #f4f4f8; }
-.rin-done { font-size: 1.1rem; font-weight: 800; color: #ff0080; padding: 12px 18px; background: #222; border-radius: 10px; }
-.rin-rules { font-size: 0.78rem; color: #aab; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.rin-btn-reset { background: #312e81; color: #f0abfc; }
+.rin-done { font-size: 1.15rem; font-weight: 800; color: #22d3ee; padding: 14px 20px; background: #1e1b4b; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.rin-rules { font-size: 0.78rem; color: #c084fc; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

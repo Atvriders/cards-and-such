@@ -1,39 +1,46 @@
+/* Hadrian's Wall Roman - imperial Roman stone wall and crimson cloak. Prefix .hwr- is unique to this game. */
 .hwr-wrap {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex; flex-direction: column; gap: 14px; align-items: center;
-  padding: 20px; max-width: 460px; margin: 0 auto;
-  background: #f6dbd6; border-radius: 16px; color: #1a202c;
+  padding: 22px; max-width: 460px; margin: 0 auto;
+  background: #f5f5f4;
+  
+  border-radius: 16px;
+  color: #1c1917;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid #78716c;
 }
 .hwr-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.hwr-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #7b241c; letter-spacing: -0.01em; }
-.hwr-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #666; }
-.hwr-meta-score { color: #7b241c; font-weight: 800; }
-.hwr-die-area { display: flex; align-items: center; gap: 10px; }
+.hwr-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #991b1b; letter-spacing: -0.01em; text-transform: uppercase; letter-spacing: 0.1em; }
+.hwr-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #57534e; }
+.hwr-meta-roll { color: #1c1917; }
+.hwr-meta-score { color: #991b1b; font-weight: 800; }
+.hwr-die-area { display: flex; align-items: center; gap: 12px; }
 .hwr-die {
-  width: 56px; height: 56px; border-radius: 12px; background: #7b241c; color: #fff;
-  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 800;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+  width: 58px; height: 58px; border-radius: 12px; background: #991b1b; color: #fef3c7;
+  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
-.hwr-hint { font-size: 0.85rem; color: #666; max-width: 200px; }
-.hwr-grid { display: grid; gap: 6px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; }
+.hwr-hint { font-size: 0.83rem; color: #57534e; max-width: 220px; text-align: center; }
+.hwr-grid { display: grid; gap: 6px; padding: 10px; background: rgba(120,113,108,0.18); border-radius: 12px; }
 .hwr-cell {
   width: 56px; height: 56px; border: 2px solid transparent; border-radius: 8px;
-  background: #fff; color: #222;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700;
-  cursor: pointer; transition: transform 0.08s, border-color 0.08s;
+  background: #fafaf9; color: #1c1917;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms ease, border-color 80ms ease, background 120ms ease;
 }
-.hwr-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #7b241c; }
+.hwr-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #991b1b; }
 .hwr-cell:disabled { cursor: not-allowed; }
-.hwr-z0 { box-shadow: inset 0 0 0 3px #7b241c33; }
-.hwr-z1 { box-shadow: inset 0 0 0 3px #a9322633; }
-.hwr-z2 { box-shadow: inset 0 0 0 3px #cb433533; }
-.hwr-z3 { box-shadow: inset 0 0 0 3px #e74c3c33; }
-.hwr-on { color: #fff; background: #7b241c; border-color: #7b241c; }
+.hwr-z0 { box-shadow: inset 0 0 0 3px #991b1b66; }
+.hwr-z1 { box-shadow: inset 0 0 0 3px #a1620766; }
+.hwr-z2 { box-shadow: inset 0 0 0 3px #44403c66; }
+.hwr-z3 { box-shadow: inset 0 0 0 3px #78716c66; }
+.hwr-on { color: #fff; background: #991b1b; border-color: #991b1b; }
 .hwr-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.hwr-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.hwr-btn-primary { background: #7b241c; color: #fff; }
+.hwr-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.hwr-btn-primary { background: #991b1b; color: #fff; }
 .hwr-btn-primary:hover { filter: brightness(1.08); }
 .hwr-btn-skip { background: #95a5a6; color: #fff; }
-.hwr-btn-reset { background: #e5e7eb; color: #1a202c; }
-.hwr-done { font-size: 1.1rem; font-weight: 800; color: #7b241c; padding: 12px 18px; background: #fff; border-radius: 10px; }
-.hwr-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.hwr-btn-reset { background: #e5e7eb; color: #1c1917; }
+.hwr-done { font-size: 1.15rem; font-weight: 800; color: #991b1b; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.hwr-rules { font-size: 0.78rem; color: #57534e; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

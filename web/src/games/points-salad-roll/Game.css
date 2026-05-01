@@ -1,39 +1,46 @@
+/* Points Salad Roll - veggie-salad multi-coloured produce. Prefix .psr- is unique to this game. */
 .psr-wrap {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex; flex-direction: column; gap: 14px; align-items: center;
-  padding: 20px; max-width: 460px; margin: 0 auto;
-  background: #e8f8f0; border-radius: 16px; color: #1a202c;
+  padding: 22px; max-width: 460px; margin: 0 auto;
+  background: #f7fee7;
+  
+  border-radius: 16px;
+  color: #1a2e05;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
 .psr-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.psr-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #52be80; letter-spacing: -0.01em; }
-.psr-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #666; }
-.psr-meta-score { color: #52be80; font-weight: 800; }
-.psr-die-area { display: flex; align-items: center; gap: 10px; }
+.psr-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #65a30d; letter-spacing: -0.01em;  }
+.psr-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #4d7c0f; }
+.psr-meta-roll { color: #1a2e05; }
+.psr-meta-score { color: #65a30d; font-weight: 800; }
+.psr-die-area { display: flex; align-items: center; gap: 12px; }
 .psr-die {
-  width: 56px; height: 56px; border-radius: 12px; background: #52be80; color: #fff;
-  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 800;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+  width: 58px; height: 58px; border-radius: 12px; background: #65a30d; color: #fff;
+  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
-.psr-hint { font-size: 0.85rem; color: #666; max-width: 200px; }
-.psr-grid { display: grid; gap: 6px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; }
+.psr-hint { font-size: 0.83rem; color: #4d7c0f; max-width: 220px; text-align: center; }
+.psr-grid { display: grid; gap: 6px; padding: 10px; background: rgba(101,163,13,0.08); border-radius: 12px; }
 .psr-cell {
   width: 56px; height: 56px; border: 2px solid transparent; border-radius: 8px;
-  background: #fff; color: #222;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700;
-  cursor: pointer; transition: transform 0.08s, border-color 0.08s;
+  background: #fff; color: #1a2e05;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms ease, border-color 80ms ease, background 120ms ease;
 }
-.psr-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #52be80; }
+.psr-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #65a30d; }
 .psr-cell:disabled { cursor: not-allowed; }
-.psr-z0 { box-shadow: inset 0 0 0 3px #f1c40f33; }
-.psr-z1 { box-shadow: inset 0 0 0 3px #52be8033; }
-.psr-z2 { box-shadow: inset 0 0 0 3px #a9322633; }
-.psr-z3 { box-shadow: inset 0 0 0 3px #9b59b633; }
-.psr-on { color: #fff; background: #52be80; border-color: #52be80; }
+.psr-z0 { box-shadow: inset 0 0 0 3px #dc262666; }
+.psr-z1 { box-shadow: inset 0 0 0 3px #fbbf2466; }
+.psr-z2 { box-shadow: inset 0 0 0 3px #65a30d66; }
+.psr-z3 { box-shadow: inset 0 0 0 3px #ea580c66; }
+.psr-on { color: #fff; background: #65a30d; border-color: #65a30d; }
 .psr-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.psr-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.psr-btn-primary { background: #52be80; color: #fff; }
+.psr-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.psr-btn-primary { background: #65a30d; color: #fff; }
 .psr-btn-primary:hover { filter: brightness(1.08); }
 .psr-btn-skip { background: #95a5a6; color: #fff; }
-.psr-btn-reset { background: #e5e7eb; color: #1a202c; }
-.psr-done { font-size: 1.1rem; font-weight: 800; color: #52be80; padding: 12px 18px; background: #fff; border-radius: 10px; }
-.psr-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.psr-btn-reset { background: #e5e7eb; color: #1a2e05; }
+.psr-done { font-size: 1.15rem; font-weight: 800; color: #65a30d; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.psr-rules { font-size: 0.78rem; color: #4d7c0f; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

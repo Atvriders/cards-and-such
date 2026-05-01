@@ -1,39 +1,46 @@
+/* Clever Cubed - cubist geometric indigo+coral tracks. Prefix .ccu- is unique to this game. */
 .ccu-wrap {
   font-family: 'Inter', system-ui, sans-serif;
-  max-width: 460px; margin: 0 auto; padding: 20px;
+  max-width: 480px; margin: 0 auto; padding: 22px;
   display: flex; flex-direction: column; align-items: center; gap: 14px;
-  background: #d1f2eb; border-radius: 16px; color: #1a202c;
+  background: #eef2ff;
+  
+  border-radius: 16px; color: #1e1b4b;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
-.ccu-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.ccu-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #16a085; }
-.ccu-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #555; }
-.ccu-score { color: #16a085; font-weight: 800; }
-.ccu-dice { display: flex; gap: 6px; }
+.ccu-head { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.ccu-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #4f46e5;  }
+.ccu-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #4338ca; }
+.ccu-score { color: #4f46e5; font-weight: 800; }
+.ccu-dice { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .ccu-die {
-  width: 44px; height: 44px; background: #fff; border: 2px solid #16a085; border-radius: 8px;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #16a085;
-  cursor: pointer;
+  width: 50px; height: 50px; background: #4f46e5; color: #fff;
+  border-radius: 10px; display: grid; place-items: center; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 800;
+  border: 2px solid transparent; transition: transform 80ms, border-color 80ms;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.16);
 }
-.ccu-die-on { background: #16a085; color: #fff; }
-.ccu-die:disabled { opacity: 0.65; cursor: not-allowed; }
+.ccu-die:hover { transform: translateY(-1px); }
+.ccu-die.ccu-die-on { border-color: #4f46e5; transform: translateY(-2px); }
 .ccu-tracks { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.ccu-track { display: flex; align-items: center; gap: 8px; padding: 8px; border: 2px solid #ddd; border-radius: 10px; background: #fff; }
-.ccu-cells { display: flex; gap: 4px; flex: 1; }
+.ccu-track { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.ccu-track-btn { padding: 6px 10px; border-radius: 6px; border: 1px solid #4f46e566; background: #fff; color: #1e1b4b; font-family: inherit; font-weight: 700; cursor: pointer; }
+.ccu-cells { display: flex; gap: 4px; flex-wrap: wrap; }
 .ccu-cell {
-  width: 32px; height: 32px; border: 1px solid #ddd; border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700;
-  display: grid; place-items: center; color: #333;
+  width: 36px; height: 36px; border: 2px solid #4f46e566; border-radius: 6px;
+  background: #fff; color: #1e1b4b;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms, background 120ms;
 }
-.ccu-fill { color: #fff; border-color: transparent; }
-.ccu-track-btn {
-  font-family: inherit; font-size: 0.78rem; font-weight: 700; color: #fff;
-  border: 0; padding: 6px 10px; border-radius: 6px; cursor: pointer; min-width: 70px;
-}
-.ccu-track-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.ccu-controls { display: flex; gap: 10px; }
-.ccu-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.ccu-primary { background: #16a085; color: #fff; }
+.ccu-cell:hover:not(:disabled) { transform: translateY(-1px); }
+.ccu-cell:disabled { cursor: not-allowed; }
+.ccu-cell.ccu-fill { background: #4f46e5; color: #fff; border-color: #4f46e5; }
+.ccu-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.ccu-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.ccu-primary { background: #4f46e5; color: #fff; }
+.ccu-primary:hover { filter: brightness(1.08); }
 .ccu-skip { background: #95a5a6; color: #fff; }
-.ccu-reset { background: #e5e7eb; color: #1a202c; }
-.ccu-done { color: #16a085; padding: 12px 18px; border-radius: 10px; font-weight: 800; font-size: 1.1rem; background: #fff; }
-.ccu-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.ccu-reset { background: #e5e7eb; color: #1e1b4b; }
+.ccu-done { font-size: 1.15rem; font-weight: 800; color: #4f46e5; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.ccu-rules { font-size: 0.78rem; color: #4338ca; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

@@ -9,43 +9,43 @@ export function CartographersBaseGame({ state, dispatch, onGameOver }: GameProps
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="ctb-wrap">
-      <header className="ctb-head">
-        <h2 className="ctb-title">Cartographers Base</h2>
-        <div className="ctb-meta">
-          <span className="ctb-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="ctb-meta-score">{state.score} pts</span>
+    <div className="ctgb-wrap">
+      <header className="ctgb-head">
+        <h2 className="ctgb-title">Cartographers Base</h2>
+        <div className="ctgb-meta">
+          <span className="ctgb-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="ctgb-meta-score">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "marking" && state.lastRoll !== null && (
-        <div className="ctb-die-area">
-          <div className="ctb-die" aria-label={`Die showing ${state.lastRoll}`}>{state.lastRoll}</div>
-          <div className="ctb-hint">Pick a cell to mark, or Skip.</div>
+        <div className="ctgb-die-area">
+          <div className="ctgb-die" aria-label={`Die showing ${state.lastRoll}`}>{state.lastRoll}</div>
+          <div className="ctgb-hint">Pick a cell to mark, or Skip.</div>
         </div>
       )}
-      <div className="ctb-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
+      <div className="ctgb-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
           <button
             key={i}
-            className={`ctb-cell ctb-z${cellZone(i)}${filled ? " ctb-on" : ""}`}
+            className={`ctgb-cell ctgb-z${cellZone(i)}${filled ? " ctgb-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
             onClick={() => dispatch({ type: "mark", index: i } as CartographersBaseAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}
       </div>
-      <div className="ctb-controls">
+      <div className="ctgb-controls">
         {state.phase === "rolling" && (
-          <button className="ctb-btn ctb-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersBaseAction)}>Roll</button>
+          <button className="ctgb-btn ctgb-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersBaseAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="ctb-btn ctb-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersBaseAction)}>Skip</button>
+          <button className="ctgb-btn ctgb-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersBaseAction)}>Skip</button>
         )}
-        <button className="ctb-btn ctb-btn-reset" onClick={() => dispatch({ type: "reset" } as CartographersBaseAction)}>Reset</button>
+        <button className="ctgb-btn ctgb-btn-reset" onClick={() => dispatch({ type: "reset" } as CartographersBaseAction)}>Reset</button>
       </div>
       {state.phase === "done" && (
-        <div className="ctb-done">Final score: <b>{final}</b></div>
+        <div className="ctgb-done">Final score: <b>{final}</b></div>
       )}
-      <div className="ctb-rules">Each terrain type: bonus per group</div>
+      <div className="ctgb-rules">Each terrain type: bonus per group</div>
     </div>
   );
 }

@@ -9,36 +9,36 @@ export function QwixxDeluxeGame({ state, dispatch, onGameOver }: GameProps<Qwixx
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     return (
-      <div className="rw-wrap">
-        <div className="rw-done">
+      <div className="qdx-wrap">
+        <div className="qdx-done">
           <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
+          <div className="qdx-final">{t?.score ?? state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="rw-wrap">
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
+    <div className="qdx-wrap">
+      <div className="qdx-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
+      <div className="qdx-score">{state.score} pts</div>
       {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
+        <div className="qdx-die">{state.lastRoll}</div>
       )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
+      <div className="qdx-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
         {state.cells.map((filled, i) => (
           <button
             key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
+            className={`qdx-cell${filled ? " qdx-filled" : ""}`}
             disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as QwixxDeluxeAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as QwixxDeluxeAction)}>Roll</button>
+        <button className="qdx-btn" onClick={() => dispatch({ type: "roll" } as QwixxDeluxeAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as QwixxDeluxeAction)}>Skip</button>
+        <button className="qdx-btn qdx-alt" onClick={() => dispatch({ type: "skip" } as QwixxDeluxeAction)}>Skip</button>
       )}
     </div>
   );

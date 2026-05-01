@@ -1,9 +1,33 @@
-.l1-wrap { max-width: 520px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-.l1-stats { font-size: 0.95rem; }
-.l1-row { display: grid; gap: 1px; width: 100%; max-width: 480px; background: #1f2937; padding: 2px; border-radius: 4px; }
-.l1-cell { aspect-ratio: 1 / 1; background: #f3f4f6; }
-.l1-cell.l1-on { background: #f59e0b; }
+/* Life 1D — monochrome cell tape on a slate canvas. */
+.l1-wrap {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  max-width: 540px; margin: 0 auto; padding: 20px;
+  display: flex; flex-direction: column; gap: 12px; align-items: center;
+  background: #f5f5f4; color: #1c1917;
+  border: 1px solid #1c1917; border-radius: 0;
+}
+.l1-stats {
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #57534e; padding: 4px 12px; background: #e7e5e4;
+  border-bottom: 2px solid #1c1917;
+}
+.l1-row {
+  display: grid; gap: 1px; width: 100%; max-width: 480px;
+  background: #1c1917; padding: 2px; border: 1px solid #1c1917;
+}
+.l1-cell { aspect-ratio: 1 / 1; background: #fafaf9; }
+.l1-cell.l1-on { background: #1c1917; }
 .l1-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.l1-controls button { padding: 7px 14px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700; background: #6366f1; color: #fff; }
-.l1-controls .l1-finish { background: #dc2626; }
-.l1-done { background: #ecfccb; padding: 12px 20px; border-radius: 10px; font-weight: 800; }
+.l1-controls button {
+  padding: 7px 14px; border: 1px solid #1c1917; background: #fafaf9; color: #1c1917;
+  font-family: inherit; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  cursor: pointer; border-radius: 0;
+}
+.l1-controls button:hover { background: #1c1917; color: #fafaf9; }
+.l1-controls .l1-finish { background: #1c1917; color: #fafaf9; }
+.l1-controls .l1-finish:hover { background: #44403c; }
+.l1-done {
+  background: #1c1917; color: #fafaf9; padding: 10px 20px;
+  font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  border: 1px solid #1c1917;
+}

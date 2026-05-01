@@ -12,21 +12,21 @@ export function CleverSpringGame({ state, dispatch, onGameOver }: GameProps<Clev
   const final = t?.score ?? state.score;
 
   return (
-    <div className="csp-wrap">
-      <header className="csp-head">
-        <h2 className="csp-title">Clever Spring</h2>
-        <div className="csp-meta">
+    <div className="cspr-wrap">
+      <header className="cspr-head">
+        <h2 className="cspr-title">Clever Spring</h2>
+        <div className="cspr-meta">
           <span>Roll {state.rolls + (state.phase !== "rolling" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="csp-score">{state.score} pts</span>
+          <span className="cspr-score">{state.score} pts</span>
         </div>
       </header>
 
       {state.lastDice.length > 0 && (
-        <div className="csp-dice">
+        <div className="cspr-dice">
           {state.lastDice.map((v, i) => (
             <button
               key={i}
-              className={`csp-die${state.selectedDie === i ? " csp-die-on" : ""}`}
+              className={`cspr-die${state.selectedDie === i ? " cspr-die-on" : ""}`}
               disabled={state.phase !== "picking"}
               onClick={() => dispatch({ type: "pick", dieIdx: i } as CleverSpringAction)}
             >{v}</button>
@@ -34,25 +34,25 @@ export function CleverSpringGame({ state, dispatch, onGameOver }: GameProps<Clev
         </div>
       )}
 
-      <div className="csp-tracks">
+      <div className="cspr-tracks">
         {Array.from({ length: TRACK_COUNT }).map((_, t) => {
           const progress = trackProgress(state.filled, t);
           const canPlace = state.phase === "placing" && progress < TRACK_LEN;
           return (
-            <div key={t} className="csp-track" style={{ borderColor: TRACK_COLORS[t] }}>
-              <div className="csp-cells">
+            <div key={t} className="cspr-track" style={{ borderColor: TRACK_COLORS[t] }}>
+              <div className="cspr-cells">
                 {Array.from({ length: TRACK_LEN }).map((__, c) => {
                   const idx = t * TRACK_LEN + c;
                   const isFilled = state.filled[idx];
                   return (
-                    <div key={c} className={`csp-cell${isFilled ? " csp-fill" : ""}`} style={{ background: isFilled ? TRACK_COLORS[t] : undefined }}>
+                    <div key={c} className={`cspr-cell${isFilled ? " cspr-fill" : ""}`} style={{ background: isFilled ? TRACK_COLORS[t] : undefined }}>
                       {isFilled ? state.fillValues[idx] : ""}
                     </div>
                   );
                 })}
               </div>
               <button
-                className="csp-track-btn"
+                className="cspr-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as CleverSpringAction)}
                 style={{ background: TRACK_COLORS[t] }}
@@ -62,18 +62,18 @@ export function CleverSpringGame({ state, dispatch, onGameOver }: GameProps<Clev
         })}
       </div>
 
-      <div className="csp-controls">
+      <div className="cspr-controls">
         {state.phase === "rolling" && (
-          <button className="csp-btn csp-primary" onClick={() => dispatch({ type: "roll" } as CleverSpringAction)}>Roll 5 Dice</button>
+          <button className="cspr-btn cspr-primary" onClick={() => dispatch({ type: "roll" } as CleverSpringAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="csp-btn csp-skip" onClick={() => dispatch({ type: "skip" } as CleverSpringAction)}>Skip</button>
+          <button className="cspr-btn cspr-skip" onClick={() => dispatch({ type: "skip" } as CleverSpringAction)}>Skip</button>
         )}
-        <button className="csp-btn csp-reset" onClick={() => dispatch({ type: "reset" } as CleverSpringAction)}>Reset</button>
+        <button className="cspr-btn cspr-reset" onClick={() => dispatch({ type: "reset" } as CleverSpringAction)}>Reset</button>
       </div>
 
-      {state.phase === "done" && <div className="csp-done">Final: <b>{final}</b></div>}
-      <div className="csp-rules">Rolls 6: bloom bonus +4</div>
+      {state.phase === "done" && <div className="cspr-done">Final: <b>{final}</b></div>}
+      <div className="cspr-rules">Rolls 6: bloom bonus +4</div>
     </div>
   );
 }

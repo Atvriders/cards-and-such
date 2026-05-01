@@ -1,14 +1,34 @@
-.rw-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; font-family: sans-serif; max-width: 560px; margin: 0 auto; }
-.rw-info { font-size: 0.95rem; color: #555; }
-.rw-score { font-size: 1.2rem; font-weight: 800; color: #27ae60; }
-.rw-die { font-size: 2rem; font-weight: 900; min-width: 60px; padding: 10px 14px; background: #fff; border: 2px solid #34495e; border-radius: 8px; text-align: center; color: #2c3e50; }
-.rw-grid { display: grid; gap: 4px; padding: 8px; background: #ecf0f1; border-radius: 8px; }
-.rw-cell { width: 44px; height: 44px; border: 1px solid #bdc3c7; border-radius: 6px; cursor: pointer; background: #fff; font-weight: 800; color: #7f8c8d; }
-.rw-cell.filled { background: #eafaf1; color: #1e8449; border-color: #27ae60; cursor: default; }
-.rw-cell:disabled { cursor: not-allowed; }
-.rw-btn { padding: 10px 22px; font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; color: #fff; background: #3498db; }
-.rw-btn:hover:not(:disabled) { background: #2980b9; }
-.rw-btn.alt { background: #e67e22; }
-.rw-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.rw-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 14px; }
-.rw-final { font-size: 1.4rem; color: #27ae60; font-weight: 900; }
+/* Qwixx Deluxe - flagship 4-color RYBG dice grid on warm cream. Prefix .qdx- is unique. */
+.qdx-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 22px; font-family: 'Inter', system-ui, sans-serif;
+  max-width: 560px; margin: 0 auto;
+  background: #fffbeb; color: #1f2937;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid #fde68a;
+}
+.qdx-info { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #92400e; letter-spacing: 0.04em; }
+.qdx-score { font-size: 1.3rem; font-weight: 800; color: #b91c1c; font-family: 'JetBrains Mono', monospace; }
+.qdx-die {
+  font-size: 2rem; font-weight: 900; min-width: 64px; padding: 10px 14px;
+  background: linear-gradient(135deg, #dc2626 0%, #f59e0b 33%, #1d4ed8 66%, #15803d 100%);
+  color: #fff; border: 2px solid #1c1917; border-radius: 10px; text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.2);
+}
+.qdx-grid { display: grid; gap: 4px; padding: 10px; background: rgba(28,25,23,0.05); border-radius: 10px; }
+.qdx-cell {
+  width: 44px; height: 44px; border: 1px solid #fcd34d; border-radius: 6px;
+  cursor: pointer; background: #fff; font-weight: 800; color: #92400e;
+  font-family: 'JetBrains Mono', monospace; transition: transform 80ms, border-color 80ms;
+}
+.qdx-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #b91c1c; }
+.qdx-cell.qdx-filled { background: #fee2e2; color: #991b1b; border-color: #b91c1c; cursor: default; }
+.qdx-cell:disabled { cursor: not-allowed; }
+.qdx-btn { padding: 10px 22px; font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; color: #fff; background: #b91c1c; font-family: inherit; }
+.qdx-btn:hover:not(:disabled) { background: #991b1b; }
+.qdx-btn.qdx-alt { background: #ea580c; }
+.qdx-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.qdx-done { text-align: center; padding: 24px; background: #fff; border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.qdx-final { font-size: 1.5rem; color: #b91c1c; font-weight: 900; font-family: 'JetBrains Mono', monospace; }

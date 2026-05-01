@@ -1,39 +1,46 @@
-.ctb-wrap {
+/* Cartographers Base - parchment kingdom map with sepia ink. Prefix .ctgb- is unique to this game. */
+.ctgb-wrap {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex; flex-direction: column; gap: 14px; align-items: center;
-  padding: 20px; max-width: 460px; margin: 0 auto;
-  background: #fef9e7; border-radius: 16px; color: #1a202c;
+  padding: 22px; max-width: 460px; margin: 0 auto;
+  background: #fef9e7;
+  
+  border-radius: 16px;
+  color: #3e2723;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  
 }
-.ctb-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
-.ctb-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #7d6608; letter-spacing: -0.01em; }
-.ctb-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #666; }
-.ctb-meta-score { color: #7d6608; font-weight: 800; }
-.ctb-die-area { display: flex; align-items: center; gap: 10px; }
-.ctb-die {
-  width: 56px; height: 56px; border-radius: 12px; background: #7d6608; color: #fff;
-  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 800;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+.ctgb-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
+.ctgb-title { margin: 0; font-size: 1.3rem; font-weight: 800; color: #92400e; letter-spacing: -0.01em;  }
+.ctgb-meta { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85rem; color: #8b6f47; }
+.ctgb-meta-roll { color: #3e2723; }
+.ctgb-meta-score { color: #92400e; font-weight: 800; }
+.ctgb-die-area { display: flex; align-items: center; gap: 12px; }
+.ctgb-die {
+  width: 58px; height: 58px; border-radius: 12px; background: #92400e; color: #fef3c7;
+  display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
-.ctb-hint { font-size: 0.85rem; color: #666; max-width: 200px; }
-.ctb-grid { display: grid; gap: 6px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; }
-.ctb-cell {
+.ctgb-hint { font-size: 0.83rem; color: #8b6f47; max-width: 220px; text-align: center; }
+.ctgb-grid { display: grid; gap: 6px; padding: 10px; background: rgba(146,64,14,0.07); border-radius: 12px; }
+.ctgb-cell {
   width: 56px; height: 56px; border: 2px solid transparent; border-radius: 8px;
-  background: #fff; color: #222;
-  font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700;
-  cursor: pointer; transition: transform 0.08s, border-color 0.08s;
+  background: #fffbeb; color: #3e2723;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; transition: transform 80ms ease, border-color 80ms ease, background 120ms ease;
 }
-.ctb-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #7d6608; }
-.ctb-cell:disabled { cursor: not-allowed; }
-.ctb-z0 { box-shadow: inset 0 0 0 3px #7d660833; }
-.ctb-z1 { box-shadow: inset 0 0 0 3px #b7950b33; }
-.ctb-z2 { box-shadow: inset 0 0 0 3px #d4ac0d33; }
-.ctb-z3 { box-shadow: inset 0 0 0 3px #f1c40f33; }
-.ctb-on { color: #fff; background: #7d6608; border-color: #7d6608; }
-.ctb-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.ctb-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
-.ctb-btn-primary { background: #7d6608; color: #fff; }
-.ctb-btn-primary:hover { filter: brightness(1.08); }
-.ctb-btn-skip { background: #95a5a6; color: #fff; }
-.ctb-btn-reset { background: #e5e7eb; color: #1a202c; }
-.ctb-done { font-size: 1.1rem; font-weight: 800; color: #7d6608; padding: 12px 18px; background: #fff; border-radius: 10px; }
-.ctb-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }
+.ctgb-cell:hover:not(:disabled) { transform: translateY(-1px); border-color: #92400e; }
+.ctgb-cell:disabled { cursor: not-allowed; }
+.ctgb-z0 { box-shadow: inset 0 0 0 3px #15803d66; }
+.ctgb-z1 { box-shadow: inset 0 0 0 3px #0ea5e966; }
+.ctgb-z2 { box-shadow: inset 0 0 0 3px #a1620766; }
+.ctgb-z3 { box-shadow: inset 0 0 0 3px #7c2d1266; }
+.ctgb-on { color: #fff; background: #92400e; border-color: #92400e; }
+.ctgb-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.ctgb-btn { padding: 10px 22px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.ctgb-btn-primary { background: #92400e; color: #fff; }
+.ctgb-btn-primary:hover { filter: brightness(1.08); }
+.ctgb-btn-skip { background: #95a5a6; color: #fff; }
+.ctgb-btn-reset { background: #e5e7eb; color: #3e2723; }
+.ctgb-done { font-size: 1.15rem; font-weight: 800; color: #92400e; padding: 14px 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.ctgb-rules { font-size: 0.78rem; color: #8b6f47; font-family: 'JetBrains Mono', monospace; text-align: center; max-width: 320px; }

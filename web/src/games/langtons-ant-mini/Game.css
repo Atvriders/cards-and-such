@@ -1,10 +1,34 @@
-.la-wrap { max-width: 480px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-.la-stats { font-size: 0.95rem; }
-.la-grid { display: grid; gap: 1px; width: 100%; max-width: 360px; background: #1f2937; padding: 2px; border-radius: 6px; }
-.la-cell { aspect-ratio: 1 / 1; background: #f3f4f6; border-radius: 1px; }
-.la-cell.la-black { background: #1f2937; }
-.la-cell.la-ant { outline: 2px solid #ef4444; }
+/* Langton's Ant — black-and-white grid with crimson ant trail. */
+.la-wrap {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  max-width: 480px; margin: 0 auto; padding: 20px;
+  display: flex; flex-direction: column; gap: 14px; align-items: center;
+  background: #fafafa; color: #0a0a0a;
+  border: 2px solid #0a0a0a; border-radius: 4px;
+  box-shadow: 8px 8px 0 #0a0a0a;
+}
+.la-stats {
+  font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #0a0a0a; padding: 6px 12px; background: #fff; border: 1px solid #0a0a0a;
+}
+.la-stats b { color: #b91c1c; font-weight: 800; }
+.la-grid {
+  display: grid; gap: 1px; width: 100%; max-width: 360px;
+  background: #0a0a0a; padding: 3px; border: 2px solid #0a0a0a;
+}
+.la-cell { aspect-ratio: 1 / 1; background: #ffffff; transition: background 80ms linear; }
+.la-cell.la-black { background: #0a0a0a; }
+.la-cell.la-ant { outline: 2px solid #dc2626; outline-offset: -2px; box-shadow: 0 0 0 1px #fff inset; z-index: 2; }
 .la-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.la-controls button { padding: 7px 14px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700; background: #6366f1; color: #fff; }
-.la-controls .la-finish { background: #dc2626; }
-.la-done { background: #ecfccb; padding: 12px 20px; border-radius: 10px; font-weight: 800; }
+.la-controls button {
+  padding: 8px 16px; border: 2px solid #0a0a0a; cursor: pointer;
+  font-family: inherit; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  background: #fff; color: #0a0a0a; border-radius: 0;
+}
+.la-controls button:hover { background: #0a0a0a; color: #fff; }
+.la-controls .la-finish { background: #dc2626; color: #fff; border-color: #7f1d1d; }
+.la-controls .la-finish:hover { background: #7f1d1d; }
+.la-done {
+  background: #0a0a0a; color: #fff; padding: 12px 22px; border: 2px solid #dc2626;
+  font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+}
