@@ -7,65 +7,55 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   {
     "question": "Palme d'Or replaced what name in 1955?",
     "choices": [
-      "Grand Prix",
+      "Grand Prix du Festival",
+      "Golden Palm",
       "Lion d'Or",
-      "Or de Cannes",
-      "Diamant"
+      "Croisette Award"
     ],
     "correct": 0
   },
   {
-    "question": "Won 2 Palmes for I, Daniel Blake / The Wind That Shakes the Barley?",
+    "question": "Palme d'Or design is based on what tree?",
     "choices": [
-      "Ken Loach",
-      "Mike Leigh",
-      "Stephen Frears",
-      "Andrea Arnold"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Won Palme for The White Ribbon and Amour?",
-    "choices": [
-      "Michael Haneke",
-      "Lars von Trier",
-      "Roman Polanski",
-      "Emir Kusturica"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "'Pulp Fiction' Palme year?",
-    "choices": [
-      "1992",
-      "1994",
-      "1996",
-      "1998"
+      "Olive",
+      "Palm",
+      "Cypress",
+      "Cedar"
     ],
     "correct": 1
   },
   {
-    "question": "Dardenne brothers' double Palme films?",
+    "question": "Festival hosting Palme d'Or is in?",
     "choices": [
-      "Rosetta + L'Enfant",
-      "L'Enfant + Two Days",
-      "Rosetta + Le Fils",
-      "Two Days + L'Enfant"
+      "Venice",
+      "Cannes",
+      "Berlin",
+      "San Sebastian"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Palme d'Or was suspended (renamed Grand Prix) between?",
+    "choices": [
+      "1955-60",
+      "1964-74",
+      "1975-80",
+      "1980-89"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First Palme d'Or (1955) winner?",
+    "choices": [
+      "Marty",
+      "The Silent World",
+      "Friendly Persuasion",
+      "La Dolce Vita"
     ],
     "correct": 0
   },
   {
-    "question": "'Apocalypse Now' shared Palme with?",
-    "choices": [
-      "The Tin Drum",
-      "Kagemusha",
-      "All That Jazz",
-      "Mon Oncle d'Amerique"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Fellini's 'La Dolce Vita' Palme year?",
+    "question": "La Dolce Vita won Palme in?",
     "choices": [
       "1958",
       "1960",
@@ -75,37 +65,127 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "First woman to solo-win Palme (1993)?",
+    "question": "Director with two Palmes (Dardennes, Loach, etc.)?",
     "choices": [
-      "Lina Wertmüller",
-      "Jane Campion",
-      "Sofia Coppola",
-      "Agnès Varda"
+      "1",
+      "2",
+      "3",
+      "Multiple directors"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Pulp Fiction (Tarantino) Palme year?",
+    "choices": [
+      "1992",
+      "1994",
+      "1996",
+      "1998"
     ],
     "correct": 1
   },
   {
-    "question": "Solo woman Palme 2021?",
+    "question": "Apocalypse Now shared Palme in 1979 with?",
     "choices": [
-      "Julia Ducournau",
-      "Jane Campion",
-      "Justine Triet",
-      "Andrea Arnold"
+      "The Tin Drum",
+      "Don Giovanni",
+      "Manhattan",
+      "All That Jazz"
     ],
     "correct": 0
   },
   {
-    "question": "Justine Triet's 2023 Palme film?",
+    "question": "The Tree of Life (Malick) won in?",
     "choices": [
-      "Anatomy of a Fall",
-      "In Bed With Victoria",
-      "Sibyl",
-      "Age of Panic"
+      "2009",
+      "2011",
+      "2013",
+      "2015"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "'Parasite' Palme year?",
+    "question": "Amour (Haneke) won in?",
+    "choices": [
+      "2010",
+      "2012",
+      "2014",
+      "2016"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Haneke's other Palme winner?",
+    "choices": [
+      "Cache",
+      "The White Ribbon",
+      "Funny Games",
+      "Code Unknown"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Blue Is the Warmest Color won in?",
+    "choices": [
+      "2011",
+      "2013",
+      "2015",
+      "2017"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Winter Sleep (Ceylan) won in?",
+    "choices": [
+      "2012",
+      "2014",
+      "2016",
+      "2018"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Dheepan (Audiard) won in?",
+    "choices": [
+      "2013",
+      "2015",
+      "2017",
+      "2019"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "I, Daniel Blake (Loach) won in?",
+    "choices": [
+      "2014",
+      "2016",
+      "2018",
+      "2020"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Square (Ostlund) Palme year?",
+    "choices": [
+      "2015",
+      "2017",
+      "2019",
+      "2021"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Shoplifters (Kore-eda) won in?",
+    "choices": [
+      "2016",
+      "2017",
+      "2018",
+      "2019"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Parasite Palme year?",
     "choices": [
       "2018",
       "2019",
@@ -115,32 +195,112 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Polanski Palme winner film?",
+    "question": "Titane (Ducournau) Palme year?",
     "choices": [
-      "The Pianist",
-      "Frantic",
-      "Knife in the Water",
-      "Tess"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dardenne 2nd Palme year?",
-    "choices": [
-      "2002",
-      "2005",
-      "2008",
-      "2010"
+      "2020",
+      "2021",
+      "2022",
+      "2023"
     ],
     "correct": 1
   },
   {
-    "question": "Triangle of Sadness director?",
+    "question": "Triangle of Sadness Palme year?",
     "choices": [
-      "Ruben Östlund",
-      "Roy Andersson",
-      "Lukas Moodysson",
-      "Tomas Alfredson"
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Anatomy of a Fall (Triet) Palme year?",
+    "choices": [
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Anora (Sean Baker) Palme year?",
+    "choices": [
+      "2022",
+      "2023",
+      "2024",
+      "2021"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Piano (Campion) shared Palme in 1993 with?",
+    "choices": [
+      "Farewell My Concubine",
+      "Three Colors: Blue",
+      "Naked",
+      "Short Cuts"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Taxi Driver (Scorsese) Palme year?",
+    "choices": [
+      "1974",
+      "1976",
+      "1978",
+      "1980"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "MASH (Altman) Palme year?",
+    "choices": [
+      "1968",
+      "1970",
+      "1972",
+      "1974"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "If.... (Anderson) Palme year?",
+    "choices": [
+      "1967",
+      "1968",
+      "1969",
+      "1970"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "All That Jazz / Kagemusha shared Palme in?",
+    "choices": [
+      "1978",
+      "1980",
+      "1982",
+      "1984"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "4 Months, 3 Weeks and 2 Days Palme year?",
+    "choices": [
+      "2005",
+      "2007",
+      "2009",
+      "2011"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Number of Palmes typically awarded each festival?",
+    "choices": [
+      "One",
+      "Two",
+      "Three",
+      "Up to four"
     ],
     "correct": 0
   }

@@ -5,142 +5,302 @@ export interface TonyAwardsQuizState { questions: QuizQuestion[]; currentIndex: 
 export type TonyAwardsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Tony Awards started in?",
+    "question": "Tony Awards were established in?",
     "choices": [
-      "1937",
+      "1945",
       "1947",
-      "1957",
-      "1967"
+      "1949",
+      "1951"
     ],
     "correct": 1
   },
   {
-    "question": "What art form do they honor?",
+    "question": "Tonys honor excellence in?",
     "choices": [
       "Film",
-      "TV",
-      "Broadway theater",
-      "Recording"
+      "Television",
+      "Broadway theatre",
+      "Off-Broadway"
     ],
     "correct": 2
+  },
+  {
+    "question": "Tonys are named after?",
+    "choices": [
+      "Tony Bennett",
+      "Antoinette Perry",
+      "Anthony Quinn",
+      "Tony Curtis"
+    ],
+    "correct": 1
   },
   {
     "question": "Antoinette Perry was a?",
     "choices": [
-      "Producer/Actress",
-      "Composer",
+      "Actress and director",
+      "Producer only",
       "Critic",
-      "Politician"
+      "Choreographer"
     ],
     "correct": 0
   },
   {
-    "question": "Most Tony wins for a single show (Best Musical year)?",
+    "question": "Tony Awards venue most associated in 21st century?",
     "choices": [
-      "The Producers (12)",
-      "Hamilton (11)",
-      "Hello, Dolly! (10)",
-      "Cats (7)"
+      "Carnegie Hall",
+      "Radio City Music Hall",
+      "Lincoln Center",
+      "Madison Square Garden"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Most Tony Awards won by a single show (record)?",
+    "choices": [
+      "10",
+      "12",
+      "13",
+      "14"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Show with 12 Tonys (1968 record)?",
+    "choices": [
+      "Hello, Dolly!",
+      "Cabaret",
+      "1776",
+      "Fiddler"
     ],
     "correct": 0
   },
   {
-    "question": "Year 'Hamilton' won Best Musical?",
+    "question": "Show that tied 12-Tony record in 2016?",
     "choices": [
-      "2014",
-      "2015",
-      "2016",
-      "2017"
+      "Book of Mormon",
+      "Hamilton",
+      "The Producers",
+      "Wicked"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Producers (2001) won how many Tonys?",
+    "choices": [
+      "10",
+      "11",
+      "12",
+      "13"
     ],
     "correct": 2
   },
   {
-    "question": "Most acting Tonys (6) belongs to?",
+    "question": "Hamilton was created by?",
     "choices": [
-      "Bernadette Peters",
-      "Audra McDonald",
-      "Patti LuPone",
-      "Cherry Jones"
+      "Stephen Schwartz",
+      "Lin-Manuel Miranda",
+      "Andrew Lloyd Webber",
+      "Stephen Sondheim"
     ],
     "correct": 1
   },
   {
-    "question": "Tony Awards site since 2011?",
+    "question": "Stephen Sondheim's Tony for Best Score for Sweeney Todd was in?",
     "choices": [
-      "Radio City Music Hall",
-      "Beacon Theatre",
-      "Lincoln Center",
-      "Madison Square Garden"
+      "1977",
+      "1979",
+      "1981",
+      "1983"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Best Musical 1976?",
+    "choices": [
+      "A Chorus Line",
+      "Chicago",
+      "Pacific Overtures",
+      "Bubbling Brown Sugar"
     ],
     "correct": 0
   },
   {
-    "question": "Won Tony, Oscar, Emmy and Grammy = ?",
+    "question": "Best Musical 1988?",
     "choices": [
-      "BIG4",
-      "EGOT",
-      "TOEG",
-      "Quad"
+      "Phantom of the Opera",
+      "Into the Woods",
+      "Les Miserables",
+      "Sarafina!"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Best Musical 2003?",
+    "choices": [
+      "Hairspray",
+      "Movin' Out",
+      "Urinetown",
+      "Amour"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Best Play 1949 (first Tony for Best Play category)?",
+    "choices": [
+      "Mister Roberts",
+      "Death of a Salesman",
+      "Streetcar",
+      "Tea and Sympathy"
     ],
     "correct": 1
   },
   {
-    "question": "Hosted the Tonys 4 times?",
+    "question": "Death of a Salesman won Best Play in?",
     "choices": [
-      "Hugh Jackman",
-      "Neil Patrick Harris",
-      "James Corden",
-      "Both A and B"
+      "1947",
+      "1949",
+      "1951",
+      "1953"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Most Tony nominations for an actor (record holder)?",
+    "choices": [
+      "Julie Harris",
+      "Audra McDonald",
+      "Bernadette Peters",
+      "Chita Rivera"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Audra McDonald's Tony win count?",
+    "choices": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Best Musical 2016 winner?",
+    "choices": [
+      "Hamilton",
+      "Waitress",
+      "School of Rock",
+      "Bright Star"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Best Musical 2018?",
+    "choices": [
+      "Mean Girls",
+      "Frozen",
+      "The Band's Visit",
+      "SpongeBob"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Best Musical 2022?",
+    "choices": [
+      "MJ",
+      "Six",
+      "A Strange Loop",
+      "Paradise Square"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Best Musical 2023?",
+    "choices": [
+      "Some Like It Hot",
+      "Kimberly Akimbo",
+      "Shucked",
+      "New York, New York"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Best Musical 2024?",
+    "choices": [
+      "Hell's Kitchen",
+      "Suffs",
+      "The Outsiders",
+      "Illinoise"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Best Play 2023?",
+    "choices": [
+      "Leopoldstadt",
+      "Cost of Living",
+      "Ain't No Mo'",
+      "Between Riverside and Crazy"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Andrew Lloyd Webber's Cats won Best Musical in?",
+    "choices": [
+      "1981",
+      "1983",
+      "1985",
+      "1987"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Les Miserables won Best Musical in?",
+    "choices": [
+      "1985",
+      "1986",
+      "1987",
+      "1988"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "West Side Story (original 1957) Best Musical?",
+    "choices": [
+      "Yes",
+      "No",
+      "It was nominated",
+      "It was Best Play"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Tony for Best Revival of a Musical first awarded in?",
+    "choices": [
+      "1977",
+      "1994",
+      "1980",
+      "1989"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Lifetime achievement Tony is called?",
+    "choices": [
+      "Special Tony",
+      "Honorary Tony",
+      "Isabelle Stevenson",
+      "Both 1 & 3"
     ],
     "correct": 3
   },
   {
-    "question": "Year 'Wicked' opened on Broadway?",
+    "question": "Tony Awards are presented by?",
     "choices": [
-      "2001",
-      "2003",
-      "2005",
-      "2007"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Best Play 1993 winner?",
-    "choices": [
-      "Angels in America",
-      "The Sisters Rosensweig",
-      "Six Degrees of Separation",
-      "Lost in Yonkers"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lin-Manuel Miranda won writing Tonys for?",
-    "choices": [
-      "In the Heights",
-      "Hamilton",
-      "Both",
-      "Neither"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "How many Tony categories are competitive (approx)?",
-    "choices": [
-      "About 12",
-      "About 18",
-      "About 26",
-      "About 40"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "First Best Musical winner (1949)?",
-    "choices": [
-      "Kiss Me, Kate",
-      "South Pacific",
-      "Brigadoon",
-      "Annie Get Your Gun"
+      "Broadway League and ATW",
+      "Equity",
+      "SAG",
+      "ACE"
     ],
     "correct": 0
   }

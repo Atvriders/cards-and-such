@@ -5,127 +5,177 @@ export interface AcademyAwardsQuizState { questions: QuizQuestion[]; currentInde
 export type AcademyAwardsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "First Academy Awards ceremony was in?",
+    "question": "First Academy Awards ceremony was held in?",
     "choices": [
-      "1924",
+      "1925",
+      "1927",
       "1929",
-      "1934",
-      "1939"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Statuette nickname?",
-    "choices": [
-      "Oscar",
-      "Tony",
-      "Emmy",
-      "Grammy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Most-Oscars-ever individual?",
-    "choices": [
-      "Walt Disney",
-      "Steven Spielberg",
-      "John Ford",
-      "James Cameron"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many career Oscars did Walt Disney win?",
-    "choices": [
-      "12",
-      "16",
-      "22",
-      "26"
+      "1931"
     ],
     "correct": 2
   },
   {
-    "question": "Highest-honored Best Director (4 wins)?",
+    "question": "Who hosted the first ceremony?",
     "choices": [
-      "Steven Spielberg",
-      "John Ford",
-      "William Wyler",
+      "Will Rogers",
+      "Douglas Fairbanks",
+      "Cecil B. DeMille",
       "Frank Capra"
     ],
     "correct": 1
   },
   {
-    "question": "First African-American Best Actor winner?",
+    "question": "Best Picture winner of 1939?",
     "choices": [
-      "Sidney Poitier",
-      "Denzel Washington",
-      "Forest Whitaker",
-      "Jamie Foxx"
+      "Gone with the Wind",
+      "Wizard of Oz",
+      "Mr. Smith",
+      "Stagecoach"
     ],
     "correct": 0
   },
   {
-    "question": "Picture famously misannounced in 2017?",
+    "question": "First color film to win Best Picture?",
     "choices": [
-      "Moonlight",
-      "La La Land (announced first)",
-      "Both",
-      "Birdman"
+      "Wizard of Oz",
+      "Gone with the Wind",
+      "Snow White",
+      "Drums Along Mohawk"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Walt Disney's record total Oscars?",
+    "choices": [
+      "18",
+      "22",
+      "26",
+      "30"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First African American to win Best Actor?",
+    "choices": [
+      "Sidney Poitier",
+      "Denzel Washington",
+      "Morgan Freeman",
+      "James Earl Jones"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Sidney Poitier won Best Actor for?",
+    "choices": [
+      "In the Heat of the Night",
+      "Lilies of the Field",
+      "To Sir with Love",
+      "Guess Who's Coming"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Most Best Director wins by one person?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Director with 4 Best Director wins?",
+    "choices": [
+      "Wyler",
+      "Capra",
+      "Ford",
+      "Spielberg"
     ],
     "correct": 2
   },
   {
-    "question": "First woman Best Director winner?",
+    "question": "Best Picture 1972?",
     "choices": [
-      "Sofia Coppola",
-      "Kathryn Bigelow",
-      "Jane Campion",
-      "Chloé Zhao"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Best Picture for 'Hurt Locker' was in?",
-    "choices": [
-      "2008",
-      "2009",
-      "2010",
-      "2011"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who hosted Oscars most times?",
-    "choices": [
-      "Bob Hope",
-      "Billy Crystal",
-      "Johnny Carson",
-      "Whoopi Goldberg"
+      "The Godfather",
+      "Cabaret",
+      "Deliverance",
+      "Sounder"
     ],
     "correct": 0
   },
   {
-    "question": "Which film holds the record for most wins (11)?",
+    "question": "Best Picture 1994?",
     "choices": [
-      "Ben-Hur",
-      "Titanic",
-      "LOTR: Return of the King",
-      "All three tie"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "First non-English Best Picture?",
-    "choices": [
-      "Crouching Tiger",
-      "Parasite",
-      "Roma",
-      "The Artist"
+      "Pulp Fiction",
+      "Forrest Gump",
+      "Shawshank",
+      "Quiz Show"
     ],
     "correct": 1
   },
   {
-    "question": "Year 'Parasite' won Best Picture?",
+    "question": "Best Picture 1997?",
+    "choices": [
+      "Titanic",
+      "L.A. Confidential",
+      "Good Will Hunting",
+      "As Good as It Gets"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Most acting Oscar nominations?",
+    "choices": [
+      "Streep",
+      "Hepburn",
+      "Davis",
+      "Nicholson"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Most Best Actress wins?",
+    "choices": [
+      "Streep",
+      "Katharine Hepburn",
+      "Bette Davis",
+      "Frances McDormand"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Katharine Hepburn's Best Actress wins?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Best Actor record holders with 3 wins?",
+    "choices": [
+      "Day-Lewis",
+      "Brando",
+      "Pacino",
+      "Hanks"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First foreign language film to win Best Picture?",
+    "choices": [
+      "Roma",
+      "Parasite",
+      "Amour",
+      "Crouching Tiger"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Parasite won Best Picture in?",
     "choices": [
       "2018",
       "2019",
@@ -135,14 +185,124 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Marlon Brando declined Oscar in 1973 over?",
+    "question": "First woman to win Best Director?",
     "choices": [
-      "Pay",
-      "Native American treatment",
-      "Other awards",
-      "Personal feud"
+      "Sofia Coppola",
+      "Kathryn Bigelow",
+      "Jane Campion",
+      "Greta Gerwig"
     ],
     "correct": 1
+  },
+  {
+    "question": "Bigelow won Best Director for?",
+    "choices": [
+      "Zero Dark Thirty",
+      "The Hurt Locker",
+      "Point Break",
+      "Strange Days"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Movie with most Oscars (tied at 11)?",
+    "choices": [
+      "Ben-Hur",
+      "Titanic",
+      "LOTR: Return of the King",
+      "All of these"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "LOTR: Return of the King's Oscar record?",
+    "choices": [
+      "10/10",
+      "11/11",
+      "12/12",
+      "9/11"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First X-rated film to win Best Picture?",
+    "choices": [
+      "A Clockwork Orange",
+      "Midnight Cowboy",
+      "Last Tango",
+      "Taxi Driver"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Best Picture 1942 about an Englishwoman in WWII?",
+    "choices": [
+      "Random Harvest",
+      "Mrs. Miniver",
+      "How Green Was My Valley",
+      "Casablanca"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Best Picture 1942/43 release set in Morocco?",
+    "choices": [
+      "Casablanca",
+      "Algiers",
+      "Sahara",
+      "Five Graves to Cairo"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Hattie McDaniel was first Black Oscar winner for?",
+    "choices": [
+      "Imitation of Life",
+      "Gone with the Wind",
+      "Show Boat",
+      "Pinky"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Best Animated Feature was created in?",
+    "choices": [
+      "1995",
+      "1998",
+      "2001",
+      "2003"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "First Best Animated Feature winner?",
+    "choices": [
+      "Toy Story",
+      "Shrek",
+      "Monsters Inc.",
+      "Finding Nemo"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "EGOT means winning Emmy, Grammy, Oscar and?",
+    "choices": [
+      "Tony",
+      "Saturn",
+      "BAFTA",
+      "Golden Globe"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Oscar statuette's official name?",
+    "choices": [
+      "Academy Award of Merit",
+      "Hollywood Trophy",
+      "Golden Knight",
+      "Silver Sword"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

@@ -5,7 +5,7 @@ export interface NobelPeaceQuizState { questions: QuizQuestion[]; currentIndex: 
 export type NobelPeaceQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "In which city is the Peace Prize awarded?",
+    "question": "In which city is the Nobel Peace Prize awarded?",
     "choices": [
       "Stockholm",
       "Oslo",
@@ -15,7 +15,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "The Peace Prize started in?",
+    "question": "In what year was the first Nobel Peace Prize awarded?",
     "choices": [
       "1895",
       "1901",
@@ -25,7 +25,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Whose will established the Nobels?",
+    "question": "Whose will established the Nobel Prizes?",
     "choices": [
       "Alfred Nobel",
       "Albert Nobel",
@@ -35,7 +35,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Year Mandela & de Klerk shared the prize?",
+    "question": "In what year did Mandela & de Klerk share the prize?",
     "choices": [
       "1991",
       "1993",
@@ -45,7 +45,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Year MLK Jr won?",
+    "question": "In what year did Martin Luther King Jr. win?",
     "choices": [
       "1962",
       "1964",
@@ -55,7 +55,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Mother Teresa won in?",
+    "question": "Mother Teresa won the Peace Prize in?",
     "choices": [
       "1973",
       "1979",
@@ -75,7 +75,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Did Mahatma Gandhi win the Peace Prize?",
+    "question": "Did Mahatma Gandhi ever win the Peace Prize?",
     "choices": [
       "Yes, 1948",
       "Yes, 1947",
@@ -85,7 +85,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 3
   },
   {
-    "question": "Doctors Without Borders won in?",
+    "question": "Doctors Without Borders (MSF) won in?",
     "choices": [
       "1999",
       "2001",
@@ -95,7 +95,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Henry Kissinger shared in?",
+    "question": "Henry Kissinger shared the Peace Prize in?",
     "choices": [
       "1971",
       "1973",
@@ -105,7 +105,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Wangari Maathai (Kenya) won in?",
+    "question": "Wangari Maathai of Kenya won in?",
     "choices": [
       "1998",
       "2002",
@@ -125,22 +125,182 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Nobel Peace medal contains how much gold (carats)?",
-    "choices": [
-      "10K",
-      "14K",
-      "18K",
-      "24K"
-    ],
-    "correct": 2
-  },
-  {
     "question": "Body that selects the Peace laureate?",
     "choices": [
       "Swedish Academy",
       "Norwegian Nobel Committee",
       "Karolinska Institutet",
       "Nobel Foundation"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Barack Obama won the Peace Prize in?",
+    "choices": [
+      "2008",
+      "2009",
+      "2010",
+      "2011"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Al Gore shared the prize with which body in 2007?",
+    "choices": [
+      "UNEP",
+      "IPCC",
+      "IAEA",
+      "UNHCR"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The IAEA and ElBaradei won in?",
+    "choices": [
+      "2003",
+      "2005",
+      "2007",
+      "2009"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The EU won the Peace Prize in?",
+    "choices": [
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Aung San Suu Kyi won in?",
+    "choices": [
+      "1989",
+      "1991",
+      "1993",
+      "1995"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Lech Walesa of Poland won in?",
+    "choices": [
+      "1981",
+      "1983",
+      "1985",
+      "1987"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mikhail Gorbachev won in?",
+    "choices": [
+      "1988",
+      "1989",
+      "1990",
+      "1991"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Dalai Lama won in?",
+    "choices": [
+      "1987",
+      "1989",
+      "1991",
+      "1993"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Yitzhak Rabin, Shimon Peres & Yasser Arafat shared in?",
+    "choices": [
+      "1992",
+      "1993",
+      "1994",
+      "1995"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Jimmy Carter won the Peace Prize in?",
+    "choices": [
+      "1998",
+      "2000",
+      "2002",
+      "2004"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Kofi Annan and the UN shared in?",
+    "choices": [
+      "1999",
+      "2000",
+      "2001",
+      "2002"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Theodore Roosevelt won in 1906 for mediating which war?",
+    "choices": [
+      "Boer War",
+      "Russo-Japanese War",
+      "Boxer Rebellion",
+      "WWI"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Woodrow Wilson won in 1919 for?",
+    "choices": [
+      "The League of Nations",
+      "Ending WWI",
+      "Suffrage",
+      "Fourteen Points only"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "ICAN (anti-nuclear coalition) won in?",
+    "choices": [
+      "2015",
+      "2016",
+      "2017",
+      "2018"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Abiy Ahmed of Ethiopia won in?",
+    "choices": [
+      "2017",
+      "2018",
+      "2019",
+      "2020"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Maria Ressa & Dmitry Muratov won in 2021 for?",
+    "choices": [
+      "Press freedom",
+      "Climate",
+      "Disarmament",
+      "Refugee aid"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Narges Mohammadi (2023) is from which country?",
+    "choices": [
+      "Afghanistan",
+      "Iran",
+      "Iraq",
+      "Yemen"
     ],
     "correct": 1
   }

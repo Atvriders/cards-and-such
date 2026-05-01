@@ -5,144 +5,304 @@ export interface ManBookerQuizState { questions: QuizQuestion[]; currentIndex: n
 export type ManBookerQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Booker Prize launched in?",
+    "question": "Booker Prize was launched in?",
     "choices": [
-      "1959",
+      "1965",
       "1969",
-      "1979",
-      "1989"
+      "1973",
+      "1977"
     ],
     "correct": 1
   },
   {
-    "question": "Country of origin?",
+    "question": "Originally called?",
     "choices": [
-      "UK",
-      "Ireland",
-      "Both UK & Ireland (eligibility)",
-      "Australia"
+      "Booker Prize",
+      "Man Booker",
+      "Booker McConnell Prize",
+      "International Booker"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
-    "question": "Salman Rushdie's Booker novel?",
+    "question": "Booker Prize is for fiction written in?",
     "choices": [
-      "Midnight's Children",
+      "French",
+      "English",
+      "Any language",
+      "German"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Until 2014 the Booker was open to authors from?",
+    "choices": [
+      "UK only",
+      "Commonwealth/Ireland",
+      "Europe",
+      "Anywhere"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Salman Rushdie won the Booker in 1981 for?",
+    "choices": [
       "Shame",
+      "Midnight's Children",
       "The Satanic Verses",
-      "Fury"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Author of 'Wolf Hall'?",
-    "choices": [
-      "Hilary Mantel",
-      "Margaret Atwood",
-      "Pat Barker",
-      "A.S. Byatt"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hilary Mantel's two Booker wins were for?",
-    "choices": [
-      "Wolf Hall + Bring Up the Bodies",
-      "Wolf Hall + The Mirror & the Light",
-      "Bring Up the Bodies + Mirror",
-      "Beyond Black + Wolf Hall"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bernardine Evaristo's joint-2019 Booker novel?",
-    "choices": [
-      "Girl, Woman, Other",
-      "Mr Loverman",
-      "Lara",
-      "Hello Mum"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Year Atwood/Evaristo shared Booker?",
-    "choices": [
-      "2018",
-      "2019",
-      "2020",
-      "2021"
+      "The Moor's Last Sigh"
     ],
     "correct": 1
   },
   {
-    "question": "Atwood's joint-2019 winning book?",
+    "question": "Midnight's Children was later voted the?",
     "choices": [
+      "Booker of Bookers",
+      "Lost Booker",
+      "Best of Booker",
+      "All of these"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "J.M. Coetzee was the first author to win Booker how many times?",
+    "choices": [
+      "Once",
+      "Twice",
+      "Thrice",
+      "Four times"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Coetzee's two Booker winners are?",
+    "choices": [
+      "Disgrace + Life and Times",
+      "Foe + Disgrace",
+      "Boyhood + Disgrace",
+      "Slow Man + Disgrace"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Hilary Mantel won the Booker for?",
+    "choices": [
+      "Bring Up the Bodies",
+      "Wolf Hall",
+      "Both",
+      "Neither"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Wolf Hall (Mantel) won in?",
+    "choices": [
+      "2007",
+      "2009",
+      "2011",
+      "2013"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Bring Up the Bodies won in?",
+    "choices": [
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Margaret Atwood won the Booker for?",
+    "choices": [
+      "The Blind Assassin",
       "The Testaments",
-      "Hag-Seed",
-      "Alias Grace",
-      "Cat's Eye"
+      "Both",
+      "Alias Grace"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
-    "question": "International Booker is for?",
+    "question": "Atwood's first Booker (Blind Assassin) was in?",
     "choices": [
-      "Translated fiction",
-      "Children's books",
-      "Nonfiction",
-      "Drama"
+      "1998",
+      "2000",
+      "2002",
+      "2004"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Yann Martel won the Booker for?",
+    "choices": [
+      "Life of Pi",
+      "Beatrice and Virgil",
+      "The High Mountains",
+      "Self"
     ],
     "correct": 0
   },
   {
-    "question": "First non-Commonwealth winners eligible from?",
+    "question": "Life of Pi won the Booker in?",
     "choices": [
       "2000",
+      "2002",
+      "2004",
+      "2006"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Aravind Adiga won the Booker for?",
+    "choices": [
+      "Last Man in Tower",
+      "The White Tiger",
+      "Selection Day",
+      "Amnesty"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The White Tiger won in?",
+    "choices": [
+      "2006",
+      "2008",
+      "2010",
+      "2012"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Hilary Mantel's two consecutive wins made her?",
+    "choices": [
+      "First Brit",
+      "First woman with 2",
+      "First with 2 in Tudor genre",
+      "All of these"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Marlon James won the Booker for?",
+    "choices": [
+      "John Crow's Devil",
+      "The Book of Night Women",
+      "A Brief History of Seven Killings",
+      "Black Leopard"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Sellout (Beatty) won in?",
+    "choices": [
       "2014",
+      "2015",
+      "2016",
+      "2017"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Lincoln in the Bardo (Saunders) won in?",
+    "choices": [
+      "2015",
+      "2016",
+      "2017",
+      "2018"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Milkman (Anna Burns) won in?",
+    "choices": [
+      "2017",
       "2018",
+      "2019",
       "2020"
     ],
     "correct": 1
   },
   {
-    "question": "Ian McEwan's Booker novel?",
+    "question": "2019 Booker was shared by Atwood and?",
     "choices": [
-      "Atonement",
-      "Amsterdam",
-      "Saturday",
-      "On Chesil Beach"
+      "Salman Rushdie",
+      "Bernardine Evaristo",
+      "Lucy Ellmann",
+      "Elif Shafak"
     ],
     "correct": 1
   },
   {
-    "question": "Penelope Lively's Booker novel?",
+    "question": "Bernardine Evaristo's winning novel?",
     "choices": [
-      "Moon Tiger",
-      "City of the Mind",
-      "Heat Wave",
-      "Family Album"
+      "Mr Loverman",
+      "Girl, Woman, Other",
+      "Soul Tourists",
+      "Lara"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Shuggie Bain (Stuart) won in?",
+    "choices": [
+      "2019",
+      "2020",
+      "2021",
+      "2022"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Promise (Galgut) won in?",
+    "choices": [
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Seven Moons of Maali Almeida won in?",
+    "choices": [
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Author of 2022 winner Seven Moons of Maali Almeida?",
+    "choices": [
+      "Karunatilaka",
+      "Hanif",
+      "Sobhraj",
+      "Selvadurai"
     ],
     "correct": 0
   },
   {
-    "question": "J.M. Coetzee's Booker double came with?",
+    "question": "Prophet Song (Lynch) won in?",
     "choices": [
-      "Disgrace + The Master of Petersburg",
-      "Disgrace + Life & Times of Michael K",
-      "Foe + Disgrace",
-      "Slow Man + Disgrace"
+      "2022",
+      "2023",
+      "2024",
+      "2021"
     ],
     "correct": 1
   },
   {
-    "question": "Booker prize money (current)?",
+    "question": "International Booker Prize honors works in translation since?",
     "choices": [
-      "£10k",
-      "£25k",
-      "£50k",
-      "£100k"
+      "2005",
+      "2016",
+      "2010",
+      "2020"
     ],
-    "correct": 2
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

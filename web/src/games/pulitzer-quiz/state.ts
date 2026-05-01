@@ -15,67 +15,177 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "First Pulitzers given in?",
+    "question": "First Pulitzer Prizes were awarded in?",
     "choices": [
-      "1907",
+      "1903",
       "1917",
-      "1927",
-      "1937"
+      "1925",
+      "1933"
     ],
     "correct": 1
   },
   {
-    "question": "Joseph Pulitzer was an?",
+    "question": "Joseph Pulitzer was publisher of?",
     "choices": [
-      "Author",
-      "Publisher",
-      "Politician",
-      "Inventor"
+      "NY Times",
+      "NY World",
+      "NY Herald",
+      "NY Sun"
     ],
     "correct": 1
   },
   {
-    "question": "Top journalism honor is the ___ Service medal.",
+    "question": "Pulitzer's bequest also founded which journalism school?",
     "choices": [
-      "National",
-      "Public",
-      "International",
-      "Civic"
+      "Northwestern",
+      "Columbia",
+      "NYU",
+      "UCLA"
     ],
     "correct": 1
   },
   {
-    "question": "Pulitzer for Fiction (2018) author?",
+    "question": "Pulitzer Prize for Fiction was originally called?",
     "choices": [
-      "Andrew Sean Greer",
-      "Colson Whitehead",
-      "Donna Tartt",
-      "Anthony Doerr"
+      "Prize for Fiction",
+      "Prize for the Novel",
+      "Prize for Romance",
+      "Prize for Story"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First Fiction (Novel) Pulitzer (1918) winner?",
+    "choices": [
+      "His Family",
+      "The Magnificent Ambersons",
+      "The Age of Innocence",
+      "Main Street"
     ],
     "correct": 0
   },
   {
-    "question": "'Hamilton' won Pulitzer for?",
+    "question": "Edith Wharton won Fiction Pulitzer for?",
     "choices": [
-      "Music",
-      "Drama",
-      "History",
-      "Nothing"
+      "The House of Mirth",
+      "The Age of Innocence",
+      "Ethan Frome",
+      "The Custom of the Country"
     ],
     "correct": 1
   },
   {
-    "question": "Kendrick Lamar's Pulitzer-winning album?",
+    "question": "Gone with the Wind won the Fiction Pulitzer in?",
     "choices": [
-      "DAMN.",
-      "good kid, m.A.A.d city",
-      "To Pimp a Butterfly",
-      "Section.80"
+      "1935",
+      "1937",
+      "1939",
+      "1941"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Author of 1937 Fiction Pulitzer Gone with the Wind?",
+    "choices": [
+      "Pearl Buck",
+      "Margaret Mitchell",
+      "Willa Cather",
+      "Edna Ferber"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "To Kill a Mockingbird won Fiction Pulitzer in?",
+    "choices": [
+      "1961",
+      "1963",
+      "1965",
+      "1967"
     ],
     "correct": 0
   },
   {
-    "question": "Year DAMN. won Music Pulitzer?",
+    "question": "The Old Man and the Sea won Fiction Pulitzer in?",
+    "choices": [
+      "1950",
+      "1953",
+      "1955",
+      "1958"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A Confederacy of Dunces won (posthumously) in?",
+    "choices": [
+      "1979",
+      "1981",
+      "1983",
+      "1985"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Beloved (Toni Morrison) won Fiction Pulitzer in?",
+    "choices": [
+      "1986",
+      "1988",
+      "1990",
+      "1992"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Road by Cormac McCarthy won in?",
+    "choices": [
+      "2005",
+      "2007",
+      "2009",
+      "2011"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A Visit from the Goon Squad won in?",
+    "choices": [
+      "2009",
+      "2011",
+      "2013",
+      "2015"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Goldfinch won the Fiction Pulitzer in?",
+    "choices": [
+      "2012",
+      "2013",
+      "2014",
+      "2015"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "All the Light We Cannot See won in?",
+    "choices": [
+      "2014",
+      "2015",
+      "2016",
+      "2017"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Underground Railroad won in?",
+    "choices": [
+      "2016",
+      "2017",
+      "2018",
+      "2019"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Less by Andrew Sean Greer won in?",
     "choices": [
       "2017",
       "2018",
@@ -85,64 +195,114 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Toni Morrison Fiction win was for?",
+    "question": "The Overstory (Powers) won in?",
     "choices": [
-      "Sula",
-      "Beloved",
-      "Song of Solomon",
-      "Jazz"
+      "2017",
+      "2018",
+      "2019",
+      "2020"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Trust by Hernan Diaz won in?",
+    "choices": [
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Drama Pulitzer 1949 (Death of a Salesman) author?",
+    "choices": [
+      "Tennessee Williams",
+      "Eugene O'Neill",
+      "Arthur Miller",
+      "William Inge"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Hamilton won the Pulitzer for Drama in?",
+    "choices": [
+      "2014",
+      "2015",
+      "2016",
+      "2017"
     ],
     "correct": 1
   },
   {
-    "question": "Hemingway won Fiction (1953) for?",
+    "question": "Number of Pulitzer journalism categories (approx)?",
     "choices": [
-      "The Old Man and the Sea",
-      "For Whom the Bell Tolls",
-      "A Farewell to Arms",
-      "The Sun Also Rises"
+      "7",
+      "10",
+      "14",
+      "21"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Public Service Pulitzer recognizes work by a?",
+    "choices": [
+      "Reporter",
+      "Newspaper/Org",
+      "Editor",
+      "Photographer"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Public Service medal was designed by?",
+    "choices": [
+      "Daniel Chester French",
+      "Saint-Gaudens",
+      "Gutzon Borglum",
+      "Frederic Remington"
     ],
     "correct": 0
   },
   {
-    "question": "Newspaper with most Pulitzers?",
+    "question": "Pulitzer Prize for Music was first awarded in?",
     "choices": [
-      "NYT",
-      "WaPo",
-      "WSJ",
-      "LA Times"
+      "1923",
+      "1933",
+      "1943",
+      "1953"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "First Music Pulitzer winner?",
+    "choices": [
+      "Aaron Copland",
+      "William Schuman",
+      "Charles Ives",
+      "Samuel Barber"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Kendrick Lamar won the Music Pulitzer for?",
+    "choices": [
+      "DAMN.",
+      "To Pimp a Butterfly",
+      "Mr. Morale",
+      "good kid"
     ],
     "correct": 0
   },
   {
-    "question": "'Underground Railroad' Fiction winner?",
+    "question": "Pulitzers are announced annually in which month?",
     "choices": [
-      "Colson Whitehead",
-      "Jesmyn Ward",
-      "Richard Powers",
-      "Andrew Sean Greer"
+      "March",
+      "April",
+      "May",
+      "June"
     ],
-    "correct": 0
-  },
-  {
-    "question": "Pulitzer Drama 2017 winner?",
-    "choices": [
-      "Sweat (Lynn Nottage)",
-      "Hamilton (held at 2016)",
-      "Father Comes Home",
-      "Disgraced (2013)"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pulitzer Investigative was won by NYT for?",
-    "choices": [
-      "Pentagon Papers",
-      "Watergate",
-      "9/11",
-      "Snowden leak"
-    ],
-    "correct": 0
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

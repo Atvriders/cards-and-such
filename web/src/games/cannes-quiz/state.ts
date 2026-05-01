@@ -5,142 +5,302 @@ export interface CannesQuizState { questions: QuizQuestion[]; currentIndex: numb
 export type CannesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Cannes is in which country?",
+    "question": "Cannes Film Festival is held in which country?",
     "choices": [
       "Italy",
       "France",
       "Spain",
-      "Monaco"
+      "Belgium"
     ],
     "correct": 1
   },
   {
-    "question": "First Cannes Festival was held in?",
+    "question": "Cannes Festival was first held in?",
     "choices": [
-      "1939 (canceled)",
+      "1939 (postponed)",
       "1946",
       "1950",
-      "1956"
+      "1955"
     ],
     "correct": 1
   },
   {
-    "question": "Top prize is called?",
+    "question": "Top prize at Cannes is?",
     "choices": [
+      "Golden Lion",
       "Palme d'Or",
       "Golden Bear",
-      "Golden Lion",
-      "Crystal Globe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Won Palme for Pulp Fiction (1994)?",
-    "choices": [
-      "Quentin Tarantino",
-      "Robert Rodriguez",
-      "Spike Lee",
-      "David Lynch"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Apocalypse Now Palme year?",
-    "choices": [
-      "1976",
-      "1979",
-      "1980",
-      "1982"
+      "Silver Shell"
     ],
     "correct": 1
   },
   {
-    "question": "Bong Joon-ho's 'Parasite' Palme year?",
+    "question": "Palme d'Or was introduced (named) in?",
     "choices": [
-      "2017",
-      "2018",
-      "2019",
-      "2020"
+      "1939",
+      "1946",
+      "1955",
+      "1964"
     ],
     "correct": 2
   },
   {
-    "question": "Festival is held annually in which month?",
+    "question": "Cannes is held annually in which month (typically)?",
     "choices": [
       "April",
       "May",
       "June",
-      "September"
+      "July"
     ],
     "correct": 1
   },
   {
-    "question": "The grand venue is the?",
+    "question": "Festival venue's main building?",
     "choices": [
-      "Salle Pleyel",
-      "Grand Théâtre Lumière",
-      "Pompidou",
-      "Opéra Garnier"
+      "Carlton",
+      "Palais des Festivals",
+      "Croisette Hall",
+      "Majestic"
     ],
     "correct": 1
   },
   {
-    "question": "Cannes 'parallel' anti-establishment section?",
+    "question": "Famous boulevard along the Cannes seafront?",
     "choices": [
-      "Quinzaine des Réalisateurs",
-      "Mostra",
-      "Arena",
-      "Forum"
+      "Champs-Elysees",
+      "La Croisette",
+      "Promenade Anglais",
+      "Rue Royale"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Director with most Palme d'Or wins (2 each, several)?",
+    "choices": [
+      "Spielberg",
+      "Ken Loach (2)",
+      "Lynch",
+      "Tarkovsky"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First American film to win Palme d'Or?",
+    "choices": [
+      "Marty",
+      "The Lost Weekend",
+      "All About Eve",
+      "On the Waterfront"
     ],
     "correct": 0
   },
   {
-    "question": "Won 2 Palmes (Loach, Haneke, Coppola, Schlöndorff and a few others) — how many directors have done it?",
+    "question": "Pulp Fiction won the Palme d'Or in?",
     "choices": [
-      "About 4",
-      "About 9",
-      "About 15",
-      "About 25"
+      "1992",
+      "1994",
+      "1996",
+      "1998"
     ],
     "correct": 1
   },
   {
-    "question": "Year 'Taxi Driver' won Palme?",
+    "question": "Apocalypse Now shared the Palme in?",
     "choices": [
-      "1973",
-      "1976",
+      "1977",
       "1979",
+      "1981",
+      "1983"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Taxi Driver won the Palme in?",
+    "choices": [
+      "1974",
+      "1976",
+      "1978",
       "1980"
     ],
     "correct": 1
   },
   {
-    "question": "Lars von Trier's controversial 2011 incident was at?",
+    "question": "Parasite won Palme d'Or in?",
     "choices": [
-      "Cannes",
-      "Berlin",
-      "Venice",
-      "Toronto"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Beach where star photos happen?",
-    "choices": [
-      "Promenade des Anglais",
-      "La Croisette",
-      "Saint-Tropez",
-      "Plage de la Garoupe"
+      "2018",
+      "2019",
+      "2020",
+      "2021"
     ],
     "correct": 1
   },
   {
-    "question": "Festival president 2014-?",
+    "question": "Anatomy of a Fall won Palme in?",
+    "choices": [
+      "2022",
+      "2023",
+      "2024",
+      "2021"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Square (Ostlund) won Palme in?",
+    "choices": [
+      "2015",
+      "2016",
+      "2017",
+      "2018"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Triangle of Sadness (Ostlund) won Palme in?",
+    "choices": [
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "First female solo Palme d'Or director?",
+    "choices": [
+      "Jane Campion",
+      "Julia Ducournau",
+      "Justine Triet",
+      "Lina Wertmuller"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Jane Campion's Palme d'Or was for?",
+    "choices": [
+      "Bright Star",
+      "The Piano",
+      "Holy Smoke",
+      "An Angel at My Table"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Titane (2021) director?",
+    "choices": [
+      "Audrey Diwan",
+      "Julia Ducournau",
+      "Mati Diop",
+      "Celine Sciamma"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Cannes jury president is selected each year by?",
+    "choices": [
+      "Mayor of Cannes",
+      "Festival President",
+      "French President",
+      "UNESCO"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Festival's longtime president (1985-2014)?",
     "choices": [
       "Gilles Jacob",
       "Pierre Lescure",
-      "Thierry Frémaux",
-      "Lambert Wilson"
+      "Thierry Fremaux",
+      "Jean Cocteau"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Cannes Festival opens with a film called?",
+    "choices": [
+      "Out of Competition",
+      "Opening Film",
+      "La Premiere",
+      "First Light"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Section for new directors at Cannes?",
+    "choices": [
+      "Un Certain Regard",
+      "Directors' Fortnight",
+      "Critics' Week",
+      "All of these"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Critics' Week is run by?",
+    "choices": [
+      "Cahiers du Cinema",
+      "French Syndicate of Cinema Critics",
+      "Variety",
+      "Le Monde"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Director banned by Cannes (2011) for Nazi remarks?",
+    "choices": [
+      "Lars von Trier",
+      "Gaspar Noe",
+      "Kim Ki-duk",
+      "Bruno Dumont"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Best Director (2017) for The Beguiled?",
+    "choices": [
+      "Sofia Coppola",
+      "Lynne Ramsay",
+      "Naomi Kawase",
+      "Andrea Arnold"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "4 Months, 3 Weeks and 2 Days won Palme in?",
+    "choices": [
+      "2005",
+      "2007",
+      "2009",
+      "2011"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Palme d'Or 2013 (Blue Is the Warmest Color) director?",
+    "choices": [
+      "Cuaron",
+      "Kechiche",
+      "Refn",
+      "Jia Zhangke"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Cannes Marche du Film is the festival's?",
+    "choices": [
+      "Awards gala",
+      "Film market",
+      "Opening parade",
+      "Jury room"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Cannes festival logo features what motif?",
+    "choices": [
+      "Anchor",
+      "Palm leaf",
+      "Lion",
+      "Tower"
     ],
     "correct": 1
   }

@@ -7,125 +7,255 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   {
     "question": "First Emmy Awards were held in?",
     "choices": [
-      "1939",
+      "1947",
       "1949",
-      "1959",
-      "1969"
+      "1951",
+      "1953"
     ],
     "correct": 1
   },
   {
-    "question": "Primetime Emmys honor?",
+    "question": "Emmys honor excellence in?",
     "choices": [
       "Film",
-      "TV",
-      "Theater",
-      "Music"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The body running them is the?",
-    "choices": [
-      "Television Academy",
-      "Hollywood Foreign Press",
-      "Recording Academy",
-      "Producers Guild"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Drama with most Emmy wins (overall)?",
-    "choices": [
-      "Hill Street Blues",
-      "West Wing",
-      "Game of Thrones",
-      "Both A and C tie at the high end"
+      "Theatre",
+      "Television",
+      "Radio"
     ],
     "correct": 2
   },
   {
-    "question": "Most consecutive Best Comedy Series wins?",
+    "question": "Emmy is short for?",
     "choices": [
-      "Modern Family (5)",
-      "Frasier (5)",
-      "Cheers (4)",
-      "Veep (3)"
+      "Emily",
+      "Image orthicon (Immy)",
+      "Embassy",
+      "Emmaus"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Primetime Emmys are presented by?",
+    "choices": [
+      "NATAS",
+      "ATAS",
+      "HFPA",
+      "SAG"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Daytime Emmys are presented by?",
+    "choices": [
+      "ATAS",
+      "NATAS",
+      "BAFTA",
+      "HFPA"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Most Emmys won by a comedy series (record holder)?",
+    "choices": [
+      "Frasier",
+      "Modern Family",
+      "Game of Thrones",
+      "Saturday Night Live"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Drama with most Emmys (record at 59)?",
+    "choices": [
+      "Game of Thrones",
+      "The Sopranos",
+      "Breaking Bad",
+      "Mad Men"
     ],
     "correct": 0
   },
   {
-    "question": "Most acting Emmys held by a comedic actress?",
+    "question": "Frasier set record for consecutive Outstanding Comedy wins?",
     "choices": [
-      "Julia Louis-Dreyfus",
-      "Lucille Ball",
-      "Mary Tyler Moore",
-      "Tina Fey"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Game of Thrones won Best Drama how many times?",
-    "choices": [
-      "2",
       "3",
       "4",
-      "5"
+      "5",
+      "6"
     ],
     "correct": 2
   },
   {
-    "question": "Succession won Best Drama in?",
+    "question": "Cheers won Outstanding Comedy how many times?",
     "choices": [
-      "2018",
-      "2020",
-      "2022",
-      "Both 2020 and 2022"
+      "3",
+      "4",
+      "5",
+      "6"
     ],
-    "correct": 3
+    "correct": 1
   },
   {
-    "question": "Daytime Emmys focus on?",
+    "question": "Mad Men won Outstanding Drama how many times?",
     "choices": [
-      "Soaps & talk",
-      "Late night",
-      "Sports",
-      "Children's only"
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Breaking Bad's Outstanding Drama wins?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Game of Thrones won Outstanding Drama how many times?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First TV show to win Outstanding Drama Series?",
+    "choices": [
+      "Studio One",
+      "Dragnet",
+      "Climax!",
+      "Playhouse 90"
     ],
     "correct": 0
   },
   {
-    "question": "First show with 6 'big-five' Comedy wins (now 3 wins)?",
+    "question": "The West Wing won Outstanding Drama in consecutive years?",
     "choices": [
-      "The Mary Tyler Moore Show",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First streaming series nominated for Outstanding Drama?",
+    "choices": [
+      "House of Cards",
+      "Orange Is the New Black",
+      "Stranger Things",
+      "Bloodline"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First streaming series to win Outstanding Drama?",
+    "choices": [
+      "Stranger Things",
+      "The Crown",
+      "Handmaid's Tale",
+      "Succession"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Succession won Outstanding Drama how many times?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Schitt's Creek's historic Emmy night was in?",
+    "choices": [
+      "2018",
+      "2019",
+      "2020",
+      "2021"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Schitt's Creek swept how many comedy categories in 2020?",
+    "choices": [
+      "5",
+      "6",
+      "7",
+      "9"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Most Emmy wins by a performer (record)?",
+    "choices": [
+      "Cloris Leachman",
+      "Sheldon Leonard",
+      "Julia Louis-Dreyfus",
+      "Ed Asner"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Julia Louis-Dreyfus's lead actress comedy Emmys?",
+    "choices": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Don Knotts won 5 Emmys for which show?",
+    "choices": [
+      "The Andy Griffith Show",
+      "Three's Company",
+      "Mayberry RFD",
+      "Get Smart"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Carl Reiner won Emmys writing for?",
+    "choices": [
+      "I Love Lucy",
+      "Dick Van Dyke Show",
       "All in the Family",
-      "Frasier",
-      "Schitt's Creek (the only one to sweep big 7)"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Emmy statuette features?",
-    "choices": [
-      "Atlas",
-      "Angel/winged figure with atom",
-      "Lyra",
-      "Glob"
+      "Mary Tyler Moore"
     ],
     "correct": 1
   },
   {
-    "question": "First major streamer Best Comedy win?",
+    "question": "Mary Tyler Moore Show's record Emmy wins?",
     "choices": [
-      "Transparent (Amazon, 2015 Best Comedy was Veep)",
-      "The Marvelous Mrs Maisel",
-      "Schitt's Creek",
-      "Ted Lasso"
+      "19",
+      "21",
+      "29",
+      "32"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "'Game of Thrones' final-season Best Drama year?",
+    "question": "Outstanding Limited Series 2017 winner?",
+    "choices": [
+      "Big Little Lies",
+      "Feud",
+      "Fargo",
+      "The Night Of"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Chernobyl won Outstanding Limited in?",
     "choices": [
       "2018",
       "2019",
@@ -135,14 +265,44 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Cloris Leachman holds 8 Emmys across?",
+    "question": "The Crown won Outstanding Drama in?",
     "choices": [
-      "Drama",
-      "Comedy + variety",
-      "Across many categories",
-      "Reality"
+      "2019",
+      "2020",
+      "2021",
+      "2022"
     ],
     "correct": 2
+  },
+  {
+    "question": "Ted Lasso won Outstanding Comedy how many times?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Saturday Night Live's record total Emmy wins is over?",
+    "choices": [
+      "50",
+      "75",
+      "100",
+      "125"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Emmy statuette depicts a winged woman holding?",
+    "choices": [
+      "Atom",
+      "Globe",
+      "Lyre",
+      "Camera"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
