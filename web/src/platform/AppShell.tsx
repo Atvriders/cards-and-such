@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "./stores/auth.js";
 import { ToastHost } from "./ui/Toast.js";
 import ThemePicker from "./ui/ThemePicker.js";
+import LightModeToggle from "./ui/LightModeToggle.js";
 import { isSoundOn, setSoundOn, playSound } from "./sounds.js";
 import "./AppShell.css";
 
@@ -184,6 +185,7 @@ export default function AppShell(): JSX.Element {
               </svg>
             )}
           </button>
+          <LightModeToggle />
           <ThemePicker />
           <span data-testid="current-user">{username}</span>
           <button onClick={logout} aria-label="logout">Sign out</button>

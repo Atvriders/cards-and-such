@@ -171,6 +171,168 @@
 }
 
 /* =====================================================================
+   Light-mode token overrides — opt-in via `:root[data-light]`
+   ---------------------------------------------------------------------
+   Set by `lightMode.ts` (and `applySavedLightMode()` at boot) when the
+   user toggles the sun/moon button in the header. Flips the global
+   surfaces (lobby tiles, header, modals, inputs, etc.) to a light slate
+   palette while keeping engine "felt-table" wraps dark for game
+   immersion (those are scoped under `body .sol-wrap`, `body .bj-wrap`
+   etc. and continue to read from `--theme-felt`).
+   ===================================================================== */
+:root[data-light] {
+  color-scheme: light;
+
+  /* Spec-aligned aliases — flipped to light values. */
+  --bg-base:           #f8fafc;
+  --bg-surface:        #ffffff;
+  --bg-elevated:       #ffffff;
+  --text-primary:      #0f172a;
+  --text-muted:        #64748b;
+  --border-color:      #e2e8f0;
+
+  /* Legacy backgrounds — used by body / wrappers. */
+  --bg-0: #f8fafc;
+  --bg-1: #ffffff;
+  --bg-2: #f1f5f933;
+  --bg-grad:
+    radial-gradient(1200px 700px at 12% -10%, rgba(99, 102, 241, 0.10), transparent 60%),
+    radial-gradient(900px 600px at 110% 10%, rgba(168, 85, 247, 0.08), transparent 60%),
+    radial-gradient(800px 500px at 50% 110%, rgba(16, 185, 129, 0.07), transparent 60%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+
+  /* Surfaces — opaque white cards on the light backdrop. */
+  --surface-1: rgba(255, 255, 255, 0.92);
+  --surface-2: rgba(248, 250, 252, 0.95);
+  --surface-3: rgba(241, 245, 249, 0.97);
+  --surface-raised: #ffffff;
+  --border-soft: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-focus: rgba(99, 102, 241, 0.55);
+  --hairline: rgba(15, 23, 42, 0.08);
+
+  /* Text — dark slate ramp. */
+  --text-100: #0f172a;
+  --text-200: #1e293b;
+  --text-300: #334155;
+  --text-400: #64748b;
+  --text-500: #94a3b8;
+
+  /* Slightly tweaked accent softness so tints read on white. */
+  --primary-soft: rgba(99, 102, 241, 0.12);
+  --primary-glow: rgba(99, 102, 241, 0.30);
+  --success-soft: rgba(16, 185, 129, 0.14);
+  --danger-soft: rgba(244, 63, 94, 0.14);
+  --warning-soft: rgba(251, 191, 36, 0.18);
+
+  /* Lighter shadows so cards still float without looking heavy. */
+  --sh-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --sh-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --sh-md: 0 6px 14px -4px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --sh-lg: 0 18px 38px -10px rgba(15, 23, 42, 0.18), 0 6px 14px -4px rgba(15, 23, 42, 0.08);
+  --sh-xl: 0 32px 70px -16px rgba(15, 23, 42, 0.22), 0 12px 28px -10px rgba(15, 23, 42, 0.10);
+  --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Header — light-mode glass. */
+:root[data-light] .app-header {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04) inset;
+}
+:root[data-light] .app-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 1px 0 rgba(15, 23, 42, 0.04) inset,
+    0 12px 28px -14px rgba(15, 23, 42, 0.18),
+    0 4px 10px -6px rgba(15, 23, 42, 0.10);
+}
+:root[data-light] .app-header .user button {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Modals — opaque white card on the light backdrop. */
+:root[data-light] .modal {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  box-shadow: 0 20px 60px -20px rgba(15, 23, 42, 0.25);
+}
+:root[data-light] .modal-backdrop {
+  background: rgba(15, 23, 42, 0.35);
+}
+:root[data-light] .whats-new-modal li {
+  background: #f8fafc;
+  border-color: var(--border-color);
+}
+
+/* Lobby tiles — flat white card with the same per-category accents. */
+:root[data-light] .tile {
+  background: #ffffff;
+  border-color: var(--border-color);
+  box-shadow:
+    0 1px 0 rgba(15, 23, 42, 0.03) inset,
+    0 6px 14px -8px rgba(15, 23, 42, 0.18);
+}
+:root[data-light] .tile:hover {
+  background: #f8fafc;
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow:
+    0 1px 0 rgba(15, 23, 42, 0.04) inset,
+    0 18px 32px -12px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(99, 102, 241, 0.20),
+    0 8px 28px -10px rgba(99, 102, 241, 0.16);
+}
+:root[data-light] .lobby-hero {
+  background:
+    linear-gradient(160deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.04) 35%, #ffffff 100%),
+    #ffffff;
+  border-color: var(--border-color);
+}
+:root[data-light] .lobby-stat {
+  background: #ffffff;
+  border-color: var(--border-color);
+}
+:root[data-light] .lobby-stat:hover {
+  background: #f8fafc;
+}
+:root[data-light] .lobby-controls {
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(248, 250, 252, 0.78) 75%, rgba(248, 250, 252, 0) 100%);
+}
+:root[data-light] .lobby-search-input {
+  background: #ffffff;
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+:root[data-light] .lobby-chip {
+  background: #ffffff;
+  border-color: var(--border-color);
+  color: var(--text-300);
+}
+
+/* Felt-table game wraps stay dark for immersion. They already paint
+   themselves via per-engine CSS / `--theme-felt`, but in case the engine
+   relies on a lifted `--bg-0` / `--surface-1` we lock those wraps to a
+   dark palette inside the wrap subtree. */
+:root[data-light] body .sol-wrap,
+:root[data-light] body .dm-wrap,
+:root[data-light] body .cm-wrap,
+:root[data-light] body .bj-wrap,
+:root[data-light] body .blackjack-wrap,
+:root[data-light] body .casino-wrap,
+:root[data-light] body .poker-wrap,
+:root[data-light] body .rummy-wrap,
+:root[data-light] body .shed-wrap,
+:root[data-light] body .trick-wrap {
+  --text-100: #f1f5f9;
+  --text-200: #e2e8f0;
+  --text-300: #cbd5e1;
+  --text-400: #94a3b8;
+  color: #f1f5f9;
+}
+
+/* =====================================================================
    Base / reset polish
    ===================================================================== */
 
