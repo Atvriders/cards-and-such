@@ -141,7 +141,8 @@ main {
   gap: 0.35rem;
 }
 .header-search-toggle,
-.app-header .bell {
+.app-header .bell,
+.app-header .sound-toggle {
   background: transparent;
   border: 1px solid rgba(148, 163, 184, 0.20);
   color: var(--text-300, #cbd5e1);
@@ -157,9 +158,13 @@ main {
   padding: 0;
 }
 .header-search-toggle:hover,
-.app-header .bell:hover {
+.app-header .bell:hover,
+.app-header .sound-toggle:hover {
   background: rgba(148, 163, 184, 0.12);
   color: var(--text-100, #f1f5f9);
+}
+.app-header .sound-toggle[aria-pressed="false"] {
+  color: rgba(148, 163, 184, 0.55);
 }
 .header-search input {
   width: 0;

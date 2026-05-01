@@ -102,6 +102,7 @@ export default function AppShell(): JSX.Element {
 
         <nav className={mobileNavOpen ? "is-open" : ""}>
           <NavLink to="/" end onClick={() => setMobileNavOpen(false)}>Lobby</NavLink>
+          <NavLink to="/daily" onClick={() => setMobileNavOpen(false)}>Daily</NavLink>
           <NavLink to="/leaderboard" onClick={() => setMobileNavOpen(false)}>Leaderboard</NavLink>
           <button
             type="button"

@@ -1,10 +1,26 @@
-import { useState, useMemo, useCallback } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState, useMemo, useCallback, useEffect } from "react";
+import { useParams, Link, useSearchParams } from "react-router-dom";
 import { GAMES } from "../games/registry.js";
 import { SettingsForm } from "../platform/game-plugin/settings.js";
 import { defaultsOf } from "../platform/game-plugin/types.js";
 import { submitScore } from "../platform/game-plugin/submitScore.js";
+import { playSound } from "../platform/sounds.js";
+import { Tutorial } from "../platform/Tutorial.js";
+import { tutorialFor, hasSeenTutorial, markTutorialSeen } from "../platform/tutorials.js";
 import "./PlayPage.css";
+
+function randomSeed(): number {
+  return Math.floor(Math.random() * 2 ** 31);
+}
+
+function parseSeed(raw: string | null): number | null {
+  if (raw == null) return null;
+  const trimmed = raw.trim();
+  if (trimmed === "") return null;
+  const n = Number.parseInt(trimmed, 10);
+  if (!Number.isFinite(n) || Number.isNaN(n) || n < 0) return null;
+  return n;
+}
 
 function HowToPlayContent({ text }: { text: string }): JSX.Element {
   return (
@@ -34,37 +50,114 @@ export default function PlayPage(): JSX.Element {
 }
 
 function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlSeed = parseSeed(searchParams.get("seed"));
+
   const [settings, setSettings] = useState(() => defaultsOf(plugin.settings));
   const [phase, setPhase] = useState<"setup" | "playing" | "ended">("setup");
-  const [seed] = useState(() => Math.floor(Math.random() * 2 ** 31));
+  const [seed, setSeed] = useState<number>(() => urlSeed ?? randomSeed());
   const [state, setState] = useState(() => plugin.initialState(seed, settings));
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [tutorialOpen, setTutorialOpen] = useState(false);
+  const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "error">("idle");
+
+  const tutorialSteps = useMemo(() => tutorialFor(plugin.id), [plugin.id]);
+
+  // Auto-launch tutorial for first-time visitors of supported games.
+  useEffect(() => {
+    if (phase !== "playing") return;
+    if (!tutorialSteps || tutorialSteps.length === 0) return;
+    if (hasSeenTutorial(plugin.id)) return;
+    setTutorialOpen(true);
+  }, [phase, plugin.id, tutorialSteps]);
+
+  // If the URL ?seed= changes externally (back/forward navigation), adopt it.
+  useEffect(() => {
+    if (urlSeed != null && urlSeed !== seed) {
+      setSeed(urlSeed);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlSeed]);
+
+  const startWithSeed = useCallback(
+    (nextSeed: number) => {
+      setSeed(nextSeed);
+      setState(plugin.initialState(nextSeed, settings));
+      setFinalScore(null);
+      setPhase("playing");
+    },
+    [plugin, settings],
+  );
 
   const start = useCallback(() => {
-    const next = plugin.initialState(seed, settings);
-    setState(next);
-    setPhase("playing");
-  }, [plugin, seed, settings]);
+    startWithSeed(seed);
+  }, [seed, startWithSeed]);
 
-  const dispatch = useCallback((action: unknown) => {
-    setState((s: unknown) => {
-      const next = plugin.reducer(s, action);
-      const term = plugin.isTerminal(next);
-      if (term) {
-        setFinalScore(term.score);
-        setPhase("ended");
-        void submitScore(plugin.id, term.score, settings as Record<string, unknown>);
+  const newGame = useCallback(() => {
+    startWithSeed(randomSeed());
+  }, [startWithSeed]);
+
+  const replay = useCallback(() => {
+    startWithSeed(seed);
+  }, [seed, startWithSeed]);
+
+  const shareSeed = useCallback(async () => {
+    const origin =
+      typeof window !== "undefined" && window.location && window.location.origin
+        ? window.location.origin
+        : "https://cards.waterburp.com";
+    const url = `${origin}/play/${plugin.id}?seed=${seed}`;
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        setShareStatus("copied");
+      } else {
+        setShareStatus("error");
       }
-      return next;
-    });
-  }, [plugin, settings]);
+    } catch {
+      setShareStatus("error");
+    }
+    // also reflect the seed in the live URL so a refresh keeps the same hand
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set("seed", String(seed));
+        return next;
+      },
+      { replace: true },
+    );
+    setTimeout(() => setShareStatus("idle"), 1800);
+  }, [plugin.id, seed, setSearchParams]);
 
-  const onGameOver = useCallback((score: number) => {
-    setFinalScore(score);
-    setPhase("ended");
-    void submitScore(plugin.id, score, settings as Record<string, unknown>);
-  }, [plugin.id, settings]);
+  const dispatch = useCallback(
+    (action: unknown) => {
+      setState((s: unknown) => {
+        const next = plugin.reducer(s, action);
+        const term = plugin.isTerminal(next);
+        if (term) {
+          setFinalScore(term.score);
+          setPhase("ended");
+          if (term.score > 0) playSound("win");
+          void submitScore(plugin.id, term.score, settings as Record<string, unknown>);
+        }
+        return next;
+      });
+    },
+    [plugin, settings],
+  );
+
+  const onGameOver = useCallback(
+    (score: number) => {
+      setFinalScore(score);
+      setPhase("ended");
+      if (score > 0) playSound("win");
+      void submitScore(plugin.id, score, settings as Record<string, unknown>);
+    },
+    [plugin.id, settings],
+  );
+
+  const showProminentSeed = plugin.id === "klondike" || plugin.id === "freecell" || plugin.id === "spider";
 
   return (
     <div className="play-page" data-game-id={plugin.id}>
@@ -74,13 +167,46 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           <h1>{plugin.title}</h1>
         </div>
         <div className="play-header-actions">
-          {plugin.howToPlay && phase === "playing" && (
+          {phase === "playing" && showProminentSeed && (
+            <span
+              className="play-seed-display"
+              data-testid="seed-display"
+              title="Current deal seed"
+              aria-label={`Current deal seed ${seed}`}
+            >
+              #{seed}
+            </span>
+          )}
+          {phase === "playing" && (
+            <button
+              className="play-iconbtn play-share-btn"
+              onClick={() => { void shareSeed(); }}
+              title={shareStatus === "copied" ? "Seed URL copied!" : "Share seed"}
+              aria-label="Share seed"
+              data-tooltip={shareStatus === "copied" ? "Copied!" : "Share seed"}
+              data-testid="share-seed-btn"
+              type="button"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </button>
+          )}
+          {(plugin.howToPlay || tutorialSteps) && phase === "playing" && (
             <button
               className="play-iconbtn"
-              onClick={() => setHelpOpen(true)}
+              onClick={() => {
+                if (tutorialSteps && tutorialSteps.length > 0) setTutorialOpen(true);
+                else setHelpOpen(true);
+              }}
               title="How to play"
               aria-label="How to play"
               data-tooltip="How to play"
+              data-testid="help-btn"
               type="button"
             >
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
@@ -141,15 +267,41 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
 
       {phase === "playing" && (
         <section className="play-panel">
-          <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} />
+          <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
         </section>
+      )}
+
+      {phase === "playing" && tutorialOpen && tutorialSteps && tutorialSteps.length > 0 && (
+        <Tutorial
+          steps={tutorialSteps}
+          onComplete={() => {
+            setTutorialOpen(false);
+            markTutorialSeen(plugin.id);
+          }}
+          onSkip={() => {
+            setTutorialOpen(false);
+            markTutorialSeen(plugin.id);
+          }}
+        />
       )}
 
       {phase === "ended" && finalScore !== null && (
         <section className="end-panel" data-testid="end-panel">
           <h2>Game over</h2>
           <div className="final-score">Score: {finalScore}</div>
-          <button onClick={start} className="play-again-btn">Play again</button>
+          <div className="end-seed" data-testid="end-seed">Seed: <code>{seed}</code></div>
+          <div className="end-actions">
+            <button onClick={newGame} className="play-again-btn" data-testid="new-game-btn">New Game</button>
+            <button onClick={replay} className="play-again-btn play-replay-btn" data-testid="replay-btn">Replay</button>
+            <button
+              onClick={() => { void shareSeed(); }}
+              className="play-share-pill"
+              data-testid="share-seed-end-btn"
+              type="button"
+            >
+              {shareStatus === "copied" ? "Copied!" : shareStatus === "error" ? "Copy failed" : "Share Seed"}
+            </button>
+          </div>
         </section>
       )}
     </div>
