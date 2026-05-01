@@ -5,22 +5,22 @@ export interface RioQuizState { questions: QuizQuestion[]; currentIndex: number;
 export type RioQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "The Christ the Redeemer statue overlooks Rio from?",
+    "question": "Christ the Redeemer overlooks Rio from?",
     "choices": [
       "Sugarloaf",
       "Corcovado",
-      "Pão de Açúcar",
-      "Tijuca"
+      "Pedra Bonita",
+      "Tijuca peak"
     ],
     "correct": 1
   },
   {
-    "question": "Rio's famous beach south of Copacabana is?",
+    "question": "Rio's beach immediately south of Copacabana is?",
     "choices": [
       "Botafogo",
       "Ipanema",
-      "Lebão",
-      "Macapá"
+      "Leblon east",
+      "Flamengo"
     ],
     "correct": 1
   },
@@ -28,17 +28,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "Carnival in Rio is held in?",
     "choices": [
       "January",
-      "February/March",
+      "February or early March",
       "April",
       "June"
     ],
     "correct": 1
   },
   {
-    "question": "Sambodromo hosts?",
+    "question": "The Sambódromo hosts?",
     "choices": [
       "football",
-      "samba parades",
+      "samba school parades",
       "rodeo",
       "music festivals only"
     ],
@@ -55,152 +55,252 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Sugarloaf Mountain is reached by?",
+    "question": "Sugarloaf Mountain is reached primarily by?",
     "choices": [
       "funicular",
       "cable car",
-      "trail only",
-      "escalator"
+      "stairs only",
+      "helicopter only"
     ],
     "correct": 1
   },
   {
-    "question": "Rio's 2016 event was the?",
+    "question": "The 2016 Summer Olympics were hosted by?",
     "choices": [
-      "World Cup",
-      "Olympics",
-      "Pan-Am Games",
-      "Expo"
+      "Rio",
+      "Tokyo",
+      "London",
+      "Beijing"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Lagoa Rodrigo de Freitas is a?",
-    "choices": [
-      "mountain",
-      "lagoon",
-      "beach",
-      "forest"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Maracanã is a famous?",
+    "question": "Maracanã is famous as a?",
     "choices": [
       "beach",
-      "stadium",
-      "mountain",
-      "palace"
+      "football stadium",
+      "cathedral",
+      "shopping mall"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 1950 World Cup final upset at Maracanã was won by?",
+    "choices": [
+      "Brazil",
+      "Uruguay",
+      "Italy",
+      "Spain"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Rio's iconic black-and-white wavy sidewalk pattern was designed by?",
+    "choices": [
+      "Niemeyer",
+      "Burle Marx",
+      "Lina Bo Bardi",
+      "Costa"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Rio served as Brazil's capital until?",
+    "choices": [
+      "1822",
+      "1889",
+      "1960",
+      "1985"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Brasília replaced Rio as the federal capital in?",
+    "choices": [
+      "1955",
+      "1960",
+      "1968",
+      "1972"
     ],
     "correct": 1
   },
   {
     "question": "Tijuca is the world's largest urban?",
     "choices": [
-      "zoo",
-      "forest",
+      "beach",
+      "rainforest",
       "mall",
-      "square"
+      "stadium"
     ],
     "correct": 1
   },
   {
-    "question": "Pão de Açúcar means?",
+    "question": "Pão de Queijo is a snack made of?",
     "choices": [
-      "sweet rock",
-      "sugar loaf",
-      "big stone",
-      "palace"
+      "wheat & ham",
+      "cheese & cassava starch",
+      "corn & beans",
+      "rice & coconut"
     ],
     "correct": 1
   },
   {
-    "question": "Rio was the capital of Brazil until?",
+    "question": "Brazil's national cocktail is the?",
     "choices": [
-      "1822",
-      "1889",
-      "1960",
-      "1990"
+      "Mojito",
+      "Caipirinha",
+      "Pisco Sour",
+      "Cuba Libre"
     ],
-    "correct": 2
+    "correct": 1
   },
   {
-    "question": "Cariocas are residents of?",
+    "question": "Caipirinha is made with cachaça, sugar and?",
     "choices": [
-      "Rio",
-      "São Paulo",
-      "Brasília",
-      "Bahia"
+      "lime",
+      "lemon",
+      "orange",
+      "mint"
     ],
     "correct": 0
   },
   {
-    "question": "Rio's main language is?",
+    "question": "Feijoada is a traditional Brazilian stew with?",
     "choices": [
-      "Spanish",
-      "Portuguese",
-      "English",
-      "French"
+      "chickpeas & lamb",
+      "black beans & pork",
+      "white beans & beef",
+      "lentils & chicken"
     ],
     "correct": 1
   },
   {
-    "question": "Copacabana fortress was built in?",
+    "question": "Açaí na tigela originally hails from?",
     "choices": [
-      "18th c.",
-      "early 20th c.",
-      "late 19th c.",
-      "21st c."
+      "Amazon region",
+      "Andes",
+      "Pantanal",
+      "Patagonia"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Bossa nova originated in Rio in the?",
+    "question": "Bossa nova was born in Rio in the?",
     "choices": [
       "1940s",
-      "1950s",
-      "1960s",
-      "1970s"
+      "late 1950s",
+      "1970s",
+      "1990s"
     ],
     "correct": 1
   },
   {
-    "question": "Rio's Olympic Stadium is named?",
+    "question": "'The Girl from Ipanema' was co-written by?",
     "choices": [
-      "Engenhão",
-      "Maracanã",
-      "Sambódromo",
-      "Canecão"
+      "Caetano Veloso",
+      "Antonio Carlos Jobim",
+      "Gilberto Gil",
+      "Chico Buarque"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Lapa is famous for its?",
+    "choices": [
+      "aqueduct arches & nightlife",
+      "skyscrapers",
+      "ancient ruins",
+      "ski slopes"
     ],
     "correct": 0
   },
   {
-    "question": "Lapa is famous for?",
+    "question": "The colorful Escadaria Selarón steps were created by an artist from?",
     "choices": [
-      "beach",
-      "aqueduct & nightlife",
-      "ports",
-      "castles"
+      "Italy",
+      "Chile",
+      "Spain",
+      "Argentina"
     ],
     "correct": 1
   },
   {
-    "question": "Santa Teresa is known for?",
+    "question": "Rio's main beachfront avenue is?",
     "choices": [
-      "modern shops",
-      "bohemian neighborhood",
-      "beach",
-      "markets"
+      "Avenida Atlântica",
+      "Avenida Paulista",
+      "Avenida Brasil",
+      "Avenida Rio Branco"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Rio residents are called?",
+    "choices": [
+      "Paulistas",
+      "Cariocas",
+      "Mineiros",
+      "Baianos"
     ],
     "correct": 1
   },
   {
-    "question": "Rio is known as Cidade?",
+    "question": "The favela perched above Ipanema/Leblon is?",
     "choices": [
-      "Eterna",
-      "Maravilhosa",
-      "Grande",
-      "Bela"
+      "Rocinha",
+      "Vidigal",
+      "Mangueira",
+      "Salgueiro"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Rocinha is South America's largest?",
+    "choices": [
+      "public park",
+      "favela",
+      "shopping center",
+      "rail yard"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Christ the Redeemer was inaugurated in?",
+    "choices": [
+      "1911",
+      "1931",
+      "1951",
+      "1971"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Niterói, across the bay, is connected to Rio by?",
+    "choices": [
+      "Rio-Niterói Bridge",
+      "Tijuca Tunnel",
+      "Rebouças Tunnel",
+      "metro only"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Cristo Redentor stands roughly how tall (statue)?",
+    "choices": [
+      "10 m",
+      "30 m",
+      "50 m",
+      "80 m"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The colorful samba schools compete during?",
+    "choices": [
+      "Christmas",
+      "Carnival",
+      "Easter",
+      "Independence Day"
     ],
     "correct": 1
   }

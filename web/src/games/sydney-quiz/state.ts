@@ -5,10 +5,10 @@ export interface SydneyQuizState { questions: QuizQuestion[]; currentIndex: numb
 export type SydneyQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "The Opera House sails were designed by?",
+    "question": "The Sydney Opera House was designed by?",
     "choices": [
       "Frank Lloyd Wright",
-      "Jorn Utzon",
+      "Jørn Utzon",
       "Norman Foster",
       "Le Corbusier"
     ],
@@ -35,12 +35,12 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Sydney is the capital of?",
+    "question": "Sydney is the capital of which Australian state?",
     "choices": [
-      "Australia",
-      "New South Wales",
       "Victoria",
-      "Queensland"
+      "New South Wales",
+      "Queensland",
+      "Western Australia"
     ],
     "correct": 1
   },
@@ -48,159 +48,259 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "The Rocks is a historic?",
     "choices": [
       "geological park",
-      "colonial neighborhood",
-      "mountain range",
-      "mining town"
+      "colonial-era waterfront district",
+      "outback ranch",
+      "ski resort"
     ],
     "correct": 1
   },
   {
-    "question": "The opera house opened in?",
+    "question": "The First Fleet arrived at Sydney Cove in?",
     "choices": [
-      "1959",
-      "1973",
-      "1988",
-      "1995"
+      "1688",
+      "1788",
+      "1888",
+      "1901"
     ],
     "correct": 1
   },
   {
-    "question": "Darling Harbour is known for?",
+    "question": "Sydney's central rail and ferry hub is?",
     "choices": [
-      "zoo",
-      "entertainment & dining",
-      "stadium",
-      "ports"
+      "Central Station",
+      "Circular Quay",
+      "Town Hall",
+      "Wynyard"
     ],
     "correct": 1
   },
   {
-    "question": "Sydney was founded as a?",
+    "question": "The Sydney Tower is also called the?",
     "choices": [
-      "fishing village",
-      "penal colony",
-      "trading post",
-      "fort"
+      "Sky Needle",
+      "Eye/Sydney Tower Eye",
+      "Big Spike",
+      "Sun Spire"
     ],
     "correct": 1
   },
   {
-    "question": "Manly is reached by?",
+    "question": "The Sydney 2000 Olympics were primarily held at?",
     "choices": [
-      "train",
+      "Bondi",
+      "Homebush/Sydney Olympic Park",
+      "Manly",
+      "The Rocks"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Manly is reached from the city by?",
+    "choices": [
+      "light rail",
       "ferry",
-      "subway",
-      "tram only"
+      "monorail",
+      "tram"
     ],
     "correct": 1
   },
   {
-    "question": "Sydney's CBD's tallest is?",
+    "question": "The 'Coathanger' is a nickname for the?",
     "choices": [
-      "MLC Centre",
+      "Opera House",
+      "Harbour Bridge",
       "Sydney Tower",
-      "Crown",
-      "Q1"
+      "Anzac Bridge"
     ],
     "correct": 1
   },
   {
-    "question": "The 2000 Olympics were held in?",
+    "question": "Australia's parliament is located in?",
     "choices": [
-      "Melbourne",
       "Sydney",
-      "Brisbane",
-      "Perth"
+      "Melbourne",
+      "Canberra",
+      "Brisbane"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "Hyde Park (Sydney) features the?",
+    "question": "The Coogee to Bondi route is a famous coastal?",
     "choices": [
-      "ANZAC Memorial",
-      "Hub",
-      "Castle",
-      "Oasis"
+      "highway",
+      "walk",
+      "tunnel",
+      "ferry"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "question": "Taronga Zoo overlooks?",
     "choices": [
-      "Bondi",
+      "Botany Bay",
       "Sydney Harbour",
-      "Manly",
-      "Newcastle"
+      "Parramatta River",
+      "Pacific Ocean"
     ],
     "correct": 1
   },
   {
-    "question": "Sydney's famous coastal walk goes from Bondi to?",
+    "question": "Sydney's New Year fireworks center on the?",
     "choices": [
-      "Manly",
-      "Coogee",
-      "Cronulla",
-      "Newcastle"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sydney's airport is named after?",
-    "choices": [
-      "Cook",
-      "Kingsford Smith",
-      "Hawke",
-      "Phillip"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The original inhabitants were the?",
-    "choices": [
-      "Eora",
-      "Maori",
-      "Yolngu",
-      "Anangu"
+      "Opera House & Harbour Bridge",
+      "Bondi Pavilion",
+      "Centennial Park",
+      "Royal Botanic Garden"
     ],
     "correct": 0
   },
   {
-    "question": "The Royal Botanic Garden is next to?",
+    "question": "Vegemite is a salty spread made from?",
     "choices": [
-      "Bondi",
+      "seaweed",
+      "yeast extract",
+      "olive paste",
+      "anchovy"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'flat white' coffee is widely claimed to have origins in?",
+    "choices": [
+      "Italy",
+      "Australia/NZ",
+      "France",
+      "Spain"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Lamingtons are sponge cake squares coated in?",
+    "choices": [
+      "honey & oats",
+      "chocolate & coconut",
+      "lemon glaze",
+      "icing & nuts"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A pavlova is a meringue dessert topped with?",
+    "choices": [
+      "chocolate ganache",
+      "whipped cream & fruit",
+      "ice cream & nuts",
+      "caramel only"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sydney's red-and-yellow flag at beaches marks?",
+    "choices": [
+      "surfing only",
+      "the safe swim zone",
+      "fishing area",
+      "boat ramp"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Royal Botanic Garden sits next to?",
+    "choices": [
       "the Opera House",
-      "airport",
-      "Manly"
+      "Bondi",
+      "Manly",
+      "Olympic Park"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Darling Harbour is best known for?",
+    "choices": [
+      "industrial docks",
+      "tourist attractions & SEA LIFE aquarium",
+      "container ships only",
+      "factories"
     ],
     "correct": 1
   },
   {
-    "question": "Sydney's NYE features fireworks on the?",
+    "question": "Surry Hills is famous for?",
     "choices": [
-      "Opera House only",
-      "Harbour Bridge",
-      "CBD streets",
-      "airport"
+      "mining",
+      "cafés & boutiques",
+      "ski lifts",
+      "shipping"
     ],
     "correct": 1
   },
   {
-    "question": "Sydney Tower's highest level is the?",
+    "question": "Sydney's Anzac Bridge honors?",
     "choices": [
-      "roof",
-      "Skywalk/observation",
-      "cellar",
-      "atrium"
+      "explorers",
+      "Australian & NZ soldiers",
+      "early settlers",
+      "engineers"
     ],
     "correct": 1
   },
   {
-    "question": "Centennial Park is known for?",
+    "question": "Hyde Park (Sydney) is the country's?",
     "choices": [
-      "zoo",
-      "large green space",
-      "rivers",
-      "mountains"
+      "largest park",
+      "oldest public park",
+      "tallest park",
+      "newest park"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Sydney Mardi Gras is a parade celebrating?",
+    "choices": [
+      "Carnival",
+      "LGBTQ+ pride",
+      "Anzac Day",
+      "Federation"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Cockatoo Island is a UNESCO site located in?",
+    "choices": [
+      "Sydney Harbour",
+      "Botany Bay",
+      "Pittwater",
+      "Hawkesbury River"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Sydney's famous outdoor pool carved into a cliff is at?",
+    "choices": [
+      "Manly",
+      "Bondi Icebergs",
+      "Coogee Pavilion",
+      "Bronte Gully"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Indigenous people of the Sydney area are the?",
+    "choices": [
+      "Yolŋu",
+      "Eora/Gadigal",
+      "Noongar",
+      "Pitjantjatjara"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sydney's iconic ferries depart from?",
+    "choices": [
+      "Central Station",
+      "Circular Quay",
+      "Bondi Junction",
+      "Town Hall"
     ],
     "correct": 1
   }

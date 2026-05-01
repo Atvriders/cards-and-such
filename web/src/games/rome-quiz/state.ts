@@ -5,7 +5,7 @@ export interface RomeQuizState { questions: QuizQuestion[]; currentIndex: number
 export type RomeQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "The Colosseum was completed in?",
+    "question": "The Colosseum was completed in roughly?",
     "choices": [
       "AD 80",
       "AD 200",
@@ -15,7 +15,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Vatican City is located in?",
+    "question": "Vatican City is located within?",
     "choices": [
       "Florence",
       "Rome",
@@ -38,169 +38,269 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "The Pantheon's most famous feature is its?",
     "choices": [
       "frescoes",
-      "dome",
+      "concrete dome",
       "spire",
       "stained glass"
     ],
     "correct": 1
   },
   {
-    "question": "Spanish Steps connect to which church?",
+    "question": "The Spanish Steps lead up to which church?",
     "choices": [
-      "Saint Peter's",
+      "St Peter's",
       "Trinità dei Monti",
-      "Saint John Lateran",
+      "Santa Maria Maggiore",
+      "St John Lateran"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Throwing a coin in the Trevi Fountain ensures you?",
+    "choices": [
+      "win the lottery",
+      "return to Rome",
+      "find love instantly",
+      "live to 100"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Rome was traditionally founded in?",
+    "choices": [
+      "753 BC",
+      "509 BC",
+      "27 BC",
+      "AD 14"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Sistine Chapel ceiling was painted by?",
+    "choices": [
+      "Raphael",
+      "Michelangelo",
+      "Donatello",
+      "Bernini"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Tiber is Rome's main?",
+    "choices": [
+      "mountain",
+      "river",
+      "lake",
+      "stadium"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The legendary founders of Rome were?",
+    "choices": [
+      "Aeneas & Anchises",
+      "Romulus & Remus",
+      "Caesar & Pompey",
+      "Castor & Pollux"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Julius Caesar was assassinated in?",
+    "choices": [
+      "27 BC",
+      "44 BC",
+      "AD 14",
+      "AD 64"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The first Roman emperor was?",
+    "choices": [
+      "Caesar",
+      "Augustus",
+      "Nero",
+      "Trajan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "St Peter's Basilica is in?",
+    "choices": [
+      "Trastevere",
+      "Vatican City",
+      "Esquiline",
+      "Aventine"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The famous Roman pasta carbonara contains?",
+    "choices": [
+      "cream",
+      "egg, guanciale & pecorino",
+      "tomato & basil",
+      "pesto"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Cacio e pepe is made with?",
+    "choices": [
+      "cheese & pepper",
+      "tomato & garlic",
+      "mushroom cream",
+      "anchovy & olive"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Saltimbocca alla Romana features?",
+    "choices": [
+      "tripe",
+      "veal with prosciutto & sage",
+      "octopus",
+      "wild boar"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Rome's Catacombs were used by early?",
+    "choices": [
+      "traders",
+      "Christians for burials",
+      "soldiers as barracks",
+      "philosophers"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Aventine Keyhole frames a view of?",
+    "choices": [
+      "the Colosseum",
+      "St Peter's dome",
+      "the Pantheon",
+      "Trevi Fountain"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Trastevere is a neighborhood famous for?",
+    "choices": [
+      "high-rise offices",
+      "narrow lanes & nightlife",
+      "industrial ports",
+      "modern museums"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Castel Sant'Angelo was originally built as?",
+    "choices": [
+      "a fortress",
+      "Hadrian's mausoleum",
+      "a basilica",
+      "a palace garden"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Rome's iconic deep-fried rice ball is the?",
+    "choices": [
+      "arancini",
+      "supplì",
+      "polpetta",
+      "crocchetta"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Mouth of Truth allegedly bites off the hands of?",
+    "choices": [
+      "thieves",
+      "liars",
+      "soldiers",
+      "merchants"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Piazza Navona is built on top of an ancient?",
+    "choices": [
+      "forum",
+      "stadium of Domitian",
+      "amphitheater",
+      "circus of Maxentius"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Vittoriano monument honors King?",
+    "choices": [
+      "Vittorio Emanuele II",
+      "Umberto I",
+      "Vittorio Emanuele III",
+      "Umberto II"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Bernini's famous baldachin sits inside?",
+    "choices": [
+      "Pantheon",
+      "St Peter's",
+      "Santa Maria Maggiore",
       "Sistine Chapel"
     ],
     "correct": 1
   },
   {
-    "question": "The Trevi Fountain is famous for tossing?",
+    "question": "The Western Roman Empire fell in?",
     "choices": [
-      "bread",
-      "coins",
-      "flowers",
-      "stones"
+      "AD 410",
+      "AD 476",
+      "AD 530",
+      "AD 800"
     ],
     "correct": 1
   },
   {
-    "question": "Romulus & Remus founded Rome in?",
+    "question": "Vatican Museums climax with?",
     "choices": [
-      "753 BC",
-      "500 BC",
-      "100 AD",
-      "27 BC"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sistine Chapel ceiling was painted by?",
-    "choices": [
-      "Raphael",
-      "Michelangelo",
-      "Donatello",
-      "Caravaggio"
+      "Borgia rooms",
+      "Sistine Chapel",
+      "Pinacoteca",
+      "Map Gallery"
     ],
     "correct": 1
   },
   {
-    "question": "Caesar was assassinated in?",
+    "question": "Rome's nickname is?",
     "choices": [
-      "44 BC",
-      "27 BC",
-      "100 BC",
-      "60 AD"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The seven hills of Rome include?",
-    "choices": [
-      "Aventine",
-      "Olympus",
-      "Vesuvius",
-      "Etna"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tiber River flows through?",
-    "choices": [
-      "Florence",
-      "Rome",
-      "Naples",
-      "Venice"
+      "City of Light",
+      "Eternal City",
+      "Big Pizza",
+      "Golden City"
     ],
     "correct": 1
   },
   {
-    "question": "Castel Sant'Angelo was originally a?",
+    "question": "Gladiator combats took place primarily at the?",
     "choices": [
-      "mausoleum",
-      "temple",
-      "theater",
-      "library"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Trastevere is known for?",
-    "choices": [
-      "banking",
-      "cobblestoned trattorias & nightlife",
-      "industry",
-      "ports"
+      "Pantheon",
+      "Colosseum",
+      "Forum",
+      "Circus Maximus"
     ],
     "correct": 1
   },
   {
-    "question": "Piazza Navona has fountains by?",
+    "question": "Chariot races were held at the?",
     "choices": [
-      "Bernini",
-      "Michelangelo",
-      "Donatello",
-      "Raphael"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Appian Way is an?",
-    "choices": [
-      "aqueduct",
-      "ancient road",
-      "tomb",
-      "arena"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Lateran Treaty established Vatican City in?",
-    "choices": [
-      "1900",
-      "1929",
-      "1945",
-      "1965"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "St Peter's Basilica was designed in part by?",
-    "choices": [
-      "Da Vinci",
-      "Michelangelo",
-      "Caravaggio",
-      "Raphael"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Aurelian Walls were built around?",
-    "choices": [
-      "AD 270s",
-      "BC 500",
-      "AD 500",
-      "BC 100"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Roman aqueducts brought?",
-    "choices": [
-      "wine",
-      "water",
-      "grain",
-      "oil"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Cinecittà is Rome's famous?",
-    "choices": [
-      "fashion district",
-      "film studios",
-      "wine region",
-      "port"
+      "Colosseum",
+      "Circus Maximus",
+      "Stadium of Domitian",
+      "Baths of Caracalla"
     ],
     "correct": 1
   }

@@ -15,7 +15,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Times Square is in?",
+    "question": "Times Square sits in which borough?",
     "choices": [
       "Brooklyn",
       "Manhattan",
@@ -45,7 +45,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Central Park is in?",
+    "question": "Central Park is in which borough?",
     "choices": [
       "Brooklyn",
       "Manhattan",
@@ -57,150 +57,250 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   {
     "question": "The Brooklyn Bridge opened in?",
     "choices": [
-      "1853",
+      "1873",
       "1883",
-      "1903",
-      "1923"
+      "1893",
+      "1903"
     ],
     "correct": 1
   },
   {
-    "question": "Wall Street is famous as the?",
-    "choices": [
-      "theater district",
-      "financial district",
-      "fashion district",
-      "university hub"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "JFK and LaGuardia are in which borough?",
-    "choices": [
-      "Manhattan",
-      "Bronx",
-      "Queens",
-      "Brooklyn"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Yankees baseball plays in which borough?",
-    "choices": [
-      "Queens",
-      "Bronx",
-      "Manhattan",
-      "Brooklyn"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Rockefeller Center is famous for its?",
-    "choices": [
-      "beach",
-      "ice rink",
-      "temple",
-      "castle"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Coney Island is in?",
-    "choices": [
-      "Manhattan",
-      "Brooklyn",
-      "Queens",
-      "Bronx"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Greenwich Village is in?",
-    "choices": [
-      "Manhattan",
-      "Brooklyn",
-      "Queens",
-      "Bronx"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Met museum is on which avenue?",
-    "choices": [
-      "Park",
-      "5th",
-      "Madison",
-      "Lexington"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "NYC subway opened in?",
-    "choices": [
-      "1880",
-      "1904",
-      "1925",
-      "1950"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ellis Island processed?",
-    "choices": [
-      "soldiers",
-      "immigrants",
-      "prisoners",
-      "tourists"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Broadway is famous for?",
+    "question": "Wall Street is the heart of?",
     "choices": [
       "theater",
       "fashion",
-      "food",
-      "banking"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Bronx Zoo is in?",
-    "choices": [
-      "Manhattan",
-      "Brooklyn",
-      "Queens",
-      "Bronx"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "World Trade Center towers fell in?",
-    "choices": [
-      "1993",
-      "1996",
-      "2001",
-      "2008"
+      "finance",
+      "publishing"
     ],
     "correct": 2
   },
   {
-    "question": "Harlem is in?",
+    "question": "The original World Trade Center towers fell in?",
+    "choices": [
+      "1993",
+      "2001",
+      "2008",
+      "2010"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Yankee Stadium is in which borough?",
     "choices": [
       "Manhattan",
+      "Bronx",
+      "Queens",
+      "Staten Island"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "JFK and LaGuardia airports are in which borough?",
+    "choices": [
       "Brooklyn",
+      "Queens",
+      "Bronx",
+      "Manhattan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Coney Island is famous for its boardwalk in?",
+    "choices": [
+      "Brooklyn",
+      "Manhattan",
       "Queens",
       "Bronx"
     ],
     "correct": 0
   },
   {
-    "question": "Staten Island is connected to Brooklyn by?",
+    "question": "The Met (MoMA's neighbor on 5th Ave) is officially the?",
     "choices": [
-      "Brooklyn Bridge",
-      "Verrazzano Bridge",
-      "George Washington Bridge",
-      "Tunnel only"
+      "Met Opera",
+      "Metropolitan Museum of Art",
+      "Met Life Building",
+      "Met Cloisters"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Ellis Island processed millions of?",
+    "choices": [
+      "soldiers",
+      "immigrants",
+      "tourists",
+      "prisoners"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Chrysler Building's style is?",
+    "choices": [
+      "Gothic Revival",
+      "Art Deco",
+      "Beaux-Arts",
+      "Brutalist"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Grand Central Terminal opened in?",
+    "choices": [
+      "1899",
+      "1913",
+      "1925",
+      "1937"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The High Line is a park built on a former?",
+    "choices": [
+      "pier",
+      "elevated rail line",
+      "highway",
+      "subway tunnel"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "NYC was originally founded by the Dutch as?",
+    "choices": [
+      "New Amsterdam",
+      "New Holland",
+      "New Utrecht",
+      "New Hudson"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Statue of Liberty was dedicated in?",
+    "choices": [
+      "1876",
+      "1886",
+      "1900",
+      "1920"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "NYC's iconic thin-crust pizza style is most associated with which borough?",
+    "choices": [
+      "Manhattan",
+      "Brooklyn",
+      "Bronx",
+      "Queens"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A New York bagel is traditionally?",
+    "choices": [
+      "fried",
+      "boiled then baked",
+      "steamed only",
+      "grilled"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 'cronut' was invented in NYC by?",
+    "choices": [
+      "Magnolia Bakery",
+      "Dominique Ansel",
+      "Levain",
+      "Junior's"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The NY Yankees and Mets share which league?",
+    "choices": [
+      "NHL",
+      "NBA",
+      "MLB",
+      "NFL"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Broadway theaters cluster around?",
+    "choices": [
+      "Wall Street",
+      "Times Square",
+      "Battery Park",
+      "Harlem"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Harlem Renaissance flourished in the?",
+    "choices": [
+      "1900s",
+      "1920s",
+      "1950s",
+      "1970s"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Rockefeller Center is famous each winter for its?",
+    "choices": [
+      "beach",
+      "ice rink & tree",
+      "ski jump",
+      "carnival"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 'L' subway line connects Manhattan to?",
+    "choices": [
+      "Brooklyn",
+      "Queens",
+      "Bronx",
+      "Staten Island"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Staten Island Ferry is famously?",
+    "choices": [
+      "expensive",
+      "free",
+      "express only",
+      "private"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "NYC's nickname 'Big Apple' was popularized by?",
+    "choices": [
+      "jazz musicians & 1970s tourism campaign",
+      "Theodore Roosevelt",
+      "the Dutch",
+      "the Yankees"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The American Museum of Natural History is famous for its giant?",
+    "choices": [
+      "dinosaur skeletons",
+      "diamond exhibit",
+      "moon rock",
+      "submarine"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The 1969 Stonewall uprising occurred in which neighborhood?",
+    "choices": [
+      "SoHo",
+      "Greenwich Village",
+      "Upper East Side",
+      "Tribeca"
     ],
     "correct": 1
   }

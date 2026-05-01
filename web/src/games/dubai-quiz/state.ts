@@ -25,7 +25,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Burj Khalifa height is approximately?",
+    "question": "Burj Khalifa's height is approximately?",
     "choices": [
       "500m",
       "700m",
@@ -49,160 +49,260 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "choices": [
       "dolphin",
       "palm tree",
-      "cross",
-      "star"
+      "star",
+      "crescent only"
     ],
     "correct": 1
   },
   {
-    "question": "Dubai's main language is?",
+    "question": "The official language of the UAE is?",
     "choices": [
-      "English only",
+      "English",
       "Arabic",
-      "Persian",
+      "Farsi",
       "Urdu"
     ],
     "correct": 1
   },
   {
-    "question": "The Dubai Mall is one of the?",
+    "question": "The Burj Al Arab is famous as a?",
     "choices": [
-      "smallest",
-      "largest in the world",
-      "most ancient",
-      "first ever"
+      "airport",
+      "sail-shaped luxury hotel",
+      "mosque",
+      "cinema"
     ],
     "correct": 1
   },
   {
-    "question": "The Burj Al Arab is shaped like a?",
+    "question": "Dubai Mall is one of the world's?",
     "choices": [
-      "sail",
-      "tree",
-      "palm",
-      "star"
+      "smallest",
+      "largest by area",
+      "oldest",
+      "tallest"
     ],
-    "correct": 0
+    "correct": 1
+  },
+  {
+    "question": "The Dubai Fountain dances in front of the?",
+    "choices": [
+      "Atlantis Hotel",
+      "Burj Khalifa",
+      "Burj Al Arab",
+      "World Trade Centre"
+    ],
+    "correct": 1
   },
   {
     "question": "Dubai Metro opened in?",
     "choices": [
-      "1999",
-      "2004",
+      "2005",
       "2009",
-      "2015"
+      "2013",
+      "2016"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The UAE was federated in?",
+    "choices": [
+      "1947",
+      "1956",
+      "1971",
+      "1981"
     ],
     "correct": 2
   },
   {
-    "question": "World Expo 2020 (held 2021) was hosted by?",
+    "question": "The ruling family of Dubai is the?",
     "choices": [
-      "Tokyo",
-      "Dubai",
-      "Milan",
-      "Astana"
+      "Al Nahyan",
+      "Al Maktoum",
+      "Al Saud",
+      "Al Sabah"
     ],
     "correct": 1
   },
   {
-    "question": "Dubai's main airport (DXB) is one of the?",
+    "question": "The Atlantis hotel sits on which palm?",
     "choices": [
-      "smallest",
-      "busiest int'l",
-      "oldest",
-      "newest only"
+      "Palm Jebel Ali",
+      "Palm Jumeirah",
+      "Palm Deira",
+      "Palm Khalifa"
     ],
     "correct": 1
   },
   {
-    "question": "Dubai is one of the seven?",
+    "question": "Bur Dubai and Deira are separated by?",
     "choices": [
+      "Sheikh Zayed Road",
+      "Dubai Creek",
+      "Persian Gulf",
+      "Ras Al Khor"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Traditional Dubai trading boats are called?",
+    "choices": [
+      "dhows",
+      "junks",
+      "feluccas",
+      "longships"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Dubai's main airport hub airline is?",
+    "choices": [
+      "Etihad",
       "Emirates",
-      "cantons",
-      "provinces",
-      "khanates"
+      "Qatar Airways",
+      "FlyDubai"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "Sheikh Zayed Road is a famous?",
+    "question": "The 'World Islands' are?",
     "choices": [
-      "river",
-      "mountain",
-      "highway",
-      "forest"
+      "natural archipelago",
+      "artificial islands shaped like the world map",
+      "national parks",
+      "oil platforms"
     ],
-    "correct": 2
+    "correct": 1
   },
   {
-    "question": "Dubai Creek divides Bur Dubai and?",
+    "question": "Sheikh Zayed Road is famous for its?",
     "choices": [
-      "Deira",
-      "Sharjah",
-      "Abu Dhabi",
-      "Ajman"
+      "beaches",
+      "skyscrapers",
+      "souks",
+      "ski slopes"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "The Museum of the Future opened in?",
+    "question": "Ski Dubai is located inside?",
     "choices": [
-      "2015",
-      "2018",
-      "2022",
-      "2024"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Skiing is offered indoors at?",
-    "choices": [
-      "Mall of the Emirates",
       "Dubai Mall",
-      "Marina Mall",
-      "Ibn Battuta"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Dubai Marina is a?",
-    "choices": [
-      "natural harbor",
-      "artificial canal",
-      "river",
-      "lake"
+      "Mall of the Emirates",
+      "Ibn Battuta Mall",
+      "City Walk"
     ],
     "correct": 1
   },
   {
-    "question": "Friday is a traditional?",
+    "question": "The Gold Souk is in?",
     "choices": [
-      "working day",
-      "weekend day in UAE",
-      "holiday only",
-      "ramadan only"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Dubai's tallest hotel was?",
-    "choices": [
-      "Burj Al Arab",
-      "Atlantis",
-      "Address",
-      "JW Marriott"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Old Dubai's gold souk is in?",
-    "choices": [
+      "Bur Dubai",
       "Deira",
-      "Marina",
-      "Downtown",
-      "Jumeirah"
+      "Jumeirah",
+      "Marina"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Emirati food shawarma is wrapped in?",
+    "choices": [
+      "tortilla",
+      "flatbread",
+      "lettuce",
+      "rice paper"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Machboos is a traditional spiced rice dish typically with?",
+    "choices": [
+      "pork",
+      "chicken or lamb",
+      "beef tongue",
+      "seafood only"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Camel milk is commonly consumed in?",
+    "choices": [
+      "UAE",
+      "Norway",
+      "Japan",
+      "Brazil"
     ],
     "correct": 0
+  },
+  {
+    "question": "Karak chai is a popular?",
+    "choices": [
+      "spiced tea with milk",
+      "coffee shot",
+      "fruit smoothie",
+      "yogurt drink"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Ramadan in Dubai famously features?",
+    "choices": [
+      "fireworks all month",
+      "fasting from sunrise to sunset",
+      "no work at all",
+      "snow"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Museum of the Future is famous for its?",
+    "choices": [
+      "pyramidal shape",
+      "torus calligraphy facade",
+      "glass dome",
+      "underwater hall"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Jumeirah Mosque is one of the few mosques in Dubai open to?",
+    "choices": [
+      "men only",
+      "non-Muslim visitors via tour",
+      "royalty only",
+      "no one"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Global Village is a seasonal?",
+    "choices": [
+      "museum",
+      "multicultural theme park",
+      "souk",
+      "auto show"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Dubai weekend shifted in 2022 to?",
+    "choices": [
+      "Thursday-Friday",
+      "Friday-Saturday",
+      "Saturday-Sunday",
+      "Sunday-Monday"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Emirates Airline cable car experience is at?",
+    "choices": [
+      "Dubai Marina",
+      "Dubai Creek Harbour",
+      "London (sponsor)",
+      "JBR"
+    ],
+    "correct": 2
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

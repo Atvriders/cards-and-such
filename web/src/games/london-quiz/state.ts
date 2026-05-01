@@ -15,12 +15,12 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Big Ben is the nickname for?",
+    "question": "Big Ben is officially the nickname for the?",
     "choices": [
-      "the bell",
-      "the clock face",
-      "the tower",
-      "the Parliament"
+      "bell inside the tower",
+      "clock face",
+      "tower itself",
+      "Parliament building"
     ],
     "correct": 0
   },
@@ -45,164 +45,264 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "The Tower of London is famous for the?",
+    "question": "The Tower of London is famous for housing the?",
     "choices": [
-      "queen's bedroom",
+      "royal bedrooms",
       "Crown Jewels",
-      "sword fights",
-      "Big Ben"
+      "Doomsday Book",
+      "Magna Carta"
     ],
     "correct": 1
   },
   {
-    "question": "Buckingham Palace is the home of the?",
+    "question": "The Great Fire of London was in?",
+    "choices": [
+      "1606",
+      "1666",
+      "1715",
+      "1759"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Buckingham Palace is the residence of the?",
     "choices": [
       "Prime Minister",
-      "Monarch",
-      "Queen Mother only",
-      "Mayor"
+      "British monarch",
+      "Lord Mayor",
+      "Speaker"
     ],
     "correct": 1
   },
   {
-    "question": "The Shard is?",
+    "question": "Westminster Abbey is the traditional site of?",
     "choices": [
-      "a museum",
-      "tallest building in UK",
-      "Underground line",
-      "old fortress"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Westminster Abbey hosts royal?",
-    "choices": [
-      "weddings & coronations",
-      "cooking",
-      "cinema",
+      "coronations",
+      "executions",
+      "trials",
       "horse races"
     ],
     "correct": 0
   },
   {
-    "question": "Camden is famous for?",
+    "question": "The London Eye is a giant?",
     "choices": [
-      "finance",
-      "markets/alt music",
-      "royals",
-      "industry"
+      "clock",
+      "Ferris wheel",
+      "telescope",
+      "fountain"
     ],
     "correct": 1
   },
   {
-    "question": "Soho is known for?",
+    "question": "The British Museum is famous for the?",
     "choices": [
-      "castles",
-      "theater & nightlife",
-      "factories",
-      "ports"
+      "Magna Carta",
+      "Rosetta Stone",
+      "Bayeux Tapestry",
+      "Crown Jewels"
     ],
     "correct": 1
   },
   {
-    "question": "Notting Hill hosts a famous?",
+    "question": "Tower Bridge is often confused with?",
     "choices": [
-      "airport",
-      "carnival",
-      "cathedral",
-      "museum"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Hyde Park is in?",
-    "choices": [
-      "Greenwich",
-      "Westminster",
-      "Camden",
-      "Chelsea"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The British Museum is in?",
-    "choices": [
-      "Bloomsbury",
-      "Mayfair",
-      "Soho",
-      "Bermondsey"
+      "London Bridge",
+      "Millennium Bridge",
+      "Waterloo Bridge",
+      "Westminster Bridge"
     ],
     "correct": 0
   },
   {
-    "question": "St Paul's Cathedral was designed by?",
+    "question": "The Shard is London's?",
     "choices": [
-      "Wren",
-      "Hawksmoor",
-      "Vanbrugh",
-      "Lutyens"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "London Eye opened in?",
-    "choices": [
-      "1985",
-      "1995",
-      "2000",
-      "2005"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The Tube line marked yellow on maps is?",
-    "choices": [
-      "Central",
-      "Circle",
-      "District",
-      "Bakerloo"
+      "oldest church",
+      "tallest skyscraper",
+      "biggest train station",
+      "main library"
     ],
     "correct": 1
   },
   {
-    "question": "Greenwich is famous for?",
+    "question": "Hyde Park's famous free-speech corner is?",
     "choices": [
-      "the Prime Meridian",
-      "the Tower",
-      "Tate",
-      "Camden Market"
+      "Speakers' Corner",
+      "Liberty Lawn",
+      "Open Mic Garden",
+      "Free Forum"
     ],
     "correct": 0
   },
   {
-    "question": "Covent Garden is famous for?",
+    "question": "The Victoria & Albert Museum specializes in?",
     "choices": [
-      "finance",
-      "market & opera",
-      "industry",
-      "ports"
+      "natural history",
+      "decorative arts & design",
+      "naval history",
+      "modern war"
     ],
     "correct": 1
   },
   {
-    "question": "The Globe Theatre is associated with?",
+    "question": "Piccadilly Circus is famous for its illuminated?",
     "choices": [
-      "Marlowe",
-      "Shakespeare",
+      "fountain",
+      "advertising billboards",
+      "carousel",
+      "ice rink"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Globe Theatre is historically associated with?",
+    "choices": [
       "Dickens",
+      "Shakespeare",
+      "Marlowe alone",
       "Wilde"
     ],
     "correct": 1
   },
   {
-    "question": "Black cabs are named?",
+    "question": "Black taxis must complete which famous test?",
     "choices": [
-      "Hackney carriages",
-      "Lamborghinis",
-      "Wakers",
-      "Stilton cabs"
+      "The Knowledge",
+      "The Map",
+      "The Route",
+      "The Lane"
     ],
     "correct": 0
+  },
+  {
+    "question": "The London Marathon is run in?",
+    "choices": [
+      "February",
+      "April",
+      "July",
+      "October"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Oxford Street is famous for?",
+    "choices": [
+      "museums",
+      "shopping",
+      "theatres",
+      "embassies"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Tube's oldest line is the?",
+    "choices": [
+      "Metropolitan",
+      "Central",
+      "Northern",
+      "Victoria"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Fish and chips are traditionally wrapped in?",
+    "choices": [
+      "banana leaves",
+      "newspaper (historically)",
+      "tinfoil only",
+      "wax cloth"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Afternoon tea is associated with which 19th-century duchess?",
+    "choices": [
+      "Bedford",
+      "Kent",
+      "Cornwall",
+      "Devonshire"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "A 'full English breakfast' typically includes?",
+    "choices": [
+      "bagels & lox",
+      "beans, eggs, sausage, bacon",
+      "rice & soup",
+      "pancakes & syrup"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Chicken tikka masala is often called Britain's?",
+    "choices": [
+      "royal dish",
+      "national dish",
+      "oldest dish",
+      "test dish"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "St Paul's Cathedral was designed by?",
+    "choices": [
+      "Inigo Jones",
+      "Christopher Wren",
+      "John Nash",
+      "Norman Foster"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Blitz refers to bombing of London during?",
+    "choices": [
+      "WWI",
+      "WWII",
+      "Cold War",
+      "Falklands"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "London's congestion charge zone covers?",
+    "choices": [
+      "all of Greater London",
+      "central London",
+      "the M25 ring",
+      "the Docklands only"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Notting Hill Carnival celebrates which heritage?",
+    "choices": [
+      "Indian",
+      "Caribbean",
+      "Italian",
+      "Polish"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Camden Market is in north London, famous for?",
+    "choices": [
+      "antiques only",
+      "alternative fashion & street food",
+      "wholesale flowers",
+      "rare books"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Routemaster is London's classic?",
+    "choices": [
+      "taxi",
+      "double-decker bus",
+      "tram",
+      "river boat"
+    ],
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

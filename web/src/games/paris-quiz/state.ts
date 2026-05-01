@@ -15,20 +15,20 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Eiffel Tower was built for the?",
+    "question": "The Eiffel Tower was built for the?",
     "choices": [
       "1889 World Fair",
       "1900 Olympics",
       "Bastille Day",
-      "Centennial of 1789"
+      "Centennial of 1889"
     ],
     "correct": 0
   },
   {
-    "question": "Le Louvre houses?",
+    "question": "The Louvre's most famous painting is the?",
     "choices": [
       "Mona Lisa",
-      "Sistine Chapel",
+      "Starry Night",
       "Birth of Venus",
       "Last Supper"
     ],
@@ -45,7 +45,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Notre-Dame is on which island?",
+    "question": "Notre-Dame Cathedral sits on which island?",
     "choices": [
       "Île Saint-Louis",
       "Île de la Cité",
@@ -55,17 +55,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Montmartre is famous for?",
+    "question": "Montmartre is crowned by which basilica?",
     "choices": [
-      "the Bastille",
+      "La Madeleine",
       "Sacré-Cœur",
-      "Versailles",
-      "Disneyland"
+      "Saint-Sulpice",
+      "Saint-Eustache"
     ],
     "correct": 1
   },
   {
-    "question": "The Paris metro opened in?",
+    "question": "The Paris Métro opened in?",
     "choices": [
       "1889",
       "1900",
@@ -85,27 +85,27 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Versailles palace is associated with?",
+    "question": "The Palace of Versailles is most associated with?",
     "choices": [
       "Charlemagne",
       "Louis XIV",
-      "Napoleon",
+      "Napoleon III",
       "Louis Philippe"
     ],
     "correct": 1
   },
   {
-    "question": "Pompidou Centre is famous for its?",
+    "question": "The Centre Pompidou is famous for its?",
     "choices": [
       "Gothic style",
-      "exposed pipes/inside-out style",
+      "exposed inside-out architecture",
       "Roman ruins",
-      "Brutalism"
+      "Brutalist bunker"
     ],
     "correct": 1
   },
   {
-    "question": "The Catacombs hold remains of about?",
+    "question": "The Catacombs hold remains of about how many people?",
     "choices": [
       "100,000",
       "1 million",
@@ -115,22 +115,22 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Place de la Concorde features an?",
+    "question": "Place de la Concorde features a giant?",
     "choices": [
-      "arc",
-      "obelisk",
+      "arch",
+      "Egyptian obelisk",
       "cathedral",
-      "palace"
+      "fountain only"
     ],
     "correct": 1
   },
   {
-    "question": "The neighborhood Le Marais is known for?",
+    "question": "Le Marais is best known as a historic?",
     "choices": [
-      "modern skyscrapers",
-      "historic Jewish quarter & boutiques",
-      "ports",
-      "forests"
+      "financial district",
+      "Jewish quarter & boutique area",
+      "industrial port",
+      "forest reserve"
     ],
     "correct": 1
   },
@@ -145,7 +145,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Père Lachaise is a?",
+    "question": "Père Lachaise is a famous?",
     "choices": [
       "palace",
       "cemetery",
@@ -155,7 +155,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "The Tuileries Garden is next to?",
+    "question": "The Tuileries Garden lies next to the?",
     "choices": [
       "Notre-Dame",
       "Louvre",
@@ -165,21 +165,21 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Sainte-Chapelle is famous for?",
+    "question": "Sainte-Chapelle is renowned for its?",
     "choices": [
       "bells",
-      "stained glass",
-      "sculptures",
-      "frescoes"
+      "stained-glass windows",
+      "frescoes",
+      "crypts"
     ],
     "correct": 1
   },
   {
-    "question": "The Latin Quarter is on which bank?",
+    "question": "The Latin Quarter is on which bank of the Seine?",
     "choices": [
       "Right Bank",
       "Left Bank",
-      "Both",
+      "Both banks",
       "Île Saint-Louis"
     ],
     "correct": 1
@@ -195,12 +195,112 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Paris's nickname is?",
+    "question": "Paris's classic nickname is?",
     "choices": [
       "The Eternal City",
       "City of Light",
       "Big Apple",
       "City of Bridges"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The flaky crescent-shaped pastry from Paris is the?",
+    "choices": [
+      "macaron",
+      "croissant",
+      "éclair",
+      "madeleine"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The colorful almond meringue sandwich cookie is the?",
+    "choices": [
+      "macaron",
+      "biscotti",
+      "financier",
+      "canelé"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "A classic Parisian onion soup is topped with?",
+    "choices": [
+      "sour cream",
+      "melted Gruyère on bread",
+      "olive tapenade",
+      "fried capers"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Moulin Rouge cabaret is famous for inventing the modern?",
+    "choices": [
+      "tango",
+      "can-can",
+      "waltz",
+      "ballet"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Storming of the Bastille occurred in?",
+    "choices": [
+      "1689",
+      "1789",
+      "1815",
+      "1848"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Napoleon Bonaparte is entombed at?",
+    "choices": [
+      "Panthéon",
+      "Les Invalides",
+      "Sacré-Cœur",
+      "Notre-Dame"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Musée d'Orsay specializes in?",
+    "choices": [
+      "Renaissance art",
+      "Impressionist art",
+      "modern sculpture",
+      "ancient Egypt"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Hôtel de Ville is Paris's?",
+    "choices": [
+      "royal palace",
+      "city hall",
+      "main hospital",
+      "opera house"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "La Défense is best known for its?",
+    "choices": [
+      "medieval ruins",
+      "modern skyscrapers & Grande Arche",
+      "vineyards",
+      "fishing port"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Tour de France traditionally finishes on the?",
+    "choices": [
+      "Place de la Concorde",
+      "Champs-Élysées",
+      "Avenue Foch",
+      "Île de la Cité"
     ],
     "correct": 1
   }
