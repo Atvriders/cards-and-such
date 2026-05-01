@@ -4,146 +4,36 @@ export interface KgbQuizSettings { questions: "10" | "20"; }
 export interface KgbQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type KgbQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "What does KGB stand for (in English translation)?",
-    "choices": [
-      "Committee for State Security",
-      "Council of Ministers",
-      "Central Government Bureau",
-      "Communist Government Brigade"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "When was the KGB formally established?",
-    "choices": [
-      "1917",
-      "1934",
-      "1954",
-      "1961"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What WAS the KGB's iconic Moscow headquarters?",
-    "choices": [
-      "The Lubyanka",
-      "The Kremlin",
-      "Red Square",
-      "Bolshoi"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which KGB chief later became Soviet leader?",
-    "choices": [
-      "Lavrentiy Beria",
-      "Yuri Andropov",
-      "Vladimir Kryuchkov",
-      "Viktor Chebrikov"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What 1991 event led to the KGB's dissolution?",
-    "choices": [
-      "August coup",
-      "Berlin Wall fall",
-      "Chernobyl",
-      "Glasnost"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Modern Russian agency descended from KGB foreign branch?",
-    "choices": [
-      "FSB",
-      "GRU",
-      "SVR",
-      "FAPSI"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "KGB First Chief Directorate handled what?",
-    "choices": [
-      "Foreign intel",
-      "Internal security",
-      "Border guards",
-      "Communications"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Soviet defector and KGB archivist who took thousands of files?",
-    "choices": [
-      "Vasili Mitrokhin",
-      "Oleg Gordievsky",
-      "Stanislav Lunev",
-      "Igor Gouzenko"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Vladimir Putin served in which KGB department?",
-    "choices": [
-      "First Directorate (foreign)",
-      "Second Directorate",
-      "Border Guards",
-      "Ninth Directorate"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which KGB predecessor existed from 1917 to 1922?",
-    "choices": [
-      "NKVD",
-      "MGB",
-      "Cheka",
-      "GPU"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Bulgarian dissident killed in London with poisoned umbrella (1978)?",
-    "choices": [
-      "Vladimir Bukovsky",
-      "Georgi Markov",
-      "Anatoly Marchenko",
-      "Ihor Bondarenko"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which KGB defector worked for MI6 and was rescued in 1985?",
-    "choices": [
-      "Oleg Penkovsky",
-      "Oleg Gordievsky",
-      "Anatoly Golitsyn",
-      "Yuri Nosenko"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Border guards of USSR were under which KGB directorate?",
-    "choices": [
-      "First",
-      "Eighth",
-      "Ninth",
-      "GUPV"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "What Russian word means 'wet work' for assassinations?",
-    "choices": [
-      "mokroye delo",
-      "delo dnya",
-      "kolkhoz",
-      "mokraya rabota"
-    ],
-    "correct": 0
-  }
+  {"question": "KGB stands for what (English)?", "choices": ["Committee for State Security", "Soviet Spy Bureau", "Central Soviet Police", "People's Security"], "correct": 0},
+  {"question": "In what year was the KGB founded?", "choices": ["1917", "1934", "1954", "1991"], "correct": 2},
+  {"question": "KGB headquarters building in Moscow?", "choices": ["Lubyanka", "Kremlin", "Red Square", "Arbat"], "correct": 0},
+  {"question": "Which Soviet leader was a KGB chairman?", "choices": ["Andropov", "Brezhnev", "Khrushchev", "Gorbachev"], "correct": 0},
+  {"question": "KGB First Chief Directorate handled?", "choices": ["Foreign intelligence", "Domestic", "Border", "Signals"], "correct": 0},
+  {"question": "Which agency replaced the KGB in Russia (foreign)?", "choices": ["SVR", "FSB", "GRU", "FAPSI"], "correct": 0},
+  {"question": "Which agency replaced the KGB (domestic)?", "choices": ["FSB", "SVR", "GRU", "MVD"], "correct": 0},
+  {"question": "KGB defector who became MI6 asset, exfiltrated 1985?", "choices": ["Gordievsky", "Penkovsky", "Mitrokhin", "Kalugin"], "correct": 0},
+  {"question": "KGB archivist who smuggled notes to UK?", "choices": ["Mitrokhin", "Gordievsky", "Kalugin", "Litvinenko"], "correct": 0},
+  {"question": "Cheka, OGPU, NKVD, MGB were KGB's?", "choices": ["Predecessors", "Subsidiaries", "Rivals", "Allies"], "correct": 0},
+  {"question": "Cheka founder?", "choices": ["Dzerzhinsky", "Yagoda", "Yezhov", "Beria"], "correct": 0},
+  {"question": "Beria led which agency?", "choices": ["NKVD", "Cheka", "KGB", "GRU"], "correct": 0},
+  {"question": "KGB term for foreign 'illegal' agents?", "choices": ["Nelegaly", "Apparat", "Kontora", "Konspiratsiya"], "correct": 0},
+  {"question": "KGB Directorate K was responsible for?", "choices": ["Counterintel in foreign ops", "Surveillance", "Border", "Comms"], "correct": 0},
+  {"question": "KGB poisoned Bulgarian dissident with?", "choices": ["Ricin umbrella", "Polonium", "Novichok", "Sarin"], "correct": 0},
+  {"question": "Litvinenko was poisoned in 2006 with?", "choices": ["Polonium-210", "Ricin", "Sarin", "Novichok"], "correct": 0},
+  {"question": "Putin served in KGB stationed in?", "choices": ["Dresden", "Berlin", "Prague", "Warsaw"], "correct": 0},
+  {"question": "KGB's elite spec-ops unit?", "choices": ["Alpha Group", "Vympel", "Both", "Spetsnaz"], "correct": 2},
+  {"question": "KGB Ninth Directorate guarded?", "choices": ["Soviet leadership", "Border", "Embassies", "Archives"], "correct": 0},
+  {"question": "Which KGB defector revealed Walker spy ring?", "choices": ["Yurchenko", "Gordievsky", "Mitrokhin", "Polyakov"], "correct": 0},
+  {"question": "KGB residency abroad was led by?", "choices": ["Rezident", "Resident agent", "Chief", "Komandir"], "correct": 0},
+  {"question": "Operation RYAN sought signs of what?", "choices": ["NATO first strike", "US elections", "Reagan illness", "Defections"], "correct": 0},
+  {"question": "KGB Line X targeted?", "choices": ["Science/tech", "Politics", "Counterintel", "Press"], "correct": 0},
+  {"question": "KGB recruited Aldrich Ames in?", "choices": ["1985", "1979", "1991", "1968"], "correct": 0},
+  {"question": "Robert Hanssen spied for KGB/SVR for how long?", "choices": ["~22 years", "~5 years", "~10 years", "~30 years"], "correct": 0},
+  {"question": "KGB sponsored 'active measures' meaning?", "choices": ["Disinformation", "Assassinations", "Sabotage", "All"], "correct": 3},
+  {"question": "KGB chairman during 1991 coup attempt?", "choices": ["Kryuchkov", "Chebrikov", "Andropov", "Bakatin"], "correct": 0},
+  {"question": "After 1991 coup, KGB was disbanded by?", "choices": ["Gorbachev", "Yeltsin", "Putin", "Khrushchev"], "correct": 1},
+  {"question": "KGB Border Troops counted roughly how many?", "choices": ["220,000+", "20,000", "5 million", "100"], "correct": 0},
+  {"question": "KGB main rival agency in USSR?", "choices": ["GRU", "FSB", "SVR", "NKVD"], "correct": 0}
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: KgbQuizSettings): KgbQuizState {

@@ -4,146 +4,36 @@ export interface ArtHeistsQuizSettings { questions: "10" | "20"; }
 export interface ArtHeistsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ArtHeistsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "What was stolen from the Louvre in 1911?",
-    "choices": [
-      "The Mona Lisa",
-      "Liberty Leading the People",
-      "The Coronation of Napoleon",
-      "Venus de Milo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Year of the Isabella Stewart Gardner heist?",
-    "choices": [
-      "1985",
-      "1990",
-      "1996",
-      "2001"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which Vermeer was stolen in the Gardner heist?",
-    "choices": [
-      "Girl with a Pearl Earring",
-      "The Concert",
-      "The Milkmaid",
-      "The Geographer"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "City of the Gardner Museum?",
-    "choices": [
-      "New York",
-      "Boston",
-      "Philadelphia",
-      "Chicago"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Munch painting stolen in Oslo (2004, recovered 2006)?",
-    "choices": [
-      "The Sun",
-      "The Scream",
-      "Starry Night",
-      "Madonna"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Vincenzo Peruggia stole the Mona Lisa to?",
-    "choices": [
-      "Sell it",
-      "Return it to Italy",
-      "Keep at home",
-      "Frame a rival"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "How long was the Mona Lisa missing?",
-    "choices": [
-      "3 weeks",
-      "9 months",
-      "Just over 2 years",
-      "5 years"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Approximate value (today) of Gardner stolen art?",
-    "choices": [
-      "$50 million",
-      "$200 million",
-      "$500 million",
-      "$5 billion"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Stéphane Breitwieser is famous for stealing how many works?",
-    "choices": [
-      "~6",
-      "~30",
-      "~100",
-      "~239"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Paris Modern Art Museum was hit in?",
-    "choices": [
-      "2008",
-      "2010",
-      "2013",
-      "2018"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Edvard Munch's 'The Scream' is from which country?",
-    "choices": [
-      "Sweden",
-      "Norway",
-      "Denmark",
-      "Germany"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Rembrandt's only seascape was stolen in which heist?",
-    "choices": [
-      "Gardner",
-      "Louvre",
-      "Van Gogh Museum",
-      "Kunsthal"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The Gardner thieves disguised themselves as?",
-    "choices": [
-      "Construction workers",
-      "Tourists",
-      "Police officers",
-      "Custodians"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Most stolen artist's name in history?",
-    "choices": [
-      "Picasso",
-      "Van Gogh",
-      "Rembrandt",
-      "Monet"
-    ],
-    "correct": 0
-  }
+  {"question": "Largest unsolved art theft happened at?", "choices": ["Isabella Stewart Gardner Museum", "Louvre", "MoMA", "Tate"], "correct": 0},
+  {"question": "Year of Gardner Museum heist?", "choices": ["1990", "1985", "1995", "2000"], "correct": 0},
+  {"question": "Gardner heist thieves dressed as?", "choices": ["Police", "Janitors", "Tourists", "Workers"], "correct": 0},
+  {"question": "Stolen Vermeer in Gardner heist?", "choices": ["The Concert", "Milkmaid", "Lacemaker", "Geographer"], "correct": 0},
+  {"question": "Stolen Rembrandt seascape from Gardner?", "choices": ["Storm on the Sea of Galilee", "Night Watch", "Anatomy", "Self-Portrait"], "correct": 0},
+  {"question": "Mona Lisa was stolen from the Louvre in?", "choices": ["1911", "1925", "1903", "1942"], "correct": 0},
+  {"question": "Mona Lisa thief?", "choices": ["Vincenzo Peruggia", "Pablo Picasso", "Apollinaire", "Adam Worth"], "correct": 0},
+  {"question": "Munch's 'The Scream' was stolen in?", "choices": ["1994 and 2004", "2010", "1985", "1972"], "correct": 0},
+  {"question": "Stockholm 2000 heist used what getaway?", "choices": ["Boats", "Cars", "Helicopter", "Bikes"], "correct": 0},
+  {"question": "Kunsthal Rotterdam 2012 heist took works by?", "choices": ["Picasso, Monet, Matisse", "Just Picasso", "Just Monet", "Just Klimt"], "correct": 0},
+  {"question": "Romanian thieves' mother allegedly burned the Kunsthal art?", "choices": ["Yes", "No", "Sold", "Ransomed"], "correct": 0},
+  {"question": "Green Vault heist (2019) was in?", "choices": ["Dresden", "Berlin", "Munich", "Vienna"], "correct": 0},
+  {"question": "Antwerp Diamond Heist year?", "choices": ["2003", "1995", "2010", "1989"], "correct": 0},
+  {"question": "Antwerp diamond heist mastermind?", "choices": ["Leonardo Notarbartolo", "Doris Payne", "Bill Mason", "Pink Panther"], "correct": 0},
+  {"question": "Pink Panthers gang origin?", "choices": ["Serbia/Montenegro", "Italy", "Russia", "Romania"], "correct": 0},
+  {"question": "Adam Worth was called the 'Napoleon of'?", "choices": ["Crime", "Art", "Banking", "Heists"], "correct": 0},
+  {"question": "Worth famously stole which Gainsborough?", "choices": ["Duchess of Devonshire", "Pinkie", "Blue Boy", "Mrs. Siddons"], "correct": 0},
+  {"question": "Caravaggio Nativity stolen in 1969 from?", "choices": ["Palermo", "Rome", "Naples", "Venice"], "correct": 0},
+  {"question": "Suspected destroyer of Caravaggio Nativity?", "choices": ["Sicilian Mafia", "Camorra", "Albanian mob", "Yakuza"], "correct": 0},
+  {"question": "Edvard Munch's 'Scream' versions number how many?", "choices": ["4", "2", "1", "6"], "correct": 0},
+  {"question": "Picasso 'Le Pigeon aux Petits Pois' stolen at Paris museum in?", "choices": ["2010", "2005", "2015", "2000"], "correct": 0},
+  {"question": "'Salvator Mundi' (controversial Da Vinci) sold in 2017 for?", "choices": ["~$450M", "~$50M", "~$100M", "~$1B"], "correct": 0},
+  {"question": "Boston Gardner reward stands at (recent)?", "choices": ["$10M", "$1M", "$25M", "$5M"], "correct": 2},
+  {"question": "Which Klimt was stolen and recovered after 23 years (2019)?", "choices": ["Portrait of a Lady", "Kiss", "Adele Bloch-Bauer I", "Judith"], "correct": 0},
+  {"question": "Klimt 'Portrait of a Lady' was at?", "choices": ["Ricci Oddi, Piacenza", "Vienna", "Florence", "Milan"], "correct": 0},
+  {"question": "Stéphane Breitwieser stole works in?", "choices": ["European museums", "US museums", "Asia", "South America"], "correct": 0},
+  {"question": "Breitwieser's mother allegedly?", "choices": ["Destroyed art", "Sold", "Hid", "Ransomed"], "correct": 0},
+  {"question": "Poly Klein Cézanne theft in 1999 was in?", "choices": ["Oxford", "Cambridge", "London", "Paris"], "correct": 0},
+  {"question": "Van Gogh Museum 2002 heist stole how many works?", "choices": ["2", "1", "5", "10"], "correct": 0},
+  {"question": "Recovered Van Gogh works in 2016 in?", "choices": ["Italy (Camorra)", "Spain", "France", "UK"], "correct": 0}
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ArtHeistsQuizSettings): ArtHeistsQuizState {

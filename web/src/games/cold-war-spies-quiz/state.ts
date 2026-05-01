@@ -4,146 +4,36 @@ export interface ColdWarSpiesQuizSettings { questions: "10" | "20"; }
 export interface ColdWarSpiesQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ColdWarSpiesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Which group of British spies fed Soviets secrets in WWII and after?",
-    "choices": [
-      "The Magnificent Seven",
-      "The Cambridge Five",
-      "The Oxford Three",
-      "The London Six"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which Cambridge spy fled to the USSR in 1963?",
-    "choices": [
-      "Guy Burgess",
-      "Donald Maclean",
-      "Kim Philby",
-      "Anthony Blunt"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "U.S. couple executed in 1953 for atomic espionage?",
-    "choices": [
-      "Hisses",
-      "Rosenbergs",
-      "Sobles",
-      "Cohens"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Soviet defector Oleg ___ exposed many KGB operations.",
-    "choices": [
-      "Penkovsky",
-      "Gordievsky",
-      "Kalugin",
-      "Rezun"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bridge in Berlin used for spy swaps?",
-    "choices": [
-      "Glienicke",
-      "Oberbaum",
-      "Bornholmer",
-      "Charlottenburg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "U.S. pilot shot down over USSR in a U-2 spy plane (1960)?",
-    "choices": [
-      "Francis Gary Powers",
-      "Chuck Yeager",
-      "Scott Crossfield",
-      "Iven Kincheloe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which physicist passed atomic secrets and was sentenced in 1950?",
-    "choices": [
-      "Klaus Fuchs",
-      "Edward Teller",
-      "Robert Oppenheimer",
-      "Hans Bethe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Soviet illegal arrested in NYC, played by Mark Rylance in 'Bridge of Spies'?",
-    "choices": [
-      "Vasili Mitrokhin",
-      "Rudolf Abel",
-      "Konon Molody",
-      "Vitaly Yurchenko"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which CIA officer was a long-term Soviet mole, exposed in 1994?",
-    "choices": [
-      "Aldrich Ames",
-      "Robert Hanssen",
-      "Edward Lee Howard",
-      "Harold Nicholson"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "FBI agent who spied for Moscow until arrested in 2001?",
-    "choices": [
-      "Aldrich Ames",
-      "Robert Hanssen",
-      "Earl Pitts",
-      "Brian Kelley"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which Soviet GRU colonel passed key Cuban missile crisis intel to West?",
-    "choices": [
-      "Penkovsky",
-      "Polyakov",
-      "Gordievsky",
-      "Tolkachev"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which spy ring run by John Walker compromised U.S. Navy comms?",
-    "choices": [
-      "Walker spy ring",
-      "Pollard ring",
-      "Larkin ring",
-      "Conrad ring"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What was 'Operation Gold' (1955)?",
-    "choices": [
-      "Berlin tunnel for Soviet wiretap",
-      "Cuba assassination plot",
-      "Korean radar mission",
-      "Vienna asset extraction"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which novelist (former MI6) wrote 'Tinker Tailor Soldier Spy'?",
-    "choices": [
-      "Graham Greene",
-      "John le Carré",
-      "Ian Fleming",
-      "Frederick Forsyth"
-    ],
-    "correct": 1
-  }
+  {"question": "Which British spy ring leaked atomic secrets to the USSR?", "choices": ["Cambridge Five", "Oxford Four", "London Three", "Manchester Six"], "correct": 0},
+  {"question": "Who was 'the third man' of the Cambridge Five?", "choices": ["Kim Philby", "Guy Burgess", "Donald Maclean", "Anthony Blunt"], "correct": 0},
+  {"question": "Which Cambridge spy was the Queen's art adviser?", "choices": ["Anthony Blunt", "John Cairncross", "Kim Philby", "Guy Burgess"], "correct": 0},
+  {"question": "German atomic spy who passed Manhattan Project secrets?", "choices": ["Klaus Fuchs", "Bruno Pontecorvo", "Allan Nunn May", "Theodore Hall"], "correct": 0},
+  {"question": "Couple executed in 1953 for atomic espionage?", "choices": ["Hiss", "Rosenbergs", "Coplons", "Sobells"], "correct": 1},
+  {"question": "Soviet defector to U.S., 1985, returned to USSR?", "choices": ["Yurchenko", "Gordievsky", "Penkovsky", "Polyakov"], "correct": 0},
+  {"question": "KGB Colonel exfiltrated by MI6, 1985?", "choices": ["Gordievsky", "Penkovsky", "Kuzichkin", "Levchenko"], "correct": 0},
+  {"question": "GRU colonel who informed West during Cuban Missile Crisis?", "choices": ["Penkovsky", "Polyakov", "Tolkachev", "Sheymov"], "correct": 0},
+  {"question": "CIA mole who betrayed many U.S. assets, 1994?", "choices": ["Ames", "Hanssen", "Howard", "Nicholson"], "correct": 0},
+  {"question": "FBI agent unmasked as Soviet/Russian spy in 2001?", "choices": ["Hanssen", "Ames", "Pitts", "Trofimoff"], "correct": 0},
+  {"question": "Soviet illegals network exposed in U.S. in 2010?", "choices": ["Ghost Stories", "Farewell", "Venona", "Mongoose"], "correct": 0},
+  {"question": "Codename of joint US/UK signals decryption project?", "choices": ["Venona", "Ultra", "Magic", "Bourbon"], "correct": 0},
+  {"question": "U-2 pilot shot down over USSR in 1960?", "choices": ["Gary Powers", "Rudolf Abel", "George Blake", "Greville Wynne"], "correct": 0},
+  {"question": "Famous spy swap bridge in Berlin?", "choices": ["Glienicke", "Oberbaum", "Bornholmer", "Friedrichstrasse"], "correct": 0},
+  {"question": "Soviet illegal exchanged for Powers?", "choices": ["Rudolf Abel", "Konon Molody", "George Blake", "Vladimir Kryuchkov"], "correct": 0},
+  {"question": "MI6 officer who escaped Wormwood Scrubs after spying for USSR?", "choices": ["George Blake", "Kim Philby", "Guy Burgess", "John Vassall"], "correct": 0},
+  {"question": "Stasi was the secret police of which country?", "choices": ["East Germany", "Poland", "Czechoslovakia", "Hungary"], "correct": 0},
+  {"question": "KGB chairman who became Soviet leader in 1982?", "choices": ["Andropov", "Chernenko", "Brezhnev", "Gromyko"], "correct": 0},
+  {"question": "CIA Berlin tunnel intercepted what?", "choices": ["Soviet phone lines", "Letters", "Microwaves", "Couriers"], "correct": 0},
+  {"question": "Which mole revealed the Berlin tunnel to the KGB?", "choices": ["George Blake", "Kim Philby", "Aldrich Ames", "Oleg Penkovsky"], "correct": 0},
+  {"question": "Bulgarian dissident killed by ricin umbrella in 1978?", "choices": ["Markov", "Kostov", "Trifonov", "Dimitrov"], "correct": 0},
+  {"question": "Which CIA officer suspected mole in James Angleton's hunt?", "choices": ["Yuri Nosenko", "Anatoly Golitsyn", "Yuri Loginov", "Oleg Lyalin"], "correct": 0},
+  {"question": "Defector who claimed deep KGB penetration of CIA?", "choices": ["Golitsyn", "Nosenko", "Polyakov", "Yurchenko"], "correct": 0},
+  {"question": "Kim Philby fled to USSR in?", "choices": ["1963", "1951", "1971", "1956"], "correct": 0},
+  {"question": "Burgess and Maclean defected in?", "choices": ["1951", "1955", "1961", "1949"], "correct": 0},
+  {"question": "Walker family spied for whom?", "choices": ["USSR", "China", "E. Germany", "N. Korea"], "correct": 0},
+  {"question": "Israeli spy caught at U.S. Naval Intelligence?", "choices": ["Pollard", "Vanunu", "Kuperwasser", "Eitan"], "correct": 0},
+  {"question": "KGB illegal nicknamed 'Lonsdale' in UK?", "choices": ["Konon Molody", "Rudolf Abel", "Vladimir Petrov", "Ruth Werner"], "correct": 0},
+  {"question": "Which KGB defector wrote 'KGB: The Inside Story'?", "choices": ["Gordievsky", "Mitrokhin", "Kalugin", "Suvorov"], "correct": 0},
+  {"question": "Vasili Mitrokhin smuggled what to MI6?", "choices": ["KGB archive notes", "Gold", "Films", "Plans"], "correct": 0}
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ColdWarSpiesQuizSettings): ColdWarSpiesQuizState {

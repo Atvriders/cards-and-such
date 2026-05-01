@@ -4,146 +4,36 @@ export interface DillingerQuizSettings { questions: "10" | "20"; }
 export interface DillingerQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type DillingerQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "John Dillinger was killed in what year?",
-    "choices": [
-      "1932",
-      "1934",
-      "1936",
-      "1938"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Outside which Chicago theater was he shot?",
-    "choices": [
-      "Biograph",
-      "Chicago",
-      "Roxy",
-      "Palace"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "FBI director who pursued Dillinger?",
-    "choices": [
-      "Eliot Ness",
-      "J. Edgar Hoover",
-      "Melvin Purvis",
-      "Walter Winchell"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lead FBI agent on the case?",
-    "choices": [
-      "Eliot Ness",
-      "Melvin Purvis",
-      "Sam Cowley",
-      "James Crowley"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Dillinger's home state?",
-    "choices": [
-      "Illinois",
-      "Indiana",
-      "Michigan",
-      "Ohio"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was the 'lady in red'?",
-    "choices": [
-      "Anna Sage",
-      "Polly Hamilton",
-      "Billie Frechette",
-      "Evelyn Frechette"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dillinger famously escaped Crown Point Jail using a?",
-    "choices": [
-      "Hidden file",
-      "Wooden gun",
-      "Bedsheet rope",
-      "Bribed guard"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Approximate FBI bounty (in 1934 dollars)?",
-    "choices": [
-      "$1,000",
-      "$5,000",
-      "$10,000",
-      "$50,000"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Famous Wisconsin gunfight site of his gang?",
-    "choices": [
-      "Little Bohemia",
-      "Long Branch",
-      "Rosie's",
-      "Cedar Point"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Public officials labeled him Public Enemy Number?",
-    "choices": [
-      "1",
-      "2",
-      "3",
-      "5"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "1973 biopic title?",
-    "choices": [
-      "Dillinger",
-      "Public Enemies",
-      "The Untouchables",
-      "Kansas City Confidential"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who played Dillinger in 'Public Enemies' (2009)?",
-    "choices": [
-      "Johnny Depp",
-      "Christian Bale",
-      "Brad Pitt",
-      "Russell Crowe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What kind of gun did Anna Sage signal with?",
-    "choices": [
-      "Red dress",
-      "Orange skirt",
-      "Blue scarf",
-      "Green coat"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Dillinger Gang member known as 'Baby Face'?",
-    "choices": [
-      "George Nelson",
-      "Homer Van Meter",
-      "Harry Pierpont",
-      "Pretty Boy Floyd"
-    ],
-    "correct": 0
-  }
+  {"question": "Dillinger's first name?", "choices": ["John", "James", "Joseph", "Jack"], "correct": 0},
+  {"question": "In which state was Dillinger born?", "choices": ["Indiana", "Illinois", "Ohio", "Iowa"], "correct": 0},
+  {"question": "Year of his death?", "choices": ["1934", "1932", "1936", "1929"], "correct": 0},
+  {"question": "Where was he killed?", "choices": ["Biograph Theater", "Lincoln Park", "Union Station", "Wrigley Field"], "correct": 0},
+  {"question": "City of his death?", "choices": ["Chicago", "Indianapolis", "St. Louis", "Detroit"], "correct": 0},
+  {"question": "Lawman who shot him?", "choices": ["Melvin Purvis", "Frank Hamer", "Eliot Ness", "Bat Masterson"], "correct": 0},
+  {"question": "FBI director during Dillinger hunt?", "choices": ["J. Edgar Hoover", "William Burns", "Stanley Finch", "Kelley"], "correct": 0},
+  {"question": "Dillinger was named what by FBI?", "choices": ["Public Enemy No. 1", "Most Wanted", "Super Crook", "Top Gun"], "correct": 0},
+  {"question": "Which woman betrayed him (Lady in Red)?", "choices": ["Anna Sage", "Polly Hamilton", "Billie Frechette", "Evelyn Frechette"], "correct": 0},
+  {"question": "Anna Sage was facing what threat?", "choices": ["Deportation", "Prison", "Execution", "Eviction"], "correct": 0},
+  {"question": "Movie playing the night he died?", "choices": ["Manhattan Melodrama", "Public Enemy", "Scarface", "Little Caesar"], "correct": 0},
+  {"question": "How did Dillinger break out of Crown Point jail?", "choices": ["Wooden gun", "Real gun", "Bribed guard", "Tunnel"], "correct": 0},
+  {"question": "Crown Point jail was in which state?", "choices": ["Indiana", "Illinois", "Ohio", "Wisconsin"], "correct": 0},
+  {"question": "Who was Baby Face Nelson?", "choices": ["Dillinger gang member", "Lawman", "Lawyer", "Banker"], "correct": 0},
+  {"question": "Pretty Boy Floyd was?", "choices": ["Outlaw", "FBI agent", "Reporter", "Sheriff"], "correct": 0},
+  {"question": "Little Bohemia Lodge raid was in?", "choices": ["Wisconsin", "Illinois", "Indiana", "Minnesota"], "correct": 0},
+  {"question": "Outcome of Little Bohemia raid?", "choices": ["FBI failure", "Capture", "Death", "No casualty"], "correct": 0},
+  {"question": "Dillinger's first major prison sentence was for?", "choices": ["Grocery store robbery", "Bank", "Auto theft", "Murder"], "correct": 0},
+  {"question": "Bank Dillinger's gang famously hit in Mason City?", "choices": ["First National", "Bank of Iowa", "Farmers Trust", "Citizens"], "correct": 0},
+  {"question": "Which doctor altered Dillinger's face?", "choices": ["Wilhelm Loeser", "Robert Lerch", "John Cassidy", "Fred Ramsey"], "correct": 0},
+  {"question": "Dillinger's signature getaway involved?", "choices": ["Stolen V-8 Fords", "Trains", "Horses", "Boats"], "correct": 0},
+  {"question": "Which gun did Dillinger reach for at the Biograph?", "choices": ["Colt 1908", "Tommy gun", "BAR", "Luger"], "correct": 0},
+  {"question": "Dillinger's father was a?", "choices": ["Grocer", "Farmer", "Banker", "Preacher"], "correct": 0},
+  {"question": "Famous quote attributed: 'I rob banks because ___'", "choices": ["that's where the money is", "I'm bored", "I can", "they ask for it"], "correct": 0},
+  {"question": "Which actor played Dillinger in 'Public Enemies' (2009)?", "choices": ["Johnny Depp", "Christian Bale", "Brad Pitt", "Mark Ruffalo"], "correct": 0},
+  {"question": "Christian Bale played who in same film?", "choices": ["Melvin Purvis", "Hoover", "Capone", "Floyd"], "correct": 0},
+  {"question": "How long did Dillinger's main crime spree last?", "choices": ["~14 months", "~3 years", "~5 months", "~10 years"], "correct": 0},
+  {"question": "Dillinger's gang killed what banker hostage style?", "choices": ["Used as shield", "Shot", "Released", "Ransomed"], "correct": 0},
+  {"question": "Dillinger Sr. capitalized after death by?", "choices": ["Touring with body story", "Suing FBI", "Writing book", "Refusing"], "correct": 0},
+  {"question": "Dillinger is buried in?", "choices": ["Crown Hill, Indianapolis", "Chicago", "St. Louis", "Dayton"], "correct": 0}
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: DillingerQuizSettings): DillingerQuizState {

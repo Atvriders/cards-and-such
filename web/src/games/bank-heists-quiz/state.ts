@@ -4,146 +4,36 @@ export interface BankHeistsQuizSettings { questions: "10" | "20"; }
 export interface BankHeistsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type BankHeistsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Banco Central in Fortaleza (Brazil, 2005) was robbed via?",
-    "choices": [
-      "Tunnel",
-      "Helicopter",
-      "Inside man",
-      "Disguises"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Roughly how much did the Banco Central thieves take?",
-    "choices": [
-      "$5 million",
-      "$30 million",
-      "$70 million",
-      "$200 million"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Butch Cassidy was leader of?",
-    "choices": [
-      "The Wild Bunch",
-      "The Dalton Gang",
-      "The James-Younger Gang",
-      "The Doolin-Dalton Gang"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Antwerp Diamond Centre robbed in?",
-    "choices": [
-      "1999",
-      "2003",
-      "2008",
-      "2013"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Heist ringleader of Antwerp?",
-    "choices": [
-      "Leonardo Notarbartolo",
-      "Carlo Gambino",
-      "Bernie Madoff",
-      "Charles Manson"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Northern Bank robbery (Belfast 2004) — accused group?",
-    "choices": [
-      "IRA",
-      "UVF",
-      "ETA",
-      "Mafia"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "British Bank of the Middle East was hit in?",
-    "choices": [
-      "Beirut 1976",
-      "Cairo 1980",
-      "Tehran 1979",
-      "Dubai 1985"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "1997 North Hollywood shootout was tied to a?",
-    "choices": [
-      "Bank robbery",
-      "Diamond heist",
-      "Casino heist",
-      "Train robbery"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which 1995 Pacino/De Niro film features a bank/armored car heist?",
-    "choices": [
-      "Heat",
-      "Casino",
-      "Goodfellas",
-      "Donnie Brasco"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "1973 Stockholm robbery led to which term?",
-    "choices": [
-      "Gaslighting",
-      "Stockholm Syndrome",
-      "Karen",
-      "Lima Effect"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Brink's-Mat (UK 1983) main loot?",
-    "choices": [
-      "Cash",
-      "Gold bullion",
-      "Diamonds",
-      "Bonds"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Loomis Fargo (US 1997) — winner of which TV-style nickname?",
-    "choices": [
-      "Hillbilly Heist",
-      "Big Easy Heist",
-      "Iceman Heist",
-      "Bayou Job"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Approximate value of Brink's-Mat haul?",
-    "choices": [
-      "£1m",
-      "£26m",
-      "£100m",
-      "£500m"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Knightsbridge Security Deposit (1987) involved?",
-    "choices": [
-      "Tunnel",
-      "Inside-fake-customer",
-      "Insider customer (Valerio Viccei)",
-      "Heist by night cleaners"
-    ],
-    "correct": 2
-  }
+  {"question": "Largest U.S. bank heist by amount?", "choices": ["Dunbar Armored 1997", "Brinks 1950", "First National", "Wells Fargo"], "correct": 0},
+  {"question": "Brinks 1950 heist was in?", "choices": ["Boston", "NYC", "Chicago", "LA"], "correct": 0},
+  {"question": "Dunbar 1997 heist took roughly?", "choices": ["$18.9M", "$5M", "$100M", "$1M"], "correct": 0},
+  {"question": "Loomis Fargo 1997 heist was in?", "choices": ["North Carolina", "Texas", "Florida", "NY"], "correct": 0},
+  {"question": "Banco Central heist 2005 was in?", "choices": ["Brazil", "Argentina", "Mexico", "Chile"], "correct": 0},
+  {"question": "Brazilian heist used what method?", "choices": ["Tunnel", "Helicopter", "Hostages", "Hack"], "correct": 0},
+  {"question": "Northern Bank 2004 heist was in?", "choices": ["Belfast", "Dublin", "London", "Glasgow"], "correct": 0},
+  {"question": "Northern Bank robbery blamed on?", "choices": ["IRA", "UDA", "UVF", "ETA"], "correct": 0},
+  {"question": "Securitas depot heist 2006 was in?", "choices": ["Tonbridge, England", "London", "Dublin", "Manchester"], "correct": 0},
+  {"question": "Securitas heist took roughly?", "choices": ["£53M", "£10M", "£100M", "£5M"], "correct": 0},
+  {"question": "Knightsbridge Safe Deposit heist year?", "choices": ["1987", "1995", "1971", "2003"], "correct": 0},
+  {"question": "Baker Street tunnel job was in?", "choices": ["1971", "1980", "1965", "1995"], "correct": 0},
+  {"question": "Hatton Garden heist year?", "choices": ["2015", "2010", "2005", "2018"], "correct": 0},
+  {"question": "Hatton Garden gang's age trait?", "choices": ["Mostly elderly", "Mostly teens", "Mid-20s", "Cops"], "correct": 0},
+  {"question": "United California Bank 1972 heist mastermind?", "choices": ["Amil Dinsio", "Patty Hearst", "Willie Sutton", "DB Cooper"], "correct": 0},
+  {"question": "Stockholm 1973 hostage origin of 'Stockholm syndrome'?", "choices": ["Norrmalmstorg", "Hovsta", "Vasa", "Drottninggatan"], "correct": 0},
+  {"question": "Patty Hearst joined which group robbing banks?", "choices": ["SLA", "Weather Underground", "Black Panthers", "FALN"], "correct": 0},
+  {"question": "Famous quote 'because that's where the money is' attributed to?", "choices": ["Willie Sutton", "Dillinger", "Capone", "Ness"], "correct": 0},
+  {"question": "Society of D.B. Cooper involves?", "choices": ["Hijack ransom", "Bank vault", "Tunnel", "Train"], "correct": 0},
+  {"question": "Air France 1967 Marseille heist used?", "choices": ["Sewer tunnel", "Helicopter", "Hostages", "Bomb"], "correct": 0},
+  {"question": "Albert Spaggiari led which heist?", "choices": ["Nice 1976", "Marseille 1967", "Paris 1980", "Lyon 1990"], "correct": 0},
+  {"question": "Spaggiari's note left at scene?", "choices": ["Without weapons, hatred or violence", "Free at last", "C'est la vie", "Adieu"], "correct": 0},
+  {"question": "First National Bank of Arizona 1997 heist used?", "choices": ["Bombs", "Tunnel", "Hostages", "Hack"], "correct": 0},
+  {"question": "Bank of America 1997 'North Hollywood Shootout' featured?", "choices": ["Body armor", "Hostages", "Tunnel", "Helicopter"], "correct": 0},
+  {"question": "North Hollywood shootout year?", "choices": ["1997", "1995", "2000", "1992"], "correct": 0},
+  {"question": "Bonnie & Clyde robbed which type primarily?", "choices": ["Small banks/stores", "Big banks", "Trains", "Armored cars"], "correct": 0},
+  {"question": "Lufthansa heist 1978 was at?", "choices": ["JFK Airport", "LaGuardia", "O'Hare", "LAX"], "correct": 0},
+  {"question": "Lufthansa heist tied to which mob?", "choices": ["Lucchese", "Genovese", "Bonanno", "Gambino"], "correct": 0},
+  {"question": "Lufthansa take roughly?", "choices": ["$5–6M", "$1M", "$20M", "$100K"], "correct": 0},
+  {"question": "Goodfellas film featured which heist?", "choices": ["Lufthansa", "Brinks", "Hatton", "Securitas"], "correct": 0}
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: BankHeistsQuizSettings): BankHeistsQuizState {

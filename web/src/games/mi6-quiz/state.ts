@@ -4,146 +4,36 @@ export interface Mi6QuizSettings { questions: "10" | "20"; }
 export interface Mi6QuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type Mi6QuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "What is MI6 officially called today?",
-    "choices": [
-      "MI6",
-      "SIS",
-      "GCHQ",
-      "DSD"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Where is MI6 headquarters?",
-    "choices": [
-      "Vauxhall Cross",
-      "Whitehall",
-      "Thames House",
-      "GCHQ Cheltenham"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Year of founding (Foreign Section)?",
-    "choices": [
-      "1899",
-      "1909",
-      "1919",
-      "1939"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First chief Mansfield Smith-Cumming was known as?",
-    "choices": [
-      "M",
-      "C",
-      "Q",
-      "K"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "MI6 chief during WWII?",
-    "choices": [
-      "Stewart Menzies",
-      "Maurice Oldfield",
-      "Stella Rimington",
-      "John Scarlett"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who notoriously betrayed MI6 secrets to the Soviets?",
-    "choices": [
-      "John le Carré",
-      "Kim Philby",
-      "Daphne Park",
-      "Ian Fleming"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Domestic counterpart of MI6?",
-    "choices": [
-      "MI4",
-      "MI5",
-      "GCHQ",
-      "SAS"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Author Ian Fleming created 'James Bond' while serving in?",
-    "choices": [
-      "MI6",
-      "Naval Intelligence Division",
-      "MI5",
-      "GCHQ"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which MI6 officer wrote 'Spycatcher' that the UK tried to ban?",
-    "choices": [
-      "Peter Wright (MI5)",
-      "Anthony Cavendish",
-      "George Blake",
-      "Maurice Oldfield"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Russian-born MI6 traitor who escaped from prison in 1966?",
-    "choices": [
-      "George Blake",
-      "Alistair Horne",
-      "Alfred Burke",
-      "John Vassall"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Modern MI6 chief is referred to as?",
-    "choices": [
-      "M",
-      "C",
-      "Director",
-      "Chief"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which act first publicly avowed MI6's existence (1994)?",
-    "choices": [
-      "Intelligence Services Act",
-      "Official Secrets Act",
-      "RIPA",
-      "Justice and Security Act"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "MI6 produced disinformation in WWII via what scheme?",
-    "choices": [
-      "XX (Double Cross)",
-      "Magic",
-      "Ultra",
-      "Bodyguard"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First female head of MI6?",
-    "choices": [
-      "Stella Rimington",
-      "Eliza Manningham-Buller",
-      "There hasn't been one yet",
-      "Alex Younger's deputy"
-    ],
-    "correct": 2
-  }
+  {"question": "MI6 is officially known as?", "choices": ["SIS", "GCHQ", "MI5", "DI"], "correct": 0},
+  {"question": "MI6 handles which type of intelligence?", "choices": ["Foreign", "Domestic", "Signals", "Military"], "correct": 0},
+  {"question": "MI6 headquarters is at?", "choices": ["Vauxhall Cross", "Thames House", "Cheltenham", "Whitehall"], "correct": 0},
+  {"question": "First chief of SIS?", "choices": ["Mansfield Cumming", "Stewart Menzies", "Dick White", "Maurice Oldfield"], "correct": 0},
+  {"question": "'C' is the title of?", "choices": ["MI6 Chief", "MI5 Chief", "GCHQ Director", "Cabinet Sec"], "correct": 0},
+  {"question": "Why is the chief called 'C'?", "choices": ["Cumming's initial", "Chief", "Cipher", "Crown"], "correct": 0},
+  {"question": "MI6 was founded in?", "choices": ["1909", "1916", "1939", "1945"], "correct": 0},
+  {"question": "MI5 vs MI6: MI5 handles?", "choices": ["Domestic security", "Foreign", "Signals", "Cyber"], "correct": 0},
+  {"question": "Which writer worked for SIS in WWII?", "choices": ["Graham Greene", "George Orwell", "Evelyn Waugh", "Kingsley Amis"], "correct": 0},
+  {"question": "Ian Fleming worked for which UK service?", "choices": ["Naval Intelligence", "SIS", "SOE", "MI5"], "correct": 0},
+  {"question": "Kim Philby led which SIS section?", "choices": ["Soviet counterintel", "Africa", "Far East", "Italy"], "correct": 0},
+  {"question": "Year MI6 was officially avowed by UK gov?", "choices": ["1994", "1985", "2001", "2010"], "correct": 0},
+  {"question": "Which Act provided MI6 statutory basis?", "choices": ["Intelligence Services Act 1994", "Official Secrets Act", "Security Service Act", "Police Act"], "correct": 0},
+  {"question": "Famous MI6 defector to USSR with Cambridge ring?", "choices": ["Philby", "Burgess", "Maclean", "Blunt"], "correct": 0},
+  {"question": "MI6 officer who escaped UK prison after spying for USSR?", "choices": ["George Blake", "Philby", "Cairncross", "Vassall"], "correct": 0},
+  {"question": "MI6 chief who exfiltrated Gordievsky?", "choices": ["Christopher Curwen", "Maurice Oldfield", "Colin McColl", "John Scarlett"], "correct": 0},
+  {"question": "First female 'C' nominated in?", "choices": ["Not yet", "2020", "2014", "1999"], "correct": 0},
+  {"question": "Which MI6 chief was caricatured as 'M'?", "choices": ["Stewart Menzies", "Mansfield Cumming", "Dick White", "Maurice Oldfield"], "correct": 0},
+  {"question": "Real-life basis for John le Carre's Smiley?", "choices": ["Maurice Oldfield", "Dick White", "Both", "Menzies"], "correct": 2},
+  {"question": "Le Carre worked for which UK service?", "choices": ["MI5 then MI6", "MI6", "MI5", "GCHQ"], "correct": 0},
+  {"question": "MI6 officer found dead in a bag in 2010?", "choices": ["Gareth Williams", "David Kelly", "Litvinenko", "Skripal"], "correct": 0},
+  {"question": "Skripal poisoning in 2018 occurred in?", "choices": ["Salisbury", "London", "Manchester", "Cardiff"], "correct": 0},
+  {"question": "Sergei Skripal had spied for which service?", "choices": ["MI6", "CIA", "BND", "DGSE"], "correct": 0},
+  {"question": "Litvinenko worked for which Russian service before defection?", "choices": ["FSB", "KGB", "SVR", "GRU"], "correct": 0},
+  {"question": "MI6 station chief in Moscow during Penkovsky case?", "choices": ["Roderick Chisholm", "Greville Wynne", "Maurice Oldfield", "Dickie Franks"], "correct": 0},
+  {"question": "Greville Wynne's role with Penkovsky?", "choices": ["Courier", "Recruiter", "Trainer", "Defector"], "correct": 0},
+  {"question": "MI6 cooperated with US OSS via?", "choices": ["Stephenson's BSC", "Camp X", "Both", "Bletchley"], "correct": 2},
+  {"question": "Which MI6 chief led UK SIS during WWII?", "choices": ["Stewart Menzies", "Mansfield Cumming", "Dick White", "Maurice Oldfield"], "correct": 0},
+  {"question": "UK signals intel partner of MI6?", "choices": ["GCHQ", "NSA", "DI", "BND"], "correct": 0},
+  {"question": "Five Eyes partners include?", "choices": ["UK,US,CA,AU,NZ", "UK,US,FR,DE,IT", "UK,US,JP,KR,IN", "UK,US,IL,SA,AU"], "correct": 0}
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: Mi6QuizSettings): Mi6QuizState {

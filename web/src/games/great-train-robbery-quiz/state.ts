@@ -4,146 +4,36 @@ export interface GreatTrainRobberyQuizSettings { questions: "10" | "20"; }
 export interface GreatTrainRobberyQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type GreatTrainRobberyQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "When did the Great Train Robbery occur?",
-    "choices": [
-      "1955",
-      "1963",
-      "1968",
-      "1972"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Where did the robbery take place?",
-    "choices": [
-      "Bridego Bridge",
-      "Watford Gap",
-      "Crewe Junction",
-      "Clapham Tunnel"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What train was robbed?",
-    "choices": [
-      "Flying Scotsman",
-      "Glasgow-London Royal Mail",
-      "Brighton Belle",
-      "Cornish Express"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which robber famously escaped from Wandsworth Prison?",
-    "choices": [
-      "Bruce Reynolds",
-      "Ronnie Biggs",
-      "Buster Edwards",
-      "Charlie Wilson"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who was widely seen as the gang's mastermind?",
-    "choices": [
-      "Bruce Reynolds",
-      "Ronnie Biggs",
-      "Roy James",
-      "Tommy Wisbey"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Where did the gang hide after the robbery?",
-    "choices": [
-      "Leatherslade Farm",
-      "Beachy Head",
-      "Box Hill",
-      "Dover Castle"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Roughly how much (in 1963 pounds) was stolen?",
-    "choices": [
-      "£10,000",
-      "£260,000",
-      "£2.6 million",
-      "£26 million"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Ronnie Biggs fled to which country for years?",
-    "choices": [
-      "Argentina",
-      "Brazil",
-      "Spain",
-      "Australia"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who later wrote a memoir titled 'Crossing the Line'?",
-    "choices": [
-      "Bruce Reynolds",
-      "Ronnie Biggs",
-      "Buster Edwards",
-      "Charlie Wilson"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which Hollywood film loosely depicts the robbery?",
-    "choices": [
-      "Ocean's Eleven",
-      "Buster",
-      "The Italian Job",
-      "The Sting"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Phil Collins played which robber in 'Buster'?",
-    "choices": [
-      "Bruce Reynolds",
-      "Buster Edwards",
-      "Ronnie Biggs",
-      "Roy James"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What weapon did the robbers carry?",
-    "choices": [
-      "Revolvers",
-      "Cosh and pickaxe handles",
-      "Sawn-off shotguns",
-      "Knives"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which detective led the investigation?",
-    "choices": [
-      "Jack Slipper",
-      "George Hatherill",
-      "Tommy Butler",
-      "Frank Williams"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What did the gang use to stop the train?",
-    "choices": [
-      "A fake red signal",
-      "Roadblock",
-      "Flagman",
-      "Loud horns"
-    ],
-    "correct": 0
-  }
+  {"question": "When did the Great Train Robbery (UK) occur?", "choices": ["1961", "1963", "1965", "1967"], "correct": 1},
+  {"question": "Which Royal Mail train was robbed?", "choices": ["Glasgow-London", "London-Edinburgh", "Bristol-London", "Liverpool-London"], "correct": 0},
+  {"question": "In which county did the robbery happen?", "choices": ["Berkshire", "Buckinghamshire", "Bedfordshire", "Surrey"], "correct": 1},
+  {"question": "At which bridge did the gang stop the train?", "choices": ["Bridego Bridge", "Sears Crossing", "Cheddington", "Leighton Buzzard"], "correct": 0},
+  {"question": "Roughly how much was stolen (GBP)?", "choices": ["260,000", "1.5 million", "2.6 million", "6 million"], "correct": 2},
+  {"question": "Most famous robber who fled to Brazil?", "choices": ["Bruce Reynolds", "Ronnie Biggs", "Buster Edwards", "Charlie Wilson"], "correct": 1},
+  {"question": "Mastermind credited with planning?", "choices": ["Ronnie Biggs", "Bruce Reynolds", "Roy James", "Gordon Goody"], "correct": 1},
+  {"question": "How was the train signal tampered with?", "choices": ["Cut wires", "Glove over green + battery red", "Smoke bomb", "Hijacked signal box"], "correct": 1},
+  {"question": "Where did the gang hide after the robbery?", "choices": ["Leatherslade Farm", "Bridego Cottage", "Cheddington Hall", "Aylesbury House"], "correct": 0},
+  {"question": "What clue at the hideout helped police?", "choices": ["Map", "Monopoly board with prints", "Tickets", "Photos"], "correct": 1},
+  {"question": "Which driver was struck during the robbery?", "choices": ["Jack Mills", "Frank Dewhurst", "David Whitby", "Tom Kett"], "correct": 0},
+  {"question": "Biggs escaped from which UK prison?", "choices": ["Pentonville", "Wandsworth", "Brixton", "Strangeways"], "correct": 1},
+  {"question": "Which film about Biggs starred Phil Collins?", "choices": ["Buster", "McVicar", "The Bank Job", "Robbery"], "correct": 0},
+  {"question": "Many sentences handed down were how long?", "choices": ["10 years", "20 years", "30 years", "life"], "correct": 2},
+  {"question": "Buster Edwards later ran what stall in London?", "choices": ["Newsstand", "Flower stall", "Coffee", "Books"], "correct": 1},
+  {"question": "Which gang member was nicknamed 'The Weasel'?", "choices": ["Tommy Wisbey", "Jim Hussey", "Roy James", "Roger Cordrey"], "correct": 2},
+  {"question": "Roy James was also known as a skilled what?", "choices": ["Locksmith", "Racing driver", "Boxer", "Jeweler"], "correct": 1},
+  {"question": "Where was Biggs eventually rearrested?", "choices": ["Spain", "Brazil", "Australia", "Barbados"], "correct": 0},
+  {"question": "Biggs returned to the UK voluntarily in?", "choices": ["1995", "2001", "2005", "2009"], "correct": 0},
+  {"question": "Which 1967 film fictionalized the heist?", "choices": ["Robbery", "The Train", "The Heist", "Loot"], "correct": 0},
+  {"question": "Which detective led the investigation?", "choices": ["Tommy Butler", "Jack Slipper", "Frank Williams", "Peter Vibart"], "correct": 0},
+  {"question": "Slipper of the Yard tracked Biggs to where?", "choices": ["Rio", "Sydney", "Adelaide", "Melbourne"], "correct": 0},
+  {"question": "How many men were directly involved?", "choices": ["8", "12", "15", "20"], "correct": 2},
+  {"question": "The mailbags were transferred to what vehicles?", "choices": ["Vans", "Land Rovers + Army truck", "Lorries", "Cars"], "correct": 1},
+  {"question": "Charlie Wilson escaped from which prison?", "choices": ["Winson Green", "Wandsworth", "Pentonville", "Durham"], "correct": 0},
+  {"question": "Wilson was later murdered in what country?", "choices": ["Spain", "Portugal", "Mexico", "Morocco"], "correct": 0},
+  {"question": "Which insider tipped off the gang (the 'Ulsterman')?", "choices": ["Patrick McKenna", "Brian Field", "Bill Boal", "Unknown insider"], "correct": 0},
+  {"question": "Bruce Reynolds fled where after the heist?", "choices": ["Mexico/Canada", "Brazil", "South Africa", "France"], "correct": 0},
+  {"question": "How long did the actual robbery roughly take?", "choices": ["5 minutes", "15 minutes", "30 minutes", "1 hour"], "correct": 1},
+  {"question": "Buster Edwards's body was found in?", "choices": ["1994", "1995", "1996", "2000"], "correct": 0}
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: GreatTrainRobberyQuizSettings): GreatTrainRobberyQuizState {
