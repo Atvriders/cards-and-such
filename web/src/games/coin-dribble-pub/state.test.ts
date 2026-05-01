@@ -1,36 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_TURNS } from "./state.js";
-
-const S = { dummy: false };
-
-describe("CoinDribble", () => {
-  it("starts at turn 1, score 0", () => {
+import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+const S = { dummy: true };
+describe("CoinDribblePubState", () => {
+  it("starts in rolling phase", () => {
     const s = initialState(1, S);
-    expect(s.turn).toBe(1);
-    expect(s.score).toBe(0);
-    expect(s.phase).toBe("ready");
+    expect(s.phase).toBe("rolling");
+    expect(s.round).toBe(1);
   });
-  it("throw moves to thrown or done", () => {
-    const s = reducer(initialState(1, S), { type: "throw" });
-    expect(["thrown", "done"]).toContain(s.phase);
+  it("rolling produces dice and advances", () => {
+    const s = reducer(initialState(2, S), { type: "roll" });
+    expect(s.dice).not.toBeNull();
+    expect(["rolled", "done"]).toContain(s.phase);
   });
-  it("score is non-negative across run", () => {
-    let s = initialState(2, S);
-    for (let i = 0; i < TOTAL_TURNS * 2 + 5; i++) {
-      if (s.phase === "ready") s = reducer(s, { type: "throw" });
-      else if (s.phase === "thrown") s = reducer(s, { type: "next" });
+  it("isTerminal null mid-game", () => {
+    expect(isTerminal(initialState(3, S))).toBeNull();
+  });
+  it("game finishes with non-negative score", () => {
+    let s = initialState(4, S);
+    for (let i = 0; i < TOTAL_ROUNDS * 4 + 10; i++) {
       if (s.phase === "done") break;
-    }
-    expect(s.score).toBeGreaterThanOrEqual(0);
-  });
-  it("ends after TOTAL_TURNS", () => {
-    let s = initialState(11, S);
-    for (let i = 0; i < TOTAL_TURNS * 2 + 10; i++) {
-      if (s.phase === "ready") s = reducer(s, { type: "throw" });
-      else if (s.phase === "thrown") s = reducer(s, { type: "next" });
-      if (s.phase === "done") break;
+      if (s.phase === "rolling") s = reducer(s, { type: "roll" });
+      if (s.phase === "rolled") s = reducer(s, { type: "next" });
     }
     expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
+    const t = isTerminal(s);
+    expect(t).not.toBeNull();
+    expect(t!.score).toBeGreaterThanOrEqual(0);
+  });
+  it("seed is deterministic", () => {
+    const play = (seed: number) => {
+      let s = initialState(seed, S);
+      for (let i = 0; i < TOTAL_ROUNDS * 4 + 10; i++) {
+        if (s.phase === "done") break;
+        if (s.phase === "rolling") s = reducer(s, { type: "roll" });
+        if (s.phase === "rolled") s = reducer(s, { type: "next" });
+      }
+      return s.score;
+    };
+    expect(play(99)).toBe(play(99));
   });
 });

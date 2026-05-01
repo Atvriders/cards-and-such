@@ -1,125 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface PictionaryManQuizSettings { questions: "10"; }
-export interface PictionaryManQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type PictionaryManQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
+
+export const PictionaryManQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Pictionary Man uses what novel drawing surface?",
+    "q": "Pictionary players?",
     "choices": [
-      "A whiteboard",
-      "A 3D mannequin",
-      "Sand tray",
-      "Glow board"
+      "Draw and guess",
+      "Act",
+      "Sing",
+      "Hum"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Pictionary Man's mannequin can be?",
+    "q": "Pictionary is by?",
     "choices": [
-      "Posed",
-      "Eaten",
-      "Bounced",
-      "Magnetized"
+      "Mattel",
+      "Hasbro",
+      "CMON",
+      "Asmodee"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Pictionary Man was branded as what kind of figure?",
+    "q": "Released in?",
     "choices": [
-      "Ken doll",
-      "Articulated drawing dummy",
-      "Soft plush",
-      "Action figure"
+      "1985",
+      "1995",
+      "2005",
+      "1975"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "The Pictionary Man timer is typically?",
+    "q": "Game uses a?",
     "choices": [
-      "10 seconds",
-      "Standard 60 seconds",
-      "Five minutes",
-      "No timer"
+      "Sand timer",
+      "Phone app",
+      "Dice tower",
+      "Spinner only"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Pictionary Man is recommended for what age?",
+    "q": "Categories include?",
     "choices": [
-      "3+",
-      "6+",
-      "10+",
-      "21+"
+      "Action, person, object, etc.",
+      "Just animals",
+      "Just food",
+      "Numbers"
     ],
-    "correct": 2
+    "answer": 0
   },
   {
-    "question": "Pictionary Man relies on poses plus?",
+    "q": "Player count?",
     "choices": [
-      "Sound effects",
-      "Drawing on mannequin",
-      "Buzzers",
-      "Tongue twisters"
+      "3–16",
+      "2",
+      "Solo",
+      "100"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Pictionary Man box generally contains how many cards?",
+    "q": "Pictionary Mania adds?",
     "choices": [
-      "~50",
-      "~150",
-      "~500+",
-      "None"
+      "Twists",
+      "Cards",
+      "Dice",
+      "Music"
     ],
-    "correct": 2
+    "answer": 0
   },
   {
-    "question": "The Pictionary Man mannequin includes which feature?",
+    "q": "Pictionary Card Game uses?",
     "choices": [
-      "Hat that lights up",
-      "Posable arms and legs",
-      "Spinning torso wheel",
-      "Magnetic shoes"
+      "Cards instead of board",
+      "Board only",
+      "No drawing",
+      "Dice"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Pictionary Man emphasizes guessing what?",
+    "q": "Pictionary Man features?",
     "choices": [
-      "Songs",
-      "Movies/People/Phrases",
-      "Math",
-      "Weather"
+      "Doodler",
+      "Robot",
+      "Audio",
+      "Spinner"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Compared to base Pictionary, Pictionary Man adds?",
+    "q": "Designer is?",
     "choices": [
-      "Less art skill needed",
-      "More art skill",
-      "Fewer players",
-      "A board"
+      "Robert Angel",
+      "Klaus Teuber",
+      "Reiner Knizia",
+      "Bruno Cathala"
     ],
-    "correct": 0
+    "answer": 0
+  },
+  {
+    "q": "Pictionary uses how many dice?",
+    "choices": [
+      "1",
+      "0",
+      "3",
+      "6"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Default round time is?",
+    "choices": [
+      "1 minute",
+      "30 seconds",
+      "2 minutes",
+      "5 minutes"
+    ],
+    "answer": 0
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
-export function initialState(seed: number, _settings: PictionaryManQuizSettings): PictionaryManQuizState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+
+const CFG = { totalQuestions: Math.min(10, PictionaryManQuiz_QUESTIONS.length), pool: PictionaryManQuiz_QUESTIONS };
+
+export interface PictionaryManQuizSettings { dummy: boolean; }
+export type PictionaryManQuizState = QuizState;
+export type PictionaryManQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: PictionaryManQuizSettings): PictionaryManQuizState {
+  return quizInitial(seed, CFG);
 }
+
 export function reducer(state: PictionaryManQuizState, action: PictionaryManQuizAction): PictionaryManQuizState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case"select":return state.submitted?state:{...state,selected:action.choice};
-    case"submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case"tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case"next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
-export function isTerminal(state: PictionaryManQuizState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function isTerminal(state: PictionaryManQuizState): { score: number } | null {
+  return quizScore(state);
+}
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

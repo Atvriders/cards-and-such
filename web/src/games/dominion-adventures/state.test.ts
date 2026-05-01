@@ -1,41 +1,39 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
-const S = { dummy: false };
-describe("DominionAdventures", () => {
-  it("starts in initial phase with score 0", () => {
-    const s = initialState(1, S);
-    expect(s.score).toBe(0);
+import { initialState, reducer, isTerminal, TOTAL_ROUNDS, TARGET_SCORE } from "./state.js";
+
+const S = { difficulty: "Standard" as const };
+
+describe("dominion-adventures", () => {
+  it("starts in choose phase with full morale", () => {
+    const s = initialState(42, S);
+    expect(s.phase).toBe("choose");
+    expect(s.progress).toBe(0);
+    expect(s.morale).toBeGreaterThan(0);
     expect(s.round).toBe(1);
   });
-  it("first draw produces items and possibly score", () => {
-    const s = reducer(initialState(1, S), { type: "draw" });
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+  it("playing a tactic advances round", () => {
+    const s0 = initialState(42, S);
+    const tid = "reserve";
+    const s1 = reducer(s0, { type: "play", tacticId: tid });
+    expect(s1.round).toBe(2);
+    expect(s1.lastTactic).toBe(tid);
   });
-  it("isTerminal null at start", () => {
+  it("isTerminal null until done", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("game ends after total rounds", () => {
+  it("game ends within total rounds", () => {
     let s = initialState(7, S);
-    for (let i = 0; i < TOTAL_ROUNDS; i++) {
-      s = reducer(s, { type: "draw" });
-      if (s.phase === "scored") s = reducer(s, { type: "next" });
+    let safety = 0;
+    while (s.phase !== "done" && safety++ < TOTAL_ROUNDS + 5) {
+      s = reducer(s, { type: "play", tacticId: "reserve" });
     }
     expect(s.phase).toBe("done");
     expect(isTerminal(s)).not.toBeNull();
-    expect(isTerminal(s)?.score).toBeGreaterThanOrEqual(0);
   });
-  it("non-negative score across multiple seeds", () => {
-    for (const seed of [1, 42, 1234]) {
-      let s = initialState(seed, S);
-      for (let i = 0; i < TOTAL_ROUNDS; i++) {
-        s = reducer(s, { type: "draw" });
-        if (s.phase === "scored") s = reducer(s, { type: "next" });
-      }
-      expect(s.score).toBeGreaterThanOrEqual(0);
-    }
+  it("invalid tactic id is a no-op", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "play", tacticId: "__bogus__" });
+    expect(s1).toBe(s0);
   });
-  it("TOTAL_ROUNDS is 10", () => {
-    expect(TOTAL_ROUNDS).toBe(10);
-  });
+  it("target score is positive", () => { expect(TARGET_SCORE).toBeGreaterThan(0); });
 });

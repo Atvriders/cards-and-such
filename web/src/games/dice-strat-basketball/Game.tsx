@@ -1,31 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { DiceStratBasketballState, DiceStratBasketballStateAction, DiceStratBasketballSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, TARGET_POINTS } from "./state.js";
+import type { DiceStratBasketballState, DiceStratBasketballAction, DiceStratBasketballSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
 export function DiceStratBasketballGame({ state, dispatch, onGameOver }: GameProps<DiceStratBasketballState, DiceStratBasketballSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dice-strat-basketball-wrap"><div className="dice-strat-basketball-done"><h2>Done!</h2><div className="dice-strat-basketball-final">You {state.myPoints} - Opp {state.oppPoints}</div></div></div>;
+    return (
+      <div className="distba-wrap">
+        <div className="distba-done">
+          <h2>Quarter</h2>
+          <div className="distba-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="distba-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="distba-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="dice-strat-basketball-wrap">
-      <div className="dice-strat-basketball-info">Round {state.round} / {TOTAL_ROUNDS} - First to {TARGET_POINTS}</div>
-      <div className="dice-strat-basketball-score">You {state.myPoints} - Opp {state.oppPoints}</div>
+    <div className="distba-wrap">
+      <div className="distba-head">
+        <span className="distba-round">Quarter {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="distba-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="dice-strat-basketball-row">{state.dice.map((d, i) => <div key={i} className="dice-strat-basketball-die">{d}</div>)}</div>
+        <div className="distba-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="distba-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="dice-strat-basketball-btn" onClick={() => dispatch({ type:"roll" } as DiceStratBasketballStateAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="distba-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="dice-strat-basketball-result">{state.lastDelta > 0 ? "+" + state.lastDelta + " You" : state.lastDelta < 0 ? (-state.lastDelta) + " Opp" : "Rally"}</div>
-          <button className="dice-strat-basketball-btn alt" onClick={() => dispatch({ type:"next" } as DiceStratBasketballStateAction)}>Next</button>
-        </>
-      )}
+      <div className="distba-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="distba-log">{line}</div>)}
+      </div>
+      <div className="distba-actions">
+        {state.phase === "rolling" && (
+          <button className="distba-btn primary" onClick={() => dispatch({ type: "roll" } as DiceStratBasketballAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="distba-btn alt" onClick={() => dispatch({ type: "next" } as DiceStratBasketballAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

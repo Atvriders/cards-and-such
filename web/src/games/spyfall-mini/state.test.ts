@@ -1,44 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
-import type { GameSettings } from "./state.js";
+import { initialState, reducer, isTerminal, SpyfallMini_CFG } from "./state.js";
 
-const S: GameSettings = { rounds: "5" };
+const S = { dummy: false };
 
 describe("spyfall-mini", () => {
-  it("creates the requested number of rounds", () => {
+  it("starts in guess phase with empty history", () => {
     const s = initialState(1, S);
-    expect(s.rounds.length).toBeGreaterThanOrEqual(4);
-    expect(s.rounds.length).toBeLessThanOrEqual(5);
+    expect(s.phase).toBe("guess");
+    expect(s.guesses.length).toBe(0);
+    expect(s.answer.length).toBe(SpyfallMini_CFG.answerLength);
   });
-  it("starts in playing phase with score 0", () => {
-    const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.score).toBe(0);
+  it("set updates working guess", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "set", position: 0, value: 1 });
+    expect(s1.current[0]).toBe(1);
   });
-  it("submitting correct answer awards positive score", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const s2 = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(100);
-    expect(s2.correctCount).toBeGreaterThanOrEqual(1);
+  it("submit appends a guess with feedback", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "submit" });
+    expect(s1.guesses.length).toBe(1);
   });
-  it("submitting wrong answer does not award score", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const wrong = ((r.correct + 1) % 4) as 0 | 1 | 2 | 3;
-    const s2 = reducer(reducer(s, { type: "select", choice: wrong }), { type: "submit" });
-    expect(s2.score).toBe(0);
+  it("isTerminal null until done", () => {
+    expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("isTerminal returns score when all rounds finished", () => {
+  it("submitting the answer wins", () => {
     let s = initialState(1, S);
-    expect(isTerminal(s)).toBeNull();
-    while (s.phase !== "done") {
-      const r = s.rounds[s.currentIndex]!;
-      s = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
-      s = reducer(s, { type: "next" });
+    for (let i = 0; i < SpyfallMini_CFG.answerLength; i++) {
+      s = reducer(s, { type: "set", position: i, value: s.answer[i]! });
     }
-    const t = isTerminal(s);
-    expect(t).not.toBeNull();
-    expect(t!.score).toBeGreaterThanOrEqual(0);
+    s = reducer(s, { type: "submit" });
+    expect(s.phase).toBe("won");
+    expect(isTerminal(s)).not.toBeNull();
+  });
+  it("running out of guesses ends the puzzle", () => {
+    let s = initialState(1, S);
+    for (let i = 0; i < SpyfallMini_CFG.maxGuesses; i++) {
+      s = reducer(s, { type: "submit" });
+    }
+    expect(s.phase === "won" || s.phase === "lost").toBe(true);
   });
 });

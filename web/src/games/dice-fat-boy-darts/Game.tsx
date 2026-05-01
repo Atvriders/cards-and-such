@@ -8,24 +8,45 @@ export function DiceFatBoyDartsGame({ state, dispatch, onGameOver }: GameProps<D
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-dicefatboydart-wrap"><div className="g-dicefatboydart-done"><h2>Match!</h2><div className="g-dicefatboydart-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="difaboda-wrap">
+        <div className="difaboda-done">
+          <h2>Round</h2>
+          <div className="difaboda-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="difaboda-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="difaboda-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-dicefatboydart-wrap">
-      <div className="g-dicefatboydart-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-dicefatboydart-score">{state.score} pts</div>
+    <div className="difaboda-wrap">
+      <div className="difaboda-head">
+        <span className="difaboda-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="difaboda-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-dicefatboydart-row">{state.dice.map((d, i) => <div key={i} className="g-dicefatboydart-die">{d}</div>)}</div>
+        <div className="difaboda-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="difaboda-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-dicefatboydart-btn" onClick={() => dispatch({ type:"roll" } as DiceFatBoyDartsAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="difaboda-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-dicefatboydart-result">+{state.lastPts}</div>
-          <button className="g-dicefatboydart-btn alt" onClick={() => dispatch({ type:"next" } as DiceFatBoyDartsAction)}>Next</button>
-        </>
-      )}
+      <div className="difaboda-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="difaboda-log">{line}</div>)}
+      </div>
+      <div className="difaboda-actions">
+        {state.phase === "rolling" && (
+          <button className="difaboda-btn primary" onClick={() => dispatch({ type: "roll" } as DiceFatBoyDartsAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="difaboda-btn alt" onClick={() => dispatch({ type: "next" } as DiceFatBoyDartsAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

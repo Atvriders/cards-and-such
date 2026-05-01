@@ -1,48 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const CARDS_PER_ROUND = 3;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Reserve", value: 3 },
-  { name: "Event", value: 4 },
-  { name: "Traveler", value: 5 },
-  { name: "Token", value: 2 },
-  { name: "Quest", value: 6 },
-];
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
 
-export interface DominionAdventuresSettings { dummy: boolean; }
-export interface DominionAdventuresState {
-  rngSeed: number;
-  round: number;
-  hand: number[];
-  lastPts: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+export const DominionAdventures_CFG: CoopEngineConfig = {
+  "totalRounds": 12,
+  "progressTarget": 65,
+  "threatPerRound": 3,
+  "startMorale": 4,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.4,
+  "scenarioLabel": "Quest Tokens",
+  "scenarioEmoji": "🗺️",
+  "progressLabel": "VP",
+  "threatLabel": "Empty Piles",
+  "moraleLabel": "Hand",
+  "tactics": [
+    {
+      "id": "reserve",
+      "label": "Reserve",
+      "emoji": "🏦",
+      "effort": 5,
+      "reliability": 0.8,
+      "threatPush": 0,
+      "desc": "Set aside."
+    },
+    {
+      "id": "buygold",
+      "label": "Gold",
+      "emoji": "🪙",
+      "effort": 4,
+      "reliability": 0.9,
+      "threatPush": 0,
+      "desc": "+money."
+    },
+    {
+      "id": "buyvp",
+      "label": "VP",
+      "emoji": "👑",
+      "effort": 6,
+      "reliability": 0.55,
+      "threatPush": 1,
+      "desc": "+score."
+    },
+    {
+      "id": "token",
+      "label": "Token",
+      "emoji": "🎟️",
+      "effort": 3,
+      "reliability": 0.9,
+      "threatPush": 1,
+      "desc": "Special."
+    }
+  ]
+};
+
+export interface DominionAdventuresSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type DominionAdventuresState = CoopState;
+export type DominionAdventuresAction = { type: "play"; tacticId: string };
+
+function diffNum(s: DominionAdventuresSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type DominionAdventuresAction = { type: "draw" } | { type: "next" };
-export function initialState(seed: number, _s: DominionAdventuresSettings): DominionAdventuresState {
-  return { rngSeed: seed, round: 1, hand: [], lastPts: 0, score: 0, phase: "drawing" };
+
+export function initialState(seed: number, s: DominionAdventuresSettings): DominionAdventuresState {
+  return coopInitial(seed, DominionAdventures_CFG, diffNum(s));
 }
-export function scoreHand(hand: number[]): number {
-  return hand.reduce((a,i) => a + (DECK[i]?.value ?? 0), 0);
-}
+
 export function reducer(state: DominionAdventuresState, action: DominionAdventuresAction): DominionAdventuresState {
-  if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand: number[] = [];
-    for (let i = 0; i < CARDS_PER_ROUND; i++) hand.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = scoreHand(hand);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, hand, lastPts: pts, score: state.score + pts, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, hand: [], lastPts: 0, phase: "drawing" };
-  }
+  if (action.type === "play") return coopStep(state, DominionAdventures_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: DominionAdventuresState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const r = coopScore(state, DominionAdventures_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = DominionAdventures_CFG.totalRounds;
+export const TARGET_SCORE = DominionAdventures_CFG.progressTarget;
+export const FLAVOR = "Reserve cards & tokens.";

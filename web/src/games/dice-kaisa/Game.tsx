@@ -1,31 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { DiceKaisaState, DiceKaisaStateAction, DiceKaisaSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, TARGET_POINTS } from "./state.js";
+import type { DiceKaisaState, DiceKaisaAction, DiceKaisaSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
 export function DiceKaisaGame({ state, dispatch, onGameOver }: GameProps<DiceKaisaState, DiceKaisaSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dice-kaisa-wrap"><div className="dice-kaisa-done"><h2>Done!</h2><div className="dice-kaisa-final">You {state.myPoints} - Opp {state.oppPoints}</div></div></div>;
+    return (
+      <div className="dickai-wrap">
+        <div className="dickai-done">
+          <h2>Shot</h2>
+          <div className="dickai-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dickai-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dickai-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="dice-kaisa-wrap">
-      <div className="dice-kaisa-info">Round {state.round} / {TOTAL_ROUNDS} - First to {TARGET_POINTS}</div>
-      <div className="dice-kaisa-score">You {state.myPoints} - Opp {state.oppPoints}</div>
+    <div className="dickai-wrap">
+      <div className="dickai-head">
+        <span className="dickai-round">Shot {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dickai-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="dice-kaisa-row">{state.dice.map((d, i) => <div key={i} className="dice-kaisa-die">{d}</div>)}</div>
+        <div className="dickai-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dickai-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="dice-kaisa-btn" onClick={() => dispatch({ type:"roll" } as DiceKaisaStateAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dickai-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="dice-kaisa-result">{state.lastDelta > 0 ? "+" + state.lastDelta + " You" : state.lastDelta < 0 ? (-state.lastDelta) + " Opp" : "Rally"}</div>
-          <button className="dice-kaisa-btn alt" onClick={() => dispatch({ type:"next" } as DiceKaisaStateAction)}>Next</button>
-        </>
-      )}
+      <div className="dickai-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dickai-log">{line}</div>)}
+      </div>
+      <div className="dickai-actions">
+        {state.phase === "rolling" && (
+          <button className="dickai-btn primary" onClick={() => dispatch({ type: "roll" } as DiceKaisaAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dickai-btn alt" onClick={() => dispatch({ type: "next" } as DiceKaisaAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

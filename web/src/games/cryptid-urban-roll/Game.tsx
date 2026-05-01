@@ -1,47 +1,21 @@
-import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { DeductionView } from "../_shared/DeductionView.js";
+import { deductionScore } from "../_shared/deduction-engine.js";
 import type { CryptidUrbanRollState, CryptidUrbanRollAction, CryptidUrbanRollSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_ROLLS } from "./state.js";
+import { CryptidUrbanRoll_CFG, FLAVOR } from "./state.js";
 import "./Game.css";
 
 export function CryptidUrbanRollGame({ state, dispatch, onGameOver }: GameProps<CryptidUrbanRollState, CryptidUrbanRollSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="rw-wrap">
-        <h3 className="rw-title">Cryptid: Urban Legends Roll</h3>
-        <div className="rw-done">
-          <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
   return (
-    <div className="rw-wrap">
-      <h3 className="rw-title">Cryptid: Urban Legends Roll</h3>
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
-      {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
-      )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
-        {state.cells.map((filled, i) => (
-          <button
-            key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
-            disabled={filled || state.phase !== "marking"}
-            onClick={() => dispatch({ type: "mark", index: i } as CryptidUrbanRollAction)}
-          >{filled ? state.cellValues[i] : ""}</button>
-        ))}
-      </div>
-      {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as CryptidUrbanRollAction)}>Roll</button>
-      )}
-      {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as CryptidUrbanRollAction)}>Skip</button>
-      )}
-    </div>
+    <DeductionView
+      prefix="cur"
+      cfg={CryptidUrbanRoll_CFG}
+      state={state}
+      onSet={(position, value) => dispatch({ type: "set", position, value } as CryptidUrbanRollAction)}
+      onSubmit={() => dispatch({ type: "submit" } as CryptidUrbanRollAction)}
+      onGameOver={onGameOver}
+      scoreFn={(s) => deductionScore(s, CryptidUrbanRoll_CFG)}
+      intro={FLAVOR}
+    />
   );
 }

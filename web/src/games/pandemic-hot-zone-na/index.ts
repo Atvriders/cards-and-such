@@ -1,18 +1,25 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PandemicHotZoneNaState, PandemicHotZoneNaAction, PandemicHotZoneNaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PandemicHotZoneNaGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = {
+  difficulty: { kind: "enum" as const, label: "Difficulty", options: ["Easy", "Standard", "Hard"] as const, default: "Standard" as const },
+} as const;
 type S = SettingsOf<typeof settings>;
-export const pandemicHotZoneNaPlugin: GamePlugin<PandemicHotZoneNaState, PandemicHotZoneNaAction, typeof settings> = {
+
+export const pandemic_hot_zone_na_plugin: GamePlugin<PandemicHotZoneNaState, PandemicHotZoneNaAction, typeof settings> = {
   id: "pandemic-hot-zone-na",
-  title: "Pandemic Hot Zone NA",
-  category: "dice",
+  title: "Pandemic Hot Zone N.A.",
+  category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Compact Pandemic on just North America.",
-  howToPlay: "Pandemic Hot Zone NA is a ten-round cooperative dice tribute to Pandemic: Hot Zone — North America, the compact 45-minute version of Leacock's classic concentrated on the continent. You and an AI ally roll dice each round to score together. The team needs 70 points by round 10. 🌎\n\nEach round, both dice are rolled and summed; that sum is added to your team score. Reach 70 and a +50 bonus is awarded. Across ten rounds, totals near 70 are common — making for a tense, often tight race against the disease.\n\nPress Play Round to roll, then Next Round to continue, and Finish on round 10. The game completes in well under a minute, distilling Hot Zone's quicker cooperative beat into a satisfying pocket-sized session ideal for any spare moment, and easily replayed many times to chase higher cooperative bonus scores together.",
+  description: "Faster Pandemic in three North American cities.",
+  howToPlay: "Pandemic Hot Zone N.A. is a cooperative solo adaptation. Each round you pick a tactic; you and an AI ally apply effort toward your objective while threat advances. Reach the target before threat overwhelms morale to win the bonus.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PandemicHotZoneNaSettings),
-  reducer, isTerminal, component: PandemicHotZoneNaGame,
+  reducer,
+  isTerminal,
+  component: PandemicHotZoneNaGame,
 };
+
+export default pandemic_hot_zone_na_plugin;

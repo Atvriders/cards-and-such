@@ -1,21 +1,21 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
+import type { SkittlesRubberState, SkittlesRubberAction, SkittlesRubberSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { SkittlesRubberGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const skittlesRubberPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
+export const skittlesRubberPlugin: GamePlugin<SkittlesRubberState, SkittlesRubberAction, typeof settings> = {
   id: "skittles-rubber",
-  title: "Skittles (Rubber)",
-  category: "board",
+  title: "Rubber Skittles",
+  category: "arcade",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Indoor rubber-ball-on-string skittles around central pin.",
-  howToPlay: "Skittles (Rubber) is the indoor table version where a rubber ball on a string swings around a central pin to knock down small skittles arranged in a circle. Across ten swings you press Swing and the ball arcs around the pin; a random outcome decides how many skittles fall: 0-7. The arc-swing rewards timing — about 15% chance of clearing all 7, 25% of 5-6, 30% of 3-4, 20% of 1-2, 10% miss. The CPU swings simultaneously each round. Total skittles knocked after ten rounds wins. Rubber skittles is a popular indoor game in British clubs and family pubs; smaller table-top sets are sold for home play. The mechanic here translates the swing-and-catch into a click-and-reveal. Press Swing each round; results appear immediately. Final scoreboard awards 100 points for the win, 25 for a tie. The variant has fewer pins than English alley-skittles but more rapid play, fitting into a few minutes of bar-time.",
+  description: 'Rubber Skittles: 2-die rolls = pins; classic strike/spare scoring across 12 frames.',
+  howToPlay: 'Rubber Skittles is a real, dice-driven simulation. Rubber Skittles: 2-die rolls = pins; classic strike/spare scoring across 12 frames.\\n\\nPress Roll to take your turn. Each round resolves immediately and the running score updates after every roll. Press Next to advance until the match ends.\\n\\nGame state is fully seeded for replay parity, and the log strip shows your most recent rolls.',
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as SkittlesRubberSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: SkittlesRubberGame,
 };

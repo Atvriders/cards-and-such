@@ -1,7 +1,8 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_ROUNDS = 10;
-export const DIE_COUNT = 2;
+export const TOTAL_ROUNDS = 8;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
 export interface DiceKegelnSettings { dummy: boolean; }
 
@@ -9,19 +10,28 @@ export interface DiceKegelnState {
   rngSeed: number;
   round: number;
   dice: number[] | null;
-  score: number;
   lastPts: number;
+  score: number;
+  history: number[];
+  log: string[];
   phase: "rolling" | "rolled" | "done";
+
 }
 
 export type DiceKegelnAction = { type: "roll" } | { type: "next" };
 
-function rollScore(dice: number[], _round: number): number {
-  return Math.max(0, Math.min(9, dice[0]! + dice[1]! - 1));
-}
-
 export function initialState(seed: number, _settings: DiceKegelnSettings): DiceKegelnState {
-  return { rngSeed: seed, round: 1, dice: null, score: 0, lastPts: 0, phase: "rolling" };
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+
+  };
 }
 
 export function reducer(state: DiceKegelnState, action: DiceKegelnAction): DiceKegelnState {
@@ -30,11 +40,27 @@ export function reducer(state: DiceKegelnState, action: DiceKegelnAction): DiceK
     if (state.phase !== "rolling") return state;
     const rng = mulberry32(state.rngSeed);
     const dice: number[] = [];
-    for (let i = 0; i < DIE_COUNT; i++) dice.push(1 + Math.floor(rng() * 6));
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
     const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = rollScore(dice, state.round);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, dice, score: state.score + pts, lastPts: pts, phase: isLast ? "done" : "rolled" };
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<DiceKegelnState> = {};
+    const sum = dice[0]! + dice[1]!;
+    const knocked = Math.max(0, Math.min(9, Math.round(((sum - 2) / 10) * 9)));
+    pts = knocked;
+    if (knocked === 9) { pts += 5; logEntry = `F${state.round}: STRIKE ${knocked}+5 bonus`; }
+    else if (knocked >= 8) { pts += 2; logEntry = `F${state.round}: SPARE ${knocked}+2`; }
+    else { logEntry = `F${state.round}: ${knocked} pins`; }
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
   if (action.type === "next") {
     if (state.phase !== "rolled") return state;
@@ -44,5 +70,5 @@ export function reducer(state: DiceKegelnState, action: DiceKegelnAction): DiceK
 }
 
 export function isTerminal(state: DiceKegelnState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

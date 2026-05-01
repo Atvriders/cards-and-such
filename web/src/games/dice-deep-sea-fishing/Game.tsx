@@ -8,24 +8,45 @@ export function DiceDeepSeaFishingGame({ state, dispatch, onGameOver }: GameProp
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-dicedeepseafish-wrap"><div className="g-dicedeepseafish-done"><h2>Match!</h2><div className="g-dicedeepseafish-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="didesefi-wrap">
+        <div className="didesefi-done">
+          <h2>Cast</h2>
+          <div className="didesefi-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="didesefi-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="didesefi-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-dicedeepseafish-wrap">
-      <div className="g-dicedeepseafish-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-dicedeepseafish-score">{state.score} pts</div>
+    <div className="didesefi-wrap">
+      <div className="didesefi-head">
+        <span className="didesefi-round">Cast {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="didesefi-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-dicedeepseafish-row">{state.dice.map((d, i) => <div key={i} className="g-dicedeepseafish-die">{d}</div>)}</div>
+        <div className="didesefi-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="didesefi-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-dicedeepseafish-btn" onClick={() => dispatch({ type:"roll" } as DiceDeepSeaFishingAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="didesefi-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-dicedeepseafish-result">+{state.lastPts}</div>
-          <button className="g-dicedeepseafish-btn alt" onClick={() => dispatch({ type:"next" } as DiceDeepSeaFishingAction)}>Next</button>
-        </>
-      )}
+      <div className="didesefi-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="didesefi-log">{line}</div>)}
+      </div>
+      <div className="didesefi-actions">
+        {state.phase === "rolling" && (
+          <button className="didesefi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceDeepSeaFishingAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="didesefi-btn alt" onClick={() => dispatch({ type: "next" } as DiceDeepSeaFishingAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

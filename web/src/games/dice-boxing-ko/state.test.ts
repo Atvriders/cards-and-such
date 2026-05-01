@@ -1,30 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS, DIE_COUNT, TARGET_POINTS, BASE_SCORE } from "./state.js";
-const S = { dummy: false };
+import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+const S = { dummy: true };
 describe("DiceBoxingKoState", () => {
-  it("starts at zero scores", () => {
+  it("starts in rolling phase", () => {
     const s = initialState(1, S);
-    expect(s.myPoints).toBe(0);
-    expect(s.oppPoints).toBe(0);
+    expect(s.phase).toBe("rolling");
+    expect(s.round).toBe(1);
   });
-  it("roll yields dice", () => {
-    const s = reducer(initialState(1, S), { type:"roll" });
-    expect(s.dice!.length).toBe(DIE_COUNT);
+  it("rolling produces dice and advances", () => {
+    const s = reducer(initialState(2, S), { type: "roll" });
+    expect(s.dice).not.toBeNull();
+    expect(["rolled", "done"]).toContain(s.phase);
   });
-  it("isTerminal null at start", () => {
-    expect(isTerminal(initialState(1, S))).toBeNull();
+  it("isTerminal null mid-game", () => {
+    expect(isTerminal(initialState(3, S))).toBeNull();
   });
-  it("ends after rounds with non-negative score", () => {
-    let s = initialState(1, S);
-    for (let i = 0; i < TOTAL_ROUNDS + 4; i++) {
-      if (s.phase === "rolling") s = reducer(s, { type:"roll" });
-      if (s.phase === "rolled") s = reducer(s, { type:"next" });
+  it("game finishes with non-negative score", () => {
+    let s = initialState(4, S);
+    for (let i = 0; i < TOTAL_ROUNDS * 4 + 10; i++) {
+      if (s.phase === "done") break;
+      if (s.phase === "rolling") s = reducer(s, { type: "roll" });
+      if (s.phase === "rolled") s = reducer(s, { type: "next" });
     }
     expect(s.phase).toBe("done");
-    expect(isTerminal(s)!.score).toBeGreaterThanOrEqual(0);
+    const t = isTerminal(s);
+    expect(t).not.toBeNull();
+    expect(t!.score).toBeGreaterThanOrEqual(0);
   });
-  it("base score and target are defined", () => {
-    expect(BASE_SCORE).toBeGreaterThan(0);
-    expect(TARGET_POINTS).toBeGreaterThan(0);
+  it("seed is deterministic", () => {
+    const play = (seed: number) => {
+      let s = initialState(seed, S);
+      for (let i = 0; i < TOTAL_ROUNDS * 4 + 10; i++) {
+        if (s.phase === "done") break;
+        if (s.phase === "rolling") s = reducer(s, { type: "roll" });
+        if (s.phase === "rolled") s = reducer(s, { type: "next" });
+      }
+      return s.score;
+    };
+    expect(play(99)).toBe(play(99));
   });
 });

@@ -1,2 +1,19 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
-@import "../../engines/quiz/quiz.css";
+.ccq-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#fee2e2;border-radius:14px}
+.ccq-header{display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.ccq-progress{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569}
+.ccq-score{font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:#b91c1c;font-weight:700}
+.ccq-q{font-size:1.1rem;font-weight:600;line-height:1.4;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #b91c1c}
+.ccq-choices{display:flex;flex-direction:column;gap:8px}
+.ccq-choice{cursor:pointer;text-align:left;padding:12px 14px;border-radius:10px;background:#fff;border:2px solid #e2e8f0;font-family:'Inter',system-ui,sans-serif;font-size:1rem;transition:all 120ms;color:#0f172a}
+.ccq-choice:hover:not(:disabled){border-color:#b91c1c;background:#f8fafc}
+.ccq-choice:disabled{cursor:not-allowed}
+.ccq-choice.ccq-correct{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.ccq-choice.ccq-wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.ccq-feedback{font-weight:700;text-align:center;padding:12px;border-radius:10px}
+.ccq-feedback.ccq-good{background:#dcfce7;color:#15803d}
+.ccq-feedback.ccq-bad{background:#fee2e2;color:#991b1b}
+.ccq-next{cursor:pointer;padding:10px 24px;border-radius:8px;background:#b91c1c;color:#fff;border:none;font-weight:700;font-size:1rem;align-self:center}
+.ccq-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
+.ccq-final-title{margin:0 0 8px;color:#b91c1c}
+.ccq-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#b91c1c}
+.ccq-streak{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#64748b}

@@ -1,12 +1,20 @@
-.dice-fantasy-football-draft-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;font-family:sans-serif;max-width:520px;margin:0 auto; }
-.dice-fantasy-football-draft-info { font-size:0.95rem;color:#555; }
-.dice-fantasy-football-draft-score { font-size:1.2rem;font-weight:800;color:#27ae60; }
-.dice-fantasy-football-draft-die { font-size:2.2rem;font-weight:900;min-width:60px;padding:12px 16px;background:#fff;border:2px solid #34495e;border-radius:10px;text-align:center;color:#2c3e50; }
-.dice-fantasy-football-draft-row { display:flex;flex-wrap:wrap;gap:10px;justify-content:center; }
-.dice-fantasy-football-draft-btn { padding:10px 22px;font-size:1rem;font-weight:700;border:none;border-radius:8px;cursor:pointer;color:#fff;background:#3498db; }
-.dice-fantasy-football-draft-btn:hover { background:#2980b9; }
-.dice-fantasy-football-draft-btn.alt { background:#e67e22; }
-.dice-fantasy-football-draft-result { font-size:1.05rem;font-weight:700;padding:8px 18px;border-radius:8px;background:#f0f4ff; }
-.dice-fantasy-football-draft-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
-.dice-fantasy-football-draft-done h2 { margin:0 0 8px; }
-.dice-fantasy-football-draft-final { font-size:1.4rem;color:#27ae60;font-weight:900; }
+.difafodr-wrap { display:flex;flex-direction:column;gap:14px;padding:22px;font-family:'Inter',sans-serif;max-width:640px;margin:0 auto;background:linear-gradient(135deg,#1a2a3a,#2f3f5a);color:#ecf0f1;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.25); }
+.difafodr-head { display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:1.05rem; }
+.difafodr-round { color:#fff;letter-spacing:0.5px; }
+.difafodr-score { color:#9b59b6;font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:800; }
+.difafodr-dice-row { display:flex;flex-wrap:wrap;justify-content:center;gap:10px; }
+.difafodr-die { background:#fefefe;color:#2c3e50;border:2px solid #34495e;border-radius:10px;font-weight:900;font-size:1.6rem;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;box-shadow:0 2px 6px rgba(0,0,0,0.18); }
+.difafodr-result { text-align:center;font-weight:900;font-size:1.4rem;color:#9b59b6;font-family:'JetBrains Mono',monospace; }
+.difafodr-log-strip { display:flex;flex-direction:column;gap:4px;min-height:18px; }
+.difafodr-log { font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#bdc3c7;text-align:center; }
+.difafodr-actions { display:flex;justify-content:center;gap:12px; }
+.difafodr-btn { padding:11px 28px;border:none;border-radius:8px;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;font-size:1rem;color:#fff; }
+.difafodr-btn.primary { background:#9b59b6; }
+.difafodr-btn.primary:hover { filter:brightness(1.1); }
+.difafodr-btn.alt { background:#e67e22; }
+.difafodr-btn.alt:hover { background:#ca6f1e; }
+.difafodr-done { text-align:center;padding:24px;background:rgba(0,0,0,0.3);border-radius:12px; }
+.difafodr-done h2 { margin:0 0 12px;color:#9b59b6; }
+.difafodr-final { font-size:2.4rem;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;margin-bottom:14px; }
+.difafodr-history { display:flex;flex-direction:column;gap:4px;margin-top:12px; }
+

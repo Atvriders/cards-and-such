@@ -1,42 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal, CockroachBluff_CFG } from "./state.js";
+
 const S = { dummy: false };
-describe("CockroachBluffState", () => {
-  it("starts in playing phase round 0", () => {
+
+describe("cockroach-bluff", () => {
+  it("starts in guess phase with empty history", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.currentIndex).toBe(0);
-    expect(s.score).toBe(0);
-    expect(s.rounds.length).toBeGreaterThanOrEqual(1);
+    expect(s.phase).toBe("guess");
+    expect(s.guesses.length).toBe(0);
+    expect(s.answer.length).toBe(CockroachBluff_CFG.answerLength);
   });
-  it("rounds have 4 choices", () => {
-    const s = initialState(1, S);
-    for (const r of s.rounds) {
-      expect(r.choices.length).toBe(4);
-      expect(r.correct).toBeGreaterThanOrEqual(0);
-      expect(r.correct).toBeLessThanOrEqual(3);
-    }
+  it("set updates working guess", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "set", position: 0, value: 1 });
+    expect(s1.current[0]).toBe(1);
   });
-  it("select updates selection", () => {
-    let s = initialState(1, S);
-    s = reducer(s, { type: "select", choice: 1 });
-    expect(s.selected).toBe(1);
+  it("submit appends a guess with feedback", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "submit" });
+    expect(s1.guesses.length).toBe(1);
   });
-  it("isTerminal null during play", () => {
+  it("isTerminal null until done", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("game ends after enough rounds", () => {
+  it("submitting the answer wins", () => {
     let s = initialState(1, S);
-    for (let i = 0; i < TOTAL_ROUNDS + 4; i++) {
-      if (s.phase === "playing") {
-        s = reducer(s, { type: "select", choice: 0 });
-        s = reducer(s, { type: "submit" });
-      }
-      if (s.phase === "result") s = reducer(s, { type: "next" });
+    for (let i = 0; i < CockroachBluff_CFG.answerLength; i++) {
+      s = reducer(s, { type: "set", position: i, value: s.answer[i]! });
     }
-    expect(s.phase).toBe("done");
-    const t = isTerminal(s);
-    expect(t).not.toBeNull();
-    expect(t!.score).toBeGreaterThanOrEqual(0);
+    s = reducer(s, { type: "submit" });
+    expect(s.phase).toBe("won");
+    expect(isTerminal(s)).not.toBeNull();
+  });
+  it("running out of guesses ends the puzzle", () => {
+    let s = initialState(1, S);
+    for (let i = 0; i < CockroachBluff_CFG.maxGuesses; i++) {
+      s = reducer(s, { type: "submit" });
+    }
+    expect(s.phase === "won" || s.phase === "lost").toBe(true);
   });
 });

@@ -4,31 +4,49 @@ import type { DiceCricketDartsState, DiceCricketDartsAction, DiceCricketDartsSet
 import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
-const NAMES = ["15","16","17","18","19","20"];
-
 export function DiceCricketDartsGame({ state, dispatch, onGameOver }: GameProps<DiceCricketDartsState, DiceCricketDartsSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-cricket-d-wrap"><div className="ds-cricket-d-done"><h2>Done!</h2><div className="ds-cricket-d-final">{state.score + state.marks.filter(m=>m>=3).length*5} pts</div></div></div>;
+    return (
+      <div className="dicrda-wrap">
+        <div className="dicrda-done">
+          <h2>Round</h2>
+          <div className="dicrda-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicrda-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicrda-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-cricket-d-wrap">
-      <div className="ds-cricket-d-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-cricket-d-score">{state.score} pts</div>
-      <div className="ds-cricket-d-row">{state.marks.map((m,i)=> <div key={i} className="ds-cricket-d-die" style={{opacity:m>=3?1:0.5}}>{NAMES[i]}: {m}/3</div>)}</div>
+    <div className="dicrda-wrap">
+      <div className="dicrda-head">
+        <span className="dicrda-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicrda-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-cricket-d-row">{state.dice.map((d, i) => <div key={i} className="ds-cricket-d-die">{d}</div>)}</div>
+        <div className="dicrda-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicrda-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-cricket-d-btn" onClick={() => dispatch({ type:"roll" } as DiceCricketDartsAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicrda-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-cricket-d-result">+{state.lastPts}</div>
-          <button className="ds-cricket-d-btn alt" onClick={() => dispatch({ type:"next" } as DiceCricketDartsAction)}>Next</button>
-        </>
-      )}
+      <div className="dicrda-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicrda-log">{line}</div>)}
+      </div>
+      <div className="dicrda-actions">
+        {state.phase === "rolling" && (
+          <button className="dicrda-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCricketDartsAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicrda-btn alt" onClick={() => dispatch({ type: "next" } as DiceCricketDartsAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

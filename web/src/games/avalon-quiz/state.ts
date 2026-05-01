@@ -1,192 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface AvalonQuizSettings { questions: "10"; }
-export interface AvalonQuizState {
-  questions: QuizQuestion[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
-  score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
-}
-export type AvalonQuizAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
 
-const ALL_QUESTIONS: QuizQuestion[] = [
+export const AvalonQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Avalon's special evil role hidden from Merlin is…",
+    "q": "Avalon: Good guys are?",
     "choices": [
-      "Mordred",
-      "Morgana",
-      "Oberon",
-      "Percival"
+      "Knights of Round Table",
+      "Pirates",
+      "Mages",
+      "Dragons"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Percival sees…",
+    "q": "Bad guys?",
     "choices": [
-      "Mordred only",
-      "Merlin & Morgana mixed",
-      "All evil",
-      "Just Merlin"
+      "Mordred's minions",
+      "Rebels",
+      "Vampires",
+      "Aliens"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Oberon is special because…",
+    "q": "Quests are?",
     "choices": [
-      "Always the leader",
-      "Doesn't know other evil",
-      "Sees everyone",
-      "Cannot vote"
+      "Sent on missions",
+      "Drawn cards",
+      "Random",
+      "Voted"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Who can the Assassin kill at game end?",
+    "q": "Mission outcome?",
     "choices": [
-      "Anyone",
-      "Merlin to win",
-      "Percival only",
-      "The leader"
+      "Success or fail",
+      "Vote",
+      "Random",
+      "Skip"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "When does the Assassin guess?",
+    "q": "Win for good guys?",
     "choices": [
-      "Anytime",
-      "After 3 successful missions",
-      "After every mission",
-      "Round 1"
+      "3 successful quests",
+      "All quests",
+      "Vote out",
+      "Lie"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Merlin's primary risk is…",
+    "q": "Win for evil?",
     "choices": [
-      "Being killed",
-      "Being voted off",
-      "Being outed and assassinated",
-      "Too many votes"
+      "3 failed quests or assassinate Merlin",
+      "Lie best",
+      "Vote in",
+      "Random"
     ],
-    "correct": 2
+    "answer": 0
   },
   {
-    "question": "Morgana appears as Merlin to whom?",
+    "q": "Special role: Merlin?",
     "choices": [
-      "Percival",
-      "Assassin",
-      "Mordred",
-      "Oberon"
+      "Sees evil",
+      "Heals",
+      "Spy",
+      "Vote 2x"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Standard 5-player Avalon evil count?",
+    "q": "Special role: Mordred?",
     "choices": [
-      "1",
+      "Hidden from Merlin",
+      "Vote 2x",
+      "Heals",
+      "Spy"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Player count?",
+    "choices": [
+      "5–10",
       "2",
-      "3",
-      "4"
+      "20+",
+      "Solo"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Best Merlin behaviour?",
+    "q": "Released in?",
     "choices": [
-      "Lead aggressively",
-      "Approve confidently without leading",
-      "Speak last",
-      "Reject everything"
+      "2012",
+      "2005",
+      "2020",
+      "1995"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Why include Mordred?",
+    "q": "Avalon is by?",
     "choices": [
-      "More fails needed",
-      "To balance Merlin's info",
-      "Extra mission",
-      "Reduce votes"
+      "Indie Boards & Cards",
+      "Jackbox",
+      "Hasbro",
+      "Asmodee"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Standard mission-five fails-needed?",
+    "q": "Lake of Lady?",
     "choices": [
-      "1",
-      "2 (in 7+)",
-      "1 always",
-      "Always 1 except for 7+ which can be 2"
+      "Reveals alignment",
+      "Heals",
+      "Skips",
+      "Lies"
     ],
-    "correct": 3
-  },
-  {
-    "question": "Percival outing themselves is…",
-    "choices": [
-      "Always wrong",
-      "Sometimes right to draw fire from Merlin",
-      "Forbidden",
-      "Only round 5"
-    ],
-    "correct": 1
+    "answer": 0
   }
 ];
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
+const CFG = { totalQuestions: Math.min(10, AvalonQuiz_QUESTIONS.length), pool: AvalonQuiz_QUESTIONS };
 
-export function initialState(seed: number, _settings: AvalonQuizSettings): AvalonQuizState {
-  const rng = mulberry32(seed);
-  const pool = shuffle([...ALL_QUESTIONS], rng).slice(0, 10);
-  const questions = pool.map(q => {
-    const idx = q.choices.map((c, i) => ({ c, i }));
-    const s = shuffle(idx, rng);
-    const newCorrect = s.findIndex(x => x.i === q.correct) as 0 | 1 | 2 | 3;
-    return { ...q, choices: s.map(x => x.c) as [string, string, string, string], correct: newCorrect };
-  });
-  return { questions, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
+export interface AvalonQuizSettings { dummy: boolean; }
+export type AvalonQuizState = QuizState;
+export type AvalonQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: AvalonQuizSettings): AvalonQuizState {
+  return quizInitial(seed, CFG);
 }
 
 export function reducer(state: AvalonQuizState, action: AvalonQuizAction): AvalonQuizState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const q = state.questions[state.currentIndex]!;
-      const ok = state.selected === q.correct;
-      return {
-        ...state,
-        submitted: true,
-        score: state.score + (ok ? 100 : 0),
-        correctCount: state.correctCount + (ok ? 1 : 0),
-        phase: "result",
-      };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.questions.length
-        ? { ...state, phase: "done" }
-        : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default:
-      return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
 
 export function isTerminal(state: AvalonQuizState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return quizScore(state);
 }
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

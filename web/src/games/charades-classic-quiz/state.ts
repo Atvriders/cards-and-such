@@ -1,125 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface CharadesClassicQuizSettings { questions: "10"; }
-export interface CharadesClassicQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type CharadesClassicQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
+
+export const CharadesClassicQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Charades players communicate by?",
+    "q": "Charades is mostly?",
     "choices": [
-      "Silent miming only",
-      "Whispering",
-      "Drawing pictures",
-      "Reading aloud"
+      "Acting silently",
+      "Drawing",
+      "Singing",
+      "Roll dice"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "The signal for 'movie title' often is?",
+    "q": "Charades originated as?",
     "choices": [
-      "Cranking an old film camera",
-      "Holding up a book",
-      "Flapping arms",
-      "Sitting down"
+      "Riddle game",
+      "Card game",
+      "Dice",
+      "Computer"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "The signal for 'book title' often is?",
+    "q": "Categories include?",
     "choices": [
-      "Hands palm-out, opened like pages",
-      "Snapping fingers",
-      "Pointing up",
-      "Hopping"
+      "Movies, books, songs",
+      "Numbers",
+      "Colors",
+      "Foods only"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Number of syllables is shown by?",
+    "q": "Reverse Charades has?",
     "choices": [
-      "Tapping that many fingers on the forearm",
-      "Stomping feet",
-      "Sticking out tongue",
-      "Waving"
+      "Group acts to one guesser",
+      "Solo act",
+      "Vote",
+      "Sing"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "'Sounds like' is signalled by?",
+    "q": "Player count?",
     "choices": [
-      "Tugging the earlobe",
-      "Shrugging",
-      "Closing eyes",
-      "Touching nose"
+      "4+",
+      "2",
+      "20+",
+      "Solo"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "'The whole concept' is signalled by?",
+    "q": "Charades typically uses?",
     "choices": [
-      "Sweeping arms in a wide circle",
-      "Crossing arms",
-      "Pointing down",
-      "Snapping"
+      "Timer",
+      "Dice",
+      "Spinner",
+      "Cards only"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Charades has roots in?",
+    "q": "Common gesture: book?",
     "choices": [
-      "18th-century French parlour games",
-      "Ancient Egypt",
-      "Modern Japan",
-      "1990s America"
+      "Open hands",
+      "Cup ear",
+      "Tap arm",
+      "Crank"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "A typical Charades round timer is?",
+    "q": "Common gesture: movie?",
     "choices": [
-      "About a minute or two",
-      "30 seconds flat",
-      "Ten minutes",
-      "No timer ever"
+      "Crank old camera",
+      "Open book",
+      "Tap arm",
+      "Cup ear"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Charades is best with?",
+    "q": "Common gesture: TV?",
     "choices": [
-      "Two or more teams",
-      "Solo only",
-      "Exactly two players",
-      "A judge alone"
+      "Box with hands",
+      "Open hands",
+      "Cup ear",
+      "Crank"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Charades' mood is best described as?",
+    "q": "Common gesture: song?",
     "choices": [
-      "Goofy team-spirited fun",
-      "Strategic auction",
-      "Math drill",
-      "Silent puzzle solo"
+      "Open mouth, music notes",
+      "Crank",
+      "Open book",
+      "Tap"
     ],
-    "correct": 0
+    "answer": 0
+  },
+  {
+    "q": "Sounds-like gesture?",
+    "choices": [
+      "Tug ear",
+      "Crank",
+      "Open book",
+      "Tap"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Categories on cards include?",
+    "choices": [
+      "People, places, things",
+      "Numbers",
+      "Music notes",
+      "Food"
+    ],
+    "answer": 0
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
-export function initialState(seed: number, _settings: CharadesClassicQuizSettings): CharadesClassicQuizState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+
+const CFG = { totalQuestions: Math.min(10, CharadesClassicQuiz_QUESTIONS.length), pool: CharadesClassicQuiz_QUESTIONS };
+
+export interface CharadesClassicQuizSettings { dummy: boolean; }
+export type CharadesClassicQuizState = QuizState;
+export type CharadesClassicQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: CharadesClassicQuizSettings): CharadesClassicQuizState {
+  return quizInitial(seed, CFG);
 }
+
 export function reducer(state: CharadesClassicQuizState, action: CharadesClassicQuizAction): CharadesClassicQuizState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case "select":return state.submitted?state:{...state,selected:action.choice};
-    case "submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case "tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case "next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
-export function isTerminal(state: CharadesClassicQuizState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function isTerminal(state: CharadesClassicQuizState): { score: number } | null {
+  return quizScore(state);
+}
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

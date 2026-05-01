@@ -1,45 +1,62 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { Drawful2QuizState, Drawful2QuizAction } from "./state.js";
-import { isTerminal, QUESTIONS } from "./state.js";
+import type { Drawful2QuizState, Drawful2QuizAction, Drawful2QuizSettings } from "./state.js";
+import { isTerminal, TOTAL_QUESTIONS } from "./state.js";
 import "./Game.css";
 
-export function Drawful2Quiz({ state, dispatch, onGameOver }: GameProps<Drawful2QuizState, { rounds: "10" }>): JSX.Element {
-  const terminal = isTerminal(state);
-  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
+const P = "dr2q";
 
-  if (state.phase === "gameover") return (
-    <div className="g-wrap"><h2>Game Over</h2><p className="g-final">Score: {state.score} / 1000</p></div>
-  );
-
-  const qi = state.order[state.index];
-  if (qi === undefined) return <div className="g-wrap">Loading…</div>;
-  const q = QUESTIONS[qi]!;
-
-  return (
-    <div className="g-wrap">
-      <div className="g-header">
-        <span>Q {state.index + 1} / {QUESTIONS.length}</span>
-        <span className="g-score">Score: {state.score}</span>
+export function Drawful2QuizGame({ state, dispatch, onGameOver }: GameProps<Drawful2QuizState, Drawful2QuizSettings>): JSX.Element {
+  const [start, setStart] = useState<number>(() => Date.now());
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  useEffect(() => { if (state.phase === "ask") setStart(Date.now()); }, [state.current, state.phase]);
+  if (state.phase === "done") {
+    return (
+      <div className={`${P}-wrap`}>
+        <div className={`${P}-final`}>
+          <h2 className={`${P}-final-title`}>Drawful 2 Quiz — Complete</h2>
+          <div className={`${P}-final-score`}>{state.score} pts</div>
+          <div className={`${P}-streak`}>{state.questions.length} questions answered</div>
+        </div>
       </div>
-      <div className="g-q">{q.q}</div>
-      <div className="g-options">
-        {q.a.map((opt, i) => {
-          let cls = "g-opt";
-          if (state.phase === "answered") {
-            if (i === q.c) cls += " right";
-            else if (i === state.selected) cls += " wrong";
-          }
+    );
+  }
+  const q = state.questions[state.current];
+  if (!q) return <div className={`${P}-wrap`}>Loading…</div>;
+  return (
+    <div className={`${P}-wrap`}>
+      <div className={`${P}-header`}>
+        <span className={`${P}-progress`}>Q{state.current + 1} / {TOTAL_QUESTIONS}</span>
+        <span className={`${P}-score`}>Score {state.score} · 🔥 {state.streak}</span>
+      </div>
+      <div className={`${P}-q`}>{q.q}</div>
+      <div className={`${P}-choices`}>
+        {q.choices.map((c, i) => {
+          const isSel = state.lastAnswerIdx === i;
+          const cls = state.phase === "feedback"
+            ? i === q.answer ? `${P}-choice ${P}-correct` : isSel ? `${P}-choice ${P}-wrong` : `${P}-choice`
+            : `${P}-choice`;
           return (
-            <button key={i} className={cls} disabled={state.phase !== "ready"}
-              onClick={() => dispatch({ type: "answer", choice: i } as Drawful2QuizAction)}>
-              {opt}
-            </button>
+            <button
+              key={i}
+              className={cls}
+              disabled={state.phase !== "ask"}
+              type="button"
+              onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as Drawful2QuizAction)}
+            >{c}</button>
           );
         })}
       </div>
-      {state.phase === "answered" && (
-        <button className="g-btn" onClick={() => dispatch({ type: "next" } as Drawful2QuizAction)}>Next</button>
+      {state.phase === "feedback" && (
+        <>
+          <div className={`${P}-feedback ${state.lastCorrect ? P + "-good" : P + "-bad"}`}>
+            {state.lastCorrect ? "Correct!" : `Answer: ${q.choices[q.answer]}`}
+          </div>
+          <button className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as Drawful2QuizAction)}>
+            {state.current + 1 >= TOTAL_QUESTIONS ? "See Results" : "Next"}
+          </button>
+        </>
       )}
     </div>
   );

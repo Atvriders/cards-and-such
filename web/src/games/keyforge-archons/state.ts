@@ -1,48 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const CARDS_PER_ROUND = 3;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Brobnar", value: 3 },
-  { name: "Dis", value: 4 },
-  { name: "Logos", value: 5 },
-  { name: "Mars", value: 2 },
-  { name: "Untamed", value: 6 },
-];
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
 
-export interface KeyforgeArchonsSettings { dummy: boolean; }
-export interface KeyforgeArchonsState {
-  rngSeed: number;
-  round: number;
-  hand: number[];
-  lastPts: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+export const KeyforgeArchons_CFG: CoopEngineConfig = {
+  "totalRounds": 10,
+  "progressTarget": 60,
+  "threatPerRound": 3,
+  "startMorale": 4,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.35,
+  "scenarioLabel": "Archon Forge",
+  "scenarioEmoji": "🗝️",
+  "progressLabel": "Aember",
+  "threatLabel": "Opponent Aember",
+  "moraleLabel": "Keys",
+  "tactics": [
+    {
+      "id": "reap",
+      "label": "Reap",
+      "emoji": "🌾",
+      "effort": 4,
+      "reliability": 0.9,
+      "threatPush": 0,
+      "desc": "+aember."
+    },
+    {
+      "id": "fight",
+      "label": "Fight",
+      "emoji": "⚔️",
+      "effort": 5,
+      "reliability": 0.7,
+      "threatPush": 1,
+      "desc": "Remove enemy."
+    },
+    {
+      "id": "forge",
+      "label": "Forge Key",
+      "emoji": "🗝️",
+      "effort": 6,
+      "reliability": 0.5,
+      "threatPush": 2,
+      "desc": "Major."
+    },
+    {
+      "id": "draw",
+      "label": "Draw",
+      "emoji": "🃏",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 0,
+      "desc": "Card."
+    }
+  ]
+};
+
+export interface KeyforgeArchonsSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type KeyforgeArchonsState = CoopState;
+export type KeyforgeArchonsAction = { type: "play"; tacticId: string };
+
+function diffNum(s: KeyforgeArchonsSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type KeyforgeArchonsAction = { type: "draw" } | { type: "next" };
-export function initialState(seed: number, _s: KeyforgeArchonsSettings): KeyforgeArchonsState {
-  return { rngSeed: seed, round: 1, hand: [], lastPts: 0, score: 0, phase: "drawing" };
+
+export function initialState(seed: number, s: KeyforgeArchonsSettings): KeyforgeArchonsState {
+  return coopInitial(seed, KeyforgeArchons_CFG, diffNum(s));
 }
-export function scoreHand(hand: number[]): number {
-  return hand.reduce((a,i) => a + (DECK[i]?.value ?? 0), 0);
-}
+
 export function reducer(state: KeyforgeArchonsState, action: KeyforgeArchonsAction): KeyforgeArchonsState {
-  if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand: number[] = [];
-    for (let i = 0; i < CARDS_PER_ROUND; i++) hand.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = scoreHand(hand);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, hand, lastPts: pts, score: state.score + pts, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, hand: [], lastPts: 0, phase: "drawing" };
-  }
+  if (action.type === "play") return coopStep(state, KeyforgeArchons_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: KeyforgeArchonsState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const r = coopScore(state, KeyforgeArchons_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = KeyforgeArchons_CFG.totalRounds;
+export const TARGET_SCORE = KeyforgeArchons_CFG.progressTarget;
+export const FLAVOR = "Forge three keys before the AI Archon.";

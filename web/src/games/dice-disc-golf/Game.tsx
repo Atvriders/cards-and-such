@@ -1,31 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceDiscGolfState, DiceDiscGolfAction, DiceDiscGolfSettings } from "./state.js";
-import { isTerminal, TOTAL_HOLES, PAR } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
 export function DiceDiscGolfGame({ state, dispatch, onGameOver }: GameProps<DiceDiscGolfState, DiceDiscGolfSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-disc-golf-wrap"><div className="ds-disc-golf-done"><h2>Done!</h2><div className="ds-disc-golf-final">{state.totalStrokes} strokes (par {PAR * TOTAL_HOLES})</div></div></div>;
+    return (
+      <div className="didigo-wrap">
+        <div className="didigo-done">
+          <h2>Hole</h2>
+          <div className="didigo-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="didigo-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="didigo-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-disc-golf-wrap">
-      <div className="ds-disc-golf-info">Hole {state.hole} / {TOTAL_HOLES} — Par {PAR}</div>
-      <div className="ds-disc-golf-score">{state.totalStrokes} strokes</div>
+    <div className="didigo-wrap">
+      <div className="didigo-head">
+        <span className="didigo-round">Hole {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="didigo-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-disc-golf-row">{state.dice.map((d, i) => <div key={i} className="ds-disc-golf-die">{d}</div>)}</div>
+        <div className="didigo-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="didigo-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-disc-golf-btn" onClick={() => dispatch({ type:"roll" } as DiceDiscGolfAction)}>Throw</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="didigo-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-disc-golf-result">{state.strokes} strokes this hole</div>
-          <button className="ds-disc-golf-btn alt" onClick={() => dispatch({ type:"next" } as DiceDiscGolfAction)}>Next Hole</button>
-        </>
-      )}
+      <div className="didigo-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="didigo-log">{line}</div>)}
+      </div>
+      <div className="didigo-actions">
+        {state.phase === "rolling" && (
+          <button className="didigo-btn primary" onClick={() => dispatch({ type: "roll" } as DiceDiscGolfAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="didigo-btn alt" onClick={() => dispatch({ type: "next" } as DiceDiscGolfAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,21 +1,21 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
+import type { QuoitsEnglishState, QuoitsEnglishAction, QuoitsEnglishSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { QuoitsEnglishGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const quoitsEnglishPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
+export const quoitsEnglishPlugin: GamePlugin<QuoitsEnglishState, QuoitsEnglishAction, typeof settings> = {
   id: "quoits-english",
-  title: "Quoits (English)",
-  category: "board",
+  title: "English Quoits",
+  category: "arcade",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Ring-throw at iron hob; closest ring scores.",
-  howToPlay: "Quoits (English) has you throw a metal ring at a fixed iron hob across a pub yard. Across twelve throws press Toss; a random outcome decides where your ring lands: ringer (ring around the hob, 6 points), close (1 point), distant (0 points), or knocking off the CPU's ring (gain 2). About 12% chance for a ringer, 35% for close, 50% distant, 3% knock-off. The CPU tosses simultaneously each round. Total points after twelve throws wins. English quoits is one of the oldest pub games, dating to medieval village greens. Modern leagues in the North of England play to specific rules with regional variations. The metal ring weighs 2-4 pounds in real life; here we represent the result probabilistically. Press Toss to advance each round; ringers are dramatically announced. Final scoreboard awards 100 points for the win, 25 for a tie. The English version uses lighter rings than Scots quoits, on a shorter pitch, with a corresponding higher rate of ringer scoring.",
+  description: 'English Quoits: throw to score; bag/ring on board = points; race to 21.',
+  howToPlay: 'English Quoits is a real, dice-driven simulation. English Quoits: throw to score; bag/ring on board = points; race to 21.\\n\\nPress Roll to take your turn. Each round resolves immediately and the running score updates after every roll. Press Next to advance until the match ends.\\n\\nGame state is fully seeded for replay parity, and the log strip shows your most recent rolls.',
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as QuoitsEnglishSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: QuoitsEnglishGame,
 };

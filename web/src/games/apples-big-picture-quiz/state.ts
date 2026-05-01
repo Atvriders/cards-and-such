@@ -1,125 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface ApplesBigPictureQuizSettings { questions: "10"; }
-export interface ApplesBigPictureQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type ApplesBigPictureQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
+
+export const ApplesBigPictureQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Apples to Apples Big Picture replaces what?",
+    "q": "Apples to Apples uses?",
     "choices": [
-      "Adjectives with images",
-      "Nouns with images",
-      "Both with images",
-      "Words with songs"
+      "Red & green cards",
+      "Dice",
+      "Spinner",
+      "Pawns"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Big Picture players judge based on?",
+    "q": "Judge picks?",
     "choices": [
-      "Best matching image to adjective",
-      "Random draw",
-      "Bidding",
-      "Vote count alone"
+      "Most fitting card",
+      "Highest",
+      "Random",
+      "Smallest"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Big Picture cards are best described as?",
+    "q": "Red cards are?",
     "choices": [
-      "Photos and illustrations",
-      "Plain text",
+      "Nouns",
+      "Adjectives",
       "Numbers",
-      "Music samples"
+      "Pictures"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Big Picture suits which players best?",
+    "q": "Green cards are?",
     "choices": [
-      "Visual learners",
-      "Math majors",
-      "Babies",
-      "Pros only"
+      "Adjectives",
+      "Nouns",
+      "Verbs",
+      "Numbers"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Big Picture is sized for how many players?",
-    "choices": [
-      "1",
-      "2 only",
-      "4 to 10",
-      "30+"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Big Picture rotation rules match?",
-    "choices": [
-      "Original rules",
-      "Solo only",
-      "Auction only",
-      "Drafting"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Apples to Apples publisher is?",
+    "q": "Apples to Apples is by?",
     "choices": [
       "Mattel",
       "Hasbro",
-      "Ravensburger",
-      "Mattel/Out of the Box originally"
+      "Out of the Box",
+      "Asmodee"
     ],
-    "correct": 3
+    "answer": 2
   },
   {
-    "question": "Big Picture rounds can be?",
+    "q": "Player count?",
     "choices": [
-      "Quick or extended like base",
-      "Five minutes minimum",
-      "All night",
-      "Always 30 seconds"
+      "4–10",
+      "2",
+      "20+",
+      "Solo"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Big Picture emphasizes?",
+    "q": "Released in?",
     "choices": [
-      "Visual interpretation",
-      "Memorization",
-      "Math",
-      "Speed"
+      "1999",
+      "2005",
+      "2015",
+      "1995"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Players compare images to what kind of card?",
+    "q": "Card to win is?",
     "choices": [
-      "Green apple adjective",
-      "Yellow apple",
-      "Red apple",
-      "Black apple"
+      "Green",
+      "Red",
+      "Black",
+      "Blue"
     ],
-    "correct": 0
+    "answer": 0
+  },
+  {
+    "q": "Game ends when?",
+    "choices": [
+      "Player gets enough green cards",
+      "Time",
+      "Cards run out",
+      "Vote"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Apples to Apples Junior is for?",
+    "choices": [
+      "Kids",
+      "Adults only",
+      "Pets",
+      "Babies"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Big Picture variant uses?",
+    "choices": [
+      "Pictures",
+      "Dice",
+      "Words only",
+      "Sounds"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Cards Against Humanity is inspired by?",
+    "choices": [
+      "Apples to Apples",
+      "Pictionary",
+      "Charades",
+      "Hanabi"
+    ],
+    "answer": 0
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
-export function initialState(seed: number, _settings: ApplesBigPictureQuizSettings): ApplesBigPictureQuizState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+
+const CFG = { totalQuestions: Math.min(10, ApplesBigPictureQuiz_QUESTIONS.length), pool: ApplesBigPictureQuiz_QUESTIONS };
+
+export interface ApplesBigPictureQuizSettings { dummy: boolean; }
+export type ApplesBigPictureQuizState = QuizState;
+export type ApplesBigPictureQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: ApplesBigPictureQuizSettings): ApplesBigPictureQuizState {
+  return quizInitial(seed, CFG);
 }
+
 export function reducer(state: ApplesBigPictureQuizState, action: ApplesBigPictureQuizAction): ApplesBigPictureQuizState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case"select":return state.submitted?state:{...state,selected:action.choice};
-    case"submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case"tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case"next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
-export function isTerminal(state: ApplesBigPictureQuizState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function isTerminal(state: ApplesBigPictureQuizState): { score: number } | null {
+  return quizScore(state);
+}
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

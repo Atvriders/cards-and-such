@@ -1,84 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
-
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Most adults HAVE done:", choices: ["Eaten sushi", "Skydived", "Climbed Mt. Everest", "Met a president"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Travelled abroad", "Won lottery", "Met celebrity", "Owned a yacht"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Forgotten birthday", "Won marathon", "Acted in movie", "Skydived"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Burnt toast", "Climbed K2", "Won grammy", "Owned a tiger"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Lost keys", "Climbed Everest", "Met queen", "Won Oscar"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Late for work", "Won lottery", "Sailed Atlantic", "Met astronaut"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Watched a sunset", "Climbed Everest", "Won Oscar", "Met queen"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Eaten pizza", "Hosted Olympics", "Owned plane", "Climbed Everest"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Cooked dinner", "Won marathon", "Met president", "Climbed Everest"], correctIndex: 0 },
-  { prompt: "Most have done:", choices: ["Used google", "Climbed Everest", "Met queen", "Won Oscar"], correctIndex: 0 },
+export const NeverHaveIEverPick_QUESTIONS: QuizQuestion[] = [
+  {
+    "q": "In Never Have I Ever, what is a \"Skip\" worth?",
+    "choices": [
+      "0",
+      "1",
+      "2",
+      "5"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Best Never Have I Ever cards generally?",
+    "choices": [
+      "Spark debate",
+      "Boring",
+      "Numbers",
+      "Solo"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Never Have I Ever optimal player count?",
+    "choices": [
+      "3+",
+      "1",
+      "Pets",
+      "Robots"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Never Have I Ever typically last?",
+    "choices": [
+      "10–30 min",
+      "5 sec",
+      "Hours",
+      "Days"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "A great Never Have I Ever card asks?",
+    "choices": [
+      "Open opinions",
+      "Yes/no",
+      "Numbers",
+      "Photos"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Never Have I Ever pacing relies on?",
+    "choices": [
+      "Storytelling",
+      "Counting",
+      "Drawing",
+      "Numbers"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Never Have I Ever good with?",
+    "choices": [
+      "Friends/family",
+      "Strangers",
+      "Computers",
+      "Pets"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "If everyone agrees in Never Have I Ever?",
+    "choices": [
+      "Less interesting",
+      "More fun",
+      "Same",
+      "Won"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Never Have I Ever category most popular?",
+    "choices": [
+      "Hypotheticals",
+      "Math",
+      "Trivia",
+      "Sports"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Never Have I Ever risk?",
+    "choices": [
+      "Awkward moments",
+      "Boredom",
+      "Cheating",
+      "Loss"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Best follow-up to a Never Have I Ever answer?",
+    "choices": [
+      "Why?",
+      "No",
+      "Skip",
+      "Yes"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Never Have I Ever ages well with?",
+    "choices": [
+      "New cards/themes",
+      "Same cards",
+      "Numbers",
+      "None"
+    ],
+    "answer": 0
+  }
 ];
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
+const CFG = { totalQuestions: Math.min(10, NeverHaveIEverPick_QUESTIONS.length), pool: NeverHaveIEverPick_QUESTIONS };
 
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
+export interface NeverHaveIEverPickSettings { dummy: boolean; }
+export type NeverHaveIEverPickState = QuizState;
+export type NeverHaveIEverPickAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: NeverHaveIEverPickSettings): NeverHaveIEverPickState {
+  return quizInitial(seed, CFG);
 }
 
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
-  score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+export function reducer(state: NeverHaveIEverPickState, action: NeverHaveIEverPickAction): NeverHaveIEverPickState {
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
-
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function isTerminal(state: NeverHaveIEverPickState): { score: number } | null {
+  return quizScore(state);
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
-  }
-}
-
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
-}
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

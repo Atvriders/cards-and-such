@@ -8,24 +8,45 @@ export function DiceCarromGame({ state, dispatch, onGameOver }: GameProps<DiceCa
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-carrom-wrap"><div className="ds-carrom-done"><h2>Done!</h2><div className="ds-carrom-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="diccar-wrap">
+        <div className="diccar-done">
+          <h2>Round</h2>
+          <div className="diccar-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="diccar-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="diccar-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-carrom-wrap">
-      <div className="ds-carrom-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-carrom-score">{state.score} pts</div>
+    <div className="diccar-wrap">
+      <div className="diccar-head">
+        <span className="diccar-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="diccar-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-carrom-row">{state.dice.map((d, i) => <div key={i} className="ds-carrom-die">{d}</div>)}</div>
+        <div className="diccar-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="diccar-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-carrom-btn" onClick={() => dispatch({ type:"roll" } as DiceCarromAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="diccar-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-carrom-result">+{state.lastPts}</div>
-          <button className="ds-carrom-btn alt" onClick={() => dispatch({ type:"next" } as DiceCarromAction)}>Next</button>
-        </>
-      )}
+      <div className="diccar-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="diccar-log">{line}</div>)}
+      </div>
+      <div className="diccar-actions">
+        {state.phase === "rolling" && (
+          <button className="diccar-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCarromAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="diccar-btn alt" onClick={() => dispatch({ type: "next" } as DiceCarromAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

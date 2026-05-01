@@ -1,43 +1,75 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_TURNS = 10;
-export const MAX_THROW = 20;
+export const TOTAL_ROUNDS = 20;
+export const DICE_COUNT = 4;
+export const DICE_SIDES = 6;
 
-export interface RingTheBullSettings { dummy: boolean; }
-export interface RingTheBullState {
+export interface RingTheBullTossSettings { dummy: boolean; }
+
+export interface RingTheBullTossState {
   rngSeed: number;
-  turn: number;
-  score: number;
+  round: number;
+  dice: number[] | null;
   lastPts: number;
-  lastRoll: number;
-  phase: "ready" | "thrown" | "done";
-}
-export type RingTheBullAction = { type: "throw" } | { type: "next" };
-
-export function initialState(seed: number, _s: RingTheBullSettings): RingTheBullState {
-  return { rngSeed: seed, turn: 1, score: 0, lastPts: 0, lastRoll: 0, phase: "ready" };
+  score: number;
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  cpuScore: number;
 }
 
-export function reducer(state: RingTheBullState, action: RingTheBullAction): RingTheBullState {
+export type RingTheBullTossAction = { type: "roll" } | { type: "next" };
+
+export function initialState(seed: number, _settings: RingTheBullTossSettings): RingTheBullTossState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    cpuScore: 0,
+  };
+}
+
+export function reducer(state: RingTheBullTossState, action: RingTheBullTossAction): RingTheBullTossState {
   if (state.phase === "done") return state;
-  if (action.type === "throw" && state.phase === "ready") {
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
     const rng = mulberry32(state.rngSeed);
-    const a = rng(), b = rng(), c = rng();
-    const next = Math.floor(rng() * 2 ** 31);
-    const aim = (a + b + c) / 3;
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
     let pts = 0;
-    if (aim < 0.05) pts = MAX_THROW;
-    else if (aim < 0.2) pts = Math.floor(MAX_THROW * 0.7);
-    else if (aim < 0.5) pts = Math.floor(MAX_THROW * 0.4);
-    else if (aim < 0.8) pts = Math.floor(MAX_THROW * 0.2);
-    else pts = 0;
-    const isLast = state.turn >= TOTAL_TURNS;
-    return { ...state, rngSeed: next, score: state.score + pts, lastPts: pts, lastRoll: Math.floor(aim * 100), phase: isLast ? "done" : "thrown" };
+    let logEntry = "";
+    let extra: Partial<RingTheBullTossState> = {};
+    const me = dice[0]! + dice[1]!;
+    const cpu = dice[2]! + dice[3]!;
+    let myPts = me >= 11 ? 3 : me >= 8 ? 2 : me >= 5 ? 1 : 0;
+    let cpuPts = cpu >= 11 ? 3 : cpu >= 8 ? 2 : cpu >= 5 ? 1 : 0;
+    pts = myPts;
+    extra.cpuScore = state.cpuScore + cpuPts;
+    logEntry = `Round ${state.round}: you +${myPts}, CPU +${cpuPts}`;
+
+    const earlyWin = ((state.score + pts >= 25) || (extra.cpuScore !== undefined && extra.cpuScore >= 25));
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
-  if (action.type === "next" && state.phase === "thrown") {
-    return { ...state, turn: state.turn + 1, lastPts: 0, lastRoll: 0, phase: "ready" };
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
   }
   return state;
 }
 
-export function isTerminal(s: RingTheBullState): { score: number } | null { return s.phase === "done" ? { score: s.score } : null; }
+export function isTerminal(state: RingTheBullTossState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
+}

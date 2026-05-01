@@ -1,48 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const CARDS_PER_ROUND = 3;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Maid", value: 3 },
-  { name: "Senior", value: 5 },
-  { name: "Bath", value: 2 },
-  { name: "Town", value: 4 },
-  { name: "Event", value: 6 },
-];
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
 
-export interface TantoCuoreMaidsSettings { dummy: boolean; }
-export interface TantoCuoreMaidsState {
-  rngSeed: number;
-  round: number;
-  hand: number[];
-  lastPts: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+export const TantoCuoreMaids_CFG: CoopEngineConfig = {
+  "totalRounds": 12,
+  "progressTarget": 65,
+  "threatPerRound": 3,
+  "startMorale": 4,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.4,
+  "scenarioLabel": "Manor Service",
+  "scenarioEmoji": "🎀",
+  "progressLabel": "Love",
+  "threatLabel": "Bad Habits",
+  "moraleLabel": "Manor Order",
+  "tactics": [
+    {
+      "id": "hire",
+      "label": "Hire Maid",
+      "emoji": "👩",
+      "effort": 5,
+      "reliability": 0.8,
+      "threatPush": 0,
+      "desc": "Recruit."
+    },
+    {
+      "id": "event",
+      "label": "Event",
+      "emoji": "🎉",
+      "effort": 6,
+      "reliability": 0.55,
+      "threatPush": 1,
+      "desc": "Big effect."
+    },
+    {
+      "id": "clean",
+      "label": "Clean",
+      "emoji": "🧹",
+      "effort": 3,
+      "reliability": 0.9,
+      "threatPush": 2,
+      "desc": "Reduce bad habits."
+    },
+    {
+      "id": "rest",
+      "label": "Rest",
+      "emoji": "💤",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 1,
+      "desc": "Recover."
+    }
+  ]
+};
+
+export interface TantoCuoreMaidsSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type TantoCuoreMaidsState = CoopState;
+export type TantoCuoreMaidsAction = { type: "play"; tacticId: string };
+
+function diffNum(s: TantoCuoreMaidsSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type TantoCuoreMaidsAction = { type: "draw" } | { type: "next" };
-export function initialState(seed: number, _s: TantoCuoreMaidsSettings): TantoCuoreMaidsState {
-  return { rngSeed: seed, round: 1, hand: [], lastPts: 0, score: 0, phase: "drawing" };
+
+export function initialState(seed: number, s: TantoCuoreMaidsSettings): TantoCuoreMaidsState {
+  return coopInitial(seed, TantoCuoreMaids_CFG, diffNum(s));
 }
-export function scoreHand(hand: number[]): number {
-  return hand.reduce((a,i) => a + (DECK[i]?.value ?? 0), 0);
-}
+
 export function reducer(state: TantoCuoreMaidsState, action: TantoCuoreMaidsAction): TantoCuoreMaidsState {
-  if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand: number[] = [];
-    for (let i = 0; i < CARDS_PER_ROUND; i++) hand.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = scoreHand(hand);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, hand, lastPts: pts, score: state.score + pts, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, hand: [], lastPts: 0, phase: "drawing" };
-  }
+  if (action.type === "play") return coopStep(state, TantoCuoreMaids_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: TantoCuoreMaidsState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const r = coopScore(state, TantoCuoreMaids_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = TantoCuoreMaids_CFG.totalRounds;
+export const TARGET_SCORE = TantoCuoreMaids_CFG.progressTarget;
+export const FLAVOR = "Hire maids; manage the manor.";

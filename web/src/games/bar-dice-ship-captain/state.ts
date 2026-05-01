@@ -1,43 +1,89 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_TURNS = 10;
-export const MAX_THROW = 20;
+export const TOTAL_ROUNDS = 15;
+export const DICE_COUNT = 5;
+export const DICE_SIDES = 6;
 
-export interface ShipCaptainCrewSettings { dummy: boolean; }
-export interface ShipCaptainCrewState {
+export interface BarDiceShipCaptainSettings { dummy: boolean; }
+
+export interface BarDiceShipCaptainState {
   rngSeed: number;
-  turn: number;
-  score: number;
+  round: number;
+  dice: number[] | null;
   lastPts: number;
-  lastRoll: number;
-  phase: "ready" | "thrown" | "done";
+  score: number;
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  ship: boolean;
+  captain: boolean;
+  crew: boolean;
+  rolls: number;
 }
-export type ShipCaptainCrewAction = { type: "throw" } | { type: "next" };
 
-export function initialState(seed: number, _s: ShipCaptainCrewSettings): ShipCaptainCrewState {
-  return { rngSeed: seed, turn: 1, score: 0, lastPts: 0, lastRoll: 0, phase: "ready" };
+export type BarDiceShipCaptainAction = { type: "roll" } | { type: "next" };
+
+export function initialState(seed: number, _settings: BarDiceShipCaptainSettings): BarDiceShipCaptainState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    ship: false,
+    captain: false,
+    crew: false,
+    rolls: 0,
+  };
 }
 
-export function reducer(state: ShipCaptainCrewState, action: ShipCaptainCrewAction): ShipCaptainCrewState {
+export function reducer(state: BarDiceShipCaptainState, action: BarDiceShipCaptainAction): BarDiceShipCaptainState {
   if (state.phase === "done") return state;
-  if (action.type === "throw" && state.phase === "ready") {
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
     const rng = mulberry32(state.rngSeed);
-    const a = rng(), b = rng(), c = rng();
-    const next = Math.floor(rng() * 2 ** 31);
-    const aim = (a + b + c) / 3;
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
     let pts = 0;
-    if (aim < 0.05) pts = MAX_THROW;
-    else if (aim < 0.2) pts = Math.floor(MAX_THROW * 0.7);
-    else if (aim < 0.5) pts = Math.floor(MAX_THROW * 0.4);
-    else if (aim < 0.8) pts = Math.floor(MAX_THROW * 0.2);
-    else pts = 0;
-    const isLast = state.turn >= TOTAL_TURNS;
-    return { ...state, rngSeed: next, score: state.score + pts, lastPts: pts, lastRoll: Math.floor(aim * 100), phase: isLast ? "done" : "thrown" };
+    let logEntry = "";
+    let extra: Partial<BarDiceShipCaptainState> = {};
+    let ship = state.ship, captain = state.captain, crew = state.crew;
+    if (!ship && dice.includes(6)) ship = true;
+    if (ship && !captain && dice.includes(5)) captain = true;
+    if (ship && captain && !crew && dice.includes(4)) crew = true;
+    extra.ship = ship;
+    extra.captain = captain;
+    extra.crew = crew;
+    extra.rolls = state.rolls + 1;
+    if (ship && captain && crew) {
+      const cargo = dice.filter(d => d !== 6 && d !== 5 && d !== 4).reduce((a,b)=>a+b,0);
+      pts = cargo;
+      logEntry = `Round complete - cargo ${cargo}`;
+    } else {
+      logEntry = `Have: ${ship ? "SHIP " : ""}${captain ? "CAPT " : ""}${crew ? "CREW" : ""}`;
+    }
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
-  if (action.type === "next" && state.phase === "thrown") {
-    return { ...state, turn: state.turn + 1, lastPts: 0, lastRoll: 0, phase: "ready" };
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
   }
   return state;
 }
 
-export function isTerminal(s: ShipCaptainCrewState): { score: number } | null { return s.phase === "done" ? { score: s.score } : null; }
+export function isTerminal(state: BarDiceShipCaptainState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
+}

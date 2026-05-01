@@ -1,1 +1,19 @@
-@import "../../engines/quiz/quiz.css";
+.shq-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#e5e7eb;border-radius:14px}
+.shq-header{display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.shq-progress{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569}
+.shq-score{font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:#374151;font-weight:700}
+.shq-q{font-size:1.1rem;font-weight:600;line-height:1.4;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #374151}
+.shq-choices{display:flex;flex-direction:column;gap:8px}
+.shq-choice{cursor:pointer;text-align:left;padding:12px 14px;border-radius:10px;background:#fff;border:2px solid #e2e8f0;font-family:'Inter',system-ui,sans-serif;font-size:1rem;transition:all 120ms;color:#0f172a}
+.shq-choice:hover:not(:disabled){border-color:#374151;background:#f8fafc}
+.shq-choice:disabled{cursor:not-allowed}
+.shq-choice.shq-correct{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.shq-choice.shq-wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.shq-feedback{font-weight:700;text-align:center;padding:12px;border-radius:10px}
+.shq-feedback.shq-good{background:#dcfce7;color:#15803d}
+.shq-feedback.shq-bad{background:#fee2e2;color:#991b1b}
+.shq-next{cursor:pointer;padding:10px 24px;border-radius:8px;background:#374151;color:#fff;border:none;font-weight:700;font-size:1rem;align-self:center}
+.shq-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
+.shq-final-title{margin:0 0 8px;color:#374151}
+.shq-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#374151}
+.shq-streak{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#64748b}

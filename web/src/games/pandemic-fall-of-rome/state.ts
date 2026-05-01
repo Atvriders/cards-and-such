@@ -1,41 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const TARGET_SCORE = 70;
-export interface PandemicFallOfRomeSettings { dummy: boolean; }
-export interface PandemicFallOfRomeState {
-  rngSeed: number;
-  round: number;
-  playerRoll: number;
-  cpuRoll: number;
-  lastPts: number;
-  teamScore: number;
-  phase: "ready" | "rolled" | "done";
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
+
+export const PandemicFallOfRome_CFG: CoopEngineConfig = {
+  "totalRounds": 12,
+  "progressTarget": 65,
+  "threatPerRound": 4,
+  "startMorale": 3,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.3,
+  "scenarioLabel": "Barbarians at the Gates",
+  "scenarioEmoji": "🏛️",
+  "progressLabel": "Alliances",
+  "threatLabel": "Invasions",
+  "moraleLabel": "Cities held",
+  "tactics": [
+    {
+      "id": "battle",
+      "label": "Battle",
+      "emoji": "⚔️",
+      "effort": 5,
+      "reliability": 0.7,
+      "threatPush": 2,
+      "desc": "Engage barbarians directly."
+    },
+    {
+      "id": "forge",
+      "label": "Forge Alliance",
+      "emoji": "🤝",
+      "effort": 6,
+      "reliability": 0.55,
+      "threatPush": 0,
+      "desc": "Convert a tribe."
+    },
+    {
+      "id": "march",
+      "label": "March Legion",
+      "emoji": "🛡️",
+      "effort": 3,
+      "reliability": 0.95,
+      "threatPush": 2,
+      "desc": "Reposition troops."
+    },
+    {
+      "id": "fort",
+      "label": "Fortify",
+      "emoji": "🏰",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 1,
+      "desc": "Defensive gain."
+    }
+  ]
+};
+
+export interface PandemicFallOfRomeSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type PandemicFallOfRomeState = CoopState;
+export type PandemicFallOfRomeAction = { type: "play"; tacticId: string };
+
+function diffNum(s: PandemicFallOfRomeSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type PandemicFallOfRomeAction = { type: "play" } | { type: "next" };
-export function initialState(seed: number, _s: PandemicFallOfRomeSettings): PandemicFallOfRomeState {
-  return { rngSeed: seed, round: 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, teamScore: 0, phase: "ready" };
+
+export function initialState(seed: number, s: PandemicFallOfRomeSettings): PandemicFallOfRomeState {
+  return coopInitial(seed, PandemicFallOfRome_CFG, diffNum(s));
 }
+
 export function reducer(state: PandemicFallOfRomeState, action: PandemicFallOfRomeAction): PandemicFallOfRomeState {
-  if (state.phase === "done") return state;
-  if (action.type === "play") {
-    if (state.phase !== "ready") return state;
-    const rng = mulberry32(state.rngSeed);
-    const pr = 1 + Math.floor(rng() * 6);
-    const cr = 1 + Math.floor(rng() * 6);
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = pr + cr;
-    const newScore = state.teamScore + pts;
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, playerRoll: pr, cpuRoll: cr, lastPts: pts, teamScore: newScore, phase: isLast ? "done" : "rolled" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "rolled") return state;
-    return { ...state, round: state.round + 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, phase: "ready" };
-  }
+  if (action.type === "play") return coopStep(state, PandemicFallOfRome_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: PandemicFallOfRomeState): { score: number } | null {
-  if (state.phase !== "done") return null;
-  const bonus = state.teamScore >= TARGET_SCORE ? 50 : 0;
-  return { score: state.teamScore + bonus };
+  const r = coopScore(state, PandemicFallOfRome_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = PandemicFallOfRome_CFG.totalRounds;
+export const TARGET_SCORE = PandemicFallOfRome_CFG.progressTarget;
+export const FLAVOR = "Forge alliances before tribes sack Rome.";

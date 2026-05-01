@@ -1,125 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface TeeKoQuizSettings { questions: "10"; }
-export interface TeeKoQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type TeeKoQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
+
+export const TeeKoQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Tee K.O. challenges players to design what?",
+    "q": "Tee K.O. has players design?",
     "choices": [
       "T-shirts",
-      "Pants",
-      "Houses",
-      "Spaceships"
+      "Posters",
+      "Songs",
+      "Dance moves"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Tee K.O. uses what player input devices?",
+    "q": "Designs combine?",
     "choices": [
-      "Phones to draw and write",
-      "Console pads",
-      "Joycons",
-      "Stylus tablets only"
+      "Slogans + drawings",
+      "Photos",
+      "Music",
+      "Voices"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Tee K.O. combines which two assets?",
+    "q": "Tee K.O. is part of pack?",
     "choices": [
-      "Drawings and slogans",
-      "Maps and dice",
-      "Voices and music",
-      "Photos and text"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tee K.O. is in which Jackbox pack?",
-    "choices": [
-      "Party Pack 3",
+      "Pack 3",
       "Pack 1",
       "Pack 7",
-      "Pack 10"
+      "Pack 9"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "How are winners determined in Tee K.O.?",
+    "q": "Players vote on?",
     "choices": [
-      "Audience votes between matchups",
-      "Solo timer",
-      "Highest dice",
-      "Drawing accuracy"
+      "Best matchup",
+      "Worst",
+      "Fastest",
+      "Random"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "After matchups, winners advance to?",
+    "q": "Tee K.O. winners can?",
     "choices": [
-      "Bracket finals",
-      "Auction phase",
-      "Co-op level",
-      "Map mode"
+      "Order their shirt",
+      "Win cash",
+      "Win cards",
+      "Skip"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Tee K.O. plays well with how many?",
+    "q": "Tee K.O. is by?",
     "choices": [
-      "1",
-      "Solo only",
-      "3-8",
-      "30+"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Tee K.O. publisher is?",
-    "choices": [
-      "Jackbox Games",
+      "Jackbox",
       "Hasbro",
-      "USAopoly",
-      "WotC"
+      "Asmodee",
+      "Mattel"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Tee K.O. drawings are scrambled with?",
+    "q": "Player count?",
     "choices": [
-      "Other player's slogans",
-      "AI captions",
-      "Pre-set phrases only",
-      "Random math"
+      "3–8",
+      "2",
+      "12+",
+      "Solo"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Tee K.O. encourages what kind of art?",
+    "q": "Released in?",
     "choices": [
-      "Quick, weird, funny",
-      "Photo-real",
-      "Calligraphy only",
-      "Vector design"
+      "2017",
+      "2010",
+      "2020",
+      "1995"
     ],
-    "correct": 0
+    "answer": 0
+  },
+  {
+    "q": "Final round structure?",
+    "choices": [
+      "Tournament",
+      "Round-robin",
+      "Single",
+      "Random"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Devices used?",
+    "choices": [
+      "TV + phones",
+      "TV only",
+      "Phones only",
+      "Cards"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Tee K.O. 2 adds?",
+    "choices": [
+      "More slogans",
+      "Music",
+      "Drawing",
+      "Acting"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "How many shirts per player?",
+    "choices": [
+      "Three",
+      "One",
+      "Five",
+      "Ten"
+    ],
+    "answer": 0
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
-export function initialState(seed: number, _settings: TeeKoQuizSettings): TeeKoQuizState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+
+const CFG = { totalQuestions: Math.min(10, TeeKoQuiz_QUESTIONS.length), pool: TeeKoQuiz_QUESTIONS };
+
+export interface TeeKoQuizSettings { dummy: boolean; }
+export type TeeKoQuizState = QuizState;
+export type TeeKoQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: TeeKoQuizSettings): TeeKoQuizState {
+  return quizInitial(seed, CFG);
 }
+
 export function reducer(state: TeeKoQuizState, action: TeeKoQuizAction): TeeKoQuizState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case"select":return state.submitted?state:{...state,selected:action.choice};
-    case"submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case"tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case"next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
-export function isTerminal(state: TeeKoQuizState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function isTerminal(state: TeeKoQuizState): { score: number } | null {
+  return quizScore(state);
+}
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

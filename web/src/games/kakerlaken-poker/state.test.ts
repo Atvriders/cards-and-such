@@ -1,44 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, KakerlakenPoker_CFG } from "./state.js";
+
 const S = { dummy: false };
-describe("Cockroach Poker", () => {
-  it("starts in playing with rounds", () => {
+
+describe("kakerlaken-poker", () => {
+  it("starts in guess phase with empty history", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.rounds.length).toBeGreaterThanOrEqual(1);
+    expect(s.phase).toBe("guess");
+    expect(s.guesses.length).toBe(0);
+    expect(s.answer.length).toBe(KakerlakenPoker_CFG.answerLength);
   });
-  it("each round has 4 choices and a valid correct index", () => {
-    const s = initialState(1, S);
-    for (const r of s.rounds) {
-      expect(r.choices.length).toBe(4);
-      expect(r.correct).toBeGreaterThanOrEqual(0);
-      expect(r.correct).toBeLessThanOrEqual(3);
+  it("set updates working guess", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "set", position: 0, value: 1 });
+    expect(s1.current[0]).toBe(1);
+  });
+  it("submit appends a guess with feedback", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "submit" });
+    expect(s1.guesses.length).toBe(1);
+  });
+  it("isTerminal null until done", () => {
+    expect(isTerminal(initialState(1, S))).toBeNull();
+  });
+  it("submitting the answer wins", () => {
+    let s = initialState(1, S);
+    for (let i = 0; i < KakerlakenPoker_CFG.answerLength; i++) {
+      s = reducer(s, { type: "set", position: i, value: s.answer[i]! });
     }
+    s = reducer(s, { type: "submit" });
+    expect(s.phase).toBe("won");
+    expect(isTerminal(s)).not.toBeNull();
   });
-  it("correct selection scores >= 10", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const s2 = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(10);
-  });
-  it("wrong selection does not score positive", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const wrong = (r.correct + 1) % 4;
-    const s2 = reducer(reducer(s, { type: "select", choice: wrong }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(0);
-    expect(s2.correctCount).toBe(0);
-  });
-  it("isTerminal null while playing, set after done", () => {
-    const s = initialState(1, S);
-    expect(isTerminal(s)).toBeNull();
-    let cur = s;
-    for (let i = 0; i < s.rounds.length; i++) {
-      cur = reducer(cur, { type: "select", choice: 0 });
-      cur = reducer(cur, { type: "submit" });
-      cur = reducer(cur, { type: "next" });
+  it("running out of guesses ends the puzzle", () => {
+    let s = initialState(1, S);
+    for (let i = 0; i < KakerlakenPoker_CFG.maxGuesses; i++) {
+      s = reducer(s, { type: "submit" });
     }
-    expect(cur.phase).toBe("done");
-    expect(isTerminal(cur)).not.toBeNull();
+    expect(s.phase === "won" || s.phase === "lost").toBe(true);
   });
 });

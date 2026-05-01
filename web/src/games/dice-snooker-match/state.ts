@@ -1,12 +1,8 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_ROUNDS = 15;
-export const DIE_COUNT = 3;
-export const TARGET_POINTS = 70;
-export const POINT_VALUE = 5;
-export const OPP_PENALTY = 3;
-export const REMAIN_BONUS = 2;
-export const BASE_SCORE = 80;
+export const TOTAL_ROUNDS = 30;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
 export interface DiceSnookerMatchSettings { dummy: boolean; }
 
@@ -14,46 +10,79 @@ export interface DiceSnookerMatchState {
   rngSeed: number;
   round: number;
   dice: number[] | null;
-  myPoints: number;
-  oppPoints: number;
-  lastDelta: number;
+  lastPts: number;
+  score: number;
+  history: number[];
+  log: string[];
   phase: "rolling" | "rolled" | "done";
+  reds: number;
+  breakRun: number;
 }
 
-export type DiceSnookerMatchStateAction = { type: "roll" } | { type: "next" };
-
-function evalRoll(dice: number[]): number {
-  if (dice[0]===dice[1] && dice[1]===dice[2]) return 1; const sum = dice.reduce((a,b)=>a+b,0); if (sum>=14) return 1; if (sum<=7) return -1; return 0;
-}
+export type DiceSnookerMatchAction = { type: "roll" } | { type: "next" };
 
 export function initialState(seed: number, _settings: DiceSnookerMatchSettings): DiceSnookerMatchState {
-  return { rngSeed: seed, round: 1, dice: null, myPoints: 0, oppPoints: 0, lastDelta: 0, phase: "rolling" };
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    reds: 15,
+    breakRun: 0,
+  };
 }
 
-export function reducer(state: DiceSnookerMatchState, action: DiceSnookerMatchStateAction): DiceSnookerMatchState {
+export function reducer(state: DiceSnookerMatchState, action: DiceSnookerMatchAction): DiceSnookerMatchState {
   if (state.phase === "done") return state;
   if (action.type === "roll") {
     if (state.phase !== "rolling") return state;
     const rng = mulberry32(state.rngSeed);
     const dice: number[] = [];
-    for (let i = 0; i < DIE_COUNT; i++) dice.push(1 + Math.floor(rng() * 6));
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
     const nextSeed = Math.floor(rng() * 2 ** 31);
-    const delta = evalRoll(dice);
-    const myPoints = state.myPoints + (delta > 0 ? delta : 0);
-    const oppPoints = state.oppPoints + (delta < 0 ? -delta : 0);
-    const won = myPoints >= TARGET_POINTS;
-    const isLast = state.round >= TOTAL_ROUNDS || won;
-    return { ...state, rngSeed: nextSeed, dice, myPoints, oppPoints, lastDelta: delta, phase: isLast ? "done" : "rolled" };
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<DiceSnookerMatchState> = {};
+    const pot = dice[0]! >= 4;
+    if (!pot) {
+      pts = 0;
+      extra.breakRun = 0;
+      logEntry = `Miss (break ends)`;
+    } else if (state.reds > 0) {
+      const colour = dice[1]!;
+      const colVal = colour <= 2 ? 2 : colour === 3 ? 3 : colour === 4 ? 4 : colour === 5 ? 5 : colour === 6 ? 7 : 6;
+      pts = 1 + colVal;
+      extra.reds = state.reds - 1;
+      extra.breakRun = state.breakRun + pts;
+      logEntry = `Red+colour: +${pts} (run ${extra.breakRun})`;
+    } else {
+      const colVal = (dice[1]! - 1) + 2; // 2..7
+      pts = colVal;
+      extra.breakRun = state.breakRun + pts;
+      logEntry = `Pot ${colVal}-pt colour`;
+    }
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
   if (action.type === "next") {
     if (state.phase !== "rolled") return state;
-    return { ...state, round: state.round + 1, dice: null, lastDelta: 0, phase: "rolling" };
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
   }
   return state;
 }
 
 export function isTerminal(state: DiceSnookerMatchState): { score: number } | null {
-  if (state.phase !== "done") return null;
-  const remaining = state.myPoints >= TARGET_POINTS ? Math.max(0, TOTAL_ROUNDS - state.round) : 0;
-  return { score: BASE_SCORE + state.myPoints * POINT_VALUE - state.oppPoints * OPP_PENALTY + remaining * REMAIN_BONUS };
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

@@ -1,21 +1,21 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
+import type { BragThreeCardState, BragThreeCardAction, BragThreeCardSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { BragThreeCardGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const bragThreeCardPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
+export const bragThreeCardPlugin: GamePlugin<BragThreeCardState, BragThreeCardAction, typeof settings> = {
   id: "brag-three-card",
-  title: "Brag (Three-Card)",
-  category: "board",
+  title: "Three Card Brag",
+  category: "arcade",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "British poker precursor with pair-royals.",
-  howToPlay: "Brag (Three-Card) is the British 16th-century gambling card game from which poker descends. Across eight rounds press Show to reveal three random cards (Ace high to 2 low across four suits). Hand rankings, low to high: high card, pair, flush, run (straight), running flush, pair-royal (three of a kind, e.g., three Jacks). Each ranking pays a fixed reward: high card 1, pair 3, flush 5, run 7, running flush 12, pair-royal 18. The CPU also reveals; if its hand outranks yours you lose half. Total points after eight rounds wins. Pair-royal is the highest hand and trumps every other ranking; pair-royal of threes (3-3-3) is the second-highest pair-royal. Brag is the precursor to poker, with classical 'blind play' (betting without seeing your hand) absent in this digital simplification. Press Show to advance each round; the hand and result reveal immediately. Final scoreboard awards 100 points for the win, 25 for a tie. The original is a betting game; here the hands themselves drive scoring.",
+  description: 'Three Card Brag: 3-card hands; classic British rankings (Prial > Run > Flush).',
+  howToPlay: 'Three Card Brag is a real, dice-driven simulation. Three Card Brag: 3-card hands; classic British rankings (Prial > Run > Flush).\\n\\nPress Roll to take your turn. Each round resolves immediately and the running score updates after every roll. Press Next to advance until the match ends.\\n\\nGame state is fully seeded for replay parity, and the log strip shows your most recent rolls.',
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as BragThreeCardSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: BragThreeCardGame,
 };

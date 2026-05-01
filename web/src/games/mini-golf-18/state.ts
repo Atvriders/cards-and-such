@@ -1,84 +1,75 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
+export const TOTAL_ROUNDS = 18;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Par for typical hole", choices: ["2 strokes","5","10","1"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Hole-in-one is", choices: ["1 stroke","0","2","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Lowest score wins", choices: ["Yes","No","Tie","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Obstacle examples", choices: ["Loops, ramps, windmills","Sand only","Water hazards only","Trees"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Best putt method", choices: ["Read break + speed","Hit hard always","Soft always","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Out of bounds", choices: ["1 stroke penalty","5 strokes","Lose game","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "18 holes total strokes ideal", choices: ["~36 (par 2 each)","100","50","9"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Tied score result", choices: ["Sudden-death extras","Restart","Average","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Wind effect", choices: ["Ball drift","None","Speed up","Stop"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Carpet vs concrete", choices: ["Carpet slower","Same","Concrete bouncier","No diff"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-];
+export interface MiniGolf18Settings { dummy: boolean; }
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
-
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
-}
-
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
+export interface MiniGolf18State {
+  rngSeed: number;
+  round: number;
+  dice: number[] | null;
+  lastPts: number;
   score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  strokes: number;
+  par: number;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+export type MiniGolf18Action = { type: "roll" } | { type: "next" };
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function initialState(seed: number, _settings: MiniGolf18Settings): MiniGolf18State {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    strokes: 0,
+    par: 54,
+  };
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
+export function reducer(state: MiniGolf18State, action: MiniGolf18Action): MiniGolf18State {
   if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<MiniGolf18State> = {};
+    const skill = dice[0]! + dice[1]!;
+    const strokes = skill >= 11 ? 2 : skill >= 9 ? 3 : skill >= 5 ? 4 : skill >= 3 ? 5 : 6;
+    extra.strokes = state.strokes + strokes;
+    pts = strokes <= 3 ? 5 : strokes === 4 ? 2 : -2;
+    logEntry = `Hole ${state.round}: ${strokes} strokes (par 3)`;
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
+  }
+  return state;
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: MiniGolf18State): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

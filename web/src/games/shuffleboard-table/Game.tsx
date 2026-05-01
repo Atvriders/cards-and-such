@@ -1,29 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
-import { isTerminal, TOTAL_TURNS } from "./state.js";
+import type { ShuffleboardTableState, ShuffleboardTableAction, ShuffleboardTableSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
-export function PubGame({ state, dispatch, onGameOver }: GameProps<PubState, PubSettings>): JSX.Element {
+export function ShuffleboardTableGame({ state, dispatch, onGameOver }: GameProps<ShuffleboardTableState, ShuffleboardTableSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  return (
-    <div className="pb-wrap">
-      <h3 className="pb-title">Shuffleboard (Table)</h3>
-      <div className="pb-stats">
-        <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
-        <div>You <b>{state.myScore}</b></div>
-        <div>CPU <b>{state.cpuScore}</b></div>
-      </div>
-      <div className="pb-board">
-        <div className="pb-result">
-          {state.phase === "ready" && <div>Ready to throw</div>}
-          {state.phase === "thrown" && <div>You +{state.lastMine} • CPU +{state.lastCpu}</div>}
-          {state.phase === "done" && <div className="pb-final">Final: You {state.myScore} • CPU {state.cpuScore}</div>}
+  if (state.phase === "done") {
+    return (
+      <div className="shutab-wrap">
+        <div className="shutab-done">
+          <h2>Round</h2>
+          <div className="shutab-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="shutab-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="shutab-log">{line}</div>)}
+          </div>
         </div>
       </div>
-      {state.phase === "ready" && <button className="pb-btn" onClick={() => dispatch({ type:"throw" } as PubAction)}>Throw</button>}
-      {state.phase === "thrown" && <button className="pb-btn alt" onClick={() => dispatch({ type:"next" } as PubAction)}>Next</button>}
+    );
+  }
+  return (
+    <div className="shutab-wrap">
+      <div className="shutab-head">
+        <span className="shutab-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="shutab-score">{state.score} pts</span>
+      </div>
+      
+      {state.dice && (
+        <div className="shutab-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="shutab-die">{d}</div>)}
+        </div>
+      )}
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="shutab-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+      )}
+      <div className="shutab-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="shutab-log">{line}</div>)}
+      </div>
+      <div className="shutab-actions">
+        {state.phase === "rolling" && (
+          <button className="shutab-btn primary" onClick={() => dispatch({ type: "roll" } as ShuffleboardTableAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="shutab-btn alt" onClick={() => dispatch({ type: "next" } as ShuffleboardTableAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

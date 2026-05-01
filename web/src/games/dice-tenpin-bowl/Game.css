@@ -1,12 +1,20 @@
-.ds-tenpin-bo-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.ds-tenpin-bo-info { font-size:0.95rem; color:#555; }
-.ds-tenpin-bo-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.ds-tenpin-bo-die { font-size:2.2rem; font-weight:900; min-width:60px; padding:12px 16px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.ds-tenpin-bo-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.ds-tenpin-bo-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.ds-tenpin-bo-btn:hover { background:#2980b9; }
-.ds-tenpin-bo-btn.alt { background:#e67e22; }
-.ds-tenpin-bo-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
-.ds-tenpin-bo-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.ds-tenpin-bo-done h2 { margin:0 0 8px; }
-.ds-tenpin-bo-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.ditebo-wrap { display:flex;flex-direction:column;gap:14px;padding:22px;font-family:'Inter',sans-serif;max-width:640px;margin:0 auto;background:linear-gradient(135deg,#1e3a5f,#0f1c2e);color:#ecf0f1;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.25); }
+.ditebo-head { display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:1.05rem; }
+.ditebo-round { color:#fff;letter-spacing:0.5px; }
+.ditebo-score { color:#f39c12;font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:800; }
+.ditebo-dice-row { display:flex;flex-wrap:wrap;justify-content:center;gap:10px; }
+.ditebo-die { background:#fefefe;color:#2c3e50;border:2px solid #34495e;border-radius:10px;font-weight:900;font-size:1.6rem;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;box-shadow:0 2px 6px rgba(0,0,0,0.18); }
+.ditebo-result { text-align:center;font-weight:900;font-size:1.4rem;color:#f39c12;font-family:'JetBrains Mono',monospace; }
+.ditebo-log-strip { display:flex;flex-direction:column;gap:4px;min-height:18px; }
+.ditebo-log { font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#bdc3c7;text-align:center; }
+.ditebo-actions { display:flex;justify-content:center;gap:12px; }
+.ditebo-btn { padding:11px 28px;border:none;border-radius:8px;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;font-size:1rem;color:#fff; }
+.ditebo-btn.primary { background:#f39c12; }
+.ditebo-btn.primary:hover { filter:brightness(1.1); }
+.ditebo-btn.alt { background:#e67e22; }
+.ditebo-btn.alt:hover { background:#ca6f1e; }
+.ditebo-done { text-align:center;padding:24px;background:rgba(0,0,0,0.3);border-radius:12px; }
+.ditebo-done h2 { margin:0 0 12px;color:#f39c12; }
+.ditebo-final { font-size:2.4rem;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;margin-bottom:14px; }
+.ditebo-history { display:flex;flex-direction:column;gap:4px;margin-top:12px; }
+

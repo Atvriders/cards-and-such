@@ -1,64 +1,50 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { GameState, GameAction, GameSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import type { Darts701ClassicState, Darts701ClassicAction, Darts701ClassicSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
-const LABELS = ["A", "B", "C", "D"];
-
-export function Darts701ClassicGame({ state, dispatch, onGameOver }: GameProps<GameState, GameSettings>): JSX.Element {
-  const terminal = isTerminal(state);
-  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-
+export function Darts701ClassicGame({ state, dispatch, onGameOver }: GameProps<Darts701ClassicState, Darts701ClassicSettings>): JSX.Element {
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     return (
-      <div className="qz-wrap">
-        <div className="qz-done">
-          <h2>Done!</h2>
-          <p>Correct: {state.correctCount} / {state.rounds.length}</p>
-          <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
+      <div className="da70cl-wrap">
+        <div className="da70cl-done">
+          <h2>Throw</h2>
+          <div className="da70cl-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="da70cl-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="da70cl-log">{line}</div>)}
+          </div>
         </div>
       </div>
     );
   }
-
-  const r = state.rounds[state.currentIndex]!;
-  const isResult = state.phase === "result";
-
   return (
-    <div className="qz-wrap">
-      <div className="qz-header">
-        <span className="qz-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="qz-score">{state.score} pts</span>
+    <div className="da70cl-wrap">
+      <div className="da70cl-head">
+        <span className="da70cl-round">Throw {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="da70cl-score">{state.score} pts</span>
       </div>
-      <div className="qz-prompt">{r.prompt}</div>
-      <div className="qz-choices">
-        {r.choices.map((choice, i) => {
-          let cls = "qz-choice";
-          if (isResult) {
-            if (i === r.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
-          return (
-            <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as GameAction)}>
-              <span className="qz-letter">{LABELS[i]}</span>{choice}
-            </button>
-          );
-        })}
-      </div>
-      {isResult && (
-        <div className={`qz-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
-          {state.selected === r.correct ? "Correct!" : `Answer: ${r.choices[r.correct]}`}
+      
+      {state.dice && (
+        <div className="da70cl-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="da70cl-die">{d}</div>)}
         </div>
       )}
-      <div className="qz-actions">
-        {!isResult && (
-          <button className="qz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as GameAction)}>Submit</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="da70cl-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+      )}
+      <div className="da70cl-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="da70cl-log">{line}</div>)}
+      </div>
+      <div className="da70cl-actions">
+        {state.phase === "rolling" && (
+          <button className="da70cl-btn primary" onClick={() => dispatch({ type: "roll" } as Darts701ClassicAction)}>Roll</button>
         )}
-        {isResult && (
-          <button className="qz-btn next" onClick={() => dispatch({ type: "next" } as GameAction)}>
-            {state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}
-          </button>
+        {state.phase === "rolled" && (
+          <button className="da70cl-btn alt" onClick={() => dispatch({ type: "next" } as Darts701ClassicAction)}>Next</button>
         )}
       </div>
     </div>

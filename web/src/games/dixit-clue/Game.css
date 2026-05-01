@@ -1,19 +1,19 @@
-.dixitclue-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:640px;margin:0 auto;}
-.dixitclue-header{display:flex;justify-content:space-between;width:100%;}
-.dixitclue-score{font-weight:700;color:#27ae60;}
-.dixitclue-scenario{font-size:1.05rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;}
-.dixitclue-clues{align-self:flex-start;background:#f4f6f7;border-left:4px solid #34495e;border-radius:6px;padding:10px 18px 10px 32px;width:100%;box-sizing:border-box;}
-.dixitclue-clues li{margin:4px 0;color:#34495e;}
-.dixitclue-options{display:flex;flex-direction:column;gap:8px;width:100%;}
-.dixitclue-option{padding:10px 14px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;text-align:left;}
-.dixitclue-option:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
-.dixitclue-option.selected{border-color:#3498db;background:#eaf4fb;}
-.dixitclue-option.correct{border-color:#27ae60;background:#eafaf1;}
-.dixitclue-option.wrong{border-color:#e74c3c;background:#fdedec;}
-.dixitclue-actions{display:flex;gap:12px;}
-.dixitclue-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
-.dixitclue-btn.submit{background:#8e44ad;color:#fff;}
-.dixitclue-btn.next{background:#3498db;color:#fff;}
-.dixitclue-btn:disabled{opacity:0.4;cursor:not-allowed;}
-.dixitclue-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
-.dixitclue-final{font-size:1.7rem;font-weight:900;color:#27ae60;}
+.dxc-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#ede9fe;border-radius:14px}
+.dxc-header{display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.dxc-progress{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569}
+.dxc-score{font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:#9333ea;font-weight:700}
+.dxc-q{font-size:1.1rem;font-weight:600;line-height:1.4;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #9333ea}
+.dxc-choices{display:flex;flex-direction:column;gap:8px}
+.dxc-choice{cursor:pointer;text-align:left;padding:12px 14px;border-radius:10px;background:#fff;border:2px solid #e2e8f0;font-family:'Inter',system-ui,sans-serif;font-size:1rem;transition:all 120ms;color:#0f172a}
+.dxc-choice:hover:not(:disabled){border-color:#9333ea;background:#f8fafc}
+.dxc-choice:disabled{cursor:not-allowed}
+.dxc-choice.dxc-correct{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.dxc-choice.dxc-wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.dxc-feedback{font-weight:700;text-align:center;padding:12px;border-radius:10px}
+.dxc-feedback.dxc-good{background:#dcfce7;color:#15803d}
+.dxc-feedback.dxc-bad{background:#fee2e2;color:#991b1b}
+.dxc-next{cursor:pointer;padding:10px 24px;border-radius:8px;background:#9333ea;color:#fff;border:none;font-weight:700;font-size:1rem;align-self:center}
+.dxc-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
+.dxc-final-title{margin:0 0 8px;color:#9333ea}
+.dxc-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#9333ea}
+.dxc-streak{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#64748b}

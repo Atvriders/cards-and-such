@@ -1,21 +1,21 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
+import type { CribbageMugginsVarState, CribbageMugginsVarAction, CribbageMugginsVarSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { CribbageMugginsVarGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cribbageMugginsVarPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
+export const cribbageMugginsVarPlugin: GamePlugin<CribbageMugginsVarState, CribbageMugginsVarAction, typeof settings> = {
   id: "cribbage-muggins-var",
-  title: "Cribbage: Muggins",
-  category: "board",
+  title: "Cribbage Muggins",
+  category: "arcade",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Muggins rule: opponent claims missed combinations.",
-  howToPlay: "Cribbage: Muggins enforces the cruel rule where opponents may claim points you forgot to peg — every miss costs you those exact points. In this digital adaptation, each of ten rounds you peg random points (1-15) and there is a 30% chance you 'miss' some sub-pegs the CPU then claims. The CPU also pegs each round but rarely misses (10% miss rate due to its careful counting). The result: you'll often watch the CPU pull ahead through your missed pegs alone — a savage simulation of being mugginsed in a packed pub. Total score after ten rounds determines the winner. Muggins is famous for sharpening cribbage skill, with experienced players watching like hawks for missed counts. The variant remains popular in serious league play. Press Peg each round; the muggins penalty is automatic and visible in the round summary. Ramp up your concentration — you'll need it. Final score awards 100 points for a win; the muggins simulation gives the underdog less hope than usual.",
+  description: 'Cribbage Muggins: peg from 0 to 121 with hand scores (15s, pairs, runs, flushes, knobs).',
+  howToPlay: 'Cribbage Muggins is a real, dice-driven simulation. Cribbage Muggins: peg from 0 to 121 with hand scores (15s, pairs, runs, flushes, knobs).\\n\\nPress Roll to take your turn. Each round resolves immediately and the running score updates after every roll. Press Next to advance until the match ends.\\n\\nGame state is fully seeded for replay parity, and the log strip shows your most recent rolls.',
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as CribbageMugginsVarSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: CribbageMugginsVarGame,
 };

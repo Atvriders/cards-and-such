@@ -1,94 +1,38 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import { deductionInitial, deductionSetCurrent, deductionSubmit, deductionScore, type DeductionConfig, type DeductionState } from "../_shared/deduction-engine.js";
 
-export interface SkullBluffSettings { rounds: "10"; }
+export const SkullBluff_CFG: DeductionConfig = {
+  "mode": "exact",
+  "answerLength": 2,
+  "poolSize": 4,
+  "allowRepeats": false,
+  "maxGuesses": 6,
+  "symbolLabels": [
+    "🌹",
+    "💀",
+    "🌹",
+    "💀"
+  ],
+  "scenarioLabel": "Skull Standoff",
+  "scenarioEmoji": "💀"
+};
 
-export interface SkullBluffRound {
-  cpuClaim: string;     // What the CPU claims
-  cpuActual: string;    // What the CPU actually has
-  isBluffing: boolean;
-  tellLevel: number;    // 0-100: higher means more obvious tell when bluffing
-}
+export interface SkullBluffSettings { dummy: boolean; }
+export type SkullBluffState = DeductionState;
+export type SkullBluffAction = { type: "set"; position: number; value: number } | { type: "submit" };
 
-export interface SkullBluffState {
-  rounds: SkullBluffRound[];
-  currentIndex: number;
-  decision: "trust" | "callBluff" | null;
-  resolved: boolean;
-  score: number;
-  callsCorrect: number;
-  phase: "playing" | "result" | "done";
-}
-
-export type SkullBluffAction =
-  | { type: "decide"; decision: "trust" | "callBluff" }
-  | { type: "next" };
-
-const ITEMS: string[] = ["flower","rose","daisy","lily","orchid","tulip"];
-
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
-
-export function initialState(seed: number, _settings: SkullBluffSettings): SkullBluffState {
-  const rng = mulberry32(seed);
-  const rounds: SkullBluffRound[] = [];
-  for (let i = 0; i < 10; i++) {
-    const isBluffing = rng() < 0.5;
-    const claimIdx = Math.floor(rng() * ITEMS.length);
-    const claim = ITEMS[claimIdx]!;
-    let actual = claim;
-    if (isBluffing) {
-      let attempts = 0;
-      while (actual === claim && attempts < 20) {
-        actual = ITEMS[Math.floor(rng() * ITEMS.length)]!;
-        attempts++;
-      }
-    }
-    const tellLevel = isBluffing ? Math.floor(rng() * 100) : Math.floor(rng() * 50);
-    rounds.push({ cpuClaim: claim, cpuActual: actual, isBluffing, tellLevel });
-  }
-  return {
-    rounds,
-    currentIndex: 0,
-    decision: null,
-    resolved: false,
-    score: 0,
-    callsCorrect: 0,
-    phase: "playing",
-  };
+export function initialState(seed: number, _s: SkullBluffSettings): SkullBluffState {
+  return deductionInitial(seed, SkullBluff_CFG);
 }
 
 export function reducer(state: SkullBluffState, action: SkullBluffAction): SkullBluffState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "decide": {
-      if (state.resolved) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const correct = (action.decision === "callBluff") === r.isBluffing;
-      return {
-        ...state,
-        decision: action.decision,
-        resolved: true,
-        score: state.score + (correct ? 100 : 0),
-        callsCorrect: state.callsCorrect + (correct ? 1 : 0),
-        phase: "result",
-      };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      if (ni >= state.rounds.length) return { ...state, phase: "done" };
-      return { ...state, currentIndex: ni, decision: null, resolved: false, phase: "playing" };
-    }
-    default:
-      return state;
-  }
+  if (action.type === "set") return deductionSetCurrent(state, action.position, action.value);
+  if (action.type === "submit") return deductionSubmit(state, SkullBluff_CFG);
+  return state;
 }
 
 export function isTerminal(state: SkullBluffState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const r = deductionScore(state, SkullBluff_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const FLAVOR = "Pick two coasters; flowers only.";

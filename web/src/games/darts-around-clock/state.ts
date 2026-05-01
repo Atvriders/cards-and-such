@@ -1,84 +1,91 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
+export const TOTAL_ROUNDS = 40;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Around-the-clock starts at", choices: ["1","20","Bull","10"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "You must hit each number", choices: ["In order","Any order","Twice","Triples only"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Currently on 7 — aim?", choices: ["Single 7","Triple 7","Bull","Double 14"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Currently on 20 — finish?", choices: ["Bullseye","Double 20","Single 1","Triple 20"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Triple 5 counts as", choices: ["Single 5 hit","Three numbers advance","Skip","Five marks"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Doubles count as one hit", choices: ["Yes","No","Two hits","Game over"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Best on number 1", choices: ["Aim large 1 segment","Aim bull","Aim 20","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Game ends when", choices: ["Bull is hit after 20","All bulls","Score 0","Time limit"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Stuck on 13 — aim", choices: ["Single 13","Triple 13","Bull","Double 6.5"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Best concentration aim", choices: ["Center of segment","Wire","Triple line","Outer edge"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-];
+export interface DartsAroundClockSettings { dummy: boolean; }
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
-
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
-}
-
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
+export interface DartsAroundClockState {
+  rngSeed: number;
+  round: number;
+  dice: number[] | null;
+  lastPts: number;
   score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  target: number;
+  hits: number;
+  misses: number;
+  cleared: boolean;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+export type DartsAroundClockAction = { type: "roll" } | { type: "next" };
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function initialState(seed: number, _settings: DartsAroundClockSettings): DartsAroundClockState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    target: 1,
+    hits: 0,
+    misses: 0,
+    cleared: false,
+  };
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
+export function reducer(state: DartsAroundClockState, action: DartsAroundClockAction): DartsAroundClockState {
   if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<DartsAroundClockState> = {};
+    const sum = dice[0]! + dice[1]!;
+    const hit = sum >= state.target + 2;
+    if (hit) {
+      pts = 5;
+      const newT = state.target + 1;
+      if (newT > 21) {
+        extra.cleared = true;
+        extra.target = 21;
+        logEntry = `Bullseye! Cleared the clock`;
+      } else {
+        extra.target = newT;
+        logEntry = `Hit ${state.target} (next: ${newT})`;
+      }
+    } else {
+      extra.misses = state.misses + 1;
+      logEntry = `Missed ${state.target}`;
     }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+
+    const earlyWin = (extra.cleared === true);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
+  }
+  return state;
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: DartsAroundClockState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

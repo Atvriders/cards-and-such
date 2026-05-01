@@ -1,84 +1,85 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
+export const TOTAL_ROUNDS = 40;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Race target standard", choices: ["150 points","100","50","8 balls"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Each pocketed ball", choices: ["1 point","5","10","0"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Scratch penalty", choices: ["-1 point + ball-in-hand","Lose game","Skip","+1"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Last ball = ", choices: ["Break ball","Final","Bonus","Free"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Re-rack with how many", choices: ["14 balls","8","10","9"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Call shot?", choices: ["Yes","No","Sometimes","Only on 8"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Combination called", choices: ["First contact + pocket","Any","Cue ball pocket","Bank only"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Run-out high record", choices: ["526 (Mosconi)","100","1000","300"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Three consecutive fouls", choices: ["-15 penalty","Loss","Bonus","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Strategy goal", choices: ["Set up break ball","Pocket all fast","Bank shots","Sink 8"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-];
+export interface PoolStraight141Settings { dummy: boolean; }
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
-
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
-}
-
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
+export interface PoolStraight141State {
+  rngSeed: number;
+  round: number;
+  dice: number[] | null;
+  lastPts: number;
   score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  ballsLeft: number;
+  fouls: number;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+export type PoolStraight141Action = { type: "roll" } | { type: "next" };
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function initialState(seed: number, _settings: PoolStraight141Settings): PoolStraight141State {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    ballsLeft: 15,
+    fouls: 0,
+  };
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
+export function reducer(state: PoolStraight141State, action: PoolStraight141Action): PoolStraight141State {
   if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<PoolStraight141State> = {};
+    const sink = dice[0]! >= 4;
+    const foul = dice[1]! === 1;
+    if (foul) {
+      extra.fouls = state.fouls + 1;
+      pts = -3;
+      logEntry = `FOUL (-3)`;
+    } else if (sink) {
+      const newLeft = Math.max(0, state.ballsLeft - 1);
+      extra.ballsLeft = newLeft;
+      pts = newLeft === 0 ? 50 : 5;
+      logEntry = newLeft === 0 ? `Sank the ${(15)}-ball! WIN` : `Pocketed (${newLeft} left)`;
+    } else {
+      pts = 0;
+      logEntry = `Missed`;
     }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+
+    const earlyWin = ((extra.ballsLeft !== undefined && extra.ballsLeft <= 0));
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
+  }
+  return state;
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: PoolStraight141State): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

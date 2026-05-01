@@ -1,28 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { QuoitsTossState, QuoitsTossAction, QuoitsTossSettings } from "./state.js";
-import { isTerminal, TOTAL_TURNS, MAX_THROW } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
 export function QuoitsTossGame({ state, dispatch, onGameOver }: GameProps<QuoitsTossState, QuoitsTossSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  return (
-    <div className="pb-wrap">
-      <h3 className="pb-title">Quoits Toss</h3>
-      <div className="pb-stats">
-        <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
-        <div>Score <b>{state.score}</b></div>
-        {state.lastPts > 0 && <div className="pb-pts">+{state.lastPts}!</div>}
-      </div>
-      <div className="pb-board">
-        <div className="pb-target">
-          <div className="pb-bullseye">{state.lastPts >= MAX_THROW ? "BULLSEYE!" : state.phase === "ready" ? "THROW" : state.lastPts > 0 ? "+" + state.lastPts : "MISS"}</div>
+  if (state.phase === "done") {
+    return (
+      <div className="quotos-wrap">
+        <div className="quotos-done">
+          <h2>Round</h2>
+          <div className="quotos-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="quotos-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="quotos-log">{line}</div>)}
+          </div>
         </div>
       </div>
-      {state.phase === "ready" && <button className="pb-btn" onClick={() => dispatch({ type: "throw" } as QuoitsTossAction)}>Throw</button>}
-      {state.phase === "thrown" && <button className="pb-btn alt" onClick={() => dispatch({ type: "next" } as QuoitsTossAction)}>Next</button>}
-      {state.phase === "done" && <div className="pb-done"><h3>Final: {state.score} pts</h3></div>}
+    );
+  }
+  return (
+    <div className="quotos-wrap">
+      <div className="quotos-head">
+        <span className="quotos-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="quotos-score">{state.score} pts</span>
+      </div>
+      
+      {state.dice && (
+        <div className="quotos-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="quotos-die">{d}</div>)}
+        </div>
+      )}
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="quotos-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+      )}
+      <div className="quotos-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="quotos-log">{line}</div>)}
+      </div>
+      <div className="quotos-actions">
+        {state.phase === "rolling" && (
+          <button className="quotos-btn primary" onClick={() => dispatch({ type: "roll" } as QuoitsTossAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="quotos-btn alt" onClick={() => dispatch({ type: "next" } as QuoitsTossAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

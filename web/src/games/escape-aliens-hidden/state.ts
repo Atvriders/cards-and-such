@@ -1,41 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const TARGET_SCORE = 65;
-export interface EscapeAliensHiddenSettings { dummy: boolean; }
-export interface EscapeAliensHiddenState {
-  rngSeed: number;
-  round: number;
-  playerRoll: number;
-  cpuRoll: number;
-  lastPts: number;
-  teamScore: number;
-  phase: "ready" | "rolled" | "done";
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
+
+export const EscapeAliensHidden_CFG: CoopEngineConfig = {
+  "totalRounds": 10,
+  "progressTarget": 55,
+  "threatPerRound": 4,
+  "startMorale": 4,
+  "threatBreakpoint": 5,
+  "allyEffort": 3,
+  "allyClutch": 0.35,
+  "scenarioLabel": "Ship Evacuation",
+  "scenarioEmoji": "👽",
+  "progressLabel": "Distance",
+  "threatLabel": "Aliens",
+  "moraleLabel": "HP",
+  "tactics": [
+    {
+      "id": "sneak",
+      "label": "Sneak",
+      "emoji": "🤫",
+      "effort": 4,
+      "reliability": 0.9,
+      "threatPush": 1,
+      "desc": "Quiet move."
+    },
+    {
+      "id": "dash",
+      "label": "Dash",
+      "emoji": "🏃",
+      "effort": 5,
+      "reliability": 0.7,
+      "threatPush": 1,
+      "desc": "Loud but fast."
+    },
+    {
+      "id": "scan",
+      "label": "Scan",
+      "emoji": "📡",
+      "effort": 3,
+      "reliability": 0.9,
+      "threatPush": 1,
+      "desc": "Locate alien."
+    },
+    {
+      "id": "trap",
+      "label": "Set Trap",
+      "emoji": "🪤",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 2,
+      "desc": "Slow alien."
+    }
+  ]
+};
+
+export interface EscapeAliensHiddenSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type EscapeAliensHiddenState = CoopState;
+export type EscapeAliensHiddenAction = { type: "play"; tacticId: string };
+
+function diffNum(s: EscapeAliensHiddenSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type EscapeAliensHiddenAction = { type: "play" } | { type: "next" };
-export function initialState(seed: number, _s: EscapeAliensHiddenSettings): EscapeAliensHiddenState {
-  return { rngSeed: seed, round: 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, teamScore: 0, phase: "ready" };
+
+export function initialState(seed: number, s: EscapeAliensHiddenSettings): EscapeAliensHiddenState {
+  return coopInitial(seed, EscapeAliensHidden_CFG, diffNum(s));
 }
+
 export function reducer(state: EscapeAliensHiddenState, action: EscapeAliensHiddenAction): EscapeAliensHiddenState {
-  if (state.phase === "done") return state;
-  if (action.type === "play") {
-    if (state.phase !== "ready") return state;
-    const rng = mulberry32(state.rngSeed);
-    const pr = 1 + Math.floor(rng() * 6);
-    const cr = 1 + Math.floor(rng() * 6);
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = pr + cr;
-    const newScore = state.teamScore + pts;
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, playerRoll: pr, cpuRoll: cr, lastPts: pts, teamScore: newScore, phase: isLast ? "done" : "rolled" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "rolled") return state;
-    return { ...state, round: state.round + 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, phase: "ready" };
-  }
+  if (action.type === "play") return coopStep(state, EscapeAliensHidden_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: EscapeAliensHiddenState): { score: number } | null {
-  if (state.phase !== "done") return null;
-  const bonus = state.teamScore >= TARGET_SCORE ? 50 : 0;
-  return { score: state.teamScore + bonus };
+  const r = coopScore(state, EscapeAliensHidden_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = EscapeAliensHidden_CFG.totalRounds;
+export const TARGET_SCORE = EscapeAliensHidden_CFG.progressTarget;
+export const FLAVOR = "Move silently; reach an escape pod.";

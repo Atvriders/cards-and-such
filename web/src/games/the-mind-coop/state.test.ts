@@ -1,28 +1,39 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, TOTAL_ROUNDS, TARGET_SCORE } from "./state.js";
 
-const S = { puzzles: "10" as const };
+const S = { difficulty: "Standard" as const };
 
 describe("the-mind-coop", () => {
-  it("creates puzzles", () => {
-    expect(initialState(1, S).puzzles.length).toBeGreaterThanOrEqual(4);
+  it("starts in choose phase with full morale", () => {
+    const s = initialState(42, S);
+    expect(s.phase).toBe("choose");
+    expect(s.progress).toBe(0);
+    expect(s.morale).toBeGreaterThan(0);
+    expect(s.round).toBe(1);
   });
-  it("starts in playing phase", () => {
-    expect(initialState(1, S).phase).toBe("playing");
+  it("playing a tactic advances round", () => {
+    const s0 = initialState(42, S);
+    const tid = "focus";
+    const s1 = reducer(s0, { type: "play", tacticId: tid });
+    expect(s1.round).toBe(2);
+    expect(s1.lastTactic).toBe(tid);
   });
-  it("submitting correct earns score", () => {
-    const s = initialState(1, S);
-    const s2 = reducer(reducer(s, { type: "select", index: s.puzzles[0]!.correctIndex }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(100);
-  });
-  it("isTerminal null while playing", () => {
+  it("isTerminal null until done", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("next advances", () => {
-    let s = initialState(1, S);
-    s = reducer(s, { type: "select", index: 0 });
-    s = reducer(s, { type: "submit" });
-    s = reducer(s, { type: "next" });
-    expect(s.currentIndex).toBeGreaterThanOrEqual(1);
+  it("game ends within total rounds", () => {
+    let s = initialState(7, S);
+    let safety = 0;
+    while (s.phase !== "done" && safety++ < TOTAL_ROUNDS + 5) {
+      s = reducer(s, { type: "play", tacticId: "focus" });
+    }
+    expect(s.phase).toBe("done");
+    expect(isTerminal(s)).not.toBeNull();
   });
+  it("invalid tactic id is a no-op", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "play", tacticId: "__bogus__" });
+    expect(s1).toBe(s0);
+  });
+  it("target score is positive", () => { expect(TARGET_SCORE).toBeGreaterThan(0); });
 });

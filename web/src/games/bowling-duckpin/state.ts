@@ -1,84 +1,74 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
+export const TOTAL_ROUNDS = 10;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Duckpin pins shape", choices: ["Short squat","Tall","Bottle","Triangle"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Pins count", choices: ["10","9","8","12"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Balls per frame", choices: ["3","2","1","5"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Ball weight", choices: ["~3.5 lbs","16 lbs","10 lbs","1 lb"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Holes in ball", choices: ["No holes","3 holes","1 hole","5 holes"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Deadwood removed", choices: ["Yes between balls","No","Sometimes","Penalty"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Strike + spare bonus", choices: ["Yes","No","Only spare","Only strike"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Highest realistic score", choices: ["~200","300","100","500"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Origin city", choices: ["Baltimore","New York","Chicago","Boston"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Frames per game", choices: ["10","8","12","5"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-];
+export interface BowlingDuckpinSettings { dummy: boolean; }
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
-
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
-}
-
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
+export interface BowlingDuckpinState {
+  rngSeed: number;
+  round: number;
+  dice: number[] | null;
+  lastPts: number;
   score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+export type BowlingDuckpinAction = { type: "roll" } | { type: "next" };
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function initialState(seed: number, _settings: BowlingDuckpinSettings): BowlingDuckpinState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+
+  };
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
+export function reducer(state: BowlingDuckpinState, action: BowlingDuckpinAction): BowlingDuckpinState {
   if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<BowlingDuckpinState> = {};
+    const sum = dice[0]! + dice[1]!;
+    const knocked = Math.max(0, Math.min(10, Math.round(((sum - 2) / 10) * 10)));
+    pts = knocked;
+    if (knocked === 10) { pts += 5; logEntry = `F${state.round}: STRIKE ${knocked}+5 bonus`; }
+    else if (knocked >= 9) { pts += 2; logEntry = `F${state.round}: SPARE ${knocked}+2`; }
+    else { logEntry = `F${state.round}: ${knocked} pins`; }
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
+  }
+  return state;
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: BowlingDuckpinState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

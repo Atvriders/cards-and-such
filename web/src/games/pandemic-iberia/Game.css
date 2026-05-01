@@ -1,14 +1,28 @@
-.coop-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:560px; margin:0 auto; }
-.coop-info { font-size:0.95rem; color:#555; }
-.coop-target { font-size:1.1rem; font-weight:800; color:#27ae60; }
-.coop-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.coop-die { font-size:1.05rem; font-weight:700; padding:10px 14px; background:#fff; border:2px solid #3498db; border-radius:10px; min-width:80px; text-align:center; color:#2980b9; }
-.coop-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.coop-btn:hover:not(:disabled) { background:#2980b9; }
-.coop-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.coop-btn.alt { background:#e67e22; }
-.coop-btn.alt:hover { background:#ca6f1e; }
-.coop-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
-.coop-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.coop-done h2 { margin:0 0 8px; }
-.coop-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.pibe-wrap{font-family:'Inter',system-ui,sans-serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#dbeafe;border-radius:14px}
+.pibe-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
+.pibe-icon{font-size:1.6rem}
+.pibe-scenario{flex:1;color:#1e40af}
+.pibe-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1}
+.pibe-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #1e40af}
+.pibe-bars{display:flex;flex-direction:column;gap:6px}
+.pibe-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#334155;margin-bottom:2px}
+.pibe-bar-track{height:10px;border-radius:5px;background:#e2e8f0;overflow:hidden}
+.pibe-bar-fill{height:100%;transition:width 200ms ease}
+.pibe-bar-good{background:linear-gradient(90deg,#10b981,#059669)}
+.pibe-bar-bad{background:linear-gradient(90deg,#f59e0b,#dc2626)}
+.pibe-morale{font-size:1rem;color:#dc2626;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
+.pibe-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#475569;background:#fff;padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1}
+.pibe-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.pibe-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:#fff;border:2px solid transparent;transition:all 150ms;display:flex;flex-direction:column;gap:2px;font-family:'Inter',system-ui,sans-serif}
+.pibe-tactic:hover:not(:disabled){border-color:#1e40af;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.pibe-tactic:disabled{opacity:0.5;cursor:not-allowed}
+.pibe-tactic-emoji{font-size:1.4rem}
+.pibe-tactic-name{font-weight:700;color:#1e40af}
+.pibe-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#64748b}
+.pibe-tactic-desc{font-size:0.78rem;color:#475569;line-height:1.3}
+.pibe-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
+.pibe-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#64748b;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.5)}
+.pibe-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
+.pibe-final-title{margin:0 0 8px;color:#1e40af}
+.pibe-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#1e40af}
+.pibe-final-stats{margin-top:8px;font-size:0.85rem;color:#64748b;font-family:'JetBrains Mono',monospace}

@@ -1,21 +1,21 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
+import type { CribbageCrashState, CribbageCrashAction, CribbageCrashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { CribbageCrashGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cribbageCrashPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
+export const cribbageCrashPlugin: GamePlugin<CribbageCrashState, CribbageCrashAction, typeof settings> = {
   id: "cribbage-crash",
-  title: "Cribbage: Crash",
-  category: "board",
+  title: "Cribbage Crash",
+  category: "arcade",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Cribbage variant where exact peg score reverses progress.",
-  howToPlay: "Cribbage: Crash is a tense bar variant where landing on an exact peg score (multiples of 30) reverses your progress instead of pegging forward. Race a virtual opponent to 121 over ten dice-driven rounds. Each round you press Peg to advance a random number of points (1-15). If your total lands exactly on a 30-multiple, the score crashes back by 30 points (cannot go below zero). The CPU also pegs each round and is similarly susceptible to crashes. The crash rule sounds harsh but introduces real swings; some games end with both sides crashing repeatedly into the 90s. After ten rounds whoever pegs higher wins. Track your peg position with the on-screen score line. Strategy is reduced to luck-of-the-roll, like the bar-pub original where Crash blanks any pegging that overshoots into the danger zone. The variant rewards consistency over big rolls and adds a chuckle when an opponent crashes near the finish line.",
+  description: 'Cribbage Crash: peg from 0 to 121 with hand scores (15s, pairs, runs, flushes, knobs).',
+  howToPlay: 'Cribbage Crash is a real, dice-driven simulation. Cribbage Crash: peg from 0 to 121 with hand scores (15s, pairs, runs, flushes, knobs).\\n\\nPress Roll to take your turn. Each round resolves immediately and the running score updates after every roll. Press Next to advance until the match ends.\\n\\nGame state is fully seeded for replay parity, and the log strip shows your most recent rolls.',
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as CribbageCrashSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: CribbageCrashGame,
 };

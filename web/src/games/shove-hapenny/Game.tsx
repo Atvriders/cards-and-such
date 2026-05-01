@@ -1,28 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ShoveHapennyState, ShoveHapennyAction, ShoveHapennySettings } from "./state.js";
-import { isTerminal, TOTAL_TURNS, MAX_THROW } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
 export function ShoveHapennyGame({ state, dispatch, onGameOver }: GameProps<ShoveHapennyState, ShoveHapennySettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  return (
-    <div className="pb-wrap">
-      <h3 className="pb-title">Shove Ha'penny</h3>
-      <div className="pb-stats">
-        <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
-        <div>Score <b>{state.score}</b></div>
-        {state.lastPts > 0 && <div className="pb-pts">+{state.lastPts}!</div>}
-      </div>
-      <div className="pb-board">
-        <div className="pb-target">
-          <div className="pb-bullseye">{state.lastPts >= MAX_THROW ? "BULLSEYE!" : state.phase === "ready" ? "SHOVE" : state.lastPts > 0 ? "+" + state.lastPts : "MISS"}</div>
+  if (state.phase === "done") {
+    return (
+      <div className="shohap-wrap">
+        <div className="shohap-done">
+          <h2>Shove</h2>
+          <div className="shohap-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="shohap-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="shohap-log">{line}</div>)}
+          </div>
         </div>
       </div>
-      {state.phase === "ready" && <button className="pb-btn" onClick={() => dispatch({ type: "throw" } as ShoveHapennyAction)}>Shove</button>}
-      {state.phase === "thrown" && <button className="pb-btn alt" onClick={() => dispatch({ type: "next" } as ShoveHapennyAction)}>Next</button>}
-      {state.phase === "done" && <div className="pb-done"><h3>Final: {state.score} pts</h3></div>}
+    );
+  }
+  return (
+    <div className="shohap-wrap">
+      <div className="shohap-head">
+        <span className="shohap-round">Shove {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="shohap-score">{state.score} pts</span>
+      </div>
+      
+      {state.dice && (
+        <div className="shohap-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="shohap-die">{d}</div>)}
+        </div>
+      )}
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="shohap-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+      )}
+      <div className="shohap-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="shohap-log">{line}</div>)}
+      </div>
+      <div className="shohap-actions">
+        {state.phase === "rolling" && (
+          <button className="shohap-btn primary" onClick={() => dispatch({ type: "roll" } as ShoveHapennyAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="shohap-btn alt" onClick={() => dispatch({ type: "next" } as ShoveHapennyAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

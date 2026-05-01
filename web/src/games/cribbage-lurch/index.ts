@@ -1,21 +1,21 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
+import type { CribbageLurchState, CribbageLurchAction, CribbageLurchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { CribbageLurchGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cribbageLurchPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
+export const cribbageLurchPlugin: GamePlugin<CribbageLurchState, CribbageLurchAction, typeof settings> = {
   id: "cribbage-lurch",
-  title: "Cribbage: Lurch",
-  category: "board",
+  title: "Cribbage Lurch",
+  category: "arcade",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Lurch rule: winner doubles if loser hasn't reached 91.",
-  howToPlay: "Cribbage: Lurch rewards a runaway win — if the loser fails to peg past 91 by game-end, the winner takes a 'lurch' and doubles their score. Across eight pegging rounds you and the CPU each peg random points (1-12). The race target is 121 but the game stops after eight rounds; whoever has more pegs wins. If the loser hasn't reached 91 the winner's score doubles in the final report — a true bar-pub bonus that drives back-row players to push hard. Press Peg each round; the CPU follows automatically. Watch the peg track; if you're well behind near round 6, the lurch threat looms. The lurch rule turns ordinary wins into outsized triumphs and ordinary losses into double humiliations. Drinks may be doubled too in the original pub etiquette. Pegging is purely dice-driven here; strategy lives in pacing the pubs after a rough round.",
+  description: 'Cribbage Lurch: peg from 0 to 61 with hand scores (15s, pairs, runs, flushes, knobs).',
+  howToPlay: 'Cribbage Lurch is a real, dice-driven simulation. Cribbage Lurch: peg from 0 to 61 with hand scores (15s, pairs, runs, flushes, knobs).\\n\\nPress Roll to take your turn. Each round resolves immediately and the running score updates after every roll. Press Next to advance until the match ends.\\n\\nGame state is fully seeded for replay parity, and the log strip shows your most recent rolls.',
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as CribbageLurchSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: CribbageLurchGame,
 };

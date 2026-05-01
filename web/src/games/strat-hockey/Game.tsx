@@ -8,24 +8,45 @@ export function StratHockeyGame({ state, dispatch, onGameOver }: GameProps<Strat
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-strahock-wrap"><div className="g-strahock-done"><h2>Match!</h2><div className="g-strahock-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="strhoc-wrap">
+        <div className="strhoc-done">
+          <h2>Period</h2>
+          <div className="strhoc-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="strhoc-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="strhoc-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-strahock-wrap">
-      <div className="g-strahock-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-strahock-score">{state.score} pts</div>
+    <div className="strhoc-wrap">
+      <div className="strhoc-head">
+        <span className="strhoc-round">Period {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="strhoc-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-strahock-row">{state.dice.map((d, i) => <div key={i} className="g-strahock-die">{d}</div>)}</div>
+        <div className="strhoc-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="strhoc-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-strahock-btn" onClick={() => dispatch({ type:"roll" } as StratHockeyAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="strhoc-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-strahock-result">+{state.lastPts}</div>
-          <button className="g-strahock-btn alt" onClick={() => dispatch({ type:"next" } as StratHockeyAction)}>Next</button>
-        </>
-      )}
+      <div className="strhoc-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="strhoc-log">{line}</div>)}
+      </div>
+      <div className="strhoc-actions">
+        {state.phase === "rolling" && (
+          <button className="strhoc-btn primary" onClick={() => dispatch({ type: "roll" } as StratHockeyAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="strhoc-btn alt" onClick={() => dispatch({ type: "next" } as StratHockeyAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

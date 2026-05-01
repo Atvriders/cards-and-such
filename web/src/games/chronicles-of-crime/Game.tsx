@@ -1,58 +1,21 @@
-import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { DeductionView } from "../_shared/DeductionView.js";
+import { deductionScore } from "../_shared/deduction-engine.js";
 import type { ChroniclesOfCrimeState, ChroniclesOfCrimeAction, ChroniclesOfCrimeSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { ChroniclesOfCrime_CFG, FLAVOR } from "./state.js";
 import "./Game.css";
 
 export function ChroniclesOfCrimeGame({ state, dispatch, onGameOver }: GameProps<ChroniclesOfCrimeState, ChroniclesOfCrimeSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="chroniclesofcrime-wrap">
-        <div className="chroniclesofcrime-done">
-          <h2>Case Closed</h2>
-          <p>Solved: {state.correctCount} / {state.puzzles.length}</p>
-          <p className="chroniclesofcrime-final">{state.score} pts</p>
-        </div>
-      </div>
-    );
-  }
-  const p = state.puzzles[state.currentIndex]!;
   return (
-    <div className="chroniclesofcrime-wrap">
-      <div className="chroniclesofcrime-header">
-        <span>Puzzle {state.currentIndex + 1} / {state.puzzles.length}</span>
-        <span className="chroniclesofcrime-score">{state.score} pts</span>
-      </div>
-      <div className="chroniclesofcrime-scenario">{p.scenario}</div>
-      <ul className="chroniclesofcrime-clues">
-        {p.clues.map((c, i) => <li key={i}>{c}</li>)}
-      </ul>
-      <div className="chroniclesofcrime-options">
-        {p.options.map((opt, i) => {
-          let cls = "chroniclesofcrime-option";
-          if (state.resolved) {
-            if (i === p.correctIndex) cls += " correct";
-            else if (i === state.selected) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
-          return (
-            <button key={i} className={cls} disabled={state.resolved} onClick={() => dispatch({ type: "select", index: i } as ChroniclesOfCrimeAction)}>
-              {opt}
-            </button>
-          );
-        })}
-      </div>
-      <div className="chroniclesofcrime-actions">
-        {!state.resolved && (
-          <button className="chroniclesofcrime-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as ChroniclesOfCrimeAction)}>Submit</button>
-        )}
-        {state.resolved && (
-          <button className="chroniclesofcrime-btn next" onClick={() => dispatch({ type: "next" } as ChroniclesOfCrimeAction)}>
-            {state.currentIndex + 1 >= state.puzzles.length ? "Finish" : "Next"}
-          </button>
-        )}
-      </div>
-    </div>
+    <DeductionView
+      prefix="coc"
+      cfg={ChroniclesOfCrime_CFG}
+      state={state}
+      onSet={(position, value) => dispatch({ type: "set", position, value } as ChroniclesOfCrimeAction)}
+      onSubmit={() => dispatch({ type: "submit" } as ChroniclesOfCrimeAction)}
+      onGameOver={onGameOver}
+      scoreFn={(s) => deductionScore(s, ChroniclesOfCrime_CFG)}
+      intro={FLAVOR}
+    />
   );
 }

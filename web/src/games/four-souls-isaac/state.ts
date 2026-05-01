@@ -1,48 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const CARDS_PER_ROUND = 3;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Item", value: 4 },
-  { name: "Loot", value: 2 },
-  { name: "Monster", value: 3 },
-  { name: "Soul", value: 6 },
-  { name: "Curse", value: 1 },
-];
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
 
-export interface FourSoulsIsaacSettings { dummy: boolean; }
-export interface FourSoulsIsaacState {
-  rngSeed: number;
-  round: number;
-  hand: number[];
-  lastPts: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+export const FourSoulsIsaac_CFG: CoopEngineConfig = {
+  "totalRounds": 11,
+  "progressTarget": 65,
+  "threatPerRound": 3,
+  "startMorale": 4,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.4,
+  "scenarioLabel": "Basement Run",
+  "scenarioEmoji": "👁️",
+  "progressLabel": "Souls",
+  "threatLabel": "Curses",
+  "moraleLabel": "HP",
+  "tactics": [
+    {
+      "id": "attack",
+      "label": "Attack",
+      "emoji": "⚔️",
+      "effort": 5,
+      "reliability": 0.7,
+      "threatPush": 1,
+      "desc": "Fight."
+    },
+    {
+      "id": "loot",
+      "label": "Loot",
+      "emoji": "💎",
+      "effort": 4,
+      "reliability": 0.85,
+      "threatPush": 0,
+      "desc": "Item."
+    },
+    {
+      "id": "buy",
+      "label": "Buy",
+      "emoji": "🪙",
+      "effort": 3,
+      "reliability": 0.9,
+      "threatPush": 0,
+      "desc": "Shop."
+    },
+    {
+      "id": "pray",
+      "label": "Pray",
+      "emoji": "🙏",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 1,
+      "desc": "Heal."
+    }
+  ]
+};
+
+export interface FourSoulsIsaacSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type FourSoulsIsaacState = CoopState;
+export type FourSoulsIsaacAction = { type: "play"; tacticId: string };
+
+function diffNum(s: FourSoulsIsaacSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type FourSoulsIsaacAction = { type: "draw" } | { type: "next" };
-export function initialState(seed: number, _s: FourSoulsIsaacSettings): FourSoulsIsaacState {
-  return { rngSeed: seed, round: 1, hand: [], lastPts: 0, score: 0, phase: "drawing" };
+
+export function initialState(seed: number, s: FourSoulsIsaacSettings): FourSoulsIsaacState {
+  return coopInitial(seed, FourSoulsIsaac_CFG, diffNum(s));
 }
-export function scoreHand(hand: number[]): number {
-  return hand.reduce((a,i) => a + (DECK[i]?.value ?? 0), 0);
-}
+
 export function reducer(state: FourSoulsIsaacState, action: FourSoulsIsaacAction): FourSoulsIsaacState {
-  if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand: number[] = [];
-    for (let i = 0; i < CARDS_PER_ROUND; i++) hand.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = scoreHand(hand);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, hand, lastPts: pts, score: state.score + pts, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, hand: [], lastPts: 0, phase: "drawing" };
-  }
+  if (action.type === "play") return coopStep(state, FourSoulsIsaac_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: FourSoulsIsaacState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const r = coopScore(state, FourSoulsIsaac_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = FourSoulsIsaac_CFG.totalRounds;
+export const TARGET_SCORE = FourSoulsIsaac_CFG.progressTarget;
+export const FLAVOR = "Defeat monsters; collect 4 souls.";

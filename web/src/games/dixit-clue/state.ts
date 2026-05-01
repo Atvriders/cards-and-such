@@ -1,92 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
 
-export interface DeductionPuzzle {
-  scenario: string;
-  clues: string[];
-  options: string[];
-  correctIndex: number;
-}
-
-export interface DixitClueSettings { puzzles: "10"; }
-
-export interface DixitClueState {
-  puzzles: DeductionPuzzle[];
-  currentIndex: number;
-  selected: number | null;
-  resolved: boolean;
-  score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
-}
-
-export type DixitClueAction =
-  | { type: "select"; index: number }
-  | { type: "submit" }
-  | { type: "next" };
-
-const ALL_PUZZLES: DeductionPuzzle[] = [
-  { scenario: "Dixit each round has 1 storyteller.", clues: ["Storyteller does?"], options: ["Says clue for chosen card","Picks a card silently","Names player","Skips"], correctIndex: 0 },
-  { scenario: "Other players?", clues: ["Pick."], options: ["Submit decoy cards matching clue","Vote first","Pass","Roll dice"], correctIndex: 0 },
-  { scenario: "Voting?", clues: ["Pick."], options: ["Players guess storyteller's card","Storyteller chooses","No vote","Random"], correctIndex: 0 },
-  { scenario: "Storyteller scores 0 if?", clues: ["Pick."], options: ["Everyone or nobody guesses","Some guess","Always","Vote tied"], correctIndex: 0 },
-  { scenario: "Optimal clue strategy?", clues: ["Pick."], options: ["Some get it, some don't","Everyone gets it","Nobody gets it","Random"], correctIndex: 0 },
-  { scenario: "Number of cards in classic Dixit?", clues: ["Pick."], options: ["84","100","36","52"], correctIndex: 0 },
-  { scenario: "Player count?", clues: ["Pick."], options: ["3-6","2","12","8-10"], correctIndex: 0 },
-  { scenario: "Win condition?", clues: ["Pick."], options: ["Reach 30 points","Round limit","Card match","Vote"], correctIndex: 0 },
-  { scenario: "Designer?", clues: ["Pick."], options: ["Jean-Louis Roubira","Reiner Knizia","Antoine Bauza","Bruno Faidutti"], correctIndex: 0 },
-  { scenario: "Year?", clues: ["Pick."], options: ["2008","2000","2015","2020"], correctIndex: 0 }
+export const DixitClue_QUESTIONS: QuizQuestion[] = [
+  {
+    "q": "Dixit cards feature?",
+    "choices": [
+      "Surreal artwork",
+      "Photos",
+      "Numbers",
+      "Words"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "The active player is called?",
+    "choices": [
+      "The Storyteller",
+      "The Caller",
+      "The Drawer",
+      "The Judge"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Storyteller gives?",
+    "choices": [
+      "A clue or phrase",
+      "A lie",
+      "A number",
+      "A score"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Other players?",
+    "choices": [
+      "Submit matching cards",
+      "Draw",
+      "Vote first",
+      "Sing"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Players vote on?",
+    "choices": [
+      "Storyteller's card",
+      "Best card",
+      "Funniest",
+      "Highest number"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Dixit is by?",
+    "choices": [
+      "Libellud",
+      "Jackbox",
+      "Asmodee",
+      "CMON"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Dixit player count?",
+    "choices": [
+      "3–6",
+      "2",
+      "12+",
+      "20"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "First Dixit released?",
+    "choices": [
+      "2008",
+      "2015",
+      "2020",
+      "1995"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Score on board uses?",
+    "choices": [
+      "Bunnies",
+      "Tokens",
+      "Coins",
+      "Dice"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "If all guess correctly, storyteller scores?",
+    "choices": [
+      "0",
+      "6",
+      "3",
+      "10"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "If none guess correctly, storyteller scores?",
+    "choices": [
+      "0",
+      "6",
+      "3",
+      "10"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Dixit's designer is?",
+    "choices": [
+      "Jean-Louis Roubira",
+      "Reiner Knizia",
+      "Klaus Teuber",
+      "Bruno Cathala"
+    ],
+    "answer": 0
+  }
 ];
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
+const CFG = { totalQuestions: Math.min(10, DixitClue_QUESTIONS.length), pool: DixitClue_QUESTIONS };
 
-export function initialState(seed: number, _settings: DixitClueSettings): DixitClueState {
-  const rng = mulberry32(seed);
-  const pool = shuffle([...ALL_PUZZLES], rng).slice(0, Math.min(10, ALL_PUZZLES.length));
-  return {
-    puzzles: pool,
-    currentIndex: 0,
-    selected: null,
-    resolved: false,
-    score: 0,
-    correctCount: 0,
-    phase: "playing",
-  };
+export interface DixitClueSettings { dummy: boolean; }
+export type DixitClueState = QuizState;
+export type DixitClueAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: DixitClueSettings): DixitClueState {
+  return quizInitial(seed, CFG);
 }
 
 export function reducer(state: DixitClueState, action: DixitClueAction): DixitClueState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.resolved ? state : { ...state, selected: action.index };
-    case "submit": {
-      if (state.resolved || state.selected === null) return state;
-      const p = state.puzzles[state.currentIndex]!;
-      const ok = state.selected === p.correctIndex;
-      return {
-        ...state,
-        resolved: true,
-        score: state.score + (ok ? 100 : 0),
-        correctCount: state.correctCount + (ok ? 1 : 0),
-        phase: "result",
-      };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      if (ni >= state.puzzles.length) return { ...state, phase: "done" };
-      return { ...state, currentIndex: ni, selected: null, resolved: false, phase: "playing" };
-    }
-    default:
-      return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
 
 export function isTerminal(state: DixitClueState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return quizScore(state);
 }
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

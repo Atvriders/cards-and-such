@@ -1,31 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { DiceBaseballHighlightsState, DiceBaseballHighlightsStateAction, DiceBaseballHighlightsSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, TARGET_POINTS } from "./state.js";
+import type { DiceBaseballHighlightsState, DiceBaseballHighlightsAction, DiceBaseballHighlightsSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
 export function DiceBaseballHighlightsGame({ state, dispatch, onGameOver }: GameProps<DiceBaseballHighlightsState, DiceBaseballHighlightsSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dice-baseball-highlights-wrap"><div className="dice-baseball-highlights-done"><h2>Done!</h2><div className="dice-baseball-highlights-final">You {state.myPoints} - Opp {state.oppPoints}</div></div></div>;
+    return (
+      <div className="dibahi-wrap">
+        <div className="dibahi-done">
+          <h2>Inning</h2>
+          <div className="dibahi-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dibahi-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dibahi-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="dice-baseball-highlights-wrap">
-      <div className="dice-baseball-highlights-info">Round {state.round} / {TOTAL_ROUNDS} - First to {TARGET_POINTS}</div>
-      <div className="dice-baseball-highlights-score">You {state.myPoints} - Opp {state.oppPoints}</div>
+    <div className="dibahi-wrap">
+      <div className="dibahi-head">
+        <span className="dibahi-round">Inning {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dibahi-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="dice-baseball-highlights-row">{state.dice.map((d, i) => <div key={i} className="dice-baseball-highlights-die">{d}</div>)}</div>
+        <div className="dibahi-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dibahi-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="dice-baseball-highlights-btn" onClick={() => dispatch({ type:"roll" } as DiceBaseballHighlightsStateAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dibahi-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="dice-baseball-highlights-result">{state.lastDelta > 0 ? "+" + state.lastDelta + " You" : state.lastDelta < 0 ? (-state.lastDelta) + " Opp" : "Rally"}</div>
-          <button className="dice-baseball-highlights-btn alt" onClick={() => dispatch({ type:"next" } as DiceBaseballHighlightsStateAction)}>Next</button>
-        </>
-      )}
+      <div className="dibahi-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dibahi-log">{line}</div>)}
+      </div>
+      <div className="dibahi-actions">
+        {state.phase === "rolling" && (
+          <button className="dibahi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceBaseballHighlightsAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dibahi-btn alt" onClick={() => dispatch({ type: "next" } as DiceBaseballHighlightsAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

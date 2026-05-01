@@ -1,84 +1,86 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
+export const TOTAL_ROUNDS = 6;
+export const DICE_COUNT = 4;
+export const DICE_SIDES = 6;
 
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Pallino is", choices: ["Small target ball","Big ball","Pin","Mat"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Closest ball scores", choices: ["Yes","No (farthest)","Random","Same"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Standard balls per team", choices: ["4","8","2","10"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Throw closer to pallino", choices: ["Best aim","Far","Behind","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Hitting opponents ball", choices: ["Legal (knock away)","Foul","Skip","Restart"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Match length", choices: ["12-16 points","100","50","5"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Surface", choices: ["Court (dirt/clay)","Grass only","Ice","Concrete"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Spock = ", choices: ["Hard knockout shot","Soft shot","Foul","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Roll = ", choices: ["Smooth aim shot","Spock","Foul","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Punto = ", choices: ["Underhand toss","Overhand","Spock","Bowl"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-];
+export interface BocceSkillSettings { dummy: boolean; }
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
-
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
-}
-
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
+export interface BocceSkillState {
+  rngSeed: number;
+  round: number;
+  dice: number[] | null;
+  lastPts: number;
   score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  myStone: number;
+  cpuStone: number;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+export type BocceSkillAction = { type: "roll" } | { type: "next" };
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function initialState(seed: number, _settings: BocceSkillSettings): BocceSkillState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    myStone: 0,
+    cpuStone: 0,
+  };
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
+export function reducer(state: BocceSkillState, action: BocceSkillAction): BocceSkillState {
   if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<BocceSkillState> = {};
+    const me = dice[0]! + dice[1]!;
+    const cpu = dice[2]! + dice[3]!;
+    const myDist = Math.abs(me - 7);
+    const cpuDist = Math.abs(cpu - 7);
+    extra.myStone = myDist;
+    extra.cpuStone = cpuDist;
+    if (myDist < cpuDist) {
+      pts = (cpuDist - myDist) * 2;
+      logEntry = `End ${state.round}: WIN end (+${pts})`;
+    } else if (myDist > cpuDist) {
+      pts = -(myDist - cpuDist);
+      logEntry = `End ${state.round}: lost end (${pts})`;
+    } else {
+      pts = 1;
+      logEntry = `End ${state.round}: tied (+1)`;
     }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
+  }
+  return state;
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: BocceSkillState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

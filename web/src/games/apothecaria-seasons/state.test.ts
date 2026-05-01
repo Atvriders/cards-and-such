@@ -1,28 +1,39 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
-const S = { dummy: false };
-describe("ApothecariaSeasons", () => {
-  it("creates 10 prompts", () => { expect(initialState(1, S).prompts.length).toBeGreaterThanOrEqual(10); });
-  it("starts in choose phase", () => { expect(initialState(1, S).phase).toBe("choose"); });
-  it("choosing scores points", () => {
-    const s = initialState(1, S);
-    const s2 = reducer(s, { type:"choose", choice: 0 });
-    expect(s2.score).toBeGreaterThanOrEqual(0);
-    expect(s2.phase).toBe("result");
+import { initialState, reducer, isTerminal, TOTAL_ROUNDS, TARGET_SCORE } from "./state.js";
+
+const S = { difficulty: "Standard" as const };
+
+describe("apothecaria-seasons", () => {
+  it("starts in choose phase with full morale", () => {
+    const s = initialState(42, S);
+    expect(s.phase).toBe("choose");
+    expect(s.progress).toBe(0);
+    expect(s.morale).toBeGreaterThan(0);
+    expect(s.round).toBe(1);
   });
-  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("can complete full saga", () => {
-    let s = initialState(1, S);
-    for (let i = 0; i < s.prompts.length; i++) {
-      s = reducer(s, { type:"choose", choice: 0 });
-      s = reducer(s, { type:"next" });
+  it("playing a tactic advances round", () => {
+    const s0 = initialState(42, S);
+    const tid = "forage";
+    const s1 = reducer(s0, { type: "play", tacticId: tid });
+    expect(s1.round).toBe(2);
+    expect(s1.lastTactic).toBe(tid);
+  });
+  it("isTerminal null until done", () => {
+    expect(isTerminal(initialState(1, S))).toBeNull();
+  });
+  it("game ends within total rounds", () => {
+    let s = initialState(7, S);
+    let safety = 0;
+    while (s.phase !== "done" && safety++ < TOTAL_ROUNDS + 5) {
+      s = reducer(s, { type: "play", tacticId: "forage" });
     }
     expect(s.phase).toBe("done");
+    expect(isTerminal(s)).not.toBeNull();
   });
-  it("different choices yield non-negative points", () => {
-    const a = reducer(initialState(7, S), { type: "choose", choice: 0 });
-    const b = reducer(initialState(7, S), { type: "choose", choice: 1 });
-    expect(a.lastPts).toBeGreaterThanOrEqual(0);
-    expect(b.lastPts).toBeGreaterThanOrEqual(0);
+  it("invalid tactic id is a no-op", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "play", tacticId: "__bogus__" });
+    expect(s1).toBe(s0);
   });
+  it("target score is positive", () => { expect(TARGET_SCORE).toBeGreaterThan(0); });
 });

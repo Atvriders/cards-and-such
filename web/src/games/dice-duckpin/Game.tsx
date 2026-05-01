@@ -8,24 +8,45 @@ export function DiceDuckpinGame({ state, dispatch, onGameOver }: GameProps<DiceD
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-duckpin-wrap"><div className="ds-duckpin-done"><h2>Done!</h2><div className="ds-duckpin-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dicduc-wrap">
+        <div className="dicduc-done">
+          <h2>Frame</h2>
+          <div className="dicduc-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicduc-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicduc-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-duckpin-wrap">
-      <div className="ds-duckpin-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-duckpin-score">{state.score} pts</div>
+    <div className="dicduc-wrap">
+      <div className="dicduc-head">
+        <span className="dicduc-round">Frame {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicduc-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-duckpin-row">{state.dice.map((d, i) => <div key={i} className="ds-duckpin-die">{d}</div>)}</div>
+        <div className="dicduc-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicduc-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-duckpin-btn" onClick={() => dispatch({ type:"roll" } as DiceDuckpinAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicduc-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-duckpin-result">+{state.lastPts}</div>
-          <button className="ds-duckpin-btn alt" onClick={() => dispatch({ type:"next" } as DiceDuckpinAction)}>Next</button>
-        </>
-      )}
+      <div className="dicduc-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicduc-log">{line}</div>)}
+      </div>
+      <div className="dicduc-actions">
+        {state.phase === "rolling" && (
+          <button className="dicduc-btn primary" onClick={() => dispatch({ type: "roll" } as DiceDuckpinAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicduc-btn alt" onClick={() => dispatch({ type: "next" } as DiceDuckpinAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

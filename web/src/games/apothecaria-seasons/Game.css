@@ -1,16 +1,28 @@
-.journal-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:20px; font-family: Georgia, serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #faf6ee 0%, #f3ebd9 100%); border-radius: 12px; }
-.journal-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
-.journal-progress { font-size:0.95rem; color:#7c5e3e; font-style: italic; }
-.journal-score { font-size:1.05rem; font-weight:700; color:#8e44ad; }
-.journal-prompt { font-size:1.15rem; font-weight:500; text-align:center; color:#3a2c18; line-height:1.5; padding: 10px 0; border-top: 1px solid #c9b78a; border-bottom: 1px solid #c9b78a; width: 100%; }
-.journal-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
-.journal-choice { display:flex; align-items:center; gap:12px; padding:12px 16px; border:2px solid #b8a070; border-radius:10px; background:#fffdf6; cursor:pointer; font-size:1rem; text-align:left; color:#3a2c18; font-family: inherit; }
-.journal-choice:hover:not(:disabled) { border-color:#8e44ad; background:#f5edff; }
-.journal-choice.selected { border-color:#8e44ad; background:#f5edff; }
-.journal-choice-letter { font-weight:900; font-size:1.05rem; color:#8e44ad; min-width:24px; }
-.journal-actions { display:flex; gap:12px; }
-.journal-btn { padding:10px 28px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; }
-.journal-btn.next { background:#8e44ad; }
-.journal-feedback { font-size:1rem; font-style: italic; padding:10px 24px; border-radius:8px; background:#f5edff; color:#5b2c84; }
-.journal-done { text-align:center; padding:24px; background:#fffdf6; border-radius:14px; width: 100%; }
-.journal-done h2 { margin:0 0 8px; color:#3a2c18; }
+.aps-wrap{font-family:'Inter',system-ui,sans-serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#dcfce7;border-radius:14px}
+.aps-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
+.aps-icon{font-size:1.6rem}
+.aps-scenario{flex:1;color:#15803d}
+.aps-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1}
+.aps-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #15803d}
+.aps-bars{display:flex;flex-direction:column;gap:6px}
+.aps-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#334155;margin-bottom:2px}
+.aps-bar-track{height:10px;border-radius:5px;background:#e2e8f0;overflow:hidden}
+.aps-bar-fill{height:100%;transition:width 200ms ease}
+.aps-bar-good{background:linear-gradient(90deg,#10b981,#059669)}
+.aps-bar-bad{background:linear-gradient(90deg,#f59e0b,#dc2626)}
+.aps-morale{font-size:1rem;color:#dc2626;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
+.aps-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#475569;background:#fff;padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1}
+.aps-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.aps-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:#fff;border:2px solid transparent;transition:all 150ms;display:flex;flex-direction:column;gap:2px;font-family:'Inter',system-ui,sans-serif}
+.aps-tactic:hover:not(:disabled){border-color:#15803d;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.aps-tactic:disabled{opacity:0.5;cursor:not-allowed}
+.aps-tactic-emoji{font-size:1.4rem}
+.aps-tactic-name{font-weight:700;color:#15803d}
+.aps-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#64748b}
+.aps-tactic-desc{font-size:0.78rem;color:#475569;line-height:1.3}
+.aps-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
+.aps-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#64748b;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.5)}
+.aps-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
+.aps-final-title{margin:0 0 8px;color:#15803d}
+.aps-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#15803d}
+.aps-final-stats{margin-top:8px;font-size:0.85rem;color:#64748b;font-family:'JetBrains Mono',monospace}

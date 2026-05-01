@@ -1,84 +1,96 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
+export const TOTAL_ROUNDS = 20;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Each player chooses", choices: ["Personal number","Same number","Bull","Triple 20"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Earn killer status by hitting", choices: ["Own double","Own single","Bull","Triple"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Killer attacks by hitting", choices: ["Opponent double","Opponent single","Bull","Triple 20"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Each player starts with lives", choices: ["3 or 5","1","10","20"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Lose all lives = ", choices: ["Out","Win","Reset","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Cannot attack until", choices: ["You become killer","First round","Bull is hit","Triple"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Self-hit kills you", choices: ["Yes (some rules)","No","Heals","Bonus"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Best killer aim", choices: ["Opponent double","Bull","Triple 20","Outer single"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Last player wins", choices: ["Yes","No","Tie always","Skip"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Friendly version skips", choices: ["Self-hit kill","Killing","Doubles","Lives"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-];
+export interface DartsKillerClassicSettings { dummy: boolean; }
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
-
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
-}
-
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
+export interface DartsKillerClassicState {
+  rngSeed: number;
+  round: number;
+  dice: number[] | null;
+  lastPts: number;
   score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  cpuLives: number;
+  myLives: number;
+  isKiller: boolean;
+  cpuKiller: boolean;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+export type DartsKillerClassicAction = { type: "roll" } | { type: "next" };
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function initialState(seed: number, _settings: DartsKillerClassicSettings): DartsKillerClassicState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    cpuLives: 5,
+    myLives: 5,
+    isKiller: false,
+    cpuKiller: false,
+  };
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
+export function reducer(state: DartsKillerClassicState, action: DartsKillerClassicAction): DartsKillerClassicState {
   if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<DartsKillerClassicState> = {};
+    const me = dice[0]!;
+    const cpu = dice[1]!;
+    if (!state.isKiller && me >= 5) {
+      extra.isKiller = true;
+      logEntry = `Hit double - YOU ARE KILLER`;
+      pts = 10;
+    } else if (state.isKiller && cpu <= 4) {
+      extra.cpuLives = state.cpuLives - 1;
+      pts = 5;
+      logEntry = `Killed CPU life (${state.cpuLives - 1} left)`;
+      if (state.cpuLives - 1 <= 0) { pts += 50; logEntry = `KO! CPU eliminated`; }
+    } else if (state.cpuKiller && me <= 4) {
+      extra.myLives = state.myLives - 1;
+      pts = -5;
+      logEntry = `CPU killed your life (${state.myLives - 1} left)`;
+    } else if (!state.cpuKiller && cpu >= 5) {
+      extra.cpuKiller = true;
+      logEntry = `CPU is now Killer`;
+      pts = -2;
+    } else {
+      logEntry = `No effect`;
     }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+
+    const earlyWin = ((extra.cpuLives !== undefined && extra.cpuLives <= 0) || (extra.myLives !== undefined && extra.myLives <= 0));
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
+  }
+  return state;
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: DartsKillerClassicState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

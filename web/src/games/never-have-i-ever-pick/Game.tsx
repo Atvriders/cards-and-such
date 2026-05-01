@@ -1,66 +1,63 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { GameState, GameAction, GameSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import type { NeverHaveIEverPickState, NeverHaveIEverPickAction, NeverHaveIEverPickSettings } from "./state.js";
+import { isTerminal, TOTAL_QUESTIONS } from "./state.js";
 import "./Game.css";
 
-const LABELS = ["A", "B", "C", "D"];
+const P = "nhiep";
 
-export function NeverHaveIEverPickGame({ state, dispatch, onGameOver }: GameProps<GameState, GameSettings>): JSX.Element {
-  const terminal = isTerminal(state);
-  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-
+export function NeverHaveIEverPickGame({ state, dispatch, onGameOver }: GameProps<NeverHaveIEverPickState, NeverHaveIEverPickSettings>): JSX.Element {
+  const [start, setStart] = useState<number>(() => Date.now());
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  useEffect(() => { if (state.phase === "ask") setStart(Date.now()); }, [state.current, state.phase]);
   if (state.phase === "done") {
     return (
-      <div className="qz-wrap">
-        <div className="qz-done">
-          <h2>Done!</h2>
-          <p>Correct: {state.correctCount} / {state.rounds.length}</p>
-          <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
+      <div className={`${P}-wrap`}>
+        <div className={`${P}-final`}>
+          <h2 className={`${P}-final-title`}>Never Have I Ever — Complete</h2>
+          <div className={`${P}-final-score`}>{state.score} pts</div>
+          <div className={`${P}-streak`}>{state.questions.length} questions answered</div>
         </div>
       </div>
     );
   }
-
-  const r = state.rounds[state.currentIndex]!;
-  const isResult = state.phase === "result";
-
+  const q = state.questions[state.current];
+  if (!q) return <div className={`${P}-wrap`}>Loading…</div>;
   return (
-    <div className="qz-wrap">
-      <div className="qz-header">
-        <span className="qz-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="qz-score">{state.score} pts</span>
+    <div className={`${P}-wrap`}>
+      <div className={`${P}-header`}>
+        <span className={`${P}-progress`}>Q{state.current + 1} / {TOTAL_QUESTIONS}</span>
+        <span className={`${P}-score`}>Score {state.score} · 🔥 {state.streak}</span>
       </div>
-      <div className="qz-prompt">{r.prompt}</div>
-      <div className="qz-choices">
-        {r.choices.map((choice, i) => {
-          let cls = "qz-choice";
-          if (isResult) {
-            if (i === r.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
+      <div className={`${P}-q`}>{q.q}</div>
+      <div className={`${P}-choices`}>
+        {q.choices.map((c, i) => {
+          const isSel = state.lastAnswerIdx === i;
+          const cls = state.phase === "feedback"
+            ? i === q.answer ? `${P}-choice ${P}-correct` : isSel ? `${P}-choice ${P}-wrong` : `${P}-choice`
+            : `${P}-choice`;
           return (
-            <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as GameAction)}>
-              <span className="qz-letter">{LABELS[i]}</span>{choice}
-            </button>
+            <button
+              key={i}
+              className={cls}
+              disabled={state.phase !== "ask"}
+              type="button"
+              onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as NeverHaveIEverPickAction)}
+            >{c}</button>
           );
         })}
       </div>
-      {isResult && (
-        <div className={`qz-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
-          {state.selected === r.correct ? "Correct!" : `Answer: ${r.choices[r.correct]}`}
-        </div>
-      )}
-      <div className="qz-actions">
-        {!isResult && (
-          <button className="qz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as GameAction)}>Submit</button>
-        )}
-        {isResult && (
-          <button className="qz-btn next" onClick={() => dispatch({ type: "next" } as GameAction)}>
-            {state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}
+      {state.phase === "feedback" && (
+        <>
+          <div className={`${P}-feedback ${state.lastCorrect ? P + "-good" : P + "-bad"}`}>
+            {state.lastCorrect ? "Correct!" : `Answer: ${q.choices[q.answer]}`}
+          </div>
+          <button className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as NeverHaveIEverPickAction)}>
+            {state.current + 1 >= TOTAL_QUESTIONS ? "See Results" : "Next"}
           </button>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }

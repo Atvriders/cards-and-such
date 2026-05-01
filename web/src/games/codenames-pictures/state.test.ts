@@ -1,28 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, CodenamesPictures_CFG } from "./state.js";
 
-const S = { puzzles: "10" as const };
+const S = { dummy: false };
 
 describe("codenames-pictures", () => {
-  it("creates puzzles", () => {
-    expect(initialState(1, S).puzzles.length).toBeGreaterThanOrEqual(4);
-  });
-  it("starts in playing phase", () => {
-    expect(initialState(1, S).phase).toBe("playing");
-  });
-  it("submitting correct earns score", () => {
+  it("starts in guess phase with empty history", () => {
     const s = initialState(1, S);
-    const s2 = reducer(reducer(s, { type: "select", index: s.puzzles[0]!.correctIndex }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(100);
+    expect(s.phase).toBe("guess");
+    expect(s.guesses.length).toBe(0);
+    expect(s.answer.length).toBe(CodenamesPictures_CFG.answerLength);
   });
-  it("isTerminal null while playing", () => {
+  it("set updates working guess", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "set", position: 0, value: 1 });
+    expect(s1.current[0]).toBe(1);
+  });
+  it("submit appends a guess with feedback", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "submit" });
+    expect(s1.guesses.length).toBe(1);
+  });
+  it("isTerminal null until done", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
   });
-  it("next advances", () => {
+  it("submitting the answer wins", () => {
     let s = initialState(1, S);
-    s = reducer(s, { type: "select", index: 0 });
+    for (let i = 0; i < CodenamesPictures_CFG.answerLength; i++) {
+      s = reducer(s, { type: "set", position: i, value: s.answer[i]! });
+    }
     s = reducer(s, { type: "submit" });
-    s = reducer(s, { type: "next" });
-    expect(s.currentIndex).toBeGreaterThanOrEqual(1);
+    expect(s.phase).toBe("won");
+    expect(isTerminal(s)).not.toBeNull();
+  });
+  it("running out of guesses ends the puzzle", () => {
+    let s = initialState(1, S);
+    for (let i = 0; i < CodenamesPictures_CFG.maxGuesses; i++) {
+      s = reducer(s, { type: "submit" });
+    }
+    expect(s.phase === "won" || s.phase === "lost").toBe(true);
   });
 });

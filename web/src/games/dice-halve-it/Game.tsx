@@ -8,24 +8,45 @@ export function DiceHalveItGame({ state, dispatch, onGameOver }: GameProps<DiceH
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-halve-it-wrap"><div className="ds-halve-it-done"><h2>Done!</h2><div className="ds-halve-it-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dihait-wrap">
+        <div className="dihait-done">
+          <h2>Round</h2>
+          <div className="dihait-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dihait-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dihait-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-halve-it-wrap">
-      <div className="ds-halve-it-info">Round {state.round} / {TOTAL_ROUNDS} — Hit 7+ or your score halves!</div>
-      <div className="ds-halve-it-score">{state.score} pts</div>
+    <div className="dihait-wrap">
+      <div className="dihait-head">
+        <span className="dihait-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dihait-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-halve-it-row">{state.dice.map((d, i) => <div key={i} className="ds-halve-it-die">{d}</div>)}</div>
+        <div className="dihait-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dihait-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-halve-it-btn" onClick={() => dispatch({ type:"roll" } as DiceHalveItAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dihait-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-halve-it-result">{state.halved ? "HALVED!" : "+" + state.lastPts}</div>
-          <button className="ds-halve-it-btn alt" onClick={() => dispatch({ type:"next" } as DiceHalveItAction)}>Next</button>
-        </>
-      )}
+      <div className="dihait-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dihait-log">{line}</div>)}
+      </div>
+      <div className="dihait-actions">
+        {state.phase === "rolling" && (
+          <button className="dihait-btn primary" onClick={() => dispatch({ type: "roll" } as DiceHalveItAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dihait-btn alt" onClick={() => dispatch({ type: "next" } as DiceHalveItAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,43 +1,72 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_TURNS = 10;
-export const MAX_THROW = 20;
+export const TOTAL_ROUNDS = 5;
+export const DICE_COUNT = 5;
+export const DICE_SIDES = 6;
 
-export interface ThreesBarDiceSettings { dummy: boolean; }
-export interface ThreesBarDiceState {
+export interface BarDiceThreesSettings { dummy: boolean; }
+
+export interface BarDiceThreesState {
   rngSeed: number;
-  turn: number;
-  score: number;
+  round: number;
+  dice: number[] | null;
   lastPts: number;
-  lastRoll: number;
-  phase: "ready" | "thrown" | "done";
-}
-export type ThreesBarDiceAction = { type: "throw" } | { type: "next" };
+  score: number;
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
 
-export function initialState(seed: number, _s: ThreesBarDiceSettings): ThreesBarDiceState {
-  return { rngSeed: seed, turn: 1, score: 0, lastPts: 0, lastRoll: 0, phase: "ready" };
 }
 
-export function reducer(state: ThreesBarDiceState, action: ThreesBarDiceAction): ThreesBarDiceState {
+export type BarDiceThreesAction = { type: "roll" } | { type: "next" };
+
+export function initialState(seed: number, _settings: BarDiceThreesSettings): BarDiceThreesState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+
+  };
+}
+
+export function reducer(state: BarDiceThreesState, action: BarDiceThreesAction): BarDiceThreesState {
   if (state.phase === "done") return state;
-  if (action.type === "throw" && state.phase === "ready") {
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
     const rng = mulberry32(state.rngSeed);
-    const a = rng(), b = rng(), c = rng();
-    const next = Math.floor(rng() * 2 ** 31);
-    const aim = (a + b + c) / 3;
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
     let pts = 0;
-    if (aim < 0.05) pts = MAX_THROW;
-    else if (aim < 0.2) pts = Math.floor(MAX_THROW * 0.7);
-    else if (aim < 0.5) pts = Math.floor(MAX_THROW * 0.4);
-    else if (aim < 0.8) pts = Math.floor(MAX_THROW * 0.2);
-    else pts = 0;
-    const isLast = state.turn >= TOTAL_TURNS;
-    return { ...state, rngSeed: next, score: state.score + pts, lastPts: pts, lastRoll: Math.floor(aim * 100), phase: isLast ? "done" : "thrown" };
+    let logEntry = "";
+    let extra: Partial<BarDiceThreesState> = {};
+    let total = 0;
+    for (const d of dice) total += d === 3 ? 0 : d;
+    pts = -total;
+    logEntry = `Threes: total ${total}`;
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
-  if (action.type === "next" && state.phase === "thrown") {
-    return { ...state, turn: state.turn + 1, lastPts: 0, lastRoll: 0, phase: "ready" };
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
   }
   return state;
 }
 
-export function isTerminal(s: ThreesBarDiceState): { score: number } | null { return s.phase === "done" ? { score: s.score } : null; }
+export function isTerminal(state: BarDiceThreesState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
+}

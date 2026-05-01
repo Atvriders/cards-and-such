@@ -1,125 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface LoadedQuestionsQuizSettings { questions: "10"; }
-export interface LoadedQuestionsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type LoadedQuestionsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
+
+export const LoadedQuestionsQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Loaded Questions has players answer how?",
+    "q": "Loaded Questions asks?",
     "choices": [
-      "Secretly, then guesser matches",
-      "Loud and proud",
-      "On a board only",
-      "By dice"
+      "Personal opinion questions",
+      "Numbers",
+      "Lies",
+      "Sketches"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "The guesser tries to identify?",
+    "q": "Players guess?",
     "choices": [
-      "Who said which answer",
-      "Total score",
-      "Drawing",
-      "Music"
+      "Who said what",
+      "Highest number",
+      "Truth",
+      "Time"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Loaded Questions was published by?",
+    "q": "Loaded Questions is by?",
     "choices": [
       "All Things Equal",
+      "Jackbox",
       "Hasbro",
-      "Mattel",
-      "USAopoly"
+      "Asmodee"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Loaded Questions categories include?",
+    "q": "Player count?",
     "choices": [
-      "Hypothetical, personal, no right answer",
-      "Math",
-      "Map facts",
-      "Sports stats"
+      "3–6",
+      "2",
+      "20+",
+      "Solo"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Loaded Questions plays with how many?",
-    "choices": [
-      "1",
-      "Just 2",
-      "3-6 usually",
-      "30+"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The original game year is approx?",
+    "q": "Released in?",
     "choices": [
       "1997",
-      "2003",
-      "2010",
-      "2018"
+      "2005",
+      "2015",
+      "2020"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "On the Go variant emphasizes?",
+    "q": "Loaded Questions Go is for?",
     "choices": [
-      "Travel-friendly card-only play",
-      "Online only",
-      "App only",
-      "Board-heavy play"
+      "Phones/quick play",
+      "Console",
+      "TV",
+      "Solo"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Loaded Questions points are scored when?",
+    "q": "Each round writes?",
     "choices": [
-      "Guesser matches answers correctly",
-      "Random draw",
-      "Highest dice",
-      "Most cards"
+      "Personal answer",
+      "Lies",
+      "Numbers",
+      "Sketches"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "Players take turns being?",
+    "q": "Active player roles?",
     "choices": [
-      "The guesser",
-      "The judge",
-      "The dealer",
-      "The audience only"
+      "Judge guesses authors",
+      "Speaker",
+      "Drawer",
+      "Singer"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "The fun comes mostly from?",
+    "q": "Categories include?",
     "choices": [
-      "Quirky honest answers",
-      "Tactical depth",
-      "Bluff betting",
-      "Drawing"
+      "Family-friendly",
+      "Numeric",
+      "Sketches",
+      "Songs"
     ],
-    "correct": 0
+    "answer": 0
+  },
+  {
+    "q": "Questions per game?",
+    "choices": [
+      "Many",
+      "One",
+      "Five",
+      "Ten"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Win condition?",
+    "choices": [
+      "First to space on board",
+      "Most lies",
+      "Best art",
+      "Random"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Loaded Questions Junior is for?",
+    "choices": [
+      "Kids",
+      "Adults",
+      "Pets",
+      "Babies"
+    ],
+    "answer": 0
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
-export function initialState(seed: number, _settings: LoadedQuestionsQuizSettings): LoadedQuestionsQuizState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+
+const CFG = { totalQuestions: Math.min(10, LoadedQuestionsQuiz_QUESTIONS.length), pool: LoadedQuestionsQuiz_QUESTIONS };
+
+export interface LoadedQuestionsQuizSettings { dummy: boolean; }
+export type LoadedQuestionsQuizState = QuizState;
+export type LoadedQuestionsQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: LoadedQuestionsQuizSettings): LoadedQuestionsQuizState {
+  return quizInitial(seed, CFG);
 }
+
 export function reducer(state: LoadedQuestionsQuizState, action: LoadedQuestionsQuizAction): LoadedQuestionsQuizState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case"select":return state.submitted?state:{...state,selected:action.choice};
-    case"submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case"tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case"next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
-export function isTerminal(state: LoadedQuestionsQuizState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function isTerminal(state: LoadedQuestionsQuizState): { score: number } | null {
+  return quizScore(state);
+}
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

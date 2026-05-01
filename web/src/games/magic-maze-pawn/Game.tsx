@@ -1,35 +1,20 @@
-import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { CoopView } from "../_shared/CoopView.js";
+import { coopScore } from "../_shared/coop-engine.js";
 import type { MagicMazePawnState, MagicMazePawnAction, MagicMazePawnSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, TARGET_SCORE } from "./state.js";
+import { MagicMazePawn_CFG, FLAVOR } from "./state.js";
 import "./Game.css";
+
 export function MagicMazePawnGame({ state, dispatch, onGameOver }: GameProps<MagicMazePawnState, MagicMazePawnSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  const theme = "Maze Movement";
-  if (state.phase === "done") {
-    const won = state.teamScore >= TARGET_SCORE;
-    return <div className="coop-wrap"><div className="coop-done"><h2>{won ? "Mission Success!" : "Mission Over"}</h2><div className="coop-final">{state.teamScore} pts (target {TARGET_SCORE})</div>{won && <p style={{ color: "#27ae60", fontWeight: 700 }}>+50 bonus!</p>}</div></div>;
-  }
   return (
-    <div className="coop-wrap">
-      <div className="coop-info">{theme} — Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="coop-target">Team Score: {state.teamScore} / {TARGET_SCORE}</div>
-      {state.phase === "rolled" && (
-        <div className="coop-row">
-          <div className="coop-die">You: {state.playerRoll}</div>
-          <div className="coop-die">Ally: {state.cpuRoll}</div>
-        </div>
-      )}
-      {state.phase === "ready" && (
-        <button className="coop-btn" onClick={() => dispatch({ type: "play" } as MagicMazePawnAction)}>Play Round</button>
-      )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="coop-result">+{state.lastPts} together</div>
-          <button className="coop-btn alt" onClick={() => dispatch({ type: "next" } as MagicMazePawnAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next Round"}</button>
-        </>
-      )}
-    </div>
+    <CoopView
+      prefix="mmp"
+      cfg={MagicMazePawn_CFG}
+      state={state}
+      onPlay={(tacticId) => dispatch({ type: "play", tacticId } as MagicMazePawnAction)}
+      onGameOver={onGameOver}
+      scoreFn={(s) => coopScore(s, MagicMazePawn_CFG)}
+      intro={FLAVOR}
+    />
   );
 }

@@ -8,24 +8,45 @@ export function ReplayBaseballGame({ state, dispatch, onGameOver }: GameProps<Re
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-replbase-wrap"><div className="g-replbase-done"><h2>Match!</h2><div className="g-replbase-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="repbas-wrap">
+        <div className="repbas-done">
+          <h2>Inning</h2>
+          <div className="repbas-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="repbas-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="repbas-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-replbase-wrap">
-      <div className="g-replbase-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-replbase-score">{state.score} pts</div>
+    <div className="repbas-wrap">
+      <div className="repbas-head">
+        <span className="repbas-round">Inning {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="repbas-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-replbase-row">{state.dice.map((d, i) => <div key={i} className="g-replbase-die">{d}</div>)}</div>
+        <div className="repbas-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="repbas-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-replbase-btn" onClick={() => dispatch({ type:"roll" } as ReplayBaseballAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="repbas-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-replbase-result">+{state.lastPts}</div>
-          <button className="g-replbase-btn alt" onClick={() => dispatch({ type:"next" } as ReplayBaseballAction)}>Next</button>
-        </>
-      )}
+      <div className="repbas-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="repbas-log">{line}</div>)}
+      </div>
+      <div className="repbas-actions">
+        {state.phase === "rolling" && (
+          <button className="repbas-btn primary" onClick={() => dispatch({ type: "roll" } as ReplayBaseballAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="repbas-btn alt" onClick={() => dispatch({ type: "next" } as ReplayBaseballAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

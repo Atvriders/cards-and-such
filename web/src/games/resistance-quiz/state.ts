@@ -1,192 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface ResistanceQuizSettings { questions: "10"; }
-export interface ResistanceQuizState {
-  questions: QuizQuestion[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
-  score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
-}
-export type ResistanceQuizAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
 
-const ALL_QUESTIONS: QuizQuestion[] = [
+export const ResistanceQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "How many failed missions do spies need to win?",
+    "q": "Resistance: rebels vs?",
     "choices": [
+      "Spies",
+      "Cops",
+      "Mages",
+      "Pirates"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Players vote on?",
+    "choices": [
+      "Mission team",
+      "Words",
+      "Roll",
+      "Random"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Rebels win after?",
+    "choices": [
+      "3 successful missions",
+      "All",
+      "Vote",
+      "Random"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Spies win after?",
+    "choices": [
+      "3 failed missions",
+      "All",
+      "Vote",
+      "Random"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Player count?",
+    "choices": [
+      "5–10",
       "2",
-      "3",
-      "4",
-      "5"
+      "20+",
+      "Solo"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "How many successful missions does the Resistance need to win?",
+    "q": "Released in?",
     "choices": [
-      "2",
-      "3",
-      "4",
-      "5"
+      "2009",
+      "2005",
+      "2020",
+      "1995"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "What happens after 5 consecutive team rejections?",
+    "q": "Resistance is by?",
     "choices": [
-      "Resistance wins",
-      "Spies automatically win",
-      "Game ends in draw",
-      "New leader chosen"
+      "Indie Boards & Cards",
+      "Jackbox",
+      "Hasbro",
+      "Asmodee"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "In a 7-player game, how many spies are there?",
+    "q": "Compared to Avalon?",
     "choices": [
-      "2",
-      "3",
-      "4",
-      "5"
+      "No special roles",
+      "Same roles",
+      "More roles",
+      "Random"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Mission 4 in 7+ player games requires how many fails?",
+    "q": "Mission cards are?",
     "choices": [
-      "1",
-      "2",
-      "3",
-      "1 or 2"
+      "Success/Fail",
+      "Vote",
+      "Color",
+      "Number"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Who chooses the team for each mission?",
+    "q": "Mission requires?",
     "choices": [
-      "The current leader",
-      "A vote",
+      "Specific number of fails",
+      "Vote",
       "Random",
-      "Last mission's success team"
+      "Time"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "How are mission cards revealed?",
+    "q": "Avalon adds?",
     "choices": [
-      "Open declaration",
-      "Played face-down then shuffled",
-      "Public vote",
-      "Leader announces"
+      "Roles",
+      "Music",
+      "Dice",
+      "Cards"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Spies know:",
+    "q": "Game ends after?",
     "choices": [
-      "Nothing",
-      "Each other",
-      "All Resistance",
-      "Everyone's roles"
+      "3-3 or 5 missions",
+      "All vote",
+      "Time",
+      "Random"
     ],
-    "correct": 1
-  },
-  {
-    "question": "Common Resistance tell of a spy is…",
-    "choices": [
-      "Eagerly leading",
-      "Always voting yes early",
-      "Quiet during discussion",
-      "All of the above"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Best strategy for Resistance early game?",
-    "choices": [
-      "Approve everything",
-      "Reject all teams",
-      "Track votes & include yourself",
-      "Talk least"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Avalon adds which iconic role to Resistance?",
-    "choices": [
-      "Witch",
-      "Merlin",
-      "King",
-      "Wolf"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Spies typically want to fail…",
-    "choices": [
-      "Mission 1",
-      "Mission 2 or 3",
-      "Every mission",
-      "Only mission 5"
-    ],
-    "correct": 1
+    "answer": 0
   }
 ];
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
+const CFG = { totalQuestions: Math.min(10, ResistanceQuiz_QUESTIONS.length), pool: ResistanceQuiz_QUESTIONS };
 
-export function initialState(seed: number, _settings: ResistanceQuizSettings): ResistanceQuizState {
-  const rng = mulberry32(seed);
-  const pool = shuffle([...ALL_QUESTIONS], rng).slice(0, 10);
-  const questions = pool.map(q => {
-    const idx = q.choices.map((c, i) => ({ c, i }));
-    const s = shuffle(idx, rng);
-    const newCorrect = s.findIndex(x => x.i === q.correct) as 0 | 1 | 2 | 3;
-    return { ...q, choices: s.map(x => x.c) as [string, string, string, string], correct: newCorrect };
-  });
-  return { questions, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
+export interface ResistanceQuizSettings { dummy: boolean; }
+export type ResistanceQuizState = QuizState;
+export type ResistanceQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: ResistanceQuizSettings): ResistanceQuizState {
+  return quizInitial(seed, CFG);
 }
 
 export function reducer(state: ResistanceQuizState, action: ResistanceQuizAction): ResistanceQuizState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const q = state.questions[state.currentIndex]!;
-      const ok = state.selected === q.correct;
-      return {
-        ...state,
-        submitted: true,
-        score: state.score + (ok ? 100 : 0),
-        correctCount: state.correctCount + (ok ? 1 : 0),
-        phase: "result",
-      };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.questions.length
-        ? { ...state, phase: "done" }
-        : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default:
-      return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
 
 export function isTerminal(state: ResistanceQuizState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return quizScore(state);
 }
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

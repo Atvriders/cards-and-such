@@ -1,125 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface TelestrationsUpsideQuizSettings { questions: "10"; }
-export interface TelestrationsUpsideQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type TelestrationsUpsideQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
+
+export const TelestrationsUpsideQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Telestrations: Upside Drawn challenges drawers to do what?",
+    "q": "How many players is classic Telestrations designed for?",
     "choices": [
-      "Draw upside down",
-      "Draw with eyes closed",
-      "Draw in 5 seconds",
-      "Skip drawing"
+      "2–4",
+      "4–8",
+      "8–12",
+      "Up to 20"
     ],
-    "correct": 0
+    "answer": 1
   },
   {
-    "question": "The 'Upside Drawn' set is which kind of expansion?",
+    "q": "Telestrations alternates between which two actions?",
     "choices": [
-      "Bonus cards",
-      "Standalone box",
-      "Mini app",
-      "Costume kit"
+      "Sing and hum",
+      "Draw and guess",
+      "Act and shout",
+      "Roll and read"
     ],
-    "correct": 1
+    "answer": 1
   },
   {
-    "question": "Drawing upside down adds which gameplay element?",
+    "q": "Telestrations was first released in?",
     "choices": [
-      "Slower pace",
-      "More chaos and laughs",
-      "Penalty rules",
-      "Auction"
+      "2000",
+      "2009",
+      "2015",
+      "1995"
     ],
-    "correct": 1
+    "answer": 1
   },
   {
-    "question": "Upside Drawn keeps which Telestrations core mechanic?",
+    "q": "Each player passes their sketchbook how often?",
     "choices": [
-      "Sketch then guess passing",
-      "Auction",
-      "Trick taking",
-      "Bidding"
+      "Once total",
+      "After each phase",
+      "At the end",
+      "Never"
     ],
-    "correct": 0
+    "answer": 1
   },
   {
-    "question": "Upside Drawn recommended players?",
+    "q": "Standard Telestrations turn length is?",
     "choices": [
-      "1",
-      "Solo only",
-      "4-8",
-      "20+"
+      "30 sec",
+      "60 sec",
+      "90 sec",
+      "3 min"
     ],
-    "correct": 2
+    "answer": 1
   },
   {
-    "question": "Upside Drawn was released by which studio?",
+    "q": "Telestrations is published by which company?",
     "choices": [
-      "The Op (USAopoly)",
-      "FFG",
-      "Days of Wonder",
-      "Z-Man"
+      "Mattel",
+      "USAopoly",
+      "Hasbro",
+      "Asmodee"
     ],
-    "correct": 0
+    "answer": 1
   },
   {
-    "question": "Upside Drawn's name plays on what?",
+    "q": "After Dark edition is targeted at?",
     "choices": [
-      "Underwater",
-      "Inverted books/sketches",
-      "Magic tricks",
-      "Calligraphy"
+      "Children",
+      "Adults",
+      "Toddlers",
+      "Pets"
     ],
-    "correct": 1
+    "answer": 1
   },
   {
-    "question": "Upside Drawn is ideal for which group?",
+    "q": "Each player receives at the start?",
     "choices": [
-      "Kids only",
-      "Family/party",
-      "Solo",
-      "Pros only"
+      "Cards only",
+      "Sketchbook + dry-erase pen",
+      "Dice",
+      "A board"
     ],
-    "correct": 1
+    "answer": 1
   },
   {
-    "question": "Sketch passing leads to results that are typically?",
+    "q": "Telestrations evolved from which folk game?",
     "choices": [
-      "Boring",
-      "Hilariously off",
-      "Mathematically precise",
-      "Identical"
+      "Pictionary",
+      "Telephone with sketches",
+      "Charades",
+      "Scattergories"
     ],
-    "correct": 1
+    "answer": 1
   },
   {
-    "question": "In any Telestrations game, you score points by?",
+    "q": "Maximum players in standard Telestrations is?",
     "choices": [
-      "Guessing right and being guessed right",
-      "Drawing best art",
-      "Voting funny",
-      "Solving puzzles"
+      "6",
+      "8",
+      "12",
+      "20"
     ],
-    "correct": 0
+    "answer": 1
+  },
+  {
+    "q": "Drawing books in original box?",
+    "choices": [
+      "4",
+      "6",
+      "8",
+      "12"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "After completing your sketchbook you read aloud?",
+    "choices": [
+      "Your last guess",
+      "Whole evolution",
+      "Only word 1",
+      "Nothing"
+    ],
+    "answer": 1
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
-export function initialState(seed: number, _settings: TelestrationsUpsideQuizSettings): TelestrationsUpsideQuizState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+
+const CFG = { totalQuestions: Math.min(10, TelestrationsUpsideQuiz_QUESTIONS.length), pool: TelestrationsUpsideQuiz_QUESTIONS };
+
+export interface TelestrationsUpsideQuizSettings { dummy: boolean; }
+export type TelestrationsUpsideQuizState = QuizState;
+export type TelestrationsUpsideQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: TelestrationsUpsideQuizSettings): TelestrationsUpsideQuizState {
+  return quizInitial(seed, CFG);
 }
+
 export function reducer(state: TelestrationsUpsideQuizState, action: TelestrationsUpsideQuizAction): TelestrationsUpsideQuizState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case"select":return state.submitted?state:{...state,selected:action.choice};
-    case"submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case"tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case"next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
-export function isTerminal(state: TelestrationsUpsideQuizState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function isTerminal(state: TelestrationsUpsideQuizState): { score: number } | null {
+  return quizScore(state);
+}
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

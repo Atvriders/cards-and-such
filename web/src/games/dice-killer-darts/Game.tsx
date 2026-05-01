@@ -8,24 +8,45 @@ export function DiceKillerDartsGame({ state, dispatch, onGameOver }: GameProps<D
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-killer-da-wrap"><div className="ds-killer-da-done"><h2>Done!</h2><div className="ds-killer-da-final">{state.score + state.lives * 20} pts ({state.lives} lives left)</div></div></div>;
+    return (
+      <div className="dikida-wrap">
+        <div className="dikida-done">
+          <h2>Throw</h2>
+          <div className="dikida-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dikida-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dikida-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-killer-da-wrap">
-      <div className="ds-killer-da-info">Round {state.round} / {TOTAL_ROUNDS} — Lives: {state.lives}</div>
-      <div className="ds-killer-da-score">{state.score} pts</div>
+    <div className="dikida-wrap">
+      <div className="dikida-head">
+        <span className="dikida-round">Throw {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dikida-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-killer-da-row">{state.dice.map((d, i) => <div key={i} className="ds-killer-da-die">{d}</div>)}</div>
+        <div className="dikida-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dikida-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-killer-da-btn" onClick={() => dispatch({ type:"roll" } as DiceKillerDartsAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dikida-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-killer-da-result">{state.hit ? "HIT! -1 life" : "+" + state.lastPts}</div>
-          <button className="ds-killer-da-btn alt" onClick={() => dispatch({ type:"next" } as DiceKillerDartsAction)}>Next</button>
-        </>
-      )}
+      <div className="dikida-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dikida-log">{line}</div>)}
+      </div>
+      <div className="dikida-actions">
+        {state.phase === "rolling" && (
+          <button className="dikida-btn primary" onClick={() => dispatch({ type: "roll" } as DiceKillerDartsAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dikida-btn alt" onClick={() => dispatch({ type: "next" } as DiceKillerDartsAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

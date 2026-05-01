@@ -1,43 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface DrawfulQuizSettings { dummy: boolean; }
-export interface DrawfulQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type DrawfulQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" };
-const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "Drawful is published by?", choices: ["Jackbox Games", "Hasbro", "Mattel", "Spin Master"], correct: 0 },
-  { question: "Drawful 2 was released in?", choices: ["2014", "2016", "2018", "2020"], correct: 1 },
-  { question: "Players draw using their?", choices: ["Phone or tablet", "A wheel", "A stylus", "A piece of paper"], correct: 0 },
-  { question: "Original Drawful is part of?", choices: ["Jackbox Party Pack 1", "Jackbox Party Pack 3", "Pack 7", "No pack"], correct: 0 },
-  { question: "After drawing, other players?", choices: ["Comment", "Submit fake titles", "Vote winners", "Do nothing"], correct: 1 },
-  { question: "Drawful 2 was offered free during?", choices: ["The 2010 Olympics", "The 2020 COVID-19 lockdowns", "E3 2015", "PAX 2018"], correct: 1 },
-  { question: "Audience members can?", choices: ["Play silently", "Submit titles and vote", "Do nothing", "Just watch"], correct: 1 },
-  { question: "Each player gets how many drawing prompts in classic mode?", choices: ["1", "2", "3", "5"], correct: 1 },
-  { question: "Maximum players in Drawful is typically?", choices: ["4", "6", "8", "10"], correct: 2 },
-  { question: "Players score points when others?", choices: ["Pick their fake title", "Pick their drawing's real title", "Boo them", "Don't vote"], correct: 0 },
-  { question: "'Drawful Animate' adds?", choices: ["Voice acting", "Animation features", "Music", "Dice"], correct: 1 },
-];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
-export function initialState(seed: number, _s: DrawfulQuizSettings): DrawfulQuizState {
-  const rng = mulberry32(seed);
-  const pool = shuffle([...ALL_QUESTIONS], rng).slice(0, Math.min(10, ALL_QUESTIONS.length));
-  const questions = pool.map(q => { const idx = q.choices.map((c,i)=>({c,i})); const s=shuffle(idx,rng); const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3; return { ...q, choices: s.map(x=>x.c) as [string,string,string,string], correct: nc }; });
-  return { questions, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-export function reducer(state: DrawfulQuizState, action: DrawfulQuizAction): DrawfulQuizState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select": return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const q = state.questions[state.currentIndex]!;
-      const ok = state.selected === q.correct;
-      return { ...state, submitted: true, score: state.score + (ok ? 100 : 0), correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.questions.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
+
+export const DrawfulQuiz_QUESTIONS: QuizQuestion[] = [
+  {
+    "q": "Drawful is what?",
+    "choices": [
+      "Sketch + guess",
+      "Trivia",
+      "Numbers",
+      "Words only"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Drawful prompt arrives via?",
+    "choices": [
+      "Phone",
+      "Cards",
+      "Dice",
+      "TV only"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Players guess by?",
+    "choices": [
+      "Typing fake titles",
+      "Multiple choice",
+      "Speaking",
+      "Drawing"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Score for tricking others?",
+    "choices": [
+      "Yes, +500",
+      "None",
+      "Negative",
+      "Skip"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Drawful 2 features?",
+    "choices": [
+      "Custom prompts",
+      "Music",
+      "Cards",
+      "Dice"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Player count?",
+    "choices": [
+      "3–8",
+      "12+",
+      "2",
+      "20"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Drawful is by?",
+    "choices": [
+      "Jackbox",
+      "Hasbro",
+      "CMON",
+      "USAopoly"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Drawful is part of pack?",
+    "choices": [
+      "Pack 1",
+      "Pack 9",
+      "Pack 8",
+      "Pack 0"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Drawful 2 is part of pack?",
+    "choices": [
+      "Pack 4",
+      "Pack 1",
+      "Pack 9",
+      "Pack 0"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Audience can?",
+    "choices": [
+      "Vote",
+      "Draw",
+      "Speak",
+      "Veto"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Sketches are drawn on?",
+    "choices": [
+      "Phone",
+      "Tablet",
+      "Paper",
+      "TV remote"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Final round is?",
+    "choices": [
+      "Bonus round only",
+      "Standard final",
+      "No different",
+      "Skipped"
+    ],
+    "answer": 1
   }
+];
+
+const CFG = { totalQuestions: Math.min(10, DrawfulQuiz_QUESTIONS.length), pool: DrawfulQuiz_QUESTIONS };
+
+export interface DrawfulQuizSettings { dummy: boolean; }
+export type DrawfulQuizState = QuizState;
+export type DrawfulQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: DrawfulQuizSettings): DrawfulQuizState {
+  return quizInitial(seed, CFG);
 }
-export function isTerminal(state: DrawfulQuizState): { score: number } | null { return state.phase === "done" ? { score: state.score } : null; }
+
+export function reducer(state: DrawfulQuizState, action: DrawfulQuizAction): DrawfulQuizState {
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
+}
+
+export function isTerminal(state: DrawfulQuizState): { score: number } | null {
+  return quizScore(state);
+}
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

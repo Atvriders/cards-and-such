@@ -8,24 +8,45 @@ export function DiceNinepinBowlGame({ state, dispatch, onGameOver }: GameProps<D
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-ninepin-b-wrap"><div className="ds-ninepin-b-done"><h2>Done!</h2><div className="ds-ninepin-b-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dinibo-wrap">
+        <div className="dinibo-done">
+          <h2>Frame</h2>
+          <div className="dinibo-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dinibo-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dinibo-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-ninepin-b-wrap">
-      <div className="ds-ninepin-b-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-ninepin-b-score">{state.score} pts</div>
+    <div className="dinibo-wrap">
+      <div className="dinibo-head">
+        <span className="dinibo-round">Frame {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dinibo-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-ninepin-b-row">{state.dice.map((d, i) => <div key={i} className="ds-ninepin-b-die">{d}</div>)}</div>
+        <div className="dinibo-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dinibo-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-ninepin-b-btn" onClick={() => dispatch({ type:"roll" } as DiceNinepinBowlAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dinibo-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-ninepin-b-result">+{state.lastPts}</div>
-          <button className="ds-ninepin-b-btn alt" onClick={() => dispatch({ type:"next" } as DiceNinepinBowlAction)}>Next</button>
-        </>
-      )}
+      <div className="dinibo-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dinibo-log">{line}</div>)}
+      </div>
+      <div className="dinibo-actions">
+        {state.phase === "rolling" && (
+          <button className="dinibo-btn primary" onClick={() => dispatch({ type: "roll" } as DiceNinepinBowlAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dinibo-btn alt" onClick={() => dispatch({ type: "next" } as DiceNinepinBowlAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

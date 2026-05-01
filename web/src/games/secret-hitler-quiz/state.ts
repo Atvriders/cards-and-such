@@ -1,192 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface SecretHitlerQuizSettings { questions: "10"; }
-export interface SecretHitlerQuizState {
-  questions: QuizQuestion[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
-  score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
-}
-export type SecretHitlerQuizAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
 
-const ALL_QUESTIONS: QuizQuestion[] = [
+export const SecretHitlerQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Total Liberal policies needed to win?",
+    "q": "Secret Hitler has roles?",
     "choices": [
-      "3",
-      "4",
-      "5",
-      "6"
+      "Liberals & Fascists",
+      "Cops & Robbers",
+      "Mages",
+      "Pirates"
     ],
-    "correct": 2
+    "answer": 0
   },
   {
-    "question": "Total Fascist policies for Fascists to win?",
+    "q": "Players elect?",
     "choices": [
-      "5",
-      "6",
-      "7",
-      "8"
+      "President & Chancellor",
+      "Captain",
+      "Mayor",
+      "Judge"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "After how many Fascist policies can electing Hitler as Chancellor end the game?",
+    "q": "Liberal goal?",
     "choices": [
-      "1",
+      "Pass 5 liberal policies",
+      "Eat",
+      "Sing",
+      "Build"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Fascist goal?",
+    "choices": [
+      "Pass 6 fascist or elect Hitler",
+      "Win random",
+      "Vote out",
+      "Lie"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Player count?",
+    "choices": [
+      "5–10",
       "2",
-      "3",
-      "5"
+      "20+",
+      "Solo"
     ],
-    "correct": 2
+    "answer": 0
   },
   {
-    "question": "Policy deck composition?",
+    "q": "Released in?",
     "choices": [
-      "6L / 11F",
-      "8L / 11F",
-      "5L / 10F",
-      "7L / 12F"
+      "2016",
+      "2005",
+      "2020",
+      "1995"
     ],
-    "correct": 0
+    "answer": 0
   },
   {
-    "question": "How many policies does the President draw?",
+    "q": "Secret Hitler is by?",
     "choices": [
-      "2",
-      "3",
-      "4",
-      "5"
+      "Goat, Wolf, & Cabbage",
+      "Jackbox",
+      "Hasbro",
+      "Asmodee"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "How many does the Chancellor enact from?",
+    "q": "Hitler is technically?",
     "choices": [
-      "1",
-      "2",
-      "3",
-      "All"
+      "A fascist",
+      "A liberal",
+      "A spy",
+      "Neutral"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Veto power unlocks after how many Fascist policies?",
+    "q": "Election rejection cap?",
     "choices": [
-      "3",
-      "4",
+      "3 in a row",
+      "No limit",
       "5",
-      "6"
+      "2"
     ],
-    "correct": 2
+    "answer": 0
   },
   {
-    "question": "Hitler in 5-6 player games knows…",
+    "q": "Policies are drawn by?",
     "choices": [
-      "Nothing",
-      "Other Fascists",
-      "Liberal count",
-      "All roles"
+      "President",
+      "Chancellor",
+      "Both",
+      "Audience"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "In 7-10 player games Hitler…",
+    "q": "Power: Investigate Loyalty?",
     "choices": [
-      "Knows other Fascists",
-      "Doesn't know other Fascists",
-      "Sees everyone",
-      "Sees Liberals only"
+      "See another's role",
+      "Heal",
+      "Skip",
+      "Lie"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Best Liberal strategy when drawing 3?",
+    "q": "Win for fascists if Hitler?",
     "choices": [
-      "Always discard Fascist",
-      "Always discard Liberal",
-      "Random",
-      "Pass full info"
+      "Elected after 3 fascist policies",
+      "Always",
+      "Never",
+      "Random"
     ],
-    "correct": 0
-  },
-  {
-    "question": "5 government rejections in a row triggers…",
-    "choices": [
-      "Game over",
-      "Top policy auto-enacts",
-      "President swap",
-      "Nothing"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which action is unlocked first chronologically (typical 7-player)?",
-    "choices": [
-      "Investigate",
-      "Special Election",
-      "Execution",
-      "Peek"
-    ],
-    "correct": 0
+    "answer": 0
   }
 ];
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
+const CFG = { totalQuestions: Math.min(10, SecretHitlerQuiz_QUESTIONS.length), pool: SecretHitlerQuiz_QUESTIONS };
 
-export function initialState(seed: number, _settings: SecretHitlerQuizSettings): SecretHitlerQuizState {
-  const rng = mulberry32(seed);
-  const pool = shuffle([...ALL_QUESTIONS], rng).slice(0, 10);
-  const questions = pool.map(q => {
-    const idx = q.choices.map((c, i) => ({ c, i }));
-    const s = shuffle(idx, rng);
-    const newCorrect = s.findIndex(x => x.i === q.correct) as 0 | 1 | 2 | 3;
-    return { ...q, choices: s.map(x => x.c) as [string, string, string, string], correct: newCorrect };
-  });
-  return { questions, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
+export interface SecretHitlerQuizSettings { dummy: boolean; }
+export type SecretHitlerQuizState = QuizState;
+export type SecretHitlerQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: SecretHitlerQuizSettings): SecretHitlerQuizState {
+  return quizInitial(seed, CFG);
 }
 
 export function reducer(state: SecretHitlerQuizState, action: SecretHitlerQuizAction): SecretHitlerQuizState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const q = state.questions[state.currentIndex]!;
-      const ok = state.selected === q.correct;
-      return {
-        ...state,
-        submitted: true,
-        score: state.score + (ok ? 100 : 0),
-        correctCount: state.correctCount + (ok ? 1 : 0),
-        phase: "result",
-      };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.questions.length
-        ? { ...state, phase: "done" }
-        : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default:
-      return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
 
 export function isTerminal(state: SecretHitlerQuizState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return quizScore(state);
 }
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

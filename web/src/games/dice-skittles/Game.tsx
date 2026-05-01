@@ -8,24 +8,45 @@ export function DiceSkittlesGame({ state, dispatch, onGameOver }: GameProps<Dice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-skittles-wrap"><div className="ds-skittles-done"><h2>Done!</h2><div className="ds-skittles-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dicski-wrap">
+        <div className="dicski-done">
+          <h2>Frame</h2>
+          <div className="dicski-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicski-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicski-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-skittles-wrap">
-      <div className="ds-skittles-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-skittles-score">{state.score} pts</div>
+    <div className="dicski-wrap">
+      <div className="dicski-head">
+        <span className="dicski-round">Frame {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicski-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-skittles-row">{state.dice.map((d, i) => <div key={i} className="ds-skittles-die">{d}</div>)}</div>
+        <div className="dicski-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicski-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-skittles-btn" onClick={() => dispatch({ type:"roll" } as DiceSkittlesAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicski-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-skittles-result">+{state.lastPts}</div>
-          <button className="ds-skittles-btn alt" onClick={() => dispatch({ type:"next" } as DiceSkittlesAction)}>Next</button>
-        </>
-      )}
+      <div className="dicski-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicski-log">{line}</div>)}
+      </div>
+      <div className="dicski-actions">
+        {state.phase === "rolling" && (
+          <button className="dicski-btn primary" onClick={() => dispatch({ type: "roll" } as DiceSkittlesAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicski-btn alt" onClick={() => dispatch({ type: "next" } as DiceSkittlesAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

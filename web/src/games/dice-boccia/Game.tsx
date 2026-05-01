@@ -8,24 +8,45 @@ export function DiceBocciaGame({ state, dispatch, onGameOver }: GameProps<DiceBo
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-boccia-wrap"><div className="ds-boccia-done"><h2>Done!</h2><div className="ds-boccia-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dicboc-wrap">
+        <div className="dicboc-done">
+          <h2>End</h2>
+          <div className="dicboc-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicboc-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicboc-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-boccia-wrap">
-      <div className="ds-boccia-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-boccia-score">{state.score} pts</div>
+    <div className="dicboc-wrap">
+      <div className="dicboc-head">
+        <span className="dicboc-round">End {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicboc-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-boccia-row">{state.dice.map((d, i) => <div key={i} className="ds-boccia-die">{d}</div>)}</div>
+        <div className="dicboc-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicboc-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-boccia-btn" onClick={() => dispatch({ type:"roll" } as DiceBocciaAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicboc-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-boccia-result">+{state.lastPts}</div>
-          <button className="ds-boccia-btn alt" onClick={() => dispatch({ type:"next" } as DiceBocciaAction)}>Next</button>
-        </>
-      )}
+      <div className="dicboc-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicboc-log">{line}</div>)}
+      </div>
+      <div className="dicboc-actions">
+        {state.phase === "rolling" && (
+          <button className="dicboc-btn primary" onClick={() => dispatch({ type: "roll" } as DiceBocciaAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicboc-btn alt" onClick={() => dispatch({ type: "next" } as DiceBocciaAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

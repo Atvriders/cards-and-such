@@ -8,24 +8,45 @@ export function PursuePennantGame({ state, dispatch, onGameOver }: GameProps<Pur
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-purspenn-wrap"><div className="g-purspenn-done"><h2>Match!</h2><div className="g-purspenn-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="purpen-wrap">
+        <div className="purpen-done">
+          <h2>Inning</h2>
+          <div className="purpen-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="purpen-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="purpen-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-purspenn-wrap">
-      <div className="g-purspenn-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-purspenn-score">{state.score} pts</div>
+    <div className="purpen-wrap">
+      <div className="purpen-head">
+        <span className="purpen-round">Inning {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="purpen-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-purspenn-row">{state.dice.map((d, i) => <div key={i} className="g-purspenn-die">{d}</div>)}</div>
+        <div className="purpen-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="purpen-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-purspenn-btn" onClick={() => dispatch({ type:"roll" } as PursuePennantAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="purpen-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-purspenn-result">+{state.lastPts}</div>
-          <button className="g-purspenn-btn alt" onClick={() => dispatch({ type:"next" } as PursuePennantAction)}>Next</button>
-        </>
-      )}
+      <div className="purpen-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="purpen-log">{line}</div>)}
+      </div>
+      <div className="purpen-actions">
+        {state.phase === "rolling" && (
+          <button className="purpen-btn primary" onClick={() => dispatch({ type: "roll" } as PursuePennantAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="purpen-btn alt" onClick={() => dispatch({ type: "next" } as PursuePennantAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

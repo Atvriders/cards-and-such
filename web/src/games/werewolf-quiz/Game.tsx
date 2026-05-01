@@ -1,63 +1,63 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { WerewolfQuizState, WerewolfQuizAction, WerewolfQuizSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { isTerminal, TOTAL_QUESTIONS } from "./state.js";
 import "./Game.css";
 
-const LABELS = ["A", "B", "C", "D"];
+const P = "wwq2";
 
 export function WerewolfQuizGame({ state, dispatch, onGameOver }: GameProps<WerewolfQuizState, WerewolfQuizSettings>): JSX.Element {
+  const [start, setStart] = useState<number>(() => Date.now());
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  useEffect(() => { if (state.phase === "ask") setStart(Date.now()); }, [state.current, state.phase]);
   if (state.phase === "done") {
     return (
-      <div className="quiz-wrap">
-        <div className="quiz-done">
-          <h2>Done!</h2>
-          <p>Correct: {state.correctCount} / {state.questions.length}</p>
-          <p className="quiz-final">{state.score} pts</p>
+      <div className={`${P}-wrap`}>
+        <div className={`${P}-final`}>
+          <h2 className={`${P}-final-title`}>Werewolf Quiz — Complete</h2>
+          <div className={`${P}-final-score`}>{state.score} pts</div>
+          <div className={`${P}-streak`}>{state.questions.length} questions answered</div>
         </div>
       </div>
     );
   }
-  const q = state.questions[state.currentIndex]!;
-  const isResult = state.phase === "result";
+  const q = state.questions[state.current];
+  if (!q) return <div className={`${P}-wrap`}>Loading…</div>;
   return (
-    <div className="quiz-wrap">
-      <div className="quiz-header">
-        <span>Q {state.currentIndex + 1} / {state.questions.length}</span>
-        <span className="quiz-score">{state.score} pts</span>
+    <div className={`${P}-wrap`}>
+      <div className={`${P}-header`}>
+        <span className={`${P}-progress`}>Q{state.current + 1} / {TOTAL_QUESTIONS}</span>
+        <span className={`${P}-score`}>Score {state.score} · 🔥 {state.streak}</span>
       </div>
-      <div className="quiz-question">{q.question}</div>
-      <div className="quiz-choices">
-        {q.choices.map((choice, i) => {
-          let cls = "quiz-choice";
-          if (isResult) {
-            if (i === q.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== q.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
+      <div className={`${P}-q`}>{q.q}</div>
+      <div className={`${P}-choices`}>
+        {q.choices.map((c, i) => {
+          const isSel = state.lastAnswerIdx === i;
+          const cls = state.phase === "feedback"
+            ? i === q.answer ? `${P}-choice ${P}-correct` : isSel ? `${P}-choice ${P}-wrong` : `${P}-choice`
+            : `${P}-choice`;
           return (
-            <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as WerewolfQuizAction)}>
-              <span className="quiz-letter">{LABELS[i]}</span>{choice}
-            </button>
+            <button
+              key={i}
+              className={cls}
+              disabled={state.phase !== "ask"}
+              type="button"
+              onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as WerewolfQuizAction)}
+            >{c}</button>
           );
         })}
       </div>
-      {isResult && (
-        <div className={`quiz-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>
-          {state.selected === q.correct ? "Correct!" : `Answer: ${q.choices[q.correct]}`}
-        </div>
-      )}
-      <div className="quiz-actions">
-        {!isResult && (
-          <button className="quiz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as WerewolfQuizAction)}>Submit</button>
-        )}
-        {isResult && (
-          <button className="quiz-btn next" onClick={() => dispatch({ type: "next" } as WerewolfQuizAction)}>
-            {state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}
+      {state.phase === "feedback" && (
+        <>
+          <div className={`${P}-feedback ${state.lastCorrect ? P + "-good" : P + "-bad"}`}>
+            {state.lastCorrect ? "Correct!" : `Answer: ${q.choices[q.answer]}`}
+          </div>
+          <button className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as WerewolfQuizAction)}>
+            {state.current + 1 >= TOTAL_QUESTIONS ? "See Results" : "Next"}
           </button>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }

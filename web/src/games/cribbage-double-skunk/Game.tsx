@@ -1,29 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
-import { isTerminal, TOTAL_TURNS } from "./state.js";
+import type { CribbageDoubleSkunkState, CribbageDoubleSkunkAction, CribbageDoubleSkunkSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
-export function PubGame({ state, dispatch, onGameOver }: GameProps<PubState, PubSettings>): JSX.Element {
+export function CribbageDoubleSkunkGame({ state, dispatch, onGameOver }: GameProps<CribbageDoubleSkunkState, CribbageDoubleSkunkSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  return (
-    <div className="pb-wrap">
-      <h3 className="pb-title">Cribbage: Double Skunk</h3>
-      <div className="pb-stats">
-        <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
-        <div>You <b>{state.myScore}</b></div>
-        <div>CPU <b>{state.cpuScore}</b></div>
-      </div>
-      <div className="pb-board">
-        <div className="pb-result">
-          {state.phase === "ready" && <div>Ready to throw</div>}
-          {state.phase === "thrown" && <div>You +{state.lastMine} • CPU +{state.lastCpu}</div>}
-          {state.phase === "done" && <div className="pb-final">Final: You {state.myScore} • CPU {state.cpuScore}</div>}
+  if (state.phase === "done") {
+    return (
+      <div className="crdosk-wrap">
+        <div className="crdosk-done">
+          <h2>Hand</h2>
+          <div className="crdosk-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="crdosk-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="crdosk-log">{line}</div>)}
+          </div>
         </div>
       </div>
-      {state.phase === "ready" && <button className="pb-btn" onClick={() => dispatch({ type:"throw" } as PubAction)}>Throw</button>}
-      {state.phase === "thrown" && <button className="pb-btn alt" onClick={() => dispatch({ type:"next" } as PubAction)}>Next</button>}
+    );
+  }
+  return (
+    <div className="crdosk-wrap">
+      <div className="crdosk-head">
+        <span className="crdosk-round">Hand {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="crdosk-score">{state.score} pts</span>
+      </div>
+      
+      {state.dice && (
+        <div className="crdosk-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="crdosk-die">{d}</div>)}
+        </div>
+      )}
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="crdosk-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+      )}
+      <div className="crdosk-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="crdosk-log">{line}</div>)}
+      </div>
+      <div className="crdosk-actions">
+        {state.phase === "rolling" && (
+          <button className="crdosk-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageDoubleSkunkAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="crdosk-btn alt" onClick={() => dispatch({ type: "next" } as CribbageDoubleSkunkAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

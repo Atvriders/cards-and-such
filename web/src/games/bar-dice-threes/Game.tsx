@@ -1,28 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { ThreesBarDiceState, ThreesBarDiceAction, ThreesBarDiceSettings } from "./state.js";
-import { isTerminal, TOTAL_TURNS, MAX_THROW } from "./state.js";
+import type { BarDiceThreesState, BarDiceThreesAction, BarDiceThreesSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
-export function ThreesBarDiceGame({ state, dispatch, onGameOver }: GameProps<ThreesBarDiceState, ThreesBarDiceSettings>): JSX.Element {
+export function BarDiceThreesGame({ state, dispatch, onGameOver }: GameProps<BarDiceThreesState, BarDiceThreesSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  return (
-    <div className="pb-wrap">
-      <h3 className="pb-title">Threes Bar Dice</h3>
-      <div className="pb-stats">
-        <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
-        <div>Score <b>{state.score}</b></div>
-        {state.lastPts > 0 && <div className="pb-pts">+{state.lastPts}!</div>}
-      </div>
-      <div className="pb-board">
-        <div className="pb-target">
-          <div className="pb-bullseye">{state.lastPts >= MAX_THROW ? "BULLSEYE!" : state.phase === "ready" ? "ROLL" : state.lastPts > 0 ? "+" + state.lastPts : "MISS"}</div>
+  if (state.phase === "done") {
+    return (
+      <div className="badith-wrap">
+        <div className="badith-done">
+          <h2>Roll</h2>
+          <div className="badith-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="badith-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="badith-log">{line}</div>)}
+          </div>
         </div>
       </div>
-      {state.phase === "ready" && <button className="pb-btn" onClick={() => dispatch({ type: "throw" } as ThreesBarDiceAction)}>Roll</button>}
-      {state.phase === "thrown" && <button className="pb-btn alt" onClick={() => dispatch({ type: "next" } as ThreesBarDiceAction)}>Next</button>}
-      {state.phase === "done" && <div className="pb-done"><h3>Final: {state.score} pts</h3></div>}
+    );
+  }
+  return (
+    <div className="badith-wrap">
+      <div className="badith-head">
+        <span className="badith-round">Roll {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="badith-score">{state.score} pts</span>
+      </div>
+      
+      {state.dice && (
+        <div className="badith-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="badith-die">{d}</div>)}
+        </div>
+      )}
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="badith-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+      )}
+      <div className="badith-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="badith-log">{line}</div>)}
+      </div>
+      <div className="badith-actions">
+        {state.phase === "rolling" && (
+          <button className="badith-btn primary" onClick={() => dispatch({ type: "roll" } as BarDiceThreesAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="badith-btn alt" onClick={() => dispatch({ type: "next" } as BarDiceThreesAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

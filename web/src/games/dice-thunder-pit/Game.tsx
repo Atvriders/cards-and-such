@@ -8,24 +8,45 @@ export function DiceThunderPitGame({ state, dispatch, onGameOver }: GameProps<Di
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-dicethunpit-wrap"><div className="g-dicethunpit-done"><h2>Match!</h2><div className="g-dicethunpit-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dithpi-wrap">
+        <div className="dithpi-done">
+          <h2>Lap</h2>
+          <div className="dithpi-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dithpi-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dithpi-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-dicethunpit-wrap">
-      <div className="g-dicethunpit-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-dicethunpit-score">{state.score} pts</div>
+    <div className="dithpi-wrap">
+      <div className="dithpi-head">
+        <span className="dithpi-round">Lap {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dithpi-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-dicethunpit-row">{state.dice.map((d, i) => <div key={i} className="g-dicethunpit-die">{d}</div>)}</div>
+        <div className="dithpi-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dithpi-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-dicethunpit-btn" onClick={() => dispatch({ type:"roll" } as DiceThunderPitAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dithpi-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-dicethunpit-result">+{state.lastPts}</div>
-          <button className="g-dicethunpit-btn alt" onClick={() => dispatch({ type:"next" } as DiceThunderPitAction)}>Next</button>
-        </>
-      )}
+      <div className="dithpi-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dithpi-log">{line}</div>)}
+      </div>
+      <div className="dithpi-actions">
+        {state.phase === "rolling" && (
+          <button className="dithpi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceThunderPitAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dithpi-btn alt" onClick={() => dispatch({ type: "next" } as DiceThunderPitAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

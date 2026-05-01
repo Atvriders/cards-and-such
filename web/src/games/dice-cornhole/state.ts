@@ -1,7 +1,8 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_ROUNDS = 9;
-export const DIE_COUNT = 4;
+export const TOTAL_ROUNDS = 20;
+export const DICE_COUNT = 4;
+export const DICE_SIDES = 6;
 
 export interface DiceCornholeSettings { dummy: boolean; }
 
@@ -9,19 +10,28 @@ export interface DiceCornholeState {
   rngSeed: number;
   round: number;
   dice: number[] | null;
-  score: number;
   lastPts: number;
+  score: number;
+  history: number[];
+  log: string[];
   phase: "rolling" | "rolled" | "done";
+  cpuScore: number;
 }
 
 export type DiceCornholeAction = { type: "roll" } | { type: "next" };
 
-function rollScore(dice: number[], _round: number): number {
-  return dice.reduce((a,b)=>a+(b===6?3:(b===4||b===5)?1:0),0);
-}
-
 export function initialState(seed: number, _settings: DiceCornholeSettings): DiceCornholeState {
-  return { rngSeed: seed, round: 1, dice: null, score: 0, lastPts: 0, phase: "rolling" };
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    cpuScore: 0,
+  };
 }
 
 export function reducer(state: DiceCornholeState, action: DiceCornholeAction): DiceCornholeState {
@@ -30,11 +40,28 @@ export function reducer(state: DiceCornholeState, action: DiceCornholeAction): D
     if (state.phase !== "rolling") return state;
     const rng = mulberry32(state.rngSeed);
     const dice: number[] = [];
-    for (let i = 0; i < DIE_COUNT; i++) dice.push(1 + Math.floor(rng() * 6));
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
     const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = rollScore(dice, state.round);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, dice, score: state.score + pts, lastPts: pts, phase: isLast ? "done" : "rolled" };
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<DiceCornholeState> = {};
+    const me = dice[0]! + dice[1]!;
+    const cpu = dice[2]! + dice[3]!;
+    let myPts = me >= 11 ? 3 : me >= 8 ? 2 : me >= 5 ? 1 : 0;
+    let cpuPts = cpu >= 11 ? 3 : cpu >= 8 ? 2 : cpu >= 5 ? 1 : 0;
+    pts = myPts;
+    extra.cpuScore = state.cpuScore + cpuPts;
+    logEntry = `Round ${state.round}: you +${myPts}, CPU +${cpuPts}`;
+
+    const earlyWin = ((state.score + pts >= 21) || (extra.cpuScore !== undefined && extra.cpuScore >= 21));
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
   if (action.type === "next") {
     if (state.phase !== "rolled") return state;
@@ -44,5 +71,5 @@ export function reducer(state: DiceCornholeState, action: DiceCornholeAction): D
 }
 
 export function isTerminal(state: DiceCornholeState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

@@ -1,2 +1,19 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
-@import "../../engines/quiz/quiz.css";
+.fbxq-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#fef3c7;border-radius:14px}
+.fbxq-header{display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.fbxq-progress{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569}
+.fbxq-score{font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:#a16207;font-weight:700}
+.fbxq-q{font-size:1.1rem;font-weight:600;line-height:1.4;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #a16207}
+.fbxq-choices{display:flex;flex-direction:column;gap:8px}
+.fbxq-choice{cursor:pointer;text-align:left;padding:12px 14px;border-radius:10px;background:#fff;border:2px solid #e2e8f0;font-family:'Inter',system-ui,sans-serif;font-size:1rem;transition:all 120ms;color:#0f172a}
+.fbxq-choice:hover:not(:disabled){border-color:#a16207;background:#f8fafc}
+.fbxq-choice:disabled{cursor:not-allowed}
+.fbxq-choice.fbxq-correct{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.fbxq-choice.fbxq-wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.fbxq-feedback{font-weight:700;text-align:center;padding:12px;border-radius:10px}
+.fbxq-feedback.fbxq-good{background:#dcfce7;color:#15803d}
+.fbxq-feedback.fbxq-bad{background:#fee2e2;color:#991b1b}
+.fbxq-next{cursor:pointer;padding:10px 24px;border-radius:8px;background:#a16207;color:#fff;border:none;font-weight:700;font-size:1rem;align-self:center}
+.fbxq-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
+.fbxq-final-title{margin:0 0 8px;color:#a16207}
+.fbxq-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#a16207}
+.fbxq-streak{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#64748b}

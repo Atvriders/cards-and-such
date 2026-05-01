@@ -1,58 +1,63 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SpyfallTimeTravelState, SpyfallTimeTravelAction, SpyfallTimeTravelSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { isTerminal, TOTAL_QUESTIONS } from "./state.js";
 import "./Game.css";
 
+const P = "sftq";
+
 export function SpyfallTimeTravelGame({ state, dispatch, onGameOver }: GameProps<SpyfallTimeTravelState, SpyfallTimeTravelSettings>): JSX.Element {
+  const [start, setStart] = useState<number>(() => Date.now());
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  useEffect(() => { if (state.phase === "ask") setStart(Date.now()); }, [state.current, state.phase]);
   if (state.phase === "done") {
     return (
-      <div className="spyfalltimetravel-wrap">
-        <div className="spyfalltimetravel-done">
-          <h2>Case Closed</h2>
-          <p>Solved: {state.correctCount} / {state.puzzles.length}</p>
-          <p className="spyfalltimetravel-final">{state.score} pts</p>
+      <div className={`${P}-wrap`}>
+        <div className={`${P}-final`}>
+          <h2 className={`${P}-final-title`}>Spyfall: Time Travel Quiz — Complete</h2>
+          <div className={`${P}-final-score`}>{state.score} pts</div>
+          <div className={`${P}-streak`}>{state.questions.length} questions answered</div>
         </div>
       </div>
     );
   }
-  const p = state.puzzles[state.currentIndex]!;
+  const q = state.questions[state.current];
+  if (!q) return <div className={`${P}-wrap`}>Loading…</div>;
   return (
-    <div className="spyfalltimetravel-wrap">
-      <div className="spyfalltimetravel-header">
-        <span>Puzzle {state.currentIndex + 1} / {state.puzzles.length}</span>
-        <span className="spyfalltimetravel-score">{state.score} pts</span>
+    <div className={`${P}-wrap`}>
+      <div className={`${P}-header`}>
+        <span className={`${P}-progress`}>Q{state.current + 1} / {TOTAL_QUESTIONS}</span>
+        <span className={`${P}-score`}>Score {state.score} · 🔥 {state.streak}</span>
       </div>
-      <div className="spyfalltimetravel-scenario">{p.scenario}</div>
-      <ul className="spyfalltimetravel-clues">
-        {p.clues.map((c, i) => <li key={i}>{c}</li>)}
-      </ul>
-      <div className="spyfalltimetravel-options">
-        {p.options.map((opt, i) => {
-          let cls = "spyfalltimetravel-option";
-          if (state.resolved) {
-            if (i === p.correctIndex) cls += " correct";
-            else if (i === state.selected) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
+      <div className={`${P}-q`}>{q.q}</div>
+      <div className={`${P}-choices`}>
+        {q.choices.map((c, i) => {
+          const isSel = state.lastAnswerIdx === i;
+          const cls = state.phase === "feedback"
+            ? i === q.answer ? `${P}-choice ${P}-correct` : isSel ? `${P}-choice ${P}-wrong` : `${P}-choice`
+            : `${P}-choice`;
           return (
-            <button key={i} className={cls} disabled={state.resolved} onClick={() => dispatch({ type: "select", index: i } as SpyfallTimeTravelAction)}>
-              {opt}
-            </button>
+            <button
+              key={i}
+              className={cls}
+              disabled={state.phase !== "ask"}
+              type="button"
+              onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as SpyfallTimeTravelAction)}
+            >{c}</button>
           );
         })}
       </div>
-      <div className="spyfalltimetravel-actions">
-        {!state.resolved && (
-          <button className="spyfalltimetravel-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SpyfallTimeTravelAction)}>Submit</button>
-        )}
-        {state.resolved && (
-          <button className="spyfalltimetravel-btn next" onClick={() => dispatch({ type: "next" } as SpyfallTimeTravelAction)}>
-            {state.currentIndex + 1 >= state.puzzles.length ? "Finish" : "Next"}
+      {state.phase === "feedback" && (
+        <>
+          <div className={`${P}-feedback ${state.lastCorrect ? P + "-good" : P + "-bad"}`}>
+            {state.lastCorrect ? "Correct!" : `Answer: ${q.choices[q.answer]}`}
+          </div>
+          <button className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as SpyfallTimeTravelAction)}>
+            {state.current + 1 >= TOTAL_QUESTIONS ? "See Results" : "Next"}
           </button>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }

@@ -8,24 +8,45 @@ export function DiceSjoelbakGame({ state, dispatch, onGameOver }: GameProps<Dice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-sjoelbak-wrap"><div className="ds-sjoelbak-done"><h2>Done!</h2><div className="ds-sjoelbak-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dicsjo-wrap">
+        <div className="dicsjo-done">
+          <h2>Pass</h2>
+          <div className="dicsjo-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicsjo-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicsjo-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-sjoelbak-wrap">
-      <div className="ds-sjoelbak-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-sjoelbak-score">{state.score} pts</div>
+    <div className="dicsjo-wrap">
+      <div className="dicsjo-head">
+        <span className="dicsjo-round">Pass {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicsjo-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-sjoelbak-row">{state.dice.map((d, i) => <div key={i} className="ds-sjoelbak-die">{d}</div>)}</div>
+        <div className="dicsjo-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicsjo-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-sjoelbak-btn" onClick={() => dispatch({ type:"roll" } as DiceSjoelbakAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicsjo-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-sjoelbak-result">+{state.lastPts}</div>
-          <button className="ds-sjoelbak-btn alt" onClick={() => dispatch({ type:"next" } as DiceSjoelbakAction)}>Next</button>
-        </>
-      )}
+      <div className="dicsjo-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicsjo-log">{line}</div>)}
+      </div>
+      <div className="dicsjo-actions">
+        {state.phase === "rolling" && (
+          <button className="dicsjo-btn primary" onClick={() => dispatch({ type: "roll" } as DiceSjoelbakAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicsjo-btn alt" onClick={() => dispatch({ type: "next" } as DiceSjoelbakAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

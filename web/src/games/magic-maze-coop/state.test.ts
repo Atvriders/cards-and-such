@@ -1,27 +1,39 @@
 import { describe, it, expect } from "vitest";
 import { initialState, reducer, isTerminal, TOTAL_ROUNDS, TARGET_SCORE } from "./state.js";
-const S = { dummy: false };
-describe("MagicMazeCoop", () => {
-  it("starts in ready", () => { const s = initialState(1, S); expect(s.phase).toBe("ready"); expect(s.teamScore).toBe(0); });
-  it("play produces rolls and points", () => {
-    const s = reducer(initialState(1, S), { type: "play" });
-    expect(s.playerRoll).toBeGreaterThanOrEqual(1);
-    expect(s.cpuRoll).toBeGreaterThanOrEqual(1);
-    expect(s.lastPts).toBeGreaterThanOrEqual(2);
+
+const S = { difficulty: "Standard" as const };
+
+describe("magic-maze-coop", () => {
+  it("starts in choose phase with full morale", () => {
+    const s = initialState(42, S);
+    expect(s.phase).toBe("choose");
+    expect(s.progress).toBe(0);
+    expect(s.morale).toBeGreaterThan(0);
+    expect(s.round).toBe(1);
   });
-  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("game ends after total rounds", () => {
-    let s = initialState(1, S);
-    for (let i = 0; i < TOTAL_ROUNDS; i++) {
-      s = reducer(s, { type: "play" });
-      if (s.phase === "rolled") s = reducer(s, { type: "next" });
+  it("playing a tactic advances round", () => {
+    const s0 = initialState(42, S);
+    const tid = "move";
+    const s1 = reducer(s0, { type: "play", tacticId: tid });
+    expect(s1.round).toBe(2);
+    expect(s1.lastTactic).toBe(tid);
+  });
+  it("isTerminal null until done", () => {
+    expect(isTerminal(initialState(1, S))).toBeNull();
+  });
+  it("game ends within total rounds", () => {
+    let s = initialState(7, S);
+    let safety = 0;
+    while (s.phase !== "done" && safety++ < TOTAL_ROUNDS + 5) {
+      s = reducer(s, { type: "play", tacticId: "move" });
     }
     expect(s.phase).toBe("done");
+    expect(isTerminal(s)).not.toBeNull();
   });
-  it("target score is set", () => { expect(TARGET_SCORE).toBeGreaterThanOrEqual(1); });
-  it("score grows with rolls", () => {
-    let s = initialState(1, S);
-    s = reducer(s, { type: "play" });
-    expect(s.teamScore).toBeGreaterThanOrEqual(2);
+  it("invalid tactic id is a no-op", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "play", tacticId: "__bogus__" });
+    expect(s1).toBe(s0);
   });
+  it("target score is positive", () => { expect(TARGET_SCORE).toBeGreaterThan(0); });
 });

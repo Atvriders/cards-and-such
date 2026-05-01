@@ -1,48 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const CARDS_PER_ROUND = 3;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Style", value: 3 },
-  { name: "Base", value: 4 },
-  { name: "Combo", value: 5 },
-  { name: "Dodge", value: 2 },
-  { name: "Finisher", value: 6 },
-];
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
 
-export interface BattleconIndinesSettings { dummy: boolean; }
-export interface BattleconIndinesState {
-  rngSeed: number;
-  round: number;
-  hand: number[];
-  lastPts: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+export const BattleconIndines_CFG: CoopEngineConfig = {
+  "totalRounds": 10,
+  "progressTarget": 50,
+  "threatPerRound": 3,
+  "startMorale": 4,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.4,
+  "scenarioLabel": "Indines Tournament",
+  "scenarioEmoji": "🥊",
+  "progressLabel": "Damage",
+  "threatLabel": "Counters",
+  "moraleLabel": "HP",
+  "tactics": [
+    {
+      "id": "attack",
+      "label": "Attack",
+      "emoji": "🥊",
+      "effort": 5,
+      "reliability": 0.7,
+      "threatPush": 1,
+      "desc": "Strike."
+    },
+    {
+      "id": "dodge",
+      "label": "Dodge",
+      "emoji": "💫",
+      "effort": 3,
+      "reliability": 0.95,
+      "threatPush": 1,
+      "desc": "Avoid."
+    },
+    {
+      "id": "special",
+      "label": "Special",
+      "emoji": "⚡",
+      "effort": 6,
+      "reliability": 0.55,
+      "threatPush": 0,
+      "desc": "Burst."
+    },
+    {
+      "id": "block",
+      "label": "Block",
+      "emoji": "🛡️",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 1,
+      "desc": "Defend."
+    }
+  ]
+};
+
+export interface BattleconIndinesSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type BattleconIndinesState = CoopState;
+export type BattleconIndinesAction = { type: "play"; tacticId: string };
+
+function diffNum(s: BattleconIndinesSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type BattleconIndinesAction = { type: "draw" } | { type: "next" };
-export function initialState(seed: number, _s: BattleconIndinesSettings): BattleconIndinesState {
-  return { rngSeed: seed, round: 1, hand: [], lastPts: 0, score: 0, phase: "drawing" };
+
+export function initialState(seed: number, s: BattleconIndinesSettings): BattleconIndinesState {
+  return coopInitial(seed, BattleconIndines_CFG, diffNum(s));
 }
-export function scoreHand(hand: number[]): number {
-  return hand.reduce((a,i) => a + (DECK[i]?.value ?? 0), 0);
-}
+
 export function reducer(state: BattleconIndinesState, action: BattleconIndinesAction): BattleconIndinesState {
-  if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand: number[] = [];
-    for (let i = 0; i < CARDS_PER_ROUND; i++) hand.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = scoreHand(hand);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, hand, lastPts: pts, score: state.score + pts, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, hand: [], lastPts: 0, phase: "drawing" };
-  }
+  if (action.type === "play") return coopStep(state, BattleconIndines_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: BattleconIndinesState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const r = coopScore(state, BattleconIndines_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = BattleconIndines_CFG.totalRounds;
+export const TARGET_SCORE = BattleconIndines_CFG.progressTarget;
+export const FLAVOR = "Play attack pairs; mind-game opponent.";

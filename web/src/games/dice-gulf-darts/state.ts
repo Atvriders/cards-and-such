@@ -1,7 +1,8 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_ROUNDS = 12;
-export const DIE_COUNT = 2;
+export const TOTAL_ROUNDS = 9;
+export const DICE_COUNT = 2;
+export const DICE_SIDES = 6;
 
 export interface DiceGulfDartsSettings { dummy: boolean; }
 
@@ -9,21 +10,30 @@ export interface DiceGulfDartsState {
   rngSeed: number;
   round: number;
   dice: number[] | null;
-  score: number;
   lastPts: number;
+  score: number;
+  history: number[];
+  log: string[];
   phase: "rolling" | "rolled" | "done";
+  strokes: number;
+  par: number;
 }
 
 export type DiceGulfDartsAction = { type: "roll" } | { type: "next" };
 
-function rollScore(dice: number[], _round: number): number {
-  let total = 0;
-  for (const d of dice) total += d;
-  return total;
-}
-
 export function initialState(seed: number, _settings: DiceGulfDartsSettings): DiceGulfDartsState {
-  return { rngSeed: seed, round: 1, dice: null, score: 0, lastPts: 0, phase: "rolling" };
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    strokes: 0,
+    par: 27,
+  };
 }
 
 export function reducer(state: DiceGulfDartsState, action: DiceGulfDartsAction): DiceGulfDartsState {
@@ -32,11 +42,26 @@ export function reducer(state: DiceGulfDartsState, action: DiceGulfDartsAction):
     if (state.phase !== "rolling") return state;
     const rng = mulberry32(state.rngSeed);
     const dice: number[] = [];
-    for (let i = 0; i < DIE_COUNT; i++) dice.push(1 + Math.floor(rng() * 6));
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
     const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = rollScore(dice, state.round);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, dice, score: state.score + pts, lastPts: pts, phase: isLast ? "done" : "rolled" };
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<DiceGulfDartsState> = {};
+    const skill = dice[0]! + dice[1]!;
+    const strokes = skill >= 11 ? 1 : skill >= 9 ? 2 : skill >= 5 ? 3 : skill >= 3 ? 4 : 5;
+    extra.strokes = state.strokes + strokes;
+    pts = -strokes;
+    logEntry = `Hole ${state.round}: ${strokes} strokes`;
+
+    const earlyWin = (false);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
   if (action.type === "next") {
     if (state.phase !== "rolled") return state;
@@ -46,5 +71,5 @@ export function reducer(state: DiceGulfDartsState, action: DiceGulfDartsAction):
 }
 
 export function isTerminal(state: DiceGulfDartsState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

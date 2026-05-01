@@ -1,2 +1,19 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
-@import "../../engines/quiz/quiz.css";
+.jp7q-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#f3e8ff;border-radius:14px}
+.jp7q-header{display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.jp7q-progress{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569}
+.jp7q-score{font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:#9333ea;font-weight:700}
+.jp7q-q{font-size:1.1rem;font-weight:600;line-height:1.4;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #9333ea}
+.jp7q-choices{display:flex;flex-direction:column;gap:8px}
+.jp7q-choice{cursor:pointer;text-align:left;padding:12px 14px;border-radius:10px;background:#fff;border:2px solid #e2e8f0;font-family:'Inter',system-ui,sans-serif;font-size:1rem;transition:all 120ms;color:#0f172a}
+.jp7q-choice:hover:not(:disabled){border-color:#9333ea;background:#f8fafc}
+.jp7q-choice:disabled{cursor:not-allowed}
+.jp7q-choice.jp7q-correct{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.jp7q-choice.jp7q-wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.jp7q-feedback{font-weight:700;text-align:center;padding:12px;border-radius:10px}
+.jp7q-feedback.jp7q-good{background:#dcfce7;color:#15803d}
+.jp7q-feedback.jp7q-bad{background:#fee2e2;color:#991b1b}
+.jp7q-next{cursor:pointer;padding:10px 24px;border-radius:8px;background:#9333ea;color:#fff;border:none;font-weight:700;font-size:1rem;align-self:center}
+.jp7q-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
+.jp7q-final-title{margin:0 0 8px;color:#9333ea}
+.jp7q-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#9333ea}
+.jp7q-streak{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#64748b}

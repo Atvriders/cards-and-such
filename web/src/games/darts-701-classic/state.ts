@@ -1,84 +1,89 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
+export const TOTAL_ROUNDS = 30;
+export const DICE_COUNT = 3;
+export const DICE_SIDES = 6;
 
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Score 701 opening triple?", choices: ["Triple 20","Triple 19","Bullseye","Single 25"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Need 270 — best three-dart score?", choices: ["3xT20 = 180","T20-T19-T17","Bull-Bull-T20","T18-T19-T20"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Need 96 — checkout?", choices: ["T20-D18","T16-D24 invalid","T19-D19.5","Bull-Bull-D8"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Need 121 — best two-dart finish?", choices: ["T20-D30.5 invalid","T19-D32 invalid","T17-D35 invalid","T11-Bull"] as [string,string,string,string], correctIndex: 3 as 0|1|2|3 },
-  { prompt: "Need 40 — checkout?", choices: ["Double 20","Single 40","Triple 13+1","Bull-D-5"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Need 170 — checkout?", choices: ["T20-T20-Bull","T20-T19-Bull","T17-T17-Bull","Bull-Bull-D35"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Bust strategy", choices: ["Stay above 2","Aim only triples","Aim only bulls","Hit doubles always"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Need 6 — best dart?", choices: ["Double 3","Single 6","Triple 2","Bull"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Need 2 — best dart?", choices: ["Double 1","Single 2","Triple 0","Bull"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-  { prompt: "Score below 0 means", choices: ["Bust, restore","Win","Continue","Skip turn"] as [string,string,string,string], correctIndex: 0 as 0|1|2|3 },
-];
+export interface Darts701ClassicSettings { dummy: boolean; }
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
-
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
-}
-
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
+export interface Darts701ClassicState {
+  rngSeed: number;
+  round: number;
+  dice: number[] | null;
+  lastPts: number;
   score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+  history: number[];
+  log: string[];
+  phase: "rolling" | "rolled" | "done";
+  remaining: number;
+  busts: number;
+  finished: boolean;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+export type Darts701ClassicAction = { type: "roll" } | { type: "next" };
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function initialState(seed: number, _settings: Darts701ClassicSettings): Darts701ClassicState {
+  return {
+    rngSeed: seed,
+    round: 1,
+    dice: null,
+    lastPts: 0,
+    score: 0,
+    history: [],
+    log: [],
+    phase: "rolling",
+    remaining: 701,
+    busts: 0,
+    finished: false,
+  };
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
+export function reducer(state: Darts701ClassicState, action: Darts701ClassicAction): Darts701ClassicState {
   if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const dice: number[] = [];
+    for (let i = 0; i < DICE_COUNT; i++) dice.push(1 + Math.floor(rng() * DICE_SIDES));
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    let pts = 0;
+    let logEntry = "";
+    let extra: Partial<Darts701ClassicState> = {};
+    const v = dice[0]! * (dice[1]! >= 5 ? 3 : dice[1]! >= 3 ? 2 : 1) + (dice.length > 2 ? dice[2]! * 2 : 0);
+    const score = Math.min(180, v);
+    const newRem = state.remaining - score;
+    if (newRem === 0) {
+      pts = state.remaining;
+      extra.remaining = 0;
+      extra.finished = true;
+      logEntry = `R${state.round}: -${score} CHECKOUT! ${newRem} left`;
+    } else if (newRem < 0 || newRem === 1) {
+      extra.busts = state.busts + 1;
+      logEntry = `R${state.round}: BUST (${score})`;
+      pts = -2;
+    } else {
+      pts = score;
+      extra.remaining = newRem;
+      logEntry = `R${state.round}: -${score} (${newRem} left)`;
     }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
+
+    const earlyWin = (extra.finished === true);
+    const isLast = state.round >= TOTAL_ROUNDS || earlyWin;
+    return {
+      ...state, ...extra, rngSeed: nextSeed, dice,
+      score: state.score + pts, lastPts: pts,
+      history: [...state.history, pts],
+      log: [...state.log, logEntry].slice(-12),
+      phase: isLast ? "done" : "rolled",
+    };
   }
+  if (action.type === "next") {
+    if (state.phase !== "rolled") return state;
+    return { ...state, round: state.round + 1, dice: null, lastPts: 0, phase: "rolling" };
+  }
+  return state;
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: Darts701ClassicState): { score: number } | null {
+  return state.phase === "done" ? { score: Math.max(0, state.score) } : null;
 }

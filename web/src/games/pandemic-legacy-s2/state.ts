@@ -1,41 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const TARGET_SCORE = 70;
-export interface PandemicLegacyS2Settings { dummy: boolean; }
-export interface PandemicLegacyS2State {
-  rngSeed: number;
-  round: number;
-  playerRoll: number;
-  cpuRoll: number;
-  lastPts: number;
-  teamScore: number;
-  phase: "ready" | "rolled" | "done";
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
+
+export const PandemicLegacyS2_CFG: CoopEngineConfig = {
+  "totalRounds": 14,
+  "progressTarget": 85,
+  "threatPerRound": 4,
+  "startMorale": 3,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.3,
+  "scenarioLabel": "Year 71",
+  "scenarioEmoji": "⚓",
+  "progressLabel": "Reclaimed",
+  "threatLabel": "Plague",
+  "moraleLabel": "Havens",
+  "tactics": [
+    {
+      "id": "supply",
+      "label": "Supply Run",
+      "emoji": "📦",
+      "effort": 4,
+      "reliability": 0.85,
+      "threatPush": 1,
+      "desc": "Move goods."
+    },
+    {
+      "id": "scout",
+      "label": "Scout",
+      "emoji": "🔭",
+      "effort": 5,
+      "reliability": 0.7,
+      "threatPush": 1,
+      "desc": "Reveal."
+    },
+    {
+      "id": "build",
+      "label": "Establish",
+      "emoji": "🏗️",
+      "effort": 6,
+      "reliability": 0.55,
+      "threatPush": 0,
+      "desc": "Construct outpost."
+    },
+    {
+      "id": "guard",
+      "label": "Guard",
+      "emoji": "🛡️",
+      "effort": 3,
+      "reliability": 1,
+      "threatPush": 1,
+      "desc": "Hold ground."
+    }
+  ]
+};
+
+export interface PandemicLegacyS2Settings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type PandemicLegacyS2State = CoopState;
+export type PandemicLegacyS2Action = { type: "play"; tacticId: string };
+
+function diffNum(s: PandemicLegacyS2Settings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type PandemicLegacyS2Action = { type: "play" } | { type: "next" };
-export function initialState(seed: number, _s: PandemicLegacyS2Settings): PandemicLegacyS2State {
-  return { rngSeed: seed, round: 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, teamScore: 0, phase: "ready" };
+
+export function initialState(seed: number, s: PandemicLegacyS2Settings): PandemicLegacyS2State {
+  return coopInitial(seed, PandemicLegacyS2_CFG, diffNum(s));
 }
+
 export function reducer(state: PandemicLegacyS2State, action: PandemicLegacyS2Action): PandemicLegacyS2State {
-  if (state.phase === "done") return state;
-  if (action.type === "play") {
-    if (state.phase !== "ready") return state;
-    const rng = mulberry32(state.rngSeed);
-    const pr = 1 + Math.floor(rng() * 6);
-    const cr = 1 + Math.floor(rng() * 6);
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = pr + cr;
-    const newScore = state.teamScore + pts;
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, playerRoll: pr, cpuRoll: cr, lastPts: pts, teamScore: newScore, phase: isLast ? "done" : "rolled" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "rolled") return state;
-    return { ...state, round: state.round + 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, phase: "ready" };
-  }
+  if (action.type === "play") return coopStep(state, PandemicLegacyS2_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: PandemicLegacyS2State): { score: number } | null {
-  if (state.phase !== "done") return null;
-  const bonus = state.teamScore >= TARGET_SCORE ? 50 : 0;
-  return { score: state.teamScore + bonus };
+  const r = coopScore(state, PandemicLegacyS2_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = PandemicLegacyS2_CFG.totalRounds;
+export const TARGET_SCORE = PandemicLegacyS2_CFG.progressTarget;
+export const FLAVOR = "Run supply lines; reclaim mainland regions.";

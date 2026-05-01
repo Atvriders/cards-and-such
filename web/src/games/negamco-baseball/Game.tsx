@@ -8,24 +8,45 @@ export function NegamcoBaseballGame({ state, dispatch, onGameOver }: GameProps<N
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-negabase-wrap"><div className="g-negabase-done"><h2>Match!</h2><div className="g-negabase-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="negbas-wrap">
+        <div className="negbas-done">
+          <h2>Inning</h2>
+          <div className="negbas-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="negbas-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="negbas-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-negabase-wrap">
-      <div className="g-negabase-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-negabase-score">{state.score} pts</div>
+    <div className="negbas-wrap">
+      <div className="negbas-head">
+        <span className="negbas-round">Inning {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="negbas-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-negabase-row">{state.dice.map((d, i) => <div key={i} className="g-negabase-die">{d}</div>)}</div>
+        <div className="negbas-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="negbas-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-negabase-btn" onClick={() => dispatch({ type:"roll" } as NegamcoBaseballAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="negbas-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-negabase-result">+{state.lastPts}</div>
-          <button className="g-negabase-btn alt" onClick={() => dispatch({ type:"next" } as NegamcoBaseballAction)}>Next</button>
-        </>
-      )}
+      <div className="negbas-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="negbas-log">{line}</div>)}
+      </div>
+      <div className="negbas-actions">
+        {state.phase === "rolling" && (
+          <button className="negbas-btn primary" onClick={() => dispatch({ type: "roll" } as NegamcoBaseballAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="negbas-btn alt" onClick={() => dispatch({ type: "next" } as NegamcoBaseballAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

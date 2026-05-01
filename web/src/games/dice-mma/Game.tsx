@@ -8,24 +8,45 @@ export function DiceMmaGame({ state, dispatch, onGameOver }: GameProps<DiceMmaSt
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-dicemma-wrap"><div className="g-dicemma-done"><h2>Match!</h2><div className="g-dicemma-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dicmma-wrap">
+        <div className="dicmma-done">
+          <h2>Round</h2>
+          <div className="dicmma-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicmma-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicmma-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-dicemma-wrap">
-      <div className="g-dicemma-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-dicemma-score">{state.score} pts</div>
+    <div className="dicmma-wrap">
+      <div className="dicmma-head">
+        <span className="dicmma-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicmma-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-dicemma-row">{state.dice.map((d, i) => <div key={i} className="g-dicemma-die">{d}</div>)}</div>
+        <div className="dicmma-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicmma-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-dicemma-btn" onClick={() => dispatch({ type:"roll" } as DiceMmaAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicmma-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-dicemma-result">+{state.lastPts}</div>
-          <button className="g-dicemma-btn alt" onClick={() => dispatch({ type:"next" } as DiceMmaAction)}>Next</button>
-        </>
-      )}
+      <div className="dicmma-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicmma-log">{line}</div>)}
+      </div>
+      <div className="dicmma-actions">
+        {state.phase === "rolling" && (
+          <button className="dicmma-btn primary" onClick={() => dispatch({ type: "roll" } as DiceMmaAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicmma-btn alt" onClick={() => dispatch({ type: "next" } as DiceMmaAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

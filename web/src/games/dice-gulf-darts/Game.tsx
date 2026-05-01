@@ -8,24 +8,45 @@ export function DiceGulfDartsGame({ state, dispatch, onGameOver }: GameProps<Dic
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="g-dicegulfdart-wrap"><div className="g-dicegulfdart-done"><h2>Match!</h2><div className="g-dicegulfdart-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="diguda-wrap">
+        <div className="diguda-done">
+          <h2>Hole</h2>
+          <div className="diguda-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="diguda-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="diguda-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="g-dicegulfdart-wrap">
-      <div className="g-dicegulfdart-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="g-dicegulfdart-score">{state.score} pts</div>
+    <div className="diguda-wrap">
+      <div className="diguda-head">
+        <span className="diguda-round">Hole {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="diguda-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="g-dicegulfdart-row">{state.dice.map((d, i) => <div key={i} className="g-dicegulfdart-die">{d}</div>)}</div>
+        <div className="diguda-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="diguda-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="g-dicegulfdart-btn" onClick={() => dispatch({ type:"roll" } as DiceGulfDartsAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="diguda-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="g-dicegulfdart-result">+{state.lastPts}</div>
-          <button className="g-dicegulfdart-btn alt" onClick={() => dispatch({ type:"next" } as DiceGulfDartsAction)}>Next</button>
-        </>
-      )}
+      <div className="diguda-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="diguda-log">{line}</div>)}
+      </div>
+      <div className="diguda-actions">
+        {state.phase === "rolling" && (
+          <button className="diguda-btn primary" onClick={() => dispatch({ type: "roll" } as DiceGulfDartsAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="diguda-btn alt" onClick={() => dispatch({ type: "next" } as DiceGulfDartsAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

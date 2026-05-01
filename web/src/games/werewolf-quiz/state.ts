@@ -1,192 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface WerewolfQuizSettings { questions: "10"; }
-export interface WerewolfQuizState {
-  questions: QuizQuestion[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
-  score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
-}
-export type WerewolfQuizAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
 
-const ALL_QUESTIONS: QuizQuestion[] = [
+export const WerewolfQuiz_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Werewolves win at what ratio?",
+    "q": "Werewolf has?",
     "choices": [
-      "More than Villagers",
-      "Equal to Villagers",
-      "Half Villagers",
-      "Always last 3"
+      "Hidden roles",
+      "Open hands",
+      "Numbers",
+      "Cards face-up"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Standard Werewolf:Villager ratio?",
+    "q": "Villagers want to?",
     "choices": [
-      "1:2",
-      "1:3",
-      "1:4",
-      "1:5"
+      "Kill werewolves",
+      "Lie",
+      "Hide",
+      "Sing"
     ],
-    "correct": 2
+    "answer": 0
   },
   {
-    "question": "Seer at night does what?",
+    "q": "Werewolves want to?",
     "choices": [
-      "Kills",
-      "Investigates one player",
+      "Eat villagers",
+      "Eat each other",
+      "Win silently",
+      "Vote out"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Rounds alternate?",
+    "choices": [
+      "Day & Night",
+      "Spring & Fall",
+      "Hot & Cold",
+      "Active & Rest"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Player count?",
+    "choices": [
+      "7+",
+      "2",
+      "20+",
+      "Solo"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Werewolf is also called?",
+    "choices": [
+      "Mafia",
+      "Coup",
+      "Avalon",
+      "Skull"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Released in?",
+    "choices": [
+      "1986",
+      "2005",
+      "2020",
+      "1995"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Day phase ends with?",
+    "choices": [
+      "Lynch vote",
+      "Random kill",
+      "No vote",
+      "Random"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Night phase werewolves?",
+    "choices": [
+      "Choose victim",
+      "Sleep",
+      "Vote",
+      "Sing"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Special role: Seer?",
+    "choices": [
+      "Sees alignment",
+      "Has extra vote",
       "Heals",
-      "Votes twice"
+      "Lies"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "Doctor / Bodyguard at night?",
+    "q": "Special role: Doctor?",
     "choices": [
-      "Sees",
-      "Protects one player",
-      "Lynches",
-      "Votes"
+      "Saves a player",
+      "Heals two",
+      "Kills",
+      "Lies"
     ],
-    "correct": 1
+    "answer": 0
   },
   {
-    "question": "First role typically targeted by Wolves?",
+    "q": "Game ends when?",
     "choices": [
-      "Doctor",
-      "Seer",
-      "Random",
-      "Village Idiot"
+      "One side eliminated",
+      "All vote",
+      "Time",
+      "Cards out"
     ],
-    "correct": 1
-  },
-  {
-    "question": "Who runs the day phase?",
-    "choices": [
-      "Moderator",
-      "Wolves",
-      "Seer",
-      "Doctor"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hammer = ?",
-    "choices": [
-      "Final vote that lynches",
-      "First vote",
-      "Tie-breaking vote",
-      "Wolf signal"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cult/Vampire variant adds…",
-    "choices": [
-      "Recruitment",
-      "Resurrection",
-      "Auto-win",
-      "Nothing"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Counter-claim Seer means…",
-    "choices": [
-      "Wolf claims to also be Seer",
-      "Doctor reveals",
-      "Village quits",
-      "Day skip"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Village's best information source?",
-    "choices": [
-      "The Wolves",
-      "Seer's checks",
-      "Random voting",
-      "Quiet players"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "If Seer dies night 1, Village should…",
-    "choices": [
-      "Give up",
-      "Treat any claim with extreme suspicion (Wolves likely fake-claim)",
-      "Auto-trust next claim",
-      "Skip day"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "One Night Werewolf differs because…",
-    "choices": [
-      "No deaths",
-      "Single round",
-      "No Seer",
-      "Auto-Wolf wins"
-    ],
-    "correct": 1
+    "answer": 0
   }
 ];
 
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
+const CFG = { totalQuestions: Math.min(10, WerewolfQuiz_QUESTIONS.length), pool: WerewolfQuiz_QUESTIONS };
 
-export function initialState(seed: number, _settings: WerewolfQuizSettings): WerewolfQuizState {
-  const rng = mulberry32(seed);
-  const pool = shuffle([...ALL_QUESTIONS], rng).slice(0, 10);
-  const questions = pool.map(q => {
-    const idx = q.choices.map((c, i) => ({ c, i }));
-    const s = shuffle(idx, rng);
-    const newCorrect = s.findIndex(x => x.i === q.correct) as 0 | 1 | 2 | 3;
-    return { ...q, choices: s.map(x => x.c) as [string, string, string, string], correct: newCorrect };
-  });
-  return { questions, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
+export interface WerewolfQuizSettings { dummy: boolean; }
+export type WerewolfQuizState = QuizState;
+export type WerewolfQuizAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: WerewolfQuizSettings): WerewolfQuizState {
+  return quizInitial(seed, CFG);
 }
 
 export function reducer(state: WerewolfQuizState, action: WerewolfQuizAction): WerewolfQuizState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const q = state.questions[state.currentIndex]!;
-      const ok = state.selected === q.correct;
-      return {
-        ...state,
-        submitted: true,
-        score: state.score + (ok ? 100 : 0),
-        correctCount: state.correctCount + (ok ? 1 : 0),
-        phase: "result",
-      };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.questions.length
-        ? { ...state, phase: "done" }
-        : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default:
-      return state;
-  }
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
 
 export function isTerminal(state: WerewolfQuizState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return quizScore(state);
 }
+
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

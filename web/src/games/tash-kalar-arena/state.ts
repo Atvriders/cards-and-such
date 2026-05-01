@@ -1,48 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const CARDS_PER_ROUND = 3;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Recruit", value: 2 },
-  { name: "Hero", value: 4 },
-  { name: "Champion", value: 6 },
-  { name: "Relic", value: 3 },
-  { name: "Spell", value: 5 },
-];
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
 
-export interface TashKalarArenaSettings { dummy: boolean; }
-export interface TashKalarArenaState {
-  rngSeed: number;
-  round: number;
-  hand: number[];
-  lastPts: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+export const TashKalarArena_CFG: CoopEngineConfig = {
+  "totalRounds": 10,
+  "progressTarget": 55,
+  "threatPerRound": 3,
+  "startMorale": 4,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.4,
+  "scenarioLabel": "Mage Arena",
+  "scenarioEmoji": "🔯",
+  "progressLabel": "Patterns",
+  "threatLabel": "Mana Drain",
+  "moraleLabel": "Health",
+  "tactics": [
+    {
+      "id": "summon",
+      "label": "Summon",
+      "emoji": "🐉",
+      "effort": 6,
+      "reliability": 0.55,
+      "threatPush": 1,
+      "desc": "Big creature."
+    },
+    {
+      "id": "place",
+      "label": "Place Stone",
+      "emoji": "🟦",
+      "effort": 4,
+      "reliability": 0.9,
+      "threatPush": 0,
+      "desc": "Foundation."
+    },
+    {
+      "id": "flare",
+      "label": "Flare",
+      "emoji": "🔥",
+      "effort": 3,
+      "reliability": 0.85,
+      "threatPush": 1,
+      "desc": "Bonus."
+    },
+    {
+      "id": "focus",
+      "label": "Focus",
+      "emoji": "🎯",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 1,
+      "desc": "Special."
+    }
+  ]
+};
+
+export interface TashKalarArenaSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type TashKalarArenaState = CoopState;
+export type TashKalarArenaAction = { type: "play"; tacticId: string };
+
+function diffNum(s: TashKalarArenaSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type TashKalarArenaAction = { type: "draw" } | { type: "next" };
-export function initialState(seed: number, _s: TashKalarArenaSettings): TashKalarArenaState {
-  return { rngSeed: seed, round: 1, hand: [], lastPts: 0, score: 0, phase: "drawing" };
+
+export function initialState(seed: number, s: TashKalarArenaSettings): TashKalarArenaState {
+  return coopInitial(seed, TashKalarArena_CFG, diffNum(s));
 }
-export function scoreHand(hand: number[]): number {
-  return hand.reduce((a,i) => a + (DECK[i]?.value ?? 0), 0);
-}
+
 export function reducer(state: TashKalarArenaState, action: TashKalarArenaAction): TashKalarArenaState {
-  if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand: number[] = [];
-    for (let i = 0; i < CARDS_PER_ROUND; i++) hand.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = scoreHand(hand);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, hand, lastPts: pts, score: state.score + pts, phase: isLast ? "done" : "scored" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, hand: [], lastPts: 0, phase: "drawing" };
-  }
+  if (action.type === "play") return coopStep(state, TashKalarArena_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: TashKalarArenaState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  const r = coopScore(state, TashKalarArena_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = TashKalarArena_CFG.totalRounds;
+export const TARGET_SCORE = TashKalarArena_CFG.progressTarget;
+export const FLAVOR = "Place stones in patterns; summon beings.";

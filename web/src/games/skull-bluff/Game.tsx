@@ -1,54 +1,21 @@
-import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { DeductionView } from "../_shared/DeductionView.js";
+import { deductionScore } from "../_shared/deduction-engine.js";
 import type { SkullBluffState, SkullBluffAction, SkullBluffSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { SkullBluff_CFG, FLAVOR } from "./state.js";
 import "./Game.css";
 
 export function SkullBluffGame({ state, dispatch, onGameOver }: GameProps<SkullBluffState, SkullBluffSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="bluff-wrap">
-        <div className="bluff-done">
-          <h2>Game Over</h2>
-          <p>Correct calls: {state.callsCorrect} / {state.rounds.length}</p>
-          <p className="bluff-final">{state.score} pts</p>
-        </div>
-      </div>
-    );
-  }
-  const r = state.rounds[state.currentIndex]!;
-  const showTell = r.tellLevel > 60;
   return (
-    <div className="bluff-wrap">
-      <div className="bluff-header">
-        <span>Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="bluff-score">{state.score} pts</span>
-      </div>
-      <div className="bluff-claim">
-        <div className="bluff-cpu-line">CPU placed:</div>
-        <div className="bluff-claim-text">"I placed a {r.cpuClaim}"</div>
-        {showTell && !state.resolved && <div className="bluff-tell">CPU is fidgeting nervously…</div>}
-        {!showTell && !state.resolved && <div className="bluff-tell calm">CPU looks calm.</div>}
-      </div>
-      {!state.resolved && (
-        <div className="bluff-actions">
-          <button className="bluff-btn trust" onClick={() => dispatch({ type: "decide", decision: "trust" } as SkullBluffAction)}>Trust</button>
-          <button className="bluff-btn call" onClick={() => dispatch({ type: "decide", decision: "callBluff" } as SkullBluffAction)}>Call Bluff!</button>
-        </div>
-      )}
-      {state.resolved && (
-        <div className="bluff-result">
-          <div className="bluff-reveal">CPU actually had: <strong>{r.cpuActual}</strong></div>
-          <div className={`bluff-feedback ${(state.decision === "callBluff") === r.isBluffing ? "ok" : "no"}`}>
-            {(state.decision === "callBluff") === r.isBluffing ? "+100 pts" : "Wrong call!"}
-          </div>
-          <button className="bluff-btn next" onClick={() => dispatch({ type: "next" } as SkullBluffAction)}>
-            {state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}
-          </button>
-        </div>
-      )}
-    </div>
+    <DeductionView
+      prefix="sk"
+      cfg={SkullBluff_CFG}
+      state={state}
+      onSet={(position, value) => dispatch({ type: "set", position, value } as SkullBluffAction)}
+      onSubmit={() => dispatch({ type: "submit" } as SkullBluffAction)}
+      onGameOver={onGameOver}
+      scoreFn={(s) => deductionScore(s, SkullBluff_CFG)}
+      intro={FLAVOR}
+    />
   );
 }

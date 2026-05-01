@@ -8,24 +8,45 @@ export function DicePetanqueGame({ state, dispatch, onGameOver }: GameProps<Dice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-petanque-wrap"><div className="ds-petanque-done"><h2>Done!</h2><div className="ds-petanque-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dicpet-wrap">
+        <div className="dicpet-done">
+          <h2>End</h2>
+          <div className="dicpet-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicpet-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicpet-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-petanque-wrap">
-      <div className="ds-petanque-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-petanque-score">{state.score} pts</div>
+    <div className="dicpet-wrap">
+      <div className="dicpet-head">
+        <span className="dicpet-round">End {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicpet-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-petanque-row">{state.dice.map((d, i) => <div key={i} className="ds-petanque-die">{d}</div>)}</div>
+        <div className="dicpet-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicpet-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-petanque-btn" onClick={() => dispatch({ type:"roll" } as DicePetanqueAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicpet-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-petanque-result">+{state.lastPts}</div>
-          <button className="ds-petanque-btn alt" onClick={() => dispatch({ type:"next" } as DicePetanqueAction)}>Next</button>
-        </>
-      )}
+      <div className="dicpet-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicpet-log">{line}</div>)}
+      </div>
+      <div className="dicpet-actions">
+        {state.phase === "rolling" && (
+          <button className="dicpet-btn primary" onClick={() => dispatch({ type: "roll" } as DicePetanqueAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicpet-btn alt" onClick={() => dispatch({ type: "next" } as DicePetanqueAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

@@ -8,24 +8,45 @@ export function DiceMolkkyGame({ state, dispatch, onGameOver }: GameProps<DiceMo
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ds-molkky-wrap"><div className="ds-molkky-done"><h2>Done!</h2><div className="ds-molkky-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="dicmol-wrap">
+        <div className="dicmol-done">
+          <h2>Throw</h2>
+          <div className="dicmol-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="dicmol-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="dicmol-log">{line}</div>)}
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="ds-molkky-wrap">
-      <div className="ds-molkky-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ds-molkky-score">{state.score} pts</div>
+    <div className="dicmol-wrap">
+      <div className="dicmol-head">
+        <span className="dicmol-round">Throw {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="dicmol-score">{state.score} pts</span>
+      </div>
+      
       {state.dice && (
-        <div className="ds-molkky-row">{state.dice.map((d, i) => <div key={i} className="ds-molkky-die">{d}</div>)}</div>
+        <div className="dicmol-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="dicmol-die">{d}</div>)}
+        </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="ds-molkky-btn" onClick={() => dispatch({ type:"roll" } as DiceMolkkyAction)}>Roll</button>
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="dicmol-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      {state.phase === "rolled" && (
-        <>
-          <div className="ds-molkky-result">+{state.lastPts}</div>
-          <button className="ds-molkky-btn alt" onClick={() => dispatch({ type:"next" } as DiceMolkkyAction)}>Next</button>
-        </>
-      )}
+      <div className="dicmol-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="dicmol-log">{line}</div>)}
+      </div>
+      <div className="dicmol-actions">
+        {state.phase === "rolling" && (
+          <button className="dicmol-btn primary" onClick={() => dispatch({ type: "roll" } as DiceMolkkyAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="dicmol-btn alt" onClick={() => dispatch({ type: "next" } as DiceMolkkyAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

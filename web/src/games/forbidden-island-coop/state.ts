@@ -1,41 +1,82 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const TARGET_SCORE = 70;
-export interface ForbiddenIslandCoopSettings { dummy: boolean; }
-export interface ForbiddenIslandCoopState {
-  rngSeed: number;
-  round: number;
-  playerRoll: number;
-  cpuRoll: number;
-  lastPts: number;
-  teamScore: number;
-  phase: "ready" | "rolled" | "done";
+import { coopInitial, coopStep, coopScore, type CoopEngineConfig, type CoopState } from "../_shared/coop-engine.js";
+
+export const ForbiddenIslandCoop_CFG: CoopEngineConfig = {
+  "totalRounds": 10,
+  "progressTarget": 50,
+  "threatPerRound": 3,
+  "startMorale": 3,
+  "threatBreakpoint": 6,
+  "allyEffort": 3,
+  "allyClutch": 0.4,
+  "scenarioLabel": "Sinking Island",
+  "scenarioEmoji": "🏝️",
+  "progressLabel": "Treasures",
+  "threatLabel": "Flood",
+  "moraleLabel": "Tiles",
+  "tactics": [
+    {
+      "id": "shoreup",
+      "label": "Shore Up",
+      "emoji": "🪨",
+      "effort": 4,
+      "reliability": 0.9,
+      "threatPush": 2,
+      "desc": "Push back the flood."
+    },
+    {
+      "id": "capture",
+      "label": "Capture Treasure",
+      "emoji": "💎",
+      "effort": 6,
+      "reliability": 0.55,
+      "threatPush": 0,
+      "desc": "Major progress."
+    },
+    {
+      "id": "move",
+      "label": "Move/Swim",
+      "emoji": "🏊",
+      "effort": 3,
+      "reliability": 0.95,
+      "threatPush": 1,
+      "desc": "Reposition."
+    },
+    {
+      "id": "airlift",
+      "label": "Airlift",
+      "emoji": "🚁",
+      "effort": 2,
+      "reliability": 1,
+      "threatPush": 2,
+      "desc": "Emergency rescue."
+    }
+  ]
+};
+
+export interface ForbiddenIslandCoopSettings { difficulty: "Easy" | "Standard" | "Hard"; }
+export type ForbiddenIslandCoopState = CoopState;
+export type ForbiddenIslandCoopAction = { type: "play"; tacticId: string };
+
+function diffNum(s: ForbiddenIslandCoopSettings): number {
+  if (s.difficulty === "Easy") return 0.8;
+  if (s.difficulty === "Hard") return 1.3;
+  return 1.0;
 }
-export type ForbiddenIslandCoopAction = { type: "play" } | { type: "next" };
-export function initialState(seed: number, _s: ForbiddenIslandCoopSettings): ForbiddenIslandCoopState {
-  return { rngSeed: seed, round: 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, teamScore: 0, phase: "ready" };
+
+export function initialState(seed: number, s: ForbiddenIslandCoopSettings): ForbiddenIslandCoopState {
+  return coopInitial(seed, ForbiddenIslandCoop_CFG, diffNum(s));
 }
+
 export function reducer(state: ForbiddenIslandCoopState, action: ForbiddenIslandCoopAction): ForbiddenIslandCoopState {
-  if (state.phase === "done") return state;
-  if (action.type === "play") {
-    if (state.phase !== "ready") return state;
-    const rng = mulberry32(state.rngSeed);
-    const pr = 1 + Math.floor(rng() * 6);
-    const cr = 1 + Math.floor(rng() * 6);
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = pr + cr;
-    const newScore = state.teamScore + pts;
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, playerRoll: pr, cpuRoll: cr, lastPts: pts, teamScore: newScore, phase: isLast ? "done" : "rolled" };
-  }
-  if (action.type === "next") {
-    if (state.phase !== "rolled") return state;
-    return { ...state, round: state.round + 1, playerRoll: 0, cpuRoll: 0, lastPts: 0, phase: "ready" };
-  }
+  if (action.type === "play") return coopStep(state, ForbiddenIslandCoop_CFG, action.tacticId);
   return state;
 }
+
 export function isTerminal(state: ForbiddenIslandCoopState): { score: number } | null {
-  if (state.phase !== "done") return null;
-  const bonus = state.teamScore >= TARGET_SCORE ? 50 : 0;
-  return { score: state.teamScore + bonus };
+  const r = coopScore(state, ForbiddenIslandCoop_CFG);
+  return r ? { score: r.score } : null;
 }
+
+export const TOTAL_ROUNDS = ForbiddenIslandCoop_CFG.totalRounds;
+export const TARGET_SCORE = ForbiddenIslandCoop_CFG.progressTarget;
+export const FLAVOR = "Capture four idols and escape via the helipad.";

@@ -3,21 +3,21 @@ import type { ClueSuspectState, ClueSuspectAction, ClueSuspectSettings } from ".
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ClueSuspectGame } from "./Game.js";
 
-const settings = {
-  puzzles: { kind: "enum" as const, label: "Puzzles", options: ["10"] as const, default: "10" as const },
-} as const;
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const clueSuspectPlugin: GamePlugin<ClueSuspectState, ClueSuspectAction, typeof settings> = {
+export const clue_suspect_plugin: GamePlugin<ClueSuspectState, ClueSuspectAction, typeof settings> = {
   id: "clue-suspect",
-  title: "Clue Suspect",
+  title: "Clue: Suspect",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Compact card-only Clue.",
-  howToPlay: "Clue Suspect adapts the classic deduction puzzle into a focused quiz format. Each round presents a scenario, a set of clues, and four candidate answers. Your task is to apply pure logic to determine which option satisfies every clue simultaneously, then click Submit to lock in your accusation. Score 100 points per correct deduction across ten puzzles for a 1000-point ceiling.\n\nRead the scenario carefully — it tells you the type of mystery (whodunnit, code-cracking, hidden-item, or social-deduction). Then read each clue as a constraint that eliminates options. Cross-reference clues mentally before clicking. The remaining option that violates no clue is your answer. Wrong accusations show the correct answer in green and your selection in red so you can learn the deduction pattern.\n\nTips: when one clue alone narrows the field to one option, you've solved it; otherwise look for an option ruled out by every other answer. Strong deductive players score 800+; perfect 1000 requires reading carefully and not rushing. Use Submit then Next to advance through ten puzzles.",
+  description: "Suspect-themed Clue card game.",
+  howToPlay: "Clue: Suspect adapted as a logic-deduction puzzle: cycle each slot to set a guess, submit, and read the feedback (filled circles = exact, hollow = correct symbol but wrong slot). Crack the code in the allotted guesses to score.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ClueSuspectSettings),
   reducer,
   isTerminal,
   component: ClueSuspectGame,
 };
+
+export default clue_suspect_plugin;

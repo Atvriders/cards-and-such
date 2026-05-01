@@ -1,28 +1,52 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { ShuffleQuarterState, ShuffleQuarterAction, ShuffleQuarterSettings } from "./state.js";
-import { isTerminal, TOTAL_TURNS, MAX_THROW } from "./state.js";
+import type { ShuffleQuarterPubState, ShuffleQuarterPubAction, ShuffleQuarterPubSettings } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 
-export function ShuffleQuarterGame({ state, dispatch, onGameOver }: GameProps<ShuffleQuarterState, ShuffleQuarterSettings>): JSX.Element {
+export function ShuffleQuarterPubGame({ state, dispatch, onGameOver }: GameProps<ShuffleQuarterPubState, ShuffleQuarterPubSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  return (
-    <div className="pb-wrap">
-      <h3 className="pb-title">Shuffle Quarter</h3>
-      <div className="pb-stats">
-        <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
-        <div>Score <b>{state.score}</b></div>
-        {state.lastPts > 0 && <div className="pb-pts">+{state.lastPts}!</div>}
-      </div>
-      <div className="pb-board">
-        <div className="pb-target">
-          <div className="pb-bullseye">{state.lastPts >= MAX_THROW ? "BULLSEYE!" : state.phase === "ready" ? "SLIDE" : state.lastPts > 0 ? "+" + state.lastPts : "MISS"}</div>
+  if (state.phase === "done") {
+    return (
+      <div className="shqupu-wrap">
+        <div className="shqupu-done">
+          <h2>Round</h2>
+          <div className="shqupu-final">{Math.max(0, state.score)} pts</div>
+          
+          <div className="shqupu-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="shqupu-log">{line}</div>)}
+          </div>
         </div>
       </div>
-      {state.phase === "ready" && <button className="pb-btn" onClick={() => dispatch({ type: "throw" } as ShuffleQuarterAction)}>Slide</button>}
-      {state.phase === "thrown" && <button className="pb-btn alt" onClick={() => dispatch({ type: "next" } as ShuffleQuarterAction)}>Next</button>}
-      {state.phase === "done" && <div className="pb-done"><h3>Final: {state.score} pts</h3></div>}
+    );
+  }
+  return (
+    <div className="shqupu-wrap">
+      <div className="shqupu-head">
+        <span className="shqupu-round">Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="shqupu-score">{state.score} pts</span>
+      </div>
+      
+      {state.dice && (
+        <div className="shqupu-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="shqupu-die">{d}</div>)}
+        </div>
+      )}
+      {state.lastPts !== 0 && state.phase === "rolled" && (
+        <div className="shqupu-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+      )}
+      <div className="shqupu-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="shqupu-log">{line}</div>)}
+      </div>
+      <div className="shqupu-actions">
+        {state.phase === "rolling" && (
+          <button className="shqupu-btn primary" onClick={() => dispatch({ type: "roll" } as ShuffleQuarterPubAction)}>Roll</button>
+        )}
+        {state.phase === "rolled" && (
+          <button className="shqupu-btn alt" onClick={() => dispatch({ type: "next" } as ShuffleQuarterPubAction)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

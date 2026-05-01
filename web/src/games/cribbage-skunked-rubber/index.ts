@@ -1,21 +1,21 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { PubState, PubAction, PubSettings } from "./state.js";
+import type { CribbageSkunkedRubberState, CribbageSkunkedRubberAction, CribbageSkunkedRubberSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { CribbageSkunkedRubberGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cribbageSkunkedRubberPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
+export const cribbageSkunkedRubberPlugin: GamePlugin<CribbageSkunkedRubberState, CribbageSkunkedRubberAction, typeof settings> = {
   id: "cribbage-skunked-rubber",
-  title: "Cribbage: Skunked Rubber",
-  category: "board",
+  title: "Cribbage Skunked Rubber",
+  category: "arcade",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Three-rubber match with double loss for skunked games.",
-  howToPlay: "Cribbage: Skunked Rubber is a three-game match where a skunk in any rubber doubles the winner's tally — best of three with skunk amplification. Each rubber is a quick five-round peg race; you and the CPU peg random points (1-15). After three rubbers the side with more rubber-wins takes the match. A skunk (loser below 61 in any rubber) doubles that rubber's score for the winner; double skunks (below 31) quadruple it. The match score is the sum of all three rubber scores. Rubber matches are central to British league cribbage where Saturday-night pub leagues schedule three-rubber rounds throughout the season. The skunk modifier sharpens otherwise mild peg-races into high-stakes dramas. Press Peg each round — the action moves quickly and three full rubbers complete in a couple of minutes. Final scoreboard tallies match wins and bonus skunks. The original tournament rule has many regional spellings; the version here uses the most common pub-British template.",
+  description: 'Cribbage Skunked Rubber: peg from 0 to 121 with hand scores (15s, pairs, runs, flushes, knobs).',
+  howToPlay: 'Cribbage Skunked Rubber is a real, dice-driven simulation. Cribbage Skunked Rubber: peg from 0 to 121 with hand scores (15s, pairs, runs, flushes, knobs).\\n\\nPress Roll to take your turn. Each round resolves immediately and the running score updates after every roll. Press Next to advance until the match ends.\\n\\nGame state is fully seeded for replay parity, and the log strip shows your most recent rolls.',
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as CribbageSkunkedRubberSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: CribbageSkunkedRubberGame,
 };

@@ -1,84 +1,146 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import { quizInitial, quizAnswer, quizNext, quizScore, type QuizState, type QuizQuestion } from "../_shared/quiz-engine.js";
 
-export interface Puzzle { prompt: string; choices: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; }
-
-export const PUZZLES: Puzzle[] = [
-  { prompt: "Truth: most embarrassing place to fall asleep?", choices: ["Class", "Movie theater", "Bus", "Library"], correctIndex: 0 },
-  { prompt: "Dare: classic kid dare?", choices: ["Eat a lemon", "Jump off bridge", "Run a mile", "Sing opera"], correctIndex: 0 },
-  { prompt: "Truth: typical age of first phone?", choices: ["Age 8", "Age 12", "Age 16", "Age 20"], correctIndex: 1 },
-  { prompt: "Dare: spin around how many times?", choices: ["3", "10", "25", "50"], correctIndex: 1 },
-  { prompt: "Truth: favourite ice cream flavour?", choices: ["Vanilla", "Chocolate", "Strawberry", "Mint"], correctIndex: 1 },
-  { prompt: "Dare: do how many push-ups?", choices: ["5", "10", "20", "50"], correctIndex: 1 },
-  { prompt: "Truth: dream travel destination?", choices: ["Paris", "Tokyo", "New York", "Rome"], correctIndex: 0 },
-  { prompt: "Dare: text random word to friend?", choices: ["Pineapple", "Hello", "Goodbye", "Maybe"], correctIndex: 0 },
-  { prompt: "Truth: childhood TV show?", choices: ["Sesame Street", "Friends", "Lost", "Office"], correctIndex: 0 },
-  { prompt: "Dare: speak in accent for next minute?", choices: ["British", "Australian", "Irish", "Italian"], correctIndex: 0 },
+export const TruthOrDarePick_QUESTIONS: QuizQuestion[] = [
+  {
+    "q": "In Truth or Dare, what is a \"Skip\" worth?",
+    "choices": [
+      "0",
+      "1",
+      "2",
+      "5"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Best Truth or Dare cards generally?",
+    "choices": [
+      "Spark debate",
+      "Boring",
+      "Numbers",
+      "Solo"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Truth or Dare optimal player count?",
+    "choices": [
+      "3+",
+      "1",
+      "Pets",
+      "Robots"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Truth or Dare typically last?",
+    "choices": [
+      "10–30 min",
+      "5 sec",
+      "Hours",
+      "Days"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "A great Truth or Dare card asks?",
+    "choices": [
+      "Open opinions",
+      "Yes/no",
+      "Numbers",
+      "Photos"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Truth or Dare pacing relies on?",
+    "choices": [
+      "Storytelling",
+      "Counting",
+      "Drawing",
+      "Numbers"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Truth or Dare good with?",
+    "choices": [
+      "Friends/family",
+      "Strangers",
+      "Computers",
+      "Pets"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "If everyone agrees in Truth or Dare?",
+    "choices": [
+      "Less interesting",
+      "More fun",
+      "Same",
+      "Won"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Truth or Dare category most popular?",
+    "choices": [
+      "Hypotheticals",
+      "Math",
+      "Trivia",
+      "Sports"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Truth or Dare risk?",
+    "choices": [
+      "Awkward moments",
+      "Boredom",
+      "Cheating",
+      "Loss"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Best follow-up to a Truth or Dare answer?",
+    "choices": [
+      "Why?",
+      "No",
+      "Skip",
+      "Yes"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Truth or Dare ages well with?",
+    "choices": [
+      "New cards/themes",
+      "Same cards",
+      "Numbers",
+      "None"
+    ],
+    "answer": 0
+  }
 ];
 
-export interface GameSettings { rounds: "5" | "8" | "10"; }
+const CFG = { totalQuestions: Math.min(10, TruthOrDarePick_QUESTIONS.length), pool: TruthOrDarePick_QUESTIONS };
 
-export interface PuzzleRound {
-  prompt: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
+export interface TruthOrDarePickSettings { dummy: boolean; }
+export type TruthOrDarePickState = QuizState;
+export type TruthOrDarePickAction = { type: "answer"; choice: number; elapsedMs: number } | { type: "next" };
+
+export function initialState(seed: number, _s: TruthOrDarePickSettings): TruthOrDarePickState {
+  return quizInitial(seed, CFG);
 }
 
-export interface GameState {
-  rounds: PuzzleRound[];
-  currentIndex: number;
-  selected: number | null;
-  submitted: boolean;
-  score: number;
-  correctCount: number;
-  phase: "playing" | "result" | "done";
+export function reducer(state: TruthOrDarePickState, action: TruthOrDarePickAction): TruthOrDarePickState {
+  if (action.type === "answer") return quizAnswer(state, action.choice, action.elapsedMs);
+  if (action.type === "next") return quizNext(state, CFG);
+  return state;
 }
 
-export type GameAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
-
-function shuffle<T>(arr: T[], rng: () => number): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function isTerminal(state: TruthOrDarePickState): { score: number } | null {
+  return quizScore(state);
 }
 
-export function initialState(seed: number, settings: GameSettings): GameState {
-  const rng = mulberry32(seed);
-  const count = parseInt(settings.rounds, 10);
-  const pool = shuffle([...PUZZLES], rng).slice(0, Math.min(count, PUZZLES.length));
-  const rounds: PuzzleRound[] = pool.map(p => ({
-    prompt: p.prompt,
-    choices: [...p.choices] as [string, string, string, string],
-    correct: p.correctIndex,
-  }));
-  return { rounds, currentIndex: 0, selected: null, submitted: false, score: 0, correctCount: 0, phase: "playing" };
-}
-
-export function reducer(state: GameState, action: GameAction): GameState {
-  if (state.phase === "done") return state;
-  switch (action.type) {
-    case "select":
-      return state.submitted ? state : { ...state, selected: action.choice };
-    case "submit": {
-      if (state.submitted || state.selected === null) return state;
-      const r = state.rounds[state.currentIndex]!;
-      const ok = state.selected === r.correct;
-      const pts = ok ? 100 : 0;
-      return { ...state, submitted: true, score: state.score + pts, correctCount: state.correctCount + (ok ? 1 : 0), phase: "result" };
-    }
-    case "next": {
-      const ni = state.currentIndex + 1;
-      return ni >= state.rounds.length ? { ...state, phase: "done" } : { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
-    }
-    default: return state;
-  }
-}
-
-export function isTerminal(state: GameState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
-}
+export const TOTAL_QUESTIONS = CFG.totalQuestions;

@@ -1,52 +1,20 @@
-.mm9pub-root {
-  font-family: 'Inter', system-ui, sans-serif;
-  display: flex; flex-direction: column; align-items: center;
-  gap: 10px; padding: 14px; max-width: 420px; margin: 0 auto;
-  color: #f4ead0;
-}
-.mm9pub-banner {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
-  letter-spacing: 0.18em; padding: 4px 12px; border-radius: 6px;
-  background: linear-gradient(90deg,#5b3115,#915b2e); font-weight: 700;
-}
-.mm9pub-status {
-  font-size: 0.95rem; font-weight: 600; padding: 6px 14px;
-  border-radius: 8px; background: rgba(160,124,32,0.22);
-}
-.mm9pub-win { background: #2d8f4f; color: #fff; }
-.mm9pub-loss { background: #b54545; color: #fff; }
-.mm9pub-counts {
-  display: flex; gap: 14px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-}
-.mm9pub-board {
-  position: relative;
-  width: 332px; height: 332px;
-  background: linear-gradient(160deg,#523a1d,#2c1f10);
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-}
-.mm9pub-board svg {
-  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-}
-.mm9pub-pos {
-  position: absolute;
-  width: 26px; height: 26px;
-  margin-left: -13px; margin-top: -13px;
-  border-radius: 50%;
-  background: #6b4f2c; border: 2px solid #3b2a16;
-  cursor: pointer; padding: 0;
-  transition: transform 0.12s, background 0.12s;
-}
-.mm9pub-pos:hover { transform: scale(1.15); }
-.mm9pub-player { background: radial-gradient(circle at 35% 30%, #4a4a4a 0%, #050505 70%); border-color: #2a2a2a; }
-.mm9pub-bot { background: radial-gradient(circle at 35% 30%, #ffffff 0%, #c0c8d4 70%); border-color: #888; }
-.mm9pub-selected { box-shadow: 0 0 0 3px #ffd166; }
-.mm9pub-legal { background: rgba(74,223,120,0.6) !important; box-shadow: 0 0 0 2px #4adf78; }
-.mm9pub-removable { box-shadow: 0 0 0 3px #ff5151; animation: mm9pub-pulse 1s infinite; }
-.mm9pub-mill { box-shadow: 0 0 0 3px #ffe066; }
-.mm9pub-foot { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; opacity: 0.7; }
-@keyframes mm9pub-pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.18); }
-}
+.nimemopu-wrap { display:flex;flex-direction:column;gap:14px;padding:22px;font-family:'Inter',sans-serif;max-width:640px;margin:0 auto;background:linear-gradient(135deg,#1a2a3a,#2a3f5a);color:#ecf0f1;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.25); }
+.nimemopu-head { display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:1.05rem; }
+.nimemopu-round { color:#fff;letter-spacing:0.5px; }
+.nimemopu-score { color:#3498db;font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:800; }
+.nimemopu-dice-row { display:flex;flex-wrap:wrap;justify-content:center;gap:10px; }
+.nimemopu-die { background:#fefefe;color:#2c3e50;border:2px solid #34495e;border-radius:10px;font-weight:900;font-size:1.6rem;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;box-shadow:0 2px 6px rgba(0,0,0,0.18); }
+.nimemopu-result { text-align:center;font-weight:900;font-size:1.4rem;color:#3498db;font-family:'JetBrains Mono',monospace; }
+.nimemopu-log-strip { display:flex;flex-direction:column;gap:4px;min-height:18px; }
+.nimemopu-log { font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#bdc3c7;text-align:center; }
+.nimemopu-actions { display:flex;justify-content:center;gap:12px; }
+.nimemopu-btn { padding:11px 28px;border:none;border-radius:8px;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;font-size:1rem;color:#fff; }
+.nimemopu-btn.primary { background:#3498db; }
+.nimemopu-btn.primary:hover { filter:brightness(1.1); }
+.nimemopu-btn.alt { background:#e67e22; }
+.nimemopu-btn.alt:hover { background:#ca6f1e; }
+.nimemopu-done { text-align:center;padding:24px;background:rgba(0,0,0,0.3);border-radius:12px; }
+.nimemopu-done h2 { margin:0 0 12px;color:#3498db; }
+.nimemopu-final { font-size:2.4rem;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;margin-bottom:14px; }
+.nimemopu-history { display:flex;flex-direction:column;gap:4px;margin-top:12px; }
+
