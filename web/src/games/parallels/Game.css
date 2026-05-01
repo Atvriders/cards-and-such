@@ -1,9 +1,70 @@
-.parallels-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.parallels-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.parallels-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.parallels-auto:hover { background: rgba(255,255,255,0.32); }
-.parallels-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+/* parallels — rail-line violet stripe felt */
+.parallels-root {
+  padding: 14px;
+  min-height: 480px;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 16px), linear-gradient(180deg, #2c1f4d 0%, #100828 100%);
+  color: #e1d3f5;
+  border-radius: 10px;
+  border: 1px solid rgba(185, 163, 224, 0.25);
+  font-family: "JetBrains Mono", "Inter", system-ui, sans-serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.parallels-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #b9a3e0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.parallels-auto {
+  background: linear-gradient(180deg, #3e2f6e 0%, #18113a 100%);
+  color: #e1d3f5;
+  border: 1px solid rgba(185, 163, 224, 0.45);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.parallels-auto:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.parallels-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
 .parallels-spacer { flex: 1; min-width: 12px; }
-.parallels-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.parallels-col, .parallels-stock, .parallels-waste, .parallels-foundation { min-width: 60px; min-height: 90px; }
-.parallels-root.has-won { box-shadow: inset 0 0 60px gold; }
+.parallels-tableau {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.parallels-col,
+.parallels-stock,
+.parallels-waste,
+.parallels-foundation {
+  min-width: 60px;
+  min-height: 90px;
+  border-radius: 6px;
+}
+.parallels-stock,
+.parallels-waste,
+.parallels-foundation {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(185, 163, 224, 0.25);
+}
+.parallels-root.has-won {
+  box-shadow: inset 0 0 80px #d4b4ff, inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: parallels-win 1.6s ease-out;
+}
+@keyframes parallels-win {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

@@ -1,9 +1,70 @@
-.quadruple-alliance-pat-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.quadruple-alliance-pat-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.quadruple-alliance-pat-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.quadruple-alliance-pat-auto:hover { background: rgba(255,255,255,0.32); }
-.quadruple-alliance-pat-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+/* quadruple-alliance-pat — diplomat dark teal felt */
+.quadruple-alliance-pat-root {
+  padding: 14px;
+  min-height: 480px;
+  background: linear-gradient(135deg, #102a3d 0%, #03101a 100%);
+  color: #c9dde9;
+  border-radius: 10px;
+  border: 1px solid rgba(138, 186, 205, 0.25);
+  font-family: "Inter", system-ui, sans-serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.quadruple-alliance-pat-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #8abacd;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.quadruple-alliance-pat-auto {
+  background: linear-gradient(180deg, #1d4263 0%, #07182a 100%);
+  color: #c9dde9;
+  border: 1px solid rgba(138, 186, 205, 0.45);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.quadruple-alliance-pat-auto:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.quadruple-alliance-pat-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
 .quadruple-alliance-pat-spacer { flex: 1; min-width: 12px; }
-.quadruple-alliance-pat-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.quadruple-alliance-pat-col, .quadruple-alliance-pat-stock, .quadruple-alliance-pat-waste, .quadruple-alliance-pat-foundation { min-width: 60px; min-height: 90px; }
-.quadruple-alliance-pat-root.has-won { box-shadow: inset 0 0 60px gold; }
+.quadruple-alliance-pat-tableau {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.quadruple-alliance-pat-col,
+.quadruple-alliance-pat-stock,
+.quadruple-alliance-pat-waste,
+.quadruple-alliance-pat-foundation {
+  min-width: 60px;
+  min-height: 90px;
+  border-radius: 6px;
+}
+.quadruple-alliance-pat-stock,
+.quadruple-alliance-pat-waste,
+.quadruple-alliance-pat-foundation {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(138, 186, 205, 0.25);
+}
+.quadruple-alliance-pat-root.has-won {
+  box-shadow: inset 0 0 80px #9bd9ff, inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: quadruple-alliance-pat-win 1.6s ease-out;
+}
+@keyframes quadruple-alliance-pat-win {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

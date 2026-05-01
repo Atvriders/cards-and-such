@@ -1,9 +1,70 @@
-.black-widow-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.black-widow-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.black-widow-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.black-widow-auto:hover { background: rgba(255,255,255,0.32); }
-.black-widow-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+/* black-widow — bloodred web on jet felt */
+.black-widow-root {
+  padding: 14px;
+  min-height: 480px;
+  background: radial-gradient(ellipse at center, #2a0c10 0%, #050102 100%), repeating-linear-gradient(0deg, rgba(255,30,60,0.06) 0 1px, transparent 1px 14px);
+  color: #ffd2d4;
+  border-radius: 10px;
+  border: 1px solid rgba(230, 149, 152, 0.3);
+  font-family: "Cinzel", "Trajan Pro", serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.black-widow-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #e69598;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.black-widow-auto {
+  background: linear-gradient(180deg, #4d1218 0%, #1a0508 100%);
+  color: #ffd2d4;
+  border: 1px solid rgba(255, 91, 108, 0.5);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.black-widow-auto:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.black-widow-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
 .black-widow-spacer { flex: 1; min-width: 12px; }
-.black-widow-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.black-widow-col, .black-widow-stock, .black-widow-waste, .black-widow-foundation { min-width: 60px; min-height: 90px; }
-.black-widow-root.has-won { box-shadow: inset 0 0 60px gold; }
+.black-widow-tableau {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.black-widow-col,
+.black-widow-stock,
+.black-widow-waste,
+.black-widow-foundation {
+  min-width: 60px;
+  min-height: 90px;
+  border-radius: 6px;
+}
+.black-widow-stock,
+.black-widow-waste,
+.black-widow-foundation {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(230, 149, 152, 0.3);
+}
+.black-widow-root.has-won {
+  box-shadow: inset 0 0 80px #ff5b6c, inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: black-widow-win 1.6s ease-out;
+}
+@keyframes black-widow-win {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

@@ -1,9 +1,70 @@
-.three-shuffles-and-a-draw-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.three-shuffles-and-a-draw-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.three-shuffles-and-a-draw-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.three-shuffles-and-a-draw-auto:hover { background: rgba(255,255,255,0.32); }
-.three-shuffles-and-a-draw-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+/* three-shuffles-and-a-draw — nautical chart steel felt */
+.three-shuffles-and-a-draw-root {
+  padding: 14px;
+  min-height: 480px;
+  background: linear-gradient(180deg, #1d3848 0%, #06121b 100%);
+  color: #cfe6ec;
+  border-radius: 10px;
+  border: 1px solid rgba(155, 196, 207, 0.22);
+  font-family: "Inter", system-ui, sans-serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.three-shuffles-and-a-draw-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #9bc4cf;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.three-shuffles-and-a-draw-auto {
+  background: linear-gradient(180deg, #28586e 0%, #0e2632 100%);
+  color: #cfe6ec;
+  border: 1px solid rgba(155, 196, 207, 0.45);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.three-shuffles-and-a-draw-auto:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.three-shuffles-and-a-draw-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
 .three-shuffles-and-a-draw-spacer { flex: 1; min-width: 12px; }
-.three-shuffles-and-a-draw-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.three-shuffles-and-a-draw-col, .three-shuffles-and-a-draw-stock, .three-shuffles-and-a-draw-waste, .three-shuffles-and-a-draw-foundation { min-width: 60px; min-height: 90px; }
-.three-shuffles-and-a-draw-root.has-won { box-shadow: inset 0 0 60px gold; }
+.three-shuffles-and-a-draw-tableau {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.three-shuffles-and-a-draw-col,
+.three-shuffles-and-a-draw-stock,
+.three-shuffles-and-a-draw-waste,
+.three-shuffles-and-a-draw-foundation {
+  min-width: 60px;
+  min-height: 90px;
+  border-radius: 6px;
+}
+.three-shuffles-and-a-draw-stock,
+.three-shuffles-and-a-draw-waste,
+.three-shuffles-and-a-draw-foundation {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(155, 196, 207, 0.22);
+}
+.three-shuffles-and-a-draw-root.has-won {
+  box-shadow: inset 0 0 80px #7fd9e8, inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: three-shuffles-and-a-draw-win 1.6s ease-out;
+}
+@keyframes three-shuffles-and-a-draw-win {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

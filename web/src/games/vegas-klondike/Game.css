@@ -1,3 +1,4 @@
+/* vegas-klondike — neon strip casino crimson & gold felt */
 .vegas-klondike {
   display: flex;
   flex-direction: column;
@@ -5,31 +6,52 @@
   padding: 18px;
   user-select: none;
   border-radius: 14px;
-  background: radial-gradient(ellipse at top, rgba(110, 16, 30, 0.85), rgba(40, 5, 12, 0.95));
+  background: radial-gradient(ellipse at top, rgba(180, 30, 50, 0.85), rgba(50, 6, 14, 0.97)), repeating-linear-gradient(0deg, rgba(255,215,0,0.04) 0 1px, transparent 1px 18px);
+  border: 1px solid rgba(255, 200, 80, 0.32);
+  color: #fff1c4;
   min-height: 600px;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.55);
 }
 .vk-info {
-  display: flex; gap: 16px; align-items: center;
-  font-size: 14px; font-weight: 700;
-  color: #fef3c7;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff1c4;
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
 }
 .vk-auto-btn {
   margin-left: auto;
-  padding: 6px 12px;
-  border: 1px solid rgba(245, 158, 11, 0.55);
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 200, 80, 0.6);
   border-radius: 6px;
-  background: rgba(180, 83, 9, 0.4);
-  color: #fef3c7; cursor: pointer; font-size: 13px;
+  background: linear-gradient(180deg, #b8730d 0%, #4a2706 100%);
+  color: #fff5d4;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease;
 }
-.vk-auto-btn:hover { background: rgba(217, 119, 6, 0.6); }
-.vk-top-row, .vk-tableau-row { display: flex; gap: 10px; flex-wrap: nowrap; }
+.vk-auto-btn:hover { filter: brightness(1.22); }
+.vk-tableau-row,
+.vk-top-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
 .vk-spacer { flex: 1; }
 .vegas-klondike .pile-wrapper { flex-shrink: 0; }
-.vk-stock-wrapper { cursor: pointer; }
-.vk-stock-wrapper:hover { filter: brightness(1.08); }
-@media (max-width: 720px) {
-  .vegas-klondike { padding: 10px; gap: 10px; }
-  .vk-top-row, .vk-tableau-row { gap: 4px; overflow-x: auto; }
+.vk-stock-wrapper {
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+.vk-stock-wrapper:hover { filter: brightness(1.12); transform: translateY(-1px); }
+@media (max-width: 900px) {
+  .vegas-klondike { padding: 10px; gap: 8px; }
+  .vk-tableau-row, .vk-top-row { gap: 4px; overflow-x: auto; }
 }

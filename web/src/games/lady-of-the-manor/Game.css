@@ -1,9 +1,70 @@
-.lady-of-the-manor-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.lady-of-the-manor-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.lady-of-the-manor-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.lady-of-the-manor-auto:hover { background: rgba(255,255,255,0.32); }
-.lady-of-the-manor-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+/* lady-of-the-manor — rosewood drawing-room felt */
+.lady-of-the-manor-root {
+  padding: 14px;
+  min-height: 480px;
+  background: radial-gradient(ellipse at top, #602848 0%, #1f0a18 100%);
+  color: #fae0ee;
+  border-radius: 10px;
+  border: 1px solid rgba(230, 168, 201, 0.28);
+  font-family: "Cormorant Garamond", "Georgia", serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.lady-of-the-manor-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #e6a8c9;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.lady-of-the-manor-auto {
+  background: linear-gradient(180deg, #7a3a5d 0%, #3a1a2c 100%);
+  color: #fae0ee;
+  border: 1px solid rgba(230, 168, 201, 0.5);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.lady-of-the-manor-auto:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.lady-of-the-manor-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
 .lady-of-the-manor-spacer { flex: 1; min-width: 12px; }
-.lady-of-the-manor-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.lady-of-the-manor-col, .lady-of-the-manor-stock, .lady-of-the-manor-waste, .lady-of-the-manor-foundation { min-width: 60px; min-height: 90px; }
-.lady-of-the-manor-root.has-won { box-shadow: inset 0 0 60px gold; }
+.lady-of-the-manor-tableau {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.lady-of-the-manor-col,
+.lady-of-the-manor-stock,
+.lady-of-the-manor-waste,
+.lady-of-the-manor-foundation {
+  min-width: 60px;
+  min-height: 90px;
+  border-radius: 6px;
+}
+.lady-of-the-manor-stock,
+.lady-of-the-manor-waste,
+.lady-of-the-manor-foundation {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(230, 168, 201, 0.28);
+}
+.lady-of-the-manor-root.has-won {
+  box-shadow: inset 0 0 80px #ffd9eb, inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: lady-of-the-manor-win 1.6s ease-out;
+}
+@keyframes lady-of-the-manor-win {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

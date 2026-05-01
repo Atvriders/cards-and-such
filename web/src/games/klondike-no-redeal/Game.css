@@ -1,3 +1,4 @@
+/* klondike-no-redeal — first-pass forest single-attempt felt */
 .knr {
   display: flex;
   flex-direction: column;
@@ -5,43 +6,52 @@
   padding: 18px;
   user-select: none;
   border-radius: 14px;
-  background: radial-gradient(ellipse at top, rgba(20, 70, 56, 0.85), rgba(8, 30, 22, 0.95));
+  background: radial-gradient(ellipse at top, rgba(28, 86, 60, 0.85), rgba(8, 26, 18, 0.97)), repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 4px, transparent 4px 12px);
+  border: 1px solid rgba(168, 226, 180, 0.27);
+  color: #d6efd6;
   min-height: 600px;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.55);
 }
-
 .knr-info {
   display: flex;
   gap: 16px;
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #f1f5f9;
+  color: #d6efd6;
+  font-family: "Bitter", "Georgia", serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
 }
-
 .knr-auto-btn {
   margin-left: auto;
-  padding: 6px 12px;
-  border: 1px solid rgba(99, 102, 241, 0.55);
+  padding: 6px 14px;
+  border: 1px solid rgba(168, 226, 180, 0.5);
   border-radius: 6px;
-  background: rgba(67, 56, 202, 0.4);
-  color: #fff;
+  background: linear-gradient(180deg, #2a6e4a 0%, #0c2618 100%);
+  color: #e6fbe2;
   cursor: pointer;
   font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease;
 }
-.knr-auto-btn:hover { background: rgba(99, 102, 241, 0.6); }
-
-.knr-top-row,
-.knr-tableau-row {
+.knr-auto-btn:hover { filter: brightness(1.22); }
+.knr-tableau-row,
+.knr-top-row {
   display: flex;
   gap: 10px;
   flex-wrap: nowrap;
+  align-items: flex-start;
 }
 .knr-spacer { flex: 1; }
 .knr .pile-wrapper { flex-shrink: 0; }
-.knr-stock-wrapper { cursor: pointer; }
-.knr-stock-wrapper:hover { filter: brightness(1.08); }
-
-@media (max-width: 720px) {
-  .knr { padding: 10px; gap: 10px; }
+.knr-stock-wrapper {
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+.knr-stock-wrapper:hover { filter: brightness(1.12); transform: translateY(-1px); }
+@media (max-width: 900px) {
+  .knr { padding: 10px; gap: 8px; }
   .knr-tableau-row, .knr-top-row { gap: 4px; overflow-x: auto; }
 }

@@ -1,3 +1,4 @@
+/* klondike-threes-no-redeal — single-shot violet midnight felt */
 .k3nr {
   display: flex;
   flex-direction: column;
@@ -5,25 +6,52 @@
   padding: 18px;
   user-select: none;
   border-radius: 14px;
-  background: radial-gradient(ellipse at top, rgba(60, 30, 80, 0.85), rgba(28, 12, 38, 0.95));
+  background: radial-gradient(ellipse at top, rgba(70, 30, 100, 0.85), rgba(28, 10, 40, 0.97));
+  border: 1px solid rgba(200, 165, 240, 0.27);
+  color: #e8d6fb;
   min-height: 600px;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.55);
 }
-.k3nr-info { display: flex; gap: 16px; align-items: center; font-size: 14px; font-weight: 600; color: #f1f5f9; }
+.k3nr-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8d6fb;
+  font-family: "Cormorant", "Georgia", serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
 .k3nr-auto-btn {
   margin-left: auto;
-  padding: 6px 12px;
-  border: 1px solid rgba(99, 102, 241, 0.55);
+  padding: 6px 14px;
+  border: 1px solid rgba(200, 165, 240, 0.5);
   border-radius: 6px;
-  background: rgba(67, 56, 202, 0.4);
-  color: #fff; cursor: pointer; font-size: 13px;
+  background: linear-gradient(180deg, #4d2380 0%, #1a0936 100%);
+  color: #f3e6ff;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease;
 }
-.k3nr-auto-btn:hover { background: rgba(99, 102, 241, 0.6); }
-.k3nr-top-row, .k3nr-tableau-row { display: flex; gap: 10px; flex-wrap: nowrap; }
+.k3nr-auto-btn:hover { filter: brightness(1.22); }
+.k3nr-tableau-row,
+.k3nr-top-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
 .k3nr-spacer { flex: 1; }
 .k3nr .pile-wrapper { flex-shrink: 0; }
-.k3nr-stock-wrapper { cursor: pointer; }
-.k3nr-stock-wrapper:hover { filter: brightness(1.08); }
-@media (max-width: 720px) {
-  .k3nr { padding: 10px; gap: 10px; }
-  .k3nr-top-row, .k3nr-tableau-row { gap: 4px; overflow-x: auto; }
+.k3nr-stock-wrapper {
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+.k3nr-stock-wrapper:hover { filter: brightness(1.12); transform: translateY(-1px); }
+@media (max-width: 900px) {
+  .k3nr { padding: 10px; gap: 8px; }
+  .k3nr-tableau-row, .k3nr-top-row { gap: 4px; overflow-x: auto; }
 }

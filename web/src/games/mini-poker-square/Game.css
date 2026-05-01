@@ -1,6 +1,46 @@
-.mini-poker-square-root { padding: 12px; min-height: 480px; background: #14322c; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.mini-poker-square-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
-.mini-poker-square-grid { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; }
-.mini-poker-square-row { display: flex; gap: 6px; }
-.mini-poker-square-cell { width: 60px; height: 90px; cursor: pointer; }
-.mini-poker-square-cell.selected { box-shadow: 0 0 0 3px gold; }
+/* mini-poker-square — high-roller emerald felt with chip rim */
+.mini-poker-square-root {
+  padding: 14px;
+  min-height: 480px;
+  background:
+    radial-gradient(ellipse at top, rgba(255, 230, 130, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at center, #1d4a3a 0%, #06180f 100%);
+  color: #ddebd9;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 220, 110, 0.27);
+  font-family: "Cormorant SC", "Georgia", serif;
+  letter-spacing: 0.04em;
+  box-shadow:
+    inset 0 0 70px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(0, 0, 0, 0.4),
+    0 0 0 5px rgba(255, 220, 110, 0.35);
+}
+.mini-poker-square-info {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 10px;
+  align-items: center;
+  font-size: 14px;
+  color: #ffd566;
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.mini-poker-square-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 0;
+}
+.mini-poker-square-row { display: flex; gap: 8px; }
+.mini-poker-square-cell {
+  width: 60px;
+  height: 90px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 120ms ease;
+}
+.mini-poker-square-cell:hover { transform: translateY(-2px); }
+.mini-poker-square-cell.selected {
+  box-shadow: 0 0 0 3px #ffd566, 0 0 18px rgba(255, 213, 102, 0.6);
+}

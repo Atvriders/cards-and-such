@@ -1,44 +1,59 @@
+/* scorpion — desert dunes amber & jet sting felt */
 .scorpion {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 16px;
   user-select: none;
+  border-radius: 12px;
+  background:
+    radial-gradient(ellipse at top, rgba(120, 60, 8, 0.55), rgba(20, 8, 2, 0.97)),
+    repeating-linear-gradient(135deg, rgba(255, 200, 80, 0.04) 0 12px, transparent 12px 28px);
+  border: 1px solid rgba(255, 184, 90, 0.27);
+  color: #ffd9a3;
+  font-family: "Cinzel", "Trajan Pro", serif;
+  letter-spacing: 0.03em;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.6);
+  min-height: 480px;
 }
-
 .scorpion-info {
   display: flex;
   gap: 16px;
   align-items: center;
   font-size: 14px;
   font-weight: 600;
+  color: #ffc97d;
+  font-variant: small-caps;
+  letter-spacing: 0.07em;
 }
-
-.deal-reserve-btn {
-  padding: 4px 12px;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background: #2a2a2a;
-  color: #eee;
+.scorpion .deal-reserve-btn {
+  padding: 5px 14px;
+  border: 1px solid rgba(255, 184, 90, 0.5);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #6b3a10 0%, #25130a 100%);
+  color: #ffe1b3;
   cursor: pointer;
   font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  transition: filter 120ms ease;
 }
-
-.deal-reserve-btn:disabled {
-  opacity: 0.4;
+.scorpion .deal-reserve-btn:disabled {
+  opacity: 0.35;
   cursor: default;
 }
-
-.deal-reserve-btn:not(:disabled):hover {
-  background: #444;
+.scorpion .deal-reserve-btn:not(:disabled):hover {
+  filter: brightness(1.22);
+  box-shadow: 0 0 12px rgba(255, 184, 90, 0.4);
 }
-
 .scorpion-tableau-row {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: nowrap;
+  overflow-x: auto;
 }
-
-.pile-wrapper {
-  flex-shrink: 0;
+.scorpion .pile-wrapper { flex-shrink: 0; }
+@media (max-width: 720px) {
+  .scorpion { padding: 10px; gap: 8px; }
+  .scorpion-tableau-row { gap: 4px; }
 }

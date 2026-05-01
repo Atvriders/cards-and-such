@@ -1,1 +1,26 @@
 @import "../../engines/solmini/solmini.css";
+
+/* fourteen-out-pat — abacus parchment & dark teal felt */
+.sol-wrap.fourteen-out-pat-theme {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 230, 150, 0.10), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.45), transparent 60%),
+    linear-gradient(180deg, #0d4047 0%, #082e34 60%, #04181c 100%);
+  color: #f3e6c4;
+  border: 1px solid rgba(243, 230, 196, 0.18);
+}
+.sol-wrap.fourteen-out-pat-theme .sol-info,
+.sol-wrap.fourteen-out-pat-theme .sol-score {
+  color: #f4d680;
+  font-variant-numeric: tabular-nums;
+  font-family: "JetBrains Mono", "Inter", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+.sol-wrap.fourteen-out-pat-theme .sol-btn {
+  background: linear-gradient(180deg, #186068 0%, #082c30 100%);
+  border-color: rgba(244, 214, 128, 0.45);
+  color: #fef0c4;
+}
+.sol-wrap.fourteen-out-pat-theme .sol-btn-keep { box-shadow: 0 0 0 1px rgba(244, 214, 128, 0.35) inset; }
+.sol-wrap.fourteen-out-pat-theme .sol-btn-disc { box-shadow: 0 0 0 1px rgba(255, 130, 110, 0.35) inset; }
+.sol-wrap.fourteen-out-pat-theme .sol-final { color: #ffe89a; }

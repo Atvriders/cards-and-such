@@ -1,9 +1,70 @@
-.alaska-pat-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.alaska-pat-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.alaska-pat-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.alaska-pat-auto:hover { background: rgba(255,255,255,0.32); }
-.alaska-pat-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+/* alaska-pat — boreal moss patience felt */
+.alaska-pat-root {
+  padding: 14px;
+  min-height: 480px;
+  background: radial-gradient(ellipse at top, #1d4d3e 0%, #04140e 100%);
+  color: #cfe9d8;
+  border-radius: 10px;
+  border: 1px solid rgba(160, 220, 180, 0.25);
+  font-family: "Crimson Pro", "Georgia", serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.alaska-pat-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #a3d4b3;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.alaska-pat-auto {
+  background: linear-gradient(180deg, #2a6b54 0%, #103224 100%);
+  color: #cfe9d8;
+  border: 1px solid rgba(160, 220, 180, 0.45);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.alaska-pat-auto:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.alaska-pat-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
 .alaska-pat-spacer { flex: 1; min-width: 12px; }
-.alaska-pat-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.alaska-pat-col, .alaska-pat-stock, .alaska-pat-waste, .alaska-pat-foundation { min-width: 60px; min-height: 90px; }
-.alaska-pat-root.has-won { box-shadow: inset 0 0 60px gold; }
+.alaska-pat-tableau {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.alaska-pat-col,
+.alaska-pat-stock,
+.alaska-pat-waste,
+.alaska-pat-foundation {
+  min-width: 60px;
+  min-height: 90px;
+  border-radius: 6px;
+}
+.alaska-pat-stock,
+.alaska-pat-waste,
+.alaska-pat-foundation {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(160, 220, 180, 0.25);
+}
+.alaska-pat-root.has-won {
+  box-shadow: inset 0 0 80px #9ee0c1, inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: alaska-pat-win 1.6s ease-out;
+}
+@keyframes alaska-pat-win {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

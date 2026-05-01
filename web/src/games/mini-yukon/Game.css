@@ -1,9 +1,70 @@
-.mini-yukon-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.mini-yukon-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
-.mini-yukon-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.mini-yukon-auto:hover { background: rgba(255,255,255,0.32); }
-.mini-yukon-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+/* mini-yukon — compact yukon emerald felt */
+.mini-yukon-root {
+  padding: 14px;
+  min-height: 480px;
+  background: linear-gradient(180deg, #163e30 0%, #04130c 100%);
+  color: #cfe7d6;
+  border-radius: 10px;
+  border: 1px solid rgba(160, 200, 173, 0.25);
+  font-family: "Inter", system-ui, sans-serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.mini-yukon-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #a0c8ad;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.mini-yukon-auto {
+  background: linear-gradient(180deg, #235745 0%, #0a1f17 100%);
+  color: #cfe7d6;
+  border: 1px solid rgba(160, 200, 173, 0.45);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.mini-yukon-auto:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.mini-yukon-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
 .mini-yukon-spacer { flex: 1; min-width: 12px; }
-.mini-yukon-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
-.mini-yukon-col, .mini-yukon-stock, .mini-yukon-waste, .mini-yukon-foundation { min-width: 60px; min-height: 90px; }
-.mini-yukon-root.has-won { box-shadow: inset 0 0 60px gold; }
+.mini-yukon-tableau {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.mini-yukon-col,
+.mini-yukon-stock,
+.mini-yukon-waste,
+.mini-yukon-foundation {
+  min-width: 60px;
+  min-height: 90px;
+  border-radius: 6px;
+}
+.mini-yukon-stock,
+.mini-yukon-waste,
+.mini-yukon-foundation {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px dashed rgba(160, 200, 173, 0.25);
+}
+.mini-yukon-root.has-won {
+  box-shadow: inset 0 0 80px #a8e8c1, inset 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: mini-yukon-win 1.6s ease-out;
+}
+@keyframes mini-yukon-win {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

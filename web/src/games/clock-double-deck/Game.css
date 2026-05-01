@@ -1,9 +1,68 @@
-.clock-double-deck-root { padding: 12px; min-height: 480px; background: #2c2c44; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.clock-double-deck-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
-.clock-double-deck-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.clock-double-deck-rings { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; padding: 12px 0; }
-.clock-double-deck-slot { display: flex; flex-direction: column; align-items: center; }
-.clock-double-deck-slot-label { font-size: 12px; opacity: 0.7; }
+/* clock-double-deck — twilight clock face felt */
+.clock-double-deck-root {
+  padding: 14px;
+  min-height: 480px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 215, 120, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at top, #2c2c44 0%, #14142a 90%);
+  color: #f7e9c8;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 120, 0.18);
+  font-family: "Cormorant Garamond", "Georgia", serif;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+}
+.clock-double-deck-info {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 10px;
+  align-items: center;
+  font-size: 14px;
+  color: #ffe9a8;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+}
+.clock-double-deck-auto {
+  background: linear-gradient(180deg, #4a3f7a 0%, #2a234d 100%);
+  color: #ffe9a8;
+  border: 1px solid rgba(255, 215, 120, 0.45);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: filter 120ms ease;
+}
+.clock-double-deck-auto:hover { filter: brightness(1.18); }
+.clock-double-deck-rings {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  padding: 14px 0;
+}
+.clock-double-deck-slot { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.clock-double-deck-slot-label {
+  font-size: 12px;
+  opacity: 0.78;
+  color: #ffd27a;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+}
 .clock-double-deck-slot-cards { min-width: 60px; min-height: 90px; }
-.clock-double-deck-empty { width: 60px; height: 90px; background: rgba(255,255,255,0.05); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
-.clock-double-deck-held { padding-top: 12px; display: flex; gap: 8px; align-items: center; }
+.clock-double-deck-empty {
+  width: 60px;
+  height: 90px;
+  background: rgba(255, 215, 120, 0.06);
+  border: 1px dashed rgba(255, 215, 120, 0.35);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clock-double-deck-held {
+  padding-top: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-top: 1px solid rgba(255, 215, 120, 0.18);
+  margin-top: 6px;
+}

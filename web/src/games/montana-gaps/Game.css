@@ -1,8 +1,42 @@
-.montana-gaps-root { padding: 12px; min-height: 480px; background: #1c2530; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.montana-gaps-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
-.montana-gaps-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
-.montana-gaps-grid { display: flex; flex-direction: column; gap: 4px; padding: 12px 0; }
-.montana-gaps-row { display: flex; gap: 4px; }
-.montana-gaps-cell { width: 60px; height: 90px; cursor: pointer; }
-.montana-gaps-cell.selected { box-shadow: 0 0 0 3px gold; }
-.montana-gaps-gap { width: 60px; height: 90px; background: rgba(255,255,255,0.06); border-radius: 4px; }
+/* montana-gaps — big-sky pine forest felt */
+.montana-gaps-root {
+  padding: 14px;
+  min-height: 480px;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.06), transparent 45%),
+    linear-gradient(180deg, #1f3b2c 0%, #0c1a13 100%);
+  color: #e7f5e1;
+  border-radius: 10px;
+  border: 1px solid rgba(160, 200, 130, 0.25);
+  font-family: "Bitter", "Georgia", serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.6);
+}
+.montana-gaps-info {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 10px;
+  align-items: center;
+  font-size: 14px;
+  color: #c8e2b3;
+}
+.montana-gaps-auto {
+  background: linear-gradient(180deg, #4d7a3c 0%, #2c4a25 100%);
+  color: #f1ffe6;
+  border: 1px solid rgba(180, 220, 150, 0.45);
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: filter 120ms ease;
+}
+.montana-gaps-auto:hover { filter: brightness(1.18); }
+.montana-gaps-grid { display: flex; flex-direction: column; gap: 6px; padding: 14px 0; }
+.montana-gaps-row { display: flex; gap: 6px; }
+.montana-gaps-cell { width: 60px; height: 90px; cursor: pointer; border-radius: 6px; }
+.montana-gaps-cell.selected { box-shadow: 0 0 0 3px #f4d03f, 0 0 16px rgba(244, 208, 63, 0.55); }
+.montana-gaps-gap {
+  width: 60px;
+  height: 90px;
+  background: rgba(160, 200, 130, 0.08);
+  border: 1px dashed rgba(160, 200, 130, 0.4);
+  border-radius: 6px;
+}

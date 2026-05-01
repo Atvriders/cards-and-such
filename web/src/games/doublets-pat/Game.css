@@ -1,1 +1,26 @@
 @import "../../engines/solmini/solmini.css";
+
+/* doublets-pat — twin-of-hearts crimson velvet felt */
+.sol-wrap.doublets-pat-theme {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 200, 220, 0.10), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.5), transparent 60%),
+    linear-gradient(180deg, #5a0f25 0%, #3a0717 60%, #1a030a 100%);
+  color: #ffd9e0;
+  border: 1px solid rgba(255, 180, 195, 0.22);
+}
+.sol-wrap.doublets-pat-theme .sol-info,
+.sol-wrap.doublets-pat-theme .sol-score {
+  color: #ffb3c2;
+  font-family: "Cormorant SC", "Georgia", serif;
+  letter-spacing: 0.05em;
+}
+.sol-wrap.doublets-pat-theme .sol-score { font-variant-numeric: tabular-nums; }
+.sol-wrap.doublets-pat-theme .sol-btn {
+  background: linear-gradient(180deg, #7e1d36 0%, #2c0710 100%);
+  border-color: rgba(255, 180, 195, 0.5);
+  color: #ffe0e8;
+}
+.sol-wrap.doublets-pat-theme .sol-btn-keep { box-shadow: 0 0 0 1px rgba(255, 180, 195, 0.4) inset; }
+.sol-wrap.doublets-pat-theme .sol-btn-disc { box-shadow: 0 0 0 1px rgba(255, 80, 110, 0.45) inset; }
+.sol-wrap.doublets-pat-theme .sol-final { color: #ffd0dc; }

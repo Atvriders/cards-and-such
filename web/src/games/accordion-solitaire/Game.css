@@ -1,5 +1,40 @@
-.accordion-solitaire-root { padding: 12px; min-height: 480px; background: #1c1f33; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
-.accordion-solitaire-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
-.accordion-solitaire-row { display: flex; flex-wrap: wrap; gap: 4px; padding: 12px 0; }
-.accordion-solitaire-cell { width: 60px; height: 90px; cursor: pointer; }
-.accordion-solitaire-cell.selected { box-shadow: 0 0 0 3px gold; }
+/* accordion-solitaire — wine-bellows velvet felt */
+.accordion-solitaire-root {
+  padding: 14px;
+  min-height: 480px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 14px),
+    radial-gradient(ellipse at top, #45122a 0%, #1a0411 100%);
+  color: #fdd7e6;
+  border-radius: 10px;
+  border: 1px solid rgba(220, 130, 175, 0.25);
+  font-family: "Cormorant", "Georgia", serif;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.6);
+}
+.accordion-solitaire-info {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 10px;
+  align-items: center;
+  font-size: 14px;
+  color: #f4b9d3;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+}
+.accordion-solitaire-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 14px 0;
+}
+.accordion-solitaire-cell {
+  width: 60px;
+  height: 90px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 120ms ease;
+}
+.accordion-solitaire-cell:hover { transform: translateY(-2px); }
+.accordion-solitaire-cell.selected {
+  box-shadow: 0 0 0 3px #ffc7df, 0 0 18px rgba(255, 199, 223, 0.6);
+}

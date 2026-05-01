@@ -1,90 +1,84 @@
+/* royal-marriage — wedding-day damask gold-on-burgundy felt */
 .royal-marriage {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 16px;
+  padding: 18px;
   user-select: none;
+  border-radius: 12px;
+  background:
+    radial-gradient(ellipse at top, rgba(255, 220, 140, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, #4a0e22 0%, #160407 100%);
+  color: #fbe1cb;
+  border: 1px solid rgba(255, 215, 140, 0.27);
+  font-family: "Pinyon Script", "Cormorant Garamond", "Georgia", serif;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
 }
-
 .rm-info {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   align-items: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
+  color: #ffd99d;
+  letter-spacing: 0.04em;
 }
-
 .rm-stock-area {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
 }
-
 .rm-stock-btn {
-  padding: 6px 16px;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background: #2a2a2a;
-  color: #eee;
+  padding: 7px 18px;
+  border: 1px solid rgba(255, 215, 140, 0.5);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #6e1830 0%, #2a0712 100%);
+  color: #ffe7c4;
   cursor: pointer;
   font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  transition: filter 120ms ease;
 }
-
-.rm-stock-btn:hover:not(:disabled) {
-  background: #444;
-}
-
-.rm-stock-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
+.rm-stock-btn:hover:not(:disabled) { filter: brightness(1.25); }
+.rm-stock-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .rm-stock-count {
   font-size: 12px;
-  color: #aaa;
+  color: #d4a877;
+  font-variant-numeric: tabular-nums;
 }
-
-.rm-row {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
+.rm-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .rm-card {
   width: 62px;
   height: 88px;
-  border: 2px solid #555;
-  border-radius: 6px;
-  background: #1a2a1a;
+  border: 2px solid rgba(255, 215, 140, 0.4);
+  border-radius: 7px;
+  background: linear-gradient(180deg, #2a0a14 0%, #150407 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   cursor: pointer;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
   flex-shrink: 0;
+  font-family: "Cinzel", serif;
 }
-
-.rm-card.red {
-  color: #e44;
-}
-
-.rm-card.black {
-  color: #eee;
-}
-
+.rm-card.red { color: #ff7373; text-shadow: 0 0 6px rgba(255, 115, 115, 0.4); }
+.rm-card.black { color: #f0e6d6; }
 .rm-card.selected {
-  border-color: #4af;
-  background: #1a2a3a;
+  border-color: #ffd56a;
+  background: linear-gradient(180deg, #4a1a2a 0%, #2a0e18 100%);
+  box-shadow: 0 0 14px rgba(255, 213, 106, 0.55);
+  transform: translateY(-2px);
 }
-
 .rm-card.special {
-  border-color: #fa0;
+  border-color: #ffb84a;
+  box-shadow: 0 0 12px rgba(255, 184, 74, 0.55);
 }
-
 .rm-hint {
   font-size: 12px;
-  color: #888;
+  color: #c89a72;
   font-style: italic;
+  font-family: "Cormorant Garamond", "Georgia", serif;
 }
