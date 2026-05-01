@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "1971"
     ],
     "correct": 1
+  },
+  {
+    "question": "In what year did the Apollo 1 fire occur?",
+    "choices": [
+      "1965",
+      "1966",
+      "1967",
+      "1968"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "On what date did the fatal fire occur?",
+    "choices": [
+      "January 27",
+      "February 14",
+      "March 1",
+      "April 12"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Where did the fire occur?",
+    "choices": [
+      "Cape Kennedy",
+      "Houston",
+      "Edwards AFB",
+      "White Sands"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Apollo 1 was originally designated?",
+    "choices": [
+      "AS-201",
+      "AS-204",
+      "AS-207",
+      "AS-501"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which astronaut commanded Apollo 1?",
+    "choices": [
+      "Gus Grissom",
+      "Ed White",
+      "Roger Chaffee",
+      "Wally Schirra"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which astronaut was the senior pilot?",
+    "choices": [
+      "Gus Grissom",
+      "Ed White",
+      "Roger Chaffee",
+      "Buzz Aldrin"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which astronaut was the pilot?",
+    "choices": [
+      "Gus Grissom",
+      "Ed White",
+      "Roger Chaffee",
+      "Donn Eisele"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What atmosphere was inside the cabin during the test?",
+    "choices": [
+      "Air",
+      "Pure O2 high pressure",
+      "Nitrogen",
+      "Argon"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The launch vehicle was?",
+    "choices": [
+      "Saturn IB",
+      "Saturn V",
+      "Titan II",
+      "Atlas"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First crewed Apollo flight after the fire was?",
+    "choices": [
+      "Apollo 4",
+      "Apollo 7",
+      "Apollo 8",
+      "Apollo 11"
+    ],
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

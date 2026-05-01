@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Storm of 1925"
     ],
     "correct": 0
+  },
+  {
+    "question": "How many passengers and crew were aboard Titanic on its maiden voyage (approx.)?",
+    "choices": [
+      "~1500",
+      "~2200",
+      "~3000",
+      "~4000"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Titanic's gross tonnage was approximately?",
+    "choices": [
+      "26,000 GRT",
+      "36,000 GRT",
+      "46,000 GRT",
+      "56,000 GRT"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What was the iceberg warning ship that sent ice messages?",
+    "choices": [
+      "Mesaba",
+      "Lusitania",
+      "Aquitania",
+      "Adriatic"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Titanic's senior wireless operator was?",
+    "choices": [
+      "Harold Bride",
+      "Jack Phillips",
+      "Cyril Evans",
+      "Thomas Cottam"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First class fare for the most expensive parlor suite was about?",
+    "choices": [
+      "$870",
+      "$2,560",
+      "$4,350",
+      "$8,000"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "How many propellers did Titanic have?",
+    "choices": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Titanic's hull contained how many watertight compartments?",
+    "choices": [
+      "8",
+      "12",
+      "16",
+      "20"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Approximately how long was Titanic?",
+    "choices": [
+      "700 ft",
+      "882 ft",
+      "950 ft",
+      "1,020 ft"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The wreck lies at a depth of about?",
+    "choices": [
+      "1,500 m",
+      "2,500 m",
+      "3,800 m",
+      "5,000 m"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Bandleader who reportedly played as the ship sank?",
+    "choices": [
+      "Wallace Hartley",
+      "John Hume",
+      "Roger Bricoux",
+      "Theodore Brailey"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

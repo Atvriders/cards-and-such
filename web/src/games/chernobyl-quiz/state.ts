@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "2010"
     ],
     "correct": 1
+  },
+  {
+    "question": "In what year did the Chernobyl disaster occur?",
+    "choices": [
+      "1984",
+      "1985",
+      "1986",
+      "1987"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which reactor exploded?",
+    "choices": [
+      "Reactor 1",
+      "Reactor 2",
+      "Reactor 3",
+      "Reactor 4"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "On what date did the explosion happen?",
+    "choices": [
+      "April 22, 1986",
+      "April 26, 1986",
+      "May 1, 1986",
+      "May 6, 1986"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "What type of reactor was it?",
+    "choices": [
+      "PWR",
+      "BWR",
+      "RBMK",
+      "CANDU"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which town was evacuated near the plant?",
+    "choices": [
+      "Pripyat",
+      "Kiev",
+      "Minsk",
+      "Gomel"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who was the General Secretary at the time?",
+    "choices": [
+      "Brezhnev",
+      "Andropov",
+      "Chernenko",
+      "Gorbachev"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "What was the test that triggered the disaster about?",
+    "choices": [
+      "Cooling pump",
+      "Turbine coast-down",
+      "Control rod",
+      "Fuel rod"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The exclusion zone covers roughly?",
+    "choices": [
+      "1,000 km²",
+      "2,600 km²",
+      "5,000 km²",
+      "10,000 km²"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 'sarcophagus' was completed in?",
+    "choices": [
+      "1986",
+      "1987",
+      "1988",
+      "1990"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "New Safe Confinement was completed in?",
+    "choices": [
+      "2010",
+      "2014",
+      "2016",
+      "2020"
+    ],
+    "correct": 2
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

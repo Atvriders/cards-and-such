@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "In prison"
     ],
     "correct": 1
+  },
+  {
+    "question": "In what year did the Bhopal disaster occur?",
+    "choices": [
+      "1982",
+      "1983",
+      "1984",
+      "1985"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "On what date did the gas leak begin?",
+    "choices": [
+      "December 2-3",
+      "November 14",
+      "January 5",
+      "October 31"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In which country is Bhopal?",
+    "choices": [
+      "Pakistan",
+      "India",
+      "Bangladesh",
+      "Sri Lanka"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which gas leaked?",
+    "choices": [
+      "Chlorine",
+      "Ammonia",
+      "Methyl isocyanate",
+      "Phosgene"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which company operated the plant?",
+    "choices": [
+      "Dow Chemical",
+      "Union Carbide",
+      "DuPont",
+      "BASF"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Approximate immediate death toll?",
+    "choices": [
+      "~500",
+      "~3,800",
+      "~10,000",
+      "~25,000"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The plant produced what kind of product?",
+    "choices": [
+      "Fertilizer",
+      "Pesticide",
+      "Plastics",
+      "Solvents"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "CEO of Union Carbide arrested briefly?",
+    "choices": [
+      "Warren Anderson",
+      "Jack Welch",
+      "Andrew Liveris",
+      "Charles Reilly"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In what Indian state is Bhopal?",
+    "choices": [
+      "Maharashtra",
+      "Madhya Pradesh",
+      "Gujarat",
+      "Bihar"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which company later acquired Union Carbide?",
+    "choices": [
+      "Dow Chemical",
+      "BASF",
+      "Bayer",
+      "Monsanto"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

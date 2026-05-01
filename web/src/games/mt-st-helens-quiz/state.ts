@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Wilderness"
     ],
     "correct": 2
+  },
+  {
+    "question": "In what year did Mt. St. Helens erupt?",
+    "choices": [
+      "1978",
+      "1980",
+      "1982",
+      "1984"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "On what date was the major eruption?",
+    "choices": [
+      "March 18",
+      "April 18",
+      "May 18",
+      "June 18"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "In which US state is Mt. St. Helens?",
+    "choices": [
+      "Oregon",
+      "Washington",
+      "California",
+      "Idaho"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "How many people were killed?",
+    "choices": [
+      "17",
+      "37",
+      "57",
+      "97"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What triggered the lateral blast?",
+    "choices": [
+      "Earthquake",
+      "Glacier collapse",
+      "Lightning",
+      "Bomb"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How much did the elevation drop?",
+    "choices": [
+      "~500 ft",
+      "~900 ft",
+      "~1,300 ft",
+      "~2,000 ft"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Famous lodge owner who refused to leave?",
+    "choices": [
+      "Harry Truman",
+      "John Muir",
+      "Tom Vail",
+      "David Johnston"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "USGS volcanologist killed in the blast?",
+    "choices": [
+      "David Johnston",
+      "Robert Christiansen",
+      "Don Swanson",
+      "Harry Glicken"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "VEI (Volcanic Explosivity Index) of the eruption?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The eruption is part of which mountain range?",
+    "choices": [
+      "Rockies",
+      "Cascades",
+      "Sierra Nevada",
+      "Olympics"
+    ],
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

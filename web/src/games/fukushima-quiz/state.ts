@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "North"
     ],
     "correct": 0
+  },
+  {
+    "question": "In what year did the Fukushima disaster occur?",
+    "choices": [
+      "2009",
+      "2010",
+      "2011",
+      "2012"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "On what date did the earthquake strike?",
+    "choices": [
+      "March 11",
+      "March 21",
+      "April 11",
+      "February 11"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Magnitude of the Tohoku earthquake?",
+    "choices": [
+      "7.9",
+      "8.4",
+      "8.9",
+      "9.1"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "What triggered the reactor meltdowns?",
+    "choices": [
+      "Earthquake only",
+      "Tsunami",
+      "Sabotage",
+      "Fire"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which company operated the plant?",
+    "choices": [
+      "TEPCO",
+      "KEPCO",
+      "JAPC",
+      "Chubu Electric"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many reactors melted down?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "6"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What type of reactors were they?",
+    "choices": [
+      "PWR",
+      "BWR",
+      "RBMK",
+      "CANDU"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Approximate height of the tsunami at the plant?",
+    "choices": [
+      "~5 m",
+      "~10 m",
+      "~14 m",
+      "~25 m"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Prime Minister of Japan during the disaster?",
+    "choices": [
+      "Abe",
+      "Kan",
+      "Noda",
+      "Hatoyama"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "INES rating assigned to the accident?",
+    "choices": [
+      "5",
+      "6",
+      "7",
+      "4"
+    ],
+    "correct": 2
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

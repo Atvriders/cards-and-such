@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Safe haven"
     ],
     "correct": 0
+  },
+  {
+    "question": "In what year did Hurricane Katrina hit?",
+    "choices": [
+      "2003",
+      "2004",
+      "2005",
+      "2006"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "In what month did Katrina make landfall?",
+    "choices": [
+      "July",
+      "August",
+      "September",
+      "October"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which city suffered the most catastrophic flooding?",
+    "choices": [
+      "Houston",
+      "Mobile",
+      "New Orleans",
+      "Biloxi"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What category was Katrina at peak intensity?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "2"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What category was Katrina at Louisiana landfall?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "5"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Approximately how many died?",
+    "choices": [
+      "~500",
+      "~1,000",
+      "~1,800",
+      "~3,000"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which levee system failed catastrophically?",
+    "choices": [
+      "NYC",
+      "Galveston",
+      "New Orleans",
+      "Charleston"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who was the FEMA director at the time?",
+    "choices": [
+      "James Lee Witt",
+      "Michael Brown",
+      "Craig Fugate",
+      "Joe Allbaugh"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who was president during Katrina?",
+    "choices": [
+      "Clinton",
+      "G.W. Bush",
+      "Obama",
+      "G.H.W. Bush"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which stadium became a shelter of last resort?",
+    "choices": [
+      "Astrodome",
+      "Superdome",
+      "Citrus Bowl",
+      "Sugar Bowl"
+    ],
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Ramsar site"
     ],
     "correct": 0
+  },
+  {
+    "question": "In what year did Vesuvius destroy Pompeii?",
+    "choices": [
+      "AD 49",
+      "AD 79",
+      "AD 109",
+      "AD 139"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which volcano erupted?",
+    "choices": [
+      "Etna",
+      "Stromboli",
+      "Vesuvius",
+      "Vulcano"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which Roman emperor reigned during the eruption?",
+    "choices": [
+      "Nero",
+      "Vespasian",
+      "Titus",
+      "Domitian"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which writer described the eruption in letters?",
+    "choices": [
+      "Tacitus",
+      "Pliny the Younger",
+      "Suetonius",
+      "Cicero"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "His uncle who died was known as?",
+    "choices": [
+      "Pliny the Elder",
+      "Seneca",
+      "Cato",
+      "Marcus Aurelius"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pompeii is located in which Italian region?",
+    "choices": [
+      "Lazio",
+      "Tuscany",
+      "Campania",
+      "Calabria"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Another city destroyed alongside Pompeii?",
+    "choices": [
+      "Ostia",
+      "Herculaneum",
+      "Capua",
+      "Brindisi"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pompeii was rediscovered in?",
+    "choices": [
+      "1548",
+      "1648",
+      "1748",
+      "1848"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Estimated population of Pompeii at eruption?",
+    "choices": [
+      "~5,000",
+      "~11,000",
+      "~25,000",
+      "~50,000"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Plaster casts of victims were pioneered by?",
+    "choices": [
+      "Fiorelli",
+      "Schliemann",
+      "Mau",
+      "Maiuri"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

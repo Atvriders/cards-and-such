@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Was nationalized"
     ],
     "correct": 2
+  },
+  {
+    "question": "In what year did the Hindenburg disaster occur?",
+    "choices": [
+      "1935",
+      "1936",
+      "1937",
+      "1938"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Where did the Hindenburg crash?",
+    "choices": [
+      "Lakehurst, NJ",
+      "Frankfurt",
+      "Friedrichshafen",
+      "Long Island"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "On what date did the disaster occur?",
+    "choices": [
+      "May 3, 1937",
+      "May 6, 1937",
+      "May 12, 1937",
+      "June 6, 1937"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "How many people died in the disaster?",
+    "choices": [
+      "13",
+      "23",
+      "36",
+      "47"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "How many people were aboard?",
+    "choices": [
+      "50",
+      "65",
+      "97",
+      "120"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What gas filled the Hindenburg?",
+    "choices": [
+      "Helium",
+      "Hydrogen",
+      "Methane",
+      "Nitrogen"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who was the radio reporter that famously cried 'Oh, the humanity!'?",
+    "choices": [
+      "Edward R. Murrow",
+      "Herbert Morrison",
+      "Walter Winchell",
+      "Lowell Thomas"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Hindenburg was operated by which company?",
+    "choices": [
+      "DELAG",
+      "Zeppelin Co.",
+      "Lufthansa",
+      "Aeropostale"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "How long was the Hindenburg?",
+    "choices": [
+      "604 ft",
+      "703 ft",
+      "804 ft",
+      "904 ft"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Hindenburg's full designation was?",
+    "choices": [
+      "LZ 127",
+      "LZ 129",
+      "LZ 130",
+      "LZ 131"
+    ],
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

@@ -203,6 +203,106 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Collapsed before quake"
     ],
     "correct": 1
+  },
+  {
+    "question": "In what year did the Great San Francisco Earthquake occur?",
+    "choices": [
+      "1898",
+      "1906",
+      "1912",
+      "1923"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "On what date did it strike?",
+    "choices": [
+      "April 18",
+      "April 22",
+      "May 1",
+      "May 18"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Estimated magnitude (modern moment scale)?",
+    "choices": [
+      "6.9",
+      "7.4",
+      "7.9",
+      "8.5"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which fault primarily ruptured?",
+    "choices": [
+      "Hayward",
+      "Calaveras",
+      "San Andreas",
+      "San Jacinto"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Most of the city's destruction came from?",
+    "choices": [
+      "Shaking",
+      "Fire",
+      "Tsunami",
+      "Landslide"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Approximately how many died?",
+    "choices": [
+      "~300",
+      "~1,000",
+      "~3,000",
+      "~10,000"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Mayor of SF at the time?",
+    "choices": [
+      "James Phelan",
+      "Eugene Schmitz",
+      "P.H. McCarthy",
+      "James Rolph"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Famous opera singer who fled the city?",
+    "choices": [
+      "Verdi",
+      "Puccini",
+      "Caruso",
+      "Toscanini"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "How many city blocks burned?",
+    "choices": [
+      "~50",
+      "~150",
+      "~500",
+      "~1,000"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "How many were left homeless?",
+    "choices": [
+      "~50,000",
+      "~150,000",
+      "~225,000",
+      "~400,000"
+    ],
+    "correct": 2
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
