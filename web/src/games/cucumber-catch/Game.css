@@ -1,1 +1,75 @@
 @import "../../engines/clicker/clicker.css";
+
+/* ==========================================================================
+   cucumbercatch food-arcade theme
+   Unique class prefix: .cucumbercatch-*  (NOT shared with engine or other games)
+   ========================================================================== */
+
+.cucumbercatch-wrap {
+  background:
+    radial-gradient(ellipse at 30% 0%, #86efac55, transparent 55%),
+    linear-gradient(180deg, #dcfce7 0%, #dcfce7cc 100%);
+  border-radius: 20px;
+}
+
+.cucumbercatch-info { color: #14532d; }
+
+.cucumbercatch-score {
+  background: linear-gradient(180deg, #16a34a, #14532d) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 18px #16a34a55 !important;
+}
+
+.cucumbercatch-timer {
+  color: #16a34a !important;
+  background: linear-gradient(180deg, #86efac66, #86efac33) !important;
+  box-shadow: 0 0 0 1px #16a34a40 inset !important;
+}
+
+.cucumbercatch-board {
+  background:
+    radial-gradient(ellipse at 22% 12%, #86efac66, transparent 50%),
+    radial-gradient(ellipse at 82% 88%, #16a34a55, transparent 55%),
+    linear-gradient(160deg, #22c55e 0%, #052e16 100%) !important;
+  box-shadow:
+    0 1px 0 #86efac40 inset,
+    0 30px 60px -28px #14532d88,
+    0 0 0 1px #14532d40 !important;
+}
+
+/* Distinctive per-game motion */
+.cucumbercatch-target {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             cucumbercatch-slice 2.4s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 6px 8px #14532d99)
+          drop-shadow(0 0 6px #16a34a55) !important;
+}
+
+.cucumbercatch-target:hover {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             cucumbercatch-slice 0.9s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 12px 16px #14532dcc)
+          drop-shadow(0 0 14px #86efac) !important;
+}
+
+.cucumbercatch-target::before {
+  background: radial-gradient(circle at 50% 50%, #86efacaa, transparent 60%) !important;
+}
+
+.cucumbercatch-final {
+  background: linear-gradient(180deg, #16a34a, #14532d) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 24px #16a34a55 !important;
+}
+
+@keyframes cucumbercatch-slice {
+  0%,100% { transform: translate(-50%,-50%) skewY(-3deg); } 50% { transform: translate(-50%,-50%) skewY(3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cucumbercatch-target, .cucumbercatch-target:hover {
+    animation: none !important;
+  }
+}

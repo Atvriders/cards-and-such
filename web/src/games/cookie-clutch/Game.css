@@ -1,1 +1,75 @@
 @import "../../engines/clicker/clicker.css";
+
+/* ==========================================================================
+   cookieclutch food-arcade theme
+   Unique class prefix: .cookieclutch-*  (NOT shared with engine or other games)
+   ========================================================================== */
+
+.cookieclutch-wrap {
+  background:
+    radial-gradient(ellipse at 30% 0%, #fde68a55, transparent 55%),
+    linear-gradient(180deg, #fef3c7 0%, #fef3c7cc 100%);
+  border-radius: 20px;
+}
+
+.cookieclutch-info { color: #451a03; }
+
+.cookieclutch-score {
+  background: linear-gradient(180deg, #92400e, #451a03) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 18px #92400e55 !important;
+}
+
+.cookieclutch-timer {
+  color: #92400e !important;
+  background: linear-gradient(180deg, #fde68a66, #fde68a33) !important;
+  box-shadow: 0 0 0 1px #92400e40 inset !important;
+}
+
+.cookieclutch-board {
+  background:
+    radial-gradient(ellipse at 22% 12%, #fde68a66, transparent 50%),
+    radial-gradient(ellipse at 82% 88%, #92400e55, transparent 55%),
+    linear-gradient(160deg, #a16207 0%, #1c1209 100%) !important;
+  box-shadow:
+    0 1px 0 #fde68a40 inset,
+    0 30px 60px -28px #451a0388,
+    0 0 0 1px #451a0340 !important;
+}
+
+/* Distinctive per-game motion */
+.cookieclutch-target {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             cookieclutch-crumble 2.4s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 6px 8px #451a0399)
+          drop-shadow(0 0 6px #92400e55) !important;
+}
+
+.cookieclutch-target:hover {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             cookieclutch-crumble 0.9s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 12px 16px #451a03cc)
+          drop-shadow(0 0 14px #fde68a) !important;
+}
+
+.cookieclutch-target::before {
+  background: radial-gradient(circle at 50% 50%, #fde68aaa, transparent 60%) !important;
+}
+
+.cookieclutch-final {
+  background: linear-gradient(180deg, #92400e, #451a03) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 24px #92400e55 !important;
+}
+
+@keyframes cookieclutch-crumble {
+  0%,100% { transform: translate(-50%,-50%) rotate(-2deg); filter: drop-shadow(0 4px 4px rgba(146,64,14,.5)); } 50% { transform: translate(-50%,-50%) rotate(2deg); filter: drop-shadow(0 6px 8px rgba(146,64,14,.8)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookieclutch-target, .cookieclutch-target:hover {
+    animation: none !important;
+  }
+}

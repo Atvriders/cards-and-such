@@ -1,1 +1,75 @@
 @import "../../engines/clicker/clicker.css";
+
+/* ==========================================================================
+   mangotap food-arcade theme
+   Unique class prefix: .mangotap-*  (NOT shared with engine or other games)
+   ========================================================================== */
+
+.mangotap-wrap {
+  background:
+    radial-gradient(ellipse at 30% 0%, #fcd34d55, transparent 55%),
+    linear-gradient(180deg, #fef3c7 0%, #fef3c7cc 100%);
+  border-radius: 20px;
+}
+
+.mangotap-info { color: #78350f; }
+
+.mangotap-score {
+  background: linear-gradient(180deg, #f59e0b, #78350f) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 18px #f59e0b55 !important;
+}
+
+.mangotap-timer {
+  color: #f59e0b !important;
+  background: linear-gradient(180deg, #fcd34d66, #fcd34d33) !important;
+  box-shadow: 0 0 0 1px #f59e0b40 inset !important;
+}
+
+.mangotap-board {
+  background:
+    radial-gradient(ellipse at 22% 12%, #fcd34d66, transparent 50%),
+    radial-gradient(ellipse at 82% 88%, #f59e0b55, transparent 55%),
+    linear-gradient(160deg, #f59e0b 0%, #78350f 100%) !important;
+  box-shadow:
+    0 1px 0 #fcd34d40 inset,
+    0 30px 60px -28px #78350f88,
+    0 0 0 1px #78350f40 !important;
+}
+
+/* Distinctive per-game motion */
+.mangotap-target {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             mangotap-sway 2.4s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 6px 8px #78350f99)
+          drop-shadow(0 0 6px #f59e0b55) !important;
+}
+
+.mangotap-target:hover {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             mangotap-sway 0.9s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 12px 16px #78350fcc)
+          drop-shadow(0 0 14px #fcd34d) !important;
+}
+
+.mangotap-target::before {
+  background: radial-gradient(circle at 50% 50%, #fcd34daa, transparent 60%) !important;
+}
+
+.mangotap-final {
+  background: linear-gradient(180deg, #f59e0b, #78350f) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 24px #f59e0b55 !important;
+}
+
+@keyframes mangotap-sway {
+  0%,100% { transform: translate(-50%,-50%) skewX(-4deg); } 50% { transform: translate(-50%,-50%) skewX(4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mangotap-target, .mangotap-target:hover {
+    animation: none !important;
+  }
+}

@@ -1,1 +1,75 @@
 @import "../../engines/clicker/clicker.css";
+
+/* ==========================================================================
+   caramelcatch food-arcade theme
+   Unique class prefix: .caramelcatch-*  (NOT shared with engine or other games)
+   ========================================================================== */
+
+.caramelcatch-wrap {
+  background:
+    radial-gradient(ellipse at 30% 0%, #fed7aa55, transparent 55%),
+    linear-gradient(180deg, #fef3c7 0%, #fef3c7cc 100%);
+  border-radius: 20px;
+}
+
+.caramelcatch-info { color: #451a03; }
+
+.caramelcatch-score {
+  background: linear-gradient(180deg, #b45309, #451a03) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 18px #b4530955 !important;
+}
+
+.caramelcatch-timer {
+  color: #b45309 !important;
+  background: linear-gradient(180deg, #fed7aa66, #fed7aa33) !important;
+  box-shadow: 0 0 0 1px #b4530940 inset !important;
+}
+
+.caramelcatch-board {
+  background:
+    radial-gradient(ellipse at 22% 12%, #fed7aa66, transparent 50%),
+    radial-gradient(ellipse at 82% 88%, #b4530955, transparent 55%),
+    linear-gradient(160deg, #d97706 0%, #3f1d05 100%) !important;
+  box-shadow:
+    0 1px 0 #fed7aa40 inset,
+    0 30px 60px -28px #451a0388,
+    0 0 0 1px #451a0340 !important;
+}
+
+/* Distinctive per-game motion */
+.caramelcatch-target {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             caramelcatch-drip 2.4s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 6px 8px #451a0399)
+          drop-shadow(0 0 6px #b4530955) !important;
+}
+
+.caramelcatch-target:hover {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             caramelcatch-drip 0.9s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 12px 16px #451a03cc)
+          drop-shadow(0 0 14px #fed7aa) !important;
+}
+
+.caramelcatch-target::before {
+  background: radial-gradient(circle at 50% 50%, #fed7aaaa, transparent 60%) !important;
+}
+
+.caramelcatch-final {
+  background: linear-gradient(180deg, #b45309, #451a03) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 24px #b4530955 !important;
+}
+
+@keyframes caramelcatch-drip {
+  0%,100% { transform: translate(-50%,-50%) translateY(0); } 50% { transform: translate(-50%,-44%) translateY(6px); filter: drop-shadow(0 8px 6px rgba(180,83,9,.7)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caramelcatch-target, .caramelcatch-target:hover {
+    animation: none !important;
+  }
+}

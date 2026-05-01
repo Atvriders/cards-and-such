@@ -14,22 +14,22 @@ export function SpinachSpinGame({ state, dispatch, onGameOver }: GameProps<Spina
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>tapped: {state.tapped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="spinachspin-wrap"><div className="spinachspin-done"><h2>Time's Up!</h2><div>tapped: {state.tapped} / Missed: {state.missed}</div><div className="spinachspin-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">tapped: {state.tapped}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="spinachspin-wrap">
+      <div className="spinachspin-header">
+        <span className="spinachspin-info">tapped: {state.tapped}</span>
+        <span className="spinachspin-timer">{state.ticksRemaining}s</span>
+        <span className="spinachspin-score">{state.score} pts</span>
       </div>
-      <div className="fc-board">
+      <div className="spinachspin-board">
         {state.items.map(c => {
           const x = (c.lane + 0.5) / LANES * 100;
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="fc-target"
+              className="spinachspin-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"tap", id:c.id } as SpinachSpinAction)}
               aria-label="spinach-spin">🥬</button>

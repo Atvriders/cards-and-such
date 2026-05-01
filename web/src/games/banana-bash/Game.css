@@ -1,1 +1,75 @@
 @import "../../engines/clicker/clicker.css";
+
+/* ==========================================================================
+   bananabash food-arcade theme
+   Unique class prefix: .bananabash-*  (NOT shared with engine or other games)
+   ========================================================================== */
+
+.bananabash-wrap {
+  background:
+    radial-gradient(ellipse at 30% 0%, #fef08a55, transparent 55%),
+    linear-gradient(180deg, #fefce8 0%, #fefce8cc 100%);
+  border-radius: 20px;
+}
+
+.bananabash-info { color: #854d0e; }
+
+.bananabash-score {
+  background: linear-gradient(180deg, #facc15, #854d0e) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 18px #facc1555 !important;
+}
+
+.bananabash-timer {
+  color: #facc15 !important;
+  background: linear-gradient(180deg, #fef08a66, #fef08a33) !important;
+  box-shadow: 0 0 0 1px #facc1540 inset !important;
+}
+
+.bananabash-board {
+  background:
+    radial-gradient(ellipse at 22% 12%, #fef08a66, transparent 50%),
+    radial-gradient(ellipse at 82% 88%, #facc1555, transparent 55%),
+    linear-gradient(160deg, #facc15 0%, #3f3f46 100%) !important;
+  box-shadow:
+    0 1px 0 #fef08a40 inset,
+    0 30px 60px -28px #854d0e88,
+    0 0 0 1px #854d0e40 !important;
+}
+
+/* Distinctive per-game motion */
+.bananabash-target {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             bananabash-curve 2.4s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 6px 8px #854d0e99)
+          drop-shadow(0 0 6px #facc1555) !important;
+}
+
+.bananabash-target:hover {
+  animation: clicker-spawn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             bananabash-curve 0.9s ease-in-out 320ms infinite !important;
+  filter: drop-shadow(0 12px 16px #854d0ecc)
+          drop-shadow(0 0 14px #fef08a) !important;
+}
+
+.bananabash-target::before {
+  background: radial-gradient(circle at 50% 50%, #fef08aaa, transparent 60%) !important;
+}
+
+.bananabash-final {
+  background: linear-gradient(180deg, #facc15, #854d0e) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 24px #facc1555 !important;
+}
+
+@keyframes bananabash-curve {
+  0%,100% { transform: translate(-50%,-50%) rotate(-12deg); } 50% { transform: translate(-50%,-52%) rotate(12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bananabash-target, .bananabash-target:hover {
+    animation: none !important;
+  }
+}

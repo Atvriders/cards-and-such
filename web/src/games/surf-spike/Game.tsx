@@ -13,22 +13,22 @@ export function SurfSpikeGame({ state, dispatch, onGameOver }: GameProps<SurfSpi
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="surfspike-wrap"><div className="surfspike-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="surfspike-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">Popped: {state.popped}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="surfspike-wrap">
+      <div className="surfspike-header">
+        <span className="surfspike-info">Popped: {state.popped}</span>
+        <span className="surfspike-timer">{state.ticksRemaining}s</span>
+        <span className="surfspike-score">{state.score} pts</span>
       </div>
-      <div className="fc-board">
+      <div className="surfspike-board">
         {state.targets.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="surfspike-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as SurfSpikeAction)}
               aria-label="target">🌊</button>

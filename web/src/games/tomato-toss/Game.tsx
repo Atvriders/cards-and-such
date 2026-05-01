@@ -14,22 +14,22 @@ export function TomatoTossGame({ state, dispatch, onGameOver }: GameProps<Tomato
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>clicked: {state.clicked} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="tomatotoss-wrap"><div className="tomatotoss-done"><h2>Time's Up!</h2><div>clicked: {state.clicked} / Missed: {state.missed}</div><div className="tomatotoss-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">clicked: {state.clicked}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="tomatotoss-wrap">
+      <div className="tomatotoss-header">
+        <span className="tomatotoss-info">clicked: {state.clicked}</span>
+        <span className="tomatotoss-timer">{state.ticksRemaining}s</span>
+        <span className="tomatotoss-score">{state.score} pts</span>
       </div>
-      <div className="fc-board">
+      <div className="tomatotoss-board">
         {state.items.map(c => {
           const x = (c.lane + 0.5) / LANES * 100;
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="fc-target"
+              className="tomatotoss-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"click", id:c.id } as TomatoTossAction)}
               aria-label="tomato-toss">🍅</button>

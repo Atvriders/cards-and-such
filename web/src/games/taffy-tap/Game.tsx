@@ -14,22 +14,22 @@ export function TaffyTapGame({ state, dispatch, onGameOver }: GameProps<TaffyTap
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Caught: {state.caught} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="taffytap-wrap"><div className="taffytap-done"><h2>Time's Up!</h2><div>Caught: {state.caught} / Missed: {state.missed}</div><div className="taffytap-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">Caught: {state.caught}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="taffytap-wrap">
+      <div className="taffytap-header">
+        <span className="taffytap-info">Caught: {state.caught}</span>
+        <span className="taffytap-timer">{state.ticksRemaining}s</span>
+        <span className="taffytap-score">{state.score} pts</span>
       </div>
-      <div className="fc-board" style={{ background: "linear-gradient(180deg,#fff5e1,#ffd9b5)" }}>
+      <div className="taffytap-board" style={{ background: "linear-gradient(180deg,#fff5e1,#ffd9b5)" }}>
         {state.targets.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="taffytap-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"catch", id:p.id } as TaffyTapAction)}
               aria-label="target">🍬</button>
