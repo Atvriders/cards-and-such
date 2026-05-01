@@ -5,104 +5,304 @@ export interface ArticleQuizState { questions: QuizQuestion[]; currentIndex: num
 export type ArticleQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "___ apple a day.",
+    "question": "Choose the article: '___ apple a day keeps the doctor away.'",
     "choices": [
-      "A",
       "An",
-      "The",
-      "No article"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "___ Sun is hot.",
-    "choices": [
       "A",
-      "An",
       "The",
-      "No article"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "I bought ___ book.",
-    "choices": [
-      "A",
-      "An",
-      "The",
-      "No article"
+      "(none)"
     ],
     "correct": 0
   },
   {
-    "question": "___ honest man.",
+    "question": "Choose the article: '___ sun rises in the east.'",
     "choices": [
+      "The",
       "A",
       "An",
-      "The",
-      "No article"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "She is ___ engineer.",
-    "choices": [
-      "A",
-      "An",
-      "The",
-      "No article"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "___ Earth orbits ___ Sun.",
-    "choices": [
-      "A/A",
-      "An/An",
-      "The/The",
-      "No/No"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "He plays ___ guitar.",
-    "choices": [
-      "A",
-      "An",
-      "The",
-      "No article"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "___ university is far.",
-    "choices": [
-      "A",
-      "An",
-      "The",
-      "No article"
+      "(none)"
     ],
     "correct": 0
   },
   {
-    "question": "I love ___ pizza.",
+    "question": "Choose: 'I saw ___ elephant at the zoo.'",
     "choices": [
-      "A",
-      "An",
-      "The",
-      "No article"
+      "an",
+      "a",
+      "the",
+      "(none)"
     ],
-    "correct": 3
+    "correct": 0
   },
   {
-    "question": "___ Eiffel Tower.",
+    "question": "Choose: 'She is ___ honest person.'",
     "choices": [
+      "an",
+      "a",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'He is ___ university student.'",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'I need ___ hour to finish.'",
+    "choices": [
+      "an",
+      "a",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: '___ Eiffel Tower is in Paris.'",
+    "choices": [
+      "The",
       "A",
       "An",
-      "The",
-      "No article"
+      "(none)"
     ],
-    "correct": 2
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'I love ___ music.' (general)",
+    "choices": [
+      "(none)",
+      "a",
+      "an",
+      "the"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'She plays ___ guitar.' (instrument)",
+    "choices": [
+      "the",
+      "a",
+      "an",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'He is ___ engineer.'",
+    "choices": [
+      "an",
+      "a",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'I bought ___ new car yesterday.'",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: '___ car I bought yesterday is red.' (specific)",
+    "choices": [
+      "The",
+      "A",
+      "An",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'Mount Everest is ___ highest mountain.'",
+    "choices": [
+      "the",
+      "a",
+      "an",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: '___ Nile is in Africa.'",
+    "choices": [
+      "The",
+      "A",
+      "An",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'She lives in ___ United States.'",
+    "choices": [
+      "the",
+      "a",
+      "an",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'He went to ___ Japan last year.'",
+    "choices": [
+      "(none)",
+      "the",
+      "a",
+      "an"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: '___ Mississippi River is long.'",
+    "choices": [
+      "The",
+      "A",
+      "An",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'I had ___ egg for breakfast.'",
+    "choices": [
+      "an",
+      "a",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'It was ___ unforgettable trip.'",
+    "choices": [
+      "an",
+      "a",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'He plays ___ soccer every day.' (sport)",
+    "choices": [
+      "(none)",
+      "a",
+      "an",
+      "the"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'Please open ___ window.' (specific known)",
+    "choices": [
+      "the",
+      "a",
+      "an",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'I want ___ banana.' (any one)",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'She is ___ best student in the class.'",
+    "choices": [
+      "the",
+      "a",
+      "an",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: '___ moon orbits ___ earth.'",
+    "choices": [
+      "The / the",
+      "A / a",
+      "An / an",
+      "(none) / (none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'I read ___ interesting book yesterday.'",
+    "choices": [
+      "an",
+      "a",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'He is ___ MBA graduate.' (sounds 'em-bee-ay')",
+    "choices": [
+      "an",
+      "a",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'She works at ___ NASA.' (acronym)",
+    "choices": [
+      "(none)",
+      "a",
+      "an",
+      "the"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'It costs ___ euro.'",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: 'He has ___ one-year-old son.' (sounds 'wun')",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "(none)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Choose: '___ rich should help ___ poor.'",
+    "choices": [
+      "The / the",
+      "A / a",
+      "An / an",
+      "(none) / (none)"
+    ],
+    "correct": 0
   }
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

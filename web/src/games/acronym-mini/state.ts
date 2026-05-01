@@ -5,104 +5,304 @@ export interface AcronymMiniState { questions: QuizQuestion[]; currentIndex: num
 export type AcronymMiniAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "NASA stands for?",
+    "question": "'NASA' stands for:",
     "choices": [
-      "National Aero Society",
       "National Aeronautics and Space Administration",
-      "North American Space Agency",
-      "New Aerospace Society"
+      "National Aerial Science Agency",
+      "North American Space Authority",
+      "National Air & Sea Authority"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "LASER acronym?",
+    "question": "'NATO' stands for:",
+    "choices": [
+      "North Atlantic Treaty Organization",
+      "North African Treaty Organization",
+      "Northern Atlantic Trade Org.",
+      "National Atlantic Treaty Org."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'FBI' stands for:",
+    "choices": [
+      "Federal Bureau of Investigation",
+      "Federal Branch of Inquiry",
+      "Federal Board of Information",
+      "Field Bureau of Investigation"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'CIA' stands for:",
+    "choices": [
+      "Central Intelligence Agency",
+      "Central Investigation Agency",
+      "Crime Intelligence Agency",
+      "Civil Intelligence Agency"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'NASA' is which type of word?",
+    "choices": [
+      "acronym (pronounced as a word)",
+      "initialism",
+      "abbreviation only",
+      "contraction"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'FBI' is which type?",
+    "choices": [
+      "initialism (pronounced letter by letter)",
+      "acronym (as a word)",
+      "contraction",
+      "compound"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'LASER' stands for:",
     "choices": [
       "Light Amplification by Stimulated Emission of Radiation",
-      "Long Active System for Electromagnetic Radiation",
-      "Linked Atomic Source for Energy Release",
-      "Laser Active System Emission Radio"
+      "Light Active Stimulated Energy Ray",
+      "Laser Active Source Emitting Radiation",
+      "Light And Sound Energy Ray"
     ],
     "correct": 0
   },
   {
-    "question": "SCUBA acronym?",
+    "question": "'RADAR' stands for:",
     "choices": [
-      "Self Contained Underwater Breathing Apparatus",
-      "Submarine Crew Underwater Boat Assistance",
-      "Sub-Coastal Unit Boat Apparatus",
-      "System Carrier Underwater Breath Aid"
+      "Radio Detection and Ranging",
+      "Radio Detection and Reading",
+      "Radio Distance and Range",
+      "Radial Detection and Ranging"
     ],
     "correct": 0
   },
   {
-    "question": "RADAR acronym?",
+    "question": "'SCUBA' stands for:",
     "choices": [
-      "RAdio Detection And Ranging",
-      "Range Awareness Detection And Reflection",
-      "Radio And Distance Ranging",
-      "Reflected Antenna Detection And Ranging"
+      "Self-Contained Underwater Breathing Apparatus",
+      "Sub-Caribbean Underwater Breathing Air",
+      "Self-Controlled Underwater Buoy Apparatus",
+      "Self-Contained Universal Breathing Aid"
     ],
     "correct": 0
   },
   {
-    "question": "GIF stands for?",
+    "question": "'AIDS' stands for:",
     "choices": [
-      "Graphics Image Format",
-      "Graphical Interchange Format",
+      "Acquired Immunodeficiency Syndrome",
+      "Acute Immune Disease Syndrome",
+      "Auto-Immune Deficiency Syndrome",
+      "Acquired Internal Disease Syndrome"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'GIF' stands for:",
+    "choices": [
       "Graphics Interchange Format",
-      "General Image Format"
+      "General Image Format",
+      "Graphics Internet Format",
+      "Global Image File"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "URL stands for?",
-    "choices": [
-      "Universal Resource Locator",
-      "Uniform Resource Locator",
-      "Unique Reference Link",
-      "Unified Routing Link"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "HTML stands for?",
+    "question": "'HTML' stands for:",
     "choices": [
       "HyperText Markup Language",
-      "Home Tool Markup Language",
-      "HyperType Marker Language",
-      "High-Tier Markup List"
+      "High-Tech Modern Language",
+      "HyperText Modular Language",
+      "Home Tool Markup Language"
     ],
     "correct": 0
   },
   {
-    "question": "RAM stands for?",
+    "question": "'URL' stands for:",
+    "choices": [
+      "Uniform Resource Locator",
+      "Universal Resource Link",
+      "Unified Reference Locator",
+      "Uniform Reference Link"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'PDF' stands for:",
+    "choices": [
+      "Portable Document Format",
+      "Printable Data File",
+      "Public Document File",
+      "Portable Data File"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'USB' stands for:",
+    "choices": [
+      "Universal Serial Bus",
+      "United Serial Bus",
+      "Universal System Bus",
+      "Uniform Serial Bus"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'CPU' stands for:",
+    "choices": [
+      "Central Processing Unit",
+      "Central Power Unit",
+      "Computer Processing Unit",
+      "Core Programming Unit"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'RAM' stands for:",
     "choices": [
       "Random Access Memory",
-      "Read After Memory",
-      "Rapid Active Memory",
-      "Recurring Access Module"
+      "Read Access Memory",
+      "Rapid Access Memory",
+      "Run-Active Memory"
     ],
     "correct": 0
   },
   {
-    "question": "ASAP means?",
+    "question": "'ROM' stands for:",
     "choices": [
-      "As Slow As Possible",
-      "As Soon As Possible",
-      "All Systems Are Powered",
-      "Attached Standard Active Process"
+      "Read-Only Memory",
+      "Random-Only Memory",
+      "Run-Only Memory",
+      "Reset-Only Memory"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "DIY means?",
+    "question": "'GPS' stands for:",
     "choices": [
-      "Done In Year",
-      "Do It Yourself",
-      "Drive It Yourself",
-      "Decided In Your"
+      "Global Positioning System",
+      "General Positioning System",
+      "Geographic Positioning Service",
+      "Global Position Sensor"
     ],
-    "correct": 1
+    "correct": 0
+  },
+  {
+    "question": "'ATM' (banking) stands for:",
+    "choices": [
+      "Automated Teller Machine",
+      "Automatic Transaction Machine",
+      "Active Teller Machine",
+      "Auto-Trade Machine"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'PIN' stands for:",
+    "choices": [
+      "Personal Identification Number",
+      "Private Identity Number",
+      "Personal Integer Number",
+      "Public Identification Number"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'WHO' stands for:",
+    "choices": [
+      "World Health Organization",
+      "Worldwide Hospital Organization",
+      "World Healing Operations",
+      "Worldwide Health Office"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'UNESCO' stands for:",
+    "choices": [
+      "UN Educational, Scientific and Cultural Organization",
+      "Union of European Science & Culture",
+      "UN Economic & Social Council Org.",
+      "UN Education and Science Council"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'UNICEF' stands for:",
+    "choices": [
+      "UN Children's Fund (orig. International Children's Emergency Fund)",
+      "Union of International Children's Fund",
+      "United National Infant Care Fund",
+      "UN Internal Children Education Fund"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'WWW' stands for:",
+    "choices": [
+      "World Wide Web",
+      "World Wireless Web",
+      "Web Wide World",
+      "Worldwide Wireless Web"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'DNA' stands for:",
+    "choices": [
+      "Deoxyribonucleic Acid",
+      "Diatomic Nucleic Acid",
+      "Dynamic Nuclear Acid",
+      "Double Nucleotide Acid"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'RNA' stands for:",
+    "choices": [
+      "Ribonucleic Acid",
+      "Recombinant Nuclear Acid",
+      "Repeat Nucleic Acid",
+      "Ribose Nuclear Acid"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'IQ' stands for:",
+    "choices": [
+      "Intelligence Quotient",
+      "Intelligence Quality",
+      "Inner Quotient",
+      "Intellectual Quality"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'CEO' stands for:",
+    "choices": [
+      "Chief Executive Officer",
+      "Chief Economic Officer",
+      "Central Executive Officer",
+      "Corporate Executive Officer"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'ASAP' stands for:",
+    "choices": [
+      "As Soon As Possible",
+      "After School And Practice",
+      "Always Send A Plan",
+      "All Set And Prepared"
+    ],
+    "correct": 0
   }
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

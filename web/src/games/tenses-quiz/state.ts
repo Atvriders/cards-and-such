@@ -5,104 +5,304 @@ export interface TensesQuizState { questions: QuizQuestion[]; currentIndex: numb
 export type TensesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "She ___ to the store yesterday.",
+    "question": "Which tense: 'She walks to school every day.'?",
     "choices": [
-      "go",
-      "goes",
+      "simple present",
+      "simple past",
+      "present perfect",
+      "future"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which tense: 'They walked to school yesterday.'?",
+    "choices": [
+      "simple past",
+      "simple present",
+      "past perfect",
+      "future"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which tense: 'I will see you tomorrow.'?",
+    "choices": [
+      "simple future",
+      "present continuous",
+      "past simple",
+      "present perfect"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which tense: 'He is reading a book right now.'?",
+    "choices": [
+      "present continuous",
+      "simple present",
+      "present perfect",
+      "past continuous"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which tense: 'They were playing when it started raining.'?",
+    "choices": [
+      "past continuous",
+      "past perfect",
+      "present continuous",
+      "future continuous"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which tense: 'I have lived here for ten years.'?",
+    "choices": [
+      "present perfect",
+      "simple past",
+      "past perfect",
+      "future perfect"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which tense: 'She had finished before I arrived.'?",
+    "choices": [
+      "past perfect",
+      "present perfect",
+      "simple past",
+      "past continuous"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which tense: 'By next year, I will have graduated.'?",
+    "choices": [
+      "future perfect",
+      "simple future",
+      "present perfect",
+      "past perfect"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past tense of 'go':",
+    "choices": [
       "went",
+      "goed",
+      "gone",
       "going"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "By next year, I ___ here for ten years.",
+    "question": "Past participle of 'eat':",
     "choices": [
-      "will live",
-      "will have lived",
-      "will be lived",
-      "lived"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Right now, they ___ dinner.",
-    "choices": [
-      "are eating",
+      "eaten",
       "ate",
-      "will eat",
-      "eat"
+      "eated",
+      "eating"
     ],
     "correct": 0
   },
   {
-    "question": "He ___ already finished the work.",
+    "question": "Past tense of 'run':",
     "choices": [
-      "have",
-      "has",
-      "is",
-      "was"
+      "ran",
+      "runned",
+      "run",
+      "running"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "When I arrived, she ___ already left.",
+    "question": "Past participle of 'write':",
     "choices": [
-      "has",
+      "written",
+      "wrote",
+      "writed",
+      "writting"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past tense of 'bring':",
+    "choices": [
+      "brought",
+      "bringed",
+      "brung",
+      "brang"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past tense of 'teach':",
+    "choices": [
+      "taught",
+      "teached",
+      "teach",
+      "teached up"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past participle of 'speak':",
+    "choices": [
+      "spoken",
+      "spoke",
+      "speaked",
+      "speaking"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'I ___ never been to Paris.' (present perfect)",
+    "choices": [
+      "have",
       "had",
-      "have",
-      "is"
+      "will",
+      "am"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Tomorrow we ___ pizza.",
+    "question": "'She ___ studying when I called.' (past continuous)",
     "choices": [
+      "was",
+      "is",
+      "has",
+      "will be"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'They ___ leave tomorrow.' (future)",
+    "choices": [
+      "will",
       "have",
       "had",
-      "will have",
-      "having"
+      "are"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "She ___ been waiting for an hour.",
+    "question": "Which is present perfect continuous? 'I ___ working since 9.'",
     "choices": [
-      "has",
-      "have",
-      "is",
+      "have been",
+      "had been",
+      "am",
       "was"
     ],
     "correct": 0
   },
   {
-    "question": "I ___ here every day.",
+    "question": "Which is past perfect? 'When I arrived, she ___ left.'",
     "choices": [
-      "coming",
-      "comes",
-      "come",
-      "came"
+      "had",
+      "has",
+      "have",
+      "will have"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Last week he ___ a movie.",
+    "question": "Which sentence uses simple present?",
     "choices": [
-      "watch",
-      "watched",
-      "watching",
-      "watches"
+      "She works in Paris.",
+      "She is working.",
+      "She has worked.",
+      "She worked."
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Past perfect of 'go'?",
+    "question": "Which sentence is in past simple?",
     "choices": [
-      "went",
-      "gone",
-      "had gone",
-      "go"
+      "I saw a movie.",
+      "I see a movie.",
+      "I have seen a movie.",
+      "I am seeing a movie."
     ],
-    "correct": 2
+    "correct": 0
+  },
+  {
+    "question": "Which sentence is in present continuous?",
+    "choices": [
+      "They are eating.",
+      "They eat.",
+      "They ate.",
+      "They have eaten."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which uses future continuous?",
+    "choices": [
+      "I will be sleeping.",
+      "I will sleep.",
+      "I have slept.",
+      "I am sleeping."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past tense of 'drink':",
+    "choices": [
+      "drank",
+      "drinked",
+      "drunk",
+      "drinking"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past participle of 'drive':",
+    "choices": [
+      "driven",
+      "drove",
+      "drived",
+      "driving"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past tense of 'swim':",
+    "choices": [
+      "swam",
+      "swum",
+      "swimmed",
+      "swim"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past tense of 'fly':",
+    "choices": [
+      "flew",
+      "flied",
+      "flyed",
+      "flown"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Past participle of 'choose':",
+    "choices": [
+      "chosen",
+      "chose",
+      "choosed",
+      "choosing"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Tense of 'I had been waiting for an hour.'?",
+    "choices": [
+      "past perfect continuous",
+      "present perfect",
+      "past continuous",
+      "simple past"
+    ],
+    "correct": 0
   }
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

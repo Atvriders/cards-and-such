@@ -5,104 +5,304 @@ export interface PluralsQuizState { questions: QuizQuestion[]; currentIndex: num
 export type PluralsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Plural of 'cactus'?",
+    "question": "The plural of 'child' is:",
     "choices": [
-      "cactuses",
-      "cacti",
-      "cactus",
-      "cactusi"
+      "children",
+      "childs",
+      "childes",
+      "childies"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Plural of 'ox'?",
+    "question": "The plural of 'mouse' (animal) is:",
     "choices": [
-      "oxes",
-      "ox",
+      "mice",
+      "mouses",
+      "meese",
+      "mousen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'foot' is:",
+    "choices": [
+      "feet",
+      "foots",
+      "feets",
+      "footes"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'tooth' is:",
+    "choices": [
+      "teeth",
+      "tooths",
+      "teethes",
+      "toothies"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'man' is:",
+    "choices": [
+      "men",
+      "mans",
+      "mens",
+      "manes"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'woman' is:",
+    "choices": [
+      "women",
+      "womans",
+      "womens",
+      "womanes"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'goose' is:",
+    "choices": [
+      "geese",
+      "gooses",
+      "geeses",
+      "goosen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'ox' is:",
+    "choices": [
       "oxen",
-      "oxi"
+      "oxes",
+      "oxs",
+      "oxies"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Plural of 'fungus'?",
+    "question": "The plural of 'sheep' is:",
     "choices": [
-      "funguses",
-      "fungi",
-      "fungus",
-      "fungis"
+      "sheep",
+      "sheeps",
+      "shepes",
+      "sheepies"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Plural of 'datum'?",
+    "question": "The plural of 'deer' is:",
     "choices": [
-      "datums",
-      "data",
-      "datas",
-      "dati"
+      "deer",
+      "deers",
+      "deeren",
+      "deeries"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Plural of 'crisis'?",
+    "question": "The plural of 'fish' (as a group of one species) is:",
+    "choices": [
+      "fish",
+      "fishes",
+      "fishen",
+      "fishies"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'cactus' (Latin form) is:",
+    "choices": [
+      "cacti",
+      "cactuses only",
+      "cactes",
+      "cactim"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'crisis' is:",
     "choices": [
       "crises",
       "crisises",
-      "crisis",
-      "crisisi"
+      "crisen",
+      "crisi"
     ],
     "correct": 0
   },
   {
-    "question": "Plural of 'analysis'?",
+    "question": "The plural of 'analysis' is:",
     "choices": [
-      "analysises",
       "analyses",
-      "analysis",
-      "analyse"
+      "analysises",
+      "analysi",
+      "analyseen"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Plural of 'phenomenon'?",
+    "question": "The plural of 'phenomenon' is:",
     "choices": [
       "phenomena",
       "phenomenons",
-      "phenomenon",
-      "phenomenis"
+      "phenomenes",
+      "phenomenae"
     ],
     "correct": 0
   },
   {
-    "question": "Plural of 'criterion'?",
+    "question": "The plural of 'criterion' is:",
     "choices": [
-      "criterias",
       "criteria",
       "criterions",
-      "criterion"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Plural of 'index'?",
-    "choices": [
-      "indexes or indices",
-      "indexs",
-      "index",
-      "indici"
+      "criteries",
+      "criteriae"
     ],
     "correct": 0
   },
   {
-    "question": "Plural of 'medium' (as in art)?",
+    "question": "The plural of 'datum' is:",
     "choices": [
-      "mediums",
-      "media",
-      "medium",
-      "medias"
+      "data",
+      "datums",
+      "daten",
+      "datae"
     ],
-    "correct": 1
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'leaf' is:",
+    "choices": [
+      "leaves",
+      "leafs",
+      "leafes",
+      "leaven"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'knife' is:",
+    "choices": [
+      "knives",
+      "knifes",
+      "knifies",
+      "kniven"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'wolf' is:",
+    "choices": [
+      "wolves",
+      "wolfs",
+      "wolfes",
+      "wolven"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'baby' is:",
+    "choices": [
+      "babies",
+      "babys",
+      "babyes",
+      "baby"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'bus' is:",
+    "choices": [
+      "buses",
+      "bus",
+      "busies",
+      "bussen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'box' is:",
+    "choices": [
+      "boxes",
+      "boxs",
+      "boxen (modern)",
+      "boxies"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'church' is:",
+    "choices": [
+      "churches",
+      "churchs",
+      "churchies",
+      "churchen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'potato' is:",
+    "choices": [
+      "potatoes",
+      "potatos",
+      "potatoses",
+      "potate"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'piano' is:",
+    "choices": [
+      "pianos",
+      "pianoes",
+      "pianies",
+      "pianon"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'series' is:",
+    "choices": [
+      "series",
+      "serieses",
+      "seri",
+      "seria"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'species' is:",
+    "choices": [
+      "species",
+      "specieses",
+      "speci",
+      "specien"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'index' (math/Latin) is commonly:",
+    "choices": [
+      "indices",
+      "indexen",
+      "indexies",
+      "indeces"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The plural of 'alumnus' (male) is:",
+    "choices": [
+      "alumni",
+      "alumnuses",
+      "alumnae",
+      "alumnen"
+    ],
+    "correct": 0
   }
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

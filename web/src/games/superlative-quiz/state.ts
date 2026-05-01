@@ -5,102 +5,302 @@ export interface SuperlativeQuizState { questions: QuizQuestion[]; currentIndex:
 export type SuperlativeQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Superlative of 'good'?",
+    "question": "Superlative of 'big':",
     "choices": [
-      "gooder",
+      "biggest",
+      "more big",
+      "bigger",
+      "big-est"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'happy':",
+    "choices": [
+      "happiest",
+      "most happy",
+      "happier",
+      "happyest"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'good':",
+    "choices": [
       "best",
-      "more good",
-      "goodest"
+      "goodest",
+      "most good",
+      "better"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Superlative of 'bad'?",
+    "question": "Superlative of 'bad':",
     "choices": [
-      "worse",
-      "baddest",
       "worst",
-      "more bad"
+      "baddest",
+      "most bad",
+      "worse"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Superlative of 'far'?",
+    "question": "Superlative of 'far' (distance):",
     "choices": [
-      "furthest/farthest",
+      "farthest",
       "farest",
-      "more far",
+      "most far",
       "further"
     ],
     "correct": 0
   },
   {
-    "question": "Superlative of 'big'?",
-    "choices": [
-      "bigger",
-      "biggest",
-      "most big",
-      "most biggest"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Superlative of 'happy'?",
-    "choices": [
-      "happiest",
-      "most happy",
-      "happyest",
-      "more happy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Superlative of 'beautiful'?",
+    "question": "Superlative of 'beautiful':",
     "choices": [
       "most beautiful",
       "beautifulest",
-      "more beautiful",
-      "most beautifulest"
+      "beautifullest",
+      "more beautiful"
     ],
     "correct": 0
   },
   {
-    "question": "Superlative of 'old'?",
+    "question": "Superlative of 'expensive':",
     "choices": [
-      "oldest/eldest",
-      "older",
-      "more old",
-      "oldester"
+      "most expensive",
+      "expensivest",
+      "more expensive",
+      "expensiver"
     ],
     "correct": 0
   },
   {
-    "question": "Superlative of 'much/many'?",
-    "choices": [
-      "most",
-      "mostest",
-      "more",
-      "muchest"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Superlative of 'little' (in size)?",
-    "choices": [
-      "littlest",
-      "least",
-      "more little",
-      "most little"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Superlative of 'fast'?",
+    "question": "Superlative of 'fast':",
     "choices": [
       "fastest",
-      "more fast",
       "most fast",
-      "fastester"
+      "faster",
+      "fasterest"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'tall':",
+    "choices": [
+      "tallest",
+      "most tall",
+      "taller",
+      "tallish"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'thin':",
+    "choices": [
+      "thinnest",
+      "thinest",
+      "most thin",
+      "thinner"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'hot':",
+    "choices": [
+      "hottest",
+      "hotest",
+      "most hot",
+      "hotter"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'easy':",
+    "choices": [
+      "easiest",
+      "easyest",
+      "most easy",
+      "easier"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'little' (size):",
+    "choices": [
+      "smallest / littlest",
+      "more little",
+      "less",
+      "lesser"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'much/many':",
+    "choices": [
+      "most",
+      "muchest",
+      "manyest",
+      "more"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'old' (family):",
+    "choices": [
+      "eldest",
+      "olderest",
+      "most old",
+      "older"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is correct? 'She is the ___ student in the class.'",
+    "choices": [
+      "smartest",
+      "most smart",
+      "most smartest",
+      "smarter"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is correct? 'This is the ___ movie I've seen.'",
+    "choices": [
+      "most interesting",
+      "interestingest",
+      "more interesting",
+      "most interestingest"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is correct? 'He is the ___ runner.'",
+    "choices": [
+      "fastest",
+      "most fast",
+      "faster",
+      "most fastest"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is correct? 'That was the ___ day of my life.'",
+    "choices": [
+      "worst",
+      "baddest",
+      "worsest",
+      "most bad"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is correct? 'Mount Everest is the ___ mountain.'",
+    "choices": [
+      "highest",
+      "most high",
+      "higher",
+      "most highest"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'careful':",
+    "choices": [
+      "most careful",
+      "carefulest",
+      "carefullest",
+      "more careful"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'simple':",
+    "choices": [
+      "simplest",
+      "most simple (also acceptable)",
+      "simpler",
+      "more simple"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'narrow':",
+    "choices": [
+      "narrowest",
+      "most narrow (also OK)",
+      "narrower",
+      "more narrow"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'clever':",
+    "choices": [
+      "cleverest / most clever",
+      "clevester",
+      "clevestest",
+      "cleverer"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'busy':",
+    "choices": [
+      "busiest",
+      "busyest",
+      "most busy",
+      "busier"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'late' (recent):",
+    "choices": [
+      "latest",
+      "most late",
+      "later",
+      "lattest"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'safe':",
+    "choices": [
+      "safest",
+      "most safe",
+      "safer",
+      "safely"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'large':",
+    "choices": [
+      "largest",
+      "most large",
+      "larger",
+      "largely"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'famous':",
+    "choices": [
+      "most famous",
+      "famousest",
+      "more famous",
+      "famouser"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Superlative of 'wise':",
+    "choices": [
+      "wisest",
+      "most wise",
+      "wiser",
+      "wisely"
     ],
     "correct": 0
   }

@@ -5,102 +5,302 @@ export interface SilentEQuizState { questions: QuizQuestion[]; currentIndex: num
 export type SilentEQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Silent E?",
+    "question": "Adding silent 'e' to 'cap' gives:",
     "choices": [
-      "BIKE",
-      "BIG",
-      "BIN",
-      "BIT"
+      "cape",
+      "caep",
+      "cappe",
+      "caap"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Adding silent 'e' to 'kit' gives:",
     "choices": [
-      "KITE",
-      "KITTEN",
-      "KIT",
-      "KICK"
+      "kite",
+      "kitee",
+      "kiet",
+      "kkite"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Adding silent 'e' to 'hop' gives:",
     "choices": [
-      "TAPE",
-      "TAP",
-      "TAN",
-      "TAB"
+      "hope",
+      "hoop",
+      "hoppe",
+      "hoap"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Adding silent 'e' to 'rid' gives:",
     "choices": [
-      "CAKE",
-      "CAT",
-      "CAB",
-      "CAR"
+      "ride",
+      "riid",
+      "rdie",
+      "ridd"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Adding silent 'e' to 'tub' gives:",
     "choices": [
-      "PINE",
-      "PIN",
-      "PIT",
-      "PICK"
+      "tube",
+      "tuub",
+      "tibe",
+      "tbeu"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Silent 'e' typically makes the preceding vowel:",
     "choices": [
-      "TIME",
-      "TIN",
-      "TIP",
-      "TICK"
+      "long",
+      "short",
+      "silent",
+      "doubled"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Which word has a silent 'e' that lengthens a vowel?",
     "choices": [
-      "GAME",
-      "GAS",
-      "GAP",
-      "GAG"
+      "bake",
+      "bag",
+      "bat",
+      "back"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Which word follows the silent-e rule?",
     "choices": [
-      "BONE",
-      "BOG",
-      "BOX",
-      "BUN"
+      "cute",
+      "cut",
+      "cup",
+      "cub"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Which is the silent-e form of 'pin'?",
     "choices": [
-      "NICE",
-      "NICK",
-      "NIT",
-      "NIP"
+      "pine",
+      "pinee",
+      "ppin",
+      "piine"
     ],
     "correct": 0
   },
   {
-    "question": "Silent E?",
+    "question": "Which is the silent-e form of 'cod'?",
     "choices": [
-      "RIDE",
-      "RID",
-      "RIG",
-      "RIP"
+      "code",
+      "cood",
+      "codde",
+      "ccode"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'tap'?",
+    "choices": [
+      "tape",
+      "taap",
+      "ttape",
+      "tapp"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'hat'?",
+    "choices": [
+      "hate",
+      "haat",
+      "hattt",
+      "hatte"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'mad'?",
+    "choices": [
+      "made",
+      "maad",
+      "madde",
+      "mmade"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'fin'?",
+    "choices": [
+      "fine",
+      "fiin",
+      "finne",
+      "ffine"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'rob'?",
+    "choices": [
+      "robe",
+      "roob",
+      "robbe",
+      "rrobe"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'cub'?",
+    "choices": [
+      "cube",
+      "cuub",
+      "cubbe",
+      "ccube"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'plan'?",
+    "choices": [
+      "plane",
+      "plaan",
+      "planne",
+      "pplane"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'slid'?",
+    "choices": [
+      "slide",
+      "sliid",
+      "sllide",
+      "sliddee"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'not'?",
+    "choices": [
+      "note",
+      "noot",
+      "nottt",
+      "nnote"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is the silent-e form of 'cut'?",
+    "choices": [
+      "cute",
+      "cuut",
+      "cuttt",
+      "ccute"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'home', the 'e' is:",
+    "choices": [
+      "silent",
+      "long e",
+      "schwa",
+      "stressed"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'time', the 'e' is:",
+    "choices": [
+      "silent",
+      "long",
+      "stressed",
+      "voiced"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'cake', the 'a' is:",
+    "choices": [
+      "long (because of silent e)",
+      "short",
+      "silent",
+      "schwa"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'rope', the 'o' is:",
+    "choices": [
+      "long",
+      "short",
+      "silent",
+      "schwa"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'use', the 'u' is:",
+    "choices": [
+      "long",
+      "short",
+      "silent",
+      "schwa"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'face', the 'a' sounds:",
+    "choices": [
+      "long",
+      "short",
+      "silent",
+      "nasal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'mile', the 'i' sounds:",
+    "choices": [
+      "long",
+      "short",
+      "silent",
+      "schwa"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'these', the 'e' sounds:",
+    "choices": [
+      "long e",
+      "short",
+      "silent both",
+      "schwa"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which word is NOT a silent-e word?",
+    "choices": [
+      "bench",
+      "bake",
+      "kite",
+      "tube"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which pair shows the silent-e rule?",
+    "choices": [
+      "mat / mate",
+      "cat / cats",
+      "run / running",
+      "big / bigger"
     ],
     "correct": 0
   }

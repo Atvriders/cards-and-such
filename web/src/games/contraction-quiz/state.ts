@@ -5,102 +5,302 @@ export interface ContractionQuizState { questions: QuizQuestion[]; currentIndex:
 export type ContractionQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "don't = ?",
+    "question": "'do not' contracts to:",
     "choices": [
-      "do not",
-      "does not",
-      "did not",
-      "do never"
+      "don't",
+      "dont",
+      "do'nt",
+      "do'not"
     ],
     "correct": 0
   },
   {
-    "question": "won't = ?",
+    "question": "'will not' contracts to:",
     "choices": [
-      "want not",
-      "will not",
-      "would not",
-      "were not"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "I'm = ?",
-    "choices": [
-      "I am",
-      "I will",
-      "I was",
-      "I had"
+      "won't",
+      "willn't",
+      "will'nt",
+      "wont"
     ],
     "correct": 0
   },
   {
-    "question": "they're = ?",
+    "question": "'cannot' contracts to:",
     "choices": [
-      "they were",
-      "they will",
-      "they are",
-      "they have"
+      "can't",
+      "cann't",
+      "ca'nt",
+      "can'ot"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "it's = ?",
+    "question": "'I am' contracts to:",
     "choices": [
-      "it is",
+      "I'm",
+      "Im",
+      "I'am",
+      "I'me"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'you are' contracts to:",
+    "choices": [
+      "you're",
+      "youre",
+      "your're",
+      "you'are"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'they are' contracts to:",
+    "choices": [
+      "they're",
+      "theyre",
+      "they'r",
+      "their're"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'we are' contracts to:",
+    "choices": [
+      "we're",
+      "were",
+      "we'are",
+      "wer'e"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'it is' contracts to:",
+    "choices": [
+      "it's",
       "its",
-      "it has or it is",
-      "it was"
+      "it'is",
+      "its'"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "should've = ?",
+    "question": "'he is' contracts to:",
     "choices": [
-      "should of",
-      "should have",
-      "should've",
-      "should had"
+      "he's",
+      "hes",
+      "he'is",
+      "h'es"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "can't = ?",
+    "question": "'she is' contracts to:",
     "choices": [
-      "can not",
-      "could not",
-      "cannot",
-      "could've"
+      "she's",
+      "shes",
+      "she'is",
+      "sh'es"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "who's = ?",
+    "question": "'I have' contracts to:",
     "choices": [
-      "whose",
-      "who is or who has",
-      "who was",
-      "who were"
+      "I've",
+      "Iv'e",
+      "Ihave",
+      "I'av"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "let's = ?",
+    "question": "'they have' contracts to:",
     "choices": [
+      "they've",
+      "theyv'e",
+      "theyhave",
+      "they'av"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'I will' contracts to:",
+    "choices": [
+      "I'll",
+      "Ill",
+      "I'wll",
+      "Iwill"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'he will' contracts to:",
+    "choices": [
+      "he'll",
+      "hell",
+      "he'wll",
+      "hewill"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'is not' contracts to:",
+    "choices": [
+      "isn't",
+      "is'nt",
+      "isnt",
+      "i'snt"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'are not' contracts to:",
+    "choices": [
+      "aren't",
+      "are'nt",
+      "arent",
+      "aren'ot"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'was not' contracts to:",
+    "choices": [
+      "wasn't",
+      "was'nt",
+      "wasnt",
+      "was'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'were not' contracts to:",
+    "choices": [
+      "weren't",
+      "were'nt",
+      "werent",
+      "were'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'has not' contracts to:",
+    "choices": [
+      "hasn't",
+      "has'nt",
+      "hasnt",
+      "has'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'have not' contracts to:",
+    "choices": [
+      "haven't",
+      "have'nt",
+      "havent",
+      "have'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'had not' contracts to:",
+    "choices": [
+      "hadn't",
+      "had'nt",
+      "hadnt",
+      "had'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'should not' contracts to:",
+    "choices": [
+      "shouldn't",
+      "should'nt",
+      "shouldnt",
+      "should'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'would not' contracts to:",
+    "choices": [
+      "wouldn't",
+      "would'nt",
+      "wouldnt",
+      "would'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'could not' contracts to:",
+    "choices": [
+      "couldn't",
+      "could'nt",
+      "couldnt",
+      "could'not"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'I would' contracts to:",
+    "choices": [
+      "I'd",
+      "Id",
+      "I'wd",
+      "Iwould"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'I had' contracts to:",
+    "choices": [
+      "I'd",
+      "Id",
+      "I'hd",
+      "Ihad"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'let us' contracts to:",
+    "choices": [
+      "let's",
       "lets",
-      "let is",
-      "let us",
-      "let was"
+      "let'us",
+      "le't us"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "they'll = ?",
+    "question": "'who is' contracts to:",
     "choices": [
-      "they will",
-      "they all",
-      "they were",
-      "they have"
+      "who's",
+      "whos",
+      "who'is",
+      "whois"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'that is' contracts to:",
+    "choices": [
+      "that's",
+      "thats",
+      "that'is",
+      "tha'ts"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'there is' contracts to:",
+    "choices": [
+      "there's",
+      "theres",
+      "there'is",
+      "ther'es"
     ],
     "correct": 0
   }

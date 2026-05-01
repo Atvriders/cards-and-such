@@ -5,102 +5,302 @@ export interface DoubleLetterQuizState { questions: QuizQuestion[]; currentIndex
 export type DoubleLetterQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Spelled with double-c?",
+    "question": "Which word has a double letter? 'accommodate'",
     "choices": [
-      "accomodate",
-      "accommodate",
-      "acommodate",
-      "acomadate"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Has double-s?",
-    "choices": [
-      "embarras",
-      "embarrass",
-      "emberras",
-      "embaras"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Has double-c double-s?",
-    "choices": [
-      "necessary",
-      "neccesary",
-      "necesary",
-      "neccessary"
+      "yes (double c and double m)",
+      "no",
+      "only double c",
+      "only double n"
     ],
     "correct": 0
   },
   {
-    "question": "Spelled with double-r?",
+    "question": "Spell correctly:",
     "choices": [
+      "necessary",
+      "neccessary",
+      "necesary",
+      "nessessary"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "embarrass",
+      "embarass",
+      "embarras",
+      "embaress"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "occurrence",
       "occurence",
       "ocurrence",
-      "occurrence",
-      "occurance"
+      "ocurrance"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Has double-l?",
-    "choices": [
-      "paralel",
-      "parallel",
-      "parralel",
-      "paralell"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Has double-m?",
+    "question": "Spell correctly:",
     "choices": [
       "committee",
-      "comitee",
       "comittee",
+      "committe",
       "commitee"
     ],
     "correct": 0
   },
   {
-    "question": "Has double-p?",
+    "question": "Spell correctly:",
     "choices": [
-      "dissapear",
-      "disapear",
-      "disappear",
-      "disappare"
+      "address",
+      "adress",
+      "addres",
+      "adres"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Has double-c?",
+    "question": "Spell correctly:",
     "choices": [
-      "acros",
+      "beginning",
+      "begining",
+      "beggining",
+      "beginnning"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "recommend",
+      "reccommend",
+      "recomend",
+      "recommmend"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "possess",
+      "posess",
+      "posses",
+      "possesss"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "successful",
+      "succesful",
+      "sucessful",
+      "successfull"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "parallel",
+      "paralel",
+      "parralel",
+      "parellel"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "millennium",
+      "milennium",
+      "millenium",
+      "millenium"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "tomorrow",
+      "tommorow",
+      "tomorow",
+      "tommorrow"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "happened",
+      "happend",
+      "hapened",
+      "happenned"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "professional",
+      "proffesional",
+      "profesional",
+      "professionnal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "written",
+      "writen",
+      "writtin",
+      "writtenn"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "different",
+      "diferent",
+      "diffrent",
+      "differrent"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
       "across",
       "accross",
-      "accros"
+      "acros",
+      "acrross"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Spelled correctly?",
+    "question": "Spell correctly:",
     "choices": [
-      "adress",
-      "address",
-      "adres",
-      "adresse"
+      "aggressive",
+      "agressive",
+      "agresive",
+      "aggresive"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Has double-z?",
+    "question": "Spell correctly:",
     "choices": [
-      "pizza",
-      "piza",
-      "pitza",
-      "pizzar"
+      "appearance",
+      "apearance",
+      "appearence",
+      "appeerance"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "balloon",
+      "baloon",
+      "ballon",
+      "baloonn"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "broccoli",
+      "brocolli",
+      "brocoli",
+      "brocolly"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "cappuccino",
+      "capuccino",
+      "capuchino",
+      "cappucino"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "dilemma",
+      "dilema",
+      "dillemma",
+      "dilemmna"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "espresso",
+      "expresso",
+      "esspresso",
+      "espreso"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "guarantee",
+      "garantee",
+      "guaruntee",
+      "guarantie"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "harass",
+      "harras",
+      "harrass",
+      "haras"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "lollipop",
+      "lolipop",
+      "lollypop",
+      "lollipopp"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "mississippi",
+      "misissippi",
+      "missisipi",
+      "mississipi"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spell correctly:",
+    "choices": [
+      "pumpkin (no double)",
+      "pumkkin",
+      "pumppkin",
+      "pumpkinn"
     ],
     "correct": 0
   }

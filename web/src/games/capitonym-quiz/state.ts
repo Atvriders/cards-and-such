@@ -5,19 +5,199 @@ export interface CapitonymQuizState { questions: QuizQuestion[]; currentIndex: n
 export type CapitonymQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "MARCH (month) vs march (verb) — capitonym?",
+    "question": "A capitonym is a word whose meaning changes based on:",
+    "choices": [
+      "capitalization",
+      "pronunciation",
+      "tense",
+      "spelling"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Polish' (verb, to shine) vs 'Polish' (from Poland) is an example of a:",
+    "choices": [
+      "capitonym",
+      "homophone",
+      "synonym",
+      "antonym"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'March' (month) vs 'march' (to walk) — what type of word pair?",
+    "choices": [
+      "capitonym",
+      "homophone",
+      "anagram",
+      "antonym"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Turkey' (country) vs 'turkey' (bird) — these are:",
+    "choices": [
+      "capitonyms",
+      "synonyms",
+      "homographs only",
+      "antonyms"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which of these is a true capitonym?",
+    "choices": [
+      "May/may",
+      "their/there",
+      "bear/bare",
+      "to/too"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Mercury' (planet) vs 'mercury' (metal) — capitonym?",
     "choices": [
       "yes",
       "no",
-      "sometimes",
-      "unrelated"
+      "only homophone",
+      "only antonym"
     ],
     "correct": 0
   },
   {
-    "question": "POLISH (to shine) vs Polish (Poland)?",
+    "question": "'Nice' (French city) vs 'nice' (kind) — what makes them differ in writing?",
+    "choices": [
+      "capitalization",
+      "spelling",
+      "punctuation",
+      "hyphenation"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Job' (Bible book) vs 'job' (work) — the change of meaning is signaled by:",
+    "choices": [
+      "initial capital letter",
+      "syllable count",
+      "stress",
+      "vowel"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Earth' (the planet) vs 'earth' (soil) is best classified as a:",
     "choices": [
       "capitonym",
+      "rhyme",
+      "compound",
+      "diminutive"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'China' (country) vs 'china' (porcelain) demonstrates:",
+    "choices": [
+      "capitonym",
+      "metaphor only",
+      "antonym",
+      "loanword"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Capitonyms typically have the same:",
+    "choices": [
+      "spelling",
+      "meaning",
+      "etymology only",
+      "pronunciation always"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'August' (month) vs 'august' (majestic) — the meanings differ when:",
+    "choices": [
+      "the first letter is capitalized",
+      "they rhyme",
+      "they are abbreviated",
+      "they are pluralized"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Reading' (a town in England) vs 'reading' (gerund of read) is a:",
+    "choices": [
+      "capitonym",
+      "synonym",
+      "metaphor",
+      "antonym"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Cancer' (zodiac sign) vs 'cancer' (disease) — capitonym?",
+    "choices": [
+      "yes",
+      "no",
+      "homophone only",
+      "antonym"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Mobile' (Alabama city) vs 'mobile' (movable) — the words are:",
+    "choices": [
+      "capitonyms",
+      "synonyms",
+      "antonyms",
+      "compounds"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which pair is NOT a capitonym?",
+    "choices": [
+      "dog/cat",
+      "Polish/polish",
+      "Turkey/turkey",
+      "May/may"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Jordan' (country) vs 'jordan' as a common noun is rare; capitonyms often involve:",
+    "choices": [
+      "proper nouns vs common nouns",
+      "verbs vs adverbs",
+      "prepositions",
+      "interjections"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In 'I want to march in March', 'march' and 'March' are:",
+    "choices": [
+      "capitonyms",
+      "synonyms",
+      "rhymes only",
+      "antonyms"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Bill' (proper name) vs 'bill' (invoice) is a capitonym only if:",
+    "choices": [
+      "capitalization changes meaning",
+      "pronunciation differs",
+      "the spelling changes",
+      "hyphenated"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Capitonyms are a special kind of:",
+    "choices": [
+      "homograph",
       "homophone",
       "synonym",
       "antonym"
@@ -25,82 +205,102 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "MAY (month) vs may (verb)?",
+    "question": "'Lent' (Christian season) vs 'lent' (past tense of lend) — capitonym?",
     "choices": [
-      "capitonym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "yes",
+      "no",
+      "only homophone",
+      "only synonym"
     ],
     "correct": 0
   },
   {
-    "question": "TURKEY (country) vs turkey (bird)?",
+    "question": "'Pole' (from Poland) vs 'pole' (long stick) is a:",
     "choices": [
       "capitonym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "homophone only",
+      "antonym",
+      "rhyme only"
     ],
     "correct": 0
   },
   {
-    "question": "MERCURY (planet) vs mercury (metal)?",
+    "question": "Which best defines a capitonym?",
     "choices": [
-      "capitonym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "same spelling, different meaning by capitalization",
+      "different spellings, same sound",
+      "same sound, different meaning",
+      "opposite meanings"
     ],
     "correct": 0
   },
   {
-    "question": "NICE (city) vs nice (kind)?",
+    "question": "'Frank' (a person's name) vs 'frank' (honest) is a:",
     "choices": [
       "capitonym",
-      "homophone",
       "synonym",
-      "antonym"
+      "antonym",
+      "compound word"
     ],
     "correct": 0
   },
   {
-    "question": "JOB (Bible) vs job (work)?",
+    "question": "'Sunday' (day of week) — is 'sunday' (lowercase) a capitonym pair?",
     "choices": [
-      "capitonym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "no, both refer to the day",
+      "yes always",
+      "only as homophones",
+      "only as antonyms"
     ],
     "correct": 0
   },
   {
-    "question": "EARTH (planet) vs earth (soil)?",
+    "question": "'Welsh' (from Wales) vs 'welsh' (to default on a debt) — capitonym?",
     "choices": [
-      "capitonym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "yes",
+      "no",
+      "only homophone",
+      "only antonym"
     ],
     "correct": 0
   },
   {
-    "question": "CHINA (country) vs china (porcelain)?",
+    "question": "'Roman' (from Rome) vs 'roman' (a font style) shows that capitonyms:",
     "choices": [
-      "capitonym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "span proper nouns and common nouns",
+      "are always animals",
+      "must be verbs",
+      "must rhyme"
     ],
     "correct": 0
   },
   {
-    "question": "SOL (sun, Spanish) vs sol (musical note)?",
+    "question": "'Scotch' (Scottish) vs 'scotch' (to put an end to) — capitonym?",
+    "choices": [
+      "yes",
+      "no",
+      "only synonym",
+      "only antonym"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Apple' (company) vs 'apple' (fruit) — by strict definition, this is a:",
     "choices": [
       "capitonym",
-      "homophone",
       "synonym",
-      "antonym"
+      "antonym",
+      "compound"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which feature does NOT change in a capitonym pair?",
+    "choices": [
+      "the letters used",
+      "the meaning",
+      "the capitalization",
+      "the part of speech sometimes"
     ],
     "correct": 0
   }
