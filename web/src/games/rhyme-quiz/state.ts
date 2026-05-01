@@ -10,14 +10,31 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which word rhymes with 'moon'?", choices: ["man","spoon","mine","mop"], correct: 1 },
   { question: "Which word rhymes with 'fly'?", choices: ["flag","sky","fop","fan"], correct: 1 },
   { question: "Which word rhymes with 'sun'?", choices: ["sat","run","sip","star"], correct: 1 },
-  { question: "Which word rhymes with 'red'?", choices: ["row","bed","red carpet","ride"], correct: 1 },
+  { question: "Which word rhymes with 'red'?", choices: ["row","bed","rot","ride"], correct: 1 },
   { question: "Which word rhymes with 'bake'?", choices: ["band","lake","bug","ban"], correct: 1 },
   { question: "Which word rhymes with 'hop'?", choices: ["help","top","hut","ham"], correct: 1 },
   { question: "Which word rhymes with 'ring'?", choices: ["road","sing","rust","run"], correct: 1 },
   { question: "Which word rhymes with 'cake'?", choices: ["cob","make","cup","cad"], correct: 1 },
   { question: "Which word rhymes with 'bed'?", choices: ["box","red","big","bug"], correct: 1 },
   { question: "Which word rhymes with 'snow'?", choices: ["snip","glow","snug","sat"], correct: 1 },
-  { question: "Which word rhymes with 'goat'?", choices: ["green","boat","grin","gum"], correct: 1 }
+  { question: "Which word rhymes with 'goat'?", choices: ["green","boat","grin","gum"], correct: 1 },
+  { question: "Which word rhymes with 'mouse'?", choices: ["moss","house","mash","must"], correct: 1 },
+  { question: "Which word rhymes with 'duck'?", choices: ["dim","truck","deep","dare"], correct: 1 },
+  { question: "Which word rhymes with 'play'?", choices: ["plot","day","plug","pin"], correct: 1 },
+  { question: "Which word rhymes with 'frog'?", choices: ["fan","log","fig","fun"], correct: 1 },
+  { question: "Which word rhymes with 'bug'?", choices: ["beg","rug","bog","big"], correct: 1 },
+  { question: "Which word rhymes with 'pen'?", choices: ["pat","ten","pop","put"], correct: 1 },
+  { question: "Which word rhymes with 'night'?", choices: ["nap","light","nut","nod"], correct: 1 },
+  { question: "Which word rhymes with 'rain'?", choices: ["rip","train","ran","rod"], correct: 1 },
+  { question: "Which word rhymes with 'shoe'?", choices: ["ship","blue","shy","shop"], correct: 1 },
+  { question: "Which word rhymes with 'sock'?", choices: ["sip","rock","sad","sub"], correct: 1 },
+  { question: "Which word rhymes with 'jail'?", choices: ["jam","sail","jog","jot"], correct: 1 },
+  { question: "Which word rhymes with 'tape'?", choices: ["tip","grape","tar","tin"], correct: 1 },
+  { question: "Which word rhymes with 'pie'?", choices: ["pop","tie","pat","pen"], correct: 1 },
+  { question: "Which word rhymes with 'queen'?", choices: ["quit","green","quack","quip"], correct: 1 },
+  { question: "Which word rhymes with 'wall'?", choices: ["win","ball","weed","wig"], correct: 1 },
+  { question: "Which word rhymes with 'stone'?", choices: ["stop","bone","stick","step"], correct: 1 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: RhymeQuizSettings): RhymeQuizState {

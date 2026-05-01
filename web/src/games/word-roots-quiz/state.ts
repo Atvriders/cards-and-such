@@ -17,7 +17,24 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "The root 'logo' means:", choices: ["place","word/study","time","color"], correct: 1 },
   { question: "The root 'micro' means:", choices: ["small","large","fast","slow"], correct: 0 },
   { question: "The root 'macro' means:", choices: ["small","large","fast","slow"], correct: 1 },
-  { question: "The root 'mort' means:", choices: ["life","death","time","love"], correct: 1 }
+  { question: "The root 'mort' means:", choices: ["life","death","time","love"], correct: 1 },
+  { question: "The root 'aud' means:", choices: ["see","hear","speak","feel"], correct: 1 },
+  { question: "The root 'vid/vis' means:", choices: ["hear","see","speak","touch"], correct: 1 },
+  { question: "The root 'dict' means:", choices: ["read","say/speak","see","hear"], correct: 1 },
+  { question: "The root 'scrib/script' means:", choices: ["read","write","speak","hear"], correct: 1 },
+  { question: "The root 'ped' (Latin) means:", choices: ["hand","foot","head","eye"], correct: 1 },
+  { question: "The root 'man' (Latin) means:", choices: ["foot","hand","head","heart"], correct: 1 },
+  { question: "The root 'cardio' means:", choices: ["mind","heart","lung","bone"], correct: 1 },
+  { question: "The root 'derm' means:", choices: ["bone","skin","blood","muscle"], correct: 1 },
+  { question: "The root 'hydro' means:", choices: ["fire","water","earth","air"], correct: 1 },
+  { question: "The root 'pyro' means:", choices: ["water","fire","earth","air"], correct: 1 },
+  { question: "The root 'cosmo' means:", choices: ["earth","universe","sea","sky"], correct: 1 },
+  { question: "The root 'demo' means:", choices: ["state","people","land","time"], correct: 1 },
+  { question: "The root 'auto' means:", choices: ["other","self","many","few"], correct: 1 },
+  { question: "The root 'biblio' means:", choices: ["paper","book","ink","pen"], correct: 1 },
+  { question: "The root 'psych' means:", choices: ["body","mind/soul","heart","blood"], correct: 1 },
+  { question: "The root 'spec/spect' means:", choices: ["hear","look/see","touch","smell"], correct: 1 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: WordRootsQuizSettings): WordRootsQuizState {

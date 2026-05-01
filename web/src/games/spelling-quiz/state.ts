@@ -7,7 +7,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which spelling is correct?", choices: ["recieve","receive","receeve","recive"], correct: 1 },
   { question: "Which spelling is correct?", choices: ["acommodate","accomodate","accommodate","acomodate"], correct: 2 },
   { question: "Which spelling is correct?", choices: ["seperate","separate","saperate","separete"], correct: 1 },
-  { question: "Which spelling is correct?", choices: ["definately","definately","definitely","definitly"], correct: 2 },
+  { question: "Which spelling is correct?", choices: ["definately","definatly","definitely","definitly"], correct: 2 },
   { question: "Which spelling is correct?", choices: ["occurence","occurrence","ocurrence","occurance"], correct: 1 },
   { question: "Which spelling is correct?", choices: ["embarass","embarrass","embarras","embaras"], correct: 1 },
   { question: "Which spelling is correct?", choices: ["rhythm","rythm","rhythem","ryhthm"], correct: 0 },
@@ -16,8 +16,25 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which spelling is correct?", choices: ["miscellaneous","miscellanous","miscelaneous","miscellanius"], correct: 0 },
   { question: "Which spelling is correct?", choices: ["judgement","judgment","judgemant","judgmant"], correct: 1 },
   { question: "Which spelling is correct?", choices: ["mispell","misspell","mispelll","missspell"], correct: 1 },
-  { question: "Which spelling is correct?", choices: ["wierd","weird","weird","wired"], correct: 1 },
-  { question: "Which spelling is correct?", choices: ["truely","truly","truley","trully"], correct: 1 }
+  { question: "Which spelling is correct?", choices: ["wierd","weird","weeird","wired"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["truely","truly","truley","trully"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["calender","calendar","calandar","calandr"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["maintainance","maintenance","maintenence","maintanance"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["beleive","believe","belive","beliefe"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["acheive","achieve","acheeve","achive"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["foriegn","foreign","forign","foriegne"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["liason","liaison","liaisan","liaisson"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["restaraunt","restaurant","resterant","restraunt"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["tommorrow","tomorrow","tomorow","tommorow"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["wenesday","wednesday","wednsday","weddnesday"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["febuary","february","febrary","februarry"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["goverment","government","govenment","governmant"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["enviroment","environment","enviornment","environmant"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["arguement","argument","argumant","argumeent"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["priviledge","privilege","privelege","privlege"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["pronounciation","pronunciation","prononciation","pronounsation"], correct: 1 },
+  { question: "Which spelling is correct?", choices: ["vaccum","vacuum","vaccuum","vacume"], correct: 1 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SpellingQuizSettings): SpellingQuizState {

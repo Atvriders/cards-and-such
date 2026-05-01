@@ -17,7 +17,24 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "The opposite of 'always' is:", choices: ["forever","never","often","yet"], correct: 1 },
   { question: "The opposite of 'true' is:", choices: ["real","false","sure","fact"], correct: 1 },
   { question: "The opposite of 'arrive' is:", choices: ["depart","reach","come","greet"], correct: 0 },
-  { question: "The opposite of 'expand' is:", choices: ["enlarge","shrink","grow","widen"], correct: 1 }
+  { question: "The opposite of 'expand' is:", choices: ["enlarge","shrink","grow","widen"], correct: 1 },
+  { question: "The opposite of 'accept' is:", choices: ["receive","reject","take","agree"], correct: 1 },
+  { question: "The opposite of 'ancient' is:", choices: ["old","modern","aged","antique"], correct: 1 },
+  { question: "The opposite of 'brave' is:", choices: ["bold","cowardly","valiant","daring"], correct: 1 },
+  { question: "The opposite of 'cheap' is:", choices: ["thrifty","expensive","low","common"], correct: 1 },
+  { question: "The opposite of 'create' is:", choices: ["build","destroy","make","form"], correct: 1 },
+  { question: "The opposite of 'dull' is:", choices: ["plain","sharp","drab","boring"], correct: 1 },
+  { question: "The opposite of 'enter' is:", choices: ["arrive","exit","join","approach"], correct: 1 },
+  { question: "The opposite of 'friend' is:", choices: ["ally","enemy","buddy","pal"], correct: 1 },
+  { question: "The opposite of 'humble' is:", choices: ["modest","arrogant","shy","meek"], correct: 1 },
+  { question: "The opposite of 'innocent' is:", choices: ["pure","guilty","naive","honest"], correct: 1 },
+  { question: "The opposite of 'major' is:", choices: ["large","minor","main","huge"], correct: 1 },
+  { question: "The opposite of 'natural' is:", choices: ["organic","artificial","wild","raw"], correct: 1 },
+  { question: "The opposite of 'private' is:", choices: ["secret","public","hidden","sealed"], correct: 1 },
+  { question: "The opposite of 'rough' is:", choices: ["coarse","smooth","harsh","jagged"], correct: 1 },
+  { question: "The opposite of 'strong' is:", choices: ["mighty","weak","tough","firm"], correct: 1 },
+  { question: "The opposite of 'visible' is:", choices: ["seen","invisible","clear","evident"], correct: 1 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: AntonymQuizSettings): AntonymQuizState {

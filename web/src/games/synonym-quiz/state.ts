@@ -17,7 +17,24 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "A synonym for 'wealthy' is:", choices: ["poor","affluent","frugal","empty"], correct: 1 },
   { question: "A synonym for 'angry' is:", choices: ["calm","furious","glad","kind"], correct: 1 },
   { question: "A synonym for 'shiny' is:", choices: ["dull","gleaming","old","drab"], correct: 1 },
-  { question: "A synonym for 'tired' is:", choices: ["alert","exhausted","strong","fast"], correct: 1 }
+  { question: "A synonym for 'tired' is:", choices: ["alert","exhausted","strong","fast"], correct: 1 },
+  { question: "A synonym for 'smart' is:", choices: ["dim","intelligent","slow","weak"], correct: 1 },
+  { question: "A synonym for 'beautiful' is:", choices: ["plain","gorgeous","ugly","drab"], correct: 1 },
+  { question: "A synonym for 'small' is:", choices: ["large","diminutive","broad","tall"], correct: 1 },
+  { question: "A synonym for 'odd' is:", choices: ["normal","peculiar","even","common"], correct: 1 },
+  { question: "A synonym for 'sad' is:", choices: ["cheerful","melancholy","elated","lively"], correct: 1 },
+  { question: "A synonym for 'help' is:", choices: ["hinder","assist","ignore","block"], correct: 1 },
+  { question: "A synonym for 'show' is:", choices: ["hide","display","cover","lose"], correct: 1 },
+  { question: "A synonym for 'gather' is:", choices: ["scatter","collect","drop","lose"], correct: 1 },
+  { question: "A synonym for 'fix' is:", choices: ["break","repair","ruin","ignore"], correct: 1 },
+  { question: "A synonym for 'true' is:", choices: ["false","accurate","fake","wrong"], correct: 1 },
+  { question: "A synonym for 'easy' is:", choices: ["hard","simple","tough","tricky"], correct: 1 },
+  { question: "A synonym for 'reply' is:", choices: ["ask","respond","wait","leave"], correct: 1 },
+  { question: "A synonym for 'kind' is:", choices: ["cruel","benevolent","rude","harsh"], correct: 1 },
+  { question: "A synonym for 'idea' is:", choices: ["fact","concept","rule","law"], correct: 1 },
+  { question: "A synonym for 'choose' is:", choices: ["reject","select","discard","ignore"], correct: 1 },
+  { question: "A synonym for 'end' is:", choices: ["start","conclude","open","begin"], correct: 1 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SynonymQuizSettings): SynonymQuizState {

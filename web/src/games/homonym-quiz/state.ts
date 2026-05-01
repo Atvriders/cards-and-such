@@ -17,7 +17,24 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which spelling means 'to pull or carry'?", choices: ["hall","haul","hail","hull"], correct: 1 },
   { question: "A 'pitcher' can mean a baseball player or a:", choices: ["jug","cake","car","trunk"], correct: 0 },
   { question: "Which homophone means 'allowed'?", choices: ["aloud","allowed","alowed","alloud"], correct: 1 },
-  { question: "Which spelling means 'a unit of weight'?", choices: ["pour","pore","poor","poure"], correct: 0 }
+  { question: "Which spelling means 'a unit of weight'?", choices: ["pour","pore","poor","poure"], correct: 0 },
+  { question: "A 'bat' can be a flying mammal or a:", choices: ["club for hitting","fish","tree","bird"], correct: 0 },
+  { question: "A 'spring' can mean a season or a:", choices: ["coil/source of water","leaf","stone","song"], correct: 0 },
+  { question: "A 'match' can be for fire or a:", choices: ["contest","shoe","house","fruit"], correct: 0 },
+  { question: "A 'bark' can be a tree's covering or a:", choices: ["dog's sound","cat's meow","fish scale","insect"], correct: 0 },
+  { question: "A 'ring' can be jewelry or a:", choices: ["sound from a bell","tree leaf","shape only","shoe"], correct: 0 },
+  { question: "A 'park' can be green space or a:", choices: ["place to leave a car","tall building","river bend","shoe"], correct: 0 },
+  { question: "A 'date' can be a fruit or a:", choices: ["calendar day","fish","metal","bird"], correct: 0 },
+  { question: "A 'right' can mean correct or:", choices: ["a direction","a fish","a song","a fruit"], correct: 0 },
+  { question: "A 'palm' can be a hand part or a:", choices: ["tree","shoe","river","insect"], correct: 0 },
+  { question: "Which spelling means 'opposite of 'wrong''?", choices: ["write","right","rite","wright"], correct: 1 },
+  { question: "Which spelling means 'to compose words'?", choices: ["write","right","rite","wright"], correct: 0 },
+  { question: "Which spelling means 'a ceremony'?", choices: ["write","right","rite","wright"], correct: 2 },
+  { question: "Which spelling means 'a male sheep'?", choices: ["ram","rams","raam","rame"], correct: 0 },
+  { question: "A 'fly' can be an insect or:", choices: ["to move through air","to swim","to dig","to crawl"], correct: 0 },
+  { question: "A 'trunk' can be a tree's stem or a:", choices: ["car storage area","bird wing","shoe","leaf"], correct: 0 },
+  { question: "Which spelling means 'a small body of water'?", choices: ["pond","pawned","ponned","pondd"], correct: 0 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: HomonymQuizSettings): HomonymQuizState {

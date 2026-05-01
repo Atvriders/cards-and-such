@@ -17,7 +17,24 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which prefix would form 'unhappy'?", choices: ["pre-","un-","re-","sub-"], correct: 1 },
   { question: "Which prefix would form 'rewrite'?", choices: ["mis-","re-","pre-","un-"], correct: 1 },
   { question: "The prefix 'anti-' means:", choices: ["with","against","near","over"], correct: 1 },
-  { question: "The prefix 'auto-' means:", choices: ["self","other","under","over"], correct: 0 }
+  { question: "The prefix 'auto-' means:", choices: ["self","other","under","over"], correct: 0 },
+  { question: "The prefix 'co-' means:", choices: ["alone","together/with","against","before"], correct: 1 },
+  { question: "The prefix 'dis-' means:", choices: ["with","apart/not","beside","over"], correct: 1 },
+  { question: "The prefix 'mono-' means:", choices: ["many","one","two","three"], correct: 1 },
+  { question: "The prefix 'poly-' means:", choices: ["one","many","two","few"], correct: 1 },
+  { question: "The prefix 'multi-' means:", choices: ["one","many","small","alone"], correct: 1 },
+  { question: "The prefix 'mega-' means:", choices: ["small","large/great","few","low"], correct: 1 },
+  { question: "The prefix 'micro-' means:", choices: ["large","small","fast","slow"], correct: 1 },
+  { question: "The prefix 'semi-' means:", choices: ["whole","half","double","none"], correct: 1 },
+  { question: "The prefix 'over-' means:", choices: ["under","above/too much","behind","alone"], correct: 1 },
+  { question: "The prefix 'under-' means:", choices: ["above","below/too little","around","with"], correct: 1 },
+  { question: "The prefix 'ex-' means:", choices: ["inside","out/former","over","near"], correct: 1 },
+  { question: "The prefix 'in-' often means:", choices: ["with","not/into","around","above"], correct: 1 },
+  { question: "The prefix 'fore-' means:", choices: ["after","before/in front","below","alone"], correct: 1 },
+  { question: "The prefix 'post-' means:", choices: ["before","after","during","with"], correct: 1 },
+  { question: "Which prefix would form 'biweekly'?", choices: ["pre-","bi-","tri-","uni-"], correct: 1 },
+  { question: "Which prefix would form 'preview'?", choices: ["post-","pre-","re-","un-"], correct: 1 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PrefixQuizSettings): PrefixQuizState {

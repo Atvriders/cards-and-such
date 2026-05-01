@@ -17,7 +17,24 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "'Laconic' means:", choices: ["wordy","using few words","loud","late"], correct: 1 },
   { question: "'Obfuscate' means:", choices: ["clarify","make unclear","build","shrink"], correct: 1 },
   { question: "'Sagacious' means:", choices: ["foolish","wise","tired","quick"], correct: 1 },
-  { question: "'Erudite' means:", choices: ["learned/scholarly","silly","sad","brief"], correct: 0 }
+  { question: "'Erudite' means:", choices: ["learned/scholarly","silly","sad","brief"], correct: 0 },
+  { question: "'Benevolent' means:", choices: ["cruel","kind/well-meaning","lazy","rich"], correct: 1 },
+  { question: "'Capricious' means:", choices: ["steady","impulsive/changeable","calm","wise"], correct: 1 },
+  { question: "'Diligent' means:", choices: ["lazy","hardworking","noisy","weak"], correct: 1 },
+  { question: "'Eloquent' means:", choices: ["awkward","fluent/persuasive","quiet","rude"], correct: 1 },
+  { question: "'Frugal' means:", choices: ["wasteful","thrifty","rich","lazy"], correct: 1 },
+  { question: "'Gregarious' means:", choices: ["shy","sociable","angry","tired"], correct: 1 },
+  { question: "'Hackneyed' means:", choices: ["fresh","overused/cliched","exotic","bold"], correct: 1 },
+  { question: "'Impetuous' means:", choices: ["careful","rash/impulsive","calm","wise"], correct: 1 },
+  { question: "'Juxtapose' means:", choices: ["separate widely","place side by side","destroy","duplicate"], correct: 1 },
+  { question: "'Mellifluous' means:", choices: ["harsh","sweet-sounding","silent","fast"], correct: 1 },
+  { question: "'Nefarious' means:", choices: ["honest","wicked/evil","shy","playful"], correct: 1 },
+  { question: "'Ostentatious' means:", choices: ["modest","showy/pretentious","plain","private"], correct: 1 },
+  { question: "'Pragmatic' means:", choices: ["theoretical","practical","lazy","wild"], correct: 1 },
+  { question: "'Recalcitrant' means:", choices: ["obedient","stubbornly resistant","kind","happy"], correct: 1 },
+  { question: "'Tenacious' means:", choices: ["weak","persistent","lazy","brief"], correct: 1 },
+  { question: "'Vehement' means:", choices: ["mild","intensely passionate","calm","quiet"], correct: 1 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: VocabularyBuilderSettings): VocabularyBuilderState {

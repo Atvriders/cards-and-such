@@ -17,7 +17,24 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which suffix would create 'beautiful'?", choices: ["-less","-ful","-ly","-er"], correct: 1 },
   { question: "Which suffix would create 'quickly'?", choices: ["-able","-ly","-ous","-tion"], correct: 1 },
   { question: "The suffix '-ish' typically means:", choices: ["like/somewhat","completely","strongly","never"], correct: 0 },
-  { question: "The suffix '-hood' often forms:", choices: ["a number","a state/condition","an adverb","a verb"], correct: 1 }
+  { question: "The suffix '-hood' often forms:", choices: ["a number","a state/condition","an adverb","a verb"], correct: 1 },
+  { question: "The suffix '-ment' typically forms:", choices: ["a verb","a noun","an adverb","a preposition"], correct: 1 },
+  { question: "The suffix '-ity' typically forms:", choices: ["a verb","a noun (quality)","an adverb","an article"], correct: 1 },
+  { question: "The suffix '-ship' typically forms:", choices: ["a verb","a noun (state/relation)","an adverb","a number"], correct: 1 },
+  { question: "The suffix '-en' often forms:", choices: ["a noun","a verb (to make)","an article","a number"], correct: 1 },
+  { question: "The suffix '-ify' typically forms:", choices: ["a noun","a verb (to make)","an adverb","an article"], correct: 1 },
+  { question: "The suffix '-ive' typically forms:", choices: ["a noun","an adjective","an adverb","a verb"], correct: 1 },
+  { question: "The suffix '-ic' typically forms:", choices: ["a verb","an adjective","an adverb","a noun"], correct: 1 },
+  { question: "The suffix '-al' typically forms:", choices: ["a verb","an adjective","an article","a number"], correct: 1 },
+  { question: "The suffix '-ant' often denotes:", choices: ["place","one who/agent","time","number"], correct: 1 },
+  { question: "The suffix '-ent' often denotes:", choices: ["place","one who/agent","time","number"], correct: 1 },
+  { question: "Which suffix would create 'kindness'?", choices: ["-ish","-ness","-ous","-able"], correct: 1 },
+  { question: "Which suffix would create 'readable'?", choices: ["-ous","-able","-ly","-ist"], correct: 1 },
+  { question: "Which suffix would create 'pianist'?", choices: ["-er","-ist","-or","-ant"], correct: 1 },
+  { question: "Which suffix would create 'darken'?", choices: ["-ize","-en","-ify","-ate"], correct: 1 },
+  { question: "Which suffix would create 'friendship'?", choices: ["-ness","-ship","-hood","-ment"], correct: 1 },
+  { question: "Which suffix would create 'magnify'?", choices: ["-ize","-en","-ify","-ate"], correct: 2 }
+
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SuffixQuizSettings): SuffixQuizState {
