@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "'Macarena' was the song of?", choices: ["1995","1996","1997","1998"], correct: 1 },
   { question: "'Shape of You' (2017) is by?", choices: ["Ed Sheeran","Sam Smith","James Arthur","Charlie Puth"], correct: 0 },
   { question: "'Uptown Funk' (2014) is by Mark Ronson and?", choices: ["Bruno Mars","Cee-Lo","Pharrell","Adam Levine"], correct: 0 },
-  { question: "'Cheerleader' (Felix Jaehn remix, 2014/15) is by?", choices: ["OMI","Magic!","Major Lazer","MØ"], correct: 0 }
+  { question: "'Cheerleader' (Felix Jaehn remix, 2014/15) is by?", choices: ["OMI","Magic!","Major Lazer","MØ"], correct: 0 },
+  { question: "\"I Gotta Feeling\" (2009) is by?", choices: ["Black Eyed Peas","LMFAO","Pitbull","Flo Rida"], correct: 0 },
+  { question: "\"Party in the U.S.A.\" is by?", choices: ["Miley Cyrus","Katy Perry","Hilary Duff","Selena Gomez"], correct: 0 },
+  { question: "\"Cheap Thrills\" (2016) is by?", choices: ["Sia","Rihanna","Calvin Harris","Zara Larsson"], correct: 0 },
+  { question: "\"Senorita\" (2019) is by Shawn Mendes and?", choices: ["Camila Cabello","Selena Gomez","Halsey","Dua Lipa"], correct: 0 },
+  { question: "\"Havana\" (2017) is by?", choices: ["Camila Cabello","Becky G","Demi Lovato","Selena Gomez"], correct: 0 },
+  { question: "\"Cheerleader\" original was released by OMI in?", choices: ["2012","2014","2015","2016"], correct: 0 },
+  { question: "\"Bad Romance\" topped charts in which summer?", choices: ["2008","2009","2010","2011"], correct: 1 },
+  { question: "\"As It Was\" by Harry Styles dominated summer of?", choices: ["2021","2022","2023","2024"], correct: 1 },
+  { question: "\"One Kiss\" (2018) is by Calvin Harris and?", choices: ["Dua Lipa","Rihanna","Ellie Goulding","Sam Smith"], correct: 0 },
+  { question: "\"I Like It\" (2018) is by Cardi B, Bad Bunny and?", choices: ["J Balvin","Maluma","Daddy Yankee","Ozuna"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SummerHitsQuizSettings): SummerHitsQuizState {

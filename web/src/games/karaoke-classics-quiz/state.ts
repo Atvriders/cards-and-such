@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "'Africa' became a viral karaoke hit by which '80s band?", choices: ["Toto","Asia","Genesis","Yes"], correct: 0 },
   { question: "'Bohemian Rhapsody' was extended to fame in which 1992 film?", choices: ["Wayne's World","Back to the Future","Top Gun","The Big Lebowski"], correct: 0 },
   { question: "Karaoke machines are commonly hooked up to TVs to display?", choices: ["Lyrics","Pitch coaching","Album art","Music videos"], correct: 0 },
-  { question: "'Can't Help Falling in Love' is most associated with?", choices: ["Elvis Presley","Frank Sinatra","Roy Orbison","Buddy Holly"], correct: 0 }
+  { question: "'Can't Help Falling in Love' is most associated with?", choices: ["Elvis Presley","Frank Sinatra","Roy Orbison","Buddy Holly"], correct: 0 },
+  { question: "\"Piano Man\" is a karaoke classic by?", choices: ["Billy Joel","Elton John","Barry Manilow","Neil Sedaka"], correct: 0 },
+  { question: "\"Friends in Low Places\" is by which country star?", choices: ["George Strait","Garth Brooks","Alan Jackson","Toby Keith"], correct: 1 },
+  { question: "\"Build Me Up Buttercup\" is by?", choices: ["The Foundations","The Drifters","The Temptations","The Hollies"], correct: 0 },
+  { question: "\"Faithfully\" is another karaoke staple by?", choices: ["Journey","Foreigner","Boston","Styx"], correct: 0 },
+  { question: "\"Tiny Dancer\" is by?", choices: ["Elton John","Billy Joel","James Taylor","Cat Stevens"], correct: 0 },
+  { question: "\"Stand By Me\" is by?", choices: ["Sam Cooke","Ben E. King","Otis Redding","Marvin Gaye"], correct: 1 },
+  { question: "\"Hey Jude\" famously ends with how many \"na na na\" repetitions on the chorus?", choices: ["8","12","16","many"], correct: 3 },
+  { question: "\"Livin' on a Prayer\" key change happens in which key direction?", choices: ["Up","Down","Stays","Modulates twice"], correct: 0 },
+  { question: "\"Hotel California\" is by?", choices: ["Eagles","Fleetwood Mac","Doobie Brothers","America"], correct: 0 },
+  { question: "\"Summer Lovin'\" is a duet from Grease between Sandy and?", choices: ["Danny","Kenickie","Doody","Sonny"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: KaraokeClassicsQuizSettings): KaraokeClassicsQuizState {

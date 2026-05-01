@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Bucks Fizz won 1981 with which song?", choices: ["Making Your Mind Up","Diggi-Loo Diggi-Ley","What's Another Year","Hold Me Now"], correct: 0 },
   { question: "Johnny Logan has won Eurovision how many times as a performer?", choices: ["1","2","3","4"], correct: 1 },
   { question: "Eurovision is organized by which broadcasting union?", choices: ["EBU","BBC","RTL","ARD"], correct: 0 },
-  { question: "Big Five countries get a free pass — which is NOT one?", choices: ["UK","Germany","Norway","Spain"], correct: 2 }
+  { question: "Big Five countries get a free pass — which is NOT one?", choices: ["UK","Germany","Norway","Spain"], correct: 2 },
+  { question: "Loreen returned and won Eurovision again in which year?", choices: ["2021","2022","2023","2024"], correct: 2 },
+  { question: "Dana won 1970 for which country with \"All Kinds of Everything\"?", choices: ["UK","Ireland","Spain","Netherlands"], correct: 1 },
+  { question: "Which Eurovision winner first opened with \"We are the winners of Eurovision\"?", choices: ["Lordi","LT United","Verka Serduchka","Dustin"], correct: 1 },
+  { question: "Italy returned to Eurovision in which year after a long break?", choices: ["2009","2010","2011","2012"], correct: 2 },
+  { question: "Australia debuted in Eurovision in which year?", choices: ["2014","2015","2016","2017"], correct: 1 },
+  { question: "\"Diva\" won 1998 for Israel sung by which artist?", choices: ["Dana International","Netta","Ofra Haza","Izhar Cohen"], correct: 0 },
+  { question: "Eurovision 1969 had how many joint winners?", choices: ["2","3","4","5"], correct: 2 },
+  { question: "\"Rise Like a Phoenix\" was sung by Conchita Wurst representing?", choices: ["Germany","Austria","Switzerland","Hungary"], correct: 1 },
+  { question: "\"Heroes\" won Eurovision 2015 for Sweden sung by?", choices: ["Loreen","Måns Zelmerlöw","John Lundvik","Robin Bengtsson"], correct: 1 },
+  { question: "Which country won Eurovision 2024 with \"The Code\"?", choices: ["Switzerland","Israel","Croatia","France"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: EurovisionQuizSettings): EurovisionQuizState {

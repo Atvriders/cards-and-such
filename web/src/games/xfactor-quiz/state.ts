@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which British group won X Factor 2008?", choices: ["JLS","Diversity","Same Difference","Alexandra Burke"], correct: 3 },
   { question: "Demi Lovato joined X Factor USA in season?", choices: ["1","2","3","Both 2 and 3"], correct: 3 },
   { question: "Wagner Carrilho was a UK X Factor novelty act in?", choices: ["2009","2010","2011","2012"], correct: 1 },
-  { question: "Louis Tomlinson is a former contestant who became which kind of judge?", choices: ["X Factor UK","X Factor USA","America's Got Talent","The Voice"], correct: 0 }
+  { question: "Louis Tomlinson is a former contestant who became which kind of judge?", choices: ["X Factor UK","X Factor USA","America's Got Talent","The Voice"], correct: 0 },
+  { question: "One Direction finished what place on X Factor UK 2010?", choices: ["1st","2nd","3rd","4th"], correct: 2 },
+  { question: "Matt Cardle won X Factor UK in?", choices: ["2009","2010","2011","2012"], correct: 1 },
+  { question: "Shayne Ward won X Factor UK in?", choices: ["2004","2005","2006","2007"], correct: 1 },
+  { question: "Ben Haenow won X Factor UK in?", choices: ["2013","2014","2015","2016"], correct: 1 },
+  { question: "Rylan Clark famously placed 5th on X Factor UK in?", choices: ["2011","2012","2013","2014"], correct: 1 },
+  { question: "Tate Stevens won which season of X Factor USA?", choices: ["1","2","3","None"], correct: 1 },
+  { question: "Joe McElderry won X Factor UK in?", choices: ["2008","2009","2010","2011"], correct: 1 },
+  { question: "Which judge's nickname on X Factor UK was \"The Boss\"?", choices: ["Simon Cowell","Louis Walsh","Sharon Osbourne","Cheryl"], correct: 0 },
+  { question: "\"Bedroom Auditions\" was an early version of which round?", choices: ["Boot Camp","Judges' Houses","Live Shows","Six Chair Challenge"], correct: 1 },
+  { question: "Which X Factor UK series introduced the Six Chair Challenge?", choices: ["2012","2013","2014","2015"], correct: 2 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: XfactorQuizSettings): XfactorQuizState {

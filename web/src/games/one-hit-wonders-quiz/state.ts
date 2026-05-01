@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "'Ice Ice Baby' is by?", choices: ["Vanilla Ice","MC Hammer","Tone Loc","Color Me Badd"], correct: 0 },
   { question: "'I Touch Myself' is by?", choices: ["Divinyls","Tracy Chapman","Sinead O'Connor","Cher"], correct: 0 },
   { question: "'Mickey' is by Toni?", choices: ["Basil","Braxton","Childs","Tennille"], correct: 0 },
-  { question: "'Tainted Love' was a hit cover by?", choices: ["Soft Cell","Marilyn Manson","Gloria Jones","Pulp"], correct: 0 }
+  { question: "'Tainted Love' was a hit cover by?", choices: ["Soft Cell","Marilyn Manson","Gloria Jones","Pulp"], correct: 0 },
+  { question: "\"Spirit in the Sky\" (1969) is by?", choices: ["Norman Greenbaum","Three Dog Night","Steppenwolf","CCR"], correct: 0 },
+  { question: "\"Video Killed the Radio Star\" is by?", choices: ["The Buggles","Trevor Horn","Soft Cell","OMD"], correct: 0 },
+  { question: "\"Save Tonight\" is by?", choices: ["Eagle-Eye Cherry","Tal Bachman","Jakob Dylan","Neneh Cherry"], correct: 0 },
+  { question: "\"Cotton Eye Joe\" (1995) is by?", choices: ["Rednex","Vengaboys","Dr. Alban","Aqua"], correct: 0 },
+  { question: "\"You Get What You Give\" is by?", choices: ["New Radicals","Sugar Ray","Marcy Playground","Cake"], correct: 0 },
+  { question: "\"Pumped Up Kicks\" is by?", choices: ["Foster the People","MGMT","Phoenix","Vampire Weekend"], correct: 0 },
+  { question: "\"Lump\" (1995) is by?", choices: ["Presidents of the USA","The Refreshments","Better Than Ezra","Spin Doctors"], correct: 0 },
+  { question: "\"Breakfast at Tiffany's\" is by?", choices: ["Deep Blue Something","Marcy Playground","Better Than Ezra","Sister Hazel"], correct: 0 },
+  { question: "\"All Star\" is by?", choices: ["Smash Mouth","Sugar Ray","Eve 6","Lit"], correct: 0 },
+  { question: "\"Somebody That I Used to Know\" is by Gotye featuring?", choices: ["Kimbra","Lana Del Rey","Sia","Ellie Goulding"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: OneHitWondersQuizSettings): OneHitWondersQuizState {

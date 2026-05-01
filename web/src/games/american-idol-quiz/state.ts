@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Idol's longtime announcer was?", choices: ["Don LaFontaine","Ryan Seacrest","Don Pardo","Ed Powell"], correct: 0 },
   { question: "Fantasia Barrino won which season?", choices: ["2","3","4","5"], correct: 1 },
   { question: "Which judge replaced Simon Cowell in 2011?", choices: ["Jennifer Lopez","Steven Tyler","Both","Mariah Carey"], correct: 2 },
-  { question: "Lionel Richie joined the ABC reboot panel along with?", choices: ["Katy Perry & Luke Bryan","JLo & Keith","Mariah & Nicki","Harry Connick Jr."], correct: 0 }
+  { question: "Lionel Richie joined the ABC reboot panel along with?", choices: ["Katy Perry & Luke Bryan","JLo & Keith","Mariah & Nicki","Harry Connick Jr."], correct: 0 },
+  { question: "Ruben Studdard won Season 2, beating which finalist?", choices: ["Clay Aiken","Kimberley Locke","Justin Guarini","Diana DeGarmo"], correct: 0 },
+  { question: "Carrie Underwood's coronation song was?", choices: ["Inside Your Heaven","Some Hearts","Jesus Take the Wheel","Before He Cheats"], correct: 0 },
+  { question: "Which judge was famously known for the catchphrase \"Yo dawg\"?", choices: ["Simon Cowell","Randy Jackson","Steven Tyler","Harry Connick Jr."], correct: 1 },
+  { question: "Scotty McCreery won which season?", choices: ["8","9","10","11"], correct: 2 },
+  { question: "Lee DeWyze won Season 9 against which runner-up?", choices: ["Crystal Bowersox","Siobhan Magnus","Casey James","Aaron Kelly"], correct: 0 },
+  { question: "Mariah Carey and Nicki Minaj judged together in which season?", choices: ["11","12","13","14"], correct: 1 },
+  { question: "Idol's longtime mentor Debbie Allen worked on which area?", choices: ["Vocal coaching","Choreography","Songwriting","Styling"], correct: 1 },
+  { question: "Taylor Hicks, Season 5 winner, was nicknamed?", choices: ["Soul Patrol","Hicksville","The Crooner","Gray Wonder"], correct: 0 },
+  { question: "Iam Tongi won which season of American Idol?", choices: ["19","20","21","22"], correct: 2 },
+  { question: "Which judge departed after Season 19 of the ABC reboot?", choices: ["Katy Perry","Lionel Richie","Luke Bryan","Ryan Seacrest"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: AmericanIdolQuizSettings): AmericanIdolQuizState {

@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Niall Horan first joined The Voice in?", choices: ["2021","2022","2023","2024"], correct: 2 },
   { question: "Which Season 3 winner is a country singer-songwriter?", choices: ["Cassadee Pope","Danielle Bradbery","Craig Wayne Boyd","Sundance Head"], correct: 0 },
   { question: "John Legend won Season 16 with which contestant?", choices: ["Maelyn Jarmon","Chevel Shepherd","Brynn Cartelli","Jordan Smith"], correct: 0 },
-  { question: "Coaches sit during blind auditions facing?", choices: ["Audience","Each other","Away from contestant","Toward contestant"], correct: 2 }
+  { question: "Coaches sit during blind auditions facing?", choices: ["Audience","Each other","Away from contestant","Toward contestant"], correct: 2 },
+  { question: "Javier Colon won which season of The Voice?", choices: ["1","2","3","4"], correct: 0 },
+  { question: "Sundance Head won which season under coach Blake Shelton?", choices: ["10","11","12","13"], correct: 1 },
+  { question: "Which coach used a \"Block\" most strategically against Blake?", choices: ["Adam Levine","Kelly Clarkson","John Legend","Pharrell"], correct: 0 },
+  { question: "The Voice's \"Steal\" was first introduced in which round?", choices: ["Blind Auditions","Battles","Knockouts","Playoffs"], correct: 1 },
+  { question: "Gwen Stefani first joined as coach in which season?", choices: ["7","8","9","10"], correct: 0 },
+  { question: "Chance the Rapper joined as coach in season?", choices: ["15","16","17","18"], correct: 1 },
+  { question: "Cam Anthony won The Voice Season 20 under coach?", choices: ["Blake Shelton","John Legend","Kelly Clarkson","Nick Jonas"], correct: 0 },
+  { question: "How many contestants are typically on each team after Battles?", choices: ["4","5","6","8"], correct: 2 },
+  { question: "Bryce Leatherwood won Season 22 coached by?", choices: ["Blake Shelton","John Legend","Kelly Clarkson","Camila Cabello"], correct: 0 },
+  { question: "Which coach left then returned multiple times — known for the \"block\"?", choices: ["Christina Aguilera","Shakira","Jennifer Hudson","Miley Cyrus"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: VoiceShowQuizSettings): VoiceShowQuizState {

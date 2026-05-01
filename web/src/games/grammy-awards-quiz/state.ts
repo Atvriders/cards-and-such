@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Billie Eilish at 18 became the youngest to win Album of the Year — for which album?", choices: ["Don't Smile at Me","When We All Fall Asleep, Where Do We Go?","Happier Than Ever","Hit Me Hard and Soft"], correct: 1 },
   { question: "How many gramophones do statuettes have in a Grammy?", choices: ["1","2","3","12"], correct: 0 },
   { question: "Which jazz icon won 8 Grammys in a single year (1991)?", choices: ["Wynton Marsalis","Quincy Jones","Branford Marsalis","Bobby McFerrin"], correct: 1 },
-  { question: "U2 won Album of the Year in 2006 for?", choices: ["Achtung Baby","All That You Can't Leave Behind","How to Dismantle an Atomic Bomb","No Line on the Horizon"], correct: 2 }
+  { question: "U2 won Album of the Year in 2006 for?", choices: ["Achtung Baby","All That You Can't Leave Behind","How to Dismantle an Atomic Bomb","No Line on the Horizon"], correct: 2 },
+  { question: "Beyoncé broke the record for most Grammy wins ever in which year?", choices: ["2021","2022","2023","2024"], correct: 2 },
+  { question: "Who won the first Grammy for Album of the Year (1959)?", choices: ["Frank Sinatra","Henry Mancini","Ella Fitzgerald","Bobby Darin"], correct: 1 },
+  { question: "\"Bad Guy\" by Billie Eilish won Record of the Year in?", choices: ["2019","2020","2021","2022"], correct: 1 },
+  { question: "Bruno Mars and Anderson .Paak won Album of the Year 2022 as which group?", choices: ["Silk Sonic","Black Pumas","LSD","Magic!"], correct: 0 },
+  { question: "Which Grammy ceremony had Jennifer Lopez's green Versace dress moment?", choices: ["1999","2000","2001","2002"], correct: 1 },
+  { question: "Harry Styles won Album of the Year 2023 for which album?", choices: ["Fine Line","Harry's House","Harry Styles","As It Was"], correct: 1 },
+  { question: "Hip-hop's first Album of the Year went to which artist (1999)?", choices: ["Lauryn Hill","OutKast","Kanye West","Eminem"], correct: 0 },
+  { question: "Which producer won Producer of the Year a record number of times?", choices: ["Quincy Jones","Babyface","Rick Rubin","Pharrell"], correct: 1 },
+  { question: "Taylor Swift became the first artist to win Album of the Year how many times?", choices: ["2","3","4","5"], correct: 2 },
+  { question: "\"Uptown Funk\" by Mark Ronson ft. Bruno Mars won Record of the Year in?", choices: ["2015","2016","2017","2018"], correct: 1 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: GrammyAwardsQuizSettings): GrammyAwardsQuizState {

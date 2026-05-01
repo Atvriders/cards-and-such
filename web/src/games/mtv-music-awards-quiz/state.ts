@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which act famously performed inside a giant clear orb?", choices: ["Pink","Beyoncé","Lady Gaga","Britney Spears"], correct: 0 },
   { question: "The VMAs were held in NYC's Madison Square Garden multiple times. The first was?", choices: ["1984","1986","1989","1991"], correct: 0 },
   { question: "Who hosted the VMAs the most times?", choices: ["Chris Rock","Jimmy Fallon","Russell Brand","No host"], correct: 0 },
-  { question: "Which 90s alt-rock band made fun of MTV's awards culture in their 1995 set?", choices: ["Nirvana","Pearl Jam","Rage Against the Machine","Beastie Boys"], correct: 1 }
+  { question: "Which 90s alt-rock band made fun of MTV's awards culture in their 1995 set?", choices: ["Nirvana","Pearl Jam","Rage Against the Machine","Beastie Boys"], correct: 1 },
+  { question: "Who won Video of the Year at the first VMAs (1984)?", choices: ["Michael Jackson","The Cars","Herbie Hancock","David Bowie"], correct: 1 },
+  { question: "Madonna kissed which artists during her 2003 VMA performance?", choices: ["Britney & Christina","Britney & Pink","Christina & Pink","Beyoncé & Britney"], correct: 0 },
+  { question: "Beyoncé revealed her pregnancy with Blue Ivy at which VMAs?", choices: ["2010","2011","2012","2013"], correct: 1 },
+  { question: "Which boy band performed \"Bye Bye Bye\" with their famous puppet strings?", choices: ["Backstreet Boys","*NSYNC","98 Degrees","BSB"], correct: 1 },
+  { question: "Lil Nas X performed \"Industry Baby\" at which VMAs?", choices: ["2020","2021","2022","2023"], correct: 1 },
+  { question: "Taylor Swift won Video of the Year 2015 for?", choices: ["Blank Space","Bad Blood","Shake It Off","Wildest Dreams"], correct: 1 },
+  { question: "Which artist hosted the 2003 VMAs alongside Snoop Dogg?", choices: ["Chris Rock","Russell Brand","Eddie Murphy","Jamie Foxx"], correct: 2 },
+  { question: "Sinéad O'Connor refused to attend the VMAs in what year?", choices: ["1989","1990","1991","1992"], correct: 1 },
+  { question: "The \"Best New Artist\" Moonperson 1985 went to whom?", choices: ["Eurythmics","'Til Tuesday","Tears for Fears","Madonna"], correct: 1 },
+  { question: "Olivia Rodrigo won Best New Artist at which VMAs?", choices: ["2020","2021","2022","2023"], correct: 1 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MtvMusicAwardsQuizSettings): MtvMusicAwardsQuizState {

@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Olivia Rodrigo's debut #1 was?", choices: ["Good 4 U","Drivers License","Deja Vu","Vampire"], correct: 1 },
   { question: "Which Mariah Carey song reclaimed #1 25 years after release?", choices: ["Hero","Vision of Love","All I Want for Christmas","Fantasy"], correct: 2 },
   { question: "The chart is published by Billboard magazine, founded in what year?", choices: ["1894","1908","1922","1955"], correct: 0 },
-  { question: "Which Drake hit was his first solo #1?", choices: ["Hotline Bling","One Dance","God's Plan","In My Feelings"], correct: 2 }
+  { question: "Which Drake hit was his first solo #1?", choices: ["Hotline Bling","One Dance","God's Plan","In My Feelings"], correct: 2 },
+  { question: "Mariah Carey's longest-running Hot 100 #1 (besides \"One Sweet Day\") is?", choices: ["Fantasy","We Belong Together","Hero","Always Be My Baby"], correct: 1 },
+  { question: "Which artist had the most weeks at #1 in the 2010s?", choices: ["Taylor Swift","Drake","Bruno Mars","Mark Ronson"], correct: 1 },
+  { question: "Cardi B's \"Bodak Yellow\" (2017) made her the first solo female rapper to hit #1 since?", choices: ["Lauryn Hill","Missy Elliott","Da Brat","Lil Kim"], correct: 0 },
+  { question: "Harry Styles's first solo Hot 100 #1 was?", choices: ["Sign of the Times","Watermelon Sugar","As It Was","Adore You"], correct: 2 },
+  { question: "\"Macarena\" topped the Hot 100 in?", choices: ["1995","1996","1997","1998"], correct: 1 },
+  { question: "Glen Campbell's \"Rhinestone Cowboy\" hit #1 in?", choices: ["1973","1975","1977","1979"], correct: 1 },
+  { question: "Taylor Swift's first Hot 100 #1 was?", choices: ["Shake It Off","We Are Never Ever Getting Back Together","Blank Space","Look What You Made Me Do"], correct: 1 },
+  { question: "\"Blinding Lights\" by The Weeknd set a record for weeks in the top 10 — how many?", choices: ["43","45","57","60"], correct: 1 },
+  { question: "Bruno Mars's \"Uptown Funk\" was #1 for how many weeks?", choices: ["10","12","14","16"], correct: 2 },
+  { question: "Which Beatles single was #1 for 9 weeks in 1964?", choices: ["I Want to Hold Your Hand","Hey Jude","She Loves You","Can't Buy Me Love"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: BillboardHitsQuizSettings): BillboardHitsQuizState {
