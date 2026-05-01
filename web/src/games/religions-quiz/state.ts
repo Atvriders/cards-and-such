@@ -24,6 +24,16 @@ const BANK = [
   { question: "The Vatican is the center of which branch of Christianity?", answer: "Catholicism" },
   { question: "Taoism was founded by which philosopher?", answer: "Laozi" },
   { question: "What is the second largest religion by followers?", answer: "Islam" },
+  { question: "Diwali is the festival of lights for which religion primarily?", answer: "Hinduism" },
+  { question: "The Dalai Lama is the spiritual leader of which Buddhist tradition?", answer: "Tibetan Buddhism" },
+  { question: "Ramadan is the holy month of fasting in which religion?", answer: "Islam" },
+  { question: "What is the central scripture of Theravada Buddhism?", answer: "Tripitaka" },
+  { question: "The Bahai Faith was founded in which country?", answer: "Persia" },
+  { question: "What is the holiest day of the year in Judaism?", answer: "Yom Kippur" },
+  { question: "Easter celebrates which event in Christianity?", answer: "Resurrection of Jesus" },
+  { question: "The Mahabharata and Ramayana are epics of which religion?", answer: "Hinduism" },
+  { question: "Jainism's core principle of non-violence is called?", answer: "Ahimsa" },
+  { question: "Which religion's followers worship in a gurdwara?", answer: "Sikhism" },
 ];
 const WRONG = ["Bible", "Torah", "Vedas", "Tripitaka", "Guru Granth Sahib", "1st century BCE", "3rd century BCE", "7th century BCE", "10th century", "16th century", "Islam", "Christianity", "Buddhism", "Judaism", "Hinduism", "Sikhism", "Taoism", "Confucianism", "Zoroastrianism", "Shinto", "Jerusalem", "Medina", "Rome", "Athens", "India", "Arabia", "China", "Japan", "Egypt", "Greece"];
 function shuffle<T>(arr: T[], rng: () => number): T[] {
