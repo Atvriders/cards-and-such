@@ -7,26 +7,26 @@ const LABELS = ["A", "B", "C", "D"];
 export function AloneAmongStarsTaleGame({ state, dispatch, onGameOver }: GameProps<AloneAmongStarsTaleState, AloneAmongStarsTaleSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="journal-wrap"><div className="journal-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#8e44ad" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="aast-wrap"><div className="aast-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#8e44ad" }}>{state.score} pts</p></div></div>;
   const p = state.prompts[state.index]!;
   const isResult = state.phase === "result";
   return (
-    <div className="journal-wrap">
-      <div className="journal-header">
-        <span className="journal-progress">Entry {state.index + 1} / {state.prompts.length}</span>
-        <span className="journal-score">{state.score} pts</span>
+    <div className="aast-wrap">
+      <div className="aast-header">
+        <span className="aast-progress">Entry {state.index + 1} / {state.prompts.length}</span>
+        <span className="aast-score">{state.score} pts</span>
       </div>
-      <div className="journal-prompt">{p.prompt}</div>
-      <div className="journal-choices">
+      <div className="aast-prompt">{p.prompt}</div>
+      <div className="aast-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`journal-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as AloneAmongStarsTaleAction)}>
-            <span className="journal-choice-letter">{LABELS[i]}</span>{c}
+          <button key={i} className={`aast-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as AloneAmongStarsTaleAction)}>
+            <span className="aast-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}
       </div>
-      {isResult && <div className="journal-feedback">+{state.lastPts} pts inscribed in your log</div>}
-      <div className="journal-actions">
-        {isResult && <button className="journal-btn next" onClick={() => dispatch({ type:"next" } as AloneAmongStarsTaleAction)}>{state.index + 1 >= state.prompts.length ? "Finish" : "Next Entry"}</button>}
+      {isResult && <div className="aast-feedback">+{state.lastPts} pts inscribed in your log</div>}
+      <div className="aast-actions">
+        {isResult && <button className="aast-btn next" onClick={() => dispatch({ type:"next" } as AloneAmongStarsTaleAction)}>{state.index + 1 >= state.prompts.length ? "Finish" : "Next Entry"}</button>}
       </div>
     </div>
   );

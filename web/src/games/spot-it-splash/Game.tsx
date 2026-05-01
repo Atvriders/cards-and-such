@@ -7,27 +7,58 @@ import "./Game.css";
 export function SpotItSplashGame({ state, dispatch, onGameOver }: GameProps<SpotItSplashState, SpotItSplashSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="spotitsplash-wrap"><div className="spotitsplash-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="spotitsplash-final">{state.score} pts</div></div></div>;
-  }
-  const r = state.rounds[state.currentIndex]!;
-  return (
-    <div className="spotitsplash-wrap">
-      <div className="spotitsplash-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="spotitsplash-score">{state.score} pts</div>
-      <div className="spotitsplash-prompt">{r.question}</div>
-      <div className="spotitsplash-grid">
-        {r.choices.map((n, i) => {
-          let cls = "spotitsplash-cell";
-          if (state.submitted) {
-            if (i === r.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SpotItSplashAction)}>{n}</button>;
-        })}
+    return (
+      <div className="spitsp-wrap">
+        <div className="spitsp-done">
+          <h2>Spotted</h2>
+          <div className="spitsp-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
+          <div className="spitsp-final">{state.score} pts</div>
+        </div>
       </div>
-      {!state.submitted && <button className="spotitsplash-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SpotItSplashAction)}>Submit</button>}
-      {state.submitted && <button className="spotitsplash-btn next" onClick={() => dispatch({ type: "next" } as SpotItSplashAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
+    );
+  }
+
+  const r = state.rounds[state.currentIndex]!;
+  const onPick = (sym: string): void => {
+    if (state.submitted) return;
+    dispatch({ type: "select", symbol: sym, nowMs: performance.now() } as SpotItSplashAction);
+  };
+  const onNext = (): void => {
+    dispatch({ type: "next", nowMs: performance.now() } as SpotItSplashAction);
+  };
+  const isCorrect = state.selected === r.shared;
+
+  return (
+    <div className="spitsp-wrap">
+      <div className="spitsp-header">
+        <span className="spitsp-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="spitsp-score">{state.score} pts</span>
+      </div>
+      <div className="spitsp-prompt">Find the symbol on BOTH cards. Click it.</div>
+      <div className="spitsp-cards">
+        <div className="spitsp-card">
+          {r.cardA.symbols.map((s, i) => (
+            <button key={"a"+i} className={`spitsp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+          ))}
+        </div>
+        <div className="spitsp-vs">vs</div>
+        <div className="spitsp-card">
+          {r.cardB.symbols.map((s, i) => (
+            <button key={"b"+i} className={`spitsp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+          ))}
+        </div>
+      </div>
+      {state.submitted && (
+        <>
+          <div className={`spitsp-feedback ${isCorrect ? "ok" : "no"}`}>
+            {isCorrect ? `Match in ${(state.lastMs / 1000).toFixed(1)}s` : `Miss · the match was ${r.shared}`}
+          </div>
+          <button className="spitsp-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
+        </>
+      )}
+      {!state.submitted && <div className="spitsp-timer">Speed counts · click fast for bonus points</div>}
     </div>
   );
 }

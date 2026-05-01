@@ -1,2 +1,18 @@
-/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+.pelm-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 18px; font-family:'Inter',system-ui,sans-serif; max-width:580px; margin:0 auto; background: linear-gradient(180deg,#3b1e36 0%,#5d2e54 100%); border-radius:14px; color:#fef3c7; min-height:560px; box-shadow:0 8px 24px rgba(0,0,0,0.22); }
+.pelm-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 6px; border-bottom:1px solid #7c3aed; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.9rem; }
+.pelm-progress { color:#fcd34d; font-weight:700; }
+.pelm-attempts { color:#e9d5ff; }
+.pelm-score { color:#fb923c; font-weight:800; }
+.pelm-board { display:grid; grid-template-columns:repeat(5,1fr); gap:9px; width:100%; }
+.pelm-card { aspect-ratio:3/4; background:linear-gradient(140deg,#4c1d95 0%,#6d28d9 100%); border:2px solid #8b5cf6; border-radius:9px; cursor:pointer; transition:all 0.18s; display:flex; align-items:center; justify-content:center; }
+.pelm-card:hover:not(:disabled) { border-color:#fcd34d; transform:translateY(-2px); }
+.pelm-card.flipped { background:linear-gradient(140deg,#fef3c7 0%,#fde68a 100%); border-color:#fb923c; }
+.pelm-card.matched { background:linear-gradient(140deg,#0f766e 0%,#14b8a6 100%); border-color:#5eead4; opacity:0.85; cursor:default; }
+.pelm-card:disabled { cursor:default; }
+.pelm-face { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:1.6rem; font-weight:800; color:#3b0764; }
+.pelm-card.matched .pelm-face { color:#0f172a; }
+.pelm-hint { font-size:0.85rem; color:#e9d5ff; font-style:italic; text-align:center; padding-top:4px; }
+.pelm-done { text-align:center; padding:32px 24px; background:#3b0764; border-radius:12px; width:100%; border:1.5px solid #7c3aed; }
+.pelm-done h2 { margin:0 0 12px; color:#fcd34d; font-family:'Inter',inherit; font-weight:800; }
+.pelm-stats { font-size:1rem; color:#e9d5ff; margin-bottom:12px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.pelm-final { font-size:2rem; font-weight:900; color:#fb923c; font-family:'JetBrains Mono',ui-monospace,monospace; }

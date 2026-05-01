@@ -1,2 +1,18 @@
-/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+.cmem-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 18px; font-family:'Inter',system-ui,sans-serif; max-width:540px; margin:0 auto; background: linear-gradient(180deg,#0f172a 0%,#1e293b 100%); border-radius:14px; color:#e2e8f0; min-height:520px; box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+.cmem-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 6px; border-bottom:1px solid #334155; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.92rem; }
+.cmem-progress { color:#22d3ee; font-weight:700; }
+.cmem-attempts { color:#94a3b8; }
+.cmem-score { color:#fbbf24; font-weight:800; }
+.cmem-board { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; width:100%; }
+.cmem-card { aspect-ratio:3/4; background:linear-gradient(140deg,#1e3a8a 0%,#312e81 100%); border:2px solid #475569; border-radius:10px; cursor:pointer; transition:all 0.18s; display:flex; align-items:center; justify-content:center; }
+.cmem-card:hover:not(:disabled) { border-color:#22d3ee; transform:translateY(-2px); }
+.cmem-card.flipped { background:linear-gradient(140deg,#1e293b 0%,#334155 100%); border-color:#fbbf24; }
+.cmem-card.matched { background:linear-gradient(140deg,#064e3b 0%,#065f46 100%); border-color:#34d399; opacity:0.78; cursor:default; }
+.cmem-card:disabled { cursor:default; }
+.cmem-face { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:1.8rem; font-weight:800; color:#f1f5f9; }
+.cmem-card.matched .cmem-face { color:#34d399; }
+.cmem-hint { font-size:0.86rem; color:#94a3b8; font-style:italic; text-align:center; padding-top:4px; }
+.cmem-done { text-align:center; padding:32px 24px; background:#1e293b; border-radius:12px; width:100%; border:1.5px solid #334155; }
+.cmem-done h2 { margin:0 0 12px; color:#22d3ee; font-family:'Inter',inherit; font-weight:800; }
+.cmem-stats { font-size:1rem; color:#cbd5e1; margin-bottom:12px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.cmem-final { font-size:2rem; font-weight:900; color:#fbbf24; font-family:'JetBrains Mono',ui-monospace,monospace; }

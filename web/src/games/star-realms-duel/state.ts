@@ -1,58 +1,136 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Scout", value: 1 },
-  { name: "Viper", value: 2 },
-  { name: "Cutter", value: 3 },
-  { name: "Frigate", value: 4 },
-  { name: "Cruiser", value: 5 },
-  { name: "Battleship", value: 6 },
-  { name: "Destroyer", value: 7 },
-  { name: "Dreadnought", value: 8 },
-];
+
+export const TOTAL_TURNS = 10;
+export const HAND_SIZE = 5;
 
 export interface StarRealmsDuelSettings { dummy: boolean; }
+
+export interface StarRealmsDuelCard {
+  id: string;
+  name: string;
+  cost: number;
+  coin: number;
+  vp: number;
+  kind: "treasure" | "victory" | "starter";
+}
+
+export const SHOP: readonly StarRealmsDuelCard[] = [
+  { id: "starter1", name: "Scout", cost: 0, coin: 1, vp: 0, kind: "starter" },
+  { id: "treasure1", name: "Patrol", cost: 3, coin: 2, vp: 0, kind: "treasure" },
+  { id: "treasure2", name: "Cruiser", cost: 6, coin: 3, vp: 0, kind: "treasure" },
+  { id: "victory1", name: "Outpost", cost: 2, coin: 0, vp: 1, kind: "victory" },
+  { id: "victory2", name: "Battlestation", cost: 5, coin: 0, vp: 3, kind: "victory" },
+  { id: "victory3", name: "Dreadnought", cost: 8, coin: 0, vp: 6, kind: "victory" },
+];
+
+const STARTING_DECK: string[] = [
+  "starter1","starter1","starter1","starter1","starter1","starter1","starter1",
+  "victory1","victory1","victory1",
+];
+
 export interface StarRealmsDuelState {
   rngSeed: number;
-  round: number;
-  you: number[];
-  foe: number[];
-  lastPts: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+  turn: number;
+  deck: string[];
+  discard: string[];
+  hand: string[];
+  played: string[];
+  coin: number;
+  bought: string | null;
+  vpGained: number;
+  vpTotal: number;
+  phase: "play" | "buy" | "done";
 }
-export type StarRealmsDuelAction = { type: "draw" } | { type: "next" };
+
+export type StarRealmsDuelAction =
+  | { type: "playAll" }
+  | { type: "buy"; cardId: string }
+  | { type: "endTurn" };
+
+function shuffle<T>(arr: T[], rng: () => number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
+export function cardById(id: string): StarRealmsDuelCard {
+  return SHOP.find(c => c.id === id)!;
+}
+
+function drawN(deck: string[], discard: string[], n: number, rng: () => number): { deck: string[]; discard: string[]; drawn: string[] } {
+  const drawn: string[] = [];
+  let d = [...deck];
+  let dis = [...discard];
+  for (let i = 0; i < n; i++) {
+    if (d.length === 0) { d = shuffle(dis, rng); dis = []; }
+    if (d.length === 0) break;
+    drawn.push(d.shift()!);
+  }
+  return { deck: d, discard: dis, drawn };
+}
+
 export function initialState(seed: number, _s: StarRealmsDuelSettings): StarRealmsDuelState {
-  return { rngSeed: seed, round: 1, you: [], foe: [], lastPts: 0, score: 0, phase: "drawing" };
+  const rng = mulberry32(seed);
+  const startDeck = shuffle(STARTING_DECK, rng);
+  const { deck, discard, drawn } = drawN(startDeck, [], HAND_SIZE, rng);
+  return {
+    rngSeed: Math.floor(rng() * 2 ** 31),
+    turn: 1,
+    deck, discard,
+    hand: drawn, played: [],
+    coin: 0, bought: null,
+    vpGained: 0, vpTotal: 0,
+    phase: "play",
+  };
 }
-function sumIdx(arr: number[]): number { return arr.reduce((a,i) => a + (DECK[i]?.value ?? 0), 0); }
-export function scoreRound(you: number[], foe: number[]): number {
-  const yv = sumIdx(you);
-  const fv = sumIdx(foe);
-  if (yv > fv) return Math.max(0, (yv - fv));
-  if (yv < fv) return 0;
-  return 1;
-}
+
 export function reducer(state: StarRealmsDuelState, action: StarRealmsDuelAction): StarRealmsDuelState {
   if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const you: number[] = [];
-    const foe: number[] = [];
-    for (let i = 0; i < 2; i++) you.push(Math.floor(rng() * DECK.length));
-    for (let i = 0; i < 2; i++) foe.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const pts = scoreRound(you, foe);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, you, foe, lastPts: pts, score: state.score + pts, phase: isLast ? "done" : "scored" };
+  if (action.type === "playAll") {
+    if (state.phase !== "play") return state;
+    const coin = state.hand.reduce((a, id) => a + cardById(id).coin, 0);
+    return { ...state, coin, played: state.hand, hand: [], phase: "buy" };
   }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, you: [], foe: [], lastPts: 0, phase: "drawing" };
+  if (action.type === "buy") {
+    if (state.phase !== "buy") return state;
+    const card = cardById(action.cardId);
+    if (state.coin < card.cost) return state;
+    if (state.bought) return state;
+    return { ...state, bought: action.cardId, coin: state.coin - card.cost, vpGained: state.vpGained + card.vp };
+  }
+  if (action.type === "endTurn") {
+    if (state.phase !== "buy") return state;
+    const rng = mulberry32(state.rngSeed);
+    let newDiscard = [...state.discard, ...state.played];
+    if (state.bought) newDiscard.push(state.bought);
+    const { deck, discard, drawn } = drawN(state.deck, newDiscard, HAND_SIZE, rng);
+    const vpTotal = state.vpTotal + state.vpGained;
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    if (state.turn >= TOTAL_TURNS) {
+      return { ...state, vpTotal, phase: "done", rngSeed: nextSeed };
+    }
+    return {
+      ...state, rngSeed: nextSeed,
+      turn: state.turn + 1,
+      deck, discard, hand: drawn, played: [],
+      coin: 0, bought: null, vpGained: 0, vpTotal,
+      phase: "play",
+    };
   }
   return state;
 }
+
+export function totalScore(state: StarRealmsDuelState): number {
+  if (state.phase === "done") {
+    const all = [...state.deck, ...state.discard, ...state.hand, ...state.played];
+    return all.reduce((a, id) => a + cardById(id).vp, 0);
+  }
+  return state.vpTotal;
+}
+
 export function isTerminal(state: StarRealmsDuelState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return state.phase === "done" ? { score: totalScore(state) * 5 } : null;
 }

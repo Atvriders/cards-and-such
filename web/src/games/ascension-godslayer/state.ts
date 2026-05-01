@@ -1,58 +1,136 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 10;
-export const CARDS_PER_ROUND = 4;
-export const DECK: { name: string; value: number }[] = [
-  { name: "Recruit", value: 1 },
-  { name: "Initiate", value: 2 },
-  { name: "Hero", value: 3 },
-  { name: "Construct", value: 4 },
-  { name: "Mystic", value: 5 },
-  { name: "Legend", value: 6 },
-];
+
+export const TOTAL_TURNS = 10;
+export const HAND_SIZE = 5;
 
 export interface AscensionGodslayerSettings { dummy: boolean; }
+
+export interface AscensionGodslayerCard {
+  id: string;
+  name: string;
+  cost: number;
+  coin: number;
+  vp: number;
+  kind: "treasure" | "victory" | "starter";
+}
+
+export const SHOP: readonly AscensionGodslayerCard[] = [
+  { id: "starter1", name: "Apprentice", cost: 0, coin: 1, vp: 0, kind: "starter" },
+  { id: "treasure1", name: "Initiate", cost: 3, coin: 2, vp: 0, kind: "treasure" },
+  { id: "treasure2", name: "Mage", cost: 6, coin: 3, vp: 0, kind: "treasure" },
+  { id: "victory1", name: "Hero", cost: 2, coin: 0, vp: 1, kind: "victory" },
+  { id: "victory2", name: "Champion", cost: 5, coin: 0, vp: 3, kind: "victory" },
+  { id: "victory3", name: "Demigod", cost: 8, coin: 0, vp: 6, kind: "victory" },
+];
+
+const STARTING_DECK: string[] = [
+  "starter1","starter1","starter1","starter1","starter1","starter1","starter1",
+  "victory1","victory1","victory1",
+];
+
 export interface AscensionGodslayerState {
   rngSeed: number;
-  round: number;
-  hand: number[];
-  lastPts: number;
-  bonus: number;
-  score: number;
-  phase: "drawing" | "scored" | "done";
+  turn: number;
+  deck: string[];
+  discard: string[];
+  hand: string[];
+  played: string[];
+  coin: number;
+  bought: string | null;
+  vpGained: number;
+  vpTotal: number;
+  phase: "play" | "buy" | "done";
 }
-export type AscensionGodslayerAction = { type: "draw" } | { type: "next" };
-export function initialState(seed: number, _s: AscensionGodslayerSettings): AscensionGodslayerState {
-  return { rngSeed: seed, round: 1, hand: [], lastPts: 0, bonus: 0, score: 0, phase: "drawing" };
-}
-export function scoreHand(hand: number[]): { base: number; bonus: number } {
-  const base = hand.reduce((a, i) => a + (DECK[i]?.value ?? 0), 0);
-  const counts = new Map<number, number>();
-  for (const i of hand) counts.set(i, (counts.get(i) ?? 0) + 1);
-  let bonus = 0;
-  for (const c of counts.values()) {
-    if (c >= 4) bonus += 12; else if (c >= 3) bonus += 8; else if (c >= 2) bonus += 4;
+
+export type AscensionGodslayerAction =
+  | { type: "playAll" }
+  | { type: "buy"; cardId: string }
+  | { type: "endTurn" };
+
+function shuffle<T>(arr: T[], rng: () => number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
   }
-  return { base, bonus };
+  return a;
 }
+
+export function cardById(id: string): AscensionGodslayerCard {
+  return SHOP.find(c => c.id === id)!;
+}
+
+function drawN(deck: string[], discard: string[], n: number, rng: () => number): { deck: string[]; discard: string[]; drawn: string[] } {
+  const drawn: string[] = [];
+  let d = [...deck];
+  let dis = [...discard];
+  for (let i = 0; i < n; i++) {
+    if (d.length === 0) { d = shuffle(dis, rng); dis = []; }
+    if (d.length === 0) break;
+    drawn.push(d.shift()!);
+  }
+  return { deck: d, discard: dis, drawn };
+}
+
+export function initialState(seed: number, _s: AscensionGodslayerSettings): AscensionGodslayerState {
+  const rng = mulberry32(seed);
+  const startDeck = shuffle(STARTING_DECK, rng);
+  const { deck, discard, drawn } = drawN(startDeck, [], HAND_SIZE, rng);
+  return {
+    rngSeed: Math.floor(rng() * 2 ** 31),
+    turn: 1,
+    deck, discard,
+    hand: drawn, played: [],
+    coin: 0, bought: null,
+    vpGained: 0, vpTotal: 0,
+    phase: "play",
+  };
+}
+
 export function reducer(state: AscensionGodslayerState, action: AscensionGodslayerAction): AscensionGodslayerState {
   if (state.phase === "done") return state;
-  if (action.type === "draw") {
-    if (state.phase !== "drawing") return state;
-    const rng = mulberry32(state.rngSeed);
-    const hand: number[] = [];
-    for (let i = 0; i < CARDS_PER_ROUND; i++) hand.push(Math.floor(rng() * DECK.length));
-    const nextSeed = Math.floor(rng() * 2 ** 31);
-    const { base, bonus } = scoreHand(hand);
-    const total = base + bonus;
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, hand, lastPts: total, bonus, score: state.score + total, phase: isLast ? "done" : "scored" };
+  if (action.type === "playAll") {
+    if (state.phase !== "play") return state;
+    const coin = state.hand.reduce((a, id) => a + cardById(id).coin, 0);
+    return { ...state, coin, played: state.hand, hand: [], phase: "buy" };
   }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, hand: [], lastPts: 0, bonus: 0, phase: "drawing" };
+  if (action.type === "buy") {
+    if (state.phase !== "buy") return state;
+    const card = cardById(action.cardId);
+    if (state.coin < card.cost) return state;
+    if (state.bought) return state;
+    return { ...state, bought: action.cardId, coin: state.coin - card.cost, vpGained: state.vpGained + card.vp };
+  }
+  if (action.type === "endTurn") {
+    if (state.phase !== "buy") return state;
+    const rng = mulberry32(state.rngSeed);
+    let newDiscard = [...state.discard, ...state.played];
+    if (state.bought) newDiscard.push(state.bought);
+    const { deck, discard, drawn } = drawN(state.deck, newDiscard, HAND_SIZE, rng);
+    const vpTotal = state.vpTotal + state.vpGained;
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    if (state.turn >= TOTAL_TURNS) {
+      return { ...state, vpTotal, phase: "done", rngSeed: nextSeed };
+    }
+    return {
+      ...state, rngSeed: nextSeed,
+      turn: state.turn + 1,
+      deck, discard, hand: drawn, played: [],
+      coin: 0, bought: null, vpGained: 0, vpTotal,
+      phase: "play",
+    };
   }
   return state;
 }
+
+export function totalScore(state: AscensionGodslayerState): number {
+  if (state.phase === "done") {
+    const all = [...state.deck, ...state.discard, ...state.hand, ...state.played];
+    return all.reduce((a, id) => a + cardById(id).vp, 0);
+  }
+  return state.vpTotal;
+}
+
 export function isTerminal(state: AscensionGodslayerState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return state.phase === "done" ? { score: totalScore(state) * 5 } : null;
 }

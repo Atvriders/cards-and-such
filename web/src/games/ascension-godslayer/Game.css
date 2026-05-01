@@ -1,2 +1,31 @@
-/* Modern card-mini look — see web/src/engines/cardmini/cardmini.css */
-@import "../../engines/cardmini/cardmini.css";
+.asc-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:24px 18px; font-family:'Inter',system-ui,sans-serif; max-width:760px; margin:0 auto; background: linear-gradient(180deg,#0c1232 0%,#1e2856 100%); border-radius:14px; color:#f1f5f9; min-height:580px; box-shadow:0 8px 24px rgba(0,0,0,0.22); }
+.asc-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 4px; border-bottom:1px solid #a78bfa; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.95rem; }
+.asc-progress { color:#c4b5fd; font-weight:700; }
+.asc-coin { color:#fcd34d; font-weight:800; }
+.asc-vp { color:#34d399; font-weight:800; }
+.asc-section-label { font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em; color:#c4b5fd; align-self:flex-start; padding-top:6px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.asc-row { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; width:100%; min-height:128px; }
+.asc-card { width:96px; height:128px; border-radius:9px; padding:10px 8px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 8px rgba(0,0,0,0.25); border:2px solid #a78bfa; }
+.asc-card.starter { background:rgba(0,0,0,0.3); }
+.asc-card.treasure { background:rgba(252,191,36,0.18); border-color:#fcd34d; }
+.asc-card.victory { background:rgba(167,139,250,0.18); border-color:#34d399; }
+.asc-card.played { opacity:0.55; }
+.asc-name { font-weight:700; font-size:0.9rem; color:#f1f5f9; }
+.asc-stats-line { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.85rem; color:#c4b5fd; }
+.asc-shop { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; width:100%; }
+.asc-shopcard { aspect-ratio:3/4; border-radius:9px; padding:8px 6px; cursor:pointer; transition:all 0.15s; display:flex; flex-direction:column; justify-content:space-between; align-items:center; text-align:center; color:#f1f5f9; border:2px solid #a78bfa; background:rgba(0,0,0,0.3); }
+.asc-shopcard.treasure { background:rgba(252,191,36,0.18); border-color:#fcd34d; }
+.asc-shopcard.victory { background:rgba(167,139,250,0.18); border-color:#34d399; }
+.asc-shopcard:hover:not(:disabled) { transform:translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.35); }
+.asc-shopcard.locked { opacity:0.4; cursor:not-allowed; }
+.asc-shopcard.bought { box-shadow:0 0 0 3px #34d399; }
+.asc-cost { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:1.05rem; font-weight:900; color:#fcd34d; }
+.asc-actions { display:flex; gap:14px; align-items:center; padding-top:6px; }
+.asc-feedback { font-style:italic; color:#c4b5fd; font-size:0.9rem; }
+.asc-btn { padding:11px 26px; border-radius:8px; border:none; font-size:0.98rem; font-weight:700; cursor:pointer; color:#0c1232; font-family:'Inter',inherit; transition:opacity 0.15s; background:#a78bfa; }
+.asc-btn.primary { background:#fcd34d; padding:13px 32px; color:#0c1232; }
+.asc-btn:hover { opacity:0.85; }
+.asc-done { text-align:center; padding:32px 24px; background:#0c1232; border-radius:12px; width:100%; border:2px solid #a78bfa; }
+.asc-done h2 { margin:0 0 12px; color:#c4b5fd; font-family:'Inter',inherit; font-weight:800; }
+.asc-stats { font-size:1rem; color:#c4b5fd; margin-bottom:12px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.asc-final { font-size:2rem; font-weight:900; color:#fcd34d; font-family:'JetBrains Mono',ui-monospace,monospace; }

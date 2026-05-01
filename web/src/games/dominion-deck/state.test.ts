@@ -1,41 +1,60 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal, TOTAL_TURNS, HAND_SIZE, totalScore } from "./state.js";
+
 const S = { dummy: false };
+
 describe("DominionDeck", () => {
-  it("starts in initial phase with score 0", () => {
+  it("starts in play phase, hand of HAND_SIZE", () => {
     const s = initialState(1, S);
-    expect(s.score).toBe(0);
-    expect(s.round).toBe(1);
+    expect(s.phase).toBe("play");
+    expect(s.hand.length).toBe(HAND_SIZE);
+    expect(s.turn).toBe(1);
   });
-  it("first draw produces items and possibly score", () => {
-    const s = reducer(initialState(1, S), { type: "draw" });
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+  it("playAll converts hand to coin", () => {
+    const s = initialState(1, S);
+    const s2 = reducer(s, { type: "playAll" });
+    expect(s2.phase).toBe("buy");
+    expect(s2.coin).toBeGreaterThanOrEqual(0);
+    expect(s2.hand.length).toBe(0);
   });
-  it("isTerminal null at start", () => {
-    expect(isTerminal(initialState(1, S))).toBeNull();
+  it("buy deducts coin, gains VP for victory cards", () => {
+    let s = initialState(1, S);
+    s = reducer(s, { type: "playAll" });
+    if (s.coin >= 2) {
+      const beforeVp = s.vpGained;
+      const beforeCoin = s.coin;
+      const s2 = reducer(s, { type: "buy", cardId: "estate" });
+      expect(s2.coin).toBe(beforeCoin - 2);
+      expect(s2.vpGained).toBe(beforeVp + 1);
+      expect(s2.bought).toBe("estate");
+    }
   });
-  it("game ends after total rounds", () => {
+  it("cannot buy when insufficient coin", () => {
+    let s = initialState(1, S);
+    s = reducer(s, { type: "playAll" });
+    const before = s;
+    const after = reducer(s, { type: "buy", cardId: "province" });
+    if (s.coin < 8) expect(after).toBe(before);
+  });
+  it("game ends after TOTAL_TURNS", () => {
     let s = initialState(7, S);
-    for (let i = 0; i < TOTAL_ROUNDS; i++) {
-      s = reducer(s, { type: "draw" });
-      if (s.phase === "scored") s = reducer(s, { type: "next" });
+    for (let i = 0; i < TOTAL_TURNS; i++) {
+      s = reducer(s, { type: "playAll" });
+      s = reducer(s, { type: "endTurn" });
     }
     expect(s.phase).toBe("done");
     expect(isTerminal(s)).not.toBeNull();
-    expect(isTerminal(s)?.score).toBeGreaterThanOrEqual(0);
+    expect(totalScore(s)).toBeGreaterThanOrEqual(3);
   });
-  it("non-negative score across multiple seeds", () => {
-    for (const seed of [1, 42, 1234]) {
+  it("score is non-negative across multiple seeds", () => {
+    for (const seed of [1, 42, 999]) {
       let s = initialState(seed, S);
-      for (let i = 0; i < TOTAL_ROUNDS; i++) {
-        s = reducer(s, { type: "draw" });
-        if (s.phase === "scored") s = reducer(s, { type: "next" });
+      for (let i = 0; i < TOTAL_TURNS; i++) {
+        s = reducer(s, { type: "playAll" });
+        if (s.coin >= 5) s = reducer(s, { type: "buy", cardId: "duchy" });
+        s = reducer(s, { type: "endTurn" });
       }
-      expect(s.score).toBeGreaterThanOrEqual(0);
+      expect(isTerminal(s)?.score).toBeGreaterThanOrEqual(0);
     }
-  });
-  it("TOTAL_ROUNDS is 10", () => {
-    expect(TOTAL_ROUNDS).toBe(10);
   });
 });

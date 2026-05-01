@@ -7,27 +7,58 @@ import "./Game.css";
 export function DobbleKidsGame({ state, dispatch, onGameOver }: GameProps<DobbleKidsState, DobbleKidsSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="dobblekids-wrap"><div className="dobblekids-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="dobblekids-final">{state.score} pts</div></div></div>;
-  }
-  const r = state.rounds[state.currentIndex]!;
-  return (
-    <div className="dobblekids-wrap">
-      <div className="dobblekids-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="dobblekids-score">{state.score} pts</div>
-      <div className="dobblekids-prompt">{r.question}</div>
-      <div className="dobblekids-grid">
-        {r.choices.map((n, i) => {
-          let cls = "dobblekids-cell";
-          if (state.submitted) {
-            if (i === r.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as DobbleKidsAction)}>{n}</button>;
-        })}
+    return (
+      <div className="dobkid-wrap">
+        <div className="dobkid-done">
+          <h2>Spotted</h2>
+          <div className="dobkid-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
+          <div className="dobkid-final">{state.score} pts</div>
+        </div>
       </div>
-      {!state.submitted && <button className="dobblekids-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as DobbleKidsAction)}>Submit</button>}
-      {state.submitted && <button className="dobblekids-btn next" onClick={() => dispatch({ type: "next" } as DobbleKidsAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
+    );
+  }
+
+  const r = state.rounds[state.currentIndex]!;
+  const onPick = (sym: string): void => {
+    if (state.submitted) return;
+    dispatch({ type: "select", symbol: sym, nowMs: performance.now() } as DobbleKidsAction);
+  };
+  const onNext = (): void => {
+    dispatch({ type: "next", nowMs: performance.now() } as DobbleKidsAction);
+  };
+  const isCorrect = state.selected === r.shared;
+
+  return (
+    <div className="dobkid-wrap">
+      <div className="dobkid-header">
+        <span className="dobkid-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="dobkid-score">{state.score} pts</span>
+      </div>
+      <div className="dobkid-prompt">Find the symbol on BOTH cards. Click it.</div>
+      <div className="dobkid-cards">
+        <div className="dobkid-card">
+          {r.cardA.symbols.map((s, i) => (
+            <button key={"a"+i} className={`dobkid-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+          ))}
+        </div>
+        <div className="dobkid-vs">vs</div>
+        <div className="dobkid-card">
+          {r.cardB.symbols.map((s, i) => (
+            <button key={"b"+i} className={`dobkid-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+          ))}
+        </div>
+      </div>
+      {state.submitted && (
+        <>
+          <div className={`dobkid-feedback ${isCorrect ? "ok" : "no"}`}>
+            {isCorrect ? `Match in ${(state.lastMs / 1000).toFixed(1)}s` : `Miss · the match was ${r.shared}`}
+          </div>
+          <button className="dobkid-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
+        </>
+      )}
+      {!state.submitted && <div className="dobkid-timer">Speed counts · click fast for bonus points</div>}
     </div>
   );
 }

@@ -1,16 +1,19 @@
-.journal-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:20px; font-family: Georgia, serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #faf6ee 0%, #f3ebd9 100%); border-radius: 12px; }
-.journal-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
-.journal-progress { font-size:0.95rem; color:#7c5e3e; font-style: italic; }
-.journal-score { font-size:1.05rem; font-weight:700; color:#8e44ad; }
-.journal-prompt { font-size:1.15rem; font-weight:500; text-align:center; color:#3a2c18; line-height:1.5; padding: 10px 0; border-top: 1px solid #c9b78a; border-bottom: 1px solid #c9b78a; width: 100%; }
-.journal-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
-.journal-choice { display:flex; align-items:center; gap:12px; padding:12px 16px; border:2px solid #b8a070; border-radius:10px; background:#fffdf6; cursor:pointer; font-size:1rem; text-align:left; color:#3a2c18; font-family: inherit; }
-.journal-choice:hover:not(:disabled) { border-color:#8e44ad; background:#f5edff; }
-.journal-choice.selected { border-color:#8e44ad; background:#f5edff; }
-.journal-choice-letter { font-weight:900; font-size:1.05rem; color:#8e44ad; min-width:24px; }
-.journal-actions { display:flex; gap:12px; }
-.journal-btn { padding:10px 28px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; }
-.journal-btn.next { background:#8e44ad; }
-.journal-feedback { font-size:1rem; font-style: italic; padding:10px 24px; border-radius:8px; background:#f5edff; color:#5b2c84; }
-.journal-done { text-align:center; padding:24px; background:#fffdf6; border-radius:14px; width: 100%; }
-.journal-done h2 { margin:0 0 8px; color:#3a2c18; }
+.ath-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 20px; font-family: 'Inter', system-ui, sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg, #2c2114 0%, #3a2c1a 100%); border-radius: 14px; color: #f7f0e0; min-height: 480px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.ath-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom: 8px; border-bottom: 1px solid #6b5320; }
+.ath-progress { font-size:0.9rem; color: #6b5320; font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+.ath-score { font-size:1.05rem; font-weight:800; color: #d4a574; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.ath-prompt { font-size:1.18rem; font-weight:500; text-align:center; color: #c08552; line-height:1.55; padding: 14px 8px; width: 100%; font-style: italic; }
+.ath-choices { display:flex; flex-direction:column; gap:10px; width:100%; }
+.ath-choice { display:flex; align-items:center; gap:14px; padding:14px 18px; border:1.5px solid #6b5320; border-radius:10px; background: #3a2c1a; cursor:pointer; font-size:1rem; text-align:left; color: #f7f0e0; font-family: 'Inter', inherit; transition: all 0.15s; }
+.ath-choice:hover:not(:disabled) { border-color: #d4a574; background: #2c2114; transform: translateY(-1px); }
+.ath-choice:disabled { cursor: default; opacity: 0.7; }
+.ath-choice.selected { border-color: #d4a574; background: #2c2114; box-shadow: inset 0 0 0 1px #d4a574; }
+.ath-choice-letter { font-weight:900; font-size:1.05rem; color: #d4a574; min-width:24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.ath-actions { display:flex; gap:12px; }
+.ath-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fff; font-family: 'Inter', inherit; transition: opacity 0.15s; }
+.ath-btn.next { background: #d4a574; }
+.ath-btn:hover { opacity: 0.85; }
+.ath-feedback { font-size:0.98rem; font-style: italic; padding:10px 22px; border-radius:8px; background: #2c2114; color: #c08552; border-left: 3px solid #d4a574; }
+.ath-done { text-align:center; padding:32px 24px; background: #2c2114; border-radius:12px; width: 100%; border: 1.5px solid #6b5320; }
+.ath-done h2 { margin:0 0 12px; color: #c08552; font-family: 'Inter', inherit; }
+.ath-final { font-size: 2rem; font-weight: 900; color: #d4a574; font-family: 'JetBrains Mono', ui-monospace, monospace; }

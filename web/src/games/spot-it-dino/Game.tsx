@@ -7,27 +7,58 @@ import "./Game.css";
 export function SpotItDinoGame({ state, dispatch, onGameOver }: GameProps<SpotItDinoState, SpotItDinoSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="spotitdino-wrap"><div className="spotitdino-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="spotitdino-final">{state.score} pts</div></div></div>;
-  }
-  const r = state.rounds[state.currentIndex]!;
-  return (
-    <div className="spotitdino-wrap">
-      <div className="spotitdino-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="spotitdino-score">{state.score} pts</div>
-      <div className="spotitdino-prompt">{r.question}</div>
-      <div className="spotitdino-grid">
-        {r.choices.map((n, i) => {
-          let cls = "spotitdino-cell";
-          if (state.submitted) {
-            if (i === r.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SpotItDinoAction)}>{n}</button>;
-        })}
+    return (
+      <div className="spitdn-wrap">
+        <div className="spitdn-done">
+          <h2>Spotted</h2>
+          <div className="spitdn-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
+          <div className="spitdn-final">{state.score} pts</div>
+        </div>
       </div>
-      {!state.submitted && <button className="spotitdino-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SpotItDinoAction)}>Submit</button>}
-      {state.submitted && <button className="spotitdino-btn next" onClick={() => dispatch({ type: "next" } as SpotItDinoAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
+    );
+  }
+
+  const r = state.rounds[state.currentIndex]!;
+  const onPick = (sym: string): void => {
+    if (state.submitted) return;
+    dispatch({ type: "select", symbol: sym, nowMs: performance.now() } as SpotItDinoAction);
+  };
+  const onNext = (): void => {
+    dispatch({ type: "next", nowMs: performance.now() } as SpotItDinoAction);
+  };
+  const isCorrect = state.selected === r.shared;
+
+  return (
+    <div className="spitdn-wrap">
+      <div className="spitdn-header">
+        <span className="spitdn-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="spitdn-score">{state.score} pts</span>
+      </div>
+      <div className="spitdn-prompt">Find the symbol on BOTH cards. Click it.</div>
+      <div className="spitdn-cards">
+        <div className="spitdn-card">
+          {r.cardA.symbols.map((s, i) => (
+            <button key={"a"+i} className={`spitdn-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+          ))}
+        </div>
+        <div className="spitdn-vs">vs</div>
+        <div className="spitdn-card">
+          {r.cardB.symbols.map((s, i) => (
+            <button key={"b"+i} className={`spitdn-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+          ))}
+        </div>
+      </div>
+      {state.submitted && (
+        <>
+          <div className={`spitdn-feedback ${isCorrect ? "ok" : "no"}`}>
+            {isCorrect ? `Match in ${(state.lastMs / 1000).toFixed(1)}s` : `Miss · the match was ${r.shared}`}
+          </div>
+          <button className="spitdn-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
+        </>
+      )}
+      {!state.submitted && <div className="spitdn-timer">Speed counts · click fast for bonus points</div>}
     </div>
   );
 }

@@ -1,16 +1,27 @@
-.spotitharrypotter-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:sans-serif;max-width:640px;margin:0 auto;}
-.spotitharrypotter-info{font-weight:600;color:#34495e;}
-.spotitharrypotter-score{font-weight:700;color:#27ae60;}
-.spotitharrypotter-prompt{font-size:1.1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;padding:8px;}
-.spotitharrypotter-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
-.spotitharrypotter-cell{padding:14px 12px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:0.95rem;text-align:center;}
-.spotitharrypotter-cell:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
-.spotitharrypotter-cell.selected{border-color:#3498db;background:#eaf4fb;}
-.spotitharrypotter-cell.correct{border-color:#27ae60;background:#eafaf1;}
-.spotitharrypotter-cell.wrong{border-color:#e74c3c;background:#fdedec;}
-.spotitharrypotter-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
-.spotitharrypotter-btn.submit{background:#8e44ad;color:#fff;}
-.spotitharrypotter-btn.next{background:#3498db;color:#fff;}
-.spotitharrypotter-btn:disabled{opacity:0.4;cursor:not-allowed;}
-.spotitharrypotter-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
-.spotitharrypotter-final{font-size:1.7rem;font-weight:900;color:#27ae60;}
+.spithp-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 18px; font-family:'Inter',system-ui,sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg,#fef3c7 0%,#fde68a 100%); border-radius:14px; color:#713f12; min-height:540px; box-shadow:0 8px 24px rgba(0,0,0,0.16); }
+.spithp-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom:8px; border-bottom:1px solid #a16207; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.92rem; }
+.spithp-progress { color:#713f12; font-weight:700; }
+.spithp-score { color:#a16207; font-weight:800; }
+.spithp-prompt { font-size:1.05rem; font-weight:600; text-align:center; color:#451a03; padding:8px 0; }
+.spithp-cards { display:flex; gap:14px; align-items:center; width:100%; justify-content:center; flex-wrap:wrap; }
+.spithp-card { background:#fef3c7; border:3px solid #a16207; border-radius:50%; width:230px; height:230px; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr); padding:18px; gap:4px; box-shadow:0 6px 14px rgba(0,0,0,0.18); place-items:center; }
+.spithp-symbol { background:transparent; border:none; cursor:pointer; font-size:1.7rem; transition:transform 0.15s, color 0.15s; padding:0; line-height:1; color:#713f12; }
+.spithp-symbol:nth-child(2) { transform:rotate(20deg) scale(0.95); }
+.spithp-symbol:nth-child(3) { transform:rotate(-15deg) scale(1.05); }
+.spithp-symbol:nth-child(5) { transform:rotate(8deg) scale(1.08); }
+.spithp-symbol:nth-child(6) { transform:rotate(-22deg) scale(0.92); }
+.spithp-symbol:hover:not(:disabled) { color:#dc2626; transform:scale(1.25); }
+.spithp-symbol:disabled { cursor:default; }
+.spithp-symbol.hit { color:#16a34a; transform:scale(1.4); }
+.spithp-symbol.miss { color:#dc2626; opacity:0.55; }
+.spithp-vs { font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:800; font-size:1.4rem; color:#a16207; }
+.spithp-timer { font-size:0.85rem; font-style:italic; color:#451a03; }
+.spithp-feedback { font-size:1rem; font-weight:600; padding:10px 22px; border-radius:8px; text-align:center; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.spithp-feedback.ok { background:#bbf7d0; color:#14532d; }
+.spithp-feedback.no { background:#fecaca; color:#7f1d1d; }
+.spithp-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fffbeb; font-family:'Inter',inherit; transition:opacity 0.15s; background:#a16207; }
+.spithp-btn:hover { opacity:0.85; }
+.spithp-done { text-align:center; padding:32px 24px; background:#fef3c7; border-radius:12px; width:100%; border:1.5px solid #a16207; }
+.spithp-done h2 { margin:0 0 12px; color:#451a03; font-family:'Inter',inherit; font-weight:800; }
+.spithp-stats { font-size:1rem; color:#713f12; margin-bottom:12px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.spithp-final { font-size:2rem; font-weight:900; color:#a16207; font-family:'JetBrains Mono',ui-monospace,monospace; }

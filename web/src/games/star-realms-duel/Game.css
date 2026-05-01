@@ -1,2 +1,31 @@
-/* Modern card-mini look — see web/src/engines/cardmini/cardmini.css */
-@import "../../engines/cardmini/cardmini.css";
+.str-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:24px 18px; font-family:'Inter',system-ui,sans-serif; max-width:760px; margin:0 auto; background: linear-gradient(180deg,#0a1a2f 0%,#15294a 100%); border-radius:14px; color:#f1f5f9; min-height:580px; box-shadow:0 8px 24px rgba(0,0,0,0.22); }
+.str-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 4px; border-bottom:1px solid #60a5fa; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.95rem; }
+.str-progress { color:#93c5fd; font-weight:700; }
+.str-coin { color:#fcd34d; font-weight:800; }
+.str-vp { color:#f472b6; font-weight:800; }
+.str-section-label { font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em; color:#93c5fd; align-self:flex-start; padding-top:6px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.str-row { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; width:100%; min-height:128px; }
+.str-card { width:96px; height:128px; border-radius:9px; padding:10px 8px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 8px rgba(0,0,0,0.25); border:2px solid #60a5fa; }
+.str-card.starter { background:rgba(0,0,0,0.3); }
+.str-card.treasure { background:rgba(252,191,36,0.18); border-color:#fcd34d; }
+.str-card.victory { background:rgba(167,139,250,0.18); border-color:#f472b6; }
+.str-card.played { opacity:0.55; }
+.str-name { font-weight:700; font-size:0.9rem; color:#f1f5f9; }
+.str-stats-line { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.85rem; color:#93c5fd; }
+.str-shop { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; width:100%; }
+.str-shopcard { aspect-ratio:3/4; border-radius:9px; padding:8px 6px; cursor:pointer; transition:all 0.15s; display:flex; flex-direction:column; justify-content:space-between; align-items:center; text-align:center; color:#f1f5f9; border:2px solid #60a5fa; background:rgba(0,0,0,0.3); }
+.str-shopcard.treasure { background:rgba(252,191,36,0.18); border-color:#fcd34d; }
+.str-shopcard.victory { background:rgba(167,139,250,0.18); border-color:#f472b6; }
+.str-shopcard:hover:not(:disabled) { transform:translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.35); }
+.str-shopcard.locked { opacity:0.4; cursor:not-allowed; }
+.str-shopcard.bought { box-shadow:0 0 0 3px #34d399; }
+.str-cost { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:1.05rem; font-weight:900; color:#fcd34d; }
+.str-actions { display:flex; gap:14px; align-items:center; padding-top:6px; }
+.str-feedback { font-style:italic; color:#93c5fd; font-size:0.9rem; }
+.str-btn { padding:11px 26px; border-radius:8px; border:none; font-size:0.98rem; font-weight:700; cursor:pointer; color:#0a1a2f; font-family:'Inter',inherit; transition:opacity 0.15s; background:#60a5fa; }
+.str-btn.primary { background:#fcd34d; padding:13px 32px; color:#0a1a2f; }
+.str-btn:hover { opacity:0.85; }
+.str-done { text-align:center; padding:32px 24px; background:#0a1a2f; border-radius:12px; width:100%; border:2px solid #60a5fa; }
+.str-done h2 { margin:0 0 12px; color:#93c5fd; font-family:'Inter',inherit; font-weight:800; }
+.str-stats { font-size:1rem; color:#93c5fd; margin-bottom:12px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.str-final { font-size:2rem; font-weight:900; color:#fcd34d; font-family:'JetBrains Mono',ui-monospace,monospace; }

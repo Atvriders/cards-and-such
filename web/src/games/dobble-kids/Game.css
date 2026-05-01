@@ -1,16 +1,27 @@
-.dobblekids-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:sans-serif;max-width:640px;margin:0 auto;}
-.dobblekids-info{font-weight:600;color:#34495e;}
-.dobblekids-score{font-weight:700;color:#27ae60;}
-.dobblekids-prompt{font-size:1.1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;padding:8px;}
-.dobblekids-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
-.dobblekids-cell{padding:14px 12px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:0.95rem;text-align:center;}
-.dobblekids-cell:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
-.dobblekids-cell.selected{border-color:#3498db;background:#eaf4fb;}
-.dobblekids-cell.correct{border-color:#27ae60;background:#eafaf1;}
-.dobblekids-cell.wrong{border-color:#e74c3c;background:#fdedec;}
-.dobblekids-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
-.dobblekids-btn.submit{background:#8e44ad;color:#fff;}
-.dobblekids-btn.next{background:#3498db;color:#fff;}
-.dobblekids-btn:disabled{opacity:0.4;cursor:not-allowed;}
-.dobblekids-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
-.dobblekids-final{font-size:1.7rem;font-weight:900;color:#27ae60;}
+.dobkid-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 18px; font-family:'Inter',system-ui,sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg,#fdf2f8 0%,#fbcfe8 100%); border-radius:14px; color:#831843; min-height:540px; box-shadow:0 8px 24px rgba(0,0,0,0.16); }
+.dobkid-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom:8px; border-bottom:1px solid #ec4899; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.92rem; }
+.dobkid-progress { color:#831843; font-weight:700; }
+.dobkid-score { color:#ec4899; font-weight:800; }
+.dobkid-prompt { font-size:1.05rem; font-weight:600; text-align:center; color:#4a044e; padding:8px 0; }
+.dobkid-cards { display:flex; gap:14px; align-items:center; width:100%; justify-content:center; flex-wrap:wrap; }
+.dobkid-card { background:#fdf2f8; border:3px solid #ec4899; border-radius:50%; width:230px; height:230px; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr); padding:18px; gap:4px; box-shadow:0 6px 14px rgba(0,0,0,0.18); place-items:center; }
+.dobkid-symbol { background:transparent; border:none; cursor:pointer; font-size:1.7rem; transition:transform 0.15s, color 0.15s; padding:0; line-height:1; color:#831843; }
+.dobkid-symbol:nth-child(2) { transform:rotate(20deg) scale(0.95); }
+.dobkid-symbol:nth-child(3) { transform:rotate(-15deg) scale(1.05); }
+.dobkid-symbol:nth-child(5) { transform:rotate(8deg) scale(1.08); }
+.dobkid-symbol:nth-child(6) { transform:rotate(-22deg) scale(0.92); }
+.dobkid-symbol:hover:not(:disabled) { color:#dc2626; transform:scale(1.25); }
+.dobkid-symbol:disabled { cursor:default; }
+.dobkid-symbol.hit { color:#16a34a; transform:scale(1.4); }
+.dobkid-symbol.miss { color:#dc2626; opacity:0.55; }
+.dobkid-vs { font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:800; font-size:1.4rem; color:#ec4899; }
+.dobkid-timer { font-size:0.85rem; font-style:italic; color:#4a044e; }
+.dobkid-feedback { font-size:1rem; font-weight:600; padding:10px 22px; border-radius:8px; text-align:center; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.dobkid-feedback.ok { background:#bbf7d0; color:#14532d; }
+.dobkid-feedback.no { background:#fecaca; color:#7f1d1d; }
+.dobkid-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fffbeb; font-family:'Inter',inherit; transition:opacity 0.15s; background:#ec4899; }
+.dobkid-btn:hover { opacity:0.85; }
+.dobkid-done { text-align:center; padding:32px 24px; background:#fdf2f8; border-radius:12px; width:100%; border:1.5px solid #ec4899; }
+.dobkid-done h2 { margin:0 0 12px; color:#4a044e; font-family:'Inter',inherit; font-weight:800; }
+.dobkid-stats { font-size:1rem; color:#831843; margin-bottom:12px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.dobkid-final { font-size:2rem; font-weight:900; color:#ec4899; font-family:'JetBrains Mono',ui-monospace,monospace; }

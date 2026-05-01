@@ -1,29 +1,51 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { PelmanismState, PelmanismAction, PelmanismSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, SCORE_WIN, SCORE_TIE, cardName, isRed, rankOf } from "./state.js";
+import { isTerminal, PAIR_COUNT, PELMANISM_FACES } from "./state.js";
 import "./Game.css";
+
 export function PelmanismGame({ state, dispatch, onGameOver }: GameProps<PelmanismState, PelmanismSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  useEffect(() => {
+    if (state.flipped.length !== 2) return;
+    const id = setTimeout(() => dispatch({ type: "resolve" } as PelmanismAction), 700);
+    return () => clearTimeout(id);
+  }, [state.flipped, dispatch]);
+
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
-  }
-  return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.you !== null && state.cpu !== null && (
-        <div className="dm-row">
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>You</div><div className={`dm-card ${isRed(state.you) ? "red" : "black"}`}>{cardName(state.you)}</div></div>
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>CPU</div><div className={`dm-card ${isRed(state.cpu) ? "red" : "black"}`}>{cardName(state.cpu)}</div></div>
+    return (
+      <div className="pelm-wrap">
+        <div className="pelm-done">
+          <h2>Cleared</h2>
+          <div className="pelm-stats">{state.matches} pairs in {state.attempts} attempts</div>
+          <div className="pelm-final">{state.score} pts</div>
         </div>
-      )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as PelmanismAction)}>Recall!</button>}
-      {state.phase === "result" && state.you !== null && state.cpu !== null && <>
-        <div className="dm-result">{rankOf(state.you) > rankOf(state.cpu) ? `You win! +${SCORE_WIN}` : rankOf(state.you) < rankOf(state.cpu) ? "CPU wins" : `Tie +${SCORE_TIE}`}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PelmanismAction)}>Next</button>
-      </>}
+      </div>
+    );
+  }
+
+  return (
+    <div className="pelm-wrap">
+      <div className="pelm-header">
+        <span className="pelm-progress">{state.matches} / {PAIR_COUNT} pairs</span>
+        <span className="pelm-attempts">{state.attempts} attempts</span>
+        <span className="pelm-score">{state.score} pts</span>
+      </div>
+      <div className="pelm-board">
+        {state.values.map((v, i) => {
+          const open = state.revealed[i] || state.flipped.includes(i);
+          let cls = "pelm-card";
+          if (state.revealed[i]) cls += " matched";
+          else if (state.flipped.includes(i)) cls += " flipped";
+          return (
+            <button key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as PelmanismAction)}>
+              <span className="pelm-face">{open ? PELMANISM_FACES[v] : ""}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="pelm-hint">Pair the symbols. Perfect run yields a bonus.</div>
     </div>
   );
 }

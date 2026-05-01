@@ -1,37 +1,87 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 8;
-export const SCORE_WIN = 14;
-export const SCORE_TIE = 5;
+
+export const PAIR_COUNT = 10;
+export const TOTAL_CARDS = PAIR_COUNT * 2;
+export const SCORE_MATCH = 10;
+export const SCORE_PERFECT_BONUS = 40;
+
 export interface PelmanismSettings { dummy: boolean; }
-export interface PelmanismState { rngSeed: number; round: number; you: number | null; cpu: number | null; phase: "ready" | "result" | "done"; wins: number; losses: number; ties: number; score: number; }
-export type PelmanismAction = { type: "play" } | { type: "next" };
-export function cardName(c: number): string { const r = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]; const s = ["♠","♥","♦","♣"]; return r[c % 13]! + s[Math.floor(c / 13)]!; }
-export function isRed(c: number): boolean { const s = Math.floor(c / 13); return s === 1 || s === 2; }
-export function rankOf(c: number): number { return c % 13; }
-function pick2(rng: () => number): [number, number] {
-  const u = new Set<number>();
-  function p(): number { while (true) { const c = Math.floor(rng() * 52); if (!u.has(c)) { u.add(c); return c; } } }
-  return [p(), p()];
+
+export interface PelmanismState {
+  rngSeed: number;
+  values: number[];
+  revealed: boolean[];
+  flipped: number[];
+  matches: number;
+  attempts: number;
+  score: number;
+  phase: "playing" | "done";
 }
+
+export type PelmanismAction =
+  | { type: "flip"; index: number }
+  | { type: "resolve" };
+
+function shuffle<T>(arr: T[], rng: () => number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
+export const PELMANISM_FACES = ["♠","♥","♦","♣","★","✦","✺","☘","☀","☂"];
+
 export function initialState(seed: number, _s: PelmanismSettings): PelmanismState {
-  return { rngSeed: seed, round: 1, you: null, cpu: null, phase: "ready", wins: 0, losses: 0, ties: 0, score: 0 };
+  const rng = mulberry32(seed);
+  const pairs: number[] = [];
+  for (let i = 0; i < PAIR_COUNT; i++) { pairs.push(i, i); }
+  const values = shuffle(pairs, rng);
+  return {
+    rngSeed: Math.floor(rng() * 2 ** 31),
+    values,
+    revealed: new Array(TOTAL_CARDS).fill(false),
+    flipped: [],
+    matches: 0,
+    attempts: 0,
+    score: 0,
+    phase: "playing",
+  };
 }
+
 export function reducer(state: PelmanismState, action: PelmanismAction): PelmanismState {
   if (state.phase === "done") return state;
-  if (action.type === "play") {
-    if (state.phase !== "ready") return state;
-    const rng = mulberry32(state.rngSeed); const [you, cpu] = pick2(rng); const next = Math.floor(rng() * 2 ** 31);
-    let wins = state.wins, losses = state.losses, ties = state.ties, pts = 0;
-    if (rankOf(you) > rankOf(cpu)) { wins++; pts = SCORE_WIN; }
-    else if (rankOf(you) < rankOf(cpu)) { losses++; }
-    else { ties++; pts = SCORE_TIE; }
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: next, you, cpu, wins, losses, ties, score: state.score + pts, phase: isLast ? "done" : "result" };
+  if (action.type === "flip") {
+    if (state.flipped.length >= 2) return state;
+    if (state.revealed[action.index]) return state;
+    if (state.flipped.includes(action.index)) return state;
+    return { ...state, flipped: [...state.flipped, action.index] };
   }
-  if (action.type === "next") {
-    if (state.phase !== "result") return state;
-    return { ...state, round: state.round + 1, you: null, cpu: null, phase: "ready" };
+  if (action.type === "resolve") {
+    if (state.flipped.length !== 2) return state;
+    const [a, b] = state.flipped;
+    const matched = state.values[a!] === state.values[b!];
+    const revealed = [...state.revealed];
+    let matches = state.matches;
+    let score = state.score;
+    if (matched) {
+      revealed[a!] = true;
+      revealed[b!] = true;
+      matches++;
+      score += SCORE_MATCH;
+    }
+    const attempts = state.attempts + 1;
+    let phase: PelmanismState["phase"] = "playing";
+    if (matches >= PAIR_COUNT) {
+      phase = "done";
+      if (attempts === PAIR_COUNT) score += SCORE_PERFECT_BONUS;
+    }
+    return { ...state, revealed, flipped: [], matches, attempts, score, phase };
   }
   return state;
 }
-export function isTerminal(state: PelmanismState): { score: number } | null { return state.phase === "done" ? { score: state.score } : null; }
+
+export function isTerminal(state: PelmanismState): { score: number } | null {
+  return state.phase === "done" ? { score: state.score } : null;
+}

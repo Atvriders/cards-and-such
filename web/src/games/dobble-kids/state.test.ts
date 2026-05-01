@@ -1,28 +1,39 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
-
+import { initialState, reducer, isTerminal, SYMBOLS_PER_CARD, TOTAL_ROUNDS } from "./state.js";
 const S = { dummy: false };
-
-describe("dobble-kids", () => {
-  it("creates rounds", () => {
-    expect(initialState(1, S).rounds.length).toBeGreaterThanOrEqual(10);
+describe("DobbleKids", () => {
+  it("creates TOTAL_ROUNDS rounds", () => {
+    expect(initialState(1, S).rounds.length).toBe(TOTAL_ROUNDS);
   });
-  it("starts playing", () => {
-    expect(initialState(1, S).phase).toBe("playing");
-  });
-  it("submitting correct scores", () => {
+  it("each round shares one symbol on both cards", () => {
     const s = initialState(1, S);
-    const s2 = reducer(reducer(s, { type: "select", choice: s.rounds[0]!.correct }), { type: "submit" });
+    for (const r of s.rounds) {
+      expect(r.cardA.symbols.length).toBe(SYMBOLS_PER_CARD);
+      expect(r.cardB.symbols.length).toBe(SYMBOLS_PER_CARD);
+      expect(r.cardA.symbols).toContain(r.shared);
+      expect(r.cardB.symbols).toContain(r.shared);
+    }
+  });
+  it("correct selection scores points", () => {
+    const s = initialState(1, S);
+    const r = s.rounds[0]!;
+    const s2 = reducer(s, { type: "select", symbol: r.shared, nowMs: 1000 });
     expect(s2.score).toBeGreaterThanOrEqual(10);
   });
-  it("isTerminal null while playing", () => {
-    expect(isTerminal(initialState(1, S))).toBeNull();
+  it("wrong selection scores 0", () => {
+    const s = initialState(1, S);
+    const r = s.rounds[0]!;
+    const wrong = r.cardA.symbols.find(x => x !== r.shared)!;
+    const s2 = reducer(s, { type: "select", symbol: wrong, nowMs: 0 });
+    expect(s2.score).toBe(0);
   });
-  it("next advances", () => {
-    let s = initialState(1, S);
-    s = reducer(s, { type: "select", choice: 0 });
-    s = reducer(s, { type: "submit" });
-    s = reducer(s, { type: "next" });
-    expect(s.currentIndex).toBeGreaterThanOrEqual(1);
+  it("isTerminal becomes non-null after all rounds", () => {
+    let s = initialState(2, S);
+    for (let i = 0; i < TOTAL_ROUNDS; i++) {
+      const r = s.rounds[s.currentIndex]!;
+      s = reducer(s, { type: "select", symbol: r.shared, nowMs: 0 });
+      s = reducer(s, { type: "next", nowMs: 0 });
+    }
+    expect(isTerminal(s)).not.toBeNull();
   });
 });

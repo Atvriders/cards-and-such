@@ -1,43 +1,50 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, SYMBOLS_PER_CARD, TOTAL_ROUNDS } from "./state.js";
+
 const S = { dummy: false };
+
 describe("Spot It Classic", () => {
-  it("starts in playing with rounds", () => {
+  it("creates TOTAL_ROUNDS rounds", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.rounds.length).toBeGreaterThanOrEqual(1);
+    expect(s.rounds.length).toBe(TOTAL_ROUNDS);
   });
-  it("each round has 4 choices and a valid correct index", () => {
+  it("each round has two cards each with SYMBOLS_PER_CARD symbols", () => {
     const s = initialState(1, S);
     for (const r of s.rounds) {
-      expect(r.choices.length).toBe(4);
-      expect(r.correct).toBeGreaterThanOrEqual(0);
-      expect(r.correct).toBeLessThanOrEqual(3);
+      expect(r.cardA.symbols.length).toBe(SYMBOLS_PER_CARD);
+      expect(r.cardB.symbols.length).toBe(SYMBOLS_PER_CARD);
     }
   });
-  it("correct selection scores >= 10", () => {
+  it("the shared symbol appears on both cards", () => {
+    const s = initialState(7, S);
+    for (const r of s.rounds) {
+      expect(r.cardA.symbols).toContain(r.shared);
+      expect(r.cardB.symbols).toContain(r.shared);
+    }
+  });
+  it("correct pick scores at least 10", () => {
     const s = initialState(1, S);
     const r = s.rounds[0]!;
-    const s2 = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
+    const s2 = reducer(s, { type: "select", symbol: r.shared, nowMs: 1000 });
     expect(s2.score).toBeGreaterThanOrEqual(10);
+    expect(s2.correctCount).toBe(1);
   });
-  it("isTerminal null while playing, set after done", () => {
-    const s = initialState(1, S);
-    expect(isTerminal(s)).toBeNull();
-    let cur = s;
-    for (let i = 0; i < s.rounds.length; i++) {
-      cur = reducer(cur, { type: "select", choice: 0 });
-      cur = reducer(cur, { type: "submit" });
-      cur = reducer(cur, { type: "next" });
-    }
-    expect(cur.phase).toBe("done");
-    expect(isTerminal(cur)).not.toBeNull();
-  });
-  it("score does not go negative", () => {
+  it("incorrect pick scores 0", () => {
     const s = initialState(1, S);
     const r = s.rounds[0]!;
-    const wrong = (r.correct + 1) % 4;
-    const s2 = reducer(reducer(s, { type: "select", choice: wrong }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(0);
+    const wrong = r.cardA.symbols.find(x => x !== r.shared)!;
+    const s2 = reducer(s, { type: "select", symbol: wrong, nowMs: 500 });
+    expect(s2.score).toBe(0);
+    expect(s2.correctCount).toBe(0);
+  });
+  it("game completes after all rounds", () => {
+    let s = initialState(42, S);
+    for (let i = 0; i < TOTAL_ROUNDS; i++) {
+      const r = s.rounds[s.currentIndex]!;
+      s = reducer(s, { type: "select", symbol: r.shared, nowMs: 0 });
+      s = reducer(s, { type: "next", nowMs: 0 });
+    }
+    expect(s.phase).toBe("done");
+    expect(isTerminal(s)).not.toBeNull();
   });
 });

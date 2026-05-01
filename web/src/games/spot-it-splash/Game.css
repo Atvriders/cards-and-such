@@ -1,16 +1,27 @@
-.spotitsplash-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;font-family:sans-serif;max-width:640px;margin:0 auto;}
-.spotitsplash-info{font-weight:600;color:#34495e;}
-.spotitsplash-score{font-weight:700;color:#27ae60;}
-.spotitsplash-prompt{font-size:1.1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;padding:8px;}
-.spotitsplash-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
-.spotitsplash-cell{padding:14px 12px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:0.95rem;text-align:center;}
-.spotitsplash-cell:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
-.spotitsplash-cell.selected{border-color:#3498db;background:#eaf4fb;}
-.spotitsplash-cell.correct{border-color:#27ae60;background:#eafaf1;}
-.spotitsplash-cell.wrong{border-color:#e74c3c;background:#fdedec;}
-.spotitsplash-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
-.spotitsplash-btn.submit{background:#8e44ad;color:#fff;}
-.spotitsplash-btn.next{background:#3498db;color:#fff;}
-.spotitsplash-btn:disabled{opacity:0.4;cursor:not-allowed;}
-.spotitsplash-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
-.spotitsplash-final{font-size:1.7rem;font-weight:900;color:#27ae60;}
+.spitsp-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:24px 18px; font-family:'Inter',system-ui,sans-serif; max-width:680px; margin:0 auto; background: linear-gradient(180deg,#cffafe 0%,#a5f3fc 100%); border-radius:14px; color:#0e7490; min-height:540px; box-shadow:0 8px 24px rgba(0,0,0,0.16); }
+.spitsp-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding-bottom:8px; border-bottom:1px solid #06b6d4; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.92rem; }
+.spitsp-progress { color:#0e7490; font-weight:700; }
+.spitsp-score { color:#06b6d4; font-weight:800; }
+.spitsp-prompt { font-size:1.05rem; font-weight:600; text-align:center; color:#083344; padding:8px 0; }
+.spitsp-cards { display:flex; gap:14px; align-items:center; width:100%; justify-content:center; flex-wrap:wrap; }
+.spitsp-card { background:#cffafe; border:3px solid #06b6d4; border-radius:50%; width:230px; height:230px; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr); padding:18px; gap:4px; box-shadow:0 6px 14px rgba(0,0,0,0.18); place-items:center; }
+.spitsp-symbol { background:transparent; border:none; cursor:pointer; font-size:1.7rem; transition:transform 0.15s, color 0.15s; padding:0; line-height:1; color:#0e7490; }
+.spitsp-symbol:nth-child(2) { transform:rotate(20deg) scale(0.95); }
+.spitsp-symbol:nth-child(3) { transform:rotate(-15deg) scale(1.05); }
+.spitsp-symbol:nth-child(5) { transform:rotate(8deg) scale(1.08); }
+.spitsp-symbol:nth-child(6) { transform:rotate(-22deg) scale(0.92); }
+.spitsp-symbol:hover:not(:disabled) { color:#dc2626; transform:scale(1.25); }
+.spitsp-symbol:disabled { cursor:default; }
+.spitsp-symbol.hit { color:#16a34a; transform:scale(1.4); }
+.spitsp-symbol.miss { color:#dc2626; opacity:0.55; }
+.spitsp-vs { font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:800; font-size:1.4rem; color:#06b6d4; }
+.spitsp-timer { font-size:0.85rem; font-style:italic; color:#083344; }
+.spitsp-feedback { font-size:1rem; font-weight:600; padding:10px 22px; border-radius:8px; text-align:center; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.spitsp-feedback.ok { background:#bbf7d0; color:#14532d; }
+.spitsp-feedback.no { background:#fecaca; color:#7f1d1d; }
+.spitsp-btn { padding:11px 32px; border-radius:8px; border:none; font-size:1rem; font-weight:700; cursor:pointer; color:#fffbeb; font-family:'Inter',inherit; transition:opacity 0.15s; background:#06b6d4; }
+.spitsp-btn:hover { opacity:0.85; }
+.spitsp-done { text-align:center; padding:32px 24px; background:#cffafe; border-radius:12px; width:100%; border:1.5px solid #06b6d4; }
+.spitsp-done h2 { margin:0 0 12px; color:#083344; font-family:'Inter',inherit; font-weight:800; }
+.spitsp-stats { font-size:1rem; color:#0e7490; margin-bottom:12px; font-family:'JetBrains Mono',ui-monospace,monospace; }
+.spitsp-final { font-size:2rem; font-weight:900; color:#06b6d4; font-family:'JetBrains Mono',ui-monospace,monospace; }

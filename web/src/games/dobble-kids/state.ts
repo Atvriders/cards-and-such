@@ -1,32 +1,38 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_ROUNDS = 15;
+export const TOTAL_ROUNDS = 12;
+export const SYMBOLS_PER_CARD = 6;
+export const SCORE_PER_HIT = 10;
 
 export interface DobbleKidsSettings { dummy: boolean; }
 
-const POOL: string[] = ["Lion Face","Bear Face","Bunny Face","Cat Face","Dog Face","Pig Face","Cow Face","Sheep Face","Mouse Face","Bird Face","Fish Face","Frog Face","Owl Face","Duck Face","Monkey Face","Elephant Face","Tiger Face","Panda Face"];
-const PROMPT = "Find the animal that appears on both kid cards:";
+export const SYMBOLS: string[] = ["🎈","🎨","🎲","🪀","🧸","🚀","🦖","🦄","🌈","⭐","🍭","🎀","🎁","🍬","🪁","🎯","🎪","🪅"];
+
+export interface DobbleKidsCard { symbols: string[]; }
 
 export interface DobbleKidsRound {
-  question: string;
-  choices: [string, string, string, string];
-  correct: 0 | 1 | 2 | 3;
+  cardA: DobbleKidsCard;
+  cardB: DobbleKidsCard;
+  shared: string;
 }
 
 export interface DobbleKidsState {
+  rngSeed: number;
   rounds: DobbleKidsRound[];
   currentIndex: number;
-  selected: number | null;
+  selected: string | null;
   submitted: boolean;
+  startMs: number;
+  lastMs: number;
+  totalMs: number;
   score: number;
   correctCount: number;
   phase: "playing" | "result" | "done";
 }
 
 export type DobbleKidsAction =
-  | { type: "select"; choice: number }
-  | { type: "submit" }
-  | { type: "next" };
+  | { type: "select"; symbol: string; nowMs: number }
+  | { type: "next"; nowMs: number };
 
 function shuffle<T>(arr: T[], rng: () => number): T[] {
   const a = [...arr];
@@ -39,23 +45,17 @@ function shuffle<T>(arr: T[], rng: () => number): T[] {
 
 function genRounds(rng: () => number): DobbleKidsRound[] {
   const out: DobbleKidsRound[] = [];
-  while (out.length < TOTAL_ROUNDS) {
-    const correctAns = POOL[Math.floor(rng() * POOL.length)]!;
-    const wrongs: string[] = [];
-    const seen = new Set<string>([correctAns]);
-    let tries = 0;
-    while (wrongs.length < 3 && tries < 80) {
-      tries++;
-      const w = POOL[Math.floor(rng() * POOL.length)]!;
-      if (!seen.has(w)) { wrongs.push(w); seen.add(w); }
-    }
-    if (wrongs.length < 3) continue;
-    const choices = shuffle([correctAns, ...wrongs], rng);
-    const correctIdx = choices.indexOf(correctAns) as 0 | 1 | 2 | 3;
+  for (let i = 0; i < TOTAL_ROUNDS; i++) {
+    const shared = SYMBOLS[Math.floor(rng() * SYMBOLS.length)]!;
+    const others = SYMBOLS.filter(s => s !== shared);
+    const shuffled = shuffle(others, rng);
+    const filler = shuffled.slice(0, (SYMBOLS_PER_CARD - 1) * 2);
+    const cardA: string[] = [shared, ...filler.slice(0, SYMBOLS_PER_CARD - 1)];
+    const cardB: string[] = [shared, ...filler.slice(SYMBOLS_PER_CARD - 1)];
     out.push({
-      question: PROMPT + " " + correctAns,
-      choices: choices as [string, string, string, string],
-      correct: correctIdx,
+      cardA: { symbols: shuffle(cardA, rng) },
+      cardB: { symbols: shuffle(cardB, rng) },
+      shared,
     });
   }
   return out;
@@ -64,10 +64,14 @@ function genRounds(rng: () => number): DobbleKidsRound[] {
 export function initialState(seed: number, _s: DobbleKidsSettings): DobbleKidsState {
   const rng = mulberry32(seed);
   return {
+    rngSeed: Math.floor(rng() * 2 ** 31),
     rounds: genRounds(rng),
     currentIndex: 0,
     selected: null,
     submitted: false,
+    startMs: 0,
+    lastMs: 0,
+    totalMs: 0,
     score: 0,
     correctCount: 0,
     phase: "playing",
@@ -78,24 +82,26 @@ export function reducer(state: DobbleKidsState, action: DobbleKidsAction): Dobbl
   if (state.phase === "done") return state;
   if (action.type === "select") {
     if (state.submitted) return state;
-    return { ...state, selected: action.choice };
-  }
-  if (action.type === "submit") {
-    if (state.submitted || state.selected === null) return state;
     const r = state.rounds[state.currentIndex]!;
-    const ok = state.selected === r.correct;
+    const ok = action.symbol === r.shared;
+    const elapsed = state.startMs > 0 ? Math.max(0, action.nowMs - state.startMs) : 0;
+    const speedBonus = ok ? Math.max(0, Math.floor(20 - elapsed / 250)) : 0;
     return {
       ...state,
+      selected: action.symbol,
       submitted: true,
-      score: state.score + (ok ? 10 : 0),
+      lastMs: elapsed,
+      totalMs: state.totalMs + elapsed,
+      score: state.score + (ok ? SCORE_PER_HIT + speedBonus : 0),
       correctCount: state.correctCount + (ok ? 1 : 0),
       phase: "result",
     };
   }
   if (action.type === "next") {
+    if (!state.submitted) return state;
     const ni = state.currentIndex + 1;
     if (ni >= state.rounds.length) return { ...state, phase: "done" };
-    return { ...state, currentIndex: ni, selected: null, submitted: false, phase: "playing" };
+    return { ...state, currentIndex: ni, selected: null, submitted: false, startMs: action.nowMs, lastMs: 0, phase: "playing" };
   }
   return state;
 }

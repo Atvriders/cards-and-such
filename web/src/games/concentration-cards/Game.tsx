@@ -1,29 +1,51 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ConcentrationCardsState, ConcentrationCardsAction, ConcentrationCardsSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, SCORE_WIN, SCORE_TIE, cardName, isRed, rankOf } from "./state.js";
+import { isTerminal, PAIR_COUNT, SYMBOL_FACES } from "./state.js";
 import "./Game.css";
+
 export function ConcentrationCardsGame({ state, dispatch, onGameOver }: GameProps<ConcentrationCardsState, ConcentrationCardsSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  useEffect(() => {
+    if (state.flipped.length !== 2) return;
+    const id = setTimeout(() => dispatch({ type: "resolve" } as ConcentrationCardsAction), 700);
+    return () => clearTimeout(id);
+  }, [state.flipped, dispatch]);
+
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
-  }
-  return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.you !== null && state.cpu !== null && (
-        <div className="dm-row">
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>You</div><div className={`dm-card ${isRed(state.you) ? "red" : "black"}`}>{cardName(state.you)}</div></div>
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>CPU</div><div className={`dm-card ${isRed(state.cpu) ? "red" : "black"}`}>{cardName(state.cpu)}</div></div>
+    return (
+      <div className="cmem-wrap">
+        <div className="cmem-done">
+          <h2>Cleared</h2>
+          <div className="cmem-stats">{state.matches} pairs in {state.attempts} attempts</div>
+          <div className="cmem-final">{state.score} pts</div>
         </div>
-      )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as ConcentrationCardsAction)}>Match!</button>}
-      {state.phase === "result" && state.you !== null && state.cpu !== null && <>
-        <div className="dm-result">{rankOf(state.you) > rankOf(state.cpu) ? `You win! +${SCORE_WIN}` : rankOf(state.you) < rankOf(state.cpu) ? "CPU wins" : `Tie +${SCORE_TIE}`}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as ConcentrationCardsAction)}>Next</button>
-      </>}
+      </div>
+    );
+  }
+
+  return (
+    <div className="cmem-wrap">
+      <div className="cmem-header">
+        <span className="cmem-progress">{state.matches} / {PAIR_COUNT} pairs</span>
+        <span className="cmem-attempts">{state.attempts} attempts</span>
+        <span className="cmem-score">{state.score} pts</span>
+      </div>
+      <div className="cmem-board">
+        {state.values.map((v, i) => {
+          const open = state.revealed[i] || state.flipped.includes(i);
+          let cls = "cmem-card";
+          if (state.revealed[i]) cls += " matched";
+          else if (state.flipped.includes(i)) cls += " flipped";
+          return (
+            <button key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as ConcentrationCardsAction)}>
+              <span className="cmem-face">{open ? SYMBOL_FACES[v] : "?"}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="cmem-hint">Flip two cards. Match the symbols. A perfect run earns a bonus.</div>
     </div>
   );
 }

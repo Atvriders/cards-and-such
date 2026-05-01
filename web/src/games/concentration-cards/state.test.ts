@@ -1,39 +1,57 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS, SCORE_WIN } from "./state.js";
+import { initialState, reducer, isTerminal, PAIR_COUNT, TOTAL_CARDS, SCORE_MATCH } from "./state.js";
+
 const S = { dummy: false };
+
 describe("ConcentrationCards", () => {
-  it("starts in ready phase", () => { expect(initialState(1, S).phase).toBe("ready"); });
-  it("starts at round 1", () => { expect(initialState(1, S).round).toBe(1); });
-  it("starts with score 0", () => { expect(initialState(1, S).score).toBe(0); });
-  it("play produces both cards", () => {
-    const s = reducer(initialState(1, S), { type: "play" });
-    expect(s.you).not.toBeNull();
-    expect(s.cpu).not.toBeNull();
+  it("starts with TOTAL_CARDS slots and zero matches", () => {
+    const s = initialState(1, S);
+    expect(s.values.length).toBe(TOTAL_CARDS);
+    expect(s.matches).toBe(0);
+    expect(s.score).toBe(0);
   });
-  it("score is non-negative after play", () => {
-    const s = reducer(initialState(1, S), { type: "play" });
-    expect(s.score).toBeGreaterThanOrEqual(0);
+  it("each pair value appears exactly twice", () => {
+    const s = initialState(7, S);
+    const counts = new Map<number, number>();
+    s.values.forEach(v => counts.set(v, (counts.get(v) ?? 0) + 1));
+    for (let i = 0; i < PAIR_COUNT; i++) expect(counts.get(i)).toBe(2);
   });
-  it("score never exceeds reasonable cap", () => {
+  it("flipping records flipped indices", () => {
+    const s = reducer(initialState(1, S), { type: "flip", index: 0 });
+    expect(s.flipped).toContain(0);
+    const s2 = reducer(s, { type: "flip", index: 1 });
+    expect(s2.flipped.length).toBe(2);
+  });
+  it("rejects a third flip until resolve", () => {
     let s = initialState(1, S);
-    for (let i = 0; i < TOTAL_ROUNDS * 2; i++) {
-      s = reducer(s, { type: "play" });
-      s = reducer(s, { type: "next" });
-    }
-    expect(s.score).toBeGreaterThanOrEqual(0);
-    expect(s.score).toBeLessThanOrEqual(TOTAL_ROUNDS * (SCORE_WIN + 10));
+    s = reducer(s, { type: "flip", index: 0 });
+    s = reducer(s, { type: "flip", index: 1 });
+    const s3 = reducer(s, { type: "flip", index: 2 });
+    expect(s3.flipped.length).toBe(2);
   });
-  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("isTerminal true after all rounds played", () => {
-    let s = initialState(42, S);
-    for (let i = 0; i < TOTAL_ROUNDS * 2 + 5; i++) {
-      if (s.phase === "ready") s = reducer(s, { type: "play" });
-      else if (s.phase === "result") s = reducer(s, { type: "next" });
-      else break;
+  it("matching pair scores SCORE_MATCH and reveals", () => {
+    const s = initialState(1, S);
+    const v = s.values[0];
+    const partner = s.values.findIndex((x, i) => i !== 0 && x === v);
+    let s2 = reducer(s, { type: "flip", index: 0 });
+    s2 = reducer(s2, { type: "flip", index: partner });
+    s2 = reducer(s2, { type: "resolve" });
+    expect(s2.score).toBe(SCORE_MATCH);
+    expect(s2.matches).toBe(1);
+    expect(s2.revealed[0]).toBe(true);
+    expect(s2.revealed[partner]).toBe(true);
+  });
+  it("isTerminal null at start, true when all matched", () => {
+    let s = initialState(3, S);
+    expect(isTerminal(s)).toBeNull();
+    while (s.matches < PAIR_COUNT) {
+      const next = s.values.findIndex((_, i) => !s.revealed[i]);
+      const partner = s.values.findIndex((x, i) => i !== next && x === s.values[next] && !s.revealed[i]);
+      s = reducer(s, { type: "flip", index: next });
+      s = reducer(s, { type: "flip", index: partner });
+      s = reducer(s, { type: "resolve" });
     }
     expect(s.phase).toBe("done");
-    const t = isTerminal(s);
-    expect(t).not.toBeNull();
-    if (t) expect(t.score).toBeGreaterThanOrEqual(0);
+    expect(isTerminal(s)).not.toBeNull();
   });
 });
