@@ -41,4 +41,10 @@
 .durak-btn { background: #facc15 !important; color: #7f1d1d !important; }
 .durak-btn:hover { filter: brightness(1.1); }
 .durak-btn.danger { background: #facc15 !important; color: #fffbeb !important; }
+.durak .dm-btn:active:not(:disabled),
+.durak .durak-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.96);
+}
+/* shed-active */
 /* === SHED-THEME END === */

@@ -59,4 +59,10 @@
   outline: 2px solid #fef08a;
   outline-offset: 3px;
 }
+.g6c-shed .dm-btn:active:not(:disabled),
+.g6c-shed .g6c-shed-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.96);
+}
+/* shed-active */
 /* === SHED-THEME END === */

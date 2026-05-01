@@ -44,4 +44,10 @@
 }
 .ch-wrap button:hover,
 .ch-wrap .ch-btn:hover { filter: brightness(1.08); }
+.ch-wrap .dm-btn:active:not(:disabled),
+.ch-wrap .ch-shed-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.96);
+}
+/* shed-active */
 /* === SHED-THEME END === */
