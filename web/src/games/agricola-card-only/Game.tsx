@@ -8,16 +8,16 @@ export function AgricolaCardOnlyGame({ state, dispatch, onGameOver }: GameProps<
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-wrap">
-      <h3 className="bz-title">Agricola Card-Only</h3>
-      <div className="bz-stats">
+    <div className="bz-aco-wrap">
+      <h3 className="bz-aco-title">Agricola Card-Only</h3>
+      <div className="bz-aco-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Field <b>{state.assets}</b></div>
         <div>Occupation <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-actions">
+        <div className="bz-aco-actions">
           <button onClick={() => dispatch({ type: "invest" } as AgricolaCardOnlyAction)}>Buy Field (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as AgricolaCardOnlyAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as AgricolaCardOnlyAction)}>Hire Occupation (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function AgricolaCardOnlyGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-event">
+        <div className="bz-aco-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as AgricolaCardOnlyAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-done">
+        <div className="bz-aco-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

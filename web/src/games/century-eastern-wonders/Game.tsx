@@ -8,16 +8,16 @@ export function CenturyEasternWondersGame({ state, dispatch, onGameOver }: GameP
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-wrap">
-      <h3 className="bz-title">Century Eastern Wonders</h3>
-      <div className="bz-stats">
+    <div className="bz-cew-wrap">
+      <h3 className="bz-cew-title">Century Eastern Wonders</h3>
+      <div className="bz-cew-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Ship <b>{state.assets}</b></div>
         <div>Outpost <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-actions">
+        <div className="bz-cew-actions">
           <button onClick={() => dispatch({ type: "invest" } as CenturyEasternWondersAction)}>Buy Ship (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CenturyEasternWondersAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CenturyEasternWondersAction)}>Hire Outpost (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function CenturyEasternWondersGame({ state, dispatch, onGameOver }: GameP
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-event">
+        <div className="bz-cew-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as CenturyEasternWondersAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-done">
+        <div className="bz-cew-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

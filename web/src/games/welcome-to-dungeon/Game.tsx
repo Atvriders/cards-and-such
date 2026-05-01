@@ -7,27 +7,27 @@ export function WelcomeToDungeonGame({ state, dispatch, onGameOver }: GameProps<
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="cm-wrap"><div className="cm-done"><h2>🚪 Done!</h2><div className="cm-final">{state.score} pts</div></div></div>;
+    return <div className="wtd-wrap"><div className="wtd-done"><h2>Done!</h2><div className="wtd-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="cm-wrap">
-      <div className="cm-info">🚪 Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="cm-score">{state.score} pts</div>
+    <div className="wtd-wrap">
+      <div className="wtd-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="wtd-score">{state.score} pts</div>
       {state.you.length > 0 && (
         <>
-          <div className="cm-label">You</div>
-          <div className="cm-row">{state.you.map((i, k) => <div key={k} className="cm-card you">{DECK[i]?.name} ({DECK[i]?.value})</div>)}</div>
-          <div className="cm-label">Foe</div>
-          <div className="cm-row">{state.foe.map((i, k) => <div key={k} className="cm-card foe">{DECK[i]?.name} ({DECK[i]?.value})</div>)}</div>
+          <div className="wtd-label">You</div>
+          <div className="wtd-row">{state.you.map((i, k) => <div key={k} className="wtd-card you">{DECK[i]?.name} ({DECK[i]?.value})</div>)}</div>
+          <div className="wtd-label">Foe</div>
+          <div className="wtd-row">{state.foe.map((i, k) => <div key={k} className="wtd-card foe">{DECK[i]?.name} ({DECK[i]?.value})</div>)}</div>
         </>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as WelcomeToDungeonAction)}>Draw</button>
+        <button className="wtd-btn" onClick={() => dispatch({ type:"draw" } as WelcomeToDungeonAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>
-          <div className="cm-result">+{state.lastPts} pts</div>
-          <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as WelcomeToDungeonAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <div className="wtd-result">+{state.lastPts} pts</div>
+          <button className="wtd-btn alt" onClick={() => dispatch({ type:"next" } as WelcomeToDungeonAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

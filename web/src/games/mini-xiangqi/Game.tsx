@@ -1,28 +1,50 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { AbsState, AbsAction, AbsSettings } from "./state.js";
-import { isTerminal, SIZE } from "./state.js";
+import type { MiniXiangqiState, MiniXiangqiAction, MiniXiangqiSettings } from "./state.js";
+import { isTerminal, ROWS, COLS } from "./state.js";
 import "./Game.css";
 
-export function AbsGame({ state, dispatch, onGameOver }: GameProps<AbsState, AbsSettings>): JSX.Element {
+const ICONS: Record<string, string> = { K: "King", Cn: "Cnn", S: "Sld" };
+
+export function MiniXiangqiGame({ state, dispatch, onGameOver }: GameProps<MiniXiangqiState, MiniXiangqiSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
-    return <div className="ab-wrap"><h3>Mini Xiangqi</h3><div className="ab-done"><h2>{msg}</h2><div className="ab-final">{state.score} pts</div></div></div>;
-  }
+
+  const onCell = (i: number) => {
+    const p = state.board[i];
+    if (state.selected !== null && state.legalTargets.includes(i)) {
+      dispatch({ type: "moveTo", idx: i } as MiniXiangqiAction);
+    } else if (p && p.color === "P") {
+      dispatch({ type: "select", idx: i } as MiniXiangqiAction);
+    }
+  };
+
   return (
-    <div className="ab-wrap">
-      <h3>Mini Xiangqi</h3>
-      <div className="ab-info">Place on an empty square. Most pieces wins.</div>
-      <div className="ab-score">Move {state.moves}</div>
-      <div className="ab-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
-        {Array.from({ length: SIZE * SIZE }).map((_, i) => {
-          const v = state.board[i];
-          const cls = v === "P" ? "p" : v === "C" ? "c" : "";
-          return <button key={i} className={`ab-cell ${cls}`} disabled={v !== null} onClick={() => dispatch({ type:"place", idx:i } as AbsAction)}>{v ?? ""}</button>;
+    <div className="mxq-wrap">
+      <div className="mxq-header">
+        <span>Mini Xiangqi</span>
+        <span className="mxq-moves">Move {state.moves}</span>
+      </div>
+      <div className="mxq-board" style={{ gridTemplateColumns: `repeat(${COLS}, 1fr)` }}>
+        {Array.from({ length: ROWS * COLS }).map((_, i) => {
+          const p = state.board[i];
+          const isSel = state.selected === i;
+          const isTarget = state.legalTargets.includes(i);
+          const cls = `mxq-cell ${p ? (p.color === "P" ? "p" : "c") : ""} ${isSel ? "sel" : ""} ${isTarget ? "tgt" : ""}`;
+          return (
+            <button key={i} className={cls} onClick={() => onCell(i)}>
+              {p ? ICONS[p.kind] : ""}
+            </button>
+          );
         })}
       </div>
+      <div className="mxq-log">{state.log}</div>
+      {state.phase === "done" && (
+        <div className="mxq-done">
+          <h3>{state.result === "P" ? "Victory!" : state.result === "C" ? "Defeat" : "Draw"}</h3>
+          <div className="mxq-final">{state.score} pts</div>
+        </div>
+      )}
     </div>
   );
 }

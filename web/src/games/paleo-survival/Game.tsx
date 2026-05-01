@@ -8,16 +8,16 @@ export function PaleoSurvivalGame({ state, dispatch, onGameOver }: GameProps<Pal
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-wrap">
-      <h3 className="bz-title">Paleo Survival</h3>
-      <div className="bz-stats">
+    <div className="bz-ps-wrap">
+      <h3 className="bz-ps-title">Paleo Survival</h3>
+      <div className="bz-ps-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Tool <b>{state.assets}</b></div>
         <div>Tribesmate <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-actions">
+        <div className="bz-ps-actions">
           <button onClick={() => dispatch({ type: "invest" } as PaleoSurvivalAction)}>Buy Tool (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as PaleoSurvivalAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as PaleoSurvivalAction)}>Hire Tribesmate (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function PaleoSurvivalGame({ state, dispatch, onGameOver }: GameProps<Pal
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-event">
+        <div className="bz-ps-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as PaleoSurvivalAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-done">
+        <div className="bz-ps-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

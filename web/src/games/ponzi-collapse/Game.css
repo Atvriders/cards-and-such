@@ -1,10 +1,80 @@
-.bz-wrap { max-width: 540px; margin: 0 auto; padding: 14px; font-family: sans-serif; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-.bz-title { margin: 0; font-size: 1.1rem; }
-.bz-stats { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.bz-stats > div { background: #f3f4f6; padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; }
-.bz-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-.bz-actions > button { padding: 8px 14px; border: 0; border-radius: 8px; cursor: pointer; background: #4f46e5; color: #fff; font-weight: 600; }
-.bz-actions > button:hover { background: #4338ca; }
-.bz-event { background: #fef3c7; padding: 10px 14px; border-radius: 8px; max-width: 480px; text-align: center; }
-.bz-event button { margin-top: 8px; padding: 6px 14px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 700; background: #1f2937; color: #fff; }
-.bz-done { background: #ecfccb; padding: 14px 22px; border-radius: 10px; text-align: center; font-weight: 800; }
+/* ponzi-collapse — unique class prefix bz-pc- */
+.bz-pc-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  color: #f1f5f9;
+  background: linear-gradient(140deg, #0c4a6e, #082f49);
+  border-radius: 12px;
+}
+.bz-pc-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.bz-pc-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+}
+.bz-pc-stats > div {
+  background: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.bz-pc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.bz-pc-actions > button {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  transition: background 120ms;
+}
+.bz-pc-actions > button:hover { background: #4338ca; }
+.bz-pc-event {
+  background: rgba(255,209,102,0.12);
+  border: 1px solid rgba(255,209,102,0.3);
+  padding: 12px 16px;
+  border-radius: 8px;
+  max-width: 480px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.bz-pc-event button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  background: #06d6a0;
+  color: #0a1521;
+}
+.bz-pc-done {
+  background: rgba(6,214,160,0.12);
+  border: 1px solid rgba(6,214,160,0.3);
+  padding: 16px 24px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+}

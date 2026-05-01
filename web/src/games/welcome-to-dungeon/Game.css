@@ -1,2 +1,75 @@
-/* Modern card-mini look — see web/src/engines/cardmini/cardmini.css */
-@import "../../engines/cardmini/cardmini.css";
+/* Welcome to the Dungeon — unique class prefix wtd- */
+.wtd-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  color: #f1f5f9;
+  background: linear-gradient(140deg, #1a0e1f, #0a0510);
+  border-radius: 12px;
+}
+.wtd-info {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.wtd-score {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffd166;
+}
+.wtd-label {
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  align-self: flex-start;
+  margin-left: 12px;
+}
+.wtd-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.wtd-card {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.wtd-card.you { border-color: #06d6a0; color: #06d6a0; }
+.wtd-card.foe { border-color: #ef476f; color: #ef476f; }
+.wtd-btn {
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.wtd-btn:hover { background: #4338ca; }
+.wtd-btn.alt { background: #06d6a0; color: #0a1521; }
+.wtd-result {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffd166;
+}
+.wtd-done {
+  text-align: center;
+  background: rgba(255,209,102,0.1);
+  padding: 16px;
+  border-radius: 8px;
+}
+.wtd-final {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #06d6a0;
+}

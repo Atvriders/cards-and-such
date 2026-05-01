@@ -1,29 +1,112 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { HanafudaKoiKoiState, HanafudaKoiKoiAction, HanafudaKoiKoiSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, SCORE_WIN, SCORE_TIE, cardName, isRed, rankOf } from "./state.js";
+import { isTerminal, cardOf, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
+
+const CAT_COLOR: Record<string, string> = {
+  hikari: "#ffd166", tane: "#ef476f", tan: "#06d6a0", kasu: "#a8b3c5",
+};
+
+function CardChip({ id, onClick, highlighted, selected }: { id: number; onClick?: () => void; highlighted?: boolean; selected?: boolean }) {
+  const c = cardOf(id);
+  return (
+    <button
+      className={`hkk-card ${selected ? "hkk-sel" : ""} ${highlighted ? "hkk-hi" : ""}`}
+      style={{ borderColor: CAT_COLOR[c.category] }}
+      onClick={onClick}
+      disabled={!onClick}
+    >
+      <span className="hkk-month">{c.month}</span>
+      <span className="hkk-name">{c.name}</span>
+    </button>
+  );
+}
+
 export function HanafudaKoiKoiGame({ state, dispatch, onGameOver }: GameProps<HanafudaKoiKoiState, HanafudaKoiKoiSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
-  }
+
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.you !== null && state.cpu !== null && (
-        <div className="dm-row">
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>You</div><div className={`dm-card ${isRed(state.you) ? "red" : "black"}`}>{cardName(state.you)}</div></div>
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>CPU</div><div className={`dm-card ${isRed(state.cpu) ? "red" : "black"}`}>{cardName(state.cpu)}</div></div>
+    <div className="hkk-wrap">
+      <div className="hkk-header">
+        <span>Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="hkk-you">You {state.score}</span>
+        <span className="hkk-cpu">CPU {state.cpuScore}</span>
+      </div>
+
+      <div className="hkk-section">
+        <div className="hkk-label">CPU Captures ({state.cpuCaptured.length})</div>
+        <div className="hkk-row hkk-mini">{state.cpuCaptured.map(id => <CardChip key={id} id={id} />)}</div>
+      </div>
+
+      <div className="hkk-section">
+        <div className="hkk-label">Field</div>
+        <div className="hkk-row">
+          {state.field.map(id => {
+            const isMatch = state.phase === "select" && state.matches.includes(id);
+            const isDrawnMatch = state.phase === "drawn" && state.drawnMatches.includes(id);
+            return (
+              <CardChip
+                key={id}
+                id={id}
+                highlighted={isMatch || isDrawnMatch}
+                onClick={
+                  isMatch ? () => dispatch({ type: "matchHand", fieldId: id } as HanafudaKoiKoiAction)
+                  : isDrawnMatch ? () => dispatch({ type: "matchDraw", fieldId: id } as HanafudaKoiKoiAction)
+                  : undefined
+                }
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      {state.phase === "drawn" && state.drawnCard !== null && (
+        <div className="hkk-drawn">
+          <div className="hkk-label">Drew:</div>
+          <CardChip id={state.drawnCard} />
+          {state.drawnMatches.length === 0 && (
+            <button className="hkk-btn" onClick={() => dispatch({ type: "discardDraw" } as HanafudaKoiKoiAction)}>Discard</button>
+          )}
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as HanafudaKoiKoiAction)}>Koi-Koi!</button>}
-      {state.phase === "result" && state.you !== null && state.cpu !== null && <>
-        <div className="dm-result">{rankOf(state.you) > rankOf(state.cpu) ? `You win! +${SCORE_WIN}` : rankOf(state.you) < rankOf(state.cpu) ? "CPU wins" : `Tie +${SCORE_TIE}`}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as HanafudaKoiKoiAction)}>Next</button>
-      </>}
+
+      <div className="hkk-section">
+        <div className="hkk-label">Your Hand</div>
+        <div className="hkk-row">
+          {state.hand.map(id => (
+            <CardChip
+              key={id}
+              id={id}
+              selected={state.selected === id}
+              onClick={state.phase === "select" ? () => dispatch({ type: "select", cardId: id } as HanafudaKoiKoiAction) : undefined}
+            />
+          ))}
+        </div>
+        {state.phase === "select" && state.selected !== null && state.matches.length === 0 && (
+          <button className="hkk-btn" onClick={() => dispatch({ type: "discardHand" } as HanafudaKoiKoiAction)}>Discard to Field</button>
+        )}
+      </div>
+
+      <div className="hkk-section">
+        <div className="hkk-label">You Captured ({state.captured.length})</div>
+        <div className="hkk-row hkk-mini">{state.captured.map(id => <CardChip key={id} id={id} />)}</div>
+      </div>
+
+      <div className="hkk-log">{state.log}</div>
+
+      {state.phase === "result" && (
+        <button className="hkk-btn primary" onClick={() => dispatch({ type: "next" } as HanafudaKoiKoiAction)}>Next Round</button>
+      )}
+
+      {state.phase === "done" && (
+        <div className="hkk-done">
+          <h3>Game Over</h3>
+          <div className="hkk-final">You: {state.score} CPU: {state.cpuScore}</div>
+          <div>{state.score > state.cpuScore ? "You won!" : state.score < state.cpuScore ? "CPU won." : "Draw."}</div>
+        </div>
+      )}
     </div>
   );
 }

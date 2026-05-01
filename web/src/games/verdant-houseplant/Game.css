@@ -1,23 +1,80 @@
-.g-wrap { max-width: 480px; margin: 0 auto; padding: 1rem; text-align: center; color: #eee; }
-.g-header { display: flex; justify-content: space-between; padding: .5rem; background: #222; border-radius: 6px; margin-bottom: 1rem; }
-.g-score { font-weight: 700; color: #f39c12; }
-.g-dice { display: flex; justify-content: center; gap: .5rem; margin: 1rem 0; flex-wrap: wrap; }
-.g-die { display: inline-block; min-width: 2.4rem; padding: .6rem .8rem; background: #fff; color: #111; font-weight: 800; border-radius: 6px; font-size: 1.4rem; }
-.g-gain { color: #2ecc71; font-weight: 700; margin: .5rem 0; }
-.g-controls { margin: 1rem 0; }
-.g-btn { padding: .8rem 1.4rem; background: #3498db; color: #fff; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
-.g-btn:hover { background: #2980b9; }
-.g-final { font-size: 1.6rem; font-weight: 900; color: #f39c12; }
-.g-card { display: inline-block; min-width: 3rem; padding: .8rem .6rem; background: #fff; color: #111; font-weight: 800; border-radius: 6px; font-size: 1.2rem; margin: .25rem; }
-.g-card.red { color: #c0392b; }
-.g-grid { display: grid; grid-template-columns: repeat(3, 60px); gap: 4px; justify-content: center; margin: 1rem auto; }
-.g-cell { width: 60px; height: 60px; background: #2c3e50; color: #ecf0f1; font-size: 1.6rem; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #34495e; border-radius: 4px; }
-.g-cell.x { background: #3498db; }
-.g-cell.o { background: #e74c3c; }
-.g-cell:hover:not(.x):not(.o) { background: #34495e; }
-.g-q { margin: 1rem 0; padding: 1rem; background: #2c3e50; border-radius: 6px; }
-.g-options { display: flex; flex-direction: column; gap: .5rem; margin: 1rem 0; }
-.g-opt { padding: .6rem 1rem; background: #34495e; color: #fff; border: none; border-radius: 6px; cursor: pointer; text-align: left; }
-.g-opt:hover { background: #455d72; }
-.g-opt.right { background: #27ae60; }
-.g-opt.wrong { background: #c0392b; }
+/* verdant-houseplant — unique class prefix bz-vh- */
+.bz-vh-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  color: #f1f5f9;
+  background: linear-gradient(140deg, #831843, #500724);
+  border-radius: 12px;
+}
+.bz-vh-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.bz-vh-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+}
+.bz-vh-stats > div {
+  background: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.bz-vh-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.bz-vh-actions > button {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  transition: background 120ms;
+}
+.bz-vh-actions > button:hover { background: #4338ca; }
+.bz-vh-event {
+  background: rgba(255,209,102,0.12);
+  border: 1px solid rgba(255,209,102,0.3);
+  padding: 12px 16px;
+  border-radius: 8px;
+  max-width: 480px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.bz-vh-event button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  background: #06d6a0;
+  color: #0a1521;
+}
+.bz-vh-done {
+  background: rgba(6,214,160,0.12);
+  border: 1px solid rgba(6,214,160,0.3);
+  padding: 16px 24px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+}

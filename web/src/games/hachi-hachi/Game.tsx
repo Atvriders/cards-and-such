@@ -1,29 +1,65 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { HachiHachiState, HachiHachiAction, HachiHachiSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, SCORE_WIN, SCORE_TIE, cardName, isRed, rankOf } from "./state.js";
+import { isTerminal, cardOf, pointsOf, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
+
+const COLORS: Record<string, string> = { hikari: "#ffd166", tane: "#ef476f", tan: "#06d6a0", kasu: "#94a3b8" };
+
+function Card({ id, onClick }: { id: number; onClick?: () => void }) {
+  const c = cardOf(id);
+  return (
+    <button className="hh88-card" style={{ borderColor: COLORS[c.category] }} onClick={onClick} disabled={!onClick}>
+      <span className="hh88-month">M{c.month}</span>
+      <span className="hh88-cat">{c.category}</span>
+      <span className="hh88-pts">{pointsOf(c.category)}pt</span>
+    </button>
+  );
+}
+
 export function HachiHachiGame({ state, dispatch, onGameOver }: GameProps<HachiHachiState, HachiHachiSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
-  }
+
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.you !== null && state.cpu !== null && (
-        <div className="dm-row">
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>You</div><div className={`dm-card ${isRed(state.you) ? "red" : "black"}`}>{cardName(state.you)}</div></div>
-          <div><div style={{ fontSize: "0.85rem", color: "#888" }}>CPU</div><div className={`dm-card ${isRed(state.cpu) ? "red" : "black"}`}>{cardName(state.cpu)}</div></div>
+    <div className="hh88-wrap">
+      <div className="hh88-header">
+        <span>Round {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="hh88-you">You {state.score}</span>
+        <span className="hh88-cpu">CPU {state.cpuScore}</span>
+      </div>
+
+      <div className="hh88-section">
+        <div className="hh88-label">Field</div>
+        <div className="hh88-row">{state.field.map(id => <Card key={id} id={id} />)}</div>
+      </div>
+
+      <div className="hh88-section">
+        <div className="hh88-label">Your Hand</div>
+        <div className="hh88-row">
+          {state.hand.map(id => (
+            <Card
+              key={id}
+              id={id}
+              onClick={state.phase === "choose" ? () => dispatch({ type: "play", cardId: id } as HachiHachiAction) : undefined}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="hh88-log">{state.log}</div>
+
+      {state.phase === "result" && (
+        <button className="hh88-btn" onClick={() => dispatch({ type: "next" } as HachiHachiAction)}>Next Round</button>
+      )}
+
+      {state.phase === "done" && (
+        <div className="hh88-done">
+          <h3>Final</h3>
+          <div className="hh88-final">You {state.score} / CPU {state.cpuScore}</div>
+          <div>{state.score >= 88 ? "Hachi-Hachi! Hit 88!" : state.score > state.cpuScore ? "You won." : "CPU won."}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as HachiHachiAction)}>Eight!</button>}
-      {state.phase === "result" && state.you !== null && state.cpu !== null && <>
-        <div className="dm-result">{rankOf(state.you) > rankOf(state.cpu) ? `You win! +${SCORE_WIN}` : rankOf(state.you) < rankOf(state.cpu) ? "CPU wins" : `Tie +${SCORE_TIE}`}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as HachiHachiAction)}>Next</button>
-      </>}
     </div>
   );
 }

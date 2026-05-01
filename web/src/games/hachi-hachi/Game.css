@@ -1,2 +1,90 @@
-/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+/* Hachi-Hachi (88) — unique class prefix hh88- */
+.hh88-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #f8fafc;
+  background: linear-gradient(135deg, #261d18, #0f0a07);
+  border-radius: 12px;
+}
+.hh88-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.04);
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+.hh88-you { color: #06d6a0; }
+.hh88-cpu { color: #ef476f; }
+.hh88-section { display: flex; flex-direction: column; gap: 6px; }
+.hh88-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 700;
+}
+.hh88-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: rgba(0,0,0,0.18);
+  padding: 8px;
+  border-radius: 8px;
+}
+.hh88-card {
+  width: 88px;
+  height: 110px;
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #2a2018, #1a1410);
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  transition: transform 100ms;
+}
+.hh88-card:disabled { cursor: default; opacity: 0.85; }
+.hh88-card:not(:disabled):hover { transform: translateY(-3px); }
+.hh88-month { font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 1.2rem; }
+.hh88-cat { font-size: 0.78rem; color: #cbd5e1; }
+.hh88-pts { font-size: 0.7rem; color: #ffd166; font-weight: 700; }
+.hh88-log {
+  background: rgba(255,255,255,0.04);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+}
+.hh88-btn {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.hh88-btn:hover { background: #4338ca; }
+.hh88-done {
+  text-align: center;
+  background: rgba(255,209,102,0.12);
+  padding: 16px;
+  border-radius: 8px;
+}
+.hh88-final {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 8px 0;
+}

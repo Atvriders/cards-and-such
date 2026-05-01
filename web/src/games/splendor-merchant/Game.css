@@ -1,37 +1,80 @@
-.spmm-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; font-family: 'Inter', system-ui, sans-serif; max-width: 720px; margin: 0 auto; color: #1c2833; }
-.spmm-title { margin: 0; font-size: 1.4rem; font-weight: 800; color: #cd853f; letter-spacing: 0.02em; }
-.spmm-stats { display: flex; gap: 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9rem; }
-.spmm-stat { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; background: #f8f9fa; border-radius: 8px; min-width: 70px; }
-.spmm-stat span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; }
-.spmm-stat b { font-size: 1.15rem; color: #cd853f; }
-.spmm-prompt { font-size: 0.92rem; color: #566573; }
-.spmm-offer { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-.spmm-card { width: 96px; height: 132px; border: 2px solid #cd853f; border-radius: 12px; background: linear-gradient(160deg, #fff 0%, #fafafa 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease; padding: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-.spmm-card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.18); }
-.spmm-rank { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 900; color: #cd853f; }
-.spmm-suit { font-size: 0.78rem; font-weight: 700; color: #34495e; text-align: center; }
-.spmm-event { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 14px; background: #f4f6f7; border-radius: 10px; }
-.spmm-event-line { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #34495e; }
-.spmm-next { padding: 8px 18px; background: #cd853f; color: #fff; border: 0; border-radius: 6px; font-weight: 700; cursor: pointer; }
-.spmm-next:hover { filter: brightness(1.1); }
-.spmm-done { text-align: center; padding: 20px; background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border-radius: 14px; border: 2px solid #cd853f; min-width: 280px; }
-.spmm-done h3 { margin: 0 0 8px; color: #cd853f; }
-.spmm-final { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #566573; }
-.spmm-final-score { margin-top: 10px; font-size: 1.1rem; }
-.spmm-final-score b { color: #cd853f; font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; }
-.spmm-tableaus { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.spmm-tab { background: #fdfefe; border: 1px solid #ecf0f1; border-radius: 8px; padding: 8px 10px; }
-.spmm-tab-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; margin-bottom: 4px; font-weight: 700; }
-.spmm-tab-row { display: flex; gap: 6px; flex-wrap: wrap; min-height: 44px; align-items: center; }
-.spmm-mini { display: flex; flex-direction: column; align-items: center; padding: 4px 6px; border-radius: 5px; min-width: 36px; background: #fff; border: 1px solid #d6eaf8; font-family: 'JetBrains Mono', monospace; }
-.spmm-mini-rank { font-size: 0.95rem; font-weight: 800; color: #1b4f72; }
-.spmm-mini-suit { font-size: 0.65rem; color: #7f8c8d; }
-.spmm-empty { font-size: 0.78rem; color: #bdc3c7; font-style: italic; }
-.spmm-legend { font-size: 0.75rem; color: #7f8c8d; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: 6px 8px; }
-.spmm-leg { padding: 2px 8px; border-radius: 4px; font-weight: 700; background: #ecf0f1; color: #34495e; }
-.spmm-rule { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #95a5a6; }
-.spmm-suit-0 { border-color: #3498db; } .spmm-suit-0 .spmm-mini-rank, .spmm-suit-0.spmm-leg { background: #3498db; color: #fff; border-radius: 4px; padding: 1px 4px; }
-.spmm-suit-1 { border-color: #9b59b6; } .spmm-suit-1 .spmm-mini-rank, .spmm-suit-1.spmm-leg { background: #9b59b6; color: #fff; border-radius: 4px; padding: 1px 4px; }
-.spmm-suit-2 { border-color: #e74c3c; } .spmm-suit-2 .spmm-mini-rank, .spmm-suit-2.spmm-leg { background: #e74c3c; color: #fff; border-radius: 4px; padding: 1px 4px; }
-.spmm-suit-3 { border-color: #27ae60; } .spmm-suit-3 .spmm-mini-rank, .spmm-suit-3.spmm-leg { background: #27ae60; color: #fff; border-radius: 4px; padding: 1px 4px; }
-.spmm-suit-4 { border-color: #f39c12; } .spmm-suit-4 .spmm-mini-rank, .spmm-suit-4.spmm-leg { background: #f39c12; color: #fff; border-radius: 4px; padding: 1px 4px; }
+/* splendor-merchant — unique class prefix bz-sm- */
+.bz-sm-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  color: #f1f5f9;
+  background: linear-gradient(140deg, #312e81, #1e1b4b);
+  border-radius: 12px;
+}
+.bz-sm-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.bz-sm-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+}
+.bz-sm-stats > div {
+  background: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.bz-sm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.bz-sm-actions > button {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  transition: background 120ms;
+}
+.bz-sm-actions > button:hover { background: #4338ca; }
+.bz-sm-event {
+  background: rgba(255,209,102,0.12);
+  border: 1px solid rgba(255,209,102,0.3);
+  padding: 12px 16px;
+  border-radius: 8px;
+  max-width: 480px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.bz-sm-event button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  background: #06d6a0;
+  color: #0a1521;
+}
+.bz-sm-done {
+  background: rgba(6,214,160,0.12);
+  border: 1px solid rgba(6,214,160,0.3);
+  padding: 16px 24px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+}

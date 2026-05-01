@@ -8,16 +8,16 @@ export function PowerGridCardGame({ state, dispatch, onGameOver }: GameProps<Pow
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-wrap">
-      <h3 className="bz-title">Power Grid Card Game</h3>
-      <div className="bz-stats">
+    <div className="bz-pgc-wrap">
+      <h3 className="bz-pgc-title">Power Grid Card Game</h3>
+      <div className="bz-pgc-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Plant <b>{state.assets}</b></div>
         <div>Engineer <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-actions">
+        <div className="bz-pgc-actions">
           <button onClick={() => dispatch({ type: "invest" } as PowerGridCardAction)}>Buy Plant (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as PowerGridCardAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as PowerGridCardAction)}>Hire Engineer (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function PowerGridCardGame({ state, dispatch, onGameOver }: GameProps<Pow
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-event">
+        <div className="bz-pgc-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as PowerGridCardAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-done">
+        <div className="bz-pgc-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

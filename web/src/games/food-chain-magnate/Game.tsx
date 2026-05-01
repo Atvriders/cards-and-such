@@ -8,16 +8,16 @@ export function FoodChainMagnateGame({ state, dispatch, onGameOver }: GameProps<
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-wrap">
-      <h3 className="bz-title">Food Chain Magnate</h3>
-      <div className="bz-stats">
+    <div className="bz-fcm-wrap">
+      <h3 className="bz-fcm-title">Food Chain Magnate</h3>
+      <div className="bz-fcm-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Restaurant <b>{state.assets}</b></div>
         <div>Manager <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-actions">
+        <div className="bz-fcm-actions">
           <button onClick={() => dispatch({ type: "invest" } as FoodChainMagnateAction)}>Buy Restaurant (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as FoodChainMagnateAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as FoodChainMagnateAction)}>Hire Manager (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function FoodChainMagnateGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-event">
+        <div className="bz-fcm-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as FoodChainMagnateAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-done">
+        <div className="bz-fcm-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}
