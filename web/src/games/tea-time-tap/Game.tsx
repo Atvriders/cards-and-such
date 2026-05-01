@@ -13,22 +13,22 @@ export function TeaTimeTapGame({ state, dispatch, onGameOver }: GameProps<TeaTim
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="teatap-wrap"><div className="teatap-done"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="teatap-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">Tapped: {state.popped}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="teatap-wrap">
+      <div className="teatap-header">
+        <span className="teatap-info">Tapped: {state.popped}</span>
+        <span className="teatap-timer">{state.ticksRemaining}s</span>
+        <span className="teatap-score">{state.score} pts</span>
       </div>
-      <div className="fc-board">
+      <div className="teatap-board">
         {state.cups.map(c => {
           const x = (c.lane + 0.5) / LANES * 100;
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="fc-target"
+              className="teatap-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as TeaTimeTapAction)}
               aria-label="tea">🍵</button>

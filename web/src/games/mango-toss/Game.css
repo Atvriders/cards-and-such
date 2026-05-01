@@ -1,11 +1,111 @@
-.arc-wrap { display:flex; flex-direction:column; align-items:center; gap:16px; padding:24px 16px; font-family:sans-serif; user-select:none; max-width:420px; margin:0 auto; width:100%; }
-.arc-display { font-size:3rem; text-align:center; }
-.arc-info { font-size:0.9rem; color:#555; }
-.arc-score { font-size:1.1rem; font-weight:bold; color:#2c3e50; }
-.arc-slider { width:100%; }
-.arc-btn { padding:10px 24px; font-size:1rem; font-weight:bold; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#e07b00; }
-.arc-btn:hover { background:#b85e00; }
-.arc-result { font-size:1.1rem; font-weight:bold; padding:8px 20px; border-radius:8px; background:#f0f4ff; }
-.arc-done { text-align:center; }
-.arc-done h2 { font-size:1.6rem; margin:0 0 8px; }
-.arc-final { font-size:1.3rem; color:#e07b00; font-weight:bold; }
+/* === mango-toss unique theme: .mangotoss-* === */
+.mangotoss-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 18px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  user-select: none;
+  max-width: 460px;
+  margin: 0 auto;
+  width: 100%;
+  background: linear-gradient(180deg, #fef3c7, #fde047);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px -16px rgba(15,23,42,0.35), 0 0 0 1px rgba(15,23,42,0.06);
+  color: #1e293b;
+}
+.mangotoss-display {
+  font-size: 4.2rem;
+  text-align: center;
+  filter: drop-shadow(0 6px 14px #ea580c55);
+  animation: mangotoss-bob 2.4s ease-in-out infinite;
+}
+.mangotoss-info {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.01em;
+}
+.mangotoss-score {
+  font-size: 1.35rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #ea580c, #ea580ccc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+}
+.mangotoss-slider {
+  width: 100%;
+  accent-color: #ea580c;
+  height: 8px;
+}
+.mangotoss-btn {
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(180deg, #ea580c, #ea580ccc);
+  box-shadow: 0 6px 14px -6px #ea580caa, 0 0 0 1px rgba(0,0,0,0.06) inset;
+  transition: transform 120ms cubic-bezier(0.4,0,0.2,1), box-shadow 120ms;
+}
+.mangotoss-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px -8px #ea580ccc;
+}
+.mangotoss-btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+.mangotoss-result {
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 10px 24px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #ea580c;
+  box-shadow: 0 0 0 1px #ea580c33 inset;
+  animation: mangotoss-pop 280ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.mangotoss-done {
+  text-align: center;
+  padding: 24px 18px;
+  animation: mangotoss-pop 360ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.mangotoss-done h2 {
+  font-size: 1.7rem;
+  margin: 0 0 10px;
+  font-weight: 900;
+  color: #ea580c;
+  letter-spacing: -0.02em;
+}
+.mangotoss-final {
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #ea580c, #ea580ccc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes mangotoss-bob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+@keyframes mangotoss-pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mangotoss-display, .mangotoss-result, .mangotoss-done { animation: none !important; }
+}

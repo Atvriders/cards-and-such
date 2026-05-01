@@ -14,22 +14,22 @@ export function BobaBounceGame({ state, dispatch, onGameOver }: GameProps<BobaBo
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>popped: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="boba-wrap"><div className="boba-done"><h2>Time's Up!</h2><div>popped: {state.popped} / Missed: {state.missed}</div><div className="boba-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">popped: {state.popped}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="boba-wrap">
+      <div className="boba-header">
+        <span className="boba-info">popped: {state.popped}</span>
+        <span className="boba-timer">{state.ticksRemaining}s</span>
+        <span className="boba-score">{state.score} pts</span>
       </div>
-      <div className="fc-board">
+      <div className="boba-board">
         {state.items.map(c => {
           const x = (c.lane + 0.5) / LANES * 100;
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="fc-target"
+              className="boba-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as BobaBounceAction)}
               aria-label="boba-bounce">🧋</button>

@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === ramen-rush unique theme: .ramen-* === */
+.ramen-board {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(253,224,71,0.45), transparent 55%), linear-gradient(180deg, #713f12, #422006) !important;
+}
+.ramen-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.ramen-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #eab30888);
+  animation-name: ramen-spawn;
+}
+.ramen-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #eab308cc);
+}
+.ramen-score {
+  background: linear-gradient(180deg, #eab308, #fde68a) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #eab30855 !important;
+}
+.ramen-final {
+  background: linear-gradient(180deg, #eab308, #fde68a) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.ramen-timer {
+  color: #eab308 !important;
+  background: linear-gradient(180deg, #fde68a66, #fde68a33) !important;
+  box-shadow: 0 0 0 1px #eab30833 inset !important;
+}
+
+@keyframes ramen-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ramen-target { animation: none !important; }
+}

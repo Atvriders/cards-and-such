@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === latte-leap unique theme: .latte-* === */
+.latte-board {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(254,243,199,0.55), transparent 55%), linear-gradient(180deg, #78350f, #292524) !important;
+}
+.latte-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.latte-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #d9770688);
+  animation-name: latte-spawn;
+}
+.latte-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #d97706cc);
+}
+.latte-score {
+  background: linear-gradient(180deg, #d97706, #fef3c7) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #d9770655 !important;
+}
+.latte-final {
+  background: linear-gradient(180deg, #d97706, #fef3c7) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.latte-timer {
+  color: #d97706 !important;
+  background: linear-gradient(180deg, #fef3c766, #fef3c733) !important;
+  box-shadow: 0 0 0 1px #d9770633 inset !important;
+}
+
+@keyframes latte-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .latte-target { animation: none !important; }
+}

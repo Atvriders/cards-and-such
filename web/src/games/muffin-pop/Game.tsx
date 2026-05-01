@@ -8,24 +8,24 @@ export function MuffinPopGame({ state, dispatch, onGameOver }: GameProps<MuffinP
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   if (state.phase === "done") {
-    return <div className="arc-wrap"><div className="arc-done"><h2>All Done!</h2><div className="arc-final">Score: {state.score}</div></div></div>;
+    return <div className="muffin-wrap"><div className="muffin-done"><h2>All Done!</h2><div className="muffin-final">Score: {state.score}</div></div></div>;
   }
   return (
-    <div className="arc-wrap">
-      <div className="arc-info">Round {state.roundIndex + 1} / {state.targets.length}</div>
-      <div className="arc-score">Score: {state.score}</div>
-      <div className="arc-display">🧁</div>
+    <div className="muffin-wrap">
+      <div className="muffin-info">Round {state.roundIndex + 1} / {state.targets.length}</div>
+      <div className="muffin-score">Score: {state.score}</div>
+      <div className="muffin-display">🧁</div>
       {state.phase === "aiming" ? (
         <>
-          <input className="arc-slider" type="range" min={0} max={100} value={state.power}
+          <input className="muffin-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as MuffinPopAction)} />
-          <div className="arc-info">Power: {state.power}</div>
-          <button className="arc-btn" onClick={() => dispatch({ type:"throw" } as MuffinPopAction)}>Go!</button>
+          <div className="muffin-info">Power: {state.power}</div>
+          <button className="muffin-btn" onClick={() => dispatch({ type:"throw" } as MuffinPopAction)}>Go!</button>
         </>
       ) : (
         <>
-          <div className="arc-result">+{state.lastPts} pts (off by {state.lastDiff})</div>
-          <button className="arc-btn" onClick={() => dispatch({ type:"next" } as MuffinPopAction)}>Next</button>
+          <div className="muffin-result">+{state.lastPts} pts (off by {state.lastDiff})</div>
+          <button className="muffin-btn" onClick={() => dispatch({ type:"next" } as MuffinPopAction)}>Next</button>
         </>
       )}
     </div>

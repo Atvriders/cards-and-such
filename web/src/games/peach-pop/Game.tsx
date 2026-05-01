@@ -14,22 +14,22 @@ export function PeachPopGame({ state, dispatch, onGameOver }: GameProps<PeachPop
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="peachpop-wrap"><div className="peachpop-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="peachpop-final">{state.score} pts</div></div></div>;
+    return <div className="peach-wrap"><div className="peach-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="peach-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="peachpop-wrap">
-      <div className="peachpop-header">
-        <span className="peachpop-info">Popped: {state.popped}</span>
-        <span className="peachpop-timer">{state.ticksRemaining}s</span>
-        <span className="peachpop-score">{state.score} pts</span>
+    <div className="peach-wrap">
+      <div className="peach-header">
+        <span className="peach-info">Popped: {state.popped}</span>
+        <span className="peach-timer">{state.ticksRemaining}s</span>
+        <span className="peach-score">{state.score} pts</span>
       </div>
-      <div className="peachpop-board">
+      <div className="peach-board">
         {state.peaches.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="peachpop-target"
+              className="peach-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as PeachPopAction)}
               aria-label="peach">🍑</button>

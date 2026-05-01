@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === tea-time-tap unique theme: .teatap-* === */
+.teatap-board {
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(187,247,208,0.45), transparent 55%), linear-gradient(180deg, #14532d, #052e16) !important;
+}
+.teatap-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.teatap-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #22c55e88);
+  animation-name: teatap-spawn;
+}
+.teatap-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #22c55ecc);
+}
+.teatap-score {
+  background: linear-gradient(180deg, #22c55e, #bbf7d0) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #22c55e55 !important;
+}
+.teatap-final {
+  background: linear-gradient(180deg, #22c55e, #bbf7d0) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.teatap-timer {
+  color: #22c55e !important;
+  background: linear-gradient(180deg, #bbf7d066, #bbf7d033) !important;
+  box-shadow: 0 0 0 1px #22c55e33 inset !important;
+}
+
+@keyframes teatap-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teatap-target { animation: none !important; }
+}

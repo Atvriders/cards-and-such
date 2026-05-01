@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === smoothie-swipe unique theme: .smoothie-* === */
+.smoothie-board {
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(244,114,182,0.4), transparent 55%), linear-gradient(180deg, #831843, #500724) !important;
+}
+.smoothie-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.smoothie-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #ec489988);
+  animation-name: smoothie-spawn;
+}
+.smoothie-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #ec4899cc);
+}
+.smoothie-score {
+  background: linear-gradient(180deg, #ec4899, #fbcfe8) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #ec489955 !important;
+}
+.smoothie-final {
+  background: linear-gradient(180deg, #ec4899, #fbcfe8) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.smoothie-timer {
+  color: #ec4899 !important;
+  background: linear-gradient(180deg, #fbcfe866, #fbcfe833) !important;
+  box-shadow: 0 0 0 1px #ec489933 inset !important;
+}
+
+@keyframes smoothie-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smoothie-target { animation: none !important; }
+}

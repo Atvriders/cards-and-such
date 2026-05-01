@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === coffee-collect unique theme: .coffee-* === */
+.coffee-board {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(180,83,9,0.45), transparent 55%), linear-gradient(180deg, #292524, #0c0a09) !important;
+}
+.coffee-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.coffee-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #a1620788);
+  animation-name: coffee-spawn;
+}
+.coffee-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #a16207cc);
+}
+.coffee-score {
+  background: linear-gradient(180deg, #a16207, #fde68a) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #a1620755 !important;
+}
+.coffee-final {
+  background: linear-gradient(180deg, #a16207, #fde68a) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.coffee-timer {
+  color: #a16207 !important;
+  background: linear-gradient(180deg, #fde68a66, #fde68a33) !important;
+  box-shadow: 0 0 0 1px #a1620733 inset !important;
+}
+
+@keyframes coffee-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coffee-target { animation: none !important; }
+}

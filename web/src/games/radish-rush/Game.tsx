@@ -14,25 +14,25 @@ export function RadishRushGame({ state, dispatch, onGameOver }: GameProps<Radish
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="radishrush-wrap"><div className="radishrush-done"><h2>Time's Up!</h2><div>Picked: {state.popped} / Missed: {state.missed}</div><div className="radishrush-final">{state.score} pts</div></div></div>;
+    return <div className="radish-wrap"><div className="radish-done"><h2>Time's Up!</h2><div>Picked: {state.popped} / Missed: {state.missed}</div><div className="radish-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="radishrush-wrap">
-      <div className="radishrush-header">
-        <span className="radishrush-info">Picked: {state.popped}</span>
-        <span className="radishrush-timer">{state.ticksRemaining}s</span>
-        <span className="radishrush-score">{state.score} pts</span>
+    <div className="radish-wrap">
+      <div className="radish-header">
+        <span className="radish-info">Picked: {state.popped}</span>
+        <span className="radish-timer">{state.ticksRemaining}s</span>
+        <span className="radish-score">{state.score} pts</span>
       </div>
-      <div className="radishrush-board">
+      <div className="radish-board">
         {state.radishes.map(r => {
           const x = (r.lane + 0.5) / LANES * 100;
           const y = 20 + ((r.ticksLeft * 23) % 70);
           return (
             <button key={r.id}
-              className="radishrush-target"
+              className="radish-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:r.id } as RadishRushAction)}
-              aria-label="radish">🌶️</button>
+              aria-label="radish">🥕</button>
           );
         })}
       </div>

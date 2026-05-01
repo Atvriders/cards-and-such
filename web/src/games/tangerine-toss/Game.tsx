@@ -14,22 +14,22 @@ export function TangerineTossGame({ state, dispatch, onGameOver }: GameProps<Tan
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="tangerinetoss-wrap"><div className="tangerinetoss-done"><h2>Time's Up!</h2><div>Tossed: {state.popped} / Missed: {state.missed}</div><div className="tangerinetoss-final">{state.score} pts</div></div></div>;
+    return <div className="tangerine-wrap"><div className="tangerine-done"><h2>Time's Up!</h2><div>Tossed: {state.popped} / Missed: {state.missed}</div><div className="tangerine-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="tangerinetoss-wrap">
-      <div className="tangerinetoss-header">
-        <span className="tangerinetoss-info">Tossed: {state.popped}</span>
-        <span className="tangerinetoss-timer">{state.ticksRemaining}s</span>
-        <span className="tangerinetoss-score">{state.score} pts</span>
+    <div className="tangerine-wrap">
+      <div className="tangerine-header">
+        <span className="tangerine-info">Tossed: {state.popped}</span>
+        <span className="tangerine-timer">{state.ticksRemaining}s</span>
+        <span className="tangerine-score">{state.score} pts</span>
       </div>
-      <div className="tangerinetoss-board">
+      <div className="tangerine-board">
         {state.tangerines.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="tangerinetoss-target"
+              className="tangerine-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as TangerineTossAction)}
               aria-label="tangerine">🍊</button>

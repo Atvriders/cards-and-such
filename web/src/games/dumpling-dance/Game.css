@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === dumpling-dance unique theme: .dumpling-* === */
+.dumpling-board {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(254,202,202,0.5), transparent 55%), linear-gradient(180deg, #7f1d1d, #450a0a) !important;
+}
+.dumpling-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.dumpling-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #ef444488);
+  animation-name: dumpling-spawn;
+}
+.dumpling-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #ef4444cc);
+}
+.dumpling-score {
+  background: linear-gradient(180deg, #ef4444, #fecaca) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #ef444455 !important;
+}
+.dumpling-final {
+  background: linear-gradient(180deg, #ef4444, #fecaca) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.dumpling-timer {
+  color: #ef4444 !important;
+  background: linear-gradient(180deg, #fecaca66, #fecaca33) !important;
+  box-shadow: 0 0 0 1px #ef444433 inset !important;
+}
+
+@keyframes dumpling-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dumpling-target { animation: none !important; }
+}

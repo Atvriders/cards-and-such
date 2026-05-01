@@ -13,25 +13,25 @@ export function JuiceJamboreeGame({ state, dispatch, onGameOver }: GameProps<Jui
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="juice-wrap"><div className="juice-done"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="juice-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">Clicked: {state.clicked}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="juice-wrap">
+      <div className="juice-header">
+        <span className="juice-info">Clicked: {state.clicked}</span>
+        <span className="juice-timer">{state.ticksRemaining}s</span>
+        <span className="juice-score">{state.score} pts</span>
       </div>
-      <div className="fc-board" style={{ background: "linear-gradient(180deg,#fff7e6,#ffe2a8)" }}>
+      <div className="juice-board" style={{ background: "linear-gradient(180deg,#fff7e6,#ffe2a8)" }}>
         {state.targets.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="juice-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as JuiceJamboreeAction)}
-              aria-label="juice-jamboree">🥤</button>
+              aria-label="juice-jamboree">🍹</button>
           );
         })}
       </div>

@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === chai-chase unique theme: .chai-* === */
+.chai-board {
+  background:
+    radial-gradient(ellipse at 70% 0%, rgba(254,215,170,0.4), transparent 55%), linear-gradient(180deg, #7c2d12, #431407) !important;
+}
+.chai-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.chai-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #fb923c88);
+  animation-name: chai-spawn;
+}
+.chai-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #fb923ccc);
+}
+.chai-score {
+  background: linear-gradient(180deg, #fb923c, #fed7aa) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #fb923c55 !important;
+}
+.chai-final {
+  background: linear-gradient(180deg, #fb923c, #fed7aa) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.chai-timer {
+  color: #fb923c !important;
+  background: linear-gradient(180deg, #fed7aa66, #fed7aa33) !important;
+  box-shadow: 0 0 0 1px #fb923c33 inset !important;
+}
+
+@keyframes chai-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chai-target { animation: none !important; }
+}

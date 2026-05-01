@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === boba-bounce unique theme: .boba-* === */
+.boba-board {
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(254,202,202,0.4), transparent 55%), linear-gradient(180deg, #78350f, #44403c) !important;
+}
+.boba-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.boba-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #f59e0b88);
+  animation-name: boba-spawn;
+}
+.boba-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #f59e0bcc);
+}
+.boba-score {
+  background: linear-gradient(180deg, #f59e0b, #fed7aa) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #f59e0b55 !important;
+}
+.boba-final {
+  background: linear-gradient(180deg, #f59e0b, #fed7aa) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.boba-timer {
+  color: #f59e0b !important;
+  background: linear-gradient(180deg, #fed7aa66, #fed7aa33) !important;
+  box-shadow: 0 0 0 1px #f59e0b33 inset !important;
+}
+
+@keyframes boba-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boba-target { animation: none !important; }
+}

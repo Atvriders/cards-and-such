@@ -13,25 +13,25 @@ export function MochaMarchGame({ state, dispatch, onGameOver }: GameProps<MochaM
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="mocha-wrap"><div className="mocha-done"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="mocha-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">Clicked: {state.clicked}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="mocha-wrap">
+      <div className="mocha-header">
+        <span className="mocha-info">Clicked: {state.clicked}</span>
+        <span className="mocha-timer">{state.ticksRemaining}s</span>
+        <span className="mocha-score">{state.score} pts</span>
       </div>
-      <div className="fc-board" style={{ background: "linear-gradient(180deg,#3a2317,#7c5246)" }}>
+      <div className="mocha-board" style={{ background: "linear-gradient(180deg,#3a2317,#7c5246)" }}>
         {state.targets.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="mocha-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as MochaMarchAction)}
-              aria-label="mocha-march">☕</button>
+              aria-label="mocha-march">🤎</button>
           );
         })}
       </div>

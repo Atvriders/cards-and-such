@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === juice-jamboree unique theme: .juice-* === */
+.juice-board {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(253,186,116,0.5), transparent 55%), linear-gradient(180deg, #c2410c, #7c2d12) !important;
+}
+.juice-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.juice-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #f9731688);
+  animation-name: juice-spawn;
+}
+.juice-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #f97316cc);
+}
+.juice-score {
+  background: linear-gradient(180deg, #f97316, #fed7aa) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #f9731655 !important;
+}
+.juice-final {
+  background: linear-gradient(180deg, #f97316, #fed7aa) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.juice-timer {
+  color: #f97316 !important;
+  background: linear-gradient(180deg, #fed7aa66, #fed7aa33) !important;
+  box-shadow: 0 0 0 1px #f9731633 inset !important;
+}
+
+@keyframes juice-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .juice-target { animation: none !important; }
+}

@@ -1,1 +1,50 @@
 @import "../../engines/clicker/clicker.css";
+
+/* === mocha-march unique theme: .mocha-* === */
+.mocha-board {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(120,53,15,0.5), transparent 55%), linear-gradient(180deg, #1c1917, #0c0a09) !important;
+}
+.mocha-board::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
+}
+.mocha-target {
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px #a1620788);
+  animation-name: mocha-spawn;
+}
+.mocha-target:hover {
+  filter:
+    drop-shadow(0 10px 16px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px #a16207cc);
+}
+.mocha-score {
+  background: linear-gradient(180deg, #a16207, #fbbf24) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 18px #a1620755 !important;
+}
+.mocha-final {
+  background: linear-gradient(180deg, #a16207, #fbbf24) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+.mocha-timer {
+  color: #a16207 !important;
+  background: linear-gradient(180deg, #fbbf2466, #fbbf2433) !important;
+  box-shadow: 0 0 0 1px #a1620733 inset !important;
+}
+
+@keyframes mocha-spawn {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-18deg); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mocha-target { animation: none !important; }
+}

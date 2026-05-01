@@ -14,22 +14,22 @@ export function MochiMashGame({ state, dispatch, onGameOver }: GameProps<MochiMa
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="mochi-wrap"><div className="mochi-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="mochi-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="fc-wrap">
-      <div className="fc-header">
-        <span className="fc-info">Popped: {state.popped}</span>
-        <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+    <div className="mochi-wrap">
+      <div className="mochi-header">
+        <span className="mochi-info">Popped: {state.popped}</span>
+        <span className="mochi-timer">{state.ticksRemaining}s</span>
+        <span className="mochi-score">{state.score} pts</span>
       </div>
-      <div className="fc-board">
+      <div className="mochi-board">
         {state.targets.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="mochi-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as MochiMashAction)}
               aria-label="target">🍡</button>
