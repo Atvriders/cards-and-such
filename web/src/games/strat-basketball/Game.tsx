@@ -9,42 +9,42 @@ export function StratBasketballGame({ state, dispatch, onGameOver }: GameProps<S
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     return (
-      <div className="strbas-wrap">
-        <div className="strbas-done">
+      <div className="strbsk-wrap">
+        <div className="strbsk-done">
           <h2>Quarter</h2>
-          <div className="strbas-final">{Math.max(0, state.score)} pts</div>
+          <div className="strbsk-final">{Math.max(0, state.score)} pts</div>
           
-          <div className="strbas-history">
-            {state.log.slice(-8).map((line, i) => <div key={i} className="strbas-log">{line}</div>)}
+          <div className="strbsk-history">
+            {state.log.slice(-8).map((line, i) => <div key={i} className="strbsk-log">{line}</div>)}
           </div>
         </div>
       </div>
     );
   }
   return (
-    <div className="strbas-wrap">
-      <div className="strbas-head">
-        <span className="strbas-round">Quarter {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="strbas-score">{state.score} pts</span>
+    <div className="strbsk-wrap">
+      <div className="strbsk-head">
+        <span className="strbsk-round">Quarter {state.round} / {TOTAL_ROUNDS}</span>
+        <span className="strbsk-score">{state.score} pts</span>
       </div>
       
       {state.dice && (
-        <div className="strbas-dice-row">
-          {state.dice.map((d, i) => <div key={i} className="strbas-die">{d}</div>)}
+        <div className="strbsk-dice-row">
+          {state.dice.map((d, i) => <div key={i} className="strbsk-die">{d}</div>)}
         </div>
       )}
       {state.lastPts !== 0 && state.phase === "rolled" && (
-        <div className="strbas-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
+        <div className="strbsk-result">{state.lastPts > 0 ? "+" : ""}{state.lastPts}</div>
       )}
-      <div className="strbas-log-strip">
-        {state.log.slice(-3).map((line, i) => <div key={i} className="strbas-log">{line}</div>)}
+      <div className="strbsk-log-strip">
+        {state.log.slice(-3).map((line, i) => <div key={i} className="strbsk-log">{line}</div>)}
       </div>
-      <div className="strbas-actions">
+      <div className="strbsk-actions">
         {state.phase === "rolling" && (
-          <button className="strbas-btn primary" onClick={() => dispatch({ type: "roll" } as StratBasketballAction)}>Roll</button>
+          <button className="strbsk-btn primary" onClick={() => dispatch({ type: "roll" } as StratBasketballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="strbas-btn alt" onClick={() => dispatch({ type: "next" } as StratBasketballAction)}>Next</button>
+          <button className="strbsk-btn alt" onClick={() => dispatch({ type: "next" } as StratBasketballAction)}>Next</button>
         )}
       </div>
     </div>

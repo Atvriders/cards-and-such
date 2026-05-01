@@ -1,20 +1,20 @@
-.strbas-wrap { display:flex;flex-direction:column;gap:14px;padding:22px;font-family:'Inter',sans-serif;max-width:640px;margin:0 auto;background:linear-gradient(135deg,#3a1a0a,#5a2f1c);color:#ecf0f1;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.25); }
-.strbas-head { display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:1.05rem; }
-.strbas-round { color:#fff;letter-spacing:0.5px; }
-.strbas-score { color:#e67e22;font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:800; }
-.strbas-dice-row { display:flex;flex-wrap:wrap;justify-content:center;gap:10px; }
-.strbas-die { background:#fefefe;color:#2c3e50;border:2px solid #34495e;border-radius:10px;font-weight:900;font-size:1.6rem;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;box-shadow:0 2px 6px rgba(0,0,0,0.18); }
-.strbas-result { text-align:center;font-weight:900;font-size:1.4rem;color:#e67e22;font-family:'JetBrains Mono',monospace; }
-.strbas-log-strip { display:flex;flex-direction:column;gap:4px;min-height:18px; }
-.strbas-log { font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#bdc3c7;text-align:center; }
-.strbas-actions { display:flex;justify-content:center;gap:12px; }
-.strbas-btn { padding:11px 28px;border:none;border-radius:8px;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;font-size:1rem;color:#fff; }
-.strbas-btn.primary { background:#e67e22; }
-.strbas-btn.primary:hover { filter:brightness(1.1); }
-.strbas-btn.alt { background:#e67e22; }
-.strbas-btn.alt:hover { background:#ca6f1e; }
-.strbas-done { text-align:center;padding:24px;background:rgba(0,0,0,0.3);border-radius:12px; }
-.strbas-done h2 { margin:0 0 12px;color:#e67e22; }
-.strbas-final { font-size:2.4rem;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;margin-bottom:14px; }
-.strbas-history { display:flex;flex-direction:column;gap:4px;margin-top:12px; }
-
+.strbsk-wrap { display:flex;flex-direction:column;gap:14px;padding:22px;font-family:'Inter',sans-serif;max-width:640px;margin:0 auto;background:linear-gradient(135deg,#a0541a,#5c2e0a);color:#ecf0f1;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.35); }
+.strbsk-head { display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:1.05rem; }
+.strbsk-round { color:#ecf0f1;letter-spacing:0.5px;text-transform:uppercase;font-size:0.85rem;opacity:0.9; }
+.strbsk-score { color:#f5b942;font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,0.3); }
+.strbsk-dice-row { display:flex;flex-wrap:wrap;justify-content:center;gap:10px; }
+.strbsk-die { background:#fbe5b5;color:#3a1808;border:2px solid #5c2e0a;border-radius:10px;font-weight:900;font-size:1.6rem;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;box-shadow:0 2px 6px rgba(0,0,0,0.25); }
+.strbsk-result { text-align:center;font-weight:900;font-size:1.4rem;color:#f5b942;font-family:'JetBrains Mono',monospace;text-shadow:0 1px 2px rgba(0,0,0,0.3); }
+.strbsk-log-strip { display:flex;flex-direction:column;gap:4px;min-height:18px; }
+.strbsk-log { font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#bdc3c7;text-align:center; }
+.strbsk-actions { display:flex;justify-content:center;gap:12px; }
+.strbsk-btn { padding:11px 28px;border:none;border-radius:8px;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;font-size:1rem;color:#fff;letter-spacing:0.5px;transition:filter 0.15s,transform 0.05s; }
+.strbsk-btn:active { transform:translateY(1px); }
+.strbsk-btn.primary { background:#f5b942;color:#3a1808; }
+.strbsk-btn.primary:hover { filter:brightness(1.12); }
+.strbsk-btn.alt { background:#c98a20;color:#fff; }
+.strbsk-btn.alt:hover { filter:brightness(1.1); }
+.strbsk-done { text-align:center;padding:24px;background:rgba(0,0,0,0.32);border-radius:12px;border:1px solid rgba(255,255,255,0.06); }
+.strbsk-done h2 { margin:0 0 12px;color:#f5b942;letter-spacing:1px;text-transform:uppercase;font-size:1.3rem; }
+.strbsk-final { font-size:2.4rem;font-weight:900;color:#ecf0f1;font-family:'JetBrains Mono',monospace;margin-bottom:14px;text-shadow:0 2px 4px rgba(0,0,0,0.4); }
+.strbsk-history { display:flex;flex-direction:column;gap:4px;margin-top:12px; }
