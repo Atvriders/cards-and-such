@@ -5,72 +5,262 @@ export interface WeaponInventionsQuizState { questions: QuizQuestion[]; currentI
 export type WeaponInventionsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Gunpowder was first developed in?",
+    "question": "Gunpowder originated in?",
     "choices": [
-      "China (Tang/Song)",
-      "Greece",
-      "Egypt",
+      "China",
+      "India",
+      "Persia",
       "Rome"
     ],
     "correct": 0
   },
   {
-    "question": "Longbow was famously used at?",
+    "question": "Gunpowder reached Europe by the?",
     "choices": [
-      "Hastings 1066",
-      "Agincourt 1415",
-      "Cannae",
-      "Marathon"
+      "8th century",
+      "13th century",
+      "17th century",
+      "19th century"
     ],
     "correct": 1
   },
   {
-    "question": "Maxim gun was an early?",
+    "question": "Longbow famously used by?",
     "choices": [
-      "Bayonet",
-      "Self-powered machine gun",
-      "Cannon",
+      "French",
+      "English",
+      "Spanish",
+      "Italians"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Crossbow advantage over bow?",
+    "choices": [
+      "Range",
+      "Ease of training",
+      "Lightness",
+      "Accuracy only"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Cannon first widely used in?",
+    "choices": [
+      "10th century",
+      "14th century",
+      "18th century",
+      "20th century"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Musket replaced the?",
+    "choices": [
+      "Sword",
+      "Arquebus",
+      "Pistol",
       "Crossbow"
     ],
     "correct": 1
   },
   {
-    "question": "AK-47 designer?",
+    "question": "Rifling improves?",
+    "choices": [
+      "Range",
+      "Accuracy",
+      "Loading speed",
+      "Weight"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Colt revolver patented in?",
+    "choices": [
+      "1806",
+      "1836",
+      "1866",
+      "1896"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Maxim gun was the first?",
+    "choices": [
+      "Repeating rifle",
+      "Recoil-operated machine gun",
+      "Bolt-action",
+      "Semi-auto pistol"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Gatling gun inventor?",
+    "choices": [
+      "Maxim",
+      "Gatling",
+      "Browning",
+      "Colt"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Dynamite invented by?",
+    "choices": [
+      "Nobel",
+      "Schwarz",
+      "Curie",
+      "Edison"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Dynamite year?",
+    "choices": [
+      "1847",
+      "1867",
+      "1887",
+      "1907"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "AK-47 designed by?",
     "choices": [
       "Stoner",
       "Kalashnikov",
+      "Browning",
+      "Garand"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "AK-47 introduced in?",
+    "choices": [
+      "1947",
+      "1957",
+      "1967",
+      "1977"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "M16 rifle designer?",
+    "choices": [
+      "Stoner",
       "Garand",
-      "Browning"
+      "Browning",
+      "Kalashnikov"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Submarine pioneer USS Holland?",
+    "choices": [
+      "Holland",
+      "Bushnell",
+      "Fulton",
+      "Whitehead"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Self-propelled torpedo by?",
+    "choices": [
+      "Whitehead",
+      "Maxim",
+      "Nobel",
+      "Colt"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Tank first used in battle?",
+    "choices": [
+      "WWI",
+      "WWII",
+      "Korea",
+      "Vietnam"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First nuclear weapon used in war year?",
+    "choices": [
+      "1935",
+      "1945",
+      "1955",
+      "1965"
     ],
     "correct": 1
   },
   {
-    "question": "Year AK-47 entered service?",
+    "question": "Manhattan Project led by?",
     "choices": [
-      "1939",
-      "1949",
-      "1959",
-      "1969"
+      "Einstein",
+      "Oppenheimer",
+      "Fermi",
+      "Bohr"
     ],
     "correct": 1
   },
   {
-    "question": "Atomic bomb first used militarily at?",
+    "question": "Hydrogen bomb first tested in?",
     "choices": [
-      "Tokyo only",
-      "Hiroshima and Nagasaki (1945)",
-      "Berlin",
-      "Pearl Harbor"
+      "1942",
+      "1952",
+      "1962",
+      "1972"
     ],
     "correct": 1
   },
   {
-    "question": "Crossbow rose to prominence in medieval?",
+    "question": "Stealth bomber B-2 era?",
     "choices": [
-      "Scandinavia",
-      "Europe and China",
-      "South America",
-      "Africa"
+      "1960s",
+      "1980s",
+      "2000s",
+      "2020s"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "ICBM stands for?",
+    "choices": [
+      "Inter-Continental Ballistic Missile",
+      "Inter-Country Bomb Missile",
+      "Intra-Continental Battle Missile",
+      "Internal Combat Bomb Missile"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First jet fighter combat use?",
+    "choices": [
+      "WWI",
+      "WWII",
+      "Korea",
+      "Vietnam"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Chemical weapons widely used in?",
+    "choices": [
+      "WWI",
+      "WWII",
+      "Korea",
+      "Gulf War"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Greek fire was used by?",
+    "choices": [
+      "Romans",
+      "Byzantines",
+      "Persians",
+      "Vikings"
     ],
     "correct": 1
   },
@@ -78,79 +268,39 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "Trebuchet is a type of?",
     "choices": [
       "Sword",
-      "Counterweight siege engine",
-      "Helmet",
-      "Shield"
+      "Siege engine",
+      "Cannon",
+      "Crossbow"
     ],
     "correct": 1
   },
   {
-    "question": "Bayonet originated as?",
+    "question": "Samurai sword is called?",
     "choices": [
-      "Pistol attachment",
-      "Plug bayonet for muskets",
-      "Cannon ball",
-      "Tank shell"
+      "Wakizashi",
+      "Katana",
+      "Tanto",
+      "Naginata"
     ],
     "correct": 1
   },
   {
-    "question": "Tank first used in combat?",
+    "question": "Smokeless powder developed in?",
     "choices": [
-      "WWI (1916, Somme)",
-      "WWII",
-      "Crimean War",
-      "Civil War"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First nuclear submarine?",
-    "choices": [
-      "USS Nautilus (1954)",
-      "K-19 1958",
-      "USS Skipjack 1959",
-      "Triton 1961"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Greek fire was a weapon of the?",
-    "choices": [
-      "Persians",
-      "Byzantines",
-      "Romans",
-      "Mongols"
+      "1784",
+      "1884",
+      "1944",
+      "1984"
     ],
     "correct": 1
   },
   {
-    "question": "Medieval plate armor peaked in?",
+    "question": "Drone Predator first flew in?",
     "choices": [
-      "1100s",
-      "15th-16th centuries",
-      "1700s",
-      "1800s"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First successful repeating rifle?",
-    "choices": [
-      "Henry/Spencer mid-1800s",
-      "Brown Bess",
-      "AK-47",
-      "M16"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cruise missiles guidance often uses?",
-    "choices": [
-      "Stars only",
-      "GPS and TERCOM",
-      "Compass only",
-      "Radio relay"
+      "1974",
+      "1994",
+      "2004",
+      "2014"
     ],
     "correct": 1
   }

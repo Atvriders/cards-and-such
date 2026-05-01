@@ -5,152 +5,302 @@ export interface InventorsToolsQuizState { questions: QuizQuestion[]; currentInd
 export type InventorsToolsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Modern zipper was patented by?",
+    "question": "Light bulb is associated with?",
     "choices": [
-      "Edison",
-      "Whitcomb Judson/Sundback",
-      "Bell",
-      "Tesla"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Velcro was invented in the?",
-    "choices": [
-      "1900s",
-      "1940s-50s",
-      "1980s",
-      "2000s"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ballpoint pen popularized by?",
-    "choices": [
-      "Parker",
-      "Biro brothers",
-      "Mont Blanc",
-      "Cross"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sticky notes invented by?",
-    "choices": [
-      "Apple",
-      "3M (Spencer Silver and Art Fry)",
-      "IBM",
-      "Sony"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Scotch tape was developed by?",
-    "choices": [
-      "3M",
-      "DuPont",
-      "GE",
-      "Kodak"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lightbulb is most associated with?",
-    "choices": [
-      "Edison",
       "Tesla",
+      "Edison",
       "Bell",
+      "Marconi"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Telephone inventor?",
+    "choices": [
+      "Edison",
+      "Bell",
+      "Marconi",
+      "Morse"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Telephone patented in?",
+    "choices": [
+      "1856",
+      "1876",
+      "1896",
+      "1916"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Phonograph inventor?",
+    "choices": [
+      "Edison",
+      "Bell",
+      "Tesla",
       "Marconi"
     ],
     "correct": 0
   },
   {
-    "question": "Toilet paper became commercially available in?",
+    "question": "Movable-type printing press?",
     "choices": [
-      "1700s",
-      "1857 (Gayetty)",
-      "1920s",
-      "1950s"
+      "Caxton",
+      "Gutenberg",
+      "Aldus",
+      "Franklin"
     ],
     "correct": 1
   },
   {
-    "question": "Microwave oven developed using?",
+    "question": "Cotton gin inventor?",
     "choices": [
-      "X-rays",
-      "Magnetron radar tech (Spencer)",
-      "Lasers",
-      "Solar cells"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Refrigerator (modern compressor) refined by?",
-    "choices": [
-      "Whirlpool",
-      "Carl von Linde",
-      "Kelvinator",
-      "Frigidaire"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sewing machine widely commercialized by?",
-    "choices": [
-      "Howe and Singer",
       "Whitney",
       "Watt",
-      "Bell"
+      "Fulton",
+      "Singer"
     ],
     "correct": 0
   },
   {
-    "question": "Wristwatch popularized for which use?",
+    "question": "Steam engine improvements by?",
     "choices": [
-      "Explorers",
-      "Soldiers (WWI)",
-      "Bankers",
-      "Doctors"
+      "Newcomen",
+      "Watt",
+      "Stephenson",
+      "Trevithick"
     ],
     "correct": 1
   },
   {
-    "question": "Vacuum cleaner inventor?",
+    "question": "Sewing machine pioneer?",
     "choices": [
-      "Booth",
-      "Hoover only",
-      "Dyson only",
+      "Howe",
+      "Singer",
+      "Whitney",
+      "Bell"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Dynamite was invented by?",
+    "choices": [
+      "Nobel",
+      "Curie",
+      "Faraday",
       "Edison"
     ],
     "correct": 0
   },
   {
-    "question": "Pliers and pincers date back to?",
+    "question": "Vulcanized rubber by?",
     "choices": [
-      "Roman era",
-      "Ancient Egypt/Bronze Age",
-      "Industrial Revolution",
-      "1800s"
+      "Goodyear",
+      "Firestone",
+      "Dunlop",
+      "Edison"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Phonograph year of invention?",
+    "choices": [
+      "1857",
+      "1877",
+      "1897",
+      "1917"
     ],
     "correct": 1
   },
   {
-    "question": "Stapler became standardized in the?",
+    "question": "Wright Brothers' first flight in?",
     "choices": [
-      "1700s",
-      "Late 1800s",
-      "1950s",
-      "2000s"
+      "1893",
+      "1903",
+      "1913",
+      "1923"
     ],
     "correct": 1
   },
   {
-    "question": "Power drill (handheld electric) by?",
+    "question": "Moving assembly line popularized by?",
     "choices": [
-      "Black & Decker (1917)",
-      "DeWalt 1960",
-      "Bosch 1980",
-      "Makita 1990"
+      "Edison",
+      "Ford",
+      "Tesla",
+      "Whitney"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "World Wide Web created by?",
+    "choices": [
+      "Berners-Lee",
+      "Cerf",
+      "Kahn",
+      "Gates"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "World Wide Web year?",
+    "choices": [
+      "1979",
+      "1989",
+      "1999",
+      "2009"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Personal computer pioneer with Apple I?",
+    "choices": [
+      "Gates",
+      "Jobs and Wozniak",
+      "Berners-Lee",
+      "Allen"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Microsoft co-founded by?",
+    "choices": [
+      "Jobs",
+      "Gates and Allen",
+      "Wozniak",
+      "Cerf"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First practical incandescent bulb year?",
+    "choices": [
+      "1859",
+      "1879",
+      "1899",
+      "1919"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Edison's Menlo Park lab opened in?",
+    "choices": [
+      "1856",
+      "1876",
+      "1896",
+      "1906"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Whitney's cotton gin year?",
+    "choices": [
+      "1773",
+      "1793",
+      "1813",
+      "1833"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Eli Whitney was American or British?",
+    "choices": [
+      "British",
+      "American",
+      "French",
+      "German"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "James Watt nationality?",
+    "choices": [
+      "English",
+      "Scottish",
+      "Welsh",
+      "Irish"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Nikola Tesla nationality of birth?",
+    "choices": [
+      "Hungarian",
+      "Serbian",
+      "Italian",
+      "Czech"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First powered airplane was named?",
+    "choices": [
+      "Spirit",
+      "Flyer",
+      "Eagle",
+      "Wright"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Edison held how many US patents (approx)?",
+    "choices": [
+      "100",
+      "500",
+      "1000+",
+      "5000"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Singer is best known for?",
+    "choices": [
+      "Sewing machine",
+      "Telegraph",
+      "Telephone",
+      "Lightbulb"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Tesla is famous for AC?",
+    "choices": [
+      "Motor and transformer",
+      "Battery",
+      "Telephone",
+      "Photograph"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Telegraph code is named after?",
+    "choices": [
+      "Bell",
+      "Morse",
+      "Marconi",
+      "Edison"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Logarithms tables associated with?",
+    "choices": [
+      "Napier",
+      "Newton",
+      "Pascal",
+      "Leibniz"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Mechanical computing pioneer?",
+    "choices": [
+      "Babbage",
+      "Lovelace",
+      "Turing",
+      "Zuse"
     ],
     "correct": 0
   }

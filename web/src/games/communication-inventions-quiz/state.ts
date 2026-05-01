@@ -5,152 +5,302 @@ export interface CommunicationInventionsQuizState { questions: QuizQuestion[]; c
 export type CommunicationInventionsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Telephone is credited to?",
+    "question": "Telegraph inventor?",
     "choices": [
-      "Edison",
       "Bell",
+      "Morse",
       "Marconi",
-      "Tesla"
+      "Edison"
     ],
     "correct": 1
   },
   {
-    "question": "Year telephone was patented?",
+    "question": "Morse code year?",
     "choices": [
-      "1860",
+      "1837",
+      "1857",
+      "1877",
+      "1897"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Radio pioneer?",
+    "choices": [
+      "Tesla",
+      "Marconi",
+      "Bell",
+      "Edison"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First transatlantic radio signal year?",
+    "choices": [
+      "1881",
+      "1901",
+      "1921",
+      "1941"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Television electronic system pioneer?",
+    "choices": [
+      "Baird",
+      "Farnsworth",
+      "Sarnoff",
+      "Zworykin"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mechanical TV demonstrated by?",
+    "choices": [
+      "Baird",
+      "Farnsworth",
+      "Edison",
+      "Tesla"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First commercial TV broadcasts began in the?",
+    "choices": [
+      "1910s",
+      "1930s",
+      "1950s",
+      "1970s"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Telephone patented year?",
+    "choices": [
+      "1856",
       "1876",
-      "1890",
-      "1900"
+      "1896",
+      "1916"
     ],
     "correct": 1
   },
   {
-    "question": "Wireless telegraphy / radio?",
+    "question": "Mobile phone first call (handheld) year?",
     "choices": [
-      "Bell",
-      "Marconi",
-      "Edison",
-      "Tesla"
+      "1953",
+      "1973",
+      "1993",
+      "2003"
     ],
     "correct": 1
   },
   {
-    "question": "First television broadcast (mechanical)?",
+    "question": "Mobile pioneer at Motorola?",
     "choices": [
-      "Baird (1926)",
-      "RCA 1939",
-      "BBC 1950",
-      "Farnsworth 1928"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Email invented in the?",
-    "choices": [
-      "1960s-70s",
-      "1980s",
-      "1990s",
-      "2000s"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "World Wide Web was created by?",
-    "choices": [
-      "Cerf",
+      "Cooper",
+      "Engelbart",
       "Berners-Lee",
+      "Cerf"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Email '@' usage credited to?",
+    "choices": [
+      "Tomlinson",
+      "Cerf",
+      "Kahn",
+      "Berners-Lee"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "World Wide Web invented by?",
+    "choices": [
+      "Berners-Lee",
+      "Cerf",
       "Gates",
       "Jobs"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Year of WWW proposal?",
+    "question": "WWW invented in?",
     "choices": [
-      "1969",
+      "1979",
       "1989",
-      "1995",
-      "2000"
+      "1999",
+      "2009"
     ],
     "correct": 1
   },
   {
-    "question": "First commercial mobile phone (Motorola DynaTAC)?",
+    "question": "Internet protocol TCP/IP fathers?",
     "choices": [
-      "1970",
+      "Cerf and Kahn",
+      "Gates and Allen",
+      "Jobs and Wozniak",
+      "Berners-Lee and Cailliau"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "ARPANET first message year?",
+    "choices": [
+      "1959",
+      "1969",
+      "1979",
+      "1989"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Fiber optics widely deployed starting in?",
+    "choices": [
+      "1960s",
+      "1980s",
+      "2000s",
+      "2020s"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First geostationary communications satellite?",
+    "choices": [
+      "Sputnik",
+      "Telstar",
+      "Syncom 3",
+      "Echo"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Telstar launched in?",
+    "choices": [
+      "1952",
+      "1962",
+      "1972",
+      "1982"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "SMS first message sent in?",
+    "choices": [
+      "1982",
+      "1992",
+      "2002",
+      "2012"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Bluetooth named after?",
+    "choices": [
+      "Viking king",
+      "Norse god",
+      "Roman emperor",
+      "Greek hero"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Wi-Fi standard family?",
+    "choices": [
+      "802.3",
+      "802.11",
+      "802.16",
+      "802.5"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First widely used web browser?",
+    "choices": [
+      "Mosaic",
+      "Netscape",
+      "IE",
+      "Chrome"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Mosaic released in?",
+    "choices": [
       "1983",
-      "1995",
-      "2000"
+      "1993",
+      "2003",
+      "2013"
     ],
     "correct": 1
   },
   {
-    "question": "Morse code is associated with the?",
+    "question": "Facebook launched in?",
     "choices": [
-      "Telephone",
-      "Telegraph",
-      "Radio",
-      "TV"
+      "2002",
+      "2004",
+      "2006",
+      "2008"
     ],
     "correct": 1
   },
   {
-    "question": "Photography's early pioneer?",
+    "question": "Twitter launched in?",
     "choices": [
-      "Daguerre",
-      "Edison",
+      "2004",
+      "2006",
+      "2008",
+      "2010"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "YouTube founded in?",
+    "choices": [
+      "2003",
+      "2005",
+      "2007",
+      "2009"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First fax machine concept by?",
+    "choices": [
+      "Bain",
       "Bell",
+      "Edison",
       "Marconi"
     ],
     "correct": 0
   },
   {
-    "question": "Printing press in Europe by?",
+    "question": "Phonograph predecessor of?",
     "choices": [
-      "Gutenberg (1440s)",
-      "Caxton 1500",
-      "Aldus 1490",
-      "Plantin 1550"
+      "Telegraph",
+      "Audio recording",
+      "TV",
+      "Radio"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "First widely used social network?",
+    "question": "Skype released in?",
     "choices": [
-      "MySpace (2003)",
-      "Friendster",
-      "Facebook",
-      "Twitter"
+      "1993",
+      "2003",
+      "2013",
+      "2023"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "First text message sent in?",
+    "question": "First smartphone with touchscreen widely sold?",
     "choices": [
-      "1992",
-      "2000",
-      "1985",
-      "1995"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Fiber optic communication scaled in the?",
-    "choices": [
-      "1970s-80s",
-      "1990s only",
-      "2000s only",
-      "1960s only"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Satellite TV became common in the?",
-    "choices": [
-      "1960s",
-      "1980s-90s",
-      "2000s",
-      "1950s"
+      "Nokia 3310",
+      "iPhone (2007)",
+      "Blackberry",
+      "Razr"
     ],
     "correct": 1
   }

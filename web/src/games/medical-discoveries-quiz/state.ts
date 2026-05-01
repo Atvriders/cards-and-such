@@ -55,7 +55,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "First successful heart transplant?",
+    "question": "First successful heart transplant year?",
     "choices": [
       "1950",
       "1967",
@@ -85,7 +85,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "First anesthetic widely used?",
+    "question": "First widely used anesthetic?",
     "choices": [
       "Aspirin",
       "Ether",
@@ -95,7 +95,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Antibiotic streptomycin discovered by?",
+    "question": "Streptomycin was discovered by?",
     "choices": [
       "Waksman",
       "Fleming",
@@ -153,6 +153,156 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Lung"
     ],
     "correct": 1
+  },
+  {
+    "question": "Germ theory of disease was championed by?",
+    "choices": [
+      "Galen",
+      "Pasteur",
+      "Hippocrates",
+      "Vesalius"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Antiseptic surgery pioneer?",
+    "choices": [
+      "Lister",
+      "Fleming",
+      "Pasteur",
+      "Salk"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Discovered radium and polonium?",
+    "choices": [
+      "Roentgen",
+      "Marie Curie",
+      "Becquerel",
+      "Rutherford"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First vaccine against rabies developed by?",
+    "choices": [
+      "Jenner",
+      "Pasteur",
+      "Koch",
+      "Salk"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Bacteria causing tuberculosis identified by?",
+    "choices": [
+      "Lister",
+      "Koch",
+      "Pasteur",
+      "Jenner"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Aspirin was introduced commercially by?",
+    "choices": [
+      "Bayer",
+      "Pfizer",
+      "Merck",
+      "Roche"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Discovered blood circulation?",
+    "choices": [
+      "William Harvey",
+      "Galen",
+      "Vesalius",
+      "Hippocrates"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Father of modern anatomy?",
+    "choices": [
+      "Vesalius",
+      "Galen",
+      "Harvey",
+      "Pare"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First CT scanner appeared in?",
+    "choices": [
+      "1971",
+      "1985",
+      "1995",
+      "2005"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "HIV virus was identified in?",
+    "choices": [
+      "1973",
+      "1983",
+      "1993",
+      "2003"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Discovered the structure of DNA in?",
+    "choices": [
+      "1943",
+      "1953",
+      "1963",
+      "1973"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Father of modern surgery?",
+    "choices": [
+      "Pare",
+      "Lister",
+      "Harvey",
+      "Galen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "First human genome sequenced in?",
+    "choices": [
+      "1993",
+      "2003",
+      "2013",
+      "1983"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Salk vaccine targets?",
+    "choices": [
+      "Smallpox",
+      "Polio",
+      "Measles",
+      "Rabies"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Discovered blood types ABO?",
+    "choices": [
+      "Landsteiner",
+      "Pasteur",
+      "Fleming",
+      "Banting"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

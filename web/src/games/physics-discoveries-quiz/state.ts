@@ -5,104 +5,154 @@ export interface PhysicsDiscoveriesQuizState { questions: QuizQuestion[]; curren
 export type PhysicsDiscoveriesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Theory of general relativity was proposed by?",
+    "question": "Theory of general relativity was formulated by?",
     "choices": [
       "Newton",
       "Einstein",
-      "Maxwell",
+      "Bohr",
+      "Planck"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Einstein published general relativity in?",
+    "choices": [
+      "1905",
+      "1915",
+      "1925",
+      "1935"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Law of universal gravitation by?",
+    "choices": [
+      "Galileo",
+      "Newton",
+      "Kepler",
+      "Einstein"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Discovered the electron?",
+    "choices": [
+      "Thomson",
+      "Rutherford",
+      "Bohr",
+      "Dalton"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Nucleus of the atom discovered by?",
+    "choices": [
+      "Thomson",
+      "Rutherford",
+      "Bohr",
+      "Chadwick"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Neutron was discovered by?",
+    "choices": [
+      "Rutherford",
+      "Chadwick",
+      "Fermi",
       "Bohr"
     ],
     "correct": 1
   },
   {
-    "question": "Year general relativity was published?",
+    "question": "Quantum theory was founded by?",
     "choices": [
-      "1905",
-      "1915",
-      "1925",
-      "1945"
+      "Einstein",
+      "Planck",
+      "Bohr",
+      "Schrodinger"
     ],
     "correct": 1
   },
   {
-    "question": "Planck's discovery of energy quanta in?",
+    "question": "Uncertainty principle is associated with?",
     "choices": [
-      "1850",
-      "1900",
-      "1925",
-      "1950"
+      "Bohr",
+      "Heisenberg",
+      "Pauli",
+      "Dirac"
     ],
     "correct": 1
   },
   {
-    "question": "Discoverer of the electron?",
+    "question": "Speed of light is approximately?",
     "choices": [
+      "3x10^6 m/s",
+      "3x10^8 m/s",
+      "3x10^10 m/s",
+      "3x10^4 m/s"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Discovered radioactivity?",
+    "choices": [
+      "Curie",
+      "Becquerel",
       "Rutherford",
-      "JJ Thomson",
+      "Roentgen"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "First nuclear chain reaction led by?",
+    "choices": [
+      "Oppenheimer",
+      "Fermi",
       "Bohr",
       "Einstein"
     ],
     "correct": 1
   },
   {
-    "question": "Higgs boson confirmed at?",
+    "question": "Higgs boson was confirmed at CERN in?",
     "choices": [
-      "Fermilab in 1998",
-      "CERN in 2012",
-      "BNL in 2005",
-      "SLAC in 1990"
+      "2002",
+      "2012",
+      "2022",
+      "1992"
     ],
     "correct": 1
   },
   {
-    "question": "Nuclear fission was discovered by?",
+    "question": "Maxwell unified electricity and?",
     "choices": [
-      "Hahn and Strassmann",
-      "Fermi alone",
-      "Einstein",
-      "Curie alone"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First controlled nuclear reactor?",
-    "choices": [
-      "1933",
-      "1942",
-      "1955",
-      "1965"
+      "Gravity",
+      "Magnetism",
+      "Heat",
+      "Sound"
     ],
     "correct": 1
   },
   {
-    "question": "Heisenberg is known for?",
+    "question": "Faraday discovered electromagnetic?",
     "choices": [
-      "General relativity",
-      "Uncertainty principle",
-      "Photoelectric effect",
-      "Kinetic theory"
+      "Conduction",
+      "Induction",
+      "Resistance",
+      "Capacitance"
     ],
     "correct": 1
   },
   {
-    "question": "Maxwell's equations unify?",
+    "question": "Schrodinger is famous for an equation in?",
     "choices": [
-      "Gravity and EM",
-      "Electricity and magnetism",
-      "Strong and weak",
-      "Mass and energy"
+      "Optics",
+      "Quantum mechanics",
+      "Thermodynamics",
+      "Relativity"
     ],
     "correct": 1
-  },
-  {
-    "question": "Discoverer of the neutron?",
-    "choices": [
-      "Chadwick",
-      "Rutherford",
-      "Curie",
-      "Bohr"
-    ],
-    "correct": 0
   },
   {
     "question": "Photoelectric effect explained by?",
@@ -110,49 +160,149 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Newton",
       "Einstein",
       "Bohr",
-      "Curie"
+      "Maxwell"
     ],
     "correct": 1
   },
   {
-    "question": "Planck's constant relates energy to?",
+    "question": "Discovered laws of planetary motion?",
     "choices": [
-      "Mass",
-      "Frequency",
-      "Charge",
-      "Temperature"
+      "Copernicus",
+      "Kepler",
+      "Galileo",
+      "Newton"
     ],
     "correct": 1
   },
   {
-    "question": "Speed of light measured precisely by?",
+    "question": "Heliocentric model was proposed by?",
+    "choices": [
+      "Ptolemy",
+      "Copernicus",
+      "Galileo",
+      "Kepler"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pendulum was studied by?",
     "choices": [
       "Galileo",
-      "Michelson",
       "Newton",
-      "Bacon"
+      "Hooke",
+      "Pascal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "E=mc^2 expresses equivalence of?",
+    "choices": [
+      "Force and motion",
+      "Mass and energy",
+      "Charge and field",
+      "Heat and work"
     ],
     "correct": 1
   },
   {
-    "question": "Electromagnetic induction discovered by?",
+    "question": "First atomic bomb tested in?",
     "choices": [
-      "Maxwell",
-      "Faraday",
-      "Ampere",
-      "Volta"
+      "1935",
+      "1945",
+      "1955",
+      "1965"
     ],
     "correct": 1
   },
   {
-    "question": "Big Bang theory was supported by discovery of?",
+    "question": "Father of modern cosmology?",
     "choices": [
-      "Quasars",
-      "Cosmic microwave background",
-      "Dark matter",
-      "Neutrinos"
+      "Hubble",
+      "Einstein",
+      "Lemaitre",
+      "Hawking"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Big Bang evidence: cosmic microwave background found in?",
+    "choices": [
+      "1945",
+      "1965",
+      "1985",
+      "2005"
     ],
     "correct": 1
+  },
+  {
+    "question": "Discovered superconductivity?",
+    "choices": [
+      "Onnes",
+      "Bardeen",
+      "Cooper",
+      "Curie"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Discovered law of buoyancy?",
+    "choices": [
+      "Newton",
+      "Archimedes",
+      "Galileo",
+      "Pascal"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pascal's law concerns?",
+    "choices": [
+      "Gases",
+      "Fluids pressure",
+      "Magnetism",
+      "Light"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Discovered law of conservation of mass?",
+    "choices": [
+      "Lavoisier",
+      "Newton",
+      "Dalton",
+      "Boyle"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Tesla pioneered which current system?",
+    "choices": [
+      "DC",
+      "AC",
+      "HVDC",
+      "Pulsed"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Boyle's law relates pressure and?",
+    "choices": [
+      "Temperature",
+      "Volume",
+      "Mass",
+      "Density"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Newton's Principia was published in?",
+    "choices": [
+      "1687",
+      "1787",
+      "1587",
+      "1487"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
