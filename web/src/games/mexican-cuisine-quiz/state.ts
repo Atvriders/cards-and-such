@@ -26,6 +26,16 @@ const BANK: { question: string; answer: string; wrong: string[] }[] = [
   { question: "What makes a chile relleno unique among Mexican dishes?", answer: "It is a stuffed and battered fried pepper", wrong: ["It is a roasted whole chili", "It is a chili-infused soup", "It is a dried chili sauce"] },
   { question: "Cemita is a sandwich style from which Mexican city?", answer: "Puebla", wrong: ["Oaxaca", "Veracruz", "Mexico City"] },
   { question: "Tacos al pastor are inspired by which immigrant community's cooking style?", answer: "Lebanese immigrants", wrong: ["Spanish immigrants", "German immigrants", "Chinese immigrants"] },
+  { question: "Birria is a slow-cooked stew traditionally made with which meat?", answer: "Goat or beef", wrong: ["Pork only", "Chicken only", "Lamb shank"] },
+  { question: "What is the Mexican corn-based street snack topped with mayo, cheese, and chili?", answer: "Elote", wrong: ["Esquites", "Tlacoyo", "Sope"] },
+  { question: "Aguachile is a Mexican dish similar to ceviche from which region?", answer: "Sinaloa", wrong: ["Yucatan", "Oaxaca", "Veracruz"] },
+  { question: "What is the difference between a quesadilla in Mexico City and elsewhere?", answer: "In Mexico City, cheese must be requested", wrong: ["It is always fried", "It uses flour tortillas only", "It contains beans by default"] },
+  { question: "Pulque is a traditional Mexican fermented drink made from what?", answer: "Agave sap", wrong: ["Corn", "Sugar cane", "Cactus fruit"] },
+  { question: "What are chapulines?", answer: "Toasted seasoned grasshoppers", wrong: ["Fried bean fritters", "Chili-coated peanuts", "Crispy pork skin"] },
+  { question: "Carnitas are typically made by slow-cooking pork in what?", answer: "Lard", wrong: ["Tomato sauce", "Beer", "Citrus juice"] },
+  { question: "Which Mexican dish features flat masa boats with toppings?", answer: "Sopes", wrong: ["Tlayudas", "Huaraches", "Tostadas"] },
+  { question: "Champurrado is a thick Mexican drink that combines chocolate with what?", answer: "Masa (corn dough)", wrong: ["Rice", "Almonds", "Oats"] },
+  { question: "Cemitas typically include which distinctive Mexican herb?", answer: "Papalo", wrong: ["Epazote", "Hoja santa", "Mexican oregano"] },
 ];
 
 function shuffle<T>(arr: T[], rng: () => number): T[] {

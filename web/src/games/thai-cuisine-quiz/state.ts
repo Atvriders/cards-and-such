@@ -26,6 +26,16 @@ const BANK: { question: string; answer: string; wrong: string[] }[] = [
   { question: "Gaeng daeng is the Thai name for which color curry?", answer: "Red curry", wrong: ["Green curry", "Yellow curry", "Orange curry"] },
   { question: "What is a common snack made from dried squid in Thailand?", answer: "Grilled seasoned squid strips", wrong: ["Squid tempura", "Calamari fritto", "Squid ink crackers"] },
   { question: "Roti in Thai cuisine is a fried flatbread typically served with?", answer: "Condensed milk or banana filling", wrong: ["Green curry sauce", "Spicy dipping sauce", "Coconut soup"] },
+  { question: "Pad See Ew is stir-fried with which type of noodle?", answer: "Wide flat rice noodles", wrong: ["Thin rice vermicelli", "Egg noodles", "Glass noodles"] },
+  { question: "What is the Thai name for the chili-lime dipping condiment with fish sauce?", answer: "Nam pla prik", wrong: ["Nam jim", "Nam prik pao", "Nam tok"] },
+  { question: "Khao soi is a coconut curry noodle soup from which region?", answer: "Northern Thailand (Chiang Mai)", wrong: ["Southern Thailand", "Central Thailand", "Isaan"] },
+  { question: "What protein traditionally tops a bowl of khao soi?", answer: "Braised chicken or beef", wrong: ["Shrimp", "Duck", "Tofu"] },
+  { question: "Yum nua is a Thai salad featuring which main ingredient?", answer: "Grilled beef", wrong: ["Squid", "Glass noodles", "Papaya"] },
+  { question: "What is the Thai sweet shaved-ice dessert with toppings called?", answer: "Nam kang sai", wrong: ["Bua loi", "Khanom krok", "Sangkaya"] },
+  { question: "Tom yum gets its sour note primarily from which ingredient?", answer: "Lime juice and tamarind", wrong: ["Vinegar", "Green mango", "Lemon zest"] },
+  { question: "What does the Thai word phat (pad) mean?", answer: "Stir-fried", wrong: ["Steamed", "Grilled", "Boiled"] },
+  { question: "Khanom krok are small coconut pancakes cooked in what?", answer: "A dimpled cast-iron griddle", wrong: ["A bamboo steamer", "A clay tandoor", "A flat skillet"] },
+  { question: "Pla pao is a Thai street-food dish of fish prepared how?", answer: "Salt-crusted and grilled over charcoal", wrong: ["Steamed in banana leaf", "Deep-fried whole", "Poached in coconut milk"] },
 ];
 
 function shuffle<T>(arr: T[], rng: () => number): T[] {

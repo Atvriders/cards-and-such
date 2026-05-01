@@ -26,6 +26,16 @@ const BANK: { question: string; answer: string; wrong: string[] }[] = [
   { question: "What is the main vegetable used in oi sobagi?", answer: "Cucumber", wrong: ["Radish", "Spinach", "Bean sprouts"] },
   { question: "Soju is a Korean distilled spirit traditionally made from which ingredient?", answer: "Rice, wheat, or barley", wrong: ["Yams and corn", "Millet and sorghum", "Sugar cane"] },
   { question: "What is the significance of seolleongtang in Korean cuisine?", answer: "Long-simmered ox bone soup eaten for centuries", wrong: ["A royal court feast dish", "A Buddhist temple soup", "A harvest festival meal"] },
+  { question: "What is the Korean side dish category that includes kimchi and pickled vegetables?", answer: "Banchan", wrong: ["Anju", "Jeotgal", "Namul"] },
+  { question: "Naengmyeon is a Korean dish of what?", answer: "Cold buckwheat noodles in broth", wrong: ["Hot wheat noodles", "Stir-fried glass noodles", "Spicy rice noodles"] },
+  { question: "What is gimbap?", answer: "Seaweed-wrapped rice rolls with fillings", wrong: ["Fried rice balls", "Steamed rice cakes", "Rice porridge"] },
+  { question: "Mandu is the Korean name for what?", answer: "Dumplings", wrong: ["Rice cakes", "Pancakes", "Steamed buns"] },
+  { question: "What ingredient gives gochugaru its color and heat?", answer: "Korean red chili pepper flakes", wrong: ["Smoked paprika", "Cayenne", "Sichuan peppercorn"] },
+  { question: "Kalbi refers to which cut of meat?", answer: "Marinated beef short ribs", wrong: ["Pork shoulder", "Chicken thigh", "Beef brisket"] },
+  { question: "What is samgyetang traditionally eaten to combat?", answer: "Summer heat (boknal)", wrong: ["Winter cold", "Spring fatigue", "Autumn dryness"] },
+  { question: "Jjajangmyeon is a Korean-Chinese noodle dish topped with what sauce?", answer: "Black bean sauce", wrong: ["Sweet chili sauce", "Soy garlic sauce", "Spicy bean paste"] },
+  { question: "What is hoeddeok?", answer: "A sweet stuffed Korean pancake", wrong: ["A spicy fish cake", "A savory dumpling", "A rice porridge"] },
+  { question: "Banchan are typically served how?", answer: "Many small dishes shared at the table", wrong: ["One large platter per person", "Sequentially as courses", "Only with rice porridge"] },
 ];
 
 function shuffle<T>(arr: T[], rng: () => number): T[] {
