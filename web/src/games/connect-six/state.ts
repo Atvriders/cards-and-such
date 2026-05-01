@@ -1,105 +1,190 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const ROWS = 9;
-export const COLS = 9;
-export const TARGET = 6;
-export const MODE: "place" | "gravity" = "place";
+// Connect Six (drop variant): Connect-Four-style gravity drop on a wide board, 6 in a row wins.
 
-export interface ConnectSettings { dummy: boolean }
+export const ROWS = 9;
+export const COLS = 11;
+export const TARGET = 6;
+
+export interface ConnectSixSettings {
+  botStrength: "easy" | "hard";
+}
+
 export type Cell = "P" | "C" | null;
 
-export interface ConnectState {
+export interface ConnectSixState {
   rngSeed: number;
   board: Cell[];
   turn: "P" | "C";
   result: "P" | "C" | "draw" | null;
-  score: number;
   phase: "playing" | "done";
   pieces: number;
+  winningLine: number[] | null;
+  lastDropCol: number | null;
+  settings: ConnectSixSettings;
 }
 
-export type ConnectAction = { type: "place"; row: number; col: number };
+export type ConnectSixAction = { type: "drop"; col: number };
 
-function topRow(b: Cell[], col: number): number {
-  for (let r = ROWS - 1; r >= 0; r--) if (b[r * COLS + col] === null) return r;
+const DIRS: ReadonlyArray<readonly [number, number]> = [
+  [0, 1], [1, 0], [1, 1], [1, -1],
+];
+
+export function topRow(board: readonly Cell[], col: number): number {
+  for (let r = ROWS - 1; r >= 0; r--) if (board[r * COLS + col] === null) return r;
   return -1;
 }
 
-function checkWin(b: Cell[]): Cell | "draw" {
-  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-    const v = b[r * COLS + c]; if (!v) continue;
-    for (const d of dirs) {
-      const dr = d[0]!, dc = d[1]!;
-      let ok = true;
-      for (let k = 0; k < TARGET; k++) {
-        const rr = r + dr * k, cc = c + dc * k;
-        if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) { ok = false; break; }
-        if (b[rr * COLS + cc] !== v) { ok = false; break; }
+export function checkWin(b: readonly Cell[]): { winner: Cell | "draw" | null; line: number[] | null } {
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const v = b[r * COLS + c];
+      if (!v) continue;
+      for (const [dr, dc] of DIRS) {
+        const line: number[] = [];
+        let ok = true;
+        for (let k = 0; k < TARGET; k++) {
+          const rr = r + dr * k, cc = c + dc * k;
+          if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) { ok = false; break; }
+          if (b[rr * COLS + cc] !== v) { ok = false; break; }
+          line.push(rr * COLS + cc);
+        }
+        if (ok) return { winner: v, line };
       }
-      if (ok) return v;
     }
   }
-  if (b.every(x => x !== null)) return "draw";
-  return null;
+  if (b.every((x) => x !== null)) return { winner: "draw", line: null };
+  return { winner: null, line: null };
 }
 
-export function initialState(seed: number, _s: ConnectSettings): ConnectState {
-  return { rngSeed: seed, board: Array(ROWS * COLS).fill(null), turn: "P", result: null, score: 0, phase: "playing", pieces: 0 };
+function dropAt(board: readonly Cell[], col: number, who: "P" | "C"): { board: Cell[]; row: number } | null {
+  const r = topRow(board, col);
+  if (r < 0) return null;
+  const nb = [...board] as Cell[];
+  nb[r * COLS + col] = who;
+  return { board: nb, row: r };
 }
 
-function legalForGravity(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let c = 0; c < COLS; c++) {
-    const r = topRow(b, c);
-    if (r >= 0) out.push({ row: r, col: c });
+function scoreCol(board: readonly Cell[], col: number, who: "P" | "C"): number {
+  const r = topRow(board, col);
+  if (r < 0) return -Infinity;
+  const nb = [...board] as Cell[];
+  nb[r * COLS + col] = who;
+  const opp: "P" | "C" = who === "P" ? "C" : "P";
+  let score = 0;
+  for (let rr = 0; rr < ROWS; rr++) {
+    for (let cc = 0; cc < COLS; cc++) {
+      for (const [dr, dc] of DIRS) {
+        const window: Cell[] = [];
+        let ok = true;
+        for (let k = 0; k < TARGET; k++) {
+          const ar = rr + dr * k, ac = cc + dc * k;
+          if (ar < 0 || ar >= ROWS || ac < 0 || ac >= COLS) { ok = false; break; }
+          window.push(nb[ar * COLS + ac]!);
+        }
+        if (!ok) continue;
+        const me = window.filter((x) => x === who).length;
+        const them = window.filter((x) => x === opp).length;
+        if (them === 0) {
+          if (me === TARGET) score += 200000;
+          else if (me === TARGET - 1) score += 300;
+          else if (me === TARGET - 2) score += 25;
+          else if (me === TARGET - 3) score += 3;
+        } else if (me === 0) {
+          if (them === TARGET - 1) score -= 350;
+          else if (them === TARGET - 2) score -= 30;
+        }
+      }
+    }
   }
-  return out;
+  const center = Math.floor(COLS / 2);
+  score -= Math.abs(col - center);
+  return score;
 }
 
-function legalForFree(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (b[r * COLS + c] === null) out.push({ row: r, col: c });
-  return out;
+function pickBotMove(board: readonly Cell[], strength: "easy" | "hard", rng: () => number): number | null {
+  const validCols: number[] = [];
+  for (let c = 0; c < COLS; c++) if (topRow(board, c) >= 0) validCols.push(c);
+  if (validCols.length === 0) return null;
+
+  for (const c of validCols) {
+    const dr = dropAt(board, c, "C")!;
+    if (checkWin(dr.board).winner === "C") return c;
+  }
+  for (const c of validCols) {
+    const dr = dropAt(board, c, "P")!;
+    if (checkWin(dr.board).winner === "P") return c;
+  }
+
+  if (strength === "easy") {
+    const center = Math.floor(COLS / 2);
+    const sorted = [...validCols].sort((a, b) => Math.abs(a - center) - Math.abs(b - center));
+    return sorted[Math.min(sorted.length - 1, Math.floor(rng() * 3))]!;
+  }
+  let best = validCols[0]!;
+  let bs = -Infinity;
+  for (const c of validCols) {
+    const s = scoreCol(board, c, "C") + rng() * 0.001;
+    if (s > bs) { bs = s; best = c; }
+  }
+  return best;
 }
 
-export function reducer(state: ConnectState, action: ConnectAction): ConnectState {
-  if (state.phase === "done" || state.result) return state;
-  if (action.type !== "place") return state;
+export function initialState(seed: number, settings: ConnectSixSettings): ConnectSixState {
+  return {
+    rngSeed: seed,
+    board: Array(ROWS * COLS).fill(null),
+    turn: "P",
+    result: null,
+    phase: "playing",
+    pieces: 0,
+    winningLine: null,
+    lastDropCol: null,
+    settings,
+  };
+}
+
+export function reducer(state: ConnectSixState, action: ConnectSixAction): ConnectSixState {
+  if (state.phase === "done") return state;
+  if (action.type !== "drop") return state;
   if (state.turn !== "P") return state;
+  const { col } = action;
+  if (col < 0 || col >= COLS) return state;
+  const drop = dropAt(state.board, col, "P");
+  if (!drop) return state;
 
-  const { row, col } = action;
-  if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return state;
-  if (state.board[row * COLS + col] !== null) return state;
-
-  if (MODE === "gravity") {
-    const expectedRow = topRow(state.board, col);
-    if (expectedRow !== row) return state;
-  }
-
-  const nb = state.board.slice();
-  nb[row * COLS + col] = "P";
+  let board = drop.board;
   let pieces = state.pieces + 1;
-  let result = checkWin(nb);
-  if (result === "P") return { ...state, board: nb, result: "P", score: state.score + 100 + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
-
-  // CPU random
-  const rng = mulberry32(state.rngSeed);
-  const legal = MODE === "gravity" ? legalForGravity(nb) : legalForFree(nb);
-  if (legal.length > 0) {
-    const pick = legal[Math.floor(rng() * legal.length)]!;
-    nb[pick.row * COLS + pick.col] = "C";
-    pieces += 1;
+  let res = checkWin(board);
+  if (res.winner === "P") {
+    return { ...state, board, result: "P", phase: "done", pieces, winningLine: res.line, lastDropCol: col };
   }
-  const seed2 = Math.floor(rng() * 2 ** 31);
-  result = checkWin(nb);
-  if (result === "C") return { ...state, rngSeed: seed2, board: nb, result: "C", score: state.score + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, rngSeed: seed2, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
+  if (res.winner === "draw") {
+    return { ...state, board, result: "draw", phase: "done", pieces, lastDropCol: col };
+  }
 
-  return { ...state, rngSeed: seed2, board: nb, turn: "P", pieces };
+  const rng = mulberry32(state.rngSeed);
+  const seed2 = Math.floor(rng() * 2 ** 31);
+  const botCol = pickBotMove(board, state.settings.botStrength, rng);
+  if (botCol !== null) {
+    const dropC = dropAt(board, botCol, "C")!;
+    board = dropC.board;
+    pieces++;
+    res = checkWin(board);
+    if (res.winner === "C") {
+      return { ...state, rngSeed: seed2, board, result: "C", phase: "done", pieces, winningLine: res.line, lastDropCol: botCol };
+    }
+    if (res.winner === "draw") {
+      return { ...state, rngSeed: seed2, board, result: "draw", phase: "done", pieces, lastDropCol: botCol };
+    }
+    return { ...state, rngSeed: seed2, board, turn: "P", pieces, lastDropCol: botCol };
+  }
+  return { ...state, rngSeed: seed2, board, turn: "P", pieces, lastDropCol: col };
 }
 
-export function isTerminal(state: ConnectState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: ConnectSixState): { score: number } | null {
+  if (state.phase !== "done") return null;
+  if (state.result === "P") return { score: 100 };
+  if (state.result === "draw") return { score: 50 };
+  return { score: 0 };
 }

@@ -1,104 +1,214 @@
+/** Quixo Mini: 4×4 edge-push board. Player = X, Bot = O. 4 in a row wins. */
+
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const ROWS = 5;
-export const COLS = 5;
-export const TARGET = 5;
-export const MODE: "place" | "gravity" = "place";
+export const SIZE = 4;
+export const TARGET = 4;
 
-export interface ConnectSettings { dummy: boolean }
-export type Cell = "P" | "C" | null;
+export type Cell = "X" | "O" | null;
+export type Dir = "right" | "left" | "up" | "down";
 
-export interface ConnectState {
+export interface QuixoMiniSettings {
+  botStrength: "easy" | "hard";
+}
+
+export interface QuixoMiniState {
+  settings: QuixoMiniSettings;
   rngSeed: number;
-  board: Cell[];
-  turn: "P" | "C";
-  result: "P" | "C" | "draw" | null;
-  score: number;
-  phase: "playing" | "done";
-  pieces: number;
+  grid: Cell[];
+  turn: "X" | "O";
+  winner: "X" | "O" | null;
+  winningLine: number[] | null;
+  gameOver: boolean;
+  selected: number | null;
 }
 
-export type ConnectAction = { type: "place"; row: number; col: number };
+export type QuixoMiniAction =
+  | { type: "select"; idx: number }
+  | { type: "push"; dir: Dir }
+  | { type: "restart" };
 
-function topRow(b: Cell[], col: number): number {
-  for (let r = ROWS - 1; r >= 0; r--) if (b[r * COLS + col] === null) return r;
-  return -1;
-}
+function idx(r: number, c: number): number { return r * SIZE + c; }
+function row(i: number): number { return Math.floor(i / SIZE); }
+function col(i: number): number { return i % SIZE; }
 
-function checkWin(b: Cell[]): Cell | "draw" {
-  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-    const v = b[r * COLS + c]; if (!v) continue;
-    for (const d of dirs) {
-      const dr = d[0]!, dc = d[1]!;
-      let ok = true;
-      for (let k = 0; k < TARGET; k++) {
-        const rr = r + dr * k, cc = c + dc * k;
-        if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) { ok = false; break; }
-        if (b[rr * COLS + cc] !== v) { ok = false; break; }
+export function edgeCells(): number[] {
+  const out: number[] = [];
+  for (let r = 0; r < SIZE; r++) {
+    for (let c = 0; c < SIZE; c++) {
+      if (r === 0 || r === SIZE - 1 || c === 0 || c === SIZE - 1) {
+        out.push(idx(r, c));
       }
-      if (ok) return v;
     }
   }
-  if (b.every(x => x !== null)) return "draw";
-  return null;
-}
-
-export function initialState(seed: number, _s: ConnectSettings): ConnectState {
-  return { rngSeed: seed, board: Array(ROWS * COLS).fill(null), turn: "P", result: null, score: 0, phase: "playing", pieces: 0 };
-}
-
-function legalForGravity(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let c = 0; c < COLS; c++) {
-    const r = topRow(b, c);
-    if (r >= 0) out.push({ row: r, col: c });
-  }
   return out;
 }
 
-function legalForFree(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (b[r * COLS + c] === null) out.push({ row: r, col: c });
-  return out;
+export function canSelect(grid: Cell[], cellIdx: number, player: "X" | "O"): boolean {
+  const cell = grid[cellIdx];
+  return cell === null || cell === player;
 }
 
-export function reducer(state: ConnectState, action: ConnectAction): ConnectState {
-  if (state.phase === "done" || state.result) return state;
-  if (action.type !== "place") return state;
-  if (state.turn !== "P") return state;
-
-  const { row, col } = action;
-  if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return state;
-  if (state.board[row * COLS + col] !== null) return state;
-
-  if (MODE === "gravity") {
-    const expectedRow = topRow(state.board, col);
-    if (expectedRow !== row) return state;
-  }
-
-  const nb = state.board.slice();
-  nb[row * COLS + col] = "P";
-  let pieces = state.pieces + 1;
-  let result = checkWin(nb);
-  if (result === "P") return { ...state, board: nb, result: "P", score: state.score + 100 + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
-
-  const rng = mulberry32(state.rngSeed);
-  const legal = MODE === "gravity" ? legalForGravity(nb) : legalForFree(nb);
-  if (legal.length > 0) {
-    const pick = legal[Math.floor(rng() * legal.length)]!;
-    nb[pick.row * COLS + pick.col] = "C";
-    pieces += 1;
-  }
-  const seed2 = Math.floor(rng() * 2 ** 31);
-  result = checkWin(nb);
-  if (result === "C") return { ...state, rngSeed: seed2, board: nb, result: "C", score: state.score + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, rngSeed: seed2, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
-
-  return { ...state, rngSeed: seed2, board: nb, turn: "P", pieces };
+export function validDirs(cellIdx: number): Dir[] {
+  const r = row(cellIdx), c = col(cellIdx);
+  const dirs: Dir[] = [];
+  if (c > 0) dirs.push("left");
+  if (c < SIZE - 1) dirs.push("right");
+  if (r > 0) dirs.push("up");
+  if (r < SIZE - 1) dirs.push("down");
+  return dirs;
 }
 
-export function isTerminal(state: ConnectState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function applyPush(grid: Cell[], cellIdx: number, dir: Dir, mark: "X" | "O"): Cell[] {
+  const r = row(cellIdx), c = col(cellIdx);
+  const next = [...grid];
+  if (dir === "right") {
+    for (let cc = c; cc < SIZE - 1; cc++) next[idx(r, cc)] = next[idx(r, cc + 1)]!;
+    next[idx(r, SIZE - 1)] = mark;
+  } else if (dir === "left") {
+    for (let cc = c; cc > 0; cc--) next[idx(r, cc)] = next[idx(r, cc - 1)]!;
+    next[idx(r, 0)] = mark;
+  } else if (dir === "down") {
+    for (let rr = r; rr < SIZE - 1; rr++) next[idx(rr, c)] = next[idx(rr + 1, c)]!;
+    next[idx(SIZE - 1, c)] = mark;
+  } else {
+    for (let rr = r; rr > 0; rr--) next[idx(rr, c)] = next[idx(rr - 1, c)]!;
+    next[idx(0, c)] = mark;
+  }
+  return next;
+}
+
+export function checkWinner(grid: Cell[]): { winner: "X" | "O" | null; line: number[] | null } {
+  for (let r = 0; r < SIZE; r++) {
+    const v = grid[idx(r, 0)];
+    if (v && [1, 2, 3].every((c) => grid[idx(r, c)] === v)) {
+      return { winner: v, line: [0, 1, 2, 3].map((c) => idx(r, c)) };
+    }
+  }
+  for (let c = 0; c < SIZE; c++) {
+    const v = grid[idx(0, c)];
+    if (v && [1, 2, 3].every((r) => grid[idx(r, c)] === v)) {
+      return { winner: v, line: [0, 1, 2, 3].map((r) => idx(r, c)) };
+    }
+  }
+  const d1 = grid[idx(0, 0)];
+  if (d1 && [1, 2, 3].every((i) => grid[idx(i, i)] === d1)) {
+    return { winner: d1, line: [0, 1, 2, 3].map((i) => idx(i, i)) };
+  }
+  const d2 = grid[idx(0, SIZE - 1)];
+  if (d2 && [1, 2, 3].every((i) => grid[idx(i, SIZE - 1 - i)] === d2)) {
+    return { winner: d2, line: [0, 1, 2, 3].map((i) => idx(i, SIZE - 1 - i)) };
+  }
+  return { winner: null, line: null };
+}
+
+function scoreGrid(grid: Cell[], mark: "X" | "O"): number {
+  const opp: Cell = mark === "X" ? "O" : "X";
+  let score = 0;
+  const lines: number[][] = [];
+  for (let r = 0; r < SIZE; r++) lines.push([0, 1, 2, 3].map((c) => idx(r, c)));
+  for (let c = 0; c < SIZE; c++) lines.push([0, 1, 2, 3].map((r) => idx(r, c)));
+  lines.push([0, 1, 2, 3].map((i) => idx(i, i)));
+  lines.push([0, 1, 2, 3].map((i) => idx(i, SIZE - 1 - i)));
+  for (const line of lines) {
+    const me = line.filter((i) => grid[i] === mark).length;
+    const them = line.filter((i) => grid[i] === opp).length;
+    if (them === 0) score += me * me;
+    if (me === 0) score -= them * them;
+  }
+  return score;
+}
+
+function botMove(grid: Cell[], strength: "easy" | "hard", rng: () => number): { cellIdx: number; dir: Dir } {
+  const edges = edgeCells().filter((i) => canSelect(grid, i, "O"));
+  // Win-now
+  for (const ci of edges) {
+    for (const d of validDirs(ci)) {
+      const next = applyPush(grid, ci, d, "O");
+      if (checkWinner(next).winner === "O") return { cellIdx: ci, dir: d };
+    }
+  }
+  if (strength === "easy") {
+    const ci = edges[Math.floor(rng() * edges.length)] ?? edges[0]!;
+    const dirs = validDirs(ci);
+    return { cellIdx: ci, dir: dirs[Math.floor(rng() * dirs.length)]! };
+  }
+  let best: { cellIdx: number; dir: Dir } = { cellIdx: edges[0]!, dir: validDirs(edges[0]!)[0]! };
+  let bs = -Infinity;
+  for (const ci of edges) {
+    for (const d of validDirs(ci)) {
+      const next = applyPush(grid, ci, d, "O");
+      // skip if it lets X win immediately
+      const xEdges = edgeCells().filter((i) => canSelect(next, i, "X"));
+      let xCanWin = false;
+      for (const xi of xEdges) {
+        for (const xd of validDirs(xi)) {
+          const xNext = applyPush(next, xi, xd, "X");
+          if (checkWinner(xNext).winner === "X") { xCanWin = true; break; }
+        }
+        if (xCanWin) break;
+      }
+      const s = (xCanWin ? -10000 : 0) + scoreGrid(next, "O") + rng() * 0.001;
+      if (s > bs) { bs = s; best = { cellIdx: ci, dir: d }; }
+    }
+  }
+  return best;
+}
+
+export function initialState(seed: number, settings: QuixoMiniSettings): QuixoMiniState {
+  return {
+    settings,
+    rngSeed: seed,
+    grid: Array(SIZE * SIZE).fill(null) as Cell[],
+    turn: "X",
+    winner: null,
+    winningLine: null,
+    gameOver: false,
+    selected: null,
+  };
+}
+
+export function reducer(state: QuixoMiniState, action: QuixoMiniAction): QuixoMiniState {
+  if (action.type === "restart") return initialState(state.rngSeed + 1, state.settings);
+  if (state.gameOver || state.turn !== "X") return state;
+
+  if (action.type === "select") {
+    const { idx: ci } = action;
+    if (!edgeCells().includes(ci)) return state;
+    if (!canSelect(state.grid, ci, "X")) return state;
+    return { ...state, selected: state.selected === ci ? null : ci };
+  }
+
+  if (action.type === "push") {
+    if (state.selected === null) return state;
+    if (!validDirs(state.selected).includes(action.dir)) return state;
+    const newGrid = applyPush(state.grid, state.selected, action.dir, "X");
+    const { winner, line } = checkWinner(newGrid);
+    if (winner !== null) {
+      return { ...state, grid: newGrid, winner, winningLine: line, gameOver: true, turn: "O", selected: null };
+    }
+    const rng = mulberry32(state.rngSeed);
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    const bm = botMove(newGrid, state.settings.botStrength, rng);
+    const botGrid = applyPush(newGrid, bm.cellIdx, bm.dir, "O");
+    const { winner: bw, line: bl } = checkWinner(botGrid);
+    return {
+      ...state,
+      rngSeed: nextSeed,
+      grid: botGrid,
+      turn: "X",
+      winner: bw,
+      winningLine: bl,
+      gameOver: bw !== null,
+      selected: null,
+    };
+  }
+
+  return state;
+}
+
+export function isTerminal(state: QuixoMiniState): { score: number } | null {
+  if (!state.gameOver) return null;
+  if (state.winner === "X") return { score: 100 };
+  return { score: 0 };
 }

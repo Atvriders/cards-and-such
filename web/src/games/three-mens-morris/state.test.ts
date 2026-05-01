@@ -1,60 +1,40 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, SIZE, MAX_MOVES } from "./state.js";
+import { initialState, reducer, isTerminal, checkLineWin, ADJACENCY, LINES, POINTS, PIECES_PER } from "./state.js";
 
-const S = { dummy: false };
+const S = { botStrength: "easy" as const };
 
 describe("Three Men's Morris", () => {
-  it("starts in playing phase with correct board size", () => {
+  it("starts placing with 3 pieces each, 9 intersections", () => {
     const s = initialState(1, S);
-    expect(s.board.length).toBe(SIZE * SIZE);
-    expect(s.phase).toBe("playing");
-    expect(s.score).toBe(0);
+    expect(s.board.length).toBe(POINTS);
+    expect(s.piecesToPlace).toEqual([PIECES_PER, PIECES_PER]);
+    expect(s.phase).toEqual(["placing", "placing"]);
+    expect(s.winner).toBeNull();
   });
 
-  it("isTerminal is null at start", () => {
+  it("placing a piece reduces toPlace count", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "place", pos: 4 });
+    expect(s1.board[4]).toBe(0);
+    expect(s1.piecesToPlace[0]).toBe(PIECES_PER - 1);
+  });
+
+  it("ADJACENCY has 9 entries; center connects to all 8 others", () => {
+    expect(ADJACENCY.length).toBe(POINTS);
+    expect(ADJACENCY[4]!.length).toBe(8);
+  });
+
+  it("LINES contains 8 winning lines (3 rows + 3 cols + 2 diags)", () => {
+    expect(LINES.length).toBe(8);
+  });
+
+  it("checkLineWin detects a row of 3", () => {
+    const board: (0 | 1 | null)[] = new Array(POINTS).fill(null);
+    board[0] = 0; board[1] = 0; board[2] = 0;
+    expect(checkLineWin(board).winner).toBe(0);
+  });
+
+  it("isTerminal null while in progress", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
-  });
-
-  it("rejects out-of-bounds placements", () => {
-    const s = initialState(1, S);
-    const s2 = reducer(s, { type: "place", idx: -1 });
-    expect(s2).toBe(s);
-    const s3 = reducer(s, { type: "place", idx: SIZE * SIZE });
-    expect(s3).toBe(s);
-  });
-
-  it("MAX_MOVES is sane", () => {
-    expect(MAX_MOVES).toBeGreaterThanOrEqual(8);
-    expect(MAX_MOVES).toBeLessThanOrEqual(40);
-  });
-
-  it("can advance state via valid moves", () => {
-    const s = initialState(7, S);
-    const target = false
-      ? s.board.findIndex(c => c === "P")
-      : s.board.findIndex(c => c === null);
-    if (target >= 0) {
-      const s2 = reducer(s, { type: "place", idx: target });
-      expect(s2.moves).toBeGreaterThanOrEqual(1);
-    } else {
-      expect(s.moves).toBeGreaterThanOrEqual(0);
-    }
-  });
-
-  it("eventually reaches terminal state with reasonable play", () => {
-    let s = initialState(42, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety < 200) {
-      const target = false
-        ? s.board.findIndex(c => c === "P")
-        : s.board.findIndex(c => c === null);
-      if (target < 0) break;
-      const next = reducer(s, { type: "place", idx: target });
-      if (next === s) break;
-      s = next;
-      safety++;
-    }
-    expect(s.moves).toBeGreaterThanOrEqual(1);
-    expect(s.score).toBeGreaterThanOrEqual(0);
   });
 });

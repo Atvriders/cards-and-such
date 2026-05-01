@@ -1,2 +1,100 @@
-/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+.crib-mini-root {
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex; flex-direction: column; align-items: stretch;
+  gap: 12px; padding: 14px; max-width: 540px; margin: 0 auto;
+  color: #ecf3ff;
+}
+.crib-mini-header {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+}
+.crib-mini-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; padding: 4px 10px; border-radius: 6px;
+  background: rgba(60,120,170,0.25);
+}
+.crib-mini-banner {
+  font-size: 0.95rem; font-weight: 600; padding: 6px 14px;
+  border-radius: 8px; background: rgba(60,120,170,0.25);
+}
+.crib-mini-win { background: #2d8f4f; color: #fff; }
+.crib-mini-loss { background: #b54545; color: #fff; }
+.crib-mini-dealer { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; opacity: 0.75; }
+.crib-mini-pegboard {
+  background: rgba(0,0,0,0.25); border-radius: 10px;
+  padding: 8px 12px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.crib-mini-peg-row {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+}
+.crib-mini-peg-bar {
+  height: 12px; background: linear-gradient(90deg,#5dd6f5,#4adf78);
+  border-radius: 6px; flex: none;
+  min-width: 4px;
+  transition: width 0.4s ease;
+}
+.crib-mini-peg-bot { background: linear-gradient(90deg,#ff7a7a,#c01a1a); }
+.crib-mini-peg-num { margin-left: auto; font-weight: 700; }
+.crib-mini-bot-row .crib-mini-peg-num { color: #ff9494; }
+.crib-mini-hands {
+  display: flex; flex-direction: column; gap: 12px;
+  background: linear-gradient(160deg,#0e2030,#06121f);
+  padding: 12px; border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.crib-mini-hand-section { display: flex; flex-direction: column; gap: 6px; }
+.crib-mini-hand-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  letter-spacing: 0.1em; opacity: 0.65;
+}
+.crib-mini-hand {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.crib-mini-starter {
+  display: flex; flex-direction: column; gap: 6px; align-items: center;
+}
+.crib-mini-card {
+  width: 56px; height: 80px;
+  border-radius: 6px;
+  background: #fdfdfd;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #c0c8d4; padding: 0; cursor: default;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.crib-mini-red { color: #c01a1a; }
+.crib-mini-black { color: #1a1a1a; }
+.crib-mini-card:not(:disabled) { cursor: pointer; }
+.crib-mini-card:not(:disabled):hover { transform: translateY(-3px); }
+.crib-mini-back {
+  background: linear-gradient(135deg,#3282b8,#0f4c75);
+  color: transparent;
+}
+.crib-mini-empty { background: rgba(255,255,255,0.05); border-style: dashed; }
+.crib-mini-selected {
+  box-shadow: 0 0 0 3px #ffd166, 0 4px 10px rgba(0,0,0,0.5);
+  transform: translateY(-3px);
+}
+.crib-mini-breakdown {
+  background: rgba(255,255,255,0.05); border-radius: 10px;
+  padding: 8px 12px;
+  display: flex; flex-direction: column; gap: 4px;
+  font-size: 0.85rem;
+}
+.crib-mini-bd-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.crib-mini-bd-label {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; min-width: 90px;
+}
+.crib-mini-bd-detail { opacity: 0.85; }
+.crib-mini-actions { display: flex; justify-content: center; }
+.crib-mini-btn {
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  padding: 10px 26px; border-radius: 8px;
+  background: #3282b8; color: #fff; border: none; cursor: pointer;
+}
+.crib-mini-btn:disabled { opacity: 0.4; cursor: default; }
+.crib-mini-btn:not(:disabled):hover { background: #459fde; }

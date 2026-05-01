@@ -1,31 +1,43 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROWS, COLS, TARGET } from "./state.js";
-const S = { dummy: false };
+import { initialState, reducer, isTerminal, applyPush, edgeCells, validDirs, checkWinner, SIZE } from "./state.js";
+
+const S = { botStrength: "easy" as const };
 
 describe("quixo-mini", () => {
-  it("starts in playing phase with empty board", () => {
+  it("starts with empty 4×4 grid", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.board.length).toBe(ROWS * COLS);
-    expect(s.board.every(c => c === null)).toBe(true);
+    expect(s.grid.length).toBe(SIZE * SIZE);
+    expect(s.grid.every((c) => c === null)).toBe(true);
+    expect(s.gameOver).toBe(false);
   });
-  it("constants are sensible", () => {
-    expect(ROWS).toBeGreaterThanOrEqual(3);
-    expect(COLS).toBeGreaterThanOrEqual(3);
-    expect(TARGET).toBeGreaterThanOrEqual(3);
+
+  it("edgeCells returns the correct count for 4×4", () => {
+    expect(edgeCells().length).toBe(12); // 16 - 4 inner cells
   });
-  it("isTerminal null at start", () => {
+
+  it("applyPush slides correctly to the right", () => {
+    const grid = Array(SIZE * SIZE).fill(null);
+    grid[0] = "X"; grid[1] = "O"; grid[2] = "O"; grid[3] = null;
+    // push (0,0) right: (0,0) becomes (0,1) value, (0,1)→(0,2), ..., (0,SIZE-1) = mark
+    const next = applyPush(grid, 0, "right", "X");
+    expect(next[3]).toBe("X");
+  });
+
+  it("validDirs for top-left corner has only right and down", () => {
+    const dirs = validDirs(0);
+    expect(dirs).toContain("right");
+    expect(dirs).toContain("down");
+    expect(dirs).not.toContain("left");
+    expect(dirs).not.toContain("up");
+  });
+
+  it("checkWinner detects a row of 4", () => {
+    const g = Array(SIZE * SIZE).fill(null);
+    for (let c = 0; c < 4; c++) g[c] = "X";
+    expect(checkWinner(g).winner).toBe("X");
+  });
+
+  it("isTerminal null on fresh game", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
-  });
-  it("place action records a player piece on the board", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: ROWS - 1, col: 0 });
-    const pCount = s1.board.filter(c => c === "P").length;
-    expect(pCount).toBeGreaterThanOrEqual(1);
-  });
-  it("invalid action does not crash", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: -5, col: -5 });
-    expect(s1.phase).toBe("playing");
   });
 });

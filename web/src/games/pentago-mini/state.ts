@@ -1,104 +1,231 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const ROWS = 6;
-export const COLS = 6;
-export const TARGET = 5;
-export const MODE: "place" | "gravity" = "place";
+// Pentago Mini: 4×4 board made of 4 quadrants of 2×2.
+// Place a marble, then rotate any quadrant 90° (CW or CCW). 4-in-a-row wins.
 
-export interface ConnectSettings { dummy: boolean }
-export type Cell = "P" | "C" | null;
+export const SIZE = 4;
+export const TARGET = 4;
 
-export interface ConnectState {
+export type Cell = 0 | 1 | null; // 0 = player (black), 1 = bot (white)
+
+export interface PentagoMiniSettings {
+  botStrength: "easy" | "hard";
+}
+
+export interface PentagoMiniState {
+  settings: PentagoMiniSettings;
+  board: readonly Cell[];
+  turn: 0 | 1;
+  phase: "place" | "rotate";
+  lastPlaced: number | null;
+  winner: 0 | 1 | "draw" | null;
+  movesMade: number;
   rngSeed: number;
-  board: Cell[];
-  turn: "P" | "C";
-  result: "P" | "C" | "draw" | null;
-  score: number;
-  phase: "playing" | "done";
-  pieces: number;
 }
 
-export type ConnectAction = { type: "place"; row: number; col: number };
+export type RotateDir = "cw" | "ccw";
 
-function topRow(b: Cell[], col: number): number {
-  for (let r = ROWS - 1; r >= 0; r--) if (b[r * COLS + col] === null) return r;
-  return -1;
+export type PentagoMiniAction =
+  | { type: "place"; pos: number }
+  | { type: "rotate"; quadrant: 0 | 1 | 2 | 3; dir: RotateDir };
+
+const QUAD_OFFSETS = [
+  { row: 0, col: 0 },
+  { row: 0, col: 2 },
+  { row: 2, col: 0 },
+  { row: 2, col: 2 },
+] as const;
+
+export function rcToPos(r: number, c: number): number { return r * SIZE + c; }
+
+const DIRECTIONS = [
+  [0, 1], [1, 0], [1, 1], [1, -1],
+] as const;
+
+export function rotateQuadrant(board: readonly Cell[], q: 0 | 1 | 2 | 3, dir: RotateDir): Cell[] {
+  const next = [...board] as Cell[];
+  const { row: qr, col: qc } = QUAD_OFFSETS[q];
+  const cells: Cell[][] = [
+    [board[rcToPos(qr, qc)]!, board[rcToPos(qr, qc + 1)]!],
+    [board[rcToPos(qr + 1, qc)]!, board[rcToPos(qr + 1, qc + 1)]!],
+  ];
+  let rot: Cell[][];
+  if (dir === "cw") {
+    rot = [
+      [cells[1]![0]!, cells[0]![0]!],
+      [cells[1]![1]!, cells[0]![1]!],
+    ];
+  } else {
+    rot = [
+      [cells[0]![1]!, cells[1]![1]!],
+      [cells[0]![0]!, cells[1]![0]!],
+    ];
+  }
+  next[rcToPos(qr, qc)] = rot[0]![0]!;
+  next[rcToPos(qr, qc + 1)] = rot[0]![1]!;
+  next[rcToPos(qr + 1, qc)] = rot[1]![0]!;
+  next[rcToPos(qr + 1, qc + 1)] = rot[1]![1]!;
+  return next;
 }
 
-function checkWin(b: Cell[]): Cell | "draw" {
-  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-    const v = b[r * COLS + c]; if (!v) continue;
-    for (const d of dirs) {
-      const dr = d[0]!, dc = d[1]!;
-      let ok = true;
-      for (let k = 0; k < TARGET; k++) {
-        const rr = r + dr * k, cc = c + dc * k;
-        if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) { ok = false; break; }
-        if (b[rr * COLS + cc] !== v) { ok = false; break; }
+export function checkWin(board: readonly Cell[]): 0 | 1 | "draw" | null {
+  let winner: 0 | 1 | null = null;
+  for (const [dr, dc] of DIRECTIONS) {
+    for (let r = 0; r < SIZE; r++) {
+      for (let c = 0; c < SIZE; c++) {
+        const v = board[rcToPos(r, c)];
+        if (v === null) continue;
+        let count = 1;
+        for (let i = 1; i < TARGET; i++) {
+          const nr = r + dr * i, nc = c + dc * i;
+          if (nr < 0 || nr >= SIZE || nc < 0 || nc >= SIZE) break;
+          if (board[rcToPos(nr, nc)] !== v) break;
+          count++;
+        }
+        if (count >= TARGET) {
+          const ws = v as 0 | 1;
+          if (winner !== null && winner !== ws) return "draw";
+          winner = ws;
+        }
       }
-      if (ok) return v;
     }
   }
-  if (b.every(x => x !== null)) return "draw";
+  if (winner !== null) return winner;
+  if (board.every((c) => c !== null)) return "draw";
   return null;
 }
 
-export function initialState(seed: number, _s: ConnectSettings): ConnectState {
-  return { rngSeed: seed, board: Array(ROWS * COLS).fill(null), turn: "P", result: null, score: 0, phase: "playing", pieces: 0 };
+interface BotMove {
+  pos: number;
+  quadrant: 0 | 1 | 2 | 3;
+  dir: RotateDir;
 }
 
-function legalForGravity(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let c = 0; c < COLS; c++) {
-    const r = topRow(b, c);
-    if (r >= 0) out.push({ row: r, col: c });
+function evalBoard(board: readonly Cell[], seat: 0 | 1): number {
+  const opp: 0 | 1 = seat === 0 ? 1 : 0;
+  const w = checkWin(board);
+  if (w === seat) return 100000;
+  if (w === opp) return -100000;
+  if (w === "draw") return 0;
+  let score = 0;
+  for (const [dr, dc] of DIRECTIONS) {
+    for (let r = 0; r < SIZE; r++) {
+      for (let c = 0; c < SIZE; c++) {
+        let me = 0, them = 0, valid = true;
+        for (let i = 0; i < TARGET; i++) {
+          const nr = r + dr * i, nc = c + dc * i;
+          if (nr < 0 || nr >= SIZE || nc < 0 || nc >= SIZE) { valid = false; break; }
+          const v = board[rcToPos(nr, nc)];
+          if (v === seat) me++;
+          else if (v === opp) them++;
+        }
+        if (!valid) continue;
+        if (them === 0 && me > 0) score += me * me * 5;
+        if (me === 0 && them > 0) score -= them * them * 6;
+      }
+    }
   }
-  return out;
+  return score;
 }
 
-function legalForFree(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (b[r * COLS + c] === null) out.push({ row: r, col: c });
-  return out;
-}
+function pickBot(state: PentagoMiniState): BotMove | null {
+  const moves: BotMove[] = [];
+  for (let pos = 0; pos < SIZE * SIZE; pos++) {
+    if (state.board[pos] !== null) continue;
+    for (let q = 0; q < 4; q++) {
+      for (const dir of ["cw", "ccw"] as RotateDir[]) {
+        moves.push({ pos, quadrant: q as 0 | 1 | 2 | 3, dir });
+      }
+    }
+  }
+  if (moves.length === 0) return null;
 
-export function reducer(state: ConnectState, action: ConnectAction): ConnectState {
-  if (state.phase === "done" || state.result) return state;
-  if (action.type !== "place") return state;
-  if (state.turn !== "P") return state;
-
-  const { row, col } = action;
-  if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return state;
-  if (state.board[row * COLS + col] !== null) return state;
-
-  if (MODE === "gravity") {
-    const expectedRow = topRow(state.board, col);
-    if (expectedRow !== row) return state;
+  // Win-now
+  for (const m of moves) {
+    const b = [...state.board] as Cell[];
+    b[m.pos] = 1;
+    const after = rotateQuadrant(b, m.quadrant, m.dir);
+    if (checkWin(after) === 1) return m;
   }
 
-  const nb = state.board.slice();
-  nb[row * COLS + col] = "P";
-  let pieces = state.pieces + 1;
-  let result = checkWin(nb);
-  if (result === "P") return { ...state, board: nb, result: "P", score: state.score + 100 + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
-
-  const rng = mulberry32(state.rngSeed);
-  const legal = MODE === "gravity" ? legalForGravity(nb) : legalForFree(nb);
-  if (legal.length > 0) {
-    const pick = legal[Math.floor(rng() * legal.length)]!;
-    nb[pick.row * COLS + pick.col] = "C";
-    pieces += 1;
+  if (state.settings.botStrength === "easy") {
+    const rng = mulberry32(state.rngSeed);
+    return moves[Math.floor(rng() * moves.length)]!;
   }
-  const seed2 = Math.floor(rng() * 2 ** 31);
-  result = checkWin(nb);
-  if (result === "C") return { ...state, rngSeed: seed2, board: nb, result: "C", score: state.score + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, rngSeed: seed2, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
-
-  return { ...state, rngSeed: seed2, board: nb, turn: "P", pieces };
+  let best = moves[0]!;
+  let bs = -Infinity;
+  for (const m of moves) {
+    const b = [...state.board] as Cell[];
+    b[m.pos] = 1;
+    const after = rotateQuadrant(b, m.quadrant, m.dir);
+    const s = evalBoard(after, 1);
+    if (s > bs) { bs = s; best = m; }
+  }
+  return best;
 }
 
-export function isTerminal(state: ConnectState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function initialState(seed: number, settings: PentagoMiniSettings): PentagoMiniState {
+  return {
+    settings,
+    board: new Array(SIZE * SIZE).fill(null),
+    turn: 0,
+    phase: "place",
+    lastPlaced: null,
+    winner: null,
+    movesMade: 0,
+    rngSeed: seed,
+  };
+}
+
+export function reducer(state: PentagoMiniState, action: PentagoMiniAction): PentagoMiniState {
+  if (state.winner !== null) return state;
+
+  if (action.type === "place") {
+    if (state.turn !== 0 || state.phase !== "place") return state;
+    if (action.pos < 0 || action.pos >= SIZE * SIZE) return state;
+    if (state.board[action.pos] !== null) return state;
+    const newBoard = [...state.board] as Cell[];
+    newBoard[action.pos] = 0;
+    return { ...state, board: newBoard, phase: "rotate", lastPlaced: action.pos };
+  }
+
+  if (action.type === "rotate") {
+    if (state.turn !== 0 || state.phase !== "rotate") return state;
+    const rotated = rotateQuadrant(state.board, action.quadrant, action.dir);
+    const w = checkWin(rotated);
+    const rng = mulberry32(state.rngSeed);
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    if (w !== null) {
+      return {
+        ...state, board: rotated, winner: w,
+        movesMade: state.movesMade + 1, phase: "place", lastPlaced: null,
+        rngSeed: nextSeed,
+      };
+    }
+    const botState: PentagoMiniState = {
+      ...state, board: rotated, turn: 1,
+      movesMade: state.movesMade + 1, phase: "place", lastPlaced: null,
+      rngSeed: nextSeed,
+    };
+    const bm = pickBot(botState);
+    if (!bm) return { ...botState, winner: "draw" };
+    const b2 = [...rotated] as Cell[];
+    b2[bm.pos] = 1;
+    const r2 = rotateQuadrant(b2, bm.quadrant, bm.dir);
+    const w2 = checkWin(r2);
+    return {
+      ...botState, board: r2, turn: 0,
+      movesMade: botState.movesMade + 1, winner: w2,
+      rngSeed: Math.floor(mulberry32(nextSeed)() * 2 ** 31),
+    };
+  }
+
+  return state;
+}
+
+export function isTerminal(state: PentagoMiniState): { score: number } | null {
+  if (state.winner === null) return null;
+  if (state.winner === 0) return { score: 100 };
+  if (state.winner === "draw") return { score: 50 };
+  return { score: 0 };
 }

@@ -1,16 +1,30 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AntiOthelloState, AntiOthelloAction, AntiOthelloSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AntiOthelloGame } from "./Game.js";
-const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
+
+const settings = {
+  botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
+} as const;
+
 type S = SettingsOf<typeof settings>;
+
 export const antiOthelloPlugin: GamePlugin<AntiOthelloState, AntiOthelloAction, typeof settings> = {
-  id:"anti-othello", title:"Anti-Othello", category:"board",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Fewest discs at the end wins.",
-  howToPlay:"Anti-Othello is a fast-paced quiz built around the rules, history, and tactical themes of Anti-Othello. Each question describes a position, a rule, or a strategic choice unique to this variant, and asks you to pick the right answer from four choices.\n\nYou have 15 seconds per question. A correct answer awards 100 base points plus 10 points for every second remaining on the clock — so think fast and decide. Wrong answers and timeouts score zero, but the correct choice is always revealed before you continue, turning every miss into a learning moment.\n\nTap a choice to select it, then press Submit. Selected choices glow blue, correct answers turn green, and wrong picks turn red. Press Next to continue to the next question. After ten questions you'll see your final score and how many you nailed.\n\nWhether you've never played this variant or you've studied it for years, the quiz mixes flavor questions, rule trivia, and tactical motifs that capture what makes this version of chess unique.",
+  id: "anti-othello",
+  title: "Anti-Othello",
+  category: "board",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Reversi misère. Same flipping rules — but the player with the FEWEST discs wins.",
+  howToPlay: `Anti-Othello (Reversi misère) plays exactly like Othello, except the goal is reversed: when no one can move, the player with the FEWEST discs of their colour wins.
+
+Place a disc on a highlighted square so that one or more of your opponent's discs are sandwiched in a straight line by your disc and one of your existing discs. All sandwiched discs flip to your colour. You're forced to move if you can — only pass when you genuinely have no legal placement.
+
+Strategy is inverted: you want to avoid building a big mass of your colour. Force your opponent into long flips, target moves that flip few discs, and watch out for endgame parity.
+
+Scoring: win = 100 + (opponent discs − your discs) × 5; draw = 50; loss = max(0, opponent discs − 10).`,
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as AntiOthelloSettings),
-  reducer,isTerminal,component:AntiOthelloGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as AntiOthelloSettings),
+  reducer,
+  isTerminal,
+  component: AntiOthelloGame,
 };

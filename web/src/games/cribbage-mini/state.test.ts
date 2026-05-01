@@ -1,39 +1,61 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS, SCORE_WIN } from "./state.js";
+import { initialState, reducer, isTerminal, scoreShow, cardValue, TARGET_SCORE, HAND_SIZE, KEEP_SIZE } from "./state.js";
+
 const S = { dummy: false };
-describe("CribbageMini", () => {
-  it("starts in ready phase", () => { expect(initialState(1, S).phase).toBe("ready"); });
-  it("starts at round 1", () => { expect(initialState(1, S).round).toBe(1); });
-  it("starts with score 0", () => { expect(initialState(1, S).score).toBe(0); });
-  it("play produces both cards", () => {
-    const s = reducer(initialState(1, S), { type: "play" });
-    expect(s.you).not.toBeNull();
-    expect(s.cpu).not.toBeNull();
+
+describe("Cribbage Mini", () => {
+  it("starts in discard phase with 4 cards each", () => {
+    const s = initialState(1, S);
+    expect(s.phase).toBe("discard");
+    expect(s.yourHand.length).toBe(HAND_SIZE);
+    expect(s.botHand.length).toBe(HAND_SIZE);
+    expect(s.yourScore).toBe(0);
+    expect(s.botScore).toBe(0);
   });
-  it("score is non-negative after play", () => {
-    const s = reducer(initialState(1, S), { type: "play" });
-    expect(s.score).toBeGreaterThanOrEqual(0);
-  });
-  it("score never exceeds reasonable cap", () => {
+
+  it("toggleSelect adds and removes selections, capped at KEEP_SIZE", () => {
     let s = initialState(1, S);
-    for (let i = 0; i < TOTAL_ROUNDS * 2; i++) {
-      s = reducer(s, { type: "play" });
-      s = reducer(s, { type: "next" });
-    }
-    expect(s.score).toBeGreaterThanOrEqual(0);
-    expect(s.score).toBeLessThanOrEqual(TOTAL_ROUNDS * (SCORE_WIN + 10));
+    s = reducer(s, { type: "toggleSelect", idx: 0 });
+    expect(s.selected).toEqual([0]);
+    s = reducer(s, { type: "toggleSelect", idx: 1 });
+    expect(s.selected).toEqual([0, 1]);
+    s = reducer(s, { type: "toggleSelect", idx: 2 });
+    expect(s.selected.length).toBe(KEEP_SIZE); // capped
+    s = reducer(s, { type: "toggleSelect", idx: 0 });
+    expect(s.selected).toEqual([1]);
   });
-  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("isTerminal true after all rounds played", () => {
-    let s = initialState(42, S);
-    for (let i = 0; i < TOTAL_ROUNDS * 2 + 5; i++) {
-      if (s.phase === "ready") s = reducer(s, { type: "play" });
-      else if (s.phase === "result") s = reducer(s, { type: "next" });
-      else break;
-    }
-    expect(s.phase).toBe("done");
-    const t = isTerminal(s);
-    expect(t).not.toBeNull();
-    if (t) expect(t.score).toBeGreaterThanOrEqual(0);
+
+  it("cardValue follows cribbage rules (A=1, J/Q/K=10)", () => {
+    expect(cardValue(0)).toBe(1); // ace
+    expect(cardValue(4 * 9)).toBe(10); // 10
+    expect(cardValue(4 * 10)).toBe(10); // J
+    expect(cardValue(4 * 12)).toBe(10); // K
+  });
+
+  it("scoreShow scores a pair of 5s + a 5 starter as pair royal + fifteens", () => {
+    // Three 5s: three pairs (3 * 2 = 6pts), and any pair of 5s = 10 (no fifteen subset)
+    // Three 5s sum to 15: that's one fifteen subset (2pts).
+    // Pairs: C(3,2) = 3 pairs * 2 = 6pts
+    // Total: 8pts
+    const cards = [4 * 4 + 0, 4 * 4 + 1, 4 * 4 + 2]; // three 5s
+    const r = scoreShow(cards, false);
+    expect(r.score).toBeGreaterThanOrEqual(8);
+  });
+
+  it("submit transitions to show and assigns a starter", () => {
+    let s = initialState(1, S);
+    s = reducer(s, { type: "toggleSelect", idx: 0 });
+    s = reducer(s, { type: "toggleSelect", idx: 1 });
+    s = reducer(s, { type: "submit" });
+    expect(["show", "done"]).toContain(s.phase);
+    expect(s.starter).not.toBeNull();
+  });
+
+  it("isTerminal null while in progress", () => {
+    expect(isTerminal(initialState(1, S))).toBeNull();
+  });
+
+  it("TARGET_SCORE is 31", () => {
+    expect(TARGET_SCORE).toBe(31);
   });
 });

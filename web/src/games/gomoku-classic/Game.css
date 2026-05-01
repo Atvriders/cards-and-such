@@ -1,10 +1,62 @@
-.cn-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; padding:14px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.cn-board { display:grid; gap:3px; padding:8px; background:#34495e; border-radius:10px; max-width:520px; }
-.cn-cell { aspect-ratio:1; min-width:18px; background:#ecf0f1; border-radius:50%; cursor:pointer; transition:background 0.15s; border:none; }
-.cn-cell.p { background:#e74c3c; }
-.cn-cell.c { background:#3498db; }
-.cn-cell:hover:not(:disabled) { background:#bdc3c7; }
-.cn-info { font-size:0.95rem; color:#555; text-align:center; }
-.cn-score { font-size:1.05rem; font-weight:700; color:#27ae60; }
-.cn-done { text-align:center; padding:20px; background:#f8f9fa; border-radius:14px; }
-.cn-final { font-size:1.2rem; color:#27ae60; font-weight:800; }
+.gomoku-cl-root {
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; padding: 12px; max-width: 720px; margin: 0 auto;
+  color: #f4ead0;
+}
+.gomoku-cl-header {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+}
+.gomoku-cl-target {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; padding: 4px 10px; border-radius: 6px;
+  background: rgba(180,140,80,0.18);
+}
+.gomoku-cl-banner {
+  font-size: 1rem; font-weight: 600; padding: 6px 14px;
+  border-radius: 8px; background: rgba(190,140,70,0.22);
+}
+.gomoku-cl-win { background: #2d8f4f; color: #fff; }
+.gomoku-cl-loss { background: #b54545; color: #fff; }
+.gomoku-cl-draw { background: #c08c2a; color: #fff; }
+.gomoku-cl-bot {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; opacity: 0.75;
+}
+.gomoku-cl-board {
+  display: grid; gap: 0; padding: 6px;
+  background: linear-gradient(160deg,#dbb67a,#b4884a);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  width: 100%; max-width: 600px;
+}
+.gomoku-cl-cell {
+  aspect-ratio: 1;
+  background: transparent;
+  border: 1px solid #80592a;
+  cursor: pointer; padding: 0;
+  position: relative;
+  transition: background 0.12s ease;
+  min-width: 0;
+}
+.gomoku-cl-cell:disabled { cursor: default; }
+.gomoku-cl-cell:not(:disabled):hover { background: rgba(255,255,255,0.16); }
+.gomoku-cl-p::after, .gomoku-cl-c::after {
+  content: ''; position: absolute; inset: 12%;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.gomoku-cl-p::after {
+  background: radial-gradient(circle at 35% 30%, #4a4a4a 0%, #050505 70%);
+}
+.gomoku-cl-c::after {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #c0c8d4 70%);
+}
+.gomoku-cl-win-cell {
+  background: rgba(255,210,90,0.45) !important;
+  box-shadow: inset 0 0 0 2px #ffe066;
+}
+.gomoku-cl-last {
+  outline: 2px solid #ff7f50; outline-offset: -2px;
+}
+.gomoku-cl-foot { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; opacity: 0.7; }

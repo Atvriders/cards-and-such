@@ -1,19 +1,33 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { GameState, GameAction, GameSettings } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GameState, GameAction, ThreeMorrisSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ThreeMensMorrisGame } from "./Game.js";
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+
+const settings = {
+  botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
+} as const;
+
 type S = SettingsOf<typeof settings>;
+
 export const threeMensMorrisPlugin: GamePlugin<GameState, GameAction, typeof settings> = {
   id: "three-mens-morris",
   title: "Three Men's Morris",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Tic-Tac-Toe-like Morris on a 3x3 grid. Form 3-in-a-row vs random CPU.",
-  howToPlay: "Three Men's Morris is the smallest and oldest Morris variant — essentially a placement-only Tic-Tac-Toe with a unique twist. Players alternate placing 3 pieces each, then move them to adjacent cells trying to form a mill (3-in-a-row). In this simplified placement-only version, the game ends when both sides have placed all pieces or one side completes a line.\n\nClick any empty cell on the 3x3 grid to place a P piece. If your placement forms 3-in-a-row in any direction (horizontal, vertical, or diagonal), you win immediately! After your turn, a random CPU places a C piece on an empty cell.\n\nGameplay continues for up to 8 moves or until one side completes a line. You earn 100 points for forming 3-in-a-row first, 25 for a board-full draw, 0 for the CPU winning, plus 5 bonus points per surviving P piece. Despite its simplicity, Three Men's Morris dates to the Roman Empire and remains a charming pocket game. Use central placement aggressively — center participates in 4 lines while corners only have 3.",
+  description: "Real Three Men's Morris on a 3×3 grid plus diagonals. Place 3 men, then slide. First 3-in-a-row wins.",
+  howToPlay: `Three Men's Morris is the smallest and oldest Morris variant. Each player has 3 men. The board is a 3×3 grid with adjacencies along rows, columns, and the two long diagonals (the centre connects to all 8 surrounding points).
+
+Phase 1 — Placing: each player places all 3 men on empty intersections, one per turn. If you complete 3-in-a-row while placing, you win immediately.
+
+Phase 2 — Moving: once both have placed all 3 men, you slide one of your men to an empty adjacent intersection per turn. The first to align 3 in a row (horizontal, vertical, or diagonal) wins. If a player has no legal moves, they lose.
+
+Click-to-act: in placing phase click any empty intersection; in moving phase click your piece to select, then click an adjacent empty target.
+
+Scoring: win = 100, loss = 0.
+
+Tips: the centre is golden — it lies on 4 of the 8 winning lines and connects to all other points. Avoid letting the bot reach the centre.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as GameSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as ThreeMorrisSettings),
   reducer,
   isTerminal,
   component: ThreeMensMorrisGame,

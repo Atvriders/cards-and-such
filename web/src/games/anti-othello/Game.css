@@ -1,25 +1,74 @@
-.trivia-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px;font-family:sans-serif;max-width:640px;margin:0 auto; }
-.trivia-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.trivia-progress { font-size:0.95rem;color:#555; }
-.trivia-score { font-size:1.1rem;font-weight:700;color:#27ae60; }
-.trivia-timer { font-size:1.4rem;font-weight:900;color:#e74c3c;min-width:40px;text-align:center; }
-.trivia-timer.urgent { animation:pulse 0.5s infinite alternate; }
-@keyframes pulse { from { opacity:1; } to { opacity:0.4; } }
-.trivia-question { font-size:1.25rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.trivia-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
-.trivia-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;transition:border-color 0.15s,background 0.15s;text-align:left; }
-.trivia-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.trivia-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.trivia-choice-letter { font-weight:900;font-size:1.1rem;color:#95a5a6;min-width:24px; }
-.trivia-actions { display:flex;gap:12px; }
-.trivia-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer; }
-.trivia-btn.submit { background:#27ae60;color:#fff; }
-.trivia-btn.next { background:#3498db;color:#fff; }
-.trivia-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.trivia-feedback { font-size:1.1rem;font-weight:700;padding:10px 24px;border-radius:8px; }
-.trivia-feedback.correct { background:#eafaf1;color:#1e8449; }
-.trivia-feedback.wrong { background:#fdedec;color:#c0392b; }
-.trivia-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:16px;width:100%; }
-.trivia-done h2 { margin-bottom:8px; }
+.antiothello-root {
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 16px; max-width: 600px; margin: 0 auto;
+  color: #f0e6f8;
+}
+.antiothello-banner {
+  display: flex; gap: 10px; align-items: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+  padding: 6px 14px; border-radius: 8px;
+  background: linear-gradient(90deg,#5e2d8a,#883a8a);
+  letter-spacing: 0.05em;
+}
+.antiothello-misere {
+  background: rgba(255,255,255,0.16); padding: 2px 8px;
+  border-radius: 4px; font-weight: 700;
+}
+.antiothello-header {
+  width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+}
+.antiothello-counts { display: flex; gap: 12px; }
+.antiothello-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600; padding: 4px 10px; border-radius: 6px;
+}
+.antiothello-black { background: #f4d35e; color: #1a1a1a; }
+.antiothello-white { background: rgba(160,180,210,0.2); color: #e8eef7; }
+.antiothello-status {
+  font-size: 1rem; font-weight: 600; padding: 6px 14px;
+  border-radius: 8px; background: rgba(140,80,180,0.25);
+}
+.antiothello-win { background: #2d8f4f; color: #fff; }
+.antiothello-loss { background: #b54545; color: #fff; }
+.antiothello-draw { background: #c08c2a; color: #fff; }
+.antiothello-board {
+  display: inline-block; padding: 6px;
+  background: linear-gradient(160deg,#2d1a4d,#180c2c);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.antiothello-row { display: flex; }
+.antiothello-cell {
+  width: 56px; height: 56px;
+  background: #432d70; border: 1px solid #1f1340;
+  display: flex; align-items: center; justify-content: center;
+  cursor: default; padding: 0;
+  transition: background 0.15s ease;
+}
+.antiothello-cell:disabled { cursor: default; }
+.antiothello-legal { cursor: pointer; }
+.antiothello-legal:hover { background: #5e3f9a; }
+.antiothello-disc {
+  display: block; width: 78%; height: 78%; border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.antiothello-disc-black {
+  background: radial-gradient(circle at 35% 30%, #4a4a4a 0%, #0a0a0a 70%);
+}
+.antiothello-disc-white {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #c4cfdb 70%);
+}
+.antiothello-hint {
+  width: 22%; height: 22%; border-radius: 50%;
+  background: rgba(255,180,255,0.45);
+}
+.antiothello-pass {
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  padding: 8px 22px; border-radius: 8px;
+  background: #884cb4; color: #fff; border: none; cursor: pointer;
+}
+.antiothello-pass:hover { background: #a065d3; }
+.antiothello-foot { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; opacity: 0.7; }

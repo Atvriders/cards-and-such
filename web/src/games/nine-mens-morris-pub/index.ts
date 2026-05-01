@@ -1,9 +1,12 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PubState, PubAction, PubSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PubGame } from "./Game.js";
+import { NineMensMorrisPubGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = {
+  botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
+} as const;
+
 type S = SettingsOf<typeof settings>;
 
 export const nineMensMorrisPubPlugin: GamePlugin<PubState, PubAction, typeof settings> = {
@@ -11,11 +14,21 @@ export const nineMensMorrisPubPlugin: GamePlugin<PubState, PubAction, typeof set
   title: "Nine Men's Morris (Pub)",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Three-phase mill game on a painted pub board.",
-  howToPlay: "Nine Men's Morris (Pub) plays the classic three-phase mill game on the rough painted pub board common in British country pubs. In this simplified click adaptation across ten turns, you place pieces on intersections trying to form mills (three in a row). Each round press Place to drop a piece on a random intersection; if it forms a mill you score 10 points, otherwise you score 1. The CPU also places each round and may form its own mills. After ten rounds the higher score wins. The pub variant uses informal rules — no movement phase, no flying, no captures, just rapid placement and mill-counting. Painted pub boards date to medieval taverns where they were chalked or carved into wooden tables. The mechanic here strips the game to its score-and-mill core; classical tournament Morris is much deeper. Press Place to advance; the score updates after each round. Final scoreboard awards 100 points for the win.",
+  description: "Standard Nine Men's Morris with the pub-rule restriction: no flying once down to 3 pieces.",
+  howToPlay: `Nine Men's Morris on the standard 24-intersection three-square board. The pub variant removes the optional "flying" endgame rule — when reduced to 3 pieces, you still must move along a line (not jump anywhere), so an immobilised player loses immediately.
+
+Phase 1 — Placing: each player places 9 men, one per turn, on any empty intersection. Forming a "mill" (three of your men aligned along a marked line) lets you remove one of your opponent's pieces (you cannot remove a piece in a mill unless all opponent pieces are in mills).
+
+Phase 2 — Moving: once both players have placed all 9, you slide one of your pieces to an empty adjacent intersection per turn. Forming a mill again lets you remove a piece. Lose by being reduced to fewer than 3 pieces or by having no legal moves.
+
+Click-to-act: in placing phase click any empty intersection; in moving phase click your piece (it highlights), then click an adjacent legal target. After forming a mill, click any opponent piece you may legally remove.
+
+Scoring: win = 100, loss = 0.
+
+Tips: place near intersections with high adjacency (the "T" points). Try to set up "double mills" you can swing back and forth — opening one mill on your turn and closing the other.`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PubSettings),
   reducer,
   isTerminal,
-  component: PubGame,
+  component: NineMensMorrisPubGame,
 };

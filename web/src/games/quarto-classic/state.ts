@@ -1,104 +1,202 @@
+/**
+ * Quarto Classic: 4×4 board, 16 unique pieces with 4 binary attributes.
+ * On your turn, place the piece your opponent picked, then choose the next piece for them.
+ * Win: 4 in a row sharing at least one attribute (row, column, or diagonal).
+ */
+
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const ROWS = 4;
-export const COLS = 4;
-export const TARGET = 4;
-export const MODE: "place" | "gravity" = "place";
+export interface QuartoClassicSettings {
+  botStrength: "easy" | "hard";
+}
 
-export interface ConnectSettings { dummy: boolean }
-export type Cell = "P" | "C" | null;
+export type Piece = number;
 
-export interface ConnectState {
+export interface QuartoClassicState {
+  settings: QuartoClassicSettings;
   rngSeed: number;
-  board: Cell[];
-  turn: "P" | "C";
-  result: "P" | "C" | "draw" | null;
-  score: number;
-  phase: "playing" | "done";
-  pieces: number;
+  board: (Piece | null)[];
+  remaining: Piece[];
+  toPlace: Piece | null;
+  phase: "place" | "choose";
+  turn: "player" | "bot";
+  winner: "player" | "bot" | null;
+  winningLine: number[] | null;
+  gameOver: boolean;
 }
 
-export type ConnectAction = { type: "place"; row: number; col: number };
+export type QuartoClassicAction =
+  | { type: "place"; cell: number }
+  | { type: "choose"; piece: Piece }
+  | { type: "restart" };
 
-function topRow(b: Cell[], col: number): number {
-  for (let r = ROWS - 1; r >= 0; r--) if (b[r * COLS + col] === null) return r;
-  return -1;
+const ALL_PIECES: Piece[] = Array.from({ length: 16 }, (_, i) => i);
+
+export function pieceAttrs(p: Piece): { tall: boolean; light: boolean; square: boolean; solid: boolean } {
+  return {
+    tall: !!(p & 8),
+    light: !!(p & 4),
+    square: !!(p & 2),
+    solid: !!(p & 1),
+  };
 }
 
-function checkWin(b: Cell[]): Cell | "draw" {
-  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-    const v = b[r * COLS + c]; if (!v) continue;
-    for (const d of dirs) {
-      const dr = d[0]!, dc = d[1]!;
-      let ok = true;
-      for (let k = 0; k < TARGET; k++) {
-        const rr = r + dr * k, cc = c + dc * k;
-        if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) { ok = false; break; }
-        if (b[rr * COLS + cc] !== v) { ok = false; break; }
-      }
-      if (ok) return v;
+export function pieceLabel(p: Piece): string {
+  const a = pieceAttrs(p);
+  return `${a.tall ? "T" : "S"}${a.light ? "L" : "D"}${a.square ? "Q" : "R"}${a.solid ? "F" : "H"}`;
+}
+
+const LINES: number[][] = (() => {
+  const out: number[][] = [];
+  for (let r = 0; r < 4; r++) out.push([0, 1, 2, 3].map((c) => r * 4 + c));
+  for (let c = 0; c < 4; c++) out.push([0, 1, 2, 3].map((r) => r * 4 + c));
+  out.push([0, 5, 10, 15]);
+  out.push([3, 6, 9, 12]);
+  return out;
+})();
+
+function checkLine(board: (Piece | null)[], indices: number[]): boolean {
+  const pieces = indices.map((i) => board[i]);
+  if (pieces.some((p) => p === null)) return false;
+  for (let bit = 0; bit < 4; bit++) {
+    const mask = 1 << bit;
+    if (pieces.every((p) => (p! & mask) === mask) || pieces.every((p) => (p! & mask) === 0)) {
+      return true;
     }
   }
-  if (b.every(x => x !== null)) return "draw";
-  return null;
+  return false;
 }
 
-export function initialState(seed: number, _s: ConnectSettings): ConnectState {
-  return { rngSeed: seed, board: Array(ROWS * COLS).fill(null), turn: "P", result: null, score: 0, phase: "playing", pieces: 0 };
-}
-
-function legalForGravity(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let c = 0; c < COLS; c++) {
-    const r = topRow(b, c);
-    if (r >= 0) out.push({ row: r, col: c });
+export function checkWinner(board: (Piece | null)[]): { winner: boolean; line: number[] | null } {
+  for (const line of LINES) {
+    if (checkLine(board, line)) return { winner: true, line };
   }
-  return out;
+  return { winner: false, line: null };
 }
 
-function legalForFree(b: Cell[]): { row: number; col: number }[] {
-  const out: { row: number; col: number }[] = [];
-  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (b[r * COLS + c] === null) out.push({ row: r, col: c });
-  return out;
-}
-
-export function reducer(state: ConnectState, action: ConnectAction): ConnectState {
-  if (state.phase === "done" || state.result) return state;
-  if (action.type !== "place") return state;
-  if (state.turn !== "P") return state;
-
-  const { row, col } = action;
-  if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return state;
-  if (state.board[row * COLS + col] !== null) return state;
-
-  if (MODE === "gravity") {
-    const expectedRow = topRow(state.board, col);
-    if (expectedRow !== row) return state;
+function botChoosePiece(remaining: Piece[], board: (Piece | null)[], strength: "easy" | "hard", rng: () => number): Piece {
+  if (strength === "easy") {
+    return remaining[Math.floor(rng() * remaining.length)]!;
   }
+  const safe: Piece[] = [];
+  for (const p of remaining) {
+    let dangerous = false;
+    for (let cell = 0; cell < 16; cell++) {
+      if (board[cell] !== null) continue;
+      const t = [...board];
+      t[cell] = p;
+      if (checkWinner(t).winner) { dangerous = true; break; }
+    }
+    if (!dangerous) safe.push(p);
+  }
+  const pool = safe.length > 0 ? safe : remaining;
+  return pool[Math.floor(rng() * pool.length)]!;
+}
 
-  const nb = state.board.slice();
-  nb[row * COLS + col] = "P";
-  let pieces = state.pieces + 1;
-  let result = checkWin(nb);
-  if (result === "P") return { ...state, board: nb, result: "P", score: state.score + 100 + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
+function botPlacePiece(toPlace: Piece, board: (Piece | null)[], remaining: Piece[], strength: "easy" | "hard", rng: () => number): number {
+  const empties: number[] = [];
+  for (let i = 0; i < 16; i++) if (board[i] === null) empties.push(i);
+  for (const cell of empties) {
+    const t = [...board];
+    t[cell] = toPlace;
+    if (checkWinner(t).winner) return cell;
+  }
+  if (strength === "easy") return empties[Math.floor(rng() * empties.length)]!;
+  const safe: number[] = [];
+  for (const cell of empties) {
+    const t = [...board];
+    t[cell] = toPlace;
+    let allow = false;
+    for (const p of remaining.filter((p) => p !== toPlace)) {
+      for (let c2 = 0; c2 < 16; c2++) {
+        if (t[c2] !== null) continue;
+        const t2 = [...t];
+        t2[c2] = p;
+        if (checkWinner(t2).winner) { allow = true; break; }
+      }
+      if (allow) break;
+    }
+    if (!allow) safe.push(cell);
+  }
+  const pool = safe.length > 0 ? safe : empties;
+  return pool[Math.floor(rng() * pool.length)]!;
+}
 
+export function initialState(seed: number, settings: QuartoClassicSettings): QuartoClassicState {
+  const rng = mulberry32(seed);
+  const nextSeed = Math.floor(rng() * 2 ** 31);
+  const firstPiece = botChoosePiece(ALL_PIECES, Array(16).fill(null), settings.botStrength, rng);
+  return {
+    settings,
+    rngSeed: nextSeed,
+    board: Array(16).fill(null) as (Piece | null)[],
+    remaining: ALL_PIECES.filter((p) => p !== firstPiece),
+    toPlace: firstPiece,
+    phase: "place",
+    turn: "player",
+    winner: null,
+    winningLine: null,
+    gameOver: false,
+  };
+}
+
+export function reducer(state: QuartoClassicState, action: QuartoClassicAction): QuartoClassicState {
+  if (action.type === "restart") return initialState(state.rngSeed + 1, state.settings);
+  if (state.gameOver) return state;
   const rng = mulberry32(state.rngSeed);
-  const legal = MODE === "gravity" ? legalForGravity(nb) : legalForFree(nb);
-  if (legal.length > 0) {
-    const pick = legal[Math.floor(rng() * legal.length)]!;
-    nb[pick.row * COLS + pick.col] = "C";
-    pieces += 1;
-  }
-  const seed2 = Math.floor(rng() * 2 ** 31);
-  result = checkWin(nb);
-  if (result === "C") return { ...state, rngSeed: seed2, board: nb, result: "C", score: state.score + pieces, phase: "done", pieces };
-  if (result === "draw") return { ...state, rngSeed: seed2, board: nb, result: "draw", score: state.score + 25 + pieces, phase: "done", pieces };
+  const nextSeed = Math.floor(rng() * 2 ** 31);
 
-  return { ...state, rngSeed: seed2, board: nb, turn: "P", pieces };
+  if (action.type === "place") {
+    if (state.phase !== "place" || state.turn !== "player") return state;
+    if (state.toPlace === null) return state;
+    const { cell } = action;
+    if (cell < 0 || cell >= 16) return state;
+    if (state.board[cell] !== null) return state;
+    const newBoard = [...state.board];
+    newBoard[cell] = state.toPlace;
+    const { winner, line } = checkWinner(newBoard);
+    if (winner) {
+      return { ...state, rngSeed: nextSeed, board: newBoard, winner: "player", winningLine: line, gameOver: true };
+    }
+    if (state.remaining.length === 0) {
+      return { ...state, rngSeed: nextSeed, board: newBoard, gameOver: true };
+    }
+    return { ...state, rngSeed: nextSeed, board: newBoard, toPlace: null, phase: "choose", turn: "player" };
+  }
+
+  if (action.type === "choose") {
+    if (state.phase !== "choose" || state.turn !== "player") return state;
+    const { piece } = action;
+    if (!state.remaining.includes(piece)) return state;
+    const newRemaining = state.remaining.filter((p) => p !== piece);
+    const botCell = botPlacePiece(piece, state.board, newRemaining, state.settings.botStrength, rng);
+    const newBoard = [...state.board];
+    newBoard[botCell] = piece;
+    const { winner: botWon, line: botLine } = checkWinner(newBoard);
+    if (botWon) {
+      return { ...state, rngSeed: nextSeed, board: newBoard, remaining: newRemaining, winner: "bot", winningLine: botLine, gameOver: true };
+    }
+    if (newRemaining.length === 0) {
+      return { ...state, rngSeed: nextSeed, board: newBoard, remaining: [], gameOver: true };
+    }
+    const next = botChoosePiece(newRemaining, newBoard, state.settings.botStrength, rng);
+    const finalRem = newRemaining.filter((p) => p !== next);
+    return {
+      ...state,
+      rngSeed: nextSeed,
+      board: newBoard,
+      remaining: finalRem,
+      toPlace: next,
+      phase: "place",
+      turn: "player",
+    };
+  }
+  return state;
 }
 
-export function isTerminal(state: ConnectState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(state: QuartoClassicState): { score: number } | null {
+  if (!state.gameOver) return null;
+  if (state.winner === "player") return { score: 100 };
+  if (state.winner === null) return { score: 50 };
+  return { score: 0 };
 }

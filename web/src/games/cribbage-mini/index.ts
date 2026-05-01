@@ -1,16 +1,38 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CribbageMiniState, CribbageMiniAction, CribbageMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CribbageMiniGame } from "./Game.js";
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+
+const settings = {
+  dummy: { kind: "boolean" as const, label: "dummy", default: false },
+} as const;
+
 type S = SettingsOf<typeof settings>;
+
 export const cribbageMiniPlugin: GamePlugin<CribbageMiniState, CribbageMiniAction, typeof settings> = {
-  id: "cribbage-mini", title: "Cribbage Mini", category: "cards",
+  id: "cribbage-mini",
+  title: "Cribbage Mini",
+  category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Mini Cribbage: peg points by drawing higher than the CPU each round.",
-  howToPlay: "Cribbage Mini is a stripped-down peg-counting variation of Cribbage focused on the head-to-head turn-up. Each round you and the CPU each cut a single card from a 52-card deck. The higher rank wins the peg. Aces count low (1) and Kings count high (13).\n\nScoring: a round win pegs 12 points (your \"his heels\" lump-sum). A tie still pegs you 4 sympathetic points so dead-even hands aren't useless. Lose the cut and you peg nothing for that round.\n\nThere are eight rounds total. Press Peg to draw both cards, see who pegged the higher card, then press Next to roll the cribbage board forward. Average expected score sits around 50-80 points; very lucky games can clear 110.\n\nThis is a quick taste of cribbage with no fifteens, pairs, runs, or his-nobs to track — just the cut, which traditionally decides the dealer in a real cribbage game. Use it to warm up before a real cribbage match.",
+  description: "Cribbage stripped to a 4-card deal and a sprint to 31 points: keep 2, discard 2 to the crib, cut a starter, score combos.",
+  howToPlay: `Cribbage Mini is a compact head-to-head cribbage. The game is a sprint to 31 points (a "short street").
+
+Each hand:
+1) You and the bot are each dealt 4 cards. Pick 2 to discard to the crib (4-card extra hand owned by the dealer that turn).
+2) A starter card is cut from the rest of the deck.
+3) Each side scores their 2-card hand + starter for combos: fifteens (any subset summing to 15) = 2pts each; pairs = 2pts; run of 3 (consecutive ranks) = 3pts; flush of 3 (all same suit) = 3pts.
+4) The crib (your two discards + the bot's two + starter) is scored for whoever was dealer this hand.
+
+Card values: A=1, 2..9=face, 10/J/Q/K=10. Ranks for runs/pairs use face order.
+
+Click cards in your hand to mark them for discard (you must mark exactly 2). Then click Submit. Review the show, then click Next deal. Dealer alternates each hand. First to 31 pts wins.
+
+Scoring: win = 100 + your final score; loss = your final score.
+
+Tips: keep card pairs and pairs that sum to 15. The starter is unknown, so prefer flexibility (5s are excellent — they pair with 10/J/Q/K for 15s).`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CribbageMiniSettings),
-  reducer, isTerminal, component: CribbageMiniGame,
+  reducer,
+  isTerminal,
+  component: CribbageMiniGame,
 };

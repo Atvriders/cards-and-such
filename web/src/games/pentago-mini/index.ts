@@ -1,21 +1,35 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { ConnectState, ConnectAction, ConnectSettings } from "./state.js";
+import type { PentagoMiniState, PentagoMiniAction, PentagoMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ConnectGame } from "./Game.js";
+import { PentagoMiniGame } from "./Game.js";
 
-const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+const settings = {
+  botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
+} as const;
+
 type S = SettingsOf<typeof settings>;
 
-export const pentagoMiniPlugin: GamePlugin<ConnectState, ConnectAction, typeof settings> = {
+export const pentagoMiniPlugin: GamePlugin<PentagoMiniState, PentagoMiniAction, typeof settings> = {
   id: "pentago-mini",
   title: "Pentago (Mini)",
   category: "board",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Five-in-a-row with rotating sub-grids — simplified to placement on 6×6.",
-  howToPlay: "Pentago is a five-in-a-row game where after each placement the active player rotates one of four 3×3 sub-grids 90 degrees. The rotation makes it possible to build winning lines and break opponent threats simultaneously. This Mini edition simplifies Pentago to placement-only on a 6×6 board.\n\nYou play first as red against a random CPU as blue. Click any empty cell to place a stone. The CPU plays a random legal move. The first to align five stones in a row, column, or diagonal wins.\n\nThe board displays as a 6×6 grid divided visually into four sub-grids of 3×3. Your stones show red; the CPU's show blue.\n\nWithout rotations, Pentago Mini plays like a small-board Gomoku. Build open-three threats and double fours where possible. Five-in-a-row on a 6×6 board often runs through both sub-grid boundaries, so plan diagonals across them. The CPU plays random legal moves, so consistent threat-building reliably wins. A win scores 100 plus a per-piece bonus; a draw scores 25; a loss scores zero.",
+  description: "Tiny Pentago: 4×4 board with four 2×2 quadrants. Place a marble, then rotate any quadrant. Four in a row wins.",
+  howToPlay: `Pentago Mini compresses the rotation game to a 4×4 board made of four 2×2 quadrants. Each turn you do two things:
+
+1) Place a marble (Black) on any empty cell.
+2) Rotate any of the four quadrants — Top-Left, Top-Right, Bottom-Left, or Bottom-Right — 90° clockwise (↻) or counter-clockwise (↺).
+
+After both steps, the position is checked for any line of four in a row (horizontal, vertical, or diagonal). If both colours complete a line on the same rotation, the game is a draw. Otherwise the player whose colour formed the four-line wins.
+
+Easy bot picks moves at random; Hard bot evaluates the resulting position and prefers immediate wins.
+
+Scoring: win = 100, draw = 50, loss = 0.
+
+Tips: rotations let you both attack and defend at once — a rotation that creates a threat for you may also break the opponent's. Watch all four directions, especially diagonals, after every rotation.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ConnectSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as PentagoMiniSettings),
   reducer,
   isTerminal,
-  component: ConnectGame,
+  component: PentagoMiniGame,
 };

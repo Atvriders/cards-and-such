@@ -1,31 +1,41 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROWS, COLS, TARGET } from "./state.js";
-const S = { dummy: false };
+import { initialState, reducer, isTerminal, rotateQuadrant, checkWin, SIZE } from "./state.js";
+
+const S = { botStrength: "easy" as const };
 
 describe("pentago-mini", () => {
-  it("starts in playing phase with empty board", () => {
+  it("starts with empty 4×4 board, place phase", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.board.length).toBe(ROWS * COLS);
-    expect(s.board.every(c => c === null)).toBe(true);
+    expect(s.phase).toBe("place");
+    expect(s.board.length).toBe(SIZE * SIZE);
+    expect(s.winner).toBeNull();
   });
-  it("constants are sensible", () => {
-    expect(ROWS).toBeGreaterThanOrEqual(3);
-    expect(COLS).toBeGreaterThanOrEqual(3);
-    expect(TARGET).toBeGreaterThanOrEqual(3);
+
+  it("placing transitions to rotate phase", () => {
+    const s0 = initialState(1, S);
+    const s1 = reducer(s0, { type: "place", pos: 0 });
+    expect(s1.phase).toBe("rotate");
+    expect(s1.board[0]).toBe(0);
+    expect(s1.lastPlaced).toBe(0);
   });
-  it("isTerminal null at start", () => {
+
+  it("rotateQuadrant rotates correctly (CW)", () => {
+    const b = new Array(SIZE * SIZE).fill(null);
+    b[0] = 0; // (0,0)
+    b[1] = 1; // (0,1)
+    // CW rotation of TL quadrant: (0,0)→(0,1); (0,1)→(1,1); (1,1)→(1,0); (1,0)→(0,0)
+    const r = rotateQuadrant(b, 0, "cw");
+    expect(r[1]).toBe(0); // 0,0 -> 0,1
+    expect(r[1 * SIZE + 1]).toBe(1); // 0,1 -> 1,1
+  });
+
+  it("checkWin detects 4-in-a-row on row 0", () => {
+    const b = new Array(SIZE * SIZE).fill(null);
+    for (let c = 0; c < 4; c++) b[c] = 0;
+    expect(checkWin(b)).toBe(0);
+  });
+
+  it("isTerminal null while in progress", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
-  });
-  it("place action records a player piece on the board", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: ROWS - 1, col: 0 });
-    const pCount = s1.board.filter(c => c === "P").length;
-    expect(pCount).toBeGreaterThanOrEqual(1);
-  });
-  it("invalid action does not crash", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "place", row: -5, col: -5 });
-    expect(s1.phase).toBe("playing");
   });
 });

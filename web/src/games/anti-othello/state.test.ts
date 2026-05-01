@@ -1,14 +1,38 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
-const S = { questions: "10" as const };
-describe("Anti-Othello", () => {
-  it("creates 10 questions", () => { expect(initialState(1,S).questions.length).toBeGreaterThanOrEqual(10); });
-  it("starts in playing phase with timer", () => { const s=initialState(1,S); expect(s.phase).toBe("playing"); expect(s.timeLeft).toBeGreaterThanOrEqual(15); });
-  it("submit on correct awards score", () => {
-    const s=initialState(1,S);
-    const s2=reducer(reducer(s,{type:"select",choice:s.questions[0]!.correct}),{type:"submit"});
-    expect(s2.score).toBeGreaterThanOrEqual(100);
+import { initialState, reducer, isTerminal, legalMoves, idx } from "./state.js";
+
+const S = { botStrength: "easy" as const };
+
+describe("Anti-Othello (misère)", () => {
+  it("starts with the standard 4-disc setup", () => {
+    const s = initialState(1, S);
+    expect(s.blackCount).toBe(2);
+    expect(s.whiteCount).toBe(2);
   });
-  it("isTerminal null during play", () => { expect(isTerminal(initialState(1,S))).toBeNull(); });
-  it("each question has 4 choices", () => { const s=initialState(1,S); for (const q of s.questions) { expect(q.choices.length).toBe(4); } });
+
+  it("offers four opening moves", () => {
+    const s = initialState(1, S);
+    expect(legalMoves(s.board, 0).length).toBe(4);
+  });
+
+  it("rejects placing on a non-flipping square", () => {
+    const s = initialState(1, S);
+    const next = reducer(s, { type: "place", row: 0, col: 0 });
+    expect(next).toBe(s);
+  });
+
+  it("flips opponent's disc on legal placement", () => {
+    const s = initialState(1, S);
+    const next = reducer(s, { type: "place", row: 2, col: 3 });
+    expect(next.board[idx(2, 3)]).toBe(0);
+    expect(next.movesMade).toBeGreaterThanOrEqual(1);
+  });
+
+  it("isTerminal scores misère: fewer = win", () => {
+    const s = initialState(1, S);
+    const ended = { ...s, winner: 0 as const, blackCount: 20, whiteCount: 44 };
+    const t = isTerminal(ended);
+    expect(t).not.toBeNull();
+    expect(t!.score).toBeGreaterThanOrEqual(100);
+  });
 });
