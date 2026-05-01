@@ -4,106 +4,306 @@ export interface NounQuizSettings { questions: "8" | "10" | "12"; }
 export interface NounQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type NounQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Pick the noun.",
-    "choices": [
-      "happy",
-      "quickly",
-      "cat",
-      "blue"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Plural of 'child'?",
-    "choices": [
-      "childs",
-      "childrens",
-      "children",
-      "childer"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Plural of 'mouse' (rodent)?",
-    "choices": [
-      "mouses",
-      "mice",
-      "mousies",
-      "meece"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Plural of 'foot'?",
-    "choices": [
-      "foots",
-      "feet",
-      "footses",
-      "fets"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Plural of 'goose'?",
-    "choices": [
-      "gooses",
-      "geeses",
-      "geese",
-      "goosies"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Common noun?",
-    "choices": [
-      "Paris",
-      "city",
-      "France",
-      "London"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Proper noun?",
-    "choices": [
-      "river",
-      "mountain",
-      "Egypt",
-      "valley"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Abstract noun?",
-    "choices": [
-      "table",
-      "love",
-      "cat",
-      "tree"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Plural of 'tooth'?",
-    "choices": [
-      "tooths",
-      "teeth",
-      "tothies",
-      "teether"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Collective noun for cows?",
-    "choices": [
-      "pack",
-      "flock",
-      "herd",
-      "swarm"
-    ],
-    "correct": 2
-  }
+{
+  "question": "The ___ ran across the road.",
+  "choices": [
+    "cat",
+    "quickly",
+    "run",
+    "ran"
+  ],
+  "correct": 0
+},
+{
+  "question": "She bought a new ___.",
+  "choices": [
+    "dress",
+    "wear",
+    "beautifully",
+    "beautiful"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ shines brightly.",
+  "choices": [
+    "sun",
+    "shiny",
+    "shines",
+    "brightly"
+  ],
+  "correct": 0
+},
+{
+  "question": "He drank a glass of ___.",
+  "choices": [
+    "water",
+    "drink",
+    "drank",
+    "cold"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ barked loudly.",
+  "choices": [
+    "dog",
+    "bark",
+    "loudly",
+    "loud"
+  ],
+  "correct": 0
+},
+{
+  "question": "My ___ is a teacher.",
+  "choices": [
+    "mother",
+    "teach",
+    "kindly",
+    "teaches"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ flew over the trees.",
+  "choices": [
+    "bird",
+    "fly",
+    "flew",
+    "over"
+  ],
+  "correct": 0
+},
+{
+  "question": "She wrote a ___.",
+  "choices": [
+    "book",
+    "wrote",
+    "writing",
+    "write"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ is on the table.",
+  "choices": [
+    "plate",
+    "on",
+    "placed",
+    "tableted"
+  ],
+  "correct": 0
+},
+{
+  "question": "He drove the ___.",
+  "choices": [
+    "car",
+    "drove",
+    "driving",
+    "drives"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ is a planet.",
+  "choices": [
+    "Earth",
+    "earthly",
+    "earths",
+    "earthen"
+  ],
+  "correct": 0
+},
+{
+  "question": "My ___ is at home.",
+  "choices": [
+    "sister",
+    "sisterly",
+    "sisters arrive",
+    "at home goes"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ rang loudly.",
+  "choices": [
+    "bell",
+    "ring",
+    "rang",
+    "loudly"
+  ],
+  "correct": 0
+},
+{
+  "question": "She painted a beautiful ___.",
+  "choices": [
+    "picture",
+    "paint",
+    "painted",
+    "beautifully"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ swims in the sea.",
+  "choices": [
+    "fish",
+    "swim",
+    "swimming",
+    "sea-going"
+  ],
+  "correct": 0
+},
+{
+  "question": "He ate an ___.",
+  "choices": [
+    "apple",
+    "ate",
+    "eating",
+    "eats"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ grew tall.",
+  "choices": [
+    "tree",
+    "grew",
+    "growing",
+    "tallness"
+  ],
+  "correct": 0
+},
+{
+  "question": "She lost her ___.",
+  "choices": [
+    "wallet",
+    "lost",
+    "losing",
+    "loses"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ is hot today.",
+  "choices": [
+    "weather",
+    "hotly",
+    "heated",
+    "heats"
+  ],
+  "correct": 0
+},
+{
+  "question": "My ___ is broken.",
+  "choices": [
+    "phone",
+    "brokenly",
+    "breaks",
+    "broken"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ stopped at the station.",
+  "choices": [
+    "train",
+    "stop",
+    "stopped",
+    "trained"
+  ],
+  "correct": 0
+},
+{
+  "question": "He needs a new ___.",
+  "choices": [
+    "computer",
+    "computes",
+    "computing",
+    "needed"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ runs the country.",
+  "choices": [
+    "president",
+    "runs",
+    "running",
+    "ruled"
+  ],
+  "correct": 0
+},
+{
+  "question": "She wears a ___.",
+  "choices": [
+    "hat",
+    "wears",
+    "wearing",
+    "worn"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ is sharp.",
+  "choices": [
+    "knife",
+    "sharply",
+    "sharpens",
+    "sharpen"
+  ],
+  "correct": 0
+},
+{
+  "question": "He plays the ___.",
+  "choices": [
+    "guitar",
+    "plays",
+    "playing",
+    "played"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ is closed.",
+  "choices": [
+    "door",
+    "closes",
+    "closing",
+    "closed firmly"
+  ],
+  "correct": 0
+},
+{
+  "question": "She studies ___.",
+  "choices": [
+    "history",
+    "studied",
+    "studying",
+    "studies"
+  ],
+  "correct": 0
+},
+{
+  "question": "The ___ flew through the sky.",
+  "choices": [
+    "plane",
+    "flew",
+    "flying",
+    "sky-high"
+  ],
+  "correct": 0
+},
+{
+  "question": "He climbed the ___.",
+  "choices": [
+    "mountain",
+    "climbs",
+    "climbing",
+    "climbed high"
+  ],
+  "correct": 0
+}
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: NounQuizSettings): NounQuizState {

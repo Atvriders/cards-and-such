@@ -4,106 +4,306 @@ export interface PrepositionQuizSettings { questions: "8" | "10" | "12"; }
 export interface PrepositionQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type PrepositionQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "She is good ___ math.",
-    "choices": [
-      "at",
-      "on",
-      "with",
-      "of"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "I'm allergic ___ peanuts.",
-    "choices": [
-      "of",
-      "to",
-      "with",
-      "at"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Listen ___ the music.",
-    "choices": [
-      "at",
-      "to",
-      "of",
-      "by"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "We arrived ___ Paris on Tuesday.",
-    "choices": [
-      "in",
-      "at",
-      "on",
-      "by"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "He was born ___ 1990.",
-    "choices": [
-      "on",
-      "at",
-      "in",
-      "by"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The book is ___ the table.",
-    "choices": [
-      "on",
-      "in",
-      "at",
-      "of"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "She is afraid ___ spiders.",
-    "choices": [
-      "from",
-      "of",
-      "by",
-      "with"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "We met ___ the corner.",
-    "choices": [
-      "in",
-      "on",
-      "at",
-      "by"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "He works ___ a hospital.",
-    "choices": [
-      "in",
-      "on",
-      "at",
-      "by"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Dependent ___ the weather.",
-    "choices": [
-      "on",
-      "of",
-      "at",
-      "by"
-    ],
-    "correct": 0
-  }
+{
+  "question": "She sat ___ the chair.",
+  "choices": [
+    "on",
+    "of",
+    "by ago",
+    "for since"
+  ],
+  "correct": 0
+},
+{
+  "question": "The book is ___ the table.",
+  "choices": [
+    "under",
+    "of",
+    "since",
+    "than"
+  ],
+  "correct": 0
+},
+{
+  "question": "We arrived ___ noon.",
+  "choices": [
+    "at",
+    "of",
+    "since",
+    "than"
+  ],
+  "correct": 0
+},
+{
+  "question": "He walked ___ the park.",
+  "choices": [
+    "through",
+    "of",
+    "since",
+    "than"
+  ],
+  "correct": 0
+},
+{
+  "question": "The cat jumped ___ the fence.",
+  "choices": [
+    "over",
+    "of",
+    "since",
+    "than"
+  ],
+  "correct": 0
+},
+{
+  "question": "I'll meet you ___ Monday.",
+  "choices": [
+    "on",
+    "of",
+    "by under",
+    "for among"
+  ],
+  "correct": 0
+},
+{
+  "question": "She was born ___ July.",
+  "choices": [
+    "in",
+    "at",
+    "on",
+    "by"
+  ],
+  "correct": 0
+},
+{
+  "question": "The keys are ___ my pocket.",
+  "choices": [
+    "in",
+    "at",
+    "on",
+    "by"
+  ],
+  "correct": 0
+},
+{
+  "question": "He is afraid ___ spiders.",
+  "choices": [
+    "of",
+    "in",
+    "at",
+    "on"
+  ],
+  "correct": 0
+},
+{
+  "question": "She is good ___ math.",
+  "choices": [
+    "at",
+    "in",
+    "of",
+    "on"
+  ],
+  "correct": 0
+},
+{
+  "question": "I'm interested ___ history.",
+  "choices": [
+    "in",
+    "at",
+    "of",
+    "on"
+  ],
+  "correct": 0
+},
+{
+  "question": "The plane flew ___ the clouds.",
+  "choices": [
+    "above",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "The dog ran ___ the house.",
+  "choices": [
+    "around",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "They walked ___ the bridge.",
+  "choices": [
+    "across",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "Put it ___ the box.",
+  "choices": [
+    "inside",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "She lives ___ the river.",
+  "choices": [
+    "near",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "Stand ___ me.",
+  "choices": [
+    "beside",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "He lives ___ Spain.",
+  "choices": [
+    "in",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "Wait ___ the bus stop.",
+  "choices": [
+    "at",
+    "of",
+    "since",
+    "than"
+  ],
+  "correct": 0
+},
+{
+  "question": "The gift is ___ you.",
+  "choices": [
+    "for",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "I went ___ the store.",
+  "choices": [
+    "to",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "She came ___ the party.",
+  "choices": [
+    "to",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "We danced ___ the music.",
+  "choices": [
+    "to",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "He hid ___ the door.",
+  "choices": [
+    "behind",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "The lamp is ___ the desk.",
+  "choices": [
+    "beside",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "She's been here ___ Monday.",
+  "choices": [
+    "since",
+    "at",
+    "of",
+    "than"
+  ],
+  "correct": 0
+},
+{
+  "question": "I waited ___ two hours.",
+  "choices": [
+    "for",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "He returned ___ midnight.",
+  "choices": [
+    "at",
+    "of",
+    "since",
+    "than"
+  ],
+  "correct": 0
+},
+{
+  "question": "The bird flew ___ the window.",
+  "choices": [
+    "through",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+},
+{
+  "question": "They drove ___ the city.",
+  "choices": [
+    "into",
+    "at",
+    "of",
+    "since"
+  ],
+  "correct": 0
+}
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PrepositionQuizSettings): PrepositionQuizState {

@@ -4,106 +4,306 @@ export interface HyphenQuizSettings { questions: "8" | "10" | "12"; }
 export interface HyphenQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type HyphenQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Standard adjective form?",
-    "choices": [
-      "well-known author",
-      "wellknown author",
-      "well known-author",
-      "well_known author"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Compound number?",
-    "choices": [
-      "twenty one",
-      "twentyone",
-      "twenty-one",
-      "twenty—one"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Self-prefix correct?",
-    "choices": [
-      "self-confidence",
-      "selfconfidence",
-      "self confidence",
-      "self—confidence"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Age-of-five form?",
-    "choices": [
-      "five-year-old",
-      "five year old",
-      "fiveyearold",
-      "five-year old"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ex-prefix correct?",
-    "choices": [
-      "ex president",
-      "expresident",
-      "ex-president",
-      "ex—president"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Prefix re- form?",
-    "choices": [
-      "re-elect",
-      "reelect",
-      "reElect",
-      "re elect"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Two-thirds correct?",
-    "choices": [
-      "two thirds",
-      "two-thirds",
-      "twothirds",
-      "two—thirds"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mother-in-law form?",
-    "choices": [
-      "motherinlaw",
-      "mother in law",
-      "mother-in-law",
-      "mother—in—law"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Up to date — adverb?",
-    "choices": [
-      "up-to-date",
-      "up to date",
-      "up_to_date",
-      "upto date"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Long-term plan?",
-    "choices": [
-      "long term",
-      "long—term",
-      "long-term",
-      "longterm"
-    ],
-    "correct": 2
-  }
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "well known author",
+    "well-known author",
+    "wellknown author",
+    "well known-author"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "self-esteem",
+    "selfesteem",
+    "self esteem",
+    "self-,esteem"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "mother in law",
+    "motherinlaw",
+    "mother-in-law",
+    "mother in-law"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "twenty one",
+    "twenty-one",
+    "twentyone",
+    "twenty,one"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "ex-president",
+    "ex president",
+    "expresident",
+    "ex,president"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "high quality work",
+    "high-quality work",
+    "highquality work",
+    "high quality-work"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "long term plan",
+    "long-term plan",
+    "longterm plan",
+    "long term-plan"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "state of the art",
+    "state-of-the-art",
+    "stateoftheart",
+    "state of-the-art"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "check in time",
+    "check-in time",
+    "checkin time",
+    "check in-time"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "full time job",
+    "full-time job",
+    "fulltime job",
+    "full time-job"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "part time worker",
+    "part-time worker",
+    "parttime worker",
+    "part time-worker"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "editor in chief",
+    "editor-in-chief",
+    "editorinchief",
+    "editor in-chief"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "forty two",
+    "forty-two",
+    "fortytwo",
+    "forty,two"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "pre-existing",
+    "preexisting",
+    "pre existing",
+    "pre,existing"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "co-worker",
+    "coworker",
+    "co worker",
+    "co,worker"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "t-shirt",
+    "tshirt",
+    "t shirt",
+    "tee-shirt-,"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "x-ray",
+    "xray",
+    "x ray",
+    "x,ray"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "runner up",
+    "runner-up",
+    "runnerup",
+    "runner,up"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "father in law",
+    "father-in-law",
+    "fatherinlaw",
+    "father in-law"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "son in law",
+    "son-in-law",
+    "soninlaw",
+    "son in-law"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "good looking",
+    "good-looking",
+    "goodlooking",
+    "good,looking"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "over the counter",
+    "over-the-counter",
+    "overthecounter",
+    "over the-counter"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "one third",
+    "one-third",
+    "onethird",
+    "one,third"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "self-aware",
+    "selfaware",
+    "self aware",
+    "self,aware"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "non profit",
+    "non-profit",
+    "nonprofit (also acceptable)",
+    "non,profit"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "up to date info",
+    "up-to-date info",
+    "uptodate info",
+    "up to-date info"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "face to face",
+    "face-to-face",
+    "facetoface",
+    "face to-face"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "brother in law",
+    "brother-in-law",
+    "brotherinlaw",
+    "brother in-law"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "five year old child",
+    "five-year-old child",
+    "fiveyearold child",
+    "five year-old child"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which is correctly hyphenated?",
+  "choices": [
+    "step by step",
+    "step-by-step",
+    "stepbystep",
+    "step by-step"
+  ],
+  "correct": 1
+}
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: HyphenQuizSettings): HyphenQuizState {

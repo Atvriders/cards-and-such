@@ -4,106 +4,306 @@ export interface SilentLetterQuizSettings { questions: "8" | "10" | "12"; }
 export interface SilentLetterQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type SilentLetterQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "KNIGHT — which letter is silent?",
-    "choices": [
-      "K",
-      "N",
-      "G",
-      "T"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "LAMB — which letter is silent?",
-    "choices": [
-      "L",
-      "A",
-      "M",
-      "B"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "ISLAND — silent letter?",
-    "choices": [
-      "I",
-      "S",
-      "L",
-      "D"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "WRITE — silent letter?",
-    "choices": [
-      "W",
-      "R",
-      "I",
-      "T"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "DEBT — silent letter?",
-    "choices": [
-      "D",
-      "E",
-      "B",
-      "T"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "HONEST — silent letter?",
-    "choices": [
-      "H",
-      "O",
-      "E",
-      "S"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "WRESTLE — silent letter?",
-    "choices": [
-      "W",
-      "T",
-      "S",
-      "E"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "GHOST — silent letter?",
-    "choices": [
-      "G",
-      "H",
-      "O",
-      "T"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "CASTLE — silent letter?",
-    "choices": [
-      "C",
-      "S",
-      "T",
-      "L"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "PSYCHIC — silent letter?",
-    "choices": [
-      "P",
-      "S",
-      "Y",
-      "C"
-    ],
-    "correct": 0
-  }
+{
+  "question": "Which letter is silent in 'knife'?",
+  "choices": [
+    "k",
+    "n",
+    "i",
+    "f"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'lamb'?",
+  "choices": [
+    "l",
+    "a",
+    "m",
+    "b"
+  ],
+  "correct": 3
+},
+{
+  "question": "Which letter is silent in 'wrist'?",
+  "choices": [
+    "w",
+    "r",
+    "i",
+    "s"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'gnome'?",
+  "choices": [
+    "g",
+    "n",
+    "o",
+    "e"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'thumb'?",
+  "choices": [
+    "t",
+    "h",
+    "u",
+    "b"
+  ],
+  "correct": 3
+},
+{
+  "question": "Which letter is silent in 'island'?",
+  "choices": [
+    "i",
+    "s",
+    "l",
+    "d"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which letter is silent in 'honest'?",
+  "choices": [
+    "h",
+    "o",
+    "n",
+    "t"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'know'?",
+  "choices": [
+    "k",
+    "n",
+    "o",
+    "w"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'wrong'?",
+  "choices": [
+    "w",
+    "r",
+    "n",
+    "g"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'climb'?",
+  "choices": [
+    "c",
+    "l",
+    "m",
+    "b"
+  ],
+  "correct": 3
+},
+{
+  "question": "Which letter is silent in 'doubt'?",
+  "choices": [
+    "d",
+    "o",
+    "b",
+    "t"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'comb'?",
+  "choices": [
+    "c",
+    "o",
+    "m",
+    "b"
+  ],
+  "correct": 3
+},
+{
+  "question": "Which letter is silent in 'castle'?",
+  "choices": [
+    "c",
+    "s",
+    "t",
+    "l"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'listen'?",
+  "choices": [
+    "l",
+    "s",
+    "t",
+    "n"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'whistle'?",
+  "choices": [
+    "w",
+    "h",
+    "t",
+    "l"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'sword'?",
+  "choices": [
+    "s",
+    "w",
+    "o",
+    "d"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which letter is silent in 'pneumonia'?",
+  "choices": [
+    "p",
+    "n",
+    "u",
+    "m"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'psychology'?",
+  "choices": [
+    "p",
+    "s",
+    "y",
+    "c"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'autumn'?",
+  "choices": [
+    "a",
+    "t",
+    "m",
+    "n"
+  ],
+  "correct": 3
+},
+{
+  "question": "Which letter is silent in 'hour'?",
+  "choices": [
+    "h",
+    "o",
+    "u",
+    "r"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'rhyme'?",
+  "choices": [
+    "r",
+    "h",
+    "y",
+    "m"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which letter is silent in 'ghost'?",
+  "choices": [
+    "g",
+    "h",
+    "o",
+    "t"
+  ],
+  "correct": 1
+},
+{
+  "question": "Which letter is silent in 'wreck'?",
+  "choices": [
+    "w",
+    "r",
+    "e",
+    "k"
+  ],
+  "correct": 0
+},
+{
+  "question": "Which letter is silent in 'numb'?",
+  "choices": [
+    "n",
+    "u",
+    "m",
+    "b"
+  ],
+  "correct": 3
+},
+{
+  "question": "Which letter is silent in 'sign'?",
+  "choices": [
+    "s",
+    "i",
+    "g",
+    "n"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'design'?",
+  "choices": [
+    "d",
+    "s",
+    "g",
+    "n"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'often' (commonly)?",
+  "choices": [
+    "o",
+    "f",
+    "t",
+    "n"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'salmon'?",
+  "choices": [
+    "s",
+    "a",
+    "l",
+    "m"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'aisle'?",
+  "choices": [
+    "a",
+    "i",
+    "s",
+    "l"
+  ],
+  "correct": 2
+},
+{
+  "question": "Which letter is silent in 'kneel'?",
+  "choices": [
+    "k",
+    "n",
+    "e",
+    "l"
+  ],
+  "correct": 0
+}
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SilentLetterQuizSettings): SilentLetterQuizState {

@@ -4,106 +4,306 @@ export interface PronounQuizSettings { questions: "8" | "10" | "12"; }
 export interface PronounQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type PronounQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "___ is going to the store.",
-    "choices": [
-      "Me",
-      "I",
-      "Mine",
-      "My"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "This book is ___.",
-    "choices": [
-      "my",
-      "mine",
-      "I",
-      "me"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Between you and ___, it's a secret.",
-    "choices": [
-      "I",
-      "me",
-      "my",
-      "mine"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "She gave the gift to ___.",
-    "choices": [
-      "I",
-      "me",
-      "my",
-      "mine"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "___ is a tall building.",
-    "choices": [
-      "He",
-      "It",
-      "Him",
-      "His"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The decision is ___.",
-    "choices": [
-      "our",
-      "us",
-      "ours",
-      "we"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "___ are our neighbors.",
-    "choices": [
-      "They",
-      "Them",
-      "Their",
-      "Theirs"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "He hurt ___ on the swing.",
-    "choices": [
-      "he",
-      "him",
-      "himself",
-      "his"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The cat licked ___ paws.",
-    "choices": [
-      "it",
-      "its",
-      "it's",
-      "they"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who's ___ — yours or hers?",
-    "choices": [
-      "who",
-      "whom",
-      "whose",
-      "who's"
-    ],
-    "correct": 2
-  }
+{
+  "question": "___ am going home.",
+  "choices": [
+    "I",
+    "Me",
+    "My",
+    "Mine"
+  ],
+  "correct": 0
+},
+{
+  "question": "Give the book to ___.",
+  "choices": [
+    "me",
+    "I",
+    "my",
+    "mine"
+  ],
+  "correct": 0
+},
+{
+  "question": "That pencil is ___.",
+  "choices": [
+    "mine",
+    "I",
+    "me",
+    "my"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ is my best friend.",
+  "choices": [
+    "She",
+    "Her",
+    "Hers",
+    "Herself"
+  ],
+  "correct": 0
+},
+{
+  "question": "I saw ___ at the store.",
+  "choices": [
+    "him",
+    "he",
+    "his",
+    "himself"
+  ],
+  "correct": 0
+},
+{
+  "question": "This is ___ house.",
+  "choices": [
+    "their",
+    "they",
+    "them",
+    "theirs"
+  ],
+  "correct": 0
+},
+{
+  "question": "The decision is ___.",
+  "choices": [
+    "yours",
+    "you",
+    "your",
+    "yourself"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ are my friends.",
+  "choices": [
+    "They",
+    "Them",
+    "Their",
+    "Theirs"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ went to the park.",
+  "choices": [
+    "We",
+    "Us",
+    "Our",
+    "Ours"
+  ],
+  "correct": 0
+},
+{
+  "question": "The teacher praised ___.",
+  "choices": [
+    "us",
+    "we",
+    "our",
+    "ours"
+  ],
+  "correct": 0
+},
+{
+  "question": "She did it ___.",
+  "choices": [
+    "herself",
+    "she",
+    "her",
+    "hers"
+  ],
+  "correct": 0
+},
+{
+  "question": "The dog wagged ___ tail.",
+  "choices": [
+    "its",
+    "it's",
+    "it",
+    "itself"
+  ],
+  "correct": 0
+},
+{
+  "question": "Who is at the door? It is ___.",
+  "choices": [
+    "he",
+    "him",
+    "his",
+    "himself"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ book is on the table?",
+  "choices": [
+    "Whose",
+    "Who's",
+    "Who",
+    "Whom"
+  ],
+  "correct": 0
+},
+{
+  "question": "To ___ did you give the gift?",
+  "choices": [
+    "whom",
+    "who",
+    "whose",
+    "whoever"
+  ],
+  "correct": 0
+},
+{
+  "question": "The cake is for ___ and me.",
+  "choices": [
+    "you",
+    "your",
+    "yours",
+    "yourself"
+  ],
+  "correct": 0
+},
+{
+  "question": "The kids fed ___.",
+  "choices": [
+    "themselves",
+    "them",
+    "their",
+    "they"
+  ],
+  "correct": 0
+},
+{
+  "question": "He hurt ___ playing soccer.",
+  "choices": [
+    "himself",
+    "he",
+    "his",
+    "him"
+  ],
+  "correct": 0
+},
+{
+  "question": "Each student must bring ___ book.",
+  "choices": [
+    "their",
+    "they",
+    "them",
+    "theirs"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ is your name?",
+  "choices": [
+    "What",
+    "Which",
+    "Who",
+    "Whose"
+  ],
+  "correct": 0
+},
+{
+  "question": "The man ___ called is here.",
+  "choices": [
+    "who",
+    "whom",
+    "whose",
+    "which"
+  ],
+  "correct": 0
+},
+{
+  "question": "This pen is ___.",
+  "choices": [
+    "hers",
+    "she",
+    "her",
+    "herself"
+  ],
+  "correct": 0
+},
+{
+  "question": "That car is ___.",
+  "choices": [
+    "theirs",
+    "they",
+    "them",
+    "their"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ are you?",
+  "choices": [
+    "Who",
+    "Whom",
+    "Whose",
+    "Which"
+  ],
+  "correct": 0
+},
+{
+  "question": "The book ___ I read was great.",
+  "choices": [
+    "that",
+    "whom",
+    "whose",
+    "who"
+  ],
+  "correct": 0
+},
+{
+  "question": "We bought ___ a new TV.",
+  "choices": [
+    "ourselves",
+    "we",
+    "us",
+    "our"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ would you like, tea or coffee?",
+  "choices": [
+    "Which",
+    "Who",
+    "Whose",
+    "Whom"
+  ],
+  "correct": 0
+},
+{
+  "question": "The cat licked ___ paws.",
+  "choices": [
+    "its",
+    "it's",
+    "it",
+    "itself"
+  ],
+  "correct": 0
+},
+{
+  "question": "Between you and ___, this is a secret.",
+  "choices": [
+    "me",
+    "I",
+    "my",
+    "mine"
+  ],
+  "correct": 0
+},
+{
+  "question": "___ is talking?",
+  "choices": [
+    "Who",
+    "Whom",
+    "Whose",
+    "Which"
+  ],
+  "correct": 0
+}
 ] as QuizQuestion[];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PronounQuizSettings): PronounQuizState {
