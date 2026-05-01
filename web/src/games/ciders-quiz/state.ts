@@ -36,6 +36,16 @@ const BANK: { question: string; answer: string }[] = [
   { question: "Which country is the largest per-capita consumer of cider in the world?", answer: "United Kingdom" },
   { question: "What device is used to press apples into juice for cider-making?", answer: "Cider Press" },
   { question: "Which low-alcohol cider variant is popular in the UK as a casual drink?", answer: "Session Cider (under 4% ABV)" },
+  { question: "What apple brandy is distilled from cider in Normandy?", answer: "Calvados" },
+  { question: "Which American apple brandy is similar to Calvados?", answer: "Applejack" },
+  { question: "What is the Spanish word for cider?", answer: "Sidra" },
+  { question: "Which traditional pouring style splashes Asturian sidra from height?", answer: "Escanciar" },
+  { question: "What term describes a cider with no residual sugar?", answer: "Dry Cider" },
+  { question: "What is the leftover apple pulp after pressing called?", answer: "Pomace" },
+  { question: "Which French region of Brittany is famous for Cidre Breton?", answer: "Brittany" },
+  { question: "What does ABV measure in a cider?", answer: "Alcohol By Volume" },
+  { question: "Which cider style adds hops for an aromatic, bitter character?", answer: "Hopped Cider" },
+  { question: "What is the bottled-conditioned naturally sparkling cider style called?", answer: "Methode Traditionnelle" },
 ];
 
 const DISTRACTORS = ["Sweet Cider","Dry Cider","Fruit Cider","Hard Cider","Rosé Cider","Barrel-Aged Cider","Hopped Cider","Spiced Cider","Ice Cider","Perry","Pear Cider","Calvados","Applejack","Pomace","Scrumpy","Keeving","Wild Cider","Heritage Cider","Craft Cider","Still Cider"];

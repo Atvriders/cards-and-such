@@ -36,6 +36,16 @@ const BANK: { question: string; answer: string }[] = [
   { question: "What wine style has been oxidized intentionally for a nutty flavor?", answer: "Sherry (Oxidized)" },
   { question: "Which Italian sparkling wine uses Glera grapes and is lighter than Champagne?", answer: "Prosecco" },
   { question: "What term describes a wine aged in wood for at least two years in Spain?", answer: "Reserva" },
+  { question: "What grape is the principal red of Tuscany's Chianti?", answer: "Sangiovese" },
+  { question: "Which sweet, fortified wine is produced on the island of Madeira?", answer: "Madeira" },
+  { question: "What is the term for the year a wine's grapes were harvested?", answer: "Vintage" },
+  { question: "Which natural compound in red wines causes a drying mouthfeel?", answer: "Tannins" },
+  { question: "What is the traditional method of making Champagne called in French?", answer: "Methode Champenoise" },
+  { question: "Which white grape is most associated with Alsace and dry, aromatic wines?", answer: "Riesling" },
+  { question: "What South African red grape is a cross between Pinot Noir and Cinsault?", answer: "Pinotage" },
+  { question: "Which sparkling Spanish wine is made by the traditional method?", answer: "Cava" },
+  { question: "What is the deepest, broadest part of the wine glass called?", answer: "Bowl" },
+  { question: "Which French region produces the appellation Hermitage?", answer: "Northern Rhone" },
 ];
 
 const DISTRACTORS = ["Cabernet Sauvignon","Pinot Noir","Chardonnay","Riesling","Sauvignon Blanc","Merlot","Syrah","Grenache","Malbec","Tempranillo","Zinfandel","Viognier","Albariño","Gewürztraminer","Pinot Grigio","Moscato","Chenin Blanc","Nebbiolo","Sangiovese","Primitivo"];

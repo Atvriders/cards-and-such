@@ -36,6 +36,16 @@ const BANK: { question: string; answer: string }[] = [
   { question: "What beer style is brewed with oats for a silky mouthfeel?", answer: "Oatmeal Stout" },
   { question: "Which amber lager is associated with Vienna, Austria?", answer: "Vienna Lager" },
   { question: "What style combines coffee, chocolate, and roasted malt flavors in a dark body?", answer: "Imperial Stout" },
+  { question: "What is the boiled, hopped liquid before fermentation called?", answer: "Wort" },
+  { question: "Which beer style is named after the city of Plzen in the Czech Republic?", answer: "Pilsner" },
+  { question: "What strong Belgian style is golden, dry, and highly carbonated?", answer: "Belgian Tripel" },
+  { question: "Which sour German wheat beer from Berlin is often served with syrup?", answer: "Berliner Weisse" },
+  { question: "What does IBU stand for in beer measurement?", answer: "International Bitterness Units" },
+  { question: "Which dark German lager style means 'black beer'?", answer: "Schwarzbier" },
+  { question: "What hazy IPA substyle originated in the northeastern United States?", answer: "New England IPA" },
+  { question: "Which strong, malty German lager uses the suffix '-bock' for double strength?", answer: "Doppelbock" },
+  { question: "What German top-fermented copper-colored beer originates near Dusseldorf?", answer: "Altbier" },
+  { question: "Which salty, sour wheat beer style is brewed with coriander?", answer: "Gose" },
 ];
 
 const DISTRACTORS = ["Pilsner","Lager","Stout","Porter","Wheat Beer","Saison","Amber Ale","Blonde Ale","Kolsch","Dunkel","Bock","Doppelbock","Gose","Berliner Weisse","Altbier","Cream Ale","Schwarzbier","Mild Ale","Brown Ale","Red Ale"];

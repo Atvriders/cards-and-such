@@ -36,6 +36,16 @@ const BANK: { question: string; answer: string }[] = [
   { question: "Which sparkling cocktail is made with Prosecco and peach purée?", answer: "Bellini" },
   { question: "What spirit is the base of a Screwdriver?", answer: "Vodka" },
   { question: "Which tall cocktail combines gin, lemon juice, sugar, and soda water?", answer: "Tom Collins" },
+  { question: "Which cocktail combines tequila, orange juice, and grenadine?", answer: "Tequila Sunrise" },
+  { question: "What is the base spirit of a Sazerac, the classic New Orleans cocktail?", answer: "Rye Whiskey" },
+  { question: "Which gin highball is garnished with lime and tonic water?", answer: "Gin and Tonic" },
+  { question: "What is the classic ratio of gin to vermouth in a Dry Martini?", answer: "5 to 1 or drier" },
+  { question: "Which Brazilian cocktail uses cachaca, lime, and sugar?", answer: "Caipirinha" },
+  { question: "What cocktail layers Guinness stout over Champagne?", answer: "Black Velvet" },
+  { question: "Which modern classic blends Scotch, lemon, honey, and ginger?", answer: "Penicillin" },
+  { question: "What ice-filled tall drink combines bourbon, mint, and sugar?", answer: "Mint Julep" },
+  { question: "Which cocktail mixes vodka, tomato juice, and spices?", answer: "Bloody Mary" },
+  { question: "What rum-based long drink is finished with cola and lime?", answer: "Cuba Libre" },
 ];
 
 const DISTRACTORS = ["Vodka","Rum","Gin","Tequila","Bourbon","Whiskey","Brandy","Champagne","Prosecco","Aperol","Campari","Vermouth","Triple Sec","Kahlúa","Baileys","Amaretto","Bitters","Lime Juice","Simple Syrup","Grenadine"];
