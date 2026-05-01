@@ -5,124 +5,304 @@ export interface BoyBandsQuizState { questions: QuizQuestion[]; currentIndex: nu
 export type BoyBandsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Backstreet Boys formed in?",
+    "question": "Backstreet Boys formed in which city?",
     "choices": [
-      "1990",
-      "1993",
-      "1996",
-      "1998"
+      "Orlando",
+      "New York",
+      "Los Angeles",
+      "Boston"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "NSYNC's lead singer became?",
+    "question": "NSYNC's lead vocalists included Justin Timberlake and?",
     "choices": [
-      "Justin Bieber",
-      "Justin Timberlake",
-      "Nick Lachey",
-      "Joey Fatone"
+      "JC Chasez",
+      "Lance Bass",
+      "Joey Fatone",
+      "Chris Kirkpatrick"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "'I Want It That Way' is by?",
+    "question": "Boyz II Men hails from?",
     "choices": [
-      "NSYNC",
-      "98 Degrees",
-      "Backstreet Boys",
-      "Boyz II Men"
+      "Philadelphia",
+      "Detroit",
+      "Atlanta",
+      "New York"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "New Kids on the Block hit big in?",
+    "question": "New Kids on the Block formed in?",
     "choices": [
-      "1985",
-      "1989",
-      "1993",
-      "1996"
+      "Boston",
+      "New York",
+      "Los Angeles",
+      "Orlando"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "BTS originates from?",
-    "choices": [
-      "Japan",
-      "South Korea",
-      "China",
-      "Vietnam"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Boyz II Men formed in?",
-    "choices": [
-      "LA",
-      "Philly",
-      "NYC",
-      "Atlanta"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "One Direction formed on?",
-    "choices": [
-      "American Idol",
-      "X Factor UK",
-      "The Voice",
-      "Britain's Got Talent"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Take That hails from?",
+    "question": "Take That originally hailed from?",
     "choices": [
       "UK",
-      "Ireland",
       "USA",
+      "Ireland",
       "Canada"
     ],
     "correct": 0
   },
   {
-    "question": "Jonas Brothers' youngest is?",
+    "question": "Westlife formed in which country?",
     "choices": [
-      "Joe",
-      "Kevin",
-      "Nick",
-      "Frankie"
+      "Ireland",
+      "UK",
+      "Australia",
+      "USA"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "New Edition spawned which solo star?",
+    "question": "One Direction was formed on which TV show?",
+    "choices": [
+      "The X Factor",
+      "American Idol",
+      "The Voice",
+      "Britain's Got Talent"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "One Direction formed in?",
+    "choices": [
+      "2008",
+      "2010",
+      "2012",
+      "2014"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "BTS debuted in?",
+    "choices": [
+      "2011",
+      "2013",
+      "2015",
+      "2017"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "BTS' agency is?",
+    "choices": [
+      "HYBE/Big Hit",
+      "SM",
+      "JYP",
+      "YG"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "EXO debuted under which agency?",
+    "choices": [
+      "SM Entertainment",
+      "JYP",
+      "YG",
+      "Big Hit"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Big Bang debuted in?",
+    "choices": [
+      "2004",
+      "2006",
+      "2008",
+      "2010"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'I Want It That Way' was by?",
+    "choices": [
+      "Backstreet Boys",
+      "NSYNC",
+      "98 Degrees",
+      "O-Town"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Bye Bye Bye' was by?",
+    "choices": [
+      "NSYNC",
+      "Backstreet Boys",
+      "BBMak",
+      "LFO"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which boy band sang 'End of the Road'?",
+    "choices": [
+      "Boyz II Men",
+      "Color Me Badd",
+      "All-4-One",
+      "Az Yet"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Menudo was a long-running boy band from?",
+    "choices": [
+      "Puerto Rico",
+      "Mexico",
+      "Spain",
+      "Cuba"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Ricky Martin was famously a member of?",
+    "choices": [
+      "Menudo",
+      "Boyz II Men",
+      "Color Me Badd",
+      "98 Degrees"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "New Edition's lead singer who went solo was?",
     "choices": [
       "Bobby Brown",
-      "Usher",
-      "Ne-Yo",
-      "R. Kelly"
+      "Ralph Tresvant",
+      "Johnny Gill",
+      "Michael Bivins"
     ],
     "correct": 0
   },
   {
-    "question": "BTS member RM stands for?",
+    "question": "Bell Biv DeVoe was an offshoot of?",
     "choices": [
-      "Rap Monster",
-      "Royal Master",
-      "Real Mood",
-      "Run Man"
+      "New Edition",
+      "Jodeci",
+      "Boyz II Men",
+      "Color Me Badd"
     ],
     "correct": 0
   },
   {
-    "question": "98 Degrees frontman?",
+    "question": "'MMMBop' was by?",
     "choices": [
-      "Justin Jeffre",
-      "Drew Lachey",
-      "Nick Lachey",
-      "Jeff Timmons"
+      "Hanson",
+      "Take 5",
+      "Dream Street",
+      "BBMak"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'5ive' (Five) hailed from?",
+    "choices": [
+      "UK",
+      "USA",
+      "Ireland",
+      "Australia"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Jonas Brothers' breakout label was?",
+    "choices": [
+      "Hollywood Records",
+      "Disney",
+      "Sony",
+      "Universal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Burnin' Up' was by?",
+    "choices": [
+      "Jonas Brothers",
+      "One Direction",
+      "The Wanted",
+      "Big Time Rush"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Wanted's hit 'Glad You Came' was released in?",
+    "choices": [
+      "2009",
+      "2011",
+      "2013",
+      "2015"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Big Time Rush originated as a?",
+    "choices": [
+      "Nickelodeon TV series",
+      "Disney TV series",
+      "X Factor band",
+      "YouTube band"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "BTS member who became known as 'World's Most Handsome' meme?",
+    "choices": [
+      "V",
+      "Jin",
+      "Jimin",
+      "Jungkook"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "BLACKPINK is a girl group, but its label YG also manages which boy group?",
+    "choices": [
+      "iKON",
+      "BTS",
+      "NCT",
+      "Stray Kids"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "NSYNC's Joey Fatone is known for hosting?",
+    "choices": [
+      "Family Feud spinoffs",
+      "Top Chef",
+      "The Voice",
+      "American Idol"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "New Kids on the Block's biggest hit was?",
+    "choices": [
+      "Step by Step",
+      "Hangin' Tough",
+      "Both A and B",
+      "I'll Be Loving You"
     ],
     "correct": 2
+  },
+  {
+    "question": "Backstreet Boys' debut US album was titled?",
+    "choices": [
+      "Backstreet Boys",
+      "Millennium",
+      "Black & Blue",
+      "Never Gone"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

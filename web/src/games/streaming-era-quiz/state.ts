@@ -5,64 +5,74 @@ export interface StreamingEraQuizState { questions: QuizQuestion[]; currentIndex
 export type StreamingEraQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Spotify launched in?",
+    "question": "Spotify was founded in?",
+    "choices": [
+      "Sweden",
+      "USA",
+      "UK",
+      "Germany"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Spotify launched publicly in?",
     "choices": [
       "2006",
       "2008",
-      "2011",
-      "2013"
+      "2010",
+      "2012"
     ],
     "correct": 1
   },
   {
-    "question": "Netflix's first original?",
+    "question": "Apple Music launched in?",
     "choices": [
-      "Stranger Things",
-      "Orange Is the New Black",
-      "House of Cards",
-      "Lilyhammer"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "'House of Cards' US debut?",
-    "choices": [
-      "2011",
       "2013",
       "2014",
-      "2015"
+      "2015",
+      "2016"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "'Stranger Things' debuted in?",
+    "question": "Tidal was relaunched in 2015 by?",
     "choices": [
-      "2014",
-      "2016",
-      "2018",
-      "2020"
+      "Jay-Z",
+      "Kanye West",
+      "Drake",
+      "Beyonce"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Netflix began streaming in?",
+    "choices": [
+      "2005",
+      "2007",
+      "2009",
+      "2011"
     ],
     "correct": 1
   },
   {
     "question": "Disney+ launched in?",
     "choices": [
-      "2017",
-      "2018",
-      "2019",
-      "2020"
+      "November 2018",
+      "November 2019",
+      "March 2020",
+      "June 2020"
     ],
-    "correct": 2
+    "correct": 1
   },
   {
-    "question": "'Game of Thrones' aired on?",
+    "question": "HBO Max rebranded in 2023 to?",
     "choices": [
-      "Netflix",
-      "Hulu",
-      "HBO",
-      "Showtime"
+      "Max",
+      "HBO Now",
+      "Discovery+",
+      "Paramount+"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
     "question": "YouTube was founded in?",
@@ -75,54 +85,224 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Twitch focuses on?",
+    "question": "YouTube was acquired by Google in?",
     "choices": [
-      "Music",
-      "Gaming",
-      "News",
-      "Cooking"
+      "2005",
+      "2006",
+      "2008",
+      "2010"
     ],
     "correct": 1
   },
   {
-    "question": "'Tiger King' aired on?",
+    "question": "TikTok's parent company is?",
     "choices": [
-      "Hulu",
-      "Netflix",
-      "Apple TV",
-      "Amazon"
+      "ByteDance",
+      "Tencent",
+      "Alibaba",
+      "Baidu"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Apple TV+ launched in?",
+    "question": "TikTok launched globally in?",
     "choices": [
-      "2017",
+      "2014",
+      "2016",
       "2018",
-      "2019",
       "2020"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Twitch was acquired by which company in 2014?",
+    "choices": [
+      "Amazon",
+      "Google",
+      "Microsoft",
+      "Facebook"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Netflix show became its first global breakout in 2013?",
+    "choices": [
+      "House of Cards",
+      "Orange Is the New Black",
+      "Stranger Things",
+      "Narcos"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Stranger Things' premiered on Netflix in?",
+    "choices": [
+      "2014",
+      "2016",
+      "2018",
+      "2020"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Squid Game' debuted in?",
+    "choices": [
+      "2019",
+      "2020",
+      "2021",
+      "2022"
     ],
     "correct": 2
   },
   {
-    "question": "'The Mandalorian' is on?",
+    "question": "Which song was Spotify's first to hit 1 billion streams?",
     "choices": [
-      "Netflix",
-      "Disney+",
-      "HBO",
-      "Apple TV+"
+      "One Dance",
+      "Shape of You",
+      "Closer",
+      "Rockstar"
     ],
     "correct": 1
   },
   {
-    "question": "'Squid Game' is from?",
+    "question": "Bad Bunny topped Spotify's global artist chart for which year first?",
     "choices": [
-      "Japan",
-      "South Korea",
-      "China",
-      "Thailand"
+      "2018",
+      "2020",
+      "2021",
+      "2023"
     ],
     "correct": 1
+  },
+  {
+    "question": "Which platform popularized 'Wrapped' year-end summaries?",
+    "choices": [
+      "Spotify",
+      "Apple Music",
+      "Pandora",
+      "Amazon Music"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which device line did Roku begin selling in 2008?",
+    "choices": [
+      "Streaming player",
+      "Smart TV",
+      "Soundbar",
+      "Tablet"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Hulu was founded in?",
+    "choices": [
+      "2007",
+      "2009",
+      "2011",
+      "2013"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Paramount+ rebranded from?",
+    "choices": [
+      "CBS All Access",
+      "Showtime Anytime",
+      "Pluto TV",
+      "Crave"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Peacock is owned by?",
+    "choices": [
+      "NBCUniversal",
+      "Disney",
+      "WBD",
+      "Amazon"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Apple TV+ launched in?",
+    "choices": [
+      "October 2018",
+      "November 2019",
+      "March 2020",
+      "July 2021"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which Apple TV+ show won Best Comedy at the 2021 Emmys?",
+    "choices": [
+      "Ted Lasso",
+      "The Morning Show",
+      "Severance",
+      "Slow Horses"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which platform popularized short vertical video before TikTok?",
+    "choices": [
+      "Vine",
+      "Snapchat",
+      "Periscope",
+      "Meerkat"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Vine shut down in?",
+    "choices": [
+      "2014",
+      "2017",
+      "2019",
+      "2021"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which streaming service offers ad-supported tiers introduced in 2022?",
+    "choices": [
+      "Netflix",
+      "Disney+",
+      "Both A and B",
+      "Neither"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which short-form vertical feature did YouTube launch in 2020?",
+    "choices": [
+      "Shorts",
+      "Reels",
+      "Snippets",
+      "Quick"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Netflix anime hit dominated 2024 charts?",
+    "choices": [
+      "My Daemon",
+      "Blue Eye Samurai",
+      "Pluto",
+      "All of the above"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Spotify acquired which podcast platform in 2019?",
+    "choices": [
+      "Anchor",
+      "SoundCloud",
+      "Stitcher",
+      "Acast"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

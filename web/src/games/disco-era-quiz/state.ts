@@ -5,7 +5,7 @@ export interface DiscoEraQuizState { questions: QuizQuestion[]; currentIndex: nu
 export type DiscoEraQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "'Saturday Night Fever' starred?",
+    "question": "'Saturday Night Fever' starred which actor?",
     "choices": [
       "Sylvester Stallone",
       "John Travolta",
@@ -15,7 +15,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Studio 54 was located in?",
+    "question": "Studio 54 was located in which city?",
     "choices": [
       "Los Angeles",
       "Las Vegas",
@@ -25,7 +25,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "'Stayin' Alive' was by?",
+    "question": "'Stayin' Alive' was a hit by which group?",
     "choices": [
       "Bee Gees",
       "Donna Summer",
@@ -35,7 +35,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Disco's biggest year was?",
+    "question": "Which year is often called disco's peak?",
     "choices": [
       "1975",
       "1977",
@@ -45,17 +45,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "'Disco Demolition Night' occurred in?",
+    "question": "Disco Demolition Night took place at which ballpark?",
     "choices": [
-      "1976",
-      "1979",
-      "1981",
-      "1983"
+      "Wrigley Field",
+      "Comiskey Park",
+      "Fenway Park",
+      "Tiger Stadium"
     ],
     "correct": 1
   },
   {
-    "question": "Donna Summer's nickname?",
+    "question": "Donna Summer was nicknamed the?",
     "choices": [
       "Disco Diva",
       "Queen of Disco",
@@ -65,27 +65,27 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "'Le Freak' was by?",
+    "question": "'Le Freak' was a 1978 hit by?",
     "choices": [
       "Chic",
-      "Earth Wind Fire",
+      "Earth, Wind & Fire",
       "Sister Sledge",
-      "KC"
+      "KC and the Sunshine Band"
     ],
     "correct": 0
   },
   {
-    "question": "Boogie Wonderland was by?",
+    "question": "'Boogie Wonderland' was performed by?",
     "choices": [
       "Bee Gees",
-      "Earth Wind & Fire",
+      "Earth, Wind & Fire",
       "Chic",
       "ABBA"
     ],
     "correct": 1
   },
   {
-    "question": "'YMCA' was by?",
+    "question": "'Y.M.C.A.' was performed by?",
     "choices": [
       "Bee Gees",
       "Village People",
@@ -95,7 +95,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Glitter ball is also called?",
+    "question": "A glitter ball is also commonly called a?",
     "choices": [
       "Mirror ball",
       "Strobe",
@@ -105,7 +105,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "ABBA originated in?",
+    "question": "ABBA originated in which country?",
     "choices": [
       "Norway",
       "Sweden",
@@ -115,12 +115,192 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Disco fashion icon: ____ pants",
+    "question": "A signature disco fashion item was bell-bottom?",
     "choices": [
-      "Bell-bottom",
-      "Skinny",
-      "Capri",
-      "Cargo"
+      "Pants",
+      "Shirts",
+      "Shoes",
+      "Hats"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Gloria Gaynor's biggest disco anthem was?",
+    "choices": [
+      "I Will Survive",
+      "Last Dance",
+      "Hot Stuff",
+      "Funkytown"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Funkytown' was a 1980 hit by?",
+    "choices": [
+      "Lipps Inc.",
+      "Chic",
+      "KC",
+      "A Taste of Honey"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'I Feel Love' was produced by Giorgio Moroder for?",
+    "choices": [
+      "Donna Summer",
+      "Diana Ross",
+      "Cher",
+      "Gloria Gaynor"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which film popularized disco worldwide in 1977?",
+    "choices": [
+      "Thank God It's Friday",
+      "Saturday Night Fever",
+      "Roller Boogie",
+      "Xanadu"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Nile Rodgers was the guitarist for which disco band?",
+    "choices": [
+      "Chic",
+      "KC",
+      "Heatwave",
+      "Sister Sledge"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'We Are Family' was by?",
+    "choices": [
+      "Sister Sledge",
+      "Pointer Sisters",
+      "The Three Degrees",
+      "Labelle"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Dancing Queen' was released by ABBA in?",
+    "choices": [
+      "1974",
+      "1976",
+      "1978",
+      "1980"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which DJ is credited with pioneering modern club mixing?",
+    "choices": [
+      "Larry Levan",
+      "Frankie Knuckles",
+      "Francis Grasso",
+      "David Mancuso"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Loft parties were hosted by?",
+    "choices": [
+      "David Mancuso",
+      "Larry Levan",
+      "Nicky Siano",
+      "Tee Scott"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Paradise Garage was located in?",
+    "choices": [
+      "New York",
+      "Chicago",
+      "Newark",
+      "Philadelphia"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Don't Leave Me This Way' was a hit for which singer?",
+    "choices": [
+      "Thelma Houston",
+      "Diana Ross",
+      "Gloria Gaynor",
+      "Cher"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "KC and the Sunshine Band hailed from?",
+    "choices": [
+      "Miami",
+      "New York",
+      "Detroit",
+      "Atlanta"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Rolling Stones song embraced disco in 1978?",
+    "choices": [
+      "Miss You",
+      "Start Me Up",
+      "Angie",
+      "Beast of Burden"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Ring My Bell' was a 1979 disco hit by?",
+    "choices": [
+      "Anita Ward",
+      "Evelyn King",
+      "Chaka Khan",
+      "Patrice Rushen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Got to Be Real' was sung by?",
+    "choices": [
+      "Cheryl Lynn",
+      "Evelyn King",
+      "Stephanie Mills",
+      "Deniece Williams"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Diana Ross song was produced by Chic?",
+    "choices": [
+      "Upside Down",
+      "Love Hangover",
+      "I'm Coming Out",
+      "Both A and C"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Which Michael Jackson album rode the disco wave in 1979?",
+    "choices": [
+      "Thriller",
+      "Off the Wall",
+      "Bad",
+      "Dangerous"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which dance was a disco floor staple?",
+    "choices": [
+      "The Hustle",
+      "The Twist",
+      "The Charleston",
+      "The Jitterbug"
     ],
     "correct": 0
   }

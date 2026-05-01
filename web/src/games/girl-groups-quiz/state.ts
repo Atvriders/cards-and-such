@@ -5,57 +5,277 @@ export interface GirlGroupsQuizState { questions: QuizQuestion[]; currentIndex: 
 export type GirlGroupsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Spice Girls formed in?",
+    "question": "The Supremes' lead singer was?",
     "choices": [
-      "1991",
-      "1994",
-      "1996",
-      "1998"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "'Wannabe' is by?",
-    "choices": [
-      "Spice Girls",
-      "TLC",
-      "Destiny's Child",
-      "All Saints"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Destiny's Child lead singer?",
-    "choices": [
-      "Beyonce",
-      "Kelly",
-      "Michelle",
-      "Letoya"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "TLC stands for?",
-    "choices": [
-      "Tionne Lisa Crystal",
-      "T-Boz Left Eye Chilli",
-      "Three Loud Cats",
-      "T Lopes Crew"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Supremes lead singer?",
-    "choices": [
-      "Aretha Franklin",
       "Diana Ross",
       "Florence Ballard",
-      "Mary Wilson"
+      "Mary Wilson",
+      "Cindy Birdsong"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Supremes were signed to which label?",
+    "choices": [
+      "Motown",
+      "Atlantic",
+      "Stax",
+      "Columbia"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Spice Girls formed in?",
+    "choices": [
+      "UK",
+      "USA",
+      "Ireland",
+      "Australia"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Wannabe' was released in?",
+    "choices": [
+      "1994",
+      "1996",
+      "1998",
+      "2000"
     ],
     "correct": 1
   },
   {
-    "question": "Sugababes are from?",
+    "question": "Which Spice Girl was 'Sporty'?",
+    "choices": [
+      "Mel C",
+      "Mel B",
+      "Emma Bunton",
+      "Geri Halliwell"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Destiny's Child's lead singer became?",
+    "choices": [
+      "Beyonce",
+      "Kelly Rowland",
+      "Michelle Williams",
+      "LeToya Luckett"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Survivor' was a hit by?",
+    "choices": [
+      "Destiny's Child",
+      "TLC",
+      "En Vogue",
+      "SWV"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "TLC's 'Waterfalls' was released in?",
+    "choices": [
+      "1992",
+      "1994",
+      "1995",
+      "1997"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Lisa 'Left Eye' Lopes was a member of?",
+    "choices": [
+      "TLC",
+      "En Vogue",
+      "SWV",
+      "Xscape"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Salt-N-Pepa hailed from?",
+    "choices": [
+      "New York",
+      "Los Angeles",
+      "Atlanta",
+      "Miami"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Push It' was by?",
+    "choices": [
+      "Salt-N-Pepa",
+      "TLC",
+      "En Vogue",
+      "SWV"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "En Vogue's debut album was?",
+    "choices": [
+      "Born to Sing",
+      "Funky Divas",
+      "EV3",
+      "Soul Flower"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Pussycat Dolls were originally a?",
+    "choices": [
+      "Burlesque troupe",
+      "Dance crew",
+      "Choir",
+      "Reality show group"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Don't Cha' was by the Pussycat Dolls in?",
+    "choices": [
+      "2003",
+      "2005",
+      "2007",
+      "2009"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Little Mix formed on which TV show?",
+    "choices": [
+      "The X Factor UK",
+      "American Idol",
+      "The Voice",
+      "Pop Idol"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Little Mix won The X Factor in?",
+    "choices": [
+      "2009",
+      "2011",
+      "2013",
+      "2015"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Fifth Harmony formed on?",
+    "choices": [
+      "The X Factor US",
+      "American Idol",
+      "The Voice",
+      "America's Got Talent"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Worth It' was by Fifth Harmony in?",
+    "choices": [
+      "2013",
+      "2015",
+      "2017",
+      "2019"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "BLACKPINK debuted in?",
+    "choices": [
+      "2014",
+      "2016",
+      "2018",
+      "2020"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "BLACKPINK's label is?",
+    "choices": [
+      "YG",
+      "SM",
+      "JYP",
+      "HYBE"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "TWICE debuted under which agency?",
+    "choices": [
+      "JYP",
+      "SM",
+      "YG",
+      "Big Hit"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Girls' Generation debuted in?",
+    "choices": [
+      "2005",
+      "2007",
+      "2009",
+      "2011"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Girls' Generation's agency is?",
+    "choices": [
+      "SM Entertainment",
+      "JYP",
+      "YG",
+      "Cube"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Gee' was by Girls' Generation in?",
+    "choices": [
+      "2007",
+      "2009",
+      "2011",
+      "2013"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Bangles' 'Walk Like an Egyptian' was a hit in?",
+    "choices": [
+      "1984",
+      "1986",
+      "1988",
+      "1990"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Go-Go's lead singer was?",
+    "choices": [
+      "Belinda Carlisle",
+      "Jane Wiedlin",
+      "Charlotte Caffey",
+      "Kathy Valentine"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'We Got the Beat' was by?",
+    "choices": [
+      "The Go-Go's",
+      "The Bangles",
+      "Bananarama",
+      "The Runaways"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Bananarama is from?",
     "choices": [
       "UK",
       "USA",
@@ -65,62 +285,22 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "BLACKPINK is from?",
+    "question": "The Ronettes' lead singer was?",
     "choices": [
-      "Japan",
-      "South Korea",
-      "Thailand",
-      "China"
+      "Ronnie Spector",
+      "Estelle Bennett",
+      "Nedra Talley",
+      "Darlene Love"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Pussycat Dolls' lead?",
+    "question": "'Be My Baby' was a hit for?",
     "choices": [
-      "Ashley",
-      "Nicole",
-      "Jessica",
-      "Kimberly"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bananarama's heyday was?",
-    "choices": [
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "'No Scrubs' is by?",
-    "choices": [
-      "Destiny's Child",
-      "TLC",
-      "En Vogue",
-      "Salt-N-Pepa"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Salt-N-Pepa is from?",
-    "choices": [
-      "LA",
-      "NYC",
-      "Chicago",
-      "Detroit"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Little Mix won?",
-    "choices": [
-      "X Factor UK",
-      "American Idol",
-      "The Voice",
-      "BGT"
+      "The Ronettes",
+      "The Shirelles",
+      "The Crystals",
+      "The Marvelettes"
     ],
     "correct": 0
   }

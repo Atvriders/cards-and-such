@@ -5,107 +5,27 @@ export interface GrungeEraQuizState { questions: QuizQuestion[]; currentIndex: n
 export type GrungeEraQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Nirvana's 'Nevermind' came out in?",
-    "choices": [
-      "1989",
-      "1991",
-      "1993",
-      "1995"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Kurt Cobain's band was?",
-    "choices": [
-      "Pearl Jam",
-      "Soundgarden",
-      "Nirvana",
-      "Alice in Chains"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Grunge originated in?",
+    "question": "Grunge's home city is widely considered?",
     "choices": [
       "Portland",
       "Seattle",
-      "San Francisco",
-      "Vancouver"
+      "Olympia",
+      "Tacoma"
     ],
     "correct": 1
   },
   {
-    "question": "Pearl Jam frontman?",
+    "question": "Nirvana's breakout album was?",
     "choices": [
-      "Kurt Cobain",
-      "Eddie Vedder",
-      "Chris Cornell",
-      "Layne Staley"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Soundgarden frontman?",
-    "choices": [
-      "Layne Staley",
-      "Eddie Vedder",
-      "Chris Cornell",
-      "Scott Weiland"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Alice in Chains frontman?",
-    "choices": [
-      "Layne Staley",
-      "Chris Cornell",
-      "Eddie Vedder",
-      "Mark Lanegan"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Iconic grunge fabric?",
-    "choices": [
-      "Velvet",
-      "Flannel",
-      "Denim",
-      "Leather"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "'Smells Like Teen Spirit' is from?",
-    "choices": [
-      "In Utero",
       "Bleach",
       "Nevermind",
+      "In Utero",
       "Incesticide"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Stone Temple Pilots frontman?",
-    "choices": [
-      "Eddie Vedder",
-      "Scott Weiland",
-      "Layne Staley",
-      "Kurt Cobain"
     ],
     "correct": 1
   },
   {
-    "question": "Kurt Cobain died in?",
-    "choices": [
-      "1991",
-      "1992",
-      "1994",
-      "1996"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Pearl Jam's debut album?",
+    "question": "Pearl Jam's debut album was?",
     "choices": [
       "Vs.",
       "Ten",
@@ -115,14 +35,274 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Sub Pop is a?",
+    "question": "Soundgarden's lead vocalist was?",
     "choices": [
-      "Soda",
-      "Record label",
-      "Magazine",
-      "Movie"
+      "Eddie Vedder",
+      "Chris Cornell",
+      "Layne Staley",
+      "Mark Lanegan"
     ],
     "correct": 1
+  },
+  {
+    "question": "Alice in Chains' lead singer was?",
+    "choices": [
+      "Jerry Cantrell",
+      "Layne Staley",
+      "Chris Cornell",
+      "Andrew Wood"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Smells Like Teen Spirit' was released in?",
+    "choices": [
+      "1989",
+      "1991",
+      "1993",
+      "1995"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which label was synonymous with the Seattle scene?",
+    "choices": [
+      "Sub Pop",
+      "Matador",
+      "SST",
+      "Dischord"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Mother Love Bone's frontman who died in 1990 was?",
+    "choices": [
+      "Andrew Wood",
+      "Stefanie Sargent",
+      "Mia Zapata",
+      "Kurt Cobain"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Temple of the Dog was a tribute to?",
+    "choices": [
+      "Andrew Wood",
+      "Kurt Cobain",
+      "Layne Staley",
+      "Mike Starr"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Pearl Jam's bassist is?",
+    "choices": [
+      "Jeff Ament",
+      "Mike McCready",
+      "Stone Gossard",
+      "Matt Cameron"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Nirvana's drummer who later formed Foo Fighters?",
+    "choices": [
+      "Dave Grohl",
+      "Krist Novoselic",
+      "Chad Channing",
+      "Pat Smear"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which film soundtrack featured many grunge bands in 1992?",
+    "choices": [
+      "Singles",
+      "Reality Bites",
+      "Empire Records",
+      "Clerks"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Stone Temple Pilots hailed from?",
+    "choices": [
+      "San Diego",
+      "Seattle",
+      "Los Angeles",
+      "Portland"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Hole was fronted by?",
+    "choices": [
+      "Courtney Love",
+      "Kim Gordon",
+      "Kat Bjelland",
+      "Donita Sparks"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Soundgarden album won a 1995 Grammy?",
+    "choices": [
+      "Superunknown",
+      "Badmotorfinger",
+      "Down on the Upside",
+      "Louder Than Love"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Alice in Chains' acoustic EP from 1994 was?",
+    "choices": [
+      "Sap",
+      "Jar of Flies",
+      "Unplugged",
+      "Dirt"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pearl Jam famously fought ticket fees from which company?",
+    "choices": [
+      "Ticketmaster",
+      "StubHub",
+      "Live Nation",
+      "TicketCity"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Smashing Pumpkins' breakout double album was?",
+    "choices": [
+      "Siamese Dream",
+      "Mellon Collie and the Infinite Sadness",
+      "Adore",
+      "Gish"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which Nirvana album was their final studio LP?",
+    "choices": [
+      "Bleach",
+      "Nevermind",
+      "In Utero",
+      "MTV Unplugged"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "'Black Hole Sun' was by?",
+    "choices": [
+      "Soundgarden",
+      "Nirvana",
+      "Pearl Jam",
+      "Alice in Chains"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Eddie Vedder grew up surfing in which state?",
+    "choices": [
+      "California",
+      "Washington",
+      "Oregon",
+      "Hawaii"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Mudhoney's label of origin was?",
+    "choices": [
+      "Sub Pop",
+      "Reprise",
+      "Geffen",
+      "Epic"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which band released 'Hunger Strike' in 1991?",
+    "choices": [
+      "Temple of the Dog",
+      "Mad Season",
+      "Soundgarden",
+      "Mother Love Bone"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Layne Staley's side project was?",
+    "choices": [
+      "Mad Season",
+      "Audioslave",
+      "Them Crooked Vultures",
+      "Velvet Revolver"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Kurt Cobain died in?",
+    "choices": [
+      "1992",
+      "1994",
+      "1996",
+      "1998"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Krist Novoselic played which instrument?",
+    "choices": [
+      "Bass",
+      "Drums",
+      "Lead Guitar",
+      "Keyboards"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Jeremy' was a hit single from which Pearl Jam album?",
+    "choices": [
+      "Ten",
+      "Vs.",
+      "Vitalogy",
+      "No Code"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The grunge fashion staple was the?",
+    "choices": [
+      "Flannel shirt",
+      "Polo",
+      "Tank top",
+      "Cardigan"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which producer worked on Nevermind?",
+    "choices": [
+      "Butch Vig",
+      "Steve Albini",
+      "Rick Rubin",
+      "Brendan O'Brien"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Man in the Box' was by?",
+    "choices": [
+      "Alice in Chains",
+      "Soundgarden",
+      "Stone Temple Pilots",
+      "Bush"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

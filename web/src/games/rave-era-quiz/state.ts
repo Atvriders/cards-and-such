@@ -5,122 +5,302 @@ export interface RaveEraQuizState { questions: QuizQuestion[]; currentIndex: num
 export type RaveEraQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Rave culture originated in?",
+    "question": "The Second Summer of Love was in?",
     "choices": [
-      "USA",
-      "UK",
-      "Germany",
-      "France"
+      "1985",
+      "1988",
+      "1991",
+      "1994"
     ],
     "correct": 1
   },
   {
-    "question": "Iconic rave drug?",
+    "question": "Acid house was associated with which smiley emblem?",
     "choices": [
-      "Cocaine",
-      "MDMA",
-      "Heroin",
-      "LSD"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "'Acid house' originated in?",
-    "choices": [
-      "Detroit",
-      "Chicago",
-      "Manchester",
-      "Berlin"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Famous rave duo Daft Punk are from?",
-    "choices": [
-      "UK",
-      "France",
-      "Germany",
-      "Belgium"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Common rave accessory?",
-    "choices": [
-      "Glow stick",
-      "Lava lamp",
-      "Disco ball",
-      "Headlamp"
+      "Yellow smiley",
+      "Red heart",
+      "Blue star",
+      "Green peace"
     ],
     "correct": 0
   },
   {
-    "question": "'PLUR' stands for?",
+    "question": "Which UK law in 1994 targeted unlicensed raves?",
     "choices": [
-      "Peace Love Unity Respect",
-      "Party Lights Use Right",
-      "Pop Like Up Right",
-      "Pulse Light Unity Rave"
+      "Public Order Act",
+      "Criminal Justice and Public Order Act",
+      "Licensing Act",
+      "Misuse of Drugs Act"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Roland TB-303 is famous for which sound?",
+    "choices": [
+      "Acid bass",
+      "808 kick",
+      "Hi-hat",
+      "Pad"
     ],
     "correct": 0
   },
   {
-    "question": "Detroit techno pioneer?",
+    "question": "The Prodigy's breakthrough album was?",
     "choices": [
-      "Juan Atkins",
-      "David Guetta",
-      "Skrillex",
+      "Music for the Jilted Generation",
+      "The Fat of the Land",
+      "Experience",
+      "Invaders Must Die"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Born Slippy .NUXX' was by which act?",
+    "choices": [
+      "Underworld",
+      "Orbital",
+      "Leftfield",
+      "Chemical Brothers"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Insomnia' was a 1995 hit by?",
+    "choices": [
+      "Faithless",
+      "Moby",
+      "Robert Miles",
+      "Sash!"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Detroit techno's pioneers include which trio?",
+    "choices": [
+      "Belleville Three",
+      "Chicago Five",
+      "Berlin Two",
+      "Bristol Posse"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which club is iconic to Berlin's techno scene?",
+    "choices": [
+      "Berghain",
+      "Fabric",
+      "Tresor",
+      "Both A and C"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Goa trance is associated with which country?",
+    "choices": [
+      "Spain",
+      "India",
+      "Thailand",
+      "Brazil"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Children' was a 1995 dream-trance hit by?",
+    "choices": [
+      "Robert Miles",
+      "BT",
+      "Sasha",
       "Tiesto"
     ],
     "correct": 0
   },
   {
-    "question": "UK 'Second Summer of Love'?",
+    "question": "PLUR stands for?",
     "choices": [
-      "1985",
-      "1988",
-      "1992",
-      "1995"
+      "Peace Love Unity Respect",
+      "People Love Unity Rave",
+      "Peace Light Unity Respect",
+      "Pray Love Unity Rave"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which UK festival started in 1992 and embraced dance music?",
+    "choices": [
+      "Creamfields",
+      "Glastonbury",
+      "Gatecrasher",
+      "Tribal Gathering"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Cream nightclub was located in?",
+    "choices": [
+      "Liverpool",
+      "Manchester",
+      "London",
+      "Leeds"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The Hacienda was located in?",
+    "choices": [
+      "Manchester",
+      "London",
+      "Sheffield",
+      "Bristol"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which DJ co-founded Cream and went on to a global career?",
+    "choices": [
+      "Paul Oakenfold",
+      "Sasha",
+      "Pete Tong",
+      "Carl Cox"
     ],
     "correct": 1
   },
   {
-    "question": "Goa is famous for which rave style?",
+    "question": "'Sandstorm' was a 1999 trance smash by?",
     "choices": [
-      "Trance",
-      "Garage",
+      "Darude",
+      "ATB",
+      "Tiesto",
+      "Armin van Buuren"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Aphex Twin album came out in 1995?",
+    "choices": [
+      "I Care Because You Do",
+      "Selected Ambient Works II",
+      "Drukqs",
+      "Richard D. James Album"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Kraftwerk hails from which country?",
+    "choices": [
+      "UK",
+      "Germany",
+      "Belgium",
+      "France"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The genre 'jungle' evolved into?",
+    "choices": [
       "Drum and bass",
-      "Dubstep"
+      "Dubstep",
+      "Garage",
+      "Techno"
     ],
     "correct": 0
   },
   {
-    "question": "Drum and bass BPM is roughly?",
+    "question": "UK Garage's vocal-led offshoot is?",
     "choices": [
-      "100",
-      "130",
-      "160",
-      "200"
+      "Speed garage",
+      "2-step",
+      "Bassline",
+      "Grime"
     ],
-    "correct": 2
+    "correct": 1
   },
   {
-    "question": "Famous UK rave magazine?",
+    "question": "Daft Punk hails from?",
     "choices": [
-      "Mixmag",
-      "Rolling Stone",
-      "NME",
-      "SPIN"
+      "France",
+      "Belgium",
+      "Italy",
+      "UK"
     ],
     "correct": 0
   },
   {
-    "question": "Aphex Twin is associated with?",
+    "question": "Daft Punk's 1997 debut album was?",
     "choices": [
-      "IDM",
-      "Hip hop",
-      "Country",
-      "Reggae"
+      "Discovery",
+      "Homework",
+      "Human After All",
+      "Random Access Memories"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Music Sounds Better with You' was by?",
+    "choices": [
+      "Stardust",
+      "Modjo",
+      "Cassius",
+      "Phoenix"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which festival in the desert started in 1986 and influenced rave culture?",
+    "choices": [
+      "Burning Man",
+      "Coachella",
+      "Lollapalooza",
+      "Bonnaroo"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Where's Your Head At' was by?",
+    "choices": [
+      "Basement Jaxx",
+      "Chemical Brothers",
+      "Fatboy Slim",
+      "Underworld"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Fatboy Slim's real name is?",
+    "choices": [
+      "Norman Cook",
+      "Liam Howlett",
+      "Tom Rowlands",
+      "Carl Cox"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Vinyl size most associated with 12-inch dance singles is?",
+    "choices": [
+      "33⅓ rpm",
+      "45 rpm",
+      "78 rpm",
+      "16 rpm"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which drum machine was central to early house music?",
+    "choices": [
+      "Roland TR-909",
+      "Roland TR-808",
+      "Linn LM-1",
+      "Korg KR-55"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which act released 'Smack My B**** Up' in 1997?",
+    "choices": [
+      "The Prodigy",
+      "Chemical Brothers",
+      "Crystal Method",
+      "Underworld"
     ],
     "correct": 0
   }
