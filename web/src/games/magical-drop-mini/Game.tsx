@@ -4,7 +4,7 @@ import type { MagicalDropMiniState, MagicalDropMiniAction, MagicalDropMiniSettin
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["✨","🌟","⭐","💫","🌠"];
+const GEMS = ["🌸","🍀","🌟","🎈","🎀","🌙"];
 
 export function MagicalDropMiniGame({ state, dispatch, onGameOver }: GameProps<MagicalDropMiniState, MagicalDropMiniSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -16,20 +16,28 @@ export function MagicalDropMiniGame({ state, dispatch, onGameOver }: GameProps<M
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="mdmm3-wrap">
+        <div className="mdmm3-done">
+          <h2>Time's Up!</h2>
+          <div className="mdmm3-stats">Matches: {state.matches}</div>
+          <div className="mdmm3-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="mdmm3-wrap">
+      <div className="mdmm3-header">
+        <span className="mdmm3-info">Matches: {state.matches}</span>
+        <span className="mdmm3-timer">{state.ticksRemaining}s</span>
+        <span className="mdmm3-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="mdmm3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`mdmm3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as MagicalDropMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

@@ -1,35 +1,95 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface ThreedTunnelRunnerSettings { questions: "10"; }
-export interface ThreedTunnelRunnerState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type ThreedTunnelRunnerAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: '3D Tunnel Runners typically have how many lanes?', choices: ['Three lanes', 'One lane', 'Five lanes', 'Ten lanes'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'The main input mechanic is?', choices: ['Swipe/tap to switch lanes', 'Type a word', 'Drag tiles', 'Roll dice'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Subway Surfers is a famous?', choices: ['3D endless tunnel/track runner', 'Trick-taking card game', 'Solitaire', 'Bridge variant'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Visual signature of tunnel runners is often?', choices: ['A rotating or twisting tunnel/track', 'Static side-view', 'Top-down board', 'Iso 3/4 view'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Difficulty in tunnel runners typically?', choices: ['Ramps up with distance and speed', 'Stays the same', 'Decreases', 'Is decided by dice'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Death/loss occurs when?', choices: ['The player hits an obstacle', 'The player rests too long', 'A timer runs out only', 'Trump is broken'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Subway Surfers was first released in?', choices: ['2012', '1985', '2000', '2022'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Power-ups in tunnel runners often include?', choices: ['Magnets, jetpacks, and shoes', 'Trump cards', 'Tile melds', 'Wild jokers'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: '3D Tunnel Runners are descended from?', choices: ['Tube-style early arcade tunnels and modern endless runners', 'Klondike', 'Whist', 'Bridge'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Tunnel rotation often produces?', choices: ['A vertigo-inducing or hypnotic effect', 'Player nausea is undocumented', 'Slower pace always', 'Lower scores always'], correct: 0 as 0 | 1 | 2 | 3 }
-];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
+
+// 3D Tunnel Runner: endless runner. Player has 3 lanes; tap to move; obstacles spawn from right; collision = game over.
+
+export const LANES = 3;
+export const LANE_LENGTH = 12;
+export const TICK_MS = 100;
+
+export interface ThreedTunnelRunnerSettings { dummy: boolean; }
+
+export interface Obstacle { id: number; lane: number; x: number; }
+
+export interface ThreedTunnelRunnerState {
+  rngSeed: number;
+  playerLane: number;
+  obstacles: Obstacle[];
+  nextId: number;
+  ticks: number;
+  spawnTimer: number;
+  spawnInterval: number;
+  speed: number;
+  speedAccum: number;
+  score: number;
+  phase: "playing" | "done";
+}
+
+export type ThreedTunnelRunnerAction =
+  | { type: "tick" }
+  | { type: "lane"; dir: -1 | 1 }
+  | { type: "setLane"; lane: number };
+
 export function initialState(seed: number, _settings: ThreedTunnelRunnerSettings): ThreedTunnelRunnerState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+  return {
+    rngSeed: seed >>> 0 || 1,
+    playerLane: 1,
+    obstacles: [],
+    nextId: 1,
+    ticks: 0,
+    spawnTimer: 0,
+    spawnInterval: 8,
+    speed: 1,
+    speedAccum: 0,
+    score: 0,
+    phase: "playing",
+  };
 }
+
+function collides(playerLane: number, obstacles: Obstacle[]): boolean {
+  for (const o of obstacles) if (o.x === 0 && o.lane === playerLane) return true;
+  return false;
+}
+
 export function reducer(state: ThreedTunnelRunnerState, action: ThreedTunnelRunnerAction): ThreedTunnelRunnerState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case "select":return state.submitted?state:{...state,selected:action.choice};
-    case "submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case "tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case "next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
+  if (state.phase === "done") return state;
+  if (action.type === "lane") {
+    const next = Math.max(0, Math.min(LANES - 1, state.playerLane + action.dir));
+    if (next === state.playerLane) return state;
+    if (collides(next, state.obstacles)) return { ...state, playerLane: next, phase: "done" };
+    return { ...state, playerLane: next };
   }
+  if (action.type === "setLane") {
+    const next = Math.max(0, Math.min(LANES - 1, action.lane));
+    if (next === state.playerLane) return state;
+    if (collides(next, state.obstacles)) return { ...state, playerLane: next, phase: "done" };
+    return { ...state, playerLane: next };
+  }
+  if (action.type === "tick") {
+    const rng = mulberry32(state.rngSeed);
+    const seed2 = Math.floor(rng() * 2 ** 31);
+    const accum = state.speedAccum + state.speed;
+    const advance = Math.floor(accum);
+    const newAccum = accum - advance;
+    let obstacles = state.obstacles.map(o => ({ ...o, x: o.x - advance })).filter(o => o.x >= 0);
+    let spawnTimer = state.spawnTimer + 1;
+    let spawnInterval = state.spawnInterval;
+    let nextId = state.nextId;
+    if (spawnTimer >= spawnInterval) {
+      spawnTimer = 0;
+      const lane = Math.floor(rng() * LANES);
+      obstacles = [...obstacles, { id: nextId++, lane, x: LANE_LENGTH - 1 }];
+    }
+    if (collides(state.playerLane, obstacles)) {
+      return { ...state, rngSeed: seed2, obstacles, nextId, ticks: state.ticks + 1, spawnTimer, spawnInterval, speedAccum: newAccum, phase: "done" };
+    }
+    const ticks = state.ticks + 1;
+    if (ticks % 60 === 0 && spawnInterval > 4) spawnInterval--;
+    const speed = ticks > 200 ? 1.4 : ticks > 100 ? 1.2 : 1;
+    return { ...state, rngSeed: seed2, obstacles, nextId, ticks, spawnTimer, spawnInterval, speed, speedAccum: newAccum, score: state.score + 1 };
+  }
+  return state;
 }
-export function isTerminal(state: ThreedTunnelRunnerState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function isTerminal(state: ThreedTunnelRunnerState): { score: number } | null {
+  return state.phase === "done" ? { score: state.score } : null;
+}

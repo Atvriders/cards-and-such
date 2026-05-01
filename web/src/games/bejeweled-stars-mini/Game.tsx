@@ -4,7 +4,7 @@ import type { BejeweledStarsMiniState, BejeweledStarsMiniAction, BejeweledStarsM
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["⭐","💎","🔵","🟢","🟡","🟣"];
+const GEMS = ["⭐","🌟","✨","💫","🌠","☀️"];
 
 export function BejeweledStarsMiniGame({ state, dispatch, onGameOver }: GameProps<BejeweledStarsMiniState, BejeweledStarsMiniSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -16,20 +16,28 @@ export function BejeweledStarsMiniGame({ state, dispatch, onGameOver }: GameProp
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="bsmm3-wrap">
+        <div className="bsmm3-done">
+          <h2>Time's Up!</h2>
+          <div className="bsmm3-stats">Matches: {state.matches}</div>
+          <div className="bsmm3-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="bsmm3-wrap">
+      <div className="bsmm3-header">
+        <span className="bsmm3-info">Matches: {state.matches}</span>
+        <span className="bsmm3-timer">{state.ticksRemaining}s</span>
+        <span className="bsmm3-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="bsmm3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`bsmm3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as BejeweledStarsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

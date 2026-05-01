@@ -2,17 +2,33 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { WelcomeToSpringState, WelcomeToSpringAction, WelcomeToSpringSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WelcomeToSpringGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const welcomeToSpringPlugin: GamePlugin<WelcomeToSpringState, WelcomeToSpringAction, typeof settings> = {
   id: "welcome-to-spring",
-  title: "Welcome To: Spring",
-  category: "board",
+  title: "Welcome To Spring",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Welcome To variant; spring suburb with gardens and bloom bonuses.",
-  howToPlay: "Welcome To: Spring is a Welcome To variant where the suburb blooms in springtime — gardens, bee houses, and flowering streets dominate the score sheet.\n\nEach round, click Roll to draw a die (1-6). Click any empty cell to plant or build with that pip value. Skip if no cell fits a bloom you want.\n\nScoring:\n- Each planted cell scores its pip (1-6).\n- +5 per row (street fully blossomed).\n- +5 per column (boulevard avenue planted).\n- +10 for fully bloomed suburb (Welcome to Spring achievement).\n\n12 rolls total. Spring is the most generous Welcome To — bonus stacking is common. Strategy: don't panic skip; even a 1 placed on a corner doubles via row+column. A typical run scores 40-55 points; full bloom reaches 65+. Welcome To: Spring is the gentle introduction to the franchise's flip-and-write rhythm. Plant deliberately, water with care, and watch your suburb burst into color over twelve sun-warmed rolls.",
+  description: "Spring blooms — flower placements grant garden bonuses.",
+  howToPlay: `Welcome To Spring is a strict-ascending placement dice game.
+
+How to play
+1. Press Roll for a d12.
+2. Place the number into any slot in any of the 3 rows of 5 — but each row must remain strictly ascending.
+3. Place gives die value + adjacency bonus (+2 if a neighbor is exactly one less or more).
+4. Skip if no legal slot — costs −1 to score.
+
+Theme: Each consecutive pair: +flower.
+
+End-of-game bonuses
+- Each completed row: +6
+- Full board: +10
+
+Game ends after 12 rolls or when all 15 slots are filled. Strong runs reach 60-100.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as WelcomeToSpringSettings),
+  initialState: (seed, s) => initialState(seed, s as WelcomeToSpringSettings),
   reducer,
   isTerminal,
   component: WelcomeToSpringGame,

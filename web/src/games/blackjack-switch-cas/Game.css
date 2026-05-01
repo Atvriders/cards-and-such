@@ -1,2 +1,16 @@
-/* Modern casino-table engine — see web/src/engines/casino/casino.css */
-@import "../../engines/casino/casino.css";
+.bj-sw-c-wrap { display:flex; flex-direction:column; gap:0.6rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; align-items: center; }
+.bj-sw-c-title { font-size:1.2rem; font-weight:700; color:#26c6da; }
+.bj-sw-c-info { font-size:0.85rem; opacity:0.75; }
+.bj-sw-c-score { font-size:1.6rem; font-weight:800; color:#26c6da; }
+.bj-sw-c-row { display:flex; gap:0.4rem; flex-wrap:wrap; justify-content:center; }
+.bj-sw-c-card { width:3.2rem; height:4.5rem; border-radius:6px; background:#fff; color:#222; font-weight:700; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 4px rgba(0,0,0,0.4); }
+.bj-sw-c-card.red { color:#c62828; }
+.bj-sw-c-card.black { color:#222; }
+.bj-sw-c-card.back { background: repeating-linear-gradient(45deg, #26c6da 0 4px, #112 4px 8px); color:#fff; }
+.bj-sw-c-actions { display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; }
+.bj-sw-c-btn { background:#26c6da; color:#000; padding:0.5rem 1rem; border:none; border-radius:6px; font-weight:700; cursor:pointer; }
+.bj-sw-c-btn:hover { filter: brightness(1.15); }
+.bj-sw-c-btn.alt { background:#444; color:#fff; }
+.bj-sw-c-result { font-size:1rem; font-weight:600; padding:0.5rem 1rem; background: rgba(0,0,0,0.3); border-radius: 6px; }
+.bj-sw-c-done { text-align:center; padding:1.5rem; background: rgba(0,0,0,0.4); border-radius:8px; border:2px solid #26c6da; }
+.bj-sw-c-final { font-size:2rem; font-weight:900; color:#26c6da; }

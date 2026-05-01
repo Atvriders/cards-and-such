@@ -2,29 +2,34 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { CartographersBaseState, CartographersBaseAction, CartographersBaseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CartographersBaseGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const cartographersBasePlugin: GamePlugin<CartographersBaseState, CartographersBaseAction, typeof settings> = {
   id: "cartographers-base",
-  title: "Cartographers",
-  category: "board",
+  title: "Cartographers Base",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Flip terrain cards and draw on a 5x5 map for seasonal scoring.",
-  howToPlay: `Cartographers is a flip-and-draw map-building game. In this adaptation you flip 12 random terrain cards (forest, water, farm, monster, mountain) and mark cells on a 5x5 kingdom map.
+  description: "Cartographers — place terrain shapes on a 4x4 map for season bonuses.",
+  howToPlay: `Cartographers Base is a 12-roll dice-and-mark game with themed scoring.
 
-Each turn click any empty cell. The cell takes the latest card's terrain.
+How to play
+1. Press Roll to throw a d6.
+2. Click any unmarked cell on the 4x4 grid to mark it with that value.
+3. Score = die value + zone bonus + adjacency bonus (matching value next door).
+4. Skip if no good spot — that roll is wasted.
 
-Scoring (computed at end across 4 'seasons' triggered at rolls 3, 6, 9, 12):
-• Spring (rolls 1-3): +1 per forest cell adjacent to mountain
-• Summer (rolls 4-6): +2 per row containing both farm and water
-• Fall (rolls 7-9): +1 per cluster of 2+ same terrain
-• Winter (rolls 10-12): +3 per monster cell that is COMPLETELY surrounded (4 sides) by non-monster
+Theme: Each terrain type: bonus per group.
 
-These all sum into your final score.
+End-of-game bonuses
+- Full row: +4 each
+- Full column: +4 each
+- Full board: +12
 
-Monsters are the catch — they score positive only when boxed in by non-monsters. Otherwise they're dead weight. A typical run scores 15-30 points. The scoring is deliberately complex to reward repeat play and adaptation. Most players win by focusing on one or two seasonal rules and accepting weak scores in others.`,
+The game ends after 12 rolls (or earlier if all 16 cells are filled). Maximum reachable depends on a balanced spread; aim for 50-80 in a strong run.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as CartographersBaseSettings),
+  initialState: (seed, s) => initialState(seed, s as CartographersBaseSettings),
   reducer,
   isTerminal,
   component: CartographersBaseGame,

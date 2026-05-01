@@ -14,20 +14,29 @@ export function SimonPatternGame({ state, dispatch, onGameOver }: GameProps<Simo
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="rx-wrap"><div className="rx-done"><h2>Time's Up!</h2><div>Hits: {state.hits} / Misses: {state.misses}</div><div className="rx-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="simrx-wrap">
+        <div className="simrx-done">
+          <h2>Time's Up!</h2>
+          <div className="simrx-stats">Hits: {state.hits} / Misses: {state.misses}</div>
+          <div className="simrx-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="rx-wrap">
-      <div className="rx-header">
-        <span className="rx-info">Hits: {state.hits}</span>
-        <span className="rx-timer">{state.ticksRemaining}s</span>
-        <span className="rx-score">{state.score} pts</span>
+    <div className="simrx-wrap">
+      <div className="simrx-header">
+        <span className="simrx-info">Hits: {state.hits}</span>
+        <span className="simrx-timer">{state.ticksRemaining}s</span>
+        <span className="simrx-score">{state.score} pts</span>
       </div>
-      <div className="rx-prompt">Tap when the rhythm calls for action!</div>
+      <div className="simrx-prompt">Watch for the GO beat — tap on rhythm!</div>
       <button
-        className={`rx-stage ${state.isGo ? "go" : "nogo"}`}
+        className={`simrx-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as SimonPatternAction)}
-        aria-label="react">🎵</button>
+        aria-label="react">{state.isGo ? "🎵" : "🔇"}</button>
+      <div className="simrx-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
     </div>
   );
 }

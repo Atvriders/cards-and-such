@@ -1,1 +1,74 @@
-@import "../../engines/dicemini/dicemini.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+.ludus12-wrap {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  max-width: 880px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+.ludus12-status { font-weight: 700; font-size: 1.05rem; color: #5b21b6; }
+.ludus12-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.85rem; }
+.ludus12-info { background: #f3f4f6; padding: 3px 8px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; }
+.ludus12-dicerow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.ludus12-die {
+  width: 38px; height: 38px;
+  background: white; border: 2px solid #5b21b6;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.1rem;
+  color: #5b21b6;
+}
+.ludus12-die-empty { opacity: 0.4; }
+.ludus12-dleft { font-family: 'JetBrains Mono', monospace; color: #6b7280; font-size: 0.85rem; }
+.ludus12-btn {
+  padding: 8px 14px; border: none; border-radius: 8px;
+  font-weight: 700; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.ludus12-btn-roll { background: #5b21b6; color: white; }
+.ludus12-btn-roll:hover { filter: brightness(1.1); }
+.ludus12-btn-end { background: #6b7280; color: white; }
+.ludus12-btn-end:hover { background: #4b5563; }
+.ludus12-board {
+  display: grid; grid-template-rows: 1fr 1fr; gap: 4px;
+  background: #78350f;
+  padding: 6px; border-radius: 10px;
+  border: 4px solid #92400e;
+}
+.ludus12-half { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(28px, 1fr); gap: 2px; }
+.ludus12-point {
+  background: #fef3c7; min-height: 110px;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding: 4px 2px; border-radius: 4px;
+  position: relative;
+}
+.ludus12-point.ludus12-even { background: #fed7aa; }
+.ludus12-point.ludus12-odd { background: #fef3c7; }
+.ludus12-point-num { font-size: 0.65rem; color: #78350f; font-family: 'JetBrains Mono', monospace; }
+.ludus12-stack { display: flex; flex-direction: column; gap: 1px; align-items: center; }
+.ludus12-chk {
+  width: 14px; height: 14px; border-radius: 50%;
+  display: inline-block;
+}
+.ludus12-chk-p { background: #f9fafb; border: 2px solid #111827; }
+.ludus12-chk-c { background: #111827; border: 2px solid #f9fafb; }
+.ludus12-pin { font-size: 0.55rem; color: #5b21b6; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+.ludus12-movehint { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; margin-top: 2px; }
+.ludus12-movebtn {
+  background: #5b21b6; color: white; border: none;
+  padding: 1px 5px; border-radius: 3px; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700;
+}
+.ludus12-movebtn:hover { filter: brightness(1.15); }
+.ludus12-bar { display: flex; gap: 12px; padding: 6px; background: #1f2937; color: white; border-radius: 6px; font-family: 'JetBrains Mono', monospace; }
+.ludus12-bar-p { color: #f9fafb; }
+.ludus12-bar-c { color: #d1d5db; }
+.ludus12-banner { font-size: 1.5rem; font-weight: 800; }
+.ludus12-win { color: #16a34a; }
+.ludus12-loss { color: #dc2626; }
+.ludus12-score { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
+.ludus12-info-line { color: #6b7280; font-size: 0.8rem; }

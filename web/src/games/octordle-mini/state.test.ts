@@ -1,44 +1,36 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, scoreGuess, NUM_BOARDS, MAX_GUESSES } from "./state.js";
 import type { OctordleMiniSettings } from "./state.js";
 
-const S: OctordleMiniSettings = { rounds: "5" };
+const S: OctordleMiniSettings = { rounds: "8" };
 
-describe("octordle-mini", () => {
-  it("creates the requested number of rounds", () => {
-    const s = initialState(1, S);
-    expect(s.rounds.length).toBeGreaterThanOrEqual(4);
-    expect(s.rounds.length).toBeLessThanOrEqual(5);
+describe("OctordleMiniState", () => {
+  it("creates the right number of distinct answers", () => {
+    const s = initialState(2, S);
+    expect(s.answers.length).toBe(NUM_BOARDS);
+    expect(new Set(s.answers).size).toBe(NUM_BOARDS);
   });
-  it("starts in playing phase with score 0", () => {
-    const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.score).toBe(0);
+  it("scoreGuess marks correct positions", () => {
+    const tiles = scoreGuess("APPLE", "APPLE");
+    expect(tiles.every(t => t === "correct")).toBe(true);
   });
-  it("submitting correct answer awards positive score", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const s2 = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(100);
-    expect(s2.correctCount).toBeGreaterThanOrEqual(1);
+  it("typing accumulates current input", () => {
+    let s = initialState(2, S);
+    s = reducer(s, { type: "key", ch: "C" });
+    s = reducer(s, { type: "key", ch: "R" });
+    expect(s.current).toBe("CR");
   });
-  it("submitting wrong answer does not increment score", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const wrong = ((r.correct + 1) % 4) as 0 | 1 | 2 | 3;
-    const s2 = reducer(reducer(s, { type: "select", choice: wrong }), { type: "submit" });
-    expect(s2.score).toBe(0);
-  });
-  it("isTerminal is null while playing and returns score when done", () => {
-    let s = initialState(1, S);
-    expect(isTerminal(s)).toBeNull();
-    while (s.phase !== "done") {
-      const r = s.rounds[s.currentIndex]!;
-      s = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
-      s = reducer(s, { type: "next" });
+  it("solving all boards wins", () => {
+    let s = initialState(2, S);
+    for (const ans of s.answers) {
+      for (const ch of ans) s = reducer(s, { type: "key", ch });
+      s = reducer(s, { type: "enter" });
+      if (s.status === "won") break;
     }
-    const t = isTerminal(s);
-    expect(t).not.toBeNull();
-    expect(t!.score).toBeGreaterThanOrEqual(0);
+    expect(s.status === "won" || s.guesses.length === MAX_GUESSES).toBe(true);
+  });
+  it("isTerminal returns null while playing", () => {
+    const s = initialState(2, S);
+    expect(isTerminal(s)).toBeNull();
   });
 });

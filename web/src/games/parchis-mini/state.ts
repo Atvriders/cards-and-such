@@ -1,141 +1,218 @@
+// Auto-generated race-game state for parchis-mini.
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TRACK = 36;
-export const CHECKERS = 3;
+export const TRACK_LEN = 36;
+export const PAWNS_PER_SIDE = 3;
+export const SINGLE_DIE = false;
+export const MUST_ROLL_6 = false;
 
-export interface RaceSettings { dummy: boolean }
+export type SpecialKind = "safe" | "slide" | "snake" | "ladder" | "hub";
+export interface Special { type: SpecialKind; to?: number }
+export const SPECIALS: Record<number, Special> = {6: {type:"safe"},12: {type:"safe"},18: {type:"safe"},24: {type:"safe"},30: {type:"safe"}};
+
 export type Side = "P" | "C";
+export interface ParchisMiniSettings { dummy: boolean }
 
-export interface RaceState {
+export interface ParchisMiniState {
   rngSeed: number;
-  pPositions: number[];
-  cPositions: number[];
-  dice: [number, number];
-  diceUsed: [boolean, boolean];
+  pPos: number[]; // pawn positions: 0 = start (off-board for must-roll-6), TRACK_LEN = home
+  cPos: number[];
+  dice: number[];
+  diceLeft: number[];
   turn: Side;
-  winner: Side | null;
   phase: "rolling" | "moving" | "done";
+  winner: Side | null;
   score: number;
+  lastBumped: Side | null; // visual feedback for capture
 }
 
-export type RaceAction =
+export type ParchisMiniAction =
   | { type: "roll" }
-  | { type: "move"; checkerIdx: number; die: 0 | 1 | 2 }
+  | { type: "move"; pawnIdx: number; pips: number }
   | { type: "endTurn" };
 
-function rollDice(seed: number): { d: [number, number]; nextSeed: number } {
+function rollOne(seed: number): { v: number; nextSeed: number } {
   const rng = mulberry32(seed);
-  const d1 = Math.floor(rng() * 6) + 1;
-  const d2 = Math.floor(rng() * 6) + 1;
-  return { d: [d1, d2] as [number, number], nextSeed: Math.floor(rng() * 2 ** 31) };
+  const v = 1 + Math.floor(rng() * 6);
+  return { v, nextSeed: Math.floor(rng() * 2 ** 31) };
 }
 
-export function initialState(seed: number, _s: RaceSettings): RaceState {
+export function initialState(seed: number, _s: ParchisMiniSettings): ParchisMiniState {
   return {
     rngSeed: seed,
-    pPositions: Array.from({ length: CHECKERS }, () => 0),
-    cPositions: Array.from({ length: CHECKERS }, () => 0),
-    dice: [0, 0],
-    diceUsed: [true, true],
-    turn: "P",
-    winner: null,
-    phase: "rolling",
-    score: 0,
+    pPos: Array.from({ length: PAWNS_PER_SIDE }, () => MUST_ROLL_6 ? -1 : 0),
+    cPos: Array.from({ length: PAWNS_PER_SIDE }, () => MUST_ROLL_6 ? -1 : 0),
+    dice: [], diceLeft: [],
+    turn: "P", phase: "rolling", winner: null, score: 0,
+    lastBumped: null,
   };
+}
+
+function applySpecials(pos: number): number {
+  const sp = SPECIALS[pos];
+  if (!sp) return pos;
+  if (sp.type === "snake" || sp.type === "ladder" || sp.type === "slide" || sp.type === "hub") {
+    return sp.to ?? pos;
+  }
+  return pos;
+}
+
+function tryMovePawn(positions: number[], idx: number, pips: number): number[] | null {
+  if (idx < 0 || idx >= positions.length) return null;
+  const cur = positions[idx]!;
+  if (cur >= TRACK_LEN) return null; // already home
+  if (cur === -1) {
+    // Off-board, need 6 to enter
+    if (!MUST_ROLL_6 || pips !== 6) return null;
+    const out = positions.slice();
+    out[idx] = 1;
+    return out;
+  }
+  const target = cur + pips;
+  if (target > TRACK_LEN) return null; // overshoot — must land exactly
+  const final = applySpecials(target);
+  const out = positions.slice();
+  out[idx] = Math.min(TRACK_LEN, final);
+  return out;
+}
+
+function bumpOpponent(side: Side, position: number, oppPos: number[]): { next: number[]; bumped: boolean } {
+  if (position <= 0 || position >= TRACK_LEN) return { next: oppPos, bumped: false };
+  // Safe square check
+  const sp = SPECIALS[position];
+  if (sp && sp.type === "safe") return { next: oppPos, bumped: false };
+  let bumped = false;
+  const next = oppPos.map(p => {
+    if (p === position) { bumped = true; return MUST_ROLL_6 ? -1 : 0; }
+    return p;
+  });
+  void side;
+  return { next, bumped };
+}
+
+function allHome(positions: number[]): boolean {
+  return positions.every(p => p >= TRACK_LEN);
 }
 
 function pipDistance(positions: number[]): number {
   let total = 0;
-  for (const p of positions) total += (TRACK - p);
+  for (const p of positions) total += (TRACK_LEN - Math.max(0, p));
   return total;
 }
 
-function allBorneOff(positions: number[]): boolean {
-  return positions.every((p) => p >= TRACK);
-}
-
-function moveChecker(positions: number[], idx: number, pips: number): number[] | null {
-  if (idx < 0 || idx >= positions.length) return null;
-  const cur = positions[idx]!;
-  if (cur >= TRACK) return null;
-  const np = Math.min(TRACK, cur + pips);
-  const out = positions.slice();
-  out[idx] = np;
-  return out;
-}
-
-function cpuTurn(state: RaceState): RaceState {
-  let s = { ...state };
-  const roll = rollDice(s.rngSeed);
-  s.rngSeed = roll.nextSeed;
-  s.dice = roll.d;
-  s.diceUsed = [false, false];
-  for (let dIdx = 0; dIdx < 2; dIdx++) {
-    const die = s.dice[dIdx]!;
-    const rng = mulberry32(s.rngSeed);
-    const eligible: number[] = [];
-    for (let i = 0; i < s.cPositions.length; i++) if (s.cPositions[i]! < TRACK) eligible.push(i);
-    if (eligible.length === 0) break;
-    const pick = eligible[Math.floor(rng() * eligible.length)]!;
-    s.rngSeed = Math.floor(rng() * 2 ** 31);
-    const np = moveChecker(s.cPositions, pick, die);
-    if (np) s.cPositions = np;
+function checkWin(s: ParchisMiniState): ParchisMiniState {
+  if (allHome(s.pPos)) {
+    const diff = pipDistance(s.cPos) - 0;
+    return { ...s, winner: "P", phase: "done", score: 100 + Math.max(0, diff) };
   }
-  s.diceUsed = [true, true];
-  if (allBorneOff(s.cPositions)) {
-    s.winner = "C";
-    s.phase = "done";
-    const diff = pipDistance(s.pPositions) - pipDistance(s.cPositions);
-    s.score = Math.max(0, -diff);
-    return s;
+  if (allHome(s.cPos)) {
+    return { ...s, winner: "C", phase: "done", score: 0 };
   }
-  s.turn = "P";
-  s.phase = "rolling";
   return s;
 }
 
-export function reducer(state: RaceState, action: RaceAction): RaceState {
+function cpuTurn(state: ParchisMiniState): ParchisMiniState {
+  let s = state;
+  const r = rollOne(s.rngSeed);
+  let dice = [r.v];
+  let seed = r.nextSeed;
+  if (!SINGLE_DIE) {
+    const r2 = rollOne(seed);
+    dice.push(r2.v);
+    seed = r2.nextSeed;
+  }
+  s = { ...s, rngSeed: seed, dice };
+
+  // Greedy CPU: prefer pawn furthest from home that can move
+  for (const pips of dice) {
+    const eligible: number[] = [];
+    for (let i = 0; i < s.cPos.length; i++) {
+      const trial = tryMovePawn(s.cPos, i, pips);
+      if (trial) eligible.push(i);
+    }
+    if (eligible.length === 0) continue;
+    // pick smallest position (furthest from home)
+    eligible.sort((a, b) => s.cPos[a]! - s.cPos[b]!);
+    const pick = eligible[0]!;
+    const moved = tryMovePawn(s.cPos, pick, pips);
+    if (moved) {
+      const newPos = moved[pick]!;
+      const bump = bumpOpponent("C", newPos, s.pPos);
+      s = { ...s, cPos: moved, pPos: bump.next, lastBumped: bump.bumped ? "P" : s.lastBumped };
+    }
+    const w = checkWin(s);
+    if (w.phase === "done") return w;
+  }
+
+  return { ...s, turn: "P", phase: "rolling", dice: [], diceLeft: [] };
+}
+
+export function legalMovesForP(state: ParchisMiniState): { pawnIdx: number; pips: number }[] {
+  const out: { pawnIdx: number; pips: number }[] = [];
+  for (const pips of state.diceLeft) {
+    for (let i = 0; i < state.pPos.length; i++) {
+      const t = tryMovePawn(state.pPos, i, pips);
+      if (t) out.push({ pawnIdx: i, pips });
+    }
+  }
+  return out;
+}
+
+export function reducer(state: ParchisMiniState, action: ParchisMiniAction): ParchisMiniState {
   if (state.phase === "done") return state;
 
   if (action.type === "roll" && state.turn === "P" && state.phase === "rolling") {
-    const r = rollDice(state.rngSeed);
-    return { ...state, rngSeed: r.nextSeed, dice: r.d, diceUsed: [false, false], phase: "moving" };
+    const r = rollOne(state.rngSeed);
+    let dice = [r.v];
+    let seed = r.nextSeed;
+    if (!SINGLE_DIE) {
+      const r2 = rollOne(seed);
+      dice.push(r2.v);
+      seed = r2.nextSeed;
+    }
+    const next: ParchisMiniState = {
+      ...state, rngSeed: seed,
+      dice, diceLeft: dice.slice(), phase: "moving"
+    };
+    const moves = legalMovesForP(next);
+    if (moves.length === 0) {
+      const cpu = cpuTurn({ ...next, diceLeft: [] });
+      return checkWin(cpu);
+    }
+    return next;
   }
 
   if (action.type === "move" && state.turn === "P" && state.phase === "moving") {
-    const dieIdx = action.die;
-    let pips = 0;
-    let usedFlags = state.diceUsed.slice() as [boolean, boolean];
-    if (dieIdx === 0 && !usedFlags[0]) { pips = state.dice[0]; usedFlags[0] = true; }
-    else if (dieIdx === 1 && !usedFlags[1]) { pips = state.dice[1]; usedFlags[1] = true; }
-    else if (dieIdx === 2 && !usedFlags[0] && !usedFlags[1]) {
-      pips = state.dice[0] + state.dice[1];
-      usedFlags = [true, true];
-    } else return state;
-
-    const np = moveChecker(state.pPositions, action.checkerIdx, pips);
-    if (!np) return state;
-    let s: RaceState = { ...state, pPositions: np, diceUsed: usedFlags };
-    if (allBorneOff(s.pPositions)) {
-      const diff = pipDistance(s.cPositions) - pipDistance(s.pPositions);
-      return { ...s, winner: "P", phase: "done", score: 100 + Math.max(0, diff) };
+    const dieIdx = state.diceLeft.indexOf(action.pips);
+    if (dieIdx === -1) return state;
+    const moved = tryMovePawn(state.pPos, action.pawnIdx, action.pips);
+    if (!moved) return state;
+    const newPos = moved[action.pawnIdx]!;
+    const bump = bumpOpponent("P", newPos, state.cPos);
+    const remaining = state.diceLeft.slice();
+    remaining.splice(dieIdx, 1);
+    let next: ParchisMiniState = {
+      ...state, pPos: moved, cPos: bump.next, diceLeft: remaining,
+      lastBumped: bump.bumped ? "C" : state.lastBumped,
+    };
+    const won = checkWin(next);
+    if (won.phase === "done") return won;
+    const moves = legalMovesForP(won);
+    if (won.diceLeft.length === 0 || moves.length === 0) {
+      const cpu = cpuTurn({ ...won, diceLeft: [] });
+      return checkWin(cpu);
     }
-    if (usedFlags[0] && usedFlags[1]) {
-      s = { ...s, turn: "C", phase: "rolling" };
-      s = cpuTurn(s);
-    }
-    return s;
+    return won;
   }
 
   if (action.type === "endTurn" && state.turn === "P") {
-    let s: RaceState = { ...state, turn: "C", phase: "rolling", diceUsed: [true, true] };
-    s = cpuTurn(s);
-    return s;
+    const cpu = cpuTurn({ ...state, diceLeft: [] });
+    return checkWin(cpu);
   }
 
   return state;
 }
 
-export function isTerminal(state: RaceState): { score: number } | null {
+export function isTerminal(state: ParchisMiniState): { score: number } | null {
   return state.phase === "done" ? { score: state.score } : null;
 }

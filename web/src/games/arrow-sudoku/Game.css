@@ -1,0 +1,27 @@
+.arrowsudoku-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.arrowsudoku-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.arrowsudoku-score { font-weight:700;color:hsl(320, 60%, 40%); }
+.arrowsudoku-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.arrowsudoku-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.arrowsudoku-row { display:flex;gap:1px; }
+.arrowsudoku-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.arrowsudoku-cell.given { background:#ecf0f1;color:#2c3e50; }
+.arrowsudoku-cell.sel { background:hsl(320, 65%, 55%);color:#fff; }
+.arrowsudoku-cell.err { background:#fdedec;color:#e74c3c; }
+.arrowsudoku-cell.rt { margin-right:3px; }
+.arrowsudoku-cell.bt { margin-bottom:3px; }
+.arrowsudoku-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.arrowsudoku-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.arrowsudoku-num:hover { background:hsl(320, 70%, 92%);border-color:hsl(320, 60%, 55%); }
+.arrowsudoku-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.arrowsudoku-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.arrowsudoku-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.arrowsudoku-btn.check { background:#3498db; }
+.arrowsudoku-btn.hint { background:#f39c12; }
+.arrowsudoku-btn.next { background:hsl(320, 60%, 45%); }
+.arrowsudoku-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.arrowsudoku-status { font-weight:700;font-size:1rem; }
+.arrowsudoku-status.solved { color:#27ae60; }
+.arrowsudoku-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.arrowsudoku-done h2 { margin-bottom:6px;color:#2c3e50; }
+.arrowsudoku-final { font-size:1.6rem;font-weight:900;color:hsl(320, 60%, 40%); }

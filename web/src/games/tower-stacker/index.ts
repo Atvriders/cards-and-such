@@ -3,7 +3,7 @@ import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TowerStackerState, TowerStackerAction, TowerStackerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TowerStackerGame } from "./Game.js";
-const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const towerStackerPlugin: GamePlugin<TowerStackerState, TowerStackerAction, typeof settings> = {
   id:"tower-stacker", title:"Tower Stacker", category:"arcade",

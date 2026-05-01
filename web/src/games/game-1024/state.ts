@@ -1,140 +1,134 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-// 1024 Match: 6x6 match-3 with 60s timer.
-// Click two adjacent cells to swap; 3+ in a row clears and gives points.
+// 1024: 4x4 sliding tiles. Arrow keys slide+merge tiles. Reach 1024 to win.
 
-export const ROWS = 6;
-export const COLS = 6;
-export const TIMER_TICKS = 60;
-export const NUM_COLORS = 5;
+export const SIZE = 4;
+export const TARGET = 1024;
 
 export interface Game1024Settings { dummy: boolean; }
-
-export type Cell = number;
+export type Cell = number; // 0 = empty, else power-of-2
 export type Grid = Cell[][];
 
 export interface Game1024State {
   rngSeed: number;
   grid: Grid;
-  selected: [number, number] | null;
-  ticksRemaining: number;
   score: number;
-  matches: number;
-  phase: "playing" | "done";
+  moves: number;
+  best: number;
+  phase: "playing" | "won" | "done";
 }
 
-export type Game1024Action =
-  | { type: "tick" }
-  | { type: "select"; row: number; col: number };
+export type Direction = "up" | "down" | "left" | "right";
+export type Game1024Action = { type: "slide"; dir: Direction };
 
-function randomGem(rng: () => number): number { return Math.floor(rng() * NUM_COLORS); }
+function randInt(rng: () => number, n: number): number { return Math.floor(rng() * n); }
 
-function makeGrid(seed: number): { grid: Grid; nextSeed: number } {
-  const rng = mulberry32(seed);
-  let grid: Grid;
-  let attempts = 0;
-  do {
-    grid = Array.from({ length: ROWS }, () => Array.from({ length: COLS }, () => randomGem(rng)));
-    attempts++;
-  } while (findMatches(grid).size > 0 && attempts < 20);
-  const nextSeed = (seed * 1664525 + 1013904223) >>> 0;
-  return { grid, nextSeed };
+function emptyGrid(): Grid {
+  return Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => 0));
 }
 
-function findMatches(grid: Grid): Set<string> {
-  const matched = new Set<string>();
-  for (let r = 0; r < ROWS; r++) {
-    let c = 0;
-    while (c < COLS) {
-      const color = grid[r]![c]!;
-      let len = 1;
-      while (c + len < COLS && grid[r]![c + len] === color) len++;
-      if (len >= 3) for (let k = 0; k < len; k++) matched.add(`${r},${c + k}`);
-      c += len;
-    }
-  }
-  for (let c = 0; c < COLS; c++) {
-    let r = 0;
-    while (r < ROWS) {
-      const color = grid[r]![c]!;
-      let len = 1;
-      while (r + len < ROWS && grid[r + len]![c] === color) len++;
-      if (len >= 3) for (let k = 0; k < len; k++) matched.add(`${r + k},${c}`);
-      r += len;
-    }
-  }
-  return matched;
-}
-
-function clearAndRefill(grid: Grid, rng: () => number): { newGrid: Grid; cleared: number } {
-  const matched = findMatches(grid);
-  if (matched.size === 0) return { newGrid: grid, cleared: 0 };
+function spawnTile(grid: Grid, rng: () => number): Grid {
+  const empties: [number, number][] = [];
+  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) if (grid[r]![c] === 0) empties.push([r, c]);
+  if (empties.length === 0) return grid;
+  const pick = empties[randInt(rng, empties.length)]!;
+  const value = rng() < 0.9 ? 2 : 4;
   const next = grid.map(row => [...row]);
-  for (const key of matched) {
-    const parts = key.split(",");
-    const r = parseInt(parts[0]!, 10);
-    const c = parseInt(parts[1]!, 10);
-    next[r]![c] = -1;
-  }
-  // gravity
-  for (let c = 0; c < COLS; c++) {
-    const stack: number[] = [];
-    for (let r = ROWS - 1; r >= 0; r--) {
-      if (next[r]![c] !== -1) stack.push(next[r]![c]!);
+  next[pick[0]]![pick[1]] = value;
+  return next;
+}
+
+function slideRowLeft(row: Cell[]): { row: Cell[]; gained: number } {
+  const filtered = row.filter(v => v !== 0);
+  const merged: Cell[] = [];
+  let gained = 0;
+  let i = 0;
+  while (i < filtered.length) {
+    if (i + 1 < filtered.length && filtered[i] === filtered[i + 1]) {
+      const v = filtered[i]! * 2;
+      merged.push(v);
+      gained += v;
+      i += 2;
+    } else {
+      merged.push(filtered[i]!);
+      i++;
     }
-    for (let r = ROWS - 1; r >= 0; r--) {
-      next[r]![c] = stack.length > 0 ? stack.shift()! : randomGem(rng);
-    }
   }
-  return { newGrid: next, cleared: matched.size };
+  while (merged.length < SIZE) merged.push(0);
+  return { row: merged, gained };
+}
+
+function reverseRow(row: Cell[]): Cell[] { return [...row].reverse(); }
+
+function transpose(grid: Grid): Grid {
+  const out = emptyGrid();
+  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) out[c]![r] = grid[r]![c]!;
+  return out;
+}
+
+function slideGrid(grid: Grid, dir: Direction): { grid: Grid; gained: number; moved: boolean } {
+  let g = grid.map(r => [...r]);
+  if (dir === "up") g = transpose(g);
+  if (dir === "down") g = transpose(g).map(reverseRow);
+  if (dir === "right") g = g.map(reverseRow);
+  let gained = 0;
+  let moved = false;
+  const out = g.map(row => {
+    const r = slideRowLeft(row);
+    gained += r.gained;
+    if (r.row.some((v, i) => v !== row[i])) moved = true;
+    return r.row;
+  });
+  let final = out;
+  if (dir === "up") final = transpose(final);
+  if (dir === "down") final = transpose(final.map(reverseRow));
+  if (dir === "right") final = final.map(reverseRow);
+  return { grid: final, gained, moved };
+}
+
+function maxTile(grid: Grid): number {
+  let m = 0;
+  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) if (grid[r]![c]! > m) m = grid[r]![c]!;
+  return m;
+}
+
+function hasMoves(grid: Grid): boolean {
+  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) {
+    if (grid[r]![c] === 0) return true;
+    if (c + 1 < SIZE && grid[r]![c] === grid[r]![c + 1]) return true;
+    if (r + 1 < SIZE && grid[r]![c] === grid[r + 1]![c]) return true;
+  }
+  return false;
 }
 
 export function initialState(seed: number, _settings: Game1024Settings): Game1024State {
-  const { grid, nextSeed } = makeGrid(seed);
-  return { rngSeed: nextSeed, grid, selected: null, ticksRemaining: TIMER_TICKS, score: 0, matches: 0, phase: "playing" };
+  const rng = mulberry32(seed);
+  let grid = emptyGrid();
+  grid = spawnTile(grid, rng);
+  grid = spawnTile(grid, rng);
+  const nextSeed = Math.floor(rng() * 2 ** 31);
+  return { rngSeed: nextSeed, grid, score: 0, moves: 0, best: maxTile(grid), phase: "playing" };
 }
 
 export function reducer(state: Game1024State, action: Game1024Action): Game1024State {
-  if (state.phase === "done") return state;
-  if (action.type === "tick") {
-    const ticksRemaining = state.ticksRemaining - 1;
-    const phase = ticksRemaining <= 0 ? "done" : "playing";
-    return { ...state, ticksRemaining, phase };
-  }
-  if (action.type === "select") {
-    const { row, col } = action;
-    if (!state.selected) return { ...state, selected: [row, col] };
-    const [sr, sc] = state.selected;
-    const dr = Math.abs(row - sr);
-    const dc = Math.abs(col - sc);
-    const adjacent = (dr === 1 && dc === 0) || (dr === 0 && dc === 1);
-    if (!adjacent) return { ...state, selected: [row, col] };
-    const newGrid = state.grid.map(r => [...r]);
-    const tmp = newGrid[sr]![sc]!;
-    newGrid[sr]![sc] = newGrid[row]![col]!;
-    newGrid[row]![col] = tmp;
-    const matches = findMatches(newGrid);
-    if (matches.size === 0) return { ...state, selected: null };
+  if (state.phase !== "playing") return state;
+  if (action.type === "slide") {
+    const { grid, gained, moved } = slideGrid(state.grid, action.dir);
+    if (!moved) return state;
     const rng = mulberry32(state.rngSeed);
-    let grid = newGrid;
-    let totalCleared = 0;
-    let cascades = 0;
-    while (true) {
-      const result = clearAndRefill(grid, rng);
-      if (result.cleared === 0) break;
-      totalCleared += result.cleared;
-      cascades++;
-      grid = result.newGrid;
-      if (cascades > 12) break;
-    }
-    const newSeed = (state.rngSeed * 1664525 + 1013904223) >>> 0;
-    return { ...state, grid, selected: null, score: state.score + totalCleared * 10, matches: state.matches + 1, rngSeed: newSeed };
+    const next = spawnTile(grid, rng);
+    const seed2 = Math.floor(rng() * 2 ** 31);
+    const best = Math.max(state.best, maxTile(next));
+    let phase: "playing" | "won" | "done" = "playing";
+    if (best >= TARGET && state.phase !== "won") phase = "won";
+    if (!hasMoves(next)) phase = "done";
+    return { ...state, rngSeed: seed2, grid: next, score: state.score + gained, moves: state.moves + 1, best, phase };
   }
   return state;
 }
 
 export function isTerminal(state: Game1024State): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+  return state.phase === "done" || state.phase === "won" ? { score: state.score } : null;
 }
 
-export { findMatches };
+export { slideGrid, hasMoves, maxTile };

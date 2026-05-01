@@ -1,22 +1,35 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { QwixxConnectedState, QwixxConnectedAction } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { QwixxConnectedState, QwixxConnectedAction, QwixxConnectedSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { QwixxConnected } from "./Game.js";
+import { QwixxConnectedGame } from "./Game.js";
 
-const settings = {
-  rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
-} as const;
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+type S = SettingsOf<typeof settings>;
 
 export const qwixxConnectedPlugin: GamePlugin<QwixxConnectedState, QwixxConnectedAction, typeof settings> = {
   id: "qwixx-connected",
   title: "Qwixx Connected",
   category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Connected Qwixx variant where rows share marks.",
-  howToPlay: "Qwixx Connected is a quick solo dice game. Connected Qwixx variant where rows share marks. Each round you roll five six-sided dice and score points based on the round's special twist: Roll 5 dice, mark a row of choice; bonus for chains across rows.\n\nPress the Roll button to throw all five dice. After they land you'll see the round's calculated score added to your total. Some rounds may pay nothing if the dice don't match the pattern; others can pay a hefty bonus.\n\nAim for the highest cumulative total over ten rounds. Strategy comes from understanding which patterns are most likely to score well — sums and matching pairs/triples are the most common scoring elements.\n\nWhen the tenth round ends, your final score is logged. Compare runs against your previous high scores. The dice are seeded so each session is reproducible — return to the exact same sequence by replaying with the same seed.\n\nSingle-player only. No CPU opponent — just you, the dice, and the scoring rules. A great filler for two minutes of casual play, with a satisfying push for higher and higher scores as you learn the patterns.",
+  description: "Qwixx with linked rows — values must connect strictly ascending.",
+  howToPlay: `Qwixx Connected is a strict-ascending placement dice game.
+
+How to play
+1. Press Roll for a d6.
+2. Place the number into any slot in any of the 3 rows of 5 — but each row must remain strictly ascending.
+3. Place gives die value + adjacency bonus (+2 if a neighbor is exactly one less or more).
+4. Skip if no legal slot — costs −1 to score.
+
+Theme: Strictly increasing chain.
+
+End-of-game bonuses
+- Each completed row: +6
+- Full board: +10
+
+Game ends after 12 rolls or when all 15 slots are filled. Strong runs reach 60-100.`,
   settings,
-  initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
+  initialState: (seed, s) => initialState(seed, s as QwixxConnectedSettings),
   reducer,
   isTerminal,
-  component: QwixxConnected,
+  component: QwixxConnectedGame,
 };

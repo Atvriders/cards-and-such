@@ -1,46 +1,105 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export const TOTAL_ROUNDS = 15;
-export interface AtlanticCityBjCasSettings { dummy: boolean; }
-export interface AtlanticCityBjCasState { rngSeed: number; round: number; cardA: number | null; cardB: number | null; cardC: number | null; phase: "ready" | "scored" | "done"; score: number; pts: number; result: string; }
-export type AtlanticCityBjCasAction = { type: "play" } | { type: "next" };
-export function cardName(c: number): string { const r = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"]; const s = ["♠","♥","♦","♣"]; return r[c % 13]! + s[Math.floor(c / 13)]!; }
-export function isRed(c: number): boolean { const s = Math.floor(c / 13); return s === 1 || s === 2; }
-function rankOf(c: number): number { return c % 13; }
-function drawCard(rng: () => number, used: Set<number>): number { while (true) { const c = Math.floor(rng() * 52); if (!used.has(c)) { used.add(c); return c; } } }
+import {
+  bjTotal, bjCardName, bjIsRed, drawCard, dealerPlay, settleHand, makeRng,
+} from "../_shared/blackjack-engine.js";
+
+export const TOTAL_ROUNDS = 12;
+export interface AtlanticCityBjCasSettings { dummy: boolean }
+export interface AtlanticCityBjCasState {
+  rngSeed: number;
+  round: number;
+  you: number[];
+  dealer: number[];
+  phase: "play" | "scored" | "done";
+  score: number;
+  pts: number;
+  result: string;
+  yourTotal: number;
+  dealerTotal: number;
+  surrendered: boolean;
+}
+export type AtlanticCityBjCasAction = { type: "hit" } | { type: "stand" } | { type: "double" } | { type: "surrender" } | { type: "next" };
+
+export const cardName = bjCardName;
+export const isRed = bjIsRed;
+
+function freshDeal(seed: number): { you: number[]; dealer: number[]; nextSeed: number } {
+  const { rng, nextSeed } = makeRng(seed);
+  const used = new Set<number>();
+  const filterTen = false;
+  const draw = () => {
+    while (true) {
+      const c = drawCard(rng, used);
+      if (filterTen && (c % 13) === 9) { used.delete(c); continue; }
+      return c;
+    }
+  };
+  const you = [draw(), draw()];
+  const dealer = [draw(), draw()];
+  return { you, dealer, nextSeed };
+}
 
 export function initialState(seed: number, _s: AtlanticCityBjCasSettings): AtlanticCityBjCasState {
-  return { rngSeed: seed, round: 1, cardA: null, cardB: null, cardC: null, phase: "ready", score: 0, pts: 0, result: "" };
+  const { you, dealer, nextSeed } = freshDeal(seed);
+  return {
+    rngSeed: nextSeed, round: 1, you, dealer, phase: "play",
+    score: 0, pts: 0, result: "",
+    yourTotal: bjTotal(you), dealerTotal: bjTotal(dealer.slice(0, 1)),
+    surrendered: false,
+  };
 }
+
 export function reducer(state: AtlanticCityBjCasState, action: AtlanticCityBjCasAction): AtlanticCityBjCasState {
   if (state.phase === "done") return state;
-  if (action.type === "play") {
-    if (state.phase !== "ready") return state;
-    const rng = mulberry32(state.rngSeed);
-    const used = new Set<number>();
-    const a = drawCard(rng, used);
-    const b = drawCard(rng, used);
+
+  if (action.type === "hit" && state.phase === "play") {
+    const { rng, nextSeed } = makeRng(state.rngSeed);
+    const used = new Set<number>([...state.you, ...state.dealer]);
     const c = drawCard(rng, used);
-    const ra = rankOf(a), rb = rankOf(b), rc = rankOf(c);
-    let pts = 0; let result = "";
-    const total = ra + rb + rc;
-    const youHand = ra + rc;
-    const dealerHand = rb + Math.floor(rng() * 5);
-    if (ra === rb && rb === rc) { pts = 50; result = `Trips bonus! +${pts}`; }
-    else if (ra === rb || rb === rc || ra === rc) { pts = 20; result = `Pair +${pts}`; }
-    else if (total >= 25) { pts = 30; result = `High roll +${pts}`; }
-    else if (youHand > dealerHand) { pts = 18; result = `You win +${pts}`; }
-    else if (youHand === dealerHand) { pts = 6; result = `Push +${pts}`; }
-    else { pts = 0; result = "Lose"; }
-    const next = Math.floor(rng() * 2 ** 31);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: next, cardA: a, cardB: b, cardC: c, pts, result, score: state.score + pts, phase: isLast ? "done" : "scored" };
+    const you = [...state.you, c];
+    const yt = bjTotal(you);
+    if (yt > 21) {
+      const isLast = state.round >= TOTAL_ROUNDS;
+      return { ...state, rngSeed: nextSeed, you, yourTotal: yt, dealerTotal: bjTotal(state.dealer), pts: 0, result: `Bust (${yt})`, phase: isLast ? "done" : "scored" };
+    }
+    return { ...state, rngSeed: nextSeed, you, yourTotal: yt };
   }
-  if (action.type === "next") {
-    if (state.phase !== "scored") return state;
-    return { ...state, round: state.round + 1, cardA: null, cardB: null, cardC: null, pts: 0, result: "", phase: "ready" };
+
+  if (action.type === "double" && state.phase === "play" && state.you.length === 2) {
+    const { rng, nextSeed } = makeRng(state.rngSeed);
+    const used = new Set<number>([...state.you, ...state.dealer]);
+    const c = drawCard(rng, used);
+    const you = [...state.you, c];
+    const yt = bjTotal(you);
+    let dealer = state.dealer;
+    if (yt <= 21) dealer = dealerPlay(state.dealer, rng, used, true);
+    const r = settleHand(you, dealer, { bjPays: 1.5 });
+    const pts = r.pts * 2;
+    const isLast = state.round >= TOTAL_ROUNDS;
+    return { ...state, rngSeed: nextSeed, you, dealer, yourTotal: yt, dealerTotal: bjTotal(dealer), pts, result: "Doubled — " + r.result, score: state.score + pts, phase: isLast ? "done" : "scored" };
+  }
+
+  if (action.type === "surrender" && state.phase === "play" && state.you.length === 2 && true) {
+    const pts = 5;
+    const isLast = state.round >= TOTAL_ROUNDS;
+    return { ...state, pts, result: "Surrendered — half back", score: state.score + pts, phase: isLast ? "done" : "scored", surrendered: true, dealerTotal: bjTotal(state.dealer) };
+  }
+
+  if (action.type === "stand" && state.phase === "play") {
+    const { rng, nextSeed } = makeRng(state.rngSeed);
+    const used = new Set<number>([...state.you, ...state.dealer]);
+    const dealer = dealerPlay(state.dealer, rng, used, true);
+    const r = settleHand(state.you, dealer, { bjPays: 1.5 });
+    const isLast = state.round >= TOTAL_ROUNDS;
+    return { ...state, rngSeed: nextSeed, dealer, yourTotal: bjTotal(state.you), dealerTotal: bjTotal(dealer), pts: r.pts, result: r.result, score: state.score + r.pts, phase: isLast ? "done" : "scored" };
+  }
+
+  if (action.type === "next" && state.phase === "scored") {
+    const { you, dealer, nextSeed } = freshDeal(state.rngSeed);
+    return { ...state, rngSeed: nextSeed, round: state.round + 1, you, dealer, phase: "play", pts: 0, result: "", yourTotal: bjTotal(you), dealerTotal: bjTotal(dealer.slice(0, 1)), surrendered: false };
   }
   return state;
 }
+
 export function isTerminal(state: AtlanticCityBjCasState): { score: number } | null {
   return state.phase === "done" ? { score: state.score } : null;
 }

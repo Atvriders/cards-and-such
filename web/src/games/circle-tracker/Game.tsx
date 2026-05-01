@@ -14,20 +14,29 @@ export function CircleTrackerGame({ state, dispatch, onGameOver }: GameProps<Cir
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="rx-wrap"><div className="rx-done"><h2>Time's Up!</h2><div>Hits: {state.hits} / Misses: {state.misses}</div><div className="rx-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="cirrx-wrap">
+        <div className="cirrx-done">
+          <h2>Time's Up!</h2>
+          <div className="cirrx-stats">Hits: {state.hits} / Misses: {state.misses}</div>
+          <div className="cirrx-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="rx-wrap">
-      <div className="rx-header">
-        <span className="rx-info">Hits: {state.hits}</span>
-        <span className="rx-timer">{state.ticksRemaining}s</span>
-        <span className="rx-score">{state.score} pts</span>
+    <div className="cirrx-wrap">
+      <div className="cirrx-header">
+        <span className="cirrx-info">Hits: {state.hits}</span>
+        <span className="cirrx-timer">{state.ticksRemaining}s</span>
+        <span className="cirrx-score">{state.score} pts</span>
       </div>
-      <div className="rx-prompt">Tap when the target appears. Don't tap when blank!</div>
+      <div className="cirrx-prompt">Track the circle — tap when blue!</div>
       <button
-        className={`rx-stage ${state.isGo ? "go" : "nogo"}`}
+        className={`cirrx-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as CircleTrackerAction)}
-        aria-label="react">🎯</button>
+        aria-label="react">{state.isGo ? "🔵" : "⚫"}</button>
+      <div className="cirrx-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
     </div>
   );
 }

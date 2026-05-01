@@ -1,98 +1,493 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface Puzzle { grid: string; prompt: string; choices: string[]; correct: number; }
+
+export interface Puzzle {
+  given: number[]; // length 25; -1 = blocked, 0 = empty, other = fixed
+  solution: number[]; // length 25
+}
+
 export interface CountryRoadMiniSettings { dummy: boolean; }
-export interface CountryRoadMiniState { puzzles: Puzzle[]; idx: number; selected: number | null; submitted: boolean; score: number; correct: number; phase: "playing"|"result"|"done"; }
-export type CountryRoadMiniAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" };
+
+export interface CountryRoadMiniState {
+  puzzles: Puzzle[];
+  idx: number;
+  current: number[];
+  selected: number | null;
+  errors: number[];
+  hintsUsed: number;
+  movesMade: number;
+  solved: boolean;
+  totalSolved: number;
+  score: number;
+  phase: "playing" | "done";
+  settings: CountryRoadMiniSettings;
+}
+
+export type CountryRoadMiniAction =
+  | { type: "select"; index: number | null }
+  | { type: "enter"; value: number }
+  | { type: "hint" }
+  | { type: "check" }
+  | { type: "next" };
+
+export const GRID_ROWS = 5;
+export const GRID_COLS = 5;
+export const VALUES: readonly number[] = [1,2];
+export const VALUE_LABELS: readonly string[] = ["·","●"];
+
 const PUZZLES: Puzzle[] = [
   {
-    "grid": "L...|L...|L...|L...",
-    "prompt": "Loop fills column 1 (rows 1-4). Closed loop must turn somewhere. Minimum number of regions visited?",
-    "choices": [
-      "1",
-      "2",
-      "3",
-      "4"
+    "given": [
+      0,
+      1,
+      1,
+      2,
+      0,
+      2,
+      0,
+      0,
+      2,
+      2,
+      2,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      2,
+      0,
+      1,
+      2,
+      1,
+      0,
+      0,
+      0
     ],
-    "correct": 0
+    "solution": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
   },
   {
-    "grid": "LL..|.L..|.LL.|...L",
-    "prompt": "Loop visits 7 cells. Closed loops must have ___ cells minimum?",
-    "choices": [
-      "3",
-      "4",
-      "5",
-      "6"
+    "given": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      2,
+      0,
+      1,
+      2,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0,
+      0,
+      2,
+      0,
+      2,
+      1,
+      0,
+      0,
+      0
     ],
-    "correct": 1
+    "solution": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
   },
   {
-    "grid": "....|....|....|....",
-    "prompt": "In a 4x4 grid, the smallest closed loop has how many cells?",
-    "choices": [
-      "2",
-      "3",
-      "4",
-      "5"
+    "given": [
+      1,
+      0,
+      2,
+      2,
+      2,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      2,
+      2,
+      1,
+      0,
+      1,
+      2
     ],
-    "correct": 2
+    "solution": [
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2
+    ]
   },
   {
-    "grid": "LLLL|L..L|L..L|LLLL",
-    "prompt": "Outer loop on a 4x4 grid uses how many cells?",
-    "choices": [
-      "8",
-      "10",
-      "12",
-      "16"
+    "given": [
+      0,
+      1,
+      0,
+      2,
+      2,
+      0,
+      2,
+      2,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0
     ],
-    "correct": 2
+    "solution": [
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2
+    ]
   },
   {
-    "grid": "L.L.|....|....|....",
-    "prompt": "Two separate loop segments in row 1 — is this a valid single loop?",
-    "choices": [
-      "Yes",
-      "No, must be connected",
-      "Only if same color",
-      "Only if same region"
+    "given": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
     ],
-    "correct": 1
+    "solution": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
   },
   {
-    "grid": "....|.LL.|.LL.|....",
-    "prompt": "2x2 block in middle — does this form a valid closed loop?",
-    "choices": [
-      "Yes",
-      "No, loop must run on edges",
-      "Only at borders",
-      "Always"
+    "given": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0
     ],
-    "correct": 0
+    "solution": [
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2
+    ]
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a = [...arr]; for (let i = a.length-1; i > 0; i--) { const j = Math.floor(rng()*(i+1)); [a[i], a[j]] = [a[j]!, a[i]!]; } return a; }
-export function initialState(seed: number, _s: CountryRoadMiniSettings): CountryRoadMiniState {
+
+function shuffle<T>(arr: T[], rng: () => number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
+export function initialState(seed: number, settings: CountryRoadMiniSettings): CountryRoadMiniState {
   const rng = mulberry32(seed);
   const puzzles = shuffle(PUZZLES, rng);
-  return { puzzles, idx: 0, selected: null, submitted: false, score: 0, correct: 0, phase: "playing" };
+  return {
+    puzzles,
+    idx: 0,
+    current: [...puzzles[0]!.given],
+    selected: null,
+    errors: [],
+    hintsUsed: 0,
+    movesMade: 0,
+    solved: false,
+    totalSolved: 0,
+    score: 0,
+    phase: "playing",
+    settings,
+  };
 }
+
+export function validate(current: number[], solution: number[]): number[] {
+  const errs: number[] = [];
+  for (let i = 0; i < current.length; i++) {
+    if (current[i] !== 0 && current[i] !== -1 && current[i] !== solution[i]) errs.push(i);
+  }
+  return errs;
+}
+
+function isComplete(current: number[], solution: number[]): boolean {
+  for (let i = 0; i < current.length; i++) {
+    if (current[i] !== solution[i]) return false;
+  }
+  return true;
+}
+
 export function reducer(state: CountryRoadMiniState, action: CountryRoadMiniAction): CountryRoadMiniState {
   if (state.phase === "done") return state;
-  if (action.type === "select") return state.submitted ? state : { ...state, selected: action.choice };
-  if (action.type === "submit") {
-    if (state.submitted || state.selected === null) return state;
-    const p = state.puzzles[state.idx]!;
-    const ok = state.selected === p.correct;
-    return { ...state, submitted: true, phase: "result", score: state.score + (ok ? 100 : 0), correct: state.correct + (ok ? 1 : 0) };
+  const puzzle = state.puzzles[state.idx]!;
+
+  switch (action.type) {
+    case "select":
+      return { ...state, selected: action.index, errors: [] };
+
+    case "enter": {
+      if (state.selected === null || state.solved) return state;
+      const g = puzzle.given[state.selected]!;
+      if (g !== 0) return state;
+      const next = [...state.current];
+      next[state.selected] = action.value;
+      const solved = isComplete(next, puzzle.solution);
+      return {
+        ...state,
+        current: next,
+        movesMade: state.movesMade + 1,
+        solved,
+        score: solved ? state.score + Math.max(50, 200 - state.hintsUsed * 30) : state.score,
+        totalSolved: solved ? state.totalSolved + 1 : state.totalSolved,
+        errors: [],
+      };
+    }
+
+    case "hint": {
+      if (state.solved) return state;
+      const empty: number[] = [];
+      for (let i = 0; i < state.current.length; i++) {
+        if (puzzle.given[i] === 0 && state.current[i] !== puzzle.solution[i]) empty.push(i);
+      }
+      if (empty.length === 0) return state;
+      const idx = empty[0]!;
+      const next = [...state.current];
+      next[idx] = puzzle.solution[idx]!;
+      const solved = isComplete(next, puzzle.solution);
+      return {
+        ...state,
+        current: next,
+        hintsUsed: state.hintsUsed + 1,
+        movesMade: state.movesMade + 1,
+        solved,
+        score: solved ? state.score + Math.max(50, 200 - state.hintsUsed * 30) : state.score,
+        totalSolved: solved ? state.totalSolved + 1 : state.totalSolved,
+        errors: [],
+      };
+    }
+
+    case "check":
+      return { ...state, errors: validate(state.current, puzzle.solution) };
+
+    case "next": {
+      const ni = state.idx + 1;
+      if (ni >= state.puzzles.length) return { ...state, phase: "done" };
+      return {
+        ...state,
+        idx: ni,
+        current: [...state.puzzles[ni]!.given],
+        selected: null,
+        errors: [],
+        solved: false,
+        hintsUsed: 0,
+        movesMade: 0,
+      };
+    }
+
+    default:
+      return state;
   }
-  if (action.type === "next") {
-    const ni = state.idx + 1;
-    if (ni >= state.puzzles.length) return { ...state, phase: "done" };
-    return { ...state, idx: ni, selected: null, submitted: false, phase: "playing" };
-  }
-  return state;
 }
+
 export function isTerminal(state: CountryRoadMiniState): { score: number } | null {
   return state.phase === "done" ? { score: state.score } : null;
 }

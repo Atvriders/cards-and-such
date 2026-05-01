@@ -1,29 +1,41 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TIMER_TICKS, ROWS, COLS } from "./state.js";
+import { initialState, reducer, isTerminal, resolveMerge, SIZE } from "./state.js";
 const S = { dummy: false };
-describe("merge-mansion-mini", () => {
-  it("starts with full grid and timer", () => {
-    const s = initialState(1, S);
+describe("MergeMansionMini", () => {
+  it("starts empty with a next tile", () => {
+    const s = initialState(11, S);
     expect(s.phase).toBe("playing");
-    expect(s.ticksRemaining).toBeGreaterThanOrEqual(TIMER_TICKS);
-    expect(s.grid.length).toBe(ROWS);
-    expect(s.grid[0]!.length).toBe(COLS);
+    expect(s.grid.length).toBe(SIZE);
+    expect(s.next).toBeGreaterThan(0);
+    expect(s.movesUsed).toBe(0);
   });
-  it("tick decrements timer", () => {
-    const s = reducer(initialState(1, S), { type: "tick" });
-    expect(s.ticksRemaining).toBeGreaterThanOrEqual(TIMER_TICKS - 1);
+  it("placing fills a cell", () => {
+    let s = initialState(11, S);
+    const startNext = s.next;
+    s = reducer(s, { type: "place", row: 2, col: 2 });
+    // tile may have merged already if surrounded; check cell is at least startNext (or higher tier)
+    expect(s.grid[2]![2]).toBeGreaterThanOrEqual(startNext);
+    expect(s.movesUsed).toBe(1);
+    expect(s.score).toBeGreaterThan(0);
   });
-  it("select records a cell first time", () => {
-    const s = reducer(initialState(1, S), { type: "select", row: 0, col: 0 });
-    expect(s.selected).toEqual([0, 0]);
+  it("placing on occupied cell is no-op", () => {
+    let s = initialState(11, S);
+    s = reducer(s, { type: "place", row: 0, col: 0 });
+    const before = s.movesUsed;
+    s = reducer(s, { type: "place", row: 0, col: 0 });
+    expect(s.movesUsed).toBe(before);
   });
-  it("score is non-negative initially", () => {
-    expect(initialState(1, S).score).toBeGreaterThanOrEqual(0);
+  it("three same tiles in a row merge to higher tier", () => {
+    const grid: number[][] = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => 0));
+    grid[0]![0] = 1; grid[0]![1] = 1; grid[0]![2] = 1;
+    const out = resolveMerge(grid, 0, 0);
+    // After merge from (0,0): 3 tier-1 cleared, (0,0) becomes tier 2
+    const tiles = out.grid.flat().filter(v => v !== 0);
+    expect(tiles.length).toBe(1);
+    expect(tiles[0]).toBe(2);
+    expect(out.gained).toBeGreaterThan(0);
   });
-  it("game ends after timer expires", () => {
-    let s = initialState(1, S);
-    for (let i = 0; i < TIMER_TICKS + 2; i++) s = reducer(s, { type: "tick" });
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
+  it("isTerminal null while playing", () => {
+    expect(isTerminal(initialState(11, S))).toBeNull();
   });
 });

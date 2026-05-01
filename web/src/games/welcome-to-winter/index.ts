@@ -2,17 +2,33 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { WelcomeToWinterState, WelcomeToWinterAction, WelcomeToWinterSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WelcomeToWinterGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const welcomeToWinterPlugin: GamePlugin<WelcomeToWinterState, WelcomeToWinterAction, typeof settings> = {
   id: "welcome-to-winter",
-  title: "Welcome To: Winter",
-  category: "board",
+  title: "Welcome To Winter",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Welcome To variant; winter suburb with snowfall and heaters.",
-  howToPlay: "Welcome To: Winter is a Welcome To variant set in a snowbound suburb where heaters, ice-cleared streets, and chimney smoke add scoring layers.\n\nEach round, click Roll to draw a die (1-6). Click any empty house cell to assign that value (representing build effort). Skip when the snowfall blocks your plan.\n\nScoring:\n- Each filled house scores its die pip (1-6).\n- +5 per row (street plowed and built).\n- +5 per column (avenue cleared end-to-end).\n- +10 for fully completed winter suburb.\n\n12 rolls available. Winter punishes splashing low pips into key cells — strategy is to place high pips in row/column intersections and accept that some plows (skips) are unavoidable. A typical winter build scores 35-50; mastering heater placement reaches 65+. Welcome To: Winter rewards patient builders: every skipped round is a snowstorm passing. The thaw rewards those who held their best builds for the right blocks.",
+  description: "Snowy Welcome To — ice rolls slip but blizzard bonuses pay big.",
+  howToPlay: `Welcome To Winter is a strict-ascending placement dice game.
+
+How to play
+1. Press Roll for a d12.
+2. Place the number into any slot in any of the 3 rows of 5 — but each row must remain strictly ascending.
+3. Place gives die value + adjacency bonus (+2 if a neighbor is exactly one less or more).
+4. Skip if no legal slot — costs −1 to score.
+
+Theme: Three odd in a row: +blizzard 6.
+
+End-of-game bonuses
+- Each completed row: +6
+- Full board: +10
+
+Game ends after 12 rolls or when all 15 slots are filled. Strong runs reach 60-100.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as WelcomeToWinterSettings),
+  initialState: (seed, s) => initialState(seed, s as WelcomeToWinterSettings),
   reducer,
   isTerminal,
   component: WelcomeToWinterGame,

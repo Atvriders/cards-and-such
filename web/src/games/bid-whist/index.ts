@@ -1,23 +1,21 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { BidWhistState } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { BidWhistState, BidWhistAction, BidWhistSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BidWhist } from "./BidWhist.js";
+import { BidWhistGame } from "./Game.js";
 
-const bidWhistSettings = {} as const;
-type BidWhistSettings = SettingsOf<typeof bidWhistSettings>;
-type BidWhistAction = { type: "play"; cardId: string };
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+type S = SettingsOf<typeof settings>;
 
-export const bidWhistPlugin: GamePlugin<BidWhistState, BidWhistAction, typeof bidWhistSettings> = {
+export const bid-whPlugin: GamePlugin<BidWhistState, BidWhistAction, typeof settings> = {
   id: "bid-whist",
   title: "Bid Whist",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Partnership Whist with bidding for trump — trimmed to a duel.",
-  howToPlay: `Bid Whist is a Whist variant popular in the United States, where teams bid for the right to choose trump. In this simplified one-on-one version, hearts are fixed as trump (a common Bid Whist trump in casual play). You and the bot each receive 13 cards from a 52-card deck. Each round, follow the led suit if you can; otherwise play any card, including trump. The highest trump wins; otherwise the highest card of the led suit wins. Click cards to play. The trick winner leads the next. Strategy: count trumps carefully, lead long side suits to flush out the bot’s hearts, then run your remaining trumps. Score equals tricks taken; win by capturing seven or more of the 13 tricks. The seed determines the shuffle, so a given seed always deals the same starting hand.`,
-  settings: bidWhistSettings,
-  initialState: (seed: number, _settings: BidWhistSettings) => initialState(seed),
+  description: "Bid Whist — bidding variant.",
+  howToPlay: "Bid Whist — bidding variant. Play heads-up against the CPU. Click cards in your hand to play. Follow the led suit if possible. Highest of led suit wins, unless beaten by trump. Score points for tricks won (or for card values, in some variants).",
+  settings,
+  initialState: (seed: number, _s: S) => initialState(seed, _s as BidWhistSettings),
   reducer,
   isTerminal,
-  component: BidWhist,
+  component: BidWhistGame,
 };

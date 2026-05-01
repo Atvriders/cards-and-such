@@ -3,7 +3,7 @@ import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SideScrollRunnerState, SideScrollRunnerAction, SideScrollRunnerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SideScrollRunnerGame } from "./Game.js";
-const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const sideScrollRunnerPlugin: GamePlugin<SideScrollRunnerState, SideScrollRunnerAction, typeof settings> = {
   id:"side-scroll-runner", title:"Side-Scroll Runner", category:"arcade",

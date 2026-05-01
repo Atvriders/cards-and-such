@@ -1,124 +1,299 @@
+// Auto-generated backgammon-family state for hyper-backgammon.
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const SIZE = 5;
-export const MAX_MOVES = 12;
+export const POINTS = 24;
+export const CHECKERS_PER_SIDE = 3;
+export const HIT_ENABLED = true;
+export const PIN_ENABLED = false;
+export const BLOCK_ONLY = false;
+export const THREE_DICE = false;
+export const ACEY_DEUCEY = false;
+// Starting layout entries are [point0Indexed, count] for player.
+const START_LAYOUT: ReadonlyArray<readonly [number, number]> = [[0,3]];
 
-export interface GameSettings { dummy: boolean; }
-export type Cell = "P" | "C" | null;
+export type Side = "P" | "C";
+export interface HyperBgSettings { dummy: boolean }
 
-export interface GameState {
+export interface HyperBgState {
   rngSeed: number;
-  board: Cell[];
-  turn: "P" | "C";
-  moves: number;
-  result: "P" | "C" | "draw" | null;
+  // pPoints[i] = number of player checkers at point i (0..POINTS-1)
+  pPoints: number[];
+  cPoints: number[];
+  pBar: number; // checkers on bar (hit)
+  cBar: number;
+  pBorne: number; // borne off
+  cBorne: number;
+  dice: number[]; // current dice values
+  diceLeft: number[]; // remaining dice to play (multiset)
+  turn: Side;
+  phase: "rolling" | "moving" | "done";
+  winner: Side | null;
   score: number;
-  captures: number;
-  phase: "playing" | "done";
+  // pinned[i]: which side is pinned at point i (only for pin variant)
+  pinned: (Side | null)[];
 }
 
-export type GameAction = { type: "place"; idx: number };
+export type HyperBgAction =
+  | { type: "roll" }
+  | { type: "move"; from: number; pips: number } // from = 0..POINTS-1, or -1 for bar
+  | { type: "endTurn" };
 
-export function initialState(seed: number, _settings: GameSettings): GameState {
-  return { rngSeed: seed, board: Array(SIZE * SIZE).fill(null), turn: "P", moves: 0, result: null, score: 0, captures: 0, phase: "playing" };
+function rollOne(seed: number): { v: number; nextSeed: number } {
+  const rng = mulberry32(seed);
+  const v = 1 + Math.floor(rng() * 6);
+  return { v, nextSeed: Math.floor(rng() * 2 ** 31) };
 }
 
-function countLine(b: Cell[], r: number, c: number, dr: number, dc: number, mark: Cell): number {
-  let n = 0; let rr = r; let cc = c;
-  while (rr >= 0 && rr < SIZE && cc >= 0 && cc < SIZE && b[rr * SIZE + cc] === mark) { n++; rr += dr; cc += dc; }
-  return n;
+function rollDiceMulti(seed: number, count: number): { d: number[]; nextSeed: number } {
+  let s = seed;
+  const out: number[] = [];
+  for (let i = 0; i < count; i++) {
+    const r = rollOne(s);
+    out.push(r.v);
+    s = r.nextSeed;
+  }
+  return { d: out, nextSeed: s };
 }
 
-function hasLine(b: Cell[], mark: Cell, target: number): boolean {
-  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) {
-    if (b[r * SIZE + c] !== mark) continue;
-    for (const [dr, dc] of [[0,1],[1,0],[1,1],[1,-1]] as const) {
-      const len = countLine(b, r, c, dr, dc, mark);
-      if (len >= target) return true;
+function expandDice(d: number[]): number[] {
+  // Doubles in 2-dice play give 4 plays of that face.
+  if (THREE_DICE) return d.slice();
+  if (d.length === 2 && d[0] === d[1]) return [d[0]!, d[0]!, d[0]!, d[0]!];
+  return d.slice();
+}
+
+export function initialState(seed: number, _s: HyperBgSettings): HyperBgState {
+  const pPoints = Array.from({ length: POINTS }, () => 0);
+  const cPoints = Array.from({ length: POINTS }, () => 0);
+  for (const [p, n] of START_LAYOUT) {
+    pPoints[p] = n;
+    // mirror C side: C at POINTS-1-p
+    cPoints[POINTS - 1 - p] = n;
+  }
+  return {
+    rngSeed: seed,
+    pPoints, cPoints,
+    pBar: 0, cBar: 0,
+    pBorne: 0, cBorne: 0,
+    dice: [], diceLeft: [],
+    turn: "P", phase: "rolling", winner: null, score: 0,
+    pinned: Array.from({ length: POINTS }, () => null),
+  };
+}
+
+function pipCount(points: number[], borne: number, bar: number, side: Side): number {
+  let total = 0;
+  for (let i = 0; i < POINTS; i++) {
+    const n = points[i] || 0;
+    const dist = side === "P" ? (POINTS - i) : (i + 1);
+    total += n * dist;
+  }
+  // bar checkers count full track
+  total += bar * (POINTS + 1);
+  // borne off contribute 0 (already home)
+  void borne;
+  return total;
+}
+
+function allInHome(points: number[], side: Side): boolean {
+  // Home is the last 6 points relative to side.
+  if (side === "P") {
+    for (let i = 0; i < POINTS - 6; i++) if ((points[i] || 0) > 0) return false;
+    return true;
+  } else {
+    for (let i = 6; i < POINTS; i++) if ((points[i] || 0) > 0) return false;
+    return true;
+  }
+}
+
+function targetPoint(from: number, pips: number, side: Side): number {
+  // Player advances toward POINTS; CPU advances toward -1.
+  return side === "P" ? from + pips : from - pips;
+}
+
+export function legalMoves(state: HyperBgState, side: Side): { from: number; pips: number }[] {
+  const out: { from: number; pips: number }[] = [];
+  const myPoints = side === "P" ? state.pPoints : state.cPoints;
+  const oppPoints = side === "P" ? state.cPoints : state.pPoints;
+  const myBar = side === "P" ? state.pBar : state.cBar;
+  const dice = Array.from(new Set(state.diceLeft));
+  for (const pips of dice) {
+    // bar entry first
+    if (myBar > 0) {
+      const entry = side === "P" ? (pips - 1) : (POINTS - pips);
+      if (entry >= 0 && entry < POINTS) {
+        const opp = oppPoints[entry] || 0;
+        if (opp <= 1 || (PIN_ENABLED && opp >= 1)) out.push({ from: -1, pips });
+      }
+      continue;
+    }
+    for (let i = 0; i < POINTS; i++) {
+      if ((myPoints[i] || 0) === 0) continue;
+      if (PIN_ENABLED && state.pinned[i] !== null && state.pinned[i] !== side) continue;
+      const t = targetPoint(i, pips, side);
+      if (t < 0 || t >= POINTS) {
+        // bear off
+        if (allInHome(myPoints, side) && myBar === 0) {
+          // exact bear-off or overshoot from highest
+          const dist = side === "P" ? (POINTS - i) : (i + 1);
+          if (dist === pips) out.push({ from: i, pips });
+          else if (dist < pips) {
+            // overshoot only if no checker further from home
+            let hasFurther = false;
+            if (side === "P") {
+              for (let j = POINTS - 6; j < i; j++) if ((myPoints[j] || 0) > 0) { hasFurther = true; break; }
+            } else {
+              for (let j = 5; j > i; j--) if ((myPoints[j] || 0) > 0) { hasFurther = true; break; }
+            }
+            if (!hasFurther) out.push({ from: i, pips });
+          }
+        }
+        continue;
+      }
+      const opp = oppPoints[t] || 0;
+      if (BLOCK_ONLY) {
+        if (opp >= 1) continue; // any opponent point blocks
+      } else if (PIN_ENABLED) {
+        // can land on single opp (pin) or own
+        if (opp >= 2) continue;
+      } else {
+        // standard: blocked by 2+ opponent
+        if (opp >= 2) continue;
+      }
+      out.push({ from: i, pips });
     }
   }
-  return false;
+  return out;
 }
 
-function maxLineLen(b: Cell[], mark: Cell): number {
-  let best = 0;
-  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) {
-    if (b[r * SIZE + c] !== mark) continue;
-    for (const [dr, dc] of [[0,1],[1,0],[1,1],[1,-1]] as const) {
-      const len = countLine(b, r, c, dr, dc, mark);
-      if (len > best) best = len;
+function applyMove(state: HyperBgState, side: Side, from: number, pips: number): HyperBgState | null {
+  const next: HyperBgState = {
+    ...state,
+    pPoints: state.pPoints.slice(),
+    cPoints: state.cPoints.slice(),
+    pinned: state.pinned.slice(),
+    diceLeft: state.diceLeft.slice(),
+  };
+  const myPoints = side === "P" ? next.pPoints : next.cPoints;
+  const oppPoints = side === "P" ? next.cPoints : next.pPoints;
+  const dieIdx = next.diceLeft.indexOf(pips);
+  if (dieIdx === -1) return null;
+  next.diceLeft.splice(dieIdx, 1);
+
+  if (from === -1) {
+    // bar entry
+    if (side === "P") next.pBar -= 1; else next.cBar -= 1;
+    const entry = side === "P" ? (pips - 1) : (POINTS - pips);
+    if (entry < 0 || entry >= POINTS) return null;
+    const opp = oppPoints[entry] || 0;
+    if (HIT_ENABLED && opp === 1) {
+      oppPoints[entry] = 0;
+      if (side === "P") next.cBar += 1; else next.pBar += 1;
     }
+    myPoints[entry] = (myPoints[entry] || 0) + 1;
+    return next;
   }
-  return best;
+
+  if ((myPoints[from] || 0) === 0) return null;
+  const t = targetPoint(from, pips, side);
+  if (t < 0 || t >= POINTS) {
+    // bear off
+    if (!allInHome(myPoints, side)) return null;
+    myPoints[from] -= 1;
+    if (side === "P") next.pBorne += 1; else next.cBorne += 1;
+    return next;
+  }
+  const opp = oppPoints[t] || 0;
+  if (BLOCK_ONLY && opp >= 1) return null;
+  if (!BLOCK_ONLY && opp >= 2) return null;
+  myPoints[from] -= 1;
+  if (HIT_ENABLED && opp === 1) {
+    oppPoints[t] = 0;
+    if (side === "P") next.cBar += 1; else next.pBar += 1;
+  }
+  if (PIN_ENABLED && opp === 1) {
+    // pin opponent — don't remove, just stack our own atop
+    next.pinned[t] = side === "P" ? "C" : "P"; // pinned side
+  } else if (PIN_ENABLED && opp === 0) {
+    next.pinned[t] = null;
+  }
+  myPoints[t] = (myPoints[t] || 0) + 1;
+  return next;
 }
 
-function applyMove(b: Cell[], idx: number, mark: "P" | "C"): { board: Cell[]; captures: number } {
-  const nb = b.slice();
-  nb[idx] = mark;
-  const opp: "P" | "C" = mark === "P" ? "C" : "P";
-  let captures = 0;
-  const r = Math.floor(idx / SIZE), c = idx % SIZE;
-  /* no capture */
-  return { board: nb, captures };
-}
-
-function checkWin(b: Cell[], mark: "P" | "C"): boolean {
-  return false;
-}
-
-function bestZoneScore(b: Cell[], mark: "P" | "C"): number {
-  let s = 0;
-  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) {
-    if (b[r * SIZE + c] !== mark) continue;
-    if (mark === "P") {
-      if (r <= 1) s += 3; else if (r === 2) s += 2; else s += 1;
-    } else {
-      if (r >= SIZE - 2) s += 3; else if (r === SIZE - 3) s += 2; else s += 1;
-    }
+function checkWin(s: HyperBgState): HyperBgState {
+  if (s.pBorne >= CHECKERS_PER_SIDE) {
+    const diff = pipCount(s.cPoints, s.cBorne, s.cBar, "C") - pipCount(s.pPoints, s.pBorne, s.pBar, "P");
+    return { ...s, winner: "P", phase: "done", score: 100 + Math.max(0, diff) };
+  }
+  if (s.cBorne >= CHECKERS_PER_SIDE) {
+    return { ...s, winner: "C", phase: "done", score: 0 };
   }
   return s;
 }
 
-// Suppress unused warnings when not used.
-void hasLine; void maxLineLen; void checkWin; void bestZoneScore; void applyMove;
-
-export function reducer(state: GameState, action: GameAction): GameState {
-  if (state.phase === "done" || state.result) return state;
-  if (action.type !== "place") return state;
-  if (state.turn !== "P") return state;
-  if (action.idx < 0 || action.idx >= SIZE * SIZE) return state;
-  if (state.board[action.idx] !== null) return state;
-  const { board: nb, captures } = applyMove(state.board, action.idx, "P");
-  let totalCaptures = state.captures + Math.max(0, captures);
-  let moves = state.moves + 1;
-  
-  
-  const rng = mulberry32(state.rngSeed);
-  const empty: number[] = [];
-  for (let i = 0; i < nb.length; i++) if (nb[i] === null) empty.push(i);
-  let cnb = nb;
-  let cmoves = moves;
-  if (empty.length > 0) {
-    const pick = empty[Math.floor(rng() * empty.length)]!;
-    const r2 = applyMove(nb, pick, "C");
-    cnb = r2.board;
-    cmoves++;
+function cpuTurn(state: HyperBgState): HyperBgState {
+  let s = state;
+  const diceCount = THREE_DICE ? 3 : 2;
+  const r = rollDiceMulti(s.rngSeed, diceCount);
+  s = { ...s, rngSeed: r.nextSeed, dice: r.d, diceLeft: expandDice(r.d) };
+  // Greedy: just apply legal moves until none
+  let guard = 0;
+  while (s.diceLeft.length > 0 && guard < 30) {
+    guard++;
+    const moves = legalMoves(s, "C");
+    if (moves.length === 0) break;
+    // pick first legal
+    const rng = mulberry32(s.rngSeed);
+    const pick = moves[Math.floor(rng() * moves.length)]!;
+    s = { ...s, rngSeed: Math.floor(rng() * 2 ** 31) };
+    const applied = applyMove(s, "C", pick.from, pick.pips);
+    if (!applied) break;
+    s = applied;
+    const w = checkWin(s);
+    if (w.phase === "done") return w;
   }
-  const seed2 = Math.floor(rng() * 2 ** 31);
-  
-  if (cmoves >= MAX_MOVES || cnb.every(x => x !== null)) {
-    const pScore = bestZoneScore(cnb, "P");
-    const cScore = bestZoneScore(cnb, "C");
-    let result: "P" | "C" | "draw" = "draw";
-    let score = state.score + 25;
-    if (pScore > cScore) { result = "P"; score = state.score + 100 + pScore; }
-    else if (cScore > pScore) { result = "C"; score = state.score; }
-    else { score = state.score + 25 + pScore; }
-    return { ...state, rngSeed: seed2, board: cnb, moves: cmoves, captures: totalCaptures, result, score, phase: "done" };
-  }
-  return { ...state, rngSeed: seed2, board: cnb, moves: cmoves, captures: totalCaptures, turn: "P" };
+  return { ...s, turn: "P", phase: "rolling", dice: [], diceLeft: [] };
 }
 
-export function isTerminal(state: GameState): { score: number } | null {
+export function reducer(state: HyperBgState, action: HyperBgAction): HyperBgState {
+  if (state.phase === "done") return state;
+
+  if (action.type === "roll" && state.turn === "P" && state.phase === "rolling") {
+    const diceCount = THREE_DICE ? 3 : 2;
+    const r = rollDiceMulti(state.rngSeed, diceCount);
+    const next: HyperBgState = { ...state, rngSeed: r.nextSeed, dice: r.d, diceLeft: expandDice(r.d), phase: "moving" };
+    // if no legal moves, end immediately
+    const moves = legalMoves(next, "P");
+    if (moves.length === 0) {
+      const cpu = cpuTurn({ ...next, diceLeft: [] });
+      return checkWin(cpu);
+    }
+    return next;
+  }
+
+  if (action.type === "move" && state.turn === "P" && state.phase === "moving") {
+    const applied = applyMove(state, "P", action.from, action.pips);
+    if (!applied) return state;
+    const won = checkWin(applied);
+    if (won.phase === "done") return won;
+    // if all dice played or no legal moves left, end turn
+    const moves = legalMoves(won, "P");
+    if (won.diceLeft.length === 0 || moves.length === 0) {
+      const cpu = cpuTurn({ ...won, diceLeft: [] });
+      return checkWin(cpu);
+    }
+    return won;
+  }
+
+  if (action.type === "endTurn" && state.turn === "P") {
+    const cpu = cpuTurn({ ...state, diceLeft: [] });
+    return checkWin(cpu);
+  }
+
+  return state;
+}
+
+export function isTerminal(state: HyperBgState): { score: number } | null {
   return state.phase === "done" ? { score: state.score } : null;
 }

@@ -1,2 +1,16 @@
-/* Modernized via shared trick engine — see web/src/engines/trick/trick.css */
-@import "../../engines/trick/trick.css";
+.bris-l-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
+.bris-l-title { font-size:1.1rem; font-weight:700; color:#0097a7; text-align:center; }
+.bris-l-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
+.bris-l-cpu, .bris-l-trick, .bris-l-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
+.bris-l-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
+.bris-l-back-row, .bris-l-trick-row, .bris-l-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
+.bris-l-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #0097a7 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
+.bris-l-empty { opacity:0.5; }
+.bris-l-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
+.bris-l-slot-label { font-size:0.7rem; opacity:0.7; }
+.bris-l-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
+.bris-l-hand .card { cursor: pointer; transition: transform 0.1s; }
+.bris-l-hand .card:hover { transform: translateY(-6px); }
+.bris-l-dim { opacity:0.4; cursor:not-allowed; }
+.bris-l-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #0097a7; }
+.bris-l-result h2 { margin:0 0 0.5rem 0; color:#0097a7; }

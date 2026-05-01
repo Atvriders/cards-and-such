@@ -1,1 +1,37 @@
-@import "../../engines/clicker/clicker.css";
+.spirn-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 20px; max-width: 720px; margin: 0 auto; user-select: none;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+}
+.spirn-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.spirn-info { font-size: 1rem; font-family: 'JetBrains Mono', monospace; color: #475569; }
+.spirn-score { font-size: 1.4rem; font-weight: 900; color: #dc2626; font-family: 'JetBrains Mono', monospace; }
+.spirn-track {
+  display: flex; flex-direction: column; gap: 6px; width: 100%;
+  padding: 12px; border-radius: 14px;
+  background: linear-gradient(180deg, #fee2e2, #fca5a5);
+  border: 3px solid #dc2626;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.spirn-lane {
+  position: relative; height: 70px; border-radius: 10px;
+  background: rgba(255,255,255,0.7); border: 2px solid transparent; cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.spirn-lane.active { border-color: #dc2626; box-shadow: inset 0 0 12px #dc262655; }
+.spirn-player { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 2rem; }
+.spirn-obstacle { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 1.8rem; transition: left 0.1s linear; }
+.spirn-controls { display: flex; gap: 12px; }
+.spirn-btn {
+  padding: 10px 22px; font-size: 1rem; font-weight: 700;
+  background: #dc2626; color: white; border: none; border-radius: 10px;
+  cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: transform 0.1s, filter 0.1s;
+}
+.spirn-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.spirn-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.spirn-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+.spirn-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.spirn-stats { font-family: 'Inter', sans-serif; color: #475569; }
+.spirn-final { font-size: 1.6rem; color: #dc2626; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }

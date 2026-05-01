@@ -1,23 +1,21 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { BriscolaChiamataState } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { BriscolaChiamataState, BriscolaChiamataAction, BriscolaChiamataSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BriscolaChiamata } from "./BriscolaChiamata.js";
+import { BriscolaChiamataGame } from "./Game.js";
 
-const briscolaChiamataSettings = {} as const;
-type BriscolaChiamataSettings = SettingsOf<typeof briscolaChiamataSettings>;
-type BriscolaChiamataAction = { type: "play"; cardId: string };
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+type S = SettingsOf<typeof settings>;
 
-export const briscolaChiamataPlugin: GamePlugin<BriscolaChiamataState, BriscolaChiamataAction, typeof briscolaChiamataSettings> = {
+export const bris-cPlugin: GamePlugin<BriscolaChiamataState, BriscolaChiamataAction, typeof settings> = {
   id: "briscola-chiamata",
   title: "Briscola Chiamata",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "5-player called Briscola — reduced to a 1v1 trick duel.",
-  howToPlay: `Briscola Chiamata is the 5-player called variant of Briscola where the bidder names a partner via a secret card. This simplified 1v1 duel preserves only the trick-play core, with diamonds as trump. You and the bot each receive 8 cards from a 40-card Italian deck (A, 2, 3, 4, 5, 6, 7, J, Q, K in each suit — no 8/9/10). Each trick: follow the led suit if able, else play any card. Highest diamond wins; otherwise highest of the led suit. Click cards to play. Trick winner leads next. Strategy: in Briscola, the Ace and 3 are the highest cards regardless of suit ranking, but here we use rank order with Ace high for simplicity. Lead long side suits to flush trumps, save trump-aces for the right trick. Capture 5 of 8 tricks to win.`,
-  settings: briscolaChiamataSettings,
-  initialState: (seed: number, _settings: BriscolaChiamataSettings) => initialState(seed),
+  description: "Briscola Chiamata — call partner variant.",
+  howToPlay: "Briscola Chiamata — call partner variant. Play heads-up against the CPU. Click cards in your hand to play. Follow the led suit if possible. Highest of led suit wins, unless beaten by trump. Score points for tricks won (or for card values, in some variants).",
+  settings,
+  initialState: (seed: number, _s: S) => initialState(seed, _s as BriscolaChiamataSettings),
   reducer,
   isTerminal,
-  component: BriscolaChiamata,
+  component: BriscolaChiamataGame,
 };

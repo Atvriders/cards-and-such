@@ -1,47 +1,51 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { QwixxExtremeState, QwixxExtremeAction, QwixxExtremeSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_ROLLS } from "./state.js";
+import { isTerminal, GRID_SIZE, TOTAL_ROLLS, cellZone } from "./state.js";
 import "./Game.css";
 
 export function QwixxExtremeGame({ state, dispatch, onGameOver }: GameProps<QwixxExtremeState, QwixxExtremeSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="rw-wrap">
-        <h3 className="rw-title">Qwixx: Extreme</h3>
-        <div className="rw-done">
-          <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
+  const final = t?.score ?? state.score;
   return (
-    <div className="rw-wrap">
-      <h3 className="rw-title">Qwixx: Extreme</h3>
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
-      {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
+    <div className="qex-wrap">
+      <header className="qex-head">
+        <h2 className="qex-title">Qwixx Extreme</h2>
+        <div className="qex-meta">
+          <span className="qex-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="qex-meta-score">{state.score} pts</span>
+        </div>
+      </header>
+      {state.phase === "marking" && state.lastRoll !== null && (
+        <div className="qex-die-area">
+          <div className="qex-die" aria-label={`Die showing ${state.lastRoll}`}>{state.lastRoll}</div>
+          <div className="qex-hint">Pick a cell to mark, or Skip.</div>
+        </div>
       )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
+      <div className="qex-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
           <button
             key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
-            disabled={filled || state.phase !== "marking"}
+            className={`qex-cell qex-z${cellZone(i)}${filled ? " qex-on" : ""}`}
+            disabled={filled || state.phase !== "marking" || state.phase === "done"}
             onClick={() => dispatch({ type: "mark", index: i } as QwixxExtremeAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}
       </div>
-      {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as QwixxExtremeAction)}>Roll</button>
+      <div className="qex-controls">
+        {state.phase === "rolling" && (
+          <button className="qex-btn qex-btn-primary" onClick={() => dispatch({ type: "roll" } as QwixxExtremeAction)}>Roll</button>
+        )}
+        {state.phase === "marking" && (
+          <button className="qex-btn qex-btn-skip" onClick={() => dispatch({ type: "skip" } as QwixxExtremeAction)}>Skip</button>
+        )}
+        <button className="qex-btn qex-btn-reset" onClick={() => dispatch({ type: "reset" } as QwixxExtremeAction)}>Reset</button>
+      </div>
+      {state.phase === "done" && (
+        <div className="qex-done">Final score: <b>{final}</b></div>
       )}
-      {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as QwixxExtremeAction)}>Skip</button>
-      )}
+      <div className="qex-rules">Roll 8 = double points</div>
     </div>
   );
 }

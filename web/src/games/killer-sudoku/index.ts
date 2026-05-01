@@ -4,6 +4,7 @@ import type { KillerSudokuState, KillerSudokuAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KillerSudoku } from "./KillerSudoku.js";
 
+import { KillerSudokuGame } from "./Game.js";
 export const killerSudokuSettings = {
   difficulty: {
     kind: "enum" as const,
@@ -30,5 +31,5 @@ Score: max(100, 1000 − moves × 5). Fewer moves earn a higher score. Tip: star
   initialState: (seed: number, settings: KillerSudokuSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
-  component: KillerSudoku,
+  component: KillerSudokuGame,
 };

@@ -14,20 +14,29 @@ export function ColorReactionGame({ state, dispatch, onGameOver }: GameProps<Col
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="rx-wrap"><div className="rx-done"><h2>Time's Up!</h2><div>Hits: {state.hits} / Misses: {state.misses}</div><div className="rx-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="colrx-wrap">
+        <div className="colrx-done">
+          <h2>Time's Up!</h2>
+          <div className="colrx-stats">Hits: {state.hits} / Misses: {state.misses}</div>
+          <div className="colrx-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="rx-wrap">
-      <div className="rx-header">
-        <span className="rx-info">Hits: {state.hits}</span>
-        <span className="rx-timer">{state.ticksRemaining}s</span>
-        <span className="rx-score">{state.score} pts</span>
+    <div className="colrx-wrap">
+      <div className="colrx-header">
+        <span className="colrx-info">Hits: {state.hits}</span>
+        <span className="colrx-timer">{state.ticksRemaining}s</span>
+        <span className="colrx-score">{state.score} pts</span>
       </div>
-      <div className="rx-prompt">Tap when the stage turns GREEN. Avoid tapping when red!</div>
+      <div className="colrx-prompt">Tap when the stage turns GREEN. Avoid tapping red!</div>
       <button
-        className={`rx-stage ${state.isGo ? "go" : "nogo"}`}
+        className={`colrx-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as ColorReactionAction)}
-        aria-label="react">🟢</button>
+        aria-label="react">{state.isGo ? "🟢" : "🔴"}</button>
+      <div className="colrx-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
     </div>
   );
 }

@@ -1,60 +1,60 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, SIZE, MAX_MOVES } from "./state.js";
+import { initialState, reducer, isTerminal, legalMoves, POINTS, CHECKERS_PER_SIDE } from "./state.js";
 
 const S = { dummy: false };
 
-describe("Narde (Russian Backgammon)", () => {
-  it("starts in playing phase with correct board size", () => {
-    const s = initialState(1, S);
-    expect(s.board.length).toBe(SIZE * SIZE);
-    expect(s.phase).toBe("playing");
-    expect(s.score).toBe(0);
+describe("narde-russian", () => {
+  it("starts in rolling phase with both sides at full strength", () => {
+    const s = initialState(123, S);
+    expect(s.phase).toBe("rolling");
+    expect(s.turn).toBe("P");
+    expect(s.pBorne).toBe(0);
+    expect(s.cBorne).toBe(0);
+    const pSum = s.pPoints.reduce((a, b) => a + b, 0);
+    const cSum = s.cPoints.reduce((a, b) => a + b, 0);
+    expect(pSum).toBe(CHECKERS_PER_SIDE);
+    expect(cSum).toBe(CHECKERS_PER_SIDE);
+  });
+
+  it("roll transitions to moving and produces dice", () => {
+    const s0 = initialState(7, S);
+    const s = reducer(s0, { type: "roll" });
+    expect(s.dice.length).toBeGreaterThanOrEqual(2);
+    expect(s.dice.every(d => d >= 1 && d <= 6)).toBe(true);
+  });
+
+  it("legalMoves returns at least one option after rolling", () => {
+    const s0 = initialState(99, S);
+    const s = reducer(s0, { type: "roll" });
+    if (s.phase === "moving") {
+      const m = legalMoves(s, "P");
+      expect(m.length).toBeGreaterThan(0);
+    }
   });
 
   it("isTerminal is null at start", () => {
     expect(isTerminal(initialState(1, S))).toBeNull();
   });
 
-  it("rejects out-of-bounds placements", () => {
+  it("track is exactly POINTS long with valid layout", () => {
+    expect(POINTS).toBeGreaterThanOrEqual(12);
     const s = initialState(1, S);
-    const s2 = reducer(s, { type: "place", idx: -1 });
-    expect(s2).toBe(s);
-    const s3 = reducer(s, { type: "place", idx: SIZE * SIZE });
-    expect(s3).toBe(s);
+    expect(s.pPoints.length).toBe(POINTS);
+    expect(s.cPoints.length).toBe(POINTS);
+    expect(s.pinned.length).toBe(POINTS);
   });
 
-  it("MAX_MOVES is sane", () => {
-    expect(MAX_MOVES).toBeGreaterThanOrEqual(8);
-    expect(MAX_MOVES).toBeLessThanOrEqual(40);
+  it("end turn passes control to CPU and returns to P rolling", () => {
+    const s0 = initialState(31, S);
+    const s = reducer(s0, { type: "endTurn" });
+    // CPU plays, then it's player's turn rolling again (or game done)
+    expect(["rolling", "done"]).toContain(s.phase);
   });
 
-  it("can advance state via valid moves", () => {
-    const s = initialState(7, S);
-    const target = false
-      ? s.board.findIndex(c => c === "P")
-      : s.board.findIndex(c => c === null);
-    if (target >= 0) {
-      const s2 = reducer(s, { type: "place", idx: target });
-      expect(s2.moves).toBeGreaterThanOrEqual(1);
-    } else {
-      expect(s.moves).toBeGreaterThanOrEqual(0);
-    }
-  });
-
-  it("eventually reaches terminal state with reasonable play", () => {
-    let s = initialState(42, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety < 200) {
-      const target = false
-        ? s.board.findIndex(c => c === "P")
-        : s.board.findIndex(c => c === null);
-      if (target < 0) break;
-      const next = reducer(s, { type: "place", idx: target });
-      if (next === s) break;
-      s = next;
-      safety++;
-    }
-    expect(s.moves).toBeGreaterThanOrEqual(1);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+  it("invalid move does not crash", () => {
+    const s0 = initialState(11, S);
+    const s = reducer(s0, { type: "move", from: 99, pips: 1 });
+    // Should be ignored (still rolling)
+    expect(s.phase).toBe("rolling");
   });
 });

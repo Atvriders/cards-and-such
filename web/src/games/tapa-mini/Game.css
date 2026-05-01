@@ -1,23 +1,30 @@
-.nlp-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:560px;margin:0 auto; }
-.nlp-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.nlp-progress { font-size:0.95rem;color:#555; }
-.nlp-score { font-size:1.05rem;font-weight:700;color:#27ae60; }
-.nlp-grid { display:flex;flex-direction:column;gap:2px;background:#34495e;padding:3px;border-radius:6px; }
-.nlp-row { display:flex;gap:2px; }
-.nlp-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-weight:700;font-size:0.95rem;color:#2c3e50;border-radius:3px; }
-.nlp-cell.empty { background:#ecf0f1; }
-.nlp-question { font-size:1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.nlp-choices { display:flex;flex-direction:column;gap:8px;width:100%; }
-.nlp-choice { display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #bdc3c7;border-radius:8px;background:#fff;cursor:pointer;font-size:0.92rem;text-align:left; }
-.nlp-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.nlp-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.nlp-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.nlp-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.nlp-letter { font-weight:900;font-size:0.95rem;color:#95a5a6;min-width:18px; }
-.nlp-actions { display:flex;gap:10px; }
-.nlp-btn { padding:8px 24px;border-radius:8px;border:none;font-size:0.95rem;font-weight:700;cursor:pointer; }
-.nlp-btn.submit { background:#27ae60;color:#fff; }
-.nlp-btn.next { background:#3498db;color:#fff; }
-.nlp-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.nlp-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%; }
-.nlp-done h2 { margin-bottom:6px; }
+.tapamini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.tapamini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.tapamini-score { font-weight:700;color:hsl(200, 60%, 40%); }
+.tapamini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.tapamini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.tapamini-row { display:flex;gap:1px; }
+.tapamini-cell { width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.tapamini-cell.given { background:#ecf0f1;color:#2c3e50; }
+.tapamini-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
+.tapamini-cell.sel { outline:3px solid hsl(200, 65%, 55%);outline-offset:-3px; }
+.tapamini-cell.err { background:#fdedec;color:#e74c3c; }
+.tapamini-cell.val0 { background:#fff5d8; }
+.tapamini-cell.val1 { background:#d8eaff; }
+.tapamini-cell.val2 { background:#ffe0e0; }
+.tapamini-cell.val3 { background:#e0ffe0; }
+.tapamini-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
+.tapamini-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.tapamini-num:hover { background:hsl(200, 70%, 92%);border-color:hsl(200, 60%, 55%); }
+.tapamini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.tapamini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.tapamini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.tapamini-btn.check { background:#3498db; }
+.tapamini-btn.hint { background:#f39c12; }
+.tapamini-btn.next { background:hsl(200, 60%, 45%); }
+.tapamini-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.tapamini-status { font-weight:700;font-size:1rem; }
+.tapamini-status.solved { color:#27ae60; }
+.tapamini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.tapamini-done h2 { margin-bottom:6px;color:#2c3e50; }
+.tapamini-final { font-size:1.6rem;font-weight:900;color:hsl(200, 60%, 40%); }

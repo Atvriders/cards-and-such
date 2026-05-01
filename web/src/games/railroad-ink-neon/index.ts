@@ -2,17 +2,34 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { RailroadInkNeonState, RailroadInkNeonAction, RailroadInkNeonSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RailroadInkNeonGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const railroadInkNeonPlugin: GamePlugin<RailroadInkNeonState, RailroadInkNeonAction, typeof settings> = {
   id: "railroad-ink-neon",
-  title: "Railroad Ink: Neon",
-  category: "board",
+  title: "Railroad Ink Neon",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Neon city edition with electric rail lines and power plants.",
-  howToPlay: "Railroad Ink: Neon is the neon-city edition with electric rail lines and power plants. In this adaptation you build a city's rail grid on a 4x4 board by rolling a single d6 and marking a cell. Click Roll, then click any empty cell to mark it with the rolled value. You may Skip if the roll doesn't suit your plan. Each marked cell adds its dice value to your score. Strategy: aim to complete rows and columns for +5 each, plus +10 for completing the full board. Use Skip sparingly — each skip uses one of your 12 rolls. Higher die values make for more profitable marks, while lower ones are best used to complete partial lines. After 12 rolls the game ends and bonuses apply. A solid Neon score is 34-48 points; an exceptional grid-completer can reach 65+. Random rolls ensure each neon city is a unique placement puzzle.",
+  description: "Neon Railroad Ink — glowing rails and synthwave scoring.",
+  howToPlay: `Railroad Ink Neon is a 12-roll dice-and-mark game with themed scoring.
+
+How to play
+1. Press Roll to throw a d6.
+2. Click any unmarked cell on the 4x4 grid to mark it with that value.
+3. Score = die value + zone bonus + adjacency bonus (matching value next door).
+4. Skip if no good spot — that roll is wasted.
+
+Theme: Dark mode: bonus when 4+ rolls match a color.
+
+End-of-game bonuses
+- Full row: +4 each
+- Full column: +4 each
+- Full board: +12
+
+The game ends after 12 rolls (or earlier if all 16 cells are filled). Maximum reachable depends on a balanced spread; aim for 50-80 in a strong run.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as RailroadInkNeonSettings),
+  initialState: (seed, s) => initialState(seed, s as RailroadInkNeonSettings),
   reducer,
   isTerminal,
   component: RailroadInkNeonGame,

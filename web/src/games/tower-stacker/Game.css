@@ -1,25 +1,37 @@
-.trivia-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px;font-family:sans-serif;max-width:640px;margin:0 auto; }
-.trivia-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.trivia-progress { font-size:0.95rem;color:#555; }
-.trivia-score { font-size:1.1rem;font-weight:700;color:#27ae60; }
-.trivia-timer { font-size:1.4rem;font-weight:900;color:#e74c3c;min-width:40px;text-align:center; }
-.trivia-timer.urgent { animation:pulse 0.5s infinite alternate; }
-@keyframes pulse { from { opacity:1; } to { opacity:0.4; } }
-.trivia-question { font-size:1.25rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.trivia-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
-.trivia-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;transition:border-color 0.15s,background 0.15s;text-align:left; }
-.trivia-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.trivia-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.trivia-choice-letter { font-weight:900;font-size:1.1rem;color:#95a5a6;min-width:24px; }
-.trivia-actions { display:flex;gap:12px; }
-.trivia-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer; }
-.trivia-btn.submit { background:#27ae60;color:#fff; }
-.trivia-btn.next { background:#3498db;color:#fff; }
-.trivia-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.trivia-feedback { font-size:1.1rem;font-weight:700;padding:10px 24px;border-radius:8px; }
-.trivia-feedback.correct { background:#eafaf1;color:#1e8449; }
-.trivia-feedback.wrong { background:#fdedec;color:#c0392b; }
-.trivia-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:16px;width:100%; }
-.trivia-done h2 { margin-bottom:8px; }
+.towrn-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 20px; max-width: 720px; margin: 0 auto; user-select: none;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+}
+.towrn-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.towrn-info { font-size: 1rem; font-family: 'JetBrains Mono', monospace; color: #475569; }
+.towrn-score { font-size: 1.4rem; font-weight: 900; color: #1d4ed8; font-family: 'JetBrains Mono', monospace; }
+.towrn-track {
+  display: flex; flex-direction: column; gap: 6px; width: 100%;
+  padding: 12px; border-radius: 14px;
+  background: linear-gradient(180deg, #dbeafe, #93c5fd);
+  border: 3px solid #1d4ed8;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.towrn-lane {
+  position: relative; height: 70px; border-radius: 10px;
+  background: rgba(255,255,255,0.7); border: 2px solid transparent; cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.towrn-lane.active { border-color: #1d4ed8; box-shadow: inset 0 0 12px #1d4ed855; }
+.towrn-player { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 2rem; }
+.towrn-obstacle { position: absolute; top: 50%; transform: translate(-50%,-50%); font-size: 1.8rem; transition: left 0.1s linear; }
+.towrn-controls { display: flex; gap: 12px; }
+.towrn-btn {
+  padding: 10px 22px; font-size: 1rem; font-weight: 700;
+  background: #1d4ed8; color: white; border: none; border-radius: 10px;
+  cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: transform 0.1s, filter 0.1s;
+}
+.towrn-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.towrn-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.towrn-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+.towrn-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.towrn-stats { font-family: 'Inter', sans-serif; color: #475569; }
+.towrn-final { font-size: 1.6rem; color: #1d4ed8; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }

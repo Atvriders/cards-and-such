@@ -1,7 +1,6 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-// Columns Mini: 6x6 match-3 with 60s timer.
-// Click two adjacent cells to swap; 3+ in a row clears and gives points.
+// Columns Mini: 6x6 match-3, swap adjacent gems, 3+ in row clears, gravity, score, 60s timer.
 
 export const ROWS = 6;
 export const COLS = 6;
@@ -76,7 +75,6 @@ function clearAndRefill(grid: Grid, rng: () => number): { newGrid: Grid; cleared
     const c = parseInt(parts[1]!, 10);
     next[r]![c] = -1;
   }
-  // gravity
   for (let c = 0; c < COLS; c++) {
     const stack: number[] = [];
     for (let r = ROWS - 1; r >= 0; r--) {
@@ -105,6 +103,7 @@ export function reducer(state: ColumnsMiniState, action: ColumnsMiniAction): Col
     const { row, col } = action;
     if (!state.selected) return { ...state, selected: [row, col] };
     const [sr, sc] = state.selected;
+    if (sr === row && sc === col) return { ...state, selected: null };
     const dr = Math.abs(row - sr);
     const dc = Math.abs(col - sc);
     const adjacent = (dr === 1 && dc === 0) || (dr === 0 && dc === 1);

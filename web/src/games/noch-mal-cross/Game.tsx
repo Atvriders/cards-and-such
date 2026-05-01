@@ -1,45 +1,51 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { NochMalCrossState, NochMalCrossAction, NochMalCrossSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_ROLLS } from "./state.js";
+import { isTerminal, GRID_SIZE, TOTAL_ROLLS, cellZone } from "./state.js";
 import "./Game.css";
 
 export function NochMalCrossGame({ state, dispatch, onGameOver }: GameProps<NochMalCrossState, NochMalCrossSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="rw-wrap">
-        <div className="rw-done">
-          <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
+  const final = t?.score ?? state.score;
   return (
-    <div className="rw-wrap">
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
-      {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
+    <div className="nmc-wrap">
+      <header className="nmc-head">
+        <h2 className="nmc-title">Noch Mal Cross</h2>
+        <div className="nmc-meta">
+          <span className="nmc-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="nmc-meta-score">{state.score} pts</span>
+        </div>
+      </header>
+      {state.phase === "marking" && state.lastRoll !== null && (
+        <div className="nmc-die-area">
+          <div className="nmc-die" aria-label={`Die showing ${state.lastRoll}`}>{state.lastRoll}</div>
+          <div className="nmc-hint">Pick a cell to mark, or Skip.</div>
+        </div>
       )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
+      <div className="nmc-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
           <button
             key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
-            disabled={filled || state.phase !== "marking"}
+            className={`nmc-cell nmc-z${cellZone(i)}${filled ? " nmc-on" : ""}`}
+            disabled={filled || state.phase !== "marking" || state.phase === "done"}
             onClick={() => dispatch({ type: "mark", index: i } as NochMalCrossAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}
       </div>
-      {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as NochMalCrossAction)}>Roll</button>
+      <div className="nmc-controls">
+        {state.phase === "rolling" && (
+          <button className="nmc-btn nmc-btn-primary" onClick={() => dispatch({ type: "roll" } as NochMalCrossAction)}>Roll</button>
+        )}
+        {state.phase === "marking" && (
+          <button className="nmc-btn nmc-btn-skip" onClick={() => dispatch({ type: "skip" } as NochMalCrossAction)}>Skip</button>
+        )}
+        <button className="nmc-btn nmc-btn-reset" onClick={() => dispatch({ type: "reset" } as NochMalCrossAction)}>Reset</button>
+      </div>
+      {state.phase === "done" && (
+        <div className="nmc-done">Final score: <b>{final}</b></div>
       )}
-      {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as NochMalCrossAction)}>Skip</button>
-      )}
+      <div className="nmc-rules">Column complete: +column number</div>
     </div>
   );
 }

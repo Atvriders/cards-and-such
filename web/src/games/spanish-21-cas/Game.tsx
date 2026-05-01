@@ -3,25 +3,35 @@ import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { Spanish21CasState, Spanish21CasAction, Spanish21CasSettings } from "./state.js";
 import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
+
+const SURRENDER_ENABLED = true;
 export function Spanish21CasGame({ state, dispatch, onGameOver }: GameProps<Spanish21CasState, Spanish21CasSettings>): JSX.Element {
-  const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><h3>Spanish 21</h3><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  if (state.phase === "done") return <div className="sp21-c-wrap"><div className="sp21-c-done"><h2>Done!</h2><div className="sp21-c-final">{state.score} pts</div></div></div>;
+  const showDealer = state.phase !== "play";
   return (
-    <div className="dm-wrap">
-      <h3>Spanish 21</h3>
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.cardA !== null && state.cardB !== null && state.cardC !== null && (
-        <div className="dm-row">
-          <div className={`dm-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>
-          <div className={`dm-card ${isRed(state.cardB) ? "red" : "black"}`}>{cardName(state.cardB)}</div>
-          <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
-        </div>
-      )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as Spanish21CasAction)}>Play</button>}
+    <div className="sp21-c-wrap">
+      <div className="sp21-c-title">Spanish 21</div>
+      <div className="sp21-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="sp21-c-score">{state.score} pts</div>
+      <div className="sp21-c-info">Dealer ({showDealer ? state.dealerTotal : "?"}):</div>
+      <div className="sp21-c-row">
+        {state.dealer.map((c, i) => (i === 1 && !showDealer)
+          ? <div key={i} className="sp21-c-card back">??</div>
+          : <div key={i} className={`sp21-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}
+      </div>
+      <div className="sp21-c-info">You ({state.yourTotal}):</div>
+      <div className="sp21-c-row">{state.you.map((c, i) => <div key={i} className={`sp21-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <div className="sp21-c-actions">
+        <button className="sp21-c-btn" onClick={() => dispatch({ type: "hit" } as Spanish21CasAction)}>Hit</button>
+        <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "stand" } as Spanish21CasAction)}>Stand</button>
+        {state.you.length === 2 && <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "double" } as Spanish21CasAction)}>Double</button>}
+        {SURRENDER_ENABLED && state.you.length === 2 && <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "surrender" } as Spanish21CasAction)}>Surrender</button>}
+      </div>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as Spanish21CasAction)}>Next</button>
+        <div className="sp21-c-result">{state.result} — +{state.pts}</div>
+        <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "next" } as Spanish21CasAction)}>Next</button>
       </>}
     </div>
   );

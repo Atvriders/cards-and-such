@@ -1,70 +1,108 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface QwixxConnectedSettings { rounds: "10"; }
+export const ROW_COUNT = 3;
+export const ROW_LEN = 5; // each row has 5 numbered slots
+export const TOTAL_SLOTS = ROW_COUNT * ROW_LEN;
+export const TOTAL_ROLLS = 12;
+export const DIE_MAX = 6;
 
+export interface QwixxConnectedSettings { dummy: boolean; }
 export interface QwixxConnectedState {
   rngSeed: number;
+  values: (number | null)[]; // length 15, slot value or null
+  rolls: number;
+  lastRoll: number | null;
   score: number;
-  round: number;
-  maxRounds: number;
-  lastRoll: number[];
-  lastGain: number;
-  phase: "ready" | "rolled" | "gameover";
+  phase: "rolling" | "placing" | "done";
 }
+export type QwixxConnectedAction =
+  | { type: "roll" }
+  | { type: "place"; index: number }
+  | { type: "skip" }
+  | { type: "reset" };
 
-export type QwixxConnectedAction = { type: "roll" } | { type: "next" };
-
-function rollFive(seed: number): { dice: number[]; nextSeed: number } {
-  const rng = mulberry32(seed);
-  const dice: number[] = [];
-  for (let i = 0; i < 5; i++) dice.push(Math.floor(rng() * 6) + 1);
-  return { dice, nextSeed: (seed + 7919) >>> 0 };
-}
-
-export function scoreRoll(dice: number[], round: number): number {
-  // generic: sum of top 3 + pair bonus + chain bonus
-  const sorted = [...dice].sort((a, b) => b - a);
-  let s = (sorted[0] ?? 0) + (sorted[1] ?? 0) + (sorted[2] ?? 0);
-  const counts: Record<number, number> = {};
-  for (const v of dice) counts[v] = (counts[v] ?? 0) + 1;
-  for (const k of Object.keys(counts)) {
-    const c = counts[Number(k)] ?? 0;
-    if (c >= 3) s += 5;
-    else if (c === 2) s += 2;
-  }
-  // small round bonus (so rounds differ)
-  if (round % 3 === 0) s += 3;
-  return s;
-}
-
-export function initialState(seed: number, _settings: QwixxConnectedSettings): QwixxConnectedState {
+export function initialState(seed: number, _s: QwixxConnectedSettings): QwixxConnectedState {
   return {
     rngSeed: seed >>> 0,
+    values: new Array(TOTAL_SLOTS).fill(null),
+    rolls: 0,
+    lastRoll: null,
     score: 0,
-    round: 1,
-    maxRounds: 10,
-    lastRoll: [],
-    lastGain: 0,
-    phase: "ready",
+    phase: "rolling",
   };
 }
 
-export function reducer(state: QwixxConnectedState, action: QwixxConnectedAction): QwixxConnectedState {
-  if (state.phase === "gameover") return state;
-  if (action.type === "roll") {
-    if (state.phase !== "ready") return state;
-    const { dice, nextSeed } = rollFive(state.rngSeed);
-    const gain = scoreRoll(dice, state.round);
-    return { ...state, rngSeed: nextSeed, lastRoll: dice, lastGain: gain, score: state.score + gain, phase: "rolled" };
+// A slot is legal if (a) empty, (b) the row remains strictly ascending after placement.
+export function legalAt(values: (number | null)[], index: number, roll: number): boolean {
+  if (values[index] !== null) return false;
+  const row = Math.floor(index / ROW_LEN);
+  const col = index % ROW_LEN;
+  // check left: any non-null left value < roll
+  for (let c = 0; c < col; c++) {
+    const v = values[row * ROW_LEN + c];
+    if (v !== null && v >= roll) return false;
   }
-  if (action.type === "next") {
-    if (state.phase !== "rolled") return state;
-    if (state.round >= state.maxRounds) return { ...state, phase: "gameover" };
-    return { ...state, round: state.round + 1, phase: "ready", lastGain: 0, lastRoll: [] };
+  // check right: any non-null right value > roll
+  for (let c = col + 1; c < ROW_LEN; c++) {
+    const v = values[row * ROW_LEN + c];
+    if (v !== null && v <= roll) return false;
+  }
+  return true;
+}
+
+export function placeValue(roll: number, idx: number, values: (number | null)[]): number {
+  // Score: roll value + adjacency bonus if neighbor filled and consecutive.
+  let v = roll;
+  const col = idx % ROW_LEN;
+  const row = Math.floor(idx / ROW_LEN);
+  const left = col > 0 ? values[row * ROW_LEN + (col - 1)] : null;
+  const right = col < ROW_LEN - 1 ? values[row * ROW_LEN + (col + 1)] : null;
+  if (left !== null && roll - left === 1) v += 2;
+  if (right !== null && right - roll === 1) v += 2;
+  return v;
+}
+
+export function reducer(state: QwixxConnectedState, action: QwixxConnectedAction): QwixxConnectedState {
+  if (state.phase === "done") return state;
+  if (action.type === "reset") return initialState(state.rngSeed, { dummy: false });
+  if (action.type === "roll") {
+    if (state.phase !== "rolling") return state;
+    const rng = mulberry32(state.rngSeed);
+    const d = 1 + Math.floor(rng() * DIE_MAX);
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    return { ...state, rngSeed: nextSeed >>> 0, lastRoll: d, phase: "placing" };
+  }
+  if (action.type === "place") {
+    if (state.phase !== "placing") return state;
+    if (!legalAt(state.values, action.index, state.lastRoll ?? 0)) return state;
+    const values = [...state.values];
+    values[action.index] = state.lastRoll;
+    const gain = placeValue(state.lastRoll ?? 0, action.index, state.values);
+    const rolls = state.rolls + 1;
+    const phase: "rolling" | "placing" | "done" =
+      rolls >= TOTAL_ROLLS || values.every(v => v !== null) ? "done" : "rolling";
+    return { ...state, values, rolls, score: state.score + gain, phase };
+  }
+  if (action.type === "skip") {
+    if (state.phase !== "placing") return state;
+    const rolls = state.rolls + 1;
+    const phase: "rolling" | "placing" | "done" = rolls >= TOTAL_ROLLS ? "done" : "rolling";
+    // small skip penalty so skip isn't free
+    return { ...state, rolls, score: Math.max(0, state.score - 1), phase };
   }
   return state;
 }
 
 export function isTerminal(state: QwixxConnectedState): { score: number } | null {
-  return state.phase === "gameover" ? { score: state.score } : null;
+  if (state.phase !== "done") return null;
+  let bonus = 0;
+  // Each fully completed row: +6
+  for (let r = 0; r < ROW_COUNT; r++) {
+    let full = true;
+    for (let c = 0; c < ROW_LEN; c++) if (state.values[r * ROW_LEN + c] === null) { full = false; break; }
+    if (full) bonus += 6;
+  }
+  // Full board: +10
+  if (state.values.every(v => v !== null)) bonus += 10;
+  return { score: state.score + bonus };
 }

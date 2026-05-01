@@ -1,98 +1,625 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface Puzzle { grid: string; prompt: string; choices: [string,string,string,string]; correct: 0|1|2|3; }
+
+export interface Puzzle {
+  given: number[]; // length 36; -1 = blocked, 0 = empty, other = fixed
+  solution: number[]; // length 36
+}
+
 export interface TakuzuMiniSettings { dummy: boolean; }
-export interface TakuzuMiniState { puzzles: Puzzle[]; idx: number; selected: number | null; submitted: boolean; score: number; correct: number; phase: "playing"|"result"|"done"; }
-export type TakuzuMiniAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" };
+
+export interface TakuzuMiniState {
+  puzzles: Puzzle[];
+  idx: number;
+  current: number[];
+  selected: number | null;
+  errors: number[];
+  hintsUsed: number;
+  movesMade: number;
+  solved: boolean;
+  totalSolved: number;
+  score: number;
+  phase: "playing" | "done";
+  settings: TakuzuMiniSettings;
+}
+
+export type TakuzuMiniAction =
+  | { type: "select"; index: number | null }
+  | { type: "enter"; value: number }
+  | { type: "hint" }
+  | { type: "check" }
+  | { type: "next" };
+
+export const GRID_ROWS = 6;
+export const GRID_COLS = 6;
+export const VALUES: readonly number[] = [1,2];
+export const VALUE_LABELS: readonly string[] = ["0","1"];
+
 const PUZZLES: Puzzle[] = [
   {
-    "grid": "....|....|....|....",
-    "prompt": "Two completed rows in a Takuzu grid look identical. Legal?",
-    "choices": [
-      "yes",
-      "no",
-      "only if columns differ",
-      "only if 4x4"
+    "given": [
+      0,
+      2,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      1,
+      2,
+      0,
+      0,
+      2,
+      2,
+      1,
+      0,
+      2,
+      2,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0
     ],
-    "correct": 1
+    "solution": [
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1
+    ]
   },
   {
-    "grid": "....|....|....|....",
-    "prompt": "Takuzu adds which constraint over Binairo?",
-    "choices": [
-      "row uniqueness",
-      "triple ban",
-      "equal count",
-      "none"
+    "given": [
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      2,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0
     ],
-    "correct": 0
+    "solution": [
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1
+    ]
   },
   {
-    "grid": "....|....|....|....",
-    "prompt": "In a 4x4 Takuzu, all four rows must be?",
-    "choices": [
-      "distinct",
-      "identical",
-      "palindromes",
-      "sorted"
+    "given": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      2,
+      2,
+      2,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      2,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      2,
+      1
     ],
-    "correct": 0
+    "solution": [
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1
+    ]
   },
   {
-    "grid": "0011|....|....|....",
-    "prompt": "Row 1 = 0011. Row 2 cannot be?",
-    "choices": [
-      "1100",
-      "0101",
-      "0110",
-      "0011"
+    "given": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      0,
+      0,
+      0
     ],
-    "correct": 3
+    "solution": [
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1
+    ]
   },
   {
-    "grid": "....|....|....|....",
-    "prompt": "Two identical columns also forbidden in Takuzu?",
-    "choices": [
-      "yes",
-      "no",
-      "only middle",
-      "only first"
+    "given": [
+      0,
+      2,
+      0,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      0,
+      0,
+      1,
+      2,
+      2,
+      1,
+      0,
+      2,
+      2,
+      1,
+      0,
+      2,
+      2,
+      1,
+      0,
+      2,
+      0,
+      0,
+      1,
+      2,
+      2,
+      1,
+      0,
+      0,
+      2,
+      1
     ],
-    "correct": 0
+    "solution": [
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1
+    ]
   },
   {
-    "grid": "1010|....|....|....",
-    "prompt": "Row 1 = 1010. Row 2 may be?",
-    "choices": [
-      "1010",
-      "0101",
-      "not 1010",
-      "both b and c"
+    "given": [
+      0,
+      0,
+      2,
+      2,
+      0,
+      0,
+      2,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      2,
+      1,
+      2,
+      0,
+      1,
+      2,
+      1,
+      0,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      2,
+      1
     ],
-    "correct": 3
+    "solution": [
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1
+    ]
   }
 ];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a = [...arr]; for (let i = a.length-1; i > 0; i--) { const j = Math.floor(rng()*(i+1)); [a[i], a[j]] = [a[j]!, a[i]!]; } return a; }
-export function initialState(seed: number, _s: TakuzuMiniSettings): TakuzuMiniState {
+
+function shuffle<T>(arr: T[], rng: () => number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
+export function initialState(seed: number, settings: TakuzuMiniSettings): TakuzuMiniState {
   const rng = mulberry32(seed);
   const puzzles = shuffle(PUZZLES, rng);
-  return { puzzles, idx: 0, selected: null, submitted: false, score: 0, correct: 0, phase: "playing" };
+  return {
+    puzzles,
+    idx: 0,
+    current: [...puzzles[0]!.given],
+    selected: null,
+    errors: [],
+    hintsUsed: 0,
+    movesMade: 0,
+    solved: false,
+    totalSolved: 0,
+    score: 0,
+    phase: "playing",
+    settings,
+  };
 }
+
+export function validate(current: number[], solution: number[]): number[] {
+  const errs: number[] = [];
+  for (let i = 0; i < current.length; i++) {
+    if (current[i] !== 0 && current[i] !== -1 && current[i] !== solution[i]) errs.push(i);
+  }
+  return errs;
+}
+
+function isComplete(current: number[], solution: number[]): boolean {
+  for (let i = 0; i < current.length; i++) {
+    if (current[i] !== solution[i]) return false;
+  }
+  return true;
+}
+
 export function reducer(state: TakuzuMiniState, action: TakuzuMiniAction): TakuzuMiniState {
   if (state.phase === "done") return state;
-  if (action.type === "select") return state.submitted ? state : { ...state, selected: action.choice };
-  if (action.type === "submit") {
-    if (state.submitted || state.selected === null) return state;
-    const p = state.puzzles[state.idx]!;
-    const ok = state.selected === p.correct;
-    return { ...state, submitted: true, phase: "result", score: state.score + (ok ? 100 : 0), correct: state.correct + (ok ? 1 : 0) };
+  const puzzle = state.puzzles[state.idx]!;
+
+  switch (action.type) {
+    case "select":
+      return { ...state, selected: action.index, errors: [] };
+
+    case "enter": {
+      if (state.selected === null || state.solved) return state;
+      const g = puzzle.given[state.selected]!;
+      if (g !== 0) return state;
+      const next = [...state.current];
+      next[state.selected] = action.value;
+      const solved = isComplete(next, puzzle.solution);
+      return {
+        ...state,
+        current: next,
+        movesMade: state.movesMade + 1,
+        solved,
+        score: solved ? state.score + Math.max(50, 200 - state.hintsUsed * 30) : state.score,
+        totalSolved: solved ? state.totalSolved + 1 : state.totalSolved,
+        errors: [],
+      };
+    }
+
+    case "hint": {
+      if (state.solved) return state;
+      const empty: number[] = [];
+      for (let i = 0; i < state.current.length; i++) {
+        if (puzzle.given[i] === 0 && state.current[i] !== puzzle.solution[i]) empty.push(i);
+      }
+      if (empty.length === 0) return state;
+      const idx = empty[0]!;
+      const next = [...state.current];
+      next[idx] = puzzle.solution[idx]!;
+      const solved = isComplete(next, puzzle.solution);
+      return {
+        ...state,
+        current: next,
+        hintsUsed: state.hintsUsed + 1,
+        movesMade: state.movesMade + 1,
+        solved,
+        score: solved ? state.score + Math.max(50, 200 - state.hintsUsed * 30) : state.score,
+        totalSolved: solved ? state.totalSolved + 1 : state.totalSolved,
+        errors: [],
+      };
+    }
+
+    case "check":
+      return { ...state, errors: validate(state.current, puzzle.solution) };
+
+    case "next": {
+      const ni = state.idx + 1;
+      if (ni >= state.puzzles.length) return { ...state, phase: "done" };
+      return {
+        ...state,
+        idx: ni,
+        current: [...state.puzzles[ni]!.given],
+        selected: null,
+        errors: [],
+        solved: false,
+        hintsUsed: 0,
+        movesMade: 0,
+      };
+    }
+
+    default:
+      return state;
   }
-  if (action.type === "next") {
-    const ni = state.idx + 1;
-    if (ni >= state.puzzles.length) return { ...state, phase: "done" };
-    return { ...state, idx: ni, selected: null, submitted: false, phase: "playing" };
-  }
-  return state;
 }
+
 export function isTerminal(state: TakuzuMiniState): { score: number } | null {
   return state.phase === "done" ? { score: state.score } : null;
 }

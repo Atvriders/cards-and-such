@@ -1,8 +1,11 @@
 import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SpikeDodgerState, SpikeDodgerAction, SpikeDodgerSettings } from "./state.js";
-import { isTerminal, LANES } from "./state.js";
+import { isTerminal, LANES, LANE_LENGTH, TICK_MS } from "./state.js";
 import "./Game.css";
+
+const PLAYER_ICON = "🛡️";
+const OBSTACLE_ICON = "⚡";
 
 export function SpikeDodgerGame({ state, dispatch, onGameOver }: GameProps<SpikeDodgerState, SpikeDodgerSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -10,31 +13,56 @@ export function SpikeDodgerGame({ state, dispatch, onGameOver }: GameProps<Spike
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
     if (state.phase !== "playing") { if (tickRef.current) clearInterval(tickRef.current); return; }
-    tickRef.current = setInterval(() => dispatch({ type: "tick" } as SpikeDodgerAction), 750);
+    tickRef.current = setInterval(() => dispatch({ type: "tick" } as SpikeDodgerAction), TICK_MS);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent): void {
+      if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") { e.preventDefault(); dispatch({ type: "lane", dir: -1 } as SpikeDodgerAction); }
+      else if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") { e.preventDefault(); dispatch({ type: "lane", dir: 1 } as SpikeDodgerAction); }
+      else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") { e.preventDefault(); dispatch({ type: "lane", dir: -1 } as SpikeDodgerAction); }
+      else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") { e.preventDefault(); dispatch({ type: "lane", dir: 1 } as SpikeDodgerAction); }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [dispatch]);
   if (state.phase === "done") {
-    return <div className="cl-wrap"><div className="cl-done"><h2>Time's Up!</h2><div>Hits: {state.hits} / Misses: {state.misses}</div><div className="cl-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="spirn-wrap">
+        <div className="spirn-done">
+          <h2>Crashed!</h2>
+          <div className="spirn-stats">Survived {state.ticks} ticks</div>
+          <div className="spirn-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="cl-wrap">
-      <div className="cl-header">
-        <span className="cl-info">Hits: {state.hits}</span>
-        <span className="cl-timer">{state.ticksRemaining}s</span>
-        <span className="cl-score">{state.score} pts</span>
+    <div className="spirn-wrap">
+      <div className="spirn-header">
+        <span className="spirn-info">Survived: {state.ticks}</span>
+        <span className="spirn-score">{state.score} pts</span>
       </div>
-      <div className="cl-board">
-        {state.targets.map(p => {
-          const x = (p.lane + 0.5) / LANES * 100;
-          const y = 20 + ((p.ticksLeft * 23) % 70);
-          return (
-            <button key={p.id} className="cl-target"
-              style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
-              onClick={() => dispatch({ type: "hit", id: p.id } as SpikeDodgerAction)}
-              aria-label="target">🛡️</button>
-          );
-        })}
+      <div className="spirn-track">
+        {Array.from({ length: LANES }).map((_, lane) => (
+          <button key={lane} className={`spirn-lane${state.playerLane === lane ? " active" : ""}`}
+            onClick={() => dispatch({ type: "setLane", lane } as SpikeDodgerAction)}
+            aria-label={`lane ${lane}`}>
+            {state.playerLane === lane && (
+              <span className="spirn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+            )}
+            {state.obstacles.filter(o => o.lane === lane).map(o => (
+              <span key={o.id} className="spirn-obstacle"
+                style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
+            ))}
+          </button>
+        ))}
       </div>
+      <div className="spirn-controls">
+        <button className="spirn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SpikeDodgerAction)}>↑ Up</button>
+        <button className="spirn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SpikeDodgerAction)}>↓ Down</button>
+      </div>
+      <div className="spirn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

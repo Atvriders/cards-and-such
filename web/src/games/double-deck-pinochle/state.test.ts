@@ -1,65 +1,18 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, legalPlays } from "./state.js";
-
-describe("double-deck-pinochle initialState", () => {
-  it("deals correct number of cards to each player", () => {
-    const s = initialState(42);
-    expect(s.playerHand.length).toBe(10);
-    expect(s.botHand.length).toBe(10);
+import { initialState, reducer, isTerminal } from "./state.js";
+const S = { dummy: false };
+describe("double-deck-pinochle", () => {
+  it("starts in playing phase", () => { expect(initialState(1, S).phase).toBe("playing"); });
+  it("deals two hands", () => { const s = initialState(1, S); expect(s.hands.length).toBe(2); expect(s.hands[0]!.length).toBe(12); });
+  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
+  it("playing a card removes it", () => {
+    const s = initialState(7, S);
+    const cardId = s.hands[0]![0]!.id;
+    const s2 = reducer(s, { type: "play", cardId });
+    expect(s2.hands[0]!.find(c => c.id === cardId)).toBeUndefined();
   });
-
-  it("starts in playing phase", () => {
-    const s = initialState(42);
-    expect(s.phase).toBe("playing");
-  });
-
-  it("is deterministic for the same seed", () => {
-    const s1 = initialState(11);
-    const s2 = initialState(11);
-    expect(s1.playerHand.map(c => c.id)).toEqual(s2.playerHand.map(c => c.id));
-  });
-
-  it("starts with player leading", () => {
-    const s = initialState(7);
-    expect(s.playerLeads).toBe(true);
-    expect(s.currentTrick.length).toBe(0);
-  });
-});
-
-describe("double-deck-pinochle legalPlays", () => {
-  it("all cards legal when leading", () => {
-    const s = initialState(42);
-    expect(legalPlays(s.playerHand, s.currentTrick).length).toBeGreaterThanOrEqual(10);
-  });
-});
-
-describe("double-deck-pinochle reducer", () => {
-  it("playing a card removes it from your hand", () => {
-    const s = initialState(42);
-    const card = s.playerHand[0]!;
-    const s2 = reducer(s, { type: "play", cardId: card.id });
-    expect(s2.playerHand.find(c => c.id === card.id)).toBeUndefined();
-  });
-
-  it("ignores invalid card IDs", () => {
-    const s = initialState(42);
-    const s2 = reducer(s, { type: "play", cardId: "no-such-card" });
-    expect(s2).toBe(s);
-  });
-});
-
-describe("double-deck-pinochle full game", () => {
-  it("completes a full game", () => {
-    let s = initialState(13);
-    let iter = 0;
-    while (s.phase === "playing" && iter < 500) {
-      const legal = legalPlays(s.playerHand, s.currentTrick);
-      if (legal.length === 0) break;
-      s = reducer(s, { type: "play", cardId: legal[0]!.id });
-      iter++;
-    }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
-    expect(s.playerTricks + s.botTricks).toBeGreaterThanOrEqual(5);
+  it("is deterministic", () => {
+    const a = initialState(99, S); const b = initialState(99, S);
+    expect(a.hands[0]!.map(c => c.id)).toEqual(b.hands[0]!.map(c => c.id));
   });
 });

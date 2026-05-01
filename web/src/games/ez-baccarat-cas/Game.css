@@ -1,2 +1,14 @@
-/* Modern casino-table engine — see web/src/engines/casino/casino.css */
-@import "../../engines/casino/casino.css";
+.ez-b-c-wrap { display:flex; flex-direction:column; gap:0.6rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#1a1f3a,#0a0f1f); color:#f5f5f5; font-family: system-ui, sans-serif; align-items: center; }
+.ez-b-c-title { font-size:1.2rem; font-weight:700; color:#ffca28; }
+.ez-b-c-info { font-size:0.85rem; opacity:0.8; }
+.ez-b-c-score { font-size:1.6rem; font-weight:800; color:#ffca28; }
+.ez-b-c-row { display:flex; gap:0.4rem; flex-wrap:wrap; justify-content:center; }
+.ez-b-c-card { width:3.2rem; height:4.5rem; border-radius:6px; background:#fff; color:#222; font-weight:700; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 4px rgba(0,0,0,0.4); }
+.ez-b-c-card.red { color:#c62828; }
+.ez-b-c-actions { display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; }
+.ez-b-c-btn { background:#ffca28; color:#000; padding:0.6rem 1.1rem; border:none; border-radius:6px; font-weight:700; cursor:pointer; }
+.ez-b-c-btn:hover { filter:brightness(1.15); }
+.ez-b-c-btn.alt { background:#444; color:#fff; }
+.ez-b-c-result { font-size:1rem; font-weight:600; padding:0.5rem 1rem; background:rgba(0,0,0,0.3); border-radius:6px; text-align:center; }
+.ez-b-c-done { text-align:center; padding:1.5rem; background:rgba(0,0,0,0.4); border-radius:8px; border:2px solid #ffca28; }
+.ez-b-c-final { font-size:2rem; font-weight:900; color:#ffca28; }

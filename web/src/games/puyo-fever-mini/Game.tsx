@@ -4,7 +4,7 @@ import type { PuyoFeverMiniState, PuyoFeverMiniAction, PuyoFeverMiniSettings } f
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["🟪","🟦","🟩","🟨","🟥","🟧"];
+const GEMS = ["🔥","💥","⚡","💫","🌟","✨"];
 
 export function PuyoFeverMiniGame({ state, dispatch, onGameOver }: GameProps<PuyoFeverMiniState, PuyoFeverMiniSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -16,20 +16,28 @@ export function PuyoFeverMiniGame({ state, dispatch, onGameOver }: GameProps<Puy
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="pfmm3-wrap">
+        <div className="pfmm3-done">
+          <h2>Time's Up!</h2>
+          <div className="pfmm3-stats">Matches: {state.matches}</div>
+          <div className="pfmm3-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="pfmm3-wrap">
+      <div className="pfmm3-header">
+        <span className="pfmm3-info">Matches: {state.matches}</span>
+        <span className="pfmm3-timer">{state.ticksRemaining}s</span>
+        <span className="pfmm3-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="pfmm3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`pfmm3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuyoFeverMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

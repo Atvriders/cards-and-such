@@ -1,45 +1,51 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { HadriansWallRomanState, HadriansWallRomanAction, HadriansWallRomanSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_ROLLS } from "./state.js";
+import { isTerminal, GRID_SIZE, TOTAL_ROLLS, cellZone } from "./state.js";
 import "./Game.css";
 
 export function HadriansWallRomanGame({ state, dispatch, onGameOver }: GameProps<HadriansWallRomanState, HadriansWallRomanSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="rw-wrap">
-        <div className="rw-done">
-          <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
+  const final = t?.score ?? state.score;
   return (
-    <div className="rw-wrap">
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
-      {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
+    <div className="hwr-wrap">
+      <header className="hwr-head">
+        <h2 className="hwr-title">Hadrian's Wall Roman</h2>
+        <div className="hwr-meta">
+          <span className="hwr-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="hwr-meta-score">{state.score} pts</span>
+        </div>
+      </header>
+      {state.phase === "marking" && state.lastRoll !== null && (
+        <div className="hwr-die-area">
+          <div className="hwr-die" aria-label={`Die showing ${state.lastRoll}`}>{state.lastRoll}</div>
+          <div className="hwr-hint">Pick a cell to mark, or Skip.</div>
+        </div>
       )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
+      <div className="hwr-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
           <button
             key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
-            disabled={filled || state.phase !== "marking"}
+            className={`hwr-cell hwr-z${cellZone(i)}${filled ? " hwr-on" : ""}`}
+            disabled={filled || state.phase !== "marking" || state.phase === "done"}
             onClick={() => dispatch({ type: "mark", index: i } as HadriansWallRomanAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}
       </div>
-      {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as HadriansWallRomanAction)}>Roll</button>
+      <div className="hwr-controls">
+        {state.phase === "rolling" && (
+          <button className="hwr-btn hwr-btn-primary" onClick={() => dispatch({ type: "roll" } as HadriansWallRomanAction)}>Roll</button>
+        )}
+        {state.phase === "marking" && (
+          <button className="hwr-btn hwr-btn-skip" onClick={() => dispatch({ type: "skip" } as HadriansWallRomanAction)}>Skip</button>
+        )}
+        <button className="hwr-btn hwr-btn-reset" onClick={() => dispatch({ type: "reset" } as HadriansWallRomanAction)}>Reset</button>
+      </div>
+      {state.phase === "done" && (
+        <div className="hwr-done">Final score: <b>{final}</b></div>
       )}
-      {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as HadriansWallRomanAction)}>Skip</button>
-      )}
+      <div className="hwr-rules">Roll 6: legion bonus +3</div>
     </div>
   );
 }

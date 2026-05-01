@@ -1,38 +1,58 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { QwixxConnectedState, QwixxConnectedAction } from "./state.js";
-import { isTerminal } from "./state.js";
+import type { QwixxConnectedState, QwixxConnectedAction, QwixxConnectedSettings } from "./state.js";
+import { isTerminal, ROW_COUNT, ROW_LEN, TOTAL_ROLLS, legalAt } from "./state.js";
 import "./Game.css";
 
-type QwixxConnectedSettingsT = QwixxConnectedState["" extends "" ? "rngSeed" : never];
-
-export function QwixxConnected({ state, dispatch, onGameOver }: GameProps<QwixxConnectedState, { rounds: "10" }>): JSX.Element {
-  const terminal = isTerminal(state);
-  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-
-  if (state.phase === "gameover") return (
-    <div className="g-wrap">
-      <h2>Game Over</h2>
-      <p className="g-final">Final Score: {state.score}</p>
-    </div>
-  );
-
+export function QwixxConnectedGame({ state, dispatch, onGameOver }: GameProps<QwixxConnectedState, QwixxConnectedSettings>): JSX.Element {
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  const final = t?.score ?? state.score;
   return (
-    <div className="g-wrap">
-      <div className="g-header">
-        <span>Round {state.round} / {state.maxRounds}</span>
-        <span className="g-score">Score: {state.score}</span>
-      </div>
-      {state.lastRoll.length > 0 && (
-        <div className="g-dice">
-          {state.lastRoll.map((d, i) => <span key={i} className="g-die">{d}</span>)}
+    <div className="qcn-wrap">
+      <header className="qcn-head">
+        <h2 className="qcn-title">Qwixx Connected</h2>
+        <div className="qcn-meta">
+          <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="qcn-score">{state.score} pts</span>
+        </div>
+      </header>
+      {state.phase === "placing" && state.lastRoll !== null && (
+        <div className="qcn-die-area">
+          <div className="qcn-die">{state.lastRoll}</div>
+          <div className="qcn-hint">Place this number into a row, keeping each row strictly ascending.</div>
         </div>
       )}
-      {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
-      <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as QwixxConnectedAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as QwixxConnectedAction)}>Next Round</button>}
+      <div className="qcn-board">
+        {Array.from({ length: ROW_COUNT }).map((_, r) => (
+          <div key={r} className="qcn-row">
+            {Array.from({ length: ROW_LEN }).map((__, c) => {
+              const idx = r * ROW_LEN + c;
+              const val = state.values[idx];
+              const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
+              return (
+                <button
+                  key={c}
+                  className={`qcn-slot${val !== null ? " qcn-filled" : ""}${canPlace ? " qcn-legal" : ""}`}
+                  disabled={val !== null || !canPlace}
+                  onClick={() => dispatch({ type: "place", index: idx } as QwixxConnectedAction)}
+                >{val ?? ""}</button>
+              );
+            })}
+          </div>
+        ))}
       </div>
+      <div className="qcn-controls">
+        {state.phase === "rolling" && (
+          <button className="qcn-btn qcn-primary" onClick={() => dispatch({ type: "roll" } as QwixxConnectedAction)}>Roll</button>
+        )}
+        {state.phase === "placing" && (
+          <button className="qcn-btn qcn-skip" onClick={() => dispatch({ type: "skip" } as QwixxConnectedAction)}>Skip (−1)</button>
+        )}
+        <button className="qcn-btn qcn-reset" onClick={() => dispatch({ type: "reset" } as QwixxConnectedAction)}>Reset</button>
+      </div>
+      {state.phase === "done" && <div className="qcn-done">Final: <b>{final}</b></div>}
+      <div className="qcn-rules">Strictly increasing chain</div>
     </div>
   );
 }

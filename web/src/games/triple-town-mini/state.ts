@@ -1,134 +1,104 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-// Triple Town Mini: 6x6 match-3 with 60s timer.
-// Click two adjacent cells to swap; 3+ in a row clears and gives points.
+// Triple Town Mini: 5x5 merge board. Place a tile; three-of-a-kind in adjacent cells merges into a tier-up tile.
 
-export const ROWS = 6;
-export const COLS = 6;
-export const TIMER_TICKS = 60;
-export const NUM_COLORS = 6;
+export const SIZE = 5;
+export const MAX_TIER = 7;
+export const MAX_MOVES = 60;
 
 export interface TripleTownMiniSettings { dummy: boolean; }
-
-export type Cell = number;
+export type Cell = number; // 0 = empty, 1..MAX_TIER tiers
 export type Grid = Cell[][];
 
 export interface TripleTownMiniState {
   rngSeed: number;
   grid: Grid;
-  selected: [number, number] | null;
-  ticksRemaining: number;
+  next: Cell;
   score: number;
-  matches: number;
+  movesUsed: number;
+  best: number;
   phase: "playing" | "done";
 }
 
-export type TripleTownMiniAction =
-  | { type: "tick" }
-  | { type: "select"; row: number; col: number };
+export type TripleTownMiniAction = { type: "place"; row: number; col: number };
 
-function randomGem(rng: () => number): number { return Math.floor(rng() * NUM_COLORS); }
-
-function makeGrid(seed: number): { grid: Grid; nextSeed: number } {
-  const rng = mulberry32(seed);
-  let grid: Grid;
-  let attempts = 0;
-  do {
-    grid = Array.from({ length: ROWS }, () => Array.from({ length: COLS }, () => randomGem(rng)));
-    attempts++;
-  } while (findMatches(grid).size > 0 && attempts < 20);
-  const nextSeed = (seed * 1664525 + 1013904223) >>> 0;
-  return { grid, nextSeed };
+function randNext(rng: () => number): Cell {
+  const r = rng();
+  if (r < 0.55) return 1;
+  if (r < 0.85) return 2;
+  return 3;
 }
 
-function findMatches(grid: Grid): Set<string> {
-  const matched = new Set<string>();
-  for (let r = 0; r < ROWS; r++) {
-    let c = 0;
-    while (c < COLS) {
-      const color = grid[r]![c]!;
-      let len = 1;
-      while (c + len < COLS && grid[r]![c + len] === color) len++;
-      if (len >= 3) for (let k = 0; k < len; k++) matched.add(`${r},${c + k}`);
-      c += len;
-    }
-  }
-  for (let c = 0; c < COLS; c++) {
-    let r = 0;
-    while (r < ROWS) {
-      const color = grid[r]![c]!;
-      let len = 1;
-      while (r + len < ROWS && grid[r + len]![c] === color) len++;
-      if (len >= 3) for (let k = 0; k < len; k++) matched.add(`${r + k},${c}`);
-      r += len;
-    }
-  }
-  return matched;
+function emptyGrid(): Grid {
+  return Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => 0));
 }
 
-function clearAndRefill(grid: Grid, rng: () => number): { newGrid: Grid; cleared: number } {
-  const matched = findMatches(grid);
-  if (matched.size === 0) return { newGrid: grid, cleared: 0 };
-  const next = grid.map(row => [...row]);
-  for (const key of matched) {
-    const parts = key.split(",");
-    const r = parseInt(parts[0]!, 10);
-    const c = parseInt(parts[1]!, 10);
-    next[r]![c] = -1;
+function flood(grid: Grid, r: number, c: number, tier: number): [number, number][] {
+  const seen = new Set<string>();
+  const stack: [number, number][] = [[r, c]];
+  const cells: [number, number][] = [];
+  while (stack.length) {
+    const [cr, cc] = stack.pop()!;
+    const key = `${cr},${cc}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    if (cr < 0 || cc < 0 || cr >= SIZE || cc >= SIZE) continue;
+    if (grid[cr]![cc] !== tier) continue;
+    cells.push([cr, cc]);
+    stack.push([cr - 1, cc], [cr + 1, cc], [cr, cc - 1], [cr, cc + 1]);
   }
-  // gravity
-  for (let c = 0; c < COLS; c++) {
-    const stack: number[] = [];
-    for (let r = ROWS - 1; r >= 0; r--) {
-      if (next[r]![c] !== -1) stack.push(next[r]![c]!);
-    }
-    for (let r = ROWS - 1; r >= 0; r--) {
-      next[r]![c] = stack.length > 0 ? stack.shift()! : randomGem(rng);
-    }
+  return cells;
+}
+
+function resolveMerge(grid: Grid, r: number, c: number): { grid: Grid; gained: number } {
+  let cur = grid.map(row => [...row]);
+  let gained = 0;
+  while (true) {
+    const tier = cur[r]![c]!;
+    if (tier <= 0 || tier >= MAX_TIER) break;
+    const group = flood(cur, r, c, tier);
+    if (group.length < 3) break;
+    for (const [gr, gc] of group) cur[gr]![gc] = 0;
+    cur[r]![c] = tier + 1;
+    gained += (tier + 1) * group.length * 5;
   }
-  return { newGrid: next, cleared: matched.size };
+  return { grid: cur, gained };
+}
+
+function maxTier(grid: Grid): number {
+  let m = 0;
+  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) if (grid[r]![c]! > m) m = grid[r]![c]!;
+  return m;
+}
+
+function hasEmpty(grid: Grid): boolean {
+  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) if (grid[r]![c] === 0) return true;
+  return false;
 }
 
 export function initialState(seed: number, _settings: TripleTownMiniSettings): TripleTownMiniState {
-  const { grid, nextSeed } = makeGrid(seed);
-  return { rngSeed: nextSeed, grid, selected: null, ticksRemaining: TIMER_TICKS, score: 0, matches: 0, phase: "playing" };
+  const rng = mulberry32(seed);
+  const next = randNext(rng);
+  const seed2 = Math.floor(rng() * 2 ** 31);
+  return { rngSeed: seed2, grid: emptyGrid(), next, score: 0, movesUsed: 0, best: 0, phase: "playing" };
 }
 
 export function reducer(state: TripleTownMiniState, action: TripleTownMiniAction): TripleTownMiniState {
   if (state.phase === "done") return state;
-  if (action.type === "tick") {
-    const ticksRemaining = state.ticksRemaining - 1;
-    const phase = ticksRemaining <= 0 ? "done" : "playing";
-    return { ...state, ticksRemaining, phase };
-  }
-  if (action.type === "select") {
+  if (action.type === "place") {
     const { row, col } = action;
-    if (!state.selected) return { ...state, selected: [row, col] };
-    const [sr, sc] = state.selected;
-    const dr = Math.abs(row - sr);
-    const dc = Math.abs(col - sc);
-    const adjacent = (dr === 1 && dc === 0) || (dr === 0 && dc === 1);
-    if (!adjacent) return { ...state, selected: [row, col] };
-    const newGrid = state.grid.map(r => [...r]);
-    const tmp = newGrid[sr]![sc]!;
-    newGrid[sr]![sc] = newGrid[row]![col]!;
-    newGrid[row]![col] = tmp;
-    const matches = findMatches(newGrid);
-    if (matches.size === 0) return { ...state, selected: null };
+    if (row < 0 || col < 0 || row >= SIZE || col >= SIZE) return state;
+    if (state.grid[row]![col] !== 0) return state;
+    const grid = state.grid.map(r => [...r]);
+    grid[row]![col] = state.next;
+    const merged = resolveMerge(grid, row, col);
     const rng = mulberry32(state.rngSeed);
-    let grid = newGrid;
-    let totalCleared = 0;
-    let cascades = 0;
-    while (true) {
-      const result = clearAndRefill(grid, rng);
-      if (result.cleared === 0) break;
-      totalCleared += result.cleared;
-      cascades++;
-      grid = result.newGrid;
-      if (cascades > 12) break;
-    }
-    const newSeed = (state.rngSeed * 1664525 + 1013904223) >>> 0;
-    return { ...state, grid, selected: null, score: state.score + totalCleared * 10, matches: state.matches + 1, rngSeed: newSeed };
+    const next = randNext(rng);
+    const seed2 = Math.floor(rng() * 2 ** 31);
+    const movesUsed = state.movesUsed + 1;
+    const best = Math.max(state.best, maxTier(merged.grid));
+    const done = !hasEmpty(merged.grid) || movesUsed >= MAX_MOVES;
+    return { ...state, rngSeed: seed2, grid: merged.grid, next, score: state.score + 5 + merged.gained, movesUsed, best, phase: done ? "done" : "playing" };
   }
   return state;
 }
@@ -137,4 +107,4 @@ export function isTerminal(state: TripleTownMiniState): { score: number } | null
   return state.phase === "done" ? { score: state.score } : null;
 }
 
-export { findMatches };
+export { resolveMerge, maxTier };

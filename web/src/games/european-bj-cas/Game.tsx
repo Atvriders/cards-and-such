@@ -3,25 +3,35 @@ import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { EuropeanBjCasState, EuropeanBjCasAction, EuropeanBjCasSettings } from "./state.js";
 import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
+
+const SURRENDER_ENABLED = false;
 export function EuropeanBjCasGame({ state, dispatch, onGameOver }: GameProps<EuropeanBjCasState, EuropeanBjCasSettings>): JSX.Element {
-  const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><h3>European Blackjack</h3><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  if (state.phase === "done") return <div className="eu-bj-c-wrap"><div className="eu-bj-c-done"><h2>Done!</h2><div className="eu-bj-c-final">{state.score} pts</div></div></div>;
+  const showDealer = state.phase !== "play";
   return (
-    <div className="dm-wrap">
-      <h3>European Blackjack</h3>
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.cardA !== null && state.cardB !== null && state.cardC !== null && (
-        <div className="dm-row">
-          <div className={`dm-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>
-          <div className={`dm-card ${isRed(state.cardB) ? "red" : "black"}`}>{cardName(state.cardB)}</div>
-          <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
-        </div>
-      )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as EuropeanBjCasAction)}>Play</button>}
+    <div className="eu-bj-c-wrap">
+      <div className="eu-bj-c-title">European Blackjack</div>
+      <div className="eu-bj-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="eu-bj-c-score">{state.score} pts</div>
+      <div className="eu-bj-c-info">Dealer ({showDealer ? state.dealerTotal : "?"}):</div>
+      <div className="eu-bj-c-row">
+        {state.dealer.map((c, i) => (i === 1 && !showDealer)
+          ? <div key={i} className="eu-bj-c-card back">??</div>
+          : <div key={i} className={`eu-bj-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}
+      </div>
+      <div className="eu-bj-c-info">You ({state.yourTotal}):</div>
+      <div className="eu-bj-c-row">{state.you.map((c, i) => <div key={i} className={`eu-bj-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <div className="eu-bj-c-actions">
+        <button className="eu-bj-c-btn" onClick={() => dispatch({ type: "hit" } as EuropeanBjCasAction)}>Hit</button>
+        <button className="eu-bj-c-btn alt" onClick={() => dispatch({ type: "stand" } as EuropeanBjCasAction)}>Stand</button>
+        {state.you.length === 2 && <button className="eu-bj-c-btn alt" onClick={() => dispatch({ type: "double" } as EuropeanBjCasAction)}>Double</button>}
+        {SURRENDER_ENABLED && state.you.length === 2 && <button className="eu-bj-c-btn alt" onClick={() => dispatch({ type: "surrender" } as EuropeanBjCasAction)}>Surrender</button>}
+      </div>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as EuropeanBjCasAction)}>Next</button>
+        <div className="eu-bj-c-result">{state.result} — +{state.pts}</div>
+        <button className="eu-bj-c-btn alt" onClick={() => dispatch({ type: "next" } as EuropeanBjCasAction)}>Next</button>
       </>}
     </div>
   );

@@ -1,47 +1,51 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { NochMalSoGutState, NochMalSoGutAction, NochMalSoGutSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_ROLLS } from "./state.js";
+import { isTerminal, GRID_SIZE, TOTAL_ROLLS, cellZone } from "./state.js";
 import "./Game.css";
 
 export function NochMalSoGutGame({ state, dispatch, onGameOver }: GameProps<NochMalSoGutState, NochMalSoGutSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="rw-wrap">
-        <h3 className="rw-title">Noch Mal So Gut</h3>
-        <div className="rw-done">
-          <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
+  const final = t?.score ?? state.score;
   return (
-    <div className="rw-wrap">
-      <h3 className="rw-title">Noch Mal So Gut</h3>
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
-      {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
+    <div className="nms-wrap">
+      <header className="nms-head">
+        <h2 className="nms-title">Noch Mal So Gut</h2>
+        <div className="nms-meta">
+          <span className="nms-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="nms-meta-score">{state.score} pts</span>
+        </div>
+      </header>
+      {state.phase === "marking" && state.lastRoll !== null && (
+        <div className="nms-die-area">
+          <div className="nms-die" aria-label={`Die showing ${state.lastRoll}`}>{state.lastRoll}</div>
+          <div className="nms-hint">Pick a cell to mark, or Skip.</div>
+        </div>
       )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
+      <div className="nms-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
           <button
             key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
-            disabled={filled || state.phase !== "marking"}
+            className={`nms-cell nms-z${cellZone(i)}${filled ? " nms-on" : ""}`}
+            disabled={filled || state.phase !== "marking" || state.phase === "done"}
             onClick={() => dispatch({ type: "mark", index: i } as NochMalSoGutAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}
       </div>
-      {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as NochMalSoGutAction)}>Roll</button>
+      <div className="nms-controls">
+        {state.phase === "rolling" && (
+          <button className="nms-btn nms-btn-primary" onClick={() => dispatch({ type: "roll" } as NochMalSoGutAction)}>Roll</button>
+        )}
+        {state.phase === "marking" && (
+          <button className="nms-btn nms-btn-skip" onClick={() => dispatch({ type: "skip" } as NochMalSoGutAction)}>Skip</button>
+        )}
+        <button className="nms-btn nms-btn-reset" onClick={() => dispatch({ type: "reset" } as NochMalSoGutAction)}>Reset</button>
+      </div>
+      {state.phase === "done" && (
+        <div className="nms-done">Final score: <b>{final}</b></div>
       )}
-      {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as NochMalSoGutAction)}>Skip</button>
-      )}
+      <div className="nms-rules">Sequel: every 4th cell: +2 token</div>
     </div>
   );
 }

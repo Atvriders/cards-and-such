@@ -1,14 +1,43 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal } from "./state.js";
-const S = { questions: "10" as const };
-describe("endless-shoot-em-up", () => {
-  it("creates >= 10 questions", () => { expect(initialState(1,S).questions.length).toBeGreaterThanOrEqual(10); });
-  it("starts in playing phase with timer >= 10", () => { const s=initialState(1,S); expect(s.phase).toBe("playing"); expect(s.timeLeft).toBeGreaterThanOrEqual(10); });
-  it("submit on correct awards score >= 100", () => {
-    const s=initialState(1,S);
-    const s2=reducer(reducer(s,{type:"select",choice:s.questions[0]!.correct}),{type:"submit"});
-    expect(s2.score).toBeGreaterThanOrEqual(100);
+import { initialState, reducer, isTerminal, LANES } from "./state.js";
+const S = { dummy: false };
+describe("EndlessShootEmUp", () => {
+  it("starts in playing in middle lane", () => {
+    const s = initialState(1, S);
+    expect(s.phase).toBe("playing");
+    expect(s.playerLane).toBe(1);
+    expect(s.score).toBe(0);
+    expect(s.obstacles).toEqual([]);
   });
-  it("isTerminal null during play", () => { expect(isTerminal(initialState(1,S))).toBeNull(); });
-  it("tick reduces time", () => { const s=initialState(1,S); const s2=reducer(s,{type:"tick"}); expect(s2.timeLeft).toBeLessThanOrEqual(s.timeLeft); });
+  it("tick increments score and ticks", () => {
+    const s = reducer(initialState(1, S), { type: "tick" });
+    expect(s.ticks).toBe(1);
+    expect(s.score).toBe(1);
+  });
+  it("lane action changes player lane", () => {
+    const s = reducer(initialState(1, S), { type: "lane", dir: 1 });
+    expect(s.playerLane).toBe(2);
+  });
+  it("lane bounds clamp at top and bottom", () => {
+    let s = initialState(1, S);
+    s = reducer(s, { type: "lane", dir: -1 });
+    s = reducer(s, { type: "lane", dir: -1 });
+    s = reducer(s, { type: "lane", dir: -1 });
+    expect(s.playerLane).toBe(0);
+    s = reducer(s, { type: "lane", dir: 1 });
+    s = reducer(s, { type: "lane", dir: 1 });
+    s = reducer(s, { type: "lane", dir: 1 });
+    s = reducer(s, { type: "lane", dir: 1 });
+    expect(s.playerLane).toBe(LANES - 1);
+  });
+  it("ticks eventually spawn obstacles", () => {
+    let s = initialState(1, S);
+    for (let i = 0; i < 30; i++) s = reducer(s, { type: "tick" });
+    // either still playing with obstacles, or game over due to crash
+    if (s.phase === "playing") expect(s.obstacles.length).toBeGreaterThan(0);
+    else expect(isTerminal(s)).not.toBeNull();
+  });
+  it("isTerminal null while playing", () => {
+    expect(isTerminal(initialState(1, S))).toBeNull();
+  });
 });

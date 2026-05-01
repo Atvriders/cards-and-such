@@ -1,2 +1,16 @@
-/* Modernized via shared trick engine — see web/src/engines/trick/trick.css */
-@import "../../engines/trick/trick.css";
+.geier-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
+.geier-title { font-size:1.1rem; font-weight:700; color:#ffa000; text-align:center; }
+.geier-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
+.geier-cpu, .geier-trick, .geier-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
+.geier-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
+.geier-back-row, .geier-trick-row, .geier-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
+.geier-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #ffa000 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
+.geier-empty { opacity:0.5; }
+.geier-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
+.geier-slot-label { font-size:0.7rem; opacity:0.7; }
+.geier-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
+.geier-hand .card { cursor: pointer; transition: transform 0.1s; }
+.geier-hand .card:hover { transform: translateY(-6px); }
+.geier-dim { opacity:0.4; cursor:not-allowed; }
+.geier-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #ffa000; }
+.geier-result h2 { margin:0 0 0.5rem 0; color:#ffa000; }

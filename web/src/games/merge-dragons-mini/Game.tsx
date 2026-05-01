@@ -1,40 +1,44 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { MergeDragonsMiniState, MergeDragonsMiniAction, MergeDragonsMiniSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { isTerminal, MAX_MOVES } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["🥚","🐉","🌟","🌸","🍃","💎"];
+const TIER_ICON = ["", "🌱", "🌿", "🌳", "🍎", "🌟", "💎", "👑"];
+const TIER_COLOR = ["#e2e8f0", "#a7f3d0", "#86efac", "#4ade80", "#facc15", "#fbbf24", "#a78bfa", "#f472b6"];
 
 export function MergeDragonsMiniGame({ state, dispatch, onGameOver }: GameProps<MergeDragonsMiniState, MergeDragonsMiniSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  useEffect(() => {
-    if (state.phase !== "playing") { if (tickRef.current) clearInterval(tickRef.current); return; }
-    tickRef.current = setInterval(() => dispatch({ type: "tick" } as MergeDragonsMiniAction), 1000);
-    return () => { if (tickRef.current) clearInterval(tickRef.current); };
-  }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="mdmmg-wrap">
+        <div className="mdmmg-done">
+          <h2>Board Full!</h2>
+          <div className="mdmmg-stats">Best tier: {state.best} • Moves: {state.movesUsed}</div>
+          <div className="mdmmg-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="mdmmg-wrap">
+      <div className="mdmmg-header">
+        <span className="mdmmg-info">Moves: {state.movesUsed}/{MAX_MOVES}</span>
+        <span className="mdmmg-next" style={{ background: TIER_COLOR[state.next] }}>{TIER_ICON[state.next]}</span>
+        <span className="mdmmg-score">{state.score}</span>
       </div>
-      <div className="m3-grid">
-        {state.grid.map((row, r) => row.map((g, c) => {
-          const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
-          return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
-              onClick={() => dispatch({ type: "select", row: r, col: c } as MergeDragonsMiniAction)}
-              aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
-          );
-        }))}
+      <div className="mdmmg-grid">
+        {state.grid.map((row, r) => row.map((v, c) => (
+          <button key={`${r}-${c}`} className="mdmmg-cell"
+            disabled={v !== 0}
+            style={{ background: v ? TIER_COLOR[v] : "#f1f5f9" }}
+            onClick={() => dispatch({ type: "place", row: r, col: c } as MergeDragonsMiniAction)}>
+            {v ? TIER_ICON[v] : ""}
+          </button>
+        )))}
       </div>
+      <div className="mdmmg-hint">Place tiles next to matching ones to merge into higher tiers</div>
     </div>
   );
 }

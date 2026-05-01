@@ -1,29 +1,36 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TIMER_TICKS, ROWS, COLS } from "./state.js";
+import { initialState, reducer, isTerminal, slideGrid, SIZE } from "./state.js";
 const S = { dummy: false };
 describe("Game1024", () => {
-  it("starts with full grid and timer", () => {
-    const s = initialState(1, S);
+  it("starts with two tiles", () => {
+    const s = initialState(7, S);
+    const filled = s.grid.flat().filter(v => v !== 0);
+    expect(filled.length).toBe(2);
     expect(s.phase).toBe("playing");
-    expect(s.ticksRemaining).toBeGreaterThanOrEqual(TIMER_TICKS);
-    expect(s.grid.length).toBe(ROWS);
-    expect(s.grid[0]!.length).toBe(COLS);
+    expect(s.grid.length).toBe(SIZE);
   });
-  it("tick decrements timer", () => {
-    const s = reducer(initialState(1, S), { type: "tick" });
-    expect(s.ticksRemaining).toBeGreaterThanOrEqual(TIMER_TICKS - 1);
+  it("merges two equal tiles when sliding left", () => {
+    const grid = [[2, 2, 0, 0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+    const out = slideGrid(grid, "left");
+    expect(out.grid[0]![0]).toBe(4);
+    expect(out.gained).toBe(4);
+    expect(out.moved).toBe(true);
   });
-  it("select records a cell first time", () => {
-    const s = reducer(initialState(1, S), { type: "select", row: 0, col: 0 });
-    expect(s.selected).toEqual([0, 0]);
+  it("non-mergable slide does not gain points", () => {
+    const grid = [[2, 4, 0, 0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+    const out = slideGrid(grid, "left");
+    expect(out.gained).toBe(0);
   });
-  it("score is non-negative initially", () => {
-    expect(initialState(1, S).score).toBeGreaterThanOrEqual(0);
+  it("slide action increments moves and adds tile", () => {
+    let s = initialState(7, S);
+    const before = s.grid.flat().filter(v => v !== 0).length;
+    s = reducer(s, { type: "slide", dir: "left" });
+    const after = s.grid.flat().filter(v => v !== 0).length;
+    // After a successful slide, at most 1 tile is added
+    expect(after).toBeGreaterThanOrEqual(before);
+    expect(after).toBeLessThanOrEqual(before + 1);
   });
-  it("game ends after timer expires", () => {
-    let s = initialState(1, S);
-    for (let i = 0; i < TIMER_TICKS + 2; i++) s = reducer(s, { type: "tick" });
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
+  it("isTerminal null while playing", () => {
+    expect(isTerminal(initialState(7, S))).toBeNull();
   });
 });

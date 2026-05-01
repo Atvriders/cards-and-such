@@ -4,7 +4,7 @@ import type { PuyoTsuMiniState, PuyoTsuMiniAction, PuyoTsuMiniSettings } from ".
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["🟣","🔵","🟢","🟡","🔴","⚫"];
+const GEMS = ["🟣","🟢","🔴","🟡","🔵","🟠"];
 
 export function PuyoTsuMiniGame({ state, dispatch, onGameOver }: GameProps<PuyoTsuMiniState, PuyoTsuMiniSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -16,20 +16,28 @@ export function PuyoTsuMiniGame({ state, dispatch, onGameOver }: GameProps<PuyoT
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="ptmm3-wrap">
+        <div className="ptmm3-done">
+          <h2>Time's Up!</h2>
+          <div className="ptmm3-stats">Matches: {state.matches}</div>
+          <div className="ptmm3-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="ptmm3-wrap">
+      <div className="ptmm3-header">
+        <span className="ptmm3-info">Matches: {state.matches}</span>
+        <span className="ptmm3-timer">{state.ticksRemaining}s</span>
+        <span className="ptmm3-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="ptmm3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`ptmm3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuyoTsuMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

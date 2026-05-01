@@ -1,22 +1,35 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { RajasDiceCharmersState, RajasDiceCharmersAction } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { RajasDiceCharmersState, RajasDiceCharmersAction, RajasDiceCharmersSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RajasDiceCharmers } from "./Game.js";
+import { RajasDiceCharmersGame } from "./Game.js";
 
-const settings = {
-  rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
-} as const;
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
+type S = SettingsOf<typeof settings>;
 
 export const rajasDiceCharmersPlugin: GamePlugin<RajasDiceCharmersState, RajasDiceCharmersAction, typeof settings> = {
   id: "rajas-dice-charmers",
-  title: "Rajas Dice Charmers",
+  title: "Raja's Dice Charmers",
   category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Roll-and-write Rajas province building.",
-  howToPlay: "Rajas Dice Charmers is a quick solo dice game. Roll-and-write Rajas province building. Each round you roll five six-sided dice and score points based on the round's special twist: Roll 5 dice, score by top-two sum + pair bonus + identical-triplet bonus.\n\nPress the Roll button to throw all five dice. After they land you'll see the round's calculated score added to your total. Some rounds may pay nothing if the dice don't match the pattern; others can pay a hefty bonus.\n\nAim for the highest cumulative total over ten rounds. Strategy comes from understanding which patterns are most likely to score well — sums and matching pairs/triples are the most common scoring elements.\n\nWhen the tenth round ends, your final score is logged. Compare runs against your previous high scores. The dice are seeded so each session is reproducible — return to the exact same sequence by replaying with the same seed.\n\nSingle-player only. No CPU opponent — just you, the dice, and the scoring rules. A great filler for two minutes of casual play, with a satisfying push for higher and higher scores as you learn the patterns.",
+  description: "Raja's Dice Charmers — palace tracks, dice charms, grand bonuses.",
+  howToPlay: `Raja's Dice Charmers is a Clever-style dice game with 4 tracks.
+
+How to play
+1. Roll 5 dice.
+2. Pick one die.
+3. Add to any of the 4 colored tracks (A, B, C, D). Tracks fill left-to-right.
+4. Score = die value + chain bonus (+2 if previous track cell has same value).
+
+Theme: Charm a snake (3+ in row): +6.
+
+End-of-game bonuses
+- Each fully completed track: +5
+- All 4 tracks reach at least 3 cells: +6
+
+The game runs 10 rolls. Aim for balanced track filling — chasing one track leaves bonuses on the table.`,
   settings,
-  initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
+  initialState: (seed, s) => initialState(seed, s as RajasDiceCharmersSettings),
   reducer,
   isTerminal,
-  component: RajasDiceCharmers,
+  component: RajasDiceCharmersGame,
 };

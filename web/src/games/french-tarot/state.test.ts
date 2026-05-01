@@ -1,20 +1,18 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal } from "./state.js";
 const S = { dummy: false };
 describe("french-tarot", () => {
-  it("starts in ready phase", () => { expect(initialState(1, S).phase).toBe("ready"); });
-  it("starts with score 0", () => { expect(initialState(1, S).score).toBeGreaterThanOrEqual(0); });
-  it("playing round advances state", () => { const s = reducer(initialState(7, S), { type: "play" }); expect(s.phase === "scored" || s.phase === "done").toBe(true); });
-  it("score is non-negative after play", () => { const s = reducer(initialState(7, S), { type: "play" }); expect(s.score).toBeGreaterThanOrEqual(0); });
+  it("starts in playing phase", () => { expect(initialState(1, S).phase).toBe("playing"); });
+  it("deals two hands", () => { const s = initialState(1, S); expect(s.hands.length).toBe(2); expect(s.hands[0]!.length).toBe(13); });
   it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("plays multiple rounds to completion", () => {
-    let s = initialState(11, S);
-    for (let i = 0; i < TOTAL_ROUNDS && !isTerminal(s); i++) { s = reducer(s, { type: "play" }); if (s.phase === "scored") s = reducer(s, { type: "next" }); }
-    expect(s.score).toBeGreaterThanOrEqual(0);
+  it("playing a card removes it", () => {
+    const s = initialState(7, S);
+    const cardId = s.hands[0]![0]!.id;
+    const s2 = reducer(s, { type: "play", cardId });
+    expect(s2.hands[0]!.find(c => c.id === cardId)).toBeUndefined();
   });
-  it("trick counts accumulate", () => {
-    let s = initialState(33, S);
-    s = reducer(s, { type: "play" });
-    expect(s.tricksWon + s.tricksLost).toBeGreaterThanOrEqual(1);
+  it("is deterministic", () => {
+    const a = initialState(99, S); const b = initialState(99, S);
+    expect(a.hands[0]!.map(c => c.id)).toEqual(b.hands[0]!.map(c => c.id));
   });
 });

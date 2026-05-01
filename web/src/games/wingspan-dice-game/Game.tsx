@@ -1,38 +1,79 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { WingspanDiceGameState, WingspanDiceGameAction } from "./state.js";
-import { isTerminal } from "./state.js";
+import type { WingspanDiceGameState, WingspanDiceGameAction, WingspanDiceGameSettings } from "./state.js";
+import { isTerminal, TRACK_COUNT, TRACK_LEN, TOTAL_ROLLS, trackProgress } from "./state.js";
 import "./Game.css";
 
-type WingspanDiceGameSettingsT = WingspanDiceGameState["" extends "" ? "rngSeed" : never];
+const TRACK_COLORS = ["#52be80","#f1c40f","#a04000","#5d6d7e"];
 
-export function WingspanDiceGame({ state, dispatch, onGameOver }: GameProps<WingspanDiceGameState, { rounds: "10" }>): JSX.Element {
-  const terminal = isTerminal(state);
-  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-
-  if (state.phase === "gameover") return (
-    <div className="g-wrap">
-      <h2>Game Over</h2>
-      <p className="g-final">Final Score: {state.score}</p>
-    </div>
-  );
+export function WingspanDiceGameGame({ state, dispatch, onGameOver }: GameProps<WingspanDiceGameState, WingspanDiceGameSettings>): JSX.Element {
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  const final = t?.score ?? state.score;
 
   return (
-    <div className="g-wrap">
-      <div className="g-header">
-        <span>Round {state.round} / {state.maxRounds}</span>
-        <span className="g-score">Score: {state.score}</span>
-      </div>
-      {state.lastRoll.length > 0 && (
-        <div className="g-dice">
-          {state.lastRoll.map((d, i) => <span key={i} className="g-die">{d}</span>)}
+    <div className="wsd-wrap">
+      <header className="wsd-head">
+        <h2 className="wsd-title">Wingspan Dice Game</h2>
+        <div className="wsd-meta">
+          <span>Roll {state.rolls + (state.phase !== "rolling" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="wsd-score">{state.score} pts</span>
+        </div>
+      </header>
+
+      {state.lastDice.length > 0 && (
+        <div className="wsd-dice">
+          {state.lastDice.map((v, i) => (
+            <button
+              key={i}
+              className={`wsd-die${state.selectedDie === i ? " wsd-die-on" : ""}`}
+              disabled={state.phase !== "picking"}
+              onClick={() => dispatch({ type: "pick", dieIdx: i } as WingspanDiceGameAction)}
+            >{v}</button>
+          ))}
         </div>
       )}
-      {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
-      <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as WingspanDiceGameAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as WingspanDiceGameAction)}>Next Round</button>}
+
+      <div className="wsd-tracks">
+        {Array.from({ length: TRACK_COUNT }).map((_, t) => {
+          const progress = trackProgress(state.filled, t);
+          const canPlace = state.phase === "placing" && progress < TRACK_LEN;
+          return (
+            <div key={t} className="wsd-track" style={{ borderColor: TRACK_COLORS[t] }}>
+              <div className="wsd-cells">
+                {Array.from({ length: TRACK_LEN }).map((__, c) => {
+                  const idx = t * TRACK_LEN + c;
+                  const isFilled = state.filled[idx];
+                  return (
+                    <div key={c} className={`wsd-cell${isFilled ? " wsd-fill" : ""}`} style={{ background: isFilled ? TRACK_COLORS[t] : undefined }}>
+                      {isFilled ? state.fillValues[idx] : ""}
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                className="wsd-track-btn"
+                disabled={!canPlace}
+                onClick={() => dispatch({ type: "place", track: t } as WingspanDiceGameAction)}
+                style={{ background: TRACK_COLORS[t] }}
+              >Add to {["A","B","C","D"][t]}</button>
+            </div>
+          );
+        })}
       </div>
+
+      <div className="wsd-controls">
+        {state.phase === "rolling" && (
+          <button className="wsd-btn wsd-primary" onClick={() => dispatch({ type: "roll" } as WingspanDiceGameAction)}>Roll 5 Dice</button>
+        )}
+        {(state.phase === "picking" || state.phase === "placing") && (
+          <button className="wsd-btn wsd-skip" onClick={() => dispatch({ type: "skip" } as WingspanDiceGameAction)}>Skip</button>
+        )}
+        <button className="wsd-btn wsd-reset" onClick={() => dispatch({ type: "reset" } as WingspanDiceGameAction)}>Reset</button>
+      </div>
+
+      {state.phase === "done" && <div className="wsd-done">Final: <b>{final}</b></div>}
+      <div className="wsd-rules">Each filled habitat: +bird bonus</div>
     </div>
   );
 }

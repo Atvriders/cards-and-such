@@ -1,22 +1,20 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { GState } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { OfficersSkatState, OfficersSkatAction, OfficersSkatSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OfficersSkatGame } from "./Game.js";
 
-const settings = {} as const;
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-type GAction = { type: "play"; cardId: string };
 
-export const officersSkatPlugin: GamePlugin<GState, GAction, typeof settings> = {
+export const off-sPlugin: GamePlugin<OfficersSkatState, OfficersSkatAction, typeof settings> = {
   id: "officers-skat",
   title: "Officers' Skat",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Two-player Skat variant with open and closed columns.",
-  howToPlay: "Officers' Skat (Offiziersskat) is the historical two-player Skat variant where each side maintains face-up and face-down 'columns' of cards. This simulator presents a streamlined adaptation: you and the bot each receive sixteen cards (a full half-deck) and play through all sixteen tricks. Clubs are trump.\n\nFollow the led suit if you can. If you cannot, any card may be played, but only trumps or led-suit cards can win the trick. The highest trump wins outright; otherwise the highest led-suit card wins. Ace is high, then king, queen, jack, ten through two.\n\nWin if you take nine or more of the sixteen tricks. Officers' Skat is famously demanding because the larger hand size enables deep planning — every trump played reduces the opponent's options downstream. The bot follows a defensive baseline. Click any legal card; the bot answers immediately. Strong trump density and at least two side-suit aces give a comfortable edge.",
+  description: "Officers' Skat — 2-player Skat.",
+  howToPlay: "Officers' Skat — 2-player Skat. Play heads-up against the CPU. Click cards in your hand to play. Follow the led suit if possible. Highest of led suit wins, unless beaten by trump. Score points for tricks won (or for card values, in some variants).",
   settings,
-  initialState: (seed: number, _s: S) => initialState(seed),
+  initialState: (seed: number, _s: S) => initialState(seed, _s as OfficersSkatSettings),
   reducer,
   isTerminal,
   component: OfficersSkatGame,

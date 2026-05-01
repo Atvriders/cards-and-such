@@ -1,12 +1,12 @@
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
-import type { RaceState, RaceAction, RaceSettings } from "./state.js";
+import type { NackState, NackAction, NackSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RaceGame } from "./Game.js";
+import { NackGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const nackgammonPlugin: GamePlugin<RaceState, RaceAction, typeof settings> = {
+export const nackgammonPlugin: GamePlugin<NackState, NackAction, typeof settings> = {
   id: "nackgammon",
   title: "Nackgammon",
   category: "board",
@@ -14,8 +14,8 @@ export const nackgammonPlugin: GamePlugin<RaceState, RaceAction, typeof settings
   description: "Backgammon variant with checkers redistributed at start for sharper tactics.",
   howToPlay: "Nackgammon is a race game inspired by the backgammon family. Like backgammon but two checkers begin on the 23-point and 24-point. Race them home and bear off.\n\nIn this simplified, single-player edition, you play as the white side against a random CPU. Each turn the dice are rolled (two six-sided dice), and you can advance one of your checkers by either die value, or both dice combined. Click any checker that has a legal move and it will jump forward by the available pip count.\n\nThe board is shown as a horizontal track of 24 points. White checkers race from left to right; black checkers (CPU) race from right to left. Each side starts with 15 checkers grouped at the back. When all your checkers cross the finish line you have borne off and the game ends.\n\nScore is calculated from the pip-count differential: how far ahead of your opponent you finish. The CPU plays random legal moves, so a little pip-management gives you a clear edge. Aim to keep your checkers connected, advance the rear runners first, and bear off as quickly as possible. A high score is +30 or better.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as RaceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as NackSettings),
   reducer,
   isTerminal,
-  component: RaceGame,
+  component: NackGame,
 };

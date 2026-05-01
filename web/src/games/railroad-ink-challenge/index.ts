@@ -2,17 +2,34 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { RailroadInkChallengeState, RailroadInkChallengeAction, RailroadInkChallengeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RailroadInkChallengeGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const railroadInkChallengePlugin: GamePlugin<RailroadInkChallengeState, RailroadInkChallengeAction, typeof settings> = {
   id: "railroad-ink-challenge",
   title: "Railroad Ink Challenge",
-  category: "board",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Revised Railroad Ink with daily challenges and city tokens.",
-  howToPlay: "Railroad Ink Challenge is the revised edition with daily challenges and city tokens. In this adaptation you build a rail network on a 4x4 grid by rolling a single d6 each turn and marking a cell with the rolled value. Click Roll, then click any empty cell to record it; you may also Skip a roll. Each marked cell adds the dice pip value to your score. Strategy: chase row and column completions for bonuses (+5 each) plus a +10 board-complete bonus. Skipping is risky because all 12 rolls are limited resources — even skips count toward the cap. The challenge style emphasises efficient marking: prefer 5s and 6s for high cells, accept 1s and 2s only when they help finish a row or column. After 12 rolls the game finalises. A solid Challenge score is 34-48 points; bonus-chasers reach 65+. Each session is a fresh dice puzzle thanks to seeded random rolls.",
+  description: "Hard-mode Railroad Ink — fewer rolls, higher difficulty bonuses.",
+  howToPlay: `Railroad Ink Challenge is a 9-roll dice-and-mark game with themed scoring.
+
+How to play
+1. Press Roll to throw a d6.
+2. Click any unmarked cell on the 4x4 grid to mark it with that value.
+3. Score = die value + zone bonus + adjacency bonus (matching value next door).
+4. Skip if no good spot — that roll is wasted.
+
+Theme: Endurance: penalty −2 if any row empty.
+
+End-of-game bonuses
+- Full row: +4 each
+- Full column: +4 each
+- Full board: +12
+
+The game ends after 9 rolls (or earlier if all 16 cells are filled). Maximum reachable depends on a balanced spread; aim for 50-80 in a strong run.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as RailroadInkChallengeSettings),
+  initialState: (seed, s) => initialState(seed, s as RailroadInkChallengeSettings),
   reducer,
   isTerminal,
   component: RailroadInkChallengeGame,

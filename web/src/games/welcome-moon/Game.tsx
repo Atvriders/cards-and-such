@@ -1,45 +1,58 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { WelcomeMoonState, WelcomeMoonAction, WelcomeMoonSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_ROLLS } from "./state.js";
+import { isTerminal, ROW_COUNT, ROW_LEN, TOTAL_ROLLS, legalAt } from "./state.js";
 import "./Game.css";
 
 export function WelcomeMoonGame({ state, dispatch, onGameOver }: GameProps<WelcomeMoonState, WelcomeMoonSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="rw-wrap">
-        <div className="rw-done">
-          <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
+  const final = t?.score ?? state.score;
   return (
-    <div className="rw-wrap">
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
-      {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
+    <div className="wmn-wrap">
+      <header className="wmn-head">
+        <h2 className="wmn-title">Welcome to the Moon</h2>
+        <div className="wmn-meta">
+          <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="wmn-score">{state.score} pts</span>
+        </div>
+      </header>
+      {state.phase === "placing" && state.lastRoll !== null && (
+        <div className="wmn-die-area">
+          <div className="wmn-die">{state.lastRoll}</div>
+          <div className="wmn-hint">Place this number into a row, keeping each row strictly ascending.</div>
+        </div>
       )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
-        {state.cells.map((filled, i) => (
-          <button
-            key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
-            disabled={filled || state.phase !== "marking"}
-            onClick={() => dispatch({ type: "mark", index: i } as WelcomeMoonAction)}
-          >{filled ? state.cellValues[i] : ""}</button>
+      <div className="wmn-board">
+        {Array.from({ length: ROW_COUNT }).map((_, r) => (
+          <div key={r} className="wmn-row">
+            {Array.from({ length: ROW_LEN }).map((__, c) => {
+              const idx = r * ROW_LEN + c;
+              const val = state.values[idx];
+              const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
+              return (
+                <button
+                  key={c}
+                  className={`wmn-slot${val !== null ? " wmn-filled" : ""}${canPlace ? " wmn-legal" : ""}`}
+                  disabled={val !== null || !canPlace}
+                  onClick={() => dispatch({ type: "place", index: idx } as WelcomeMoonAction)}
+                >{val ?? ""}</button>
+              );
+            })}
+          </div>
         ))}
       </div>
-      {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as WelcomeMoonAction)}>Roll</button>
-      )}
-      {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as WelcomeMoonAction)}>Skip</button>
-      )}
+      <div className="wmn-controls">
+        {state.phase === "rolling" && (
+          <button className="wmn-btn wmn-primary" onClick={() => dispatch({ type: "roll" } as WelcomeMoonAction)}>Roll</button>
+        )}
+        {state.phase === "placing" && (
+          <button className="wmn-btn wmn-skip" onClick={() => dispatch({ type: "skip" } as WelcomeMoonAction)}>Skip (−1)</button>
+        )}
+        <button className="wmn-btn wmn-reset" onClick={() => dispatch({ type: "reset" } as WelcomeMoonAction)}>Reset</button>
+      </div>
+      {state.phase === "done" && <div className="wmn-done">Final: <b>{final}</b></div>}
+      <div className="wmn-rules">Lunar bases: pairs of 11 grant +5</div>
     </div>
   );
 }

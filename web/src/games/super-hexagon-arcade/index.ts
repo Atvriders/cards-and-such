@@ -3,7 +3,7 @@ import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SuperHexagonArcadeState, SuperHexagonArcadeAction, SuperHexagonArcadeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SuperHexagonArcadeGame } from "./Game.js";
-const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
+const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const superHexagonArcadePlugin: GamePlugin<SuperHexagonArcadeState, SuperHexagonArcadeAction, typeof settings> = {
   id:"super-hexagon-arcade", title:"Super Hexagon-Style", category:"arcade",

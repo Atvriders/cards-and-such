@@ -1,40 +1,75 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { ThreesPuzzleState, ThreesPuzzleAction, ThreesPuzzleSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import type { ThreesPuzzleState, ThreesPuzzleAction, ThreesPuzzleSettings, Direction } from "./state.js";
+import { isTerminal, TARGET } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["1️⃣","2️⃣","3️⃣","6️⃣","9️⃣","#️⃣"];
+const TILE_COLORS: Record<number, string> = {
+  2: "#eee4da", 4: "#ede0c8", 8: "#f2b179", 16: "#f59563",
+  32: "#f67c5f", 64: "#f65e3b", 128: "#edcf72", 256: "#edcc61",
+  512: "#edc850", 1024: "#edc53f", 2048: "#edc22e", 4096: "#3c3a32",
+};
 
 export function ThreesPuzzleGame({ state, dispatch, onGameOver }: GameProps<ThreesPuzzleState, ThreesPuzzleSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
-    if (state.phase !== "playing") { if (tickRef.current) clearInterval(tickRef.current); return; }
-    tickRef.current = setInterval(() => dispatch({ type: "tick" } as ThreesPuzzleAction), 1000);
-    return () => { if (tickRef.current) clearInterval(tickRef.current); };
-  }, [state.phase, dispatch]);
+    function handleKey(e: KeyboardEvent): void {
+      const map: Record<string, Direction> = {
+        ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right",
+        w: "up", s: "down", a: "left", d: "right",
+        W: "up", S: "down", A: "left", D: "right",
+      };
+      const dir = map[e.key];
+      if (dir) { e.preventDefault(); dispatch({ type: "slide", dir } as ThreesPuzzleAction); }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="thrsl-wrap">
+        <div className="thrsl-done">
+          <h2>Game Over</h2>
+          <div className="thrsl-stats">Best tile: {state.best} • Moves: {state.moves}</div>
+          <div className="thrsl-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
+  if (state.phase === "won") {
+    return (
+      <div className="thrsl-wrap">
+        <div className="thrsl-done">
+          <h2>You reached {TARGET}!</h2>
+          <div className="thrsl-stats">Moves: {state.moves}</div>
+          <div className="thrsl-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
+  }
+  function tap(dir: Direction): void { dispatch({ type: "slide", dir } as ThreesPuzzleAction); }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="thrsl-wrap">
+      <div className="thrsl-header">
+        <span className="thrsl-info">Moves: {state.moves}</span>
+        <span className="thrsl-target">Target: {TARGET}</span>
+        <span className="thrsl-score">{state.score}</span>
       </div>
-      <div className="m3-grid">
-        {state.grid.map((row, r) => row.map((g, c) => {
-          const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
-          return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
-              onClick={() => dispatch({ type: "select", row: r, col: c } as ThreesPuzzleAction)}
-              aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
-          );
-        }))}
+      <div className="thrsl-grid">
+        {state.grid.flat().map((v, i) => (
+          <div key={i} className="thrsl-cell" style={{ background: v ? (TILE_COLORS[v] ?? "#3c3a32") : "rgba(238,228,218,0.35)", color: v <= 4 ? "#776e65" : "#f9f6f2" }}>
+            {v ? v : ""}
+          </div>
+        ))}
       </div>
+      <div className="thrsl-pad">
+        <div></div><button className="thrsl-btn" onClick={() => tap("up")}>↑</button><div></div>
+        <button className="thrsl-btn" onClick={() => tap("left")}>←</button>
+        <button className="thrsl-btn" onClick={() => tap("down")}>↓</button>
+        <button className="thrsl-btn" onClick={() => tap("right")}>→</button>
+      </div>
+      <div className="thrsl-hint">Use arrow keys or WASD</div>
     </div>
   );
 }

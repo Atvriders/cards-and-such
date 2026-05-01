@@ -2,34 +2,34 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { HadriansWallRomanState, HadriansWallRomanAction, HadriansWallRomanSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HadriansWallRomanGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const hadriansWallRomanPlugin: GamePlugin<HadriansWallRomanState, HadriansWallRomanAction, typeof settings> = {
   id: "hadrians-wall-roman",
-  title: "Hadrian's Wall",
-  category: "board",
+  title: "Hadrian's Wall Roman",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Construct a Roman fort on a 5x5 wall sheet via dice rolls.",
-  howToPlay: `Hadrian's Wall is a flip-and-write Roman fort builder. In this adaptation you have a 5x5 fort plan and 14 dice rolls. Each turn roll 2 dice; the sum determines what type of structure you can build:
+  description: "Hadrian's Wall — fortify Britannia by allocating dice resources.",
+  howToPlay: `Hadrian's Wall Roman is a 12-roll dice-and-mark game with themed scoring.
 
-• Sum 2-3: tower (T)
-• Sum 4-5: barracks (B)
-• Sum 6-7: granary (G)
-• Sum 8-9: vineyard (V)
-• Sum 10-12: road (R)
+How to play
+1. Press Roll to throw a d6.
+2. Click any unmarked cell on the 4x4 grid to mark it with that value.
+3. Score = die value + zone bonus + adjacency bonus (matching value next door).
+4. Skip if no good spot — that roll is wasted.
 
-Click any empty cell to place the structure.
+Theme: Roll 6: legion bonus +3.
 
-Scoring (at end):
-• Towers: +5 each, +3 bonus if on the perimeter
-• Barracks: +3 each, +2 per orthogonal road neighbor
-• Granaries: +4 each, but only if there are 2+ on the board (food economy needs scale)
-• Vineyards: +2 each, +1 per other vineyard in the same row
-• Roads: +1 each, +1 per orthogonal road neighbor (long roads = continuous)
+End-of-game bonuses
+- Full row: +4 each
+- Full column: +4 each
+- Full board: +12
 
-The game runs 14 rolls. A balanced fort with a road network and several towers scores 35-55 points. Edge towers and connected roads form the backbone. A pure granary fort fails because of the 2+ requirement on a single granary.`,
+The game ends after 12 rolls (or earlier if all 16 cells are filled). Maximum reachable depends on a balanced spread; aim for 50-80 in a strong run.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as HadriansWallRomanSettings),
+  initialState: (seed, s) => initialState(seed, s as HadriansWallRomanSettings),
   reducer,
   isTerminal,
   component: HadriansWallRomanGame,

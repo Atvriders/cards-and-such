@@ -4,6 +4,7 @@ import type { ArrowSudokuState, ArrowSudokuAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ArrowSudoku } from "./ArrowSudoku.js";
 
+import { ArrowSudokuGame } from "./Game.js";
 const arrowSudokuSettings = {
   difficulty: {
     kind: "enum" as const,
@@ -36,5 +37,5 @@ Click Reset to start fresh.`,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
-  component: ArrowSudoku,
+  component: ArrowSudokuGame,
 };

@@ -1,65 +1,88 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { SedecordleMiniState, SedecordleMiniAction, SedecordleMiniSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import type { SedecordleMiniState, SedecordleMiniAction, SedecordleMiniSettings, Tile } from "./state.js";
+import { isTerminal, scoreGuess, MAX_GUESSES } from "./state.js";
 import "./Game.css";
 
-const LABELS = ["A", "B", "C", "D"];
+const KEY_ROWS = ["QWERTYUIOP","ASDFGHJKL","ZXCVBNM"];
+
+function buildBoard(answer: string, guesses: string[], current: string, solved: boolean): { letters: string[]; tiles: Tile[] }[] {
+  const rows: { letters: string[]; tiles: Tile[] }[] = [];
+  for (let r = 0; r < MAX_GUESSES; r++) {
+    if (r < guesses.length) {
+      const g = guesses[r]!;
+      rows.push({ letters: g.split(""), tiles: scoreGuess(g, answer) });
+    } else if (r === guesses.length && !solved) {
+      const cur = current.padEnd(5, " ").split("");
+      rows.push({ letters: cur, tiles: cur.map(_ => "blank") as Tile[] });
+    } else {
+      rows.push({ letters: [" "," "," "," "," "], tiles: ["blank","blank","blank","blank","blank"] });
+    }
+  }
+  return rows;
+}
 
 export function SedecordleMiniGame({ state, dispatch, onGameOver }: GameProps<SedecordleMiniState, SedecordleMiniSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
-  if (state.phase === "done") {
-    return (
-      <div className="word-wrap">
-        <div className="word-done">
-          <h2>Done!</h2>
-          <p>Correct: {state.correctCount} / {state.rounds.length}</p>
-          <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
-        </div>
-      </div>
-    );
-  }
+  const onKey = useCallback((e: KeyboardEvent) => {
+    if (state.status !== "playing") return;
+    if (e.key === "Enter") dispatch({ type: "enter" } as SedecordleMiniAction);
+    else if (e.key === "Backspace") dispatch({ type: "backspace" } as SedecordleMiniAction);
+    else if (/^[a-zA-Z]$/.test(e.key)) dispatch({ type: "key", ch: e.key } as SedecordleMiniAction);
+  }, [state.status, dispatch]);
+  useEffect(() => { window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey); }, [onKey]);
 
-  const r = state.rounds[state.currentIndex]!;
-  const isResult = state.phase === "result";
+  const combined: Record<string, "absent"|"present"|"correct"|undefined> = {};
+  state.guesses.forEach(g => {
+    state.answers.forEach((ans) => {
+      const tiles = scoreGuess(g, ans);
+      for (let i = 0; i < 5; i++) {
+        const ch = g[i]!;
+        const t = tiles[i]!;
+        if (t === "correct") combined[ch] = "correct";
+        else if (t === "present" && combined[ch] !== "correct") combined[ch] = "present";
+        else if (t === "absent" && !combined[ch]) combined[ch] = "absent";
+      }
+    });
+  });
 
   return (
-    <div className="word-wrap">
-      <div className="word-header">
-        <span className="word-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="word-score">{state.score} pts</span>
+    <div className="sm-wrap">
+      <div className="sm-header">
+        <span className="sm-title">{state.answers.length} Words</span>
+        <span className="sm-info">Guess {state.guesses.length + (state.status === "playing" ? 1 : 0)} / {MAX_GUESSES}</span>
+        <span className="sm-info">Solved {state.solved.filter(Boolean).length} / {state.answers.length}</span>
       </div>
-      <div className="word-prompt"><span className="word-label">Choose:</span> {r.prompt}</div>
-      <div className="word-choices">
-        {r.choices.map((choice, i) => {
-          let cls = "word-choice";
-          if (isResult) {
-            if (i === r.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
+      <div className="sm-boards">
+        {state.answers.map((ans, bi) => {
+          const board = buildBoard(ans, state.guesses, state.current, state.solved[bi]!);
           return (
-            <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as SedecordleMiniAction)}>
-              <span className="word-choice-letter">{LABELS[i]}</span>{choice}
-            </button>
+            <div className={`sm-board ${state.solved[bi] ? "sm-solved" : ""}`} key={bi}>
+              {board.map((row, ri) => (
+                <div className="sm-row" key={ri}>
+                  {row.letters.map((ch, ci) => (
+                    <div className={`sm-tile sm-${row.tiles[ci]}`} key={ci}>{ch.trim()}</div>
+                  ))}
+                </div>
+              ))}
+              {state.status !== "playing" && !state.solved[bi] && <div className="sm-answer">{ans}</div>}
+            </div>
           );
         })}
       </div>
-      {isResult && (
-        <div className={`word-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
-          {state.selected === r.correct ? "Correct!" : `Answer: ${r.choices[r.correct]}`}
-        </div>
-      )}
-      <div className="word-actions">
-        {!isResult && (
-          <button className="word-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SedecordleMiniAction)}>Submit</button>
-        )}
-        {isResult && (
-          <button className="word-btn next" onClick={() => dispatch({ type: "next" } as SedecordleMiniAction)}>
-            {state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}
-          </button>
-        )}
+      {state.message && <div className="sm-msg">{state.message}</div>}
+      <div className="sm-keyboard">
+        {KEY_ROWS.map((row, ri) => (
+          <div className="sm-krow" key={ri}>
+            {ri === 2 && <button className="sm-key sm-wide" onClick={() => dispatch({ type: "enter" } as SedecordleMiniAction)}>ENTER</button>}
+            {row.split("").map(ch => (
+              <button key={ch} className={`sm-key ${combined[ch] ? "sm-k-" + combined[ch] : ""}`} onClick={() => dispatch({ type: "key", ch } as SedecordleMiniAction)}>{ch}</button>
+            ))}
+            {ri === 2 && <button className="sm-key sm-wide" onClick={() => dispatch({ type: "backspace" } as SedecordleMiniAction)}>DEL</button>}
+          </div>
+        ))}
       </div>
     </div>
   );

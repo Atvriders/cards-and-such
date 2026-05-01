@@ -16,20 +16,28 @@ export function BejeweledBlitzGame({ state, dispatch, onGameOver }: GameProps<Be
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="bejm3-wrap">
+        <div className="bejm3-done">
+          <h2>Time's Up!</h2>
+          <div className="bejm3-stats">Matches: {state.matches}</div>
+          <div className="bejm3-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="bejm3-wrap">
+      <div className="bejm3-header">
+        <span className="bejm3-info">Matches: {state.matches}</span>
+        <span className="bejm3-timer">{state.ticksRemaining}s</span>
+        <span className="bejm3-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="bejm3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`bejm3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as BejeweledBlitzAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

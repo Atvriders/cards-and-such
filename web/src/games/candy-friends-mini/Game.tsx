@@ -4,7 +4,7 @@ import type { CandyFriendsMiniState, CandyFriendsMiniAction, CandyFriendsMiniSet
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["🐶","🐱","🐰","🦊","🐻","🐼"];
+const GEMS = ["🐰","🐻","🐱","🐶","🦊","🐼"];
 
 export function CandyFriendsMiniGame({ state, dispatch, onGameOver }: GameProps<CandyFriendsMiniState, CandyFriendsMiniSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -16,20 +16,28 @@ export function CandyFriendsMiniGame({ state, dispatch, onGameOver }: GameProps<
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="cfmm3-wrap">
+        <div className="cfmm3-done">
+          <h2>Time's Up!</h2>
+          <div className="cfmm3-stats">Matches: {state.matches}</div>
+          <div className="cfmm3-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="cfmm3-wrap">
+      <div className="cfmm3-header">
+        <span className="cfmm3-info">Matches: {state.matches}</span>
+        <span className="cfmm3-timer">{state.ticksRemaining}s</span>
+        <span className="cfmm3-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="cfmm3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`cfmm3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as CandyFriendsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

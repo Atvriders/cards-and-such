@@ -1,43 +1,68 @@
 import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DoodleJumpArcadeState, DoodleJumpArcadeAction, DoodleJumpArcadeSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { isTerminal, LANES, LANE_LENGTH, TICK_MS } from "./state.js";
 import "./Game.css";
-const LABELS = ["A", "B", "C", "D"];
+
+const PLAYER_ICON = "🟢";
+const OBSTACLE_ICON = "🟦";
+
 export function DoodleJumpArcadeGame({ state, dispatch, onGameOver }: GameProps<DoodleJumpArcadeState, DoodleJumpArcadeSettings>): JSX.Element {
-  const terminal = isTerminal(state);
-  useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
     if (state.phase !== "playing") { if (tickRef.current) clearInterval(tickRef.current); return; }
-    tickRef.current = setInterval(() => dispatch({ type: "tick" } as DoodleJumpArcadeAction), 1000);
+    tickRef.current = setInterval(() => dispatch({ type: "tick" } as DoodleJumpArcadeAction), TICK_MS);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
-  const q = state.questions[state.currentIndex]!;
-  const isResult = state.phase === "result";
-  const urgent = state.timeLeft <= 5 && !state.submitted;
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent): void {
+      if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") { e.preventDefault(); dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction); }
+      else if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") { e.preventDefault(); dispatch({ type: "lane", dir: 1 } as DoodleJumpArcadeAction); }
+      else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") { e.preventDefault(); dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction); }
+      else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") { e.preventDefault(); dispatch({ type: "lane", dir: 1 } as DoodleJumpArcadeAction); }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [dispatch]);
+  if (state.phase === "done") {
+    return (
+      <div className="djarn-wrap">
+        <div className="djarn-done">
+          <h2>Crashed!</h2>
+          <div className="djarn-stats">Survived {state.ticks} ticks</div>
+          <div className="djarn-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="trivia-wrap">
-      <div className="trivia-header">
-        <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
-        <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+    <div className="djarn-wrap">
+      <div className="djarn-header">
+        <span className="djarn-info">Survived: {state.ticks}</span>
+        <span className="djarn-score">{state.score} pts</span>
       </div>
-      <div className="trivia-question">{q.question}</div>
-      <div className="trivia-choices">
-        {q.choices.map((choice, i) => {
-          let cls = "trivia-choice";
-          if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
-          else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as DoodleJumpArcadeAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
-        })}
+      <div className="djarn-track">
+        {Array.from({ length: LANES }).map((_, lane) => (
+          <button key={lane} className={`djarn-lane${state.playerLane === lane ? " active" : ""}`}
+            onClick={() => dispatch({ type: "setLane", lane } as DoodleJumpArcadeAction)}
+            aria-label={`lane ${lane}`}>
+            {state.playerLane === lane && (
+              <span className="djarn-player" style={{ left: `${100 / LANE_LENGTH / 2}%` }}>{PLAYER_ICON}</span>
+            )}
+            {state.obstacles.filter(o => o.lane === lane).map(o => (
+              <span key={o.id} className="djarn-obstacle"
+                style={{ left: `${(o.x + 0.5) * 100 / LANE_LENGTH}%` }}>{OBSTACLE_ICON}</span>
+            ))}
+          </button>
+        ))}
       </div>
-      {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
-      <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as DoodleJumpArcadeAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as DoodleJumpArcadeAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+      <div className="djarn-controls">
+        <button className="djarn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction)}>↑ Up</button>
+        <button className="djarn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as DoodleJumpArcadeAction)}>↓ Down</button>
       </div>
+      <div className="djarn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>
   );
 }

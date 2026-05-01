@@ -1,5 +1,7 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
+// Candy Soda Mini: 6x6 match-3, swap adjacent gems, 3+ in row clears, gravity, score, 60s timer.
+
 export const ROWS = 6;
 export const COLS = 6;
 export const TIMER_TICKS = 60;
@@ -101,6 +103,7 @@ export function reducer(state: CandySodaMiniState, action: CandySodaMiniAction):
     const { row, col } = action;
     if (!state.selected) return { ...state, selected: [row, col] };
     const [sr, sc] = state.selected;
+    if (sr === row && sc === col) return { ...state, selected: null };
     const dr = Math.abs(row - sr);
     const dc = Math.abs(col - sc);
     const adjacent = (dr === 1 && dc === 0) || (dr === 0 && dc === 1);

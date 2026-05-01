@@ -1,1 +1,74 @@
-@import "../../engines/dicemini/dicemini.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+.trictrac-wrap {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  max-width: 880px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+.trictrac-status { font-weight: 700; font-size: 1.05rem; color: #1d4ed8; }
+.trictrac-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.85rem; }
+.trictrac-info { background: #f3f4f6; padding: 3px 8px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; }
+.trictrac-dicerow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.trictrac-die {
+  width: 38px; height: 38px;
+  background: white; border: 2px solid #1d4ed8;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.1rem;
+  color: #1d4ed8;
+}
+.trictrac-die-empty { opacity: 0.4; }
+.trictrac-dleft { font-family: 'JetBrains Mono', monospace; color: #6b7280; font-size: 0.85rem; }
+.trictrac-btn {
+  padding: 8px 14px; border: none; border-radius: 8px;
+  font-weight: 700; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.trictrac-btn-roll { background: #1d4ed8; color: white; }
+.trictrac-btn-roll:hover { filter: brightness(1.1); }
+.trictrac-btn-end { background: #6b7280; color: white; }
+.trictrac-btn-end:hover { background: #4b5563; }
+.trictrac-board {
+  display: grid; grid-template-rows: 1fr 1fr; gap: 4px;
+  background: #78350f;
+  padding: 6px; border-radius: 10px;
+  border: 4px solid #92400e;
+}
+.trictrac-half { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(28px, 1fr); gap: 2px; }
+.trictrac-point {
+  background: #fef3c7; min-height: 110px;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding: 4px 2px; border-radius: 4px;
+  position: relative;
+}
+.trictrac-point.trictrac-even { background: #fed7aa; }
+.trictrac-point.trictrac-odd { background: #fef3c7; }
+.trictrac-point-num { font-size: 0.65rem; color: #78350f; font-family: 'JetBrains Mono', monospace; }
+.trictrac-stack { display: flex; flex-direction: column; gap: 1px; align-items: center; }
+.trictrac-chk {
+  width: 14px; height: 14px; border-radius: 50%;
+  display: inline-block;
+}
+.trictrac-chk-p { background: #f9fafb; border: 2px solid #111827; }
+.trictrac-chk-c { background: #111827; border: 2px solid #f9fafb; }
+.trictrac-pin { font-size: 0.55rem; color: #1d4ed8; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+.trictrac-movehint { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; margin-top: 2px; }
+.trictrac-movebtn {
+  background: #1d4ed8; color: white; border: none;
+  padding: 1px 5px; border-radius: 3px; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700;
+}
+.trictrac-movebtn:hover { filter: brightness(1.15); }
+.trictrac-bar { display: flex; gap: 12px; padding: 6px; background: #1f2937; color: white; border-radius: 6px; font-family: 'JetBrains Mono', monospace; }
+.trictrac-bar-p { color: #f9fafb; }
+.trictrac-bar-c { color: #d1d5db; }
+.trictrac-banner { font-size: 1.5rem; font-weight: 800; }
+.trictrac-win { color: #16a34a; }
+.trictrac-loss { color: #dc2626; }
+.trictrac-score { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
+.trictrac-info-line { color: #6b7280; font-size: 0.8rem; }

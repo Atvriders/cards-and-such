@@ -1,12 +1,25 @@
-.rx-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px; font-family:sans-serif; max-width:540px; margin:0 auto; user-select:none; }
-.rx-header { display:flex; justify-content:space-between; width:100%; align-items:center; }
-.rx-timer { font-size:1.4rem; font-weight:900; color:#e74c3c; }
-.rx-score { font-size:1.2rem; font-weight:800; color:#16a34a; }
-.rx-info { font-size:0.95rem; color:#555; }
-.rx-prompt { font-size:1rem; color:#333; padding:8px; background:#fff5; border-radius:8px; }
-.rx-stage { width:100%; height:280px; display:flex; align-items:center; justify-content:center; font-size:5rem; cursor:pointer; background:linear-gradient(180deg,#dcfce7,#86efac); border:3px solid #16a34a; border-radius:14px; transition:background 0.15s; }
-.rx-stage.go { background:#a3e635; }
-.rx-stage.nogo { background:#fca5a5; }
-.rx-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; width:100%; }
-.rx-done h2 { margin:0 0 8px; }
-.rx-final { font-size:1.4rem; color:#16a34a; font-weight:900; }
+.colrx-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 22px; max-width: 540px; margin: 0 auto; user-select: none;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+.colrx-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.colrx-info { font-size: 0.95rem; color: #475569; font-family: 'Inter', sans-serif; }
+.colrx-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
+.colrx-score { font-size: 1.2rem; font-weight: 800; color: #1e40af; font-family: 'JetBrains Mono', monospace; }
+.colrx-prompt { text-align: center; font-size: 1.05rem; color: #334155; font-weight: 600; font-family: 'Inter', sans-serif; }
+.colrx-stage {
+  width: 240px; height: 240px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; cursor: pointer; border: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+.colrx-stage.go { background: #22c55e; box-shadow: 0 0 40px #22c55eaa, inset 0 0 20px rgba(255,255,255,0.3); }
+.colrx-stage.nogo { background: #ef4444; box-shadow: 0 0 24px rgba(0,0,0,0.2); opacity: 0.85; }
+.colrx-stage:active { transform: scale(0.97); }
+.colrx-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
+.colrx-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.colrx-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.colrx-stats { font-family: 'Inter', sans-serif; color: #475569; }
+.colrx-final { font-size: 1.6rem; color: #1e40af; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }

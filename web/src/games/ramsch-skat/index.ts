@@ -1,22 +1,20 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { GState } from "./state.js";
+import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { RamschSkatState, RamschSkatAction, RamschSkatSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RamschSkatGame } from "./Game.js";
 
-const settings = {} as const;
+const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-type GAction = { type: "play"; cardId: string };
 
-export const ramschSkatPlugin: GamePlugin<GState, GAction, typeof settings> = {
+export const ram-sPlugin: GamePlugin<RamschSkatState, RamschSkatAction, typeof settings> = {
   id: "ramsch-skat",
-  title: "Ramsch",
+  title: "Ramsch (Skat)",
   category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Anti-trick Skat side game where lowest score wins.",
-  howToPlay: "Ramsch is the 'rubbish' Skat side-game traditionally played when no one bids: the goal inverts to taking as FEW points as possible. In this 1v1 misère simulator you and the bot each receive ten cards (echoing Skat's 32-card foundation, halved per player). No trump applies.\n\nFollow the led suit if you can. If you cannot, any card may be played, but only led-suit cards can win the trick (since there is no trump in this Ramsch variant). The highest card of the led suit wins — ace high, then king, queen, jack, ten through two.\n\nWin by taking four or fewer of the ten tricks (six or more for the bot). Ramsch strategy inverts trick play: dump high cards onto bot-led tricks, save low cards for forced leads, and never capture an ace if you can avoid it. The bot plays its standard defensive baseline, occasionally accidentally helping you. Click any legal card; the bot answers immediately.",
+  description: "Ramsch — avoid points variant.",
+  howToPlay: "Ramsch — avoid points variant. Play heads-up against the CPU. Click cards in your hand to play. Follow the led suit if possible. Highest of led suit wins, unless beaten by trump. Score points for tricks won (or for card values, in some variants).",
   settings,
-  initialState: (seed: number, _s: S) => initialState(seed),
+  initialState: (seed: number, _s: S) => initialState(seed, _s as RamschSkatSettings),
   reducer,
   isTerminal,
   component: RamschSkatGame,

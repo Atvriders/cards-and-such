@@ -1,14 +1,29 @@
-.rw-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; font-family: sans-serif; max-width: 560px; margin: 0 auto; }
-.rw-info { font-size: 0.95rem; color: #555; }
-.rw-score { font-size: 1.2rem; font-weight: 800; color: #27ae60; }
-.rw-die { font-size: 2rem; font-weight: 900; min-width: 60px; padding: 10px 14px; background: #fff; border: 2px solid #34495e; border-radius: 8px; text-align: center; color: #2c3e50; }
-.rw-grid { display: grid; gap: 4px; padding: 8px; background: #ecf0f1; border-radius: 8px; }
-.rw-cell { width: 44px; height: 44px; border: 1px solid #bdc3c7; border-radius: 6px; cursor: pointer; background: #fff; font-weight: 800; color: #7f8c8d; }
-.rw-cell.filled { background: #eafaf1; color: #1e8449; border-color: #27ae60; cursor: default; }
-.rw-cell:disabled { cursor: not-allowed; }
-.rw-btn { padding: 10px 22px; font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; color: #fff; background: #3498db; }
-.rw-btn:hover:not(:disabled) { background: #2980b9; }
-.rw-btn.alt { background: #e67e22; }
-.rw-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.rw-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 14px; }
-.rw-final { font-size: 1.4rem; color: #27ae60; font-weight: 900; }
+.wlv-wrap {
+  font-family: 'Inter', system-ui, sans-serif;
+  max-width: 460px; margin: 0 auto; padding: 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  background: #fceae6; border-radius: 16px;
+}
+.wlv-head { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
+.wlv-title { margin: 0; font-size: 1.25rem; font-weight: 800; color: #a93226; }
+.wlv-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #555; }
+.wlv-score { color: #a93226; font-weight: 800; }
+.wlv-die-area { display: flex; align-items: center; gap: 12px; }
+.wlv-die { width: 56px; height: 56px; background: #a93226; color: #fff; border-radius: 12px; display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 800; box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+.wlv-hint { font-size: 0.82rem; color: #555; max-width: 220px; }
+.wlv-board { display: flex; flex-direction: column; gap: 6px; padding: 8px; background: rgba(0,0,0,0.04); border-radius: 10px; }
+.wlv-row { display: flex; gap: 6px; }
+.wlv-slot {
+  width: 56px; height: 56px; border: 2px solid #ddd; border-radius: 8px; background: #fff;
+  font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700; cursor: pointer; color: #1a202c;
+}
+.wlv-slot:disabled { cursor: not-allowed; }
+.wlv-legal { border-color: #a93226; background: #cd615522; }
+.wlv-filled { background: #a93226; color: #fff; border-color: #a93226; }
+.wlv-controls { display: flex; gap: 10px; }
+.wlv-btn { padding: 9px 20px; border-radius: 8px; font-weight: 700; font-family: inherit; border: 0; cursor: pointer; }
+.wlv-primary { background: #a93226; color: #fff; }
+.wlv-skip { background: #95a5a6; color: #fff; }
+.wlv-reset { background: #e5e7eb; color: #1a202c; }
+.wlv-done { background: #fff; color: #a93226; padding: 12px 18px; border-radius: 10px; font-weight: 800; font-size: 1.1rem; }
+.wlv-rules { font-size: 0.78rem; color: #666; font-family: 'JetBrains Mono', monospace; text-align: center; }

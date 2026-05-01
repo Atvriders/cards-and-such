@@ -1,35 +1,102 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
-export interface QuizQuestion { question: string; choices: [string, string, string, string]; correct: 0 | 1 | 2 | 3; }
-export interface IcyTowerArcadeSettings { questions: "10"; }
-export interface IcyTowerArcadeState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
-export type IcyTowerArcadeAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
-const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: 'Icy Tower was developed by?', choices: ['Free Lunch Design', 'Lima Sky', 'Halfbrick', 'Mojang'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Icy Tower was released in?', choices: ['2001', '1985', '2010', '2020'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'The original protagonist is?', choices: ['Harold the Homeboy', 'Sonic', 'Mario', 'PacMan'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Game-over occurs when the bottom of the screen?', choices: ['Catches up to the player (player falls behind)', 'Reaches the top first', 'Scores zero', 'Times out the auction'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Combo bonuses are triggered by?', choices: ['Skipping multiple floors in a single jump', 'Collecting coins', 'Bidding correctly', 'Discarding cards'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Icy Tower-style is best classified as?', choices: ['A vertical chain-jumping platformer', 'A solitaire', 'A trick-taking game', 'A bridge variant'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Score in Icy Tower is based primarily on?', choices: ['Floors climbed and combos', 'Time elapsed only', 'Money spent', 'Number of opponents'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Player movement in Icy Tower uses?', choices: ['Arrow keys (left/right and jump)', 'Mouse only', 'Voice', 'Eye tracking'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Icy Tower is most associated with?', choices: ['Early 2000s freeware/Flash gaming era', '1990s arcades', '1980s consoles', '2020s VR'], correct: 0 as 0 | 1 | 2 | 3 },
-  { question: 'Icy Tower combo points scale by?', choices: ['Number of floors skipped per jump', 'Time per jump', 'Coins per second', 'Random chance'], correct: 0 as 0 | 1 | 2 | 3 }
-];
-function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
+
+// Icy Tower Arcade: endless runner. Player has 3 lanes; tap to move; obstacles spawn from right; collision = game over.
+
+export const LANES = 3;
+export const LANE_LENGTH = 12; // x positions, 0 (player) to 11 (spawn point)
+export const TICK_MS = 100;
+
+export interface IcyTowerArcadeSettings { dummy: boolean; }
+
+export interface Obstacle { id: number; lane: number; x: number; }
+
+export interface IcyTowerArcadeState {
+  rngSeed: number;
+  playerLane: number;
+  obstacles: Obstacle[];
+  nextId: number;
+  ticks: number;
+  spawnTimer: number;
+  spawnInterval: number;
+  speed: number; // tiles per tick (fractional accumulator)
+  speedAccum: number;
+  score: number;
+  phase: "playing" | "done";
+}
+
+export type IcyTowerArcadeAction =
+  | { type: "tick" }
+  | { type: "lane"; dir: -1 | 1 }
+  | { type: "setLane"; lane: number };
+
 export function initialState(seed: number, _settings: IcyTowerArcadeSettings): IcyTowerArcadeState {
-  const rng=mulberry32(seed);
-  const pool=shuffle([...ALL_QUESTIONS],rng).slice(0,10);
-  const questions=pool.map(q=>{const idx=q.choices.map((c,i)=>({c,i}));const s=shuffle(idx,rng);const nc=s.findIndex(x=>x.i===q.correct) as 0|1|2|3;return{...q,choices:s.map(x=>x.c) as [string,string,string,string],correct:nc};});
-  return{questions,currentIndex:0,selected:null,submitted:false,timeLeft:15,score:0,correctCount:0,phase:"playing"};
+  return {
+    rngSeed: seed >>> 0 || 1,
+    playerLane: 1,
+    obstacles: [],
+    nextId: 1,
+    ticks: 0,
+    spawnTimer: 0,
+    spawnInterval: 8,
+    speed: 1,
+    speedAccum: 0,
+    score: 0,
+    phase: "playing",
+  };
 }
-export function reducer(state: IcyTowerArcadeState, action: IcyTowerArcadeAction): IcyTowerArcadeState {
-  if(state.phase==="done")return state;
-  switch(action.type){
-    case "select":return state.submitted?state:{...state,selected:action.choice};
-    case "submit":{if(state.submitted||state.selected===null)return state;const q=state.questions[state.currentIndex]!;const ok=state.selected===q.correct;const pts=ok?100+Math.floor(state.timeLeft*10):0;return{...state,submitted:true,score:state.score+pts,correctCount:state.correctCount+(ok?1:0),phase:"result"};}
-    case "tick":{if(state.submitted)return state;const t=state.timeLeft-1;return t<=0?{...state,timeLeft:0,submitted:true,phase:"result"}:{...state,timeLeft:t};}
-    case "next":{const ni=state.currentIndex+1;return ni>=state.questions.length?{...state,phase:"done"}:{...state,currentIndex:ni,selected:null,submitted:false,timeLeft:15,phase:"playing"};}
-    default:return state;
+
+function collides(playerLane: number, obstacles: Obstacle[]): boolean {
+  for (const o of obstacles) {
+    if (o.x === 0 && o.lane === playerLane) return true;
   }
+  return false;
 }
-export function isTerminal(state: IcyTowerArcadeState): { score: number } | null { return state.phase==="done"?{score:state.score}:null; }
+
+export function reducer(state: IcyTowerArcadeState, action: IcyTowerArcadeAction): IcyTowerArcadeState {
+  if (state.phase === "done") return state;
+  if (action.type === "lane") {
+    const next = Math.max(0, Math.min(LANES - 1, state.playerLane + action.dir));
+    if (next === state.playerLane) return state;
+    if (collides(next, state.obstacles)) return { ...state, playerLane: next, phase: "done" };
+    return { ...state, playerLane: next };
+  }
+  if (action.type === "setLane") {
+    const next = Math.max(0, Math.min(LANES - 1, action.lane));
+    if (next === state.playerLane) return state;
+    if (collides(next, state.obstacles)) return { ...state, playerLane: next, phase: "done" };
+    return { ...state, playerLane: next };
+  }
+  if (action.type === "tick") {
+    const rng = mulberry32(state.rngSeed);
+    const seed2 = Math.floor(rng() * 2 ** 31);
+    // advance obstacles
+    const accum = state.speedAccum + state.speed;
+    const advance = Math.floor(accum);
+    const newAccum = accum - advance;
+    let obstacles = state.obstacles.map(o => ({ ...o, x: o.x - advance })).filter(o => o.x >= 0);
+    // spawn
+    let spawnTimer = state.spawnTimer + 1;
+    let spawnInterval = state.spawnInterval;
+    let nextId = state.nextId;
+    if (spawnTimer >= spawnInterval) {
+      spawnTimer = 0;
+      const lane = Math.floor(rng() * LANES);
+      obstacles = [...obstacles, { id: nextId++, lane, x: LANE_LENGTH - 1 }];
+    }
+    // collision check
+    if (collides(state.playerLane, obstacles)) {
+      return { ...state, rngSeed: seed2, obstacles, nextId, ticks: state.ticks + 1, spawnTimer, spawnInterval, speedAccum: newAccum, phase: "done" };
+    }
+    // difficulty scaling
+    const ticks = state.ticks + 1;
+    if (ticks % 60 === 0 && spawnInterval > 4) spawnInterval--;
+    const speed = ticks > 200 ? 1.4 : ticks > 100 ? 1.2 : 1;
+    const score = state.score + 1;
+    return { ...state, rngSeed: seed2, obstacles, nextId, ticks, spawnTimer, spawnInterval, speed, speedAccum: newAccum, score };
+  }
+  return state;
+}
+
+export function isTerminal(state: IcyTowerArcadeState): { score: number } | null {
+  return state.phase === "done" ? { score: state.score } : null;
+}

@@ -1,48 +1,81 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { NonConsecutiveSudokuState, NonConsecutiveSudokuAction, NonConsecutiveSudokuSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { isTerminal, GRID_SIZE, MAX_DIGIT, BOX_ROWS, BOX_COLS } from "./state.js";
 import "./Game.css";
-const LABELS = ["A", "B", "C", "D"];
+
 export function NonConsecutiveSudokuGame({ state, dispatch, onGameOver }: GameProps<NonConsecutiveSudokuState, NonConsecutiveSudokuSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  if (state.phase === "done") return (
-    <div className="nlp-wrap"><div className="nlp-done"><h2>Done!</h2><p>Correct: {state.correct} / {state.puzzles.length}</p><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#27ae60" }}>{state.score} pts</p></div></div>
-  );
-  const p = state.puzzles[state.idx]!;
-  const isResult = state.phase === "result";
-  const rows = p.grid.split("|");
-  return (
-    <div className="nlp-wrap">
-      <div className="nlp-header">
-        <span className="nlp-progress">Q {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="nlp-score">{state.score} pts</span>
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (state.selected === null) return;
+      const d = parseInt(e.key, 10);
+      if (!isNaN(d) && d >= 1 && d <= MAX_DIGIT) dispatch({ type: "enter", digit: d } as NonConsecutiveSudokuAction);
+      else if (e.key === "Backspace" || e.key === "Delete" || e.key === "0") dispatch({ type: "enter", digit: 0 } as NonConsecutiveSudokuAction);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [state.selected, dispatch]);
+
+  if (state.phase === "done") {
+    return (
+      <div className="nonconsecutivesudoku-wrap">
+        <div className="nonconsecutivesudoku-done">
+          <h2>Done!</h2>
+          <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
+          <p className="nonconsecutivesudoku-final">{state.score} pts</p>
+        </div>
       </div>
-      <div className="nlp-grid">
-        {rows.map((row, ri) => (
-          <div key={ri} className="nlp-row">
-            {row.split("").map((c, ci) => (
-              <span key={ci} className={"nlp-cell" + (c === "." ? " empty" : "")}>{c === "." ? "" : c}</span>
-            ))}
+    );
+  }
+
+  const puzzle = state.puzzles[state.idx]!;
+  const errSet = new Set(state.errors);
+  const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
+
+  return (
+    <div className="nonconsecutivesudoku-wrap">
+      <div className="nonconsecutivesudoku-header">
+        <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
+        <span className="nonconsecutivesudoku-score">{state.score} pts</span>
+      </div>
+      <div className="nonconsecutivesudoku-mech">Sudoku where adjacent cells differ by more than 1.</div>
+      <div className="nonconsecutivesudoku-grid">
+        {Array.from({ length: GRID_SIZE }, (_, r) => (
+          <div key={r} className="nonconsecutivesudoku-row">
+            {Array.from({ length: GRID_SIZE }, (_, c) => {
+              const idx = r * GRID_SIZE + c;
+              const v = state.current[idx]!;
+              const isGiven = puzzle.given[idx] !== 0;
+              const isSel = state.selected === idx;
+              const isErr = errSet.has(idx);
+              const rightThick = (c + 1) % BOX_COLS === 0 && c + 1 < GRID_SIZE;
+              const bottomThick = (r + 1) % BOX_ROWS === 0 && r + 1 < GRID_SIZE;
+              return (
+                <button
+                  key={c}
+                  className={`nonconsecutivesudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  onClick={() => dispatch({ type: "select", index: idx } as NonConsecutiveSudokuAction)}
+                >{v === 0 ? "" : v}</button>
+              );
+            })}
           </div>
         ))}
       </div>
-      <div className="nlp-question">{p.prompt}</div>
-      <div className="nlp-choices">
-        {p.choices.map((choice, i) => {
-          let cls = "nlp-choice";
-          if (isResult) {
-            if (i === p.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== p.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as NonConsecutiveSudokuAction)}><span className="nlp-letter">{LABELS[i]}</span>{choice}</button>;
-        })}
+      <div className="nonconsecutivesudoku-pad">
+        {digits.map((d) => (
+          <button key={d} className="nonconsecutivesudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as NonConsecutiveSudokuAction)}>{d}</button>
+        ))}
+        <button className="nonconsecutivesudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as NonConsecutiveSudokuAction)}>×</button>
       </div>
-      <div className="nlp-actions">
-        {!isResult && <button className="nlp-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as NonConsecutiveSudokuAction)}>Submit</button>}
-        {isResult && <button className="nlp-btn next" onClick={() => dispatch({ type: "next" } as NonConsecutiveSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>}
+      <div className="nonconsecutivesudoku-actions">
+        <button className="nonconsecutivesudoku-btn check" onClick={() => dispatch({ type: "check" } as NonConsecutiveSudokuAction)}>Check</button>
+        <button className="nonconsecutivesudoku-btn hint" onClick={() => dispatch({ type: "hint" } as NonConsecutiveSudokuAction)}>Hint</button>
+        <button className="nonconsecutivesudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as NonConsecutiveSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
+      {state.solved && <div className="nonconsecutivesudoku-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

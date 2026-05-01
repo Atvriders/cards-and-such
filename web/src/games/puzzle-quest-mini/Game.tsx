@@ -4,7 +4,7 @@ import type { PuzzleQuestMiniState, PuzzleQuestMiniAction, PuzzleQuestMiniSettin
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-const GEMS = ["⚔","🛡","🏹","🔮","💰","💚"];
+const GEMS = ["⚔️","🛡️","💰","💎","📜","🏹"];
 
 export function PuzzleQuestMiniGame({ state, dispatch, onGameOver }: GameProps<PuzzleQuestMiniState, PuzzleQuestMiniSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -16,20 +16,28 @@ export function PuzzleQuestMiniGame({ state, dispatch, onGameOver }: GameProps<P
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="pqmm3-wrap">
+        <div className="pqmm3-done">
+          <h2>Time's Up!</h2>
+          <div className="pqmm3-stats">Matches: {state.matches}</div>
+          <div className="pqmm3-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="m3-wrap">
-      <div className="m3-header">
-        <span className="m3-info">Matches: {state.matches}</span>
-        <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+    <div className="pqmm3-wrap">
+      <div className="pqmm3-header">
+        <span className="pqmm3-info">Matches: {state.matches}</span>
+        <span className="pqmm3-timer">{state.ticksRemaining}s</span>
+        <span className="pqmm3-score">{state.score} pts</span>
       </div>
-      <div className="m3-grid">
+      <div className="pqmm3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button key={`${r}-${c}`} className={`pqmm3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuzzleQuestMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

@@ -2,28 +2,34 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { NochMalCrossState, NochMalCrossAction, NochMalCrossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NochMalCrossGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const nochMalCrossPlugin: GamePlugin<NochMalCrossState, NochMalCrossAction, typeof settings> = {
   id: "noch-mal-cross",
   title: "Noch Mal Cross",
-  category: "board",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Color/number dice cross-marking; mark cells matching both rolls.",
-  howToPlay: `Noch Mal! is a color/number cross-marking roll-and-write. In this adaptation you have a 5x5 grid where each cell has both a color (R/Y/G/B/W) and a number (1-5). Cells are pre-painted in a fixed pattern.
+  description: "Noch Mal — cross out cells matching color and number on grid.",
+  howToPlay: `Noch Mal Cross is a 12-roll dice-and-mark game with themed scoring.
 
-Each turn you roll 2 dice: a color die (R/Y/G/B/W) and a number die (1-5). Click any unmarked cell whose color matches OR whose number matches the rolls; if both match, you score double.
+How to play
+1. Press Roll to throw a d6.
+2. Click any unmarked cell on the 4x4 grid to mark it with that value.
+3. Score = die value + zone bonus + adjacency bonus (matching value next door).
+4. Skip if no good spot — that roll is wasted.
 
-Scoring (at end):
-• Each marked cell: +1 base point
-• Doubled cells (both color and number matched): +2 bonus on top of base
-• Bonus +5 per fully-completed row
-• Bonus +5 per fully-completed column
-• Bonus +10 per matching color group of 3+ cells (any same-color set of 3+ marked cells)
+Theme: Column complete: +column number.
 
-The game runs 12 rolls. With 12 marks on a 25-cell board, you'll fill about half. Hunt for matching pairs to score doubles. A strong Noch Mal run scores 25-40 points. The fixed pattern rewards memory and aim.`,
+End-of-game bonuses
+- Full row: +4 each
+- Full column: +4 each
+- Full board: +12
+
+The game ends after 12 rolls (or earlier if all 16 cells are filled). Maximum reachable depends on a balanced spread; aim for 50-80 in a strong run.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as NochMalCrossSettings),
+  initialState: (seed, s) => initialState(seed, s as NochMalCrossSettings),
   reducer,
   isTerminal,
   component: NochMalCrossGame,

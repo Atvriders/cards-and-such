@@ -1,70 +1,106 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export interface WingspanDiceGameSettings { rounds: "10"; }
+export const TRACK_COUNT = 4;
+export const TRACK_LEN = 6;
+export const TOTAL_CELLS = TRACK_COUNT * TRACK_LEN;
+export const TOTAL_ROLLS = 10;
+export const DIE_MAX = 6;
 
+export interface WingspanDiceGameSettings { dummy: boolean; }
 export interface WingspanDiceGameState {
   rngSeed: number;
+  filled: boolean[]; // 4 tracks * 6 cells
+  fillValues: number[];
+  rolls: number;
+  lastDice: number[]; // 5 dice each roll (Clever style)
+  selectedDie: number | null; // index into lastDice picked this turn
   score: number;
-  round: number;
-  maxRounds: number;
-  lastRoll: number[];
-  lastGain: number;
-  phase: "ready" | "rolled" | "gameover";
+  phase: "rolling" | "picking" | "placing" | "done";
 }
+export type WingspanDiceGameAction =
+  | { type: "roll" }
+  | { type: "pick"; dieIdx: number }
+  | { type: "place"; track: number }
+  | { type: "skip" }
+  | { type: "reset" };
 
-export type WingspanDiceGameAction = { type: "roll" } | { type: "next" };
-
-function rollFive(seed: number): { dice: number[]; nextSeed: number } {
-  const rng = mulberry32(seed);
-  const dice: number[] = [];
-  for (let i = 0; i < 5; i++) dice.push(Math.floor(rng() * 6) + 1);
-  return { dice, nextSeed: (seed + 7919) >>> 0 };
-}
-
-export function scoreRoll(dice: number[], round: number): number {
-  // generic: sum of top 3 + pair bonus + chain bonus
-  const sorted = [...dice].sort((a, b) => b - a);
-  let s = (sorted[0] ?? 0) + (sorted[1] ?? 0) + (sorted[2] ?? 0);
-  const counts: Record<number, number> = {};
-  for (const v of dice) counts[v] = (counts[v] ?? 0) + 1;
-  for (const k of Object.keys(counts)) {
-    const c = counts[Number(k)] ?? 0;
-    if (c >= 3) s += 5;
-    else if (c === 2) s += 2;
-  }
-  // small round bonus (so rounds differ)
-  if (round % 3 === 0) s += 3;
-  return s;
-}
-
-export function initialState(seed: number, _settings: WingspanDiceGameSettings): WingspanDiceGameState {
+export function initialState(seed: number, _s: WingspanDiceGameSettings): WingspanDiceGameState {
   return {
     rngSeed: seed >>> 0,
+    filled: new Array(TOTAL_CELLS).fill(false),
+    fillValues: new Array(TOTAL_CELLS).fill(0),
+    rolls: 0,
+    lastDice: [],
+    selectedDie: null,
     score: 0,
-    round: 1,
-    maxRounds: 10,
-    lastRoll: [],
-    lastGain: 0,
-    phase: "ready",
+    phase: "rolling",
   };
 }
 
+export function trackProgress(filled: boolean[], track: number): number {
+  let n = 0;
+  for (let i = 0; i < TRACK_LEN; i++) if (filled[track * TRACK_LEN + i]) n++;
+  return n;
+}
+
 export function reducer(state: WingspanDiceGameState, action: WingspanDiceGameAction): WingspanDiceGameState {
-  if (state.phase === "gameover") return state;
+  if (state.phase === "done") return state;
+  if (action.type === "reset") return initialState(state.rngSeed, { dummy: false });
   if (action.type === "roll") {
-    if (state.phase !== "ready") return state;
-    const { dice, nextSeed } = rollFive(state.rngSeed);
-    const gain = scoreRoll(dice, state.round);
-    return { ...state, rngSeed: nextSeed, lastRoll: dice, lastGain: gain, score: state.score + gain, phase: "rolled" };
+    if (state.phase !== "rolling") return state;
+    let seed = state.rngSeed;
+    const dice: number[] = [];
+    for (let i = 0; i < 5; i++) {
+      const rng = mulberry32(seed);
+      dice.push(1 + Math.floor(rng() * DIE_MAX));
+      seed = Math.floor(rng() * 2 ** 31);
+    }
+    return { ...state, rngSeed: seed >>> 0, lastDice: dice, selectedDie: null, phase: "picking" };
   }
-  if (action.type === "next") {
-    if (state.phase !== "rolled") return state;
-    if (state.round >= state.maxRounds) return { ...state, phase: "gameover" };
-    return { ...state, round: state.round + 1, phase: "ready", lastGain: 0, lastRoll: [] };
+  if (action.type === "pick") {
+    if (state.phase !== "picking") return state;
+    if (action.dieIdx < 0 || action.dieIdx >= state.lastDice.length) return state;
+    return { ...state, selectedDie: action.dieIdx, phase: "placing" };
+  }
+  if (action.type === "place") {
+    if (state.phase !== "placing" || state.selectedDie === null) return state;
+    const v = state.lastDice[state.selectedDie] ?? 0;
+    const t = action.track;
+    if (t < 0 || t >= TRACK_COUNT) return state;
+    const progress = trackProgress(state.filled, t);
+    if (progress >= TRACK_LEN) return state;
+    const idx = t * TRACK_LEN + progress;
+    const filled = [...state.filled];
+    filled[idx] = true;
+    const fillValues = [...state.fillValues];
+    fillValues[idx] = v;
+    // Score: value + chain bonus (consecutive same value)
+    let bonus = 0;
+    if (progress > 0 && state.fillValues[idx - 1] === v) bonus += 2;
+    const rolls = state.rolls + 1;
+    const phase: "rolling" | "picking" | "placing" | "done" =
+      rolls >= TOTAL_ROLLS || filled.every(Boolean) ? "done" : "rolling";
+    return { ...state, filled, fillValues, rolls, score: state.score + v + bonus, selectedDie: null, lastDice: [], phase };
+  }
+  if (action.type === "skip") {
+    if (state.phase !== "picking" && state.phase !== "placing") return state;
+    const rolls = state.rolls + 1;
+    const phase: "rolling" | "picking" | "placing" | "done" = rolls >= TOTAL_ROLLS ? "done" : "rolling";
+    return { ...state, rolls, selectedDie: null, lastDice: [], phase };
   }
   return state;
 }
 
 export function isTerminal(state: WingspanDiceGameState): { score: number } | null {
-  return state.phase === "gameover" ? { score: state.score } : null;
+  if (state.phase !== "done") return null;
+  let bonus = 0;
+  // Each track fully filled: +5
+  for (let t = 0; t < TRACK_COUNT; t++) {
+    if (trackProgress(state.filled, t) === TRACK_LEN) bonus += 5;
+  }
+  // All 4 tracks at least 3 cells: +6
+  let allThree = true;
+  for (let t = 0; t < TRACK_COUNT; t++) if (trackProgress(state.filled, t) < 3) { allThree = false; break; }
+  if (allThree) bonus += 6;
+  return { score: state.score + bonus };
 }

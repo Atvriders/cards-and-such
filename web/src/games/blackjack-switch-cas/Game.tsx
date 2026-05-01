@@ -3,25 +3,35 @@ import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { BlackjackSwitchCasState, BlackjackSwitchCasAction, BlackjackSwitchCasSettings } from "./state.js";
 import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
+
+const SURRENDER_ENABLED = false;
 export function BlackjackSwitchCasGame({ state, dispatch, onGameOver }: GameProps<BlackjackSwitchCasState, BlackjackSwitchCasSettings>): JSX.Element {
-  const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><h3>Blackjack Switch (Casino)</h3><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  const t = isTerminal(state);
+  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+  if (state.phase === "done") return <div className="bj-sw-c-wrap"><div className="bj-sw-c-done"><h2>Done!</h2><div className="bj-sw-c-final">{state.score} pts</div></div></div>;
+  const showDealer = state.phase !== "play";
   return (
-    <div className="dm-wrap">
-      <h3>Blackjack Switch (Casino)</h3>
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      {state.cardA !== null && state.cardB !== null && state.cardC !== null && (
-        <div className="dm-row">
-          <div className={`dm-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>
-          <div className={`dm-card ${isRed(state.cardB) ? "red" : "black"}`}>{cardName(state.cardB)}</div>
-          <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
-        </div>
-      )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as BlackjackSwitchCasAction)}>Play</button>}
+    <div className="bj-sw-c-wrap">
+      <div className="bj-sw-c-title">Blackjack Switch</div>
+      <div className="bj-sw-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="bj-sw-c-score">{state.score} pts</div>
+      <div className="bj-sw-c-info">Dealer ({showDealer ? state.dealerTotal : "?"}):</div>
+      <div className="bj-sw-c-row">
+        {state.dealer.map((c, i) => (i === 1 && !showDealer)
+          ? <div key={i} className="bj-sw-c-card back">??</div>
+          : <div key={i} className={`bj-sw-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}
+      </div>
+      <div className="bj-sw-c-info">You ({state.yourTotal}):</div>
+      <div className="bj-sw-c-row">{state.you.map((c, i) => <div key={i} className={`bj-sw-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <div className="bj-sw-c-actions">
+        <button className="bj-sw-c-btn" onClick={() => dispatch({ type: "hit" } as BlackjackSwitchCasAction)}>Hit</button>
+        <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "stand" } as BlackjackSwitchCasAction)}>Stand</button>
+        {state.you.length === 2 && <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "double" } as BlackjackSwitchCasAction)}>Double</button>}
+        {SURRENDER_ENABLED && state.you.length === 2 && <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "surrender" } as BlackjackSwitchCasAction)}>Surrender</button>}
+      </div>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as BlackjackSwitchCasAction)}>Next</button>
+        <div className="bj-sw-c-result">{state.result} — +{state.pts}</div>
+        <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "next" } as BlackjackSwitchCasAction)}>Next</button>
       </>}
     </div>
   );

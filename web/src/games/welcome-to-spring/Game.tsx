@@ -1,47 +1,58 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { WelcomeToSpringState, WelcomeToSpringAction, WelcomeToSpringSettings } from "./state.js";
-import { isTerminal, GRID_SIZE, TOTAL_ROLLS } from "./state.js";
+import { isTerminal, ROW_COUNT, ROW_LEN, TOTAL_ROLLS, legalAt } from "./state.js";
 import "./Game.css";
 
 export function WelcomeToSpringGame({ state, dispatch, onGameOver }: GameProps<WelcomeToSpringState, WelcomeToSpringSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return (
-      <div className="rw-wrap">
-        <h3 className="rw-title">Welcome To: Spring</h3>
-        <div className="rw-done">
-          <h2>Done!</h2>
-          <div className="rw-final">{t?.score ?? state.score} pts</div>
-        </div>
-      </div>
-    );
-  }
+  const final = t?.score ?? state.score;
   return (
-    <div className="rw-wrap">
-      <h3 className="rw-title">Welcome To: Spring</h3>
-      <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
-      {state.lastRoll !== null && state.phase === "marking" && (
-        <div className="rw-die">{state.lastRoll}</div>
+    <div className="wsp-wrap">
+      <header className="wsp-head">
+        <h2 className="wsp-title">Welcome To Spring</h2>
+        <div className="wsp-meta">
+          <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
+          <span className="wsp-score">{state.score} pts</span>
+        </div>
+      </header>
+      {state.phase === "placing" && state.lastRoll !== null && (
+        <div className="wsp-die-area">
+          <div className="wsp-die">{state.lastRoll}</div>
+          <div className="wsp-hint">Place this number into a row, keeping each row strictly ascending.</div>
+        </div>
       )}
-      <div className="rw-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
-        {state.cells.map((filled, i) => (
-          <button
-            key={i}
-            className={`rw-cell${filled ? " filled" : ""}`}
-            disabled={filled || state.phase !== "marking"}
-            onClick={() => dispatch({ type: "mark", index: i } as WelcomeToSpringAction)}
-          >{filled ? state.cellValues[i] : ""}</button>
+      <div className="wsp-board">
+        {Array.from({ length: ROW_COUNT }).map((_, r) => (
+          <div key={r} className="wsp-row">
+            {Array.from({ length: ROW_LEN }).map((__, c) => {
+              const idx = r * ROW_LEN + c;
+              const val = state.values[idx];
+              const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
+              return (
+                <button
+                  key={c}
+                  className={`wsp-slot${val !== null ? " wsp-filled" : ""}${canPlace ? " wsp-legal" : ""}`}
+                  disabled={val !== null || !canPlace}
+                  onClick={() => dispatch({ type: "place", index: idx } as WelcomeToSpringAction)}
+                >{val ?? ""}</button>
+              );
+            })}
+          </div>
         ))}
       </div>
-      {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as WelcomeToSpringAction)}>Roll</button>
-      )}
-      {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as WelcomeToSpringAction)}>Skip</button>
-      )}
+      <div className="wsp-controls">
+        {state.phase === "rolling" && (
+          <button className="wsp-btn wsp-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToSpringAction)}>Roll</button>
+        )}
+        {state.phase === "placing" && (
+          <button className="wsp-btn wsp-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToSpringAction)}>Skip (−1)</button>
+        )}
+        <button className="wsp-btn wsp-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToSpringAction)}>Reset</button>
+      </div>
+      {state.phase === "done" && <div className="wsp-done">Final: <b>{final}</b></div>}
+      <div className="wsp-rules">Each consecutive pair: +flower</div>
     </div>
   );
 }

@@ -1,48 +1,72 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { NumbrixMiniState, NumbrixMiniAction, NumbrixMiniSettings } from "./state.js";
-import { isTerminal } from "./state.js";
+import { isTerminal, GRID_ROWS, GRID_COLS, VALUES, VALUE_LABELS } from "./state.js";
 import "./Game.css";
-const LABELS = ["A", "B", "C", "D"];
+
 export function NumbrixMiniGame({ state, dispatch, onGameOver }: GameProps<NumbrixMiniState, NumbrixMiniSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  if (state.phase === "done") return (
-    <div className="nlp-wrap"><div className="nlp-done"><h2>Done!</h2><p>Correct: {state.correct} / {state.puzzles.length}</p><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#27ae60" }}>{state.score} pts</p></div></div>
-  );
-  const p = state.puzzles[state.idx]!;
-  const isResult = state.phase === "result";
-  const rows = p.grid.split("|");
-  return (
-    <div className="nlp-wrap">
-      <div className="nlp-header">
-        <span className="nlp-progress">Q {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="nlp-score">{state.score} pts</span>
+
+  if (state.phase === "done") {
+    return (
+      <div className="numbrixmini-wrap">
+        <div className="numbrixmini-done">
+          <h2>Done!</h2>
+          <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
+          <p className="numbrixmini-final">{state.score} pts</p>
+        </div>
       </div>
-      <div className="nlp-grid">
-        {rows.map((row, ri) => (
-          <div key={ri} className="nlp-row">
-            {row.split("").map((c, ci) => (
-              <span key={ci} className={"nlp-cell" + (c === "." ? " empty" : "")}>{c === "." ? "" : c}</span>
-            ))}
+    );
+  }
+
+  const puzzle = state.puzzles[state.idx]!;
+  const errSet = new Set(state.errors);
+
+  return (
+    <div className="numbrixmini-wrap">
+      <div className="numbrixmini-header">
+        <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
+        <span className="numbrixmini-score">{state.score} pts</span>
+      </div>
+      <div className="numbrixmini-mech">Fill 1..16 in a connected horizontal/vertical chain.</div>
+      <div className="numbrixmini-grid">
+        {Array.from({ length: GRID_ROWS }, (_, r) => (
+          <div key={r} className="numbrixmini-row">
+            {Array.from({ length: GRID_COLS }, (_, c) => {
+              const idx = r * GRID_COLS + c;
+              const v = state.current[idx]!;
+              const g = puzzle.given[idx]!;
+              const isGiven = g !== 0 && g !== -1;
+              const isBlocked = g === -1;
+              const isSel = state.selected === idx;
+              const isErr = errSet.has(idx);
+              const valIdx = VALUES.indexOf(v);
+              const label = isBlocked ? "■" : (v === 0 ? "" : (valIdx >= 0 ? VALUE_LABELS[valIdx] : String(v)));
+              return (
+                <button
+                  key={c}
+                  disabled={isBlocked}
+                  className={`numbrixmini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as NumbrixMiniAction)}
+                >{label}</button>
+              );
+            })}
           </div>
         ))}
       </div>
-      <div className="nlp-question">{p.prompt}</div>
-      <div className="nlp-choices">
-        {p.choices.map((choice, i) => {
-          let cls = "nlp-choice";
-          if (isResult) {
-            if (i === p.correct) cls += " correct";
-            else if (i === state.selected && state.selected !== p.correct) cls += " wrong";
-          } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as NumbrixMiniAction)}><span className="nlp-letter">{LABELS[i]}</span>{choice}</button>;
-        })}
+      <div className="numbrixmini-pad">
+        {VALUES.map((vv, i) => (
+          <button key={vv} className={`numbrixmini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as NumbrixMiniAction)}>{VALUE_LABELS[i]}</button>
+        ))}
+        <button className="numbrixmini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as NumbrixMiniAction)}>×</button>
       </div>
-      <div className="nlp-actions">
-        {!isResult && <button className="nlp-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as NumbrixMiniAction)}>Submit</button>}
-        {isResult && <button className="nlp-btn next" onClick={() => dispatch({ type: "next" } as NumbrixMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>}
+      <div className="numbrixmini-actions">
+        <button className="numbrixmini-btn check" onClick={() => dispatch({ type: "check" } as NumbrixMiniAction)}>Check</button>
+        <button className="numbrixmini-btn hint" onClick={() => dispatch({ type: "hint" } as NumbrixMiniAction)}>Hint</button>
+        <button className="numbrixmini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as NumbrixMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
+      {state.solved && <div className="numbrixmini-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

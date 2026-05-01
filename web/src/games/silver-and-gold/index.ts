@@ -2,30 +2,34 @@ import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js
 import type { SilverAndGoldState, SilverAndGoldAction, SilverAndGoldSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SilverAndGoldGame } from "./Game.js";
+
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+
 export const silverAndGoldPlugin: GamePlugin<SilverAndGoldState, SilverAndGoldAction, typeof settings> = {
   id: "silver-and-gold",
-  title: "Silver and Gold",
-  category: "board",
+  title: "Silver & Gold",
+  category: "dice",
   players: { min: 1, max: 1, multiplayer: false },
-  description: "Flip-card polyomino placement on treasure maps.",
-  howToPlay: `Silver and Gold is a card-flip polyomino roll-and-write. In this adaptation you flip 12 cards (each shows a polyomino size 1-4) and mark contiguous cells on a 5x5 treasure map.
+  description: "Treasure cards — fill in shapes on islands for silver and gold bonuses.",
+  howToPlay: `Silver & Gold is a 12-roll dice-and-mark game with themed scoring.
 
-Each turn click any empty cell to drop a polyomino's anchor there; the cells horizontally and vertically extending fill in based on the size value (1-cell up to 4-cell line). If extension goes off-grid, only what fits is placed.
+How to play
+1. Press Roll to throw a d6.
+2. Click any unmarked cell on the 4x4 grid to mark it with that value.
+3. Score = die value + zone bonus + adjacency bonus (matching value next door).
+4. Skip if no good spot — that roll is wasted.
 
-Scoring at end:
-• Each filled cell: +1 base point
-• Bonus +5 per fully-completed row
-• Bonus +5 per fully-completed column
-• Penalty −2 per fully-empty row or column at game end
-• Bonus +15 if 20+ cells are filled (treasure-map complete)
+Theme: Filling a shape: +shape size points.
 
-The game ends after 12 rolls. With polyomino sizes 1-4, you can fill 12-25 cells depending on your luck.
+End-of-game bonuses
+- Full row: +4 each
+- Full column: +4 each
+- Full board: +12
 
-Strategy: plan to extend polyominoes in directions that complete rows or columns. Avoid placing 4-cell pieces near the edge where they'd waste cells. A strong run scores 25-40 points. The treasure is the bonus.`,
+The game ends after 12 rolls (or earlier if all 16 cells are filled). Maximum reachable depends on a balanced spread; aim for 50-80 in a strong run.`,
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as SilverAndGoldSettings),
+  initialState: (seed, s) => initialState(seed, s as SilverAndGoldSettings),
   reducer,
   isTerminal,
   component: SilverAndGoldGame,
