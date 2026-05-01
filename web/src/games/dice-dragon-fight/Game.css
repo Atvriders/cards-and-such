@@ -1,1 +1,67 @@
-@import "../../engines/dicemini/dicemini.css";
+.df-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background:
+    radial-gradient(circle at 50% 0%, #5a1010 0%, transparent 55%),
+    linear-gradient(180deg, #1a0a08 0%, #060201 100%);
+  color: #f4d2a8;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.df-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #ffaa6a;
+  border: 1px solid #803a1a; border-radius: 999px;
+  padding: 6px 14px; background: rgba(60, 16, 6, 0.6);
+}
+.df-bar-row {
+  display: flex; gap: 10px; align-items: center; width: min(100%, 460px);
+}
+.df-bar-label {
+  font-family: "JetBrains Mono", monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: #d8a47a; min-width: 56px;
+}
+.df-bar {
+  flex: 1; height: 10px; border-radius: 4px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid #5a2010;
+  overflow: hidden;
+}
+.df-bar-fill { display: block; height: 100%; transition: width 0.3s; }
+.df-bar-fill.hero { background: linear-gradient(90deg, #4cc56b, #2e8a4a); }
+.df-bar-fill.foe { background: linear-gradient(90deg, #f06030, #a02018); }
+.df-bar-val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #f0c098; min-width: 110px; text-align: right; }
+.df-stage {
+  width: min(100%, 460px);
+  background: rgba(20, 8, 4, 0.85);
+  border: 1px solid #5a2010; border-radius: 14px;
+  padding: 18px; text-align: center;
+}
+.df-dragon-art {
+  font-family: "JetBrains Mono", monospace; font-size: 48px;
+  color: #ff5a30; letter-spacing: 0.25em; text-shadow: 0 0 18px #ff5a30;
+}
+.df-dice { display: flex; gap: 10px; justify-content: center; margin: 12px 0; }
+.df-die {
+  width: 44px; height: 44px;
+  background: #fff5d8; color: #1a0a08;
+  border: 2px solid #803a1a; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 18px;
+}
+.df-log {
+  margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 13px;
+  color: #ffd098; min-height: 36px;
+}
+.df-actions { display: flex; gap: 10px; }
+.df-btn {
+  font-family: "Inter", sans-serif; font-weight: 600;
+  border: 1px solid; padding: 10px 22px; border-radius: 8px;
+  cursor: pointer; min-width: 110px;
+}
+.df-btn.strike { background: linear-gradient(180deg, #a02018, #50100a); border-color: #f06030; color: #ffd0b0; }
+.df-btn.guard { background: linear-gradient(180deg, #205a8a, #102a4a); border-color: #5aa8d8; color: #c0e0ff; }
+.df-btn.focus { background: linear-gradient(180deg, #4a3a8a, #20184a); border-color: #8a6dff; color: #d8c8ff; }
+.df-btn.next { background: linear-gradient(180deg, #4a3a1a, #20180a); border-color: #c8a050; color: #ffe0a8; min-width: 200px; }
+.df-done { text-align: center; padding: 24px; }
+.df-done h2 { font-size: 28px; color: #ffaa6a; margin: 0 0 8px 0; }
+.df-final { font-size: 36px; font-weight: 800; color: #ffd970; }

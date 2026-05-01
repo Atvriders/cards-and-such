@@ -1,10 +1,39 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal, TURNS } from "./state.js";
+
 const S = { dummy: false };
-describe("DiceBazaar", () => {
-  it("starts rolling at round 1", () => { const s = initialState(1, S); expect(s.phase).toBe("rolling"); expect(s.round).toBe(1); });
-  it("roll produces 5 dice", () => { const s = reducer(initialState(1, S), { type:"roll" }); expect(s.dice.length).toBe(5); });
-  it("score >= 0 after roll", () => { const s = reducer(initialState(1, S), { type:"roll" }); expect(s.score).toBeGreaterThanOrEqual(0); });
-  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("rounds >= 10", () => { expect(TOTAL_ROUNDS).toBeGreaterThanOrEqual(10); });
+
+describe("dice-bazaar", () => {
+  it("starts with 12 gold, no inventory", () => {
+    const s = initialState(1, S);
+    expect(s.gold).toBe(12);
+    expect(s.inventory.silk).toBe(0);
+  });
+  it("buying spends gold and adds inventory", () => {
+    const s0 = initialState(2, S);
+    const s = reducer(s0, { type: "buy", good: "silk" });
+    expect(s.inventory.silk).toBe(1);
+    expect(s.gold).toBe(s0.gold - s0.prices.silk);
+  });
+  it("can't buy without enough gold", () => {
+    let s = initialState(3, S);
+    s = { ...s, gold: 0 };
+    const r = reducer(s, { type: "buy", good: "gem" });
+    expect(r).toBe(s);
+  });
+  it("selling returns gold and adds score", () => {
+    let s = reducer(initialState(4, S), { type: "buy", good: "silk" });
+    const beforeScore = s.score;
+    s = reducer(s, { type: "sell", good: "silk" });
+    expect(s.inventory.silk).toBe(0);
+    expect(s.score).toBeGreaterThanOrEqual(beforeScore);
+  });
+  it("isTerminal null at start", () => {
+    expect(isTerminal(initialState(5, S))).toBeNull();
+  });
+  it("game ends after TURNS days", () => {
+    let s = initialState(6, S);
+    for (let i = 0; i < TURNS; i++) s = reducer(s, { type: "next" });
+    expect(s.phase).toBe("done");
+  });
 });

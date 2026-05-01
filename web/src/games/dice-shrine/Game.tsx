@@ -1,32 +1,44 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceShrineState, DiceShrineAction, DiceShrineSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, CHOICES } from "./state.js";
+import { isTerminal, ROUNDS } from "./state.js";
 import "./Game.css";
+
+const GLYPH = { sun: "*", moon: "(", river: "~" } as const;
 
 export function DiceShrineGame({ state, dispatch, onGameOver }: GameProps<DiceShrineState, DiceShrineSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="rg-wrap"><div className="rg-done"><h2>Done!</h2><div className="rg-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="sh-wrap">
+        <div className="sh-done">
+          <h2>The Gods Are Pleased</h2>
+          <div className="sh-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
+
   return (
-    <div className="rg-wrap">
-      <div className="rg-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="rg-score">{state.score} pts</div>
-      {state.display && <div className="rg-display">{state.display}</div>}
-      {state.phase === "predict" && (
-        <div className="rg-row">
-          {CHOICES.map(c => (
-            <button key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as DiceShrineAction)}>{c}</button>
-          ))}
+    <div className="sh-wrap">
+      <div className="sh-banner">Round {state.round} / {ROUNDS} · Score {state.score}</div>
+      <div className={`sh-altar ${state.god}`}>
+        <div className="sh-glyph">{GLYPH[state.god]}</div>
+        <div className="sh-god">{state.god.toUpperCase()}</div>
+      </div>
+      {state.rolls && (
+        <div className="sh-row">
+          {state.rolls.map((r, i) => <div key={i} className="sh-die">{r}</div>)}
         </div>
       )}
+      <div className="sh-log">{state.log || "Roll three offerings to the deity."}</div>
+      {state.phase === "roll" && (
+        <button className="sh-btn" onClick={() => dispatch({ type: "offer" } as DiceShrineAction)}>Offer</button>
+      )}
       {state.phase === "result" && (
-        <>
-          <div className="rg-result">{state.lastWin ? `Correct! +${state.lastPts}` : "Wrong — 0"}</div>
-          <button className="rg-btn alt" onClick={() => dispatch({ type:"next" } as DiceShrineAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
-        </>
+        <button className="sh-btn alt" onClick={() => dispatch({ type: "next" } as DiceShrineAction)}>Next</button>
       )}
     </div>
   );

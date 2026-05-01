@@ -1,1 +1,52 @@
-@import "../../engines/dicemini/dicemini.css";
+.rr-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 30px, rgba(80, 50, 18, 0.08) 30px 32px),
+    linear-gradient(180deg, #1a1a1a 0%, #08080a 100%);
+  color: #d8d4c8;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.rr-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #d8a050;
+  border: 1px solid #6a4828; border-radius: 999px;
+  padding: 6px 14px; background: rgba(28, 20, 8, 0.8);
+}
+.rr-track {
+  position: relative;
+  width: min(100%, 460px); height: 22px;
+  background: rgba(20, 12, 6, 0.85); border: 2px solid #4a3018;
+  border-radius: 4px; overflow: visible;
+}
+.rr-track-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, #6a4828, #c89858);
+  border-right: 2px solid #ffd970;
+}
+.rr-train {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-family: "JetBrains Mono", monospace; font-weight: 800;
+  color: #ffd970; text-shadow: 0 0 8px #ffd970;
+  transition: left 0.3s;
+}
+.rr-ties { font-family: "JetBrains Mono", monospace; color: #6a4828; letter-spacing: 1px; }
+.rr-row { display: flex; gap: 10px; }
+.rr-die {
+  width: 50px; height: 50px;
+  background: #f0e0a8; color: #2a1408;
+  border: 2px solid #4a3018; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 22px;
+}
+.rr-die.hot { box-shadow: 0 0 18px #ffd970; outline: 2px solid #ffd970; outline-offset: 2px; }
+.rr-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #d8a050; min-height: 36px; text-align: center; }
+.rr-btn {
+  font-family: "Inter", sans-serif; font-weight: 600;
+  border: 1px solid #d8a050; background: linear-gradient(180deg, #6a4828, #3a2810);
+  color: #ffe098; padding: 10px 22px; border-radius: 8px;
+  cursor: pointer; min-width: 200px;
+}
+.rr-btn.alt { background: linear-gradient(180deg, #2a1808, #14080a); }
+.rr-done { text-align: center; padding: 24px; }
+.rr-done h2 { font-size: 28px; color: #d8a050; margin: 0 0 8px 0; }
+.rr-final { font-size: 36px; font-weight: 800; color: #ffd970; }

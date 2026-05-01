@@ -1,1 +1,59 @@
-@import "../../engines/dicemini/dicemini.css";
+.ga-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  position: relative;
+  min-height: 100%; padding: 22px 16px;
+  background: linear-gradient(180deg, #02030c 0%, #0a0820 50%, #04020c 100%);
+  color: #cfe0ff;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.ga-stars {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background-image: radial-gradient(2px 2px at 30% 30%, #fff, transparent), radial-gradient(1px 1px at 70% 80%, #cfe0ff, transparent), radial-gradient(2px 2px at 50% 60%, #fff, transparent);
+  background-size: 220px 220px;
+}
+.ga-banner {
+  position: relative;
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #6abfff;
+  border: 1px solid #2a4a8a; border-radius: 999px;
+  padding: 6px 14px; background: rgba(10, 16, 40, 0.7);
+}
+.ga-planets {
+  position: relative;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  width: min(100%, 460px);
+}
+.ga-planet {
+  background: rgba(10, 16, 40, 0.85); border: 1px solid #2a4a8a;
+  border-radius: 10px; padding: 10px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  font-family: "Inter", sans-serif;
+}
+.ga-planet:disabled { opacity: 0.4; cursor: not-allowed; }
+.ga-planet-orb {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #b8d8ff 0%, #2a4a8a 60%, #0a1228 100%);
+  box-shadow: 0 0 12px rgba(100, 180, 255, 0.5);
+}
+.ga-planet.visited .ga-planet-orb { filter: grayscale(1) brightness(0.5); }
+.ga-planet.selected { outline: 2px solid #ffd970; outline-offset: 2px; }
+.ga-planet-name { font-size: 13px; font-weight: 700; color: #c0e0ff; }
+.ga-planet-meta { font-family: "JetBrains Mono", monospace; font-size: 10px; color: #6a90c8; }
+.ga-row { position: relative; display: flex; gap: 10px; align-items: center; }
+.ga-die {
+  width: 44px; height: 44px;
+  background: #e0e8ff; color: #0a1838;
+  border: 2px solid #2a4a8a; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 18px;
+}
+.ga-sum { font-family: "JetBrains Mono", monospace; font-size: 18px; color: #ffd970; }
+.ga-log { position: relative; font-family: "JetBrains Mono", monospace; font-size: 13px; color: #8aafe0; min-height: 36px; text-align: center; max-width: 460px; }
+.ga-btn {
+  position: relative;
+  font-family: "Inter", sans-serif; font-weight: 600;
+  border: 1px solid #6abfff; background: linear-gradient(180deg, #2a4a8a, #102040);
+  color: #c0e0ff; padding: 10px 22px; border-radius: 8px; cursor: pointer; min-width: 200px;
+}
+.ga-done { position: relative; text-align: center; padding: 24px; }
+.ga-done h2 { font-size: 28px; color: #c0e0ff; margin: 0 0 8px 0; }
+.ga-final { font-size: 36px; font-weight: 800; color: #ffd970; }

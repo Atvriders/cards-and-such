@@ -1,34 +1,39 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceTyphoonState, DiceTyphoonAction, DiceTyphoonSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { isTerminal, ROUNDS } from "./state.js";
 import "./Game.css";
+
 export function DiceTyphoonGame({ state, dispatch, onGameOver }: GameProps<DiceTyphoonState, DiceTyphoonSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="ty-wrap">
+        <div className="ty-done">
+          <h2>Storm Passes</h2>
+          <div className="ty-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
+
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-hint">Storm dice — even sums survive the typhoon!</div>
-      {state.dice && (
-        <div className="dm-row">
-          <div className="dm-die">{state.dice[0]}</div>
-          <div className="dm-die">{state.dice[1]}</div>
+    <div className="ty-wrap">
+      <div className="ty-rain"></div>
+      <div className="ty-banner">Round {state.round} / {ROUNDS} · Banked {state.score}</div>
+      <div className="ty-pool">Pool: <strong>{state.pool}</strong></div>
+      {state.rolls.length > 0 && (
+        <div className="ty-row">
+          {state.rolls.map((r, i) => <div key={i} className={`ty-die${state.busted ? " bust" : ""}`}>{r}</div>)}
         </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceTyphoonAction)}>Roll</button>
-      )}
-      {state.phase === "scored" && (
-        <>
-          <div className="dm-result">+{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceTyphoonAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
-        </>
-      )}
+      <div className="ty-log">{state.log || "Roll for points or bank what you have. Double 1s wipe the pool."}</div>
+      <div className="ty-actions">
+        <button className="ty-btn roll" onClick={() => dispatch({ type: "roll" } as DiceTyphoonAction)}>Roll Wave</button>
+        <button className="ty-btn bank" disabled={state.pool <= 0} onClick={() => dispatch({ type: "bank" } as DiceTyphoonAction)}>Bank ({state.pool})</button>
+      </div>
     </div>
   );
 }

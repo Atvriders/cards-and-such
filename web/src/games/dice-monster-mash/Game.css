@@ -1,1 +1,45 @@
-@import "../../engines/dicemini/dicemini.css";
+.mm-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background:
+    radial-gradient(circle at 50% 0%, #4a1830 0%, transparent 60%),
+    linear-gradient(180deg, #1a0820 0%, #060208 100%);
+  color: #f0d8e8;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.mm-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #ff8a98;
+  border: 1px solid #8a2848; border-radius: 999px;
+  padding: 6px 14px; background: rgba(40, 8, 24, 0.6);
+}
+.mm-arena {
+  width: min(100%, 460px); padding: 18px;
+  background: rgba(20, 8, 24, 0.85);
+  border: 1px solid #6a2848; border-radius: 14px;
+  text-align: center;
+}
+.mm-name { font-size: 22px; font-weight: 700; color: #ffd0a8; margin-bottom: 6px; }
+.mm-bar { height: 12px; border-radius: 4px; background: rgba(0,0,0,0.5); overflow: hidden; border: 1px solid #6a2848; }
+.mm-bar > span { display: block; height: 100%; background: linear-gradient(90deg, #ff5a98, #c81848); transition: width 0.3s; }
+.mm-hp { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #d8a8c0; margin-top: 4px; }
+.mm-row { display: flex; gap: 10px; justify-content: center; margin: 12px 0; }
+.mm-die {
+  width: 48px; height: 48px;
+  background: #f8e0e8; color: #2a0818;
+  border: 2px solid #6a2848; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 800; font-size: 20px;
+}
+.mm-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #f0a8c8; min-height: 36px; }
+.mm-btn {
+  font-family: "Inter", sans-serif; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid #ff5a98;
+  background: linear-gradient(180deg, #c8203a, #6a081a);
+  color: #ffd0d8; padding: 12px 26px; border-radius: 8px;
+  cursor: pointer; min-width: 200px;
+}
+.mm-btn.alt { background: linear-gradient(180deg, #5a3050, #2a0818); border-color: #c870a8; }
+.mm-done { text-align: center; padding: 24px; }
+.mm-done h2 { font-size: 28px; color: #ffd0a8; margin: 0 0 8px 0; }
+.mm-final { font-size: 36px; font-weight: 800; color: #ff8a98; }

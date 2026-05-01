@@ -1,1 +1,58 @@
-@import "../../engines/dicemini/dicemini.css";
+.tw-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background:
+    radial-gradient(ellipse at 50% 100%, #38302a 0%, transparent 70%),
+    linear-gradient(180deg, #1a1820 0%, #06060a 100%);
+  color: #d8d4f0;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.tw-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #b89cff;
+  border: 1px solid #5a3aa0; border-radius: 999px;
+  padding: 6px 14px; background: rgba(20, 10, 40, 0.6);
+}
+.tw-target { font-family: "JetBrains Mono", monospace; font-size: 14px; color: #ffd970; }
+.tw-tower {
+  display: flex; flex-direction: column; gap: 2px;
+  width: min(100%, 200px); padding: 8px;
+  background: rgba(20, 10, 40, 0.7);
+  border: 1px solid #4a3a8a; border-radius: 10px;
+}
+.tw-floor {
+  height: 18px; line-height: 18px; text-align: center;
+  font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700;
+  background: rgba(40, 30, 70, 0.5); color: #6a5aa0;
+  border-radius: 3px;
+}
+.tw-floor.on {
+  background: linear-gradient(135deg, #ff8a30, #c84818);
+  color: #fff; box-shadow: 0 0 12px #ff8a30;
+}
+.tw-floor.done { background: rgba(60, 90, 50, 0.5); color: #98c878; }
+.tw-row { display: flex; gap: 10px; align-items: center; }
+.tw-die {
+  width: 44px; height: 44px;
+  background: #e0d8ff; color: #1a1040;
+  border: 2px solid #4a3a8a; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 18px;
+}
+.tw-tag {
+  font-family: "JetBrains Mono", monospace; font-weight: 700;
+  padding: 6px 12px; border-radius: 6px;
+}
+.tw-tag.ok { background: #2a8a48; color: #fff; }
+.tw-tag.bad { background: #a82838; color: #fff; }
+.tw-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #b8a8e8; min-height: 36px; text-align: center; max-width: 460px; }
+.tw-btn {
+  font-family: "Inter", sans-serif; font-weight: 600;
+  border: 1px solid #8a6dff;
+  background: linear-gradient(180deg, #4a32a0, #2a1a60);
+  color: #e0d5ff; padding: 10px 22px; border-radius: 8px;
+  cursor: pointer; min-width: 220px;
+}
+.tw-btn.alt { background: linear-gradient(180deg, #2a1a60, #18103a); }
+.tw-done { text-align: center; padding: 24px; }
+.tw-done h2 { font-size: 28px; color: #b89cff; margin: 0 0 8px 0; }
+.tw-final { font-size: 36px; font-weight: 800; color: #ffd970; }

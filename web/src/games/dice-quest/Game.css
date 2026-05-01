@@ -1,14 +1,34 @@
-.rg-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.rg-info { font-size:0.95rem; color:#555; }
-.rg-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.rg-display { font-size:2rem; font-weight:900; padding:16px 28px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; min-width:160px; color:#2c3e50; }
-.rg-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.rg-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.rg-btn:hover:not(:disabled) { background:#2980b9; }
-.rg-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.rg-btn.alt { background:#e67e22; }
-.rg-btn.alt:hover { background:#ca6f1e; }
-.rg-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
-.rg-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.rg-done h2 { margin:0 0 8px; }
-.rg-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.qu-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background: linear-gradient(180deg, #1a2a18 0%, #060808 100%);
+  color: #d8e0c8;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.qu-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #a8c878;
+  border: 1px solid #506a30; border-radius: 999px;
+  padding: 6px 14px; background: rgba(20, 30, 14, 0.7);
+}
+.qu-row { display: flex; gap: 10px; }
+.qu-die {
+  width: 50px; height: 50px;
+  background: #f0f4d0; color: #1a2a08;
+  border: 2px solid #506a30; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 22px;
+}
+.qu-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #a8c878; min-height: 36px; text-align: center; max-width: 460px; }
+.qu-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.qu-btn {
+  font-family: "Inter", sans-serif; font-weight: 700;
+  border: 1px solid; padding: 12px 22px; border-radius: 8px;
+  cursor: pointer; min-width: 130px;
+}
+.qu-btn.p-forest { background: linear-gradient(180deg, #2a5a18, #102a08); border-color: #6ab048; color: #c8e8a8; }
+.qu-btn.p-cave { background: linear-gradient(180deg, #3a2a4a, #1a1228); border-color: #9070d0; color: #d8c0f0; }
+.qu-btn.p-mountain { background: linear-gradient(180deg, #4a3a2a, #2a1810); border-color: #c8a880; color: #f0d8b0; }
+.qu-btn.next { background: linear-gradient(180deg, #2a3a1a, #14180a); border-color: #6ab048; color: #c8e8a8; min-width: 200px; }
+.qu-done { text-align: center; padding: 24px; }
+.qu-done h2 { font-size: 28px; color: #a8c878; margin: 0 0 8px 0; }
+.qu-final { font-size: 36px; font-weight: 800; color: #ffd970; }

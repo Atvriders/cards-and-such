@@ -1,1 +1,53 @@
-@import "../../engines/dicemini/dicemini.css";
+.tm-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 14px, rgba(120, 80, 30, 0.05) 14px 16px),
+    linear-gradient(135deg, #d8b070 0%, #a87830 100%);
+  color: #2a1808;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.tm-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #4a2a08;
+  border: 1px solid #6a4018; border-radius: 999px;
+  padding: 6px 14px; background: rgba(255, 235, 200, 0.7);
+}
+.tm-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  width: min(100%, 320px); padding: 14px;
+  background: rgba(80, 50, 16, 0.18);
+  border: 2px dashed #5a3818; border-radius: 12px;
+}
+.tm-tile {
+  aspect-ratio: 1; display: grid; place-items: center;
+  font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 20px;
+  background: rgba(255, 240, 200, 0.6);
+  border: 1px solid #8a5a28; border-radius: 6px;
+  color: #6a3a18;
+}
+.tm-tile.open { background: rgba(80, 60, 30, 0.4); color: #fff; }
+.tm-tile.gold {
+  background: linear-gradient(135deg, #ffd970, #b87a18);
+  color: #4a2008; box-shadow: 0 0 12px #ffd970;
+}
+.tm-tile.glow { outline: 2px solid #ff5a30; outline-offset: 2px; }
+.tm-row { display: flex; gap: 10px; }
+.tm-die {
+  width: 44px; height: 44px;
+  background: #fff5d8; color: #2a1408;
+  border: 2px solid #6a4018; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 18px;
+}
+.tm-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #4a2a08; min-height: 36px; text-align: center; max-width: 360px; }
+.tm-btn {
+  font-family: "Inter", sans-serif; font-weight: 600;
+  border: 1px solid #6a4018;
+  background: linear-gradient(180deg, #8a5018, #5a3008);
+  color: #ffe0a8; padding: 10px 22px; border-radius: 8px;
+  cursor: pointer; min-width: 200px;
+}
+.tm-btn.alt { background: linear-gradient(180deg, #4a2a08, #2a1808); }
+.tm-done { text-align: center; padding: 12px; }
+.tm-done h2 { font-size: 26px; color: #2a1808; margin: 0 0 6px 0; }
+.tm-final { font-size: 32px; font-weight: 800; color: #803a08; }

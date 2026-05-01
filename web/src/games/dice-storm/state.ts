@@ -1,58 +1,54 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_ROUNDS = 10;
+export const TARGET = 50;
+export const MAX_ROLLS = 30;
 
 export interface DiceStormSettings { dummy: boolean; }
 
 export interface DiceStormState {
   rngSeed: number;
-  round: number;
+  rollsTaken: number;
+  pool: number;
+  rolls: number[];
   score: number;
-  phase: "predict" | "result" | "done";
-  display: string;
-  lastChoice: string;
-  lastWin: boolean;
-  lastPts: number;
+  phase: "roll" | "decide" | "done";
+  log: string;
 }
 
-export type DiceStormAction = { type: "go"; choice: string } | { type: "next" };
-
-export const CHOICES: readonly string[] = ["Brave","Shelter"];
+export type DiceStormAction = { type: "roll" } | { type: "bank" };
 
 export function initialState(seed: number, _settings: DiceStormSettings): DiceStormState {
-  return { rngSeed: seed, round: 1, score: 0, phase: "predict", display: "", lastChoice: "", lastWin: false, lastPts: 0 };
+  return { rngSeed: seed, rollsTaken: 0, pool: 0, rolls: [], score: 0, phase: "roll", log: "" };
 }
 
 export function reducer(state: DiceStormState, action: DiceStormAction): DiceStormState {
   if (state.phase === "done") return state;
-  if (action.type === "go") {
-    if (state.phase !== "predict") return state;
+  if (action.type === "roll") {
     const rng = mulberry32(state.rngSeed);
-    const choice = action.choice;
-    let display = ""; let points = 0;
-    const stormRoll = rng();
-    let storm: string; let mult: number;
-    if (stormRoll < 0.4) { storm = "☀️"; mult = 1; }
-    else if (stormRoll < 0.7) { storm = "🌧"; mult = 2; }
-    else if (stormRoll < 0.9) { storm = "⚡"; mult = 3; }
-    else { storm = "🌀"; mult = 0; }
-    const a = 1 + Math.floor(rng()*6);
-    const b = 1 + Math.floor(rng()*6);
-    if (choice === "Brave") {
-      points = (a + b) * mult;
-      display = storm + " 🎲" + a + "+🎲" + b + " ×" + mult;
-    } else {
-      points = 5;
-      display = storm + " sheltered (+5)";
-    }
-    const win = points > 0;
+    const r = [1+Math.floor(rng()*6), 1+Math.floor(rng()*6)];
     const nextSeed = Math.floor(rng() * 2 ** 31);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, score: state.score + points, phase: isLast ? "done" : "result", display, lastChoice: choice, lastWin: win, lastPts: points };
+    const rollsTaken = state.rollsTaken + 1;
+    if (r[0] === r[1] && r[0] === 1) {
+      // thunderstrike: lose pool
+      return { ...state, rngSeed: nextSeed, rolls: r, pool: 0, rollsTaken, phase: "decide", log: "THUNDER! Pool wiped." };
+    }
+    const sum = r[0]! + r[1]!;
+    const phase: DiceStormState["phase"] = rollsTaken >= MAX_ROLLS ? "done" : "decide";
+    let log = `+${sum} (pool ${state.pool + sum})`;
+    let pool = state.pool + sum;
+    let score = state.score;
+    if (phase === "done") {
+      score += pool;
+      log += " — final pool added.";
+    }
+    return { ...state, rngSeed: nextSeed, rolls: r, pool, rollsTaken, phase, score, log };
   }
-  if (action.type === "next") {
-    if (state.phase !== "result") return state;
-    return { ...state, round: state.round + 1, phase: "predict", display: "", lastChoice: "", lastWin: false, lastPts: 0 };
+  if (action.type === "bank") {
+    if (state.phase !== "decide") return state;
+    let bonus = 0;
+    if (state.pool >= TARGET) bonus = 30;
+    const score = state.score + state.pool + bonus;
+    return { ...state, score, pool: 0, phase: "done", log: bonus > 0 ? `Banked ${state.pool} (+${bonus} target bonus).` : `Banked ${state.pool}.` };
   }
   return state;
 }

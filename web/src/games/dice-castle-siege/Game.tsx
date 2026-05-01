@@ -1,31 +1,67 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceCastleSiegeState, DiceCastleSiegeAction, DiceCastleSiegeSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { isTerminal, WALL_MAX, TURN_LIMIT, WEAPONS } from "./state.js";
 import "./Game.css";
+
+const LABEL = { cannon: "Cannon", trebuchet: "Trebuchet", sapper: "Sapper" } as const;
+
 export function DiceCastleSiegeGame({ state, dispatch, onGameOver }: GameProps<DiceCastleSiegeState, DiceCastleSiegeSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+    const won = state.wall === 0;
+    return (
+      <div className="cs-wrap">
+        <div className="cs-done">
+          <h2>{won ? "Wall Breached!" : "Siege Failed"}</h2>
+          <div className="cs-final">{state.score} pts</div>
+          <div className="cs-log">{state.log}</div>
+        </div>
+      </div>
+    );
   }
+
+  const wallPct = (state.wall / WALL_MAX) * 100;
+
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">🏰 Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
+    <div className="cs-wrap">
+      <div className="cs-banner">Turn {state.turn} / {TURN_LIMIT}</div>
+      <div className="cs-stats">
+        <div className="cs-stat"><div className="cs-stat-label">Wall</div><div className="cs-stat-val">{state.wall} / {WALL_MAX}</div></div>
+        <div className="cs-stat"><div className="cs-stat-label">Score</div><div className="cs-stat-val">{state.score}</div></div>
+      </div>
+      <div className="cs-wall">
+        <div className="cs-wall-fill" style={{ width: wallPct + "%" }} />
+        <div className="cs-bricks">{"|".repeat(Math.max(1, Math.round(wallPct / 8)))}</div>
+      </div>
+
       {state.rolls.length > 0 && (
-        <div className="dm-row">
-          {state.rolls.map((r, i) => <div key={i} className="dm-die">{r}</div>)}
+        <div className="cs-row">
+          {state.rolls.map((r, i) => <div key={i} className="cs-die">{r}</div>)}
+          <div className="cs-result">{state.lastWeapon ? `${LABEL[state.lastWeapon]} → ${state.lastDmg}` : ""}</div>
         </div>
       )}
-      {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceCastleSiegeAction)}>Roll Dice</button>
+      <div className="cs-log">{state.log || "Pick a siege weapon. Each die roll determines damage."}</div>
+
+      {state.phase === "choose" && (
+        <div className="cs-actions">
+          {WEAPONS.map(w => (
+            <button
+              key={w}
+              className={`cs-btn ${w}`}
+              disabled={state.ammo[w] <= 0}
+              onClick={() => dispatch({ type: "fire", weapon: w } as DiceCastleSiegeAction)}
+            >
+              <span className="cs-w-name">{LABEL[w]}</span>
+              <span className="cs-w-ammo">x{state.ammo[w]}</span>
+            </button>
+          ))}
+        </div>
       )}
-      {state.phase === "scored" && (
-        <>
-          <div className="dm-result">+{state.lastPts} pts</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceCastleSiegeAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
-        </>
+      {state.phase === "result" && (
+        <button className="cs-btn next" onClick={() => dispatch({ type: "next" } as DiceCastleSiegeAction)}>Continue</button>
       )}
     </div>
   );

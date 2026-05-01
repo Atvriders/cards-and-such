@@ -1,1 +1,45 @@
-@import "../../engines/dicemini/dicemini.css";
+.tr-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background:
+    radial-gradient(circle at 30% 0%, #4a3a18 0%, transparent 60%),
+    linear-gradient(180deg, #2a1810 0%, #100804 100%);
+  color: #f0d8a8;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.tr-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #f0c060;
+  border: 1px solid #8a5018; border-radius: 999px;
+  padding: 6px 14px; background: rgba(40, 16, 8, 0.7);
+}
+.tr-cities { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; width: min(100%, 460px); }
+.tr-city {
+  background: rgba(40, 28, 14, 0.85); border: 1px solid #6a4818;
+  border-radius: 8px; padding: 8px 6px; text-align: center;
+}
+.tr-city.here { background: linear-gradient(135deg, #c8703a, #6a3008); border-color: #ffd970; box-shadow: 0 0 16px #ffd970; }
+.tr-city.past { opacity: 0.45; }
+.tr-city-name { font-family: "JetBrains Mono", monospace; font-size: 10px; color: #c89858; }
+.tr-city-price { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 18px; color: #ffd970; }
+.tr-row { display: flex; gap: 8px; }
+.tr-die {
+  width: 40px; height: 40px;
+  background: #f0e0a8; color: #2a1408;
+  border: 2px solid #6a4818; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 18px;
+}
+.tr-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #f0c060; min-height: 36px; text-align: center; max-width: 460px; }
+.tr-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.tr-btn {
+  font-family: "Inter", sans-serif; font-weight: 600;
+  border: 1px solid #c8a050; background: linear-gradient(180deg, #6a4018, #3a2008);
+  color: #ffe098; padding: 8px 14px; border-radius: 8px; font-size: 13px;
+  cursor: pointer; min-width: 80px;
+}
+.tr-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.tr-btn.alt { background: linear-gradient(180deg, #2a4a18, #102a08); border-color: #6ab048; color: #c8e8a8; min-width: 110px; }
+.tr-btn.next { background: linear-gradient(180deg, #4a3018, #2a1808); border-color: #c8a050; min-width: 200px; padding: 10px 22px; }
+.tr-done { text-align: center; padding: 24px; }
+.tr-done h2 { font-size: 28px; color: #f0c060; margin: 0 0 8px 0; }
+.tr-final { font-size: 36px; font-weight: 800; color: #ffd970; }

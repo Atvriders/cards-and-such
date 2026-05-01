@@ -1,25 +1,47 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal, TRACK_LENGTH, STARTING_FUEL, STARTING_HULL } from "./state.js";
+
 const S = { dummy: false };
-describe("DiceSpaceship", () => {
-  it("starts in rolling", () => { const s = initialState(1, S); expect(s.phase).toBe("rolling"); expect(s.score).toBe(0); });
-  it("roll produces dice and points", () => {
-    const s = reducer(initialState(1, S), { type:"roll" });
-    expect(s.rolls.length).toBeGreaterThanOrEqual(1);
-    expect(s.score).toBeGreaterThanOrEqual(1);
+
+describe("dice-spaceship", () => {
+  it("starts at sector 0 with full fuel and hull", () => {
+    const s = initialState(1, S);
+    expect(s.pos).toBe(0);
+    expect(s.fuel).toBe(STARTING_FUEL);
+    expect(s.hull).toBe(STARTING_HULL);
   });
-  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("game ends after total rounds", () => {
-    let s = initialState(1, S);
-    for (let i = 0; i < TOTAL_ROUNDS; i++) {
-      s = reducer(s, { type:"roll" });
-      if (s.phase === "scored") s = reducer(s, { type:"next" });
+
+  it("thrust burns 2 fuel and advances", () => {
+    const s = reducer(initialState(2, S), { type: "act", choice: "thrust" });
+    expect(s.fuel).toBe(STARTING_FUEL - 2);
+    expect(s.pos).toBeGreaterThan(0);
+  });
+
+  it("drift consumes no fuel", () => {
+    const s = reducer(initialState(3, S), { type: "act", choice: "drift" });
+    expect(s.fuel).toBe(STARTING_FUEL);
+  });
+
+  it("scan never takes hull damage", () => {
+    let s = initialState(99, S);
+    for (let i = 0; i < 5 && s.phase === "choose"; i++) {
+      s = reducer(s, { type: "act", choice: "scan" });
+      if (s.phase === "result") s = reducer(s, { type: "next" });
+    }
+    expect(s.hull).toBe(STARTING_HULL);
+  });
+
+  it("isTerminal null until done", () => {
+    expect(isTerminal(initialState(1, S))).toBeNull();
+  });
+
+  it("eventually arrives or sinks across many actions", () => {
+    let s = initialState(7, S);
+    for (let i = 0; i < 100 && s.phase !== "done"; i++) {
+      if (s.phase === "choose") s = reducer(s, { type: "act", choice: s.fuel > 0 ? "thrust" : "drift" });
+      else s = reducer(s, { type: "next" });
     }
     expect(s.phase).toBe("done");
-  });
-  it("score grows after rolls", () => {
-    let s = initialState(1, S);
-    s = reducer(s, { type:"roll" });
-    expect(s.score).toBeGreaterThanOrEqual(1);
+    expect(s.pos === TRACK_LENGTH || s.hull === 0).toBe(true);
   });
 });

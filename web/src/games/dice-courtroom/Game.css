@@ -1,1 +1,49 @@
-@import "../../engines/dicemini/dicemini.css";
+.cr-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 24px, rgba(160, 120, 80, 0.04) 24px 26px),
+    linear-gradient(180deg, #2a1c10 0%, #100806 100%);
+  color: #e0d0a8;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.cr-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #d8b070;
+  border: 1px solid #8a5818; border-radius: 999px;
+  padding: 6px 14px; background: rgba(40, 24, 8, 0.7);
+}
+.cr-bench { display: flex; gap: 16px; align-items: center; width: min(100%, 460px); justify-content: space-around; }
+.cr-side {
+  background: rgba(40, 28, 12, 0.85); border: 1px solid #8a5818;
+  border-radius: 12px; padding: 14px 22px; min-width: 160px; text-align: center;
+}
+.cr-side.opp { border-color: #8a3818; }
+.cr-label { font-family: "JetBrains Mono", monospace; font-size: 10px; color: #a88858; letter-spacing: 0.15em; text-transform: uppercase; }
+.cr-side.opp .cr-label { color: #c87858; }
+.cr-evidence { font-family: "JetBrains Mono", monospace; font-size: 32px; font-weight: 800; color: #ffd970; }
+.cr-side.opp .cr-evidence { color: #ff8a48; }
+.cr-vs { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #c8a050; letter-spacing: 0.2em; }
+.cr-rolls { display: flex; gap: 12px; align-items: center; }
+.cr-row { display: flex; gap: 6px; }
+.cr-die {
+  width: 38px; height: 38px;
+  background: #f0e0a8; color: #2a1808;
+  border: 2px solid #8a5818; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 16px;
+}
+.cr-die.opp { background: #ffc0a0; border-color: #8a3818; }
+.cr-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #d8b070; min-height: 36px; text-align: center; max-width: 460px; }
+.cr-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.cr-btn {
+  font-family: "Inter", sans-serif; font-weight: 600;
+  border: 1px solid; padding: 10px 18px; border-radius: 8px;
+  cursor: pointer; min-width: 120px;
+}
+.cr-btn.ev { background: linear-gradient(180deg, #6a4818, #3a2808); border-color: #c8a050; color: #ffd970; }
+.cr-btn.ob { background: linear-gradient(180deg, #5a2818, #2a1208); border-color: #c87058; color: #f0c098; }
+.cr-btn.sp { background: linear-gradient(180deg, #4a3a18, #2a2008); border-color: #b8a040; color: #ffe098; }
+.cr-btn.next { background: linear-gradient(180deg, #4a3018, #2a1808); border-color: #c8a050; color: #ffe0a8; min-width: 200px; }
+.cr-done { text-align: center; padding: 24px; }
+.cr-done h2 { font-size: 28px; color: #d8b070; margin: 0 0 8px 0; }
+.cr-final { font-size: 36px; font-weight: 800; color: #ffd970; }

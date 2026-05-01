@@ -1,1 +1,47 @@
-@import "../../engines/dicemini/dicemini.css";
+.pi-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%; padding: 22px 16px;
+  background: linear-gradient(180deg, #0a2838 0%, #04101c 100%);
+  color: #d8e8f0;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.pi-banner {
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #ffd970;
+  border: 1px solid #c8a050; border-radius: 999px;
+  padding: 6px 14px; background: rgba(8, 24, 40, 0.7);
+}
+.pi-fleet { display: flex; gap: 10px; }
+.pi-ship {
+  font-family: "JetBrains Mono", monospace; font-size: 24px; font-weight: 800;
+  color: #80b8d0; padding: 4px 8px;
+  border-radius: 4px;
+}
+.pi-ship.sunk { color: #406878; opacity: 0.6; }
+.pi-ship.here { color: #ffd970; transform: scale(1.3); text-shadow: 0 0 12px #ffd970; }
+.pi-target {
+  background: rgba(8, 24, 40, 0.9); border: 1px solid #4a78a0;
+  border-radius: 12px; padding: 12px 22px; text-align: center;
+}
+.pi-name { font-size: 20px; font-weight: 700; color: #ffd970; }
+.pi-meta { font-family: "JetBrains Mono", monospace; font-size: 12px; color: #80b8d0; margin-top: 4px; }
+.pi-row { display: flex; gap: 10px; align-items: center; }
+.pi-die {
+  width: 48px; height: 48px;
+  background: #d8e8ff; color: #08182a;
+  border: 2px solid #4a78a0; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 20px;
+}
+.pi-sum { font-family: "JetBrains Mono", monospace; font-size: 20px; color: #ffd970; }
+.pi-log { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #80b8d0; min-height: 36px; text-align: center; max-width: 460px; }
+.pi-btn {
+  font-family: "Inter", sans-serif; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  border: 1px solid #c8a050; background: linear-gradient(180deg, #804818, #4a2a08);
+  color: #ffd970; padding: 12px 24px; border-radius: 8px;
+  cursor: pointer; min-width: 200px;
+}
+.pi-btn.alt { background: linear-gradient(180deg, #2a4a8a, #102040); border-color: #6abfff; color: #d8e8ff; }
+.pi-done { text-align: center; padding: 24px; }
+.pi-done h2 { font-size: 28px; color: #ffd970; margin: 0 0 8px 0; }
+.pi-final { font-size: 36px; font-weight: 800; color: #ffd970; }

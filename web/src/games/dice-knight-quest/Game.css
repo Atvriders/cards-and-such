@@ -1,1 +1,69 @@
-@import "../../engines/dicemini/dicemini.css";
+.kq-wrap {
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%;
+  padding: 24px 16px;
+  background:
+    radial-gradient(circle at 20% 0%, #2a1a3d 0%, transparent 60%),
+    radial-gradient(circle at 80% 100%, #3a1f1f 0%, transparent 60%),
+    linear-gradient(180deg, #14101a 0%, #0a0810 100%);
+  color: #f3e9c8;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.kq-banner {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #d8b257; padding: 6px 14px;
+  border: 1px solid #5a4423; border-radius: 999px;
+  background: rgba(50, 32, 12, 0.55);
+}
+.kq-stats { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.kq-stat {
+  background: rgba(20, 14, 28, 0.7);
+  border: 1px solid #4d3a5a; border-radius: 10px;
+  padding: 8px 14px; min-width: 120px; text-align: center;
+}
+.kq-stat-label { font-family: "JetBrains Mono", monospace; font-size: 10px; color: #a8956b; letter-spacing: 0.15em; text-transform: uppercase; }
+.kq-stat-val { font-size: 22px; font-weight: 700; color: #f5d98a; margin-top: 2px; }
+.kq-hpbar { width: 100%; height: 6px; background: #2a1a30; border-radius: 4px; overflow: hidden; margin-top: 6px; }
+.kq-hpbar > span { display: block; height: 100%; transition: width 0.3s; }
+.kq-hpbar.knight > span { background: linear-gradient(90deg, #4cc56b, #2e8a4a); }
+.kq-hpbar.foe > span { background: linear-gradient(90deg, #d83a4a, #8e1f2c); }
+.kq-arena {
+  width: min(100%, 460px);
+  background: rgba(18, 10, 22, 0.85);
+  border: 1px solid #503867; border-radius: 14px;
+  padding: 18px; box-shadow: 0 0 24px rgba(120, 70, 200, 0.18) inset;
+}
+.kq-foe-name { font-size: 18px; font-weight: 700; color: #f0c060; text-align: center; margin-bottom: 4px; }
+.kq-foe-meta { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #b58a52; text-align: center; }
+.kq-log {
+  margin-top: 10px; padding: 10px 12px; min-height: 40px;
+  background: rgba(0,0,0,0.4); border-radius: 8px;
+  font-family: "JetBrains Mono", monospace; font-size: 13px; color: #d6c8a4;
+}
+.kq-roll { display: flex; gap: 10px; justify-content: center; margin-top: 12px; align-items: center; }
+.kq-d20 {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, #c8a050, #8a6420);
+  color: #1c0e08; font-weight: 800; font-size: 22px;
+  display: grid; place-items: center;
+  clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
+  border: 2px solid #2a1408;
+}
+.kq-d6 {
+  width: 44px; height: 44px;
+  background: #efe6c8; color: #2a1408;
+  border: 2px solid #2a1408; border-radius: 6px;
+  display: grid; place-items: center; font-weight: 700; font-size: 18px;
+}
+.kq-btn {
+  font-family: "Inter", sans-serif;
+  border: 1px solid #c8a050; background: linear-gradient(180deg, #6e4a1c, #3e2a10);
+  color: #f5dfa0; padding: 10px 22px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; letter-spacing: 0.04em; min-width: 160px;
+}
+.kq-btn:hover { background: linear-gradient(180deg, #8a6028, #5a3a18); }
+.kq-btn.alt { border-color: #8c6dc2; background: linear-gradient(180deg, #3a2a5a, #221638); color: #d4c4f0; }
+.kq-done { text-align: center; padding: 24px; }
+.kq-done h2 { font-size: 28px; color: #f5d98a; margin: 0 0 8px 0; }
+.kq-done .kq-final { font-size: 36px; font-weight: 800; color: #ffeaa0; }

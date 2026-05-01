@@ -1,10 +1,33 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { initialState, reducer, isTerminal, ROUNDS } from "./state.js";
+
 const S = { dummy: false };
-describe("DiceLaboratory", () => {
-  it("starts rolling at round 1", () => { const s = initialState(1, S); expect(s.phase).toBe("rolling"); expect(s.round).toBe(1); });
-  it("roll produces 5 dice", () => { const s = reducer(initialState(1, S), { type:"roll" }); expect(s.dice.length).toBe(5); });
-  it("score >= 0 after roll", () => { const s = reducer(initialState(1, S), { type:"roll" }); expect(s.score).toBeGreaterThanOrEqual(0); });
-  it("isTerminal null at start", () => { expect(isTerminal(initialState(1, S))).toBeNull(); });
-  it("rounds >= 10", () => { expect(TOTAL_ROUNDS).toBeGreaterThanOrEqual(10); });
+
+describe("dice-laboratory", () => {
+  it("starts with a formula", () => {
+    const s = initialState(1, S);
+    expect(s.formula.length).toBe(3);
+    s.formula.forEach(f => { expect(f).toBeGreaterThanOrEqual(1); expect(f).toBeLessThanOrEqual(6); });
+  });
+  it("mix produces 3 sorted dice", () => {
+    const s = reducer(initialState(2, S), { type: "mix" });
+    expect(s.rolls.length).toBe(3);
+    for (let i = 1; i < s.rolls.length; i++) expect(s.rolls[i]).toBeGreaterThanOrEqual(s.rolls[i-1]!);
+  });
+  it("matched count is between 0 and 3", () => {
+    const s = reducer(initialState(3, S), { type: "mix" });
+    expect(s.matched).toBeGreaterThanOrEqual(0);
+    expect(s.matched).toBeLessThanOrEqual(3);
+  });
+  it("isTerminal null at start", () => {
+    expect(isTerminal(initialState(4, S))).toBeNull();
+  });
+  it("game ends after ROUNDS rounds", () => {
+    let s = initialState(5, S);
+    for (let i = 0; i < ROUNDS; i++) {
+      s = reducer(s, { type: "mix" });
+      if (s.phase === "result") s = reducer(s, { type: "next" });
+    }
+    expect(s.phase).toBe("done");
+  });
 });

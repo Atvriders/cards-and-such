@@ -1,56 +1,59 @@
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
 
-export const TOTAL_ROUNDS = 8;
+export const ROUNDS = 8;
+export const GODS = ["sun", "moon", "river"] as const;
+export type God = typeof GODS[number];
 
 export interface DiceShrineSettings { dummy: boolean; }
 
 export interface DiceShrineState {
   rngSeed: number;
   round: number;
+  god: God;
+  rolls: number[] | null;
   score: number;
-  phase: "predict" | "result" | "done";
-  display: string;
-  lastChoice: string;
-  lastWin: boolean;
-  lastPts: number;
+  phase: "roll" | "result" | "done";
+  log: string;
 }
 
-export type DiceShrineAction = { type: "go"; choice: string } | { type: "next" };
+export type DiceShrineAction = { type: "offer" } | { type: "next" };
 
-export const CHOICES: readonly string[] = ["Bow","Pray","Offer"];
+export function godScore(god: God, rolls: number[]): { pts: number; desc: string } {
+  const sum = rolls.reduce((a,b)=>a+b,0);
+  const evens = rolls.filter(r => r%2===0).length;
+  const odds = rolls.length - evens;
+  const high = rolls.filter(r => r>=5).length;
+  if (god === "sun") return { pts: high * 8 + odds * 2, desc: `Sun favors odd & high (${high}H, ${odds}O)` };
+  if (god === "moon") return { pts: evens * 6 + (sum >= 12 ? 8 : 0), desc: `Moon favors evens (${evens}E)` };
+  return { pts: sum + (rolls[0] === rolls[1] && rolls[1] === rolls[2] ? 18 : 0), desc: `River favors flow (sum ${sum})` };
+}
+
+function pickGod(rng: () => number): God {
+  return GODS[Math.floor(rng() * GODS.length)]!;
+}
 
 export function initialState(seed: number, _settings: DiceShrineSettings): DiceShrineState {
-  return { rngSeed: seed, round: 1, score: 0, phase: "predict", display: "", lastChoice: "", lastWin: false, lastPts: 0 };
+  const rng = mulberry32(seed);
+  const god = pickGod(rng);
+  const nextSeed = Math.floor(rng() * 2 ** 31);
+  return { rngSeed: nextSeed, round: 1, god, rolls: null, score: 0, phase: "roll", log: "" };
 }
 
 export function reducer(state: DiceShrineState, action: DiceShrineAction): DiceShrineState {
   if (state.phase === "done") return state;
-  if (action.type === "go") {
-    if (state.phase !== "predict") return state;
+  if (action.type === "offer" && state.phase === "roll") {
     const rng = mulberry32(state.rngSeed);
-    const choice = action.choice;
-    let display = ""; let points = 0;
-    if (choice === "Bow") {
-      const r = 1 + Math.floor(rng()*6);
-      display = "🎲 " + r;
-      points = r;
-    } else if (choice === "Pray") {
-      const r = 1 + Math.floor(rng()*8);
-      display = "🎲 " + r + " + 5 blessing";
-      points = r + 5;
-    } else {
-      const r = 1 + Math.floor(rng()*12);
-      display = "🎲 " + r + (r === 12 ? " ✨ vision!" : "");
-      points = r === 12 ? 30 : r;
-    }
-    const win = points > 0;
+    const r = [1+Math.floor(rng()*6), 1+Math.floor(rng()*6), 1+Math.floor(rng()*6)];
     const nextSeed = Math.floor(rng() * 2 ** 31);
-    const isLast = state.round >= TOTAL_ROUNDS;
-    return { ...state, rngSeed: nextSeed, score: state.score + points, phase: isLast ? "done" : "result", display, lastChoice: choice, lastWin: win, lastPts: points };
+    const { pts, desc } = godScore(state.god, r);
+    return { ...state, rngSeed: nextSeed, rolls: r, score: state.score + pts, phase: "result", log: `${desc} +${pts}` };
   }
-  if (action.type === "next") {
-    if (state.phase !== "result") return state;
-    return { ...state, round: state.round + 1, phase: "predict", display: "", lastChoice: "", lastWin: false, lastPts: 0 };
+  if (action.type === "next" && state.phase === "result") {
+    if (state.round >= ROUNDS) return { ...state, phase: "done" };
+    const rng = mulberry32(state.rngSeed);
+    const god = pickGod(rng);
+    const nextSeed = Math.floor(rng() * 2 ** 31);
+    return { ...state, rngSeed: nextSeed, round: state.round + 1, god, rolls: null, phase: "roll", log: "" };
   }
   return state;
 }

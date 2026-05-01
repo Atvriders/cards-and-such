@@ -1,32 +1,46 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceBullseyeState, DiceBullseyeAction, DiceBullseyeSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS, CHOICES } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS, RINGS } from "./state.js";
 import "./Game.css";
 
 export function DiceBullseyeGame({ state, dispatch, onGameOver }: GameProps<DiceBullseyeState, DiceBullseyeSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="rg-wrap"><div className="rg-done"><h2>Done!</h2><div className="rg-final">{state.score} pts</div></div></div>;
+    return (
+      <div className="bs-wrap">
+        <div className="bs-done">
+          <h2>Match Over</h2>
+          <div className="bs-final">{state.score} pts</div>
+        </div>
+      </div>
+    );
   }
+
   return (
-    <div className="rg-wrap">
-      <div className="rg-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="rg-score">{state.score} pts</div>
-      {state.display && <div className="rg-display">{state.display}</div>}
-      {state.phase === "predict" && (
-        <div className="rg-row">
-          {CHOICES.map(c => (
-            <button key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as DiceBullseyeAction)}>{c}</button>
+    <div className="bs-wrap">
+      <div className="bs-banner">Shot {state.round} / {TOTAL_ROUNDS} · Score {state.score}</div>
+      <div className="bs-target">
+        <div className="bs-ring r1"><div className="bs-ring r2"><div className="bs-ring r3"><div className="bs-ring r4 bull" /></div></div></div>
+      </div>
+      {state.rolls && (
+        <div className="bs-row">
+          <div className="bs-die">{state.rolls[0]}</div>
+          <div className="bs-die">{state.rolls[1]}</div>
+        </div>
+      )}
+      <div className="bs-log">{state.log || "Pick a target value. Closer dice average = more points."}</div>
+      {state.phase === "aim" && (
+        <div className="bs-actions">
+          {RINGS.map(r => (
+            <button key={r} className="bs-btn" onClick={() => dispatch({ type: "shoot", target: r } as DiceBullseyeAction)}>Aim {r}</button>
           ))}
         </div>
       )}
       {state.phase === "result" && (
-        <>
-          <div className="rg-result">{state.lastWin ? `Correct! +${state.lastPts}` : "Wrong — 0"}</div>
-          <button className="rg-btn alt" onClick={() => dispatch({ type:"next" } as DiceBullseyeAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
-        </>
+        <button className="bs-btn alt" onClick={() => dispatch({ type: "next" } as DiceBullseyeAction)}>Next Shot</button>
       )}
     </div>
   );

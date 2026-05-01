@@ -1,34 +1,54 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { DiceTempleState, DiceTempleAction, DiceTempleSettings } from "./state.js";
-import { isTerminal, TOTAL_ROUNDS } from "./state.js";
+import type { DiceTempleState, DiceTempleAction, DiceTempleSettings, Category } from "./state.js";
+import { isTerminal, CATEGORIES, categoryScore } from "./state.js";
 import "./Game.css";
+
+const LABELS: Record<Category, string> = {
+  ones: "Ones", twos: "Twos", threes: "Threes", fours: "Fours", fives: "Fives", sixes: "Sixes",
+  threeKind: "3 of Kind", fourKind: "4 of Kind", fullHouse: "Full House", straight: "Straight", temple: "TEMPLE",
+};
+
 export function DiceTempleGame({ state, dispatch, onGameOver }: GameProps<DiceTempleState, DiceTempleSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
+
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
-  }
-  return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-hint">Roll dice — match for temple bonus!</div>
-      {state.dice && (
-        <div className="dm-row">
-          <div className="dm-die">{state.dice[0]}</div>
-          <div className="dm-die">{state.dice[1]}</div>
+    return (
+      <div className="te-wrap">
+        <div className="te-done">
+          <h2>Temple Sealed</h2>
+          <div className="te-final">{state.score} pts</div>
         </div>
-      )}
-      {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceTempleAction)}>Roll</button>
-      )}
-      {state.phase === "scored" && (
-        <>
-          <div className="dm-result">+{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceTempleAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
-        </>
-      )}
+      </div>
+    );
+  }
+
+  const rolled = state.dice.every(d => d > 0);
+  return (
+    <div className="te-wrap">
+      <div className="te-banner">Score {state.score} · Rolls {state.rerolls} / 3</div>
+      <div className="te-dice">
+        {state.dice.map((d, i) => <div key={i} className={`te-die${d === 0 ? " empty" : ""}`}>{d || "·"}</div>)}
+      </div>
+      <button className="te-btn" disabled={state.rerolls >= 3} onClick={() => dispatch({ type: "roll" } as DiceTempleAction)}>Roll Dice</button>
+      <div className="te-card">
+        {CATEGORIES.map(c => {
+          const claimed = state.card[c] !== undefined;
+          const preview = rolled ? categoryScore(c, state.dice) : 0;
+          return (
+            <button
+              key={c}
+              className={`te-cat${claimed ? " claimed" : ""}`}
+              disabled={claimed || !rolled}
+              onClick={() => dispatch({ type: "claim", cat: c } as DiceTempleAction)}
+            >
+              <span className="te-cat-name">{LABELS[c]}</span>
+              <span className="te-cat-pts">{claimed ? state.card[c] : (rolled ? preview : "—")}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
