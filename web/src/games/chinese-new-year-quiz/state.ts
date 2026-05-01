@@ -4,256 +4,36 @@ export interface ChineseNewYearQuizSettings { questions: "10" | "20" | "30"; }
 export interface ChineseNewYearQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ChineseNewYearQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Chinese New Year follows which calendar?",
-    "choices": [
-      "Solar",
-      "Lunisolar",
-      "Gregorian",
-      "Julian"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Spring Festival lasts how many days?",
-    "choices": [
-      "3",
-      "7",
-      "10",
-      "15"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "How many zodiac animals?",
-    "choices": [
-      "10",
-      "12",
-      "13",
-      "16"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First zodiac animal?",
-    "choices": [
-      "Tiger",
-      "Rat",
-      "Ox",
-      "Dragon"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lucky color of CNY is?",
-    "choices": [
-      "Red",
-      "Gold",
-      "Both",
-      "Yellow"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Money is given in?",
-    "choices": [
-      "Red envelopes",
-      "Gold coins",
-      "White envelopes",
-      "Yellow paper"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Red envelopes are called?",
-    "choices": [
-      "Hongbao",
-      "Hongbai",
-      "Honglu",
-      "Hongtai"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lion dance scares away?",
-    "choices": [
-      "Nian",
-      "Tigers",
-      "Snakes",
-      "Demons"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Last day of CNY is?",
-    "choices": [
-      "Lantern Festival",
-      "Tomb-sweeping",
-      "Mid-Autumn",
-      "Dragon Boat"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dumplings symbolize?",
-    "choices": [
-      "Long life",
-      "Wealth (resemble ingots)",
-      "Family",
-      "Travel"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Niangao means?",
-    "choices": [
-      "Year cake",
-      "Year fish",
-      "Year tea",
-      "Year bread"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Fish is eaten because?",
-    "choices": [
-      "Surplus pun",
-      "Lucky color",
-      "Tradition only",
-      "Meat ban"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Spring couplets are written on?",
-    "choices": [
-      "Red paper",
-      "Gold paper",
-      "Silk",
-      "Bamboo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Firecrackers used to scare?",
-    "choices": [
-      "Bad luck",
-      "Nian",
-      "Spirits",
-      "Both nian and bad luck"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Reunion dinner is on?",
-    "choices": [
-      "NY Eve",
-      "First day",
-      "Last day",
-      "Mid-festival"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "CNY flower (Chinese)?",
-    "choices": [
-      "Plum blossom",
-      "Peach blossom",
-      "Both",
-      "Jasmine"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Vietnam's CNY is called?",
-    "choices": [
-      "Tet",
-      "Songkran",
-      "Imlek",
-      "Seollal"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Korea's lunar NY is?",
-    "choices": [
-      "Tet",
-      "Seollal",
-      "Songkran",
-      "Imlek"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mongolia's New Year is?",
-    "choices": [
-      "Tsagaan Sar",
-      "Naadam",
-      "Ulaanbaatar",
-      "Yurt"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Don't ___ on New Year's Day?",
-    "choices": [
-      "Eat fish",
-      "Sweep",
-      "Sleep",
-      "Smile"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tangerines symbolize?",
-    "choices": [
-      "Family",
-      "Wealth/luck",
-      "Health",
-      "Long life"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What's banned to wash on day 1?",
-    "choices": [
-      "Hair",
-      "Floor",
-      "Clothes",
-      "All these"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "CNY date can fall between?",
-    "choices": [
-      "Jan 21-Feb 20",
-      "Feb 1-Feb 28",
-      "Jan 1-Feb 1",
-      "Mar 1-Apr 1"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Year of Tiger comes after?",
-    "choices": [
-      "Ox",
-      "Rabbit",
-      "Dragon",
-      "Snake"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Lantern Festival ends with eating?",
-    "choices": [
-      "Dumplings",
-      "Tangyuan",
-      "Mooncakes",
-      "Zongzi"
-    ],
-    "correct": 1
-  }
+  { question: "Chinese New Year is also called?", choices: ["Lunar New Year / Spring Festival", "Mid-Autumn Festival", "Dragon Boat Festival", "Qixi"], correct: 0 },
+  { question: "Chinese New Year typically falls between?", choices: ["January 21 and February 20", "January 1 always", "February 14 always", "March equinox"], correct: 0 },
+  { question: "Chinese New Year follows?", choices: ["Lunisolar calendar (new moon)", "Solar calendar", "Pure lunar calendar", "Roman calendar"], correct: 0 },
+  { question: "How many animals are in the Chinese zodiac?", choices: ["12", "10", "8", "15"], correct: 0 },
+  { question: "What is the first animal in the Chinese zodiac?", choices: ["Rat", "Ox", "Tiger", "Dragon"], correct: 0 },
+  { question: "What zodiac year is 2024?", choices: ["Dragon", "Rabbit", "Snake", "Tiger"], correct: 0 },
+  { question: "What zodiac year is 2025?", choices: ["Snake", "Dragon", "Horse", "Tiger"], correct: 0 },
+  { question: "Chinese New Year celebrations last?", choices: ["15 days (until Lantern Festival)", "1 day", "3 days", "30 days"], correct: 0 },
+  { question: "The 15th day of CNY is?", choices: ["Lantern Festival (Yuan Xiao Jie)", "Dragon Boat", "Mid-Autumn", "Qingming"], correct: 0 },
+  { question: "Red envelopes are called?", choices: ["Hongbao", "Qipao", "Mahjong", "Fu"], correct: 0 },
+  { question: "What is in red envelopes?", choices: ["Money (lucky money)", "Chocolates", "Notes", "Charms only"], correct: 0 },
+  { question: "Red is associated with?", choices: ["Good fortune and warding off evil (Nian)", "Sadness", "Mourning", "Royalty only"], correct: 0 },
+  { question: "Nian is?", choices: ["A mythical beast scared by red and noise", "A god", "A king", "A founder"], correct: 0 },
+  { question: "Firecrackers serve to?", choices: ["Scare away evil spirits / Nian", "Just for noise", "Decorate", "Cook food"], correct: 0 },
+  { question: "Reunion dinner is held on?", choices: ["New Year's Eve", "First day", "Last day (Lantern)", "Second day"], correct: 0 },
+  { question: "Common reunion dinner dish symbolizing surplus?", choices: ["Fish (yu sounds like surplus)", "Beef", "Lamb", "Tofu"], correct: 0 },
+  { question: "Dumplings are popular for CNY because?", choices: ["They resemble silver/gold ingots (wealth)", "Easy to make", "Inexpensive", "Quick"], correct: 0 },
+  { question: "Niangao is?", choices: ["Sticky rice cake (homophone for higher year)", "Chicken", "Soup", "Bread"], correct: 0 },
+  { question: "Lion dance and dragon dance are performed to?", choices: ["Bring good luck", "Just entertainment", "Mock", "Religious only"], correct: 0 },
+  { question: "How many people typically operate a dragon dance?", choices: ["Many (often 9, can be more)", "1", "2", "100"], correct: 0 },
+  { question: "'Gong Xi Fa Cai' means?", choices: ["Wishing you prosperity", "Happy new year literally", "Good fortune", "Long life"], correct: 0 },
+  { question: "The 'kitchen god' tradition involves?", choices: ["Sending him to heaven before New Year", "Welcoming on Day 1", "Praying on Day 15", "Ignoring entirely"], correct: 0 },
+  { question: "Vietnamese version of Lunar New Year?", choices: ["Tet", "Seollal", "Losar", "Chuseok"], correct: 0 },
+  { question: "Korean Lunar New Year is?", choices: ["Seollal", "Tet", "Chuseok", "Buddha's Birthday"], correct: 0 },
+  { question: "Tibetan New Year is?", choices: ["Losar", "Seollal", "Tet", "Sagaalgan"], correct: 0 },
+  { question: "What 12-year cycle do Chinese zodiac animals follow?", choices: ["Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, Pig", "Same as Western zodiac", "Random order", "Reverse alphabetical"], correct: 0 },
+  { question: "Chinese zodiac years are paired with?", choices: ["Five elements (wood, fire, earth, metal, water) on 60-year cycle", "10 elements", "Cardinal directions only", "Colors only"], correct: 0 },
+  { question: "Lantern Festival features?", choices: ["Lantern displays and tangyuan (sweet rice balls)", "Mooncakes", "Zongzi (rice dumplings)", "Dragon boats"], correct: 0 },
+  { question: "What flower is associated with CNY?", choices: ["Peach blossom and plum blossom", "Lotus", "Cherry blossom", "Chrysanthemum"], correct: 0 },
+  { question: "Cleaning the house before CNY symbolizes?", choices: ["Sweeping away bad luck (don't sweep on day 1!)", "Just hygiene", "Required by law", "Neighborly tradition"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ChineseNewYearQuizSettings): ChineseNewYearQuizState {

@@ -4,256 +4,36 @@ export interface MardiGrasQuizSettings { questions: "10" | "20" | "30"; }
 export interface MardiGrasQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type MardiGrasQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Mardi Gras means?",
-    "choices": [
-      "Big Tuesday",
-      "Fat Tuesday",
-      "Lent Tuesday",
-      "Holy Tuesday"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mardi Gras is the day before?",
-    "choices": [
-      "Easter",
-      "Christmas",
-      "Ash Wednesday",
-      "Palm Sunday"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Most famous US Mardi Gras city?",
-    "choices": [
-      "Mobile",
-      "New Orleans",
-      "Galveston",
-      "St. Louis"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mardi Gras colors are?",
-    "choices": [
-      "Purple, green, gold",
-      "Red, white, blue",
-      "Blue, yellow, red",
-      "Pink, blue, gold"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Purple symbolizes?",
-    "choices": [
-      "Justice",
-      "Faith",
-      "Power",
-      "Love"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Gold symbolizes?",
-    "choices": [
-      "Power",
-      "Justice",
-      "Faith",
-      "Joy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Green symbolizes?",
-    "choices": [
-      "Faith",
-      "Hope",
-      "Power",
-      "Love"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Krewes are?",
-    "choices": [
-      "Bands",
-      "Parade clubs",
-      "Dancers",
-      "Bakers"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "King Cake hides what?",
-    "choices": [
-      "Coin",
-      "Bean",
-      "Plastic baby",
-      "Ring"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Carnival officially starts on?",
-    "choices": [
-      "Christmas",
-      "Epiphany (Jan 6)",
-      "New Year",
-      "Valentine's"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Beads are thrown from?",
-    "choices": [
-      "Floats",
-      "Balconies",
-      "Both",
-      "Cars"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "First Mardi Gras in US was in?",
-    "choices": [
-      "1670",
-      "1699",
-      "1718",
-      "1830"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Rio's Carnival rivals?",
-    "choices": [
-      "Venice",
-      "New Orleans",
-      "Both",
-      "Paris"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Brazilian samba schools compete in?",
-    "choices": [
-      "Rio",
-      "Salvador",
-      "Both",
-      "Sao Paulo"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Venice Carnival is famous for?",
-    "choices": [
-      "Costumes",
-      "Masks",
-      "Music",
-      "Dance"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Trinidad Carnival features?",
-    "choices": [
-      "Calypso",
-      "Soca",
-      "Both",
-      "Reggae"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mardi Gras Indians of NOLA are known for?",
-    "choices": [
-      "Beadwork suits",
-      "Drumming",
-      "Singing",
-      "All these"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Zulu Krewe parades on?",
-    "choices": [
-      "Saturday",
-      "Sunday",
-      "Monday",
-      "Tuesday"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Rex is the?",
-    "choices": [
-      "King of Carnival",
-      "Queen",
-      "Knight",
-      "Jester"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many days is Carnival?",
-    "choices": [
-      "1",
-      "Up to 3 weeks",
-      "1 week",
-      "1 month"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lent lasts how many days?",
-    "choices": [
-      "20",
-      "30",
-      "40",
-      "50"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mardi Gras parade floats are decorated by?",
-    "choices": [
-      "Krewes",
-      "City",
-      "Sponsors",
-      "Tourists"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "King Cake colors mirror Mardi Gras?",
-    "choices": [
-      "Yes",
-      "No",
-      "Half",
-      "Sometimes"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Most parade flow is in?",
-    "choices": [
-      "French Quarter",
-      "Garden District",
-      "Uptown via St. Charles",
-      "CBD"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mardi Gras was banned in NOLA in?",
-    "choices": [
-      "1850s",
-      "1875",
-      "1918 (WWI)",
-      "Never"
-    ],
-    "correct": 2
-  }
+  { question: "Mardi Gras translates to?", choices: ["Fat Tuesday (French)", "Fat Wednesday", "Big Sunday", "Carnival Friday"], correct: 0 },
+  { question: "Mardi Gras occurs on?", choices: ["The day before Ash Wednesday", "Easter Sunday", "Christmas Eve", "Lent end"], correct: 0 },
+  { question: "What U.S. city is most famous for Mardi Gras?", choices: ["New Orleans, Louisiana", "Mobile, Alabama", "St. Louis", "Houston"], correct: 0 },
+  { question: "Where in the U.S. did Mardi Gras first happen?", choices: ["Mobile, Alabama (1703)", "New Orleans (1718)", "Galveston", "Pensacola"], correct: 0 },
+  { question: "New Orleans Mardi Gras dates back to?", choices: ["Early 1700s; first parade 1837", "1900", "1850", "1800"], correct: 0 },
+  { question: "Official Mardi Gras colors?", choices: ["Purple, green, gold", "Red, white, blue", "Black and orange", "Pink and white"], correct: 0 },
+  { question: "Purple represents?", choices: ["Justice", "Faith", "Power", "Royalty"], correct: 0 },
+  { question: "Green represents?", choices: ["Faith", "Justice", "Power", "Hope"], correct: 0 },
+  { question: "Gold represents?", choices: ["Power", "Justice", "Faith", "Wealth"], correct: 0 },
+  { question: "What are krewes?", choices: ["Mardi Gras parade organizations/clubs", "Police units", "Chefs", "Musicians only"], correct: 0 },
+  { question: "Oldest active New Orleans krewe?", choices: ["Mistick Krewe of Comus (since 1857)", "Rex (1872)", "Zulu", "Endymion"], correct: 0 },
+  { question: "King Cake contains?", choices: ["A small plastic baby (finder hosts next party)", "A coin", "A pearl", "A nut"], correct: 0 },
+  { question: "King Cake is eaten during?", choices: ["Carnival season (January 6 to Mardi Gras)", "Lent", "Easter", "Christmas"], correct: 0 },
+  { question: "Beads thrown from floats are called?", choices: ["Throws", "Tosses", "Gifts", "Showers"], correct: 0 },
+  { question: "Other common 'throws'?", choices: ["Doubloons (coins) and small toys", "Real money", "Food", "Cards"], correct: 0 },
+  { question: "Ash Wednesday begins?", choices: ["Lent (40 days of fasting)", "Easter", "Advent", "Pentecost"], correct: 0 },
+  { question: "Lent ends on?", choices: ["Easter Sunday", "Pentecost", "Good Friday", "Palm Sunday"], correct: 0 },
+  { question: "Brazilian equivalent of Mardi Gras?", choices: ["Carnival (especially Rio)", "Fat Sunday", "Just Brazil Day", "São João"], correct: 0 },
+  { question: "Rio Carnival is best known for?", choices: ["Samba schools parade", "Country music", "Tango", "Folk dance"], correct: 0 },
+  { question: "Venice Carnival is famous for?", choices: ["Elaborate masks and costumes", "Boat races", "Eating contests", "Singing competitions"], correct: 0 },
+  { question: "Rex is the?", choices: ["King of Carnival in New Orleans", "A krewe ranking", "An author", "A song"], correct: 0 },
+  { question: "Zulu Krewe is famous for?", choices: ["Decorated coconuts as throws", "Boats", "Costumes only", "Food contests"], correct: 0 },
+  { question: "Bourbon Street is in?", choices: ["French Quarter, New Orleans", "Mobile", "Memphis", "Nashville"], correct: 0 },
+  { question: "Carnival season begins on?", choices: ["Twelfth Night (January 6, Epiphany)", "Christmas Eve", "January 1", "Ash Wednesday"], correct: 0 },
+  { question: "Mardi Gras Indians are?", choices: ["African American Carnival groups with Native-inspired suits", "Native American tribes", "Indian immigrants", "Sports teams"], correct: 0 },
+  { question: "What is 'Fat Tuesday' a final day of feasting before?", choices: ["Lent's fasting period", "Christmas", "Easter", "Pentecost"], correct: 0 },
+  { question: "Trinidad and Tobago Carnival features?", choices: ["Calypso, soca music, costumes", "Polka", "Reggae only", "Salsa"], correct: 0 },
+  { question: "Mardi Gras World in New Orleans is?", choices: ["Float-building warehouse and tour", "Theme park", "Museum", "Hotel"], correct: 0 },
+  { question: "How many people typically attend Mardi Gras in New Orleans?", choices: ["Over 1 million", "100,000", "5 million", "10,000"], correct: 0 },
+  { question: "What sandwich is associated with New Orleans?", choices: ["Po'boy", "Hoagie", "Hero", "Grinder"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MardiGrasQuizSettings): MardiGrasQuizState {

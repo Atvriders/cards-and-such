@@ -4,256 +4,36 @@ export interface HanukkahQuizSettings { questions: "10" | "20" | "30"; }
 export interface HanukkahQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type HanukkahQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Hanukkah lasts how many nights?",
-    "choices": [
-      "6",
-      "7",
-      "8",
-      "9"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Hanukkah commemorates what victory?",
-    "choices": [
-      "Maccabean",
-      "Babylonian",
-      "Egyptian",
-      "Roman"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Menorah branches that are lit total?",
-    "choices": [
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The shamash is the?",
-    "choices": [
-      "Helper candle",
-      "Eighth night",
-      "Spinner",
-      "Gift"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Dreidel sides have which letters?",
-    "choices": [
-      "Aleph-Bet",
-      "Nun-Gimel-Hey-Shin",
-      "Yud-Hey-Vav-Hey",
-      "Aleph-Mem-Tav-Bet"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Latkes are made from?",
-    "choices": [
-      "Cheese",
-      "Potato",
-      "Apple",
-      "Bread"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sufganiyot are?",
-    "choices": [
-      "Pancakes",
-      "Donuts",
-      "Pastries",
-      "Pies"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Hanukkah means?",
-    "choices": [
-      "Light",
-      "Dedication",
-      "Festival",
-      "Holy"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Temple cleansed after victory was in?",
-    "choices": [
-      "Jerusalem",
-      "Damascus",
-      "Cairo",
-      "Rome"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Oil miracle lasted how many days?",
-    "choices": [
-      "6",
-      "7",
-      "8",
-      "10"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Hanukkah is in which Hebrew month?",
-    "choices": [
-      "Tishrei",
-      "Cheshvan",
-      "Kislev",
-      "Tevet"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Candle is lit from which side?",
-    "choices": [
-      "Right",
-      "Left",
-      "Center",
-      "Both"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Maccabees fought against?",
-    "choices": [
-      "Romans",
-      "Seleucid Greeks",
-      "Persians",
-      "Egyptians"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Judah Maccabee led which group?",
-    "choices": [
-      "Pharisees",
-      "Hasmoneans",
-      "Sadducees",
-      "Zealots"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Gelt are?",
-    "choices": [
-      "Coins",
-      "Cookies",
-      "Cakes",
-      "Candles"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chocolate gelt usually wrapped in?",
-    "choices": [
-      "Silver",
-      "Gold foil",
-      "Tin foil",
-      "Wax paper"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Modern dreidel game was inspired by?",
-    "choices": [
-      "Spinning top",
-      "Card game",
-      "Dice",
-      "Marbles"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What does 'Nes Gadol Hayah Sham' mean?",
-    "choices": [
-      "Light shines",
-      "Great miracle happened there",
-      "Hanukkah is here",
-      "Praise God"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Israel says 'Po' (here) instead of which word?",
-    "choices": [
-      "Sham",
-      "Hayah",
-      "Gadol",
-      "Nes"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Hanukkiah differs from menorah by having?",
-    "choices": [
-      "7 branches",
-      "8+1 branches",
-      "9+1 branches",
-      "10 branches"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Common Hanukkah fried foods relate to?",
-    "choices": [
-      "Wheat",
-      "Oil miracle",
-      "Yeast",
-      "Honey"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Many Jews give gifts on?",
-    "choices": [
-      "Christmas",
-      "Each Hanukkah night",
-      "Yom Kippur",
-      "None"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which song is 'I Have a Little Dreidel' also called?",
-    "choices": [
-      "Sevivon",
-      "Maoz Tzur",
-      "Hatikvah",
-      "Shalom"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Maoz Tzur is a Hanukkah?",
-    "choices": [
-      "Food",
-      "Hymn",
-      "Game",
-      "Coin"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Adam Sandler's Hanukkah Song became famous in?",
-    "choices": [
-      "1990",
-      "1994",
-      "1996",
-      "2000"
-    ],
-    "correct": 2
-  }
+  { question: "Hanukkah celebrates the rededication of?", choices: ["The Second Temple in Jerusalem", "The First Temple", "The Western Wall", "The Synagogue of Alexandria"], correct: 0 },
+  { question: "Hanukkah lasts how many nights?", choices: ["Eight", "Seven", "Five", "Ten"], correct: 0 },
+  { question: "Hanukkah celebrates which historical victory?", choices: ["Maccabean revolt over Seleucid Greeks", "Babylonian exile end", "Roman conquest", "Crusader victory"], correct: 0 },
+  { question: "Who led the Maccabean revolt?", choices: ["Judah Maccabee", "King David", "King Solomon", "Bar Kochba"], correct: 0 },
+  { question: "The miracle of Hanukkah involved?", choices: ["Oil lasting 8 days when only enough for 1", "Manna from heaven", "Parting of sea", "Burning bush"], correct: 0 },
+  { question: "The Hanukkah candelabrum is called?", choices: ["Hanukkiah (or menorah colloquially)", "Mezuzah", "Tallit", "Shofar"], correct: 0 },
+  { question: "How many candles does a Hanukkiah hold (including shamash)?", choices: ["Nine", "Seven", "Eight", "Ten"], correct: 0 },
+  { question: "What is the 'shamash'?", choices: ["The helper candle used to light others", "A prayer", "A song", "A food"], correct: 0 },
+  { question: "Hanukkah falls on the Hebrew month of?", choices: ["Kislev (25th day starts)", "Tishrei", "Nisan", "Adar"], correct: 0 },
+  { question: "What dreidel letters represent in Hebrew?", choices: ["Nes Gadol Hayah Sham (a great miracle happened there)", "Names of months", "Greetings", "Numbers only"], correct: 0 },
+  { question: "In Israel, the dreidel changes one letter to mean?", choices: ["A great miracle happened HERE (Po instead of Sham)", "Same letters", "All Hebrew alphabet", "Different game"], correct: 0 },
+  { question: "Traditional Hanukkah food fried in oil?", choices: ["Latkes (potato pancakes)", "Bagels", "Matzo balls", "Challah"], correct: 0 },
+  { question: "Israeli Hanukkah doughnut is called?", choices: ["Sufganiyot (jelly-filled)", "Babka", "Rugelach", "Hamantaschen"], correct: 0 },
+  { question: "What festival is sometimes called 'Festival of Lights'?", choices: ["Hanukkah", "Passover", "Yom Kippur", "Sukkot"], correct: 0 },
+  { question: "Maccabees historical period?", choices: ["Around 167-160 BCE (revolt)", "1000 CE", "500 BCE", "100 CE"], correct: 0 },
+  { question: "The Seleucid king who desecrated the Temple?", choices: ["Antiochus IV Epiphanes", "Cyrus the Great", "Darius", "Alexander the Great"], correct: 0 },
+  { question: "Books of Maccabees are in?", choices: ["Apocrypha (Catholic/Orthodox canon, not Tanakh)", "Hebrew Bible", "Quran", "Pentateuch"], correct: 0 },
+  { question: "Hanukkah blessing 'Shehecheyanu' is recited?", choices: ["On the first night only (for new occasion)", "Every night", "Final night", "Not at all"], correct: 0 },
+  { question: "Songs commonly sung at Hanukkah?", choices: ["Maoz Tzur, Hanukkah Oh Hanukkah, Sevivon", "Hava Nagila only", "Dayenu", "Hatikvah"], correct: 0 },
+  { question: "Adam Sandler's 'Hanukkah Song' debuted on?", choices: ["SNL Weekend Update (1994)", "Comedy Central", "Tonight Show", "Late Show"], correct: 0 },
+  { question: "Hanukkah gelt is?", choices: ["Coins (chocolate or real, often given to children)", "Candle", "Prayer book", "Decoration"], correct: 0 },
+  { question: "The dreidel game is played for?", choices: ["Nuts, gelt, candy", "Real money exclusively", "Books", "Songs"], correct: 0 },
+  { question: "Hanukkah is sometimes called?", choices: ["Festival of Dedication", "Festival of Tabernacles", "Festival of Booths", "Festival of Weeks"], correct: 0 },
+  { question: "Hanukkiah candles burn for at least?", choices: ["30 minutes per night minimum (custom)", "Whole day", "Hour", "5 minutes"], correct: 0 },
+  { question: "Hanukkah candles are lit?", choices: ["After sundown (placed at window/doorway)", "Morning only", "Noon", "Anytime"], correct: 0 },
+  { question: "Hanukkah-themed food besides latkes?", choices: ["Brisket and dairy dishes (varied tradition)", "Just bread", "Just fish", "Just rice"], correct: 0 },
+  { question: "Modern Hanukkah gift-giving is influenced by?", choices: ["Proximity to Christmas (especially in US)", "Ancient law", "Bible commandment", "Soviet tradition"], correct: 0 },
+  { question: "The Maccabees restored worship at?", choices: ["The Second Temple in Jerusalem (165 BCE)", "Tabernacle", "Mount Sinai", "Babylon"], correct: 0 },
+  { question: "Hanukkah is also spelled?", choices: ["Chanukah, Hanukah, Hanukkah", "Only one way", "Hannukah only", "Khanukah only"], correct: 0 },
+  { question: "First night candle is placed?", choices: ["Right side of hanukkiah, lit first; subsequent nights add to left", "Center", "Random", "Left side first"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: HanukkahQuizSettings): HanukkahQuizState {

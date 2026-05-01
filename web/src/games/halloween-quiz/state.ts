@@ -4,256 +4,36 @@ export interface HalloweenQuizSettings { questions: "10" | "20" | "30"; }
 export interface HalloweenQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type HalloweenQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Halloween originates from which Celtic festival?",
-    "choices": [
-      "Beltane",
-      "Samhain",
-      "Imbolc",
-      "Lughnasadh"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Jack-o'-lanterns were originally carved from?",
-    "choices": [
-      "Pumpkins",
-      "Apples",
-      "Turnips",
-      "Squash"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What does 'Halloween' mean literally?",
-    "choices": [
-      "Holy night",
-      "All Hallows' Eve",
-      "Witches' eve",
-      "Dark night"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which country has Dia de los Muertos near Halloween?",
-    "choices": [
-      "Mexico",
-      "Spain",
-      "Argentina",
-      "Peru"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bram Stoker wrote which Halloween classic?",
-    "choices": [
-      "Frankenstein",
-      "Dracula",
-      "Carmilla",
-      "The Mummy"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mary Shelley wrote which novel?",
-    "choices": [
-      "Frankenstein",
-      "Dracula",
-      "Wuthering Heights",
-      "Jekyll and Hyde"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which 1978 film launched modern slasher horror?",
-    "choices": [
-      "Friday the 13th",
-      "Halloween",
-      "Scream",
-      "The Exorcist"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who plays Michael Myers's pursuer Dr. Loomis?",
-    "choices": [
-      "Donald Pleasence",
-      "Christopher Lee",
-      "Vincent Price",
-      "Boris Karloff"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is Freddy Krueger's iconic weapon?",
-    "choices": [
-      "Chainsaw",
-      "Bladed glove",
-      "Hockey mask",
-      "Hatchet"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What is Jason Voorhees's signature mask?",
-    "choices": [
-      "Hockey mask",
-      "Skull mask",
-      "Pig mask",
-      "Plain white"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Black cats are a symbol of?",
-    "choices": [
-      "Good luck",
-      "Witches",
-      "Death",
-      "Ghosts"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Halloween falls on what date?",
-    "choices": [
-      "Oct 30",
-      "Oct 31",
-      "Nov 1",
-      "Nov 2"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What candy is the most-sold at Halloween in the US?",
-    "choices": [
-      "Skittles",
-      "Reese's",
-      "Snickers",
-      "M&Ms"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What does 'trick or treat' originate from?",
-    "choices": [
-      "Souling",
-      "Mumming",
-      "Guising",
-      "All of these"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Which film features Sanderson sisters?",
-    "choices": [
-      "The Witch",
-      "Hocus Pocus",
-      "Coven",
-      "Practical Magic"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Headless Horseman is from what story?",
-    "choices": [
-      "Sleepy Hollow",
-      "Frankenstein",
-      "Dracula",
-      "Edgar Allan Poe"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who wrote 'The Tell-Tale Heart'?",
-    "choices": [
-      "Lovecraft",
-      "Poe",
-      "King",
-      "Stoker"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Vampires reportedly fear which plant?",
-    "choices": [
-      "Rose",
-      "Garlic",
-      "Wolfsbane",
-      "Mistletoe"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Werewolves transform under what?",
-    "choices": [
-      "Sun",
-      "Full moon",
-      "Eclipse",
-      "Storm"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which film uses 'Tubular Bells'?",
-    "choices": [
-      "The Omen",
-      "The Exorcist",
-      "Suspiria",
-      "Halloween"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who directed 'Get Out' (2017)?",
-    "choices": [
-      "Ari Aster",
-      "Jordan Peele",
-      "James Wan",
-      "Mike Flanagan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Pumpkin carving originated in?",
-    "choices": [
-      "England",
-      "Ireland",
-      "Scotland",
-      "Wales"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "What was the original 'Trick or Treat for UNICEF' year?",
-    "choices": [
-      "1947",
-      "1950",
-      "1955",
-      "1962"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which witch household pet is called a 'familiar'?",
-    "choices": [
-      "A wand",
-      "A black cat",
-      "A broom",
-      "A grimoire"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which holiday came from blending Samhain and Christianity?",
-    "choices": [
-      "Easter",
-      "All Hallows",
-      "Christmas",
-      "Lent"
-    ],
-    "correct": 1
-  }
+  { question: "Halloween's date is?", choices: ["October 31", "October 30", "November 1", "October 25"], correct: 0 },
+  { question: "Halloween originated from which Celtic festival?", choices: ["Samhain", "Beltane", "Imbolc", "Lughnasadh"], correct: 0 },
+  { question: "What does 'Halloween' shorten?", choices: ["All Hallows' Eve", "Hallow's evening", "Halloween mass", "All Souls' eve"], correct: 0 },
+  { question: "What is November 1 called?", choices: ["All Saints' Day", "All Souls' Day", "Day of the Dead", "St. Nicholas Day"], correct: 0 },
+  { question: "What is November 2 called?", choices: ["All Souls' Day", "All Saints' Day", "Day of the Dead Eve", "Saints Plus"], correct: 0 },
+  { question: "Mexico's Day of the Dead is celebrated?", choices: ["November 1-2", "October 31", "December 12", "November 25"], correct: 0 },
+  { question: "Mexico's Day of the Dead is called?", choices: ["Día de los Muertos", "Cinco de Mayo", "Las Posadas", "Día de la Raza"], correct: 0 },
+  { question: "Jack-o'-lanterns originated in carving what?", choices: ["Turnips (Ireland)", "Pumpkins from start", "Watermelons", "Apples"], correct: 0 },
+  { question: "Why are pumpkins used now?", choices: ["Native to North America, easier to carve", "Required by law", "Symbolic of corn", "Cheaper than turnips"], correct: 0 },
+  { question: "Trick-or-treating originated from which European custom?", choices: ["Souling/guising", "May Day dancing", "Christmas caroling alone", "Easter parade"], correct: 0 },
+  { question: "What classic monster comes from Bram Stoker (1897)?", choices: ["Dracula", "Frankenstein", "Werewolf", "Mummy"], correct: 0 },
+  { question: "Frankenstein was written by?", choices: ["Mary Shelley", "Bram Stoker", "Edgar Allan Poe", "H.G. Wells"], correct: 0 },
+  { question: "Frankenstein was published in?", choices: ["1818", "1897", "1850", "1900"], correct: 0 },
+  { question: "Who plays Dracula in the iconic 1931 film?", choices: ["Bela Lugosi", "Boris Karloff", "Lon Chaney Jr.", "Christopher Lee"], correct: 0 },
+  { question: "Boris Karloff played which classic monster (1931)?", choices: ["Frankenstein's Monster", "Dracula", "Mummy", "Wolf Man"], correct: 0 },
+  { question: "John Carpenter's 1978 horror is?", choices: ["Halloween", "The Thing", "Friday the 13th", "Nightmare on Elm Street"], correct: 0 },
+  { question: "Who is the killer in 'Halloween'?", choices: ["Michael Myers", "Jason Voorhees", "Freddy Krueger", "Leatherface"], correct: 0 },
+  { question: "Jason Voorhees is from which franchise?", choices: ["Friday the 13th", "Halloween", "Nightmare on Elm Street", "Texas Chainsaw"], correct: 0 },
+  { question: "Freddy Krueger is from?", choices: ["A Nightmare on Elm Street", "Friday the 13th", "Halloween", "Saw"], correct: 0 },
+  { question: "What 1993 Tim Burton stop-motion film?", choices: ["The Nightmare Before Christmas", "Coraline", "Corpse Bride", "Frankenweenie"], correct: 0 },
+  { question: "Most-watched modern Halloween candy?", choices: ["Reese's, Snickers, Skittles, candy corn typical", "Just lollipops", "Just chocolate bars", "Just gum"], correct: 0 },
+  { question: "Candy corn was invented in?", choices: ["1880s", "1950s", "1900s", "1920s"], correct: 0 },
+  { question: "What Salem MA event is associated with Halloween tourism?", choices: ["Salem witch trials of 1692", "Salem fire", "Battle of Salem", "Salem founding"], correct: 0 },
+  { question: "What is 'mischief night'?", choices: ["Night before Halloween (pranks)", "Halloween itself", "Boxing Day", "Mardi Gras"], correct: 0 },
+  { question: "What is the origin of black cats and witches association?", choices: ["Medieval European folklore (cats as familiars)", "American invention", "Ancient Egypt", "Native American belief"], correct: 0 },
+  { question: "What Charles Schulz Halloween special features Linus?", choices: ["It's the Great Pumpkin, Charlie Brown", "A Charlie Brown Halloween", "Snoopy's Halloween", "Pumpkin Patch"], correct: 0 },
+  { question: "What Hocus Pocus year?", choices: ["1993", "1995", "1990", "2000"], correct: 0 },
+  { question: "Who plays the Sanderson sisters in Hocus Pocus?", choices: ["Bette Midler, Sarah Jessica Parker, Kathy Najimy", "Bette Midler alone", "Just SJP", "Mary Steenburgen-led"], correct: 0 },
+  { question: "Halloween Horror Nights is held at?", choices: ["Universal Studios", "Disney", "Six Flags", "Cedar Point"], correct: 0 },
+  { question: "Pumpkin spice is a blend of?", choices: ["Cinnamon, nutmeg, ginger, cloves", "Just cinnamon", "Pumpkin pulp", "Anise and cardamom"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: HalloweenQuizSettings): HalloweenQuizState {

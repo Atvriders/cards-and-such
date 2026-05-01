@@ -4,256 +4,36 @@ export interface TrainsQuizSettings { questions: "10" | "20" | "30"; }
 export interface TrainsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type TrainsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Stephenson's Rocket year?",
-    "choices": [
-      "1825",
-      "1829",
-      "1835",
-      "1840"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First steam locomotive inventor?",
-    "choices": [
-      "Stephenson",
-      "Trevithick",
-      "Watt",
-      "Stephens"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Trevithick's loco year?",
-    "choices": [
-      "1801",
-      "1804",
-      "1812",
-      "1815"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Transcontinental Railroad completed (US)?",
-    "choices": [
-      "1865",
-      "1869",
-      "1875",
-      "1880"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Golden Spike at?",
-    "choices": [
-      "Promontory Summit",
-      "San Francisco",
-      "Sacramento",
-      "Cheyenne"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Orient Express first ran?",
-    "choices": [
-      "1865",
-      "1883",
-      "1900",
-      "1920"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bullet Train (Shinkansen) first opened?",
-    "choices": [
-      "1959",
-      "1964",
-      "1970",
-      "1975"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "TGV speed record (~)?",
-    "choices": [
-      "320 km/h",
-      "375 km/h",
-      "574 km/h",
-      "600 km/h"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Trans-Siberian length (~ km)?",
-    "choices": [
-      "5000",
-      "7500",
-      "9300",
-      "12000"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Channel Tunnel opened?",
-    "choices": [
-      "1990",
-      "1994",
-      "2000",
-      "2004"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Underground (London Tube) opened?",
-    "choices": [
-      "1863",
-      "1880",
-      "1900",
-      "1920"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "NYC Subway opened?",
-    "choices": [
-      "1888",
-      "1900",
-      "1904",
-      "1915"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Maglev top speed (Shanghai)?",
-    "choices": [
-      "~300",
-      "~400",
-      "~430",
-      "~500 km/h"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Eurostar serves?",
-    "choices": [
-      "UK-France-Belgium-NL",
-      "UK-Spain",
-      "France-Germany",
-      "UK-Ireland"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Big Boy is a?",
-    "choices": [
-      "Diesel",
-      "Steam loco",
-      "Electric",
-      "Hybrid"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Flying Scotsman class?",
-    "choices": [
-      "A1/A3 Pacific",
-      "A4",
-      "Black 5",
-      "King"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mallard speed record kph?",
-    "choices": [
-      "180",
-      "200",
-      "203",
-      "220"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Casey Jones was a?",
-    "choices": [
-      "Pioneer",
-      "Engineer (US)",
-      "Conductor",
-      "Inventor"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First underground rail city?",
-    "choices": [
-      "NYC",
-      "London",
-      "Paris",
-      "Boston"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Amtrak founded?",
-    "choices": [
-      "1965",
-      "1971",
-      "1976",
-      "1980"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Model trains 'O scale' is?",
-    "choices": [
-      "1:48",
-      "1:87",
-      "1:160",
-      "1:220"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "HO scale is?",
-    "choices": [
-      "1:48",
-      "1:87",
-      "1:160",
-      "1:220"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "GE/EMD make?",
-    "choices": [
-      "Steam",
-      "Diesel locos",
-      "Electric",
-      "Maglev"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Steam locomotive's piston drives?",
-    "choices": [
-      "Pulleys",
-      "Rods",
-      "Cables",
-      "Gears"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First high-speed rail country?",
-    "choices": [
-      "France",
-      "Japan",
-      "Germany",
-      "China"
-    ],
-    "correct": 1
-  }
+  { question: "Who built the first commercial steam locomotive 'Locomotion No. 1' (1825)?", choices: ["George Stephenson", "Richard Trevithick", "James Watt", "Isambard Brunel"], correct: 0 },
+  { question: "What was the first public railway with steam traction?", choices: ["Stockton & Darlington Railway (1825)", "Liverpool & Manchester (1830)", "Great Western", "Baltimore & Ohio"], correct: 0 },
+  { question: "Stephenson's famous Rocket locomotive won which contest?", choices: ["Rainhill Trials (1829)", "Great Exhibition", "World's Fair", "Manchester Race"], correct: 0 },
+  { question: "What gauge is 'standard gauge' worldwide?", choices: ["4 ft 8.5 in", "5 ft 0 in", "3 ft 6 in", "1 m"], correct: 0 },
+  { question: "What is the world's longest railway?", choices: ["Trans-Siberian Railway", "China-Tibet", "Indian Pacific", "Cross-Canada"], correct: 0 },
+  { question: "Trans-Siberian Railway length?", choices: ["About 9,289 km", "About 5,000 km", "About 12,000 km", "About 7,000 km"], correct: 0 },
+  { question: "What was the first transcontinental railroad in the U.S. completed?", choices: ["1869", "1860", "1875", "1880"], correct: 0 },
+  { question: "Where was the golden spike driven?", choices: ["Promontory Summit, Utah", "Sacramento", "Omaha", "Salt Lake City"], correct: 0 },
+  { question: "What is the first underground rail system in the world?", choices: ["London Underground (1863)", "Paris Metro", "New York Subway", "Berlin U-Bahn"], correct: 0 },
+  { question: "What year did Japan launch the Shinkansen?", choices: ["1964", "1970", "1958", "1980"], correct: 0 },
+  { question: "What is the world's fastest commercial train (production)?", choices: ["Shanghai Maglev (~431 km/h)", "TGV", "Shinkansen", "ICE"], correct: 0 },
+  { question: "TGV stands for?", choices: ["Train à Grande Vitesse", "Transit Grand Voiture", "Train Grand Voyage", "Train Galaxy Vector"], correct: 0 },
+  { question: "The Orient Express ran between?", choices: ["Paris and Constantinople (Istanbul)", "London and Paris", "Berlin and Moscow", "Vienna and Athens"], correct: 0 },
+  { question: "What gauge is Russia's railway system?", choices: ["1520 mm (Russian gauge)", "Standard gauge", "Cape gauge", "Indian gauge"], correct: 0 },
+  { question: "Who founded the Pullman sleeper car company?", choices: ["George Pullman", "Cornelius Vanderbilt", "Jay Gould", "Henry Flagler"], correct: 0 },
+  { question: "What is the longest tunnel for a train?", choices: ["Gotthard Base Tunnel (~57 km)", "Channel Tunnel", "Seikan Tunnel", "Lötschberg"], correct: 0 },
+  { question: "Channel Tunnel connects which countries?", choices: ["UK and France", "France and Belgium", "UK and Belgium", "France and Spain"], correct: 0 },
+  { question: "Channel Tunnel opened in?", choices: ["1994", "1990", "2000", "1985"], correct: 0 },
+  { question: "Eurostar runs between?", choices: ["London and continental Europe (Paris/Brussels/Amsterdam)", "Paris and Berlin", "Madrid and Rome", "Milan and Vienna"], correct: 0 },
+  { question: "What is a 'Maglev' train?", choices: ["Magnetic levitation train", "Magnetic-level train", "Manual gearbox", "Mass transit"], correct: 0 },
+  { question: "Amtrak was created in?", choices: ["1971", "1965", "1980", "1955"], correct: 0 },
+  { question: "What is BART (San Francisco)?", choices: ["Bay Area Rapid Transit", "Bay Area Regional Train", "Bay Area Railway", "Bay Area Rail Transit"], correct: 0 },
+  { question: "Indian Railways is among the world's?", choices: ["Largest employers", "Smallest networks", "Most automated", "Newest systems"], correct: 0 },
+  { question: "What is Britain's most famous steam locomotive built 1934?", choices: ["Flying Scotsman", "Mallard", "City of Truro", "Rocket"], correct: 0 },
+  { question: "Mallard set what speed record in 1938?", choices: ["126 mph (203 km/h) for steam", "100 mph", "150 mph", "120 mph"], correct: 0 },
+  { question: "Brunel's Great Western Railway used what gauge originally?", choices: ["Broad gauge (7 ft 0.25 in)", "Standard gauge", "Narrow gauge", "Russian gauge"], correct: 0 },
+  { question: "Who is the 'Father of Railways'?", choices: ["George Stephenson", "Richard Trevithick", "Isambard Brunel", "James Watt"], correct: 0 },
+  { question: "What is a 'cog railway' for?", choices: ["Steep mountain ascents", "Underwater tunnels", "Desert", "Arctic"], correct: 0 },
+  { question: "Mount Washington Cog Railway in NH opened in?", choices: ["1869", "1850", "1880", "1900"], correct: 0 },
+  { question: "What is 'high-speed rail' minimum speed (UIC definition)?", choices: ["250 km/h on new lines / 200 km/h on upgraded", "300 km/h", "200 km/h flat", "150 km/h"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: TrainsQuizSettings): TrainsQuizState {

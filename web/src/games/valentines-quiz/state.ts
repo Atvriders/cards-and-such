@@ -4,246 +4,36 @@ export interface ValentinesQuizSettings { questions: "10" | "20" | "30"; }
 export interface ValentinesQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ValentinesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Valentine's Day is celebrated on?",
-    "choices": [
-      "Feb 1",
-      "Feb 7",
-      "Feb 14",
-      "Feb 28"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "St. Valentine was a saint of which religion?",
-    "choices": [
-      "Hindu",
-      "Buddhist",
-      "Christian",
-      "Muslim"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Cupid is the Roman god of?",
-    "choices": [
-      "War",
-      "Wisdom",
-      "Love",
-      "Sea"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Cupid's Greek counterpart is?",
-    "choices": [
-      "Apollo",
-      "Eros",
-      "Ares",
-      "Hermes"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Roses on Valentine's symbolize?",
-    "choices": [
-      "Friendship",
-      "Love",
-      "Marriage",
-      "Loss"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Hallmark started selling cards in?",
-    "choices": [
-      "1900",
-      "1913",
-      "1929",
-      "1945"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Most popular Valentine's gift?",
-    "choices": [
-      "Chocolate",
-      "Flowers",
-      "Cards",
-      "Jewelry"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which color rose means 'true love'?",
-    "choices": [
-      "Yellow",
-      "White",
-      "Red",
-      "Pink"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Sweetheart candies are also known as?",
-    "choices": [
-      "Necco hearts",
-      "Conversation hearts",
-      "Sugar hearts",
-      "Love hearts"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Valentine's was first associated with romance by?",
-    "choices": [
-      "Shakespeare",
-      "Chaucer",
-      "Dante",
-      "Petrarch"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lupercalia, the Roman fest, was held in?",
-    "choices": [
-      "January",
-      "February",
-      "March",
-      "May"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which country celebrates 'White Day' on March 14?",
-    "choices": [
-      "China",
-      "Korea",
-      "Japan",
-      "Taiwan"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Galentine's Day is on?",
-    "choices": [
-      "Feb 12",
-      "Feb 13",
-      "Feb 14",
-      "Feb 15"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Heart-shaped boxes for chocolates were popularized by?",
-    "choices": [
-      "Hershey",
-      "Cadbury",
-      "Russell Stover",
-      "Richard Cadbury"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Which 1929 event is St. Valentine's Day Massacre?",
-    "choices": [
-      "Mob killing in Chicago",
-      "Fire in NYC",
-      "Wall St crash",
-      "Banking panic"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which Disney film features lovers Tramp and?",
-    "choices": [
-      "Lady",
-      "Belle",
-      "Cinderella",
-      "Aurora"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which Shakespeare play is most romantic?",
-    "choices": [
-      "Hamlet",
-      "Macbeth",
-      "Romeo and Juliet",
-      "Othello"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Verona, Italy is associated with?",
-    "choices": [
-      "Casablanca",
-      "Romeo and Juliet",
-      "Cinderella",
-      "Tristan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Roses are red, ___ are blue?",
-    "choices": [
-      "Skies",
-      "Violets",
-      "Eyes",
-      "Daisies"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Chaucer's 'Parliament of Fowls' linked Valentine's to?",
-    "choices": [
-      "Wedding",
-      "Birds choosing mates",
-      "Easter",
-      "Christmas"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Number of cards sent annually in US?",
-    "choices": [
-      "50M",
-      "150M",
-      "300M",
-      "1B"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Red and which color are Valentine's main?",
-    "choices": [
-      "Pink",
-      "White",
-      "Gold",
-      "Black"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "X has long meant?",
-    "choices": [
-      "Hug",
-      "Kiss",
-      "Swear",
-      "Love"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Anti-Valentine's holiday is sometimes called?",
-    "choices": [
-      "Singles Day",
-      "Black Day",
-      "Lonely Day",
-      "Forever Alone"
-    ],
-    "correct": 1
-  }
+  { question: "Valentine's Day is on?", choices: ["February 14", "February 13", "February 15", "February 28"], correct: 0 },
+  { question: "Saint Valentine was a?", choices: ["Christian martyr (3rd century Rome)", "Pope", "Saint of Ireland", "Modern figure"], correct: 0 },
+  { question: "Symbol most associated with Valentine's?", choices: ["Red heart", "Yellow rose", "White lily", "Olive branch"], correct: 0 },
+  { question: "Cupid is the Roman god of?", choices: ["Love (Eros in Greek)", "War", "Wisdom", "Harvest"], correct: 0 },
+  { question: "Cupid's parents in Roman mythology?", choices: ["Venus and Mars", "Jupiter and Juno", "Apollo and Diana", "Saturn and Ops"], correct: 0 },
+  { question: "Valentine cards were first popularized commercially in?", choices: ["19th-century England (Esther Howland in US)", "1700s", "20th century only", "Ancient Rome"], correct: 0 },
+  { question: "Esther Howland is known as?", choices: ["Mother of the American Valentine", "Card store founder", "Hallmark CEO", "Hershey heiress"], correct: 0 },
+  { question: "Hallmark Cards launched Valentine cards in?", choices: ["1913", "1950", "1900", "1925"], correct: 0 },
+  { question: "What chocolate is most associated with Valentine's?", choices: ["Heart-shaped boxed assortments", "White chocolate only", "Milk chocolate bars", "Truffles only"], correct: 0 },
+  { question: "Conversation hearts (candy) are made by?", choices: ["Originally NECCO; now Spangler", "Hershey", "Mars", "Cadbury"], correct: 0 },
+  { question: "What Roman February festival predates Valentine's?", choices: ["Lupercalia", "Saturnalia", "Quirinalia", "Bacchanalia"], correct: 0 },
+  { question: "Geoffrey Chaucer linked Valentine's Day to romance in?", choices: ["Parlement of Foules (~1382)", "Canterbury Tales", "Troilus and Criseyde", "Knight's Tale"], correct: 0 },
+  { question: "Shakespeare mentions Valentine's in?", choices: ["Hamlet (Ophelia's song)", "Romeo and Juliet", "A Midsummer Night's Dream", "Twelfth Night"], correct: 0 },
+  { question: "What flower is most given on Valentine's Day?", choices: ["Red roses", "Tulips", "Lilies", "Daisies"], correct: 0 },
+  { question: "Most popular non-romantic Valentine demographic?", choices: ["Children at school exchanges", "Coworkers", "Pets", "Politicians"], correct: 0 },
+  { question: "What February 1929 Chicago event was 'Valentine's Day Massacre'?", choices: ["Capone-related gangland killings", "Stock crash", "Fire", "Riot"], correct: 0 },
+  { question: "Sweetest Day differs from Valentine's because?", choices: ["Mid-October regional US holiday", "Same as Valentine's", "European version", "Religious only"], correct: 0 },
+  { question: "Valentine's color scheme?", choices: ["Red, pink, white", "Green, white", "Blue, gold", "Orange, black"], correct: 0 },
+  { question: "Galentine's Day was popularized by?", choices: ["Parks and Recreation TV show (Leslie Knope, Feb 13)", "SNL", "Big Bang Theory", "Friends"], correct: 0 },
+  { question: "Japanese Valentine's tradition?", choices: ["Women give chocolates to men (giri-choco/honmei-choco)", "Men only give", "No giving", "Roses only"], correct: 0 },
+  { question: "Japanese 'White Day' (March 14)?", choices: ["Men reciprocate gifts to women", "Just white candy day", "Wedding day", "Children's day"], correct: 0 },
+  { question: "Most popular Valentine's flower color besides red?", choices: ["Pink", "Yellow", "White", "Orange"], correct: 0 },
+  { question: "What is the average spend per Valentine in U.S. recently?", choices: ["Around $150-200", "Around $20", "Around $1000", "Around $5"], correct: 0 },
+  { question: "Vinegar Valentines were?", choices: ["19th-century insulting cards", "Sweet cards only", "Modern jokes", "Religious tracts"], correct: 0 },
+  { question: "What classical music piece is associated with Valentine's romance?", choices: ["Tchaikovsky's Romeo and Juliet Overture (and others)", "1812 Overture", "Pachelbel Canon (mainly weddings, also Valentine's-themed)", "Both 1 and 3"], correct: 3 },
+  { question: "Valentine's Day in Finland is?", choices: ["Friend's Day (Ystävänpäivä)", "Romance Day", "Family Day", "Wedding Day"], correct: 0 },
+  { question: "Saint Valentine's relics are reportedly at?", choices: ["Whitefriar Street Church, Dublin (some); Rome", "Vatican only", "Westminster", "Cathedral of Cologne"], correct: 0 },
+  { question: "Heart shape (♥) doesn't actually depict?", choices: ["A real human heart anatomically", "An ideogram", "A symbol", "A stylized leaf possibility"], correct: 0 },
+  { question: "Mass weddings on Valentine's are popular in?", choices: ["The Philippines", "Japan", "Russia", "Brazil"], correct: 0 },
+  { question: "What love song is the all-time Valentine standard?", choices: ["My Funny Valentine", "Crazy for You", "I Will Always Love You", "Endless Love"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ValentinesQuizSettings): ValentinesQuizState {

@@ -4,256 +4,36 @@ export interface ShipsQuizSettings { questions: "10" | "20" | "30"; }
 export interface ShipsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ShipsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Titanic sank in?",
-    "choices": [
-      "1910",
-      "1912",
-      "1914",
-      "1916"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Titanic was built in?",
-    "choices": [
-      "Liverpool",
-      "Belfast",
-      "Glasgow",
-      "Southampton"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Titanic struck a?",
-    "choices": [
-      "Reef",
-      "Iceberg",
-      "Submarine",
-      "Mine"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mayflower year?",
-    "choices": [
-      "1605",
-      "1620",
-      "1635",
-      "1650"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Columbus's flagship was?",
-    "choices": [
-      "Pinta",
-      "Nina",
-      "Santa Maria",
-      "Trinidad"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "HMS Victory was Nelson's flagship at?",
-    "choices": [
-      "Nile",
-      "Trafalgar",
-      "Copenhagen",
-      "Cape St Vincent"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bismarck was a?",
-    "choices": [
-      "Cruiser",
-      "Battleship",
-      "Destroyer",
-      "Carrier"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "USS Constitution nickname?",
-    "choices": [
-      "Old Ironsides",
-      "Old Glory",
-      "Old Salt",
-      "Old Defender"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First ironclad battle (1862)?",
-    "choices": [
-      "Monitor v Merrimack",
-      "Hampton Roads",
-      "Both",
-      "Mobile"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Suez Canal opened?",
-    "choices": [
-      "1859",
-      "1869",
-      "1880",
-      "1900"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Panama Canal opened?",
-    "choices": [
-      "1904",
-      "1914",
-      "1924",
-      "1934"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Magellan's expedition was first to?",
-    "choices": [
-      "Discover Brazil",
-      "Circumnavigate",
-      "Reach India",
-      "Reach Japan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Captain Cook explored?",
-    "choices": [
-      "Pacific",
-      "Atlantic",
-      "Indian",
-      "Arctic"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "USS Enterprise (CVN-65) was first nuclear?",
-    "choices": [
-      "Sub",
-      "Carrier",
-      "Destroyer",
-      "Cruiser"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Queen Mary 2 launched?",
-    "choices": [
-      "2000",
-      "2003",
-      "2004",
-      "2010"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Largest cruise ship class as of 2024?",
-    "choices": [
-      "Quantum",
-      "Oasis",
-      "Icon",
-      "Sphere"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Lusitania sunk by?",
-    "choices": [
-      "U-boat",
-      "Mine",
-      "Storm",
-      "Iceberg"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "USS Missouri famous for?",
-    "choices": [
-      "Pearl Harbor",
-      "Japan surrender",
-      "D-Day",
-      "Midway"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Cutty Sark was a?",
-    "choices": [
-      "Steamer",
-      "Tea clipper",
-      "Frigate",
-      "Battleship"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First ship to circumnavigate solo (1898)?",
-    "choices": [
-      "Slocum's Spray",
-      "Chichester",
-      "Knox-Johnston",
-      "Moitessier"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "USS Arizona sunk during?",
-    "choices": [
-      "Pearl Harbor",
-      "Midway",
-      "Coral Sea",
-      "Iwo Jima"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pirate ship 'Queen Anne's Revenge' belonged to?",
-    "choices": [
-      "Blackbeard",
-      "Kidd",
-      "Morgan",
-      "Drake"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Trireme was a?",
-    "choices": [
-      "Roman lawyer",
-      "Greek warship",
-      "Egyptian boat",
-      "Viking longship"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Viking ships are called?",
-    "choices": [
-      "Knarrs",
-      "Longships",
-      "Both",
-      "Cogs"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Battle of Trafalgar year?",
-    "choices": [
-      "1798",
-      "1805",
-      "1815",
-      "1820"
-    ],
-    "correct": 1
-  }
+  { question: "What was the most famous ship to sink in 1912?", choices: ["RMS Titanic", "RMS Lusitania", "HMS Hood", "USS Indianapolis"], correct: 0 },
+  { question: "How many people died on the Titanic?", choices: ["About 1500", "About 800", "About 2000", "About 500"], correct: 0 },
+  { question: "Who built the Titanic?", choices: ["Harland & Wolff", "Cunard", "White Star Line", "Cammell Laird"], correct: 0 },
+  { question: "Where was Titanic built?", choices: ["Belfast", "Liverpool", "Glasgow", "Southampton"], correct: 0 },
+  { question: "What ship was sunk by a German U-boat in 1915, helping draw US into WWI?", choices: ["RMS Lusitania", "HMS Hood", "Britannic", "Olympic"], correct: 0 },
+  { question: "What is the largest aircraft carrier in service?", choices: ["USS Gerald R. Ford", "USS Nimitz", "USS Enterprise", "HMS Queen Elizabeth"], correct: 0 },
+  { question: "What was the first nuclear-powered aircraft carrier?", choices: ["USS Enterprise (CVN-65)", "USS Nimitz", "USS Eisenhower", "USS Forrestal"], correct: 0 },
+  { question: "What ship sank during WWII at Pearl Harbor in 1941?", choices: ["USS Arizona", "USS Missouri", "USS Iowa", "USS New Jersey"], correct: 0 },
+  { question: "Where was the WWII Japanese surrender signed?", choices: ["USS Missouri", "USS Arizona", "USS Iowa", "USS Yorktown"], correct: 0 },
+  { question: "The Spanish Armada was defeated in?", choices: ["1588", "1492", "1620", "1700"], correct: 0 },
+  { question: "Who commanded the English fleet against the Armada?", choices: ["Lord Howard of Effingham", "Francis Drake", "John Hawkins", "Walter Raleigh"], correct: 0 },
+  { question: "HMS Victory was the flagship of?", choices: ["Admiral Nelson", "Admiral Drake", "Admiral Rodney", "Admiral Anson"], correct: 0 },
+  { question: "Battle of Trafalgar was fought in?", choices: ["1805", "1815", "1798", "1812"], correct: 0 },
+  { question: "What was Magellan's flagship for circumnavigating Earth?", choices: ["Trinidad", "Victoria", "Concepcion", "San Antonio"], correct: 0 },
+  { question: "What ship completed the first circumnavigation of the globe?", choices: ["Victoria (1522)", "Trinidad", "Santa Maria", "Endeavour"], correct: 0 },
+  { question: "Captain Cook commanded which ship to discover Australia/Hawaii etc.?", choices: ["HMS Endeavour", "HMS Resolution", "HMS Discovery", "Both Endeavour and Resolution"], correct: 3 },
+  { question: "The USS Constitution is nicknamed?", choices: ["Old Ironsides", "Big Mo", "The Mighty Mo", "Big Stick"], correct: 0 },
+  { question: "Who designed the ironclad USS Monitor?", choices: ["John Ericsson", "Robert Fulton", "James Watt", "Isambard Brunel"], correct: 0 },
+  { question: "The Battle of Hampton Roads in 1862 featured which two ironclads?", choices: ["Monitor vs Merrimack (Virginia)", "Monitor vs Constitution", "Merrimack vs Hartford", "Hartford vs Monitor"], correct: 0 },
+  { question: "What is the world's oldest commissioned warship still afloat?", choices: ["USS Constitution", "HMS Victory (in dry dock)", "HMS Trincomalee", "USS Constellation"], correct: 0 },
+  { question: "What sank the German battleship Bismarck?", choices: ["British Royal Navy fleet (May 1941)", "US Navy", "Soviet Navy", "Free French Navy"], correct: 0 },
+  { question: "What is the largest cargo container ship class today?", choices: ["Ever Given-class/HMM Algeciras-class (~24,000 TEU)", "Triple-E", "Panamax", "Suezmax"], correct: 0 },
+  { question: "Who invented the first steamboat in regular service?", choices: ["Robert Fulton (Clermont, 1807)", "James Watt", "John Fitch", "John Stevens"], correct: 0 },
+  { question: "Cunard's RMS Queen Mary 2 entered service in?", choices: ["2004", "2000", "2008", "1998"], correct: 0 },
+  { question: "What is a 'frigate' historically?", choices: ["A fast warship", "A passenger liner", "A cargo ship", "A fishing boat"], correct: 0 },
+  { question: "What ship class is HMS Queen Elizabeth?", choices: ["Aircraft carrier", "Battleship", "Submarine", "Frigate"], correct: 0 },
+  { question: "The 'Black Pearl' is a fictional ship from?", choices: ["Pirates of the Caribbean", "Treasure Island", "Master and Commander", "Moby Dick"], correct: 0 },
+  { question: "The Mayflower carried Pilgrims to Plymouth in?", choices: ["1620", "1607", "1492", "1630"], correct: 0 },
+  { question: "RMS stands for?", choices: ["Royal Mail Ship", "Royal Marine Ship", "Royal Maritime Ship", "Regulated Maritime Steamer"], correct: 0 },
+  { question: "What is a 'Panamax' ship?", choices: ["Maximum size to fit through Panama Canal", "Maximum cargo capacity", "Built in Panama", "Owned by Panama"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ShipsQuizSettings): ShipsQuizState {

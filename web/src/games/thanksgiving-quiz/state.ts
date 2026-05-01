@@ -4,256 +4,36 @@ export interface ThanksgivingQuizSettings { questions: "10" | "20" | "30"; }
 export interface ThanksgivingQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ThanksgivingQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "First Thanksgiving was held at?",
-    "choices": [
-      "Jamestown",
-      "Plymouth",
-      "Boston",
-      "Salem"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First Thanksgiving year?",
-    "choices": [
-      "1607",
-      "1620",
-      "1621",
-      "1630"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Pilgrims celebrated with which Native peoples?",
-    "choices": [
-      "Mohawk",
-      "Iroquois",
-      "Wampanoag",
-      "Cherokee"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Sarah Josepha Hale lobbied for Thanksgiving as?",
-    "choices": [
-      "A meal",
-      "A national holiday",
-      "A school holiday",
-      "A church day"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lincoln declared Thanksgiving national in?",
-    "choices": [
-      "1860",
-      "1863",
-      "1865",
-      "1869"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Macy's parade started in?",
-    "choices": [
-      "1920",
-      "1924",
-      "1929",
-      "1934"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Thanksgiving falls on which Thursday?",
-    "choices": [
-      "Third",
-      "Fourth",
-      "First",
-      "Last"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Most-eaten bird?",
-    "choices": [
-      "Chicken",
-      "Duck",
-      "Turkey",
-      "Goose"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Cranberry sauce origin?",
-    "choices": [
-      "Native American",
-      "British",
-      "Spanish",
-      "Italian"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "'Black Friday' is the day after?",
-    "choices": [
-      "Christmas",
-      "Halloween",
-      "Thanksgiving",
-      "Easter"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What is 'turducken'?",
-    "choices": [
-      "Stuffed turkey",
-      "Turkey-duck-chicken",
-      "Turkey-duck-quail",
-      "Turkey-duck"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Canada celebrates Thanksgiving in?",
-    "choices": [
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which president pardoned the first turkey traditionally?",
-    "choices": [
-      "Lincoln",
-      "Truman",
-      "Kennedy",
-      "Reagan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Plymouth Rock is in?",
-    "choices": [
-      "Maine",
-      "Massachusetts",
-      "Rhode Island",
-      "Connecticut"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Squanto helped pilgrims by?",
-    "choices": [
-      "Teaching agriculture",
-      "Giving them weapons",
-      "Teaching English",
-      "Teaching navigation"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The 'Three Sisters' crops are?",
-    "choices": [
-      "Corn, beans, squash",
-      "Rice, beans, corn",
-      "Wheat, oats, barley",
-      "Yams, peas, corn"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pumpkin pie became popular in?",
-    "choices": [
-      "17th century",
-      "18th century",
-      "19th century",
-      "20th century"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mayflower departed from?",
-    "choices": [
-      "London",
-      "Plymouth (England)",
-      "Southampton",
-      "Liverpool"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "How many pilgrims arrived on Mayflower?",
-    "choices": [
-      "50",
-      "75",
-      "102",
-      "150"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "First documented Thanksgiving in North America?",
-    "choices": [
-      "Plymouth 1621",
-      "Berkeley 1619",
-      "St. Augustine 1565",
-      "Roanoke 1586"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Wishbone tradition originated with?",
-    "choices": [
-      "Etruscans",
-      "Greeks",
-      "Egyptians",
-      "Celts"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First Thanksgiving Day football game year?",
-    "choices": [
-      "1876",
-      "1880",
-      "1900",
-      "1920"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "FDR moved Thanksgiving to?",
-    "choices": [
-      "Boost retail",
-      "Honor veterans",
-      "Aid farmers",
-      "Avoid storms"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "What is the name of NYC's parade?",
-    "choices": [
-      "Macy's",
-      "Gimbels'",
-      "Hudson's",
-      "Saks'"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Which dish is most regional / Southern?",
-    "choices": [
-      "Cornbread stuffing",
-      "Mashed potatoes",
-      "Green bean casserole",
-      "Yams"
-    ],
-    "correct": 0
-  }
+  { question: "U.S. Thanksgiving is on?", choices: ["Fourth Thursday of November", "Last Thursday of November", "November 25 always", "Third Thursday of November"], correct: 0 },
+  { question: "Canadian Thanksgiving is on?", choices: ["Second Monday of October", "Fourth Thursday of November", "November 11", "First Friday of November"], correct: 0 },
+  { question: "The first Thanksgiving (1621) was held at?", choices: ["Plymouth Colony", "Jamestown", "New Amsterdam", "Salem"], correct: 0 },
+  { question: "Pilgrims arrived on which ship?", choices: ["Mayflower", "Speedwell", "Santa Maria", "Discovery"], correct: 0 },
+  { question: "Mayflower departed from where?", choices: ["Plymouth, England", "Southampton", "London", "Bristol"], correct: 0 },
+  { question: "Mayflower arrived in?", choices: ["1620", "1607", "1630", "1492"], correct: 0 },
+  { question: "Wampanoag chief at first Thanksgiving was?", choices: ["Massasoit", "Squanto", "Powhatan", "Pocahontas"], correct: 0 },
+  { question: "Who taught Pilgrims to plant corn?", choices: ["Squanto (Tisquantum)", "Massasoit", "Samoset", "Pocahontas"], correct: 0 },
+  { question: "Lincoln declared Thanksgiving a national holiday in?", choices: ["1863", "1789", "1876", "1900"], correct: 0 },
+  { question: "FDR moved Thanksgiving date controversy in?", choices: ["1939", "1942", "1945", "1933"], correct: 0 },
+  { question: "Macy's Thanksgiving Day Parade started in?", choices: ["1924", "1900", "1936", "1945"], correct: 0 },
+  { question: "Parade is held in?", choices: ["New York City", "Chicago", "Detroit", "Boston"], correct: 0 },
+  { question: "What turkey/balloon character appears in Macy's parade?", choices: ["Many balloons (Snoopy, etc.)", "Only turkeys", "Only Santa", "Only floats"], correct: 0 },
+  { question: "Detroit traditionally hosts what NFL team on Thanksgiving?", choices: ["Detroit Lions (since 1934)", "Cowboys", "Patriots", "Packers"], correct: 0 },
+  { question: "Other NFL team that traditionally plays Thanksgiving?", choices: ["Dallas Cowboys (since 1966)", "Bears", "Steelers", "Giants"], correct: 0 },
+  { question: "Most popular Thanksgiving dish?", choices: ["Roast turkey", "Ham", "Beef", "Lamb"], correct: 0 },
+  { question: "What is 'cornbread stuffing' or 'dressing'?", choices: ["Cooked outside the bird is dressing; inside is stuffing", "Same thing", "Different cuisine", "Vegan substitute"], correct: 0 },
+  { question: "Pumpkin pie is typically flavored with?", choices: ["Cinnamon, nutmeg, ginger, cloves", "Cardamom", "Saffron", "Vanilla only"], correct: 0 },
+  { question: "President pardons what each Thanksgiving?", choices: ["A turkey (or two)", "A pig", "A chicken", "An ostrich"], correct: 0 },
+  { question: "First president to formally pardon a turkey?", choices: ["George H.W. Bush (1989, formal tradition)", "Lincoln", "Truman", "JFK"], correct: 0 },
+  { question: "Black Friday occurs on?", choices: ["The day after Thanksgiving", "Two days before", "Tuesday after", "Monday after"], correct: 0 },
+  { question: "'Cyber Monday' falls?", choices: ["Monday after Thanksgiving", "First Monday of December", "Tuesday after", "Thursday after"], correct: 0 },
+  { question: "How many Pilgrims roughly attended the first Thanksgiving?", choices: ["About 50 (with 90 Wampanoag)", "100", "20", "200"], correct: 0 },
+  { question: "First Thanksgiving lasted approximately?", choices: ["Three days", "One day", "A week", "A month"], correct: 0 },
+  { question: "Plymouth Rock is in?", choices: ["Plymouth, MA", "Plymouth, NH", "Plymouth, England", "Plymouth, ME"], correct: 0 },
+  { question: "Sarah Josepha Hale famously campaigned for?", choices: ["Making Thanksgiving a national holiday", "Black Friday", "Pumpkin pie", "Mayflower preservation"], correct: 0 },
+  { question: "Thanksgiving turkey ranks roughly?", choices: ["46 million eaten in US annually", "10 million", "100 million", "200 million"], correct: 0 },
+  { question: "Cranberry sauce is associated with?", choices: ["Massachusetts/New England bogs", "California", "Florida", "Texas"], correct: 0 },
+  { question: "What is 'Friendsgiving'?", choices: ["Thanksgiving celebration with friends instead of/before family", "Online thanksgiving", "Religious version", "Children's version"], correct: 0 },
+  { question: "Charlie Brown Thanksgiving special premiered?", choices: ["1973", "1965", "1980", "1968"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ThanksgivingQuizSettings): ThanksgivingQuizState {

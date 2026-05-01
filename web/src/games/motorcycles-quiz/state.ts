@@ -4,256 +4,36 @@ export interface MotorcyclesQuizSettings { questions: "10" | "20" | "30"; }
 export interface MotorcyclesQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type MotorcyclesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "Harley-Davidson founded in?",
-    "choices": [
-      "Detroit",
-      "Milwaukee",
-      "Chicago",
-      "Pittsburgh"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Year Harley founded?",
-    "choices": [
-      "1903",
-      "1910",
-      "1915",
-      "1920"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ducati nationality?",
-    "choices": [
-      "German",
-      "Italian",
-      "Spanish",
-      "French"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Kawasaki nationality?",
-    "choices": [
-      "Korean",
-      "Japanese",
-      "Chinese",
-      "Taiwanese"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Honda Goldwing is a?",
-    "choices": [
-      "Sportbike",
-      "Touring bike",
-      "Cruiser",
-      "Dirtbike"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Vincent Black Shadow was famous for?",
-    "choices": [
-      "Speed",
-      "Beauty",
-      "Ruggedness",
-      "Stunt riding"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Triumph nationality?",
-    "choices": [
-      "British",
-      "German",
-      "Italian",
-      "American"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "BSA stands for?",
-    "choices": [
-      "Birmingham Small Arms",
-      "British Sports Association",
-      "Bavarian Speed Auto",
-      "Belgian Standard Atelier"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First motorcycle invented by?",
-    "choices": [
-      "Daimler",
-      "Benz",
-      "Honda",
-      "Indian"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Year of first motorcycle?",
-    "choices": [
-      "1867",
-      "1885",
-      "1900",
-      "1920"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Indian Motorcycles started in?",
-    "choices": [
-      "1901",
-      "1910",
-      "1920",
-      "1930"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Yamaha originally made?",
-    "choices": [
-      "Bikes",
-      "Pianos",
-      "Cars",
-      "Phones"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Suzuki Hayabusa is named after?",
-    "choices": [
-      "Falcon",
-      "Eagle",
-      "Hawk",
-      "Owl"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Vespa nationality?",
-    "choices": [
-      "Italian",
-      "Spanish",
-      "Greek",
-      "French"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "MotoGP top class displacement?",
-    "choices": [
-      "500cc",
-      "750cc",
-      "1000cc",
-      "1200cc"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Most-titled MotoGP rider?",
-    "choices": [
-      "Rossi",
-      "Marquez",
-      "Doohan",
-      "Hailwood"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Valentino Rossi nationality?",
-    "choices": [
-      "Italian",
-      "Spanish",
-      "American",
-      "British"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Marc Marquez nationality?",
-    "choices": [
-      "Italian",
-      "Spanish",
-      "Portuguese",
-      "French"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Isle of Man TT held since?",
-    "choices": [
-      "1907",
-      "1920",
-      "1947",
-      "1955"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Royal Enfield is now made in?",
-    "choices": [
-      "UK",
-      "USA",
-      "India",
-      "Japan"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "BMW R series are?",
-    "choices": [
-      "Boxer twins",
-      "Inline 4",
-      "V-twin",
-      "Single"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Cafe racer style emerged in?",
-    "choices": [
-      "UK 1950s-60s",
-      "US 1960s",
-      "Italy 1970s",
-      "Japan 1980s"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chopper style associated with?",
-    "choices": [
-      "UK",
-      "Japan",
-      "USA",
-      "Germany"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Easy Rider movie year?",
-    "choices": [
-      "1969",
-      "1972",
-      "1975",
-      "1980"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ducati's signature engine?",
-    "choices": [
-      "V-twin (L-twin)",
-      "Boxer",
-      "Inline 4",
-      "Single"
-    ],
-    "correct": 0
-  }
+  { question: "Who founded Harley-Davidson?", choices: ["William Harley and Arthur Davidson", "Henry Ford", "John Harley", "Fred Davidson alone"], correct: 0 },
+  { question: "Harley-Davidson was founded in?", choices: ["1903", "1910", "1898", "1920"], correct: 0 },
+  { question: "What city is Harley-Davidson headquartered in?", choices: ["Milwaukee", "Detroit", "Chicago", "Cleveland"], correct: 0 },
+  { question: "Who founded Honda Motor Co. (motorcycles)?", choices: ["Soichiro Honda", "Kiichiro Toyoda", "Akio Morita", "Konosuke Matsushita"], correct: 0 },
+  { question: "What is the best-selling motor vehicle in history?", choices: ["Honda Super Cub", "VW Beetle", "Toyota Corolla", "Ford F-150"], correct: 0 },
+  { question: "What year did Honda introduce the Super Cub?", choices: ["1958", "1965", "1972", "1950"], correct: 0 },
+  { question: "What is the famous 'Triumph Bonneville' named after?", choices: ["Bonneville Salt Flats", "A village in England", "A racing track", "A river"], correct: 0 },
+  { question: "Where is Triumph Motorcycles based?", choices: ["Hinckley, England", "Birmingham", "Manchester", "London"], correct: 0 },
+  { question: "What Italian brand makes the V-twin Monster series?", choices: ["Ducati", "MV Agusta", "Aprilia", "Moto Guzzi"], correct: 0 },
+  { question: "Where is Ducati headquartered?", choices: ["Bologna", "Milan", "Rome", "Turin"], correct: 0 },
+  { question: "Who owns Ducati now?", choices: ["Audi (VW Group)", "BMW", "Honda", "Yamaha"], correct: 0 },
+  { question: "What Japanese brand makes the YZF-R1?", choices: ["Yamaha", "Honda", "Kawasaki", "Suzuki"], correct: 0 },
+  { question: "Kawasaki's Ninja is what type of bike?", choices: ["Sportbike", "Cruiser", "Touring", "Off-road"], correct: 0 },
+  { question: "What German brand makes the GS adventure bikes?", choices: ["BMW", "KTM", "Husqvarna", "Sachs"], correct: 0 },
+  { question: "Where is KTM headquartered?", choices: ["Mattighofen, Austria", "Munich, Germany", "Bologna, Italy", "Helsinki, Finland"], correct: 0 },
+  { question: "What does 'MotoGP' stand for?", choices: ["Motorcycle Grand Prix", "Motor Grand Prize", "Motor Group Prix", "Motorbike Globe Prix"], correct: 0 },
+  { question: "How many MotoGP titles has Valentino Rossi won?", choices: ["9", "7", "5", "11"], correct: 0 },
+  { question: "Marc Marquez races for which factory team in MotoGP (most successfully)?", choices: ["Honda Repsol", "Yamaha", "Ducati", "Suzuki"], correct: 0 },
+  { question: "Isle of Man TT races have been held since?", choices: ["1907", "1920", "1935", "1950"], correct: 0 },
+  { question: "What is the famous Indian Motorcycle's home country?", choices: ["United States", "India", "England", "Italy"], correct: 0 },
+  { question: "Indian Motorcycles was founded in?", choices: ["1901", "1910", "1925", "1898"], correct: 0 },
+  { question: "What classifies a 'cruiser' motorcycle?", choices: ["Low seat, relaxed riding position", "Aggressive sport position", "Off-road capability", "Touring fairings"], correct: 0 },
+  { question: "What is a 'cafe racer' style?", choices: ["Stripped-down classic with low handlebars", "Modern superbike", "Off-road dirt bike", "Touring bike"], correct: 0 },
+  { question: "Easy Rider (1969) features what type of motorcycle?", choices: ["Customized Harley-Davidson choppers", "Triumph Bonneville", "Indian Chief", "Honda 750"], correct: 0 },
+  { question: "What does 'cc' measure on a motorcycle engine?", choices: ["Cubic centimeters of displacement", "Cylinder count", "Compression ratio", "Combustion cycle"], correct: 0 },
+  { question: "What was the first production motorcycle to top 200 mph?", choices: ["Suzuki Hayabusa (1999)", "Kawasaki Ninja H2", "BMW S1000RR", "Ducati Panigale"], correct: 0 },
+  { question: "What is Vespa famous for?", choices: ["Italian scooters", "Sportbikes", "Cruisers", "Touring bikes"], correct: 0 },
+  { question: "Vespa is made by which company?", choices: ["Piaggio", "Ducati", "Aprilia", "MV Agusta"], correct: 0 },
+  { question: "Steve McQueen's famous bike in 'The Great Escape' was?", choices: ["Triumph TR6 Trophy", "Harley Knucklehead", "BMW R75", "Indian Scout"], correct: 0 },
+  { question: "What does 'ABS' on a motorcycle stand for?", choices: ["Anti-lock Braking System", "Auto Brake System", "Active Braking Sensor", "Adjustable Brake System"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: MotorcyclesQuizSettings): MotorcyclesQuizState {

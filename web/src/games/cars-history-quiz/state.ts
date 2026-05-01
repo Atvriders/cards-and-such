@@ -4,256 +4,36 @@ export interface CarsHistoryQuizSettings { questions: "10" | "20" | "30"; }
 export interface CarsHistoryQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type CarsHistoryQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "First mass-produced car?",
-    "choices": [
-      "Model A",
-      "Model T",
-      "Model S",
-      "Beetle"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Henry Ford founded Ford in?",
-    "choices": [
-      "1903",
-      "1908",
-      "1913",
-      "1920"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Karl Benz patented the automobile in?",
-    "choices": [
-      "1879",
-      "1886",
-      "1895",
-      "1900"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tesla Motors founded year?",
-    "choices": [
-      "1998",
-      "2003",
-      "2008",
-      "2010"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tesla's first car?",
-    "choices": [
-      "Model S",
-      "Model 3",
-      "Roadster",
-      "Cybertruck"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Volkswagen Beetle origin country?",
-    "choices": [
-      "Italy",
-      "Germany",
-      "France",
-      "Czech"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Toyota's first car was?",
-    "choices": [
-      "Crown",
-      "Model AA",
-      "Corolla",
-      "Camry"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Chevrolet co-founder?",
-    "choices": [
-      "Henry Ford",
-      "Louis Chevrolet",
-      "Walter Chrysler",
-      "Ransom Olds"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Lamborghini was originally a?",
-    "choices": [
-      "Bicycle co.",
-      "Tractor co.",
-      "Boat co.",
-      "Plane co."
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ferrari founded year?",
-    "choices": [
-      "1929 (Scuderia)",
-      "1939",
-      "1947",
-      "1955"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Rolls-Royce founders?",
-    "choices": [
-      "Charles Rolls & Henry Royce",
-      "Charles Royce & Henry Rolls",
-      "Two Rolls",
-      "Two Royces"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bentley brand founded in?",
-    "choices": [
-      "1885",
-      "1919",
-      "1930",
-      "1945"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Porsche 911 introduced in?",
-    "choices": [
-      "1955",
-      "1963",
-      "1970",
-      "1975"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First successful electric car date?",
-    "choices": [
-      "1830s",
-      "1880s",
-      "1900s",
-      "1950s"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "First hybrid mass-market car?",
-    "choices": [
-      "Honda Insight",
-      "Toyota Prius",
-      "Both",
-      "Chevy Volt"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Toyota Prius launched in?",
-    "choices": [
-      "1995",
-      "1997",
-      "2001",
-      "2003"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "GM founded by?",
-    "choices": [
-      "Billy Durant",
-      "Henry Ford",
-      "Alfred Sloan",
-      "Walter Chrysler"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chrysler founded in?",
-    "choices": [
-      "1900",
-      "1925",
-      "1935",
-      "1945"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "BMW originally made?",
-    "choices": [
-      "Cars",
-      "Aircraft engines",
-      "Motorcycles",
-      "Tractors"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mercedes-Benz emblem has?",
-    "choices": [
-      "3 points",
-      "4 points",
-      "5 points",
-      "6 points"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Audi's four rings represent?",
-    "choices": [
-      "4 cylinders",
-      "4 founders",
-      "4 models",
-      "4 merged companies"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Honda founded as a?",
-    "choices": [
-      "Car co.",
-      "Motorcycle co.",
-      "Boat co.",
-      "Plane co."
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First car with seatbelts standard?",
-    "choices": [
-      "Ford T",
-      "Volvo PV544",
-      "Chevy Bel Air",
-      "Citroen DS"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bugatti Veyron top speed (mph)?",
-    "choices": [
-      "~230",
-      "~253",
-      "~268",
-      "~280"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Cybertruck first revealed?",
-    "choices": [
-      "2019",
-      "2020",
-      "2021",
-      "2022"
-    ],
-    "correct": 0
-  }
+  { question: "Who is credited with inventing the modern automobile in 1885-86?", choices: ["Karl Benz", "Henry Ford", "Gottlieb Daimler", "Nikolaus Otto"], correct: 0 },
+  { question: "What was the first mass-produced car (1908)?", choices: ["Ford Model T", "Ford Model A", "Ford Mustang", "Cadillac Coupe"], correct: 0 },
+  { question: "Who pioneered the moving assembly line in 1913?", choices: ["Henry Ford", "Ransom Olds", "Walter Chrysler", "Louis Chevrolet"], correct: 0 },
+  { question: "What German company has the slogan 'Vorsprung durch Technik'?", choices: ["Audi", "BMW", "Mercedes-Benz", "Porsche"], correct: 0 },
+  { question: "Where is BMW headquartered?", choices: ["Munich", "Stuttgart", "Wolfsburg", "Berlin"], correct: 0 },
+  { question: "Mercedes-Benz is headquartered in?", choices: ["Stuttgart", "Munich", "Hamburg", "Frankfurt"], correct: 0 },
+  { question: "Volkswagen was founded in what year?", choices: ["1937", "1945", "1928", "1955"], correct: 0 },
+  { question: "What car is known as 'The People's Car' in German?", choices: ["VW Beetle", "VW Golf", "VW Passat", "VW Polo"], correct: 0 },
+  { question: "Who founded Toyota?", choices: ["Kiichiro Toyoda", "Soichiro Honda", "Yutaka Katayama", "Eiji Toyoda"], correct: 0 },
+  { question: "Toyota was founded in what year?", choices: ["1937", "1933", "1945", "1950"], correct: 0 },
+  { question: "Who founded Honda Motor Co.?", choices: ["Soichiro Honda", "Kiichiro Toyoda", "Yutaka Katayama", "Konosuke Matsushita"], correct: 0 },
+  { question: "Honda was founded in?", choices: ["1948", "1937", "1955", "1962"], correct: 0 },
+  { question: "What year did Tesla Motors deliver its first Roadster?", choices: ["2008", "2003", "2010", "2012"], correct: 0 },
+  { question: "Who founded Ferrari?", choices: ["Enzo Ferrari", "Ferruccio Lamborghini", "Battista Pininfarina", "Alfieri Maserati"], correct: 0 },
+  { question: "Ferrari was founded in?", choices: ["1939 (Auto Avio Costruzioni); 1947 first Ferrari-badged car", "1929", "1955", "1962"], correct: 0 },
+  { question: "What was the first car to break the sound barrier on land?", choices: ["ThrustSSC (1997)", "Spirit of America", "Bluebird", "Bloodhound"], correct: 0 },
+  { question: "What was the world's first commercially successful electric car company today?", choices: ["Tesla", "GM", "Nissan", "BYD"], correct: 0 },
+  { question: "What car holds the title for fastest production car in the early 2020s?", choices: ["SSC Tuatara/Bugatti Chiron Super Sport contenders", "Lamborghini Aventador", "Ferrari LaFerrari", "McLaren P1"], correct: 0 },
+  { question: "What was Henry Ford's $5/day wage announcement year?", choices: ["1914", "1908", "1920", "1925"], correct: 0 },
+  { question: "What U.S. company was founded by William C. Durant in 1908?", choices: ["General Motors", "Chrysler", "Ford", "Studebaker"], correct: 0 },
+  { question: "Walter Chrysler founded Chrysler in?", choices: ["1925", "1908", "1932", "1945"], correct: 0 },
+  { question: "What was Volkswagen Beetle's production run length?", choices: ["1938-2003 (original)", "1950-1990", "1945-1980", "1960-2000"], correct: 0 },
+  { question: "What vehicle was the first SUV?", choices: ["Often credited to Jeep Wagoneer (1963)", "Ford Bronco", "Chevy Suburban", "Range Rover"], correct: 0 },
+  { question: "What 1959 Mini was designed by?", choices: ["Alec Issigonis", "Colin Chapman", "Carroll Shelby", "Enzo Ferrari"], correct: 0 },
+  { question: "Who founded Lamborghini?", choices: ["Ferruccio Lamborghini", "Enzo Ferrari", "Battista Pininfarina", "Carlo Abarth"], correct: 0 },
+  { question: "Lamborghini was founded in?", choices: ["1963", "1947", "1955", "1972"], correct: 0 },
+  { question: "Who designed the Volkswagen Beetle?", choices: ["Ferdinand Porsche", "Karl Benz", "Wilhelm Maybach", "Bela Barenyi"], correct: 0 },
+  { question: "What was the first car with airbags as standard?", choices: ["Mercedes-Benz S-Class (1981 driver airbag)", "Volvo 240", "BMW 7 Series", "Ford Taurus"], correct: 0 },
+  { question: "When was the Toyota Prius (first hybrid mass-market car) launched?", choices: ["1997 (Japan)", "2000", "2003", "1995"], correct: 0 },
+  { question: "What U.S. brand made the famous Corvette since 1953?", choices: ["Chevrolet", "Ford", "Pontiac", "Dodge"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CarsHistoryQuizSettings): CarsHistoryQuizState {

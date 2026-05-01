@@ -4,256 +4,36 @@ export interface SpaceVehiclesQuizSettings { questions: "10" | "20" | "30"; }
 export interface SpaceVehiclesQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type SpaceVehiclesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "First satellite year?",
-    "choices": [
-      "1955",
-      "1957",
-      "1961",
-      "1965"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Sputnik 1 launched by?",
-    "choices": [
-      "USA",
-      "USSR",
-      "China",
-      "France"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First man in space?",
-    "choices": [
-      "Glenn",
-      "Gagarin",
-      "Shepard",
-      "Armstrong"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Year of Gagarin's flight?",
-    "choices": [
-      "1958",
-      "1961",
-      "1965",
-      "1969"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Apollo 11 landed on Moon?",
-    "choices": [
-      "1968",
-      "1969",
-      "1970",
-      "1971"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First Moon-walker?",
-    "choices": [
-      "Aldrin",
-      "Armstrong",
-      "Collins",
-      "Cernan"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Saturn V was made by?",
-    "choices": [
-      "NASA + Boeing/Douglas/N. American",
-      "SpaceX",
-      "Lockheed",
-      "Soviet"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Space Shuttle first flew?",
-    "choices": [
-      "1979",
-      "1981",
-      "1985",
-      "1988"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Shuttle program ended?",
-    "choices": [
-      "2008",
-      "2011",
-      "2014",
-      "2018"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Number of Shuttles built?",
-    "choices": [
-      "3",
-      "5",
-      "6",
-      "7"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Challenger disaster year?",
-    "choices": [
-      "1984",
-      "1986",
-      "1990",
-      "1993"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Columbia disaster year?",
-    "choices": [
-      "1999",
-      "2001",
-      "2003",
-      "2005"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Hubble Space Telescope launched?",
-    "choices": [
-      "1985",
-      "1990",
-      "1995",
-      "2000"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "ISS first module year?",
-    "choices": [
-      "1995",
-      "1998",
-      "2001",
-      "2003"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "ISS first module name?",
-    "choices": [
-      "Unity",
-      "Zarya",
-      "Destiny",
-      "Zvezda"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "SpaceX founded?",
-    "choices": [
-      "2000",
-      "2002",
-      "2005",
-      "2008"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First reusable orbital booster (landed)?",
-    "choices": [
-      "Atlas V",
-      "Falcon 9",
-      "Falcon Heavy",
-      "Starship"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Falcon 9 first booster landing year?",
-    "choices": [
-      "2014",
-      "2015",
-      "2016",
-      "2018"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mars rover Curiosity landed?",
-    "choices": [
-      "2008",
-      "2010",
-      "2012",
-      "2014"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mars rover Perseverance landed?",
-    "choices": [
-      "2018",
-      "2020",
-      "2021",
-      "2023"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Voyager 1 launched?",
-    "choices": [
-      "1972",
-      "1977",
-      "1981",
-      "1985"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Voyager 1 entered interstellar space?",
-    "choices": [
-      "2010",
-      "2012",
-      "2015",
-      "2018"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "First space station?",
-    "choices": [
-      "Skylab",
-      "Salyut 1",
-      "Mir",
-      "ISS"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Mir operated until?",
-    "choices": [
-      "1995",
-      "2001",
-      "2003",
-      "2010"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Artemis I uncrewed flew in?",
-    "choices": [
-      "2020",
-      "2022",
-      "2023",
-      "2024"
-    ],
-    "correct": 1
-  }
+  { question: "What was the first artificial satellite?", choices: ["Sputnik 1", "Explorer 1", "Vanguard 1", "Telstar"], correct: 0 },
+  { question: "Sputnik 1 was launched in what year?", choices: ["1957", "1955", "1961", "1959"], correct: 0 },
+  { question: "Who was the first human in space?", choices: ["Yuri Gagarin", "Alan Shepard", "John Glenn", "Neil Armstrong"], correct: 0 },
+  { question: "Gagarin flew in which spacecraft?", choices: ["Vostok 1", "Voskhod 1", "Soyuz 1", "Mercury"], correct: 0 },
+  { question: "Apollo 11 landed on the Moon in?", choices: ["July 1969", "July 1968", "July 1970", "July 1971"], correct: 0 },
+  { question: "Who was the first to step on the Moon?", choices: ["Neil Armstrong", "Buzz Aldrin", "Michael Collins", "Pete Conrad"], correct: 0 },
+  { question: "How many manned Moon landings (Apollo) occurred?", choices: ["6", "5", "7", "4"], correct: 0 },
+  { question: "What was the U.S.'s first crewed spacecraft program?", choices: ["Mercury", "Gemini", "Apollo", "Skylab"], correct: 0 },
+  { question: "What rocket launched Apollo missions to the Moon?", choices: ["Saturn V", "Atlas", "Titan", "Saturn IB"], correct: 0 },
+  { question: "Saturn V designer Wernher von Braun previously worked on?", choices: ["German V-2 rockets", "British Spitfire", "Russian R-7", "American Atlas"], correct: 0 },
+  { question: "Space Shuttle's first orbital flight?", choices: ["1981 (STS-1, Columbia)", "1979", "1985", "1975"], correct: 0 },
+  { question: "How many Space Shuttle orbiters were built (operational)?", choices: ["5 (Columbia, Challenger, Discovery, Atlantis, Endeavour)", "4", "6", "3"], correct: 0 },
+  { question: "Challenger disaster occurred in?", choices: ["1986", "1984", "1988", "1990"], correct: 0 },
+  { question: "Columbia disaster occurred in?", choices: ["2003", "2001", "2005", "1999"], correct: 0 },
+  { question: "When did the Space Shuttle program end?", choices: ["2011", "2008", "2013", "2010"], correct: 0 },
+  { question: "International Space Station was first launched in?", choices: ["1998", "1995", "2000", "2005"], correct: 0 },
+  { question: "How many countries collaborate on the ISS primarily?", choices: ["5 (USA, Russia, ESA member states, Japan, Canada)", "3", "10", "15"], correct: 0 },
+  { question: "Who founded SpaceX?", choices: ["Elon Musk (2002)", "Jeff Bezos", "Richard Branson", "Burt Rutan"], correct: 0 },
+  { question: "SpaceX's reusable orbital rocket?", choices: ["Falcon 9", "Atlas V", "Antares", "Delta IV"], correct: 0 },
+  { question: "SpaceX's massive next-gen rocket?", choices: ["Starship/Super Heavy", "Falcon Heavy", "BFR Mark 1", "Big Falcon"], correct: 0 },
+  { question: "Who founded Blue Origin?", choices: ["Jeff Bezos", "Elon Musk", "Richard Branson", "Paul Allen"], correct: 0 },
+  { question: "Blue Origin's suborbital tourist rocket?", choices: ["New Shepard", "New Glenn", "BE-4", "Blue Moon"], correct: 0 },
+  { question: "Voyager 1 was launched in?", choices: ["1977", "1972", "1980", "1969"], correct: 0 },
+  { question: "Voyager 1 is now in?", choices: ["Interstellar space", "Heliosphere only", "Asteroid belt", "Kuiper belt only"], correct: 0 },
+  { question: "What rover landed on Mars in 2021?", choices: ["Perseverance", "Curiosity", "Spirit", "Opportunity"], correct: 0 },
+  { question: "Curiosity rover landed in?", choices: ["2012", "2009", "2015", "2018"], correct: 0 },
+  { question: "Hubble Space Telescope launched in?", choices: ["1990", "1985", "1995", "1980"], correct: 0 },
+  { question: "James Webb Space Telescope launched in?", choices: ["2021", "2018", "2023", "2019"], correct: 0 },
+  { question: "First space station in orbit?", choices: ["Salyut 1 (1971)", "Skylab", "Mir", "ISS"], correct: 0 },
+  { question: "Mir space station deorbited in?", choices: ["2001", "1995", "2005", "1999"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SpaceVehiclesQuizSettings): SpaceVehiclesQuizState {

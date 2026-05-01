@@ -4,256 +4,36 @@ export interface NASCARQuizSettings { questions: "10" | "20" | "30"; }
 export interface NASCARQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type NASCARQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  {
-    "question": "NASCAR founded in?",
-    "choices": [
-      "1948",
-      "1955",
-      "1962",
-      "1970"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "NASCAR founder?",
-    "choices": [
-      "Bill France Sr",
-      "Richard Petty",
-      "Junior Johnson",
-      "Lee Petty"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Daytona 500 first held?",
-    "choices": [
-      "1948",
-      "1959",
-      "1965",
-      "1970"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Most career Cup wins?",
-    "choices": [
-      "Petty",
-      "Earnhardt",
-      "Pearson",
-      "Gordon"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Petty's Cup wins?",
-    "choices": [
-      "100",
-      "150",
-      "200",
-      "250"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Earnhardt 'The Intimidator' #?",
-    "choices": [
-      "3",
-      "8",
-      "24",
-      "43"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Earnhardt Sr. died at?",
-    "choices": [
-      "Daytona 2001",
-      "Talladega 2000",
-      "Bristol 2002",
-      "Charlotte 2001"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Jeff Gordon's #?",
-    "choices": [
-      "3",
-      "24",
-      "48",
-      "88"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Jimmie Johnson titles?",
-    "choices": [
-      "5",
-      "6",
-      "7",
-      "8"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Cale Yarborough won how many titles in a row?",
-    "choices": [
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Talladega is in?",
-    "choices": [
-      "Alabama",
-      "Florida",
-      "Georgia",
-      "Tennessee"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bristol is famous for?",
-    "choices": [
-      "Short track",
-      "Superspeedway",
-      "Road course",
-      "Dirt"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "NASCAR top series is now (sponsor)?",
-    "choices": [
-      "Sprint",
-      "Monster",
-      "NASCAR Cup",
-      "Winston"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Daytona track length?",
-    "choices": [
-      "1.5",
-      "2.0",
-      "2.5",
-      "3.0 mi"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Indianapolis Motor Speedway hosts?",
-    "choices": [
-      "Brickyard 400",
-      "Daytona 500",
-      "Coca-Cola 600",
-      "Southern 500"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Rookie of the Year started in?",
-    "choices": [
-      "1948",
-      "1954",
-      "1958",
-      "1965"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Talladega track length?",
-    "choices": [
-      "2.0",
-      "2.5",
-      "2.66",
-      "3.0 mi"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Pole sitter starts from?",
-    "choices": [
-      "1st",
-      "2nd",
-      "Last",
-      "Pit"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Most-watched NASCAR race usually?",
-    "choices": [
-      "Daytona 500",
-      "Coca-Cola 600",
-      "Southern 500",
-      "Brickyard"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Restrictor plates used at?",
-    "choices": [
-      "Daytona/Talladega",
-      "Bristol",
-      "Martinsville",
-      "Watkins Glen"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "NASCAR Hall of Fame is in?",
-    "choices": [
-      "Daytona",
-      "Charlotte",
-      "Atlanta",
-      "Talladega"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Watkins Glen is a?",
-    "choices": [
-      "Short track",
-      "Superspeedway",
-      "Road course",
-      "Dirt"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Kyle Busch's brother?",
-    "choices": [
-      "Kurt",
-      "Kelvin",
-      "Ken",
-      "Kasey"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chase format introduced?",
-    "choices": [
-      "1998",
-      "2004",
-      "2010",
-      "2014"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Toyota joined Cup series in?",
-    "choices": [
-      "2005",
-      "2007",
-      "2010",
-      "2012"
-    ],
-    "correct": 1
-  }
+  { question: "When was NASCAR founded?", choices: ["1948", "1955", "1962", "1942"], correct: 0 },
+  { question: "Who founded NASCAR?", choices: ["Bill France Sr.", "Richard Petty", "Junior Johnson", "Lee Petty"], correct: 0 },
+  { question: "Where is NASCAR's HQ?", choices: ["Daytona Beach, Florida", "Charlotte, NC", "Atlanta", "Talladega"], correct: 0 },
+  { question: "Who has the most NASCAR Cup Series championships (all-time tied)?", choices: ["Richard Petty, Dale Earnhardt, Jimmie Johnson (7 each)", "Jeff Gordon (4)", "David Pearson (3)", "Tony Stewart (3)"], correct: 0 },
+  { question: "Richard Petty's nickname?", choices: ["The King", "The Intimidator", "Rocket Man", "The Kid"], correct: 0 },
+  { question: "Dale Earnhardt's nickname?", choices: ["The Intimidator", "The King", "Iceman", "Smoke"], correct: 0 },
+  { question: "Dale Earnhardt died at which 2001 race?", choices: ["Daytona 500", "Talladega 500", "Charlotte 500", "Bristol 500"], correct: 0 },
+  { question: "What number was Earnhardt's iconic car?", choices: ["3", "24", "8", "43"], correct: 0 },
+  { question: "Richard Petty drove what number?", choices: ["43", "3", "24", "11"], correct: 0 },
+  { question: "The Daytona 500 first ran in?", choices: ["1959", "1948", "1965", "1955"], correct: 0 },
+  { question: "What is the longest oval track in NASCAR?", choices: ["Talladega Superspeedway (2.66 miles)", "Daytona", "Atlanta", "Charlotte"], correct: 0 },
+  { question: "What is the shortest track in NASCAR Cup?", choices: ["Martinsville Speedway (0.526 mi)", "Bristol", "Richmond", "Phoenix"], correct: 0 },
+  { question: "Bristol Motor Speedway is famous for?", choices: ["High-banked half-mile concrete track", "Road course", "Superspeedway", "Dirt only"], correct: 0 },
+  { question: "Jimmie Johnson won 5 championships in a row from?", choices: ["2006-2010", "2010-2014", "2002-2006", "2008-2012"], correct: 0 },
+  { question: "Jeff Gordon's car number?", choices: ["24", "3", "43", "88"], correct: 0 },
+  { question: "How many championships did Jeff Gordon win?", choices: ["4", "3", "5", "6"], correct: 0 },
+  { question: "Who won the 2024 NASCAR Cup Series Championship?", choices: ["Joey Logano", "Kyle Larson", "William Byron", "Christopher Bell"], correct: 0 },
+  { question: "What is the Brickyard 400 raced at?", choices: ["Indianapolis Motor Speedway", "Pocono", "Indy 500 track only", "Texas Motor Speedway"], correct: 0 },
+  { question: "What is the Charlotte race called (longest in distance)?", choices: ["Coca-Cola 600", "World 600 (historic)", "Both names", "Coca-Cola 500"], correct: 2 },
+  { question: "Coca-Cola 600 distance?", choices: ["600 miles (longest)", "500 miles", "400 miles", "300 miles"], correct: 0 },
+  { question: "What manufacturer is iconic with Bill Elliott?", choices: ["Ford", "Chevrolet", "Pontiac", "Dodge"], correct: 0 },
+  { question: "Chase Elliott is the son of?", choices: ["Bill Elliott", "Davey Allison", "Dale Earnhardt", "Richard Petty"], correct: 0 },
+  { question: "What is 'restrictor plate' racing?", choices: ["Cars with restrictor on intake to limit speed (now tapered spacer)", "Speed limit on pit road", "Tire restriction", "Fuel limit"], correct: 0 },
+  { question: "What car make does Toyota use in NASCAR Cup?", choices: ["Camry", "Corolla", "Supra (Xfinity)", "Avalon (former)"], correct: 0 },
+  { question: "What manufacturer left NASCAR Cup in 2012?", choices: ["Dodge", "Pontiac", "Mercury", "Buick"], correct: 0 },
+  { question: "Talladega is in what state?", choices: ["Alabama", "Georgia", "Florida", "Tennessee"], correct: 0 },
+  { question: "How many cars typically start a Cup race?", choices: ["About 36-40", "About 20", "About 50", "About 30"], correct: 0 },
+  { question: "What playoff format does NASCAR use since 2014?", choices: ["Chase/Playoffs with elimination rounds", "Single race finale", "Season points only", "Two-race playoff"], correct: 0 },
+  { question: "Stewart-Haas Racing is co-owned by?", choices: ["Tony Stewart and Gene Haas", "Tony Stewart only", "Gene Haas only", "Joe Gibbs"], correct: 0 },
+  { question: "Joe Gibbs (NFL coach) owns which racing team?", choices: ["Joe Gibbs Racing (Toyota)", "Hendrick Motorsports", "Roush Fenway", "Penske"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: NASCARQuizSettings): NASCARQuizState {
