@@ -1,16 +1,103 @@
-.coin-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.coin-title { font-size:1.1rem; font-weight:700; color:#f57f17; text-align:center; }
-.coin-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.coin-cpu, .coin-trick, .coin-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.coin-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.coin-back-row, .coin-trick-row, .coin-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.coin-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #f57f17 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.coin-empty { opacity:0.5; }
-.coin-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.coin-slot-label { font-size:0.7rem; opacity:0.7; }
-.coin-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.coin-hand .card { cursor: pointer; transition: transform 0.1s; }
-.coin-hand .card:hover { transform: translateY(-6px); }
-.coin-dim { opacity:0.4; cursor:not-allowed; }
-.coin-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #f57f17; }
-.coin-result h2 { margin:0 0 0.5rem 0; color:#f57f17; }
+/* Themed: family=jass (alpine forest teal) — unique prefix coincc */
+.coincc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #0c3a3a 0%, #03161a 100%);
+  color: #e0f2f1;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.coincc-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.coincc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #80cbc4;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.coincc-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #4db6ac33;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.coincc-cpu, .coincc-trick, .coincc-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.coincc-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4db6ac;
+}
+.coincc-back-row, .coincc-trick-row, .coincc-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.coincc-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #80cbc4 0 4px, #03161a 4px 8px);
+  border: 1px solid #80cbc444;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.coincc-empty { opacity: 0.5; }
+.coincc-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.coincc-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.coincc-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #80cbc4;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #e0f2f1;
+}
+.coincc-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.coincc-hand .card:hover { transform: translateY(-6px); }
+.coincc-dim { opacity: 0.4; cursor: not-allowed; }
+.coincc-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #80cbc4;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.coincc-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #80cbc4;
+  letter-spacing: 0.05em;
+}

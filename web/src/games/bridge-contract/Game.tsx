@@ -11,7 +11,7 @@ export function BridgeContractGame({ state, dispatch, onGameOver }: GameProps<Br
       dispatch={(a) => dispatch(a as BridgeContractAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="br-c"
+      prefix="bridgec"
       title="Contract Bridge"
     />
   );

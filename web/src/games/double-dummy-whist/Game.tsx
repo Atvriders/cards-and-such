@@ -11,7 +11,7 @@ export function DoubleDummyWhistGame({ state, dispatch, onGameOver }: GameProps<
       dispatch={(a) => dispatch(a as DoubleDummyWhistAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="dd-wh"
+      prefix="ddwh"
       title="Double Dummy Whist"
     />
   );

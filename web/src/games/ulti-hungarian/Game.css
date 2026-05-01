@@ -1,16 +1,103 @@
-.ulti-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.ulti-title { font-size:1.1rem; font-weight:700; color:#ff7043; text-align:center; }
-.ulti-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.ulti-cpu, .ulti-trick, .ulti-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.ulti-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.ulti-back-row, .ulti-trick-row, .ulti-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.ulti-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #ff7043 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.ulti-empty { opacity:0.5; }
-.ulti-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.ulti-slot-label { font-size:0.7rem; opacity:0.7; }
-.ulti-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.ulti-hand .card { cursor: pointer; transition: transform 0.1s; }
-.ulti-hand .card:hover { transform: translateY(-6px); }
-.ulti-dim { opacity:0.4; cursor:not-allowed; }
-.ulti-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #ff7043; }
-.ulti-result h2 { margin:0 0 0.5rem 0; color:#ff7043; }
+/* Themed: family=mariash (paprika red + gold) — unique prefix ultic */
+.ultic-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #4d1a0d 0%, #1c0604 100%);
+  color: #fff8e1;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.ultic-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.ultic-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f9a825;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.ultic-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #ffb74d33;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.ultic-cpu, .ultic-trick, .ultic-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.ultic-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffb74d;
+}
+.ultic-back-row, .ultic-trick-row, .ultic-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.ultic-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #f9a825 0 4px, #1c0604 4px 8px);
+  border: 1px solid #f9a82544;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.ultic-empty { opacity: 0.5; }
+.ultic-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.ultic-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.ultic-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #f9a825;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff8e1;
+}
+.ultic-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.ultic-hand .card:hover { transform: translateY(-6px); }
+.ultic-dim { opacity: 0.4; cursor: not-allowed; }
+.ultic-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #f9a825;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.ultic-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #f9a825;
+  letter-spacing: 0.05em;
+}

@@ -11,7 +11,7 @@ export function TarocchiGame({ state, dispatch, onGameOver }: GameProps<Tarocchi
       dispatch={(a) => dispatch(a as TarocchiAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="tar"
+      prefix="tarocchi"
       title="Tarocchi"
     />
   );

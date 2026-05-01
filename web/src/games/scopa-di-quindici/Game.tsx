@@ -11,7 +11,7 @@ export function ScopaDiQuindiciGame({ state, dispatch, onGameOver }: GameProps<S
       dispatch={(a) => dispatch(a as ScopaDiQuindiciAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="sq15"
+      prefix="sq15c"
       title="Scopa di Quindici"
     />
   );

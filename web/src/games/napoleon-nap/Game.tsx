@@ -11,7 +11,7 @@ export function NapGame({ state, dispatch, onGameOver }: GameProps<NapState, Nap
       dispatch={(a) => dispatch(a as NapAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="nap"
+      prefix="napc"
       title="Napoleon (Nap)"
     />
   );

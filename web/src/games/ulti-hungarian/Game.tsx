@@ -11,7 +11,7 @@ export function UltiHungarianGame({ state, dispatch, onGameOver }: GameProps<Ult
       dispatch={(a) => dispatch(a as UltiHungarianAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="ulti"
+      prefix="ultic"
       title="Ulti"
     />
   );

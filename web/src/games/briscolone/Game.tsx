@@ -11,7 +11,7 @@ export function BriscoloneGame({ state, dispatch, onGameOver }: GameProps<Brisco
       dispatch={(a) => dispatch(a as BriscoloneAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="bris-l"
+      prefix="brislc"
       title="Briscolone"
     />
   );

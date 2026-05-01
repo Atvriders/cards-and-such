@@ -11,7 +11,7 @@ export function WhistGame({ state, dispatch, onGameOver }: GameProps<WhistState,
       dispatch={(a) => dispatch(a as WhistAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="wh"
+      prefix="whistc"
       title="Whist"
     />
   );

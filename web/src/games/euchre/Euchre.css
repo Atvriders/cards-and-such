@@ -1,2 +1,45 @@
-/* Modern trick-taking engine — see web/src/engines/trick/trick.css */
+/* Themed: family=anglo (anglo green + amber) — unique prefix euchrec */
 @import "../../engines/trick/trick.css";
+
+/* Override base trick palette with Euchre's anglo green+amber felt. */
+.euchre,
+.euchre-game,
+.euchre-wrap {
+  --euchrec-bg-top: #103626;
+  --euchrec-bg-bot: #04130a;
+  --euchrec-accent: #ffb74d;
+  --euchrec-text: #fffaf0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #103626 0%, #04130a 100%) !important;
+  color: #fffaf0;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+}
+.euchre-header {
+  background: rgba(0,0,0,0.35) !important;
+  border: 1px solid #ff980033;
+  border-radius: 6px;
+}
+.euchre-seat-label,
+.euchre-label {
+  color: #ff9800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.euchre-card-back {
+  background: repeating-linear-gradient(45deg, #ffb74d 0 4px, #04130a 4px 8px) !important;
+  border: 1px solid #ffb74d44 !important;
+}
+.euchre-status,
+.euchre-message {
+  border-left: 3px solid #ffb74d;
+  background: rgba(0,0,0,0.25);
+  border-radius: 4px;
+  font-style: italic;
+}
+.euchre-result,
+.euchre-done {
+  background: rgba(0,0,0,0.55) !important;
+  border: 2px solid #ffb74d !important;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}

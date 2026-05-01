@@ -1,16 +1,103 @@
-.cala-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.cala-title { font-size:1.1rem; font-weight:700; color:#00695c; text-align:center; }
-.cala-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.cala-cpu, .cala-trick, .cala-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.cala-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.cala-back-row, .cala-trick-row, .cala-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.cala-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #00695c 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.cala-empty { opacity:0.5; }
-.cala-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.cala-slot-label { font-size:0.7rem; opacity:0.7; }
-.cala-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.cala-hand .card { cursor: pointer; transition: transform 0.1s; }
-.cala-hand .card:hover { transform: translateY(-6px); }
-.cala-dim { opacity:0.4; cursor:not-allowed; }
-.cala-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #00695c; }
-.cala-result h2 { margin:0 0 0.5rem 0; color:#00695c; }
+/* Themed: family=italian (tuscan red felt) — unique prefix calac */
+.calac-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #4a1410 0%, #1a0604 100%);
+  color: #fff8e1;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.calac-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.calac-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffb300;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.calac-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #ff8a6533;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.calac-cpu, .calac-trick, .calac-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.calac-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ff8a65;
+}
+.calac-back-row, .calac-trick-row, .calac-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.calac-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffb300 0 4px, #1a0604 4px 8px);
+  border: 1px solid #ffb30044;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.calac-empty { opacity: 0.5; }
+.calac-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.calac-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.calac-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffb300;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff8e1;
+}
+.calac-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.calac-hand .card:hover { transform: translateY(-6px); }
+.calac-dim { opacity: 0.4; cursor: not-allowed; }
+.calac-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffb300;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.calac-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffb300;
+  letter-spacing: 0.05em;
+}

@@ -11,7 +11,7 @@ export function CoincheGame({ state, dispatch, onGameOver }: GameProps<CoincheSt
       dispatch={(a) => dispatch(a as CoincheAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="coin"
+      prefix="coincc"
       title="Coinche"
     />
   );

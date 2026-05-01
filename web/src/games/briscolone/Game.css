@@ -1,16 +1,103 @@
-.bris-l-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.bris-l-title { font-size:1.1rem; font-weight:700; color:#0097a7; text-align:center; }
-.bris-l-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.bris-l-cpu, .bris-l-trick, .bris-l-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.bris-l-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.bris-l-back-row, .bris-l-trick-row, .bris-l-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.bris-l-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #0097a7 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.bris-l-empty { opacity:0.5; }
-.bris-l-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.bris-l-slot-label { font-size:0.7rem; opacity:0.7; }
-.bris-l-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.bris-l-hand .card { cursor: pointer; transition: transform 0.1s; }
-.bris-l-hand .card:hover { transform: translateY(-6px); }
-.bris-l-dim { opacity:0.4; cursor:not-allowed; }
-.bris-l-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #0097a7; }
-.bris-l-result h2 { margin:0 0 0.5rem 0; color:#0097a7; }
+/* Themed: family=italian (tuscan red felt) — unique prefix brislc */
+.brislc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #4a1410 0%, #1a0604 100%);
+  color: #fff8e1;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.brislc-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.brislc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffb300;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.brislc-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #ff8a6533;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.brislc-cpu, .brislc-trick, .brislc-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.brislc-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ff8a65;
+}
+.brislc-back-row, .brislc-trick-row, .brislc-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.brislc-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffb300 0 4px, #1a0604 4px 8px);
+  border: 1px solid #ffb30044;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.brislc-empty { opacity: 0.5; }
+.brislc-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.brislc-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.brislc-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffb300;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff8e1;
+}
+.brislc-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.brislc-hand .card:hover { transform: translateY(-6px); }
+.brislc-dim { opacity: 0.4; cursor: not-allowed; }
+.brislc-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffb300;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.brislc-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffb300;
+  letter-spacing: 0.05em;
+}

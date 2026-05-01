@@ -11,7 +11,7 @@ export function SoloWhistGame({ state, dispatch, onGameOver }: GameProps<SoloWhi
       dispatch={(a) => dispatch(a as SoloWhistAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="solo-wh"
+      prefix="solowh"
       title="Solo Whist"
     />
   );

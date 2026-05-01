@@ -11,7 +11,7 @@ export function CalabresellaGame({ state, dispatch, onGameOver }: GameProps<Cala
       dispatch={(a) => dispatch(a as CalabresellaAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="cala"
+      prefix="calac"
       title="Calabresella"
     />
   );

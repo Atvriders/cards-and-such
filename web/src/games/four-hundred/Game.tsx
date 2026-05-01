@@ -11,7 +11,7 @@ export function FourHundredGame({ state, dispatch, onGameOver }: GameProps<FourH
       dispatch={(a) => dispatch(a as FourHundredAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="f400"
+      prefix="f400c"
       title="Four Hundred"
     />
   );

@@ -11,7 +11,7 @@ export function BidWhistGame({ state, dispatch, onGameOver }: GameProps<BidWhist
       dispatch={(a) => dispatch(a as BidWhistAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="bid-wh"
+      prefix="bidwh"
       title="Bid Whist"
     />
   );

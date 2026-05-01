@@ -11,7 +11,7 @@ export function KittyWhistGame({ state, dispatch, onGameOver }: GameProps<KittyW
       dispatch={(a) => dispatch(a as KittyWhistAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="kit-wh"
+      prefix="kitwh"
       title="Kitty Whist"
     />
   );

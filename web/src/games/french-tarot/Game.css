@@ -1,16 +1,103 @@
-.fr-tar-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.fr-tar-title { font-size:1.1rem; font-weight:700; color:#7e57c2; text-align:center; }
-.fr-tar-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.fr-tar-cpu, .fr-tar-trick, .fr-tar-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.fr-tar-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.fr-tar-back-row, .fr-tar-trick-row, .fr-tar-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.fr-tar-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #7e57c2 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.fr-tar-empty { opacity:0.5; }
-.fr-tar-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.fr-tar-slot-label { font-size:0.7rem; opacity:0.7; }
-.fr-tar-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.fr-tar-hand .card { cursor: pointer; transition: transform 0.1s; }
-.fr-tar-hand .card:hover { transform: translateY(-6px); }
-.fr-tar-dim { opacity:0.4; cursor:not-allowed; }
-.fr-tar-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #7e57c2; }
-.fr-tar-result h2 { margin:0 0 0.5rem 0; color:#7e57c2; }
+/* Themed: family=tarot (indigo + gold) — unique prefix frtarc */
+.frtarc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #1a1255 0%, #070428 100%);
+  color: #fff8dc;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.frtarc-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.frtarc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffd700;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.frtarc-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #d4af3733;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.frtarc-cpu, .frtarc-trick, .frtarc-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.frtarc-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d4af37;
+}
+.frtarc-back-row, .frtarc-trick-row, .frtarc-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.frtarc-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffd700 0 4px, #070428 4px 8px);
+  border: 1px solid #ffd70044;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.frtarc-empty { opacity: 0.5; }
+.frtarc-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.frtarc-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.frtarc-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffd700;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff8dc;
+}
+.frtarc-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.frtarc-hand .card:hover { transform: translateY(-6px); }
+.frtarc-dim { opacity: 0.4; cursor: not-allowed; }
+.frtarc-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffd700;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.frtarc-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffd700;
+  letter-spacing: 0.05em;
+}

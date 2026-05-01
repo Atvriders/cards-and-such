@@ -11,7 +11,7 @@ export function CirullaGame({ state, dispatch, onGameOver }: GameProps<CirullaSt
       dispatch={(a) => dispatch(a as CirullaAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="cir"
+      prefix="cirullc"
       title="Cirulla"
     />
   );

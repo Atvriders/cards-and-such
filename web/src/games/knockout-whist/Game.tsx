@@ -11,7 +11,7 @@ export function KnockoutWhistGame({ state, dispatch, onGameOver }: GameProps<Kno
       dispatch={(a) => dispatch(a as KnockoutWhistAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="ko-wh"
+      prefix="kowh"
       title="Knockout Whist"
     />
   );

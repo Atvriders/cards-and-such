@@ -11,7 +11,7 @@ export function MadrassoTrickGame({ state, dispatch, onGameOver }: GameProps<Mad
       dispatch={(a) => dispatch(a as MadrassoTrickAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="madr"
+      prefix="madrc"
       title="Madrasso"
     />
   );

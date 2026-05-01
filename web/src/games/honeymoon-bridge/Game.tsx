@@ -11,7 +11,7 @@ export function HoneymoonBridgeGame({ state, dispatch, onGameOver }: GameProps<H
       dispatch={(a) => dispatch(a as HoneymoonBridgeAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="hm-b"
+      prefix="honeyb"
       title="Honeymoon Bridge"
     />
   );

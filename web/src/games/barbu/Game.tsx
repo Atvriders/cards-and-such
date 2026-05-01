@@ -11,7 +11,7 @@ export function BarbuGame({ state, dispatch, onGameOver }: GameProps<BarbuState,
       dispatch={(a) => dispatch(a as BarbuAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="barb"
+      prefix="barbuc"
       title="Barbu"
     />
   );

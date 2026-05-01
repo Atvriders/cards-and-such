@@ -11,7 +11,7 @@ export function DuplicateBridgeGame({ state, dispatch, onGameOver }: GameProps<D
       dispatch={(a) => dispatch(a as DuplicateBridgeAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="dup-b"
+      prefix="dupb"
       title="Duplicate Bridge"
     />
   );

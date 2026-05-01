@@ -11,7 +11,7 @@ export function WenzGame({ state, dispatch, onGameOver }: GameProps<WenzState, W
       dispatch={(a) => dispatch(a as WenzAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="wenz"
+      prefix="wenzc"
       title="Wenz"
     />
   );

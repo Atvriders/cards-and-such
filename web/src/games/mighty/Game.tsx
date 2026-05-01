@@ -11,7 +11,7 @@ export function MightyGame({ state, dispatch, onGameOver }: GameProps<MightyStat
       dispatch={(a) => dispatch(a as MightyAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="mty"
+      prefix="mightyc"
       title="Mighty"
     />
   );

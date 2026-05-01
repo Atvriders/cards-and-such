@@ -11,7 +11,7 @@ export function KonigrufenGame({ state, dispatch, onGameOver }: GameProps<Konigr
       dispatch={(a) => dispatch(a as KonigrufenAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="kon"
+      prefix="konigc"
       title="Königrufen"
     />
   );

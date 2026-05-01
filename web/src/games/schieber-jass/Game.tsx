@@ -11,7 +11,7 @@ export function SchieberJassGame({ state, dispatch, onGameOver }: GameProps<Schi
       dispatch={(a) => dispatch(a as SchieberJassAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="sch-j"
+      prefix="schjc"
       title="Schieber Jass"
     />
   );

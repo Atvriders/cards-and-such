@@ -1,16 +1,103 @@
-.geier-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.geier-title { font-size:1.1rem; font-weight:700; color:#ffa000; text-align:center; }
-.geier-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.geier-cpu, .geier-trick, .geier-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.geier-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.geier-back-row, .geier-trick-row, .geier-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.geier-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #ffa000 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.geier-empty { opacity:0.5; }
-.geier-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.geier-slot-label { font-size:0.7rem; opacity:0.7; }
-.geier-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.geier-hand .card { cursor: pointer; transition: transform 0.1s; }
-.geier-hand .card:hover { transform: translateY(-6px); }
-.geier-dim { opacity:0.4; cursor:not-allowed; }
-.geier-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #ffa000; }
-.geier-result h2 { margin:0 0 0.5rem 0; color:#ffa000; }
+/* Themed: family=schafkopf (Bavarian blue + gold) — unique prefix geierc */
+.geierc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #0e2a55 0%, #03102a 100%);
+  color: #e3f2fd;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.geierc-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.geierc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffd54f;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.geierc-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #90caf933;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.geierc-cpu, .geierc-trick, .geierc-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.geierc-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #90caf9;
+}
+.geierc-back-row, .geierc-trick-row, .geierc-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.geierc-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffd54f 0 4px, #03102a 4px 8px);
+  border: 1px solid #ffd54f44;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.geierc-empty { opacity: 0.5; }
+.geierc-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.geierc-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.geierc-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffd54f;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #e3f2fd;
+}
+.geierc-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.geierc-hand .card:hover { transform: translateY(-6px); }
+.geierc-dim { opacity: 0.4; cursor: not-allowed; }
+.geierc-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffd54f;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.geierc-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffd54f;
+  letter-spacing: 0.05em;
+}

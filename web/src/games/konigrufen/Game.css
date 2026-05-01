@@ -1,16 +1,103 @@
-.kon-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.kon-title { font-size:1.1rem; font-weight:700; color:#512da8; text-align:center; }
-.kon-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.kon-cpu, .kon-trick, .kon-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.kon-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.kon-back-row, .kon-trick-row, .kon-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.kon-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #512da8 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.kon-empty { opacity:0.5; }
-.kon-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.kon-slot-label { font-size:0.7rem; opacity:0.7; }
-.kon-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.kon-hand .card { cursor: pointer; transition: transform 0.1s; }
-.kon-hand .card:hover { transform: translateY(-6px); }
-.kon-dim { opacity:0.4; cursor:not-allowed; }
-.kon-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #512da8; }
-.kon-result h2 { margin:0 0 0.5rem 0; color:#512da8; }
+/* Themed: family=tarot (indigo + gold) — unique prefix konigc */
+.konigc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #1a1255 0%, #070428 100%);
+  color: #fff8dc;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.konigc-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.konigc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffd700;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.konigc-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #d4af3733;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.konigc-cpu, .konigc-trick, .konigc-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.konigc-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d4af37;
+}
+.konigc-back-row, .konigc-trick-row, .konigc-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.konigc-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffd700 0 4px, #070428 4px 8px);
+  border: 1px solid #ffd70044;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.konigc-empty { opacity: 0.5; }
+.konigc-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.konigc-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.konigc-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffd700;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff8dc;
+}
+.konigc-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.konigc-hand .card:hover { transform: translateY(-6px); }
+.konigc-dim { opacity: 0.4; cursor: not-allowed; }
+.konigc-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffd700;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.konigc-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffd700;
+  letter-spacing: 0.05em;
+}

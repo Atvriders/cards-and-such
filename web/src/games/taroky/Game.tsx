@@ -11,7 +11,7 @@ export function TarokyGame({ state, dispatch, onGameOver }: GameProps<TarokyStat
       dispatch={(a) => dispatch(a as TarokyAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="tarky"
+      prefix="tarokyc"
       title="Taroky"
     />
   );

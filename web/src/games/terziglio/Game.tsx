@@ -11,7 +11,7 @@ export function TerziglioGame({ state, dispatch, onGameOver }: GameProps<Terzigl
       dispatch={(a) => dispatch(a as TerziglioAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="terz"
+      prefix="terzc"
       title="Terziglio"
     />
   );

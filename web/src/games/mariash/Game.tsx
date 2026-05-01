@@ -11,7 +11,7 @@ export function MariashGame({ state, dispatch, onGameOver }: GameProps<MariashSt
       dispatch={(a) => dispatch(a as MariashAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="mar"
+      prefix="mariac"
       title="Mariáš"
     />
   );

@@ -1,16 +1,103 @@
-.bid-eu-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.bid-eu-title { font-size:1.1rem; font-weight:700; color:#ffab40; text-align:center; }
-.bid-eu-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.bid-eu-cpu, .bid-eu-trick, .bid-eu-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.bid-eu-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.bid-eu-back-row, .bid-eu-trick-row, .bid-eu-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.bid-eu-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #ffab40 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.bid-eu-empty { opacity:0.5; }
-.bid-eu-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.bid-eu-slot-label { font-size:0.7rem; opacity:0.7; }
-.bid-eu-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.bid-eu-hand .card { cursor: pointer; transition: transform 0.1s; }
-.bid-eu-hand .card:hover { transform: translateY(-6px); }
-.bid-eu-dim { opacity:0.4; cursor:not-allowed; }
-.bid-eu-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #ffab40; }
-.bid-eu-result h2 { margin:0 0 0.5rem 0; color:#ffab40; }
+/* Themed: family=anglo (anglo green + amber) — unique prefix bideu */
+.bideu-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #103626 0%, #04130a 100%);
+  color: #fffaf0;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.bideu-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.bideu-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffb74d;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.bideu-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #ff980033;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.bideu-cpu, .bideu-trick, .bideu-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.bideu-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ff9800;
+}
+.bideu-back-row, .bideu-trick-row, .bideu-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.bideu-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffb74d 0 4px, #04130a 4px 8px);
+  border: 1px solid #ffb74d44;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.bideu-empty { opacity: 0.5; }
+.bideu-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.bideu-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.bideu-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffb74d;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fffaf0;
+}
+.bideu-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.bideu-hand .card:hover { transform: translateY(-6px); }
+.bideu-dim { opacity: 0.4; cursor: not-allowed; }
+.bideu-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffb74d;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.bideu-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffb74d;
+  letter-spacing: 0.05em;
+}

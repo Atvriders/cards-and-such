@@ -1,16 +1,103 @@
-.madr-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.madr-title { font-size:1.1rem; font-weight:700; color:#1de9b6; text-align:center; }
-.madr-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.madr-cpu, .madr-trick, .madr-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.madr-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.madr-back-row, .madr-trick-row, .madr-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.madr-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #1de9b6 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.madr-empty { opacity:0.5; }
-.madr-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.madr-slot-label { font-size:0.7rem; opacity:0.7; }
-.madr-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.madr-hand .card { cursor: pointer; transition: transform 0.1s; }
-.madr-hand .card:hover { transform: translateY(-6px); }
-.madr-dim { opacity:0.4; cursor:not-allowed; }
-.madr-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #1de9b6; }
-.madr-result h2 { margin:0 0 0.5rem 0; color:#1de9b6; }
+/* Themed: family=italian (tuscan red felt) — unique prefix madrc */
+.madrc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #4a1410 0%, #1a0604 100%);
+  color: #fff8e1;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.madrc-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.madrc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffb300;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.madrc-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #ff8a6533;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.madrc-cpu, .madrc-trick, .madrc-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.madrc-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ff8a65;
+}
+.madrc-back-row, .madrc-trick-row, .madrc-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.madrc-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffb300 0 4px, #1a0604 4px 8px);
+  border: 1px solid #ffb30044;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.madrc-empty { opacity: 0.5; }
+.madrc-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.madrc-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.madrc-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffb300;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff8e1;
+}
+.madrc-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.madrc-hand .card:hover { transform: translateY(-6px); }
+.madrc-dim { opacity: 0.4; cursor: not-allowed; }
+.madrc-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffb300;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.madrc-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffb300;
+  letter-spacing: 0.05em;
+}

@@ -11,7 +11,7 @@ export function SoloSchafkopfGame({ state, dispatch, onGameOver }: GameProps<Sol
       dispatch={(a) => dispatch(a as SoloSchafkopfAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="sol-sk"
+      prefix="solskc"
       title="Solo Schafkopf"
     />
   );

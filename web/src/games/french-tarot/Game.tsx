@@ -11,7 +11,7 @@ export function FrenchTarotGame({ state, dispatch, onGameOver }: GameProps<Frenc
       dispatch={(a) => dispatch(a as FrenchTarotAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="fr-tar"
+      prefix="frtarc"
       title="French Tarot"
     />
   );

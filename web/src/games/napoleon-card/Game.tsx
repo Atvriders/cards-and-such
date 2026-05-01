@@ -11,7 +11,7 @@ export function NapoleonCardGame({ state, dispatch, onGameOver }: GameProps<Napo
       dispatch={(a) => dispatch(a as NapoleonCardAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="nap-c"
+      prefix="napcard"
       title="Napoleon"
     />
   );

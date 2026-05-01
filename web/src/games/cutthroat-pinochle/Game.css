@@ -1,16 +1,103 @@
-.cut-pin-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.cut-pin-title { font-size:1.1rem; font-weight:700; color:#ba68c8; text-align:center; }
-.cut-pin-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.cut-pin-cpu, .cut-pin-trick, .cut-pin-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.cut-pin-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.cut-pin-back-row, .cut-pin-trick-row, .cut-pin-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.cut-pin-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #ba68c8 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.cut-pin-empty { opacity:0.5; }
-.cut-pin-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.cut-pin-slot-label { font-size:0.7rem; opacity:0.7; }
-.cut-pin-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.cut-pin-hand .card { cursor: pointer; transition: transform 0.1s; }
-.cut-pin-hand .card:hover { transform: translateY(-6px); }
-.cut-pin-dim { opacity:0.4; cursor:not-allowed; }
-.cut-pin-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #ba68c8; }
-.cut-pin-result h2 { margin:0 0 0.5rem 0; color:#ba68c8; }
+/* Themed: family=pinochle (burgundy felt) — unique prefix cutpinc */
+.cutpinc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #3a0d18 0%, #180408 100%);
+  color: #fff5e6;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.cutpinc-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.cutpinc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffcc80;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.cutpinc-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #e6a86a33;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.cutpinc-cpu, .cutpinc-trick, .cutpinc-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.cutpinc-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e6a86a;
+}
+.cutpinc-back-row, .cutpinc-trick-row, .cutpinc-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.cutpinc-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffcc80 0 4px, #180408 4px 8px);
+  border: 1px solid #ffcc8044;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.cutpinc-empty { opacity: 0.5; }
+.cutpinc-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.cutpinc-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.cutpinc-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffcc80;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff5e6;
+}
+.cutpinc-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.cutpinc-hand .card:hover { transform: translateY(-6px); }
+.cutpinc-dim { opacity: 0.4; cursor: not-allowed; }
+.cutpinc-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffcc80;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.cutpinc-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffcc80;
+  letter-spacing: 0.05em;
+}

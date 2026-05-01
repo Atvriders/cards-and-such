@@ -11,7 +11,7 @@ export function ChibreGame({ state, dispatch, onGameOver }: GameProps<ChibreStat
       dispatch={(a) => dispatch(a as ChibreAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="chib"
+      prefix="chibrc"
       title="Chibre"
     />
   );

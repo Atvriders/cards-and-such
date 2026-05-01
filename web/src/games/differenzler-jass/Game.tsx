@@ -11,7 +11,7 @@ export function DifferenzlerJassGame({ state, dispatch, onGameOver }: GameProps<
       dispatch={(a) => dispatch(a as DifferenzlerJassAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="dif-j"
+      prefix="difjc"
       title="Differenzler Jass"
     />
   );

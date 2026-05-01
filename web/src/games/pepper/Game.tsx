@@ -11,7 +11,7 @@ export function PepperGame({ state, dispatch, onGameOver }: GameProps<PepperStat
       dispatch={(a) => dispatch(a as PepperAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="pep"
+      prefix="pepperc"
       title="Pepper"
     />
   );

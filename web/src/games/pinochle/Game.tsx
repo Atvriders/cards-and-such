@@ -11,7 +11,7 @@ export function PinochleGame({ state, dispatch, onGameOver }: GameProps<Pinochle
       dispatch={(a) => dispatch(a as PinochleAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="pin"
+      prefix="pinc"
       title="Pinochle"
     />
   );

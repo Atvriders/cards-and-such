@@ -11,7 +11,7 @@ export function TressetteGame({ state, dispatch, onGameOver }: GameProps<Tresset
       dispatch={(a) => dispatch(a as TressetteAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="tre"
+      prefix="trec"
       title="Tressette"
     />
   );

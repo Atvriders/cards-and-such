@@ -11,7 +11,7 @@ export function TressetteNonPrendereGame({ state, dispatch, onGameOver }: GamePr
       dispatch={(a) => dispatch(a as TressetteNonPrendereAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="tre-np"
+      prefix="trenpc"
       title="Tressette Non Prendere"
     />
   );

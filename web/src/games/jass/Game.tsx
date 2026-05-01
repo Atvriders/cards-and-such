@@ -11,7 +11,7 @@ export function JassGame({ state, dispatch, onGameOver }: GameProps<JassState, J
       dispatch={(a) => dispatch(a as JassAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="jass"
+      prefix="jassc"
       title="Jass"
     />
   );

@@ -11,7 +11,7 @@ export function RubberBridgeGame({ state, dispatch, onGameOver }: GameProps<Rubb
       dispatch={(a) => dispatch(a as RubberBridgeAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="rub-b"
+      prefix="rubberb"
       title="Rubber Bridge"
     />
   );

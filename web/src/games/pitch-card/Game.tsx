@@ -11,7 +11,7 @@ export function PitchGame({ state, dispatch, onGameOver }: GameProps<PitchState,
       dispatch={(a) => dispatch(a as PitchAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="pitch"
+      prefix="pitchc"
       title="Pitch"
     />
   );

@@ -11,7 +11,7 @@ export function CutthroatPinochleGame({ state, dispatch, onGameOver }: GameProps
       dispatch={(a) => dispatch(a as CutthroatPinochleAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="cut-pin"
+      prefix="cutpinc"
       title="Cutthroat Pinochle"
     />
   );

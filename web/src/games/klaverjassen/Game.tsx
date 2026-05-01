@@ -11,7 +11,7 @@ export function KlaverjassenGame({ state, dispatch, onGameOver }: GameProps<Klav
       dispatch={(a) => dispatch(a as KlaverjassenAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="klav"
+      prefix="klavc"
       title="Klaverjassen"
     />
   );

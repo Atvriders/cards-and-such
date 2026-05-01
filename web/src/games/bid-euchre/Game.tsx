@@ -11,7 +11,7 @@ export function BidEuchreGame({ state, dispatch, onGameOver }: GameProps<BidEuch
       dispatch={(a) => dispatch(a as BidEuchreAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="bid-eu"
+      prefix="bideu"
       title="Bid Euchre"
     />
   );

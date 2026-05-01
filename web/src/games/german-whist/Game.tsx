@@ -11,7 +11,7 @@ export function GermanWhistGame({ state, dispatch, onGameOver }: GameProps<Germa
       dispatch={(a) => dispatch(a as GermanWhistAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="ger-wh"
+      prefix="gerwh"
       title="German Whist"
     />
   );

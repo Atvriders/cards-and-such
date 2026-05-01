@@ -11,7 +11,7 @@ export function MiniBridgeGame({ state, dispatch, onGameOver }: GameProps<MiniBr
       dispatch={(a) => dispatch(a as MiniBridgeAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="mini-b"
+      prefix="minib"
       title="Mini Bridge"
     />
   );

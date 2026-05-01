@@ -1,16 +1,103 @@
-.bris-c-wrap { display:flex; flex-direction:column; gap:0.75rem; padding:1rem; min-height:100%; background: linear-gradient(180deg,#0a3d2c,#072019); color:#f5f5f5; font-family: system-ui, sans-serif; }
-.bris-c-title { font-size:1.1rem; font-weight:700; color:#00bcd4; text-align:center; }
-.bris-c-header { display:flex; justify-content:space-around; gap:0.5rem; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:6px; font-size:0.9rem; flex-wrap:wrap; }
-.bris-c-cpu, .bris-c-trick, .bris-c-player { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
-.bris-c-label { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:0.05rem; }
-.bris-c-back-row, .bris-c-trick-row, .bris-c-hand { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; min-height:4.5rem; }
-.bris-c-back { width:2.6rem; height:3.8rem; border-radius:4px; background: repeating-linear-gradient(45deg, #00bcd4 0 4px, #112 4px 8px); border:1px solid rgba(255,255,255,0.2); }
-.bris-c-empty { opacity:0.5; }
-.bris-c-trick-slot { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-.bris-c-slot-label { font-size:0.7rem; opacity:0.7; }
-.bris-c-status { text-align:center; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:6px; min-height:2rem; font-style:italic; }
-.bris-c-hand .card { cursor: pointer; transition: transform 0.1s; }
-.bris-c-hand .card:hover { transform: translateY(-6px); }
-.bris-c-dim { opacity:0.4; cursor:not-allowed; }
-.bris-c-result { background:rgba(0,0,0,0.5); padding:1rem; border-radius:8px; text-align:center; border:2px solid #00bcd4; }
-.bris-c-result h2 { margin:0 0 0.5rem 0; color:#00bcd4; }
+/* Themed: family=italian (tuscan red felt) — unique prefix briscch */
+.briscch-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #4a1410 0%, #1a0604 100%);
+  color: #fff8e1;
+  font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", system-ui, serif;
+  position: relative;
+}
+.briscch-wrap::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px);
+  pointer-events: none;
+}
+.briscch-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffb300;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.briscch-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid #ff8a6533;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.briscch-cpu, .briscch-trick, .briscch-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.briscch-label {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ff8a65;
+}
+.briscch-back-row, .briscch-trick-row, .briscch-hand {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 4.5rem;
+}
+.briscch-back {
+  width: 2.6rem;
+  height: 3.8rem;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, #ffb300 0 4px, #1a0604 4px 8px);
+  border: 1px solid #ffb30044;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.briscch-empty { opacity: 0.5; }
+.briscch-trick-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.briscch-slot-label { font-size: 0.7rem; opacity: 0.7; }
+.briscch-status {
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.25);
+  border-left: 3px solid #ffb300;
+  border-radius: 4px;
+  min-height: 2rem;
+  font-style: italic;
+  color: #fff8e1;
+}
+.briscch-hand .card { cursor: pointer; transition: transform 0.12s ease-out; }
+.briscch-hand .card:hover { transform: translateY(-6px); }
+.briscch-dim { opacity: 0.4; cursor: not-allowed; }
+.briscch-result {
+  background: rgba(0,0,0,0.55);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #ffb300;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.briscch-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffb300;
+  letter-spacing: 0.05em;
+}

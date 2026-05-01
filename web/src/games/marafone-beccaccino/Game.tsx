@@ -11,7 +11,7 @@ export function MarafoneGame({ state, dispatch, onGameOver }: GameProps<Marafone
       dispatch={(a) => dispatch(a as MarafoneAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="maraf"
+      prefix="marafc"
       title="Marafone (Beccaccino)"
     />
   );

@@ -11,7 +11,7 @@ export function DoubleDeckPinochleGame({ state, dispatch, onGameOver }: GameProp
       dispatch={(a) => dispatch(a as DoubleDeckPinochleAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="dd-pin"
+      prefix="ddpinc"
       title="Double-Deck Pinochle"
     />
   );

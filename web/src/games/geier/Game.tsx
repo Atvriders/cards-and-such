@@ -11,7 +11,7 @@ export function GeierGame({ state, dispatch, onGameOver }: GameProps<GeierState,
       dispatch={(a) => dispatch(a as GeierAction)}
       onGameOver={onGameOver}
       isTerminal={isTerminal}
-      prefix="geier"
+      prefix="geierc"
       title="Geier"
     />
   );
