@@ -47,3 +47,48 @@
 .ofc-cardlabel { font-size: 0.85rem; opacity: 0.8; }
 .ofc-cardbox { padding: 0.3rem; }
 .ofc-placeactions { display: flex; gap: 0.6rem; }
+
+
+/* === poker-theme:chinese-jade === unique-class .thmOFC === */
+.thmOFC,
+.thmOFC.dm-wrap,
+.thmOFC.holdem-wrap,
+.thmOFC.g-wrap,
+.thmOFC .dm-wrap,
+.thmOFC .holdem-wrap,
+.thmOFC .holdem-table,
+.thmOFC .g-wrap,
+.thmOFC .open-face-chinese-felt,
+.thmOFC [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #1f7a5a 0%, #0d4a36 60%, #021a12 100%) !important;
+  color: #e6fff4 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #9be6c8;
+  --theme-accent2: #d0fce6;
+  --theme-ink: #e6fff4;
+  --theme-rim: #06281c;
+}
+.thmOFC .dm-score,
+.thmOFC .holdem-pot-amount,
+.thmOFC [class$="-stack"],
+.thmOFC [class$="-pot-amount"] {
+  color: #d0fce6 !important;
+  text-shadow: 0 0 18px #9be6c855;
+}
+.thmOFC .dm-info,
+.thmOFC [class$="-hud"],
+.thmOFC [class$="-stat"] {
+  border-color: #9be6c855 !important;
+}
+.thmOFC .dm-card,
+.thmOFC .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #9be6c822;
+}
+.thmOFC .dm-btn,
+.thmOFC [class*="-btn"] {
+  border-color: #9be6c855 !important;
+}

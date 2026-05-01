@@ -5,16 +5,16 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function PointsRummyRGame({ state, dispatch, onGameOver }: GameProps<GState, object>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="ptsr-wrap"><div className="ptsr-done"><h2>Done!</h2><div className="ptsr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="dm-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+    <div className="ptsr-wrap">
+      <div className="ptsr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="ptsr-score">{state.score} pts</div>
+      <div className="ptsr-row">{state.hand.map((c, i) => <div key={i} className={`ptsr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <button className="ptsr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <div className="ptsr-result">{state.result} — +{state.pts}</div>
+        <button className="ptsr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

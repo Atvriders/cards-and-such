@@ -1,4 +1,4 @@
-/* bull-bear-market — unique class prefix bz-bbm- */
+/* Bull Bear Market — unique class prefix bz-bbm- (themed) */
 .bz-bbm-wrap {
   max-width: 600px;
   margin: 0 auto;
@@ -8,15 +8,19 @@
   flex-direction: column;
   gap: 14px;
   align-items: center;
-  color: #f1f5f9;
-  background: linear-gradient(140deg, #155e75, #083344);
+  color: #e0f2fe;
+  background: linear-gradient(140deg, #0f172a, #1a1f3a);
   border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
 }
 .bz-bbm-title {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #22c55e;
+  text-shadow: 0 1px 2px #05070d;
 }
 .bz-bbm-stats {
   display: flex;
@@ -26,12 +30,14 @@
   font-family: "JetBrains Mono", monospace;
 }
 .bz-bbm-stats > div {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.07);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.82rem;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid #22c55e33;
+  color: #e0f2fe;
 }
+.bz-bbm-stats b { color: #22c55e; }
 .bz-bbm-actions {
   display: flex;
   flex-wrap: wrap;
@@ -43,21 +49,24 @@
   border: 0;
   border-radius: 8px;
   cursor: pointer;
-  background: #4f46e5;
-  color: #fff;
+  background: #22c55e;
+  color: #05070d;
   font-weight: 700;
   font-family: "Inter", sans-serif;
-  transition: background 120ms;
+  transition: background 120ms, transform 80ms;
+  letter-spacing: 0.02em;
 }
-.bz-bbm-actions > button:hover { background: #4338ca; }
+.bz-bbm-actions > button:hover { background: #16a34a; transform: translateY(-1px); }
+.bz-bbm-actions > button:active { transform: translateY(0); }
 .bz-bbm-event {
-  background: rgba(255,209,102,0.12);
-  border: 1px solid rgba(255,209,102,0.3);
+  background: #ef444422;
+  border: 1px solid #ef444455;
   padding: 12px 16px;
   border-radius: 8px;
   max-width: 480px;
   text-align: center;
   font-size: 0.9rem;
+  color: #fecaca;
 }
 .bz-bbm-event button {
   margin-top: 10px;
@@ -66,15 +75,17 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: 700;
-  background: #06d6a0;
-  color: #0a1521;
+  background: #ef4444;
+  color: #05070d;
 }
+.bz-bbm-event button:hover { filter: brightness(1.1); }
 .bz-bbm-done {
-  background: rgba(6,214,160,0.12);
-  border: 1px solid rgba(6,214,160,0.3);
+  background: #22c55e22;
+  border: 1px solid #22c55e55;
   padding: 16px 24px;
   border-radius: 10px;
   text-align: center;
   font-weight: 800;
   font-family: "JetBrains Mono", monospace;
+  color: #22c55e;
 }

@@ -1,23 +1,23 @@
-.word-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px;font-family:sans-serif;max-width:640px;margin:0 auto; }
-.word-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.word-progress { font-size:0.95rem;color:#555; }
-.word-score { font-size:1.1rem;font-weight:700;color:#27ae60; }
-.word-prompt { font-size:1.25rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.word-label { font-weight:900;color:#7f8c8d;text-transform:uppercase;font-size:0.85rem;margin-right:6px; }
-.word-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
-.word-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;text-align:left; }
-.word-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.word-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.word-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.word-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.word-choice-letter { font-weight:900;color:#95a5a6;min-width:24px; }
-.word-actions { display:flex;gap:12px; }
-.word-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer; }
-.word-btn.submit { background:#27ae60;color:#fff; }
-.word-btn.next { background:#3498db;color:#fff; }
-.word-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.word-feedback { font-size:1.05rem;font-weight:700;padding:8px 18px;border-radius:8px; }
-.word-feedback.correct { background:#eafaf1;color:#1e8449; }
-.word-feedback.wrong { background:#fdedec;color:#c0392b; }
-.word-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:16px;width:100%; }
-.word-done h2 { margin-bottom:8px; }
+.blr-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:22px;font-family:'Inter',sans-serif;max-width:640px;margin:0 auto;background:#e3f2fd;color:#0d3b66;border-radius:14px; }
+.blr-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
+.blr-progress { font-size:0.95rem;color:#0d3b66;opacity:0.7; }
+.blr-score { font-size:1.1rem;font-weight:800;color:#1976d2; }
+.blr-prompt { font-size:1.2rem;font-weight:700;text-align:center;color:#0d3b66;line-height:1.4;background:#ffffff;padding:12px 18px;border-radius:10px;border:1px solid #90caf9; }
+.blr-label { font-weight:900;color:#ff6f00;text-transform:uppercase;font-size:0.85rem;margin-right:6px;letter-spacing:0.05em; }
+.blr-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
+.blr-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #90caf9;border-radius:10px;background:#ffffff;cursor:pointer;font-size:1rem;text-align:left;color:#0d3b66;font-family:inherit;transition:transform .08s ease,border-color .15s ease,background .15s ease; }
+.blr-choice:hover:not(:disabled) { border-color:#1976d2;transform:translateY(-1px); }
+.blr-choice.selected { border-color:#1976d2;background:#ffffff;box-shadow:0 0 0 3px #1976d233; }
+.blr-choice.correct { border-color:#43a047;background:#43a04722;color:#0d3b66; }
+.blr-choice.wrong { border-color:#e53935;background:#e5393522; }
+.blr-choice-letter, .blr-letter { font-weight:900;color:#ff6f00;min-width:24px;font-family:'Inter',sans-serif; }
+.blr-actions { display:flex;gap:12px; }
+.blr-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:800;cursor:pointer;font-family:inherit;letter-spacing:0.03em; }
+.blr-btn.submit { background:#1976d2;color:#fff; }
+.blr-btn.next { background:#ff6f00;color:#fff; }
+.blr-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.blr-feedback { font-size:1.05rem;font-weight:800;padding:8px 18px;border-radius:8px; }
+.blr-feedback.correct { background:#43a04722;color:#43a047; }
+.blr-feedback.wrong { background:#e5393522;color:#e53935; }
+.blr-done { text-align:center;padding:28px;background:#ffffff;border-radius:16px;width:100%;border:1px solid #90caf9; }
+.blr-done h2 { margin-bottom:8px;color:#1976d2; }

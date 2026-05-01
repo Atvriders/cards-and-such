@@ -9,11 +9,11 @@ export function FiveCardStudClassicGame({ state, dispatch, onGameOver }: GamePro
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
   if (state.phase === "gameover") return (
-    <div className="g-wrap"><h2>Game Over</h2><p className="g-final">Final Score: {state.score}</p></div>
+    <div className="g-wrap thm5StudCl"><h2>Game Over</h2><p className="g-final">Final Score: {state.score}</p></div>
   );
 
   return (
-    <div className="g-wrap">
+    <div className="g-wrap thm5StudCl">
       <div className="g-header">
         <span>Round {state.round} / {state.maxRounds}</span>
         <span className="g-score">Score: {state.score}</span>

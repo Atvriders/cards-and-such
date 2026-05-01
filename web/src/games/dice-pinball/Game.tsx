@@ -8,26 +8,26 @@ export function DicePinballGame({ state, dispatch, onGameOver }: GameProps<DiceP
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dpb-wrap"><div className="dpb-done"><h2>Tilt!</h2><div className="dpb-final">{t?.score} pts</div></div></div>;
+    return <div className="dpnb-wrap dpnb-theme"><div className="dpnb-done"><h2>Tilt!</h2><div className="dpnb-final">{t?.score} pts</div></div></div>;
   }
   return (
-    <div className="dpb-wrap">
-      <div className="dpb-header">Round {state.round}/{TOTAL_ROUNDS} <span className="dpb-score">{state.score}</span></div>
-      <div className="dpb-board">
+    <div className="dpnb-wrap dpnb-theme">
+      <div className="dpnb-header">Round {state.round}/{TOTAL_ROUNDS} <span className="dpnb-score">{state.score}</span></div>
+      <div className="dpnb-board">
         {state.dice ? (
           <>
-            <div className="dpb-dice">{PIPS[state.dice[0] - 1]}{PIPS[state.dice[1] - 1]}</div>
-            <div className="dpb-mult">x{state.multiplier} multiplier</div>
-            <div className="dpb-points">+{state.history[state.history.length - 1]}</div>
+            <div className="dpnb-dice">{PIPS[state.dice[0] - 1]}{PIPS[state.dice[1] - 1]}</div>
+            <div className="dpnb-mult">x{state.multiplier} multiplier</div>
+            <div className="dpnb-points">+{state.history[state.history.length - 1]}</div>
           </>
         ) : (
-          <div className="dpb-empty">Press LAUNCH</div>
+          <div className="dpnb-empty">Press LAUNCH</div>
         )}
       </div>
       {state.phase === "idle" ? (
-        <button className="dpb-btn launch" onClick={() => dispatch({ type:"launch" } as DicePinballAction)}>LAUNCH</button>
+        <button className="dpnb-btn launch" onClick={() => dispatch({ type:"launch" } as DicePinballAction)}>LAUNCH</button>
       ) : (
-        <button className="dpb-btn next" onClick={() => dispatch({ type:"next" } as DicePinballAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next Round"}</button>
+        <button className="dpnb-btn next" onClick={() => dispatch({ type:"next" } as DicePinballAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next Round"}</button>
       )}
     </div>
   );

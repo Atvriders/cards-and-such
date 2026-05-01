@@ -15,25 +15,25 @@ export function TrayMemoryGame({ state, dispatch, onGameOver }: GameProps<TrayMe
   }, [state.currentIndex]);
 
   if (state.phase === "done") {
-    return <div className="gtrayme-wrap"><div className="gtrayme-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="gtrayme-final">{state.score} pts</div></div></div>;
+    return <div className="traymem-wrap"><div className="traymem-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="traymem-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="gtrayme-wrap">
-      <div className="gtrayme-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="gtrayme-score">{state.score} pts</div>
+    <div className="traymem-wrap">
+      <div className="traymem-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
+      <div className="traymem-score">{state.score} pts</div>
       {showTray ? (
         <>
-          <div className="gtrayme-prompt">Memorize the tray (3.5s)</div>
-          <div className="gtrayme-tray">{r.tray.map((it, i) => <span key={i} className="gtrayme-trayitem">{it}</span>)}</div>
-          <button className="gtrayme-btn submit" onClick={() => setShowTray(false)}>Ready</button>
+          <div className="traymem-prompt">Memorize the tray (3.5s)</div>
+          <div className="traymem-tray">{r.tray.map((it, i) => <span key={i} className="traymem-trayitem">{it}</span>)}</div>
+          <button className="traymem-btn submit" onClick={() => setShowTray(false)}>Ready</button>
         </>
       ) : (
         <>
-          <div className="gtrayme-prompt">{r.question}</div>
-          <div className="gtrayme-grid">
+          <div className="traymem-prompt">{r.question}</div>
+          <div className="traymem-grid">
             {r.choices.map((n, i) => {
-              let cls = "gtrayme-cell";
+              let cls = "traymem-cell";
               if (state.submitted) {
                 if (i === r.correct) cls += " correct";
                 else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
@@ -41,8 +41,8 @@ export function TrayMemoryGame({ state, dispatch, onGameOver }: GameProps<TrayMe
               return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as TrayMemoryAction)}>{n}</button>;
             })}
           </div>
-          {!state.submitted && <button className="gtrayme-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as TrayMemoryAction)}>Submit</button>}
-          {state.submitted && <button className="gtrayme-btn next" onClick={() => dispatch({ type: "next" } as TrayMemoryAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
+          {!state.submitted && <button className="traymem-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as TrayMemoryAction)}>Submit</button>}
+          {state.submitted && <button className="traymem-btn next" onClick={() => dispatch({ type: "next" } as TrayMemoryAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
         </>
       )}
     </div>

@@ -12,8 +12,8 @@ export function WordBingoMiniGame({ state, dispatch, onGameOver }: GameProps<Wor
 
   if (state.phase === "done") {
     return (
-      <div className="word-wrap">
-        <div className="word-done">
+      <div className="wbg-wrap">
+        <div className="wbg-done">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,37 +26,37 @@ export function WordBingoMiniGame({ state, dispatch, onGameOver }: GameProps<Wor
   const isResult = state.phase === "result";
 
   return (
-    <div className="word-wrap">
-      <div className="word-header">
-        <span className="word-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="word-score">{state.score} pts</span>
+    <div className="wbg-wrap">
+      <div className="wbg-header">
+        <span className="wbg-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="wbg-score">{state.score} pts</span>
       </div>
-      <div className="word-prompt"><span className="word-label">Choose:</span> {r.prompt}</div>
-      <div className="word-choices">
+      <div className="wbg-prompt"><span className="wbg-label">Choose:</span> {r.prompt}</div>
+      <div className="wbg-choices">
         {r.choices.map((choice, i) => {
-          let cls = "word-choice";
+          let cls = "wbg-choice";
           if (isResult) {
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as WordBingoMiniAction)}>
-              <span className="word-choice-letter">{LABELS[i]}</span>{choice}
+              <span className="wbg-choice-letter">{LABELS[i]}</span>{choice}
             </button>
           );
         })}
       </div>
       {isResult && (
-        <div className={`word-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
+        <div className={`wbg-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
           {state.selected === r.correct ? "Correct!" : `Answer: ${r.choices[r.correct]}`}
         </div>
       )}
-      <div className="word-actions">
+      <div className="wbg-actions">
         {!isResult && (
-          <button className="word-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as WordBingoMiniAction)}>Submit</button>
+          <button className="wbg-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as WordBingoMiniAction)}>Submit</button>
         )}
         {isResult && (
-          <button className="word-btn next" onClick={() => dispatch({ type: "next" } as WordBingoMiniAction)}>
+          <button className="wbg-btn next" onClick={() => dispatch({ type: "next" } as WordBingoMiniAction)}>
             {state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}
           </button>
         )}

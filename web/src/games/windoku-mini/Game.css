@@ -1,19 +1,77 @@
-.ded-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:640px;margin:0 auto;}
-.ded-header{display:flex;justify-content:space-between;width:100%;}
-.ded-score{font-weight:700;color:#27ae60;}
-.ded-scenario{font-size:1.1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;}
-.ded-clues{align-self:flex-start;background:#f4f6f7;border-left:4px solid #34495e;border-radius:6px;padding:10px 18px 10px 32px;width:100%;box-sizing:border-box;}
-.ded-clues li{margin:4px 0;color:#34495e;}
-.ded-options{display:flex;flex-direction:column;gap:8px;width:100%;}
-.ded-option{padding:10px 14px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;text-align:left;}
-.ded-option:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
-.ded-option.selected{border-color:#3498db;background:#eaf4fb;}
-.ded-option.correct{border-color:#27ae60;background:#eafaf1;}
-.ded-option.wrong{border-color:#e74c3c;background:#fdedec;}
-.ded-actions{display:flex;gap:12px;}
-.ded-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
-.ded-btn.submit{background:#8e44ad;color:#fff;}
-.ded-btn.next{background:#3498db;color:#fff;}
-.ded-btn:disabled{opacity:0.4;cursor:not-allowed;}
-.ded-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
-.ded-final{font-size:1.7rem;font-weight:900;color:#27ae60;}
+.windokusage-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:640px;margin:0 auto;}
+.windokusage-header{display:flex;justify-content:space-between;width:100%;}
+.windokusage-score{font-weight:700;color:#27ae60;}
+.windokusage-scenario{font-size:1.1rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4;}
+.windokusage-clues{align-self:flex-start;background:#f4f6f7;border-left:4px solid #34495e;border-radius:6px;padding:10px 18px 10px 32px;width:100%;box-sizing:border-box;}
+.windokusage-clues li{margin:4px 0;color:#34495e;}
+.windokusage-options{display:flex;flex-direction:column;gap:8px;width:100%;}
+.windokusage-option{padding:10px 14px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;text-align:left;}
+.windokusage-option:hover:not(:disabled){border-color:#3498db;background:#eaf4fb;}
+.windokusage-option.selected{border-color:#3498db;background:#eaf4fb;}
+.windokusage-option.correct{border-color:#27ae60;background:#eafaf1;}
+.windokusage-option.wrong{border-color:#e74c3c;background:#fdedec;}
+.windokusage-actions{display:flex;gap:12px;}
+.windokusage-btn{padding:10px 26px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer;}
+.windokusage-btn.submit{background:#8e44ad;color:#fff;}
+.windokusage-btn.next{background:#3498db;color:#fff;}
+.windokusage-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.windokusage-done{text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;}
+.windokusage-final{font-size:1.7rem;font-weight:900;color:#27ae60;}
+
+
+/* === Theme: sage (Sage windoku — herbal green) === */
+.windokusage {
+  background: #eef0e8;
+  color: #1a2a1a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.windokusage .windokusage-mech,
+.windokusage [class*="-mech"],
+.windokusage [class*="-status"]:not(.solved):not(.win) {
+  color: #5a6a4a;
+}
+.windokusage [class*="-score"],
+.windokusage [class*="-final"] {
+  color: #5a7a4a;
+}
+.windokusage [class*="-grid"] {
+  background: #3a4a2a;
+  border-color: #3a4a2a;
+}
+.windokusage [class*="-cell"] {
+  background: #dde0d4;
+  color: #1a2a1a;
+}
+.windokusage [class*="-cell"].sel,
+.windokusage [class*="-cell"].selected {
+  outline: 3px solid #88a878;
+  outline-offset: -3px;
+}
+.windokusage [class*="-cell"].err,
+.windokusage [class*="-cell"].error,
+.windokusage [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #a83a3a;
+}
+.windokusage [class*="-num"]:hover,
+.windokusage [class*="-numpad"] button:hover {
+  background: #88a878;
+  color: #eef0e8;
+  border-color: #5a7a4a;
+}
+.windokusage [class*="-btn"].check,
+.windokusage [class*="-controls"] button {
+  background: #5a7a4a;
+  color: #eef0e8;
+  border-color: #5a7a4a;
+}
+.windokusage [class*="-btn"].next {
+  background: #88a878;
+  color: #eef0e8;
+}
+.windokusage [class*="-status"].solved,
+.windokusage [class*="-status"].win {
+  color: #5a7a4a;
+}

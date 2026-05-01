@@ -21,11 +21,11 @@ export function NonConsecutiveSudokuGame({ state, dispatch, onGameOver }: GamePr
 
   if (state.phase === "done") {
     return (
-      <div className="nonconsecutivesudoku-wrap">
-        <div className="nonconsecutivesudoku-done">
+      <div className="nonconsecutivesteel-wrap">
+        <div className="nonconsecutivesteel-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="nonconsecutivesudoku-final">{state.score} pts</p>
+          <p className="nonconsecutivesteel-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function NonConsecutiveSudokuGame({ state, dispatch, onGameOver }: GamePr
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="nonconsecutivesudoku-wrap">
-      <div className="nonconsecutivesudoku-header">
+    <div className="nonconsecutivesteel-wrap">
+      <div className="nonconsecutivesteel-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="nonconsecutivesudoku-score">{state.score} pts</span>
+        <span className="nonconsecutivesteel-score">{state.score} pts</span>
       </div>
-      <div className="nonconsecutivesudoku-mech">Sudoku where adjacent cells differ by more than 1.</div>
-      <div className="nonconsecutivesudoku-grid">
+      <div className="nonconsecutivesteel-mech">Sudoku where adjacent cells differ by more than 1.</div>
+      <div className="nonconsecutivesteel-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="nonconsecutivesudoku-row">
+          <div key={r} className="nonconsecutivesteel-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function NonConsecutiveSudokuGame({ state, dispatch, onGameOver }: GamePr
               return (
                 <button
                   key={c}
-                  className={`nonconsecutivesudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`nonconsecutivesteel-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as NonConsecutiveSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function NonConsecutiveSudokuGame({ state, dispatch, onGameOver }: GamePr
           </div>
         ))}
       </div>
-      <div className="nonconsecutivesudoku-pad">
+      <div className="nonconsecutivesteel-pad">
         {digits.map((d) => (
-          <button key={d} className="nonconsecutivesudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as NonConsecutiveSudokuAction)}>{d}</button>
+          <button key={d} className="nonconsecutivesteel-num" onClick={() => dispatch({ type: "enter", digit: d } as NonConsecutiveSudokuAction)}>{d}</button>
         ))}
-        <button className="nonconsecutivesudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as NonConsecutiveSudokuAction)}>×</button>
+        <button className="nonconsecutivesteel-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as NonConsecutiveSudokuAction)}>×</button>
       </div>
-      <div className="nonconsecutivesudoku-actions">
-        <button className="nonconsecutivesudoku-btn check" onClick={() => dispatch({ type: "check" } as NonConsecutiveSudokuAction)}>Check</button>
-        <button className="nonconsecutivesudoku-btn hint" onClick={() => dispatch({ type: "hint" } as NonConsecutiveSudokuAction)}>Hint</button>
-        <button className="nonconsecutivesudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as NonConsecutiveSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="nonconsecutivesteel-actions">
+        <button className="nonconsecutivesteel-btn check" onClick={() => dispatch({ type: "check" } as NonConsecutiveSudokuAction)}>Check</button>
+        <button className="nonconsecutivesteel-btn hint" onClick={() => dispatch({ type: "hint" } as NonConsecutiveSudokuAction)}>Hint</button>
+        <button className="nonconsecutivesteel-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as NonConsecutiveSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="nonconsecutivesudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="nonconsecutivesteel-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

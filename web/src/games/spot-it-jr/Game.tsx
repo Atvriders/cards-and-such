@@ -10,11 +10,11 @@ export function SpotItJrGame({ state, dispatch, onGameOver }: GameProps<SpotItJr
 
   if (state.phase === "done") {
     return (
-      <div className="spitjr-wrap">
-        <div className="spitjr-done">
+      <div className="spotjr-wrap">
+        <div className="spotjr-done">
           <h2>Spotted</h2>
-          <div className="spitjr-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
-          <div className="spitjr-final">{state.score} pts</div>
+          <div className="spotjr-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
+          <div className="spotjr-final">{state.score} pts</div>
         </div>
       </div>
     );
@@ -31,34 +31,34 @@ export function SpotItJrGame({ state, dispatch, onGameOver }: GameProps<SpotItJr
   const isCorrect = state.selected === r.shared;
 
   return (
-    <div className="spitjr-wrap">
-      <div className="spitjr-header">
-        <span className="spitjr-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="spitjr-score">{state.score} pts</span>
+    <div className="spotjr-wrap">
+      <div className="spotjr-header">
+        <span className="spotjr-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="spotjr-score">{state.score} pts</span>
       </div>
-      <div className="spitjr-prompt">Find the symbol on BOTH cards. Click it.</div>
-      <div className="spitjr-cards">
-        <div className="spitjr-card">
+      <div className="spotjr-prompt">Find the symbol on BOTH cards. Click it.</div>
+      <div className="spotjr-cards">
+        <div className="spotjr-card">
           {r.cardA.symbols.map((s, i) => (
-            <button key={"a"+i} className={`spitjr-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"a"+i} className={`spotjr-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
-        <div className="spitjr-vs">vs</div>
-        <div className="spitjr-card">
+        <div className="spotjr-vs">vs</div>
+        <div className="spotjr-card">
           {r.cardB.symbols.map((s, i) => (
-            <button key={"b"+i} className={`spitjr-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"b"+i} className={`spotjr-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
       </div>
       {state.submitted && (
         <>
-          <div className={`spitjr-feedback ${isCorrect ? "ok" : "no"}`}>
+          <div className={`spotjr-feedback ${isCorrect ? "ok" : "no"}`}>
             {isCorrect ? `Match in ${(state.lastMs / 1000).toFixed(1)}s` : `Miss · the match was ${r.shared}`}
           </div>
-          <button className="spitjr-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
+          <button className="spotjr-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
         </>
       )}
-      {!state.submitted && <div className="spitjr-timer">Speed counts · click fast for bonus points</div>}
+      {!state.submitted && <div className="spotjr-timer">Speed counts · click fast for bonus points</div>}
     </div>
   );
 }

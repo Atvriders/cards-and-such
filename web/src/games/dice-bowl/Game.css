@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-bowl (unique class prefix + themed palette over shared dm-* engine) */
+.dice-bowl-theme.dm-wrap {
+  background: linear-gradient(180deg,#5b21b6 0%,#7c3aed 55%,#a78bfa 100%);
+}
+.dice-bowl-theme .dm-info,
+.dice-bowl-theme .dm-header {
+  color: #f5f3ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-bowl-theme .dm-target { color: #f5f3ff; opacity: 0.85; }
+.dice-bowl-theme .dm-score {
+  background: linear-gradient(180deg, #ddd6fe, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(167,139,250,0.45);
+}
+.dice-bowl-theme .dm-die {
+  background: linear-gradient(145deg,#f5f3ff,#ddd6fe);
+  color: #3b0764;
+}
+.dice-bowl-theme .dm-card {
+  background: linear-gradient(145deg,#f5f3ff,#ddd6fe);
+  color: #3b0764;
+}
+.dice-bowl-theme .dm-btn {
+  background: linear-gradient(180deg, #8b5cf6 0%, #5b21b6 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(91,33,182,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-bowl-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #c4b5fd 0%, #ddd6fe 100%);
+  color: #1f2937;
+}
+.dice-bowl-theme .dm-bet-btn {
+  color: #f5f3ff;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-bowl-theme .dm-result {
+  color: #f5f3ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-bowl-theme .dm-feedback {
+  color: #ddd6fe;
+  text-shadow: 0 0 12px rgba(167,139,250,0.6);
+}
+.dice-bowl-theme .dm-final {
+  background: linear-gradient(180deg, #ede9fe, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-bowl-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #8b5cf6, #5b21b6);
+  border-color: #ddd6fe;
+}
+.dice-bowl-theme .dm-die.selected,
+.dice-bowl-theme .dm-die.hl {
+  border-color: #c4b5fd;
+  box-shadow:
+    0 0 0 2px #c4b5fd,
+    0 0 22px rgba(196,181,253,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

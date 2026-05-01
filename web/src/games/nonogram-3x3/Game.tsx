@@ -10,12 +10,12 @@ export function Nonogram3x3Game({ state, dispatch, onGameOver }: GameProps<Nonog
 
   if (state.phase === "done") {
     return (
-      <div className="ng3-wrap">
-        <div className="ng3-banner">
-          <h2 className="ng3-title">Picture Found!</h2>
-          <div className="ng3-stat">Moves: <b>{state.moves}</b></div>
-          <div className="ng3-final">{t?.score} pts</div>
-          <button className="ng3-btn primary" onClick={() => dispatch({ type: "reset" } as Nonogram3x3Action)}>
+      <div className="nonogram3x3candy-wrap">
+        <div className="nonogram3x3candy-banner">
+          <h2 className="nonogram3x3candy-title">Picture Found!</h2>
+          <div className="nonogram3x3candy-stat">Moves: <b>{state.moves}</b></div>
+          <div className="nonogram3x3candy-final">{t?.score} pts</div>
+          <button className="nonogram3x3candy-btn primary" onClick={() => dispatch({ type: "reset" } as Nonogram3x3Action)}>
             New Puzzle
           </button>
         </div>
@@ -24,23 +24,23 @@ export function Nonogram3x3Game({ state, dispatch, onGameOver }: GameProps<Nonog
   }
 
   return (
-    <div className="ng3-wrap">
-      <div className="ng3-info">Fill cells so each row and column matches its clue numbers.</div>
-      <div className="ng3-stat">Moves: <b>{state.moves}</b></div>
-      <div className="ng3-board">
-        <div className="ng3-corner" />
+    <div className="nonogram3x3candy-wrap">
+      <div className="nonogram3x3candy-info">Fill cells so each row and column matches its clue numbers.</div>
+      <div className="nonogram3x3candy-stat">Moves: <b>{state.moves}</b></div>
+      <div className="nonogram3x3candy-board">
+        <div className="nonogram3x3candy-corner" />
         {state.colClues.map((c, i) => (
-          <div key={`c${i}`} className="ng3-clue col">{c.join(" ")}</div>
+          <div key={`c${i}`} className="nonogram3x3candy-clue col">{c.join(" ")}</div>
         ))}
         {[0, 1, 2].map((r) => (
           <>
-            <div key={`rc${r}`} className="ng3-clue row">{state.rowClues[r]!.join(" ")}</div>
+            <div key={`rc${r}`} className="nonogram3x3candy-clue row">{state.rowClues[r]!.join(" ")}</div>
             {[0, 1, 2].map((c) => {
               const i = r * 3 + c;
               return (
                 <button
                   key={i}
-                  className={`ng3-cell${state.cells[i] ? " on" : ""}`}
+                  className={`nonogram3x3candy-cell${state.cells[i] ? " on" : ""}`}
                   onClick={() => dispatch({ type: "toggle", index: i } as Nonogram3x3Action)}
                   aria-label={state.cells[i] ? "filled" : "empty"}
                 />
@@ -49,10 +49,10 @@ export function Nonogram3x3Game({ state, dispatch, onGameOver }: GameProps<Nonog
           </>
         ))}
       </div>
-      {state.message && <div className="ng3-msg">{state.message}</div>}
-      <div className="ng3-actions">
-        <button className="ng3-btn primary" onClick={() => dispatch({ type: "check" } as Nonogram3x3Action)}>Check</button>
-        <button className="ng3-btn secondary" onClick={() => dispatch({ type: "reset" } as Nonogram3x3Action)}>New Puzzle</button>
+      {state.message && <div className="nonogram3x3candy-msg">{state.message}</div>}
+      <div className="nonogram3x3candy-actions">
+        <button className="nonogram3x3candy-btn primary" onClick={() => dispatch({ type: "check" } as Nonogram3x3Action)}>Check</button>
+        <button className="nonogram3x3candy-btn secondary" onClick={() => dispatch({ type: "reset" } as Nonogram3x3Action)}>New Puzzle</button>
       </div>
     </div>
   );

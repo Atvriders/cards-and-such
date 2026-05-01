@@ -8,16 +8,16 @@ export function AcquireHotelsGame({ state, dispatch, onGameOver }: GameProps<Acq
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-ah-wrap">
-      <h3 className="bz-ah-title">Acquire Hotels</h3>
-      <div className="bz-ah-stats">
+    <div className="bz-ahq-wrap">
+      <h3 className="bz-ahq-title">Acquire Hotels</h3>
+      <div className="bz-ahq-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Hotels <b>{state.assets}</b></div>
         <div>Manager <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-ah-actions">
+        <div className="bz-ahq-actions">
           <button onClick={() => dispatch({ type: "invest" } as AcquireHotelsAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as AcquireHotelsAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as AcquireHotelsAction)}>Hire (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function AcquireHotelsGame({ state, dispatch, onGameOver }: GameProps<Acq
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-ah-event">
+        <div className="bz-ahq-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as AcquireHotelsAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-ah-done">
+        <div className="bz-ahq-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

@@ -37,14 +37,14 @@ export function Acrostic({
   }
 
   return (
-    <div className="ac-wrap">
-      <div className="ac-quote">
-        <div className="ac-quote-label">Quote:</div>
-        <div className="ac-quote-text">&ldquo;{puzzle.quote}&rdquo;</div>
-        <div className="ac-quote-author">— <em>{puzzle.author.split("").join(" ")}</em></div>
+    <div className="acr-wrap">
+      <div className="acr-quote">
+        <div className="acr-quote-label">Quote:</div>
+        <div className="acr-quote-text">&ldquo;{puzzle.quote}&rdquo;</div>
+        <div className="acr-quote-author">— <em>{puzzle.author.split("").join(" ")}</em></div>
       </div>
 
-      <div className="ac-clues-section">
+      <div className="acr-clues-section">
         {puzzle.clues.map((c, i) => {
           const val = getDisplayInput(i);
           const isSelected = selectedClue === i;
@@ -53,33 +53,33 @@ export function Acrostic({
           return (
             <div
               key={i}
-              className={`ac-clue-row${isSelected ? " ac-selected" : ""}${isCorrect ? " ac-correct" : ""}${isWrong ? " ac-wrong" : ""}`}
+              className={`acr-clue-row${isSelected ? " acr-selected" : ""}${isCorrect ? " acr-correct" : ""}${isWrong ? " acr-wrong" : ""}`}
               onClick={() => dispatch({ type: "selectClue", index: i } as AcrosticAction)}
             >
-              <div className="ac-clue-letter">{c.letter}.</div>
-              <div className="ac-clue-body">
-                <div className="ac-clue-text">{c.clue}</div>
-                <div className="ac-clue-input">{val || " "}</div>
+              <div className="acr-clue-letter">{c.letter}.</div>
+              <div className="acr-clue-body">
+                <div className="acr-clue-text">{c.clue}</div>
+                <div className="acr-clue-input">{val || " "}</div>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="ac-controls">
+      <div className="acr-controls">
         <button onClick={() => dispatch({ type: "delete" } as AcrosticAction)}>Delete</button>
         <button onClick={() => dispatch({ type: "clear" } as AcrosticAction)}>Clear</button>
         {!state.gameOver && (
-          <button className="ac-check-btn" onClick={() => dispatch({ type: "check" } as AcrosticAction)}>Check Answers</button>
+          <button className="acr-check-btn" onClick={() => dispatch({ type: "check" } as AcrosticAction)}>Check Answers</button>
         )}
       </div>
 
-      {state.message && <div className="ac-message">{state.message}</div>}
-      {checked && <div className="ac-score">Score: {score} / 100</div>}
+      {state.message && <div className="acr-message">{state.message}</div>}
+      {checked && <div className="acr-score">Score: {score} / 100</div>}
 
       {state.gameOver && (
-        <div className="ac-overlay">
-          <div className="ac-overlay-box">
+        <div className="acr-overlay">
+          <div className="acr-overlay-box">
             <h2>Results</h2>
             <div>Author: {puzzle.author}</div>
             <div>Score: {score} / 100</div>

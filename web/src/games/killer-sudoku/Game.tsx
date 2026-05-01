@@ -21,11 +21,11 @@ export function KillerSudokuGame({ state, dispatch, onGameOver }: GameProps<Kill
 
   if (state.phase === "done") {
     return (
-      <div className="killersudoku-wrap">
-        <div className="killersudoku-done">
+      <div className="killercrimescene-wrap">
+        <div className="killercrimescene-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="killersudoku-final">{state.score} pts</p>
+          <p className="killercrimescene-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function KillerSudokuGame({ state, dispatch, onGameOver }: GameProps<Kill
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="killersudoku-wrap">
-      <div className="killersudoku-header">
+    <div className="killercrimescene-wrap">
+      <div className="killercrimescene-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="killersudoku-score">{state.score} pts</span>
+        <span className="killercrimescene-score">{state.score} pts</span>
       </div>
-      <div className="killersudoku-mech">Sudoku with cage sums.</div>
-      <div className="killersudoku-grid">
+      <div className="killercrimescene-mech">Sudoku with cage sums.</div>
+      <div className="killercrimescene-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="killersudoku-row">
+          <div key={r} className="killercrimescene-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function KillerSudokuGame({ state, dispatch, onGameOver }: GameProps<Kill
               return (
                 <button
                   key={c}
-                  className={`killersudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`killercrimescene-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as KillerSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function KillerSudokuGame({ state, dispatch, onGameOver }: GameProps<Kill
           </div>
         ))}
       </div>
-      <div className="killersudoku-pad">
+      <div className="killercrimescene-pad">
         {digits.map((d) => (
-          <button key={d} className="killersudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as KillerSudokuAction)}>{d}</button>
+          <button key={d} className="killercrimescene-num" onClick={() => dispatch({ type: "enter", digit: d } as KillerSudokuAction)}>{d}</button>
         ))}
-        <button className="killersudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as KillerSudokuAction)}>×</button>
+        <button className="killercrimescene-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as KillerSudokuAction)}>×</button>
       </div>
-      <div className="killersudoku-actions">
-        <button className="killersudoku-btn check" onClick={() => dispatch({ type: "check" } as KillerSudokuAction)}>Check</button>
-        <button className="killersudoku-btn hint" onClick={() => dispatch({ type: "hint" } as KillerSudokuAction)}>Hint</button>
-        <button className="killersudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as KillerSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="killercrimescene-actions">
+        <button className="killercrimescene-btn check" onClick={() => dispatch({ type: "check" } as KillerSudokuAction)}>Check</button>
+        <button className="killercrimescene-btn hint" onClick={() => dispatch({ type: "hint" } as KillerSudokuAction)}>Hint</button>
+        <button className="killercrimescene-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as KillerSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="killersudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="killercrimescene-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

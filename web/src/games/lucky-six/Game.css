@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: lucky-six (unique class prefix + themed palette over shared dm-* engine) */
+.lucky-six-theme.dm-wrap {
+  background: linear-gradient(180deg,#064e3b 0%,#047857 55%,#10b981 100%);
+}
+.lucky-six-theme .dm-info,
+.lucky-six-theme .dm-header {
+  color: #ecfdf5;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.lucky-six-theme .dm-target { color: #ecfdf5; opacity: 0.85; }
+.lucky-six-theme .dm-score {
+  background: linear-gradient(180deg, #a7f3d0, #34d399);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(52,211,153,0.45);
+}
+.lucky-six-theme .dm-die {
+  background: linear-gradient(145deg,#d1fae5,#86efac);
+  color: #064e3b;
+}
+.lucky-six-theme .dm-card {
+  background: linear-gradient(145deg,#d1fae5,#86efac);
+  color: #064e3b;
+}
+.lucky-six-theme .dm-btn {
+  background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(4,120,87,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.lucky-six-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #34d399 0%, #6ee7b7 100%);
+  color: #1f2937;
+}
+.lucky-six-theme .dm-bet-btn {
+  color: #ecfdf5;
+  border-color: rgba(255,255,255,0.25);
+}
+.lucky-six-theme .dm-result {
+  color: #ecfdf5;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.lucky-six-theme .dm-feedback {
+  color: #a7f3d0;
+  text-shadow: 0 0 12px rgba(52,211,153,0.6);
+}
+.lucky-six-theme .dm-final {
+  background: linear-gradient(180deg, #bbf7d0, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lucky-six-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #10b981, #047857);
+  border-color: #6ee7b7;
+}
+.lucky-six-theme .dm-die.selected,
+.lucky-six-theme .dm-die.hl {
+  border-color: #34d399;
+  box-shadow:
+    0 0 0 2px #34d399,
+    0 0 22px rgba(52,211,153,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

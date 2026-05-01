@@ -1,12 +1,46 @@
-.dx-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.dx-info { font-size:0.95rem; color:#555; }
-.dx-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.dx-die { font-size:2.5rem; font-weight:900; min-width:70px; padding:14px 18px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.dx-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.dx-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.dx-btn:hover { background:#2980b9; }
-.dx-btn.alt { background:#e67e22; }
-.dx-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
-.dx-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.dx-done h2 { margin:0 0 8px; }
-.dx-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.dbwl-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.dbwl-info { font-size:0.95rem; color:#555; }
+.dbwl-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.dbwl-die { font-size:2.5rem; font-weight:900; min-width:70px; padding:14px 18px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
+.dbwl-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.dbwl-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.dbwl-btn:hover { background:#2980b9; }
+.dbwl-btn.alt { background:#e67e22; }
+.dbwl-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
+.dbwl-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.dbwl-done h2 { margin:0 0 8px; }
+.dbwl-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dbwl (unique class prefix + themed palette tokens) */
+.dbwl-theme {
+  --dbwl-bg: linear-gradient(180deg,#fed7aa 0%,#fb923c 55%,#9a3412 100%);
+  --dbwl-felt: #7c2d12;
+  --dbwl-accent: #fef3c7;
+  --dbwl-text: #fff7ed;
+}
+.dbwl-theme.dbwl-wrap,
+.dbwl-theme .dbwl-wrap,
+.dbwl-wrap.dbwl-theme {
+  background: var(--dbwl-bg);
+  color: var(--dbwl-text);
+}
+.dbwl-theme .dbwl-die,
+.dbwl-theme .dbwl-card {
+  border-color: var(--dbwl-accent);
+}
+.dbwl-theme .dbwl-btn,
+.dbwl-theme .dbwl-roll-btn {
+  background: var(--dbwl-accent);
+  color: var(--dbwl-felt);
+  border-color: var(--dbwl-accent);
+}
+.dbwl-theme .dbwl-info,
+.dbwl-theme .dbwl-score,
+.dbwl-theme .dbwl-final,
+.dbwl-theme .dbwl-result,
+.dbwl-theme .dbwl-header,
+.dbwl-theme .dbwl-message {
+  color: var(--dbwl-text);
+}
+

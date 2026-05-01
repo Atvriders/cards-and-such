@@ -1,30 +1,88 @@
-.binairomini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.binairomini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.binairomini-score { font-weight:700;color:hsl(200, 60%, 40%); }
-.binairomini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.binairomini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.binairomini-row { display:flex;gap:1px; }
-.binairomini-cell { width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.binairomini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.binairomini-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
-.binairomini-cell.sel { outline:3px solid hsl(200, 65%, 55%);outline-offset:-3px; }
-.binairomini-cell.err { background:#fdedec;color:#e74c3c; }
-.binairomini-cell.val0 { background:#fff5d8; }
-.binairomini-cell.val1 { background:#d8eaff; }
-.binairomini-cell.val2 { background:#ffe0e0; }
-.binairomini-cell.val3 { background:#e0ffe0; }
-.binairomini-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
-.binairomini-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.binairomini-num:hover { background:hsl(200, 70%, 92%);border-color:hsl(200, 60%, 55%); }
-.binairomini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.binairomini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.binairomini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.binairomini-btn.check { background:#3498db; }
-.binairomini-btn.hint { background:#f39c12; }
-.binairomini-btn.next { background:hsl(200, 60%, 45%); }
-.binairomini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.binairomini-status { font-weight:700;font-size:1rem; }
-.binairomini-status.solved { color:#27ae60; }
-.binairomini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.binairomini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.binairomini-final { font-size:1.6rem;font-weight:900;color:hsl(200, 60%, 40%); }
+.binairobinary-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.binairobinary-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.binairobinary-score { font-weight:700;color:hsl(200, 60%, 40%); }
+.binairobinary-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.binairobinary-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.binairobinary-row { display:flex;gap:1px; }
+.binairobinary-cell { width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.binairobinary-cell.given { background:#ecf0f1;color:#2c3e50; }
+.binairobinary-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
+.binairobinary-cell.sel { outline:3px solid hsl(200, 65%, 55%);outline-offset:-3px; }
+.binairobinary-cell.err { background:#fdedec;color:#e74c3c; }
+.binairobinary-cell.val0 { background:#fff5d8; }
+.binairobinary-cell.val1 { background:#d8eaff; }
+.binairobinary-cell.val2 { background:#ffe0e0; }
+.binairobinary-cell.val3 { background:#e0ffe0; }
+.binairobinary-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
+.binairobinary-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.binairobinary-num:hover { background:hsl(200, 70%, 92%);border-color:hsl(200, 60%, 55%); }
+.binairobinary-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.binairobinary-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.binairobinary-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.binairobinary-btn.check { background:#3498db; }
+.binairobinary-btn.hint { background:#f39c12; }
+.binairobinary-btn.next { background:hsl(200, 60%, 45%); }
+.binairobinary-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.binairobinary-status { font-weight:700;font-size:1rem; }
+.binairobinary-status.solved { color:#27ae60; }
+.binairobinary-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.binairobinary-done h2 { margin-bottom:6px;color:#2c3e50; }
+.binairobinary-final { font-size:1.6rem;font-weight:900;color:hsl(200, 60%, 40%); }
+
+
+/* === Theme: binary (Binary — black, white, alarm red) === */
+.binairobinary {
+  background: #f0f0f0;
+  color: #1a1a1a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.binairobinary .binairobinary-mech,
+.binairobinary [class*="-mech"],
+.binairobinary [class*="-status"]:not(.solved):not(.win) {
+  color: #6a6a6a;
+}
+.binairobinary [class*="-score"],
+.binairobinary [class*="-final"] {
+  color: #1a1a1a;
+}
+.binairobinary [class*="-grid"] {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+}
+.binairobinary [class*="-cell"] {
+  background: #e0e0e0;
+  color: #1a1a1a;
+}
+.binairobinary [class*="-cell"].sel,
+.binairobinary [class*="-cell"].selected {
+  outline: 3px solid #9a9a9a;
+  outline-offset: -3px;
+}
+.binairobinary [class*="-cell"].err,
+.binairobinary [class*="-cell"].error,
+.binairobinary [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #d44a3a;
+}
+.binairobinary [class*="-num"]:hover,
+.binairobinary [class*="-numpad"] button:hover {
+  background: #9a9a9a;
+  color: #f0f0f0;
+  border-color: #1a1a1a;
+}
+.binairobinary [class*="-btn"].check,
+.binairobinary [class*="-controls"] button {
+  background: #1a1a1a;
+  color: #f0f0f0;
+  border-color: #1a1a1a;
+}
+.binairobinary [class*="-btn"].next {
+  background: #9a9a9a;
+  color: #f0f0f0;
+}
+.binairobinary [class*="-status"].solved,
+.binairobinary [class*="-status"].win {
+  color: #3a3a3a;
+}

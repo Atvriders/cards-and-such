@@ -29,20 +29,20 @@ export function Anagram({
 
   return (
     <div className="anagram" tabIndex={0} onKeyDown={handleKey} style={{ outline: "none" }}>
-      <div className="anagram-scrambled-label">Unscramble this word</div>
-      <div className="anagram-scrambled">{state.scrambled}</div>
+      <div className="ang-scrambled-label">Unscramble this word</div>
+      <div className="ang-scrambled">{state.scrambled}</div>
 
-      <div className="anagram-info">
+      <div className="ang-info">
         Guesses left: {guessesLeft} · Word length: {state.wordLength}
       </div>
 
-      <div className="anagram-guesses">
+      <div className="ang-guesses">
         {state.guesses.map((guess, i) => {
           const isCorrect = guess === state.target;
           return (
-            <div key={`${guess}-${i}`} className="anagram-guess-row">
+            <div key={`${guess}-${i}`} className="ang-guess-row">
               {guess.split("").map((ch, j) => (
-                <div key={j} className={`anagram-guess-tile ${isCorrect ? "correct" : "wrong"}`}>
+                <div key={j} className={`ang-guess-tile ${isCorrect ? "correct" : "wrong"}`}>
                   {ch}
                 </div>
               ))}
@@ -54,32 +54,32 @@ export function Anagram({
 
       {!state.won && !state.lost && (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
-          <div className="anagram-input-row">
+          <div className="ang-input-row">
             {Array.from({ length: state.wordLength }, (_, i) => {
               const ch = state.currentGuess[i] ?? "";
               const isActive = i === state.currentGuess.length;
               return (
-                <div key={i} className={`anagram-tile${isActive ? " active" : ""}`}>
+                <div key={i} className={`ang-tile${isActive ? " active" : ""}`}>
                   {ch}
                 </div>
               );
             })}
           </div>
           <button
-            className="anagram-submit-btn"
+            className="ang-submit-btn"
             onClick={() => dispatch({ type: "submit" } as AnagramAction)}
             disabled={state.currentGuess.length !== state.wordLength}
           >
             Check
           </button>
-          <p className="anagram-hint">
+          <p className="ang-hint">
             Click the puzzle, then type your guess and press Enter
           </p>
         </div>
       )}
 
       {(state.won || state.lost) && (
-        <div className={`anagram-status ${state.won ? "won" : "lost"}`}>
+        <div className={`ang-status ${state.won ? "won" : "lost"}`}>
           {state.won
             ? `Correct! The word was ${state.target}.`
             : `Out of guesses! The word was ${state.target}.`}

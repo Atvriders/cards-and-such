@@ -132,3 +132,48 @@
   text-align: center;
   font-style: italic;
 }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: yahtz (unique class prefix + themed palette tokens) */
+.yahtz-theme {
+  --yahtz-bg: linear-gradient(180deg,#7f1d1d 0%,#991b1b 55%,#dc2626 100%);
+  --yahtz-felt: #fee2e2;
+  --yahtz-accent: #e5e7eb;
+  --yahtz-text: #fef2f2;
+}
+.yahtz-theme.yahtz-wrap,
+.yahtz-theme .yahtz-wrap,
+.yahtz-wrap.yahtz-theme {
+  background: var(--yahtz-bg);
+  color: var(--yahtz-text);
+}
+.yahtz-theme .yahtz-die {
+  border-color: var(--yahtz-accent);
+}
+.yahtz-theme .yahtz-card {
+  border-color: var(--yahtz-accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+.yahtz-theme .yahtz-btn,
+.yahtz-theme .yahtz-roll-btn {
+  background: linear-gradient(180deg,#e5e7eb,#94a3b8);
+  color: #7f1d1d;
+  border: 1px solid #cbd5e1;
+}
+.yahtz-theme .yahtz-info,
+.yahtz-theme .yahtz-score,
+.yahtz-theme .yahtz-final,
+.yahtz-theme .yahtz-result,
+.yahtz-theme .yahtz-header,
+.yahtz-theme .yahtz-message,
+.yahtz-theme .yahtz-hint {
+  color: var(--yahtz-text);
+}
+.yahtz-theme .yahtz-total {
+  color: #e5e7eb;
+}
+.yahtz-theme .yahtz-total-row td {
+  background: #7f1d1d;
+  color: #e5e7eb;
+}
+

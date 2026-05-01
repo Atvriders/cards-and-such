@@ -12,3 +12,48 @@
 .dm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
 .dm-done h2 { margin:0 0 8px; }
 .dm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+
+
+/* === poker-theme:mixed-neon === unique-class .thmFollowQ === */
+.thmFollowQ,
+.thmFollowQ.dm-wrap,
+.thmFollowQ.holdem-wrap,
+.thmFollowQ.g-wrap,
+.thmFollowQ .dm-wrap,
+.thmFollowQ .holdem-wrap,
+.thmFollowQ .holdem-table,
+.thmFollowQ .g-wrap,
+.thmFollowQ .follow-the-queen-felt,
+.thmFollowQ [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #4a1a6a 0%, #1f0a36 60%, #08001a 100%) !important;
+  color: #f6e8ff !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.65),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.65) !important;
+  --theme-accent: #ff66cc;
+  --theme-accent2: #9ae8ff;
+  --theme-ink: #f6e8ff;
+  --theme-rim: #0a0118;
+}
+.thmFollowQ .dm-score,
+.thmFollowQ .holdem-pot-amount,
+.thmFollowQ [class$="-stack"],
+.thmFollowQ [class$="-pot-amount"] {
+  color: #9ae8ff !important;
+  text-shadow: 0 0 18px #ff66cc55;
+}
+.thmFollowQ .dm-info,
+.thmFollowQ [class$="-hud"],
+.thmFollowQ [class$="-stat"] {
+  border-color: #ff66cc55 !important;
+}
+.thmFollowQ .dm-card,
+.thmFollowQ .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.65), 0 0 0 1px #ff66cc22;
+}
+.thmFollowQ .dm-btn,
+.thmFollowQ [class*="-btn"] {
+  border-color: #ff66cc55 !important;
+}

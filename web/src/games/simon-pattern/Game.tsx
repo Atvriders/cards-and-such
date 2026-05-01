@@ -15,28 +15,28 @@ export function SimonPatternGame({ state, dispatch, onGameOver }: GameProps<Simo
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
     return (
-      <div className="smnptn-wrap">
-        <div className="smnptn-done">
+      <div className="smnpat-wrap">
+        <div className="smnpat-done">
           <h2>Time's Up!</h2>
-          <div className="smnptn-stats">Hits: {state.hits} / Misses: {state.misses}</div>
-          <div className="smnptn-final">{state.score} pts</div>
+          <div className="smnpat-stats">Hits: {state.hits} / Misses: {state.misses}</div>
+          <div className="smnpat-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
   return (
-    <div className="smnptn-wrap">
-      <div className="smnptn-header">
-        <span className="smnptn-info">Hits: {state.hits}</span>
-        <span className="smnptn-timer">{state.ticksRemaining}s</span>
-        <span className="smnptn-score">{state.score} pts</span>
+    <div className="smnpat-wrap">
+      <div className="smnpat-header">
+        <span className="smnpat-info">Hits: {state.hits}</span>
+        <span className="smnpat-timer">{state.ticksRemaining}s</span>
+        <span className="smnpat-score">{state.score} pts</span>
       </div>
-      <div className="smnptn-prompt">Watch for the GO beat — tap on rhythm!</div>
+      <div className="smnpat-prompt">Watch for the GO beat — tap on rhythm!</div>
       <button
-        className={`smnptn-stage ${state.isGo ? "go" : "nogo"}`}
+        className={`smnpat-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as SimonPatternAction)}
         aria-label="react">{state.isGo ? "🎵" : "🔇"}</button>
-      <div className="smnptn-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
+      <div className="smnpat-hint">Click big button when shown a GO signal — miss when it's NOT GO</div>
     </div>
   );
 }

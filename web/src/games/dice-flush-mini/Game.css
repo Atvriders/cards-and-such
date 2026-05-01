@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-flush-mini (unique class prefix + themed palette over shared dm-* engine) */
+.dice-flush-mini-theme.dm-wrap {
+  background: linear-gradient(180deg,#082f49 0%,#0e7490 55%,#06b6d4 100%);
+}
+.dice-flush-mini-theme .dm-info,
+.dice-flush-mini-theme .dm-header {
+  color: #ecfeff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-flush-mini-theme .dm-target { color: #ecfeff; opacity: 0.85; }
+.dice-flush-mini-theme .dm-score {
+  background: linear-gradient(180deg, #a5f3fc, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(34,211,238,0.45);
+}
+.dice-flush-mini-theme .dm-die {
+  background: linear-gradient(145deg,#ecfeff,#a5f3fc);
+  color: #083344;
+}
+.dice-flush-mini-theme .dm-card {
+  background: linear-gradient(145deg,#ecfeff,#a5f3fc);
+  color: #083344;
+}
+.dice-flush-mini-theme .dm-btn {
+  background: linear-gradient(180deg, #06b6d4 0%, #0e7490 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(14,116,144,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-flush-mini-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #22d3ee 0%, #67e8f9 100%);
+  color: #1f2937;
+}
+.dice-flush-mini-theme .dm-bet-btn {
+  color: #ecfeff;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-flush-mini-theme .dm-result {
+  color: #ecfeff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-flush-mini-theme .dm-feedback {
+  color: #a5f3fc;
+  text-shadow: 0 0 12px rgba(34,211,238,0.6);
+}
+.dice-flush-mini-theme .dm-final {
+  background: linear-gradient(180deg, #cffafe, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-flush-mini-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #06b6d4, #0e7490);
+  border-color: #67e8f9;
+}
+.dice-flush-mini-theme .dm-die.selected,
+.dice-flush-mini-theme .dm-die.hl {
+  border-color: #22d3ee;
+  box-shadow:
+    0 0 0 2px #22d3ee,
+    0 0 22px rgba(34,211,238,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

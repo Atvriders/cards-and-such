@@ -1,4 +1,4 @@
-.tents {
+.tentsforest {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,33 +8,33 @@
   user-select: none;
 }
 
-.tents-title {
+.tentsforest-title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.tents-status {
+.tentsforest-status {
   font-size: 0.95rem;
   color: #555;
 }
 
-.tents-status.win {
+.tentsforest-status.win {
   color: #27ae60;
   font-weight: bold;
 }
 
-.tents-wrap {
+.tentsforest-wrap {
   display: flex;
   flex-direction: row;
   gap: 0;
 }
 
-.tents-left {
+.tentsforest-left {
   display: flex;
   flex-direction: column;
 }
 
-.tents-row-clue {
+.tentsforest-row-clue {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,16 +43,16 @@
   color: #333;
 }
 
-.tents-main {
+.tentsforest-main {
   display: flex;
   flex-direction: column;
 }
 
-.tents-grid-row {
+.tentsforest-grid-row {
   display: flex;
 }
 
-.tents-cell {
+.tentsforest-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,28 +63,28 @@
   background: #f9f9f9;
 }
 
-.tents-cell.tree {
+.tentsforest-cell.tree {
   background: #2d7a2d;
   color: #fff;
   cursor: default;
 }
 
-.tents-cell.tent {
+.tentsforest-cell.tent {
   background: #e8f4c8;
   color: #5a7a00;
 }
 
-.tents-cell.x {
+.tentsforest-cell.x {
   background: #f0f0f0;
   color: #bbb;
 }
 
-.tents-col-clues {
+.tentsforest-col-clues {
   display: flex;
   flex-direction: row;
 }
 
-.tents-col-clue {
+.tentsforest-col-clue {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,12 +93,12 @@
   color: #333;
 }
 
-.tents-btn-row {
+.tentsforest-btn-row {
   display: flex;
   gap: 8px;
 }
 
-.tents-btn-row button {
+.tentsforest-btn-row button {
   padding: 8px 18px;
   font-size: 0.95rem;
   border: 1.5px solid #aaa;
@@ -107,9 +107,67 @@
   background: #f5f5f5;
 }
 
-.tents-btn-row button:hover {
+.tentsforest-btn-row button:hover {
   background: #dde;
 }
 
-.tents-clue-ok { color: #27ae60; }
-.tents-clue-over { color: #c0392b; }
+.tentsforest-clue-ok { color: #27ae60; }
+.tentsforest-clue-over { color: #c0392b; }
+
+
+/* === Theme: forest (Forest camp — leaf green) === */
+.tentsforest {
+  background: #e8f2e0;
+  color: #1f3a14;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.tentsforest .tentsforest-mech,
+.tentsforest [class*="-mech"],
+.tentsforest [class*="-status"]:not(.solved):not(.win) {
+  color: #4a6a3a;
+}
+.tentsforest [class*="-score"],
+.tentsforest [class*="-final"] {
+  color: #3a7a2a;
+}
+.tentsforest [class*="-grid"] {
+  background: #1f4a14;
+  border-color: #1f4a14;
+}
+.tentsforest [class*="-cell"] {
+  background: #d8e8c8;
+  color: #1f3a14;
+}
+.tentsforest [class*="-cell"].sel,
+.tentsforest [class*="-cell"].selected {
+  outline: 3px solid #65a850;
+  outline-offset: -3px;
+}
+.tentsforest [class*="-cell"].err,
+.tentsforest [class*="-cell"].error,
+.tentsforest [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #a83820;
+}
+.tentsforest [class*="-num"]:hover,
+.tentsforest [class*="-numpad"] button:hover {
+  background: #65a850;
+  color: #e8f2e0;
+  border-color: #3a7a2a;
+}
+.tentsforest [class*="-btn"].check,
+.tentsforest [class*="-controls"] button {
+  background: #3a7a2a;
+  color: #e8f2e0;
+  border-color: #3a7a2a;
+}
+.tentsforest [class*="-btn"].next {
+  background: #65a850;
+  color: #e8f2e0;
+}
+.tentsforest [class*="-status"].solved,
+.tentsforest [class*="-status"].win {
+  color: #3a7a2a;
+}

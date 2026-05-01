@@ -1,19 +1,44 @@
-.gobserv-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.gobserv-info { font-size:0.95rem; color:#555; }
-.gobserv-score { font-size:1.2rem; font-weight:800; color:#2563eb; }
-.gobserv-prompt { font-size:1.1rem; font-weight:700; color:#2c3e50; text-align:center; padding:8px; }
-.gobserv-tray { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:14px; background:#fef3c7; border-radius:10px; width:100%; max-width:340px; }
-.gobserv-trayitem { font-size:1rem; text-align:center; padding:10px; background:#fff; border-radius:8px; font-weight:600; }
-.gobserv-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; width:100%; max-width:380px; }
-.gobserv-cell { padding:14px; font-size:0.95rem; font-weight:600; border:2px solid #34495e; background:#fff; border-radius:10px; cursor:pointer; min-height:60px; }
-.gobserv-cell:hover:not(:disabled) { background:#eaf4fb; }
-.gobserv-cell.selected { background:#eaf4fb; border-color:#3498db; }
-.gobserv-cell.correct { background:#eafaf1; border-color:#27ae60; color:#1e8449; }
-.gobserv-cell.wrong { background:#fdedec; border-color:#e74c3c; color:#c0392b; }
-.gobserv-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; }
-.gobserv-btn.submit { background:#27ae60; }
-.gobserv-btn.next { background:#3498db; }
-.gobserv-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.gobserv-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.gobserv-done h2 { margin:0 0 8px; }
-.gobserv-final { font-size:1.4rem; color:#2563eb; font-weight:900; }
+/* === obscard themed palette (observer_blue) === */
+.obscard-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 22px 18px; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  max-width: 560px; margin: 0 auto; background: #eff6ff; color: #1e3a8a;
+  border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.obscard-info { font-size: 0.95rem; color: #1e3a8a; opacity: 0.78; }
+.obscard-score { font-size: 1.25rem; font-weight: 800; color: #1d4ed8; }
+.obscard-prompt { font-size: 1.1rem; font-weight: 700; color: #1e3a8a; text-align: center; padding: 8px; }
+.obscard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; max-width: 380px; }
+.obscard-tray { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 14px; background: #ffffff; border: 1px solid #0e7490; border-radius: 10px; width: 100%; max-width: 360px; }
+.obscard-trayitem { font-size: 1rem; text-align: center; padding: 10px; background: #fff; border-radius: 8px; font-weight: 600; color: #1e3a8a; }
+.obscard-cell { padding: 14px; font-size: 0.95rem; font-weight: 600; border: 2px solid #0e7490; background: #ffffff; color: #1e3a8a; border-radius: 10px; cursor: pointer; min-height: 60px; transition: transform .12s ease, background .12s; }
+.obscard-cell:hover:not(:disabled) { background: #0e749033; transform: translateY(-1px); }
+.obscard-cell.selected { background: #0e749055; border-color: #1d4ed8; }
+.obscard-cell.correct { background: #86efac; border-color: #86efac; color: #1e3a8a; }
+.obscard-cell.wrong { background: #fca5a5; border-color: #fca5a5; color: #1e3a8a; }
+.obscard-btn { padding: 10px 22px; font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; color: #fff; background: #1d4ed8; }
+.obscard-btn.submit { background: #1d4ed8; }
+.obscard-btn.next { background: #0e7490; }
+.obscard-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.obscard-done { text-align: center; padding: 24px; background: #ffffff; border: 1px solid #0e7490; border-radius: 14px; color: #1e3a8a; }
+.obscard-done h2 { margin: 0 0 8px; color: #1d4ed8; }
+.obscard-final { font-size: 1.5rem; color: #1d4ed8; font-weight: 900; }
+.obscard-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:6px 4px; }
+.obscard-progress { color: #1d4ed8; font-weight: 700; }
+.obscard-attempts { color: #1e3a8a; opacity: 0.7; }
+.obscard-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; }
+.obscard-card { aspect-ratio: 3/4; background: #ffffff; border: 2px solid #0e7490; border-radius: 10px; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; color: #1e3a8a; }
+.obscard-card:hover:not(:disabled) { border-color: #1d4ed8; transform: translateY(-2px); }
+.obscard-card.flipped { background: #0e749033; border-color: #1d4ed8; }
+.obscard-card.matched { background: #86efac; border-color: #86efac; opacity: 0.85; cursor: default; }
+.obscard-card:disabled { cursor: default; }
+.obscard-face { font-size: 1.8rem; font-weight: 800; color: #1e3a8a; }
+.obscard-hint { font-size: 0.86rem; color: #1e3a8a; opacity: 0.7; font-style: italic; text-align: center; padding-top: 4px; }
+.obscard-stats { font-size: 1rem; color: #1e3a8a; margin-bottom: 12px; }
+.obscard-feedback { padding: 8px 12px; border-radius: 8px; font-weight: 700; text-align: center; }
+.obscard-feedback.correct { background: #86efac; color: #1e3a8a; }
+.obscard-feedback.wrong { background: #fca5a5; color: #1e3a8a; }
+.obscard-actions { display: flex; gap: 8px; justify-content: center; }
+.obscard-timer { font-weight: 700; color: #1d4ed8; }
+.obscard-timer.urgent { color: #fca5a5; animation: obscard-pulse 0.6s infinite alternate; }
+@keyframes obscard-pulse { from { transform: scale(1); } to { transform: scale(1.08); } }

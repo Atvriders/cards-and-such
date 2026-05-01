@@ -212,3 +212,37 @@
   .shutbox-tile { font-size: 1.1rem; }
   .shutbox-header { grid-template-columns: 1fr; }
 }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: shutbox (unique class prefix + themed palette tokens) */
+.shutbox-theme {
+  --shutbox-bg: linear-gradient(180deg,#7c2d12 0%,#a16207 55%,#ca8a04 100%);
+  --shutbox-felt: #fef3c7;
+  --shutbox-accent: #7c2d12;
+  --shutbox-text: #fffbeb;
+}
+.shutbox-theme.shutbox-wrap,
+.shutbox-theme .shutbox-wrap,
+.shutbox-wrap.shutbox-theme {
+  background: var(--shutbox-bg);
+  color: var(--shutbox-text);
+}
+.shutbox-theme .shutbox-die,
+.shutbox-theme .shutbox-card {
+  border-color: var(--shutbox-accent);
+}
+.shutbox-theme .shutbox-btn,
+.shutbox-theme .shutbox-roll-btn {
+  background: var(--shutbox-accent);
+  color: var(--shutbox-felt);
+  border-color: var(--shutbox-accent);
+}
+.shutbox-theme .shutbox-info,
+.shutbox-theme .shutbox-score,
+.shutbox-theme .shutbox-final,
+.shutbox-theme .shutbox-result,
+.shutbox-theme .shutbox-header,
+.shutbox-theme .shutbox-message {
+  color: var(--shutbox-text);
+}
+

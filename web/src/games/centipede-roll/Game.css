@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: centipede-roll (unique class prefix + themed palette over shared dm-* engine) */
+.centipede-roll-theme.dm-wrap {
+  background: linear-gradient(180deg,#365314 0%,#65a30d 55%,#a3e635 100%);
+}
+.centipede-roll-theme .dm-info,
+.centipede-roll-theme .dm-header {
+  color: #f7fee7;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.centipede-roll-theme .dm-target { color: #f7fee7; opacity: 0.85; }
+.centipede-roll-theme .dm-score {
+  background: linear-gradient(180deg, #d9f99d, #a3e635);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(163,230,53,0.45);
+}
+.centipede-roll-theme .dm-die {
+  background: linear-gradient(145deg,#f7fee7,#bef264);
+  color: #365314;
+}
+.centipede-roll-theme .dm-card {
+  background: linear-gradient(145deg,#f7fee7,#bef264);
+  color: #365314;
+}
+.centipede-roll-theme .dm-btn {
+  background: linear-gradient(180deg, #65a30d 0%, #3f6212 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(63,98,18,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.centipede-roll-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #84cc16 0%, #bef264 100%);
+  color: #1f2937;
+}
+.centipede-roll-theme .dm-bet-btn {
+  color: #f7fee7;
+  border-color: rgba(255,255,255,0.25);
+}
+.centipede-roll-theme .dm-result {
+  color: #f7fee7;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.centipede-roll-theme .dm-feedback {
+  color: #d9f99d;
+  text-shadow: 0 0 12px rgba(163,230,53,0.6);
+}
+.centipede-roll-theme .dm-final {
+  background: linear-gradient(180deg, #ecfccb, #65a30d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.centipede-roll-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #65a30d, #3f6212);
+  border-color: #bef264;
+}
+.centipede-roll-theme .dm-die.selected,
+.centipede-roll-theme .dm-die.hl {
+  border-color: #84cc16;
+  box-shadow:
+    0 0 0 2px #84cc16,
+    0 0 22px rgba(132,204,22,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

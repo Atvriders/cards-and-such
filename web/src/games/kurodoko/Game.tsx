@@ -10,11 +10,11 @@ export function KurodokoGame({ state, dispatch, onGameOver }: GameProps<Kurodoko
 
   if (state.phase === "done") {
     return (
-      <div className="kurodoko-wrap">
-        <div className="kurodoko-done">
+      <div className="kurodokomoonlight-wrap">
+        <div className="kurodokomoonlight-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="kurodoko-final">{state.score} pts</p>
+          <p className="kurodokomoonlight-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function KurodokoGame({ state, dispatch, onGameOver }: GameProps<Kurodoko
   const errSet = new Set(state.errors);
 
   return (
-    <div className="kurodoko-wrap">
-      <div className="kurodoko-header">
+    <div className="kurodokomoonlight-wrap">
+      <div className="kurodokomoonlight-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="kurodoko-score">{state.score} pts</span>
+        <span className="kurodokomoonlight-score">{state.score} pts</span>
       </div>
-      <div className="kurodoko-mech">Shade cells so numbered cells see exactly that many cells; shaded cells form one region.</div>
-      <div className="kurodoko-grid">
+      <div className="kurodokomoonlight-mech">Shade cells so numbered cells see exactly that many cells; shaded cells form one region.</div>
+      <div className="kurodokomoonlight-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="kurodoko-row">
+          <div key={r} className="kurodokomoonlight-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function KurodokoGame({ state, dispatch, onGameOver }: GameProps<Kurodoko
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`kurodoko-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`kurodokomoonlight-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as KurodokoAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function KurodokoGame({ state, dispatch, onGameOver }: GameProps<Kurodoko
           </div>
         ))}
       </div>
-      <div className="kurodoko-pad">
+      <div className="kurodokomoonlight-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`kurodoko-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as KurodokoAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`kurodokomoonlight-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as KurodokoAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="kurodoko-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as KurodokoAction)}>×</button>
+        <button className="kurodokomoonlight-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as KurodokoAction)}>×</button>
       </div>
-      <div className="kurodoko-actions">
-        <button className="kurodoko-btn check" onClick={() => dispatch({ type: "check" } as KurodokoAction)}>Check</button>
-        <button className="kurodoko-btn hint" onClick={() => dispatch({ type: "hint" } as KurodokoAction)}>Hint</button>
-        <button className="kurodoko-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as KurodokoAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="kurodokomoonlight-actions">
+        <button className="kurodokomoonlight-btn check" onClick={() => dispatch({ type: "check" } as KurodokoAction)}>Check</button>
+        <button className="kurodokomoonlight-btn hint" onClick={() => dispatch({ type: "hint" } as KurodokoAction)}>Hint</button>
+        <button className="kurodokomoonlight-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as KurodokoAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="kurodoko-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="kurodokomoonlight-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

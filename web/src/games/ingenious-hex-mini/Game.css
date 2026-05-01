@@ -78,3 +78,36 @@
   font-weight: 800;
   font-family: "JetBrains Mono", monospace;
 }
+
+
+/* Ingenious Hex — themed override (unique prefix bz-ihm-) */
+.bz-ihm-wrap {
+  background: linear-gradient(140deg, #1e293b, #0f172a) !important;
+  color: #f1f5f9 !important;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #ec489933;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.bz-ihm-wrap h2 {
+  color: #ec4899;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bz-ihm-wrap .g-cell {
+  background: #1e293b55;
+  border: 1px solid #ec489933;
+  color: #ec4899;
+  transition: background 120ms, transform 80ms;
+}
+.bz-ihm-wrap .g-cell:hover {
+  background: #ec489933;
+  transform: translateY(-1px);
+}
+.bz-ihm-wrap .g-cell.x { color: #ec4899; font-weight: 800; }
+.bz-ihm-wrap .g-cell.o { color: #f1f5f9; font-weight: 800; }
+.bz-ihm-wrap .g-final {
+  color: #ec4899;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+}

@@ -21,11 +21,11 @@ export function SudokuMini6x6Game({ state, dispatch, onGameOver }: GameProps<Sud
 
   if (state.phase === "done") {
     return (
-      <div className="sudokumini6x6-wrap">
-        <div className="sudokumini6x6-done">
+      <div className="sudoku6x6mint-wrap">
+        <div className="sudoku6x6mint-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="sudokumini6x6-final">{state.score} pts</p>
+          <p className="sudoku6x6mint-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function SudokuMini6x6Game({ state, dispatch, onGameOver }: GameProps<Sud
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="sudokumini6x6-wrap">
-      <div className="sudokumini6x6-header">
+    <div className="sudoku6x6mint-wrap">
+      <div className="sudoku6x6mint-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="sudokumini6x6-score">{state.score} pts</span>
+        <span className="sudoku6x6mint-score">{state.score} pts</span>
       </div>
-      <div className="sudokumini6x6-mech">6×6 Sudoku — fill so rows, columns, and 2×3 boxes contain digits 1–6.</div>
-      <div className="sudokumini6x6-grid">
+      <div className="sudoku6x6mint-mech">6×6 Sudoku — fill so rows, columns, and 2×3 boxes contain digits 1–6.</div>
+      <div className="sudoku6x6mint-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="sudokumini6x6-row">
+          <div key={r} className="sudoku6x6mint-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function SudokuMini6x6Game({ state, dispatch, onGameOver }: GameProps<Sud
               return (
                 <button
                   key={c}
-                  className={`sudokumini6x6-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`sudoku6x6mint-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as SudokuMini6x6Action)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function SudokuMini6x6Game({ state, dispatch, onGameOver }: GameProps<Sud
           </div>
         ))}
       </div>
-      <div className="sudokumini6x6-pad">
+      <div className="sudoku6x6mint-pad">
         {digits.map((d) => (
-          <button key={d} className="sudokumini6x6-num" onClick={() => dispatch({ type: "enter", digit: d } as SudokuMini6x6Action)}>{d}</button>
+          <button key={d} className="sudoku6x6mint-num" onClick={() => dispatch({ type: "enter", digit: d } as SudokuMini6x6Action)}>{d}</button>
         ))}
-        <button className="sudokumini6x6-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as SudokuMini6x6Action)}>×</button>
+        <button className="sudoku6x6mint-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as SudokuMini6x6Action)}>×</button>
       </div>
-      <div className="sudokumini6x6-actions">
-        <button className="sudokumini6x6-btn check" onClick={() => dispatch({ type: "check" } as SudokuMini6x6Action)}>Check</button>
-        <button className="sudokumini6x6-btn hint" onClick={() => dispatch({ type: "hint" } as SudokuMini6x6Action)}>Hint</button>
-        <button className="sudokumini6x6-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as SudokuMini6x6Action)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="sudoku6x6mint-actions">
+        <button className="sudoku6x6mint-btn check" onClick={() => dispatch({ type: "check" } as SudokuMini6x6Action)}>Check</button>
+        <button className="sudoku6x6mint-btn hint" onClick={() => dispatch({ type: "hint" } as SudokuMini6x6Action)}>Hint</button>
+        <button className="sudoku6x6mint-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as SudokuMini6x6Action)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="sudokumini6x6-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="sudoku6x6mint-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

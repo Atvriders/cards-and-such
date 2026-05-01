@@ -1,22 +1,80 @@
-.shikaku {
+.shikakumosaic {
   display: flex; flex-direction: column; align-items: center;
   gap: 12px; padding: 16px; font-family: sans-serif; user-select: none;
 }
-.shikaku-title { font-size: 1.5rem; font-weight: bold; }
-.shikaku-status { font-size: 0.95rem; color: #555; }
-.shikaku-status.win { color: #27ae60; font-weight: bold; }
-.shikaku-grid { display: grid; border: 2px solid #333; }
-.shikaku-cell {
+.shikakumosaic-title { font-size: 1.5rem; font-weight: bold; }
+.shikakumosaic-status { font-size: 0.95rem; color: #555; }
+.shikakumosaic-status.win { color: #27ae60; font-weight: bold; }
+.shikakumosaic-grid { display: grid; border: 2px solid #333; }
+.shikakumosaic-cell {
   display: flex; align-items: center; justify-content: center;
   border: 1px solid #ccc; box-sizing: border-box; cursor: crosshair;
   font-size: 1rem; background: #f9f9f9;
 }
-.shikaku-cell.draft-valid { background: #a5d6a7 !important; }
-.shikaku-cell.draft-invalid { background: #ef9a9a !important; }
-.shikaku-clue { font-weight: bold; font-size: 1rem; color: #222; }
-.shikaku-btns { display: flex; gap: 8px; }
-.shikaku-btns button {
+.shikakumosaic-cell.draft-valid { background: #a5d6a7 !important; }
+.shikakumosaic-cell.draft-invalid { background: #ef9a9a !important; }
+.shikakumosaic-clue { font-weight: bold; font-size: 1rem; color: #222; }
+.shikakumosaic-btns { display: flex; gap: 8px; }
+.shikakumosaic-btns button {
   padding: 8px 18px; font-size: 0.95rem; border: 1.5px solid #aaa;
   border-radius: 6px; cursor: pointer; background: #f5f5f5;
 }
-.shikaku-btns button:hover { background: #dde; }
+.shikakumosaic-btns button:hover { background: #dde; }
+
+
+/* === Theme: mosaic (Mosaic tile — terracotta) === */
+.shikakumosaic {
+  background: #f6f0e4;
+  color: #3a2a1a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.shikakumosaic .shikakumosaic-mech,
+.shikakumosaic [class*="-mech"],
+.shikakumosaic [class*="-status"]:not(.solved):not(.win) {
+  color: #7a5a3a;
+}
+.shikakumosaic [class*="-score"],
+.shikakumosaic [class*="-final"] {
+  color: #c4633a;
+}
+.shikakumosaic [class*="-grid"] {
+  background: #7a4520;
+  border-color: #7a4520;
+}
+.shikakumosaic [class*="-cell"] {
+  background: #f0e3c8;
+  color: #3a2a1a;
+}
+.shikakumosaic [class*="-cell"].sel,
+.shikakumosaic [class*="-cell"].selected {
+  outline: 3px solid #e0935f;
+  outline-offset: -3px;
+}
+.shikakumosaic [class*="-cell"].err,
+.shikakumosaic [class*="-cell"].error,
+.shikakumosaic [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #b5402a;
+}
+.shikakumosaic [class*="-num"]:hover,
+.shikakumosaic [class*="-numpad"] button:hover {
+  background: #e0935f;
+  color: #f6f0e4;
+  border-color: #c4633a;
+}
+.shikakumosaic [class*="-btn"].check,
+.shikakumosaic [class*="-controls"] button {
+  background: #c4633a;
+  color: #f6f0e4;
+  border-color: #c4633a;
+}
+.shikakumosaic [class*="-btn"].next {
+  background: #e0935f;
+  color: #f6f0e4;
+}
+.shikakumosaic [class*="-status"].solved,
+.shikakumosaic [class*="-status"].win {
+  color: #5a8c4a;
+}

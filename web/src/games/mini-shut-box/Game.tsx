@@ -12,7 +12,7 @@ export function MiniShutBoxGame({ state, dispatch, onGameOver }: GameProps<MiniS
   if (state.phase === "done") {
     const remaining = state.open.map((o, i) => o ? i + 1 : 0).filter(Boolean);
     return (
-      <div className="shutbox-wrap">
+      <div className="shutbox-wrap shutbox-theme">
         <div className={`shutbox-done ${state.perfect ? "perfect" : "regular"}`}>
           <h2>{state.perfect ? "Box SHUT!" : "Game Over"}</h2>
           <div className="shutbox-final">{state.score}</div>
@@ -30,7 +30,7 @@ export function MiniShutBoxGame({ state, dispatch, onGameOver }: GameProps<MiniS
   const remainingSum = state.open.reduce((s, o, i) => o ? s + (i + 1) : s, 0);
 
   return (
-    <div className="shutbox-wrap">
+    <div className="shutbox-wrap shutbox-theme">
       <header className="shutbox-header">
         <div className="shutbox-stat">
           <span className="shutbox-stat-label">Tiles closed</span>

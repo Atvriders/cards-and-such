@@ -1,27 +1,85 @@
-.palindromesudoku-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.palindromesudoku-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.palindromesudoku-score { font-weight:700;color:hsl(260, 60%, 40%); }
-.palindromesudoku-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.palindromesudoku-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.palindromesudoku-row { display:flex;gap:1px; }
-.palindromesudoku-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.palindromesudoku-cell.given { background:#ecf0f1;color:#2c3e50; }
-.palindromesudoku-cell.sel { background:hsl(260, 65%, 55%);color:#fff; }
-.palindromesudoku-cell.err { background:#fdedec;color:#e74c3c; }
-.palindromesudoku-cell.rt { margin-right:3px; }
-.palindromesudoku-cell.bt { margin-bottom:3px; }
-.palindromesudoku-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.palindromesudoku-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.palindromesudoku-num:hover { background:hsl(260, 70%, 92%);border-color:hsl(260, 60%, 55%); }
-.palindromesudoku-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.palindromesudoku-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.palindromesudoku-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.palindromesudoku-btn.check { background:#3498db; }
-.palindromesudoku-btn.hint { background:#f39c12; }
-.palindromesudoku-btn.next { background:hsl(260, 60%, 45%); }
-.palindromesudoku-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.palindromesudoku-status { font-weight:700;font-size:1rem; }
-.palindromesudoku-status.solved { color:#27ae60; }
-.palindromesudoku-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.palindromesudoku-done h2 { margin-bottom:6px;color:#2c3e50; }
-.palindromesudoku-final { font-size:1.6rem;font-weight:900;color:hsl(260, 60%, 40%); }
+.palindromemirror-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.palindromemirror-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.palindromemirror-score { font-weight:700;color:hsl(260, 60%, 40%); }
+.palindromemirror-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.palindromemirror-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.palindromemirror-row { display:flex;gap:1px; }
+.palindromemirror-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.palindromemirror-cell.given { background:#ecf0f1;color:#2c3e50; }
+.palindromemirror-cell.sel { background:hsl(260, 65%, 55%);color:#fff; }
+.palindromemirror-cell.err { background:#fdedec;color:#e74c3c; }
+.palindromemirror-cell.rt { margin-right:3px; }
+.palindromemirror-cell.bt { margin-bottom:3px; }
+.palindromemirror-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.palindromemirror-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.palindromemirror-num:hover { background:hsl(260, 70%, 92%);border-color:hsl(260, 60%, 55%); }
+.palindromemirror-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.palindromemirror-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.palindromemirror-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.palindromemirror-btn.check { background:#3498db; }
+.palindromemirror-btn.hint { background:#f39c12; }
+.palindromemirror-btn.next { background:hsl(260, 60%, 45%); }
+.palindromemirror-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.palindromemirror-status { font-weight:700;font-size:1rem; }
+.palindromemirror-status.solved { color:#27ae60; }
+.palindromemirror-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.palindromemirror-done h2 { margin-bottom:6px;color:#2c3e50; }
+.palindromemirror-final { font-size:1.6rem;font-weight:900;color:hsl(260, 60%, 40%); }
+
+
+/* === Theme: mirror (Mirror palindrome — sea foam) === */
+.palindromemirror {
+  background: #e8f4f0;
+  color: #0d2a28;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.palindromemirror .palindromemirror-mech,
+.palindromemirror [class*="-mech"],
+.palindromemirror [class*="-status"]:not(.solved):not(.win) {
+  color: #4a7a70;
+}
+.palindromemirror [class*="-score"],
+.palindromemirror [class*="-final"] {
+  color: #3a8a78;
+}
+.palindromemirror [class*="-grid"] {
+  background: #1a4a40;
+  border-color: #1a4a40;
+}
+.palindromemirror [class*="-cell"] {
+  background: #d4e8e0;
+  color: #0d2a28;
+}
+.palindromemirror [class*="-cell"].sel,
+.palindromemirror [class*="-cell"].selected {
+  outline: 3px solid #6abaa8;
+  outline-offset: -3px;
+}
+.palindromemirror [class*="-cell"].err,
+.palindromemirror [class*="-cell"].error,
+.palindromemirror [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #c44a4a;
+}
+.palindromemirror [class*="-num"]:hover,
+.palindromemirror [class*="-numpad"] button:hover {
+  background: #6abaa8;
+  color: #e8f4f0;
+  border-color: #3a8a78;
+}
+.palindromemirror [class*="-btn"].check,
+.palindromemirror [class*="-controls"] button {
+  background: #3a8a78;
+  color: #e8f4f0;
+  border-color: #3a8a78;
+}
+.palindromemirror [class*="-btn"].next {
+  background: #6abaa8;
+  color: #e8f4f0;
+}
+.palindromemirror [class*="-status"].solved,
+.palindromemirror [class*="-status"].win {
+  color: #3a8a78;
+}

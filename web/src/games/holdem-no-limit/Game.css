@@ -368,3 +368,48 @@
 @media (prefers-reduced-motion: reduce) {
   .holdem-community .holdem-card { animation: none; }
 }
+
+
+/* === poker-theme:holdem-emerald === unique-class .thmHldNL === */
+.thmHldNL,
+.thmHldNL.dm-wrap,
+.thmHldNL.holdem-wrap,
+.thmHldNL.g-wrap,
+.thmHldNL .dm-wrap,
+.thmHldNL .holdem-wrap,
+.thmHldNL .holdem-table,
+.thmHldNL .g-wrap,
+.thmHldNL .holdem-no-limit-felt,
+.thmHldNL [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #0e6a48 0%, #054a2c 60%, #021712 100%) !important;
+  color: #f7f1e1 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #d8b86a;
+  --theme-accent2: #f3d488;
+  --theme-ink: #f7f1e1;
+  --theme-rim: #2a1a0a;
+}
+.thmHldNL .dm-score,
+.thmHldNL .holdem-pot-amount,
+.thmHldNL [class$="-stack"],
+.thmHldNL [class$="-pot-amount"] {
+  color: #f3d488 !important;
+  text-shadow: 0 0 18px #d8b86a55;
+}
+.thmHldNL .dm-info,
+.thmHldNL [class$="-hud"],
+.thmHldNL [class$="-stat"] {
+  border-color: #d8b86a55 !important;
+}
+.thmHldNL .dm-card,
+.thmHldNL .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #d8b86a22;
+}
+.thmHldNL .dm-btn,
+.thmHldNL [class*="-btn"] {
+  border-color: #d8b86a55 !important;
+}

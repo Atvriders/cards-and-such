@@ -1,30 +1,88 @@
-.takuzumini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.takuzumini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.takuzumini-score { font-weight:700;color:hsl(280, 60%, 40%); }
-.takuzumini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.takuzumini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.takuzumini-row { display:flex;gap:1px; }
-.takuzumini-cell { width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.takuzumini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.takuzumini-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
-.takuzumini-cell.sel { outline:3px solid hsl(280, 65%, 55%);outline-offset:-3px; }
-.takuzumini-cell.err { background:#fdedec;color:#e74c3c; }
-.takuzumini-cell.val0 { background:#fff5d8; }
-.takuzumini-cell.val1 { background:#d8eaff; }
-.takuzumini-cell.val2 { background:#ffe0e0; }
-.takuzumini-cell.val3 { background:#e0ffe0; }
-.takuzumini-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
-.takuzumini-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.takuzumini-num:hover { background:hsl(280, 70%, 92%);border-color:hsl(280, 60%, 55%); }
-.takuzumini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.takuzumini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.takuzumini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.takuzumini-btn.check { background:#3498db; }
-.takuzumini-btn.hint { background:#f39c12; }
-.takuzumini-btn.next { background:hsl(280, 60%, 45%); }
-.takuzumini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.takuzumini-status { font-weight:700;font-size:1rem; }
-.takuzumini-status.solved { color:#27ae60; }
-.takuzumini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.takuzumini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.takuzumini-final { font-size:1.6rem;font-weight:900;color:hsl(280, 60%, 40%); }
+.takuzudual-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.takuzudual-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.takuzudual-score { font-weight:700;color:hsl(280, 60%, 40%); }
+.takuzudual-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.takuzudual-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.takuzudual-row { display:flex;gap:1px; }
+.takuzudual-cell { width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.takuzudual-cell.given { background:#ecf0f1;color:#2c3e50; }
+.takuzudual-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
+.takuzudual-cell.sel { outline:3px solid hsl(280, 65%, 55%);outline-offset:-3px; }
+.takuzudual-cell.err { background:#fdedec;color:#e74c3c; }
+.takuzudual-cell.val0 { background:#fff5d8; }
+.takuzudual-cell.val1 { background:#d8eaff; }
+.takuzudual-cell.val2 { background:#ffe0e0; }
+.takuzudual-cell.val3 { background:#e0ffe0; }
+.takuzudual-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
+.takuzudual-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.takuzudual-num:hover { background:hsl(280, 70%, 92%);border-color:hsl(280, 60%, 55%); }
+.takuzudual-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.takuzudual-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.takuzudual-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.takuzudual-btn.check { background:#3498db; }
+.takuzudual-btn.hint { background:#f39c12; }
+.takuzudual-btn.next { background:hsl(280, 60%, 45%); }
+.takuzudual-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.takuzudual-status { font-weight:700;font-size:1rem; }
+.takuzudual-status.solved { color:#27ae60; }
+.takuzudual-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.takuzudual-done h2 { margin-bottom:6px;color:#2c3e50; }
+.takuzudual-final { font-size:1.6rem;font-weight:900;color:hsl(280, 60%, 40%); }
+
+
+/* === Theme: dual-tone (Dual tone — blue & yellow bits) === */
+.takuzudual {
+  background: #f4f7fb;
+  color: #1a2840;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.takuzudual .takuzudual-mech,
+.takuzudual [class*="-mech"],
+.takuzudual [class*="-status"]:not(.solved):not(.win) {
+  color: #4a607a;
+}
+.takuzudual [class*="-score"],
+.takuzudual [class*="-final"] {
+  color: #2a5aa8;
+}
+.takuzudual [class*="-grid"] {
+  background: #2a5aa8;
+  border-color: #2a5aa8;
+}
+.takuzudual [class*="-cell"] {
+  background: #e2e8f4;
+  color: #1a2840;
+}
+.takuzudual [class*="-cell"].sel,
+.takuzudual [class*="-cell"].selected {
+  outline: 3px solid #f0c640;
+  outline-offset: -3px;
+}
+.takuzudual [class*="-cell"].err,
+.takuzudual [class*="-cell"].error,
+.takuzudual [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #c43a3a;
+}
+.takuzudual [class*="-num"]:hover,
+.takuzudual [class*="-numpad"] button:hover {
+  background: #f0c640;
+  color: #f4f7fb;
+  border-color: #2a5aa8;
+}
+.takuzudual [class*="-btn"].check,
+.takuzudual [class*="-controls"] button {
+  background: #2a5aa8;
+  color: #f4f7fb;
+  border-color: #2a5aa8;
+}
+.takuzudual [class*="-btn"].next {
+  background: #f0c640;
+  color: #f4f7fb;
+}
+.takuzudual [class*="-status"].solved,
+.takuzudual [class*="-status"].win {
+  color: #3a8a5a;
+}

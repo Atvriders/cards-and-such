@@ -10,11 +10,11 @@ export function DobbleKidsGame({ state, dispatch, onGameOver }: GameProps<Dobble
 
   if (state.phase === "done") {
     return (
-      <div className="dobkid-wrap">
-        <div className="dobkid-done">
+      <div className="dobkidz-wrap">
+        <div className="dobkidz-done">
           <h2>Spotted</h2>
-          <div className="dobkid-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
-          <div className="dobkid-final">{state.score} pts</div>
+          <div className="dobkidz-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
+          <div className="dobkidz-final">{state.score} pts</div>
         </div>
       </div>
     );
@@ -31,34 +31,34 @@ export function DobbleKidsGame({ state, dispatch, onGameOver }: GameProps<Dobble
   const isCorrect = state.selected === r.shared;
 
   return (
-    <div className="dobkid-wrap">
-      <div className="dobkid-header">
-        <span className="dobkid-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="dobkid-score">{state.score} pts</span>
+    <div className="dobkidz-wrap">
+      <div className="dobkidz-header">
+        <span className="dobkidz-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="dobkidz-score">{state.score} pts</span>
       </div>
-      <div className="dobkid-prompt">Find the symbol on BOTH cards. Click it.</div>
-      <div className="dobkid-cards">
-        <div className="dobkid-card">
+      <div className="dobkidz-prompt">Find the symbol on BOTH cards. Click it.</div>
+      <div className="dobkidz-cards">
+        <div className="dobkidz-card">
           {r.cardA.symbols.map((s, i) => (
-            <button key={"a"+i} className={`dobkid-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"a"+i} className={`dobkidz-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
-        <div className="dobkid-vs">vs</div>
-        <div className="dobkid-card">
+        <div className="dobkidz-vs">vs</div>
+        <div className="dobkidz-card">
           {r.cardB.symbols.map((s, i) => (
-            <button key={"b"+i} className={`dobkid-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"b"+i} className={`dobkidz-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
       </div>
       {state.submitted && (
         <>
-          <div className={`dobkid-feedback ${isCorrect ? "ok" : "no"}`}>
+          <div className={`dobkidz-feedback ${isCorrect ? "ok" : "no"}`}>
             {isCorrect ? `Match in ${(state.lastMs / 1000).toFixed(1)}s` : `Miss · the match was ${r.shared}`}
           </div>
-          <button className="dobkid-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
+          <button className="dobkidz-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
         </>
       )}
-      {!state.submitted && <div className="dobkid-timer">Speed counts · click fast for bonus points</div>}
+      {!state.submitted && <div className="dobkidz-timer">Speed counts · click fast for bonus points</div>}
     </div>
   );
 }

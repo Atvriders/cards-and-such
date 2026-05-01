@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === monetpq-themewrap themed palette (monet_impressionist) === */
+.monetpq-themewrap.trivia-wrap,
+.monetpq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #e0f2fe;
+  color: #0c4a6e;
+  border-color: #bae6fd55;
+}
+.monetpq-themewrap .trivia-progress,
+.monetpq-themewrap .trivia-score { color: #7dd3fc; }
+.monetpq-themewrap .trivia-timer { color: #bae6fd; }
+.monetpq-themewrap .trivia-timer.urgent { color: #fecaca; }
+.monetpq-themewrap .trivia-question { color: #0c4a6e; }
+.monetpq-themewrap .trivia-choice {
+  background: #f0f9ff;
+  color: #0c4a6e;
+  border: 1.5px solid #bae6fd;
+}
+.monetpq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #7dd3fc;
+  background: #bae6fd22;
+}
+.monetpq-themewrap .trivia-choice.selected {
+  border-color: #7dd3fc;
+  background: #bae6fd33;
+}
+.monetpq-themewrap .trivia-choice.correct {
+  background: #a7f3d0;
+  border-color: #a7f3d0;
+  color: #0c4a6e;
+}
+.monetpq-themewrap .trivia-choice.wrong {
+  background: #fecaca;
+  border-color: #fecaca;
+  color: #0c4a6e;
+}
+.monetpq-themewrap .trivia-choice-letter {
+  background: #7dd3fc;
+  color: #fff;
+}
+.monetpq-themewrap .trivia-feedback.correct { background: #a7f3d0; color: #0c4a6e; }
+.monetpq-themewrap .trivia-feedback.wrong { background: #fecaca; color: #0c4a6e; }
+.monetpq-themewrap .trivia-btn.submit { background: #7dd3fc; }
+.monetpq-themewrap .trivia-btn.next { background: #bae6fd; }
+.monetpq-themewrap .trivia-done { background: #f0f9ff; color: #0c4a6e; }
+.monetpq-themewrap .trivia-done h2 { color: #7dd3fc; }

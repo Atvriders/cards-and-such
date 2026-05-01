@@ -1,2 +1,47 @@
 /* Modern casino-table engine — see web/src/engines/casino/casino.css */
 @import "../../engines/casino/casino.css";
+
+
+/* === poker-theme:pineapple-trop === unique-class .thmLazyPCas === */
+.thmLazyPCas,
+.thmLazyPCas.dm-wrap,
+.thmLazyPCas.holdem-wrap,
+.thmLazyPCas.g-wrap,
+.thmLazyPCas .dm-wrap,
+.thmLazyPCas .holdem-wrap,
+.thmLazyPCas .holdem-table,
+.thmLazyPCas .g-wrap,
+.thmLazyPCas .lazy-pineapple-cas-felt,
+.thmLazyPCas [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #b85a18 0%, #6a2f08 60%, #2a1300 100%) !important;
+  color: #fff5e2 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #ffcf66;
+  --theme-accent2: #ffe6a8;
+  --theme-ink: #fff5e2;
+  --theme-rim: #2a1300;
+}
+.thmLazyPCas .dm-score,
+.thmLazyPCas .holdem-pot-amount,
+.thmLazyPCas [class$="-stack"],
+.thmLazyPCas [class$="-pot-amount"] {
+  color: #ffe6a8 !important;
+  text-shadow: 0 0 18px #ffcf6655;
+}
+.thmLazyPCas .dm-info,
+.thmLazyPCas [class$="-hud"],
+.thmLazyPCas [class$="-stat"] {
+  border-color: #ffcf6655 !important;
+}
+.thmLazyPCas .dm-card,
+.thmLazyPCas .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #ffcf6622;
+}
+.thmLazyPCas .dm-btn,
+.thmLazyPCas [class*="-btn"] {
+  border-color: #ffcf6655 !important;
+}

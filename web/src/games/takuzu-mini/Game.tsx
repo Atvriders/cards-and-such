@@ -10,11 +10,11 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
 
   if (state.phase === "done") {
     return (
-      <div className="takuzumini-wrap">
-        <div className="takuzumini-done">
+      <div className="takuzudual-wrap">
+        <div className="takuzudual-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="takuzumini-final">{state.score} pts</p>
+          <p className="takuzudual-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
   const errSet = new Set(state.errors);
 
   return (
-    <div className="takuzumini-wrap">
-      <div className="takuzumini-header">
+    <div className="takuzudual-wrap">
+      <div className="takuzudual-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="takuzumini-score">{state.score} pts</span>
+        <span className="takuzudual-score">{state.score} pts</span>
       </div>
-      <div className="takuzumini-mech">Same rules as Binairo: equal counts, no 3-in-a-row of same symbol.</div>
-      <div className="takuzumini-grid">
+      <div className="takuzudual-mech">Same rules as Binairo: equal counts, no 3-in-a-row of same symbol.</div>
+      <div className="takuzudual-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="takuzumini-row">
+          <div key={r} className="takuzudual-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`takuzumini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`takuzudual-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as TakuzuMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
           </div>
         ))}
       </div>
-      <div className="takuzumini-pad">
+      <div className="takuzudual-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`takuzumini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as TakuzuMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`takuzudual-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as TakuzuMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="takuzumini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as TakuzuMiniAction)}>×</button>
+        <button className="takuzudual-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as TakuzuMiniAction)}>×</button>
       </div>
-      <div className="takuzumini-actions">
-        <button className="takuzumini-btn check" onClick={() => dispatch({ type: "check" } as TakuzuMiniAction)}>Check</button>
-        <button className="takuzumini-btn hint" onClick={() => dispatch({ type: "hint" } as TakuzuMiniAction)}>Hint</button>
-        <button className="takuzumini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as TakuzuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="takuzudual-actions">
+        <button className="takuzudual-btn check" onClick={() => dispatch({ type: "check" } as TakuzuMiniAction)}>Check</button>
+        <button className="takuzudual-btn hint" onClick={() => dispatch({ type: "hint" } as TakuzuMiniAction)}>Hint</button>
+        <button className="takuzudual-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as TakuzuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="takuzumini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="takuzudual-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

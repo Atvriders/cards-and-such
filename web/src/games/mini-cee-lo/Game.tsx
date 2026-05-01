@@ -12,7 +12,7 @@ export function MiniCeeLoGame({ state, dispatch, onGameOver }: GameProps<MiniCee
   if (state.phase === "done") {
     const wonSeries = state.playerWins > state.cpuWins;
     return (
-      <div className="ceelo-wrap">
+      <div className="ceelo-wrap ceelo-theme">
         <div className={`ceelo-done ${wonSeries ? "win" : "lose"}`}>
           <h2>{wonSeries ? "You Win the Series!" : "CPU Wins the Series"}</h2>
           <div className="ceelo-final">
@@ -27,7 +27,7 @@ export function MiniCeeLoGame({ state, dispatch, onGameOver }: GameProps<MiniCee
   }
 
   return (
-    <div className="ceelo-wrap">
+    <div className="ceelo-wrap ceelo-theme">
       <header className="ceelo-header">
         <div className="ceelo-round">
           <span className="ceelo-round-label">Round</span>

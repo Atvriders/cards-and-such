@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-mountain (unique class prefix + themed palette over shared dm-* engine) */
+.dice-mountain-theme.dm-wrap {
+  background: linear-gradient(180deg,#1e293b 0%,#475569 50%,#cbd5e1 100%);
+}
+.dice-mountain-theme .dm-info,
+.dice-mountain-theme .dm-header {
+  color: #f8fafc;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-mountain-theme .dm-target { color: #f8fafc; opacity: 0.85; }
+.dice-mountain-theme .dm-score {
+  background: linear-gradient(180deg, #cbd5e1, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(148,163,184,0.45);
+}
+.dice-mountain-theme .dm-die {
+  background: linear-gradient(145deg,#f8fafc,#e2e8f0);
+  color: #0f172a;
+}
+.dice-mountain-theme .dm-card {
+  background: linear-gradient(145deg,#f8fafc,#e2e8f0);
+  color: #0f172a;
+}
+.dice-mountain-theme .dm-btn {
+  background: linear-gradient(180deg, #64748b 0%, #334155 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(51,65,85,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-mountain-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #94a3b8 0%, #cbd5e1 100%);
+  color: #1f2937;
+}
+.dice-mountain-theme .dm-bet-btn {
+  color: #f8fafc;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-mountain-theme .dm-result {
+  color: #f8fafc;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-mountain-theme .dm-feedback {
+  color: #cbd5e1;
+  text-shadow: 0 0 12px rgba(148,163,184,0.6);
+}
+.dice-mountain-theme .dm-final {
+  background: linear-gradient(180deg, #e2e8f0, #64748b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-mountain-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #64748b, #334155);
+  border-color: #cbd5e1;
+}
+.dice-mountain-theme .dm-die.selected,
+.dice-mountain-theme .dm-die.hl {
+  border-color: #94a3b8;
+  box-shadow:
+    0 0 0 2px #94a3b8,
+    0 0 22px rgba(148,163,184,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

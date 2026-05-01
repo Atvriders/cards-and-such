@@ -1,4 +1,4 @@
-.sudoku {
+.sudokunews {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,14 +7,14 @@
   user-select: none;
 }
 
-.sudoku-info {
+.sudokunews-info {
   display: flex;
   gap: 24px;
   font-size: 0.9rem;
   color: #555;
 }
 
-.sudoku-grid {
+.sudokunews-grid {
   display: grid;
   grid-template-columns: repeat(9, 44px);
   grid-template-rows: repeat(9, 44px);
@@ -22,7 +22,7 @@
   gap: 0;
 }
 
-.sudoku-cell {
+.sudokunews-cell {
   width: 44px;
   height: 44px;
   display: flex;
@@ -37,50 +37,50 @@
 }
 
 /* Thicker borders every 3 cells — right and bottom */
-.sudoku-cell[data-col="2"],
-.sudoku-cell[data-col="5"] {
+.sudokunews-cell[data-col="2"],
+.sudokunews-cell[data-col="5"] {
   border-right: 3px solid #222;
 }
 
-.sudoku-cell[data-row="2"],
-.sudoku-cell[data-row="5"] {
+.sudokunews-cell[data-row="2"],
+.sudokunews-cell[data-row="5"] {
   border-bottom: 3px solid #222;
 }
 
-.sudoku-cell.given {
+.sudokunews-cell.given {
   font-weight: 700;
   color: #1a1a2e;
 }
 
-.sudoku-cell.player {
+.sudokunews-cell.player {
   color: #0057b8;
 }
 
-.sudoku-cell.selected {
+.sudokunews-cell.selected {
   background: #cce5ff;
 }
 
-.sudoku-cell.error {
+.sudokunews-cell.error {
   background: #ffe0e0;
   color: #c00;
 }
 
-.sudoku-cell.error.selected {
+.sudokunews-cell.error.selected {
   background: #ffb3b3;
 }
 
-.sudoku-cell.hint-group {
+.sudokunews-cell.hint-group {
   background: #e8f5e9;
 }
 
-.sudoku-numpad {
+.sudokunews-numpad {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.sudoku-numpad button {
+.sudokunews-numpad button {
   width: 40px;
   height: 40px;
   font-size: 1.1rem;
@@ -92,23 +92,23 @@
   transition: background 0.1s, border-color 0.1s;
 }
 
-.sudoku-numpad button:hover {
+.sudokunews-numpad button:hover {
   background: #e0ecff;
   border-color: #0057b8;
 }
 
-.sudoku-numpad button.erase {
+.sudokunews-numpad button.erase {
   font-size: 0.8rem;
   color: #c00;
   border-color: #c00;
 }
 
-.sudoku-controls {
+.sudokunews-controls {
   display: flex;
   gap: 12px;
 }
 
-.sudoku-controls button {
+.sudokunews-controls button {
   padding: 8px 20px;
   font-size: 0.95rem;
   font-family: inherit;
@@ -120,16 +120,16 @@
   transition: background 0.15s;
 }
 
-.sudoku-controls button:hover:not(:disabled) {
+.sudokunews-controls button:hover:not(:disabled) {
   background: #003d82;
 }
 
-.sudoku-controls button:disabled {
+.sudokunews-controls button:disabled {
   opacity: 0.5;
   cursor: default;
 }
 
-.sudoku-game-over {
+.sudokunews-game-over {
   font-size: 1.2rem;
   font-weight: 700;
   color: #0057b8;
@@ -137,4 +137,62 @@
   border: 2px solid #0057b8;
   border-radius: 8px;
   background: #e0ecff;
+}
+
+
+/* === Theme: newspaper (Newspaper ink — black serif on cream) === */
+.sudokunews {
+  background: #fafaf6;
+  color: #1a1a1a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.sudokunews .sudokunews-mech,
+.sudokunews [class*="-mech"],
+.sudokunews [class*="-status"]:not(.solved):not(.win) {
+  color: #555;
+}
+.sudokunews [class*="-score"],
+.sudokunews [class*="-final"] {
+  color: #222222;
+}
+.sudokunews [class*="-grid"] {
+  background: #0d0d0d;
+  border-color: #0d0d0d;
+}
+.sudokunews [class*="-cell"] {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+.sudokunews [class*="-cell"].sel,
+.sudokunews [class*="-cell"].selected {
+  outline: 3px solid #444444;
+  outline-offset: -3px;
+}
+.sudokunews [class*="-cell"].err,
+.sudokunews [class*="-cell"].error,
+.sudokunews [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #a30000;
+}
+.sudokunews [class*="-num"]:hover,
+.sudokunews [class*="-numpad"] button:hover {
+  background: #444444;
+  color: #fafaf6;
+  border-color: #222222;
+}
+.sudokunews [class*="-btn"].check,
+.sudokunews [class*="-controls"] button {
+  background: #1a1a1a;
+  color: #fafaf6;
+  border-color: #222222;
+}
+.sudokunews [class*="-btn"].next {
+  background: #444444;
+  color: #fafaf6;
+}
+.sudokunews [class*="-status"].solved,
+.sudokunews [class*="-status"].win {
+  color: #1a1a1a;
 }

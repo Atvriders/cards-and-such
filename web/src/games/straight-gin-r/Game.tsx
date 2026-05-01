@@ -5,16 +5,16 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function StraightGinRGame({ state, dispatch, onGameOver }: GameProps<StraightGinRState, StraightGinRSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="stgr-wrap"><div className="stgr-done"><h2>Done!</h2><div className="stgr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="dm-btn" onClick={() => dispatch({ type: "score" } as StraightGinRAction)}>Auto-score</button>}
+    <div className="stgr-wrap">
+      <div className="stgr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="stgr-score">{state.score} pts</div>
+      <div className="stgr-row">{state.hand.map((c, i) => <div key={i} className={`stgr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <button className="stgr-btn" onClick={() => dispatch({ type: "score" } as StraightGinRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as StraightGinRAction)}>Next</button>
+        <div className="stgr-result">{state.result} — +{state.pts}</div>
+        <button className="stgr-btn alt" onClick={() => dispatch({ type: "next" } as StraightGinRAction)}>Next</button>
       </>}
     </div>
   );

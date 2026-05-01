@@ -1,4 +1,4 @@
-.akari {
+.akarilamp {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,14 +7,14 @@
   font-family: sans-serif;
   user-select: none;
 }
-.akari-title { font-size: 1.5rem; font-weight: bold; }
-.akari-status { font-size: 0.95rem; color: #555; }
-.akari-status.win { color: #27ae60; font-weight: bold; }
-.akari-grid {
+.akarilamp-title { font-size: 1.5rem; font-weight: bold; }
+.akarilamp-status { font-size: 0.95rem; color: #555; }
+.akarilamp-status.win { color: #27ae60; font-weight: bold; }
+.akarilamp-grid {
   display: grid;
   border: 2px solid #333;
 }
-.akari-cell {
+.akarilamp-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,17 +24,17 @@
   font-size: 1.1rem;
   background: #f5f5f5;
 }
-.akari-cell.wall {
+.akarilamp-cell.wall {
   background: #222;
   color: #fff;
   font-weight: bold;
   cursor: default;
 }
-.akari-cell.lit { background: #fffde7; }
-.akari-cell.bulb { background: #fff176; color: #e65100; }
-.akari-cell.bulb.conflict { background: #ffccbc; color: #c62828; }
-.akari-btns { display: flex; gap: 8px; }
-.akari-btns button {
+.akarilamp-cell.lit { background: #fffde7; }
+.akarilamp-cell.bulb { background: #fff176; color: #e65100; }
+.akarilamp-cell.bulb.conflict { background: #ffccbc; color: #c62828; }
+.akarilamp-btns { display: flex; gap: 8px; }
+.akarilamp-btns button {
   padding: 8px 18px;
   font-size: 0.95rem;
   border: 1.5px solid #aaa;
@@ -42,4 +42,62 @@
   cursor: pointer;
   background: #f5f5f5;
 }
-.akari-btns button:hover { background: #dde; }
+.akarilamp-btns button:hover { background: #dde; }
+
+
+/* === Theme: lamp (Lamp light — yellow on slate) === */
+.akarilamp {
+  background: #1a1a26;
+  color: #fff5cc;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.akarilamp .akarilamp-mech,
+.akarilamp [class*="-mech"],
+.akarilamp [class*="-status"]:not(.solved):not(.win) {
+  color: #bdb8a0;
+}
+.akarilamp [class*="-score"],
+.akarilamp [class*="-final"] {
+  color: #ffd84a;
+}
+.akarilamp [class*="-grid"] {
+  background: #ffd84a;
+  border-color: #ffd84a;
+}
+.akarilamp [class*="-cell"] {
+  background: #2c2c40;
+  color: #fff5cc;
+}
+.akarilamp [class*="-cell"].sel,
+.akarilamp [class*="-cell"].selected {
+  outline: 3px solid #ffe680;
+  outline-offset: -3px;
+}
+.akarilamp [class*="-cell"].err,
+.akarilamp [class*="-cell"].error,
+.akarilamp [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #ff7a7a;
+}
+.akarilamp [class*="-num"]:hover,
+.akarilamp [class*="-numpad"] button:hover {
+  background: #ffe680;
+  color: #1a1a26;
+  border-color: #ffd84a;
+}
+.akarilamp [class*="-btn"].check,
+.akarilamp [class*="-controls"] button {
+  background: #ffd84a;
+  color: #1a1a26;
+  border-color: #ffd84a;
+}
+.akarilamp [class*="-btn"].next {
+  background: #ffe680;
+  color: #1a1a26;
+}
+.akarilamp [class*="-status"].solved,
+.akarilamp [class*="-status"].win {
+  color: #7adba0;
+}

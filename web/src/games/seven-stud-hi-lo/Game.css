@@ -36,3 +36,48 @@
 .sevenstud-hilo-gameover { text-align: center; font-family: "JetBrains Mono", monospace; font-size: 1.2rem; color: #ffd76b; padding: 0.75rem; background: rgba(0, 0, 0, 0.5); border-radius: 8px; }
 .sevenstud-hilo-discardable { box-shadow: 0 0 0 3px #ffd76b, 0 0 12px rgba(255, 215, 107, 0.5); cursor: pointer; }
 .sevenstud-hilo-discardprompt { font-family: "JetBrains Mono", monospace; font-size: 0.9rem; color: #ffd76b; padding: 0.5rem 1rem; border: 1px dashed #ffd76b; border-radius: 8px; }
+
+
+/* === poker-theme:stud-mahogany === unique-class .thm7StudHL === */
+.thm7StudHL,
+.thm7StudHL.dm-wrap,
+.thm7StudHL.holdem-wrap,
+.thm7StudHL.g-wrap,
+.thm7StudHL .dm-wrap,
+.thm7StudHL .holdem-wrap,
+.thm7StudHL .holdem-table,
+.thm7StudHL .g-wrap,
+.thm7StudHL .seven-stud-hi-lo-felt,
+.thm7StudHL [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #4d1f12 0%, #2b110a 60%, #0e0604 100%) !important;
+  color: #f5e7cf !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.6),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.6) !important;
+  --theme-accent: #d6a060;
+  --theme-accent2: #f3cf90;
+  --theme-ink: #f5e7cf;
+  --theme-rim: #1a0a04;
+}
+.thm7StudHL .dm-score,
+.thm7StudHL .holdem-pot-amount,
+.thm7StudHL [class$="-stack"],
+.thm7StudHL [class$="-pot-amount"] {
+  color: #f3cf90 !important;
+  text-shadow: 0 0 18px #d6a06055;
+}
+.thm7StudHL .dm-info,
+.thm7StudHL [class$="-hud"],
+.thm7StudHL [class$="-stat"] {
+  border-color: #d6a06055 !important;
+}
+.thm7StudHL .dm-card,
+.thm7StudHL .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.6), 0 0 0 1px #d6a06022;
+}
+.thm7StudHL .dm-btn,
+.thm7StudHL [class*="-btn"] {
+  border-color: #d6a06055 !important;
+}

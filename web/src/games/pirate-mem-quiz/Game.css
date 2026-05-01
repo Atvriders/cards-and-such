@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === piratmq-themewrap themed palette (pirate_treasure) === */
+.piratmq-themewrap.trivia-wrap,
+.piratmq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #1c1917;
+  color: #fef3c7;
+  border-color: #a1620755;
+}
+.piratmq-themewrap .trivia-progress,
+.piratmq-themewrap .trivia-score { color: #facc15; }
+.piratmq-themewrap .trivia-timer { color: #a16207; }
+.piratmq-themewrap .trivia-timer.urgent { color: #fca5a5; }
+.piratmq-themewrap .trivia-question { color: #fef3c7; }
+.piratmq-themewrap .trivia-choice {
+  background: #292524;
+  color: #fef3c7;
+  border: 1.5px solid #a16207;
+}
+.piratmq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #facc15;
+  background: #a1620722;
+}
+.piratmq-themewrap .trivia-choice.selected {
+  border-color: #facc15;
+  background: #a1620733;
+}
+.piratmq-themewrap .trivia-choice.correct {
+  background: #86efac;
+  border-color: #86efac;
+  color: #fef3c7;
+}
+.piratmq-themewrap .trivia-choice.wrong {
+  background: #fca5a5;
+  border-color: #fca5a5;
+  color: #fef3c7;
+}
+.piratmq-themewrap .trivia-choice-letter {
+  background: #facc15;
+  color: #fff;
+}
+.piratmq-themewrap .trivia-feedback.correct { background: #86efac; color: #fef3c7; }
+.piratmq-themewrap .trivia-feedback.wrong { background: #fca5a5; color: #fef3c7; }
+.piratmq-themewrap .trivia-btn.submit { background: #facc15; }
+.piratmq-themewrap .trivia-btn.next { background: #a16207; }
+.piratmq-themewrap .trivia-done { background: #292524; color: #fef3c7; }
+.piratmq-themewrap .trivia-done h2 { color: #facc15; }

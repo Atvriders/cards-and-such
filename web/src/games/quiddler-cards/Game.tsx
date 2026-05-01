@@ -7,10 +7,10 @@ export function QuiddlerCardsGame({ state, dispatch, onGameOver }: GameProps<Qui
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap qdc-scope"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap qdc-scope">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.you !== null && state.cpu !== null && (

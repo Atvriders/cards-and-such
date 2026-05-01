@@ -1,27 +1,85 @@
-.xsudokumini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.xsudokumini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.xsudokumini-score { font-weight:700;color:hsl(150, 60%, 40%); }
-.xsudokumini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.xsudokumini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.xsudokumini-row { display:flex;gap:1px; }
-.xsudokumini-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.xsudokumini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.xsudokumini-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
-.xsudokumini-cell.err { background:#fdedec;color:#e74c3c; }
-.xsudokumini-cell.rt { margin-right:3px; }
-.xsudokumini-cell.bt { margin-bottom:3px; }
-.xsudokumini-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.xsudokumini-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.xsudokumini-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
-.xsudokumini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.xsudokumini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.xsudokumini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.xsudokumini-btn.check { background:#3498db; }
-.xsudokumini-btn.hint { background:#f39c12; }
-.xsudokumini-btn.next { background:hsl(150, 60%, 45%); }
-.xsudokumini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.xsudokumini-status { font-weight:700;font-size:1rem; }
-.xsudokumini-status.solved { color:#27ae60; }
-.xsudokumini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.xsudokumini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.xsudokumini-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+.xsudokucrimson-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.xsudokucrimson-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.xsudokucrimson-score { font-weight:700;color:hsl(150, 60%, 40%); }
+.xsudokucrimson-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.xsudokucrimson-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.xsudokucrimson-row { display:flex;gap:1px; }
+.xsudokucrimson-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.xsudokucrimson-cell.given { background:#ecf0f1;color:#2c3e50; }
+.xsudokucrimson-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
+.xsudokucrimson-cell.err { background:#fdedec;color:#e74c3c; }
+.xsudokucrimson-cell.rt { margin-right:3px; }
+.xsudokucrimson-cell.bt { margin-bottom:3px; }
+.xsudokucrimson-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.xsudokucrimson-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.xsudokucrimson-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
+.xsudokucrimson-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.xsudokucrimson-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.xsudokucrimson-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.xsudokucrimson-btn.check { background:#3498db; }
+.xsudokucrimson-btn.hint { background:#f39c12; }
+.xsudokucrimson-btn.next { background:hsl(150, 60%, 45%); }
+.xsudokucrimson-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.xsudokucrimson-status { font-weight:700;font-size:1rem; }
+.xsudokucrimson-status.solved { color:#27ae60; }
+.xsudokucrimson-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.xsudokucrimson-done h2 { margin-bottom:6px;color:#2c3e50; }
+.xsudokucrimson-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+
+
+/* === Theme: crimson-x (Crimson X — diagonals burn) === */
+.xsudokucrimson {
+  background: #fdeeee;
+  color: #3a0a0a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.xsudokucrimson .xsudokucrimson-mech,
+.xsudokucrimson [class*="-mech"],
+.xsudokucrimson [class*="-status"]:not(.solved):not(.win) {
+  color: #7a4a4a;
+}
+.xsudokucrimson [class*="-score"],
+.xsudokucrimson [class*="-final"] {
+  color: #c4253a;
+}
+.xsudokucrimson [class*="-grid"] {
+  background: #7a0a18;
+  border-color: #7a0a18;
+}
+.xsudokucrimson [class*="-cell"] {
+  background: #f8d8d8;
+  color: #3a0a0a;
+}
+.xsudokucrimson [class*="-cell"].sel,
+.xsudokucrimson [class*="-cell"].selected {
+  outline: 3px solid #e8556a;
+  outline-offset: -3px;
+}
+.xsudokucrimson [class*="-cell"].err,
+.xsudokucrimson [class*="-cell"].error,
+.xsudokucrimson [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #9a0a14;
+}
+.xsudokucrimson [class*="-num"]:hover,
+.xsudokucrimson [class*="-numpad"] button:hover {
+  background: #e8556a;
+  color: #fdeeee;
+  border-color: #c4253a;
+}
+.xsudokucrimson [class*="-btn"].check,
+.xsudokucrimson [class*="-controls"] button {
+  background: #c4253a;
+  color: #fdeeee;
+  border-color: #c4253a;
+}
+.xsudokucrimson [class*="-btn"].next {
+  background: #e8556a;
+  color: #fdeeee;
+}
+.xsudokucrimson [class*="-status"].solved,
+.xsudokucrimson [class*="-status"].win {
+  color: #3a7a4a;
+}

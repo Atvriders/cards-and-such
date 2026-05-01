@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: mexican-dice (unique class prefix + themed palette over shared dm-* engine) */
+.mexican-dice-theme.dm-wrap {
+  background: linear-gradient(180deg,#7c2d12 0%,#15803d 50%,#c2410c 100%);
+}
+.mexican-dice-theme .dm-info,
+.mexican-dice-theme .dm-header {
+  color: #fff7ed;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.mexican-dice-theme .dm-target { color: #fff7ed; opacity: 0.85; }
+.mexican-dice-theme .dm-score {
+  background: linear-gradient(180deg, #fed7aa, #fb923c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(251,146,60,0.45);
+}
+.mexican-dice-theme .dm-die {
+  background: linear-gradient(145deg,#fff7ed,#fed7aa);
+  color: #7c2d12;
+}
+.mexican-dice-theme .dm-card {
+  background: linear-gradient(145deg,#fff7ed,#fed7aa);
+  color: #7c2d12;
+}
+.mexican-dice-theme .dm-btn {
+  background: linear-gradient(180deg, #dc2626 0%, #9f1239 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(159,18,57,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.mexican-dice-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #fde047 0%, #fb923c 100%);
+  color: #1f2937;
+}
+.mexican-dice-theme .dm-bet-btn {
+  color: #fff7ed;
+  border-color: rgba(255,255,255,0.25);
+}
+.mexican-dice-theme .dm-result {
+  color: #fff7ed;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.mexican-dice-theme .dm-feedback {
+  color: #fed7aa;
+  text-shadow: 0 0 12px rgba(251,146,60,0.6);
+}
+.mexican-dice-theme .dm-final {
+  background: linear-gradient(180deg, #ffedd5, #dc2626);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.mexican-dice-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #dc2626, #9f1239);
+  border-color: #fb923c;
+}
+.mexican-dice-theme .dm-die.selected,
+.mexican-dice-theme .dm-die.hl {
+  border-color: #fde047;
+  box-shadow:
+    0 0 0 2px #fde047,
+    0 0 22px rgba(253,224,71,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

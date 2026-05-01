@@ -18,6 +18,7 @@ export function FiveStudPokerGame({ state, dispatch, onGameOver }: GameProps<Fiv
     ? bestFiveStud(state.cpu.cards).class : undefined;
 
   return (
+    <div className="thm5Stud">
     <StudTable
       prefix="fivestud-"
       state={state}
@@ -31,5 +32,6 @@ export function FiveStudPokerGame({ state, dispatch, onGameOver }: GameProps<Fiv
       onCall={() => dis({ type: "call" })}
       onRaise={(amount) => dis({ type: "raise", amount })}
     />
+  </div>
   );
 }

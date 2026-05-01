@@ -8,14 +8,14 @@ export function DiceFrenzyTallGame({ state, dispatch, onGameOver }: GameProps<Di
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dft-wrap"><div className="dft-done"><h2>Done!</h2><div className="dft-final">{state.score} pts</div></div></div>;
+    return <div className="dfrt-wrap dfrt-theme"><div className="dfrt-done"><h2>Done!</h2><div className="dfrt-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dft-wrap">
-      <div className="dft-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dft-score">{state.score} pts</div>
-      <div className="dft-info">Need: ascending stack (each die ≥ previous)</div>
-      <div className="dft-row">
+    <div className="dfrt-wrap dfrt-theme">
+      <div className="dfrt-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="dfrt-score">{state.score} pts</div>
+      <div className="dfrt-info">Need: ascending stack (each die ≥ previous)</div>
+      <div className="dfrt-row">
         {state.dice.map((v, i) => (
           <button
             key={i}
@@ -26,15 +26,15 @@ export function DiceFrenzyTallGame({ state, dispatch, onGameOver }: GameProps<Di
         ))}
       </div>
       {state.phase === "rolling" && (
-        <div className="dft-row">
-          <button className="dft-btn alt" disabled={state.rerollUsed || state.selected.every(s => !s)} onClick={() => dispatch({ type: "reroll" } as DiceFrenzyTallAction)}>Reroll{state.rerollUsed ? " (used)" : ""}</button>
-          <button className="dft-btn" onClick={() => dispatch({ type: "lock" } as DiceFrenzyTallAction)}>Lock</button>
+        <div className="dfrt-row">
+          <button className="dfrt-btn alt" disabled={state.rerollUsed || state.selected.every(s => !s)} onClick={() => dispatch({ type: "reroll" } as DiceFrenzyTallAction)}>Reroll{state.rerollUsed ? " (used)" : ""}</button>
+          <button className="dfrt-btn" onClick={() => dispatch({ type: "lock" } as DiceFrenzyTallAction)}>Lock</button>
         </div>
       )}
       {state.phase === "result" && (
         <>
           <div className={`dft-feedback ${state.lastOk ? "ok" : "no"}`}>{state.lastOk ? "Ascending! +30" : "Not ascending."}</div>
-          <button className="dft-btn alt" onClick={() => dispatch({ type: "next" } as DiceFrenzyTallAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dfrt-btn alt" onClick={() => dispatch({ type: "next" } as DiceFrenzyTallAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

@@ -1,27 +1,85 @@
-.dutchwhisperssudoku-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.dutchwhisperssudoku-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.dutchwhisperssudoku-score { font-weight:700;color:hsl(200, 60%, 40%); }
-.dutchwhisperssudoku-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.dutchwhisperssudoku-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.dutchwhisperssudoku-row { display:flex;gap:1px; }
-.dutchwhisperssudoku-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.dutchwhisperssudoku-cell.given { background:#ecf0f1;color:#2c3e50; }
-.dutchwhisperssudoku-cell.sel { background:hsl(200, 65%, 55%);color:#fff; }
-.dutchwhisperssudoku-cell.err { background:#fdedec;color:#e74c3c; }
-.dutchwhisperssudoku-cell.rt { margin-right:3px; }
-.dutchwhisperssudoku-cell.bt { margin-bottom:3px; }
-.dutchwhisperssudoku-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.dutchwhisperssudoku-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.dutchwhisperssudoku-num:hover { background:hsl(200, 70%, 92%);border-color:hsl(200, 60%, 55%); }
-.dutchwhisperssudoku-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.dutchwhisperssudoku-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.dutchwhisperssudoku-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.dutchwhisperssudoku-btn.check { background:#3498db; }
-.dutchwhisperssudoku-btn.hint { background:#f39c12; }
-.dutchwhisperssudoku-btn.next { background:hsl(200, 60%, 45%); }
-.dutchwhisperssudoku-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.dutchwhisperssudoku-status { font-weight:700;font-size:1rem; }
-.dutchwhisperssudoku-status.solved { color:#27ae60; }
-.dutchwhisperssudoku-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.dutchwhisperssudoku-done h2 { margin-bottom:6px;color:#2c3e50; }
-.dutchwhisperssudoku-final { font-size:1.6rem;font-weight:900;color:hsl(200, 60%, 40%); }
+.dutchwhispersorange-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.dutchwhispersorange-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.dutchwhispersorange-score { font-weight:700;color:hsl(200, 60%, 40%); }
+.dutchwhispersorange-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.dutchwhispersorange-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.dutchwhispersorange-row { display:flex;gap:1px; }
+.dutchwhispersorange-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.dutchwhispersorange-cell.given { background:#ecf0f1;color:#2c3e50; }
+.dutchwhispersorange-cell.sel { background:hsl(200, 65%, 55%);color:#fff; }
+.dutchwhispersorange-cell.err { background:#fdedec;color:#e74c3c; }
+.dutchwhispersorange-cell.rt { margin-right:3px; }
+.dutchwhispersorange-cell.bt { margin-bottom:3px; }
+.dutchwhispersorange-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.dutchwhispersorange-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.dutchwhispersorange-num:hover { background:hsl(200, 70%, 92%);border-color:hsl(200, 60%, 55%); }
+.dutchwhispersorange-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.dutchwhispersorange-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.dutchwhispersorange-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.dutchwhispersorange-btn.check { background:#3498db; }
+.dutchwhispersorange-btn.hint { background:#f39c12; }
+.dutchwhispersorange-btn.next { background:hsl(200, 60%, 45%); }
+.dutchwhispersorange-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.dutchwhispersorange-status { font-weight:700;font-size:1rem; }
+.dutchwhispersorange-status.solved { color:#27ae60; }
+.dutchwhispersorange-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.dutchwhispersorange-done h2 { margin-bottom:6px;color:#2c3e50; }
+.dutchwhispersorange-final { font-size:1.6rem;font-weight:900;color:hsl(200, 60%, 40%); }
+
+
+/* === Theme: dutch-orange (Dutch orange — Oranje koningsdag) === */
+.dutchwhispersorange {
+  background: #fff5e8;
+  color: #0a1a4a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.dutchwhispersorange .dutchwhispersorange-mech,
+.dutchwhispersorange [class*="-mech"],
+.dutchwhispersorange [class*="-status"]:not(.solved):not(.win) {
+  color: #5a5a7a;
+}
+.dutchwhispersorange [class*="-score"],
+.dutchwhispersorange [class*="-final"] {
+  color: #ff6700;
+}
+.dutchwhispersorange [class*="-grid"] {
+  background: #003da5;
+  border-color: #003da5;
+}
+.dutchwhispersorange [class*="-cell"] {
+  background: #ffe1c4;
+  color: #0a1a4a;
+}
+.dutchwhispersorange [class*="-cell"].sel,
+.dutchwhispersorange [class*="-cell"].selected {
+  outline: 3px solid #003da5;
+  outline-offset: -3px;
+}
+.dutchwhispersorange [class*="-cell"].err,
+.dutchwhispersorange [class*="-cell"].error,
+.dutchwhispersorange [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #c40a14;
+}
+.dutchwhispersorange [class*="-num"]:hover,
+.dutchwhispersorange [class*="-numpad"] button:hover {
+  background: #003da5;
+  color: #fff5e8;
+  border-color: #ff6700;
+}
+.dutchwhispersorange [class*="-btn"].check,
+.dutchwhispersorange [class*="-controls"] button {
+  background: #ff6700;
+  color: #fff5e8;
+  border-color: #ff6700;
+}
+.dutchwhispersorange [class*="-btn"].next {
+  background: #003da5;
+  color: #fff5e8;
+}
+.dutchwhispersorange [class*="-status"].solved,
+.dutchwhispersorange [class*="-status"].win {
+  color: #3a8a4a;
+}

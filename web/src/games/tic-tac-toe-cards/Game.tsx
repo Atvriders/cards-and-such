@@ -18,6 +18,7 @@ export function TicTacToeCards({
       : "Place a Hearts/Diamonds card. CPU plays Spades/Clubs.";
 
   return (
+    <div className="thmTTTC">
     <div className="tttcards-wrap">
       <div className="tttcards-header">
         <h2 className="tttcards-title">Tic-Tac-Toe Cards</h2>
@@ -46,6 +47,7 @@ export function TicTacToeCards({
                 </span>
               ) : null}
             </button>
+          </div>
           );
         })}
       </div>

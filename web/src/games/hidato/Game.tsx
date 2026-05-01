@@ -37,15 +37,15 @@ export function Hidato({
   }
 
   return (
-    <div className="hidato">
-      <div className="hidato-title">Hidato</div>
-      <div className={`hidato-status${won ? " win" : ""}`}>
+    <div className="hidatosnake">
+      <div className="hidatosnake-title">Hidato</div>
+      <div className={`hidatosnake-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
           : `Moves: ${state.moves} — fill 1 to ${N} consecutively adjacent`}
       </div>
       <div
-        className="hidato-grid"
+        className="hidatosnake-grid"
         style={{ gridTemplateColumns: `repeat(${cols}, 46px)` }}
       >
         {Array.from({ length: rows * cols }, (_, i) => {
@@ -54,7 +54,7 @@ export function Hidato({
           const isGiven = puzzle.given[i];
           const isSel = selected === i;
           const classes = [
-            "hidato-cell",
+            "hidatosnake-cell",
             isBlocked ? "blocked" : "",
             isGiven ? "given" : "",
             isSel ? "selected" : "",
@@ -74,7 +74,7 @@ export function Hidato({
         })}
       </div>
       {!won && selected !== null && (
-        <div className="hidato-input">
+        <div className="hidatosnake-input">
           <input
             type="number"
             min={1}
@@ -83,14 +83,14 @@ export function Hidato({
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handlePlace()}
             placeholder={`1–${N}`}
-            className="hidato-number-input"
+            className="hidatosnake-number-input"
             autoFocus
           />
-          <button className="hidato-btn" onClick={handlePlace}>
+          <button className="hidatosnake-btn" onClick={handlePlace}>
             Place
           </button>
           <button
-            className="hidato-btn clear"
+            className="hidatosnake-btn clear"
             onClick={() => {
               dispatch({ type: "clearCell", idx: selected } satisfies HidatoAction);
               setInputVal("");
@@ -100,7 +100,7 @@ export function Hidato({
           </button>
         </div>
       )}
-      <div className="hidato-hint">
+      <div className="hidatosnake-hint">
         Select a cell, type a number, and press Place. Consecutive numbers must be king-adjacent (including diagonals).
       </div>
     </div>

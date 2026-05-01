@@ -7,10 +7,10 @@ export function DiceMountainGame({ state, dispatch, onGameOver }: GameProps<Dice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Summit reached!</h2><div>Rolls: {state.rolls}</div><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap dice-mountain-theme"><div className="dm-done"><h2>Summit reached!</h2><div>Rolls: {state.rolls}</div><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap dice-mountain-theme">
       <div className="dm-info">Mountain — Altitude {state.altitude} / {TARGET}</div>
       <div className="dm-score">Rolls: {state.rolls}</div>
       {state.dice && (

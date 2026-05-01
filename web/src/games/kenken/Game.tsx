@@ -41,19 +41,19 @@ export function KenKen({
 
     // Top border: thicken if neighbor above is in a different cage (or no neighbor)
     const above = r > 0 ? cageOf.get((r - 1) * size + c) : -1;
-    if (above === undefined || above !== ci) classes.push("kenken-cell-border-top");
+    if (above === undefined || above !== ci) classes.push("kenkenclay-cell-border-top");
 
     // Right border
     const right = c < size - 1 ? cageOf.get(r * size + (c + 1)) : -1;
-    if (right === undefined || right !== ci) classes.push("kenken-cell-border-right");
+    if (right === undefined || right !== ci) classes.push("kenkenclay-cell-border-right");
 
     // Bottom border
     const below = r < size - 1 ? cageOf.get((r + 1) * size + c) : -1;
-    if (below === undefined || below !== ci) classes.push("kenken-cell-border-bottom");
+    if (below === undefined || below !== ci) classes.push("kenkenclay-cell-border-bottom");
 
     // Left border
     const left = c > 0 ? cageOf.get(r * size + (c - 1)) : -1;
-    if (left === undefined || left !== ci) classes.push("kenken-cell-border-left");
+    if (left === undefined || left !== ci) classes.push("kenkenclay-cell-border-left");
 
     return classes.join(" ");
   }
@@ -80,16 +80,16 @@ export function KenKen({
   }, [won, size, handleDigit, dispatch]);
 
   return (
-    <div className="kenken">
-      <div className="kenken-title">KenKen</div>
-      <div className={`kenken-status${won ? " win" : ""}`}>
+    <div className="kenkenclay">
+      <div className="kenkenclay-title">KenKen</div>
+      <div className={`kenkenclay-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
           : `Moves: ${state.moves} — fill 1–${size} in each row & column, satisfying cage targets`}
       </div>
 
       <div
-        className="kenken-grid"
+        className="kenkenclay-grid"
         style={{ gridTemplateColumns: `repeat(${size}, 54px)`, gridTemplateRows: `repeat(${size}, 54px)` }}
       >
         {Array.from({ length: size * size }, (_, idx) => {
@@ -103,7 +103,7 @@ export function KenKen({
             <div
               key={idx}
               className={[
-                "kenken-cell",
+                "kenkenclay-cell",
                 isSelected ? "selected" : "",
                 isError ? "error" : "",
                 getBorderClasses(idx),
@@ -113,7 +113,7 @@ export function KenKen({
               onClick={() => dispatch({ type: "selectCell", idx })}
             >
               {isTopLeft && (
-                <span className="kenken-cage-label">
+                <span className="kenkenclay-cage-label">
                   {cage.target}{cage.op !== "=" ? cage.op : ""}
                 </span>
               )}
@@ -123,7 +123,7 @@ export function KenKen({
         })}
       </div>
 
-      <div className="kenken-numpad">
+      <div className="kenkenclay-numpad">
         {Array.from({ length: size }, (_, i) => i + 1).map((d) => (
           <button key={d} onClick={() => handleDigit(d)}>
             {d}

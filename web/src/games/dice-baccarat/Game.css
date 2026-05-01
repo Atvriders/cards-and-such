@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-baccarat (unique class prefix + themed palette over shared dm-* engine) */
+.dice-baccarat-theme.dm-wrap {
+  background: linear-gradient(180deg,#1a0f0f 0%,#451a03 55%,#78350f 100%);
+}
+.dice-baccarat-theme .dm-info,
+.dice-baccarat-theme .dm-header {
+  color: #fffbeb;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-baccarat-theme .dm-target { color: #fffbeb; opacity: 0.85; }
+.dice-baccarat-theme .dm-score {
+  background: linear-gradient(180deg, #fde68a, #facc15);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(250,204,21,0.45);
+}
+.dice-baccarat-theme .dm-die {
+  background: linear-gradient(145deg,#fffbeb,#fde68a);
+  color: #451a03;
+}
+.dice-baccarat-theme .dm-card {
+  background: linear-gradient(145deg,#fffbeb,#fde68a);
+  color: #451a03;
+}
+.dice-baccarat-theme .dm-btn {
+  background: linear-gradient(180deg, #a16207 0%, #78350f 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(120,53,15,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-baccarat-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #d4af37 0%, #fde68a 100%);
+  color: #1f2937;
+}
+.dice-baccarat-theme .dm-bet-btn {
+  color: #fffbeb;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-baccarat-theme .dm-result {
+  color: #fffbeb;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-baccarat-theme .dm-feedback {
+  color: #fde68a;
+  text-shadow: 0 0 12px rgba(250,204,21,0.6);
+}
+.dice-baccarat-theme .dm-final {
+  background: linear-gradient(180deg, #fef9c3, #d4af37);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-baccarat-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #a16207, #78350f);
+  border-color: #fde68a;
+}
+.dice-baccarat-theme .dm-die.selected,
+.dice-baccarat-theme .dm-die.hl {
+  border-color: #d4af37;
+  box-shadow:
+    0 0 0 2px #d4af37,
+    0 0 22px rgba(212,175,55,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-keno (unique class prefix + themed palette over shared dm-* engine) */
+.dice-keno-theme.dm-wrap {
+  background: linear-gradient(180deg,#1e1b4b 0%,#581c87 55%,#a21caf 100%);
+}
+.dice-keno-theme .dm-info,
+.dice-keno-theme .dm-header {
+  color: #fdf4ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-keno-theme .dm-target { color: #fdf4ff; opacity: 0.85; }
+.dice-keno-theme .dm-score {
+  background: linear-gradient(180deg, #f0abfc, #e879f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(232,121,249,0.45);
+}
+.dice-keno-theme .dm-die {
+  background: linear-gradient(145deg,#fdf4ff,#f5d0fe);
+  color: #581c87;
+}
+.dice-keno-theme .dm-card {
+  background: linear-gradient(145deg,#fdf4ff,#f5d0fe);
+  color: #581c87;
+}
+.dice-keno-theme .dm-btn {
+  background: linear-gradient(180deg, #a855f7 0%, #7e22ce 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(126,34,206,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-keno-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #e879f9 0%, #f0abfc 100%);
+  color: #1f2937;
+}
+.dice-keno-theme .dm-bet-btn {
+  color: #fdf4ff;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-keno-theme .dm-result {
+  color: #fdf4ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-keno-theme .dm-feedback {
+  color: #f0abfc;
+  text-shadow: 0 0 12px rgba(232,121,249,0.6);
+}
+.dice-keno-theme .dm-final {
+  background: linear-gradient(180deg, #fae8ff, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-keno-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #a855f7, #7e22ce);
+  border-color: #f0abfc;
+}
+.dice-keno-theme .dm-die.selected,
+.dice-keno-theme .dm-die.hl {
+  border-color: #e879f9;
+  box-shadow:
+    0 0 0 2px #e879f9,
+    0 0 22px rgba(232,121,249,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

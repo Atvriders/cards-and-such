@@ -1,2 +1,47 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+
+/* === poker-theme:mixed-neon === unique-class .thmSpitWild === */
+.thmSpitWild,
+.thmSpitWild.dm-wrap,
+.thmSpitWild.holdem-wrap,
+.thmSpitWild.g-wrap,
+.thmSpitWild .dm-wrap,
+.thmSpitWild .holdem-wrap,
+.thmSpitWild .holdem-table,
+.thmSpitWild .g-wrap,
+.thmSpitWild .spit-ocean-wild-felt,
+.thmSpitWild [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #4a1a6a 0%, #1f0a36 60%, #08001a 100%) !important;
+  color: #f6e8ff !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.65),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.65) !important;
+  --theme-accent: #ff66cc;
+  --theme-accent2: #9ae8ff;
+  --theme-ink: #f6e8ff;
+  --theme-rim: #0a0118;
+}
+.thmSpitWild .dm-score,
+.thmSpitWild .holdem-pot-amount,
+.thmSpitWild [class$="-stack"],
+.thmSpitWild [class$="-pot-amount"] {
+  color: #9ae8ff !important;
+  text-shadow: 0 0 18px #ff66cc55;
+}
+.thmSpitWild .dm-info,
+.thmSpitWild [class$="-hud"],
+.thmSpitWild [class$="-stat"] {
+  border-color: #ff66cc55 !important;
+}
+.thmSpitWild .dm-card,
+.thmSpitWild .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.65), 0 0 0 1px #ff66cc22;
+}
+.thmSpitWild .dm-btn,
+.thmSpitWild [class*="-btn"] {
+  border-color: #ff66cc55 !important;
+}

@@ -12,8 +12,8 @@ export function CatchphraseClueGame({ state, dispatch, onGameOver }: GameProps<C
 
   if (state.phase === "done") {
     return (
-      <div className="word-wrap">
-        <div className="word-done">
+      <div className="ctp-wrap">
+        <div className="ctp-done">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,37 +26,37 @@ export function CatchphraseClueGame({ state, dispatch, onGameOver }: GameProps<C
   const isResult = state.phase === "result";
 
   return (
-    <div className="word-wrap">
-      <div className="word-header">
-        <span className="word-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="word-score">{state.score} pts</span>
+    <div className="ctp-wrap">
+      <div className="ctp-header">
+        <span className="ctp-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="ctp-score">{state.score} pts</span>
       </div>
-      <div className="word-prompt"><span className="word-label">Choose:</span> {r.prompt}</div>
-      <div className="word-choices">
+      <div className="ctp-prompt"><span className="ctp-label">Choose:</span> {r.prompt}</div>
+      <div className="ctp-choices">
         {r.choices.map((choice, i) => {
-          let cls = "word-choice";
+          let cls = "ctp-choice";
           if (isResult) {
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as CatchphraseClueAction)}>
-              <span className="word-choice-letter">{LABELS[i]}</span>{choice}
+              <span className="ctp-choice-letter">{LABELS[i]}</span>{choice}
             </button>
           );
         })}
       </div>
       {isResult && (
-        <div className={`word-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
+        <div className={`ctp-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
           {state.selected === r.correct ? "Correct!" : `Answer: ${r.choices[r.correct]}`}
         </div>
       )}
-      <div className="word-actions">
+      <div className="ctp-actions">
         {!isResult && (
-          <button className="word-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as CatchphraseClueAction)}>Submit</button>
+          <button className="ctp-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as CatchphraseClueAction)}>Submit</button>
         )}
         {isResult && (
-          <button className="word-btn next" onClick={() => dispatch({ type: "next" } as CatchphraseClueAction)}>
+          <button className="ctp-btn next" onClick={() => dispatch({ type: "next" } as CatchphraseClueAction)}>
             {state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}
           </button>
         )}

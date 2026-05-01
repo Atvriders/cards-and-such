@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-shipping (unique class prefix + themed palette over shared dm-* engine) */
+.dice-shipping-theme.dm-wrap {
+  background: linear-gradient(180deg,#0c4a6e 0%,#0369a1 55%,#7dd3fc 100%);
+}
+.dice-shipping-theme .dm-info,
+.dice-shipping-theme .dm-header {
+  color: #e0f2fe;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-shipping-theme .dm-target { color: #e0f2fe; opacity: 0.85; }
+.dice-shipping-theme .dm-score {
+  background: linear-gradient(180deg, #bae6fd, #7dd3fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(125,211,252,0.45);
+}
+.dice-shipping-theme .dm-die {
+  background: linear-gradient(145deg,#fffbeb,#fde047);
+  color: #0c4a6e;
+}
+.dice-shipping-theme .dm-card {
+  background: linear-gradient(145deg,#fffbeb,#fde047);
+  color: #0c4a6e;
+}
+.dice-shipping-theme .dm-btn {
+  background: linear-gradient(180deg, #0284c7 0%, #075985 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(7,89,133,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-shipping-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #fbbf24 0%, #fde047 100%);
+  color: #1f2937;
+}
+.dice-shipping-theme .dm-bet-btn {
+  color: #e0f2fe;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-shipping-theme .dm-result {
+  color: #e0f2fe;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-shipping-theme .dm-feedback {
+  color: #bae6fd;
+  text-shadow: 0 0 12px rgba(125,211,252,0.6);
+}
+.dice-shipping-theme .dm-final {
+  background: linear-gradient(180deg, #e0f2fe, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-shipping-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #0284c7, #075985);
+  border-color: #fde047;
+}
+.dice-shipping-theme .dm-die.selected,
+.dice-shipping-theme .dm-die.hl {
+  border-color: #fbbf24;
+  box-shadow:
+    0 0 0 2px #fbbf24,
+    0 0 22px rgba(251,191,36,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

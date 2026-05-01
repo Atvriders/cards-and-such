@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: parity-pop (unique class prefix + themed palette over shared dm-* engine) */
+.parity-pop-theme.dm-wrap {
+  background: linear-gradient(135deg,#ec4899 0%,#a855f7 50%,#3b82f6 100%);
+}
+.parity-pop-theme .dm-info,
+.parity-pop-theme .dm-header {
+  color: #fdf2f8;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.parity-pop-theme .dm-target { color: #fdf2f8; opacity: 0.85; }
+.parity-pop-theme .dm-score {
+  background: linear-gradient(180deg, #fbcfe8, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(244,114,182,0.45);
+}
+.parity-pop-theme .dm-die {
+  background: linear-gradient(145deg,#fdf2f8,#fbcfe8);
+  color: #831843;
+}
+.parity-pop-theme .dm-card {
+  background: linear-gradient(145deg,#fdf2f8,#fbcfe8);
+  color: #831843;
+}
+.parity-pop-theme .dm-btn {
+  background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(190,24,93,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.parity-pop-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #f472b6 0%, #c084fc 100%);
+  color: #1f2937;
+}
+.parity-pop-theme .dm-bet-btn {
+  color: #fdf2f8;
+  border-color: rgba(255,255,255,0.25);
+}
+.parity-pop-theme .dm-result {
+  color: #fdf2f8;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.parity-pop-theme .dm-feedback {
+  color: #fbcfe8;
+  text-shadow: 0 0 12px rgba(244,114,182,0.6);
+}
+.parity-pop-theme .dm-final {
+  background: linear-gradient(180deg, #fce7f3, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.parity-pop-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #ec4899, #be185d);
+  border-color: #c084fc;
+}
+.parity-pop-theme .dm-die.selected,
+.parity-pop-theme .dm-die.hl {
+  border-color: #f472b6;
+  box-shadow:
+    0 0 0 2px #f472b6,
+    0 0 22px rgba(244,114,182,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

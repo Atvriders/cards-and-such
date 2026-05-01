@@ -1,2 +1,47 @@
 /* Modern casino-table engine — see web/src/engines/casino/casino.css */
 @import "../../engines/casino/casino.css";
+
+
+/* === poker-theme:holdem-emerald === unique-class .thmHUHld === */
+.thmHUHld,
+.thmHUHld.dm-wrap,
+.thmHUHld.holdem-wrap,
+.thmHUHld.g-wrap,
+.thmHUHld .dm-wrap,
+.thmHUHld .holdem-wrap,
+.thmHUHld .holdem-table,
+.thmHUHld .g-wrap,
+.thmHUHld .heads-up-holdem-cas-felt,
+.thmHUHld [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #0e6a48 0%, #054a2c 60%, #021712 100%) !important;
+  color: #f7f1e1 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #d8b86a;
+  --theme-accent2: #f3d488;
+  --theme-ink: #f7f1e1;
+  --theme-rim: #2a1a0a;
+}
+.thmHUHld .dm-score,
+.thmHUHld .holdem-pot-amount,
+.thmHUHld [class$="-stack"],
+.thmHUHld [class$="-pot-amount"] {
+  color: #f3d488 !important;
+  text-shadow: 0 0 18px #d8b86a55;
+}
+.thmHUHld .dm-info,
+.thmHUHld [class$="-hud"],
+.thmHUHld [class$="-stat"] {
+  border-color: #d8b86a55 !important;
+}
+.thmHUHld .dm-card,
+.thmHUHld .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #d8b86a22;
+}
+.thmHUHld .dm-btn,
+.thmHUHld [class*="-btn"] {
+  border-color: #d8b86a55 !important;
+}

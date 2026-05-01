@@ -12,8 +12,8 @@ export function ConnectionsMiniGame({ state, dispatch, onGameOver }: GameProps<G
 
   if (state.phase === "done") {
     return (
-      <div className="qz-wrap">
-        <div className="qz-done">
+      <div className="cnx-wrap">
+        <div className="cnx-done">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,37 +26,37 @@ export function ConnectionsMiniGame({ state, dispatch, onGameOver }: GameProps<G
   const isResult = state.phase === "result";
 
   return (
-    <div className="qz-wrap">
-      <div className="qz-header">
-        <span className="qz-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="qz-score">{state.score} pts</span>
+    <div className="cnx-wrap">
+      <div className="cnx-header">
+        <span className="cnx-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="cnx-score">{state.score} pts</span>
       </div>
-      <div className="qz-prompt">{r.prompt}</div>
-      <div className="qz-choices">
+      <div className="cnx-prompt">{r.prompt}</div>
+      <div className="cnx-choices">
         {r.choices.map((choice, i) => {
-          let cls = "qz-choice";
+          let cls = "cnx-choice";
           if (isResult) {
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as GameAction)}>
-              <span className="qz-letter">{LABELS[i]}</span>{choice}
+              <span className="cnx-letter">{LABELS[i]}</span>{choice}
             </button>
           );
         })}
       </div>
       {isResult && (
-        <div className={`qz-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
+        <div className={`cnx-feedback ${state.selected === r.correct ? "correct" : "wrong"}`}>
           {state.selected === r.correct ? "Correct!" : `Answer: ${r.choices[r.correct]}`}
         </div>
       )}
-      <div className="qz-actions">
+      <div className="cnx-actions">
         {!isResult && (
-          <button className="qz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as GameAction)}>Submit</button>
+          <button className="cnx-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as GameAction)}>Submit</button>
         )}
         {isResult && (
-          <button className="qz-btn next" onClick={() => dispatch({ type: "next" } as GameAction)}>
+          <button className="cnx-btn next" onClick={() => dispatch({ type: "next" } as GameAction)}>
             {state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}
           </button>
         )}

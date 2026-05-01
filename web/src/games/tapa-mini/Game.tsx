@@ -10,11 +10,11 @@ export function TapaMiniGame({ state, dispatch, onGameOver }: GameProps<TapaMini
 
   if (state.phase === "done") {
     return (
-      <div className="tapamini-wrap">
-        <div className="tapamini-done">
+      <div className="tapaturkish-wrap">
+        <div className="tapaturkish-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="tapamini-final">{state.score} pts</p>
+          <p className="tapaturkish-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function TapaMiniGame({ state, dispatch, onGameOver }: GameProps<TapaMini
   const errSet = new Set(state.errors);
 
   return (
-    <div className="tapamini-wrap">
-      <div className="tapamini-header">
+    <div className="tapaturkish-wrap">
+      <div className="tapaturkish-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="tapamini-score">{state.score} pts</span>
+        <span className="tapaturkish-score">{state.score} pts</span>
       </div>
-      <div className="tapamini-mech">Shade cells per clue patterns to form one connected wall.</div>
-      <div className="tapamini-grid">
+      <div className="tapaturkish-mech">Shade cells per clue patterns to form one connected wall.</div>
+      <div className="tapaturkish-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="tapamini-row">
+          <div key={r} className="tapaturkish-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function TapaMiniGame({ state, dispatch, onGameOver }: GameProps<TapaMini
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`tapamini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`tapaturkish-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as TapaMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function TapaMiniGame({ state, dispatch, onGameOver }: GameProps<TapaMini
           </div>
         ))}
       </div>
-      <div className="tapamini-pad">
+      <div className="tapaturkish-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`tapamini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as TapaMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`tapaturkish-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as TapaMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="tapamini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as TapaMiniAction)}>×</button>
+        <button className="tapaturkish-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as TapaMiniAction)}>×</button>
       </div>
-      <div className="tapamini-actions">
-        <button className="tapamini-btn check" onClick={() => dispatch({ type: "check" } as TapaMiniAction)}>Check</button>
-        <button className="tapamini-btn hint" onClick={() => dispatch({ type: "hint" } as TapaMiniAction)}>Hint</button>
-        <button className="tapamini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as TapaMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="tapaturkish-actions">
+        <button className="tapaturkish-btn check" onClick={() => dispatch({ type: "check" } as TapaMiniAction)}>Check</button>
+        <button className="tapaturkish-btn hint" onClick={() => dispatch({ type: "hint" } as TapaMiniAction)}>Hint</button>
+        <button className="tapaturkish-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as TapaMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="tapamini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="tapaturkish-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

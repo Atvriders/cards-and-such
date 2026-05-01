@@ -15,21 +15,21 @@ function Grid({ results, target, solved, currentInput, isActive }: {
   isActive: boolean;
 }): JSX.Element {
   return (
-    <div className={`qr-grid${solved ? " qr-grid-solved" : ""}`}>
+    <div className={`qrd-grid${solved ? " qrd-grid-solved" : ""}`}>
       {Array.from({ length: ROWS }, (_, row) => {
         const guess = results[row];
         const isCurrent = !guess && isActive && row === results.length;
         const displayWord = isCurrent ? currentInput.padEnd(5) : (guess?.word ?? "     ");
         return (
-          <div key={row} className="qr-grid-row">
+          <div key={row} className="qrd-grid-row">
             {Array.from({ length: 5 }, (_, col) => {
               const letter = displayWord[col] ?? " ";
               const res: LetterResult | undefined = guess?.results[col];
-              let cls = "qr-cell";
-              if (res === "correct") cls += " qr-correct";
-              else if (res === "present") cls += " qr-present";
-              else if (res === "absent" && guess) cls += " qr-absent";
-              else if (isCurrent && letter.trim()) cls += " qr-typing";
+              let cls = "qrd-cell";
+              if (res === "correct") cls += " qrd-correct";
+              else if (res === "present") cls += " qrd-present";
+              else if (res === "absent" && guess) cls += " qrd-absent";
+              else if (isCurrent && letter.trim()) cls += " qrd-typing";
               return (
                 <div key={col} className={cls}>{letter.trim()}</div>
               );
@@ -37,7 +37,7 @@ function Grid({ results, target, solved, currentInput, isActive }: {
           </div>
         );
       })}
-      {solved && <div className="qr-solved-label">{target} ✓</div>}
+      {solved && <div className="qrd-solved-label">{target} ✓</div>}
     </div>
   );
 }
@@ -63,13 +63,13 @@ function Keyboard({ guesses, targets }: { guesses: GuessResult[]; targets: reado
 
   const rows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
   return (
-    <div className="qr-keyboard">
+    <div className="qrd-keyboard">
       {rows.map((row, ri) => (
-        <div key={ri} className="qr-kb-row">
+        <div key={ri} className="qrd-kb-row">
           {row.split("").map(l => {
             const c = colorMap[l];
             return (
-              <div key={l} className={`qr-kb-key${c === "correct" ? " qr-correct" : c === "present" ? " qr-present" : c === "absent" ? " qr-absent" : ""}`}>
+              <div key={l} className={`qrd-kb-key${c === "correct" ? " qrd-correct" : c === "present" ? " qrd-present" : c === "absent" ? " qrd-absent" : ""}`}>
                 {l}
               </div>
             );
@@ -110,23 +110,23 @@ export function Quordle({
   const solvedCount = solved.filter(Boolean).length;
 
   return (
-    <div className="qr-wrap">
-      <div className="qr-header">
+    <div className="qrd-wrap">
+      <div className="qrd-header">
         <span>Guesses left: {guessesLeft} / 9</span>
         <span>Solved: {solvedCount} / 4</span>
       </div>
 
-      {message && <div className="qr-message">{message}</div>}
+      {message && <div className="qrd-message">{message}</div>}
 
-      <div className="qr-input-display">
+      <div className="qrd-input-display">
         {Array.from({ length: 5 }, (_, i) => (
-          <div key={i} className={`qr-input-cell${currentInput[i] ? " qr-typing" : ""}`}>
+          <div key={i} className={`qrd-input-cell${currentInput[i] ? " qrd-typing" : ""}`}>
             {currentInput[i] ?? ""}
           </div>
         ))}
       </div>
 
-      <div className="qr-grids">
+      <div className="qrd-grids">
         {([0, 1, 2, 3] as const).map(gi => (
           <Grid
             key={gi}
@@ -139,16 +139,16 @@ export function Quordle({
         ))}
       </div>
 
-      <div className="qr-controls">
+      <div className="qrd-controls">
         <button onClick={() => dispatch({ type: "delete" } as QuordleAction)}>⌫</button>
-        <button className="qr-enter" onClick={() => dispatch({ type: "submit" } as QuordleAction)}>ENTER</button>
+        <button className="qrd-enter" onClick={() => dispatch({ type: "submit" } as QuordleAction)}>ENTER</button>
       </div>
 
       <Keyboard guesses={guesses} targets={targets} />
 
       {gameOver && (
-        <div className="qr-overlay">
-          <div className="qr-overlay-box">
+        <div className="qrd-overlay">
+          <div className="qrd-overlay-box">
             <h2>{solvedCount === 4 ? "Brilliant!" : "Game Over"}</h2>
             <div>Solved: {solvedCount} / 4</div>
             <div>Guesses used: {guesses.length}</div>

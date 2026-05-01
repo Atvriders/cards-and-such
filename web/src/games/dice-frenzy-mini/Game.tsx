@@ -8,15 +8,15 @@ export function DiceFrenzyMiniGame({ state, dispatch, onGameOver }: GameProps<Di
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dfm-wrap"><div className="dfm-done"><h2>Done!</h2><div className="dfm-final">{state.score} pts</div></div></div>;
+    return <div className="dfrm-wrap dfrm-theme"><div className="dfrm-done"><h2>Done!</h2><div className="dfrm-final">{state.score} pts</div></div></div>;
   }
   const sum = state.dice.reduce((acc, v, i) => acc + (state.selected[i] ? v : 0), 0);
   return (
-    <div className="dfm-wrap">
-      <div className="dfm-info">Round {state.round} / {TOTAL_ROUNDS} — Target: {state.target}</div>
-      <div className="dfm-score">{state.score} pts</div>
-      <div className="dfm-info">Selected sum: {sum}</div>
-      <div className="dfm-grid">
+    <div className="dfrm-wrap dfrm-theme">
+      <div className="dfrm-info">Round {state.round} / {TOTAL_ROUNDS} — Target: {state.target}</div>
+      <div className="dfrm-score">{state.score} pts</div>
+      <div className="dfrm-info">Selected sum: {sum}</div>
+      <div className="dfrm-grid">
         {state.dice.map((v, i) => (
           <button
             key={i}
@@ -27,12 +27,12 @@ export function DiceFrenzyMiniGame({ state, dispatch, onGameOver }: GameProps<Di
         ))}
       </div>
       {state.phase === "selecting" && (
-        <button className="dfm-btn" onClick={() => dispatch({ type: "submit" } as DiceFrenzyMiniAction)}>Lock In</button>
+        <button className="dfrm-btn" onClick={() => dispatch({ type: "submit" } as DiceFrenzyMiniAction)}>Lock In</button>
       )}
       {state.phase === "result" && (
         <>
-          <div className="dfm-feedback">Delta: {state.lastDelta >= 0 ? `+${state.lastDelta}` : state.lastDelta} → +{state.lastPts}</div>
-          <button className="dfm-btn alt" onClick={() => dispatch({ type: "next" } as DiceFrenzyMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <div className="dfrm-feedback">Delta: {state.lastDelta >= 0 ? `+${state.lastDelta}` : state.lastDelta} → +{state.lastPts}</div>
+          <button className="dfrm-btn alt" onClick={() => dispatch({ type: "next" } as DiceFrenzyMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

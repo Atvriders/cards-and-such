@@ -5,16 +5,16 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function PersianRummyRGame({ state, dispatch, onGameOver }: GameProps<PersianRummyRState, PersianRummyRSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="prsr-wrap"><div className="prsr-done"><h2>Done!</h2><div className="prsr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="dm-btn" onClick={() => dispatch({ type: "score" } as PersianRummyRAction)}>Auto-score</button>}
+    <div className="prsr-wrap">
+      <div className="prsr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="prsr-score">{state.score} pts</div>
+      <div className="prsr-row">{state.hand.map((c, i) => <div key={i} className={`prsr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <button className="prsr-btn" onClick={() => dispatch({ type: "score" } as PersianRummyRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PersianRummyRAction)}>Next</button>
+        <div className="prsr-result">{state.result} — +{state.pts}</div>
+        <button className="prsr-btn alt" onClick={() => dispatch({ type: "next" } as PersianRummyRAction)}>Next</button>
       </>}
     </div>
   );

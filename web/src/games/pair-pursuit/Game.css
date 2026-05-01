@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: pair-pursuit (unique class prefix + themed palette over shared dm-* engine) */
+.pair-pursuit-theme.dm-wrap {
+  background: linear-gradient(180deg,#3f0f6c 0%,#6d28d9 55%,#9333ea 100%);
+}
+.pair-pursuit-theme .dm-info,
+.pair-pursuit-theme .dm-header {
+  color: #f5f3ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.pair-pursuit-theme .dm-target { color: #f5f3ff; opacity: 0.85; }
+.pair-pursuit-theme .dm-score {
+  background: linear-gradient(180deg, #ddd6fe, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(167,139,250,0.45);
+}
+.pair-pursuit-theme .dm-die {
+  background: linear-gradient(145deg,#ede9fe,#c4b5fd);
+  color: #3b0764;
+}
+.pair-pursuit-theme .dm-card {
+  background: linear-gradient(145deg,#ede9fe,#c4b5fd);
+  color: #3b0764;
+}
+.pair-pursuit-theme .dm-btn {
+  background: linear-gradient(180deg, #8b5cf6 0%, #5b21b6 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(91,33,182,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.pair-pursuit-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #a78bfa 0%, #c4b5fd 100%);
+  color: #1f2937;
+}
+.pair-pursuit-theme .dm-bet-btn {
+  color: #f5f3ff;
+  border-color: rgba(255,255,255,0.25);
+}
+.pair-pursuit-theme .dm-result {
+  color: #f5f3ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.pair-pursuit-theme .dm-feedback {
+  color: #ddd6fe;
+  text-shadow: 0 0 12px rgba(167,139,250,0.6);
+}
+.pair-pursuit-theme .dm-final {
+  background: linear-gradient(180deg, #ede9fe, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.pair-pursuit-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #8b5cf6, #5b21b6);
+  border-color: #c4b5fd;
+}
+.pair-pursuit-theme .dm-die.selected,
+.pair-pursuit-theme .dm-die.hl {
+  border-color: #a78bfa;
+  box-shadow:
+    0 0 0 2px #a78bfa,
+    0 0 22px rgba(167,139,250,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

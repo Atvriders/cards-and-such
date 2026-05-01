@@ -18,6 +18,7 @@ export function ShortDeckHoldemGame({ state, dispatch, onGameOver }: GameProps<S
     ? bestFiveSD([...state.cpu.hole, ...state.community]) : null;
 
   return (
+    <div className="thmShortDeck">
     <PokerTable
       prefix="sdholdem-"
       state={state}
@@ -31,5 +32,6 @@ export function ShortDeckHoldemGame({ state, dispatch, onGameOver }: GameProps<S
       onCall={() => dis({ type: "call" })}
       onRaise={(amount) => dis({ type: "raise", amount })}
     />
+  </div>
   );
 }

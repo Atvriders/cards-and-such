@@ -47,14 +47,14 @@ export function Shikaku({ state, dispatch, onGameOver }: GameProps<ShikakuState,
   }
 
   return (
-    <div className="shikaku" onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
-      <div className="shikaku-title">Shikaku</div>
-      <div className={`shikaku-status${won ? " win" : ""}`}>
+    <div className="shikakumosaic" onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
+      <div className="shikakumosaic-title">Shikaku</div>
+      <div className={`shikakumosaic-status${won ? " win" : ""}`}>
         {won ? `Solved! Score: ${terminal?.score ?? 0}` : `Moves: ${state.moves} — drag to divide into rectangles`}
       </div>
 
       <div
-        className="shikaku-grid"
+        className="shikakumosaic-grid"
         style={{ gridTemplateColumns: `repeat(${size}, ${CELL}px)` }}
       >
         {Array.from({ length: size * size }, (_, idx) => {
@@ -69,18 +69,18 @@ export function Shikaku({ state, dispatch, onGameOver }: GameProps<ShikakuState,
           return (
             <div
               key={idx}
-              className={["shikaku-cell", inDraft ? (draftValid ? "draft-valid" : "draft-invalid") : ""].join(" ")}
+              className={["shikakumosaic-cell", inDraft ? (draftValid ? "draft-valid" : "draft-invalid") : ""].join(" ")}
               style={{ width: CELL, height: CELL, background: bg || undefined }}
               onMouseDown={() => handleMouseDown(r, c)}
               onMouseEnter={() => handleMouseEnter(r, c)}
             >
-              {clueInfo ? <span className="shikaku-clue">{clueInfo.cl.value}</span> : null}
+              {clueInfo ? <span className="shikakumosaic-clue">{clueInfo.cl.value}</span> : null}
             </div>
           );
         })}
       </div>
 
-      <div className="shikaku-btns">
+      <div className="shikakumosaic-btns">
         <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>

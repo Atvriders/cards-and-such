@@ -8,22 +8,22 @@ export function DiceGridironGame({ state, dispatch, onGameOver }: GameProps<Dice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dx-wrap"><div className="dx-done"><h2>Done!</h2><div className="dx-final">{state.score} pts</div></div></div>;
+    return <div className="dgrd-wrap dgrd-theme"><div className="dgrd-done"><h2>Done!</h2><div className="dgrd-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dx-wrap">
-      <div className="dx-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dx-score">{state.score} pts</div>
+    <div className="dgrd-wrap dgrd-theme">
+      <div className="dgrd-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="dgrd-score">{state.score} pts</div>
       {state.dice && (
-        <div className="dx-row">{state.dice.map((d, i) => <div key={i} className="dx-die">{d}</div>)}</div>
+        <div className="dgrd-row">{state.dice.map((d, i) => <div key={i} className="dgrd-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dx-btn" onClick={() => dispatch({ type:"roll" } as DiceGridironAction)}>Roll</button>
+        <button className="dgrd-btn" onClick={() => dispatch({ type:"roll" } as DiceGridironAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>
-          <div className="dx-result">+{state.lastPts}</div>
-          <button className="dx-btn alt" onClick={() => dispatch({ type:"next" } as DiceGridironAction)}>Next</button>
+          <div className="dgrd-result">+{state.lastPts}</div>
+          <button className="dgrd-btn alt" onClick={() => dispatch({ type:"next" } as DiceGridironAction)}>Next</button>
         </>
       )}
     </div>

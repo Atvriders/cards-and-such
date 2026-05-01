@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-hand-poker (unique class prefix + themed palette over shared dm-* engine) */
+.dice-hand-poker-theme.dm-wrap {
+  background: linear-gradient(180deg,#0a0a0a 0%,#262626 55%,#404040 100%);
+}
+.dice-hand-poker-theme .dm-info,
+.dice-hand-poker-theme .dm-header {
+  color: #fafafa;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-hand-poker-theme .dm-target { color: #fafafa; opacity: 0.85; }
+.dice-hand-poker-theme .dm-score {
+  background: linear-gradient(180deg, #fef08a, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(251,191,36,0.45);
+}
+.dice-hand-poker-theme .dm-die {
+  background: linear-gradient(145deg,#fffbeb,#fde68a);
+  color: #171717;
+}
+.dice-hand-poker-theme .dm-card {
+  background: linear-gradient(145deg,#fffbeb,#fde68a);
+  color: #171717;
+}
+.dice-hand-poker-theme .dm-btn {
+  background: linear-gradient(180deg, #eab308 0%, #a16207 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(161,98,7,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-hand-poker-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #fbbf24 0%, #facc15 100%);
+  color: #1f2937;
+}
+.dice-hand-poker-theme .dm-bet-btn {
+  color: #fafafa;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-hand-poker-theme .dm-result {
+  color: #fafafa;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-hand-poker-theme .dm-feedback {
+  color: #fef08a;
+  text-shadow: 0 0 12px rgba(251,191,36,0.6);
+}
+.dice-hand-poker-theme .dm-final {
+  background: linear-gradient(180deg, #fef9c3, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-hand-poker-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #eab308, #a16207);
+  border-color: #facc15;
+}
+.dice-hand-poker-theme .dm-die.selected,
+.dice-hand-poker-theme .dm-die.hl {
+  border-color: #fbbf24;
+  box-shadow:
+    0 0 0 2px #fbbf24,
+    0 0 22px rgba(251,191,36,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

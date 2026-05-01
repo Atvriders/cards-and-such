@@ -1,2 +1,47 @@
 /* Modern poker-table engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+
+/* === poker-theme:omaha-ocean === unique-class .thmOma5Hi === */
+.thmOma5Hi,
+.thmOma5Hi.dm-wrap,
+.thmOma5Hi.holdem-wrap,
+.thmOma5Hi.g-wrap,
+.thmOma5Hi .dm-wrap,
+.thmOma5Hi .holdem-wrap,
+.thmOma5Hi .holdem-table,
+.thmOma5Hi .g-wrap,
+.thmOma5Hi .omaha-five-card-hi-felt,
+.thmOma5Hi [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #0d6e3a 0%, #054224 60%, #021810 100%), linear-gradient(180deg, #0e3d63, #07223b) !important;
+  color: #eaf6ff !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #7fc8ff;
+  --theme-accent2: #bfe4ff;
+  --theme-ink: #eaf6ff;
+  --theme-rim: #0a1c2e;
+}
+.thmOma5Hi .dm-score,
+.thmOma5Hi .holdem-pot-amount,
+.thmOma5Hi [class$="-stack"],
+.thmOma5Hi [class$="-pot-amount"] {
+  color: #bfe4ff !important;
+  text-shadow: 0 0 18px #7fc8ff55;
+}
+.thmOma5Hi .dm-info,
+.thmOma5Hi [class$="-hud"],
+.thmOma5Hi [class$="-stat"] {
+  border-color: #7fc8ff55 !important;
+}
+.thmOma5Hi .dm-card,
+.thmOma5Hi .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #7fc8ff22;
+}
+.thmOma5Hi .dm-btn,
+.thmOma5Hi [class*="-btn"] {
+  border-color: #7fc8ff55 !important;
+}

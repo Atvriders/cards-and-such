@@ -128,29 +128,29 @@ export function Masyu({
   );
 
   return (
-    <div className="masyu">
-      <div className="masyu-title">Masyu</div>
-      <div className={`masyu-status${won ? " win" : ""}`}>
+    <div className="masyupearl">
+      <div className="masyupearl-title">Masyu</div>
+      <div className={`masyupearl-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
           : `Moves: ${state.moves} — draw a loop through all pearls`}
       </div>
 
-      <div className="masyu-canvas-wrap">
+      <div className="masyupearl-canvas-wrap">
         <canvas
           ref={canvasRef}
-          className="masyu-canvas"
+          className="masyupearl-canvas"
           width={width}
           height={height}
           onClick={handleClick}
         />
       </div>
 
-      <div className="masyu-legend">
+      <div className="masyupearl-legend">
         Click between adjacent cells to draw/erase a loop segment. ● = black pearl (turn here). ○ = white pearl (go straight).
       </div>
 
-      <div className="masyu-btn-row">
+      <div className="masyupearl-btn-row">
         <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>

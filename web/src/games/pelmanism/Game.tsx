@@ -15,37 +15,37 @@ export function PelmanismGame({ state, dispatch, onGameOver }: GameProps<Pelmani
 
   if (state.phase === "done") {
     return (
-      <div className="pelm-wrap">
-        <div className="pelm-done">
+      <div className="pelman-wrap">
+        <div className="pelman-done">
           <h2>Cleared</h2>
-          <div className="pelm-stats">{state.matches} pairs in {state.attempts} attempts</div>
-          <div className="pelm-final">{state.score} pts</div>
+          <div className="pelman-stats">{state.matches} pairs in {state.attempts} attempts</div>
+          <div className="pelman-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="pelm-wrap">
-      <div className="pelm-header">
-        <span className="pelm-progress">{state.matches} / {PAIR_COUNT} pairs</span>
-        <span className="pelm-attempts">{state.attempts} attempts</span>
-        <span className="pelm-score">{state.score} pts</span>
+    <div className="pelman-wrap">
+      <div className="pelman-header">
+        <span className="pelman-progress">{state.matches} / {PAIR_COUNT} pairs</span>
+        <span className="pelman-attempts">{state.attempts} attempts</span>
+        <span className="pelman-score">{state.score} pts</span>
       </div>
-      <div className="pelm-board">
+      <div className="pelman-board">
         {state.values.map((v, i) => {
           const open = state.revealed[i] || state.flipped.includes(i);
-          let cls = "pelm-card";
+          let cls = "pelman-card";
           if (state.revealed[i]) cls += " matched";
           else if (state.flipped.includes(i)) cls += " flipped";
           return (
             <button key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as PelmanismAction)}>
-              <span className="pelm-face">{open ? PELMANISM_FACES[v] : ""}</span>
+              <span className="pelman-face">{open ? PELMANISM_FACES[v] : ""}</span>
             </button>
           );
         })}
       </div>
-      <div className="pelm-hint">Pair the symbols. Perfect run yields a bonus.</div>
+      <div className="pelman-hint">Pair the symbols. Perfect run yields a bonus.</div>
     </div>
   );
 }

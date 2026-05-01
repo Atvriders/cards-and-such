@@ -15,25 +15,25 @@ export function KimsGameGame({ state, dispatch, onGameOver }: GameProps<KimsGame
   }, [state.currentIndex]);
 
   if (state.phase === "done") {
-    return <div className="gkimsga-wrap"><div className="gkimsga-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="gkimsga-final">{state.score} pts</div></div></div>;
+    return <div className="kimsobs-wrap"><div className="kimsobs-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="kimsobs-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="gkimsga-wrap">
-      <div className="gkimsga-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="gkimsga-score">{state.score} pts</div>
+    <div className="kimsobs-wrap">
+      <div className="kimsobs-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
+      <div className="kimsobs-score">{state.score} pts</div>
       {showTray ? (
         <>
-          <div className="gkimsga-prompt">Memorize the tray (3.5s)</div>
-          <div className="gkimsga-tray">{r.tray.map((it, i) => <span key={i} className="gkimsga-trayitem">{it}</span>)}</div>
-          <button className="gkimsga-btn submit" onClick={() => setShowTray(false)}>Ready</button>
+          <div className="kimsobs-prompt">Memorize the tray (3.5s)</div>
+          <div className="kimsobs-tray">{r.tray.map((it, i) => <span key={i} className="kimsobs-trayitem">{it}</span>)}</div>
+          <button className="kimsobs-btn submit" onClick={() => setShowTray(false)}>Ready</button>
         </>
       ) : (
         <>
-          <div className="gkimsga-prompt">{r.question}</div>
-          <div className="gkimsga-grid">
+          <div className="kimsobs-prompt">{r.question}</div>
+          <div className="kimsobs-grid">
             {r.choices.map((n, i) => {
-              let cls = "gkimsga-cell";
+              let cls = "kimsobs-cell";
               if (state.submitted) {
                 if (i === r.correct) cls += " correct";
                 else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
@@ -41,8 +41,8 @@ export function KimsGameGame({ state, dispatch, onGameOver }: GameProps<KimsGame
               return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as KimsGameAction)}>{n}</button>;
             })}
           </div>
-          {!state.submitted && <button className="gkimsga-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as KimsGameAction)}>Submit</button>}
-          {state.submitted && <button className="gkimsga-btn next" onClick={() => dispatch({ type: "next" } as KimsGameAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
+          {!state.submitted && <button className="kimsobs-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as KimsGameAction)}>Submit</button>}
+          {state.submitted && <button className="kimsobs-btn next" onClick={() => dispatch({ type: "next" } as KimsGameAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
         </>
       )}
     </div>

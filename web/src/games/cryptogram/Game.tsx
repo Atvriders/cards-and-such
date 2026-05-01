@@ -33,16 +33,16 @@ export function Cryptogram({
 
   return (
     <div className="crypto">
-      <div className="crypto-title">Cryptogram</div>
-      <div className={`crypto-status${won ? " win" : ""}`}>
+      <div className="crg-title">Cryptogram</div>
+      <div className={`crg-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${state.score}`
           : `Guesses: ${state.guesses} · Hints: ${state.hintsUsed} — decode the quote`}
       </div>
 
-      <div className="crypto-text">
+      <div className="crg-text">
         {words.map((word, wi) => (
-          <span key={wi} className="crypto-word">
+          <span key={wi} className="crg-word">
             {word.split("").map((ch, ci) => {
               const isLetter = /[A-Z]/.test(ch);
               const guess = isLetter ? decryptMap[ch] : null;
@@ -52,7 +52,7 @@ export function Cryptogram({
                 <span
                   key={ci}
                   className={[
-                    "crypto-letter",
+                    "crg-letter",
                     isLetter ? "clickable" : "punct",
                     isSel ? "selected" : "",
                     isRevealed ? "revealed" : "",
@@ -62,8 +62,8 @@ export function Cryptogram({
                   onClick={() => isLetter && handleCipherClick(ch)}
                   data-testid={`cipher-${wi}-${ci}`}
                 >
-                  <span className="crypto-plain">{guess ?? (isLetter ? "_" : ch)}</span>
-                  <span className="crypto-cipher">{isLetter ? ch : ""}</span>
+                  <span className="crg-plain">{guess ?? (isLetter ? "_" : ch)}</span>
+                  <span className="crg-cipher">{isLetter ? ch : ""}</span>
                 </span>
               );
             })}
@@ -74,15 +74,15 @@ export function Cryptogram({
       {!won && (
         <>
           {selectedCipher && (
-            <div className="crypto-sel-label">
+            <div className="crg-sel-label">
               Assigning plain letter for cipher: <strong>{selectedCipher}</strong>
             </div>
           )}
-          <div className="crypto-alpha">
+          <div className="crg-alpha">
             {ALPHA.map((pl) => (
               <button
                 key={pl}
-                className={`crypto-alpha-btn${selectedCipher ? "" : " disabled"}`}
+                className={`crg-alpha-btn${selectedCipher ? "" : " disabled"}`}
                 onClick={() => selectedCipher && handlePlain(pl)}
                 data-testid={`plain-${pl}`}
               >
@@ -90,16 +90,16 @@ export function Cryptogram({
               </button>
             ))}
           </div>
-          <div className="crypto-actions">
+          <div className="crg-actions">
             <button
-              className="crypto-action-btn"
+              className="crg-action-btn"
               onClick={() => dispatch({ type: "clearGuess" } satisfies CryptogramAction)}
               disabled={!selectedCipher}
             >
               Clear
             </button>
             <button
-              className="crypto-action-btn hint"
+              className="crg-action-btn hint"
               onClick={() => dispatch({ type: "hint" } satisfies CryptogramAction)}
             >
               Hint (−100 pts)
@@ -109,13 +109,13 @@ export function Cryptogram({
       )}
 
       {won && (
-        <div className="crypto-reveal">
-          <div className="crypto-reveal-label">Decoded quote:</div>
-          <div className="crypto-reveal-text">{state.plaintext}</div>
+        <div className="crg-reveal">
+          <div className="crg-reveal-label">Decoded quote:</div>
+          <div className="crg-reveal-text">{state.plaintext}</div>
         </div>
       )}
 
-      <div className="crypto-hint">
+      <div className="crg-hint">
         Click a cipher letter (top row), then click the plain letter you think it represents.
       </div>
     </div>

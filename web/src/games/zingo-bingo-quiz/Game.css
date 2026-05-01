@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === zngbngq-themewrap themed palette (zingo_bingo) === */
+.zngbngq-themewrap.trivia-wrap,
+.zngbngq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #fef9c3;
+  color: #1e3a8a;
+  border-color: #0891b255;
+}
+.zngbngq-themewrap .trivia-progress,
+.zngbngq-themewrap .trivia-score { color: #dc2626; }
+.zngbngq-themewrap .trivia-timer { color: #0891b2; }
+.zngbngq-themewrap .trivia-timer.urgent { color: #f43f5e; }
+.zngbngq-themewrap .trivia-question { color: #1e3a8a; }
+.zngbngq-themewrap .trivia-choice {
+  background: #ffffff;
+  color: #1e3a8a;
+  border: 1.5px solid #0891b2;
+}
+.zngbngq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #dc2626;
+  background: #0891b222;
+}
+.zngbngq-themewrap .trivia-choice.selected {
+  border-color: #dc2626;
+  background: #0891b233;
+}
+.zngbngq-themewrap .trivia-choice.correct {
+  background: #84cc16;
+  border-color: #84cc16;
+  color: #1e3a8a;
+}
+.zngbngq-themewrap .trivia-choice.wrong {
+  background: #f43f5e;
+  border-color: #f43f5e;
+  color: #1e3a8a;
+}
+.zngbngq-themewrap .trivia-choice-letter {
+  background: #dc2626;
+  color: #fff;
+}
+.zngbngq-themewrap .trivia-feedback.correct { background: #84cc16; color: #1e3a8a; }
+.zngbngq-themewrap .trivia-feedback.wrong { background: #f43f5e; color: #1e3a8a; }
+.zngbngq-themewrap .trivia-btn.submit { background: #dc2626; }
+.zngbngq-themewrap .trivia-btn.next { background: #0891b2; }
+.zngbngq-themewrap .trivia-done { background: #ffffff; color: #1e3a8a; }
+.zngbngq-themewrap .trivia-done h2 { color: #dc2626; }

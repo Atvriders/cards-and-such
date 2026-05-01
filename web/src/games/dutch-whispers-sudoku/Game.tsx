@@ -21,11 +21,11 @@ export function DutchWhispersSudokuGame({ state, dispatch, onGameOver }: GamePro
 
   if (state.phase === "done") {
     return (
-      <div className="dutchwhisperssudoku-wrap">
-        <div className="dutchwhisperssudoku-done">
+      <div className="dutchwhispersorange-wrap">
+        <div className="dutchwhispersorange-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="dutchwhisperssudoku-final">{state.score} pts</p>
+          <p className="dutchwhispersorange-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function DutchWhispersSudokuGame({ state, dispatch, onGameOver }: GamePro
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="dutchwhisperssudoku-wrap">
-      <div className="dutchwhisperssudoku-header">
+    <div className="dutchwhispersorange-wrap">
+      <div className="dutchwhispersorange-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="dutchwhisperssudoku-score">{state.score} pts</span>
+        <span className="dutchwhispersorange-score">{state.score} pts</span>
       </div>
-      <div className="dutchwhisperssudoku-mech">Sudoku with Dutch whisper lines (differ by ≥4).</div>
-      <div className="dutchwhisperssudoku-grid">
+      <div className="dutchwhispersorange-mech">Sudoku with Dutch whisper lines (differ by ≥4).</div>
+      <div className="dutchwhispersorange-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="dutchwhisperssudoku-row">
+          <div key={r} className="dutchwhispersorange-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function DutchWhispersSudokuGame({ state, dispatch, onGameOver }: GamePro
               return (
                 <button
                   key={c}
-                  className={`dutchwhisperssudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`dutchwhispersorange-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as DutchWhispersSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function DutchWhispersSudokuGame({ state, dispatch, onGameOver }: GamePro
           </div>
         ))}
       </div>
-      <div className="dutchwhisperssudoku-pad">
+      <div className="dutchwhispersorange-pad">
         {digits.map((d) => (
-          <button key={d} className="dutchwhisperssudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as DutchWhispersSudokuAction)}>{d}</button>
+          <button key={d} className="dutchwhispersorange-num" onClick={() => dispatch({ type: "enter", digit: d } as DutchWhispersSudokuAction)}>{d}</button>
         ))}
-        <button className="dutchwhisperssudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as DutchWhispersSudokuAction)}>×</button>
+        <button className="dutchwhispersorange-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as DutchWhispersSudokuAction)}>×</button>
       </div>
-      <div className="dutchwhisperssudoku-actions">
-        <button className="dutchwhisperssudoku-btn check" onClick={() => dispatch({ type: "check" } as DutchWhispersSudokuAction)}>Check</button>
-        <button className="dutchwhisperssudoku-btn hint" onClick={() => dispatch({ type: "hint" } as DutchWhispersSudokuAction)}>Hint</button>
-        <button className="dutchwhisperssudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as DutchWhispersSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="dutchwhispersorange-actions">
+        <button className="dutchwhispersorange-btn check" onClick={() => dispatch({ type: "check" } as DutchWhispersSudokuAction)}>Check</button>
+        <button className="dutchwhispersorange-btn hint" onClick={() => dispatch({ type: "hint" } as DutchWhispersSudokuAction)}>Hint</button>
+        <button className="dutchwhispersorange-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as DutchWhispersSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="dutchwhisperssudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="dutchwhispersorange-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

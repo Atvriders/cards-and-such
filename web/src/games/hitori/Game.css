@@ -1,4 +1,4 @@
-.hitori {
+.hitorishadow {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,22 +8,22 @@
   user-select: none;
 }
 
-.hitori-title {
+.hitorishadow-title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.hitori-status {
+.hitorishadow-status {
   font-size: 0.95rem;
   color: #555;
 }
 
-.hitori-status.win {
+.hitorishadow-status.win {
   color: #27ae60;
   font-weight: bold;
 }
 
-.hitori-grid {
+.hitorishadow-grid {
   display: inline-grid;
   gap: 2px;
   background: #ccc;
@@ -31,7 +31,7 @@
   padding: 2px;
 }
 
-.hitori-cell {
+.hitorishadow-cell {
   width: 48px;
   height: 48px;
   display: flex;
@@ -44,32 +44,32 @@
   transition: background 0.1s;
 }
 
-.hitori-cell.unshaded {
+.hitorishadow-cell.unshaded {
   background: #fff;
   color: #222;
 }
 
-.hitori-cell.shaded {
+.hitorishadow-cell.shaded {
   background: #333;
   color: transparent;
 }
 
-.hitori-cell.violation {
+.hitorishadow-cell.violation {
   background: #ffe0e0;
   color: #c0392b;
 }
 
-.hitori-cell.shaded.violation {
+.hitorishadow-cell.shaded.violation {
   background: #8b0000;
   color: transparent;
 }
 
-.hitori-btn-row {
+.hitorishadow-btn-row {
   display: flex;
   gap: 8px;
 }
 
-.hitori-btn-row button {
+.hitorishadow-btn-row button {
   padding: 8px 18px;
   font-size: 0.95rem;
   border: 1.5px solid #aaa;
@@ -78,11 +78,69 @@
   background: #f5f5f5;
 }
 
-.hitori-btn-row button:hover {
+.hitorishadow-btn-row button:hover {
   background: #dde;
 }
 
-.hitori-legend {
+.hitorishadow-legend {
   font-size: 0.82rem;
   color: #666;
+}
+
+
+/* === Theme: charcoal (Charcoal shade — black & white) === */
+.hitorishadow {
+  background: #ededed;
+  color: #1a1a1a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.hitorishadow .hitorishadow-mech,
+.hitorishadow [class*="-mech"],
+.hitorishadow [class*="-status"]:not(.solved):not(.win) {
+  color: #5a5a5a;
+}
+.hitorishadow [class*="-score"],
+.hitorishadow [class*="-final"] {
+  color: #2c2c2c;
+}
+.hitorishadow [class*="-grid"] {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+}
+.hitorishadow [class*="-cell"] {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+.hitorishadow [class*="-cell"].sel,
+.hitorishadow [class*="-cell"].selected {
+  outline: 3px solid #5a5a5a;
+  outline-offset: -3px;
+}
+.hitorishadow [class*="-cell"].err,
+.hitorishadow [class*="-cell"].error,
+.hitorishadow [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #a83a3a;
+}
+.hitorishadow [class*="-num"]:hover,
+.hitorishadow [class*="-numpad"] button:hover {
+  background: #5a5a5a;
+  color: #ededed;
+  border-color: #2c2c2c;
+}
+.hitorishadow [class*="-btn"].check,
+.hitorishadow [class*="-controls"] button {
+  background: #2c2c2c;
+  color: #ededed;
+  border-color: #2c2c2c;
+}
+.hitorishadow [class*="-btn"].next {
+  background: #5a5a5a;
+  color: #ededed;
+}
+.hitorishadow [class*="-status"].solved,
+.hitorishadow [class*="-status"].win {
+  color: #2c5d3a;
 }

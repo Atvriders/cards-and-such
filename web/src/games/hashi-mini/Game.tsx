@@ -10,11 +10,11 @@ export function HashiMiniGame({ state, dispatch, onGameOver }: GameProps<HashiMi
 
   if (state.phase === "done") {
     return (
-      <div className="hashimini-wrap">
-        <div className="hashimini-done">
+      <div className="hashiminicyan-wrap">
+        <div className="hashiminicyan-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="hashimini-final">{state.score} pts</p>
+          <p className="hashiminicyan-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function HashiMiniGame({ state, dispatch, onGameOver }: GameProps<HashiMi
   const errSet = new Set(state.errors);
 
   return (
-    <div className="hashimini-wrap">
-      <div className="hashimini-header">
+    <div className="hashiminicyan-wrap">
+      <div className="hashiminicyan-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="hashimini-score">{state.score} pts</span>
+        <span className="hashiminicyan-score">{state.score} pts</span>
       </div>
-      <div className="hashimini-mech">Fill island degree counts; islands connect by 1-2 bridges to form one network.</div>
-      <div className="hashimini-grid">
+      <div className="hashiminicyan-mech">Fill island degree counts; islands connect by 1-2 bridges to form one network.</div>
+      <div className="hashiminicyan-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="hashimini-row">
+          <div key={r} className="hashiminicyan-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function HashiMiniGame({ state, dispatch, onGameOver }: GameProps<HashiMi
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`hashimini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`hashiminicyan-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as HashiMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function HashiMiniGame({ state, dispatch, onGameOver }: GameProps<HashiMi
           </div>
         ))}
       </div>
-      <div className="hashimini-pad">
+      <div className="hashiminicyan-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`hashimini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as HashiMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`hashiminicyan-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as HashiMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="hashimini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as HashiMiniAction)}>×</button>
+        <button className="hashiminicyan-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as HashiMiniAction)}>×</button>
       </div>
-      <div className="hashimini-actions">
-        <button className="hashimini-btn check" onClick={() => dispatch({ type: "check" } as HashiMiniAction)}>Check</button>
-        <button className="hashimini-btn hint" onClick={() => dispatch({ type: "hint" } as HashiMiniAction)}>Hint</button>
-        <button className="hashimini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as HashiMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="hashiminicyan-actions">
+        <button className="hashiminicyan-btn check" onClick={() => dispatch({ type: "check" } as HashiMiniAction)}>Check</button>
+        <button className="hashiminicyan-btn hint" onClick={() => dispatch({ type: "hint" } as HashiMiniAction)}>Hint</button>
+        <button className="hashiminicyan-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as HashiMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="hashimini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="hashiminicyan-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

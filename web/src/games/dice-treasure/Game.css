@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-treasure (unique class prefix + themed palette over shared dm-* engine) */
+.dice-treasure-theme.dm-wrap {
+  background: linear-gradient(180deg,#451a03 0%,#a16207 55%,#fbbf24 100%);
+}
+.dice-treasure-theme .dm-info,
+.dice-treasure-theme .dm-header {
+  color: #fffbeb;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-treasure-theme .dm-target { color: #fffbeb; opacity: 0.85; }
+.dice-treasure-theme .dm-score {
+  background: linear-gradient(180deg, #fde68a, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(251,191,36,0.45);
+}
+.dice-treasure-theme .dm-die {
+  background: linear-gradient(145deg,#fffbeb,#fde68a);
+  color: #451a03;
+}
+.dice-treasure-theme .dm-card {
+  background: linear-gradient(145deg,#fffbeb,#fde68a);
+  color: #451a03;
+}
+.dice-treasure-theme .dm-btn {
+  background: linear-gradient(180deg, #ca8a04 0%, #854d0e 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(133,77,14,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-treasure-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #fde047 0%, #fef08a 100%);
+  color: #1f2937;
+}
+.dice-treasure-theme .dm-bet-btn {
+  color: #fffbeb;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-treasure-theme .dm-result {
+  color: #fffbeb;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-treasure-theme .dm-feedback {
+  color: #fde68a;
+  text-shadow: 0 0 12px rgba(251,191,36,0.6);
+}
+.dice-treasure-theme .dm-final {
+  background: linear-gradient(180deg, #fef3c7, #eab308);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-treasure-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #ca8a04, #854d0e);
+  border-color: #fef08a;
+}
+.dice-treasure-theme .dm-die.selected,
+.dice-treasure-theme .dm-die.hl {
+  border-color: #fde047;
+  box-shadow:
+    0 0 0 2px #fde047,
+    0 0 22px rgba(253,224,71,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

@@ -1,5 +1,5 @@
-/* tiny-epic-western-mini — unique class prefix bz-tewm- */
-.bz-tewm-wrap {
+/* Tiny Epic Western — unique class prefix bz-tew- (themed) */
+.bz-tew-wrap {
   max-width: 600px;
   margin: 0 auto;
   padding: 16px;
@@ -8,73 +8,84 @@
   flex-direction: column;
   gap: 14px;
   align-items: center;
-  color: #f1f5f9;
-  background: linear-gradient(140deg, #581c87, #2e1065);
+  color: #fed7aa;
+  background: linear-gradient(140deg, #7c2d12, #451a03);
   border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
 }
-.bz-tewm-title {
+.bz-tew-title {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fbbf24;
+  text-shadow: 0 1px 2px #1a0801;
 }
-.bz-tewm-stats {
+.bz-tew-stats {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
   font-family: "JetBrains Mono", monospace;
 }
-.bz-tewm-stats > div {
-  background: rgba(255,255,255,0.08);
+.bz-tew-stats > div {
+  background: rgba(255,255,255,0.07);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.82rem;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid #fbbf2433;
+  color: #fed7aa;
 }
-.bz-tewm-actions {
+.bz-tew-stats b { color: #fbbf24; }
+.bz-tew-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
 }
-.bz-tewm-actions > button {
+.bz-tew-actions > button {
   padding: 9px 16px;
   border: 0;
   border-radius: 8px;
   cursor: pointer;
-  background: #4f46e5;
-  color: #fff;
+  background: #fbbf24;
+  color: #1a0801;
   font-weight: 700;
   font-family: "Inter", sans-serif;
-  transition: background 120ms;
+  transition: background 120ms, transform 80ms;
+  letter-spacing: 0.02em;
 }
-.bz-tewm-actions > button:hover { background: #4338ca; }
-.bz-tewm-event {
-  background: rgba(255,209,102,0.12);
-  border: 1px solid rgba(255,209,102,0.3);
+.bz-tew-actions > button:hover { background: #d97706; transform: translateY(-1px); }
+.bz-tew-actions > button:active { transform: translateY(0); }
+.bz-tew-event {
+  background: #dc262622;
+  border: 1px solid #dc262655;
   padding: 12px 16px;
   border-radius: 8px;
   max-width: 480px;
   text-align: center;
   font-size: 0.9rem;
+  color: #fecaca;
 }
-.bz-tewm-event button {
+.bz-tew-event button {
   margin-top: 10px;
   padding: 8px 16px;
   border: 0;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 700;
-  background: #06d6a0;
-  color: #0a1521;
+  background: #dc2626;
+  color: #1a0801;
 }
-.bz-tewm-done {
-  background: rgba(6,214,160,0.12);
-  border: 1px solid rgba(6,214,160,0.3);
+.bz-tew-event button:hover { filter: brightness(1.1); }
+.bz-tew-done {
+  background: #fbbf2422;
+  border: 1px solid #fbbf2455;
   padding: 16px 24px;
   border-radius: 10px;
   text-align: center;
   font-weight: 800;
   font-family: "JetBrains Mono", monospace;
+  color: #fbbf24;
 }

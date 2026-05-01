@@ -1,2 +1,47 @@
 /* Modern poker-table engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+
+/* === poker-theme:razz-amber === unique-class .thmBadeucy === */
+.thmBadeucy,
+.thmBadeucy.dm-wrap,
+.thmBadeucy.holdem-wrap,
+.thmBadeucy.g-wrap,
+.thmBadeucy .dm-wrap,
+.thmBadeucy .holdem-wrap,
+.thmBadeucy .holdem-table,
+.thmBadeucy .g-wrap,
+.thmBadeucy .badeucy-poker-felt,
+.thmBadeucy [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #6a4a0a 0%, #3a2a05 60%, #14100a 100%) !important;
+  color: #fff4d0 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #ffd76b;
+  --theme-accent2: #ffe9a8;
+  --theme-ink: #fff4d0;
+  --theme-rim: #1a1206;
+}
+.thmBadeucy .dm-score,
+.thmBadeucy .holdem-pot-amount,
+.thmBadeucy [class$="-stack"],
+.thmBadeucy [class$="-pot-amount"] {
+  color: #ffe9a8 !important;
+  text-shadow: 0 0 18px #ffd76b55;
+}
+.thmBadeucy .dm-info,
+.thmBadeucy [class$="-hud"],
+.thmBadeucy [class$="-stat"] {
+  border-color: #ffd76b55 !important;
+}
+.thmBadeucy .dm-card,
+.thmBadeucy .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #ffd76b22;
+}
+.thmBadeucy .dm-btn,
+.thmBadeucy [class*="-btn"] {
+  border-color: #ffd76b55 !important;
+}

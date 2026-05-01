@@ -1,4 +1,4 @@
-.masyu {
+.masyupearl {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,36 +8,36 @@
   user-select: none;
 }
 
-.masyu-title {
+.masyupearl-title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.masyu-status {
+.masyupearl-status {
   font-size: 0.95rem;
   color: #555;
 }
 
-.masyu-status.win {
+.masyupearl-status.win {
   color: #27ae60;
   font-weight: bold;
 }
 
-.masyu-canvas-wrap {
+.masyupearl-canvas-wrap {
   position: relative;
 }
 
-.masyu-canvas {
+.masyupearl-canvas {
   display: block;
   cursor: crosshair;
 }
 
-.masyu-btn-row {
+.masyupearl-btn-row {
   display: flex;
   gap: 8px;
 }
 
-.masyu-btn-row button {
+.masyupearl-btn-row button {
   padding: 8px 18px;
   font-size: 0.95rem;
   border: 1.5px solid #aaa;
@@ -46,12 +46,70 @@
   background: #f5f5f5;
 }
 
-.masyu-btn-row button:hover {
+.masyupearl-btn-row button:hover {
   background: #dde;
 }
 
-.masyu-legend {
+.masyupearl-legend {
   font-size: 0.82rem;
   color: #666;
   text-align: center;
+}
+
+
+/* === Theme: pearl (Pearl — black & white pearls) === */
+.masyupearl {
+  background: #f5f5f5;
+  color: #1a1a1a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.masyupearl .masyupearl-mech,
+.masyupearl [class*="-mech"],
+.masyupearl [class*="-status"]:not(.solved):not(.win) {
+  color: #6a6a6a;
+}
+.masyupearl [class*="-score"],
+.masyupearl [class*="-final"] {
+  color: #1a1a1a;
+}
+.masyupearl [class*="-grid"] {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+}
+.masyupearl [class*="-cell"] {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+.masyupearl [class*="-cell"].sel,
+.masyupearl [class*="-cell"].selected {
+  outline: 3px solid #9a9a9a;
+  outline-offset: -3px;
+}
+.masyupearl [class*="-cell"].err,
+.masyupearl [class*="-cell"].error,
+.masyupearl [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #a83a3a;
+}
+.masyupearl [class*="-num"]:hover,
+.masyupearl [class*="-numpad"] button:hover {
+  background: #9a9a9a;
+  color: #f5f5f5;
+  border-color: #1a1a1a;
+}
+.masyupearl [class*="-btn"].check,
+.masyupearl [class*="-controls"] button {
+  background: #1a1a1a;
+  color: #f5f5f5;
+  border-color: #1a1a1a;
+}
+.masyupearl [class*="-btn"].next {
+  background: #9a9a9a;
+  color: #f5f5f5;
+}
+.masyupearl [class*="-status"].solved,
+.masyupearl [class*="-status"].win {
+  color: #3a8a4a;
 }

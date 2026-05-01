@@ -21,11 +21,11 @@ export function JigsawSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
 
   if (state.phase === "done") {
     return (
-      <div className="jigsawsudokumini-wrap">
-        <div className="jigsawsudokumini-done">
+      <div className="jigsawpiece-wrap">
+        <div className="jigsawpiece-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="jigsawsudokumini-final">{state.score} pts</p>
+          <p className="jigsawpiece-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function JigsawSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="jigsawsudokumini-wrap">
-      <div className="jigsawsudokumini-header">
+    <div className="jigsawpiece-wrap">
+      <div className="jigsawpiece-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="jigsawsudokumini-score">{state.score} pts</span>
+        <span className="jigsawpiece-score">{state.score} pts</span>
       </div>
-      <div className="jigsawsudokumini-mech">Sudoku where boxes are irregular jigsaw shapes.</div>
-      <div className="jigsawsudokumini-grid">
+      <div className="jigsawpiece-mech">Sudoku where boxes are irregular jigsaw shapes.</div>
+      <div className="jigsawpiece-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="jigsawsudokumini-row">
+          <div key={r} className="jigsawpiece-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function JigsawSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
               return (
                 <button
                   key={c}
-                  className={`jigsawsudokumini-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`jigsawpiece-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as JigsawSudokuMiniAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function JigsawSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
           </div>
         ))}
       </div>
-      <div className="jigsawsudokumini-pad">
+      <div className="jigsawpiece-pad">
         {digits.map((d) => (
-          <button key={d} className="jigsawsudokumini-num" onClick={() => dispatch({ type: "enter", digit: d } as JigsawSudokuMiniAction)}>{d}</button>
+          <button key={d} className="jigsawpiece-num" onClick={() => dispatch({ type: "enter", digit: d } as JigsawSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="jigsawsudokumini-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as JigsawSudokuMiniAction)}>×</button>
+        <button className="jigsawpiece-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as JigsawSudokuMiniAction)}>×</button>
       </div>
-      <div className="jigsawsudokumini-actions">
-        <button className="jigsawsudokumini-btn check" onClick={() => dispatch({ type: "check" } as JigsawSudokuMiniAction)}>Check</button>
-        <button className="jigsawsudokumini-btn hint" onClick={() => dispatch({ type: "hint" } as JigsawSudokuMiniAction)}>Hint</button>
-        <button className="jigsawsudokumini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as JigsawSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="jigsawpiece-actions">
+        <button className="jigsawpiece-btn check" onClick={() => dispatch({ type: "check" } as JigsawSudokuMiniAction)}>Check</button>
+        <button className="jigsawpiece-btn hint" onClick={() => dispatch({ type: "hint" } as JigsawSudokuMiniAction)}>Hint</button>
+        <button className="jigsawpiece-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as JigsawSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="jigsawsudokumini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="jigsawpiece-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

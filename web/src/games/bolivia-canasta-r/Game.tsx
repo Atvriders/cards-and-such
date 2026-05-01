@@ -5,16 +5,16 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function BoliviaCanastaRGame({ state, dispatch, onGameOver }: GameProps<BoliviaCanastaRState, BoliviaCanastaRSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="bolr-wrap"><div className="bolr-done"><h2>Done!</h2><div className="bolr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="dm-btn" onClick={() => dispatch({ type: "score" } as BoliviaCanastaRAction)}>Auto-score</button>}
+    <div className="bolr-wrap">
+      <div className="bolr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="bolr-score">{state.score} pts</div>
+      <div className="bolr-row">{state.hand.map((c, i) => <div key={i} className={`bolr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <button className="bolr-btn" onClick={() => dispatch({ type: "score" } as BoliviaCanastaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as BoliviaCanastaRAction)}>Next</button>
+        <div className="bolr-result">{state.result} — +{state.pts}</div>
+        <button className="bolr-btn alt" onClick={() => dispatch({ type: "next" } as BoliviaCanastaRAction)}>Next</button>
       </>}
     </div>
   );

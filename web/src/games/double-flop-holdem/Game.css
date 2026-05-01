@@ -1,2 +1,47 @@
 /* Modern poker-table engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+
+/* === poker-theme:holdem-emerald === unique-class .thmDblFlop === */
+.thmDblFlop,
+.thmDblFlop.dm-wrap,
+.thmDblFlop.holdem-wrap,
+.thmDblFlop.g-wrap,
+.thmDblFlop .dm-wrap,
+.thmDblFlop .holdem-wrap,
+.thmDblFlop .holdem-table,
+.thmDblFlop .g-wrap,
+.thmDblFlop .double-flop-holdem-felt,
+.thmDblFlop [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #0e6a48 0%, #054a2c 60%, #021712 100%) !important;
+  color: #f7f1e1 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #d8b86a;
+  --theme-accent2: #f3d488;
+  --theme-ink: #f7f1e1;
+  --theme-rim: #2a1a0a;
+}
+.thmDblFlop .dm-score,
+.thmDblFlop .holdem-pot-amount,
+.thmDblFlop [class$="-stack"],
+.thmDblFlop [class$="-pot-amount"] {
+  color: #f3d488 !important;
+  text-shadow: 0 0 18px #d8b86a55;
+}
+.thmDblFlop .dm-info,
+.thmDblFlop [class$="-hud"],
+.thmDblFlop [class$="-stat"] {
+  border-color: #d8b86a55 !important;
+}
+.thmDblFlop .dm-card,
+.thmDblFlop .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #d8b86a22;
+}
+.thmDblFlop .dm-btn,
+.thmDblFlop [class*="-btn"] {
+  border-color: #d8b86a55 !important;
+}

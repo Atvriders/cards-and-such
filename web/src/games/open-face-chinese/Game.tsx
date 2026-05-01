@@ -50,7 +50,7 @@ export function OpenFaceChineseGame({ state, dispatch, onGameOver }: GameProps<O
   const canBot = cur !== null && state.player.bottom.length < 5;
 
   return (
-    <div className={cls("felt")}>
+    <div className={`${cls("felt")} thmOFC`}>
       <div className={cls("hud")}>
         <span className={cls("stat")}>Round {Math.max(state.round, 1)}/{state.totalRounds}</span>
         <span className={cls("stat")}>Score: {state.score >= 0 ? "+" : ""}{state.score}</span>

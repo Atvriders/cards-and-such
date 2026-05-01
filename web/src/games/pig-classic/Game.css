@@ -191,3 +191,37 @@
   color: #6b7280;
   font-size: 0.9rem;
 }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: pig (unique class prefix + themed palette tokens) */
+.pig-theme {
+  --pig-bg: linear-gradient(180deg,#fbcfe8 0%,#f9a8d4 55%,#9f1239 100%);
+  --pig-felt: #fce7f3;
+  --pig-accent: #dc2626;
+  --pig-text: #831843;
+}
+.pig-theme.pig-wrap,
+.pig-theme .pig-wrap,
+.pig-wrap.pig-theme {
+  background: var(--pig-bg);
+  color: var(--pig-text);
+}
+.pig-theme .pig-die,
+.pig-theme .pig-card {
+  border-color: var(--pig-accent);
+}
+.pig-theme .pig-btn,
+.pig-theme .pig-roll-btn {
+  background: var(--pig-accent);
+  color: var(--pig-felt);
+  border-color: var(--pig-accent);
+}
+.pig-theme .pig-info,
+.pig-theme .pig-score,
+.pig-theme .pig-final,
+.pig-theme .pig-result,
+.pig-theme .pig-header,
+.pig-theme .pig-message {
+  color: var(--pig-text);
+}
+

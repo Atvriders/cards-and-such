@@ -1,2 +1,17 @@
 /* Modern card-mini look — see web/src/engines/cardmini/cardmini.css */
 @import "../../engines/cardmini/cardmini.css";
+
+/* themed override scoped to .pbk-scope */
+.pbk-scope { background:#f3eadc;color:#2c1a05;border-radius:14px;padding:6px;font-family:'Georgia',serif; }
+.pbk-scope .cm-wrap { background:transparent; }
+.pbk-scope .cm-info { color:#2c1a05;opacity:0.8; }
+.pbk-scope .cm-score { color:#8b5a00;font-weight:900; }
+.pbk-scope .cm-card { border:2px solid #c8b58a;background:#fffaf0;color:#2c1a05;border-radius:10px;font-family:'Georgia',serif; }
+.pbk-scope .cm-card.red { color:#1f3a5f; }
+.pbk-scope .cm-card.black { color:#2c1a05; }
+.pbk-scope .cm-btn { background:#8b5a00;color:#fff;border:none;border-radius:8px;font-family:inherit;font-weight:800; }
+.pbk-scope .cm-btn.alt { background:#1f3a5f;color:#fff; }
+.pbk-scope .cm-result { color:#8b5a00;font-weight:800; }
+.pbk-scope .cm-final { color:#8b5a00;font-weight:900; }
+.pbk-scope .cm-done { background:#fffaf0;border:1px solid #c8b58a;border-radius:14px;color:#2c1a05; }
+.pbk-scope .cm-row { gap:14px; }

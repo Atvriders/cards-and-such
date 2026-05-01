@@ -8,24 +8,24 @@ export function DicePickupGame({ state, dispatch, onGameOver }: GameProps<DicePi
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dp-wrap"><div className="dp-done"><h2>Done!</h2><div className="dp-final">{state.score} pts</div></div></div>;
+    return <div className="dpck-wrap dpck-theme"><div className="dpck-done"><h2>Done!</h2><div className="dpck-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dp-wrap">
-      <div className="dp-info">Round {state.round} / {TOTAL_ROUNDS} — Target: <strong>{state.target}</strong></div>
-      <div className="dp-score">{state.score} pts</div>
-      <div className="dp-grid">
+    <div className="dpck-wrap dpck-theme">
+      <div className="dpck-info">Round {state.round} / {TOTAL_ROUNDS} — Target: <strong>{state.target}</strong></div>
+      <div className="dpck-score">{state.score} pts</div>
+      <div className="dpck-grid">
         {state.dice.map((d, i) => (
           <button key={i} className={`dp-die ${state.picked[i] ? "picked" : ""}`} disabled={state.phase !== "picking"} onClick={() => dispatch({ type:"pick", index:i } as DicePickupAction)}>
             {d}
           </button>
         ))}
       </div>
-      {state.phase === "picking" && <button className="dp-btn" onClick={() => dispatch({ type:"submit" } as DicePickupAction)}>Submit Picks</button>}
+      {state.phase === "picking" && <button className="dpck-btn" onClick={() => dispatch({ type:"submit" } as DicePickupAction)}>Submit Picks</button>}
       {state.phase === "result" && (
         <>
-          <div className="dp-result">+{state.lastPts}</div>
-          <button className="dp-btn alt" onClick={() => dispatch({ type:"next" } as DicePickupAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <div className="dpck-result">+{state.lastPts}</div>
+          <button className="dpck-btn alt" onClick={() => dispatch({ type:"next" } as DicePickupAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

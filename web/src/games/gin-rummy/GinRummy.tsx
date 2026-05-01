@@ -31,27 +31,27 @@ export function GinRummy({
   const stockEmpty = stock.length === 0;
 
   return (
-    <div className="gin-rummy">
+    <div className="ginr-root">
       {/* Header */}
-      <div className="gin-header">
+      <div className="ginr-header">
         <span>Phase: {phase}</span>
         <span>Your deadwood: {deadwoodValue}</span>
         <span>Stock: {stock.length}</span>
       </div>
 
       {/* Bot hand */}
-      <div className="gin-bot-area">
-        <div className="gin-hand-label">Bot Hand ({botHand.length} cards)</div>
-        <div className="gin-card-backs">
+      <div className="ginr-bot-area">
+        <div className="ginr-hand-label">Bot Hand ({botHand.length} cards)</div>
+        <div className="ginr-card-backs">
           {botHand.map((_, i) => (
-            <div key={i} className="gin-card-back" />
+            <div key={i} className="ginr-card-back" />
           ))}
         </div>
       </div>
 
       {/* Draw area */}
-      <div className="gin-area">
-        <div className="gin-pile">
+      <div className="ginr-area">
+        <div className="ginr-pile">
           Stock ({stock.length})
           {phase === "player-draw" && !stockEmpty ? (
             <Card
@@ -59,29 +59,29 @@ export function GinRummy({
               onClick={() => dispatch({ type: "draw", from: "stock" } as GinRummyAction)}
             />
           ) : (
-            <div className="gin-card-back" style={{ opacity: stockEmpty ? 0.2 : 0.6 }} />
+            <div className="ginr-card-back" style={{ opacity: stockEmpty ? 0.2 : 0.6 }} />
           )}
         </div>
-        <div className="gin-pile">
+        <div className="ginr-pile">
           Discard
           {topDiscard ? (
             phase === "player-draw"
               ? <Card card={topDiscard} onClick={() => dispatch({ type: "draw", from: "discard" } as GinRummyAction)} />
               : <Card card={topDiscard} />
           ) : (
-            <div className="gin-card-back" style={{ opacity: 0.2 }} />
+            <div className="ginr-card-back" style={{ opacity: 0.2 }} />
           )}
         </div>
       </div>
 
       {/* Status */}
-      <div className="gin-status">{message}</div>
+      <div className="ginr-status">{message}</div>
 
       {/* Actions */}
       {!done && (
-        <div className="gin-actions">
+        <div className="ginr-actions">
           <button
-            className="gin-btn"
+            className="ginr-btn"
             disabled={!canKnock}
             onClick={() => dispatch({ type: "knock" } as GinRummyAction)}
           >
@@ -91,10 +91,10 @@ export function GinRummy({
       )}
 
       {/* Player hand */}
-      <div className="gin-hand-label">
+      <div className="ginr-hand-label">
         Your Hand ({playerHand.length} cards) — melds: {melds.length}
       </div>
-      <div className="gin-hand">
+      <div className="ginr-hand">
         {[...playerHand]
           .sort((a, b) => {
             const suitOrder: Record<string, number> = { "♠": 0, "♥": 1, "♦": 2, "♣": 3 };
@@ -110,16 +110,16 @@ export function GinRummy({
 
       {/* Result */}
       {done && finalScore !== null && (
-        <div className="gin-result">
+        <div className="ginr-result">
           <h2>Hand Over</h2>
           <div>{message}</div>
           <div>Final score: <strong>{finalScore > 0 ? `+${finalScore} (you win)` : finalScore < 0 ? `${finalScore} (bot wins)` : "Tie"}</strong></div>
           {state.playerMelds.length > 0 && (
             <>
-              <div className="gin-hand-label">Your Melds</div>
-              <div className="gin-melds">
+              <div className="ginr-hand-label">Your Melds</div>
+              <div className="ginr-melds">
                 {state.playerMelds.map((m, i) => (
-                  <div key={i} className="gin-meld-group">
+                  <div key={i} className="ginr-meld-group">
                     {m.map(c => <Card key={c.id} card={c} />)}
                   </div>
                 ))}
@@ -128,10 +128,10 @@ export function GinRummy({
           )}
           {state.botMelds.length > 0 && (
             <>
-              <div className="gin-hand-label">Bot Melds</div>
-              <div className="gin-melds">
+              <div className="ginr-hand-label">Bot Melds</div>
+              <div className="ginr-melds">
                 {state.botMelds.map((m, i) => (
-                  <div key={i} className="gin-meld-group">
+                  <div key={i} className="ginr-meld-group">
                     {m.map(c => <Card key={c.id} card={c} />)}
                   </div>
                 ))}

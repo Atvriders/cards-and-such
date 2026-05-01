@@ -15,25 +15,25 @@ export function ObserverCardGame({ state, dispatch, onGameOver }: GameProps<Obse
   }, [state.currentIndex]);
 
   if (state.phase === "done") {
-    return <div className="gobserv-wrap"><div className="gobserv-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="gobserv-final">{state.score} pts</div></div></div>;
+    return <div className="obscard-wrap"><div className="obscard-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="obscard-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="gobserv-wrap">
-      <div className="gobserv-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="gobserv-score">{state.score} pts</div>
+    <div className="obscard-wrap">
+      <div className="obscard-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
+      <div className="obscard-score">{state.score} pts</div>
       {showTray ? (
         <>
-          <div className="gobserv-prompt">Memorize the tray (3.5s)</div>
-          <div className="gobserv-tray">{r.tray.map((it, i) => <span key={i} className="gobserv-trayitem">{it}</span>)}</div>
-          <button className="gobserv-btn submit" onClick={() => setShowTray(false)}>Ready</button>
+          <div className="obscard-prompt">Memorize the tray (3.5s)</div>
+          <div className="obscard-tray">{r.tray.map((it, i) => <span key={i} className="obscard-trayitem">{it}</span>)}</div>
+          <button className="obscard-btn submit" onClick={() => setShowTray(false)}>Ready</button>
         </>
       ) : (
         <>
-          <div className="gobserv-prompt">{r.question}</div>
-          <div className="gobserv-grid">
+          <div className="obscard-prompt">{r.question}</div>
+          <div className="obscard-grid">
             {r.choices.map((n, i) => {
-              let cls = "gobserv-cell";
+              let cls = "obscard-cell";
               if (state.submitted) {
                 if (i === r.correct) cls += " correct";
                 else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
@@ -41,8 +41,8 @@ export function ObserverCardGame({ state, dispatch, onGameOver }: GameProps<Obse
               return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as ObserverCardAction)}>{n}</button>;
             })}
           </div>
-          {!state.submitted && <button className="gobserv-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as ObserverCardAction)}>Submit</button>}
-          {state.submitted && <button className="gobserv-btn next" onClick={() => dispatch({ type: "next" } as ObserverCardAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
+          {!state.submitted && <button className="obscard-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as ObserverCardAction)}>Submit</button>}
+          {state.submitted && <button className="obscard-btn next" onClick={() => dispatch({ type: "next" } as ObserverCardAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
         </>
       )}
     </div>

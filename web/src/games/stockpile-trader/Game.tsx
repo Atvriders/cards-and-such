@@ -8,16 +8,16 @@ export function StockpileTraderGame({ state, dispatch, onGameOver }: GameProps<S
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-st-wrap">
-      <h3 className="bz-st-title">Stockpile Trader</h3>
-      <div className="bz-st-stats">
+    <div className="bz-spt-wrap">
+      <h3 className="bz-spt-title">Stockpile Trader</h3>
+      <div className="bz-spt-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Assets <b>{state.assets}</b></div>
         <div>Workers <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-st-actions">
+        <div className="bz-spt-actions">
           <button onClick={() => dispatch({ type: "invest" } as StockpileTraderAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as StockpileTraderAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as StockpileTraderAction)}>Hire (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function StockpileTraderGame({ state, dispatch, onGameOver }: GameProps<S
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-st-event">
+        <div className="bz-spt-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as StockpileTraderAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-st-done">
+        <div className="bz-spt-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

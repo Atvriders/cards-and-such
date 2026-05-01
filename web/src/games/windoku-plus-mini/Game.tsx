@@ -21,11 +21,11 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
 
   if (state.phase === "done") {
     return (
-      <div className="windokuplusmini-wrap">
-        <div className="windokuplusmini-done">
+      <div className="windokuplusherb-wrap">
+        <div className="windokuplusherb-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="windokuplusmini-final">{state.score} pts</p>
+          <p className="windokuplusherb-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="windokuplusmini-wrap">
-      <div className="windokuplusmini-header">
+    <div className="windokuplusherb-wrap">
+      <div className="windokuplusherb-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="windokuplusmini-score">{state.score} pts</span>
+        <span className="windokuplusherb-score">{state.score} pts</span>
       </div>
-      <div className="windokuplusmini-mech">Standard Sudoku rules. Bonus: extra 3×3 windows constrained too.</div>
-      <div className="windokuplusmini-grid">
+      <div className="windokuplusherb-mech">Standard Sudoku rules. Bonus: extra 3×3 windows constrained too.</div>
+      <div className="windokuplusherb-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="windokuplusmini-row">
+          <div key={r} className="windokuplusherb-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
               return (
                 <button
                   key={c}
-                  className={`windokuplusmini-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`windokuplusherb-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as WindokuPlusMiniAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
           </div>
         ))}
       </div>
-      <div className="windokuplusmini-pad">
+      <div className="windokuplusherb-pad">
         {digits.map((d) => (
-          <button key={d} className="windokuplusmini-num" onClick={() => dispatch({ type: "enter", digit: d } as WindokuPlusMiniAction)}>{d}</button>
+          <button key={d} className="windokuplusherb-num" onClick={() => dispatch({ type: "enter", digit: d } as WindokuPlusMiniAction)}>{d}</button>
         ))}
-        <button className="windokuplusmini-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as WindokuPlusMiniAction)}>×</button>
+        <button className="windokuplusherb-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as WindokuPlusMiniAction)}>×</button>
       </div>
-      <div className="windokuplusmini-actions">
-        <button className="windokuplusmini-btn check" onClick={() => dispatch({ type: "check" } as WindokuPlusMiniAction)}>Check</button>
-        <button className="windokuplusmini-btn hint" onClick={() => dispatch({ type: "hint" } as WindokuPlusMiniAction)}>Hint</button>
-        <button className="windokuplusmini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as WindokuPlusMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="windokuplusherb-actions">
+        <button className="windokuplusherb-btn check" onClick={() => dispatch({ type: "check" } as WindokuPlusMiniAction)}>Check</button>
+        <button className="windokuplusherb-btn hint" onClick={() => dispatch({ type: "hint" } as WindokuPlusMiniAction)}>Hint</button>
+        <button className="windokuplusherb-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as WindokuPlusMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="windokuplusmini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="windokuplusherb-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

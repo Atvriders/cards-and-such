@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: triple-three (unique class prefix + themed palette over shared dm-* engine) */
+.triple-three-theme.dm-wrap {
+  background: linear-gradient(180deg,#1e1b4b 0%,#312e81 50%,#4338ca 100%);
+}
+.triple-three-theme .dm-info,
+.triple-three-theme .dm-header {
+  color: #e0e7ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.triple-three-theme .dm-target { color: #e0e7ff; opacity: 0.85; }
+.triple-three-theme .dm-score {
+  background: linear-gradient(180deg, #c7d2fe, #818cf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(129,140,248,0.45);
+}
+.triple-three-theme .dm-die {
+  background: linear-gradient(145deg,#e0e7ff,#a5b4fc);
+  color: #1e1b4b;
+}
+.triple-three-theme .dm-card {
+  background: linear-gradient(145deg,#e0e7ff,#a5b4fc);
+  color: #1e1b4b;
+}
+.triple-three-theme .dm-btn {
+  background: linear-gradient(180deg, #6366f1 0%, #3730a3 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(55,48,163,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.triple-three-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #818cf8 0%, #a5b4fc 100%);
+  color: #1f2937;
+}
+.triple-three-theme .dm-bet-btn {
+  color: #e0e7ff;
+  border-color: rgba(255,255,255,0.25);
+}
+.triple-three-theme .dm-result {
+  color: #e0e7ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.triple-three-theme .dm-feedback {
+  color: #c7d2fe;
+  text-shadow: 0 0 12px rgba(129,140,248,0.6);
+}
+.triple-three-theme .dm-final {
+  background: linear-gradient(180deg, #e0e7ff, #818cf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.triple-three-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #6366f1, #3730a3);
+  border-color: #a5b4fc;
+}
+.triple-three-theme .dm-die.selected,
+.triple-three-theme .dm-die.hl {
+  border-color: #818cf8;
+  box-shadow:
+    0 0 0 2px #818cf8,
+    0 0 22px rgba(129,140,248,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

@@ -8,16 +8,16 @@ export function DiceLeapGame({ state, dispatch, onGameOver }: GameProps<DiceLeap
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dl-wrap"><div className="dl-done"><h2>{state.reached ? "You made it!" : "Out of rolls!"}</h2><div>Position: {state.position} / {TARGET}</div><div>Rolls used: {state.rollsUsed}</div><div className="dl-final">{state.score} pts</div></div></div>;
+    return <div className="dleap-wrap dleap-theme"><div className="dleap-done"><h2>{state.reached ? "You made it!" : "Out of rolls!"}</h2><div>Position: {state.position} / {TARGET}</div><div>Rolls used: {state.rollsUsed}</div><div className="dleap-final">{state.score} pts</div></div></div>;
   }
   const pct = Math.min(100, (state.position / TARGET) * 100);
   return (
-    <div className="dl-wrap">
-      <div className="dl-info">Rolls: {state.rollsUsed} / {MAX_ROLLS}</div>
-      <div className="dl-info">Position: {state.position} / {TARGET}</div>
-      <div className="dl-track"><div className="dl-fill" style={{ width: `${pct}%` }} /></div>
-      {state.lastRoll !== null && <div className="dl-die">{state.lastRoll}</div>}
-      <button className="dl-btn" onClick={() => dispatch({ type: "roll" } as DiceLeapAction)}>Roll</button>
+    <div className="dleap-wrap dleap-theme">
+      <div className="dleap-info">Rolls: {state.rollsUsed} / {MAX_ROLLS}</div>
+      <div className="dleap-info">Position: {state.position} / {TARGET}</div>
+      <div className="dleap-track"><div className="dleap-fill" style={{ width: `${pct}%` }} /></div>
+      {state.lastRoll !== null && <div className="dleap-die">{state.lastRoll}</div>}
+      <button className="dleap-btn" onClick={() => dispatch({ type: "roll" } as DiceLeapAction)}>Roll</button>
     </div>
   );
 }

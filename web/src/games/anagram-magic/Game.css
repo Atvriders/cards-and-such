@@ -1,23 +1,23 @@
-.word-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px;font-family:sans-serif;max-width:640px;margin:0 auto; }
-.word-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.word-progress { font-size:0.95rem;color:#555; }
-.word-score { font-size:1.1rem;font-weight:700;color:#27ae60; }
-.word-prompt { font-size:1.25rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.word-label { font-weight:900;color:#7f8c8d;text-transform:uppercase;font-size:0.85rem;margin-right:6px; }
-.word-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
-.word-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;text-align:left; }
-.word-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.word-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.word-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.word-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.word-choice-letter { font-weight:900;color:#95a5a6;min-width:24px; }
-.word-actions { display:flex;gap:12px; }
-.word-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer; }
-.word-btn.submit { background:#27ae60;color:#fff; }
-.word-btn.next { background:#3498db;color:#fff; }
-.word-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.word-feedback { font-size:1.05rem;font-weight:700;padding:8px 18px;border-radius:8px; }
-.word-feedback.correct { background:#eafaf1;color:#1e8449; }
-.word-feedback.wrong { background:#fdedec;color:#c0392b; }
-.word-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:16px;width:100%; }
-.word-done h2 { margin-bottom:8px; }
+.agm-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:22px;font-family:'Georgia',serif;max-width:640px;margin:0 auto;background:#f6e9c5;color:#3d2c0c;border-radius:14px; }
+.agm-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
+.agm-progress { font-size:0.95rem;color:#3d2c0c;opacity:0.7; }
+.agm-score { font-size:1.1rem;font-weight:800;color:#1a5d1a; }
+.agm-prompt { font-size:1.2rem;font-weight:700;text-align:center;color:#3d2c0c;line-height:1.4;background:#fff6dc;padding:12px 18px;border-radius:10px;border:1px solid #c9a96a; }
+.agm-label { font-weight:900;color:#8b0000;text-transform:uppercase;font-size:0.85rem;margin-right:6px;letter-spacing:0.05em; }
+.agm-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
+.agm-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #c9a96a;border-radius:10px;background:#fff6dc;cursor:pointer;font-size:1rem;text-align:left;color:#3d2c0c;font-family:inherit;transition:transform .08s ease,border-color .15s ease,background .15s ease; }
+.agm-choice:hover:not(:disabled) { border-color:#1a5d1a;transform:translateY(-1px); }
+.agm-choice.selected { border-color:#1a5d1a;background:#fff6dc;box-shadow:0 0 0 3px #1a5d1a33; }
+.agm-choice.correct { border-color:#1a5d1a;background:#1a5d1a22;color:#3d2c0c; }
+.agm-choice.wrong { border-color:#8b0000;background:#8b000022; }
+.agm-choice-letter, .agm-letter { font-weight:900;color:#8b0000;min-width:24px;font-family:'Georgia',serif; }
+.agm-actions { display:flex;gap:12px; }
+.agm-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:800;cursor:pointer;font-family:inherit;letter-spacing:0.03em; }
+.agm-btn.submit { background:#1a5d1a;color:#fff; }
+.agm-btn.next { background:#8b0000;color:#fff; }
+.agm-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.agm-feedback { font-size:1.05rem;font-weight:800;padding:8px 18px;border-radius:8px; }
+.agm-feedback.correct { background:#1a5d1a22;color:#1a5d1a; }
+.agm-feedback.wrong { background:#8b000022;color:#8b0000; }
+.agm-done { text-align:center;padding:28px;background:#fff6dc;border-radius:16px;width:100%;border:1px solid #c9a96a; }
+.agm-done h2 { margin-bottom:8px;color:#1a5d1a; }

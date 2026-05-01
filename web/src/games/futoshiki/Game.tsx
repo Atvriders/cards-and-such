@@ -46,17 +46,17 @@ export function Futoshiki({
   }
 
   return (
-    <div className="futoshiki">
-      <div className="futoshiki-title">Futoshiki</div>
-      <div className={`futoshiki-status${won ? " win" : ""}`}>
+    <div className="futoshikiviolet">
+      <div className="futoshikiviolet-title">Futoshiki</div>
+      <div className={`futoshikiviolet-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
           : `Moves: ${state.moves} — fill 1–${size} in each row and column`}
       </div>
 
-      <div className="futoshiki-grid-wrap">
+      <div className="futoshikiviolet-grid-wrap">
         {Array.from({ length: size }, (_, r) => (
-          <div key={r} className="futoshiki-grid-row">
+          <div key={r} className="futoshikiviolet-grid-row">
             {Array.from({ length: size }, (_, c) => {
               const idx = r * size + c;
               const val = board[idx] ?? 0;
@@ -64,10 +64,10 @@ export function Futoshiki({
               const isSel = selected === idx;
               const ineqRight = c < size - 1 ? getIneqH(r, c) : "";
               return (
-                <div key={c} className="futoshiki-cell-group">
+                <div key={c} className="futoshikiviolet-cell-group">
                   <div
                     className={[
-                      "futoshiki-cell",
+                      "futoshikiviolet-cell",
                       isGiven ? "given" : "",
                       isSel ? "selected" : "",
                     ]
@@ -79,24 +79,24 @@ export function Futoshiki({
                     {val > 0 ? val : ""}
                   </div>
                   {c < size - 1 && (
-                    <div className="futoshiki-ineq-h">{ineqRight}</div>
+                    <div className="futoshikiviolet-ineq-h">{ineqRight}</div>
                   )}
                 </div>
               );
             })}
             {/* Vertical inequalities row below */}
             {r < size - 1 && (
-              <div className="futoshiki-ineq-row" style={{ display: "none" }} />
+              <div className="futoshikiviolet-ineq-row" style={{ display: "none" }} />
             )}
           </div>
         ))}
         {/* Vertical inequality rows */}
         {Array.from({ length: size - 1 }, (_, r) => (
-          <div key={`vrow-${r}`} className="futoshiki-grid-row futoshiki-ineq-v-row">
+          <div key={`vrow-${r}`} className="futoshikiviolet-grid-row futoshikiviolet-ineq-v-row">
             {Array.from({ length: size }, (_, c) => (
-              <div key={c} className="futoshiki-cell-group">
-                <div className="futoshiki-ineq-v">{getIneqV(r, c)}</div>
-                {c < size - 1 && <div className="futoshiki-ineq-h-spacer" />}
+              <div key={c} className="futoshikiviolet-cell-group">
+                <div className="futoshikiviolet-ineq-v">{getIneqV(r, c)}</div>
+                {c < size - 1 && <div className="futoshikiviolet-ineq-h-spacer" />}
               </div>
             ))}
           </div>
@@ -104,11 +104,11 @@ export function Futoshiki({
       </div>
 
       {!won && (
-        <div className="futoshiki-numpad">
+        <div className="futoshikiviolet-numpad">
           {Array.from({ length: size }, (_, i) => i + 1).map((n) => (
             <button
               key={n}
-              className="futoshiki-num-btn"
+              className="futoshikiviolet-num-btn"
               onClick={() => handleNumber(n)}
               data-testid={`num-${n}`}
             >
@@ -116,14 +116,14 @@ export function Futoshiki({
             </button>
           ))}
           <button
-            className="futoshiki-num-btn clear"
+            className="futoshikiviolet-num-btn clear"
             onClick={() => dispatch({ type: "clearCell" } satisfies FutoshikiAction)}
           >
             ✕
           </button>
         </div>
       )}
-      <div className="futoshiki-hint">
+      <div className="futoshikiviolet-hint">
         Select a cell then tap a number. &lt; and &gt; show which neighbor must be smaller/larger. ∧ = left cell &lt; right cell direction for vertical.
       </div>
     </div>

@@ -1,20 +1,54 @@
-.bk-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.bk-info { font-size:0.95rem; color:#555; text-align:center; }
-.bk-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.bk-die { font-size:2rem; font-weight:900; min-width:54px; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.bk-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.bk-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.bk-btn:hover:not(:disabled) { background:#2980b9; }
-.bk-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.bk-btn.alt { background:#e67e22; }
-.bk-btn.alt:hover { background:#ca6f1e; }
-.bk-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
-.bk-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.bk-done h2 { margin:0 0 8px; }
-.bk-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
-.bk-board { display:grid; gap:4px; padding:8px; background:#34495e; border-radius:10px; }
-.bk-cell { aspect-ratio:1; min-width:40px; min-height:40px; background:#ecf0f1; border-radius:6px; cursor:pointer; transition:background 0.15s; border:none; font-weight:900; font-size:1rem; }
-.bk-cell.p { background:#e74c3c; color:#fff; }
-.bk-cell.c { background:#2c3e50; color:#fff; }
-.bk-cell.k { background:#f1c40f; color:#000; }
-.bk-cell:hover:not(:disabled) { background:#bdc3c7; }
+.bkcr-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.bkcr-info { font-size:0.95rem; color:#555; text-align:center; }
+.bkcr-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.bkcr-die { font-size:2rem; font-weight:900; min-width:54px; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
+.bkcr-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.bkcr-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.bkcr-btn:hover:not(:disabled) { background:#2980b9; }
+.bkcr-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.bkcr-btn.alt { background:#e67e22; }
+.bkcr-btn.alt:hover { background:#ca6f1e; }
+.bkcr-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
+.bkcr-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.bkcr-done h2 { margin:0 0 8px; }
+.bkcr-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.bkcr-board { display:grid; gap:4px; padding:8px; background:#34495e; border-radius:10px; }
+.bkcr-cell { aspect-ratio:1; min-width:40px; min-height:40px; background:#ecf0f1; border-radius:6px; cursor:pointer; transition:background 0.15s; border:none; font-weight:900; font-size:1rem; }
+.bkcr-cell.p { background:#e74c3c; color:#fff; }
+.bkcr-cell.c { background:#2c3e50; color:#fff; }
+.bkcr-cell.k { background:#f1c40f; color:#000; }
+.bkcr-cell:hover:not(:disabled) { background:#bdc3c7; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: bkcr (unique class prefix + themed palette tokens) */
+.bkcr-theme {
+  --bkcr-bg: linear-gradient(180deg,#365314 0%,#4d7c0f 55%,#84cc16 100%);
+  --bkcr-felt: #365314;
+  --bkcr-accent: #fef08a;
+  --bkcr-text: #f7fee7;
+}
+.bkcr-theme.bkcr-wrap,
+.bkcr-theme .bkcr-wrap,
+.bkcr-wrap.bkcr-theme {
+  background: var(--bkcr-bg);
+  color: var(--bkcr-text);
+}
+.bkcr-theme .bkcr-die,
+.bkcr-theme .bkcr-card {
+  border-color: var(--bkcr-accent);
+}
+.bkcr-theme .bkcr-btn,
+.bkcr-theme .bkcr-roll-btn {
+  background: var(--bkcr-accent);
+  color: var(--bkcr-felt);
+  border-color: var(--bkcr-accent);
+}
+.bkcr-theme .bkcr-info,
+.bkcr-theme .bkcr-score,
+.bkcr-theme .bkcr-final,
+.bkcr-theme .bkcr-result,
+.bkcr-theme .bkcr-header,
+.bkcr-theme .bkcr-message {
+  color: var(--bkcr-text);
+}
+

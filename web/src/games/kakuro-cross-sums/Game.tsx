@@ -10,11 +10,11 @@ export function KakuroCrossSumsGame({ state, dispatch, onGameOver }: GameProps<K
 
   if (state.phase === "done") {
     return (
-      <div className="kakurocrosssums-wrap">
-        <div className="kakurocrosssums-done">
+      <div className="kakurocross-wrap">
+        <div className="kakurocross-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="kakurocrosssums-final">{state.score} pts</p>
+          <p className="kakurocross-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function KakuroCrossSumsGame({ state, dispatch, onGameOver }: GameProps<K
   const errSet = new Set(state.errors);
 
   return (
-    <div className="kakurocrosssums-wrap">
-      <div className="kakurocrosssums-header">
+    <div className="kakurocross-wrap">
+      <div className="kakurocross-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="kakurocrosssums-score">{state.score} pts</span>
+        <span className="kakurocross-score">{state.score} pts</span>
       </div>
-      <div className="kakurocrosssums-mech">Fill digits 1-9 so each entry sums to its clue. Stored-solution simplification.</div>
-      <div className="kakurocrosssums-grid">
+      <div className="kakurocross-mech">Fill digits 1-9 so each entry sums to its clue. Stored-solution simplification.</div>
+      <div className="kakurocross-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="kakurocrosssums-row">
+          <div key={r} className="kakurocross-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function KakuroCrossSumsGame({ state, dispatch, onGameOver }: GameProps<K
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`kakurocrosssums-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`kakurocross-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as KakuroCrossSumsAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function KakuroCrossSumsGame({ state, dispatch, onGameOver }: GameProps<K
           </div>
         ))}
       </div>
-      <div className="kakurocrosssums-pad">
+      <div className="kakurocross-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`kakurocrosssums-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as KakuroCrossSumsAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`kakurocross-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as KakuroCrossSumsAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="kakurocrosssums-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as KakuroCrossSumsAction)}>×</button>
+        <button className="kakurocross-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as KakuroCrossSumsAction)}>×</button>
       </div>
-      <div className="kakurocrosssums-actions">
-        <button className="kakurocrosssums-btn check" onClick={() => dispatch({ type: "check" } as KakuroCrossSumsAction)}>Check</button>
-        <button className="kakurocrosssums-btn hint" onClick={() => dispatch({ type: "hint" } as KakuroCrossSumsAction)}>Hint</button>
-        <button className="kakurocrosssums-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as KakuroCrossSumsAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="kakurocross-actions">
+        <button className="kakurocross-btn check" onClick={() => dispatch({ type: "check" } as KakuroCrossSumsAction)}>Check</button>
+        <button className="kakurocross-btn hint" onClick={() => dispatch({ type: "hint" } as KakuroCrossSumsAction)}>Hint</button>
+        <button className="kakurocross-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as KakuroCrossSumsAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="kakurocrosssums-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="kakurocross-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

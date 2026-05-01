@@ -25,7 +25,7 @@ export function MiniTenziGame({ state, dispatch, onGameOver }: GameProps<MiniTen
     const elapsed = elapsedMs(state, now);
     const won = state.phase === "won";
     return (
-      <div className="tenzi-wrap">
+      <div className="tenzi-wrap tenzi-theme">
         <div className={`tenzi-done ${won ? "win" : "lose"}`}>
           <h2>{won ? "TENZI!" : "Out of Rolls"}</h2>
           <div className="tenzi-final">{t?.score ?? 0}</div>
@@ -43,7 +43,7 @@ export function MiniTenziGame({ state, dispatch, onGameOver }: GameProps<MiniTen
   const matched = state.dice.filter((d) => d === state.target).length;
 
   return (
-    <div className="tenzi-wrap">
+    <div className="tenzi-wrap tenzi-theme">
       <header className="tenzi-header">
         <div className="tenzi-stat">
           <span className="tenzi-stat-label">Target</span>

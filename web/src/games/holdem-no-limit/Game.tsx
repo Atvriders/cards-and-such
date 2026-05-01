@@ -58,7 +58,7 @@ export function HoldemNoLimitGame({ state, dispatch, onGameOver }:
     : "";
 
   return (
-    <div className="holdem-wrap">
+    <div className="holdem-wrap thmHldNL">
       <div className="holdem-table">
         {/* CPU area (top) */}
         <div className="holdem-seat holdem-seat-cpu">

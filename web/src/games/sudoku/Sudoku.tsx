@@ -94,20 +94,20 @@ export function Sudoku({
   }
 
   return (
-    <div className="sudoku" tabIndex={0} onKeyDown={handleKeyDown}>
-      <div className="sudoku-info">
+    <div className="sudokunews" tabIndex={0} onKeyDown={handleKeyDown}>
+      <div className="sudokunews-info">
         <span>Difficulty: {state.settings.difficulty}</span>
         <span>Moves: {state.movesMade}</span>
         <span>Hints: {state.hintsUsed}</span>
       </div>
 
       {terminal && (
-        <div className="sudoku-game-over">
+        <div className="sudokunews-game-over">
           Puzzle Solved! Score: {terminal.score}
         </div>
       )}
 
-      <div className="sudoku-grid">
+      <div className="sudokunews-grid">
         {Array.from({ length: 81 }, (_, idx) => {
           const row = Math.floor(idx / 9);
           const col = idx % 9;
@@ -117,7 +117,7 @@ export function Sudoku({
           const isError = errorSet.has(idx);
           const isHighlighted = highlightSet.has(idx) && !isSelected;
 
-          let className = "sudoku-cell";
+          let className = "sudokunews-cell";
           if (isGiven) className += " given";
           else if (val !== 0) className += " player";
           if (isSelected) className += " selected";
@@ -138,7 +138,7 @@ export function Sudoku({
         })}
       </div>
 
-      <div className="sudoku-numpad">
+      <div className="sudokunews-numpad">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((d) => (
           <button key={d} onClick={() => handleDigit(d)} disabled={!!terminal}>
             {d}
@@ -149,7 +149,7 @@ export function Sudoku({
         </button>
       </div>
 
-      <div className="sudoku-controls">
+      <div className="sudokunews-controls">
         <button onClick={handleHint} disabled={!!terminal}>
           Hint
         </button>

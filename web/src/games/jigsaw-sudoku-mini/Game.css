@@ -1,27 +1,85 @@
-.jigsawsudokumini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.jigsawsudokumini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.jigsawsudokumini-score { font-weight:700;color:hsl(0, 60%, 40%); }
-.jigsawsudokumini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.jigsawsudokumini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.jigsawsudokumini-row { display:flex;gap:1px; }
-.jigsawsudokumini-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.jigsawsudokumini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.jigsawsudokumini-cell.sel { background:hsl(0, 65%, 55%);color:#fff; }
-.jigsawsudokumini-cell.err { background:#fdedec;color:#e74c3c; }
-.jigsawsudokumini-cell.rt { margin-right:3px; }
-.jigsawsudokumini-cell.bt { margin-bottom:3px; }
-.jigsawsudokumini-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.jigsawsudokumini-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.jigsawsudokumini-num:hover { background:hsl(0, 70%, 92%);border-color:hsl(0, 60%, 55%); }
-.jigsawsudokumini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.jigsawsudokumini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.jigsawsudokumini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.jigsawsudokumini-btn.check { background:#3498db; }
-.jigsawsudokumini-btn.hint { background:#f39c12; }
-.jigsawsudokumini-btn.next { background:hsl(0, 60%, 45%); }
-.jigsawsudokumini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.jigsawsudokumini-status { font-weight:700;font-size:1rem; }
-.jigsawsudokumini-status.solved { color:#27ae60; }
-.jigsawsudokumini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.jigsawsudokumini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.jigsawsudokumini-final { font-size:1.6rem;font-weight:900;color:hsl(0, 60%, 40%); }
+.jigsawpiece-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.jigsawpiece-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.jigsawpiece-score { font-weight:700;color:hsl(0, 60%, 40%); }
+.jigsawpiece-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.jigsawpiece-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.jigsawpiece-row { display:flex;gap:1px; }
+.jigsawpiece-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.jigsawpiece-cell.given { background:#ecf0f1;color:#2c3e50; }
+.jigsawpiece-cell.sel { background:hsl(0, 65%, 55%);color:#fff; }
+.jigsawpiece-cell.err { background:#fdedec;color:#e74c3c; }
+.jigsawpiece-cell.rt { margin-right:3px; }
+.jigsawpiece-cell.bt { margin-bottom:3px; }
+.jigsawpiece-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.jigsawpiece-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.jigsawpiece-num:hover { background:hsl(0, 70%, 92%);border-color:hsl(0, 60%, 55%); }
+.jigsawpiece-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.jigsawpiece-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.jigsawpiece-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.jigsawpiece-btn.check { background:#3498db; }
+.jigsawpiece-btn.hint { background:#f39c12; }
+.jigsawpiece-btn.next { background:hsl(0, 60%, 45%); }
+.jigsawpiece-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.jigsawpiece-status { font-weight:700;font-size:1rem; }
+.jigsawpiece-status.solved { color:#27ae60; }
+.jigsawpiece-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.jigsawpiece-done h2 { margin-bottom:6px;color:#2c3e50; }
+.jigsawpiece-final { font-size:1.6rem;font-weight:900;color:hsl(0, 60%, 40%); }
+
+
+/* === Theme: jigsaw-piece (Jigsaw piece — woodgrain) === */
+.jigsawpiece {
+  background: #f4ede0;
+  color: #3a2814;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.jigsawpiece .jigsawpiece-mech,
+.jigsawpiece [class*="-mech"],
+.jigsawpiece [class*="-status"]:not(.solved):not(.win) {
+  color: #7a5a3a;
+}
+.jigsawpiece [class*="-score"],
+.jigsawpiece [class*="-final"] {
+  color: #a86a2a;
+}
+.jigsawpiece [class*="-grid"] {
+  background: #5a3a18;
+  border-color: #5a3a18;
+}
+.jigsawpiece [class*="-cell"] {
+  background: #ead8b8;
+  color: #3a2814;
+}
+.jigsawpiece [class*="-cell"].sel,
+.jigsawpiece [class*="-cell"].selected {
+  outline: 3px solid #d49858;
+  outline-offset: -3px;
+}
+.jigsawpiece [class*="-cell"].err,
+.jigsawpiece [class*="-cell"].error,
+.jigsawpiece [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #b03a30;
+}
+.jigsawpiece [class*="-num"]:hover,
+.jigsawpiece [class*="-numpad"] button:hover {
+  background: #d49858;
+  color: #f4ede0;
+  border-color: #a86a2a;
+}
+.jigsawpiece [class*="-btn"].check,
+.jigsawpiece [class*="-controls"] button {
+  background: #a86a2a;
+  color: #f4ede0;
+  border-color: #a86a2a;
+}
+.jigsawpiece [class*="-btn"].next {
+  background: #d49858;
+  color: #f4ede0;
+}
+.jigsawpiece [class*="-status"].solved,
+.jigsawpiece [class*="-status"].win {
+  color: #6a8a3a;
+}

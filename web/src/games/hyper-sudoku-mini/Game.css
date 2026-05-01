@@ -1,27 +1,85 @@
-.hypersudokumini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.hypersudokumini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.hypersudokumini-score { font-weight:700;color:hsl(150, 60%, 40%); }
-.hypersudokumini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.hypersudokumini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.hypersudokumini-row { display:flex;gap:1px; }
-.hypersudokumini-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.hypersudokumini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.hypersudokumini-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
-.hypersudokumini-cell.err { background:#fdedec;color:#e74c3c; }
-.hypersudokumini-cell.rt { margin-right:3px; }
-.hypersudokumini-cell.bt { margin-bottom:3px; }
-.hypersudokumini-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.hypersudokumini-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.hypersudokumini-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
-.hypersudokumini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.hypersudokumini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.hypersudokumini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.hypersudokumini-btn.check { background:#3498db; }
-.hypersudokumini-btn.hint { background:#f39c12; }
-.hypersudokumini-btn.next { background:hsl(150, 60%, 45%); }
-.hypersudokumini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.hypersudokumini-status { font-weight:700;font-size:1rem; }
-.hypersudokumini-status.solved { color:#27ae60; }
-.hypersudokumini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.hypersudokumini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.hypersudokumini-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+.hypersapphire-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.hypersapphire-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.hypersapphire-score { font-weight:700;color:hsl(150, 60%, 40%); }
+.hypersapphire-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.hypersapphire-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.hypersapphire-row { display:flex;gap:1px; }
+.hypersapphire-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.hypersapphire-cell.given { background:#ecf0f1;color:#2c3e50; }
+.hypersapphire-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
+.hypersapphire-cell.err { background:#fdedec;color:#e74c3c; }
+.hypersapphire-cell.rt { margin-right:3px; }
+.hypersapphire-cell.bt { margin-bottom:3px; }
+.hypersapphire-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.hypersapphire-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.hypersapphire-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
+.hypersapphire-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.hypersapphire-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.hypersapphire-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.hypersapphire-btn.check { background:#3498db; }
+.hypersapphire-btn.hint { background:#f39c12; }
+.hypersapphire-btn.next { background:hsl(150, 60%, 45%); }
+.hypersapphire-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.hypersapphire-status { font-weight:700;font-size:1rem; }
+.hypersapphire-status.solved { color:#27ae60; }
+.hypersapphire-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.hypersapphire-done h2 { margin-bottom:6px;color:#2c3e50; }
+.hypersapphire-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+
+
+/* === Theme: sapphire (Hyper sapphire — deep blue) === */
+.hypersapphire {
+  background: #e8eef8;
+  color: #0d1d3a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.hypersapphire .hypersapphire-mech,
+.hypersapphire [class*="-mech"],
+.hypersapphire [class*="-status"]:not(.solved):not(.win) {
+  color: #4a5a7a;
+}
+.hypersapphire [class*="-score"],
+.hypersapphire [class*="-final"] {
+  color: #1a3a8a;
+}
+.hypersapphire [class*="-grid"] {
+  background: #0a1a4a;
+  border-color: #0a1a4a;
+}
+.hypersapphire [class*="-cell"] {
+  background: #d8e0f0;
+  color: #0d1d3a;
+}
+.hypersapphire [class*="-cell"].sel,
+.hypersapphire [class*="-cell"].selected {
+  outline: 3px solid #3a5ac8;
+  outline-offset: -3px;
+}
+.hypersapphire [class*="-cell"].err,
+.hypersapphire [class*="-cell"].error,
+.hypersapphire [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #c43a3a;
+}
+.hypersapphire [class*="-num"]:hover,
+.hypersapphire [class*="-numpad"] button:hover {
+  background: #3a5ac8;
+  color: #e8eef8;
+  border-color: #1a3a8a;
+}
+.hypersapphire [class*="-btn"].check,
+.hypersapphire [class*="-controls"] button {
+  background: #1a3a8a;
+  color: #e8eef8;
+  border-color: #1a3a8a;
+}
+.hypersapphire [class*="-btn"].next {
+  background: #3a5ac8;
+  color: #e8eef8;
+}
+.hypersapphire [class*="-status"].solved,
+.hypersapphire [class*="-status"].win {
+  color: #3a8a5a;
+}

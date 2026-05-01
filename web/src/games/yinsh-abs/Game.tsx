@@ -13,30 +13,30 @@ export function YinshAbsGame({ state, dispatch, onGameOver }: GameProps<YinshAbs
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as YinshAbsAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="ynsh-wrap"><div className="ynsh-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
-      <div className="trivia-header">
-        <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
-        <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+    <div className="ynsh-wrap">
+      <div className="ynsh-header">
+        <span className="ynsh-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
+        <span className={`ynsh-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
+        <span className="ynsh-score">{state.score} pts</span>
       </div>
-      <div className="trivia-question">{q.question}</div>
-      <div className="trivia-choices">
+      <div className="ynsh-question">{q.question}</div>
+      <div className="ynsh-choices">
         {q.choices.map((choice, i) => {
-          let cls = "trivia-choice";
+          let cls = "ynsh-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as YinshAbsAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as YinshAbsAction)}><span className="ynsh-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
-      {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
-      <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as YinshAbsAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as YinshAbsAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+      {isResult && <div className={`ynsh-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
+      <div className="ynsh-actions">
+        {!isResult && <button className="ynsh-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as YinshAbsAction)}>Submit</button>}
+        {isResult && <button className="ynsh-btn next" onClick={() => dispatch({ type:"next" } as YinshAbsAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

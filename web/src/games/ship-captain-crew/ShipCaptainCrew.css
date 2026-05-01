@@ -153,3 +153,55 @@
   border-radius: 12px;
   color: #0e7490;
 }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: scc (unique class prefix + themed palette tokens) */
+.scc-theme {
+  --scc-bg: linear-gradient(180deg,#0c4a6e 0%,#075985 55%,#0369a1 100%);
+  --scc-felt: #082f49;
+  --scc-accent: #fbbf24;
+  --scc-text: #e0f2fe;
+}
+.scc-theme.scc-wrap,
+.scc-theme .scc-wrap,
+.scc-wrap.scc-theme,
+.scc-theme.scc,
+.scc.scc-theme {
+  background: var(--scc-bg);
+  color: var(--scc-text);
+  border-radius: 14px;
+  padding: 20px;
+}
+.scc-theme .scc-die,
+.scc-theme .scc-card {
+  border-color: var(--scc-accent);
+}
+.scc-theme .scc-btn,
+.scc-theme .scc-roll-btn,
+.scc-theme .scc-controls button {
+  background: linear-gradient(180deg,#fbbf24,#d97706);
+  color: var(--scc-felt);
+  border: 1px solid var(--scc-accent);
+}
+.scc-theme .scc-info,
+.scc-theme .scc-score,
+.scc-theme .scc-final,
+.scc-theme .scc-result,
+.scc-theme .scc-header,
+.scc-theme .scc-message,
+.scc-theme .scc-sequence,
+.scc-theme .scc-round-result,
+.scc-theme .scc-game-over {
+  color: var(--scc-text);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.18);
+}
+.scc-theme .scc-scoreboard th {
+  background: #082f49;
+  color: var(--scc-accent);
+}
+.scc-theme .scc-scoreboard tr.total td {
+  background: #075985;
+  color: var(--scc-accent);
+}
+

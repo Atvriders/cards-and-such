@@ -21,11 +21,11 @@ export function OddEvenSudokuGame({ state, dispatch, onGameOver }: GameProps<Odd
 
   if (state.phase === "done") {
     return (
-      <div className="oddevensudoku-wrap">
-        <div className="oddevensudoku-done">
+      <div className="oddevenparity-wrap">
+        <div className="oddevenparity-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="oddevensudoku-final">{state.score} pts</p>
+          <p className="oddevenparity-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function OddEvenSudokuGame({ state, dispatch, onGameOver }: GameProps<Odd
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="oddevensudoku-wrap">
-      <div className="oddevensudoku-header">
+    <div className="oddevenparity-wrap">
+      <div className="oddevenparity-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="oddevensudoku-score">{state.score} pts</span>
+        <span className="oddevenparity-score">{state.score} pts</span>
       </div>
-      <div className="oddevensudoku-mech">Sudoku with odd/even cell color hints.</div>
-      <div className="oddevensudoku-grid">
+      <div className="oddevenparity-mech">Sudoku with odd/even cell color hints.</div>
+      <div className="oddevenparity-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="oddevensudoku-row">
+          <div key={r} className="oddevenparity-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function OddEvenSudokuGame({ state, dispatch, onGameOver }: GameProps<Odd
               return (
                 <button
                   key={c}
-                  className={`oddevensudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`oddevenparity-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as OddEvenSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function OddEvenSudokuGame({ state, dispatch, onGameOver }: GameProps<Odd
           </div>
         ))}
       </div>
-      <div className="oddevensudoku-pad">
+      <div className="oddevenparity-pad">
         {digits.map((d) => (
-          <button key={d} className="oddevensudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as OddEvenSudokuAction)}>{d}</button>
+          <button key={d} className="oddevenparity-num" onClick={() => dispatch({ type: "enter", digit: d } as OddEvenSudokuAction)}>{d}</button>
         ))}
-        <button className="oddevensudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as OddEvenSudokuAction)}>×</button>
+        <button className="oddevenparity-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as OddEvenSudokuAction)}>×</button>
       </div>
-      <div className="oddevensudoku-actions">
-        <button className="oddevensudoku-btn check" onClick={() => dispatch({ type: "check" } as OddEvenSudokuAction)}>Check</button>
-        <button className="oddevensudoku-btn hint" onClick={() => dispatch({ type: "hint" } as OddEvenSudokuAction)}>Hint</button>
-        <button className="oddevensudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as OddEvenSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="oddevenparity-actions">
+        <button className="oddevenparity-btn check" onClick={() => dispatch({ type: "check" } as OddEvenSudokuAction)}>Check</button>
+        <button className="oddevenparity-btn hint" onClick={() => dispatch({ type: "hint" } as OddEvenSudokuAction)}>Hint</button>
+        <button className="oddevenparity-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as OddEvenSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="oddevensudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="oddevenparity-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

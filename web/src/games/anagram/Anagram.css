@@ -8,14 +8,14 @@
   margin: 0 auto;
 }
 
-.anagram-scrambled-label {
+.ang-scrambled-label {
   font-size: 0.75rem;
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-.anagram-scrambled {
+.ang-scrambled {
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: 0.25em;
@@ -25,12 +25,12 @@
   border-radius: 8px;
 }
 
-.anagram-info {
+.ang-info {
   font-size: 0.85rem;
   color: #555;
 }
 
-.anagram-guesses {
+.ang-guesses {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -38,12 +38,12 @@
   align-items: center;
 }
 
-.anagram-guess-row {
+.ang-guess-row {
   display: flex;
   gap: 4px;
 }
 
-.anagram-guess-tile {
+.ang-guess-tile {
   width: 36px;
   height: 42px;
   border: 2px solid #d1d5db;
@@ -56,16 +56,16 @@
   background: #f9fafb;
 }
 
-.anagram-guess-tile.correct { background: #22c55e; border-color: #22c55e; color: #fff; }
-.anagram-guess-tile.wrong { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
-.anagram-guess-tile.current { border-color: #3b82f6; background: #eff6ff; }
+.ang-guess-tile.correct { background: #22c55e; border-color: #22c55e; color: #fff; }
+.ang-guess-tile.wrong { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.ang-guess-tile.current { border-color: #3b82f6; background: #eff6ff; }
 
-.anagram-input-row {
+.ang-input-row {
   display: flex;
   gap: 4px;
 }
 
-.anagram-tile {
+.ang-tile {
   width: 36px;
   height: 42px;
   border: 2px solid #9ca3af;
@@ -78,9 +78,9 @@
   background: #fff;
 }
 
-.anagram-tile.active { border-color: #3b82f6; background: #eff6ff; }
+.ang-tile.active { border-color: #3b82f6; background: #eff6ff; }
 
-.anagram-submit-btn {
+.ang-submit-btn {
   padding: 8px 20px;
   background: #3b82f6;
   color: #fff;
@@ -90,17 +90,46 @@
   font-weight: 600;
   cursor: pointer;
 }
-.anagram-submit-btn:hover { background: #2563eb; }
-.anagram-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.ang-submit-btn:hover { background: #2563eb; }
+.ang-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.anagram-status {
+.ang-status {
   font-size: 1rem;
   font-weight: 600;
 }
-.anagram-status.won { color: #15803d; }
-.anagram-status.lost { color: #dc2626; }
+.ang-status.won { color: #15803d; }
+.ang-status.lost { color: #dc2626; }
 
-.anagram-hint {
+.ang-hint {
   font-size: 0.75rem;
   color: #9ca3af;
 }
+
+/* === Theme: scrabble_cream === */
+.ang-wrap, .ang-board, .ang {
+  background: #f6e9c5;
+  color: #3d2c0c;
+  border-radius: 14px;
+}
+.ang-tile, .ang-cell, .ang-key {
+  background: #fff6dc;
+  border-color: #c9a96a;
+  color: #3d2c0c;
+}
+.ang-correct, .ang-tile.correct, .ang-cell.correct, .ang-key.correct {
+  background: #1a5d1a !important;
+  color: #fff !important;
+  border-color: #1a5d1a !important;
+}
+.ang-wrong, .ang-tile.wrong, .ang-cell.wrong {
+  background: #8b0000 !important;
+  color: #fff !important;
+  border-color: #8b0000 !important;
+}
+.ang-accent, .ang-title, .ang-header { color: #1a5d1a; }
+.ang-btn, .ang-submit-btn, .ang-action-btn {
+  background: #1a5d1a;
+  color: #fff;
+  border: none;
+}
+.ang-btn:hover:not(:disabled) { filter: brightness(1.08); }

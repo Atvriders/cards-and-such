@@ -1,27 +1,85 @@
-.sudokumini6x6-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.sudokumini6x6-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.sudokumini6x6-score { font-weight:700;color:hsl(150, 60%, 40%); }
-.sudokumini6x6-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.sudokumini6x6-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.sudokumini6x6-row { display:flex;gap:1px; }
-.sudokumini6x6-cell { width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.2rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.sudokumini6x6-cell.given { background:#ecf0f1;color:#2c3e50; }
-.sudokumini6x6-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
-.sudokumini6x6-cell.err { background:#fdedec;color:#e74c3c; }
-.sudokumini6x6-cell.rt { margin-right:3px; }
-.sudokumini6x6-cell.bt { margin-bottom:3px; }
-.sudokumini6x6-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.sudokumini6x6-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.sudokumini6x6-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
-.sudokumini6x6-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.sudokumini6x6-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.sudokumini6x6-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.sudokumini6x6-btn.check { background:#3498db; }
-.sudokumini6x6-btn.hint { background:#f39c12; }
-.sudokumini6x6-btn.next { background:hsl(150, 60%, 45%); }
-.sudokumini6x6-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.sudokumini6x6-status { font-weight:700;font-size:1rem; }
-.sudokumini6x6-status.solved { color:#27ae60; }
-.sudokumini6x6-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.sudokumini6x6-done h2 { margin-bottom:6px;color:#2c3e50; }
-.sudokumini6x6-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+.sudoku6x6mint-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.sudoku6x6mint-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.sudoku6x6mint-score { font-weight:700;color:hsl(150, 60%, 40%); }
+.sudoku6x6mint-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.sudoku6x6mint-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.sudoku6x6mint-row { display:flex;gap:1px; }
+.sudoku6x6mint-cell { width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.2rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.sudoku6x6mint-cell.given { background:#ecf0f1;color:#2c3e50; }
+.sudoku6x6mint-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
+.sudoku6x6mint-cell.err { background:#fdedec;color:#e74c3c; }
+.sudoku6x6mint-cell.rt { margin-right:3px; }
+.sudoku6x6mint-cell.bt { margin-bottom:3px; }
+.sudoku6x6mint-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.sudoku6x6mint-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.sudoku6x6mint-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
+.sudoku6x6mint-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.sudoku6x6mint-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.sudoku6x6mint-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.sudoku6x6mint-btn.check { background:#3498db; }
+.sudoku6x6mint-btn.hint { background:#f39c12; }
+.sudoku6x6mint-btn.next { background:hsl(150, 60%, 45%); }
+.sudoku6x6mint-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.sudoku6x6mint-status { font-weight:700;font-size:1rem; }
+.sudoku6x6mint-status.solved { color:#27ae60; }
+.sudoku6x6mint-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.sudoku6x6mint-done h2 { margin-bottom:6px;color:#2c3e50; }
+.sudoku6x6mint-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+
+
+/* === Theme: mint (Soft mint — fresh green) === */
+.sudoku6x6mint {
+  background: #eef9f3;
+  color: #1f3b2e;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.sudoku6x6mint .sudoku6x6mint-mech,
+.sudoku6x6mint [class*="-mech"],
+.sudoku6x6mint [class*="-status"]:not(.solved):not(.win) {
+  color: #446a59;
+}
+.sudoku6x6mint [class*="-score"],
+.sudoku6x6mint [class*="-final"] {
+  color: #10a36a;
+}
+.sudoku6x6mint [class*="-grid"] {
+  background: #0a7a4f;
+  border-color: #0a7a4f;
+}
+.sudoku6x6mint [class*="-cell"] {
+  background: #dff5e8;
+  color: #1f3b2e;
+}
+.sudoku6x6mint [class*="-cell"].sel,
+.sudoku6x6mint [class*="-cell"].selected {
+  outline: 3px solid #2dc488;
+  outline-offset: -3px;
+}
+.sudoku6x6mint [class*="-cell"].err,
+.sudoku6x6mint [class*="-cell"].error,
+.sudoku6x6mint [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #d04848;
+}
+.sudoku6x6mint [class*="-num"]:hover,
+.sudoku6x6mint [class*="-numpad"] button:hover {
+  background: #2dc488;
+  color: #eef9f3;
+  border-color: #10a36a;
+}
+.sudoku6x6mint [class*="-btn"].check,
+.sudoku6x6mint [class*="-controls"] button {
+  background: #10a36a;
+  color: #eef9f3;
+  border-color: #10a36a;
+}
+.sudoku6x6mint [class*="-btn"].next {
+  background: #2dc488;
+  color: #eef9f3;
+}
+.sudoku6x6mint [class*="-status"].solved,
+.sudoku6x6mint [class*="-status"].win {
+  color: #10a36a;
+}

@@ -78,3 +78,36 @@
   font-weight: 800;
   font-family: "JetBrains Mono", monospace;
 }
+
+
+/* Ukiyo Tile — themed override (unique prefix bz-ukt-) */
+.bz-ukt-wrap {
+  background: linear-gradient(140deg, #312e81, #1e1b4b) !important;
+  color: #fce7f3 !important;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #ec489933;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.bz-ukt-wrap h2 {
+  color: #ec4899;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bz-ukt-wrap .g-cell {
+  background: #312e8155;
+  border: 1px solid #ec489933;
+  color: #ec4899;
+  transition: background 120ms, transform 80ms;
+}
+.bz-ukt-wrap .g-cell:hover {
+  background: #ec489933;
+  transform: translateY(-1px);
+}
+.bz-ukt-wrap .g-cell.x { color: #ec4899; font-weight: 800; }
+.bz-ukt-wrap .g-cell.o { color: #fce7f3; font-weight: 800; }
+.bz-ukt-wrap .g-final {
+  color: #ec4899;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+}

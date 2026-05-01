@@ -10,11 +10,11 @@ export function AkariMiniGame({ state, dispatch, onGameOver }: GameProps<AkariMi
 
   if (state.phase === "done") {
     return (
-      <div className="akarimini-wrap">
-        <div className="akarimini-done">
+      <div className="akariminiamber-wrap">
+        <div className="akariminiamber-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="akarimini-final">{state.score} pts</p>
+          <p className="akariminiamber-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function AkariMiniGame({ state, dispatch, onGameOver }: GameProps<AkariMi
   const errSet = new Set(state.errors);
 
   return (
-    <div className="akarimini-wrap">
-      <div className="akarimini-header">
+    <div className="akariminiamber-wrap">
+      <div className="akariminiamber-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="akarimini-score">{state.score} pts</span>
+        <span className="akariminiamber-score">{state.score} pts</span>
       </div>
-      <div className="akarimini-mech">Place light bulbs in white cells so all lit, no bulbs see each other.</div>
-      <div className="akarimini-grid">
+      <div className="akariminiamber-mech">Place light bulbs in white cells so all lit, no bulbs see each other.</div>
+      <div className="akariminiamber-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="akarimini-row">
+          <div key={r} className="akariminiamber-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function AkariMiniGame({ state, dispatch, onGameOver }: GameProps<AkariMi
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`akarimini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`akariminiamber-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as AkariMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function AkariMiniGame({ state, dispatch, onGameOver }: GameProps<AkariMi
           </div>
         ))}
       </div>
-      <div className="akarimini-pad">
+      <div className="akariminiamber-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`akarimini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as AkariMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`akariminiamber-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as AkariMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="akarimini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as AkariMiniAction)}>×</button>
+        <button className="akariminiamber-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as AkariMiniAction)}>×</button>
       </div>
-      <div className="akarimini-actions">
-        <button className="akarimini-btn check" onClick={() => dispatch({ type: "check" } as AkariMiniAction)}>Check</button>
-        <button className="akarimini-btn hint" onClick={() => dispatch({ type: "hint" } as AkariMiniAction)}>Hint</button>
-        <button className="akarimini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as AkariMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="akariminiamber-actions">
+        <button className="akariminiamber-btn check" onClick={() => dispatch({ type: "check" } as AkariMiniAction)}>Check</button>
+        <button className="akariminiamber-btn hint" onClick={() => dispatch({ type: "hint" } as AkariMiniAction)}>Hint</button>
+        <button className="akariminiamber-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as AkariMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="akarimini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="akariminiamber-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

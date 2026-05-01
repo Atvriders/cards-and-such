@@ -1,27 +1,85 @@
-.renbansudoku-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.renbansudoku-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.renbansudoku-score { font-weight:700;color:hsl(150, 60%, 40%); }
-.renbansudoku-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.renbansudoku-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.renbansudoku-row { display:flex;gap:1px; }
-.renbansudoku-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.renbansudoku-cell.given { background:#ecf0f1;color:#2c3e50; }
-.renbansudoku-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
-.renbansudoku-cell.err { background:#fdedec;color:#e74c3c; }
-.renbansudoku-cell.rt { margin-right:3px; }
-.renbansudoku-cell.bt { margin-bottom:3px; }
-.renbansudoku-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.renbansudoku-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.renbansudoku-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
-.renbansudoku-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.renbansudoku-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.renbansudoku-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.renbansudoku-btn.check { background:#3498db; }
-.renbansudoku-btn.hint { background:#f39c12; }
-.renbansudoku-btn.next { background:hsl(150, 60%, 45%); }
-.renbansudoku-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.renbansudoku-status { font-weight:700;font-size:1rem; }
-.renbansudoku-status.solved { color:#27ae60; }
-.renbansudoku-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.renbansudoku-done h2 { margin-bottom:6px;color:#2c3e50; }
-.renbansudoku-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+.renbanribbon-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.renbanribbon-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.renbanribbon-score { font-weight:700;color:hsl(150, 60%, 40%); }
+.renbanribbon-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.renbanribbon-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.renbanribbon-row { display:flex;gap:1px; }
+.renbanribbon-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.renbanribbon-cell.given { background:#ecf0f1;color:#2c3e50; }
+.renbanribbon-cell.sel { background:hsl(150, 65%, 55%);color:#fff; }
+.renbanribbon-cell.err { background:#fdedec;color:#e74c3c; }
+.renbanribbon-cell.rt { margin-right:3px; }
+.renbanribbon-cell.bt { margin-bottom:3px; }
+.renbanribbon-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.renbanribbon-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.renbanribbon-num:hover { background:hsl(150, 70%, 92%);border-color:hsl(150, 60%, 55%); }
+.renbanribbon-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.renbanribbon-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.renbanribbon-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.renbanribbon-btn.check { background:#3498db; }
+.renbanribbon-btn.hint { background:#f39c12; }
+.renbanribbon-btn.next { background:hsl(150, 60%, 45%); }
+.renbanribbon-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.renbanribbon-status { font-weight:700;font-size:1rem; }
+.renbanribbon-status.solved { color:#27ae60; }
+.renbanribbon-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.renbanribbon-done h2 { margin-bottom:6px;color:#2c3e50; }
+.renbanribbon-final { font-size:1.6rem;font-weight:900;color:hsl(150, 60%, 40%); }
+
+
+/* === Theme: ribbon (Renban ribbon — purple cascade) === */
+.renbanribbon {
+  background: #fdf6ec;
+  color: #2a1a3a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.renbanribbon .renbanribbon-mech,
+.renbanribbon [class*="-mech"],
+.renbanribbon [class*="-status"]:not(.solved):not(.win) {
+  color: #5a4a6a;
+}
+.renbanribbon [class*="-score"],
+.renbanribbon [class*="-final"] {
+  color: #9a3acc;
+}
+.renbanribbon [class*="-grid"] {
+  background: #5a1a8a;
+  border-color: #5a1a8a;
+}
+.renbanribbon [class*="-cell"] {
+  background: #f0e0d4;
+  color: #2a1a3a;
+}
+.renbanribbon [class*="-cell"].sel,
+.renbanribbon [class*="-cell"].selected {
+  outline: 3px solid #c468f0;
+  outline-offset: -3px;
+}
+.renbanribbon [class*="-cell"].err,
+.renbanribbon [class*="-cell"].error,
+.renbanribbon [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #c43a4a;
+}
+.renbanribbon [class*="-num"]:hover,
+.renbanribbon [class*="-numpad"] button:hover {
+  background: #c468f0;
+  color: #fdf6ec;
+  border-color: #9a3acc;
+}
+.renbanribbon [class*="-btn"].check,
+.renbanribbon [class*="-controls"] button {
+  background: #9a3acc;
+  color: #fdf6ec;
+  border-color: #9a3acc;
+}
+.renbanribbon [class*="-btn"].next {
+  background: #c468f0;
+  color: #fdf6ec;
+}
+.renbanribbon [class*="-status"].solved,
+.renbanribbon [class*="-status"].win {
+  color: #3a8a5a;
+}

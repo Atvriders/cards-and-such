@@ -1,20 +1,54 @@
-.cc-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.cc-info { font-size:0.95rem; color:#555; text-align:center; }
-.cc-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.cc-die { font-size:2rem; font-weight:900; min-width:54px; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.cc-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.cc-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.cc-btn:hover:not(:disabled) { background:#2980b9; }
-.cc-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.cc-btn.alt { background:#e67e22; }
-.cc-btn.alt:hover { background:#ca6f1e; }
-.cc-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
-.cc-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.cc-done h2 { margin:0 0 8px; }
-.cc-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
-.cc-board { display:grid; gap:4px; padding:8px; background:#34495e; border-radius:10px; }
-.cc-cell { aspect-ratio:1; min-width:40px; min-height:40px; background:#ecf0f1; border-radius:6px; cursor:pointer; transition:background 0.15s; border:none; font-weight:900; font-size:1rem; }
-.cc-cell.p { background:#e74c3c; color:#fff; }
-.cc-cell.c { background:#2c3e50; color:#fff; }
-.cc-cell.k { background:#f1c40f; color:#000; }
-.cc-cell:hover:not(:disabled) { background:#bdc3c7; }
+.ccrp-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.ccrp-info { font-size:0.95rem; color:#555; text-align:center; }
+.ccrp-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.ccrp-die { font-size:2rem; font-weight:900; min-width:54px; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
+.ccrp-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.ccrp-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.ccrp-btn:hover:not(:disabled) { background:#2980b9; }
+.ccrp-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.ccrp-btn.alt { background:#e67e22; }
+.ccrp-btn.alt:hover { background:#ca6f1e; }
+.ccrp-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
+.ccrp-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.ccrp-done h2 { margin:0 0 8px; }
+.ccrp-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.ccrp-board { display:grid; gap:4px; padding:8px; background:#34495e; border-radius:10px; }
+.ccrp-cell { aspect-ratio:1; min-width:40px; min-height:40px; background:#ecf0f1; border-radius:6px; cursor:pointer; transition:background 0.15s; border:none; font-weight:900; font-size:1rem; }
+.ccrp-cell.p { background:#e74c3c; color:#fff; }
+.ccrp-cell.c { background:#2c3e50; color:#fff; }
+.ccrp-cell.k { background:#f1c40f; color:#000; }
+.ccrp-cell:hover:not(:disabled) { background:#bdc3c7; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: ccrp (unique class prefix + themed palette tokens) */
+.ccrp-theme {
+  --ccrp-bg: linear-gradient(180deg,#0d4a1f 0%,#166534 55%,#22c55e 100%);
+  --ccrp-felt: #14532d;
+  --ccrp-accent: #fbbf24;
+  --ccrp-text: #f0fdf4;
+}
+.ccrp-theme.ccrp-wrap,
+.ccrp-theme .ccrp-wrap,
+.ccrp-wrap.ccrp-theme {
+  background: var(--ccrp-bg);
+  color: var(--ccrp-text);
+}
+.ccrp-theme .ccrp-die,
+.ccrp-theme .ccrp-card {
+  border-color: var(--ccrp-accent);
+}
+.ccrp-theme .ccrp-btn,
+.ccrp-theme .ccrp-roll-btn {
+  background: var(--ccrp-accent);
+  color: var(--ccrp-felt);
+  border-color: var(--ccrp-accent);
+}
+.ccrp-theme .ccrp-info,
+.ccrp-theme .ccrp-score,
+.ccrp-theme .ccrp-final,
+.ccrp-theme .ccrp-result,
+.ccrp-theme .ccrp-header,
+.ccrp-theme .ccrp-message {
+  color: var(--ccrp-text);
+}
+

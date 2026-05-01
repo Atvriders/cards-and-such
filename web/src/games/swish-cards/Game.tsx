@@ -8,17 +8,17 @@ export function SwishCardsGame({ state, dispatch, onGameOver }: GameProps<SwishC
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="gswishc-wrap"><div className="gswishc-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="gswishc-final">{state.score} pts</div></div></div>;
+    return <div className="swshcrd-wrap"><div className="swshcrd-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="swshcrd-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="gswishc-wrap">
-      <div className="gswishc-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="gswishc-score">{state.score} pts</div>
-      <div className="gswishc-prompt">{r.question}</div>
-      <div className="gswishc-grid">
+    <div className="swshcrd-wrap">
+      <div className="swshcrd-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
+      <div className="swshcrd-score">{state.score} pts</div>
+      <div className="swshcrd-prompt">{r.question}</div>
+      <div className="swshcrd-grid">
         {r.choices.map((n, i) => {
-          let cls = "gswishc-cell";
+          let cls = "swshcrd-cell";
           if (state.submitted) {
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
@@ -26,8 +26,8 @@ export function SwishCardsGame({ state, dispatch, onGameOver }: GameProps<SwishC
           return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SwishCardsAction)}>{n}</button>;
         })}
       </div>
-      {!state.submitted && <button className="gswishc-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SwishCardsAction)}>Submit</button>}
-      {state.submitted && <button className="gswishc-btn next" onClick={() => dispatch({ type: "next" } as SwishCardsAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
+      {!state.submitted && <button className="swshcrd-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SwishCardsAction)}>Submit</button>}
+      {state.submitted && <button className="swshcrd-btn next" onClick={() => dispatch({ type: "next" } as SwishCardsAction)}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>}
     </div>
   );
 }

@@ -18,6 +18,7 @@ export function OmahaHiGame({ state, dispatch, onGameOver }: GameProps<OmahaHiSt
     ? bestOmaha(state.cpu.hole, state.community) : null;
 
   return (
+    <div className="thmOmaHi">
     <PokerTable
       prefix="omaha-hi-"
       state={state}
@@ -31,5 +32,6 @@ export function OmahaHiGame({ state, dispatch, onGameOver }: GameProps<OmahaHiSt
       onCall={() => dis({ type: "call" })}
       onRaise={(amount) => dis({ type: "raise", amount })}
     />
+  </div>
   );
 }

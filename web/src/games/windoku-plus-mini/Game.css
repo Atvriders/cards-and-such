@@ -1,27 +1,85 @@
-.windokuplusmini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.windokuplusmini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.windokuplusmini-score { font-weight:700;color:hsl(30, 60%, 40%); }
-.windokuplusmini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.windokuplusmini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.windokuplusmini-row { display:flex;gap:1px; }
-.windokuplusmini-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.windokuplusmini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.windokuplusmini-cell.sel { background:hsl(30, 65%, 55%);color:#fff; }
-.windokuplusmini-cell.err { background:#fdedec;color:#e74c3c; }
-.windokuplusmini-cell.rt { margin-right:3px; }
-.windokuplusmini-cell.bt { margin-bottom:3px; }
-.windokuplusmini-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.windokuplusmini-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.windokuplusmini-num:hover { background:hsl(30, 70%, 92%);border-color:hsl(30, 60%, 55%); }
-.windokuplusmini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.windokuplusmini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.windokuplusmini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.windokuplusmini-btn.check { background:#3498db; }
-.windokuplusmini-btn.hint { background:#f39c12; }
-.windokuplusmini-btn.next { background:hsl(30, 60%, 45%); }
-.windokuplusmini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.windokuplusmini-status { font-weight:700;font-size:1rem; }
-.windokuplusmini-status.solved { color:#27ae60; }
-.windokuplusmini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.windokuplusmini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.windokuplusmini-final { font-size:1.6rem;font-weight:900;color:hsl(30, 60%, 40%); }
+.windokuplusherb-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.windokuplusherb-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.windokuplusherb-score { font-weight:700;color:hsl(30, 60%, 40%); }
+.windokuplusherb-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.windokuplusherb-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.windokuplusherb-row { display:flex;gap:1px; }
+.windokuplusherb-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.windokuplusherb-cell.given { background:#ecf0f1;color:#2c3e50; }
+.windokuplusherb-cell.sel { background:hsl(30, 65%, 55%);color:#fff; }
+.windokuplusherb-cell.err { background:#fdedec;color:#e74c3c; }
+.windokuplusherb-cell.rt { margin-right:3px; }
+.windokuplusherb-cell.bt { margin-bottom:3px; }
+.windokuplusherb-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.windokuplusherb-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.windokuplusherb-num:hover { background:hsl(30, 70%, 92%);border-color:hsl(30, 60%, 55%); }
+.windokuplusherb-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.windokuplusherb-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.windokuplusherb-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.windokuplusherb-btn.check { background:#3498db; }
+.windokuplusherb-btn.hint { background:#f39c12; }
+.windokuplusherb-btn.next { background:hsl(30, 60%, 45%); }
+.windokuplusherb-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.windokuplusherb-status { font-weight:700;font-size:1rem; }
+.windokuplusherb-status.solved { color:#27ae60; }
+.windokuplusherb-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.windokuplusherb-done h2 { margin-bottom:6px;color:#2c3e50; }
+.windokuplusherb-final { font-size:1.6rem;font-weight:900;color:hsl(30, 60%, 40%); }
+
+
+/* === Theme: herb-plus (Herb plus — vibrant sage) === */
+.windokuplusherb {
+  background: #e4ecdc;
+  color: #1a2814;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.windokuplusherb .windokuplusherb-mech,
+.windokuplusherb [class*="-mech"],
+.windokuplusherb [class*="-status"]:not(.solved):not(.win) {
+  color: #4a6a40;
+}
+.windokuplusherb [class*="-score"],
+.windokuplusherb [class*="-final"] {
+  color: #3a7a30;
+}
+.windokuplusherb [class*="-grid"] {
+  background: #1a4818;
+  border-color: #1a4818;
+}
+.windokuplusherb [class*="-cell"] {
+  background: #d4e0c8;
+  color: #1a2814;
+}
+.windokuplusherb [class*="-cell"].sel,
+.windokuplusherb [class*="-cell"].selected {
+  outline: 3px solid #6aa860;
+  outline-offset: -3px;
+}
+.windokuplusherb [class*="-cell"].err,
+.windokuplusherb [class*="-cell"].error,
+.windokuplusherb [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #b03a30;
+}
+.windokuplusherb [class*="-num"]:hover,
+.windokuplusherb [class*="-numpad"] button:hover {
+  background: #6aa860;
+  color: #e4ecdc;
+  border-color: #3a7a30;
+}
+.windokuplusherb [class*="-btn"].check,
+.windokuplusherb [class*="-controls"] button {
+  background: #3a7a30;
+  color: #e4ecdc;
+  border-color: #3a7a30;
+}
+.windokuplusherb [class*="-btn"].next {
+  background: #6aa860;
+  color: #e4ecdc;
+}
+.windokuplusherb [class*="-status"].solved,
+.windokuplusherb [class*="-status"].win {
+  color: #3a7a30;
+}

@@ -8,16 +8,16 @@ export function CavernaCaveVsCaveGame({ state, dispatch, onGameOver }: GameProps
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-ccvc-wrap">
-      <h3 className="bz-ccvc-title">Caverna: Cave vs Cave</h3>
-      <div className="bz-ccvc-stats">
+    <div className="bz-cvc-wrap">
+      <h3 className="bz-cvc-title">Caverna: Cave vs Cave</h3>
+      <div className="bz-cvc-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Assets <b>{state.assets}</b></div>
         <div>Workers <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-ccvc-actions">
+        <div className="bz-cvc-actions">
           <button onClick={() => dispatch({ type: "invest" } as CavernaCaveVsCaveAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CavernaCaveVsCaveAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CavernaCaveVsCaveAction)}>Hire (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function CavernaCaveVsCaveGame({ state, dispatch, onGameOver }: GameProps
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-ccvc-event">
+        <div className="bz-cvc-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as CavernaCaveVsCaveAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-ccvc-done">
+        <div className="bz-cvc-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

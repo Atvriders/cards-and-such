@@ -11,7 +11,7 @@ function HangmanFigure({ wrong, max }: { wrong: number; max: number }): JSX.Elem
   // Normalize to 6 stages regardless of maxWrong
   const stage = Math.round((wrong / max) * 6);
   return (
-    <svg className="hangman-figure" viewBox="0 0 120 140" aria-label={`Hangman: ${wrong} wrong guesses`}>
+    <svg className="hgm-figure" viewBox="0 0 120 140" aria-label={`Hangman: ${wrong} wrong guesses`}>
       {/* Gallows */}
       <line x1="10" y1="130" x2="110" y2="130" stroke="#333" strokeWidth="4" strokeLinecap="round" />
       <line x1="30" y1="130" x2="30" y2="10"  stroke="#333" strokeWidth="4" strokeLinecap="round" />
@@ -68,25 +68,25 @@ export function Hangman({
   const guessedSet = new Set(guessed);
 
   return (
-    <div className="hangman-wrap">
+    <div className="hgm-wrap">
       <HangmanFigure wrong={wrongGuesses} max={maxWrongNum} />
 
-      <div className="hangman-status">
+      <div className="hgm-status">
         Wrong: {wrongGuesses} / {maxWrongNum}
       </div>
 
-      <div className="hangman-word">
+      <div className="hgm-word">
         {target.split("").map((ch, i) => (
-          <div key={i} className="hangman-letter-slot">
-            <span className="hangman-letter-char">
+          <div key={i} className="hgm-letter-slot">
+            <span className="hgm-letter-char">
               {guessedSet.has(ch) ? ch : "\u00A0"}
             </span>
-            <div className="hangman-letter-line" />
+            <div className="hgm-letter-line" />
           </div>
         ))}
       </div>
 
-      <div className="hangman-keyboard">
+      <div className="hgm-keyboard">
         {ALPHABET.map(letter => {
           const wasGuessed = guessedSet.has(letter);
           const isCorrect = wasGuessed && target.includes(letter);
@@ -94,7 +94,7 @@ export function Hangman({
           return (
             <button
               key={letter}
-              className={`hangman-key${isCorrect ? " correct" : ""}${isWrong ? " wrong" : ""}`}
+              className={`hgm-key${isCorrect ? " correct" : ""}${isWrong ? " wrong" : ""}`}
               disabled={wasGuessed || won || lost}
               onClick={() => handleGuess(letter)}
               aria-label={`Guess ${letter}`}
@@ -106,17 +106,17 @@ export function Hangman({
       </div>
 
       {(won || lost) && (
-        <div className="hangman-overlay">
-          <div className="hangman-overlay-box">
+        <div className="hgm-overlay">
+          <div className="hgm-overlay-box">
             <h2>{won ? "You win!" : "Game over!"}</h2>
-            <div className="hangman-target-reveal">{target}</div>
+            <div className="hgm-target-reveal">{target}</div>
             {won && (
-              <div className="hangman-score">
+              <div className="hgm-score">
                 Score: {(maxWrongNum - wrongGuesses) * 50 + target.length * 10}
               </div>
             )}
             {lost && (
-              <div className="hangman-score">Better luck next time!</div>
+              <div className="hgm-score">Better luck next time!</div>
             )}
           </div>
         </div>

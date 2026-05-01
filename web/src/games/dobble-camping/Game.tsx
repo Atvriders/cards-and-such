@@ -10,11 +10,11 @@ export function DobbleCampingGame({ state, dispatch, onGameOver }: GameProps<Dob
 
   if (state.phase === "done") {
     return (
-      <div className="dobcmp-wrap">
-        <div className="dobcmp-done">
+      <div className="dobcamp-wrap">
+        <div className="dobcamp-done">
           <h2>Spotted</h2>
-          <div className="dobcmp-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
-          <div className="dobcmp-final">{state.score} pts</div>
+          <div className="dobcamp-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
+          <div className="dobcamp-final">{state.score} pts</div>
         </div>
       </div>
     );
@@ -31,34 +31,34 @@ export function DobbleCampingGame({ state, dispatch, onGameOver }: GameProps<Dob
   const isCorrect = state.selected === r.shared;
 
   return (
-    <div className="dobcmp-wrap">
-      <div className="dobcmp-header">
-        <span className="dobcmp-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="dobcmp-score">{state.score} pts</span>
+    <div className="dobcamp-wrap">
+      <div className="dobcamp-header">
+        <span className="dobcamp-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="dobcamp-score">{state.score} pts</span>
       </div>
-      <div className="dobcmp-prompt">Find the symbol on BOTH cards. Click it.</div>
-      <div className="dobcmp-cards">
-        <div className="dobcmp-card">
+      <div className="dobcamp-prompt">Find the symbol on BOTH cards. Click it.</div>
+      <div className="dobcamp-cards">
+        <div className="dobcamp-card">
           {r.cardA.symbols.map((s, i) => (
-            <button key={"a"+i} className={`dobcmp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"a"+i} className={`dobcamp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
-        <div className="dobcmp-vs">vs</div>
-        <div className="dobcmp-card">
+        <div className="dobcamp-vs">vs</div>
+        <div className="dobcamp-card">
           {r.cardB.symbols.map((s, i) => (
-            <button key={"b"+i} className={`dobcmp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"b"+i} className={`dobcamp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
       </div>
       {state.submitted && (
         <>
-          <div className={`dobcmp-feedback ${isCorrect ? "ok" : "no"}`}>
+          <div className={`dobcamp-feedback ${isCorrect ? "ok" : "no"}`}>
             {isCorrect ? `Match in ${(state.lastMs / 1000).toFixed(1)}s` : `Miss · the match was ${r.shared}`}
           </div>
-          <button className="dobcmp-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
+          <button className="dobcamp-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
         </>
       )}
-      {!state.submitted && <div className="dobcmp-timer">Speed counts · click fast for bonus points</div>}
+      {!state.submitted && <div className="dobcamp-timer">Speed counts · click fast for bonus points</div>}
     </div>
   );
 }

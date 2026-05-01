@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-portal (unique class prefix + themed palette over shared dm-* engine) */
+.dice-portal-theme.dm-wrap {
+  background: radial-gradient(circle at 50% 50%,#a855f7 0%,#581c87 40%,#0c0a09 100%);
+}
+.dice-portal-theme .dm-info,
+.dice-portal-theme .dm-header {
+  color: #fdf4ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-portal-theme .dm-target { color: #fdf4ff; opacity: 0.85; }
+.dice-portal-theme .dm-score {
+  background: linear-gradient(180deg, #f0abfc, #e879f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(232,121,249,0.45);
+}
+.dice-portal-theme .dm-die {
+  background: linear-gradient(145deg,#fdf4ff,#e9d5ff);
+  color: #581c87;
+}
+.dice-portal-theme .dm-card {
+  background: linear-gradient(145deg,#fdf4ff,#e9d5ff);
+  color: #581c87;
+}
+.dice-portal-theme .dm-btn {
+  background: linear-gradient(180deg, #a855f7 0%, #6b21a8 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(107,33,168,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-portal-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #e879f9 0%, #f0abfc 100%);
+  color: #1f2937;
+}
+.dice-portal-theme .dm-bet-btn {
+  color: #fdf4ff;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-portal-theme .dm-result {
+  color: #fdf4ff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-portal-theme .dm-feedback {
+  color: #f0abfc;
+  text-shadow: 0 0 12px rgba(232,121,249,0.6);
+}
+.dice-portal-theme .dm-final {
+  background: linear-gradient(180deg, #fae8ff, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-portal-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #a855f7, #6b21a8);
+  border-color: #f0abfc;
+}
+.dice-portal-theme .dm-die.selected,
+.dice-portal-theme .dm-die.hl {
+  border-color: #e879f9;
+  box-shadow:
+    0 0 0 2px #e879f9,
+    0 0 22px rgba(232,121,249,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

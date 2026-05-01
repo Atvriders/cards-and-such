@@ -8,16 +8,16 @@ export function ZoolorettoTruckGame({ state, dispatch, onGameOver }: GameProps<Z
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-zt-wrap">
-      <h3 className="bz-zt-title">Zooloretto Truck</h3>
-      <div className="bz-zt-stats">
+    <div className="bz-zlt-wrap">
+      <h3 className="bz-zlt-title">Zooloretto Truck</h3>
+      <div className="bz-zlt-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Assets <b>{state.assets}</b></div>
         <div>Workers <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-zt-actions">
+        <div className="bz-zlt-actions">
           <button onClick={() => dispatch({ type: "invest" } as ZoolorettoTruckAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as ZoolorettoTruckAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as ZoolorettoTruckAction)}>Hire (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function ZoolorettoTruckGame({ state, dispatch, onGameOver }: GameProps<Z
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-zt-event">
+        <div className="bz-zlt-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as ZoolorettoTruckAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-zt-done">
+        <div className="bz-zlt-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

@@ -78,3 +78,36 @@
   font-weight: 800;
   font-family: "JetBrains Mono", monospace;
 }
+
+
+/* Babylonia Tiles — themed override (unique prefix bz-byt-) */
+.bz-byt-wrap {
+  background: linear-gradient(140deg, #5e3f1d, #3d2914) !important;
+  color: #fde68a !important;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #0891b233;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.bz-byt-wrap h2 {
+  color: #0891b2;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bz-byt-wrap .g-cell {
+  background: #0f172a55;
+  border: 1px solid #0891b233;
+  color: #0891b2;
+  transition: background 120ms, transform 80ms;
+}
+.bz-byt-wrap .g-cell:hover {
+  background: #0891b233;
+  transform: translateY(-1px);
+}
+.bz-byt-wrap .g-cell.x { color: #0891b2; font-weight: 800; }
+.bz-byt-wrap .g-cell.o { color: #fde68a; font-weight: 800; }
+.bz-byt-wrap .g-final {
+  color: #0891b2;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+}

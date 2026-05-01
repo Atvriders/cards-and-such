@@ -8,10 +8,10 @@ export function Dice21Game({ state, dispatch, onGameOver }: GameProps<Dice21Stat
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.totalScore} pts</div></div></div>;
+    return <div className="dm-wrap dice-21-theme"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.totalScore} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap dice-21-theme">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">Total: {state.totalScore} | Sum: {state.sum}</div>
       {state.rolls.length > 0 && (

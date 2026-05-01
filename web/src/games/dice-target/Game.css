@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-target (unique class prefix + themed palette over shared dm-* engine) */
+.dice-target-theme.dm-wrap {
+  background: radial-gradient(circle at 50% 50%,#fee2e2 0%,#dc2626 35%,#7f1d1d 100%);
+}
+.dice-target-theme .dm-info,
+.dice-target-theme .dm-header {
+  color: #fff1f2;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-target-theme .dm-target { color: #fff1f2; opacity: 0.85; }
+.dice-target-theme .dm-score {
+  background: linear-gradient(180deg, #fecaca, #f87171);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(248,113,113,0.45);
+}
+.dice-target-theme .dm-die {
+  background: linear-gradient(145deg,#fff1f2,#fecaca);
+  color: #7f1d1d;
+}
+.dice-target-theme .dm-card {
+  background: linear-gradient(145deg,#fff1f2,#fecaca);
+  color: #7f1d1d;
+}
+.dice-target-theme .dm-btn {
+  background: linear-gradient(180deg, #ef4444 0%, #991b1b 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(153,27,27,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-target-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #f43f5e 0%, #fecaca 100%);
+  color: #1f2937;
+}
+.dice-target-theme .dm-bet-btn {
+  color: #fff1f2;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-target-theme .dm-result {
+  color: #fff1f2;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-target-theme .dm-feedback {
+  color: #fecaca;
+  text-shadow: 0 0 12px rgba(248,113,113,0.6);
+}
+.dice-target-theme .dm-final {
+  background: linear-gradient(180deg, #fee2e2, #ef4444);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-target-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #ef4444, #991b1b);
+  border-color: #fecaca;
+}
+.dice-target-theme .dm-die.selected,
+.dice-target-theme .dm-die.hl {
+  border-color: #f43f5e;
+  box-shadow:
+    0 0 0 2px #f43f5e,
+    0 0 22px rgba(244,63,94,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

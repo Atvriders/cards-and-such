@@ -1,84 +1,44 @@
-.smnptn-wrap {
+/* === smnpat themed palette (simon_rybg) === */
+.smnpat-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 14px;
-  padding: 22px; max-width: 540px; margin: 0 auto; user-select: none;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding: 22px 18px; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  max-width: 560px; margin: 0 auto; background: #0f172a; color: #f1f5f9;
+  border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
-.smnptn-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-.smnptn-info { font-size: 0.95rem; color: #475569; font-family: 'Inter', sans-serif; }
-.smnptn-timer { font-size: 1.5rem; font-weight: 900; color: #e74c3c; font-family: 'JetBrains Mono', monospace; }
-.smnptn-score { font-size: 1.2rem; font-weight: 800; color: #1e40af; font-family: 'JetBrains Mono', monospace; }
-.smnptn-prompt { text-align: center; font-size: 1.05rem; color: #334155; font-weight: 600; font-family: 'Inter', sans-serif; }
-.smnptn-stage {
-  width: 240px; height: 240px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 4rem; cursor: pointer; border: none;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
-  font-family: 'Inter', sans-serif;
-}
-.smnptn-stage.go { background: #22c55e; box-shadow: 0 0 40px #22c55eaa, inset 0 0 20px rgba(255,255,255,0.3); }
-.smnptn-stage.nogo { background: #94a3b8; box-shadow: 0 0 24px rgba(0,0,0,0.2); opacity: 0.85; }
-.smnptn-stage:active { transform: scale(0.97); }
-.smnptn-hint { font-size: 0.85rem; color: #64748b; font-family: 'Inter', sans-serif; }
-.smnptn-done { text-align: center; padding: 28px; background: #f8fafc; border-radius: 14px; width: 100%; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
-.smnptn-done h2 { margin: 0 0 8px; font-family: 'Inter', sans-serif; font-weight: 800; }
-.smnptn-stats { font-family: 'Inter', sans-serif; color: #475569; }
-.smnptn-final { font-size: 1.6rem; color: #1e40af; font-weight: 900; margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
-
-
-/* === Themed palette overrides === */
-.smnptn-wrap {
-  background: #020617;
-  color: #f8fafc;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  border-radius: 18px;
-  padding: 18px;
-}
-.smnptn-header { color: #f8fafc; }
-.smnptn-info { color: #f8fafc; opacity: 0.85; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
-.smnptn-timer { color: #facc15; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 6px #facc1566; }
-.smnptn-score { color: #22c55e; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 4px #22c55e55; }
-.smnptn-target, .smnptn-hint, .smnptn-stats { color: #ef4444; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
-.smnptn-grid {
-  background: radial-gradient(circle at 50% 50%,#1e293b,#020617);
-  border: 3px solid #22c55e;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
-}
-.smnptn-cell {
-  background: #0f172a;
-  color: #f8fafc;
-  border: 2px solid transparent;
-}
-.smnptn-cell.sel,
-.smnptn-cell.selected,
-.smnptn-cell.active {
-  border-color: #facc15;
-  box-shadow: 0 0 14px #facc15;
-}
-.smnptn-btn,
-.smnptn-pad {
-  background: #22c55e;
-  color: #fff;
-  border: 2px solid #22c55e;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.1s ease, background 0.1s ease;
-}
-.smnptn-btn:hover, .smnptn-pad:hover { transform: translateY(-1px); background: #ef4444; color: #f8fafc; }
-.smnptn-done {
-  background: #0f172a;
-  color: #f8fafc;
-  border: 2px solid #22c55e;
-  border-radius: 16px;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-}
-.smnptn-done h2 { color: #facc15; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
-.smnptn-final { color: #22c55e; font-family: 'JetBrains Mono', 'Fira Code', monospace; text-shadow: 0 0 8px #22c55e55; }
-.smnptn-controls,
-.smnptn-track,
-.smnptn-next,
-.smnptn-player,
-.smnptn-obstacle { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
-.smnptn-track { background: radial-gradient(circle at 50% 50%,#1e293b,#020617); border: 3px solid #22c55e; border-radius: 16px; }
-.smnptn-player { color: #facc15; }
-.smnptn-obstacle { color: #ef4444; }
+.smnpat-info { font-size: 0.95rem; color: #f1f5f9; opacity: 0.78; }
+.smnpat-score { font-size: 1.25rem; font-weight: 800; color: #dc2626; }
+.smnpat-prompt { font-size: 1.1rem; font-weight: 700; color: #f1f5f9; text-align: center; padding: 8px; }
+.smnpat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; max-width: 380px; }
+.smnpat-tray { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 14px; background: #1e293b; border: 1px solid #facc15; border-radius: 10px; width: 100%; max-width: 360px; }
+.smnpat-trayitem { font-size: 1rem; text-align: center; padding: 10px; background: #fff; border-radius: 8px; font-weight: 600; color: #f1f5f9; }
+.smnpat-cell { padding: 14px; font-size: 0.95rem; font-weight: 600; border: 2px solid #facc15; background: #1e293b; color: #f1f5f9; border-radius: 10px; cursor: pointer; min-height: 60px; transition: transform .12s ease, background .12s; }
+.smnpat-cell:hover:not(:disabled) { background: #facc1533; transform: translateY(-1px); }
+.smnpat-cell.selected { background: #facc1555; border-color: #dc2626; }
+.smnpat-cell.correct { background: #16a34a; border-color: #16a34a; color: #f1f5f9; }
+.smnpat-cell.wrong { background: #2563eb; border-color: #2563eb; color: #f1f5f9; }
+.smnpat-btn { padding: 10px 22px; font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; color: #fff; background: #dc2626; }
+.smnpat-btn.submit { background: #dc2626; }
+.smnpat-btn.next { background: #facc15; }
+.smnpat-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.smnpat-done { text-align: center; padding: 24px; background: #1e293b; border: 1px solid #facc15; border-radius: 14px; color: #f1f5f9; }
+.smnpat-done h2 { margin: 0 0 8px; color: #dc2626; }
+.smnpat-final { font-size: 1.5rem; color: #dc2626; font-weight: 900; }
+.smnpat-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:6px 4px; }
+.smnpat-progress { color: #dc2626; font-weight: 700; }
+.smnpat-attempts { color: #f1f5f9; opacity: 0.7; }
+.smnpat-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; }
+.smnpat-card { aspect-ratio: 3/4; background: #1e293b; border: 2px solid #facc15; border-radius: 10px; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; color: #f1f5f9; }
+.smnpat-card:hover:not(:disabled) { border-color: #dc2626; transform: translateY(-2px); }
+.smnpat-card.flipped { background: #facc1533; border-color: #dc2626; }
+.smnpat-card.matched { background: #16a34a; border-color: #16a34a; opacity: 0.85; cursor: default; }
+.smnpat-card:disabled { cursor: default; }
+.smnpat-face { font-size: 1.8rem; font-weight: 800; color: #f1f5f9; }
+.smnpat-hint { font-size: 0.86rem; color: #f1f5f9; opacity: 0.7; font-style: italic; text-align: center; padding-top: 4px; }
+.smnpat-stats { font-size: 1rem; color: #f1f5f9; margin-bottom: 12px; }
+.smnpat-feedback { padding: 8px 12px; border-radius: 8px; font-weight: 700; text-align: center; }
+.smnpat-feedback.correct { background: #16a34a; color: #f1f5f9; }
+.smnpat-feedback.wrong { background: #2563eb; color: #f1f5f9; }
+.smnpat-actions { display: flex; gap: 8px; justify-content: center; }
+.smnpat-timer { font-weight: 700; color: #dc2626; }
+.smnpat-timer.urgent { color: #2563eb; animation: smnpat-pulse 0.6s infinite alternate; }
+@keyframes smnpat-pulse { from { transform: scale(1); } to { transform: scale(1.08); } }

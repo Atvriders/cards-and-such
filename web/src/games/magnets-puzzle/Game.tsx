@@ -10,11 +10,11 @@ export function MagnetsPuzzleGame({ state, dispatch, onGameOver }: GameProps<Mag
 
   if (state.phase === "done") {
     return (
-      <div className="magnetspuzzle-wrap">
-        <div className="magnetspuzzle-done">
+      <div className="magnetspoles-wrap">
+        <div className="magnetspoles-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="magnetspuzzle-final">{state.score} pts</p>
+          <p className="magnetspoles-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function MagnetsPuzzleGame({ state, dispatch, onGameOver }: GameProps<Mag
   const errSet = new Set(state.errors);
 
   return (
-    <div className="magnetspuzzle-wrap">
-      <div className="magnetspuzzle-header">
+    <div className="magnetspoles-wrap">
+      <div className="magnetspoles-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="magnetspuzzle-score">{state.score} pts</span>
+        <span className="magnetspoles-score">{state.score} pts</span>
       </div>
-      <div className="magnetspuzzle-mech">Place + and − magnets so likes never touch; some cells are neutral.</div>
-      <div className="magnetspuzzle-grid">
+      <div className="magnetspoles-mech">Place + and − magnets so likes never touch; some cells are neutral.</div>
+      <div className="magnetspoles-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="magnetspuzzle-row">
+          <div key={r} className="magnetspoles-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function MagnetsPuzzleGame({ state, dispatch, onGameOver }: GameProps<Mag
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`magnetspuzzle-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`magnetspoles-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as MagnetsPuzzleAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function MagnetsPuzzleGame({ state, dispatch, onGameOver }: GameProps<Mag
           </div>
         ))}
       </div>
-      <div className="magnetspuzzle-pad">
+      <div className="magnetspoles-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`magnetspuzzle-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as MagnetsPuzzleAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`magnetspoles-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as MagnetsPuzzleAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="magnetspuzzle-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as MagnetsPuzzleAction)}>×</button>
+        <button className="magnetspoles-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as MagnetsPuzzleAction)}>×</button>
       </div>
-      <div className="magnetspuzzle-actions">
-        <button className="magnetspuzzle-btn check" onClick={() => dispatch({ type: "check" } as MagnetsPuzzleAction)}>Check</button>
-        <button className="magnetspuzzle-btn hint" onClick={() => dispatch({ type: "hint" } as MagnetsPuzzleAction)}>Hint</button>
-        <button className="magnetspuzzle-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as MagnetsPuzzleAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="magnetspoles-actions">
+        <button className="magnetspoles-btn check" onClick={() => dispatch({ type: "check" } as MagnetsPuzzleAction)}>Check</button>
+        <button className="magnetspoles-btn hint" onClick={() => dispatch({ type: "hint" } as MagnetsPuzzleAction)}>Hint</button>
+        <button className="magnetspoles-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as MagnetsPuzzleAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="magnetspuzzle-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="magnetspoles-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

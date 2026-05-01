@@ -1,23 +1,57 @@
-.ds-wrap { max-width: 480px; margin: 0 auto; font-family: sans-serif; padding: 12px; }
-.ds-header { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; color: #fff; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; }
-.ds-title { font-size: 1.1rem; font-weight: bold; color: #f9a825; }
-.ds-score { color: #66bb6a; font-weight: bold; font-size: 1.1rem; }
-.ds-dice-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 14px; }
-.ds-die { width: 54px; height: 54px; border: 3px solid #555; border-radius: 10px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; user-select: none; }
-.ds-die.kept { border-color: #f9a825; background: #fff8e1; }
-.ds-die:hover { border-color: #90caf9; }
-.ds-roll-btn { width: 100%; padding: 10px; background: #1565c0; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-bottom: 10px; }
-.ds-roll-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.ds-rolls-left { text-align: center; font-size: 0.85rem; color: #aaa; margin-bottom: 8px; }
-.ds-scorecard { border: 1px solid #333; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
-.ds-sc-header { display: grid; grid-template-columns: 1fr 80px 80px; background: #222; color: #aaa; font-size: 0.75rem; padding: 4px 8px; }
-.ds-sc-row { display: grid; grid-template-columns: 1fr 80px 80px; padding: 5px 8px; border-bottom: 1px solid #222; align-items: center; }
-.ds-sc-row:last-child { border-bottom: none; }
-.ds-sc-row.scored { background: #1a2a1a; }
-.ds-sc-name { font-size: 0.85rem; }
-.ds-sc-pot { color: #90caf9; font-size: 0.85rem; text-align: right; }
-.ds-sc-val { font-weight: bold; text-align: right; font-size: 0.9rem; }
-.ds-sc-btn { background: #1565c0; color: #fff; border: none; border-radius: 4px; cursor: pointer; padding: 3px 10px; font-size: 0.8rem; }
-.ds-sc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.ds-done { text-align: center; padding: 20px; }
-.ds-final { font-size: 1.5rem; font-weight: bold; color: #f9a825; }
+.dstck-wrap { max-width: 480px; margin: 0 auto; font-family: sans-serif; padding: 12px; }
+.dstck-header { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; color: #fff; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; }
+.dstck-title { font-size: 1.1rem; font-weight: bold; color: #f9a825; }
+.dstck-score { color: #66bb6a; font-weight: bold; font-size: 1.1rem; }
+.dstck-dice-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 14px; }
+.dstck-die { width: 54px; height: 54px; border: 3px solid #555; border-radius: 10px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; user-select: none; }
+.dstck-die.kept { border-color: #f9a825; background: #fff8e1; }
+.dstck-die:hover { border-color: #90caf9; }
+.dstck-roll-btn { width: 100%; padding: 10px; background: #1565c0; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-bottom: 10px; }
+.dstck-roll-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.dstck-rolls-left { text-align: center; font-size: 0.85rem; color: #aaa; margin-bottom: 8px; }
+.dstck-scorecard { border: 1px solid #333; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+.dstck-sc-header { display: grid; grid-template-columns: 1fr 80px 80px; background: #222; color: #aaa; font-size: 0.75rem; padding: 4px 8px; }
+.dstck-sc-row { display: grid; grid-template-columns: 1fr 80px 80px; padding: 5px 8px; border-bottom: 1px solid #222; align-items: center; }
+.dstck-sc-row:last-child { border-bottom: none; }
+.dstck-sc-row.scored { background: #1a2a1a; }
+.dstck-sc-name { font-size: 0.85rem; }
+.dstck-sc-pot { color: #90caf9; font-size: 0.85rem; text-align: right; }
+.dstck-sc-val { font-weight: bold; text-align: right; font-size: 0.9rem; }
+.dstck-sc-btn { background: #1565c0; color: #fff; border: none; border-radius: 4px; cursor: pointer; padding: 3px 10px; font-size: 0.8rem; }
+.dstck-sc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.dstck-done { text-align: center; padding: 20px; }
+.dstck-final { font-size: 1.5rem; font-weight: bold; color: #f9a825; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dstck (unique class prefix + themed palette tokens) */
+.dstck-theme {
+  --dstck-bg: linear-gradient(180deg,#1e293b 0%,#475569 55%,#cbd5e1 100%);
+  --dstck-felt: #0f172a;
+  --dstck-accent: #fbbf24;
+  --dstck-text: #f1f5f9;
+}
+.dstck-theme.dstck-wrap,
+.dstck-theme .dstck-wrap,
+.dstck-wrap.dstck-theme {
+  background: var(--dstck-bg);
+  color: var(--dstck-text);
+}
+.dstck-theme .dstck-die,
+.dstck-theme .dstck-card {
+  border-color: var(--dstck-accent);
+}
+.dstck-theme .dstck-btn,
+.dstck-theme .dstck-roll-btn {
+  background: var(--dstck-accent);
+  color: var(--dstck-felt);
+  border-color: var(--dstck-accent);
+}
+.dstck-theme .dstck-info,
+.dstck-theme .dstck-score,
+.dstck-theme .dstck-final,
+.dstck-theme .dstck-result,
+.dstck-theme .dstck-header,
+.dstck-theme .dstck-message {
+  color: var(--dstck-text);
+}
+

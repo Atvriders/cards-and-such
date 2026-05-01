@@ -12,3 +12,48 @@
 .dm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
 .dm-done h2 { margin:0 0 8px; }
 .dm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+
+
+/* === poker-theme:omaha-ocean === unique-class .thmBigO === */
+.thmBigO,
+.thmBigO.dm-wrap,
+.thmBigO.holdem-wrap,
+.thmBigO.g-wrap,
+.thmBigO .dm-wrap,
+.thmBigO .holdem-wrap,
+.thmBigO .holdem-table,
+.thmBigO .g-wrap,
+.thmBigO .big-o-plo-felt,
+.thmBigO [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #0d6e3a 0%, #054224 60%, #021810 100%), linear-gradient(180deg, #0e3d63, #07223b) !important;
+  color: #eaf6ff !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #7fc8ff;
+  --theme-accent2: #bfe4ff;
+  --theme-ink: #eaf6ff;
+  --theme-rim: #0a1c2e;
+}
+.thmBigO .dm-score,
+.thmBigO .holdem-pot-amount,
+.thmBigO [class$="-stack"],
+.thmBigO [class$="-pot-amount"] {
+  color: #bfe4ff !important;
+  text-shadow: 0 0 18px #7fc8ff55;
+}
+.thmBigO .dm-info,
+.thmBigO [class$="-hud"],
+.thmBigO [class$="-stat"] {
+  border-color: #7fc8ff55 !important;
+}
+.thmBigO .dm-card,
+.thmBigO .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #7fc8ff22;
+}
+.thmBigO .dm-btn,
+.thmBigO [class*="-btn"] {
+  border-color: #7fc8ff55 !important;
+}

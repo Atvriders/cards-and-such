@@ -1,23 +1,81 @@
-.nlp-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:560px;margin:0 auto; }
-.nlp-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.nlp-progress { font-size:0.95rem;color:#555; }
-.nlp-score { font-size:1.05rem;font-weight:700;color:#27ae60; }
-.nlp-grid { display:flex;flex-direction:column;gap:2px;background:#34495e;padding:3px;border-radius:6px; }
-.nlp-row { display:flex;gap:2px; }
-.nlp-cell { width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#fff;font-weight:700;font-size:1.1rem;color:#2c3e50;border-radius:3px; }
-.nlp-cell.empty { background:#ecf0f1; }
-.nlp-question { font-size:1.05rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.nlp-choices { display:flex;flex-direction:column;gap:8px;width:100%; }
-.nlp-choice { display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #bdc3c7;border-radius:8px;background:#fff;cursor:pointer;font-size:0.95rem;text-align:left; }
-.nlp-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.nlp-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.nlp-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.nlp-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.nlp-letter { font-weight:900;font-size:1rem;color:#95a5a6;min-width:20px; }
-.nlp-actions { display:flex;gap:10px; }
-.nlp-btn { padding:8px 24px;border-radius:8px;border:none;font-size:0.95rem;font-weight:700;cursor:pointer; }
-.nlp-btn.submit { background:#27ae60;color:#fff; }
-.nlp-btn.next { background:#3498db;color:#fff; }
-.nlp-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.nlp-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%; }
-.nlp-done h2 { margin-bottom:6px; }
+.sudokutwentyfive-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:560px;margin:0 auto; }
+.sudokutwentyfive-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
+.sudokutwentyfive-progress { font-size:0.95rem;color:#555; }
+.sudokutwentyfive-score { font-size:1.05rem;font-weight:700;color:#27ae60; }
+.sudokutwentyfive-grid { display:flex;flex-direction:column;gap:2px;background:#34495e;padding:3px;border-radius:6px; }
+.sudokutwentyfive-row { display:flex;gap:2px; }
+.sudokutwentyfive-cell { width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#fff;font-weight:700;font-size:1.1rem;color:#2c3e50;border-radius:3px; }
+.sudokutwentyfive-cell.empty { background:#ecf0f1; }
+.sudokutwentyfive-question { font-size:1.05rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
+.sudokutwentyfive-choices { display:flex;flex-direction:column;gap:8px;width:100%; }
+.sudokutwentyfive-choice { display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #bdc3c7;border-radius:8px;background:#fff;cursor:pointer;font-size:0.95rem;text-align:left; }
+.sudokutwentyfive-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
+.sudokutwentyfive-choice.selected { border-color:#3498db;background:#eaf4fb; }
+.sudokutwentyfive-choice.correct { border-color:#27ae60;background:#eafaf1; }
+.sudokutwentyfive-choice.wrong { border-color:#e74c3c;background:#fdedec; }
+.sudokutwentyfive-letter { font-weight:900;font-size:1rem;color:#95a5a6;min-width:20px; }
+.sudokutwentyfive-actions { display:flex;gap:10px; }
+.sudokutwentyfive-btn { padding:8px 24px;border-radius:8px;border:none;font-size:0.95rem;font-weight:700;cursor:pointer; }
+.sudokutwentyfive-btn.submit { background:#27ae60;color:#fff; }
+.sudokutwentyfive-btn.next { background:#3498db;color:#fff; }
+.sudokutwentyfive-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.sudokutwentyfive-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%; }
+.sudokutwentyfive-done h2 { margin-bottom:6px; }
+
+
+/* === Theme: imperial-25 (Sudoku 25 — imperial cobalt) === */
+.sudokutwentyfive {
+  background: #0e1430;
+  color: #dee4ff;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.sudokutwentyfive .sudokutwentyfive-mech,
+.sudokutwentyfive [class*="-mech"],
+.sudokutwentyfive [class*="-status"]:not(.solved):not(.win) {
+  color: #a0a8c0;
+}
+.sudokutwentyfive [class*="-score"],
+.sudokutwentyfive [class*="-final"] {
+  color: #5a78f0;
+}
+.sudokutwentyfive [class*="-grid"] {
+  background: #5a78f0;
+  border-color: #5a78f0;
+}
+.sudokutwentyfive [class*="-cell"] {
+  background: #1c224a;
+  color: #dee4ff;
+}
+.sudokutwentyfive [class*="-cell"].sel,
+.sudokutwentyfive [class*="-cell"].selected {
+  outline: 3px solid #8aa0ff;
+  outline-offset: -3px;
+}
+.sudokutwentyfive [class*="-cell"].err,
+.sudokutwentyfive [class*="-cell"].error,
+.sudokutwentyfive [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #ff7a8a;
+}
+.sudokutwentyfive [class*="-num"]:hover,
+.sudokutwentyfive [class*="-numpad"] button:hover {
+  background: #8aa0ff;
+  color: #0e1430;
+  border-color: #5a78f0;
+}
+.sudokutwentyfive [class*="-btn"].check,
+.sudokutwentyfive [class*="-controls"] button {
+  background: #5a78f0;
+  color: #0e1430;
+  border-color: #5a78f0;
+}
+.sudokutwentyfive [class*="-btn"].next {
+  background: #8aa0ff;
+  color: #0e1430;
+}
+.sudokutwentyfive [class*="-status"].solved,
+.sudokutwentyfive [class*="-status"].win {
+  color: #7adb9a;
+}

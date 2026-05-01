@@ -162,3 +162,37 @@
   .tenzi-header { grid-template-columns: repeat(2, 1fr); }
   .tenzi-dice { grid-template-columns: repeat(5, 1fr); gap: 8px; }
 }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: tenzi (unique class prefix + themed palette tokens) */
+.tenzi-theme {
+  --tenzi-bg: conic-gradient(from 0deg at 50% 50%,#ef4444,#f59e0b,#facc15,#22c55e,#3b82f6,#a855f7,#ef4444);
+  --tenzi-felt: #fafafa;
+  --tenzi-accent: #ec4899;
+  --tenzi-text: #1e293b;
+}
+.tenzi-theme.tenzi-wrap,
+.tenzi-theme .tenzi-wrap,
+.tenzi-wrap.tenzi-theme {
+  background: var(--tenzi-bg);
+  color: var(--tenzi-text);
+}
+.tenzi-theme .tenzi-die,
+.tenzi-theme .tenzi-card {
+  border-color: var(--tenzi-accent);
+}
+.tenzi-theme .tenzi-btn,
+.tenzi-theme .tenzi-roll-btn {
+  background: var(--tenzi-accent);
+  color: var(--tenzi-felt);
+  border-color: var(--tenzi-accent);
+}
+.tenzi-theme .tenzi-info,
+.tenzi-theme .tenzi-score,
+.tenzi-theme .tenzi-final,
+.tenzi-theme .tenzi-result,
+.tenzi-theme .tenzi-header,
+.tenzi-theme .tenzi-message {
+  color: var(--tenzi-text);
+}
+

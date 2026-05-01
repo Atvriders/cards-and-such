@@ -1,5 +1,5 @@
-/* stockpile-trader — unique class prefix bz-st- */
-.bz-st-wrap {
+/* Stockpile Trader — unique class prefix bz-spt- (themed) */
+.bz-spt-wrap {
   max-width: 600px;
   margin: 0 auto;
   padding: 16px;
@@ -8,73 +8,84 @@
   flex-direction: column;
   gap: 14px;
   align-items: center;
-  color: #f1f5f9;
-  background: linear-gradient(140deg, #155e75, #083344);
+  color: #dbeafe;
+  background: linear-gradient(140deg, #1e3a8a, #0c2a4a);
   border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
 }
-.bz-st-title {
+.bz-spt-title {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #10b981;
+  text-shadow: 0 1px 2px #070f1c;
 }
-.bz-st-stats {
+.bz-spt-stats {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
   font-family: "JetBrains Mono", monospace;
 }
-.bz-st-stats > div {
-  background: rgba(255,255,255,0.08);
+.bz-spt-stats > div {
+  background: rgba(255,255,255,0.07);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.82rem;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid #10b98133;
+  color: #dbeafe;
 }
-.bz-st-actions {
+.bz-spt-stats b { color: #10b981; }
+.bz-spt-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
 }
-.bz-st-actions > button {
+.bz-spt-actions > button {
   padding: 9px 16px;
   border: 0;
   border-radius: 8px;
   cursor: pointer;
-  background: #4f46e5;
-  color: #fff;
+  background: #10b981;
+  color: #070f1c;
   font-weight: 700;
   font-family: "Inter", sans-serif;
-  transition: background 120ms;
+  transition: background 120ms, transform 80ms;
+  letter-spacing: 0.02em;
 }
-.bz-st-actions > button:hover { background: #4338ca; }
-.bz-st-event {
-  background: rgba(255,209,102,0.12);
-  border: 1px solid rgba(255,209,102,0.3);
+.bz-spt-actions > button:hover { background: #059669; transform: translateY(-1px); }
+.bz-spt-actions > button:active { transform: translateY(0); }
+.bz-spt-event {
+  background: #fbbf2422;
+  border: 1px solid #fbbf2455;
   padding: 12px 16px;
   border-radius: 8px;
   max-width: 480px;
   text-align: center;
   font-size: 0.9rem;
+  color: #fde68a;
 }
-.bz-st-event button {
+.bz-spt-event button {
   margin-top: 10px;
   padding: 8px 16px;
   border: 0;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 700;
-  background: #06d6a0;
-  color: #0a1521;
+  background: #fbbf24;
+  color: #070f1c;
 }
-.bz-st-done {
-  background: rgba(6,214,160,0.12);
-  border: 1px solid rgba(6,214,160,0.3);
+.bz-spt-event button:hover { filter: brightness(1.1); }
+.bz-spt-done {
+  background: #10b98122;
+  border: 1px solid #10b98155;
   padding: 16px 24px;
   border-radius: 10px;
   text-align: center;
   font-weight: 800;
   font-family: "JetBrains Mono", monospace;
+  color: #10b981;
 }

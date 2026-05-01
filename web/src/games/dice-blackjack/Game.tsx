@@ -8,10 +8,10 @@ export function DiceBlackjackGame({ state, dispatch, onGameOver }: GameProps<Dic
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap dice-blackjack-theme"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap dice-blackjack-theme">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — Target {TARGET}</div>
       <div className="dm-score">Total Score: {state.score}</div>
       <div className="dm-row">

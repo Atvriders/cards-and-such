@@ -16,7 +16,7 @@ function BoxLetter({
 }): JSX.Element {
   return (
     <div
-      className={`lb-letter${used ? " used" : ""}`}
+      className={`lbx-letter${used ? " used" : ""}`}
       onClick={onClick}
       title={letter}
     >
@@ -59,58 +59,58 @@ export function LetterBoxed({ state, dispatch, onGameOver }: GameProps<LetterBox
   const coveredCount = allLetters.filter(l => usedLetters.has(l)).length;
 
   return (
-    <div className="lb-wrap">
-      <div className="lb-title">Letter Boxed</div>
+    <div className="lbx-wrap">
+      <div className="lbx-title">Letter Boxed</div>
 
-      <div className="lb-box-container">
-        <div className="lb-box-border" />
+      <div className="lbx-box-container">
+        <div className="lbx-box-border" />
 
         {/* Top side */}
-        <div className="lb-side top">
+        <div className="lbx-side top">
           {sides[0]!.split("").map(l => (
             <BoxLetter key={`top-${l}`} letter={l} used={usedLetters.has(l)} onClick={() => handleLetterClick(l)} />
           ))}
         </div>
         {/* Right side */}
-        <div className="lb-side right">
+        <div className="lbx-side right">
           {sides[1]!.split("").map(l => (
             <BoxLetter key={`right-${l}`} letter={l} used={usedLetters.has(l)} onClick={() => handleLetterClick(l)} />
           ))}
         </div>
         {/* Bottom side */}
-        <div className="lb-side bottom">
+        <div className="lbx-side bottom">
           {sides[2]!.split("").map(l => (
             <BoxLetter key={`bottom-${l}`} letter={l} used={usedLetters.has(l)} onClick={() => handleLetterClick(l)} />
           ))}
         </div>
         {/* Left side */}
-        <div className="lb-side left">
+        <div className="lbx-side left">
           {sides[3]!.split("").map(l => (
             <BoxLetter key={`left-${l}`} letter={l} used={usedLetters.has(l)} onClick={() => handleLetterClick(l)} />
           ))}
         </div>
       </div>
 
-      <div className="lb-current-word">{currentInput || (lastLetter ? `starts with: ${lastLetter}` : "type a word")}</div>
+      <div className="lbx-current-word">{currentInput || (lastLetter ? `starts with: ${lastLetter}` : "type a word")}</div>
 
       {lastLetter && (
-        <div className="lb-chain-hint">
+        <div className="lbx-chain-hint">
           Next word must start with: <strong>{lastLetter}</strong>
         </div>
       )}
 
-      <div className="lb-error">{error ?? " "}</div>
+      <div className="lbx-error">{error ?? " "}</div>
 
-      <div className="lb-actions">
+      <div className="lbx-actions">
         <button
-          className="lb-btn submit"
+          className="lbx-btn submit"
           disabled={currentInput.length < 3 || won}
           onClick={() => dispatch({ type: "submitWord" } as LetterBoxedAction)}
         >
           Submit
         </button>
         <button
-          className="lb-btn clear"
+          className="lbx-btn clear"
           disabled={currentInput.length === 0 || won}
           onClick={() => dispatch({ type: "clearInput" } as LetterBoxedAction)}
         >
@@ -118,22 +118,22 @@ export function LetterBoxed({ state, dispatch, onGameOver }: GameProps<LetterBox
         </button>
       </div>
 
-      <div className="lb-progress">
+      <div className="lbx-progress">
         Letters covered: {coveredCount} / {allLetters.length} &mdash; Words used: {words.length}
       </div>
 
       {words.length > 0 && (
-        <div className="lb-words-used">
+        <div className="lbx-words-used">
           {words.map((w, i) => (
-            <span key={i} className="lb-word-chip">{w}</span>
+            <span key={i} className="lbx-word-chip">{w}</span>
           ))}
         </div>
       )}
 
-      <div className="lb-keyboard-hint">Click letters or type on keyboard. Enter to submit.</div>
+      <div className="lbx-keyboard-hint">Click letters or type on keyboard. Enter to submit.</div>
 
       {won && (
-        <div className="lb-win">
+        <div className="lbx-win">
           <h2>Solved in {words.length} {words.length === 1 ? "word" : "words"}!</h2>
           <p>Score: <strong>{score}</strong></p>
         </div>

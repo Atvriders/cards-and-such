@@ -33,16 +33,16 @@ export function Boggle({ state, dispatch, onGameOver }: GameProps<BoggleState, B
   };
 
   return (
-    <div className="boggle-wrap">
-      <div className="boggle-header">
+    <div className="bgl-wrap">
+      <div className="bgl-header">
         <span>Score: {score}</span>
-        <span className="boggle-timer">
+        <span className="bgl-timer">
           {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
         </span>
         <span>{foundWords.length} words</span>
       </div>
 
-      <div className="boggle-grid" style={gridStyle}>
+      <div className="bgl-grid" style={gridStyle}>
         {grid.map((letter, i) => {
           const pathIdx = currentPath.indexOf(i);
           const isFirst = currentPath[0] === i;
@@ -50,7 +50,7 @@ export function Boggle({ state, dispatch, onGameOver }: GameProps<BoggleState, B
           return (
             <div
               key={i}
-              className={`boggle-cell${isFirst ? " first" : isSelected ? " selected" : ""}`}
+              className={`bgl-cell${isFirst ? " first" : isSelected ? " selected" : ""}`}
               onClick={() => !done && dispatch({ type: "selectCell", index: i } as BoggleAction)}
             >
               {letter}
@@ -59,18 +59,18 @@ export function Boggle({ state, dispatch, onGameOver }: GameProps<BoggleState, B
         })}
       </div>
 
-      <div className="boggle-current-word">{currentWord || " "}</div>
+      <div className="bgl-current-word">{currentWord || " "}</div>
 
-      <div className="boggle-actions">
+      <div className="bgl-actions">
         <button
-          className="boggle-btn submit"
+          className="bgl-btn submit"
           disabled={currentPath.length < 3 || done}
           onClick={() => dispatch({ type: "submitWord" } as BoggleAction)}
         >
           Submit ({currentPath.length >= 3 ? `+${wordScore(currentPath.length)}pt` : "—"})
         </button>
         <button
-          className="boggle-btn clear"
+          className="bgl-btn clear"
           disabled={currentPath.length === 0 || done}
           onClick={() => dispatch({ type: "clearPath" } as BoggleAction)}
         >
@@ -78,19 +78,19 @@ export function Boggle({ state, dispatch, onGameOver }: GameProps<BoggleState, B
         </button>
       </div>
 
-      <div className="boggle-error">{error ?? " "}</div>
+      <div className="bgl-error">{error ?? " "}</div>
 
       {foundWords.length > 0 && (
-        <div className="boggle-found-words">
+        <div className="bgl-found-words">
           {[...foundWords].reverse().map(w => (
-            <span key={w} className="boggle-word-chip">{w}</span>
+            <span key={w} className="bgl-word-chip">{w}</span>
           ))}
         </div>
       )}
 
       {done && (
-        <div className="boggle-done-overlay">
-          <div className="boggle-done-box">
+        <div className="bgl-done-overlay">
+          <div className="bgl-done-box">
             <h2>Time&apos;s up!</h2>
             <p>Words found: {foundWords.length}</p>
             <p>Final score: <strong>{score}</strong></p>

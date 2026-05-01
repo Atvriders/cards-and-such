@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === spotorq-themewrap themed palette (spotit_circus) === */
+.spotorq-themewrap.trivia-wrap,
+.spotorq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #fffbeb;
+  color: #0c0a09;
+  border-color: #facc1555;
+}
+.spotorq-themewrap .trivia-progress,
+.spotorq-themewrap .trivia-score { color: #dc2626; }
+.spotorq-themewrap .trivia-timer { color: #facc15; }
+.spotorq-themewrap .trivia-timer.urgent { color: #f87171; }
+.spotorq-themewrap .trivia-question { color: #0c0a09; }
+.spotorq-themewrap .trivia-choice {
+  background: #fff7ed;
+  color: #0c0a09;
+  border: 1.5px solid #facc15;
+}
+.spotorq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #dc2626;
+  background: #facc1522;
+}
+.spotorq-themewrap .trivia-choice.selected {
+  border-color: #dc2626;
+  background: #facc1533;
+}
+.spotorq-themewrap .trivia-choice.correct {
+  background: #34d399;
+  border-color: #34d399;
+  color: #0c0a09;
+}
+.spotorq-themewrap .trivia-choice.wrong {
+  background: #f87171;
+  border-color: #f87171;
+  color: #0c0a09;
+}
+.spotorq-themewrap .trivia-choice-letter {
+  background: #dc2626;
+  color: #fff;
+}
+.spotorq-themewrap .trivia-feedback.correct { background: #34d399; color: #0c0a09; }
+.spotorq-themewrap .trivia-feedback.wrong { background: #f87171; color: #0c0a09; }
+.spotorq-themewrap .trivia-btn.submit { background: #dc2626; }
+.spotorq-themewrap .trivia-btn.next { background: #facc15; }
+.spotorq-themewrap .trivia-done { background: #fff7ed; color: #0c0a09; }
+.spotorq-themewrap .trivia-done h2 { color: #dc2626; }

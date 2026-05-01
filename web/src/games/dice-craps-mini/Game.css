@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-craps-mini (unique class prefix + themed palette over shared dm-* engine) */
+.dice-craps-mini-theme.dm-wrap {
+  background: linear-gradient(180deg,#0d4a0d 0%,#166534 55%,#22c55e 100%);
+}
+.dice-craps-mini-theme .dm-info,
+.dice-craps-mini-theme .dm-header {
+  color: #f0fdf4;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-craps-mini-theme .dm-target { color: #f0fdf4; opacity: 0.85; }
+.dice-craps-mini-theme .dm-score {
+  background: linear-gradient(180deg, #fef08a, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(251,191,36,0.45);
+}
+.dice-craps-mini-theme .dm-die {
+  background: linear-gradient(145deg,#fffbeb,#fde047);
+  color: #14532d;
+}
+.dice-craps-mini-theme .dm-card {
+  background: linear-gradient(145deg,#fffbeb,#fde047);
+  color: #14532d;
+}
+.dice-craps-mini-theme .dm-btn {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(153,27,27,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-craps-mini-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #fef08a 0%, #fde047 100%);
+  color: #1f2937;
+}
+.dice-craps-mini-theme .dm-bet-btn {
+  color: #f0fdf4;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-craps-mini-theme .dm-result {
+  color: #f0fdf4;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-craps-mini-theme .dm-feedback {
+  color: #fef08a;
+  text-shadow: 0 0 12px rgba(251,191,36,0.6);
+}
+.dice-craps-mini-theme .dm-final {
+  background: linear-gradient(180deg, #fef9c3, #dc2626);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-craps-mini-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #dc2626, #991b1b);
+  border-color: #fde047;
+}
+.dice-craps-mini-theme .dm-die.selected,
+.dice-craps-mini-theme .dm-die.hl {
+  border-color: #fef08a;
+  box-shadow:
+    0 0 0 2px #fef08a,
+    0 0 22px rgba(254,240,138,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

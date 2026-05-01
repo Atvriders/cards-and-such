@@ -21,11 +21,11 @@ export function PalindromeSudokuGame({ state, dispatch, onGameOver }: GameProps<
 
   if (state.phase === "done") {
     return (
-      <div className="palindromesudoku-wrap">
-        <div className="palindromesudoku-done">
+      <div className="palindromemirror-wrap">
+        <div className="palindromemirror-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="palindromesudoku-final">{state.score} pts</p>
+          <p className="palindromemirror-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function PalindromeSudokuGame({ state, dispatch, onGameOver }: GameProps<
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="palindromesudoku-wrap">
-      <div className="palindromesudoku-header">
+    <div className="palindromemirror-wrap">
+      <div className="palindromemirror-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="palindromesudoku-score">{state.score} pts</span>
+        <span className="palindromemirror-score">{state.score} pts</span>
       </div>
-      <div className="palindromesudoku-mech">Sudoku with palindrome lines that read the same forwards and backwards.</div>
-      <div className="palindromesudoku-grid">
+      <div className="palindromemirror-mech">Sudoku with palindrome lines that read the same forwards and backwards.</div>
+      <div className="palindromemirror-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="palindromesudoku-row">
+          <div key={r} className="palindromemirror-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function PalindromeSudokuGame({ state, dispatch, onGameOver }: GameProps<
               return (
                 <button
                   key={c}
-                  className={`palindromesudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`palindromemirror-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as PalindromeSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function PalindromeSudokuGame({ state, dispatch, onGameOver }: GameProps<
           </div>
         ))}
       </div>
-      <div className="palindromesudoku-pad">
+      <div className="palindromemirror-pad">
         {digits.map((d) => (
-          <button key={d} className="palindromesudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as PalindromeSudokuAction)}>{d}</button>
+          <button key={d} className="palindromemirror-num" onClick={() => dispatch({ type: "enter", digit: d } as PalindromeSudokuAction)}>{d}</button>
         ))}
-        <button className="palindromesudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as PalindromeSudokuAction)}>×</button>
+        <button className="palindromemirror-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as PalindromeSudokuAction)}>×</button>
       </div>
-      <div className="palindromesudoku-actions">
-        <button className="palindromesudoku-btn check" onClick={() => dispatch({ type: "check" } as PalindromeSudokuAction)}>Check</button>
-        <button className="palindromesudoku-btn hint" onClick={() => dispatch({ type: "hint" } as PalindromeSudokuAction)}>Hint</button>
-        <button className="palindromesudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as PalindromeSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="palindromemirror-actions">
+        <button className="palindromemirror-btn check" onClick={() => dispatch({ type: "check" } as PalindromeSudokuAction)}>Check</button>
+        <button className="palindromemirror-btn hint" onClick={() => dispatch({ type: "hint" } as PalindromeSudokuAction)}>Hint</button>
+        <button className="palindromemirror-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as PalindromeSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="palindromesudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="palindromemirror-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

@@ -1,29 +1,33 @@
-.gin-rummy {
+/* Themed Gin Rummy — unique prefix `.ginr-*` (mint + silver) */
+
+.ginr-root {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background: #1b5e20;
+  background: linear-gradient(180deg, #134e3a 0%, #07291d 100%);
   min-height: 100%;
-  color: #fff;
-  font-family: sans-serif;
+  color: #f1f5f9;
+  font-family: ui-sans-serif, system-ui, sans-serif;
   box-sizing: border-box;
+  border-radius: 16px;
 }
 
-.gin-header {
+.ginr-header {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
   background: rgba(0,0,0,0.35);
   padding: 0.4rem 1rem;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 0.9rem;
   font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
-.gin-area {
+.ginr-area {
   display: flex;
   gap: 1.5rem;
   align-items: center;
@@ -31,7 +35,7 @@
   justify-content: center;
 }
 
-.gin-pile {
+.ginr-pile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,134 +43,112 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-.gin-pile .card {
-  cursor: pointer;
-}
+.ginr-pile .card { cursor: pointer; transition: transform 0.1s; }
+.ginr-pile .card:hover { transform: translateY(-4px); }
 
-.gin-pile .card:hover {
-  transform: translateY(-4px);
-  transition: transform 0.1s;
-}
-
-.gin-status {
+.ginr-status {
   background: rgba(0,0,0,0.4);
   padding: 0.3rem 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 0.9rem;
   text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-.gin-hand-label {
+.ginr-hand-label {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  opacity: 0.7;
+  opacity: 0.8;
+  background: linear-gradient(180deg, #d1fae5, #34d399);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
 }
 
-.gin-hand {
+.ginr-hand {
   display: flex;
   gap: 0.3rem;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.gin-hand .card {
+.ginr-hand .card {
   cursor: pointer;
   transition: transform 0.1s;
 }
 
-.gin-hand .card:hover:not(.dim) {
-  transform: translateY(-6px);
-}
-
-.gin-hand .card.dim {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.gin-hand .card.selected {
+.ginr-hand .card:hover:not(.dim) { transform: translateY(-6px); }
+.ginr-hand .card.dim { opacity: 0.35; cursor: default; }
+.ginr-hand .card.selected {
   transform: translateY(-10px);
-  box-shadow: 0 4px 12px rgba(255,235,59,0.7);
+  box-shadow: 0 4px 12px rgba(255,255,255,0.45);
 }
 
-.gin-actions {
+.ginr-actions {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.gin-btn {
-  padding: 0.4rem 1rem;
-  background: #2e7d32;
+.ginr-btn {
+  padding: 0.45rem 1.1rem;
+  background: linear-gradient(180deg, #10b981 0%, #047857 100%);
   color: #fff;
-  border: 2px solid #81c784;
-  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: filter 0.15s, transform 0.1s;
+  font-family: inherit;
 }
 
-.gin-btn:hover:not(:disabled) {
-  background: #43a047;
-}
+.ginr-btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
+.ginr-btn:disabled { opacity: 0.4; cursor: default; }
 
-.gin-btn:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-
-.gin-bot-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.gin-card-backs {
-  display: flex;
-  gap: 3px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.gin-card-back {
+.ginr-bot-area { display:flex; flex-direction:column; align-items:center; gap:0.3rem; }
+.ginr-card-backs { display:flex; gap:3px; flex-wrap:wrap; justify-content:center; }
+.ginr-card-back {
   width: 30px;
   height: 42px;
-  background: #1565c0;
+  background: linear-gradient(180deg, #0f3d2e, #062117);
   border-radius: 4px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255,255,255,0.25);
 }
 
-.gin-result {
-  background: rgba(0,0,0,0.6);
+.ginr-result {
+  background: rgba(0,0,0,0.55);
   padding: 1.5rem 2rem;
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   max-width: 500px;
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
-.gin-result h2 { margin: 0; font-size: 1.4rem; }
-
-.gin-melds {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 0.5rem;
+.ginr-result h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  background: linear-gradient(180deg, #d1fae5, #34d399);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.gin-meld-group {
+.ginr-melds { display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-top:0.5rem; }
+.ginr-meld-group {
   display: flex;
   gap: 2px;
   background: rgba(255,255,255,0.08);
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.10);
 }

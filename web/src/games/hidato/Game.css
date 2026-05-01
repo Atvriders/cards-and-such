@@ -1,4 +1,4 @@
-.hidato {
+.hidatosnake {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,29 +7,29 @@
   font-family: system-ui, sans-serif;
 }
 
-.hidato-title {
+.hidatosnake-title {
   font-size: 1.6rem;
   font-weight: 700;
   color: #1a1a2e;
 }
 
-.hidato-status {
+.hidatosnake-status {
   font-size: 0.95rem;
   color: #555;
 }
 
-.hidato-status.win {
+.hidatosnake-status.win {
   color: #2e7d32;
   font-weight: 700;
   font-size: 1.1rem;
 }
 
-.hidato-grid {
+.hidatosnake-grid {
   display: grid;
   gap: 3px;
 }
 
-.hidato-cell {
+.hidatosnake-cell {
   width: 46px;
   height: 46px;
   display: flex;
@@ -46,34 +46,34 @@
   user-select: none;
 }
 
-.hidato-cell:hover:not(.blocked):not(.given) {
+.hidatosnake-cell:hover:not(.blocked):not(.given) {
   background: #e3f2fd;
 }
 
-.hidato-cell.blocked {
+.hidatosnake-cell.blocked {
   background: #333;
   border-color: #333;
   cursor: default;
 }
 
-.hidato-cell.given {
+.hidatosnake-cell.given {
   background: #dde;
   cursor: default;
   color: #333;
 }
 
-.hidato-cell.selected {
+.hidatosnake-cell.selected {
   background: #bbdefb;
   border-color: #1565c0;
 }
 
-.hidato-input {
+.hidatosnake-input {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-.hidato-number-input {
+.hidatosnake-number-input {
   width: 70px;
   font-size: 1rem;
   padding: 4px 8px;
@@ -82,7 +82,7 @@
   text-align: center;
 }
 
-.hidato-btn {
+.hidatosnake-btn {
   padding: 6px 14px;
   font-size: 0.9rem;
   border: none;
@@ -93,21 +93,79 @@
   font-weight: 600;
 }
 
-.hidato-btn:hover {
+.hidatosnake-btn:hover {
   background: #1976d2;
 }
 
-.hidato-btn.clear {
+.hidatosnake-btn.clear {
   background: #c62828;
 }
 
-.hidato-btn.clear:hover {
+.hidatosnake-btn.clear:hover {
   background: #e53935;
 }
 
-.hidato-hint {
+.hidatosnake-hint {
   font-size: 0.8rem;
   color: #888;
   max-width: 360px;
   text-align: center;
+}
+
+
+/* === Theme: snake-sunset (Snake trail — sunset orange) === */
+.hidatosnake {
+  background: #fff3ec;
+  color: #3a1a14;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.hidatosnake .hidatosnake-mech,
+.hidatosnake [class*="-mech"],
+.hidatosnake [class*="-status"]:not(.solved):not(.win) {
+  color: #7a4030;
+}
+.hidatosnake [class*="-score"],
+.hidatosnake [class*="-final"] {
+  color: #d65a31;
+}
+.hidatosnake [class*="-grid"] {
+  background: #a8401d;
+  border-color: #a8401d;
+}
+.hidatosnake [class*="-cell"] {
+  background: #fde6d4;
+  color: #3a1a14;
+}
+.hidatosnake [class*="-cell"].sel,
+.hidatosnake [class*="-cell"].selected {
+  outline: 3px solid #f08750;
+  outline-offset: -3px;
+}
+.hidatosnake [class*="-cell"].err,
+.hidatosnake [class*="-cell"].error,
+.hidatosnake [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #b02828;
+}
+.hidatosnake [class*="-num"]:hover,
+.hidatosnake [class*="-numpad"] button:hover {
+  background: #f08750;
+  color: #fff3ec;
+  border-color: #d65a31;
+}
+.hidatosnake [class*="-btn"].check,
+.hidatosnake [class*="-controls"] button {
+  background: #d65a31;
+  color: #fff3ec;
+  border-color: #d65a31;
+}
+.hidatosnake [class*="-btn"].next {
+  background: #f08750;
+  color: #fff3ec;
+}
+.hidatosnake [class*="-status"].solved,
+.hidatosnake [class*="-status"].win {
+  color: #3aa05a;
 }

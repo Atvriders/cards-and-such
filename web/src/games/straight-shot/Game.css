@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: straight-shot (unique class prefix + themed palette over shared dm-* engine) */
+.straight-shot-theme.dm-wrap {
+  background: linear-gradient(180deg,#0c4a6e 0%,#0369a1 55%,#0ea5e9 100%);
+}
+.straight-shot-theme .dm-info,
+.straight-shot-theme .dm-header {
+  color: #e0f2fe;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.straight-shot-theme .dm-target { color: #e0f2fe; opacity: 0.85; }
+.straight-shot-theme .dm-score {
+  background: linear-gradient(180deg, #bae6fd, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(56,189,248,0.45);
+}
+.straight-shot-theme .dm-die {
+  background: linear-gradient(145deg,#e0f2fe,#7dd3fc);
+  color: #0c4a6e;
+}
+.straight-shot-theme .dm-card {
+  background: linear-gradient(145deg,#e0f2fe,#7dd3fc);
+  color: #0c4a6e;
+}
+.straight-shot-theme .dm-btn {
+  background: linear-gradient(180deg, #0ea5e9 0%, #0369a1 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(3,105,161,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.straight-shot-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 100%);
+  color: #1f2937;
+}
+.straight-shot-theme .dm-bet-btn {
+  color: #e0f2fe;
+  border-color: rgba(255,255,255,0.25);
+}
+.straight-shot-theme .dm-result {
+  color: #e0f2fe;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.straight-shot-theme .dm-feedback {
+  color: #bae6fd;
+  text-shadow: 0 0 12px rgba(56,189,248,0.6);
+}
+.straight-shot-theme .dm-final {
+  background: linear-gradient(180deg, #e0f2fe, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.straight-shot-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #0ea5e9, #0369a1);
+  border-color: #7dd3fc;
+}
+.straight-shot-theme .dm-die.selected,
+.straight-shot-theme .dm-die.hl {
+  border-color: #38bdf8;
+  box-shadow:
+    0 0 0 2px #38bdf8,
+    0 0 22px rgba(56,189,248,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

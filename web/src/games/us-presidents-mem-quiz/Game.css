@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === uspresq-themewrap themed palette (memory_pastel) === */
+.uspresq-themewrap.trivia-wrap,
+.uspresq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #fef9c3;
+  color: #3b3354;
+  border-color: #a78bfa55;
+}
+.uspresq-themewrap .trivia-progress,
+.uspresq-themewrap .trivia-score { color: #f472b6; }
+.uspresq-themewrap .trivia-timer { color: #a78bfa; }
+.uspresq-themewrap .trivia-timer.urgent { color: #fca5a5; }
+.uspresq-themewrap .trivia-question { color: #3b3354; }
+.uspresq-themewrap .trivia-choice {
+  background: #fdf2f8;
+  color: #3b3354;
+  border: 1.5px solid #a78bfa;
+}
+.uspresq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #f472b6;
+  background: #a78bfa22;
+}
+.uspresq-themewrap .trivia-choice.selected {
+  border-color: #f472b6;
+  background: #a78bfa33;
+}
+.uspresq-themewrap .trivia-choice.correct {
+  background: #86efac;
+  border-color: #86efac;
+  color: #3b3354;
+}
+.uspresq-themewrap .trivia-choice.wrong {
+  background: #fca5a5;
+  border-color: #fca5a5;
+  color: #3b3354;
+}
+.uspresq-themewrap .trivia-choice-letter {
+  background: #f472b6;
+  color: #fff;
+}
+.uspresq-themewrap .trivia-feedback.correct { background: #86efac; color: #3b3354; }
+.uspresq-themewrap .trivia-feedback.wrong { background: #fca5a5; color: #3b3354; }
+.uspresq-themewrap .trivia-btn.submit { background: #f472b6; }
+.uspresq-themewrap .trivia-btn.next { background: #a78bfa; }
+.uspresq-themewrap .trivia-done { background: #fdf2f8; color: #3b3354; }
+.uspresq-themewrap .trivia-done h2 { color: #f472b6; }

@@ -1,6 +1,6 @@
 /* Nonogram 3x3 — unique class prefix `ng3-` */
 
-.ng3-wrap {
+.nonogram3x3candy-wrap {
   font-family: "Inter", system-ui, sans-serif;
   display: flex;
   flex-direction: column;
@@ -12,20 +12,20 @@
   color: #1f2937;
 }
 
-.ng3-info {
+.nonogram3x3candy-info {
   font-size: 0.95rem;
   color: #4b5563;
   text-align: center;
 }
 
-.ng3-stat { font-size: 0.95rem; color: #4b5563; }
-.ng3-stat b {
+.nonogram3x3candy-stat { font-size: 0.95rem; color: #4b5563; }
+.nonogram3x3candy-stat b {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-weight: 800;
   color: #111827;
 }
 
-.ng3-board {
+.nonogram3x3candy-board {
   display: grid;
   grid-template-columns: 56px repeat(3, 64px);
   grid-template-rows: 56px repeat(3, 64px);
@@ -36,9 +36,9 @@
   border-radius: 12px;
 }
 
-.ng3-corner { background: transparent; }
+.nonogram3x3candy-corner { background: transparent; }
 
-.ng3-clue {
+.nonogram3x3candy-clue {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-weight: 800;
   font-size: 1rem;
@@ -51,7 +51,7 @@
   justify-content: center;
 }
 
-.ng3-cell {
+.nonogram3x3candy-cell {
   background: #fff;
   border: 2px solid #fdba74;
   border-radius: 8px;
@@ -59,9 +59,9 @@
   transition: background 0.14s, transform 0.1s;
 }
 
-.ng3-cell:hover { background: #fff7ed; }
+.nonogram3x3candy-cell:hover { background: #fff7ed; }
 
-.ng3-cell.on {
+.nonogram3x3candy-cell.on {
   background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
   border-color: #44403c;
   animation: ng3-fill 200ms ease-out;
@@ -72,7 +72,7 @@
   to   { transform: scale(1); }
 }
 
-.ng3-msg {
+.nonogram3x3candy-msg {
   font-size: 0.95rem;
   padding: 8px 16px;
   background: #fef3c7;
@@ -81,12 +81,12 @@
   color: #92400e;
 }
 
-.ng3-actions {
+.nonogram3x3candy-actions {
   display: flex;
   gap: 10px;
 }
 
-.ng3-btn {
+.nonogram3x3candy-btn {
   font-family: "Inter", system-ui, sans-serif;
   padding: 10px 22px;
   font-size: 0.95rem;
@@ -98,11 +98,11 @@
   transition: transform 0.12s;
 }
 
-.ng3-btn.primary { background: linear-gradient(180deg, #f97316 0%, #ea580c 100%); }
-.ng3-btn.secondary { background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%); }
-.ng3-btn:hover { transform: translateY(-1px); }
+.nonogram3x3candy-btn.primary { background: linear-gradient(180deg, #f97316 0%, #ea580c 100%); }
+.nonogram3x3candy-btn.secondary { background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%); }
+.nonogram3x3candy-btn:hover { transform: translateY(-1px); }
 
-.ng3-banner {
+.nonogram3x3candy-banner {
   text-align: center;
   padding: 28px 32px;
   background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%);
@@ -110,12 +110,70 @@
   border-radius: 16px;
 }
 
-.ng3-title { margin: 0 0 6px; font-size: 1.7rem; font-weight: 800; color: #064e3b; }
+.nonogram3x3candy-title { margin: 0 0 6px; font-size: 1.7rem; font-weight: 800; color: #064e3b; }
 
-.ng3-final {
+.nonogram3x3candy-final {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 1.7rem;
   font-weight: 800;
   color: #059669;
   margin: 8px 0 14px;
+}
+
+
+/* === Theme: candy (Candy pop — bubblegum pink) === */
+.nonogram3x3candy {
+  background: #fff0f5;
+  color: #3a1a3a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.nonogram3x3candy .nonogram3x3candy-mech,
+.nonogram3x3candy [class*="-mech"],
+.nonogram3x3candy [class*="-status"]:not(.solved):not(.win) {
+  color: #8a5a7a;
+}
+.nonogram3x3candy [class*="-score"],
+.nonogram3x3candy [class*="-final"] {
+  color: #ff6fa8;
+}
+.nonogram3x3candy [class*="-grid"] {
+  background: #c44a82;
+  border-color: #c44a82;
+}
+.nonogram3x3candy [class*="-cell"] {
+  background: #ffe0ec;
+  color: #3a1a3a;
+}
+.nonogram3x3candy [class*="-cell"].sel,
+.nonogram3x3candy [class*="-cell"].selected {
+  outline: 3px solid #ff9bc4;
+  outline-offset: -3px;
+}
+.nonogram3x3candy [class*="-cell"].err,
+.nonogram3x3candy [class*="-cell"].error,
+.nonogram3x3candy [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #e0405a;
+}
+.nonogram3x3candy [class*="-num"]:hover,
+.nonogram3x3candy [class*="-numpad"] button:hover {
+  background: #ff9bc4;
+  color: #fff0f5;
+  border-color: #ff6fa8;
+}
+.nonogram3x3candy [class*="-btn"].check,
+.nonogram3x3candy [class*="-controls"] button {
+  background: #ff6fa8;
+  color: #fff0f5;
+  border-color: #ff6fa8;
+}
+.nonogram3x3candy [class*="-btn"].next {
+  background: #ff9bc4;
+  color: #fff0f5;
+}
+.nonogram3x3candy [class*="-status"].solved,
+.nonogram3x3candy [class*="-status"].win {
+  color: #5fc488;
 }

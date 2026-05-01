@@ -47,20 +47,20 @@ export function Bananagrams({
   const secs = timeLeft % 60;
 
   return (
-    <div className="bg-wrap">
-      <div className="bg-header">
-        <span className="bg-score">Score: {score}</span>
-        <span className="bg-timer">{mins}:{secs.toString().padStart(2,"0")}</span>
-        <span className="bg-hand-count">Hand: {hand.length}</span>
+    <div className="bng-wrap">
+      <div className="bng-header">
+        <span className="bng-score">Score: {score}</span>
+        <span className="bng-timer">{mins}:{secs.toString().padStart(2,"0")}</span>
+        <span className="bng-hand-count">Hand: {hand.length}</span>
       </div>
 
-      <div className={`bg-message${validationResult === "valid" ? " bg-valid" : validationResult === "invalid" ? " bg-invalid" : ""}`}>
+      <div className={`bng-message${validationResult === "valid" ? " bng-valid" : validationResult === "invalid" ? " bng-invalid" : ""}`}>
         {message}
       </div>
 
       {/* Grid */}
-      <div className="bg-grid-scroll">
-        <div className="bg-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 32px)`, gridTemplateRows: `repeat(${GRID_SIZE}, 32px)` }}>
+      <div className="bng-grid-scroll">
+        <div className="bng-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 32px)`, gridTemplateRows: `repeat(${GRID_SIZE}, 32px)` }}>
           {Array.from({ length: GRID_SIZE }, (_, gi) => {
             const row = gi - GRID_OFFSET;
             return Array.from({ length: GRID_SIZE }, (_, ci) => {
@@ -69,7 +69,7 @@ export function Bananagrams({
               return (
                 <div
                   key={`${gi}-${ci}`}
-                  className={`bg-cell${cell ? " bg-cell-placed" : " bg-cell-empty"}${selectedHandTile !== null && !cell ? " bg-cell-target" : ""}`}
+                  className={`bng-cell${cell ? " bng-cell-placed" : " bng-cell-empty"}${selectedHandTile !== null && !cell ? " bng-cell-target" : ""}`}
                   onClick={() => handleGridClick(row, col)}
                 >
                   {cell?.letter ?? ""}
@@ -81,13 +81,13 @@ export function Bananagrams({
       </div>
 
       {/* Hand */}
-      <div className="bg-hand">
-        <div className="bg-hand-label">Your tiles:</div>
-        <div className="bg-hand-tiles">
+      <div className="bng-hand">
+        <div className="bng-hand-label">Your tiles:</div>
+        <div className="bng-hand-tiles">
           {hand.map(id => (
             <div
               key={id}
-              className={`bg-tile${selectedHandTile === id ? " bg-tile-selected" : ""}`}
+              className={`bng-tile${selectedHandTile === id ? " bng-tile-selected" : ""}`}
               onClick={() => dispatch({ type: "selectHandTile", tileId: id } as BananagramsAction)}
             >
               {tiles[id]}
@@ -96,13 +96,13 @@ export function Bananagrams({
         </div>
       </div>
 
-      <div className="bg-controls">
+      <div className="bng-controls">
         <button onClick={() => dispatch({ type: "validate" } as BananagramsAction)}>Validate</button>
       </div>
 
       {state.gameOver && (
-        <div className="bg-overlay">
-          <div className="bg-overlay-box">
+        <div className="bng-overlay">
+          <div className="bng-overlay-box">
             <h2>{state.hand.length === 0 ? "Done!" : "Time's Up!"}</h2>
             <div>Tiles placed: {placed.length}</div>
             <div>Score: {score}</div>

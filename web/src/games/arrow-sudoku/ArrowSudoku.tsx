@@ -36,15 +36,15 @@ export function ArrowSudoku({ state, dispatch, onGameOver }: GameProps<ArrowSudo
   }
 
   return (
-    <div className="arrow-sudoku">
-      <div className="arrow-sudoku-title">Arrow Sudoku</div>
-      <div className={`arrow-sudoku-status${won ? " win" : ""}`}>
+    <div className="arrowarchery-sudoku">
+      <div className="arrowarchery-sudoku-title">Arrow Sudoku</div>
+      <div className={`arrowarchery-sudoku-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
-          : `Moves: ${state.moves} — fill 1-6; circle digit = sum of arrow`}
+          : `Moves: ${state.moves} — fill 1-6; circle digit = sum of arrowarchery`}
       </div>
 
-      <div className="arrow-sudoku-grid">
+      <div className="arrowarchery-sudoku-grid">
         {Array.from({ length: N * N }, (_, idx) => {
           const given = puzzle.givens[idx] !== 0;
           const isHead = headSet.has(idx);
@@ -57,8 +57,8 @@ export function ArrowSudoku({ state, dispatch, onGameOver }: GameProps<ArrowSudo
             "as-cell",
             given ? "given" : "",
             isSelected ? "selected" : "",
-            isHead && !given ? "arrow-head" : "",
-            isShaft && !given && !isHead ? "arrow-shaft" : "",
+            isHead && !given ? "arrowarchery-head" : "",
+            isShaft && !given && !isHead ? "arrowarchery-shaft" : "",
             isConflict ? "conflict" : "",
             won ? "won-cell" : "",
           ].filter(Boolean).join(" ");
@@ -75,7 +75,7 @@ export function ArrowSudoku({ state, dispatch, onGameOver }: GameProps<ArrowSudo
         })}
       </div>
 
-      <div className="arrow-sudoku-numpad">
+      <div className="arrowarchery-sudoku-numpad">
         {[1, 2, 3, 4, 5, 6].map(d => (
           <button
             key={d}
@@ -87,7 +87,7 @@ export function ArrowSudoku({ state, dispatch, onGameOver }: GameProps<ArrowSudo
         <button onClick={() => dispatch({ type: "clearCell" } satisfies ArrowSudokuAction)}>X</button>
       </div>
 
-      <div className="arrow-sudoku-btns">
+      <div className="arrowarchery-sudoku-btns">
         <button onClick={() => dispatch({ type: "reset" } satisfies ArrowSudokuAction)}>Reset</button>
       </div>
     </div>

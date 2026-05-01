@@ -21,11 +21,11 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
 
   if (state.phase === "done") {
     return (
-      <div className="xsudokumini-wrap">
-        <div className="xsudokumini-done">
+      <div className="xsudokucrimson-wrap">
+        <div className="xsudokucrimson-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="xsudokumini-final">{state.score} pts</p>
+          <p className="xsudokucrimson-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="xsudokumini-wrap">
-      <div className="xsudokumini-header">
+    <div className="xsudokucrimson-wrap">
+      <div className="xsudokucrimson-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="xsudokumini-score">{state.score} pts</span>
+        <span className="xsudokucrimson-score">{state.score} pts</span>
       </div>
-      <div className="xsudokumini-mech">Sudoku with both diagonals also containing 1–9.</div>
-      <div className="xsudokumini-grid">
+      <div className="xsudokucrimson-mech">Sudoku with both diagonals also containing 1–9.</div>
+      <div className="xsudokucrimson-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="xsudokumini-row">
+          <div key={r} className="xsudokucrimson-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
               return (
                 <button
                   key={c}
-                  className={`xsudokumini-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`xsudokucrimson-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as XSudokuMiniAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
           </div>
         ))}
       </div>
-      <div className="xsudokumini-pad">
+      <div className="xsudokucrimson-pad">
         {digits.map((d) => (
-          <button key={d} className="xsudokumini-num" onClick={() => dispatch({ type: "enter", digit: d } as XSudokuMiniAction)}>{d}</button>
+          <button key={d} className="xsudokucrimson-num" onClick={() => dispatch({ type: "enter", digit: d } as XSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="xsudokumini-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as XSudokuMiniAction)}>×</button>
+        <button className="xsudokucrimson-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as XSudokuMiniAction)}>×</button>
       </div>
-      <div className="xsudokumini-actions">
-        <button className="xsudokumini-btn check" onClick={() => dispatch({ type: "check" } as XSudokuMiniAction)}>Check</button>
-        <button className="xsudokumini-btn hint" onClick={() => dispatch({ type: "hint" } as XSudokuMiniAction)}>Hint</button>
-        <button className="xsudokumini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as XSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="xsudokucrimson-actions">
+        <button className="xsudokucrimson-btn check" onClick={() => dispatch({ type: "check" } as XSudokuMiniAction)}>Check</button>
+        <button className="xsudokucrimson-btn hint" onClick={() => dispatch({ type: "hint" } as XSudokuMiniAction)}>Hint</button>
+        <button className="xsudokucrimson-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as XSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="xsudokumini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="xsudokucrimson-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

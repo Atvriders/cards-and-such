@@ -11,7 +11,7 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
 
   if (state.phase === "done") {
     return (
-      <div className="farkle-wrap">
+      <div className="farkle-wrap farkle-theme">
         <div className="farkle-done">
           <h2>Game Over</h2>
           <div className="farkle-final">{state.totalScore}</div>
@@ -27,7 +27,7 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
   const canRoll = state.phase === "decide" && state.pendingScore > 0;
 
   return (
-    <div className="farkle-wrap">
+    <div className="farkle-wrap farkle-theme">
       <header className="farkle-header">
         <div className="farkle-round">Round {state.round} / {TOTAL_ROUNDS}</div>
         <div className="farkle-totals">

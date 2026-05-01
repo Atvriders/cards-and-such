@@ -1,27 +1,85 @@
-.littlekillersudoku-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.littlekillersudoku-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.littlekillersudoku-score { font-weight:700;color:hsl(280, 60%, 40%); }
-.littlekillersudoku-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.littlekillersudoku-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.littlekillersudoku-row { display:flex;gap:1px; }
-.littlekillersudoku-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.littlekillersudoku-cell.given { background:#ecf0f1;color:#2c3e50; }
-.littlekillersudoku-cell.sel { background:hsl(280, 65%, 55%);color:#fff; }
-.littlekillersudoku-cell.err { background:#fdedec;color:#e74c3c; }
-.littlekillersudoku-cell.rt { margin-right:3px; }
-.littlekillersudoku-cell.bt { margin-bottom:3px; }
-.littlekillersudoku-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.littlekillersudoku-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.littlekillersudoku-num:hover { background:hsl(280, 70%, 92%);border-color:hsl(280, 60%, 55%); }
-.littlekillersudoku-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.littlekillersudoku-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.littlekillersudoku-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.littlekillersudoku-btn.check { background:#3498db; }
-.littlekillersudoku-btn.hint { background:#f39c12; }
-.littlekillersudoku-btn.next { background:hsl(280, 60%, 45%); }
-.littlekillersudoku-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.littlekillersudoku-status { font-weight:700;font-size:1rem; }
-.littlekillersudoku-status.solved { color:#27ae60; }
-.littlekillersudoku-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.littlekillersudoku-done h2 { margin-bottom:6px;color:#2c3e50; }
-.littlekillersudoku-final { font-size:1.6rem;font-weight:900;color:hsl(280, 60%, 40%); }
+.littlekillerforensic-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.littlekillerforensic-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.littlekillerforensic-score { font-weight:700;color:hsl(280, 60%, 40%); }
+.littlekillerforensic-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.littlekillerforensic-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.littlekillerforensic-row { display:flex;gap:1px; }
+.littlekillerforensic-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.littlekillerforensic-cell.given { background:#ecf0f1;color:#2c3e50; }
+.littlekillerforensic-cell.sel { background:hsl(280, 65%, 55%);color:#fff; }
+.littlekillerforensic-cell.err { background:#fdedec;color:#e74c3c; }
+.littlekillerforensic-cell.rt { margin-right:3px; }
+.littlekillerforensic-cell.bt { margin-bottom:3px; }
+.littlekillerforensic-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.littlekillerforensic-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.littlekillerforensic-num:hover { background:hsl(280, 70%, 92%);border-color:hsl(280, 60%, 55%); }
+.littlekillerforensic-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.littlekillerforensic-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.littlekillerforensic-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.littlekillerforensic-btn.check { background:#3498db; }
+.littlekillerforensic-btn.hint { background:#f39c12; }
+.littlekillerforensic-btn.next { background:hsl(280, 60%, 45%); }
+.littlekillerforensic-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.littlekillerforensic-status { font-weight:700;font-size:1rem; }
+.littlekillerforensic-status.solved { color:#27ae60; }
+.littlekillerforensic-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.littlekillerforensic-done h2 { margin-bottom:6px;color:#2c3e50; }
+.littlekillerforensic-final { font-size:1.6rem;font-weight:900;color:hsl(280, 60%, 40%); }
+
+
+/* === Theme: forensic (Forensic file — dossier yellow) === */
+.littlekillerforensic {
+  background: #252525;
+  color: #e8d870;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.littlekillerforensic .littlekillerforensic-mech,
+.littlekillerforensic [class*="-mech"],
+.littlekillerforensic [class*="-status"]:not(.solved):not(.win) {
+  color: #a8a070;
+}
+.littlekillerforensic [class*="-score"],
+.littlekillerforensic [class*="-final"] {
+  color: #e8d870;
+}
+.littlekillerforensic [class*="-grid"] {
+  background: #e8d870;
+  border-color: #e8d870;
+}
+.littlekillerforensic [class*="-cell"] {
+  background: #3a3a3a;
+  color: #e8d870;
+}
+.littlekillerforensic [class*="-cell"].sel,
+.littlekillerforensic [class*="-cell"].selected {
+  outline: 3px solid #ff7a4a;
+  outline-offset: -3px;
+}
+.littlekillerforensic [class*="-cell"].err,
+.littlekillerforensic [class*="-cell"].error,
+.littlekillerforensic [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #ff7a4a;
+}
+.littlekillerforensic [class*="-num"]:hover,
+.littlekillerforensic [class*="-numpad"] button:hover {
+  background: #ff7a4a;
+  color: #252525;
+  border-color: #e8d870;
+}
+.littlekillerforensic [class*="-btn"].check,
+.littlekillerforensic [class*="-controls"] button {
+  background: #e8d870;
+  color: #252525;
+  border-color: #e8d870;
+}
+.littlekillerforensic [class*="-btn"].next {
+  background: #ff7a4a;
+  color: #252525;
+}
+.littlekillerforensic [class*="-status"].solved,
+.littlekillerforensic [class*="-status"].win {
+  color: #7adba0;
+}

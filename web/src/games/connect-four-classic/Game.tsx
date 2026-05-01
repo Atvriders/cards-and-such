@@ -41,31 +41,31 @@ export function ConnectGame({
   const last = state.lastDrop;
 
   return (
-    <div className="connect4-classic connect4-wrap">
-      <div className="connect4-status">
-        <span className="connect4-pill" data-mode="classic">Classic · {COLS}×{ROWS}</span>
-        <span className="connect4-turn" data-state={state.phase === "done" ? state.result ?? "" : state.turn}>
+    <div className="c4cl-classic c4cl-wrap">
+      <div className="c4cl-status">
+        <span className="c4cl-pill" data-mode="classic">Classic · {COLS}×{ROWS}</span>
+        <span className="c4cl-turn" data-state={state.phase === "done" ? state.result ?? "" : state.turn}>
           {playerLabel}
         </span>
-        <span className="connect4-score">{state.score} pts</span>
+        <span className="c4cl-score">{state.score} pts</span>
       </div>
 
-      <div className="connect4-board-shell">
-        <div className="connect4-arrow-row" style={{ gridTemplateColumns: `repeat(${COLS},1fr)` }}>
+      <div className="c4cl-board-shell">
+        <div className="c4cl-arrow-row" style={{ gridTemplateColumns: `repeat(${COLS},1fr)` }}>
           {Array.from({ length: COLS }).map((_, c) => (
             <button
               key={`arrow-${c}`}
-              className="connect4-arrow"
+              className="c4cl-arrow"
               onClick={() => drop(c)}
               disabled={state.phase !== "playing" || state.turn !== "P" || fullCols[c]}
               aria-label={`Drop in column ${c + 1}`}
             >
-              <span className="connect4-arrow-glyph">{state.turn === "P" && !fullCols[c] ? "▼" : ""}</span>
+              <span className="c4cl-arrow-glyph">{state.turn === "P" && !fullCols[c] ? "▼" : ""}</span>
             </button>
           ))}
         </div>
         <div
-          className="connect4-board"
+          className="c4cl-board"
           style={{ gridTemplateColumns: `repeat(${COLS},1fr)`, gridTemplateRows: `repeat(${ROWS},1fr)` }}
         >
           {Array.from({ length: ROWS }).map((_, r) =>
@@ -76,11 +76,11 @@ export function ConnectGame({
               const isLastDrop = last && last.row === r && last.col === c;
               const dropDist = isLastDrop ? r + 1 : 0;
               return (
-                <div key={idx} className="connect4-slot" onClick={() => drop(c)}>
-                  <div className="connect4-slot-inner">
+                <div key={idx} className="c4cl-slot" onClick={() => drop(c)}>
+                  <div className="c4cl-slot-inner">
                     {v && (
                       <div
-                        className={`connect4-disc connect4-disc-${v === "P" ? "red" : "yellow"}${isWin ? " connect4-disc-win" : ""}${isLastDrop ? " connect4-disc-drop" : ""}`}
+                        className={`c4cl-disc c4cl-disc-${v === "P" ? "red" : "yellow"}${isWin ? " c4cl-disc-win" : ""}${isLastDrop ? " c4cl-disc-drop" : ""}`}
                         style={isLastDrop ? ({ "--drop-from": `-${dropDist * 100}%` } as React.CSSProperties) : undefined}
                       />
                     )}
@@ -92,13 +92,13 @@ export function ConnectGame({
         </div>
       </div>
 
-      <div className="connect4-controls">
-        <button className="connect4-btn" onClick={reset}>
+      <div className="c4cl-controls">
+        <button className="c4cl-btn" onClick={reset}>
           {state.phase === "done" ? "New Game" : "Restart"}
         </button>
-        <div className="connect4-legend">
-          <span className="connect4-legend-item"><span className="connect4-dot connect4-dot-red" />You</span>
-          <span className="connect4-legend-item"><span className="connect4-dot connect4-dot-yellow" />CPU</span>
+        <div className="c4cl-legend">
+          <span className="c4cl-legend-item"><span className="c4cl-dot c4cl-dot-red" />You</span>
+          <span className="c4cl-legend-item"><span className="c4cl-dot c4cl-dot-yellow" />CPU</span>
         </div>
       </div>
     </div>

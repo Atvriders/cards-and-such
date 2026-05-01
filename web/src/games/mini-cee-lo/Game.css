@@ -233,3 +233,37 @@
   .ceelo-arena { grid-template-columns: 1fr; }
   .ceelo-vs-banner { padding: 6px; }
 }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: ceelo (unique class prefix + themed palette tokens) */
+.ceelo-theme {
+  --ceelo-bg: linear-gradient(180deg,#1c1917 0%,#292524 55%,#44403c 100%);
+  --ceelo-felt: #1c1917;
+  --ceelo-accent: #fbbf24;
+  --ceelo-text: #fafaf9;
+}
+.ceelo-theme.ceelo-wrap,
+.ceelo-theme .ceelo-wrap,
+.ceelo-wrap.ceelo-theme {
+  background: var(--ceelo-bg);
+  color: var(--ceelo-text);
+}
+.ceelo-theme .ceelo-die,
+.ceelo-theme .ceelo-card {
+  border-color: var(--ceelo-accent);
+}
+.ceelo-theme .ceelo-btn,
+.ceelo-theme .ceelo-roll-btn {
+  background: var(--ceelo-accent);
+  color: var(--ceelo-felt);
+  border-color: var(--ceelo-accent);
+}
+.ceelo-theme .ceelo-info,
+.ceelo-theme .ceelo-score,
+.ceelo-theme .ceelo-final,
+.ceelo-theme .ceelo-result,
+.ceelo-theme .ceelo-header,
+.ceelo-theme .ceelo-message {
+  color: var(--ceelo-text);
+}
+

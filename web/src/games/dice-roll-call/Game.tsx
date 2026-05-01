@@ -8,27 +8,27 @@ export function DiceRollCallGame({ state, dispatch, onGameOver }: GameProps<Dice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="drc-wrap"><div className="drc-done"><h2>Done!</h2><div className="drc-final">{t?.score} pts</div></div></div>;
+    return <div className="drlc-wrap drlc-theme"><div className="drlc-done"><h2>Done!</h2><div className="drlc-final">{t?.score} pts</div></div></div>;
   }
   return (
-    <div className="drc-wrap">
-      <div className="drc-header">Round {state.round}/{TOTAL_ROUNDS} <span className="drc-score">{state.score}</span></div>
+    <div className="drlc-wrap drlc-theme">
+      <div className="drlc-header">Round {state.round}/{TOTAL_ROUNDS} <span className="drlc-score">{state.score}</span></div>
       {state.phase === "call" ? (
         <>
-          <div className="drc-prompt">Call your roll!</div>
-          <div className="drc-keys">
+          <div className="drlc-prompt">Call your roll!</div>
+          <div className="drlc-keys">
             {[1,2,3,4,5,6].map(v => (
-              <button key={v} className="drc-key" onClick={() => dispatch({ type:"call", value:v } as DiceRollCallAction)}>{PIPS[v - 1]}</button>
+              <button key={v} className="drlc-key" onClick={() => dispatch({ type:"call", value:v } as DiceRollCallAction)}>{PIPS[v - 1]}</button>
             ))}
           </div>
         </>
       ) : (
         <>
-          <div className="drc-result">
+          <div className="drlc-result">
             <span>You called {PIPS[(state.call ?? 1) - 1]}</span>
             <span>Rolled: {PIPS[(state.die ?? 1) - 1]}</span>
           </div>
-          <button className="drc-btn next" onClick={() => dispatch({ type:"next" } as DiceRollCallAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="drlc-btn next" onClick={() => dispatch({ type:"next" } as DiceRollCallAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

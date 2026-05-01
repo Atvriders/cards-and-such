@@ -30,16 +30,16 @@ export function Slitherlink({
   }
 
   const edgeClass = (active: boolean) =>
-    `slither-edge${active ? (won ? " win-active" : " active") : ""}`;
+    `slitherinksketch-edge${active ? (won ? " win-active" : " active") : ""}`;
 
   return (
-    <div className="slither">
-      <div className="slither-title">Slitherlink</div>
-      <div className={`slither-status${won ? " win" : ""}`}>
+    <div className="slitherinksketch">
+      <div className="slitherinksketch-title">Slitherlink</div>
+      <div className={`slitherinksketch-status${won ? " win" : ""}`}>
         {won ? `Solved! Score: ${terminal?.score ?? 0}` : `Moves: ${state.moves} — click edges to draw the loop`}
       </div>
-      <div className="slither-grid-wrap">
-        <svg className="slither-svg" width={svgW} height={svgH} viewBox={`0 0 ${svgW} ${svgH}`}>
+      <div className="slitherinksketch-grid-wrap">
+        <svg className="slitherinksketch-svg" width={svgW} height={svgH} viewBox={`0 0 ${svgW} ${svgH}`}>
           {/* Horizontal edges */}
           {Array.from({ length: rows + 1 }, (_, r) =>
             Array.from({ length: cols }, (_, c) => {
@@ -85,7 +85,7 @@ export function Slitherlink({
                   key={`clue${r}-${c}`}
                   x={x + CELL / 2}
                   y={y + CELL / 2}
-                  className="slither-clue"
+                  className="slitherinksketch-clue"
                 >
                   {clue}
                 </text>
@@ -96,12 +96,12 @@ export function Slitherlink({
           {Array.from({ length: rows + 1 }, (_, r) =>
             Array.from({ length: cols + 1 }, (_, c) => {
               const { x, y } = dot(r, c);
-              return <circle key={`dot${r}-${c}`} cx={x} cy={y} r={DOT_R} className="slither-dot" />;
+              return <circle key={`dot${r}-${c}`} cx={x} cy={y} r={DOT_R} className="slitherinksketch-dot" />;
             })
           )}
         </svg>
       </div>
-      <div className="slither-hint">Click any edge segment between dots to toggle it on/off.</div>
+      <div className="slitherinksketch-hint">Click any edge segment between dots to toggle it on/off.</div>
     </div>
   );
 }

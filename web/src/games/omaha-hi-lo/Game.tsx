@@ -26,6 +26,7 @@ export function OmahaHiLoGame({ state, dispatch, onGameOver }: GameProps<OmahaHi
     : undefined;
 
   return (
+    <div className="thmOmaHiLo">
     <PokerTable
       prefix="omaha-hilo-"
       state={state}
@@ -39,5 +40,6 @@ export function OmahaHiLoGame({ state, dispatch, onGameOver }: GameProps<OmahaHi
       onCall={() => dis({ type: "call" })}
       onRaise={(amount) => dis({ type: "raise", amount })}
     />
+  </div>
   );
 }

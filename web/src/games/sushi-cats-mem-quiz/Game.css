@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === sushictq-themewrap themed palette (sushi_cats) === */
+.sushictq-themewrap.trivia-wrap,
+.sushictq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #fef2f2;
+  color: #881337;
+  border-color: #fb923c55;
+}
+.sushictq-themewrap .trivia-progress,
+.sushictq-themewrap .trivia-score { color: #e11d48; }
+.sushictq-themewrap .trivia-timer { color: #fb923c; }
+.sushictq-themewrap .trivia-timer.urgent { color: #fca5a5; }
+.sushictq-themewrap .trivia-question { color: #881337; }
+.sushictq-themewrap .trivia-choice {
+  background: #fff1f2;
+  color: #881337;
+  border: 1.5px solid #fb923c;
+}
+.sushictq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #e11d48;
+  background: #fb923c22;
+}
+.sushictq-themewrap .trivia-choice.selected {
+  border-color: #e11d48;
+  background: #fb923c33;
+}
+.sushictq-themewrap .trivia-choice.correct {
+  background: #86efac;
+  border-color: #86efac;
+  color: #881337;
+}
+.sushictq-themewrap .trivia-choice.wrong {
+  background: #fca5a5;
+  border-color: #fca5a5;
+  color: #881337;
+}
+.sushictq-themewrap .trivia-choice-letter {
+  background: #e11d48;
+  color: #fff;
+}
+.sushictq-themewrap .trivia-feedback.correct { background: #86efac; color: #881337; }
+.sushictq-themewrap .trivia-feedback.wrong { background: #fca5a5; color: #881337; }
+.sushictq-themewrap .trivia-btn.submit { background: #e11d48; }
+.sushictq-themewrap .trivia-btn.next { background: #fb923c; }
+.sushictq-themewrap .trivia-done { background: #fff1f2; color: #881337; }
+.sushictq-themewrap .trivia-done h2 { color: #e11d48; }

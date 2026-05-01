@@ -1,4 +1,4 @@
-.nurikabe {
+.nurikabeisland {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,20 +6,20 @@
   padding: 16px;
   font-family: monospace;
 }
-.nurikabe-title { font-size: 1.4rem; font-weight: 700; }
-.nurikabe-status {
+.nurikabeisland-title { font-size: 1.4rem; font-weight: 700; }
+.nurikabeisland-status {
   font-size: 0.95rem;
   padding: 6px 14px;
   border-radius: 6px;
   background: #e8f0fe;
 }
-.nurikabe-status.win { background: #d4edda; color: #155724; }
-.nurikabe-grid {
+.nurikabeisland-status.win { background: #d4edda; color: #155724; }
+.nurikabeisland-grid {
   display: grid;
   border: 2px solid #333;
   gap: 0;
 }
-.nurikabe-cell {
+.nurikabeisland-cell {
   width: 44px;
   height: 44px;
   display: flex;
@@ -33,14 +33,72 @@
   transition: background 0.1s;
   box-sizing: border-box;
 }
-.nurikabe-cell.unknown { background: #f8f9fa; }
-.nurikabe-cell.shaded { background: #222; color: #fff; }
-.nurikabe-cell.unshaded { background: #fff; }
-.nurikabe-cell.clue { background: #fffde7; }
-.nurikabe-cell.clue.shaded { background: #222; color: #fff; }
-.nurikabe-hint {
+.nurikabeisland-cell.unknown { background: #f8f9fa; }
+.nurikabeisland-cell.shaded { background: #222; color: #fff; }
+.nurikabeisland-cell.unshaded { background: #fff; }
+.nurikabeisland-cell.clue { background: #fffde7; }
+.nurikabeisland-cell.clue.shaded { background: #222; color: #fff; }
+.nurikabeisland-hint {
   font-size: 0.82rem;
   color: #666;
   text-align: center;
   max-width: 340px;
+}
+
+
+/* === Theme: islands (Islands & sea — sand on water) === */
+.nurikabeisland {
+  background: #e6f2f8;
+  color: #0d2c3f;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.nurikabeisland .nurikabeisland-mech,
+.nurikabeisland [class*="-mech"],
+.nurikabeisland [class*="-status"]:not(.solved):not(.win) {
+  color: #4a6a82;
+}
+.nurikabeisland [class*="-score"],
+.nurikabeisland [class*="-final"] {
+  color: #1e6091;
+}
+.nurikabeisland [class*="-grid"] {
+  background: #0d3a5a;
+  border-color: #0d3a5a;
+}
+.nurikabeisland [class*="-cell"] {
+  background: #fff8e1;
+  color: #0d2c3f;
+}
+.nurikabeisland [class*="-cell"].sel,
+.nurikabeisland [class*="-cell"].selected {
+  outline: 3px solid #3a8dbe;
+  outline-offset: -3px;
+}
+.nurikabeisland [class*="-cell"].err,
+.nurikabeisland [class*="-cell"].error,
+.nurikabeisland [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #cc4a3a;
+}
+.nurikabeisland [class*="-num"]:hover,
+.nurikabeisland [class*="-numpad"] button:hover {
+  background: #3a8dbe;
+  color: #e6f2f8;
+  border-color: #1e6091;
+}
+.nurikabeisland [class*="-btn"].check,
+.nurikabeisland [class*="-controls"] button {
+  background: #1e6091;
+  color: #e6f2f8;
+  border-color: #1e6091;
+}
+.nurikabeisland [class*="-btn"].next {
+  background: #3a8dbe;
+  color: #e6f2f8;
+}
+.nurikabeisland [class*="-status"].solved,
+.nurikabeisland [class*="-status"].win {
+  color: #2c8c50;
 }

@@ -21,11 +21,11 @@ export function RenbanSudokuGame({ state, dispatch, onGameOver }: GameProps<Renb
 
   if (state.phase === "done") {
     return (
-      <div className="renbansudoku-wrap">
-        <div className="renbansudoku-done">
+      <div className="renbanribbon-wrap">
+        <div className="renbanribbon-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="renbansudoku-final">{state.score} pts</p>
+          <p className="renbanribbon-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function RenbanSudokuGame({ state, dispatch, onGameOver }: GameProps<Renb
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="renbansudoku-wrap">
-      <div className="renbansudoku-header">
+    <div className="renbanribbon-wrap">
+      <div className="renbanribbon-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="renbansudoku-score">{state.score} pts</span>
+        <span className="renbanribbon-score">{state.score} pts</span>
       </div>
-      <div className="renbansudoku-mech">Sudoku with renban lines (consecutive set, any order).</div>
-      <div className="renbansudoku-grid">
+      <div className="renbanribbon-mech">Sudoku with renban lines (consecutive set, any order).</div>
+      <div className="renbanribbon-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="renbansudoku-row">
+          <div key={r} className="renbanribbon-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function RenbanSudokuGame({ state, dispatch, onGameOver }: GameProps<Renb
               return (
                 <button
                   key={c}
-                  className={`renbansudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`renbanribbon-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as RenbanSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function RenbanSudokuGame({ state, dispatch, onGameOver }: GameProps<Renb
           </div>
         ))}
       </div>
-      <div className="renbansudoku-pad">
+      <div className="renbanribbon-pad">
         {digits.map((d) => (
-          <button key={d} className="renbansudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as RenbanSudokuAction)}>{d}</button>
+          <button key={d} className="renbanribbon-num" onClick={() => dispatch({ type: "enter", digit: d } as RenbanSudokuAction)}>{d}</button>
         ))}
-        <button className="renbansudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as RenbanSudokuAction)}>×</button>
+        <button className="renbanribbon-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as RenbanSudokuAction)}>×</button>
       </div>
-      <div className="renbansudoku-actions">
-        <button className="renbansudoku-btn check" onClick={() => dispatch({ type: "check" } as RenbanSudokuAction)}>Check</button>
-        <button className="renbansudoku-btn hint" onClick={() => dispatch({ type: "hint" } as RenbanSudokuAction)}>Hint</button>
-        <button className="renbansudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as RenbanSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="renbanribbon-actions">
+        <button className="renbanribbon-btn check" onClick={() => dispatch({ type: "check" } as RenbanSudokuAction)}>Check</button>
+        <button className="renbanribbon-btn hint" onClick={() => dispatch({ type: "hint" } as RenbanSudokuAction)}>Hint</button>
+        <button className="renbanribbon-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as RenbanSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="renbansudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="renbanribbon-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

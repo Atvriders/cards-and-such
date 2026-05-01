@@ -5,16 +5,16 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function BiribaRGame({ state, dispatch, onGameOver }: GameProps<BiribaRState, BiribaRSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="birr-wrap"><div className="birr-done"><h2>Done!</h2><div className="birr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="dm-btn" onClick={() => dispatch({ type: "score" } as BiribaRAction)}>Auto-score</button>}
+    <div className="birr-wrap">
+      <div className="birr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="birr-score">{state.score} pts</div>
+      <div className="birr-row">{state.hand.map((c, i) => <div key={i} className={`birr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <button className="birr-btn" onClick={() => dispatch({ type: "score" } as BiribaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as BiribaRAction)}>Next</button>
+        <div className="birr-result">{state.result} — +{state.pts}</div>
+        <button className="birr-btn alt" onClick={() => dispatch({ type: "next" } as BiribaRAction)}>Next</button>
       </>}
     </div>
   );

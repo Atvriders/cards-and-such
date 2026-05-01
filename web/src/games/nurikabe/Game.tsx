@@ -19,22 +19,22 @@ export function Nurikabe({
   const { rows, cols } = puzzle;
 
   return (
-    <div className="nurikabe">
-      <div className="nurikabe-title">Nurikabe</div>
-      <div className={`nurikabe-status${won ? " win" : ""}`}>
+    <div className="nurikabeisland">
+      <div className="nurikabeisland-title">Nurikabe</div>
+      <div className={`nurikabeisland-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
           : `Moves: ${state.moves} — shade the sea cells`}
       </div>
       <div
-        className="nurikabe-grid"
+        className="nurikabeisland-grid"
         style={{ gridTemplateColumns: `repeat(${cols}, 44px)` }}
       >
         {cells.map((cell, i) => {
           const clue = puzzle.clues[i] ?? 0;
           const hasClue = clue > 0;
           const classes = [
-            "nurikabe-cell",
+            "nurikabeisland-cell",
             cell,
             hasClue ? "clue" : "",
           ]
@@ -52,7 +52,7 @@ export function Nurikabe({
           );
         })}
       </div>
-      <div className="nurikabe-hint">
+      <div className="nurikabeisland-hint">
         Click cells to cycle: unknown → shaded (sea) → unshaded (island). Numbered cells are island roots.
       </div>
     </div>

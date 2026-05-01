@@ -10,11 +10,11 @@ export function SpotItSplashGame({ state, dispatch, onGameOver }: GameProps<Spot
 
   if (state.phase === "done") {
     return (
-      <div className="spitsp-wrap">
-        <div className="spitsp-done">
+      <div className="spotspl-wrap">
+        <div className="spotspl-done">
           <h2>Spotted</h2>
-          <div className="spitsp-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
-          <div className="spitsp-final">{state.score} pts</div>
+          <div className="spotspl-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
+          <div className="spotspl-final">{state.score} pts</div>
         </div>
       </div>
     );
@@ -31,34 +31,34 @@ export function SpotItSplashGame({ state, dispatch, onGameOver }: GameProps<Spot
   const isCorrect = state.selected === r.shared;
 
   return (
-    <div className="spitsp-wrap">
-      <div className="spitsp-header">
-        <span className="spitsp-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="spitsp-score">{state.score} pts</span>
+    <div className="spotspl-wrap">
+      <div className="spotspl-header">
+        <span className="spotspl-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
+        <span className="spotspl-score">{state.score} pts</span>
       </div>
-      <div className="spitsp-prompt">Find the symbol on BOTH cards. Click it.</div>
-      <div className="spitsp-cards">
-        <div className="spitsp-card">
+      <div className="spotspl-prompt">Find the symbol on BOTH cards. Click it.</div>
+      <div className="spotspl-cards">
+        <div className="spotspl-card">
           {r.cardA.symbols.map((s, i) => (
-            <button key={"a"+i} className={`spitsp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"a"+i} className={`spotspl-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
-        <div className="spitsp-vs">vs</div>
-        <div className="spitsp-card">
+        <div className="spotspl-vs">vs</div>
+        <div className="spotspl-card">
           {r.cardB.symbols.map((s, i) => (
-            <button key={"b"+i} className={`spitsp-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
+            <button key={"b"+i} className={`spotspl-symbol${state.submitted && s === r.shared ? " hit" : ""}${state.submitted && state.selected === s && s !== r.shared ? " miss" : ""}`} disabled={state.submitted} onClick={() => onPick(s)}>{s}</button>
           ))}
         </div>
       </div>
       {state.submitted && (
         <>
-          <div className={`spitsp-feedback ${isCorrect ? "ok" : "no"}`}>
+          <div className={`spotspl-feedback ${isCorrect ? "ok" : "no"}`}>
             {isCorrect ? `Match in ${(state.lastMs / 1000).toFixed(1)}s` : `Miss · the match was ${r.shared}`}
           </div>
-          <button className="spitsp-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
+          <button className="spotspl-btn next" onClick={onNext}>{state.currentIndex + 1 >= state.rounds.length ? "Finish" : "Next"}</button>
         </>
       )}
-      {!state.submitted && <div className="spitsp-timer">Speed counts · click fast for bonus points</div>}
+      {!state.submitted && <div className="spotspl-timer">Speed counts · click fast for bonus points</div>}
     </div>
   );
 }

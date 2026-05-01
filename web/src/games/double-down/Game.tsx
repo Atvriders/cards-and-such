@@ -8,10 +8,10 @@ export function DoubleDownGame({ state, dispatch, onGameOver }: GameProps<Double
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{Math.max(0, state.score)} pts</div></div></div>;
+    return <div className="dm-wrap double-down-theme"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{Math.max(0, state.score)} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap double-down-theme">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.dice && (

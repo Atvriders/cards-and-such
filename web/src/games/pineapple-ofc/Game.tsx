@@ -54,7 +54,7 @@ export function PineappleOfcGame({ state, dispatch, onGameOver }: GameProps<Pine
   const canBot = state.player.bottom.length < 5;
 
   return (
-    <div className={cls("felt")}>
+    <div className={`${cls("felt")} thmPineapOFC`}>
       <div className={cls("hud")}>
         <span className={cls("stat")}>Round {Math.max(state.round, 1)}/{state.totalRounds}</span>
         <span className={cls("stat")}>Score: {state.score >= 0 ? "+" : ""}{state.score}</span>

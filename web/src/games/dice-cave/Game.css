@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-cave (unique class prefix + themed palette over shared dm-* engine) */
+.dice-cave-theme.dm-wrap {
+  background: radial-gradient(ellipse at 50% 30%,#1e1b4b 0%,#0c0a09 60%,#000 100%);
+}
+.dice-cave-theme .dm-info,
+.dice-cave-theme .dm-header {
+  color: #fef3c7;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-cave-theme .dm-target { color: #fef3c7; opacity: 0.85; }
+.dice-cave-theme .dm-score {
+  background: linear-gradient(180deg, #fde68a, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(251,191,36,0.45);
+}
+.dice-cave-theme .dm-die {
+  background: linear-gradient(145deg,#fef3c7,#fde68a);
+  color: #451a03;
+}
+.dice-cave-theme .dm-card {
+  background: linear-gradient(145deg,#fef3c7,#fde68a);
+  color: #451a03;
+}
+.dice-cave-theme .dm-btn {
+  background: linear-gradient(180deg, #a16207 0%, #78350f 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(120,53,15,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-cave-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #fbbf24 0%, #fde68a 100%);
+  color: #1f2937;
+}
+.dice-cave-theme .dm-bet-btn {
+  color: #fef3c7;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-cave-theme .dm-result {
+  color: #fef3c7;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-cave-theme .dm-feedback {
+  color: #fde68a;
+  text-shadow: 0 0 12px rgba(251,191,36,0.6);
+}
+.dice-cave-theme .dm-final {
+  background: linear-gradient(180deg, #fef3c7, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-cave-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #a16207, #78350f);
+  border-color: #fde68a;
+}
+.dice-cave-theme .dm-die.selected,
+.dice-cave-theme .dm-die.hl {
+  border-color: #fbbf24;
+  box-shadow:
+    0 0 0 2px #fbbf24,
+    0 0 22px rgba(251,191,36,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

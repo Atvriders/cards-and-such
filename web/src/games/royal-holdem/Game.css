@@ -1,2 +1,47 @@
 /* Modern poker-table engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+
+/* === poker-theme:holdem-royal === unique-class .thmRoyalHld === */
+.thmRoyalHld,
+.thmRoyalHld.dm-wrap,
+.thmRoyalHld.holdem-wrap,
+.thmRoyalHld.g-wrap,
+.thmRoyalHld .dm-wrap,
+.thmRoyalHld .holdem-wrap,
+.thmRoyalHld .holdem-table,
+.thmRoyalHld .g-wrap,
+.thmRoyalHld .royal-holdem-felt,
+.thmRoyalHld [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 35%, #5b1830 0%, #2c0a18 65%, #0e0308 100%) !important;
+  color: #fff6e2 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.65),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.65) !important;
+  --theme-accent: #f3c870;
+  --theme-accent2: #ffe6a8;
+  --theme-ink: #fff6e2;
+  --theme-rim: #1a0808;
+}
+.thmRoyalHld .dm-score,
+.thmRoyalHld .holdem-pot-amount,
+.thmRoyalHld [class$="-stack"],
+.thmRoyalHld [class$="-pot-amount"] {
+  color: #ffe6a8 !important;
+  text-shadow: 0 0 18px #f3c87055;
+}
+.thmRoyalHld .dm-info,
+.thmRoyalHld [class$="-hud"],
+.thmRoyalHld [class$="-stat"] {
+  border-color: #f3c87055 !important;
+}
+.thmRoyalHld .dm-card,
+.thmRoyalHld .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.65), 0 0 0 1px #f3c87022;
+}
+.thmRoyalHld .dm-btn,
+.thmRoyalHld [class*="-btn"] {
+  border-color: #f3c87055 !important;
+}

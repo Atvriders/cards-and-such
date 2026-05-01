@@ -1,2 +1,17 @@
 /* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+/* themed override scoped to .qdc-scope */
+.qdc-scope { background:#fff8e7;color:#4a2c00;border-radius:14px;padding:6px;font-family:'Georgia',serif; }
+.qdc-scope .dm-wrap { background:transparent; }
+.qdc-scope .dm-info { color:#4a2c00;opacity:0.8; }
+.qdc-scope .dm-score { color:#c25e00;font-weight:900; }
+.qdc-scope .dm-card { border:2px solid #e0b870;background:#fff3d0;color:#4a2c00;border-radius:10px;font-family:'Georgia',serif; }
+.qdc-scope .dm-card.red { color:#1565c0; }
+.qdc-scope .dm-card.black { color:#4a2c00; }
+.qdc-scope .dm-btn { background:#c25e00;color:#fff;border:none;border-radius:8px;font-family:inherit;font-weight:800; }
+.qdc-scope .dm-btn.alt { background:#1565c0;color:#fff; }
+.qdc-scope .dm-result { color:#c25e00;font-weight:800; }
+.qdc-scope .dm-final { color:#c25e00;font-weight:900; }
+.qdc-scope .dm-done { background:#fff3d0;border:1px solid #e0b870;border-radius:14px;color:#4a2c00; }
+.qdc-scope .dm-row { gap:14px; }

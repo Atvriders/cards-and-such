@@ -31,18 +31,18 @@
 }
 .pentago-cell {
   aspect-ratio: 1;
-  background: #2c5489;
   cursor: pointer; padding: 0; position: relative;
-  transition: background 0.12s ease;
+  transition: filter 0.12s ease;
   min-width: 0;
-  border: 1px solid #1e3a5b;
+  border: 1px solid rgba(255,255,255,0.12);
 }
-.pentago-q0 { box-shadow: inset 1px 1px 0 rgba(255,255,255,0.06); }
-.pentago-q1 { box-shadow: inset -1px 1px 0 rgba(255,255,255,0.06); }
-.pentago-q2 { box-shadow: inset 1px -1px 0 rgba(255,255,255,0.06); }
-.pentago-q3 { box-shadow: inset -1px -1px 0 rgba(255,255,255,0.06); }
+/* Quadrant pastels: rose, mint, sky, butter */
+.pentago-q0 { background: #f7c6c7; box-shadow: inset 1px 1px 0 rgba(255,255,255,0.35); }
+.pentago-q1 { background: #b9e6c8; box-shadow: inset -1px 1px 0 rgba(255,255,255,0.35); }
+.pentago-q2 { background: #c2dff5; box-shadow: inset 1px -1px 0 rgba(255,255,255,0.35); }
+.pentago-q3 { background: #f7e3a3; box-shadow: inset -1px -1px 0 rgba(255,255,255,0.35); }
 .pentago-cell:disabled { cursor: default; }
-.pentago-cell:not(:disabled):hover { background: #3a6cad; }
+.pentago-cell:not(:disabled):hover { filter: brightness(1.08); }
 .pentago-p0::after, .pentago-p1::after {
   content: ''; position: absolute; inset: 14%;
   border-radius: 50%;

@@ -8,10 +8,10 @@ export function DiceBowlGame({ state, dispatch, onGameOver }: GameProps<DiceBowl
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap dice-bowl-theme"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap dice-bowl-theme">
       <div className="dm-info">Frame {state.frame} / {TOTAL_FRAMES}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.dice.length > 0 && (

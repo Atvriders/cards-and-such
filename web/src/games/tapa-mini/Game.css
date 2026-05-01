@@ -1,30 +1,88 @@
-.tapamini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.tapamini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.tapamini-score { font-weight:700;color:hsl(200, 60%, 40%); }
-.tapamini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.tapamini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.tapamini-row { display:flex;gap:1px; }
-.tapamini-cell { width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.tapamini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.tapamini-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
-.tapamini-cell.sel { outline:3px solid hsl(200, 65%, 55%);outline-offset:-3px; }
-.tapamini-cell.err { background:#fdedec;color:#e74c3c; }
-.tapamini-cell.val0 { background:#fff5d8; }
-.tapamini-cell.val1 { background:#d8eaff; }
-.tapamini-cell.val2 { background:#ffe0e0; }
-.tapamini-cell.val3 { background:#e0ffe0; }
-.tapamini-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
-.tapamini-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.tapamini-num:hover { background:hsl(200, 70%, 92%);border-color:hsl(200, 60%, 55%); }
-.tapamini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.tapamini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.tapamini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.tapamini-btn.check { background:#3498db; }
-.tapamini-btn.hint { background:#f39c12; }
-.tapamini-btn.next { background:hsl(200, 60%, 45%); }
-.tapamini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.tapamini-status { font-weight:700;font-size:1rem; }
-.tapamini-status.solved { color:#27ae60; }
-.tapamini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.tapamini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.tapamini-final { font-size:1.6rem;font-weight:900;color:hsl(200, 60%, 40%); }
+.tapaturkish-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.tapaturkish-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.tapaturkish-score { font-weight:700;color:hsl(200, 60%, 40%); }
+.tapaturkish-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.tapaturkish-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.tapaturkish-row { display:flex;gap:1px; }
+.tapaturkish-cell { width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.tapaturkish-cell.given { background:#ecf0f1;color:#2c3e50; }
+.tapaturkish-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
+.tapaturkish-cell.sel { outline:3px solid hsl(200, 65%, 55%);outline-offset:-3px; }
+.tapaturkish-cell.err { background:#fdedec;color:#e74c3c; }
+.tapaturkish-cell.val0 { background:#fff5d8; }
+.tapaturkish-cell.val1 { background:#d8eaff; }
+.tapaturkish-cell.val2 { background:#ffe0e0; }
+.tapaturkish-cell.val3 { background:#e0ffe0; }
+.tapaturkish-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
+.tapaturkish-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.tapaturkish-num:hover { background:hsl(200, 70%, 92%);border-color:hsl(200, 60%, 55%); }
+.tapaturkish-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.tapaturkish-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.tapaturkish-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.tapaturkish-btn.check { background:#3498db; }
+.tapaturkish-btn.hint { background:#f39c12; }
+.tapaturkish-btn.next { background:hsl(200, 60%, 45%); }
+.tapaturkish-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.tapaturkish-status { font-weight:700;font-size:1rem; }
+.tapaturkish-status.solved { color:#27ae60; }
+.tapaturkish-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.tapaturkish-done h2 { margin-bottom:6px;color:#2c3e50; }
+.tapaturkish-final { font-size:1.6rem;font-weight:900;color:hsl(200, 60%, 40%); }
+
+
+/* === Theme: turkish-tile (Turkish tile — cobalt on cream) === */
+.tapaturkish {
+  background: #f0e8d8;
+  color: #1a2a4a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.tapaturkish .tapaturkish-mech,
+.tapaturkish [class*="-mech"],
+.tapaturkish [class*="-status"]:not(.solved):not(.win) {
+  color: #5a5a3a;
+}
+.tapaturkish [class*="-score"],
+.tapaturkish [class*="-final"] {
+  color: #2a5aa8;
+}
+.tapaturkish [class*="-grid"] {
+  background: #1a2a4a;
+  border-color: #1a2a4a;
+}
+.tapaturkish [class*="-cell"] {
+  background: #e0d4b8;
+  color: #1a2a4a;
+}
+.tapaturkish [class*="-cell"].sel,
+.tapaturkish [class*="-cell"].selected {
+  outline: 3px solid #5a8ad4;
+  outline-offset: -3px;
+}
+.tapaturkish [class*="-cell"].err,
+.tapaturkish [class*="-cell"].error,
+.tapaturkish [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #b03a3a;
+}
+.tapaturkish [class*="-num"]:hover,
+.tapaturkish [class*="-numpad"] button:hover {
+  background: #5a8ad4;
+  color: #f0e8d8;
+  border-color: #2a5aa8;
+}
+.tapaturkish [class*="-btn"].check,
+.tapaturkish [class*="-controls"] button {
+  background: #2a5aa8;
+  color: #f0e8d8;
+  border-color: #2a5aa8;
+}
+.tapaturkish [class*="-btn"].next {
+  background: #5a8ad4;
+  color: #f0e8d8;
+}
+.tapaturkish [class*="-status"].solved,
+.tapaturkish [class*="-status"].win {
+  color: #3a8a5a;
+}

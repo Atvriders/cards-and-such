@@ -1,13 +1,47 @@
-.dsm-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:380px;margin:0 auto; }
-.dsm-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
-.dsm-score { color:#27ae60; }
-.dsm-target { font-size:1.1rem;color:#34495e; }
-.dsm-target-val { font-size:3rem;display:inline-block;vertical-align:middle;margin-left:8px;color:#e74c3c; }
-.dsm-result { padding:10px 16px;border-radius:8px;font-weight:700;font-size:1rem; }
-.dsm-result.hit { background:#eafaf1;color:#1e8449; }
-.dsm-result.miss { background:#fdedec;color:#c0392b; }
-.dsm-btn { padding:12px 28px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:1.05rem; }
-.dsm-btn.shoot { background:#e67e22;color:#fff; }
-.dsm-btn.next { background:#3498db;color:#fff; }
-.dsm-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
-.dsm-final { font-size:1.6rem;color:#27ae60;font-weight:900;margin-top:8px; }
+.dshm-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:380px;margin:0 auto; }
+.dshm-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
+.dshm-score { color:#27ae60; }
+.dshm-target { font-size:1.1rem;color:#34495e; }
+.dshm-target-val { font-size:3rem;display:inline-block;vertical-align:middle;margin-left:8px;color:#e74c3c; }
+.dshm-result { padding:10px 16px;border-radius:8px;font-weight:700;font-size:1rem; }
+.dshm-result.hit { background:#eafaf1;color:#1e8449; }
+.dshm-result.miss { background:#fdedec;color:#c0392b; }
+.dshm-btn { padding:12px 28px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:1.05rem; }
+.dshm-btn.shoot { background:#e67e22;color:#fff; }
+.dshm-btn.next { background:#3498db;color:#fff; }
+.dshm-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.dshm-final { font-size:1.6rem;color:#27ae60;font-weight:900;margin-top:8px; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dshm (unique class prefix + themed palette tokens) */
+.dshm-theme {
+  --dshm-bg: linear-gradient(180deg,#7f1d1d 0%,#dc2626 55%,#1c1917 100%);
+  --dshm-felt: #1c1917;
+  --dshm-accent: #fde047;
+  --dshm-text: #fef2f2;
+}
+.dshm-theme.dshm-wrap,
+.dshm-theme .dshm-wrap,
+.dshm-wrap.dshm-theme {
+  background: var(--dshm-bg);
+  color: var(--dshm-text);
+}
+.dshm-theme .dshm-die,
+.dshm-theme .dshm-card {
+  border-color: var(--dshm-accent);
+}
+.dshm-theme .dshm-btn,
+.dshm-theme .dshm-roll-btn {
+  background: var(--dshm-accent);
+  color: var(--dshm-felt);
+  border-color: var(--dshm-accent);
+}
+.dshm-theme .dshm-info,
+.dshm-theme .dshm-score,
+.dshm-theme .dshm-final,
+.dshm-theme .dshm-result,
+.dshm-theme .dshm-header,
+.dshm-theme .dshm-message {
+  color: var(--dshm-text);
+}
+

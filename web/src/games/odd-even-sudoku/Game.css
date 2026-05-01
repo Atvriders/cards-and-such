@@ -1,27 +1,85 @@
-.oddevensudoku-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.oddevensudoku-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.oddevensudoku-score { font-weight:700;color:hsl(0, 60%, 40%); }
-.oddevensudoku-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.oddevensudoku-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.oddevensudoku-row { display:flex;gap:1px; }
-.oddevensudoku-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.oddevensudoku-cell.given { background:#ecf0f1;color:#2c3e50; }
-.oddevensudoku-cell.sel { background:hsl(0, 65%, 55%);color:#fff; }
-.oddevensudoku-cell.err { background:#fdedec;color:#e74c3c; }
-.oddevensudoku-cell.rt { margin-right:3px; }
-.oddevensudoku-cell.bt { margin-bottom:3px; }
-.oddevensudoku-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.oddevensudoku-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.oddevensudoku-num:hover { background:hsl(0, 70%, 92%);border-color:hsl(0, 60%, 55%); }
-.oddevensudoku-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.oddevensudoku-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.oddevensudoku-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.oddevensudoku-btn.check { background:#3498db; }
-.oddevensudoku-btn.hint { background:#f39c12; }
-.oddevensudoku-btn.next { background:hsl(0, 60%, 45%); }
-.oddevensudoku-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.oddevensudoku-status { font-weight:700;font-size:1rem; }
-.oddevensudoku-status.solved { color:#27ae60; }
-.oddevensudoku-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.oddevensudoku-done h2 { margin-bottom:6px;color:#2c3e50; }
-.oddevensudoku-final { font-size:1.6rem;font-weight:900;color:hsl(0, 60%, 40%); }
+.oddevenparity-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.oddevenparity-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.oddevenparity-score { font-weight:700;color:hsl(0, 60%, 40%); }
+.oddevenparity-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.oddevenparity-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.oddevenparity-row { display:flex;gap:1px; }
+.oddevenparity-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.oddevenparity-cell.given { background:#ecf0f1;color:#2c3e50; }
+.oddevenparity-cell.sel { background:hsl(0, 65%, 55%);color:#fff; }
+.oddevenparity-cell.err { background:#fdedec;color:#e74c3c; }
+.oddevenparity-cell.rt { margin-right:3px; }
+.oddevenparity-cell.bt { margin-bottom:3px; }
+.oddevenparity-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.oddevenparity-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.oddevenparity-num:hover { background:hsl(0, 70%, 92%);border-color:hsl(0, 60%, 55%); }
+.oddevenparity-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.oddevenparity-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.oddevenparity-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.oddevenparity-btn.check { background:#3498db; }
+.oddevenparity-btn.hint { background:#f39c12; }
+.oddevenparity-btn.next { background:hsl(0, 60%, 45%); }
+.oddevenparity-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.oddevenparity-status { font-weight:700;font-size:1rem; }
+.oddevenparity-status.solved { color:#27ae60; }
+.oddevenparity-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.oddevenparity-done h2 { margin-bottom:6px;color:#2c3e50; }
+.oddevenparity-final { font-size:1.6rem;font-weight:900;color:hsl(0, 60%, 40%); }
+
+
+/* === Theme: parity (Parity — orange & teal) === */
+.oddevenparity {
+  background: #f5f5f5;
+  color: #1a2030;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.oddevenparity .oddevenparity-mech,
+.oddevenparity [class*="-mech"],
+.oddevenparity [class*="-status"]:not(.solved):not(.win) {
+  color: #5a6a78;
+}
+.oddevenparity [class*="-score"],
+.oddevenparity [class*="-final"] {
+  color: #ff8a3a;
+}
+.oddevenparity [class*="-grid"] {
+  background: #3a4858;
+  border-color: #3a4858;
+}
+.oddevenparity [class*="-cell"] {
+  background: #e8e8e8;
+  color: #1a2030;
+}
+.oddevenparity [class*="-cell"].sel,
+.oddevenparity [class*="-cell"].selected {
+  outline: 3px solid #3aa0c8;
+  outline-offset: -3px;
+}
+.oddevenparity [class*="-cell"].err,
+.oddevenparity [class*="-cell"].error,
+.oddevenparity [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #c44a3a;
+}
+.oddevenparity [class*="-num"]:hover,
+.oddevenparity [class*="-numpad"] button:hover {
+  background: #3aa0c8;
+  color: #f5f5f5;
+  border-color: #ff8a3a;
+}
+.oddevenparity [class*="-btn"].check,
+.oddevenparity [class*="-controls"] button {
+  background: #ff8a3a;
+  color: #f5f5f5;
+  border-color: #ff8a3a;
+}
+.oddevenparity [class*="-btn"].next {
+  background: #3aa0c8;
+  color: #f5f5f5;
+}
+.oddevenparity [class*="-status"].solved,
+.oddevenparity [class*="-status"].win {
+  color: #3a8a6a;
+}

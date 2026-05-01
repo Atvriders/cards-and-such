@@ -8,10 +8,10 @@ export function MexicanDiceGame({ state, dispatch, onGameOver }: GameProps<Mexic
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.totalScore} pts</div></div></div>;
+    return <div className="dm-wrap mexican-dice-theme"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.totalScore} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap mexican-dice-theme">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">{state.totalScore} pts</div>
       {state.dice && (

@@ -21,11 +21,11 @@ export function MiracleSudokuMiniGame({ state, dispatch, onGameOver }: GameProps
 
   if (state.phase === "done") {
     return (
-      <div className="miraclesudokumini-wrap">
-        <div className="miraclesudokumini-done">
+      <div className="miraclegold-wrap">
+        <div className="miraclegold-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="miraclesudokumini-final">{state.score} pts</p>
+          <p className="miraclegold-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function MiracleSudokuMiniGame({ state, dispatch, onGameOver }: GameProps
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="miraclesudokumini-wrap">
-      <div className="miraclesudokumini-header">
+    <div className="miraclegold-wrap">
+      <div className="miraclegold-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="miraclesudokumini-score">{state.score} pts</span>
+        <span className="miraclegold-score">{state.score} pts</span>
       </div>
-      <div className="miraclesudokumini-mech">Sudoku with anti-king and anti-knight constraints.</div>
-      <div className="miraclesudokumini-grid">
+      <div className="miraclegold-mech">Sudoku with anti-king and anti-knight constraints.</div>
+      <div className="miraclegold-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="miraclesudokumini-row">
+          <div key={r} className="miraclegold-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function MiracleSudokuMiniGame({ state, dispatch, onGameOver }: GameProps
               return (
                 <button
                   key={c}
-                  className={`miraclesudokumini-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`miraclegold-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as MiracleSudokuMiniAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function MiracleSudokuMiniGame({ state, dispatch, onGameOver }: GameProps
           </div>
         ))}
       </div>
-      <div className="miraclesudokumini-pad">
+      <div className="miraclegold-pad">
         {digits.map((d) => (
-          <button key={d} className="miraclesudokumini-num" onClick={() => dispatch({ type: "enter", digit: d } as MiracleSudokuMiniAction)}>{d}</button>
+          <button key={d} className="miraclegold-num" onClick={() => dispatch({ type: "enter", digit: d } as MiracleSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="miraclesudokumini-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as MiracleSudokuMiniAction)}>×</button>
+        <button className="miraclegold-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as MiracleSudokuMiniAction)}>×</button>
       </div>
-      <div className="miraclesudokumini-actions">
-        <button className="miraclesudokumini-btn check" onClick={() => dispatch({ type: "check" } as MiracleSudokuMiniAction)}>Check</button>
-        <button className="miraclesudokumini-btn hint" onClick={() => dispatch({ type: "hint" } as MiracleSudokuMiniAction)}>Hint</button>
-        <button className="miraclesudokumini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as MiracleSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="miraclegold-actions">
+        <button className="miraclegold-btn check" onClick={() => dispatch({ type: "check" } as MiracleSudokuMiniAction)}>Check</button>
+        <button className="miraclegold-btn hint" onClick={() => dispatch({ type: "hint" } as MiracleSudokuMiniAction)}>Hint</button>
+        <button className="miraclegold-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as MiracleSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="miraclesudokumini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="miraclegold-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

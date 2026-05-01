@@ -1,12 +1,46 @@
-.dx-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.dx-info { font-size:0.95rem; color:#555; }
-.dx-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.dx-die { font-size:2.5rem; font-weight:900; min-width:70px; padding:14px 18px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.dx-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.dx-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.dx-btn:hover { background:#2980b9; }
-.dx-btn.alt { background:#e67e22; }
-.dx-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
-.dx-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.dx-done h2 { margin:0 0 8px; }
-.dx-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.daim-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.daim-info { font-size:0.95rem; color:#555; }
+.daim-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.daim-die { font-size:2.5rem; font-weight:900; min-width:70px; padding:14px 18px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
+.daim-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.daim-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.daim-btn:hover { background:#2980b9; }
+.daim-btn.alt { background:#e67e22; }
+.daim-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; }
+.daim-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.daim-done h2 { margin:0 0 8px; }
+.daim-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: daim (unique class prefix + themed palette tokens) */
+.daim-theme {
+  --daim-bg: radial-gradient(circle at 50% 50%,#fee2e2 0%,#dc2626 35%,#7f1d1d 100%);
+  --daim-felt: #7f1d1d;
+  --daim-accent: #fef08a;
+  --daim-text: #fff1f2;
+}
+.daim-theme.daim-wrap,
+.daim-theme .daim-wrap,
+.daim-wrap.daim-theme {
+  background: var(--daim-bg);
+  color: var(--daim-text);
+}
+.daim-theme .daim-die,
+.daim-theme .daim-card {
+  border-color: var(--daim-accent);
+}
+.daim-theme .daim-btn,
+.daim-theme .daim-roll-btn {
+  background: var(--daim-accent);
+  color: var(--daim-felt);
+  border-color: var(--daim-accent);
+}
+.daim-theme .daim-info,
+.daim-theme .daim-score,
+.daim-theme .daim-final,
+.daim-theme .daim-result,
+.daim-theme .daim-header,
+.daim-theme .daim-message {
+  color: var(--daim-text);
+}
+

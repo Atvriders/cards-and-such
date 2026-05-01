@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dice-roulette (unique class prefix + themed palette over shared dm-* engine) */
+.dice-roulette-theme.dm-wrap {
+  background: radial-gradient(ellipse at 50% 30%,#7f1d1d 0%,#1f2937 60%,#000 100%);
+}
+.dice-roulette-theme .dm-info,
+.dice-roulette-theme .dm-header {
+  color: #f3f4f6;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-roulette-theme .dm-target { color: #f3f4f6; opacity: 0.85; }
+.dice-roulette-theme .dm-score {
+  background: linear-gradient(180deg, #fbbf24, #fde047);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(253,224,71,0.45);
+}
+.dice-roulette-theme .dm-die {
+  background: linear-gradient(145deg,#fef3c7,#fbbf24);
+  color: #7c2d12;
+}
+.dice-roulette-theme .dm-card {
+  background: linear-gradient(145deg,#fef3c7,#fbbf24);
+  color: #7c2d12;
+}
+.dice-roulette-theme .dm-btn {
+  background: linear-gradient(180deg, #dc2626 0%, #7f1d1d 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(127,29,29,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.dice-roulette-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #dc2626 0%, #fbbf24 100%);
+  color: #1f2937;
+}
+.dice-roulette-theme .dm-bet-btn {
+  color: #f3f4f6;
+  border-color: rgba(255,255,255,0.25);
+}
+.dice-roulette-theme .dm-result {
+  color: #f3f4f6;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.dice-roulette-theme .dm-feedback {
+  color: #fbbf24;
+  text-shadow: 0 0 12px rgba(253,224,71,0.6);
+}
+.dice-roulette-theme .dm-final {
+  background: linear-gradient(180deg, #fbbf24, #dc2626);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dice-roulette-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #dc2626, #7f1d1d);
+  border-color: #fbbf24;
+}
+.dice-roulette-theme .dm-die.selected,
+.dice-roulette-theme .dm-die.hl {
+  border-color: #dc2626;
+  box-shadow:
+    0 0 0 2px #dc2626,
+    0 0 22px rgba(220,38,38,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

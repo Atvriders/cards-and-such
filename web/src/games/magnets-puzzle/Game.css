@@ -1,30 +1,88 @@
-.magnetspuzzle-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.magnetspuzzle-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.magnetspuzzle-score { font-weight:700;color:hsl(0, 60%, 40%); }
-.magnetspuzzle-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.magnetspuzzle-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.magnetspuzzle-row { display:flex;gap:1px; }
-.magnetspuzzle-cell { width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.magnetspuzzle-cell.given { background:#ecf0f1;color:#2c3e50; }
-.magnetspuzzle-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
-.magnetspuzzle-cell.sel { outline:3px solid hsl(0, 65%, 55%);outline-offset:-3px; }
-.magnetspuzzle-cell.err { background:#fdedec;color:#e74c3c; }
-.magnetspuzzle-cell.val0 { background:#fff5d8; }
-.magnetspuzzle-cell.val1 { background:#d8eaff; }
-.magnetspuzzle-cell.val2 { background:#ffe0e0; }
-.magnetspuzzle-cell.val3 { background:#e0ffe0; }
-.magnetspuzzle-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
-.magnetspuzzle-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.magnetspuzzle-num:hover { background:hsl(0, 70%, 92%);border-color:hsl(0, 60%, 55%); }
-.magnetspuzzle-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.magnetspuzzle-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.magnetspuzzle-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.magnetspuzzle-btn.check { background:#3498db; }
-.magnetspuzzle-btn.hint { background:#f39c12; }
-.magnetspuzzle-btn.next { background:hsl(0, 60%, 45%); }
-.magnetspuzzle-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.magnetspuzzle-status { font-weight:700;font-size:1rem; }
-.magnetspuzzle-status.solved { color:#27ae60; }
-.magnetspuzzle-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.magnetspuzzle-done h2 { margin-bottom:6px;color:#2c3e50; }
-.magnetspuzzle-final { font-size:1.6rem;font-weight:900;color:hsl(0, 60%, 40%); }
+.magnetspoles-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.magnetspoles-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.magnetspoles-score { font-weight:700;color:hsl(0, 60%, 40%); }
+.magnetspoles-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.magnetspoles-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.magnetspoles-row { display:flex;gap:1px; }
+.magnetspoles-cell { width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.magnetspoles-cell.given { background:#ecf0f1;color:#2c3e50; }
+.magnetspoles-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
+.magnetspoles-cell.sel { outline:3px solid hsl(0, 65%, 55%);outline-offset:-3px; }
+.magnetspoles-cell.err { background:#fdedec;color:#e74c3c; }
+.magnetspoles-cell.val0 { background:#fff5d8; }
+.magnetspoles-cell.val1 { background:#d8eaff; }
+.magnetspoles-cell.val2 { background:#ffe0e0; }
+.magnetspoles-cell.val3 { background:#e0ffe0; }
+.magnetspoles-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
+.magnetspoles-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.magnetspoles-num:hover { background:hsl(0, 70%, 92%);border-color:hsl(0, 60%, 55%); }
+.magnetspoles-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.magnetspoles-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.magnetspoles-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.magnetspoles-btn.check { background:#3498db; }
+.magnetspoles-btn.hint { background:#f39c12; }
+.magnetspoles-btn.next { background:hsl(0, 60%, 45%); }
+.magnetspoles-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.magnetspoles-status { font-weight:700;font-size:1rem; }
+.magnetspoles-status.solved { color:#27ae60; }
+.magnetspoles-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.magnetspoles-done h2 { margin-bottom:6px;color:#2c3e50; }
+.magnetspoles-final { font-size:1.6rem;font-weight:900;color:hsl(0, 60%, 40%); }
+
+
+/* === Theme: magnet-poles (Magnet poles — N red, S blue) === */
+.magnetspoles {
+  background: #f5f5f5;
+  color: #1a1a1a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.magnetspoles .magnetspoles-mech,
+.magnetspoles [class*="-mech"],
+.magnetspoles [class*="-status"]:not(.solved):not(.win) {
+  color: #5a5a5a;
+}
+.magnetspoles [class*="-score"],
+.magnetspoles [class*="-final"] {
+  color: #d63a3a;
+}
+.magnetspoles [class*="-grid"] {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+}
+.magnetspoles [class*="-cell"] {
+  background: #e8e8e8;
+  color: #1a1a1a;
+}
+.magnetspoles [class*="-cell"].sel,
+.magnetspoles [class*="-cell"].selected {
+  outline: 3px solid #3a5ad6;
+  outline-offset: -3px;
+}
+.magnetspoles [class*="-cell"].err,
+.magnetspoles [class*="-cell"].error,
+.magnetspoles [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #d63a3a;
+}
+.magnetspoles [class*="-num"]:hover,
+.magnetspoles [class*="-numpad"] button:hover {
+  background: #3a5ad6;
+  color: #f5f5f5;
+  border-color: #d63a3a;
+}
+.magnetspoles [class*="-btn"].check,
+.magnetspoles [class*="-controls"] button {
+  background: #d63a3a;
+  color: #f5f5f5;
+  border-color: #d63a3a;
+}
+.magnetspoles [class*="-btn"].next {
+  background: #3a5ad6;
+  color: #f5f5f5;
+}
+.magnetspoles [class*="-status"].solved,
+.magnetspoles [class*="-status"].win {
+  color: #3a8a5a;
+}

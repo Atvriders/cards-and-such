@@ -47,25 +47,25 @@ export function Kakuro({
   }, [won, handleDigit, dispatch]);
 
   return (
-    <div className="kakuro">
-      <div className="kakuro-title">Kakuro</div>
-      <div className={`kakuro-status${won ? " win" : ""}`}>
+    <div className="kakuroblue">
+      <div className="kakuroblue-title">Kakuro</div>
+      <div className={`kakuroblue-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
           : `Moves: ${state.moves} — fill digits 1–9 so each run sums to its clue`}
       </div>
 
       <div
-        className="kakuro-grid"
+        className="kakuroblue-grid"
         style={{ gridTemplateColumns: `repeat(${cols}, 48px)`, gridTemplateRows: `repeat(${rows}, 48px)` }}
       >
         {cells.map((cell, idx) => {
           if (cell.isBlack) {
             return (
-              <div key={idx} className="kakuro-cell black">
-                <div className="kakuro-clue-wrap">
-                  {cell.downClue > 0 && <span className="kakuro-clue-down">{cell.downClue}</span>}
-                  {cell.acrossClue > 0 && <span className="kakuro-clue-across">{cell.acrossClue}</span>}
+              <div key={idx} className="kakuroblue-cell black">
+                <div className="kakuroblue-clue-wrap">
+                  {cell.downClue > 0 && <span className="kakuroblue-clue-down">{cell.downClue}</span>}
+                  {cell.acrossClue > 0 && <span className="kakuroblue-clue-across">{cell.acrossClue}</span>}
                 </div>
               </div>
             );
@@ -77,7 +77,7 @@ export function Kakuro({
             <div
               key={idx}
               className={[
-                "kakuro-cell white",
+                "kakuroblue-cell white",
                 isSelected ? "selected" : "",
                 isError ? "error" : "",
               ]
@@ -91,7 +91,7 @@ export function Kakuro({
         })}
       </div>
 
-      <div className="kakuro-numpad">
+      <div className="kakuroblue-numpad">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((d) => (
           <button key={d} onClick={() => handleDigit(d)}>
             {d}

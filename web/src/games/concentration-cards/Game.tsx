@@ -15,37 +15,37 @@ export function ConcentrationCardsGame({ state, dispatch, onGameOver }: GameProp
 
   if (state.phase === "done") {
     return (
-      <div className="cmem-wrap">
-        <div className="cmem-done">
+      <div className="cncntrc-wrap">
+        <div className="cncntrc-done">
           <h2>Cleared</h2>
-          <div className="cmem-stats">{state.matches} pairs in {state.attempts} attempts</div>
-          <div className="cmem-final">{state.score} pts</div>
+          <div className="cncntrc-stats">{state.matches} pairs in {state.attempts} attempts</div>
+          <div className="cncntrc-final">{state.score} pts</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="cmem-wrap">
-      <div className="cmem-header">
-        <span className="cmem-progress">{state.matches} / {PAIR_COUNT} pairs</span>
-        <span className="cmem-attempts">{state.attempts} attempts</span>
-        <span className="cmem-score">{state.score} pts</span>
+    <div className="cncntrc-wrap">
+      <div className="cncntrc-header">
+        <span className="cncntrc-progress">{state.matches} / {PAIR_COUNT} pairs</span>
+        <span className="cncntrc-attempts">{state.attempts} attempts</span>
+        <span className="cncntrc-score">{state.score} pts</span>
       </div>
-      <div className="cmem-board">
+      <div className="cncntrc-board">
         {state.values.map((v, i) => {
           const open = state.revealed[i] || state.flipped.includes(i);
-          let cls = "cmem-card";
+          let cls = "cncntrc-card";
           if (state.revealed[i]) cls += " matched";
           else if (state.flipped.includes(i)) cls += " flipped";
           return (
             <button key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as ConcentrationCardsAction)}>
-              <span className="cmem-face">{open ? SYMBOL_FACES[v] : "?"}</span>
+              <span className="cncntrc-face">{open ? SYMBOL_FACES[v] : "?"}</span>
             </button>
           );
         })}
       </div>
-      <div className="cmem-hint">Flip two cards. Match the symbols. A perfect run earns a bonus.</div>
+      <div className="cncntrc-hint">Flip two cards. Match the symbols. A perfect run earns a bonus.</div>
     </div>
   );
 }

@@ -43,12 +43,12 @@ export function Nonogram({
   const maxColClues = Math.max(...colClues.map((c) => c.length));
 
   return (
-    <div className="nonogram">
-      <div className="nonogram-info">
+    <div className="nonogrampixel">
+      <div className="nonogrampixel-info">
         <span>Size: {size}×{size}</span>
         <span>Moves: {state.movesMade}</span>
       </div>
-      <div className={`nonogram-status${state.won ? " win" : ""}`}>
+      <div className={`nonogrampixel-status${state.won ? " win" : ""}`}>
         {state.won ? "Puzzle solved! Great job!" : "Fill cells to match the clues"}
       </div>
 
@@ -71,7 +71,7 @@ export function Nonogram({
             return (
               <div
                 key={`col-${c}-${ci}`}
-                className="nonogram-clue-cell"
+                className="nonogrampixel-clue-cell"
                 style={{ gridColumn: c + 2, gridRow: ci + 1 }}
               >
                 {val !== undefined ? val : ""}
@@ -85,7 +85,7 @@ export function Nonogram({
           <>
             <div
               key={`row-clue-${r}`}
-              className="nonogram-row-clue"
+              className="nonogrampixel-row-clue"
               style={{ gridColumn: 1, gridRow: maxColClues + r + 1 }}
             >
               {rowClues[r]!.join(" ")}
@@ -93,7 +93,7 @@ export function Nonogram({
             {Array.from({ length: size }, (_, c) => {
               const idx = r * size + c;
               const cell = cells[idx]!;
-              let cls = "nonogram-cell";
+              let cls = "nonogrampixel-cell";
               if (state.won && state.solution[idx]) cls += " won-filled";
               else if (cell === 1) cls += " filled";
               else if (cell === 2) cls += " marked";
@@ -114,7 +114,7 @@ export function Nonogram({
         ))}
       </div>
 
-      <p className="nonogram-hint">Left-click to fill · Shift-click or right-click to mark empty (×)</p>
+      <p className="nonogrampixel-hint">Left-click to fill · Shift-click or right-click to mark empty (×)</p>
     </div>
   );
 }

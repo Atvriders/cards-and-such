@@ -10,11 +10,11 @@ export function CountryRoadMiniGame({ state, dispatch, onGameOver }: GameProps<C
 
   if (state.phase === "done") {
     return (
-      <div className="countryroadmini-wrap">
-        <div className="countryroadmini-done">
+      <div className="countryroadmeadow-wrap">
+        <div className="countryroadmeadow-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="countryroadmini-final">{state.score} pts</p>
+          <p className="countryroadmeadow-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function CountryRoadMiniGame({ state, dispatch, onGameOver }: GameProps<C
   const errSet = new Set(state.errors);
 
   return (
-    <div className="countryroadmini-wrap">
-      <div className="countryroadmini-header">
+    <div className="countryroadmeadow-wrap">
+      <div className="countryroadmeadow-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="countryroadmini-score">{state.score} pts</span>
+        <span className="countryroadmeadow-score">{state.score} pts</span>
       </div>
-      <div className="countryroadmini-mech">Draw a single closed loop visiting each region exactly once.</div>
-      <div className="countryroadmini-grid">
+      <div className="countryroadmeadow-mech">Draw a single closed loop visiting each region exactly once.</div>
+      <div className="countryroadmeadow-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="countryroadmini-row">
+          <div key={r} className="countryroadmeadow-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function CountryRoadMiniGame({ state, dispatch, onGameOver }: GameProps<C
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`countryroadmini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`countryroadmeadow-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as CountryRoadMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function CountryRoadMiniGame({ state, dispatch, onGameOver }: GameProps<C
           </div>
         ))}
       </div>
-      <div className="countryroadmini-pad">
+      <div className="countryroadmeadow-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`countryroadmini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as CountryRoadMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`countryroadmeadow-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as CountryRoadMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="countryroadmini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as CountryRoadMiniAction)}>×</button>
+        <button className="countryroadmeadow-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as CountryRoadMiniAction)}>×</button>
       </div>
-      <div className="countryroadmini-actions">
-        <button className="countryroadmini-btn check" onClick={() => dispatch({ type: "check" } as CountryRoadMiniAction)}>Check</button>
-        <button className="countryroadmini-btn hint" onClick={() => dispatch({ type: "hint" } as CountryRoadMiniAction)}>Hint</button>
-        <button className="countryroadmini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as CountryRoadMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="countryroadmeadow-actions">
+        <button className="countryroadmeadow-btn check" onClick={() => dispatch({ type: "check" } as CountryRoadMiniAction)}>Check</button>
+        <button className="countryroadmeadow-btn hint" onClick={() => dispatch({ type: "hint" } as CountryRoadMiniAction)}>Hint</button>
+        <button className="countryroadmeadow-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as CountryRoadMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="countryroadmini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="countryroadmeadow-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

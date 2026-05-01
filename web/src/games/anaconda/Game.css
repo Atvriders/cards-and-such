@@ -12,3 +12,48 @@
 .dm-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
 .dm-done h2 { margin:0 0 8px; }
 .dm-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+
+
+/* === poker-theme:mixed-neon === unique-class .thmAnaconda === */
+.thmAnaconda,
+.thmAnaconda.dm-wrap,
+.thmAnaconda.holdem-wrap,
+.thmAnaconda.g-wrap,
+.thmAnaconda .dm-wrap,
+.thmAnaconda .holdem-wrap,
+.thmAnaconda .holdem-table,
+.thmAnaconda .g-wrap,
+.thmAnaconda .anaconda-felt,
+.thmAnaconda [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #4a1a6a 0%, #1f0a36 60%, #08001a 100%) !important;
+  color: #f6e8ff !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.65),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.65) !important;
+  --theme-accent: #ff66cc;
+  --theme-accent2: #9ae8ff;
+  --theme-ink: #f6e8ff;
+  --theme-rim: #0a0118;
+}
+.thmAnaconda .dm-score,
+.thmAnaconda .holdem-pot-amount,
+.thmAnaconda [class$="-stack"],
+.thmAnaconda [class$="-pot-amount"] {
+  color: #9ae8ff !important;
+  text-shadow: 0 0 18px #ff66cc55;
+}
+.thmAnaconda .dm-info,
+.thmAnaconda [class$="-hud"],
+.thmAnaconda [class$="-stat"] {
+  border-color: #ff66cc55 !important;
+}
+.thmAnaconda .dm-card,
+.thmAnaconda .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.65), 0 0 0 1px #ff66cc22;
+}
+.thmAnaconda .dm-btn,
+.thmAnaconda [class*="-btn"] {
+  border-color: #ff66cc55 !important;
+}

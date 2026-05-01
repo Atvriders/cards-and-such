@@ -1,4 +1,4 @@
-.ac-wrap {
+.acr-wrap {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
   margin: 0 auto;
 }
 
-.ac-quote {
+.acr-quote {
   background: #fffbe6;
   border: 1px solid #f0d060;
   border-radius: 8px;
@@ -21,13 +21,13 @@
   width: 100%;
 }
 
-.ac-quote-label { font-size: 0.8rem; color: #888; text-transform: uppercase; margin-bottom: 6px; }
-.ac-quote-text { font-size: 1rem; font-style: italic; color: #333; line-height: 1.5; }
-.ac-quote-author { font-size: 0.85rem; color: #777; margin-top: 6px; text-align: right; }
+.acr-quote-label { font-size: 0.8rem; color: #888; text-transform: uppercase; margin-bottom: 6px; }
+.acr-quote-text { font-size: 1rem; font-style: italic; color: #333; line-height: 1.5; }
+.acr-quote-author { font-size: 0.85rem; color: #777; margin-top: 6px; text-align: right; }
 
-.ac-clues-section { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.acr-clues-section { display: flex; flex-direction: column; gap: 10px; width: 100%; }
 
-.ac-clue-row {
+.acr-clue-row {
   display: flex;
   gap: 10px;
   align-items: flex-start;
@@ -39,20 +39,20 @@
   background: #fff;
 }
 
-.ac-clue-row.ac-selected { border-color: #4a90d9; background: #eaf4fe; }
-.ac-clue-row.ac-correct { border-color: #27ae60; background: #d4edda; }
-.ac-clue-row.ac-wrong { border-color: #c0392b; background: #f8d7da; }
+.acr-clue-row.acr-selected { border-color: #4a90d9; background: #eaf4fe; }
+.acr-clue-row.acr-correct { border-color: #27ae60; background: #d4edda; }
+.acr-clue-row.acr-wrong { border-color: #c0392b; background: #f8d7da; }
 
-.ac-clue-letter {
+.acr-clue-letter {
   font-size: 1.2rem;
   font-weight: bold;
   color: #4a90d9;
   min-width: 24px;
 }
 
-.ac-clue-body { flex: 1; }
-.ac-clue-text { font-size: 0.9rem; color: #444; margin-bottom: 4px; }
-.ac-clue-input {
+.acr-clue-body { flex: 1; }
+.acr-clue-text { font-size: 0.9rem; color: #444; margin-bottom: 4px; }
+.acr-clue-input {
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 3px;
@@ -61,8 +61,8 @@
   border-bottom: 1px solid #aaa;
 }
 
-.ac-controls { display: flex; gap: 10px; }
-.ac-controls button {
+.acr-controls { display: flex; gap: 10px; }
+.acr-controls button {
   padding: 8px 18px;
   font-size: 0.95rem;
   border: 1px solid #999;
@@ -71,22 +71,51 @@
   cursor: pointer;
 }
 
-.ac-check-btn { background: #2c7be5 !important; color: #fff !important; border-color: #1a5dbf !important; }
+.acr-check-btn { background: #2c7be5 !important; color: #fff !important; border-color: #1a5dbf !important; }
 
-.ac-message { font-size: 1rem; font-weight: bold; color: #27ae60; }
-.ac-score { font-size: 1rem; font-weight: bold; }
+.acr-message { font-size: 1rem; font-weight: bold; color: #27ae60; }
+.acr-score { font-size: 1rem; font-weight: bold; }
 
-.ac-overlay {
+.acr-overlay {
   position: absolute; inset: 0;
   background: rgba(0,0,0,0.55);
   display: flex; align-items: center; justify-content: center;
   border-radius: 8px; z-index: 10;
 }
 
-.ac-overlay-box {
+.acr-overlay-box {
   background: #fff; border-radius: 10px;
   padding: 28px 40px; text-align: center;
   box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 
-.ac-overlay-box h2 { margin: 0 0 12px; font-size: 1.6rem; }
+.acr-overlay-box h2 { margin: 0 0 12px; font-size: 1.6rem; }
+
+/* === Theme: acrostic === */
+.acr-wrap, .acr-board, .acr {
+  background: #fdf9ee;
+  color: #2c2410;
+  border-radius: 14px;
+}
+.acr-tile, .acr-cell, .acr-key {
+  background: #fffdf6;
+  border-color: #d4c283;
+  color: #2c2410;
+}
+.acr-correct, .acr-tile.correct, .acr-cell.correct, .acr-key.correct {
+  background: #1b5e20 !important;
+  color: #fff !important;
+  border-color: #1b5e20 !important;
+}
+.acr-wrong, .acr-tile.wrong, .acr-cell.wrong {
+  background: #7a1f1f !important;
+  color: #fff !important;
+  border-color: #7a1f1f !important;
+}
+.acr-accent, .acr-title, .acr-header { color: #7a5a00; }
+.acr-btn, .acr-submit-btn, .acr-action-btn {
+  background: #7a5a00;
+  color: #fff;
+  border: none;
+}
+.acr-btn:hover:not(:disabled) { filter: brightness(1.08); }

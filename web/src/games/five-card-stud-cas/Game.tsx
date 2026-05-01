@@ -5,9 +5,9 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function FiveCardStudCasGame({ state, dispatch, onGameOver }: GameProps<FiveCardStudCasState, FiveCardStudCasSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="dm-wrap thm5StudCas"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap thm5StudCas">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">{state.score} pts</div>
       <div className="dm-info">You:</div>

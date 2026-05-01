@@ -9,29 +9,29 @@ export function WindokuMiniGame({ state, dispatch, onGameOver }: GameProps<Windo
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     return (
-      <div className="ded-wrap">
-        <div className="ded-done">
+      <div className="windokusage-wrap">
+        <div className="windokusage-done">
           <h2>Case Closed</h2>
           <p>Solved: {state.correctCount} / {state.puzzles.length}</p>
-          <p className="ded-final">{state.score} pts</p>
+          <p className="windokusage-final">{state.score} pts</p>
         </div>
       </div>
     );
   }
   const p = state.puzzles[state.currentIndex]!;
   return (
-    <div className="ded-wrap">
-      <div className="ded-header">
+    <div className="windokusage-wrap">
+      <div className="windokusage-header">
         <span>Puzzle {state.currentIndex + 1} / {state.puzzles.length}</span>
-        <span className="ded-score">{state.score} pts</span>
+        <span className="windokusage-score">{state.score} pts</span>
       </div>
-      <div className="ded-scenario">{p.scenario}</div>
-      <ul className="ded-clues">
+      <div className="windokusage-scenario">{p.scenario}</div>
+      <ul className="windokusage-clues">
         {p.clues.map((c, i) => <li key={i}>{c}</li>)}
       </ul>
-      <div className="ded-options">
+      <div className="windokusage-options">
         {p.options.map((opt, i) => {
-          let cls = "ded-option";
+          let cls = "windokusage-option";
           if (state.resolved) {
             if (i === p.correctIndex) cls += " correct";
             else if (i === state.selected) cls += " wrong";
@@ -43,12 +43,12 @@ export function WindokuMiniGame({ state, dispatch, onGameOver }: GameProps<Windo
           );
         })}
       </div>
-      <div className="ded-actions">
+      <div className="windokusage-actions">
         {!state.resolved && (
-          <button className="ded-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as WindokuMiniAction)}>Accuse!</button>
+          <button className="windokusage-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as WindokuMiniAction)}>Accuse!</button>
         )}
         {state.resolved && (
-          <button className="ded-btn next" onClick={() => dispatch({ type: "next" } as WindokuMiniAction)}>
+          <button className="windokusage-btn next" onClick={() => dispatch({ type: "next" } as WindokuMiniAction)}>
             {state.currentIndex + 1 >= state.puzzles.length ? "Finish" : "Next"}
           </button>
         )}

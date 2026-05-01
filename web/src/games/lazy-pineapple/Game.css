@@ -1,2 +1,47 @@
 /* Modern poker-table engine — see web/src/engines/poker/poker.css */
 @import "../../engines/poker/poker.css";
+
+
+/* === poker-theme:pineapple-trop === unique-class .thmLazyP === */
+.thmLazyP,
+.thmLazyP.dm-wrap,
+.thmLazyP.holdem-wrap,
+.thmLazyP.g-wrap,
+.thmLazyP .dm-wrap,
+.thmLazyP .holdem-wrap,
+.thmLazyP .holdem-table,
+.thmLazyP .g-wrap,
+.thmLazyP .lazy-pineapple-felt,
+.thmLazyP [class$="-felt"] {
+  background: radial-gradient(ellipse at 50% 38%, #b85a18 0%, #6a2f08 60%, #2a1300 100%) !important;
+  color: #fff5e2 !important;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.55),
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    0 24px 60px -20px rgba(0,0,0,0.55) !important;
+  --theme-accent: #ffcf66;
+  --theme-accent2: #ffe6a8;
+  --theme-ink: #fff5e2;
+  --theme-rim: #2a1300;
+}
+.thmLazyP .dm-score,
+.thmLazyP .holdem-pot-amount,
+.thmLazyP [class$="-stack"],
+.thmLazyP [class$="-pot-amount"] {
+  color: #ffe6a8 !important;
+  text-shadow: 0 0 18px #ffcf6655;
+}
+.thmLazyP .dm-info,
+.thmLazyP [class$="-hud"],
+.thmLazyP [class$="-stat"] {
+  border-color: #ffcf6655 !important;
+}
+.thmLazyP .dm-card,
+.thmLazyP .holdem-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.55), 0 0 0 1px #ffcf6622;
+}
+.thmLazyP .dm-btn,
+.thmLazyP [class*="-btn"] {
+  border-color: #ffcf6655 !important;
+}

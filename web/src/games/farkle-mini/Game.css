@@ -185,3 +185,37 @@
   letter-spacing: 0.1em;
   color: #92400e;
 }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: farkle (unique class prefix + themed palette tokens) */
+.farkle-theme {
+  --farkle-bg: linear-gradient(180deg,#0a3a18 0%,#0d4a1f 55%,#166534 100%);
+  --farkle-felt: #0d4a1f;
+  --farkle-accent: #d4af37;
+  --farkle-text: #fef3c7;
+}
+.farkle-theme.farkle-wrap,
+.farkle-theme .farkle-wrap,
+.farkle-wrap.farkle-theme {
+  background: var(--farkle-bg);
+  color: var(--farkle-text);
+}
+.farkle-theme .farkle-die,
+.farkle-theme .farkle-card {
+  border-color: var(--farkle-accent);
+}
+.farkle-theme .farkle-btn,
+.farkle-theme .farkle-roll-btn {
+  background: var(--farkle-accent);
+  color: var(--farkle-felt);
+  border-color: var(--farkle-accent);
+}
+.farkle-theme .farkle-info,
+.farkle-theme .farkle-score,
+.farkle-theme .farkle-final,
+.farkle-theme .farkle-result,
+.farkle-theme .farkle-header,
+.farkle-theme .farkle-message {
+  color: var(--farkle-text);
+}
+

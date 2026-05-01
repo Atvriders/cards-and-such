@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: over-under (unique class prefix + themed palette over shared dm-* engine) */
+.over-under-theme.dm-wrap {
+  background: linear-gradient(180deg,#0f4c81 0%,#1d6fb8 55%,#fbbf24 100%);
+}
+.over-under-theme .dm-info,
+.over-under-theme .dm-header {
+  color: #fff7ed;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.over-under-theme .dm-target { color: #fff7ed; opacity: 0.85; }
+.over-under-theme .dm-score {
+  background: linear-gradient(180deg, #fde68a, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(251,191,36,0.45);
+}
+.over-under-theme .dm-die {
+  background: linear-gradient(145deg,#fef3c7,#fde68a);
+  color: #7c2d12;
+}
+.over-under-theme .dm-card {
+  background: linear-gradient(145deg,#fef3c7,#fde68a);
+  color: #7c2d12;
+}
+.over-under-theme .dm-btn {
+  background: linear-gradient(180deg, #0ea5e9 0%, #0369a1 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(3,105,161,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.over-under-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #f59e0b 0%, #fbbf24 100%);
+  color: #1f2937;
+}
+.over-under-theme .dm-bet-btn {
+  color: #fff7ed;
+  border-color: rgba(255,255,255,0.25);
+}
+.over-under-theme .dm-result {
+  color: #fff7ed;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.over-under-theme .dm-feedback {
+  color: #fde68a;
+  text-shadow: 0 0 12px rgba(251,191,36,0.6);
+}
+.over-under-theme .dm-final {
+  background: linear-gradient(180deg, #fef3c7, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.over-under-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #0ea5e9, #0369a1);
+  border-color: #fbbf24;
+}
+.over-under-theme .dm-die.selected,
+.over-under-theme .dm-die.hl {
+  border-color: #f59e0b;
+  box-shadow:
+    0 0 0 2px #f59e0b,
+    0 0 22px rgba(245,158,11,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

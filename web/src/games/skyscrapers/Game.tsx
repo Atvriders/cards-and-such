@@ -54,13 +54,13 @@ export function Skyscrapers({
 
     if (isCorner) {
       return (
-        <div key={key} className="sky-cell empty-clue" style={{ width: CELL, height: CELL }} />
+        <div key={key} className="skyscrapersdeco-cell empty-clue" style={{ width: CELL, height: CELL }} />
       );
     }
     if (isTopClue) {
       const c = col - 1;
       return (
-        <div key={key} className="sky-clue" style={{ width: CELL, height: CELL }}>
+        <div key={key} className="skyscrapersdeco-clue" style={{ width: CELL, height: CELL }}>
           {topClues[c] || ""}
         </div>
       );
@@ -68,7 +68,7 @@ export function Skyscrapers({
     if (isBottomClue) {
       const c = col - 1;
       return (
-        <div key={key} className="sky-clue" style={{ width: CELL, height: CELL }}>
+        <div key={key} className="skyscrapersdeco-clue" style={{ width: CELL, height: CELL }}>
           {bottomClues[c] || ""}
         </div>
       );
@@ -76,7 +76,7 @@ export function Skyscrapers({
     if (isLeftClue) {
       const r = row - 1;
       return (
-        <div key={key} className="sky-clue" style={{ width: CELL, height: CELL }}>
+        <div key={key} className="skyscrapersdeco-clue" style={{ width: CELL, height: CELL }}>
           {leftClues[r] || ""}
         </div>
       );
@@ -84,7 +84,7 @@ export function Skyscrapers({
     if (isRightClue) {
       const r = row - 1;
       return (
-        <div key={key} className="sky-clue" style={{ width: CELL, height: CELL }}>
+        <div key={key} className="skyscrapersdeco-clue" style={{ width: CELL, height: CELL }}>
           {rightClues[r] || ""}
         </div>
       );
@@ -102,7 +102,7 @@ export function Skyscrapers({
       <div
         key={key}
         className={[
-          "sky-cell",
+          "skyscrapersdeco-cell",
           isSelected ? "selected" : "",
           isError ? "error" : "",
         ]
@@ -126,7 +126,7 @@ export function Skyscrapers({
       </div>
 
       <div
-        className="sky-wrap"
+        className="skyscrapersdeco-wrap"
         style={{
           gridTemplateColumns: `repeat(${total}, ${CELL}px)`,
           gridTemplateRows: `repeat(${total}, ${CELL}px)`,

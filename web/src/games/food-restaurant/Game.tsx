@@ -8,16 +8,16 @@ export function FoodRestaurantGame({ state, dispatch, onGameOver }: GameProps<Fo
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-fr-wrap">
-      <h3 className="bz-fr-title">Food Chain Restaurant</h3>
-      <div className="bz-fr-stats">
+    <div className="bz-fre-wrap">
+      <h3 className="bz-fre-title">Food Chain Restaurant</h3>
+      <div className="bz-fre-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Assets <b>{state.assets}</b></div>
         <div>Workers <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-fr-actions">
+        <div className="bz-fre-actions">
           <button onClick={() => dispatch({ type: "invest" } as FoodRestaurantAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as FoodRestaurantAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as FoodRestaurantAction)}>Hire (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function FoodRestaurantGame({ state, dispatch, onGameOver }: GameProps<Fo
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-fr-event">
+        <div className="bz-fre-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as FoodRestaurantAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-fr-done">
+        <div className="bz-fre-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

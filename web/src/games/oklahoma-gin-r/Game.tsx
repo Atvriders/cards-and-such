@@ -4,5 +4,5 @@ import { RummyView } from "../_shared/RummyView.js";
 import "./Game.css";
 
 export function OklahomaGinRGame(props: GameProps<OklahomaGinRState, OklahomaGinRSettings>): JSX.Element {
-  return <RummyView {...(props as any)} prefix="okgin-r" title="Oklahoma Gin" />;
+  return <RummyView {...(props as any)} prefix="okgr" title="Oklahoma Gin" />;
 }

@@ -78,3 +78,36 @@
   font-weight: 800;
   font-family: "JetBrains Mono", monospace;
 }
+
+
+/* Verdant Houseplant — themed override (unique prefix bz-vhp-) */
+.bz-vhp-wrap {
+  background: linear-gradient(140deg, #166534, #14532d) !important;
+  color: #dcfce7 !important;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #84cc1633;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.bz-vhp-wrap h2 {
+  color: #84cc16;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bz-vhp-wrap .g-cell {
+  background: #15803d55;
+  border: 1px solid #84cc1633;
+  color: #84cc16;
+  transition: background 120ms, transform 80ms;
+}
+.bz-vhp-wrap .g-cell:hover {
+  background: #84cc1633;
+  transform: translateY(-1px);
+}
+.bz-vhp-wrap .g-cell.x { color: #84cc16; font-weight: 800; }
+.bz-vhp-wrap .g-cell.o { color: #dcfce7; font-weight: 800; }
+.bz-vhp-wrap .g-final {
+  color: #84cc16;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+}

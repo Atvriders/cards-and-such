@@ -8,22 +8,22 @@ export function DiceBowlingGame({ state, dispatch, onGameOver }: GameProps<DiceB
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dx-wrap"><div className="dx-done"><h2>Done!</h2><div className="dx-final">{state.score} pts</div></div></div>;
+    return <div className="dbwl-wrap dbwl-theme"><div className="dbwl-done"><h2>Done!</h2><div className="dbwl-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dx-wrap">
-      <div className="dx-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dx-score">{state.score} pts</div>
+    <div className="dbwl-wrap dbwl-theme">
+      <div className="dbwl-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="dbwl-score">{state.score} pts</div>
       {state.dice && (
-        <div className="dx-row">{state.dice.map((d, i) => <div key={i} className="dx-die">{d}</div>)}</div>
+        <div className="dbwl-row">{state.dice.map((d, i) => <div key={i} className="dbwl-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dx-btn" onClick={() => dispatch({ type:"roll" } as DiceBowlingAction)}>Roll</button>
+        <button className="dbwl-btn" onClick={() => dispatch({ type:"roll" } as DiceBowlingAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>
-          <div className="dx-result">+{state.lastPts}</div>
-          <button className="dx-btn alt" onClick={() => dispatch({ type:"next" } as DiceBowlingAction)}>Next</button>
+          <div className="dbwl-result">+{state.lastPts}</div>
+          <button className="dbwl-btn alt" onClick={() => dispatch({ type:"next" } as DiceBowlingAction)}>Next</button>
         </>
       )}
     </div>

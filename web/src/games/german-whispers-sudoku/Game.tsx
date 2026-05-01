@@ -21,11 +21,11 @@ export function GermanWhispersSudokuGame({ state, dispatch, onGameOver }: GamePr
 
   if (state.phase === "done") {
     return (
-      <div className="germanwhisperssudoku-wrap">
-        <div className="germanwhisperssudoku-done">
+      <div className="germanwhispersflag-wrap">
+        <div className="germanwhispersflag-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="germanwhisperssudoku-final">{state.score} pts</p>
+          <p className="germanwhispersflag-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function GermanWhispersSudokuGame({ state, dispatch, onGameOver }: GamePr
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="germanwhisperssudoku-wrap">
-      <div className="germanwhisperssudoku-header">
+    <div className="germanwhispersflag-wrap">
+      <div className="germanwhispersflag-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="germanwhisperssudoku-score">{state.score} pts</span>
+        <span className="germanwhispersflag-score">{state.score} pts</span>
       </div>
-      <div className="germanwhisperssudoku-mech">Sudoku with whisper lines (adjacent digits differ by ≥5).</div>
-      <div className="germanwhisperssudoku-grid">
+      <div className="germanwhispersflag-mech">Sudoku with whisper lines (adjacent digits differ by ≥5).</div>
+      <div className="germanwhispersflag-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="germanwhisperssudoku-row">
+          <div key={r} className="germanwhispersflag-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function GermanWhispersSudokuGame({ state, dispatch, onGameOver }: GamePr
               return (
                 <button
                   key={c}
-                  className={`germanwhisperssudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`germanwhispersflag-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as GermanWhispersSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function GermanWhispersSudokuGame({ state, dispatch, onGameOver }: GamePr
           </div>
         ))}
       </div>
-      <div className="germanwhisperssudoku-pad">
+      <div className="germanwhispersflag-pad">
         {digits.map((d) => (
-          <button key={d} className="germanwhisperssudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as GermanWhispersSudokuAction)}>{d}</button>
+          <button key={d} className="germanwhispersflag-num" onClick={() => dispatch({ type: "enter", digit: d } as GermanWhispersSudokuAction)}>{d}</button>
         ))}
-        <button className="germanwhisperssudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as GermanWhispersSudokuAction)}>×</button>
+        <button className="germanwhispersflag-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as GermanWhispersSudokuAction)}>×</button>
       </div>
-      <div className="germanwhisperssudoku-actions">
-        <button className="germanwhisperssudoku-btn check" onClick={() => dispatch({ type: "check" } as GermanWhispersSudokuAction)}>Check</button>
-        <button className="germanwhisperssudoku-btn hint" onClick={() => dispatch({ type: "hint" } as GermanWhispersSudokuAction)}>Hint</button>
-        <button className="germanwhisperssudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as GermanWhispersSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="germanwhispersflag-actions">
+        <button className="germanwhispersflag-btn check" onClick={() => dispatch({ type: "check" } as GermanWhispersSudokuAction)}>Check</button>
+        <button className="germanwhispersflag-btn hint" onClick={() => dispatch({ type: "hint" } as GermanWhispersSudokuAction)}>Hint</button>
+        <button className="germanwhispersflag-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as GermanWhispersSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="germanwhisperssudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="germanwhispersflag-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

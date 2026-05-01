@@ -20,7 +20,7 @@ export function ShipCaptainCrew({ state, dispatch, onGameOver }: GameProps<ShipC
   const botTotal = totalScore(state.botScores);
 
   return (
-    <div className="scc">
+    <div className="scc scc-theme">
       <div className="scc-info">
         <span>Round {Math.min(state.round, state.maxRounds)} / {state.maxRounds}</span>
         <span>Roll {cur.rollsUsed} / 3</span>

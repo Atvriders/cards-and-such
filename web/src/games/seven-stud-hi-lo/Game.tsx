@@ -24,6 +24,7 @@ export function SevenStudHiLoGame({ state, dispatch, onGameOver }: GameProps<Sev
     : undefined;
 
   return (
+    <div className="thm7StudHL">
     <StudTable
       prefix="sevenstud-hilo-"
       state={state}
@@ -37,5 +38,6 @@ export function SevenStudHiLoGame({ state, dispatch, onGameOver }: GameProps<Sev
       onCall={() => dis({ type: "call" })}
       onRaise={(amount) => dis({ type: "raise", amount })}
     />
+  </div>
   );
 }

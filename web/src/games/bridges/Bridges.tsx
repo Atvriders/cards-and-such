@@ -116,13 +116,13 @@ export function Bridges({ state, dispatch, onGameOver }: GameProps<BridgesState,
   }
 
   return (
-    <div className="bridges">
-      <div className="bridges-title">Bridges (Hashiwokakero)</div>
-      <div className={`bridges-status${won ? " win" : ""}`}>
+    <div className="bridgesnautical">
+      <div className="bridgesnautical-title">Bridges (Hashiwokakero)</div>
+      <div className={`bridgesnautical-status${won ? " win" : ""}`}>
         {won ? `Solved! Score: ${terminal?.score ?? 0}` : `Moves: ${state.moves} — connect all islands`}
       </div>
 
-      <div className="bridges-canvas-wrap">
+      <div className="bridgesnautical-canvas-wrap">
         <canvas
           ref={canvasRef}
           width={W}
@@ -132,11 +132,11 @@ export function Bridges({ state, dispatch, onGameOver }: GameProps<BridgesState,
         />
       </div>
 
-      <div className="bridges-hint">
+      <div className="bridgesnautical-hint">
         Drag from island to island to draw a bridge. Click same pair again for double bridge, again to remove.
       </div>
 
-      <div className="bridges-btns">
+      <div className="bridgesnautical-btns">
         <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>

@@ -1,25 +1,81 @@
-.trivia-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px;font-family:sans-serif;max-width:640px;margin:0 auto; }
-.trivia-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.trivia-progress { font-size:0.95rem;color:#555; }
-.trivia-score { font-size:1.1rem;font-weight:700;color:#27ae60; }
-.trivia-timer { font-size:1.4rem;font-weight:900;color:#e74c3c;min-width:40px;text-align:center; }
-.trivia-timer.urgent { animation:pulse 0.5s infinite alternate; }
-@keyframes pulse { from { opacity:1; } to { opacity:0.4; } }
-.trivia-question { font-size:1.25rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.trivia-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
-.trivia-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;transition:border-color 0.15s,background 0.15s;text-align:left; }
-.trivia-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.trivia-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.trivia-choice-letter { font-weight:900;font-size:1.1rem;color:#95a5a6;min-width:24px; }
-.trivia-actions { display:flex;gap:12px; }
-.trivia-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer; }
-.trivia-btn.submit { background:#27ae60;color:#fff; }
-.trivia-btn.next { background:#3498db;color:#fff; }
-.trivia-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.trivia-feedback { font-size:1.1rem;font-weight:700;padding:10px 24px;border-radius:8px; }
-.trivia-feedback.correct { background:#eafaf1;color:#1e8449; }
-.trivia-feedback.wrong { background:#fdedec;color:#c0392b; }
-.trivia-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:16px;width:100%; }
-.trivia-done h2 { margin-bottom:8px; }
+/* yinsh-abs — unique class prefix `ynsh-` */
+.ynsh-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  padding: 24px 20px 28px;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  max-width: 660px; margin: 0 auto; width: 100%;
+  background: linear-gradient(160deg, #1f2937 0%, #0f1722 100%);
+  color: #e5e7eb; border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.ynsh-header {
+  display: flex; justify-content: space-between; width: 100%;
+  align-items: center; gap: 12px;
+}
+.ynsh-progress {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.85rem; color: #94a3b8; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ynsh-score {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 1rem; font-weight: 700; color: #86efac;
+  background: #0f3322; padding: 4px 10px; border-radius: 999px;
+}
+.ynsh-timer {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 1.3rem; font-weight: 800; color: #fbbf24;
+  min-width: 48px; text-align: center;
+  padding: 4px 10px; border-radius: 8px;
+  background: rgba(0,0,0,0.18);
+}
+.ynsh-timer.urgent { animation: ynsh-pulse 0.55s infinite alternate; }
+@keyframes ynsh-pulse { from { opacity: 1; transform: scale(1); } to { opacity: 0.5; transform: scale(1.06); } }
+.ynsh-question {
+  font-size: 1.2rem; font-weight: 600; text-align: center;
+  line-height: 1.45; color: #e5e7eb; padding: 14px 18px;
+  background: #1a232f; border-radius: 12px; width: 100%;
+  border: 1px solid #374151;
+}
+.ynsh-choices { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.ynsh-choice {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border: 2px solid #374151; border-radius: 10px;
+  background: #1a232f; cursor: pointer; font-size: 0.98rem;
+  color: #e5e7eb; font-family: inherit; text-align: left;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.ynsh-choice:hover:not(:disabled) { border-color: #94a3b8; background: #2a3441; transform: translateY(-1px); }
+.ynsh-choice.selected { border-color: #94a3b8; background: #2a3441; }
+.ynsh-choice.correct { border-color: #86efac; background: #0f3322; color: #86efac; }
+.ynsh-choice.wrong { border-color: #fda4af; background: #3a1418; color: #fda4af; }
+.ynsh-choice-letter {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 800; font-size: 1rem; color: #cbd5e1; min-width: 24px;
+}
+.ynsh-actions { display: flex; gap: 12px; }
+.ynsh-btn {
+  padding: 11px 30px; border-radius: 10px; border: none;
+  font-size: 0.98rem; font-weight: 700; cursor: pointer;
+  font-family: inherit; letter-spacing: 0.01em;
+  transition: transform 0.1s, box-shadow 0.1s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.18);
+}
+.ynsh-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.ynsh-btn:active:not(:disabled) { transform: translateY(1px); }
+.ynsh-btn.submit { background: linear-gradient(180deg, #94a3b8, #475569); color: #fff; }
+.ynsh-btn.next { background: linear-gradient(180deg, #64748b, #334155); color: #fff; }
+.ynsh-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+.ynsh-feedback {
+  font-size: 1rem; font-weight: 700;
+  padding: 10px 22px; border-radius: 8px;
+}
+.ynsh-feedback.correct { background: #0f3322; color: #86efac; }
+.ynsh-feedback.wrong { background: #3a1418; color: #fda4af; }
+.ynsh-done {
+  text-align: center; padding: 28px 24px;
+  background: #1a232f; border-radius: 14px; width: 100%;
+  border: 1px solid #374151;
+}
+.ynsh-done h2 { margin-bottom: 8px; color: #e5e7eb; }
+.ynsh-done p { color: #94a3b8; }

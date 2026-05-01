@@ -8,10 +8,10 @@ export function DiceKenoGame({ state, dispatch, onGameOver }: GameProps<DiceKeno
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap dice-keno-theme"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap dice-keno-theme">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — Pick {PICK_COUNT} faces</div>
       <div className="dm-score">{state.score} pts</div>
       <div className="dm-row">

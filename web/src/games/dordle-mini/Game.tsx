@@ -67,37 +67,37 @@ export function DordleMiniGame({ state, dispatch, onGameOver }: GameProps<Dordle
   }
 
   return (
-    <div className="dm-wrap">
-      <div className="dm-header">
-        <span className="dm-title">Dordle</span>
-        <span className="dm-info">Guess {state.guesses.length + (state.status === "playing" ? 1 : 0)} / {MAX_GUESSES}</span>
+    <div className="dm2-wrap">
+      <div className="dm2-header">
+        <span className="dm2-title">Dordle</span>
+        <span className="dm2-info">Guess {state.guesses.length + (state.status === "playing" ? 1 : 0)} / {MAX_GUESSES}</span>
       </div>
-      <div className="dm-boards">
+      <div className="dm2-boards">
         {state.answers.map((ans, bi) => {
           const board = buildBoard(ans, state.guesses, state.current, state.solved[bi]!);
           return (
-            <div className={`dm-board ${state.solved[bi] ? "dm-solved" : ""}`} key={bi}>
+            <div className={`dm2-board ${state.solved[bi] ? "dm2-solved" : ""}`} key={bi}>
               {board.map((row, ri) => (
-                <div className="dm-row" key={ri}>
+                <div className="dm2-row" key={ri}>
                   {row.letters.map((ch, ci) => (
-                    <div className={`dm-tile dm-${row.tiles[ci]}`} key={ci}>{ch.trim()}</div>
+                    <div className={`dm2-tile dm2-${row.tiles[ci]}`} key={ci}>{ch.trim()}</div>
                   ))}
                 </div>
               ))}
-              {state.status !== "playing" && !state.solved[bi] && <div className="dm-answer">{ans}</div>}
+              {state.status !== "playing" && !state.solved[bi] && <div className="dm2-answer">{ans}</div>}
             </div>
           );
         })}
       </div>
-      {state.message && <div className="dm-msg">{state.message}</div>}
-      <div className="dm-keyboard">
+      {state.message && <div className="dm2-msg">{state.message}</div>}
+      <div className="dm2-keyboard">
         {KEY_ROWS.map((row, ri) => (
-          <div className="dm-krow" key={ri}>
-            {ri === 2 && <button className="dm-key dm-wide" onClick={() => dispatch({ type: "enter" } as DordleMiniAction)}>ENTER</button>}
+          <div className="dm2-krow" key={ri}>
+            {ri === 2 && <button className="dm2-key dm2-wide" onClick={() => dispatch({ type: "enter" } as DordleMiniAction)}>ENTER</button>}
             {row.split("").map(ch => (
-              <button key={ch} className={`dm-key ${combined[ch] ? "dm-k-" + combined[ch] : ""}`} onClick={() => dispatch({ type: "key", ch } as DordleMiniAction)}>{ch}</button>
+              <button key={ch} className={`dm2-key ${combined[ch] ? "dm2-k-" + combined[ch] : ""}`} onClick={() => dispatch({ type: "key", ch } as DordleMiniAction)}>{ch}</button>
             ))}
-            {ri === 2 && <button className="dm-key dm-wide" onClick={() => dispatch({ type: "backspace" } as DordleMiniAction)}>DEL</button>}
+            {ri === 2 && <button className="dm2-key dm2-wide" onClick={() => dispatch({ type: "backspace" } as DordleMiniAction)}>DEL</button>}
           </div>
         ))}
       </div>

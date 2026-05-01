@@ -1,14 +1,48 @@
-.dhd-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:420px;margin:0 auto; }
-.dhd-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
-.dhd-banked { color:#27ae60; }
-.dhd-tally { display:flex;gap:18px;font-weight:700;color:#34495e; }
-.dhd-die { font-size:5rem;color:#2c3e50; }
-.dhd-die.bust { color:#e74c3c; }
-.dhd-bust-msg { font-weight:900;color:#e74c3c;font-size:1.2rem; }
-.dhd-actions { display:flex;gap:12px; }
-.dhd-btn { padding:10px 22px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:1rem; }
-.dhd-btn.roll { background:#e67e22;color:#fff; }
-.dhd-btn.bank { background:#27ae60;color:#fff; }
-.dhd-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.dhd-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
-.dhd-final { font-size:1.8rem;color:#27ae60;font-weight:900; }
+.dhdc-wrap { display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;font-family:sans-serif;max-width:420px;margin:0 auto; }
+.dhdc-header { display:flex;justify-content:space-between;width:100%;font-weight:700; }
+.dhdc-banked { color:#27ae60; }
+.dhdc-tally { display:flex;gap:18px;font-weight:700;color:#34495e; }
+.dhdc-die { font-size:5rem;color:#2c3e50; }
+.dhdc-die.bust { color:#e74c3c; }
+.dhdc-bust-msg { font-weight:900;color:#e74c3c;font-size:1.2rem; }
+.dhdc-actions { display:flex;gap:12px; }
+.dhdc-btn { padding:10px 22px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:1rem; }
+.dhdc-btn.roll { background:#e67e22;color:#fff; }
+.dhdc-btn.bank { background:#27ae60;color:#fff; }
+.dhdc-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.dhdc-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.dhdc-final { font-size:1.8rem;color:#27ae60;font-weight:900; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: dhdc (unique class prefix + themed palette tokens) */
+.dhdc-theme {
+  --dhdc-bg: radial-gradient(ellipse at 50% 30%,#fbbf24 0%,#dc2626 50%,#7f1d1d 100%);
+  --dhdc-felt: #7f1d1d;
+  --dhdc-accent: #fde047;
+  --dhdc-text: #fff1f2;
+}
+.dhdc-theme.dhdc-wrap,
+.dhdc-theme .dhdc-wrap,
+.dhdc-wrap.dhdc-theme {
+  background: var(--dhdc-bg);
+  color: var(--dhdc-text);
+}
+.dhdc-theme .dhdc-die,
+.dhdc-theme .dhdc-card {
+  border-color: var(--dhdc-accent);
+}
+.dhdc-theme .dhdc-btn,
+.dhdc-theme .dhdc-roll-btn {
+  background: var(--dhdc-accent);
+  color: var(--dhdc-felt);
+  border-color: var(--dhdc-accent);
+}
+.dhdc-theme .dhdc-info,
+.dhdc-theme .dhdc-score,
+.dhdc-theme .dhdc-final,
+.dhdc-theme .dhdc-result,
+.dhdc-theme .dhdc-header,
+.dhdc-theme .dhdc-message {
+  color: var(--dhdc-text);
+}
+

@@ -1,4 +1,4 @@
-.futoshiki {
+.futoshikiviolet {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,47 +7,47 @@
   font-family: system-ui, sans-serif;
 }
 
-.futoshiki-title {
+.futoshikiviolet-title {
   font-size: 1.6rem;
   font-weight: 700;
   color: #1a1a2e;
 }
 
-.futoshiki-status {
+.futoshikiviolet-status {
   font-size: 0.95rem;
   color: #555;
 }
 
-.futoshiki-status.win {
+.futoshikiviolet-status.win {
   color: #2e7d32;
   font-weight: 700;
   font-size: 1.1rem;
 }
 
-.futoshiki-grid-wrap {
+.futoshikiviolet-grid-wrap {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
 }
 
-.futoshiki-grid-row {
+.futoshikiviolet-grid-row {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.futoshiki-ineq-v-row {
+.futoshikiviolet-ineq-v-row {
   /* intentionally displayed below each row */
 }
 
-.futoshiki-cell-group {
+.futoshikiviolet-cell-group {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.futoshiki-cell {
+.futoshikiviolet-cell {
   width: 44px;
   height: 44px;
   display: flex;
@@ -64,22 +64,22 @@
   user-select: none;
 }
 
-.futoshiki-cell:hover:not(.given) {
+.futoshikiviolet-cell:hover:not(.given) {
   background: #e3f2fd;
 }
 
-.futoshiki-cell.given {
+.futoshikiviolet-cell.given {
   background: #dde;
   cursor: default;
   color: #333;
 }
 
-.futoshiki-cell.selected {
+.futoshikiviolet-cell.selected {
   background: #bbdefb;
   border-color: #1565c0;
 }
 
-.futoshiki-ineq-h {
+.futoshikiviolet-ineq-h {
   width: 24px;
   text-align: center;
   font-size: 1rem;
@@ -87,7 +87,7 @@
   color: #c62828;
 }
 
-.futoshiki-ineq-v {
+.futoshikiviolet-ineq-v {
   width: 44px;
   height: 20px;
   text-align: center;
@@ -97,18 +97,18 @@
   line-height: 20px;
 }
 
-.futoshiki-ineq-h-spacer {
+.futoshikiviolet-ineq-h-spacer {
   width: 24px;
 }
 
-.futoshiki-numpad {
+.futoshikiviolet-numpad {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.futoshiki-num-btn {
+.futoshikiviolet-num-btn {
   width: 40px;
   height: 40px;
   font-size: 1rem;
@@ -121,21 +121,79 @@
   transition: background 0.15s;
 }
 
-.futoshiki-num-btn:hover {
+.futoshikiviolet-num-btn:hover {
   background: #1976d2;
 }
 
-.futoshiki-num-btn.clear {
+.futoshikiviolet-num-btn.clear {
   background: #c62828;
 }
 
-.futoshiki-num-btn.clear:hover {
+.futoshikiviolet-num-btn.clear:hover {
   background: #e53935;
 }
 
-.futoshiki-hint {
+.futoshikiviolet-hint {
   font-size: 0.8rem;
   color: #888;
   max-width: 380px;
   text-align: center;
+}
+
+
+/* === Theme: regal-violet (Regal violet — strict order) === */
+.futoshikiviolet {
+  background: #f3eefa;
+  color: #2a1640;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.futoshikiviolet .futoshikiviolet-mech,
+.futoshikiviolet [class*="-mech"],
+.futoshikiviolet [class*="-status"]:not(.solved):not(.win) {
+  color: #5a4a7a;
+}
+.futoshikiviolet [class*="-score"],
+.futoshikiviolet [class*="-final"] {
+  color: #6a2ca8;
+}
+.futoshikiviolet [class*="-grid"] {
+  background: #3d1a6e;
+  border-color: #3d1a6e;
+}
+.futoshikiviolet [class*="-cell"] {
+  background: #e7dcf5;
+  color: #2a1640;
+}
+.futoshikiviolet [class*="-cell"].sel,
+.futoshikiviolet [class*="-cell"].selected {
+  outline: 3px solid #9554d4;
+  outline-offset: -3px;
+}
+.futoshikiviolet [class*="-cell"].err,
+.futoshikiviolet [class*="-cell"].error,
+.futoshikiviolet [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #b03a5a;
+}
+.futoshikiviolet [class*="-num"]:hover,
+.futoshikiviolet [class*="-numpad"] button:hover {
+  background: #9554d4;
+  color: #f3eefa;
+  border-color: #6a2ca8;
+}
+.futoshikiviolet [class*="-btn"].check,
+.futoshikiviolet [class*="-controls"] button {
+  background: #6a2ca8;
+  color: #f3eefa;
+  border-color: #6a2ca8;
+}
+.futoshikiviolet [class*="-btn"].next {
+  background: #9554d4;
+  color: #f3eefa;
+}
+.futoshikiviolet [class*="-status"].solved,
+.futoshikiviolet [class*="-status"].win {
+  color: #5a8a3a;
 }

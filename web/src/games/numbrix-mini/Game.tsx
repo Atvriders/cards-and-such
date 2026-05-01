@@ -10,11 +10,11 @@ export function NumbrixMiniGame({ state, dispatch, onGameOver }: GameProps<Numbr
 
   if (state.phase === "done") {
     return (
-      <div className="numbrixmini-wrap">
-        <div className="numbrixmini-done">
+      <div className="numbrixchrome-wrap">
+        <div className="numbrixchrome-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="numbrixmini-final">{state.score} pts</p>
+          <p className="numbrixchrome-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function NumbrixMiniGame({ state, dispatch, onGameOver }: GameProps<Numbr
   const errSet = new Set(state.errors);
 
   return (
-    <div className="numbrixmini-wrap">
-      <div className="numbrixmini-header">
+    <div className="numbrixchrome-wrap">
+      <div className="numbrixchrome-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="numbrixmini-score">{state.score} pts</span>
+        <span className="numbrixchrome-score">{state.score} pts</span>
       </div>
-      <div className="numbrixmini-mech">Fill 1..16 in a connected horizontal/vertical chain.</div>
-      <div className="numbrixmini-grid">
+      <div className="numbrixchrome-mech">Fill 1..16 in a connected horizontal/vertical chain.</div>
+      <div className="numbrixchrome-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="numbrixmini-row">
+          <div key={r} className="numbrixchrome-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function NumbrixMiniGame({ state, dispatch, onGameOver }: GameProps<Numbr
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`numbrixmini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`numbrixchrome-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as NumbrixMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function NumbrixMiniGame({ state, dispatch, onGameOver }: GameProps<Numbr
           </div>
         ))}
       </div>
-      <div className="numbrixmini-pad">
+      <div className="numbrixchrome-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`numbrixmini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as NumbrixMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`numbrixchrome-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as NumbrixMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="numbrixmini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as NumbrixMiniAction)}>×</button>
+        <button className="numbrixchrome-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as NumbrixMiniAction)}>×</button>
       </div>
-      <div className="numbrixmini-actions">
-        <button className="numbrixmini-btn check" onClick={() => dispatch({ type: "check" } as NumbrixMiniAction)}>Check</button>
-        <button className="numbrixmini-btn hint" onClick={() => dispatch({ type: "hint" } as NumbrixMiniAction)}>Hint</button>
-        <button className="numbrixmini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as NumbrixMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="numbrixchrome-actions">
+        <button className="numbrixchrome-btn check" onClick={() => dispatch({ type: "check" } as NumbrixMiniAction)}>Check</button>
+        <button className="numbrixchrome-btn hint" onClick={() => dispatch({ type: "hint" } as NumbrixMiniAction)}>Hint</button>
+        <button className="numbrixchrome-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as NumbrixMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="numbrixmini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="numbrixchrome-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

@@ -10,11 +10,11 @@ export function LitsMiniGame({ state, dispatch, onGameOver }: GameProps<LitsMini
 
   if (state.phase === "done") {
     return (
-      <div className="litsmini-wrap">
-        <div className="litsmini-done">
+      <div className="litstetris-wrap">
+        <div className="litstetris-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="litsmini-final">{state.score} pts</p>
+          <p className="litstetris-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function LitsMiniGame({ state, dispatch, onGameOver }: GameProps<LitsMini
   const errSet = new Set(state.errors);
 
   return (
-    <div className="litsmini-wrap">
-      <div className="litsmini-header">
+    <div className="litstetris-wrap">
+      <div className="litstetris-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="litsmini-score">{state.score} pts</span>
+        <span className="litstetris-score">{state.score} pts</span>
       </div>
-      <div className="litsmini-mech">Fill cells to form L/I/T/S tetrominos under LITS rules.</div>
-      <div className="litsmini-grid">
+      <div className="litstetris-mech">Fill cells to form L/I/T/S tetrominos under LITS rules.</div>
+      <div className="litstetris-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="litsmini-row">
+          <div key={r} className="litstetris-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function LitsMiniGame({ state, dispatch, onGameOver }: GameProps<LitsMini
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`litsmini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`litstetris-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as LitsMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function LitsMiniGame({ state, dispatch, onGameOver }: GameProps<LitsMini
           </div>
         ))}
       </div>
-      <div className="litsmini-pad">
+      <div className="litstetris-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`litsmini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as LitsMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`litstetris-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as LitsMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="litsmini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as LitsMiniAction)}>×</button>
+        <button className="litstetris-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as LitsMiniAction)}>×</button>
       </div>
-      <div className="litsmini-actions">
-        <button className="litsmini-btn check" onClick={() => dispatch({ type: "check" } as LitsMiniAction)}>Check</button>
-        <button className="litsmini-btn hint" onClick={() => dispatch({ type: "hint" } as LitsMiniAction)}>Hint</button>
-        <button className="litsmini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as LitsMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="litstetris-actions">
+        <button className="litstetris-btn check" onClick={() => dispatch({ type: "check" } as LitsMiniAction)}>Check</button>
+        <button className="litstetris-btn hint" onClick={() => dispatch({ type: "hint" } as LitsMiniAction)}>Hint</button>
+        <button className="litstetris-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as LitsMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="litsmini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="litstetris-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

@@ -21,11 +21,11 @@ export function LittleKillerSudokuGame({ state, dispatch, onGameOver }: GameProp
 
   if (state.phase === "done") {
     return (
-      <div className="littlekillersudoku-wrap">
-        <div className="littlekillersudoku-done">
+      <div className="littlekillerforensic-wrap">
+        <div className="littlekillerforensic-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="littlekillersudoku-final">{state.score} pts</p>
+          <p className="littlekillerforensic-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function LittleKillerSudokuGame({ state, dispatch, onGameOver }: GameProp
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="littlekillersudoku-wrap">
-      <div className="littlekillersudoku-header">
+    <div className="littlekillerforensic-wrap">
+      <div className="littlekillerforensic-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="littlekillersudoku-score">{state.score} pts</span>
+        <span className="littlekillerforensic-score">{state.score} pts</span>
       </div>
-      <div className="littlekillersudoku-mech">Sudoku with little-killer diagonal sum hints.</div>
-      <div className="littlekillersudoku-grid">
+      <div className="littlekillerforensic-mech">Sudoku with little-killer diagonal sum hints.</div>
+      <div className="littlekillerforensic-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="littlekillersudoku-row">
+          <div key={r} className="littlekillerforensic-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function LittleKillerSudokuGame({ state, dispatch, onGameOver }: GameProp
               return (
                 <button
                   key={c}
-                  className={`littlekillersudoku-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`littlekillerforensic-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as LittleKillerSudokuAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function LittleKillerSudokuGame({ state, dispatch, onGameOver }: GameProp
           </div>
         ))}
       </div>
-      <div className="littlekillersudoku-pad">
+      <div className="littlekillerforensic-pad">
         {digits.map((d) => (
-          <button key={d} className="littlekillersudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as LittleKillerSudokuAction)}>{d}</button>
+          <button key={d} className="littlekillerforensic-num" onClick={() => dispatch({ type: "enter", digit: d } as LittleKillerSudokuAction)}>{d}</button>
         ))}
-        <button className="littlekillersudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as LittleKillerSudokuAction)}>×</button>
+        <button className="littlekillerforensic-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as LittleKillerSudokuAction)}>×</button>
       </div>
-      <div className="littlekillersudoku-actions">
-        <button className="littlekillersudoku-btn check" onClick={() => dispatch({ type: "check" } as LittleKillerSudokuAction)}>Check</button>
-        <button className="littlekillersudoku-btn hint" onClick={() => dispatch({ type: "hint" } as LittleKillerSudokuAction)}>Hint</button>
-        <button className="littlekillersudoku-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as LittleKillerSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="littlekillerforensic-actions">
+        <button className="littlekillerforensic-btn check" onClick={() => dispatch({ type: "check" } as LittleKillerSudokuAction)}>Check</button>
+        <button className="littlekillerforensic-btn hint" onClick={() => dispatch({ type: "hint" } as LittleKillerSudokuAction)}>Hint</button>
+        <button className="littlekillerforensic-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as LittleKillerSudokuAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="littlekillersudoku-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="littlekillerforensic-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

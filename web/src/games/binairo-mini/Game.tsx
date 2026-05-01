@@ -10,11 +10,11 @@ export function BinairoMiniGame({ state, dispatch, onGameOver }: GameProps<Binai
 
   if (state.phase === "done") {
     return (
-      <div className="binairomini-wrap">
-        <div className="binairomini-done">
+      <div className="binairobinary-wrap">
+        <div className="binairobinary-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="binairomini-final">{state.score} pts</p>
+          <p className="binairobinary-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function BinairoMiniGame({ state, dispatch, onGameOver }: GameProps<Binai
   const errSet = new Set(state.errors);
 
   return (
-    <div className="binairomini-wrap">
-      <div className="binairomini-header">
+    <div className="binairobinary-wrap">
+      <div className="binairobinary-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="binairomini-score">{state.score} pts</span>
+        <span className="binairobinary-score">{state.score} pts</span>
       </div>
-      <div className="binairomini-mech">Fill grid with circles and dots; equal counts per row/col, no 3-in-a-row.</div>
-      <div className="binairomini-grid">
+      <div className="binairobinary-mech">Fill grid with circles and dots; equal counts per row/col, no 3-in-a-row.</div>
+      <div className="binairobinary-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="binairomini-row">
+          <div key={r} className="binairobinary-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function BinairoMiniGame({ state, dispatch, onGameOver }: GameProps<Binai
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`binairomini-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`binairobinary-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as BinairoMiniAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function BinairoMiniGame({ state, dispatch, onGameOver }: GameProps<Binai
           </div>
         ))}
       </div>
-      <div className="binairomini-pad">
+      <div className="binairobinary-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`binairomini-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as BinairoMiniAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`binairobinary-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as BinairoMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="binairomini-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as BinairoMiniAction)}>×</button>
+        <button className="binairobinary-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as BinairoMiniAction)}>×</button>
       </div>
-      <div className="binairomini-actions">
-        <button className="binairomini-btn check" onClick={() => dispatch({ type: "check" } as BinairoMiniAction)}>Check</button>
-        <button className="binairomini-btn hint" onClick={() => dispatch({ type: "hint" } as BinairoMiniAction)}>Hint</button>
-        <button className="binairomini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as BinairoMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="binairobinary-actions">
+        <button className="binairobinary-btn check" onClick={() => dispatch({ type: "check" } as BinairoMiniAction)}>Check</button>
+        <button className="binairobinary-btn hint" onClick={() => dispatch({ type: "hint" } as BinairoMiniAction)}>Hint</button>
+        <button className="binairobinary-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as BinairoMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="binairomini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="binairobinary-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

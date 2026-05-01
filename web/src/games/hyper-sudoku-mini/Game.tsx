@@ -21,11 +21,11 @@ export function HyperSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<H
 
   if (state.phase === "done") {
     return (
-      <div className="hypersudokumini-wrap">
-        <div className="hypersudokumini-done">
+      <div className="hypersapphire-wrap">
+        <div className="hypersapphire-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="hypersudokumini-final">{state.score} pts</p>
+          <p className="hypersapphire-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function HyperSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<H
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="hypersudokumini-wrap">
-      <div className="hypersudokumini-header">
+    <div className="hypersapphire-wrap">
+      <div className="hypersapphire-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="hypersudokumini-score">{state.score} pts</span>
+        <span className="hypersapphire-score">{state.score} pts</span>
       </div>
-      <div className="hypersudokumini-mech">Sudoku with four extra 3×3 hyper-regions.</div>
-      <div className="hypersudokumini-grid">
+      <div className="hypersapphire-mech">Sudoku with four extra 3×3 hyper-regions.</div>
+      <div className="hypersapphire-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="hypersudokumini-row">
+          <div key={r} className="hypersapphire-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function HyperSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<H
               return (
                 <button
                   key={c}
-                  className={`hypersudokumini-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`hypersapphire-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as HyperSudokuMiniAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function HyperSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<H
           </div>
         ))}
       </div>
-      <div className="hypersudokumini-pad">
+      <div className="hypersapphire-pad">
         {digits.map((d) => (
-          <button key={d} className="hypersudokumini-num" onClick={() => dispatch({ type: "enter", digit: d } as HyperSudokuMiniAction)}>{d}</button>
+          <button key={d} className="hypersapphire-num" onClick={() => dispatch({ type: "enter", digit: d } as HyperSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="hypersudokumini-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as HyperSudokuMiniAction)}>×</button>
+        <button className="hypersapphire-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as HyperSudokuMiniAction)}>×</button>
       </div>
-      <div className="hypersudokumini-actions">
-        <button className="hypersudokumini-btn check" onClick={() => dispatch({ type: "check" } as HyperSudokuMiniAction)}>Check</button>
-        <button className="hypersudokumini-btn hint" onClick={() => dispatch({ type: "hint" } as HyperSudokuMiniAction)}>Hint</button>
-        <button className="hypersudokumini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as HyperSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="hypersapphire-actions">
+        <button className="hypersapphire-btn check" onClick={() => dispatch({ type: "check" } as HyperSudokuMiniAction)}>Check</button>
+        <button className="hypersapphire-btn hint" onClick={() => dispatch({ type: "hint" } as HyperSudokuMiniAction)}>Hint</button>
+        <button className="hypersapphire-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as HyperSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="hypersudokumini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="hypersapphire-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

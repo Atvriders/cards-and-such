@@ -32,12 +32,12 @@ export function CrosswordMini({
 
   function getCellClass(i: number): string {
     const ch = puzzle.grid[i];
-    if (ch === "#") return "cm-cell cm-black";
-    let cls = "cm-cell";
-    if (selectedCell === i) cls += " cm-selected";
+    if (ch === "#") return "cmn-cell cmn-black";
+    let cls = "cmn-cell";
+    if (selectedCell === i) cls += " cmn-selected";
     if (checked) {
-      if (playerGrid[i] === ch) cls += " cm-correct";
-      else if (playerGrid[i]) cls += " cm-wrong";
+      if (playerGrid[i] === ch) cls += " cmn-correct";
+      else if (playerGrid[i]) cls += " cmn-wrong";
     }
     return cls;
   }
@@ -59,48 +59,48 @@ export function CrosswordMini({
   }
 
   return (
-    <div className="cm-wrap">
-      <div className="cm-grid">
+    <div className="cmn-wrap">
+      <div className="cmn-grid">
         {Array.from({ length: 25 }, (_, i) => (
           <div
             key={i}
             className={getCellClass(i)}
             onClick={() => puzzle.grid[i] !== "#" && dispatch({ type: "selectCell", index: i } as CrosswordMiniAction)}
           >
-            {cellNumbers[i] && <span className="cm-cell-num">{cellNumbers[i]}</span>}
-            <span className="cm-cell-letter">{playerGrid[i] !== "#" ? playerGrid[i] : ""}</span>
+            {cellNumbers[i] && <span className="cmn-cell-num">{cellNumbers[i]}</span>}
+            <span className="cmn-cell-letter">{playerGrid[i] !== "#" ? playerGrid[i] : ""}</span>
           </div>
         ))}
       </div>
 
-      <div className="cm-clues">
-        <div className="cm-clues-section">
+      <div className="cmn-clues">
+        <div className="cmn-clues-section">
           <strong>Across</strong>
           {puzzle.across.map(c => (
-            <div key={c.number} className="cm-clue">{c.number}. {c.clue}</div>
+            <div key={c.number} className="cmn-clue">{c.number}. {c.clue}</div>
           ))}
         </div>
-        <div className="cm-clues-section">
+        <div className="cmn-clues-section">
           <strong>Down</strong>
           {puzzle.down.map(c => (
-            <div key={c.number} className="cm-clue">{c.number}. {c.clue}</div>
+            <div key={c.number} className="cmn-clue">{c.number}. {c.clue}</div>
           ))}
         </div>
       </div>
 
       {!state.gameOver && (
-        <button className="cm-check-btn" onClick={() => dispatch({ type: "check" } as CrosswordMiniAction)}>
+        <button className="cmn-check-btn" onClick={() => dispatch({ type: "check" } as CrosswordMiniAction)}>
           Check Answers
         </button>
       )}
 
       {checked && (
-        <div className="cm-result">Score: {score} / 100</div>
+        <div className="cmn-result">Score: {score} / 100</div>
       )}
 
       {state.gameOver && (
-        <div className="cm-overlay">
-          <div className="cm-overlay-box">
+        <div className="cmn-overlay">
+          <div className="cmn-overlay-box">
             <h2>Checked!</h2>
             <div>Score: {score} / 100</div>
           </div>

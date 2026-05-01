@@ -47,7 +47,7 @@ export function MiniYahtzeeGame({
   }
 
   return (
-    <div className="yahtz-wrap">
+    <div className="yahtz-wrap yahtz-theme">
       <div className="yahtz-header">
         <span className="yahtz-info">Round {Math.min(state.round, 13)} / 13</span>
         <span className="yahtz-info">Roll {state.rollsUsed} / 3</span>

@@ -17,13 +17,13 @@ export function Akari({ state, dispatch, onGameOver }: GameProps<AkariState, Aka
   const conflicts = computeConflicts(puzzle, bulbs);
 
   return (
-    <div className="akari">
-      <div className="akari-title">Akari (Light Up)</div>
-      <div className={`akari-status${won ? " win" : ""}`}>
+    <div className="akarilamp">
+      <div className="akarilamp-title">Akari (Light Up)</div>
+      <div className={`akarilamp-status${won ? " win" : ""}`}>
         {won ? `Solved! Score: ${terminal?.score ?? 0}` : `Moves: ${state.moves} — illuminate every white cell`}
       </div>
 
-      <div className="akari-grid" style={{ gridTemplateColumns: `repeat(${size}, ${CELL}px)` }}>
+      <div className="akarilamp-grid" style={{ gridTemplateColumns: `repeat(${size}, ${CELL}px)` }}>
         {Array.from({ length: size * size }, (_, idx) => {
           const v = grid[idx];
           const isWall = v !== null;
@@ -33,7 +33,7 @@ export function Akari({ state, dispatch, onGameOver }: GameProps<AkariState, Aka
 
           if (isWall) {
             return (
-              <div key={idx} className="akari-cell wall" style={{ width: CELL, height: CELL }}>
+              <div key={idx} className="akarilamp-cell wall" style={{ width: CELL, height: CELL }}>
                 {v !== -1 ? <span>{v}</span> : null}
               </div>
             );
@@ -41,7 +41,7 @@ export function Akari({ state, dispatch, onGameOver }: GameProps<AkariState, Aka
           return (
             <div
               key={idx}
-              className={["akari-cell", hasBulb ? (isConflict ? "bulb conflict" : "bulb") : isLit ? "lit" : ""].join(" ")}
+              className={["akarilamp-cell", hasBulb ? (isConflict ? "bulb conflict" : "bulb") : isLit ? "lit" : ""].join(" ")}
               style={{ width: CELL, height: CELL }}
               onClick={() => !won && dispatch({ type: "toggleBulb", idx } satisfies AkariAction)}
             >
@@ -51,7 +51,7 @@ export function Akari({ state, dispatch, onGameOver }: GameProps<AkariState, Aka
         })}
       </div>
 
-      <div className="akari-btns">
+      <div className="akarilamp-btns">
         <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>

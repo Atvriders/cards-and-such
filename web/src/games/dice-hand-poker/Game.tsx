@@ -8,11 +8,11 @@ export function DiceHandPokerGame({ state, dispatch, onGameOver }: GameProps<Dic
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap dice-hand-poker-theme"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
   }
   const canHold = state.rollsLeft > 0 && state.rollsLeft < MAX_ROLLS;
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap dice-hand-poker-theme">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — Rolls left: {state.rollsLeft}</div>
       <div className="dm-score">{state.score} pts</div>
       <div className="dm-row">

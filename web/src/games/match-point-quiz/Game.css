@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === mpointq-themewrap themed palette (match_tennis) === */
+.mpointq-themewrap.trivia-wrap,
+.mpointq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #ecfccb;
+  color: #1a2e05;
+  border-color: #facc1555;
+}
+.mpointq-themewrap .trivia-progress,
+.mpointq-themewrap .trivia-score { color: #65a30d; }
+.mpointq-themewrap .trivia-timer { color: #facc15; }
+.mpointq-themewrap .trivia-timer.urgent { color: #dc2626; }
+.mpointq-themewrap .trivia-question { color: #1a2e05; }
+.mpointq-themewrap .trivia-choice {
+  background: #f7fee7;
+  color: #1a2e05;
+  border: 1.5px solid #facc15;
+}
+.mpointq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #65a30d;
+  background: #facc1522;
+}
+.mpointq-themewrap .trivia-choice.selected {
+  border-color: #65a30d;
+  background: #facc1533;
+}
+.mpointq-themewrap .trivia-choice.correct {
+  background: #84cc16;
+  border-color: #84cc16;
+  color: #1a2e05;
+}
+.mpointq-themewrap .trivia-choice.wrong {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #1a2e05;
+}
+.mpointq-themewrap .trivia-choice-letter {
+  background: #65a30d;
+  color: #fff;
+}
+.mpointq-themewrap .trivia-feedback.correct { background: #84cc16; color: #1a2e05; }
+.mpointq-themewrap .trivia-feedback.wrong { background: #dc2626; color: #1a2e05; }
+.mpointq-themewrap .trivia-btn.submit { background: #65a30d; }
+.mpointq-themewrap .trivia-btn.next { background: #facc15; }
+.mpointq-themewrap .trivia-done { background: #f7fee7; color: #1a2e05; }
+.mpointq-themewrap .trivia-done h2 { color: #65a30d; }

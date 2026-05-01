@@ -5,16 +5,16 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function IndianRGame({ state, dispatch, onGameOver }: GameProps<IndianRState, IndianRSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="indr-wrap"><div className="indr-done"><h2>Done!</h2><div className="indr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
-      <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
-      <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="dm-btn" onClick={() => dispatch({ type: "score" } as IndianRAction)}>Auto-score</button>}
+    <div className="indr-wrap">
+      <div className="indr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="indr-score">{state.score} pts</div>
+      <div className="indr-row">{state.hand.map((c, i) => <div key={i} className={`indr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
+      {state.phase === "play" && <button className="indr-btn" onClick={() => dispatch({ type: "score" } as IndianRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
-        <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as IndianRAction)}>Next</button>
+        <div className="indr-result">{state.result} — +{state.pts}</div>
+        <button className="indr-btn alt" onClick={() => dispatch({ type: "next" } as IndianRAction)}>Next</button>
       </>}
     </div>
   );

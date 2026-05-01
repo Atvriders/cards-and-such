@@ -1,8 +1,42 @@
-.drk-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:sans-serif;max-width:340px;margin:0 auto; }
-.drk-header { font-weight:700; }
-.drk-track { width:60px;height:280px;background:linear-gradient(180deg,#0a1f44,#3b6fb6);border-radius:30px;position:relative;border:2px solid #34495e; }
-.drk-rocket { position:absolute;left:8px;font-size:2rem;transition:bottom 0.4s; }
-.drk-die { font-size:3rem;color:#2c3e50; }
-.drk-btn { padding:12px 32px;border-radius:8px;border:none;background:#e74c3c;color:#fff;font-weight:800;cursor:pointer;font-size:1.1rem; }
-.drk-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
-.drk-final { font-size:1.8rem;color:#27ae60;font-weight:900;margin-top:8px; }
+.drkt-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:sans-serif;max-width:340px;margin:0 auto; }
+.drkt-header { font-weight:700; }
+.drkt-track { width:60px;height:280px;background:linear-gradient(180deg,#0a1f44,#3b6fb6);border-radius:30px;position:relative;border:2px solid #34495e; }
+.drkt-rocket { position:absolute;left:8px;font-size:2rem;transition:bottom 0.4s; }
+.drkt-die { font-size:3rem;color:#2c3e50; }
+.drkt-btn { padding:12px 32px;border-radius:8px;border:none;background:#e74c3c;color:#fff;font-weight:800;cursor:pointer;font-size:1.1rem; }
+.drkt-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px; }
+.drkt-final { font-size:1.8rem;color:#27ae60;font-weight:900;margin-top:8px; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: drkt (unique class prefix + themed palette tokens) */
+.drkt-theme {
+  --drkt-bg: linear-gradient(180deg,#0c0a09 0%,#1e1b4b 55%,#3b82f6 100%);
+  --drkt-felt: #0c0a09;
+  --drkt-accent: #fbbf24;
+  --drkt-text: #fafafa;
+}
+.drkt-theme.drkt-wrap,
+.drkt-theme .drkt-wrap,
+.drkt-wrap.drkt-theme {
+  background: var(--drkt-bg);
+  color: var(--drkt-text);
+}
+.drkt-theme .drkt-die,
+.drkt-theme .drkt-card {
+  border-color: var(--drkt-accent);
+}
+.drkt-theme .drkt-btn,
+.drkt-theme .drkt-roll-btn {
+  background: var(--drkt-accent);
+  color: var(--drkt-felt);
+  border-color: var(--drkt-accent);
+}
+.drkt-theme .drkt-info,
+.drkt-theme .drkt-score,
+.drkt-theme .drkt-final,
+.drkt-theme .drkt-result,
+.drkt-theme .drkt-header,
+.drkt-theme .drkt-message {
+  color: var(--drkt-text);
+}
+

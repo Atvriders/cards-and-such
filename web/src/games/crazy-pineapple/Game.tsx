@@ -18,6 +18,7 @@ export function CrazyPineappleGame({ state, dispatch, onGameOver }: GameProps<Cr
     ? bestFive([...state.cpu.hole, ...state.community]) : null;
 
   return (
+    <div className="thmCrazyP">
     <PokerTable
       prefix="crazypineap-"
       state={state}
@@ -33,5 +34,6 @@ export function CrazyPineappleGame({ state, dispatch, onGameOver }: GameProps<Cr
       onRaise={(amount) => dis({ type: "raise", amount })}
       onDiscard={(index) => dis({ type: "discard", index })}
     />
+  </div>
   );
 }

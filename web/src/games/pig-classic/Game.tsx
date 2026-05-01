@@ -12,7 +12,7 @@ export function PigClassicGame({ state, dispatch, onGameOver }: GameProps<PigCla
   if (state.phase === "done") {
     const reachedTarget = state.totalScore >= TARGET;
     return (
-      <div className="pig-wrap">
+      <div className="pig-wrap pig-theme">
         <div className={`pig-done ${reachedTarget ? "win" : "lose"}`}>
           <h2>{reachedTarget ? "You Hit 100!" : "Out of Turns"}</h2>
           <div className="pig-final">{state.totalScore}</div>
@@ -27,7 +27,7 @@ export function PigClassicGame({ state, dispatch, onGameOver }: GameProps<PigCla
   const dieValue = (state.lastRoll || 1) as 1 | 2 | 3 | 4 | 5 | 6;
 
   return (
-    <div className="pig-wrap">
+    <div className="pig-wrap pig-theme">
       <header className="pig-header">
         <div className="pig-stat">
           <div className="pig-stat-label">Banked</div>

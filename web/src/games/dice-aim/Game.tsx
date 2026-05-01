@@ -8,22 +8,22 @@ export function DiceAimGame({ state, dispatch, onGameOver }: GameProps<DiceAimSt
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dx-wrap"><div className="dx-done"><h2>Done!</h2><div className="dx-final">{state.score} pts</div></div></div>;
+    return <div className="daim-wrap daim-theme"><div className="daim-done"><h2>Done!</h2><div className="daim-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dx-wrap">
-      <div className="dx-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dx-score">{state.score} pts</div>
+    <div className="daim-wrap daim-theme">
+      <div className="daim-info">Round {state.round} / {TOTAL_ROUNDS}</div>
+      <div className="daim-score">{state.score} pts</div>
       {state.dice && (
-        <div className="dx-row">{state.dice.map((d, i) => <div key={i} className="dx-die">{d}</div>)}</div>
+        <div className="daim-row">{state.dice.map((d, i) => <div key={i} className="daim-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dx-btn" onClick={() => dispatch({ type:"roll" } as DiceAimAction)}>Roll</button>
+        <button className="daim-btn" onClick={() => dispatch({ type:"roll" } as DiceAimAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>
-          <div className="dx-result">+{state.lastPts}</div>
-          <button className="dx-btn alt" onClick={() => dispatch({ type:"next" } as DiceAimAction)}>Next</button>
+          <div className="daim-result">+{state.lastPts}</div>
+          <button className="daim-btn alt" onClick={() => dispatch({ type:"next" } as DiceAimAction)}>Next</button>
         </>
       )}
     </div>

@@ -8,16 +8,16 @@ export function BaronsTradeGame({ state, dispatch, onGameOver }: GameProps<Baron
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-bt-wrap">
-      <h3 className="bz-bt-title">Barons of Trade</h3>
-      <div className="bz-bt-stats">
+    <div className="bz-btr-wrap">
+      <h3 className="bz-btr-title">Barons of Trade</h3>
+      <div className="bz-btr-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Cash <b>${state.cash}</b></div>
         <div>Assets <b>{state.assets}</b></div>
         <div>Workers <b>{state.workers}</b></div>
       </div>
       {state.phase === "choosing" && (
-        <div className="bz-bt-actions">
+        <div className="bz-btr-actions">
           <button onClick={() => dispatch({ type: "invest" } as BaronsTradeAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as BaronsTradeAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as BaronsTradeAction)}>Hire (${HIRE_COST})</button>
@@ -25,13 +25,13 @@ export function BaronsTradeGame({ state, dispatch, onGameOver }: GameProps<Baron
         </div>
       )}
       {state.phase === "resolved" && (
-        <div className="bz-bt-event">
+        <div className="bz-btr-event">
           <div>{state.lastEvent}</div>
           <button onClick={() => dispatch({ type: "next" } as BaronsTradeAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-bt-done">
+        <div className="bz-btr-done">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

@@ -1,1 +1,76 @@
 @import "../../engines/dicemini/dicemini.css";
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: triple-toss (unique class prefix + themed palette over shared dm-* engine) */
+.triple-toss-theme.dm-wrap {
+  background: linear-gradient(180deg,#7c2d12 0%,#c2410c 55%,#fb923c 100%);
+}
+.triple-toss-theme .dm-info,
+.triple-toss-theme .dm-header {
+  color: #fff7ed;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.triple-toss-theme .dm-target { color: #fff7ed; opacity: 0.85; }
+.triple-toss-theme .dm-score {
+  background: linear-gradient(180deg, #fed7aa, #fdba74);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(253,186,116,0.45);
+}
+.triple-toss-theme .dm-die {
+  background: linear-gradient(145deg,#fff7ed,#fed7aa);
+  color: #7c2d12;
+}
+.triple-toss-theme .dm-card {
+  background: linear-gradient(145deg,#fff7ed,#fed7aa);
+  color: #7c2d12;
+}
+.triple-toss-theme .dm-btn {
+  background: linear-gradient(180deg, #ea580c 0%, #9a3412 100%);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 8px 18px -8px rgba(154,52,18,0.7),
+    0 0 0 1px rgba(0,0,0,0.12);
+}
+.triple-toss-theme .dm-btn.alt {
+  background: linear-gradient(180deg, #fb923c 0%, #fed7aa 100%);
+  color: #1f2937;
+}
+.triple-toss-theme .dm-bet-btn {
+  color: #fff7ed;
+  border-color: rgba(255,255,255,0.25);
+}
+.triple-toss-theme .dm-result {
+  color: #fff7ed;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255,255,255,0.18);
+}
+.triple-toss-theme .dm-feedback {
+  color: #fed7aa;
+  text-shadow: 0 0 12px rgba(253,186,116,0.6);
+}
+.triple-toss-theme .dm-final {
+  background: linear-gradient(180deg, #ffedd5, #ea580c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.triple-toss-theme .dm-cell.selected {
+  background: linear-gradient(180deg, #ea580c, #9a3412);
+  border-color: #fed7aa;
+}
+.triple-toss-theme .dm-die.selected,
+.triple-toss-theme .dm-die.hl {
+  border-color: #fb923c;
+  box-shadow:
+    0 0 0 2px #fb923c,
+    0 0 22px rgba(251,146,60,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.10),
+    inset 0 2px 3px rgba(255,255,255,0.55),
+    0 4px 10px rgba(0,0,0,0.25);
+}
+

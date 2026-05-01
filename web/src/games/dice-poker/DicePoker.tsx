@@ -32,25 +32,25 @@ export function DicePoker({
   }
 
   return (
-    <div className="dp">
-      <div className="dp-header">
+    <div className="dpkr dpkr-theme">
+      <div className="dpkr-header">
         <h2>Dice Poker</h2>
-        <div className="dp-scores">
+        <div className="dpkr-scores">
           <span>You: <strong>{state.playerScore}</strong></span>
           <span> / </span>
           <span>Bot: <strong>{state.botScore}</strong></span>
-          <span className="dp-target">First to {state.settings.winScore}</span>
+          <span className="dpkr-target">First to {state.settings.winScore}</span>
         </div>
       </div>
 
-      <div className="dp-round">Round {state.round}</div>
+      <div className="dpkr-round">Round {state.round}</div>
 
-      <div className="dp-message">{state.message}</div>
+      <div className="dpkr-message">{state.message}</div>
 
       {/* Player dice */}
-      <div className="dp-section">
-        <div className="dp-label">Your Dice</div>
-        <div className="dp-dice">
+      <div className="dpkr-section">
+        <div className="dpkr-label">Your Dice</div>
+        <div className="dpkr-dice">
           {state.playerDice.map((die, i) => (
             <div
               key={i}
@@ -62,38 +62,38 @@ export function DicePoker({
           ))}
         </div>
         {state.playerHand && (
-          <div className="dp-hand-label">{HAND_LABELS[state.playerHand]}</div>
+          <div className="dpkr-hand-label">{HAND_LABELS[state.playerHand]}</div>
         )}
       </div>
 
       {/* Bot dice — shown after result */}
       {(state.phase === "result" || state.phase === "gameOver") && (
-        <div className="dp-section">
-          <div className="dp-label">Bot's Dice</div>
-          <div className="dp-dice">
+        <div className="dpkr-section">
+          <div className="dpkr-label">Bot's Dice</div>
+          <div className="dpkr-dice">
             {state.botDice.map((die, i) => (
-              <div key={i} className="dp-die">{faceLabel(die.value)}</div>
+              <div key={i} className="dpkr-die">{faceLabel(die.value)}</div>
             ))}
           </div>
           {state.botHand && (
-            <div className="dp-hand-label">{HAND_LABELS[state.botHand]}</div>
+            <div className="dpkr-hand-label">{HAND_LABELS[state.botHand]}</div>
           )}
         </div>
       )}
 
-      <div className="dp-controls">
+      <div className="dpkr-controls">
         {canRoll && (
-          <button className="dp-btn" onClick={() => dispatch({ type: "roll" } as DicePokerAction)}>
+          <button className="dpkr-btn" onClick={() => dispatch({ type: "roll" } as DicePokerAction)}>
             {state.playerRollsUsed === 0 ? "Roll Dice" : `Re-roll (${3 - state.playerRollsUsed} left)`}
           </button>
         )}
         {canBank && (
-          <button className="dp-btn secondary" onClick={() => dispatch({ type: "bank" } as DicePokerAction)}>
+          <button className="dpkr-btn secondary" onClick={() => dispatch({ type: "bank" } as DicePokerAction)}>
             Bank This Hand
           </button>
         )}
         {state.phase === "result" && !state.winner && (
-          <button className="dp-btn" onClick={() => dispatch({ type: "nextRound" } as DicePokerAction)}>
+          <button className="dpkr-btn" onClick={() => dispatch({ type: "nextRound" } as DicePokerAction)}>
             Next Round →
           </button>
         )}

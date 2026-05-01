@@ -1,27 +1,85 @@
-.thermosudokumini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.thermosudokumini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.thermosudokumini-score { font-weight:700;color:hsl(100, 60%, 40%); }
-.thermosudokumini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.thermosudokumini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.thermosudokumini-row { display:flex;gap:1px; }
-.thermosudokumini-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.thermosudokumini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.thermosudokumini-cell.sel { background:hsl(100, 65%, 55%);color:#fff; }
-.thermosudokumini-cell.err { background:#fdedec;color:#e74c3c; }
-.thermosudokumini-cell.rt { margin-right:3px; }
-.thermosudokumini-cell.bt { margin-bottom:3px; }
-.thermosudokumini-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
-.thermosudokumini-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.thermosudokumini-num:hover { background:hsl(100, 70%, 92%);border-color:hsl(100, 60%, 55%); }
-.thermosudokumini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.thermosudokumini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.thermosudokumini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.thermosudokumini-btn.check { background:#3498db; }
-.thermosudokumini-btn.hint { background:#f39c12; }
-.thermosudokumini-btn.next { background:hsl(100, 60%, 45%); }
-.thermosudokumini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.thermosudokumini-status { font-weight:700;font-size:1rem; }
-.thermosudokumini-status.solved { color:#27ae60; }
-.thermosudokumini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.thermosudokumini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.thermosudokumini-final { font-size:1.6rem;font-weight:900;color:hsl(100, 60%, 40%); }
+.thermored-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.thermored-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.thermored-score { font-weight:700;color:hsl(100, 60%, 40%); }
+.thermored-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.thermored-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.thermored-row { display:flex;gap:1px; }
+.thermored-cell { width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.thermored-cell.given { background:#ecf0f1;color:#2c3e50; }
+.thermored-cell.sel { background:hsl(100, 65%, 55%);color:#fff; }
+.thermored-cell.err { background:#fdedec;color:#e74c3c; }
+.thermored-cell.rt { margin-right:3px; }
+.thermored-cell.bt { margin-bottom:3px; }
+.thermored-pad { display:flex;gap:5px;flex-wrap:wrap;justify-content:center; }
+.thermored-num { width:42px;height:42px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.thermored-num:hover { background:hsl(100, 70%, 92%);border-color:hsl(100, 60%, 55%); }
+.thermored-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.thermored-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.thermored-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.thermored-btn.check { background:#3498db; }
+.thermored-btn.hint { background:#f39c12; }
+.thermored-btn.next { background:hsl(100, 60%, 45%); }
+.thermored-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.thermored-status { font-weight:700;font-size:1rem; }
+.thermored-status.solved { color:#27ae60; }
+.thermored-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.thermored-done h2 { margin-bottom:6px;color:#2c3e50; }
+.thermored-final { font-size:1.6rem;font-weight:900;color:hsl(100, 60%, 40%); }
+
+
+/* === Theme: thermo-red (Thermo red — heat rising) === */
+.thermored {
+  background: #fff0eb;
+  color: #3a0a0a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.thermored .thermored-mech,
+.thermored [class*="-mech"],
+.thermored [class*="-status"]:not(.solved):not(.win) {
+  color: #7a3a30;
+}
+.thermored [class*="-score"],
+.thermored [class*="-final"] {
+  color: #e0301c;
+}
+.thermored [class*="-grid"] {
+  background: #9a1a0a;
+  border-color: #9a1a0a;
+}
+.thermored [class*="-cell"] {
+  background: #fcd8c8;
+  color: #3a0a0a;
+}
+.thermored [class*="-cell"].sel,
+.thermored [class*="-cell"].selected {
+  outline: 3px solid #ff7050;
+  outline-offset: -3px;
+}
+.thermored [class*="-cell"].err,
+.thermored [class*="-cell"].error,
+.thermored [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #9a0a0a;
+}
+.thermored [class*="-num"]:hover,
+.thermored [class*="-numpad"] button:hover {
+  background: #ff7050;
+  color: #fff0eb;
+  border-color: #e0301c;
+}
+.thermored [class*="-btn"].check,
+.thermored [class*="-controls"] button {
+  background: #e0301c;
+  color: #fff0eb;
+  border-color: #e0301c;
+}
+.thermored [class*="-btn"].next {
+  background: #ff7050;
+  color: #fff0eb;
+}
+.thermored [class*="-status"].solved,
+.thermored [class*="-status"].win {
+  color: #3a8a4a;
+}

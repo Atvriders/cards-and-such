@@ -8,10 +8,10 @@ export function CentipedeRollGame({ state, dispatch, onGameOver }: GameProps<Cen
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>Sum: {state.sum}</div><div className="dm-final">{targetScore(state.sum)} pts</div></div></div>;
+    return <div className="dm-wrap centipede-roll-theme"><div className="dm-done"><h2>Done!</h2><div>Sum: {state.sum}</div><div className="dm-final">{targetScore(state.sum)} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap centipede-roll-theme">
       <div className="dm-info">Roll {state.rolls.length} / {TOTAL_ROLLS}</div>
       <div className="dm-score">Sum: {state.sum} (target 100)</div>
       <div className="dm-row">

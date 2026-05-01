@@ -23,12 +23,12 @@
   font-weight: bold;
 }
 
-.sky-wrap {
+.skyscrapersdeco-wrap {
   display: inline-grid;
   gap: 0;
 }
 
-.sky-clue {
+.skyscrapersdeco-clue {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
   color: #444;
 }
 
-.sky-cell {
+.skyscrapersdeco-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,19 +49,19 @@
   background: #fff;
 }
 
-.sky-cell.selected {
+.skyscrapersdeco-cell.selected {
   background: #cce5ff;
 }
 
-.sky-cell.error {
+.skyscrapersdeco-cell.error {
   background: #ffe0e0;
 }
 
-.sky-cell.selected.error {
+.skyscrapersdeco-cell.selected.error {
   background: #ffb3b3;
 }
 
-.sky-cell.empty-clue {
+.skyscrapersdeco-cell.empty-clue {
   background: transparent;
   border: none;
   cursor: default;
@@ -92,4 +92,62 @@
 .skyscrapers-numpad button.clear {
   background: #fdd;
   width: 60px;
+}
+
+
+/* === Theme: art-deco (Art deco — gold on teal) === */
+.skyscrapersdeco {
+  background: #0e2a2e;
+  color: #f0e1b8;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.skyscrapersdeco .skyscrapersdeco-mech,
+.skyscrapersdeco [class*="-mech"],
+.skyscrapersdeco [class*="-status"]:not(.solved):not(.win) {
+  color: #a8c2c5;
+}
+.skyscrapersdeco [class*="-score"],
+.skyscrapersdeco [class*="-final"] {
+  color: #d4a04a;
+}
+.skyscrapersdeco [class*="-grid"] {
+  background: #d4a04a;
+  border-color: #d4a04a;
+}
+.skyscrapersdeco [class*="-cell"] {
+  background: #163b40;
+  color: #f0e1b8;
+}
+.skyscrapersdeco [class*="-cell"].sel,
+.skyscrapersdeco [class*="-cell"].selected {
+  outline: 3px solid #e8c478;
+  outline-offset: -3px;
+}
+.skyscrapersdeco [class*="-cell"].err,
+.skyscrapersdeco [class*="-cell"].error,
+.skyscrapersdeco [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #ff8a7a;
+}
+.skyscrapersdeco [class*="-num"]:hover,
+.skyscrapersdeco [class*="-numpad"] button:hover {
+  background: #e8c478;
+  color: #0e2a2e;
+  border-color: #d4a04a;
+}
+.skyscrapersdeco [class*="-btn"].check,
+.skyscrapersdeco [class*="-controls"] button {
+  background: #d4a04a;
+  color: #0e2a2e;
+  border-color: #d4a04a;
+}
+.skyscrapersdeco [class*="-btn"].next {
+  background: #e8c478;
+  color: #0e2a2e;
+}
+.skyscrapersdeco [class*="-status"].solved,
+.skyscrapersdeco [class*="-status"].win {
+  color: #7ad9b0;
 }

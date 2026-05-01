@@ -9,7 +9,7 @@ export function SpringMeadowMini({ state, dispatch, onGameOver }: GameProps<Spri
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
   if (state.phase === "gameover" && state.result) return (
-    <div className="g-wrap">
+    <div className="bz-smm-wrap g-wrap">
       <h2>Game Over</h2>
       <p className="g-final">You: {state.result.player} — CPU: {state.result.cpu}</p>
       <p>{state.result.player > state.result.cpu ? "You win!" : state.result.player < state.result.cpu ? "CPU wins" : "Tie"}</p>
@@ -17,7 +17,7 @@ export function SpringMeadowMini({ state, dispatch, onGameOver }: GameProps<Spri
   );
 
   return (
-    <div className="g-wrap">
+    <div className="bz-smm-wrap g-wrap">
       <p>You are X. Click an empty cell.</p>
       <div className="g-grid">
         {state.board.map((c, i) => (

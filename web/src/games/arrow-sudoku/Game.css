@@ -25,3 +25,61 @@
 .arrowsudoku-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
 .arrowsudoku-done h2 { margin-bottom:6px;color:#2c3e50; }
 .arrowsudoku-final { font-size:1.6rem;font-weight:900;color:hsl(320, 60%, 40%); }
+
+
+/* === Theme: archery (Archery target — bow & quiver) === */
+.arrowarchery {
+  background: #f4ede0;
+  color: #3a2814;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.arrowarchery .arrowarchery-mech,
+.arrowarchery [class*="-mech"],
+.arrowarchery [class*="-status"]:not(.solved):not(.win) {
+  color: #7a5a3a;
+}
+.arrowarchery [class*="-score"],
+.arrowarchery [class*="-final"] {
+  color: #b8702a;
+}
+.arrowarchery [class*="-grid"] {
+  background: #5a3a18;
+  border-color: #5a3a18;
+}
+.arrowarchery [class*="-cell"] {
+  background: #ead8b8;
+  color: #3a2814;
+}
+.arrowarchery [class*="-cell"].sel,
+.arrowarchery [class*="-cell"].selected {
+  outline: 3px solid #e0a050;
+  outline-offset: -3px;
+}
+.arrowarchery [class*="-cell"].err,
+.arrowarchery [class*="-cell"].error,
+.arrowarchery [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #a83a2a;
+}
+.arrowarchery [class*="-num"]:hover,
+.arrowarchery [class*="-numpad"] button:hover {
+  background: #e0a050;
+  color: #f4ede0;
+  border-color: #b8702a;
+}
+.arrowarchery [class*="-btn"].check,
+.arrowarchery [class*="-controls"] button {
+  background: #b8702a;
+  color: #f4ede0;
+  border-color: #b8702a;
+}
+.arrowarchery [class*="-btn"].next {
+  background: #e0a050;
+  color: #f4ede0;
+}
+.arrowarchery [class*="-status"].solved,
+.arrowarchery [class*="-status"].win {
+  color: #5a8a3a;
+}

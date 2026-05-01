@@ -1,30 +1,88 @@
-.litsmini-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
-.litsmini-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
-.litsmini-score { font-weight:700;color:hsl(260, 60%, 40%); }
-.litsmini-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
-.litsmini-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
-.litsmini-row { display:flex;gap:1px; }
-.litsmini-cell { width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
-.litsmini-cell.given { background:#ecf0f1;color:#2c3e50; }
-.litsmini-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
-.litsmini-cell.sel { outline:3px solid hsl(260, 65%, 55%);outline-offset:-3px; }
-.litsmini-cell.err { background:#fdedec;color:#e74c3c; }
-.litsmini-cell.val0 { background:#fff5d8; }
-.litsmini-cell.val1 { background:#d8eaff; }
-.litsmini-cell.val2 { background:#ffe0e0; }
-.litsmini-cell.val3 { background:#e0ffe0; }
-.litsmini-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
-.litsmini-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
-.litsmini-num:hover { background:hsl(260, 70%, 92%);border-color:hsl(260, 60%, 55%); }
-.litsmini-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
-.litsmini-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
-.litsmini-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
-.litsmini-btn.check { background:#3498db; }
-.litsmini-btn.hint { background:#f39c12; }
-.litsmini-btn.next { background:hsl(260, 60%, 45%); }
-.litsmini-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.litsmini-status { font-weight:700;font-size:1rem; }
-.litsmini-status.solved { color:#27ae60; }
-.litsmini-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
-.litsmini-done h2 { margin-bottom:6px;color:#2c3e50; }
-.litsmini-final { font-size:1.6rem;font-weight:900;color:hsl(260, 60%, 40%); }
+.litstetris-wrap { display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;font-family:'Inter',sans-serif;max-width:680px;margin:0 auto; }
+.litstetris-header { display:flex;justify-content:space-between;width:100%;align-items:center;font-size:0.95rem;color:#34495e; }
+.litstetris-score { font-weight:700;color:hsl(260, 60%, 40%); }
+.litstetris-mech { font-size:0.85rem;color:#7f8c8d;text-align:center;font-style:italic;max-width:560px; }
+.litstetris-grid { display:flex;flex-direction:column;gap:1px;background:#2c3e50;padding:3px;border-radius:6px; }
+.litstetris-row { display:flex;gap:1px; }
+.litstetris-cell { width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;color:#2c3e50;border:none;cursor:pointer;border-radius:2px;padding:0; }
+.litstetris-cell.given { background:#ecf0f1;color:#2c3e50; }
+.litstetris-cell.blocked { background:#34495e;color:#34495e;cursor:not-allowed; }
+.litstetris-cell.sel { outline:3px solid hsl(260, 65%, 55%);outline-offset:-3px; }
+.litstetris-cell.err { background:#fdedec;color:#e74c3c; }
+.litstetris-cell.val0 { background:#fff5d8; }
+.litstetris-cell.val1 { background:#d8eaff; }
+.litstetris-cell.val2 { background:#ffe0e0; }
+.litstetris-cell.val3 { background:#e0ffe0; }
+.litstetris-pad { display:flex;gap:6px;flex-wrap:wrap;justify-content:center; }
+.litstetris-num { min-width:46px;height:44px;padding:0 10px;border:2px solid #bdc3c7;background:#fff;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#2c3e50; }
+.litstetris-num:hover { background:hsl(260, 70%, 92%);border-color:hsl(260, 60%, 55%); }
+.litstetris-num.clear { background:#fef5e7;color:#e67e22;border-color:#f39c12; }
+.litstetris-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center; }
+.litstetris-btn { padding:8px 18px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;color:#fff; }
+.litstetris-btn.check { background:#3498db; }
+.litstetris-btn.hint { background:#f39c12; }
+.litstetris-btn.next { background:hsl(260, 60%, 45%); }
+.litstetris-btn:disabled { opacity:0.4;cursor:not-allowed; }
+.litstetris-status { font-weight:700;font-size:1rem; }
+.litstetris-status.solved { color:#27ae60; }
+.litstetris-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:14px;width:100%;font-family:'Inter',sans-serif; }
+.litstetris-done h2 { margin-bottom:6px;color:#2c3e50; }
+.litstetris-final { font-size:1.6rem;font-weight:900;color:hsl(260, 60%, 40%); }
+
+
+/* === Theme: tetris (Tetris glow — neon block) === */
+.litstetris {
+  background: #1a1a26;
+  color: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.litstetris .litstetris-mech,
+.litstetris [class*="-mech"],
+.litstetris [class*="-status"]:not(.solved):not(.win) {
+  color: #a8a8c0;
+}
+.litstetris [class*="-score"],
+.litstetris [class*="-final"] {
+  color: #ff4081;
+}
+.litstetris [class*="-grid"] {
+  background: #ff4081;
+  border-color: #ff4081;
+}
+.litstetris [class*="-cell"] {
+  background: #2c2c40;
+  color: #fff;
+}
+.litstetris [class*="-cell"].sel,
+.litstetris [class*="-cell"].selected {
+  outline: 3px solid #40c4ff;
+  outline-offset: -3px;
+}
+.litstetris [class*="-cell"].err,
+.litstetris [class*="-cell"].error,
+.litstetris [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #ff5a4a;
+}
+.litstetris [class*="-num"]:hover,
+.litstetris [class*="-numpad"] button:hover {
+  background: #40c4ff;
+  color: #1a1a26;
+  border-color: #ff4081;
+}
+.litstetris [class*="-btn"].check,
+.litstetris [class*="-controls"] button {
+  background: #ff4081;
+  color: #1a1a26;
+  border-color: #ff4081;
+}
+.litstetris [class*="-btn"].next {
+  background: #40c4ff;
+  color: #1a1a26;
+}
+.litstetris [class*="-status"].solved,
+.litstetris [class*="-status"].win {
+  color: #7adba0;
+}

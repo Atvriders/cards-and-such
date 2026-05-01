@@ -1,4 +1,4 @@
-.sb-wrap {
+.sbe-wrap {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,17 +10,17 @@
   min-height: 520px;
 }
 
-.sb-header {
+.sbe-header {
   display: flex;
   gap: 40px;
   font-size: 1.1rem;
   font-weight: bold;
 }
 
-.sb-timer { color: #c0392b; }
-.sb-score { color: #2c3e50; }
+.sbe-timer { color: #c0392b; }
+.sbe-score { color: #2c3e50; }
 
-.sb-input-display {
+.sbe-input-display {
   font-size: 1.6rem;
   font-weight: bold;
   letter-spacing: 4px;
@@ -32,45 +32,45 @@
   padding-bottom: 4px;
 }
 
-.sb-message {
+.sbe-message {
   font-size: 0.95rem;
   color: #e67e22;
   min-height: 20px;
   font-weight: bold;
 }
 
-.sb-honeycomb { cursor: pointer; }
+.sbe-honeycomb { cursor: pointer; }
 
-.sb-hex {
+.sbe-hex {
   fill: #f0e68c;
   stroke: #d4ac0d;
   stroke-width: 2;
   transition: fill 0.1s;
 }
 
-.sb-hex-center-cell {
+.sbe-hex-center-cell {
   fill: #f9c74f;
   stroke: #e6a817;
 }
 
-.sb-hex-outer:hover .sb-hex,
-.sb-hex-center:hover .sb-hex {
+.sbe-hex-outer:hover .sbe-hex,
+.sbe-hex-center:hover .sbe-hex {
   fill: #ffe066;
 }
 
-.sb-hex-letter {
+.sbe-hex-letter {
   font-size: 18px;
   font-weight: bold;
   fill: #222;
   pointer-events: none;
 }
 
-.sb-controls {
+.sbe-controls {
   display: flex;
   gap: 10px;
 }
 
-.sb-controls button {
+.sbe-controls button {
   padding: 8px 18px;
   font-size: 1rem;
   border: 1px solid #999;
@@ -79,29 +79,29 @@
   cursor: pointer;
 }
 
-.sb-submit-btn {
+.sbe-submit-btn {
   background: #27ae60 !important;
   color: #fff;
   border-color: #1e8449 !important;
 }
 
-.sb-found {
+.sbe-found {
   width: 100%;
   max-width: 360px;
 }
 
-.sb-found-header {
+.sbe-found-header {
   font-weight: bold;
   margin-bottom: 6px;
 }
 
-.sb-found-list {
+.sbe-found-list {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.sb-found-word {
+.sbe-found-word {
   background: #eaf4fe;
   border: 1px solid #a9d4f5;
   border-radius: 4px;
@@ -109,13 +109,13 @@
   font-size: 0.85rem;
 }
 
-.sb-found-word.pangram {
+.sbe-found-word.pangram {
   background: #fff3cd;
   border-color: #f0c040;
   font-weight: bold;
 }
 
-.sb-overlay {
+.sbe-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.55);
@@ -126,7 +126,7 @@
   z-index: 10;
 }
 
-.sb-overlay-box {
+.sbe-overlay-box {
   background: #fff;
   border-radius: 10px;
   padding: 28px 40px;
@@ -134,7 +134,36 @@
   box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 
-.sb-overlay-box h2 {
+.sbe-overlay-box h2 {
   margin: 0 0 12px;
   font-size: 1.6rem;
 }
+
+/* === Theme: honeycomb === */
+.sbe-wrap, .sbe-board, .sbe {
+  background: #fff8d8;
+  color: #5b3a00;
+  border-radius: 14px;
+}
+.sbe-tile, .sbe-cell, .sbe-key {
+  background: #ffe699;
+  border-color: #e6cf80;
+  color: #5b3a00;
+}
+.sbe-correct, .sbe-tile.correct, .sbe-cell.correct, .sbe-key.correct {
+  background: #a07d10 !important;
+  color: #fff !important;
+  border-color: #a07d10 !important;
+}
+.sbe-wrong, .sbe-tile.wrong, .sbe-cell.wrong {
+  background: #7a4a00 !important;
+  color: #fff !important;
+  border-color: #7a4a00 !important;
+}
+.sbe-accent, .sbe-title, .sbe-header { color: #d4a017; }
+.sbe-btn, .sbe-submit-btn, .sbe-action-btn {
+  background: #d4a017;
+  color: #fff;
+  border: none;
+}
+.sbe-btn:hover:not(:disabled) { filter: brightness(1.08); }

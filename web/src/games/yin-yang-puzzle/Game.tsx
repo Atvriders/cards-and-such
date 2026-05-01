@@ -10,11 +10,11 @@ export function YinYangPuzzleGame({ state, dispatch, onGameOver }: GameProps<Yin
 
   if (state.phase === "done") {
     return (
-      <div className="yinyangpuzzle-wrap">
-        <div className="yinyangpuzzle-done">
+      <div className="yinyangzen-wrap">
+        <div className="yinyangzen-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="yinyangpuzzle-final">{state.score} pts</p>
+          <p className="yinyangzen-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -24,15 +24,15 @@ export function YinYangPuzzleGame({ state, dispatch, onGameOver }: GameProps<Yin
   const errSet = new Set(state.errors);
 
   return (
-    <div className="yinyangpuzzle-wrap">
-      <div className="yinyangpuzzle-header">
+    <div className="yinyangzen-wrap">
+      <div className="yinyangzen-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="yinyangpuzzle-score">{state.score} pts</span>
+        <span className="yinyangzen-score">{state.score} pts</span>
       </div>
-      <div className="yinyangpuzzle-mech">Fill each cell black or white so each color forms a single connected region.</div>
-      <div className="yinyangpuzzle-grid">
+      <div className="yinyangzen-mech">Fill each cell black or white so each color forms a single connected region.</div>
+      <div className="yinyangzen-grid">
         {Array.from({ length: GRID_ROWS }, (_, r) => (
-          <div key={r} className="yinyangpuzzle-row">
+          <div key={r} className="yinyangzen-row">
             {Array.from({ length: GRID_COLS }, (_, c) => {
               const idx = r * GRID_COLS + c;
               const v = state.current[idx]!;
@@ -47,7 +47,7 @@ export function YinYangPuzzleGame({ state, dispatch, onGameOver }: GameProps<Yin
                 <button
                   key={c}
                   disabled={isBlocked}
-                  className={`yinyangpuzzle-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
+                  className={`yinyangzen-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}
                   onClick={() => !isBlocked && dispatch({ type: "select", index: idx } as YinYangPuzzleAction)}
                 >{label}</button>
               );
@@ -55,18 +55,18 @@ export function YinYangPuzzleGame({ state, dispatch, onGameOver }: GameProps<Yin
           </div>
         ))}
       </div>
-      <div className="yinyangpuzzle-pad">
+      <div className="yinyangzen-pad">
         {VALUES.map((vv, i) => (
-          <button key={vv} className={`yinyangpuzzle-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as YinYangPuzzleAction)}>{VALUE_LABELS[i]}</button>
+          <button key={vv} className={`yinyangzen-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as YinYangPuzzleAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="yinyangpuzzle-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as YinYangPuzzleAction)}>×</button>
+        <button className="yinyangzen-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as YinYangPuzzleAction)}>×</button>
       </div>
-      <div className="yinyangpuzzle-actions">
-        <button className="yinyangpuzzle-btn check" onClick={() => dispatch({ type: "check" } as YinYangPuzzleAction)}>Check</button>
-        <button className="yinyangpuzzle-btn hint" onClick={() => dispatch({ type: "hint" } as YinYangPuzzleAction)}>Hint</button>
-        <button className="yinyangpuzzle-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as YinYangPuzzleAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="yinyangzen-actions">
+        <button className="yinyangzen-btn check" onClick={() => dispatch({ type: "check" } as YinYangPuzzleAction)}>Check</button>
+        <button className="yinyangzen-btn hint" onClick={() => dispatch({ type: "hint" } as YinYangPuzzleAction)}>Hint</button>
+        <button className="yinyangzen-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as YinYangPuzzleAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="yinyangpuzzle-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="yinyangzen-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

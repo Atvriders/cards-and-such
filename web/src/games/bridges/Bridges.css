@@ -1,2 +1,60 @@
 /* Modern trick-taking engine — see web/src/engines/trick/trick.css */
 @import "../../engines/trick/trick.css";
+
+
+/* === Theme: nautical (Harbour nautical — navy & rope) === */
+.bridgesnautical {
+  background: #e6eef5;
+  color: #0a1f3a;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.bridgesnautical .bridgesnautical-mech,
+.bridgesnautical [class*="-mech"],
+.bridgesnautical [class*="-status"]:not(.solved):not(.win) {
+  color: #4a607a;
+}
+.bridgesnautical [class*="-score"],
+.bridgesnautical [class*="-final"] {
+  color: #0a3a6a;
+}
+.bridgesnautical [class*="-grid"] {
+  background: #0a1f3a;
+  border-color: #0a1f3a;
+}
+.bridgesnautical [class*="-cell"] {
+  background: #fff5dc;
+  color: #0a1f3a;
+}
+.bridgesnautical [class*="-cell"].sel,
+.bridgesnautical [class*="-cell"].selected {
+  outline: 3px solid #3a6aa8;
+  outline-offset: -3px;
+}
+.bridgesnautical [class*="-cell"].err,
+.bridgesnautical [class*="-cell"].error,
+.bridgesnautical [class*="-cell"].conflict {
+  background: #fdecec;
+  color: #c43a3a;
+}
+.bridgesnautical [class*="-num"]:hover,
+.bridgesnautical [class*="-numpad"] button:hover {
+  background: #3a6aa8;
+  color: #e6eef5;
+  border-color: #0a3a6a;
+}
+.bridgesnautical [class*="-btn"].check,
+.bridgesnautical [class*="-controls"] button {
+  background: #0a3a6a;
+  color: #e6eef5;
+  border-color: #0a3a6a;
+}
+.bridgesnautical [class*="-btn"].next {
+  background: #3a6aa8;
+  color: #e6eef5;
+}
+.bridgesnautical [class*="-status"].solved,
+.bridgesnautical [class*="-status"].win {
+  color: #2c8a5a;
+}

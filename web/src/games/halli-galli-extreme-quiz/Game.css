@@ -1,2 +1,50 @@
 /* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+
+/* === hgallixq-themewrap themed palette (halli_fruit) === */
+.hgallixq-themewrap.trivia-wrap,
+.hgallixq-themewrap .trivia-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)),
+    #fffbeb;
+  color: #7c2d12;
+  border-color: #16a34a55;
+}
+.hgallixq-themewrap .trivia-progress,
+.hgallixq-themewrap .trivia-score { color: #dc2626; }
+.hgallixq-themewrap .trivia-timer { color: #16a34a; }
+.hgallixq-themewrap .trivia-timer.urgent { color: #fca5a5; }
+.hgallixq-themewrap .trivia-question { color: #7c2d12; }
+.hgallixq-themewrap .trivia-choice {
+  background: #ffffff;
+  color: #7c2d12;
+  border: 1.5px solid #16a34a;
+}
+.hgallixq-themewrap .trivia-choice:hover:not(:disabled) {
+  border-color: #dc2626;
+  background: #16a34a22;
+}
+.hgallixq-themewrap .trivia-choice.selected {
+  border-color: #dc2626;
+  background: #16a34a33;
+}
+.hgallixq-themewrap .trivia-choice.correct {
+  background: #86efac;
+  border-color: #86efac;
+  color: #7c2d12;
+}
+.hgallixq-themewrap .trivia-choice.wrong {
+  background: #fca5a5;
+  border-color: #fca5a5;
+  color: #7c2d12;
+}
+.hgallixq-themewrap .trivia-choice-letter {
+  background: #dc2626;
+  color: #fff;
+}
+.hgallixq-themewrap .trivia-feedback.correct { background: #86efac; color: #7c2d12; }
+.hgallixq-themewrap .trivia-feedback.wrong { background: #fca5a5; color: #7c2d12; }
+.hgallixq-themewrap .trivia-btn.submit { background: #dc2626; }
+.hgallixq-themewrap .trivia-btn.next { background: #16a34a; }
+.hgallixq-themewrap .trivia-done { background: #ffffff; color: #7c2d12; }
+.hgallixq-themewrap .trivia-done h2 { color: #dc2626; }

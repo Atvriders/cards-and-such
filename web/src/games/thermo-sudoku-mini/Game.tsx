@@ -21,11 +21,11 @@ export function ThermoSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
 
   if (state.phase === "done") {
     return (
-      <div className="thermosudokumini-wrap">
-        <div className="thermosudokumini-done">
+      <div className="thermored-wrap">
+        <div className="thermored-done">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
-          <p className="thermosudokumini-final">{state.score} pts</p>
+          <p className="thermored-final">{state.score} pts</p>
         </div>
       </div>
     );
@@ -36,15 +36,15 @@ export function ThermoSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="thermosudokumini-wrap">
-      <div className="thermosudokumini-header">
+    <div className="thermored-wrap">
+      <div className="thermored-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="thermosudokumini-score">{state.score} pts</span>
+        <span className="thermored-score">{state.score} pts</span>
       </div>
-      <div className="thermosudokumini-mech">Sudoku with thermometers — digits along must increase from bulb.</div>
-      <div className="thermosudokumini-grid">
+      <div className="thermored-mech">Sudoku with thermometers — digits along must increase from bulb.</div>
+      <div className="thermored-grid">
         {Array.from({ length: GRID_SIZE }, (_, r) => (
-          <div key={r} className="thermosudokumini-row">
+          <div key={r} className="thermored-row">
             {Array.from({ length: GRID_SIZE }, (_, c) => {
               const idx = r * GRID_SIZE + c;
               const v = state.current[idx]!;
@@ -56,7 +56,7 @@ export function ThermoSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
               return (
                 <button
                   key={c}
-                  className={`thermosudokumini-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
+                  className={`thermored-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as ThermoSudokuMiniAction)}
                 >{v === 0 ? "" : v}</button>
               );
@@ -64,18 +64,18 @@ export function ThermoSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
           </div>
         ))}
       </div>
-      <div className="thermosudokumini-pad">
+      <div className="thermored-pad">
         {digits.map((d) => (
-          <button key={d} className="thermosudokumini-num" onClick={() => dispatch({ type: "enter", digit: d } as ThermoSudokuMiniAction)}>{d}</button>
+          <button key={d} className="thermored-num" onClick={() => dispatch({ type: "enter", digit: d } as ThermoSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="thermosudokumini-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as ThermoSudokuMiniAction)}>×</button>
+        <button className="thermored-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as ThermoSudokuMiniAction)}>×</button>
       </div>
-      <div className="thermosudokumini-actions">
-        <button className="thermosudokumini-btn check" onClick={() => dispatch({ type: "check" } as ThermoSudokuMiniAction)}>Check</button>
-        <button className="thermosudokumini-btn hint" onClick={() => dispatch({ type: "hint" } as ThermoSudokuMiniAction)}>Hint</button>
-        <button className="thermosudokumini-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as ThermoSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
+      <div className="thermored-actions">
+        <button className="thermored-btn check" onClick={() => dispatch({ type: "check" } as ThermoSudokuMiniAction)}>Check</button>
+        <button className="thermored-btn hint" onClick={() => dispatch({ type: "hint" } as ThermoSudokuMiniAction)}>Hint</button>
+        <button className="thermored-btn next" disabled={!state.solved} onClick={() => dispatch({ type: "next" } as ThermoSudokuMiniAction)}>{state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}</button>
       </div>
-      {state.solved && <div className="thermosudokumini-status solved">Solved! Press Next.</div>}
+      {state.solved && <div className="thermored-status solved">Solved! Press Next.</div>}
     </div>
   );
 }

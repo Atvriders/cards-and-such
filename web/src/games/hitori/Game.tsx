@@ -21,16 +21,16 @@ export function Hitori({
   const violations = computeViolations(shaded, puzzle);
 
   return (
-    <div className="hitori">
-      <div className="hitori-title">Hitori</div>
-      <div className={`hitori-status${won ? " win" : ""}`}>
+    <div className="hitorishadow">
+      <div className="hitorishadow-title">Hitori</div>
+      <div className={`hitorishadow-status${won ? " win" : ""}`}>
         {won
           ? `Solved! Score: ${terminal?.score ?? 0}`
           : `Moves: ${state.moves} — shade cells to remove duplicates`}
       </div>
 
       <div
-        className="hitori-grid"
+        className="hitorishadow-grid"
         style={{ gridTemplateColumns: `repeat(${N}, 50px)` }}
       >
         {Array.from({ length: N * N }, (_, idx) => {
@@ -40,7 +40,7 @@ export function Hitori({
             <div
               key={idx}
               className={[
-                "hitori-cell",
+                "hitorishadow-cell",
                 isShaded ? "shaded" : "unshaded",
                 hasViolation ? "violation" : "",
               ]
@@ -57,11 +57,11 @@ export function Hitori({
         })}
       </div>
 
-      <div className="hitori-legend">
+      <div className="hitorishadow-legend">
         Click a cell to shade/unshade it. Shaded cells are black.
       </div>
 
-      <div className="hitori-btn-row">
+      <div className="hitorishadow-btn-row">
         <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>

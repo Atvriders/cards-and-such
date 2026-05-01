@@ -1,20 +1,54 @@
-.hp-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
-.hp-info { font-size:0.95rem; color:#555; text-align:center; }
-.hp-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
-.hp-die { font-size:2rem; font-weight:900; min-width:54px; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
-.hp-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-.hp-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
-.hp-btn:hover:not(:disabled) { background:#2980b9; }
-.hp-btn:disabled { opacity:0.4; cursor:not-allowed; }
-.hp-btn.alt { background:#e67e22; }
-.hp-btn.alt:hover { background:#ca6f1e; }
-.hp-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
-.hp-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
-.hp-done h2 { margin:0 0 8px; }
-.hp-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
-.hp-board { display:grid; gap:4px; padding:8px; background:#34495e; border-radius:10px; }
-.hp-cell { aspect-ratio:1; min-width:40px; min-height:40px; background:#ecf0f1; border-radius:6px; cursor:pointer; transition:background 0.15s; border:none; font-weight:900; font-size:1rem; }
-.hp-cell.p { background:#e74c3c; color:#fff; }
-.hp-cell.c { background:#2c3e50; color:#fff; }
-.hp-cell.k { background:#f1c40f; color:#000; }
-.hp-cell:hover:not(:disabled) { background:#bdc3c7; }
+.hpcr-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:520px; margin:0 auto; }
+.hpcr-info { font-size:0.95rem; color:#555; text-align:center; }
+.hpcr-score { font-size:1.2rem; font-weight:800; color:#27ae60; }
+.hpcr-die { font-size:2rem; font-weight:900; min-width:54px; padding:10px 14px; background:#fff; border:2px solid #34495e; border-radius:10px; text-align:center; color:#2c3e50; }
+.hpcr-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.hpcr-btn { padding:10px 22px; font-size:1rem; font-weight:700; border:none; border-radius:8px; cursor:pointer; color:#fff; background:#3498db; }
+.hpcr-btn:hover:not(:disabled) { background:#2980b9; }
+.hpcr-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.hpcr-btn.alt { background:#e67e22; }
+.hpcr-btn.alt:hover { background:#ca6f1e; }
+.hpcr-result { font-size:1.05rem; font-weight:700; padding:8px 18px; border-radius:8px; background:#f0f4ff; text-align:center; }
+.hpcr-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.hpcr-done h2 { margin:0 0 8px; }
+.hpcr-final { font-size:1.4rem; color:#27ae60; font-weight:900; }
+.hpcr-board { display:grid; gap:4px; padding:8px; background:#34495e; border-radius:10px; }
+.hpcr-cell { aspect-ratio:1; min-width:40px; min-height:40px; background:#ecf0f1; border-radius:6px; cursor:pointer; transition:background 0.15s; border:none; font-weight:900; font-size:1rem; }
+.hpcr-cell.p { background:#e74c3c; color:#fff; }
+.hpcr-cell.c { background:#2c3e50; color:#fff; }
+.hpcr-cell.k { background:#f1c40f; color:#000; }
+.hpcr-cell:hover:not(:disabled) { background:#bdc3c7; }
+
+/* === auto-themed: unique prefix + palette === */
+/* Theme: hpcr (unique class prefix + themed palette tokens) */
+.hpcr-theme {
+  --hpcr-bg: linear-gradient(180deg,#1e3a8a 0%,#1e40af 55%,#3b82f6 100%);
+  --hpcr-felt: #1e3a8a;
+  --hpcr-accent: #fbbf24;
+  --hpcr-text: #dbeafe;
+}
+.hpcr-theme.hpcr-wrap,
+.hpcr-theme .hpcr-wrap,
+.hpcr-wrap.hpcr-theme {
+  background: var(--hpcr-bg);
+  color: var(--hpcr-text);
+}
+.hpcr-theme .hpcr-die,
+.hpcr-theme .hpcr-card {
+  border-color: var(--hpcr-accent);
+}
+.hpcr-theme .hpcr-btn,
+.hpcr-theme .hpcr-roll-btn {
+  background: var(--hpcr-accent);
+  color: var(--hpcr-felt);
+  border-color: var(--hpcr-accent);
+}
+.hpcr-theme .hpcr-info,
+.hpcr-theme .hpcr-score,
+.hpcr-theme .hpcr-final,
+.hpcr-theme .hpcr-result,
+.hpcr-theme .hpcr-header,
+.hpcr-theme .hpcr-message {
+  color: var(--hpcr-text);
+}
+
