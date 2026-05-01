@@ -12,7 +12,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Players are", choices: ["Two", "Four", "One", "Six"], correct: 0 },
   { question: "Initial setup includes", choices: ["King, queen, two rooks, two knights, six pawns per side", "Standard 16", "Eight pawns only", "Two queens"], correct: 0 },
   { question: "Pawn promotion ranks are", choices: ["Rank 6 for white", "Rank 8", "Rank 4", "No promotion"], correct: 0 },
-  { question: "The variant runs in around", choices: ["A short, sharp game", "Six hours", "No time", "Days"], correct: 0 },
+  { question: "Compared to standard chess, a Los Alamos game is", choices: ["Shorter and sharper due to the smaller board", "Much longer", "Identical in length", "Always drawn"], correct: 0 },
   { question: "Los Alamos was designed for", choices: ["Early computers with limited memory", "Bobby Fischer", "Casual play", "Lichess testing"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

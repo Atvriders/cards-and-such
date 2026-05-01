@@ -11,7 +11,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Teams mode is won by", choices: ["The team with at least one king alive after both opponents are mated", "Most points", "First mate", "Three checks"], correct: 0 },
   { question: "When you checkmate someone", choices: ["Their pieces become yours (or removed depending on rules)", "Pieces vanish", "Game ends", "Reset"], correct: 0 },
   { question: "A king in check who can't move is", choices: ["Mated and removed", "Captured", "Drawn", "Dead"], correct: 0 },
-  { question: "Castling rules in 4PC are", choices: ["Standard chess castling adapted to the 8 rank", "Forbidden", "Required", "Replaced by drops"], correct: 0 },
+  { question: "Castling rules in 4PC are", choices: ["Adapted from standard chess for each player's back rank", "Forbidden", "Required", "Replaced by drops"], correct: 0 },
   { question: "Pawns promote on", choices: ["Their respective 8th rank or center", "Rank 4", "Capture only", "Random rank"], correct: 0 },
   { question: "The variant is hosted prominently on", choices: ["Chess.com four-player chess", "FIDE", "World correspondence", "Olympics"], correct: 0 },
 ];
