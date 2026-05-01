@@ -17,7 +17,23 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "You can't judge a book by its...", choices: ["title","cover","author","price"], correct: 1 },
   { question: "Practice makes...", choices: ["money","perfect","perfect sense","fast"], correct: 1 },
   { question: "No pain, no...", choices: ["fame","gain","name","game"], correct: 1 },
-  { question: "Where there's a will, there's a...", choices: ["road","way","path","bridge"], correct: 1 }
+  { question: "Where there's a will, there's a...", choices: ["road","way","path","bridge"], correct: 1 },
+  { question: "Too many cooks spoil the...", choices: ["soup","broth","stew","sauce"], correct: 1 },
+  { question: "A rolling stone gathers no...", choices: ["dust","moss","speed","friends"], correct: 1 },
+  { question: "Beggars can't be...", choices: ["winners","choosers","losers","sellers"], correct: 1 },
+  { question: "Every cloud has a silver...", choices: ["edge","lining","cloud","sky"], correct: 1 },
+  { question: "Curiosity killed the...", choices: ["dog","cat","mouse","bird"], correct: 1 },
+  { question: "Don't bite the hand that feeds...", choices: ["it","you","them","us"], correct: 1 },
+  { question: "Honesty is the best...", choices: ["medicine","policy","friend","gift"], correct: 1 },
+  { question: "Absence makes the heart grow...", choices: ["stronger","fonder","weaker","wiser"], correct: 1 },
+  { question: "The grass is always greener on the other...", choices: ["hill","side","field","yard"], correct: 1 },
+  { question: "Two heads are better than...", choices: ["none","one","four","three"], correct: 1 },
+  { question: "Out of sight, out of...", choices: ["mind","heart","reach","luck"], correct: 0 },
+  { question: "Look before you...", choices: ["jump","leap","run","speak"], correct: 1 },
+  { question: "Time heals all...", choices: ["pain","wounds","sins","ills"], correct: 1 },
+  { question: "Strike while the iron is...", choices: ["hot","cold","ready","melted"], correct: 0 },
+  { question: "A picture is worth a thousand...", choices: ["dollars","words","images","songs"], correct: 1 },
+  { question: "Don't cry over spilled...", choices: ["tea","milk","beans","wine"], correct: 1 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ProverbQuizSettings): ProverbQuizState {
