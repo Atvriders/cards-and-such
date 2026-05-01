@@ -8,7 +8,7 @@ import "./Game.css";
 export function MysteriumVisionsGame({ state, dispatch, onGameOver }: GameProps<MysteriumVisionsState, MysteriumVisionsSettings>): JSX.Element {
   return (
     <DeductionView
-      prefix="myv"
+      prefix="mysv"
       cfg={MysteriumVisions_CFG}
       state={state}
       onSet={(position, value) => dispatch({ type: "set", position, value } as MysteriumVisionsAction)}

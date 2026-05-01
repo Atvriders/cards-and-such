@@ -8,7 +8,7 @@ import "./Game.css";
 export function CheatBsGame({ state, dispatch, onGameOver }: GameProps<CheatBsState, CheatBsSettings>): JSX.Element {
   return (
     <DeductionView
-      prefix="ch"
+      prefix="chtb"
       cfg={CheatBs_CFG}
       state={state}
       onSet={(position, value) => dispatch({ type: "set", position, value } as CheatBsAction)}

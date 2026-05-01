@@ -4,7 +4,7 @@ import type { SecretHitlerQuizState, SecretHitlerQuizAction, SecretHitlerQuizSet
 import { isTerminal, TOTAL_QUESTIONS } from "./state.js";
 import "./Game.css";
 
-const P = "shq";
+const P = "shtq";
 
 export function SecretHitlerQuizGame({ state, dispatch, onGameOver }: GameProps<SecretHitlerQuizState, SecretHitlerQuizSettings>): JSX.Element {
   const [start, setStart] = useState<number>(() => Date.now());

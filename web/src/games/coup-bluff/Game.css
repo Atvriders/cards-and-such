@@ -1,21 +1,21 @@
-.cpb-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#fee2e2;border-radius:14px}
-.cpb-header{display:flex;align-items:center;gap:10px;font-weight:700}
-.cpb-icon{font-size:1.6rem}
-.cpb-scenario{flex:1;color:#7f1d1d}
-.cpb-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1;color:#475569}
-.cpb-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #7f1d1d}
-.cpb-history{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
-.cpb-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fff;border-radius:8px}
-.cpb-row-pegs{display:flex;gap:4px;flex:1;flex-wrap:wrap}
-.cpb-peg,.cpb-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none}
-.cpb-row-fb{display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem}
-.cpb-fb-exact{color:#15803d;font-weight:700}
-.cpb-fb-partial{color:#b45309}
-.cpb-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fff;border-radius:10px;border:2px dashed #7f1d1d;flex-wrap:wrap}
-.cpb-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.1);transition:transform 100ms}
-.cpb-slot:hover{transform:scale(1.08)}
-.cpb-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#7f1d1d;color:#fff;border:none;font-weight:700}
-.cpb-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.cpb-final-title{margin:0 0 8px;color:#7f1d1d}
-.cpb-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#7f1d1d}
-.cpb-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}
+.cpbx-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#fef9c3;background:#1e3a8a;border-radius:14px}
+.cpbx-header{display:flex;align-items:center;gap:10px;font-weight:700}
+.cpbx-icon{font-size:1.6rem}
+.cpbx-scenario{flex:1;color:#fbbf24}
+.cpbx-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#1f2937;padding:2px 8px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);color:#94a3b8}
+.cpbx-intro{font-size:0.9rem;color:#fef9c3;background:rgba(255,255,255,0.08);padding:10px;border-radius:8px;border-left:3px solid #fbbf24}
+.cpbx-history{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
+.cpbx-row{display:flex;align-items:center;gap:8px;padding:6px;background:#1f2937;border-radius:8px}
+.cpbx-row-pegs{display:flex;gap:4px;flex:1;flex-wrap:wrap}
+.cpbx-peg,.cpbx-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none}
+.cpbx-row-fb{display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem}
+.cpbx-fb-exact{color:#15803d;font-weight:700}
+.cpbx-fb-partial{color:#b45309}
+.cpbx-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#1f2937;border-radius:10px;border:2px dashed #fbbf24;flex-wrap:wrap}
+.cpbx-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.1);transition:transform 100ms}
+.cpbx-slot:hover{transform:scale(1.08)}
+.cpbx-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#fbbf24;color:#1c1917;border:none;font-weight:700}
+.cpbx-final{text-align:center;padding:24px;background:#1f2937;border-radius:14px;color:#fef9c3}
+.cpbx-final-title{margin:0 0 8px;color:#fbbf24}
+.cpbx-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#fbbf24}
+.cpbx-final-stats{margin-top:8px;font-size:0.85rem;color:#94a3b8;font-family:'JetBrains Mono',monospace}

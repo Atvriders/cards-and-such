@@ -8,7 +8,7 @@ import "./Game.css";
 export function CoupBluffGame({ state, dispatch, onGameOver }: GameProps<CoupBluffState, CoupBluffSettings>): JSX.Element {
   return (
     <DeductionView
-      prefix="cpb"
+      prefix="cpbx"
       cfg={CoupBluff_CFG}
       state={state}
       onSet={(position, value) => dispatch({ type: "set", position, value } as CoupBluffAction)}

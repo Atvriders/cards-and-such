@@ -8,7 +8,7 @@ import "./Game.css";
 export function SkullBluffGame({ state, dispatch, onGameOver }: GameProps<SkullBluffState, SkullBluffSettings>): JSX.Element {
   return (
     <DeductionView
-      prefix="sk"
+      prefix="sklb"
       cfg={SkullBluff_CFG}
       state={state}
       onSet={(position, value) => dispatch({ type: "set", position, value } as SkullBluffAction)}
