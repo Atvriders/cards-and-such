@@ -1,35 +1,49 @@
-import { useEffect } from "react";
+import { useState, useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { Card as CardView } from "../../engines/deck/Card.js";
 import type { AcesUpFiringSquadState, AcesUpFiringSquadAction, AcesUpFiringSquadSettings } from "./state.js";
-import { isTerminal, cardName, ROUNDS } from "./state.js";
 import "./Game.css";
 
-export function AcesUpFiringSquadGame({ state, dispatch, onGameOver }: GameProps<AcesUpFiringSquadState, AcesUpFiringSquadSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    const rating = state.score >= 120 ? "Excellent" : state.score >= 80 ? "Good" : state.score >= 40 ? "Fair" : "Pass";
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div className="sol-final">{state.score} pts</div><div>{rating}</div></div></div>;
-  }
+export function AcesUpFiringSquadGame(
+  { state, dispatch, onGameOver }: GameProps<AcesUpFiringSquadState, AcesUpFiringSquadSettings>,
+): JSX.Element {
+  const [sel, setSel] = useState<number | null>(null);
+  if (state.won) onGameOver(state.score);
+  const click = useCallback((i: number) => {
+    if (sel === null) {
+      setSel(i);
+      return;
+    }
+    if (sel === i) {
+      // discard
+      dispatch({ type: "discard", col: i } as AcesUpFiringSquadAction);
+      setSel(null);
+      return;
+    }
+    dispatch({ type: "move", from: sel, to: i } as AcesUpFiringSquadAction);
+    setSel(null);
+  }, [sel, dispatch]);
   return (
-    <div className="sol-wrap">
-      <div className="sol-header">
-        <span className="sol-info">Round: {state.round + 1} / {ROUNDS}</span>
-        <span className="sol-score">{state.score} pts</span>
+    <div className="aces-up-firing-squad-root">
+      <div className="aces-up-firing-squad-info">
+        <span>Moves: {state.movesMade}</span>
+        <span>Score: {state.score}</span>
+        <span>Stock: {state.stock.length}</span>
+        <button
+          className="aces-up-firing-squad-auto"
+          type="button"
+          onClick={() => dispatch({ type: "deal" } as AcesUpFiringSquadAction)}
+          disabled={state.stock.length === 0 && !state.won}
+        >Deal</button>
       </div>
-      <div className="sol-board">
-        {state.hand.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "swap", index: i } as AcesUpFiringSquadAction)}>
-            {cardName(c)}
-          </button>
+      <div className="aces-up-firing-squad-cols">
+        {state.columns.map((col, i) => (
+          <div key={i} className={"aces-up-firing-squad-col" + (sel === i ? " selected" : "")} onClick={() => click(i)}>
+            {col.length > 0 && <CardView card={col[col.length - 1]!} />}
+            {col.length === 0 && <div className="aces-up-firing-squad-empty" />}
+            <div className="aces-up-firing-squad-cnt">{col.length}</div>
+          </div>
         ))}
-      </div>
-      <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as AcesUpFiringSquadAction)}>Keep & Score</button>
-        <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as AcesUpFiringSquadAction)}>Discard Hand</button>
-      </div>
-      <div className="sol-log">
-        {state.log.slice(-3).map((l, i) => (<div key={i}>{l}</div>))}
       </div>
     </div>
   );

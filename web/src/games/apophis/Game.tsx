@@ -1,35 +1,65 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { Card as CardView } from "../../engines/deck/Card.js";
 import type { ApophisState, ApophisAction, ApophisSettings } from "./state.js";
-import { isTerminal, cardName, ROUNDS } from "./state.js";
 import "./Game.css";
 
-export function ApophisGame({ state, dispatch, onGameOver }: GameProps<ApophisState, ApophisSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    const rating = state.score >= 120 ? "Excellent" : state.score >= 80 ? "Good" : state.score >= 40 ? "Fair" : "Pass";
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div className="sol-final">{state.score} pts</div><div>{rating}</div></div></div>;
-  }
+export function ApophisGame(
+  { state, dispatch, onGameOver }: GameProps<ApophisState, ApophisSettings>,
+): JSX.Element {
+  const select = useCallback(
+    (src: { kind: "pyramid"; row: number; col: number } | { kind: "waste" }) =>
+      dispatch({ type: "select", source: src } as ApophisAction),
+    [dispatch],
+  );
+  if (state.won || state.lost) onGameOver(state.score);
+
   return (
-    <div className="sol-wrap">
-      <div className="sol-header">
-        <span className="sol-info">Round: {state.round + 1} / {ROUNDS}</span>
-        <span className="sol-score">{state.score} pts</span>
+    <div className="apophis-root">
+      <div className="apophis-info">
+        <span>Moves: {state.movesMade}</span>
+        <span>Score: {state.score}</span>
+        <span>Redeals: {state.redealsRemaining}</span>
+        <button
+          className="apophis-auto"
+          type="button"
+          onClick={() => dispatch({ type: "draw" } as ApophisAction)}
+          disabled={state.stock.length === 0}
+        >Draw</button>
+        <button
+          className="apophis-auto"
+          type="button"
+          onClick={() => dispatch({ type: "redeal" } as ApophisAction)}
+          disabled={state.stock.length > 0 || state.redealsRemaining <= 0}
+        >Redeal</button>
       </div>
-      <div className="sol-board">
-        {state.hand.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "swap", index: i } as ApophisAction)}>
-            {cardName(c)}
-          </button>
+      <div className="apophis-pyramid">
+        {state.pyramid.map((row, r) => (
+          <div key={r} className="apophis-row">
+            {row.map((cell, c) => (
+              <div key={c} className="apophis-cell">
+                {cell && !cell.removed && (
+                  <div onClick={() => select({ kind: "pyramid", row: r, col: c })}>
+                    <CardView card={cell.card} />
+                  </div>
+                )}
+                {(!cell || cell.removed) && <div className="apophis-gap" />}
+              </div>
+            ))}
+          </div>
         ))}
       </div>
-      <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as ApophisAction)}>Keep & Score</button>
-        <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as ApophisAction)}>Discard Hand</button>
-      </div>
-      <div className="sol-log">
-        {state.log.slice(-3).map((l, i) => (<div key={i}>{l}</div>))}
+      <div className="apophis-bottom">
+        <div className="apophis-stock-pile">
+          <div>Stock: {state.stock.length}</div>
+        </div>
+        <div className="apophis-waste-pile">
+          {state.waste.length > 0 && (
+            <div onClick={() => select({ kind: "waste" })}>
+              <CardView card={state.waste[state.waste.length - 1]!} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

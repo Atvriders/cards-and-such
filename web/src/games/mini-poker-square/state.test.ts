@@ -1,29 +1,27 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, INITIAL_FLIP, MAX_CLICKS } from "./state.js";
-const S = { dummy: false };
-describe("MiniPokerSquare", () => {
-  it("starts in playing phase with layout filled", () => {
+import { initialState, reducer, isTerminal, cfg } from "./state.js";
+
+const S = {} as never;
+
+describe("mini-poker-square", () => {
+  it("starts with grid populated", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.layout.length).toBeGreaterThanOrEqual(1);
-    expect(s.layout.length).toBeLessThanOrEqual(INITIAL_FLIP);
+    const cards = s.grid.flat().filter((c) => c.card).length;
+    expect(cards).toBeGreaterThan(0);
+    expect(cards).toBeLessThanOrEqual(cfg.rows * cfg.cols);
   });
-  it("remove action shrinks layout and adds score", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "remove", index: 0 });
-    expect(s1.layout.length).toBe(s0.layout.length - 1);
-    expect(s1.score).toBeGreaterThanOrEqual(15);
-    expect(s1.removed).toBeGreaterThanOrEqual(1);
+  it("is deterministic under the same seed", () => {
+    const a = initialState(7, S);
+    const b = initialState(7, S);
+    expect(a.grid[0]?.[0]?.card?.id).toBe(b.grid[0]?.[0]?.card?.id);
   });
-  it("isTerminal null while playing", () => {
-    expect(isTerminal(initialState(1, S))).toBeNull();
+  it("first select highlights a cell", () => {
+    const s0 = initialState(2, S);
+    const s1 = reducer(s0, { type: "select", r: 0, c: 0 });
+    expect(s1.selected).not.toBeNull();
   });
-  it("game ends after MAX_CLICKS or empty layout", () => {
-    let s = initialState(1, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < MAX_CLICKS + 5) {
-      s = reducer(s, { type: "remove", index: 0 });
-    }
-    expect(s.phase).toBe("done");
+  it("isTerminal is null on a fresh deal", () => {
+    const s = initialState(3, S);
+    expect(isTerminal(s)).toBeNull();
   });
 });

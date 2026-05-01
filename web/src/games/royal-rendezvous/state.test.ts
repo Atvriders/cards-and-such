@@ -1,42 +1,29 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("Royal Rendezvous", () => {
-  it("starts in playing phase with a hand", () => {
+import { initialState, reducer, isTerminal, cfg } from "./state.js";
+
+const S = {} as never;
+
+describe("royal-rendezvous", () => {
+  it("deals the correct total card count", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+    const total = s.piles.reduce((sum, p) => sum + p.cards.length, 0);
+    expect(total).toBe(52 * cfg.copies);
   });
-  it("keep action increases round and may add score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
+  it("is deterministic under the same seed", () => {
+    const a = initialState(7, S);
+    const b = initialState(7, S);
+    const ai = a.piles.map((p) => p.cards.map((c) => c.id)).flat().join(",");
+    const bi = b.piles.map((p) => p.cards.map((c) => c.id)).flat().join(",");
+    expect(ai).toBe(bi);
   });
-  it("discard advances round and gives at least 1 point", () => {
-    const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
+  it("rejects illegal moves", () => {
+    const s = initialState(3, S);
+    // Try moving from a foundation to a tableau (always illegal at start).
+    const next = reducer(s, { type: "move", fromPile: "f1", toPile: "t1", count: 1 });
+    expect(next).toBe(s);
   });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
-    }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
-  });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
-  });
-  it("swap exchanges hand card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+  it("isTerminal returns null on a fresh deal", () => {
+    const s = initialState(11, S);
+    expect(isTerminal(s)).toBeNull();
   });
 });

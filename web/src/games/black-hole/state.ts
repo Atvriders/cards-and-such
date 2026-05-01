@@ -1,95 +1,47 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import type { Card } from "../../engines/deck/index.js";
+import {
+  makeGolfFamilyState,
+  reduceGolfFamily,
+  isGolfFamilyTerminal,
+  type GolfFamilyAction,
+  type GolfFamilyConfig,
+  type GolfFamilyState,
+} from "../_shared/solitaire-family-engine.js";
 
-export const ROUNDS = 10;
-export const HAND_SIZE = 5;
-
-export interface BlackHoleSolSettings { dummy: boolean; }
-
-export interface BlackHoleSolState {
-  rngSeed: number;
-  deck: number[];
-  pos: number;
-  hand: number[];
-  round: number;
-  score: number;
-  phase: "playing" | "done";
-  log: string[];
-}
-
-export type BlackHoleSolAction =
-  | { type: "keep" }
-  | { type: "discard"; index: number }
-  | { type: "swap"; index: number }
-  | { type: "noop" };
-
-export function cardName(c: number): string {
-  const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
-  const suits = ["♠","♥","♦","♣"];
-  return ranks[c % 13]! + suits[Math.floor(c / 13) % 4]!;
-}
-
-export function cardRank(c: number): number { return (c % 13) + 1; }
-export function cardSuit(c: number): number { return Math.floor(c / 13) % 4; }
-
-function shuffle(rng: () => number, n: number): number[] {
-  const a: number[] = [];
-  for (let i = 0; i < n; i++) a.push(i);
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
-
-function scoreHand(h: number[]): number {
-  let s = 0; const r = h.map(cardRank).sort((a,b)=>a-b);
-  for (let i = 1; i < r.length; i++) if (r[i] === r[i-1]! + 1) s += 5;
-  s += h.length;
-  if (s === 0) s = 1; return s;
-}
-
-export function initialState(seed: number, _s: BlackHoleSolSettings): BlackHoleSolState {
-  const rng = mulberry32(seed);
-  const deck = shuffle(rng, 52);
-  const hand = deck.slice(0, HAND_SIZE);
-  return { rngSeed: seed, deck, pos: HAND_SIZE, hand, round: 0, score: 0, phase: "playing", log: [] };
-}
-
-export function reducer(state: BlackHoleSolState, action: BlackHoleSolAction): BlackHoleSolState {
-  if (state.phase === "done") return state;
-  if (action.type === "noop") return state;
-  if (action.type === "keep") {
-    const score = scoreHand(state.hand);
-    const newScore = state.score + score;
-    const round = state.round + 1;
-    const log = [...state.log, `R${round}: keep +${score}`];
-    if (round >= ROUNDS || state.pos + HAND_SIZE > state.deck.length) {
-      return { ...state, score: newScore, round, phase: "done", log };
+export const cfg: GolfFamilyConfig = {
+  ...{
+  initialWasteCount: 1,
+  wrap: true,
+  hasRedeals: 0
+},
+  layout: (deck) => {
+    const cols: Card[][] = [];
+    // Black Hole deals the 51 non-Ace cards into 17 fans of three; the lone
+    // Ace anchors the centre (the "black hole") as the initial waste card.
+    const ace = deck.findIndex((c) => c.rank === 1);
+    const aceCard = deck[ace]!;
+    const others = [...deck.slice(0, ace), ...deck.slice(ace + 1)];
+    for (let i = 0; i < 17; i++) {
+      cols.push(others.slice(i * 3, i * 3 + 3));
     }
-    const next = state.deck.slice(state.pos, state.pos + HAND_SIZE);
-    return { ...state, score: newScore, round, hand: next, pos: state.pos + HAND_SIZE, log };
-  }
-  if (action.type === "discard") {
-    if (action.index < 0 || action.index >= state.hand.length) return state;
-    const round = state.round + 1;
-    const log = [...state.log, `R${round}: discard`];
-    if (round >= ROUNDS || state.pos + HAND_SIZE > state.deck.length) {
-      return { ...state, round, phase: "done", log, score: state.score + 1 };
-    }
-    const next = state.deck.slice(state.pos, state.pos + HAND_SIZE);
-    return { ...state, round, hand: next, pos: state.pos + HAND_SIZE, log, score: state.score + 1 };
-  }
-  if (action.type === "swap") {
-    if (action.index < 0 || action.index >= state.hand.length) return state;
-    if (state.pos >= state.deck.length) return state;
-    const swapCard = state.deck[state.pos]!;
-    const newHand = [...state.hand];
-    newHand[action.index] = swapCard;
-    return { ...state, hand: newHand, pos: state.pos + 1 };
-  }
-  return state;
+    void aceCard;
+    return { columns: cols, deckUsed: 52 };
+  },
+};
+
+export type BlackHoleState = GolfFamilyState;
+export type BlackHoleAction = GolfFamilyAction;
+export interface BlackHoleSettings { _dummy?: undefined }
+
+export function initialState(seed: number, _s: BlackHoleSettings): BlackHoleState {
+  void _s;
+  return makeGolfFamilyState(seed, cfg);
 }
 
-export function isTerminal(state: BlackHoleSolState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function reducer(s: BlackHoleState, a: BlackHoleAction): BlackHoleState {
+  return reduceGolfFamily(s, a, cfg);
+}
+
+export function isTerminal(s: BlackHoleState): { score: number } | null {
+  return isGolfFamilyTerminal(s);
 }

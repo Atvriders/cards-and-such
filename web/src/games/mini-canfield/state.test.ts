@@ -1,29 +1,29 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, INITIAL_FLIP, MAX_CLICKS } from "./state.js";
-const S = { dummy: false };
-describe("MiniCanfield", () => {
-  it("starts in playing phase with layout filled", () => {
+import { initialState, reducer, isTerminal, cfg } from "./state.js";
+
+const S = {} as never;
+
+describe("mini-canfield", () => {
+  it("deals the correct total card count", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.layout.length).toBeGreaterThanOrEqual(1);
-    expect(s.layout.length).toBeLessThanOrEqual(INITIAL_FLIP);
+    const total = s.piles.reduce((sum, p) => sum + p.cards.length, 0);
+    expect(total).toBe(52 * cfg.copies);
   });
-  it("remove action shrinks layout and adds score", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "remove", index: 0 });
-    expect(s1.layout.length).toBe(s0.layout.length - 1);
-    expect(s1.score).toBeGreaterThanOrEqual(15);
-    expect(s1.removed).toBeGreaterThanOrEqual(1);
+  it("is deterministic under the same seed", () => {
+    const a = initialState(7, S);
+    const b = initialState(7, S);
+    const ai = a.piles.map((p) => p.cards.map((c) => c.id)).flat().join(",");
+    const bi = b.piles.map((p) => p.cards.map((c) => c.id)).flat().join(",");
+    expect(ai).toBe(bi);
   });
-  it("isTerminal null while playing", () => {
-    expect(isTerminal(initialState(1, S))).toBeNull();
+  it("rejects illegal moves", () => {
+    const s = initialState(3, S);
+    // Try moving from a foundation to a tableau (always illegal at start).
+    const next = reducer(s, { type: "move", fromPile: "f1", toPile: "t1", count: 1 });
+    expect(next).toBe(s);
   });
-  it("game ends after MAX_CLICKS or empty layout", () => {
-    let s = initialState(1, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < MAX_CLICKS + 5) {
-      s = reducer(s, { type: "remove", index: 0 });
-    }
-    expect(s.phase).toBe("done");
+  it("isTerminal returns null on a fresh deal", () => {
+    const s = initialState(11, S);
+    expect(isTerminal(s)).toBeNull();
   });
 });

@@ -1,1 +1,6 @@
-@import "../../engines/solmini/solmini.css";
+.mini-poker-square-root { padding: 12px; min-height: 480px; background: #14322c; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.mini-poker-square-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
+.mini-poker-square-grid { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; }
+.mini-poker-square-row { display: flex; gap: 6px; }
+.mini-poker-square-cell { width: 60px; height: 90px; cursor: pointer; }
+.mini-poker-square-cell.selected { box-shadow: 0 0 0 3px gold; }

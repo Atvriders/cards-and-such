@@ -3,14 +3,19 @@ import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RoyalRendezvousState, RoyalRendezvousAction, RoyalRendezvousSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RoyalRendezvousGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const royalRendezvousPlugin: GamePlugin<RoyalRendezvousState, RoyalRendezvousAction, typeof settings> = {
-  id:"royal-rendezvous", title:"Royal Rendezvous", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"A 10-round solitaire micro-variant inspired by Royal Rendezvous: Eight foundations: four climb by 1 and four climb by 2.",
-  howToPlay:"Royal Rendezvous is a compact 10-round solitaire micro-variant inspired by the classic patience: Eight foundations: four climb by 1 and four climb by 2. Each round you receive a fresh hand of five cards drawn from a single seeded 52-card deck. You then choose one of three actions.\n\nKeep & Score locks the current hand and awards points based on face cards, pairs, ascending runs, and same-suit flushes, with a small variant-specific bonus that captures the flavor of Royal Rendezvous. Discard Hand abandons it for a flat one-point consolation and rolls into the next round. Swap consumes the next deck card to replace any single card in the visible hand without ending the round, which is your main tactical lever for shaping a strong Keep.\n\nScores compound across all ten rounds. Disciplined swap usage and well-timed Keeps will push your total well past a typical run. The game ends when ten rounds elapse or the deck runs out, and your final score is rated Pass, Fair, Good, or Excellent. Deals are fully seeded so identical seeds always produce identical card orders for fair comparison and replay.",
+  id: "royal-rendezvous",
+  title: "Royal Rendezvous",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Two-deck Royal Rendezvous — same-colour packing.",
+  howToPlay: "Two-deck Royal Rendezvous — same-colour packing. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as RoyalRendezvousSettings),
-  reducer,isTerminal,component:RoyalRendezvousGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as RoyalRendezvousSettings),
+  reducer,
+  isTerminal,
+  component: RoyalRendezvousGame,
 };

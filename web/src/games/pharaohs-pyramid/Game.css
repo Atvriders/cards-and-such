@@ -1,1 +1,9 @@
-@import "../../engines/solmini/solmini.css";
+.pharaohs-pyramid-root { padding: 12px; min-height: 480px; background: #2a1d3d; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.pharaohs-pyramid-info { display: flex; gap: 14px; padding-bottom: 8px; font-size: 14px; align-items: center; }
+.pharaohs-pyramid-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.pharaohs-pyramid-pyramid { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0; }
+.pharaohs-pyramid-row { display: flex; gap: 6px; }
+.pharaohs-pyramid-cell { min-width: 60px; min-height: 90px; }
+.pharaohs-pyramid-gap { width: 60px; height: 90px; background: rgba(255,255,255,0.05); border-radius: 4px; }
+.pharaohs-pyramid-bottom { display: flex; gap: 18px; padding-top: 12px; align-items: center; }
+.pharaohs-pyramid-stock-pile, .pharaohs-pyramid-waste-pile { min-width: 60px; min-height: 90px; }

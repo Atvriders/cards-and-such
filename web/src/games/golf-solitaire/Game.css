@@ -1,1 +1,7 @@
-@import "../../engines/solmini/solmini.css";
+.golf-solitaire-root { padding: 12px; min-height: 480px; background: #1d3b2c; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.golf-solitaire-info { display: flex; gap: 12px; padding-bottom: 8px; font-size: 14px; align-items: center; }
+.golf-solitaire-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.golf-solitaire-board { display: flex; gap: 6px; padding: 8px 0; flex-wrap: wrap; }
+.golf-solitaire-col { display: flex; flex-direction: column; gap: 4px; }
+.golf-solitaire-cell { min-width: 60px; min-height: 90px; }
+.golf-solitaire-waste { padding: 12px 0; }

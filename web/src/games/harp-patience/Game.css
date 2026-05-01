@@ -1,1 +1,9 @@
-@import "../../engines/solmini/solmini.css";
+.harp-patience-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.harp-patience-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
+.harp-patience-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.harp-patience-auto:hover { background: rgba(255,255,255,0.32); }
+.harp-patience-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+.harp-patience-spacer { flex: 1; min-width: 12px; }
+.harp-patience-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+.harp-patience-col, .harp-patience-stock, .harp-patience-waste, .harp-patience-foundation { min-width: 60px; min-height: 90px; }
+.harp-patience-root.has-won { box-shadow: inset 0 0 60px gold; }

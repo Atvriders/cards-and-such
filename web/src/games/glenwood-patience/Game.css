@@ -1,1 +1,9 @@
-@import "../../engines/solmini/solmini.css";
+.glenwood-patience-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.glenwood-patience-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
+.glenwood-patience-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.glenwood-patience-auto:hover { background: rgba(255,255,255,0.32); }
+.glenwood-patience-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+.glenwood-patience-spacer { flex: 1; min-width: 12px; }
+.glenwood-patience-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+.glenwood-patience-col, .glenwood-patience-stock, .glenwood-patience-waste, .glenwood-patience-foundation { min-width: 60px; min-height: 90px; }
+.glenwood-patience-root.has-won { box-shadow: inset 0 0 60px gold; }

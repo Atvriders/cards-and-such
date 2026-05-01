@@ -1,42 +1,25 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, ROUNDS, HAND_SIZE, cardName } from "./state.js";
-const S = { dummy: false };
-describe("AccordionSolitaire", () => {
-  it("starts in playing phase with full hand", () => {
+import { initialState, reducer, isTerminal } from "./state.js";
+
+const S = {} as never;
+
+describe("accordion-solitaire", () => {
+  it("starts with all 52 cards", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.hand.length).toBeGreaterThanOrEqual(1);
-    expect(s.hand.length).toBeLessThanOrEqual(HAND_SIZE);
-    expect(s.score).toBeGreaterThanOrEqual(0);
+    expect(s.cards.length).toBe(52);
   });
-  it("keep action increases round and may add score", () => {
-    const s0 = initialState(7, S);
-    const s1 = reducer(s0, { type: "keep" });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score);
+  it("is deterministic under the same seed", () => {
+    const a = initialState(7, S);
+    const b = initialState(7, S);
+    expect(a.cards[0]?.id).toBe(b.cards[0]?.id);
   });
-  it("discard advances round and gives at least 1 point", () => {
+  it("rejects invalid collapses", () => {
     const s0 = initialState(3, S);
-    const s1 = reducer(s0, { type: "discard", index: 0 });
-    expect(s1.round).toBeGreaterThanOrEqual(s0.round + 1);
-    expect(s1.score).toBeGreaterThanOrEqual(s0.score + 1);
+    const s1 = reducer(s0, { type: "collapse", from: 5, to: 0 });
+    expect(s1).toBe(s0);
   });
-  it("game ends after ROUNDS keeps", () => {
-    let s = initialState(5, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < ROUNDS + 5) {
-      s = reducer(s, { type: "keep" });
-    }
-    expect(s.phase).toBe("done");
-    expect(isTerminal(s)).not.toBeNull();
-  });
-  it("cardName returns rank+suit string", () => {
-    expect(cardName(0).length).toBeGreaterThanOrEqual(2);
-  });
-  it("swap exchanges hand card without ending round", () => {
-    const s0 = initialState(11, S);
-    const s1 = reducer(s0, { type: "swap", index: 0 });
-    expect(s1.round).toBe(s0.round);
-    expect(s1.hand.length).toBe(s0.hand.length);
+  it("isTerminal is null on a fresh deal", () => {
+    const s = initialState(2, S);
+    expect(isTerminal(s)).toBeNull();
   });
 });

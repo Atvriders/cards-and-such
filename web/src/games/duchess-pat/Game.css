@@ -1,1 +1,9 @@
-@import "../../engines/solmini/solmini.css";
+.duchess-pat-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.duchess-pat-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
+.duchess-pat-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.duchess-pat-auto:hover { background: rgba(255,255,255,0.32); }
+.duchess-pat-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+.duchess-pat-spacer { flex: 1; min-width: 12px; }
+.duchess-pat-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+.duchess-pat-col, .duchess-pat-stock, .duchess-pat-waste, .duchess-pat-foundation { min-width: 60px; min-height: 90px; }
+.duchess-pat-root.has-won { box-shadow: inset 0 0 60px gold; }

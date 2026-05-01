@@ -1,27 +1,34 @@
-import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { Card as CardView } from "../../engines/deck/Card.js";
 import type { MiniPokerSquareState, MiniPokerSquareAction, MiniPokerSquareSettings } from "./state.js";
-import { isTerminal, cardName, MAX_CLICKS } from "./state.js";
 import "./Game.css";
 
-export function MiniPokerSquareGame({ state, dispatch, onGameOver }: GameProps<MiniPokerSquareState, MiniPokerSquareSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div>Removed: {state.removed}</div><div className="sol-final">{state.score} pts</div></div></div>;
-  }
+export function MiniPokerSquareGame(
+  { state, dispatch, onGameOver }: GameProps<MiniPokerSquareState, MiniPokerSquareSettings>,
+): JSX.Element {
+  if (state.won) onGameOver(state.score);
   return (
-    <div className="sol-wrap">
-      <div className="sol-header">
-        <span className="sol-info">Removed: {state.removed}</span>
-        <span className="sol-info">Clicks: {state.clicks} / {MAX_CLICKS}</span>
-        <span className="sol-score">{state.score} pts</span>
+    <div className="mini-poker-square-root">
+      <div className="mini-poker-square-info">
+        <span>Moves: {state.movesMade}</span>
+        <span>Score: {state.score}</span>
       </div>
-      <div className="sol-board">
-        {state.layout.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "remove", index: i } as MiniPokerSquareAction)}>
-            {cardName(c)}
-          </button>
+      <div className="mini-poker-square-grid">
+        {state.grid.map((row, r) => (
+          <div key={r} className="mini-poker-square-row">
+            {row.map((cell, c) => {
+              const sel = state.selected && state.selected.r === r && state.selected.c === c;
+              return (
+                <div
+                  key={c}
+                  className={"mini-poker-square-cell" + (sel ? " selected" : "")}
+                  onClick={() => dispatch({ type: "select", r, c } as MiniPokerSquareAction)}
+                >
+                  {cell.card && <CardView card={cell.card} />}
+                </div>
+              );
+            })}
+          </div>
         ))}
       </div>
     </div>

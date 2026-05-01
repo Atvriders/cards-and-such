@@ -1,1 +1,6 @@
-@import "../../engines/solmini/solmini.css";
+.simple-pairs-root { padding: 12px; min-height: 480px; background: #14322c; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.simple-pairs-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
+.simple-pairs-grid { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; }
+.simple-pairs-row { display: flex; gap: 6px; }
+.simple-pairs-cell { width: 60px; height: 90px; cursor: pointer; }
+.simple-pairs-cell.selected { box-shadow: 0 0 0 3px gold; }

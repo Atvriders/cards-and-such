@@ -3,14 +3,19 @@ import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AcesUpFiringSquadState, AcesUpFiringSquadAction, AcesUpFiringSquadSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AcesUpFiringSquadGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const acesUpFiringSquadPlugin: GamePlugin<AcesUpFiringSquadState, AcesUpFiringSquadAction, typeof settings> = {
-  id:"aces-up-firing-squad", title:"Aces Up (Firing Squad)", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Remove same-suit lower than top card; goal: only aces remain.",
-  howToPlay:"Aces Up (Firing Squad) is a compact 10-round solitaire micro-variant inspired by Aces Up (Firing Squad): Remove same-suit lower than top card; goal: only aces remain. Each round you receive a fresh hand of five cards drawn from a single seeded deck. You then choose one of three actions. Keep & Score locks the current hand and awards points based on the variant's special bonus rule. Discard Hand abandons it for a flat one-point consolation and rolls into the next round. Swap consumes the next deck card to replace any single card in the visible hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay. Compress carefully and the bonus rule will reward you.",
+  id: "aces-up-firing-squad",
+  title: "Aces Up (Firing Squad)",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Aces Up firing-squad rules — only the absolute highest of each suit gets the boot.",
+  howToPlay: "Aces Up firing-squad rules — only the absolute highest of each suit gets the boot. Click a column to select it, click again to discard the top (legal only if a higher same-suit lurks elsewhere); click another column to move into an empty slot. Goal: only the four Aces remain.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as AcesUpFiringSquadSettings),
-  reducer,isTerminal,component:AcesUpFiringSquadGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as AcesUpFiringSquadSettings),
+  reducer,
+  isTerminal,
+  component: AcesUpFiringSquadGame,
 };

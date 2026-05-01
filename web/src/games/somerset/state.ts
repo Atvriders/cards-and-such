@@ -1,97 +1,81 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import {
+  makeKlondikeFamilyRuleset,
+  makeKlondikeFamilyState,
+  reduceKlondikeFamily,
+  isKlondikeFamilyTerminal,
+  type KlondikeFamilyAction,
+  type KlondikeFamilyConfig,
+  type KlondikeFamilyState,
+} from "../_shared/solitaire-family-engine.js";
 
-export const ROUNDS = 10;
-export const HAND_SIZE = 5;
-
-export interface SomersetSolSettings { dummy: boolean; }
-
-export interface SomersetSolState {
-  rngSeed: number;
-  deck: number[];
-  pos: number;
-  hand: number[];
-  round: number;
-  score: number;
-  phase: "playing" | "done";
-  log: string[];
-}
-
-export type SomersetSolAction =
-  | { type: "keep" }
-  | { type: "discard"; index: number }
-  | { type: "swap"; index: number }
-  | { type: "noop" };
-
-export function cardName(c: number): string {
-  const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
-  const suits = ["♠","♥","♦","♣"];
-  return ranks[c % 13]! + suits[Math.floor(c / 13) % 4]!;
-}
-
-export function cardRank(c: number): number { return (c % 13) + 1; }
-export function cardSuit(c: number): number { return Math.floor(c / 13) % 4; }
-
-function shuffle(rng: () => number, n: number): number[] {
-  const a: number[] = [];
-  for (let i = 0; i < n; i++) a.push(i);
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
-
-function scoreHand(h: number[]): number {
-  let s = 0; const suits = h.map(cardSuit); const counts: Record<number, number> = {};
-  for (const r of suits) counts[r] = (counts[r] ?? 0) + 1;
-  let max = 0; for (const k in counts) if (counts[k]! > max) max = counts[k]!;
-  if (max === 5) s += 30; else if (max === 4) s += 16; else if (max === 3) s += 8;
-  s += h.length;
-  if (s === 0) s = 1; return s;
-}
-
-export function initialState(seed: number, _s: SomersetSolSettings): SomersetSolState {
-  const rng = mulberry32(seed);
-  const deck = shuffle(rng, 52);
-  const hand = deck.slice(0, HAND_SIZE);
-  return { rngSeed: seed, deck, pos: HAND_SIZE, hand, round: 0, score: 0, phase: "playing", log: [] };
-}
-
-export function reducer(state: SomersetSolState, action: SomersetSolAction): SomersetSolState {
-  if (state.phase === "done") return state;
-  if (action.type === "noop") return state;
-  if (action.type === "keep") {
-    const score = scoreHand(state.hand);
-    const newScore = state.score + score;
-    const round = state.round + 1;
-    const log = [...state.log, `R${round}: keep +${score}`];
-    if (round >= ROUNDS || state.pos + HAND_SIZE > state.deck.length) {
-      return { ...state, score: newScore, round, phase: "done", log };
+export const cfg: KlondikeFamilyConfig = {
+  copies: 1,
+  numTableau: 10,
+  numFoundations: 4,
+  drawCount: 1,
+  redealsAllowed: 0,
+  hasStock: false,
+  hasWaste: false,
+  stackKind: "alt-color",
+  emptyPolicy: "any",
+  columns: [
+    {
+      total: 10,
+      faceUp: 10
+    },
+    {
+      total: 9,
+      faceUp: 9
+    },
+    {
+      total: 8,
+      faceUp: 8
+    },
+    {
+      total: 7,
+      faceUp: 7
+    },
+    {
+      total: 6,
+      faceUp: 6
+    },
+    {
+      total: 5,
+      faceUp: 5
+    },
+    {
+      total: 4,
+      faceUp: 4
+    },
+    {
+      total: 1,
+      faceUp: 1
+    },
+    {
+      total: 1,
+      faceUp: 1
+    },
+    {
+      total: 1,
+      faceUp: 1
     }
-    const next = state.deck.slice(state.pos, state.pos + HAND_SIZE);
-    return { ...state, score: newScore, round, hand: next, pos: state.pos + HAND_SIZE, log };
-  }
-  if (action.type === "discard") {
-    if (action.index < 0 || action.index >= state.hand.length) return state;
-    const round = state.round + 1;
-    const log = [...state.log, `R${round}: discard`];
-    if (round >= ROUNDS || state.pos + HAND_SIZE > state.deck.length) {
-      return { ...state, round, phase: "done", log, score: state.score + 1 };
-    }
-    const next = state.deck.slice(state.pos, state.pos + HAND_SIZE);
-    return { ...state, round, hand: next, pos: state.pos + HAND_SIZE, log, score: state.score + 1 };
-  }
-  if (action.type === "swap") {
-    if (action.index < 0 || action.index >= state.hand.length) return state;
-    if (state.pos >= state.deck.length) return state;
-    const swapCard = state.deck[state.pos]!;
-    const newHand = [...state.hand];
-    newHand[action.index] = swapCard;
-    return { ...state, hand: newHand, pos: state.pos + 1 };
-  }
-  return state;
+  ]
+};
+export const ruleset = makeKlondikeFamilyRuleset(cfg);
+
+export type SomersetState = KlondikeFamilyState;
+export type SomersetAction = KlondikeFamilyAction;
+export interface SomersetSettings { _dummy?: undefined }
+
+export function initialState(seed: number, _s: SomersetSettings): SomersetState {
+  void _s;
+  return makeKlondikeFamilyState(seed, cfg);
 }
 
-export function isTerminal(state: SomersetSolState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function reducer(s: SomersetState, a: SomersetAction): SomersetState {
+  return reduceKlondikeFamily(s, a, cfg, ruleset);
+}
+
+export function isTerminal(s: SomersetState): { score: number } | null {
+  return isKlondikeFamilyTerminal(s, cfg);
 }

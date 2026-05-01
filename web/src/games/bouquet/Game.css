@@ -1,1 +1,9 @@
-@import "../../engines/solmini/solmini.css";
+.bouquet-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.bouquet-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
+.bouquet-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.bouquet-auto:hover { background: rgba(255,255,255,0.32); }
+.bouquet-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+.bouquet-spacer { flex: 1; min-width: 12px; }
+.bouquet-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+.bouquet-col, .bouquet-stock, .bouquet-waste, .bouquet-foundation { min-width: 60px; min-height: 90px; }
+.bouquet-root.has-won { box-shadow: inset 0 0 60px gold; }

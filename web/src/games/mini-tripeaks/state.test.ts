@@ -1,29 +1,26 @@
 import { describe, it, expect } from "vitest";
-import { initialState, reducer, isTerminal, INITIAL_FLIP, MAX_CLICKS } from "./state.js";
-const S = { dummy: false };
-describe("MiniTripeaks", () => {
-  it("starts in playing phase with layout filled", () => {
+import { initialState, reducer, isTerminal } from "./state.js";
+
+const S = {} as never;
+
+describe("mini-tripeaks", () => {
+  it("starts with a board", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.layout.length).toBeGreaterThanOrEqual(1);
-    expect(s.layout.length).toBeLessThanOrEqual(INITIAL_FLIP);
+    expect(s.columns.length).toBeGreaterThan(0);
   });
-  it("remove action shrinks layout and adds score", () => {
-    const s0 = initialState(1, S);
-    const s1 = reducer(s0, { type: "remove", index: 0 });
-    expect(s1.layout.length).toBe(s0.layout.length - 1);
-    expect(s1.score).toBeGreaterThanOrEqual(15);
-    expect(s1.removed).toBeGreaterThanOrEqual(1);
+  it("is deterministic under the same seed", () => {
+    const a = initialState(5, S);
+    const b = initialState(5, S);
+    expect(a.stock.length).toBe(b.stock.length);
   });
-  it("isTerminal null while playing", () => {
-    expect(isTerminal(initialState(1, S))).toBeNull();
+  it("draw moves stock to waste", () => {
+    const s0 = initialState(2, S);
+    if (s0.stock.length === 0) return;
+    const s1 = reducer(s0, { type: "draw" });
+    expect(s1.waste.length).toBe(s0.waste.length + 1);
   });
-  it("game ends after MAX_CLICKS or empty layout", () => {
-    let s = initialState(1, S);
-    let safety = 0;
-    while (s.phase === "playing" && safety++ < MAX_CLICKS + 5) {
-      s = reducer(s, { type: "remove", index: 0 });
-    }
-    expect(s.phase).toBe("done");
+  it("isTerminal is null on a fresh deal", () => {
+    const s = initialState(3, S);
+    expect(isTerminal(s)).toBeNull();
   });
 });

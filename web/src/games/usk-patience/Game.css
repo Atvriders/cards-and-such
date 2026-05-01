@@ -1,1 +1,9 @@
-@import "../../engines/solmini/solmini.css";
+.usk-patience-root { padding: 12px; min-height: 480px; background: #0d5e3a; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.usk-patience-info { display: flex; gap: 18px; align-items: center; padding-bottom: 8px; font-size: 14px; }
+.usk-patience-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.usk-patience-auto:hover { background: rgba(255,255,255,0.32); }
+.usk-patience-top { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 14px; flex-wrap: wrap; }
+.usk-patience-spacer { flex: 1; min-width: 12px; }
+.usk-patience-tableau { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+.usk-patience-col, .usk-patience-stock, .usk-patience-waste, .usk-patience-foundation { min-width: 60px; min-height: 90px; }
+.usk-patience-root.has-won { box-shadow: inset 0 0 60px gold; }

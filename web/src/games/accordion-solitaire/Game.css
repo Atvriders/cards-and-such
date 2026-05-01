@@ -1,1 +1,5 @@
-@import "../../engines/solmini/solmini.css";
+.accordion-solitaire-root { padding: 12px; min-height: 480px; background: #1c1f33; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.accordion-solitaire-info { display: flex; gap: 12px; padding-bottom: 8px; align-items: center; font-size: 14px; }
+.accordion-solitaire-row { display: flex; flex-wrap: wrap; gap: 4px; padding: 12px 0; }
+.accordion-solitaire-cell { width: 60px; height: 90px; cursor: pointer; }
+.accordion-solitaire-cell.selected { box-shadow: 0 0 0 3px gold; }

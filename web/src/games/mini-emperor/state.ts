@@ -1,59 +1,61 @@
-import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import {
+  makeKlondikeFamilyRuleset,
+  makeKlondikeFamilyState,
+  reduceKlondikeFamily,
+  isKlondikeFamilyTerminal,
+  type KlondikeFamilyAction,
+  type KlondikeFamilyConfig,
+  type KlondikeFamilyState,
+} from "../_shared/solitaire-family-engine.js";
 
-export const DECK_SIZE = 30;
-export const INITIAL_FLIP = 20;
-export const MAX_CLICKS = 28;
+export const cfg: KlondikeFamilyConfig = {
+  copies: 1,
+  numTableau: 5,
+  numFoundations: 4,
+  drawCount: 1,
+  redealsAllowed: 0,
+  hasStock: true,
+  hasWaste: true,
+  stackKind: "alt-color",
+  emptyPolicy: "any",
+  columns: [
+    {
+      total: 3,
+      faceUp: 3
+    },
+    {
+      total: 3,
+      faceUp: 3
+    },
+    {
+      total: 3,
+      faceUp: 3
+    },
+    {
+      total: 3,
+      faceUp: 3
+    },
+    {
+      total: 3,
+      faceUp: 3
+    }
+  ]
+};
+export const ruleset = makeKlondikeFamilyRuleset(cfg);
 
-export interface MiniEmperorSettings { dummy: boolean; }
+export type MiniEmperorState = KlondikeFamilyState;
+export type MiniEmperorAction = KlondikeFamilyAction;
+export interface MiniEmperorSettings { _dummy?: undefined }
 
-export interface MiniEmperorState {
-  rngSeed: number;
-  layout: number[]; // current visible card ids (0..51)
-  removed: number;
-  clicks: number;
-  score: number;
-  phase: "playing" | "done";
+export function initialState(seed: number, _s: MiniEmperorSettings): MiniEmperorState {
+  void _s;
+  return makeKlondikeFamilyState(seed, cfg);
 }
 
-export type MiniEmperorAction = { type: "remove"; index: number } | { type: "noop" };
-
-function shuffleDeck(rng: () => number, n: number): number[] {
-  const a: number[] = [];
-  for (let i = 0; i < n; i++) a.push(i);
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
+export function reducer(s: MiniEmperorState, a: MiniEmperorAction): MiniEmperorState {
+  return reduceKlondikeFamily(s, a, cfg, ruleset);
 }
 
-export function cardName(c: number): string {
-  const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
-  const suits = ["♠","♥","♦","♣"];
-  return ranks[c % 13]! + suits[Math.floor(c / 13) % 4]!;
-}
-
-export function initialState(seed: number, _settings: MiniEmperorSettings): MiniEmperorState {
-  const rng = mulberry32(seed);
-  const deck = shuffleDeck(rng, DECK_SIZE);
-  const layout = deck.slice(0, INITIAL_FLIP);
-  return { rngSeed: seed, layout, removed: 0, clicks: 0, score: 0, phase: "playing" };
-}
-
-export function reducer(state: MiniEmperorState, action: MiniEmperorAction): MiniEmperorState {
-  if (state.phase === "done") return state;
-  if (action.type === "remove") {
-    if (action.index < 0 || action.index >= state.layout.length) return state;
-    const layout = state.layout.filter((_, i) => i !== action.index);
-    const removed = state.removed + 1;
-    const clicks = state.clicks + 1;
-    const score = state.score + 15;
-    const done = layout.length === 0 || clicks >= MAX_CLICKS;
-    return { ...state, layout, removed, clicks, score, phase: done ? "done" : "playing" };
-  }
-  return state;
-}
-
-export function isTerminal(state: MiniEmperorState): { score: number } | null {
-  return state.phase === "done" ? { score: state.score } : null;
+export function isTerminal(s: MiniEmperorState): { score: number } | null {
+  return isKlondikeFamilyTerminal(s, cfg);
 }

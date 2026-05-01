@@ -1,29 +1,18 @@
-import { useEffect } from "react";
+import { SolitaireFamilyView } from "../_shared/SolitaireFamilyView.js";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { MiniSpider1suitState, MiniSpider1suitAction, MiniSpider1suitSettings } from "./state.js";
-import { isTerminal, cardName, MAX_CLICKS } from "./state.js";
+import type { MiniSpider1suitState, MiniSpider1suitSettings } from "./state.js";
+import { cfg, ruleset } from "./state.js";
 import "./Game.css";
 
-export function MiniSpider1suitGame({ state, dispatch, onGameOver }: GameProps<MiniSpider1suitState, MiniSpider1suitSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div>Removed: {state.removed}</div><div className="sol-final">{state.score} pts</div></div></div>;
-  }
+export function MiniSpider1suitGame(
+  props: GameProps<MiniSpider1suitState, MiniSpider1suitSettings>,
+): JSX.Element {
   return (
-    <div className="sol-wrap">
-      <div className="sol-header">
-        <span className="sol-info">Removed: {state.removed}</span>
-        <span className="sol-info">Clicks: {state.clicks} / {MAX_CLICKS}</span>
-        <span className="sol-score">{state.score} pts</span>
-      </div>
-      <div className="sol-board">
-        {state.layout.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "remove", index: i } as MiniSpider1suitAction)}>
-            {cardName(c)}
-          </button>
-        ))}
-      </div>
-    </div>
+    <SolitaireFamilyView
+      {...props}
+      cfg={cfg}
+      ruleset={ruleset}
+      prefix="mini-spider-1suit"
+    />
   );
 }

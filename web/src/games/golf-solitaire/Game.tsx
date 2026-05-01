@@ -1,35 +1,52 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
+import { Card as CardView } from "../../engines/deck/Card.js";
 import type { GolfSolitaireState, GolfSolitaireAction, GolfSolitaireSettings } from "./state.js";
-import { isTerminal, cardName, ROUNDS } from "./state.js";
 import "./Game.css";
 
-export function GolfSolitaireGame({ state, dispatch, onGameOver }: GameProps<GolfSolitaireState, GolfSolitaireSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    const rating = state.score >= 120 ? "Excellent" : state.score >= 80 ? "Good" : state.score >= 40 ? "Fair" : "Pass";
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div className="sol-final">{state.score} pts</div><div>{rating}</div></div></div>;
-  }
+export function GolfSolitaireGame(
+  { state, dispatch, onGameOver }: GameProps<GolfSolitaireState, GolfSolitaireSettings>,
+): JSX.Element {
+  const play = useCallback(
+    (col: number, idx: number) =>
+      dispatch({ type: "play", col, idx } as GolfSolitaireAction),
+    [dispatch],
+  );
+  if (state.won || state.lost) onGameOver(state.score);
   return (
-    <div className="sol-wrap">
-      <div className="sol-header">
-        <span className="sol-info">Round: {state.round + 1} / {ROUNDS}</span>
-        <span className="sol-score">{state.score} pts</span>
+    <div className="golf-solitaire-root">
+      <div className="golf-solitaire-info">
+        <span>Moves: {state.movesMade}</span>
+        <span>Score: {state.score}</span>
+        <span>Stock: {state.stock.length}</span>
+        <button
+          className="golf-solitaire-auto"
+          type="button"
+          onClick={() => dispatch({ type: "draw" } as GolfSolitaireAction)}
+          disabled={state.stock.length === 0}
+        >Draw</button>
+        <button
+          className="golf-solitaire-auto"
+          type="button"
+          onClick={() => dispatch({ type: "recycle" } as GolfSolitaireAction)}
+          disabled={state.stock.length > 0}
+        >Recycle</button>
       </div>
-      <div className="sol-board">
-        {state.hand.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "swap", index: i } as GolfSolitaireAction)}>
-            {cardName(c)}
-          </button>
+      <div className="golf-solitaire-board">
+        {state.columns.map((col, ci) => (
+          <div key={ci} className="golf-solitaire-col">
+            {col.map((card, ri) => (
+              <div key={ri} className="golf-solitaire-cell" onClick={() => play(ci, ri)}>
+                {!state.removed[ci]?.[ri] && <CardView card={card} />}
+              </div>
+            ))}
+          </div>
         ))}
       </div>
-      <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as GolfSolitaireAction)}>Keep & Score</button>
-        <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as GolfSolitaireAction)}>Discard Hand</button>
-      </div>
-      <div className="sol-log">
-        {state.log.slice(-3).map((l, i) => (<div key={i}>{l}</div>))}
+      <div className="golf-solitaire-waste">
+        {state.waste.length > 0 && (
+          <CardView card={state.waste[state.waste.length - 1]!} />
+        )}
       </div>
     </div>
   );

@@ -3,14 +3,19 @@ import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TriPeaksSolitaireState, TriPeaksSolitaireAction, TriPeaksSolitaireSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TriPeaksSolitaireGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const triPeaksSolitairePlugin: GamePlugin<TriPeaksSolitaireState, TriPeaksSolitaireAction, typeof settings> = {
-  id:"tri-peaks-solitaire", title:"Tri-Peaks Solitaire", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"Three small pyramids; chain sequences up or down.",
-  howToPlay:"Tri-Peaks Solitaire is a compact 10-round solitaire micro-variant inspired by Tri-Peaks Solitaire: Three small pyramids; chain sequences up or down. Each round you receive a fresh hand of five cards drawn from a single seeded deck. You then choose one of three actions. Keep & Score locks the current hand and awards points based on the variant's special bonus rule. Discard Hand abandons it for a flat one-point consolation and rolls into the next round. Swap consumes the next deck card to replace any single card in the visible hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay. Compress carefully and the bonus rule will reward you.",
+  id: "tri-peaks-solitaire",
+  title: "Tri-Peaks Solitaire",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Three-peak board: clear cards rank-adjacent to the waste top.",
+  howToPlay: "Three-peak board: clear cards rank-adjacent to the waste top. Click any available column-top whose rank is one above or below the waste top to play it; draw from the stock when the board stalls.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as TriPeaksSolitaireSettings),
-  reducer,isTerminal,component:TriPeaksSolitaireGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as TriPeaksSolitaireSettings),
+  reducer,
+  isTerminal,
+  component: TriPeaksSolitaireGame,
 };

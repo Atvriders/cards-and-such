@@ -1,1 +1,9 @@
-@import "../../engines/solmini/solmini.css";
+.apophis-root { padding: 12px; min-height: 480px; background: #2a1d3d; color: #fff; border-radius: 8px; font-family: system-ui, sans-serif; }
+.apophis-info { display: flex; gap: 14px; padding-bottom: 8px; font-size: 14px; align-items: center; }
+.apophis-auto { background: rgba(255,255,255,0.18); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.apophis-pyramid { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0; }
+.apophis-row { display: flex; gap: 6px; }
+.apophis-cell { min-width: 60px; min-height: 90px; }
+.apophis-gap { width: 60px; height: 90px; background: rgba(255,255,255,0.05); border-radius: 4px; }
+.apophis-bottom { display: flex; gap: 18px; padding-top: 12px; align-items: center; }
+.apophis-stock-pile, .apophis-waste-pile { min-width: 60px; min-height: 90px; }

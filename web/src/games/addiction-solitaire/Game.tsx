@@ -1,35 +1,62 @@
-import { useEffect } from "react";
+import { useState, useCallback } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { AddictionSolState, AddictionSolAction, AddictionSolSettings } from "./state.js";
-import { isTerminal, cardName, ROUNDS } from "./state.js";
+import { Card as CardView } from "../../engines/deck/Card.js";
+import type { AddictionSolitaireState, AddictionSolitaireAction, AddictionSolitaireSettings } from "./state.js";
 import "./Game.css";
 
-export function AddictionSolGame({ state, dispatch, onGameOver }: GameProps<AddictionSolState, AddictionSolSettings>): JSX.Element {
-  const t = isTerminal(state);
-  useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") {
-    const rating = state.score >= 120 ? "Excellent" : state.score >= 80 ? "Good" : state.score >= 40 ? "Fair" : "Pass";
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div className="sol-final">{state.score} pts</div><div>{rating}</div></div></div>;
-  }
+export function AddictionSolitaireGame(
+  { state, dispatch, onGameOver }: GameProps<AddictionSolitaireState, AddictionSolitaireSettings>,
+): JSX.Element {
+  const [src, setSrc] = useState<{ r: number; c: number } | null>(null);
+  if (state.won) onGameOver(state.score);
+
+  const click = useCallback((r: number, c: number) => {
+    const cell = state.grid[r]?.[c];
+    if (!cell) return;
+    if (!src) {
+      if (cell.card) setSrc({ r, c });
+      return;
+    }
+    if (cell.card) {
+      // re-pick
+      setSrc({ r, c });
+      return;
+    }
+    // try move
+    dispatch({ type: "move", fromR: src.r, fromC: src.c, toR: r, toC: c } as AddictionSolitaireAction);
+    setSrc(null);
+  }, [state.grid, src, dispatch]);
+
   return (
-    <div className="sol-wrap">
-      <div className="sol-header">
-        <span className="sol-info">Round: {state.round + 1} / {ROUNDS}</span>
-        <span className="sol-score">{state.score} pts</span>
+    <div className="addiction-solitaire-root">
+      <div className="addiction-solitaire-info">
+        <span>Moves: {state.movesMade}</span>
+        <span>Score: {state.score}</span>
+        <span>Redeals: {state.redealsRemaining}</span>
+        <button
+          className="addiction-solitaire-auto"
+          type="button"
+          onClick={() => dispatch({ type: "redeal" } as AddictionSolitaireAction)}
+          disabled={state.redealsRemaining <= 0}
+        >Redeal</button>
       </div>
-      <div className="sol-board">
-        {state.hand.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "swap", index: i } as AddictionSolAction)}>
-            {cardName(c)}
-          </button>
+      <div className="addiction-solitaire-grid">
+        {state.grid.map((row, r) => (
+          <div key={r} className="addiction-solitaire-row">
+            {row.map((cell, c) => {
+              const sel = src && src.r === r && src.c === c;
+              return (
+                <div
+                  key={c}
+                  className={"addiction-solitaire-cell" + (sel ? " selected" : "")}
+                  onClick={() => click(r, c)}
+                >
+                  {cell.card ? <CardView card={cell.card} /> : <div className="addiction-solitaire-gap" />}
+                </div>
+              );
+            })}
+          </div>
         ))}
-      </div>
-      <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as AddictionSolAction)}>Keep & Score</button>
-        <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as AddictionSolAction)}>Discard Hand</button>
-      </div>
-      <div className="sol-log">
-        {state.log.slice(-3).map((l, i) => (<div key={i}>{l}</div>))}
       </div>
     </div>
   );

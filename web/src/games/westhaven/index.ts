@@ -3,14 +3,19 @@ import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WesthavenState, WesthavenAction, WesthavenSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WesthavenGame } from "./Game.js";
-const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
+
+const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const westhavenPlugin: GamePlugin<WesthavenState, WesthavenAction, typeof settings> = {
-  id:"westhaven", title:"Westhaven", category:"solitaire",
-  players:{ min:1, max:1, multiplayer:false },
-  description:"A 10-round solitaire micro-variant inspired by five-column Klondike-flavored micro with partial face-up dealing.",
-  howToPlay:"Westhaven is a compact 10-round solitaire micro-variant inspired by five-column Klondike-flavored micro with partial face-up dealing. Each round you receive a fresh hand of five cards drawn from a single seeded deck. You then choose one of three actions: Keep & Score locks the current hand and awards points based on face cards, pairs, ascending runs, and same-suit flushes; Discard Hand abandons it for a flat one-point consolation and rolls into the next round; Swap consumes the next deck card to replace any single card in the visible hand without ending the round.\n\nScores compound across all ten rounds. A typical run lands somewhere between 40 and 120 total points; sharp swap usage and well-timed Keeps can push past that. The game ends automatically when ten rounds are reached or the deck is exhausted, and your final score is rated Pass, Fair, Good, or Excellent depending on the total earned.\n\nThe deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay.",
+  id: "westhaven",
+  title: "Westhaven",
+  category: "solitaire",
+  players: { min: 1, max: 1, multiplayer: false },
+  description: "Westhaven — ten columns of three, top face-up.",
+  howToPlay: "Westhaven — ten columns of three, top face-up. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState:(seed:number,s:S)=>initialState(seed,s as WesthavenSettings),
-  reducer,isTerminal,component:WesthavenGame,
+  initialState: (seed: number, s: S) => initialState(seed, s as WesthavenSettings),
+  reducer,
+  isTerminal,
+  component: WesthavenGame,
 };
