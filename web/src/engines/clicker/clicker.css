@@ -377,3 +377,34 @@
     transition: none !important;
   }
 }
+
+/* =====================================================================
+ * Engine character — target spawn pop animation.
+ * Scale 0.6 -> 1.0 with overshoot easing. Centering math (translate
+ * -50%, -50%) preserved across keyframes so position stays anchored.
+ * ===================================================================== */
+[class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
+  animation: clicker-spawn-pop 360ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes clicker-spawn-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class$="-target"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) {
+    animation: none !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}

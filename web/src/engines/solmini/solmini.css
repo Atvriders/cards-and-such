@@ -565,3 +565,30 @@
     transition: none !important;
   }
 }
+
+/* =====================================================================
+ * Engine character — very subtle felt shimmer on the wrap.
+ * Drifts the highlight gradient on the ::before texture so the felt
+ * appears to breathe under casino lighting. ~9s loop, low amplitude.
+ * ===================================================================== */
+.sol-wrap::before {
+  animation: felt-shimmer 9s ease-in-out infinite;
+  will-change: opacity, background-position;
+}
+
+@keyframes felt-shimmer {
+  0%, 100% {
+    opacity: 0.55;
+    background-position: 0 0, 1px 2px;
+  }
+  50% {
+    opacity: 0.68;
+    background-position: 1px 1px, 2px 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sol-wrap::before {
+    animation: none !important;
+  }
+}

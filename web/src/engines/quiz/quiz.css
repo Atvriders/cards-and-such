@@ -979,3 +979,50 @@
     transform: none !important;
   }
 }
+
+/* =====================================================================
+ * Engine character — entrance animations.
+ * Fade-in on the question itself, staggered slide-in on each choice.
+ * Layered on top — overrides earlier shorter animation rules so the
+ * choice slide-in plays after the question fade.
+ * ===================================================================== */
+.trivia-question,
+.quiz-question {
+  animation: trivia-question-fade-in 200ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes trivia-question-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.trivia-choice,
+.quiz-choice {
+  animation: trivia-choice-slide-in 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.trivia-choice:nth-child(1), .quiz-choice:nth-child(1) { animation-delay:  60ms; }
+.trivia-choice:nth-child(2), .quiz-choice:nth-child(2) { animation-delay: 130ms; }
+.trivia-choice:nth-child(3), .quiz-choice:nth-child(3) { animation-delay: 200ms; }
+.trivia-choice:nth-child(4), .quiz-choice:nth-child(4) { animation-delay: 270ms; }
+.trivia-choice:nth-child(5), .quiz-choice:nth-child(5) { animation-delay: 340ms; }
+.trivia-choice:nth-child(6), .quiz-choice:nth-child(6) { animation-delay: 410ms; }
+
+@keyframes trivia-choice-slide-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trivia-question, .quiz-question,
+  .trivia-choice, .quiz-choice,
+  .trivia-choice:nth-child(1), .quiz-choice:nth-child(1),
+  .trivia-choice:nth-child(2), .quiz-choice:nth-child(2),
+  .trivia-choice:nth-child(3), .quiz-choice:nth-child(3),
+  .trivia-choice:nth-child(4), .quiz-choice:nth-child(4),
+  .trivia-choice:nth-child(5), .quiz-choice:nth-child(5),
+  .trivia-choice:nth-child(6), .quiz-choice:nth-child(6) {
+    animation: none !important;
+    transform: none !important;
+  }
+}
