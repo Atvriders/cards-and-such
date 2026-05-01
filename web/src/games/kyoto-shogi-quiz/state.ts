@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Drops in Kyoto Shogi are", choices: ["Standard Shogi drops with flip mechanic", "Forbidden", "Required", "Reset"], correct: 0 },
   { question: "Game length is typically", choices: ["Short, sharp", "Always long", "Days", "Bullet only"], correct: 0 },
   { question: "Kyoto Shogi is classified as a", choices: ["Mini Shogi fairy variant", "Standard FIDE", "Race game", "Card variant"], correct: 0 },
+
+  { question: "Each side starts with", choices: ["Five pieces (King, Tokin, Silver, Knight, Lance)", "Twenty pieces", "Two kings", "Pawns only"], correct: 0 },
+  { question: "When a piece moves, it", choices: ["Flips to its paired piece type", "Stays the same", "Promotes only at end", "Captures itself"], correct: 0 },
+  { question: "A dropped piece enters", choices: ["As one of the two paired sides (player choice)", "Always face up", "Always face down", "Captured"], correct: 0 },
+  { question: "The Tokin pairs with", choices: ["Pawn", "Silver", "Knight", "King"], correct: 0 },
+  { question: "The Silver pairs with", choices: ["Bishop", "Rook", "Pawn", "King"], correct: 0 },
+  { question: "The Knight pairs with", choices: ["Gold", "Pawn", "King", "Lance"], correct: 0 },
+  { question: "The Lance pairs with", choices: ["Rook (in many editions)", "Pawn", "King", "Knight"], correct: 0 },
+  { question: "Kyoto Shogi designs are credited to", choices: ["Tamiya Katsuya in the 1970s", "Bobby Fischer", "V. R. Parton", "Reiner Knizia"], correct: 0 },
+  { question: "The board has", choices: ["25 squares (5×5)", "49", "81", "64"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: KyotoShogiQuizSettings): KyotoShogiQuizState {

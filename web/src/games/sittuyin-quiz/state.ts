@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Castling in Sittuyin is", choices: ["Not present", "Required", "Standard", "Replaces promotion"], correct: 0 },
   { question: "The Yathei (rook-like) moves like a", choices: ["FIDE rook", "Bishop", "Pawn", "King"], correct: 0 },
   { question: "Sittuyin is classified as a", choices: ["Regional Asian chess variant", "FIDE rule", "Race game", "Card variant"], correct: 0 },
+
+  { question: "The Sittuyin board has pre-drawn", choices: ["Diagonal lines marking pawn promotion squares", "A river", "Palaces", "Hex cells"], correct: 0 },
+  { question: "The Min Gyi is the", choices: ["King piece", "Pawn", "Rook", "Bishop"], correct: 0 },
+  { question: "The Sin (elephant) moves", choices: ["One square diagonally or one forward", "Like FIDE bishop", "Two squares jumping", "Like a rook"], correct: 0 },
+  { question: "The Myin (horse) moves", choices: ["Like a FIDE knight", "Like a rook", "One square", "Diagonally only"], correct: 0 },
+  { question: "Sittuyin pawn promotion requires", choices: ["The Sit-ke to be off the board first", "Reaching last rank", "Capturing a queen", "Nothing"], correct: 0 },
+  { question: "A promoted pawn is placed", choices: ["On any empty square the player chooses", "On the promotion square", "Off-board", "Adjacent to king"], correct: 0 },
+  { question: "Pieces are traditionally", choices: ["Three-dimensional carved wood", "Flat kanji tiles", "Cards", "Glass disks"], correct: 0 },
+  { question: "Stalemate in Sittuyin is generally", choices: ["A draw", "A win for stalemated side", "A loss for the king", "Forbidden"], correct: 0 },
+  { question: "Sittuyin literally means", choices: ["\"Game of generals\" in Burmese", "Lion game", "Tiger chess", "River chess"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: SittuyinQuizSettings): SittuyinQuizState {

@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "The board has", choices: ["20 squares", "25 squares", "81 squares", "One square"], correct: 0 },
   { question: "Promotion happens", choices: ["Every move automatically", "Only on capture", "On rank 4", "Never"], correct: 0 },
   { question: "Micro Shogi is classified as a", choices: ["Ultra-mini Shogi fairy variant", "Standard FIDE", "Race game", "Card variant"], correct: 0 },
+
+  { question: "Micro Shogi is also nicknamed", choices: ["\"Poppy Shogi\" (Yari Shogi family)", "Bullet Shogi", "Reverse Shogi", "Hex Shogi"], correct: 0 },
+  { question: "Each side starts with", choices: ["Four pieces (King, Pawn, Bishop or Silver, Rook or Gold)", "Twenty pieces", "Two kings", "Pawns only"], correct: 0 },
+  { question: "Movement causes", choices: ["Automatic flip to the paired piece", "No change", "Capture", "Drop"], correct: 0 },
+  { question: "Captured pieces drop", choices: ["As one of the two paired forms", "Always promoted", "Always demoted", "Off-board"], correct: 0 },
+  { question: "Compared to Kyoto Shogi, Micro is", choices: ["Even smaller and faster", "Larger", "Slower", "Identical"], correct: 0 },
+  { question: "Promotion happens", choices: ["Every move automatically (flip)", "On rank 4", "Never", "On capture only"], correct: 0 },
+  { question: "Mating with a dropped pawn follows", choices: ["Uchifuzume restriction", "No restriction", "Always allowed", "Required"], correct: 0 },
+  { question: "The variant illustrates", choices: ["Maximum flip-paired tactical density", "Slow strategy", "Pure luck", "Card play"], correct: 0 },
+  { question: "Micro Shogi is classified as", choices: ["Ultra-mini fairy Shogi", "Standard FIDE", "Race game", "Card variant"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: MicroShogiQuizSettings): MicroShogiQuizState {

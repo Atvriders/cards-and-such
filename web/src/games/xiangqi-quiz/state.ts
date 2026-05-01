@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "The Horse moves like the chess Knight but", choices: ["Can be blocked by adjacent pieces", "Cannot be blocked", "Identical", "Cannot capture"], correct: 0 },
   { question: "Castling in Xiangqi is", choices: ["Not present", "Required", "Standard", "Replaces promotion"], correct: 0 },
   { question: "The board has", choices: ["90 intersection points", "64 squares", "81 squares", "100 squares"], correct: 0 },
+
+  { question: "The Advisor (Guard) is restricted to", choices: ["Diagonal moves inside the palace", "Whole board", "Forward only", "Rook moves"], correct: 0 },
+  { question: "The Chariot moves", choices: ["Like a FIDE rook", "Like a knight", "One square", "Diagonally"], correct: 0 },
+  { question: "Pawns on their own side of the river move", choices: ["Only forward, one square", "Forward and sideways", "Backward", "Diagonally"], correct: 0 },
+  { question: "The starting position has", choices: ["Two cannons in front of the back rank", "No cannons", "Cannons on the back rank", "One cannon"], correct: 0 },
+  { question: "Perpetual check in Xiangqi is generally", choices: ["A loss for the checking side", "A draw", "A win", "Allowed"], correct: 0 },
+  { question: "The Elephant moves", choices: ["Two squares diagonally with a midpoint check", "Like FIDE bishop", "Like a king", "Like a knight"], correct: 0 },
+  { question: "Notation uses", choices: ["Files numbered 1–9 from each player's right", "Algebraic only", "Random", "Chinese characters only"], correct: 0 },
+  { question: "The Chinese name 象棋 literally suggests", choices: ["\"Elephant game\"", "Horse game", "River game", "King game"], correct: 0 },
+  { question: "Asia Xiangqi Federation governs", choices: ["International Xiangqi competition", "Janggi only", "Shogi", "Go"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: XiangqiQuizSettings): XiangqiQuizState {

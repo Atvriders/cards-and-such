@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Wa Shogi is from", choices: ["Japan", "Korea", "China", "Thailand"], correct: 0 },
   { question: "Number of distinct piece types", choices: ["Many — over 20", "Six", "Three", "One"], correct: 0 },
   { question: "Wa Shogi is classified as a", choices: ["Large-board fairy Shogi", "Standard FIDE", "Race game", "Card variant"], correct: 0 },
+
+  { question: "Wa Shogi has versions both with and without", choices: ["Drops", "Pawns", "Kings", "Promotion"], correct: 0 },
+  { question: "The Crane piece moves", choices: ["Like a Silver General (one diagonal or forward)", "Like a queen", "Two squares orthogonal", "Like a knight"], correct: 0 },
+  { question: "Wa Shogi pieces feature animals such as", choices: ["Pheasant, swallow, ox, crane", "Castles only", "Bishops only", "Standard chess"], correct: 0 },
+  { question: "The variant is recorded in", choices: ["Edo-period Japanese sources", "Korean texts", "Chinese annals", "Roman manuscripts"], correct: 0 },
+  { question: "The starting army size is", choices: ["27 pieces per side", "20 pieces", "8 pieces", "40 pieces"], correct: 0 },
+  { question: "Wa Shogi belongs to the family of", choices: ["Large Shogi variants", "Mini Shogi", "Western chess", "Card games"], correct: 0 },
+  { question: "\"Wa\" in the name refers to", choices: ["Japan (the old name \"Wa\")", "Wing", "Wave", "War"], correct: 0 },
+  { question: "Promotion typically yields", choices: ["Stronger movement (often Gold-like)", "Demotion", "Disappearance", "Pawn"], correct: 0 },
+  { question: "The variant is best known among", choices: ["Shogi historians and fairy chess fans", "Casual gamers", "Children", "Bullet players"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: WaShogiQuizSettings): WaShogiQuizState {

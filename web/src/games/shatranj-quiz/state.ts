@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Castling in Shatranj is", choices: ["Not present", "Required", "Standard", "Replaces promotion"], correct: 0 },
   { question: "The variant disappeared in popularity around", choices: ["1500 (when modern chess emerged)", "2000", "1800", "Today still popular"], correct: 0 },
   { question: "Shatranj is", choices: ["The direct ancestor of modern chess", "Unrelated to chess", "A card game", "A race game"], correct: 0 },
+
+  { question: "Bare king (denuding the opponent) was historically", choices: ["A win condition in Shatranj", "A draw", "A loss", "Illegal"], correct: 0 },
+  { question: "The opening problems studied by Shatranj masters were called", choices: ["Mansubat", "Gambits", "Tabiyat", "Endings"], correct: 0 },
+  { question: "A standardized opening setup is called", choices: ["Tabiya", "Fianchetto", "Castle", "Promotion"], correct: 0 },
+  { question: "The al-Adli ar-Rumi was a famous", choices: ["9th-century Shatranj theorist", "King", "Modern player", "Pope"], correct: 0 },
+  { question: "The Shah (king) moves", choices: ["One square in any direction", "Like a queen", "Two squares", "Only diagonally"], correct: 0 },
+  { question: "The Rukh (rook) moves", choices: ["Like a FIDE rook", "One square", "Diagonally", "Like a knight"], correct: 0 },
+  { question: "The Faras (knight) moves", choices: ["Like a FIDE knight", "Like a rook", "Like a king", "Diagonally only"], correct: 0 },
+  { question: "Stalemating the opponent in Shatranj was usually", choices: ["A win for the stalemating side (per some traditions)", "Always a draw", "A loss", "Illegal"], correct: 0 },
+  { question: "Pawns initially advance", choices: ["One square only (no two-step)", "Two squares", "Backward", "Diagonally"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: ShatranjQuizSettings): ShatranjQuizState {

@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Mating with a dropped pawn is", choices: ["Forbidden (uchifuzume rule)", "Required", "Allowed", "Free"], correct: 0 },
   { question: "Promoted pieces", choices: ["Gain extra movement abilities", "Lose movement", "Disappear", "Become pawns"], correct: 0 },
   { question: "Shogi pieces are typically", choices: ["Wedge-shaped tiles with kanji", "Round chips", "Card-like", "Carved 3D"], correct: 0 },
+
+  { question: "The Gold General moves", choices: ["One square in any direction except diagonally backward", "Like a queen", "Diagonally", "Like a knight"], correct: 0 },
+  { question: "The Silver General moves", choices: ["One square diagonally or straight forward", "Like a rook", "Like a knight", "Like a bishop"], correct: 0 },
+  { question: "The Lance moves", choices: ["Any number of squares straight forward only", "Diagonally", "Backward", "Like a knight"], correct: 0 },
+  { question: "The Knight (Keima) moves", choices: ["Two squares forward and one to the side, leaping", "Like FIDE knight", "L-shape backward only", "Diagonally"], correct: 0 },
+  { question: "The Rook promotes to", choices: ["Dragon King (Ryuo)", "Queen", "Gold", "Pawn"], correct: 0 },
+  { question: "The Bishop promotes to", choices: ["Dragon Horse (Ryuma)", "Queen", "Silver", "Knight"], correct: 0 },
+  { question: "Sennichite (fourfold repetition) results in", choices: ["A draw (or loss if perpetual check)", "A win", "Reset", "Nothing"], correct: 0 },
+  { question: "Standard Shogi has how many pieces per side?", choices: ["20", "16", "32", "8"], correct: 0 },
+  { question: "A \"tsume\" puzzle is a", choices: ["Forced checkmate problem", "Opening trap", "Endgame study", "Fork tactic"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: ShogiQuizSettings): ShogiQuizState {

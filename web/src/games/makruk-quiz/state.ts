@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "The board is", choices: ["8×8 (no light/dark color distinction in some versions)", "9×9", "10×10", "Hex"], correct: 0 },
   { question: "Castling in Makruk is", choices: ["Not present", "Required", "Standard", "Replaces promotion"], correct: 0 },
   { question: "Endgame play emphasizes", choices: ["Slow approach due to short-range pieces", "Race plays", "Drop tactics", "Pure pawn play"], correct: 0 },
+
+  { question: "The Ma (knight-like) moves", choices: ["Like a FIDE knight (L-shape)", "Like a rook", "Like a king", "Diagonally only"], correct: 0 },
+  { question: "The Ruea (rook-like) moves", choices: ["Like a FIDE rook", "One square only", "Diagonally", "Like a knight"], correct: 0 },
+  { question: "The Khun (king) moves", choices: ["One square in any direction", "Two squares", "Like a queen", "Only diagonally"], correct: 0 },
+  { question: "Counting rules trigger when", choices: ["One side has insufficient mating material", "Always at move 50", "Never", "On promotion"], correct: 0 },
+  { question: "Pieces are traditionally", choices: ["Pyramidal cone-shaped wood", "Flat tiles with kanji", "Cards", "Glass orbs"], correct: 0 },
+  { question: "Initial pawn move advances", choices: ["One square only (no two-step)", "Two squares", "Three squares", "Backward"], correct: 0 },
+  { question: "Stalemate in Makruk is", choices: ["A draw", "A loss for stalemated side", "A win for stalemated side", "Forbidden"], correct: 0 },
+  { question: "Makruk is also called", choices: ["Thai chess", "Chinese chess", "Burmese chess", "Japanese chess"], correct: 0 },
+  { question: "The Met starts adjacent to the", choices: ["Khun (king)", "Ruea", "Edge", "Pawn"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: MakrukQuizSettings): MakrukQuizState {

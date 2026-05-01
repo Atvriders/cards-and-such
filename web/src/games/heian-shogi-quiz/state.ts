@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Promotion in Heian Shogi is", choices: ["Limited to certain pieces", "All pieces", "Forbidden", "Random"], correct: 0 },
   { question: "The variant emphasizes", choices: ["Slow positional play", "Fast bullet", "Pawn race", "Drops"], correct: 0 },
   { question: "Heian Shogi is classified as a", choices: ["Historical Shogi variant", "Standard FIDE", "Race game", "Card variant"], correct: 0 },
+
+  { question: "The earliest source for Heian Shogi is", choices: ["The Nichureki (12th century)", "A 20th-century essay", "A 1500 manuscript", "Roman texts"], correct: 0 },
+  { question: "The Tokin (promoted pawn) moves like a", choices: ["Gold General", "Rook", "Bishop", "Knight"], correct: 0 },
+  { question: "Heian Shogi has", choices: ["Fewer piece types than modern Shogi", "More piece types", "Identical pieces", "No pieces"], correct: 0 },
+  { question: "The Knight in Heian Shogi moves", choices: ["Like the modern Shogi Keima (forward L only)", "Like FIDE knight", "Backward L", "Like a king"], correct: 0 },
+  { question: "The Rook is", choices: ["Generally absent in Heian Shogi", "Always present", "Present and central", "Doubled"], correct: 0 },
+  { question: "The Bishop is", choices: ["Generally absent in Heian Shogi", "Always present", "Doubled", "Replaces king"], correct: 0 },
+  { question: "Heian Dai Shogi differs by being", choices: ["A larger 13×13 cousin", "Smaller 5×5", "Played on hex", "Modern"], correct: 0 },
+  { question: "The variant evolved into", choices: ["Modern Shogi over centuries", "Western chess", "Xiangqi", "Janggi"], correct: 0 },
+  { question: "Heian-period Japan was known for", choices: ["Court culture and classical literature", "Industrial revolution", "Samurai shogunate", "Modernization"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: HeianShogiQuizSettings): HeianShogiQuizState {

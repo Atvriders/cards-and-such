@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Game length is", choices: ["Typically short — fast tactical play", "Always long", "Six hours", "Days"], correct: 0 },
   { question: "Bishop and rook in Mini Shogi", choices: ["Move diagonally and orthogonally any distance respectively", "Are pawns", "Are kings", "Can leap"], correct: 0 },
   { question: "Mini Shogi was designed for", choices: ["Quick learning of Shogi mechanics", "Olympic chess", "Pure casual fun", "Bullet"], correct: 0 },
+
+  { question: "Mini Shogi starts with each side having a", choices: ["King, Rook, Bishop, Gold, Silver, Pawn (one each)", "Two of each piece", "Only pawns", "Only kings"], correct: 0 },
+  { question: "The board size is", choices: ["25 squares (5×5)", "64 squares", "81 squares", "100 squares"], correct: 0 },
+  { question: "Mini Shogi is solved as", choices: ["A win for the second player with perfect play", "A draw", "A first-player win", "Unsolved"], correct: 0 },
+  { question: "Promotion zone covers", choices: ["Just the opponent's back rank", "Three back ranks", "All ranks", "No ranks"], correct: 0 },
+  { question: "Knights and Lances are", choices: ["Not present in Mini Shogi", "Both present", "Doubled", "Replace pawns"], correct: 0 },
+  { question: "Drop rules in Mini Shogi mostly follow", choices: ["Standard Shogi (with nifu)", "No drops at all", "Free drop anywhere", "Drop captures"], correct: 0 },
+  { question: "Mini Shogi was published in", choices: ["1970 by Shigenobu Kusumoto", "1500", "2010", "1828"], correct: 0 },
+  { question: "Game length is typically", choices: ["30–40 moves", "5 moves", "Hundreds of moves", "Days"], correct: 0 },
+  { question: "The variant is also known as", choices: ["Gogo Shogi (5×5 Shogi)", "Bullet Shogi", "Reverse Shogi", "Hex Shogi"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: MiniShogiQuizSettings): MiniShogiQuizState {

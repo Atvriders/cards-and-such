@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Player setup in Janggi is", choices: ["Flexible between two pre-game piece arrangements", "Fixed FIDE", "Random", "Pawn only"], correct: 0 },
   { question: "Castling in Janggi is", choices: ["Not present", "Required", "Standard", "Replaces promotion"], correct: 0 },
   { question: "Janggi is classified as a", choices: ["Regional East-Asian chess variant", "FIDE rule", "Race game", "Card variant"], correct: 0 },
+
+  { question: "Unlike Xiangqi, Janggi has", choices: ["No river on the board", "Two rivers", "Three rivers", "A diagonal river"], correct: 0 },
+  { question: "The Cannon (Po) cannot", choices: ["Capture or jump over another Cannon", "Move at all", "Be captured", "Promote"], correct: 0 },
+  { question: "The Chariot moves", choices: ["Like a rook (and along palace diagonals)", "Like a knight", "One square", "Diagonally only"], correct: 0 },
+  { question: "The Horse moves like a knight but", choices: ["Can be blocked by an adjacent piece (hobbled)", "Cannot be blocked", "Jumps freely", "Moves like a rook"], correct: 0 },
+  { question: "Pawns and other pieces in the palace gain", choices: ["Diagonal movement along palace lines", "Promotion", "Drop ability", "Doubled speed"], correct: 0 },
+  { question: "Bikjang (face-to-face generals) results in", choices: ["A draw (under most rule sets)", "A win for one side", "A reset", "Illegal move"], correct: 0 },
+  { question: "A typical Janggi game is decided by", choices: ["Material counting if no checkmate", "Time only", "Random", "Cards"], correct: 0 },
+  { question: "The starting setup choice is between", choices: ["Inside or outside placement of Horse and Elephant", "Two king positions", "Pawn rows", "Cannon files"], correct: 0 },
+  { question: "Janggi pieces are typically", choices: ["Octagonal disks of varying sizes by rank", "Square tiles", "Round chips uniform size", "Carved 3D figures"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: JanggiQuizSettings): JanggiQuizState {

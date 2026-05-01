@@ -14,6 +14,16 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Tori Shogi was reconstructed in", choices: ["The 19th century", "2000s", "1500s", "Heian era"], correct: 0 },
   { question: "The Crane and Crow pieces are", choices: ["Distinct piece types", "Same", "Pawns", "Kings"], correct: 0 },
   { question: "Tori Shogi is classified as a", choices: ["Themed Shogi variant", "Standard FIDE", "Race game", "Card variant"], correct: 0 },
+
+  { question: "The board is", choices: ["7 files × 7 ranks (49 squares)", "5×5", "9×9", "8×8"], correct: 0 },
+  { question: "Each side starts with", choices: ["16 pieces", "20 pieces", "8 pieces", "40 pieces"], correct: 0 },
+  { question: "The Swallow piece is the", choices: ["Pawn-equivalent", "King", "Rook", "Knight"], correct: 0 },
+  { question: "The Falcon moves", choices: ["Like a Silver General with extra moves", "Like a rook", "Diagonally only", "Backward only"], correct: 0 },
+  { question: "The Quail pieces have", choices: ["Asymmetric moves (left/right different)", "Identical moves", "No moves", "Random moves"], correct: 0 },
+  { question: "Drop rule for Swallow follows", choices: ["Standard nifu (no two on a file)", "No restriction", "Free drop", "Forbidden"], correct: 0 },
+  { question: "Tori Shogi means", choices: ["\"Bird Shogi\" in Japanese", "River Shogi", "Castle Shogi", "Mini Shogi"], correct: 0 },
+  { question: "The Phoenix moves like a", choices: ["Standard Shogi king (one square any direction)", "Queen", "Rook", "Knight"], correct: 0 },
+  { question: "Tori Shogi is enjoyed for", choices: ["Compact, sharp tactical play", "Long endgames", "Pure luck", "Card draws"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: ToriShogiQuizSettings): ToriShogiQuizState {
