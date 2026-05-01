@@ -1,22 +1,24 @@
-.trivia-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:680px; margin:0 auto; }
-.trivia-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 12px; background:#f4f6fa; border-radius:8px; }
-.trivia-progress, .trivia-score { font-weight:700; color:#34495e; }
-.trivia-timer { font-weight:800; color:#27ae60; }
-.trivia-timer.urgent { color:#e74c3c; }
-.trivia-question { font-size:1.15rem; padding:18px; background:#ecf0f1; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; }
-.trivia-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
-.trivia-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff; border:2px solid #34495e; border-radius:8px; cursor:pointer; text-align:left; }
-.trivia-choice:hover { background:#f0f6ff; }
-.trivia-choice.selected { background:#dceefb; border-color:#2980b9; }
-.trivia-choice.correct { background:#d4f5d4; border-color:#27ae60; }
-.trivia-choice.wrong { background:#f8d7da; border-color:#e74c3c; }
-.trivia-choice-letter { font-weight:800; min-width:1.3em; }
-.trivia-feedback { font-weight:700; padding:8px 12px; border-radius:8px; }
-.trivia-feedback.correct { background:#d4f5d4; color:#27ae60; }
-.trivia-feedback.wrong { background:#f8d7da; color:#e74c3c; }
-.trivia-actions { display:flex; gap:10px; }
-.trivia-btn { padding:10px 18px; font-weight:700; border:0; border-radius:8px; cursor:pointer; }
-.trivia-btn.submit { background:#2980b9; color:#fff; }
-.trivia-btn.submit:disabled { background:#95a5a6; cursor:not-allowed; }
-.trivia-btn.next { background:#27ae60; color:#fff; }
-.trivia-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.fpctsg-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#fffaf0; color:#2b1a0a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.fpctsg-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#ffeed1; color:#3b3b58; border-radius:8px; border:1px solid #3b3b58; }
+.fpctsg-progress, .fpctsg-score { font-weight:700; color:#3b3b58; }
+.fpctsg-timer { font-weight:800; color:#d22a2a; }
+.fpctsg-timer.urgent { color:#d22a2a; animation:fpctsg-pulse 0.5s infinite alternate; }
+@keyframes fpctsg-pulse { from { opacity:1; } to { opacity:0.4; } }
+.fpctsg-question { font-size:1.18rem; padding:18px; background:#fff5dc; color:#2b1a0a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #d22a2a; }
+.fpctsg-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.fpctsg-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#ffffff; color:#2b1a0a; border:2px solid #3b3b58; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.fpctsg-choice:hover:not(:disabled) { background:#ffe4a8; border-color:#d2a02a; }
+.fpctsg-choice.selected { background:#ffe4a8; border-color:#d2a02a; }
+.fpctsg-choice.correct { background:#d8f0c8; border-color:#2a8a2a; color:#2b1a0a; }
+.fpctsg-choice.wrong { background:#fad8d8; border-color:#d22a2a; color:#2b1a0a; }
+.fpctsg-choice-letter { font-weight:800; min-width:1.4em; color:#d22a2a; }
+.fpctsg-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.fpctsg-feedback.correct { background:#d8f0c8; color:#2a8a2a; }
+.fpctsg-feedback.wrong { background:#fad8d8; color:#d22a2a; }
+.fpctsg-actions { display:flex; gap:10px; }
+.fpctsg-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.fpctsg-btn.submit { background:#2a8ad2; color:#fff; }
+.fpctsg-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.fpctsg-btn.next { background:#2a8a2a; color:#fff; }
+.fpctsg-done { text-align:center; padding:28px; background:#fff5dc; color:#2b1a0a; border-radius:14px; border:2px solid #3b3b58; width:100%; box-sizing:border-box; }
+.fpctsg-done h2 { margin-bottom:8px; color:#3b3b58; }

@@ -1,22 +1,24 @@
-.trivia-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:680px; margin:0 auto; }
-.trivia-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 12px; background:#f4f6fa; border-radius:8px; }
-.trivia-progress, .trivia-score { font-weight:700; color:#34495e; }
-.trivia-timer { font-weight:800; color:#27ae60; }
-.trivia-timer.urgent { color:#e74c3c; }
-.trivia-question { font-size:1.15rem; padding:18px; background:#ecf0f1; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; }
-.trivia-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
-.trivia-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff; border:2px solid #34495e; border-radius:8px; cursor:pointer; text-align:left; }
-.trivia-choice:hover { background:#f0f6ff; }
-.trivia-choice.selected { background:#dceefb; border-color:#2980b9; }
-.trivia-choice.correct { background:#d4f5d4; border-color:#27ae60; }
-.trivia-choice.wrong { background:#f8d7da; border-color:#e74c3c; }
-.trivia-choice-letter { font-weight:800; min-width:1.3em; }
-.trivia-feedback { font-weight:700; padding:8px 12px; border-radius:8px; }
-.trivia-feedback.correct { background:#d4f5d4; color:#27ae60; }
-.trivia-feedback.wrong { background:#f8d7da; color:#e74c3c; }
-.trivia-actions { display:flex; gap:10px; }
-.trivia-btn { padding:10px 18px; font-weight:700; border:0; border-radius:8px; cursor:pointer; }
-.trivia-btn.submit { background:#2980b9; color:#fff; }
-.trivia-btn.submit:disabled { background:#95a5a6; cursor:not-allowed; }
-.trivia-btn.next { background:#27ae60; color:#fff; }
-.trivia-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.pente-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#f0f8ff; color:#0a1a3a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.pente-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#1463a0; color:#0e3a6a; border-radius:8px; border:1px solid #0e3a6a; }
+.pente-progress, .pente-score { font-weight:700; color:#0e3a6a; }
+.pente-timer { font-weight:800; color:#1463a0; }
+.pente-timer.urgent { color:#7a1a1a; animation:pente-pulse 0.5s infinite alternate; }
+@keyframes pente-pulse { from { opacity:1; } to { opacity:0.4; } }
+.pente-question { font-size:1.18rem; padding:18px; background:#e0eef8; color:#0a1a3a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #1463a0; }
+.pente-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.pente-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#ffffff; color:#0a1a3a; border:2px solid #1463a0; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.pente-choice:hover:not(:disabled) { background:#b8d4ee; border-color:#0e3a6a; }
+.pente-choice.selected { background:#b8d4ee; border-color:#0e3a6a; }
+.pente-choice.correct { background:#d4f0d4; border-color:#1a7a4a; color:#0a1a3a; }
+.pente-choice.wrong { background:#fadcdc; border-color:#7a1a1a; color:#0a1a3a; }
+.pente-choice-letter { font-weight:800; min-width:1.4em; color:#1463a0; }
+.pente-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.pente-feedback.correct { background:#d4f0d4; color:#1a7a4a; }
+.pente-feedback.wrong { background:#fadcdc; color:#7a1a1a; }
+.pente-actions { display:flex; gap:10px; }
+.pente-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.pente-btn.submit { background:#1463a0; color:#fff; }
+.pente-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.pente-btn.next { background:#1a7a4a; color:#fff; }
+.pente-done { text-align:center; padding:28px; background:#e0eef8; color:#0a1a3a; border-radius:14px; border:2px solid #0e3a6a; width:100%; box-sizing:border-box; }
+.pente-done h2 { margin-bottom:8px; color:#0e3a6a; }

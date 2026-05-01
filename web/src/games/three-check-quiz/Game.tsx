@@ -13,30 +13,30 @@ export function ThreeCheckQuizGame({ state, dispatch, onGameOver }: GameProps<Th
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as ThreeCheckQuizAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="tcchq-wrap"><div className="tcchq-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
-      <div className="trivia-header">
-        <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
-        <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+    <div className="tcchq-wrap">
+      <div className="tcchq-header">
+        <span className="tcchq-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
+        <span className={`tcchq-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
+        <span className="tcchq-score">{state.score} pts</span>
       </div>
-      <div className="trivia-question">{q.question}</div>
-      <div className="trivia-choices">
+      <div className="tcchq-question">{q.question}</div>
+      <div className="tcchq-choices">
         {q.choices.map((choice, i) => {
-          let cls = "trivia-choice";
+          let cls = "tcchq-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as ThreeCheckQuizAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as ThreeCheckQuizAction)}><span className="tcchq-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
-      {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
-      <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as ThreeCheckQuizAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as ThreeCheckQuizAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+      {isResult && <div className={`tcchq-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
+      <div className="tcchq-actions">
+        {!isResult && <button className="tcchq-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as ThreeCheckQuizAction)}>Submit</button>}
+        {isResult && <button className="tcchq-btn next" onClick={() => dispatch({ type:"next" } as ThreeCheckQuizAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

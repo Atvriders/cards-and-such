@@ -1,22 +1,24 @@
-.trivia-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:680px; margin:0 auto; }
-.trivia-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 12px; background:#f4f6fa; border-radius:8px; }
-.trivia-progress, .trivia-score { font-weight:700; color:#34495e; }
-.trivia-timer { font-weight:800; color:#27ae60; }
-.trivia-timer.urgent { color:#e74c3c; }
-.trivia-question { font-size:1.15rem; padding:18px; background:#ecf0f1; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; }
-.trivia-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
-.trivia-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff; border:2px solid #34495e; border-radius:8px; cursor:pointer; text-align:left; }
-.trivia-choice:hover { background:#f0f6ff; }
-.trivia-choice.selected { background:#dceefb; border-color:#2980b9; }
-.trivia-choice.correct { background:#d4f5d4; border-color:#27ae60; }
-.trivia-choice.wrong { background:#f8d7da; border-color:#e74c3c; }
-.trivia-choice-letter { font-weight:800; min-width:1.3em; }
-.trivia-feedback { font-weight:700; padding:8px 12px; border-radius:8px; }
-.trivia-feedback.correct { background:#d4f5d4; color:#27ae60; }
-.trivia-feedback.wrong { background:#f8d7da; color:#e74c3c; }
-.trivia-actions { display:flex; gap:10px; }
-.trivia-btn { padding:10px 18px; font-weight:700; border:0; border-radius:8px; cursor:pointer; }
-.trivia-btn.submit { background:#2980b9; color:#fff; }
-.trivia-btn.submit:disabled { background:#95a5a6; cursor:not-allowed; }
-.trivia-btn.next { background:#27ae60; color:#fff; }
-.trivia-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.czch-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#1a0e2e; color:#fff5e1; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.czch-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#2c1c4a; color:#ffeb3b; border-radius:8px; border:1px solid #ff4081; }
+.czch-progress, .czch-score { font-weight:700; color:#ffeb3b; }
+.czch-timer { font-weight:800; color:#ff4081; }
+.czch-timer.urgent { color:#ff1744; animation:czch-pulse 0.5s infinite alternate; }
+@keyframes czch-pulse { from { opacity:1; } to { opacity:0.4; } }
+.czch-question { font-size:1.18rem; padding:18px; background:#321f54; color:#fff5e1; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #ff4081; }
+.czch-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.czch-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#3a2566; color:#fff5e1; border:2px solid #9c27b0; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.czch-choice:hover:not(:disabled) { background:#553388; border-color:#ffeb3b; }
+.czch-choice.selected { background:#553388; border-color:#ffeb3b; }
+.czch-choice.correct { background:#1d6e2a; border-color:#76ff03; color:#fff5e1; }
+.czch-choice.wrong { background:#5a1a2e; border-color:#ff1744; color:#fff5e1; }
+.czch-choice-letter { font-weight:800; min-width:1.4em; color:#ff4081; }
+.czch-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.czch-feedback.correct { background:#1d6e2a; color:#76ff03; }
+.czch-feedback.wrong { background:#5a1a2e; color:#ff1744; }
+.czch-actions { display:flex; gap:10px; }
+.czch-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.czch-btn.submit { background:#e91e63; color:#fff; }
+.czch-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.czch-btn.next { background:#00bcd4; color:#fff; }
+.czch-done { text-align:center; padding:28px; background:#2c1c4a; color:#fff5e1; border-radius:14px; border:2px solid #ff4081; width:100%; box-sizing:border-box; }
+.czch-done h2 { margin-bottom:8px; color:#ffeb3b; }

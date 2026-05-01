@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.torchq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#2a1f3d; color:#f0ecf7; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.torchq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#3a2c52; color:#e6e0f5; border-radius:8px; border:1px solid #8a78b3; }
+.torchq-progress, .torchq-score { font-weight:700; color:#e6e0f5; }
+.torchq-timer { font-weight:800; color:#b59cd9; }
+.torchq-timer.urgent { color:#d27192; animation:torchq-pulse 0.5s infinite alternate; }
+@keyframes torchq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.torchq-question { font-size:1.18rem; padding:18px; background:#473762; color:#f0ecf7; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #b59cd9; }
+.torchq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.torchq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#3a2c52; color:#f0ecf7; border:2px solid #a48ec7; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.torchq-choice:hover:not(:disabled) { background:#5e4a7a; border-color:#d8c4f0; }
+.torchq-choice.selected { background:#5e4a7a; border-color:#d8c4f0; }
+.torchq-choice.correct { background:#3e6b3a; border-color:#7ad06b; color:#f0ecf7; }
+.torchq-choice.wrong { background:#5a2a3a; border-color:#d27192; color:#f0ecf7; }
+.torchq-choice-letter { font-weight:800; min-width:1.4em; color:#b59cd9; }
+.torchq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.torchq-feedback.correct { background:#3e6b3a; color:#7ad06b; }
+.torchq-feedback.wrong { background:#5a2a3a; color:#d27192; }
+.torchq-actions { display:flex; gap:10px; }
+.torchq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.torchq-btn.submit { background:#8a6cc4; color:#fff; }
+.torchq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.torchq-btn.next { background:#5da64f; color:#fff; }
+.torchq-done { text-align:center; padding:28px; background:#473762; color:#f0ecf7; border-radius:14px; border:2px solid #8a78b3; width:100%; box-sizing:border-box; }
+.torchq-done h2 { margin-bottom:8px; color:#e6e0f5; }

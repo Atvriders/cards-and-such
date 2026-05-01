@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.tcchq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#fff5f5; color:#3a0a0a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.tcchq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#ffe0e0; color:#8a1a1a; border-radius:8px; border:1px solid #c41e1e; }
+.tcchq-progress, .tcchq-score { font-weight:700; color:#8a1a1a; }
+.tcchq-timer { font-weight:800; color:#c41e1e; }
+.tcchq-timer.urgent { color:#8a1a1a; animation:tcchq-pulse 0.5s infinite alternate; }
+@keyframes tcchq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.tcchq-question { font-size:1.18rem; padding:18px; background:#ffeded; color:#3a0a0a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #c41e1e; }
+.tcchq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.tcchq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff7f7; color:#3a0a0a; border:2px solid #c41e1e; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.tcchq-choice:hover:not(:disabled) { background:#ffd0d0; border-color:#8a1a1a; }
+.tcchq-choice.selected { background:#ffd0d0; border-color:#8a1a1a; }
+.tcchq-choice.correct { background:#d8f0d0; border-color:#3a7a1a; color:#3a0a0a; }
+.tcchq-choice.wrong { background:#ffb8b8; border-color:#8a1a1a; color:#3a0a0a; }
+.tcchq-choice-letter { font-weight:800; min-width:1.4em; color:#c41e1e; }
+.tcchq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.tcchq-feedback.correct { background:#d8f0d0; color:#3a7a1a; }
+.tcchq-feedback.wrong { background:#ffb8b8; color:#8a1a1a; }
+.tcchq-actions { display:flex; gap:10px; }
+.tcchq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.tcchq-btn.submit { background:#c41e1e; color:#fff; }
+.tcchq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.tcchq-btn.next { background:#3a7a1a; color:#fff; }
+.tcchq-done { text-align:center; padding:28px; background:#ffeded; color:#3a0a0a; border-radius:14px; border:2px solid #c41e1e; width:100%; box-sizing:border-box; }
+.tcchq-done h2 { margin-bottom:8px; color:#8a1a1a; }

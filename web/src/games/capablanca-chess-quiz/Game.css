@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.capchq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#fdfaf6; color:#1a0a0a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.capchq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#3a3a3a; color:#a02a2a; border-radius:8px; border:1px solid #0a0a0a; }
+.capchq-progress, .capchq-score { font-weight:700; color:#a02a2a; }
+.capchq-timer { font-weight:800; color:#a02a2a; }
+.capchq-timer.urgent { color:#a02a2a; animation:capchq-pulse 0.5s infinite alternate; }
+@keyframes capchq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.capchq-question { font-size:1.18rem; padding:18px; background:#f8eded; color:#1a0a0a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #a02a2a; }
+.capchq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.capchq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#ffffff; color:#1a0a0a; border:2px solid #a02a2a; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.capchq-choice:hover:not(:disabled) { background:#f0c8c8; border-color:#a02a2a; }
+.capchq-choice.selected { background:#f0c8c8; border-color:#a02a2a; }
+.capchq-choice.correct { background:#d4f0d4; border-color:#1a7a4a; color:#1a0a0a; }
+.capchq-choice.wrong { background:#fadcdc; border-color:#a02a2a; color:#1a0a0a; }
+.capchq-choice-letter { font-weight:800; min-width:1.4em; color:#a02a2a; }
+.capchq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.capchq-feedback.correct { background:#d4f0d4; color:#1a7a4a; }
+.capchq-feedback.wrong { background:#fadcdc; color:#a02a2a; }
+.capchq-actions { display:flex; gap:10px; }
+.capchq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.capchq-btn.submit { background:#a02a2a; color:#fff; }
+.capchq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.capchq-btn.next { background:#1a1a1a; color:#fff; }
+.capchq-done { text-align:center; padding:28px; background:#f8eded; color:#1a0a0a; border-radius:14px; border:2px solid #0a0a0a; width:100%; box-sizing:border-box; }
+.capchq-done h2 { margin-bottom:8px; color:#a02a2a; }

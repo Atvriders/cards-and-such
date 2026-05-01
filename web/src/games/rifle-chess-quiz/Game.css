@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.rifchq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#1e2a36; color:#dceaf5; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.rifchq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#2c3a4a; color:#9aaecb; border-radius:8px; border:1px solid #5a7d9c; }
+.rifchq-progress, .rifchq-score { font-weight:700; color:#9aaecb; }
+.rifchq-timer { font-weight:800; color:#5a7d9c; }
+.rifchq-timer.urgent { color:#cf4040; animation:rifchq-pulse 0.5s infinite alternate; }
+@keyframes rifchq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.rifchq-question { font-size:1.18rem; padding:18px; background:#243240; color:#dceaf5; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #5a7d9c; }
+.rifchq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.rifchq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#2c3a4a; color:#dceaf5; border:2px solid #5a7d9c; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.rifchq-choice:hover:not(:disabled) { background:#3e5670; border-color:#9aaecb; }
+.rifchq-choice.selected { background:#3e5670; border-color:#9aaecb; }
+.rifchq-choice.correct { background:#345f3a; border-color:#7ac072; color:#dceaf5; }
+.rifchq-choice.wrong { background:#5a2a2a; border-color:#cf4040; color:#dceaf5; }
+.rifchq-choice-letter { font-weight:800; min-width:1.4em; color:#5a7d9c; }
+.rifchq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.rifchq-feedback.correct { background:#345f3a; color:#7ac072; }
+.rifchq-feedback.wrong { background:#5a2a2a; color:#cf4040; }
+.rifchq-actions { display:flex; gap:10px; }
+.rifchq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.rifchq-btn.submit { background:#5a7d9c; color:#fff; }
+.rifchq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.rifchq-btn.next { background:#3a7a4a; color:#fff; }
+.rifchq-done { text-align:center; padding:28px; background:#243240; color:#dceaf5; border-radius:14px; border:2px solid #5a7d9c; width:100%; box-sizing:border-box; }
+.rifchq-done h2 { margin-bottom:8px; color:#9aaecb; }

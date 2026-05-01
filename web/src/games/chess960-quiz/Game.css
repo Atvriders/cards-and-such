@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.ch960q-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#f5ecd9; color:#2b1a0a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.ch960q-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#ede0c2; color:#5b3a1a; border-radius:8px; border:1px solid #7a4d22; }
+.ch960q-progress, .ch960q-score { font-weight:700; color:#5b3a1a; }
+.ch960q-timer { font-weight:800; color:#7a4d22; }
+.ch960q-timer.urgent { color:#a02b2b; animation:ch960q-pulse 0.5s infinite alternate; }
+@keyframes ch960q-pulse { from { opacity:1; } to { opacity:0.4; } }
+.ch960q-question { font-size:1.18rem; padding:18px; background:#fbf3df; color:#2b1a0a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #7a4d22; }
+.ch960q-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.ch960q-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fffaee; color:#2b1a0a; border:2px solid #a87649; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.ch960q-choice:hover:not(:disabled) { background:#f3e0bf; border-color:#7a4d22; }
+.ch960q-choice.selected { background:#f3e0bf; border-color:#7a4d22; }
+.ch960q-choice.correct { background:#e8f2d6; border-color:#5a7a2b; color:#2b1a0a; }
+.ch960q-choice.wrong { background:#f6dada; border-color:#a02b2b; color:#2b1a0a; }
+.ch960q-choice-letter { font-weight:800; min-width:1.4em; color:#7a4d22; }
+.ch960q-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.ch960q-feedback.correct { background:#e8f2d6; color:#5a7a2b; }
+.ch960q-feedback.wrong { background:#f6dada; color:#a02b2b; }
+.ch960q-actions { display:flex; gap:10px; }
+.ch960q-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.ch960q-btn.submit { background:#7a4d22; color:#fff; }
+.ch960q-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.ch960q-btn.next { background:#5a7a2b; color:#fff; }
+.ch960q-done { text-align:center; padding:28px; background:#fbf3df; color:#2b1a0a; border-radius:14px; border:2px solid #7a4d22; width:100%; box-sizing:border-box; }
+.ch960q-done h2 { margin-bottom:8px; color:#5b3a1a; }

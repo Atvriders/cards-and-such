@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.atomchq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#0f1a0f; color:#daffd6; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.atomchq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#1a2a1a; color:#a5ff5a; border-radius:8px; border:1px solid #5fbf1c; }
+.atomchq-progress, .atomchq-score { font-weight:700; color:#a5ff5a; }
+.atomchq-timer { font-weight:800; color:#7eff2e; }
+.atomchq-timer.urgent { color:#fff04a; animation:atomchq-pulse 0.5s infinite alternate; }
+@keyframes atomchq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.atomchq-question { font-size:1.18rem; padding:18px; background:#15291a; color:#daffd6; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #7eff2e; }
+.atomchq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.atomchq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#1c3320; color:#daffd6; border:2px solid #5fbf1c; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.atomchq-choice:hover:not(:disabled) { background:#2a4a2a; border-color:#a5ff5a; }
+.atomchq-choice.selected { background:#2a4a2a; border-color:#a5ff5a; }
+.atomchq-choice.correct { background:#2a5a1a; border-color:#7eff2e; color:#daffd6; }
+.atomchq-choice.wrong { background:#5a3a0e; border-color:#fff04a; color:#daffd6; }
+.atomchq-choice-letter { font-weight:800; min-width:1.4em; color:#7eff2e; }
+.atomchq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.atomchq-feedback.correct { background:#2a5a1a; color:#7eff2e; }
+.atomchq-feedback.wrong { background:#5a3a0e; color:#fff04a; }
+.atomchq-actions { display:flex; gap:10px; }
+.atomchq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.atomchq-btn.submit { background:#5fbf1c; color:#fff; }
+.atomchq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.atomchq-btn.next { background:#c4d22a; color:#fff; }
+.atomchq-done { text-align:center; padding:28px; background:#1a2a1a; color:#daffd6; border-radius:14px; border:2px solid #5fbf1c; width:100%; box-sizing:border-box; }
+.atomchq-done h2 { margin-bottom:8px; color:#a5ff5a; }

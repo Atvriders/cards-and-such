@@ -1,22 +1,24 @@
-.trivia-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:680px; margin:0 auto; }
-.trivia-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 12px; background:#f4f6fa; border-radius:8px; }
-.trivia-progress, .trivia-score { font-weight:700; color:#34495e; }
-.trivia-timer { font-weight:800; color:#27ae60; }
-.trivia-timer.urgent { color:#e74c3c; }
-.trivia-question { font-size:1.15rem; padding:18px; background:#ecf0f1; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; }
-.trivia-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
-.trivia-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff; border:2px solid #34495e; border-radius:8px; cursor:pointer; text-align:left; }
-.trivia-choice:hover { background:#f0f6ff; }
-.trivia-choice.selected { background:#dceefb; border-color:#2980b9; }
-.trivia-choice.correct { background:#d4f5d4; border-color:#27ae60; }
-.trivia-choice.wrong { background:#f8d7da; border-color:#e74c3c; }
-.trivia-choice-letter { font-weight:800; min-width:1.3em; }
-.trivia-feedback { font-weight:700; padding:8px 12px; border-radius:8px; }
-.trivia-feedback.correct { background:#d4f5d4; color:#27ae60; }
-.trivia-feedback.wrong { background:#f8d7da; color:#e74c3c; }
-.trivia-actions { display:flex; gap:10px; }
-.trivia-btn { padding:10px 18px; font-weight:700; border:0; border-radius:8px; cursor:pointer; }
-.trivia-btn.submit { background:#2980b9; color:#fff; }
-.trivia-btn.submit:disabled { background:#95a5a6; cursor:not-allowed; }
-.trivia-btn.next { background:#27ae60; color:#fff; }
-.trivia-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.dameopz-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#fbf3df; color:#1a0a0a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.dameopz-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#a02a2a; color:#7a1a1a; border-radius:8px; border:1px solid #a02a2a; }
+.dameopz-progress, .dameopz-score { font-weight:700; color:#7a1a1a; }
+.dameopz-timer { font-weight:800; color:#a02a2a; }
+.dameopz-timer.urgent { color:#7a1a1a; animation:dameopz-pulse 0.5s infinite alternate; }
+@keyframes dameopz-pulse { from { opacity:1; } to { opacity:0.4; } }
+.dameopz-question { font-size:1.18rem; padding:18px; background:#f8e0e0; color:#1a0a0a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #a02a2a; }
+.dameopz-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.dameopz-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff8ec; color:#1a0a0a; border:2px solid #a02a2a; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.dameopz-choice:hover:not(:disabled) { background:#f0c8c8; border-color:#7a1a1a; }
+.dameopz-choice.selected { background:#f0c8c8; border-color:#7a1a1a; }
+.dameopz-choice.correct { background:#d4f0d4; border-color:#1a7a4a; color:#1a0a0a; }
+.dameopz-choice.wrong { background:#fadcdc; border-color:#7a1a1a; color:#1a0a0a; }
+.dameopz-choice-letter { font-weight:800; min-width:1.4em; color:#a02a2a; }
+.dameopz-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.dameopz-feedback.correct { background:#d4f0d4; color:#1a7a4a; }
+.dameopz-feedback.wrong { background:#fadcdc; color:#7a1a1a; }
+.dameopz-actions { display:flex; gap:10px; }
+.dameopz-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.dameopz-btn.submit { background:#a02a2a; color:#fff; }
+.dameopz-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.dameopz-btn.next { background:#1a7a4a; color:#fff; }
+.dameopz-done { text-align:center; padding:28px; background:#f8e0e0; color:#1a0a0a; border-radius:14px; border:2px solid #a02a2a; width:100%; box-sizing:border-box; }
+.dameopz-done h2 { margin-bottom:8px; color:#7a1a1a; }

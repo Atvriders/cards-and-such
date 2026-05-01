@@ -55,9 +55,9 @@ export function RacingKingsGame({
 
   function squareClass(r: number, c: number): string {
     const light = (r + c) % 2 === 0;
-    const base = light ? "rk-sq-light" : "rk-sq-dark";
+    const base = light ? "rkpb-sq-light" : "rkpb-sq-dark";
     const key = `${r},${c}`;
-    if (r === 0) return `${base} rk-goal`;
+    if (r === 0) return `${base} rkpb-goal`;
     if (selected && selected.row === r && selected.col === c) return `${base} selected-source`;
     if (legalTargets.has(key)) return `${base} legal-target`;
     return base;
@@ -76,13 +76,13 @@ export function RacingKingsGame({
   const bRow = bKing ? 8 - bKing.row : 0;
 
   return (
-    <div className="rk-wrap">
-      <div className="rk-info">
+    <div className="rkpb-wrap">
+      <div className="rkpb-info">
         <span>Racing Kings — race to rank 8!</span>
         <span>White king rank: {wRow} | Black king rank: {bRow}</span>
       </div>
-      <div className={`rk-status ${statusClass}`}>{statusText}</div>
-      <div className="rk-goal-label">← Finish line (rank 8)</div>
+      <div className={`rkpb-status ${statusClass}`}>{statusText}</div>
+      <div className="rkpb-goal-label">← Finish line (rank 8)</div>
       <div style={{ display: "grid", gridTemplateColumns: `repeat(8, ${CELL_SIZE}px)`, border: "2px solid #555" }}>
         {Array.from({ length: 8 }, (_, r) =>
           Array.from({ length: 8 }, (_, c) => {
@@ -90,11 +90,11 @@ export function RacingKingsGame({
             return (
               <div
                 key={`${r}-${c}`}
-                className={`rk-cell ${squareClass(r, c)}`}
+                className={`rkpb-cell ${squareClass(r, c)}`}
                 style={{ width: CELL_SIZE, height: CELL_SIZE, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative" }}
                 onClick={() => handleClick(r, c)}
               >
-                {piece && <span className="rk-piece">{PIECE_UNICODE[piece.color][piece.type]}</span>}
+                {piece && <span className="rkpb-piece">{PIECE_UNICODE[piece.color][piece.type]}</span>}
                 {c === 0 && <span style={{ position: "absolute", top: 2, left: 3, fontSize: "0.6rem", color: "#888", fontWeight: "bold" }}>{8-r}</span>}
               </div>
             );

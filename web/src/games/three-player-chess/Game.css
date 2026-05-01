@@ -1,25 +1,24 @@
-.trivia-wrap { display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px;font-family:sans-serif;max-width:640px;margin:0 auto; }
-.trivia-header { display:flex;justify-content:space-between;width:100%;align-items:center; }
-.trivia-progress { font-size:0.95rem;color:#555; }
-.trivia-score { font-size:1.1rem;font-weight:700;color:#27ae60; }
-.trivia-timer { font-size:1.4rem;font-weight:900;color:#e74c3c;min-width:40px;text-align:center; }
-.trivia-timer.urgent { animation:pulse 0.5s infinite alternate; }
-@keyframes pulse { from { opacity:1; } to { opacity:0.4; } }
-.trivia-question { font-size:1.25rem;font-weight:600;text-align:center;color:#2c3e50;line-height:1.4; }
-.trivia-choices { display:flex;flex-direction:column;gap:10px;width:100%; }
-.trivia-choice { display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #bdc3c7;border-radius:10px;background:#fff;cursor:pointer;font-size:1rem;transition:border-color 0.15s,background 0.15s;text-align:left; }
-.trivia-choice:hover:not(:disabled) { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.selected { border-color:#3498db;background:#eaf4fb; }
-.trivia-choice.correct { border-color:#27ae60;background:#eafaf1; }
-.trivia-choice.wrong { border-color:#e74c3c;background:#fdedec; }
-.trivia-choice-letter { font-weight:900;font-size:1.1rem;color:#95a5a6;min-width:24px; }
-.trivia-actions { display:flex;gap:12px; }
-.trivia-btn { padding:10px 28px;border-radius:8px;border:none;font-size:1rem;font-weight:700;cursor:pointer; }
-.trivia-btn.submit { background:#27ae60;color:#fff; }
-.trivia-btn.next { background:#3498db;color:#fff; }
-.trivia-btn:disabled { opacity:0.4;cursor:not-allowed; }
-.trivia-feedback { font-size:1.1rem;font-weight:700;padding:10px 24px;border-radius:8px; }
-.trivia-feedback.correct { background:#eafaf1;color:#1e8449; }
-.trivia-feedback.wrong { background:#fdedec;color:#c0392b; }
-.trivia-done { text-align:center;padding:24px;background:#f8f9fa;border-radius:16px;width:100%; }
-.trivia-done h2 { margin-bottom:8px; }
+.tpc-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#f5f0fa; color:#2a1242; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.tpc-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#e6dcf2; color:#4a2a72; border-radius:8px; border:1px solid #4a2a72; }
+.tpc-progress, .tpc-score { font-weight:700; color:#4a2a72; }
+.tpc-timer { font-weight:800; color:#7a3aac; }
+.tpc-timer.urgent { color:#7a1a3a; animation:tpc-pulse 0.5s infinite alternate; }
+@keyframes tpc-pulse { from { opacity:1; } to { opacity:0.4; } }
+.tpc-question { font-size:1.18rem; padding:18px; background:#efe6f8; color:#2a1242; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #7a3aac; }
+.tpc-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.tpc-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fbf7ff; color:#2a1242; border:2px solid #7a3aac; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.tpc-choice:hover:not(:disabled) { background:#dcc6ee; border-color:#4a2a72; }
+.tpc-choice.selected { background:#dcc6ee; border-color:#4a2a72; }
+.tpc-choice.correct { background:#cdedd6; border-color:#1a7a4a; color:#2a1242; }
+.tpc-choice.wrong { background:#f0d4d4; border-color:#7a1a3a; color:#2a1242; }
+.tpc-choice-letter { font-weight:800; min-width:1.4em; color:#7a3aac; }
+.tpc-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.tpc-feedback.correct { background:#cdedd6; color:#1a7a4a; }
+.tpc-feedback.wrong { background:#f0d4d4; color:#7a1a3a; }
+.tpc-actions { display:flex; gap:10px; }
+.tpc-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.tpc-btn.submit { background:#7a3aac; color:#fff; }
+.tpc-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.tpc-btn.next { background:#1a7a4a; color:#fff; }
+.tpc-done { text-align:center; padding:28px; background:#efe6f8; color:#2a1242; border-radius:14px; border:2px solid #4a2a72; width:100%; box-sizing:border-box; }
+.tpc-done h2 { margin-bottom:8px; color:#4a2a72; }

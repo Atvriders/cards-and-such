@@ -13,30 +13,30 @@ export function Minichess5x5Game({ state, dispatch, onGameOver }: GameProps<Mini
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as Minichess5x5Action), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="mini5x5-wrap"><div className="mini5x5-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
-      <div className="trivia-header">
-        <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
-        <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+    <div className="mini5x5-wrap">
+      <div className="mini5x5-header">
+        <span className="mini5x5-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
+        <span className={`mini5x5-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
+        <span className="mini5x5-score">{state.score} pts</span>
       </div>
-      <div className="trivia-question">{q.question}</div>
-      <div className="trivia-choices">
+      <div className="mini5x5-question">{q.question}</div>
+      <div className="mini5x5-choices">
         {q.choices.map((choice, i) => {
-          let cls = "trivia-choice";
+          let cls = "mini5x5-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as Minichess5x5Action)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as Minichess5x5Action)}><span className="mini5x5-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
-      {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
-      <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as Minichess5x5Action)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as Minichess5x5Action)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+      {isResult && <div className={`mini5x5-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
+      <div className="mini5x5-actions">
+        {!isResult && <button className="mini5x5-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as Minichess5x5Action)}>Submit</button>}
+        {isResult && <button className="mini5x5-btn next" onClick={() => dispatch({ type:"next" } as Minichess5x5Action)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

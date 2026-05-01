@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.marschq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#fafbff; color:#0a2050; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.marschq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#e2e8f7; color:#0a3a8a; border-radius:8px; border:1px solid #0a3a8a; }
+.marschq-progress, .marschq-score { font-weight:700; color:#0a3a8a; }
+.marschq-timer { font-weight:800; color:#0a3a8a; }
+.marschq-timer.urgent { color:#cc1f1f; animation:marschq-pulse 0.5s infinite alternate; }
+@keyframes marschq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.marschq-question { font-size:1.18rem; padding:18px; background:#eef2fa; color:#0a2050; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #0a3a8a; }
+.marschq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.marschq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#ffffff; color:#0a2050; border:2px solid #0a3a8a; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.marschq-choice:hover:not(:disabled) { background:#cad9f3; border-color:#0a3a8a; }
+.marschq-choice.selected { background:#cad9f3; border-color:#0a3a8a; }
+.marschq-choice.correct { background:#d8f0d4; border-color:#1a7a4a; color:#0a2050; }
+.marschq-choice.wrong { background:#fadcdc; border-color:#cc1f1f; color:#0a2050; }
+.marschq-choice-letter { font-weight:800; min-width:1.4em; color:#0a3a8a; }
+.marschq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.marschq-feedback.correct { background:#d8f0d4; color:#1a7a4a; }
+.marschq-feedback.wrong { background:#fadcdc; color:#cc1f1f; }
+.marschq-actions { display:flex; gap:10px; }
+.marschq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.marschq-btn.submit { background:#0a3a8a; color:#fff; }
+.marschq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.marschq-btn.next { background:#cc1f1f; color:#fff; }
+.marschq-done { text-align:center; padding:28px; background:#eef2fa; color:#0a2050; border-radius:14px; border:2px solid #0a3a8a; width:100%; box-sizing:border-box; }
+.marschq-done h2 { margin-bottom:8px; color:#0a3a8a; }

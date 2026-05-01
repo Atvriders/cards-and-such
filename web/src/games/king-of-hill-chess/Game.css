@@ -1,22 +1,24 @@
-.trivia-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:680px; margin:0 auto; }
-.trivia-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 12px; background:#f4f6fa; border-radius:8px; }
-.trivia-progress, .trivia-score { font-weight:700; color:#34495e; }
-.trivia-timer { font-weight:800; color:#27ae60; }
-.trivia-timer.urgent { color:#e74c3c; }
-.trivia-question { font-size:1.15rem; padding:18px; background:#ecf0f1; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; }
-.trivia-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
-.trivia-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff; border:2px solid #34495e; border-radius:8px; cursor:pointer; text-align:left; }
-.trivia-choice:hover { background:#f0f6ff; }
-.trivia-choice.selected { background:#dceefb; border-color:#2980b9; }
-.trivia-choice.correct { background:#d4f5d4; border-color:#27ae60; }
-.trivia-choice.wrong { background:#f8d7da; border-color:#e74c3c; }
-.trivia-choice-letter { font-weight:800; min-width:1.3em; }
-.trivia-feedback { font-weight:700; padding:8px 12px; border-radius:8px; }
-.trivia-feedback.correct { background:#d4f5d4; color:#27ae60; }
-.trivia-feedback.wrong { background:#f8d7da; color:#e74c3c; }
-.trivia-actions { display:flex; gap:10px; }
-.trivia-btn { padding:10px 18px; font-weight:700; border:0; border-radius:8px; cursor:pointer; }
-.trivia-btn.submit { background:#2980b9; color:#fff; }
-.trivia-btn.submit:disabled { background:#95a5a6; cursor:not-allowed; }
-.trivia-btn.next { background:#27ae60; color:#fff; }
-.trivia-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.kothch-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#fff5d6; color:#2a1a08; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.kothch-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#dab373; color:#7a4a0a; border-radius:8px; border:1px solid #7a4a0a; }
+.kothch-progress, .kothch-score { font-weight:700; color:#7a4a0a; }
+.kothch-timer { font-weight:800; color:#a87a2a; }
+.kothch-timer.urgent { color:#8a3a1a; animation:kothch-pulse 0.5s infinite alternate; }
+@keyframes kothch-pulse { from { opacity:1; } to { opacity:0.4; } }
+.kothch-question { font-size:1.18rem; padding:18px; background:#fcecbf; color:#2a1a08; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #a87a2a; }
+.kothch-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.kothch-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fffceb; color:#2a1a08; border:2px solid #a87a2a; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.kothch-choice:hover:not(:disabled) { background:#dab373; border-color:#7a4a0a; }
+.kothch-choice.selected { background:#dab373; border-color:#7a4a0a; }
+.kothch-choice.correct { background:#d4ee9c; border-color:#3a5a08; color:#2a1a08; }
+.kothch-choice.wrong { background:#f0d0c4; border-color:#8a3a1a; color:#2a1a08; }
+.kothch-choice-letter { font-weight:800; min-width:1.4em; color:#a87a2a; }
+.kothch-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.kothch-feedback.correct { background:#d4ee9c; color:#3a5a08; }
+.kothch-feedback.wrong { background:#f0d0c4; color:#8a3a1a; }
+.kothch-actions { display:flex; gap:10px; }
+.kothch-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.kothch-btn.submit { background:#a87a2a; color:#fff; }
+.kothch-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.kothch-btn.next { background:#3a5a08; color:#fff; }
+.kothch-done { text-align:center; padding:28px; background:#fcecbf; color:#2a1a08; border-radius:14px; border:2px solid #7a4a0a; width:100%; box-sizing:border-box; }
+.kothch-done h2 { margin-bottom:8px; color:#7a4a0a; }

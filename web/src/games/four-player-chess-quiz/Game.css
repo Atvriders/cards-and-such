@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.fpcq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#fffaf0; color:#2b1a0a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.fpcq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#ffeed1; color:#3b3b58; border-radius:8px; border:1px solid #3b3b58; }
+.fpcq-progress, .fpcq-score { font-weight:700; color:#3b3b58; }
+.fpcq-timer { font-weight:800; color:#d22a2a; }
+.fpcq-timer.urgent { color:#d22a2a; animation:fpcq-pulse 0.5s infinite alternate; }
+@keyframes fpcq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.fpcq-question { font-size:1.18rem; padding:18px; background:#fff5dc; color:#2b1a0a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #d22a2a; }
+.fpcq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.fpcq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#ffffff; color:#2b1a0a; border:2px solid #3b3b58; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.fpcq-choice:hover:not(:disabled) { background:#ffe4a8; border-color:#d2a02a; }
+.fpcq-choice.selected { background:#ffe4a8; border-color:#d2a02a; }
+.fpcq-choice.correct { background:#d8f0c8; border-color:#2a8a2a; color:#2b1a0a; }
+.fpcq-choice.wrong { background:#fad8d8; border-color:#d22a2a; color:#2b1a0a; }
+.fpcq-choice-letter { font-weight:800; min-width:1.4em; color:#d22a2a; }
+.fpcq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.fpcq-feedback.correct { background:#d8f0c8; color:#2a8a2a; }
+.fpcq-feedback.wrong { background:#fad8d8; color:#d22a2a; }
+.fpcq-actions { display:flex; gap:10px; }
+.fpcq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.fpcq-btn.submit { background:#2a8ad2; color:#fff; }
+.fpcq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.fpcq-btn.next { background:#2a8a2a; color:#fff; }
+.fpcq-done { text-align:center; padding:28px; background:#fff5dc; color:#2b1a0a; border-radius:14px; border:2px solid #3b3b58; width:100%; box-sizing:border-box; }
+.fpcq-done h2 { margin-bottom:8px; color:#3b3b58; }

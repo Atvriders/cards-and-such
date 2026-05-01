@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.losalq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#f5ecd9; color:#2b1a0a; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.losalq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#ede0c2; color:#5b3a1a; border-radius:8px; border:1px solid #7a4d22; }
+.losalq-progress, .losalq-score { font-weight:700; color:#5b3a1a; }
+.losalq-timer { font-weight:800; color:#7a4d22; }
+.losalq-timer.urgent { color:#a02b2b; animation:losalq-pulse 0.5s infinite alternate; }
+@keyframes losalq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.losalq-question { font-size:1.18rem; padding:18px; background:#fbf3df; color:#2b1a0a; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #7a4d22; }
+.losalq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.losalq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fffaee; color:#2b1a0a; border:2px solid #a87649; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.losalq-choice:hover:not(:disabled) { background:#f3e0bf; border-color:#7a4d22; }
+.losalq-choice.selected { background:#f3e0bf; border-color:#7a4d22; }
+.losalq-choice.correct { background:#e8f2d6; border-color:#5a7a2b; color:#2b1a0a; }
+.losalq-choice.wrong { background:#f6dada; border-color:#a02b2b; color:#2b1a0a; }
+.losalq-choice-letter { font-weight:800; min-width:1.4em; color:#7a4d22; }
+.losalq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.losalq-feedback.correct { background:#e8f2d6; color:#5a7a2b; }
+.losalq-feedback.wrong { background:#f6dada; color:#a02b2b; }
+.losalq-actions { display:flex; gap:10px; }
+.losalq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.losalq-btn.submit { background:#7a4d22; color:#fff; }
+.losalq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.losalq-btn.next { background:#5a7a2b; color:#fff; }
+.losalq-done { text-align:center; padding:28px; background:#fbf3df; color:#2b1a0a; border-radius:14px; border:2px solid #7a4d22; width:100%; box-sizing:border-box; }
+.losalq-done h2 { margin-bottom:8px; color:#5b3a1a; }

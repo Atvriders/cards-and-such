@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.darkchq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#1f2937; color:#e5e7eb; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.darkchq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#374151; color:#cbd5e1; border-radius:8px; border:1px solid #64748b; }
+.darkchq-progress, .darkchq-score { font-weight:700; color:#cbd5e1; }
+.darkchq-timer { font-weight:800; color:#94a3b8; }
+.darkchq-timer.urgent { color:#f87171; animation:darkchq-pulse 0.5s infinite alternate; }
+@keyframes darkchq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.darkchq-question { font-size:1.18rem; padding:18px; background:#2a3344; color:#e5e7eb; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #94a3b8; }
+.darkchq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.darkchq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#374151; color:#e5e7eb; border:2px solid #64748b; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.darkchq-choice:hover:not(:disabled) { background:#475569; border-color:#cbd5e1; }
+.darkchq-choice.selected { background:#475569; border-color:#cbd5e1; }
+.darkchq-choice.correct { background:#365a48; border-color:#86efac; color:#e5e7eb; }
+.darkchq-choice.wrong { background:#5a3535; border-color:#f87171; color:#e5e7eb; }
+.darkchq-choice-letter { font-weight:800; min-width:1.4em; color:#94a3b8; }
+.darkchq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.darkchq-feedback.correct { background:#365a48; color:#86efac; }
+.darkchq-feedback.wrong { background:#5a3535; color:#f87171; }
+.darkchq-actions { display:flex; gap:10px; }
+.darkchq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.darkchq-btn.submit { background:#475569; color:#fff; }
+.darkchq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.darkchq-btn.next { background:#3a7a4a; color:#fff; }
+.darkchq-done { text-align:center; padding:28px; background:#2a3344; color:#e5e7eb; border-radius:14px; border:2px solid #64748b; width:100%; box-sizing:border-box; }
+.darkchq-done h2 { margin-bottom:8px; color:#cbd5e1; }

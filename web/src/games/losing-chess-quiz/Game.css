@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.losechq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#2c2c2c; color:#dddddd; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.losechq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#3a3a3a; color:#bbb; border-radius:8px; border:1px solid #777; }
+.losechq-progress, .losechq-score { font-weight:700; color:#bbb; }
+.losechq-timer { font-weight:800; color:#888; }
+.losechq-timer.urgent { color:#aa5a5a; animation:losechq-pulse 0.5s infinite alternate; }
+@keyframes losechq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.losechq-question { font-size:1.18rem; padding:18px; background:#333; color:#dddddd; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #888; }
+.losechq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.losechq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#444; color:#dddddd; border:2px solid #888; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.losechq-choice:hover:not(:disabled) { background:#5a5a5a; border-color:#cc8a3a; }
+.losechq-choice.selected { background:#5a5a5a; border-color:#cc8a3a; }
+.losechq-choice.correct { background:#3a5a3a; border-color:#7aae5a; color:#dddddd; }
+.losechq-choice.wrong { background:#5a3a3a; border-color:#aa5a5a; color:#dddddd; }
+.losechq-choice-letter { font-weight:800; min-width:1.4em; color:#888; }
+.losechq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.losechq-feedback.correct { background:#3a5a3a; color:#7aae5a; }
+.losechq-feedback.wrong { background:#5a3a3a; color:#aa5a5a; }
+.losechq-actions { display:flex; gap:10px; }
+.losechq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.losechq-btn.submit { background:#666; color:#fff; }
+.losechq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.losechq-btn.next { background:#3a7a3a; color:#fff; }
+.losechq-done { text-align:center; padding:28px; background:#333; color:#dddddd; border-radius:14px; border:2px solid #777; width:100%; box-sizing:border-box; }
+.losechq-done h2 { margin-bottom:8px; color:#bbb; }

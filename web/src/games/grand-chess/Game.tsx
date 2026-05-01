@@ -13,30 +13,30 @@ export function GrandChessGame({ state, dispatch, onGameOver }: GameProps<GrandC
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as GrandChessAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="grndch-wrap"><div className="grndch-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
-      <div className="trivia-header">
-        <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
-        <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+    <div className="grndch-wrap">
+      <div className="grndch-header">
+        <span className="grndch-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
+        <span className={`grndch-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
+        <span className="grndch-score">{state.score} pts</span>
       </div>
-      <div className="trivia-question">{q.question}</div>
-      <div className="trivia-choices">
+      <div className="grndch-question">{q.question}</div>
+      <div className="grndch-choices">
         {q.choices.map((choice, i) => {
-          let cls = "trivia-choice";
+          let cls = "grndch-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as GrandChessAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as GrandChessAction)}><span className="grndch-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
-      {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
-      <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as GrandChessAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as GrandChessAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+      {isResult && <div className={`grndch-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
+      <div className="grndch-actions">
+        {!isResult && <button className="grndch-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as GrandChessAction)}>Submit</button>}
+        {isResult && <button className="grndch-btn next" onClick={() => dispatch({ type:"next" } as GrandChessAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

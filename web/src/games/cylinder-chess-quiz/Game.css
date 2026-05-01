@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.cylchq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#2a1f3d; color:#f0ecf7; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.cylchq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#3a2c52; color:#e6e0f5; border-radius:8px; border:1px solid #8a78b3; }
+.cylchq-progress, .cylchq-score { font-weight:700; color:#e6e0f5; }
+.cylchq-timer { font-weight:800; color:#b59cd9; }
+.cylchq-timer.urgent { color:#d27192; animation:cylchq-pulse 0.5s infinite alternate; }
+@keyframes cylchq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.cylchq-question { font-size:1.18rem; padding:18px; background:#473762; color:#f0ecf7; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #b59cd9; }
+.cylchq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.cylchq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#3a2c52; color:#f0ecf7; border:2px solid #a48ec7; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.cylchq-choice:hover:not(:disabled) { background:#5e4a7a; border-color:#d8c4f0; }
+.cylchq-choice.selected { background:#5e4a7a; border-color:#d8c4f0; }
+.cylchq-choice.correct { background:#3e6b3a; border-color:#7ad06b; color:#f0ecf7; }
+.cylchq-choice.wrong { background:#5a2a3a; border-color:#d27192; color:#f0ecf7; }
+.cylchq-choice-letter { font-weight:800; min-width:1.4em; color:#b59cd9; }
+.cylchq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.cylchq-feedback.correct { background:#3e6b3a; color:#7ad06b; }
+.cylchq-feedback.wrong { background:#5a2a3a; color:#d27192; }
+.cylchq-actions { display:flex; gap:10px; }
+.cylchq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.cylchq-btn.submit { background:#8a6cc4; color:#fff; }
+.cylchq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.cylchq-btn.next { background:#5da64f; color:#fff; }
+.cylchq-done { text-align:center; padding:28px; background:#473762; color:#f0ecf7; border-radius:14px; border:2px solid #8a78b3; width:100%; box-sizing:border-box; }
+.cylchq-done h2 { margin-bottom:8px; color:#e6e0f5; }

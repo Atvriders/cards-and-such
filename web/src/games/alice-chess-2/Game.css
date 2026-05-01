@@ -1,22 +1,24 @@
-.trivia-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:sans-serif; max-width:680px; margin:0 auto; }
-.trivia-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 12px; background:#f4f6fa; border-radius:8px; }
-.trivia-progress, .trivia-score { font-weight:700; color:#34495e; }
-.trivia-timer { font-weight:800; color:#27ae60; }
-.trivia-timer.urgent { color:#e74c3c; }
-.trivia-question { font-size:1.15rem; padding:18px; background:#ecf0f1; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; }
-.trivia-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
-.trivia-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fff; border:2px solid #34495e; border-radius:8px; cursor:pointer; text-align:left; }
-.trivia-choice:hover { background:#f0f6ff; }
-.trivia-choice.selected { background:#dceefb; border-color:#2980b9; }
-.trivia-choice.correct { background:#d4f5d4; border-color:#27ae60; }
-.trivia-choice.wrong { background:#f8d7da; border-color:#e74c3c; }
-.trivia-choice-letter { font-weight:800; min-width:1.3em; }
-.trivia-feedback { font-weight:700; padding:8px 12px; border-radius:8px; }
-.trivia-feedback.correct { background:#d4f5d4; color:#27ae60; }
-.trivia-feedback.wrong { background:#f8d7da; color:#e74c3c; }
-.trivia-actions { display:flex; gap:10px; }
-.trivia-btn { padding:10px 18px; font-weight:700; border:0; border-radius:8px; cursor:pointer; }
-.trivia-btn.submit { background:#2980b9; color:#fff; }
-.trivia-btn.submit:disabled { background:#95a5a6; cursor:not-allowed; }
-.trivia-btn.next { background:#27ae60; color:#fff; }
-.trivia-done { text-align:center; padding:24px; background:#f8f9fa; border-radius:14px; }
+.alice2-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#f0f5fb; color:#1f1a2e; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.alice2-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#e0e8f5; color:#5a3a8a; border-radius:8px; border:1px solid #7a4dab; }
+.alice2-progress, .alice2-score { font-weight:700; color:#5a3a8a; }
+.alice2-timer { font-weight:800; color:#7a4dab; }
+.alice2-timer.urgent { color:#a02b6a; animation:alice2-pulse 0.5s infinite alternate; }
+@keyframes alice2-pulse { from { opacity:1; } to { opacity:0.4; } }
+.alice2-question { font-size:1.18rem; padding:18px; background:#eaf3f9; color:#1f1a2e; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #7a4dab; }
+.alice2-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.alice2-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fafdff; color:#1f1a2e; border:2px solid #1ab2c4; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.alice2-choice:hover:not(:disabled) { background:#d4ecff; border-color:#7a4dab; }
+.alice2-choice.selected { background:#d4ecff; border-color:#7a4dab; }
+.alice2-choice.correct { background:#d4f0d4; border-color:#1a8a1a; color:#1f1a2e; }
+.alice2-choice.wrong { background:#f0d4e8; border-color:#a02b6a; color:#1f1a2e; }
+.alice2-choice-letter { font-weight:800; min-width:1.4em; color:#7a4dab; }
+.alice2-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.alice2-feedback.correct { background:#d4f0d4; color:#1a8a1a; }
+.alice2-feedback.wrong { background:#f0d4e8; color:#a02b6a; }
+.alice2-actions { display:flex; gap:10px; }
+.alice2-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.alice2-btn.submit { background:#7a4dab; color:#fff; }
+.alice2-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.alice2-btn.next { background:#1ab2c4; color:#fff; }
+.alice2-done { text-align:center; padding:28px; background:#eaf3f9; color:#1f1a2e; border-radius:14px; border:2px solid #7a4dab; width:100%; box-sizing:border-box; }
+.alice2-done h2 { margin-bottom:8px; color:#5a3a8a; }

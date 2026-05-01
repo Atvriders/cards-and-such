@@ -13,30 +13,30 @@ export function AtomicChessQuizGame({ state, dispatch, onGameOver }: GameProps<A
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as AtomicChessQuizAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="atomchq-wrap"><div className="atomchq-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
-      <div className="trivia-header">
-        <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
-        <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+    <div className="atomchq-wrap">
+      <div className="atomchq-header">
+        <span className="atomchq-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
+        <span className={`atomchq-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
+        <span className="atomchq-score">{state.score} pts</span>
       </div>
-      <div className="trivia-question">{q.question}</div>
-      <div className="trivia-choices">
+      <div className="atomchq-question">{q.question}</div>
+      <div className="atomchq-choices">
         {q.choices.map((choice, i) => {
-          let cls = "trivia-choice";
+          let cls = "atomchq-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as AtomicChessQuizAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as AtomicChessQuizAction)}><span className="atomchq-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
-      {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
-      <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as AtomicChessQuizAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as AtomicChessQuizAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+      {isResult && <div className={`atomchq-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
+      <div className="atomchq-actions">
+        {!isResult && <button className="atomchq-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as AtomicChessQuizAction)}>Submit</button>}
+        {isResult && <button className="atomchq-btn next" onClick={() => dispatch({ type:"next" } as AtomicChessQuizAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

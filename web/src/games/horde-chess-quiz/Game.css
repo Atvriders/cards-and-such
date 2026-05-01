@@ -1,2 +1,25 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
 @import "../../engines/quiz/quiz.css";
+.hordeq-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px; font-family:'Georgia','Cambria',serif; max-width:680px; margin:0 auto; background:#f5e8c8; color:#2a1a08; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+.hordeq-header { display:flex; justify-content:space-between; width:100%; align-items:center; padding:8px 14px; background:#e8d5a5; color:#6b4a1a; border-radius:8px; border:1px solid #6b4a1a; }
+.hordeq-progress, .hordeq-score { font-weight:700; color:#6b4a1a; }
+.hordeq-timer { font-weight:800; color:#a87a2a; }
+.hordeq-timer.urgent { color:#8a3a1a; animation:hordeq-pulse 0.5s infinite alternate; }
+@keyframes hordeq-pulse { from { opacity:1; } to { opacity:0.4; } }
+.hordeq-question { font-size:1.18rem; padding:18px; background:#f8eecf; color:#2a1a08; border-radius:10px; width:100%; box-sizing:border-box; line-height:1.5; border-left:4px solid #a87a2a; }
+.hordeq-choices { display:flex; flex-direction:column; gap:8px; width:100%; }
+.hordeq-choice { display:flex; gap:10px; align-items:center; padding:12px 14px; font-size:1rem; background:#fcf6e0; color:#2a1a08; border:2px solid #a87a2a; border-radius:8px; cursor:pointer; text-align:left; transition:background 0.15s, border-color 0.15s, transform 0.05s; }
+.hordeq-choice:hover:not(:disabled) { background:#eed6a0; border-color:#6b4a1a; }
+.hordeq-choice.selected { background:#eed6a0; border-color:#6b4a1a; }
+.hordeq-choice.correct { background:#dceec0; border-color:#5a7a2a; color:#2a1a08; }
+.hordeq-choice.wrong { background:#f0d4cc; border-color:#8a3a1a; color:#2a1a08; }
+.hordeq-choice-letter { font-weight:800; min-width:1.4em; color:#a87a2a; }
+.hordeq-feedback { font-weight:700; padding:10px 16px; border-radius:8px; }
+.hordeq-feedback.correct { background:#dceec0; color:#5a7a2a; }
+.hordeq-feedback.wrong { background:#f0d4cc; color:#8a3a1a; }
+.hordeq-actions { display:flex; gap:10px; }
+.hordeq-btn { padding:10px 22px; font-weight:700; border:0; border-radius:8px; cursor:pointer; font-family:inherit; }
+.hordeq-btn.submit { background:#a87a2a; color:#fff; }
+.hordeq-btn.submit:disabled { opacity:0.45; cursor:not-allowed; }
+.hordeq-btn.next { background:#5a7a2a; color:#fff; }
+.hordeq-done { text-align:center; padding:28px; background:#f8eecf; color:#2a1a08; border-radius:14px; border:2px solid #6b4a1a; width:100%; box-sizing:border-box; }
+.hordeq-done h2 { margin-bottom:8px; color:#6b4a1a; }
