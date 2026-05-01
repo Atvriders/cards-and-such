@@ -7,10 +7,44 @@ import { submitScore } from "../platform/game-plugin/submitScore.js";
 import { playSound } from "../platform/sounds.js";
 import { Tutorial } from "../platform/Tutorial.js";
 import { tutorialFor, hasSeenTutorial, markTutorialSeen } from "../platform/tutorials.js";
+import { Confetti } from "../platform/Confetti.js";
+import { HowToPlayModal } from "../platform/HowToPlayModal.js";
 import "./PlayPage.css";
 
 function randomSeed(): number {
   return Math.floor(Math.random() * 2 ** 31);
+}
+
+function formatTime(totalSeconds: number): string {
+  const s = Math.max(0, Math.floor(totalSeconds));
+  const mm = Math.floor(s / 60).toString().padStart(2, "0");
+  const ss = (s % 60).toString().padStart(2, "0");
+  return `${mm}:${ss}`;
+}
+
+function readBestTime(gameId: string): number | null {
+  try {
+    if (typeof localStorage === "undefined") return null;
+    const raw = localStorage.getItem("cards-best-times");
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Record<string, number>;
+    const v = parsed[gameId];
+    return typeof v === "number" && Number.isFinite(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeBestTime(gameId: string, seconds: number): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    const raw = localStorage.getItem("cards-best-times");
+    const parsed = raw ? (JSON.parse(raw) as Record<string, number>) : {};
+    parsed[gameId] = seconds;
+    localStorage.setItem("cards-best-times", JSON.stringify(parsed));
+  } catch {
+    /* ignore */
+  }
 }
 
 function parseSeed(raw: string | null): number | null {
@@ -64,6 +98,18 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [helpOpen, setHelpOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "error">("idle");
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [elapsed, setElapsed] = useState<number>(0);
+  const [bestTime, setBestTime] = useState<number | null>(() => readBestTime(plugin.id));
+
+  // Tick the in-game timer once per second while playing.
+  useEffect(() => {
+    if (phase !== "playing") return;
+    const id = setInterval(() => {
+      setElapsed((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [phase]);
 
   const tutorialSteps = useMemo(() => tutorialFor(plugin.id), [plugin.id]);
 
@@ -88,6 +134,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       setSeed(nextSeed);
       setState(plugin.initialState(nextSeed, settings));
       setFinalScore(null);
+      setElapsed(0);
+      setShowConfetti(false);
       setPhase("playing");
     },
     [plugin, settings],
@@ -133,6 +181,17 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     setTimeout(() => setShareStatus("idle"), 1800);
   }, [plugin.id, seed, setSearchParams]);
 
+  const recordBest = useCallback(
+    (seconds: number) => {
+      const prev = readBestTime(plugin.id);
+      if (prev == null || seconds < prev) {
+        writeBestTime(plugin.id, seconds);
+        setBestTime(seconds);
+      }
+    },
+    [plugin.id],
+  );
+
   const dispatch = useCallback(
     (action: unknown) => {
       setState((s: unknown) => {
@@ -141,23 +200,31 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         if (term) {
           setFinalScore(term.score);
           setPhase("ended");
-          if (term.score > 0) playSound("win");
+          if (term.score > 0) {
+            playSound("win");
+            recordBest(elapsed);
+            setShowConfetti(true);
+          }
           void submitScore(plugin.id, term.score, settings as Record<string, unknown>);
         }
         return next;
       });
     },
-    [plugin, settings],
+    [plugin, settings, elapsed, recordBest],
   );
 
   const onGameOver = useCallback(
     (score: number) => {
       setFinalScore(score);
       setPhase("ended");
-      if (score > 0) playSound("win");
+      if (score > 0) {
+        playSound("win");
+        recordBest(elapsed);
+        setShowConfetti(true);
+      }
       void submitScore(plugin.id, score, settings as Record<string, unknown>);
     },
-    [plugin.id, settings],
+    [plugin.id, settings, elapsed, recordBest],
   );
 
   const showProminentSeed = plugin.id === "klondike" || plugin.id === "freecell" || plugin.id === "spider";
@@ -170,6 +237,27 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           <h1>{plugin.title}</h1>
         </div>
         <div className="play-header-actions">
+          {(phase === "playing" || phase === "ended") && (
+            <span
+              className="play-timer"
+              data-testid="play-timer"
+              title="Elapsed time"
+              aria-label={`Elapsed time ${formatTime(elapsed)}`}
+            >
+              <span className="play-timer-current" data-testid="play-timer-current">
+                {formatTime(elapsed)}
+              </span>
+              {bestTime != null && (
+                <span
+                  className="play-timer-best"
+                  data-testid="play-timer-best"
+                  title="Personal best"
+                >
+                  best {formatTime(bestTime)}
+                </span>
+              )}
+            </span>
+          )}
           {phase === "playing" && showProminentSeed && (
             <span
               className="play-seed-display"
@@ -244,16 +332,13 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         </div>
       </header>
 
-      {helpOpen && plugin.howToPlay && (
-        <div className="help-modal-backdrop" onClick={() => setHelpOpen(false)}>
-          <div className="help-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="close" onClick={() => setHelpOpen(false)}>✕</button>
-            <h2>How to play — {plugin.title}</h2>
-            {plugin.howToPlay.split("\n\n").map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </div>
-        </div>
+      {plugin.howToPlay && (
+        <HowToPlayModal
+          open={helpOpen}
+          onClose={() => setHelpOpen(false)}
+          title={plugin.title}
+          text={plugin.howToPlay}
+        />
       )}
 
       {phase === "setup" && (
@@ -307,6 +392,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           </div>
         </section>
       )}
+
+      {showConfetti && <Confetti onDone={() => setShowConfetti(false)} />}
     </div>
   );
 }
