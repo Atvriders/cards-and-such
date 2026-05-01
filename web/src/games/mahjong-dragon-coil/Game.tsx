@@ -1,3 +1,3 @@
-import { MahjongBoard } from "../_shared/MahjongBoard.js";
+import { makeThemedMahjongBoard } from "../_shared/MahjongBoard.js";
 import "../_shared/mahjong.css";
-export { MahjongBoard as MahjongDragonCoilGame };
+export const MahjongDragonCoilGame = makeThemedMahjongBoard("dragon");

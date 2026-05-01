@@ -89,9 +89,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.4rem;
+  /* emoji-first rendering — emoji fonts first, serif fallback for face stars */
+  font-family:
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
+    "Georgia", "Times New Roman", serif;
   font-weight: 700;
+  line-height: 1;
   border-radius: var(--tile-radius);
   border: 1px solid var(--tile-edge);
   background: var(--tile-face);
@@ -99,6 +103,10 @@
   cursor: pointer;
   box-sizing: border-box;
   padding: 0;
+  /* Crisper edges + stable click target across browsers */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform-origin: center bottom;
   transition:
     transform 0.14s ease,
     box-shadow 0.14s ease,
@@ -112,7 +120,8 @@
     inset 0 2px 3px rgba(255, 255, 255, 0.7),
     inset 1px 0 0 rgba(255, 255, 255, 0.45),
     inset -1px 0 0 rgba(0, 0, 0, 0.12);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.55);
+  /* No text-shadow on emoji — it makes them blurry on most platforms */
+  text-shadow: none;
   animation: tileFlip 0.45s cubic-bezier(0.2, 0.85, 0.3, 1.05) both;
 }
 
@@ -261,7 +270,7 @@
     border-radius: 12px;
   }
   .mahjong-shared .mahjong-tile {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
   }
   .mahjong-shared .mahjong-info,
   .mahjong-shared .mahjong-hud {
@@ -269,6 +278,129 @@
     padding: 8px 14px;
     gap: 14px;
   }
+}
+
+/* Ensure tile is large enough to tap on touch (>=44px hit zone via padding-extension trick).
+   We can't grow .mahjong-tile itself (board layout depends on tile size), but we can
+   provide a transparent click extension through ::before pseudo-element. */
+.mahjong-shared .mahjong-tile::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: calc(var(--tile-radius) + 3px);
+  pointer-events: auto;
+  background: transparent;
+  z-index: -1;
+}
+
+/* ---------------------- LAYOUT THEMES -------------------------- */
+/*
+   Per-layout visual themes. Activated by adding a `mahjong-theme-<name>`
+   class on .mahjong-shared (see makeThemedMahjongBoard helper).
+   Each theme tweaks the table felt, accent colors and tile face tint
+   so similarly-shaped layouts still feel distinct at a glance.
+*/
+
+/* Jade — emerald felt, gold accent */
+.mahjong-shared.mahjong-theme-jade {
+  --accent: #34d399;
+}
+.mahjong-shared.mahjong-theme-jade .mahjong-board {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(80, 200, 140, 0.28), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(20, 120, 80, 0.35), transparent 60%),
+    linear-gradient(135deg, #053b2c 0%, #0e6b48 50%, #053b2c 100%);
+}
+.mahjong-shared.mahjong-theme-jade .mahjong-tile.free {
+  background: linear-gradient(180deg, #f1fff8 0%, #d6f5e4 55%, #b9e8cd 100%);
+}
+
+/* Sakura — soft pink table, cherry accent */
+.mahjong-shared.mahjong-theme-sakura {
+  --accent: #f472b6;
+}
+.mahjong-shared.mahjong-theme-sakura .mahjong-board {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 200, 220, 0.35), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(220, 100, 150, 0.28), transparent 60%),
+    linear-gradient(135deg, #5a2438 0%, #8a3a5a 50%, #5a2438 100%);
+}
+.mahjong-shared.mahjong-theme-sakura .mahjong-tile.free {
+  background: linear-gradient(180deg, #fff5fa 0%, #ffd9e8 55%, #f5b8d0 100%);
+  color: #8a1d4a;
+}
+
+/* Koi — black-water pond, orange-red accent */
+.mahjong-shared.mahjong-theme-koi {
+  --accent: #fb923c;
+}
+.mahjong-shared.mahjong-theme-koi .mahjong-board {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(80, 80, 140, 0.22), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(20, 20, 50, 0.4), transparent 60%),
+    linear-gradient(135deg, #0a142a 0%, #112048 50%, #08102a 100%);
+}
+.mahjong-shared.mahjong-theme-koi .mahjong-tile.free {
+  background: linear-gradient(180deg, #fff7e8 0%, #ffd8a8 55%, #f5a060 100%);
+  color: #5a2410;
+}
+
+/* Dragon — deep red felt, gold accent */
+.mahjong-shared.mahjong-theme-dragon {
+  --accent: #fbbf24;
+}
+.mahjong-shared.mahjong-theme-dragon .mahjong-board {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(220, 60, 50, 0.32), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(120, 20, 20, 0.4), transparent 60%),
+    linear-gradient(135deg, #3b0a0a 0%, #6b1414 50%, #3b0a0a 100%);
+}
+.mahjong-shared.mahjong-theme-dragon .mahjong-tile.free {
+  background: linear-gradient(180deg, #fff8e0 0%, #ffe4a8 55%, #f5c060 100%);
+}
+
+/* Fortress — stone-grey, slate accent */
+.mahjong-shared.mahjong-theme-fortress {
+  --accent: #94a3b8;
+}
+.mahjong-shared.mahjong-theme-fortress .mahjong-board {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(180, 180, 190, 0.18), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(40, 50, 60, 0.4), transparent 60%),
+    linear-gradient(135deg, #1f2530 0%, #2c3440 50%, #1c222c 100%);
+}
+.mahjong-shared.mahjong-theme-fortress .mahjong-tile.free {
+  background: linear-gradient(180deg, #f5f5f0 0%, #d8d8d0 55%, #b8b8b0 100%);
+  color: #2c3440;
+}
+
+/* Butterfly — purple/lavender table, pink accent */
+.mahjong-shared.mahjong-theme-butterfly {
+  --accent: #c084fc;
+}
+.mahjong-shared.mahjong-theme-butterfly .mahjong-board {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(200, 130, 220, 0.28), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(90, 40, 130, 0.4), transparent 60%),
+    linear-gradient(135deg, #2a1240 0%, #4a2270 50%, #2a1240 100%);
+}
+.mahjong-shared.mahjong-theme-butterfly .mahjong-tile.free {
+  background: linear-gradient(180deg, #fef5ff 0%, #f0d8ff 55%, #d8b8f0 100%);
+  color: #4a2270;
+}
+
+/* Turtle — sandy ocean-floor, teal accent */
+.mahjong-shared.mahjong-theme-turtle {
+  --accent: #2dd4bf;
+}
+.mahjong-shared.mahjong-theme-turtle .mahjong-board {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(120, 200, 200, 0.22), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(20, 80, 80, 0.42), transparent 60%),
+    linear-gradient(135deg, #0a3030 0%, #146060 50%, #0a3030 100%);
+}
+.mahjong-shared.mahjong-theme-turtle .mahjong-tile.free {
+  background: linear-gradient(180deg, #f0fffd 0%, #c8f0ec 55%, #a0d8d2 100%);
 }
 
 /* --------------------- REDUCED MOTION -------------------------- */

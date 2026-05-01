@@ -9,11 +9,28 @@ const TILE_W = 36;
 const TILE_H = 44;
 const LAYER_OFFSET = 3;
 
+/**
+ * Build a themed MahjongBoard component. Pass a theme name (e.g. "jade", "sakura",
+ * "koi", "fortress", "dragon") and the rendered board gets a `mahjong-theme-<name>`
+ * class — themed CSS in `mahjong.css` then tweaks board background, accent colors,
+ * tile face tint, etc. Default is the neutral jade table.
+ */
+export function makeThemedMahjongBoard(theme: string) {
+  return function ThemedBoard(props: GameProps<MahjongState, Settings>): JSX.Element {
+    return <MahjongBoard {...props} theme={theme} />;
+  };
+}
+
+interface MahjongBoardProps extends GameProps<MahjongState, Settings> {
+  theme?: string;
+}
+
 export function MahjongBoard({
   state,
   dispatch,
   onGameOver,
-}: GameProps<MahjongState, Settings>): JSX.Element {
+  theme,
+}: MahjongBoardProps): JSX.Element {
   const terminal = isTerminal(state);
 
   useEffect(() => {
@@ -37,8 +54,10 @@ export function MahjongBoard({
     dispatch({ type: "select" as const, id } as MahjongAction);
   };
 
+  const rootClass = theme ? `mahjong-shared mahjong-theme-${theme}` : "mahjong-shared";
+
   return (
-    <div className="mahjong-shared">
+    <div className={rootClass}>
       <div className="mahjong-info">
         <span>Removed: {state.removed}/{state.total}</span>
         <span>Moves: {state.moves}</span>
