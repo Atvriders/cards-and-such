@@ -5,77 +5,147 @@ export interface StanleyCupQuizState { questions: QuizQuestion[]; currentIndex: 
 export type StanleyCupQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Most Stanley Cup titles by a team?",
+    "question": "Which team has won the most Stanley Cups?",
     "choices": [
-      "Red Wings",
-      "Maple Leafs",
       "Canadiens",
+      "Maple Leafs",
+      "Red Wings",
       "Bruins"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "How many Cups have Canadiens won?",
-    "choices": [
-      "20",
-      "22",
-      "24",
-      "26"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Wayne Gretzky won most of his Cups with?",
-    "choices": [
-      "Kings",
-      "Oilers",
-      "Rangers",
-      "Blues"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who won Stanley Cup in 2024?",
-    "choices": [
-      "Panthers",
-      "Oilers",
-      "Stars",
-      "Rangers"
     ],
     "correct": 0
   },
   {
-    "question": "Mario Lemieux played for?",
+    "question": "How many cups have the Montreal Canadiens won?",
     "choices": [
-      "Canadiens",
-      "Penguins",
-      "Bruins",
-      "Flyers"
+      "22",
+      "23",
+      "24",
+      "25"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "Most Conn Smythe MVPs?",
+    "question": "Who is the all-time NHL goal scorer?",
     "choices": [
-      "Howe",
       "Gretzky",
-      "Crosby",
+      "Ovechkin",
+      "Howe",
       "Lemieux"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Bobby Orr's flying-goal Cup year?",
+    "question": "Which team won the 2024 Stanley Cup?",
     "choices": [
-      "1968",
-      "1970",
-      "1972",
-      "1974"
+      "Panthers",
+      "Oilers",
+      "Knights",
+      "Bruins"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who is 'The Great One'?",
+    "choices": [
+      "Gretzky",
+      "Lemieux",
+      "Crosby",
+      "Ovechkin"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team won the 2023 Stanley Cup?",
+    "choices": [
+      "Golden Knights",
+      "Panthers",
+      "Avalanche",
+      "Lightning"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team won back-to-back Cups in 2020 and 2021?",
+    "choices": [
+      "Lightning",
+      "Avalanche",
+      "Bruins",
+      "Canadiens"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who captained the 2010 Blackhawks championship?",
+    "choices": [
+      "Toews",
+      "Kane",
+      "Hossa",
+      "Sharp"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Russian player led the Capitals to 2018?",
+    "choices": [
+      "Ovechkin",
+      "Kuznetsov",
+      "Backstrom",
+      "Holtby"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In which year did the Rangers last win the Cup?",
+    "choices": [
+      "1994",
+      "1996",
+      "1990",
+      "2000"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who scored the 1994 Cup-winning goal for the Rangers?",
+    "choices": [
+      "Mark Messier",
+      "Brian Leetch",
+      "Stephane Matteau",
+      "Mike Richter"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many wins are needed to take a playoff series?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "7"
     ],
     "correct": 1
   },
   {
-    "question": "Islanders dynasty won how many straight Cups?",
+    "question": "Which trophy goes to the playoff MVP?",
+    "choices": [
+      "Conn Smythe",
+      "Hart",
+      "Vezina",
+      "Norris"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Sidney Crosby plays for which team?",
+    "choices": [
+      "Penguins",
+      "Capitals",
+      "Flyers",
+      "Devils"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many Stanley Cups did Wayne Gretzky win?",
     "choices": [
       "3",
       "4",
@@ -85,72 +155,152 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Patrick Roy played goalie for?",
+    "question": "Who are the 'Original Six'?",
     "choices": [
-      "Habs/Avalanche",
-      "Habs only",
-      "Avalanche only",
-      "Bruins"
+      "The six oldest NHL teams",
+      "Six US teams",
+      "Six Canadian teams",
+      "Six expansion teams"
     ],
     "correct": 0
   },
   {
-    "question": "NHL began awarding Stanley Cup in?",
+    "question": "Who is the oldest player to score a Cup-winning goal?",
     "choices": [
-      "1893",
-      "1917",
-      "1926",
-      "1942"
+      "Lanny McDonald",
+      "Gordie Howe",
+      "Mark Recchi",
+      "Chris Chelios"
     ],
     "correct": 0
   },
   {
-    "question": "Who is the 'Great One'?",
+    "question": "Which team won 4 straight Cups in the early 1980s?",
     "choices": [
-      "Lemieux",
+      "Islanders",
+      "Oilers",
+      "Canadiens",
+      "Flyers"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who scored 92 goals in a single NHL season?",
+    "choices": [
       "Gretzky",
-      "Howe",
-      "Crosby"
+      "Lemieux",
+      "Hull",
+      "Ovechkin"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team won the 2022 Stanley Cup?",
+    "choices": [
+      "Avalanche",
+      "Lightning",
+      "Rangers",
+      "Oilers"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who was the 2022 Conn Smythe winner?",
+    "choices": [
+      "Cale Makar",
+      "Nathan MacKinnon",
+      "Mikko Rantanen",
+      "Darcy Kuemper"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team did the Panthers beat in the 2024 Cup Final?",
+    "choices": [
+      "Oilers",
+      "Rangers",
+      "Stars",
+      "Hurricanes"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How long is a Stanley Cup Final series?",
+    "choices": [
+      "Best of 5",
+      "Best of 7",
+      "Best of 9",
+      "Best of 3"
     ],
     "correct": 1
   },
   {
-    "question": "Sidney Crosby plays for?",
+    "question": "Who was the first European captain to win a Stanley Cup?",
     "choices": [
-      "Penguins",
-      "Oilers",
-      "Capitals",
-      "Rangers"
+      "Lidstrom",
+      "Sundin",
+      "Forsberg",
+      "Selanne"
     ],
     "correct": 0
   },
   {
-    "question": "Auston Matthews drafted by?",
+    "question": "Which team relocated and became the Carolina Hurricanes?",
     "choices": [
-      "Maple Leafs",
-      "Coyotes",
-      "Sabres",
+      "Hartford Whalers",
+      "Quebec Nordiques",
+      "Minnesota North Stars",
+      "Winnipeg Jets"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who did Pittsburgh draft 1st overall in 2005?",
+    "choices": [
+      "Crosby",
+      "Malkin",
+      "Staal",
+      "Fleury"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team won the 2017 Cup?",
+    "choices": [
+      "Penguins",
+      "Predators",
+      "Capitals",
       "Senators"
     ],
     "correct": 0
   },
   {
-    "question": "Tampa Bay Lightning won back-to-back in?",
+    "question": "Who was Lightning captain for the 2020/2021 Cups?",
     "choices": [
-      "2017-18",
-      "2019-20",
-      "2020-21",
-      "2021-22"
+      "Stamkos",
+      "Hedman",
+      "Kucherov",
+      "Vasilevskiy"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Gordie Howe spent most career with?",
+    "question": "Which trophy goes to the top regular-season team?",
     "choices": [
-      "Red Wings",
-      "Whalers",
-      "Bruins",
-      "Blackhawks"
+      "Presidents' Trophy",
+      "Stanley Cup",
+      "Hart",
+      "Calder"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Where is the Hockey Hall of Fame located?",
+    "choices": [
+      "Toronto",
+      "Montreal",
+      "Detroit",
+      "Ottawa"
     ],
     "correct": 0
   }

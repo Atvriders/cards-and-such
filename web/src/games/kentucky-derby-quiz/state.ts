@@ -5,147 +5,47 @@ export interface KentuckyDerbyQuizState { questions: QuizQuestion[]; currentInde
 export type KentuckyDerbyQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Kentucky Derby is held at?",
+    "question": "In which state is the Kentucky Derby held?",
     "choices": [
-      "Belmont",
+      "Kentucky",
+      "Tennessee",
+      "Virginia",
+      "Indiana"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "At which track is the Derby held?",
+    "choices": [
       "Churchill Downs",
+      "Belmont Park",
       "Pimlico",
       "Saratoga"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Derby distance is?",
+    "question": "How long is the Kentucky Derby race?",
     "choices": [
       "1 mile",
-      "1 1/4 miles",
-      "1 1/2 miles",
+      "1.25 miles",
+      "1.5 miles",
       "2 miles"
     ],
     "correct": 1
   },
   {
-    "question": "Triple Crown is Derby plus?",
+    "question": "Which horse won the 1973 Triple Crown including the Derby?",
     "choices": [
-      "Travers, Belmont",
-      "Preakness, Travers",
-      "Preakness, Belmont",
-      "Belmont, Breeders Cup"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Secretariat won Derby in?",
-    "choices": [
-      "1971",
-      "1973",
-      "1975",
-      "1977"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "American Pharoah won TC in?",
-    "choices": [
-      "2013",
-      "2014",
-      "2015",
-      "2016"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "How many TC winners are there?",
-    "choices": [
-      "11",
-      "13",
-      "15",
-      "17"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Justify won TC in?",
-    "choices": [
-      "2017",
-      "2018",
-      "2019",
-      "2020"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Most Derby wins by a jockey?",
-    "choices": [
-      "Eddie Arcaro",
-      "Bill Hartack",
-      "Both A and B (5)",
-      "Calvin Borel"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Kentucky Derby drink?",
-    "choices": [
-      "Old Fashioned",
-      "Mint Julep",
-      "Margarita",
-      "Bloody Mary"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Derby first run in?",
-    "choices": [
-      "1875",
-      "1900",
-      "1920",
-      "1936"
+      "Secretariat",
+      "Affirmed",
+      "Seattle Slew",
+      "Citation"
     ],
     "correct": 0
   },
   {
-    "question": "Run for the ___?",
-    "choices": [
-      "Cash",
-      "Roses",
-      "Ribbons",
-      "Glory"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Most exciting ___ in sports?",
-    "choices": [
-      "Hour",
-      "Hour and minutes",
-      "Two minutes",
-      "Half hour"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Mine That Bird won Derby (50-1) in?",
-    "choices": [
-      "2007",
-      "2009",
-      "2011",
-      "2013"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Derby blanket is made of?",
-    "choices": [
-      "Lilies",
-      "Roses",
-      "Daisies",
-      "Carnations"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Derby happens first Saturday in?",
+    "question": "In which month is the Derby traditionally run?",
     "choices": [
       "April",
       "May",
@@ -153,6 +53,256 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "July"
     ],
     "correct": 1
+  },
+  {
+    "question": "Which flower is associated with the Derby?",
+    "choices": [
+      "Rose",
+      "Tulip",
+      "Lily",
+      "Daisy"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which horse won the 2024 Kentucky Derby?",
+    "choices": [
+      "Mystik Dan",
+      "Sierra Leone",
+      "Forever Young",
+      "Fierceness"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which jockeys have the most Derby wins (5 each)?",
+    "choices": [
+      "Arcaro and Hartack",
+      "Borel and Smith",
+      "Shoemaker and Stevens",
+      "Velazquez and Prat"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "To whom is the 'garland of roses' presented?",
+    "choices": [
+      "Winning horse",
+      "Winning jockey",
+      "Owner",
+      "Trainer"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In which year did Secretariat win the Derby?",
+    "choices": [
+      "1971",
+      "1972",
+      "1973",
+      "1974"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which trainer is nicknamed 'The Coach'?",
+    "choices": [
+      "Bob Baffert",
+      "Wayne Lukas",
+      "Todd Pletcher",
+      "Steve Asmussen"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 2019 Derby horse was disqualified after crossing the line first?",
+    "choices": [
+      "Maximum Security",
+      "Country House",
+      "Code of Honor",
+      "Tacitus"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How old must horses be to run the Derby?",
+    "choices": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which song is sung before the Derby?",
+    "choices": [
+      "My Old Kentucky Home",
+      "Dixie",
+      "Rocky Top",
+      "America the Beautiful"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the official Derby cocktail?",
+    "choices": [
+      "Mint Julep",
+      "Old Fashioned",
+      "Whiskey Sour",
+      "Bourbon Smash"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which horse won the 2018 Triple Crown including the Derby?",
+    "choices": [
+      "Justify",
+      "American Pharoah",
+      "California Chrome",
+      "Always Dreaming"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which horse won the 2015 Triple Crown including the Derby?",
+    "choices": [
+      "American Pharoah",
+      "Justify",
+      "Pioneerof the Nile",
+      "Authentic"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In what year was the first Kentucky Derby?",
+    "choices": [
+      "1875",
+      "1880",
+      "1900",
+      "1925"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the maximum number of horses in a Derby field?",
+    "choices": [
+      "18",
+      "20",
+      "22",
+      "24"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which fashion accessory is iconic at the Derby?",
+    "choices": [
+      "Hats",
+      "Gloves",
+      "Capes",
+      "Tiaras"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which horse won the 2020 Derby (delayed to September)?",
+    "choices": [
+      "Authentic",
+      "Tiz the Law",
+      "Honor A. P.",
+      "Max Player"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who has the most Derby wins as a trainer?",
+    "choices": [
+      "Bob Baffert",
+      "Todd Pletcher",
+      "Wayne Lukas",
+      "Ben A. Jones"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which jockey won the 2024 Derby?",
+    "choices": [
+      "Brian Hernandez Jr.",
+      "John Velazquez",
+      "Mike Smith",
+      "Flavien Prat"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many legs are in the Triple Crown?",
+    "choices": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "What is the second leg of the Triple Crown?",
+    "choices": [
+      "Preakness Stakes",
+      "Belmont Stakes",
+      "Travers",
+      "Breeders' Cup"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the third leg of the Triple Crown?",
+    "choices": [
+      "Belmont Stakes",
+      "Preakness Stakes",
+      "Travers",
+      "Florida Derby"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which famous filly won the Derby in 1988?",
+    "choices": [
+      "Winning Colors",
+      "Genuine Risk",
+      "Ruffian",
+      "Rachel Alexandra"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Derby winner died of laminitis after the 2006 Preakness?",
+    "choices": [
+      "Barbaro",
+      "Smarty Jones",
+      "Funny Cide",
+      "Big Brown"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "By how many lengths did Secretariat win the 1973 Derby?",
+    "choices": [
+      "2.5",
+      "5",
+      "7",
+      "10"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the Derby's nickname?",
+    "choices": [
+      "Run for the Roses",
+      "The Big One",
+      "Bluegrass Run",
+      "Spring Sprint"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

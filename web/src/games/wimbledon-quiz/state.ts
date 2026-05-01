@@ -5,17 +5,17 @@ export interface WimbledonQuizState { questions: QuizQuestion[]; currentIndex: n
 export type WimbledonQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Most Wimbledon men's singles titles?",
+    "question": "Who has the most Wimbledon men's singles titles?",
     "choices": [
       "Federer",
-      "Sampras",
       "Djokovic",
-      "Nadal"
+      "Sampras",
+      "Borg"
     ],
     "correct": 0
   },
   {
-    "question": "How many Wimbledon titles has Federer?",
+    "question": "How many men's singles titles did Federer win at Wimbledon?",
     "choices": [
       "7",
       "8",
@@ -25,17 +25,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Most Wimbledon women's singles titles?",
-    "choices": [
-      "Court",
-      "Navratilova",
-      "Williams",
-      "Graf"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Wimbledon is played on what surface?",
+    "question": "Which surface is Wimbledon played on?",
     "choices": [
       "Clay",
       "Hard",
@@ -45,107 +35,117 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Who won Wimbledon men's 2024?",
+    "question": "Who has the most Wimbledon women's singles titles in the Open Era?",
+    "choices": [
+      "Navratilova",
+      "Williams",
+      "Graf",
+      "Court"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In which year was the first Wimbledon Championships?",
+    "choices": [
+      "1877",
+      "1881",
+      "1900",
+      "1925"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won the 2023 men's Wimbledon title?",
     "choices": [
       "Alcaraz",
-      "Sinner",
       "Djokovic",
+      "Sinner",
       "Medvedev"
     ],
     "correct": 0
   },
   {
-    "question": "Bjorn Borg won how many in a row?",
+    "question": "Which Czech-born player won 9 Wimbledon women's singles titles?",
     "choices": [
-      "3",
-      "4",
-      "5",
-      "6"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Wimbledon final was played on which day traditionally?",
-    "choices": [
-      "Saturday",
-      "Sunday",
-      "Monday",
-      "Wednesday"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Strawberries and ___ at Wimbledon?",
-    "choices": [
-      "sugar",
-      "cream",
-      "tea",
-      "cake"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Centre Court got a roof in?",
-    "choices": [
-      "2005",
-      "2007",
-      "2009",
-      "2011"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Longest Wimbledon match (Isner-Mahut)?",
-    "choices": [
-      "8 hrs",
-      "9 hrs",
-      "11 hrs",
-      "13 hrs"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Wimbledon was founded in?",
-    "choices": [
-      "1877",
-      "1898",
-      "1923",
-      "1968"
+      "Navratilova",
+      "Mandlikova",
+      "Sukova",
+      "Kvitova"
     ],
     "correct": 0
   },
   {
-    "question": "Open Era began in?",
+    "question": "Who is most associated with serve and volley at Wimbledon?",
     "choices": [
-      "1962",
-      "1968",
-      "1972",
-      "1978"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "All England Club is in?",
-    "choices": [
-      "Wimbledon",
-      "Greenwich",
-      "Hampstead",
-      "Richmond"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Steffi Graf won Wimbledon how many times?",
-    "choices": [
-      "5",
-      "6",
-      "7",
-      "9"
+      "Sampras",
+      "Federer",
+      "Both Sampras and Federer",
+      "Murray"
     ],
     "correct": 2
   },
   {
-    "question": "Pete Sampras won Wimbledon how many times?",
+    "question": "Which British man won Wimbledon in 2013?",
+    "choices": [
+      "Andy Murray",
+      "Tim Henman",
+      "Greg Rusedski",
+      "Cameron Norrie"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won 5 straight Wimbledon men's titles 1976-80?",
+    "choices": [
+      "Borg",
+      "McEnroe",
+      "Connors",
+      "Lendl"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In which year was Wimbledon cancelled?",
+    "choices": [
+      "2020",
+      "2018",
+      "2019",
+      "2021"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won the 2024 men's Wimbledon final?",
+    "choices": [
+      "Alcaraz",
+      "Djokovic",
+      "Sinner",
+      "Medvedev"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won the 2024 women's Wimbledon final?",
+    "choices": [
+      "Krejcikova",
+      "Paolini",
+      "Swiatek",
+      "Sabalenka"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the iconic Wimbledon snack?",
+    "choices": [
+      "Strawberries and cream",
+      "Hot dogs",
+      "Fish and chips",
+      "Tea sandwiches"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many Wimbledon women's singles titles does Serena Williams have?",
     "choices": [
       "5",
       "6",
@@ -153,6 +153,156 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "8"
     ],
     "correct": 2
+  },
+  {
+    "question": "In what year was the tiebreak introduced at Wimbledon?",
+    "choices": [
+      "1971",
+      "1980",
+      "1990",
+      "2000"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What feature does Centre Court now have?",
+    "choices": [
+      "Retractable roof",
+      "Open dome",
+      "Ice rink",
+      "Sand pit"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who played the longest Wimbledon match against Mahut?",
+    "choices": [
+      "Isner",
+      "Federer",
+      "Nadal",
+      "Djokovic"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the Wimbledon dress code?",
+    "choices": [
+      "All white",
+      "Any color",
+      "Light blue",
+      "Pastels"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many Wimbledon women's singles titles does Steffi Graf have?",
+    "choices": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who won the 2022 Wimbledon women's title?",
+    "choices": [
+      "Rybakina",
+      "Jabeur",
+      "Swiatek",
+      "Sabalenka"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which player won her first Slam at Wimbledon 2021?",
+    "choices": [
+      "Barty",
+      "Krejcikova",
+      "Halep",
+      "Kerber"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who was Borg's famous rival in the 1980 final?",
+    "choices": [
+      "McEnroe",
+      "Connors",
+      "Lendl",
+      "Vilas"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Where is Wimbledon held?",
+    "choices": [
+      "London",
+      "Manchester",
+      "Edinburgh",
+      "Birmingham"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who is the BBC's main rival broadcaster (none) in UK for Wimbledon?",
+    "choices": [
+      "BBC has exclusive rights",
+      "ITV",
+      "Sky",
+      "Channel 4"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won the men's Wimbledon title in 2021?",
+    "choices": [
+      "Djokovic",
+      "Berrettini",
+      "Federer",
+      "Nadal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Wimbledon is officially known as what?",
+    "choices": [
+      "The Championships",
+      "The Open",
+      "The Cup",
+      "The Slam"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which trophy does the men's Wimbledon winner receive?",
+    "choices": [
+      "Gentlemen's Singles Trophy",
+      "Plate",
+      "Bowl",
+      "Salver"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which trophy does the women's Wimbledon winner receive?",
+    "choices": [
+      "Venus Rosewater Dish",
+      "Wimbledon Cup",
+      "Norman Brookes",
+      "Daphne Akhurst"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many Wimbledon men's titles does Djokovic have as of 2024?",
+    "choices": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

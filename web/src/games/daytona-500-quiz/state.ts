@@ -5,27 +5,37 @@ export interface Daytona500QuizState { questions: QuizQuestion[]; currentIndex: 
 export type Daytona500QuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Daytona 500 distance is?",
+    "question": "How long is the Daytona 500 race?",
     "choices": [
       "400 miles",
       "500 miles",
       "600 miles",
-      "250 miles"
+      "300 miles"
     ],
     "correct": 1
   },
   {
-    "question": "Most Daytona 500 wins by a driver?",
+    "question": "In which state is the Daytona 500 held?",
     "choices": [
-      "Petty",
-      "Earnhardt",
-      "Yarborough",
-      "Allison"
+      "Florida",
+      "Georgia",
+      "Alabama",
+      "Tennessee"
     ],
     "correct": 0
   },
   {
-    "question": "How many Daytona 500 wins did Richard Petty have?",
+    "question": "Who has the most Daytona 500 wins?",
+    "choices": [
+      "Richard Petty",
+      "Cale Yarborough",
+      "Dale Earnhardt",
+      "Jimmie Johnson"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many Daytona 500 wins does Richard Petty have?",
     "choices": [
       "5",
       "6",
@@ -35,124 +45,264 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Dale Earnhardt finally won Daytona 500 in?",
+    "question": "In which year was the first Daytona 500?",
     "choices": [
-      "1995",
-      "1998",
-      "2000",
-      "2001"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Earnhardt died at Daytona in?",
-    "choices": [
-      "1999",
-      "2000",
-      "2001",
-      "2002"
+      "1957",
+      "1958",
+      "1959",
+      "1960"
     ],
     "correct": 2
   },
   {
-    "question": "Daytona 500 is held in?",
+    "question": "Which driver finally won Daytona in 1998 after 19 tries?",
     "choices": [
-      "January",
-      "February",
-      "March",
-      "April"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Daytona 500 is at Daytona ___ Speedway?",
-    "choices": [
-      "International",
-      "Beach",
-      "Florida",
-      "Speed"
+      "Dale Earnhardt",
+      "Jeff Gordon",
+      "Rusty Wallace",
+      "Mark Martin"
     ],
     "correct": 0
   },
   {
-    "question": "First Daytona 500 was in?",
+    "question": "Who won the 2024 Daytona 500?",
     "choices": [
-      "1949",
-      "1959",
-      "1969",
-      "1979"
+      "William Byron",
+      "Tyler Reddick",
+      "Christopher Bell",
+      "Alex Bowman"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Jeff Gordon won Daytona 500 how many times?",
+    "question": "The Daytona 500 is the season opener for which series?",
     "choices": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "NASCAR Cup",
+      "IndyCar",
+      "Formula 1",
+      "IMSA"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "NASCAR top series formerly Winston Cup, now?",
+    "question": "How many laps is the Daytona 500?",
     "choices": [
-      "Sprint",
-      "Cup",
-      "Series",
-      "Tour"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Daytona track length?",
-    "choices": [
-      "1.5",
-      "2.0",
-      "2.5",
-      "3.0"
+      "100",
+      "150",
+      "200",
+      "250"
     ],
     "correct": 2
   },
   {
-    "question": "Davy Allison won Daytona 500 in?",
+    "question": "What is the shape of Daytona International Speedway?",
     "choices": [
-      "1990",
-      "1992",
-      "1993",
-      "1994"
+      "Tri-oval",
+      "Oval",
+      "Road course",
+      "Street circuit"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Most popular father-son champions?",
+    "question": "Who tragically died on the last lap of the 2001 Daytona 500?",
     "choices": [
-      "Pettys",
-      "Earnhardts",
-      "Allisons",
-      "Waltrips"
+      "Dale Earnhardt",
+      "Adam Petty",
+      "Tony Stewart",
+      "Kenny Irwin"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Restrictor plate racing pioneered at?",
+    "question": "Which driver won the 2023 Daytona 500?",
     "choices": [
-      "Talladega",
-      "Daytona",
-      "Both",
-      "Charlotte"
+      "Ricky Stenhouse Jr.",
+      "Joey Logano",
+      "Kyle Larson",
+      "Chase Elliott"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How banked are Daytona's turns?",
+    "choices": [
+      "18 degrees",
+      "24 degrees",
+      "31 degrees",
+      "36 degrees"
     ],
     "correct": 2
   },
   {
-    "question": "Trevor Bayne shocked field winning Daytona 500 in?",
+    "question": "Which device historically reduced engine power at Daytona?",
+    "choices": [
+      "Restrictor plate",
+      "Wing",
+      "Spoiler limit",
+      "Tire change"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many Cup titles did Dale Earnhardt win?",
+    "choices": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which driver swept the Daytona 500 in 2014?",
+    "choices": [
+      "Dale Earnhardt Jr.",
+      "Kevin Harvick",
+      "Brad Keselowski",
+      "Joey Logano"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many drivers race in the Daytona 500?",
+    "choices": [
+      "40",
+      "42",
+      "44",
+      "46"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which automaker won the first Daytona 500?",
+    "choices": [
+      "Plymouth",
+      "Oldsmobile",
+      "Chevy",
+      "Dodge"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "What is 'The Big One' at Daytona?",
+    "choices": [
+      "Multi-car wreck",
+      "Final lap",
+      "Pit stop",
+      "Fueling"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What event is used to set the Daytona 500 grid?",
+    "choices": [
+      "Duels",
+      "Practice times",
+      "Free passes",
+      "Fan vote"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who finished 1-2 with Pearson in the iconic 1976 Daytona 500 finish?",
+    "choices": [
+      "Richard Petty",
+      "David Pearson",
+      "Both crashed",
+      "Bobby Allison"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which year did Trevor Bayne win Daytona 500 as a rookie?",
     "choices": [
       "2009",
+      "2010",
       "2011",
-      "2013",
-      "2015"
+      "2012"
     ],
-    "correct": 1
+    "correct": 2
+  },
+  {
+    "question": "Who won the Daytona 500 in 2022?",
+    "choices": [
+      "Austin Cindric",
+      "Bubba Wallace",
+      "Kyle Larson",
+      "Kurt Busch"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won the Daytona 500 in 2021?",
+    "choices": [
+      "Michael McDowell",
+      "Brad Keselowski",
+      "Joey Logano",
+      "Denny Hamlin"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Hendrick Motorsports driver won the 2024 Daytona 500?",
+    "choices": [
+      "William Byron",
+      "Kyle Larson",
+      "Chase Elliott",
+      "Alex Bowman"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How long is Daytona International Speedway?",
+    "choices": [
+      "2.5 miles",
+      "2.0 miles",
+      "3.0 miles",
+      "1.5 miles"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which sanctioning body runs the Daytona 500?",
+    "choices": [
+      "NASCAR",
+      "USAC",
+      "ARCA",
+      "IMSA"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who founded NASCAR?",
+    "choices": [
+      "Bill France Sr.",
+      "Richard Petty",
+      "Junior Johnson",
+      "Bill France Jr."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which car number is iconic for Dale Earnhardt?",
+    "choices": [
+      "3",
+      "8",
+      "24",
+      "43"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which trophy is awarded for the Daytona 500?",
+    "choices": [
+      "Harley J. Earl Trophy",
+      "Petty Cup",
+      "France Cup",
+      "Speed Trophy"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

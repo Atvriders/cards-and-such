@@ -27,10 +27,10 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   {
     "question": "Who scored the famous 'Hand of God' goal?",
     "choices": [
-      "Pelé",
+      "Pele",
       "Maradona",
       "Zidane",
-      "Romário"
+      "Romario"
     ],
     "correct": 1
   },
@@ -45,11 +45,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Which player won the Golden Ball at 2022 World Cup?",
+    "question": "Who won the Golden Ball at the 2022 World Cup?",
     "choices": [
-      "Mbappé",
+      "Mbappe",
       "Messi",
-      "Modrić",
+      "Modric",
       "Neymar"
     ],
     "correct": 1
@@ -79,13 +79,13 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "choices": [
       "Klose",
       "Ronaldo",
-      "Pelé",
-      "Müller"
+      "Pele",
+      "Muller"
     ],
     "correct": 0
   },
   {
-    "question": "Which team did Zidane head-butt in 2006 final?",
+    "question": "Which team did Zidane head-butt in the 2006 final?",
     "choices": [
       "Italy",
       "Brazil",
@@ -115,7 +115,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Which year did Italy win their fourth title?",
+    "question": "In which year did Italy win their fourth title?",
     "choices": [
       "1998",
       "2002",
@@ -135,7 +135,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Argentina's 1986 captain was?",
+    "question": "Who captained Argentina in 1986?",
     "choices": [
       "Kempes",
       "Maradona",
@@ -148,11 +148,161 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "Who won the Golden Boot in 2014?",
     "choices": [
       "Messi",
-      "James Rodríguez",
+      "James Rodriguez",
       "Neymar",
-      "Müller"
+      "Muller"
     ],
     "correct": 1
+  },
+  {
+    "question": "Which country won the 2010 World Cup?",
+    "choices": [
+      "Spain",
+      "Netherlands",
+      "Germany",
+      "Uruguay"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who scored the winning goal in the 2010 final?",
+    "choices": [
+      "Iniesta",
+      "Xavi",
+      "Villa",
+      "Torres"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which nations co-hosted the 2002 World Cup?",
+    "choices": [
+      "Japan and South Korea",
+      "China and Japan",
+      "Australia and NZ",
+      "Thailand and Malaysia"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won the Golden Ball at the 2014 World Cup?",
+    "choices": [
+      "Messi",
+      "Neymar",
+      "Robben",
+      "Muller"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many teams played in the 2022 World Cup?",
+    "choices": [
+      "24",
+      "28",
+      "32",
+      "48"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which countries primarily host the 2026 World Cup?",
+    "choices": [
+      "USA, Canada, Mexico",
+      "Australia and NZ",
+      "China and Japan",
+      "Spain and Portugal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who scored the fastest goal in World Cup history?",
+    "choices": [
+      "Hakan Sukur",
+      "Ronaldo",
+      "Klose",
+      "Mbappe"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which country won the 1966 World Cup?",
+    "choices": [
+      "England",
+      "Germany",
+      "Brazil",
+      "Italy"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In what year did Brazil win their fifth title?",
+    "choices": [
+      "1994",
+      "1998",
+      "2002",
+      "2006"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who scored a hat-trick in the 1966 final?",
+    "choices": [
+      "Geoff Hurst",
+      "Bobby Moore",
+      "Bobby Charlton",
+      "Roger Hunt"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which trophy is awarded to the World Cup winner since 1974?",
+    "choices": [
+      "Jules Rimet",
+      "FIFA World Cup Trophy",
+      "Golden Ball",
+      "Coupe du Monde"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who scored a hat-trick in the 2022 World Cup final?",
+    "choices": [
+      "Messi",
+      "Mbappe",
+      "Di Maria",
+      "Griezmann"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which African country reached the 2022 semifinals?",
+    "choices": [
+      "Senegal",
+      "Morocco",
+      "Cameroon",
+      "Ghana"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which player has appeared in the most World Cups?",
+    "choices": [
+      "Lothar Matthaus",
+      "Cristiano Ronaldo",
+      "Lionel Messi",
+      "Rafael Marquez"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who won the Golden Boot at the 2018 World Cup?",
+    "choices": [
+      "Harry Kane",
+      "Mbappe",
+      "Lukaku",
+      "Griezmann"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

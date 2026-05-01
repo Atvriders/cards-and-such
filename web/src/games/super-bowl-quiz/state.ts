@@ -15,14 +15,34 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Most Super Bowl wins as QB?",
+    "question": "Which team has the most Super Bowl wins?",
     "choices": [
-      "Montana",
-      "Brady",
-      "Manning",
-      "Bradshaw"
+      "Patriots",
+      "Cowboys",
+      "Steelers",
+      "49ers"
     ],
-    "correct": 1
+    "correct": 2
+  },
+  {
+    "question": "Who is the only player with 7 Super Bowl rings?",
+    "choices": [
+      "Brady",
+      "Montana",
+      "Manning",
+      "Rodgers"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Where was Super Bowl LVIII held in 2024?",
+    "choices": [
+      "Las Vegas",
+      "Los Angeles",
+      "Tampa",
+      "Atlanta"
+    ],
+    "correct": 0
   },
   {
     "question": "Which team won Super Bowl LVIII?",
@@ -35,124 +55,254 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Who is the 'GOAT' QB by most fans?",
+    "question": "Who is the youngest QB to win a Super Bowl?",
     "choices": [
+      "Roethlisberger",
       "Brady",
-      "Montana",
-      "Manning",
-      "Rodgers"
+      "Mahomes",
+      "Marino"
     ],
     "correct": 0
   },
   {
-    "question": "Halftime show in 1993 starred?",
+    "question": "Who headlined the 2020 Super Bowl halftime show?",
     "choices": [
+      "J.Lo and Shakira",
+      "Beyonce",
       "Madonna",
-      "Michael Jackson",
-      "Prince",
-      "Beyoncé"
+      "Prince"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Patriots won Super Bowl XXXVI vs?",
-    "choices": [
-      "Eagles",
-      "Rams",
-      "Panthers",
-      "Seahawks"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who threw 'The Tuck Rule' play?",
+    "question": "Who was Super Bowl XLIX MVP?",
     "choices": [
       "Brady",
-      "Bledsoe",
-      "Favre",
-      "Brees"
+      "Lynch",
+      "Edelman",
+      "Butler"
     ],
     "correct": 0
   },
   {
-    "question": "Bart Starr won MVP in?",
+    "question": "Which team blew a 28-3 lead in Super Bowl LI?",
     "choices": [
-      "I and II",
-      "II and III",
-      "I and III",
-      "II only"
+      "Falcons",
+      "Panthers",
+      "Seahawks",
+      "Broncos"
     ],
     "correct": 0
   },
   {
-    "question": "Which team has most Super Bowl losses?",
+    "question": "Who threw the pass for the 2008 'Helmet Catch'?",
+    "choices": [
+      "Eli Manning",
+      "Brady",
+      "Tyree",
+      "Roethlisberger"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Super Bowl featured the 'Philly Special'?",
+    "choices": [
+      "LII",
+      "LI",
+      "LIII",
+      "LIV"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won Super Bowl XLVIII?",
+    "choices": [
+      "Seahawks",
+      "Broncos",
+      "Patriots",
+      "49ers"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who scored the first touchdown in Super Bowl history?",
+    "choices": [
+      "Max McGee",
+      "Bart Starr",
+      "Don Chandler",
+      "Elijah Pitts"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team is famously 0-4 in Super Bowls?",
     "choices": [
       "Vikings",
-      "Bills",
-      "Broncos",
-      "Patriots"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Doug Williams was first Black QB to win SB in?",
-    "choices": [
-      "1983",
-      "1988",
-      "1991",
-      "1995"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Who threw 'The Helmet Catch' to in SB XLII?",
-    "choices": [
-      "Tyree",
-      "Burress",
-      "Manningham",
-      "Cruz"
+      "Browns",
+      "Lions",
+      "Texans"
     ],
     "correct": 0
   },
   {
-    "question": "Where was Super Bowl LVII played?",
-    "choices": [
-      "Glendale",
-      "Tampa",
-      "Inglewood",
-      "Atlanta"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Most Super Bowl rings as a player?",
+    "question": "Who was MVP of Super Bowl LV?",
     "choices": [
       "Brady",
-      "Montana",
-      "Bradshaw",
-      "Robinson"
+      "Mahomes",
+      "Gronkowski",
+      "Fournette"
     ],
     "correct": 0
   },
   {
-    "question": "Steelers won how many Super Bowls in 1970s?",
+    "question": "Which team won Super Bowl LVII?",
     "choices": [
-      "3",
-      "4",
-      "5",
-      "6"
+      "Chiefs",
+      "Eagles",
+      "49ers",
+      "Bengals"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who coached the Patriots dynasty?",
+    "choices": [
+      "Belichick",
+      "Parcells",
+      "Carroll",
+      "Reid"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "In what year was Super Bowl I played?",
+    "choices": [
+      "1965",
+      "1966",
+      "1967",
+      "1968"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who is famous for the 'Immaculate Reception'?",
+    "choices": [
+      "Franco Harris",
+      "Terry Bradshaw",
+      "Lynn Swann",
+      "Mean Joe Greene"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team won Super Bowl XXXVI to start the Patriots dynasty?",
+    "choices": [
+      "Patriots",
+      "Rams",
+      "Eagles",
+      "Steelers"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who won Super Bowl LIV MVP?",
+    "choices": [
+      "Mahomes",
+      "Reid",
+      "Hill",
+      "Kelce"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which kicker missed a key field goal in Super Bowl XXV?",
+    "choices": [
+      "Scott Norwood",
+      "Adam Vinatieri",
+      "Gary Anderson",
+      "Mike Vanderjagt"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who was QB for the 1985 Bears?",
+    "choices": [
+      "Jim McMahon",
+      "Walter Payton",
+      "Mike Ditka",
+      "Jim Kelly"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the Super Bowl trophy called?",
+    "choices": [
+      "Lombardi Trophy",
+      "Halas Trophy",
+      "Brady Trophy",
+      "NFL Cup"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team won Super Bowl 50?",
+    "choices": [
+      "Broncos",
+      "Panthers",
+      "Patriots",
+      "Cardinals"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who was MVP of Super Bowl 50?",
+    "choices": [
+      "Von Miller",
+      "Peyton Manning",
+      "Cam Newton",
+      "DeMarcus Ware"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which QB won Super Bowls with two different teams?",
+    "choices": [
+      "Peyton Manning",
+      "Brees",
+      "Brady",
+      "All of these"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Where was Super Bowl LVI held?",
+    "choices": [
+      "Inglewood",
+      "Tampa",
+      "Miami",
+      "Phoenix"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which kicker won Super Bowl MVP for the Colts (1971)?",
+    "choices": [
+      "Adam Vinatieri",
+      "Jim O'Brien",
+      "Ray Wersching",
+      "Gary Anderson"
     ],
     "correct": 1
   },
   {
-    "question": "Which team won 'The Drive' game (AFC Championship 1986)?",
+    "question": "Who threw the game-winning TD in Super Bowl LI overtime?",
     "choices": [
-      "Browns",
-      "Broncos",
-      "Bills",
-      "Bengals"
+      "Brady",
+      "White",
+      "Edelman",
+      "Bennett"
     ],
-    "correct": 1
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

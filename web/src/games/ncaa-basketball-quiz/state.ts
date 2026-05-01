@@ -5,27 +5,57 @@ export interface NcaaBasketballQuizState { questions: QuizQuestion[]; currentInd
 export type NcaaBasketballQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Coach with most NCAA men's titles?",
+    "question": "Which school has the most NCAA men's basketball titles?",
     "choices": [
-      "John Wooden",
-      "Mike Krzyzewski",
-      "Adolph Rupp",
-      "Roy Williams"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "How many NCAA titles did UCLA win under Wooden?",
-    "choices": [
-      "8",
-      "9",
-      "10",
-      "11"
+      "Duke",
+      "Kentucky",
+      "UCLA",
+      "North Carolina"
     ],
     "correct": 2
   },
   {
-    "question": "Christian Laettner played for?",
+    "question": "Who coached UCLA to 10 NCAA men's titles?",
+    "choices": [
+      "Wooden",
+      "Krzyzewski",
+      "Knight",
+      "Smith"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the NCAA tournament also known as?",
+    "choices": [
+      "The Big Dance",
+      "The Final Push",
+      "The Hoop Run",
+      "March Mayhem"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many teams are in the men's NCAA tournament?",
+    "choices": [
+      "64",
+      "65",
+      "68",
+      "72"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who won the 2024 men's NCAA championship?",
+    "choices": [
+      "UConn",
+      "Purdue",
+      "Alabama",
+      "NC State"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Coach K led which team for decades?",
     "choices": [
       "UNC",
       "Duke",
@@ -35,122 +65,242 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Who won NCAA 2023 men's title?",
+    "question": "Who hit 'The Shot' for Duke vs Kentucky in 1992?",
     "choices": [
-      "UConn",
-      "UNC",
-      "Kansas",
-      "Gonzaga"
+      "Laettner",
+      "Hill",
+      "Hurley",
+      "Davis"
     ],
     "correct": 0
   },
   {
-    "question": "Steph Curry played college at?",
+    "question": "Which team is called the Tar Heels?",
     "choices": [
       "Duke",
-      "Davidson",
-      "Carolina",
-      "Kentucky"
+      "UNC",
+      "NC State",
+      "Wake Forest"
     ],
     "correct": 1
   },
   {
-    "question": "NCAA tournament expanded to 64 teams in?",
+    "question": "Where is NCAA HQ located?",
     "choices": [
-      "1979",
-      "1985",
-      "1991",
-      "1996"
+      "Atlanta",
+      "Indianapolis",
+      "New York",
+      "New Orleans"
     ],
     "correct": 1
   },
   {
-    "question": "Who is the 'Round of 64' nickname?",
+    "question": "Who is the all-time NCAA D-I men's scoring leader?",
     "choices": [
-      "First round",
-      "Sweet Sixteen",
-      "Elite Eight",
-      "Final Four"
+      "Pete Maravich",
+      "Caitlin Clark",
+      "Kareem Abdul-Jabbar",
+      "Oscar Robertson"
     ],
     "correct": 0
   },
   {
-    "question": "NC State's 1983 title coach?",
+    "question": "Which conference does Kentucky play in?",
     "choices": [
+      "ACC",
+      "Big Ten",
+      "SEC",
+      "Big 12"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who won the 2023 men's NCAA title?",
+    "choices": [
+      "UConn",
+      "San Diego State",
+      "Miami",
+      "FAU"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which 16-seed beat Virginia in 2018?",
+    "choices": [
+      "UMBC",
+      "FGCU",
+      "St. Peter's",
+      "Lehigh"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "How many NCAA titles does Coach K have?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Caitlin Clark played college ball for which school?",
+    "choices": [
+      "Iowa",
+      "UConn",
+      "South Carolina",
+      "Stanford"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which team won three straight men's titles 1971-73?",
+    "choices": [
+      "UCLA",
+      "Indiana",
+      "Kentucky",
+      "UNC"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who coached Indiana to the 1976 undefeated title?",
+    "choices": [
+      "Bob Knight",
+      "Bobby Hurley",
+      "John Calipari",
+      "Mike K"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which school is nicknamed the Jayhawks?",
+    "choices": [
+      "Kansas",
+      "Kansas State",
+      "Iowa",
+      "Iowa State"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who hit the dunk for NC State to win the 1983 title?",
+    "choices": [
+      "Lorenzo Charles",
       "Jim Valvano",
-      "Dean Smith",
-      "Mike Krzyzewski",
-      "Bobby Knight"
+      "Sidney Lowe",
+      "Dereck Whittenburg"
     ],
     "correct": 0
   },
   {
-    "question": "Larry Bird played college at?",
+    "question": "How many wins on Kareem's college team UCLA in his career?",
     "choices": [
-      "Indiana",
-      "Indiana State",
-      "Purdue",
-      "Notre Dame"
+      "88",
+      "78",
+      "98",
+      "108"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Whose record did Caitlin Clark surpass for D-I scoring in 2024?",
+    "choices": [
+      "Pete Maravich",
+      "Lisa Leslie",
+      "Kelsey Plum",
+      "Patrick Ewing"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What is the NIT?",
+    "choices": [
+      "A postseason tournament",
+      "Preseason event",
+      "Coaches award",
+      "Recruiting fair"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who went 4-for-4 in NCAA championship games as a player at UCLA?",
+    "choices": [
+      "Lew Alcindor",
+      "Bill Walton",
+      "Jamaal Wilkes",
+      "Sidney Wicks"
     ],
     "correct": 1
   },
   {
-    "question": "Magic Johnson played college at?",
+    "question": "Who won the 2022 men's title?",
     "choices": [
-      "Michigan",
-      "Michigan State",
-      "Indiana",
-      "UCLA"
+      "Kansas",
+      "UNC",
+      "Villanova",
+      "Duke"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is Kentucky's biggest in-state rival?",
+    "choices": [
+      "Louisville",
+      "Tennessee",
+      "Florida",
+      "Auburn"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who coaches South Carolina women's powerhouse?",
+    "choices": [
+      "Dawn Staley",
+      "Geno Auriemma",
+      "Kim Mulkey",
+      "Tara VanDerveer"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which UConn coach won 11 women's titles?",
+    "choices": [
+      "Auriemma",
+      "Staley",
+      "Mulkey",
+      "VanDerveer"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "What round comes right before the Final Four?",
+    "choices": [
+      "Sweet 16",
+      "Elite 8",
+      "Round of 32",
+      "First Four"
     ],
     "correct": 1
   },
   {
-    "question": "Villanova won 2018 title under coach?",
+    "question": "Which player won Naismith Player of the Year three times?",
     "choices": [
-      "Jay Wright",
-      "Tom Izzo",
-      "Bill Self",
-      "John Calipari"
+      "Caitlin Clark",
+      "Tyler Hansbrough",
+      "Christian Laettner",
+      "Anthony Davis"
     ],
     "correct": 0
   },
   {
-    "question": "Tournament's most upsets in a year is called?",
+    "question": "Where did UCLA play home games during their dynasty?",
     "choices": [
-      "Madness",
-      "Mayhem",
-      "Wild Card",
-      "Bracket Bust"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Most consecutive Final Fours by a coach?",
-    "choices": [
-      "Wooden",
-      "Smith",
-      "Krzyzewski",
-      "Calipari"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Kentucky's 2012 title coach?",
-    "choices": [
-      "Calipari",
-      "Pitino",
-      "Smith",
-      "Self"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Final Four 2024 was held in?",
-    "choices": [
-      "Phoenix",
-      "Houston",
-      "New Orleans",
-      "Indianapolis"
+      "Pauley Pavilion",
+      "Madison Square Garden",
+      "Cameron Indoor",
+      "The Pit"
     ],
     "correct": 0
   }
