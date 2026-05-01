@@ -30,3 +30,19 @@
   font-size: 0.7rem; cursor: pointer; background: #deb887;
 }
 .minishogi-hand-piece.selected-drop { background: rgba(255,215,0,0.8); }
+
+
+/* ---- mini-shogi themed palette overlay (unique prefix `msh-thm-`, theme: shogi) ---- */
+.play-page[data-game-id="mini-shogi"] {
+  --msh-thm-bg: linear-gradient(160deg,#3a2618 0%,#1c1108 100%);
+  --msh-thm-panel: rgba(245,222,179,0.94);
+  --msh-thm-ink: #1a0e05;
+  --msh-thm-accent: #deb887;
+  --msh-thm-accent2: #8b4513;
+  --msh-thm-border: rgba(139,69,19,0.65);
+  --msh-thm-btn-bg: linear-gradient(180deg,#8b4513,#5a2c0c);
+  --msh-thm-btn-fg: #fff5dc;
+  --msh-thm-sel: rgba(255,215,0,0.45);
+  --msh-thm-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--msh-thm-bg);
+}

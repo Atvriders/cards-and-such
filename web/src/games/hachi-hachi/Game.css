@@ -88,3 +88,19 @@
   font-weight: 800;
   margin: 8px 0;
 }
+
+
+/* ---- hachi-hachi themed palette overlay (unique prefix `hh88-thm-`, theme: hanafuda) ---- */
+.play-page[data-game-id="hachi-hachi"] {
+  --hh88-thm-bg: linear-gradient(160deg,#fde7ef 0%,#f9b5cb 60%,#e58aa9 100%);
+  --hh88-thm-panel: rgba(255,255,255,0.72);
+  --hh88-thm-ink: #3d1320;
+  --hh88-thm-accent: #d4af37;
+  --hh88-thm-accent2: #c0205c;
+  --hh88-thm-border: rgba(212,175,55,0.55);
+  --hh88-thm-btn-bg: linear-gradient(180deg,#d4af37,#a3811f);
+  --hh88-thm-btn-fg: #1a0a14;
+  --hh88-thm-sel: rgba(212,175,55,0.45);
+  --hh88-thm-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--hh88-thm-bg);
+}

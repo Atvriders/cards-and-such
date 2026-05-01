@@ -10,3 +10,19 @@
 .shz-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 14px; }
 .shz-done h2 { margin: 0 0 8px; }
 .shz-final { font-size: 1.4rem; color: #27ae60; font-weight: 900; }
+
+
+/* ---- shatranj-arabic themed palette overlay (unique prefix `shz-thm-`, theme: arabic) ---- */
+.play-page[data-game-id="shatranj-arabic"] {
+  --shz-thm-bg: linear-gradient(160deg,#1a1a4a 0%,#0a0a2a 100%);
+  --shz-thm-panel: rgba(245,225,180,0.94);
+  --shz-thm-ink: #0a0a2a;
+  --shz-thm-accent: #d4a437;
+  --shz-thm-accent2: #3a3aa0;
+  --shz-thm-border: rgba(212,164,55,0.55);
+  --shz-thm-btn-bg: linear-gradient(180deg,#3a3aa0,#1a1a4a);
+  --shz-thm-btn-fg: #f5e1b4;
+  --shz-thm-sel: rgba(212,164,55,0.45);
+  --shz-thm-font-display: "Amiri","Noto Naskh Arabic","Noto Serif",Georgia,serif;
+  background: var(--shz-thm-bg);
+}

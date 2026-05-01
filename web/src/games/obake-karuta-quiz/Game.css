@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* obake-karuta-quiz — unique themed CSS prefix `obkq-` (theme: karuta) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="obake-karuta-quiz"] {
+  --obkq-bg: linear-gradient(160deg,#f5ecd8 0%,#e8dcb8 100%);
+  --obkq-panel: rgba(255,252,238,0.96);
+  --obkq-ink: #1a1208;
+  --obkq-accent: #7a3b2e;
+  --obkq-accent2: #3d2415;
+  --obkq-muted: #7a6a4a;
+  --obkq-border: rgba(122,59,46,0.45);
+  --obkq-btn-bg: linear-gradient(180deg,#3d2415,#1a1208);
+  --obkq-btn-fg: #f5ecd8;
+  --obkq-ok: #3d6e3a;
+  --obkq-no: #a8323a;
+  --obkq-sel: rgba(122,59,46,0.25);
+  --obkq-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--obkq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-wrap,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-container {
+  background: var(--obkq-panel);
+  color: var(--obkq-ink);
+  border: 1px solid var(--obkq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--obkq-font-display);
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-header,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--obkq-border);
+  color: var(--obkq-ink);
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-progress,
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-score {
+  color: var(--obkq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-timer {
+  color: var(--obkq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-timer.urgent {
+  color: var(--obkq-no);
+  animation: obkq-pulse 700ms ease-in-out infinite;
+}
+@keyframes obkq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-question,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-question {
+  color: var(--obkq-ink);
+  font-family: var(--obkq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-choice,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--obkq-ink);
+  border: 1px solid var(--obkq-border);
+  font-family: var(--obkq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--obkq-sel);
+  border-color: var(--obkq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-choice.selected {
+  background: var(--obkq-sel);
+  border-color: var(--obkq-accent);
+  box-shadow: 0 0 0 2px var(--obkq-accent);
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--obkq-ok);
+  color: var(--obkq-ink);
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--obkq-no);
+  color: var(--obkq-ink);
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-choice-letter {
+  background: var(--obkq-accent);
+  color: var(--obkq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--obkq-ok);
+  border: 1px solid var(--obkq-ok);
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--obkq-no);
+  border: 1px solid var(--obkq-no);
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-btn,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-btn {
+  background: var(--obkq-btn-bg);
+  color: var(--obkq-btn-fg);
+  border: 1px solid var(--obkq-border);
+  font-family: var(--obkq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="obake-karuta-quiz"] .trivia-done,
+.play-page[data-game-id="obake-karuta-quiz"] .quiz-done {
+  background: var(--obkq-panel);
+  color: var(--obkq-ink);
+  border: 1px solid var(--obkq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

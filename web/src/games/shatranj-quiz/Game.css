@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* shatranj-quiz — unique themed CSS prefix `shrq-` (theme: arabic) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="shatranj-quiz"] {
+  --shrq-bg: linear-gradient(160deg,#1a1a4a 0%,#0a0a2a 100%);
+  --shrq-panel: rgba(245,225,180,0.94);
+  --shrq-ink: #0a0a2a;
+  --shrq-accent: #d4a437;
+  --shrq-accent2: #3a3aa0;
+  --shrq-muted: #5a5a7a;
+  --shrq-border: rgba(212,164,55,0.55);
+  --shrq-btn-bg: linear-gradient(180deg,#3a3aa0,#1a1a4a);
+  --shrq-btn-fg: #f5e1b4;
+  --shrq-ok: #2e7d4f;
+  --shrq-no: #9b1b1b;
+  --shrq-sel: rgba(212,164,55,0.45);
+  --shrq-font-display: "Amiri","Noto Naskh Arabic","Noto Serif",Georgia,serif;
+  background: var(--shrq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-wrap,
+.play-page[data-game-id="shatranj-quiz"] .quiz-container {
+  background: var(--shrq-panel);
+  color: var(--shrq-ink);
+  border: 1px solid var(--shrq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--shrq-font-display);
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-header,
+.play-page[data-game-id="shatranj-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--shrq-border);
+  color: var(--shrq-ink);
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-progress,
+.play-page[data-game-id="shatranj-quiz"] .trivia-score {
+  color: var(--shrq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-timer {
+  color: var(--shrq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-timer.urgent {
+  color: var(--shrq-no);
+  animation: shrq-pulse 700ms ease-in-out infinite;
+}
+@keyframes shrq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-question,
+.play-page[data-game-id="shatranj-quiz"] .quiz-question {
+  color: var(--shrq-ink);
+  font-family: var(--shrq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-choice,
+.play-page[data-game-id="shatranj-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--shrq-ink);
+  border: 1px solid var(--shrq-border);
+  font-family: var(--shrq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="shatranj-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--shrq-sel);
+  border-color: var(--shrq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="shatranj-quiz"] .quiz-choice.selected {
+  background: var(--shrq-sel);
+  border-color: var(--shrq-accent);
+  box-shadow: 0 0 0 2px var(--shrq-accent);
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="shatranj-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--shrq-ok);
+  color: var(--shrq-ink);
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="shatranj-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--shrq-no);
+  color: var(--shrq-ink);
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-choice-letter {
+  background: var(--shrq-accent);
+  color: var(--shrq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--shrq-ok);
+  border: 1px solid var(--shrq-ok);
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--shrq-no);
+  border: 1px solid var(--shrq-no);
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-btn,
+.play-page[data-game-id="shatranj-quiz"] .quiz-btn {
+  background: var(--shrq-btn-bg);
+  color: var(--shrq-btn-fg);
+  border: 1px solid var(--shrq-border);
+  font-family: var(--shrq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="shatranj-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="shatranj-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="shatranj-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="shatranj-quiz"] .trivia-done,
+.play-page[data-game-id="shatranj-quiz"] .quiz-done {
+  background: var(--shrq-panel);
+  color: var(--shrq-ink);
+  border: 1px solid var(--shrq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

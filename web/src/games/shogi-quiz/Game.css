@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* shogi-quiz — unique themed CSS prefix `shgq-` (theme: shogi) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="shogi-quiz"] {
+  --shgq-bg: linear-gradient(160deg,#3a2618 0%,#1c1108 100%);
+  --shgq-panel: rgba(245,222,179,0.94);
+  --shgq-ink: #1a0e05;
+  --shgq-accent: #deb887;
+  --shgq-accent2: #8b4513;
+  --shgq-muted: #6b4a2b;
+  --shgq-border: rgba(139,69,19,0.65);
+  --shgq-btn-bg: linear-gradient(180deg,#8b4513,#5a2c0c);
+  --shgq-btn-fg: #fff5dc;
+  --shgq-ok: #2e7d4f;
+  --shgq-no: #9b1b1b;
+  --shgq-sel: rgba(255,215,0,0.45);
+  --shgq-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--shgq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-wrap,
+.play-page[data-game-id="shogi-quiz"] .quiz-container {
+  background: var(--shgq-panel);
+  color: var(--shgq-ink);
+  border: 1px solid var(--shgq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--shgq-font-display);
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-header,
+.play-page[data-game-id="shogi-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--shgq-border);
+  color: var(--shgq-ink);
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-progress,
+.play-page[data-game-id="shogi-quiz"] .trivia-score {
+  color: var(--shgq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-timer {
+  color: var(--shgq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-timer.urgent {
+  color: var(--shgq-no);
+  animation: shgq-pulse 700ms ease-in-out infinite;
+}
+@keyframes shgq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-question,
+.play-page[data-game-id="shogi-quiz"] .quiz-question {
+  color: var(--shgq-ink);
+  font-family: var(--shgq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-choice,
+.play-page[data-game-id="shogi-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--shgq-ink);
+  border: 1px solid var(--shgq-border);
+  font-family: var(--shgq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="shogi-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--shgq-sel);
+  border-color: var(--shgq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="shogi-quiz"] .quiz-choice.selected {
+  background: var(--shgq-sel);
+  border-color: var(--shgq-accent);
+  box-shadow: 0 0 0 2px var(--shgq-accent);
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="shogi-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--shgq-ok);
+  color: var(--shgq-ink);
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="shogi-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--shgq-no);
+  color: var(--shgq-ink);
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-choice-letter {
+  background: var(--shgq-accent);
+  color: var(--shgq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--shgq-ok);
+  border: 1px solid var(--shgq-ok);
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--shgq-no);
+  border: 1px solid var(--shgq-no);
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-btn,
+.play-page[data-game-id="shogi-quiz"] .quiz-btn {
+  background: var(--shgq-btn-bg);
+  color: var(--shgq-btn-fg);
+  border: 1px solid var(--shgq-border);
+  font-family: var(--shgq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="shogi-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="shogi-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="shogi-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="shogi-quiz"] .trivia-done,
+.play-page[data-game-id="shogi-quiz"] .quiz-done {
+  background: var(--shgq-panel);
+  color: var(--shgq-ink);
+  border: 1px solid var(--shgq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

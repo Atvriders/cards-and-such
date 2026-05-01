@@ -10,3 +10,19 @@
 .kts-done { text-align: center; padding: 24px; background: #f8f9fa; border-radius: 14px; }
 .kts-done h2 { margin: 0 0 8px; }
 .kts-final { font-size: 1.4rem; color: #27ae60; font-weight: 900; }
+
+
+/* ---- kyoto-shogi themed palette overlay (unique prefix `kts-thm-`, theme: shogi) ---- */
+.play-page[data-game-id="kyoto-shogi"] {
+  --kts-thm-bg: linear-gradient(160deg,#3a2618 0%,#1c1108 100%);
+  --kts-thm-panel: rgba(245,222,179,0.94);
+  --kts-thm-ink: #1a0e05;
+  --kts-thm-accent: #deb887;
+  --kts-thm-accent2: #8b4513;
+  --kts-thm-border: rgba(139,69,19,0.65);
+  --kts-thm-btn-bg: linear-gradient(180deg,#8b4513,#5a2c0c);
+  --kts-thm-btn-fg: #fff5dc;
+  --kts-thm-sel: rgba(255,215,0,0.45);
+  --kts-thm-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--kts-thm-bg);
+}

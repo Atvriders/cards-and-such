@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* taiwanese-mahjong-quiz — unique themed CSS prefix `twmq-` (theme: riichi) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] {
+  --twmq-bg: linear-gradient(160deg,#0f3a2e 0%,#1f7a52 100%);
+  --twmq-panel: rgba(248,243,219,0.92);
+  --twmq-ink: #1a2e25;
+  --twmq-accent: #fff8dc;
+  --twmq-accent2: #d4a437;
+  --twmq-muted: #5a7a6c;
+  --twmq-border: rgba(255,248,220,0.45);
+  --twmq-btn-bg: linear-gradient(180deg,#fff8dc,#e8d9a3);
+  --twmq-btn-fg: #163026;
+  --twmq-ok: #3aa66a;
+  --twmq-no: #c84a4a;
+  --twmq-sel: rgba(212,164,55,0.35);
+  --twmq-font-display: "Noto Serif TC","Noto Serif JP",Georgia,serif;
+  background: var(--twmq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-wrap,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-container {
+  background: var(--twmq-panel);
+  color: var(--twmq-ink);
+  border: 1px solid var(--twmq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--twmq-font-display);
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-header,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--twmq-border);
+  color: var(--twmq-ink);
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-progress,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-score {
+  color: var(--twmq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-timer {
+  color: var(--twmq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-timer.urgent {
+  color: var(--twmq-no);
+  animation: twmq-pulse 700ms ease-in-out infinite;
+}
+@keyframes twmq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-question,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-question {
+  color: var(--twmq-ink);
+  font-family: var(--twmq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-choice,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--twmq-ink);
+  border: 1px solid var(--twmq-border);
+  font-family: var(--twmq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--twmq-sel);
+  border-color: var(--twmq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-choice.selected {
+  background: var(--twmq-sel);
+  border-color: var(--twmq-accent);
+  box-shadow: 0 0 0 2px var(--twmq-accent);
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--twmq-ok);
+  color: var(--twmq-ink);
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--twmq-no);
+  color: var(--twmq-ink);
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-choice-letter {
+  background: var(--twmq-accent);
+  color: var(--twmq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--twmq-ok);
+  border: 1px solid var(--twmq-ok);
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--twmq-no);
+  border: 1px solid var(--twmq-no);
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-btn,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-btn {
+  background: var(--twmq-btn-bg);
+  color: var(--twmq-btn-fg);
+  border: 1px solid var(--twmq-border);
+  font-family: var(--twmq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .trivia-done,
+.play-page[data-game-id="taiwanese-mahjong-quiz"] .quiz-done {
+  background: var(--twmq-panel);
+  color: var(--twmq-ink);
+  border: 1px solid var(--twmq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

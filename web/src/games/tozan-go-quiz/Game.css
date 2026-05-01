@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* tozan-go-quiz — unique themed CSS prefix `tzgq-` (theme: go) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="tozan-go-quiz"] {
+  --tzgq-bg: linear-gradient(160deg,#d4a437 0%,#a87a18 100%);
+  --tzgq-panel: rgba(245,222,140,0.95);
+  --tzgq-ink: #1a1208;
+  --tzgq-accent: #0a0a0a;
+  --tzgq-accent2: #fcfcfc;
+  --tzgq-muted: #5c4a18;
+  --tzgq-border: rgba(0,0,0,0.55);
+  --tzgq-btn-bg: linear-gradient(180deg,#1a1208,#0a0a0a);
+  --tzgq-btn-fg: #f5de8c;
+  --tzgq-ok: #2e7d4f;
+  --tzgq-no: #8b1a1a;
+  --tzgq-sel: rgba(0,0,0,0.18);
+  --tzgq-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--tzgq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-wrap,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-container {
+  background: var(--tzgq-panel);
+  color: var(--tzgq-ink);
+  border: 1px solid var(--tzgq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--tzgq-font-display);
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-header,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--tzgq-border);
+  color: var(--tzgq-ink);
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-progress,
+.play-page[data-game-id="tozan-go-quiz"] .trivia-score {
+  color: var(--tzgq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-timer {
+  color: var(--tzgq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-timer.urgent {
+  color: var(--tzgq-no);
+  animation: tzgq-pulse 700ms ease-in-out infinite;
+}
+@keyframes tzgq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-question,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-question {
+  color: var(--tzgq-ink);
+  font-family: var(--tzgq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-choice,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--tzgq-ink);
+  border: 1px solid var(--tzgq-border);
+  font-family: var(--tzgq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="tozan-go-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--tzgq-sel);
+  border-color: var(--tzgq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-choice.selected {
+  background: var(--tzgq-sel);
+  border-color: var(--tzgq-accent);
+  box-shadow: 0 0 0 2px var(--tzgq-accent);
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--tzgq-ok);
+  color: var(--tzgq-ink);
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--tzgq-no);
+  color: var(--tzgq-ink);
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-choice-letter {
+  background: var(--tzgq-accent);
+  color: var(--tzgq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--tzgq-ok);
+  border: 1px solid var(--tzgq-ok);
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--tzgq-no);
+  border: 1px solid var(--tzgq-no);
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-btn,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-btn {
+  background: var(--tzgq-btn-bg);
+  color: var(--tzgq-btn-fg);
+  border: 1px solid var(--tzgq-border);
+  font-family: var(--tzgq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="tozan-go-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="tozan-go-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="tozan-go-quiz"] .trivia-done,
+.play-page[data-game-id="tozan-go-quiz"] .quiz-done {
+  background: var(--tzgq-panel);
+  color: var(--tzgq-ink);
+  border: 1px solid var(--tzgq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

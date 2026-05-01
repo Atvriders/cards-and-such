@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* hyakunin-isshu-quiz — unique themed CSS prefix `hisq-` (theme: karuta) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] {
+  --hisq-bg: linear-gradient(160deg,#f5ecd8 0%,#e8dcb8 100%);
+  --hisq-panel: rgba(255,252,238,0.96);
+  --hisq-ink: #1a1208;
+  --hisq-accent: #7a3b2e;
+  --hisq-accent2: #3d2415;
+  --hisq-muted: #7a6a4a;
+  --hisq-border: rgba(122,59,46,0.45);
+  --hisq-btn-bg: linear-gradient(180deg,#3d2415,#1a1208);
+  --hisq-btn-fg: #f5ecd8;
+  --hisq-ok: #3d6e3a;
+  --hisq-no: #a8323a;
+  --hisq-sel: rgba(122,59,46,0.25);
+  --hisq-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--hisq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-wrap,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-container {
+  background: var(--hisq-panel);
+  color: var(--hisq-ink);
+  border: 1px solid var(--hisq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--hisq-font-display);
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-header,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--hisq-border);
+  color: var(--hisq-ink);
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-progress,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-score {
+  color: var(--hisq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-timer {
+  color: var(--hisq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-timer.urgent {
+  color: var(--hisq-no);
+  animation: hisq-pulse 700ms ease-in-out infinite;
+}
+@keyframes hisq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-question,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-question {
+  color: var(--hisq-ink);
+  font-family: var(--hisq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-choice,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--hisq-ink);
+  border: 1px solid var(--hisq-border);
+  font-family: var(--hisq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--hisq-sel);
+  border-color: var(--hisq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-choice.selected {
+  background: var(--hisq-sel);
+  border-color: var(--hisq-accent);
+  box-shadow: 0 0 0 2px var(--hisq-accent);
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--hisq-ok);
+  color: var(--hisq-ink);
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--hisq-no);
+  color: var(--hisq-ink);
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-choice-letter {
+  background: var(--hisq-accent);
+  color: var(--hisq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--hisq-ok);
+  border: 1px solid var(--hisq-ok);
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--hisq-no);
+  border: 1px solid var(--hisq-no);
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-btn,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-btn {
+  background: var(--hisq-btn-bg);
+  color: var(--hisq-btn-fg);
+  border: 1px solid var(--hisq-border);
+  font-family: var(--hisq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="hyakunin-isshu-quiz"] .trivia-done,
+.play-page[data-game-id="hyakunin-isshu-quiz"] .quiz-done {
+  background: var(--hisq-panel);
+  color: var(--hisq-ink);
+  border: 1px solid var(--hisq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

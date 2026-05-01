@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* hachi-hachi-quiz — unique themed CSS prefix `h8q-` (theme: hanafuda) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="hachi-hachi-quiz"] {
+  --h8q-bg: linear-gradient(160deg,#fde7ef 0%,#f9b5cb 60%,#e58aa9 100%);
+  --h8q-panel: rgba(255,255,255,0.72);
+  --h8q-ink: #3d1320;
+  --h8q-accent: #d4af37;
+  --h8q-accent2: #c0205c;
+  --h8q-muted: #8a4a63;
+  --h8q-border: rgba(212,175,55,0.55);
+  --h8q-btn-bg: linear-gradient(180deg,#d4af37,#a3811f);
+  --h8q-btn-fg: #1a0a14;
+  --h8q-ok: #2f8f5b;
+  --h8q-no: #a8123b;
+  --h8q-sel: rgba(212,175,55,0.45);
+  --h8q-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--h8q-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-wrap,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-container {
+  background: var(--h8q-panel);
+  color: var(--h8q-ink);
+  border: 1px solid var(--h8q-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--h8q-font-display);
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-header,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--h8q-border);
+  color: var(--h8q-ink);
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-progress,
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-score {
+  color: var(--h8q-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-timer {
+  color: var(--h8q-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-timer.urgent {
+  color: var(--h8q-no);
+  animation: h8q-pulse 700ms ease-in-out infinite;
+}
+@keyframes h8q-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-question,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-question {
+  color: var(--h8q-ink);
+  font-family: var(--h8q-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-choice,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--h8q-ink);
+  border: 1px solid var(--h8q-border);
+  font-family: var(--h8q-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--h8q-sel);
+  border-color: var(--h8q-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-choice.selected {
+  background: var(--h8q-sel);
+  border-color: var(--h8q-accent);
+  box-shadow: 0 0 0 2px var(--h8q-accent);
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--h8q-ok);
+  color: var(--h8q-ink);
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--h8q-no);
+  color: var(--h8q-ink);
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-choice-letter {
+  background: var(--h8q-accent);
+  color: var(--h8q-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--h8q-ok);
+  border: 1px solid var(--h8q-ok);
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--h8q-no);
+  border: 1px solid var(--h8q-no);
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-btn,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-btn {
+  background: var(--h8q-btn-bg);
+  color: var(--h8q-btn-fg);
+  border: 1px solid var(--h8q-border);
+  font-family: var(--h8q-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="hachi-hachi-quiz"] .trivia-done,
+.play-page[data-game-id="hachi-hachi-quiz"] .quiz-done {
+  background: var(--h8q-panel);
+  color: var(--h8q-ink);
+  border: 1px solid var(--h8q-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

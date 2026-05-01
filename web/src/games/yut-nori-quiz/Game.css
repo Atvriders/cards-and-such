@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* yut-nori-quiz — unique themed CSS prefix `ytnq-` (theme: korean_card) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="yut-nori-quiz"] {
+  --ytnq-bg: linear-gradient(160deg,#1a2e5a 0%,#5a0a14 100%);
+  --ytnq-panel: rgba(252,248,230,0.92);
+  --ytnq-ink: #1a1a2e;
+  --ytnq-accent: #cd2e3a;
+  --ytnq-accent2: #0047a0;
+  --ytnq-muted: #5a5a7a;
+  --ytnq-border: rgba(205,46,58,0.55);
+  --ytnq-btn-bg: linear-gradient(180deg,#cd2e3a,#8b0000);
+  --ytnq-btn-fg: #fff8dc;
+  --ytnq-ok: #2e7d4f;
+  --ytnq-no: #cd2e3a;
+  --ytnq-sel: rgba(205,46,58,0.35);
+  --ytnq-font-display: "Noto Serif KR","Nanum Myeongjo",Georgia,serif;
+  background: var(--ytnq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-wrap,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-container {
+  background: var(--ytnq-panel);
+  color: var(--ytnq-ink);
+  border: 1px solid var(--ytnq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--ytnq-font-display);
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-header,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--ytnq-border);
+  color: var(--ytnq-ink);
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-progress,
+.play-page[data-game-id="yut-nori-quiz"] .trivia-score {
+  color: var(--ytnq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-timer {
+  color: var(--ytnq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-timer.urgent {
+  color: var(--ytnq-no);
+  animation: ytnq-pulse 700ms ease-in-out infinite;
+}
+@keyframes ytnq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-question,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-question {
+  color: var(--ytnq-ink);
+  font-family: var(--ytnq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-choice,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--ytnq-ink);
+  border: 1px solid var(--ytnq-border);
+  font-family: var(--ytnq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="yut-nori-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--ytnq-sel);
+  border-color: var(--ytnq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-choice.selected {
+  background: var(--ytnq-sel);
+  border-color: var(--ytnq-accent);
+  box-shadow: 0 0 0 2px var(--ytnq-accent);
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--ytnq-ok);
+  color: var(--ytnq-ink);
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--ytnq-no);
+  color: var(--ytnq-ink);
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-choice-letter {
+  background: var(--ytnq-accent);
+  color: var(--ytnq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--ytnq-ok);
+  border: 1px solid var(--ytnq-ok);
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--ytnq-no);
+  border: 1px solid var(--ytnq-no);
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-btn,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-btn {
+  background: var(--ytnq-btn-bg);
+  color: var(--ytnq-btn-fg);
+  border: 1px solid var(--ytnq-border);
+  font-family: var(--ytnq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="yut-nori-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="yut-nori-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="yut-nori-quiz"] .trivia-done,
+.play-page[data-game-id="yut-nori-quiz"] .quiz-done {
+  background: var(--ytnq-panel);
+  color: var(--ytnq-ink);
+  border: 1px solid var(--ytnq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

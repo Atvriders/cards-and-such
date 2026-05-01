@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* go-stop-quiz — unique themed CSS prefix `gstq-` (theme: korean_card) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="go-stop-quiz"] {
+  --gstq-bg: linear-gradient(160deg,#1a2e5a 0%,#5a0a14 100%);
+  --gstq-panel: rgba(252,248,230,0.92);
+  --gstq-ink: #1a1a2e;
+  --gstq-accent: #cd2e3a;
+  --gstq-accent2: #0047a0;
+  --gstq-muted: #5a5a7a;
+  --gstq-border: rgba(205,46,58,0.55);
+  --gstq-btn-bg: linear-gradient(180deg,#cd2e3a,#8b0000);
+  --gstq-btn-fg: #fff8dc;
+  --gstq-ok: #2e7d4f;
+  --gstq-no: #cd2e3a;
+  --gstq-sel: rgba(205,46,58,0.35);
+  --gstq-font-display: "Noto Serif KR","Nanum Myeongjo",Georgia,serif;
+  background: var(--gstq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-wrap,
+.play-page[data-game-id="go-stop-quiz"] .quiz-container {
+  background: var(--gstq-panel);
+  color: var(--gstq-ink);
+  border: 1px solid var(--gstq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--gstq-font-display);
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-header,
+.play-page[data-game-id="go-stop-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--gstq-border);
+  color: var(--gstq-ink);
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-progress,
+.play-page[data-game-id="go-stop-quiz"] .trivia-score {
+  color: var(--gstq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-timer {
+  color: var(--gstq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-timer.urgent {
+  color: var(--gstq-no);
+  animation: gstq-pulse 700ms ease-in-out infinite;
+}
+@keyframes gstq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-question,
+.play-page[data-game-id="go-stop-quiz"] .quiz-question {
+  color: var(--gstq-ink);
+  font-family: var(--gstq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-choice,
+.play-page[data-game-id="go-stop-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--gstq-ink);
+  border: 1px solid var(--gstq-border);
+  font-family: var(--gstq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="go-stop-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--gstq-sel);
+  border-color: var(--gstq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="go-stop-quiz"] .quiz-choice.selected {
+  background: var(--gstq-sel);
+  border-color: var(--gstq-accent);
+  box-shadow: 0 0 0 2px var(--gstq-accent);
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="go-stop-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--gstq-ok);
+  color: var(--gstq-ink);
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="go-stop-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--gstq-no);
+  color: var(--gstq-ink);
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-choice-letter {
+  background: var(--gstq-accent);
+  color: var(--gstq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--gstq-ok);
+  border: 1px solid var(--gstq-ok);
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--gstq-no);
+  border: 1px solid var(--gstq-no);
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-btn,
+.play-page[data-game-id="go-stop-quiz"] .quiz-btn {
+  background: var(--gstq-btn-bg);
+  color: var(--gstq-btn-fg);
+  border: 1px solid var(--gstq-border);
+  font-family: var(--gstq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="go-stop-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="go-stop-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="go-stop-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="go-stop-quiz"] .trivia-done,
+.play-page[data-game-id="go-stop-quiz"] .quiz-done {
+  background: var(--gstq-panel);
+  color: var(--gstq-ink);
+  border: 1px solid var(--gstq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

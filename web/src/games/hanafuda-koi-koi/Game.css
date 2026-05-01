@@ -108,3 +108,19 @@
   font-weight: 800;
   margin: 8px 0;
 }
+
+
+/* ---- hanafuda-koi-koi themed palette overlay (unique prefix `hkk-thm-`, theme: hanafuda) ---- */
+.play-page[data-game-id="hanafuda-koi-koi"] {
+  --hkk-thm-bg: linear-gradient(160deg,#fde7ef 0%,#f9b5cb 60%,#e58aa9 100%);
+  --hkk-thm-panel: rgba(255,255,255,0.72);
+  --hkk-thm-ink: #3d1320;
+  --hkk-thm-accent: #d4af37;
+  --hkk-thm-accent2: #c0205c;
+  --hkk-thm-border: rgba(212,175,55,0.55);
+  --hkk-thm-btn-bg: linear-gradient(180deg,#d4af37,#a3811f);
+  --hkk-thm-btn-fg: #1a0a14;
+  --hkk-thm-sel: rgba(212,175,55,0.45);
+  --hkk-thm-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--hkk-thm-bg);
+}

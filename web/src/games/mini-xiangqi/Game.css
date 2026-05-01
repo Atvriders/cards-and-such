@@ -65,3 +65,19 @@
   font-weight: 800;
   color: #06d6a0;
 }
+
+
+/* ---- mini-xiangqi themed palette overlay (unique prefix `mxq-thm-`, theme: xiangqi) ---- */
+.play-page[data-game-id="mini-xiangqi"] {
+  --mxq-thm-bg: linear-gradient(160deg,#7b0a13 0%,#3d0508 100%);
+  --mxq-thm-panel: rgba(255,243,210,0.94);
+  --mxq-thm-ink: #2b0508;
+  --mxq-thm-accent: #f5cb5c;
+  --mxq-thm-accent2: #c80815;
+  --mxq-thm-border: rgba(245,203,92,0.6);
+  --mxq-thm-btn-bg: linear-gradient(180deg,#c80815,#8b0000);
+  --mxq-thm-btn-fg: #fff8dc;
+  --mxq-thm-sel: rgba(245,203,92,0.5);
+  --mxq-thm-font-display: "Noto Serif SC","Noto Serif TC",Georgia,serif;
+  background: var(--mxq-thm-bg);
+}

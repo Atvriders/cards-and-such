@@ -31,3 +31,19 @@
 }
 .shogi-hand-piece.selected-drop { background: rgba(255,215,0,0.8); border-color: #f39c12; }
 .shogi-hand-label { font-size: 0.75rem; color: #666; margin-bottom: 4px; }
+
+
+/* ---- shogi themed palette overlay (unique prefix `shg-thm-`, theme: shogi) ---- */
+.play-page[data-game-id="shogi"] {
+  --shg-thm-bg: linear-gradient(160deg,#3a2618 0%,#1c1108 100%);
+  --shg-thm-panel: rgba(245,222,179,0.94);
+  --shg-thm-ink: #1a0e05;
+  --shg-thm-accent: #deb887;
+  --shg-thm-accent2: #8b4513;
+  --shg-thm-border: rgba(139,69,19,0.65);
+  --shg-thm-btn-bg: linear-gradient(180deg,#8b4513,#5a2c0c);
+  --shg-thm-btn-fg: #fff5dc;
+  --shg-thm-sel: rgba(255,215,0,0.45);
+  --shg-thm-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--shg-thm-bg);
+}

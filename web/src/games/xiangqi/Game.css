@@ -38,3 +38,19 @@
 .xiangqi-piece.red { background: #c0392b; color: #fff; border-color: #922b21; }
 .xiangqi-piece.black { background: #2c3e50; color: #ecf0f1; border-color: #1a252f; }
 .xiangqi-piece.target-hint { width: 14px; height: 14px; background: rgba(0,180,0,0.5); border-radius: 50%; }
+
+
+/* ---- xiangqi themed palette overlay (unique prefix `xq-thm-`, theme: xiangqi) ---- */
+.play-page[data-game-id="xiangqi"] {
+  --xq-thm-bg: linear-gradient(160deg,#7b0a13 0%,#3d0508 100%);
+  --xq-thm-panel: rgba(255,243,210,0.94);
+  --xq-thm-ink: #2b0508;
+  --xq-thm-accent: #f5cb5c;
+  --xq-thm-accent2: #c80815;
+  --xq-thm-border: rgba(245,203,92,0.6);
+  --xq-thm-btn-bg: linear-gradient(180deg,#c80815,#8b0000);
+  --xq-thm-btn-fg: #fff8dc;
+  --xq-thm-sel: rgba(245,203,92,0.5);
+  --xq-thm-font-display: "Noto Serif SC","Noto Serif TC",Georgia,serif;
+  background: var(--xq-thm-bg);
+}

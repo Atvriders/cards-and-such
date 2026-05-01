@@ -67,7 +67,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   }, [plugin.id, settings]);
 
   return (
-    <div className="play-page">
+    <div className="play-page" data-game-id={plugin.id}>
       <header className="play-header">
         <div className="play-header-titleblock">
           <span className={`play-category play-category--${plugin.category}`}>{plugin.category}</span>

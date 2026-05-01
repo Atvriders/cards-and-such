@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* hanamikoji-quiz — unique themed CSS prefix `hmkq-` (theme: geisha) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="hanamikoji-quiz"] {
+  --hmkq-bg: linear-gradient(160deg,#5a1230 0%,#2a0815 100%);
+  --hmkq-panel: rgba(255,232,238,0.94);
+  --hmkq-ink: #2a0815;
+  --hmkq-accent: #d4af37;
+  --hmkq-accent2: #e58aa9;
+  --hmkq-muted: #8a4a63;
+  --hmkq-border: rgba(212,175,55,0.55);
+  --hmkq-btn-bg: linear-gradient(180deg,#c0205c,#7a0a30);
+  --hmkq-btn-fg: #fff0e8;
+  --hmkq-ok: #2f8f5b;
+  --hmkq-no: #a8123b;
+  --hmkq-sel: rgba(212,175,55,0.4);
+  --hmkq-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--hmkq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-wrap,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-container {
+  background: var(--hmkq-panel);
+  color: var(--hmkq-ink);
+  border: 1px solid var(--hmkq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--hmkq-font-display);
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-header,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--hmkq-border);
+  color: var(--hmkq-ink);
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-progress,
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-score {
+  color: var(--hmkq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-timer {
+  color: var(--hmkq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-timer.urgent {
+  color: var(--hmkq-no);
+  animation: hmkq-pulse 700ms ease-in-out infinite;
+}
+@keyframes hmkq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-question,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-question {
+  color: var(--hmkq-ink);
+  font-family: var(--hmkq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-choice,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--hmkq-ink);
+  border: 1px solid var(--hmkq-border);
+  font-family: var(--hmkq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--hmkq-sel);
+  border-color: var(--hmkq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-choice.selected {
+  background: var(--hmkq-sel);
+  border-color: var(--hmkq-accent);
+  box-shadow: 0 0 0 2px var(--hmkq-accent);
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--hmkq-ok);
+  color: var(--hmkq-ink);
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--hmkq-no);
+  color: var(--hmkq-ink);
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-choice-letter {
+  background: var(--hmkq-accent);
+  color: var(--hmkq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--hmkq-ok);
+  border: 1px solid var(--hmkq-ok);
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--hmkq-no);
+  border: 1px solid var(--hmkq-no);
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-btn,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-btn {
+  background: var(--hmkq-btn-bg);
+  color: var(--hmkq-btn-fg);
+  border: 1px solid var(--hmkq-border);
+  font-family: var(--hmkq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="hanamikoji-quiz"] .trivia-done,
+.play-page[data-game-id="hanamikoji-quiz"] .quiz-done {
+  background: var(--hmkq-panel);
+  color: var(--hmkq-ink);
+  border: 1px solid var(--hmkq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

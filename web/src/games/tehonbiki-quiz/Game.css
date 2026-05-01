@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* tehonbiki-quiz — unique themed CSS prefix `thbq-` (theme: tehonbiki) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="tehonbiki-quiz"] {
+  --thbq-bg: linear-gradient(160deg,#1a0a0a 0%,#0a0505 100%);
+  --thbq-panel: rgba(50,30,30,0.92);
+  --thbq-ink: #f5e8c8;
+  --thbq-accent: #d4a437;
+  --thbq-accent2: #c80815;
+  --thbq-muted: #a08070;
+  --thbq-border: rgba(212,164,55,0.55);
+  --thbq-btn-bg: linear-gradient(180deg,#c80815,#6b0a14);
+  --thbq-btn-fg: #fff8dc;
+  --thbq-ok: #3aa66a;
+  --thbq-no: #c84a4a;
+  --thbq-sel: rgba(212,164,55,0.45);
+  --thbq-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--thbq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-wrap,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-container {
+  background: var(--thbq-panel);
+  color: var(--thbq-ink);
+  border: 1px solid var(--thbq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--thbq-font-display);
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-header,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--thbq-border);
+  color: var(--thbq-ink);
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-progress,
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-score {
+  color: var(--thbq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-timer {
+  color: var(--thbq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-timer.urgent {
+  color: var(--thbq-no);
+  animation: thbq-pulse 700ms ease-in-out infinite;
+}
+@keyframes thbq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-question,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-question {
+  color: var(--thbq-ink);
+  font-family: var(--thbq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-choice,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--thbq-ink);
+  border: 1px solid var(--thbq-border);
+  font-family: var(--thbq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--thbq-sel);
+  border-color: var(--thbq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-choice.selected {
+  background: var(--thbq-sel);
+  border-color: var(--thbq-accent);
+  box-shadow: 0 0 0 2px var(--thbq-accent);
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--thbq-ok);
+  color: var(--thbq-ink);
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--thbq-no);
+  color: var(--thbq-ink);
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-choice-letter {
+  background: var(--thbq-accent);
+  color: var(--thbq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--thbq-ok);
+  border: 1px solid var(--thbq-ok);
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--thbq-no);
+  border: 1px solid var(--thbq-no);
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-btn,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-btn {
+  background: var(--thbq-btn-bg);
+  color: var(--thbq-btn-fg);
+  border: 1px solid var(--thbq-border);
+  font-family: var(--thbq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="tehonbiki-quiz"] .trivia-done,
+.play-page[data-game-id="tehonbiki-quiz"] .quiz-done {
+  background: var(--thbq-panel);
+  color: var(--thbq-ink);
+  border: 1px solid var(--thbq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

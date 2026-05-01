@@ -1,2 +1,151 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* koi-koi-quiz — unique themed CSS prefix `kkq-` (theme: hanafuda) */
 @import "../../engines/quiz/quiz.css";
+
+.play-page[data-game-id="koi-koi-quiz"] {
+  --kkq-bg: linear-gradient(160deg,#fde7ef 0%,#f9b5cb 60%,#e58aa9 100%);
+  --kkq-panel: rgba(255,255,255,0.72);
+  --kkq-ink: #3d1320;
+  --kkq-accent: #d4af37;
+  --kkq-accent2: #c0205c;
+  --kkq-muted: #8a4a63;
+  --kkq-border: rgba(212,175,55,0.55);
+  --kkq-btn-bg: linear-gradient(180deg,#d4af37,#a3811f);
+  --kkq-btn-fg: #1a0a14;
+  --kkq-ok: #2f8f5b;
+  --kkq-no: #a8123b;
+  --kkq-sel: rgba(212,175,55,0.45);
+  --kkq-font-display: "Yuji Syuku","Noto Serif JP",Georgia,serif;
+  background: var(--kkq-bg);
+  min-height: 100%;
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-wrap,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-container {
+  background: var(--kkq-panel);
+  color: var(--kkq-ink);
+  border: 1px solid var(--kkq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
+  font-family: var(--kkq-font-display);
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-header,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-header {
+  background: rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--kkq-border);
+  color: var(--kkq-ink);
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-progress,
+.play-page[data-game-id="koi-koi-quiz"] .trivia-score {
+  color: var(--kkq-ink);
+  font-weight: 700;
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-timer {
+  color: var(--kkq-accent2);
+  font-weight: 800;
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-timer.urgent {
+  color: var(--kkq-no);
+  animation: kkq-pulse 700ms ease-in-out infinite;
+}
+@keyframes kkq-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-question,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-question {
+  color: var(--kkq-ink);
+  font-family: var(--kkq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-choice,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-choice {
+  background: rgba(255,255,255,0.55);
+  color: var(--kkq-ink);
+  border: 1px solid var(--kkq-border);
+  font-family: var(--kkq-font-display);
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-choice:hover:not(:disabled),
+.play-page[data-game-id="koi-koi-quiz"] .quiz-choice:hover:not(:disabled) {
+  background: var(--kkq-sel);
+  border-color: var(--kkq-accent);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-choice.selected,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-choice.selected {
+  background: var(--kkq-sel);
+  border-color: var(--kkq-accent);
+  box-shadow: 0 0 0 2px var(--kkq-accent);
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-choice.correct,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-choice.correct {
+  background: rgba(46,125,80,0.22);
+  border-color: var(--kkq-ok);
+  color: var(--kkq-ink);
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-choice.wrong,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-choice.wrong {
+  background: rgba(168,18,59,0.18);
+  border-color: var(--kkq-no);
+  color: var(--kkq-ink);
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-choice-letter {
+  background: var(--kkq-accent);
+  color: var(--kkq-ink);
+  border-radius: 999px;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6em;
+  font-weight: 800;
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-feedback.correct {
+  background: rgba(46,125,80,0.18);
+  color: var(--kkq-ok);
+  border: 1px solid var(--kkq-ok);
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-feedback.wrong {
+  background: rgba(168,18,59,0.16);
+  color: var(--kkq-no);
+  border: 1px solid var(--kkq-no);
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-btn,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-btn {
+  background: var(--kkq-btn-bg);
+  color: var(--kkq-btn-fg);
+  border: 1px solid var(--kkq-border);
+  font-family: var(--kkq-font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: filter 140ms ease, transform 140ms ease;
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-btn:hover:not(:disabled),
+.play-page[data-game-id="koi-koi-quiz"] .quiz-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.play-page[data-game-id="koi-koi-quiz"] .trivia-btn:disabled,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.play-page[data-game-id="koi-koi-quiz"] .trivia-done,
+.play-page[data-game-id="koi-koi-quiz"] .quiz-done {
+  background: var(--kkq-panel);
+  color: var(--kkq-ink);
+  border: 1px solid var(--kkq-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
