@@ -255,6 +255,34 @@
 
 .play-not-found { text-align: center; padding: 4rem 1rem; color: #94a3b8; }
 
+/* In-game elapsed timer HUD */
+.play-timer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.05;
+  padding: 0.22rem 0.55rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.22);
+  border-radius: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.play-timer-current {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.02em;
+}
+.play-timer-best {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: #94a3b8;
+  opacity: 0.65;
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+
 /* Seed display in HUD (klondike / freecell / spider) */
 .play-seed-display {
   display: inline-flex;
