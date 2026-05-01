@@ -563,3 +563,48 @@
   }
   .dm-card:hover { transform: none !important; }
 }
+
+/* =====================================================================
+ * Engine polish (chip-stack hover + button hover lift + focus rings).
+ * ===================================================================== */
+.dm-card:not(.disabled):hover {
+  transform: translateY(-4px) scale(1.02);
+  transition:
+    transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 150ms ease-out,
+    border-color 150ms ease-out;
+}
+.dm-btn:hover:not(:disabled),
+.g-btn:hover:not(:disabled),
+.coop-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 150ms ease-out, filter 150ms ease-out;
+}
+.dm-btn:focus-visible,
+.g-btn:focus-visible,
+.g-opt:focus-visible,
+.coop-btn:focus-visible {
+  outline: 2px solid var(--primary, #c7d2fe);
+  outline-offset: 3px;
+}
+/* Chip-stack hover for elements explicitly tagged as chips */
+[class*="chip"]:not([class*="play-"]):not([class*="lobby"]):hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 150ms ease-out;
+  filter: brightness(1.05);
+}
+[class*="chip"]:focus-visible {
+  outline: 2px solid var(--primary, #c7d2fe);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-card:not(.disabled):hover,
+  .dm-btn:hover:not(:disabled),
+  .g-btn:hover:not(:disabled),
+  .coop-btn:hover:not(:disabled),
+  [class*="chip"]:hover:not(:disabled) {
+    transform: none !important;
+    transition: none !important;
+  }
+}

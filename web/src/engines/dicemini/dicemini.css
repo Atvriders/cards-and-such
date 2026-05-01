@@ -606,3 +606,31 @@
     transform: none !important;
   }
 }
+
+/* =====================================================================
+ * Engine polish (die hover lift + roll ease-out + focus rings).
+ * ===================================================================== */
+.dm-die:hover:not(.disabled):not(.locked):not(.kept) {
+  transform: translateY(-4px) scale(1.04) rotate(-2deg);
+  transition:
+    transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 150ms ease-out,
+    border-color 150ms ease-out;
+}
+.dm-die.rolling {
+  animation: dm-roll-spin 460ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.dm-die:focus-visible,
+.dm-card:focus-visible,
+.dm-cell:focus-visible,
+.dm-bet-btn:focus-visible {
+  outline: 2px solid var(--primary, #818cf8);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-die:hover:not(.disabled):not(.locked):not(.kept) {
+    transform: none !important;
+    transition: none !important;
+  }
+}

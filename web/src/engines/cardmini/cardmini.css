@@ -494,3 +494,31 @@
     transform: none;
   }
 }
+
+/* =====================================================================
+ * Engine polish (card lift + focus rings + reduced-motion).
+ * ===================================================================== */
+.cm-card.pickable:hover,
+.cm-card:not(.disabled):not(.kept):not(.match):not(.picked):not(.selected):not(.hl):hover {
+  transform: translateY(-3px) scale(1.02);
+  transition:
+    transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 150ms ease-out,
+    border-color 150ms ease-out;
+}
+.cm-card:focus-visible {
+  outline: 2px solid var(--primary, #818cf8);
+  outline-offset: 3px;
+}
+.cm-btn:focus-visible {
+  outline: 2px solid var(--primary, #c7d2fe);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-card.pickable:hover,
+  .cm-card:not(.disabled):not(.kept):not(.match):not(.picked):not(.selected):not(.hl):hover {
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -945,3 +945,37 @@
     font-size: var(--font-sm, 0.85rem);
   }
 }
+
+/* =====================================================================
+ * Engine polish (hover scale + accessible focus rings + reduced-motion).
+ * Layered on top of existing rules — no existing selectors are altered.
+ * ===================================================================== */
+.trivia-choice,
+.quiz-choice {
+  transition:
+    transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    color 150ms ease;
+}
+.trivia-choice:hover:not(:disabled),
+.quiz-choice:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+}
+.trivia-choice:focus-visible,
+.quiz-choice:focus-visible {
+  outline: 2px solid var(--primary, #818cf8);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trivia-choice,
+  .quiz-choice {
+    transition: none !important;
+  }
+  .trivia-choice:hover:not(:disabled),
+  .quiz-choice:hover:not(:disabled) {
+    transform: none !important;
+  }
+}

@@ -375,3 +375,38 @@
     transition: none !important;
   }
 }
+
+/* =====================================================================
+ * Engine polish (chip-stack hover + button hover lift + focus rings).
+ * ===================================================================== */
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:hover:not(:disabled),
+[class$="-bets"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:hover:not(:disabled),
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 150ms ease-out;
+}
+[class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:focus-visible,
+[class$="-bets"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:focus-visible,
+[class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):focus-visible {
+  outline: 2px solid var(--primary, #fde047);
+  outline-offset: 3px;
+}
+[class*="chip"]:not([class*="play-"]):not([class*="lobby"]):hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 150ms ease-out;
+  filter: brightness(1.05);
+}
+[class*="chip"]:focus-visible {
+  outline: 2px solid var(--primary, #fde047);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class$="-actions"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:hover:not(:disabled),
+  [class$="-bets"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]) button:hover:not(:disabled),
+  [class$="-btn"][class*="-"]:not([class*="play-"]):not([class*="lobby"]):not([class*="tile-"]):not([class*="tile--"]):not([class*="theme-"]):not([class*="app-"]):not([class*="login"]):not([class*="leaderboard"]):hover:not(:disabled),
+  [class*="chip"]:hover:not(:disabled) {
+    transform: none !important;
+    transition: none !important;
+  }
+}

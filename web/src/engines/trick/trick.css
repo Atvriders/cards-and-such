@@ -540,3 +540,50 @@
   }
   .dr-card:hover { transform: none !important; }
 }
+
+/* =====================================================================
+ * Engine polish (chip-stack hover + button hover lift + focus rings).
+ * ===================================================================== */
+.dr-card:hover,
+.bz-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  transition:
+    transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 150ms ease-out,
+    border-color 150ms ease-out;
+}
+.bz-actions > button:hover:not(:disabled),
+.dr-event button:hover,
+.bz-event button:hover {
+  transform: translateY(-2px) scale(1.02);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 150ms ease-out;
+}
+.dr-card:focus-visible,
+.bz-card:focus-visible,
+.bz-actions > button:focus-visible,
+.dr-event button:focus-visible,
+.bz-event button:focus-visible {
+  outline: 2px solid var(--primary, #c7d2fe);
+  outline-offset: 3px;
+}
+[class*="chip"]:not([class*="play-"]):not([class*="lobby"]):hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 150ms ease-out;
+  filter: brightness(1.05);
+}
+[class*="chip"]:focus-visible {
+  outline: 2px solid var(--primary, #c7d2fe);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dr-card:hover,
+  .bz-card:hover,
+  .bz-actions > button:hover:not(:disabled),
+  .dr-event button:hover,
+  .bz-event button:hover,
+  [class*="chip"]:hover:not(:disabled) {
+    transform: none !important;
+    transition: none !important;
+  }
+}
