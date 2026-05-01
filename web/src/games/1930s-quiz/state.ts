@@ -55,87 +55,137 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "What 1930 sci-fi-epic novel by Aldous Huxley imagined a dystopia? (Hint: published 1932)",
+    "question": "Which 1939 film featured Dorothy and a yellow brick road?",
     "choices": [
-      "1984",
-      "Brave New World",
-      "We",
-      "Animal Farm"
+      "Snow White",
+      "The Wizard of Oz",
+      "Pinocchio",
+      "Fantasia"
     ],
     "correct": 1
   },
   {
-    "question": "The Empire State Building opened in what year?",
+    "question": "What 1936 event in Spain began with a military uprising?",
     "choices": [
-      "1929",
-      "1931",
-      "1934",
-      "1937"
+      "Spanish-American War",
+      "Spanish Civil War",
+      "Carlist Revolt",
+      "Catalan Crisis"
     ],
     "correct": 1
   },
   {
-    "question": "Which Steinbeck novel followed Okies fleeing the Dust Bowl?",
+    "question": "Which 'Gone With the Wind' actress won Best Actress in 1939?",
     "choices": [
-      "East of Eden",
-      "Of Mice and Men",
-      "The Grapes of Wrath",
-      "Cannery Row"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "What 1933 movie featured a giant ape on the Empire State Building?",
-    "choices": [
-      "Mighty Joe Young",
-      "Son of Kong",
-      "King Kong",
-      "Tarzan"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which 1939 film premiered with a famous line: 'Frankly, my dear...'?",
-    "choices": [
-      "Wizard of Oz",
-      "Gone with the Wind",
-      "Stagecoach",
-      "Wuthering Heights"
+      "Bette Davis",
+      "Vivien Leigh",
+      "Olivia de Havilland",
+      "Hattie McDaniel"
     ],
     "correct": 1
   },
   {
-    "question": "Joe Louis was famous in what sport in the 1930s?",
+    "question": "Which German airship exploded at Lakehurst in 1937?",
     "choices": [
-      "Baseball",
-      "Football",
-      "Boxing",
-      "Tennis"
+      "Graf Zeppelin",
+      "Hindenburg",
+      "USS Akron",
+      "USS Macon"
     ],
-    "correct": 2
+    "correct": 1
   },
   {
-    "question": "The Hindenburg disaster occurred in what year?",
+    "question": "Who wrote 'The Grapes of Wrath' (1939)?",
+    "choices": [
+      "Faulkner",
+      "Steinbeck",
+      "Hemingway",
+      "Wolfe"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Babe Ruth retired from baseball in what year?",
     "choices": [
       "1933",
       "1935",
       "1937",
       "1939"
     ],
-    "correct": 2
+    "correct": 1
   },
   {
-    "question": "Which dance was popular along with swing music in the late 1930s?",
+    "question": "The 1936 Berlin Olympics star sprinter was?",
     "choices": [
-      "Charleston",
-      "Lindy Hop",
-      "Twist",
-      "Polka"
+      "Carl Lewis",
+      "Jesse Owens",
+      "Eddie Tolan",
+      "Ralph Metcalfe"
     ],
     "correct": 1
   },
   {
-    "question": "Prohibition was repealed by which amendment in 1933?",
+    "question": "Which Disney film, 1937, was the first feature-length animation?",
+    "choices": [
+      "Pinocchio",
+      "Snow White and the Seven Dwarfs",
+      "Bambi",
+      "Dumbo"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which boxer became heavyweight champion in 1937?",
+    "choices": [
+      "Jack Dempsey",
+      "Gene Tunney",
+      "Joe Louis",
+      "Rocky Marciano"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Empire State Building opened in what year?",
+    "choices": [
+      "1929",
+      "1931",
+      "1933",
+      "1935"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1934 outlaw duo were ambushed in Louisiana?",
+    "choices": [
+      "Sacco-Vanzetti",
+      "Bonnie and Clyde",
+      "Pretty Boy Floyd & Ma Barker",
+      "Baby Face Nelson & Dillinger"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who painted 'American Gothic' in 1930?",
+    "choices": [
+      "Edward Hopper",
+      "Grant Wood",
+      "Norman Rockwell",
+      "Georgia O'Keeffe"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which radio drama by Orson Welles caused panic in 1938?",
+    "choices": [
+      "The Shadow",
+      "War of the Worlds",
+      "Mercury Theatre on the Air",
+      "Inner Sanctum"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "What 1933 amendment ended Prohibition?",
     "choices": [
       "20th",
       "21st",
@@ -145,14 +195,114 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Shirley Temple was a famous 1930s star at what age range?",
+    "question": "Which jazz bandleader was 'King of Swing' in the 1930s?",
     "choices": [
-      "Adult",
-      "Teenager",
-      "Child",
-      "Senior"
+      "Duke Ellington",
+      "Benny Goodman",
+      "Glenn Miller",
+      "Count Basie"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which child star of the 1930s sang 'On the Good Ship Lollipop'?",
+    "choices": [
+      "Judy Garland",
+      "Shirley Temple",
+      "Mickey Rooney",
+      "Deanna Durbin"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "What U.S. workers' law passed in 1935 created Social Security?",
+    "choices": [
+      "Wagner Act",
+      "Social Security Act",
+      "Fair Labor Standards Act",
+      "Glass-Steagall"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Japan invaded which Chinese region in 1931?",
+    "choices": [
+      "Tibet",
+      "Manchuria",
+      "Xinjiang",
+      "Hainan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who became British PM (1937) at the time of Munich?",
+    "choices": [
+      "Churchill",
+      "Chamberlain",
+      "Baldwin",
+      "Attlee"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which radio comedian quipped 'Wanna buy a duck'?",
+    "choices": [
+      "Jack Benny",
+      "Joe Penner",
+      "Burns & Allen",
+      "Fred Allen"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1933 King Kong setting featured the Empire State?",
+    "choices": [
+      "London",
+      "Paris",
+      "New York",
+      "Chicago"
     ],
     "correct": 2
+  },
+  {
+    "question": "Which 1930s aircraft, the DC-3, was made by what company?",
+    "choices": [
+      "Boeing",
+      "Douglas",
+      "Lockheed",
+      "Curtiss"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which dictator launched the Great Purge starting in 1936?",
+    "choices": [
+      "Hitler",
+      "Stalin",
+      "Mussolini",
+      "Franco"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who composed 'Porgy and Bess' (1935)?",
+    "choices": [
+      "Cole Porter",
+      "George Gershwin",
+      "Aaron Copland",
+      "Richard Rodgers"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "What 1939 invasion started WWII in Europe?",
+    "choices": [
+      "Of France",
+      "Of Poland",
+      "Of Belgium",
+      "Of Norway"
+    ],
+    "correct": 1
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

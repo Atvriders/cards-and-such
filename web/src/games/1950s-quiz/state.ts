@@ -45,114 +45,264 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Brown v. Board of Education ruled what unconstitutional?",
+    "question": "Brown v. Board of Education (1954) ruled what unconstitutional?",
     "choices": [
       "Poll taxes",
       "School segregation",
-      "Anti-miscegenation laws",
-      "Literacy tests"
+      "Literacy tests",
+      "Jim Crow buses"
     ],
     "correct": 1
   },
   {
-    "question": "Marilyn Monroe starred in which 1959 film?",
+    "question": "Who refused to give up her bus seat in 1955 Montgomery?",
     "choices": [
-      "Niagara",
+      "Coretta Scott",
+      "Rosa Parks",
+      "Ella Baker",
+      "Daisy Bates"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1955 Disney park opened in Anaheim?",
+    "choices": [
+      "Disney World",
+      "Disneyland",
+      "EPCOT",
+      "Magic Kingdom"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Hawaii became the 50th U.S. state in?",
+    "choices": [
+      "1957",
+      "1958",
+      "1959",
+      "1960"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who developed the polio vaccine announced in 1955?",
+    "choices": [
+      "Albert Sabin",
+      "Jonas Salk",
+      "Alexander Fleming",
+      "Louis Pasteur"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1956 musical featured 'Tonight' and the Sharks vs. Jets?",
+    "choices": [
+      "My Fair Lady",
+      "West Side Story",
+      "South Pacific",
+      "The King and I"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Castro overthrew which Cuban leader in 1959?",
+    "choices": [
+      "Batista",
+      "Machado",
+      "Estrada",
+      "Grau"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Eisenhower's vice president throughout the 1950s was?",
+    "choices": [
+      "Nixon",
+      "JFK",
+      "LBJ",
+      "Humphrey"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which 1953 Everest climber reached the summit with Tenzing?",
+    "choices": [
+      "George Mallory",
+      "Edmund Hillary",
+      "Reinhold Messner",
+      "Chris Bonington"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "DNA's double helix was described in 1953 by?",
+    "choices": [
+      "Pauling & Corey",
+      "Watson & Crick",
+      "Franklin alone",
+      "Mendel & Morgan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1956 Elvis hit topped Billboard's first Hot 100 era?",
+    "choices": [
+      "Hound Dog",
+      "Heartbreak Hotel",
+      "Jailhouse Rock",
+      "All Shook Up"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Marilyn Monroe famously sang 'Happy Birthday' to JFK in 1962, but in 1955 starred in which film?",
+    "choices": [
       "Some Like It Hot",
-      "The Misfits",
-      "Bus Stop"
+      "The Seven Year Itch",
+      "Bus Stop",
+      "How to Marry a Millionaire"
     ],
     "correct": 1
   },
   {
-    "question": "Senator Joseph McCarthy is associated with hunting?",
+    "question": "What was the first satellite, launched 1957?",
     "choices": [
-      "Civil rights leaders",
-      "Communists",
-      "Beatniks",
-      "Mobsters"
+      "Explorer 1",
+      "Sputnik 1",
+      "Vanguard",
+      "Luna 1"
     ],
     "correct": 1
   },
   {
-    "question": "The Salk vaccine of the 1950s targeted which disease?",
+    "question": "Queen Elizabeth II was crowned in?",
     "choices": [
-      "Smallpox",
-      "Polio",
-      "Measles",
-      "Tuberculosis"
+      "1952",
+      "1953",
+      "1955",
+      "1957"
     ],
     "correct": 1
   },
   {
-    "question": "Eisenhower was U.S. President from?",
+    "question": "Who pitched a perfect game in the 1956 World Series?",
     "choices": [
-      "1949-1957",
-      "1953-1961",
-      "1957-1965",
-      "1961-1969"
+      "Sandy Koufax",
+      "Don Larsen",
+      "Whitey Ford",
+      "Bob Feller"
     ],
     "correct": 1
   },
   {
-    "question": "Which 1956 film starred James Dean as Cal Trask?",
+    "question": "Which 1957 Kerouac novel defined the Beat Generation?",
     "choices": [
+      "Howl",
+      "On the Road",
+      "Naked Lunch",
+      "The Dharma Bums"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "McCarthy's anti-communist hearings targeted which industry?",
+    "choices": [
+      "Oil",
+      "Hollywood",
+      "Auto",
+      "Steel"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1955 James Dean film featured a knife fight?",
+    "choices": [
+      "Giant",
       "Rebel Without a Cause",
       "East of Eden",
-      "Giant",
       "On the Waterfront"
     ],
     "correct": 1
   },
   {
-    "question": "The Hula Hoop became a craze in?",
+    "question": "Buddy Holly died in a 1959 plane crash with whom?",
     "choices": [
-      "1955",
-      "1958",
-      "1960",
-      "1962"
+      "Elvis & Sinatra",
+      "Ritchie Valens & Big Bopper",
+      "Roy Orbison & Eddie Cochran",
+      "Chuck Berry & Little Richard"
     ],
     "correct": 1
   },
   {
-    "question": "Mickey Mantle played for which MLB team?",
+    "question": "Alaska became a U.S. state in?",
     "choices": [
-      "Boston Red Sox",
-      "New York Yankees",
-      "Brooklyn Dodgers",
-      "Chicago Cubs"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Disneyland opened in California in?",
-    "choices": [
-      "1953",
-      "1955",
       "1957",
-      "1959"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Beat Generation novel 'On the Road' was by?",
-    "choices": [
-      "Allen Ginsberg",
-      "Jack Kerouac",
-      "William S. Burroughs",
-      "Lawrence Ferlinghetti"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Rosa Parks refused to give up her bus seat in which city?",
-    "choices": [
-      "Birmingham",
-      "Selma",
-      "Montgomery",
-      "Atlanta"
+      "1958",
+      "1959",
+      "1960"
     ],
     "correct": 2
+  },
+  {
+    "question": "Which 1953 Arthur Miller play allegorized McCarthyism via Salem?",
+    "choices": [
+      "Death of a Salesman",
+      "The Crucible",
+      "All My Sons",
+      "A View from the Bridge"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Rock Around the Clock' (1954) was performed by?",
+    "choices": [
+      "Elvis Presley",
+      "Bill Haley & His Comets",
+      "Chuck Berry",
+      "Little Richard"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1959 Cadillac was famous for its huge tail fins?",
+    "choices": [
+      "DeVille",
+      "Eldorado",
+      "Fleetwood",
+      "Series 62"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Suez Crisis happened in?",
+    "choices": [
+      "1955",
+      "1956",
+      "1957",
+      "1958"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1950s toy was a metal spring that 'walks' down stairs?",
+    "choices": [
+      "Hula Hoop",
+      "Slinky",
+      "Etch A Sketch",
+      "Mr. Potato Head"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who broke the four-minute mile in 1954?",
+    "choices": [
+      "Roger Bannister",
+      "John Landy",
+      "Jim Ryun",
+      "Herb Elliott"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

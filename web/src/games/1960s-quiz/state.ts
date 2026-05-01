@@ -48,64 +48,14 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "MLK's 'I Have a Dream' speech was given in?",
     "choices": [
       "1961",
+      "1962",
       "1963",
-      "1965",
-      "1967"
+      "1964"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "Woodstock music festival took place in?",
-    "choices": [
-      "1967",
-      "1969",
-      "1971",
-      "1973"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which 1960s movement championed peace and free love?",
-    "choices": [
-      "Beatniks",
-      "Hippies",
-      "Mods",
-      "Greasers"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "The Vietnam War escalation under which U.S. President?",
-    "choices": [
-      "JFK",
-      "LBJ",
-      "Nixon",
-      "Eisenhower"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Bob Dylan's 1965 album was?",
-    "choices": [
-      "Blonde on Blonde",
-      "Highway 61 Revisited",
-      "Bringing It All Back Home",
-      "All of these"
-    ],
-    "correct": 3
-  },
-  {
-    "question": "Star Trek (original series) premiered on TV in?",
-    "choices": [
-      "1964",
-      "1966",
-      "1968",
-      "1970"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Yuri Gagarin was the first man in space, in?",
+    "question": "The Berlin Wall was built in?",
     "choices": [
       "1959",
       "1961",
@@ -115,42 +65,242 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "The Civil Rights Act was signed in?",
+    "question": "Woodstock music festival took place in?",
     "choices": [
-      "1962",
-      "1964",
-      "1966",
-      "1968"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Robert Kennedy was assassinated in?",
-    "choices": [
-      "1965",
       "1967",
       "1968",
+      "1969",
       "1970"
     ],
     "correct": 2
   },
   {
-    "question": "Which fashion model symbolized 1960s London?",
+    "question": "Who first orbited Earth in 1961?",
     "choices": [
-      "Twiggy",
-      "Jean Shrimpton",
-      "Veruschka",
-      "Pattie Boyd"
+      "John Glenn",
+      "Yuri Gagarin",
+      "Alan Shepard",
+      "Gherman Titov"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Civil Rights Act was signed by which president in 1964?",
+    "choices": [
+      "JFK",
+      "LBJ",
+      "Nixon",
+      "Ford"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1965 Vietnam buildup operation bombed the North?",
+    "choices": [
+      "Rolling Thunder",
+      "Linebacker",
+      "Tet Offensive",
+      "Market Time"
     ],
     "correct": 0
   },
   {
-    "question": "The 1969 film 'Easy Rider' starred Peter Fonda and?",
+    "question": "Who painted Campbell's Soup Cans in 1962?",
     "choices": [
-      "Jack Nicholson",
-      "Dennis Hopper",
-      "Robert Redford",
-      "Warren Beatty"
+      "Lichtenstein",
+      "Andy Warhol",
+      "Jasper Johns",
+      "Robert Rauschenberg"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Beatles first appeared on Ed Sullivan in?",
+    "choices": [
+      "1962",
+      "1963",
+      "1964",
+      "1965"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 1968 figure was assassinated at the Lorraine Motel?",
+    "choices": [
+      "RFK",
+      "MLK",
+      "Malcolm X",
+      "Medgar Evers"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1969 film won Best Picture and was X-rated?",
+    "choices": [
+      "Easy Rider",
+      "Midnight Cowboy",
+      "Bonnie and Clyde",
+      "The Graduate"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who became Prime Minister of the UK in 1964 (Labour)?",
+    "choices": [
+      "Macmillan",
+      "Wilson",
+      "Heath",
+      "Callaghan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1962 'Dr.' film launched the James Bond franchise?",
+    "choices": [
+      "From Russia with Love",
+      "Dr. No",
+      "Goldfinger",
+      "Thunderball"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Bob Dylan went electric at which 1965 festival?",
+    "choices": [
+      "Monterey",
+      "Newport Folk",
+      "Woodstock",
+      "Isle of Wight"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Tet Offensive happened in?",
+    "choices": [
+      "1966",
+      "1967",
+      "1968",
+      "1969"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 1960 birth-control milestone was approved by FDA?",
+    "choices": [
+      "IUD",
+      "The Pill",
+      "Patch",
+      "Diaphragm"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Cassius Clay (Muhammad Ali) won the heavyweight title from whom in 1964?",
+    "choices": [
+      "Floyd Patterson",
+      "Sonny Liston",
+      "Joe Frazier",
+      "George Foreman"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1963 musical film stars Julie Andrews as a nanny?",
+    "choices": [
+      "The Sound of Music",
+      "Mary Poppins",
+      "My Fair Lady",
+      "Funny Girl"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Six-Day War in 1967 involved Israel and which neighbors?",
+    "choices": [
+      "Iran/Iraq/Syria",
+      "Egypt/Syria/Jordan",
+      "Libya/Egypt/Sudan",
+      "Lebanon/Iraq/Saudi"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1969 festival ended in a stabbing death (Hells Angels)?",
+    "choices": [
+      "Monterey Pop",
+      "Altamont",
+      "Isle of Wight",
+      "Woodstock"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Apollo 11 lunar module was named?",
+    "choices": [
+      "Columbia",
+      "Eagle",
+      "Falcon",
+      "Antares"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who was assassinated in California after winning 1968 primary?",
+    "choices": [
+      "MLK",
+      "RFK",
+      "Malcolm X",
+      "George Wallace"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1964 Beatles film featured 'A Hard Day's Night'?",
+    "choices": [
+      "Help!",
+      "A Hard Day's Night",
+      "Let It Be",
+      "Magical Mystery Tour"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who founded Motown Records?",
+    "choices": [
+      "Quincy Jones",
+      "Berry Gordy",
+      "Smokey Robinson",
+      "Marvin Gaye"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Stonewall riots in NYC sparked which movement in 1969?",
+    "choices": [
+      "Anti-war",
+      "Gay rights",
+      "Feminist",
+      "Civil rights"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 1969 Manson Family murders were in which city?",
+    "choices": [
+      "San Francisco",
+      "Los Angeles",
+      "Las Vegas",
+      "Sacramento"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'In the Heat of the Night' (1967 Best Picture) starred whom as Detective Tibbs?",
+    "choices": [
+      "Sammy Davis Jr.",
+      "Sidney Poitier",
+      "Harry Belafonte",
+      "James Earl Jones"
     ],
     "correct": 1
   }

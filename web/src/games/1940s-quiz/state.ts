@@ -48,64 +48,64 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "The United Nations was founded in what year?",
     "choices": [
       "1942",
-      "1945",
-      "1948",
-      "1950"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Anne Frank wrote her diary while hiding in which city?",
-    "choices": [
-      "Berlin",
-      "Vienna",
-      "Amsterdam",
-      "Warsaw"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Casablanca, the iconic film, was released in?",
-    "choices": [
-      "1939",
-      "1942",
+      "1944",
       "1945",
       "1948"
     ],
-    "correct": 1
-  },
-  {
-    "question": "Operation Overlord refers to which event?",
-    "choices": [
-      "Battle of Britain",
-      "Pearl Harbor attack",
-      "D-Day invasion",
-      "Atomic bomb"
-    ],
     "correct": 2
   },
   {
-    "question": "Which baseball player broke the color barrier in 1947?",
+    "question": "Which 1942 film features 'Here's looking at you, kid'?",
     "choices": [
-      "Willie Mays",
-      "Hank Aaron",
-      "Jackie Robinson",
-      "Satchel Paige"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Bing Crosby's 1942 song 'White Christmas' came from which film?",
-    "choices": [
-      "White Christmas",
-      "Holiday Inn",
-      "Christmas in Connecticut",
-      "It's a Wonderful Life"
+      "Citizen Kane",
+      "Casablanca",
+      "The Maltese Falcon",
+      "Double Indemnity"
     ],
     "correct": 1
   },
   {
-    "question": "The Marshall Plan helped rebuild what region?",
+    "question": "Operation Overlord refers to what?",
+    "choices": [
+      "Battle of Bulge",
+      "D-Day",
+      "Pearl Harbor",
+      "Berlin airlift"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "VE Day, marking Nazi surrender, was in what month/year?",
+    "choices": [
+      "May 1945",
+      "August 1945",
+      "May 1944",
+      "September 1945"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Who led the Soviet Union during WWII?",
+    "choices": [
+      "Lenin",
+      "Stalin",
+      "Khrushchev",
+      "Trotsky"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1948 country declared independence in the Middle East?",
+    "choices": [
+      "Egypt",
+      "Israel",
+      "Iraq",
+      "Jordan"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Marshall Plan was created to rebuild what?",
     "choices": [
       "Asia",
       "Europe",
@@ -115,34 +115,154 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Iron Curtain was a phrase coined by?",
+    "question": "Which 1947 invention by Bell Labs led to modern electronics?",
     "choices": [
-      "Roosevelt",
-      "Truman",
-      "Churchill",
-      "Stalin"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which animated mouse debuted in his first sound cartoon in 1928 but starred in 1940's Fantasia?",
-    "choices": [
-      "Donald Duck",
-      "Mickey Mouse",
-      "Tom",
-      "Bugs Bunny"
+      "Vacuum tube",
+      "Transistor",
+      "Integrated circuit",
+      "LED"
     ],
     "correct": 1
   },
   {
-    "question": "The Berlin Airlift took place in?",
+    "question": "Mahatma Gandhi was assassinated in?",
     "choices": [
-      "1945-46",
-      "1947-48",
-      "1948-49",
-      "1950-51"
+      "1946",
+      "1947",
+      "1948",
+      "1949"
     ],
     "correct": 2
+  },
+  {
+    "question": "'A Streetcar Named Desire' premiered on Broadway by which playwright (1947)?",
+    "choices": [
+      "Arthur Miller",
+      "Tennessee Williams",
+      "Eugene O'Neill",
+      "Lillian Hellman"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Jackie Robinson broke MLB's color barrier with which team in 1947?",
+    "choices": [
+      "NY Yankees",
+      "Brooklyn Dodgers",
+      "Boston Braves",
+      "Cleveland Indians"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1944 conference set post-war monetary order (IMF/World Bank)?",
+    "choices": [
+      "Yalta",
+      "Tehran",
+      "Bretton Woods",
+      "Potsdam"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The Berlin Airlift took place in?",
+    "choices": [
+      "1946-47",
+      "1947-48",
+      "1948-49",
+      "1949-50"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who designed the famous 'Rosie the Riveter' poster lookalike for WWII labor?",
+    "choices": [
+      "Norman Rockwell",
+      "J. Howard Miller",
+      "Charles Schulz",
+      "Saul Bass"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mao Zedong proclaimed the People's Republic of China in?",
+    "choices": [
+      "1947",
+      "1948",
+      "1949",
+      "1950"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Which 1946 Frank Capra film stars James Stewart as George Bailey?",
+    "choices": [
+      "Mr. Smith Goes to Washington",
+      "It's a Wonderful Life",
+      "Meet John Doe",
+      "You Can't Take It With You"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pakistan and India gained independence from Britain in?",
+    "choices": [
+      "1945",
+      "1946",
+      "1947",
+      "1948"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "ENIAC, an early electronic computer, was unveiled in?",
+    "choices": [
+      "1942",
+      "1944",
+      "1946",
+      "1948"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who was British PM during most of WWII?",
+    "choices": [
+      "Chamberlain",
+      "Churchill",
+      "Attlee",
+      "Eden"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Nuremberg Trials began in?",
+    "choices": [
+      "1944",
+      "1945",
+      "1946",
+      "1947"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1949 NATO founding was a Western military alliance?",
+    "choices": [
+      "UN",
+      "Warsaw Pact",
+      "NATO",
+      "SEATO"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who painted 'Number 1A' (drip paintings) gaining fame in late 1940s?",
+    "choices": [
+      "Mark Rothko",
+      "Jackson Pollock",
+      "Willem de Kooning",
+      "Andy Warhol"
+    ],
+    "correct": 1
   },
   {
     "question": "Which 1949 novel by Orwell warned of totalitarianism?",
@@ -150,9 +270,39 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Animal Farm",
       "1984",
       "Brave New World",
-      "Darkness at Noon"
+      "Fahrenheit 451"
     ],
     "correct": 1
+  },
+  {
+    "question": "Which singer crooned 'White Christmas' (1942 Bing Crosby hit)?",
+    "choices": [
+      "Frank Sinatra",
+      "Bing Crosby",
+      "Perry Como",
+      "Dean Martin"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Manhattan Project produced what?",
+    "choices": [
+      "Radar",
+      "Atomic bomb",
+      "Penicillin",
+      "Jet engine"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Diary of a Young Girl' (published 1947) was written by whom?",
+    "choices": [
+      "Anne Frank",
+      "Elie Wiesel",
+      "Primo Levi",
+      "Viktor Frankl"
+    ],
+    "correct": 0
   }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }

@@ -35,7 +35,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "What was the name of the cultural movement among Black Americans in 1920s New York?",
+    "question": "What was the cultural movement among Black Americans in 1920s New York?",
     "choices": [
       "Harlem Renaissance",
       "Bronx Boom",
@@ -105,7 +105,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Calvin Coolidge was U.S. President during most of the 1920s. His nickname was?",
+    "question": "Calvin Coolidge's nickname was?",
     "choices": [
       "Silent Cal",
       "Honest Cal",
@@ -125,17 +125,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "What 1920s economy term referred to mass-produced goods on credit?",
-    "choices": [
-      "Consumerism",
-      "Mercantilism",
-      "Industrialism",
-      "Manorialism"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Who composed Rhapsody in Blue in 1924?",
+    "question": "Who composed 'Rhapsody in Blue' in 1924?",
     "choices": [
       "Cole Porter",
       "George Gershwin",
@@ -151,6 +141,166 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Flapper dress",
       "Bustle gown",
       "A-line"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Walt Disney's first synchronized-sound cartoon (1928) starred whom?",
+    "choices": [
+      "Donald Duck",
+      "Mickey Mouse",
+      "Goofy",
+      "Oswald"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which Egyptian pharaoh's tomb was opened by Howard Carter in 1922?",
+    "choices": [
+      "Ramses II",
+      "Tutankhamun",
+      "Khufu",
+      "Akhenaten"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Penicillin was discovered in 1928 by whom?",
+    "choices": [
+      "Louis Pasteur",
+      "Alexander Fleming",
+      "Jonas Salk",
+      "Robert Koch"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1920s craze had owners marking down each 'flag-pole' minute?",
+    "choices": [
+      "Marathon dancing",
+      "Flagpole sitting",
+      "Goldfish swallowing",
+      "Phone booth stuffing"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which Italian dictator took power in 1922?",
+    "choices": [
+      "Hitler",
+      "Franco",
+      "Mussolini",
+      "Stalin"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Who became Soviet leader after Lenin's 1924 death?",
+    "choices": [
+      "Trotsky",
+      "Stalin",
+      "Kamenev",
+      "Khrushchev"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1925 Chaplin film features a dance with bread rolls?",
+    "choices": [
+      "Modern Times",
+      "City Lights",
+      "The Gold Rush",
+      "The Kid"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What name describes 1920s women defying traditional norms?",
+    "choices": [
+      "Suffragettes",
+      "Flappers",
+      "Bobby-soxers",
+      "Beatniks"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which constitutional amendment legalized federal income tax in earlier years and stayed in force?",
+    "choices": [
+      "13th",
+      "16th",
+      "21st",
+      "22nd"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who painted 'American Gothic'? (1930, but the artist rose in the 1920s)",
+    "choices": [
+      "Edward Hopper",
+      "Grant Wood",
+      "Norman Rockwell",
+      "Georgia O'Keeffe"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which 1924 Olympics, held in Paris, was depicted in 'Chariots of Fire'?",
+    "choices": [
+      "Summer",
+      "Winter",
+      "Both",
+      "Neither"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "The 1925 'Great Gatsby' is set on which fictional Long Island areas?",
+    "choices": [
+      "East and West Egg",
+      "North and South Bay",
+      "Upper and Lower Sound",
+      "Pine and Oak Hills"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which radio network began broadcasting in 1926?",
+    "choices": [
+      "CBS",
+      "NBC",
+      "ABC",
+      "Mutual"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who wrote 'The Sun Also Rises' in 1926?",
+    "choices": [
+      "F. Scott Fitzgerald",
+      "Ernest Hemingway",
+      "John Steinbeck",
+      "William Faulkner"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "What insulin discovery year (Banting & Best) saved diabetics?",
+    "choices": [
+      "1919",
+      "1921",
+      "1925",
+      "1928"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which Russian-born composer premiered 'Rite of Spring' earlier and remained famous in the 1920s?",
+    "choices": [
+      "Prokofiev",
+      "Stravinsky",
+      "Rachmaninoff",
+      "Shostakovich"
     ],
     "correct": 1
   }
