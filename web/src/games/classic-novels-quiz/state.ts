@@ -5,7 +5,6 @@ export interface ClassicNovelsQuizState { questions: QuizQuestion[]; currentInde
 export type ClassicNovelsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Who wrote 'Pride and Prejudice'?", choices: ["Charlotte Bronte","Jane Austen","Emily Dickinson","Mary Shelley"], correct: 1 },
-  { question: "Who wrote 'A Tale of Two Cities'?", choices: ["Dickens","Thackeray","Hardy","Eliot"], correct: 0 },
   { question: "'It was the best of times, it was the worst of times' opens which novel?", choices: ["Bleak House","Great Expectations","A Tale of Two Cities","Oliver Twist"], correct: 2 },
   { question: "Who wrote 'War and Peace'?", choices: ["Dostoevsky","Tolstoy","Turgenev","Chekhov"], correct: 1 },
   { question: "Who wrote 'Anna Karenina'?", choices: ["Dostoevsky","Tolstoy","Pasternak","Gogol"], correct: 1 },
@@ -13,7 +12,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Who is the protagonist of 'Crime and Punishment'?", choices: ["Raskolnikov","Karamazov","Bezukhov","Vronsky"], correct: 0 },
   { question: "Who wrote 'Jane Eyre'?", choices: ["Charlotte Bronte","Emily Bronte","Anne Bronte","George Eliot"], correct: 0 },
   { question: "Who wrote 'Wuthering Heights'?", choices: ["Charlotte Bronte","Emily Bronte","Anne Bronte","Jane Austen"], correct: 1 },
-  { question: "Heathcliff is from?", choices: ["Wuthering Heights","Jane Eyre","Tess","Mill on the Floss"], correct: 0 },
+  { question: "Heathcliff is from which novel?", choices: ["Wuthering Heights","Jane Eyre","Tess","Mill on the Floss"], correct: 0 },
   { question: "Who wrote 'Madame Bovary'?", choices: ["Hugo","Flaubert","Dumas","Balzac"], correct: 1 },
   { question: "Who wrote 'Les Miserables'?", choices: ["Hugo","Flaubert","Zola","Dumas"], correct: 0 },
   { question: "Jean Valjean is from?", choices: ["The Count of Monte Cristo","Les Miserables","Notre-Dame de Paris","Germinal"], correct: 1 },
@@ -30,15 +29,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Who wrote 'Middlemarch'?", choices: ["Eliot","Hardy","Trollope","Gaskell"], correct: 0 },
   { question: "Who wrote 'Bleak House'?", choices: ["Dickens","Trollope","Eliot","Thackeray"], correct: 0 },
   { question: "Who wrote 'Vanity Fair' (1848)?", choices: ["Thackeray","Dickens","Eliot","Hardy"], correct: 0 },
-  { question: "Who wrote 'David Copperfield'?", choices: ["Dickens","Trollope","Wilkie Collins","Thackeray"], correct: 0 },
-  { question: "Who wrote 'Great Expectations'?", choices: ["Dickens","Eliot","Trollope","Gaskell"], correct: 0 },
   { question: "Pip is the narrator in?", choices: ["David Copperfield","Great Expectations","Bleak House","Oliver Twist"], correct: 1 },
   { question: "Who wrote 'The Brothers Karamazov'?", choices: ["Tolstoy","Dostoevsky","Turgenev","Gogol"], correct: 1 },
   { question: "Who wrote 'Fathers and Sons'?", choices: ["Tolstoy","Dostoevsky","Turgenev","Chekhov"], correct: 2 },
   { question: "Who wrote 'Dead Souls'?", choices: ["Tolstoy","Dostoevsky","Gogol","Pushkin"], correct: 2 },
-  { question: "Sense and Sensibility is by?", choices: ["Bronte","Austen","Eliot","Gaskell"], correct: 1 },
-  { question: "Emma is by?", choices: ["Austen","Eliot","Gaskell","Trollope"], correct: 0 },
-  { question: "Mansfield Park is by?", choices: ["Austen","Bronte","Eliot","Gaskell"], correct: 0 },
+  { question: "'Emma' is by which author?", choices: ["Austen","Eliot","Gaskell","Trollope"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ClassicNovelsQuizSettings): ClassicNovelsQuizState {
