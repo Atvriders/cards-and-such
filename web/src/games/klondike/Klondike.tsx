@@ -11,6 +11,7 @@ export function Klondike({
   state,
   dispatch,
   onGameOver,
+  seed,
 }: GameProps<KlondikeState, KlondikeSettings>): JSX.Element {
   const { onDragStart, onDragOver, onDrop } = useDragDrop();
 
@@ -77,6 +78,11 @@ export function Klondike({
       <div className="klondike-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>
+        {seed != null && (
+          <span className="hud-seed" data-testid="hud-seed" title="Current deal seed">
+            #{seed}
+          </span>
+        )}
         <button
           className="auto-move-btn"
           type="button"

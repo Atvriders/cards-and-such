@@ -35,7 +35,10 @@ function HowToPlayContent({ text }: { text: string }): JSX.Element {
 
 export default function PlayPage(): JSX.Element {
   const { gameId } = useParams<{ gameId: string }>();
-  const plugin = useMemo(() => GAMES.find((g) => g.id === gameId), [gameId]);
+  const plugin = useMemo(
+    () => GAMES.find((g) => g != null && g.id === gameId),
+    [gameId],
+  );
 
   if (!plugin) {
     return (

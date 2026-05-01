@@ -476,6 +476,25 @@
 }
 
 /* =====================================================================
+   Shared HUD seed pill (Klondike / FreeCell / Spider, etc.)
+   ===================================================================== */
+.hud-seed {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.4rem;
+  padding: 0.18rem 0.55rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #c7cdfe;
+  background: rgba(99, 102, 241, 0.10);
+  border: 1px solid rgba(129, 140, 248, 0.28);
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* =====================================================================
    Reduced motion
    ===================================================================== */
 @media (prefers-reduced-motion: reduce) {

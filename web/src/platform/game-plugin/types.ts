@@ -21,9 +21,22 @@ export interface GameProps<State, Settings> {
   settings: Settings;
   dispatch: (action: unknown) => void;
   onGameOver: (score: number) => void;
+  /** Current RNG seed for this run. Optional so existing games keep compiling. */
+  seed?: number;
 }
 
 export type GameCategory = "solitaire" | "cards" | "dice" | "board" | "arcade";
+
+/** A hint suggestion. `message` is shown in a toast. Optional fields support
+ *  UI affordances:
+ *    - `eliminatedChoice` (quiz): a wrong choice index to gray-out
+ *    - `revealedIndex` (sudoku/grid): a cell index to highlight
+ */
+export interface GameHint {
+  message: string;
+  eliminatedChoice?: number;
+  revealedIndex?: number;
+}
 
 export interface GamePlugin<State = unknown, Action = unknown, Schema extends SettingSchema = SettingSchema> {
   id: string;
@@ -37,6 +50,9 @@ export interface GamePlugin<State = unknown, Action = unknown, Schema extends Se
   initialState: (seed: number, settings: SettingsOf<Schema>) => State;
   reducer: (state: State, action: Action) => State;
   isTerminal: (state: State) => { score: number } | null;
+
+  /** Optional hint generator. Returns a suggested move/clue, or null if none. */
+  getHint?: (state: State, settings: SettingsOf<Schema>) => GameHint | null;
 
   component: React.FC<GameProps<State, SettingsOf<Schema>>>;
 }

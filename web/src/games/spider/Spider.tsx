@@ -11,6 +11,7 @@ export function Spider({
   state,
   dispatch,
   onGameOver,
+  seed,
 }: GameProps<SpiderState, SpiderSettings>): JSX.Element {
   const { onDragStart, onDragOver, onDrop } = useDragDrop();
 
@@ -69,6 +70,11 @@ export function Spider({
         <span>Score: {state.score}</span>
         <span>Suits: {state.completedSuits}/8</span>
         <span>Deals left: {dealsRemaining}</span>
+        {seed != null && (
+          <span className="hud-seed" data-testid="hud-seed" title="Current deal seed">
+            #{seed}
+          </span>
+        )}
       </div>
 
       <div className="spider-top-row">
