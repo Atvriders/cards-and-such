@@ -5,205 +5,305 @@ export interface CardMagicQuizState { questions: QuizQuestion[]; currentIndex: n
 export type CardMagicQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Card magic's 'pip' refers to?",
+    "question": "A 'force' in card magic means making a spectator?",
     "choices": [
-      "face value symbols",
-      "jokers",
-      "corner index",
-      "back design"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A 'force' makes the spectator pick a?",
-    "choices": [
-      "random card",
-      "specific card",
-      "red card",
-      "ace"
+      "shuffle freely",
+      "pick a chosen card",
+      "cut the deck",
+      "memorize"
     ],
     "correct": 1
   },
   {
-    "question": "The 'double lift' shows?",
+    "question": "The classic pass is used to?",
     "choices": [
-      "two cards as one",
-      "two decks",
-      "two volunteers",
-      "two backs"
+      "reveal a card",
+      "secretly cut the deck",
+      "fan cards",
+      "palm a card"
     ],
-    "correct": 0
+    "correct": 1
+  },
+  {
+    "question": "Who wrote 'The Expert at the Card Table' in 1902?",
+    "choices": [
+      "Dai Vernon",
+      "S.W. Erdnase",
+      "Ed Marlo",
+      "Harry Houdini"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'double lift' shows two cards as?",
+    "choices": [
+      "two",
+      "one",
+      "three",
+      "none"
+    ],
+    "correct": 1
   },
   {
     "question": "Dai Vernon was nicknamed?",
     "choices": [
-      "The Magician",
+      "The Card Wizard",
       "The Professor",
-      "The Ace",
-      "The Mage"
+      "The Master",
+      "The King"
     ],
     "correct": 1
   },
   {
-    "question": "A 'cull' is a method of?",
+    "question": "'Out of This World' was created by?",
     "choices": [
-      "dealing cards",
-      "secretly moving a card",
-      "cutting a deck",
-      "shuffling"
+      "Paul Curry",
+      "Ed Marlo",
+      "Bill Malone",
+      "Juan Tamariz"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "A 'gaffed' card is?",
+    "choices": [
+      "normal",
+      "specially prepared",
+      "marked",
+      "short"
     ],
     "correct": 1
   },
   {
-    "question": "'Sleight of hand' refers primarily to?",
+    "question": "The Charlier cut is a one-handed?",
     "choices": [
-      "camera tricks",
-      "manual dexterity",
-      "mind reading",
-      "hypnosis"
+      "false shuffle",
+      "cut",
+      "palm",
+      "fan"
     ],
     "correct": 1
   },
   {
-    "question": "A 'palm' hides a card in?",
+    "question": "Cardistry differs from magic by emphasizing?",
     "choices": [
-      "the sleeve",
-      "the hand",
-      "the pocket",
-      "the deck"
+      "secrets",
+      "flourish and visuals",
+      "forces",
+      "gimmicks"
     ],
     "correct": 1
   },
   {
-    "question": "An 'Ambitious Card' routine repeatedly returns the card to?",
+    "question": "'Triumph' is a classic effect by?",
     "choices": [
-      "the bottom",
-      "the middle",
-      "the top",
-      "the spectator"
+      "Vernon",
+      "Marlo",
+      "Tamariz",
+      "Slydini"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Ricky Jay was a famous?",
+    "question": "A 'key card' helps the magician to?",
     "choices": [
-      "mentalist",
-      "card magician",
-      "escape artist",
-      "ventriloquist"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A 'pass' is used to?",
-    "choices": [
-      "change the order",
-      "secretly cut to a card",
-      "reveal a card",
-      "replace a card"
+      "force",
+      "locate the chosen card",
+      "palm",
+      "spread"
     ],
     "correct": 1
   },
   {
-    "question": "Marked decks rely on?",
+    "question": "The Zarrow shuffle is a?",
     "choices": [
-      "color",
-      "secret back markings",
-      "rough edges",
-      "weights"
+      "false riffle shuffle",
+      "cut",
+      "palm",
+      "spread"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Ambitious Card' routine features a card that?",
+    "choices": [
+      "disappears",
+      "rises to the top",
+      "changes",
+      "duplicates"
     ],
     "correct": 1
   },
   {
-    "question": "A 'fan' display shows the?",
+    "question": "Juan Tamariz hails from?",
     "choices": [
-      "jokers",
-      "face cards",
-      "entire deck spread",
-      "backs only"
+      "Spain",
+      "Italy",
+      "Argentina",
+      "Mexico"
     ],
-    "correct": 2
+    "correct": 0
   },
   {
-    "question": "Howard Thurston was known for?",
+    "question": "A 'pinky break' is?",
     "choices": [
-      "dove magic",
-      "stage card manipulation",
-      "mentalism",
-      "tightrope"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A 'false shuffle' preserves?",
-    "choices": [
-      "the suits",
-      "the deck order",
-      "the colors",
-      "the value"
+      "a flourish",
+      "a small finger gap",
+      "a cut",
+      "a force"
     ],
     "correct": 1
   },
   {
-    "question": "Three Card Monte is a famous?",
+    "question": "The faro shuffle perfectly interleaves?",
     "choices": [
-      "card trick",
-      "con/short con",
-      "stage trick",
-      "mentalism act"
+      "random cards",
+      "every other card",
+      "top half",
+      "bottom half"
     ],
     "correct": 1
   },
   {
-    "question": "The 'Charlier cut' is performed with?",
+    "question": "Eight perfect out-faros restore a 52-card deck to?",
     "choices": [
-      "both hands",
-      "one hand",
-      "the deck on table",
-      "two decks"
+      "random",
+      "its original order",
+      "reverse",
+      "shuffled"
     ],
     "correct": 1
   },
   {
-    "question": "Cardistry is the art of?",
+    "question": "A 'stripper deck' has cards that are slightly?",
     "choices": [
+      "shorter",
+      "tapered",
+      "marked",
+      "bent"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The classic palm hides a card in the?",
+    "choices": [
+      "sleeve",
+      "palm of hand",
+      "pocket",
+      "finger"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Mnemonica' is a stack created by?",
+    "choices": [
+      "Tamariz",
+      "Aronson",
+      "Mullica",
+      "Goshman"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "A 'crimp' is a slight bend used as a?",
+    "choices": [
+      "flourish",
+      "key locator",
+      "force",
+      "cut"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Ed Marlo specialized in?",
+    "choices": [
+      "coin magic",
       "card magic",
-      "flourishing",
-      "gambling",
-      "tarot"
+      "mentalism",
+      "stage"
     ],
     "correct": 1
   },
   {
-    "question": "A 'glide' secretly retains?",
+    "question": "The 'Elmsley count' displays four cards as?",
     "choices": [
-      "the top card",
-      "the bottom card",
-      "the middle card",
-      "the joker"
+      "four",
+      "four hiding one",
+      "three",
+      "two"
     ],
     "correct": 1
   },
   {
-    "question": "A 'mexican turnover' switches?",
+    "question": "Cardistry's modern boom started in the?",
     "choices": [
-      "two decks",
-      "two cards face up",
-      "colors",
-      "suits"
+      "1990s",
+      "2000s",
+      "1980s",
+      "1970s"
     ],
     "correct": 1
   },
   {
-    "question": "Erdnase wrote 'The Expert at the' what?",
+    "question": "A 'glide' secretly deals from the?",
     "choices": [
-      "Bridge Table",
-      "Card Table",
-      "Poker Table",
-      "Magic Table"
+      "top",
+      "bottom",
+      "middle",
+      "second"
     ],
     "correct": 1
-  }
+  },
+  {
+    "question": "The 'second deal' deals from the?",
+    "choices": [
+      "top",
+      "second from top",
+      "bottom",
+      "middle"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Any Card at Any Number' is abbreviated?",
+    "choices": [
+      "ACAAN",
+      "AAAA",
+      "ACAN",
+      "AC@N"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Penn and Teller's TV show is called?",
+    "choices": [
+      "Magic Hour",
+      "Fool Us",
+      "The Trick",
+      "Illusionists"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A bridge-size card is narrower than?",
+    "choices": [
+      "jumbo",
+      "poker-size",
+      "tarot",
+      "mini"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Bicycle playing cards are made by?",
+    "choices": [
+      "USPCC",
+      "Cartamundi",
+      "Theory11",
+      "Ellusionist"
+    ],
+    "correct": 0
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CardMagicQuizSettings): CardMagicQuizState {

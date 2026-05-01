@@ -5,205 +5,305 @@ export interface WinePairingQuizState { questions: QuizQuestion[]; currentIndex:
 export type WinePairingQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Which wine pairs best with steak?",
+    "question": "Pinot Noir traditionally pairs well with?",
     "choices": [
-      "Riesling",
-      "Cabernet Sauvignon",
-      "Pinot Grigio",
-      "Champagne"
+      "heavy steak",
+      "salmon and duck",
+      "spicy curry",
+      "sweet desserts"
     ],
     "correct": 1
   },
   {
-    "question": "Sushi pairs well with?",
+    "question": "Cabernet Sauvignon pairs well with?",
     "choices": [
-      "Cabernet",
-      "Sauvignon Blanc",
-      "Port",
-      "Malbec"
+      "white fish",
+      "grilled red meat",
+      "oysters",
+      "fruit salad"
     ],
     "correct": 1
   },
   {
-    "question": "Champagne is from?",
+    "question": "Chardonnay (oaked) pairs with?",
     "choices": [
-      "Italy",
-      "France",
-      "Spain",
-      "Germany"
+      "sushi",
+      "buttery lobster",
+      "spicy tacos",
+      "chocolate"
     ],
     "correct": 1
   },
   {
-    "question": "Riesling is often described as?",
+    "question": "Sauvignon Blanc is a classic match for?",
     "choices": [
-      "sweet/aromatic",
-      "dry oaky",
-      "bold tannic",
-      "earthy"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Chianti is from?",
-    "choices": [
-      "France",
-      "Tuscany",
-      "Spain",
-      "Portugal"
+      "red meat",
+      "goat cheese and salads",
+      "steak",
+      "duck"
     ],
     "correct": 1
   },
   {
-    "question": "Pinot Noir pairs nicely with?",
+    "question": "Champagne is famously paired with?",
     "choices": [
-      "mushroom dishes",
-      "very spicy curry",
-      "ice cream",
-      "chocolate cake"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tannins are most associated with?",
-    "choices": [
-      "red wine",
-      "sparkling wine",
-      "white wine",
-      "rosé"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sauvignon Blanc has notes of?",
-    "choices": [
-      "chocolate",
-      "grass/citrus",
-      "leather",
-      "smoke"
+      "red meat",
+      "oysters and caviar",
+      "spicy chili",
+      "brownies"
     ],
     "correct": 1
   },
   {
-    "question": "Bordeaux is famous for?",
+    "question": "Riesling (off-dry) pairs nicely with?",
     "choices": [
-      "sparkling wine",
-      "red blends",
-      "Riesling",
-      "Port"
+      "plain chicken",
+      "spicy Asian food",
+      "aged beef",
+      "port wine"
     ],
     "correct": 1
   },
   {
-    "question": "Which grape makes Chablis?",
+    "question": "Malbec pairs traditionally with?",
+    "choices": [
+      "white fish",
+      "Argentine steak",
+      "sushi",
+      "fruit"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Tannins in red wine help cut through?",
+    "choices": [
+      "sweetness",
+      "fat in food",
+      "spice",
+      "saltiness"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sweet wines are typically paired with?",
+    "choices": [
+      "spicy food",
+      "desserts",
+      "red meat",
+      "oysters"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sancerre is made primarily from?",
     "choices": [
       "Chardonnay",
+      "Sauvignon Blanc",
       "Riesling",
-      "Pinot Gris",
-      "Sauvignon Blanc"
+      "Pinot Gris"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Chianti pairs classically with?",
+    "choices": [
+      "sushi",
+      "tomato-based pasta",
+      "oysters",
+      "cheesecake"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Port wine commonly accompanies?",
+    "choices": [
+      "seafood",
+      "blue cheese",
+      "salads",
+      "chicken"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Ros\u00e9 is well-suited to?",
+    "choices": [
+      "heavy stew",
+      "summer salads",
+      "hot soup",
+      "red meat"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Gew\u00fcrztraminer's spicy notes pair with?",
+    "choices": [
+      "plain chicken",
+      "Indian curry",
+      "oysters",
+      "cheesecake"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Acidity in wine helps pair with?",
+    "choices": [
+      "fatty foods",
+      "sweet only",
+      "spicy only",
+      "bland foods"
     ],
     "correct": 0
   },
   {
-    "question": "Port wine is from?",
+    "question": "Bordeaux blends often pair with?",
+    "choices": [
+      "white fish",
+      "lamb",
+      "oysters",
+      "fruit"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Albari\u00f1o pairs well with?",
+    "choices": [
+      "red meat",
+      "seafood",
+      "spicy chili",
+      "chocolate"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Zinfandel pairs with?",
+    "choices": [
+      "raw fish",
+      "barbecue",
+      "oysters",
+      "white asparagus"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sparkling wine cleanses the palate of?",
+    "choices": [
+      "sweet",
+      "fried foods",
+      "spicy",
+      "raw"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sauternes is famously paired with?",
+    "choices": [
+      "steak",
+      "foie gras",
+      "salad",
+      "sushi"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Tempranillo (Rioja) pairs with?",
+    "choices": [
+      "seafood",
+      "lamb and tapas",
+      "sushi",
+      "cheesecake"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Beaujolais Nouveau is best with?",
+    "choices": [
+      "heavy stews",
+      "light dishes/turkey",
+      "steak",
+      "rich sauces"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Sherry (fino) pairs with?",
+    "choices": [
+      "red meat",
+      "tapas and almonds",
+      "desserts",
+      "chocolate"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "White Burgundy is made from?",
+    "choices": [
+      "Pinot Noir",
+      "Chardonnay",
+      "Sauvignon Blanc",
+      "Riesling"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 'fifth taste' that often clashes with wine is?",
+    "choices": [
+      "sweet",
+      "umami",
+      "sour",
+      "salty"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Syrah/Shiraz pairs with?",
+    "choices": [
+      "white fish",
+      "grilled lamb",
+      "oysters",
+      "fruit"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pinot Grigio is typically?",
+    "choices": [
+      "heavy red",
+      "light white",
+      "sweet dessert",
+      "sparkling"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Decanting' wine helps with?",
+    "choices": [
+      "chilling",
+      "aeration",
+      "filtering yeast",
+      "carbonating"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Ice wine pairs with?",
+    "choices": [
+      "red meat",
+      "fruit desserts",
+      "oysters",
+      "steak"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Madeira is a fortified wine from?",
     "choices": [
       "Spain",
       "Portugal",
-      "France",
-      "Italy"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Fish typically pairs with?",
-    "choices": [
-      "red wine",
-      "white wine",
-      "port",
-      "fortified wine"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Malbec is most associated with?",
-    "choices": [
-      "Chile",
-      "Argentina",
-      "Australia",
+      "Italy",
       "France"
     ],
     "correct": 1
   },
-  {
-    "question": "Brut means?",
-    "choices": [
-      "sweet",
-      "dry",
-      "off-dry",
-      "fruity"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Decanting helps wine to?",
-    "choices": [
-      "chill",
-      "aerate",
-      "heat",
-      "sweeten"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tempranillo is from?",
-    "choices": [
-      "Spain",
-      "Italy",
-      "France",
-      "Germany"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Pizza pairs well with?",
-    "choices": [
-      "Chianti",
-      "Sauternes",
-      "Sherry",
-      "Madeira"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Ice wine is harvested?",
-    "choices": [
-      "in summer",
-      "while frozen",
-      "early spring",
-      "by night only"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Aging in oak adds?",
-    "choices": [
-      "acidity",
-      "vanilla/spice",
-      "sugar",
-      "tannin reduction"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Rosé color comes from?",
-    "choices": [
-      "mixing red & white",
-      "brief grape skin contact",
-      "cherries",
-      "food coloring"
-    ],
-    "correct": 1
-  }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: WinePairingQuizSettings): WinePairingQuizState {

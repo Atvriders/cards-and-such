@@ -5,205 +5,305 @@ export interface PaintingTechniquesQuizState { questions: QuizQuestion[]; curren
 export type PaintingTechniquesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Oil paint dries by?",
+    "question": "Oil paint uses which binder?",
     "choices": [
-      "evaporation",
-      "oxidation",
-      "fermentation",
-      "sublimation"
+      "water",
+      "linseed/walnut oil",
+      "egg yolk",
+      "gum arabic"
     ],
     "correct": 1
   },
   {
-    "question": "Watercolor uses what binder?",
+    "question": "Watercolor uses which binder?",
     "choices": [
       "oil",
       "gum arabic",
-      "acrylic",
+      "egg",
       "wax"
     ],
     "correct": 1
   },
   {
-    "question": "Impasto refers to?",
+    "question": "Tempera paint traditionally uses?",
+    "choices": [
+      "linseed oil",
+      "egg yolk",
+      "gum arabic",
+      "acrylic resin"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Impasto' refers to?",
     "choices": [
       "thin washes",
-      "thick paint application",
+      "thick paint texture",
       "glazing",
-      "stippling"
+      "sgraffito"
     ],
     "correct": 1
   },
   {
-    "question": "A canvas should typically be?",
+    "question": "Glazing is layering?",
     "choices": [
-      "unprimed",
-      "primed with gesso",
-      "wet",
-      "stretched without prep"
+      "thick paint",
+      "thin transparent layers",
+      "gesso",
+      "ink"
     ],
     "correct": 1
   },
   {
-    "question": "Glazing means?",
+    "question": "'Chiaroscuro' is the contrast of?",
     "choices": [
-      "thick layer",
-      "translucent thin layer",
-      "sanding",
-      "scraping"
+      "colors",
+      "light and dark",
+      "warm/cool",
+      "textures"
     ],
     "correct": 1
   },
   {
-    "question": "Acrylic paint dries by?",
+    "question": "Sfumato is a soft technique pioneered by?",
+    "choices": [
+      "Raphael",
+      "Da Vinci",
+      "Caravaggio",
+      "Vermeer"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Acrylics dry primarily by?",
     "choices": [
       "oxidation",
-      "evaporation of water",
+      "water evaporation",
       "heat",
-      "UV light"
+      "UV"
     ],
     "correct": 1
   },
   {
-    "question": "Gesso is used to?",
+    "question": "Underpainting in 'grisaille' is in tones of?",
     "choices": [
-      "thin paint",
-      "prime surfaces",
-      "clean brushes",
-      "fix paint"
+      "red",
+      "gray",
+      "blue",
+      "yellow"
     ],
     "correct": 1
   },
   {
-    "question": "Chiaroscuro emphasizes?",
+    "question": "'Alla prima' means?",
     "choices": [
-      "color",
-      "light/dark contrast",
-      "texture",
-      "scale"
+      "layered",
+      "wet-on-wet in one session",
+      "glazed",
+      "dry brush"
     ],
     "correct": 1
   },
   {
-    "question": "Sfumato is a soft?",
+    "question": "Canvas is typically primed with?",
     "choices": [
-      "color",
-      "blending technique",
-      "linework",
-      "perspective method"
+      "varnish",
+      "gesso",
+      "linseed oil",
+      "water"
     ],
     "correct": 1
   },
   {
-    "question": "Plein air means painting?",
+    "question": "Oil paintings are best painted 'fat over?",
     "choices": [
-      "indoors",
-      "outdoors",
-      "quickly",
-      "slowly"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Underpainting establishes?",
-    "choices": [
-      "composition basics",
-      "final colors",
-      "frames",
-      "texture"
+      "thin",
+      "thick",
+      "wet",
+      "dry"
     ],
     "correct": 0
   },
   {
-    "question": "Stippling uses?",
+    "question": "A 'palette knife' is used for?",
     "choices": [
-      "dots",
-      "lines",
-      "washes",
-      "scratches"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Wet-on-wet is associated with?",
-    "choices": [
-      "Bob Ross",
-      "Picasso",
-      "Dali",
-      "Warhol"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A pochade box is for?",
-    "choices": [
-      "studio work",
-      "plein air painting",
-      "framing",
-      "grinding pigments"
+      "stretching",
+      "mixing/applying paint",
+      "priming",
+      "cleaning"
     ],
     "correct": 1
   },
   {
     "question": "Pointillism uses?",
     "choices": [
-      "lines",
-      "tiny dots",
-      "squares",
-      "triangles"
+      "broad strokes",
+      "tiny dots of color",
+      "glaze",
+      "drip"
     ],
     "correct": 1
   },
   {
-    "question": "Fat over lean refers to?",
+    "question": "Seurat is associated with?",
     "choices": [
-      "watercolor",
-      "oil layering rule",
-      "framing",
-      "stretching"
+      "Cubism",
+      "Pointillism",
+      "Surrealism",
+      "Realism"
     ],
     "correct": 1
   },
   {
-    "question": "A palette knife is used for?",
+    "question": "Fresco is painted on?",
     "choices": [
-      "cutting canvas",
-      "mixing or applying paint",
-      "cleaning brushes",
-      "stretching"
+      "dry plaster",
+      "wet plaster",
+      "canvas",
+      "wood"
     ],
     "correct": 1
   },
   {
-    "question": "Tempera was popular in?",
+    "question": "Gouache is similar to watercolor but?",
     "choices": [
-      "modern era",
-      "medieval/Renaissance",
-      "19th century only",
-      "ancient Egypt only"
+      "transparent",
+      "opaque",
+      "oil-based",
+      "plastic"
     ],
     "correct": 1
   },
   {
-    "question": "Gouache is opaque?",
+    "question": "'Wet-on-wet' watercolor produces?",
     "choices": [
-      "oil paint",
-      "watercolor",
-      "ink",
-      "acrylic only"
+      "sharp lines",
+      "soft blends",
+      "crisp edges",
+      "textures"
     ],
     "correct": 1
   },
   {
-    "question": "Linseed oil thins which paint?",
+    "question": "Encaustic painting uses heated?",
     "choices": [
-      "acrylic",
+      "resin",
+      "wax",
       "oil",
-      "watercolor",
-      "tempera"
+      "gesso"
     ],
     "correct": 1
-  }
+  },
+  {
+    "question": "Stippling uses?",
+    "choices": [
+      "broad sweeps",
+      "small dots/marks",
+      "blending",
+      "glazes"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Scumbling' applies?",
+    "choices": [
+      "thick paint",
+      "broken thin layer",
+      "glaze",
+      "wash"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Color theory's primary colors (traditional) are?",
+    "choices": [
+      "red, green, blue",
+      "red, yellow, blue",
+      "cyan, magenta, yellow",
+      "orange, purple, green"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Complementary colors sit?",
+    "choices": [
+      "next to each other",
+      "opposite on color wheel",
+      "adjacent",
+      "same"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Tooth' refers to?",
+    "choices": [
+      "paint texture",
+      "paper/canvas surface roughness",
+      "brush",
+      "gesso"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'mahlstick' is used to?",
+    "choices": [
+      "mix paint",
+      "steady the hand",
+      "prime canvas",
+      "clean brushes"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Caravaggio is known for dramatic?",
+    "choices": [
+      "pointillism",
+      "tenebrism",
+      "cubism",
+      "abstraction"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 'Mona Lisa' is painted on?",
+    "choices": [
+      "canvas",
+      "poplar wood panel",
+      "paper",
+      "metal"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Linseed oil yellows over time more than?",
+    "choices": [
+      "walnut",
+      "poppy",
+      "both",
+      "none"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "'Drying time' for oil paint can be days to?",
+    "choices": [
+      "minutes",
+      "hours",
+      "weeks/months",
+      "years only"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Bob Ross is famous for popularizing?",
+    "choices": [
+      "fresco",
+      "wet-on-wet oil painting",
+      "watercolor",
+      "fresco"
+    ],
+    "correct": 1
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PaintingTechniquesQuizSettings): PaintingTechniquesQuizState {

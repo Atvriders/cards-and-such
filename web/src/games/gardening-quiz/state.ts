@@ -5,22 +5,32 @@ export interface GardeningQuizState { questions: QuizQuestion[]; currentIndex: n
 export type GardeningQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Which season is best for planting most spring bulbs?",
+    "question": "Which nutrient promotes leafy green growth?",
     "choices": [
-      "Spring",
-      "Summer",
-      "Autumn",
-      "Winter"
+      "Phosphorus",
+      "Nitrogen",
+      "Potassium",
+      "Calcium"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The pH of neutral soil is?",
+    "choices": [
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "correct": 2
   },
   {
-    "question": "Compost is also called?",
+    "question": "Composting requires a balance of greens (nitrogen) and?",
     "choices": [
-      "mulch",
-      "black gold",
-      "peat",
-      "loam"
+      "water",
+      "browns (carbon)",
+      "sand",
+      "clay"
     ],
     "correct": 1
   },
@@ -29,181 +39,271 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "choices": [
       "vegetables",
       "fruits",
-      "herbs",
-      "grains"
+      "berries",
+      "tubers"
     ],
     "correct": 1
   },
   {
-    "question": "A pH below 7 means soil is?",
+    "question": "Mulching primarily helps to?",
     "choices": [
-      "alkaline",
-      "neutral",
-      "acidic",
-      "saline"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which tool aerates the lawn?",
-    "choices": [
-      "hoe",
-      "aerator",
-      "spade",
-      "rake"
+      "fertilize",
+      "retain moisture",
+      "kill weeds",
+      "attract bees"
     ],
     "correct": 1
   },
   {
-    "question": "Photosynthesis requires?",
+    "question": "Which plant fixes nitrogen in soil?",
     "choices": [
-      "nitrogen",
-      "sunlight",
-      "oxygen",
-      "calcium"
+      "Tomato",
+      "Bean",
+      "Lettuce",
+      "Onion"
     ],
     "correct": 1
   },
   {
-    "question": "Companion planting pairs basil with?",
+    "question": "Hardiness zones are defined by?",
     "choices": [
-      "roses",
-      "tomatoes",
-      "cabbage",
-      "carrots"
+      "rainfall",
+      "minimum winter temperatures",
+      "sun hours",
+      "altitude"
     ],
     "correct": 1
   },
   {
-    "question": "Pruning roses is best done in?",
+    "question": "Deadheading flowers means removing?",
     "choices": [
-      "midsummer",
-      "late winter",
-      "midwinter",
-      "midautumn"
+      "leaves",
+      "spent blooms",
+      "roots",
+      "stems"
     ],
     "correct": 1
-  },
-  {
-    "question": "Mulch helps the soil by?",
-    "choices": [
-      "retaining moisture",
-      "attracting pests",
-      "hardening",
-      "draining"
-    ],
-    "correct": 0
   },
   {
     "question": "A perennial plant lives for?",
     "choices": [
-      "one year",
+      "one season",
       "two years",
-      "several years",
-      "one season"
+      "more than two years",
+      "one month"
     ],
     "correct": 2
   },
   {
-    "question": "Which is a common nitrogen source?",
+    "question": "Pollinators include bees, butterflies, and?",
     "choices": [
-      "potash",
-      "blood meal",
-      "limestone",
-      "gypsum"
+      "worms",
+      "hummingbirds",
+      "ants",
+      "spiders"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Companion planting' pairs crops to?",
+    "choices": [
+      "look pretty",
+      "benefit each other",
+      "fill space",
+      "save seed"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Photosynthesis converts light into?",
+    "choices": [
+      "heat",
+      "sugar",
+      "oxygen only",
+      "water"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which is a cool-season crop?",
+    "choices": [
+      "Tomato",
+      "Pepper",
+      "Lettuce",
+      "Squash"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Garlic is typically planted in?",
+    "choices": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Worm castings are valued as?",
+    "choices": [
+      "mulch",
+      "fertilizer",
+      "pesticide",
+      "seed"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'rhizome' is a type of?",
+    "choices": [
+      "root",
+      "underground stem",
+      "leaf",
+      "seed"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Dahlia tubers should be lifted before?",
+    "choices": [
+      "spring",
+      "summer",
+      "frost",
+      "rain"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Pruning fruit trees is best done in?",
+    "choices": [
+      "mid-summer",
+      "late winter",
+      "autumn",
+      "never"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which pest is famously deterred by marigolds?",
+    "choices": [
+      "aphids",
+      "nematodes",
+      "slugs",
+      "beetles"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mycorrhizae are beneficial?",
+    "choices": [
+      "bacteria",
+      "fungi",
+      "viruses",
+      "insects"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Heirloom seeds are?",
+    "choices": [
+      "hybrid",
+      "open-pollinated",
+      "sterile",
+      "GMO"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Bolting in lettuce means it is going to?",
+    "choices": [
+      "wilt",
+      "flower/seed",
+      "rot",
+      "yellow"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Hardening off' seedlings means?",
+    "choices": [
+      "fertilizing",
+      "gradual outdoor exposure",
+      "pruning",
+      "watering"
     ],
     "correct": 1
   },
   {
     "question": "Lavender prefers soil that is?",
     "choices": [
-      "wet and clay",
-      "dry and well-drained",
-      "acidic",
-      "saline"
+      "wet",
+      "well-drained",
+      "clay",
+      "acidic"
     ],
     "correct": 1
   },
   {
-    "question": "Bees pollinate via?",
+    "question": "Which is an example of a brassica?",
     "choices": [
-      "wind",
-      "water",
-      "insects",
-      "gravity"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Which is a root vegetable?",
-    "choices": [
-      "lettuce",
-      "carrot",
-      "cabbage",
-      "spinach"
+      "Carrot",
+      "Broccoli",
+      "Tomato",
+      "Pepper"
     ],
     "correct": 1
   },
   {
-    "question": "An annual plant completes its life cycle in?",
+    "question": "Earthworms improve soil by?",
     "choices": [
-      "one year",
-      "two years",
-      "seasons",
-      "decades"
+      "pollinating",
+      "aerating",
+      "spreading seeds",
+      "adding nitrogen"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'cultivar' is a?",
+    "choices": [
+      "wild plant",
+      "cultivated variety",
+      "weed",
+      "tree"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Square foot gardening was popularized by?",
+    "choices": [
+      "Mel Bartholomew",
+      "Monty Don",
+      "James Wong",
+      "Alan Titchmarsh"
     ],
     "correct": 0
   },
   {
-    "question": "A trowel is used for?",
+    "question": "Hydrangea color often depends on soil?",
     "choices": [
-      "digging large holes",
-      "small planting jobs",
-      "cutting branches",
-      "mowing"
+      "moisture",
+      "pH",
+      "temperature",
+      "texture"
     ],
     "correct": 1
   },
   {
-    "question": "Hardening off refers to?",
+    "question": "Which tool is best for cutting small branches?",
     "choices": [
-      "pruning",
-      "acclimating seedlings",
-      "fertilizing",
-      "staking"
+      "Spade",
+      "Secateurs",
+      "Trowel",
+      "Hoe"
     ],
     "correct": 1
   },
-  {
-    "question": "Which plant is a common ground cover?",
-    "choices": [
-      "sunflower",
-      "creeping thyme",
-      "bamboo",
-      "cactus"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Most herbs prefer?",
-    "choices": [
-      "full sun",
-      "deep shade",
-      "partial shade",
-      "no light"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Deadheading means removing?",
-    "choices": [
-      "leaves",
-      "spent flowers",
-      "weeds",
-      "seeds"
-    ],
-    "correct": 1
-  }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: GardeningQuizSettings): GardeningQuizState {

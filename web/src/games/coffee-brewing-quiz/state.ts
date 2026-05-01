@@ -5,205 +5,305 @@ export interface CoffeeBrewingQuizState { questions: QuizQuestion[]; currentInde
 export type CoffeeBrewingQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Espresso brewing time is roughly?",
+    "question": "The two most common coffee species are Arabica and?",
     "choices": [
-      "5 sec",
-      "25-30 sec",
-      "2 min",
-      "5 min"
+      "Liberica",
+      "Robusta",
+      "Excelsa",
+      "Catuai"
     ],
     "correct": 1
   },
   {
-    "question": "Pour-over coffee uses?",
+    "question": "Espresso is brewed under approximately how many bars of pressure?",
+    "choices": [
+      "3",
+      "6",
+      "9",
+      "15"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Pour-over coffee is typically brewed using?",
     "choices": [
       "pressure",
       "gravity drip",
-      "percolation",
-      "French press"
+      "immersion",
+      "percolation"
     ],
     "correct": 1
   },
   {
-    "question": "Ideal brewing water temperature?",
+    "question": "French press is an example of?",
     "choices": [
-      "140°F",
-      "180°F",
-      "195-205°F",
-      "220°F"
+      "drip",
+      "pressure",
+      "immersion brewing",
+      "percolator"
     ],
     "correct": 2
   },
   {
-    "question": "A French press uses?",
+    "question": "Aeropress brewing involves?",
     "choices": [
-      "paper filter",
-      "metal mesh",
-      "gold filter",
+      "high pressure machine",
+      "manual air pressure",
+      "vacuum",
+      "pour-over"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A typical pour-over ratio is around?",
+    "choices": [
+      "1:5",
+      "1:10",
+      "1:16",
+      "1:30"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Light roasts generally have?",
+    "choices": [
+      "less acidity",
+      "more acidity",
+      "more bitterness",
+      "no flavor"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Dark roasts emphasize?",
+    "choices": [
+      "fruit notes",
+      "floral",
+      "bitter and roasted notes",
+      "sweetness"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Optimal brewing water temperature is around?",
+    "choices": [
+      "70\u00b0C",
+      "85\u00b0C",
+      "93\u00b0C",
+      "105\u00b0C"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Espresso shot typical volume is about?",
+    "choices": [
+      "10ml",
+      "30ml",
+      "60ml",
+      "100ml"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Coffee freshness is best within how many weeks of roasting?",
+    "choices": [
+      "1-4",
+      "6-8",
+      "12-16",
       "none"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Cold brew steeps for?",
+    "question": "Cold brew is brewed for how long typically?",
     "choices": [
-      "10 min",
+      "10 minutes",
       "1 hour",
       "12-24 hours",
-      "several days"
+      "1 week"
     ],
     "correct": 2
   },
   {
-    "question": "Light roasts retain more?",
+    "question": "A 'crema' is the foam atop a fresh?",
     "choices": [
-      "caffeine",
-      "oils",
-      "sugar",
-      "fat"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "An AeroPress uses?",
-    "choices": [
-      "centrifuge",
-      "manual pressure",
-      "electricity",
-      "steam only"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Burr grinders produce?",
-    "choices": [
-      "uneven grind",
-      "even grind",
-      "powder",
-      "flakes"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Crema is the foam on?",
-    "choices": [
-      "cappuccino",
-      "espresso",
+      "latte",
       "drip coffee",
+      "espresso",
       "cold brew"
     ],
-    "correct": 1
+    "correct": 2
   },
   {
-    "question": "A typical cappuccino is?",
+    "question": "Coffee originated in?",
     "choices": [
-      "1/3 espresso 1/3 milk 1/3 foam",
-      "all milk",
-      "all foam",
-      "drip coffee"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "The bean is technically a?",
-    "choices": [
-      "nut",
-      "seed",
-      "fruit",
-      "leaf"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Arabica is generally?",
-    "choices": [
-      "bitter & strong",
-      "smoother & sweeter",
-      "caffeinated",
-      "acidic"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A V60 is a?",
-    "choices": [
-      "French press",
-      "pour-over dripper",
-      "espresso machine",
-      "grinder"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Robusta has more?",
-    "choices": [
-      "sugar",
-      "caffeine",
-      "oil",
-      "aroma"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Ratio rule of thumb is?",
-    "choices": [
-      "1:5 coffee to water",
-      "1:15 coffee to water",
-      "1:30",
-      "1:100"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Stovetop moka pots are popular in?",
-    "choices": [
-      "Italy",
       "Brazil",
       "Ethiopia",
+      "Colombia",
       "Vietnam"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "Which country produces the most coffee?",
+    "question": "The Chemex was invented in?",
     "choices": [
-      "Vietnam",
-      "Colombia",
-      "Brazil",
-      "Ethiopia"
+      "1901",
+      "1941",
+      "1962",
+      "1985"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "V60 was created by which company?",
+    "choices": [
+      "Bodum",
+      "Hario",
+      "Kalita",
+      "Aeropress"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Espresso grind is typically?",
+    "choices": [
+      "coarse",
+      "medium",
+      "fine",
+      "extra coarse"
     ],
     "correct": 2
   },
   {
-    "question": "Bloom (in pour-over) refers to?",
+    "question": "French press grind is typically?",
     "choices": [
-      "foaming top",
-      "initial CO2 release",
-      "old grounds",
-      "oil layer"
+      "fine",
+      "medium-fine",
+      "coarse",
+      "powder"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "'Bloom' in pour-over refers to?",
+    "choices": [
+      "foam",
+      "CO2 release on first pour",
+      "crema",
+      "cooling"
     ],
     "correct": 1
   },
   {
-    "question": "A flat white originated in?",
+    "question": "Decaf coffee retains roughly what % of caffeine?",
     "choices": [
-      "UK",
-      "Australia/NZ",
+      "50",
+      "25",
+      "2-3",
+      "0"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "A 'flat white' originated in?",
+    "choices": [
       "Italy",
+      "USA",
+      "Australia/NZ",
       "France"
     ],
+    "correct": 2
+  },
+  {
+    "question": "Robusta beans contain more caffeine than?",
+    "choices": [
+      "green tea",
+      "Arabica",
+      "Liberica",
+      "matcha"
+    ],
     "correct": 1
   },
   {
-    "question": "Decaf still has about?",
+    "question": "Barista is the Italian word for?",
     "choices": [
-      "0%",
-      "2-3%",
-      "20%",
-      "50%"
+      "server",
+      "bartender/barperson",
+      "chef",
+      "host"
     ],
     "correct": 1
-  }
+  },
+  {
+    "question": "Specialty coffee scores at least how many points (SCA)?",
+    "choices": [
+      "60",
+      "70",
+      "80",
+      "90"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Moka pot brews on the?",
+    "choices": [
+      "stovetop",
+      "oven",
+      "microwave",
+      "fridge"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Robusta is preferred by some for espresso for its?",
+    "choices": [
+      "acidity",
+      "crema and body",
+      "fruit notes",
+      "sweetness"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Single-origin means coffee from?",
+    "choices": [
+      "one farm/region",
+      "blends",
+      "blended roasters",
+      "grocery"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Coffee cherry contains how many beans typically?",
+    "choices": [
+      "1",
+      "2",
+      "4",
+      "6"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Tamping pressure for espresso is roughly?",
+    "choices": [
+      "1 lb",
+      "5 lbs",
+      "30 lbs",
+      "100 lbs"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "'Channeling' in espresso causes?",
+    "choices": [
+      "even extraction",
+      "uneven extraction",
+      "cooling",
+      "crema"
+    ],
+    "correct": 1
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CoffeeBrewingQuizSettings): CoffeeBrewingQuizState {

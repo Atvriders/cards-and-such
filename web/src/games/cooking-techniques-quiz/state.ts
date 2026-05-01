@@ -5,205 +5,305 @@ export interface CookingTechniquesQuizState { questions: QuizQuestion[]; current
 export type CookingTechniquesQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Sautéing means cooking quickly in?",
+    "question": "Saut\u00e9ing uses which type of heat?",
     "choices": [
-      "oil over high heat",
-      "water over low heat",
-      "oven",
-      "steam"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Braising is a combination of?",
-    "choices": [
-      "dry & wet heat",
-      "grilling & smoking",
-      "steaming & boiling",
-      "baking & frying"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Caramelization occurs at approximately?",
-    "choices": [
-      "100°F",
-      "200°F",
-      "300°F",
-      "400°F"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Sous vide cooking uses?",
-    "choices": [
-      "dry heat",
-      "precise water bath",
-      "steam",
-      "oven"
+      "Low slow",
+      "High dry quick",
+      "Wet steam",
+      "Cold"
     ],
     "correct": 1
   },
   {
-    "question": "A roux is a mixture of?",
+    "question": "Braising combines searing with?",
     "choices": [
-      "fat & flour",
-      "fat & sugar",
-      "stock & wine",
-      "milk & cream"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Blanching means briefly?",
-    "choices": [
-      "boiling then ice bath",
-      "steaming",
       "frying",
-      "baking"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Searing creates flavor through the?",
-    "choices": [
-      "Maillard reaction",
-      "oxidation",
-      "fermentation",
-      "gelation"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Deglazing uses liquid to?",
-    "choices": [
-      "clean fond from pan",
-      "clean dishes",
-      "cool down food",
-      "thin sauce"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tempering chocolate stabilizes?",
-    "choices": [
-      "sugar",
-      "cocoa butter crystals",
-      "milk",
-      "vanilla"
+      "slow moist cooking",
+      "grilling",
+      "baking dry"
     ],
     "correct": 1
   },
   {
-    "question": "Folding is a gentle technique to?",
+    "question": "Blanching vegetables is followed by?",
     "choices": [
-      "combine without deflating",
-      "separate",
-      "beat air in",
-      "cool"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Reducing a sauce means?",
-    "choices": [
-      "cooling",
-      "simmering to thicken",
-      "diluting",
-      "straining"
+      "roasting",
+      "ice bath",
+      "frying",
+      "drying"
     ],
     "correct": 1
   },
   {
-    "question": "Brining adds?",
+    "question": "Sous vide cooks food in?",
     "choices": [
-      "acidity",
-      "moisture & seasoning",
-      "crispness",
-      "sweetness"
+      "oil",
+      "vacuum-sealed water bath",
+      "steam",
+      "smoke"
     ],
     "correct": 1
   },
   {
-    "question": "Confit means cooking slowly in?",
+    "question": "'Mise en place' means?",
+    "choices": [
+      "taste as you go",
+      "everything in place",
+      "season heavily",
+      "reduce sauce"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Maillard reaction produces?",
+    "choices": [
+      "caramelization of sugar",
+      "browning and flavor",
+      "steam",
+      "smoke"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'roux' is made from flour and?",
     "choices": [
       "water",
-      "wine",
-      "fat",
-      "oven"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Poaching uses water at?",
-    "choices": [
-      "below boiling",
-      "rolling boil",
-      "high simmer",
-      "vapor only"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Mise en place means?",
-    "choices": [
-      "cleaning station",
-      "everything in its place",
-      "menu plan",
-      "table setting"
+      "butter",
+      "milk",
+      "oil"
     ],
     "correct": 1
   },
   {
-    "question": "Julienne is a cut described as?",
+    "question": "Deglazing a pan uses?",
     "choices": [
-      "thin matchstick",
-      "cubes",
-      "slices",
-      "mince"
+      "cold water",
+      "liquid to lift fond",
+      "oil",
+      "cream"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "An emulsion combines?",
+    "question": "Caramelization happens with?",
     "choices": [
-      "two solids",
-      "two gases",
-      "oil & water",
-      "sugars"
+      "proteins",
+      "sugars",
+      "fats",
+      "starches"
     ],
-    "correct": 2
+    "correct": 1
+  },
+  {
+    "question": "Poaching is cooking gently in?",
+    "choices": [
+      "oil",
+      "liquid below boiling",
+      "steam",
+      "fat"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Brunoise' is a cut of?",
+    "choices": [
+      "1cm cubes",
+      "very fine 3mm dice",
+      "julienne",
+      "slices"
+    ],
+    "correct": 1
   },
   {
     "question": "A bain-marie is a?",
     "choices": [
-      "water bath",
-      "oven",
       "pressure cooker",
-      "chiller"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Roasting uses primarily?",
-    "choices": [
-      "dry heat in oven",
-      "wet heat",
-      "steam",
-      "direct flame"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Sweating onions means?",
-    "choices": [
-      "fast browning",
-      "slow cook without color",
-      "blanching",
-      "caramelizing"
+      "water bath",
+      "stockpot",
+      "steamer"
     ],
     "correct": 1
-  }
+  },
+  {
+    "question": "Tempering chocolate creates?",
+    "choices": [
+      "a soft texture",
+      "glossy snap",
+      "grainy finish",
+      "liquid form"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Reduction' concentrates flavor by?",
+    "choices": [
+      "adding water",
+      "evaporating liquid",
+      "freezing",
+      "whipping"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A chiffonade is used for?",
+    "choices": [
+      "roots",
+      "leafy herbs",
+      "onions",
+      "meats"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Confit involves cooking in?",
+    "choices": [
+      "water",
+      "fat at low temp",
+      "brine",
+      "wine"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Searing aims to develop?",
+    "choices": [
+      "pink center",
+      "crust and color",
+      "steam",
+      "tenderness"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Emulsification combines?",
+    "choices": [
+      "sugar and water",
+      "oil and water",
+      "flour and milk",
+      "egg and salt"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A bechamel is a sauce made from milk and?",
+    "choices": [
+      "roux",
+      "cream",
+      "butter only",
+      "egg"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Al dente' refers to pasta that is?",
+    "choices": [
+      "overcooked",
+      "firm to the bite",
+      "raw",
+      "mushy"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Smoking foods uses?",
+    "choices": [
+      "raw heat",
+      "wood smoke",
+      "ice",
+      "steam"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Folding' batter prevents?",
+    "choices": [
+      "under-mixing",
+      "loss of air",
+      "over-flouring",
+      "burning"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Proofing dough means?",
+    "choices": [
+      "kneading",
+      "letting it rise",
+      "baking",
+      "cooling"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Dry brining uses?",
+    "choices": [
+      "water",
+      "salt",
+      "sugar",
+      "vinegar"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Resting' cooked meat allows?",
+    "choices": [
+      "evaporation",
+      "juice redistribution",
+      "cooling",
+      "browning"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Flamb\u00e9ing involves igniting?",
+    "choices": [
+      "water",
+      "alcohol",
+      "oil",
+      "sugar"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A double boiler is used for gentle?",
+    "choices": [
+      "frying",
+      "melting/cooking",
+      "poaching",
+      "boiling"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Whisking egg whites incorporates?",
+    "choices": [
+      "fat",
+      "air",
+      "sugar",
+      "heat"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pickling preserves food using?",
+    "choices": [
+      "sugar",
+      "acid/brine",
+      "oil",
+      "smoke"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pan-frying uses more oil than?",
+    "choices": [
+      "deep frying",
+      "saut\u00e9ing",
+      "boiling",
+      "sous vide"
+    ],
+    "correct": 1
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: CookingTechniquesQuizSettings): CookingTechniquesQuizState {

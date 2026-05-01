@@ -95,11 +95,11 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "Phil Hellmuth has won how many WSOP bracelets (record)?",
+    "question": "Phil Hellmuth holds the record with how many WSOP bracelets?",
     "choices": [
       "10",
       "13",
-      "16",
+      "17",
       "20"
     ],
     "correct": 2
@@ -125,7 +125,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "In Stud, hole cards remain?",
+    "question": "In Seven-Card Stud, hole cards are?",
     "choices": [
       "face up",
       "hidden",
@@ -160,7 +160,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Super/System",
       "Caro's Book",
       "Theory of Poker",
-      "Harrington"
+      "Harrington on Hold'em"
     ],
     "correct": 0
   },
@@ -187,7 +187,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   {
     "question": "Caribbean Stud is played against?",
     "choices": [
-      "players",
+      "other players",
       "the dealer",
       "the bank",
       "other tables"
@@ -203,7 +203,107 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Jacks"
     ],
     "correct": 0
-  }
+  },
+  {
+    "question": "Chris Moneymaker won the WSOP Main Event in?",
+    "choices": [
+      "2001",
+      "2002",
+      "2003",
+      "2004"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "The 'turn' is the?",
+    "choices": [
+      "3rd street",
+      "4th community card",
+      "5th street",
+      "river"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'The river' is the?",
+    "choices": [
+      "first card",
+      "third card",
+      "fifth community card",
+      "showdown"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "A 'rake' is?",
+    "choices": [
+      "pot fee",
+      "big blind",
+      "tip",
+      "ante"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Stu Ungar won the WSOP Main Event how many times?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Pot-Limit Omaha is abbreviated?",
+    "choices": [
+      "NLHE",
+      "PLO",
+      "HORSE",
+      "LHE"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Cowboys' in poker slang means?",
+    "choices": [
+      "AA",
+      "KK",
+      "QQ",
+      "JJ"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Daniel Negreanu is from which country?",
+    "choices": [
+      "USA",
+      "Canada",
+      "Romania",
+      "UK"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'set' is three of a kind made with?",
+    "choices": [
+      "board cards",
+      "a pocket pair",
+      "trip kings",
+      "none"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The lowest possible straight is called?",
+    "choices": [
+      "wheel",
+      "broadway",
+      "baby",
+      "mini"
+    ],
+    "correct": 0
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PokerHistoryQuizSettings): PokerHistoryQuizState {

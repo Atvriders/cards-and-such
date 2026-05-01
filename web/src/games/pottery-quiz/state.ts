@@ -5,205 +5,305 @@ export interface PotteryQuizState { questions: QuizQuestion[]; currentIndex: num
 export type PotteryQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Throwing pottery refers to?",
+    "question": "'Throwing' clay refers to?",
     "choices": [
-      "smashing clay",
-      "wheel forming",
+      "firing",
+      "shaping on a wheel",
       "glazing",
-      "firing"
+      "drying"
     ],
     "correct": 1
   },
   {
-    "question": "Bisque firing is?",
+    "question": "Kilns reach temperatures up to about?",
     "choices": [
-      "the final firing",
-      "the first firing",
-      "glaze firing",
-      "wood firing"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Clay must be ___ before firing?",
-    "choices": [
-      "dry",
-      "wet",
-      "frozen",
-      "glazed"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A kiln is a?",
-    "choices": [
-      "wheel",
-      "oven",
-      "mold",
-      "storage"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Stoneware fires at approximately?",
-    "choices": [
-      "500°F",
-      "1200°F",
-      "2200°F",
-      "3500°F"
+      "500\u00b0C",
+      "800\u00b0C",
+      "1300\u00b0C",
+      "2500\u00b0C"
     ],
     "correct": 2
   },
   {
-    "question": "Earthenware is fired at?",
+    "question": "Bisque firing is the?",
     "choices": [
-      "lower temps",
-      "higher temps",
-      "same as porcelain",
-      "won't fire"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Porcelain is known for being?",
-    "choices": [
-      "coarse",
-      "translucent when thin",
-      "heavy",
-      "matte"
+      "glaze firing",
+      "first firing",
+      "raku",
+      "none"
     ],
     "correct": 1
   },
   {
-    "question": "Wedging removes?",
+    "question": "Clay 'leather-hard' is ready for?",
     "choices": [
-      "air bubbles",
-      "color",
-      "glaze",
-      "kiln dust"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Slip is a?",
-    "choices": [
-      "dry powder",
-      "liquid clay",
-      "glaze type",
-      "tool"
+      "throwing",
+      "trimming/handles",
+      "glazing",
+      "firing"
     ],
     "correct": 1
   },
   {
-    "question": "Greenware is?",
+    "question": "The hottest cone (lowest number) is for?",
     "choices": [
-      "unfired clay",
-      "glazed only",
-      "fired bisque",
+      "earthenware",
+      "stoneware",
+      "porcelain",
       "raku"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
-    "question": "Raku originated in?",
+    "question": "Earthenware fires at?",
+    "choices": [
+      "high temps",
+      "low temps",
+      "cone 10",
+      "cone 15"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Stoneware fires typically at cones?",
+    "choices": [
+      "04-06",
+      "6-10",
+      "20+",
+      "cold"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Porcelain originated in?",
+    "choices": [
+      "Egypt",
+      "China",
+      "Greece",
+      "Mesopotamia"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Slip' is liquid clay used for?",
+    "choices": [
+      "glazing",
+      "joining/decoration",
+      "throwing",
+      "drying"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Raku firing originated in?",
     "choices": [
       "China",
       "Japan",
       "Korea",
-      "India"
+      "Vietnam"
     ],
     "correct": 1
   },
   {
-    "question": "Coil pottery is built by?",
+    "question": "'Wedging' clay removes?",
     "choices": [
-      "throwing",
-      "stacking ropes of clay",
-      "molding",
-      "slab"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A pug mill is used to?",
-    "choices": [
-      "fire pottery",
-      "mix clay",
+      "water",
+      "air bubbles",
       "glaze",
-      "trim"
+      "grog"
     ],
     "correct": 1
   },
   {
-    "question": "Saggar firing involves?",
+    "question": "Coiling is a hand-building technique using?",
     "choices": [
-      "enclosing pieces in containers",
-      "pit firing",
-      "raku only",
-      "oxidation"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Centering is critical when?",
-    "choices": [
-      "glazing",
-      "wheel throwing",
-      "trimming",
-      "loading kiln"
+      "slabs",
+      "ropes/coils of clay",
+      "pinches",
+      "molds"
     ],
     "correct": 1
   },
   {
-    "question": "Ash glazes use?",
+    "question": "Pinch pots are made by?",
     "choices": [
-      "sand",
-      "plant ash",
-      "oils",
-      "oxides only"
+      "wheel",
+      "pressing thumb into ball",
+      "slabs",
+      "molds"
     ],
     "correct": 1
   },
   {
-    "question": "Cone numbers measure?",
-    "choices": [
-      "clay weight",
-      "kiln temperature",
-      "wheel speed",
-      "glaze thickness"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Slab construction uses?",
+    "question": "Slab building uses?",
     "choices": [
       "coils",
-      "flat sheets",
-      "wheel",
-      "slip casting"
+      "flat sheets of clay",
+      "pinches",
+      "molds"
     ],
     "correct": 1
   },
   {
-    "question": "Sgraffito is a technique of?",
+    "question": "Glazes are essentially?",
     "choices": [
+      "paint",
+      "glass forming on clay",
+      "plastic",
+      "wax"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Reduction' firing reduces?",
+    "choices": [
+      "temperature",
+      "oxygen in kiln",
+      "clay",
+      "fuel"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Sgraffito' decoration is?",
+    "choices": [
+      "dotting",
       "scratching through slip",
-      "throwing",
       "glazing",
-      "firing"
+      "painting"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Greenware is clay that is?",
+    "choices": [
+      "fired",
+      "unfired",
+      "glazed",
+      "green-colored"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Grog' added to clay improves?",
+    "choices": [
+      "color",
+      "strength/thermal shock",
+      "glaze fit",
+      "plasticity"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A potter's wheel originated around?",
+    "choices": [
+      "3500 BCE",
+      "500 CE",
+      "1200 CE",
+      "1800 CE"
     ],
     "correct": 0
   },
   {
-    "question": "Underglaze is applied?",
+    "question": "Saggar firing protects pieces using?",
     "choices": [
-      "after final firing",
-      "before glaze",
-      "instead of glaze",
-      "only on raw clay"
+      "water",
+      "container/saggar in kiln",
+      "oxygen",
+      "heat"
     ],
     "correct": 1
-  }
+  },
+  {
+    "question": "Crystalline glazes form crystals during?",
+    "choices": [
+      "bisque",
+      "cooling phase",
+      "drying",
+      "wedging"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Celadon is a famous green/blue?",
+    "choices": [
+      "clay",
+      "glaze",
+      "wheel",
+      "kiln"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Majolica is tin-glazed?",
+    "choices": [
+      "porcelain",
+      "earthenware",
+      "stoneware",
+      "raku"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Bone china includes?",
+    "choices": [
+      "bone ash",
+      "glass",
+      "metal",
+      "sand"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Soda firing introduces sodium during?",
+    "choices": [
+      "wedging",
+      "firing",
+      "drying",
+      "glazing"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Pyrometric cones measure?",
+    "choices": [
+      "temperature only",
+      "heatwork (time+temp)",
+      "weight",
+      "color"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Crawling' is a glaze defect of?",
+    "choices": [
+      "cracking",
+      "beading/separating",
+      "pinholing",
+      "crazing"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Crazing' is a glaze defect of?",
+    "choices": [
+      "bubbles",
+      "fine cracks",
+      "running",
+      "matte spots"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A potter's 'rib' is a tool for?",
+    "choices": [
+      "wedging",
+      "smoothing/shaping",
+      "firing",
+      "glazing"
+    ],
+    "correct": 1
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PotteryQuizSettings): PotteryQuizState {

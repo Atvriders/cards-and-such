@@ -15,7 +15,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "Bobby Fischer became champion in what year?",
+    "question": "Bobby Fischer became World Champion in what year?",
     "choices": [
       "1969",
       "1972",
@@ -25,7 +25,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "The Sicilian Defense begins with which move by Black?",
+    "question": "The Sicilian Defense begins with which Black move?",
     "choices": [
       "e5",
       "c5",
@@ -45,39 +45,19 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 1
   },
   {
-    "question": "Garry Kasparov lost to which computer in 1997?",
+    "question": "Garry Kasparov lost to which IBM computer in 1997?",
     "choices": [
       "Deep Thought",
       "Deep Blue",
-      "Stockfish",
-      "AlphaZero"
+      "Fritz",
+      "Stockfish"
     ],
     "correct": 1
   },
   {
-    "question": "The Queen's Gambit begins with?",
+    "question": "How many squares on a standard chess board?",
     "choices": [
-      "1.e4",
-      "1.d4",
-      "1.Nf3",
-      "1.c4"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which player was known as 'The Magician of Riga'?",
-    "choices": [
-      "Spassky",
-      "Tal",
-      "Petrosian",
-      "Botvinnik"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "How many squares on a chessboard?",
-    "choices": [
-      "48",
+      "49",
       "56",
       "64",
       "72"
@@ -85,87 +65,177 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 2
   },
   {
-    "question": "The 'Immortal Game' was played by Anderssen vs?",
+    "question": "Which piece moves only diagonally?",
     "choices": [
-      "Steinitz",
-      "Kieseritzky",
-      "Morphy",
-      "Zukertort"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Which opening starts 1.e4 e5 2.Nf3 Nc6 3.Bb5?",
-    "choices": [
-      "Italian",
-      "Ruy Lopez",
-      "Scotch",
-      "King's Gambit"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Anatoly Karpov was champion from?",
-    "choices": [
-      "1969-1985",
-      "1972-1975",
-      "1975-1985",
-      "1985-2000"
+      "Rook",
+      "Knight",
+      "Bishop",
+      "Queen"
     ],
     "correct": 2
   },
   {
-    "question": "The 'King's Indian Defense' is a defense against?",
+    "question": "The opening move 1.e4 e5 2.Nf3 Nc6 3.Bb5 is called?",
     "choices": [
-      "1.e4",
-      "1.d4",
-      "1.c4",
-      "1.Nf3"
+      "Italian Game",
+      "Ruy Lopez",
+      "Scotch Game",
+      "Vienna Game"
     ],
     "correct": 1
   },
   {
-    "question": "FIDE was founded in?",
+    "question": "En passant can only be played by which piece?",
+    "choices": [
+      "Knight",
+      "Bishop",
+      "Pawn",
+      "Rook"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Castling moves the king how many squares?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who held the World Championship from 1985 to 2000?",
+    "choices": [
+      "Karpov",
+      "Kasparov",
+      "Kramnik",
+      "Spassky"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "FIDE was founded in what year?",
     "choices": [
       "1924",
       "1934",
-      "1948",
-      "1950"
+      "1944",
+      "1954"
     ],
     "correct": 0
   },
   {
-    "question": "Which player wrote 'My System'?",
+    "question": "The Queen's Gambit begins with?",
     "choices": [
-      "Capablanca",
-      "Alekhine",
-      "Nimzowitsch",
-      "Reti"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The chess piece that moves in an L-shape is the?",
-    "choices": [
-      "Bishop",
-      "Knight",
-      "Rook",
-      "Queen"
+      "1.e4",
+      "1.d4 d5 2.c4",
+      "1.Nf3",
+      "1.c4"
     ],
     "correct": 1
   },
   {
-    "question": "Who is Magnus Carlsen's home country?",
+    "question": "Paul Morphy was from which country?",
     "choices": [
-      "Sweden",
-      "Denmark",
-      "Norway",
-      "Iceland"
+      "England",
+      "France",
+      "USA",
+      "Germany"
     ],
     "correct": 2
   },
   {
-    "question": "Capablanca was from?",
+    "question": "The longest official world title match was between Karpov and?",
+    "choices": [
+      "Kasparov",
+      "Korchnoi",
+      "Spassky",
+      "Fischer"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which Indian became World Champion in 2007?",
+    "choices": [
+      "Anand",
+      "Sasikiran",
+      "Harikrishna",
+      "Negi"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "A 'zugzwang' position means?",
+    "choices": [
+      "Forced win",
+      "Any move worsens",
+      "Stalemate",
+      "Forced draw"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The fastest possible checkmate is called?",
+    "choices": [
+      "Scholar's mate",
+      "Fool's mate",
+      "Smothered mate",
+      "Back rank mate"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Who wrote 'My System'?",
+    "choices": [
+      "Capablanca",
+      "Nimzowitsch",
+      "Tarrasch",
+      "Lasker"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Vishy Anand's home city is?",
+    "choices": [
+      "Mumbai",
+      "Chennai",
+      "Delhi",
+      "Kolkata"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The King's Indian Defense is played by?",
+    "choices": [
+      "White",
+      "Black",
+      "Either",
+      "Computers"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "How many pawns does each side begin with?",
+    "choices": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Stalemate results in?",
+    "choices": [
+      "White wins",
+      "Black wins",
+      "Draw",
+      "Replay"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Capablanca was from which country?",
     "choices": [
       "Cuba",
       "Spain",
@@ -175,35 +245,65 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "The longest theoretical chess game is around?",
+    "question": "Hou Yifan is best known for being?",
     "choices": [
-      "50 moves",
-      "100 moves",
-      "5,949 moves",
-      "Unlimited"
+      "Youngest GM",
+      "Top women's player",
+      "Streamer",
+      "Trainer"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "AlphaZero was developed by?",
+    "choices": [
+      "IBM",
+      "Google DeepMind",
+      "Microsoft",
+      "OpenAI"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The 50-move rule allows a draw if no pawn moves and no?",
+    "choices": [
+      "Check",
+      "Capture",
+      "Castle",
+      "Promotion"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Which piece is worth approximately 9 points?",
+    "choices": [
+      "Bishop",
+      "Rook",
+      "Queen",
+      "Knight"
     ],
     "correct": 2
   },
   {
-    "question": "Stalemate results in?",
+    "question": "Mikhail Tal was nicknamed?",
     "choices": [
-      "Win",
-      "Loss",
-      "Draw",
-      "Replay"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "The 'Fool's Mate' takes how many moves?",
-    "choices": [
-      "2",
-      "3",
-      "4",
-      "5"
+      "Magician of Riga",
+      "Iron Tigran",
+      "Lion of London",
+      "Beast of Baku"
     ],
     "correct": 0
-  }
+  },
+  {
+    "question": "The Berlin Defense is a variation of?",
+    "choices": [
+      "Sicilian",
+      "Ruy Lopez",
+      "French",
+      "Caro-Kann"
+    ],
+    "correct": 1
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ChessHistoryQuizSettings): ChessHistoryQuizState {

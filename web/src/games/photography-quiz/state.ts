@@ -5,205 +5,305 @@ export interface PhotographyQuizState { questions: QuizQuestion[]; currentIndex:
 export type PhotographyQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Aperture is measured in?",
+    "question": "Aperture controls?",
     "choices": [
-      "seconds",
-      "f-stops",
-      "ISO",
-      "mm"
+      "shutter speed",
+      "amount of light/depth of field",
+      "focus",
+      "ISO"
     ],
     "correct": 1
   },
   {
-    "question": "A higher ISO means?",
+    "question": "A lower f-number means?",
     "choices": [
-      "less light sensitivity",
-      "more light sensitivity",
-      "faster shutter",
-      "longer focus"
+      "smaller aperture",
+      "larger aperture",
+      "slower shutter",
+      "more grain"
     ],
     "correct": 1
   },
   {
-    "question": "Shutter speed of 1/1000s is?",
+    "question": "ISO measures?",
     "choices": [
-      "slow",
-      "very fast",
-      "moderate",
-      "one second"
+      "lens length",
+      "sensor sensitivity",
+      "aperture",
+      "shutter"
     ],
     "correct": 1
   },
   {
-    "question": "A wider aperture has a smaller?",
+    "question": "The 'rule of thirds' helps with?",
     "choices": [
-      "f-number",
-      "ISO",
-      "focal length",
-      "sensor"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Rule of thirds divides image into?",
-    "choices": [
-      "2 parts",
-      "6 parts",
-      "9 parts",
-      "12 parts"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Ansel Adams is famous for?",
-    "choices": [
-      "portraits",
-      "B&W landscapes",
-      "war photos",
-      "fashion"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "DSLR stands for?",
-    "choices": [
-      "Digital Single Lens Reflex",
-      "Digital Standard Lens Range",
-      "Digital Sensor Lens Reflector",
-      "Direct Sensor Lens Read"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Bokeh refers to?",
-    "choices": [
-      "framing",
-      "blurry background quality",
-      "tone",
-      "focus"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A telephoto lens has?",
-    "choices": [
-      "short focal length",
-      "long focal length",
-      "fixed focal length",
-      "variable aperture only"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Depth of field controls?",
-    "choices": [
-      "color",
-      "focus area depth",
       "exposure",
-      "contrast"
+      "composition",
+      "focusing",
+      "white balance"
     ],
     "correct": 1
   },
   {
-    "question": "RAW files are?",
+    "question": "Shutter speed of 1/1000s is best for?",
     "choices": [
-      "compressed",
-      "uncompressed image data",
-      "JPEG variants",
-      "video format"
+      "star trails",
+      "freezing motion",
+      "long exposure",
+      "panning"
     ],
     "correct": 1
   },
   {
-    "question": "Henri Cartier-Bresson coined?",
+    "question": "'Bokeh' refers to?",
     "choices": [
-      "The decisive moment",
-      "Zone system",
-      "Bulb mode",
-      "Flash sync"
+      "sharpness",
+      "aesthetic blur",
+      "color cast",
+      "flare"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
-    "question": "Golden hour is just after?",
+    "question": "HDR stands for?",
     "choices": [
+      "High Definition Resolution",
+      "High Dynamic Range",
+      "Hyper Drive",
+      "High Density"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 50mm lens on full frame is considered?",
+    "choices": [
+      "wide",
+      "standard",
+      "telephoto",
+      "macro"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Golden hour occurs?",
+    "choices": [
+      "midday",
+      "just after sunrise/before sunset",
       "midnight",
-      "sunrise/before sunset",
-      "noon",
-      "midnight"
+      "at noon"
     ],
     "correct": 1
   },
   {
-    "question": "A prime lens has?",
+    "question": "Long exposure photography requires?",
+    "choices": [
+      "high ISO",
+      "tripod and slow shutter",
+      "fast aperture",
+      "flash"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Raw files retain?",
+    "choices": [
+      "compressed JPEG data",
+      "more sensor data",
+      "less data",
+      "no metadata"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "White balance corrects?",
+    "choices": [
+      "focus",
+      "color casts",
+      "sharpness",
+      "exposure"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'prime lens' has?",
     "choices": [
       "zoom",
       "fixed focal length",
-      "variable focal length",
-      "macro only"
+      "tilt",
+      "macro"
     ],
     "correct": 1
   },
   {
-    "question": "Macro photography focuses on?",
+    "question": "Depth of field is shallower with?",
     "choices": [
-      "very small subjects close-up",
-      "far away",
-      "portraits",
-      "landscapes"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Exposure is the combination of?",
-    "choices": [
-      "aperture, shutter, ISO",
-      "focus, shutter, color",
-      "aperture, color, ISO",
-      "white balance, ISO, focus"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "A lower f-number lets in?",
-    "choices": [
-      "less light",
-      "more light",
-      "same light",
-      "no light"
+      "small aperture",
+      "large aperture",
+      "small ISO",
+      "fast shutter"
     ],
     "correct": 1
   },
   {
-    "question": "The 'magic hour' refers to?",
-    "choices": [
-      "midday",
-      "golden hour",
-      "blue hour",
-      "midnight"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A tripod helps with?",
+    "question": "The exposure triangle is aperture, shutter, and?",
     "choices": [
       "focus",
-      "stability",
+      "ISO",
+      "white balance",
+      "focal length"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Macro photography emphasizes?",
+    "choices": [
+      "wide landscapes",
+      "close-up small subjects",
+      "distant subjects",
+      "panoramas"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A polarizer reduces?",
+    "choices": [
+      "light",
+      "reflections and glare",
+      "noise",
+      "sharpness"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Ansel Adams was known for?",
+    "choices": [
+      "fashion",
+      "landscape",
+      "sports",
+      "journalism"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "The Zone System was developed by?",
+    "choices": [
+      "Adams and Archer",
+      "Cartier-Bresson",
+      "Eggleston",
+      "Avedon"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Decisive moment' is associated with?",
+    "choices": [
+      "Adams",
+      "Cartier-Bresson",
+      "Steichen",
+      "Maier"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "A 'crop sensor' is smaller than?",
+    "choices": [
+      "medium format",
+      "full frame",
+      "both",
+      "neither"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Diffraction softens images at?",
+    "choices": [
+      "wide apertures",
+      "very small apertures",
+      "high ISO",
+      "fast shutter"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Histogram shows?",
+    "choices": [
+      "focus",
+      "tonal distribution",
+      "colors only",
+      "sharpness"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Reciprocity means?",
+    "choices": [
+      "focus law",
+      "equivalent exposures",
+      "color law",
+      "ISO law"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Hyperfocal distance maximizes?",
+    "choices": [
+      "bokeh",
+      "depth of field",
       "exposure",
       "color"
     ],
     "correct": 1
   },
   {
-    "question": "Histograms show?",
+    "question": "A graduated ND filter darkens?",
     "choices": [
-      "focus",
-      "tonal distribution",
-      "color saturation",
-      "focal length"
+      "whole frame",
+      "one half/sky",
+      "corners",
+      "shadows"
     ],
     "correct": 1
-  }
+  },
+  {
+    "question": "Chromatic aberration is?",
+    "choices": [
+      "motion blur",
+      "color fringing",
+      "dust",
+      "banding"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Mirrorless cameras lack a?",
+    "choices": [
+      "sensor",
+      "reflex mirror",
+      "viewfinder",
+      "battery"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "'Stopping down' means using a?",
+    "choices": [
+      "wider aperture",
+      "smaller aperture",
+      "faster shutter",
+      "higher ISO"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "Daguerreotype was an early form of?",
+    "choices": [
+      "video",
+      "photography",
+      "printing",
+      "engraving"
+    ],
+    "correct": 1
+  },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: PhotographyQuizSettings): PhotographyQuizState {
