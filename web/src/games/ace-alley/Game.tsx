@@ -6,9 +6,9 @@ import "./Game.css";
 export function AceAlleyGame({ state, dispatch, onGameOver }: GameProps<AceAlleyState, AceAlleySettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><div>Aces: {state.aces}</div><div className="cm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="cm-wrap aceall-wrap"><div className="cm-done"><h2>Done!</h2><div>Aces: {state.aces}</div><div className="cm-final">{state.score} pts</div></div></div>;
   return (
-    <div className="cm-wrap">
+    <div className="cm-wrap aceall-wrap">
       <div className="cm-info">Draw {state.draw} / {TOTAL_DRAWS}</div>
       <div className="cm-score">{state.score} pts (Aces: {state.aces})</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}

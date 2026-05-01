@@ -1,2 +1,72 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* 1920s-quiz - unique prefix .g192qui-* + themed palette (engine: .trivia-wrap). */
 @import "../../engines/quiz/quiz.css";
+
+:root {
+  --g192qui-primary: #aa52e9;
+  --g192qui-accent: #e532af;
+  --g192qui-surface: #1b0d25;
+  --g192qui-primary-soft: rgba(170,82,233,0.18);
+  --g192qui-primary-glow: rgba(170,82,233,0.45);
+}
+
+.trivia-wrap.g192qui-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--g192qui-surface, #1b0d25);
+  border: 1px solid var(--g192qui-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--g192qui-primary-soft) inset;
+}
+
+.trivia-wrap.g192qui-wrap .trivia-progress,
+.trivia-wrap.g192qui-wrap .quiz-progress,
+.trivia-wrap.g192qui-wrap .dm-info,
+.trivia-wrap.g192qui-wrap .sol-info,
+.trivia-wrap.g192qui-wrap .cm-info,
+.trivia-wrap.g192qui-wrap .coop-info,
+.trivia-wrap.g192qui-wrap .dr-info {
+  color: var(--g192qui-accent);
+}
+
+.trivia-wrap.g192qui-wrap .trivia-score,
+.trivia-wrap.g192qui-wrap .quiz-score,
+.trivia-wrap.g192qui-wrap .dm-score,
+.trivia-wrap.g192qui-wrap .sol-score,
+.trivia-wrap.g192qui-wrap .cm-score,
+.trivia-wrap.g192qui-wrap .coop-score,
+.trivia-wrap.g192qui-wrap .dr-score {
+  color: var(--g192qui-primary);
+  text-shadow: 0 0 18px var(--g192qui-primary-glow);
+}
+
+.trivia-wrap.g192qui-wrap .trivia-choice.selected,
+.trivia-wrap.g192qui-wrap .quiz-choice.selected {
+  border-color: var(--g192qui-primary);
+  background: var(--g192qui-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--g192qui-primary) inset,
+    0 6px 18px -6px var(--g192qui-primary-glow);
+}
+
+.trivia-wrap.g192qui-wrap .trivia-btn.submit,
+.trivia-wrap.g192qui-wrap .quiz-btn.submit,
+.trivia-wrap.g192qui-wrap .dm-btn.primary,
+.trivia-wrap.g192qui-wrap .sol-btn.primary,
+.trivia-wrap.g192qui-wrap .cm-btn.primary,
+.trivia-wrap.g192qui-wrap .coop-btn.primary,
+.trivia-wrap.g192qui-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--g192qui-primary), var(--g192qui-accent));
+  border-color: var(--g192qui-primary);
+}
+
+.trivia-wrap.g192qui-wrap .trivia-done h2,
+.trivia-wrap.g192qui-wrap .quiz-done h2,
+.trivia-wrap.g192qui-wrap .dm-done h2,
+.trivia-wrap.g192qui-wrap .sol-done h2,
+.trivia-wrap.g192qui-wrap .cm-done h2,
+.trivia-wrap.g192qui-wrap .coop-done h2,
+.trivia-wrap.g192qui-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--g192qui-primary), var(--g192qui-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

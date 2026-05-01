@@ -1,2 +1,72 @@
-/* Modern card-mini look — see web/src/engines/cardmini/cardmini.css */
-@import "../../engines/cardmini/cardmini.css";
+/* ace-alley - unique prefix .aceall-* + themed palette (engine: .cm-wrap). */
+
+
+:root {
+  --aceall-primary: #a45ddf;
+  --aceall-accent: #d93faf;
+  --aceall-surface: #1a0f23;
+  --aceall-primary-soft: rgba(164,93,223,0.18);
+  --aceall-primary-glow: rgba(164,93,223,0.45);
+}
+
+.cm-wrap.aceall-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--aceall-surface, #1a0f23);
+  border: 1px solid var(--aceall-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--aceall-primary-soft) inset;
+}
+
+.cm-wrap.aceall-wrap .trivia-progress,
+.cm-wrap.aceall-wrap .quiz-progress,
+.cm-wrap.aceall-wrap .dm-info,
+.cm-wrap.aceall-wrap .sol-info,
+.cm-wrap.aceall-wrap .cm-info,
+.cm-wrap.aceall-wrap .coop-info,
+.cm-wrap.aceall-wrap .dr-info {
+  color: var(--aceall-accent);
+}
+
+.cm-wrap.aceall-wrap .trivia-score,
+.cm-wrap.aceall-wrap .quiz-score,
+.cm-wrap.aceall-wrap .dm-score,
+.cm-wrap.aceall-wrap .sol-score,
+.cm-wrap.aceall-wrap .cm-score,
+.cm-wrap.aceall-wrap .coop-score,
+.cm-wrap.aceall-wrap .dr-score {
+  color: var(--aceall-primary);
+  text-shadow: 0 0 18px var(--aceall-primary-glow);
+}
+
+.cm-wrap.aceall-wrap .trivia-choice.selected,
+.cm-wrap.aceall-wrap .quiz-choice.selected {
+  border-color: var(--aceall-primary);
+  background: var(--aceall-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--aceall-primary) inset,
+    0 6px 18px -6px var(--aceall-primary-glow);
+}
+
+.cm-wrap.aceall-wrap .trivia-btn.submit,
+.cm-wrap.aceall-wrap .quiz-btn.submit,
+.cm-wrap.aceall-wrap .dm-btn.primary,
+.cm-wrap.aceall-wrap .sol-btn.primary,
+.cm-wrap.aceall-wrap .cm-btn.primary,
+.cm-wrap.aceall-wrap .coop-btn.primary,
+.cm-wrap.aceall-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--aceall-primary), var(--aceall-accent));
+  border-color: var(--aceall-primary);
+}
+
+.cm-wrap.aceall-wrap .trivia-done h2,
+.cm-wrap.aceall-wrap .quiz-done h2,
+.cm-wrap.aceall-wrap .dm-done h2,
+.cm-wrap.aceall-wrap .sol-done h2,
+.cm-wrap.aceall-wrap .cm-done h2,
+.cm-wrap.aceall-wrap .coop-done h2,
+.cm-wrap.aceall-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--aceall-primary), var(--aceall-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

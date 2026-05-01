@@ -1,2 +1,72 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* animal-quiz - unique prefix .aniqui-* + themed palette (engine: .trivia-wrap). */
 @import "../../engines/quiz/quiz.css";
+
+:root {
+  --aniqui-primary: #5db8df;
+  --aniqui-accent: #423fd9;
+  --aniqui-surface: #0f1d23;
+  --aniqui-primary-soft: rgba(93,184,223,0.18);
+  --aniqui-primary-glow: rgba(93,184,223,0.45);
+}
+
+.trivia-wrap.aniqui-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--aniqui-surface, #0f1d23);
+  border: 1px solid var(--aniqui-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--aniqui-primary-soft) inset;
+}
+
+.trivia-wrap.aniqui-wrap .trivia-progress,
+.trivia-wrap.aniqui-wrap .quiz-progress,
+.trivia-wrap.aniqui-wrap .dm-info,
+.trivia-wrap.aniqui-wrap .sol-info,
+.trivia-wrap.aniqui-wrap .cm-info,
+.trivia-wrap.aniqui-wrap .coop-info,
+.trivia-wrap.aniqui-wrap .dr-info {
+  color: var(--aniqui-accent);
+}
+
+.trivia-wrap.aniqui-wrap .trivia-score,
+.trivia-wrap.aniqui-wrap .quiz-score,
+.trivia-wrap.aniqui-wrap .dm-score,
+.trivia-wrap.aniqui-wrap .sol-score,
+.trivia-wrap.aniqui-wrap .cm-score,
+.trivia-wrap.aniqui-wrap .coop-score,
+.trivia-wrap.aniqui-wrap .dr-score {
+  color: var(--aniqui-primary);
+  text-shadow: 0 0 18px var(--aniqui-primary-glow);
+}
+
+.trivia-wrap.aniqui-wrap .trivia-choice.selected,
+.trivia-wrap.aniqui-wrap .quiz-choice.selected {
+  border-color: var(--aniqui-primary);
+  background: var(--aniqui-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--aniqui-primary) inset,
+    0 6px 18px -6px var(--aniqui-primary-glow);
+}
+
+.trivia-wrap.aniqui-wrap .trivia-btn.submit,
+.trivia-wrap.aniqui-wrap .quiz-btn.submit,
+.trivia-wrap.aniqui-wrap .dm-btn.primary,
+.trivia-wrap.aniqui-wrap .sol-btn.primary,
+.trivia-wrap.aniqui-wrap .cm-btn.primary,
+.trivia-wrap.aniqui-wrap .coop-btn.primary,
+.trivia-wrap.aniqui-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--aniqui-primary), var(--aniqui-accent));
+  border-color: var(--aniqui-primary);
+}
+
+.trivia-wrap.aniqui-wrap .trivia-done h2,
+.trivia-wrap.aniqui-wrap .quiz-done h2,
+.trivia-wrap.aniqui-wrap .dm-done h2,
+.trivia-wrap.aniqui-wrap .sol-done h2,
+.trivia-wrap.aniqui-wrap .cm-done h2,
+.trivia-wrap.aniqui-wrap .coop-done h2,
+.trivia-wrap.aniqui-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--aniqui-primary), var(--aniqui-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

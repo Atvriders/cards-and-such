@@ -1,2 +1,72 @@
-/* Modern card-mini look — see web/src/engines/cardmini/cardmini.css */
-@import "../../engines/cardmini/cardmini.css";
+/* aces-up-mini - unique prefix .aum-* + themed palette (engine: .cm-wrap). */
+
+
+:root {
+  --aum-primary: #594eed;
+  --aum-accent: #c22eea;
+  --aum-surface: #0e0c26;
+  --aum-primary-soft: rgba(89,78,237,0.18);
+  --aum-primary-glow: rgba(89,78,237,0.45);
+}
+
+.cm-wrap.aum-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--aum-surface, #0e0c26);
+  border: 1px solid var(--aum-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--aum-primary-soft) inset;
+}
+
+.cm-wrap.aum-wrap .trivia-progress,
+.cm-wrap.aum-wrap .quiz-progress,
+.cm-wrap.aum-wrap .dm-info,
+.cm-wrap.aum-wrap .sol-info,
+.cm-wrap.aum-wrap .cm-info,
+.cm-wrap.aum-wrap .coop-info,
+.cm-wrap.aum-wrap .dr-info {
+  color: var(--aum-accent);
+}
+
+.cm-wrap.aum-wrap .trivia-score,
+.cm-wrap.aum-wrap .quiz-score,
+.cm-wrap.aum-wrap .dm-score,
+.cm-wrap.aum-wrap .sol-score,
+.cm-wrap.aum-wrap .cm-score,
+.cm-wrap.aum-wrap .coop-score,
+.cm-wrap.aum-wrap .dr-score {
+  color: var(--aum-primary);
+  text-shadow: 0 0 18px var(--aum-primary-glow);
+}
+
+.cm-wrap.aum-wrap .trivia-choice.selected,
+.cm-wrap.aum-wrap .quiz-choice.selected {
+  border-color: var(--aum-primary);
+  background: var(--aum-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--aum-primary) inset,
+    0 6px 18px -6px var(--aum-primary-glow);
+}
+
+.cm-wrap.aum-wrap .trivia-btn.submit,
+.cm-wrap.aum-wrap .quiz-btn.submit,
+.cm-wrap.aum-wrap .dm-btn.primary,
+.cm-wrap.aum-wrap .sol-btn.primary,
+.cm-wrap.aum-wrap .cm-btn.primary,
+.cm-wrap.aum-wrap .coop-btn.primary,
+.cm-wrap.aum-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--aum-primary), var(--aum-accent));
+  border-color: var(--aum-primary);
+}
+
+.cm-wrap.aum-wrap .trivia-done h2,
+.cm-wrap.aum-wrap .quiz-done h2,
+.cm-wrap.aum-wrap .dm-done h2,
+.cm-wrap.aum-wrap .sol-done h2,
+.cm-wrap.aum-wrap .cm-done h2,
+.cm-wrap.aum-wrap .coop-done h2,
+.cm-wrap.aum-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--aum-primary), var(--aum-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

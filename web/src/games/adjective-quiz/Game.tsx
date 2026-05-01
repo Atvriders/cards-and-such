@@ -13,12 +13,12 @@ export function AdjectiveQuizGame({ state, dispatch, onGameOver }: GameProps<Adj
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as AdjectiveQuizAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="trivia-wrap adjqui-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
+    <div className="trivia-wrap adjqui-wrap">
       <div className="trivia-header">
         <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>

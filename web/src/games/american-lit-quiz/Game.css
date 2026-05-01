@@ -1,2 +1,72 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* american-lit-quiz - unique prefix .alq-* + themed palette (engine: .trivia-wrap). */
 @import "../../engines/quiz/quiz.css";
+
+:root {
+  --alq-primary: #d7e853;
+  --alq-accent: #50e433;
+  --alq-surface: #22250d;
+  --alq-primary-soft: rgba(215,232,83,0.18);
+  --alq-primary-glow: rgba(215,232,83,0.45);
+}
+
+.trivia-wrap.alq-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--alq-surface, #22250d);
+  border: 1px solid var(--alq-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--alq-primary-soft) inset;
+}
+
+.trivia-wrap.alq-wrap .trivia-progress,
+.trivia-wrap.alq-wrap .quiz-progress,
+.trivia-wrap.alq-wrap .dm-info,
+.trivia-wrap.alq-wrap .sol-info,
+.trivia-wrap.alq-wrap .cm-info,
+.trivia-wrap.alq-wrap .coop-info,
+.trivia-wrap.alq-wrap .dr-info {
+  color: var(--alq-accent);
+}
+
+.trivia-wrap.alq-wrap .trivia-score,
+.trivia-wrap.alq-wrap .quiz-score,
+.trivia-wrap.alq-wrap .dm-score,
+.trivia-wrap.alq-wrap .sol-score,
+.trivia-wrap.alq-wrap .cm-score,
+.trivia-wrap.alq-wrap .coop-score,
+.trivia-wrap.alq-wrap .dr-score {
+  color: var(--alq-primary);
+  text-shadow: 0 0 18px var(--alq-primary-glow);
+}
+
+.trivia-wrap.alq-wrap .trivia-choice.selected,
+.trivia-wrap.alq-wrap .quiz-choice.selected {
+  border-color: var(--alq-primary);
+  background: var(--alq-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--alq-primary) inset,
+    0 6px 18px -6px var(--alq-primary-glow);
+}
+
+.trivia-wrap.alq-wrap .trivia-btn.submit,
+.trivia-wrap.alq-wrap .quiz-btn.submit,
+.trivia-wrap.alq-wrap .dm-btn.primary,
+.trivia-wrap.alq-wrap .sol-btn.primary,
+.trivia-wrap.alq-wrap .cm-btn.primary,
+.trivia-wrap.alq-wrap .coop-btn.primary,
+.trivia-wrap.alq-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--alq-primary), var(--alq-accent));
+  border-color: var(--alq-primary);
+}
+
+.trivia-wrap.alq-wrap .trivia-done h2,
+.trivia-wrap.alq-wrap .quiz-done h2,
+.trivia-wrap.alq-wrap .dm-done h2,
+.trivia-wrap.alq-wrap .sol-done h2,
+.trivia-wrap.alq-wrap .cm-done h2,
+.trivia-wrap.alq-wrap .coop-done h2,
+.trivia-wrap.alq-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--alq-primary), var(--alq-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

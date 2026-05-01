@@ -1,1 +1,72 @@
-@import "../../engines/solmini/solmini.css";
+/* above-and-below-pat - unique prefix .aabp-* + themed palette (engine: .sol-wrap). */
+
+
+:root {
+  --aabp-primary: #9062da;
+  --aabp-accent: #d345c4;
+  --aabp-surface: #171022;
+  --aabp-primary-soft: rgba(144,98,218,0.18);
+  --aabp-primary-glow: rgba(144,98,218,0.45);
+}
+
+.sol-wrap.aabp-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--aabp-surface, #171022);
+  border: 1px solid var(--aabp-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--aabp-primary-soft) inset;
+}
+
+.sol-wrap.aabp-wrap .trivia-progress,
+.sol-wrap.aabp-wrap .quiz-progress,
+.sol-wrap.aabp-wrap .dm-info,
+.sol-wrap.aabp-wrap .sol-info,
+.sol-wrap.aabp-wrap .cm-info,
+.sol-wrap.aabp-wrap .coop-info,
+.sol-wrap.aabp-wrap .dr-info {
+  color: var(--aabp-accent);
+}
+
+.sol-wrap.aabp-wrap .trivia-score,
+.sol-wrap.aabp-wrap .quiz-score,
+.sol-wrap.aabp-wrap .dm-score,
+.sol-wrap.aabp-wrap .sol-score,
+.sol-wrap.aabp-wrap .cm-score,
+.sol-wrap.aabp-wrap .coop-score,
+.sol-wrap.aabp-wrap .dr-score {
+  color: var(--aabp-primary);
+  text-shadow: 0 0 18px var(--aabp-primary-glow);
+}
+
+.sol-wrap.aabp-wrap .trivia-choice.selected,
+.sol-wrap.aabp-wrap .quiz-choice.selected {
+  border-color: var(--aabp-primary);
+  background: var(--aabp-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--aabp-primary) inset,
+    0 6px 18px -6px var(--aabp-primary-glow);
+}
+
+.sol-wrap.aabp-wrap .trivia-btn.submit,
+.sol-wrap.aabp-wrap .quiz-btn.submit,
+.sol-wrap.aabp-wrap .dm-btn.primary,
+.sol-wrap.aabp-wrap .sol-btn.primary,
+.sol-wrap.aabp-wrap .cm-btn.primary,
+.sol-wrap.aabp-wrap .coop-btn.primary,
+.sol-wrap.aabp-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--aabp-primary), var(--aabp-accent));
+  border-color: var(--aabp-primary);
+}
+
+.sol-wrap.aabp-wrap .trivia-done h2,
+.sol-wrap.aabp-wrap .quiz-done h2,
+.sol-wrap.aabp-wrap .dm-done h2,
+.sol-wrap.aabp-wrap .sol-done h2,
+.sol-wrap.aabp-wrap .cm-done h2,
+.sol-wrap.aabp-wrap .coop-done h2,
+.sol-wrap.aabp-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--aabp-primary), var(--aabp-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

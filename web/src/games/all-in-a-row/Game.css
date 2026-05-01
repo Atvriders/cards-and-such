@@ -1,1 +1,72 @@
-@import "../../engines/solmini/solmini.css";
+/* all-in-a-row - unique prefix .aiar-* + themed palette (engine: .sol-wrap). */
+
+
+:root {
+  --aiar-primary: #d9cf62;
+  --aiar-accent: #79d246;
+  --aiar-surface: #222110;
+  --aiar-primary-soft: rgba(217,207,98,0.18);
+  --aiar-primary-glow: rgba(217,207,98,0.45);
+}
+
+.sol-wrap.aiar-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--aiar-surface, #222110);
+  border: 1px solid var(--aiar-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--aiar-primary-soft) inset;
+}
+
+.sol-wrap.aiar-wrap .trivia-progress,
+.sol-wrap.aiar-wrap .quiz-progress,
+.sol-wrap.aiar-wrap .dm-info,
+.sol-wrap.aiar-wrap .sol-info,
+.sol-wrap.aiar-wrap .cm-info,
+.sol-wrap.aiar-wrap .coop-info,
+.sol-wrap.aiar-wrap .dr-info {
+  color: var(--aiar-accent);
+}
+
+.sol-wrap.aiar-wrap .trivia-score,
+.sol-wrap.aiar-wrap .quiz-score,
+.sol-wrap.aiar-wrap .dm-score,
+.sol-wrap.aiar-wrap .sol-score,
+.sol-wrap.aiar-wrap .cm-score,
+.sol-wrap.aiar-wrap .coop-score,
+.sol-wrap.aiar-wrap .dr-score {
+  color: var(--aiar-primary);
+  text-shadow: 0 0 18px var(--aiar-primary-glow);
+}
+
+.sol-wrap.aiar-wrap .trivia-choice.selected,
+.sol-wrap.aiar-wrap .quiz-choice.selected {
+  border-color: var(--aiar-primary);
+  background: var(--aiar-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--aiar-primary) inset,
+    0 6px 18px -6px var(--aiar-primary-glow);
+}
+
+.sol-wrap.aiar-wrap .trivia-btn.submit,
+.sol-wrap.aiar-wrap .quiz-btn.submit,
+.sol-wrap.aiar-wrap .dm-btn.primary,
+.sol-wrap.aiar-wrap .sol-btn.primary,
+.sol-wrap.aiar-wrap .cm-btn.primary,
+.sol-wrap.aiar-wrap .coop-btn.primary,
+.sol-wrap.aiar-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--aiar-primary), var(--aiar-accent));
+  border-color: var(--aiar-primary);
+}
+
+.sol-wrap.aiar-wrap .trivia-done h2,
+.sol-wrap.aiar-wrap .quiz-done h2,
+.sol-wrap.aiar-wrap .dm-done h2,
+.sol-wrap.aiar-wrap .sol-done h2,
+.sol-wrap.aiar-wrap .cm-done h2,
+.sol-wrap.aiar-wrap .coop-done h2,
+.sol-wrap.aiar-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--aiar-primary), var(--aiar-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

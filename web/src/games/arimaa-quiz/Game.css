@@ -1,2 +1,72 @@
-/* Quiz UI provided by the shared engine. Add per-game theming below if needed. */
+/* arimaa-quiz - unique prefix .ariqui-* + themed palette (engine: .trivia-wrap). */
 @import "../../engines/quiz/quiz.css";
+
+:root {
+  --ariqui-primary: #6662da;
+  --ariqui-accent: #b045d3;
+  --ariqui-surface: #101022;
+  --ariqui-primary-soft: rgba(102,98,218,0.18);
+  --ariqui-primary-glow: rgba(102,98,218,0.45);
+}
+
+.trivia-wrap.ariqui-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--ariqui-surface, #101022);
+  border: 1px solid var(--ariqui-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--ariqui-primary-soft) inset;
+}
+
+.trivia-wrap.ariqui-wrap .trivia-progress,
+.trivia-wrap.ariqui-wrap .quiz-progress,
+.trivia-wrap.ariqui-wrap .dm-info,
+.trivia-wrap.ariqui-wrap .sol-info,
+.trivia-wrap.ariqui-wrap .cm-info,
+.trivia-wrap.ariqui-wrap .coop-info,
+.trivia-wrap.ariqui-wrap .dr-info {
+  color: var(--ariqui-accent);
+}
+
+.trivia-wrap.ariqui-wrap .trivia-score,
+.trivia-wrap.ariqui-wrap .quiz-score,
+.trivia-wrap.ariqui-wrap .dm-score,
+.trivia-wrap.ariqui-wrap .sol-score,
+.trivia-wrap.ariqui-wrap .cm-score,
+.trivia-wrap.ariqui-wrap .coop-score,
+.trivia-wrap.ariqui-wrap .dr-score {
+  color: var(--ariqui-primary);
+  text-shadow: 0 0 18px var(--ariqui-primary-glow);
+}
+
+.trivia-wrap.ariqui-wrap .trivia-choice.selected,
+.trivia-wrap.ariqui-wrap .quiz-choice.selected {
+  border-color: var(--ariqui-primary);
+  background: var(--ariqui-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--ariqui-primary) inset,
+    0 6px 18px -6px var(--ariqui-primary-glow);
+}
+
+.trivia-wrap.ariqui-wrap .trivia-btn.submit,
+.trivia-wrap.ariqui-wrap .quiz-btn.submit,
+.trivia-wrap.ariqui-wrap .dm-btn.primary,
+.trivia-wrap.ariqui-wrap .sol-btn.primary,
+.trivia-wrap.ariqui-wrap .cm-btn.primary,
+.trivia-wrap.ariqui-wrap .coop-btn.primary,
+.trivia-wrap.ariqui-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--ariqui-primary), var(--ariqui-accent));
+  border-color: var(--ariqui-primary);
+}
+
+.trivia-wrap.ariqui-wrap .trivia-done h2,
+.trivia-wrap.ariqui-wrap .quiz-done h2,
+.trivia-wrap.ariqui-wrap .dm-done h2,
+.trivia-wrap.ariqui-wrap .sol-done h2,
+.trivia-wrap.ariqui-wrap .cm-done h2,
+.trivia-wrap.ariqui-wrap .coop-done h2,
+.trivia-wrap.ariqui-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--ariqui-primary), var(--ariqui-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

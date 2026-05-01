@@ -8,10 +8,10 @@ export function AcesUpMiniGame({ state, dispatch, onGameOver }: GameProps<AcesUp
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><div>Aces found: {state.acesFound}</div><div className="cm-final">{state.score} pts</div></div></div>;
+    return <div className="cm-wrap aum-wrap"><div className="cm-done"><h2>Done!</h2><div>Aces found: {state.acesFound}</div><div className="cm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="cm-wrap">
+    <div className="cm-wrap aum-wrap">
       <div className="cm-info">Draw {state.draw} / {TOTAL_DRAWS}</div>
       <div className="cm-score">{state.score} pts • Aces: {state.acesFound}</div>
       {state.card !== null && (

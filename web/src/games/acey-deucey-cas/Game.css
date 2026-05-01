@@ -1,2 +1,72 @@
-/* Modern casino-table engine — see web/src/engines/casino/casino.css */
-@import "../../engines/casino/casino.css";
+/* acey-deucey-cas - unique prefix .adc-* + themed palette (engine: .dm-wrap). */
+
+
+:root {
+  --adc-primary: #52aae9;
+  --adc-accent: #4b32e5;
+  --adc-surface: #0d1b25;
+  --adc-primary-soft: rgba(82,170,233,0.18);
+  --adc-primary-glow: rgba(82,170,233,0.45);
+}
+
+.dm-wrap.adc-wrap {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    var(--adc-surface, #0d1b25);
+  border: 1px solid var(--adc-primary-soft);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.42), 0 0 0 1px var(--adc-primary-soft) inset;
+}
+
+.dm-wrap.adc-wrap .trivia-progress,
+.dm-wrap.adc-wrap .quiz-progress,
+.dm-wrap.adc-wrap .dm-info,
+.dm-wrap.adc-wrap .sol-info,
+.dm-wrap.adc-wrap .cm-info,
+.dm-wrap.adc-wrap .coop-info,
+.dm-wrap.adc-wrap .dr-info {
+  color: var(--adc-accent);
+}
+
+.dm-wrap.adc-wrap .trivia-score,
+.dm-wrap.adc-wrap .quiz-score,
+.dm-wrap.adc-wrap .dm-score,
+.dm-wrap.adc-wrap .sol-score,
+.dm-wrap.adc-wrap .cm-score,
+.dm-wrap.adc-wrap .coop-score,
+.dm-wrap.adc-wrap .dr-score {
+  color: var(--adc-primary);
+  text-shadow: 0 0 18px var(--adc-primary-glow);
+}
+
+.dm-wrap.adc-wrap .trivia-choice.selected,
+.dm-wrap.adc-wrap .quiz-choice.selected {
+  border-color: var(--adc-primary);
+  background: var(--adc-primary-soft);
+  box-shadow:
+    0 0 0 1px var(--adc-primary) inset,
+    0 6px 18px -6px var(--adc-primary-glow);
+}
+
+.dm-wrap.adc-wrap .trivia-btn.submit,
+.dm-wrap.adc-wrap .quiz-btn.submit,
+.dm-wrap.adc-wrap .dm-btn.primary,
+.dm-wrap.adc-wrap .sol-btn.primary,
+.dm-wrap.adc-wrap .cm-btn.primary,
+.dm-wrap.adc-wrap .coop-btn.primary,
+.dm-wrap.adc-wrap .dr-btn.primary {
+  background: linear-gradient(135deg, var(--adc-primary), var(--adc-accent));
+  border-color: var(--adc-primary);
+}
+
+.dm-wrap.adc-wrap .trivia-done h2,
+.dm-wrap.adc-wrap .quiz-done h2,
+.dm-wrap.adc-wrap .dm-done h2,
+.dm-wrap.adc-wrap .sol-done h2,
+.dm-wrap.adc-wrap .cm-done h2,
+.dm-wrap.adc-wrap .coop-done h2,
+.dm-wrap.adc-wrap .dr-done h2 {
+  background: linear-gradient(135deg, var(--adc-primary), var(--adc-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

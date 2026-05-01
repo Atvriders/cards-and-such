@@ -25,7 +25,7 @@ export function AnimalQuiz({ state, dispatch, onGameOver }: GameProps<QuizState,
 
   if (state.phase === "done") {
     return (
-      <div className="trivia-wrap">
+      <div className="trivia-wrap aniqui-wrap">
         <div className="trivia-done">
           <h2>Game Over!</h2>
           <p>Correct: {state.correctCount} / {state.questions.length}</p>
@@ -40,7 +40,7 @@ export function AnimalQuiz({ state, dispatch, onGameOver }: GameProps<QuizState,
   const urgent = state.timeLeft <= 5 && !state.submitted;
 
   return (
-    <div className="trivia-wrap">
+    <div className="trivia-wrap aniqui-wrap">
       <div className="trivia-header">
         <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
