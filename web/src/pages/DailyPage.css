@@ -1,0 +1,203 @@
+.daily-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem 0 3rem;
+}
+
+.daily-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: 1.5rem 1.6rem;
+  background: linear-gradient(120deg, #1e1b4b 0%, #4338ca 50%, #be185d 100%);
+  color: #fff;
+  box-shadow: 0 14px 40px -18px rgba(67, 56, 202, 0.7);
+}
+
+.daily-banner h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem);
+  letter-spacing: -0.02em;
+}
+
+.daily-banner-sub {
+  margin: 0.4rem 0 0;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.daily-banner-date {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.daily-streak {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 700;
+}
+
+.daily-streak-flame {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 6px rgba(251, 146, 60, 0.7));
+}
+
+.daily-streak-count {
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.daily-streak-label {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.daily-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 16px;
+  padding: 1.1rem 1.2rem;
+  background: linear-gradient(160deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  transition: transform 0.35s ease, border-color 0.25s ease, box-shadow 0.35s ease;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.daily-card:hover {
+  transform: translateY(-3px) rotateX(2deg);
+  border-color: rgba(199, 210, 254, 0.5);
+  box-shadow: 0 18px 40px -22px rgba(99, 102, 241, 0.6);
+}
+
+.daily-card-medal {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #1f1100;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.6);
+}
+
+.daily-card-medal--gold {
+  background: radial-gradient(circle at 30% 30%, #fde68a 0%, #f59e0b 60%, #b45309 100%);
+}
+
+.daily-card-medal--silver {
+  background: radial-gradient(circle at 30% 30%, #f1f5f9 0%, #cbd5e1 60%, #64748b 100%);
+}
+
+.daily-card-medal--bronze {
+  background: radial-gradient(circle at 30% 30%, #fcd9b6 0%, #d97706 60%, #78350f 100%);
+}
+
+.daily-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.01em;
+}
+
+.daily-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0.35rem 0;
+  font-size: 0.88rem;
+}
+
+.daily-card-row dt {
+  opacity: 0.7;
+  letter-spacing: 0.03em;
+}
+
+.daily-card-row dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.daily-card-status {
+  margin-top: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+}
+
+.daily-card-status--not-started {
+  background: rgba(148, 163, 184, 0.18);
+  color: #cbd5e1;
+}
+
+.daily-card-status--in-progress {
+  background: rgba(59, 130, 246, 0.22);
+  color: #93c5fd;
+}
+
+.daily-card-status--completed {
+  background: rgba(34, 197, 94, 0.22);
+  color: #86efac;
+}
+
+.daily-card-difficulty {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.daily-card-difficulty--easy {
+  background: rgba(34, 197, 94, 0.18);
+  color: #86efac;
+}
+
+.daily-card-difficulty--medium {
+  background: rgba(251, 191, 36, 0.18);
+  color: #fcd34d;
+}
+
+.daily-card-difficulty--hard {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+}

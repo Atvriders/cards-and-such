@@ -6,6 +6,7 @@ import "./styles/games.css";
 import LobbyPage from "./pages/LobbyPage.js";
 import PlayPage from "./pages/PlayPage.js";
 import LeaderboardPage from "./pages/LeaderboardPage.js";
+import DailyPage from "./pages/DailyPage.js";
 import PlayOnlinePage from "./pages/PlayOnlinePage.js";
 import Connect4Online from "./games/connect-4/Connect4Online.js";
 import UnoLikeOnline from "./games/uno-like/UnoLikeOnline.js";
@@ -21,6 +22,7 @@ export default function App(): JSX.Element {
         <Route path="/play/connect-4/online/:roomId" element={<Connect4Online />} />
         <Route path="/play/uno-like/online/:roomId" element={<UnoLikeOnline />} />
         <Route path="/play/:gameId/online/:roomId" element={<PlayOnlinePage />} />
+        <Route path="/daily" element={<DailyPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
