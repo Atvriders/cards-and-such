@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "What's the name of the front bobsled occupant?", choices: ["Pilot", "Driver", "Captain", "Pilot or driver"], correct: 3 },
   { question: "Which Olympics introduced the monobob (1-woman bobsled)?", choices: ["2018 PyeongChang", "2022 Beijing", "2014 Sochi", "2010 Vancouver"], correct: 1 },
   { question: "Who is a famous American bobsledder of recent years?", choices: ["Steven Holcomb", "Apolo Ohno", "Shaun White", "Bode Miller"], correct: 0 },
-  { question: "Which sport is bobsled most adjacent to in winter Olympics?", choices: ["Curling", "Luge and skeleton", "Cross-country skiing", "Speed skating"], correct: 1 }
+  { question: "Which sport is bobsled most adjacent to in winter Olympics?", choices: ["Curling", "Luge and skeleton", "Cross-country skiing", "Speed skating"], correct: 1 },
+  { question: "What does the brakeman do?", choices: ["Steers", "Stops the sled", "Pushes only", "Maintains balance"], correct: 1 },
+  { question: "Which country has won the most bobsled golds historically?", choices: ["Switzerland", "Germany", "USA", "Italy"], correct: 1 },
+  { question: "Which event is the heaviest bobsled?", choices: ["2-man", "4-man", "Monobob", "Skeleton"], correct: 1 },
+  { question: "Who pilots the bobsled?", choices: ["Brakeman", "Driver", "Pusher", "Coach"], correct: 1 },
+  { question: "What surface do bobsleds race on?", choices: ["Ice", "Snow", "Plastic", "Rubber"], correct: 0 },
+  { question: "Which Jamaican bobsledder is famous from 1988?", choices: ["Devon Harris", "Dudley Stokes", "Michael White", "All of these"], correct: 3 },
+  { question: "What new event debuted in 2022 women's bobsled?", choices: ["2-woman", "Monobob", "4-woman", "Skeleton"], correct: 1 },
+  { question: "Which Italian-born sport center is the bobsled hub?", choices: ["Cortina d'Ampezzo", "Rome", "Milan", "Turin"], correct: 0 },
+  { question: "Top speed of an Olympic bobsled is roughly?", choices: ["80 km/h", "100 km/h", "150 km/h", "200 km/h"], correct: 2 },
+  { question: "Which is shorter, a bobsled or luge track?", choices: ["Same", "Bobsled", "Luge", "Varies"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: BobsledQuizSettings): BobsledQuizState {

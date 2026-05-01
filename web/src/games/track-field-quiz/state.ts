@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which event is Olympic but not held indoors?", choices: ["High jump", "Hammer throw", "60m dash", "Long jump"], correct: 1 },
   { question: "How long is the men's javelin?", choices: ["1.5-1.7m", "2.6-2.7m", "3.5-4m", "5m"], correct: 1 },
   { question: "Which surface is typical for modern outdoor tracks?", choices: ["Cinder", "Polyurethane (Mondo/synthetic)", "Concrete", "Grass"], correct: 1 },
-  { question: "How many laps is a 1500m race on a standard track?", choices: ["3.75", "4", "5", "6"], correct: 0 }
+  { question: "How many laps is a 1500m race on a standard track?", choices: ["3.75", "4", "5", "6"], correct: 0 },
+  { question: "Who holds the men's 100m world record?", choices: ["Usain Bolt", "Tyson Gay", "Asafa Powell", "Yohan Blake"], correct: 0 },
+  { question: "What is Usain Bolt's 100m world record time?", choices: ["9.58", "9.69", "9.74", "9.79"], correct: 0 },
+  { question: "Who holds the women's 100m world record?", choices: ["Florence Griffith-Joyner", "Marion Jones", "Shelly-Ann Fraser-Pryce", "Elaine Thompson-Herah"], correct: 0 },
+  { question: "How many hurdles in a men's 110m hurdle race?", choices: ["8", "9", "10", "12"], correct: 2 },
+  { question: "What is the standard length of an outdoor track?", choices: ["400 meters", "440 yards", "500 meters", "800 meters"], correct: 0 },
+  { question: "Who broke the 4-minute mile barrier first?", choices: ["Roger Bannister", "Jim Ryun", "John Landy", "Hicham El Guerrouj"], correct: 0 },
+  { question: "Which jumping event uses a long flexible pole?", choices: ["High jump", "Long jump", "Pole vault", "Triple jump"], correct: 2 },
+  { question: "How heavy is the men's shot put?", choices: ["4 kg", "6 kg", "7.26 kg", "9 kg"], correct: 2 },
+  { question: "What distance is a marathon?", choices: ["26.2 miles", "24 miles", "30 km", "50 km"], correct: 0 },
+  { question: "Who set the long jump record at 8.95m in 1991?", choices: ["Bob Beamon", "Mike Powell", "Carl Lewis", "Ralph Boston"], correct: 1 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: TrackFieldQuizSettings): TrackFieldQuizState {

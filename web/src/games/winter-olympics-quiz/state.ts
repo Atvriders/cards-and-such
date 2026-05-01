@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Where were the 1998 Winter Olympics held?", choices: ["Nagano", "Sapporo", "Lillehammer", "Albertville"], correct: 0 },
   { question: "Which sport involves sliding stones on ice?", choices: ["Curling", "Bobsled", "Luge", "Skeleton"], correct: 0 },
   { question: "Which Olympics first allowed pro hockey players?", choices: ["1992", "1994", "1998", "2002"], correct: 2 },
-  { question: "Where were the 1976 Winter Olympics held?", choices: ["Innsbruck", "Sapporo", "Grenoble", "Lake Placid"], correct: 0 }
+  { question: "Where were the 1976 Winter Olympics held?", choices: ["Innsbruck", "Sapporo", "Grenoble", "Lake Placid"], correct: 0 },
+  { question: "Which speed skater won 5 golds at the 1980 Olympics?", choices: ["Eric Heiden", "Dan Jansen", "Apolo Ohno", "Johann Olav Koss"], correct: 0 },
+  { question: "Where were the 2002 Winter Olympics held?", choices: ["Salt Lake City", "Turin", "Vancouver", "Calgary"], correct: 0 },
+  { question: "Where were the 2006 Winter Olympics held?", choices: ["Turin", "Vancouver", "Sochi", "Nagano"], correct: 0 },
+  { question: "Which event combines skiing and shooting?", choices: ["Biathlon", "Skeleton", "Nordic combined", "Pentathlon"], correct: 0 },
+  { question: "Where were the 1988 Winter Olympics held?", choices: ["Calgary", "Albertville", "Lillehammer", "Sarajevo"], correct: 0 },
+  { question: "Which figure skater landed the first quad axel in competition?", choices: ["Yuzuru Hanyu", "Nathan Chen", "Ilia Malinin", "Patrick Chan"], correct: 2 },
+  { question: "Which country dominated cross-country skiing historically?", choices: ["Sweden", "Norway", "Finland", "Russia"], correct: 1 },
+  { question: "Which sport features a single rider going head-first down a track?", choices: ["Luge", "Skeleton", "Bobsled", "Snowboard cross"], correct: 1 },
+  { question: "Which Winter Olympics was the first held in Asia?", choices: ["Sapporo 1972", "Nagano 1998", "Pyeongchang 2018", "Beijing 2022"], correct: 0 },
+  { question: "Which snowboarder is known for the X Games and Olympic golds halfpipe?", choices: ["Shaun White", "Travis Rice", "Chloe Kim", "Ayumu Hirano"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: WinterOlympicsQuizSettings): WinterOlympicsQuizState {

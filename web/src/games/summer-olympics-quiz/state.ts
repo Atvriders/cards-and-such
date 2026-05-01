@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Which 1936 Olympian won 4 gold medals in Berlin?", choices: ["Carl Lewis", "Jesse Owens", "Bob Hayes", "Eric Liddell"], correct: 1 },
   { question: "Where will the 2028 Summer Olympics be held?", choices: ["Paris", "Brisbane", "Los Angeles", "Madrid"], correct: 2 },
   { question: "Which country boycotted the 1980 Moscow Olympics?", choices: ["USA", "France", "China", "Germany"], correct: 0 },
-  { question: "Where were the 1984 Summer Olympics held?", choices: ["Los Angeles", "Seoul", "Moscow", "Munich"], correct: 0 }
+  { question: "Where were the 1984 Summer Olympics held?", choices: ["Los Angeles", "Seoul", "Moscow", "Munich"], correct: 0 },
+  { question: "Which gymnast scored the first perfect 10 in Olympic history?", choices: ["Nadia Comaneci", "Olga Korbut", "Mary Lou Retton", "Larisa Latynina"], correct: 0 },
+  { question: "Where were the 1992 Summer Olympics held?", choices: ["Barcelona", "Atlanta", "Seoul", "Sydney"], correct: 0 },
+  { question: "Where were the 1996 Summer Olympics held?", choices: ["Athens", "Atlanta", "Sydney", "Barcelona"], correct: 1 },
+  { question: "Where were the 2004 Summer Olympics held?", choices: ["Beijing", "Sydney", "Athens", "Rio"], correct: 2 },
+  { question: "Which sprinter won 9 Olympic gold medals from 1984-1996?", choices: ["Carl Lewis", "Linford Christie", "Maurice Greene", "Donovan Bailey"], correct: 0 },
+  { question: "Which boycott affected the 1984 Los Angeles Olympics?", choices: ["African nations", "Soviet bloc", "South America", "Middle East"], correct: 1 },
+  { question: "Who lit the cauldron at the 1996 Atlanta Olympics?", choices: ["Carl Lewis", "Muhammad Ali", "Evander Holyfield", "Michael Johnson"], correct: 1 },
+  { question: "Which sport returned to the Olympics in 2016 after 112 years?", choices: ["Rugby", "Golf", "Cricket", "Polo"], correct: 1 },
+  { question: "Which marathoner ran barefoot to gold in 1960?", choices: ["Abebe Bikila", "Frank Shorter", "Emil Zatopek", "Kip Keino"], correct: 0 },
+  { question: "How many gold medals did Michael Phelps win in 2008 Beijing?", choices: ["6", "7", "8", "9"], correct: 2 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SummerOlympicsQuizSettings): SummerOlympicsQuizState {

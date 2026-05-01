@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "How long is a typical men's free skate program?", choices: ["2 minutes", "3.5 minutes", "4 minutes", "5 minutes"], correct: 2 },
   { question: "Which medal did Tonya Harding win in 1994?", choices: ["Gold", "Silver", "Bronze", "None - 8th place"], correct: 3 },
   { question: "What is a 'death spiral'?", choices: ["A pairs element with skater horizontal", "Solo spin", "Dance step", "Footwork sequence"], correct: 0 },
-  { question: "Who is known as 'Yu-na Queen'?", choices: ["Kim Yuna", "Mao Asada", "Carolina Kostner", "Yulia Lipnitskaya"], correct: 0 }
+  { question: "Who is known as 'Yu-na Queen'?", choices: ["Kim Yuna", "Mao Asada", "Carolina Kostner", "Yulia Lipnitskaya"], correct: 0 },
+  { question: "What does ISU stand for?", choices: ["International Skating Union", "Ice Skaters Union", "Int. Sports Union", "Ice Skating Union"], correct: 0 },
+  { question: "Which country invented modern figure skating?", choices: ["Netherlands", "USA", "Austria", "Russia"], correct: 1 },
+  { question: "Who choreographed Torvill and Dean's 1984 \"Bolero\"?", choices: ["Themselves", "Christopher Dean", "Lawrence Demmy", "Betty Callaway"], correct: 0 },
+  { question: "How many segments in a singles competition (Olympic)?", choices: ["1", "2", "3", "4"], correct: 1 },
+  { question: "What are the two segments called?", choices: ["Short and Free", "Compulsory and Free", "Original and Free", "Pattern and Free"], correct: 0 },
+  { question: "Which Russian skater won gold in 2014 at age 15?", choices: ["Yulia Lipnitskaya", "Adelina Sotnikova", "Evgenia Medvedeva", "Alina Zagitova"], correct: 1 },
+  { question: "How many jumps are recognized in figure skating?", choices: ["4", "5", "6", "7"], correct: 2 },
+  { question: "Which jump is launched from a forward outside edge?", choices: ["Lutz", "Axel", "Salchow", "Toe loop"], correct: 1 },
+  { question: "Who is \"Mr. Triple Axel\" with 19 World Championship medals?", choices: ["Yuzuru Hanyu", "Brian Orser", "Patrick Chan", "Kurt Browning"], correct: 0 },
+  { question: "What scoring system replaced 6.0 in 2004?", choices: ["IJS", "GOE", "ISU+", "TES"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: FigureSkatingQuizSettings): FigureSkatingQuizState {

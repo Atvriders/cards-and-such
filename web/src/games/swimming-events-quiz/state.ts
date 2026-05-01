@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "What year were full-body tech suits banned?", choices: ["2008", "2010", "2012", "2014"], correct: 1 },
   { question: "How many turns in a 200m freestyle in long course?", choices: ["1", "2", "3", "4"], correct: 2 },
   { question: "Which is the fastest stroke?", choices: ["Backstroke", "Freestyle", "Butterfly", "Breaststroke"], correct: 1 },
-  { question: "How many strokes in a Medley Relay?", choices: ["3", "4", "5", "6"], correct: 1 }
+  { question: "How many strokes in a Medley Relay?", choices: ["3", "4", "5", "6"], correct: 1 },
+  { question: "How long is an Olympic-size swimming pool?", choices: ["25 m", "50 m", "100 m", "100 yd"], correct: 1 },
+  { question: "Which stroke is fastest?", choices: ["Freestyle", "Backstroke", "Breaststroke", "Butterfly"], correct: 0 },
+  { question: "How many strokes are in an individual medley?", choices: ["2", "3", "4", "5"], correct: 2 },
+  { question: "In what order are strokes swum in IM?", choices: ["Fly, Back, Breast, Free", "Free, Back, Breast, Fly", "Back, Fly, Breast, Free", "Fly, Breast, Back, Free"], correct: 0 },
+  { question: "Which swimmer is \"the Iron Lady\" of Hungary?", choices: ["Krisztina Egerszegi", "Katinka Hosszu", "Boglarka Kapas", "Zsuzsanna Jakabos"], correct: 1 },
+  { question: "Who broke Mark Spitz's 7-gold record at one Games?", choices: ["Ian Thorpe", "Michael Phelps", "Ryan Lochte", "Caeleb Dressel"], correct: 1 },
+  { question: "How many lanes in a standard Olympic pool?", choices: ["6", "8", "10", "12"], correct: 1 },
+  { question: "What is the shortest individual Olympic swim event?", choices: ["25 m", "50 m", "100 m", "200 m"], correct: 1 },
+  { question: "Which stroke requires both hands to touch the wall simultaneously?", choices: ["Free", "Back", "Breast", "None"], correct: 2 },
+  { question: "Which event is NOT swum at the Olympics?", choices: ["100m butterfly", "50m breaststroke", "1500m freestyle", "4x100m medley"], correct: 1 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: SwimmingEventsQuizSettings): SwimmingEventsQuizState {

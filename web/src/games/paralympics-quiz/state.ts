@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Sled hockey is a Winter Paralympic sport. True or false?", choices: ["True", "False", "Only in Europe", "Only in USA"], correct: 0 },
   { question: "Where were the 2008 Paralympic Games held?", choices: ["Athens", "Beijing", "Sydney", "London"], correct: 1 },
   { question: "Where were the 2014 Winter Paralympics held?", choices: ["Vancouver", "Pyeongchang", "Sochi", "Beijing"], correct: 2 },
-  { question: "What is the symbol of the Paralympic Games?", choices: ["Five rings", "Three Agitos", "Olive branch", "Dove"], correct: 1 }
+  { question: "What is the symbol of the Paralympic Games?", choices: ["Five rings", "Three Agitos", "Olive branch", "Dove"], correct: 1 },
+  { question: "In what year were the first Paralympic Games held?", choices: ["1948", "1952", "1960", "1968"], correct: 2 },
+  { question: "Where were the first Paralympic Games held?", choices: ["Rome", "Stoke Mandeville", "London", "Tokyo"], correct: 0 },
+  { question: "Who founded the precursor games for disabled WWII veterans?", choices: ["Pierre de Coubertin", "Ludwig Guttmann", "Avery Brundage", "Antonio Samaranch"], correct: 1 },
+  { question: "How often are the Paralympics held?", choices: ["Every 2 years", "Every 3 years", "Every 4 years", "Every 5 years"], correct: 2 },
+  { question: "Which Paralympic athlete is known as the \"Blade Runner\"?", choices: ["Oscar Pistorius", "Markus Rehm", "Jonnie Peacock", "David Weir"], correct: 0 },
+  { question: "When did the Paralympics first share a host city with the Olympics?", choices: ["1960", "1976", "1988", "2000"], correct: 2 },
+  { question: "Which sport is unique to the Paralympics?", choices: ["Goalball", "Volleyball", "Basketball", "Tennis"], correct: 0 },
+  { question: "Where were the 2012 Summer Paralympics held?", choices: ["Beijing", "London", "Rio", "Tokyo"], correct: 1 },
+  { question: "Where were the 2020 Summer Paralympics held?", choices: ["Tokyo", "Paris", "Rio", "Beijing"], correct: 0 },
+  { question: "Which symbol represents the Paralympic movement?", choices: ["Three Agitos", "Five Rings", "Torch", "Wreath"], correct: 0 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: ParalympicsQuizSettings): ParalympicsQuizState {

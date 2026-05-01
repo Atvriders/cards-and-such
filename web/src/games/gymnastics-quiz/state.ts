@@ -23,7 +23,17 @@ const ALL_QUESTIONS: QuizQuestion[] = [
   { question: "Who is the most decorated American gymnast in Olympics?", choices: ["Mary Lou Retton", "Shannon Miller", "Simone Biles", "Nastia Liukin"], correct: 2 },
   { question: "How many gymnasts on a typical Olympic team?", choices: ["3", "4-5", "6", "8"], correct: 1 },
   { question: "What does 'all-around' refer to?", choices: ["Combined score across all apparatus", "Single best event", "Team score", "Floor only"], correct: 0 },
-  { question: "Which 1972 Soviet gymnast captivated audiences with the 'Korbut Flip'?", choices: ["Olga Korbut", "Larisa Latynina", "Nellie Kim", "Lyudmila Tourischeva"], correct: 0 }
+  { question: "Which 1972 Soviet gymnast captivated audiences with the 'Korbut Flip'?", choices: ["Olga Korbut", "Larisa Latynina", "Nellie Kim", "Lyudmila Tourischeva"], correct: 0 },
+  { question: "How many apparatus in men's artistic gymnastics?", choices: ["4", "5", "6", "7"], correct: 2 },
+  { question: "How many apparatus in women's artistic gymnastics?", choices: ["3", "4", "5", "6"], correct: 1 },
+  { question: "Which apparatus is unique to women's gymnastics?", choices: ["Vault", "Beam", "Floor", "Bars"], correct: 1 },
+  { question: "Which apparatus is unique to men's gymnastics?", choices: ["Pommel horse", "Vault", "Floor", "Bars"], correct: 0 },
+  { question: "Who won 3 Olympic all-around golds in row (men)?", choices: ["Sawao Kato", "Kohei Uchimura", "Vitaly Scherbo", "Boris Shakhlin"], correct: 1 },
+  { question: "Which gymnast invented the \"Produnova\" vault?", choices: ["Yelena Produnova", "Simone Biles", "Oksana Chusovitina", "Aliya Mustafina"], correct: 0 },
+  { question: "How many gymnasts on an Olympic team final (current)?", choices: ["3", "4", "5", "6"], correct: 1 },
+  { question: "Where is the FIG (gymnastics federation) headquartered?", choices: ["Switzerland", "Germany", "France", "Italy"], correct: 0 },
+  { question: "Which gymnast scored the first perfect 10?", choices: ["Olga Korbut", "Nadia Comaneci", "Mary Lou Retton", "Vera Caslavska"], correct: 1 },
+  { question: "Which is NOT a gymnastics discipline at the Olympics?", choices: ["Artistic", "Rhythmic", "Trampoline", "Acrobatic"], correct: 3 }
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, settings: GymnasticsQuizSettings): GymnasticsQuizState {
