@@ -1,21 +1,22 @@
-.cnxl-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#fee2e2;border-radius:14px}
-.cnxl-header{display:flex;align-items:center;gap:10px;font-weight:700}
+.cnxl-wrap{font-family:'Courier New',monospace;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#1a1a1a;background:linear-gradient(180deg,#e4d29c 0%,#cdb56c 100%);border-radius:14px}
+.cnxl-header{display:flex;align-items:center;gap:10px;font-weight:700;color:#2a1808}
 .cnxl-icon{font-size:1.6rem}
-.cnxl-scenario{flex:1;color:#b91c1c}
-.cnxl-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1;color:#475569}
-.cnxl-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #b91c1c}
+.cnxl-scenario{flex:1;color:#1a4878}
+.cnxl-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fcf0cc;padding:2px 8px;border-radius:6px;border:1px solid #7a3818;color:#2a1808}
+.cnxl-intro{font-size:0.9rem;color:#2a1808;background:rgba(252,240,204,0.9);padding:10px;border-radius:8px;border-left:3px solid #7a3818}
 .cnxl-history{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
-.cnxl-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fff;border-radius:8px}
+.cnxl-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fcf0cc;border-radius:8px;border:1px solid #9a7838}
 .cnxl-row-pegs{display:flex;gap:4px;flex:1;flex-wrap:wrap}
-.cnxl-peg,.cnxl-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none}
+.cnxl-peg,.cnxl-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:4px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none;box-shadow:0 1px 2px rgba(0,0,0,0.25)}
 .cnxl-row-fb{display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem}
-.cnxl-fb-exact{color:#15803d;font-weight:700}
-.cnxl-fb-partial{color:#b45309}
-.cnxl-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fff;border-radius:10px;border:2px dashed #b91c1c;flex-wrap:wrap}
-.cnxl-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.1);transition:transform 100ms}
+.cnxl-fb-exact{color:#1a5818;font-weight:700}
+.cnxl-fb-partial{color:#a85818}
+.cnxl-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fcf0cc;border-radius:10px;border:2px dashed #1a4878;flex-wrap:wrap}
+.cnxl-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.15);transition:transform 100ms}
 .cnxl-slot:hover{transform:scale(1.08)}
-.cnxl-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#b91c1c;color:#fff;border:none;font-weight:700}
-.cnxl-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.cnxl-final-title{margin:0 0 8px;color:#b91c1c}
-.cnxl-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#b91c1c}
-.cnxl-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}
+.cnxl-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#1a4878;color:#fcf0cc;border:none;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;font-size:0.85rem}
+.cnxl-submit:hover{filter:brightness(1.1)}
+.cnxl-final{text-align:center;padding:24px;background:#fcf0cc;border-radius:14px;color:#2a1808}
+.cnxl-final-title{margin:0 0 8px;color:#2a1808;font-family:'Courier New',monospace}
+.cnxl-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#2a1808}
+.cnxl-final-stats{margin-top:8px;font-size:0.85rem;color:#2a1808;font-family:'JetBrains Mono',monospace;opacity:0.8}

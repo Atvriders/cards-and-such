@@ -1,21 +1,22 @@
-.smm-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#dbeafe;border-radius:14px}
-.smm-header{display:flex;align-items:center;gap:10px;font-weight:700}
+.smm-wrap{font-family:'Georgia',serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#3a2a14;background:linear-gradient(180deg,#f5e9d0 0%,#e8d4a8 100%);border-radius:14px}
+.smm-header{display:flex;align-items:center;gap:10px;font-weight:700;color:#5b3a1a}
 .smm-icon{font-size:1.6rem}
-.smm-scenario{flex:1;color:#1e3a8a}
-.smm-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1;color:#475569}
-.smm-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #1e3a8a}
+.smm-scenario{flex:1;color:#7a4a1a}
+.smm-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fef8ec;padding:2px 8px;border-radius:6px;border:1px solid #a87a3a;color:#5b3a1a}
+.smm-intro{font-size:0.9rem;color:#5b3a1a;background:rgba(255,250,235,0.85);padding:10px;border-radius:8px;border-left:3px solid #a87a3a}
 .smm-history{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
-.smm-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fff;border-radius:8px}
+.smm-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fef8ec;border-radius:8px;border:1px solid #c9a872}
 .smm-row-pegs{display:flex;gap:4px;flex:1;flex-wrap:wrap}
-.smm-peg,.smm-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none}
+.smm-peg,.smm-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:50%;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none;box-shadow:inset -2px -2px 4px rgba(0,0,0,0.25),inset 2px 2px 4px rgba(255,255,255,0.3)}
 .smm-row-fb{display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem}
-.smm-fb-exact{color:#15803d;font-weight:700}
-.smm-fb-partial{color:#b45309}
-.smm-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fff;border-radius:10px;border:2px dashed #1e3a8a;flex-wrap:wrap}
-.smm-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.1);transition:transform 100ms}
+.smm-fb-exact{color:#1a4d1a;font-weight:700}
+.smm-fb-partial{color:#a85a1a}
+.smm-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fef8ec;border-radius:10px;border:2px dashed #8a5a2a;flex-wrap:wrap}
+.smm-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.15);transition:transform 100ms}
 .smm-slot:hover{transform:scale(1.08)}
-.smm-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#1e3a8a;color:#fff;border:none;font-weight:700}
-.smm-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.smm-final-title{margin:0 0 8px;color:#1e3a8a}
-.smm-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#1e3a8a}
-.smm-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}
+.smm-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#5b3a1a;color:#fef8ec;border:none;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;font-size:0.85rem}
+.smm-submit:hover{filter:brightness(1.1)}
+.smm-final{text-align:center;padding:24px;background:#fef8ec;border-radius:14px;color:#5b3a1a}
+.smm-final-title{margin:0 0 8px;color:#5b3a1a;font-family:'Georgia',serif}
+.smm-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#5b3a1a}
+.smm-final-stats{margin-top:8px;font-size:0.85rem;color:#5b3a1a;font-family:'JetBrains Mono',monospace;opacity:0.8}

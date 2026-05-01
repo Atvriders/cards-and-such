@@ -1,21 +1,22 @@
-.c777-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#fee2e2;border-radius:14px}
-.c777-header{display:flex;align-items:center;gap:10px;font-weight:700}
+.c777-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#3a1a0a;background:linear-gradient(180deg,#fff4e6 0%,#ffd8b0 100%);border-radius:14px}
+.c777-header{display:flex;align-items:center;gap:10px;font-weight:700;color:#9a2828}
 .c777-icon{font-size:1.6rem}
-.c777-scenario{flex:1;color:#dc2626}
-.c777-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1;color:#475569}
-.c777-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #dc2626}
+.c777-scenario{flex:1;color:#c83838}
+.c777-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #d83838;color:#9a2828}
+.c777-intro{font-size:0.9rem;color:#3a1a0a;background:rgba(255,255,255,0.85);padding:10px;border-radius:8px;border-left:3px solid #d83838}
 .c777-history{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
-.c777-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fff;border-radius:8px}
+.c777-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fff;border-radius:8px;border:1px solid #f4b870}
 .c777-row-pegs{display:flex;gap:4px;flex:1;flex-wrap:wrap}
-.c777-peg,.c777-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none}
+.c777-peg,.c777-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:10px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none;box-shadow:0 2px 4px rgba(216,56,56,0.25)}
 .c777-row-fb{display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem}
-.c777-fb-exact{color:#15803d;font-weight:700}
-.c777-fb-partial{color:#b45309}
-.c777-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fff;border-radius:10px;border:2px dashed #dc2626;flex-wrap:wrap}
-.c777-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.1);transition:transform 100ms}
+.c777-fb-exact{color:#168816;font-weight:700}
+.c777-fb-partial{color:#d86818}
+.c777-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fff;border-radius:10px;border:2px dashed #d83838;flex-wrap:wrap}
+.c777-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.15);transition:transform 100ms}
 .c777-slot:hover{transform:scale(1.08)}
-.c777-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#dc2626;color:#fff;border:none;font-weight:700}
-.c777-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.c777-final-title{margin:0 0 8px;color:#dc2626}
-.c777-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#dc2626}
-.c777-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}
+.c777-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#d83838;color:#fff;border:none;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;font-size:0.85rem}
+.c777-submit:hover{filter:brightness(1.1)}
+.c777-final{text-align:center;padding:24px;background:#fff;border-radius:14px;color:#9a2828}
+.c777-final-title{margin:0 0 8px;color:#9a2828;font-family:'Inter',system-ui,sans-serif}
+.c777-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#9a2828}
+.c777-final-stats{margin-top:8px;font-size:0.85rem;color:#9a2828;font-family:'JetBrains Mono',monospace;opacity:0.8}

@@ -1,21 +1,22 @@
-.mmnr-wrap{font-family:'Inter',system-ui,sans-serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#dbeafe;border-radius:14px}
-.mmnr-header{display:flex;align-items:center;gap:10px;font-weight:700}
+.mmnr-wrap{font-family:'Georgia',serif;max-width:600px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#2a1f0a;background:linear-gradient(180deg,#f0e2c5 0%,#dec094 100%);border-radius:14px}
+.mmnr-header{display:flex;align-items:center;gap:10px;font-weight:700;color:#4a2810}
 .mmnr-icon{font-size:1.6rem}
-.mmnr-scenario{flex:1;color:#1d4ed8}
-.mmnr-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1;color:#475569}
-.mmnr-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #1d4ed8}
+.mmnr-scenario{flex:1;color:#6a3a18}
+.mmnr-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:#fbf3df;padding:2px 8px;border-radius:6px;border:1px solid #9a6020;color:#4a2810}
+.mmnr-intro{font-size:0.9rem;color:#4a2810;background:rgba(251,243,223,0.85);padding:10px;border-radius:8px;border-left:3px solid #9a6020}
 .mmnr-history{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
-.mmnr-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fff;border-radius:8px}
+.mmnr-row{display:flex;align-items:center;gap:8px;padding:6px;background:#fbf3df;border-radius:8px;border:1px solid #b8975a}
 .mmnr-row-pegs{display:flex;gap:4px;flex:1;flex-wrap:wrap}
-.mmnr-peg,.mmnr-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none}
+.mmnr-peg,.mmnr-slot{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:50%;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:0 6px;border:none;box-shadow:inset -2px -2px 4px rgba(0,0,0,0.25),inset 2px 2px 4px rgba(255,255,255,0.3)}
 .mmnr-row-fb{display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem}
-.mmnr-fb-exact{color:#15803d;font-weight:700}
-.mmnr-fb-partial{color:#b45309}
-.mmnr-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fff;border-radius:10px;border:2px dashed #1d4ed8;flex-wrap:wrap}
-.mmnr-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.1);transition:transform 100ms}
+.mmnr-fb-exact{color:#155515;font-weight:700}
+.mmnr-fb-partial{color:#995015}
+.mmnr-current{display:flex;gap:6px;justify-content:center;padding:10px;background:#fbf3df;border-radius:10px;border:2px dashed #7a4818;flex-wrap:wrap}
+.mmnr-slot{cursor:pointer;border:2px solid rgba(0,0,0,0.15);transition:transform 100ms}
 .mmnr-slot:hover{transform:scale(1.08)}
-.mmnr-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#1d4ed8;color:#fff;border:none;font-weight:700}
-.mmnr-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.mmnr-final-title{margin:0 0 8px;color:#1d4ed8}
-.mmnr-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#1d4ed8}
-.mmnr-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}
+.mmnr-submit{cursor:pointer;align-self:center;padding:10px 24px;border-radius:8px;background:#4a2810;color:#fbf3df;border:none;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;font-size:0.85rem}
+.mmnr-submit:hover{filter:brightness(1.1)}
+.mmnr-final{text-align:center;padding:24px;background:#fbf3df;border-radius:14px;color:#4a2810}
+.mmnr-final-title{margin:0 0 8px;color:#4a2810;font-family:'Georgia',serif}
+.mmnr-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#4a2810}
+.mmnr-final-stats{margin-top:8px;font-size:0.85rem;color:#4a2810;font-family:'JetBrains Mono',monospace;opacity:0.8}
