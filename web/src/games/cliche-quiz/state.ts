@@ -5,102 +5,302 @@ export interface ClicheQuizState { questions: QuizQuestion[]; currentIndex: numb
 export type ClicheQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Time flies when you're ___.",
+    "question": "Complete: 'At the end of the ___'",
     "choices": [
-      "sleeping",
-      "having fun",
-      "walking",
-      "tired"
+      "day",
+      "rope",
+      "line",
+      "tunnel"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "A penny for your ___.",
+    "question": "Complete: 'Think outside the ___'",
+    "choices": [
+      "box",
+      "wall",
+      "page",
+      "frame"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Low-hanging ___'",
+    "choices": [
+      "fruit",
+      "branch",
+      "cloud",
+      "tree"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Move the ___'",
+    "choices": [
+      "needle",
+      "goalpost",
+      "chess piece",
+      "marker"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Hit the ground ___'",
+    "choices": [
+      "running",
+      "walking",
+      "moving",
+      "rolling"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'A perfect ___'",
+    "choices": [
+      "storm",
+      "mess",
+      "circle",
+      "dawn"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Avoid like the ___'",
+    "choices": [
+      "plague",
+      "flu",
+      "rain",
+      "devil"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Read between the ___'",
+    "choices": [
+      "lines",
+      "pages",
+      "words",
+      "chapters"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Time will ___'",
+    "choices": [
+      "tell",
+      "heal",
+      "pass",
+      "march"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Only time will ___'",
+    "choices": [
+      "tell",
+      "show",
+      "say",
+      "know"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'A blessing in ___'",
+    "choices": [
+      "disguise",
+      "hiding",
+      "secret",
+      "wait"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'It is what it ___'",
+    "choices": [
+      "is",
+      "was",
+      "seems",
+      "becomes"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Every cloud has a silver ___'",
+    "choices": [
+      "lining",
+      "edge",
+      "frame",
+      "shadow"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'When life gives you ___'",
+    "choices": [
+      "lemons",
+      "apples",
+      "trouble",
+      "rain"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Last but not ___'",
+    "choices": [
+      "least",
+      "lost",
+      "low",
+      "loud"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'In the nick of ___'",
+    "choices": [
+      "time",
+      "fate",
+      "luck",
+      "moment"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Easier said than ___'",
+    "choices": [
+      "done",
+      "made",
+      "tried",
+      "told"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'A penny for your ___'",
     "choices": [
       "thoughts",
-      "wallet",
-      "time",
-      "trouble"
+      "trouble",
+      "secrets",
+      "wisdom"
     ],
     "correct": 0
   },
   {
-    "question": "Better late than ___.",
+    "question": "Complete: 'Better late than ___'",
     "choices": [
-      "sorry",
       "never",
-      "worse",
-      "early"
+      "early",
+      "sorry",
+      "missed"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "Don't judge a book by its ___.",
+    "question": "Complete: 'Don't count your chickens before they ___'",
     "choices": [
-      "spine",
-      "cover",
-      "title",
-      "author"
+      "hatch",
+      "lay",
+      "crow",
+      "fly"
     ],
-    "correct": 1
+    "correct": 0
   },
   {
-    "question": "The early bird catches the ___.",
+    "question": "Complete: 'The early bird catches the ___'",
     "choices": [
-      "fish",
       "worm",
       "sun",
-      "cat"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Every cloud has a silver ___.",
-    "choices": [
-      "edge",
-      "lining",
-      "cloud",
-      "sun"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "When in Rome, ___.",
-    "choices": [
-      "leave",
-      "do as the Romans do",
-      "speak Italian",
-      "fight"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "A picture is worth a thousand ___.",
-    "choices": [
-      "dollars",
-      "words",
-      "hours",
-      "frames"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Two heads are better than ___.",
-    "choices": [
-      "one",
-      "none",
-      "three",
-      "many"
+      "dew",
+      "prize"
     ],
     "correct": 0
   },
   {
-    "question": "The grass is always greener on the ___.",
+    "question": "Complete: 'Actions speak louder than ___'",
+    "choices": [
+      "words",
+      "thoughts",
+      "promises",
+      "noise"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Don't judge a book by its ___'",
+    "choices": [
+      "cover",
+      "title",
+      "weight",
+      "author"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'When in Rome, do as the Romans ___'",
+    "choices": [
+      "do",
+      "say",
+      "live",
+      "eat"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Beauty is in the eye of the ___'",
+    "choices": [
+      "beholder",
+      "lover",
+      "artist",
+      "stranger"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'A picture is worth a thousand ___'",
+    "choices": [
+      "words",
+      "stories",
+      "memories",
+      "moments"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'There's no place like ___'",
+    "choices": [
+      "home",
+      "Kansas",
+      "here",
+      "Earth"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'Birds of a feather flock ___'",
+    "choices": [
+      "together",
+      "south",
+      "high",
+      "fast"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'The grass is always greener on the ___'",
     "choices": [
       "other side",
-      "top",
-      "far side",
-      "mountain"
+      "hill",
+      "lawn",
+      "horizon"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Complete: 'You can't have your cake and ___ it too'",
+    "choices": [
+      "eat",
+      "save",
+      "give",
+      "hide"
     ],
     "correct": 0
   }

@@ -5,102 +5,302 @@ export interface HeteronymQuizState { questions: QuizQuestion[]; currentIndex: n
 export type HeteronymQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "LEAD as metal vs verb 'to guide' — heteronym?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "yes",
-      "no",
-      "sometimes",
-      "never"
+      "BASS (fish/instrument)",
+      "CHAIR (seat/lead)",
+      "RUN (jog/operate)",
+      "FAST (quick/abstain)"
     ],
     "correct": 0
   },
   {
-    "question": "TEAR (eye) vs TEAR (rip)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "LEAD (metal/guide)",
+      "TABLE (furniture/data)",
+      "BANK (river/money)",
+      "MATCH (fire/pair)"
     ],
     "correct": 0
   },
   {
-    "question": "BASS (fish) vs BASS (low sound)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "BOW (ribbon/bend)",
+      "DUCK (bird/avoid)",
+      "RING (jewelry/sound)",
+      "PARK (place/stop)"
     ],
     "correct": 0
   },
   {
-    "question": "WIND (breeze) vs WIND (turn)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "TEAR (rip/cry)",
+      "BAT (animal/club)",
+      "FAIR (just/festival)",
+      "LIGHT (lamp/weight)"
     ],
     "correct": 0
   },
   {
-    "question": "BOW (ribbon) vs BOW (bend)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "WIND (air/coil)",
+      "ROSE (flower/got up)",
+      "BARK (dog/tree)",
+      "PINE (tree/yearn)"
     ],
     "correct": 0
   },
   {
-    "question": "MINUTE (60s) vs MINUTE (tiny)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "DOVE (bird/jumped)",
+      "COULD (able/preserve)",
+      "WAVE (sea/hand)",
+      "FLY (insect/travel)"
     ],
     "correct": 0
   },
   {
-    "question": "DESERT (sand) vs DESERT (abandon)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "MINUTE (time/tiny)",
+      "SAW (tool/past see)",
+      "WELL (good/water)",
+      "JAM (fruit/stuck)"
     ],
     "correct": 0
   },
   {
-    "question": "RECORD (noun) vs RECORD (verb)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "DESERT (abandon/sand)",
+      "PALM (hand/tree)",
+      "CRANE (bird/machine)",
+      "SEAL (animal/close)"
     ],
     "correct": 0
   },
   {
-    "question": "PRESENT (gift) vs PRESENT (show)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "OBJECT (thing/oppose)",
+      "MEAN (cruel/average)",
+      "FAIR (event/just)",
+      "BARK (tree/dog)"
     ],
     "correct": 0
   },
   {
-    "question": "OBJECT (item) vs OBJECT (oppose)?",
+    "question": "Which is a heteronym pair?",
     "choices": [
-      "heteronym",
-      "homophone",
-      "synonym",
-      "antonym"
+      "CONTENT (happy/contents)",
+      "RING (sound/jewelry)",
+      "SCALE (weight/fish)",
+      "BAT (animal/club)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "RECORD (data/log)",
+      "SPRING (season/coil)",
+      "LIGHT (sun/weight)",
+      "MATCH (fire/pair)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "PRESENT (gift/show)",
+      "BANK (money/river)",
+      "PEN (writer/cage)",
+      "BARK (dog/tree)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "CONDUCT (lead/behavior)",
+      "FLY (insect/travel)",
+      "MATCH (fire/pair)",
+      "TIE (knot/draw)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "CONTRACT (deal/shrink)",
+      "BAT (animal/wood)",
+      "BARK (tree/dog)",
+      "FAIR (event/just)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "REFUSE (decline/trash)",
+      "JAM (fruit/stuck)",
+      "WAVE (sea/hand)",
+      "BEAR (animal/carry)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "PRODUCE (make/groceries)",
+      "FAIR (event/just)",
+      "WAVE (water/hand)",
+      "SCALE (weight/climb)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "INVALID (not valid/sick person)",
+      "BAT (animal/club)",
+      "TIE (knot/draw)",
+      "WELL (water/good)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "POLISH (clean) vs Polish (Poland)",
+      "MATCH (fire/pair)",
+      "BARK (dog/tree)",
+      "JAM (fruit/stuck)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "MOPED (sulked/scooter)",
+      "BARK (dog/tree)",
+      "TIE (knot/draw)",
+      "FAIR (event/just)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "NUMBER (digit/more numb)",
+      "BAT (animal/club)",
+      "BANK (river/money)",
+      "LIGHT (lamp/weight)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "CLOSE (near/shut)",
+      "PEN (cage/writer)",
+      "MATCH (fire/pair)",
+      "LIGHT (sun/weight)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "HOUSE (noun/verb)",
+      "BAT (animal/club)",
+      "BANK (river/money)",
+      "FAIR (event/just)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "USE (noun/verb)",
+      "BAT (animal/wood)",
+      "MATCH (fire/pair)",
+      "JAM (fruit/stuck)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "EXCUSE (noun/verb)",
+      "TIE (knot/draw)",
+      "WAVE (sea/hand)",
+      "BARK (dog/tree)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "ABUSE (noun/verb)",
+      "FAIR (event/just)",
+      "BAT (animal/club)",
+      "PEN (cage/writer)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "ENTRANCE (doorway/charm)",
+      "BANK (river/money)",
+      "MATCH (fire/pair)",
+      "JAM (fruit/stuck)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "AUGUST (month/majestic)",
+      "TIE (knot/draw)",
+      "BAT (animal/club)",
+      "WAVE (sea/hand)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "INTIMATE (close/imply)",
+      "BARK (dog/tree)",
+      "FAIR (event/just)",
+      "LIGHT (lamp/weight)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "SEPARATE (adj/verb)",
+      "PEN (writer/cage)",
+      "MATCH (fire/pair)",
+      "BAT (animal/club)"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a heteronym pair?",
+    "choices": [
+      "PERFECT (flawless/complete a task)",
+      "JAM (fruit/stuck)",
+      "TIE (knot/draw)",
+      "WAVE (sea/hand)"
     ],
     "correct": 0
   }

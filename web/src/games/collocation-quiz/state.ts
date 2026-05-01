@@ -5,59 +5,209 @@ export interface CollocationQuizState { questions: QuizQuestion[]; currentIndex:
 export type CollocationQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Make or do — homework?",
+    "question": "___ a decision",
     "choices": [
       "make",
       "do",
-      "take",
-      "get"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Heavy or strong — rain?",
-    "choices": [
-      "heavy",
-      "strong",
-      "tough",
-      "big"
+      "have",
+      "give"
     ],
     "correct": 0
   },
   {
-    "question": "Take or make — a decision?",
+    "question": "___ a mistake",
     "choices": [
-      "take",
       "make",
       "do",
-      "get"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Strong or heavy — coffee?",
-    "choices": [
-      "strong",
-      "heavy",
-      "big",
-      "hard"
+      "have",
+      "take"
     ],
     "correct": 0
   },
   {
-    "question": "Catch or take — a cold?",
+    "question": "___ homework",
     "choices": [
-      "catch",
+      "do",
+      "make",
+      "have",
+      "give"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ the dishes",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a shower",
+    "choices": [
       "take",
-      "get",
+      "do",
+      "make",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a photo",
+    "choices": [
+      "take",
+      "do",
+      "make",
+      "give"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ breakfast",
+    "choices": [
+      "have",
+      "do",
+      "take",
+      "make"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a good time",
+    "choices": [
+      "have",
+      "do",
+      "take",
+      "give"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ attention",
+    "choices": [
+      "pay",
+      "give",
+      "make",
       "do"
     ],
     "correct": 0
   },
   {
-    "question": "Pay or do — attention?",
+    "question": "___ a visit",
     "choices": [
       "pay",
+      "do",
+      "take",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a question",
+    "choices": [
+      "ask",
+      "do",
+      "make",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a favor",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ the bed",
+    "choices": [
+      "make",
+      "do",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ progress",
+    "choices": [
+      "make",
+      "do",
+      "have",
+      "give"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a chance",
+    "choices": [
+      "take",
+      "do",
+      "make",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ care of",
+    "choices": [
+      "take",
+      "make",
+      "do",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a noise",
+    "choices": [
+      "make",
+      "do",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a profit",
+    "choices": [
+      "make",
+      "do",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ business",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ research",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ patience",
+    "choices": [
+      "have",
       "do",
       "make",
       "take"
@@ -65,42 +215,92 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "High or tall — fever?",
+    "question": "___ a meeting",
     "choices": [
-      "high",
-      "tall",
-      "big",
-      "strong"
+      "have",
+      "do",
+      "take",
+      "make"
     ],
     "correct": 0
   },
   {
-    "question": "Fast or quick — food?",
-    "choices": [
-      "fast",
-      "quick",
-      "speedy",
-      "instant"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Big or large — surprise?",
-    "choices": [
-      "big",
-      "large",
-      "huge",
-      "strong"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Take or make — a photo?",
+    "question": "___ a break",
     "choices": [
       "take",
+      "do",
+      "have",
+      "make"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ medicine",
+    "choices": [
+      "take",
+      "do",
+      "make",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a speech",
+    "choices": [
+      "give",
+      "do",
+      "take",
+      "make"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a hand (help)",
+    "choices": [
+      "give",
+      "do",
+      "make",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a cold",
+    "choices": [
+      "catch",
+      "do",
+      "make",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ the bus",
+    "choices": [
+      "catch",
+      "do",
+      "make",
+      "have"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ exercise",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "take"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "___ a promise",
+    "choices": [
       "make",
       "do",
-      "get"
+      "have",
+      "take"
     ],
     "correct": 0
   }

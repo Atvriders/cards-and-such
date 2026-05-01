@@ -8,27 +8,27 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "SANDWICH is named after?",
     "choices": [
       "Earl of Sandwich",
-      "King George",
-      "a chef",
-      "a baker"
+      "King George III",
+      "a French chef",
+      "a baker's son"
     ],
     "correct": 0
   },
   {
     "question": "BOYCOTT is named after?",
     "choices": [
-      "Captain Boycott",
+      "Captain Charles Boycott",
       "an actor",
-      "a dog",
-      "a city"
+      "a politician",
+      "an island"
     ],
     "correct": 0
   },
   {
     "question": "SAXOPHONE is named after?",
     "choices": [
-      "Sax family",
-      "a saxon king",
+      "Adolphe Sax",
+      "a Saxon king",
       "a saint",
       "a city"
     ],
@@ -38,9 +38,9 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "CARDIGAN is named after?",
     "choices": [
       "Earl of Cardigan",
-      "a baker",
+      "a tailor",
       "a queen",
-      "a city"
+      "a Welsh city"
     ],
     "correct": 0
   },
@@ -48,9 +48,9 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "WELLINGTON BOOT is named after?",
     "choices": [
       "Duke of Wellington",
-      "a baker",
+      "a cobbler",
       "a queen",
-      "a knight"
+      "a battle site"
     ],
     "correct": 0
   },
@@ -70,7 +70,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
       "Rudolf Diesel",
       "a Greek god",
       "a chemist",
-      "a chef"
+      "a town"
     ],
     "correct": 0
   },
@@ -78,7 +78,7 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "question": "GEIGER COUNTER is named after?",
     "choices": [
       "Hans Geiger",
-      "a king",
+      "a Russian general",
       "a city",
       "a saint"
     ],
@@ -95,12 +95,212 @@ const ALL_QUESTIONS: QuizQuestion[] = [
     "correct": 0
   },
   {
-    "question": "CELSIUS is named after?",
+    "question": "CELSIUS scale is named after?",
     "choices": [
       "Anders Celsius",
       "a king",
       "a saint",
       "a city"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "FAHRENHEIT scale is named after?",
+    "choices": [
+      "Daniel Fahrenheit",
+      "a chemist",
+      "a saint",
+      "a city"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "OHM unit is named after?",
+    "choices": [
+      "Georg Ohm",
+      "a Greek philosopher",
+      "a saint",
+      "a kingdom"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "WATT unit is named after?",
+    "choices": [
+      "James Watt",
+      "a king",
+      "a saint",
+      "an inventor of light bulbs"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "VOLT unit is named after?",
+    "choices": [
+      "Alessandro Volta",
+      "a saint",
+      "a Roman emperor",
+      "a chemist"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "AMPERE unit is named after?",
+    "choices": [
+      "Andre-Marie Ampere",
+      "a king",
+      "a city",
+      "a saint"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "PASTEURIZATION is named after?",
+    "choices": [
+      "Louis Pasteur",
+      "a city",
+      "a chef",
+      "a saint"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "BRAILLE is named after?",
+    "choices": [
+      "Louis Braille",
+      "a doctor",
+      "a saint",
+      "a school"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "LEOTARD is named after?",
+    "choices": [
+      "Jules Leotard",
+      "a designer",
+      "a queen",
+      "a dancer's town"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "MAUSOLEUM is named after?",
+    "choices": [
+      "King Mausolus",
+      "a Greek god",
+      "a saint",
+      "a Roman general"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "FERRIS WHEEL is named after?",
+    "choices": [
+      "George Ferris",
+      "a fairground owner",
+      "a saint",
+      "an English town"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "MASON JAR is named after?",
+    "choices": [
+      "John Landis Mason",
+      "a guild",
+      "a saint",
+      "a town"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "BUNSEN BURNER is named after?",
+    "choices": [
+      "Robert Bunsen",
+      "a chemist's son",
+      "a city",
+      "a saint"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "PETRI DISH is named after?",
+    "choices": [
+      "Julius Petri",
+      "a saint",
+      "a Roman",
+      "a king"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "HOOVER vacuum is named after?",
+    "choices": [
+      "W.H. Hoover",
+      "a US president",
+      "a town",
+      "a soldier"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "LEVI'S JEANS is named after?",
+    "choices": [
+      "Levi Strauss",
+      "a tribe",
+      "a town",
+      "a tailor's son"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "MACADAMIA NUT is named after?",
+    "choices": [
+      "John Macadam",
+      "a Scottish town",
+      "a saint",
+      "a botanist's wife"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "ZEPPELIN is named after?",
+    "choices": [
+      "Count von Zeppelin",
+      "a German town",
+      "a saint",
+      "an engineer's wife"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "MAVERICK is named after?",
+    "choices": [
+      "Samuel Maverick",
+      "a horse breeder",
+      "a saint",
+      "a town"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "SHRAPNEL is named after?",
+    "choices": [
+      "Henry Shrapnel",
+      "a battlefield",
+      "a saint",
+      "a metal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "LYNCH is named after?",
+    "choices": [
+      "Charles Lynch",
+      "a sheriff's son",
+      "an Irish town",
+      "a saint"
     ],
     "correct": 0
   }

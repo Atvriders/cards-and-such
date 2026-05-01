@@ -5,102 +5,302 @@ export interface TautologyQuizState { questions: QuizQuestion[]; currentIndex: n
 export type TautologyQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Tautology?",
+    "question": "Which is a tautology?",
     "choices": [
       "free gift",
-      "red ball",
-      "hot soup",
-      "cold day"
+      "small gift",
+      "wrapped gift",
+      "given gift"
     ],
     "correct": 0
   },
   {
-    "question": "Tautology?",
-    "choices": [
-      "green grass",
-      "cold day",
-      "new innovation",
-      "tall tree"
-    ],
-    "correct": 2
-  },
-  {
-    "question": "Tautology?",
+    "question": "Which is a tautology?",
     "choices": [
       "ATM machine",
-      "big book",
-      "loud noise",
-      "hot coffee"
+      "bank machine",
+      "cash machine",
+      "card reader"
     ],
     "correct": 0
   },
   {
-    "question": "Tautology?",
-    "choices": [
-      "close proximity",
-      "sharp knife",
-      "red apple",
-      "blue car"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "Tautology?",
+    "question": "Which is a tautology?",
     "choices": [
       "PIN number",
-      "green tree",
-      "round ball",
-      "cold ice"
+      "PIN code",
+      "secret code",
+      "passcode"
     ],
     "correct": 0
   },
   {
-    "question": "Tautology?",
+    "question": "Which is a tautology?",
     "choices": [
-      "nice day",
-      "past history",
-      "blue sky",
-      "open door"
-    ],
-    "correct": 1
-  },
-  {
-    "question": "Tautology?",
-    "choices": [
-      "future plans",
-      "large house",
-      "quick run",
-      "sad book"
+      "LCD display",
+      "LED display",
+      "OLED screen",
+      "plasma display"
     ],
     "correct": 0
   },
   {
-    "question": "Tautology?",
+    "question": "Which is a tautology?",
+    "choices": [
+      "HIV virus",
+      "flu virus",
+      "cold virus",
+      "novel virus"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "added bonus",
+      "yearly bonus",
+      "small bonus",
+      "cash bonus"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "advance planning",
+      "careful planning",
+      "early plan",
+      "future plan"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "close proximity",
+      "distant proximity",
+      "near distance",
+      "far range"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "end result",
+      "test result",
+      "final outcome",
+      "score"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
     "choices": [
       "unexpected surprise",
-      "green leaf",
-      "wet pool",
-      "sharp pencil"
+      "small surprise",
+      "birthday surprise",
+      "happy gift"
     ],
     "correct": 0
   },
   {
-    "question": "Tautology?",
+    "question": "Which is a tautology?",
     "choices": [
-      "repeat again",
-      "old song",
-      "bright sun",
-      "quiet room"
+      "past history",
+      "recent history",
+      "ancient history",
+      "oral history"
     ],
     "correct": 0
   },
   {
-    "question": "Tautology?",
+    "question": "Which is a tautology?",
+    "choices": [
+      "new innovation",
+      "tech innovation",
+      "small invention",
+      "fresh idea"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "false pretense",
+      "true pretext",
+      "honest claim",
+      "sincere lie"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "null and void",
+      "binding contract",
+      "signed deal",
+      "verbal pact"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "each and every",
+      "some or all",
+      "few and many",
+      "any or none"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "12 noon",
+      "12 o'clock",
+      "noon hour",
+      "midday meal"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "12 midnight",
+      "late night",
+      "12 o'clock",
+      "midnight hour"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "safe haven",
+      "warm home",
+      "guarded fort",
+      "quiet refuge"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
     "choices": [
       "frozen ice",
-      "new song",
-      "old book",
-      "bright moon"
+      "thin ice",
+      "thick ice",
+      "black ice"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "join together",
+      "join apart",
+      "split together",
+      "merge apart"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "revert back",
+      "go back",
+      "step back",
+      "look back"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "repeat again",
+      "say again",
+      "do over",
+      "try once"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "completely finished",
+      "almost done",
+      "halfway through",
+      "barely begun"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "totally unique",
+      "rather rare",
+      "fairly common",
+      "quite typical"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "personal opinion",
+      "shared view",
+      "popular take",
+      "common belief"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "true fact",
+      "key fact",
+      "small fact",
+      "known fact"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "actual fact",
+      "minor detail",
+      "side note",
+      "main point"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "sum total",
+      "grand finale",
+      "final lap",
+      "last word"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "empty space",
+      "open field",
+      "wide road",
+      "vast plain"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which is a tautology?",
+    "choices": [
+      "future plans",
+      "past plans",
+      "current plan",
+      "draft plan"
     ],
     "correct": 0
   }

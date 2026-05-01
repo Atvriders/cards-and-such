@@ -5,102 +5,302 @@ export interface SpoonerismQuizState { questions: QuizQuestion[]; currentIndex: 
 export type SpoonerismQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
   {
-    "question": "Spoonerism: 'belly jeans' = ?",
+    "question": "'A blushing crow' is a spoonerism of?",
+    "choices": [
+      "a crushing blow",
+      "a brushing crow",
+      "a flushing crow",
+      "a rushing brow"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Belly jeans' is a spoonerism of?",
     "choices": [
       "jelly beans",
-      "baby genes",
-      "belly grins",
-      "bell joins"
+      "belly beans",
+      "jolly jeans",
+      "belly jams"
     ],
     "correct": 0
   },
   {
-    "question": "'lack of pies' = ?",
+    "question": "'Plaster man' is a spoonerism of?",
     "choices": [
-      "pack of lies",
-      "lack of fries",
-      "lots of pies",
-      "luck of pies"
+      "master plan",
+      "plastic man",
+      "pasture man",
+      "plaster pan"
     ],
     "correct": 0
   },
   {
-    "question": "'shake a tower' = ?",
+    "question": "'Sealing the hick' is a spoonerism of?",
     "choices": [
-      "take a shower",
-      "make a tower",
-      "shape a tower",
-      "sake a hour"
+      "healing the sick",
+      "feeling the hick",
+      "sealing the kick",
+      "sailing the hill"
     ],
     "correct": 0
   },
   {
-    "question": "'cattle ships' = ?",
+    "question": "'Tease my ears' is a spoonerism of?",
     "choices": [
-      "battleships",
-      "cattle hips",
-      "saddle ships",
-      "battle slips"
+      "ease my tears",
+      "tease my fears",
+      "freeze my ears",
+      "tease my years"
     ],
     "correct": 0
   },
   {
-    "question": "'dear old queen' = ?",
-    "choices": [
-      "queer old dean",
-      "dear old quill",
-      "near old green",
-      "fair old queen"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "'tons of soil' = ?",
-    "choices": [
-      "sons of toil",
-      "tons of foil",
-      "tans of soil",
-      "ton of toils"
-    ],
-    "correct": 0
-  },
-  {
-    "question": "'wave the sails' = ?",
+    "question": "'Wave the sails' is a spoonerism of?",
     "choices": [
       "save the whales",
-      "wave the rails",
-      "gave the sails",
-      "wave the snails"
+      "wave the whales",
+      "save the sails",
+      "wave the wails"
     ],
     "correct": 0
   },
   {
-    "question": "'fight in your liar' = ?",
+    "question": "'Trail snacks' is a spoonerism of?",
     "choices": [
-      "light in your fryer",
-      "fight in your liver",
-      "write in your fire",
-      "light in your eye"
+      "snail tracks",
+      "trail snakes",
+      "frail snacks",
+      "tail snacks"
     ],
     "correct": 0
   },
   {
-    "question": "'roaring pain' = ?",
+    "question": "'Flutter by' is a spoonerism of?",
     "choices": [
-      "pouring rain",
-      "raring pane",
-      "road in pain",
-      "ruling pen"
+      "butterfly",
+      "flutter buy",
+      "fly by",
+      "flatter by"
     ],
     "correct": 0
   },
   {
-    "question": "'know your blows' = ?",
+    "question": "'Lack of pies' is a spoonerism of?",
+    "choices": [
+      "pack of lies",
+      "lack of lies",
+      "lack of pi",
+      "back of pies"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Bedding wells' is a spoonerism of?",
+    "choices": [
+      "wedding bells",
+      "bedding bells",
+      "bedding wills",
+      "wedding wells"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Roaring with pain' is a spoonerism of?",
+    "choices": [
+      "pouring with rain",
+      "roaring with rain",
+      "soaring with pain",
+      "roaring with main"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Chipping the flannel' is a spoonerism of?",
+    "choices": [
+      "flipping the channel",
+      "chipping the channel",
+      "flipping the flannel",
+      "skipping the channel"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Birthington's washday' is a spoonerism of?",
+    "choices": [
+      "Washington's birthday",
+      "Washington's washday",
+      "Birmington's birthday",
+      "Burlington's washday"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Mardon me, padam' is a spoonerism of?",
+    "choices": [
+      "Pardon me, madam",
+      "Mardon me, madam",
+      "Garden me, padam",
+      "Bargain me, madam"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'A well-boiled icicle' is a spoonerism of?",
+    "choices": [
+      "a well-oiled bicycle",
+      "a well-cooled icicle",
+      "a well-foiled icicle",
+      "a well-boiled cycle"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Fighting a liar' is a spoonerism of?",
+    "choices": [
+      "lighting a fire",
+      "lighting a liar",
+      "fighting a fire",
+      "fighting a friar"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Cop porn' is a spoonerism of?",
+    "choices": [
+      "popcorn",
+      "cop horn",
+      "cop borne",
+      "top corn"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Soul of ballad' is a spoonerism of?",
+    "choices": [
+      "bowl of salad",
+      "sole of ballad",
+      "sole of salad",
+      "bowl of ballad"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Tons of soil' is a spoonerism of?",
+    "choices": [
+      "sons of toil",
+      "tons of toil",
+      "sons of soil",
+      "fans of toil"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Nosey little cook' is a spoonerism of?",
+    "choices": [
+      "cosy little nook",
+      "nosy little nook",
+      "cosy little book",
+      "rosy little cook"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Know your blows' is a spoonerism of?",
     "choices": [
       "blow your nose",
-      "grow your blows",
-      "know the blow",
-      "go your blows"
+      "know your nose",
+      "blow your blows",
+      "know your toes"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Go and shake a tower' is a spoonerism of?",
+    "choices": [
+      "go and take a shower",
+      "go and bake a tower",
+      "go and rake a flower",
+      "go and shake a flower"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Queer old dean' is a spoonerism of?",
+    "choices": [
+      "dear old queen",
+      "dear old dean",
+      "queer old queen",
+      "rear old dean"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Hissed all my mystery lectures' is a spoonerism of?",
+    "choices": [
+      "missed all my history lectures",
+      "hissed all my history lectures",
+      "kissed all my mystery lectures",
+      "missed all my mystery lectures"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Half-warmed fish' is a spoonerism of?",
+    "choices": [
+      "half-formed wish",
+      "half-warmed dish",
+      "half-formed fish",
+      "half-warm fish"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Nicking your pose' is a spoonerism of?",
+    "choices": [
+      "picking your nose",
+      "kicking your pose",
+      "picking your pose",
+      "nicking your nose"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Tip of the slung' is a spoonerism of?",
+    "choices": [
+      "slip of the tongue",
+      "tip of the tongue",
+      "slip of the slung",
+      "tip of the lung"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Roy of the bovers' is a spoonerism of?",
+    "choices": [
+      "boy of the rovers",
+      "roy of the rovers",
+      "boy of the bovers",
+      "joy of the bovers"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Bunny phone' is a spoonerism of?",
+    "choices": [
+      "funny bone",
+      "bunny bone",
+      "funny phone",
+      "honey bone"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "'Ready as a stock' is a spoonerism of?",
+    "choices": [
+      "steady as a rock",
+      "ready as a rock",
+      "steady as a stock",
+      "heady as a rock"
     ],
     "correct": 0
   }
