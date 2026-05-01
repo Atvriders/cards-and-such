@@ -4,16 +4,16 @@ export interface ThreeCheckQuizSettings { questions: "10"; }
 export interface ThreeCheckQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ThreeCheckQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "Three-Check is won by", choices: ["Delivering check three times to the opponent", "Three captures", "Three pawn promotions", "Reaching rank 3"], correct: 0 },
-  { question: "Standard checkmate", choices: ["Still wins immediately", "Doesn't count", "Counts as one check", "Loses"], correct: 0 },
-  { question: "A player can also win by", choices: ["Delivering checkmate at any point", "Three pawn moves", "Capturing queen", "Stalemate"], correct: 0 },
-  { question: "Tracking checks is done", choices: ["By a counter for each side", "Verbally only", "Via flag", "By write-down only"], correct: 0 },
-  { question: "Aggressive opening play is", choices: ["Common — quick checks are valuable", "Discouraged", "Forbidden", "Always wrong"], correct: 0 },
-  { question: "Defending against repeated checks", choices: ["Becomes a key positional skill", "Is impossible", "Forbidden", "Always wins"], correct: 0 },
-  { question: "Three-Check supports", choices: ["Standard FIDE pieces with normal moves", "Drop pieces", "Fairy pieces only", "Dice rolls"], correct: 0 },
-  { question: "Castling in Three-Check", choices: ["Standard chess castling allowed", "Forbidden", "Counts as check", "Required"], correct: 0 },
-  { question: "The variant rewards", choices: ["Tactical king-safety awareness", "Mancala patience", "Memorized endgames", "Pure pawn play"], correct: 0 },
-  { question: "Three-Check is most often played", choices: ["On Lichess and casual venues", "World Championship", "Olympic Games", "Correspondence only"], correct: 0 },
+  { question: "In Three-check chess, you win by", choices: ["Delivering check three times (or by checkmate)", "Capturing all pieces", "Promoting three pawns", "Surviving 30 moves"], correct: 0 },
+  { question: "Each check delivered", choices: ["Counts toward the three-check total regardless of whether mate follows", "Only counts if it's mate", "Resets the clock", "Removes a pawn"], correct: 0 },
+  { question: "Discovered checks count as", choices: ["One check (or two if double check)", "Zero — they don't count", "Three at once", "Only count if announced"], correct: 0 },
+  { question: "Standard checkmate", choices: ["Still ends the game immediately", "No longer ends the game", "Counts as zero checks", "Requires three confirmations"], correct: 0 },
+  { question: "A double check counts as", choices: ["Either one or two depending on rule set (commonly one)", "Always three", "Always zero", "Forfeit"], correct: 0 },
+  { question: "A common strategy is to", choices: ["Sacrifice material for repeated checking sequences", "Trade queens early", "Avoid all checks", "Castle queenside on move 1"], correct: 0 },
+  { question: "If you give two checks and your opponent gives two,", choices: ["Both sides need only one more check to win", "The game is drawn", "Both lose", "Checks reset"], correct: 0 },
+  { question: "Three-check is popular on", choices: ["Lichess and other online platforms", "FIDE world championships", "Correspondence-only servers", "Hex boards"], correct: 0 },
+  { question: "Perpetual check in Three-check", choices: ["Wins after the third check, not draws", "Always draws", "Is forbidden", "Forfeits the game"], correct: 0 },
+  { question: "Three-check rewards", choices: ["Aggressive, attacking play and king-hunts", "Slow positional grinding", "Pawn-only endgames", "Avoiding the center"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: ThreeCheckQuizSettings): ThreeCheckQuizState {

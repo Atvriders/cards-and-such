@@ -4,16 +4,16 @@ export interface BughousePuzzleSettings { questions: "10"; }
 export interface BughousePuzzleState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type BughousePuzzleAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "Bughouse is played by", choices: ["Four players on two boards", "Two players on one board", "Six players", "Solo"], correct: 0 },
-  { question: "Captured pieces are", choices: ["Passed to your partner to drop", "Removed permanently", "Returned to original square", "Promoted automatically"], correct: 0 },
-  { question: "A team wins when", choices: ["Either partner checkmates the opposing king", "Both partners draw", "All pawns promote", "Time expires"], correct: 0 },
-  { question: "Communication between partners is", choices: ["Encouraged — verbal coordination is part of the game", "Forbidden", "Limited to one word", "By writing only"], correct: 0 },
-  { question: "Time controls are usually", choices: ["Fast (blitz/bullet)", "Days per move", "Six hours per game", "Untimed"], correct: 0 },
-  { question: "Pieces dropped on rank 1/8 may be", choices: ["Pawns may not drop on those ranks", "Always queens", "Always knights", "Forbidden completely"], correct: 0 },
-  { question: "The board layout is", choices: ["Two opposite-colored teams across two boards", "One large board", "Hexagonal", "Triangular"], correct: 0 },
-  { question: "Sitting still without moving is", choices: ["A tactic — to wait for partner to pass a piece", "Forbidden", "Loss by forfeit", "An automatic draw"], correct: 0 },
-  { question: "Drops can give", choices: ["Immediate check or mate", "No checks ever", "Only check, never mate", "Only mates if announced"], correct: 0 },
-  { question: "Bughouse is associated with", choices: ["Casual chess clubs and online speed play", "FIDE world championships", "Olympic competition", "Solitaire"], correct: 0 },
+  { question: "Bughouse is played by", choices: ["Four players on two adjacent boards", "Two players on one board", "Six players in a circle", "A single player solo"], correct: 0 },
+  { question: "When you capture a piece, it", choices: ["Is passed to your partner to drop on their board", "Stays in your reserve to drop yourself", "Is removed from play", "Goes back to its starting square"], correct: 0 },
+  { question: "A team wins when", choices: ["Either partner delivers checkmate or wins on time", "Both partners checkmate simultaneously", "All four players agree", "One side runs out of pawns"], correct: 0 },
+  { question: "Verbal communication between partners is", choices: ["Allowed and central to strategy", "Strictly forbidden", "Limited to a single code word", "Only by written notes"], correct: 0 },
+  { question: "Pawns dropped from the reserve may not land on", choices: ["Rank 1 or rank 8", "Any dark square", "Central squares", "The same file twice"], correct: 0 },
+  { question: "Partners on the two boards play", choices: ["Opposite colors so captures feed each other", "The same color as each other", "Random colors each game", "Whichever color they prefer mid-game"], correct: 0 },
+  { question: "'Sitting' (deliberately not moving) is", choices: ["A legitimate tactic to wait for a piece from your partner", "An automatic forfeit", "Forbidden by rule", "Only allowed in the endgame"], correct: 0 },
+  { question: "A drop that delivers checkmate is", choices: ["Legal and a primary winning method", "Illegal", "Allowed only with knights", "Allowed only after move 30"], correct: 0 },
+  { question: "Typical Bughouse time controls are", choices: ["Blitz or bullet (often 5 minutes or less)", "Classical (3+ hours)", "Correspondence (days per move)", "No clock at all"], correct: 0 },
+  { question: "Bughouse is most associated with", choices: ["Casual chess clubs, scholastic events, and online play", "Official FIDE world championships", "The Olympic Games", "Solitaire chess apps"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: BughousePuzzleSettings): BughousePuzzleState {

@@ -4,16 +4,16 @@ export interface CylinderChessQuizSettings { questions: "10"; }
 export interface CylinderChessQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type CylinderChessQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "Cylinder chess wraps", choices: ["The a- and h-files (left-right edges)", "Top and bottom", "Both directions", "Diagonally"], correct: 0 },
-  { question: "A rook on a-file can move to", choices: ["h-file by going 'past the edge'", "Only forward", "Only backward", "Random rank"], correct: 0 },
-  { question: "Bishops gain", choices: ["New long diagonals that wrap around", "Nothing — bishops play normally", "Less power", "Drop ability"], correct: 0 },
-  { question: "Pawns in Cylinder Chess", choices: ["Move forward as in standard chess", "Wrap files like rooks", "Promote anywhere", "Capture all directions"], correct: 0 },
-  { question: "Castling rules are", choices: ["Standard chess castling", "Forbidden", "Required", "Replaces promotion"], correct: 0 },
-  { question: "The variant deepens", choices: ["Diagonal and rank attacks dramatically", "Pure pawn play", "Endgame theory", "Knight maneuvers"], correct: 0 },
-  { question: "The h- and a-files become", choices: ["Identical (adjacent) due to wrapping", "Locked", "Removed", "Random"], correct: 0 },
-  { question: "Cylinder Chess is classified as", choices: ["A topology-based fairy variant", "Standard FIDE", "Race game", "Card variant"], correct: 0 },
-  { question: "Players are", choices: ["Two", "Four", "One", "Three"], correct: 0 },
-  { question: "Strategically, the variant", choices: ["Heavily favors attacking play", "Always favors black", "Always draws", "Always favors king-side"], correct: 0 },
+  { question: "In Cylinder chess, the board is treated as if", choices: ["The a-file and h-file are joined into a cylinder", "Rank 1 and rank 8 are joined", "All four edges wrap", "The board is hexagonal"], correct: 0 },
+  { question: "A rook on a4 can therefore", choices: ["Travel rightward off h4 and reappear on a4 from the other side", "Only move within the original 8x8", "Jump like a knight", "Move backwards only"], correct: 0 },
+  { question: "Bishops in Cylinder chess can", choices: ["Wrap diagonally around the side edges", "Only move on light squares", "Move like rooks", "Not move at all"], correct: 0 },
+  { question: "The top and bottom edges (ranks 1 and 8)", choices: ["Are NOT connected — only the side files wrap", "Are also wrapped (toroidal board)", "Are removed", "Allow only pawns"], correct: 0 },
+  { question: "Pawns in Cylinder chess capture", choices: ["Diagonally, including across the wrap when applicable", "Only straight ahead", "Only on the central files", "Backwards"], correct: 0 },
+  { question: "Castling in Cylinder chess is", choices: ["Generally allowed but the king's path still must be safe", "Forbidden", "Done with the queen", "Required every game"], correct: 0 },
+  { question: "Knights in Cylinder chess", choices: ["Also wrap around the side edges in their L-shaped jumps", "Cannot wrap — they only move within 8 files", "Move like bishops", "Move only one square"], correct: 0 },
+  { question: "A queen on d4 has", choices: ["More attacking squares than in standard chess due to wrap-around lines", "Fewer squares", "The same exact reach", "No attacking squares at all"], correct: 0 },
+  { question: "A common Cylinder chess tactic is", choices: ["Surprise attacks by pieces wrapping behind the enemy king", "Slow pawn pushes", "Quiet maneuvering", "Avoiding the center"], correct: 0 },
+  { question: "The variant is sometimes called", choices: ["Anchor-ring chess (a related toroidal cousin) or just Cylinder Chess", "Antichess", "Atomic Chess", "Bughouse"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: CylinderChessQuizSettings): CylinderChessQuizState {

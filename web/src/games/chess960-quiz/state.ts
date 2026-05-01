@@ -4,16 +4,16 @@ export interface Chess960QuizSettings { questions: "10"; }
 export interface Chess960QuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type Chess960QuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "Chess960 randomizes the", choices: ["Back-rank starting position", "Pawn moves", "Board size", "Capture rules"], correct: 0 },
-  { question: "The bishops in Chess960 always start", choices: ["On opposite-color squares", "On same-color squares", "Both on dark squares", "Both on light squares"], correct: 0 },
-  { question: "Chess960 was invented by", choices: ["Bobby Fischer", "Garry Kasparov", "Magnus Carlsen", "Wilhelm Steinitz"], correct: 0 },
-  { question: "Number of legal starting positions", choices: ["960", "100", "8", "1024"], correct: 0 },
-  { question: "The king in Chess960 must start", choices: ["Between the two rooks", "On the e-file", "On a corner", "On rank 1 always"], correct: 0 },
-  { question: "Castling in Chess960", choices: ["Works but is generalized for any starting position", "Is forbidden", "Identical to FIDE", "Replaced by drops"], correct: 0 },
-  { question: "Pawn rules in Chess960 are", choices: ["Standard chess pawn rules", "Move three squares", "No promotion", "Capture forward"], correct: 0 },
-  { question: "Chess960 is favored because it", choices: ["Reduces opening memorization", "Adds new pieces", "Lengthens the game", "Uses dice"], correct: 0 },
-  { question: "Year Fischer announced Chess960", choices: ["1996", "1972", "1985", "2010"], correct: 0 },
-  { question: "Chess960 was originally called", choices: ["Fischer Random Chess", "Wild Chess", "Random Knights", "Open Chess"], correct: 0 },
+  { question: "Chess960 is also known as", choices: ["Fischer Random Chess", "Antichess", "Bughouse", "Atomic chess"], correct: 0 },
+  { question: "The starting position is", choices: ["One of 960 randomized back-rank arrangements", "Always the standard chess setup", "Mirror-symmetric only", "Chosen by the player to move"], correct: 0 },
+  { question: "In any Chess960 starting position the bishops are", choices: ["Placed on opposite-colored squares", "Always on c1 and f1", "On the same color", "Adjacent to the king"], correct: 0 },
+  { question: "The king must start", choices: ["Between the two rooks", "On e1 always", "On a corner square", "Next to a bishop"], correct: 0 },
+  { question: "Black's starting position", choices: ["Mirrors White's setup exactly", "Is chosen independently", "Is always the standard setup", "Is randomized separately"], correct: 0 },
+  { question: "Castling rules in Chess960", choices: ["Place the king on g1/c1 and rook on f1/d1 regardless of starting squares", "Are not allowed", "Require three moves", "Are identical to standard chess only"], correct: 0 },
+  { question: "Chess960 was promoted by", choices: ["Bobby Fischer in 1996", "Mikhail Tal in 1960", "Magnus Carlsen in 2010", "Garry Kasparov in 1985"], correct: 0 },
+  { question: "The number 960 comes from", choices: ["The count of legal back-rank arrangements", "Fischer's birth year", "The year of the first FIDE championship", "An arbitrary marketing choice"], correct: 0 },
+  { question: "Opening theory in Chess960 is", choices: ["Largely irrelevant — players must reason from move 1", "Identical to standard chess", "Memorized in 50-move books", "Limited to three openings"], correct: 0 },
+  { question: "Pawn structure and middle/endgame technique in Chess960", choices: ["Still apply once pieces develop", "Are completely different", "Are reversed", "Don't matter at all"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: Chess960QuizSettings): Chess960QuizState {

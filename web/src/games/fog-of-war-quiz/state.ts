@@ -4,16 +4,16 @@ export interface FogOfWarQuizSettings { questions: "10"; }
 export interface FogOfWarQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type FogOfWarQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "In Fog of War (Dark) Chess, you see", choices: ["Your own pieces and squares they attack", "All squares", "Only opponent pieces", "Only the kings"], correct: 0 },
-  { question: "Discovering opponent pieces happens by", choices: ["Moving into squares your pieces can attack", "Asking opponent", "Random reveal", "Captures only"], correct: 0 },
-  { question: "The game ends when", choices: ["A king is captured (no check announced)", "Standard checkmate", "Three checks", "Stalemate"], correct: 0 },
-  { question: "Check is", choices: ["Not announced — you must figure it out", "Always announced", "Forbidden", "Three needed"], correct: 0 },
-  { question: "The variant is also known as", choices: ["Dark Chess", "Bullet Chess", "Speed Chess", "Open Chess"], correct: 0 },
-  { question: "Pieces revealed during a turn", choices: ["Become hidden again next turn unless still in vision", "Stay revealed forever", "Are removed", "Captured automatically"], correct: 0 },
-  { question: "Stalemate is", choices: ["Possible and counted as draw", "Forbidden", "Wins", "Loses"], correct: 0 },
-  { question: "The variant tests", choices: ["Inferential reasoning under hidden information", "Pure tactics", "Memorization", "Endgame theory"], correct: 0 },
-  { question: "Fog of War is best supported on", choices: ["Online platforms with a server arbiter", "OTB", "Correspondence", "Mail chess"], correct: 0 },
-  { question: "A castling move", choices: ["Is allowed if requirements still hold (your knowledge)", "Forbidden", "Required", "Only king-side"], correct: 0 },
+  { question: "In Fog of War (Dark Chess), each player can see", choices: ["Only their own pieces and squares those pieces attack or can move to", "The whole board normally", "Only the center", "Only enemy pieces"], correct: 0 },
+  { question: "The win condition is", choices: ["Capture the opposing king (no check or checkmate concept)", "Standard checkmate", "Promote three pawns", "Stalemate the opponent"], correct: 0 },
+  { question: "A move into a square occupied by an enemy piece", choices: ["Captures it, even if you couldn't see it", "Is illegal", "Reveals the piece without capturing", "Ends the game"], correct: 0 },
+  { question: "Check is", choices: ["Not announced — the king can be captured directly", "Announced as in standard chess", "Worth bonus points", "Required to be parried"], correct: 0 },
+  { question: "Squares hidden by fog appear", choices: ["Empty or shaded — you cannot tell what's there", "As skull icons", "As random pieces", "In a smaller board view"], correct: 0 },
+  { question: "Castling in Fog of War is", choices: ["Allowed if the king's destination/path squares are visible to you", "Always allowed without restriction", "Forbidden", "Done with the queen"], correct: 0 },
+  { question: "If you move into the line of an unseen bishop,", choices: ["You may be captured next turn", "The bishop reveals itself first", "The move is undone", "The game pauses"], correct: 0 },
+  { question: "Pawn captures reveal", choices: ["The captured piece's identity to the capturer", "The entire board for one move", "Nothing — captures are silent", "All enemy pawns"], correct: 0 },
+  { question: "Fog of War rewards", choices: ["Probabilistic reasoning and bluffing", "Pure calculation as in standard chess", "Endgame technique only", "Memorization of openings"], correct: 0 },
+  { question: "Another common name for the variant is", choices: ["Dark Chess or Kriegspiel-style chess", "Atomic Chess", "Three-check Chess", "Horde Chess"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: FogOfWarQuizSettings): FogOfWarQuizState {

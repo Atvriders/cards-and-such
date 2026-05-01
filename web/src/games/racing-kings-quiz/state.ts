@@ -4,16 +4,16 @@ export interface RacingKingsQuizSettings { questions: "10"; }
 export interface RacingKingsQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type RacingKingsQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "The objective is to", choices: ["Be the first to move your king to rank 8", "Checkmate", "Capture queen", "Three checks"], correct: 0 },
-  { question: "Check is", choices: ["Forbidden — moves giving check are illegal", "Mandatory", "Allowed", "Three needed to win"], correct: 0 },
-  { question: "Both kings start on", choices: ["Rank 1, both colors", "Opposite ranks", "Same square", "The center"], correct: 0 },
-  { question: "Pawns in Racing Kings", choices: ["Are not on the board", "Are at rank 2 only", "Are doubled", "Promote instantly"], correct: 0 },
-  { question: "Pieces are placed on", choices: ["Ranks 1 and 2 of one side", "All ranks", "Center", "Random squares"], correct: 0 },
-  { question: "When white reaches rank 8", choices: ["Black gets one move to also reach rank 8 for a draw", "Game ends immediately", "Black wins", "Three checks needed"], correct: 0 },
-  { question: "Castling is", choices: ["Forbidden", "Required", "Standard", "Only queen-side"], correct: 0 },
-  { question: "A draw is possible", choices: ["When both kings reach rank 8 simultaneously", "Never", "Always", "Only by stalemate"], correct: 0 },
-  { question: "The variant emphasizes", choices: ["King mobility and piece-cleared paths", "Pawn race", "Drop tactics", "Three-check ladders"], correct: 0 },
-  { question: "Racing Kings is supported on", choices: ["Lichess", "FIDE OTB", "Olympic Chess", "All standard tournaments"], correct: 0 },
+  { question: "In Racing Kings, the goal is to", choices: ["Be the first to get your king to the eighth rank", "Checkmate the opponent", "Capture the enemy king", "Promote a pawn"], correct: 0 },
+  { question: "In the starting position both armies are placed", choices: ["On the first two ranks together (no pawns)", "On opposite sides as in standard chess", "Randomly", "Only kings on the board"], correct: 0 },
+  { question: "Pawns in Racing Kings", choices: ["Are not used — there are none", "Start on rank 2 as normal", "Move backwards", "Are placed on rank 4"], correct: 0 },
+  { question: "Giving check is", choices: ["Forbidden — no move may give check", "Encouraged", "Required every turn", "Worth bonus points"], correct: 0 },
+  { question: "If both kings reach rank 8, the result is", choices: ["A draw (if Black reaches on the move after White)", "White always wins", "Black always wins", "Sudden-death playoff"], correct: 0 },
+  { question: "Castling in Racing Kings is", choices: ["Not allowed", "Required on move 1", "Allowed both sides", "Done with the queen"], correct: 0 },
+  { question: "The starting square for the white king is usually", choices: ["b1 (with the rest of the army nearby)", "e1", "a1", "h1"], correct: 0 },
+  { question: "Because checks are illegal,", choices: ["Players cannot use forced check sequences to slow opponents", "Mate is impossible to detect", "All games end in draws", "Pieces freeze"], correct: 0 },
+  { question: "A typical winning idea is to", choices: ["Use minor pieces to escort the king up the board", "Trade all the pieces", "Push pawns rapidly", "Castle long"], correct: 0 },
+  { question: "Racing Kings is most associated with", choices: ["Lichess and online variant play", "FIDE classical events", "Correspondence chess only", "Hexagonal boards"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: RacingKingsQuizSettings): RacingKingsQuizState {

@@ -4,16 +4,16 @@ export interface ProgressiveChessQuizSettings { questions: "10"; }
 export interface ProgressiveChessQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type ProgressiveChessQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "Progressive Chess increases moves by", choices: ["One per turn (1, 2, 3, ...)", "Two per turn", "Random", "No progression"], correct: 0 },
-  { question: "After turn 5, white plays", choices: ["5 moves in that turn", "One move", "Skips", "Two moves"], correct: 0 },
-  { question: "Italian Progressive ignores", choices: ["Intermediate checks (only final position counts)", "All checks", "No special rule", "Captures"], correct: 0 },
-  { question: "Scottish Progressive requires", choices: ["Each check to be escaped immediately", "Skipping turns", "Only one check", "Rolling dice"], correct: 0 },
-  { question: "A player must escape check", choices: ["At the end of their move sequence", "Mid-sequence", "Never", "Only on first move"], correct: 0 },
-  { question: "Castling counts as", choices: ["One move in the sequence", "Two moves", "Free", "Forbidden"], correct: 0 },
-  { question: "The variant rewards", choices: ["Long forcing tactical sequences", "Pure positional play", "Pawn pushes", "Drops"], correct: 0 },
-  { question: "Progressive Chess is studied at", choices: ["Italian and Scottish chess clubs", "Olympic Games", "World Championship", "FIDE schools"], correct: 0 },
-  { question: "Most progressive sequences end with", choices: ["A piece capture or check", "Pawn move", "Promotion", "Drop"], correct: 0 },
-  { question: "The maximum number of moves grows", choices: ["Unboundedly until checkmate", "Up to 10", "Once", "Stops at 5"], correct: 0 },
+  { question: "In Progressive (Scotch) chess, each turn a player makes", choices: ["One more move than the previous turn (1, then 2, then 3, ...)", "Exactly two moves", "One move always", "Three moves always"], correct: 0 },
+  { question: "White's first turn consists of", choices: ["1 move", "2 moves", "3 moves", "0 moves"], correct: 0 },
+  { question: "Black's first turn consists of", choices: ["2 moves", "1 move", "3 moves", "Same as White"], correct: 0 },
+  { question: "Within a multi-move turn you may", choices: ["Move the same piece multiple times", "Only move different pieces each move", "Only capture", "Only promote"], correct: 0 },
+  { question: "Giving check during your turn is", choices: ["Usually only allowed as the LAST move of the sequence (rules vary)", "Forbidden completely", "Required on every move", "Only allowed first"], correct: 0 },
+  { question: "If you cannot complete your full sequence of moves,", choices: ["You lose (in most rule sets)", "Your turn just ends", "You skip a move", "The game is drawn"], correct: 0 },
+  { question: "En passant captures in Progressive", choices: ["Must be made on the move immediately following the pawn's two-square advance within the turn", "Are forbidden", "Last forever", "Only happen on rank 5"], correct: 0 },
+  { question: "Castling counts as", choices: ["A single move within the sequence", "Two moves", "The whole turn", "Forbidden"], correct: 0 },
+  { question: "Progressive chess favors", choices: ["Sharp tactics and long combinations", "Slow positional play", "Pawn endgames", "Symmetric setups"], correct: 0 },
+  { question: "Another name for the variant is", choices: ["Scotch Chess or Italian Progressive Chess", "Antichess", "Atomic Chess", "Three-check Chess"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: ProgressiveChessQuizSettings): ProgressiveChessQuizState {

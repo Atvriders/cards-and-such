@@ -4,16 +4,16 @@ export interface HordeChessQuizSettings { questions: "10"; }
 export interface HordeChessQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type HordeChessQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "The Horde side controls", choices: ["32–36 pawns and pawn-like material", "A normal chess army", "Knights only", "Eight pawns"], correct: 0 },
-  { question: "Black wins by", choices: ["Capturing all white pawns", "Promoting eight pawns", "Reaching rank 1", "Three checks"], correct: 0 },
-  { question: "White (the Horde) wins by", choices: ["Checkmating the black king", "Reaching rank 8", "Capturing the queen", "Stalemate"], correct: 0 },
-  { question: "Horde pawns can", choices: ["Promote on rank 8 like normal pawns", "Never promote", "Only become knights", "Move backwards"], correct: 0 },
-  { question: "The first rank for white pawns means", choices: ["They can move two squares from rank 1 or 2", "Always two squares", "Locked in place", "Only diagonal"], correct: 0 },
-  { question: "The Horde has", choices: ["No king — no checkmate possible against white", "A standard king", "Two kings", "A queen-king"], correct: 0 },
-  { question: "Tactically, black usually plays", choices: ["With piece coordination to clear the front", "Solo king run", "Pawn races", "Castling"], correct: 0 },
-  { question: "The Horde variant is studied as", choices: ["An asymmetric chess problem", "An opening line", "A bullet variant", "A pawn-only puzzle"], correct: 0 },
-  { question: "Initial pawn formation for the Horde is", choices: ["Two ranks of pawns plus extra pawns", "One rank of 8", "Standard", "Eight pawns"], correct: 0 },
-  { question: "Horde pawns can be captured", choices: ["Yes, by any black piece", "Only by black pawns", "Never", "Only on dark squares"], correct: 0 },
+  { question: "In Horde chess, one side plays", choices: ["36 pawns versus a standard army", "Only kings", "Only queens", "Two armies of equal size"], correct: 0 },
+  { question: "The Black side (standard army) wins by", choices: ["Capturing every white pawn", "Checkmating the white king", "Promoting first", "Surviving 50 moves"], correct: 0 },
+  { question: "The white horde wins by", choices: ["Checkmating the black king", "Reaching rank 8 with any pawn", "Capturing all black pieces", "Stalemating black"], correct: 0 },
+  { question: "The horde side has", choices: ["No king at all", "A king on e1", "Two kings", "A king disguised as a pawn"], correct: 0 },
+  { question: "Horde pawns on the second rank may", choices: ["Move two squares as in standard chess", "Move three squares", "Only capture", "Not move at all"], correct: 0 },
+  { question: "Pawns on rank 1 of the horde", choices: ["May still advance one or two squares (special rule)", "Cannot move at all", "Promote immediately", "Become rooks"], correct: 0 },
+  { question: "If the horde runs out of pawns,", choices: ["Black wins", "The game is drawn", "White still has a hidden king", "White respawns pawns"], correct: 0 },
+  { question: "En passant against horde pawns is", choices: ["Allowed normally", "Forbidden", "Only allowed once per game", "Allowed only on rank 4"], correct: 0 },
+  { question: "A typical Black strategy in Horde is", choices: ["Trade pieces for multiple pawns to thin the horde", "Avoid captures entirely", "Sacrifice the queen on move 1", "Promote a knight"], correct: 0 },
+  { question: "Horde is a variant of", choices: ["Dunsany's Chess (the asymmetric pawn-army idea)", "Xiangqi", "Shogi", "Go"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: HordeChessQuizSettings): HordeChessQuizState {

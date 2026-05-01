@@ -4,16 +4,16 @@ export interface MarseillaisQuizSettings { questions: "10"; }
 export interface MarseillaisQuizState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type MarseillaisQuizAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "Marseillais Chess gives each player", choices: ["Two consecutive moves per turn", "Three", "One", "Random"], correct: 0 },
-  { question: "A check on the first move", choices: ["Must be addressed (no second move) in some variants", "Always ignored", "Wins", "Forbidden"], correct: 0 },
-  { question: "Pawn double moves count as", choices: ["One move (or two depending on rule set)", "Three moves", "Free", "Forbidden"], correct: 0 },
-  { question: "The variant originated in", choices: ["Marseille, France", "Moscow", "London", "Tokyo"], correct: 0 },
-  { question: "Castling counts as", choices: ["One move", "Two moves", "Free", "Forbidden"], correct: 0 },
-  { question: "Marseillais is sometimes called", choices: ["Double-move chess", "Triple chess", "Speed chess", "Bullet chess"], correct: 0 },
-  { question: "Tactical opportunities are", choices: ["Very rich — combinations are deeper", "Limited", "Standard", "Reduced"], correct: 0 },
-  { question: "The first move of a turn must be", choices: ["Legal in itself", "Optional", "Captures only", "Pawn only"], correct: 0 },
-  { question: "The variant tests", choices: ["Calculating move pairs", "Pure positional play", "Endgames", "Drops"], correct: 0 },
-  { question: "Marseillais Chess is classified as a", choices: ["Compound-move fairy variant", "Standard FIDE rule", "Race game", "Card variant"], correct: 0 },
+  { question: "In Marseillais chess, after the first move each player makes", choices: ["Two moves per turn", "Three moves per turn", "One move per turn", "Five moves per turn"], correct: 0 },
+  { question: "White's opening turn is", choices: ["Just one move (to balance Black's reply)", "Two moves", "Three moves", "No moves"], correct: 0 },
+  { question: "If you give check on your first move of a two-move turn, you", choices: ["Must end your turn immediately (cannot make the second move)", "Get a bonus move", "Continue normally", "Lose your turn"], correct: 0 },
+  { question: "If your king is in check at the start of your turn, you must", choices: ["Get out of check on the first move of the pair", "Ignore the check", "Skip your turn", "Resign"], correct: 0 },
+  { question: "Within your two moves you may", choices: ["Move the same piece twice", "Only move different pieces", "Only capture", "Only push pawns"], correct: 0 },
+  { question: "Castling counts as", choices: ["One of your two moves", "The whole turn", "Two moves", "Forbidden"], correct: 0 },
+  { question: "En passant in Marseillais is", choices: ["Available only on the move immediately after the two-square advance", "Always available for the rest of the game", "Forbidden", "Allowed only by the king"], correct: 0 },
+  { question: "The variant is named after", choices: ["The French city of Marseille", "A 19th-century Russian master", "A type of opening", "The Marseillais regiment"], correct: 0 },
+  { question: "Balanced Marseillais (a popular sub-variant) gives White", choices: ["Only one move on the first turn so Black isn't disadvantaged", "Three moves on the first turn", "Two captures only", "A free queen move"], correct: 0 },
+  { question: "Marseillais favors", choices: ["Sharp combinational attacks and king hunts", "Quiet maneuvering", "Pawn endgames", "Symmetric opening play"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: MarseillaisQuizSettings): MarseillaisQuizState {

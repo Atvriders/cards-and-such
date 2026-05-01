@@ -4,16 +4,16 @@ export interface CrazyhousePuzzleSettings { questions: "10"; }
 export interface CrazyhousePuzzleState { questions: QuizQuestion[]; currentIndex: number; selected: number | null; submitted: boolean; timeLeft: number; score: number; correctCount: number; phase: "playing" | "result" | "done"; }
 export type CrazyhousePuzzleAction = { type: "select"; choice: number } | { type: "submit" } | { type: "next" } | { type: "tick" };
 const ALL_QUESTIONS: QuizQuestion[] = [
-  { question: "In Crazyhouse, captured pieces", choices: ["Go to the captor's hand to drop later", "Are removed forever", "Become pawns", "Switch sides"], correct: 0 },
-  { question: "Dropping a piece counts as", choices: ["A normal move", "Two moves", "A capture", "Castling"], correct: 0 },
-  { question: "Pawns cannot be dropped on", choices: ["The first or eighth rank", "The center squares", "Dark squares", "Light squares"], correct: 0 },
-  { question: "A piece dropped to give immediate check is", choices: ["Allowed", "Forbidden", "Counted twice", "Reduces hand"], correct: 0 },
-  { question: "Promoted pawns when captured become", choices: ["Pawns again in the captor's hand", "Queens", "Removed", "Frozen"], correct: 0 },
-  { question: "Crazyhouse derives from", choices: ["Bughouse, played solo", "Standard chess", "Xiangqi", "Halma"], correct: 0 },
-  { question: "Drop-mate threats are", choices: ["Common and dangerous", "Impossible", "Only on rank 1", "Always queen-mates"], correct: 0 },
-  { question: "Time controls usually used", choices: ["Blitz or bullet", "Days per move", "Three-hour classical", "No clock"], correct: 0 },
-  { question: "Pieces dropped on the board are", choices: ["The same color as the dropper", "Random color", "Opposite color", "Neutral"], correct: 0 },
-  { question: "Crazyhouse is best classified as", choices: ["A Chess + drop-mechanic variant", "A card game", "A race game", "A Go variant"], correct: 0 },
+  { question: "In Crazyhouse, a captured piece", choices: ["Goes to the captor's reserve to be dropped later", "Is removed from the game", "Returns to its starting square", "Becomes a pawn"], correct: 0 },
+  { question: "Pawns dropped from the reserve cannot land on", choices: ["The first or eighth rank", "Central squares", "The c-file", "Dark squares"], correct: 0 },
+  { question: "A piece dropped to deliver immediate checkmate is", choices: ["Legal — drop-mates are a core tactic", "Forbidden by rule", "Only legal with knights", "Allowed only after move 20"], correct: 0 },
+  { question: "When a promoted pawn is captured, it returns as", choices: ["A pawn in the captor's reserve", "A queen", "Whatever it promoted to", "Nothing — it's removed"], correct: 0 },
+  { question: "Dropping a piece consumes", choices: ["One full move (your turn)", "Two moves", "Half a move", "No move at all"], correct: 0 },
+  { question: "Crazyhouse is the solo-player adaptation of", choices: ["Bughouse", "Suicide chess", "Xiangqi", "Shogi"], correct: 0 },
+  { question: "A dropped piece appears on the board with", choices: ["The same color as the player dropping it", "A neutral color", "The opposite color", "Random color"], correct: 0 },
+  { question: "A typical Crazyhouse time control online is", choices: ["Blitz or bullet", "Correspondence (days per move)", "Classical 90+30", "Untimed"], correct: 0 },
+  { question: "King safety in Crazyhouse is especially fragile because", choices: ["Drops allow surprise mating attacks from holes near the king", "Kings cannot castle", "Kings move two squares", "Pawns are stronger"], correct: 0 },
+  { question: "The rook's role in Crazyhouse opening play is often", choices: ["Weakened — exchanging it gives the opponent a powerful drop", "Stronger than the queen", "To attack on rank 1 only", "Identical to standard chess"], correct: 0 },
 ];
 function shuffle<T>(arr: T[], rng: () => number): T[] { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j]!,a[i]!];}return a; }
 export function initialState(seed: number, _settings: CrazyhousePuzzleSettings): CrazyhousePuzzleState {
