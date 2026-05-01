@@ -46,6 +46,7 @@
   box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.40);
 }
 
+/* Legacy minimal score list (kept for backwards compat). */
 .scores {
   list-style: none;
   padding: 0;
@@ -62,16 +63,207 @@
   border: 1px solid rgba(148, 163, 184, 0.08);
   border-radius: 10px;
   font-variant-numeric: tabular-nums;
-  transition:
-    border-color 140ms cubic-bezier(0.25, 1, 0.5, 1),
-    transform 140ms cubic-bezier(0.25, 1, 0.5, 1);
 }
-.scores li:hover {
+
+/* ---------- Controls (filter + search) ---------- */
+.lb-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.lb-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.lb-control select,
+.lb-control input {
+  background: rgba(10, 12, 22, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  color: #f1f5f9;
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.92rem;
+  min-width: 180px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+.lb-control select:focus,
+.lb-control input:focus {
+  outline: none;
+  border-color: rgba(129, 140, 248, 0.55);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
+}
+.lb-search { flex: 1 1 240px; }
+.lb-search input { width: 100%; }
+
+/* ---------- Category sections ---------- */
+.lb-category { margin-bottom: 2rem; }
+.lb-category-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #c7cdfe;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+.lb-game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+/* ---------- Card ---------- */
+.lb-card {
+  background: linear-gradient(180deg, rgba(22, 25, 39, 0.85), rgba(15, 17, 28, 0.85));
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.lb-card:hover {
   border-color: rgba(129, 140, 248, 0.30);
-  transform: translateX(2px);
+  transform: translateY(-1px);
+}
+.lb-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+  background: rgba(10, 12, 22, 0.4);
+}
+.lb-game-link {
+  color: #f1f5f9;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 120ms ease;
+}
+.lb-game-link:hover { color: #c7cdfe; text-decoration: underline; }
+.lb-card-count {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Table ---------- */
+.lb-table-wrap {
+  max-height: 280px;
+  overflow-y: auto;
+}
+.lb-global-wrap { max-height: 600px; }
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+}
+.lb-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: rgba(10, 12, 22, 0.95);
+  backdrop-filter: blur(6px);
+  text-align: left;
+  font-weight: 600;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+.lb-table tbody td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+  color: #cbd5e1;
+}
+.lb-table tbody tr:nth-child(even) td {
+  background: rgba(148, 163, 184, 0.03);
+}
+.lb-table tbody tr:hover td { background: rgba(129, 140, 248, 0.06); }
+.lb-table tbody tr:last-child td { border-bottom: 0; }
+
+.lb-rank {
+  width: 2.4rem;
+  text-align: center;
+  color: #64748b;
+  font-weight: 600;
+}
+.lb-score {
+  text-align: right;
+  white-space: nowrap;
+  color: #f1f5f9;
+  font-weight: 500;
+}
+.lb-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.lb-empty {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 1.25rem !important;
+}
+
+/* ---------- Medals ---------- */
+.lb-medal-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+.lb-medal-1 td { background: linear-gradient(90deg, rgba(250, 204, 21, 0.10), transparent 70%) !important; }
+.lb-medal-2 td { background: linear-gradient(90deg, rgba(203, 213, 225, 0.10), transparent 70%) !important; }
+.lb-medal-3 td { background: linear-gradient(90deg, rgba(217, 119, 6, 0.10), transparent 70%) !important; }
+.lb-medal-1 .lb-score { color: #fde68a; }
+.lb-medal-2 .lb-score { color: #e2e8f0; }
+.lb-medal-3 .lb-score { color: #fdba74; }
+
+/* ---------- Personal best highlight ---------- */
+.lb-me td {
+  background: linear-gradient(90deg, rgba(129, 140, 248, 0.18), rgba(129, 140, 248, 0.04)) !important;
+  color: #e0e3ff;
+  font-weight: 500;
+  box-shadow: inset 3px 0 0 #818cf8;
+}
+.lb-you-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(129, 140, 248, 0.25);
+  color: #e0e3ff;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.5);
 }
 
 .online-standalone { max-width: 440px; }
+
+/* ---------- Responsive ---------- */
 @media (max-width: 720px) {
-  .leaderboard-layout { grid-template-columns: 1fr; }
+  .leaderboard-layout { grid-template-columns: 1fr; gap: 1rem; }
+  .lb-game-grid { grid-template-columns: 1fr; }
+  .lb-controls { flex-direction: column; align-items: stretch; }
+  .lb-control select,
+  .lb-control input { min-width: 0; width: 100%; }
+  .lb-table { font-size: 0.85rem; }
+  .lb-table thead th,
+  .lb-table tbody td { padding: 0.45rem 0.6rem; }
+  .lb-card-head { padding: 0.6rem 0.75rem; }
+  .lb-table-wrap { max-height: 240px; }
 }
