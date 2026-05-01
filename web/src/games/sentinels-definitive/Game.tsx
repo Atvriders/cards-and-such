@@ -8,7 +8,7 @@ import "./Game.css";
 export function SentinelsDefinitiveGame({ state, dispatch, onGameOver }: GameProps<SentinelsDefinitiveState, SentinelsDefinitiveSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="smdef"
+      prefix="sentDefin"
       cfg={SentinelsDefinitive_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as SentinelsDefinitiveAction)}

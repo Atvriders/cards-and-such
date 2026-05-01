@@ -1,28 +1,29 @@
-.spn-wrap{font-family:'Inter',system-ui,sans-serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#dcfce7;border-radius:14px}
-.spn-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
-.spn-icon{font-size:1.6rem}
-.spn-scenario{flex:1;color:#16a34a}
-.spn-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1}
-.spn-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #16a34a}
-.spn-bars{display:flex;flex-direction:column;gap:6px}
-.spn-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#334155;margin-bottom:2px}
-.spn-bar-track{height:10px;border-radius:5px;background:#e2e8f0;overflow:hidden}
-.spn-bar-fill{height:100%;transition:width 200ms ease}
-.spn-bar-good{background:linear-gradient(90deg,#10b981,#059669)}
-.spn-bar-bad{background:linear-gradient(90deg,#f59e0b,#dc2626)}
-.spn-morale{font-size:1rem;color:#dc2626;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
-.spn-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#475569;background:#fff;padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1}
-.spn-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
-.spn-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:#fff;border:2px solid transparent;transition:all 150ms;display:flex;flex-direction:column;gap:2px;font-family:'Inter',system-ui,sans-serif}
-.spn-tactic:hover:not(:disabled){border-color:#16a34a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
-.spn-tactic:disabled{opacity:0.5;cursor:not-allowed}
-.spn-tactic-emoji{font-size:1.4rem}
-.spn-tactic-name{font-weight:700;color:#16a34a}
-.spn-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#64748b}
-.spn-tactic-desc{font-size:0.78rem;color:#475569;line-height:1.3}
-.spn-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
-.spn-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#64748b;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.5)}
-.spn-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.spn-final-title{margin:0 0 8px;color:#16a34a}
-.spn-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#16a34a}
-.spn-final-stats{margin-top:8px;font-size:0.85rem;color:#64748b;font-family:'JetBrains Mono',monospace}
+.spirnatur-wrap{font-family:'Cormorant Garamond','Inter',serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:linear-gradient(180deg,#ecfccb,#bbf7d0);border-radius:14px;box-shadow:0 6px 24px rgba(77,124,15,0.25)}
+.spirnatur-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
+.spirnatur-icon{font-size:1.6rem;filter:drop-shadow(0 0 6px rgba(77,124,15,0.25))}
+.spirnatur-scenario{flex:1;color:#4d7c0f;letter-spacing:0.02em}
+.spirnatur-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#3f6212;background:rgba(255,255,255,0.94);padding:2px 8px;border-radius:6px;border:1px solid #bef264}
+.spirnatur-intro{font-size:0.9rem;color:#3f6212;background:rgba(255,255,255,0.94);padding:10px;border-radius:8px;border-left:3px solid #4d7c0f;line-height:1.45}
+.spirnatur-bars{display:flex;flex-direction:column;gap:6px}
+.spirnatur-bar{display:flex;flex-direction:column}
+.spirnatur-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#3f6212;margin-bottom:2px}
+.spirnatur-bar-track{height:10px;border-radius:5px;background:#bef264;overflow:hidden;opacity:0.85}
+.spirnatur-bar-fill{height:100%;transition:width 240ms ease;border-radius:5px}
+.spirnatur-bar-good{background:linear-gradient(90deg,#84cc16,#4d7c0f)}
+.spirnatur-bar-bad{background:linear-gradient(90deg,#fbbf24,#92400e)}
+.spirnatur-morale{font-size:1rem;color:#4d7c0f;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
+.spirnatur-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#3f6212;background:rgba(255,255,255,0.94);padding:6px 10px;border-radius:6px;border:1px solid #bef264}
+.spirnatur-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.spirnatur-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:rgba(255,255,255,0.94);border:2px solid #bef264;transition:all 160ms;display:flex;flex-direction:column;gap:2px;font-family:'Cormorant Garamond','Inter',serif;color:#0f172a}
+.spirnatur-tactic:hover:not(:disabled){border-color:#4d7c0f;transform:translateY(-1px);box-shadow:0 6px 16px rgba(77,124,15,0.25)}
+.spirnatur-tactic:disabled{opacity:0.5;cursor:not-allowed}
+.spirnatur-tactic-emoji{font-size:1.4rem;filter:drop-shadow(0 0 4px rgba(77,124,15,0.25))}
+.spirnatur-tactic-name{font-weight:700;color:#4d7c0f;letter-spacing:0.02em}
+.spirnatur-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#3f6212}
+.spirnatur-tactic-desc{font-size:0.78rem;color:#3f6212;line-height:1.35}
+.spirnatur-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
+.spirnatur-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#3f6212;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.94);border-left:2px solid #365314}
+.spirnatur-final{text-align:center;padding:24px;background:rgba(255,255,255,0.94);border:2px solid #4d7c0f;border-radius:14px;box-shadow:0 8px 28px rgba(77,124,15,0.25)}
+.spirnatur-final-title{margin:0 0 8px;color:#4d7c0f;letter-spacing:0.02em}
+.spirnatur-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#4d7c0f}
+.spirnatur-final-stats{margin-top:8px;font-size:0.85rem;color:#3f6212;font-family:'JetBrains Mono',monospace}

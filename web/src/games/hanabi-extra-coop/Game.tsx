@@ -8,7 +8,7 @@ import "./Game.css";
 export function HanabiExtraCoopGame({ state, dispatch, onGameOver }: GameProps<HanabiExtraCoopState, HanabiExtraCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="hbex"
+      prefix="hanabiExC"
       cfg={HanabiExtraCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as HanabiExtraCoopAction)}

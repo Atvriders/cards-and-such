@@ -8,7 +8,7 @@ import "./Game.css";
 export function PandemicMultistepGame({ state, dispatch, onGameOver }: GameProps<PandemicMultistepState, PandemicMultistepSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="pmst"
+      prefix="pandmulti"
       cfg={PandemicMultistep_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as PandemicMultistepAction)}

@@ -8,7 +8,7 @@ import "./Game.css";
 export function PandemicFallOfRomeGame({ state, dispatch, onGameOver }: GameProps<PandemicFallOfRomeState, PandemicFallOfRomeSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="pfor"
+      prefix="pandrome9"
       cfg={PandemicFallOfRome_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as PandemicFallOfRomeAction)}

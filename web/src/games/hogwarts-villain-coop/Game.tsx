@@ -8,7 +8,7 @@ import "./Game.css";
 export function HogwartsVillainCoopGame({ state, dispatch, onGameOver }: GameProps<HogwartsVillainCoopState, HogwartsVillainCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="hwv"
+      prefix="hogVilCop"
       cfg={HogwartsVillainCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as HogwartsVillainCoopAction)}

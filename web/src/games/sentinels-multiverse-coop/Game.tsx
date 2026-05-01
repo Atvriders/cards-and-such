@@ -8,7 +8,7 @@ import "./Game.css";
 export function SentinelsMultiverseCoopGame({ state, dispatch, onGameOver }: GameProps<SentinelsMultiverseCoopState, SentinelsMultiverseCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="smc"
+      prefix="sentMvCop"
       cfg={SentinelsMultiverseCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as SentinelsMultiverseCoopAction)}

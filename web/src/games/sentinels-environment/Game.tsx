@@ -8,7 +8,7 @@ import "./Game.css";
 export function SentinelsEnvironmentGame({ state, dispatch, onGameOver }: GameProps<SentinelsEnvironmentState, SentinelsEnvironmentSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="smenv"
+      prefix="sentEnvir"
       cfg={SentinelsEnvironment_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as SentinelsEnvironmentAction)}

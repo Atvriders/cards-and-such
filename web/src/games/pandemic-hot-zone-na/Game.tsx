@@ -8,7 +8,7 @@ import "./Game.css";
 export function PandemicHotZoneNaGame({ state, dispatch, onGameOver }: GameProps<PandemicHotZoneNaState, PandemicHotZoneNaSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="phna"
+      prefix="pandhotna"
       cfg={PandemicHotZoneNa_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as PandemicHotZoneNaAction)}

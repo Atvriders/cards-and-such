@@ -8,7 +8,7 @@ import "./Game.css";
 export function MagicMazeMaxSecurityGame({ state, dispatch, onGameOver }: GameProps<MagicMazeMaxSecurityState, MagicMazeMaxSecuritySettings>): JSX.Element {
   return (
     <CoopView
-      prefix="mmms"
+      prefix="magMzMxSc"
       cfg={MagicMazeMaxSecurity_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as MagicMazeMaxSecurityAction)}

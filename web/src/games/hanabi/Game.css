@@ -3,11 +3,16 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 12px;
-  font-family: system-ui, sans-serif;
+  padding: 16px;
+  font-family: 'Inter', system-ui, sans-serif;
   max-width: 700px;
   margin: 0 auto;
+  background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0e27 70%);
+  color: #fef9c3;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(250,204,21,0.25), inset 0 0 60px rgba(124,58,237,0.15);
 }
+.hanabi h3 { color: #fde68a; }
 
 .hanabi-tokens {
   display: flex;

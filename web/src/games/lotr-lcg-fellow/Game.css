@@ -1,28 +1,29 @@
-.lotrf-wrap{font-family:'Inter',system-ui,sans-serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#dcfce7;border-radius:14px}
-.lotrf-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
-.lotrf-icon{font-size:1.6rem}
-.lotrf-scenario{flex:1;color:#16a34a}
-.lotrf-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1}
-.lotrf-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #16a34a}
-.lotrf-bars{display:flex;flex-direction:column;gap:6px}
-.lotrf-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#334155;margin-bottom:2px}
-.lotrf-bar-track{height:10px;border-radius:5px;background:#e2e8f0;overflow:hidden}
-.lotrf-bar-fill{height:100%;transition:width 200ms ease}
-.lotrf-bar-good{background:linear-gradient(90deg,#10b981,#059669)}
-.lotrf-bar-bad{background:linear-gradient(90deg,#f59e0b,#dc2626)}
-.lotrf-morale{font-size:1rem;color:#dc2626;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
-.lotrf-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#475569;background:#fff;padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1}
-.lotrf-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
-.lotrf-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:#fff;border:2px solid transparent;transition:all 150ms;display:flex;flex-direction:column;gap:2px;font-family:'Inter',system-ui,sans-serif}
-.lotrf-tactic:hover:not(:disabled){border-color:#16a34a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
-.lotrf-tactic:disabled{opacity:0.5;cursor:not-allowed}
-.lotrf-tactic-emoji{font-size:1.4rem}
-.lotrf-tactic-name{font-weight:700;color:#16a34a}
-.lotrf-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#64748b}
-.lotrf-tactic-desc{font-size:0.78rem;color:#475569;line-height:1.3}
-.lotrf-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
-.lotrf-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#64748b;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.5)}
-.lotrf-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.lotrf-final-title{margin:0 0 8px;color:#16a34a}
-.lotrf-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#16a34a}
-.lotrf-final-stats{margin-top:8px;font-size:0.85rem;color:#64748b;font-family:'JetBrains Mono',monospace}
+.lotrFelow-wrap{font-family:'Cinzel','Cormorant Garamond',serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:linear-gradient(160deg,#e2e8f0,#cbd5e1);border-radius:14px;box-shadow:0 6px 24px rgba(71,85,105,0.25)}
+.lotrFelow-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
+.lotrFelow-icon{font-size:1.6rem;filter:drop-shadow(0 0 6px rgba(71,85,105,0.25))}
+.lotrFelow-scenario{flex:1;color:#475569;letter-spacing:0.02em}
+.lotrFelow-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569;background:rgba(255,255,255,0.92);padding:2px 8px;border-radius:6px;border:1px solid #94a3b8}
+.lotrFelow-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.92);padding:10px;border-radius:8px;border-left:3px solid #475569;line-height:1.45}
+.lotrFelow-bars{display:flex;flex-direction:column;gap:6px}
+.lotrFelow-bar{display:flex;flex-direction:column}
+.lotrFelow-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#475569;margin-bottom:2px}
+.lotrFelow-bar-track{height:10px;border-radius:5px;background:#94a3b8;overflow:hidden;opacity:0.85}
+.lotrFelow-bar-fill{height:100%;transition:width 240ms ease;border-radius:5px}
+.lotrFelow-bar-good{background:linear-gradient(90deg,#10b981,#047857)}
+.lotrFelow-bar-bad{background:linear-gradient(90deg,#dc2626,#7f1d1d)}
+.lotrFelow-morale{font-size:1rem;color:#475569;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
+.lotrFelow-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#475569;background:rgba(255,255,255,0.92);padding:6px 10px;border-radius:6px;border:1px solid #94a3b8}
+.lotrFelow-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.lotrFelow-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:rgba(255,255,255,0.92);border:2px solid #94a3b8;transition:all 160ms;display:flex;flex-direction:column;gap:2px;font-family:'Cinzel','Cormorant Garamond',serif;color:#0f172a}
+.lotrFelow-tactic:hover:not(:disabled){border-color:#475569;transform:translateY(-1px);box-shadow:0 6px 16px rgba(71,85,105,0.25)}
+.lotrFelow-tactic:disabled{opacity:0.5;cursor:not-allowed}
+.lotrFelow-tactic-emoji{font-size:1.4rem;filter:drop-shadow(0 0 4px rgba(71,85,105,0.25))}
+.lotrFelow-tactic-name{font-weight:700;color:#475569;letter-spacing:0.02em}
+.lotrFelow-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#475569}
+.lotrFelow-tactic-desc{font-size:0.78rem;color:#475569;line-height:1.35}
+.lotrFelow-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
+.lotrFelow-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#475569;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.92);border-left:2px solid #1e293b}
+.lotrFelow-final{text-align:center;padding:24px;background:rgba(255,255,255,0.92);border:2px solid #475569;border-radius:14px;box-shadow:0 8px 28px rgba(71,85,105,0.25)}
+.lotrFelow-final-title{margin:0 0 8px;color:#475569;letter-spacing:0.02em}
+.lotrFelow-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#475569}
+.lotrFelow-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}

@@ -8,7 +8,7 @@ import "./Game.css";
 export function ArkhamLcgFellowGame({ state, dispatch, onGameOver }: GameProps<ArkhamLcgFellowState, ArkhamLcgFellowSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="arkf"
+      prefix="arkhamFlw"
       cfg={ArkhamLcgFellow_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as ArkhamLcgFellowAction)}

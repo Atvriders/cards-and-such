@@ -8,7 +8,7 @@ import "./Game.css";
 export function MarvelChampionsHeroGame({ state, dispatch, onGameOver }: GameProps<MarvelChampionsHeroState, MarvelChampionsHeroSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="mvh"
+      prefix="mvlchpHro"
       cfg={MarvelChampionsHero_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as MarvelChampionsHeroAction)}

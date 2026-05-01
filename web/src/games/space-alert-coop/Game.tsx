@@ -8,7 +8,7 @@ import "./Game.css";
 export function SpaceAlertCoopGame({ state, dispatch, onGameOver }: GameProps<SpaceAlertCoopState, SpaceAlertCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="spa"
+      prefix="spcAlertC"
       cfg={SpaceAlertCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as SpaceAlertCoopAction)}

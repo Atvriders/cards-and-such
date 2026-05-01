@@ -8,7 +8,7 @@ import "./Game.css";
 export function EscapeAliensHiddenGame({ state, dispatch, onGameOver }: GameProps<EscapeAliensHiddenState, EscapeAliensHiddenSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="ehsa"
+      prefix="escAliens"
       cfg={EscapeAliensHidden_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as EscapeAliensHiddenAction)}

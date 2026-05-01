@@ -8,7 +8,7 @@ import "./Game.css";
 export function EldritchInvestigatorGame({ state, dispatch, onGameOver }: GameProps<EldritchInvestigatorState, EldritchInvestigatorSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="ehi"
+      prefix="eldInvest"
       cfg={EldritchInvestigator_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as EldritchInvestigatorAction)}

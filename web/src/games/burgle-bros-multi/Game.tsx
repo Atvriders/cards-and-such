@@ -8,7 +8,7 @@ import "./Game.css";
 export function BurgleBrosMultiGame({ state, dispatch, onGameOver }: GameProps<BurgleBrosMultiState, BurgleBrosMultiSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="bbm"
+      prefix="brgBrMult"
       cfg={BurgleBrosMulti_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as BurgleBrosMultiAction)}

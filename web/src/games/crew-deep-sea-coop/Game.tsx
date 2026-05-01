@@ -8,7 +8,7 @@ import "./Game.css";
 export function CrewDeepSeaCoopGame({ state, dispatch, onGameOver }: GameProps<CrewDeepSeaCoopState, CrewDeepSeaCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="crwd"
+      prefix="crewDeepS"
       cfg={CrewDeepSeaCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as CrewDeepSeaCoopAction)}

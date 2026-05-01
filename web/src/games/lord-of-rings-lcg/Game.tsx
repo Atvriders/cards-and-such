@@ -8,7 +8,7 @@ import "./Game.css";
 export function LordOfRingsLcgGame({ state, dispatch, onGameOver }: GameProps<LordOfRingsLcgState, LordOfRingsLcgSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="lotrl"
+      prefix="lordRgLcg"
       cfg={LordOfRingsLcg_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as LordOfRingsLcgAction)}

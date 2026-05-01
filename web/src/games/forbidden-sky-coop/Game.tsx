@@ -8,7 +8,7 @@ import "./Game.css";
 export function ForbiddenSkyCoopGame({ state, dispatch, onGameOver }: GameProps<ForbiddenSkyCoopState, ForbiddenSkyCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="fbs"
+      prefix="fbskycoop"
       cfg={ForbiddenSkyCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as ForbiddenSkyCoopAction)}

@@ -8,7 +8,7 @@ import "./Game.css";
 export function SpiritIslandCoopGame({ state, dispatch, onGameOver }: GameProps<SpiritIslandCoopState, SpiritIslandCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="spi"
+      prefix="spirislnd"
       cfg={SpiritIslandCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as SpiritIslandCoopAction)}

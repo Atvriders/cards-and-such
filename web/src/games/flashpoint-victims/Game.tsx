@@ -8,7 +8,7 @@ import "./Game.css";
 export function FlashpointVictimsGame({ state, dispatch, onGameOver }: GameProps<FlashpointVictimsState, FlashpointVictimsSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="fpv"
+      prefix="flshVictm"
       cfg={FlashpointVictims_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as FlashpointVictimsAction)}

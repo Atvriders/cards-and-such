@@ -1,28 +1,29 @@
-.dowS-wrap{font-family:'Inter',system-ui,sans-serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:#e2e8f0;border-radius:14px}
-.dowS-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
-.dowS-icon{font-size:1.6rem}
-.dowS-scenario{flex:1;color:#0f172a}
-.dowS-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid #cbd5e1}
-.dowS-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.6);padding:10px;border-radius:8px;border-left:3px solid #0f172a}
-.dowS-bars{display:flex;flex-direction:column;gap:6px}
-.dowS-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#334155;margin-bottom:2px}
-.dowS-bar-track{height:10px;border-radius:5px;background:#e2e8f0;overflow:hidden}
-.dowS-bar-fill{height:100%;transition:width 200ms ease}
-.dowS-bar-good{background:linear-gradient(90deg,#10b981,#059669)}
-.dowS-bar-bad{background:linear-gradient(90deg,#f59e0b,#dc2626)}
-.dowS-morale{font-size:1rem;color:#dc2626;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
-.dowS-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#475569;background:#fff;padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1}
-.dowS-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
-.dowS-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:#fff;border:2px solid transparent;transition:all 150ms;display:flex;flex-direction:column;gap:2px;font-family:'Inter',system-ui,sans-serif}
-.dowS-tactic:hover:not(:disabled){border-color:#0f172a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
-.dowS-tactic:disabled{opacity:0.5;cursor:not-allowed}
-.dowS-tactic-emoji{font-size:1.4rem}
-.dowS-tactic-name{font-weight:700;color:#0f172a}
-.dowS-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#64748b}
-.dowS-tactic-desc{font-size:0.78rem;color:#475569;line-height:1.3}
-.dowS-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
-.dowS-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#64748b;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.5)}
-.dowS-final{text-align:center;padding:24px;background:#fff;border-radius:14px}
-.dowS-final-title{margin:0 0 8px;color:#0f172a}
-.dowS-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#0f172a}
-.dowS-final-stats{margin-top:8px;font-size:0.85rem;color:#64748b;font-family:'JetBrains Mono',monospace}
+.dowSurviv-wrap{font-family:'Cormorant Garamond','Inter',serif;max-width:680px;margin:0 auto;padding:18px;display:flex;flex-direction:column;gap:14px;color:#0f172a;background:linear-gradient(180deg,#dbeafe,#cbd5e1);border-radius:14px;box-shadow:0 6px 24px rgba(30,58,138,0.25)}
+.dowSurviv-header{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
+.dowSurviv-icon{font-size:1.6rem;filter:drop-shadow(0 0 6px rgba(30,58,138,0.25))}
+.dowSurviv-scenario{flex:1;color:#1e3a8a;letter-spacing:0.02em}
+.dowSurviv-round{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#475569;background:rgba(255,255,255,0.95);padding:2px 8px;border-radius:6px;border:1px solid #93c5fd}
+.dowSurviv-intro{font-size:0.9rem;color:#475569;background:rgba(255,255,255,0.95);padding:10px;border-radius:8px;border-left:3px solid #1e3a8a;line-height:1.45}
+.dowSurviv-bars{display:flex;flex-direction:column;gap:6px}
+.dowSurviv-bar{display:flex;flex-direction:column}
+.dowSurviv-bar-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#475569;margin-bottom:2px}
+.dowSurviv-bar-track{height:10px;border-radius:5px;background:#93c5fd;overflow:hidden;opacity:0.85}
+.dowSurviv-bar-fill{height:100%;transition:width 240ms ease;border-radius:5px}
+.dowSurviv-bar-good{background:linear-gradient(90deg,#10b981,#047857)}
+.dowSurviv-bar-bad{background:linear-gradient(90deg,#dc2626,#7f1d1d)}
+.dowSurviv-morale{font-size:1rem;color:#1e3a8a;letter-spacing:2px;font-family:'JetBrains Mono',monospace}
+.dowSurviv-last{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#475569;background:rgba(255,255,255,0.95);padding:6px 10px;border-radius:6px;border:1px solid #93c5fd}
+.dowSurviv-tactics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.dowSurviv-tactic{cursor:pointer;text-align:left;padding:10px;border-radius:10px;background:rgba(255,255,255,0.95);border:2px solid #93c5fd;transition:all 160ms;display:flex;flex-direction:column;gap:2px;font-family:'Cormorant Garamond','Inter',serif;color:#0f172a}
+.dowSurviv-tactic:hover:not(:disabled){border-color:#1e3a8a;transform:translateY(-1px);box-shadow:0 6px 16px rgba(30,58,138,0.25)}
+.dowSurviv-tactic:disabled{opacity:0.5;cursor:not-allowed}
+.dowSurviv-tactic-emoji{font-size:1.4rem;filter:drop-shadow(0 0 4px rgba(30,58,138,0.25))}
+.dowSurviv-tactic-name{font-weight:700;color:#1e3a8a;letter-spacing:0.02em}
+.dowSurviv-tactic-meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#475569}
+.dowSurviv-tactic-desc{font-size:0.78rem;color:#475569;line-height:1.35}
+.dowSurviv-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto}
+.dowSurviv-log-line{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#475569;padding:3px 6px;border-radius:4px;background:rgba(255,255,255,0.95);border-left:2px solid #0c1858}
+.dowSurviv-final{text-align:center;padding:24px;background:rgba(255,255,255,0.95);border:2px solid #1e3a8a;border-radius:14px;box-shadow:0 8px 28px rgba(30,58,138,0.25)}
+.dowSurviv-final-title{margin:0 0 8px;color:#1e3a8a;letter-spacing:0.02em}
+.dowSurviv-final-score{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:900;color:#1e3a8a}
+.dowSurviv-final-stats{margin-top:8px;font-size:0.85rem;color:#475569;font-family:'JetBrains Mono',monospace}

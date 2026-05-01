@@ -8,7 +8,7 @@ import "./Game.css";
 export function RobinsonCrusoeCoopGame({ state, dispatch, onGameOver }: GameProps<RobinsonCrusoeCoopState, RobinsonCrusoeCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="rcc"
+      prefix="robCrCoop"
       cfg={RobinsonCrusoeCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as RobinsonCrusoeCoopAction)}

@@ -8,7 +8,7 @@ import "./Game.css";
 export function AeonsEndMagesGame({ state, dispatch, onGameOver }: GameProps<AeonsEndMagesState, AeonsEndMagesSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="aem"
+      prefix="aeonmages"
       cfg={AeonsEndMages_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as AeonsEndMagesAction)}

@@ -8,7 +8,7 @@ import "./Game.css";
 export function LetterJamCoopGame({ state, dispatch, onGameOver }: GameProps<LetterJamCoopState, LetterJamCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="ltj"
+      prefix="letJmCoop"
       cfg={LetterJamCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as LetterJamCoopAction)}

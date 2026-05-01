@@ -8,7 +8,7 @@ import "./Game.css";
 export function MagicMazePawnGame({ state, dispatch, onGameOver }: GameProps<MagicMazePawnState, MagicMazePawnSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="mmp"
+      prefix="magMzPawn"
       cfg={MagicMazePawn_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as MagicMazePawnAction)}

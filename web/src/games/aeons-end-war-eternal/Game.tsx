@@ -8,7 +8,7 @@ import "./Game.css";
 export function AeonsEndWarEternalGame({ state, dispatch, onGameOver }: GameProps<AeonsEndWarEternalState, AeonsEndWarEternalSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="aewe"
+      prefix="aeonwareE"
       cfg={AeonsEndWarEternal_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as AeonsEndWarEternalAction)}

@@ -8,7 +8,7 @@ import "./Game.css";
 export function CrewDistressSignalGame({ state, dispatch, onGameOver }: GameProps<CrewDistressSignalState, CrewDistressSignalSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="crws"
+      prefix="crewDistr"
       cfg={CrewDistressSignal_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as CrewDistressSignalAction)}

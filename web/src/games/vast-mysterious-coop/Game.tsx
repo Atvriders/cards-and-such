@@ -8,7 +8,7 @@ import "./Game.css";
 export function VastMysteriousCoopGame({ state, dispatch, onGameOver }: GameProps<VastMysteriousCoopState, VastMysteriousCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="vstm"
+      prefix="vastMystr"
       cfg={VastMysteriousCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as VastMysteriousCoopAction)}

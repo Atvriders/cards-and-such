@@ -8,7 +8,7 @@ import "./Game.css";
 export function ForbiddenDesertCoopGame({ state, dispatch, onGameOver }: GameProps<ForbiddenDesertCoopState, ForbiddenDesertCoopSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="fbd"
+      prefix="fbdsrcoop"
       cfg={ForbiddenDesertCoop_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as ForbiddenDesertCoopAction)}

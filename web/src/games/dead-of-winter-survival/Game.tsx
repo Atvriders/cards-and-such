@@ -8,7 +8,7 @@ import "./Game.css";
 export function DeadOfWinterSurvivalGame({ state, dispatch, onGameOver }: GameProps<DeadOfWinterSurvivalState, DeadOfWinterSurvivalSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="dowS"
+      prefix="dowSurviv"
       cfg={DeadOfWinterSurvival_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as DeadOfWinterSurvivalAction)}

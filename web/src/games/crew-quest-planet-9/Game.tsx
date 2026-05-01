@@ -8,7 +8,7 @@ import "./Game.css";
 export function CrewQuestPlanet9Game({ state, dispatch, onGameOver }: GameProps<CrewQuestPlanet9State, CrewQuestPlanet9Settings>): JSX.Element {
   return (
     <CoopView
-      prefix="crwq"
+      prefix="crewQp9zz"
       cfg={CrewQuestPlanet9_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as CrewQuestPlanet9Action)}

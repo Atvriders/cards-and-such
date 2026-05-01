@@ -8,7 +8,7 @@ import "./Game.css";
 export function BurgleBrosHeistGame({ state, dispatch, onGameOver }: GameProps<BurgleBrosHeistState, BurgleBrosHeistSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="bbh"
+      prefix="brgBrHeis"
       cfg={BurgleBrosHeist_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as BurgleBrosHeistAction)}

@@ -8,7 +8,7 @@ import "./Game.css";
 export function HpDefenceDarkArtsGame({ state, dispatch, onGameOver }: GameProps<HpDefenceDarkArtsState, HpDefenceDarkArtsSettings>): JSX.Element {
   return (
     <CoopView
-      prefix="hpdda"
+      prefix="hpDfDkArt"
       cfg={HpDefenceDarkArts_CFG}
       state={state}
       onPlay={(tacticId) => dispatch({ type: "play", tacticId } as HpDefenceDarkArtsAction)}
