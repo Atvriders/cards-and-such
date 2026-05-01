@@ -1,2 +1,150 @@
-/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+/*
+ * run-it-three-times - themed CSS (UNIQUE prefix: --ritt-*, theme: Cash (traditional felt))
+ *
+ * Per-format unique CSS custom-property prefix and palette. DOM uses .g-*
+ * classes (legacy engine compatibility).
+ */
+:root {
+  --ritt-felt-a: #1f5b3a;
+  --ritt-felt-b: #13402a;
+  --ritt-felt-c: #0a2818;
+  --ritt-rail: #7c2d12;
+  --ritt-rail-dim: #451a03;
+  --ritt-accent: #fef3c7;
+  --ritt-accent2: #facc15;
+  --ritt-card-bg: #fefce8;
+  --ritt-card-red: #b91c1c;
+  --ritt-btn: #0f766e;
+  --ritt-btn-hov: #115e59;
+  --ritt-info: rgba(255,255,255,0.80);
+  --ritt-glow: 0 0 22px rgba(234,179,8,0.30);
+  --ritt-hue: -13deg;
+}
+
+.g-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 18px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 22px;
+  position: relative;
+  isolation: isolate;
+  user-select: none;
+  color: #f8fafc;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255,255,255,0.10), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, var(--ritt-felt-a) 0%, var(--ritt-felt-b) 55%, var(--ritt-felt-c) 100%);
+  box-shadow:
+    inset 0 0 0 6px var(--ritt-rail-dim),
+    inset 0 0 0 7px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(0,0,0,0.40),
+    0 30px 60px -28px rgba(0,0,0,0.65),
+    0 0 22px rgba(234,179,8,0.30);
+  filter: hue-rotate(var(--ritt-hue));
+}
+
+.dm-wrap::before, .g-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
+.g-wrap > * { position: relative; z-index: 1; }
+
+.g-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 460px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ritt-info);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.g-header .g-score {
+  font-weight: 900;
+  background: linear-gradient(180deg,#fef9c3,#eab308);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.g-dice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.g-card {
+  display: inline-block;
+  font-size: 1.15rem;
+  font-weight: 900;
+  padding: 12px 14px;
+  background: var(--ritt-card-bg);
+  border: 2px solid var(--ritt-rail);
+  border-radius: 10px;
+  min-width: 52px;
+  text-align: center;
+  color: #1f2937;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.65) inset,
+    0 6px 14px -6px rgba(0,0,0,0.55);
+}
+.g-card.red { color: var(--ritt-card-red); }
+
+.g-gain {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ritt-accent);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.g-controls { display: flex; gap: 10px; }
+
+.g-btn {
+  padding: 11px 24px;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(180deg, var(--ritt-btn), var(--ritt-btn-hov));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.30) inset,
+    0 8px 20px -10px rgba(0,0,0,0.7);
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+.g-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.g-btn:active:not(:disabled) { transform: translateY(1px); }
+
+.g-final { font-size: 1.4rem; font-weight: 900; color: var(--ritt-accent2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .g-btn { transition: none; }
+  .g-wrap::after { display: none; }
+}

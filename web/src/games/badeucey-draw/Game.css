@@ -1,2 +1,162 @@
-/* Modernized via shared poker engine — see web/src/engines/poker/poker.css */
-@import "../../engines/poker/poker.css";
+/*
+ * badeucey-draw - themed CSS (UNIQUE prefix: --bd-*, theme: Cash (traditional felt))
+ *
+ * Per-format unique CSS custom-property prefix and palette so two formats
+ * cannot share visual state. DOM uses .dm-* classes (engine compatibility).
+ */
+:root {
+  --bd-felt-a: #1f5b3a;
+  --bd-felt-b: #13402a;
+  --bd-felt-c: #0a2818;
+  --bd-rail: #7c2d12;
+  --bd-rail-dim: #451a03;
+  --bd-accent: #fef3c7;
+  --bd-accent2: #facc15;
+  --bd-card-bg: #fefce8;
+  --bd-card-red: #b91c1c;
+  --bd-card-black: #1f2937;
+  --bd-btn: #0f766e;
+  --bd-btn-hov: #115e59;
+  --bd-btn-alt: #a16207;
+  --bd-btn-alt-hov: #854d0e;
+  --bd-result-bg: rgba(254,243,199,0.22);
+  --bd-info: rgba(255,255,255,0.80);
+  --bd-glow: 0 0 22px rgba(234,179,8,0.30);
+  --bd-hue: 21deg;
+}
+
+.dm-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 18px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 22px;
+  position: relative;
+  isolation: isolate;
+  user-select: none;
+  color: #f8fafc;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255,255,255,0.10), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, var(--bd-felt-a) 0%, var(--bd-felt-b) 55%, var(--bd-felt-c) 100%);
+  box-shadow:
+    inset 0 0 0 6px var(--bd-rail-dim),
+    inset 0 0 0 7px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(0,0,0,0.40),
+    0 30px 60px -28px rgba(0,0,0,0.65),
+    0 0 22px rgba(234,179,8,0.30);
+  filter: hue-rotate(var(--bd-hue));
+}
+
+.dm-wrap::before, .g-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
+.dm-wrap > * { position: relative; z-index: 1; }
+
+.dm-info {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--bd-info);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.10);
+  font-variant-numeric: tabular-nums;
+}
+
+.dm-score {
+  font-size: 1.55rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  font-family: "SF Mono", "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+  background: linear-gradient(180deg,#fef9c3,#eab308);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 22px rgba(234,179,8,0.30);
+}
+
+.dm-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.dm-card {
+  font-size: 1.15rem;
+  font-weight: 900;
+  padding: 12px 14px;
+  background: var(--bd-card-bg);
+  border: 2px solid var(--bd-rail);
+  border-radius: 10px;
+  min-width: 52px;
+  text-align: center;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.65) inset,
+    0 6px 14px -6px rgba(0,0,0,0.55);
+}
+.dm-card.red { color: var(--bd-card-red); }
+.dm-card.black { color: var(--bd-card-black); }
+
+.dm-btn {
+  padding: 11px 24px;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(180deg, var(--bd-btn), var(--bd-btn-hov));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.30) inset,
+    0 8px 20px -10px rgba(0,0,0,0.7);
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+.dm-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(0,0,0,0.7); }
+.dm-btn:active:not(:disabled) { transform: translateY(1px); }
+.dm-btn.alt { background: linear-gradient(180deg, var(--bd-btn-alt), var(--bd-btn-alt-hov)); }
+
+.dm-result {
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: var(--bd-result-bg);
+  border: 1px solid rgba(255,255,255,0.10);
+  text-align: center;
+  color: #fff;
+}
+
+.dm-done {
+  text-align: center;
+  padding: 26px 22px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.20));
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.dm-done h2 { margin: 0 0 10px; color: var(--bd-accent); letter-spacing: 0.02em; }
+.dm-final { font-size: 1.55rem; font-weight: 900; color: var(--bd-accent2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-wrap::after { display: none; }
+  .dm-btn { transition: none; }
+}
