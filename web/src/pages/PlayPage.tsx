@@ -3,7 +3,7 @@ import { useParams, Link, useSearchParams } from "react-router-dom";
 import { Skeleton } from "../platform/Skeleton.js";
 import { GAMES } from "../games/registry.js";
 import { SettingsForm } from "../platform/game-plugin/settings.js";
-import { defaultsOf } from "../platform/game-plugin/types.js";
+import { defaultsOf, type SettingSchema, type SettingsOf } from "../platform/game-plugin/types.js";
 import { submitScore } from "../platform/game-plugin/submitScore.js";
 import { playSound } from "../platform/sounds.js";
 import { Tutorial } from "../platform/Tutorial.js";
@@ -126,6 +126,56 @@ function readHintsEnabled(): boolean {
   }
 }
 
+/** Per-game persisted settings, keyed by game id. Stored under
+ *  `cards-game-settings:<gameId>` so each game lives in its own slot —
+ *  reading is best-effort and silently falls back to the plugin defaults
+ *  when the entry is missing or malformed. */
+const LS_GAME_SETTINGS_PREFIX = "cards-game-settings:";
+
+function readGameSettings<S extends SettingSchema>(
+  gameId: string,
+  schema: S,
+): SettingsOf<S> {
+  const defaults = defaultsOf(schema);
+  try {
+    if (typeof localStorage === "undefined") return defaults;
+    const raw = localStorage.getItem(`${LS_GAME_SETTINGS_PREFIX}${gameId}`);
+    if (!raw) return defaults;
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    if (!parsed || typeof parsed !== "object") return defaults;
+    // Whitelist keys to the schema so a stale/foreign payload can't
+    // smuggle in fields the reducer doesn't expect, and validate each
+    // value against its kind so a corrupt entry falls back per-key.
+    const merged = { ...defaults } as Record<string, unknown>;
+    for (const [key, field] of Object.entries(schema)) {
+      const v = parsed[key];
+      if (v === undefined) continue;
+      if (field.kind === "number" && typeof v === "number" && Number.isFinite(v)) {
+        merged[key] = v;
+      } else if (field.kind === "boolean" && typeof v === "boolean") {
+        merged[key] = v;
+      } else if (field.kind === "enum" && typeof v === "string" && field.options.includes(v)) {
+        merged[key] = v;
+      }
+    }
+    return merged as SettingsOf<S>;
+  } catch {
+    return defaults;
+  }
+}
+
+function writeGameSettings(gameId: string, settings: Record<string, unknown>): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(
+      `${LS_GAME_SETTINGS_PREFIX}${gameId}`,
+      JSON.stringify(settings),
+    );
+  } catch {
+    /* ignore — quota / private mode */
+  }
+}
+
 function bumpHintsUsed(gameId: string): void {
   try {
     if (typeof localStorage === "undefined") return;
@@ -173,10 +223,22 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const urlSeed = parseSeed(searchParams.get("seed"));
 
-  const [settings, setSettings] = useState(() => defaultsOf(plugin.settings));
+  const [settings, setSettings] = useState(() =>
+    readGameSettings(plugin.id, plugin.settings),
+  );
   const [phase, setPhase] = useState<"setup" | "playing" | "ended">("setup");
   const [seed, setSeed] = useState<number>(() => urlSeed ?? randomSeed());
   const [state, setState] = useState(() => plugin.initialState(seed, settings));
+  // Snapshot of settings at the moment the current game started — used to
+  // render the "Restart to apply" banner without mid-game-mutating state.
+  // JSON-serialized for cheap structural comparison; settings shapes are
+  // always plain primitives + strings so this is safe.
+  const [settingsAtGameStart, setSettingsAtGameStart] = useState<string>(
+    () => JSON.stringify(settings),
+  );
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const settingsModalRef = useRef<HTMLDivElement | null>(null);
+  const settingsButtonRef = useRef<HTMLButtonElement | null>(null);
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const [helpOpen, setHelpOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
@@ -245,6 +307,30 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const hintsEnabled = useMemo(() => readHintsEnabled(), []);
 
   useFocusTrap(infoPopoverRef, infoOpen);
+  useFocusTrap(settingsModalRef, settingsModalOpen);
+
+  // Persist settings under `cards-game-settings:<gameId>` whenever they
+  // change. Writes are best-effort; the helper swallows quota / private
+  // mode errors so a denied write never breaks gameplay.
+  useEffect(() => {
+    writeGameSettings(plugin.id, settings as Record<string, unknown>);
+  }, [plugin.id, settings]);
+
+  // Esc closes the settings modal. Bound at capture so we win against the
+  // pause-toggle handler when both are theoretically active.
+  useEffect(() => {
+    if (!settingsModalOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        setSettingsModalOpen(false);
+        settingsButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [settingsModalOpen]);
 
   const onRate = useCallback(
     (next: number) => {
@@ -295,6 +381,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     setFinalScore(null);
     setElapsed(0);
     setShowConfetti(false);
+    setSettingsAtGameStart(JSON.stringify(settings));
     setPhase("playing");
     setSearchParams(
       (prev) => {
@@ -323,6 +410,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       sessionStartRef.current = new Date();
       actionCountRef.current = 0;
       setSessionPlays((n) => n + 1);
+      setSettingsAtGameStart(JSON.stringify(settings));
       setPhase("playing");
     },
     [plugin, settings],
@@ -545,6 +633,14 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const showProminentSeed = plugin.id === "klondike" || plugin.id === "freecell" || plugin.id === "spider";
   const progress = useMemo(() => deriveProgress(state), [state]);
 
+  // Have settings drifted from the snapshot taken when the current game
+  // started? Settings changes are NEVER applied mid-game (would break
+  // determinism / replay) — they take effect only on Restart, so we
+  // surface a banner whenever the live `settings` no longer match the
+  // snapshot. JSON-string compare is fine: settings are flat primitives.
+  const settingsDirty =
+    phase === "playing" && JSON.stringify(settings) !== settingsAtGameStart;
+
   const isWin = phase === "ended" && finalScore !== null && finalScore > 0;
   const showWinBanner = isWin && !bannerDismissed;
 
@@ -596,7 +692,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // form field so users editing settings or seed inputs aren't surprised.
   useEffect(() => {
     if (phase !== "playing") return;
-    if (showWinBanner || infoOpen || helpOpen || tutorialOpen) return;
+    if (showWinBanner || infoOpen || helpOpen || tutorialOpen || settingsModalOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       const target = e.target as HTMLElement | null;
@@ -608,7 +704,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [phase, showWinBanner, infoOpen, helpOpen, tutorialOpen, togglePause]);
+  }, [phase, showWinBanner, infoOpen, helpOpen, tutorialOpen, settingsModalOpen, togglePause]);
 
   // Delegated sparkle handler — only primary action surfaces (.btn-primary,
   // .play-iconbtn) trigger a burst, so casual UI clicks stay quiet.
@@ -830,18 +926,45 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               </svg>
             </button>
           )}
-          {phase === "playing" && (
+          {phase === "playing" && Object.keys(plugin.settings).length > 0 && (
             <button
-              className="play-iconbtn"
-              onClick={() => setPhase("setup")}
-              title="Settings"
-              aria-label="Settings"
+              ref={settingsButtonRef}
+              className={`play-iconbtn play-settings-btn${settingsDirty ? " play-settings-btn--dirty" : ""}`}
+              onClick={() => setSettingsModalOpen((v) => !v)}
+              title="Game settings"
+              aria-label="Game settings"
+              aria-haspopup="dialog"
+              aria-expanded={settingsModalOpen}
               data-tooltip="Settings"
+              data-testid="play-settings-btn"
               type="button"
             >
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
                 <circle cx="12" cy="12" r="3"></circle>
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              {settingsDirty && (
+                <span
+                  className="play-settings-dot"
+                  aria-hidden="true"
+                  data-testid="play-settings-dirty-dot"
+                />
+              )}
+            </button>
+          )}
+          {phase === "playing" && (
+            <button
+              className="play-iconbtn"
+              onClick={() => setPhase("setup")}
+              title="Setup screen"
+              aria-label="Setup screen"
+              data-tooltip="Setup"
+              type="button"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path d="M3 6h18"></path>
+                <path d="M3 12h18"></path>
+                <path d="M3 18h18"></path>
               </svg>
             </button>
           )}
@@ -911,6 +1034,175 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           title={plugin.title}
           text={plugin.howToPlay}
         />
+      )}
+
+      {settingsModalOpen && (
+        <div
+          className="play-settings-backdrop"
+          onClick={() => {
+            setSettingsModalOpen(false);
+            settingsButtonRef.current?.focus();
+          }}
+          role="presentation"
+          data-testid="play-settings-backdrop"
+        >
+          <div
+            ref={settingsModalRef}
+            className="play-settings-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${plugin.title} settings`}
+            data-testid="play-settings-modal"
+            tabIndex={-1}
+          >
+            <header className="play-settings-modal-header">
+              <h2 className="play-settings-modal-title">{plugin.title} settings</h2>
+              <button
+                type="button"
+                className="play-settings-close"
+                onClick={() => {
+                  setSettingsModalOpen(false);
+                  settingsButtonRef.current?.focus();
+                }}
+                aria-label="Close settings"
+                data-testid="play-settings-close"
+              >
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </header>
+
+            {Object.keys(plugin.settings).length === 0 ? (
+              <p className="play-settings-empty" data-testid="play-settings-empty">
+                This game has no configurable settings.
+              </p>
+            ) : (
+              <div className="play-settings-fields">
+                {Object.entries(plugin.settings).map(([key, field]) => {
+                  const testId = `play-setting-${key}`;
+                  if (field.kind === "boolean") {
+                    const checked = (settings as Record<string, boolean>)[key] === true;
+                    return (
+                      <label
+                        key={key}
+                        className="play-settings-row play-settings-row--bool"
+                      >
+                        <span className="play-settings-label">{field.label}</span>
+                        <span
+                          className={`play-settings-toggle${checked ? " is-on" : ""}`}
+                        >
+                          <input
+                            type="checkbox"
+                            data-testid={testId}
+                            checked={checked}
+                            onChange={(e) =>
+                              setSettings((s) =>
+                                ({ ...s, [key]: e.target.checked }) as typeof s,
+                              )
+                            }
+                          />
+                          <span className="play-settings-toggle-thumb" aria-hidden="true" />
+                        </span>
+                      </label>
+                    );
+                  }
+                  if (field.kind === "number") {
+                    const value = (settings as Record<string, number>)[key];
+                    return (
+                      <label key={key} className="play-settings-row">
+                        <span className="play-settings-label">{field.label}</span>
+                        <input
+                          type="number"
+                          data-testid={testId}
+                          min={field.min}
+                          max={field.max}
+                          step={field.step ?? 1}
+                          value={Number.isFinite(value) ? value : field.default}
+                          onChange={(e) => {
+                            const next = Number(e.target.value);
+                            if (!Number.isFinite(next)) return;
+                            setSettings((s) => ({ ...s, [key]: next }) as typeof s);
+                          }}
+                        />
+                      </label>
+                    );
+                  }
+                  // kind === "enum" → select dropdown
+                  const value = String((settings as Record<string, string>)[key]);
+                  return (
+                    <label key={key} className="play-settings-row">
+                      <span className="play-settings-label">{field.label}</span>
+                      <select
+                        data-testid={testId}
+                        value={value}
+                        onChange={(e) =>
+                          setSettings((s) =>
+                            ({ ...s, [key]: e.target.value }) as typeof s,
+                          )
+                        }
+                      >
+                        {field.options.map((o) => (
+                          <option key={o} value={o}>
+                            {o}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  );
+                })}
+              </div>
+            )}
+
+            {settingsDirty && (
+              <div
+                className="play-settings-banner"
+                role="status"
+                aria-live="polite"
+                data-testid="play-settings-restart-banner"
+              >
+                <span>Restart to apply</span>
+                <button
+                  type="button"
+                  className="play-settings-restart-btn"
+                  onClick={() => {
+                    setSettingsModalOpen(false);
+                    replay();
+                  }}
+                  data-testid="play-settings-restart-now"
+                >
+                  Restart now
+                </button>
+              </div>
+            )}
+
+            <footer className="play-settings-footer">
+              <button
+                type="button"
+                className="play-settings-reset"
+                onClick={() => setSettings(defaultsOf(plugin.settings))}
+                data-testid="play-settings-reset"
+              >
+                Reset to defaults
+              </button>
+              {plugin.howToPlay && (
+                <button
+                  type="button"
+                  className="play-settings-howto"
+                  onClick={() => {
+                    setSettingsModalOpen(false);
+                    setHelpOpen(true);
+                  }}
+                  data-testid="play-settings-howto"
+                >
+                  How to play
+                </button>
+              )}
+            </footer>
+          </div>
+        </div>
       )}
 
       {phase === "setup" && (
