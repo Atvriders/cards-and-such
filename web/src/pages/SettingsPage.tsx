@@ -31,9 +31,13 @@ import {
   LIGHT_STORAGE_KEY,
 } from "../platform/lightMode.js";
 import { LS_SOUND_ON } from "../platform/sounds.js";
+import {
+  isMockLeaderboardEnabled,
+  setMockLeaderboardEnabled,
+} from "../platform/leaderboardClient.js";
 import { useToast } from "../platform/ui/Toast.js";
 import { t } from "../platform/i18n.js";
-import { resetWelcomeTutorial } from "../platform/tutorials.js";
+import { resetWelcomeTutorial, setCoachmarkPending } from "../platform/tutorials.js";
 import "./SettingsPage.css";
 
 type CardBack = "classic-blue" | "red-weave" | "plain";
@@ -171,6 +175,7 @@ export default function SettingsPage(): JSX.Element {
   const [autoMove, setAutoMove] = useState<boolean>(readAutoMove);
   const [hintCount, setHintCount] = useState<number>(readHintCount);
   const [hintsEnabled, setHintsEnabled] = useState<boolean>(readHintsEnabled);
+  const [mockLeaderboard, setMockLeaderboard] = useState<boolean>(isMockLeaderboardEnabled);
   const importInputRef = useRef<HTMLInputElement | null>(null);
 
   function refreshFromStorage() {
@@ -337,6 +342,9 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     localStorage.setItem(LS_HINTS_ENABLED, String(hintsEnabled));
   }, [hintsEnabled]);
+  useEffect(() => {
+    setMockLeaderboardEnabled(mockLeaderboard);
+  }, [mockLeaderboard]);
 
   return (
     <div className="settings-page" data-testid="settings-page">
@@ -718,6 +726,25 @@ export default function SettingsPage(): JSX.Element {
             Show again
           </button>
         </div>
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Show coachmarks</div>
+            <p className="settings-hint">
+              Re-arm the lobby Featured-strip hint on your next visit.
+            </p>
+          </div>
+          <button
+            type="button"
+            className="settings-mini-btn"
+            data-testid="settings-show-coachmarks"
+            onClick={() => {
+              setCoachmarkPending();
+            }}
+          >
+            Show again
+          </button>
+        </div>
       </section>
 
       {/* Data ------------------------------------------------------------ */}
@@ -775,6 +802,32 @@ export default function SettingsPage(): JSX.Element {
             onChange={handleImportFile}
             data-testid="settings-import-input"
           />
+        </div>
+
+        <div className="settings-divider" role="presentation" />
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Use mock leaderboard</div>
+            <p className="settings-hint">
+              Show 5 simulated other players on the Top Players tab. There's
+              no global leaderboard backend yet — this is a developer/preview
+              toggle for the UI. Off = just your own scores.
+            </p>
+          </div>
+          <label className="settings-toggle">
+            <input
+              type="checkbox"
+              checked={mockLeaderboard}
+              onChange={(e) => setMockLeaderboard(e.target.checked)}
+              data-testid="settings-mock-leaderboard"
+              aria-label="Use mock leaderboard"
+            />
+            <span className="settings-toggle-track" aria-hidden="true">
+              <span className="settings-toggle-thumb" />
+            </span>
+            <span className="settings-toggle-label">{mockLeaderboard ? "On" : "Off"}</span>
+          </label>
         </div>
 
         {/* Mini-actions: narrower wipes that don't kick a full reload.

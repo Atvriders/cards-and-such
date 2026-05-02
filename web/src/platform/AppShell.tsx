@@ -18,6 +18,7 @@ import { WelcomeTutorial } from "./Tutorial.js";
 import {
   hasSeenWelcomeTutorial,
   markWelcomeTutorialSeen,
+  setCoachmarkPending,
 } from "./tutorials.js";
 import { searchAll, type SearchHit } from "./search.js";
 import "./AppShell.css";
@@ -727,10 +728,14 @@ export default function AppShell(): JSX.Element {
         <WelcomeTutorial
           onComplete={() => {
             markWelcomeTutorialSeen();
+            // Arm the lobby coachmark so the user gets a gentle nudge
+            // toward the Featured strip on their next lobby visit.
+            setCoachmarkPending();
             setWelcomeOpen(false);
           }}
           onSkip={() => {
             markWelcomeTutorialSeen();
+            setCoachmarkPending();
             setWelcomeOpen(false);
           }}
         />

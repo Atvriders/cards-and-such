@@ -235,3 +235,46 @@ export function resetWelcomeTutorial(): void {
     /* ignore quota / disabled storage */
   }
 }
+
+/* ----------------------------------------------------------------------
+ * Onboarding coachmark — a one-shot floating tooltip pointing at the
+ * Featured strip on the lobby. Set to "pending" when the welcome
+ * carousel is dismissed (or when the user manually re-arms it from
+ * Settings → Gameplay), flipped to "done" the first time the user
+ * dismisses it (tile click, navigation, Esc, or the X). The "done"
+ * state is sticky so the coachmark never re-shows on its own.
+ *
+ * Stored under its own key so the import/export round-trip can include
+ * it without disturbing the SeenMap.
+ * -------------------------------------------------------------------- */
+export const COACHMARK_KEY = "cards-onboard-coachmark";
+export type CoachmarkState = "pending" | "done" | "unset";
+
+export function getCoachmarkState(): CoachmarkState {
+  try {
+    if (typeof localStorage === "undefined") return "unset";
+    const raw = localStorage.getItem(COACHMARK_KEY);
+    if (raw === "pending" || raw === "done") return raw;
+    return "unset";
+  } catch {
+    return "unset";
+  }
+}
+
+export function setCoachmarkPending(): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(COACHMARK_KEY, "pending");
+  } catch {
+    /* ignore */
+  }
+}
+
+export function setCoachmarkDone(): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(COACHMARK_KEY, "done");
+  } catch {
+    /* ignore */
+  }
+}

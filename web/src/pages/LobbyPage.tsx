@@ -11,6 +11,11 @@ import { t } from "../platform/i18n.js";
 import { Badge, type BadgeKind } from "../platform/Badge.js";
 import { readFavorites, toggleFavorite as toggleFavoritePersist } from "../platform/userdata.js";
 import { highlightMatch } from "../platform/highlight.js";
+import {
+  getCoachmarkState,
+  setCoachmarkDone,
+} from "../platform/tutorials.js";
+import { loadStats } from "../platform/stats.js";
 import "./LobbyPage.css";
 
 /**
@@ -58,7 +63,7 @@ interface TileTooltipData {
   description: string;
   players: string;
   multiplayer: boolean;
-  howToPlay?: string;
+  howToPlay?: string | undefined;
 }
 
 /**
@@ -102,7 +107,7 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
     onDragStart: () => void;
     onFocus: (e: React.FocusEvent<HTMLElement>) => void;
     onBlur: () => void;
-    "aria-describedby"?: string;
+    "aria-describedby"?: string | undefined;
   };
   tooltip: JSX.Element | null;
 } {
@@ -413,6 +418,24 @@ export default function LobbyPage(): JSX.Element {
   const [favSet, setFavSet] = useState<Set<string>>(() => readFavorites());
   const deferredQuery = useDeferredValue(query);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const featuredRef = useRef<HTMLElement | null>(null);
+  // Onboarding coachmark — only render when the welcome tutorial just
+  // dismissed AND the user has zero plays. The state is hydrated lazily
+  // because we don't want SSR / unit-test localStorage probes to crash.
+  const [coachmarkVisible, setCoachmarkVisible] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      if (getCoachmarkState() !== "pending") return false;
+      // Returning users (any plays recorded) skip the coachmark — they
+      // already know how the lobby works.
+      const stats = loadStats();
+      if ((stats.totalPlayed ?? 0) > 0) return false;
+      return true;
+    } catch {
+      return false;
+    }
+  });
+  const [coachmarkPos, setCoachmarkPos] = useState<{ top: number; left: number } | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   // Track which family id (if any) was opened via a `?family=<id>` deep
@@ -708,6 +731,91 @@ export default function LobbyPage(): JSX.Element {
     return () => window.removeEventListener("keydown", onKey);
   }, [openFamilyId]);
 
+  // -----------------------------------------------------------------
+  // Onboarding coachmark — dismissal + positioning side-effects.
+  // The actual tooltip JSX lives at the bottom of the lobby render so
+  // it floats above the strip without being clipped by parent stacking
+  // contexts. Dismissal sources:
+  //   - any tile click inside `.lobby-grid` (capture-phase listener)
+  //   - any navigation away from the lobby (router `location` change)
+  //   - the Esc key
+  //   - the explicit X on the coachmark itself
+  // Once dismissed, `cards-onboard-coachmark` flips to "done" so the
+  // hint never re-shows on its own.
+  // -----------------------------------------------------------------
+  const dismissCoachmark = useCallback(() => {
+    setCoachmarkVisible(false);
+    setCoachmarkDone();
+  }, []);
+
+  useEffect(() => {
+    if (!coachmarkVisible) return;
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        dismissCoachmark();
+      }
+    };
+    const onTileClick = (e: MouseEvent): void => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      // Any click inside any lobby tile (.tile) or the featured strip
+      // counts — the user is engaging with the catalog, the hint has
+      // done its job.
+      if (target.closest(".tile") || target.closest(".lobby-tile-wrap")) {
+        dismissCoachmark();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    document.addEventListener("click", onTileClick, true);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("click", onTileClick, true);
+    };
+  }, [coachmarkVisible, dismissCoachmark]);
+
+  // Navigation away from the lobby also dismisses the coachmark — this
+  // covers header links, search-popover navigations, and the "Surprise"
+  // jump. Driven off `location.pathname` so SPAs are caught.
+  const initialPathRef = useRef<string>(location.pathname);
+  useEffect(() => {
+    if (!coachmarkVisible) return;
+    if (location.pathname !== initialPathRef.current) {
+      dismissCoachmark();
+    }
+  }, [location.pathname, coachmarkVisible, dismissCoachmark]);
+
+  // Recompute coachmark position whenever it's visible — anchored to
+  // the Featured section so the arrow points at the strip header.
+  useEffect(() => {
+    if (!coachmarkVisible) return;
+    const place = (): void => {
+      const node = featuredRef.current;
+      if (!node) {
+        setCoachmarkPos(null);
+        return;
+      }
+      const r = node.getBoundingClientRect();
+      const TIP_W = 260;
+      const GAP = 10;
+      // Sit just below the section header, nudged inwards from the
+      // left edge so the arrow aligns near the section title.
+      const left = Math.min(
+        Math.max(12, r.left + 24),
+        window.innerWidth - TIP_W - 12,
+      );
+      const top = r.top + 8 + window.scrollY * 0; // rect already viewport-relative
+      setCoachmarkPos({ top: top + 28, left });
+    };
+    place();
+    window.addEventListener("resize", place);
+    window.addEventListener("scroll", place, true);
+    return () => {
+      window.removeEventListener("resize", place);
+      window.removeEventListener("scroll", place, true);
+    };
+  }, [coachmarkVisible]);
+
   // Honour `/?family=<id>` deep-links from CategoryPage (and elsewhere).
   // On mount and whenever the URL changes, look up the family by id and
   // auto-open the picker. Unknown / missing ids are silently ignored so
@@ -935,7 +1043,11 @@ export default function LobbyPage(): JSX.Element {
       </div>
 
       {!query && filter === "all" && featured.length > 0 && (
-        <section className="lobby-featured" aria-label="Featured games">
+        <section
+          className="lobby-featured"
+          aria-label="Featured games"
+          ref={featuredRef}
+        >
           <h2>
             <span className="lobby-featured-spark" aria-hidden="true">✦</span>
             Featured
@@ -1155,6 +1267,31 @@ export default function LobbyPage(): JSX.Element {
             }
           }}
         />
+      )}
+
+      {coachmarkVisible && coachmarkPos && (
+        <div
+          className="lobby-coachmark"
+          data-testid="coachmark"
+          role="status"
+          aria-live="polite"
+          style={{ top: coachmarkPos.top, left: coachmarkPos.left }}
+        >
+          <span className="lobby-coachmark-arrow" aria-hidden="true" />
+          <span className="lobby-coachmark-text">
+            Try one of these to get started{" "}
+            <span aria-hidden="true">✨</span>
+          </span>
+          <button
+            type="button"
+            className="lobby-coachmark-close"
+            data-testid="coachmark-dismiss"
+            aria-label="Dismiss tip"
+            onClick={dismissCoachmark}
+          >
+            ×
+          </button>
+        </div>
       )}
     </div>
   );
@@ -1422,13 +1559,13 @@ function FamilyCard({
   category: GameCategory;
   memberCount: number;
   onClick: () => void;
-  testIdOverride?: string;
-  userRating?: number;
-  isNew?: boolean;
+  testIdOverride?: string | undefined;
+  userRating?: number | undefined;
+  isNew?: boolean | undefined;
   members: GamePlugin[];
-  isFavorite?: boolean;
-  onToggleFavorite?: (id: string) => void;
-  highlightQuery?: string;
+  isFavorite?: boolean | undefined;
+  onToggleFavorite?: ((id: string) => void) | undefined;
+  highlightQuery?: string | undefined;
 }): JSX.Element {
   // Family badge: NEW wins outright, otherwise CHALLENGING/QUICK if any
   // member is curated, otherwise POPULAR by best-rating threshold.

@@ -1528,3 +1528,76 @@ button.tile {
   .tile-fav-glyph { animation: none; }
   .tile-fav { transition: none; }
 }
+
+/* ----------------------------------------------------------------
+ * Onboarding coachmark — a small floating tooltip that points at
+ * the Featured strip after the welcome carousel closes. Theme
+ * variables only so it tracks every palette automatically.
+ * ---------------------------------------------------------------- */
+.lobby-coachmark {
+  position: fixed;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2, 0.5rem);
+  max-width: 260px;
+  padding: var(--sp-2, 0.5rem) var(--sp-3, 0.75rem);
+  background: var(--surface-1, #1b2230);
+  color: var(--text-100, #f8fafc);
+  border: 1px solid var(--accent, #5b6cff);
+  border-radius: var(--r-md, 10px);
+  box-shadow:
+    0 12px 28px -8px rgba(0, 0, 0, 0.45),
+    0 0 0 3px color-mix(in srgb, var(--accent, #5b6cff) 18%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  pointer-events: auto;
+  animation: lobby-coachmark-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.lobby-coachmark-arrow {
+  position: absolute;
+  top: -7px;
+  left: 22px;
+  width: 12px;
+  height: 12px;
+  background: var(--surface-1, #1b2230);
+  border-top: 1px solid var(--accent, #5b6cff);
+  border-left: 1px solid var(--accent, #5b6cff);
+  transform: rotate(45deg);
+}
+.lobby-coachmark-text {
+  flex: 1;
+  color: var(--text-100, #f8fafc);
+}
+.lobby-coachmark-close {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  border-radius: var(--r-pill, 999px);
+  background: transparent;
+  color: var(--text-300, #cbd5e1);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast, 140ms) var(--ease-out-quart, ease),
+    color var(--dur-fast, 140ms) var(--ease-out-quart, ease),
+    border-color var(--dur-fast, 140ms) var(--ease-out-quart, ease);
+}
+.lobby-coachmark-close:hover,
+.lobby-coachmark-close:focus-visible {
+  background: var(--surface-2, rgba(255, 255, 255, 0.06));
+  color: var(--text-100, #f8fafc);
+  border-color: var(--border-focus, var(--accent, #5b6cff));
+}
+@keyframes lobby-coachmark-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lobby-coachmark { animation: none; }
+}
