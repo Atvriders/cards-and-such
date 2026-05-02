@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RollRightState, RollRightAction, RollRightSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RollRightGame } from "./Game.js";
@@ -26,5 +26,27 @@ The first player to reach or exceed 100 points wins. Plan when to be aggressive 
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: RollRightState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.currentPlayer !== 0) {
+      // Bot's turn — pulse Confirm if available
+      if (state.phase === "scored") {
+        return { selector: '[data-testid="hint-target-roll-right-confirm"]', pulses: 3 };
+      }
+      return null;
+    }
+    if (state.phase === "scored") {
+      return { selector: '[data-testid="hint-target-roll-right-confirm"]', pulses: 3 };
+    }
+    if (state.rollsThisTurn === 0) {
+      return { selector: '[data-testid="hint-target-roll-right-roll"]', pulses: 3 };
+    }
+    // Already rolled — score if any kept high-value dice, else re-roll
+    const keptSum = state.dice.reduce((s, v, i) => s + (state.kept[i] ? v : 0), 0);
+    if (keptSum >= 12) {
+      return { selector: '[data-testid="hint-target-roll-right-score"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-roll-right-roll"]', pulses: 3 };
+  },
   component: RollRightGame,
 };

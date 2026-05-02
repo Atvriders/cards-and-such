@@ -41,10 +41,10 @@ export function BarDiceThreesGame({ state, dispatch, onGameOver }: GameProps<Bar
       </div>
       <div className="badith-actions">
         {state.phase === "rolling" && (
-          <button className="badith-btn primary" onClick={() => dispatch({ type: "roll" } as BarDiceThreesAction)}>Roll</button>
+          <button className="badith-btn primary" data-testid="hint-target-bar-dice-threes-roll" onClick={() => dispatch({ type: "roll" } as BarDiceThreesAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="badith-btn alt" onClick={() => dispatch({ type: "next" } as BarDiceThreesAction)}>Next</button>
+          <button className="badith-btn alt" data-testid="hint-target-bar-dice-threes-next" onClick={() => dispatch({ type: "next" } as BarDiceThreesAction)}>Next</button>
         )}
       </div>
     </div>

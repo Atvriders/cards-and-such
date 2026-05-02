@@ -84,9 +84,10 @@ export function Dudo({
             </select>
           </div>
           <div className="dudo-btn-row">
-            <button className="dudo-bid-btn" onClick={handleBid}>Bid</button>
+            <button className="dudo-bid-btn" data-testid="hint-target-dudo-bid" onClick={handleBid}>Bid</button>
             <button
               className="dudo-dudo-btn"
+              data-testid="hint-target-dudo-call"
               disabled={!currentBid}
               onClick={handleDudo}
             >

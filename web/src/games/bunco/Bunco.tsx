@@ -39,11 +39,11 @@ export function Bunco({ state, dispatch, onGameOver }: GameProps<BuncoState, Bun
       )}
 
       <div className="bunco-controls">
-        <button onClick={() => dispatch({ type: "roll" } as BuncoAction)} disabled={!canRoll || !!terminal}>
+        <button data-testid="hint-target-bunco-roll" onClick={() => dispatch({ type: "roll" } as BuncoAction)} disabled={!canRoll || !!terminal}>
           Roll
         </button>
         {state.phase === "roundOver" && !terminal && (
-          <button onClick={() => dispatch({ type: "nextRound" } as BuncoAction)}>Next Round</button>
+          <button data-testid="hint-target-bunco-next-round" onClick={() => dispatch({ type: "nextRound" } as BuncoAction)}>Next Round</button>
         )}
       </div>
 

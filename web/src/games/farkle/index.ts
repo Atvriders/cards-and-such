@@ -1,7 +1,8 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FarkleState, FarkleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { scoreFarkleSelection } from "../../engines/dice/index.js";
 import { Farkle } from "./Farkle.js";
 
 export const farkleSettings = {
@@ -32,6 +33,32 @@ Tips: early in a turn it pays to be aggressive and reroll; once you've built a l
   initialState: (seed: number, settings: FarkleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FarkleState): HintTarget | null => {
+    if (state.won) return null;
+    const phase = state.currentTurn.phase;
+    if (phase === "preRoll") {
+      // If we have turn score banked, suggest banking; otherwise roll
+      if (state.currentTurn.turnScore > 0) {
+        return { selector: '[data-testid="hint-target-farkle-bank"]', pulses: 3 };
+      }
+      return { selector: '[data-testid="hint-target-farkle-roll"]', pulses: 3 };
+    }
+    if (phase === "farkled") {
+      return { selector: '[data-testid="hint-target-farkle-next-turn"]', pulses: 3 };
+    }
+    if (phase === "rolled") {
+      // Find the first individually-scoring die (a 1 or 5)
+      for (let i = 0; i < state.lastRoll.length; i++) {
+        const v = state.lastRoll[i]!.value;
+        if (scoreFarkleSelection([v]) > 0) {
+          return { selector: `[data-testid="hint-target-farkle-die-${i}"]`, pulses: 3 };
+        }
+      }
+      // No single-die scores — pulse Set Aside button as a fallback
+      return { selector: '[data-testid="hint-target-farkle-setaside"]', pulses: 3 };
+    }
+    return null;
+  },
   component: Farkle,
   themeOverrides: {
     feltGradient: "linear-gradient(135deg, #6b3f1a, #8a5a2b 50%, #4a2810)",

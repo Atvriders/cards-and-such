@@ -62,20 +62,20 @@ export function RollRightGame({ state, dispatch, onGameOver }: GameProps<RollRig
 
       <div className="rr-controls">
         {canRoll && (
-          <button onClick={() => dispatch({ type: "roll" })}>
+          <button data-testid="hint-target-roll-right-roll" onClick={() => dispatch({ type: "roll" })}>
             {state.rollsThisTurn === 0 ? "Roll Dice" : "Re-roll Unkept"}
           </button>
         )}
         {canScore && (
-          <button onClick={() => dispatch({ type: "score" })}>
+          <button data-testid="hint-target-roll-right-score" onClick={() => dispatch({ type: "score" })}>
             Score {state.kept.some(Boolean) ? `Kept (${state.dice.reduce((s, v, i) => s + (state.kept[i] ? v : 0), 0)})` : "All"}
           </button>
         )}
         {canConfirm && state.currentPlayer === 1 && (
-          <button onClick={() => dispatch({ type: "confirm" })}>Next Turn</button>
+          <button data-testid="hint-target-roll-right-confirm" onClick={() => dispatch({ type: "confirm" })}>Next Turn</button>
         )}
         {canConfirm && state.currentPlayer === 0 && (
-          <button onClick={() => dispatch({ type: "confirm" })}>Continue</button>
+          <button data-testid="hint-target-roll-right-confirm" onClick={() => dispatch({ type: "confirm" })}>Continue</button>
         )}
         {!isHuman && state.winner === null && state.phase !== "scored" && (
           <div className="rr-bot-label">Bot is thinking…</div>

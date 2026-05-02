@@ -75,17 +75,17 @@ export function MexicoDice({
       ) : (
         <div className="mexico-controls">
           {canRoll && (
-            <button onClick={() => dispatch({ type: "roll" } as MexicoAction)}>
+            <button data-testid="hint-target-mexico-dice-roll" onClick={() => dispatch({ type: "roll" } as MexicoAction)}>
               Roll {rerolls === 0 ? "" : "Again"}
             </button>
           )}
           {canKeep && (
-            <button className="keep-btn" onClick={() => dispatch({ type: "keep" } as MexicoAction)}>
+            <button className="keep-btn" data-testid="hint-target-mexico-dice-keep" onClick={() => dispatch({ type: "keep" } as MexicoAction)}>
               Keep
             </button>
           )}
           {(phase === "botRolling" || phase === "roundOver") && (
-            <button onClick={() => dispatch({ type: "nextRound" } as MexicoAction)}>
+            <button data-testid="hint-target-mexico-dice-next" onClick={() => dispatch({ type: "nextRound" } as MexicoAction)}>
               {phase === "botRolling" ? "Reveal Bot" : "Next Round"}
             </button>
           )}

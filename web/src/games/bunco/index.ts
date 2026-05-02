@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BuncoState, BuncoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,12 @@ Tips: you have no decisions to make — just keep rolling while you score. The g
   initialState: (seed: number, settings: BuncoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BuncoState): HintTarget | null => {
+    if (state.phase === "gameOver") return null;
+    if (state.phase === "roundOver") {
+      return { selector: '[data-testid="hint-target-bunco-next-round"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-bunco-roll"]', pulses: 3 };
+  },
   component: Bunco,
 };

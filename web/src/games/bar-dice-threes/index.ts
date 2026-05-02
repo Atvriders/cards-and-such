@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BarDiceThreesState, BarDiceThreesAction, BarDiceThreesSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BarDiceThreesGame } from "./Game.js";
@@ -17,5 +17,12 @@ export const threesBarDicePlugin: GamePlugin<BarDiceThreesState, BarDiceThreesAc
   initialState: (seed: number, s: S) => initialState(seed, s as BarDiceThreesSettings),
   reducer,
   isTerminal,
+  hint: (state: BarDiceThreesState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "rolling") {
+      return { selector: '[data-testid="hint-target-bar-dice-threes-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-bar-dice-threes-next"]', pulses: 3 };
+  },
   component: BarDiceThreesGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LiarsDiceState, LiarsDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,6 +38,22 @@ Tips: Your bid should reflect what you know about your own dice plus a probabili
   initialState: (seed: number, settings: LiarsDiceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LiarsDiceState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    const bid = state.currentBid;
+    if (!bid) {
+      return { selector: '[data-testid="hint-target-liars-dice-bid"]', pulses: 3 };
+    }
+    // Estimate probability: actual count of bid.face across known + expected on bot's side
+    const known = state.playerDice.filter((d) => d === bid.face).length;
+    const expected = known + state.botDice.length / 6;
+    // If bid significantly exceeds expectation, suggest Call; otherwise Bid (raise)
+    if (bid.count > expected * 1.4) {
+      return { selector: '[data-testid="hint-target-liars-dice-call"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-liars-dice-bid"]', pulses: 3 };
+  },
   component: LiarsDice,
   themeOverrides: {
     feltGradient: "linear-gradient(135deg, #6b3f1a, #8a5a2b 50%, #4a2810)",

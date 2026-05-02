@@ -97,12 +97,13 @@ export function Farkle({
           </div>
           <div className="farkle-dice">
             {state.lastRoll.map((die, i) => (
-              <Die
-                key={i}
-                value={die.value}
-                kept={selected.includes(i)}
-                onClick={() => toggleSelect(i)}
-              />
+              <span key={i} data-testid={`hint-target-farkle-die-${i}`}>
+                <Die
+                  value={die.value}
+                  kept={selected.includes(i)}
+                  onClick={() => toggleSelect(i)}
+                />
+              </span>
             ))}
           </div>
         </div>
@@ -110,25 +111,25 @@ export function Farkle({
 
       <div className="farkle-controls">
         {phase === "preRoll" && !terminal && (
-          <button onClick={handleRoll}>
+          <button data-testid="hint-target-farkle-roll" onClick={handleRoll}>
             Roll {diceRemaining} {diceRemaining === 1 ? "Die" : "Dice"}
           </button>
         )}
 
         {phase === "rolled" && (
           <>
-            <button onClick={handleSetAside} disabled={!selectionValid}>
+            <button data-testid="hint-target-farkle-setaside" onClick={handleSetAside} disabled={!selectionValid}>
               Set Aside {selectionValid ? `(+${selectionScore})` : ""}
             </button>
           </>
         )}
 
         {phase === "farkled" && !terminal && (
-          <button onClick={() => dispatch({ type: "nextTurn" } as FarkleAction)}>Next Turn</button>
+          <button data-testid="hint-target-farkle-next-turn" onClick={() => dispatch({ type: "nextTurn" } as FarkleAction)}>Next Turn</button>
         )}
 
         {phase === "preRoll" && turnScore > 0 && !terminal && (
-          <button className="bank-btn" onClick={handleBank}>
+          <button className="bank-btn" data-testid="hint-target-farkle-bank" onClick={handleBank}>
             Bank {turnScore}
           </button>
         )}

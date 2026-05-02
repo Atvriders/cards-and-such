@@ -143,6 +143,7 @@ export function LiarsDice({
           <div className="liars-dice-actions">
             <button
               className="bid-btn"
+              data-testid="hint-target-liars-dice-bid"
               onClick={handleBid}
               disabled={!isBidValid()}
             >
@@ -150,6 +151,7 @@ export function LiarsDice({
             </button>
             <button
               className="call-btn"
+              data-testid="hint-target-liars-dice-call"
               onClick={handleCall}
               disabled={!canCall}
             >

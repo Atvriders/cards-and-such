@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DudoState, DudoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,23 @@ Strategy: ones in your hand are powerful wildcards — factor them in when biddi
   initialState: (seed: number, settings: DudoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: DudoState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    if (state.phase !== "bid") return null;
+    const bid = state.currentBid;
+    if (!bid) {
+      return { selector: '[data-testid="hint-target-dudo-bid"]', pulses: 3 };
+    }
+    // Estimate actual count of bid.face including wilds
+    const playerKnown = state.playerRoll.filter((d) => d === bid.face || (bid.face !== 1 && d === 1)).length;
+    // Bot expected contribution: 1/3 of dice (face + wild) for non-1 faces, 1/6 for 1s
+    const expected = playerKnown + state.botDice * (bid.face !== 1 ? 2 : 1) / 6;
+    // High doubt → call
+    if (bid.count > expected * 1.5) {
+      return { selector: '[data-testid="hint-target-dudo-call"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-dudo-bid"]', pulses: 3 };
+  },
   component: Dudo,
 };

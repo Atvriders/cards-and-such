@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { YahtzeeState, YahtzeeAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { YahtzeeState, YahtzeeAction, Category } from "./state.js";
+import { initialState, reducer, isTerminal, ALL_CATEGORIES, computeCategoryScore } from "./state.js";
 import { Yahtzee } from "./Yahtzee.js";
 
 export const yahtzeeSettings = {
@@ -31,6 +31,23 @@ Tips: aim for 63+ in the upper section early. Save Chance for rounds where no ot
   initialState: (seed: number, settings: YahtzeeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: YahtzeeState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    // If rolls remain (and we've rolled at least once or not at all), pulse Roll
+    if (state.rollsUsed < 3) {
+      return { selector: '[data-testid="hint-target-yahtzee-roll"]', pulses: 3 };
+    }
+    // Out of rolls: pulse the best-scoring unused category
+    const unused = ALL_CATEGORIES.filter((c) => !(c in state.scores)) as Category[];
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = computeCategoryScore(state.dice, bestCat);
+    for (const c of unused) {
+      const s = computeCategoryScore(state.dice, c);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-yahtzee-cat-${bestCat}"]`, pulses: 3 };
+  },
   component: Yahtzee,
   themeOverrides: {
     // Warm wooden tabletop — dice games feel right on a stained-pine surface

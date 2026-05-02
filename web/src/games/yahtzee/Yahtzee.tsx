@@ -66,6 +66,7 @@ export function Yahtzee({
       <tr key={cat} className={used ? "used" : canScore && !used ? "clickable" : ""}>
         <td>{CATEGORY_LABELS[cat]}</td>
         <td
+          data-testid={`hint-target-yahtzee-cat-${cat}`}
           className={used ? undefined : potential !== null ? "score-cell potential" : "score-cell"}
           onClick={used ? undefined : () => handleScore(cat)}
         >
@@ -99,6 +100,7 @@ export function Yahtzee({
 
       <div className="yahtzee-controls">
         <button
+          data-testid="hint-target-yahtzee-roll"
           onClick={() => dispatch({ type: "roll" } as YahtzeeAction)}
           disabled={!canRoll || !!terminal}
         >
