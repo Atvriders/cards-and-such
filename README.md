@@ -3,160 +3,128 @@
 [![CI](https://github.com/Atvriders/cards-and-such/actions/workflows/ci.yml/badge.svg)](https://github.com/Atvriders/cards-and-such/actions/workflows/ci.yml)
 [![Publish images](https://github.com/Atvriders/cards-and-such/actions/workflows/publish-images.yml/badge.svg)](https://github.com/Atvriders/cards-and-such/actions/workflows/publish-images.yml)
 
-Browser-based game hub for card, dice, board, and arcade games. Username-only
-login, shared leaderboard, live "Online Now" presence, and realtime multiplayer.
-Ten polished launch games; a 2,400-game backlog to draw from next.
+A browser-based hub for card, dice, board, arcade, and quiz games — username-only
+login, shared leaderboard, achievements, and realtime multiplayer.
 
-Full Phase 1 design at
-[`docs/superpowers/specs/2026-04-20-cards-and-such-phase-1-design.md`](docs/superpowers/specs/2026-04-20-cards-and-such-phase-1-design.md).
-
----
-
-## Status
-
-| Plan | State |
-|---|---|
-| **A — Platform Foundation** | complete — monorepo, auth, presence, leaderboard, Docker, CI |
-| **B — Single-Player Games** | complete — plugin system, 4 shared engines, 8 single-player games |
-| **C — Multiplayer + Polish** | complete — authoritative rooms, 2 online games, toasts, reconnect |
-
-228 unit tests + 3 Playwright e2e tests. All green on every push.
-
-## The 10 launch games
-
-| # | Game | Category | Mode |
-|---|------|----------|------|
-| 1 | **Klondike Solitaire** | solitaire | single-player |
-| 2 | **FreeCell** | solitaire | single-player |
-| 3 | **Blackjack** | cards (deck) | single-player vs. dealer |
-| 4 | **Video Poker** | cards (deck) | single-player (Jacks-or-Better) |
-| 5 | **Yahtzee-style** | dice | single-player |
-| 6 | **Farkle** | dice | single-player |
-| 7 | **Tic-Tac-Toe** | board (grid) | vs. minimax bot or hot-seat |
-| 8 | **Checkers** | board (grid) | vs. minimax bot or hot-seat |
-| 9 | **Connect 4** | board (grid) | **online multiplayer** |
-| 10 | **Uno-like (Shed)** | cards (shedding) | **online multiplayer** |
-
-Every game has auto-rendered settings, a pure reducer (unit-tested), and posts
-finishing scores to the leaderboard.
-
-## Architecture at a glance
-
-```
-┌────────────────────────────────────────────────────────────────────┐
-│  Browser                                                           │
-│   │                                                                │
-│   │  http://localhost:3050  ───────────────────────────────┐       │
-│   ▼                                                        │       │
-│  ┌──────────────────────────┐         ┌────────────────────▼────┐  │
-│  │  web  (nginx + React)    │ ──/api/ │  server  (Fastify)      │  │
-│  │  ghcr.io/.../web:latest  │ ──/ws── │  ghcr.io/.../server:... │  │
-│  └──────────────────────────┘         │   + SQLite (volume)     │  │
-│          ▲                            │   + WebSocket hub       │  │
-│          │ pulls from GHCR            │   + Room registry       │  │
-│          │ on `docker compose up`     └─────────────────────────┘  │
-└────────────────────────────────────────────────────────────────────┘
-```
-
-Only the web container is exposed on the host (`3050` by default). The server
-stays internal to the compose network; nginx reverse-proxies `/api/*` and `/ws`
-to it. Multiplayer games ship a single reducer in `shared/` that both client
-and server import — no logic drift possible.
+**Live demo:** https://cards.waterburp.com
 
 ## Quick start
 
 ```bash
-cp .env.example .env             # then fill in JWT_SECRET (openssl rand -hex 32)
-docker compose up -d             # pulls the latest images from GHCR and runs them
-curl http://127.0.0.1:3050/api/health
-# then open http://127.0.0.1:3050/
-```
-
-That's it. The whole stack runs on one port (`3050` by default).
-
-### Pull-only by design
-
-`docker-compose.yml` has **no `build:` sections**. Every `docker compose up`
-pulls the latest prebuilt images from GitHub Container Registry:
-
-- `ghcr.io/atvriders/cards-and-such-server:latest`
-- `ghcr.io/atvriders/cards-and-such-web:latest`
-
-Both are public — no login needed. To pin to a specific commit, set
-`IMAGE_TAG=sha-<short>` in `.env`.
-
-### Building locally (contributor workflow)
-
-Only if you're changing `server/` or `web/` source and want to test against
-your own build instead of GHCR:
-
-```bash
-docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
-```
-
-## Configuration
-
-Everything deploy-dependent is driven by `.env` (see [.env.example](.env.example)):
-
-| Variable | Default | Purpose |
-|---|---|---|
-| `JWT_SECRET` | *(dev-only fallback — insecure)* | HS256 signing secret. ≥ 16 chars. **Always set for anything past localhost.** |
-| `CORS_ORIGIN` | `http://localhost:3050` | Browser origin the server trusts. Must match the URL users actually open. |
-| `WEB_PORT` | `3050` | Host port for the SPA + API proxy. |
-| `IMAGE_TAG` | `latest` | GHCR tag to pull. |
-
-## Development
-
-Install dependencies, then run any combination of:
-
-```bash
 npm install
-npm run typecheck                # all workspaces
-npm run test                     # unit tests (shared + server + web)
-npm -w @cards/shared run test    # just the shared schemas
-npm -w @cards/server run test    # backend (Fastify + SQLite + WS)
-npm -w @cards/web run test       # frontend (Vitest + jsdom)
-npm -w @cards/e2e run test       # Playwright — requires compose stack running
+npm -w @cards/web run dev        # Vite dev server on :5173
 ```
 
-Source hot-reload while developing the UI against a local compose stack:
+The root has no `dev` script; each workspace owns its own. For the full stack
+(server + web + WebSocket rooms) bring up the compose stack first, then run the
+web dev server against it:
 
 ```bash
-docker compose up -d             # stack on :3050
-npm -w @cards/web run dev        # Vite dev server on :5173, proxies /api and /ws to server
+docker compose up -d             # server on :3050
+npm -w @cards/web run dev        # /api and /ws are proxied to the server
 ```
+
+## Test
+
+```bash
+npm test                         # runs vitest in every workspace
+npm -w @cards/e2e run test       # Playwright (requires the compose stack up)
+```
+
+## Build
+
+```bash
+npm run build                    # builds shared + server + web
+```
+
+## Architecture
+
+Monorepo, four workspaces:
+
+| Folder    | Package         | What it does                                                  |
+|-----------|-----------------|---------------------------------------------------------------|
+| `shared/` | `@cards/shared` | Zod schemas, TS types, deterministic multiplayer reducers shared by client and server. |
+| `server/` | `@cards/server` | Fastify HTTP API, SQLite (via better-sqlite3), WebSocket hub, room registry, JWT auth. |
+| `web/`    | `@cards/web`    | React 18 SPA. All games, the plugin registry, Zustand stores, router, themes, achievements, sounds. |
+| `e2e/`    | `@cards/e2e`    | Playwright smoke and multiplayer tests against a running compose stack. |
+
+The web container (nginx + built SPA) is the only host-exposed service. Nginx
+reverse-proxies `/api/*` and `/ws` to the server; the server stays internal.
+Multiplayer games use a single reducer in `shared/` that both sides import, so
+client and server can never disagree on game state.
+
+## Adding a new game
+
+Each game is a self-contained plugin. Five steps:
+
+1. **Create a folder** under `web/src/games/<your-game>/`.
+2. **Add `state.ts`** — exports `initialState`, a pure `reducer(state, action)`,
+   and `isTerminal(state)`. Write `state.test.ts` next to it.
+3. **Add `<YourGame>.tsx`** — the React component. It receives `state` and a
+   `dispatch` function; render the board, wire up clicks to dispatch actions.
+4. **Add `index.ts`** — export a `GamePlugin` object: `id`, `title`, `category`,
+   `players`, `description`, `howToPlay`, `settings`, `initialState`, `reducer`,
+   `isTerminal`, `component`. Use `web/src/games/tic-tac-toe/index.ts` as a
+   template.
+5. **Register it** in `web/src/games/registry.ts` — add the import at the top
+   and append the plugin to the `GAMES` array.
+
+That's it. Settings render automatically, scores post to the leaderboard, and
+the lobby picks it up on next reload.
+
+## Tech stack
+
+- **React 18** + **react-router-dom** for the SPA shell
+- **TypeScript** end-to-end
+- **Vite** for dev server and production build
+- **Vitest** for unit tests (jsdom for component tests)
+- **Zustand** for client state (auth, presence, toasts, stats)
+- **Fastify** + **better-sqlite3** + **ws** on the server
+- **Zod** for shared schema validation
+- **Playwright** for e2e
+- **Docker Compose** + **GHCR** for deployment
+
+## What's in the box
+
+- ~4,500 game plugins registered (4,466 in `web/src/games/registry.ts`)
+- 36 achievements (`web/src/platform/stats.ts`)
+- 10 themes (`web/src/platform/themes.ts`)
+- Single shared reducer for every multiplayer game — no client/server drift
+- Username-only auth, JWT sessions, shared leaderboard, "Online Now" presence
 
 ## Repo layout
 
 ```
 cards-and-such/
-├── shared/       @cards/shared — zod schemas + TS types + multiplayer reducers
-├── server/       @cards/server — Fastify + SQLite + WebSocket rooms
-├── web/          @cards/web    — React 18 + Vite + Zustand (+ the 10 games)
-├── e2e/          @cards/e2e    — Playwright smoke + multiplayer tests
+├── shared/        zod schemas, types, multiplayer reducers
+├── server/        Fastify + SQLite + WebSocket rooms
+├── web/           React SPA + every game plugin
+├── e2e/           Playwright tests
+├── docs/          specs, plans, game-catalog backlogs
 ├── docker-compose.yml         pull-only compose (user-facing)
-├── docker-compose.ci.yml      CI override that adds local build capability
-├── .env.example
-└── docs/
-    ├── superpowers/            spec + plans
-    ├── game-catalog.md         1,188 games (Phase 2+ backlog)
-    └── game-catalog-extended.md  1,285 more (regional/obscure/tabletop)
+├── docker-compose.ci.yml      CI override that adds local build
+└── .env.example
 ```
 
-## CI
+## Configuration
 
-- **CI** — typecheck + unit tests on every branch; e2e (Playwright via docker compose) gated on unit.
-- **Publish images** — on push to `master`, builds & pushes server + web images to GHCR with `latest` and `sha-<short>` tags.
+Deploy-time settings live in `.env` (copy from `.env.example`):
 
-Both workflows run on GitHub-hosted `ubuntu-latest`. No external secrets beyond the default `GITHUB_TOKEN`.
+| Variable      | Default                   | Purpose                                                     |
+|---------------|---------------------------|-------------------------------------------------------------|
+| `JWT_SECRET`  | *(insecure dev fallback)* | HS256 signing secret. **Always set this in production.**    |
+| `CORS_ORIGIN` | `http://localhost:3050`   | Origin the server trusts. Must match the URL users open.    |
+| `WEB_PORT`    | `3050`                    | Host port for the SPA + API proxy.                          |
+| `IMAGE_TAG`   | `latest`                  | GHCR tag to pull.                                           |
 
-## Roadmap
+## Contributing
 
-Phase 1 ships the platform. The 2,400-game backlog in `docs/game-catalog*.md`
-feeds the next iteration. Short-term focus (from the final code review):
+PRs welcome. Run `npm test` and `npm run typecheck` before pushing — CI runs
+both on every branch and they must pass. Keep new games self-contained in
+their own folder, and put any non-trivial state logic behind a pure reducer
+with unit tests. See `CONTRIBUTING.md` for the short version.
 
-- Persist current-game in presence so "Online Now" shows which game each user is in.
-- Room-session reconnect with backoff (currently only the lobby channel reconnects).
-- Quick-match queue for Uno-like (auto-countdown, auto-start at min players).
-- Richer e2e coverage: special-card effects in Uno-like, win-detection paths in Checkers.
+## License
 
+MIT — see `LICENSE` if present, otherwise this project is offered under the
+standard MIT terms.
