@@ -1234,29 +1234,32 @@ button.tile {
 /* Pre-stage so the first paint shows the resting (offscreen) state.
    When `.is-mounted` lands one frame later, the animations run. */
 .lobby-page:not(.is-mounted) .lobby-grid > .tile,
+.lobby-page:not(.is-mounted) .lobby-grid > .lobby-tile-wrap,
 .lobby-page:not(.is-mounted) .lobby-chips > .lobby-chip {
   opacity: 0;
 }
 
-.lobby-page.is-mounted .lobby-grid > .tile {
+.lobby-page.is-mounted .lobby-grid > .tile,
+.lobby-page.is-mounted .lobby-grid > .lobby-tile-wrap {
   animation: lobby-tile-enter 360ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
-.lobby-page.is-mounted .lobby-grid--featured > .tile {
+.lobby-page.is-mounted .lobby-grid--featured > .tile,
+.lobby-page.is-mounted .lobby-grid--featured > .lobby-tile-wrap {
   animation: lobby-tile-enter-featured 440ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
 /* Stagger 50ms per tile, plateau at index 10. Each grid restarts its
    own counter — featured strip and main grid animate independently. */
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(1)  { animation-delay:   0ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(2)  { animation-delay:  50ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(3)  { animation-delay: 100ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(4)  { animation-delay: 150ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(5)  { animation-delay: 200ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(6)  { animation-delay: 250ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(7)  { animation-delay: 300ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(8)  { animation-delay: 350ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(9)  { animation-delay: 400ms; }
-.lobby-page.is-mounted .lobby-grid > .tile:nth-child(n+10) { animation-delay: 450ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(1)  { animation-delay:   0ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(2)  { animation-delay:  50ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(3)  { animation-delay: 100ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(4)  { animation-delay: 150ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(5)  { animation-delay: 200ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(6)  { animation-delay: 250ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(7)  { animation-delay: 300ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(8)  { animation-delay: 350ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(9)  { animation-delay: 400ms; }
+.lobby-page.is-mounted .lobby-grid > :nth-child(n+10) { animation-delay: 450ms; }
 
 /* Filter chips slide in from the left, also staggered. */
 .lobby-page.is-mounted .lobby-chips > .lobby-chip {
@@ -1283,11 +1286,14 @@ button.tile {
 
   /* No entrance animations under reduced motion — render at rest. */
   .lobby-page:not(.is-mounted) .lobby-grid > .tile,
+  .lobby-page:not(.is-mounted) .lobby-grid > .lobby-tile-wrap,
   .lobby-page:not(.is-mounted) .lobby-chips > .lobby-chip {
     opacity: 1;
   }
   .lobby-page.is-mounted .lobby-grid > .tile,
+  .lobby-page.is-mounted .lobby-grid > .lobby-tile-wrap,
   .lobby-page.is-mounted .lobby-grid--featured > .tile,
+  .lobby-page.is-mounted .lobby-grid--featured > .lobby-tile-wrap,
   .lobby-page.is-mounted .lobby-chips > .lobby-chip {
     animation: none !important;
   }
@@ -1378,12 +1384,32 @@ button.tile {
 
 /* =====================================================================
    Tile heart toggle — favorites
+   ---------------------------------------------------------------------
+   The heart is rendered as a SIBLING of the tile's click-target (Link or
+   <button>), inside `.lobby-tile-wrap`. Nesting a <button> inside a
+   <button>/<Link> would fire React's `validateDOMNesting` warning and
+   produce invalid HTML, so the wrap div hosts both as separate
+   click-handlers instead. Wrap is purely a positioning context — it
+   catches no clicks of its own.
    --------------------------------------------------------------------- */
+.lobby-tile-wrap {
+  position: relative;
+  display: flex;
+  /* Let the wrap be sized by its grid cell — the inner .tile fills the
+     wrap so the heart's absolute coords land on the visible tile bounds. */
+  min-width: 0;
+}
+.lobby-tile-wrap > .tile {
+  flex: 1 1 auto;
+  min-width: 0;
+}
 .tile-fav {
   position: absolute;
   top: 8px;
   right: 8px;
-  z-index: 3;
+  /* Sit above the tile's stripe / sheen / badge so clicks land on the
+     heart even when the tile is hovered (which raises the sheen). */
+  z-index: 5;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1421,8 +1447,10 @@ button.tile {
   opacity: 1;
   transform: translateY(0);
 }
-.tile:hover .tile-fav,
-.tile:focus-within .tile-fav {
+/* Heart is now a SIBLING of the tile, not a descendant — drive its
+   reveal off the wrap's hover/focus state instead of `.tile`'s. */
+.lobby-tile-wrap:hover .tile-fav,
+.lobby-tile-wrap:focus-within .tile-fav {
   opacity: 1;
   transform: translateY(0);
 }

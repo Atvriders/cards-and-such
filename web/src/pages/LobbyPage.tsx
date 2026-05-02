@@ -1113,7 +1113,7 @@ function GameCard({
   );
   const badgeKind = pickBadgeKind(g.id, isNew, userRating);
   return (
-    <>
+    <div className="lobby-tile-wrap">
     <Link
       to={`/play/${g.id}`}
       className={`tile tile--cat-${CATEGORY_TAG[g.category]}`}
@@ -1126,9 +1126,6 @@ function GameCard({
         <span className="tile-badge-slot">
           <Badge kind={badgeKind} testId={`tile-badge-${g.id}`} />
         </span>
-      )}
-      {onToggleFavorite && (
-        <HeartToggle id={g.id} active={isFavorite} onToggle={onToggleFavorite} />
       )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
@@ -1166,8 +1163,11 @@ function GameCard({
         </span>
       </div>
     </Link>
+    {onToggleFavorite && (
+      <HeartToggle id={g.id} active={isFavorite} onToggle={onToggleFavorite} />
+    )}
     {tooltip}
-    </>
+    </div>
   );
 }
 
@@ -1293,7 +1293,7 @@ function FamilyCard({
     family.id,
   );
   return (
-    <>
+    <div className="lobby-tile-wrap">
     <button
       type="button"
       onClick={onClick}
@@ -1309,19 +1309,6 @@ function FamilyCard({
         <span className="tile-badge-slot">
           <Badge kind={badgeKind} testId={`tile-badge-${family.id}`} />
         </span>
-      )}
-      {onToggleFavorite && (
-        /* Family-level heart toggles the first member; the chip
-           treatment still lights when any member is hearted, so the
-           picker remains the place to manage variants individually. */
-        <HeartToggle
-          id={family.id}
-          active={isFavorite}
-          onToggle={() => {
-            const first = members[0];
-            if (first) onToggleFavorite(first.id);
-          }}
-        />
       )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[category]}`}>
@@ -1354,8 +1341,21 @@ function FamilyCard({
         </span>
       </div>
     </button>
+    {onToggleFavorite && (
+      /* Family-level heart toggles the first member; the chip
+         treatment still lights when any member is hearted, so the
+         picker remains the place to manage variants individually. */
+      <HeartToggle
+        id={family.id}
+        active={isFavorite}
+        onToggle={() => {
+          const first = members[0];
+          if (first) onToggleFavorite(first.id);
+        }}
+      />
+    )}
     {tooltip}
-    </>
+    </div>
   );
 }
 
@@ -1406,7 +1406,7 @@ function FeaturedTile({
 
   if (familyId) {
     return (
-      <>
+      <div className="lobby-tile-wrap">
       <button
         type="button"
         onClick={() => onOpenFamily(familyId)}
@@ -1422,13 +1422,6 @@ function FeaturedTile({
             <Badge kind={featuredBadge} testId={`tile-badge-${familyId}`} />
           </span>
         )}
-        {onToggleFavorite && (
-          <HeartToggle
-            id={familyId}
-            active={isFavorite}
-            onToggle={() => onToggleFavorite(g.id)}
-          />
-        )}
         <div className="tile-meta">
           <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
             <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
@@ -1442,12 +1435,19 @@ function FeaturedTile({
           <span className="tile-cta" aria-hidden="true">Pick</span>
         </div>
       </button>
+      {onToggleFavorite && (
+        <HeartToggle
+          id={familyId}
+          active={isFavorite}
+          onToggle={() => onToggleFavorite(g.id)}
+        />
+      )}
       {tooltip}
-      </>
+      </div>
     );
   }
   return (
-    <>
+    <div className="lobby-tile-wrap">
     <Link
       to={`/play/${g.id}`}
       className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured`}
@@ -1460,13 +1460,6 @@ function FeaturedTile({
         <span className="tile-badge-slot">
           <Badge kind={featuredBadge} testId={`feat-tile-badge-${g.id}`} />
         </span>
-      )}
-      {onToggleFavorite && (
-        <HeartToggle
-          id={`feat-${g.id}`}
-          active={isFavorite}
-          onToggle={() => onToggleFavorite(g.id)}
-        />
       )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
@@ -1489,8 +1482,15 @@ function FeaturedTile({
         <span className="tile-cta" aria-hidden="true">Play</span>
       </div>
     </Link>
+    {onToggleFavorite && (
+      <HeartToggle
+        id={`feat-${g.id}`}
+        active={isFavorite}
+        onToggle={() => onToggleFavorite(g.id)}
+      />
+    )}
     {tooltip}
-    </>
+    </div>
   );
 }
 
