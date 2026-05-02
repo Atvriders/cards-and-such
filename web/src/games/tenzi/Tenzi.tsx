@@ -69,7 +69,7 @@ export function Tenzi({
       <div className="tenzi-stats">Rolls: {rollCount}</div>
 
       {phase === "rolling" && (
-        <button className="tenzi-roll-btn" onClick={handleRoll}>
+        <button data-testid="hint-target-tenzi-roll" className="tenzi-roll-btn" onClick={handleRoll}>
           Roll!
         </button>
       )}

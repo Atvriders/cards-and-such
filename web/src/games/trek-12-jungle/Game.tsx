@@ -41,7 +41,7 @@ export function Trek12JungleGame({ state, dispatch, onGameOver }: GameProps<Trek
           const v = state.values[i];
           const canPlace = state.phase === "choosing" && v === null;
           return (
-            <button
+            <button data-testid="hint-target-trek-12-jungle-place"
               key={i}
               className={`tjg-node${v !== null ? " tjg-on" : ""}${canPlace ? " tjg-legal" : ""}`}
               disabled={!canPlace}
@@ -52,8 +52,8 @@ export function Trek12JungleGame({ state, dispatch, onGameOver }: GameProps<Trek
       </div>
 
       <div className="tjg-controls">
-        {state.phase === "rolling" && <button className="tjg-btn tjg-primary" onClick={() => dispatch({ type: "roll" } as Trek12JungleAction)}>Roll 2 Dice</button>}
-        {state.phase === "choosing" && <button className="tjg-btn tjg-skip" onClick={() => dispatch({ type: "skip" } as Trek12JungleAction)}>Skip</button>}
+        {state.phase === "rolling" && <button data-testid="hint-target-trek-12-jungle-roll" className="tjg-btn tjg-primary" onClick={() => dispatch({ type: "roll" } as Trek12JungleAction)}>Roll 2 Dice</button>}
+        {state.phase === "choosing" && <button data-testid="hint-target-trek-12-jungle-skip" className="tjg-btn tjg-skip" onClick={() => dispatch({ type: "skip" } as Trek12JungleAction)}>Skip</button>}
         <button className="tjg-btn tjg-reset" onClick={() => dispatch({ type: "reset" } as Trek12JungleAction)}>Reset</button>
       </div>
 

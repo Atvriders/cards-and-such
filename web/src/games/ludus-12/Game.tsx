@@ -48,7 +48,7 @@ export function Ludus12Game({ state, dispatch, onGameOver }: GameProps<Ludus12St
         {myMoves.length > 0 && isPTurn && (
           <div className="ludus12-movehint">
             {myMoves.map((pips, k) => (
-              <button
+              <button data-testid="hint-target-ludus-12-move"
                 key={k}
                 className="ludus12-movebtn"
                 onClick={() => dispatch({ type: "move", from: i, pips } as Ludus12Action)}
@@ -85,10 +85,10 @@ export function Ludus12Game({ state, dispatch, onGameOver }: GameProps<Ludus12St
           <div key={idx} className="ludus12-die">{d}</div>
         )) : <div className="ludus12-die ludus12-die-empty">-</div>}
         {state.phase === "rolling" && isPTurn && (
-          <button className="ludus12-btn ludus12-btn-roll" onClick={() => dispatch({ type: "roll" } as Ludus12Action)}>Roll Dice</button>
+          <button data-testid="hint-target-ludus-12-roll" className="ludus12-btn ludus12-btn-roll" onClick={() => dispatch({ type: "roll" } as Ludus12Action)}>Roll Dice</button>
         )}
         {state.phase === "moving" && isPTurn && (
-          <button className="ludus12-btn ludus12-btn-end" onClick={() => dispatch({ type: "endTurn" } as Ludus12Action)}>End Turn</button>
+          <button data-testid="hint-target-ludus-12-endTurn" className="ludus12-btn ludus12-btn-end" onClick={() => dispatch({ type: "endTurn" } as Ludus12Action)}>End Turn</button>
         )}
         {state.diceLeft.length > 0 && (
           <span className="ludus12-dleft">left: {state.diceLeft.join(", ")}</span>

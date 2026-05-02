@@ -24,7 +24,7 @@ export function CleverHochVierGame({ state, dispatch, onGameOver }: GameProps<Cl
       {state.lastDice.length > 0 && (
         <div className="chv-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-clever-hoch-vier-pick"
               key={i}
               className={`chv-die${state.selectedDie === i ? " chv-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function CleverHochVierGame({ state, dispatch, onGameOver }: GameProps<Cl
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-clever-hoch-vier-place"
                 className="chv-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as CleverHochVierAction)}
@@ -64,10 +64,10 @@ export function CleverHochVierGame({ state, dispatch, onGameOver }: GameProps<Cl
 
       <div className="chv-controls">
         {state.phase === "rolling" && (
-          <button className="chv-btn chv-primary" onClick={() => dispatch({ type: "roll" } as CleverHochVierAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-clever-hoch-vier-roll" className="chv-btn chv-primary" onClick={() => dispatch({ type: "roll" } as CleverHochVierAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="chv-btn chv-skip" onClick={() => dispatch({ type: "skip" } as CleverHochVierAction)}>Skip</button>
+          <button data-testid="hint-target-clever-hoch-vier-skip" className="chv-btn chv-skip" onClick={() => dispatch({ type: "skip" } as CleverHochVierAction)}>Skip</button>
         )}
         <button className="chv-btn chv-reset" onClick={() => dispatch({ type: "reset" } as CleverHochVierAction)}>Reset</button>
       </div>

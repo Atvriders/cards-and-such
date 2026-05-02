@@ -20,5 +20,9 @@ Strategy: when you have a partial pattern after the first roll, keep the relevan
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    return { selector: '[data-testid="hint-target-dice-pool-match-roll"]', pulses: 3 };
+  },
   component: DicePoolMatch,
 } as unknown as GamePlugin;

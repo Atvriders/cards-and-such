@@ -33,7 +33,7 @@ export function CrownAndAnchor({
       <div style={{ fontWeight: "bold", fontSize: "0.95rem" }}>Pick your symbol:</div>
       <div className="ca-symbols">
         {SYMBOLS.map((sym) => (
-          <button
+          <button data-testid="hint-target-crown-and-anchor-setBetSymbol"
             key={sym}
             className={`ca-symbol-btn${betSymbol === sym ? " selected" : ""}`}
             onClick={() => phase === "betting" && dispatch({ type: "setBetSymbol", symbol: sym } as CrownAndAnchorAction)}
@@ -80,12 +80,12 @@ export function CrownAndAnchor({
 
       <div className="ca-controls">
         {phase === "betting" && (
-          <button className="roll-btn" onClick={() => dispatch({ type: "roll" } as CrownAndAnchorAction)}>
+          <button data-testid="hint-target-crown-and-anchor-roll" className="roll-btn" onClick={() => dispatch({ type: "roll" } as CrownAndAnchorAction)}>
             Roll Dice
           </button>
         )}
         {phase === "rolled" && (
-          <button onClick={() => dispatch({ type: "nextRound" } as CrownAndAnchorAction)}>
+          <button data-testid="hint-target-crown-and-anchor-nextRound" onClick={() => dispatch({ type: "nextRound" } as CrownAndAnchorAction)}>
             Next Round
           </button>
         )}

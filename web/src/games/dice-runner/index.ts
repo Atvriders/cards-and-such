@@ -34,5 +34,9 @@ Score equals movement points plus gem bonuses plus the finishing bonus. Survivin
   initialState: (seed: number, settings: DiceRunnerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).won) return null;
+    return { selector: '[data-testid="hint-target-dice-runner-roll"]', pulses: 3 };
+  },
   component: DiceRunner,
 };

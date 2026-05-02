@@ -39,13 +39,13 @@ export function AcesInThePot({ state, dispatch, onGameOver }: GameProps<AcesStat
       )}
 
       {state.phase === "rolling" && (
-        <button className="aces-btn" onClick={() => dispatch({ type: "roll" } as AcesAction)}>
+        <button data-testid="hint-target-aces-in-the-pot-roll" className="aces-btn" onClick={() => dispatch({ type: "roll" } as AcesAction)}>
           Roll Dice
         </button>
       )}
 
       {state.phase === "roundOver" && !state.gameOver && (
-        <button className="aces-btn" onClick={() => dispatch({ type: "nextRound" } as AcesAction)}>
+        <button data-testid="hint-target-aces-in-the-pot-nextRound" className="aces-btn" onClick={() => dispatch({ type: "nextRound" } as AcesAction)}>
           Next Round →
         </button>
       )}

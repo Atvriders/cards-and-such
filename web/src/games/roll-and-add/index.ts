@@ -34,5 +34,8 @@ You play five rounds. Each round starts fresh with a running total of zero. Your
   initialState: (seed: number, settings: RollAndAddSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    return { selector: '[data-testid="hint-target-roll-and-add-roll"]', pulses: 3 };
+  },
   component: RollAndAdd,
 };

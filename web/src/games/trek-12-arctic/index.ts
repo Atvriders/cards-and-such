@@ -31,5 +31,19 @@ Game runs 12 rolls. Plan your operations to chain duplicates and rack up bonuses
   initialState: (seed, s) => initialState(seed, s as Trek12ArcticSettings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+    if (phase === "placing") return { selector: '[data-testid="hint-target-trek-12-arctic-place"]', pulses: 3 };
+    if (phase === "place") return { selector: '[data-testid="hint-target-trek-12-arctic-place"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-trek-12-arctic-roll"]', pulses: 3 };
+  },
   component: Trek12ArcticGame,
 };

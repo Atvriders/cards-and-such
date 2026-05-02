@@ -25,7 +25,7 @@ export function ThreeSistersGardenGame({ state, dispatch, onGameOver }: GameProp
       )}
       <div className="tsg-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-three-sisters-garden-mark"
             key={i}
             className={`tsg-cell tsg-z${cellZone(i)}${filled ? " tsg-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function ThreeSistersGardenGame({ state, dispatch, onGameOver }: GameProp
       </div>
       <div className="tsg-controls">
         {state.phase === "rolling" && (
-          <button className="tsg-btn tsg-btn-primary" onClick={() => dispatch({ type: "roll" } as ThreeSistersGardenAction)}>Roll</button>
+          <button data-testid="hint-target-three-sisters-garden-roll" className="tsg-btn tsg-btn-primary" onClick={() => dispatch({ type: "roll" } as ThreeSistersGardenAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="tsg-btn tsg-btn-skip" onClick={() => dispatch({ type: "skip" } as ThreeSistersGardenAction)}>Skip</button>
+          <button data-testid="hint-target-three-sisters-garden-skip" className="tsg-btn tsg-btn-skip" onClick={() => dispatch({ type: "skip" } as ThreeSistersGardenAction)}>Skip</button>
         )}
         <button className="tsg-btn tsg-btn-reset" onClick={() => dispatch({ type: "reset" } as ThreeSistersGardenAction)}>Reset</button>
       </div>

@@ -21,14 +21,14 @@ export function MeyerBluffGame({ state, dispatch, onGameOver }: GameProps<MeyerB
       {state.phase === "predict" && (
         <div className="dm-row">
           {CHOICES.map((c, i) => (
-            <button key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as MeyerBluffAction)}>{c}</button>
+            <button data-testid="hint-target-meyer-bluff-predict" key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as MeyerBluffAction)}>{c}</button>
           ))}
         </div>
       )}
       {state.phase === "result" && state.resultIdx !== null && state.prediction !== null && (
         <>
           <div className="dm-result">{state.prediction === state.resultIdx ? "Correct! +" + PAYOUTS[state.resultIdx] : "Wrong — Result was " + CHOICES[state.resultIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as MeyerBluffAction)}>Next</button>
+          <button data-testid="hint-target-meyer-bluff-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as MeyerBluffAction)}>Next</button>
         </>
       )}
     </div>

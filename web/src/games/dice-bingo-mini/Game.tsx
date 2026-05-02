@@ -32,7 +32,7 @@ export function DiceBingoMini({ state, dispatch, onGameOver }: GameProps<DiceBin
         )))}
       </div>
       <div className="dbm-info">Bingos: {state.bingos}</div>
-      <button className="dbm-btn" onClick={() => dispatch({ type: "roll" } as DiceBingoMiniAction)}>Roll</button>
+      <button data-testid="hint-target-dice-bingo-mini-roll" className="dbm-btn" onClick={() => dispatch({ type: "roll" } as DiceBingoMiniAction)}>Roll</button>
     </div>
   );
 }

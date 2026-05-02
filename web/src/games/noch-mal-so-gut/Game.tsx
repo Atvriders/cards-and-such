@@ -25,7 +25,7 @@ export function NochMalSoGutGame({ state, dispatch, onGameOver }: GameProps<Noch
       )}
       <div className="nms-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-noch-mal-so-gut-mark"
             key={i}
             className={`nms-cell nms-z${cellZone(i)}${filled ? " nms-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function NochMalSoGutGame({ state, dispatch, onGameOver }: GameProps<Noch
       </div>
       <div className="nms-controls">
         {state.phase === "rolling" && (
-          <button className="nms-btn nms-btn-primary" onClick={() => dispatch({ type: "roll" } as NochMalSoGutAction)}>Roll</button>
+          <button data-testid="hint-target-noch-mal-so-gut-roll" className="nms-btn nms-btn-primary" onClick={() => dispatch({ type: "roll" } as NochMalSoGutAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="nms-btn nms-btn-skip" onClick={() => dispatch({ type: "skip" } as NochMalSoGutAction)}>Skip</button>
+          <button data-testid="hint-target-noch-mal-so-gut-skip" className="nms-btn nms-btn-skip" onClick={() => dispatch({ type: "skip" } as NochMalSoGutAction)}>Skip</button>
         )}
         <button className="nms-btn nms-btn-reset" onClick={() => dispatch({ type: "reset" } as NochMalSoGutAction)}>Reset</button>
       </div>

@@ -75,7 +75,7 @@ export function Mia({
       <div className="mia-message">{state.message}</div>
 
       {state.phase === "playerRoll" && !state.winner && (
-        <button className="mia-btn" onClick={handleRoll}>Roll Dice (Secret)</button>
+        <button data-testid="hint-target-mia-roll" className="mia-btn" onClick={handleRoll}>Roll Dice (Secret)</button>
       )}
 
       {state.phase === "playerDeclare" && state.playerRoll && (
@@ -96,7 +96,7 @@ export function Mia({
               </option>
             ))}
           </select>
-          <button className="mia-btn" onClick={handleDeclare} disabled={!selectedClaim}>
+          <button data-testid="hint-target-mia-declare" className="mia-btn" onClick={handleDeclare} disabled={!selectedClaim}>
             Declare!
           </button>
         </div>
@@ -107,7 +107,7 @@ export function Mia({
       )}
 
       {state.phase === "reveal" && (
-        <button className="mia-btn" onClick={handleNextRound}>Next Round</button>
+        <button data-testid="hint-target-mia-roll" className="mia-btn" onClick={handleNextRound}>Next Round</button>
       )}
 
       {state.winner && (

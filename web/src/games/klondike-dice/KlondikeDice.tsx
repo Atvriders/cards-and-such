@@ -44,18 +44,18 @@ export function KlondikeDice({
 
       <div className="klondike-dice-controls">
         {phase === "preRoll" && !terminal && (
-          <button onClick={() => dispatch({ type: "roll" } as KlondikeDiceAction)}>Roll</button>
+          <button data-testid="hint-target-klondike-dice-roll" onClick={() => dispatch({ type: "roll" } as KlondikeDiceAction)}>Roll</button>
         )}
         {phase === "rolled" && (
           <>
-            <button onClick={() => dispatch({ type: "roll" } as KlondikeDiceAction)}>Push Luck</button>
-            <button className="bank-btn" onClick={() => dispatch({ type: "bank" } as KlondikeDiceAction)}>
+            <button data-testid="hint-target-klondike-dice-roll" onClick={() => dispatch({ type: "roll" } as KlondikeDiceAction)}>Push Luck</button>
+            <button data-testid="hint-target-klondike-dice-bank" className="bank-btn" onClick={() => dispatch({ type: "bank" } as KlondikeDiceAction)}>
               Bank {turnScore}
             </button>
           </>
         )}
         {phase === "bust" && (
-          <button onClick={() => dispatch({ type: "nextTurn" } as KlondikeDiceAction)}>Next Turn</button>
+          <button data-testid="hint-target-klondike-dice-nextTurn" onClick={() => dispatch({ type: "nextTurn" } as KlondikeDiceAction)}>Next Turn</button>
         )}
       </div>
 

@@ -31,15 +31,15 @@ export function DiceCoinBet({ state, dispatch, onGameOver }: GameProps<DiceCoinB
           <p className="dcb-hint">Bet on Odd or Even result:</p>
           <div className="dcb-row">
             <input type="number" min={1} max={state.coins} value={amount} onChange={e => setAmount(Number(e.target.value))} className="dcb-input" />
-            <button className="dcb-btn odd" onClick={() => dispatch({ type: "bet", amount, side: "odd" } as DiceCoinBetAction)}>Odd</button>
-            <button className="dcb-btn even" onClick={() => dispatch({ type: "bet", amount, side: "even" } as DiceCoinBetAction)}>Even</button>
+            <button data-testid="hint-target-dice-coin-bet-bet" className="dcb-btn odd" onClick={() => dispatch({ type: "bet", amount, side: "odd" } as DiceCoinBetAction)}>Odd</button>
+            <button data-testid="hint-target-dice-coin-bet-bet" className="dcb-btn even" onClick={() => dispatch({ type: "bet", amount, side: "even" } as DiceCoinBetAction)}>Even</button>
           </div>
         </div>
       )}
       {state.phase === "rolled" && (
         <div className="dcb-body">
           <div className={`dcb-result ${state.lastWin ? "win" : "lose"}`}>{state.lastWin ? `+${state.bid}` : `-${state.bid}`}</div>
-          <button className="dcb-btn next" onClick={() => dispatch({ type: "next" } as DiceCoinBetAction)}>Next</button>
+          <button data-testid="hint-target-dice-coin-bet-next" className="dcb-btn next" onClick={() => dispatch({ type: "next" } as DiceCoinBetAction)}>Next</button>
         </div>
       )}
     </div>

@@ -25,7 +25,7 @@ export function SecondChanceGridGame({ state, dispatch, onGameOver }: GameProps<
       )}
       <div className="scg-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-second-chance-grid-mark"
             key={i}
             className={`scg-cell scg-z${cellZone(i)}${filled ? " scg-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function SecondChanceGridGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="scg-controls">
         {state.phase === "rolling" && (
-          <button className="scg-btn scg-btn-primary" onClick={() => dispatch({ type: "roll" } as SecondChanceGridAction)}>Roll</button>
+          <button data-testid="hint-target-second-chance-grid-roll" className="scg-btn scg-btn-primary" onClick={() => dispatch({ type: "roll" } as SecondChanceGridAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="scg-btn scg-btn-skip" onClick={() => dispatch({ type: "skip" } as SecondChanceGridAction)}>Skip</button>
+          <button data-testid="hint-target-second-chance-grid-skip" className="scg-btn scg-btn-skip" onClick={() => dispatch({ type: "skip" } as SecondChanceGridAction)}>Skip</button>
         )}
         <button className="scg-btn scg-btn-reset" onClick={() => dispatch({ type: "reset" } as SecondChanceGridAction)}>Reset</button>
       </div>

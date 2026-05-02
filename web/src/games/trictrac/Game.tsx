@@ -48,7 +48,7 @@ export function TrictracGame({ state, dispatch, onGameOver }: GameProps<Trictrac
         {myMoves.length > 0 && isPTurn && (
           <div className="trictrac-movehint">
             {myMoves.map((pips, k) => (
-              <button
+              <button data-testid="hint-target-trictrac-move"
                 key={k}
                 className="trictrac-movebtn"
                 onClick={() => dispatch({ type: "move", from: i, pips } as TrictracAction)}
@@ -85,10 +85,10 @@ export function TrictracGame({ state, dispatch, onGameOver }: GameProps<Trictrac
           <div key={idx} className="trictrac-die">{d}</div>
         )) : <div className="trictrac-die trictrac-die-empty">-</div>}
         {state.phase === "rolling" && isPTurn && (
-          <button className="trictrac-btn trictrac-btn-roll" onClick={() => dispatch({ type: "roll" } as TrictracAction)}>Roll Dice</button>
+          <button data-testid="hint-target-trictrac-roll" className="trictrac-btn trictrac-btn-roll" onClick={() => dispatch({ type: "roll" } as TrictracAction)}>Roll Dice</button>
         )}
         {state.phase === "moving" && isPTurn && (
-          <button className="trictrac-btn trictrac-btn-end" onClick={() => dispatch({ type: "endTurn" } as TrictracAction)}>End Turn</button>
+          <button data-testid="hint-target-trictrac-endTurn" className="trictrac-btn trictrac-btn-end" onClick={() => dispatch({ type: "endTurn" } as TrictracAction)}>End Turn</button>
         )}
         {state.diceLeft.length > 0 && (
           <span className="trictrac-dleft">left: {state.diceLeft.join(", ")}</span>

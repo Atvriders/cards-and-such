@@ -25,7 +25,7 @@ export function RollingAmericaGame({ state, dispatch, onGameOver }: GameProps<Ro
       )}
       <div className="rma-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-rolling-america-mark"
             key={i}
             className={`rma-cell rma-z${cellZone(i)}${filled ? " rma-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function RollingAmericaGame({ state, dispatch, onGameOver }: GameProps<Ro
       </div>
       <div className="rma-controls">
         {state.phase === "rolling" && (
-          <button className="rma-btn rma-btn-primary" onClick={() => dispatch({ type: "roll" } as RollingAmericaAction)}>Roll</button>
+          <button data-testid="hint-target-rolling-america-roll" className="rma-btn rma-btn-primary" onClick={() => dispatch({ type: "roll" } as RollingAmericaAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="rma-btn rma-btn-skip" onClick={() => dispatch({ type: "skip" } as RollingAmericaAction)}>Skip</button>
+          <button data-testid="hint-target-rolling-america-skip" className="rma-btn rma-btn-skip" onClick={() => dispatch({ type: "skip" } as RollingAmericaAction)}>Skip</button>
         )}
         <button className="rma-btn rma-btn-reset" onClick={() => dispatch({ type: "reset" } as RollingAmericaAction)}>Reset</button>
       </div>

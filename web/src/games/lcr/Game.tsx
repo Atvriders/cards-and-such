@@ -48,10 +48,10 @@ export function LCRGame({ state, dispatch, onGameOver }: GameProps<LCRState, LCR
 
       <div className="lcr-controls">
         {isHumanTurn && state.phase === "rolling" && (
-          <button onClick={() => dispatch({ type: "roll" })}>Roll Dice</button>
+          <button data-testid="hint-target-lcr-roll" onClick={() => dispatch({ type: "roll" })}>Roll Dice</button>
         )}
         {isHumanTurn && state.phase === "result" && state.winner === null && (
-          <button onClick={() => dispatch({ type: "confirm" })}>Next Turn</button>
+          <button data-testid="hint-target-lcr-confirm" onClick={() => dispatch({ type: "confirm" })}>Next Turn</button>
         )}
         {!isHumanTurn && state.winner === null && (
           <div className="lcr-waiting">{PLAYER_LABELS[state.currentPlayer]} is rolling…</div>

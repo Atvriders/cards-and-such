@@ -41,7 +41,7 @@ export function Trek12HimalayaGame({ state, dispatch, onGameOver }: GameProps<Tr
           const v = state.values[i];
           const canPlace = state.phase === "choosing" && v === null;
           return (
-            <button
+            <button data-testid="hint-target-trek-12-himalaya-place"
               key={i}
               className={`thi-node${v !== null ? " thi-on" : ""}${canPlace ? " thi-legal" : ""}`}
               disabled={!canPlace}
@@ -52,8 +52,8 @@ export function Trek12HimalayaGame({ state, dispatch, onGameOver }: GameProps<Tr
       </div>
 
       <div className="thi-controls">
-        {state.phase === "rolling" && <button className="thi-btn thi-primary" onClick={() => dispatch({ type: "roll" } as Trek12HimalayaAction)}>Roll 2 Dice</button>}
-        {state.phase === "choosing" && <button className="thi-btn thi-skip" onClick={() => dispatch({ type: "skip" } as Trek12HimalayaAction)}>Skip</button>}
+        {state.phase === "rolling" && <button data-testid="hint-target-trek-12-himalaya-roll" className="thi-btn thi-primary" onClick={() => dispatch({ type: "roll" } as Trek12HimalayaAction)}>Roll 2 Dice</button>}
+        {state.phase === "choosing" && <button data-testid="hint-target-trek-12-himalaya-skip" className="thi-btn thi-skip" onClick={() => dispatch({ type: "skip" } as Trek12HimalayaAction)}>Skip</button>}
         <button className="thi-btn thi-reset" onClick={() => dispatch({ type: "reset" } as Trek12HimalayaAction)}>Reset</button>
       </div>
 

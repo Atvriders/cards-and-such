@@ -41,11 +41,11 @@ export function ChicagoDice({
       <div className="chicago-message">{state.message}</div>
 
       {state.phase === "roll" && (
-        <button className="chicago-btn" onClick={handleRoll}>Roll Dice</button>
+        <button data-testid="hint-target-chicago-dice-roll" className="chicago-btn" onClick={handleRoll}>Roll Dice</button>
       )}
 
       {state.phase === "result" && (
-        <button className="chicago-btn" onClick={handleRoll}>Next Round →</button>
+        <button data-testid="hint-target-chicago-dice-roll" className="chicago-btn" onClick={handleRoll}>Next Round →</button>
       )}
 
       {state.winner && (

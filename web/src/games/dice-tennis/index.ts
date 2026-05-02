@@ -34,5 +34,10 @@ Strategy: Use Slice to bank easy points when you are ahead in a game. Switch to 
   initialState: (seed: number, settings: DiceTennisSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    const phase = (state as any).phase;
+    return { selector: '[data-testid="hint-target-dice-tennis-serve"]', pulses: 3 };
+  },
   component: DiceTennis,
 };

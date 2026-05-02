@@ -54,7 +54,7 @@ export function DropDead({
           Game over! Final score: <strong>{score}</strong>
         </div>
       ) : (
-        <button className="dropdead-btn" onClick={() => dispatch({ type: "roll" } as DropDeadAction)}>
+        <button data-testid="hint-target-drop-dead-roll" className="dropdead-btn" onClick={() => dispatch({ type: "roll" } as DropDeadAction)}>
           Roll {activeDice} {activeDice === 1 ? "Die" : "Dice"}
         </button>
       )}

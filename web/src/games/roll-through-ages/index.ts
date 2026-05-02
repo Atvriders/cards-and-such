@@ -32,5 +32,28 @@ After 5 (or 7) turns the game ends. Your score combines points from developments
   initialState: (seed: number, settings: RTASettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+    if (phase === "rolled") return { selector: '[data-testid="hint-target-roll-through-ages-toggleHold"]', pulses: 3 };
+    if (phase === "picking") return { selector: '[data-testid="hint-target-roll-through-ages-toggleHold"]', pulses: 3 };
+    if (phase === "selecting") return { selector: '[data-testid="hint-target-roll-through-ages-toggleHold"]', pulses: 3 };
+    if (phase === "choosing") return { selector: '[data-testid="hint-target-roll-through-ages-toggleHold"]', pulses: 3 };
+    if (phase === "roundOver") return { selector: '[data-testid="hint-target-roll-through-ages-nextTurn"]', pulses: 3 };
+    if (phase === "result") return { selector: '[data-testid="hint-target-roll-through-ages-nextTurn"]', pulses: 3 };
+    if (phase === "settled") return { selector: '[data-testid="hint-target-roll-through-ages-nextTurn"]', pulses: 3 };
+    if (phase === "banked") return { selector: '[data-testid="hint-target-roll-through-ages-nextTurn"]', pulses: 3 };
+    if (phase === "done") return { selector: '[data-testid="hint-target-roll-through-ages-nextTurn"]', pulses: 3 };
+    if (phase === "farkled") return { selector: '[data-testid="hint-target-roll-through-ages-nextTurn"]', pulses: 3 };
+    if (phase === "busted") return { selector: '[data-testid="hint-target-roll-through-ages-nextTurn"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-roll-through-ages-roll"]', pulses: 3 };
+  },
   component: RollThroughAges,
 };

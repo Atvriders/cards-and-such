@@ -40,5 +40,25 @@ Strategy: the optimal play is almost always to place your highest digits first. 
   initialState: (seed: number, settings: BeatThatSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+    if (phase === "roundOver") return { selector: '[data-testid="hint-target-beat-that-nextRound"]', pulses: 3 };
+    if (phase === "result") return { selector: '[data-testid="hint-target-beat-that-nextRound"]', pulses: 3 };
+    if (phase === "settled") return { selector: '[data-testid="hint-target-beat-that-nextRound"]', pulses: 3 };
+    if (phase === "banked") return { selector: '[data-testid="hint-target-beat-that-nextRound"]', pulses: 3 };
+    if (phase === "done") return { selector: '[data-testid="hint-target-beat-that-nextRound"]', pulses: 3 };
+    if (phase === "farkled") return { selector: '[data-testid="hint-target-beat-that-nextRound"]', pulses: 3 };
+    if (phase === "busted") return { selector: '[data-testid="hint-target-beat-that-nextRound"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-beat-that-roll"]', pulses: 3 };
+  },
   component: BeatThat,
 };

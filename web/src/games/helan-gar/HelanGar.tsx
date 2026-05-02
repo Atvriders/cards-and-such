@@ -75,17 +75,17 @@ export function HelanGar({
 
       <div className="helan-controls">
         {(phase === "preRoll" || phase === "rolled") && (
-          <button className="helan-btn" onClick={() => dispatch({ type: "roll" } as HelanGarAction)}>
+          <button data-testid="hint-target-helan-gar-roll" className="helan-btn" onClick={() => dispatch({ type: "roll" } as HelanGarAction)}>
             Roll
           </button>
         )}
         {phase === "stageOver" && stage < totalStages && (
-          <button className="helan-btn helan-btn-next" onClick={() => dispatch({ type: "nextStage" } as HelanGarAction)}>
+          <button data-testid="hint-target-helan-gar-nextStage" className="helan-btn helan-btn-next" onClick={() => dispatch({ type: "nextStage" } as HelanGarAction)}>
             Next: {stageName(stage + 1)}
           </button>
         )}
         {phase === "stageOver" && stage >= totalStages && (
-          <button className="helan-btn helan-btn-next" onClick={() => dispatch({ type: "nextStage" } as HelanGarAction)}>
+          <button data-testid="hint-target-helan-gar-nextStage" className="helan-btn helan-btn-next" onClick={() => dispatch({ type: "nextStage" } as HelanGarAction)}>
             Finish
           </button>
         )}

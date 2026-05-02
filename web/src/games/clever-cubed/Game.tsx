@@ -24,7 +24,7 @@ export function CleverCubedGame({ state, dispatch, onGameOver }: GameProps<Cleve
       {state.lastDice.length > 0 && (
         <div className="ccu-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-clever-cubed-pick"
               key={i}
               className={`ccu-die${state.selectedDie === i ? " ccu-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function CleverCubedGame({ state, dispatch, onGameOver }: GameProps<Cleve
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-clever-cubed-place"
                 className="ccu-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as CleverCubedAction)}
@@ -64,10 +64,10 @@ export function CleverCubedGame({ state, dispatch, onGameOver }: GameProps<Cleve
 
       <div className="ccu-controls">
         {state.phase === "rolling" && (
-          <button className="ccu-btn ccu-primary" onClick={() => dispatch({ type: "roll" } as CleverCubedAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-clever-cubed-roll" className="ccu-btn ccu-primary" onClick={() => dispatch({ type: "roll" } as CleverCubedAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="ccu-btn ccu-skip" onClick={() => dispatch({ type: "skip" } as CleverCubedAction)}>Skip</button>
+          <button data-testid="hint-target-clever-cubed-skip" className="ccu-btn ccu-skip" onClick={() => dispatch({ type: "skip" } as CleverCubedAction)}>Skip</button>
         )}
         <button className="ccu-btn ccu-reset" onClick={() => dispatch({ type: "reset" } as CleverCubedAction)}>Reset</button>
       </div>

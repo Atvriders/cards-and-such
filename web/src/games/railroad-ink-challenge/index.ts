@@ -32,5 +32,19 @@ The game ends after 9 rolls (or earlier if all 16 cells are filled). Maximum rea
   initialState: (seed, s) => initialState(seed, s as RailroadInkChallengeSettings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+    if (phase === "marking") return { selector: '[data-testid="hint-target-railroad-ink-challenge-mark"]', pulses: 3 };
+    if (phase === "mark") return { selector: '[data-testid="hint-target-railroad-ink-challenge-mark"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-railroad-ink-challenge-roll"]', pulses: 3 };
+  },
   component: RailroadInkChallengeGame,
 };

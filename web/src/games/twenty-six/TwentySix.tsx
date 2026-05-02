@@ -44,7 +44,7 @@ export function TwentySix({
           <div className="ts-label">Choose your lucky number:</div>
           <div className="ts-num-grid">
             {[1, 2, 3, 4, 5, 6].map((n) => (
-              <button
+              <button data-testid="hint-target-twenty-six-chooseTarget"
                 key={n}
                 className="ts-num-btn"
                 onClick={() => dispatch({ type: "chooseTarget", num: n } as TwentySixAction)}
@@ -80,12 +80,12 @@ export function TwentySix({
 
       <div className="ts-controls">
         {phase === "rolling" && (
-          <button className="ts-btn" onClick={() => dispatch({ type: "roll" } as TwentySixAction)}>
+          <button data-testid="hint-target-twenty-six-roll" className="ts-btn" onClick={() => dispatch({ type: "roll" } as TwentySixAction)}>
             Roll #{rollIndex + 1}
           </button>
         )}
         {phase === "roundOver" && (
-          <button className="ts-btn" onClick={() => dispatch({ type: "nextRound" } as TwentySixAction)}>
+          <button data-testid="hint-target-twenty-six-nextRound" className="ts-btn" onClick={() => dispatch({ type: "nextRound" } as TwentySixAction)}>
             {state.roundsPlayed + 1 >= Number(state.settings.rounds) ? "Finish" : "Next Round"}
           </button>
         )}

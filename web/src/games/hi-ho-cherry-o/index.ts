@@ -33,5 +33,8 @@ First player whose tree reaches zero cherries wins! The score is 100 for a win a
   initialState: (seed: number, settings: HiHoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    return { selector: '[data-testid="hint-target-hi-ho-cherry-o-spin"]', pulses: 3 };
+  },
   component: HiHoGame,
 };

@@ -49,7 +49,7 @@ export function SafeKeeper({ state, dispatch, onGameOver }: GameProps<SafeKeeper
       <div className="sk-message">{state.message}</div>
 
       {state.phase === "rolling" && (
-        <button className="sk-btn" onClick={() => dispatch({ type: "roll" } as SafeKeeperAction)}>
+        <button data-testid="hint-target-safe-keeper-roll" className="sk-btn" onClick={() => dispatch({ type: "roll" } as SafeKeeperAction)}>
           {state.activePlayer === 0 ? "Roll Dice" : `Roll for ${names[state.activePlayer] ?? "Bot"}...`}
         </button>
       )}

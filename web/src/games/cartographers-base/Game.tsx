@@ -25,7 +25,7 @@ export function CartographersBaseGame({ state, dispatch, onGameOver }: GameProps
       )}
       <div className="ctgb-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-cartographers-base-mark"
             key={i}
             className={`ctgb-cell ctgb-z${cellZone(i)}${filled ? " ctgb-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function CartographersBaseGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="ctgb-controls">
         {state.phase === "rolling" && (
-          <button className="ctgb-btn ctgb-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersBaseAction)}>Roll</button>
+          <button data-testid="hint-target-cartographers-base-roll" className="ctgb-btn ctgb-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersBaseAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="ctgb-btn ctgb-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersBaseAction)}>Skip</button>
+          <button data-testid="hint-target-cartographers-base-skip" className="ctgb-btn ctgb-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersBaseAction)}>Skip</button>
         )}
         <button className="ctgb-btn ctgb-btn-reset" onClick={() => dispatch({ type: "reset" } as CartographersBaseAction)}>Reset</button>
       </div>

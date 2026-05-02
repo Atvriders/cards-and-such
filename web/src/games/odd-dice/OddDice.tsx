@@ -52,10 +52,10 @@ export function OddDice({
 
       {!state.done && (
         <div className="od-buttons">
-          <button className="od-roll-btn" disabled={!canRoll} onClick={() => dispatch({ type: "roll" })}>
+          <button data-testid="hint-target-odd-dice-roll" className="od-roll-btn" disabled={!canRoll} onClick={() => dispatch({ type: "roll" })}>
             {state.dice.length === 0 ? "Roll Dice" : `Re-Roll All (${state.rollsLeft} left)`}
           </button>
-          <button className="od-keep-btn" disabled={!canEnd} onClick={() => dispatch({ type: "endRound" })}>
+          <button data-testid="hint-target-odd-dice-endRound" className="od-keep-btn" disabled={!canEnd} onClick={() => dispatch({ type: "endRound" })}>
             Keep Score
           </button>
         </div>

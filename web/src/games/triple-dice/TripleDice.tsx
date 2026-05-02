@@ -44,7 +44,7 @@ export function TripleDice({ state, dispatch, onGameOver }: GameProps<TripleDice
 
       <div className="triple-dice-buttons">
         {!state.roundOver && (
-          <button
+          <button data-testid="hint-target-triple-dice-roll"
             disabled={state.rollsLeft <= 0}
             onClick={() => dispatch({ type: "roll" })}
           >
@@ -52,7 +52,7 @@ export function TripleDice({ state, dispatch, onGameOver }: GameProps<TripleDice
           </button>
         )}
         {state.roundOver && !state.gameOver && (
-          <button onClick={() => dispatch({ type: "score" })}>Next Round</button>
+          <button data-testid="hint-target-triple-dice-score" onClick={() => dispatch({ type: "score" })}>Next Round</button>
         )}
         {state.gameOver && (
           <button onClick={() => dispatch({ type: "restart" })}>Play Again</button>

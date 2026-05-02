@@ -53,14 +53,14 @@ export function ZombieDice({ state, dispatch, onGameOver }: GameProps<ZombieDice
       {isBusted && <div className="zd-bust">BANG! 3 shotguns — turn over, brains lost!</div>}
 
       <div className="zd-controls">
-        <button onClick={() => dispatch({ type: "roll" } as ZombieAction)} disabled={!canRoll || isBusted || !!terminal}>
+        <button data-testid="hint-target-zombie-dice-roll" onClick={() => dispatch({ type: "roll" } as ZombieAction)} disabled={!canRoll || isBusted || !!terminal}>
           {state.lastRoll.length === 0 ? "Roll" : `Roll Again (${state.rolling.length} runners + draw)`}
         </button>
-        <button onClick={() => dispatch({ type: "bank" } as ZombieAction)} disabled={!canBank || !!terminal}>
+        <button data-testid="hint-target-zombie-dice-bank" onClick={() => dispatch({ type: "bank" } as ZombieAction)} disabled={!canBank || !!terminal}>
           Bank {state.turnBrains} Brains
         </button>
         {isBusted && (
-          <button onClick={() => dispatch({ type: "nextTurn" } as ZombieAction)}>Next Turn</button>
+          <button data-testid="hint-target-zombie-dice-nextTurn" onClick={() => dispatch({ type: "nextTurn" } as ZombieAction)}>Next Turn</button>
         )}
       </div>
 

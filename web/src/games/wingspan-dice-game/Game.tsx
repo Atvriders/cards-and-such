@@ -24,7 +24,7 @@ export function WingspanDiceGameGame({ state, dispatch, onGameOver }: GameProps<
       {state.lastDice.length > 0 && (
         <div className="wsd-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-wingspan-dice-game-pick"
               key={i}
               className={`wsd-die${state.selectedDie === i ? " wsd-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function WingspanDiceGameGame({ state, dispatch, onGameOver }: GameProps<
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-wingspan-dice-game-place"
                 className="wsd-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as WingspanDiceGameAction)}
@@ -64,10 +64,10 @@ export function WingspanDiceGameGame({ state, dispatch, onGameOver }: GameProps<
 
       <div className="wsd-controls">
         {state.phase === "rolling" && (
-          <button className="wsd-btn wsd-primary" onClick={() => dispatch({ type: "roll" } as WingspanDiceGameAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-wingspan-dice-game-roll" className="wsd-btn wsd-primary" onClick={() => dispatch({ type: "roll" } as WingspanDiceGameAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="wsd-btn wsd-skip" onClick={() => dispatch({ type: "skip" } as WingspanDiceGameAction)}>Skip</button>
+          <button data-testid="hint-target-wingspan-dice-game-skip" className="wsd-btn wsd-skip" onClick={() => dispatch({ type: "skip" } as WingspanDiceGameAction)}>Skip</button>
         )}
         <button className="wsd-btn wsd-reset" onClick={() => dispatch({ type: "reset" } as WingspanDiceGameAction)}>Reset</button>
       </div>

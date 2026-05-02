@@ -32,7 +32,7 @@ export function DicePoolMatch({
 
       <div className="dpm-dice">
         {state.dice.map((v, i) => (
-          <button
+          <button data-testid="hint-target-dice-pool-match-toggleKeep"
             key={i}
             className={`dpm-die-btn${state.kept[i] ? " kept" : ""}`}
             onClick={() => dispatch({ type: "toggleKeep", index: i } as DicePoolMatchAction)}
@@ -57,7 +57,7 @@ export function DicePoolMatch({
         </div>
       )}
 
-      <button
+      <button data-testid="hint-target-dice-pool-match-roll"
         className="dpm-btn"
         onClick={() => dispatch({ type: "roll" } as DicePoolMatchAction)}
         disabled={state.gameOver || state.rollsLeft === 0}

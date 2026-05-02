@@ -48,7 +48,7 @@ export function TabulaGame({ state, dispatch, onGameOver }: GameProps<TabulaStat
         {myMoves.length > 0 && isPTurn && (
           <div className="tabula-movehint">
             {myMoves.map((pips, k) => (
-              <button
+              <button data-testid="hint-target-tabula-game-move"
                 key={k}
                 className="tabula-movebtn"
                 onClick={() => dispatch({ type: "move", from: i, pips } as TabulaAction)}
@@ -85,10 +85,10 @@ export function TabulaGame({ state, dispatch, onGameOver }: GameProps<TabulaStat
           <div key={idx} className="tabula-die">{d}</div>
         )) : <div className="tabula-die tabula-die-empty">-</div>}
         {state.phase === "rolling" && isPTurn && (
-          <button className="tabula-btn tabula-btn-roll" onClick={() => dispatch({ type: "roll" } as TabulaAction)}>Roll Dice</button>
+          <button data-testid="hint-target-tabula-game-roll" className="tabula-btn tabula-btn-roll" onClick={() => dispatch({ type: "roll" } as TabulaAction)}>Roll Dice</button>
         )}
         {state.phase === "moving" && isPTurn && (
-          <button className="tabula-btn tabula-btn-end" onClick={() => dispatch({ type: "endTurn" } as TabulaAction)}>End Turn</button>
+          <button data-testid="hint-target-tabula-game-endTurn" className="tabula-btn tabula-btn-end" onClick={() => dispatch({ type: "endTurn" } as TabulaAction)}>End Turn</button>
         )}
         {state.diceLeft.length > 0 && (
           <span className="tabula-dleft">left: {state.diceLeft.join(", ")}</span>

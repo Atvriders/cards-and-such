@@ -21,12 +21,12 @@ export function TaiSaiBoGame({ state, dispatch, onGameOver }: GameProps<TaiSaiBo
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "roll" } as TaiSaiBoAction)}>Roll</button>
+        <button data-testid="hint-target-tai-sai-bo-roll" className="dm-btn alt" onClick={() => dispatch({ type: "roll" } as TaiSaiBoAction)}>Roll</button>
       )}
       {state.phase === "result" && state.lastIdx !== null && (
         <>
           <div className="dm-result">{CHOICES[state.lastIdx]} — +{PAYOUTS[state.lastIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as TaiSaiBoAction)}>Next</button>
+          <button data-testid="hint-target-tai-sai-bo-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as TaiSaiBoAction)}>Next</button>
         </>
       )}
     </div>

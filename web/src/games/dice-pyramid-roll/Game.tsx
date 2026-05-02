@@ -27,7 +27,7 @@ export function DicePyramidRoll({ state, dispatch, onGameOver }: GameProps<DiceP
       <div className="dpr-target">Need die value ≥ <strong>{currentTarget}</strong></div>
       <div className="dpr-dice">
         {state.dice.map((d, i) => (
-          <button key={i} className={`dpr-die ${state.usedDice[i] ? "used" : ""} ${state.phase === "assigning" && !state.usedDice[i] ? "pickable" : ""}`}
+          <button data-testid="hint-target-dice-pyramid-roll-assign" key={i} className={`dpr-die ${state.usedDice[i] ? "used" : ""} ${state.phase === "assigning" && !state.usedDice[i] ? "pickable" : ""}`}
             disabled={state.usedDice[i] || state.phase !== "assigning"}
             onClick={() => dispatch({ type: "assign", diceIndex: i } as DicePyramidRollAction)}>
             {FACES[d]}
@@ -38,9 +38,9 @@ export function DicePyramidRoll({ state, dispatch, onGameOver }: GameProps<DiceP
         <div className="dpr-feedback">{state.lastLevelPts > 0 ? `Success! +${state.lastLevelPts}` : "Failed! 0 pts"}</div>
       )}
       <div className="dpr-actions">
-        {state.phase === "rolling" && <button className="dpr-btn roll" onClick={() => dispatch({ type: "roll" } as DicePyramidRollAction)}>Roll</button>}
+        {state.phase === "rolling" && <button data-testid="hint-target-dice-pyramid-roll-roll" className="dpr-btn roll" onClick={() => dispatch({ type: "roll" } as DicePyramidRollAction)}>Roll</button>}
         {state.phase === "assigning" && <p className="dpr-hint">Click a die to assign to this level</p>}
-        {state.phase === "scored" && <button className="dpr-btn next" onClick={() => dispatch({ type: "next" } as DicePyramidRollAction)}>Next Level</button>}
+        {state.phase === "scored" && <button data-testid="hint-target-dice-pyramid-roll-next" className="dpr-btn next" onClick={() => dispatch({ type: "next" } as DicePyramidRollAction)}>Next Level</button>}
       </div>
     </div>
   );

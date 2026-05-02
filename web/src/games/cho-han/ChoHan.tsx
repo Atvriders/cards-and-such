@@ -37,17 +37,17 @@ export function ChoHan({ state, dispatch, onGameOver }: GameProps<ChoHanState, C
 
       {state.phase === "betting" && (
         <div className="cho-han-buttons">
-          <button className="cho-han-btn cho" onClick={() => dispatch({ type: "bet", bet: "cho" } as ChoHanAction)}>
+          <button data-testid="hint-target-cho-han-bet" className="cho-han-btn cho" onClick={() => dispatch({ type: "bet", bet: "cho" } as ChoHanAction)}>
             Chō (Even)
           </button>
-          <button className="cho-han-btn han" onClick={() => dispatch({ type: "bet", bet: "han" } as ChoHanAction)}>
+          <button data-testid="hint-target-cho-han-bet" className="cho-han-btn han" onClick={() => dispatch({ type: "bet", bet: "han" } as ChoHanAction)}>
             Han (Odd)
           </button>
         </div>
       )}
 
       {state.phase === "rolled" && (
-        <button className="cho-han-btn" onClick={() => dispatch({ type: "next" } as ChoHanAction)}>
+        <button data-testid="hint-target-cho-han-next" className="cho-han-btn" onClick={() => dispatch({ type: "next" } as ChoHanAction)}>
           Next Round →
         </button>
       )}

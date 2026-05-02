@@ -24,7 +24,7 @@ export function CleverSpringGame({ state, dispatch, onGameOver }: GameProps<Clev
       {state.lastDice.length > 0 && (
         <div className="cspr-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-clever-spring-pick"
               key={i}
               className={`cspr-die${state.selectedDie === i ? " cspr-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function CleverSpringGame({ state, dispatch, onGameOver }: GameProps<Clev
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-clever-spring-place"
                 className="cspr-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as CleverSpringAction)}
@@ -64,10 +64,10 @@ export function CleverSpringGame({ state, dispatch, onGameOver }: GameProps<Clev
 
       <div className="cspr-controls">
         {state.phase === "rolling" && (
-          <button className="cspr-btn cspr-primary" onClick={() => dispatch({ type: "roll" } as CleverSpringAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-clever-spring-roll" className="cspr-btn cspr-primary" onClick={() => dispatch({ type: "roll" } as CleverSpringAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="cspr-btn cspr-skip" onClick={() => dispatch({ type: "skip" } as CleverSpringAction)}>Skip</button>
+          <button data-testid="hint-target-clever-spring-skip" className="cspr-btn cspr-skip" onClick={() => dispatch({ type: "skip" } as CleverSpringAction)}>Skip</button>
         )}
         <button className="cspr-btn cspr-reset" onClick={() => dispatch({ type: "reset" } as CleverSpringAction)}>Reset</button>
       </div>

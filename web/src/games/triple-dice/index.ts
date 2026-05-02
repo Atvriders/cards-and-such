@@ -34,5 +34,9 @@ Rounds: choose 5, 7, or 10 rounds. Longer games smooth out luck and reward consi
   initialState: (seed: number, settings: TripleDiceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    return { selector: '[data-testid="hint-target-triple-dice-roll"]', pulses: 3 };
+  },
   component: TripleDice,
 };

@@ -36,5 +36,18 @@ A win earns 1000 points, a tie earns 500, and a loss earns 100. Skate aggressive
   initialState: (seed: number, settings: DiceHockeySettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-hockey-play"]', pulses: 3 };
+  },
   component: DiceHockey,
 };

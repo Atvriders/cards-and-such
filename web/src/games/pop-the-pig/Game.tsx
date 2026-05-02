@@ -42,7 +42,7 @@ export function PopThePig({ state, dispatch, onGameOver }: GameProps<PopPigState
       )}
 
       {canRoll && (
-        <button className="pig-roll-btn" onClick={() => dispatch({ type: "roll" } satisfies PopPigAction)}>
+        <button data-testid="hint-target-pop-the-pig-roll" className="pig-roll-btn" onClick={() => dispatch({ type: "roll" } satisfies PopPigAction)}>
           Feed the Pig 🍔
         </button>
       )}

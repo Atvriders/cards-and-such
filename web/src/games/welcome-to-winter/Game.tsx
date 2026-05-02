@@ -31,7 +31,7 @@ export function WelcomeToWinterGame({ state, dispatch, onGameOver }: GameProps<W
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-to-winter-place"
                   key={c}
                   className={`wwi-slot${val !== null ? " wwi-filled" : ""}${canPlace ? " wwi-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeToWinterGame({ state, dispatch, onGameOver }: GameProps<W
       </div>
       <div className="wwi-controls">
         {state.phase === "rolling" && (
-          <button className="wwi-btn wwi-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToWinterAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-to-winter-roll" className="wwi-btn wwi-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToWinterAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wwi-btn wwi-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToWinterAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-to-winter-skip" className="wwi-btn wwi-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToWinterAction)}>Skip (−1)</button>
         )}
         <button className="wwi-btn wwi-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToWinterAction)}>Reset</button>
       </div>

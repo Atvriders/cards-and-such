@@ -25,7 +25,7 @@ export function PointsSaladRollGame({ state, dispatch, onGameOver }: GameProps<P
       )}
       <div className="psr-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-points-salad-roll-mark"
             key={i}
             className={`psr-cell psr-z${cellZone(i)}${filled ? " psr-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function PointsSaladRollGame({ state, dispatch, onGameOver }: GameProps<P
       </div>
       <div className="psr-controls">
         {state.phase === "rolling" && (
-          <button className="psr-btn psr-btn-primary" onClick={() => dispatch({ type: "roll" } as PointsSaladRollAction)}>Roll</button>
+          <button data-testid="hint-target-points-salad-roll-roll" className="psr-btn psr-btn-primary" onClick={() => dispatch({ type: "roll" } as PointsSaladRollAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="psr-btn psr-btn-skip" onClick={() => dispatch({ type: "skip" } as PointsSaladRollAction)}>Skip</button>
+          <button data-testid="hint-target-points-salad-roll-skip" className="psr-btn psr-btn-skip" onClick={() => dispatch({ type: "skip" } as PointsSaladRollAction)}>Skip</button>
         )}
         <button className="psr-btn psr-btn-reset" onClick={() => dispatch({ type: "reset" } as PointsSaladRollAction)}>Reset</button>
       </div>

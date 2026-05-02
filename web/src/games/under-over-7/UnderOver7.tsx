@@ -40,13 +40,13 @@ export function UnderOver7({ state, dispatch, onGameOver }: GameProps<UnderOver7
       {state.phase === "betting" && (
         <>
           <div className="uo7-buttons">
-            <button className="uo7-btn under" onClick={() => dispatch({ type: "bet", bet: "under" } as UnderOver7Action)}>
+            <button data-testid="hint-target-under-over-7-bet" className="uo7-btn under" onClick={() => dispatch({ type: "bet", bet: "under" } as UnderOver7Action)}>
               Under 7 (1:1)
             </button>
-            <button className="uo7-btn seven" onClick={() => dispatch({ type: "bet", bet: "seven" } as UnderOver7Action)}>
+            <button data-testid="hint-target-under-over-7-bet" className="uo7-btn seven" onClick={() => dispatch({ type: "bet", bet: "seven" } as UnderOver7Action)}>
               Exactly 7 (4:1)
             </button>
-            <button className="uo7-btn over" onClick={() => dispatch({ type: "bet", bet: "over" } as UnderOver7Action)}>
+            <button data-testid="hint-target-under-over-7-bet" className="uo7-btn over" onClick={() => dispatch({ type: "bet", bet: "over" } as UnderOver7Action)}>
               Over 7 (1:1)
             </button>
           </div>
@@ -55,7 +55,7 @@ export function UnderOver7({ state, dispatch, onGameOver }: GameProps<UnderOver7
       )}
 
       {state.phase === "rolled" && (
-        <button className="uo7-btn" onClick={() => dispatch({ type: "next" } as UnderOver7Action)}>
+        <button data-testid="hint-target-under-over-7-next" className="uo7-btn" onClick={() => dispatch({ type: "next" } as UnderOver7Action)}>
           Next Round →
         </button>
       )}

@@ -31,7 +31,7 @@ export function WelcomeToSpringGame({ state, dispatch, onGameOver }: GameProps<W
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-to-spring-place"
                   key={c}
                   className={`wsp-slot${val !== null ? " wsp-filled" : ""}${canPlace ? " wsp-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeToSpringGame({ state, dispatch, onGameOver }: GameProps<W
       </div>
       <div className="wsp-controls">
         {state.phase === "rolling" && (
-          <button className="wsp-btn wsp-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToSpringAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-to-spring-roll" className="wsp-btn wsp-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToSpringAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wsp-btn wsp-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToSpringAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-to-spring-skip" className="wsp-btn wsp-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToSpringAction)}>Skip (−1)</button>
         )}
         <button className="wsp-btn wsp-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToSpringAction)}>Reset</button>
       </div>

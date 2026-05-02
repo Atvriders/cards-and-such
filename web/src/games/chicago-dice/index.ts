@@ -36,5 +36,18 @@ It's pure dice luck — a great warm-up game or a way to practice reading dice p
   initialState: (seed: number, settings: ChicagoDiceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-chicago-dice-roll"]', pulses: 3 };
+  },
   component: ChicagoDice,
 };

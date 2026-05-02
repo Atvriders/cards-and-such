@@ -26,5 +26,17 @@ After the round result is shown, click Next Round to continue. First to 5 round 
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-diddler-roll"]', pulses: 3 };
+  },
   component: DiddlerGame,
 };

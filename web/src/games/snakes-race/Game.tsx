@@ -63,10 +63,10 @@ export function SnakesRace({ state, dispatch, onGameOver }: GameProps<SnakesRace
 
       <div className="sr-controls">
         {canRoll && (
-          <button onClick={() => dispatch({ type: "roll" })}>Roll Dice</button>
+          <button data-testid="hint-target-snakes-race-roll" onClick={() => dispatch({ type: "roll" })}>Roll Dice</button>
         )}
         {state.currentPlayer === 0 && state.phase === "result" && state.winner === null && (
-          <button onClick={() => dispatch({ type: "confirm" })}>Bot&apos;s Turn</button>
+          <button data-testid="hint-target-snakes-race-confirm" onClick={() => dispatch({ type: "confirm" })}>Bot&apos;s Turn</button>
         )}
       </div>
 

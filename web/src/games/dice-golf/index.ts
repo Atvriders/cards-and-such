@@ -32,5 +32,9 @@ Final score is 500 minus 10 for every stroke you are over par (floored at 0). Co
   initialState: (seed: number, settings: DiceGolfSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    return { selector: '[data-testid="hint-target-dice-golf-roll"]', pulses: 3 };
+  },
   component: DiceGolf,
 };

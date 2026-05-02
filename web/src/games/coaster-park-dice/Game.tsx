@@ -30,8 +30,8 @@ export function CoasterParkDice({ state, dispatch, onGameOver }: GameProps<Coast
       )}
       {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as CoasterParkDiceAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as CoasterParkDiceAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-coaster-park-dice-roll" className="g-btn" onClick={() => dispatch({ type: "roll" } as CoasterParkDiceAction)}>Roll 5 Dice</button>}
+        {state.phase === "rolled" && <button data-testid="hint-target-coaster-park-dice-next" className="g-btn" onClick={() => dispatch({ type: "next" } as CoasterParkDiceAction)}>Next Round</button>}
       </div>
     </div>
   );

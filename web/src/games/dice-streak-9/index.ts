@@ -29,5 +29,17 @@ Points grow fast on long streaks: hitting 5 in a row scores 10+20+30+40+50 = 150
   initialState: (seed: number, settings: DiceStreak9SettingsType) => initialState(seed, settings as DiceStreak9Settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-streak-9-roll"]', pulses: 3 };
+  },
   component: DiceStreak9,
 };

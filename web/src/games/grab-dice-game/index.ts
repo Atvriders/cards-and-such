@@ -15,5 +15,20 @@ export const grabDiceGamePlugin: GamePlugin<GrabDiceGameState, GrabDiceGameActio
   initialState: (seed: number, s: S) => initialState(seed, s as GrabDiceGameSettings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "betting") return { selector: '[data-testid="hint-target-grab-dice-game-predict"]', pulses: 3 };
+    if (phase === "bet") return { selector: '[data-testid="hint-target-grab-dice-game-predict"]', pulses: 3 };
+    if (phase === "predict") return { selector: '[data-testid="hint-target-grab-dice-game-predict"]', pulses: 3 };
+    if (phase === "predicting") return { selector: '[data-testid="hint-target-grab-dice-game-predict"]', pulses: 3 };
+    if (phase === "roundOver") return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+    if (phase === "result") return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+    if (phase === "settled") return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+    if (phase === "banked") return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+    if (phase === "done") return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+    if (phase === "farkled") return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+    if (phase === "busted") return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-grab-dice-game-next"]', pulses: 3 };
+  },
   component: GrabDiceGameGame,
 };

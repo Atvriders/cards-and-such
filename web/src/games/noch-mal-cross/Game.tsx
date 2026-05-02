@@ -25,7 +25,7 @@ export function NochMalCrossGame({ state, dispatch, onGameOver }: GameProps<Noch
       )}
       <div className="nmc-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-noch-mal-cross-mark"
             key={i}
             className={`nmc-cell nmc-z${cellZone(i)}${filled ? " nmc-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function NochMalCrossGame({ state, dispatch, onGameOver }: GameProps<Noch
       </div>
       <div className="nmc-controls">
         {state.phase === "rolling" && (
-          <button className="nmc-btn nmc-btn-primary" onClick={() => dispatch({ type: "roll" } as NochMalCrossAction)}>Roll</button>
+          <button data-testid="hint-target-noch-mal-cross-roll" className="nmc-btn nmc-btn-primary" onClick={() => dispatch({ type: "roll" } as NochMalCrossAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="nmc-btn nmc-btn-skip" onClick={() => dispatch({ type: "skip" } as NochMalCrossAction)}>Skip</button>
+          <button data-testid="hint-target-noch-mal-cross-skip" className="nmc-btn nmc-btn-skip" onClick={() => dispatch({ type: "skip" } as NochMalCrossAction)}>Skip</button>
         )}
         <button className="nmc-btn nmc-btn-reset" onClick={() => dispatch({ type: "reset" } as NochMalCrossAction)}>Reset</button>
       </div>

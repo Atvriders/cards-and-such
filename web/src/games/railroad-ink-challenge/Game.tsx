@@ -25,7 +25,7 @@ export function RailroadInkChallengeGame({ state, dispatch, onGameOver }: GamePr
       )}
       <div className="ric-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-railroad-ink-challenge-mark"
             key={i}
             className={`ric-cell ric-z${cellZone(i)}${filled ? " ric-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function RailroadInkChallengeGame({ state, dispatch, onGameOver }: GamePr
       </div>
       <div className="ric-controls">
         {state.phase === "rolling" && (
-          <button className="ric-btn ric-btn-primary" onClick={() => dispatch({ type: "roll" } as RailroadInkChallengeAction)}>Roll</button>
+          <button data-testid="hint-target-railroad-ink-challenge-roll" className="ric-btn ric-btn-primary" onClick={() => dispatch({ type: "roll" } as RailroadInkChallengeAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="ric-btn ric-btn-skip" onClick={() => dispatch({ type: "skip" } as RailroadInkChallengeAction)}>Skip</button>
+          <button data-testid="hint-target-railroad-ink-challenge-skip" className="ric-btn ric-btn-skip" onClick={() => dispatch({ type: "skip" } as RailroadInkChallengeAction)}>Skip</button>
         )}
         <button className="ric-btn ric-btn-reset" onClick={() => dispatch({ type: "reset" } as RailroadInkChallengeAction)}>Reset</button>
       </div>

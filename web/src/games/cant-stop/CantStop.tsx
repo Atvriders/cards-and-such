@@ -85,7 +85,7 @@ export function CantStop({
       {phase === "pickSplit" && (
         <div className="cant-stop-splits">
           {validSplits.map((split, i) => (
-            <button
+            <button data-testid="hint-target-cant-stop-pickSplit"
               key={i}
               onClick={() =>
                 dispatch({ type: "pickSplit", pairs: split } as CantStopAction)
@@ -104,10 +104,10 @@ export function CantStop({
       <div className="cant-stop-controls">
         {phase === "preRoll" && winner === null && (
           <>
-            <button disabled={!canRoll} onClick={() => dispatch({ type: "roll" } as CantStopAction)}>
+            <button data-testid="hint-target-cant-stop-roll" disabled={!canRoll} onClick={() => dispatch({ type: "roll" } as CantStopAction)}>
               Roll
             </button>
-            <button
+            <button data-testid="hint-target-cant-stop-bank"
               className="bank-btn"
               disabled={!canBank}
               onClick={() => dispatch({ type: "bank" } as CantStopAction)}
@@ -117,7 +117,7 @@ export function CantStop({
           </>
         )}
         {phase === "busted" && (
-          <button onClick={() => dispatch({ type: "continue" } as CantStopAction)}>
+          <button data-testid="hint-target-cant-stop-continue" onClick={() => dispatch({ type: "continue" } as CantStopAction)}>
             Continue
           </button>
         )}

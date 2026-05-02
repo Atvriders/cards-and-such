@@ -47,14 +47,14 @@ export function DiceSoccer({ state, dispatch, onGameOver }: GameProps<DiceSoccer
         <div className="ds-controls">
           {yourTurn ? (
             <>
-              <button onClick={() => dispatch({ type: "play", move: "dribble" })}>Dribble</button>
-              <button onClick={() => dispatch({ type: "play", move: "shoot" })} disabled={state.ballPosition < 6}>
+              <button data-testid="hint-target-dice-soccer-play" onClick={() => dispatch({ type: "play", move: "dribble" })}>Dribble</button>
+              <button data-testid="hint-target-dice-soccer-play" onClick={() => dispatch({ type: "play", move: "shoot" })} disabled={state.ballPosition < 6}>
                 Shoot {state.ballPosition < 6 ? "(too far)" : ""}
               </button>
-              <button onClick={() => dispatch({ type: "play", move: "defend" })}>Defend</button>
+              <button data-testid="hint-target-dice-soccer-play" onClick={() => dispatch({ type: "play", move: "defend" })}>Defend</button>
             </>
           ) : (
-            <button onClick={() => dispatch({ type: "play", move: "defend" })}>Defend / Intercept</button>
+            <button data-testid="hint-target-dice-soccer-play" onClick={() => dispatch({ type: "play", move: "defend" })}>Defend / Intercept</button>
           )}
         </div>
       )}

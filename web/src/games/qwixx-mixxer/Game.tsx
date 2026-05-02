@@ -24,7 +24,7 @@ export function QwixxMixxerGame({ state, dispatch, onGameOver }: GameProps<Qwixx
       {state.lastDice.length > 0 && (
         <div className="qmx-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-qwixx-mixxer-pick"
               key={i}
               className={`qmx-die${state.selectedDie === i ? " qmx-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function QwixxMixxerGame({ state, dispatch, onGameOver }: GameProps<Qwixx
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-qwixx-mixxer-place"
                 className="qmx-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as QwixxMixxerAction)}
@@ -64,10 +64,10 @@ export function QwixxMixxerGame({ state, dispatch, onGameOver }: GameProps<Qwixx
 
       <div className="qmx-controls">
         {state.phase === "rolling" && (
-          <button className="qmx-btn qmx-primary" onClick={() => dispatch({ type: "roll" } as QwixxMixxerAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-qwixx-mixxer-roll" className="qmx-btn qmx-primary" onClick={() => dispatch({ type: "roll" } as QwixxMixxerAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="qmx-btn qmx-skip" onClick={() => dispatch({ type: "skip" } as QwixxMixxerAction)}>Skip</button>
+          <button data-testid="hint-target-qwixx-mixxer-skip" className="qmx-btn qmx-skip" onClick={() => dispatch({ type: "skip" } as QwixxMixxerAction)}>Skip</button>
         )}
         <button className="qmx-btn qmx-reset" onClick={() => dispatch({ type: "reset" } as QwixxMixxerAction)}>Reset</button>
       </div>

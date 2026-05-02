@@ -37,7 +37,7 @@ export function DiceTowerStackGame({
               const selPos = state.selected.indexOf(i);
               const isSel = selPos >= 0;
               return (
-                <button
+                <button data-testid="hint-target-dice-tower-stack-select"
                   key={i}
                   type="button"
                   className={`dts-die${isSel ? " dts-die--selected" : ""}`}
@@ -74,10 +74,10 @@ export function DiceTowerStackGame({
           <div className="dts-actions">
             {!state.committed ? (
               <>
-                <button type="button" className="dts-btn" onClick={() => dispatch({ type: "clear" })}>
+                <button data-testid="hint-target-dice-tower-stack-clear" type="button" className="dts-btn" onClick={() => dispatch({ type: "clear" })}>
                   Clear
                 </button>
-                <button
+                <button data-testid="hint-target-dice-tower-stack-commit"
                   type="button"
                   className="dts-btn dts-btn--primary"
                   onClick={() => dispatch({ type: "commit" })}
@@ -86,7 +86,7 @@ export function DiceTowerStackGame({
                 </button>
               </>
             ) : (
-              <button
+              <button data-testid="hint-target-dice-tower-stack-next"
                 type="button"
                 className="dts-btn dts-btn--primary"
                 onClick={() => dispatch({ type: "next" })}

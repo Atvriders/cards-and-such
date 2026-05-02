@@ -79,7 +79,7 @@ export function DiceGolf({
       )}
 
       <div className="golf-controls">
-        <button
+        <button data-testid="hint-target-dice-golf-roll"
           onClick={() => dispatch({ type: "roll" } as DiceGolfAction)}
           disabled={state.gameOver}
         >

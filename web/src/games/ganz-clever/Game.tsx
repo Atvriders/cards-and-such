@@ -24,7 +24,7 @@ export function GanzCleverGame({ state, dispatch, onGameOver }: GameProps<GanzCl
       {state.lastDice.length > 0 && (
         <div className="gcl-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-ganz-clever-pick"
               key={i}
               className={`gcl-die${state.selectedDie === i ? " gcl-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function GanzCleverGame({ state, dispatch, onGameOver }: GameProps<GanzCl
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-ganz-clever-place"
                 className="gcl-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as GanzCleverAction)}
@@ -64,10 +64,10 @@ export function GanzCleverGame({ state, dispatch, onGameOver }: GameProps<GanzCl
 
       <div className="gcl-controls">
         {state.phase === "rolling" && (
-          <button className="gcl-btn gcl-primary" onClick={() => dispatch({ type: "roll" } as GanzCleverAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-ganz-clever-roll" className="gcl-btn gcl-primary" onClick={() => dispatch({ type: "roll" } as GanzCleverAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="gcl-btn gcl-skip" onClick={() => dispatch({ type: "skip" } as GanzCleverAction)}>Skip</button>
+          <button data-testid="hint-target-ganz-clever-skip" className="gcl-btn gcl-skip" onClick={() => dispatch({ type: "skip" } as GanzCleverAction)}>Skip</button>
         )}
         <button className="gcl-btn gcl-reset" onClick={() => dispatch({ type: "reset" } as GanzCleverAction)}>Reset</button>
       </div>

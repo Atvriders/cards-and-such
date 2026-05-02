@@ -31,7 +31,7 @@ export function WelcomeDinolandGame({ state, dispatch, onGameOver }: GameProps<W
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-dinoland-place"
                   key={c}
                   className={`wdino-slot${val !== null ? " wdino-filled" : ""}${canPlace ? " wdino-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeDinolandGame({ state, dispatch, onGameOver }: GameProps<W
       </div>
       <div className="wdino-controls">
         {state.phase === "rolling" && (
-          <button className="wdino-btn wdino-primary" onClick={() => dispatch({ type: "roll" } as WelcomeDinolandAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-dinoland-roll" className="wdino-btn wdino-primary" onClick={() => dispatch({ type: "roll" } as WelcomeDinolandAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wdino-btn wdino-skip" onClick={() => dispatch({ type: "skip" } as WelcomeDinolandAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-dinoland-skip" className="wdino-btn wdino-skip" onClick={() => dispatch({ type: "skip" } as WelcomeDinolandAction)}>Skip (−1)</button>
         )}
         <button className="wdino-btn wdino-reset" onClick={() => dispatch({ type: "reset" } as WelcomeDinolandAction)}>Reset</button>
       </div>

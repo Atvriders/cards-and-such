@@ -24,7 +24,7 @@ export function CleverSummerGame({ state, dispatch, onGameOver }: GameProps<Clev
       {state.lastDice.length > 0 && (
         <div className="csu-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-clever-summer-pick"
               key={i}
               className={`csu-die${state.selectedDie === i ? " csu-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function CleverSummerGame({ state, dispatch, onGameOver }: GameProps<Clev
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-clever-summer-place"
                 className="csu-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as CleverSummerAction)}
@@ -64,10 +64,10 @@ export function CleverSummerGame({ state, dispatch, onGameOver }: GameProps<Clev
 
       <div className="csu-controls">
         {state.phase === "rolling" && (
-          <button className="csu-btn csu-primary" onClick={() => dispatch({ type: "roll" } as CleverSummerAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-clever-summer-roll" className="csu-btn csu-primary" onClick={() => dispatch({ type: "roll" } as CleverSummerAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="csu-btn csu-skip" onClick={() => dispatch({ type: "skip" } as CleverSummerAction)}>Skip</button>
+          <button data-testid="hint-target-clever-summer-skip" className="csu-btn csu-skip" onClick={() => dispatch({ type: "skip" } as CleverSummerAction)}>Skip</button>
         )}
         <button className="csu-btn csu-reset" onClick={() => dispatch({ type: "reset" } as CleverSummerAction)}>Reset</button>
       </div>

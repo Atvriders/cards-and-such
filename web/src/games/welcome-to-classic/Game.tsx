@@ -31,7 +31,7 @@ export function WelcomeToClassicGame({ state, dispatch, onGameOver }: GameProps<
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-to-classic-place"
                   key={c}
                   className={`wtc-slot${val !== null ? " wtc-filled" : ""}${canPlace ? " wtc-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeToClassicGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="wtc-controls">
         {state.phase === "rolling" && (
-          <button className="wtc-btn wtc-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToClassicAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-to-classic-roll" className="wtc-btn wtc-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToClassicAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wtc-btn wtc-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToClassicAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-to-classic-skip" className="wtc-btn wtc-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToClassicAction)}>Skip (−1)</button>
         )}
         <button className="wtc-btn wtc-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToClassicAction)}>Reset</button>
       </div>

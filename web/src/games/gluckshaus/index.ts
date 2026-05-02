@@ -39,5 +39,18 @@ Start with 10, 15, or 20 pennies. The game ends as soon as one player reaches ze
   initialState: (seed: number, settings: GluckshausSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-gluckshaus-roll"]', pulses: 3 };
+  },
   component: Gluckshaus,
 };

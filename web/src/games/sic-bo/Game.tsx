@@ -68,7 +68,7 @@ export function SicBo({ state, dispatch, onGameOver }: Props) {
       )}
 
       {state.phase === "rolled" && (
-        <button
+        <button data-testid="hint-target-sic-bo-roll"
           className="sb-btn next"
           onClick={() => dispatch({ type: "roll" } as SicBoAction)}
           disabled={state.rollsPlayed >= maxRolls || state.bankroll <= 0}
@@ -124,7 +124,7 @@ export function SicBo({ state, dispatch, onGameOver }: Props) {
                 <button className="sb-btn clear" onClick={() => dispatch({ type: "clear-bets" } as SicBoAction)}>
                   Clear Bets
                 </button>
-                <button
+                <button data-testid="hint-target-sic-bo-roll"
                   className="sb-btn roll"
                   onClick={() => dispatch({ type: "roll" } as SicBoAction)}
                 >

@@ -25,7 +25,7 @@ export function CartographersDesertGame({ state, dispatch, onGameOver }: GamePro
       )}
       <div className="ctd-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-cartographers-desert-mark"
             key={i}
             className={`ctd-cell ctd-z${cellZone(i)}${filled ? " ctd-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function CartographersDesertGame({ state, dispatch, onGameOver }: GamePro
       </div>
       <div className="ctd-controls">
         {state.phase === "rolling" && (
-          <button className="ctd-btn ctd-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersDesertAction)}>Roll</button>
+          <button data-testid="hint-target-cartographers-desert-roll" className="ctd-btn ctd-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersDesertAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="ctd-btn ctd-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersDesertAction)}>Skip</button>
+          <button data-testid="hint-target-cartographers-desert-skip" className="ctd-btn ctd-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersDesertAction)}>Skip</button>
         )}
         <button className="ctd-btn ctd-btn-reset" onClick={() => dispatch({ type: "reset" } as CartographersDesertAction)}>Reset</button>
       </div>

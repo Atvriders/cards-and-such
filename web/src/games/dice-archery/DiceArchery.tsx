@@ -55,7 +55,7 @@ export function DiceArchery({
         </div>
       )}
 
-      <button
+      <button data-testid="hint-target-dice-archery-shoot"
         className="da-btn"
         onClick={() => dispatch({ type: "shoot" } as DiceArcheryAction)}
         disabled={state.gameOver}

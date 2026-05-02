@@ -90,12 +90,12 @@ export function KingdomsDice({
 
       <div className="kingdoms-controls">
         {canRoll && (
-          <button onClick={() => dispatch({ type: "roll" } as KingdomsDiceAction)}>
+          <button data-testid="hint-target-kingdoms-dice-roll" onClick={() => dispatch({ type: "roll" } as KingdomsDiceAction)}>
             Roll 3 Dice
           </button>
         )}
         {canPass && (
-          <button onClick={() => dispatch({ type: "pass" } as KingdomsDiceAction)}>
+          <button data-testid="hint-target-kingdoms-dice-pass" onClick={() => dispatch({ type: "pass" } as KingdomsDiceAction)}>
             Pass
           </button>
         )}

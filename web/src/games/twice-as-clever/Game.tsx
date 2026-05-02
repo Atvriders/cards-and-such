@@ -24,7 +24,7 @@ export function TwiceAsCleverGame({ state, dispatch, onGameOver }: GameProps<Twi
       {state.lastDice.length > 0 && (
         <div className="tac-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-twice-as-clever-pick"
               key={i}
               className={`tac-die${state.selectedDie === i ? " tac-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function TwiceAsCleverGame({ state, dispatch, onGameOver }: GameProps<Twi
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-twice-as-clever-place"
                 className="tac-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as TwiceAsCleverAction)}
@@ -64,10 +64,10 @@ export function TwiceAsCleverGame({ state, dispatch, onGameOver }: GameProps<Twi
 
       <div className="tac-controls">
         {state.phase === "rolling" && (
-          <button className="tac-btn tac-primary" onClick={() => dispatch({ type: "roll" } as TwiceAsCleverAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-twice-as-clever-roll" className="tac-btn tac-primary" onClick={() => dispatch({ type: "roll" } as TwiceAsCleverAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="tac-btn tac-skip" onClick={() => dispatch({ type: "skip" } as TwiceAsCleverAction)}>Skip</button>
+          <button data-testid="hint-target-twice-as-clever-skip" className="tac-btn tac-skip" onClick={() => dispatch({ type: "skip" } as TwiceAsCleverAction)}>Skip</button>
         )}
         <button className="tac-btn tac-reset" onClick={() => dispatch({ type: "reset" } as TwiceAsCleverAction)}>Reset</button>
       </div>

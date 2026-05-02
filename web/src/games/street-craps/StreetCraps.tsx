@@ -57,12 +57,12 @@ export function StreetCraps({
 
       <div className="sc-controls">
         {canRoll && (
-          <button onClick={() => dispatch({ type: "roll" } as StreetCrapsAction)}>
+          <button data-testid="hint-target-street-craps-roll" onClick={() => dispatch({ type: "roll" } as StreetCrapsAction)}>
             {phase === "comeOut" ? "Come-Out Roll" : `Roll for Point (${point})`}
           </button>
         )}
         {phase === "roundDone" && (
-          <button className="next-btn" onClick={() => dispatch({ type: "nextRound" } as StreetCrapsAction)}>
+          <button data-testid="hint-target-street-craps-nextRound" className="next-btn" onClick={() => dispatch({ type: "nextRound" } as StreetCrapsAction)}>
             Next Round
           </button>
         )}

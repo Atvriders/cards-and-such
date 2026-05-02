@@ -31,7 +31,7 @@ export function WelcomeMoonGame({ state, dispatch, onGameOver }: GameProps<Welco
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-moon-place"
                   key={c}
                   className={`wmn-slot${val !== null ? " wmn-filled" : ""}${canPlace ? " wmn-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeMoonGame({ state, dispatch, onGameOver }: GameProps<Welco
       </div>
       <div className="wmn-controls">
         {state.phase === "rolling" && (
-          <button className="wmn-btn wmn-primary" onClick={() => dispatch({ type: "roll" } as WelcomeMoonAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-moon-roll" className="wmn-btn wmn-primary" onClick={() => dispatch({ type: "roll" } as WelcomeMoonAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wmn-btn wmn-skip" onClick={() => dispatch({ type: "skip" } as WelcomeMoonAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-moon-skip" className="wmn-btn wmn-skip" onClick={() => dispatch({ type: "skip" } as WelcomeMoonAction)}>Skip (−1)</button>
         )}
         <button className="wmn-btn wmn-reset" onClick={() => dispatch({ type: "reset" } as WelcomeMoonAction)}>Reset</button>
       </div>

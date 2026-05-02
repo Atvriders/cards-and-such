@@ -59,7 +59,7 @@ export function Centennial({ state, dispatch, onGameOver }: GameProps<Centennial
       <div className="cent-message">{state.message}</div>
 
       {state.phase === "rolling" && (
-        <button className="cent-btn" onClick={() => dispatch({ type: "roll" } as CentennialAction)}>
+        <button data-testid="hint-target-centennial-roll" className="cent-btn" onClick={() => dispatch({ type: "roll" } as CentennialAction)}>
           Roll 3 Dice
         </button>
       )}

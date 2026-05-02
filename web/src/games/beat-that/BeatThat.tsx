@@ -123,12 +123,12 @@ export function BeatThat({
 
       <div className="beat-that-controls">
         {phase === "playerRoll" && (
-          <button onClick={() => dispatch({ type: "roll" } as BeatThatAction)}>
+          <button data-testid="hint-target-beat-that-roll" onClick={() => dispatch({ type: "roll" } as BeatThatAction)}>
             Roll Dice
           </button>
         )}
         {phase === "playerArrange" && (
-          <button
+          <button data-testid="hint-target-beat-that-arrange"
             className="submit-btn"
             disabled={!allFilled}
             onClick={handleSubmit}
@@ -137,7 +137,7 @@ export function BeatThat({
           </button>
         )}
         {phase === "roundOver" && (
-          <button onClick={() => dispatch({ type: "nextRound" } as BeatThatAction)}>
+          <button data-testid="hint-target-beat-that-nextRound" onClick={() => dispatch({ type: "nextRound" } as BeatThatAction)}>
             Next Round
           </button>
         )}

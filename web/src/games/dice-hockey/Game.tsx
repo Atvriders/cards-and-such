@@ -49,16 +49,16 @@ export function DiceHockey({ state, dispatch, onGameOver }: GameProps<DiceHockey
         <div className="dh-controls">
           {yourTurn ? (
             <>
-              <button onClick={() => dispatch({ type: "play", move: "pass" })}>Skate</button>
-              <button onClick={() => dispatch({ type: "play", move: "wrist" })} disabled={state.puckPosition > 5}>
+              <button data-testid="hint-target-dice-hockey-play" onClick={() => dispatch({ type: "play", move: "pass" })}>Skate</button>
+              <button data-testid="hint-target-dice-hockey-play" onClick={() => dispatch({ type: "play", move: "wrist" })} disabled={state.puckPosition > 5}>
                 Wrist Shot {state.puckPosition > 5 ? "(far)" : ""}
               </button>
-              <button onClick={() => dispatch({ type: "play", move: "slap" })} disabled={state.puckPosition > 4}>
+              <button data-testid="hint-target-dice-hockey-play" onClick={() => dispatch({ type: "play", move: "slap" })} disabled={state.puckPosition > 4}>
                 Slap Shot {state.puckPosition > 4 ? "(far)" : ""}
               </button>
             </>
           ) : (
-            <button onClick={() => dispatch({ type: "play", move: "block" })}>Block / Steal</button>
+            <button data-testid="hint-target-dice-hockey-play" onClick={() => dispatch({ type: "play", move: "block" })}>Block / Steal</button>
           )}
         </div>
       )}

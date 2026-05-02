@@ -25,7 +25,7 @@ export function HadriansWallRomanGame({ state, dispatch, onGameOver }: GameProps
       )}
       <div className="hwr-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-hadrians-wall-roman-mark"
             key={i}
             className={`hwr-cell hwr-z${cellZone(i)}${filled ? " hwr-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function HadriansWallRomanGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="hwr-controls">
         {state.phase === "rolling" && (
-          <button className="hwr-btn hwr-btn-primary" onClick={() => dispatch({ type: "roll" } as HadriansWallRomanAction)}>Roll</button>
+          <button data-testid="hint-target-hadrians-wall-roman-roll" className="hwr-btn hwr-btn-primary" onClick={() => dispatch({ type: "roll" } as HadriansWallRomanAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="hwr-btn hwr-btn-skip" onClick={() => dispatch({ type: "skip" } as HadriansWallRomanAction)}>Skip</button>
+          <button data-testid="hint-target-hadrians-wall-roman-skip" className="hwr-btn hwr-btn-skip" onClick={() => dispatch({ type: "skip" } as HadriansWallRomanAction)}>Skip</button>
         )}
         <button className="hwr-btn hwr-btn-reset" onClick={() => dispatch({ type: "reset" } as HadriansWallRomanAction)}>Reset</button>
       </div>

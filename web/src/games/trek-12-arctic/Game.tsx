@@ -41,7 +41,7 @@ export function Trek12ArcticGame({ state, dispatch, onGameOver }: GameProps<Trek
           const v = state.values[i];
           const canPlace = state.phase === "choosing" && v === null;
           return (
-            <button
+            <button data-testid="hint-target-trek-12-arctic-place"
               key={i}
               className={`tar-node${v !== null ? " tar-on" : ""}${canPlace ? " tar-legal" : ""}`}
               disabled={!canPlace}
@@ -52,8 +52,8 @@ export function Trek12ArcticGame({ state, dispatch, onGameOver }: GameProps<Trek
       </div>
 
       <div className="tar-controls">
-        {state.phase === "rolling" && <button className="tar-btn tar-primary" onClick={() => dispatch({ type: "roll" } as Trek12ArcticAction)}>Roll 2 Dice</button>}
-        {state.phase === "choosing" && <button className="tar-btn tar-skip" onClick={() => dispatch({ type: "skip" } as Trek12ArcticAction)}>Skip</button>}
+        {state.phase === "rolling" && <button data-testid="hint-target-trek-12-arctic-roll" className="tar-btn tar-primary" onClick={() => dispatch({ type: "roll" } as Trek12ArcticAction)}>Roll 2 Dice</button>}
+        {state.phase === "choosing" && <button data-testid="hint-target-trek-12-arctic-skip" className="tar-btn tar-skip" onClick={() => dispatch({ type: "skip" } as Trek12ArcticAction)}>Skip</button>}
         <button className="tar-btn tar-reset" onClick={() => dispatch({ type: "reset" } as Trek12ArcticAction)}>Reset</button>
       </div>
 

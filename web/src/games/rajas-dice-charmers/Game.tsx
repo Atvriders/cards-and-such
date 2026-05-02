@@ -24,7 +24,7 @@ export function RajasDiceCharmersGame({ state, dispatch, onGameOver }: GameProps
       {state.lastDice.length > 0 && (
         <div className="rdc-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-rajas-dice-charmers-pick"
               key={i}
               className={`rdc-die${state.selectedDie === i ? " rdc-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function RajasDiceCharmersGame({ state, dispatch, onGameOver }: GameProps
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-rajas-dice-charmers-place"
                 className="rdc-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as RajasDiceCharmersAction)}
@@ -64,10 +64,10 @@ export function RajasDiceCharmersGame({ state, dispatch, onGameOver }: GameProps
 
       <div className="rdc-controls">
         {state.phase === "rolling" && (
-          <button className="rdc-btn rdc-primary" onClick={() => dispatch({ type: "roll" } as RajasDiceCharmersAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-rajas-dice-charmers-roll" className="rdc-btn rdc-primary" onClick={() => dispatch({ type: "roll" } as RajasDiceCharmersAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="rdc-btn rdc-skip" onClick={() => dispatch({ type: "skip" } as RajasDiceCharmersAction)}>Skip</button>
+          <button data-testid="hint-target-rajas-dice-charmers-skip" className="rdc-btn rdc-skip" onClick={() => dispatch({ type: "skip" } as RajasDiceCharmersAction)}>Skip</button>
         )}
         <button className="rdc-btn rdc-reset" onClick={() => dispatch({ type: "reset" } as RajasDiceCharmersAction)}>Reset</button>
       </div>

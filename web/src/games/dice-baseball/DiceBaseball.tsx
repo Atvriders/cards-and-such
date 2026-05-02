@@ -73,7 +73,7 @@ export function DiceBaseball({
       )}
 
       <div className="baseball-controls">
-        <button
+        <button data-testid="hint-target-dice-baseball-roll"
           onClick={() => dispatch({ type: "roll" } as DiceBaseballAction)}
           disabled={state.gameOver}
         >

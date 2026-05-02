@@ -24,7 +24,7 @@ export function FleetDiceGame({ state, dispatch, onGameOver }: GameProps<FleetDi
       {state.lastDice.length > 0 && (
         <div className="fld-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-fleet-dice-pick"
               key={i}
               className={`fld-die${state.selectedDie === i ? " fld-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function FleetDiceGame({ state, dispatch, onGameOver }: GameProps<FleetDi
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-fleet-dice-place"
                 className="fld-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as FleetDiceAction)}
@@ -64,10 +64,10 @@ export function FleetDiceGame({ state, dispatch, onGameOver }: GameProps<FleetDi
 
       <div className="fld-controls">
         {state.phase === "rolling" && (
-          <button className="fld-btn fld-primary" onClick={() => dispatch({ type: "roll" } as FleetDiceAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-fleet-dice-roll" className="fld-btn fld-primary" onClick={() => dispatch({ type: "roll" } as FleetDiceAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="fld-btn fld-skip" onClick={() => dispatch({ type: "skip" } as FleetDiceAction)}>Skip</button>
+          <button data-testid="hint-target-fleet-dice-skip" className="fld-btn fld-skip" onClick={() => dispatch({ type: "skip" } as FleetDiceAction)}>Skip</button>
         )}
         <button className="fld-btn fld-reset" onClick={() => dispatch({ type: "reset" } as FleetDiceAction)}>Reset</button>
       </div>

@@ -37,7 +37,7 @@ export function HiHoGame({ state, dispatch, onGameOver }: GameProps<HiHoState, H
       )}
 
       {canSpin && (
-        <button className="hiho-spin-btn" onClick={() => dispatch({ type: "spin" } satisfies HiHoAction)}>
+        <button data-testid="hint-target-hi-ho-cherry-o-spin" className="hiho-spin-btn" onClick={() => dispatch({ type: "spin" } satisfies HiHoAction)}>
           Spin!
         </button>
       )}

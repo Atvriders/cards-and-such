@@ -25,7 +25,7 @@ export function SilverAndGoldGame({ state, dispatch, onGameOver }: GameProps<Sil
       )}
       <div className="sag-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-silver-and-gold-mark"
             key={i}
             className={`sag-cell sag-z${cellZone(i)}${filled ? " sag-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function SilverAndGoldGame({ state, dispatch, onGameOver }: GameProps<Sil
       </div>
       <div className="sag-controls">
         {state.phase === "rolling" && (
-          <button className="sag-btn sag-btn-primary" onClick={() => dispatch({ type: "roll" } as SilverAndGoldAction)}>Roll</button>
+          <button data-testid="hint-target-silver-and-gold-roll" className="sag-btn sag-btn-primary" onClick={() => dispatch({ type: "roll" } as SilverAndGoldAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="sag-btn sag-btn-skip" onClick={() => dispatch({ type: "skip" } as SilverAndGoldAction)}>Skip</button>
+          <button data-testid="hint-target-silver-and-gold-skip" className="sag-btn sag-btn-skip" onClick={() => dispatch({ type: "skip" } as SilverAndGoldAction)}>Skip</button>
         )}
         <button className="sag-btn sag-btn-reset" onClick={() => dispatch({ type: "reset" } as SilverAndGoldAction)}>Reset</button>
       </div>

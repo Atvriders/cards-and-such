@@ -78,7 +78,7 @@ export function DiceRunner({
           {state.won ? "You Win!" : "Game Over!"} Final Score: {state.score}
         </div>
       ) : (
-        <button
+        <button data-testid="hint-target-dice-runner-roll"
           className="dice-runner-btn"
           onClick={() => dispatch({ type: "roll" } as DiceRunnerAction)}
         >

@@ -15,5 +15,17 @@ export const ludus12Plugin: GamePlugin<Ludus12State, Ludus12Action, typeof setti
   initialState: (seed: number, s: S) => initialState(seed, s as Ludus12Settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-ludus-12-roll"]', pulses: 3 };
+  },
   component: Ludus12Game,
 };

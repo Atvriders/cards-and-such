@@ -24,7 +24,7 @@ export function CleverDiceGame({ state, dispatch, onGameOver }: GameProps<Clever
       {state.lastDice.length > 0 && (
         <div className="cdc-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-clever-dice-pick"
               key={i}
               className={`cdc-die${state.selectedDie === i ? " cdc-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function CleverDiceGame({ state, dispatch, onGameOver }: GameProps<Clever
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-clever-dice-place"
                 className="cdc-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as CleverDiceAction)}
@@ -64,10 +64,10 @@ export function CleverDiceGame({ state, dispatch, onGameOver }: GameProps<Clever
 
       <div className="cdc-controls">
         {state.phase === "rolling" && (
-          <button className="cdc-btn cdc-primary" onClick={() => dispatch({ type: "roll" } as CleverDiceAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-clever-dice-roll" className="cdc-btn cdc-primary" onClick={() => dispatch({ type: "roll" } as CleverDiceAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="cdc-btn cdc-skip" onClick={() => dispatch({ type: "skip" } as CleverDiceAction)}>Skip</button>
+          <button data-testid="hint-target-clever-dice-skip" className="cdc-btn cdc-skip" onClick={() => dispatch({ type: "skip" } as CleverDiceAction)}>Skip</button>
         )}
         <button className="cdc-btn cdc-reset" onClick={() => dispatch({ type: "reset" } as CleverDiceAction)}>Reset</button>
       </div>

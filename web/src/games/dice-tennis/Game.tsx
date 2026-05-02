@@ -50,9 +50,9 @@ export function DiceTennis({ state, dispatch, onGameOver }: GameProps<DiceTennis
 
       {!isOver && (
         <div className="dt-controls">
-          <button onClick={() => dispatch({ type: "serve", style: "flat" })}>Flat (14+)</button>
-          <button onClick={() => dispatch({ type: "serve", style: "spin" })}>Spin (11+)</button>
-          <button onClick={() => dispatch({ type: "serve", style: "slice" })}>Slice (9+)</button>
+          <button data-testid="hint-target-dice-tennis-serve" onClick={() => dispatch({ type: "serve", style: "flat" })}>Flat (14+)</button>
+          <button data-testid="hint-target-dice-tennis-serve" onClick={() => dispatch({ type: "serve", style: "spin" })}>Spin (11+)</button>
+          <button data-testid="hint-target-dice-tennis-serve" onClick={() => dispatch({ type: "serve", style: "slice" })}>Slice (9+)</button>
         </div>
       )}
 

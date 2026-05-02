@@ -25,5 +25,8 @@ Tips: track your rolling average over many games. The law of large numbers means
   initialState,
   reducer,
   isTerminal,
+  hint: (state) => {
+    return { selector: '[data-testid="hint-target-roll-a-six-roll"]', pulses: 3 };
+  },
   component: RollASix,
 };

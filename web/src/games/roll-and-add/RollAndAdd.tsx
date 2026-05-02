@@ -47,22 +47,22 @@ export function RollAndAdd({
       </div>
 
       <div className="roll-add-num-dice">
-        <button className="rna-btn-sm" onClick={() => dispatch({ type: "removeDie" } as RollAndAddAction)} disabled={state.numDice <= 1}>-</button>
+        <button data-testid="hint-target-roll-and-add-removeDie" className="rna-btn-sm" onClick={() => dispatch({ type: "removeDie" } as RollAndAddAction)} disabled={state.numDice <= 1}>-</button>
         <span>{state.numDice} {state.numDice === 1 ? "die" : "dice"}</span>
-        <button className="rna-btn-sm" onClick={() => dispatch({ type: "addDie" } as RollAndAddAction)} disabled={state.numDice >= 4}>+</button>
+        <button data-testid="hint-target-roll-and-add-addDie" className="rna-btn-sm" onClick={() => dispatch({ type: "addDie" } as RollAndAddAction)} disabled={state.numDice >= 4}>+</button>
       </div>
 
       <div className="roll-add-message">{state.lastMessage}</div>
 
       <div className="roll-add-controls">
-        <button
+        <button data-testid="hint-target-roll-and-add-roll"
           className="rna-btn roll"
           onClick={() => dispatch({ type: "roll" } as RollAndAddAction)}
           disabled={!canRoll}
         >
           Roll {state.numDice} {state.numDice === 1 ? "Die" : "Dice"}
         </button>
-        <button
+        <button data-testid="hint-target-roll-and-add-bank"
           className="rna-btn bank"
           onClick={() => dispatch({ type: "bank" } as RollAndAddAction)}
           disabled={!canBank}
@@ -72,7 +72,7 @@ export function RollAndAdd({
       </div>
 
       {state.bust && !state.over && (
-        <button className="rna-btn" onClick={() => dispatch({ type: "bank" } as RollAndAddAction)}>
+        <button data-testid="hint-target-roll-and-add-bank" className="rna-btn" onClick={() => dispatch({ type: "bank" } as RollAndAddAction)}>
           Next Round (Bust — 0 pts)
         </button>
       )}

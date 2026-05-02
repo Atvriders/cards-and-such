@@ -25,7 +25,7 @@ export function CorinthMarketGame({ state, dispatch, onGameOver }: GameProps<Cor
       )}
       <div className="com-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-corinth-market-mark"
             key={i}
             className={`com-cell com-z${cellZone(i)}${filled ? " com-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function CorinthMarketGame({ state, dispatch, onGameOver }: GameProps<Cor
       </div>
       <div className="com-controls">
         {state.phase === "rolling" && (
-          <button className="com-btn com-btn-primary" onClick={() => dispatch({ type: "roll" } as CorinthMarketAction)}>Roll</button>
+          <button data-testid="hint-target-corinth-market-roll" className="com-btn com-btn-primary" onClick={() => dispatch({ type: "roll" } as CorinthMarketAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="com-btn com-btn-skip" onClick={() => dispatch({ type: "skip" } as CorinthMarketAction)}>Skip</button>
+          <button data-testid="hint-target-corinth-market-skip" className="com-btn com-btn-skip" onClick={() => dispatch({ type: "skip" } as CorinthMarketAction)}>Skip</button>
         )}
         <button className="com-btn com-btn-reset" onClick={() => dispatch({ type: "reset" } as CorinthMarketAction)}>Reset</button>
       </div>

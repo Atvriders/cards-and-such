@@ -83,17 +83,17 @@ export function DicePoker({
 
       <div className="dpkr-controls">
         {canRoll && (
-          <button className="dpkr-btn" onClick={() => dispatch({ type: "roll" } as DicePokerAction)}>
+          <button data-testid="hint-target-dice-poker-roll" className="dpkr-btn" onClick={() => dispatch({ type: "roll" } as DicePokerAction)}>
             {state.playerRollsUsed === 0 ? "Roll Dice" : `Re-roll (${3 - state.playerRollsUsed} left)`}
           </button>
         )}
         {canBank && (
-          <button className="dpkr-btn secondary" onClick={() => dispatch({ type: "bank" } as DicePokerAction)}>
+          <button data-testid="hint-target-dice-poker-bank" className="dpkr-btn secondary" onClick={() => dispatch({ type: "bank" } as DicePokerAction)}>
             Bank This Hand
           </button>
         )}
         {state.phase === "result" && !state.winner && (
-          <button className="dpkr-btn" onClick={() => dispatch({ type: "nextRound" } as DicePokerAction)}>
+          <button data-testid="hint-target-dice-poker-nextRound" className="dpkr-btn" onClick={() => dispatch({ type: "nextRound" } as DicePokerAction)}>
             Next Round →
           </button>
         )}

@@ -31,5 +31,23 @@ The game runs 10 rolls. Aim for balanced track filling — chasing one track lea
   initialState: (seed, s) => initialState(seed, s as FleetDiceSettings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+    if (phase === "rolled") return { selector: '[data-testid="hint-target-fleet-dice-pick"]', pulses: 3 };
+    if (phase === "picking") return { selector: '[data-testid="hint-target-fleet-dice-pick"]', pulses: 3 };
+    if (phase === "selecting") return { selector: '[data-testid="hint-target-fleet-dice-pick"]', pulses: 3 };
+    if (phase === "choosing") return { selector: '[data-testid="hint-target-fleet-dice-pick"]', pulses: 3 };
+    if (phase === "placing") return { selector: '[data-testid="hint-target-fleet-dice-place"]', pulses: 3 };
+    if (phase === "place") return { selector: '[data-testid="hint-target-fleet-dice-place"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-fleet-dice-roll"]', pulses: 3 };
+  },
   component: FleetDiceGame,
 };

@@ -29,5 +29,17 @@ Use Settings to choose 15 or 20 maximum rolls. Get as many bingos as possible! W
   initialState: (seed: number, settings: DiceBingoMiniSettingsType) => initialState(seed, settings as DiceBingoMiniSettings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-bingo-mini-roll"]', pulses: 3 };
+  },
   component: DiceBingoMini,
 };

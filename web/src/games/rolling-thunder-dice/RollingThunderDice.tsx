@@ -49,14 +49,14 @@ export function RollingThunderDice({
       )}
 
       <div className="rt-controls">
-        <button
+        <button data-testid="hint-target-rolling-thunder-dice-roll"
           className="rt-btn rt-roll"
           onClick={() => dispatch({ type: "roll" } as RollingThunderAction)}
           disabled={state.gameOver}
         >
           {state.currentDice.length === 0 ? "Roll 5 Dice!" : `Roll ${state.currentDice.length} Dice`}
         </button>
-        <button
+        <button data-testid="hint-target-rolling-thunder-dice-bank"
           className="rt-btn rt-bank"
           onClick={() => dispatch({ type: "bank" } as RollingThunderAction)}
           disabled={state.gameOver || state.turnScore === 0}

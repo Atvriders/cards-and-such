@@ -40,7 +40,7 @@ export function Zilch({
       {currentRoll.length > 0 && (
         <div className="zilch-dice">
           {currentRoll.map((v, i) => (
-            <button
+            <button data-testid="hint-target-zilch-toggleHold"
               key={i}
               className={`zilch-die ${heldIndices.includes(i) ? "held" : ""} ${phase !== "rolled" ? "inactive" : ""}`}
               onClick={() => phase === "rolled" && dispatch({ type: "toggleHold", index: i } as ZilchAction)}
@@ -72,21 +72,21 @@ export function Zilch({
 
       <div className="zilch-controls">
         {phase === "preRoll" && (
-          <button className="zilch-btn" onClick={() => dispatch({ type: "roll" } as ZilchAction)}>
+          <button data-testid="hint-target-zilch-roll" className="zilch-btn" onClick={() => dispatch({ type: "roll" } as ZilchAction)}>
             Roll {diceLeft} {diceLeft === 1 ? "Die" : "Dice"}
             {turnScore > 0 && ` (turn: ${turnScore})`}
           </button>
         )}
         {phase === "rolled" && (
           <>
-            <button
+            <button data-testid="hint-target-zilch-nextTurn"
               className="zilch-btn zilch-btn-keep"
               onClick={() => dispatch({ type: "nextTurn" } as ZilchAction)}
               disabled={!validSelection}
             >
               Keep &amp; Roll Again
             </button>
-            <button
+            <button data-testid="hint-target-zilch-bank"
               className="zilch-btn zilch-btn-bank"
               onClick={() => dispatch({ type: "bank" } as ZilchAction)}
               disabled={!validSelection}
@@ -96,7 +96,7 @@ export function Zilch({
           </>
         )}
         {phase === "zilched" && (
-          <button className="zilch-btn" onClick={() => dispatch({ type: "roll" } as ZilchAction)}>
+          <button data-testid="hint-target-zilch-roll" className="zilch-btn" onClick={() => dispatch({ type: "roll" } as ZilchAction)}>
             New Turn
           </button>
         )}

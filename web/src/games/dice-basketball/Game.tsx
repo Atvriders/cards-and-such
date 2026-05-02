@@ -50,16 +50,16 @@ export function DiceBasketball({
       <div className="dice-basketball-controls">
         {!isOver && (
           <>
-            <button className="layup" onClick={() => dispatch({ type: "shoot", shotType: "layup" } as DiceBasketballAction)}>
+            <button data-testid="hint-target-dice-basketball-shoot" className="layup" onClick={() => dispatch({ type: "shoot", shotType: "layup" } as DiceBasketballAction)}>
               Layup (2pt, easy)
             </button>
-            <button className="mid" onClick={() => dispatch({ type: "shoot", shotType: "midrange" } as DiceBasketballAction)}>
+            <button data-testid="hint-target-dice-basketball-shoot" className="mid" onClick={() => dispatch({ type: "shoot", shotType: "midrange" } as DiceBasketballAction)}>
               Mid-Range (2pt)
             </button>
-            <button className="three" onClick={() => dispatch({ type: "shoot", shotType: "three" } as DiceBasketballAction)}>
+            <button data-testid="hint-target-dice-basketball-shoot" className="three" onClick={() => dispatch({ type: "shoot", shotType: "three" } as DiceBasketballAction)}>
               3-Pointer (3pt, hard)
             </button>
-            <button className="ft" onClick={() => dispatch({ type: "shoot", shotType: "freethrow" } as DiceBasketballAction)}>
+            <button data-testid="hint-target-dice-basketball-shoot" className="ft" onClick={() => dispatch({ type: "shoot", shotType: "freethrow" } as DiceBasketballAction)}>
               Free Throws (1-2pt)
             </button>
           </>

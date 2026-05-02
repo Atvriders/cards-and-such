@@ -25,7 +25,7 @@ export function RailroadInkGreenGame({ state, dispatch, onGameOver }: GameProps<
       )}
       <div className="rig-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-railroad-ink-green-mark"
             key={i}
             className={`rig-cell rig-z${cellZone(i)}${filled ? " rig-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function RailroadInkGreenGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="rig-controls">
         {state.phase === "rolling" && (
-          <button className="rig-btn rig-btn-primary" onClick={() => dispatch({ type: "roll" } as RailroadInkGreenAction)}>Roll</button>
+          <button data-testid="hint-target-railroad-ink-green-roll" className="rig-btn rig-btn-primary" onClick={() => dispatch({ type: "roll" } as RailroadInkGreenAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="rig-btn rig-btn-skip" onClick={() => dispatch({ type: "skip" } as RailroadInkGreenAction)}>Skip</button>
+          <button data-testid="hint-target-railroad-ink-green-skip" className="rig-btn rig-btn-skip" onClick={() => dispatch({ type: "skip" } as RailroadInkGreenAction)}>Skip</button>
         )}
         <button className="rig-btn rig-btn-reset" onClick={() => dispatch({ type: "reset" } as RailroadInkGreenAction)}>Reset</button>
       </div>

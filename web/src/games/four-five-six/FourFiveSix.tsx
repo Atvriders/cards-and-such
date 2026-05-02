@@ -59,13 +59,13 @@ export function FourFiveSix({
 
       <div className="ffs-controls">
         {phase === "preRoll" && (
-          <button className="primary" onClick={() => dispatch({ type: "roll" } as FourFiveSixAction)}>Roll</button>
+          <button data-testid="hint-target-four-five-six-roll" className="primary" onClick={() => dispatch({ type: "roll" } as FourFiveSixAction)}>Roll</button>
         )}
         {phase === "dealerRolling" && (
-          <button className="primary" onClick={() => dispatch({ type: "rollDealer" } as FourFiveSixAction)}>Dealer Rolls</button>
+          <button data-testid="hint-target-four-five-six-rollDealer" className="primary" onClick={() => dispatch({ type: "rollDealer" } as FourFiveSixAction)}>Dealer Rolls</button>
         )}
         {phase === "roundDone" && (
-          <button onClick={() => dispatch({ type: "nextRound" } as FourFiveSixAction)}>Next Round</button>
+          <button data-testid="hint-target-four-five-six-nextRound" onClick={() => dispatch({ type: "nextRound" } as FourFiveSixAction)}>Next Round</button>
         )}
       </div>
     </div>

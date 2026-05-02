@@ -36,7 +36,7 @@ export function MacaoDice({
           <div className="macao-label">Your bet: <strong>{bet}</strong></div>
           <div className="macao-bet-btns">
             {betOptions.map((v) => (
-              <button
+              <button data-testid="hint-target-macao-dice-setBet"
                 key={v}
                 className={`macao-bet-btn ${bet === v ? "active" : ""}`}
                 onClick={() => dispatch({ type: "setBet", amount: v } as MacaoDiceAction)}
@@ -53,7 +53,7 @@ export function MacaoDice({
               className="macao-slider"
             />
           </div>
-          <button className="macao-roll-btn" onClick={() => dispatch({ type: "roll" } as MacaoDiceAction)}>
+          <button data-testid="hint-target-macao-dice-roll" className="macao-roll-btn" onClick={() => dispatch({ type: "roll" } as MacaoDiceAction)}>
             Roll!
           </button>
         </div>
@@ -81,12 +81,12 @@ export function MacaoDice({
 
       <div className="macao-controls">
         {phase === "tieBreak" && (
-          <button className="macao-roll-btn" onClick={() => dispatch({ type: "roll" } as MacaoDiceAction)}>
+          <button data-testid="hint-target-macao-dice-roll" className="macao-roll-btn" onClick={() => dispatch({ type: "roll" } as MacaoDiceAction)}>
             Roll Tie-Break
           </button>
         )}
         {phase === "roundOver" && (
-          <button className="macao-roll-btn" onClick={() => dispatch({ type: "nextRound" } as MacaoDiceAction)}>
+          <button data-testid="hint-target-macao-dice-nextRound" className="macao-roll-btn" onClick={() => dispatch({ type: "nextRound" } as MacaoDiceAction)}>
             Next Round
           </button>
         )}

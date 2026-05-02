@@ -25,7 +25,7 @@ export function HarvestDiceGardenGame({ state, dispatch, onGameOver }: GameProps
       )}
       <div className="hdg-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-harvest-dice-garden-mark"
             key={i}
             className={`hdg-cell hdg-z${cellZone(i)}${filled ? " hdg-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function HarvestDiceGardenGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="hdg-controls">
         {state.phase === "rolling" && (
-          <button className="hdg-btn hdg-btn-primary" onClick={() => dispatch({ type: "roll" } as HarvestDiceGardenAction)}>Roll</button>
+          <button data-testid="hint-target-harvest-dice-garden-roll" className="hdg-btn hdg-btn-primary" onClick={() => dispatch({ type: "roll" } as HarvestDiceGardenAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="hdg-btn hdg-btn-skip" onClick={() => dispatch({ type: "skip" } as HarvestDiceGardenAction)}>Skip</button>
+          <button data-testid="hint-target-harvest-dice-garden-skip" className="hdg-btn hdg-btn-skip" onClick={() => dispatch({ type: "skip" } as HarvestDiceGardenAction)}>Skip</button>
         )}
         <button className="hdg-btn hdg-btn-reset" onClick={() => dispatch({ type: "reset" } as HarvestDiceGardenAction)}>Reset</button>
       </div>

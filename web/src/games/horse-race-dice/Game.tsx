@@ -22,14 +22,14 @@ export function HorseRaceDiceGame({ state, dispatch, onGameOver }: GameProps<Hor
       {state.phase === "predict" && (
         <div className="dm-row">
           {CHOICES.map((c, i) => (
-            <button key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as HorseRaceDiceAction)}>{c}</button>
+            <button data-testid="hint-target-horse-race-dice-predict" key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as HorseRaceDiceAction)}>{c}</button>
           ))}
         </div>
       )}
       {state.phase === "result" && state.resultIdx !== null && state.prediction !== null && (
         <>
           <div className="dm-result">{state.prediction === state.resultIdx ? "Correct! +" + PAYOUTS[state.resultIdx] : "Wrong — Result was " + CHOICES[state.resultIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as HorseRaceDiceAction)}>Next</button>
+          <button data-testid="hint-target-horse-race-dice-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as HorseRaceDiceAction)}>Next</button>
         </>
       )}
     </div>

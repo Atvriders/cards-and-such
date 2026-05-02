@@ -83,7 +83,7 @@ export function DiddlerGame({ state, dispatch, onGameOver }: GameProps<DiddlerSt
 
       {state.phase === "rolling" && (
         <div className="diddler-controls">
-          <button onClick={() => dispatch({ type: "roll" })}>Roll Dice</button>
+          <button data-testid="hint-target-diddler-roll" onClick={() => dispatch({ type: "roll" })}>Roll Dice</button>
         </div>
       )}
 
@@ -122,7 +122,7 @@ export function DiddlerGame({ state, dispatch, onGameOver }: GameProps<DiddlerSt
           </div>
 
           <div className="diddler-controls">
-            <button disabled={!allFilled} onClick={submitOrder}>Confirm Number</button>
+            <button data-testid="hint-target-diddler-setOrder" disabled={!allFilled} onClick={submitOrder}>Confirm Number</button>
           </div>
           <div className="diddler-hint">Select a die, then click a slot. Place all 3 to confirm.</div>
         </>
@@ -133,7 +133,7 @@ export function DiddlerGame({ state, dispatch, onGameOver }: GameProps<DiddlerSt
           <div className="diddler-result">{state.roundResult}</div>
           {state.winner === null && (
             <div className="diddler-controls">
-              <button onClick={() => dispatch({ type: "roll" })}>Next Round</button>
+              <button data-testid="hint-target-diddler-roll" onClick={() => dispatch({ type: "roll" })}>Next Round</button>
             </div>
           )}
         </>

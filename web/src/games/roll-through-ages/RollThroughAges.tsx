@@ -40,7 +40,7 @@ export function RollThroughAges({
       {currentRoll.length > 0 && (
         <div className="rta-dice">
           {currentRoll.map((f, i) => (
-            <button
+            <button data-testid="hint-target-roll-through-ages-toggleHold"
               key={i}
               className={`rta-die ${heldMask[i] ? "held" : ""} ${phase !== "rolled" ? "inactive" : ""}`}
               onClick={() => phase === "rolled" && dispatch({ type: "toggleHold", index: i } as RollThroughAgesAction)}
@@ -57,25 +57,25 @@ export function RollThroughAges({
 
       <div className="rta-controls">
         {phase === "preRoll" && (
-          <button className="rta-btn" onClick={() => dispatch({ type: "roll" } as RollThroughAgesAction)}>
+          <button data-testid="hint-target-roll-through-ages-roll" className="rta-btn" onClick={() => dispatch({ type: "roll" } as RollThroughAgesAction)}>
             Roll Dice
           </button>
         )}
         {phase === "rolled" && (
           <>
             {rerollsLeft > 0 && (
-              <button className="rta-btn" onClick={() => dispatch({ type: "roll" } as RollThroughAgesAction)}>
+              <button data-testid="hint-target-roll-through-ages-roll" className="rta-btn" onClick={() => dispatch({ type: "roll" } as RollThroughAgesAction)}>
                 Reroll Unheld ({rerollsLeft} left)
               </button>
             )}
-            <button className="rta-btn rta-btn-bank" onClick={() => dispatch({ type: "endRoll" } as RollThroughAgesAction)}>
+            <button data-testid="hint-target-roll-through-ages-endRoll" className="rta-btn rta-btn-bank" onClick={() => dispatch({ type: "endRoll" } as RollThroughAgesAction)}>
               Keep Dice
             </button>
           </>
         )}
         {phase === "turnOver" && (
           <>
-            <button
+            <button data-testid="hint-target-roll-through-ages-buyDev"
               className="rta-btn"
               onClick={() => dispatch({ type: "buyDev" } as RollThroughAgesAction)}
               disabled={goods < 3}
@@ -83,7 +83,7 @@ export function RollThroughAges({
             >
               Buy Dev ({goods}/3 ⚙️)
             </button>
-            <button
+            <button data-testid="hint-target-roll-through-ages-buildMon"
               className="rta-btn"
               onClick={() => dispatch({ type: "buildMon" } as RollThroughAgesAction)}
               disabled={workers < 6}
@@ -91,7 +91,7 @@ export function RollThroughAges({
             >
               Build Mon ({workers}/6 👷)
             </button>
-            <button className="rta-btn rta-btn-next" onClick={() => dispatch({ type: "nextTurn" } as RollThroughAgesAction)}>
+            <button data-testid="hint-target-roll-through-ages-nextTurn" className="rta-btn rta-btn-next" onClick={() => dispatch({ type: "nextTurn" } as RollThroughAgesAction)}>
               Next Turn (feed {cities} 🍖)
             </button>
           </>

@@ -1300,19 +1300,89 @@
 
 /* Pulsing outline added by PlayPage.showHint() to whatever element the
    plugin's hint() returned. ~1.5s of three pulses; the JS removes the
-   class when the burst is done. Read-only highlight — never moves cards. */
-@keyframes hint-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow, #ffe066); }
-  50% { box-shadow: 0 0 0 8px transparent; }
-}
+   class when the burst is done. Read-only highlight — never moves cards.
+   Uses the theme's --accent so it picks up the per-game palette; falls
+   back to a soft indigo close to the rest of the play chrome. The CSS
+   custom property `--hint-stagger` is set inline by JS when multiple
+   pulses fire at once so they don't all flash on the same frame. */
 .hint-pulse {
+  /* Resolve the accent once so the keyframes can lerp alpha around it.
+     We use color-mix when available; the fallback stays close to the
+     existing play-page indigo. */
+  --hint-accent: var(--accent, #818cf8);
+  --hint-stagger: 0ms;
   animation: hint-pulse 0.5s ease-in-out 3;
+  animation-delay: var(--hint-stagger);
   border-radius: 8px;
+  position: relative;
 }
+@keyframes hint-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb, var(--hint-accent) 80%, transparent),
+      0 0 0 0 color-mix(in srgb, var(--hint-accent) 35%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--hint-accent) 80%, transparent),
+      0 0 18px 8px color-mix(in srgb, var(--hint-accent) 35%, transparent);
+  }
+}
+
+/* Floating "💡 Hint — Try this" label anchored above the pulsed element.
+   Auto-dismissed by JS after 2s. Pure presentational — pointer-events
+   are off so it never intercepts clicks on the underlying card. */
+.hint-pulse-tooltip {
+  position: absolute;
+  z-index: 460;
+  pointer-events: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #f1f5f9;
+  background: rgba(22, 25, 39, 0.95);
+  border: 1px solid color-mix(in srgb, var(--accent, #818cf8) 55%, transparent);
+  border-radius: 8px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 10px 24px -10px rgba(0, 0, 0, 0.55),
+    0 0 18px -4px color-mix(in srgb, var(--accent, #818cf8) 40%, transparent);
+  white-space: nowrap;
+  transform: translate(-50%, calc(-100% - 8px));
+  animation: hint-tooltip-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hint-pulse-tooltip-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--accent, #c7cdfe) 70%, #f1f5f9);
+}
+.hint-pulse-tooltip-body {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+@keyframes hint-tooltip-in {
+  from { opacity: 0; transform: translate(-50%, calc(-100% - 4px)) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%, calc(-100% - 8px)) scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  /* Replace the pulsing glow with a static 1px accent outline so users
+     who opt out of motion still get a clear visual cue. */
   .hint-pulse {
     animation: none;
-    box-shadow: 0 0 0 3px var(--accent-glow, #ffe066);
+    box-shadow: none;
+    outline: 1px solid var(--accent, #818cf8);
+    outline-offset: 2px;
+  }
+  .hint-pulse-tooltip {
+    animation: none;
   }
 }
 

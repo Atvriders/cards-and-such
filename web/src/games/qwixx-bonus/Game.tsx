@@ -25,7 +25,7 @@ export function QwixxBonusGame({ state, dispatch, onGameOver }: GameProps<QwixxB
       )}
       <div className="qbn-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-qwixx-bonus-mark"
             key={i}
             className={`qbn-cell qbn-z${cellZone(i)}${filled ? " qbn-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function QwixxBonusGame({ state, dispatch, onGameOver }: GameProps<QwixxB
       </div>
       <div className="qbn-controls">
         {state.phase === "rolling" && (
-          <button className="qbn-btn qbn-btn-primary" onClick={() => dispatch({ type: "roll" } as QwixxBonusAction)}>Roll</button>
+          <button data-testid="hint-target-qwixx-bonus-roll" className="qbn-btn qbn-btn-primary" onClick={() => dispatch({ type: "roll" } as QwixxBonusAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="qbn-btn qbn-btn-skip" onClick={() => dispatch({ type: "skip" } as QwixxBonusAction)}>Skip</button>
+          <button data-testid="hint-target-qwixx-bonus-skip" className="qbn-btn qbn-btn-skip" onClick={() => dispatch({ type: "skip" } as QwixxBonusAction)}>Skip</button>
         )}
         <button className="qbn-btn qbn-btn-reset" onClick={() => dispatch({ type: "reset" } as QwixxBonusAction)}>Reset</button>
       </div>

@@ -25,7 +25,7 @@ export function QwixxGemixxtGame({ state, dispatch, onGameOver }: GameProps<Qwix
       )}
       <div className="qgx-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-qwixx-gemixxt-mark"
             key={i}
             className={`qgx-cell qgx-z${cellZone(i)}${filled ? " qgx-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function QwixxGemixxtGame({ state, dispatch, onGameOver }: GameProps<Qwix
       </div>
       <div className="qgx-controls">
         {state.phase === "rolling" && (
-          <button className="qgx-btn qgx-btn-primary" onClick={() => dispatch({ type: "roll" } as QwixxGemixxtAction)}>Roll</button>
+          <button data-testid="hint-target-qwixx-gemixxt-roll" className="qgx-btn qgx-btn-primary" onClick={() => dispatch({ type: "roll" } as QwixxGemixxtAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="qgx-btn qgx-btn-skip" onClick={() => dispatch({ type: "skip" } as QwixxGemixxtAction)}>Skip</button>
+          <button data-testid="hint-target-qwixx-gemixxt-skip" className="qgx-btn qgx-btn-skip" onClick={() => dispatch({ type: "skip" } as QwixxGemixxtAction)}>Skip</button>
         )}
         <button className="qgx-btn qgx-btn-reset" onClick={() => dispatch({ type: "reset" } as QwixxGemixxtAction)}>Reset</button>
       </div>

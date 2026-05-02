@@ -20,5 +20,9 @@ Strategy is limited since rolls are random, but you can watch the remaining coun
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    return { selector: '[data-testid="hint-target-dice-darts-throw"]', pulses: 3 };
+  },
   component: DiceDarts,
 } as unknown as GamePlugin;

@@ -25,7 +25,7 @@ export function CartographersMonstersGame({ state, dispatch, onGameOver }: GameP
       )}
       <div className="ctm-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-cartographers-monsters-mark"
             key={i}
             className={`ctm-cell ctm-z${cellZone(i)}${filled ? " ctm-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function CartographersMonstersGame({ state, dispatch, onGameOver }: GameP
       </div>
       <div className="ctm-controls">
         {state.phase === "rolling" && (
-          <button className="ctm-btn ctm-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersMonstersAction)}>Roll</button>
+          <button data-testid="hint-target-cartographers-monsters-roll" className="ctm-btn ctm-btn-primary" onClick={() => dispatch({ type: "roll" } as CartographersMonstersAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="ctm-btn ctm-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersMonstersAction)}>Skip</button>
+          <button data-testid="hint-target-cartographers-monsters-skip" className="ctm-btn ctm-btn-skip" onClick={() => dispatch({ type: "skip" } as CartographersMonstersAction)}>Skip</button>
         )}
         <button className="ctm-btn ctm-btn-reset" onClick={() => dispatch({ type: "reset" } as CartographersMonstersAction)}>Reset</button>
       </div>

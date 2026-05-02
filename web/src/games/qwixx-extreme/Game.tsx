@@ -25,7 +25,7 @@ export function QwixxExtremeGame({ state, dispatch, onGameOver }: GameProps<Qwix
       )}
       <div className="qex-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-qwixx-extreme-mark"
             key={i}
             className={`qex-cell qex-z${cellZone(i)}${filled ? " qex-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function QwixxExtremeGame({ state, dispatch, onGameOver }: GameProps<Qwix
       </div>
       <div className="qex-controls">
         {state.phase === "rolling" && (
-          <button className="qex-btn qex-btn-primary" onClick={() => dispatch({ type: "roll" } as QwixxExtremeAction)}>Roll</button>
+          <button data-testid="hint-target-qwixx-extreme-roll" className="qex-btn qex-btn-primary" onClick={() => dispatch({ type: "roll" } as QwixxExtremeAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="qex-btn qex-btn-skip" onClick={() => dispatch({ type: "skip" } as QwixxExtremeAction)}>Skip</button>
+          <button data-testid="hint-target-qwixx-extreme-skip" className="qex-btn qex-btn-skip" onClick={() => dispatch({ type: "skip" } as QwixxExtremeAction)}>Skip</button>
         )}
         <button className="qex-btn qex-btn-reset" onClick={() => dispatch({ type: "reset" } as QwixxExtremeAction)}>Reset</button>
       </div>

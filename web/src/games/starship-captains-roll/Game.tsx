@@ -30,8 +30,8 @@ export function StarshipCaptainsRoll({ state, dispatch, onGameOver }: GameProps<
       )}
       {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as StarshipCaptainsRollAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as StarshipCaptainsRollAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-starship-captains-roll-roll" className="g-btn" onClick={() => dispatch({ type: "roll" } as StarshipCaptainsRollAction)}>Roll 5 Dice</button>}
+        {state.phase === "rolled" && <button data-testid="hint-target-starship-captains-roll-next" className="g-btn" onClick={() => dispatch({ type: "next" } as StarshipCaptainsRollAction)}>Next Round</button>}
       </div>
     </div>
   );

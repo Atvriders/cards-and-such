@@ -31,7 +31,7 @@ export function QwixxConnectedGame({ state, dispatch, onGameOver }: GameProps<Qw
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-qwixx-connected-place"
                   key={c}
                   className={`qcn-slot${val !== null ? " qcn-filled" : ""}${canPlace ? " qcn-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function QwixxConnectedGame({ state, dispatch, onGameOver }: GameProps<Qw
       </div>
       <div className="qcn-controls">
         {state.phase === "rolling" && (
-          <button className="qcn-btn qcn-primary" onClick={() => dispatch({ type: "roll" } as QwixxConnectedAction)}>Roll</button>
+          <button data-testid="hint-target-qwixx-connected-roll" className="qcn-btn qcn-primary" onClick={() => dispatch({ type: "roll" } as QwixxConnectedAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="qcn-btn qcn-skip" onClick={() => dispatch({ type: "skip" } as QwixxConnectedAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-qwixx-connected-skip" className="qcn-btn qcn-skip" onClick={() => dispatch({ type: "skip" } as QwixxConnectedAction)}>Skip (−1)</button>
         )}
         <button className="qcn-btn qcn-reset" onClick={() => dispatch({ type: "reset" } as QwixxConnectedAction)}>Reset</button>
       </div>

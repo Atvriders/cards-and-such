@@ -31,7 +31,7 @@ export function OnTourRoadsGame({ state, dispatch, onGameOver }: GameProps<OnTou
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-on-tour-roads-place"
                   key={c}
                   className={`otr-slot${val !== null ? " otr-filled" : ""}${canPlace ? " otr-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function OnTourRoadsGame({ state, dispatch, onGameOver }: GameProps<OnTou
       </div>
       <div className="otr-controls">
         {state.phase === "rolling" && (
-          <button className="otr-btn otr-primary" onClick={() => dispatch({ type: "roll" } as OnTourRoadsAction)}>Roll</button>
+          <button data-testid="hint-target-on-tour-roads-roll" className="otr-btn otr-primary" onClick={() => dispatch({ type: "roll" } as OnTourRoadsAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="otr-btn otr-skip" onClick={() => dispatch({ type: "skip" } as OnTourRoadsAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-on-tour-roads-skip" className="otr-btn otr-skip" onClick={() => dispatch({ type: "skip" } as OnTourRoadsAction)}>Skip (−1)</button>
         )}
         <button className="otr-btn otr-reset" onClick={() => dispatch({ type: "reset" } as OnTourRoadsAction)}>Reset</button>
       </div>

@@ -53,7 +53,7 @@ export function RollASix({
       </div>
 
       {!state.done && (
-        <button className="ras-roll-btn" onClick={() => dispatch({ type: "roll" })}>
+        <button data-testid="hint-target-roll-a-six-roll" className="ras-roll-btn" onClick={() => dispatch({ type: "roll" })}>
           Roll Die
         </button>
       )}

@@ -81,18 +81,18 @@ export function PirateDice({
 
       <div className="pd-controls">
         {phase === "preRoll" && !terminal && (
-          <button onClick={() => dispatch({ type: "roll" } as PirateDiceAction)}>Roll Dice</button>
+          <button data-testid="hint-target-pirate-dice-roll" onClick={() => dispatch({ type: "roll" } as PirateDiceAction)}>Roll Dice</button>
         )}
         {phase === "rolled" && (
           <>
-            <button onClick={() => dispatch({ type: "roll" } as PirateDiceAction)}>Re-roll Maps</button>
-            <button className="bank-btn" onClick={() => dispatch({ type: "bank" } as PirateDiceAction)} disabled={turnTreasure === 0}>
+            <button data-testid="hint-target-pirate-dice-roll" onClick={() => dispatch({ type: "roll" } as PirateDiceAction)}>Re-roll Maps</button>
+            <button data-testid="hint-target-pirate-dice-bank" className="bank-btn" onClick={() => dispatch({ type: "bank" } as PirateDiceAction)} disabled={turnTreasure === 0}>
               Bank {turnTreasure} Treasure
             </button>
           </>
         )}
         {phase === "sunk" && (
-          <button onClick={() => dispatch({ type: "nextTurn" } as PirateDiceAction)}>Next Turn</button>
+          <button data-testid="hint-target-pirate-dice-nextTurn" onClick={() => dispatch({ type: "nextTurn" } as PirateDiceAction)}>Next Turn</button>
         )}
       </div>
     </div>

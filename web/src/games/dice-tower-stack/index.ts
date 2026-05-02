@@ -35,5 +35,20 @@ export const diceTowerStackPlugin: GamePlugin<
   initialState: (seed: number, s: DTSSettingsType) => initialState(seed, coerce(s)),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolled") return { selector: '[data-testid="hint-target-dice-tower-stack-select"]', pulses: 3 };
+    if (phase === "picking") return { selector: '[data-testid="hint-target-dice-tower-stack-select"]', pulses: 3 };
+    if (phase === "selecting") return { selector: '[data-testid="hint-target-dice-tower-stack-select"]', pulses: 3 };
+    if (phase === "choosing") return { selector: '[data-testid="hint-target-dice-tower-stack-select"]', pulses: 3 };
+    if (phase === "roundOver") return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+    if (phase === "result") return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+    if (phase === "settled") return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+    if (phase === "banked") return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+    if (phase === "done") return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+    if (phase === "farkled") return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+    if (phase === "busted") return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-tower-stack-next"]', pulses: 3 };
+  },
   component: DiceTowerStackGame,
 };

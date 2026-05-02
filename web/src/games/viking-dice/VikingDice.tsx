@@ -61,22 +61,22 @@ export function VikingDice({
 
       <div className="viking-controls">
         {phase === "preRoll" && !terminal && (
-          <button onClick={() => dispatch({ type: "roll" } as VikingDiceAction)}>
+          <button data-testid="hint-target-viking-dice-roll" onClick={() => dispatch({ type: "roll" } as VikingDiceAction)}>
             Roll Dice
           </button>
         )}
         {phase === "rolled" && !terminal && (
           <>
-            <button onClick={() => dispatch({ type: "roll" } as VikingDiceAction)}>
+            <button data-testid="hint-target-viking-dice-roll" onClick={() => dispatch({ type: "roll" } as VikingDiceAction)}>
               Press Luck (+Raid)
             </button>
-            <button className="bank-btn" onClick={() => dispatch({ type: "bank" } as VikingDiceAction)}>
+            <button data-testid="hint-target-viking-dice-bank" className="bank-btn" onClick={() => dispatch({ type: "bank" } as VikingDiceAction)}>
               Bank {turnRaid} pts
             </button>
           </>
         )}
         {phase === "busted" && (
-          <button onClick={() => dispatch({ type: "nextTurn" } as VikingDiceAction)}>
+          <button data-testid="hint-target-viking-dice-nextTurn" onClick={() => dispatch({ type: "nextTurn" } as VikingDiceAction)}>
             Next Turn
           </button>
         )}

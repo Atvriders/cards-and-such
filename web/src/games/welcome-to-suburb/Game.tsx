@@ -31,7 +31,7 @@ export function WelcomeToSuburbGame({ state, dispatch, onGameOver }: GameProps<W
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-to-suburb-place"
                   key={c}
                   className={`wts-slot${val !== null ? " wts-filled" : ""}${canPlace ? " wts-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeToSuburbGame({ state, dispatch, onGameOver }: GameProps<W
       </div>
       <div className="wts-controls">
         {state.phase === "rolling" && (
-          <button className="wts-btn wts-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToSuburbAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-to-suburb-roll" className="wts-btn wts-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToSuburbAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wts-btn wts-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToSuburbAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-to-suburb-skip" className="wts-btn wts-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToSuburbAction)}>Skip (−1)</button>
         )}
         <button className="wts-btn wts-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToSuburbAction)}>Reset</button>
       </div>

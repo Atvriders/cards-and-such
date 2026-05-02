@@ -58,7 +58,7 @@ export function Gluckshaus({ state, dispatch, onGameOver }: GameProps<Gluckshaus
       <div className="gluck-message">{state.message}</div>
 
       {state.phase === "rolling" && (
-        <button className="gluck-btn" onClick={() => dispatch({ type: "roll" } as GAction)}>
+        <button data-testid="hint-target-gluckshaus-roll" className="gluck-btn" onClick={() => dispatch({ type: "roll" } as GAction)}>
           {state.activePlayer === "player" ? "Roll Dice" : "Roll for Bot..."}
         </button>
       )}

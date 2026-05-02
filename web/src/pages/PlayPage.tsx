@@ -801,15 +801,74 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     }
     bumpHintsUsed(plugin.id);
     track("play.hint", { gameId: plugin.id });
+    // Stagger the pulse if other targets are already animating so a
+    // burst of simultaneous hints doesn't flash on the same frame.
+    const concurrentBefore = document.querySelectorAll(".hint-pulse").length;
+    if (el instanceof HTMLElement) {
+      el.style.setProperty("--hint-stagger", `${concurrentBefore * 120}ms`);
+    }
     el.classList.add("hint-pulse");
+
+    // Floating "Try this" tooltip — appended to body and positioned over
+    // the target element. Auto-dismissed after 2s regardless of pulse
+    // duration so it never lingers on long animations.
+    let tooltip: HTMLDivElement | null = null;
+    let scrollHandler: (() => void) | null = null;
+    let resizeHandler: (() => void) | null = null;
+    try {
+      tooltip = document.createElement("div");
+      tooltip.className = "hint-pulse-tooltip";
+      tooltip.setAttribute("role", "status");
+      tooltip.setAttribute("aria-live", "polite");
+      const titleEl = document.createElement("span");
+      titleEl.className = "hint-pulse-tooltip-title";
+      titleEl.textContent = "💡 Hint";
+      const bodyEl = document.createElement("span");
+      bodyEl.className = "hint-pulse-tooltip-body";
+      bodyEl.textContent = "Try this";
+      tooltip.appendChild(titleEl);
+      tooltip.appendChild(bodyEl);
+      document.body.appendChild(tooltip);
+
+      const positionTooltip = () => {
+        if (!tooltip || !el) return;
+        const rect = el.getBoundingClientRect();
+        const x = rect.left + rect.width / 2 + window.scrollX;
+        const y = rect.top + window.scrollY;
+        tooltip.style.left = `${x}px`;
+        tooltip.style.top = `${y}px`;
+      };
+      positionTooltip();
+      scrollHandler = positionTooltip;
+      resizeHandler = positionTooltip;
+      window.addEventListener("scroll", scrollHandler, { passive: true });
+      window.addEventListener("resize", resizeHandler);
+    } catch {
+      /* DOM might not be available in unusual environments */
+    }
+
+    const tooltipMs = 2000;
+    window.setTimeout(() => {
+      try {
+        if (scrollHandler) window.removeEventListener("scroll", scrollHandler);
+        if (resizeHandler) window.removeEventListener("resize", resizeHandler);
+        tooltip?.remove();
+      } catch {
+        /* tooltip may have already been removed */
+      }
+    }, tooltipMs);
+
     const ms = 500 * Math.max(1, target.pulses ?? 3);
     window.setTimeout(() => {
       try {
         el?.classList.remove("hint-pulse");
+        if (el instanceof HTMLElement) {
+          el.style.removeProperty("--hint-stagger");
+        }
       } catch {
         /* element may have unmounted */
       }
-    }, ms);
+    }, ms + concurrentBefore * 120);
   }, [hintsEnabled, plugin, phase, state, pushToast]);
 
   const friendMode = searchParams.get("friend") === "1";

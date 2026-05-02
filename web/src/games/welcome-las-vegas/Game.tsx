@@ -31,7 +31,7 @@ export function WelcomeLasVegasGame({ state, dispatch, onGameOver }: GameProps<W
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-las-vegas-place"
                   key={c}
                   className={`wlv-slot${val !== null ? " wlv-filled" : ""}${canPlace ? " wlv-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeLasVegasGame({ state, dispatch, onGameOver }: GameProps<W
       </div>
       <div className="wlv-controls">
         {state.phase === "rolling" && (
-          <button className="wlv-btn wlv-primary" onClick={() => dispatch({ type: "roll" } as WelcomeLasVegasAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-las-vegas-roll" className="wlv-btn wlv-primary" onClick={() => dispatch({ type: "roll" } as WelcomeLasVegasAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wlv-btn wlv-skip" onClick={() => dispatch({ type: "skip" } as WelcomeLasVegasAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-las-vegas-skip" className="wlv-btn wlv-skip" onClick={() => dispatch({ type: "skip" } as WelcomeLasVegasAction)}>Skip (−1)</button>
         )}
         <button className="wlv-btn wlv-reset" onClick={() => dispatch({ type: "reset" } as WelcomeLasVegasAction)}>Reset</button>
       </div>

@@ -78,7 +78,7 @@ export function Qwixx({
         {COLORS.map((color) => (
           <div key={color} className={`qwixx-row qwixx-row-${color} ${locked[color] ? "locked" : ""}`}>
             {ROW_VALUES[color].map((val, i) => (
-              <button
+              <button data-testid="hint-target-qwixx-markColor"
                 key={i}
                 className={`qwixx-cell ${checked[color][i] ? "checked" : ""} ${isWhiteMarkable(color, i) ? "white-markable" : ""} ${isColorMarkable(color, i) ? "color-markable" : ""}`}
                 onClick={() => {
@@ -107,12 +107,12 @@ export function Qwixx({
 
       <div className="qwixx-controls">
         {phase === "preRoll" && (
-          <button className="qwixx-btn" onClick={() => dispatch({ type: "roll" } as QwixxAction)}>
+          <button data-testid="hint-target-qwixx-roll" className="qwixx-btn" onClick={() => dispatch({ type: "roll" } as QwixxAction)}>
             Roll Dice
           </button>
         )}
         {phase === "rolled" && (
-          <button className="qwixx-btn penalty-btn" onClick={() => dispatch({ type: "takePenalty" } as QwixxAction)}>
+          <button data-testid="hint-target-qwixx-takePenalty" className="qwixx-btn penalty-btn" onClick={() => dispatch({ type: "takePenalty" } as QwixxAction)}>
             Take Penalty (skip turn)
           </button>
         )}

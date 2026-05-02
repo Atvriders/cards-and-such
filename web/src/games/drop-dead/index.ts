@@ -34,5 +34,17 @@ Try the 7-dice variant for a longer, higher-scoring game. Average score with 5 d
   initialState: (seed: number, settings: DropDeadSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-drop-dead-roll"]', pulses: 3 };
+  },
   component: DropDead,
 };

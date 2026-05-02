@@ -101,11 +101,11 @@ export function Perudo({
             </select>
           </div>
           <div className="perudo-bid-row">
-            <button className="perudo-bid-btn" onClick={handleBid}>
+            <button data-testid="hint-target-perudo-bid" className="perudo-bid-btn" onClick={handleBid}>
               Bid
             </button>
             {currentBid && (
-              <button className="perudo-dudo-btn" onClick={handleDudo}>
+              <button data-testid="hint-target-perudo-dudo" className="perudo-dudo-btn" onClick={handleDudo}>
                 Dudo! (Challenge)
               </button>
             )}

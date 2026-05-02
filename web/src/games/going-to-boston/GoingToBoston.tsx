@@ -62,10 +62,10 @@ export function GoingToBoston({
 
       <div className="gtb-controls">
         {(phase === "preRoll" || phase === "kept1" || phase === "kept2") && (
-          <button onClick={() => dispatch({ type: "roll" } as GoingToBostonAction)}>{rollLabel}</button>
+          <button data-testid="hint-target-going-to-boston-roll" onClick={() => dispatch({ type: "roll" } as GoingToBostonAction)}>{rollLabel}</button>
         )}
         {phase === "roundDone" && (
-          <button onClick={() => dispatch({ type: "nextRound" } as GoingToBostonAction)}>Next Round</button>
+          <button data-testid="hint-target-going-to-boston-nextRound" onClick={() => dispatch({ type: "nextRound" } as GoingToBostonAction)}>Next Round</button>
         )}
       </div>
     </div>

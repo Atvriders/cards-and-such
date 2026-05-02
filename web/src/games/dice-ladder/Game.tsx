@@ -57,17 +57,17 @@ export function DiceLadder({
       {!state.gameOver && (
         <div className="dl-actions">
           {!phase.rolled && (
-            <button className="dl-btn roll-btn" onClick={() => dispatch({ type: "roll" } as DiceLadderAction)}>
+            <button data-testid="hint-target-dice-ladder-roll" className="dl-btn roll-btn" onClick={() => dispatch({ type: "roll" } as DiceLadderAction)}>
               Roll Dice
             </button>
           )}
           {phase.rolled && (
             <>
-              <button className="dl-btn up-btn" onClick={() => dispatch({ type: "climbUp" } as DiceLadderAction)}>
+              <button data-testid="hint-target-dice-ladder-climbUp" className="dl-btn up-btn" onClick={() => dispatch({ type: "climbUp" } as DiceLadderAction)}>
                 Climb Up (+{state.lastRoll.reduce((a, b) => a + b, 0)})
               </button>
               {phase.canClimbDown && (
-                <button className="dl-btn down-btn" onClick={() => dispatch({ type: "climbDown" } as DiceLadderAction)}>
+                <button data-testid="hint-target-dice-ladder-climbDown" className="dl-btn down-btn" onClick={() => dispatch({ type: "climbDown" } as DiceLadderAction)}>
                   Slide Down (-{Math.min(...state.lastRoll)})
                 </button>
               )}

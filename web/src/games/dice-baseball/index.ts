@@ -32,5 +32,9 @@ The game is purely random but deeply satisfying: a grand slam on the last roll o
   initialState: (seed: number, settings: DiceBaseballSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    return { selector: '[data-testid="hint-target-dice-baseball-roll"]', pulses: 3 };
+  },
   component: DiceBaseball,
 };

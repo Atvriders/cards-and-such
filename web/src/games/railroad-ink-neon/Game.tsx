@@ -25,7 +25,7 @@ export function RailroadInkNeonGame({ state, dispatch, onGameOver }: GameProps<R
       )}
       <div className="rin-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button data-testid="hint-target-railroad-ink-neon-mark"
             key={i}
             className={`rin-cell rin-z${cellZone(i)}${filled ? " rin-on" : ""}`}
             disabled={filled || state.phase !== "marking" || state.phase === "done"}
@@ -35,10 +35,10 @@ export function RailroadInkNeonGame({ state, dispatch, onGameOver }: GameProps<R
       </div>
       <div className="rin-controls">
         {state.phase === "rolling" && (
-          <button className="rin-btn rin-btn-primary" onClick={() => dispatch({ type: "roll" } as RailroadInkNeonAction)}>Roll</button>
+          <button data-testid="hint-target-railroad-ink-neon-roll" className="rin-btn rin-btn-primary" onClick={() => dispatch({ type: "roll" } as RailroadInkNeonAction)}>Roll</button>
         )}
         {state.phase === "marking" && (
-          <button className="rin-btn rin-btn-skip" onClick={() => dispatch({ type: "skip" } as RailroadInkNeonAction)}>Skip</button>
+          <button data-testid="hint-target-railroad-ink-neon-skip" className="rin-btn rin-btn-skip" onClick={() => dispatch({ type: "skip" } as RailroadInkNeonAction)}>Skip</button>
         )}
         <button className="rin-btn rin-btn-reset" onClick={() => dispatch({ type: "reset" } as RailroadInkNeonAction)}>Reset</button>
       </div>

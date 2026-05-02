@@ -24,7 +24,7 @@ export function DoppeltCleverGame({ state, dispatch, onGameOver }: GameProps<Dop
       {state.lastDice.length > 0 && (
         <div className="dcl-dice">
           {state.lastDice.map((v, i) => (
-            <button
+            <button data-testid="hint-target-doppelt-clever-pick"
               key={i}
               className={`dcl-die${state.selectedDie === i ? " dcl-die-on" : ""}`}
               disabled={state.phase !== "picking"}
@@ -51,7 +51,7 @@ export function DoppeltCleverGame({ state, dispatch, onGameOver }: GameProps<Dop
                   );
                 })}
               </div>
-              <button
+              <button data-testid="hint-target-doppelt-clever-place"
                 className="dcl-track-btn"
                 disabled={!canPlace}
                 onClick={() => dispatch({ type: "place", track: t } as DoppeltCleverAction)}
@@ -64,10 +64,10 @@ export function DoppeltCleverGame({ state, dispatch, onGameOver }: GameProps<Dop
 
       <div className="dcl-controls">
         {state.phase === "rolling" && (
-          <button className="dcl-btn dcl-primary" onClick={() => dispatch({ type: "roll" } as DoppeltCleverAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-doppelt-clever-roll" className="dcl-btn dcl-primary" onClick={() => dispatch({ type: "roll" } as DoppeltCleverAction)}>Roll 5 Dice</button>
         )}
         {(state.phase === "picking" || state.phase === "placing") && (
-          <button className="dcl-btn dcl-skip" onClick={() => dispatch({ type: "skip" } as DoppeltCleverAction)}>Skip</button>
+          <button data-testid="hint-target-doppelt-clever-skip" className="dcl-btn dcl-skip" onClick={() => dispatch({ type: "skip" } as DoppeltCleverAction)}>Skip</button>
         )}
         <button className="dcl-btn dcl-reset" onClick={() => dispatch({ type: "reset" } as DoppeltCleverAction)}>Reset</button>
       </div>

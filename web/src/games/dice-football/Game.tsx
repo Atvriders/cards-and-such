@@ -70,19 +70,19 @@ export function DiceFootball({
       <div className="dice-football-controls">
         {!isOver && yourTurn && (
           <>
-            <button
+            <button data-testid="hint-target-dice-football-play"
               className="run"
               onClick={() => dispatch({ type: "play", playType: "run" } as DiceFootballAction)}
             >
               Run
             </button>
-            <button
+            <button data-testid="hint-target-dice-football-play"
               className="pass"
               onClick={() => dispatch({ type: "play", playType: "pass" } as DiceFootballAction)}
             >
               Pass
             </button>
-            <button
+            <button data-testid="hint-target-dice-football-play"
               className="kick"
               onClick={() => dispatch({ type: "play", playType: "kick" } as DiceFootballAction)}
               disabled={state.fieldPosition < 30}
@@ -92,7 +92,7 @@ export function DiceFootball({
           </>
         )}
         {!isOver && !yourTurn && (
-          <button
+          <button data-testid="hint-target-dice-football-play"
             className="pass"
             onClick={() => dispatch({ type: "play", playType: "run" } as DiceFootballAction)}
           >

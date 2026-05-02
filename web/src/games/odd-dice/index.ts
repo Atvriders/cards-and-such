@@ -32,5 +32,8 @@ Settings: choose 3-round or 5-round mode. The 5-round mode gives a higher total 
   initialState,
   reducer,
   isTerminal,
+  hint: (state) => {
+    return { selector: '[data-testid="hint-target-odd-dice-roll"]', pulses: 3 };
+  },
   component: OddDice,
 };

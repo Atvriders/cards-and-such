@@ -37,7 +37,7 @@ export function DiceStreak9({ state, dispatch, onGameOver }: GameProps<DiceStrea
       {state.lastHit !== null && (
         <div className={`ds9-feedback ${state.lastHit ? "hit" : "miss"}`}>{state.lastHit ? `Hit! +${10 * state.streak}` : "Miss — streak reset"}</div>
       )}
-      <button className="ds9-btn" onClick={() => dispatch({ type: "roll" } as DiceStreak9Action)}>Roll</button>
+      <button data-testid="hint-target-dice-streak-9-roll" className="ds9-btn" onClick={() => dispatch({ type: "roll" } as DiceStreak9Action)}>Roll</button>
       <div className="ds9-target">Target streak: {state.target}</div>
     </div>
   );

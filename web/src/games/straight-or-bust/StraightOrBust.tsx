@@ -47,12 +47,12 @@ export function StraightOrBust({
 
       <div className="sob-controls">
         {canRoll && (
-          <button onClick={() => dispatch({ type: "roll" } as StraightOrBustAction)}>
+          <button data-testid="hint-target-straight-or-bust-roll" onClick={() => dispatch({ type: "roll" } as StraightOrBustAction)}>
             {state.rollsUsed === 0 ? "Roll" : `Re-roll (${3 - state.rollsUsed} left)`}
           </button>
         )}
         {state.phase === "done" && !state.gameOver && (
-          <button onClick={() => dispatch({ type: "nextRound" } as StraightOrBustAction)}>
+          <button data-testid="hint-target-straight-or-bust-nextRound" onClick={() => dispatch({ type: "nextRound" } as StraightOrBustAction)}>
             Next Round
           </button>
         )}

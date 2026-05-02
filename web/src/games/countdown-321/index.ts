@@ -16,5 +16,24 @@ export const countdown321Plugin: GamePlugin<Countdown321State, Countdown321Actio
   initialState: (seed: number, s: S) => initialState(seed, s as Countdown321Settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    const phase = (state as any).phase;
+    if (phase === "rolling") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "rolling-dice") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "preRoll") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "ready") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "playerRoll") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "roll") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "play") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "playing") return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+    if (phase === "roundOver") return { selector: '[data-testid="hint-target-countdown-321-next"]', pulses: 3 };
+    if (phase === "result") return { selector: '[data-testid="hint-target-countdown-321-next"]', pulses: 3 };
+    if (phase === "settled") return { selector: '[data-testid="hint-target-countdown-321-next"]', pulses: 3 };
+    if (phase === "banked") return { selector: '[data-testid="hint-target-countdown-321-next"]', pulses: 3 };
+    if (phase === "done") return { selector: '[data-testid="hint-target-countdown-321-next"]', pulses: 3 };
+    if (phase === "farkled") return { selector: '[data-testid="hint-target-countdown-321-next"]', pulses: 3 };
+    if (phase === "busted") return { selector: '[data-testid="hint-target-countdown-321-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-countdown-321-roll"]', pulses: 3 };
+  },
   component: Countdown321Game,
 };

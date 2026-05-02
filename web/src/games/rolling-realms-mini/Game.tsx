@@ -30,8 +30,8 @@ export function RollingRealmsMini({ state, dispatch, onGameOver }: GameProps<Rol
       )}
       {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as RollingRealmsMiniAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as RollingRealmsMiniAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-rolling-realms-mini-roll" className="g-btn" onClick={() => dispatch({ type: "roll" } as RollingRealmsMiniAction)}>Roll 5 Dice</button>}
+        {state.phase === "rolled" && <button data-testid="hint-target-rolling-realms-mini-next" className="g-btn" onClick={() => dispatch({ type: "next" } as RollingRealmsMiniAction)}>Next Round</button>}
       </div>
     </div>
   );

@@ -40,5 +40,10 @@ Tips: ones in your cup are extremely valuable as wildcards. Bid conservatively e
   initialState: (seed: number, settings: PerudoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).gameOver) return null;
+    const phase = (state as any).phase;
+    return { selector: '[data-testid="hint-target-perudo-bid"]', pulses: 3 };
+  },
   component: Perudo,
 };

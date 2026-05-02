@@ -22,14 +22,14 @@ export function SequencesDiceGame({ state, dispatch, onGameOver }: GameProps<Seq
       {state.phase === "predict" && (
         <div className="dm-row">
           {CHOICES.map((c, i) => (
-            <button key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as SequencesDiceAction)}>{c}</button>
+            <button data-testid="hint-target-sequences-dice-predict" key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as SequencesDiceAction)}>{c}</button>
           ))}
         </div>
       )}
       {state.phase === "result" && state.resultIdx !== null && state.prediction !== null && (
         <>
           <div className="dm-result">{state.prediction === state.resultIdx ? "Correct! +" + PAYOUTS[state.resultIdx] : "Wrong — Result was " + CHOICES[state.resultIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as SequencesDiceAction)}>Next</button>
+          <button data-testid="hint-target-sequences-dice-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as SequencesDiceAction)}>Next</button>
         </>
       )}
     </div>

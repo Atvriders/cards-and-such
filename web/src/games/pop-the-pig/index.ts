@@ -31,5 +31,8 @@ You can play against 1, 2, or 3 bots. The game starts fresh each time with a new
   initialState: (seed: number, settings: PopPigSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    return { selector: '[data-testid="hint-target-pop-the-pig-roll"]', pulses: 3 };
+  },
   component: PopThePig,
 };

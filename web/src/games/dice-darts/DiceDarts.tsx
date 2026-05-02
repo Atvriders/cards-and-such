@@ -50,7 +50,7 @@ export function DiceDarts({
         </div>
       )}
 
-      <button
+      <button data-testid="hint-target-dice-darts-throw"
         className="dd-btn"
         onClick={() => dispatch({ type: "throw" } as DiceDartsAction)}
         disabled={state.gameOver}

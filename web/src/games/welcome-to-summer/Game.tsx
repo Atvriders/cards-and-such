@@ -31,7 +31,7 @@ export function WelcomeToSummerGame({ state, dispatch, onGameOver }: GameProps<W
               const val = state.values[idx];
               const canPlace = state.phase === "placing" && state.lastRoll !== null && legalAt(state.values, idx, state.lastRoll);
               return (
-                <button
+                <button data-testid="hint-target-welcome-to-summer-place"
                   key={c}
                   className={`wsu-slot${val !== null ? " wsu-filled" : ""}${canPlace ? " wsu-legal" : ""}`}
                   disabled={val !== null || !canPlace}
@@ -44,10 +44,10 @@ export function WelcomeToSummerGame({ state, dispatch, onGameOver }: GameProps<W
       </div>
       <div className="wsu-controls">
         {state.phase === "rolling" && (
-          <button className="wsu-btn wsu-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToSummerAction)}>Roll</button>
+          <button data-testid="hint-target-welcome-to-summer-roll" className="wsu-btn wsu-primary" onClick={() => dispatch({ type: "roll" } as WelcomeToSummerAction)}>Roll</button>
         )}
         {state.phase === "placing" && (
-          <button className="wsu-btn wsu-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToSummerAction)}>Skip (−1)</button>
+          <button data-testid="hint-target-welcome-to-summer-skip" className="wsu-btn wsu-skip" onClick={() => dispatch({ type: "skip" } as WelcomeToSummerAction)}>Skip (−1)</button>
         )}
         <button className="wsu-btn wsu-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToSummerAction)}>Reset</button>
       </div>

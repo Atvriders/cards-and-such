@@ -21,12 +21,12 @@ export function Countdown321Game({ state, dispatch, onGameOver }: GameProps<Coun
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "roll" } as Countdown321Action)}>Roll</button>
+        <button data-testid="hint-target-countdown-321-roll" className="dm-btn alt" onClick={() => dispatch({ type: "roll" } as Countdown321Action)}>Roll</button>
       )}
       {state.phase === "result" && state.lastIdx !== null && (
         <>
           <div className="dm-result">{CHOICES[state.lastIdx]} — +{PAYOUTS[state.lastIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as Countdown321Action)}>Next</button>
+          <button data-testid="hint-target-countdown-321-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as Countdown321Action)}>Next</button>
         </>
       )}
     </div>

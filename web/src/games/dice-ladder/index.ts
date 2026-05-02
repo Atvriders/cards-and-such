@@ -37,5 +37,10 @@ Tips: With one die, rolls average 3.5, so a 15-rung ladder takes roughly 4–5 t
   initialState: (seed: number, s: DiceLadderSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if ((state as any).won) return null;
+    if ((state as any).gameOver) return null;
+    return { selector: '[data-testid="hint-target-dice-ladder-roll"]', pulses: 3 };
+  },
   component: DiceLadder,
 };

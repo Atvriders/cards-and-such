@@ -22,14 +22,14 @@ export function CatchDiceGame({ state, dispatch, onGameOver }: GameProps<CatchDi
       {state.phase === "predict" && (
         <div className="dm-row">
           {CHOICES.map((c, i) => (
-            <button key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as CatchDiceAction)}>{c}</button>
+            <button data-testid="hint-target-catch-dice-predict" key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as CatchDiceAction)}>{c}</button>
           ))}
         </div>
       )}
       {state.phase === "result" && state.resultIdx !== null && state.prediction !== null && (
         <>
           <div className="dm-result">{state.prediction === state.resultIdx ? "Correct! +" + PAYOUTS[state.resultIdx] : "Wrong — Result was " + CHOICES[state.resultIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as CatchDiceAction)}>Next</button>
+          <button data-testid="hint-target-catch-dice-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as CatchDiceAction)}>Next</button>
         </>
       )}
     </div>
