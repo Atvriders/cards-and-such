@@ -29,7 +29,11 @@ export type ThemeId =
   | "neon"
   | "candy"
   | "monochrome"
-  | "autumn";
+  | "autumn"
+  | "winter"
+  | "spring"
+  | "summer"
+  | "holiday";
 
 export interface Theme {
   id: ThemeId;
@@ -288,6 +292,74 @@ export const THEMES: Theme[] = [
       "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.5), transparent 60%)," +
       "linear-gradient(180deg, #b45309 0%, #9a3412 60%, #7c2d12 100%)",
     accent: "rgba(251, 146, 60, 0.50)",
+  },
+  {
+    id: "winter",
+    label: "Winter",
+    /* Icy cool blue + frosted white — snow & ice. */
+    swatch: "linear-gradient(180deg, #e0f2fe 0%, #7dd3fc 55%, #0c4a6e 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 30% -10%, rgba(186, 230, 253, 0.45), transparent 60%)," +
+      "radial-gradient(900px 500px at 80% 20%, rgba(125, 211, 252, 0.35), transparent 60%)," +
+      "radial-gradient(900px 600px at 50% 120%, rgba(255, 255, 255, 0.25), transparent 60%)," +
+      "linear-gradient(180deg, #e0f2fe 0%, #bae6fd 60%, #7dd3fc 100%)",
+    feltGradient:
+      "repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 5px)," +
+      "repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 5px)," +
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.40), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(8, 47, 73, 0.20), transparent 60%)," +
+      "linear-gradient(180deg, #e0f7ff 0%, #bae6fd 55%, #7dd3fc 100%)",
+    accent: "rgba(56, 189, 248, 0.55)",
+  },
+  {
+    id: "spring",
+    label: "Spring",
+    /* Pastel green + soft pink — fresh blossoms. */
+    swatch: "linear-gradient(180deg, #bbf7d0 0%, #fbcfe8 55%, #fce7f3 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 20% -10%, rgba(187, 247, 208, 0.55), transparent 60%)," +
+      "radial-gradient(900px 500px at 80% 20%, rgba(251, 207, 232, 0.50), transparent 60%)," +
+      "radial-gradient(900px 600px at 50% 120%, rgba(252, 231, 243, 0.45), transparent 60%)," +
+      "linear-gradient(180deg, #f0fdf4 0%, #fdf2f8 100%)",
+    feltGradient:
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.30), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.10), transparent 60%)," +
+      "linear-gradient(180deg, #bbf7d0 0%, #fbcfe8 55%, #fce7f3 100%)",
+    accent: "rgba(244, 114, 182, 0.55)",
+  },
+  {
+    id: "summer",
+    label: "Summer",
+    /* Sunny yellow + bright turquoise — beach & sunshine. */
+    swatch: "linear-gradient(180deg, #fde047 0%, #2dd4bf 60%, #0e7490 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 25% -10%, rgba(253, 224, 71, 0.40), transparent 60%)," +
+      "radial-gradient(900px 500px at 85% 25%, rgba(45, 212, 191, 0.36), transparent 60%)," +
+      "radial-gradient(900px 600px at 50% 120%, rgba(14, 116, 144, 0.30), transparent 60%)," +
+      "linear-gradient(180deg, #fef9c3 0%, #ccfbf1 60%, #67e8f9 100%)",
+    feltGradient:
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.25), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.20), transparent 60%)," +
+      "linear-gradient(180deg, #fde047 0%, #2dd4bf 60%, #0e7490 100%)",
+    accent: "rgba(250, 204, 21, 0.55)",
+  },
+  {
+    id: "holiday",
+    label: "Holiday",
+    /* Festive deep red + evergreen — classic Christmas. */
+    swatch: "linear-gradient(180deg, #b91c1c 0%, #166534 60%, #14532d 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 25% -10%, rgba(239, 68, 68, 0.28), transparent 60%)," +
+      "radial-gradient(900px 500px at 80% 20%, rgba(34, 197, 94, 0.24), transparent 60%)," +
+      "radial-gradient(900px 600px at 50% 120%, rgba(0, 0, 0, 0.55), transparent 60%)," +
+      "linear-gradient(180deg, #2a0a0a 0%, #0f1f12 100%)",
+    feltGradient:
+      "repeating-linear-gradient(45deg, rgba(255,255,255,0.030) 0 1px, transparent 1px 4px)," +
+      "repeating-linear-gradient(-45deg, rgba(0,0,0,0.030) 0 1px, transparent 1px 4px)," +
+      "radial-gradient(ellipse at 30% -10%, rgba(239, 68, 68, 0.30), transparent 55%)," +
+      "radial-gradient(ellipse at 70% 120%, rgba(22, 101, 52, 0.30), transparent 55%)," +
+      "linear-gradient(180deg, #b91c1c 0%, #7f1d1d 40%, #166534 75%, #14532d 100%)",
+    accent: "rgba(248, 113, 113, 0.55)",
   },
 ];
 
