@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { beforeEach, describe, expect, it } from "vitest";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import SettingsPage, { _buildExportSnapshot } from "./SettingsPage.js";
 import { KNOWN_KEYS } from "../platform/userdata.js";
@@ -76,25 +76,41 @@ describe("SettingsPage", () => {
     }
   });
 
-  it("clear-all aborts when the user cancels the confirm prompt", () => {
+  it("clear-all aborts when the user cancels the confirm dialog", async () => {
     localStorage.setItem("cards-ratings", '{"klondike":4}');
-    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(false);
     renderPage();
     fireEvent.click(screen.getByTestId("settings-clear"));
+    // The dialog must appear and offer a Cancel button.
+    const cancel = await screen.findByTestId("confirm-no");
+    fireEvent.click(cancel);
     expect(localStorage.getItem("cards-ratings")).toBe('{"klondike":4}');
-    confirmSpy.mockRestore();
   });
 
-  it("clear-all wipes non-pref keys when confirmed", () => {
+  it("clear-all requires typing DELETE before confirm activates", async () => {
     localStorage.setItem("cards-ratings", '{"klondike":4}');
     localStorage.setItem("cards-best-times", '{"freecell":120}');
-    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
     renderPage();
     fireEvent.click(screen.getByTestId("settings-clear"));
+    const yes = (await screen.findByTestId("confirm-yes")) as HTMLButtonElement;
+    // Confirm starts disabled until the user types the magic word.
+    expect(yes.disabled).toBe(true);
+    const input = screen.getByTestId("confirm-input") as HTMLInputElement;
+    fireEvent.change(input, { target: { value: "DELETE" } });
+    expect(yes.disabled).toBe(false);
+    await act(async () => {
+      fireEvent.click(yes);
+    });
     // Pref keys may be re-written to defaults by render-effects; stats /
     // ratings are not auto-re-written, so they should remain null.
     expect(localStorage.getItem("cards-ratings")).toBeNull();
     expect(localStorage.getItem("cards-best-times")).toBeNull();
-    confirmSpy.mockRestore();
+  });
+
+  it("renders the confirm dialog with title and message", async () => {
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-reset-ratings"));
+    const dlg = await screen.findByTestId("confirm-dialog");
+    expect(dlg).toBeInTheDocument();
+    expect(dlg.getAttribute("role")).toBe("alertdialog");
   });
 });

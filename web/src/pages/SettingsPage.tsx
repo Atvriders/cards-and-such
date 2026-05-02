@@ -46,6 +46,7 @@ import { useToast } from "../platform/ui/Toast.js";
 import { t } from "../platform/i18n.js";
 import { resetWelcomeTutorial, setCoachmarkPending } from "../platform/tutorials.js";
 import { track, getEvents, clearEvents, type AnalyticsEvent } from "../platform/analytics.js";
+import { useStandaloneConfirm } from "../platform/ConfirmDialog.js";
 import "./SettingsPage.css";
 
 type CardBack = "classic-blue" | "red-weave" | "plain";
@@ -216,6 +217,9 @@ export default function SettingsPage(): JSX.Element {
   // Debounce timer for the volume-preview tone. We don't want to fire one
   // tone per drag event — wait 80ms after the last change to play.
   const volumePreviewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Theme-styled confirm dialog — replaces native window.confirm() so
+  // every destructive action gets the same keyboard-accessible UX.
+  const { showConfirm, dialog: confirmDialog } = useStandaloneConfirm();
 
   function refreshFromStorage() {
     setTheme(loadSavedThemeChoice());
@@ -255,9 +259,14 @@ export default function SettingsPage(): JSX.Element {
     const file = e.target.files?.[0];
     e.target.value = "";
     if (!file) return;
-    if (!window.confirm("Import will overwrite existing settings, ratings, and stats with the data in this file. Continue?")) {
-      return;
-    }
+    const ok = await showConfirm({
+      title: "Import data?",
+      message:
+        "Import will overwrite existing settings, ratings, and stats with the data in this file. Continue?",
+      confirmLabel: "Import",
+      danger: true,
+    });
+    if (!ok) return;
     try {
       const text = await file.text();
       const result = importAll(text);
@@ -289,19 +298,40 @@ export default function SettingsPage(): JSX.Element {
   // confirm. Both fire a toast so the empty-state isn't surprising and
   // avoid `location.reload()` because the lobby already listens to
   // storage events and re-pulls automatically.
-  function handleResetRatings() {
-    if (!window.confirm("Erase all your star ratings? This can't be undone.")) return;
+  async function handleResetRatings() {
+    const ok = await showConfirm({
+      title: "Reset ratings?",
+      message: "Erase all your star ratings? This can't be undone.",
+      confirmLabel: "Reset ratings",
+      danger: true,
+    });
+    if (!ok) return;
     clearAllRatings();
     useToast.getState().push("success", "Cleared all ratings");
   }
-  function handleResetFavorites() {
-    if (!window.confirm("Remove every favorited game? This can't be undone.")) return;
+  async function handleResetFavorites() {
+    const ok = await showConfirm({
+      title: "Reset favorites?",
+      message: "Remove every favorited game? This can't be undone.",
+      confirmLabel: "Reset favorites",
+      danger: true,
+    });
+    if (!ok) return;
     clearAllFavorites();
     useToast.getState().push("success", "Cleared all favorites");
   }
 
-  function handleClearAll() {
-    if (!window.confirm("This will erase all progress. Continue?")) return;
+  async function handleClearAll() {
+    const ok = await showConfirm({
+      title: "Clear all data?",
+      message:
+        "This will erase all progress, ratings, stats, and settings on this device. This can't be undone.",
+      confirmLabel: "Clear all data",
+      danger: true,
+      requireText: "DELETE",
+      requireTextLabel: 'Type "DELETE" to confirm',
+    });
+    if (!ok) return;
     clearKeys(KNOWN_KEYS);
     useToast.getState().push("success", "Cleared all saved data");
     // Apply defaults visibly, then reload so any in-memory caches reset too.
@@ -417,6 +447,7 @@ export default function SettingsPage(): JSX.Element {
 
   return (
     <div className="settings-page" data-testid="settings-page">
+      {confirmDialog}
       <header className="settings-header">
         <h1>{t("settings.title")}</h1>
         <p className="settings-subtitle">

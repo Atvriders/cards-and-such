@@ -1,0 +1,129 @@
+/* ConfirmDialog — small theme-styled modal that replaces native confirm().
+   Uses CSS variables (with sensible fallbacks) so it picks up the active
+   palette / light mode automatically. */
+
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(2, 6, 23, 0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: confirm-fade-in 120ms ease-out;
+}
+
+@keyframes confirm-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirm-dialog {
+  background: var(--surface-100, #1e2236);
+  color: var(--text-100, #f1f5f9);
+  border: 1px solid var(--border-100, rgba(148, 163, 184, 0.22));
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  width: min(440px, 100%);
+  padding: 1.25rem 1.35rem 1.1rem;
+  outline: none;
+  animation: confirm-slide-in 140ms ease-out;
+}
+
+@keyframes confirm-slide-in {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+.confirm-dialog-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem 0;
+  color: var(--text-100, #f1f5f9);
+}
+
+.confirm-dialog-message {
+  margin: 0 0 1rem 0;
+  color: var(--text-300, #cbd5e1);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.confirm-dialog-input-label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-400, #94a3b8);
+  margin: 0 0 0.35rem 0;
+}
+
+.confirm-dialog-input {
+  width: 100%;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: var(--text-100, #f1f5f9);
+  margin: 0 0 1rem 0;
+  outline: none;
+  transition: border-color 120ms ease;
+}
+.confirm-dialog-input:focus {
+  border-color: rgba(129, 140, 248, 0.7);
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.confirm-dialog-btn {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  color: var(--text-200, #e2e8f0);
+  border-radius: 999px;
+  padding: 0.4rem 1.05rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+}
+.confirm-dialog-btn:hover:not(:disabled) {
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.5);
+  color: var(--text-100, #f1f5f9);
+}
+.confirm-dialog-btn:focus-visible {
+  outline: 2px solid rgba(129, 140, 248, 0.85);
+  outline-offset: 2px;
+}
+.confirm-dialog-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.confirm-dialog-btn--primary {
+  background: rgba(129, 140, 248, 0.18);
+  border-color: rgba(129, 140, 248, 0.55);
+  color: var(--text-100, #f1f5f9);
+}
+.confirm-dialog-btn--primary:hover:not(:disabled) {
+  background: rgba(129, 140, 248, 0.3);
+  border-color: rgba(129, 140, 248, 0.75);
+}
+
+.confirm-dialog-btn--danger {
+  background: var(--danger-500, #dc2626);
+  border-color: var(--danger-600, #b91c1c);
+  color: #fff;
+}
+.confirm-dialog-btn--danger:hover:not(:disabled) {
+  background: var(--danger-600, #b91c1c);
+  border-color: var(--danger-700, #991b1b);
+  color: #fff;
+}
