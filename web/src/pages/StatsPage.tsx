@@ -107,6 +107,33 @@ function hintsTotal(): number {
   return total;
 }
 
+/** Per-game hint usage. Reads `cards-hints-used` (a `Record<gameId, number>`)
+ *  and returns the count for `id`, or 0 when missing/corrupt. Powers the
+ *  StatsPage drill-down "Hints used" row alongside its undo counterpart. */
+function hintsUsedFor(id: string): number {
+  const v = progressJSON<Record<string, number>>("cards-hints-used");
+  if (!v || typeof v !== "object") return 0;
+  const n = v[id];
+  return typeof n === "number" && Number.isFinite(n) && n >= 0 ? n : 0;
+}
+
+function undosTotal(): number {
+  const v = progressJSON<Record<string, number>>("cards-undos-used");
+  if (!v || typeof v !== "object") return 0;
+  let total = 0;
+  for (const val of Object.values(v)) if (typeof val === "number" && Number.isFinite(val)) total += val;
+  return total;
+}
+
+/** Per-game undo usage. Mirror of {@link hintsUsedFor} for the
+ *  `cards-undos-used` blob written by PlayPage's `undo()` callback. */
+function undosUsedFor(id: string): number {
+  const v = progressJSON<Record<string, number>>("cards-undos-used");
+  if (!v || typeof v !== "object") return 0;
+  const n = v[id];
+  return typeof n === "number" && Number.isFinite(n) && n >= 0 ? n : 0;
+}
+
 function progressFor(a: Achievement, s: StatsState): { cur: number; goal: number } {
   switch (a.id) {
     case "first-win": return { cur: Math.min(s.totalWins, 1), goal: 1 };
@@ -512,6 +539,8 @@ export default function StatsPage(): JSX.Element {
       bestTime: bestTimeFor(drillId),
       lastPlayed: lastPlayedFor(drillId),
       rating: ratingFor(drillId),
+      hintsUsed: hintsUsedFor(drillId),
+      undosUsed: undosUsedFor(drillId),
     };
   }, [drillId, stats]);
 
@@ -578,6 +607,8 @@ export default function StatsPage(): JSX.Element {
           <div className="stats-summary">
             <div className="stat-card" data-testid="stat-total-played"><div className="stat-label">Games played</div><div className="stat-value">{category === "all" ? stats.totalPlayed : totalsForFilter.played}</div></div>
             <div className="stat-card" data-testid="stat-total-wins"><div className="stat-label">Total wins</div><div className="stat-value">{category === "all" ? stats.totalWins : totalsForFilter.wins}</div></div>
+            <div className="stat-card" data-testid="stat-total-hints"><div className="stat-label">Total hints used</div><div className="stat-value">{hintsTotal()}</div></div>
+            <div className="stat-card" data-testid="stat-total-undos"><div className="stat-label">Total undos used</div><div className="stat-value">{undosTotal()}</div></div>
           </div>
           <div className="stats-range-row">
             <div className="stats-chart-label">Last {range} days</div>
@@ -662,6 +693,8 @@ export default function StatsPage(): JSX.Element {
                 <li><span>Best time</span><em>{drillInfo.bestTime != null ? formatBestTime(drillInfo.bestTime) : "—"}</em></li>
                 <li><span>Last played</span><em>{drillInfo.lastPlayed != null ? formatRelativeTime(drillInfo.lastPlayed) : "—"}</em></li>
                 <li><span>Your rating</span><em>{drillInfo.rating != null ? `${drillInfo.rating.toFixed(1)}★` : "—"}</em></li>
+                <li data-testid="stats-drill-hints"><span>Hints used</span><em>{drillInfo.hintsUsed}</em></li>
+                <li data-testid="stats-drill-undos"><span>Undos used</span><em>{drillInfo.undosUsed}</em></li>
               </ul>
               <Link to={`/play/${drillInfo.id}`} className="btn btn-primary stats-drill-play" data-testid="stats-drill-play">Play</Link>
             </div>

@@ -54,6 +54,7 @@ export const KNOWN_KEYS: readonly string[] = [
   "cards-hints-used",
   // undo
   "cards-show-undo-count",
+  "cards-undos-used",
   "cas:lastSeenHighScoreId",
 ] as const;
 

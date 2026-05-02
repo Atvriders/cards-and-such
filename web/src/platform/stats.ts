@@ -642,6 +642,12 @@ export function favoriteCategory(s: StatsState): string | null {
 export function resetStats(): void {
   try {
     localStorage.removeItem(STORAGE_KEY);
+    // Per-game hint and undo counters are derived signals tied to the
+    // play history — clearing the stats blob without them would leave
+    // the StatsPage drill-down (and the "Hint Reliant" achievement
+    // probe) reporting numbers that no longer correspond to anything.
+    localStorage.removeItem("cards-hints-used");
+    localStorage.removeItem("cards-undos-used");
   } catch {
     /* ignore */
   }

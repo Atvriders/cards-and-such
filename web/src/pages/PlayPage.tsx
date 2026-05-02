@@ -134,6 +134,11 @@ function parseSeed(raw: string | null): number | null {
  *  JSON object mapping gameId → count. Read-only here besides the
  *  `bumpHintsUsed` writer below. */
 const LS_HINTS_USED = "cards-hints-used";
+/** Per-game undo-usage counter. Stored under `cards-undos-used` as a
+ *  JSON object mapping gameId → count. Bumped each time the user
+ *  triggers `undo()` (button or Ctrl/Cmd+Z) so the StatsPage drill-down
+ *  can surface "Undos used" alongside hints. */
+const LS_UNDOS_USED = "cards-undos-used";
 const LS_HINTS_ENABLED = "cards-hints-enabled";
 /** Tiny global counter — bumped each time the user copies a friend-mode
  *  link. Pure stats fun, no behavior keys off it. */
@@ -240,6 +245,26 @@ function bumpHintsUsed(gameId: string): void {
     const parsed = raw ? (JSON.parse(raw) as Record<string, number>) : {};
     parsed[gameId] = (parsed[gameId] ?? 0) + 1;
     localStorage.setItem(LS_HINTS_USED, JSON.stringify(parsed));
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Per-game undo counter writer. Mirror of {@link bumpHintsUsed} for the
+ *  `cards-undos-used` blob. Tolerates a corrupt entry by treating it as
+ *  zero so we never throw out of the undo path. */
+function bumpUndosUsed(gameId: string): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    const raw = localStorage.getItem(LS_UNDOS_USED);
+    const parsed = raw ? (JSON.parse(raw) as Record<string, number>) : {};
+    if (!parsed || typeof parsed !== "object") {
+      localStorage.setItem(LS_UNDOS_USED, JSON.stringify({ [gameId]: 1 }));
+      return;
+    }
+    const cur = typeof parsed[gameId] === "number" && Number.isFinite(parsed[gameId]) ? parsed[gameId] : 0;
+    parsed[gameId] = cur + 1;
+    localStorage.setItem(LS_UNDOS_USED, JSON.stringify(parsed));
   } catch {
     /* ignore */
   }
@@ -935,6 +960,10 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     setUndoStack((stack) => {
       if (stack.length === 0) return stack;
       const prev = stack[stack.length - 1];
+      // Bump the per-game undo counter only when an actual frame is
+      // popped — empty-stack invocations are no-ops and shouldn't inflate
+      // the StatsPage drill-down. Mirror of `bumpHintsUsed` semantics.
+      bumpUndosUsed(plugin.id);
       // Snapshot the *current* state onto redoStack before rolling back so
       // a subsequent `redo()` can step forward again. We capture state via
       // the functional setState to avoid stale-closure reads.
@@ -949,7 +978,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       });
       return stack.slice(0, -1);
     });
-  }, [phase]);
+  }, [phase, plugin.id]);
 
   /**
    * Mirror of `undo`: pop the most recent frame off redoStack and restore
