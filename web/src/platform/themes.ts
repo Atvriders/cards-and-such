@@ -24,7 +24,12 @@ export type ThemeId =
   | "aurora"
   | "sunset"
   | "forest"
-  | "cyberpunk";
+  | "cyberpunk"
+  | "ocean"
+  | "neon"
+  | "candy"
+  | "monochrome"
+  | "autumn";
 
 export interface Theme {
   id: ThemeId;
@@ -202,6 +207,88 @@ export const THEMES: Theme[] = [
       "linear-gradient(180deg, #0a0a14 0%, #11111d 60%, #07070d 100%)",
     accent: "rgba(34, 211, 238, 0.55)",
   },
+  {
+    id: "ocean",
+    label: "Ocean",
+    /* Deep sea teal/cyan tones. */
+    swatch: "linear-gradient(180deg, #0e7490 0%, #155e75 60%, #082f49 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 50% -10%, rgba(34, 211, 238, 0.22), transparent 60%)," +
+      "radial-gradient(900px 500px at 50% 120%, rgba(0, 0, 0, 0.55), transparent 60%)," +
+      "linear-gradient(180deg, #082f49 0%, #051d2e 100%)",
+    feltGradient:
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.12), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.5), transparent 60%)," +
+      "linear-gradient(180deg, #0e7490 0%, #155e75 60%, #0c4a6e 100%)",
+    accent: "rgba(34, 211, 238, 0.50)",
+  },
+  {
+    id: "neon",
+    label: "Neon",
+    /* Electric lime + magenta on near-black. */
+    swatch: "linear-gradient(180deg, #050505 0%, #d946ef 55%, #a3e635 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 15% -10%, rgba(217, 70, 239, 0.26), transparent 60%)," +
+      "radial-gradient(900px 500px at 90% 30%, rgba(163, 230, 53, 0.22), transparent 60%)," +
+      "linear-gradient(180deg, #050507 0%, #0a0a10 100%)",
+    feltGradient:
+      "radial-gradient(ellipse at 20% 0%, rgba(217, 70, 239, 0.32), transparent 55%)," +
+      "radial-gradient(ellipse at 80% 110%, rgba(163, 230, 53, 0.26), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.55), transparent 70%)," +
+      "linear-gradient(180deg, #0a0a14 0%, #11111d 60%, #050508 100%)",
+    accent: "rgba(217, 70, 239, 0.55)",
+  },
+  {
+    id: "candy",
+    label: "Candy",
+    /* Pastel pink + lavender + mint. */
+    swatch: "linear-gradient(180deg, #fbcfe8 0%, #ddd6fe 55%, #a7f3d0 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 20% -10%, rgba(251, 207, 232, 0.50), transparent 60%)," +
+      "radial-gradient(900px 500px at 80% 20%, rgba(221, 214, 254, 0.45), transparent 60%)," +
+      "radial-gradient(900px 600px at 50% 120%, rgba(167, 243, 208, 0.40), transparent 60%)," +
+      "linear-gradient(180deg, #fdf2f8 0%, #f5f3ff 100%)",
+    feltGradient:
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.30), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.10), transparent 60%)," +
+      "linear-gradient(180deg, #fbcfe8 0%, #ddd6fe 55%, #a7f3d0 100%)",
+    accent: "rgba(244, 114, 182, 0.55)",
+  },
+  {
+    id: "monochrome",
+    label: "Monochrome",
+    /* Pure grayscale — black to charcoal. */
+    swatch: "linear-gradient(180deg, #404040 0%, #1f1f1f 60%, #050505 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 50% -10%, rgba(255, 255, 255, 0.10), transparent 60%)," +
+      "radial-gradient(900px 500px at 50% 120%, rgba(0, 0, 0, 0.65), transparent 60%)," +
+      "linear-gradient(180deg, #161616 0%, #050505 100%)",
+    feltGradient:
+      "repeating-linear-gradient(45deg, rgba(255,255,255,0.020) 0 1px, transparent 1px 4px)," +
+      "repeating-linear-gradient(-45deg, rgba(0,0,0,0.030) 0 1px, transparent 1px 4px)," +
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.08), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.55), transparent 60%)," +
+      "linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 60%, #0a0a0a 100%)",
+    accent: "rgba(229, 229, 229, 0.45)",
+  },
+  {
+    id: "autumn",
+    label: "Autumn",
+    /* Rust, amber, burnt orange — falling leaves. */
+    swatch: "linear-gradient(180deg, #b45309 0%, #9a3412 60%, #7c2d12 100%)",
+    bgGradient:
+      "radial-gradient(1100px 600px at 30% -10%, rgba(217, 119, 6, 0.24), transparent 60%)," +
+      "radial-gradient(900px 500px at 80% 20%, rgba(194, 65, 12, 0.22), transparent 60%)," +
+      "radial-gradient(900px 600px at 50% 120%, rgba(0, 0, 0, 0.55), transparent 60%)," +
+      "linear-gradient(180deg, #2a1407 0%, #1a0a04 100%)",
+    feltGradient:
+      "repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 4px)," +
+      "repeating-linear-gradient(-45deg, rgba(0,0,0,0.030) 0 1px, transparent 1px 4px)," +
+      "radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.10), transparent 55%)," +
+      "radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.5), transparent 60%)," +
+      "linear-gradient(180deg, #b45309 0%, #9a3412 60%, #7c2d12 100%)",
+    accent: "rgba(251, 146, 60, 0.50)",
+  },
 ];
 
 export const DEFAULT_THEME: ThemeId = "midnight";
@@ -213,11 +300,21 @@ export type ThemeChoice = ThemeId | typeof CUSTOM_THEME_ID;
 
 /** Persisted shape of the user's custom theme overrides. */
 export interface CustomThemeConfig {
+  /** Page background base color as a `#rrggbb` hex string. */
+  bg: string;
+  /** Surface / panel base color as a `#rrggbb` hex string. */
+  surface: string;
   /** Primary accent color as a `#rrggbb` hex string. */
   accent: string;
 }
 
-export const DEFAULT_CUSTOM: CustomThemeConfig = { accent: "#7c8cf8" };
+export const DEFAULT_CUSTOM: CustomThemeConfig = {
+  bg: "#0a0c16",
+  surface: "#14172a",
+  accent: "#7c8cf8",
+};
+
+const HEX_RE = /^#[0-9a-fA-F]{6}$/;
 
 export function getTheme(id: ThemeId | string | null | undefined): Theme {
   const found = THEMES.find((t) => t.id === id);
@@ -228,14 +325,22 @@ export function getTheme(id: ThemeId | string | null | undefined): Theme {
  * Apply CSS variables for a theme to :root *without* persisting. Used for
  * hover-preview in the picker so we can revert cleanly on mouseleave.
  * If `accentOverride` is provided (used by the custom theme) it replaces the
- * theme's built-in accent.
+ * theme's built-in accent. `bgOverride` / `surfaceOverride` likewise replace
+ * the theme's bg gradient and felt/surface — used by the custom theme so all
+ * three CSS vars reflect the user's picks.
  */
-export function previewTheme(id: ThemeId, accentOverride?: string): void {
+export function previewTheme(
+  id: ThemeId,
+  accentOverride?: string,
+  bgOverride?: string,
+  surfaceOverride?: string,
+): void {
   const theme = getTheme(id);
   const root = typeof document !== "undefined" ? document.documentElement : null;
   if (!root) return;
-  root.style.setProperty("--theme-bg", theme.bgGradient);
-  root.style.setProperty("--theme-felt", theme.feltGradient);
+  root.style.setProperty("--theme-bg", bgOverride ?? theme.bgGradient);
+  root.style.setProperty("--theme-felt", surfaceOverride ?? theme.feltGradient);
+  root.style.setProperty("--theme-surface", surfaceOverride ?? theme.feltGradient);
   root.style.setProperty("--theme-accent", accentOverride ?? theme.accent);
   root.setAttribute("data-theme", theme.id);
 }
@@ -256,15 +361,21 @@ export function applyTheme(id: ThemeId): void {
   }
 }
 
-/** Read the saved custom-theme JSON, falling back to DEFAULT_CUSTOM. */
+/** Read the saved custom-theme JSON, falling back to DEFAULT_CUSTOM.
+ *  Each field is validated independently so legacy blobs that only set
+ *  `accent` (the v1 schema) still load with sensible bg/surface defaults. */
 export function loadCustomTheme(): CustomThemeConfig {
   try {
     if (typeof localStorage !== "undefined") {
       const raw = localStorage.getItem(CUSTOM_STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<CustomThemeConfig> | null;
-        if (parsed && typeof parsed.accent === "string" && /^#[0-9a-fA-F]{6}$/.test(parsed.accent)) {
-          return { accent: parsed.accent };
+        if (parsed && typeof parsed === "object") {
+          const out = { ...DEFAULT_CUSTOM };
+          if (typeof parsed.bg === "string" && HEX_RE.test(parsed.bg)) out.bg = parsed.bg;
+          if (typeof parsed.surface === "string" && HEX_RE.test(parsed.surface)) out.surface = parsed.surface;
+          if (typeof parsed.accent === "string" && HEX_RE.test(parsed.accent)) out.accent = parsed.accent;
+          return out;
         }
       }
     }
@@ -286,12 +397,13 @@ export function saveCustomTheme(cfg: CustomThemeConfig): void {
 }
 
 /**
- * Apply the custom theme: uses Midnight as the base bg/felt and overrides
- * `--theme-accent` with the user's color. v1 keeps surfaces stable so the
- * accent change is what reads on screen. Persists `cards-bg-theme=custom`.
+ * Apply the custom theme: overrides `--theme-bg`, `--theme-felt` /
+ * `--theme-surface`, and `--theme-accent` with the user's three picks
+ * (using Midnight as the base for any vars that are not overridden).
+ * Persists `cards-bg-theme=custom`.
  */
 export function applyCustomTheme(cfg: CustomThemeConfig): void {
-  previewTheme(DEFAULT_THEME, cfg.accent);
+  previewTheme(DEFAULT_THEME, cfg.accent, cfg.bg, cfg.surface);
   const root = typeof document !== "undefined" ? document.documentElement : null;
   if (root) root.setAttribute("data-theme", CUSTOM_THEME_ID);
   saveCustomTheme(cfg);
