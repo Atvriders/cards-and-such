@@ -1,0 +1,96 @@
+.speed-test-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: system-ui, sans-serif;
+  user-select: none;
+}
+
+.speed-test-info {
+  display: flex;
+  gap: 18px;
+  font-size: 1rem;
+  color: #4a5568;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.speed-test-info strong { color: #1a202c; }
+
+.speed-test-arena {
+  position: relative;
+  width: 480px;
+  height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #2d3748;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.speed-test-arena.speed-test-arena--waiting {
+  background: #2c5282;
+  cursor: wait;
+}
+
+.speed-test-arena.speed-test-arena--ready {
+  background: #1a202c;
+  cursor: crosshair;
+}
+
+.speed-test-arena.speed-test-arena--ended {
+  background: #1a202c;
+  cursor: default;
+}
+
+.speed-test-prompt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ebf8ff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  pointer-events: none;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.speed-test-target {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #9ae6b4, #38a169 60%, #276749);
+  border: 3px solid #fff;
+  box-shadow: 0 0 16px rgba(72, 187, 120, 0.7);
+  animation: speed-test-pop 0.1s ease-out;
+}
+
+@keyframes speed-test-pop {
+  from { transform: scale(0.4); opacity: 0.6; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.speed-test-summary {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #276749;
+  padding: 14px 24px;
+  border: 2px solid #48bb78;
+  border-radius: 8px;
+  background: #f0fff4;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 280px;
+}
+
+.speed-test-summary--new-best {
+  color: #b7791f;
+  border-color: #d69e2e;
+  background: #fffff0;
+}

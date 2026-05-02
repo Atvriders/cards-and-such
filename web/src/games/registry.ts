@@ -891,6 +891,7 @@ import { chimpTestPlugin } from "./chimp-test/index.js";
 import { stroopTestPlugin } from "./stroop-test/index.js";
 import { digitSpanPlugin } from "./digit-span/index.js";
 import { aimTrainerPlugin } from "./aim-trainer/index.js";
+import { speedTestMiniPlugin } from "./speed-test-mini/index.js";
 import { visualMemoryGridPlugin } from "./visual-memory-grid/index.js";
 import { homeRunDerbyPlugin } from "./home-run-derby/index.js";
 import { soccerPenaltyPlugin } from "./soccer-penalty/index.js";
@@ -5113,6 +5114,7 @@ export const GAMES: GamePlugin[] = [
   stroopTestPlugin as unknown as GamePlugin,
   digitSpanPlugin as unknown as GamePlugin,
   aimTrainerPlugin as unknown as GamePlugin,
+  speedTestMiniPlugin as unknown as GamePlugin,
   visualMemoryGridPlugin as unknown as GamePlugin,
   homeRunDerbyPlugin as unknown as GamePlugin,
   soccerPenaltyPlugin as unknown as GamePlugin,
