@@ -1,9 +1,10 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ParallelsState, ParallelsAction, ParallelsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, ruleset } from "./state.js";
 import { ParallelsGame } from "./Game.js";
 
+import { canMove } from "../../engines/tableau/moves.js";
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const parallelsSolPlugin: GamePlugin<ParallelsState, ParallelsAction, typeof settings> = {
@@ -17,5 +18,28 @@ export const parallelsSolPlugin: GamePlugin<ParallelsState, ParallelsAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as ParallelsSettings),
   reducer,
   isTerminal,
+  hint: (state: ParallelsState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1","f2","f3","f4","f5","f6","f7","f8"];
+    const TABLEAU_IDS = ["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10"];
+    const sources = ["waste", ...TABLEAU_IDS];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, ruleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    const stock = state.piles.find((p) => p.id === "stock");
+    if (stock && stock.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    const waste = state.piles.find((p) => p.id === "waste");
+    if (waste && waste.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    return null;
+  },
   component: ParallelsGame,
 };

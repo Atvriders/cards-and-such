@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MariashState, MariashAction, MariashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { defaultRankOrder, legalPlays } from "../_shared/trick-engine.js";
 import { MariashGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,48 @@ export const mariashPlugin: GamePlugin<MariashState, MariashAction, typeof setti
   initialState: (seed: number, _s: S) => initialState(seed, _s as MariashSettings),
   reducer,
   isTerminal,
+  hint: (state: MariashState): HintTarget | null => {
+    if (state.phase !== "playing" || state.turn !== 0) return null;
+    const hand = state.hands[0]!;
+    if (hand.length === 0) return null;
+    const legal = legalPlays(hand, state.trick);
+    if (legal.length === 0) return null;
+    const trick = state.trick;
+    const led = trick.length > 0 ? trick[0]!.card.suit : null;
+    const trump = state.trump;
+    if (trick.length === 0) {
+      // Leading: prefer lowest non-trump (safe), else lowest legal.
+      const nonTrump = legal.filter(c => c.suit !== trump);
+      const pool = nonTrump.length > 0 ? nonTrump : legal;
+      const pick = pool.reduce((lo, c) =>
+        defaultRankOrder(c.rank) < defaultRankOrder(lo.rank) ? c : lo,
+      );
+      return { selector: `[data-testid="hint-target-mariac-${pick.id}"]`, pulses: 3 };
+    }
+    const ledCards = legal.filter(c => c.suit === led);
+    if (ledCards.length > 0) {
+      const onTable = trick.filter(t => t.card.suit === led).map(t => t.card);
+      const highOn = onTable.reduce((hi, c) =>
+        defaultRankOrder(c.rank) > defaultRankOrder(hi.rank) ? c : hi,
+      );
+      const winners = ledCards.filter(c => defaultRankOrder(c.rank) > defaultRankOrder(highOn.rank));
+      if (winners.length > 0) {
+        const pick = winners.reduce((lo, c) =>
+          defaultRankOrder(c.rank) < defaultRankOrder(lo.rank) ? c : lo,
+        );
+        return { selector: `[data-testid="hint-target-mariac-${pick.id}"]`, pulses: 3 };
+      }
+      const pick = ledCards.reduce((lo, c) =>
+        defaultRankOrder(c.rank) < defaultRankOrder(lo.rank) ? c : lo,
+      );
+      return { selector: `[data-testid="hint-target-mariac-${pick.id}"]`, pulses: 3 };
+    }
+    const trumps = legal.filter(c => c.suit === trump);
+    const pool = trumps.length > 0 ? trumps : legal;
+    const pick = pool.reduce((lo, c) =>
+      defaultRankOrder(c.rank) < defaultRankOrder(lo.rank) ? c : lo,
+    );
+    return { selector: `[data-testid="hint-target-mariac-${pick.id}"]`, pulses: 3 };
+  },
   component: MariashGame,
 };
