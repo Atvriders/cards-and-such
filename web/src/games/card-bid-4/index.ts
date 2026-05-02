@@ -12,5 +12,5 @@ export const cardBid4Plugin: GamePlugin<CardBid4State, CardBid4Action, typeof se
   howToPlay:`In Card Bid 4, correct predictions pay out 4 times your bet. Start with 200 coins, choose a bet, then predict higher or lower. A correct call wins 4x your amount. Wrong guesses lose the bet. Equal ranks are a tie. Suit does not matter. Choose 8 or 12 rounds in Settings. Your final coin total is your score — use the generous 4x payout to build a massive stack!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardBid4Settings),
-  reducer,isTerminal,component:CardBid4Game,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-bid-4-primary"]', pulses: 3 }), component:CardBid4Game,
 };

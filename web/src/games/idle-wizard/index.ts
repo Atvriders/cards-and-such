@@ -27,5 +27,6 @@ Strategy tip: buy Tomes as aggressively as possible once you can afford them. Th
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".iw-cast-btn", pulses: 3 }),
   component: IdleWizard,
 };

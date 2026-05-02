@@ -18,5 +18,11 @@ There's no skill ceiling: the more trains you tap in 25 seconds, the higher you 
 All aboard!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TrainTapSettings),
-  reducer,isTerminal,component:TrainTapGame,
+  reducer,isTerminal,
+  hint: (state: TrainTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".trt-target", pulses: 3 };
+  },
+  component:TrainTapGame,
 };

@@ -25,7 +25,7 @@ export function AthenaPatGame({ state, dispatch, onGameOver }: GameProps<AthenaP
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as AthenaPatAction)}>Keep & Score</button>
+        <button data-testid="hint-target-athena-pat-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as AthenaPatAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as AthenaPatAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

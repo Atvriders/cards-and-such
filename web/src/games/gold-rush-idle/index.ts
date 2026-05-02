@@ -27,5 +27,6 @@ Strategy tip: stake your second claim as soon as possible, then hire prospectors
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".gri-pan-btn", pulses: 3 }),
   component: GoldRushIdle,
 };

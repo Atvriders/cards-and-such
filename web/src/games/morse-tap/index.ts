@@ -22,5 +22,6 @@ Letters featured: A (•—), B (—•••), C (—•—•), E (•), S (�
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".mt-start-btn", pulses: 3 }),
   component: MorseTap,
 };

@@ -18,5 +18,11 @@ There's no skill ceiling: the more trucks you tap in 30 seconds, the higher you 
 Keep on truckin'!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TruckTapSettings),
-  reducer,isTerminal,component:TruckTapGame,
+  reducer,isTerminal,
+  hint: (state: TruckTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".ttp-target", pulses: 3 };
+  },
+  component:TruckTapGame,
 };

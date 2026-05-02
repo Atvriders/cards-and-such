@@ -25,7 +25,7 @@ export function BigFortyGame({ state, dispatch, onGameOver }: GameProps<BigForty
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BigFortyAction)}>Keep & Score</button>
+        <button data-testid="hint-target-big-forty-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BigFortyAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as BigFortyAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

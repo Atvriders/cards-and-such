@@ -27,5 +27,6 @@ Strategy tip: recruit your first soldier early to start passive income, then spl
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".iwar-strike-btn", pulses: 3 }),
   component: IdleWarrior,
 };

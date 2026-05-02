@@ -17,5 +17,6 @@ export const blackHoleSoliPlugin: GamePlugin<BlackHoleSoliState, BlackHoleSoliAc
   initialState: (seed: number, s: S) => initialState(seed, s as BlackHoleSoliSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-black-hole-soli-primary"]', pulses: 3 }),
   component: BlackHoleSoliGame,
 };

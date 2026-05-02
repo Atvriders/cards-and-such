@@ -27,5 +27,6 @@ Strategy tip: buy your second oven first, then hire assistants. The oven multipl
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".ibk-bake-btn", pulses: 3 }),
   component: IdleBaker,
 };

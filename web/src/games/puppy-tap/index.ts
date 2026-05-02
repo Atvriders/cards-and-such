@@ -17,5 +17,11 @@ There is no skill ceiling beyond reflexes and accuracy: the more puppies you tap
 Mash that screen and rack up the puppy count!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PuppyTapSettings),
-  reducer, isTerminal, component: PuppyTapGame,
+  reducer, isTerminal, 
+  hint: (state: PuppyTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".pt-target", pulses: 3 };
+  },
+  component: PuppyTapGame,
 };

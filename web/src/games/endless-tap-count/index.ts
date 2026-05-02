@@ -12,5 +12,7 @@ export const endlessTapCountPlugin: GamePlugin<EndlessTapCountState, EndlessTapC
   howToPlay:"Endless Tap Count is a thirty-second hyper-casual speed-tap clicker. Tap targets appear across six lanes — tap each target as fast as possible before it disappears to score ten points. Missed targets age out and count against your accuracy. The screen ticks about once per second, with one or two fresh targets spawning per tick. Each target only stays visible for a few ticks before fading. The timer counts down from thirty seconds in the upper-right corner. With its bright purple aesthetic and finger-pointing emoji, Endless Tap Count celebrates the joy of pure tap-to-score speed gameplay. Average runs net 220-300 points; speed-tap virtuosos clear 380+ regularly. Empty-space taps are free of penalty, so attack the screen with rapid-fire multi-taps when several targets appear at once. When the timer hits zero, the field goes still and your final score is locked in. Just tap. Faster!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EndlessTapCountSettings),
-  reducer,isTerminal,component:EndlessTapCountGame,
+  reducer,isTerminal,
+  hint: (state: EndlessTapCountState) => state.phase === "done" ? null : ({ selector: ".etptcnt-btn", pulses: 3 }),
+  component:EndlessTapCountGame,
 };

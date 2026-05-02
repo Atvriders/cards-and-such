@@ -18,5 +18,11 @@ There is no skill ceiling: the more kiwis you click in 30 seconds, the higher yo
 Click those kiwis and dominate the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as KiwiClickerSettings),
-  reducer, isTerminal, component: KiwiClickerGame,
+  reducer, isTerminal, 
+  hint: (state: KiwiClickerState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".kiwiclicker-target", pulses: 3 };
+  },
+  component: KiwiClickerGame,
 };

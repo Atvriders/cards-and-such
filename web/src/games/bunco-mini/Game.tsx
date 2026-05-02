@@ -20,7 +20,7 @@ export function BuncoMiniGame({ state, dispatch, onGameOver }: GameProps<BuncoMi
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as BuncoMiniAction)}>Roll 3</button>
+        <button data-testid="hint-target-bunco-mini-primary" className="dm-btn" onClick={() => dispatch({ type:"roll" } as BuncoMiniAction)}>Roll 3</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -25,7 +25,7 @@ export function BearRiverGame({ state, dispatch, onGameOver }: GameProps<BearRiv
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BearRiverAction)}>Keep & Score</button>
+        <button data-testid="hint-target-bear-river-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BearRiverAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as BearRiverAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

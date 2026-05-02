@@ -12,7 +12,7 @@ export function BlackBridgeGame({ state, dispatch, onGameOver }: GameProps<Black
       <div className="cm-info">Draw {state.draw} / {TOTAL_DRAWS}</div>
       <div className="cm-score">{state.score} pts (Streak: {state.streak})</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}
-      {state.phase === "drawing" && <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as BlackBridgeAction)}>Draw</button>}
+      {state.phase === "drawing" && <button data-testid="hint-target-black-bridge-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as BlackBridgeAction)}>Draw</button>}
       {state.phase === "result" && <>
         <div className="cm-result">{state.streak > 0 ? `Black x${state.streak}!` : "Red — streak broken"}</div>
         <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as BlackBridgeAction)}>{state.draw >= TOTAL_DRAWS ? "Finish" : "Next"}</button>

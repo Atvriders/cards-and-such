@@ -16,5 +16,5 @@ There are 10 rounds total. Each card is drawn fresh from a shuffled deck so your
 After each round, press Next to continue. Press Black or Red to lock in your call. There's nothing to memorize, no card-counting to attempt — just press a button and find out. Quick, simple, and the perfect lazy-afternoon game.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BlackBidderSettings),
-  reducer,isTerminal,component:BlackBidderGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-black-bidder-primary"]', pulses: 3 }), component:BlackBidderGame,
 };

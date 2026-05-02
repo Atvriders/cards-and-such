@@ -32,5 +32,6 @@ The game ends either when you run out of boulders or when every block has been d
   initialState: (seed: number, settings: CatapultCastleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".catapult-fire-btn", pulses: 3 }),
   component: CatapultCastle,
 };

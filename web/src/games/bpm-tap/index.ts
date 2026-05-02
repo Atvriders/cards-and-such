@@ -25,5 +25,6 @@ Don't rush your early taps — it takes a few to settle into the rhythm. Your la
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".bpm-target", pulses: 3 }),
   component: BpmTap,
 };

@@ -17,7 +17,7 @@ export function CardCallGame({ state, dispatch, onGameOver }: GameProps<CardCall
       {state.card !== null && <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>}
       {state.phase === "predict" && (
         <div className="cm-row">
-          <button className="cm-btn red" onClick={() => dispatch({ type:"predict", choice:"red" } as CardCallAction)}>Red</button>
+          <button data-testid="hint-target-card-call-primary" className="cm-btn red" onClick={() => dispatch({ type:"predict", choice:"red" } as CardCallAction)}>Red</button>
           <button className="cm-btn" onClick={() => dispatch({ type:"predict", choice:"black" } as CardCallAction)}>Black</button>
         </div>
       )}

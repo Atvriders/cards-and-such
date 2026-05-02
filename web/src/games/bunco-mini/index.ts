@@ -23,5 +23,5 @@ Probability of a Bunco on any single round is 1 in 216 (~0.46%), so a real Bunco
 Roll, count, cheer for the rare BUNCO!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BuncoMiniSettings),
-  reducer,isTerminal,component:BuncoMiniGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-bunco-mini-primary"]', pulses: 3 }), component:BuncoMiniGame,
 };

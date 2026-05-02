@@ -18,5 +18,11 @@ There is no skill ceiling: the more comets you click in 30 seconds, the higher y
 Click those comets and dominate the cosmos!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CometClickerSettings),
-  reducer, isTerminal, component: CometClickerGame,
+  reducer, isTerminal, 
+  hint: (state: CometClickerState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".cometclicker-target", pulses: 3 };
+  },
+  component: CometClickerGame,
 };

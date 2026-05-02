@@ -18,5 +18,11 @@ There is no skill ceiling: the more meteors you tap in 30 seconds, the higher yo
 Tap those meteors and ignite the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MeteorTapSettings),
-  reducer, isTerminal, component: MeteorTapGame,
+  reducer, isTerminal, 
+  hint: (state: MeteorTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".meteortap-target", pulses: 3 };
+  },
+  component: MeteorTapGame,
 };

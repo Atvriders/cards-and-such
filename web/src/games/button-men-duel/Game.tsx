@@ -28,7 +28,7 @@ export function ButtonMenDuelGame({ state, dispatch, onGameOver }: GameProps<But
       {state.phase === "result" && state.resultIdx !== null && state.prediction !== null && (
         <>
           <div className="dm-result">{state.prediction === state.resultIdx ? "Correct! +" + PAYOUTS[state.resultIdx] : "Wrong — Result was " + CHOICES[state.resultIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as ButtonMenDuelAction)}>Next</button>
+          <button data-testid="hint-target-button-men-duel-primary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as ButtonMenDuelAction)}>Next</button>
         </>
       )}
     </div>

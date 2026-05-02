@@ -18,5 +18,7 @@ There's no skill ceiling: the more cups you click in 30 seconds, the higher your
 Time for a brew?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TeaTimeTapSettings),
-  reducer,isTerminal,component:TeaTimeTapGame,
+  reducer,isTerminal,
+  hint: (state: TeaTimeTapState) => state.phase === "done" ? null : ({ selector: ".teatap-target", pulses: 3 }),
+  component:TeaTimeTapGame,
 };

@@ -30,7 +30,7 @@ export function BidouDiceGame({ state, dispatch, onGameOver }: GameProps<BidouDi
       {state.phase === "result" && state.resultIdx !== null && state.prediction !== null && (
         <>
           <div className="dm-result">{state.prediction === state.resultIdx ? "Correct! +" + PAYOUTS[state.resultIdx] : "Wrong — Result was " + CHOICES[state.resultIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as BidouDiceAction)}>Next</button>
+          <button data-testid="hint-target-bidou-dice-primary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as BidouDiceAction)}>Next</button>
         </>
       )}
     </div>

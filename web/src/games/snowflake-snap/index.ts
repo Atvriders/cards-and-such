@@ -18,5 +18,11 @@ There is no skill ceiling: the more snowflakes you snap in 30 seconds, the highe
 Snap those flakes and chill the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SnowflakeSnapSettings),
-  reducer, isTerminal, component: SnowflakeSnapGame,
+  reducer, isTerminal, 
+  hint: (state: SnowflakeSnapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".snowflakesnap-target", pulses: 3 };
+  },
+  component: SnowflakeSnapGame,
 };

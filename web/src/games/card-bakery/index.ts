@@ -12,5 +12,5 @@ export const cardBakeryPlugin: GamePlugin<CardBakeryState, CardBakeryAction, typ
   howToPlay:"Card Bakery is a tiny bread-rising card mini. Twelve cards arrive two at a time. Each round you decide Take (into the oven) or Skip (let it rest). The dough rises with each consecutive higher rank you take, and falls when it's lower — like real bread, momentum matters.\n\nFinal scoring: each kept card adds (rank+1) times 3 points, plus a +50 bonus if your kept cards are taken in a strictly increasing rank sequence (a perfect rise). Mixed orders still score, just without the bonus.\n\nSix rounds total (12 cards). Watch for low cards early to leave room above; high cards mid-round can accidentally cap your sequence. The patient baker reads the dough and judges the rise.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardBakerySettings),
-  reducer,isTerminal,component:CardBakeryGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-bakery-primary"]', pulses: 3 }), component:CardBakeryGame,
 };

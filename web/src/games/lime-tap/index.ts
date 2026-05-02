@@ -18,5 +18,11 @@ There is no skill ceiling: the more limes you tap in 30 seconds, the higher your
 Tap those limes and rack up the points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as LimeTapSettings),
-  reducer, isTerminal, component: LimeTapGame,
+  reducer, isTerminal, 
+  hint: (state: LimeTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".limetap-target", pulses: 3 };
+  },
+  component: LimeTapGame,
 };

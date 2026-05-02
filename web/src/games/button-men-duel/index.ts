@@ -15,5 +15,6 @@ export const buttonMenDuelPlugin: GamePlugin<ButtonMenDuelState, ButtonMenDuelAc
   initialState: (seed: number, s: S) => initialState(seed, s as ButtonMenDuelSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-button-men-duel-primary"]', pulses: 3 }),
   component: ButtonMenDuelGame,
 };

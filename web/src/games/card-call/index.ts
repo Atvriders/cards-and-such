@@ -18,5 +18,5 @@ Card Call is a quick coin-flip-style game built around the rhythm of card flippi
 Settle in, trust your gut, and let the cards decide!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardCallSettings),
-  reducer,isTerminal,component:CardCallGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-call-primary"]', pulses: 3 }), component:CardCallGame,
 };

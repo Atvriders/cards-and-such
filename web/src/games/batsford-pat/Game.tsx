@@ -25,7 +25,7 @@ export function SoliGame({ state, dispatch, onGameOver }: GameProps<SoliState, S
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SoliAction)}>Keep & Score</button>
+        <button data-testid="hint-target-batsford-pat-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SoliAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as SoliAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

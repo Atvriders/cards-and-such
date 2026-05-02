@@ -18,5 +18,7 @@ Average runs land around 200-300 points; expert octopus tappers can crack 500. T
 Tap fast, tap precise, and keep the deep ocean buzzing!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OctopusTapSettings),
-  reducer,isTerminal,component:OctopusTapGame,
+  reducer,isTerminal,
+  hint: (state: OctopusTapState) => state.phase === "done" ? null : ({ selector: ".ot-target", pulses: 3 }),
+  component:OctopusTapGame,
 };

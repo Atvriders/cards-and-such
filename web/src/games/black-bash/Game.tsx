@@ -18,7 +18,7 @@ export function BlackBashGame({ state, dispatch, onGameOver }: GameProps<BlackBa
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type: "draw" } as BlackBashAction)}>Draw</button>
+        <button data-testid="hint-target-black-bash-primary" className="cm-btn" onClick={() => dispatch({ type: "draw" } as BlackBashAction)}>Draw</button>
       )}
       {state.phase === "shown" && (
         <>

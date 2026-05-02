@@ -20,7 +20,7 @@ export function CardBridgeCrossGame({ state, dispatch, onGameOver }: GameProps<C
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardBridgeCrossAction)}>Step</button>
+        <button data-testid="hint-target-card-bridge-cross-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardBridgeCrossAction)}>Step</button>
       )}
       {state.phase === "scored" && (
         <>

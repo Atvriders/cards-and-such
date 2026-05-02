@@ -25,7 +25,7 @@ export function CardBidStreak({ state, dispatch, onGameOver }: GameProps<CardBid
             <>
               <div className="cm-prompt">Will the NEXT card be Higher or Lower?</div>
               <div className="cm-btns">
-                <button className="cm-btn" onClick={() => dispatch({ type: "guess", higher: true } as CardBidStreakAction)}>Higher</button>
+                <button data-testid="hint-target-card-bid-streak-primary" className="cm-btn" onClick={() => dispatch({ type: "guess", higher: true } as CardBidStreakAction)}>Higher</button>
                 <button className="cm-btn alt" onClick={() => dispatch({ type: "guess", higher: false } as CardBidStreakAction)}>Lower</button>
               </div>
             </>

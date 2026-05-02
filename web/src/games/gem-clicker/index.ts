@@ -27,5 +27,6 @@ Strategy tip: hire miners first to establish passive income, then save for a sec
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".gc-click-btn", pulses: 3 }),
   component: GemClicker,
 };

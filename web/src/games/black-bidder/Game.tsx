@@ -21,7 +21,7 @@ export function BlackBidderGame({ state, dispatch, onGameOver }: GameProps<Black
       )}
       {state.phase === "predict" && (
         <div className="cm-row">
-          <button className="cm-btn" style={{ background:"#2c3e50" }} onClick={() => dispatch({ type:"predict", choice:"black" } as BlackBidderAction)}>Black</button>
+          <button data-testid="hint-target-black-bidder-primary" className="cm-btn" style={{ background:"#2c3e50" }} onClick={() => dispatch({ type:"predict", choice:"black" } as BlackBidderAction)}>Black</button>
           <button className="cm-btn" style={{ background:"#c0392b" }} onClick={() => dispatch({ type:"predict", choice:"red" } as BlackBidderAction)}>Red</button>
         </div>
       )}

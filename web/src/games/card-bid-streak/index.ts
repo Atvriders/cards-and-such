@@ -29,5 +29,6 @@ Choose 10 or 20 rounds in settings. Tips: Watch the current rank carefully — a
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-bid-streak-primary"]', pulses: 3 }),
   component: CardBidStreak,
 };

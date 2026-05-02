@@ -18,5 +18,11 @@ There is no skill ceiling: the more apples you tap in 30 seconds, the higher you
 Mash that orchard and rack up apples!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AppleTapSettings),
-  reducer, isTerminal, component: AppleTapGame,
+  reducer, isTerminal, 
+  hint: (state: AppleTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".appletap-target", pulses: 3 };
+  },
+  component: AppleTapGame,
 };

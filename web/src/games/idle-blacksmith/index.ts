@@ -27,5 +27,6 @@ Strategy tip: buy your first helper quickly, then alternate between helpers and 
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".ibs-forge-btn", pulses: 3 }),
   component: IdleBlacksmith,
 };

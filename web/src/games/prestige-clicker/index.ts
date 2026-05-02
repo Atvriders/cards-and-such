@@ -27,5 +27,6 @@ Strategy tip: buy as many Auto Clickers as possible on each run, prestige the mo
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".pc-click-btn", pulses: 3 }),
   component: PrestigeClicker,
 };

@@ -27,5 +27,6 @@ Strategy tip: buy your first Field as soon as you can. The field multiplier is t
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".if-harvest-btn", pulses: 3 }),
   component: IdleFarmer,
 };

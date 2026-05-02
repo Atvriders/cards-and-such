@@ -12,5 +12,5 @@ export const blackPairPickupPlugin: GamePlugin<BlackPairPickupState, BlackPairPi
   howToPlay:"Black Pair Pickup is a fast hand-of-two card mini. Each round you're dealt 2 random cards from a standard 52-card deck. If both cards are black (Spades or Clubs), you score 30 points; otherwise 0. There are 14 rounds total — short, snappy, and pure RNG fun.\n\nThe probability of being dealt two black cards is roughly 24.5% (26/52 × 25/51). Across 14 rounds the expected value is about 100 points; lucky streaks can push you to 200+ for top scores. Press Deal to roll the cards, then Next to advance to the next round.\n\nA perfect game (every round black-black) yields 420 points but is exceedingly rare. Average runs land near 90-110 points. The dark-suit twin to Red Pair Pickup — a quick rhythm game between heavier rounds.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BlackPairPickupSettings),
-  reducer,isTerminal,component:BlackPairPickupGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-black-pair-pickup-primary"]', pulses: 3 }), component:BlackPairPickupGame,
 };

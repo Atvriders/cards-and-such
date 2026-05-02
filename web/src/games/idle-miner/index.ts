@@ -27,5 +27,6 @@ Tip: hire as early as possible. Passive income compounds quickly.`,
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".im-mine-btn", pulses: 3 }),
   component: IdleMiner,
 };

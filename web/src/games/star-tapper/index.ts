@@ -18,5 +18,11 @@ There is no skill ceiling: the more stars you tap in 30 seconds, the higher your
 Tap those stars and light up the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as StarTapperSettings),
-  reducer, isTerminal, component: StarTapperGame,
+  reducer, isTerminal, 
+  hint: (state: StarTapperState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".startapper-target", pulses: 3 };
+  },
+  component: StarTapperGame,
 };

@@ -12,5 +12,11 @@ export const staplerSnapPlugin: GamePlugin<StaplerSnapState, StaplerSnapAction, 
   howToPlay:"Stapler Snap is a 30-second office-supply clicker. Staplers spawn across 6 lanes; tap each one to snap it for 10 points. Each stapler hangs around for a few ticks before disappearing — miss too many and your final tally suffers.\n\nThe game ticks once per second, spawning fresh staplers in random lanes. The board can quickly fill with desk targets, so practice your hand-eye coordination and aim carefully.\n\nThere's no skill ceiling: the more staplers you click in 30 seconds, the higher your score. Average runs land near 200-300 points; sharpshooters pushing 500+ are showing real reflex talent. The clock counts down in the top right.\n\nSnap to it and tap fast!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as StaplerSnapSettings),
-  reducer,isTerminal,component:StaplerSnapGame,
+  reducer,isTerminal,
+  hint: (state: StaplerSnapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".fc-target", pulses: 3 };
+  },
+  component:StaplerSnapGame,
 };

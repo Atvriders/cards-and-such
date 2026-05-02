@@ -25,7 +25,7 @@ export function CalculationSolitaireGame({ state, dispatch, onGameOver }: GamePr
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as CalculationSolitaireAction)}>Keep & Score</button>
+        <button data-testid="hint-target-calculation-solitaire-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as CalculationSolitaireAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as CalculationSolitaireAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

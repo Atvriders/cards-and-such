@@ -18,5 +18,11 @@ There is no skill ceiling: the more acorns you tap in 30 seconds, the higher you
 Tap those acorns and rack up the points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AcornTapSettings),
-  reducer, isTerminal, component: AcornTapGame,
+  reducer, isTerminal, 
+  hint: (state: AcornTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".acorntap-target", pulses: 3 };
+  },
+  component: AcornTapGame,
 };

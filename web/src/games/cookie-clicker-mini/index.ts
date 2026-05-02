@@ -25,5 +25,6 @@ Tip: buy your first upgrade as soon as you can afford it. The passive income sno
   initialState,
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".ccm-cookie-btn", pulses: 3 }),
   component: CookieClickerMini,
 };

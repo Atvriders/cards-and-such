@@ -15,7 +15,7 @@ export function CardBakeryGame({ state, dispatch, onGameOver }: GameProps<CardBa
       <div className="cm-info">Round {state.round + 1} / {TOTAL_ROUNDS}</div>
       <div className="cm-score">Kept: {state.decisions.length}</div>
       {state.phase === "deal" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardBakeryAction)}>Deal pair</button>
+        <button data-testid="hint-target-card-bakery-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardBakeryAction)}>Deal pair</button>
       )}
       {state.phase === "decide" && state.pair && (
         <>

@@ -18,5 +18,11 @@ There is no skill ceiling: the more bolts you tap in 30 seconds, the higher your
 Tap those bolts and light up the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as LightningTapSettings),
-  reducer, isTerminal, component: LightningTapGame,
+  reducer, isTerminal, 
+  hint: (state: LightningTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".lightningtap-target", pulses: 3 };
+  },
+  component: LightningTapGame,
 };

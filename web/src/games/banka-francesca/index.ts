@@ -16,5 +16,6 @@ export const bankaFrancescaPlugin: GamePlugin<BankaFrancescaState, BankaFrancesc
   initialState: (seed: number, s: S) => initialState(seed, s as BankaFrancescaSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-banka-francesca-primary"]', pulses: 3 }),
   component: BankaFrancescaGame,
 };

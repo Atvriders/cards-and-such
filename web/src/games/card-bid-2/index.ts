@@ -20,5 +20,5 @@ Press Next after each reveal. The game ends when rounds run out or your coins hi
 Your final coin total is your score. Choose 8 or 12 rounds in Settings for a quicker or longer session. Can you double your starting coins in just 8 rounds?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardBid2Settings),
-  reducer,isTerminal,component:CardBid2Game,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-bid-2-primary"]', pulses: 3 }), component:CardBid2Game,
 };

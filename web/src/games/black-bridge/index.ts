@@ -16,5 +16,5 @@ A solo black is +10. Two blacks in a row: +10 then +20 = +30 total. Five blacks 
 Average runs land around 80–120 points. A six-card black streak is the stuff of legend, worth 210 points by itself! Press Draw to flip a card, then Next. Pure luck, but pure thrill — march across the bridge as far as the deck will let you!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BlackBridgeSettings),
-  reducer,isTerminal,component:BlackBridgeGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-black-bridge-primary"]', pulses: 3 }), component:BlackBridgeGame,
 };

@@ -19,7 +19,7 @@ export function CardBid4Game({ state, dispatch, onGameOver }: GameProps<CardBid4
       {state.phase === "betting" ? (
         <div className="cm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardBid4Action)}>Higher</button>
+          <button data-testid="hint-target-card-bid-4-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardBid4Action)}>Higher</button>
           <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"lower" } as CardBid4Action)}>Lower</button>
         </div>
       ) : (

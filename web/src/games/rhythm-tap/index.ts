@@ -34,5 +34,6 @@ Tips: Watch the lane colors, not individual blocks. Keep your hands on the home 
   initialState: (seed: number, settings: RhythmTapSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: () => ({ selector: ".rt-tap-btn", pulses: 3 }),
   component: RhythmTap,
 };

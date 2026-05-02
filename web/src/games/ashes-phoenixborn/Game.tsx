@@ -22,7 +22,7 @@ export function AshesPhoenixbornGame({ state, dispatch, onGameOver }: GameProps<
         </>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as AshesPhoenixbornAction)}>Roll</button>
+        <button data-testid="hint-target-ashes-phoenixborn-primary" className="dm-btn" onClick={() => dispatch({ type:"roll" } as AshesPhoenixbornAction)}>Roll</button>
       )}
       {state.phase === "scored" && (
         <>

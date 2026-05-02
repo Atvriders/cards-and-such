@@ -30,7 +30,7 @@ export function BankaFrancescaGame({ state, dispatch, onGameOver }: GameProps<Ba
       {state.phase === "result" && state.resultIdx !== null && state.prediction !== null && (
         <>
           <div className="dm-result">{state.prediction === state.resultIdx ? "Correct! +" + PAYOUTS[state.resultIdx] : "Wrong — Result was " + CHOICES[state.resultIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as BankaFrancescaAction)}>Next</button>
+          <button data-testid="hint-target-banka-francesca-primary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as BankaFrancescaAction)}>Next</button>
         </>
       )}
     </div>

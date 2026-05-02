@@ -12,5 +12,5 @@ export const blackBashPlugin: GamePlugin<BlackBashState, BlackBashAction, typeof
   howToPlay:"Black Bash is the mirror image of Red Rally: every black card (spades and clubs) scores 10 points, while red cards (hearts and diamonds) score zero. Each draw is a 50/50 shot in a balanced deck of 26 black and 26 red cards.\n\nYou play 15 rounds. Expect an average score around 75 (7-8 blacks per game), with hot streaks soaring past 110 and cold streaks slumping below 50. The theoretical max is 150 points — fifteen blacks in a row, an extreme lucky run.\n\nThe mechanic is simple and meditative: press Draw, see the card, press Next. There's no choice, no strategy, just the back-and-forth dance of red and black. A perfect quick-play card mini for when you want a 90-second flutter without any decision-making weight on your shoulders.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BlackBashSettings),
-  reducer,isTerminal,component:BlackBashGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-black-bash-primary"]', pulses: 3 }), component:BlackBashGame,
 };

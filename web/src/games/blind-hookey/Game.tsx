@@ -25,7 +25,7 @@ export function BlindHookeyGame({ state, dispatch, onGameOver }: GameProps<Blind
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BlindHookeyAction)}>Keep & Score</button>
+        <button data-testid="hint-target-blind-hookey-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BlindHookeyAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as BlindHookeyAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

@@ -18,5 +18,11 @@ There is no skill ceiling: the more moons you tap in 30 seconds, the higher your
 Tap those moons and light up the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MoonTapSettings),
-  reducer, isTerminal, component: MoonTapGame,
+  reducer, isTerminal, 
+  hint: (state: MoonTapState) => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: ".moontap-target", pulses: 3 };
+  },
+  component: MoonTapGame,
 };
