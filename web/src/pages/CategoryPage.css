@@ -1,0 +1,178 @@
+/* =====================================================================
+ * CategoryPage — overrides + extras layered on top of LobbyPage.css.
+ *
+ * Most look-and-feel is inherited from `.lobby-*` styles. This file
+ * adds:
+ *   - .cat-breadcrumb         → "Lobby › Solitaire" link bar
+ *   - .cat-hero               → tweaks to the lobby hero for category
+ *   - .cat-hero-glyph         → big tinted glyph beside the title
+ *   - .cat-count-badge        → "142 games" pill in the hero
+ *   - .cat-played-badge       → small play-count chip on featured tiles
+ *   - .cat-pagination         → prev / 1 2 3 / next bar under the grid
+ *
+ * All colours come from theme CSS variables so light/dark switch
+ * automatically — there are no hard-coded hex values.
+ * ===================================================================== */
+
+.cat-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2, 0.5rem);
+  font-size: 0.875rem;
+  color: var(--text-400, #94a3b8);
+  padding: var(--sp-3, 0.75rem) 0 var(--sp-2, 0.5rem);
+}
+.cat-breadcrumb a {
+  color: var(--text-300, var(--text-400, #cbd5e1));
+  text-decoration: none;
+  border-radius: var(--r-sm, 4px);
+  padding: 2px 6px;
+  transition: color 120ms ease, background-color 120ms ease;
+}
+.cat-breadcrumb a:hover,
+.cat-breadcrumb a:focus-visible {
+  color: var(--accent, #5b6cff);
+  background: var(--surface-2, rgba(91, 108, 255, 0.08));
+  outline: none;
+}
+.cat-breadcrumb [aria-current="page"] {
+  color: var(--text, #1a1d2c);
+  font-weight: 600;
+}
+.cat-breadcrumb-sep {
+  color: var(--text-400, #94a3b8);
+  opacity: 0.7;
+}
+
+.cat-hero {
+  /* Slightly tighter than the lobby hero — no big orbs, no big stat row. */
+  padding-bottom: var(--sp-4, 1rem);
+}
+.cat-hero-title {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+.cat-hero-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  font-size: 0.85em;
+  border-radius: var(--r-md, 10px);
+  background: var(--surface-2, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  color: var(--accent, #5b6cff);
+  line-height: 1;
+}
+.cat-hero-glyph--s { color: var(--cat-solitaire, var(--accent, #5b6cff)); }
+.cat-hero-glyph--c { color: var(--cat-cards, var(--accent, #5b6cff)); }
+.cat-hero-glyph--d { color: var(--cat-dice, var(--accent, #5b6cff)); }
+.cat-hero-glyph--b { color: var(--cat-board, var(--accent, #5b6cff)); }
+.cat-hero-glyph--a { color: var(--cat-arcade, var(--accent, #5b6cff)); }
+
+.cat-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: var(--surface-2, rgba(91, 108, 255, 0.12));
+  color: var(--text-200, var(--text, #1a1d2c));
+  border: 1px solid var(--border, rgba(91, 108, 255, 0.25));
+  vertical-align: middle;
+}
+
+.cat-sub {
+  max-width: 60ch;
+}
+
+.cat-played-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  background: var(--surface-3, rgba(91, 108, 255, 0.14));
+  color: var(--accent, #5b6cff);
+  border: 1px solid var(--border, rgba(91, 108, 255, 0.3));
+}
+
+.cat-family-section { margin-top: var(--sp-6, 1.5rem); }
+.cat-featured { margin-top: var(--sp-4, 1rem); }
+
+/* ---------- Pagination ---------- */
+.cat-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: var(--sp-6, 1.5rem) 0 var(--sp-4, 1rem);
+}
+.cat-page-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.cat-page-btn {
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.65rem;
+  border-radius: var(--r-md, 8px);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  background: var(--surface-1, transparent);
+  color: var(--text-200, var(--text, #1a1d2c));
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+.cat-page-btn:hover:not(:disabled),
+.cat-page-btn:focus-visible:not(:disabled) {
+  background: var(--surface-2, rgba(91, 108, 255, 0.1));
+  border-color: var(--accent, #5b6cff);
+  outline: none;
+}
+.cat-page-btn.is-active {
+  background: var(--accent, #5b6cff);
+  color: var(--accent-contrast, #fff);
+  border-color: var(--accent, #5b6cff);
+  font-weight: 600;
+}
+.cat-page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.cat-page-gap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  color: var(--text-400, #94a3b8);
+}
+
+/* ---------- Light-mode tweaks (rely on theme vars where defined). ---------- */
+@media (prefers-color-scheme: light) {
+  .cat-count-badge {
+    background: var(--surface-2, rgba(91, 108, 255, 0.08));
+  }
+}
+
+@media (max-width: 720px) {
+  .cat-hero-title { font-size: 1.65rem; }
+  .cat-hero-glyph { width: 1.4em; height: 1.4em; }
+  .cat-page-btn { min-width: 2rem; height: 2rem; padding: 0 0.5rem; }
+}
