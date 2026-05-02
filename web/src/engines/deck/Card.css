@@ -157,7 +157,8 @@
 /* ----- Hover lift (only when explicitly clickable) ----- */
 .card.face-up.clickable { cursor: pointer; }
 .card.face-up.clickable:hover {
-  transform: translateY(-3px) perspective(600px) rotateX(2deg) scale(1.02);
+  /* Subtle two-step: a small lift (-2px) + a tiny scale bump for a tactile feel. */
+  transform: translateY(-2px) scale(1.02);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
     0 0 0 1px rgba(255, 255, 255, 0.35) inset,
@@ -165,12 +166,40 @@
     0 14px 24px -8px rgba(0, 0, 0, 0.55);
 }
 .card.face-down.clickable:hover {
-  transform: translateY(-3px) perspective(600px) rotateX(2deg) scale(1.02);
+  transform: translateY(-2px) scale(1.02);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.10) inset,
     0 0 0 2px rgba(255, 255, 255, 0.06) inset,
     0 4px 8px rgba(0, 0, 0, 0.35),
     0 16px 28px -8px rgba(0, 0, 0, 0.65);
+}
+
+/* ----- Holographic shimmer on hover for face-down cards ----- */
+/* Adds a slow-sweeping iridescent gradient over the woven back so the back
+   feels alive when the player hovers it. Pure CSS — no extra DOM needed. */
+.card.face-down.clickable {
+  /* Establish a stacking context so the shimmer pseudo lives above the weave. */
+  isolation: isolate;
+}
+.card.face-down.clickable:hover::after {
+  /* Reuse the dashed inner-frame ::after but layer the holo gradient on top
+     of its border via background. Animation only runs on hover so it doesn't
+     burn cycles when the table is idle. */
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(180, 220, 255, 0.18) 35%,
+    rgba(255, 200, 240, 0.22) 50%,
+    rgba(180, 255, 220, 0.18) 65%,
+    transparent 100%
+  );
+  background-size: 220% 220%;
+  animation: card-back-shimmer 2400ms linear infinite;
+  mix-blend-mode: screen;
+}
+@keyframes card-back-shimmer {
+  0%   { background-position:   0% 100%; }
+  100% { background-position: 200%   0%; }
 }
 
 /* ----- Keyboard focus ring (consistent across click targets) ----- */
@@ -329,4 +358,59 @@
 :root[data-animations="reduced"] .card.card-reveal,
 :root[data-animations="reduced"] .card.flip-pickup {
   animation: none;
+}
+
+/* ----- Deal-in: 200ms slide from the deck origin ----- */
+/* Engines opt cards in by adding the `deal-in` class. Optionally pass a per-card
+   index via the `--card-stagger-delay` CSS var (e.g. style={{ '--card-stagger-delay':
+   `${i * 30}ms` }}) to cascade the deal across a fan / row. */
+.card.deal-in {
+  animation: card-deal-in 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--card-stagger-delay, 0ms);
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+@keyframes card-deal-in {
+  from {
+    /* "Deck" is conceptually centered above the target slot — slide in from
+       there, slightly shrunk and faded so it looks like it's flying in. */
+    transform: translate(var(--card-deal-from-x, 0), var(--card-deal-from-y, -40px))
+               scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Drag-shift indicator: cards stacked on the dragged card ghost out at 0.6
+   opacity so the user clearly sees what's traveling with them. The Pile.css
+   already shifts these neighbors a few pixels; we just dim them here so the
+   visual story is "these are coming with you, but right now they're a hint". */
+.pile-tableau .pile-card:has(.card.dragging) ~ .pile-card .card {
+  opacity: 0.6;
+  transition: opacity 160ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card.deal-in { animation: none; }
+  .pile-tableau .pile-card:has(.card.dragging) ~ .pile-card .card { transition: none; }
+}
+:root[data-animations="off"] .card.deal-in,
+:root[data-animations="reduced"] .card.deal-in {
+  animation: none;
+}
+
+/* Reduced-motion fallbacks for the new animations: collapse durations to ~0. */
+@media (prefers-reduced-motion: reduce) {
+  .card.face-up.clickable:hover,
+  .card.face-down.clickable:hover { transform: none; }
+  .card.face-down.clickable:hover::after { animation-duration: 0.01ms; background: none; }
+  .card.deal-in,
+  .card.card-reveal,
+  .card.flip-pickup,
+  .card.flip-in {
+    animation-duration: 0.01ms !important;
+  }
 }
