@@ -727,6 +727,54 @@
   50%      { opacity: 0.45; }
 }
 
+/* ----- At-a-glance metadata chips (eta + difficulty dots) -----
+   Sits just above the .tile-foot row, bottom-left aligned. The two
+   chips stay on a single line; on narrow viewports the difficulty
+   chip is hidden so the tile doesn't wrap awkwardly. */
+.tile-chips {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.tile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  padding: 0.12rem 0.45rem;
+  font-size: 0.62rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.04em;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-400);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+.tile-chip-eta { font-variant-numeric: tabular-nums; }
+.tile-chip-diff { padding: 0.18rem 0.45rem; gap: 0.18rem; }
+.tile-chip-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+.tile-chip-dot--on { background: var(--tile-accent, var(--primary, #818cf8)); }
+.tile-chip-diff-easy   .tile-chip-dot--on { background: #34d399; }
+.tile-chip-diff-medium .tile-chip-dot--on { background: #fbbf24; }
+.tile-chip-diff-hard   .tile-chip-dot--on { background: #fb7185; }
+
+/* Collapse the difficulty chip on narrow viewports — keep just the
+   time so the row never overflows on a phone. */
+@media (max-width: 480px) {
+  .tile-chip-diff { display: none; }
+}
+
 /* Featured-card variant — slightly more elevated, gradient-tinted border. */
 .tile--featured {
   background: linear-gradient(160deg, rgba(99, 102, 241, 0.08) 0%, var(--surface-1) 100%);
