@@ -10,8 +10,22 @@ const COLORS = [
   "#ec4899", // pink
 ];
 
-const PARTICLE_COUNT = 80;
+const PARTICLE_COUNT_MAX = 80;
+const PARTICLE_COUNT_MIN = 60;
 const DURATION_MS = 3000;
+
+/**
+ * Scale particle count by viewport. Tiny screens (phones) get the minimum;
+ * desktop/large get the cap. Animation is pure CSS keyframes — no rAF or
+ * setInterval — so cost is GPU compositor work plus N DOM nodes.
+ */
+function pickParticleCount(): number {
+  if (typeof window === "undefined") return PARTICLE_COUNT_MIN;
+  const w = window.innerWidth || 1024;
+  if (w < 480) return PARTICLE_COUNT_MIN;
+  if (w < 1024) return Math.round((PARTICLE_COUNT_MIN + PARTICLE_COUNT_MAX) / 2);
+  return PARTICLE_COUNT_MAX;
+}
 
 interface Particle {
   left: number;
@@ -36,8 +50,9 @@ function prefersReducedMotion(): boolean {
 }
 
 function generateParticles(): Particle[] {
+  const count = pickParticleCount();
   const out: Particle[] = [];
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
+  for (let i = 0; i < count; i++) {
     // Half from top edge, quarter each from left/right edges
     const edge = Math.random();
     let left: number;
