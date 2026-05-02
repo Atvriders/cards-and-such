@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
 
@@ -53,5 +53,45 @@ describe("LobbyPage — ?family= deep link", () => {
     expect(
       screen.queryByTestId("lobby-auto-family-does-not-exist"),
     ).not.toBeInTheDocument();
+  });
+});
+
+/**
+ * Sort dropdown — covers the default value, that all four documented
+ * modes are reachable as <option> elements with the agreed test ids,
+ * and that the user's choice round-trips through `cards-lobby-sort` so
+ * a reload rehydrates the same selection.
+ */
+describe("LobbyPage — sort dropdown", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders all four sort modes with the expected test ids", () => {
+    renderAt("/");
+    for (const mode of ["alphabetical", "most-played", "newest", "top-rated"] as const) {
+      expect(screen.getByTestId(`lobby-sort-${mode}`)).toBeInTheDocument();
+    }
+  });
+
+  it("defaults to alphabetical when no preference is stored", () => {
+    renderAt("/");
+    const select = screen.getByTestId("lobby-sort") as HTMLSelectElement;
+    expect(select.value).toBe("alphabetical");
+  });
+
+  it("persists the selected mode to localStorage under cards-lobby-sort", () => {
+    renderAt("/");
+    const select = screen.getByTestId("lobby-sort") as HTMLSelectElement;
+    fireEvent.change(select, { target: { value: "most-played" } });
+    expect(select.value).toBe("most-played");
+    expect(localStorage.getItem("cards-lobby-sort")).toBe("most-played");
+  });
+
+  it("rehydrates the persisted mode on next render", () => {
+    localStorage.setItem("cards-lobby-sort", "newest");
+    renderAt("/");
+    const select = screen.getByTestId("lobby-sort") as HTMLSelectElement;
+    expect(select.value).toBe("newest");
   });
 });
