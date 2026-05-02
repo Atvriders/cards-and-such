@@ -443,6 +443,17 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // `setState(prev)`. Purely PlayPage-side presentation memory; the
   // reducer and plugin shape are untouched.
   const [undoStack, setUndoStack] = useState<Array<{ state: unknown; action: unknown }>>([]);
+  // Redo ring buffer. Mirror of undoStack — every `undo()` peels one frame
+  // off undoStack and pushes the *current* state onto redoStack so we can
+  // step forward again. A fresh `dispatch` (i.e. a brand-new user action)
+  // wipes redoStack: that path branches the timeline, so the previously
+  // discarded redo frames are no longer reachable.
+  const [redoStack, setRedoStack] = useState<Array<{ state: unknown; action: unknown }>>([]);
+  // Rolling action log — last 10 dispatched action types with timestamps.
+  // Surfaced under the info popover for debugging + curious users; never
+  // observed by the reducer, so plugin shape is unchanged.
+  const [actionLog, setActionLog] = useState<Array<{ id: number; type: string; ts: number }>>([]);
+  const actionLogIdRef = useRef(0);
   // Whether the Undo button label should include the current depth, e.g.
   // "Undo (3)". Read once at mount from Settings → Gameplay; default off.
   const showUndoCount = useMemo(() => readShowUndoCount(), []);
@@ -842,6 +853,18 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       actionCountRef.current += 1;
       const label = describeAction(action);
       if (label) pushToast(label);
+      // Append to the rolling action log (cap = 10) regardless of whether
+      // the reducer ends up changing state. Useful as a debugging breadcrumb
+      // even when the reducer collapses the action into a no-op.
+      const actionType =
+        action && typeof action === "object" && typeof (action as { type?: unknown }).type === "string"
+          ? ((action as { type: string }).type)
+          : "(unknown)";
+      setActionLog((prev) => {
+        const id = ++actionLogIdRef.current;
+        const appended = [...prev, { id, type: actionType, ts: Date.now() }];
+        return appended.length > 10 ? appended.slice(appended.length - 10) : appended;
+      });
       setState((s: unknown) => {
         const next = plugin.reducer(s, action);
         // Push the prior state onto the unified undo ring buffer (last
@@ -855,6 +878,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               ? appended.slice(appended.length - UNDO_STACK_CAP)
               : appended;
           });
+          // Fresh user action → branch the timeline. Any previously-stashed
+          // redo frames are no longer reachable, so drop them.
+          setRedoStack((prev) => (prev.length === 0 ? prev : []));
         }
         const term = plugin.isTerminal(next);
         if (term) {
@@ -895,31 +921,78 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     setUndoStack((stack) => {
       if (stack.length === 0) return stack;
       const prev = stack[stack.length - 1];
-      setState(prev.state);
+      // Snapshot the *current* state onto redoStack before rolling back so
+      // a subsequent `redo()` can step forward again. We capture state via
+      // the functional setState to avoid stale-closure reads.
+      setState((cur: unknown) => {
+        setRedoStack((rs) => {
+          const appended = [...rs, { state: cur, action: prev.action }];
+          return appended.length > UNDO_STACK_CAP
+            ? appended.slice(appended.length - UNDO_STACK_CAP)
+            : appended;
+        });
+        return prev.state;
+      });
       return stack.slice(0, -1);
     });
   }, [phase]);
 
-  // Ctrl/Cmd+Z triggers undo. We skip when focus is in a text-entry
-  // surface (settings inputs, contenteditable) so users editing fields
-  // get the browser's native text-undo, not a game rollback. We also
-  // avoid Ctrl+Shift+Z so a future redo binding stays free.
+  /**
+   * Mirror of `undo`: pop the most recent frame off redoStack and restore
+   * it, pushing the current state back onto undoStack so undo/redo stay
+   * symmetrical. A no-op when redoStack is empty (e.g. immediately after a
+   * fresh dispatch, which clears it).
+   */
+  const redo = useCallback(() => {
+    if (phase !== "playing") return;
+    setRedoStack((stack) => {
+      if (stack.length === 0) return stack;
+      const next = stack[stack.length - 1];
+      setState((cur: unknown) => {
+        setUndoStack((us) => {
+          const appended = [...us, { state: cur, action: next.action }];
+          return appended.length > UNDO_STACK_CAP
+            ? appended.slice(appended.length - UNDO_STACK_CAP)
+            : appended;
+        });
+        return next.state;
+      });
+      return stack.slice(0, -1);
+    });
+  }, [phase]);
+
+  // Ctrl/Cmd+Z triggers undo, Ctrl/Cmd+Shift+Z and Ctrl/Cmd+Y trigger redo.
+  // We skip when focus is in a text-entry surface (settings inputs,
+  // contenteditable) so users editing fields get the browser's native
+  // text-undo/redo, not a game rollback.
   useEffect(() => {
     if (phase !== "playing") return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key !== "z" && e.key !== "Z") return;
       if (!(e.ctrlKey || e.metaKey)) return;
-      if (e.shiftKey || e.altKey) return;
+      if (e.altKey) return;
       const target = e.target as HTMLElement | null;
       const tag = target?.tagName?.toLowerCase();
       if (tag === "input" || tag === "textarea" || tag === "select") return;
       if (target?.isContentEditable) return;
-      e.preventDefault();
-      undo();
+      const key = e.key.toLowerCase();
+      if (key === "z" && !e.shiftKey) {
+        e.preventDefault();
+        undo();
+        return;
+      }
+      if (key === "z" && e.shiftKey) {
+        e.preventDefault();
+        redo();
+        return;
+      }
+      if (key === "y" && !e.shiftKey) {
+        e.preventDefault();
+        redo();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [phase, undo]);
+  }, [phase, undo, redo]);
 
   const onGameOver = useCallback(
     (score: number) => {
@@ -1126,6 +1199,48 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                   <span className="play-info-label">Time trend</span>
                   <TimeTrendChart history={timeHistory} />
                 </div>
+                <details className="play-info-popover-section play-action-log-details">
+                  <summary className="play-info-label" style={{ cursor: "pointer" }}>
+                    Action log ({actionLog.length})
+                  </summary>
+                  <ol
+                    className="play-action-log"
+                    data-testid="play-action-log"
+                    style={{
+                      margin: "6px 0 0",
+                      padding: 0,
+                      listStyle: "none",
+                      fontSize: 12,
+                      maxHeight: 160,
+                      overflowY: "auto",
+                    }}
+                  >
+                    {actionLog.length === 0 && (
+                      <li style={{ opacity: 0.6 }}>No actions yet.</li>
+                    )}
+                    {actionLog
+                      .slice()
+                      .reverse()
+                      .map((entry) => (
+                        <li
+                          key={entry.id}
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            gap: 8,
+                            padding: "2px 0",
+                          }}
+                        >
+                          <code style={{ flex: "1 1 auto", overflow: "hidden", textOverflow: "ellipsis" }}>
+                            {entry.type}
+                          </code>
+                          <span style={{ flex: "0 0 auto", opacity: 0.7 }}>
+                            {new Date(entry.ts).toLocaleTimeString()}
+                          </span>
+                        </li>
+                      ))}
+                  </ol>
+                </details>
                 {plugin.howToPlay && (
                   <button
                     type="button"
@@ -1380,6 +1495,30 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               {showUndoCount && (
                 <span className="play-hint-btn-label" data-testid="play-undo-btn-label">
                   Undo ({undoStack.length})
+                </span>
+              )}
+            </button>
+          )}
+          {phase === "playing" && (
+            <button
+              type="button"
+              className="play-iconbtn play-redo-btn"
+              onClick={redo}
+              disabled={redoStack.length === 0}
+              title={redoStack.length === 0 ? "Nothing to redo" : "Redo (Ctrl+Shift+Z / Ctrl+Y)"}
+              aria-label={
+                showUndoCount
+                  ? `Redo, ${redoStack.length} step${redoStack.length === 1 ? "" : "s"} available`
+                  : "Redo"
+              }
+              aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z Control+Y Meta+Y"
+              data-tooltip="Redo"
+              data-testid="play-redo-btn"
+            >
+              <span aria-hidden="true" style={{ fontSize: 16, lineHeight: 1 }}>↻</span>
+              {showUndoCount && (
+                <span className="play-hint-btn-label" data-testid="play-redo-btn-label">
+                  Redo ({redoStack.length})
                 </span>
               )}
             </button>
