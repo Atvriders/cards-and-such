@@ -53,6 +53,7 @@ const LS_VOLUME = "cards-sound-volume";
 const LS_AUTO_MOVE = "cards-auto-move";
 const LS_HINT_COUNT = "cards-hint-count";
 const LS_HINTS_ENABLED = "cards-hints-enabled";
+const LS_SHOW_UNDO_COUNT = "cards-show-undo-count";
 const LS_BG_THEME = "cards-bg-theme";
 
 const APPEARANCE_KEYS = [
@@ -63,7 +64,7 @@ const APPEARANCE_KEYS = [
   LS_CARD_FONT,
 ];
 const AUDIO_KEYS = [LS_SOUND, LS_SOUND_LEGACY, LS_VOLUME];
-const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT, LS_HINTS_ENABLED];
+const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT, LS_HINTS_ENABLED, LS_SHOW_UNDO_COUNT];
 
 const CARD_BACKS: { id: CardBack; label: string; preview: string }[] = [
   {
@@ -132,6 +133,11 @@ function readHintsEnabled(): boolean {
   const v = localStorage.getItem(LS_HINTS_ENABLED);
   return v === null ? true : v === "true";
 }
+function readShowUndoCount(): boolean {
+  if (typeof localStorage === "undefined") return false;
+  const v = localStorage.getItem(LS_SHOW_UNDO_COUNT);
+  return v === "true";
+}
 
 export function applyCardBack(id: CardBack): void {
   if (typeof document !== "undefined") document.documentElement.setAttribute("data-card-back", id);
@@ -175,6 +181,7 @@ export default function SettingsPage(): JSX.Element {
   const [autoMove, setAutoMove] = useState<boolean>(readAutoMove);
   const [hintCount, setHintCount] = useState<number>(readHintCount);
   const [hintsEnabled, setHintsEnabled] = useState<boolean>(readHintsEnabled);
+  const [showUndoCount, setShowUndoCount] = useState<boolean>(readShowUndoCount);
   const [mockLeaderboard, setMockLeaderboard] = useState<boolean>(isMockLeaderboardEnabled);
   const importInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -190,6 +197,7 @@ export default function SettingsPage(): JSX.Element {
     setAutoMove(readAutoMove());
     setHintCount(readHintCount());
     setHintsEnabled(readHintsEnabled());
+    setShowUndoCount(readShowUndoCount());
     applyCardBack(readCardBack());
     applyAnimations(readAnimations());
     applyCardFont(readCardFont());
@@ -310,6 +318,7 @@ export default function SettingsPage(): JSX.Element {
     setAutoMove(true);
     setHintCount(3);
     setHintsEnabled(true);
+    setShowUndoCount(false);
     applyAnimations("full");
   }
 
@@ -351,6 +360,9 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     localStorage.setItem(LS_HINTS_ENABLED, String(hintsEnabled));
   }, [hintsEnabled]);
+  useEffect(() => {
+    localStorage.setItem(LS_SHOW_UNDO_COUNT, String(showUndoCount));
+  }, [showUndoCount]);
   useEffect(() => {
     setMockLeaderboardEnabled(mockLeaderboard);
   }, [mockLeaderboard]);
@@ -688,6 +700,30 @@ export default function SettingsPage(): JSX.Element {
             className="settings-range"
             data-testid="settings-hint-count"
           />
+        </div>
+
+        <div className="settings-divider" role="presentation" />
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Show undo count</div>
+            <p className="settings-hint">
+              When on, the Undo button label includes the current step count
+              (e.g. &quot;Undo (3)&quot;) so you can see how far you can roll back.
+            </p>
+          </div>
+          <label className="settings-toggle">
+            <input
+              type="checkbox"
+              checked={showUndoCount}
+              onChange={(e) => setShowUndoCount(e.target.checked)}
+              data-testid="settings-show-undo-count"
+            />
+            <span className="settings-toggle-track" aria-hidden="true">
+              <span className="settings-toggle-thumb" />
+            </span>
+            <span className="settings-toggle-label">{showUndoCount ? "On" : "Off"}</span>
+          </label>
         </div>
 
         <div className="settings-divider" role="presentation" />
