@@ -345,6 +345,106 @@ function LineChart({ data, w = 320, h = 140, rangeLabel, svgRef }: { data: BarDa
   );
 }
 
+/** Categories used by the day-of-week heatmap (mirrors `CATEGORY_FILTERS`
+ *  minus the "all" pseudo-entry). Order is fixed so the row layout is stable
+ *  across renders; new categories must be added explicitly. */
+const HEATMAP_CATEGORIES = ["solitaire", "cards", "dice", "board", "arcade"] as const;
+type HeatmapCategory = typeof HEATMAP_CATEGORIES[number];
+const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
+
+/**
+ * Walk `cards-time-history:<gameId>` localStorage entries and bucket each
+ * play within the last `windowDays` days into a category × day-of-week grid.
+ * Returns a `[catIdx][dayIdx]` count matrix where `dayIdx` is Mon=0..Sun=6.
+ *
+ * Pure, deterministic given a fixed `now`; tolerates corrupt JSON the same
+ * way `readTimeHistory` does (it falls back through `progressJSON`).
+ */
+function buildCategoryDowHeatmap(
+  windowDays: number,
+  now: number = Date.now(),
+): { counts: number[][]; max: number; total: number } {
+  const counts: number[][] = HEATMAP_CATEGORIES.map(() => [0, 0, 0, 0, 0, 0, 0]);
+  let max = 0;
+  let total = 0;
+  if (typeof localStorage === "undefined") return { counts, max, total };
+  const cutoff = now - windowDays * 24 * 60 * 60 * 1000;
+  // Pre-index game ids -> category to avoid O(games) lookups per entry.
+  const catById: Record<string, HeatmapCategory> = {};
+  for (const g of GAMES) {
+    if ((HEATMAP_CATEGORIES as readonly string[]).includes(g.category)) {
+      catById[g.id] = g.category as HeatmapCategory;
+    }
+  }
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith(TIME_HISTORY_KEY_PREFIX)) continue;
+    const gameId = k.slice(TIME_HISTORY_KEY_PREFIX.length);
+    const cat = catById[gameId];
+    if (!cat) continue;
+    const catIdx = HEATMAP_CATEGORIES.indexOf(cat);
+    const entries = progressJSON<unknown>(k);
+    if (!Array.isArray(entries)) continue;
+    for (const e of entries) {
+      if (!e || typeof e !== "object") continue;
+      const ts = (e as { ts?: unknown }).ts;
+      if (typeof ts !== "number" || !Number.isFinite(ts)) continue;
+      if (ts < cutoff || ts > now) continue;
+      // JS getDay() returns Sun=0..Sat=6; remap to Mon=0..Sun=6.
+      const jsDow = new Date(ts).getDay();
+      const dowIdx = (jsDow + 6) % 7;
+      counts[catIdx][dowIdx] += 1;
+      total += 1;
+      if (counts[catIdx][dowIdx] > max) max = counts[catIdx][dowIdx];
+    }
+  }
+  return { counts, max, total };
+}
+
+/**
+ * 5×7 heatmap: rows are categories (solitaire/cards/dice/board/arcade),
+ * columns are days of the week (Mon..Sun). Cell opacity is linear in
+ * `count / max`, with a faint floor for empty cells so the grid stays
+ * legible. Renders as a CSS grid of `<div>`s rather than an SVG so the
+ * accent-colored background reads correctly under any theme.
+ */
+function HeatmapChart({
+  data,
+}: {
+  data: { counts: number[][]; max: number; total: number };
+}): JSX.Element {
+  const { counts, max } = data;
+  return (
+    <div className="stats-heatmap" data-testid="stats-cat-heatmap" role="img" aria-label="Plays by category and day of week, last 30 days">
+      <div className="stats-heatmap-row stats-heatmap-row--head" aria-hidden="true">
+        <span className="stats-heatmap-cat" />
+        {DAY_LABELS.map((d) => (
+          <span key={d} className="stats-heatmap-dow">{d}</span>
+        ))}
+      </div>
+      {HEATMAP_CATEGORIES.map((cat, ci) => (
+        <div key={cat} className="stats-heatmap-row">
+          <span className="stats-heatmap-cat">{cat}</span>
+          {DAY_LABELS.map((d, di) => {
+            const v = counts[ci][di];
+            const opacity = max > 0 ? 0.12 + 0.88 * (v / max) : 0.08;
+            return (
+              <span
+                key={d}
+                className="stats-heatmap-cell"
+                style={{ opacity }}
+                title={`${cat} · ${d}: ${v}`}
+                data-testid={`stats-cat-heatmap-${cat}-${d.toLowerCase()}`}
+                data-count={v}
+              >{v > 0 ? v : ""}</span>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 interface PieDatum { label: string; v: number }
 function PieChart({ data, size = 160, svgRef }: { data: PieDatum[]; size?: number; svgRef?: RefObject<SVGSVGElement> }): JSX.Element {
   const total = data.reduce((a, b) => a + b.v, 0);
@@ -557,6 +657,74 @@ function downloadStatsJson(filename: string): void {
   setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
+/**
+ * Quote a value per RFC 4180: wrap in double-quotes when it contains a comma,
+ * quote, CR, or LF; double any embedded quote. Numbers are emitted bare.
+ */
+function csvCell(v: string | number): string {
+  if (typeof v === "number") return Number.isFinite(v) ? String(v) : "";
+  const s = String(v);
+  if (/[",\r\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+  return s;
+}
+
+/**
+ * Build a CSV summary of every game that appears in `stats.perGame`,
+ * augmented with the per-game side-tables (best time, rating, hints, undos).
+ * Columns: gameId,plays,wins,winRate,bestTime,bestScore,rating,hintsUsed,undosUsed
+ * Empty values are emitted as empty cells (not "0" or "—") so downstream
+ * spreadsheets can distinguish "no data" from a true zero.
+ */
+function buildStatsCsv(): string {
+  const stats = loadStats();
+  const header = [
+    "gameId",
+    "plays",
+    "wins",
+    "winRate",
+    "bestTime",
+    "bestScore",
+    "rating",
+    "hintsUsed",
+    "undosUsed",
+  ].join(",");
+  const rows: string[] = [header];
+  const ids = Object.keys(stats.perGame).sort();
+  for (const id of ids) {
+    const gs = stats.perGame[id];
+    const winRate = gs.played > 0 ? gs.wins / gs.played : null;
+    const bestTime = bestTimeFor(id);
+    const rating = ratingFor(id);
+    const cells: (string | number)[] = [
+      csvCell(id),
+      csvCell(gs.played),
+      csvCell(gs.wins),
+      winRate != null ? winRate.toFixed(4) : "",
+      bestTime != null ? csvCell(bestTime) : "",
+      csvCell(gs.best || 0),
+      rating != null ? rating.toFixed(2) : "",
+      csvCell(hintsUsedFor(id)),
+      csvCell(undosUsedFor(id)),
+    ];
+    rows.push(cells.join(","));
+  }
+  return rows.join("\r\n") + "\r\n";
+}
+
+function downloadStatsCsv(filename: string): void {
+  if (typeof document === "undefined" || typeof URL === "undefined") return;
+  const csv = buildStatsCsv();
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
 function formatRelativeTime(ms: number): string {
   const diff = Math.max(0, Date.now() - ms);
   const sec = Math.round(diff / 1000);
@@ -577,6 +745,18 @@ function formatBestTime(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = Math.round(seconds % 60);
   return `${m}m ${s}s`;
+}
+
+/** YYYY-MM-DD formatter for the "achieved on" column on the Personal Records
+ *  card. Uses local-time fields rather than `toISOString()` so the date that
+ *  appears matches what the user saw on their wall clock when the PR landed. */
+function formatAchievedDate(ms: number): string {
+  const d = new Date(ms);
+  if (Number.isNaN(d.getTime())) return "—";
+  const yr = d.getFullYear();
+  const mo = String(d.getMonth() + 1).padStart(2, "0");
+  const dy = String(d.getDate()).padStart(2, "0");
+  return `${yr}-${mo}-${dy}`;
 }
 
 export default function StatsPage(): JSX.Element {
@@ -617,6 +797,11 @@ export default function StatsPage(): JSX.Element {
   const exportJson = (): void => {
     const today = new Date().toISOString().slice(0, 10);
     downloadStatsJson(`cards-stats-${today}.json`);
+  };
+
+  const exportCsv = (): void => {
+    const today = new Date().toISOString().slice(0, 10);
+    downloadStatsCsv(`cards-stats-${today}.csv`);
   };
 
   const fav = favoriteCategory(stats);
@@ -692,6 +877,47 @@ export default function StatsPage(): JSX.Element {
     rows.sort((a, b) => b.count - a.count);
     return rows.slice(0, 5);
     // Re-derive when stats change so the card refreshes after a reset.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stats]);
+
+  // Category × day-of-week heatmap over the last 30 days. Re-derived from
+  // `cards-time-history:*` whenever stats change so a Reset clears the grid.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const heatmapData = useMemo(() => buildCategoryDowHeatmap(30), [stats]);
+
+  /** Top-10 personal best times across all known games. Reads
+   *  `cards-best-times` directly (a `Record<gameId, number>` of seconds), drops
+   *  unknown / non-positive entries, sorts ascending (lower is better), then
+   *  resolves an achieved-on timestamp by scanning the per-game time history
+   *  for the earliest entry whose recorded `time` matches the best. Falls back
+   *  to `null` when no matching history entry exists so the row renders as
+   *  "—". Re-derives whenever stats change so a Reset wipes the card. */
+  const personalRecords = useMemo<{
+    id: string;
+    title: string;
+    time: number;
+    achievedAt: number | null;
+  }[]>(() => {
+    const v = progressJSON<Record<string, number>>("cards-best-times");
+    if (!v || typeof v !== "object") return [];
+    const rows: { id: string; title: string; time: number; achievedAt: number | null }[] = [];
+    for (const [id, t] of Object.entries(v)) {
+      if (typeof t !== "number" || !Number.isFinite(t) || t <= 0) continue;
+      const plug = GAMES.find((g) => g.id === id);
+      if (!plug) continue;
+      let achievedAt: number | null = null;
+      for (const e of readTimeHistory(id)) {
+        // Match within 0.05s to absorb float rounding from formatBestTime
+        // round-trips elsewhere. Take the EARLIEST match — that's when the PR
+        // was first set, even if it was later tied.
+        if (Math.abs(e.time - t) <= 0.05) {
+          if (achievedAt == null || e.ts < achievedAt) achievedAt = e.ts;
+        }
+      }
+      rows.push({ id, title: plug.title, time: t, achievedAt });
+    }
+    rows.sort((a, b) => a.time - b.time);
+    return rows.slice(0, 10);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stats]);
 
@@ -775,6 +1001,16 @@ export default function StatsPage(): JSX.Element {
           >
             <span className="stats-export-json-badge" aria-hidden="true">JSON</span>
             Download stats
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost stats-export-csv"
+            onClick={exportCsv}
+            data-testid="stats-export-csv"
+            title="Download per-game stats summary as CSV (spreadsheet-friendly)"
+          >
+            <span className="stats-export-json-badge" aria-hidden="true">CSV</span>
+            Download CSV
           </button>
         </div>
       </div>
@@ -951,6 +1187,82 @@ export default function StatsPage(): JSX.Element {
               ))}
             </ul>
           )}
+        </div>
+
+        <div className="stats-card" data-testid="stats-personal-records">
+          <h2>Personal records</h2>
+          <p className="stats-chart-label">Top 10 best times across all games</p>
+          {personalRecords.length === 0 ? (
+            <p className="stats-empty">No best times recorded yet — finish a timed game!</p>
+          ) : (
+            <ul className="stats-pr-list">
+              {personalRecords.map((row, idx) => (
+                <li key={row.id} data-testid={`stats-pr-row-${idx}`}>
+                  <span className="stats-pr-rank">{idx + 1}</span>
+                  <span className="stats-pr-title">{row.title}</span>
+                  <span className="stats-pr-time">{formatBestTime(row.time)}</span>
+                  <span className="stats-pr-date">
+                    {row.achievedAt != null ? formatAchievedDate(row.achievedAt) : "—"}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="stats-card stats-card--week" data-testid="stats-this-week">
+          <h2>This week</h2>
+          <p className="stats-chart-label">Last 7 days vs prior 7 days</p>
+          {(() => {
+            const { current, prior } = weekAggregates;
+            const playsDelta = pctDelta(current.plays, prior.plays);
+            const winsDelta = pctDelta(current.wins, prior.wins);
+            // Avg-time deltas are inverted in tone (faster = better), but we
+            // still report the raw % change — color signaling is left to the
+            // CSS based on direction. A null delta renders as an em-dash.
+            const avgDelta = pctDelta(current.avgTime, prior.avgTime);
+            const renderDelta = (d: number | null): JSX.Element => {
+              if (d == null) return <span className="stats-week-delta is-flat" data-direction="flat">—</span>;
+              if (d > 0) return <span className="stats-week-delta is-up" data-direction="up">▲ {d}%</span>;
+              if (d < 0) return <span className="stats-week-delta is-down" data-direction="down">▼ {Math.abs(d)}%</span>;
+              return <span className="stats-week-delta is-flat" data-direction="flat">0%</span>;
+            };
+            return (
+              <>
+                <ul className="stats-week-list" data-testid="stats-this-week-list">
+                  <li>
+                    <span className="stats-week-label">Plays</span>
+                    <em className="stats-week-value">{current.plays}</em>
+                    {renderDelta(playsDelta)}
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Wins</span>
+                    <em className="stats-week-value">{current.wins}</em>
+                    {renderDelta(winsDelta)}
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Avg time</span>
+                    <em className="stats-week-value">{formatAvgTime(current.avgTime)}</em>
+                    {renderDelta(avgDelta)}
+                  </li>
+                </ul>
+                <ul className="stats-week-list stats-week-list--prev" data-testid="stats-prev-week">
+                  <li>
+                    <span className="stats-week-label">Prior plays</span>
+                    <em className="stats-week-value">{prior.plays}</em>
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Prior wins</span>
+                    <em className="stats-week-value">{prior.wins}</em>
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Prior avg time</span>
+                    <em className="stats-week-value">{formatAvgTime(prior.avgTime)}</em>
+                  </li>
+                </ul>
+              </>
+            );
+          })()}
         </div>
 
         <div className="stats-card" data-testid="stats-achievements">
