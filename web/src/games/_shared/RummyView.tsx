@@ -36,7 +36,7 @@ export function RummyView({
         </div>
       </div>
       <div className={`${prefix}-piles`}>
-        <div className={`${prefix}-pile`}>
+        <div className={`${prefix}-pile`} data-testid="hint-target-rummy-stock">
           <div className={`${prefix}-label`}>Stock ({stock.length})</div>
           {phase === "player-draw" && stock.length > 0 ? (
             <Card faceDown onClick={() => dispatch({ type: "draw", from: "stock" } as RummyAction)} />
@@ -44,7 +44,7 @@ export function RummyView({
             <Card faceDown />
           )}
         </div>
-        <div className={`${prefix}-pile`}>
+        <div className={`${prefix}-pile`} data-testid="hint-target-rummy-discard">
           <div className={`${prefix}-label`}>Discard</div>
           {top ? (
             phase === "player-draw"
@@ -57,6 +57,7 @@ export function RummyView({
       {!done && (
         <div className={`${prefix}-actions`}>
           <button className={`${prefix}-btn`} disabled={!canKnock}
+            data-testid="hint-target-rummy-knock"
             onClick={() => dispatch({ type: "knock" } as RummyAction)}>
             Knock ({deadwoodValue} dw)
           </button>
@@ -70,11 +71,13 @@ export function RummyView({
             const sd = (so[a.suit] ?? 0) - (so[b.suit] ?? 0);
             return sd !== 0 ? sd : a.rank - b.rank;
           })
-          .map(c =>
-            phase === "player-discard"
-              ? <Card key={c.id} card={c} onClick={() => dispatch({ type: "discard", cardId: c.id } as RummyAction)} />
-              : <Card key={c.id} card={c} />
-          )}
+          .map((c, i) => (
+            <span key={c.id} data-testid={`hint-target-rummy-card-${i}`}>
+              {phase === "player-discard"
+                ? <Card card={c} onClick={() => dispatch({ type: "discard", cardId: c.id } as RummyAction)} />
+                : <Card card={c} />}
+            </span>
+          ))}
       </div>
       {done && finalScore !== null && (
         <div className={`${prefix}-result`}>
