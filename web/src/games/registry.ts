@@ -4462,6 +4462,9 @@ import { basicRummyPlugin } from "./basic-rummy/index.js";
 import { durakPodkPlugin } from "./durak-podk/index.js";
 import { chinchonCardPlugin } from "./chinchon-card/index.js";
 import { setteBelloPlugin } from "./sette-bello/index.js";
+import { diceTowerStackPlugin } from "./dice-tower-stack/index.js";
+import { cardShuffleProPlugin } from "./card-shuffle-pro/index.js";
+import { clickTheDifferencePlugin } from "./click-the-difference/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -8926,4 +8929,7 @@ export const GAMES: GamePlugin[] = [
   durakPodkPlugin as unknown as GamePlugin,
   chinchonCardPlugin as unknown as GamePlugin,
   setteBelloPlugin as unknown as GamePlugin,
+  diceTowerStackPlugin as unknown as GamePlugin,
+  cardShuffleProPlugin as unknown as GamePlugin,
+  clickTheDifferencePlugin as unknown as GamePlugin,
 ];
