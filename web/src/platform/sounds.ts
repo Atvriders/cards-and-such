@@ -5,6 +5,15 @@
  * Each sound is a 50–200 ms beep with a quick attack/decay envelope so
  * effects don't click. Honors the `cards-sound-on` localStorage flag
  * (defaults to ON) and silently no-ops in non-browser / SSR contexts.
+ *
+ * Volume is sourced from `cards-sound-volume` (0–100 integer, default 70)
+ * and converted to a gain factor of `vol / 100 * 0.5` so the headroom is
+ * deliberately low — Web Audio is loud and the recipes below were tuned
+ * with a 0.5 ceiling in mind. Volume changes propagate live via the
+ * window `storage` event so the Settings slider doesn't need a reload.
+ *
+ * `cards-mute-on-hidden` (default true) drops the gain factor to 0 while
+ * the tab is hidden and restores it on visibilitychange.
  */
 
 export type SoundName =
@@ -21,6 +30,13 @@ export type SoundName =
   | "achievement";
 
 export const LS_SOUND_ON = "cards-sound-on";
+export const LS_SOUND_VOLUME = "cards-sound-volume";
+export const LS_MUTE_ON_HIDDEN = "cards-mute-on-hidden";
+
+/** Default volume on the 0..100 slider scale. */
+export const DEFAULT_VOLUME_PERCENT = 70;
+/** Headroom multiplier — Web Audio is loud, keep things quiet by default. */
+export const VOLUME_HEADROOM = 0.5;
 
 let cachedCtx: AudioContext | null = null;
 
@@ -68,6 +84,106 @@ export function setSoundOn(on: boolean): void {
     /* ignore */
   }
 }
+
+/**
+ * Read the persisted volume slider value and clamp to 0..100.
+ *
+ * Tolerant of both the documented 0–100 integer scale (what Settings now
+ * writes) and the historical 0..1 float scale that an earlier draft of
+ * the slider used — values <= 1 are treated as fractions and scaled up,
+ * everything else is rounded and clamped. Falls back to 70 on any miss.
+ */
+export function readVolumePercent(): number {
+  if (typeof localStorage === "undefined") return DEFAULT_VOLUME_PERCENT;
+  let raw: string | null = null;
+  try {
+    raw = localStorage.getItem(LS_SOUND_VOLUME);
+  } catch {
+    return DEFAULT_VOLUME_PERCENT;
+  }
+  if (raw === null || raw === "") return DEFAULT_VOLUME_PERCENT;
+  const n = Number(raw);
+  if (!Number.isFinite(n)) return DEFAULT_VOLUME_PERCENT;
+  // Tolerate the legacy 0..1 float scale.
+  const pct = n > 0 && n <= 1 ? n * 100 : n;
+  return Math.min(100, Math.max(0, Math.round(pct)));
+}
+
+export function readMuteOnHidden(): boolean {
+  if (typeof localStorage === "undefined") return true;
+  try {
+    const v = localStorage.getItem(LS_MUTE_ON_HIDDEN);
+    if (v === null) return true; // default ON
+    return v === "true";
+  } catch {
+    return true;
+  }
+}
+
+/**
+ * Convert a 0..100 percent to the per-tone gain multiplier. The 0.5 cap
+ * keeps the recipes (which top out around peak=0.26) within a comfortable
+ * range — at vol=100 the loudest tone tops at ~0.13 absolute gain.
+ */
+export function volumeFactor(percent: number = readVolumePercent()): number {
+  const clamped = Math.min(100, Math.max(0, percent));
+  return (clamped / 100) * VOLUME_HEADROOM;
+}
+
+// ---------------------------------------------------------------------------
+// Live state — kept in module scope so playSound() doesn't have to re-read
+// localStorage on every tone, and so visibilitychange / storage listeners
+// can mutate the effective gain in O(1).
+
+let currentVolumePercent = readVolumePercent();
+let muteOnHidden = readMuteOnHidden();
+let hidden = false;
+
+/**
+ * The gain factor we actually multiply each tone by. Hidden + muteOnHidden
+ * drives this to 0 regardless of slider position.
+ */
+function effectiveGainFactor(): number {
+  if (muteOnHidden && hidden) return 0;
+  return volumeFactor(currentVolumePercent);
+}
+
+/** Test/debug helper — re-pull every input from localStorage + document. */
+export function _refreshAudioState(): void {
+  currentVolumePercent = readVolumePercent();
+  muteOnHidden = readMuteOnHidden();
+  hidden = typeof document !== "undefined" && document.visibilityState === "hidden";
+}
+
+/** Wire up storage + visibilitychange listeners exactly once. */
+let listenersAttached = false;
+function attachListenersOnce(): void {
+  if (listenersAttached) return;
+  if (typeof window === "undefined") return;
+  listenersAttached = true;
+
+  // Cross-tab + same-doc Settings updates. The browser fires `storage` on
+  // *other* tabs only, so SettingsPage already triggers re-renders via its
+  // own state — we still listen here so background tabs follow along.
+  window.addEventListener("storage", (e: StorageEvent) => {
+    if (e.key === LS_SOUND_VOLUME || e.key === null) {
+      currentVolumePercent = readVolumePercent();
+    }
+    if (e.key === LS_MUTE_ON_HIDDEN || e.key === null) {
+      muteOnHidden = readMuteOnHidden();
+    }
+  });
+
+  if (typeof document !== "undefined") {
+    hidden = document.visibilityState === "hidden";
+    document.addEventListener("visibilitychange", () => {
+      hidden = document.visibilityState === "hidden";
+    });
+  }
+}
+
+// Attach immediately at module load. Safe in SSR — guarded above.
+attachListenersOnce();
 
 interface Tone {
   freq: number;
@@ -136,7 +252,7 @@ const SOUND_RECIPES: Record<SoundName, Tone[]> = {
   ],
 };
 
-function playTone(ctx: AudioContext, t: Tone, startAt: number): void {
+function playTone(ctx: AudioContext, t: Tone, startAt: number, factor: number): void {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.type = t.type ?? "sine";
@@ -144,7 +260,11 @@ function playTone(ctx: AudioContext, t: Tone, startAt: number): void {
   if (typeof t.to === "number") {
     osc.frequency.linearRampToValueAtTime(t.to, startAt + t.duration);
   }
-  const peak = t.gain ?? 0.18;
+  // Apply the user's volume factor to the recipe's peak. exponentialRampTo
+  // can't accept 0, so floor to a tiny epsilon when factor is 0 — the tone
+  // will still be effectively silent.
+  const recipePeak = t.gain ?? 0.18;
+  const peak = Math.max(0.0001, recipePeak * factor);
   // Quick attack/decay envelope to avoid clicks.
   gain.gain.setValueAtTime(0.0001, startAt);
   gain.gain.exponentialRampToValueAtTime(peak, startAt + 0.005);
@@ -156,11 +276,14 @@ function playTone(ctx: AudioContext, t: Tone, startAt: number): void {
 
 /**
  * Play a named sound effect. Silent if the user has disabled sound
- * via `localStorage["cards-sound-on"] === "false"`, or if Web Audio
- * isn't available in the host environment.
+ * via `localStorage["cards-sound-on"] === "false"`, if the volume
+ * slider is at 0, if the tab is hidden and mute-on-hidden is on, or
+ * if Web Audio isn't available in the host environment.
  */
 export function playSound(name: SoundName): void {
   if (!isSoundOn()) return;
+  const factor = effectiveGainFactor();
+  if (factor <= 0) return;
   const ctx = getAudioContext();
   if (!ctx) return;
   const recipe = SOUND_RECIPES[name];
@@ -168,7 +291,7 @@ export function playSound(name: SoundName): void {
   const now = ctx.currentTime;
   for (const tone of recipe) {
     try {
-      playTone(ctx, tone, now + (tone.delay ?? 0));
+      playTone(ctx, tone, now + (tone.delay ?? 0), factor);
     } catch {
       /* ignore individual tone failures */
     }

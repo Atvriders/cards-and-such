@@ -43,6 +43,8 @@ export const KNOWN_KEYS: readonly string[] = [
   // sound (current + legacy)
   "cards-sound-on",
   "cards-sound-enabled",
+  "cards-sound-volume",
+  "cards-mute-on-hidden",
   // ui state
   "cards-stats-panel-collapsed",
   "cards-tutorial-seen",

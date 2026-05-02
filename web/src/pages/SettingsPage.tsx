@@ -30,7 +30,12 @@ import {
   loadSavedLightMode,
   LIGHT_STORAGE_KEY,
 } from "../platform/lightMode.js";
-import { LS_SOUND_ON } from "../platform/sounds.js";
+import {
+  LS_SOUND_ON,
+  LS_SOUND_VOLUME,
+  LS_MUTE_ON_HIDDEN,
+  DEFAULT_VOLUME_PERCENT,
+} from "../platform/sounds.js";
 import {
   isMockLeaderboardEnabled,
   setMockLeaderboardEnabled,
@@ -49,7 +54,8 @@ const LS_SOUND = LS_SOUND_ON; // "cards-sound-on"
 const LS_SOUND_LEGACY = "cards-sound-enabled";
 const LS_ANIMATIONS = "cards-animations";
 const LS_CARD_FONT = "cards-card-font";
-const LS_VOLUME = "cards-sound-volume";
+const LS_VOLUME = LS_SOUND_VOLUME;
+const LS_MUTE_HIDDEN = LS_MUTE_ON_HIDDEN;
 const LS_AUTO_MOVE = "cards-auto-move";
 const LS_HINT_COUNT = "cards-hint-count";
 const LS_HINTS_ENABLED = "cards-hints-enabled";
@@ -63,7 +69,7 @@ const APPEARANCE_KEYS = [
   LIGHT_STORAGE_KEY,
   LS_CARD_FONT,
 ];
-const AUDIO_KEYS = [LS_SOUND, LS_SOUND_LEGACY, LS_VOLUME];
+const AUDIO_KEYS = [LS_SOUND, LS_SOUND_LEGACY, LS_VOLUME, LS_MUTE_HIDDEN];
 const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT, LS_HINTS_ENABLED, LS_SHOW_UNDO_COUNT];
 
 const CARD_BACKS: { id: CardBack; label: string; preview: string }[] = [
@@ -102,11 +108,19 @@ function readSound(): boolean {
   return legacy === null ? true : legacy === "true";
 }
 function readVolume(): number {
-  if (typeof localStorage === "undefined") return 0.8;
+  // Stored on the 0..100 integer scale; tolerate the legacy 0..1 floats.
+  if (typeof localStorage === "undefined") return DEFAULT_VOLUME_PERCENT;
   const raw = localStorage.getItem(LS_VOLUME);
-  const n = raw === null ? NaN : Number(raw);
-  if (!Number.isFinite(n)) return 0.8;
-  return Math.min(1, Math.max(0, n));
+  if (raw === null) return DEFAULT_VOLUME_PERCENT;
+  const n = Number(raw);
+  if (!Number.isFinite(n)) return DEFAULT_VOLUME_PERCENT;
+  const pct = n > 0 && n <= 1 ? n * 100 : n;
+  return Math.min(100, Math.max(0, Math.round(pct)));
+}
+function readMuteOnHidden(): boolean {
+  if (typeof localStorage === "undefined") return true;
+  const v = localStorage.getItem(LS_MUTE_HIDDEN);
+  return v === null ? true : v === "true";
 }
 function readAnimations(): Animations {
   const v = (typeof localStorage !== "undefined" && localStorage.getItem(LS_ANIMATIONS)) as Animations | null;
@@ -177,6 +191,7 @@ export default function SettingsPage(): JSX.Element {
   const [cardFont, setCardFont] = useState<CardFont>(readCardFont);
   const [sound, setSound] = useState<boolean>(readSound);
   const [volume, setVolume] = useState<number>(readVolume);
+  const [muteOnHidden, setMuteOnHidden] = useState<boolean>(readMuteOnHidden);
   const [animations, setAnimations] = useState<Animations>(readAnimations);
   const [autoMove, setAutoMove] = useState<boolean>(readAutoMove);
   const [hintCount, setHintCount] = useState<number>(readHintCount);
@@ -193,6 +208,7 @@ export default function SettingsPage(): JSX.Element {
     setCardFont(readCardFont());
     setSound(readSound());
     setVolume(readVolume());
+    setMuteOnHidden(readMuteOnHidden());
     setAnimations(readAnimations());
     setAutoMove(readAutoMove());
     setHintCount(readHintCount());
@@ -310,7 +326,8 @@ export default function SettingsPage(): JSX.Element {
   function resetAudio() {
     clearKeys(AUDIO_KEYS);
     setSound(true);
-    setVolume(0.8);
+    setVolume(DEFAULT_VOLUME_PERCENT);
+    setMuteOnHidden(true);
   }
   function resetGameplay() {
     clearKeys(GAMEPLAY_KEYS);
@@ -343,6 +360,9 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     localStorage.setItem(LS_VOLUME, String(volume));
   }, [volume]);
+  useEffect(() => {
+    localStorage.setItem(LS_MUTE_HIDDEN, String(muteOnHidden));
+  }, [muteOnHidden]);
   useEffect(() => {
     localStorage.setItem(LS_ANIMATIONS, animations);
     applyAnimations(animations);
@@ -602,20 +622,43 @@ export default function SettingsPage(): JSX.Element {
 
         <div className="settings-field">
           <label className="settings-field-label" htmlFor="settings-volume">
-            Volume <span className="settings-meta">{Math.round(volume * 100)}%</span>
+            Volume <span className="settings-meta">{volume}%</span>
           </label>
           <input
             id="settings-volume"
             type="range"
             min={0}
-            max={1}
-            step={0.05}
+            max={100}
+            step={1}
             value={volume}
-            onChange={(e) => setVolume(Number(e.target.value))}
+            onChange={(e) => setVolume(Number.parseInt(e.target.value, 10))}
             disabled={!sound}
             className="settings-range"
             data-testid="settings-volume"
           />
+        </div>
+
+        <div className="settings-divider" role="presentation" />
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Mute when tab hidden</div>
+            <p className="settings-hint">
+              Silence sound effects while the browser tab is in the background.
+            </p>
+          </div>
+          <label className="settings-toggle">
+            <input
+              type="checkbox"
+              checked={muteOnHidden}
+              onChange={(e) => setMuteOnHidden(e.target.checked)}
+              data-testid="settings-mute-on-hidden"
+            />
+            <span className="settings-toggle-track" aria-hidden="true">
+              <span className="settings-toggle-thumb" />
+            </span>
+            <span className="settings-toggle-label">{muteOnHidden ? "On" : "Off"}</span>
+          </label>
         </div>
       </section>
 
