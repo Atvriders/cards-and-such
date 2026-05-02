@@ -31,5 +31,9 @@ Tips: For small counts (under 10), your brain can subitize — recognize the qua
   initialState: (seed: number, settings: QCSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: QuickCountingState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".qc-btn-primary", pulses: 3 };
+  },
   component: QuickCounting,
 };

@@ -15,5 +15,9 @@ export const dinoOpolyMemPlugin: GamePlugin<dinoOpolyMemState, dinoOpolyMemActio
   initialState: (seed: number, s: S) => initialState(seed, s as dinoOpolyMemSettings),
   reducer,
   isTerminal,
+  hint: (state: dinoOpolyMemState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".gmem-btn.submit, .gmem-btn.next", pulses: 3 };
+  },
   component: dinoOpolyMemGame,
 };

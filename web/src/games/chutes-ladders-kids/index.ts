@@ -33,5 +33,9 @@ Bots roll automatically after you. Play against 1, 2, or 3 bot opponents. It's a
   initialState: (seed: number, settings: ChutesKidsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: KidsState) => {
+    if (state.winner !== null) return null;
+    return { selector: ".clk-roll-btn", pulses: 3 };
+  },
   component: ChutesLaddersKids,
 };

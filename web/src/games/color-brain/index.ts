@@ -12,5 +12,10 @@ export const colorBrainPlugin: GamePlugin<ColorBrainState, ColorBrainAction, typ
   howToPlay: "Color Brain is trivia where every answer is a color. Fifteen rounds each pose a question — what color is a stop sign, a pumpkin, fresh snow, an avocado peel, a flamingo? — and present four candidate colors. Pick the right one, hit Submit, score ten points. Max 150 points across fifteen rounds. The full pool covers everyday objects (buses, basketballs, eggplants), weather (sky, snow), animals (flamingos, polar bears), and traffic (stop and go signals). Color Brain rewards observational fluency — knowing the world's colors as you have actually seen them. Children playing score 90-130; adults often get 130-150. The trick is that obvious answers stay obvious — no trick questions. Hit Submit to lock and Next to advance. Useful as a kids learning game, an icebreaker, or as a five-minute palette-check before doing visual creative work. A perfect score certifies you as a color-pattern observer of the everyday.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ColorBrainSettings),
-  reducer, isTerminal, component: ColorBrainGame,
+  reducer, isTerminal,
+  hint: (state: ColorBrainState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".clrbrn-btn.submit, .clrbrn-btn.next", pulses: 3 };
+  },
+  component: ColorBrainGame,
 };

@@ -33,5 +33,9 @@ This game helps children learn to recognize uppercase letters quickly. Play a fe
   initialState: (seed: number, settings: AlphabetCatchSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: AlphabetState) => {
+    if (state.done) return null;
+    return { selector: ".ac-btn", pulses: 3 };
+  },
   component: AlphabetCatch,
 };

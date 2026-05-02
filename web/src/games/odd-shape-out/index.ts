@@ -31,5 +31,9 @@ Tips: Train your eye to do a quick categorical sweep rather than examining each 
   initialState: (seed: number, settings: OSOSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: OSOState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".oso-shape-btn, .oso-btn-primary", pulses: 3 };
+  },
   component: OddShapeOut,
 };

@@ -18,5 +18,10 @@ Spelling matters — it's "forty" (not "fourty") and "ninety" (not "ninty"). The
 There are 20 rounds and no timer — accuracy over speed. Maximum score is 200 points. Easy practice for kids learning their number words, or a quick warm-up for adults who want to flex their lexical-numeric muscles.`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as NumwordMatchSettings),
-  reducer, isTerminal, component: NumwordMatchGame,
+  reducer, isTerminal,
+  hint: (state: NumwordMatchState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".nw-btn.submit, .nw-btn.next", pulses: 3 };
+  },
+  component: NumwordMatchGame,
 };

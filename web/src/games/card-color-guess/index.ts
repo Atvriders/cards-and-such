@@ -18,5 +18,10 @@ With 26 red and 26 black cards in the deck, each guess is essentially 50/50 — 
 Play 10 or 20 rounds using Settings. Maximum possible score grows with your streak. The real goal is keeping that streak alive as long as possible. Simple to play, hard to master — can you guess correctly every time?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardColorGuessSettings),
-  reducer, isTerminal, component:CardColorGuess,
+  reducer, isTerminal,
+  hint: (state: CardColorGuessState) => {
+    if (state.phase === "gameover" || state.phase === "reveal") return null;
+    return { selector: ".bet-btn", pulses: 3 };
+  },
+  component:CardColorGuess,
 };

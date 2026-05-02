@@ -20,5 +20,9 @@ export const categoriesLetterPlugin: GamePlugin<GameState, GameAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as GameSettings),
   reducer,
   isTerminal,
+  hint: (state: GameState) => {
+    if (state.phase === "done" || state.submitted) return null;
+    return { selector: ".qz-choices button", pulses: 3 };
+  },
   component: CategoriesLetterGame,
 };

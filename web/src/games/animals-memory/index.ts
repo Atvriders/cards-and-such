@@ -17,5 +17,9 @@ export const animalsMemoryPlugin: GamePlugin<AnimalsMemoryState, AnimalsMemoryAc
   initialState: (seed: number, s: S) => initialState(seed, s as AnimalsMemorySettings),
   reducer,
   isTerminal,
+  hint: (state: AnimalsMemoryState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".anmlmem-btn.submit, .anmlmem-btn.next", pulses: 3 };
+  },
   component: AnimalsMemoryGame,
 };

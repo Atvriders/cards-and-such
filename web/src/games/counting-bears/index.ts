@@ -33,5 +33,9 @@ Take your time and count out loud to yourself. A good strategy is to point to ea
   initialState: (seed: number, settings: CountingBearsSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CountingState) => {
+    if (state.done) return null;
+    return { selector: ".cb-choice-btn", pulses: 3 };
+  },
   component: CountingBears,
 };

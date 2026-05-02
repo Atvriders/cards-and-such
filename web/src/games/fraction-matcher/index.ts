@@ -40,5 +40,9 @@ Tips: Memorise the most common decimal equivalents: 1/2 = 0.5, 1/4 = 0.25, 3/4 =
   initialState: (seed: number, settings: FractionMatcherSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FractionMatcherState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".fm-btn.submit, .fm-btn.next", pulses: 3 };
+  },
   component: FractionMatcherGame,
 };

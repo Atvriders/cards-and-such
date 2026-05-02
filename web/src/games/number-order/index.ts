@@ -33,5 +33,9 @@ Play with 5 numbers for a gentle start, 8 numbers for a medium challenge, or 10 
   initialState: (seed: number, settings: NumberOrderSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: NumberOrderState) => {
+    if (state.done) return null;
+    return { selector: ".no-num:not(.tapped)", pulses: 3 };
+  },
   component: NumberOrder,
 };

@@ -28,5 +28,9 @@ Tips: There is no guaranteed strategy since the deck is randomly shuffled, but t
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CardColorStreakState) => {
+    if (state.phase === "done" || state.phase === "reveal") return null;
+    return { selector: ".ccs-btn", pulses: 3 };
+  },
   component: CardColorStreak,
 };

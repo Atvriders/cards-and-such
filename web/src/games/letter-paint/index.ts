@@ -38,5 +38,9 @@ Tips: scan row by row rather than jumping around. The target count hint gives yo
   initialState: (seed: number, settings: LetterPaintSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LetterPaintState) => {
+    if (state.phase === "result") return null;
+    return { selector: ".lp-cell:not(.painted)", pulses: 3 };
+  },
   component: LetterPaintGame,
 };

@@ -12,5 +12,10 @@ export const colorReactionPlugin: GamePlugin<ColorReactionState, ColorReactionAc
   howToPlay:"Color Reaction is a thirty-tick reflex test in the classic 'go/no-go' tradition. Each round (about one second per tick), the central stage shows either GREEN (a 'go' signal) or RED (a 'no-go' signal). Your job: tap the stage when it's green, but absolutely do not tap when it's red. A correct green tap scores ten points; an incorrect red tap deducts five points (minimum zero). Misses (failing to tap a green) don't directly cost points, but you'll miss out on scoring opportunities. The timer counts down thirty ticks in the upper-right corner. This is a textbook neuropsychology task — used to measure inhibitory control and reaction time. Average runs land at 80-140 points; quick-reflex enthusiasts with disciplined inhibition routinely score 200+. When the thirty ticks expire, your final score is locked in. Train your inhibition, tap on green only, and rack up the points!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ColorReactionSettings),
-  reducer,isTerminal,component:ColorReactionGame,
+  reducer,isTerminal,
+  hint: (state: ColorReactionState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".clrrct-target", pulses: 3 };
+  },
+  component:ColorReactionGame,
 };

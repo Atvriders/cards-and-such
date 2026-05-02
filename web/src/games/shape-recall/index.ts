@@ -18,5 +18,10 @@ The sequence advances automatically every 0.9 seconds — pay close attention! B
 Use Settings to play 5 or 10 rounds. Longer sequences require deeper concentration. With practice, you can reliably recall sequences of 7-8 shapes. Can you push your visual sequence memory to the limit?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ShapeRecallSettings),
-  reducer, isTerminal, component:ShapeRecall,
+  reducer, isTerminal,
+  hint: (state: ShapeRecallState) => {
+    if (state.phase === "gameover") return null;
+    return { selector: ".memory-btn", pulses: 3 };
+  },
+  component:ShapeRecall,
 };

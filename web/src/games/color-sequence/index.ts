@@ -22,5 +22,9 @@ The fifth color (purple) adds 25% more combinations compared to classic four-col
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: ColorSequenceState) => {
+    if (state.phase === "complete") return null;
+    return { selector: ".cs-start-btn", pulses: 3 };
+  },
   component: ColorSequence,
 };

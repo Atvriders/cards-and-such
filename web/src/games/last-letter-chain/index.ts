@@ -20,5 +20,9 @@ export const lastLetterChainPlugin: GamePlugin<LastLetterChainState, LastLetterC
   initialState: (seed: number, s: S) => initialState(seed, s as LastLetterChainSettings),
   reducer,
   isTerminal,
+  hint: (state: LastLetterChainState) => {
+    if (state.phase === "done") return null;
+    return { selector: ".llc-btn.submit, .llc-btn.next", pulses: 3 };
+  },
   component: LastLetterChainGame,
 };
