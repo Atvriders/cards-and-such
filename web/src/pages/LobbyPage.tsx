@@ -1998,6 +1998,7 @@ function GameCard({
       to={`/play/${g.id}`}
       className={`tile tile--cat-${CATEGORY_TAG[g.category]}${pressed ? " tile--pressed" : ""}`}
       data-testid={`tile-${g.id}`}
+      aria-haspopup="menu"
       onMouseDown={startPress}
       onMouseUp={endPress}
       onMouseLeave={endPress}
