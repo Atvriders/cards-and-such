@@ -17,6 +17,7 @@ import { Skeleton } from "../Skeleton.js";
 import { emitSparkles } from "../Sparkles.js";
 import { useFocusTrap } from "../useFocusTrap.js";
 import { t } from "../i18n.js";
+import { track } from "../analytics.js";
 import "./ThemePicker.css";
 
 /**
@@ -113,6 +114,7 @@ export default function ThemePicker(): JSX.Element {
     stampTried(id);
     setOpen(false);
     buttonRef.current?.focus();
+    track("theme.change", { theme: id });
   }, [stampTried]);
 
   const selectCustom = useCallback((cfg: CustomThemeConfig) => {
@@ -120,6 +122,7 @@ export default function ThemePicker(): JSX.Element {
     setActive(CUSTOM_THEME_ID);
     setCustom(cfg);
     stampTried(CUSTOM_THEME_ID);
+    track("theme.change", { theme: CUSTOM_THEME_ID, accent: cfg.accent });
   }, [stampTried]);
 
   // Hover-preview: temporarily apply theme variables without persisting.

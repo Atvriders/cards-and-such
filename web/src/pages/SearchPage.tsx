@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { PageHead } from "../platform/PageHead.js";
 import { searchAll, type SearchHit } from "../platform/search.js";
 import { highlightMatch } from "../platform/highlight.js";
+import { track } from "../platform/analytics.js";
 import "./SearchPage.css";
 
 /**
@@ -139,6 +140,8 @@ export default function SearchPage(): JSX.Element {
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     setDebounced(query);
+    const trimmed = query.trim();
+    if (trimmed.length > 0) track("search.submit", { length: trimmed.length });
   };
 
   const runRecent = (q: string): void => {

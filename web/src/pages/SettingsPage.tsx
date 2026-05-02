@@ -201,6 +201,17 @@ export default function SettingsPage(): JSX.Element {
   const [hintsEnabled, setHintsEnabled] = useState<boolean>(readHintsEnabled);
   const [showUndoCount, setShowUndoCount] = useState<boolean>(readShowUndoCount);
   const [mockLeaderboard, setMockLeaderboard] = useState<boolean>(isMockLeaderboardEnabled);
+  // Hidden dev panel: surfaces the local-only analytics ring buffer. The
+  // toggle starts off — the link itself is small + de-emphasized so casual
+  // users never notice it, but power users + maintainers can pop it open
+  // to verify behaviour without running the app under devtools.
+  const [eventLogOpen, setEventLogOpen] = useState(false);
+  const [eventLog, setEventLog] = useState<AnalyticsEvent[]>([]);
+  const refreshEventLog = () => {
+    const all = getEvents();
+    // Show only the last 50 — newest last is the natural tail order.
+    setEventLog(all.slice(-50));
+  };
   const importInputRef = useRef<HTMLInputElement | null>(null);
   // Debounce timer for the volume-preview tone. We don't want to fire one
   // tone per drag event — wait 80ms after the last change to play.
@@ -1014,6 +1025,79 @@ export default function SettingsPage(): JSX.Element {
             Reset favorites only
           </button>
         </div>
+
+        {/* Hidden dev panel — local-only analytics. Renders a quiet
+            text-link that pops a panel showing the most recent ring-buffer
+            events. No network, no upload, no remote anything. Strictly a
+            debug surface. */}
+        <div className="settings-row settings-mini-row">
+          <button
+            type="button"
+            className="settings-link settings-link--inline"
+            onClick={() => {
+              const next = !eventLogOpen;
+              setEventLogOpen(next);
+              if (next) refreshEventLog();
+            }}
+            data-testid="analytics-toggle"
+            aria-expanded={eventLogOpen}
+          >
+            {eventLogOpen ? "Hide event log" : "Show event log"}
+          </button>
+        </div>
+
+        {eventLogOpen && (
+          <div
+            className="settings-event-log"
+            data-testid="analytics-panel"
+            aria-label="Local analytics event log"
+          >
+            <div className="settings-row settings-mini-row">
+              <button
+                type="button"
+                className="settings-mini-btn"
+                onClick={refreshEventLog}
+                data-testid="analytics-refresh"
+              >
+                Refresh
+              </button>
+              <button
+                type="button"
+                className="settings-mini-btn"
+                onClick={() => {
+                  clearEvents();
+                  refreshEventLog();
+                }}
+                data-testid="analytics-clear"
+              >
+                Clear
+              </button>
+              <span className="settings-meta">
+                {eventLog.length} event{eventLog.length === 1 ? "" : "s"} (local-only, never uploaded)
+              </span>
+            </div>
+            {eventLog.length === 0 ? (
+              <p className="settings-hint" data-testid="analytics-empty">
+                No events recorded yet on this device.
+              </p>
+            ) : (
+              <ol className="settings-event-list">
+                {eventLog.map((evt, idx) => (
+                  <li
+                    key={`${evt.ts}-${idx}`}
+                    className="settings-event-item"
+                    data-testid={`analytics-event-${idx}`}
+                  >
+                    <code>
+                      {new Date(evt.ts).toISOString()} — {evt.name}
+                      {evt.props ? ` ${JSON.stringify(evt.props)}` : ""}
+                    </code>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
+        )}
       </section>
     </div>
   );

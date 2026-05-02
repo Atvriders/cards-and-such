@@ -21,6 +21,7 @@ import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
 import { encodeChallenge, MAX_FRIEND_SEED } from "../platform/friendCode.js";
+import { track } from "../platform/analytics.js";
 import { hashStamp, todayStamp } from "./dailyPicker.js";
 import "./PlayPage.css";
 
@@ -626,6 +627,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     setShowConfetti(false);
     setSettingsAtGameStart(JSON.stringify(settings));
     setPhase("playing");
+    track("game.start", { gameId: plugin.id, seed, quickstart: true });
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
@@ -657,6 +659,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       setSessionPlays((n) => n + 1);
       setSettingsAtGameStart(JSON.stringify(settings));
       setPhase("playing");
+      track("game.start", { gameId: plugin.id, seed: nextSeed });
     },
     [plugin, settings],
   );
@@ -902,6 +905,11 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           // history so the info popover trend chart reflects all plays.
           setTimeHistory(appendTimeHistory(plugin.id, elapsed, term.score));
           void submitScore(plugin.id, term.score, settings as Record<string, unknown>);
+          track(term.score > 0 ? "game.win" : "game.lose", {
+            gameId: plugin.id,
+            score: term.score,
+            elapsed,
+          });
         }
         return next;
       });
@@ -1014,6 +1022,11 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       // trend chart reflects all plays — not just personal-best winners.
       setTimeHistory(appendTimeHistory(plugin.id, elapsed, score));
       void submitScore(plugin.id, score, settings as Record<string, unknown>);
+      track(score > 0 ? "game.win" : "game.lose", {
+        gameId: plugin.id,
+        score,
+        elapsed,
+      });
     },
     [plugin.id, settings, elapsed, recordBest],
   );

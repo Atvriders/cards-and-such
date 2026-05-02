@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
+import { track } from "./analytics.js";
 
 /**
  * Single fade phase length, in ms. Two phases run back-to-back when the
@@ -52,6 +53,13 @@ export function RouteTransition({ children }: { children: ReactNode }): JSX.Elem
     if (typeof window === "undefined" || !window.matchMedia) return false;
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   };
+
+  // Record the route change for the local analytics ring buffer. We fire
+  // before the cross-fade kicks in so the timeline reflects intent, not
+  // the post-transition settle moment.
+  useEffect(() => {
+    track("route.change", { path: pathKey });
+  }, [pathKey]);
 
   useEffect(() => {
     if (pathKey === displayedKey) {
