@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpellingBeeState, SpellingBeeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SpellingBee } from "./SpellingBee.js";
@@ -41,5 +41,9 @@ Tips: start by finding all the short 4-letter words to build your score, then hu
   initialState: (seed: number, settings: SpellingBeeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: SpellingBeeState): HintTarget | null => {
+    if (state.gameOver) return null;
+    return { selector: ".sbe-input-display", pulses: 3 };
+  },
   component: SpellingBee,
 };

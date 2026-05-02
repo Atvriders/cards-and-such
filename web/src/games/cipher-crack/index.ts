@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CipherCrackState, CipherCrackAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Tips for solving substitution ciphers: single-letter words must be A or I. The m
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CipherCrackState): HintTarget | null => {
+    if (state.won) return null;
+    return { selector: ".cipher-crack-plain-input", pulses: 3 };
+  },
   component: CipherCrackGame,
 };

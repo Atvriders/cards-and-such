@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordConstructionState, WordConstructionAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WordConstruction } from "./WordConstruction.js";
@@ -35,5 +35,9 @@ Tips: start with the prefix you know the most words for and build momentum. Comm
   initialState: (seed: number, settings: WordConstructionSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WordConstructionState): HintTarget | null => {
+    if (state.gameOver) return null;
+    return { selector: ".wcon-input-area", pulses: 3 };
+  },
   component: WordConstruction,
 };

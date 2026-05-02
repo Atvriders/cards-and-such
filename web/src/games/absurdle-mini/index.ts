@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AbsurdleMiniState, AbsurdleMiniAction, AbsurdleMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,9 @@ export const absurdleMiniPlugin: GamePlugin<AbsurdleMiniState, AbsurdleMiniActio
   initialState: (seed: number, s: S) => initialState(seed, s as AbsurdleMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: AbsurdleMiniState): HintTarget | null => {
+    if (state.status !== "playing") return null;
+    return { selector: ".ab-board", pulses: 3 };
+  },
   component: AbsurdleMiniGame,
 };

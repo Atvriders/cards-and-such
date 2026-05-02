@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BoggleProState, BoggleProAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BoggleProGame } from "./Game.js";
@@ -22,5 +22,9 @@ Strategy: scan for common letter combinations like -ing, -tion, -tion, -ed, -er,
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: BoggleProState, action: BoggleProAction) => BoggleProState,
   isTerminal,
+  hint: (state: BoggleProState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: ".bg-input-row", pulses: 3 };
+  },
   component: BoggleProGame,
 } as unknown as GamePlugin;

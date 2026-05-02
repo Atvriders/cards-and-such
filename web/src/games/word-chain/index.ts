@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordChainState, WordChainAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WordChain } from "./WordChain.js";
@@ -33,5 +33,9 @@ Settings let you choose a 60-second or 2-minute session. With practice you can b
   initialState: (seed: number, settings: WordChainSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WordChainState): HintTarget | null => {
+    if (state.gameOver) return null;
+    return { selector: ".wc-input", pulses: 3 };
+  },
   component: WordChain,
 };

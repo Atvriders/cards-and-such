@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordHuntState, WordHuntAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WordHunt } from "./Game.js";
@@ -26,5 +26,9 @@ Tips: start with short common words you know immediately, then reach for longer 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: WordHuntState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: ".wordhunt-input", pulses: 3 };
+  },
   component: WordHunt,
 };

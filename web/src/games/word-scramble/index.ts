@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordScrambleState, WordScrambleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,9 @@ Tips: Look for common letter patterns — TH, SH, CH, ING, -ED, -ER. Vowels ofte
   initialState: (seed: number, settings: WordScrambleSettingsType) => initialState(seed, settings),
   reducer: (state: WordScrambleState, action: WordScrambleAction) => reducer(state, action, 0),
   isTerminal,
+  hint: (state: WordScrambleState): HintTarget | null => {
+    if (state.solved || state.skipped) return null;
+    return { selector: ".ws-input", pulses: 3 };
+  },
   component: WordScramble,
 };

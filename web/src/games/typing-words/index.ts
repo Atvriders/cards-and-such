@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TypingWordsState, TypingWordsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,9 @@ Tips: Keep your eyes on the next word as you finish the current one so you can a
   initialState: (seed: number, settings: TypingWordsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: TypingWordsState): HintTarget | null => {
+    if (state.ended) return null;
+    return { selector: ".tw-input", pulses: 3 };
+  },
   component: TypingWords,
 };

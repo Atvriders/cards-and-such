@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LastLetterState, LastLetterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { LastLetter } from "./Game.js";
@@ -35,5 +35,9 @@ Tips: think ahead — try to end each word on a common starting letter like S, T
   initialState: (seed: number, settings: LastLetterSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LastLetterState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: ".lastletter-input", pulses: 3 };
+  },
   component: LastLetter,
 };

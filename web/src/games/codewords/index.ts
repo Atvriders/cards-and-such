@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CodewordsState, CodewordsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Tips: look for short words first — a two-letter word with a repeated structure
   initialState: (seed: number, settings: CodewordsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CodewordsState): HintTarget | null => {
+    if (state.won) return null;
+    return { selector: ".cw-grid", pulses: 3 };
+  },
   component: Codewords,
 };

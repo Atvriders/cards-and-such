@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CompoundState, CompoundAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CompoundWord } from "./Game.js";
@@ -26,5 +26,9 @@ Tips: read both hints carefully — sometimes the clue word is used in an unusua
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: CompoundState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: ".compound-input", pulses: 3 };
+  },
   component: CompoundWord,
 };

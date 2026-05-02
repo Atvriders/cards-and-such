@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MissingLettersState, MissingLettersAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,9 @@ Tips: Read the visible letters carefully and think about what English words fit 
   initialState: (seed: number, settings: MissingLettersSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: MissingLettersState): HintTarget | null => {
+    if (state.submitted) return null;
+    return { selector: ".ml-wrap", pulses: 3 };
+  },
   component: MissingLetters,
 };

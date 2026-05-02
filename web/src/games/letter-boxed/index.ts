@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LetterBoxedState, LetterBoxedAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Tips: look for long words that use letters from multiple sides. Try to end each 
   initialState: (seed: number, settings: LetterBoxedSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LetterBoxedState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    return { selector: ".lbx-wrap", pulses: 3 };
+  },
   component: LetterBoxed,
 };

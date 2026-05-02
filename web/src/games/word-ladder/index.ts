@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordLadderState, WordLadderAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -42,5 +42,9 @@ Tips: think about the target first and work backwards mentally. Changing vowels 
   initialState: (seed: number, settings: WordLadderSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WordLadderState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    return { selector: ".wlr-ladder-input-row", pulses: 3 };
+  },
   component: WordLadder,
 };

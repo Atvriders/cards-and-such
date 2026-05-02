@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordAssocState, WordAssocAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Choose 60 or 120 seconds in settings. The starter word is randomized each game.`
   initialState: (seed: number, settings: WordAssocSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WordAssocState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: ".wordassoc-input", pulses: 3 };
+  },
   component: WordAssociation,
 };

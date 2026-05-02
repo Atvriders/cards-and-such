@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordPyramidState, WordPyramidAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WordPyramid } from "./Game.js";
@@ -26,5 +26,9 @@ Tips: start from the top (shortest words) and work your way down, carrying your 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: WordPyramidState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: ".pyramid-input", pulses: 3 };
+  },
   component: WordPyramid,
 };

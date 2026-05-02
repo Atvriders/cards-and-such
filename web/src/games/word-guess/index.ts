@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordGuessState, WordGuessAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -39,5 +39,9 @@ Tips: Start with words that cover common letters such as E, A, R, I, O, T, N, S.
   initialState: (seed: number, settings: WordGuessSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WordGuessState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    return { selector: ".word-guess__keyboard", pulses: 3 };
+  },
   component: WordGuess,
 };

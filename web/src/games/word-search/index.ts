@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordSearchState, WordSearchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,9 @@ Tips: Scan for the first letter of each word, then look in all eight directions 
   initialState: (seed: number, settings: WordSearchSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WordSearchState): HintTarget | null => {
+    if (state.won) return null;
+    return { selector: ".word-search-grid", pulses: 3 };
+  },
   component: WordSearch,
 };

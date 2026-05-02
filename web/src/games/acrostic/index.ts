@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AcrosticState, AcrosticAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Acrostic } from "./Acrostic.js";
@@ -26,5 +26,9 @@ The quote and clue set are randomly chosen from a collection of hand-designed pu
   initialState: (seed: number, settings: AcrosticSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: AcrosticState): HintTarget | null => {
+    if (state.gameOver) return null;
+    return { selector: ".acr-wrap", pulses: 3 };
+  },
   component: Acrostic,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BananagramsState, BananagramsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Bananagrams } from "./Bananagrams.js";
@@ -33,5 +33,9 @@ Settings allow you to choose 15, 21, or 30 starting tiles. More tiles means more
   initialState: (seed: number, settings: BananagramsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BananagramsState): HintTarget | null => {
+    if (state.gameOver) return null;
+    return { selector: ".bng-grid-scroll", pulses: 3 };
+  },
   component: Bananagrams,
 };

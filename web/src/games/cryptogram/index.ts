@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CryptogramState, CryptogramAction, CryptogramSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Cryptogram } from "./Game.js";
@@ -35,5 +35,9 @@ Tips: look for single-letter words (must be A or I), common short words, and rep
   initialState: (seed: number, s: CryptogramSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: CryptogramState): HintTarget | null => {
+    if (state.won) return null;
+    return { selector: ".crg-text", pulses: 3 };
+  },
   component: Cryptogram,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordPokerState, WordPokerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Tips: high-value letters like J, Q, X, Z appear rarely — treasure them. Longer
   initialState: (seed: number, settings: WordPokerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WordPokerState): HintTarget | null => {
+    if (state.gameOver) return null;
+    return { selector: ".wp-hand", pulses: 3 };
+  },
   component: WordPoker,
 };
