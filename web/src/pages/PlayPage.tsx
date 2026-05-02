@@ -9,12 +9,14 @@ import { playSound } from "../platform/sounds.js";
 import { Tutorial } from "../platform/Tutorial.js";
 import { tutorialFor, hasSeenTutorial, markTutorialSeen } from "../platform/tutorials.js";
 import { Confetti } from "../platform/Confetti.js";
+import { emitSparkles } from "../platform/Sparkles.js";
 import { HowToPlayModal } from "../platform/HowToPlayModal.js";
 import { PageHead } from "../platform/PageHead.js";
 import { StarRating, readRating, writeRating } from "../platform/StarRating.js";
 import { StatsPanel } from "../platform/StatsPanel.js";
 import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
 import { recordPlayed } from "../platform/quickstart.js";
+import { t } from "../platform/i18n.js";
 import "./PlayPage.css";
 
 function randomSeed(): number {
@@ -272,8 +274,18 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const showProminentSeed = plugin.id === "klondike" || plugin.id === "freecell" || plugin.id === "spider";
   const progress = useMemo(() => deriveProgress(state), [state]);
 
+  // Delegated sparkle handler — only primary action surfaces (.btn-primary,
+  // .play-iconbtn) trigger a burst, so casual UI clicks stay quiet.
+  const onPrimaryClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null;
+    if (!target || typeof target.closest !== "function") return;
+    if (target.closest(".btn-primary, .play-iconbtn")) {
+      emitSparkles(e.clientX, e.clientY);
+    }
+  }, []);
+
   return (
-    <div className="play-page" data-game-id={plugin.id}>
+    <div className="play-page" data-game-id={plugin.id} onClick={onPrimaryClick}>
       <PageHead
         title={`Play ${plugin.title}`}
         description={`Play ${plugin.title} free online — ${plugin.description}`}
@@ -301,7 +313,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                   data-testid="play-timer-best"
                   title="Personal best"
                 >
-                  best {formatTime(bestTime)}
+                  {t("hud.best")} {formatTime(bestTime)}
                 </span>
               )}
             </span>
@@ -375,7 +387,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
-            <span>Lobby</span>
+            <span>{t("nav.lobby")}</span>
           </Link>
         </div>
       </header>
@@ -449,12 +461,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
 
       {phase === "ended" && finalScore !== null && (
         <section className="end-panel" data-testid="end-panel">
-          <h2>Game over</h2>
-          <div className="final-score">Score: {finalScore}</div>
+          <h2>{t("hud.game_over")}</h2>
+          <div className="final-score">{t("hud.score")}: {finalScore}</div>
           <div className="end-seed" data-testid="end-seed">Seed: <code>{seed}</code></div>
           <div className="end-actions">
-            <button onClick={newGame} className="play-again-btn" data-testid="new-game-btn">New Game</button>
-            <button onClick={replay} className="play-again-btn play-replay-btn" data-testid="replay-btn">Replay</button>
+            <button onClick={newGame} className="play-again-btn" data-testid="new-game-btn">{t("hud.new_game")}</button>
+            <button onClick={replay} className="play-again-btn play-replay-btn" data-testid="replay-btn">{t("hud.replay")}</button>
             <button
               onClick={() => { void shareSeed(); }}
               className="play-share-pill"

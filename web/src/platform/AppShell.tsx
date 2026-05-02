@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "./stores/auth.js";
 import { ToastHost } from "./ui/Toast.js";
+import { SparkleHost } from "./Sparkles.js";
 import ThemePicker from "./ui/ThemePicker.js";
 import LightModeToggle from "./ui/LightModeToggle.js";
 import { isSoundOn, setSoundOn, playSound } from "./sounds.js";
 import KeyboardCheatSheet from "./KeyboardCheatSheet.js";
 import { GAMES } from "../games/registry.js";
 import { pickQuickstart } from "./quickstart.js";
+import { t } from "./i18n.js";
 import "./AppShell.css";
 
 const CHANGELOG: Array<{ title: string; detail: string }> = [
@@ -30,8 +32,37 @@ export default function AppShell(): JSX.Element {
   const [cheatSheetOpen, setCheatSheetOpen] = useState(false);
   const [hasNewHighScore, setHasNewHighScore] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [soundOn, setSoundOnState] = useState<boolean>(() => isSoundOn());
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const categoriesRef = useRef<HTMLDivElement | null>(null);
+
+  // Close the categories dropdown on outside click / Escape.
+  useEffect(() => {
+    if (!categoriesOpen) return;
+    const onPointer = (e: MouseEvent): void => {
+      const root = categoriesRef.current;
+      if (root && e.target instanceof Node && root.contains(e.target)) return;
+      setCategoriesOpen(false);
+    };
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === "Escape") setCategoriesOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer, true);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer, true);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [categoriesOpen]);
+
+  const HEADER_CATEGORIES = [
+    { id: "solitaire", label: "Solitaire", glyph: "♤" },
+    { id: "cards", label: "Cards", glyph: "♣" },
+    { id: "dice", label: "Dice", glyph: "⚂" },
+    { id: "board", label: "Board", glyph: "▦" },
+    { id: "arcade", label: "Arcade", glyph: "✦" },
+  ] as const;
 
   const toggleSound = (): void => {
     const next = !soundOn;
@@ -140,15 +171,75 @@ export default function AppShell(): JSX.Element {
         </button>
 
         <nav className={mobileNavOpen ? "is-open" : ""}>
-          <NavLink to="/" end onClick={() => setMobileNavOpen(false)}>Lobby</NavLink>
-          <NavLink to="/daily" onClick={() => setMobileNavOpen(false)}>Daily</NavLink>
-          <NavLink to="/leaderboard" onClick={() => setMobileNavOpen(false)}>Leaderboard</NavLink>
+          <NavLink to="/" end onClick={() => setMobileNavOpen(false)}>{t("nav.lobby")}</NavLink>
+          <div
+            ref={categoriesRef}
+            className="categories-menu"
+            style={{ position: "relative", display: "inline-block" }}
+          >
+            <button
+              type="button"
+              className="whats-new-link"
+              aria-haspopup="menu"
+              aria-expanded={categoriesOpen}
+              data-testid="nav-categories-toggle"
+              onClick={() => setCategoriesOpen((v) => !v)}
+            >
+              Categories ▾
+            </button>
+            {categoriesOpen && (
+              <div
+                role="menu"
+                data-testid="nav-categories-menu"
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 0.35rem)",
+                  left: 0,
+                  zIndex: 30,
+                  background: "var(--bg-surface, #1f2937)",
+                  border: "1px solid var(--border, rgba(255,255,255,0.1))",
+                  borderRadius: "0.5rem",
+                  padding: "0.35rem",
+                  minWidth: "9rem",
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.15rem",
+                }}
+              >
+                {HEADER_CATEGORIES.map((c) => (
+                  <NavLink
+                    key={c.id}
+                    to={`/category/${c.id}`}
+                    role="menuitem"
+                    data-testid={`nav-cat-${c.id}`}
+                    onClick={() => { setCategoriesOpen(false); setMobileNavOpen(false); }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      padding: "0.4rem 0.6rem",
+                      borderRadius: "0.35rem",
+                      textDecoration: "none",
+                      color: "inherit",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    <span aria-hidden="true">{c.glyph}</span>
+                    <span>{c.label}</span>
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
+          <NavLink to="/daily" onClick={() => setMobileNavOpen(false)}>{t("nav.daily")}</NavLink>
+          <NavLink to="/leaderboard" onClick={() => setMobileNavOpen(false)}>{t("nav.leaderboard")}</NavLink>
           <button
             type="button"
             className="whats-new-link"
             onClick={() => { setWhatsNewOpen(true); setMobileNavOpen(false); }}
           >
-            What's New
+            {t("nav.whats_new")}
           </button>
         </nav>
 
@@ -229,7 +320,7 @@ export default function AppShell(): JSX.Element {
           <LightModeToggle />
           <ThemePicker />
           <span data-testid="current-user">{username}</span>
-          <button onClick={logout} aria-label="logout">Sign out</button>
+          <button onClick={logout} aria-label="logout">{t("nav.sign_out")}</button>
         </div>
       </header>
 
@@ -269,6 +360,7 @@ export default function AppShell(): JSX.Element {
       </footer>
 
       <ToastHost />
+      <SparkleHost />
       <KeyboardCheatSheet open={cheatSheetOpen} onClose={() => setCheatSheetOpen(false)} />
 
       {whatsNewOpen ? (
