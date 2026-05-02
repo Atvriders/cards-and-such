@@ -1190,6 +1190,87 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     return () => window.removeEventListener("keydown", onKey);
   }, [phase, showWinBanner, infoOpen, helpOpen, tutorialOpen, settingsModalOpen, togglePause]);
 
+  // Power-user shortcuts: N (new game), R (restart), Shift+R (random seed),
+  // D (daily), F (fullscreen), I (info popover), T (settings popover),
+  // = (seed picker). Each handler ignores when typing into a form field or
+  // contenteditable surface, when a modifier we don't expect is pressed, and
+  // when a modal/banner is already eating keys. R intentionally skips the
+  // "dice" category so it doesn't fight the per-game Roll binding.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      // Ctrl/Cmd/Alt combos belong to the dedicated undo/redo handler or the
+      // browser — never steal them here. Shift IS allowed because Shift+R
+      // is one of our bindings.
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName?.toLowerCase();
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+      if (target?.isContentEditable) return;
+      // Don't fight modal/overlay surfaces — they own their own keys.
+      if (showWinBanner || helpOpen || tutorialOpen || settingsModalOpen) return;
+      const key = e.key;
+      const lower = key.length === 1 ? key.toLowerCase() : key;
+      if (lower === "n" && !e.shiftKey) {
+        e.preventDefault();
+        void newGame();
+        return;
+      }
+      if (lower === "r" && e.shiftKey) {
+        e.preventDefault();
+        applyPickedSeed(randomSeed());
+        return;
+      }
+      if (lower === "r" && !e.shiftKey) {
+        // Skip dice games — R is the per-game Roll binding there.
+        if (plugin.category === "dice") return;
+        e.preventDefault();
+        void replay();
+        return;
+      }
+      if (lower === "d" && !e.shiftKey) {
+        e.preventDefault();
+        applyPickedSeed(hashStamp(todayStamp()));
+        return;
+      }
+      if (lower === "f" && !e.shiftKey) {
+        e.preventDefault();
+        toggleFullscreen();
+        return;
+      }
+      if (lower === "i" && !e.shiftKey) {
+        if (seedPickerOpen) return;
+        e.preventDefault();
+        setInfoOpen((v) => !v);
+        return;
+      }
+      if (lower === "t" && !e.shiftKey) {
+        if (infoOpen || seedPickerOpen) return;
+        e.preventDefault();
+        setSettingsModalOpen((v) => !v);
+        return;
+      }
+      if (key === "=" || key === "+") {
+        e.preventDefault();
+        setSeedPickerOpen(true);
+        return;
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    plugin.category,
+    showWinBanner,
+    helpOpen,
+    tutorialOpen,
+    settingsModalOpen,
+    infoOpen,
+    seedPickerOpen,
+    newGame,
+    replay,
+    applyPickedSeed,
+    toggleFullscreen,
+  ]);
+
   // Delegated sparkle handler — only primary action surfaces (.btn-primary,
   // .play-iconbtn) trigger a burst, so casual UI clicks stay quiet.
   const onPrimaryClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
