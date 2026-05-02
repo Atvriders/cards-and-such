@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ScorpionState, ScorpionAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -31,5 +31,27 @@ Tips: Expose face-down cards as quickly as possible. Empty columns are powerful 
   initialState: (seed: number, settings: ScorpionSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: ScorpionState): HintTarget | null => {
+    // Priority 1: any tableau column whose top two face-up cards form a same-suit descending run.
+    const TABLEAU_IDS = ["t1", "t2", "t3", "t4", "t5", "t6", "t7"];
+    for (const id of TABLEAU_IDS) {
+      const pile = state.piles.find((p) => p.id === id);
+      if (!pile || pile.cards.length < 2) continue;
+      const faceUp = pile.faceUpCount ?? 0;
+      if (faceUp < 2) continue;
+      const top = pile.cards[pile.cards.length - 1]!;
+      const below = pile.cards[pile.cards.length - 2]!;
+      if (top.suit === below.suit && (below.rank as number) === (top.rank as number) + 1) {
+        return { selector: `[data-testid="pile-${id}"]`, pulses: 3 };
+      }
+    }
+    // Priority 2: deal reserve if not yet dealt and reserve still has cards.
+    const reserve = state.piles.find((p) => p.id === "reserve");
+    const dealt = (state as unknown as { reserveDealt?: boolean }).reserveDealt === true;
+    if (!dealt && reserve && reserve.cards.length > 0) {
+      return { selector: `[data-testid="pile-reserve"]`, pulses: 3 };
+    }
+    return null;
+  },
   component: Scorpion,
 };
