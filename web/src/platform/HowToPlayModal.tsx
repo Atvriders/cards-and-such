@@ -1,11 +1,16 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import "./HowToPlayModal.css";
+import { GAMES } from "../games/registry.js";
+import type { GameCategory, GamePlugin } from "./game-plugin/types.js";
 
 interface HowToPlayModalProps {
   open: boolean;
   onClose: () => void;
   title: string;
   text: string;
+  /** Optional — used to scope same-category suggestions and exclude self. */
+  pluginId?: string;
+  category?: GameCategory;
 }
 
 interface Block {
@@ -21,6 +26,8 @@ interface Section {
   blocks: Block[];
 }
 
+type TabKey = "overview" | "rules" | "tips";
+
 const SECTION_ALIASES: Record<string, string> = {
   goal: "Goal",
   goals: "Goal",
@@ -33,6 +40,8 @@ const SECTION_ALIASES: Record<string, string> = {
   tip: "Tips",
   strategy: "Tips",
   hints: "Tips",
+  "pro tip": "Tips",
+  "pro tips": "Tips",
 };
 
 /** Parse one line of inline markdown (`**bold**`, `*italic*`). */
@@ -139,6 +148,26 @@ function canonicalHeading(heading: string | null): string | null {
   return SECTION_ALIASES[key] ?? heading;
 }
 
+/** Heuristic: classify a parsed section into the Rules, Tips, or Overview tab. */
+function classifySection(sec: Section): TabKey {
+  const head = (sec.heading ?? "").toLowerCase();
+  if (/(^|\b)(tip|tips|strategy|strategies|hint|hints|pro tip|pro tips)\b/.test(head)) {
+    return "tips";
+  }
+  if (/(^|\b)(rule|rules|how to play|how to win|gameplay|goal|goals|objective|moves?|deal|setup|scoring)\b/.test(head)) {
+    return "rules";
+  }
+  // No heading or non-matching heading → infer from content.
+  if (!sec.heading) {
+    const blob = sec.blocks
+      .map((b) => (b.kind === "paragraph" ? (b.text ?? "") : (b.items ?? []).join(" ")))
+      .join(" ")
+      .toLowerCase();
+    if (/\b(pro tip|tip:|strategy|tips?\b)/.test(blob)) return "tips";
+  }
+  return "overview";
+}
+
 function focusableIn(el: HTMLElement): HTMLElement[] {
   const sel = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
   return Array.from(el.querySelectorAll<HTMLElement>(sel)).filter(
@@ -146,10 +175,51 @@ function focusableIn(el: HTMLElement): HTMLElement[] {
   );
 }
 
-export function HowToPlayModal({ open, onClose, title, text }: HowToPlayModalProps): JSX.Element | null {
+/** Pick up to N other plugins from the same category, deterministically per-id+seed. */
+function pickSuggestions(
+  pluginId: string | undefined,
+  category: GameCategory | undefined,
+  count: number,
+): GamePlugin[] {
+  if (!category) return [];
+  const pool = GAMES.filter(
+    (g): g is GamePlugin => g != null && g.category === category && g.id !== pluginId,
+  );
+  if (pool.length === 0) return [];
+  // Stable pseudo-shuffle keyed on the current plugin's id so suggestions
+  // don't reshuffle on every render but vary between games.
+  const seedStr = pluginId ?? category;
+  let h = 0;
+  for (let i = 0; i < seedStr.length; i++) h = ((h << 5) - h + seedStr.charCodeAt(i)) | 0;
+  const sorted = [...pool].sort((a, b) => {
+    const ha = (h ^ hashString(a.id)) >>> 0;
+    const hb = (h ^ hashString(b.id)) >>> 0;
+    return ha - hb;
+  });
+  return sorted.slice(0, count);
+}
+
+function hashString(s: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+export function HowToPlayModal({
+  open,
+  onClose,
+  title,
+  text,
+  pluginId,
+  category,
+}: HowToPlayModalProps): JSX.Element | null {
   const [mounted, setMounted] = useState(open);
   const [animating, setAnimating] = useState(open);
   const [query, setQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<TabKey>("overview");
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
 
@@ -165,7 +235,10 @@ export function HowToPlayModal({ open, onClose, title, text }: HowToPlayModalPro
   }, [open]);
 
   useEffect(() => {
-    if (open) setQuery("");
+    if (open) {
+      setQuery("");
+      setActiveTab("overview");
+    }
   }, [open]);
 
   useEffect(() => {
@@ -210,10 +283,40 @@ export function HowToPlayModal({ open, onClose, title, text }: HowToPlayModalPro
 
   const sections = useMemo(() => parseHowToPlay(text), [text]);
 
-  const filtered = useMemo(() => {
+  /** Bucket parsed sections into the three logical tabs. */
+  const buckets = useMemo<Record<TabKey, Section[]>>(() => {
+    const out: Record<TabKey, Section[]> = { overview: [], rules: [], tips: [] };
+    for (const sec of sections) out[classifySection(sec)].push(sec);
+    return out;
+  }, [sections]);
+
+  /** Tabs that actually have content. */
+  const populatedTabs = useMemo<TabKey[]>(() => {
+    return (["overview", "rules", "tips"] as TabKey[]).filter(
+      (t) => buckets[t].length > 0,
+    );
+  }, [buckets]);
+
+  /** If the parser only managed one bucket (typical for "bare prose"
+   *  howToPlay strings), keep the legacy single-pane look — no tab strip. */
+  const showTabs = populatedTabs.length > 1;
+
+  /** Make sure the active tab is one that exists. */
+  useEffect(() => {
+    if (!open) return;
+    if (populatedTabs.length === 0) return;
+    if (!populatedTabs.includes(activeTab)) {
+      setActiveTab(populatedTabs[0]!);
+    }
+  }, [open, populatedTabs, activeTab]);
+
+  /** Apply the search query — filters sections in the *currently displayed*
+   *  set. With tabs, that's the active tab's bucket; without tabs, all. */
+  const visibleSections = useMemo<Section[]>(() => {
+    const source = showTabs ? buckets[activeTab] : sections;
     const q = query.trim().toLowerCase();
-    if (!q) return sections;
-    return sections
+    if (!q) return source;
+    return source
       .map((sec) => {
         const headingMatches = (sec.heading ?? "").toLowerCase().includes(q);
         const blocks = sec.blocks.filter((b) => {
@@ -227,7 +330,12 @@ export function HowToPlayModal({ open, onClose, title, text }: HowToPlayModalPro
         return { ...sec, blocks };
       })
       .filter((s): s is Section => s != null);
-  }, [sections, query]);
+  }, [showTabs, buckets, activeTab, sections, query]);
+
+  const suggestions = useMemo(
+    () => pickSuggestions(pluginId, category, 3),
+    [pluginId, category],
+  );
 
   if (!mounted) return null;
 
@@ -238,6 +346,55 @@ export function HowToPlayModal({ open, onClose, title, text }: HowToPlayModalPro
   };
 
   const stateClass = animating ? "is-open" : "is-closing";
+
+  const renderSections = (list: Section[]): ReactNode => {
+    if (list.length === 0) {
+      return <p className="htp-empty">No matches.</p>;
+    }
+    return list.map((sec, i) => {
+      const heading = canonicalHeading(sec.heading);
+      return (
+        <section key={i} className="htp-section">
+          {heading && (
+            <h3 className={`htp-section-heading htp-h${Math.min(sec.level || 2, 4)}`}>
+              {heading}
+            </h3>
+          )}
+          {sec.blocks.map((block, j) => {
+            if (block.kind === "paragraph") {
+              return (
+                <p key={j} className="htp-p">
+                  {renderInline(block.text ?? "", `p-${i}-${j}`)}
+                </p>
+              );
+            }
+            if (block.kind === "bullets") {
+              const allNumbered = (block.items ?? []).every((it) =>
+                /^\d+[.)]\s/.test(it),
+              );
+              return (
+                <ul
+                  key={j}
+                  className={`htp-list${allNumbered ? " htp-list-numbered" : ""}`}
+                >
+                  {(block.items ?? []).map((item, k) => (
+                    <li key={k}>{renderInline(item, `li-${i}-${j}-${k}`)}</li>
+                  ))}
+                </ul>
+              );
+            }
+            return null;
+          })}
+        </section>
+      );
+    });
+  };
+
+  const tabLabels: Record<TabKey, string> = {
+    overview: "Overview",
+    rules: "Rules",
+    tips: "Tips",
+  };
 
   return (
     <div
@@ -306,42 +463,61 @@ export function HowToPlayModal({ open, onClose, title, text }: HowToPlayModalPro
           />
         </div>
 
+        {showTabs && (
+          <div className="htp-tabs" role="tablist" aria-label="How to play sections">
+            {populatedTabs.map((t) => {
+              const selected = t === activeTab;
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  className={`htp-tab${selected ? " is-active" : ""}`}
+                  onClick={() => setActiveTab(t)}
+                  data-testid={`howto-tab-${t}`}
+                >
+                  {tabLabels[t]}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
         <div className="htp-body" data-testid="htp-body">
-          {filtered.length === 0 && (
-            <p className="htp-empty">No matches.</p>
-          )}
-          {filtered.map((sec, i) => {
-            const heading = canonicalHeading(sec.heading);
-            return (
-              <section key={i} className="htp-section">
-                {heading && (
-                  <h3 className={`htp-section-heading htp-h${Math.min(sec.level || 2, 4)}`}>
-                    {heading}
-                  </h3>
-                )}
-                {sec.blocks.map((block, j) => {
-                  if (block.kind === "paragraph") {
-                    return (
-                      <p key={j} className="htp-p">
-                        {renderInline(block.text ?? "", `p-${i}-${j}`)}
-                      </p>
-                    );
-                  }
-                  if (block.kind === "bullets") {
-                    return (
-                      <ul key={j} className="htp-list">
-                        {(block.items ?? []).map((item, k) => (
-                          <li key={k}>{renderInline(item, `li-${i}-${j}-${k}`)}</li>
-                        ))}
-                      </ul>
-                    );
-                  }
-                  return null;
-                })}
-              </section>
-            );
-          })}
+          {renderSections(visibleSections)}
         </div>
+
+        {suggestions.length > 0 && (
+          <div className="htp-suggest" data-testid="htp-suggest">
+            <span className="htp-suggest-label">Try also:</span>
+            <span className="htp-suggest-list">
+              {suggestions.map((g, i) => (
+                <span key={g.id}>
+                  <a
+                    className="htp-suggest-link"
+                    href={`/play/${g.id}`}
+                    data-testid={`howto-suggest-${i}`}
+                  >
+                    {g.title}
+                  </a>
+                  {i < suggestions.length - 1 ? <span className="htp-suggest-sep">, </span> : null}
+                </span>
+              ))}
+            </span>
+          </div>
+        )}
+
+        <footer className="htp-footer">
+          <button
+            type="button"
+            className="htp-gotit"
+            onClick={onClose}
+            data-testid="htp-gotit"
+          >
+            Got it
+          </button>
+        </footer>
       </div>
     </div>
   );

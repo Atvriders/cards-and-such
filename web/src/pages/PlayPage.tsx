@@ -1192,8 +1192,28 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     }
   }, []);
 
+  // Per-game CSS-var overrides. When a plugin declares `themeOverrides`, we
+  // inject `--theme-felt` / `--theme-accent` / `--theme-bg` directly onto the
+  // `.play-page` element (NOT `:root`) so the override stays scoped to this
+  // game and the user's ThemePicker selection still owns the rest of the app.
+  // Cast through CSSProperties so TS accepts custom-property keys.
+  const playPageStyle = (() => {
+    const ov = plugin.themeOverrides;
+    if (!ov) return undefined;
+    const s: Record<string, string> = {};
+    if (ov.feltGradient) s["--theme-felt"] = ov.feltGradient;
+    if (ov.accent) s["--theme-accent"] = ov.accent;
+    if (ov.bgGradient) s["--theme-bg"] = ov.bgGradient;
+    return s as React.CSSProperties;
+  })();
+
   return (
-    <div className="play-page" data-game-id={plugin.id} onClick={onPrimaryClick}>
+    <div
+      className="play-page"
+      data-game-id={plugin.id}
+      onClick={onPrimaryClick}
+      style={playPageStyle}
+    >
       <PageHead
         title={`Play ${plugin.title}`}
         description={`Play ${plugin.title} free online — ${plugin.description}`}
@@ -1717,6 +1737,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           onClose={() => setHelpOpen(false)}
           title={plugin.title}
           text={plugin.howToPlay}
+          pluginId={plugin.id}
+          category={plugin.category}
         />
       )}
 
