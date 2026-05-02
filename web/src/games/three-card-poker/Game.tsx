@@ -45,6 +45,7 @@ export function ThreeCardPoker({ state, dispatch, onGameOver }: Props) {
           </div>
           <div className="tcp-actions">
             <button
+              data-testid="hint-target-three-card-poker-deal"
               className="tcp-btn primary"
               onClick={() => dispatch({ type: "deal" } as ThreeCardPokerAction)}
               disabled={state.bankroll < betNeeded}
@@ -74,10 +75,11 @@ export function ThreeCardPoker({ state, dispatch, onGameOver }: Props) {
 
           {state.phase === "decision" && usesAnte && (
             <div className="tcp-actions">
-              <button className="tcp-btn danger" onClick={() => dispatch({ type: "fold" } as ThreeCardPokerAction)}>
+              <button data-testid="hint-target-three-card-poker-fold" className="tcp-btn danger" onClick={() => dispatch({ type: "fold" } as ThreeCardPokerAction)}>
                 Fold
               </button>
               <button
+                data-testid="hint-target-three-card-poker-play"
                 className="tcp-btn primary"
                 onClick={() => dispatch({ type: "play" } as ThreeCardPokerAction)}
                 disabled={state.bankroll < ante}

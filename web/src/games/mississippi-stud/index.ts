@@ -38,5 +38,36 @@ Strategy: Always continue with a pair. With three-to-a-flush or three-to-a-strai
   initialState: (seed: number, settings: Settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: MississippiStudState): HintTarget | null => {
+    if (state.phase === "ante" || state.phase === "settled") {
+      if (state.bankroll <= 0) return null;
+      return { selector: '[data-testid="hint-target-mississippi-stud-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "third-street" && state.phase !== "fourth-street" && state.phase !== "fifth-street") return null;
+    // Pot-odds analogue: each bet costs anteX vs paytable EV. Use simple hand strength.
+    const visible = [
+      ...state.playerCards,
+      ...state.communityCards.slice(0, visibleCommunity(state.phase)),
+    ];
+    const ranks = visible.map((c) => (c.rank === 1 ? 14 : c.rank));
+    const counts = new Map<number, number>();
+    for (const r of ranks) counts.set(r, (counts.get(r) ?? 0) + 1);
+    const pairs = [...counts.entries()].filter(([, v]) => v >= 2);
+    const hasHighPair = pairs.some(([r, v]) => v >= 2 && r >= 6);
+    const hasLowPair = pairs.some(([r, v]) => v >= 2 && r < 6);
+    const trips = pairs.some(([, v]) => v >= 3);
+    if (trips || hasHighPair) return { selector: '[data-testid="hint-target-mississippi-stud-bet3"]', pulses: 3 };
+    // Three-to-flush or three-to-straight on 4th street: bet 2x.
+    const suits = visible.map((c) => c.suit);
+    const suitCounts = new Map<string, number>();
+    for (const s of suits) suitCounts.set(s, (suitCounts.get(s) ?? 0) + 1);
+    const flushDraw = [...suitCounts.values()].some((v) => v >= 3);
+    if (flushDraw && !hasLowPair) return { selector: '[data-testid="hint-target-mississippi-stud-bet2"]', pulses: 3 };
+    if (hasLowPair) return { selector: '[data-testid="hint-target-mississippi-stud-fold"]', pulses: 3 };
+    // High cards (J+) — fold trash.
+    const highs = ranks.filter((r) => r >= 11).length;
+    if (highs >= 2) return { selector: '[data-testid="hint-target-mississippi-stud-bet1"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-mississippi-stud-fold"]', pulses: 3 };
+  },
   component: MississippiStudGame,
 };

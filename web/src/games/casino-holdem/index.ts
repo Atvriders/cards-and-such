@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CasinoHoldemState, CasinoHoldemAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bestHand } from "./state.js";
 import { CasinoHoldemGame } from "./Game.js";
 
 export const casinoHoldemSettings = {
@@ -42,5 +42,23 @@ Strategy: Call with any pair or better. Fold only against strong dealer upcards 
   initialState: (seed: number, settings: Settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CasinoHoldemState): HintTarget | null => {
+    if (state.phase === "ante" || state.phase === "settled") {
+      if (state.bankroll <= 0) return null;
+      return { selector: '[data-testid="hint-target-casino-holdem-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "decision") return null;
+    // Casino Hold'em: math says call ~82% of the time. Strict heuristic:
+    // call with any pair or better, suited connectors, two big cards (J+).
+    if (state.playerCards.length < 2 || state.communityCards.length < 3) return null;
+    const r = bestHand(state.playerCards, state.communityCards);
+    if (r.class !== "high-card") {
+      return { selector: '[data-testid="hint-target-casino-holdem-call"]', pulses: 3 };
+    }
+    const ranks = state.playerCards.map((c) => (c.rank === 1 ? 14 : c.rank));
+    const high = Math.max(...ranks);
+    if (high >= 11) return { selector: '[data-testid="hint-target-casino-holdem-call"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-casino-holdem-fold"]', pulses: 3 };
+  },
   component: CasinoHoldemGame,
 };

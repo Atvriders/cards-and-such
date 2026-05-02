@@ -72,12 +72,12 @@ export function CasinoHoldemGame({
 
       <div className="choldem-actions">
         {(phase === "ante" || phase === "settled") && !terminal && (
-          <button className="primary" onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button data-testid="hint-target-casino-holdem-deal" className="primary" onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
         {phase === "decision" && (
           <>
-            <button onClick={() => dis({ type: "call" })}>Call (${ante * 2})</button>
-            <button className="fold-btn" onClick={() => dis({ type: "fold" })}>Fold</button>
+            <button data-testid="hint-target-casino-holdem-call" onClick={() => dis({ type: "call" })}>Call (${ante * 2})</button>
+            <button data-testid="hint-target-casino-holdem-fold" className="fold-btn" onClick={() => dis({ type: "fold" })}>Fold</button>
           </>
         )}
         {terminal && <div className="choldem-game-over">Game Over — Final: ${terminal.score}</div>}

@@ -1,7 +1,8 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CaribbeanStudState, CaribbeanStudAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { rankHand } from "../../engines/deck/ranking.js";
 import { CaribbeanStud } from "./CaribbeanStud.js";
 
 export const caribbeanStudSettings = {
@@ -47,5 +48,23 @@ Settings: Ante size ($10/$25/$50), hands per session (5/10/20). Score equals fin
   initialState: (seed: number, settings: CaribbeanStudSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CaribbeanStudState): HintTarget | null => {
+    if (state.phase === "ante" || state.phase === "settled") {
+      if (state.bankroll <= 0) return null;
+      return { selector: '[data-testid="hint-target-caribbean-stud-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "decision") return null;
+    // House strategy: raise with any pair or better, or A-K with high kickers; fold otherwise.
+    if (state.playerCards.length < 5) return null;
+    const r = rankHand(state.playerCards);
+    if (r.class !== "high-card") {
+      return { selector: '[data-testid="hint-target-caribbean-stud-raise"]', pulses: 3 };
+    }
+    const ranks = state.playerCards.map((c) => (c.rank === 1 ? 14 : c.rank)).sort((a, b) => b - a);
+    if (ranks[0] === 14 && ranks[1] === 13) {
+      return { selector: '[data-testid="hint-target-caribbean-stud-raise"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-caribbean-stud-fold"]', pulses: 3 };
+  },
   component: CaribbeanStud,
 };

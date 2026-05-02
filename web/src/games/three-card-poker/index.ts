@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ThreeCardPokerState, ThreeCardPokerAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, rankThreeHand } from "./state.js";
 import { ThreeCardPoker } from "./Game.js";
 
 export const threeCardPokerSettings = {
@@ -56,5 +56,23 @@ Settings: Set starting bankroll, bet size, and which bets to place.`,
   initialState: (seed: number, settings: ThreeCardSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: ThreeCardPokerState): HintTarget | null => {
+    if (state.phase === "betting" || state.phase === "settled") {
+      if (state.bankroll <= 0) return null;
+      return { selector: '[data-testid="hint-target-three-card-poker-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "decision" || state.playerCards.length !== 3) return null;
+    // House strategy: play with Q-6-4 or better.
+    const r = rankThreeHand(state.playerCards);
+    if (r.class !== "high-card") {
+      return { selector: '[data-testid="hint-target-three-card-poker-play"]', pulses: 3 };
+    }
+    const ranks = state.playerCards.map((c) => (c.rank === 1 ? 14 : c.rank)).sort((a, b) => b - a);
+    const [a, b, c] = ranks;
+    if (a! > 12 || (a === 12 && (b! > 6 || (b === 6 && c! >= 4)))) {
+      return { selector: '[data-testid="hint-target-three-card-poker-play"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-three-card-poker-fold"]', pulses: 3 };
+  },
   component: ThreeCardPoker,
 };

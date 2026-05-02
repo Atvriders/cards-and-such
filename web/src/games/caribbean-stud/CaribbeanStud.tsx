@@ -86,16 +86,17 @@ export function CaribbeanStud({
 
       <div className="cs-actions">
         {!terminal && isAnte && (
-          <button className="deal" onClick={() => dis({ type: "deal" })}>
+          <button data-testid="hint-target-caribbean-stud-deal" className="deal" onClick={() => dis({ type: "deal" })}>
             Deal Hand
           </button>
         )}
         {!terminal && isDecision && (
           <>
-            <button className="fold" onClick={() => dis({ type: "fold" })}>
+            <button data-testid="hint-target-caribbean-stud-fold" className="fold" onClick={() => dis({ type: "fold" })}>
               Fold (lose ${ante})
             </button>
             <button
+              data-testid="hint-target-caribbean-stud-raise"
               className="raise"
               onClick={() => dis({ type: "raise" })}
               disabled={bankroll < raise}
