@@ -1,7 +1,8 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FreeCellState, FreeCellAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, freecellRuleset } from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { FreeCell } from "./FreeCell.js";
 
 export const freecellSettings = {
@@ -34,5 +35,37 @@ Tips: Think several moves ahead before parking cards in free cells — once all 
   initialState: (seed: number, settings: FreeCellSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FreeCellState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const FREECELL_IDS = ["fc1", "fc2", "fc3", "fc4"];
+    const CASCADE_IDS = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
+    // Priority 1: any cascade/freecell card that can go to a foundation.
+    const sources = [...CASCADE_IDS, ...FREECELL_IDS];
+    for (const sourceId of sources) {
+      const source = state.piles.find((p) => p.id === sourceId);
+      if (!source || source.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        const move = { fromPile: sourceId, toPile: foundId, count: 1 };
+        if (canMove(state.piles, move, freecellRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    // Priority 2: any cascade-top card that can be parked into an empty
+    // free cell. Walk cascades; pick the first one with a free-cell-able
+    // card (always count=1 satisfies freecellCellStack).
+    const emptyCell = FREECELL_IDS.map((id) =>
+      state.piles.find((p) => p.id === id),
+    ).find((p) => p && p.cards.length === 0);
+    if (emptyCell) {
+      for (const cascadeId of CASCADE_IDS) {
+        const cascade = state.piles.find((p) => p.id === cascadeId);
+        if (cascade && cascade.cards.length > 0) {
+          return { selector: `[data-testid="pile-${cascadeId}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: FreeCell,
 };

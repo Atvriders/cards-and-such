@@ -133,7 +133,7 @@ export function FreeCell({
   };
 
   return (
-    <div className={`freecell${state.won ? " has-won" : ""}`}>
+    <div className={`freecell${state.won ? " has-won" : ""}`} data-testid="hint-target-freecell">
       <div className="freecell-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

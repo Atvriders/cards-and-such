@@ -38,6 +38,14 @@ export interface GameHint {
   revealedIndex?: number;
 }
 
+/** A DOM-pulse hint target. The hint button on PlayPage queries the
+ *  document for `selector` and adds a brief pulsing outline to the first
+ *  match. `pulses` defaults to 3 (~1.5s). Read-only — never mutates state. */
+export interface HintTarget {
+  selector: string;
+  pulses?: number;
+}
+
 export interface GamePlugin<State = unknown, Action = unknown, Schema extends SettingSchema = SettingSchema> {
   id: string;
   title: string;
@@ -53,6 +61,12 @@ export interface GamePlugin<State = unknown, Action = unknown, Schema extends Se
 
   /** Optional hint generator. Returns a suggested move/clue, or null if none. */
   getHint?: (state: State, settings: SettingsOf<Schema>) => GameHint | null;
+
+  /** Optional DOM-pulse hint. Returns a CSS selector to pulse, or null
+   *  if no hint is available. Strictly read-only — must never mutate
+   *  state. Used by PlayPage's Hint button to highlight the most
+   *  plausible next move/control. */
+  hint?: (state: State) => HintTarget | null;
 
   component: React.FC<GameProps<State, SettingsOf<Schema>>>;
 }

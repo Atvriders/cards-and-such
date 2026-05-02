@@ -40,6 +40,7 @@ const LS_CARD_FONT = "cards-card-font";
 const LS_VOLUME = "cards-sound-volume";
 const LS_AUTO_MOVE = "cards-auto-move";
 const LS_HINT_COUNT = "cards-hint-count";
+const LS_HINTS_ENABLED = "cards-hints-enabled";
 const LS_BG_THEME = "cards-bg-theme";
 
 const APPEARANCE_KEYS = [
@@ -49,7 +50,7 @@ const APPEARANCE_KEYS = [
   LS_CARD_FONT,
 ];
 const AUDIO_KEYS = [LS_SOUND, LS_SOUND_LEGACY, LS_VOLUME];
-const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT];
+const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT, LS_HINTS_ENABLED];
 
 const CARD_BACKS: { id: CardBack; label: string; preview: string }[] = [
   {
@@ -113,6 +114,11 @@ function readHintCount(): number {
   if (!Number.isFinite(n)) return 3;
   return Math.min(10, Math.max(0, n));
 }
+function readHintsEnabled(): boolean {
+  if (typeof localStorage === "undefined") return true;
+  const v = localStorage.getItem(LS_HINTS_ENABLED);
+  return v === null ? true : v === "true";
+}
 
 export function applyCardBack(id: CardBack): void {
   if (typeof document !== "undefined") document.documentElement.setAttribute("data-card-back", id);
@@ -154,6 +160,7 @@ export default function SettingsPage(): JSX.Element {
   const [animations, setAnimations] = useState<Animations>(readAnimations);
   const [autoMove, setAutoMove] = useState<boolean>(readAutoMove);
   const [hintCount, setHintCount] = useState<number>(readHintCount);
+  const [hintsEnabled, setHintsEnabled] = useState<boolean>(readHintsEnabled);
   const importInputRef = useRef<HTMLInputElement | null>(null);
 
   function refreshFromStorage() {
@@ -166,6 +173,7 @@ export default function SettingsPage(): JSX.Element {
     setAnimations(readAnimations());
     setAutoMove(readAutoMove());
     setHintCount(readHintCount());
+    setHintsEnabled(readHintsEnabled());
     applyCardBack(readCardBack());
     applyAnimations(readAnimations());
     applyCardFont(readCardFont());
@@ -267,6 +275,7 @@ export default function SettingsPage(): JSX.Element {
     setAnimations("full");
     setAutoMove(true);
     setHintCount(3);
+    setHintsEnabled(true);
     applyAnimations("full");
   }
 
@@ -301,6 +310,9 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     localStorage.setItem(LS_HINT_COUNT, String(hintCount));
   }, [hintCount]);
+  useEffect(() => {
+    localStorage.setItem(LS_HINTS_ENABLED, String(hintsEnabled));
+  }, [hintsEnabled]);
 
   return (
     <div className="settings-page" data-testid="settings-page">
@@ -534,6 +546,30 @@ export default function SettingsPage(): JSX.Element {
               <span className="settings-toggle-thumb" />
             </span>
             <span className="settings-toggle-label">{autoMove ? "On" : "Off"}</span>
+          </label>
+        </div>
+
+        <div className="settings-divider" role="presentation" />
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Hints</div>
+            <p className="settings-hint">
+              Pulse the most plausible next move on supported games.
+              Disabling this hides the Hint button entirely.
+            </p>
+          </div>
+          <label className="settings-toggle">
+            <input
+              type="checkbox"
+              checked={hintsEnabled}
+              onChange={(e) => setHintsEnabled(e.target.checked)}
+              data-testid="settings-hints-enabled"
+            />
+            <span className="settings-toggle-track" aria-hidden="true">
+              <span className="settings-toggle-thumb" />
+            </span>
+            <span className="settings-toggle-label">{hintsEnabled ? "On" : "Off"}</span>
           </label>
         </div>
 

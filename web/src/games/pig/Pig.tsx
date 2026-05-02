@@ -38,7 +38,7 @@ export function Pig({
   }
 
   return (
-    <div className="pig">
+    <div className="pig" data-testid="hint-target-pig">
       <div className="pig-scoreboard">
         <span className="pig-human-score">
           You: {scores[0]}
@@ -110,10 +110,10 @@ export function Pig({
 
       {winner === null && (
         <div className="pig-controls">
-          <button onClick={handleRoll} disabled={!canRoll}>
+          <button onClick={handleRoll} disabled={!canRoll} data-testid="hint-target-pig-roll">
             Roll
           </button>
-          <button className="bank-btn" onClick={handleBank} disabled={!canBank}>
+          <button className="bank-btn" onClick={handleBank} disabled={!canBank} data-testid="hint-target-pig-bank">
             Bank {turnScore > 0 ? turnScore : ""}
           </button>
         </div>

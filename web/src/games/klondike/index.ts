@@ -1,7 +1,8 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KlondikeState, KlondikeAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, klondikeRuleset } from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { Klondike } from "./Klondike.js";
 
 export const klondikeSettings = {
@@ -35,5 +36,33 @@ Tips: Build your foundations patiently — don't send every Ace and 2 up immedia
   initialState: (seed: number, settings: KlondikeSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: KlondikeState): HintTarget | null => {
+    // Priority 1: anything that can move from waste/tableau-tops to a
+    // foundation is the strongest "obvious" move.
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const TABLEAU_IDS = ["t1", "t2", "t3", "t4", "t5", "t6", "t7"];
+    const sources = ["waste", ...TABLEAU_IDS];
+    for (const sourceId of sources) {
+      const source = state.piles.find((p) => p.id === sourceId);
+      if (!source || source.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        const move = { fromPile: sourceId, toPile: foundId, count: 1 };
+        if (canMove(state.piles, move, klondikeRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    // Priority 2: nothing obvious — point at the stock to encourage drawing.
+    const stock = state.piles.find((p) => p.id === "stock");
+    if (stock && stock.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    // Priority 3: stock empty but waste has cards — recycle.
+    const waste = state.piles.find((p) => p.id === "waste");
+    if (waste && waste.cards.length > 0) {
+      return { selector: `[data-testid="pile-waste"]`, pulses: 3 };
+    }
+    return null;
+  },
   component: Klondike,
 };

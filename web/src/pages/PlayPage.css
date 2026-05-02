@@ -997,3 +997,36 @@
     animation: none;
   }
 }
+
+/* Hint button — pairs the bulb glyph with a compact label so the action
+   reads clearly even before users hover for the tooltip. */
+.play-hint-btn {
+  gap: 0.35rem;
+}
+.play-hint-btn-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.play-hint-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Pulsing outline added by PlayPage.showHint() to whatever element the
+   plugin's hint() returned. ~1.5s of three pulses; the JS removes the
+   class when the burst is done. Read-only highlight — never moves cards. */
+@keyframes hint-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow, #ffe066); }
+  50% { box-shadow: 0 0 0 8px transparent; }
+}
+.hint-pulse {
+  animation: hint-pulse 0.5s ease-in-out 3;
+  border-radius: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hint-pulse {
+    animation: none;
+    box-shadow: 0 0 0 3px var(--accent-glow, #ffe066);
+  }
+}

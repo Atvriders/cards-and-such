@@ -31,6 +31,9 @@ export const KNOWN_KEYS: readonly string[] = [
   // ui state
   "cards-stats-panel-collapsed",
   "cards-tutorial-seen",
+  // hints
+  "cards-hints-enabled",
+  "cards-hints-used",
   "cas:lastSeenHighScoreId",
 ] as const;
 

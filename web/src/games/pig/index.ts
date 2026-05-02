@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PigState, PigAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,20 @@ Tips: the break-even roll count per turn is around 4–5. If you're close to the
   initialState: (seed: number, settings: PigSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: PigState): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    // Conservative push-your-luck heuristic: if banking would clinch the
+    // win, suggest Bank. Otherwise, while the player's score is still
+    // below target and the running turn-score is < 20, suggest Roll.
+    const humanScore = state.scores[0];
+    if (humanScore + state.turnScore >= state.targetScore && state.turnScore > 0) {
+      return { selector: '[data-testid="hint-target-pig-bank"]', pulses: 3 };
+    }
+    if (humanScore < state.targetScore && state.turnScore < 20) {
+      return { selector: '[data-testid="hint-target-pig-roll"]', pulses: 3 };
+    }
+    // Already past the safe threshold this turn — lock in the points.
+    return { selector: '[data-testid="hint-target-pig-bank"]', pulses: 3 };
+  },
   component: Pig,
 };

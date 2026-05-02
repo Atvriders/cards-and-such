@@ -95,6 +95,34 @@ function parseSeed(raw: string | null): number | null {
   return n;
 }
 
+/** Per-game hint-usage counter. Stored under `cards-hints-used` as a
+ *  JSON object mapping gameId → count. Read-only here besides the
+ *  `bumpHintsUsed` writer below. */
+const LS_HINTS_USED = "cards-hints-used";
+const LS_HINTS_ENABLED = "cards-hints-enabled";
+
+function readHintsEnabled(): boolean {
+  try {
+    if (typeof localStorage === "undefined") return true;
+    const v = localStorage.getItem(LS_HINTS_ENABLED);
+    return v === null ? true : v === "true";
+  } catch {
+    return true;
+  }
+}
+
+function bumpHintsUsed(gameId: string): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    const raw = localStorage.getItem(LS_HINTS_USED);
+    const parsed = raw ? (JSON.parse(raw) as Record<string, number>) : {};
+    parsed[gameId] = (parsed[gameId] ?? 0) + 1;
+    localStorage.setItem(LS_HINTS_USED, JSON.stringify(parsed));
+  } catch {
+    /* ignore */
+  }
+}
+
 function HowToPlayContent({ text }: { text: string }): JSX.Element {
   return (
     <div className="how-to-play">
@@ -165,6 +193,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // Plays-this-session counter — bumped each time we transition into
   // "playing", never written to localStorage.
   const [sessionPlays, setSessionPlays] = useState(0);
+  // Whether the user has enabled hints in Settings → Gameplay. Read once
+  // up-front; settings changes don't take effect mid-game.
+  const hintsEnabled = useMemo(() => readHintsEnabled(), []);
 
   useFocusTrap(infoPopoverRef, infoOpen);
 
@@ -294,6 +325,50 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     if (phase !== "playing") return;
     setPaused((p) => !p);
   }, [phase]);
+
+  /**
+   * Trigger a hint pulse. Calls `plugin.hint?.(state)` (read-only — never
+   * mutates state), then queries the DOM for the returned selector and
+   * adds the `hint-pulse` class for ~1.5s (3 pulses by default). No-op
+   * if the plugin doesn't define a hint or the selector resolves to
+   * nothing on the page.
+   */
+  const showHint = useCallback(() => {
+    if (!hintsEnabled) return;
+    if (!plugin.hint) return;
+    if (phase !== "playing") return;
+    let target: ReturnType<NonNullable<typeof plugin.hint>>;
+    try {
+      target = plugin.hint(state);
+    } catch {
+      target = null;
+    }
+    if (!target) {
+      pushToast("No hint available");
+      return;
+    }
+    if (typeof document === "undefined") return;
+    let el: Element | null = null;
+    try {
+      el = document.querySelector(target.selector);
+    } catch {
+      el = null;
+    }
+    if (!el) {
+      pushToast("No hint available");
+      return;
+    }
+    bumpHintsUsed(plugin.id);
+    el.classList.add("hint-pulse");
+    const ms = 500 * Math.max(1, target.pulses ?? 3);
+    window.setTimeout(() => {
+      try {
+        el?.classList.remove("hint-pulse");
+      } catch {
+        /* element may have unmounted */
+      }
+    }, ms);
+  }, [hintsEnabled, plugin, phase, state, pushToast]);
 
   const shareSeed = useCallback(async () => {
     const origin =
@@ -614,6 +689,25 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
                 <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
               </svg>
+            </button>
+          )}
+          {phase === "playing" && hintsEnabled && (
+            <button
+              type="button"
+              className="play-iconbtn play-hint-btn"
+              onClick={showHint}
+              disabled={!plugin.hint}
+              title={plugin.hint ? "Hint" : "No hint available for this game"}
+              aria-label="Hint"
+              data-tooltip="Hint"
+              data-testid="play-hint-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V18h6v-1.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"></path>
+              </svg>
+              <span className="play-hint-btn-label">Hint</span>
             </button>
           )}
           {(plugin.howToPlay || tutorialSteps) && phase === "playing" && (
