@@ -17,5 +17,6 @@ export const doubletsPatPlugin: GamePlugin<SoliState, SoliAction, typeof setting
   initialState: (seed: number, s: S) => initialState(seed, s as SoliSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: ".play-restart-btn", pulses: 3 },
   component: SoliGame,
 };

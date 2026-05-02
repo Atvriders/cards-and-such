@@ -17,5 +17,6 @@ export const zodiacPatPlugin: GamePlugin<ZodiacPatState, ZodiacPatAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as ZodiacPatSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: ".play-restart-btn", pulses: 3 },
   component: ZodiacPatGame,
 };
