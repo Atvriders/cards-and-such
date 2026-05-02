@@ -1353,7 +1353,7 @@ export default function LobbyPage(): JSX.Element {
           )}
         </div>
 
-        <div className="lobby-chips" role="tablist" aria-label="Filter by category">
+        <ChipStrip activeFilter={filter}>
           <Chip active={filter === "all"} onClick={() => setFilter("all")} count={GAMES.length} testId="chip-all">{t("lobby.chip.all")}</Chip>
           <Chip
             active={filter === "top-rated"}
@@ -1386,7 +1386,7 @@ export default function LobbyPage(): JSX.Element {
               glyph={CATEGORY_GLYPHS[cat]}
             >{CATEGORY_LABELS[cat]}</Chip>
           ))}
-        </div>
+        </ChipStrip>
       </div>
 
       {!query && filter === "all" && featured.length > 0 && (
@@ -1721,6 +1721,117 @@ function DrawerLink({ id, active, onClick, glyph, label, count, collapsed }: Dra
       <span className="lobby-drawer-link-label">{label}</span>
       <span className="lobby-drawer-link-count">{count.toLocaleString()}</span>
     </button>
+  );
+}
+
+/**
+ * Horizontally scrollable wrapper for the lobby filter chips. On narrow
+ * viewports the chip row would otherwise overflow / wrap awkwardly; this
+ * keeps everything on a single line behind a scroll-snap track with
+ * fade-mask edges (CSS) and optional desktop scroll arrows. The active
+ * chip is also auto-scrolled into view whenever `activeFilter` changes
+ * so a tap on a partially-clipped chip jumps it into the viewport.
+ */
+function ChipStrip({
+  activeFilter,
+  children,
+}: {
+  activeFilter: string;
+  children: React.ReactNode;
+}): JSX.Element {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(false);
+
+  // Recompute overflow state on scroll / resize. Tolerance of 1px guards
+  // against fractional scroll positions on hi-DPI displays.
+  const recompute = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setCanLeft(el.scrollLeft > 1);
+    setCanRight(el.scrollLeft < max - 1);
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    recompute();
+    el.addEventListener("scroll", recompute, { passive: true });
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(recompute);
+      ro.observe(el);
+    } else if (typeof window !== "undefined") {
+      window.addEventListener("resize", recompute);
+    }
+    return () => {
+      el.removeEventListener("scroll", recompute);
+      if (ro) ro.disconnect();
+      else if (typeof window !== "undefined") window.removeEventListener("resize", recompute);
+    };
+  }, [recompute]);
+
+  // When the active chip changes (programmatically or via tap), scroll
+  // it into view so it's never clipped behind a fade-mask edge.
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const active = el.querySelector<HTMLElement>(".lobby-chip.is-active");
+    if (!active) return;
+    const trackRect = el.getBoundingClientRect();
+    const chipRect = active.getBoundingClientRect();
+    const overflowsLeft = chipRect.left < trackRect.left + 24;
+    const overflowsRight = chipRect.right > trackRect.right - 24;
+    if (overflowsLeft || overflowsRight) {
+      // `inline: "center"` centers the active chip in the viewport on
+      // mobile; smooth scrolling is governed by the CSS `scroll-behavior`
+      // declaration (which already respects prefers-reduced-motion).
+      // jsdom (the test runtime) lacks scrollIntoView, so guard it.
+      if (typeof active.scrollIntoView === "function") {
+        active.scrollIntoView({ block: "nearest", inline: "center" });
+      }
+    }
+  }, [activeFilter]);
+
+  const nudge = useCallback((dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    // Scroll by ~80% of viewport width — enough to advance, not so much
+    // that the user loses their place between presses.
+    const step = Math.max(120, el.clientWidth * 0.8);
+    el.scrollBy({ left: dir * step });
+  }, []);
+
+  return (
+    <div
+      className={`lobby-chips-wrap${canLeft ? " has-overflow-left" : ""}${canRight ? " has-overflow-right" : ""}`}
+    >
+      <button
+        type="button"
+        className="lobby-chips-arrow lobby-chips-arrow--left"
+        aria-label="Scroll filters left"
+        tabIndex={-1}
+        onClick={() => nudge(-1)}
+        hidden={!canLeft}
+      >‹</button>
+      <div
+        ref={trackRef}
+        className="lobby-chips"
+        role="tablist"
+        aria-label="Filter by category"
+      >
+        {children}
+      </div>
+      <button
+        type="button"
+        className="lobby-chips-arrow lobby-chips-arrow--right"
+        aria-label="Scroll filters right"
+        tabIndex={-1}
+        onClick={() => nudge(1)}
+        hidden={!canRight}
+      >›</button>
+    </div>
   );
 }
 
