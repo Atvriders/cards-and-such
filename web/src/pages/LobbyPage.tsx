@@ -88,6 +88,49 @@ function playersLine(p: { min: number; max: number }): string {
 }
 
 /**
+ * Tile-tooltip handler shape. The same set of props is spread onto the
+ * tile root regardless of whether the tooltip engine has hydrated yet —
+ * pre-hydration the methods are stubs that flip activation, so the very
+ * first hover/touch/focus seamlessly hands off to the heavy engine.
+ */
+type TileTooltipHandlers = {
+  onMouseEnter: (e: React.MouseEvent<HTMLElement>) => void;
+  onMouseLeave: () => void;
+  onTouchStart: (e: React.TouchEvent<HTMLElement>) => void;
+  onTouchEnd: () => void;
+  onDragStart: () => void;
+  onFocus: (e: React.FocusEvent<HTMLElement>) => void;
+  onBlur: () => void;
+  "aria-describedby"?: string | undefined;
+};
+
+/**
+ * Imperative API the engine publishes back to the outer hook so the
+ * tile's spread-handlers (which were created before activation) can
+ * route subsequent events into the engine's stateful machinery.
+ */
+type TileTooltipEngineApi = {
+  onMouseEnter: (e: React.MouseEvent<HTMLElement>) => void;
+  onMouseLeave: () => void;
+  onTouchStart: (e: React.TouchEvent<HTMLElement>) => void;
+  onTouchEnd: () => void;
+  onDragStart: () => void;
+  onFocus: (e: React.FocusEvent<HTMLElement>) => void;
+  onBlur: () => void;
+};
+
+/**
+ * Reason for the very first activation — the engine reads this on mount
+ * to mimic the original behaviour for the activating event:
+ *  - "hover" / "touch": schedule the 500ms hover-intent timer.
+ *  - "focus": show immediately (keyboard parity, no delay).
+ */
+type TileTooltipKickoff = {
+  kind: "hover" | "touch" | "focus";
+  el: HTMLElement;
+};
+
+/**
  * Hook wired into a tile element. Encapsulates:
  *   - 500ms hover-intent delay before showing.
  *   - Long-press (500ms) on touch to show; tap-elsewhere to hide.
@@ -95,22 +138,90 @@ function playersLine(p: { min: number; max: number }): string {
  *   - Smart placement: prefer right-of-tile, fall back to left if the
  *     viewport doesn't have at least 280px clear on the right.
  *
+ * Lazy hydration: at 80 tiles per page, the per-tile cost of always
+ * allocating 2 useState + 2 useRef + 3 useEffect + several useCallback
+ * adds up. The hook now keeps only a single `activated` flag plus a
+ * stable handler object until the user actually hovers / touches /
+ * focuses a tile, at which point a sibling `<TileTooltipEngine>`
+ * mounts and owns all the stateful machinery for *that* tile.
+ *
  * Returns event-handler props that the tile spreads onto its root, and
- * a `tooltip` value (the floating element to render) — null when hidden.
+ * a `tooltip` value (the floating element to render, plus the engine
+ * itself when hydrated) — null when nothing has activated yet.
  */
 function useTileTooltip(data: TileTooltipData, tileId: string): {
-  handlers: {
-    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => void;
-    onMouseLeave: () => void;
-    onTouchStart: (e: React.TouchEvent<HTMLElement>) => void;
-    onTouchEnd: () => void;
-    onDragStart: () => void;
-    onFocus: (e: React.FocusEvent<HTMLElement>) => void;
-    onBlur: () => void;
-    "aria-describedby"?: string | undefined;
-  };
+  handlers: TileTooltipHandlers;
   tooltip: JSX.Element | null;
 } {
+  const [activated, setActivated] = useState(false);
+  // Engine publishes its imperative API here once mounted; the
+  // handlers below route to it when present.
+  const engineApiRef = useRef<TileTooltipEngineApi | null>(null);
+  // First-activation kickoff stashed for the engine to read on mount.
+  const kickoffRef = useRef<TileTooltipKickoff | null>(null);
+
+  const baseHandlers = useMemo(() => ({
+    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+      const api = engineApiRef.current;
+      if (api) { api.onMouseEnter(e); return; }
+      kickoffRef.current = { kind: "hover", el: e.currentTarget };
+      setActivated(true);
+    },
+    onMouseLeave: () => engineApiRef.current?.onMouseLeave(),
+    onTouchStart: (e: React.TouchEvent<HTMLElement>) => {
+      const api = engineApiRef.current;
+      if (api) { api.onTouchStart(e); return; }
+      kickoffRef.current = { kind: "touch", el: e.currentTarget };
+      setActivated(true);
+    },
+    onTouchEnd: () => engineApiRef.current?.onTouchEnd(),
+    onDragStart: () => engineApiRef.current?.onDragStart(),
+    onFocus: (e: React.FocusEvent<HTMLElement>) => {
+      const api = engineApiRef.current;
+      if (api) { api.onFocus(e); return; }
+      kickoffRef.current = { kind: "focus", el: e.currentTarget };
+      setActivated(true);
+    },
+    onBlur: () => engineApiRef.current?.onBlur(),
+  }), []);
+  // Pre-hydration: no tooltip in the DOM, omit aria-describedby. Once
+  // hydrated we point at the deterministic tooltip id; when the
+  // engine isn't currently rendering the tooltip the id simply
+  // resolves to nothing — screen readers ignore unresolved idrefs,
+  // matching the previous "undefined when hidden" behaviour from the
+  // user's standpoint.
+  const handlers: TileTooltipHandlers = activated
+    ? { ...baseHandlers, "aria-describedby": `tile-tooltip-${tileId}` }
+    : { ...baseHandlers, "aria-describedby": undefined };
+
+  const tooltip = activated ? (
+    <TileTooltipEngine
+      data={data}
+      tileId={tileId}
+      apiRef={engineApiRef}
+      initialKickoff={kickoffRef}
+    />
+  ) : null;
+
+  return { handlers, tooltip };
+}
+
+/**
+ * Heavy half of the lobby tooltip — owns visibility/coords state, the
+ * 500ms show timer, and the document/window listeners. Mounted only
+ * after the first hover/touch/focus on its tile.
+ */
+function TileTooltipEngine({
+  data,
+  tileId,
+  apiRef,
+  initialKickoff,
+}: {
+  data: TileTooltipData;
+  tileId: string;
+  apiRef: React.MutableRefObject<TileTooltipEngineApi | null>;
+  initialKickoff: React.MutableRefObject<TileTooltipKickoff | null>;
+}): JSX.Element | null {
   const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState<{ top: number; left: number; side: "right" | "left" } | null>(null);
   const showTimer = useRef<number | null>(null);
@@ -153,6 +264,61 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
     setVisible(false);
   }, [clearTimer]);
 
+  // Publish the imperative API on every render so the parent's stable
+  // handler object can route subsequent events here.
+  apiRef.current = {
+    onMouseEnter: (e) => {
+      const el = e.currentTarget;
+      targetRef.current = el;
+      clearTimer();
+      showTimer.current = window.setTimeout(() => show(el), 500);
+    },
+    onMouseLeave: () => hide(),
+    onTouchStart: (e) => {
+      const el = e.currentTarget;
+      targetRef.current = el;
+      clearTimer();
+      showTimer.current = window.setTimeout(() => show(el), 500);
+    },
+    onTouchEnd: () => clearTimer(),
+    onDragStart: () => hide(),
+    onFocus: (e) => {
+      const el = e.currentTarget;
+      targetRef.current = el;
+      clearTimer();
+      show(el);
+    },
+    onBlur: () => hide(),
+  };
+
+  // Replay the activating event. The light handlers swallowed the
+  // first hover/touch/focus to flip activation; on first mount we
+  // honour what the user actually did.
+  useEffect(() => {
+    const ko = initialKickoff.current;
+    initialKickoff.current = null;
+    if (!ko) return;
+    targetRef.current = ko.el;
+    if (ko.kind === "focus") {
+      show(ko.el);
+    } else {
+      // hover / touch: 500ms hover-intent delay, same as live events.
+      clearTimer();
+      showTimer.current = window.setTimeout(() => show(ko.el), 500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Clear the published API when this engine unmounts (currently only
+  // happens when the parent tile unmounts — engines are sticky once
+  // hydrated, since the cost was already paid).
+  useEffect(() => {
+    return () => {
+      apiRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Tap-elsewhere on touch devices closes the tooltip; any scroll hides.
   useEffect(() => {
     if (!visible) return;
@@ -184,40 +350,10 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
 
   useEffect(() => () => clearTimer(), [clearTimer]);
 
-  const tooltipDomId = `tile-tooltip-${tileId}`;
-
-  const handlers = {
-    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
-      const el = e.currentTarget;
-      targetRef.current = el;
-      clearTimer();
-      showTimer.current = window.setTimeout(() => show(el), 500);
-    },
-    onMouseLeave: () => hide(),
-    onTouchStart: (e: React.TouchEvent<HTMLElement>) => {
-      const el = e.currentTarget;
-      targetRef.current = el;
-      clearTimer();
-      showTimer.current = window.setTimeout(() => show(el), 500);
-    },
-    onTouchEnd: () => clearTimer(),
-    onDragStart: () => hide(),
-    // Keyboard parity: tab-focus shows immediately (no 500ms hover-intent
-    // delay — keyboard users have already committed to the element),
-    // and blur hides like a mouseleave.
-    onFocus: (e: React.FocusEvent<HTMLElement>) => {
-      const el = e.currentTarget;
-      targetRef.current = el;
-      clearTimer();
-      show(el);
-    },
-    onBlur: () => hide(),
-    "aria-describedby": visible ? tooltipDomId : undefined,
-  };
-
-  const tooltip = visible && coords ? (
+  if (!visible || !coords) return null;
+  return (
     <div
-      id={tooltipDomId}
+      id={`tile-tooltip-${tileId}`}
       className={`lobby-tooltip lobby-tooltip--${coords.side}`}
       role="tooltip"
       data-testid={`tile-tooltip-${tileId}`}
@@ -236,9 +372,7 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
         </div>
       )}
     </div>
-  ) : null;
-
-  return { handlers, tooltip };
+  );
 }
 
 type Filter = "all" | "top-rated" | "favorites" | GameCategory;
