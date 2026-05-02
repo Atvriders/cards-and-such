@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { ACHIEVEMENTS } from "./stats.js";
 import type { StatsState } from "./stats.js";
+import { GAMES } from "../games/registry.js";
 
 /**
  * Predicate-level tests for every achievement in `ACHIEVEMENTS`.
@@ -193,7 +194,90 @@ describe("ACHIEVEMENTS – baseline", () => {
     }
   });
 
-  it("array contains 18 new achievements (24 total)", () => {
-    expect(ACHIEVEMENTS.length).toBe(24);
+  it("array contains 30 new achievements (36 total)", () => {
+    expect(ACHIEVEMENTS.length).toBe(36);
+  });
+});
+
+describe("ACHIEVEMENTS – game families", () => {
+  it("klondike-master fires after 10 klondike wins (across variants)", () => {
+    const s = emptyStats();
+    s.perGame["klondike"] = { played: 6, wins: 6, best: 0 };
+    s.perGame["klondike-by-threes"] = { played: 4, wins: 4, best: 0 };
+    expect(find("klondike-master").isUnlocked(s)).toBe(true);
+  });
+
+  it("spider-slayer fires after 5 spider wins", () => {
+    const s = emptyStats();
+    s.perGame["spider"] = { played: 5, wins: 5, best: 0 };
+    expect(find("spider-slayer").isUnlocked(s)).toBe(true);
+  });
+
+  it("freecell-fanatic fires after 50 freecell plays", () => {
+    const s = emptyStats();
+    s.perGame["freecell"] = { played: 30, wins: 0, best: 0 };
+    s.perGame["freecell-classic"] = { played: 20, wins: 0, best: 0 };
+    expect(find("freecell-fanatic").isUnlocked(s)).toBe(true);
+  });
+
+  it("solitaire-suite fires after one win in each pillar", () => {
+    const s = emptyStats();
+    s.perGame["klondike"] = { played: 1, wins: 1, best: 0 };
+    s.perGame["spider"] = { played: 1, wins: 1, best: 0 };
+    s.perGame["freecell"] = { played: 1, wins: 1, best: 0 };
+    s.perGame["yukon"] = { played: 1, wins: 1, best: 0 };
+    expect(find("solitaire-suite").isUnlocked(s)).toBe(true);
+  });
+
+  it("wordle-whiz fires after a high wordle-mini best score", () => {
+    const s = emptyStats();
+    s.perGame["wordle-mini"] = { played: 1, wins: 1, best: 6 };
+    expect(find("wordle-whiz").isUnlocked(s)).toBe(true);
+  });
+
+  it("holdem-hustler fires after 50 holdem plays (across variants)", () => {
+    const s = emptyStats();
+    s.perGame["holdem-no-limit"] = { played: 25, wins: 0, best: 0 };
+    s.perGame["holdem-fixed-limit"] = { played: 25, wins: 0, best: 0 };
+    expect(find("holdem-hustler").isUnlocked(s)).toBe(true);
+  });
+
+  it("yahtzee-royale fires after a 200+ yahtzee score", () => {
+    const s = emptyStats();
+    s.perGame["yahtzee"] = { played: 1, wins: 0, best: 250 };
+    expect(find("yahtzee-royale").isUnlocked(s)).toBe(true);
+  });
+
+  it("pig-out fires after a 100+ pig score", () => {
+    const s = emptyStats();
+    s.perGame["pig"] = { played: 1, wins: 1, best: 100 };
+    expect(find("pig-out").isUnlocked(s)).toBe(true);
+  });
+
+  it("war-hero fires after 5 war games (proxy: plays)", () => {
+    const s = emptyStats();
+    s.perGame["war"] = { played: 5, wins: 0, best: 0 };
+    expect(find("war-hero").isUnlocked(s)).toBe(true);
+  });
+
+  it("memory-genius fires when a memory-pairs best time is under 60s", () => {
+    localStorage.setItem("cards-best-times", JSON.stringify({ "memory-pairs-kids": 45 }));
+    expect(find("memory-genius").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("speed-demon fires after a win in any speed variant", () => {
+    const s = emptyStats();
+    s.perGame["speed"] = { played: 1, wins: 1, best: 0 };
+    expect(find("speed-demon").isUnlocked(s)).toBe(true);
+  });
+
+  it("five-of-a-kind fires after playing 5 different solitaire games", () => {
+    // Pull real solitaire ids from the registry so the predicate's category
+    // lookup matches what `recordGame` would actually persist.
+    const solitaireIds = GAMES.filter((g) => g.category === "solitaire").slice(0, 5).map((g) => g.id);
+    expect(solitaireIds.length).toBe(5);
+    const s = emptyStats();
+    for (const id of solitaireIds) s.perGame[id] = { played: 1, wins: 0, best: 0 };
+    expect(find("five-of-a-kind").isUnlocked(s)).toBe(true);
   });
 });

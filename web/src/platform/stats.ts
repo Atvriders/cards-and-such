@@ -97,6 +97,45 @@ function bestTimes(): number[] {
   return out;
 }
 
+function bestTimesMap(): Record<string, number> {
+  const v = readJSON<Record<string, number>>("cards-best-times");
+  if (!v || typeof v !== "object") return {};
+  const out: Record<string, number> = {};
+  for (const [k, val] of Object.entries(v)) {
+    if (typeof val === "number" && Number.isFinite(val) && val > 0) out[k] = val;
+  }
+  return out;
+}
+
+/**
+ * Sum stats across every game whose id starts with one of the given prefixes.
+ * Lets a single achievement cover a family of variants (klondike-by-threes,
+ * spider-one-suit, holdem-no-limit, yahtzee-mini, etc.) without enumerating
+ * each one. Matches on prefix because the registry is family-rooted.
+ */
+function familyStats(s: StatsState, prefixes: string[]): { played: number; wins: number; best: number } {
+  let played = 0;
+  let wins = 0;
+  let best = 0;
+  for (const [id, g] of Object.entries(s.perGame)) {
+    if (prefixes.some((p) => id === p || id.startsWith(`${p}-`) || id.startsWith(`${p}_`))) {
+      played += g.played;
+      wins += g.wins;
+      if (g.best > best) best = g.best;
+    }
+  }
+  return { played, wins, best };
+}
+
+function familyHasMatch(map: Record<string, number>, prefixes: string[], pred: (v: number) => boolean): boolean {
+  for (const [id, val] of Object.entries(map)) {
+    if (prefixes.some((p) => id === p || id.startsWith(`${p}-`) || id.startsWith(`${p}_`))) {
+      if (pred(val)) return true;
+    }
+  }
+  return false;
+}
+
 export const ACHIEVEMENTS: Achievement[] = [
   {
     id: "first-win",
@@ -253,6 +292,102 @@ export const ACHIEVEMENTS: Achievement[] = [
     title: "Arcade Ace",
     description: "Play 25 arcade games.",
     isUnlocked: (s) => (s.perCategory["arcade"] ?? 0) >= 25,
+  },
+
+  /* ---- game-family achievements ---- */
+  {
+    id: "klondike-master",
+    title: "Klondike Master",
+    description: "Win 10 Klondike games.",
+    isUnlocked: (s) => familyStats(s, ["klondike"]).wins >= 10,
+  },
+  {
+    id: "spider-slayer",
+    title: "Spider Slayer",
+    description: "Win 5 Spider games.",
+    isUnlocked: (s) => familyStats(s, ["spider", "spiderette"]).wins >= 5,
+  },
+  {
+    id: "freecell-fanatic",
+    title: "FreeCell Fanatic",
+    description: "Play 50 FreeCell games.",
+    isUnlocked: (s) => familyStats(s, ["freecell"]).played >= 50,
+  },
+  {
+    id: "solitaire-suite",
+    title: "Solitaire Suite",
+    description: "Win at least one game in Klondike, Spider, FreeCell, and Yukon.",
+    isUnlocked: (s) =>
+      familyStats(s, ["klondike"]).wins >= 1 &&
+      familyStats(s, ["spider", "spiderette"]).wins >= 1 &&
+      familyStats(s, ["freecell"]).wins >= 1 &&
+      familyStats(s, ["yukon"]).wins >= 1,
+  },
+  {
+    id: "wordle-whiz",
+    // No per-guess signal exists; proxy with a high best score for any
+    // wordle-mini variant. Lower guess count => higher score in our
+    // scoring scheme, so best >= 6 stands in for "solved in 3 or fewer".
+    title: "Wordle Whiz",
+    description: "Crush Wordle Mini with a top-tier score.",
+    isUnlocked: (s) => familyStats(s, ["wordle"]).best >= 6,
+  },
+  {
+    id: "holdem-hustler",
+    title: "Holdem Hustler",
+    description: "Play 50 Hold'em hands.",
+    isUnlocked: (s) => familyStats(s, ["holdem"]).played >= 50,
+  },
+  {
+    id: "yahtzee-royale",
+    title: "Yahtzee Royale",
+    description: "Score 200+ in Yahtzee or Yacht.",
+    isUnlocked: (s) => familyStats(s, ["yahtzee", "yacht"]).best >= 200,
+  },
+  {
+    id: "pig-out",
+    title: "Pig Out",
+    description: "Reach 100 in Pig dice.",
+    isUnlocked: (s) => familyStats(s, ["pig"]).best >= 100,
+  },
+  {
+    id: "war-hero",
+    // War's win/loss is binary and not always tracked as a "win"; fall back
+    // to the play count if no wins have been recorded yet.
+    title: "War Hero",
+    description: "Survive 5 games of War.",
+    isUnlocked: (s) => {
+      const f = familyStats(s, ["war"]);
+      return f.wins >= 5 || f.played >= 5;
+    },
+  },
+  {
+    id: "memory-genius",
+    title: "Memory Genius",
+    description: "Finish a memory pairs round in under 60 seconds.",
+    isUnlocked: () => familyHasMatch(bestTimesMap(), ["memory", "memory-pairs", "memory-match"], (t) => t > 0 && t < 60),
+  },
+  {
+    id: "speed-demon",
+    title: "Speed Demon",
+    description: "Win a game of Speed.",
+    isUnlocked: (s) => familyStats(s, ["speed"]).wins >= 1,
+  },
+  {
+    id: "five-of-a-kind",
+    title: "Five-of-a-Kind",
+    description: "Finish 5 different solitaire games.",
+    isUnlocked: (s) => {
+      // "Different solitaire games" = distinct game ids in the solitaire
+      // category that have at least one play recorded.
+      const solitaireIds = GAMES.filter((g) => g.category === "solitaire").map((g) => g.id);
+      let n = 0;
+      for (const id of solitaireIds) {
+        const g = s.perGame[id];
+        if (g && g.played >= 1) n += 1;
+      }
+      return n >= 5;
+    },
   },
 ];
 

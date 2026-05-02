@@ -204,6 +204,38 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const actionCountRef = useRef(0);
   const infoPopoverRef = useRef<HTMLDivElement | null>(null);
   const infoButtonRef = useRef<HTMLButtonElement | null>(null);
+  const playPanelRef = useRef<HTMLElement | null>(null);
+
+  /**
+   * Best-effort fullscreen toggle on the play panel. Browsers vary on the
+   * exact API surface — we feature-detect `requestFullscreen` per the
+   * standard and silently fall back to a no-op when unavailable (older
+   * Safari, locked-down embeds, etc.). Errors during the request are
+   * swallowed so a denial doesn't surface as an unhandled rejection.
+   */
+  const toggleFullscreen = useCallback(() => {
+    if (typeof document === "undefined") return;
+    const el = playPanelRef.current;
+    const docAny = document as Document & { exitFullscreen?: () => Promise<void> };
+    if (document.fullscreenElement) {
+      if (typeof docAny.exitFullscreen === "function") {
+        try {
+          void docAny.exitFullscreen();
+        } catch {
+          /* ignore */
+        }
+      }
+      return;
+    }
+    if (!el) return;
+    if (typeof el.requestFullscreen === "function") {
+      try {
+        void el.requestFullscreen();
+      } catch {
+        /* ignore — user gesture or permission may have been denied */
+      }
+    }
+  }, []);
 
   // Plays-this-session counter — bumped each time we transition into
   // "playing", never written to localStorage.
@@ -816,6 +848,24 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           {phase === "playing" && (
             <button
               type="button"
+              className="play-iconbtn play-fullscreen-btn"
+              onClick={toggleFullscreen}
+              title="Fullscreen"
+              aria-label="Fullscreen"
+              data-tooltip="Fullscreen"
+              data-testid="play-fullscreen-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path d="M4 9V4h5"></path>
+                <path d="M20 9V4h-5"></path>
+                <path d="M4 15v5h5"></path>
+                <path d="M20 15v5h-5"></path>
+              </svg>
+            </button>
+          )}
+          {phase === "playing" && (
+            <button
+              type="button"
               className="play-iconbtn"
               onClick={replay}
               title="Restart"
@@ -871,7 +921,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             values={settings}
             onChange={(k, v) => setSettings((s) => ({ ...s, [k]: v } as typeof s))}
           />
-          <button onClick={start} className="start-btn" data-testid="start-game">Start</button>
+          <button onClick={start} className="start-btn" data-testid="start-game">Start playing</button>
         </section>
       )}
 
@@ -889,16 +939,27 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
 
       {phase === "playing" && (
         <div className="play-with-sidebar">
-          <section className={`play-panel${paused ? " play-panel--paused" : ""}`}>
+          <section
+            ref={playPanelRef}
+            className={`play-panel play-board${paused ? " play-panel--paused" : ""}`}
+          >
             {/* Suspense fallback shows a skeleton "loading game…" card while
                 the active plugin's component module finishes loading. Most
                 plugins are eagerly imported today, but games that use
                 React.lazy or trigger a suspending data read still benefit
                 here, and the boundary keeps render-time fallbacks scoped
-                to the play panel rather than blanking the whole page. */}
-            <Suspense fallback={<GameLoadingSkeleton />}>
-              <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
-            </Suspense>
+                to the play panel rather than blanking the whole page.
+                We also explicitly guard for an undefined `plugin.component`
+                — a registry entry that's still resolving its import will
+                hand us `undefined`, in which case rendering the skeleton
+                directly avoids tripping React with `<undefined />`. */}
+            {plugin.component ? (
+              <Suspense fallback={<GameLoadingSkeleton />}>
+                <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
+              </Suspense>
+            ) : (
+              <GameLoadingSkeleton />
+            )}
             {paused && (
               <div className="play-paused-overlay" data-testid="play-paused-overlay" role="status" aria-live="polite">
                 <div className="play-paused-card">
@@ -1159,17 +1220,25 @@ function EndRatingBlock({
  *
  * Sized to roughly mirror a real play panel — header line, status row,
  * playfield rectangle — so the layout doesn't jump when the real game
- * mounts. Includes a polite "Loading game…" caption for screen readers.
+ * mounts. Three card-shaped shimmer blocks evoke a fanned deck so users
+ * have a visual cue beyond the polite "Loading game…" caption picked up
+ * by screen readers.
  */
 function GameLoadingSkeleton(): JSX.Element {
   return (
-    <div className="play-game-loading" data-testid="play-game-loading" role="status" aria-live="polite">
+    <div
+      className="play-game-loading"
+      data-testid="play-loading-skeleton"
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
       <div className="play-game-loading-caption">Loading game…</div>
-      <div className="play-game-loading-row">
-        <Skeleton variant="text-line" width={120} />
-        <Skeleton variant="text-line" width={64} />
+      <div className="play-game-loading-deck" aria-hidden="true">
+        <Skeleton variant="rect" className="play-game-loading-card play-game-loading-card--back" />
+        <Skeleton variant="rect" className="play-game-loading-card play-game-loading-card--mid" />
+        <Skeleton variant="rect" className="play-game-loading-card play-game-loading-card--front" />
       </div>
-      <Skeleton variant="rect" width="100%" height={320} />
       <div className="play-game-loading-row">
         <Skeleton variant="text-line" width={80} />
         <Skeleton variant="text-line" width={80} />
