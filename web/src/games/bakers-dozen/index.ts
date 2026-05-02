@@ -1,7 +1,8 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BakersDozenState, BakersDozenAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bakersDozRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { BakersDozen } from "./BakersDozen.js";
 
 export const bakersDozSettings = {} as const;
@@ -31,5 +32,19 @@ Tip: Focus on clearing columns rather than filling foundations early. A free col
   initialState: (seed: number, settings: BakersDozenSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BakersDozenState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const sources = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12", "t13"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, bakersDozRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: BakersDozen,
 };

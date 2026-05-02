@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { CapricieseState, CapricieseAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, capricieseRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { Game } from "./Game.js";
 
 export const capricieseSettings = {} as const;
@@ -28,5 +29,19 @@ Scoring: +10 per card on a foundation. Use Auto-move to sweep ready cards up.`,
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: CapricieseState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"];
+    const sources = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, capricieseRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: Game,
 };

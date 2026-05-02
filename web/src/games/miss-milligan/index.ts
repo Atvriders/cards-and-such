@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { MissMilliganState, MissMilliganAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, missMilliganRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { MissMilligan } from "./MissMilligan.js";
 
 export const missMilliganSettings = {} as const;
@@ -30,5 +31,23 @@ Tips: Try to expose low-rank cards early. Empty columns are valuable — don't f
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: MissMilliganState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const sources = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, missMilliganRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    const stock = state.piles.find((p) => p.id === "stock");
+    if (stock && stock.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    return null;
+  },
   component: MissMilligan,
 };

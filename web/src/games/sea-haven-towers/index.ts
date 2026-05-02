@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SeaHavenTowersState, SeaHavenTowersAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, seaHavenRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { SeaHavenTowers } from "./SeaHavenTowers.js";
 
 export const seaHavenTowersSettings = {} as const;
@@ -24,5 +25,19 @@ Win condition: All four foundations built Ace through King by suit.`,
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: SeaHavenTowersState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const sources = ["r1", "r2", "r3", "r4", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, seaHavenRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: SeaHavenTowers,
 };

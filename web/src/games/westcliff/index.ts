@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { WestcliffState, WestcliffAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, westcliffRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { Westcliff } from "./Westcliff.js";
 
 export const westcliffSettings = {} as const;
@@ -24,5 +25,27 @@ Strategy: Be conservative with the stock — each card is only dealt once. Focus
   initialState: (seed) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: WestcliffState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const sources = ["waste", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, westcliffRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    const stock = state.piles.find((p) => p.id === "stock");
+    if (stock && stock.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    const waste = state.piles.find((p) => p.id === "waste");
+    if (waste && waste.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    return null;
+  },
   component: Westcliff,
 };

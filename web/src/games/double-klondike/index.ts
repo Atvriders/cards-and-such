@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { DoubleKlondikeState, DoubleKlondikeAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, doubleKlondikeRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { DoubleKlondikeGame } from "./Game.js";
 
 export const doubleKlondikePlugin: GamePlugin<DoubleKlondikeState, DoubleKlondikeAction, Record<string, never>> = {
@@ -26,5 +27,27 @@ Tips: With two decks there are eight Aces to find — plan for both copies of ea
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: DoubleKlondikeState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"];
+    const sources = ["waste", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, doubleKlondikeRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    const stock = state.piles.find((p) => p.id === "stock");
+    if (stock && stock.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    const waste = state.piles.find((p) => p.id === "waste");
+    if (waste && waste.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    return null;
+  },
   component: DoubleKlondikeGame,
 } as unknown as GamePlugin;

@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { YukonCellsState, YukonCellsAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, yukonCellsRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { YukonCells } from "./YukonCells.js";
 
 export const yukonCellsSettings = {} as const;
@@ -28,5 +29,19 @@ Tips: The free cells give you crucial extra flexibility over standard Yukon, but
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: YukonCellsState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const sources = ["fc1", "fc2", "fc3", "fc4", "t1", "t2", "t3", "t4", "t5", "t6", "t7"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, yukonCellsRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: YukonCells,
 };

@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { TripleFreecellState, TripleFreecellAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, tripleFreecellRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { TripleFreecellGame } from "./Game.js";
 
 export const tripleFreecellPlugin: GamePlugin<TripleFreecellState, TripleFreecellAction, Record<string, never>> = {
@@ -24,5 +25,19 @@ Tips: With 13 long columns, plan your sequences carefully. Empty columns are ext
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: TripleFreecellState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12"];
+    const sources = ["fc1", "fc2", "fc3", "fc4", "fc5", "fc6", "fc7", "fc8", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12", "c13"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, tripleFreecellRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: TripleFreecellGame,
 } as unknown as GamePlugin;

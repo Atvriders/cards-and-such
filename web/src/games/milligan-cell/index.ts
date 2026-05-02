@@ -1,6 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { MilliganCellState, MilliganCellAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, milliganCellRuleset} from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { MilliganCell } from "./Game.js";
 
 export const milliganCellPlugin: GamePlugin<MilliganCellState, MilliganCellAction, Record<string, never>> = {
@@ -24,5 +25,19 @@ Strategy: With 12 cells the game is much more forgiving than standard FreeCell. 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: MilliganCellState): HintTarget | null => {
+    const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"];
+    const sources = ["fc1", "fc2", "fc3", "fc4", "fc5", "fc6", "fc7", "fc8", "fc9", "fc10", "fc11", "fc12", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
+    for (const sourceId of sources) {
+      const src = state.piles.find((p) => p.id === sourceId);
+      if (!src || src.cards.length === 0) continue;
+      for (const foundId of FOUNDATION_IDS) {
+        if (canMove(state.piles, { fromPile: sourceId, toPile: foundId, count: 1 }, milliganCellRuleset)) {
+          return { selector: `[data-testid="pile-${sourceId}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: MilliganCell,
 } as unknown as GamePlugin;
