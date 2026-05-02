@@ -47,6 +47,74 @@ const FILTER_STORAGE_KEY = "cards-lobby-filter";
 const LIST_MODE_STORAGE_KEY = "cards-lobby-list-mode";
 /** localStorage key persisting the desktop left-drawer collapsed state. */
 const DRAWER_COLLAPSED_KEY = "cards-lobby-drawer-collapsed";
+/** localStorage key persisting the desktop left-drawer resize width (px). */
+const DRAWER_WIDTH_KEY = "cards-lobby-drawer-width";
+/** Default drawer width when no override is persisted (matches CSS rule). */
+const DRAWER_WIDTH_DEFAULT = 220;
+/** Minimum drag-resize width (px) — labels & counts must stay legible. */
+const DRAWER_WIDTH_MIN = 200;
+/** Maximum drag-resize width (px) — avoids overlapping the lobby grid. */
+const DRAWER_WIDTH_MAX = 360;
+
+function readPersistedDrawerWidth(): number {
+  try {
+    if (typeof localStorage === "undefined") return DRAWER_WIDTH_DEFAULT;
+    const raw = localStorage.getItem(DRAWER_WIDTH_KEY);
+    if (raw === null) return DRAWER_WIDTH_DEFAULT;
+    const n = Number.parseInt(raw, 10);
+    if (!Number.isFinite(n)) return DRAWER_WIDTH_DEFAULT;
+    return Math.min(DRAWER_WIDTH_MAX, Math.max(DRAWER_WIDTH_MIN, n));
+  } catch { return DRAWER_WIDTH_DEFAULT; }
+}
+
+/** localStorage key persisting the lobby sort mode. */
+const SORT_STORAGE_KEY = "cards-lobby-sort";
+
+/**
+ * Sort modes available in the lobby's sort dropdown. "alphabetical" is
+ * the default and matches the canonical ordering of `allEntries`. The
+ * other modes layer a stable secondary sort over the alphabetised
+ * baseline so ties order predictably (e.g. two unplayed games for
+ * "most-played" fall back to alphabetical).
+ */
+type SortMode = "alphabetical" | "most-played" | "newest" | "top-rated";
+
+const SORT_LABELS: Record<SortMode, string> = {
+  "alphabetical": "Alphabetical",
+  "most-played": "Most played",
+  "newest": "Newest",
+  "top-rated": "Top rated",
+};
+
+const SORT_MODES: readonly SortMode[] = [
+  "alphabetical",
+  "most-played",
+  "newest",
+  "top-rated",
+] as const;
+
+function readPersistedSort(): SortMode {
+  try {
+    if (typeof localStorage === "undefined") return "alphabetical";
+    const raw = localStorage.getItem(SORT_STORAGE_KEY);
+    if (
+      raw === "alphabetical"
+      || raw === "most-played"
+      || raw === "newest"
+      || raw === "top-rated"
+    ) {
+      return raw;
+    }
+  } catch { /* ignore */ }
+  return "alphabetical";
+}
+
+function writePersistedSort(mode: SortMode): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(SORT_STORAGE_KEY, mode);
+  } catch { /* ignore */ }
+}
 
 /**
  * Two ways to walk the long lobby list:
@@ -68,6 +136,50 @@ function writePersistedListMode(mode: ListMode): void {
   try {
     if (typeof localStorage === "undefined") return;
     localStorage.setItem(LIST_MODE_STORAGE_KEY, mode);
+  } catch { /* ignore */ }
+}
+
+/** localStorage key persisting the lobby grid density preference. */
+const DENSITY_STORAGE_KEY = "cards-lobby-density";
+
+/**
+ * Three packing levels for the lobby grid:
+ *  - "compact":     smaller tiles, tight gap — fit more on screen at once.
+ *  - "comfortable" (default): the original lobby sizing.
+ *  - "spacious":    larger tiles, generous gap — easier touch targets.
+ *
+ * The active mode is mirrored as a `data-density` attribute on the grid
+ * container so all sizing is driven by CSS rather than inline styles.
+ */
+type DensityMode = "compact" | "comfortable" | "spacious";
+
+const DENSITY_MODES: readonly DensityMode[] = [
+  "compact",
+  "comfortable",
+  "spacious",
+] as const;
+
+const DENSITY_LABELS: Record<DensityMode, string> = {
+  "compact": "Compact",
+  "comfortable": "Comfortable",
+  "spacious": "Spacious",
+};
+
+function readPersistedDensity(): DensityMode {
+  try {
+    if (typeof localStorage === "undefined") return "comfortable";
+    const raw = localStorage.getItem(DENSITY_STORAGE_KEY);
+    if (raw === "compact" || raw === "comfortable" || raw === "spacious") {
+      return raw;
+    }
+  } catch { /* ignore */ }
+  return "comfortable";
+}
+
+function writePersistedDensity(mode: DensityMode): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(DENSITY_STORAGE_KEY, mode);
   } catch { /* ignore */ }
 }
 
@@ -513,6 +625,8 @@ export default function LobbyPage(): JSX.Element {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>(() => readPersistedFilter());
   const [listMode, setListMode] = useState<ListMode>(() => readPersistedListMode());
+  const [sortMode, setSortMode] = useState<SortMode>(() => readPersistedSort());
+  const [density, setDensity] = useState<DensityMode>(() => readPersistedDensity());
   // Infinite-scroll high-water mark (number of entries appended so far);
   // pagination mode ignores this and slices by `page` instead.
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -663,6 +777,11 @@ export default function LobbyPage(): JSX.Element {
   useEffect(() => {
     writePersistedListMode(listMode);
   }, [listMode]);
+
+  // Persist grid-density changes; rehydrates on next mount.
+  useEffect(() => {
+    writePersistedDensity(density);
+  }, [density]);
 
   // Flip favorite status for a single game id and write through to the
   // shared persistence helper, then update the in-memory set so all
@@ -858,9 +977,22 @@ export default function LobbyPage(): JSX.Element {
     [hiddenSet],
   );
 
+  // Registry-order index per game id — used as a proxy for "added at"
+  // since plugins lack timestamps. Higher index = newer.
+  const registryIndex = useMemo(() => {
+    const m = new Map<string, number>();
+    let i = 0;
+    for (const g of GAMES) {
+      if (g == null) continue;
+      m.set(g.id, i++);
+    }
+    return m;
+  }, []);
+
   const filtered = useMemo(() => {
     const q = deferredQuery.trim().toLowerCase();
     let list: LobbyEntry[];
+    let usesIntrinsicSort = false;
     if (filter === "hidden") {
       // Dedicated chip: surface ONLY the hidden tiles so the user can
       // review what they've stashed (and clear via Settings).
@@ -893,19 +1025,59 @@ export default function LobbyPage(): JSX.Element {
         .filter((e) => !isEntryHidden(e) && stampOf(e) > 0)
         .slice()
         .sort((a, b) => stampOf(b) - stampOf(a));
+      usesIntrinsicSort = true;
     } else {
       list = allEntries.filter((e) => !isEntryHidden(e) && e.category === filter);
     }
-    if (!q) return list;
-    // Each entry carries a precomputed lowercase `haystack` covering the
-    // family label / description / member titles / member descriptions,
-    // so the per-keystroke filter is a single `indexOf` per entry rather
-    // than re-lowercasing every field. Same matching semantics as before
-    // (family surfaces if any member matches; standalone matches title /
-    // category / description).
-    list = list.filter((e) => e.haystack.includes(q));
+    if (q) {
+      // Each entry carries a precomputed lowercase `haystack` covering the
+      // family label / description / member titles / member descriptions,
+      // so the per-keystroke filter is a single `indexOf` per entry rather
+      // than re-lowercasing every field. Same matching semantics as before
+      // (family surfaces if any member matches; standalone matches title /
+      // category / description).
+      list = list.filter((e) => e.haystack.includes(q));
+    }
+    // Apply user-selected sort. "alphabetical" is a no-op (allEntries is
+    // already alphabetised). "recently-played" has its own intrinsic sort
+    // by last-played timestamp, so we leave it alone. All other modes
+    // sort a copy with a stable secondary alphabetical fallback so ties
+    // (e.g. two unplayed games for "most-played") order predictably.
+    if (!usesIntrinsicSort && sortMode !== "alphabetical") {
+      const playsOf = (e: LobbyEntry): number => {
+        const perGame = stats.perGame ?? {};
+        if (e.kind === "game") return perGame[e.game.id]?.played ?? 0;
+        let total = 0;
+        for (const m of e.members) total += perGame[m.id]?.played ?? 0;
+        return total;
+      };
+      const newnessOf = (e: LobbyEntry): number => {
+        if (e.kind === "game") return registryIndex.get(e.game.id) ?? -1;
+        let best = -1;
+        for (const m of e.members) {
+          const v = registryIndex.get(m.id) ?? -1;
+          if (v > best) best = v;
+        }
+        return best;
+      };
+      const tie = (a: LobbyEntry, b: LobbyEntry): number =>
+        compareTitles(a.sortKey, b.sortKey);
+      list = list.slice().sort((a, b) => {
+        if (sortMode === "most-played") {
+          const d = playsOf(b) - playsOf(a);
+          return d !== 0 ? d : tie(a, b);
+        }
+        if (sortMode === "newest") {
+          const d = newnessOf(b) - newnessOf(a);
+          return d !== 0 ? d : tie(a, b);
+        }
+        // top-rated
+        const d = entryRating(b) - entryRating(a);
+        return d !== 0 ? d : tie(a, b);
+      });
+    }
     return list;
-  }, [allEntries, filter, deferredQuery, entryRating, favSet, lastPlayed, isEntryHidden]);
+  }, [allEntries, filter, deferredQuery, entryRating, favSet, lastPlayed, isEntryHidden, sortMode, stats, registryIndex]);
 
   // Reset window + page + close any open picker when filter or query changes.
   useEffect(() => {
@@ -921,6 +1093,15 @@ export default function LobbyPage(): JSX.Element {
     setVisibleCount(PAGE_SIZE);
     setPage(1);
   }, [listMode]);
+
+  // Persist sort mode + reset pagination so a re-sort starts from page 1
+  // rather than stranding the user on what is now a different page of
+  // entries.
+  useEffect(() => {
+    writePersistedSort(sortMode);
+    setVisibleCount(PAGE_SIZE);
+    setPage(1);
+  }, [sortMode]);
 
   // Infinite-scroll sentinel: when it crosses the viewport, append one
   // more page worth of cards. Disabled in pagination mode (the sentinel
@@ -1459,6 +1640,29 @@ export default function LobbyPage(): JSX.Element {
             >{CATEGORY_LABELS[cat]}</Chip>
           ))}
         </ChipStrip>
+
+        {/* Sort dropdown — applies on top of the active filter / search.
+            Persisted to localStorage under `cards-lobby-sort` (default
+            alphabetical). The "recently-played" filter has its own
+            intrinsic ordering and ignores this control. */}
+        <label className="lobby-sort">
+          <span className="lobby-sort-label">Sort</span>
+          <select
+            className="lobby-sort-select"
+            value={sortMode}
+            onChange={(e) => setSortMode(e.target.value as SortMode)}
+            data-testid="lobby-sort"
+            aria-label="Sort games"
+          >
+            {SORT_MODES.map((mode) => (
+              <option
+                key={mode}
+                value={mode}
+                data-testid={`lobby-sort-${mode}`}
+              >{SORT_LABELS[mode]}</option>
+            ))}
+          </select>
+        </label>
       </div>
 
       {!query && filter === "all" && featured.length > 0 && (
@@ -1561,6 +1765,26 @@ export default function LobbyPage(): JSX.Element {
               </span>
             )}
           </h2>
+          {/* Three-state pill toggle for grid density (compact/comfortable/
+              spacious). Persisted in localStorage; mirrored as
+              `data-density` on `.lobby-grid` so all sizing is CSS-driven. */}
+          <div
+            className="lobby-density-toggle"
+            role="group"
+            aria-label="Grid density"
+            data-testid="lobby-density-toggle"
+          >
+            {DENSITY_MODES.map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                className={`lobby-density-toggle-btn${density === mode ? " is-active" : ""}`}
+                aria-pressed={density === mode}
+                onClick={() => setDensity(mode)}
+                data-testid={`lobby-density-${mode}`}
+              >{DENSITY_LABELS[mode]}</button>
+            ))}
+          </div>
           {/* Two-state pill toggle for the list-walking strategy.
               Persisted in localStorage; default = pagination. */}
           <div
@@ -1587,7 +1811,7 @@ export default function LobbyPage(): JSX.Element {
         </div>
 
         {filterPending ? (
-          <div className="lobby-grid" data-testid="lobby-skeleton-grid" aria-busy="true">
+          <div className="lobby-grid" data-density={density} data-testid="lobby-skeleton-grid" aria-busy="true">
             {Array.from({ length: 6 }).map((_, i) => (
               <SkeletonTile key={`sk-${i}`} />
             ))}
@@ -1623,7 +1847,7 @@ export default function LobbyPage(): JSX.Element {
           )
         ) : (
           <>
-            <div className="lobby-grid" ref={gridRef} onKeyDown={onGridKeyDown}>
+            <div className="lobby-grid" data-density={density} ref={gridRef} onKeyDown={onGridKeyDown}>
               {visible.map((entry) =>
                 entry.kind === "game" ? (
                   <GameCard

@@ -287,6 +287,34 @@
   -webkit-backdrop-filter: blur(8px);
 }
 
+.lobby-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  align-self: flex-end;
+  font-size: 0.85rem;
+  color: var(--text-muted, #a1a1aa);
+}
+.lobby-sort-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.lobby-sort-select {
+  appearance: auto;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text, #f4f4f5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font: inherit;
+  cursor: pointer;
+}
+.lobby-sort-select:focus-visible {
+  outline: 2px solid var(--accent, #a78bfa);
+  outline-offset: 2px;
+}
+
 .lobby-search {
   position: relative;
   display: flex;
@@ -547,6 +575,24 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 0.95rem;
+}
+
+/* Density variants — driven by `data-density` set from the section-head
+   toggle. Comfortable matches the default sizing above; compact tightens
+   gap + tile minimums to fit more on screen, spacious does the inverse
+   for easier touch targets. Applied only to the non-featured grid so the
+   featured rail keeps its bespoke sizing. */
+.lobby-grid[data-density="compact"] {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+.lobby-grid[data-density="comfortable"] {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.95rem;
+}
+.lobby-grid[data-density="spacious"] {
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.4rem;
 }
 
 /* Featured grid uses larger minimums so each card breathes. */
@@ -1340,6 +1386,35 @@ button.tile {
 }
 .lobby-mode-toggle-btn:hover { color: var(--text); }
 .lobby-mode-toggle-btn.is-active {
+  background: var(--accent, #5b6cff);
+  color: var(--accent-fg, #fff);
+}
+
+/* Density pill — visually mirrors `.lobby-mode-toggle` so both controls
+   in the section header read as a matched set. */
+.lobby-density-toggle {
+  display: inline-flex;
+  gap: 2px;
+  background: var(--surface-2, rgba(148,163,184,0.12));
+  border: 1px solid var(--border, rgba(148,163,184,0.30));
+  border-radius: 999px;
+  padding: 2px;
+  margin-right: 0.5rem;
+}
+.lobby-density-toggle-btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--text-400);
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+.lobby-density-toggle-btn:hover { color: var(--text); }
+.lobby-density-toggle-btn.is-active {
   background: var(--accent, #5b6cff);
   color: var(--accent-fg, #fff);
 }
