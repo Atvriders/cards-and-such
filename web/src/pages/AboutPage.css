@@ -1,0 +1,191 @@
+/* AboutPage.css — polished hero, stats grid, category cards, code block */
+
+.about-page {
+  max-width: 960px;
+  padding: 0 1rem 3rem;
+}
+
+/* ---------- Hero ---------- */
+.about-hero {
+  margin: 0.5rem 0 1.5rem;
+  text-align: center;
+}
+.about-hero-title {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.75rem;
+  background: linear-gradient(
+    90deg,
+    #f0abfc 0%,
+    #c4b5fd 25%,
+    #93c5fd 50%,
+    #67e8f9 75%,
+    #f0abfc 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: about-gradient-pan 9s linear infinite;
+}
+.about-hero-tag {
+  margin: 0 auto;
+  max-width: 640px;
+  color: var(--text-300, #cbd5e1);
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  line-height: 1.5;
+}
+
+@keyframes about-gradient-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-hero-title { animation: none; }
+}
+
+/* ---------- Stats strip ---------- */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+}
+.about-stat {
+  background: rgba(15, 18, 32, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: 14px;
+  padding: 0.95rem 0.5rem;
+  text-align: center;
+}
+.about-stat-value {
+  font-size: clamp(1.3rem, 4vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #c4b5fd, #67e8f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.about-stat-label {
+  margin-top: 0.2rem;
+  color: var(--text-400, #94a3b8);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Sections ---------- */
+.about-section { padding: 1.1rem 1.2rem; }
+.about-section h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.65rem;
+}
+.about-list { margin: 0; padding-left: 1.1rem; }
+.about-list li { margin: 0.25rem 0; line-height: 1.5; }
+.about-list-mono code {
+  font-size: 0.88rem;
+  word-break: break-all;
+}
+
+/* ---------- Stack chips ---------- */
+.about-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 0.6rem;
+}
+.about-chip {
+  display: inline-block;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  background: rgba(129, 140, 248, 0.12);
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  color: #e0e3ff;
+  white-space: nowrap;
+}
+
+/* ---------- Category cards ---------- */
+.about-cats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.7rem;
+}
+.about-cat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(15, 18, 32, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  color: var(--text-100, #f1f5f9);
+  text-decoration: none;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+.about-cat:hover {
+  transform: translateY(-2px);
+  border-color: rgba(129, 140, 248, 0.55);
+  background: rgba(30, 27, 75, 0.55);
+}
+.about-cat-count {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #c4b5fd;
+}
+.about-cat-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-200, #e2e8f0);
+}
+.about-cat-blurb {
+  font-size: 0.82rem;
+  color: var(--text-400, #94a3b8);
+  line-height: 1.4;
+}
+
+/* ---------- Code block ---------- */
+.about-code {
+  margin: 0.6rem 0 0;
+  padding: 0.9rem 1rem;
+  background: rgba(2, 6, 23, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+}
+.about-page code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 0.85em;
+  background: rgba(129, 140, 248, 0.10);
+  border: 1px solid rgba(129, 140, 248, 0.22);
+  border-radius: 5px;
+  padding: 0.05rem 0.35rem;
+}
+.about-code code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .about-page { padding: 0 0.6rem 2rem; }
+  .about-section { padding: 0.9rem 0.95rem; }
+  .about-cat-count { font-size: 1.2rem; }
+}
