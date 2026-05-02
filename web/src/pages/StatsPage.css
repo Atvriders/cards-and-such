@@ -118,6 +118,44 @@
   font-size: 0.85rem;
 }
 
+.stats-pr-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.stats-pr-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(10, 12, 22, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+}
+.stats-pr-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: rgba(167, 139, 250, 0.18);
+  color: #c7cdfe;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.stats-pr-title { color: #e2e8f0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stats-pr-time { font-weight: 700; color: #34d399; font-variant-numeric: tabular-nums; }
+.stats-pr-date {
+  font-size: 0.8rem;
+  color: rgba(203, 213, 225, 0.65);
+  font-variant-numeric: tabular-nums;
+}
+
 .achievements-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -521,6 +559,59 @@
 .stats-reset-btn {
   font-size: 0.8rem;
   padding: 0.4rem 0.8rem;
+}
+
+/* "This week" comparison card. The current-week list shows numeric values
+ * with a coloured delta chip; the prior-week list uses muted styling so the
+ * eye lands on the current row first. Up = green, Down = red — the delta
+ * chip's tone is intentionally not inverted for "Avg time" since the goal
+ * here is to surface direction, not value-judge it. */
+.stats-week-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.stats-week-list li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.stats-week-label {
+  color: rgba(203, 213, 225, 0.85);
+  font-size: 0.85rem;
+}
+.stats-week-value {
+  font-style: normal;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #e2e8f0;
+}
+.stats-week-delta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  color: rgba(203, 213, 225, 0.8);
+}
+.stats-week-delta.is-up {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+}
+.stats-week-delta.is-down {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+}
+.stats-week-list--prev {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed rgba(148, 163, 184, 0.18);
+  opacity: 0.7;
 }
 
 @media (max-width: 480px) {
