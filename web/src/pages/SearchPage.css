@@ -1,0 +1,167 @@
+/* =====================================================================
+   Search page — dedicated /search?q=... view
+   ---------------------------------------------------------------------
+   Visual hierarchy mirrors the lobby (hero header, then sectioned
+   results). The top-match card is intentionally larger than the rest
+   so the eye lands there first.
+   ===================================================================== */
+
+.search-page {
+  max-width: var(--container-w, 1080px);
+  margin: 0 auto;
+  padding: var(--sp-6, 1.5rem) var(--sp-4, 1rem) var(--sp-12, 3rem);
+}
+
+.search-head h1 {
+  margin: 0 0 var(--sp-3, 0.75rem);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-input {
+  flex: 1 1 auto;
+  font-size: 1.05rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md, 0.5rem);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  background: var(--bg-surface, #1f2937);
+  color: inherit;
+}
+
+.search-input:focus {
+  outline: 2px solid var(--accent, #5b6cff);
+  outline-offset: 2px;
+}
+
+.search-empty {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.search-empty h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.search-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.search-chip {
+  appearance: none;
+  background: var(--bg-surface, #1f2937);
+  color: inherit;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.search-chip:hover {
+  border-color: var(--accent, #5b6cff);
+}
+
+.search-chip--suggested {
+  border-style: dashed;
+  opacity: 0.95;
+}
+
+.search-no-results {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: var(--radius-lg, 0.75rem);
+  border: 1px dashed var(--border, rgba(255, 255, 255, 0.12));
+}
+
+.search-results {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.search-section h2 {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.search-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.search-card {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md, 0.5rem);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  background: var(--bg-surface, #1f2937);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+
+.search-card:hover,
+.search-card.is-selected {
+  border-color: var(--accent, #5b6cff);
+  transform: translateY(-1px);
+}
+
+.search-card-kind {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.search-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.search-card-desc {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.search-card mark {
+  background: var(--accent, #5b6cff);
+  color: var(--bg-base, #0f1115);
+  padding: 0 0.15em;
+  border-radius: 0.2em;
+}
+
+.search-card--top {
+  padding: 1.1rem 1.25rem;
+  border-width: 2px;
+  background: linear-gradient(
+    135deg,
+    var(--bg-surface, #1f2937),
+    color-mix(in srgb, var(--accent, #5b6cff) 12%, var(--bg-surface, #1f2937))
+  );
+}
+
+.search-card--top .search-card-title {
+  font-size: 1.2rem;
+}
