@@ -60,6 +60,9 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
     onTouchStart: (e: React.TouchEvent<HTMLElement>) => void;
     onTouchEnd: () => void;
     onDragStart: () => void;
+    onFocus: (e: React.FocusEvent<HTMLElement>) => void;
+    onBlur: () => void;
+    "aria-describedby"?: string;
   };
   tooltip: JSX.Element | null;
 } {
@@ -123,7 +126,20 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
     };
   }, [visible]);
 
+  // Escape closes any open tooltip — feels right when a keyboard user
+  // tabs onto a tile, sees the tooltip, but wants to keep focus there.
+  useEffect(() => {
+    if (!visible) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setVisible(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [visible]);
+
   useEffect(() => () => clearTimer(), [clearTimer]);
+
+  const tooltipDomId = `tile-tooltip-${tileId}`;
 
   const handlers = {
     onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
@@ -141,10 +157,22 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
     },
     onTouchEnd: () => clearTimer(),
     onDragStart: () => hide(),
+    // Keyboard parity: tab-focus shows immediately (no 500ms hover-intent
+    // delay — keyboard users have already committed to the element),
+    // and blur hides like a mouseleave.
+    onFocus: (e: React.FocusEvent<HTMLElement>) => {
+      const el = e.currentTarget;
+      targetRef.current = el;
+      clearTimer();
+      show(el);
+    },
+    onBlur: () => hide(),
+    "aria-describedby": visible ? tooltipDomId : undefined,
   };
 
   const tooltip = visible && coords ? (
     <div
+      id={tooltipDomId}
       className={`lobby-tooltip lobby-tooltip--${coords.side}`}
       role="tooltip"
       data-testid={`tile-tooltip-${tileId}`}
