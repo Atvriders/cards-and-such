@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HockeyShootoutState, type HockeyShootoutAction } from "./state.js";
 import { HockeyShootout } from "./Game.js";
 
@@ -25,5 +25,9 @@ Scoring: goals divided by total shots, scaled to 1000. NHL shootout conversion r
   initialState,
   reducer,
   isTerminal,
+    hint: (state: HockeyShootoutState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-hockey-shootout-action"]', pulses: 3 };
+    },
   component: HockeyShootout,
 };

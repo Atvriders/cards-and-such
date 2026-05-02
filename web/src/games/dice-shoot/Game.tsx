@@ -24,7 +24,7 @@ export function DiceShootGame({ state, dispatch, onGameOver }: GameProps<DiceSho
         <button className="dm-btn" onClick={() => dispatch({ type:"setTarget" } as DiceShootAction)}>Set Target</button>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"roll" } as DiceShootAction)}>Roll</button>
+        <button data-testid="hint-target-dice-shoot-action" className="dm-btn alt" onClick={() => dispatch({ type:"roll" } as DiceShootAction)}>Roll</button>
       )}
       {state.phase === "result" && (
         <>

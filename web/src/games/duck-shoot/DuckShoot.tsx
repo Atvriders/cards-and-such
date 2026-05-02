@@ -70,7 +70,7 @@ export function DuckShoot({
       {state.roundOver && !terminal && (
         <div className="ds-round-over">
           Round {state.round} done — next round starting…
-          <button className="ds-next-btn" onClick={() => dispatch({ type: "nextRound" })}>
+          <button data-testid="hint-target-duck-shoot-action" className="ds-next-btn" onClick={() => dispatch({ type: "nextRound" })}>
             Next Round
           </button>
         </div>

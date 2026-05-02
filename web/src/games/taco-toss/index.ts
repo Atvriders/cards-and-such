@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TacoTossState, TacoTossAction, TacoTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,10 @@ export const tacoTossPlugin: GamePlugin<TacoTossState, TacoTossAction, typeof se
   howToPlay: `Taco Toss is an angle-based throwing game. Each round you need to find the perfect launch angle to toss a taco into a serving bowl at just the right trajectory.\n\nAdjust the Angle slider and press Go! Points depend on how close your angle is to the ideal for each round. The target angle varies subtly due to wind and distance changes.\n\n10 tosses per game. Study your results — how far off you were tells you which direction to correct. Master the arc and score big!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as TacoTossSettings),
-  reducer, isTerminal, component: TacoTossGame,
+  reducer, isTerminal,
+    hint: (state: TacoTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-taco-toss-action"]', pulses: 3 };
+    },
+  component: TacoTossGame,
 };

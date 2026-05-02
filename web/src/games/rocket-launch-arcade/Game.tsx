@@ -48,7 +48,7 @@ export function RocketLaunchGame({
         {state.phase === "aim" && (
           <>
             <button onClick={() => dispatch({ type: "move-left" } as RocketLaunchAction)} disabled={state.rocketX === 0 || state.fuel === 0}>◀ Left</button>
-            <button className="rla-launch-btn" onClick={() => dispatch({ type: "launch" } as RocketLaunchAction)}>Launch!</button>
+            <button data-testid="hint-target-rocket-launch-arcade-action" className="rla-launch-btn" onClick={() => dispatch({ type: "launch" } as RocketLaunchAction)}>Launch!</button>
             <button onClick={() => dispatch({ type: "move-right" } as RocketLaunchAction)} disabled={state.rocketX === 8 || state.fuel === 0}>Right ▶</button>
           </>
         )}

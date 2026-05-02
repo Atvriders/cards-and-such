@@ -18,7 +18,7 @@ export function DiceAimGame({ state, dispatch, onGameOver }: GameProps<DiceAimSt
         <div className="daim-row">{state.dice.map((d, i) => <div key={i} className="daim-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="daim-btn" onClick={() => dispatch({ type:"roll" } as DiceAimAction)}>Roll</button>
+        <button data-testid="hint-target-dice-aim-action" className="daim-btn" onClick={() => dispatch({ type:"roll" } as DiceAimAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>

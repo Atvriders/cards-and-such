@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BirdShootState, BirdShootAction, BirdShootSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,10 @@ New birds appear every two seconds. Birds move quickly — you need sharp eyes a
 Use Settings to choose 20, 30, or 45 seconds. Final score, tagged count, and escape count are displayed at the end. Can you tag every bird for a perfect score?`,
   settings: birdShootPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as BirdShootSettings),
-  reducer, isTerminal, component: BirdShoot,
+  reducer, isTerminal,
+    hint: (state: BirdShootState) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-bird-shoot-action"]', pulses: 3 };
+    },
+  component: BirdShoot,
 };

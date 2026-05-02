@@ -13,7 +13,7 @@ export function TacoTossGame({ state, dispatch, onGameOver }: GameProps<TacoToss
       <div className="arc-display">🌮</div>
       {state.phase==="aiming" && <>
         <div className="arc-slider-row"><span className="arc-slider-label">Angle</span><input type="range" className="arc-slider" min={0} max={100} value={state.power} onChange={e=>dispatch({type:"setPower",value:+e.target.value} as TacoTossAction)}/><span className="arc-slider-value">{state.power}</span></div>
-        <button className="arc-btn" onClick={()=>dispatch({type:"throw"} as TacoTossAction)}>Go!</button>
+        <button data-testid="hint-target-taco-toss-action" className="arc-btn" onClick={()=>dispatch({type:"throw"} as TacoTossAction)}>Go!</button>
       </>}
       {state.phase==="result" && <><div className="arc-result">+{state.lastPts} pts (off by {state.lastDiff})</div><button className="arc-btn" onClick={()=>dispatch({type:"next"} as TacoTossAction)}>Next</button></>}
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HatTossState, HatTossAction, HatTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,10 @@ New hats toss in every two seconds. Up to 6 can be in the air at once, so stay s
 Use Settings to choose 20, 30, or 45 seconds. Final score, hats caught, and hats missed are shown at the end. Can you catch every hat and stay perfectly stylish?`,
   settings: hatTossPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as HatTossSettings),
-  reducer, isTerminal, component: HatToss,
+  reducer, isTerminal,
+    hint: (state: HatTossState) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-hat-toss-action"]', pulses: 3 };
+    },
+  component: HatToss,
 };

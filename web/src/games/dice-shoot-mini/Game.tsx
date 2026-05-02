@@ -20,7 +20,7 @@ export function DiceShootMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
         </div>
       )}
       {state.phase === "aim" ? (
-        <button className="dshm-btn shoot" onClick={() => dispatch({ type:"shoot" } as DiceShootMiniAction)}>SHOOT!</button>
+        <button data-testid="hint-target-dice-shoot-mini-action" className="dshm-btn shoot" onClick={() => dispatch({ type:"shoot" } as DiceShootMiniAction)}>SHOOT!</button>
       ) : (
         <button className="dshm-btn next" onClick={() => dispatch({ type:"next" } as DiceShootMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next Target"}</button>
       )}

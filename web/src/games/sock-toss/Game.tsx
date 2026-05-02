@@ -32,7 +32,7 @@ export function SockToss({ state, dispatch, onGameOver }: GameProps<SockTossStat
           {state.lastLanded === "basket" ? `Basket! +${state.lastPoints}` : state.lastLanded === "rim" ? `Rim! +${state.lastPoints}` : "Floor miss!"}
         </div>
       )}
-      {state.phase === "tossing" && <button className="sock-btn" onClick={() => dispatch({ type: "release" } as SockTossAction)}>TOSS!</button>}
+      {state.phase === "tossing" && <button data-testid="hint-target-sock-toss-action" className="sock-btn" onClick={() => dispatch({ type: "release" } as SockTossAction)}>TOSS!</button>}
       {state.phase === "result" && <button className="sock-btn next" onClick={() => dispatch({ type: "next" } as SockTossAction)}>Next Toss</button>}
       <p className="sock-hint">Release when the sock reaches the basket zone!</p>
     </div>

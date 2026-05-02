@@ -29,7 +29,7 @@ export function HatToss({ state, dispatch, onGameOver }: GameProps<HatTossState,
       <div className="banana-header"><span>{hearts.join("")}</span><span>{state.timeLeft}s</span><span>{state.score} pts</span></div>
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#2d3436,#636e72)" }}>
         {state.items.map(item => (
-          <button key={item.id} className="banana-btn"
+          <button data-testid="hint-target-hat-toss-action" key={item.id} className="banana-btn"
             style={{ left: `${item.x}%`, top: `${Math.min(item.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: item.id } as HatTossAction)}>
             {item.points >= 20 ? "🎩🎩" : "🎩"}

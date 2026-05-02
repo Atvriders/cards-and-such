@@ -53,7 +53,7 @@ export function HockeyShootout({ state, dispatch, onGameOver }: GameProps<Hockey
             <input type="range" min={0} max={1} step={0.01} value={state.fakeDir}
               onChange={(e) => dispatch({ type: "set-fake", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="hsh-btn" onClick={() => dispatch({ type: "shoot" })}>Shoot!</button>
+          <button data-testid="hint-target-hockey-shootout-action" className="hsh-btn" onClick={() => dispatch({ type: "shoot" })}>Shoot!</button>
         </div>
       )}
 

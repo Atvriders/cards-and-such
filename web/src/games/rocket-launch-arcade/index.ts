@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RocketLaunchState, RocketLaunchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,9 @@ Win by finishing with more hits than misses. Maximize your score by minimizing u
   initialState: (seed: number, settings: RocketLaunchArcadeSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: RocketLaunchState) => {
+      if (state.phase === "result") return null;
+      return { selector: '[data-testid="hint-target-rocket-launch-arcade-action"]', pulses: 3 };
+    },
   component: RocketLaunchGame,
 };

@@ -22,7 +22,7 @@ export function DungeonFighterThrowGame({ state, dispatch, onGameOver }: GamePro
         </>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DungeonFighterThrowAction)}>Roll</button>
+        <button data-testid="hint-target-dungeon-fighter-throw-action" className="dm-btn" onClick={() => dispatch({ type:"roll" } as DungeonFighterThrowAction)}>Roll</button>
       )}
       {state.phase === "scored" && (
         <>

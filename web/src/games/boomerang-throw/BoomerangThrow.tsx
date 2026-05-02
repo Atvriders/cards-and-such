@@ -76,7 +76,7 @@ export function BoomerangThrow({
           <div className="bt-charge-bar">
             <div className="bt-charge-fill" style={{ width: `${chargePct}%`, background: chargeColor }} />
           </div>
-          <button className="bt-btn" onClick={() => dispatch({ type: "act" })}>Throw!</button>
+          <button data-testid="hint-target-boomerang-throw-action" className="bt-btn" onClick={() => dispatch({ type: "act" })}>Throw!</button>
         </>
       )}
 

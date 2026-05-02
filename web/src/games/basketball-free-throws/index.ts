@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type BasketballFTState, type BasketballFTAction } from "./state.js";
 import { BasketballFT } from "./Game.js";
 
@@ -25,5 +25,9 @@ Top free-throw shooters in the NBA shoot 90%+. Can you match them? Focus on cons
   initialState,
   reducer,
   isTerminal,
+    hint: (state: BasketballFTState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-basketball-free-throws-action"]', pulses: 3 };
+    },
   component: BasketballFT,
 };

@@ -41,7 +41,7 @@ export function RingTheBullTossGame({ state, dispatch, onGameOver }: GameProps<R
       </div>
       <div className="rithbuto-actions">
         {state.phase === "rolling" && (
-          <button className="rithbuto-btn primary" onClick={() => dispatch({ type: "roll" } as RingTheBullTossAction)}>Roll</button>
+          <button data-testid="hint-target-ring-the-bull-toss-action" className="rithbuto-btn primary" onClick={() => dispatch({ type: "roll" } as RingTheBullTossAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="rithbuto-btn alt" onClick={() => dispatch({ type: "next" } as RingTheBullTossAction)}>Next</button>

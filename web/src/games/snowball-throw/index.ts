@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SnowballThrowState, SnowballThrowAction, SnowballThrowSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,9 @@ Watch the target's path, predict where it will be, and click there at just the r
   initialState: (seed: number, settings: SnowballThrowSettingsType) => initialState(seed, settings as SnowballThrowSettings),
   reducer,
   isTerminal,
+    hint: (state: SnowballThrowState) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-snowball-throw-action"]', pulses: 3 };
+    },
   component: SnowballThrow,
 };

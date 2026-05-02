@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SockTossState, SockTossAction, SockTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,9 @@ It sounds simple — just let go at the right height. But the changing speed and
   initialState: (seed: number, settings: SockTossSettingsType) => initialState(seed, settings as SockTossSettings),
   reducer,
   isTerminal,
+    hint: (state: SockTossState) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-sock-toss-action"]', pulses: 3 };
+    },
   component: SockToss,
 };

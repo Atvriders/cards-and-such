@@ -35,7 +35,7 @@ export function blazeFireworkGame({ state, dispatch, onGameOver }: GameProps<bla
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as blazeFireworkAction)}>Roll</button>
+        <button data-testid="hint-target-blaze-firework-action" className="rw-btn" onClick={() => dispatch({ type: "roll" } as blazeFireworkAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
         <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as blazeFireworkAction)}>Skip</button>

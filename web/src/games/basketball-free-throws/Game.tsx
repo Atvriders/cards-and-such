@@ -48,7 +48,7 @@ export function BasketballFT({ state, dispatch, onGameOver }: GameProps<Basketba
             <input type="range" min={0} max={1} step={0.01} value={state.power}
               onChange={(e) => dispatch({ type: "set-power", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="bft-btn" onClick={() => dispatch({ type: "shoot" })}>Shoot!</button>
+          <button data-testid="hint-target-basketball-free-throws-action" className="bft-btn" onClick={() => dispatch({ type: "shoot" })}>Shoot!</button>
         </div>
       )}
 

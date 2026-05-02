@@ -177,7 +177,7 @@ export function RingThrowerGame({
         )}
       </div>
       <div className="arcade-controls">
-        <button className="arcade-btn" onClick={() => dispatch({ type: "tap" } as RingThrowerAction)}>
+        <button data-testid="hint-target-ring-thrower-action" className="arcade-btn" onClick={() => dispatch({ type: "tap" } as RingThrowerAction)}>
           Tap (Space)
         </button>
       </div>

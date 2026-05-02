@@ -38,7 +38,7 @@ export function SnowballThrow({ state, dispatch, onGameOver }: GameProps<Snowbal
           {state.lastHit ? `Hit! +${state.lastPoints}` : state.lastPoints > 0 ? `Near miss! +${state.lastPoints}` : "Missed!"}
         </div>
       )}
-      {state.phase === "result" && <button className="st-btn" onClick={() => dispatch({ type: "next" } as SnowballThrowAction)}>Next Throw</button>}
+      {state.phase === "result" && <button data-testid="hint-target-snowball-throw-action" className="st-btn" onClick={() => dispatch({ type: "next" } as SnowballThrowAction)}>Next Throw</button>}
       {state.phase === "throwing" && <p className="st-hint">Click the moving snowflake target!</p>}
     </div>
   );

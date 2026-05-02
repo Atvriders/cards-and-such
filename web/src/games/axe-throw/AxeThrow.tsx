@@ -138,7 +138,7 @@ export function AxeThrow({
       </div>
       <div className="axe-controls">
         {!state.over && !state.landed && (
-          <button className="axe-throw-btn" disabled={state.throwing}
+          <button data-testid="hint-target-axe-throw-action" className="axe-throw-btn" disabled={state.throwing}
             onClick={() => dispatch({ type: "throw" } as AxeThrowAction)}>
             THROW!
           </button>

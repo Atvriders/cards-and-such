@@ -84,7 +84,7 @@ export function PaperTossGame({ state, dispatch, onGameOver }: GameProps<PaperTo
             />
             <span className="pt-slider-value">{state.power}</span>
           </div>
-          <button onClick={() => dispatch({ type: "throw" })}>Throw!</button>
+          <button data-testid="hint-target-paper-toss-action" onClick={() => dispatch({ type: "throw" })}>Throw!</button>
         </div>
       )}
 

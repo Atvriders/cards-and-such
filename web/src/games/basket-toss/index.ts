@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BasketTossState, BasketTossAction, BasketTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,10 @@ The basket moves to a new position after each throw. Use Settings to play 5 or 1
 The key skill is accurately reading the basket's position and clicking precisely. The basket is small — a narrow 14% of screen width. Be exact! With a perfect 10-ball streak the score would be massive. How many can you make in a row?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BasketTossSettings),
-  reducer, isTerminal, component:BasketToss,
+  reducer, isTerminal,
+    hint: (state: BasketTossState) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-basket-toss-action"]', pulses: 3 };
+    },
+  component:BasketToss,
 };

@@ -26,7 +26,7 @@ export function BasketToss({ state, dispatch, onGameOver }: GameProps<BasketToss
     </svg>
     {isResult&&<div>
       <p style={{fontWeight:700,color:state.lastResult==="made"?"#27ae60":"#e74c3c"}}>{state.lastResult==="made"?`Made it! +${100+state.streak*20} pts`:"Missed!"}</p>
-      <button className="bet-btn" style={{padding:"8px 20px",borderRadius:"8px",border:"none",background:"#e67e22",color:"#fff",cursor:"pointer",fontWeight:700}} onClick={()=>dispatch({type:"next"} as BasketTossAction)}>Next Ball</button>
+      <button data-testid="hint-target-basket-toss-action" className="bet-btn" style={{padding:"8px 20px",borderRadius:"8px",border:"none",background:"#e67e22",color:"#fff",cursor:"pointer",fontWeight:700}} onClick={()=>dispatch({type:"next"} as BasketTossAction)}>Next Ball</button>
     </div>}
     {!isResult&&<p style={{fontSize:"0.85rem",color:"#888"}}>Click at the basket position to toss!</p>}
   </div>;

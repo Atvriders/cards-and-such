@@ -21,7 +21,7 @@ export function ClownToss({ state, dispatch, onGameOver }: GameProps<ClownTossSt
 
       <div className="ct-pegs">
         {state.pegs.map(peg => (
-          <button
+          <button data-testid="hint-target-clown-toss-action"
             key={peg.id}
             className="ct-peg"
             onClick={() => dispatch({ type: "toss", pegId: peg.id })}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MangoTossState, MangoTossAction, MangoTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,10 @@ export const mangoTossPlugin: GamePlugin<MangoTossState, MangoTossAction, typeof
   howToPlay:`Mango Toss challenges you to toss mangoes into a crate at the perfect power. Each round a hidden target is set. Use the slider and press Toss! The closer your power is to the target, the more points you score up to 100 each round. Ten rounds of tossing. Watch how far off you were and adjust. A perfect game scores 1000 points. Aim true and stack up those mangoes!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MangoTossSettings),
-  reducer,isTerminal,component:MangoTossGame,
+  reducer,isTerminal,
+    hint: (state: MangoTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-mango-toss-action"]', pulses: 3 };
+    },
+  component:MangoTossGame,
 };

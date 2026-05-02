@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveDiceState, FiveDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,9 @@ There's no strategy beyond rolling — it's pure dice luck. But that's what make
   initialState: (seed: number, settings: FiveDiceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: FiveDiceState) => {
+      if (isTerminal(state)) return null;
+      return { selector: '[data-testid="hint-target-five-dice-shootout-action"]', pulses: 3 };
+    },
   component: FiveDiceShootout,
 };

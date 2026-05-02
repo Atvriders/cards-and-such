@@ -41,7 +41,7 @@ export function RingboardTossGame({ state, dispatch, onGameOver }: GameProps<Rin
       </div>
       <div className="rintos-actions">
         {state.phase === "rolling" && (
-          <button className="rintos-btn primary" onClick={() => dispatch({ type: "roll" } as RingboardTossAction)}>Roll</button>
+          <button data-testid="hint-target-ringboard-toss-action" className="rintos-btn primary" onClick={() => dispatch({ type: "roll" } as RingboardTossAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="rintos-btn alt" onClick={() => dispatch({ type: "next" } as RingboardTossAction)}>Next</button>

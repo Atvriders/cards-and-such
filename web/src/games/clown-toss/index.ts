@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClownTossState, ClownTossAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Tips: once you have a streak of 2+, keep targeting the same peg to maintain it. 
   initialState: (seed: number, settings: ClownTossSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: ClownTossState) => {
+      if (isTerminal(state)) return null;
+      return { selector: '[data-testid="hint-target-clown-toss-action"]', pulses: 3 };
+    },
   component: ClownToss,
 };

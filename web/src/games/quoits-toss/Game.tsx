@@ -41,7 +41,7 @@ export function QuoitsTossGame({ state, dispatch, onGameOver }: GameProps<Quoits
       </div>
       <div className="quotos-actions">
         {state.phase === "rolling" && (
-          <button className="quotos-btn primary" onClick={() => dispatch({ type: "roll" } as QuoitsTossAction)}>Roll</button>
+          <button data-testid="hint-target-quoits-toss-action" className="quotos-btn primary" onClick={() => dispatch({ type: "roll" } as QuoitsTossAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="quotos-btn alt" onClick={() => dispatch({ type: "next" } as QuoitsTossAction)}>Next</button>

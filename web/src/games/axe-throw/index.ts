@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AxeThrowState, AxeThrowAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -32,5 +32,9 @@ The swing speed changes each round, so you cannot simply memorize a timing. Adap
   initialState: (seed: number, settings: AxeThrowSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: AxeThrowState) => {
+      if (isTerminal(state)) return null;
+      return { selector: '[data-testid="hint-target-axe-throw-action"]', pulses: 3 };
+    },
   component: AxeThrow,
 };

@@ -99,7 +99,7 @@ export function SlingshotLaunch({
           <div className="sl-power-bar">
             <div className="sl-power-fill" style={{ width: `${powerPct}%`, background: powerColor }} />
           </div>
-          <button className="sl-btn" onClick={() => dispatch({ type: "release" })}>
+          <button data-testid="hint-target-slingshot-launch-action" className="sl-btn" onClick={() => dispatch({ type: "release" })}>
             Release! ({Math.round(state.pullAngle)}°)
           </button>
           <div className="sl-hint">Time angle and power — Space or click</div>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DuckShootState, DuckShootAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,9 @@ Tips: Click slightly ahead of a moving duck to lead your shot — there is a sma
   initialState: (seed: number, settings: DuckShootSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: DuckShootState) => {
+      if (isTerminal(state)) return null;
+      return { selector: '[data-testid="hint-target-duck-shoot-action"]', pulses: 3 };
+    },
   component: DuckShoot,
 };

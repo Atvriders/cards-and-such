@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { QuoitsTossState, QuoitsTossAction, QuoitsTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { QuoitsTossGame } from "./Game.js";
@@ -17,5 +17,9 @@ export const quoitsTossPlugin: GamePlugin<QuoitsTossState, QuoitsTossAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as QuoitsTossSettings),
   reducer,
   isTerminal,
+    hint: (state: QuoitsTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-quoits-toss-action"]', pulses: 3 };
+    },
   component: QuoitsTossGame,
 };

@@ -13,7 +13,7 @@ export function SushiRollTossGame({ state, dispatch, onGameOver }: GameProps<Sus
       <div className="arc-display">🍣</div>
       {state.phase==="aiming" && <>
         <div className="arc-slider-row"><span className="arc-slider-label">Spin</span><input type="range" className="arc-slider" min={0} max={100} value={state.power} onChange={e=>dispatch({type:"setPower",value:+e.target.value} as SushiRollTossAction)}/><span className="arc-slider-value">{state.power}</span></div>
-        <button className="arc-btn" onClick={()=>dispatch({type:"throw"} as SushiRollTossAction)}>Go!</button>
+        <button data-testid="hint-target-sushi-roll-toss-action" className="arc-btn" onClick={()=>dispatch({type:"throw"} as SushiRollTossAction)}>Go!</button>
       </>}
       {state.phase==="result" && <><div className="arc-result">+{state.lastPts} pts (off by {state.lastDiff})</div><button className="arc-btn" onClick={()=>dispatch({type:"next"} as SushiRollTossAction)}>Next</button></>}
     </div>

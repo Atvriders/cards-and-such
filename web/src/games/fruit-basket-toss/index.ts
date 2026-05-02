@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FruitBasketTossState, FruitBasketTossAction, FruitBasketTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,10 @@ export const fruitBasketTossPlugin: GamePlugin<FruitBasketTossState, FruitBasket
   howToPlay: `Fruit Basket Toss is a power-accuracy game. Each round you launch a basket of fresh fruit toward a table. Set your power slider and press Go! — the basket lands closer or farther based on your power. Closer to the target earns more points. 10 tosses for a full score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as FruitBasketTossSettings),
-  reducer, isTerminal, component: FruitBasketTossGame,
+  reducer, isTerminal,
+    hint: (state: FruitBasketTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-fruit-basket-toss-action"]', pulses: 3 };
+    },
+  component: FruitBasketTossGame,
 };

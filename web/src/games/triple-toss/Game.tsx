@@ -17,7 +17,7 @@ export function TripleTossGame({ state, dispatch, onGameOver }: GameProps<Triple
       {state.dice.length > 0 && (
         <div className="dm-row">{state.dice.map((d, i) => <div key={i} className="dm-die">{d}</div>)}</div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as TripleTossAction)}>Roll 3</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-triple-toss-action" className="dm-btn" onClick={() => dispatch({ type:"roll" } as TripleTossAction)}>Roll 3</button>}
       {state.phase === "rolled" && (
         <>
           <div className="dm-result">{state.lastLabel}</div>

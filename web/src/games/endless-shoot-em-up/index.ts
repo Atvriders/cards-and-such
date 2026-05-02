@@ -13,9 +13,5 @@ export const endlessShootEmUpPlugin: GamePlugin<EndlessShootEmUpState, EndlessSh
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EndlessShootEmUpSettings),
   reducer,isTerminal,hint: (state: EndlessShootEmUpState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-endless-shoot-em-up-primary"]', pulses: 3 } : null,
-    hint: (state: EndlessShootEmUpState) => {
-      if (state.phase === "done") return null;
-      return { selector: '[data-testid="hint-target-endless-shoot-em-up-action"]', pulses: 3 };
-    },
   component:EndlessShootEmUpGame,
 };

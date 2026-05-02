@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SlingshotLaunchState, SlingshotLaunchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,9 @@ Tips: Start with medium angle (40–50°) and medium power for the mid-value tar
   initialState: (seed: number, _settings: SLSettingsType) => initialState(seed),
   reducer,
   isTerminal,
+    hint: (state: SlingshotLaunchState) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-slingshot-launch-action"]', pulses: 3 };
+    },
   component: SlingshotLaunch,
 };

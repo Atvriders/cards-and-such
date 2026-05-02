@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceAimState, DiceAimAction, DiceAimSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,10 @@ export const diceAimPlugin: GamePlugin<DiceAimState, DiceAimAction, typeof setti
   howToPlay:"Dice Aim is a darts-style accuracy challenge. Each round, you roll two six-sided dice; their sum is added to your score. There are 8 rounds total. Lower scores are better in real darts, but here higher is better — every pip counts.\n\nThe expected sum per roll is 7 (with the classic bell-curve distribution). Across 8 rounds the average final score is around 56; great runs push 80+. Press Roll, see your dice, press Next to advance.\n\nThis is a simplified rebrand of \"darts as dice\" mechanic — instead of throwing physical darts, your dice represent throws at a target. Casual, low-stakes, and rhythmically satisfying. Maximum theoretical score is 96 (all sixes). A great quick warm-up between heavier dice rounds.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceAimSettings),
-  reducer,isTerminal,component:DiceAimGame,
+  reducer,isTerminal,
+    hint: (state: DiceAimState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-dice-aim-action"]', pulses: 3 };
+    },
+  component:DiceAimGame,
 };

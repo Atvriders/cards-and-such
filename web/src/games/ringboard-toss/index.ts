@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RingboardTossState, RingboardTossAction, RingboardTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RingboardTossGame } from "./Game.js";
@@ -17,5 +17,9 @@ export const ringboardTossPlugin: GamePlugin<RingboardTossState, RingboardTossAc
   initialState: (seed: number, s: S) => initialState(seed, s as RingboardTossSettings),
   reducer,
   isTerminal,
+    hint: (state: RingboardTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-ringboard-toss-action"]', pulses: 3 };
+    },
   component: RingboardTossGame,
 };

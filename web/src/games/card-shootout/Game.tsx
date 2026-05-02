@@ -18,7 +18,7 @@ export function CardShootoutGame({ state, dispatch, onGameOver }: GameProps<Card
       {state.phase === "predict" && (
         <div className="rg-row">
           {CHOICES.map(c => (
-            <button key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardShootoutAction)}>{c}</button>
+            <button data-testid="hint-target-card-shootout-action" key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardShootoutAction)}>{c}</button>
           ))}
         </div>
       )}

@@ -38,7 +38,7 @@ export function FiveDiceShootout({ state, dispatch, onGameOver }: GameProps<Five
       )}
 
       {state.phase === "rolling" && (
-        <button className="fds-btn" onClick={() => dispatch({ type: "roll" } as FiveDiceAction)}>
+        <button data-testid="hint-target-five-dice-shootout-action" className="fds-btn" onClick={() => dispatch({ type: "roll" } as FiveDiceAction)}>
           Roll 5 Dice!
         </button>
       )}

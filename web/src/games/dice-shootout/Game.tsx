@@ -16,7 +16,7 @@ export function DiceShootoutGame({ state, dispatch, onGameOver }: GameProps<Dice
       </div>
       {state.lastP!==null && (<div className="dm-row"><div className="dm-die">{state.lastP}</div><div className="dm-die" style={{ background:"#fdedec" }}>{state.lastA}</div></div>)}
       {state.lastResult && <div className="dm-result">{state.lastResult==="tie"?"Tie!":state.lastResult==="player"?`You +${state.lastP}`:`AI +${state.lastA}`}</div>}
-      <button className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceShootoutAction)}>Roll Both</button>
+      <button data-testid="hint-target-dice-shootout-action" className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceShootoutAction)}>Roll Both</button>
     </div>
   );
 }

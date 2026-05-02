@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceShootMiniState, DiceShootMiniAction, DiceShootMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceShootMiniGame } from "./Game.js";
@@ -22,5 +22,10 @@ There's no aiming skill in this version — the die rolls are random — so it's
 Press SHOOT to roll, then Next Target to continue. Try to remember which targets you nailed: it makes a fun improvised statistics game with friends.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceShootMiniSettings),
-  reducer, isTerminal, component: DiceShootMiniGame,
+  reducer, isTerminal,
+    hint: (state: DiceShootMiniState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-dice-shoot-mini-action"]', pulses: 3 };
+    },
+  component: DiceShootMiniGame,
 };

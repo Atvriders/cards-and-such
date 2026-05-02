@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UfoShooterState, UfoShooterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Score is capped at 1000. To maximise your score, track moving targets closely an
   initialState: (seed: number, settings: UfoShooterSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: UfoShooterState) => {
+      if (isTerminal(state)) return null;
+      return { selector: '[data-testid="hint-target-ufo-shooter-action"]', pulses: 3 };
+    },
   component: UfoShooterGame,
 };

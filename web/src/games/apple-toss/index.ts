@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AppleTossState, AppleTossAction, AppleTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,10 @@ New apples spawn every two seconds. Up to 6 apples can be visible at once, so sc
 Use Settings to choose 20, 30, or 45 seconds. Final score, catch count, and miss count are shown at the end. Can you keep all 3 lives and catch every apple?`,
   settings: appleTossSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as AppleTossSettings),
-  reducer, isTerminal, component: AppleToss,
+  reducer, isTerminal,
+    hint: (state: AppleTossState) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-apple-toss-action"]', pulses: 3 };
+    },
+  component: AppleToss,
 };

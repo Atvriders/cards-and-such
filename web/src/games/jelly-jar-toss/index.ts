@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { JellyJarTossState, JellyJarTossAction, JellyJarTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,10 @@ export const jellyJarTossPlugin: GamePlugin<JellyJarTossState, JellyJarTossActio
   howToPlay: `Jelly Jar Toss challenges you to land a jar of jelly on a shelf without it wobbling off. Each round set your power slider and press Go! — the closer your power to the hidden target, the more stable the landing and the higher your score. 10 rounds of jar-launching joy!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as JellyJarTossSettings),
-  reducer, isTerminal, component: JellyJarTossGame,
+  reducer, isTerminal,
+    hint: (state: JellyJarTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-jelly-jar-toss-action"]', pulses: 3 };
+    },
+  component: JellyJarTossGame,
 };

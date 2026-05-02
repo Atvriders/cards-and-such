@@ -12,7 +12,7 @@ export function DiceToss3Game({ state, dispatch, onGameOver }: GameProps<DiceTos
     <div className="dm-wrap">
       <div className="dm-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dm-score">{state.score} pts</span></div>
       <p>Toss 3 dice — score the total!</p>
-      {state.phase === "waiting" && <button className="dm-btn" onClick={() => dispatch({ type:"toss" } as DiceToss3Action)}>Toss!</button>}
+      {state.phase === "waiting" && <button data-testid="hint-target-dice-toss-3-action" className="dm-btn" onClick={() => dispatch({ type:"toss" } as DiceToss3Action)}>Toss!</button>}
       {state.phase === "result" && state.dice && <>
         <div className="dm-dice">{state.dice.map((d,i) => <div key={i} className="dm-die">{d}</div>)}</div>
         <div className="dm-result">Sum: {state.dice.reduce((s,v)=>s+v,0)} → +{state.lastPts} pts</div>

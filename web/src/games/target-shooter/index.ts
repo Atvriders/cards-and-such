@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TargetShooterState, TargetShooterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,9 @@ Tips: Focus on the horizontal alignment first since that is the trickier axis. L
   initialState: (seed: number, _settings: TSSettingsType) => initialState(seed),
   reducer,
   isTerminal,
+    hint: (state: TargetShooterState) => {
+      if (isTerminal(state)) return null;
+      return { selector: '[data-testid="hint-target-target-shooter-action"]', pulses: 3 };
+    },
   component: TargetShooter,
 };

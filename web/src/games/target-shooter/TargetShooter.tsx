@@ -84,7 +84,7 @@ export function TargetShooter({
 
       {state.phase === "aiming" && (
         <>
-          <button className="ts-btn" onClick={() => dispatch({ type: "fire" })}>Fire! (Space/F)</button>
+          <button data-testid="hint-target-target-shooter-action" className="ts-btn" onClick={() => dispatch({ type: "fire" })}>Fire! (Space/F)</button>
           <div className="ts-hint">Crosshair drifts — fire when it overlaps the target</div>
         </>
       )}

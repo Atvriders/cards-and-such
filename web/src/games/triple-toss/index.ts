@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TripleTossState, TripleTossAction, TripleTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,10 @@ You play 12 rounds. The probability of all three matching is about 2.8%; the pro
 After each round, press Next to continue. There's no choice — just press Roll, see the dice, and let the matching gods decide. A full game takes only a minute or two; perfect for a coffee-break dice fix.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TripleTossSettings),
-  reducer,isTerminal,component:TripleTossGame,
+  reducer,isTerminal,
+    hint: (state: TripleTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-triple-toss-action"]', pulses: 3 };
+    },
+  component:TripleTossGame,
 };

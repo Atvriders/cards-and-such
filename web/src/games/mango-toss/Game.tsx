@@ -20,7 +20,7 @@ export function MangoTossGame({ state, dispatch, onGameOver }: GameProps<MangoTo
           <input className="mangotoss-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as MangoTossAction)} />
           <div className="mangotoss-info">Power: {state.power}</div>
-          <button className="mangotoss-btn" onClick={() => dispatch({ type:"throw" } as MangoTossAction)}>Go!</button>
+          <button data-testid="hint-target-mango-toss-action" className="mangotoss-btn" onClick={() => dispatch({ type:"throw" } as MangoTossAction)}>Go!</button>
         </>
       ) : (
         <>

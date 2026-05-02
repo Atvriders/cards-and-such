@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RingThrowerState, RingThrowerAction, RingThrowerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RingThrowerGame } from "./Game.js";
@@ -28,5 +28,9 @@ Strategy: early in the game, aim for the high-value small pegs. If you miss a fe
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: RingThrowerState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-ring-thrower-action"]', pulses: 3 };
+    },
   component: RingThrowerGame,
 };

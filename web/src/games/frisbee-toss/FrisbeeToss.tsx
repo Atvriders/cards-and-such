@@ -67,7 +67,7 @@ export function FrisbeeToss({
 
       {state.phase === "aiming" && (
         <>
-          <button className="ft-btn" onClick={() => dispatch({ type: "throw" })}>Toss!</button>
+          <button data-testid="hint-target-frisbee-toss-action" className="ft-btn" onClick={() => dispatch({ type: "throw" })}>Toss!</button>
           <div className="ft-hint">Time your throw to align with the target — Space or click</div>
         </>
       )}

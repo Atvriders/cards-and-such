@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { blazeFireworkState, blazeFireworkAction, blazeFireworkSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { blazeFireworkGame } from "./Game.js";
@@ -15,5 +15,9 @@ export const blazeFireworkPlugin: GamePlugin<blazeFireworkState, blazeFireworkAc
   initialState: (seed: number, s: S) => initialState(seed, s as blazeFireworkSettings),
   reducer,
   isTerminal,
+    hint: (state: blazeFireworkState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-blaze-firework-action"]', pulses: 3 };
+    },
   component: blazeFireworkGame,
 };

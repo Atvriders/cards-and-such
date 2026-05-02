@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardPileTossState, CardPileTossAction, CardPileTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,6 @@ You can't see the target directly; you'll get feedback after each toss showing h
 Play 10 or 20 rounds and build the highest cumulative score you can!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardPileTossSettings),
-  reducer, isTerminal, hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-pile-toss-primary"]', pulses: 3 }), component: CardPileTossGame,
+  reducer, isTerminal, hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-pile-toss-primary"]', pulses: 3 }),
+  component: CardPileTossGame,
 };

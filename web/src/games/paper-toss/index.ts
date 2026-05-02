@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PaperTossState, PaperTossAction, PaperTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PaperTossGame } from "./Game.js";
@@ -28,5 +28,9 @@ Experiment with different angle and power combinations to find what works for ea
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+    hint: (state: PaperTossState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-paper-toss-action"]', pulses: 3 };
+    },
   component: PaperTossGame,
 };

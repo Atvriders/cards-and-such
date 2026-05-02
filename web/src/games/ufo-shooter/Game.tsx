@@ -44,7 +44,7 @@ export function UfoShooterGame({ state, dispatch, onGameOver }: GameProps<UfoSho
       {!isOver && !waveOver && (
         <div className="us-controls">
           <button onClick={() => dispatch({ type: "moveLeft" })}>Left</button>
-          <button onClick={() => dispatch({ type: "shoot" })}>Shoot!</button>
+          <button data-testid="hint-target-ufo-shooter-action" onClick={() => dispatch({ type: "shoot" })}>Shoot!</button>
           <button onClick={() => dispatch({ type: "moveRight" })}>Right</button>
         </div>
       )}

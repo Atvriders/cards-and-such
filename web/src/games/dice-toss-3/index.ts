@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceToss3State, DiceToss3Action, DiceToss3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,10 @@ There are no decisions to make: just toss and watch the dice fly. The highest po
 Average rounds score around 10-11 points, so a great run with lots of high numbers will push your score well above average. Can you roll your way to a perfect game?`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceToss3Settings),
-  reducer, isTerminal, component: DiceToss3Game,
+  reducer, isTerminal,
+    hint: (state: DiceToss3State) => {
+      if (state.phase === "gameover") return null;
+      return { selector: '[data-testid="hint-target-dice-toss-3-action"]', pulses: 3 };
+    },
+  component: DiceToss3Game,
 };

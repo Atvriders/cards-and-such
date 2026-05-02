@@ -62,7 +62,7 @@ export function BubbleShooter({
             onChange={(e) => dispatch({ type: "aim", angle: parseInt(e.target.value, 10) })}
             disabled={!!terminal}
           />
-          <button
+          <button data-testid="hint-target-bubble-shooter-action"
             className="bs-shoot-btn"
             onClick={() => dispatch({ type: "shoot" })}
             disabled={!!terminal}
