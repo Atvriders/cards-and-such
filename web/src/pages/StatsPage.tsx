@@ -402,6 +402,125 @@ function buildCategoryDowHeatmap(
 }
 
 /**
+ * Walk every `cards-time-history:<gameId>` localStorage entry and bucket each
+ * play timestamp into one of 24 local-time hour bins (0..23). Returns the
+ * counts array, the peak hour (or null when no data), and the total samples.
+ *
+ * Pure given a fixed `now` (only used to skip future-dated entries that may
+ * appear when the user's clock has drifted backwards). Tolerates corrupt
+ * localStorage blobs the same way the rest of this file does.
+ */
+function buildHourOfDayCounts(
+  now: number = Date.now(),
+): { counts: number[]; peakHour: number | null; total: number } {
+  const counts = new Array<number>(24).fill(0);
+  let total = 0;
+  if (typeof localStorage === "undefined") {
+    return { counts, peakHour: null, total };
+  }
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith(TIME_HISTORY_KEY_PREFIX)) continue;
+    const entries = progressJSON<unknown>(k);
+    if (!Array.isArray(entries)) continue;
+    for (const e of entries) {
+      if (!e || typeof e !== "object") continue;
+      const ts = (e as { ts?: unknown }).ts;
+      if (typeof ts !== "number" || !Number.isFinite(ts)) continue;
+      // Skip future-dated entries (clock skew) but accept everything historical.
+      if (ts > now) continue;
+      const hr = new Date(ts).getHours();
+      if (hr < 0 || hr > 23) continue;
+      counts[hr] += 1;
+      total += 1;
+    }
+  }
+  let peakHour: number | null = null;
+  let peakV = 0;
+  for (let h = 0; h < 24; h++) {
+    if (counts[h] > peakV) {
+      peakV = counts[h];
+      peakHour = h;
+    }
+  }
+  return { counts, peakHour, total };
+}
+
+/**
+ * 24-bar chart of plays per hour of day. The peak bar is recolored to the
+ * active accent so it's the obvious focal point; ties go to the earliest
+ * hour (matches `buildHourOfDayCounts`). When `total === 0` we render an
+ * empty-state placeholder rather than a flat baseline.
+ */
+function HourChart({
+  data,
+  w = 320,
+  h = 140,
+}: {
+  data: { counts: number[]; peakHour: number | null; total: number };
+  w?: number;
+  h?: number;
+}): JSX.Element {
+  const { counts, peakHour, total } = data;
+  const max = Math.max(1, ...counts);
+  const pad = 24;
+  const bw = (w - pad * 2) / 24;
+  return (
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      className="stats-svg"
+      role="img"
+      aria-label={
+        peakHour != null
+          ? `Plays by hour of day (peak ${peakHour}:00, ${total} total)`
+          : "Plays by hour of day (no data yet)"
+      }
+      data-testid="stats-hour-chart"
+      data-peak-hour={peakHour ?? ""}
+      data-total={total}
+    >
+      <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="rgba(148,163,184,0.25)" />
+      {counts.map((v, hr) => {
+        const bh = ((h - pad * 2) * v) / max;
+        const x = pad + hr * bw + bw * 0.1;
+        const y = h - pad - bh;
+        const isPeak = peakHour === hr && total > 0;
+        // Label every 6h so 24 ticks don't crowd the axis.
+        const showLabel = hr % 6 === 0 || hr === 23;
+        return (
+          <g
+            key={hr}
+            data-testid={`stats-hour-bar-${hr}`}
+            data-peak={isPeak ? "true" : undefined}
+            data-count={v}
+          >
+            <rect
+              x={x}
+              y={y}
+              width={bw * 0.8}
+              height={bh}
+              rx="2"
+              fill={isPeak ? "#fbbf24" : "#a78bfa"}
+            />
+            {showLabel && (
+              <text
+                x={x + bw * 0.4}
+                y={h - pad + 12}
+                fontSize="9"
+                fill="rgba(203,213,225,0.7)"
+                textAnchor="middle"
+              >
+                {hr}
+              </text>
+            )}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/**
  * 5×7 heatmap: rows are categories (solitaire/cards/dice/board/arcade),
  * columns are days of the week (Mon..Sun). Cell opacity is linear in
  * `count / max`, with a faint floor for empty cells so the grid stays
@@ -885,6 +1004,11 @@ export default function StatsPage(): JSX.Element {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const heatmapData = useMemo(() => buildCategoryDowHeatmap(30), [stats]);
 
+  // 24-hour-of-day chart aggregated across every game's time history. Re-derived
+  // when stats change so Reset clears the bars to all zero.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const hourData = useMemo(() => buildHourOfDayCounts(), [stats]);
+
   /** Top-10 personal best times across all known games. Reads
    *  `cards-best-times` directly (a `Record<gameId, number>` of seconds), drops
    *  unknown / non-positive entries, sorts ascending (lower is better), then
@@ -1187,6 +1311,18 @@ export default function StatsPage(): JSX.Element {
               ))}
             </ul>
           )}
+        </div>
+
+        <div className="stats-card" data-testid="stats-hour-of-day">
+          <h2>Plays by hour of day</h2>
+          <p className="stats-chart-label">
+            {hourData.total === 0
+              ? "No plays recorded yet — finish a game to start the chart"
+              : hourData.peakHour != null
+                ? `Peak ${String(hourData.peakHour).padStart(2, "0")}:00 · ${hourData.total} total plays`
+                : `${hourData.total} total plays`}
+          </p>
+          <HourChart data={hourData} />
         </div>
 
         <div className="stats-card" data-testid="stats-personal-records">
