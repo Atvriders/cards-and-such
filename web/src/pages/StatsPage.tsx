@@ -569,6 +569,25 @@ export default function StatsPage(): JSX.Element {
 
   const lineData = useMemo<BarDatum[]>(() => lastNDays(new Set(stats.daysPlayed), range), [stats, range]);
 
+  /** Top-5 most-hinted games. Reads the `cards-hints-used` blob (a
+   *  Record<gameId, number>) directly so the card stays accurate even when the
+   *  game isn't in `stats.perGame` yet. Filters out 0-counts and unknown ids. */
+  const mostHinted = useMemo<{ id: string; title: string; count: number }[]>(() => {
+    const v = progressJSON<Record<string, number>>("cards-hints-used");
+    if (!v || typeof v !== "object") return [];
+    const rows: { id: string; title: string; count: number }[] = [];
+    for (const [id, n] of Object.entries(v)) {
+      if (typeof n !== "number" || !Number.isFinite(n) || n <= 0) continue;
+      const plug = GAMES.find((g) => g.id === id);
+      if (!plug) continue;
+      rows.push({ id, title: plug.title, count: n });
+    }
+    rows.sort((a, b) => b.count - a.count);
+    return rows.slice(0, 5);
+    // Re-derive when stats change so the card refreshes after a reset.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stats]);
+
   const topGamesPie = useMemo<PieDatum[]>(() => {
     return Object.entries(stats.perGame)
       .filter(([id]) => matchesCategory(id))
@@ -785,6 +804,24 @@ export default function StatsPage(): JSX.Element {
                   <span className={`play-category play-category--${cat}`}>{cat}</span>
                   <span className="best-title">{info.title}</span>
                   <span className="best-score">{info.score}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="stats-card" data-testid="stats-most-hinted">
+          <h2>Most-hinted games</h2>
+          {mostHinted.length === 0 ? (
+            <p className="stats-empty">No hints used yet — try the lightbulb button on a game!</p>
+          ) : (
+            <ul className="stats-most-hinted-list">
+              {mostHinted.map((row, idx) => (
+                <li key={row.id} data-testid={`stats-most-hinted-row-${idx}`}>
+                  <span className="stats-most-hinted-rank">{idx + 1}</span>
+                  <span className="stats-most-hinted-title">{row.title}</span>
+                  <span className="stats-most-hinted-count">{row.count}</span>
+                  <Link to={`/play/${row.id}`} className="btn btn-ghost stats-most-hinted-play">Play</Link>
                 </li>
               ))}
             </ul>
