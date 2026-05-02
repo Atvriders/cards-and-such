@@ -1,0 +1,65 @@
+/* ErrorBoundary — friendly fallback card. Theme-aware via CSS variables
+   with sensible fallbacks so the boundary still looks intentional even if
+   the failure was the theme layer itself. */
+
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  min-height: 240px;
+}
+
+.error-boundary-card {
+  width: min(520px, 100%);
+  background: var(--surface-100, #1e2236);
+  color: var(--text-100, #f1f5f9);
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  border-radius: 12px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+  padding: 1.1rem 1.2rem 1.2rem;
+}
+
+.error-boundary-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+  color: #fca5a5;
+}
+
+.error-boundary-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-200, #cbd5e1);
+}
+
+.error-boundary-message {
+  margin: 0 0 0.9rem;
+  padding: 0.55rem 0.7rem;
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 8rem;
+  overflow: auto;
+}
+
+.error-boundary-actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.error-boundary-report {
+  color: var(--text-200, #cbd5e1);
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.error-boundary-report:hover,
+.error-boundary-report:focus-visible {
+  color: var(--text-100, #f1f5f9);
+}

@@ -23,8 +23,10 @@ import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
 import { encodeChallenge, MAX_FRIEND_SEED } from "../platform/friendCode.js";
 import { track } from "../platform/analytics.js";
 import { useConfirm } from "../platform/ConfirmDialog.js";
+import { ErrorBoundary } from "../platform/ErrorBoundary.js";
 import { hashStamp, todayStamp } from "./dailyPicker.js";
 import "./PlayPage.css";
+import "../platform/ErrorBoundary.css";
 
 /** Maximum number of toasts visible at once — older ones drop off. */
 const MAX_TOASTS = 3;
@@ -2078,9 +2080,15 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 hand us `undefined`, in which case rendering the skeleton
                 directly avoids tripping React with `<undefined />`. */}
             {plugin.component ? (
-              <Suspense fallback={<GameLoadingSkeleton gameTitle={plugin.title} />}>
-                <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
-              </Suspense>
+              <ErrorBoundary
+                scope="play-surface"
+                title="This game hit a snag"
+                hint="The play surface crashed, but the rest of the app is still running. Reload to try again or report the bug below."
+              >
+                <Suspense fallback={<GameLoadingSkeleton gameTitle={plugin.title} />}>
+                  <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
+                </Suspense>
+              </ErrorBoundary>
             ) : (
               <GameLoadingSkeleton gameTitle={plugin.title} />
             )}
