@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { PageHead } from "../platform/PageHead.js";
 import { searchAll, type SearchHit } from "../platform/search.js";
+import { highlightMatch } from "../platform/highlight.js";
 import "./SearchPage.css";
 
 /**
@@ -39,24 +40,10 @@ function writeRecent(list: string[]): void {
 
 /**
  * Render `text` with the first occurrence of `q` wrapped in <mark>.
- * Case-insensitive. Returns plain text when there's no match.
+ * Implementation lives in `../platform/highlight.ts` so the lobby tiles
+ * can share the same case-insensitive single-substring behaviour.
  */
-function highlight(text: string, q: string): React.ReactNode {
-  if (!q) return text;
-  const lower = text.toLowerCase();
-  const idx = lower.indexOf(q);
-  if (idx < 0) return text;
-  const before = text.slice(0, idx);
-  const match = text.slice(idx, idx + q.length);
-  const after = text.slice(idx + q.length);
-  return (
-    <>
-      {before}
-      <mark>{match}</mark>
-      {after}
-    </>
-  );
-}
+const highlight = highlightMatch;
 
 export default function SearchPage(): JSX.Element {
   const [params, setParams] = useSearchParams();

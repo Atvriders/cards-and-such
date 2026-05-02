@@ -10,7 +10,15 @@ import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { Badge, type BadgeKind } from "../platform/Badge.js";
 import { readFavorites, toggleFavorite as toggleFavoritePersist } from "../platform/userdata.js";
+import { highlightMatch } from "../platform/highlight.js";
 import "./LobbyPage.css";
+
+/**
+ * Minimum query length that triggers `<mark>` highlighting on tile
+ * titles. Single-character queries match too aggressively (every "a"
+ * lights up) so we wait for at least two chars before annotating.
+ */
+const TITLE_HIGHLIGHT_MIN_LEN = 2;
 
 /** localStorage key persisting the active lobby filter chip across reloads. */
 const FILTER_STORAGE_KEY = "cards-lobby-filter";
@@ -375,12 +383,19 @@ type FamilyEntry = {
   /** Sort key — the family label, lower-cased. */
   sortKey: string;
   category: GameCategory;
+  /**
+   * Precomputed lowercase haystack — all searchable strings for this
+   * entry concatenated, so per-keystroke filtering does an `indexOf`
+   * instead of re-lowercasing every field on every render.
+   */
+  haystack: string;
 };
 type GameEntry = {
   kind: "game";
   game: GamePlugin;
   sortKey: string;
   category: GameCategory;
+  haystack: string;
 };
 type LobbyEntry = FamilyEntry | GameEntry;
 
@@ -553,23 +568,42 @@ export default function LobbyPage(): JSX.Element {
       // first by title — this keeps category filtering deterministic).
       members.sort((a, b) => compareTitles(a.title, b.title));
       const category = members[0]!.category;
+      // Build the search haystack once: family label + description plus
+      // each member's title + description, all lower-cased and joined
+      // with `\n` so substrings can't bleed across boundaries.
+      const memberStrings: string[] = [];
+      for (const m of members) {
+        memberStrings.push(m.title.toLowerCase(), m.description.toLowerCase());
+      }
+      const haystack = [
+        fam.label.toLowerCase(),
+        fam.description.toLowerCase(),
+        ...memberStrings,
+      ].join("\n");
       entries.push({
         kind: "family",
         family: fam,
         members,
         sortKey: fam.label.toLowerCase(),
         category,
+        haystack,
       });
     }
 
     // Standalone entries — games not absorbed by any family.
     for (const g of safeGames) {
       if (idToFamily.has(g.id)) continue;
+      const haystack = [
+        g.title.toLowerCase(),
+        g.category.toLowerCase(),
+        g.description.toLowerCase(),
+      ].join("\n");
       entries.push({
         kind: "game",
         game: g,
         sortKey: g.title.toLowerCase(),
         category: g.category,
+        haystack,
       });
     }
 
@@ -613,28 +647,13 @@ export default function LobbyPage(): JSX.Element {
       list = allEntries.filter((e) => e.category === filter);
     }
     if (!q) return list;
-    list = list.filter((e) => {
-      if (e.kind === "game") {
-        const g = e.game;
-        return (
-          g.title.toLowerCase().includes(q)
-          || g.category.toLowerCase().includes(q)
-          || g.description.toLowerCase().includes(q)
-        );
-      }
-      // Family matches if its label / description matches OR if any
-      // member's title / description matches — that way searching for
-      // "Vegas" still surfaces the Klondike family that contains it.
-      const fam = e.family;
-      if (
-        fam.label.toLowerCase().includes(q)
-        || fam.description.toLowerCase().includes(q)
-      ) return true;
-      return e.members.some((m) =>
-        m.title.toLowerCase().includes(q)
-        || m.description.toLowerCase().includes(q),
-      );
-    });
+    // Each entry carries a precomputed lowercase `haystack` covering the
+    // family label / description / member titles / member descriptions,
+    // so the per-keystroke filter is a single `indexOf` per entry rather
+    // than re-lowercasing every field. Same matching semantics as before
+    // (family surfaces if any member matches; standalone matches title /
+    // category / description).
+    list = list.filter((e) => e.haystack.includes(q));
     return list;
   }, [allEntries, filter, deferredQuery, entryRating, favSet]);
 
@@ -939,6 +958,7 @@ export default function LobbyPage(): JSX.Element {
                   userRating={ratings[g.id] ?? 0}
                   isFavorite={isFav}
                   onToggleFavorite={onToggleFavorite}
+                  highlightQuery={deferredQuery}
                 />
               );
             })}
@@ -1036,6 +1056,7 @@ export default function LobbyPage(): JSX.Element {
                     isNew={newGameIds.has(entry.game.id)}
                     isFavorite={favSet.has(entry.game.id)}
                     onToggleFavorite={onToggleFavorite}
+                    highlightQuery={deferredQuery}
                   />
                 ) : (
                   <FamilyCard
@@ -1057,6 +1078,7 @@ export default function LobbyPage(): JSX.Element {
                     members={entry.members}
                     isFavorite={entry.members.some((m) => favSet.has(m.id))}
                     onToggleFavorite={onToggleFavorite}
+                    highlightQuery={deferredQuery}
                   />
                 ),
               )}
@@ -1221,12 +1243,18 @@ function GameCard({
   isNew = false,
   isFavorite = false,
   onToggleFavorite,
+  highlightQuery,
 }: {
   game: GamePlugin;
   userRating?: number;
   isNew?: boolean;
   isFavorite?: boolean;
   onToggleFavorite?: (id: string) => void;
+  /**
+   * If set (and at least TITLE_HIGHLIGHT_MIN_LEN chars), wrap the first
+   * matching substring of the title in a `<mark>`. Mirrors SearchPage.
+   */
+  highlightQuery?: string;
 }): JSX.Element {
   const { handlers, tooltip } = useTileTooltip(
     {
@@ -1266,7 +1294,11 @@ function GameCard({
           </span>
         )}
       </div>
-      <div className="tile-title">{g.title}</div>
+      <div className="tile-title lobby-tile-title">
+        {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
+          ? highlightMatch(g.title, highlightQuery)
+          : g.title}
+      </div>
       <div className="tile-desc">{g.description}</div>
       <div className="tile-foot">
         <span className="tile-players">
@@ -1384,6 +1416,7 @@ function FamilyCard({
   members,
   isFavorite = false,
   onToggleFavorite,
+  highlightQuery,
 }: {
   family: GameFamily;
   category: GameCategory;
@@ -1395,6 +1428,7 @@ function FamilyCard({
   members: GamePlugin[];
   isFavorite?: boolean;
   onToggleFavorite?: (id: string) => void;
+  highlightQuery?: string;
 }): JSX.Element {
   // Family badge: NEW wins outright, otherwise CHALLENGING/QUICK if any
   // member is curated, otherwise POPULAR by best-rating threshold.
@@ -1447,7 +1481,11 @@ function FamilyCard({
           {memberCount} variant{memberCount === 1 ? "" : "s"}
         </span>
       </div>
-      <div className="tile-title">{family.label}</div>
+      <div className="tile-title lobby-tile-title">
+        {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
+          ? highlightMatch(family.label, highlightQuery)
+          : family.label}
+      </div>
       <div className="tile-desc">{family.description}</div>
       <div className="tile-foot">
         <span className="tile-players">Multiple variants</span>
@@ -1501,6 +1539,7 @@ function FeaturedTile({
   userRating = 0,
   isFavorite = false,
   onToggleFavorite,
+  highlightQuery,
 }: {
   game: GamePlugin;
   familyId: string | undefined;
@@ -1509,6 +1548,7 @@ function FeaturedTile({
   userRating?: number;
   isFavorite?: boolean;
   onToggleFavorite?: (id: string) => void;
+  highlightQuery?: string;
 }): JSX.Element {
   const featuredBadge = pickBadgeKind(g.id, isNew, userRating);
   // Featured tiles get the same hover-tooltip treatment regardless of
@@ -1555,7 +1595,11 @@ function FeaturedTile({
             {CATEGORY_LABELS[g.category]}
           </span>
         </div>
-        <div className="tile-title">{g.title}</div>
+        <div className="tile-title lobby-tile-title">
+        {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
+          ? highlightMatch(g.title, highlightQuery)
+          : g.title}
+      </div>
         <div className="tile-desc">{g.description}</div>
         <div className="tile-foot">
           <span className="tile-players">Multiple variants</span>
@@ -1600,7 +1644,11 @@ function FeaturedTile({
           </span>
         )}
       </div>
-      <div className="tile-title">{g.title}</div>
+      <div className="tile-title lobby-tile-title">
+        {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
+          ? highlightMatch(g.title, highlightQuery)
+          : g.title}
+      </div>
       <div className="tile-desc">{g.description}</div>
       <div className="tile-foot">
         <span className="tile-players">
