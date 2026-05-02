@@ -16,9 +16,14 @@ import { loadStats } from "../platform/stats.js";
 import { readRatings } from "../platform/StarRating.js";
 import { getLastPlayed } from "../platform/userdata.js";
 import { buildLadderSvg, downloadSvg } from "../platform/svgShare.js";
+import {
+  getLeaderboardClient,
+  type LeaderboardClient,
+  type LeaderboardEntry,
+} from "../platform/leaderboardClient.js";
 import "./LeaderboardPage.css";
 
-type Tab = "per-game" | "global" | "online" | "my-ladder";
+type Tab = "per-game" | "global" | "online" | "my-ladder" | "top-players";
 type GameCategory = "solitaire" | "cards" | "dice" | "board" | "arcade";
 type CategoryFilter = "all" | GameCategory;
 type TimeRange = "all" | "today" | "week" | "month";
@@ -147,11 +152,13 @@ export default function LeaderboardPage(): JSX.Element {
       <section className="leaderboard-main">
         <h1 tabIndex={-1}>Leaderboard</h1>
         <nav className="tabs" role="tablist">
+          <button role="tab" aria-selected={tab === "top-players"} onClick={() => setTab("top-players")}>Top Players</button>
           <button role="tab" aria-selected={tab === "per-game"} onClick={() => setTab("per-game")}>Per-game</button>
           <button role="tab" aria-selected={tab === "global"} onClick={() => setTab("global")}>Global</button>
           <button role="tab" aria-selected={tab === "my-ladder"} onClick={() => setTab("my-ladder")}>My Ladder</button>
           <button role="tab" aria-selected={tab === "online"} onClick={() => setTab("online")}>Online now</button>
         </nav>
+        {tab === "top-players" && <TopPlayersPanel />}
         {tab === "per-game" && <PerGamePanel />}
         {tab === "global" && <GlobalPanel />}
         {tab === "my-ladder" && <MyLadderPanel />}
@@ -940,6 +947,116 @@ function MyLadderPanel(): JSX.Element {
           </section>
         </>
       )}
+    </div>
+  );
+}
+
+/* ============================================================
+ * Top Players — sourced from the active LeaderboardClient.
+ * Today this is either LocalOnlyClient (just the user's own
+ * ladder, "coming soon" empty state) or MockClient (5 fake
+ * players), gated by Settings → Data → "Use mock leaderboard".
+ * No HTTP yet — see web/src/platform/leaderboardClient.ts.
+ * ============================================================ */
+
+function TopPlayersPanel({
+  client,
+}: {
+  client?: LeaderboardClient;
+} = {}): JSX.Element {
+  const me = useAuth((s) => s.username);
+  const [gameId, setGameId] = useState<string>("klondike");
+  const [rows, setRows] = useState<LeaderboardEntry[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Use the explicit prop if provided (tests inject a stub); otherwise
+  // resolve the active client from the Settings toggle each time the
+  // selected game changes. This means flipping the toggle in another
+  // tab and switching games here will pick up the change.
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    const c = client ?? getLeaderboardClient();
+    c.getTop(gameId, 10)
+      .then((r) => { if (!cancelled) setRows(r); })
+      .catch(() => { if (!cancelled) setRows([]); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [client, gameId]);
+
+  const games = FEATURED_GAMES;
+
+  return (
+    <div className="lb-top-players" data-testid="lb-top-players">
+      <div className="lb-controls">
+        <label className="lb-control">
+          <span>Game</span>
+          <select
+            aria-label="top players game"
+            value={gameId}
+            onChange={(e) => setGameId(e.target.value)}
+          >
+            {games.map((g) => (
+              <option key={g.id} value={g.id}>{g.title}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="lb-table-wrap">
+        <table className="lb-table">
+          <thead>
+            <tr>
+              <th scope="col" className="lb-rank">#</th>
+              <th scope="col">Player</th>
+              <th scope="col" className="lb-score">Score</th>
+              <th scope="col">Time</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading && <SkeletonRows rows={5} cols={5} testId="lb-top-skeleton-row" />}
+            {!loading && rows && rows.length === 0 && (
+              <tr>
+                <td colSpan={5} className="lb-empty" data-testid="lb-top-empty">
+                  Coming soon — for now, here's your own ladder.
+                </td>
+              </tr>
+            )}
+            {!loading && rows && rows.map((r, i) => {
+              const medal = MEDALS[i + 1];
+              const isMe = me && r.name.toLowerCase() === me.toLowerCase();
+              const t = r.time > 0
+                ? `${Math.floor(r.time / 60)}:${String(Math.floor(r.time % 60)).padStart(2, "0")}`
+                : "—";
+              const d = (() => {
+                try { return new Date(r.date).toLocaleDateString(); }
+                catch { return r.date; }
+              })();
+              return (
+                <tr
+                  key={`${r.name}-${i}`}
+                  className={[
+                    medal ? `lb-medal lb-medal-${i + 1}` : "",
+                    isMe ? "lb-me" : "",
+                  ].filter(Boolean).join(" ")}
+                  data-testid="lb-top-row"
+                >
+                  <td className="lb-rank">
+                    {medal ? <span className="lb-medal-icon" aria-label={`rank ${i + 1}`}>{medal}</span> : i + 1}
+                  </td>
+                  <td className="lb-user">
+                    <span>{r.name}</span>
+                    {isMe && <span className="lb-you-badge">you</span>}
+                  </td>
+                  <td className="lb-score">{r.score.toLocaleString()}</td>
+                  <td>{t}</td>
+                  <td>{d}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

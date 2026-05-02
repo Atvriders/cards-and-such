@@ -492,7 +492,8 @@ export function favoriteCategory(s: StatsState): string | null {
   const entries = Object.entries(s.perCategory);
   if (entries.length === 0) return null;
   entries.sort((a, b) => b[1] - a[1]);
-  return entries[0][0];
+  // Length-checked above, so entries[0] exists.
+  return entries[0]![0];
 }
 
 export function resetStats(): void {
