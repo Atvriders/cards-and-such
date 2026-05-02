@@ -100,6 +100,21 @@ function parseSeed(raw: string | null): number | null {
  *  `bumpHintsUsed` writer below. */
 const LS_HINTS_USED = "cards-hints-used";
 const LS_HINTS_ENABLED = "cards-hints-enabled";
+/** Tiny global counter — bumped each time the user copies a friend-mode
+ *  link. Pure stats fun, no behavior keys off it. */
+const LS_FRIEND_SESSIONS = "cards-friend-sessions";
+
+function bumpFriendSessions(): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    const raw = localStorage.getItem(LS_FRIEND_SESSIONS);
+    const cur = raw ? Number.parseInt(raw, 10) : 0;
+    const next = (Number.isFinite(cur) ? cur : 0) + 1;
+    localStorage.setItem(LS_FRIEND_SESSIONS, String(next));
+  } catch {
+    /* ignore */
+  }
+}
 
 function readHintsEnabled(): boolean {
   try {
@@ -369,6 +384,40 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       }
     }, ms);
   }, [hintsEnabled, plugin, phase, state, pushToast]);
+
+  const friendMode = searchParams.get("friend") === "1";
+
+  const shareFriendLink = useCallback(async () => {
+    const origin =
+      typeof window !== "undefined" && window.location && window.location.origin
+        ? window.location.origin
+        : "https://cards.waterburp.com";
+    const url = `${origin}/play/${plugin.id}?seed=${seed}&friend=1`;
+    let copied = false;
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        copied = true;
+      }
+    } catch {
+      copied = false;
+    }
+    bumpFriendSessions();
+    // also reflect the seed in the live URL so a refresh keeps the same hand
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set("seed", String(seed));
+        return next;
+      },
+      { replace: true },
+    );
+    pushToast(
+      copied
+        ? "Link copied — share with a friend (same seed = same hand)"
+        : "Could not copy link",
+    );
+  }, [plugin.id, seed, setSearchParams, pushToast]);
 
   const shareSeed = useCallback(async () => {
     const origin =
@@ -691,6 +740,25 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               </svg>
             </button>
           )}
+          {phase === "playing" && plugin.players.multiplayer && (
+            <button
+              type="button"
+              className="play-iconbtn play-friend-btn"
+              onClick={() => { void shareFriendLink(); }}
+              title="Play with a friend (copies seeded link)"
+              aria-label="Play with a friend"
+              data-tooltip="Play with a friend"
+              data-testid="play-friend-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span className="play-hint-btn-label">Friend</span>
+            </button>
+          )}
           {phase === "playing" && hintsEnabled && (
             <button
               type="button"
@@ -805,6 +873,18 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           />
           <button onClick={start} className="start-btn" data-testid="start-game">Start</button>
         </section>
+      )}
+
+      {phase === "playing" && friendMode && plugin.players.multiplayer && (
+        <div
+          className="play-friend-banner"
+          data-testid="play-friend-banner"
+          role="status"
+          aria-live="polite"
+        >
+          Friend mode — same seed, you both see the same hand. Take turns and
+          compare scores.
+        </div>
       )}
 
       {phase === "playing" && (

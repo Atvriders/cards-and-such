@@ -76,6 +76,14 @@ export default function AboutPage(): JSX.Element {
         </p>
       </section>
 
+      <section className="settings-section about-section" data-testid="about-friend-mode">
+        <h2>Friend mode</h2>
+        <p>
+          🤝 Same-seed friend matches let you compare scores fairly without
+          netcode.
+        </p>
+      </section>
+
       <section className="settings-section about-section">
         <h2>Numbers at a glance</h2>
         <div className="about-stats" aria-label="Project statistics">

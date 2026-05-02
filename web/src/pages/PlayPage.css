@@ -369,6 +369,25 @@
 }
 .play-share-pill:active { transform: translateY(0); }
 
+/* Friend mode banner — shown above the play panel when ?friend=1 is in
+ * the URL on a multiplayer-capable game. Pure presentational, no
+ * netcode behind it. */
+.play-friend-banner {
+  margin: 0 0 0.85rem;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #f1f5f9;
+  background: linear-gradient(
+    90deg,
+    rgba(129, 140, 248, 0.18) 0%,
+    rgba(56, 189, 248, 0.14) 100%
+  );
+  border: 1px solid rgba(129, 140, 248, 0.45);
+  border-radius: 10px;
+  line-height: 1.4;
+}
+
 /* How-to-play (inline + modal) */
 .setup-panel .how-to-play {
   margin-bottom: 1.25rem;
