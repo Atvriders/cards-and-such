@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import DailyPage from "./DailyPage.js";
 import {
@@ -8,6 +8,7 @@ import {
   pickDailyGame,
   parScore,
   getTodaysDaily,
+  todayStamp,
 } from "./dailyPicker.js";
 import { recordDailyPlayed, getStreak } from "../platform/userdata.js";
 import { GAMES } from "../games/registry.js";
@@ -118,5 +119,72 @@ describe("DailyPage", () => {
   it("shows the empty-state when streak is zero", () => {
     renderPage();
     expect(screen.getByTestId("daily-streak")).toHaveTextContent(/Come back tomorrow|0/);
+  });
+
+  it("renders 7 history rows with date, game name, and Skipped status by default", () => {
+    renderPage();
+    for (let i = 0; i < 7; i++) {
+      const row = screen.getByTestId(`daily-history-row-${i}`);
+      expect(row).toBeInTheDocument();
+      // Each row should contain a YYYY-MM-DD date stamp.
+      expect(row.textContent ?? "").toMatch(/\d{4}-\d{2}-\d{2}/);
+      // With no plays and no per-game bests, every row is Skipped.
+      expect(row.textContent ?? "").toContain("Skipped");
+    }
+    // 8th row must NOT exist — only 7 days of history.
+    expect(screen.queryByTestId("daily-history-row-7")).toBeNull();
+  });
+
+  it("marks today's history row as ✓ Done after recordDailyPlayed", () => {
+    recordDailyPlayed(todayStamp());
+    renderPage();
+    // Today is the newest entry (index 0) per last7Stamps ordering.
+    const todayRow = screen.getByTestId("daily-history-row-0");
+    expect(todayRow.textContent ?? "").toContain("✓ Done");
+    // Each row should also display the picked game's title.
+    const todaysPick = pickDailyGame(todayStamp());
+    expect(todayRow.textContent ?? "").toContain(todaysPick.game.title);
+  });
+
+  it("Share button is clickable and triggers an SVG download", () => {
+    // jsdom doesn't implement URL.createObjectURL — stub it so downloadSvg
+    // doesn't throw when the button is clicked.
+    const createObj = vi.fn(() => "blob:mock-url");
+    const revokeObj = vi.fn();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (URL as any).createObjectURL = createObj;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (URL as any).revokeObjectURL = revokeObj;
+    // Prevent the synthetic anchor click from navigating jsdom.
+    const clickSpy = vi
+      .spyOn(HTMLAnchorElement.prototype, "click")
+      .mockImplementation(() => {});
+
+    renderPage();
+    const shareBtn = screen.getByTestId("daily-share-btn");
+    expect(shareBtn).toBeInTheDocument();
+    fireEvent.click(shareBtn);
+
+    expect(createObj).toHaveBeenCalled();
+    expect(clickSpy).toHaveBeenCalled();
+    clickSpy.mockRestore();
+  });
+
+  it("Notify toggle persists cards-daily-notify in localStorage and shows the (coming soon) caveat", () => {
+    renderPage();
+    expect(screen.getByText(/\(coming soon\)/i)).toBeInTheDocument();
+
+    const toggle = screen.getByTestId("daily-notify") as HTMLInputElement;
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-daily-notify")).toBeNull();
+
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-daily-notify")).toBe("true");
+
+    // Toggling back removes the key.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-daily-notify")).toBeNull();
   });
 });
