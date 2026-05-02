@@ -9,7 +9,11 @@ import { StarRating, readRatings } from "../platform/StarRating.js";
 import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { Badge, type BadgeKind } from "../platform/Badge.js";
+import { readFavorites, toggleFavorite as toggleFavoritePersist } from "../platform/userdata.js";
 import "./LobbyPage.css";
+
+/** localStorage key persisting the active lobby filter chip across reloads. */
+const FILTER_STORAGE_KEY = "cards-lobby-filter";
 
 /**
  * Tooltip data shared between GameCard / FamilyCard / FeaturedTile and
@@ -199,8 +203,41 @@ function useTileTooltip(data: TileTooltipData, tileId: string): {
   return { handlers, tooltip };
 }
 
-type Filter = "all" | "top-rated" | GameCategory;
+type Filter = "all" | "top-rated" | "favorites" | GameCategory;
 const TOP_RATED_THRESHOLD = 4;
+
+/**
+ * Read the persisted lobby filter (if any) and validate it against the
+ * known set of filter values — guards against stale / hand-edited
+ * localStorage entries from older builds.
+ */
+function readPersistedFilter(): Filter {
+  try {
+    if (typeof localStorage === "undefined") return "all";
+    const raw = localStorage.getItem(FILTER_STORAGE_KEY);
+    if (!raw) return "all";
+    if (
+      raw === "all"
+      || raw === "top-rated"
+      || raw === "favorites"
+      || raw === "solitaire"
+      || raw === "cards"
+      || raw === "dice"
+      || raw === "board"
+      || raw === "arcade"
+    ) {
+      return raw;
+    }
+  } catch { /* ignore */ }
+  return "all";
+}
+
+function writePersistedFilter(filter: Filter): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(FILTER_STORAGE_KEY, filter);
+  } catch { /* ignore */ }
+}
 
 const CATEGORY_ORDER: GameCategory[] = ["solitaire", "cards", "dice", "board", "arcade"];
 const CATEGORY_LABELS: Record<GameCategory, string> = {
@@ -324,10 +361,11 @@ type LobbyEntry = FamilyEntry | GameEntry;
 
 export default function LobbyPage(): JSX.Element {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<Filter>("all");
+  const [filter, setFilter] = useState<Filter>(() => readPersistedFilter());
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [openFamilyId, setOpenFamilyId] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>(() => readRatings());
+  const [favSet, setFavSet] = useState<Set<string>>(() => readFavorites());
   const deferredQuery = useDeferredValue(query);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
@@ -370,6 +408,40 @@ export default function LobbyPage(): JSX.Element {
       window.removeEventListener("focus", refresh);
       window.removeEventListener("storage", onStorage);
     };
+  }, []);
+
+  // Mirror — keep favorites synced across tabs and on focus regain so the
+  // lobby reflects toggles made in another window or in the play page.
+  useEffect(() => {
+    const refresh = () => setFavSet(readFavorites());
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === "cards-favorites") refresh();
+    };
+    window.addEventListener("focus", refresh);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
+
+  // Persist filter changes; the value rehydrates on the next mount.
+  useEffect(() => {
+    writePersistedFilter(filter);
+  }, [filter]);
+
+  // Flip favorite status for a single game id and write through to the
+  // shared persistence helper, then update the in-memory set so all
+  // tiles re-render with the new state without an extra read pass.
+  const onToggleFavorite = useCallback((id: string) => {
+    if (!id) return;
+    toggleFavoritePersist(id);
+    setFavSet((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   }, []);
 
   // Per-category counts (computed once over the full registry — these
@@ -496,6 +568,12 @@ export default function LobbyPage(): JSX.Element {
     if (filter === "all") list = allEntries;
     else if (filter === "top-rated") {
       list = allEntries.filter((e) => entryRating(e) >= TOP_RATED_THRESHOLD);
+    } else if (filter === "favorites") {
+      list = allEntries.filter((e) =>
+        e.kind === "game"
+          ? favSet.has(e.game.id)
+          : e.members.some((m) => favSet.has(m.id)),
+      );
     } else {
       list = allEntries.filter((e) => e.category === filter);
     }
@@ -523,7 +601,7 @@ export default function LobbyPage(): JSX.Element {
       );
     });
     return list;
-  }, [allEntries, filter, deferredQuery, entryRating]);
+  }, [allEntries, filter, deferredQuery, entryRating, favSet]);
 
   // Reset window + close any open picker when filter or query changes.
   useEffect(() => {
@@ -750,6 +828,13 @@ export default function LobbyPage(): JSX.Element {
             testId="chip-top-rated"
             glyph="★"
           >{t("lobby.chip.top_rated")}</Chip>
+          <Chip
+            active={filter === "favorites"}
+            onClick={() => setFilter("favorites")}
+            count={favSet.size}
+            testId="chip-favorites"
+            glyph="♥"
+          >Favorites</Chip>
           {CATEGORY_ORDER.map((cat) => (
             <Chip
               key={cat}
@@ -770,16 +855,26 @@ export default function LobbyPage(): JSX.Element {
             Featured
           </h2>
           <div className="lobby-grid lobby-grid--featured">
-            {featured.map((g) => (
-              <FeaturedTile
-                key={`feat-${g.id}`}
-                game={g}
-                familyId={gameIdToFamilyId.get(g.id)}
-                onOpenFamily={(famId) => setOpenFamilyId(famId)}
-                isNew={newGameIds.has(g.id)}
-                userRating={ratings[g.id] ?? 0}
-              />
-            ))}
+            {featured.map((g) => {
+              const famId = gameIdToFamilyId.get(g.id);
+              const isFav = famId
+                ? false /* family featured tile — toggle is per-game; we
+                           visualise active state from the picker, which
+                           tracks individual member ids. */
+                : favSet.has(g.id);
+              return (
+                <FeaturedTile
+                  key={`feat-${g.id}`}
+                  game={g}
+                  familyId={famId}
+                  onOpenFamily={(id) => setOpenFamilyId(id)}
+                  isNew={newGameIds.has(g.id)}
+                  userRating={ratings[g.id] ?? 0}
+                  isFavorite={isFav}
+                  onToggleFavorite={onToggleFavorite}
+                />
+              );
+            })}
           </div>
         </section>
       )}
@@ -791,7 +886,9 @@ export default function LobbyPage(): JSX.Element {
               ? "All games"
               : filter === "top-rated"
                 ? "Top Rated"
-                : CATEGORY_LABELS[filter]}
+                : filter === "favorites"
+                  ? "Favorites"
+                  : CATEGORY_LABELS[filter]}
             {query && (
               <span className="lobby-section-count">
                 {" · "}
@@ -809,17 +906,34 @@ export default function LobbyPage(): JSX.Element {
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="lobby-no-results" data-testid="lobby-no-results">
-            <ConfusedCardSvg />
-            {filter === "top-rated" && !query ? (
-              <p data-testid="lobby-top-rated-empty">
-                You haven't rated any games {TOP_RATED_THRESHOLD} stars or higher yet. Play a game and tap the stars at the end to fill this list.
+          filter === "favorites" && !query ? (
+            <div
+              className="lobby-no-results"
+              data-testid="lobby-favorites-empty"
+            >
+              <ConfusedCardSvg />
+              <p>
+                No favorites yet. Tap the <span aria-hidden="true">♥</span> heart on any tile to save a game here for quick access.
               </p>
-            ) : (
-              <p>No games match <strong>{query}</strong>.</p>
-            )}
-            <button type="button" className="btn btn-ghost" onClick={() => { setQuery(""); setFilter("all"); }}>{t("lobby.clear_filters")}</button>
-          </div>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => { setQuery(""); setFilter("all"); }}
+              >Browse all games</button>
+            </div>
+          ) : (
+            <div className="lobby-no-results" data-testid="lobby-no-results">
+              <ConfusedCardSvg />
+              {filter === "top-rated" && !query ? (
+                <p data-testid="lobby-top-rated-empty">
+                  You haven't rated any games {TOP_RATED_THRESHOLD} stars or higher yet. Play a game and tap the stars at the end to fill this list.
+                </p>
+              ) : (
+                <p>No games match <strong>{query}</strong>.</p>
+              )}
+              <button type="button" className="btn btn-ghost" onClick={() => { setQuery(""); setFilter("all"); }}>{t("lobby.clear_filters")}</button>
+            </div>
+          )
         ) : (
           <>
             <div className="lobby-grid">
@@ -830,6 +944,8 @@ export default function LobbyPage(): JSX.Element {
                     game={entry.game}
                     userRating={ratings[entry.game.id] ?? 0}
                     isNew={newGameIds.has(entry.game.id)}
+                    isFavorite={favSet.has(entry.game.id)}
+                    onToggleFavorite={onToggleFavorite}
                   />
                 ) : (
                   <FamilyCard
@@ -849,6 +965,8 @@ export default function LobbyPage(): JSX.Element {
                     userRating={entryRating(entry)}
                     isNew={entry.members.some((m) => newGameIds.has(m.id))}
                     members={entry.members}
+                    isFavorite={entry.members.some((m) => favSet.has(m.id))}
+                    onToggleFavorite={onToggleFavorite}
                   />
                 ),
               )}
