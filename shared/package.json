@@ -11,6 +11,6 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run"
   },
-  "dependencies": { "zod": "^3.23.8" },
+  "dependencies": { "zod": "^4.4.2" },
   "devDependencies": { "vitest": "^1.6.0" }
 }
