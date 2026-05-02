@@ -69,6 +69,20 @@ export interface GamePlugin<State = unknown, Action = unknown, Schema extends Se
   hint?: (state: State) => HintTarget | null;
 
   component: React.FC<GameProps<State, SettingsOf<Schema>>>;
+
+  /** Optional per-game CSS variable overrides for the play surface. When
+   *  present, PlayPage scopes these onto the `.play-page` wrapper (NOT
+   *  `:root`) so the override is contained to this game and does not bleed
+   *  into the rest of the app or the user's selected ThemePicker theme.
+   *  Variable names match the global theme system: `--theme-felt`,
+   *  `--theme-accent`, `--theme-bg`. Engine wraps that read those vars
+   *  (e.g. `var(--theme-felt, ...)`) automatically pick up the override.
+   */
+  themeOverrides?: {
+    feltGradient?: string;
+    accent?: string;
+    bgGradient?: string;
+  };
 }
 
 export function defaultsOf<S extends SettingSchema>(schema: S): SettingsOf<S> {

@@ -34,4 +34,8 @@ export const holdemNoLimitPlugin: GamePlugin<HoldemNoLimitState, HoldemNoLimitAc
   reducer,
   isTerminal,
   component: HoldemNoLimitGame,
+  themeOverrides: {
+    feltGradient: "linear-gradient(135deg, #0b3d2e, #1a6c3f)",
+    accent: "rgba(74, 222, 128, 0.50)",
+  },
 };

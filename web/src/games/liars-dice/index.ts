@@ -39,4 +39,8 @@ Tips: Your bid should reflect what you know about your own dice plus a probabili
   reducer,
   isTerminal,
   component: LiarsDice,
+  themeOverrides: {
+    feltGradient: "linear-gradient(135deg, #6b3f1a, #8a5a2b 50%, #4a2810)",
+    accent: "rgba(217, 119, 6, 0.45)",
+  },
 };

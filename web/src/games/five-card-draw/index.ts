@@ -78,4 +78,8 @@ The game ends when one player runs out of chips. Settings: Starting Bankroll ($5
   isTerminal,
   hint: fiveCardDrawHint,
   component: FiveCardDraw,
+  themeOverrides: {
+    feltGradient: "linear-gradient(135deg, #0b3d2e, #1a6c3f)",
+    accent: "rgba(74, 222, 128, 0.50)",
+  },
 };

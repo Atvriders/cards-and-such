@@ -32,4 +32,10 @@ Tips: aim for 63+ in the upper section early. Save Chance for rounds where no ot
   reducer,
   isTerminal,
   component: Yahtzee,
+  themeOverrides: {
+    // Warm wooden tabletop — dice games feel right on a stained-pine surface
+    // rather than a card felt. Scoped to this plugin only.
+    feltGradient: "linear-gradient(135deg, #6b3f1a, #8a5a2b 50%, #4a2810)",
+    accent: "rgba(217, 119, 6, 0.45)",
+  },
 };

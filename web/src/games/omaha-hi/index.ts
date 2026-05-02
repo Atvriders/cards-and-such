@@ -47,4 +47,8 @@ export const omahaHiPlugin: GamePlugin<OmahaHiState, OmahaHiAction, typeof setti
     return { selector: '[data-testid="hint-target-omaha-hi-fold"]', pulses: 3 };
   },
   component: OmahaHiGame,
+  themeOverrides: {
+    feltGradient: "linear-gradient(135deg, #0b3d2e, #1a6c3f)",
+    accent: "rgba(74, 222, 128, 0.50)",
+  },
 };

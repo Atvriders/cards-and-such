@@ -79,4 +79,8 @@ The game continues until one player runs out of chips. Settings: Starting Bankro
   isTerminal,
   hint: studHint,
   component: SevenCardStud,
+  themeOverrides: {
+    feltGradient: "linear-gradient(135deg, #0b3d2e, #1a6c3f)",
+    accent: "rgba(74, 222, 128, 0.50)",
+  },
 };

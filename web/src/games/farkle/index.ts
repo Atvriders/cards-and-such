@@ -33,4 +33,8 @@ Tips: early in a turn it pays to be aggressive and reroll; once you've built a l
   reducer,
   isTerminal,
   component: Farkle,
+  themeOverrides: {
+    feltGradient: "linear-gradient(135deg, #6b3f1a, #8a5a2b 50%, #4a2810)",
+    accent: "rgba(217, 119, 6, 0.45)",
+  },
 };

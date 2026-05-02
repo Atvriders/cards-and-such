@@ -89,4 +89,10 @@ Settings: Starting Bankroll ($500/$1000/$5000), Blind Levels (2/4, 5/10, 10/20).
   isTerminal,
   hint: holdemHint,
   component: TexasHoldem,
+  themeOverrides: {
+    // Real poker-room green felt — overrides the user's chosen ThemePicker
+    // theme just for this game so cards/chips read against a classic table.
+    feltGradient: "linear-gradient(135deg, #0b3d2e, #1a6c3f)",
+    accent: "rgba(74, 222, 128, 0.50)",
+  },
 };
