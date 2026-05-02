@@ -28,7 +28,7 @@ export function ConcreteCrunchGame({ state, dispatch, onGameOver }: GameProps<Co
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ck-target"
+              className="ck-target" data-testid="hint-target-concrete-crunch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"hit", id:p.id } as ConcreteCrunchAction)}
               aria-label="target"

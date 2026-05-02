@@ -28,7 +28,7 @@ export function FrappeFlipGame({ state, dispatch, onGameOver }: GameProps<Frappe
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="frappe-target"
+              className="frappe-target" data-testid="hint-target-frappe-flip-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as FrappeFlipAction)}
               aria-label="frappe-flip">🥶</button>

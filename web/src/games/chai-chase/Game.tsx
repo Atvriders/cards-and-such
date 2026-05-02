@@ -29,7 +29,7 @@ export function ChaiChaseGame({ state, dispatch, onGameOver }: GameProps<ChaiCha
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="chai-target"
+              className="chai-target" data-testid="hint-target-chai-chase-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as ChaiChaseAction)}
               aria-label="chai-chase"

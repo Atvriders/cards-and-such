@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WhaleWaveState, WhaleWaveAction, WhaleWaveSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ Average runs hit around 200-280 points; whale-watching pros can crack 400+. The 
 Each whale tap is worth 12 points (one more than the typical 10) to reward the quicker tempo and tighter timer. Tap, wave, and ride the whale current!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WhaleWaveSettings),
-  reducer,isTerminal,component:WhaleWaveGame,
+  reducer,isTerminal,
+  hint: (state: WhaleWaveState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.critters || state.critters.length === 0) return null;
+    return { selector: '[data-testid="hint-target-whale-wave-target"]', pulses: 3 };
+  },
+  component:WhaleWaveGame,
 };

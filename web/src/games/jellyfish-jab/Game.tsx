@@ -29,7 +29,7 @@ export function JellyfishJabGame({ state, dispatch, onGameOver }: GameProps<Jell
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="jj-target"
+              className="jj-target" data-testid="hint-target-jellyfish-jab-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as JellyfishJabAction)}
               aria-label="jellyfish-jab">🪼</button>

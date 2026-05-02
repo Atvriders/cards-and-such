@@ -29,7 +29,7 @@ export function FireflyFlashGame({ state, dispatch, onGameOver }: GameProps<Fire
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="frf-target"
+              className="frf-target" data-testid="hint-target-firefly-flash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as FireflyFlashAction)}
               aria-label="firefly-flash">✨</button>

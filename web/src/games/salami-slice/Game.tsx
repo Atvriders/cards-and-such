@@ -29,7 +29,7 @@ export function SalamiSliceGame({ state, dispatch, onGameOver }: GameProps<Salam
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="salami-target"
+              className="salami-target" data-testid="hint-target-salami-slice-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onMouseEnter={() => dispatch({ type:"pop", id:p.id } as SalamiSliceAction)}
               onClick={() => dispatch({ type:"pop", id:p.id } as SalamiSliceAction)}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RadishRushState, RadishRushAction, RadishRushSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling: the more radishes you tap inside the time limit, the h
 Get those radishes before they bolt!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RadishRushSettings),
-  reducer,isTerminal,component:RadishRushGame,
+  reducer,isTerminal,
+  hint: (state: RadishRushState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.radishes || state.radishes.length === 0) return null;
+    return { selector: '[data-testid="hint-target-radish-rush-target"]', pulses: 3 };
+  },
+  component:RadishRushGame,
 };

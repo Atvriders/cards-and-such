@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { JellyfishJabState, JellyfishJabAction, JellyfishJabSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ Average runs hit 200-300 points; jellyfish jab masters can crack 500+. The clock
 Quick reflexes, gentle taps, and a calm hand — Jellyfish Jab is the perfect light arcade for a lazy afternoon. Sting that screen and harvest those jelly points!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as JellyfishJabSettings),
-  reducer,isTerminal,component:JellyfishJabGame,
+  reducer,isTerminal,
+  hint: (state: JellyfishJabState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.critters || state.critters.length === 0) return null;
+    return { selector: '[data-testid="hint-target-jellyfish-jab-target"]', pulses: 3 };
+  },
+  component:JellyfishJabGame,
 };

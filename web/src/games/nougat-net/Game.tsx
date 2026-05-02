@@ -29,7 +29,7 @@ export function NougatNetGame({ state, dispatch, onGameOver }: GameProps<NougatN
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="nougatnet-target"
+              className="nougatnet-target" data-testid="hint-target-nougat-net-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"catch", id:p.id } as NougatNetAction)}
               aria-label="target">🟫</button>

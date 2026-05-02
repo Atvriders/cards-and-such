@@ -29,7 +29,7 @@ export function SharkSwatGame({ state, dispatch, onGameOver }: GameProps<SharkSw
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ss-target"
+              className="ss-target" data-testid="hint-target-shark-swat-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as SharkSwatAction)}
               aria-label="shark-swat">🦈</button>

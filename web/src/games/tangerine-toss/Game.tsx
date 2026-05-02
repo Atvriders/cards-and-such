@@ -29,7 +29,7 @@ export function TangerineTossGame({ state, dispatch, onGameOver }: GameProps<Tan
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="tangerine-target"
+              className="tangerine-target" data-testid="hint-target-tangerine-toss-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as TangerineTossAction)}
               aria-label="tangerine">🍊</button>

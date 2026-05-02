@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PretzelPluckState, PretzelPluckAction, PretzelPluckSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling: the more pretzels you tap in 30 seconds, the higher yo
 Limber up those fingers — these salty knots aren't going to pluck themselves!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PretzelPluckSettings),
-  reducer,isTerminal,component:PretzelPluckGame,
+  reducer,isTerminal,
+  hint: (state: PretzelPluckState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.pretzels || state.pretzels.length === 0) return null;
+    return { selector: '[data-testid="hint-target-pretzel-pluck-target"]', pulses: 3 };
+  },
+  component:PretzelPluckGame,
 };

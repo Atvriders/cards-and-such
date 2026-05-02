@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PumpkinPopState, PumpkinPopAction, PumpkinPopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const pumpkinPopPlugin: GamePlugin<PumpkinPopState, PumpkinPopAction, typ
   howToPlay:"Pumpkin Pop is a Halloween-themed 30-second clicker arcade. Bouncing jack-o'-lanterns appear across a moonlit pumpkin patch in six lanes; tap each one as fast as you can to pop it for 10 points. Each pumpkin sits for a few ticks before disappearing into the night \u2014 miss too many and your final tally suffers.\n\nThe board ticks roughly once per second, spawning 1 or 2 fresh pumpkins in random lanes. The patch can quickly fill with grinning targets, so practice your hand-eye coordination and aim carefully \u2014 every pumpkin you pop is 10 points closer to a top score.\n\nAverage runs land near 200-300 points; jack-o'-lantern jockeys pushing 500+ are showing real reflex talent. The clock counts down in red at the top right; when it hits zero, your final score is locked in.\n\nTrick or treat? Pure treat \u2014 grab those pumpkins before the witching hour! Perfect for October but festive enough to enjoy any time of year.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PumpkinPopSettings),
-  reducer,isTerminal,component:PumpkinPopGame,
+  reducer,isTerminal,
+  hint: (state: PumpkinPopState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-pumpkin-pop-target"]', pulses: 3 };
+  },
+  component:PumpkinPopGame,
 };

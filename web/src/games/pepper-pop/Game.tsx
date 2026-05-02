@@ -29,7 +29,7 @@ export function PepperPopGame({ state, dispatch, onGameOver }: GameProps<PepperP
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="pepperpop-target"
+              className="pepperpop-target" data-testid="hint-target-pepper-pop-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as PepperPopAction)}
               aria-label="pepper-pop">🫑</button>

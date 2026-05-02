@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LanternLiftState, LanternLiftAction, LanternLiftSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const lanternLiftPlugin: GamePlugin<LanternLiftState, LanternLiftAction, 
   howToPlay:"Lantern Lift is a serene 30-second clicker arcade. Glowing red sky lanterns drift across a deep-blue evening sky in six lanes; tap each one as fast as you can to lift it for 10 points before it floats out of reach. Each lantern hangs around for a few ticks before drifting beyond the frame \u2014 miss too many and your final tally suffers.\n\nThe board ticks roughly once per second, spawning 1 or 2 fresh lanterns in random lanes. Despite the calm visual, the action is brisk \u2014 your hand-eye coordination determines how high your score climbs.\n\nAverage runs land near 200-300 points; serene-but-swift lantern handlers pushing 500+ are showing real reflex talent. The clock counts down in red at the top right; when it hits zero, your final score is locked in.\n\nInspired by sky-lantern festivals (Yi Peng in Thailand, Pingxi in Taiwan, Mid-Autumn Festival across Asia), this clicker brings a touch of cultural festivity to your screen. Lift every lantern and let your wishes rise!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LanternLiftSettings),
-  reducer,isTerminal,component:LanternLiftGame,
+  reducer,isTerminal,
+  hint: (state: LanternLiftState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-lantern-lift-target"]', pulses: 3 };
+  },
+  component:LanternLiftGame,
 };

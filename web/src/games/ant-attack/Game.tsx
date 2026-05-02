@@ -29,7 +29,7 @@ export function AntAttackGame({ state, dispatch, onGameOver }: GameProps<AntAtta
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="aa-target"
+              className="aa-target" data-testid="hint-target-ant-attack-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as AntAttackAction)}
               aria-label="ant-attack"

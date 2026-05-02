@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MelonMashState, MelonMashAction, MelonMashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling: the more melons you mash in 30 seconds, the higher yo
 Mash those melons and dominate the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MelonMashSettings),
-  reducer, isTerminal, component: MelonMashGame,
+  reducer, isTerminal,
+  hint: (state: MelonMashState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-melon-mash-target"]', pulses: 3 };
+  },
+  component: MelonMashGame,
 };

@@ -29,7 +29,7 @@ export function ChickChaseGame({ state, dispatch, onGameOver }: GameProps<ChickC
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="chk-target"
+              className="chk-target" data-testid="hint-target-chick-chase-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ChickChaseAction)}
               aria-label="chick-chase"

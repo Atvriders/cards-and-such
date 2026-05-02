@@ -29,7 +29,7 @@ export function FrogFlickGame({ state, dispatch, onGameOver }: GameProps<FrogFli
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ff-target"
+              className="ff-target" data-testid="hint-target-frog-flick-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as FrogFlickAction)}
               aria-label="frog-flick">🐸</button>

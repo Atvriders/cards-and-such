@@ -29,7 +29,7 @@ export function TomatoTossGame({ state, dispatch, onGameOver }: GameProps<Tomato
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="tomatotoss-target"
+              className="tomatotoss-target" data-testid="hint-target-tomato-toss-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"click", id:c.id } as TomatoTossAction)}
               aria-label="tomato-toss">🍅</button>

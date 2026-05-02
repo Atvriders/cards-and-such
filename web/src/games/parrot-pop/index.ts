@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ParrotPopState, ParrotPopAction, ParrotPopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ParrotPopGame } from "./Game.js";
@@ -17,5 +17,11 @@ There is no skill ceiling beyond reflexes and accuracy: the more parrots you pop
 Mash that screen and rack up the parrot count!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ParrotPopSettings),
-  reducer, isTerminal, component: ParrotPopGame,
+  reducer, isTerminal,
+  hint: (state: ParrotPopState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-parrot-pop-target"]', pulses: 3 };
+  },
+  component: ParrotPopGame,
 };

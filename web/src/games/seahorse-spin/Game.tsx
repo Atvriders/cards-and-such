@@ -29,7 +29,7 @@ export function SeahorseSpinGame({ state, dispatch, onGameOver }: GameProps<Seah
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="shs-target"
+              className="shs-target" data-testid="hint-target-seahorse-spin-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as SeahorseSpinAction)}
               aria-label="seahorse-spin">🐉</button>

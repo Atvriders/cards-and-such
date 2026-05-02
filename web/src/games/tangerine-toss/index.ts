@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TangerineTossState, TangerineTossAction, TangerineTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling: the more tangerines you toss in 30 seconds, the higher
 Aim for the bin and rack up that citrus score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TangerineTossSettings),
-  reducer,isTerminal,component:TangerineTossGame,
+  reducer,isTerminal,
+  hint: (state: TangerineTossState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.tangerines || state.tangerines.length === 0) return null;
+    return { selector: '[data-testid="hint-target-tangerine-toss-target"]', pulses: 3 };
+  },
+  component:TangerineTossGame,
 };

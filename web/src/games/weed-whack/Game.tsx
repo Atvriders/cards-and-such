@@ -27,7 +27,7 @@ export function WeedWhackGame({ state, dispatch, onGameOver }: GameProps<WeedWha
           const x=(p.lane+0.5)/LANES*100;
           const y=20+((p.ticksLeft*23)%70);
           return (
-            <button key={p.id} className="fc-target"
+            <button key={p.id} className="fc-target" data-testid="hint-target-weed-whack-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={()=>dispatch({type:"pop",id:p.id} as WeedWhackAction)} aria-label="weeds">🌿</button>
           );

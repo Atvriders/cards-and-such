@@ -24,7 +24,7 @@ export function MechMashGame({ state, dispatch, onGameOver }: GameProps<MechMash
         {state.targets.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
-          return <button key={p.id} className="fc-target" style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }} onClick={() => dispatch({ type:"pop", id:p.id } as MechMashAction)} aria-label="target">🤖</button>;
+          return <button key={p.id} className="fc-target" data-testid="hint-target-mech-mash-target" style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }} onClick={() => dispatch({ type:"pop", id:p.id } as MechMashAction)} aria-label="target">🤖</button>;
         })}
       </div>
     </div>

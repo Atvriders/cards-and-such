@@ -29,7 +29,7 @@ export function ParrotPopGame({ state, dispatch, onGameOver }: GameProps<ParrotP
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="pp-target"
+              className="pp-target" data-testid="hint-target-parrot-pop-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ParrotPopAction)}
               aria-label="parrot-pop">🦜</button>

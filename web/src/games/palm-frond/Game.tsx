@@ -28,7 +28,7 @@ export function PalmFrondGame({ state, dispatch, onGameOver }: GameProps<PalmFro
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="palmfrond-target"
+              className="palmfrond-target" data-testid="hint-target-palm-frond-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as PalmFrondAction)}
               aria-label="target">🌴</button>

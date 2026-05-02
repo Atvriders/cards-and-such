@@ -24,7 +24,7 @@ export function CogClickGame({ state, dispatch, onGameOver }: GameProps<CogClick
         {state.targets.map(p => {
           const x = (p.lane + 0.5) / LANES * 100;
           const y = 20 + ((p.ticksLeft * 23) % 70);
-          return <button key={p.id} className="fc-target" style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }} onClick={() => dispatch({ type:"pop", id:p.id } as CogClickAction)} aria-label="target" data-tooltip="Tap to score in Cog Click">⚙️</button>;
+          return <button key={p.id} className="fc-target" data-testid="hint-target-cog-click-target" style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }} onClick={() => dispatch({ type:"pop", id:p.id } as CogClickAction)} aria-label="target" data-tooltip="Tap to score in Cog Click">⚙️</button>;
         })}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HamsterHopState, HamsterHopAction, HamsterHopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HamsterHopGame } from "./Game.js";
@@ -17,5 +17,11 @@ There is no skill ceiling beyond reflexes and accuracy: the more hamsters you ta
 Mash that screen and rack up the hamster count!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HamsterHopSettings),
-  reducer, isTerminal, component: HamsterHopGame,
+  reducer, isTerminal,
+  hint: (state: HamsterHopState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-hamster-hop-target"]', pulses: 3 };
+  },
+  component: HamsterHopGame,
 };

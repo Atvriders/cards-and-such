@@ -29,7 +29,7 @@ export function WaspWhipGame({ state, dispatch, onGameOver }: GameProps<WaspWhip
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="wsp-target"
+              className="wsp-target" data-testid="hint-target-wasp-whip-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as WaspWhipAction)}
               aria-label="wasp-whip">🦟</button>

@@ -29,7 +29,7 @@ export function ScrewGrabGame({ state, dispatch, onGameOver }: GameProps<ScrewGr
           const y = 20 + ((t.ticksLeft * 23) % 70);
           return (
             <button key={t.id}
-              className="fc-target"
+              className="fc-target" data-testid="hint-target-screw-grab-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:t.id } as ScrewGrabAction)}
               aria-label="screw">🔩</button>

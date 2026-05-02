@@ -29,7 +29,7 @@ export function ClamClapGame({ state, dispatch, onGameOver }: GameProps<ClamClap
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="clc-target"
+              className="clc-target" data-testid="hint-target-clam-clap-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ClamClapAction)}
               aria-label="clam-clap"

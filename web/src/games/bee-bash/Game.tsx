@@ -29,7 +29,7 @@ export function BeeBashGame({ state, dispatch, onGameOver }: GameProps<BeeBashSt
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="bee-target"
+              className="bee-target" data-testid="hint-target-bee-bash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BeeBashAction)}
               aria-label="bee-bash"

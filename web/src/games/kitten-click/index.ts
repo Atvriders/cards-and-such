@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { KittenClickState, KittenClickAction, KittenClickSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KittenClickGame } from "./Game.js";
@@ -17,5 +17,11 @@ There is no skill ceiling beyond reflexes and accuracy: the more kittens you cli
 Mash that screen and rack up the kitten count!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as KittenClickSettings),
-  reducer, isTerminal, component: KittenClickGame,
+  reducer, isTerminal,
+  hint: (state: KittenClickState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-kitten-click-target"]', pulses: 3 };
+  },
+  component: KittenClickGame,
 };

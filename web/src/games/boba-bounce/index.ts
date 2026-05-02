@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BobaBounceState, BobaBounceAction, BobaBounceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const bobaBouncePlugin: GamePlugin<BobaBounceState, BobaBounceAction, typ
   howToPlay:`Boba Bounce is a fast-paced 25-second clicker arcade game. Boba teas (bubble teas) bounce across a six-lane board; tap each one quickly to slurp it for 10 points. Each boba hangs around for a few ticks before bouncing away — miss too many and your score suffers.\n\nThe board ticks roughly once per second, spawning fresh boba in random lanes. The board can fill quickly with chewy pearl targets, so keep your hand-eye coordination sharp and your tap reflexes ready.\n\nThere is no skill ceiling: the more boba you click in 25 seconds, the higher your score. Average runs land near 150-250 points; sharp tappers pushing 400+ are showing real reflex talent. Slurp up those pearls!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BobaBounceSettings),
-  reducer,isTerminal,component:BobaBounceGame,
+  reducer,isTerminal,
+  hint: (state: BobaBounceState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.items || state.items.length === 0) return null;
+    return { selector: '[data-testid="hint-target-boba-bounce-target"]', pulses: 3 };
+  },
+  component:BobaBounceGame,
 };

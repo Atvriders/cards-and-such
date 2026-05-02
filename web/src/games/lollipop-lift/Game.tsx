@@ -29,7 +29,7 @@ export function LollipopLiftGame({ state, dispatch, onGameOver }: GameProps<Loll
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="lollipoplift-target"
+              className="lollipoplift-target" data-testid="hint-target-lollipop-lift-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"catch", id:p.id } as LollipopLiftAction)}
               aria-label="target">🍭</button>

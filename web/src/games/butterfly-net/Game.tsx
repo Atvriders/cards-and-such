@@ -27,7 +27,7 @@ export function ButterflyNetGame({ state, dispatch, onGameOver }: GameProps<Butt
           const x=(p.lane+0.5)/LANES*100;
           const y=20+((p.ticksLeft*23)%70);
           return (
-            <button key={p.id} className="fc-target"
+            <button key={p.id} className="fc-target" data-testid="hint-target-butterfly-net-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={()=>dispatch({type:"pop",id:p.id} as ButterflyNetAction)} aria-label="butterflies"
               data-tooltip="Tap to score in Butterfly Net">🦋</button>

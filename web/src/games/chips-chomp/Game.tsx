@@ -29,7 +29,7 @@ export function ChipsChompGame({ state, dispatch, onGameOver }: GameProps<ChipsC
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="chipschomp-target"
+              className="chipschomp-target" data-testid="hint-target-chips-chomp-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ChipsChompAction)}
               aria-label="target"

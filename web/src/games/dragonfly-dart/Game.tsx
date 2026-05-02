@@ -29,7 +29,7 @@ export function DragonflyDartGame({ state, dispatch, onGameOver }: GameProps<Dra
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="drd-target"
+              className="drd-target" data-testid="hint-target-dragonfly-dart-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as DragonflyDartAction)}
               aria-label="dragonfly-dart">🦗</button>

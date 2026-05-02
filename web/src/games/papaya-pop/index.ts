@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PapayaPopState, PapayaPopAction, PapayaPopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling: the more papayas you pop in 30 seconds, the higher yo
 Pop those papayas and rack up the points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PapayaPopSettings),
-  reducer, isTerminal, component: PapayaPopGame,
+  reducer, isTerminal,
+  hint: (state: PapayaPopState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-papaya-pop-target"]', pulses: 3 };
+  },
+  component: PapayaPopGame,
 };

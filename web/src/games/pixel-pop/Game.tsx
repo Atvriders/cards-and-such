@@ -29,7 +29,7 @@ export function PixelPopGame({ state, dispatch, onGameOver }: GameProps<PixelPop
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="fc-target" data-testid="hint-target-pixel-pop-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as PixelPopAction)}
               aria-label="target">🟦</button>

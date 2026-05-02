@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CookieClutchState, CookieClutchAction, CookieClutchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling — the more cookies you click in 30 seconds, the highe
 Get clicking before they crumble away!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CookieClutchSettings),
-  reducer,isTerminal,component:CookieClutchGame,
+  reducer,isTerminal,
+  hint: (state: CookieClutchState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.items || state.items.length === 0) return null;
+    return { selector: '[data-testid="hint-target-cookie-clutch-target"]', pulses: 3 };
+  },
+  component:CookieClutchGame,
 };

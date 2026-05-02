@@ -29,7 +29,7 @@ export function PineconePopGame({ state, dispatch, onGameOver }: GameProps<Pinec
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="pcp-target"
+              className="pcp-target" data-testid="hint-target-pinecone-pop-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as PineconePopAction)}
               aria-label="pinecone-pop">🌲</button>

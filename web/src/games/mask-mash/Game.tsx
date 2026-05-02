@@ -28,7 +28,7 @@ export function MaskMashGame({ state, dispatch, onGameOver }: GameProps<MaskMash
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="fc-target" data-testid="hint-target-mask-mash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as MaskMashAction)}
               aria-label="item">🎭</button>

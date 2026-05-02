@@ -29,7 +29,7 @@ export function SpinachSpinGame({ state, dispatch, onGameOver }: GameProps<Spina
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="spinachspin-target"
+              className="spinachspin-target" data-testid="hint-target-spinach-spin-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"tap", id:c.id } as SpinachSpinAction)}
               aria-label="spinach-spin">🥬</button>

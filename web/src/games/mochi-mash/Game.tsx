@@ -29,7 +29,7 @@ export function MochiMashGame({ state, dispatch, onGameOver }: GameProps<MochiMa
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="mochi-target"
+              className="mochi-target" data-testid="hint-target-mochi-mash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as MochiMashAction)}
               aria-label="target">🍡</button>

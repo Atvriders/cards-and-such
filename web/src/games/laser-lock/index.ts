@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LaserLockState, LaserLockAction, LaserLockSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const laserLockPlugin: GamePlugin<LaserLockState, LaserLockAction, typeof
   howToPlay:"Laser Lock is a 25-second sci-fi clicker arcade. Targeting lasers paint the board across six grid lanes; tap each red dot before it cycles off for 10 points apiece. Each lock hangs around for a few ticks — let too many fade and your final tally suffers.\n\nThe grid ticks every 750ms, spawning fresh laser locks in random lanes. The targeting zone can quickly fill with active dots, so practice your hand-eye coordination and aim carefully — every laser you confirm is one more kill-shot logged and 10 points closer to a top score.\n\nThere's no skill ceiling: the more laser dots you click in 25 seconds, the higher your score. Average runs land near 180-260 points; sharpshooters pushing 400+ are real reflex talent. The clock counts down in the top right; when it hits zero, your final score is locked in.\n\nAcquire, lock, fire — every dot counts!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LaserLockSettings),
-  reducer,isTerminal,component:LaserLockGame,
+  reducer,isTerminal,
+  hint: (state: LaserLockState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-laser-lock-target"]', pulses: 3 };
+  },
+  component:LaserLockGame,
 };

@@ -28,7 +28,7 @@ export function MeteorBashGame({ state, dispatch, onGameOver }: GameProps<Meteor
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="fc-target" data-testid="hint-target-meteor-bash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as MeteorBashAction)}
               aria-label="target">☄️</button>

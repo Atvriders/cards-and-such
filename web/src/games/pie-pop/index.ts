@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PiePopState, PiePopAction, PiePopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling — the more pies you click in 30 seconds, the higher 
 Mash that screen and rack up those pie points before they slip away!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PiePopSettings),
-  reducer,isTerminal,component:PiePopGame,
+  reducer,isTerminal,
+  hint: (state: PiePopState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.items || state.items.length === 0) return null;
+    return { selector: '[data-testid="hint-target-pie-pop-target"]', pulses: 3 };
+  },
+  component:PiePopGame,
 };

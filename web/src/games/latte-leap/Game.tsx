@@ -28,7 +28,7 @@ export function LatteLeapGame({ state, dispatch, onGameOver }: GameProps<LatteLe
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="latte-target"
+              className="latte-target" data-testid="hint-target-latte-leap-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as LatteLeapAction)}
               aria-label="latte-leap">🍮</button>

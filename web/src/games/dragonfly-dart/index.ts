@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DragonflyDartState, DragonflyDartAction, DragonflyDartSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const dragonflyDartPlugin: GamePlugin<DragonflyDartState, DragonflyDartAc
   howToPlay:"Dragonfly Dart is a 30-second clicker arcade with a pond-skimming theme. Dragonflies dart across the screen in six lanes; tap each one as fast as you can to catch it for 10 points. Each dragonfly hovers for only a few ticks before darting off — miss too many and your final tally suffers.\n\nThe game ticks roughly once per second, spawning fresh dragonflies in random lanes. The screen can quickly fill with iridescent, fast-moving targets, so quick taps and good visual scanning are key.\n\nAverage runs land near 200-300 points; sharpshooters pushing 500+ are showing real reflex talent. The clock counts down in the top right; when it hits zero, your final score is locked in. Capture summer's most graceful pond-dwellers — dart by dart. Aim true!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DragonflyDartSettings),
-  reducer,isTerminal,component:DragonflyDartGame,
+  reducer,isTerminal,
+  hint: (state: DragonflyDartState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.bugs || state.bugs.length === 0) return null;
+    return { selector: '[data-testid="hint-target-dragonfly-dart-target"]', pulses: 3 };
+  },
+  component:DragonflyDartGame,
 };

@@ -28,7 +28,7 @@ export function JuiceJamboreeGame({ state, dispatch, onGameOver }: GameProps<Jui
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="juice-target"
+              className="juice-target" data-testid="hint-target-juice-jamboree-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as JuiceJamboreeAction)}
               aria-label="juice-jamboree">🍹</button>

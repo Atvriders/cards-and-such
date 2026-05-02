@@ -29,7 +29,7 @@ export function SmoothieSwipeGame({ state, dispatch, onGameOver }: GameProps<Smo
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="smoothie-target"
+              className="smoothie-target" data-testid="hint-target-smoothie-swipe-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as SmoothieSwipeAction)}
               aria-label="smoothie-swipe">🍓</button>

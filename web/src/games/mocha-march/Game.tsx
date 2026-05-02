@@ -28,7 +28,7 @@ export function MochaMarchGame({ state, dispatch, onGameOver }: GameProps<MochaM
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="mocha-target"
+              className="mocha-target" data-testid="hint-target-mocha-march-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as MochaMarchAction)}
               aria-label="mocha-march">🤎</button>

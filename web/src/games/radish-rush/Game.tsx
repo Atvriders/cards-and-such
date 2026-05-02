@@ -29,7 +29,7 @@ export function RadishRushGame({ state, dispatch, onGameOver }: GameProps<Radish
           const y = 20 + ((r.ticksLeft * 23) % 70);
           return (
             <button key={r.id}
-              className="radish-target"
+              className="radish-target" data-testid="hint-target-radish-rush-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:r.id } as RadishRushAction)}
               aria-label="radish">🥕</button>

@@ -29,7 +29,7 @@ export function NachosNowGame({ state, dispatch, onGameOver }: GameProps<NachosN
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="nachosnow-target"
+              className="nachosnow-target" data-testid="hint-target-nachos-now-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as NachosNowAction)}
               aria-label="target">🌮</button>

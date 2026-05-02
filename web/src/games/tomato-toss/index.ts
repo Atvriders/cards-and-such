@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TomatoTossState, TomatoTossAction, TomatoTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const tomatoTossPlugin: GamePlugin<TomatoTossState, TomatoTossAction, typ
   howToPlay:`Tomato Toss is a 30-second tomato-tapping arcade. Tomatoes drift across the screen in six lanes; click each one before it squishes off-screen. Each successful tap scores 10 points.\n\nThe board ticks roughly once per second, spawning fresh tomatoes in random lanes. Each tomato hangs around for a few ticks before disappearing — miss too many and you'll regret it.\n\nThere's no skill ceiling: the more tomatoes you tap in 30 seconds, the higher your score. Average runs land in the 200-300 range; reflex masters can push past 500.\n\nTomatoes are technically fruit, but botanists let them slide — and so will we. Tap fast, score high, and don't let them squish!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TomatoTossSettings),
-  reducer,isTerminal,component:TomatoTossGame,
+  reducer,isTerminal,
+  hint: (state: TomatoTossState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.items || state.items.length === 0) return null;
+    return { selector: '[data-testid="hint-target-tomato-toss-target"]', pulses: 3 };
+  },
+  component:TomatoTossGame,
 };

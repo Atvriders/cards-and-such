@@ -29,7 +29,7 @@ export function SquirrelSpotGame({ state, dispatch, onGameOver }: GameProps<Squi
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="sqs-target"
+              className="sqs-target" data-testid="hint-target-squirrel-spot-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as SquirrelSpotAction)}
               aria-label="squirrel-spot">🐿️</button>

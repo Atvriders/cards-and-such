@@ -29,7 +29,7 @@ export function GumballGrabGame({ state, dispatch, onGameOver }: GameProps<Gumba
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="gumballgrab-target"
+              className="gumballgrab-target" data-testid="hint-target-gumball-grab-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"catch", id:p.id } as GumballGrabAction)}
               aria-label="target">🟣</button>

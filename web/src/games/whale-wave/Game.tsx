@@ -29,7 +29,7 @@ export function WhaleWaveGame({ state, dispatch, onGameOver }: GameProps<WhaleWa
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ww-target"
+              className="ww-target" data-testid="hint-target-whale-wave-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as WhaleWaveAction)}
               aria-label="whale-wave">🐳</button>

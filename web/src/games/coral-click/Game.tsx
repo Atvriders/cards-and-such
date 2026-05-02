@@ -29,7 +29,7 @@ export function CoralClickGame({ state, dispatch, onGameOver }: GameProps<CoralC
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="crl-target"
+              className="crl-target" data-testid="hint-target-coral-click-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CoralClickAction)}
               aria-label="coral-click"

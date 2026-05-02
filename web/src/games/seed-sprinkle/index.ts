@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SeedSprinkleState, SeedSprinkleAction, SeedSprinkleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const seedSprinklePlugin: GamePlugin<SeedSprinkleState, SeedSprinkleActio
   howToPlay:"Seed Sprinkle is a 25-second clicker where seeds rain down across the planting bed in random lanes. Tap each seed before it falls past your reach to plant it for 10 points.\n\nThe board spawns 1-2 fresh seeds per tick. Each seed only sticks around 3-5 ticks, so you have a brief window to catch it. Once it disappears, it's gone for good — but no penalty beyond the missed point.\n\nYour seed count, the timer, and your score update in real time at the top of the screen. The game is fully timer-based: when the 25 seconds expire, your final tally is locked in.\n\nThere's no skill ceiling or settings — pure click-and-collect gameplay. Average scores land near 180; quick reflexes push 350+. Plant those seeds and grow your high score!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SeedSprinkleSettings),
-  reducer,isTerminal,component:SeedSprinkleGame,
+  reducer,isTerminal,
+  hint: (state: SeedSprinkleState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-seed-sprinkle-target"]', pulses: 3 };
+  },
+  component:SeedSprinkleGame,
 };

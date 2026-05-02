@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GrapePopState, GrapePopAction, GrapePopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling: the more grapes you pop in 30 seconds, the higher you
 Pop those grapes and rack up the points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as GrapePopSettings),
-  reducer, isTerminal, component: GrapePopGame,
+  reducer, isTerminal,
+  hint: (state: GrapePopState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-grape-pop-target"]', pulses: 3 };
+  },
+  component: GrapePopGame,
 };

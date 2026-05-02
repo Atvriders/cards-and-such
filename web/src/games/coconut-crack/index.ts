@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CoconutCrackState, CoconutCrackAction, CoconutCrackSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const coconutCrackPlugin: GamePlugin<CoconutCrackState, CoconutCrackActio
   howToPlay:"Coconut Crack is a tropical 30-second clicker arcade. Coconuts drift across the screen in six lanes; tap each one as fast as you can to crack it for 10 points. Each coconut hangs around for a few ticks before drifting off — miss too many and your final tally suffers.\n\nThe game ticks roughly once per second, spawning fresh coconuts in random lanes. The board can quickly fill with falling coconuts, so practice your hand-eye coordination and aim carefully — every coconut you crack is 10 points closer to a top score.\n\nThere's no skill ceiling: the more coconuts you click in 30 seconds, the higher your score. Average runs land near 200-300 points; sharpshooters pushing 500+ are showing real reflex talent. The clock counts down in the top right; when it hits zero, your final score is locked in.\n\nMash that screen and rack up those coconut points!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CoconutCrackSettings),
-  reducer,isTerminal,component:CoconutCrackGame,
+  reducer,isTerminal,
+  hint: (state: CoconutCrackState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-coconut-crack-target"]', pulses: 3 };
+  },
+  component:CoconutCrackGame,
 };

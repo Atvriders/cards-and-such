@@ -29,7 +29,7 @@ export function KaleKombatGame({ state, dispatch, onGameOver }: GameProps<KaleKo
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="kalekombat-target"
+              className="kalekombat-target" data-testid="hint-target-kale-kombat-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"click", id:c.id } as KaleKombatAction)}
               aria-label="kale-kombat">🥬</button>

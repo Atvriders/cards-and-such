@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SalamiSliceState, SalamiSliceAction, SalamiSliceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling: the more salamis you slice in 30 seconds, the higher y
 Sharpen your blade — these salamis are slippery!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SalamiSliceSettings),
-  reducer,isTerminal,component:SalamiSliceGame,
+  reducer,isTerminal,
+  hint: (state: SalamiSliceState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.salamis || state.salamis.length === 0) return null;
+    return { selector: '[data-testid="hint-target-salami-slice-target"]', pulses: 3 };
+  },
+  component:SalamiSliceGame,
 };

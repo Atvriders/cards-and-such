@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PeachPopState, PeachPopAction, PeachPopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling: the more peaches you click in 30 seconds, the higher y
 Mash that screen and rack up those peach points!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PeachPopSettings),
-  reducer,isTerminal,component:PeachPopGame,
+  reducer,isTerminal,
+  hint: (state: PeachPopState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.peaches || state.peaches.length === 0) return null;
+    return { selector: '[data-testid="hint-target-peach-pop-target"]', pulses: 3 };
+  },
+  component:PeachPopGame,
 };

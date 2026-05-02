@@ -29,7 +29,7 @@ export function LaserLockGame({ state, dispatch, onGameOver }: GameProps<LaserLo
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="fc-target" data-testid="hint-target-laser-lock-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"hit", id:p.id } as LaserLockAction)}
               aria-label="laser-lock">🔴</button>

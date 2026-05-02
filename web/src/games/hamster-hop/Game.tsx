@@ -29,7 +29,7 @@ export function HamsterHopGame({ state, dispatch, onGameOver }: GameProps<Hamste
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="hh-target"
+              className="hh-target" data-testid="hint-target-hamster-hop-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as HamsterHopAction)}
               aria-label="hamster-hop">🐹</button>

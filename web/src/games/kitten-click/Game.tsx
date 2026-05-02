@@ -29,7 +29,7 @@ export function KittenClickGame({ state, dispatch, onGameOver }: GameProps<Kitte
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="kc-target"
+              className="kc-target" data-testid="hint-target-kitten-click-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as KittenClickAction)}
               aria-label="kitten-click">🐱</button>

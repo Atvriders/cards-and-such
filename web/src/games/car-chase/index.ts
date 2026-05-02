@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CarChaseState, CarChaseAction, CarChaseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling: the more cars you tap in 30 seconds, the higher your s
 Mash that screen and rev up some points!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CarChaseSettings),
-  reducer,isTerminal,component:CarChaseGame,
+  reducer,isTerminal,
+  hint: (state: CarChaseState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-car-chase-target"]', pulses: 3 };
+  },
+  component:CarChaseGame,
 };

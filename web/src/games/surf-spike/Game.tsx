@@ -28,7 +28,7 @@ export function SurfSpikeGame({ state, dispatch, onGameOver }: GameProps<SurfSpi
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="surfspike-target"
+              className="surfspike-target" data-testid="hint-target-surf-spike-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as SurfSpikeAction)}
               aria-label="target">🌊</button>

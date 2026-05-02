@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PumpkinSmashState, PumpkinSmashAction, PumpkinSmashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling: the more pumpkins you smash in 30 seconds, the higher
 Smash those pumpkins and dominate the patch!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PumpkinSmashSettings),
-  reducer, isTerminal, component: PumpkinSmashGame,
+  reducer, isTerminal,
+  hint: (state: PumpkinSmashState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-pumpkin-smash-target"]', pulses: 3 };
+  },
+  component: PumpkinSmashGame,
 };

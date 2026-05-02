@@ -29,7 +29,7 @@ export function MushroomMashGame({ state, dispatch, onGameOver }: GameProps<Mush
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="msm-target"
+              className="msm-target" data-testid="hint-target-mushroom-mash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as MushroomMashAction)}
               aria-label="mushroom-mash">🍄</button>

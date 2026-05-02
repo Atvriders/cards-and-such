@@ -29,7 +29,7 @@ export function LobsterLeapGame({ state, dispatch, onGameOver }: GameProps<Lobst
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ll-target"
+              className="ll-target" data-testid="hint-target-lobster-leap-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as LobsterLeapAction)}
               aria-label="lobster-leap">🦞</button>

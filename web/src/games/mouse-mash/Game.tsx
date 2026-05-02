@@ -29,7 +29,7 @@ export function MouseMashGame({ state, dispatch, onGameOver }: GameProps<MouseMa
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="mm-target"
+              className="mm-target" data-testid="hint-target-mouse-mash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as MouseMashAction)}
               aria-label="mouse-mash">🐭</button>

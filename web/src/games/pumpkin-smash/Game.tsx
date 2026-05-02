@@ -29,7 +29,7 @@ export function PumpkinSmashGame({ state, dispatch, onGameOver }: GameProps<Pump
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="pumpkinsmash-target"
+              className="pumpkinsmash-target" data-testid="hint-target-pumpkin-smash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background: "transparent", border: "none" }}
               onClick={() => dispatch({ type: "pop", id: p.id } as PumpkinSmashAction)}
               aria-label="target">🎃</button>

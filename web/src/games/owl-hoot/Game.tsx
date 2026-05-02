@@ -29,7 +29,7 @@ export function OwlHootGame({ state, dispatch, onGameOver }: GameProps<OwlHootSt
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="owh-target"
+              className="owh-target" data-testid="hint-target-owl-hoot-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as OwlHootAction)}
               aria-label="owl-hoot">🦉</button>

@@ -29,7 +29,7 @@ export function BusBashGame({ state, dispatch, onGameOver }: GameProps<BusBashSt
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="bsb-target"
+              className="bsb-target" data-testid="hint-target-bus-bash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BusBashAction)}
               aria-label="vehicle"

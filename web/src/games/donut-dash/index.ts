@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DonutDashState, DonutDashAction, DonutDashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling — the more donuts you click in 25 seconds, the highe
 Ready, set, dash!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DonutDashSettings),
-  reducer,isTerminal,component:DonutDashGame,
+  reducer,isTerminal,
+  hint: (state: DonutDashState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.items || state.items.length === 0) return null;
+    return { selector: '[data-testid="hint-target-donut-dash-target"]', pulses: 3 };
+  },
+  component:DonutDashGame,
 };
