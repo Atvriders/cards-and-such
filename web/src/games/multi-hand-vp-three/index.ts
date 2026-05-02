@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CasState, CasAction, CasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CasGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const multiHandVpThreePlugin: GamePlugin<CasState, CasAction, typeof sett
   initialState: (seed: number, s: S) => initialState(seed, s as CasSettings),
   reducer,
   isTerminal,
+  hint: (state: CasState): HintTarget | null => isTerminal(state) ? null : { selector: '[data-testid="hint-target-multi-hand-vp-three-primary"]', pulses: 3 },
   component: CasGame,
 };
