@@ -1,8 +1,10 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import type { RefObject } from "react";
 import { Link } from "react-router-dom";
 import { ACHIEVEMENTS, favoriteCategory, loadStats, resetStats } from "../platform/stats.js";
 import type { Achievement, StatsState } from "../platform/stats.js";
 import { GAMES } from "../games/registry.js";
+import { downloadSvg } from "../platform/svgShare.js";
 import "./StatsPage.css";
 
 const PIE_COLORS = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24", "#f472b6"];
@@ -143,18 +145,20 @@ function BarChart({
   h = 140,
   onSelect,
   selectedId,
+  svgRef,
 }: {
   data: BarDatum[];
   w?: number;
   h?: number;
   onSelect?: (id: string) => void;
   selectedId?: string | null;
+  svgRef?: RefObject<SVGSVGElement>;
 }): JSX.Element {
   const max = Math.max(1, ...data.map((d) => d.v));
   const pad = 24;
   const bw = data.length ? (w - pad * 2) / data.length : 0;
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label="Games played per category" data-testid="stats-bar-chart">
+    <svg ref={svgRef} viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label="Games played per category" data-testid="stats-bar-chart">
       <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="rgba(148,163,184,0.25)" />
       {data.map((d, i) => {
         const bh = ((h - pad * 2) * d.v) / max;
@@ -186,14 +190,14 @@ function BarChart({
   );
 }
 
-function LineChart({ data, w = 320, h = 140, rangeLabel }: { data: BarDatum[]; w?: number; h?: number; rangeLabel: string }): JSX.Element {
+function LineChart({ data, w = 320, h = 140, rangeLabel, svgRef }: { data: BarDatum[]; w?: number; h?: number; rangeLabel: string; svgRef?: RefObject<SVGSVGElement> }): JSX.Element {
   const max = Math.max(1, ...data.map((d) => d.v));
   const pad = 22;
   const step = data.length > 1 ? (w - pad * 2) / (data.length - 1) : 0;
   const pts = data.map((d, i) => [pad + i * step, h - pad - ((h - pad * 2) * d.v) / max] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label={`Activity over last ${rangeLabel}`} data-testid="stats-line-chart">
+    <svg ref={svgRef} viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label={`Activity over last ${rangeLabel}`} data-testid="stats-line-chart">
       <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="rgba(148,163,184,0.25)" />
       <path d={path} fill="none" stroke="#60a5fa" strokeWidth="2" />
       {pts.map(([x, y], i) => (
@@ -206,7 +210,7 @@ function LineChart({ data, w = 320, h = 140, rangeLabel }: { data: BarDatum[]; w
 }
 
 interface PieDatum { label: string; v: number }
-function PieChart({ data, size = 160 }: { data: PieDatum[]; size?: number }): JSX.Element {
+function PieChart({ data, size = 160, svgRef }: { data: PieDatum[]; size?: number; svgRef?: RefObject<SVGSVGElement> }): JSX.Element {
   const total = data.reduce((a, b) => a + b.v, 0);
   const r = size / 2 - 4;
   const cx = size / 2;
@@ -214,7 +218,7 @@ function PieChart({ data, size = 160 }: { data: PieDatum[]; size?: number }): JS
   let acc = 0;
   return (
     <div className="stats-pie-wrap">
-      <svg viewBox={`0 0 ${size} ${size}`} className="stats-svg stats-pie" role="img" aria-label="Time per game (top 5)" data-testid="stats-pie-chart">
+      <svg ref={svgRef} viewBox={`0 0 ${size} ${size}`} className="stats-svg stats-pie" role="img" aria-label="Time per game (top 5)" data-testid="stats-pie-chart">
         {total === 0 ? (
           <circle cx={cx} cy={cy} r={r} fill="rgba(148,163,184,0.15)" />
         ) : data.map((d, i) => {
@@ -236,6 +240,125 @@ function PieChart({ data, size = 160 }: { data: PieDatum[]; size?: number }): JS
       </ul>
     </div>
   );
+}
+
+/**
+ * Resolve the current `--accent` CSS variable from the document root, with
+ * a hard-coded fallback that matches the StatsPage default purple. Used at
+ * export time so the downloaded SVG echoes the user's active theme even if
+ * the theme is set via inline style on a parent that isn't `<html>`.
+ */
+function resolveAccent(): string {
+  if (typeof document === "undefined" || typeof getComputedStyle === "undefined") return "#a78bfa";
+  const probe = document.querySelector(".stats-page") ?? document.documentElement;
+  const v = getComputedStyle(probe as Element).getPropertyValue("--accent").trim();
+  return v || "#a78bfa";
+}
+
+/**
+ * Serialize a live `<svg>` DOM element into a standalone, printable SVG
+ * document: white background, black axis labels, and the supplied accent
+ * color recolored on the bar/line/pie strokes. We clone before mutating so
+ * the on-screen chart is unaffected, and we strip React-only attributes
+ * (`data-testid`) that have no meaning outside the app.
+ */
+function chartToStandaloneSvg(node: SVGSVGElement, accent: string): string {
+  const clone = node.cloneNode(true) as SVGSVGElement;
+  // Ensure xmlns + a printable width/height so consumers (Inkscape, browsers
+  // opening the file directly) get a fixed size rather than 100% × auto.
+  clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  const vb = clone.getAttribute("viewBox") ?? "0 0 320 140";
+  const [, , vbW, vbH] = vb.split(/\s+/).map((n) => parseFloat(n));
+  clone.setAttribute("width", String(Math.round(vbW || 320)));
+  clone.setAttribute("height", String(Math.round(vbH || 140)));
+  clone.removeAttribute("class");
+  // Drop React/test-only attrs
+  clone.querySelectorAll("[data-testid]").forEach((el) => el.removeAttribute("data-testid"));
+  // Recolor the dark-theme purple bars and the blue line stroke to use --accent
+  // so the export reflects the user's active theme.
+  clone.querySelectorAll('[fill="#a78bfa"]').forEach((el) => el.setAttribute("fill", accent));
+  clone.querySelectorAll('[fill="#60a5fa"]').forEach((el) => el.setAttribute("fill", accent));
+  clone.querySelectorAll('[stroke="#60a5fa"]').forEach((el) => el.setAttribute("stroke", accent));
+  // Axis labels were dim slate for dark UI — make them solid black on white
+  // for printability.
+  clone.querySelectorAll("text").forEach((el) => el.setAttribute("fill", "#000000"));
+  // Make the baseline crisper against white.
+  clone.querySelectorAll('line[stroke="rgba(148,163,184,0.25)"]').forEach((el) =>
+    el.setAttribute("stroke", "#94a3b8"),
+  );
+  // Inject a white background rect as the first child.
+  const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  bg.setAttribute("x", "0");
+  bg.setAttribute("y", "0");
+  bg.setAttribute("width", "100%");
+  bg.setAttribute("height", "100%");
+  bg.setAttribute("fill", "#ffffff");
+  clone.insertBefore(bg, clone.firstChild);
+  const inner = new XMLSerializer().serializeToString(clone);
+  return `<?xml version="1.0" encoding="UTF-8"?>\n${inner}`;
+}
+
+/**
+ * Bundle the three live chart SVGs into a single 1200×1800 vertical-stack
+ * document. Each panel is laid out with a header label and 540px of plot
+ * height, so consumers get one printable page rather than three files.
+ */
+function buildCombinedSvg(
+  bar: SVGSVGElement | null,
+  line: SVGSVGElement | null,
+  pie: SVGSVGElement | null,
+  accent: string,
+): string {
+  const W = 1200;
+  const H = 1800;
+  const PANEL_H = 540;
+  const HEAD_H = 60;
+  const GAP = 30;
+
+  // Reuse the single-chart sanitizer to get a clean inner SVG, then strip
+  // the outer <svg> wrapper so we can re-embed each as a <g>.
+  const innerBody = (svg: SVGSVGElement | null, label: string, idx: number): string => {
+    const y0 = idx * (PANEL_H + GAP) + 80;
+    const titleY = y0 + 10;
+    const plotY = y0 + HEAD_H;
+    const vbW = svg?.viewBox?.baseVal?.width || 320;
+    const vbH = svg?.viewBox?.baseVal?.height || 140;
+    const targetW = W - 80;
+    const targetH = PANEL_H - HEAD_H;
+    // Fit-inside scale so the chart fills the panel without distortion.
+    const scale = Math.min(targetW / vbW, targetH / vbH);
+    const drawW = vbW * scale;
+    const drawH = vbH * scale;
+    const offsetX = 40 + (targetW - drawW) / 2;
+    const offsetY = plotY + (targetH - drawH) / 2;
+    let body = "";
+    if (svg) {
+      const sanitized = chartToStandaloneSvg(svg, accent);
+      // Strip the XML prolog and the outer <svg ...> tags so the contents can
+      // be inlined as a <g>. Also drop the white-bg <rect> we just added —
+      // we'll paint the combined background ourselves.
+      const m = sanitized.match(/<svg[^>]*>([\s\S]*)<\/svg>/);
+      const guts = m ? m[1].replace(/<rect[^>]*fill="#ffffff"[^>]*\/>/, "") : "";
+      body = `<g transform="translate(${offsetX.toFixed(2)} ${offsetY.toFixed(2)}) scale(${scale.toFixed(4)})">${guts}</g>`;
+    } else {
+      body = `<text x="${W / 2}" y="${plotY + targetH / 2}" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="20" text-anchor="middle">No data</text>`;
+    }
+    return `
+      <text x="40" y="${titleY}" fill="#0f172a" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700">${label}</text>
+      ${body}
+    `;
+  };
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+  <rect width="${W}" height="${H}" fill="#ffffff"/>
+  <text x="40" y="50" fill="#0f172a" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="800">Cards &amp; Such — Stats</text>
+  <text x="${W - 40}" y="50" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="16" text-anchor="end">${new Date().toISOString().slice(0, 10)}</text>
+  <line x1="40" y1="64" x2="${W - 40}" y2="64" stroke="${accent}" stroke-width="2"/>
+  ${innerBody(line, "Activity", 0)}
+  ${innerBody(pie, "Time spent (top 5)", 1)}
+  ${innerBody(bar, "Top played", 2)}
+</svg>`;
 }
 
 function formatRelativeTime(ms: number): string {
@@ -266,6 +389,33 @@ export default function StatsPage(): JSX.Element {
   const [range, setRange] = useState<RangeOption>(14);
   const [search, setSearch] = useState<string>("");
   const [drillId, setDrillId] = useState<string | null>(null);
+
+  // Live refs to each chart's <svg> DOM node — used by the Export buttons to
+  // serialize whatever the user is currently looking at, including any
+  // category/range filter state, rather than re-deriving from props.
+  const barRef = useRef<SVGSVGElement | null>(null);
+  const lineRef = useRef<SVGSVGElement | null>(null);
+  const pieRef = useRef<SVGSVGElement | null>(null);
+
+  const exportChart = (which: "bar" | "line" | "pie"): void => {
+    const node = which === "bar" ? barRef.current : which === "line" ? lineRef.current : pieRef.current;
+    if (!node) return;
+    const svg = chartToStandaloneSvg(node, resolveAccent());
+    downloadSvg(svg, `cards-stats-${which}.svg`);
+  };
+
+  const exportAll = (): void => {
+    const svg = buildCombinedSvg(barRef.current, lineRef.current, pieRef.current, resolveAccent());
+    downloadSvg(svg, "cards-stats-all.svg");
+    // Stamp the export flag for the "Exporter" achievement (v44).
+    try {
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("cards-stats-exported", "true");
+      }
+    } catch {
+      /* ignore quota / private mode */
+    }
+  };
 
   const fav = favoriteCategory(stats);
 
@@ -372,7 +522,16 @@ export default function StatsPage(): JSX.Element {
 
   return (
     <div className="stats-page" data-testid="stats-page">
-      <h1>Your stats</h1>
+      <div className="stats-page-head">
+        <h1>Your stats</h1>
+        <button
+          type="button"
+          className="btn btn-ghost stats-export-all"
+          onClick={exportAll}
+          data-testid="stats-export-all"
+          title="Download all three charts as a single SVG"
+        >Export all charts</button>
+      </div>
 
       {/* Top control row: category chips */}
       <div className="stats-controls" data-testid="stats-controls">
@@ -393,7 +552,20 @@ export default function StatsPage(): JSX.Element {
       </div>
 
       <section className="stats-card-grid">
-        <div className="stats-card" data-testid="stats-activity">
+        <div className="stats-card stats-card--exportable" data-testid="stats-activity">
+          <button
+            type="button"
+            className="stats-export-btn"
+            onClick={() => exportChart("line")}
+            data-testid="stats-export-line"
+            title="Download activity chart as SVG"
+            aria-label="Download activity chart as SVG"
+          >
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+              <path d="M8 1.5v8.7m0 0L4.5 6.7M8 10.2l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2.5 11.5v1.7c0 .55.45 1 1 1h9a1 1 0 0 0 1-1v-1.7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
           <h2>Activity</h2>
           <div className="stats-summary">
             <div className="stat-card" data-testid="stat-total-played"><div className="stat-label">Games played</div><div className="stat-value">{category === "all" ? stats.totalPlayed : totalsForFilter.played}</div></div>
@@ -416,25 +588,51 @@ export default function StatsPage(): JSX.Element {
               ))}
             </div>
           </div>
-          <LineChart data={lineData} rangeLabel={`${range}d`} />
+          <LineChart data={lineData} rangeLabel={`${range}d`} svgRef={lineRef} />
         </div>
 
-        <div className="stats-card" data-testid="stats-records">
+        <div className="stats-card stats-card--exportable" data-testid="stats-records">
+          <button
+            type="button"
+            className="stats-export-btn"
+            onClick={() => exportChart("pie")}
+            data-testid="stats-export-pie"
+            title="Download time-spent pie chart as SVG"
+            aria-label="Download time-spent pie chart as SVG"
+          >
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+              <path d="M8 1.5v8.7m0 0L4.5 6.7M8 10.2l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2.5 11.5v1.7c0 .55.45 1 1 1h9a1 1 0 0 0 1-1v-1.7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
           <h2>Records</h2>
           <div className="stats-summary">
             <div className="stat-card" data-testid="stat-longest-streak"><div className="stat-label">Longest streak</div><div className="stat-value">{stats.longestStreak}</div></div>
             <div className="stat-card" data-testid="stat-favorite-category"><div className="stat-label">Favorite</div><div className="stat-value">{fav ?? "—"}</div></div>
           </div>
           <div className="stats-chart-label">Time spent (top 5 games)</div>
-          {topGamesPie.length === 0 ? <p className="stats-empty">No games played yet.</p> : <PieChart data={topGamesPie} />}
+          {topGamesPie.length === 0 ? <p className="stats-empty">No games played yet.</p> : <PieChart data={topGamesPie} svgRef={pieRef} />}
         </div>
 
-        <div className="stats-card" data-testid="stats-categories">
+        <div className="stats-card stats-card--exportable" data-testid="stats-categories">
+          <button
+            type="button"
+            className="stats-export-btn"
+            onClick={() => exportChart("bar")}
+            data-testid="stats-export-bar"
+            title="Download top-played bar chart as SVG"
+            aria-label="Download top-played bar chart as SVG"
+          >
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+              <path d="M8 1.5v8.7m0 0L4.5 6.7M8 10.2l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2.5 11.5v1.7c0 .55.45 1 1 1h9a1 1 0 0 0 1-1v-1.7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
           <h2>Top played</h2>
           <div className="stats-chart-label">Click a bar to see details</div>
           {categoryBarData.length === 0
             ? <p className="stats-empty">No games played yet.</p>
-            : <BarChart data={categoryBarData} onSelect={(id) => setDrillId((cur) => (cur === id ? null : id))} selectedId={drillId} />}
+            : <BarChart data={categoryBarData} onSelect={(id) => setDrillId((cur) => (cur === id ? null : id))} selectedId={drillId} svgRef={barRef} />}
 
           {drillInfo && (
             <div className="stats-drill-panel" data-testid="stats-drill-panel">

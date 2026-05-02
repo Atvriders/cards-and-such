@@ -381,6 +381,52 @@
   font-size: 0.85rem;
 }
 
+/* Export controls — top-of-page "Export all" sits in the title row, and a
+ * compact icon-button overlays the top-right of each chart card. The icon
+ * button is intentionally small so it doesn't compete with chart content;
+ * card hover lifts the contrast on the button border. */
+.stats-page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.stats-page-head h1 { margin: 0; }
+.stats-export-all {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.85rem;
+}
+.stats-card--exportable { position: relative; }
+.stats-export-btn {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(10, 12, 22, 0.7);
+  color: rgba(203, 213, 225, 0.85);
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+.stats-export-btn:hover {
+  color: #f1f5f9;
+  border-color: rgba(167, 139, 250, 0.6);
+  background: rgba(76, 29, 149, 0.35);
+  transform: translateY(-1px);
+}
+.stats-export-btn:focus-visible {
+  outline: none;
+  border-color: rgba(167, 139, 250, 0.7);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+}
+
 .stats-footer {
   display: flex;
   align-items: center;
