@@ -208,6 +208,15 @@ export default function SettingsPage(): JSX.Element {
   // to verify behaviour without running the app under devtools.
   const [eventLogOpen, setEventLogOpen] = useState(false);
   const [eventLog, setEventLog] = useState<AnalyticsEvent[]>([]);
+  // Hidden dev-tools panel — only mounted in development builds. Vite
+  // replaces `import.meta.env.DEV` with a literal at build time so the
+  // toggle (and the fault-injection button it gates) tree-shakes out of
+  // production bundles entirely.
+  const isDevBuild =
+    typeof import.meta !== "undefined" &&
+    (import.meta as ImportMeta & { env?: { DEV?: boolean } }).env?.DEV ===
+      true;
+  const [devToolsOpen, setDevToolsOpen] = useState(false);
   const refreshEventLog = () => {
     const all = getEvents();
     // Show only the last 50 — newest last is the natural tail order.
@@ -220,6 +229,24 @@ export default function SettingsPage(): JSX.Element {
   // Theme-styled confirm dialog — replaces native window.confirm() so
   // every destructive action gets the same keyboard-accessible UX.
   const { showConfirm, dialog: confirmDialog } = useStandaloneConfirm();
+
+  // Dev-only: arm the fault-injection flag and reload. After the reload,
+  // visiting /dev/error-test (which we navigate to here) will throw during
+  // render, exercising the per-page <ErrorBoundary>. The flag is consumed
+  // on read inside DevErrorTestPage so a Reload click on the boundary
+  // recovers cleanly.
+  function triggerErrorBoundaryTest() {
+    if (typeof window === "undefined") return;
+    type FlagWindow = Window & { __cardsForceError?: boolean };
+    (window as FlagWindow).__cardsForceError = true;
+    // Sending the user to the dev route ensures the throw happens even in
+    // builds where the lobby/ shell never reads the flag itself.
+    try {
+      window.location.assign("/dev/error-test");
+    } catch {
+      window.location.reload();
+    }
+  }
 
   function refreshFromStorage() {
     setTheme(loadSavedThemeChoice());
@@ -1076,6 +1103,53 @@ export default function SettingsPage(): JSX.Element {
             {eventLogOpen ? "Hide event log" : "Show event log"}
           </button>
         </div>
+
+        {/* Hidden dev tools — only mounted in dev builds. Provides a
+            fault-injection button for verifying the per-page
+            <ErrorBoundary> works in production-like conditions. The
+            toggle link is small + de-emphasized to match the analytics
+            link above. */}
+        {isDevBuild && (
+          <>
+            <div className="settings-row settings-mini-row">
+              <button
+                type="button"
+                className="settings-link settings-link--inline"
+                onClick={() => setDevToolsOpen((v) => !v)}
+                data-testid="dev-tools-toggle"
+                aria-expanded={devToolsOpen}
+              >
+                {devToolsOpen ? "Hide dev tools" : "Show dev tools"}
+              </button>
+            </div>
+            {devToolsOpen && (
+              <div
+                className="settings-event-log"
+                data-testid="dev-tools-panel"
+                aria-label="Developer tools"
+              >
+                <p className="settings-hint">
+                  Internal diagnostics. Only visible in development builds.
+                </p>
+                <div className="settings-row settings-mini-row">
+                  <button
+                    type="button"
+                    className="settings-mini-btn"
+                    onClick={triggerErrorBoundaryTest}
+                    data-testid="dev-trigger-error"
+                  >
+                    Trigger error boundary test
+                  </button>
+                  <span className="settings-meta">
+                    Sets <code>window.__cardsForceError</code> and navigates to{" "}
+                    <code>/dev/error-test</code>; the boundary should catch the
+                    throw.
+                  </span>
+                </div>
+              </div>
+            )}
+          </>
+        )}
 
         {eventLogOpen && (
           <div

@@ -21,8 +21,16 @@ import StatsPage from "./pages/StatsPage.js";
 import SearchPage from "./pages/SearchPage.js";
 import NotFoundPage from "./pages/NotFoundPage.js";
 import OfflinePage from "./pages/OfflinePage.js";
+import DevErrorTestPage from "./pages/DevErrorTestPage.js";
 import Connect4Online from "./games/connect-4/Connect4Online.js";
 import UnoLikeOnline from "./games/uno-like/UnoLikeOnline.js";
+
+// DEV-only fault-injection route. Vite replaces `import.meta.env.DEV` with a
+// literal `true` / `false` at build time so the production bundle tree-shakes
+// the page out entirely — there's nothing left to navigate to.
+const DEV_BUILD =
+  typeof import.meta !== "undefined" &&
+  (import.meta as ImportMeta & { env?: { DEV?: boolean } }).env?.DEV === true;
 
 export default function App(): JSX.Element {
   // Top-level boundary: a slightly more generic fallback for catastrophic
@@ -55,6 +63,9 @@ export default function App(): JSX.Element {
             <Route path="/stats" element={<StatsPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/offline" element={<OfflinePage />} />
+            {DEV_BUILD && (
+              <Route path="/dev/error-test" element={<DevErrorTestPage />} />
+            )}
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
