@@ -775,6 +775,28 @@
   .tile-chip-diff { display: none; }
 }
 
+/* Family-tile chip row: lays the inner TileMetaChips group plus the
+   trailing "+N variants" chip on a single line. Reuses .tile-chips
+   spacing so families and games stay visually aligned. */
+.tile-chips-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.tile-chips-row .tile-chips { margin-top: 0; }
+.tile-chip-variants {
+  /* Slightly purple-tinted to echo the family-tile palette. */
+  background: rgba(168, 139, 250, 0.12);
+  border-color: rgba(168, 139, 250, 0.35);
+  color: #ddd6fe;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Featured-card variant — slightly more elevated, gradient-tinted border. */
 .tile--featured {
   background: linear-gradient(160deg, rgba(99, 102, 241, 0.08) 0%, var(--surface-1) 100%);

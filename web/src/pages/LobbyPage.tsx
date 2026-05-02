@@ -1872,6 +1872,21 @@ function FamilyCard({
           : family.label}
       </div>
       <div className="tile-desc">{family.description}</div>
+      {/* Family chips reuse the first member's id as the meta basis —
+         variants in a family typically share playtime / difficulty
+         characteristics, so a single representative read is plenty.
+         The trailing "+N variants" chip surfaces the family size
+         inline (the upper-right badge stays for at-a-glance count). */}
+      {members[0] && (
+        <div className="tile-chips-row">
+          <TileMetaChips gameId={members[0].id} />
+          {memberCount > 1 && (
+            <span className="tile-chip tile-chip-variants" aria-label={`${memberCount - 1} more variants`}>
+              +{memberCount - 1} variant{memberCount - 1 === 1 ? "" : "s"}
+            </span>
+          )}
+        </div>
+      )}
       <div className="tile-foot">
         <span className="tile-players">Multiple variants</span>
         {userRating > 0 && (
@@ -1989,6 +2004,10 @@ function FeaturedTile({
           : g.title}
       </div>
         <div className="tile-desc">{g.description}</div>
+        {/* Family-anchor featured tile: the anchor game (`g`) is a
+           representative member, so its eta/difficulty stand in for
+           the family. Reuses TileMetaChips' existing test ids. */}
+        <TileMetaChips gameId={g.id} />
         <div className="tile-foot">
           <span className="tile-players">Multiple variants</span>
           <span className="tile-cta" aria-hidden="true">Pick</span>
@@ -2038,6 +2057,7 @@ function FeaturedTile({
           : g.title}
       </div>
       <div className="tile-desc">{g.description}</div>
+      <TileMetaChips gameId={g.id} />
       <div className="tile-foot">
         <span className="tile-players">
           {g.players.min === g.players.max ? `${g.players.min} player${g.players.min === 1 ? "" : "s"}` : `${g.players.min}–${g.players.max} players`}
