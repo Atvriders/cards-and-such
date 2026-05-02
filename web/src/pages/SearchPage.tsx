@@ -220,7 +220,7 @@ export default function SearchPage(): JSX.Element {
       ) : noResults ? (
         <div className="search-no-results" data-testid="search-no-results">
           <p>No results for <strong>{debounced}</strong>.</p>
-          <p>Try a shorter or simpler word — for example a game name, family, or category.</p>
+          <p>Try a shorter word — a game name, family, or category usually does it.</p>
         </div>
       ) : (
         <div className="search-results">

@@ -90,8 +90,8 @@ export default function DailyPage(): JSX.Element {
       />
 
       <header className="daily-banner" aria-label="Today's challenge">
-        <h1>Daily Challenge</h1>
-        <p className="daily-banner-sub">One curated game, same seed for everyone, fresh every day.</p>
+        <h1>Daily challenge</h1>
+        <p className="daily-banner-sub">One curated game, same seed for everyone — fresh every day.</p>
         <span className="daily-banner-date" data-testid="daily-date">{prettyDate(today)}</span>
       </header>
 

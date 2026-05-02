@@ -829,7 +829,7 @@ export default function LobbyPage(): JSX.Element {
           <span className="lobby-hero-title">Cards and Such</span>
         </h1>
         <p className="lobby-sub" data-testid="lobby-total-count">
-          <strong>{GAMES.length.toLocaleString()}</strong> games and growing — search, browse, deal yourself in.
+          <strong>{GAMES.length.toLocaleString()}</strong> games and counting — pick one and deal yourself in.
         </p>
         <div className="lobby-hero-stats" aria-label="Catalog breakdown">
           {CATEGORY_ORDER.map((cat) => (
@@ -870,7 +870,7 @@ export default function LobbyPage(): JSX.Element {
           <input
             type="search"
             className="lobby-search-input"
-            placeholder="Search 4,500+ games…"
+            placeholder={t("lobby.search.placeholder")}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             data-testid="lobby-search"
@@ -901,7 +901,7 @@ export default function LobbyPage(): JSX.Element {
             count={favSet.size}
             testId="chip-favorites"
             glyph="♥"
-          >Favorites</Chip>
+          >{t("lobby.chip.favorites")}</Chip>
           {CATEGORY_ORDER.map((cat) => (
             <Chip
               key={cat}
@@ -950,11 +950,11 @@ export default function LobbyPage(): JSX.Element {
         <div className="lobby-section-head">
           <h2>
             {filter === "all"
-              ? "All games"
+              ? t("lobby.all_games")
               : filter === "top-rated"
-                ? "Top Rated"
+                ? t("lobby.chip.top_rated")
                 : filter === "favorites"
-                  ? "Favorites"
+                  ? t("lobby.chip.favorites")
                   : CATEGORY_LABELS[filter]}
             {query && (
               <span className="lobby-section-count">
@@ -1003,13 +1003,13 @@ export default function LobbyPage(): JSX.Element {
             >
               <ConfusedCardSvg />
               <p>
-                No favorites yet. Tap the <span aria-hidden="true">♥</span> heart on any tile to save a game here for quick access.
+                {t("lobby.empty.favorites")} Tap the <span aria-hidden="true">♥</span> heart on any tile to save it here.
               </p>
               <button
                 type="button"
                 className="btn btn-ghost"
                 onClick={() => { setQuery(""); setFilter("all"); }}
-              >Browse all games</button>
+              >{t("lobby.browse_all")}</button>
             </div>
           ) : (
             <div className="lobby-no-results" data-testid="lobby-no-results">

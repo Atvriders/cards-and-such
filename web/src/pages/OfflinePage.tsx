@@ -90,8 +90,8 @@ export default function OfflinePage(): JSX.Element {
         <h2 className="offline-section-title">Recently opened</h2>
         {recents.length === 0 ? (
           <p className="offline-empty">
-            No recent games yet. Once you open a game, it&apos;ll show up here so
-            you can keep playing if your connection drops.
+            No recent games yet. Open one online and it&apos;ll show up here for
+            offline play.
           </p>
         ) : (
           <ul className="offline-recents">

@@ -114,7 +114,7 @@ export default function NotFoundPage(): JSX.Element {
         <h1 className="nf-title">We can&apos;t find that page</h1>
         <p className="nf-tag">
           The trail goes cold at <code className="nf-path">{location.pathname}</code>.
-          Maybe the deck got reshuffled.
+          Looks like the deck got reshuffled.
         </p>
       </header>
 

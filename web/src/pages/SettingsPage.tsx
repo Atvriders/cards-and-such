@@ -343,7 +343,7 @@ export default function SettingsPage(): JSX.Element {
       <header className="settings-header">
         <h1>{t("settings.title")}</h1>
         <p className="settings-subtitle">
-          Customize how the table looks and feels. Changes save automatically.
+          Tune the look, sound, and feel — changes save automatically.
           {" "}<Link to="/" className="settings-link">Back to lobby</Link>
         </p>
       </header>

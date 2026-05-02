@@ -375,7 +375,7 @@ export default function CategoryPage(): JSX.Element {
             ["all", "All", filterCounts.all, undefined],
             ["quick", "Quick", filterCounts.quick, "⚡"],
             ["challenging", "Challenging", filterCounts.challenging, "♛"],
-            ["top-rated", "Top Rated", filterCounts.topRated, "★"],
+            ["top-rated", "Top rated", filterCounts.topRated, "★"],
           ] as const).map(([key, lab, n, gly]) => (
             <button
               key={key}

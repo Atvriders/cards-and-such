@@ -67,12 +67,11 @@ export default function AboutPage(): JSX.Element {
       <section className="settings-section about-section">
         <h2>What is this?</h2>
         <p>
-          Cards &amp; Such is a single-page web app that bundles thousands of
-          classic and modern games into one fast, zero-friction lobby. Every
-          game is a self-contained plugin, so the catalog can keep growing
-          without any one game blocking the next. The whole project is open
-          source and self-hostable — you can run your own copy with two Docker
-          images.
+          A single-page web app that bundles thousands of classic and modern
+          games into one fast, zero-friction lobby. Every game is a
+          self-contained plugin, so the catalog keeps growing without one game
+          blocking the next. Open source and self-hostable — run your own copy
+          with two Docker images.
         </p>
       </section>
 

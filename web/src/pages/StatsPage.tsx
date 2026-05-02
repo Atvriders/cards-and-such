@@ -372,7 +372,7 @@ export default function StatsPage(): JSX.Element {
 
   return (
     <div className="stats-page" data-testid="stats-page">
-      <h1>Your Stats</h1>
+      <h1>Your stats</h1>
 
       {/* Top control row: category chips */}
       <div className="stats-controls" data-testid="stats-controls">
@@ -396,8 +396,8 @@ export default function StatsPage(): JSX.Element {
         <div className="stats-card" data-testid="stats-activity">
           <h2>Activity</h2>
           <div className="stats-summary">
-            <div className="stat-card" data-testid="stat-total-played"><div className="stat-label">Games Played</div><div className="stat-value">{category === "all" ? stats.totalPlayed : totalsForFilter.played}</div></div>
-            <div className="stat-card" data-testid="stat-total-wins"><div className="stat-label">Total Wins</div><div className="stat-value">{category === "all" ? stats.totalWins : totalsForFilter.wins}</div></div>
+            <div className="stat-card" data-testid="stat-total-played"><div className="stat-label">Games played</div><div className="stat-value">{category === "all" ? stats.totalPlayed : totalsForFilter.played}</div></div>
+            <div className="stat-card" data-testid="stat-total-wins"><div className="stat-label">Total wins</div><div className="stat-value">{category === "all" ? stats.totalWins : totalsForFilter.wins}</div></div>
           </div>
           <div className="stats-range-row">
             <div className="stats-chart-label">Last {range} days</div>
@@ -422,7 +422,7 @@ export default function StatsPage(): JSX.Element {
         <div className="stats-card" data-testid="stats-records">
           <h2>Records</h2>
           <div className="stats-summary">
-            <div className="stat-card" data-testid="stat-longest-streak"><div className="stat-label">Longest Streak</div><div className="stat-value">{stats.longestStreak}</div></div>
+            <div className="stat-card" data-testid="stat-longest-streak"><div className="stat-label">Longest streak</div><div className="stat-value">{stats.longestStreak}</div></div>
             <div className="stat-card" data-testid="stat-favorite-category"><div className="stat-label">Favorite</div><div className="stat-value">{fav ?? "—"}</div></div>
           </div>
           <div className="stats-chart-label">Time spent (top 5 games)</div>

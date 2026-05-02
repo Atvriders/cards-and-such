@@ -33,15 +33,23 @@ const EN: Registry = {
 
   // Lobby chips / category labels
   "lobby.chip.all": "All",
-  "lobby.chip.top_rated": "Top Rated",
+  "lobby.chip.top_rated": "Top rated",
+  "lobby.chip.favorites": "Favorites",
   "lobby.cat.solitaire": "Solitaire",
   "lobby.cat.cards": "Cards",
   "lobby.cat.dice": "Dice",
   "lobby.cat.board": "Board",
   "lobby.cat.arcade": "Arcade",
-  "lobby.empty.no_games": "No games installed yet.",
-  "lobby.empty.top_rated": "You haven't rated any games highly enough yet. Play a game and tap the stars at the end to fill this list.",
+  "lobby.empty.no_games": "No games installed yet — check back soon.",
+  "lobby.empty.top_rated": "No 4-star games yet. Finish a round and tap the stars to fill this list.",
+  "lobby.empty.favorites": "No favorites yet. Tap the heart on any tile to save it here.",
+  "lobby.empty.no_results": "No games match your search.",
   "lobby.clear_filters": "Clear filters",
+  "lobby.search.placeholder": "Search 4,500+ games…",
+  "lobby.surprise": "Surprise me",
+  "lobby.featured": "Featured",
+  "lobby.all_games": "All games",
+  "lobby.browse_all": "Browse all games",
 
   // PlayPage HUD / end screen
   "hud.score": "Score",
