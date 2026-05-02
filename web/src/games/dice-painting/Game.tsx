@@ -25,7 +25,7 @@ export function DicePaintingGame({ state, dispatch, onGameOver }: GameProps<Dice
           {state.rolls.map((r, i) => <div key={i} className="dpa-mini">{r}</div>)}
         </div>
       )}
-      <button className="dpa-btn" onClick={() => dispatch({ type:"roll" } as DicePaintingAction)}>Roll Die</button>
+      <button data-testid="hint-target-dice-painting-roll" className="dpa-btn" onClick={() => dispatch({ type:"roll" } as DicePaintingAction)}>Roll Die</button>
     </div>
   );
 }

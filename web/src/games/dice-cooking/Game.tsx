@@ -25,7 +25,7 @@ export function DiceCookingGame({ state, dispatch, onGameOver }: GameProps<DiceC
           {state.rolls.map((r, i) => <div key={i} className="dco-mini">{r}</div>)}
         </div>
       )}
-      <button className="dco-btn" onClick={() => dispatch({ type:"roll" } as DiceCookingAction)}>Roll Die</button>
+      <button data-testid="hint-target-dice-cooking-roll" className="dco-btn" onClick={() => dispatch({ type:"roll" } as DiceCookingAction)}>Roll Die</button>
     </div>
   );
 }

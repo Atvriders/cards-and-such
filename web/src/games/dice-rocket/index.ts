@@ -19,5 +19,7 @@ Strategy: there's no strategy — it's pure dice. But that's the fun. Press BOOS
 Liftoff!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceRocketSettings),
-  reducer, isTerminal, component: DiceRocketGame,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-rocket-roll"]', pulses: 3 }; },
+  component: DiceRocketGame,
 };

@@ -16,5 +16,7 @@ Press Roll Die for each dig. The probability of rolling a 6 is 1/6 (about 16.7%)
 There are no choices to make — just roll and hope for sixes. The high payoff per success makes this a thrilling game of variance: you might end with a windfall of artifacts or walk away empty-handed. Archeology isn't always rewarding — but when it is, it pays!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceArcheologySettings),
-  reducer,isTerminal,component:DiceArcheologyGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-archeology-roll"]', pulses: 3 }; },
+  component:DiceArcheologyGame,
 };

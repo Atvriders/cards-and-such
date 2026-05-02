@@ -30,7 +30,7 @@ export function DiceBazaarGame({ state, dispatch, onGameOver }: GameProps<DiceBa
             <div className="bz-price">{state.prices[g]}g</div>
             <div className="bz-stock">stock: {state.inventory[g]}</div>
             <div className="bz-actions">
-              <button className="bz-btn buy" disabled={state.gold < state.prices[g]} onClick={() => dispatch({ type: "buy", good: g } as DiceBazaarAction)}>Buy</button>
+              <button data-testid="hint-target-dice-bazaar-roll" className="bz-btn buy" disabled={state.gold < state.prices[g]} onClick={() => dispatch({ type: "buy", good: g } as DiceBazaarAction)}>Buy</button>
               <button className="bz-btn sell" disabled={state.inventory[g] <= 0} onClick={() => dispatch({ type: "sell", good: g } as DiceBazaarAction)}>Sell</button>
             </div>
           </div>

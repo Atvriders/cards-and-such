@@ -19,7 +19,7 @@ export function DicePyramidStack({ state, dispatch, onGameOver }: GameProps<Dice
             ))}
           </div>
           <div className="dg-result">Pyramid rows: {state.pyramid.length}</div>
-          <button className="dg-btn" onClick={() => dispatch({ type: "roll" })}>Roll Next</button>
+          <button data-testid="hint-target-dice-pyramid-stack-roll" className="dg-btn" onClick={() => dispatch({ type: "roll" })}>Roll Next</button>
         </>
       ) : (
         <div className="dg-done"><h2>Game Over!</h2><div className="dg-final">Final Score: {state.score}</div></div>

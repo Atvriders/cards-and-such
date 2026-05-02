@@ -16,5 +16,7 @@ Press Roll Die for each round. The expected average roll is 3.5, so over 10 roun
 There are no choices, just press Roll Die for each round and let the music play. After 10 rounds, your composition is complete and the final score is locked in. There's something pleasingly minimalist about this game — a small accumulation of pure dice luck. Compose your masterpiece!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceMusicMiniSettings),
-  reducer,isTerminal,component:DiceMusicMiniGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-music-mini-roll"]', pulses: 3 }; },
+  component:DiceMusicMiniGame,
 };

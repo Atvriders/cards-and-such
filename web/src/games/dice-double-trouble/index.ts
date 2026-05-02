@@ -29,5 +29,7 @@ Press Roll to roll. The result is shown with highlights for doubles. Press Next 
 Use Settings to choose 6, 8, or 10 rounds. Total score accumulates across all rounds. Can you chain two doubles in a row for the ultimate bonus?`,
   settings: diceDoubleTroubleSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceDoubleTroubleSettings),
-  reducer, isTerminal, component: DiceDoubleTrouble,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-double-trouble-roll"]', pulses: 3 }; },
+  component: DiceDoubleTrouble,
 };

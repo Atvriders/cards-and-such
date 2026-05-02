@@ -22,7 +22,7 @@ export function DiceCrapsMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
       </div>
       {state.phase === "betting" && (
         <div className="dm-row">
-          <button className="dm-btn" onClick={() => dispatch({ type:"bet", choice:"pass" } as DiceCrapsMiniAction)}>Pass</button>
+          <button data-testid="hint-target-dice-craps-mini-roll" className="dm-btn" onClick={() => dispatch({ type:"bet", choice:"pass" } as DiceCrapsMiniAction)}>Pass</button>
           <button className="dm-btn alt" onClick={() => dispatch({ type:"bet", choice:"dontpass" } as DiceCrapsMiniAction)}>Don't Pass</button>
         </div>
       )}

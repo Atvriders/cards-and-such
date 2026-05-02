@@ -12,7 +12,7 @@ export function DiceSnakeLadderGame({ state, dispatch, onGameOver }: GameProps<D
       <div className="dm-info">Position {state.pos} / {TARGET} — Rolls: {state.rolls}</div>
       <div className="dm-score">{state.score} pts (computed at end)</div>
       {state.lastRoll && <div className="dm-dice">Rolled {state.lastRoll}{state.lastEvent && ` — ${state.lastEvent}`}</div>}
-      <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceSnakeLadderAction)}>Roll</button>
+      <button data-testid="hint-target-dice-snake-ladder-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceSnakeLadderAction)}>Roll</button>
     </div>
   );
 }

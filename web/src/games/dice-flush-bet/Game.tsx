@@ -21,7 +21,7 @@ export function DiceFlushBetGame({ state, dispatch, onGameOver }: GameProps<Dice
       {state.phase === "betting" ? (
         <div className="dm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DiceFlushBetAction)}>Roll</button>
+          <button data-testid="hint-target-dice-flush-bet-roll" className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DiceFlushBetAction)}>Roll</button>
         </div>
       ) : (
         <>

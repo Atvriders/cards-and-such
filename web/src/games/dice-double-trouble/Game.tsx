@@ -36,7 +36,7 @@ export function DiceDoubleTrouble({ state, dispatch, onGameOver }: GameProps<Dic
           )}
           {state.isDoubleDouble && <p style={{ color: "#e74c3c", fontWeight: 900 }}>DOUBLE DOUBLE! +50 bonus!</p>}
           <p className="dice-msg" style={{ color: "#27ae60" }}>Round score: +{state.roundScore}</p>
-          <button className="dice-btn" onClick={() => dispatch({ type: "next" } as DiceDoubleTroubleAction)}>Next</button>
+          <button data-testid="hint-target-dice-double-trouble-roll" className="dice-btn" onClick={() => dispatch({ type: "next" } as DiceDoubleTroubleAction)}>Next</button>
         </>
       )}
       {!isResult && (

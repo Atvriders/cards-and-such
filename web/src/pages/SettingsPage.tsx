@@ -48,6 +48,7 @@ import { t } from "../platform/i18n.js";
 import { resetWelcomeTutorial, setCoachmarkPending } from "../platform/tutorials.js";
 import { track, getEvents, clearEvents, type AnalyticsEvent } from "../platform/analytics.js";
 import { useStandaloneConfirm } from "../platform/ConfirmDialog.js";
+import { highlightMatch } from "../platform/highlight.js";
 import "./SettingsPage.css";
 
 type CardBack =
@@ -280,6 +281,16 @@ export default function SettingsPage(): JSX.Element {
   // Theme-styled confirm dialog — replaces native window.confirm() so
   // every destructive action gets the same keyboard-accessible UX.
   const { showConfirm, dialog: confirmDialog } = useStandaloneConfirm();
+
+  // Search-bar filter: each .settings-field row checks `matchesQuery` on
+  // its label and renders `hidden` when there's no substring match. The
+  // visible label is wrapped via `labelNode(...)` so the matched span
+  // gets the same <mark> highlight used by SearchPage / LobbyPage.
+  const [searchQuery, setSearchQuery] = useState("");
+  const trimmedQuery = searchQuery.trim();
+  const matchesQuery = (label: string): boolean =>
+    !trimmedQuery || label.toLowerCase().includes(trimmedQuery.toLowerCase());
+  const labelNode = (label: string) => highlightMatch(label, trimmedQuery);
 
   // Dev-only: arm the fault-injection flag and reload. After the reload,
   // visiting /dev/error-test (which we navigate to here) will throw during
@@ -546,6 +557,17 @@ export default function SettingsPage(): JSX.Element {
           Tune the look, sound, and feel — changes save automatically.
           {" "}<Link to="/" className="settings-link">Back to lobby</Link>
         </p>
+        <div className="settings-search">
+          <input
+            type="search"
+            className="settings-search-input"
+            placeholder="Search settings…"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            data-testid="settings-search-input"
+            aria-label="Search settings"
+          />
+        </div>
       </header>
 
       {/* Appearance ------------------------------------------------------- */}
@@ -571,9 +593,9 @@ export default function SettingsPage(): JSX.Element {
           </button>
         </div>
 
-        <div className="settings-field">
+        <div className="settings-field" hidden={!matchesQuery("Background theme")}>
           <label className="settings-field-label">
-            Background theme
+            {labelNode("Background theme")}
             <button
               type="button"
               className="settings-link settings-link--inline"
@@ -655,9 +677,9 @@ export default function SettingsPage(): JSX.Element {
 
         <div className="settings-divider" role="presentation" />
 
-        <div className="settings-field settings-field--row">
+        <div className="settings-field settings-field--row" hidden={!matchesQuery("Light mode")}>
           <div>
-            <div className="settings-field-label">Light mode</div>
+            <div className="settings-field-label">{labelNode("Light mode")}</div>
             <p className="settings-hint">Flip the global palette to a light surface.</p>
           </div>
           <label className="settings-toggle">
@@ -676,8 +698,8 @@ export default function SettingsPage(): JSX.Element {
 
         <div className="settings-divider" role="presentation" />
 
-        <div className="settings-field">
-          <label className="settings-field-label">Card back</label>
+        <div className="settings-field" hidden={!matchesQuery("Card back")}>
+          <label className="settings-field-label">{labelNode("Card back")}</label>
           <div
             className="settings-row cardback-gallery"
             role="radiogroup"
@@ -733,8 +755,8 @@ export default function SettingsPage(): JSX.Element {
 
         <div className="settings-divider" role="presentation" />
 
-        <div className="settings-field">
-          <label className="settings-field-label">Card font</label>
+        <div className="settings-field" hidden={!matchesQuery("Card font")}>
+          <label className="settings-field-label">{labelNode("Card font")}</label>
           <div className="settings-row" role="radiogroup" aria-label="Card font">
             <button
               type="button"

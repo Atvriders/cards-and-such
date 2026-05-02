@@ -16,5 +16,7 @@ Statistically, both you and the CPU have identical odds, so wins/losses/ties sho
 Press Duel to roll both sets of dice, then Next to advance. The dice display shows your three vs the CPU's three, with the running sum and outcome reported. Roll well and crush the CPU!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceDuelSettings),
-  reducer,isTerminal,component:DiceDuelGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-duel-roll"]', pulses: 3 }; },
+  component:DiceDuelGame,
 };

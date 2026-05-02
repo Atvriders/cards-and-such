@@ -12,5 +12,7 @@ export const diceBullseyeRollPlugin: GamePlugin<DiceBullseyeRollState, DiceBulls
   howToPlay: `Dice Bullseye Roll challenges you to hit a random target number with two dice. Each round a target between 2 and 12 is set, then two dice are rolled automatically. Score points based on how close your roll is to the target: an exact match earns 20 points (bullseye!), one away earns 10, two away earns 5, and further away scores nothing. Click Next Roll to proceed to the following round and a new target. Play 5, 10, or 15 rounds. Tips: The most likely two-dice totals are 6, 7, and 8 — they appear most frequently. Targets of 2 or 12 are hardest to hit but score 20 when you do. Watch for streaks of luck when targets align with common totals.`,
   settings: diceBullseyeRollSettings,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
-  reducer, isTerminal, component: DiceBullseyeRoll,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-bullseye-roll-roll"]', pulses: 3 }; },
+  component: DiceBullseyeRoll,
 };

@@ -25,7 +25,7 @@ export function DicePhotographyGame({ state, dispatch, onGameOver }: GameProps<D
           {state.rolls.map((r, i) => <div key={i} className="dph-mini">{r}</div>)}
         </div>
       )}
-      <button className="dph-btn" onClick={() => dispatch({ type:"roll" } as DicePhotographyAction)}>Roll Die</button>
+      <button data-testid="hint-target-dice-photography-roll" className="dph-btn" onClick={() => dispatch({ type:"roll" } as DicePhotographyAction)}>Roll Die</button>
     </div>
   );
 }

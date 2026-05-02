@@ -31,7 +31,7 @@ export function DiceHarvestGame({ state, dispatch, onGameOver }: GameProps<DiceH
       </div>
       <div className="hv-log">{state.log || "Plant seeds (dice values become crops). Harvest multiplies by a yield die."}</div>
       {state.phase === "plant" && (
-        <button className="hv-btn plant" onClick={() => dispatch({ type: "plant" } as DiceHarvestAction)}>Plant Seeds</button>
+        <button data-testid="hint-target-dice-harvest-roll" className="hv-btn plant" onClick={() => dispatch({ type: "plant" } as DiceHarvestAction)}>Plant Seeds</button>
       )}
       {state.phase === "harvest" && (
         <button className="hv-btn harvest" onClick={() => dispatch({ type: "harvest" } as DiceHarvestAction)}>Harvest</button>

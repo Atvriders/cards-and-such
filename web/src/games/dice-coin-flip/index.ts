@@ -18,5 +18,7 @@ There's no skill — pure 50/50 luck per flip. Across 20 flips, average totals l
 Tap Next to advance. The game records every result as you go, so you can track your hot streaks and cold streaks. Trust your gut — or don't, since it makes no statistical difference!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceCoinFlipSettings),
-  reducer,isTerminal,component:DiceCoinFlipGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-coin-flip-roll"]', pulses: 3 }; },
+  component:DiceCoinFlipGame,
 };

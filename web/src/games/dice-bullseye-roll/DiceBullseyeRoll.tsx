@@ -23,7 +23,7 @@ export function DiceBullseyeRoll({ state, dispatch, onGameOver }: GameProps<Dice
             {state.dice.map((d, i) => <div key={i} className="dg-die disabled">{d}</div>)}
           </div>
           <div className="dg-result">Total: {state.total} | {hit ? "BULLSEYE! +20" : pts > 0 ? `Close! +${pts}` : "Miss +0"}</div>
-          <button className="dg-btn" onClick={() => dispatch({ type: "roll" })}>Next Roll</button>
+          <button data-testid="hint-target-dice-bullseye-roll-roll" className="dg-btn" onClick={() => dispatch({ type: "roll" })}>Next Roll</button>
         </>
       ) : (
         <div className="dg-done"><h2>Game Over!</h2><div className="dg-final">Final Score: {state.score}</div></div>

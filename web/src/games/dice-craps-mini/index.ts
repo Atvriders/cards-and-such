@@ -18,5 +18,7 @@ Win the round to score 10 points; lose or push to score 0. There are 12 rounds, 
 Statistically Pass wins about 49.3% of the time and Don't Pass wins about 47.9%, with the small remainder going to the rare push on 12. Either bet is roughly a coin flip — it's pure dice fortune.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceCrapsMiniSettings),
-  reducer,isTerminal,component:DiceCrapsMiniGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-craps-mini-roll"]', pulses: 3 }; },
+  component:DiceCrapsMiniGame,
 };

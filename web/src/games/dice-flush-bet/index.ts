@@ -16,5 +16,7 @@ Start with 100 coins. Choose 8 or 12 rounds in Settings.
 A flush has roughly 1-in-9 odds naturally, so bet conservatively and celebrate when it hits. Watch your coins carefully — each miss costs your stake. Your final coin total is your score. Can you ride the flushes to a big stack?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceFlushBetSettings),
-  reducer,isTerminal,component:DiceFlushBetGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-flush-bet-roll"]', pulses: 3 }; },
+  component:DiceFlushBetGame,
 };

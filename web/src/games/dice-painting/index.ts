@@ -16,5 +16,7 @@ Press Roll Die to paint each round. With even rolls comprising 50% of outcomes (
 There are no decisions or choices — just roll and watch the score climb. After 10 rounds, the painting is complete and your final canvas is revealed. Channel your inner Bob Ross — there are no mistakes, only happy accidents!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DicePaintingSettings),
-  reducer,isTerminal,component:DicePaintingGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-painting-roll"]', pulses: 3 }; },
+  component:DicePaintingGame,
 };

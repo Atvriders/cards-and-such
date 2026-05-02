@@ -28,7 +28,7 @@ export function DiceBaccaratGame({ state, dispatch, onGameOver }: GameProps<Dice
       )}
       {state.phase === "betting" && (
         <div className="dm-row">
-          {opts.map(o => <button key={o.id} className="dm-btn" onClick={() => dispatch({ type:"bet", choice: o.id } as DiceBaccaratAction)}>{o.label}</button>)}
+          {opts.map(o => <button data-testid="hint-target-dice-baccarat-roll" key={o.id} className="dm-btn" onClick={() => dispatch({ type:"bet", choice: o.id } as DiceBaccaratAction)}>{o.label}</button>)}
         </div>
       )}
       {state.phase === "result" && (

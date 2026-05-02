@@ -19,7 +19,7 @@ export function DiceRocketGame({ state, dispatch, onGameOver }: GameProps<DiceRo
         <div className="drkt-rocket" style={{ bottom: `calc(${pct}% - 12px)` }}>🚀</div>
       </div>
       {state.lastDie && <div className="drkt-die">{PIPS[state.lastDie - 1]}</div>}
-      <button className="drkt-btn" onClick={() => dispatch({ type:"boost" } as DiceRocketAction)}>BOOST</button>
+      <button data-testid="hint-target-dice-rocket-roll" className="drkt-btn" onClick={() => dispatch({ type:"boost" } as DiceRocketAction)}>BOOST</button>
     </div>
   );
 }

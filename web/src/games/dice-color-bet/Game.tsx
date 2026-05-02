@@ -19,7 +19,7 @@ export function DiceColorBet({ state, dispatch, onGameOver }: GameProps<DiceColo
       {state.phase==="betting" && <>
         <label className="dg-label">Bet: <input type="number" min={1} max={state.coins} value={bet} onChange={e=>setBet(Math.max(1,parseInt(e.target.value)||1))} style={{width:"60px",textAlign:"center"}}/></label>
         <div style={{display:"flex",gap:"12px"}}>
-          <button className="dg-btn red" onClick={()=>dispatch({type:"bet",amount:bet,color:"red"} as DiceColorBetAction)}>Red (Odd)</button>
+          <button data-testid="hint-target-dice-color-bet-roll" className="dg-btn red" onClick={()=>dispatch({type:"bet",amount:bet,color:"red"} as DiceColorBetAction)}>Red (Odd)</button>
           <button className="dg-btn" style={{background:"#2980b9"}} onClick={()=>dispatch({type:"bet",amount:bet,color:"blue"} as DiceColorBetAction)}>Blue (Even)</button>
         </div>
       </>}

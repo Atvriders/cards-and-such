@@ -16,5 +16,7 @@ If you bet Player or Banker correctly, you score 10 points. A correct Tie bet pa
 There are 10 rounds. Player and Banker each win roughly 44% of the time in this dice version, so picking either is roughly a coin flip and yields about 40 expected points across 10 rounds. Ties expectation is 30/8 = 3.75 per round = 37.5 total, only marginally lower. The result is a quick, breezy mini that captures the rhythm of baccarat without the cards.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceBaccaratSettings),
-  reducer,isTerminal,component:DiceBaccaratGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-baccarat-roll"]', pulses: 3 }; },
+  component:DiceBaccaratGame,
 };

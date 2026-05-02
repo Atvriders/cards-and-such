@@ -25,7 +25,7 @@ export function DiceArcheologyGame({ state, dispatch, onGameOver }: GameProps<Di
           {state.rolls.map((r, i) => <div key={i} className="dar-mini">{r}</div>)}
         </div>
       )}
-      <button className="dar-btn" onClick={() => dispatch({ type:"roll" } as DiceArcheologyAction)}>Roll Die</button>
+      <button data-testid="hint-target-dice-archeology-roll" className="dar-btn" onClick={() => dispatch({ type:"roll" } as DiceArcheologyAction)}>Roll Die</button>
     </div>
   );
 }

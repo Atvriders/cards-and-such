@@ -16,5 +16,7 @@ Press Roll Die to capture each photograph. The probability of rolling 3 or lower
 There are no decisions or strategy — just roll and let the dice frame your shot. After 10 rounds, the photo session ends and your portfolio is locked in. The minimalist scoring belies the satisfaction of a streak of good shots. Snap to it!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DicePhotographySettings),
-  reducer,isTerminal,component:DicePhotographyGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-photography-roll"]', pulses: 3 }; },
+  component:DicePhotographyGame,
 };

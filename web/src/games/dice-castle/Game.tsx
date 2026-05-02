@@ -45,7 +45,7 @@ export function DiceCastleGame({ state, dispatch, onGameOver }: GameProps<DiceCa
       )}
       <div className="dc-log">{state.log || "Roll three dice — 1-2 wood, 3-5 stone, 6 gold."}</div>
       {state.phase === "roll" && (
-        <button className="dc-btn" onClick={() => dispatch({ type: "roll" } as DiceCastleAction)}>Gather</button>
+        <button data-testid="hint-target-dice-castle-roll" className="dc-btn" onClick={() => dispatch({ type: "roll" } as DiceCastleAction)}>Gather</button>
       )}
       {state.phase === "build" && (
         <div className="dc-actions">

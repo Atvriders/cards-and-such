@@ -17,7 +17,7 @@ export function DiceLeapGame({ state, dispatch, onGameOver }: GameProps<DiceLeap
       <div className="dleap-info">Position: {state.position} / {TARGET}</div>
       <div className="dleap-track"><div className="dleap-fill" style={{ width: `${pct}%` }} /></div>
       {state.lastRoll !== null && <div className="dleap-die">{state.lastRoll}</div>}
-      <button className="dleap-btn" onClick={() => dispatch({ type: "roll" } as DiceLeapAction)}>Roll</button>
+      <button data-testid="hint-target-dice-leap-roll" className="dleap-btn" onClick={() => dispatch({ type: "roll" } as DiceLeapAction)}>Roll</button>
     </div>
   );
 }

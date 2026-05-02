@@ -18,7 +18,7 @@ export function DiceSequence3({ state, dispatch, onGameOver }: GameProps<DiceSeq
             {[...state.dice].sort((a,b)=>a-b).map((d, i) => <div key={i} className={`dg-die disabled${seq ? " selected" : ""}`}>{d}</div>)}
           </div>
           {state.lastResult && <div className="dg-result">{state.lastResult}</div>}
-          <button className="dg-btn" onClick={() => dispatch({ type: "roll" })}>Roll</button>
+          <button data-testid="hint-target-dice-sequence-3-roll" className="dg-btn" onClick={() => dispatch({ type: "roll" })}>Roll</button>
         </>
       ) : (
         <div className="dg-done"><h2>Game Over!</h2><div className="dg-final">Final Score: {state.score}</div></div>

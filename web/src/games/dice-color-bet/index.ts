@@ -18,5 +18,7 @@ Start with 100 coins. Choose a bet amount, pick Red or Blue, and the dice roll. 
 Settings allow 10 or 20 rounds. Keep your bets sensible and try to grow your starting stake of 100 coins by the end!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceColorBetSettings),
-  reducer, isTerminal, component: DiceColorBet,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-color-bet-roll"]', pulses: 3 }; },
+  component: DiceColorBet,
 };

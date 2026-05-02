@@ -18,5 +18,7 @@ Scoring: you earn (200 minus 5 times rolls used) points, plus a 100-point bonus 
 Press Roll, watch the bar fill, and pray you don't see too many 1s. Good luck!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceLeapSettings),
-  reducer, isTerminal, component: DiceLeapGame,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-leap-roll"]', pulses: 3 }; },
+  component: DiceLeapGame,
 };

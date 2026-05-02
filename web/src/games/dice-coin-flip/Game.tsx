@@ -14,7 +14,7 @@ export function DiceCoinFlipGame({ state, dispatch, onGameOver }: GameProps<Dice
       {state.lastDie && <div className="dm-dice">Die: {state.lastDie} ({state.lastHeads ? "Heads" : "Tails"}) — {state.lastWin ? "Win!" : "Lose"}</div>}
       {state.phase === "predict" && (
         <div className="dm-row">
-          <button className="dm-btn" onClick={() => dispatch({ type:"predict", choice:"heads" } as DiceCoinFlipAction)}>Heads (Even)</button>
+          <button data-testid="hint-target-dice-coin-flip-roll" className="dm-btn" onClick={() => dispatch({ type:"predict", choice:"heads" } as DiceCoinFlipAction)}>Heads (Even)</button>
           <button className="dm-btn alt" onClick={() => dispatch({ type:"predict", choice:"tails" } as DiceCoinFlipAction)}>Tails (Odd)</button>
         </div>
       )}

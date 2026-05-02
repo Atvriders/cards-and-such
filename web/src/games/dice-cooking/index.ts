@@ -16,5 +16,7 @@ Press Roll Die to cook each round. The probability of rolling 4+ on a fair die i
 There are no choices to make — just press Roll Die for each round and let the dice decide. After 10 rounds, the kitchen closes and you see your final culinary score. Cook up a high score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceCookingSettings),
-  reducer,isTerminal,component:DiceCookingGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-cooking-roll"]', pulses: 3 }; },
+  component:DiceCookingGame,
 };

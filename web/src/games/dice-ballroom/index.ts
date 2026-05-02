@@ -12,5 +12,7 @@ export const diceBallroomPlugin: GamePlugin<DiceBallroomState, DiceBallroomActio
   howToPlay:"Dice Ballroom is a tiny dance-floor mini. Each round, you pick a dance step: Waltz (3-step — sum 3, 6, or 9), Tango (passionate — sum 4 or 11), or Foxtrot (slow-quick-quick — sum 5, 7, or 10). The dice are rolled and the dance is judged.\n\nScoring: Waltz (about 28%) pays 18 points, Tango (about 14%) pays 35 points, Foxtrot (about 36%) pays 15 points. Wrong picks score zero. Ten rounds total.\n\nThe Tango pays the most but rolls infrequently — bet it sparingly. Waltz and Foxtrot are bread-and-butter bets. Mix and match like a skilled ballroom dancer; keep your timing right, and the trophy will be yours!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceBallroomSettings),
-  reducer,isTerminal,component:DiceBallroomGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-ballroom-roll"]', pulses: 3 }; },
+  component:DiceBallroomGame,
 };

@@ -22,5 +22,6 @@ Strategy: Use Defend when enemy dice outnumber yours. Save attack rolls for when
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: DiceDungeonState, action: DiceDungeonAction) => DiceDungeonState,
   isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-dungeon-roll"]', pulses: 3 }; },
   component: DiceDungeon,
 } as unknown as GamePlugin;

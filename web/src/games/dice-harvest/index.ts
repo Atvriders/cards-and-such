@@ -12,5 +12,7 @@ export const diceHarvestPlugin: GamePlugin<DiceHarvestState, DiceHarvestAction, 
   howToPlay:"Dice Harvest is a 10-round farming-themed dice mini. Each round you roll two dice to harvest a field. A sum of 9 or higher is a bumper crop and scores 10 points; sums of 8 or lower yield poor harvests for no points.\n\nThe probability of sum >= 9 with two dice is 10/36, about 27.8%. So expected scores are around 28 points across 10 rounds — the game leans hard, making big rolls feel meaningful.\n\nThere's no skill — just press Roll, see your dice, watch the harvest play out. The farming flavor (wheat, corn, barley) is purely cosmetic; mechanically it's a high-threshold dice mini. Most rounds will fail, so each successful harvest is a celebration. Lucky farmers can score 50+ points in a single game; average farmers should expect around 20-30. Either way, the wheat must flow!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceHarvestSettings),
-  reducer,isTerminal,component:DiceHarvestGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-harvest-roll"]', pulses: 3 }; },
+  component:DiceHarvestGame,
 };

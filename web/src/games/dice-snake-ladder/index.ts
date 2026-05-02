@@ -22,5 +22,7 @@ Speed-run skill matters less than ladder luck. A perfect 9-roll finish (using bo
 Press Roll to advance. There's no choice — purely a sprint to the goal.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceSnakeLadderSettings),
-  reducer,isTerminal,component:DiceSnakeLadderGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-snake-ladder-roll"]', pulses: 3 }; },
+  component:DiceSnakeLadderGame,
 };

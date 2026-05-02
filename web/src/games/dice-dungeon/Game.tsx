@@ -43,7 +43,7 @@ export function DiceDungeon({ state, dispatch, onGameOver }: GameProps<DiceDunge
 
       {state.phase === "roll" && (
         <div className="ddu-actions">
-          <button className="ddu-btn ddu-attack" onClick={() => d({ type: "rollAttack" })}>Roll Attack ({state.playerDice}d6)</button>
+          <button data-testid="hint-target-dice-dungeon-roll" className="ddu-btn ddu-attack" onClick={() => d({ type: "rollAttack" })}>Roll Attack ({state.playerDice}d6)</button>
           <button className="ddu-btn ddu-defend" onClick={() => d({ type: "rollDefend" })}>Roll Defend ({state.playerDice}d6)</button>
         </div>
       )}

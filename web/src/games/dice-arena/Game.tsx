@@ -49,7 +49,7 @@ export function DiceArenaGame({ state, dispatch, onGameOver }: GameProps<DiceAre
       )}
       <div className="ar-log">{state.log || "Roll 2d6 to attack. Doubles add +4 damage."}</div>
       {state.phase === "fight" && (
-        <button className="ar-btn" onClick={() => dispatch({ type: "fight" } as DiceArenaAction)}>Engage</button>
+        <button data-testid="hint-target-dice-arena-roll" className="ar-btn" onClick={() => dispatch({ type: "fight" } as DiceArenaAction)}>Engage</button>
       )}
       {state.phase === "result" && (
         <button className="ar-btn alt" onClick={() => dispatch({ type: "next" } as DiceArenaAction)}>{opp.hp === 0 ? "Next Foe" : "Continue"}</button>

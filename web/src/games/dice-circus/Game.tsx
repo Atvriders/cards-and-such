@@ -23,7 +23,7 @@ export function DiceCircusGame({ state, dispatch, onGameOver }: GameProps<DiceCi
       {state.phase === "predict" && (
         <div className="dm-row">
           {OPTIONS.map(o => (
-            <button key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceCircusAction)}>{o.label} (+{o.points})</button>
+            <button data-testid="hint-target-dice-circus-roll" key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceCircusAction)}>{o.label} (+{o.points})</button>
           ))}
         </div>
       )}

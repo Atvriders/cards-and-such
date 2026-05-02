@@ -25,7 +25,7 @@ export function DiceMusicMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
           {state.rolls.map((r, i) => <div key={i} className="dmm-mini">{r}</div>)}
         </div>
       )}
-      <button className="dmm-btn" onClick={() => dispatch({ type:"roll" } as DiceMusicMiniAction)}>Roll Die</button>
+      <button data-testid="hint-target-dice-music-mini-roll" className="dmm-btn" onClick={() => dispatch({ type:"roll" } as DiceMusicMiniAction)}>Roll Die</button>
     </div>
   );
 }

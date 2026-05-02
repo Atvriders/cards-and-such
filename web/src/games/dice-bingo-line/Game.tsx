@@ -15,7 +15,7 @@ export function DiceBingoLineGame({ state, dispatch, onGameOver }: GameProps<Dic
       <div className="dm-row">
         {state.line.map((filled,i)=>(<div key={i} className={`dm-cell ${filled?"filled":""}`}>{i+1}</div>))}
       </div>
-      <button className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceBingoLineAction)}>Roll</button>
+      <button data-testid="hint-target-dice-bingo-line-roll" className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceBingoLineAction)}>Roll</button>
     </div>
   );
 }

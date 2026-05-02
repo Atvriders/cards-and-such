@@ -27,7 +27,7 @@ export function DiceGalaxyGame({ state, dispatch, onGameOver }: GameProps<DiceGa
       <div className="ga-banner">Fuel {state.fuel} · Score {state.score}</div>
       <div className="ga-planets">
         {state.planets.map((p, i) => (
-          <button
+          <button data-testid="hint-target-dice-galaxy-roll"
             key={i}
             className={`ga-planet${p.visited ? " visited" : ""}${state.selected === i ? " selected" : ""}`}
             disabled={p.visited || state.phase !== "roll"}
