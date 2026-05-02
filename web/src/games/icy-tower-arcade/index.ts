@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IcyTowerArcadeState, IcyTowerArcadeAction, IcyTowerArcadeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const icyTowerArcadePlugin: GamePlugin<IcyTowerArcadeState, IcyTowerArcad
   howToPlay:"Icy Tower-Style Trivia is a ten-question quiz about Icy Tower (Free Lunch Design, 2001) and similar chain-jumping endless vertical jumpers. The protagonist (originally Harold the homeboy) starts climbing an icy tower of platforms, jumping floor-by-floor. Missing too long causes the bottom of the screen to catch up and end the game. Skipping multiple floors in a single jump triggers combo bonuses. Each question tests history and mechanics of Icy Tower. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown. Icy Tower's combo system birthed a whole platforming subgenre.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as IcyTowerArcadeSettings),
-  reducer,isTerminal,component:IcyTowerArcadeGame,
+  reducer,isTerminal,hint: (state: IcyTowerArcadeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-icy-tower-arcade-primary"]', pulses: 3 } : null,component:IcyTowerArcadeGame,
 };

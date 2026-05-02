@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PaperPlaneMiniState, PaperPlaneMiniAction, PaperPlaneMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const paperPlaneMiniPlugin: GamePlugin<PaperPlaneMiniState, PaperPlaneMin
   howToPlay:"Paper Plane Mini is a thirty-second reflex sprint where you tap paper planes drifting across six aerial lanes. Each successful tap scores ten points; missed planes age out and count against accuracy. The board ticks about once per second, with one or two fresh paper planes spawning per tick and each plane staying airborne for just a few ticks before drifting off the screen. The timer counts down from thirty seconds in the upper-right corner. With its warm parchment aesthetic and gentle drifting motion, Paper Plane Mini rewards both quick eyes and steady fingers. Average runs land near 220-300 points; plane-spotting paper aviators routinely score 380+. Empty-space taps are free of any penalty, so attack the screen with aggressive multi-taps when many planes appear at once. When the timer hits zero, the board freezes and your final score is locked in. Catch those planes!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PaperPlaneMiniSettings),
-  reducer,isTerminal,component:PaperPlaneMiniGame,
+  reducer,isTerminal,hint: (state: PaperPlaneMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-paper-plane-mini-primary"]', pulses: 3 } : null,component:PaperPlaneMiniGame,
 };

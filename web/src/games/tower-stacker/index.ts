@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TowerStackerState, TowerStackerAction, TowerStackerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const towerStackerPlugin: GamePlugin<TowerStackerState, TowerStackerActio
   howToPlay:"Tower Stacker Trivia is a ten-question quiz about endless tower-stacking arcade games — those where the player taps to drop a moving block onto the previous block, with any overhang trimmed off, and the goal is to stack as tall as possible without ever missing. Stack (Ketchapp), Tower Bloxx, and many similar mobile titles popularized the genre. As blocks shrink with each miss, precision becomes harder. Each question tests history, mechanics, and famous titles in the tower-stacker genre. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TowerStackerSettings),
-  reducer,isTerminal,component:TowerStackerGame,
+  reducer,isTerminal,hint: (state: TowerStackerState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-tower-stacker-primary"]', pulses: 3 } : null,component:TowerStackerGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DoodleJumpArcadeState, DoodleJumpArcadeAction, DoodleJumpArcadeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const doodleJumpArcadePlugin: GamePlugin<DoodleJumpArcadeState, DoodleJum
   howToPlay:"Doodle Jump-Style Trivia is a ten-question quiz about Doodle Jump and the wider genre of endless vertical jumper mobile games. The player auto-bounces upward on platforms, tilting or tapping to land on the next platform. Missing a platform causes a fall and game over. Score is based on height climbed. Doodle Jump (Lima Sky, 2009) was a smash hit that helped define the casual mobile genre. Examples include Mega Jump, Jetpack Jump, and many spinoffs. Each question tests history, mechanics, and famous titles in the vertical jumper genre. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DoodleJumpArcadeSettings),
-  reducer,isTerminal,component:DoodleJumpArcadeGame,
+  reducer,isTerminal,hint: (state: DoodleJumpArcadeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-doodle-jump-arcade-primary"]', pulses: 3 } : null,component:DoodleJumpArcadeGame,
 };

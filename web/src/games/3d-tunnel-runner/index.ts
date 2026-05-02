@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ThreedTunnelRunnerState, ThreedTunnelRunnerAction, ThreedTunnelRunnerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const threedTunnelRunnerPlugin: GamePlugin<ThreedTunnelRunnerState, Three
   howToPlay:"3D Tunnel Runner is an endless lane-runner. Use arrow keys, WASD, or on-screen buttons to switch between three lanes. Diamond pulses spawn from the right and approach you. One collision ends the run. Survive as long as you can — your score grows every tick.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ThreedTunnelRunnerSettings),
-  reducer,isTerminal,component:ThreedTunnelRunnerGame,
+  reducer,isTerminal,hint: (state: ThreedTunnelRunnerState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-3d-tunnel-runner-primary"]', pulses: 3 } : null,component:ThreedTunnelRunnerGame,
 };

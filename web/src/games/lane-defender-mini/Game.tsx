@@ -59,7 +59,7 @@ export function LaneDefenderMiniGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="lndfm-controls">
-        <button className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as LaneDefenderMiniAction)}>↑ Up</button>
+        <button data-testid="hint-target-lane-defender-mini-primary" className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as LaneDefenderMiniAction)}>↑ Up</button>
         <button className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as LaneDefenderMiniAction)}>↓ Down</button>
       </div>
       <div className="lndfm-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

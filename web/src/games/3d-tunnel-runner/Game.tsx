@@ -59,7 +59,7 @@ export function ThreedTunnelRunnerGame({ state, dispatch, onGameOver }: GameProp
         ))}
       </div>
       <div className="tdtnl-controls">
-        <button className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ThreedTunnelRunnerAction)}>↑ Up</button>
+        <button data-testid="hint-target-3d-tunnel-runner-primary" className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ThreedTunnelRunnerAction)}>↑ Up</button>
         <button className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ThreedTunnelRunnerAction)}>↓ Down</button>
       </div>
       <div className="tdtnl-hint">Use arrow keys / WASD — dodge the {OBSTACLE_ICON} pulses</div>

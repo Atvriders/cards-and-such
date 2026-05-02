@@ -59,7 +59,7 @@ export function SuperHexagonArcadeGame({ state, dispatch, onGameOver }: GameProp
         ))}
       </div>
       <div className="sphxgn-controls">
-        <button className="sphxgn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SuperHexagonArcadeAction)}>↑ Up</button>
+        <button data-testid="hint-target-super-hexagon-arcade-primary" className="sphxgn-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SuperHexagonArcadeAction)}>↑ Up</button>
         <button className="sphxgn-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SuperHexagonArcadeAction)}>↓ Down</button>
       </div>
       <div className="sphxgn-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

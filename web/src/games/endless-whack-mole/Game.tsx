@@ -59,7 +59,7 @@ export function EndlessWhackMoleGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="ewmole-controls">
-        <button className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessWhackMoleAction)}>↑ Up</button>
+        <button data-testid="hint-target-endless-whack-mole-primary" className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessWhackMoleAction)}>↑ Up</button>
         <button className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessWhackMoleAction)}>↓ Down</button>
       </div>
       <div className="ewmole-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

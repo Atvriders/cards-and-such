@@ -59,7 +59,7 @@ export function IcyTowerArcadeGame({ state, dispatch, onGameOver }: GameProps<Ic
         ))}
       </div>
       <div className="icytwr-controls">
-        <button className="icytwr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as IcyTowerArcadeAction)}>↑ Up</button>
+        <button data-testid="hint-target-icy-tower-arcade-primary" className="icytwr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as IcyTowerArcadeAction)}>↑ Up</button>
         <button className="icytwr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as IcyTowerArcadeAction)}>↓ Down</button>
       </div>
       <div className="icytwr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

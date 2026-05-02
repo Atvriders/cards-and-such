@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NinjaWallMiniState, NinjaWallMiniAction, NinjaWallMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const ninjaWallMiniPlugin: GamePlugin<NinjaWallMiniState, NinjaWallMiniAc
   howToPlay:"Ninja Wall Mini is a thirty-second reflex sprint where ninjas wall-jump between six vertical walls — your job is to tap each ninja before they vanish behind the wall. Each successful tap scores ten points; missed ninjas age out and count against your accuracy. The walls tick roughly once per second, with one or two fresh ninjas spawning per tick. Each ninja only clings to the wall for a few ticks before leaping out of view. The timer counts down from thirty seconds in the upper-right corner. With its bold red-on-red aesthetic, Ninja Wall Mini is pure reflex hunting — quick eyes, faster taps. Average runs net 220-300 points; shuriken-quick ninja-spotters routinely score 380+. Empty-space taps are free of any penalty, so aggressive multi-tap attacks are welcome when several ninjas appear at once. When the timer hits zero, the walls go still and your final score is locked in!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NinjaWallMiniSettings),
-  reducer,isTerminal,component:NinjaWallMiniGame,
+  reducer,isTerminal,hint: (state: NinjaWallMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-ninja-wall-mini-primary"]', pulses: 3 } : null,component:NinjaWallMiniGame,
 };

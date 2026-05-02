@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorBallDropState, ColorBallDropAction, ColorBallDropSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const colorBallDropPlugin: GamePlugin<ColorBallDropState, ColorBallDropAc
   howToPlay:"Color Ball Drop is a thirty-second reflex sprint where colored balls drop through six target rings — tap each ball before it exits the rings to score ten points. Missed balls age out and count against your accuracy. The drop tunnel ticks about once per second, spawning one or two fresh balls each tick. Each ball only stays in the rings for a few ticks before slipping past. The timer counts down from thirty seconds in the upper-right corner. With its bold green-on-green aesthetic, Color Ball Drop is pure reflex gameplay — quick eyes and quick fingers win the day. Average runs net 220-300 points; ball-tracking reflex masters score 380+ regularly. Empty-space taps are free of penalty, so attack the screen aggressively when multiple balls appear at once. When the timer hits zero, the tunnel goes still and your final score is locked in. Drop, tap, color the world!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ColorBallDropSettings),
-  reducer,isTerminal,component:ColorBallDropGame,
+  reducer,isTerminal,hint: (state: ColorBallDropState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-color-ball-drop-primary"]', pulses: 3 } : null,component:ColorBallDropGame,
 };

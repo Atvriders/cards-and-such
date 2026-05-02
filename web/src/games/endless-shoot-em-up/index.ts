@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EndlessShootEmUpState, EndlessShootEmUpAction, EndlessShootEmUpSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,10 @@ export const endlessShootEmUpPlugin: GamePlugin<EndlessShootEmUpState, EndlessSh
   howToPlay:"Endless Shoot-'Em-Up Trivia is a ten-question quiz about endless shoot-em-up arcade games — a genre where the player pilots a ship/character that auto-fires (or fires on tap) at endless waves of enemies. Examples include Geometry Wars, Vampire Survivors, and many bullet-hell endless modes. The player typically moves with one input and aims/fires with another (or a single dual-stick stick). Score scales with kills and survival time. Each question tests genre history, mechanics, and famous titles. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EndlessShootEmUpSettings),
-  reducer,isTerminal,component:EndlessShootEmUpGame,
+  reducer,isTerminal,hint: (state: EndlessShootEmUpState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-endless-shoot-em-up-primary"]', pulses: 3 } : null,
+    hint: (state: EndlessShootEmUpState) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-endless-shoot-em-up-action"]', pulses: 3 };
+    },
+  component:EndlessShootEmUpGame,
 };

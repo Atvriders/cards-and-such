@@ -59,7 +59,7 @@ export function ColorBallDropGame({ state, dispatch, onGameOver }: GameProps<Col
         ))}
       </div>
       <div className="clrbll-controls">
-        <button className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ColorBallDropAction)}>↑ Up</button>
+        <button data-testid="hint-target-color-ball-drop-primary" className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ColorBallDropAction)}>↑ Up</button>
         <button className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ColorBallDropAction)}>↓ Down</button>
       </div>
       <div className="clrbll-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

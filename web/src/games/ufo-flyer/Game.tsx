@@ -59,7 +59,7 @@ export function UfoFlyerGame({ state, dispatch, onGameOver }: GameProps<UfoFlyer
         ))}
       </div>
       <div className="uflyr-controls">
-        <button className="uflyr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as UfoFlyerAction)}>↑ Up</button>
+        <button data-testid="hint-target-ufo-flyer-primary" className="uflyr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as UfoFlyerAction)}>↑ Up</button>
         <button className="uflyr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as UfoFlyerAction)}>↓ Down</button>
       </div>
       <div className="uflyr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

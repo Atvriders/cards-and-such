@@ -59,7 +59,7 @@ export function NinjaWallMiniGame({ state, dispatch, onGameOver }: GameProps<Nin
         ))}
       </div>
       <div className="njwll-controls">
-        <button className="njwll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as NinjaWallMiniAction)}>↑ Up</button>
+        <button data-testid="hint-target-ninja-wall-mini-primary" className="njwll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as NinjaWallMiniAction)}>↑ Up</button>
         <button className="njwll-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as NinjaWallMiniAction)}>↓ Down</button>
       </div>
       <div className="njwll-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

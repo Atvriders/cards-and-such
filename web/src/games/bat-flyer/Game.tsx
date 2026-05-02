@@ -59,7 +59,7 @@ export function BatFlyerGame({ state, dispatch, onGameOver }: GameProps<BatFlyer
         ))}
       </div>
       <div className="btfly-controls">
-        <button className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as BatFlyerAction)}>↑ Up</button>
+        <button data-testid="hint-target-bat-flyer-primary" className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as BatFlyerAction)}>↑ Up</button>
         <button className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as BatFlyerAction)}>↓ Down</button>
       </div>
       <div className="btfly-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

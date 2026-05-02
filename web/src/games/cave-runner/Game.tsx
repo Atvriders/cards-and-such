@@ -59,7 +59,7 @@ export function CaveRunnerGame({ state, dispatch, onGameOver }: GameProps<CaveRu
         ))}
       </div>
       <div className="cvrnr-controls">
-        <button className="cvrnr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CaveRunnerAction)}>↑ Up</button>
+        <button data-testid="hint-target-cave-runner-primary" className="cvrnr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CaveRunnerAction)}>↑ Up</button>
         <button className="cvrnr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CaveRunnerAction)}>↓ Down</button>
       </div>
       <div className="cvrnr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

@@ -59,7 +59,7 @@ export function EndlessCatchGame({ state, dispatch, onGameOver }: GameProps<Endl
         ))}
       </div>
       <div className="encatch-controls">
-        <button className="encatch-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessCatchAction)}>↑ Up</button>
+        <button data-testid="hint-target-endless-catch-primary" className="encatch-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessCatchAction)}>↑ Up</button>
         <button className="encatch-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessCatchAction)}>↓ Down</button>
       </div>
       <div className="encatch-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

@@ -59,7 +59,7 @@ export function CircleRushGame({ state, dispatch, onGameOver }: GameProps<Circle
         ))}
       </div>
       <div className="crrsh-controls">
-        <button className="crrsh-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CircleRushAction)}>↑ Up</button>
+        <button data-testid="hint-target-circle-rush-primary" className="crrsh-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CircleRushAction)}>↑ Up</button>
         <button className="crrsh-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CircleRushAction)}>↓ Down</button>
       </div>
       <div className="crrsh-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

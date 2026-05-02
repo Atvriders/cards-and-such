@@ -59,7 +59,7 @@ export function OrbitArcadeGame({ state, dispatch, onGameOver }: GameProps<Orbit
         ))}
       </div>
       <div className="orbtr-controls">
-        <button className="orbtr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as OrbitArcadeAction)}>↑ Up</button>
+        <button data-testid="hint-target-orbit-arcade-primary" className="orbtr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as OrbitArcadeAction)}>↑ Up</button>
         <button className="orbtr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as OrbitArcadeAction)}>↓ Down</button>
       </div>
       <div className="orbtr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

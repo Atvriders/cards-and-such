@@ -59,7 +59,7 @@ export function SpikeDodgerGame({ state, dispatch, onGameOver }: GameProps<Spike
         ))}
       </div>
       <div className="spkdg-controls">
-        <button className="spkdg-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SpikeDodgerAction)}>↑ Up</button>
+        <button data-testid="hint-target-spike-dodger-primary" className="spkdg-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SpikeDodgerAction)}>↑ Up</button>
         <button className="spkdg-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SpikeDodgerAction)}>↓ Down</button>
       </div>
       <div className="spkdg-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

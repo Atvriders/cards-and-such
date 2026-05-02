@@ -59,7 +59,7 @@ export function CanabaltMiniGame({ state, dispatch, onGameOver }: GameProps<Cana
         ))}
       </div>
       <div className="cnblt-controls">
-        <button className="cnblt-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CanabaltMiniAction)}>↑ Up</button>
+        <button data-testid="hint-target-canabalt-mini-primary" className="cnblt-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as CanabaltMiniAction)}>↑ Up</button>
         <button className="cnblt-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as CanabaltMiniAction)}>↓ Down</button>
       </div>
       <div className="cnblt-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

@@ -59,7 +59,7 @@ export function SideScrollRunnerGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="ssrnr-controls">
-        <button className="ssrnr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SideScrollRunnerAction)}>↑ Up</button>
+        <button data-testid="hint-target-side-scroll-runner-primary" className="ssrnr-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as SideScrollRunnerAction)}>↑ Up</button>
         <button className="ssrnr-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as SideScrollRunnerAction)}>↓ Down</button>
       </div>
       <div className="ssrnr-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

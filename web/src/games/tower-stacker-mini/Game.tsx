@@ -59,7 +59,7 @@ export function TowerStackerMiniGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="twstkm-controls">
-        <button className="twstkm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerMiniAction)}>↑ Up</button>
+        <button data-testid="hint-target-tower-stacker-mini-primary" className="twstkm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerMiniAction)}>↑ Up</button>
         <button className="twstkm-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as TowerStackerMiniAction)}>↓ Down</button>
       </div>
       <div className="twstkm-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

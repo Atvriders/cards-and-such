@@ -59,7 +59,7 @@ export function HelicopterFlyerGame({ state, dispatch, onGameOver }: GameProps<H
         ))}
       </div>
       <div className="hlcpt-controls">
-        <button className="hlcpt-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as HelicopterFlyerAction)}>↑ Up</button>
+        <button data-testid="hint-target-helicopter-flyer-primary" className="hlcpt-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as HelicopterFlyerAction)}>↑ Up</button>
         <button className="hlcpt-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as HelicopterFlyerAction)}>↓ Down</button>
       </div>
       <div className="hlcpt-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

@@ -59,7 +59,7 @@ export function PaperPlaneMiniGame({ state, dispatch, onGameOver }: GameProps<Pa
         ))}
       </div>
       <div className="pprpln-controls">
-        <button className="pprpln-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as PaperPlaneMiniAction)}>↑ Up</button>
+        <button data-testid="hint-target-paper-plane-mini-primary" className="pprpln-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as PaperPlaneMiniAction)}>↑ Up</button>
         <button className="pprpln-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as PaperPlaneMiniAction)}>↓ Down</button>
       </div>
       <div className="pprpln-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

@@ -59,7 +59,7 @@ export function TowerStackerGame({ state, dispatch, onGameOver }: GameProps<Towe
         ))}
       </div>
       <div className="twstk-controls">
-        <button className="twstk-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerAction)}>↑ Up</button>
+        <button data-testid="hint-target-tower-stacker-primary" className="twstk-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as TowerStackerAction)}>↑ Up</button>
         <button className="twstk-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as TowerStackerAction)}>↓ Down</button>
       </div>
       <div className="twstk-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

@@ -59,7 +59,7 @@ export function DoodleJumpArcadeGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="ddljmp-controls">
-        <button className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction)}>↑ Up</button>
+        <button data-testid="hint-target-doodle-jump-arcade-primary" className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction)}>↑ Up</button>
         <button className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as DoodleJumpArcadeAction)}>↓ Down</button>
       </div>
       <div className="ddljmp-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
