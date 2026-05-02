@@ -12,5 +12,5 @@ export const cardCanyonPlugin: GamePlugin<CardCanyonState, CardCanyonAction, typ
   howToPlay:"Card Canyon is a 12-round mini where depth is measured by total pip value. Unlike Card Mountain (where lower sums win), in Card Canyon higher sums dig deeper into the canyon — and the deeper you go, the more points you score.\n\nEach round you draw 5 cards from a fresh deck. Your round score equals the pip sum directly, capped at 65 maximum. Aces count as 1 (shallow), face cards count as 11/12/13 (deep). A hand of 5 face-card values can hit the 65-point cap easily; a hand of low spots scores modestly.\n\nPress Deal 5 to descend each round, then Next to dig deeper. After 12 rounds your canyon depth is final. Average expected sum is about 35 per hand (~35 points), so typical runs land near 380-450 points. Hit big-card hands repeatedly to push past 600. The Canyon rewards bold, heavy draws.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardCanyonSettings),
-  reducer,isTerminal,component:CardCanyonGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-canyon-primary"]', pulses: 3 }), component:CardCanyonGame,
 };

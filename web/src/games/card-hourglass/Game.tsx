@@ -22,7 +22,7 @@ export function CardHourglassGame({ state, dispatch, onGameOver }: GameProps<Car
         ))}
       </div>
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardHourglassAction)}>Deal</button>
+        <button data-testid="hint-target-card-hourglass-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardHourglassAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

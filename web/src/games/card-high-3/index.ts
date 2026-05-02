@@ -33,5 +33,6 @@ Tips: The theoretical maximum is three Aces (sum = 33). A hand with two or more 
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-high-3-primary"]', pulses: 3 }),
   component: CardHigh3,
 };

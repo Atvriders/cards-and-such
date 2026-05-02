@@ -18,7 +18,7 @@ export function CardPileTossGame({ state, dispatch, onGameOver }: GameProps<Card
           <input type="range" className="cm-slider" min={0} max={100} value={state.power} onChange={e => dispatch({ type:"setPower", value:+e.target.value } as CardPileTossAction)} />
           <span>{state.power}</span>
         </div>
-        <button className="cm-btn" onClick={() => dispatch({ type:"toss" } as CardPileTossAction)}>Toss!</button>
+        <button data-testid="hint-target-card-pile-toss-primary" className="cm-btn" onClick={() => dispatch({ type:"toss" } as CardPileTossAction)}>Toss!</button>
       </>}
       {state.phase === "result" && <>
         <div className="cm-result">+{state.lastPts} pts</div>

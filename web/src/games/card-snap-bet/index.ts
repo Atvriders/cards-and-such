@@ -12,5 +12,5 @@ export const cardSnapBetPlugin: GamePlugin<CardSnapBetState, CardSnapBetAction, 
   howToPlay:`Card Snap Bet is a quick-fire higher-or-lower prediction card game. You start with 90 coins, see the top card, choose a wager, and snap a prediction: higher or lower. A correct call wins your bet; a wrong snap loses it; equal ranks push. Card ranks run 2 through Ace. Suits do not matter. Press Next after each reveal. Choose 8 or 12 rounds for a brisk session. Your final coin total is your score — how many coins can you snap up?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardSnapBetSettings),
-  reducer,isTerminal,component:CardSnapBetGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-snap-bet-primary"]', pulses: 3 }), component:CardSnapBetGame,
 };

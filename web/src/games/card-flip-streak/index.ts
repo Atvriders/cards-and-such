@@ -29,5 +29,6 @@ Tips: Roughly half the deck is red and half black, so your chance per flip is al
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-flip-streak-primary"]', pulses: 3 }),
   component: CardFlipStreak,
 };

@@ -18,5 +18,5 @@ There are no choices — just face the storm and accept the deal. Average hands 
 8 rounds, no skill, all chaos. Brace for the storm and hope for high cards!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardStormSettings),
-  reducer,isTerminal,component:CardStormGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-storm-primary"]', pulses: 3 }), component:CardStormGame,
 };

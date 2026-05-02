@@ -19,7 +19,7 @@ export function CardSnakeLineGame({ state, dispatch, onGameOver }: GameProps<Car
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSnakeLineAction)}>Draw</button>
+        <button data-testid="hint-target-card-snake-line-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSnakeLineAction)}>Draw</button>
       )}
       {state.phase === "result" && (
         <>

@@ -16,7 +16,7 @@ export function CardFanGame({ state, dispatch, onGameOver }: GameProps<CardFanSt
           <button key={i} disabled={state.phase!=="choose"} className={`cm-card ${isRed(c)?"red":"black"} pickable`} onClick={() => dispatch({ type:"pick", index:i } as CardFanAction)}>{cardName(c)}</button>
         ))}
       </div>
-      {state.phase === "result" && (<><div className="cm-result">{state.lastWin ? "Top pick! +30" : "Not the highest"}</div><button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardFanAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
+      {state.phase === "result" && (<><div className="cm-result">{state.lastWin ? "Top pick! +30" : "Not the highest"}</div><button data-testid="hint-target-card-fan-primary" className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardFanAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );
 }

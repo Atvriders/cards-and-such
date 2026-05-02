@@ -15,7 +15,7 @@ export function CardFlowerShopGame({ state, dispatch, onGameOver }: GameProps<Ca
       <div className="cm-info">Round {state.round + 1} / {TOTAL_ROUNDS}</div>
       <div className="cm-score">Kept: {state.decisions.length}</div>
       {state.phase === "deal" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardFlowerShopAction)}>Deal pair</button>
+        <button data-testid="hint-target-card-flower-shop-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardFlowerShopAction)}>Deal pair</button>
       )}
       {state.phase === "decide" && state.pair && (
         <>

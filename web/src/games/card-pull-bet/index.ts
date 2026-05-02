@@ -12,5 +12,5 @@ export const cardPullBetPlugin: GamePlugin<CardPullBetState, CardPullBetAction, 
   howToPlay:`Card Pull Bet is a higher-or-lower guessing game played against a shuffled deck. Each round you see the top card and predict whether the next card pulled will rank higher or lower. Bet any amount up to your current coins. Correct guesses win your bet; wrong guesses lose it. Tied ranks are a push. Start with 80 coins. Choose 8 or 12 rounds in Settings. Can you grow your stake through the full deck?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardPullBetSettings),
-  reducer,isTerminal,component:CardPullBetGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-pull-bet-primary"]', pulses: 3 }), component:CardPullBetGame,
 };

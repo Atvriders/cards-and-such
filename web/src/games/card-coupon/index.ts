@@ -18,5 +18,5 @@ There's no decision — just keep drawing. Across 10 draws, average totals fall 
 Press Draw to flip the next card. The deck is infinite (cards may repeat), so each draw is fully independent. Hunt those low ranks!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardCouponSettings),
-  reducer,isTerminal,component:CardCouponGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-coupon-primary"]', pulses: 3 }), component:CardCouponGame,
 };

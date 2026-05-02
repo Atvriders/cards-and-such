@@ -12,5 +12,5 @@ export const cardStackBet2Plugin: GamePlugin<CardStackBet2State, CardStackBet2Ac
   howToPlay:`Card Stack Bet 2 gives you 120 coins to wager on higher-or-lower predictions across a freshly shuffled deck. Each round you see the top card, choose a bet amount, and call higher or lower for the next card. Correct predictions win your bet; wrong ones lose it; equal ranks are a tie. Suits don't affect rank comparison. Choose 8 or 12 rounds in Settings. Use your larger starting stack to make bigger bets and aim for maximum coins at the end!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardStackBet2Settings),
-  reducer,isTerminal,component:CardStackBet2Game,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-stack-bet-2-primary"]', pulses: 3 }), component:CardStackBet2Game,
 };

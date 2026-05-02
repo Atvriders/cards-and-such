@@ -12,5 +12,5 @@ export const cardPileBet2Plugin: GamePlugin<CardPileBet2State, CardPileBet2Actio
   howToPlay:`Card Pile Bet 2 is a compact higher-or-lower card game. Starting with 60 coins, you bet on whether each new card drawn from the pile ranks higher or lower than the previous one. Card ranks go from 2 to Ace, with suits ignored. Win your bet for a correct call; lose it for a wrong guess; ties push. Choose 8 or 12 rounds. Your goal is to grow those 60 starting coins as far as possible before the rounds end.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardPileBet2Settings),
-  reducer,isTerminal,component:CardPileBet2Game,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-pile-bet-2-primary"]', pulses: 3 }), component:CardPileBet2Game,
 };

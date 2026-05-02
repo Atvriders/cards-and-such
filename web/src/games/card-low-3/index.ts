@@ -33,5 +33,6 @@ Tips: A maximum possible score requires three 2s (sum = 6). Getting below 10 con
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-low-3-primary"]', pulses: 3 }),
   component: CardLow3,
 };

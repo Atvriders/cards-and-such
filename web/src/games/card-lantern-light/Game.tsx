@@ -20,7 +20,7 @@ export function CardLanternLightGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardLanternLightAction)}>Light</button>
+        <button data-testid="hint-target-card-lantern-light-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardLanternLightAction)}>Light</button>
       )}
       {state.phase === "scored" && (
         <>

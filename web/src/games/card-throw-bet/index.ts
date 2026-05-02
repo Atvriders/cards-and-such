@@ -16,5 +16,5 @@ Win your bet amount if your color is correct; lose it if wrong. Red and black ar
 Start with 100 coins and play over 10 or 20 rounds. Careful bankroll management — don't go too big early — gives you the best chance of finishing with a healthy total!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardThrowBetSettings),
-  reducer, isTerminal, component: CardThrowBetGame,
+  reducer, isTerminal, hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-throw-bet-primary"]', pulses: 3 }), component: CardThrowBetGame,
 };

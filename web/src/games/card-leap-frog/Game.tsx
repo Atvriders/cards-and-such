@@ -19,7 +19,7 @@ export function CardLeapFrogGame({ state, dispatch, onGameOver }: GameProps<Card
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardLeapFrogAction)}>Draw</button>
+        <button data-testid="hint-target-card-leap-frog-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardLeapFrogAction)}>Draw</button>
       )}
       {state.phase === "result" && (
         <>

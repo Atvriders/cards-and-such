@@ -19,7 +19,7 @@ export function CardCastleBuildGame({ state, dispatch, onGameOver }: GameProps<C
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCastleBuildAction)}>Deal 5</button>
+        <button data-testid="hint-target-card-castle-build-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCastleBuildAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -19,7 +19,7 @@ export function CardIslandGame({ state, dispatch, onGameOver }: GameProps<CardIs
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardIslandAction)}>Deal 5</button>
+        <button data-testid="hint-target-card-island-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardIslandAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

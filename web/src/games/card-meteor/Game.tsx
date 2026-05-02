@@ -27,7 +27,7 @@ export function CardMeteorGame({ state, dispatch, onGameOver }: GameProps<CardMe
       {state.phase === "scored" && (
         <>
           <div className="cm-result">Picked: {cardName(state.picked!)} — {state.lastPts > 0 ? `+${state.lastPts}` : "0"}</div>
-          <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardMeteorAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-card-meteor-primary" className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardMeteorAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

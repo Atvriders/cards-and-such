@@ -22,7 +22,7 @@ export function CardMixmatchGame({ state, dispatch, onGameOver }: GameProps<Card
         ))}
       </div>
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardMixmatchAction)}>Deal</button>
+        <button data-testid="hint-target-card-mixmatch-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardMixmatchAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

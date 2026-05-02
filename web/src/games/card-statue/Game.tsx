@@ -20,7 +20,7 @@ export function CardStatueGame({ state, dispatch, onGameOver }: GameProps<CardSt
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardStatueAction)}>Pose</button>
+        <button data-testid="hint-target-card-statue-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardStatueAction)}>Pose</button>
       )}
       {state.phase === "scored" && (
         <>

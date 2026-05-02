@@ -19,7 +19,7 @@ export function CardRiverGame({ state, dispatch, onGameOver }: GameProps<CardRiv
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardRiverAction)}>Deal 5</button>
+        <button data-testid="hint-target-card-river-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardRiverAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

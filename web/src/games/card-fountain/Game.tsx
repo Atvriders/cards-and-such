@@ -20,7 +20,7 @@ export function CardFountainGame({ state, dispatch, onGameOver }: GameProps<Card
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardFountainAction)}>Splash</button>
+        <button data-testid="hint-target-card-fountain-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardFountainAction)}>Splash</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -13,7 +13,7 @@ export function CardQuadQuestGame({ state, dispatch, onGameOver }: GameProps<Car
       <div className="cm-score">{state.score} pts</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}
       {state.lastMatched && <div className="cm-result">Match!</div>}
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardQuadQuestAction)}>Draw</button>
+      <button data-testid="hint-target-card-quad-quest-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardQuadQuestAction)}>Draw</button>
     </div>
   );
 }

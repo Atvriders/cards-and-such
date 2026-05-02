@@ -19,7 +19,7 @@ export function CardSnapBetGame({ state, dispatch, onGameOver }: GameProps<CardS
       {state.phase === "betting" ? (
         <div className="cm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardSnapBetAction)}>Higher</button>
+          <button data-testid="hint-target-card-snap-bet-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardSnapBetAction)}>Higher</button>
           <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"lower" } as CardSnapBetAction)}>Lower</button>
         </div>
       ) : (

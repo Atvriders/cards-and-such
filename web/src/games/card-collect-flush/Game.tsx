@@ -12,7 +12,7 @@ export function CardCollectFlushGame({ state, dispatch, onGameOver }: GameProps<
       <div className="cm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="cm-score">{state.score} pts</div>
       {state.hand.length > 0 && <div className="cm-row">{state.hand.map((c,i) => <div key={i} className={`cm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>}
-      {state.phase === "playing" && <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCollectFlushAction)}>Deal 5</button>}
+      {state.phase === "playing" && <button data-testid="hint-target-card-collect-flush-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCollectFlushAction)}>Deal 5</button>}
       {state.phase === "scored" && (
         <>
           <div className="cm-result">Best suit: {bestSuitCount(state.hand)} of 5 — {state.lastPts > 0 ? `+${state.lastPts}` : "no points"}</div>

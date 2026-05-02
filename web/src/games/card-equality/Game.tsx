@@ -22,7 +22,7 @@ export function CardEqualityGame({ state, dispatch, onGameOver }: GameProps<Card
         ))}
       </div>
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardEqualityAction)}>Deal</button>
+        <button data-testid="hint-target-card-equality-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardEqualityAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

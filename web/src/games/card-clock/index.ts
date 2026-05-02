@@ -12,5 +12,5 @@ export const cardClockPlugin: GamePlugin<CardClockState, CardClockAction, typeof
   howToPlay:"Card Clock is a 12-round draw-and-match mini themed around a clock face. Each round corresponds to an hour of the clock (1 through 12). Draw a card; if its rank matches the current hour (Ace=1, 2=2, ..., 10=10, Jack=11, Queen=12), you score 60 points. Kings are 'wild' — they always miss in this build.\n\nThere are 12 hours/draws total. With one matching rank per hour out of 13 (≈ 7.7% chance), you'll average about 1 match per game (≈ 60 points). Lucky runs that land 2 or even 3 matches are big scores; a perfect 12-for-12 would score the impossible-feeling 720 points.\n\nPress Draw, see the card, see if it matches the hour, then press Next. There's no skill, just suspense and the small thrill of a clean clock-hour match. A perfect chime-and-watch mini.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardClockSettings),
-  reducer,isTerminal,component:CardClockGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-clock-primary"]', pulses: 3 }), component:CardClockGame,
 };

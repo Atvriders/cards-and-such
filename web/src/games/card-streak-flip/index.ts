@@ -12,5 +12,5 @@ export const cardStreakFlipPlugin: GamePlugin<CardStreakFlipState, CardStreakFli
   howToPlay:`Card Streak Flip rewards consistency. Each consecutive correct prediction increases your payout multiplier — 1x, 2x, 3x, up to 4x. One wrong guess resets your streak to zero. Start with 100 coins. Each round you see the top card, set a bet, and call higher or lower. A win extends your streak; a loss resets it. The longer your streak, the bigger the rewards! Choose 8 or 12 rounds in Settings.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardStreakFlipSettings),
-  reducer,isTerminal,component:CardStreakFlipGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-streak-flip-primary"]', pulses: 3 }), component:CardStreakFlipGame,
 };

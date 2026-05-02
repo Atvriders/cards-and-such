@@ -13,7 +13,7 @@ export function CardSpikeGame({ state, dispatch, onGameOver }: GameProps<CardSpi
       <div className="cm-score">{state.score} pts</div>
       <div className="cm-info">Target rank: <b>{rankName(state.targetRank)}</b></div>
       {state.card !== null && <div className={`cm-card ${isRed(state.card)?"red":"black"}`}>{cardName(state.card)}</div>}
-      {state.phase === "draw" && <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSpikeAction)}>Spike!</button>}
+      {state.phase === "draw" && <button data-testid="hint-target-card-spike-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSpikeAction)}>Spike!</button>}
       {state.phase === "result" && (<><div className="cm-result">{state.lastWin ? "Hit! +25" : "Miss"}</div><button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardSpikeAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );

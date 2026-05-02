@@ -15,7 +15,7 @@ export function CardStackFlipGame({ state, dispatch, onGameOver }: GameProps<Car
         {state.phase === "revealed" ? state.flipped.map((c,i) => <div key={i} className={`cm-card ${Math.floor(c/13)===1||Math.floor(c/13)===2?"red":""}`}>{["2","3","4","5","6","7","8","9","10","J","Q","K","A"][c%13]}{"♠♥♦♣"[Math.floor(c/13)]}</div>) : [0,1,2,3,4].map(i => <div key={i} className="cm-card">?</div>)}
       </div>
       {state.phase === "revealed" && <div className="cm-result">+{state.lastPts} pts</div>}
-      {state.phase === "waiting" && <button className="cm-btn" onClick={() => dispatch({ type:"flip" } as CardStackFlipAction)}>Flip 5</button>}
+      {state.phase === "waiting" && <button data-testid="hint-target-card-stack-flip-primary" className="cm-btn" onClick={() => dispatch({ type:"flip" } as CardStackFlipAction)}>Flip 5</button>}
       {state.phase === "revealed" && <button className="cm-btn" onClick={() => dispatch({ type:"next" } as CardStackFlipAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>}
     </div>
   );

@@ -19,7 +19,7 @@ export function CardOceanGame({ state, dispatch, onGameOver }: GameProps<CardOce
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardOceanAction)}>Draw</button>
+        <button data-testid="hint-target-card-ocean-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardOceanAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

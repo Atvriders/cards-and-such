@@ -19,7 +19,7 @@ export function CardPuzzleGame({ state, dispatch, onGameOver }: GameProps<CardPu
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardPuzzleAction)}>Draw</button>
+        <button data-testid="hint-target-card-puzzle-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardPuzzleAction)}>Draw</button>
       )}
       {state.phase === "result" && (
         <>

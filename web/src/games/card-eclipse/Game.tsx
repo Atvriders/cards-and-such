@@ -27,7 +27,7 @@ export function CardEclipseGame({ state, dispatch, onGameOver }: GameProps<CardE
       {state.phase === "scored" && (
         <>
           <div className="cm-result">Picked: {cardName(state.picked!)} — {state.lastPts > 0 ? `+${state.lastPts}` : "0"}</div>
-          <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardEclipseAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-card-eclipse-primary" className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardEclipseAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

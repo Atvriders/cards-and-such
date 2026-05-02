@@ -19,7 +19,7 @@ export function CardMountainGame({ state, dispatch, onGameOver }: GameProps<Card
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardMountainAction)}>Deal 5</button>
+        <button data-testid="hint-target-card-mountain-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardMountainAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

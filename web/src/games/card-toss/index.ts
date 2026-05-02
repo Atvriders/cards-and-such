@@ -18,5 +18,5 @@ The game tests both color recognition and quick rank reading. Aces and faces are
 A perfect run scores 300 points. Try to beat that on every play!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardTossSettings),
-  reducer,isTerminal,component:CardTossGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-toss-primary"]', pulses: 3 }), component:CardTossGame,
 };

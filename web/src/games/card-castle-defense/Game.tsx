@@ -19,7 +19,7 @@ export function CardCastleDefenseGame({ state, dispatch, onGameOver }: GameProps
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCastleDefenseAction)}>Draw</button>
+        <button data-testid="hint-target-card-castle-defense-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCastleDefenseAction)}>Draw</button>
       )}
       {state.phase === "result" && (
         <>

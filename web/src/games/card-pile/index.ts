@@ -18,5 +18,5 @@ There are 8 rounds, max 240 points. The challenge is balancing risk: drawing mor
 Build your pile carefully and find the sweet spot!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardPileSettings),
-  reducer,isTerminal,component:CardPileGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-pile-primary"]', pulses: 3 }), component:CardPileGame,
 };

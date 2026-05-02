@@ -16,5 +16,5 @@ Click the card you believe has the lowest rank (2 is lowest, Ace is highest). A 
 Over 10 or 20 rounds, consistently picking the lowest card will maximize your score. Watch for 2s, 3s, and 4s — they're your friends in this game!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardLowPickSettings),
-  reducer, isTerminal, component: CardLowPickGame,
+  reducer, isTerminal, hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-low-pick-primary"]', pulses: 3 }), component: CardLowPickGame,
 };

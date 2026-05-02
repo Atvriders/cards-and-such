@@ -18,7 +18,7 @@ export function CardClockGame({ state, dispatch, onGameOver }: GameProps<CardClo
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type: "draw" } as CardClockAction)}>Draw for hour {state.currentHour}</button>
+        <button data-testid="hint-target-card-clock-primary" className="cm-btn" onClick={() => dispatch({ type: "draw" } as CardClockAction)}>Draw for hour {state.currentHour}</button>
       )}
       {state.phase === "shown" && (
         <>

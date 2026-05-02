@@ -22,7 +22,7 @@ export function CardStairwayGame({ state, dispatch, onGameOver }: GameProps<Card
         ))}
       </div>
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardStairwayAction)}>Deal</button>
+        <button data-testid="hint-target-card-stairway-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardStairwayAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -15,7 +15,7 @@ export function CardJamGame({ state, dispatch, onGameOver }: GameProps<CardJamSt
       <div className="cm-score">{state.score} pts</div>
       <div className={`cm-card ${isRed(card)?"red":"black"}`}>{cardName(card)}</div>
       <div className="cm-row">
-        {JARS.map((j,i)=><button key={i} className="cm-btn" onClick={() => dispatch({ type:"jam", jar:i } as CardJamAction)}>Jar {j}</button>)}
+        {JARS.map((j,i)=><button data-testid="hint-target-card-jam-primary" key={i} className="cm-btn" onClick={() => dispatch({ type:"jam", jar:i } as CardJamAction)}>Jar {j}</button>)}
       </div>
     </div>
   );

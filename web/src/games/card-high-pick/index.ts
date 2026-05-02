@@ -16,5 +16,5 @@ Click the card you believe has the highest rank (Ace is highest, 2 is lowest). A
 Over 10 or 20 rounds, consistently picking the highest card will maximize your score. Look for Aces, Kings, and Queens — they're your best friends in this game!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardHighPickSettings),
-  reducer, isTerminal, component: CardHighPickGame,
+  reducer, isTerminal, hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-high-pick-primary"]', pulses: 3 }), component: CardHighPickGame,
 };

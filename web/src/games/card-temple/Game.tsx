@@ -19,7 +19,7 @@ export function CardTempleGame({ state, dispatch, onGameOver }: GameProps<CardTe
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTempleAction)}>Draw</button>
+        <button data-testid="hint-target-card-temple-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTempleAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

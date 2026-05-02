@@ -17,7 +17,7 @@ export function CardShoeStoreGame({ state, dispatch, onGameOver }: GameProps<Car
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardShoeStoreAction)}>Draw Card</button>
+        <button data-testid="hint-target-card-shoe-store-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardShoeStoreAction)}>Draw Card</button>
       )}
       {state.phase === "scored" && (
         <>

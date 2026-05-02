@@ -12,5 +12,5 @@ export const cardLighthousePlugin: GamePlugin<CardLighthouseState, CardLighthous
   howToPlay:"Card Lighthouse asks you to illuminate cards of the right color through twelve foggy nights. Each round, five cards drift through the lighthouse beam. The target suit lights up brightest: matching cards score (rank index + 5), so a 2 of target = 5, a King of target = 16, an Ace of target = 17.\n\nCards from any other suit are dim — they only score 3 each, regardless of rank.\n\nThe strategy: scan for the highest rank in the target suit. If no target-suit card is dealt that round, just take any card for the 3 consolation points.\n\nYou play 12 rounds. Each suit has 13 of 52 cards (25%), so you'll usually have at least one target-suit card. Expected scores typically land around 100-160, with strong runs (where high-rank target cards keep showing) pushing 180+.\n\nA simple navigation game — guide the ships home with your lantern!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardLighthouseSettings),
-  reducer,isTerminal,component:CardLighthouseGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-lighthouse-primary"]', pulses: 3 }), component:CardLighthouseGame,
 };

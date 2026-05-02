@@ -16,5 +16,5 @@ A perfect median pick earns 30 points. Being one rank away earns 24, two away ea
 This is harder than it sounds — you must quickly scan all five ranks and estimate which is most central. Over 10 or 20 rounds, consistent accuracy builds a high total score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardMidPickSettings),
-  reducer, isTerminal, component: CardMidPickGame,
+  reducer, isTerminal, hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-mid-pick-primary"]', pulses: 3 }), component: CardMidPickGame,
 };

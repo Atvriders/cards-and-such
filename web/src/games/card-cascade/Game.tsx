@@ -22,7 +22,7 @@ export function CardCascadeGame({ state, dispatch, onGameOver }: GameProps<CardC
           <div key={i} className={`cm-card small ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>
         ))}
       </div>
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCascadeAction)}>Draw</button>
+      <button data-testid="hint-target-card-cascade-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCascadeAction)}>Draw</button>
     </div>
   );
 }

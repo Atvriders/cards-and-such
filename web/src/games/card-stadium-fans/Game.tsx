@@ -17,7 +17,7 @@ export function CardStadiumFansGame({ state, dispatch, onGameOver }: GameProps<C
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardStadiumFansAction)}>Draw Card</button>
+        <button data-testid="hint-target-card-stadium-fans-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardStadiumFansAction)}>Draw Card</button>
       )}
       {state.phase === "scored" && (
         <>

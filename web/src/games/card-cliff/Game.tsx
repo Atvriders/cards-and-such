@@ -19,7 +19,7 @@ export function CardCliffGame({ state, dispatch, onGameOver }: GameProps<CardCli
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCliffAction)}>Draw</button>
+        <button data-testid="hint-target-card-cliff-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCliffAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

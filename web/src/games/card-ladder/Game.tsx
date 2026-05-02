@@ -19,7 +19,7 @@ export function CardLadderGame({ state, dispatch, onGameOver }: GameProps<CardLa
           <div className={`cm-card ${isRed(last) ? "red" : "black"}`}>{cardName(last)}</div>
         </div>
       )}
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardLadderAction)}>Draw</button>
+      <button data-testid="hint-target-card-ladder-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardLadderAction)}>Draw</button>
     </div>
   );
 }

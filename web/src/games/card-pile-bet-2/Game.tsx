@@ -19,7 +19,7 @@ export function CardPileBet2Game({ state, dispatch, onGameOver }: GameProps<Card
       {state.phase === "betting" ? (
         <div className="cm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardPileBet2Action)}>Higher</button>
+          <button data-testid="hint-target-card-pile-bet-2-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardPileBet2Action)}>Higher</button>
           <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"lower" } as CardPileBet2Action)}>Lower</button>
         </div>
       ) : (

@@ -19,7 +19,7 @@ export function CardStreakFlipGame({ state, dispatch, onGameOver }: GameProps<Ca
       {state.phase === "betting" ? (
         <div className="cm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardStreakFlipAction)}>Higher</button>
+          <button data-testid="hint-target-card-streak-flip-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardStreakFlipAction)}>Higher</button>
           <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"lower" } as CardStreakFlipAction)}>Lower</button>
         </div>
       ) : (

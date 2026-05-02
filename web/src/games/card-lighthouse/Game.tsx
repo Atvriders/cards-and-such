@@ -27,7 +27,7 @@ export function CardLighthouseGame({ state, dispatch, onGameOver }: GameProps<Ca
       {state.phase === "scored" && (
         <>
           <div className="cm-result">Picked: {cardName(state.picked!)} — {state.lastPts > 0 ? `+${state.lastPts}` : "0"}</div>
-          <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardLighthouseAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-card-lighthouse-primary" className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardLighthouseAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

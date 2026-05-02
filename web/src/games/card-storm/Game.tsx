@@ -14,7 +14,7 @@ export function CardStormGame({ state, dispatch, onGameOver }: GameProps<CardSto
       <div className="cm-row">
         {state.hand.map((c, i) => <div key={i} className={`cm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}
       </div>
-      {state.phase === "playing" && <button className="cm-btn" onClick={() => dispatch({ type:"lock" } as CardStormAction)}>Lock Hand</button>}
+      {state.phase === "playing" && <button data-testid="hint-target-card-storm-primary" className="cm-btn" onClick={() => dispatch({ type:"lock" } as CardStormAction)}>Lock Hand</button>}
       {state.phase === "scored" && (
         <>
           <div className="cm-result">+{state.lastPts}</div>

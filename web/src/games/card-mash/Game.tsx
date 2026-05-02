@@ -14,7 +14,7 @@ export function CardMashGame({ state, dispatch, onGameOver }: GameProps<CardMash
       <div className="cm-score">{state.score} pts</div>
       {state.phase === "scored" && <div className="cm-info">Target: <b>{SUITS[state.targetSuit]}</b></div>}
       {state.hand.length > 0 && (<div className="cm-row">{state.hand.map((c,i)=><div key={i} className={`cm-card ${isRed(c)?"red":"black"} ${suitOf(c)===state.targetSuit?"hl":""}`}>{cardName(c)}</div>)}</div>)}
-      {state.phase === "dealing" && <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardMashAction)}>Deal 5</button>}
+      {state.phase === "dealing" && <button data-testid="hint-target-card-mash-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardMashAction)}>Deal 5</button>}
       {state.phase === "scored" && (<><div className="cm-result">Matches: {state.matches} - +{state.lastPts}</div><button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardMashAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );

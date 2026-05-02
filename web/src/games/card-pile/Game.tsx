@@ -20,7 +20,7 @@ export function CardPileGame({ state, dispatch, onGameOver }: GameProps<CardPile
       </div>
       {state.phase === "drawing" && (
         <div className="cm-row">
-          <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardPileAction)}>Draw</button>
+          <button data-testid="hint-target-card-pile-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardPileAction)}>Draw</button>
           <button className="cm-btn alt" onClick={() => dispatch({ type:"stop" } as CardPileAction)} disabled={state.pile.length === 0}>Stop</button>
         </div>
       )}

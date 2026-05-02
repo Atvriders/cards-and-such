@@ -22,7 +22,7 @@ export function CardFlipStreak({ state, dispatch, onGameOver }: GameProps<CardFl
           {state.phase === "picking" && (
             <>
               <div className="cm-prompt">Flip for a Red card — build your streak!</div>
-              <button className="cm-btn" onClick={() => dispatch({ type: "flip" } as CardFlipStreakAction)}>Flip</button>
+              <button data-testid="hint-target-card-flip-streak-primary" className="cm-btn" onClick={() => dispatch({ type: "flip" } as CardFlipStreakAction)}>Flip</button>
             </>
           )}
           {state.phase === "revealed" && (

@@ -27,7 +27,7 @@ export function CardLow3({ state, dispatch, onGameOver }: GameProps<CardLow3Stat
               <div className={`cm-result ${(state.lastSum ?? 99) <= 15 ? "good" : "bad"}`}>
                 Sum: {state.lastSum} — {(state.lastSum ?? 99) <= 9 ? "+20!" : (state.lastSum ?? 99) <= 15 ? "+10" : (state.lastSum ?? 99) <= 21 ? "+5" : "No points"}
               </div>
-              <button className="cm-btn" onClick={() => dispatch({ type: "next" } as CardLow3Action)}>Next</button>
+              <button data-testid="hint-target-card-low-3-primary" className="cm-btn" onClick={() => dispatch({ type: "next" } as CardLow3Action)}>Next</button>
             </>
           ) : (
             <button className="cm-btn" onClick={() => dispatch({ type: "deal" } as CardLow3Action)}>Deal</button>

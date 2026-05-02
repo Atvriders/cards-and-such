@@ -14,7 +14,7 @@ export function CardTossGame({ state, dispatch, onGameOver }: GameProps<CardToss
       {state.current !== null && <div className={`cm-card ${isRed(state.current) ? "red" : "black"}`}>{cardName(state.current)}</div>}
       {state.lastResult && <div className="cm-result">{state.lastResult}</div>}
       <div className="cm-row">
-        <button className="cm-btn" onClick={() => dispatch({ type:"toss", pile:"red" } as CardTossAction)}>Red Pile</button>
+        <button data-testid="hint-target-card-toss-primary" className="cm-btn" onClick={() => dispatch({ type:"toss", pile:"red" } as CardTossAction)}>Red Pile</button>
         <button className="cm-btn" onClick={() => dispatch({ type:"toss", pile:"black" } as CardTossAction)}>Black Pile</button>
         <button className="cm-btn alt" onClick={() => dispatch({ type:"toss", pile:"special" } as CardTossAction)}>Face Pile (J/Q/K/A)</button>
       </div>

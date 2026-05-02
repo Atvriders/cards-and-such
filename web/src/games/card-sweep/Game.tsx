@@ -19,7 +19,7 @@ export function CardSweepGame({ state, dispatch, onGameOver }: GameProps<CardSwe
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSweepAction)}>Draw</button>
+        <button data-testid="hint-target-card-sweep-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSweepAction)}>Draw</button>
       )}
       {state.phase === "result" && (
         <>

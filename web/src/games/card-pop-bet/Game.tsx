@@ -15,7 +15,7 @@ export function CardPopBetGame({ state, dispatch, onGameOver }: GameProps<CardPo
         {[5,10,20].map(a => <button key={`hi${a}`} className="cm-bet-btn hi" onClick={() => dispatch({ type:"bet", amount:a, side:"hi" } as CardPopBetAction)}>Hi +{a}</button>)}
         {[5,10,20].map(a => <button key={`lo${a}`} className="cm-bet-btn lo" onClick={() => dispatch({ type:"bet", amount:a, side:"lo" } as CardPopBetAction)}>Lo +{a}</button>)}
       </div></>}
-      {state.phase === "result" && state.card !== null && <><div className="cm-result">{state.lastWin ? "Win!" : "Lose!"} Card: rank {state.card % 13 + 2}</div><button className="cm-btn" onClick={() => dispatch({ type:"next" } as CardPopBetAction)}>Next</button></>}
+      {state.phase === "result" && state.card !== null && <><div className="cm-result">{state.lastWin ? "Win!" : "Lose!"} Card: rank {state.card % 13 + 2}</div><button data-testid="hint-target-card-pop-bet-primary" className="cm-btn" onClick={() => dispatch({ type:"next" } as CardPopBetAction)}>Next</button></>}
     </div>
   );
 }

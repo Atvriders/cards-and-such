@@ -13,7 +13,7 @@ export function CardCouponGame({ state, dispatch, onGameOver }: GameProps<CardCo
       <div className="cm-score">{state.score} pts</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}
       {state.lastCard !== null && <div className="cm-result">Coupon value: {state.lastValue} — earned {Math.max(0, 12 - state.lastValue)} pts</div>}
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCouponAction)}>Draw</button>
+      <button data-testid="hint-target-card-coupon-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCouponAction)}>Draw</button>
     </div>
   );
 }

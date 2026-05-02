@@ -19,7 +19,7 @@ export function CardStackBet2Game({ state, dispatch, onGameOver }: GameProps<Car
       {state.phase === "betting" ? (
         <div className="cm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardStackBet2Action)}>Higher</button>
+          <button data-testid="hint-target-card-stack-bet-2-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardStackBet2Action)}>Higher</button>
           <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"lower" } as CardStackBet2Action)}>Lower</button>
         </div>
       ) : (

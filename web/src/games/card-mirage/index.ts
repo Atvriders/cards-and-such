@@ -12,5 +12,5 @@ export const cardMiragePlugin: GamePlugin<CardMirageState, CardMirageAction, typ
   howToPlay:"Card Mirage tests your ability to tell real cards from desert illusions. Each round, five cards appear in the heat shimmer. Cards with rank 2, 3, or 4 are mirages — pick one and you score zero. Anything 5 or higher is real, and scores (rank value × 2): so a 5 = 14, a 10 = 24, Jack = 26, Ace = 28.\n\nThe strategy: scan the cards, eliminate the low-rank mirages (2/3/4), and pick the highest real card available. Roughly 3/13 of cards are mirages, so you'll usually have several real options.\n\nYou play 8 rounds. If you always pick the highest real card from each hand, expected scores land around 160-200. Top players who consistently spot Aces and Kings can push 220+. Maximum theoretical: 224 (8 × 28).\n\nKeep your wits about you — the desert plays tricks, but the real cards reward sharp eyes.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardMirageSettings),
-  reducer,isTerminal,component:CardMirageGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-mirage-primary"]', pulses: 3 }), component:CardMirageGame,
 };

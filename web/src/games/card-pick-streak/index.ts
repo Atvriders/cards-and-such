@@ -29,5 +29,6 @@ Tips: Since the cards are not visible before you pick, the choice involves genui
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-pick-streak-primary"]', pulses: 3 }),
   component: CardPickStreak,
 };

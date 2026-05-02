@@ -19,7 +19,7 @@ export function CardGlacierGame({ state, dispatch, onGameOver }: GameProps<CardG
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardGlacierAction)}>Draw</button>
+        <button data-testid="hint-target-card-glacier-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardGlacierAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

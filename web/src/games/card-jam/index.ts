@@ -12,5 +12,5 @@ export const cardJamPlugin: GamePlugin<CardJamState, CardJamAction, typeof setti
   howToPlay:"Card Jam pours 16 random cards through your hands one at a time. Four jam jars sit at the bottom, one for each suit. Tap the matching jar to score 12 points; tap the wrong jar and earn nothing. There is no penalty for mismatches besides the missed points.\n\nThe card on display shows its suit clearly via symbol and color (red for hearts and diamonds, black for spades and clubs). Just match it to the correct jar and the next card flips up automatically. The 16-card deal continues until every card has been jammed, then your final score is locked in.\n\nMaximum possible score is 192 (16 times 12). Pay attention: under speed pressure it is easy to mistap a red jar for the wrong red suit. Card Jam is a quick reflex-and-recognition game; finishing with 150 or more means your suit recognition is razor sharp.\n\nSort fast, sort right, and keep that jam flowing!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardJamSettings),
-  reducer,isTerminal,component:CardJamGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-jam-primary"]', pulses: 3 }), component:CardJamGame,
 };

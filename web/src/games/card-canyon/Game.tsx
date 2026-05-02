@@ -19,7 +19,7 @@ export function CardCanyonGame({ state, dispatch, onGameOver }: GameProps<CardCa
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCanyonAction)}>Deal 5</button>
+        <button data-testid="hint-target-card-canyon-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCanyonAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -19,7 +19,7 @@ export function CardPullBetGame({ state, dispatch, onGameOver }: GameProps<CardP
       {state.phase === "betting" ? (
         <div className="cm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardPullBetAction)}>Higher</button>
+          <button data-testid="hint-target-card-pull-bet-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"higher" } as CardPullBetAction)}>Higher</button>
           <button className="cm-btn" onClick={() => dispatch({ type:"bet", amount:bid, dir:"lower" } as CardPullBetAction)}>Lower</button>
         </div>
       ) : (

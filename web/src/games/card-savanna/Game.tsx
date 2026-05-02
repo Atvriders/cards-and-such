@@ -19,7 +19,7 @@ export function CardSavannaGame({ state, dispatch, onGameOver }: GameProps<CardS
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSavannaAction)}>Draw</button>
+        <button data-testid="hint-target-card-savanna-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSavannaAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

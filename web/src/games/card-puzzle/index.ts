@@ -12,5 +12,5 @@ export const cardPuzzlePlugin: GamePlugin<CardPuzzleState, CardPuzzleAction, typ
   howToPlay:"Card Puzzle is a tiny single-card mini. You get 8 rounds. Each round, draw a card from the deck. Red cards (hearts and diamonds) successfully fit the puzzle slot and earn 10 points; black cards (spades and clubs) don't fit and earn nothing.\n\nThe probability of red is exactly 50% — 26 of 52 cards are red — so this is a pure coin flip with a friendlier interface. Across 8 rounds, expect about 40 points on average, with hot streaks reaching 60-70.\n\nThe mini name is intentionally puzzle-themed: think of each card as a piece that either slots in (red, fits the gap) or doesn't (black, wrong shape). There's no real choice within the round — just draw, look, advance. Quick, casual, no thinking required. Perfect for a one-minute distraction!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardPuzzleSettings),
-  reducer,isTerminal,component:CardPuzzleGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-puzzle-primary"]', pulses: 3 }), component:CardPuzzleGame,
 };

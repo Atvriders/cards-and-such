@@ -35,7 +35,7 @@ export function CardPickStreak({ state, dispatch, onGameOver }: GameProps<CardPi
             </button>
           </div>
           {state.phase === "revealed" && (
-            <button className="cm-btn" onClick={() => dispatch({ type: "next" } as CardPickStreakAction)}>Next</button>
+            <button data-testid="hint-target-card-pick-streak-primary" className="cm-btn" onClick={() => dispatch({ type: "next" } as CardPickStreakAction)}>Next</button>
           )}
         </>
       ) : (

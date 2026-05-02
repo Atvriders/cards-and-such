@@ -25,7 +25,7 @@ export function BlackWidowSpiderGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BlackWidowSpiderAction)}>Keep & Score</button>
+        <button data-testid="hint-target-black-widow-spider-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as BlackWidowSpiderAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as BlackWidowSpiderAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

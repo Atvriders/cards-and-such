@@ -21,7 +21,7 @@ export function CardHighPickGame({ state, dispatch, onGameOver }: GameProps<Card
       </div>
       {state.phase === "result" && <>
         <div className="cm-result">+{state.lastPts} pts</div>
-        <button className="cm-btn" onClick={() => dispatch({ type:"next" } as CardHighPickAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
+        <button data-testid="hint-target-card-high-pick-primary" className="cm-btn" onClick={() => dispatch({ type:"next" } as CardHighPickAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

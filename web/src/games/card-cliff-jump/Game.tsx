@@ -19,7 +19,7 @@ export function CardCliffJumpGame({ state, dispatch, onGameOver }: GameProps<Car
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCliffJumpAction)}>Draw</button>
+        <button data-testid="hint-target-card-cliff-jump-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardCliffJumpAction)}>Draw</button>
       )}
       {state.phase === "result" && (
         <>

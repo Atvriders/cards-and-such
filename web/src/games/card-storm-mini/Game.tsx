@@ -19,7 +19,7 @@ export function CardStormMiniGame({ state, dispatch, onGameOver }: GameProps<Car
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardStormMiniAction)}>Deal 5</button>
+        <button data-testid="hint-target-card-storm-mini-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardStormMiniAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

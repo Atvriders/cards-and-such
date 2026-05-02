@@ -12,5 +12,5 @@ export const cardDeckBetPlugin: GamePlugin<CardDeckBetState, CardDeckBetAction, 
   howToPlay:`Card Deck Bet is a simple higher-or-lower prediction game. A full deck is shuffled and dealt one card at a time. You see the top card, set your bet, and predict whether the next card will be higher or lower in rank. A correct prediction wins your bet; a wrong guess loses it. Ties return no coins. Ranks run from 2 (lowest) to Ace (highest). Start with 75 coins and choose 8 or 12 rounds. Your final coin total is your score.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardDeckBetSettings),
-  reducer,isTerminal,component:CardDeckBetGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-deck-bet-primary"]', pulses: 3 }), component:CardDeckBetGame,
 };

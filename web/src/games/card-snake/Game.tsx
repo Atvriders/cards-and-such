@@ -19,7 +19,7 @@ export function CardSnakeGame({ state, dispatch, onGameOver }: GameProps<CardSna
           <div className={`cm-card ${isRed(last) ? "red" : "black"}`}>{cardName(last)}</div>
         </div>
       )}
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSnakeAction)}>Draw</button>
+      <button data-testid="hint-target-card-snake-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardSnakeAction)}>Draw</button>
     </div>
   );
 }

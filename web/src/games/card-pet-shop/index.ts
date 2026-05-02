@@ -12,5 +12,5 @@ export const cardPetShopPlugin: GamePlugin<CardPetShopState, CardPetShopAction, 
   howToPlay:"Card Pet Shop is a quick card-draw game where face cards (J, Q, K) earn extra rewards. 🐾 Each draw flips one card from a fresh 52-card deck and you earn the rank value: numbers (2-10) score their face value, Jack is 11, Queen is 12, King is 13, and Ace is 14.\n\nWhen you draw a face card (Jack, Queen, or King), you also get a bonus 10 points — collecting these special cards is the path to higher scores. The deck reshuffles each draw, so face-card chances stay constant.\n\nYou play 12 draws total. Each draw shows the card and resulting points; press Next to continue. There's no decision making — it's pure draw-and-tally fun. Average runs land near 110-140 points; players hitting multiple face cards can push past 180. The best part is the simple, clean themed atmosphere with each card draw.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardPetShopSettings),
-  reducer,isTerminal,component:CardPetShopGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-pet-shop-primary"]', pulses: 3 }), component:CardPetShopGame,
 };

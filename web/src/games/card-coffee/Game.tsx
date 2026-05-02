@@ -15,7 +15,7 @@ export function CardCoffeeGame({ state, dispatch, onGameOver }: GameProps<CardCo
       <div className="cm-info">Round {state.round + 1} / {TOTAL_ROUNDS}</div>
       <div className="cm-score">Kept: {state.decisions.length}</div>
       {state.phase === "deal" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCoffeeAction)}>Deal pair</button>
+        <button data-testid="hint-target-card-coffee-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardCoffeeAction)}>Deal pair</button>
       )}
       {state.phase === "decide" && state.pair && (
         <>

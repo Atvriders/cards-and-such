@@ -21,7 +21,7 @@ export function CardThrowBetGame({ state, dispatch, onGameOver }: GameProps<Card
       {state.phase === "result" && state.card !== null && <>
         <div className={`cm-card disabled ${isRed(state.card) ? "red" : ""}`}>{rankName(state.card)}{suitName(state.card)}</div>
         <div className="cm-result">{state.lastWin ? "Win!" : "Lose!"}</div>
-        <button className="cm-btn" onClick={() => dispatch({ type:"next" } as CardThrowBetAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
+        <button data-testid="hint-target-card-throw-bet-primary" className="cm-btn" onClick={() => dispatch({ type:"next" } as CardThrowBetAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

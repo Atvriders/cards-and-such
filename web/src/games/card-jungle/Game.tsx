@@ -19,7 +19,7 @@ export function CardJungleGame({ state, dispatch, onGameOver }: GameProps<CardJu
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardJungleAction)}>Draw</button>
+        <button data-testid="hint-target-card-jungle-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardJungleAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

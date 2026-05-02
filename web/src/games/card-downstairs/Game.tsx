@@ -22,7 +22,7 @@ export function CardDownstairsGame({ state, dispatch, onGameOver }: GameProps<Ca
         ))}
       </div>
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardDownstairsAction)}>Deal</button>
+        <button data-testid="hint-target-card-downstairs-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardDownstairsAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

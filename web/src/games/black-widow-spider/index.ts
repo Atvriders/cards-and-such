@@ -17,5 +17,6 @@ export const blackWidowSpiderPlugin: GamePlugin<BlackWidowSpiderState, BlackWido
   initialState: (seed: number, s: S) => initialState(seed, s as BlackWidowSpiderSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-black-widow-spider-primary"]', pulses: 3 }),
   component: BlackWidowSpiderGame,
 };

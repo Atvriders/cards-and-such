@@ -16,5 +16,5 @@ If the ranks don't match, you still earn 5 consolation points. Over 10 or 20 rou
 The game requires no decisions: just press Snap and see what fate delivers. Can you get multiple snaps in a row for a massive score?`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardSnapPairSettings),
-  reducer, isTerminal, component: CardSnapPairGame,
+  reducer, isTerminal, hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-snap-pair-primary"]', pulses: 3 }), component: CardSnapPairGame,
 };

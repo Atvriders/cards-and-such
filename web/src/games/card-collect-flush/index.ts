@@ -21,5 +21,5 @@ There are no choices, no holds, no draws — pure shuffle and reveal. The chance
 Across 8 rounds you can expect roughly 80-130 points; a flush in any round catapults you to 200+. The all-time peak run with two flushes can reach 400+ — pure luck, but pure thrill.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardCollectFlushSettings),
-  reducer,isTerminal,component:CardCollectFlushGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-collect-flush-primary"]', pulses: 3 }), component:CardCollectFlushGame,
 };
