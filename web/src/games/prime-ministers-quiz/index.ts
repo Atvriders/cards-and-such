@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PMState, PMAction, PMSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,7 @@ Settings let you choose 10, 20, or 30 questions from a pool of 30 covering polic
 From Winston Churchill's wartime leadership to Jacinda Ardern's modern progressive governance, Prime Ministers Quiz challenges you to name the leaders and the moments that defined their terms in office!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as PMSettings),
-  reducer, isTerminal, component: PrimeMinistersQuiz,
+  reducer, isTerminal, 
+  hint: (state: PMState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: PrimeMinistersQuiz,
 };

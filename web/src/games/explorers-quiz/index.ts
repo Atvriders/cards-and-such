@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ExplorersState, ExplorersAction, ExplorersSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,7 @@ Choose 10, 20, or 30 questions in Settings from a pool covering Columbus, Magell
 Chart a course for knowledge and see how far your explorer's instinct takes you!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as ExplorersSettings),
-  reducer, isTerminal, component: ExplorersQuiz,
+  reducer, isTerminal, 
+  hint: (state: ExplorersState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: ExplorersQuiz,
 };

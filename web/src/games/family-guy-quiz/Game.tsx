@@ -30,7 +30,7 @@ export function FamilyGuyQuizGame({ state, dispatch, onGameOver }: GameProps<Fam
           let cls = "trivia-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as FamilyGuyAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type:"select", choice:i } as FamilyGuyAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MathematiciansState, MathematiciansAction, MathematiciansSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,7 @@ Settings let you choose 10, 20, or 30 questions from a pool of 30 items covering
 From ancient Greek geometry to 20th-century abstract algebra, Mathematicians Quiz celebrates the elegance and power of pure reasoning!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as MathematiciansSettings),
-  reducer, isTerminal, component: MathematiciansQuiz,
+  reducer, isTerminal, 
+  hint: (state: MathematiciansState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: MathematiciansQuiz,
 };

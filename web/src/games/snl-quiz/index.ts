@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SnlQuizState, SnlQuizAction, SnlQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const snlQuizPlugin: GamePlugin<SnlQuizState, SnlQuizAction, typeof setti
   howToPlay:"Saturday Night Live Quiz tests your knowledge with a series of multiple-choice questions. Each question gives you four options labeled A through D — tap the answer you believe is correct, then press Submit to lock it in.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 bonus points for every second remaining on the timer, so quick thinking really pays off. Wrong answers and timeouts score zero. Don't panic when the timer turns red at five seconds remaining — pick your best guess and submit.\n\nCorrect answers glow green, incorrect picks turn red, and the right answer is always revealed before you continue. Press Next to advance to the next question, or Finish on the final question to see your final tally and accuracy stats.\n\nIn Settings you can choose 10, 20, or 30 questions per game. Whether you're a casual fan or an obsessive expert, this quiz will challenge what you know — and maybe teach you something new.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SnlQuizSettings),
-  reducer,isTerminal,component:SnlQuizGame,
+  reducer,isTerminal,
+  hint: (state: SnlQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SnlQuizGame,
 };

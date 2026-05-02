@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MortalKombatState, MortalKombatAction, MortalKombatSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const mortalKombatQuizPlugin: GamePlugin<MortalKombatState, MortalKombatA
   howToPlay:"Mortal Kombat Quiz tests your knowledge of Midway and NetherRealm's iconic, blood-soaked fighting franchise that revolutionized arcade brawlers in 1992. Questions cover the kombatants you know — Scorpion, Sub-Zero, Liu Kang, Raiden, Kitana, Mileena, Kano, Sonya, Johnny Cage, Jax, Goro, Shao Kahn, Quan Chi, Reptile, and many more — along with Fatalities, Babalities, the realms (Earthrealm, Outworld, Netherrealm, Edenia), and three decades of brutal kombat.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red.\n\nChoose 10, 20, or 30 questions in Settings. FINISH HIM!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MortalKombatSettings),
-  reducer,isTerminal,component:MortalKombatQuizGame,
+  reducer,isTerminal,
+  hint: (state: MortalKombatState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MortalKombatQuizGame,
 };

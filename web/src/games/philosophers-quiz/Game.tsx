@@ -42,7 +42,7 @@ export function PhilosophersQuiz({ state, dispatch, onGameOver }: GameProps<Phil
           else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult}
-              onClick={() => dispatch({ type: "select", choice: i } as PhilosophersQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "select", choice: i } as PhilosophersQuizAction)}>
               <span className="trivia-choice-letter">{LABELS[i]}</span>{choice}
             </button>
           );

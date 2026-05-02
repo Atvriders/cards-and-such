@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OfficeShowState, OfficeShowAction, OfficeShowSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const officeShowQuizPlugin: GamePlugin<OfficeShowState, OfficeShowAction,
   howToPlay:"The Office Quiz tests your knowledge of the American mockumentary sitcom about the staff of the Dunder Mifflin paper company in Scranton, Pennsylvania. Questions cover all the unforgettable characters — Michael, Jim, Pam, Dwight, Andy, Stanley, Phyllis, Kevin, Angela, Kelly, Ryan, Toby, Creed, Meredith, Oscar, and the rest — along with running pranks, big episodes, and the show's nine-season run.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed.\n\nChoose 10, 20, or 30 questions in Settings. World's best boss vibes only!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OfficeShowSettings),
-  reducer,isTerminal,component:OfficeShowQuizGame,
+  reducer,isTerminal,
+  hint: (state: OfficeShowState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:OfficeShowQuizGame,
 };

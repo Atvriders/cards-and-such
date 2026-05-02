@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KnightsQuizState, KnightsQuizAction, KnightsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Each correct answer earns 10 points. Choose 5, 10, or 15 questions in Settings.
 Key facts: dubbing was the knighting ceremony; the destrier was the war horse; chivalry governed knight behavior; the First Crusade captured Jerusalem in 1099; the Fourth Crusade sacked Constantinople. The lance was used for jousting and the heater shield became standard in the later medieval period. Know these and you will conquer the quiz!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as KnightsQuizSettings),
-  reducer,isTerminal,component:KnightsQuizGame,
+  reducer,isTerminal,
+  hint: (state: KnightsQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:KnightsQuizGame,
 };

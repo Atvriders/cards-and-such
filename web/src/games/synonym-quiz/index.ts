@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SynonymQuizState, SynonymQuizAction, SynonymQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Whether you are sharpening for a vocabulary test, padding your daily word workout, or just having fun with English, Synonym Quiz keeps your mind nimble. Build vocabulary, score points, and beat your best streak!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SynonymQuizSettings),
-  reducer, isTerminal, component: SynonymQuizGame,
+  reducer, isTerminal, 
+  hint: (state: SynonymQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: SynonymQuizGame,
 };

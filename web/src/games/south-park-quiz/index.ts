@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SouthParkState, SouthParkAction, SouthParkSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const southParkQuizPlugin: GamePlugin<SouthParkState, SouthParkAction, ty
   howToPlay:"South Park Quiz tests your knowledge of Trey Parker and Matt Stone's biting animated satire, set in the small mountain town of South Park, Colorado. Questions cover the main four — Stan, Kyle, Cartman, and Kenny — plus Butters, Timmy, Tweek, Craig, Token, Mr. Garrison, Chef, Big Gay Al, Mr. Mackey, Towelie, and the rest of the bizarre supporting cast.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue.\n\nChoose 10, 20, or 30 questions in Settings. Oh my god, you killed Kenny — go win!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SouthParkSettings),
-  reducer,isTerminal,component:SouthParkQuizGame,
+  reducer,isTerminal,
+  hint: (state: SouthParkState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SouthParkQuizGame,
 };

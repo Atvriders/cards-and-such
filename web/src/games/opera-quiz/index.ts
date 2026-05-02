@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OperaQuizState, OperaQuizAction, OperaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice and press Submit. Correct answers glow green; wrong ones turn red, 
 Choose 10, 20, or 30 questions in Settings. Whether you've stood at La Scala or only seen The Met in HD, this quiz is your bel canto warm-up!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OperaQuizSettings),
-  reducer,isTerminal,component:OperaQuizGame,
+  reducer,isTerminal,
+  hint: (state: OperaQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:OperaQuizGame,
 };

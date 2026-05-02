@@ -42,7 +42,7 @@ export function WarsQuiz({ state, dispatch, onGameOver }: GameProps<WarsQuizStat
           else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult}
-              onClick={() => dispatch({ type: "select", choice: i } as WarsQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "select", choice: i } as WarsQuizAction)}>
               <span className="trivia-choice-letter">{LABELS[i]}</span>{choice}
             </button>
           );

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HomonymQuizState, HomonymQuizAction, HomonymQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 English is full of trickery: 'bear' the animal versus 'bear' meaning to carry; 'their' versus 'there' versus 'they're'. Homonym Quiz drills the most common confusions, sharpening your spelling and writing instincts. Score points, build skills, and master the homonym maze!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as HomonymQuizSettings),
-  reducer, isTerminal, component: HomonymQuizGame,
+  reducer, isTerminal, 
+  hint: (state: HomonymQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: HomonymQuizGame,
 };

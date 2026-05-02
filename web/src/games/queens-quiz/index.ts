@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QueensState, QueensAction, QueensSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,7 @@ Settings let you choose 10, 20, or 30 questions. Topics include Cleopatra, Eliza
 From the pharaohs of ancient Egypt to the queens of 20th-century Europe, this quiz reveals the fascinating and often underappreciated stories of women who ruled!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as QueensSettings),
-  reducer, isTerminal, component: QueensQuiz,
+  reducer, isTerminal, 
+  hint: (state: QueensState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: QueensQuiz,
 };

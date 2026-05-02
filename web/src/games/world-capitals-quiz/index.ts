@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WorldCapitalsQuizState, WorldCapitalsQuizAction, WorldCapitalsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap your answer, then press Submit. The correct answer is always revealed, glowi
 Choose 10, 20, or 30 questions in Settings. Whether you're a seasoned globetrotter or a casual map nerd, this quiz will sharpen your knowledge of cities like Riyadh, Hanoi, Lima, and Reykjavik.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WorldCapitalsQuizSettings),
-  reducer,isTerminal,component:WorldCapitalsQuizGame,
+  reducer,isTerminal,
+  hint: (state: WorldCapitalsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:WorldCapitalsQuizGame,
 };

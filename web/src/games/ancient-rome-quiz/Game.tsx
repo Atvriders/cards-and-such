@@ -24,7 +24,7 @@ export function AncientRomeQuizGame({ state, dispatch, onGameOver }: GameProps<A
               }
               return (
                 <button key={i} className={cls} disabled={state.selected !== null}
-                  onClick={() => dispatch({ type: "select", index: i } as AncientRomeQuizAction)}>
+                  data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "select", index: i } as AncientRomeQuizAction)}>
                   {choice}
                 </button>
               );

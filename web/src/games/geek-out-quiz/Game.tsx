@@ -32,7 +32,7 @@ export function GeekOutQuiz({ state, dispatch, onGameOver }: GameProps<GeekOutQu
           }
           return (
             <button key={i} className={cls} disabled={state.phase !== "ready"}
-              onClick={() => dispatch({ type: "answer", choice: i } as GeekOutQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "answer", choice: i } as GeekOutQuizAction)}>
               {opt}
             </button>
           );

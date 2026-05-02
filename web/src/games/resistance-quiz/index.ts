@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ResistanceQuizState, ResistanceQuizAction, ResistanceQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ResistanceQuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const resistanceQuizPlugin: GamePlugin<ResistanceQuizState, ResistanceQui
   initialState: (seed: number, s: S) => initialState(seed, s as ResistanceQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: ResistanceQuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: ResistanceQuizGame,
 };
 

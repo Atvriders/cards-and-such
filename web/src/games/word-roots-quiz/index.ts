@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordRootsQuizState, WordRootsQuizAction, WordRootsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Knowing roots unlocks the meaning of words you have never seen — once you learn 'aqua' means water, 'aquatic', 'aquarium', and 'aqueduct' all click. Whether you are studying medicine, law, or just expanding vocabulary, Word Roots Quiz is a powerful tool. Build skills, score big!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as WordRootsQuizSettings),
-  reducer, isTerminal, component: WordRootsQuizGame,
+  reducer, isTerminal, 
+  hint: (state: WordRootsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: WordRootsQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MentalMathQuizState, MentalMathQuizAction, MentalMathQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const mentalMathQuizPlugin: GamePlugin<MentalMathQuizState, MentalMathQui
   howToPlay:"Mental Math Quiz puts your arithmetic chops to the test. Questions cover addition, subtraction, multiplication, division, percentages, fractions, and squares — all designed to be solvable in your head with no pencil. The goal is speed and accuracy: answer fast and correct to maximize your points.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points per second remaining on the clock — quick thinking really pays. Wrong answers score zero but the correct answer is revealed, so you learn for next time.\n\nTap a choice and press Submit. Green means correct, red means wrong. Press Next to advance.\n\nChoose 10 or 20 questions in Settings. Whether you're a mathlete, a casino card counter, or just want to keep your mental math sharp, this quiz is great daily brain exercise. No calculators allowed!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MentalMathQuizSettings),
-  reducer,isTerminal,component:MentalMathQuizGame,
+  reducer,isTerminal,
+  hint: (state: MentalMathQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MentalMathQuizGame,
 };

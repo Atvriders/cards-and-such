@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PastaQuizState, PastaQuizAction, PastaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const pastaQuizPlugin: GamePlugin<PastaQuizState, PastaQuizAction, typeof
   howToPlay:"Pasta Quiz tests your knowledge of Italy's beloved noodles. Questions cover the long shapes (spaghetti, linguine, fettuccine, bucatini), short shapes (penne, rigatoni, fusilli, farfalle), stuffed varieties (ravioli, tortellini, agnolotti), and tiny pastinas. You'll match shapes to regional sauces and learn the geography of Italian cuisine — from Bolognese in Emilia-Romagna to pesto Genovese in Liguria, cacio e pepe in Rome, and the spicy arrabbiata of central Italy.\n\nEach question allows 15 seconds. Correct answers earn 100 base points plus 10 points per second remaining. Wrong answers earn nothing.\n\nTap a choice, press Submit, see if you nailed it. Correct answers light up green; wrong choices turn red and show the right answer. Press Next to continue. Choose 10 or 20 questions in Settings. Whether you're a Nonna who makes fresh tagliatelle or a college student boiling boxed elbows, this quiz delivers a full plate of pasta knowledge.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PastaQuizSettings),
-  reducer,isTerminal,component:PastaQuizGame,
+  reducer,isTerminal,
+  hint: (state: PastaQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:PastaQuizGame,
 };

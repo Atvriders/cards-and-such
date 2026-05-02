@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Ww2QuizState, Ww2QuizAction, Ww2QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next to continue. Choose 5, 10, or 15 questions in Settings.
 Key facts: Germany invaded Poland in 1939; Pearl Harbor brought the US in December 1941; D-Day (Operation Overlord) was June 6 1944; Stalingrad was the Eastern Front turning point; Hiroshima and Nagasaki were bombed in August 1945; the United Nations was founded after the war. Know these to score perfectly!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as Ww2QuizSettings),
-  reducer,isTerminal,component:Ww2QuizGame,
+  reducer,isTerminal,
+  hint: (state: Ww2QuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:Ww2QuizGame,
 };

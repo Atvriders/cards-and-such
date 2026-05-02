@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MexicanCuisineQuiz2State, MexicanCuisineQuiz2Action, MexicanCuisineQuiz2Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MexicanCuisineQuiz2Game } from "./Game.js";
@@ -19,5 +19,7 @@ Choose 5 or 10 questions in Settings — Settings, then Questions. The pool is r
 Eat well and quiz hard!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MexicanCuisineQuiz2Settings),
-  reducer,isTerminal,component:MexicanCuisineQuiz2Game,
+  reducer,isTerminal,
+  hint: (state: MexicanCuisineQuiz2State): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MexicanCuisineQuiz2Game,
 };

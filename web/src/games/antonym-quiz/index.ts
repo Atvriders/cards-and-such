@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AntonymQuizState, AntonymQuizAction, AntonymQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Antonyms are the foundation of nuance in English; mastering them sharpens your reading comprehension and writing precision. Whether you are prepping for a standardized test or just stretching your brain, Antonym Quiz keeps you guessing and learning. Build vocabulary, score points, and beat your best streak!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AntonymQuizSettings),
-  reducer, isTerminal, component: AntonymQuizGame,
+  reducer, isTerminal, 
+  hint: (state: AntonymQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: AntonymQuizGame,
 };

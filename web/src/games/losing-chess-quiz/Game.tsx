@@ -30,7 +30,7 @@ export function LosingChessQuizGame({ state, dispatch, onGameOver }: GameProps<L
           let cls = "losechq-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as LosingChessQuizAction)}><span className="losechq-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type:"select", choice:i } as LosingChessQuizAction)}><span className="losechq-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`losechq-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

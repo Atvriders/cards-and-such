@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TappleLettersQuizState, TappleLettersQuizAction, TappleLettersQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const tappleLettersQuizPlugin: GamePlugin<TappleLettersQuizState, TappleL
   howToPlay:"Tapple Trivia is a ten-century quiz about the word-association party game where players take turns naming items in a category (animals, fruits, etc.) by pressing one of the 20 letter buttons on the central wheel before a 10-second timer runs out. Each round tests your knowledge of the publisher USAopoly (now The Op), the wheel mechanics, the category cards, the rules for elimination, and recommended ages. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Tapple has won numerous family game-of-the-year awards thanks to its perfectly tuned tension — see how many of its quirks you remember.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TappleLettersQuizSettings),
-  reducer,isTerminal,component:TappleLettersQuizGame,
+  reducer,isTerminal,
+  hint: (state: TappleLettersQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TappleLettersQuizGame,
 };

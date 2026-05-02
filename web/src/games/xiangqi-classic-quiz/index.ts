@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { XiangqiClassicQuizState, XiangqiClassicQuizAction, XiangqiClassicQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { XiangqiClassicQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const xiangqiClassicQuizPlugin: GamePlugin<XiangqiClassicQuizState, Xiang
   initialState: (seed: number, s: S) => initialState(seed, s as XiangqiClassicQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: XiangqiClassicQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: XiangqiClassicQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RhymeQuizState, RhymeQuizAction, RhymeQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Rhyme recognition is fundamental for poetry, songwriting, and early reading instruction. Whether you are a budding lyricist, a parent helping your child read, or just a fan of wordplay, Rhyme Quiz keeps your ear sharp. Score points and build skills!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as RhymeQuizSettings),
-  reducer, isTerminal, component: RhymeQuizGame,
+  reducer, isTerminal, 
+  hint: (state: RhymeQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: RhymeQuizGame,
 };

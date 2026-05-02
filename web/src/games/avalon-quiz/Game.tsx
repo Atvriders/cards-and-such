@@ -43,6 +43,7 @@ export function AvalonQuizGame({ state, dispatch, onGameOver }: GameProps<Avalon
               className={cls}
               disabled={state.phase !== "ask"}
               type="button"
+              data-testid={`hint-target-quiz-answer-${i}`}
               onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as AvalonQuizAction)}
             >{c}</button>
           );

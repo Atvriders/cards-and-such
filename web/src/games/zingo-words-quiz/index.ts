@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ZingoWordsQuizState, ZingoWordsQuizAction, ZingoWordsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const zingoWordsQuizPlugin: GamePlugin<ZingoWordsQuizState, ZingoWordsQui
   howToPlay:"Zingo! Word Builder Trivia is a ten-question quiz about the literacy-focused expansion of Zingo!, where players race to grab letter tiles dispensed by the Zinger to spell sight words on their personal cards. Each round you'll be tested on the publisher ThinkFun, the Zinger device, the difference between Zingo! Word Builder and the original, recommended ages, and the words children typically learn. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Zingo! Word Builder is praised for combining the original's joyful chaos with early literacy skills — see how much trivia about its alphabet design you can recall.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ZingoWordsQuizSettings),
-  reducer,isTerminal,component:ZingoWordsQuizGame,
+  reducer,isTerminal,
+  hint: (state: ZingoWordsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ZingoWordsQuizGame,
 };

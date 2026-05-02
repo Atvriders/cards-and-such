@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BirdsQuizState, BirdsQuizAction, BirdsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Your final score and accuracy are shown at the end. Whether you are a casual bir
   initialState: (seed: number, settings: BirdsQuizSettingsType) => initialState(seed, settings as BirdsQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: BirdsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: BirdsQuiz,
 };

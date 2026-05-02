@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PhilosophersQuizState, PhilosophersQuizAction, PhilosophersQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,7 @@ Choose 10, 20, or 30 questions in Settings. Questions cover thinkers from Confuc
 Score and accuracy are displayed at the end. Whether you love debating big ideas or just started exploring philosophy, this quiz will make you think!`,
   settings: philosophersQuizPluginSettings,
   initialState: (seed: number, s: ST) => initialState(seed, s as PhilosophersQuizSettings),
-  reducer, isTerminal, component: PhilosophersQuiz,
+  reducer, isTerminal, 
+  hint: (state: PhilosophersQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: PhilosophersQuiz,
 };

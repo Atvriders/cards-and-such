@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AncientRomeQuizState, AncientRomeQuizAction, AncientRomeQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -28,5 +28,6 @@ Tips: SPQR is a key abbreviation to know. Julius Caesar was never emperor — Oc
   initialState: (seed: number, s: S) => initialState(seed, s as AncientRomeQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: AncientRomeQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: AncientRomeQuizGame,
 };

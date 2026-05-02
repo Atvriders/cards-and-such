@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { JackboxPack1QuizState, JackboxPack1QuizAction, JackboxPack1QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { JackboxPack1QuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const jackboxPack1QuizPlugin: GamePlugin<JackboxPack1QuizState, JackboxPa
   initialState: (seed: number, s: S) => initialState(seed, s as JackboxPack1QuizSettings),
   reducer,
   isTerminal,
+  hint: (state: JackboxPack1QuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: JackboxPack1QuizGame,
 };
 

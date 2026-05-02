@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AncientGreeceQuizState, AncientGreeceQuizAction, AncientGreeceQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next after each reveal. Each correct answer earns 10 points. Choose 5, 10,
 Key facts: Homer wrote the Iliad and Odyssey; the Battle of Thermopylae saw 300 Spartans; Aristotle tutored Alexander the Great; the Oracle of Delphi gave prophecies; Plato wrote The Republic. Greek democracy comes from "demos" (people) and "kratos" (rule). Knowing these pillars will carry you to a perfect score!`,
   settings,
   initialState:(seed:number, s:S) => initialState(seed, s as AncientGreeceQuizSettings),
-  reducer, isTerminal, component:AncientGreeceQuizGame,
+  reducer, isTerminal, 
+  hint: (state: AncientGreeceQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:AncientGreeceQuizGame,
 };

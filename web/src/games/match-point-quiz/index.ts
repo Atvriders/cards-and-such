@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MatchPointQuizState, MatchPointQuizAction, MatchPointQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const matchPointQuizPlugin: GamePlugin<MatchPointQuizState, MatchPointQui
   howToPlay:"Match Point Trivia is a ten-question quiz about a tennis-scored variant of card pair-matching where players race to call out a matching pair from cards in the playing area, with rounds won and lost using tennis scoring (15, 30, 40, deuce). Each round you'll be tested on the rules of pair-calling, the tennis-style scoring, recommended player count, the importance of fast observation, and how pairs are formed. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Match Point combines the joy of fast pattern recognition with the dramatic ebb and flow of tennis scoring — see how fast you can recall its twists.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MatchPointQuizSettings),
-  reducer,isTerminal,component:MatchPointQuizGame,
+  reducer,isTerminal,
+  hint: (state: MatchPointQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MatchPointQuizGame,
 };

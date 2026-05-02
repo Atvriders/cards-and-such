@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ModernArtQuizState, ModernArtQuizAction, ModernArtQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Click a choice to highlight it, then press Submit. After submitting, the correct
 Choose 10, 20, or 30 questions in Settings. Questions range from accessible pop art trivia to deeper conceptual art knowledge. Whether you visit galleries or just appreciate a great print, Modern Art Quiz will sharpen your eye!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ModernArtQuizSettings),
-  reducer,isTerminal,component:ModernArtQuizGame,
+  reducer,isTerminal,
+  hint: (state: ModernArtQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ModernArtQuizGame,
 };

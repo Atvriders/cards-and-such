@@ -43,6 +43,7 @@ export function TeeKoQuizGame({ state, dispatch, onGameOver }: GameProps<TeeKoQu
               className={cls}
               disabled={state.phase !== "ask"}
               type="button"
+              data-testid={`hint-target-quiz-answer-${i}`}
               onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as TeeKoQuizAction)}
             >{c}</button>
           );

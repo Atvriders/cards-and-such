@@ -43,6 +43,7 @@ export function WitsWagersQuizGame({ state, dispatch, onGameOver }: GameProps<Wi
               className={cls}
               disabled={state.phase !== "ask"}
               type="button"
+              data-testid={`hint-target-quiz-answer-${i}`}
               onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as WitsWagersQuizAction)}
             >{c}</button>
           );

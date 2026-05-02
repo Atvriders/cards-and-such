@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WimbledonQuizState, WimbledonQuizAction, WimbledonQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const wimbledonQuizPlugin: GamePlugin<WimbledonQuizState, WimbledonQuizAc
   howToPlay:"Wimbledon Quiz tests your knowledge of tennis's most prestigious tournament. Questions cover champions, finals, longest matches, surface specialists, royal box moments, and the strawberries-and-cream tradition of the All England Club.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on.\n\nChoose 10, 20, or 30 questions in Settings. From Borg's five straight titles to the Federer-Nadal 2008 epic to Serena's seven Plates, Wimbledon Quiz is for tennis fans who love the grass.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WimbledonQuizSettings),
-  reducer,isTerminal,component:WimbledonQuizGame,
+  reducer,isTerminal,
+  hint: (state: WimbledonQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:WimbledonQuizGame,
 };

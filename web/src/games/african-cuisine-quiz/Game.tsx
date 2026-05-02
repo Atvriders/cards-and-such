@@ -19,7 +19,7 @@ export function AfricanCuisineQuiz({ state, dispatch, onGameOver }: GameProps<Af
           {entry.choices.map((c, i) => {
             let cls = "cq-choice";
             if (state.selected !== null) { if (c === entry.answer) cls += " correct"; else if (state.selected === i) cls += " wrong"; }
-            return <button key={i} className={cls} disabled={state.selected !== null} onClick={() => dispatch({ type:"select", index:i } as AfricanCuisineQuizAction)}>{c}</button>;
+            return <button key={i} className={cls} disabled={state.selected !== null} data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type:"select", index:i } as AfricanCuisineQuizAction)}>{c}</button>;
           })}
         </div>
         {state.selected !== null && <button className="cq-next" onClick={() => dispatch({ type:"next" } as AfricanCuisineQuizAction)}>{state.current + 1 < state.entries.length ? "Next" : "Finish"}</button>}

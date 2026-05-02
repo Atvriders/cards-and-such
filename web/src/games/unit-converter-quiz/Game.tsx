@@ -61,6 +61,7 @@ export function UnitConverterQuizGame({ state, dispatch, onGameOver }: GameProps
               key={i}
               className={cls}
               disabled={isResult}
+              data-testid={`hint-target-quiz-answer-${i}`}
               onClick={() => dispatch({ type: "select", index: i })}
             >
               <span className="uc-choice-letter">{LABELS[i]}</span>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TozanGoState, TozanGoAction, TozanGoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const tozanGoPlugin: GamePlugin<TozanGoState, TozanGoAction, typeof setti
   howToPlay:"Tozan Go ('uphill Go') is a teaching Go variant where the handicap system is inverted: the weaker player takes black (which would normally play first) but with the additional advantage of placing extra stones, while the stronger player faces a literal uphill struggle. The variant is designed to make matches between mismatched players more competitive and to give learners a real chance against teachers without changing the deeper rules of Go.\n\nThis is a 10-question multiple-choice quiz. Each question gives you 15 seconds to answer. Tap one of the four choices, then press Submit to lock in your answer.\n\nYou earn 100 base points for every correct answer plus 10 points for each second remaining on the clock — quick correct answers are worth far more than slow ones. Wrong answers earn nothing.\n\nAfter you submit, the correct answer is revealed: green for correct, red for wrong. Press Next to continue. The game ends after all 10 questions.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TozanGoSettings),
-  reducer,isTerminal,component:TozanGoGame,
+  reducer,isTerminal,
+  hint: (state: TozanGoState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TozanGoGame,
 };

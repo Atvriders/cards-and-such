@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PlanetsQuizState, PlanetsQuizAction, PlanetsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Topics include: planet sizes (Jupiter is the largest, Mercury the smallest), tem
 Use Settings to choose 10 or 20 questions. Questions are randomly selected and choices shuffled each game. From casual stargazers to space enthusiasts, this quiz offers fascinating facts about the worlds in our cosmic neighborhood!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PlanetsQuizSettings),
-  reducer, isTerminal, component:PlanetsQuiz,
+  reducer, isTerminal, 
+  hint: (state: PlanetsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:PlanetsQuiz,
 };

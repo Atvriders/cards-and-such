@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MokshaPatamState, MokshaPatamAction, MokshaPatamSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const mokshaPatamPlugin: GamePlugin<MokshaPatamState, MokshaPatamAction, 
   howToPlay:"Moksha Patam is the original spiritual Indian board game that became Snakes and Ladders. Squares represent virtues that pull players upward via ladders or vices that drag players down via snakes, illustrating moral karma.\n\nThis is a 10-question multiple-choice quiz. Each question gives you 15 seconds to answer. Tap one of the four choices, then press Submit to lock in your answer. You earn 100 base points for every correct answer plus 10 points for each second remaining on the clock — quick correct answers are worth far more than slow ones. Wrong answers earn nothing.\n\nAfter you submit, the correct answer is revealed: green for correct, red for wrong. Press Next to continue. The game ends after all 10 questions.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MokshaPatamSettings),
-  reducer,isTerminal,component:MokshaPatamGame,
+  reducer,isTerminal,
+  hint: (state: MokshaPatamState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MokshaPatamGame,
 };

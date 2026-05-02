@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WhalesDolphinsQuizState, WhalesDolphinsQuizAction, WhalesDolphinsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const whalesDolphinsQuizPlugin: GamePlugin<WhalesDolphinsQuizState, Whale
   howToPlay:"Whales & Dolphins Quiz dives into the world of cetaceans — the marine mammals that include the colossal blue whale, intelligent orcas, playful dolphins, and the legendary sperm whale. Questions cover species identification, feeding behaviors, migration patterns, intelligence, and the deep bonds these animals form with one another.\n\nEach correct answer earns 100 base points plus 10 points per second remaining on the 15-second timer. Wrong answers earn nothing. There are 10 questions per game.\n\nTap a choice, then press Submit. The right answer is revealed before you continue. Whether you've watched whales off Maui, swum with dolphins in Hawaii, or just love the ocean, this quiz invites you to explore the giants and acrobats of the sea. Dive in!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WhalesDolphinsQuizSettings),
-  reducer,isTerminal,component:WhalesDolphinsQuizGame,
+  reducer,isTerminal,
+  hint: (state: WhalesDolphinsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:WhalesDolphinsQuizGame,
 };

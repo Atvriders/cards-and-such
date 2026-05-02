@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HerbsQuizState, HerbsQuizAction, HerbsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Your final score and accuracy are displayed at the end. Whether you are a home c
   initialState: (seed: number, settings: HerbsQuizSettingsType) => initialState(seed, settings as HerbsQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: HerbsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: HerbsQuiz,
 };

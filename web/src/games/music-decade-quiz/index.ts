@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MusicDecadeQuizState, MusicDecadeQuizAction, MusicDecadeQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -26,5 +26,6 @@ Use Settings to play 10 or 20 questions. Questions are randomly selected and cho
   initialState: (seed:number, s:S) => initialState(seed, s as MusicDecadeQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: MusicDecadeQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: MusicDecadeQuiz,
 };

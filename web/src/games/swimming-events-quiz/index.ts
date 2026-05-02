@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SwimmingEventsQuizState, SwimmingEventsQuizAction, SwimmingEventsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ You have 15 seconds per question. Correct answers award 100 base points plus 10 
 Choose 10 or 20 questions in Settings. Whether you swim laps yourself or just love watching the records fall every Olympics, dive in — the water's fast!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SwimmingEventsQuizSettings),
-  reducer,isTerminal,component:SwimmingEventsQuizGame,
+  reducer,isTerminal,
+  hint: (state: SwimmingEventsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SwimmingEventsQuizGame,
 };

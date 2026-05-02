@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TennisRulesQuizState, TennisRulesQuizAction, TennisRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Topics include the dimensions of a tennis court (78 feet long, 27 feet wide for 
 Tap, Submit, Next. Choose 10, 20, or 30 questions in Settings. From Wimbledon to your local park courts, sharpen your tennis IQ!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TennisRulesQuizSettings),
-  reducer,isTerminal,component:TennisRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: TennisRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TennisRulesQuizGame,
 };

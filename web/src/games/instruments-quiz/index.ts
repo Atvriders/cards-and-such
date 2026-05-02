@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { InstrumentsQuizState, InstrumentsQuizAction, InstrumentsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Instruments featured include: violin, guitar, piano, clarinet, tuba, harp, sitar
 Use Settings to choose 10 or 20 questions. Questions are randomly drawn and answer choices are shuffled each game. Whether you play an instrument, love music, or are just curious about how sounds are made, this quiz offers something to discover with every question!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as InstrumentsQuizSettings),
-  reducer, isTerminal, component:InstrumentsQuiz,
+  reducer, isTerminal, 
+  hint: (state: InstrumentsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:InstrumentsQuiz,
 };

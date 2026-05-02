@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OscarFilmsQuizState, OscarFilmsQuizAction, OscarFilmsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10, 20, or 30 questions in Settings. Whether you're a casual moviegoer or a dedicated cinephile, lights, camera, action!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OscarFilmsQuizSettings),
-  reducer,isTerminal,component:OscarFilmsQuizGame,
+  reducer,isTerminal,
+  hint: (state: OscarFilmsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:OscarFilmsQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChuShogiState, ChuShogiAction, ChuShogiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const chuShogiPlugin: GamePlugin<ChuShogiState, ChuShogiAction, typeof se
   howToPlay:"Chu Shogi ('middle Shogi') is a medieval Japanese variant of Shogi played on a 12x12 board with 46 pieces per side. Among its many unique pieces is the famous Lion, a piece capable of double moves and powerful captures. Chu Shogi was historically the most popular Shogi variant before standard 9x9 Shogi displaced it; today it survives as a niche game played by specialists. A modern game can take many hours.\n\nThis is a 10-question multiple-choice quiz. Each question gives you 15 seconds to answer. Tap one of the four choices, then press Submit to lock in your answer.\n\nYou earn 100 base points for every correct answer plus 10 points for each second remaining on the clock — quick correct answers are worth far more than slow ones. Wrong answers earn nothing.\n\nAfter you submit, the correct answer is revealed: green for correct, red for wrong. Press Next to continue. The game ends after all 10 questions.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ChuShogiSettings),
-  reducer,isTerminal,component:ChuShogiGame,
+  reducer,isTerminal,
+  hint: (state: ChuShogiState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ChuShogiGame,
 };

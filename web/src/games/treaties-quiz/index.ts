@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TreatiesQuizState, TreatiesQuizAction, TreatiesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,7 @@ Choose 10, 20, or 30 questions in Settings. Questions range from the Treaty of W
 Score and accuracy are displayed at the end. Whether you study diplomacy or just love history, Treaties Quiz will broaden your global perspective!`,
   settings: treatiesQuizPluginSettings,
   initialState: (seed: number, s: ST) => initialState(seed, s as TreatiesQuizSettings),
-  reducer, isTerminal, component: TreatiesQuiz,
+  reducer, isTerminal, 
+  hint: (state: TreatiesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: TreatiesQuiz,
 };

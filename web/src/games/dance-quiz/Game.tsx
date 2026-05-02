@@ -42,7 +42,7 @@ export function DanceQuiz({ state, dispatch, onGameOver }: GameProps<DanceQuizSt
           else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult}
-              onClick={() => dispatch({ type: "select", choice: i } as DanceQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "select", choice: i } as DanceQuizAction)}>
               <span className="trivia-choice-letter">{LABELS[i]}</span>{choice}
             </button>
           );

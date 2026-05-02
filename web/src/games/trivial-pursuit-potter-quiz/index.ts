@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TrivialPursuitPotterQuizState, TrivialPursuitPotterQuizAction, TrivialPursuitPotterQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const trivialPursuitPotterQuizPlugin: GamePlugin<TrivialPursuitPotterQuiz
   howToPlay:"Trivial Pursuit Harry Potter Trivia tests your knowledge of the Wizarding World — the seven novels, the films, the characters, the houses, and the magical creatures of Hogwarts. Each round contains ten questions. Tap your selected answer, then press Submit. A correct answer earns 100 base points plus 10 points for every second still on the 15-second timer, so quick wand work pays. Wrong answers lock in and reveal the right choice; press Next to advance. After ten questions, your final score is displayed. If you have read every book multiple times, can name your favorite Hogwarts house immediately, or own at least one striped scarf, you'll ace this quiz. Otherwise, expect to pick up a few extra spells of trivia knowledge along the way to your final score.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TrivialPursuitPotterQuizSettings),
-  reducer,isTerminal,component:TrivialPursuitPotterQuizGame,
+  reducer,isTerminal,
+  hint: (state: TrivialPursuitPotterQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TrivialPursuitPotterQuizGame,
 };

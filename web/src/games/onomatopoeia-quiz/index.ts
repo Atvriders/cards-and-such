@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OnomatopoeiaQuizState, OnomatopoeiaQuizAction, OnomatopoeiaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Onomatopoeia brings writing to life: 'buzz', 'crash', 'whoosh', 'crackle'. Comic books, poetry, and children's books rely heavily on these vivid words. Whether you are a writer, comic fan, or word lover, Onomatopoeia Quiz makes language fun and audible. Score points, learn vocabulary, and tune your ear!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as OnomatopoeiaQuizSettings),
-  reducer, isTerminal, component: OnomatopoeiaQuizGame,
+  reducer, isTerminal, 
+  hint: (state: OnomatopoeiaQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: OnomatopoeiaQuizGame,
 };

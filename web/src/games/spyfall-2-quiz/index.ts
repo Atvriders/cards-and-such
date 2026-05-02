@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Spyfall2QuizState, Spyfall2QuizAction, Spyfall2QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Spyfall2QuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const spyfall2QuizPlugin: GamePlugin<Spyfall2QuizState, Spyfall2QuizActio
   initialState: (seed: number, s: S) => initialState(seed, s as Spyfall2QuizSettings),
   reducer,
   isTerminal,
+  hint: (state: Spyfall2QuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: Spyfall2QuizGame,
 };
 

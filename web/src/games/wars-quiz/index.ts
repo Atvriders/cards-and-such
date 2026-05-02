@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WarsQuizState, WarsQuizAction, WarsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,7 @@ Choose 10, 20, or 30 questions in Settings. Questions span conflicts from the Pe
 Score and accuracy are displayed at the end. Whether you are a history buff or a military strategy fan, Wars Quiz will test your battlefield knowledge!`,
   settings: warsQuizPluginSettings,
   initialState: (seed: number, s: ST) => initialState(seed, s as WarsQuizSettings),
-  reducer, isTerminal, component: WarsQuiz,
+  reducer, isTerminal, 
+  hint: (state: WarsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: WarsQuiz,
 };

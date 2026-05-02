@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AlliterationQuizState, AlliterationQuizAction, AlliterationQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Alliteration powers tongue-twisters ('Peter Piper picked a peck'), advertising slogans ('Coca-Cola'), and poetry. Spotting it improves your writing rhythm and reading enjoyment. Whether for school or fun, Alliteration Quiz makes you listen for music in language. Score points, sharpen ears!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AlliterationQuizSettings),
-  reducer, isTerminal, component: AlliterationQuizGame,
+  reducer, isTerminal, 
+  hint: (state: AlliterationQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: AlliterationQuizGame,
 };

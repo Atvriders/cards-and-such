@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PharaohsQuizState, PharaohsQuizAction, PharaohsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next to continue. Each correct answer earns 10 points. Choose 5, 10, or 15
 Key facts: Narmer unified Egypt; Djoser built the first step pyramid; Sneferu built the first true pyramid; Khufu built the Great Pyramid; Hatshepsut ruled as male king; Tutankhamun's tomb was found intact in 1922; Cleopatra VII was the last pharaoh. The uraeus cobra was a symbol of royal power. Learn these and score perfectly!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PharaohsQuizSettings),
-  reducer,isTerminal,component:PharaohsQuizGame,
+  reducer,isTerminal,
+  hint: (state: PharaohsQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:PharaohsQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CharadesClassicQuizState, CharadesClassicQuizAction, CharadesClassicQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CharadesClassicQuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const charadesClassicQuizPlugin: GamePlugin<CharadesClassicQuizState, Cha
   initialState: (seed: number, s: S) => initialState(seed, s as CharadesClassicQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: CharadesClassicQuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: CharadesClassicQuizGame,
 };
 

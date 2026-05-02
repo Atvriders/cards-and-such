@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CountryFlagQuizState, CountryFlagQuizAction, CountryFlagQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Questions cover flag colors and arrangements, unique symbols (animals, plants, c
 Regions covered include Europe, the Americas, Asia, Africa, and Oceania — giving you a global tour through vexillology (the study of flags). Use Settings to choose 10 or 20 questions. Questions are randomly selected and answer choices are shuffled each game. Whether you are a geography enthusiast or just love colorful symbols, this quiz will expand your knowledge of the world's nations!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CountryFlagQuizSettings),
-  reducer, isTerminal, component:CountryFlagQuiz,
+  reducer, isTerminal, 
+  hint: (state: CountryFlagQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:CountryFlagQuiz,
 };

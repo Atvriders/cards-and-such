@@ -43,6 +43,7 @@ export function Fibbage2QuizGame({ state, dispatch, onGameOver }: GameProps<Fibb
               className={cls}
               disabled={state.phase !== "ask"}
               type="button"
+              data-testid={`hint-target-quiz-answer-${i}`}
               onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as Fibbage2QuizAction)}
             >{c}</button>
           );

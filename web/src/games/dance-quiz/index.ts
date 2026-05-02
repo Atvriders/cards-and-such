@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DanceQuizState, DanceQuizAction, DanceQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,7 @@ Choose 10, 20, or 30 questions in Settings. Questions cover everything from Swan
 Score and accuracy are displayed at the end. Whether you are a seasoned dancer or a curious fan, Dance Quiz will keep you moving!`,
   settings: danceQuizPluginSettings,
   initialState: (seed: number, s: ST) => initialState(seed, s as DanceQuizSettings),
-  reducer, isTerminal, component: DanceQuiz,
+  reducer, isTerminal, 
+  hint: (state: DanceQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: DanceQuiz,
 };

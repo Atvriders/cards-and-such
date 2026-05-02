@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ShatranjBoardQuizState, ShatranjBoardQuizAction, ShatranjBoardQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ShatranjBoardQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const shatranjBoardQuizPlugin: GamePlugin<ShatranjBoardQuizState, Shatran
   initialState: (seed: number, s: S) => initialState(seed, s as ShatranjBoardQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: ShatranjBoardQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: ShatranjBoardQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RenaissanceQuizState, RenaissanceQuizAction, RenaissanceQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next to continue. Choose 5, 10, or 15 questions in Settings.
 Key facts: The Renaissance began in Italy; Leonardo painted the Mona Lisa and The Last Supper; Michelangelo painted the Sistine Chapel; Gutenberg invented the printing press; the Medici were the key patrons in Florence; Copernicus proposed the heliocentric model; Columbus reached the Americas in 1492. Learn these and achieve a perfect score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RenaissanceQuizSettings),
-  reducer,isTerminal,component:RenaissanceQuizGame,
+  reducer,isTerminal,
+  hint: (state: RenaissanceQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:RenaissanceQuizGame,
 };

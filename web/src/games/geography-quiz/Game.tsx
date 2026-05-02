@@ -61,6 +61,7 @@ export function GeographyQuizGame({ state, dispatch, onGameOver }: GameProps<Geo
               key={i}
               className={cls}
               disabled={isResult}
+              data-testid={`hint-target-quiz-answer-${i}`}
               onClick={() => dispatch({ type: "select", index: i })}
             >
               <span className="gq-choice-letter">{LABELS[i]}</span>

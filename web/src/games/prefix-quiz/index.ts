@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PrefixQuizState, PrefixQuizAction, PrefixQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Mastering prefixes unlocks thousands of vocabulary words — once you know 'pre-' means 'before', words like 'preview', 'predict', and 'preface' click instantly. Whether you are studying for school, prepping standardized tests, or just curious about etymology, Prefix Quiz sharpens your wordcraft. Build skills, score points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PrefixQuizSettings),
-  reducer, isTerminal, component: PrefixQuizGame,
+  reducer, isTerminal, 
+  hint: (state: PrefixQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: PrefixQuizGame,
 };

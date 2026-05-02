@@ -34,7 +34,7 @@ export function WeatherQuiz({ state, dispatch, onGameOver }: GameProps<WeatherQu
           let cls="trivia-choice";
           if(isResult){ if(i===q.correct) cls+=" correct"; else if(i===state.selected&&state.selected!==q.correct) cls+=" wrong"; }
           else if(i===state.selected) cls+=" selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={()=>dispatch({type:"select",choice:i} as WeatherQuizAction)}>
+          return <button key={i} className={cls} disabled={isResult} data-testid={`hint-target-quiz-answer-${i}`} onClick={()=>dispatch({type:"select",choice:i} as WeatherQuizAction)}>
             <span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>

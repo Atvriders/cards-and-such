@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GoStopState, GoStopAction, GoStopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const goStopPlugin: GamePlugin<GoStopState, GoStopAction, typeof settings
   howToPlay:"Go-Stop is the most popular Korean card game, played with a Hwatu deck (the Korean equivalent of Hanafuda). Players match flower cards from their hands and the table to score points. Once a player reaches the threshold (commonly 7 points), they may either say 'Go!' to keep playing for more, or 'Stop!' to lock in the win. Saying Go raises both the reward and the risk — opponents who later score the threshold can take the doubled pot.\n\nThis is a 10-question multiple-choice quiz. Each question gives you 15 seconds to answer. Tap one of the four choices, then press Submit to lock in your answer.\n\nYou earn 100 base points for every correct answer plus 10 points for each second remaining on the clock — quick correct answers are worth far more than slow ones. Wrong answers earn nothing.\n\nAfter you submit, the correct answer is revealed: green for correct, red for wrong. Press Next to continue. The game ends after all 10 questions.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as GoStopSettings),
-  reducer,isTerminal,component:GoStopGame,
+  reducer,isTerminal,
+  hint: (state: GoStopState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:GoStopGame,
 };

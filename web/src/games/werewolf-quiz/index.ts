@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WerewolfQuizState, WerewolfQuizAction, WerewolfQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WerewolfQuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const werewolfQuizPlugin: GamePlugin<WerewolfQuizState, WerewolfQuizActio
   initialState: (seed: number, s: S) => initialState(seed, s as WerewolfQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: WerewolfQuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: WerewolfQuizGame,
 };
 

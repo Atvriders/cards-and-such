@@ -36,7 +36,7 @@ export function MagicSquareQuizGame({ state, dispatch, onGameOver }: GameProps<M
             if (i === p.correct) cls += " correct";
             else if (i === state.selected && state.selected !== p.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type: "select", choice: i } as MagicSquareQuizAction)}><span className="nlp-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "select", choice: i } as MagicSquareQuizAction)}><span className="nlp-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       <div className="nlp-actions">

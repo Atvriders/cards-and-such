@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PaintersQuizState, PaintersQuizAction, PaintersQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,7 @@ Choose 10, 20, or 30 questions in Settings. Questions cover artists from da Vinc
 Score and accuracy are displayed at the end. Whether you frequent galleries or just admire great art, Painters Quiz will sharpen your artistic eye!`,
   settings: paintersQuizPluginSettings,
   initialState: (seed: number, s: ST) => initialState(seed, s as PaintersQuizSettings),
-  reducer, isTerminal, component: PaintersQuiz,
+  reducer, isTerminal, 
+  hint: (state: PaintersQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: PaintersQuiz,
 };

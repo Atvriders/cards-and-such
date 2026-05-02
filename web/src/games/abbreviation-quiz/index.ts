@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AbbreviationQuizState, AbbreviationQuizAction, AbbreviationQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Abbreviations save space and time — 'etc.', 'e.g.', 'i.e.', 'a.m.', 'p.m.', 'PhD'. Knowing what they actually mean keeps you writing precisely. Whether for school, work, or general fluency, Abbreviation Quiz refreshes the basics. Score points, sharpen English skills!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AbbreviationQuizSettings),
-  reducer, isTerminal, component: AbbreviationQuizGame,
+  reducer, isTerminal, 
+  hint: (state: AbbreviationQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: AbbreviationQuizGame,
 };

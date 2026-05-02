@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CivilWarQuizState, CivilWarQuizAction, CivilWarQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Each correct answer earns 10 points. Choose 5, 10, or 15 questions in Settings.
 Key facts: Jefferson Davis led the Confederacy; Richmond was the Confederate capital; Lee surrendered at Appomattox in 1865; Antietam was the bloodiest single day; Gettysburg was the war's turning point; the 13th Amendment abolished slavery; Lincoln was assassinated by John Wilkes Booth. Know these and you will ace the quiz!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CivilWarQuizSettings),
-  reducer,isTerminal,component:CivilWarQuizGame,
+  reducer,isTerminal,
+  hint: (state: CivilWarQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:CivilWarQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Minichess5x5QuizState, Minichess5x5QuizAction, Minichess5x5QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Minichess5x5QuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const minichess5x5QuizPlugin: GamePlugin<Minichess5x5QuizState, Minichess
   initialState: (seed: number, s: S) => initialState(seed, s as Minichess5x5QuizSettings),
   reducer,
   isTerminal,
+  hint: (state: Minichess5x5QuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: Minichess5x5QuizGame,
 };

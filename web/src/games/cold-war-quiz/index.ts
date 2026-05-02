@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColdWarQuizState, ColdWarQuizAction, ColdWarQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next to advance. Choose 5, 10, or 15 questions in Settings.
 Key facts: Churchill coined "Iron Curtain"; Sputnik was the first satellite (1957); Yuri Gagarin was first in space; the Cuban Missile Crisis was 1962; the Berlin Wall fell in 1989; the USSR dissolved in 1991; Gorbachev introduced glasnost. Learn these milestones and you will ace the quiz!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ColdWarQuizSettings),
-  reducer,isTerminal,component:ColdWarQuizGame,
+  reducer,isTerminal,
+  hint: (state: ColdWarQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ColdWarQuizGame,
 };

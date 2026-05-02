@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OichoKabuQuizState, OichoKabuQuizAction, OichoKabuQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const oichoKabuQuizPlugin: GamePlugin<OichoKabuQuizState, OichoKabuQuizAc
   howToPlay:"Oicho Kabu is a traditional Japanese gambling card game played with the Kabufuda deck. The objective is similar to baccarat: get a hand whose total ends as close to 9 as possible. The name 'kabu' means 'nine'.\n\nThis is a 10-question multiple-choice quiz. Each question gives you 15 seconds to answer. Tap one of the four lettered choices, then press Submit to lock in your answer.\n\nYou earn 100 base points for every correct answer plus 10 points for each second remaining on the clock — quick correct answers are worth far more than slow ones. Wrong answers earn nothing, and if you let the timer run out, the question is marked wrong automatically.\n\nAfter you submit, the correct answer is revealed in green and an incorrect choice in red. Press Next to move on to the next question. The quiz ends after all 10 questions and your final score and number of correct answers are shown. Try to beat your best score on subsequent runs.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OichoKabuQuizSettings),
-  reducer,isTerminal,component:OichoKabuQuizGame,
+  reducer,isTerminal,
+  hint: (state: OichoKabuQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:OichoKabuQuizGame,
 };

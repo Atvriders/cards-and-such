@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpellingQuizState, SpellingQuizAction, SpellingQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 English spelling is famously unpredictable — 'accommodate', 'embarrass', 'occurrence', 'rhythm'. Practising builds muscle memory and exam confidence. Whether prepping for a spelling bee, a school test, or just love wordcraft, Spelling Quiz delivers a workout that keeps your inner editor sharp. Score points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SpellingQuizSettings),
-  reducer, isTerminal, component: SpellingQuizGame,
+  reducer, isTerminal, 
+  hint: (state: SpellingQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: SpellingQuizGame,
 };

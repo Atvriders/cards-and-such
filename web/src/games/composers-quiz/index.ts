@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ComposersQuizState, ComposersQuizAction, ComposersQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,7 @@ Choose 10, 20, or 30 questions in Settings. Questions cover composers from Vival
 Score and accuracy are displayed at the end. Whether you are a concert-goer or simply love great music, Composers Quiz will fine-tune your knowledge!`,
   settings: composersQuizPluginSettings,
   initialState: (seed: number, s: ST) => initialState(seed, s as ComposersQuizSettings),
-  reducer, isTerminal, component: ComposersQuiz,
+  reducer, isTerminal, 
+  hint: (state: ComposersQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: ComposersQuiz,
 };

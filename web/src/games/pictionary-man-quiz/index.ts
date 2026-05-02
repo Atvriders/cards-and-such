@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PictionaryManQuizState, PictionaryManQuizAction, PictionaryManQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PictionaryManQuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const pictionaryManQuizPlugin: GamePlugin<PictionaryManQuizState, Piction
   initialState: (seed: number, s: S) => initialState(seed, s as PictionaryManQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: PictionaryManQuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: PictionaryManQuizGame,
 };
 

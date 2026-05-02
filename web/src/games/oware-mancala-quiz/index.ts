@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { OwareMancalaQuizState, OwareMancalaQuizAction, OwareMancalaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OwareMancalaQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const owareMancalaQuizPlugin: GamePlugin<OwareMancalaQuizState, OwareManc
   initialState: (seed: number, s: S) => initialState(seed, s as OwareMancalaQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: OwareMancalaQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: OwareMancalaQuizGame,
 };

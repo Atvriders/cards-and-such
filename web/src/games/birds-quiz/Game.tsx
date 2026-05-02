@@ -56,7 +56,7 @@ export function BirdsQuiz({ state, dispatch, onGameOver }: GameProps<BirdsQuizSt
           } else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult}
-              onClick={() => dispatch({ type: "select", choice: i } as BirdsQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "select", choice: i } as BirdsQuizAction)}>
               <span className="trivia-choice-letter">{LABELS[i]}</span>
               {choice}
             </button>

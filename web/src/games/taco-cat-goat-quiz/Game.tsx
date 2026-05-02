@@ -32,7 +32,7 @@ export function TacoCatGoatQuiz({ state, dispatch, onGameOver }: GameProps<TacoC
           }
           return (
             <button key={i} className={cls} disabled={state.phase !== "ready"}
-              onClick={() => dispatch({ type: "answer", choice: i } as TacoCatGoatQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "answer", choice: i } as TacoCatGoatQuizAction)}>
               {opt}
             </button>
           );

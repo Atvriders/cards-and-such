@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TelestrationsUpsideQuizState, TelestrationsUpsideQuizAction, TelestrationsUpsideQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TelestrationsUpsideQuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const telestrationsUpsideQuizPlugin: GamePlugin<TelestrationsUpsideQuizSt
   initialState: (seed: number, s: S) => initialState(seed, s as TelestrationsUpsideQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: TelestrationsUpsideQuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: TelestrationsUpsideQuizGame,
 };
 

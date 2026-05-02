@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MafiaQuizState, MafiaQuizAction, MafiaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MafiaQuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const mafiaQuizPlugin: GamePlugin<MafiaQuizState, MafiaQuizAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as MafiaQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: MafiaQuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: MafiaQuizGame,
 };
 

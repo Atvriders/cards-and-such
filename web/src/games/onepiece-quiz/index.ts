@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OnepieceQuizState, OnepieceQuizAction, OnepieceQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 20 questions in Settings. From the East Blue to Wano, see how well you know the world's longest-running pirate saga. Set sail!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OnepieceQuizSettings),
-  reducer,isTerminal,component:OnepieceQuizGame,
+  reducer,isTerminal,
+  hint: (state: OnepieceQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:OnepieceQuizGame,
 };

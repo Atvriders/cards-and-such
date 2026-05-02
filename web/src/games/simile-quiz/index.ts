@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SimileQuizState, SimileQuizAction, SimileQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Similes spice up writing: 'as brave as a lion', 'sleeps like a log', 'busy as a bee'. They are easier to spot than metaphors because of those telltale 'like' or 'as'. Whether for school, writing, or wordplay love, Simile Quiz keeps you sharp. Score points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SimileQuizSettings),
-  reducer, isTerminal, component: SimileQuizGame,
+  reducer, isTerminal, 
+  hint: (state: SimileQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: SimileQuizGame,
 };

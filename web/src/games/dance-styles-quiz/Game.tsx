@@ -36,6 +36,7 @@ export function DanceStylesQuiz({
                   key={i}
                   className={cls}
                   disabled={state.selected !== null}
+                  data-testid={`hint-target-quiz-answer-${i}`}
                   onClick={() => dispatch({ type: "select", index: i } as DanceStylesQuizAction)}
                 >
                   {choice}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HyperboleQuizState, HyperboleQuizAction, HyperboleQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Hyperbole brings color to language — 'I'm so hungry I could eat a horse', 'It took forever', 'She's a million miles ahead'. Used carefully, it adds drama and humor. Whether studying English, writing, or just enjoying language, Hyperbole Quiz keeps your eye sharp. Score points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as HyperboleQuizSettings),
-  reducer, isTerminal, component: HyperboleQuizGame,
+  reducer, isTerminal, 
+  hint: (state: HyperboleQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: HyperboleQuizGame,
 };

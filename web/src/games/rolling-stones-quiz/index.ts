@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RollingStonesQuizState, RollingStonesQuizAction, RollingStonesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const rollingStonesQuizPlugin: GamePlugin<RollingStonesQuizState, Rolling
   howToPlay:`Rolling Stones Quiz tests your knowledge of the World's Greatest Rock 'n' Roll Band. From their formation in 1962 through Brian Jones, Mick Taylor, and Ron Wood guitar eras, you'll be quizzed on hit singles like 'Satisfaction' and 'Brown Sugar', landmark albums like 'Exile on Main St.', tragedies like Altamont, the iconic tongue logo, and the longtime partnership of Mick Jagger and Keith Richards.\n\nYou have 15 seconds per question. Each correct answer earns 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the correct answer is always revealed before you continue. Press Next to advance.\n\nChoose 10, 20, or 30 questions in Settings. Start me up!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RollingStonesQuizSettings),
-  reducer,isTerminal,component:RollingStonesQuizGame,
+  reducer,isTerminal,
+  hint: (state: RollingStonesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:RollingStonesQuizGame,
 };

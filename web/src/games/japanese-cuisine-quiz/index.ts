@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { JapaneseCuisineQuizState, JapaneseCuisineQuizAction, JapaneseCuisineQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,7 @@ Tips: Pay attention to regional clues in each question. Many dishes are strongly
 Challenge yourself across multiple sessions to improve your score and deepen your knowledge of this rich culinary tradition!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as JapaneseCuisineQuizSettings),
-  reducer, isTerminal, component: JapaneseCuisineQuiz,
+  reducer, isTerminal, 
+  hint: (state: JapaneseCuisineQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: JapaneseCuisineQuiz,
 };

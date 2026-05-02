@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NasaAstronautsQuizState, NasaAstronautsQuizAction, NasaAstronautsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const nasaAstronautsQuizPlugin: GamePlugin<NasaAstronautsQuizState, NasaA
   howToPlay:"NASA Astronauts Quiz tests your knowledge of America's spacefarers. Questions cover Mercury, Gemini, Apollo, Skylab, Space Shuttle and ISS missions — naming first-flight pioneers, Moonwalkers, Shuttle commanders, mission patches, training centers, and the famous quotes spoken from orbit and the lunar surface.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on.\n\nChoose 10, 20, or 30 questions in Settings. Houston, we have a quiz — see if you have the right stuff!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NasaAstronautsQuizSettings),
-  reducer,isTerminal,component:NasaAstronautsQuizGame,
+  reducer,isTerminal,
+  hint: (state: NasaAstronautsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:NasaAstronautsQuizGame,
 };

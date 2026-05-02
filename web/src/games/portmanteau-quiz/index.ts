@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PortmanteauQuizState, PortmanteauQuizAction, PortmanteauQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Portmanteau words are everywhere in modern English: 'brunch' from breakfast and lunch, 'smog' from smoke and fog, 'motel' from motor and hotel. Lewis Carroll coined the term in Through the Looking-Glass. Whether you love etymology or just love wordplay, Portmanteau Quiz is great fun. Score points, learn origins!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PortmanteauQuizSettings),
-  reducer, isTerminal, component: PortmanteauQuizGame,
+  reducer, isTerminal, 
+  hint: (state: PortmanteauQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: PortmanteauQuizGame,
 };

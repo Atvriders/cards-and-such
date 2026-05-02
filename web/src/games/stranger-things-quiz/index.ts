@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StrangerThingsState, StrangerThingsAction, StrangerThingsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const strangerThingsQuizPlugin: GamePlugin<StrangerThingsState, StrangerT
   howToPlay:"Stranger Things Quiz tests your knowledge of the Duffer Brothers' nostalgic Netflix sci-fi/horror series set in 1980s Hawkins, Indiana. Questions cover Eleven, Mike, Will, Lucas, Dustin, Max, Nancy, Steve, Robin, Jonathan, Hopper, Joyce, and the rest, plus the Upside Down, Demogorgons, the Mind Flayer, Vecna, and the various Hawkins Lab conspiracies.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red.\n\nChoose 10, 20, or 30 questions in Settings. Friends don't lie — but they do quiz!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as StrangerThingsSettings),
-  reducer,isTerminal,component:StrangerThingsQuizGame,
+  reducer,isTerminal,
+  hint: (state: StrangerThingsState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:StrangerThingsQuizGame,
 };

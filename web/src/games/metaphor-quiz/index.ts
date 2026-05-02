@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MetaphorQuizState, MetaphorQuizAction, MetaphorQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Metaphors enrich language: 'Time is a thief'; 'Life is a journey'. They help us think about abstract ideas through concrete images. Whether you are studying literature, writing essays, or just love wordplay, Metaphor Quiz sharpens insight. Score points, build skills!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MetaphorQuizSettings),
-  reducer, isTerminal, component: MetaphorQuizGame,
+  reducer, isTerminal, 
+  hint: (state: MetaphorQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: MetaphorQuizGame,
 };

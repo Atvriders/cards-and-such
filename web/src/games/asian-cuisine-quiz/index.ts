@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AsianCuisineQuizState, AsianCuisineQuizAction, AsianCuisineQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,7 @@ Tips: Many Asian soups share broth bases — look for regional clues in the ques
 Challenge yourself to name countries, identify signature spices, and distinguish between similar-sounding dishes across this richly diverse region.`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as AsianCuisineQuizSettings),
-  reducer, isTerminal, component: AsianCuisineQuiz,
+  reducer, isTerminal, 
+  hint: (state: AsianCuisineQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: AsianCuisineQuiz,
 };

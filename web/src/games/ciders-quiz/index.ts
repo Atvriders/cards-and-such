@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CidersQuizState, CidersQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,6 @@ Tips: Geographic clues are crucial — Normandy means French cider and Calvados;
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CidersQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: CidersQuiz,
 };

@@ -18,7 +18,7 @@ export function RenaissanceQuizGame({ state, dispatch, onGameOver }: GameProps<R
           {entry.choices.map((choice, i) => {
             let cls = "hq-choice";
             if (state.selected !== null) { if (choice === entry.answer) cls += " correct"; else if (state.selected === i) cls += " wrong"; }
-            return <button key={i} className={cls} disabled={state.selected !== null} onClick={() => dispatch({ type:"select", index:i } as RenaissanceQuizAction)}>{choice}</button>;
+            return <button key={i} className={cls} disabled={state.selected !== null} data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type:"select", index:i } as RenaissanceQuizAction)}>{choice}</button>;
           })}
         </div>
         {state.selected !== null && <button className="hq-next" onClick={() => dispatch({ type:"next" } as RenaissanceQuizAction)}>{state.current + 1 < state.entries.length ? "Next" : "Finish"}</button>}

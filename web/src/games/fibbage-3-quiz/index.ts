@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Fibbage3QuizState, Fibbage3QuizAction, Fibbage3QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Fibbage3QuizGame } from "./Game.js";
@@ -17,6 +17,7 @@ export const fibbage3QuizPlugin: GamePlugin<Fibbage3QuizState, Fibbage3QuizActio
   initialState: (seed: number, s: S) => initialState(seed, s as Fibbage3QuizSettings),
   reducer,
   isTerminal,
+  hint: (state: Fibbage3QuizState): HintTarget | null => state.phase === "ask" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: Fibbage3QuizGame,
 };
 

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SciFiFilmsQuizState, SciFiFilmsQuizAction, SciFiFilmsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const sciFiFilmsQuizPlugin: GamePlugin<SciFiFilmsQuizState, SciFiFilmsQui
   howToPlay:`Sci-Fi Films Quiz tests your knowledge of science fiction cinema. From the galaxy-spanning saga of 'Star Wars' to the rain-soaked streets of 'Blade Runner', the existential trips of '2001: A Space Odyssey' and 'Solaris', through to modern epics like 'Interstellar', 'Arrival', and 'Dune', you'll be quizzed on directors, characters, technology, and iconic moments. Expect Skynet, the Matrix, lightsabers, replicants, HAL 9000, and time travel.\n\nYou have 15 seconds per question. Each correct answer earns 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the correct answer is always revealed before you continue. Press Next to advance.\n\nChoose 10, 20, or 30 questions in Settings. Engage!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SciFiFilmsQuizSettings),
-  reducer,isTerminal,component:SciFiFilmsQuizGame,
+  reducer,isTerminal,
+  hint: (state: SciFiFilmsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SciFiFilmsQuizGame,
 };

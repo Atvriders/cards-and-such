@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpidersQuizState, SpidersQuizAction, SpidersQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const spidersQuizPlugin: GamePlugin<SpidersQuizState, SpidersQuizAction, 
   howToPlay:"Spiders Quiz challenges your knowledge of the order Araneae — the spiders. Questions cover web architectures, hunting strategies (orb-weavers vs jumping spiders), venomous species (black widow, brown recluse, funnel-web), tarantulas, spider size and lifespan, and the surprising biology that makes spiders one of Earth's most successful predator groups.\n\nEach correct answer earns 100 base points plus 10 points per second remaining on the 15-second timer. Wrong answers earn nothing. There are 10 questions per game.\n\nTap a choice, then press Submit. The right answer is revealed before you continue. Whether you're an arachnologist, a backyard naturalist, or just curious about the eight-legged neighbors, this quiz invites you to spin a web of knowledge. Climb on in!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SpidersQuizSettings),
-  reducer,isTerminal,component:SpidersQuizGame,
+  reducer,isTerminal,
+  hint: (state: SpidersQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SpidersQuizGame,
 };

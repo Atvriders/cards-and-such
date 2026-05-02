@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EmperorsQuizState, EmperorsQuizAction, EmperorsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next to advance. Choose 5, 10, or 15 questions in Settings.
 Key facts: Augustus was Rome's first emperor; Constantine converted Rome to Christianity; Nero ruled during the Great Fire; Marcus Aurelius was the Philosopher Emperor; Shah Jahan built the Taj Mahal; Mehmed II conquered Constantinople in 1453; Napoleon was exiled to Elba after defeat. Master these and conquer the quiz!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EmperorsQuizSettings),
-  reducer,isTerminal,component:EmperorsQuizGame,
+  reducer,isTerminal,
+  hint: (state: EmperorsQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:EmperorsQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FruitsQuizState, FruitsQuizAction, FruitsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,7 @@ Use Settings to choose 10, 20, or 30 questions. Questions cover tomatoes to duri
 Your final score and accuracy are displayed at the end. Whether you are a foodie or a botanist, Fruits Quiz will refresh your fruity knowledge!`,
   settings: fruitsQuizPluginSettings,
   initialState: (seed: number, s: ST) => initialState(seed, s as FruitsQuizSettings),
-  reducer, isTerminal, component: FruitsQuiz,
+  reducer, isTerminal, 
+  hint: (state: FruitsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: FruitsQuiz,
 };

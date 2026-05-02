@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EnlightenmentQuizState, EnlightenmentQuizAction, EnlightenmentQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next to continue. Choose 5, 10, or 15 questions in Settings.
 Key facts: Locke's natural rights were life, liberty, and property; Montesquieu proposed separation of powers; Rousseau wrote the Social Contract; Hobbes wrote Leviathan; Descartes said "I think therefore I am"; Newton inspired Enlightenment faith in reason; Adam Smith wrote the Wealth of Nations. Master these to ace the quiz!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EnlightenmentQuizSettings),
-  reducer,isTerminal,component:EnlightenmentQuizGame,
+  reducer,isTerminal,
+  hint: (state: EnlightenmentQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:EnlightenmentQuizGame,
 };

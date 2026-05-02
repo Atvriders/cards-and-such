@@ -53,7 +53,7 @@ export function HerbsQuiz({ state, dispatch, onGameOver }: GameProps<HerbsQuizSt
           } else if (i === state.selected) cls += " selected";
           return (
             <button key={i} className={cls} disabled={isResult}
-              onClick={() => dispatch({ type: "select", choice: i } as HerbsQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "select", choice: i } as HerbsQuizAction)}>
               <span className="trivia-choice-letter">{LABELS[i]}</span>
               {choice}
             </button>

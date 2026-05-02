@@ -32,7 +32,7 @@ export function FakeArtistQuiz({ state, dispatch, onGameOver }: GameProps<FakeAr
           }
           return (
             <button key={i} className={cls} disabled={state.phase !== "ready"}
-              onClick={() => dispatch({ type: "answer", choice: i } as FakeArtistQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "answer", choice: i } as FakeArtistQuizAction)}>
               {opt}
             </button>
           );

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ThrowThrowBurritoQuizState, ThrowThrowBurritoQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ThrowThrowBurritoQuiz } from "./Game.js";
@@ -18,5 +18,6 @@ export const throwThrowBurritoQuizPlugin: GamePlugin<ThrowThrowBurritoQuizState,
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: ThrowThrowBurritoQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: ThrowThrowBurritoQuiz,
 };

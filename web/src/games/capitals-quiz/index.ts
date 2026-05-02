@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CapitalsQuizState, CapitalsQuizAction, CapitalsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Countries covered span all inhabited continents: Australia (Canberra, not Sydney
 Use Settings to choose 10 or 20 questions. Questions are randomly selected and answer choices are shuffled every game. Many capitals are surprising — the largest city is often not the capital. This quiz will challenge even seasoned geography enthusiasts. How many capitals do you really know?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CapitalsQuizSettings),
-  reducer, isTerminal, component:CapitalsQuiz,
+  reducer, isTerminal, 
+  hint: (state: CapitalsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:CapitalsQuiz,
 };

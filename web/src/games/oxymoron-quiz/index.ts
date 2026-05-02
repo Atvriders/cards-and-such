@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OxymoronQuizState, OxymoronQuizAction, OxymoronQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Oxymorons capture life's contradictions — they sharpen poetry, prose, and humor. 'Original copy', 'open secret', 'awfully good': each holds a wink. Whether you love wordplay or just want to spot literary devices, Oxymoron Quiz keeps you guessing. Score points and laugh at language!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as OxymoronQuizSettings),
-  reducer, isTerminal, component: OxymoronQuizGame,
+  reducer, isTerminal, 
+  hint: (state: OxymoronQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: OxymoronQuizGame,
 };

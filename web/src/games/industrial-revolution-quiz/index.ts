@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IndustrialRevolutionQuizState, IndustrialRevolutionQuizAction, IndustrialRevolutionQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Press Next to continue. Choose 5, 10, or 15 questions in Settings.
 Key facts: The revolution began in Britain; James Watt improved the steam engine; the spinning jenny mechanized textiles; the Luddites destroyed machines in protest; Marx and Engels wrote the Communist Manifesto; coal was the main fuel; the middle class grew dramatically. Know these to achieve a perfect score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as IndustrialRevolutionQuizSettings),
-  reducer,isTerminal,component:IndustrialRevolutionQuizGame,
+  reducer,isTerminal,
+  hint: (state: IndustrialRevolutionQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:IndustrialRevolutionQuizGame,
 };

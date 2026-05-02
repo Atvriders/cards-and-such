@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ProverbQuizState, ProverbQuizAction, ProverbQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Proverbs pack centuries of wisdom into a sentence: 'A stitch in time saves nine'; 'Don't count your chickens'. They sharpen writing, conversation, and intercultural understanding. Whether learning English or polishing your prose, Proverb Quiz delivers fun and insight in equal measure. Score points, learn wisdom!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ProverbQuizSettings),
-  reducer, isTerminal, component: ProverbQuizGame,
+  reducer, isTerminal, 
+  hint: (state: ProverbQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: ProverbQuizGame,
 };

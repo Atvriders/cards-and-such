@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MetalGearState, MetalGearAction, MetalGearSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const metalGearQuizPlugin: GamePlugin<MetalGearState, MetalGearAction, ty
   howToPlay:"Metal Gear Solid Quiz tests your knowledge of Hideo Kojima's pioneering stealth action franchise, from the original 1987 MSX2 Metal Gear through Metal Gear Solid V: The Phantom Pain. Questions cover the saga's protagonists — Solid Snake, Big Boss (Naked Snake), Raiden, Venom Snake — plus Liquid, Solidus, Otacon, Meryl, Ocelot, The Boss, Quiet, and the convoluted, delightful Patriots/Outer Heaven mythology that ties it all together.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red.\n\nChoose 10, 20, or 30 questions in Settings. Kept you waiting, huh?",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MetalGearSettings),
-  reducer,isTerminal,component:MetalGearQuizGame,
+  reducer,isTerminal,
+  hint: (state: MetalGearState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MetalGearQuizGame,
 };

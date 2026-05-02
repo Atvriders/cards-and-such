@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WinterOlympicsQuizState, WinterOlympicsQuizAction, WinterOlympicsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ You have 15 seconds per question. Each correct answer awards 100 base points plu
 Choose 10 or 20 questions in Settings. Whether you grew up watching the medals on a snowy weekend or you're a ski-jumping junkie, this quiz will bring the Olympic frost back to mind.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WinterOlympicsQuizSettings),
-  reducer,isTerminal,component:WinterOlympicsQuizGame,
+  reducer,isTerminal,
+  hint: (state: WinterOlympicsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:WinterOlympicsQuizGame,
 };

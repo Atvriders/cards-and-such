@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SillyStreetQuizState, SillyStreetQuizAction, SillyStreetQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const sillyStreetQuizPlugin: GamePlugin<SillyStreetQuizState, SillyStreet
   howToPlay:"Silly Street Trivia is a ten-question quiz about the kids' party game where players draw cards instructing them to perform silly physical or vocal challenges on their way down a colourful street. Each round you'll be tested on Silly Street's publisher, target age, the kinds of cards drawn, the simple board layout, and the way kids advance by completing challenges. Tap your answer and press Submit. A correct answer awards 100 base points plus 10 per second remaining on the 15-second timer, so quick recall is rewarded. A wrong answer reveals the correct option and locks the round so you can press Next. After ten questions your final score is displayed. Silly Street is known for its joyfully chaotic energy and the way it gets even shy children moving and laughing — test how much you remember about its wholesome chaos.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SillyStreetQuizSettings),
-  reducer,isTerminal,component:SillyStreetQuizGame,
+  reducer,isTerminal,
+  hint: (state: SillyStreetQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SillyStreetQuizGame,
 };

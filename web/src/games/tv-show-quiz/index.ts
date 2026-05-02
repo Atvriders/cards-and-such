@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TvShowQuizState, TvShowQuizAction, TvShowQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Shows featured include: The Office, Breaking Bad, Game of Thrones, Stranger Thin
 Questions test character names, show settings, famous quotes, plot details, and network origins. Use Settings to choose 10 or 20 questions. Questions are randomly drawn and shuffled each game so no two playthroughs are the same. Whether you are a casual viewer or a certified TV binge-watcher, this quiz has something to stump you!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as TvShowQuizSettings),
-  reducer, isTerminal, component: TvShowQuiz,
+  reducer, isTerminal, 
+  hint: (state: TvShowQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: TvShowQuiz,
 };

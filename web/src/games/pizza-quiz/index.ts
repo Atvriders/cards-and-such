@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PizzaQuizState, PizzaQuizAction, PizzaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,7 @@ Each question gives you 15 seconds to answer. Correct answers award 100 base poi
 Tap a choice, press Submit, and see how you fared. Correct answers light up green; wrong choices flash red and reveal the right answer. Press Next to continue. Choose 10 or 20 questions in Settings. Whether you prefer Margherita simplicity or pineapple controversy, this quiz delivers a full slice of pizza trivia.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PizzaQuizSettings),
-  reducer,isTerminal,component:PizzaQuizGame,
+  reducer,isTerminal,
+  hint: (state: PizzaQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:PizzaQuizGame,
 };

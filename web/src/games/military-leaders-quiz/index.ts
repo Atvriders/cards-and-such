@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MilLeadersState, MilLeadersAction, MilLeadersSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,6 @@ Whether you are a history buff, a strategy game fan, or simply curious about the
   initialState: (seed:number, s:S) => initialState(seed, s as MilLeadersSettings),
   reducer,
   isTerminal,
+  hint: (state: MilLeadersState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: MilitaryLeadersQuiz,
 };

@@ -43,6 +43,7 @@ export function TelestrationsAfterDarkQuizGame({ state, dispatch, onGameOver }: 
               className={cls}
               disabled={state.phase !== "ask"}
               type="button"
+              data-testid={`hint-target-quiz-answer-${i}`}
               onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as TelestrationsAfterDarkQuizAction)}
             >{c}</button>
           );

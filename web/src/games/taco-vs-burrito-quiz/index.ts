@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TacoVsBurritoQuizState, TacoVsBurritoQuizAction, TacoVsBurritoQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const tacoVsBurritoQuizPlugin: GamePlugin<TacoVsBurritoQuizState, TacoVsB
   howToPlay:"Taco vs. Burrito Trivia is a ten-question quiz about the small-format viral card game where players compete to cook the most ridiculous taco or burrito by adding wild ingredients (a cell phone! a kraken!) and bombing each other with hot peppers and pizza-cutters. Each round you'll be tested on its unusual origin (it was created by a 7-year-old), the ingredient cards, action cards, the publisher, and how points are scored. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Taco vs. Burrito's quirky charm and underdog backstory made it a Kickstarter sensation — see how much culinary chaos you can recall.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TacoVsBurritoQuizSettings),
-  reducer,isTerminal,component:TacoVsBurritoQuizGame,
+  reducer,isTerminal,
+  hint: (state: TacoVsBurritoQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TacoVsBurritoQuizGame,
 };

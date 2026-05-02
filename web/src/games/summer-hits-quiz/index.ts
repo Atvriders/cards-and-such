@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SummerHitsQuizState, SummerHitsQuizAction, SummerHitsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const summerHitsQuizPlugin: GamePlugin<SummerHitsQuizState, SummerHitsQui
   howToPlay:"Summer Hits Quiz celebrates the songs that defined sunshine, beaches, road trips, and pool parties. Questions cover decades of summer chart climbers — Beach Boys' surf-rock, disco anthems, '80s pop bangers, '90s reggae crossovers, and modern pop and Latin smashes that own the airwaves from June to September.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on.\n\nChoose 10, 20, or 30 questions in Settings. Roll the windows down and turn it up — this quiz is a summer mixtape!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SummerHitsQuizSettings),
-  reducer,isTerminal,component:SummerHitsQuizGame,
+  reducer,isTerminal,
+  hint: (state: SummerHitsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SummerHitsQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SoccerRulesQuizState, SoccerRulesQuizAction, SoccerRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Topics include match duration (90 minutes plus stoppage), substitution rules (no
 Tap a choice, hit Submit, then Next. Choose 10, 20, or 30 questions in Settings. Whether you live for the Premier League, La Liga, the World Cup, or your local pickup, sharpen your game!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SoccerRulesQuizSettings),
-  reducer,isTerminal,component:SoccerRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: SoccerRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:SoccerRulesQuizGame,
 };

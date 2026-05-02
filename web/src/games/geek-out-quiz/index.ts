@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GeekOutQuizState, GeekOutQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GeekOutQuiz } from "./Game.js";
@@ -18,5 +18,6 @@ export const geekOutQuizPlugin: GamePlugin<GeekOutQuizState, GeekOutQuizAction, 
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: GeekOutQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: GeekOutQuiz,
 };

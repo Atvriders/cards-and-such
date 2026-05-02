@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RussianLitQuizState, RussianLitQuizAction, RussianLitQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const russianLitQuizPlugin: GamePlugin<RussianLitQuizState, RussianLitQui
   howToPlay:`Russian Literature Quiz tests your knowledge of one of the world's most powerful literary traditions. Questions cover the 19th-century giants — Pushkin, Lermontov, Gogol, Turgenev, Tolstoy, Dostoevsky, Chekhov — and stretch into the Soviet and post-Soviet eras with Bulgakov, Pasternak, Sholokhov, Nabokov, and Solzhenitsyn.\n\nYou will be tested on iconic novels (War and Peace, Crime and Punishment, Anna Karenina, The Brothers Karamazov, Doctor Zhivago, The Master and Margarita), key characters (Raskolnikov, Pierre Bezukhov, Anna), and Chekhov's classic plays (The Cherry Orchard, Three Sisters, Uncle Vanya).\n\nEach question has 15 seconds. Correct answers earn 100 points plus 10 per second remaining. Choose 10, 20, or 30 questions in Settings.\n\nIf you can keep Tolstoy's tolerant aristocrats straight from Dostoevsky's tortured saints, you are ready. Da svidaniya — and good luck!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RussianLitQuizSettings),
-  reducer,isTerminal,component:RussianLitQuizGame,
+  reducer,isTerminal,
+  hint: (state: RussianLitQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:RussianLitQuizGame,
 };

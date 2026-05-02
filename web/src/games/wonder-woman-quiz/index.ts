@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WonderWomanQuizState, WonderWomanQuizAction, WonderWomanQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 20 questions in Settings. From William Moulton Marston's 1941 origin to Gal Gadot's modern films, see how well you know the world's most famous superheroine.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WonderWomanQuizSettings),
-  reducer,isTerminal,component:WonderWomanQuizGame,
+  reducer,isTerminal,
+  hint: (state: WonderWomanQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:WonderWomanQuizGame,
 };

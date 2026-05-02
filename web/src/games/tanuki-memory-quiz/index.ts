@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TanukiMemoryState, TanukiMemoryAction, TanukiMemorySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const tanukiMemoryPlugin: GamePlugin<TanukiMemoryState, TanukiMemoryActio
   howToPlay:"Tanuki Memory is a Japanese children's memory card game illustrated with adorable tanuki (raccoon dog) characters. Players take turns flipping pairs of face-down cards, trying to recall locations to find matching tanuki illustrations.\n\nThis is a 10-question multiple-choice quiz. Each question gives you 15 seconds to answer. Tap one of the four choices, then press Submit to lock in your answer. You earn 100 base points for every correct answer plus 10 points for each second remaining on the clock — quick correct answers are worth far more than slow ones. Wrong answers earn nothing.\n\nAfter you submit, the correct answer is revealed: green for correct, red for wrong. Press Next to continue. The game ends after all 10 questions.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TanukiMemorySettings),
-  reducer,isTerminal,component:TanukiMemoryGame,
+  reducer,isTerminal,
+  hint: (state: TanukiMemoryState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TanukiMemoryGame,
 };

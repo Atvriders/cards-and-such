@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VideoGameQuizState, VideoGameQuizAction, VideoGameQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Topics include: Nintendo characters (Mario, Link, Pikachu), PlayStation and Xbox
 Use Settings to choose 10 or 20 questions. Questions are randomly drawn and answer choices are shuffled every game for replayability. Whether you grew up on an Atari or are a current-gen gamer, this quiz covers the breadth of interactive entertainment history. How many can you get right?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as VideoGameQuizSettings),
-  reducer, isTerminal, component:VideoGameQuiz,
+  reducer, isTerminal, 
+  hint: (state: VideoGameQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:VideoGameQuiz,
 };

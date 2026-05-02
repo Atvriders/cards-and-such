@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MusicNotationQuizState, MusicNotationQuizAction, MusicNotationQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const musicNotationQuizPlugin: GamePlugin<MusicNotationQuizState, MusicNo
   howToPlay:"Music Notation Quiz drills the symbols, signs, and conventions of written music. Treble clef, bass clef, alto clef, time signatures, accidentals, rests, ties, slurs, articulations, repeat barlines, dynamics — if it appears on a staff, it could appear here.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on.\n\nChoose 10, 20, or 30 questions in Settings. Performers, sight-readers, and music students alike will sharpen their fluency through this notation pop-quiz!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MusicNotationQuizSettings),
-  reducer,isTerminal,component:MusicNotationQuizGame,
+  reducer,isTerminal,
+  hint: (state: MusicNotationQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MusicNotationQuizGame,
 };

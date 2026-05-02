@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NarutoQuizState, NarutoQuizAction, NarutoQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 20 questions in Settings. Whether you're a die-hard Sasuke fan or a Rock Lee taijutsu loyalist, see how deep your shinobi knowledge runs. Believe it!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NarutoQuizSettings),
-  reducer,isTerminal,component:NarutoQuizGame,
+  reducer,isTerminal,
+  hint: (state: NarutoQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:NarutoQuizGame,
 };

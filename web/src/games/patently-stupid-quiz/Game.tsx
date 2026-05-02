@@ -32,7 +32,7 @@ export function PatentlyStupidQuiz({ state, dispatch, onGameOver }: GameProps<Pa
           }
           return (
             <button key={i} className={cls} disabled={state.phase !== "ready"}
-              onClick={() => dispatch({ type: "answer", choice: i } as PatentlyStupidQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "answer", choice: i } as PatentlyStupidQuizAction)}>
               {opt}
             </button>
           );

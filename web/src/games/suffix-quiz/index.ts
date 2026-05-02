@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SuffixQuizState, SuffixQuizAction, SuffixQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Suffixes turn nouns into adjectives ('-ful'), adjectives into adverbs ('-ly'), and verbs into agents ('-er'). Mastering suffixes unlocks word formation patterns that boost vocabulary. Build skills, score points, and dominate the leaderboard!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SuffixQuizSettings),
-  reducer, isTerminal, component: SuffixQuizGame,
+  reducer, isTerminal, 
+  hint: (state: SuffixQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: SuffixQuizGame,
 };

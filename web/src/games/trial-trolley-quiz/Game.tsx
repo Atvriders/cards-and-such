@@ -32,7 +32,7 @@ export function TrialTrolleyQuiz({ state, dispatch, onGameOver }: GameProps<Tria
           }
           return (
             <button key={i} className={cls} disabled={state.phase !== "ready"}
-              onClick={() => dispatch({ type: "answer", choice: i } as TrialTrolleyQuizAction)}>
+              data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type: "answer", choice: i } as TrialTrolleyQuizAction)}>
               {opt}
             </button>
           );

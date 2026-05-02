@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UsPresidentsMemQuizState, UsPresidentsMemQuizAction, UsPresidentsMemQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const usPresidentsMemQuizPlugin: GamePlugin<UsPresidentsMemQuizState, UsP
   howToPlay:"US Presidents Memory Quiz is a ten-question quiz about the educational variant of the classic concentration matching game where tiles depict portraits of United States Presidents. Each round you'll be tested on the deck's contents, the order in which Presidents took office, common educational variants, the basic match rules, and the publishers who make these decks. Tap your answer and press Submit. A correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is shown. US Presidents Memory has been a classic homeschool and classroom staple for generations, mixing fun with American civics — test how much you remember from a deck designed to be remembered.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as UsPresidentsMemQuizSettings),
-  reducer,isTerminal,component:UsPresidentsMemQuizGame,
+  reducer,isTerminal,
+  hint: (state: UsPresidentsMemQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:UsPresidentsMemQuizGame,
 };

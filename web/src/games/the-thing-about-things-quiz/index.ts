@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TheThingAboutThingsQuizState, TheThingAboutThingsQuizAction, TheThingAboutThingsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const theThingAboutThingsQuizPlugin: GamePlugin<TheThingAboutThingsQuizSt
   howToPlay:"The Thing About Things Trivia is a ten-question quiz about the small-format party card game where players must describe an item assigned to them using only an awkward adjective drawn from a card. Each round you'll be tested on its publisher and designers, the card types (Things and Thing-Adjectives), the round structure, judging, and how points are awarded. Tap your answer and press Submit. A correct answer awards 100 base points plus 10 points per second remaining on the 15-second timer, so move briskly. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. The Thing About Things shines by demanding ridiculous storytelling improv from its players, where the joy is in trying to describe a 'sad' table, a 'judgmental' fork, or a 'romantic' lawnmower. Test how much you remember of its design.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TheThingAboutThingsQuizSettings),
-  reducer,isTerminal,component:TheThingAboutThingsQuizGame,
+  reducer,isTerminal,
+  hint: (state: TheThingAboutThingsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TheThingAboutThingsQuizGame,
 };

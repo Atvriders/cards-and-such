@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MagicSquareQuizState, MagicSquareQuizAction, MagicSquareQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MagicSquareQuizGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const magicSquareQuizPlugin: GamePlugin<MagicSquareQuizState, MagicSquare
   initialState: (seed: number) => initialState(seed, { dummy: true } as MagicSquareQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: MagicSquareQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: MagicSquareQuizGame,
 };

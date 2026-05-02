@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PirateMemQuizState, PirateMemQuizAction, PirateMemQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const pirateMemQuizPlugin: GamePlugin<PirateMemQuizState, PirateMemQuizAc
   howToPlay:"Pirate Memory Trivia is a ten-question quiz about a popular children's variant of the classic memory tile-flip game where the deck is themed with pirates, ships, treasure chests, parrots, and tropical islands. Each round you'll be tested on the rules of concentration, common pirate-deck tile contents, age ranges, publishers of themed memory decks, and the educational values of the game. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Pirate Memory is a perennial bestseller in nursery and bookshop bins thanks to its swashbuckling art and the timeless appeal of the matching mechanic — see how much pirate-deck trivia you can recall.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PirateMemQuizSettings),
-  reducer,isTerminal,component:PirateMemQuizGame,
+  reducer,isTerminal,
+  hint: (state: PirateMemQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:PirateMemQuizGame,
 };

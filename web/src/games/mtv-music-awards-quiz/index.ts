@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MtvMusicAwardsQuizState, MtvMusicAwardsQuizAction, MtvMusicAwardsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const mtvMusicAwardsQuizPlugin: GamePlugin<MtvMusicAwardsQuizState, MtvMu
   howToPlay:"MTV Music Awards Quiz covers the wild, wonderful world of the VMAs. From Madonna's wedding-dress 1984 performance of 'Like a Virgin' to Michael Jackson's 'Thriller' choreography, Britney's snake, Kanye interrupting Taylor, and decades of unforgettable moments — these are the events that defined pop culture.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on.\n\nChoose 10, 20, or 30 questions in Settings. If you grew up with TRL or just love an awards-show meltdown, this is your quiz!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MtvMusicAwardsQuizSettings),
-  reducer,isTerminal,component:MtvMusicAwardsQuizGame,
+  reducer,isTerminal,
+  hint: (state: MtvMusicAwardsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:MtvMusicAwardsQuizGame,
 };
