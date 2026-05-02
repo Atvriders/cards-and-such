@@ -15,7 +15,7 @@ import {
   QUICK_GAME_IDS,
   pickBadgeKind,
 } from "../platform/gameTags.js";
-import { readFavorites, toggleFavorite as toggleFavoritePersist } from "../platform/userdata.js";
+import { readFavorites, toggleFavorite as toggleFavoritePersist, getLastPlayed } from "../platform/userdata.js";
 import { highlightMatch } from "../platform/highlight.js";
 import {
   getCoachmarkState,
@@ -35,6 +35,8 @@ const TITLE_HIGHLIGHT_MIN_LEN = 2;
 const FILTER_STORAGE_KEY = "cards-lobby-filter";
 /** localStorage key persisting the lobby list pagination mode. */
 const LIST_MODE_STORAGE_KEY = "cards-lobby-list-mode";
+/** localStorage key persisting the desktop left-drawer collapsed state. */
+const DRAWER_COLLAPSED_KEY = "cards-lobby-drawer-collapsed";
 
 /**
  * Two ways to walk the long lobby list:
@@ -381,7 +383,7 @@ function TileTooltipEngine({
   );
 }
 
-type Filter = "all" | "top-rated" | "favorites" | GameCategory;
+type Filter = "all" | "top-rated" | "favorites" | "recently-played" | GameCategory;
 const TOP_RATED_THRESHOLD = 4;
 
 /**
@@ -398,6 +400,7 @@ function readPersistedFilter(): Filter {
       raw === "all"
       || raw === "top-rated"
       || raw === "favorites"
+      || raw === "recently-played"
       || raw === "solitaire"
       || raw === "cards"
       || raw === "dice"
@@ -507,6 +510,15 @@ export default function LobbyPage(): JSX.Element {
   const [openFamilyId, setOpenFamilyId] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>(() => readRatings());
   const [favSet, setFavSet] = useState<Set<string>>(() => readFavorites());
+  const [lastPlayed, setLastPlayed] = useState<Record<string, number>>(() => {
+    try { return getLastPlayed(); } catch { return {}; }
+  });
+  const [drawerCollapsed, setDrawerCollapsed] = useState<boolean>(() => {
+    try {
+      if (typeof localStorage === "undefined") return false;
+      return localStorage.getItem(DRAWER_COLLAPSED_KEY) === "1";
+    } catch { return false; }
+  });
   const deferredQuery = useDeferredValue(query);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const featuredRef = useRef<HTMLElement | null>(null);
@@ -587,6 +599,32 @@ export default function LobbyPage(): JSX.Element {
       window.removeEventListener("storage", onStorage);
     };
   }, []);
+
+  // Mirror — keep the recently-played map fresh when refocusing the
+  // lobby so the drawer's "Recently played" filter reflects the most
+  // recent session even after navigating back from PlayPage.
+  useEffect(() => {
+    const refresh = () => {
+      try { setLastPlayed(getLastPlayed()); } catch { /* ignore */ }
+    };
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === "cards-last-played") refresh();
+    };
+    window.addEventListener("focus", refresh);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
+
+  // Persist drawer-collapsed flag — best-effort, ignored on private mode.
+  useEffect(() => {
+    try {
+      if (typeof localStorage === "undefined") return;
+      localStorage.setItem(DRAWER_COLLAPSED_KEY, drawerCollapsed ? "1" : "0");
+    } catch { /* ignore */ }
+  }, [drawerCollapsed]);
 
   // Persist filter changes; the value rehydrates on the next mount.
   useEffect(() => {
@@ -761,6 +799,23 @@ export default function LobbyPage(): JSX.Element {
           ? favSet.has(e.game.id)
           : e.members.some((m) => favSet.has(m.id)),
       );
+    } else if (filter === "recently-played") {
+      // Keep only entries that have at least one member with a non-zero
+      // last-played stamp; sort by most-recent stamp descending so the
+      // top of the list is what the user just touched.
+      const stampOf = (e: LobbyEntry): number => {
+        if (e.kind === "game") return lastPlayed[e.game.id] ?? 0;
+        let best = 0;
+        for (const m of e.members) {
+          const v = lastPlayed[m.id] ?? 0;
+          if (v > best) best = v;
+        }
+        return best;
+      };
+      list = allEntries
+        .filter((e) => stampOf(e) > 0)
+        .slice()
+        .sort((a, b) => stampOf(b) - stampOf(a));
     } else {
       list = allEntries.filter((e) => e.category === filter);
     }
@@ -773,7 +828,7 @@ export default function LobbyPage(): JSX.Element {
     // category / description).
     list = list.filter((e) => e.haystack.includes(q));
     return list;
-  }, [allEntries, filter, deferredQuery, entryRating, favSet]);
+  }, [allEntries, filter, deferredQuery, entryRating, favSet, lastPlayed]);
 
   // Reset window + page + close any open picker when filter or query changes.
   useEffect(() => {
@@ -1044,6 +1099,10 @@ export default function LobbyPage(): JSX.Element {
     if (filter === "all") pool = allGames;
     else if (filter === "top-rated") {
       pool = allGames.filter((g) => (ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD);
+    } else if (filter === "favorites") {
+      pool = allGames.filter((g) => favSet.has(g.id));
+    } else if (filter === "recently-played") {
+      pool = allGames.filter((g) => (lastPlayed[g.id] ?? 0) > 0);
     } else {
       pool = allGames.filter((g) => g.category === filter);
     }
@@ -1051,7 +1110,7 @@ export default function LobbyPage(): JSX.Element {
     if (final.length === 0) return;
     const pick = final[Math.floor(Math.random() * final.length)]!;
     navigate(`/play/${pick.id}`);
-  }, [filter, navigate, ratings]);
+  }, [filter, navigate, ratings, favSet, lastPlayed]);
 
   // Count of distinct top-rated games (>= 4 stars) — drives the chip count.
   const topRatedCount = useMemo(() => {
@@ -1062,6 +1121,17 @@ export default function LobbyPage(): JSX.Element {
     }
     return n;
   }, [ratings]);
+
+  // Count of distinct games with a non-zero last-played stamp — drives
+  // the drawer's "Recently played" entry count badge.
+  const recentlyPlayedCount = useMemo(() => {
+    let n = 0;
+    for (const g of GAMES) {
+      if (g == null) continue;
+      if ((lastPlayed[g.id] ?? 0) > 0) n++;
+    }
+    return n;
+  }, [lastPlayed]);
 
   // Family ids that already appear in the featured strip — when a
   // family is featured, its main-grid tile uses a different testid
@@ -1115,13 +1185,85 @@ export default function LobbyPage(): JSX.Element {
   }
 
   return (
-    <div className="lobby-page" ref={rootRef}>
+    <div
+      className={`lobby-page${drawerCollapsed ? " lobby-page--drawer-collapsed" : ""}`}
+      ref={rootRef}
+    >
       <PageHead
         title="Cards and Such — 4500+ classic and modern games"
         exact
         description="Browse 4,500+ free solitaire, card, dice, board, and arcade games. Play Klondike, FreeCell, Spider, Hearts, Spades, Yahtzee, Chess, and more — instantly in your browser."
         canonical="https://cards.waterburp.com/"
       />
+      <aside
+        className="lobby-drawer"
+        data-testid="lobby-drawer"
+        aria-label="Lobby categories"
+        data-collapsed={drawerCollapsed ? "true" : "false"}
+      >
+        <button
+          type="button"
+          className="lobby-drawer-toggle"
+          data-testid="lobby-drawer-toggle"
+          onClick={() => setDrawerCollapsed((c) => !c)}
+          aria-expanded={!drawerCollapsed}
+          aria-label={drawerCollapsed ? "Expand category drawer" : "Collapse category drawer"}
+          title={drawerCollapsed ? "Expand" : "Collapse"}
+        >
+          <span aria-hidden="true">{drawerCollapsed ? "›" : "‹"}</span>
+        </button>
+        <nav className="lobby-drawer-nav" role="tablist" aria-label="Filter by category (drawer)">
+          <DrawerLink
+            id="all"
+            active={filter === "all"}
+            onClick={() => setFilter("all")}
+            glyph="◎"
+            label={t("lobby.all_games")}
+            count={GAMES.length}
+            collapsed={drawerCollapsed}
+          />
+          {CATEGORY_ORDER.map((cat) => (
+            <DrawerLink
+              key={cat}
+              id={cat}
+              active={filter === cat}
+              onClick={() => setFilter(cat)}
+              glyph={CATEGORY_GLYPHS[cat]}
+              label={CATEGORY_LABELS[cat]}
+              count={categoryCounts[cat]}
+              collapsed={drawerCollapsed}
+            />
+          ))}
+          <div className="lobby-drawer-sep" aria-hidden="true" />
+          <DrawerLink
+            id="favorites"
+            active={filter === "favorites"}
+            onClick={() => setFilter("favorites")}
+            glyph="♥"
+            label={t("lobby.chip.favorites")}
+            count={favSet.size}
+            collapsed={drawerCollapsed}
+          />
+          <DrawerLink
+            id="top-rated"
+            active={filter === "top-rated"}
+            onClick={() => setFilter("top-rated")}
+            glyph="★"
+            label={t("lobby.chip.top_rated")}
+            count={topRatedCount}
+            collapsed={drawerCollapsed}
+          />
+          <DrawerLink
+            id="recently-played"
+            active={filter === "recently-played"}
+            onClick={() => setFilter("recently-played")}
+            glyph="↺"
+            label={t("lobby.chip.recently_played")}
+            count={recentlyPlayedCount}
+            collapsed={drawerCollapsed}
+          />
+        </nav>
+      </aside>
       <header className="lobby-hero">
         <div className="lobby-hero-orb lobby-hero-orb--a" aria-hidden="true" />
         <div className="lobby-hero-orb lobby-hero-orb--b" aria-hidden="true" />
@@ -1206,6 +1348,13 @@ export default function LobbyPage(): JSX.Element {
             testId="chip-favorites"
             glyph="♥"
           >{t("lobby.chip.favorites")}</Chip>
+          <Chip
+            active={filter === "recently-played"}
+            onClick={() => setFilter("recently-played")}
+            count={recentlyPlayedCount}
+            testId="chip-recently-played"
+            glyph="↺"
+          >{t("lobby.chip.recently_played")}</Chip>
           {CATEGORY_ORDER.map((cat) => (
             <Chip
               key={cat}
@@ -1264,7 +1413,9 @@ export default function LobbyPage(): JSX.Element {
                 ? t("lobby.chip.top_rated")
                 : filter === "favorites"
                   ? t("lobby.chip.favorites")
-                  : CATEGORY_LABELS[filter]}
+                  : filter === "recently-played"
+                    ? t("lobby.chip.recently_played")
+                    : CATEGORY_LABELS[filter]}
             {query && (
               <span className="lobby-section-count">
                 {" · "}
@@ -1471,6 +1622,42 @@ export default function LobbyPage(): JSX.Element {
         </div>
       )}
     </div>
+  );
+}
+
+interface DrawerLinkProps {
+  id: string;
+  active: boolean;
+  onClick: () => void;
+  glyph: string;
+  label: string;
+  count: number;
+  collapsed: boolean;
+}
+/**
+ * Single entry in the desktop left-drawer category nav. Renders the
+ * glyph + label + count when expanded, glyph-only when collapsed (the
+ * label still ships in `aria-label` and a native `title` so the icon
+ * row remains usable). Clicking sets the same lobby `filter` state as
+ * the chip strip — they stay in sync because they read/write the same
+ * piece of state.
+ */
+function DrawerLink({ id, active, onClick, glyph, label, count, collapsed }: DrawerLinkProps): JSX.Element {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      className={`lobby-drawer-link${active ? " is-active" : ""}`}
+      onClick={onClick}
+      data-testid={`lobby-drawer-cat-${id}`}
+      title={collapsed ? `${label} (${count.toLocaleString()})` : undefined}
+      aria-label={`${label} — ${count.toLocaleString()} games`}
+    >
+      <span className="lobby-drawer-link-glyph" aria-hidden="true">{glyph}</span>
+      <span className="lobby-drawer-link-label">{label}</span>
+      <span className="lobby-drawer-link-count">{count.toLocaleString()}</span>
+    </button>
   );
 }
 

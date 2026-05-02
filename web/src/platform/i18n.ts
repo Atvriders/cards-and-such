@@ -35,6 +35,7 @@ const EN: Registry = {
   "lobby.chip.all": "All",
   "lobby.chip.top_rated": "Top rated",
   "lobby.chip.favorites": "Favorites",
+  "lobby.chip.recently_played": "Recently played",
   "lobby.cat.solitaire": "Solitaire",
   "lobby.cat.cards": "Cards",
   "lobby.cat.dice": "Dice",

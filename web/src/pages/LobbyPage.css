@@ -1685,3 +1685,136 @@ button.tile {
 @media (prefers-reduced-motion: reduce) {
   .lobby-coachmark { animation: none; }
 }
+
+/* ===================================================================
+   Desktop left-side category drawer
+   -------------------------------------------------------------------
+   Below 1024px the drawer is hidden entirely (mobile keeps the chip
+   strip). At >=1024px the drawer is a sticky aside docked to the left
+   of the viewport — collapsible to an icon-only rail. Persisted via
+   the `cards-lobby-drawer-collapsed` localStorage key.
+   ================================================================ */
+.lobby-drawer { display: none; }
+
+@media (min-width: 1024px) {
+  .lobby-drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 72px;
+    left: max(12px, calc((100vw - var(--container-w, 1180px)) / 2 - 232px));
+    width: 220px;
+    max-height: calc(100vh - 96px);
+    padding: var(--sp-2);
+    z-index: 4;
+    background: linear-gradient(180deg, rgba(14, 16, 28, 0.78) 0%, rgba(14, 16, 28, 0.55) 100%);
+    border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+    border-radius: var(--r-xl, 14px);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: 0 20px 50px -28px rgba(0, 0, 0, 0.7);
+    overflow: hidden auto;
+    transition: width var(--dur-fast, 160ms) var(--ease-out-quart, ease-out);
+  }
+  .lobby-drawer[data-collapsed="true"] {
+    width: 56px;
+  }
+  .lobby-drawer-toggle {
+    align-self: flex-end;
+    width: 28px;
+    height: 28px;
+    margin-bottom: var(--sp-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    line-height: 1;
+    color: var(--text-300, rgba(255, 255, 255, 0.7));
+    background: transparent;
+    border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+    border-radius: var(--r-pill, 999px);
+    cursor: pointer;
+    transition: background var(--dur-fast, 160ms) ease, color var(--dur-fast, 160ms) ease;
+  }
+  .lobby-drawer-toggle:hover,
+  .lobby-drawer-toggle:focus-visible {
+    background: var(--surface-2, rgba(255, 255, 255, 0.06));
+    color: var(--text-100, #f8fafc);
+    outline: none;
+  }
+  .lobby-drawer[data-collapsed="true"] .lobby-drawer-toggle {
+    align-self: center;
+  }
+  .lobby-drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .lobby-drawer-link {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.7rem;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: var(--weight-semibold, 600);
+    color: var(--text-300, rgba(255, 255, 255, 0.7));
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--r-md, 10px);
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--dur-fast, 160ms) ease, color var(--dur-fast, 160ms) ease, border-color var(--dur-fast, 160ms) ease;
+  }
+  .lobby-drawer-link:hover {
+    background: var(--surface-2, rgba(255, 255, 255, 0.06));
+    color: var(--text-100, #f8fafc);
+  }
+  .lobby-drawer-link:focus-visible {
+    outline: 2px solid var(--border-focus, #5b6cff);
+    outline-offset: 1px;
+  }
+  .lobby-drawer-link.is-active {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(56, 189, 248, 0.16) 100%);
+    border-color: rgba(99, 102, 241, 0.5);
+    color: #ffffff;
+  }
+  .lobby-drawer-link-glyph {
+    width: 22px;
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+  .lobby-drawer-link-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lobby-drawer-link-count {
+    font-size: 0.78rem;
+    font-weight: var(--weight-medium, 500);
+    color: var(--text-400, rgba(255, 255, 255, 0.55));
+    font-variant-numeric: tabular-nums;
+  }
+  .lobby-drawer[data-collapsed="true"] .lobby-drawer-link {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 0.55rem 0.25rem;
+  }
+  .lobby-drawer[data-collapsed="true"] .lobby-drawer-link-label,
+  .lobby-drawer[data-collapsed="true"] .lobby-drawer-link-count {
+    display: none;
+  }
+  .lobby-drawer-sep {
+    height: 1px;
+    margin: 0.4rem 0.5rem;
+    background: var(--border-soft, rgba(255, 255, 255, 0.08));
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .lobby-drawer,
+  .lobby-drawer-link,
+  .lobby-drawer-toggle { transition: none; }
+}
