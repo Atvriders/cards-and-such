@@ -16,5 +16,5 @@ There are 10 draws per game. The probability of a random five-card flush is abou
 Just press Draw 5, watch the cards land, and click Next to move on. The game ends after 10 draws, and your score sums every flush you found. Suit yourself!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FlushFinderSettings),
-  reducer,isTerminal,component:FlushFinderGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-flush-finder-primary"]', pulses: 3 }),component:FlushFinderGame,
 };

@@ -20,7 +20,7 @@ export function FourColorFlushGame({ state, dispatch, onGameOver }: GameProps<Fo
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as FourColorFlushAction)}>Deal 4</button>
+        <button data-testid="hint-target-four-color-flush-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as FourColorFlushAction)}>Deal 4</button>
       )}
       {state.phase === "scored" && (
         <>

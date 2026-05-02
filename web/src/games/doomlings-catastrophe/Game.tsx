@@ -22,7 +22,7 @@ export function DoomlingsCatastropheGame({ state, dispatch, onGameOver }: GamePr
         </>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as DoomlingsCatastropheAction)}>Draw</button>
+        <button data-testid="hint-target-doomlings-catastrophe-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as DoomlingsCatastropheAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

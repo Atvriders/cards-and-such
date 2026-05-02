@@ -21,7 +21,7 @@ export function EvenEvensGame({ state, dispatch, onGameOver }: GameProps<EvenEve
         </div>
       )}
       {state.phase === "ready" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as EvenEvensAction)}>Draw 2</button>
+        <button data-testid="hint-target-even-evens-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as EvenEvensAction)}>Draw 2</button>
       )}
       {state.phase === "revealed" && (
         <>

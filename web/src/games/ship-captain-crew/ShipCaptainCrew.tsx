@@ -45,14 +45,14 @@ export function ShipCaptainCrew({ state, dispatch, onGameOver }: GameProps<ShipC
       )}
 
       <div className="scc-controls">
-        <button onClick={() => dispatch({ type: "roll" } as SCCAction)} disabled={!canRoll || !!terminal}>
+        <button data-testid="hint-target-ship-captain-crew-roll" onClick={() => dispatch({ type: "roll" } as SCCAction)} disabled={!canRoll || !!terminal}>
           {cur.rollsUsed === 0 ? "Roll" : "Re-roll"}
         </button>
-        <button onClick={() => dispatch({ type: "bank" } as SCCAction)} disabled={!canBank || !!terminal}>
+        <button data-testid="hint-target-ship-captain-crew-bank" onClick={() => dispatch({ type: "bank" } as SCCAction)} disabled={!canBank || !!terminal}>
           Bank &amp; Pass
         </button>
         {state.phase === "roundOver" && !state.gameOver && (
-          <button onClick={() => dispatch({ type: "nextRound" } as SCCAction)}>Next Round</button>
+          <button data-testid="hint-target-ship-captain-crew-next" onClick={() => dispatch({ type: "nextRound" } as SCCAction)}>Next Round</button>
         )}
       </div>
 

@@ -18,5 +18,5 @@ You get 12 draws total. Since there are only 4 of each rank in a deck, the maxim
 There's no skill, just rhythm and reveal. Draw, watch the rank counts climb, and cheer when a triple completes. Your final score is your triple count times 30.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TripleTroubleSettings),
-  reducer,isTerminal,component:TripleTroubleGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-triple-trouble-primary"]', pulses: 3 }),component:TripleTroubleGame,
 };

@@ -15,6 +15,6 @@ export const cartographerHeroesPlugin: GamePlugin<CartographerHeroesState, Carto
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CartographerHeroesSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-cartographer-heroes-primary"]', pulses: 3 }),
   component:CartographerHeroesGame,
 };

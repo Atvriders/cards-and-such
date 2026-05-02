@@ -19,7 +19,7 @@ export function HighFiveCardsGame({ state, dispatch, onGameOver }: GameProps<Hig
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as HighFiveCardsAction)}>Deal 5</button>
+        <button data-testid="hint-target-high-five-cards-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as HighFiveCardsAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

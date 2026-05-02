@@ -18,5 +18,5 @@ If two cards tie for highest rank (different suits), tapping either of those wou
 Look quickly, tap accurately, and chase a perfect 100.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as QuintDealSettings),
-  reducer,isTerminal,component:QuintDealGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-quint-deal-primary"]', pulses: 3 }),component:QuintDealGame,
 };

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { Nmbr9State, Nmbr9Action, Nmbr9Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { Nmbr9Game } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const nmbr9Plugin: GamePlugin<Nmbr9State, Nmbr9Action, typeof settings> =
   initialState: (seed: number, s: S) => initialState(seed, s as Nmbr9Settings),
   reducer,
   isTerminal,
+  hint: (state: Nmbr9State): HintTarget | null => {
+    const sel = tileHintSelector(state, "nm9-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: Nmbr9Game,
 };

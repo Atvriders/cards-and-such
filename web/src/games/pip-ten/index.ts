@@ -16,5 +16,5 @@ Your score for the round is 40 minus twice the absolute distance from 50. So a s
 There are 8 rounds and no in-round choices — it's pure draw-and-tally. Average sums tend to land in the 60s because face cards and tens cluster at the top end, so be on the lookout for hands rich in twos, threes, fours, and friendly aces. With ten cards the variance smooths out compared to Pip Five, so consistently good hands earn steady mid-range scores. The maximum total is 320.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PipTenSettings),
-  reducer,isTerminal,component:PipTenGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-pip-ten-primary"]', pulses: 3 }),component:PipTenGame,
 };

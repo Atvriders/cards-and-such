@@ -14,8 +14,8 @@ export function DiceCricketGame({ state, dispatch, onGameOver }: GameProps<DiceC
       <div className="dm-row">{state.closed.map((c,i)=>(<div key={i} className={`dm-cell ${c?"filled":""}`}>{i===5?"BE":i+1}</div>))}</div>
       {state.dice.length>0 && (<div className="dm-row">{state.dice.map((d,i)=>(<div key={i} className="dm-die">{d}</div>))}</div>)}
       {state.phase==="scored" && <div className="dm-result">+{state.lastPts}</div>}
-      {state.phase==="rolling" && <button className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceCricketAction)}>Roll 3 Dice</button>}
-      {state.phase==="scored" && <button className="dm-btn alt" onClick={()=>dispatch({type:"next"} as DiceCricketAction)}>{state.round>=TOTAL_ROUNDS?"Finish":"Next"}</button>}
+      {state.phase==="rolling" && <button data-testid="hint-target-dice-cricket-roll" className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceCricketAction)}>Roll 3 Dice</button>}
+      {state.phase==="scored" && <button data-testid="hint-target-dice-cricket-next" className="dm-btn alt" onClick={()=>dispatch({type:"next"} as DiceCricketAction)}>{state.round>=TOTAL_ROUNDS?"Finish":"Next"}</button>}
     </div>
   );
 }

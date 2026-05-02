@@ -22,7 +22,7 @@ export function FiveFingersGame({ state, dispatch, onGameOver }: GameProps<FiveF
           <div key={i} className={`cm-card small ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>
         ))}
       </div>
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as FiveFingersAction)}>Draw</button>
+      <button data-testid="hint-target-five-fingers-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as FiveFingersAction)}>Draw</button>
     </div>
   );
 }

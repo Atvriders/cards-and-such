@@ -18,5 +18,5 @@ Since the deck contains exactly four of each rank, every rank you fully complete
 There's no skill — pure draw-and-reveal. Tap Draw, watch the rank counts climb in the hand display, and shout when that fourth match lands. Your final score is your quartet count times 60. Aim for 60+ and consider yourself a quartet champion!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as QuartetQuestSettings),
-  reducer,isTerminal,component:QuartetQuestGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-quartet-quest-primary"]', pulses: 3 }),component:QuartetQuestGame,
 };

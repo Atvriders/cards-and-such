@@ -22,7 +22,7 @@ export function TwoTwosomeGame({ state, dispatch, onGameOver }: GameProps<TwoTwo
           <div key={i} className={`cm-card small ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>
         ))}
       </div>
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as TwoTwosomeAction)}>Draw</button>
+      <button data-testid="hint-target-two-twosome-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as TwoTwosomeAction)}>Draw</button>
     </div>
   );
 }

@@ -16,5 +16,5 @@ There are 8 rounds. There's no in-round choice; the cards fall as they will. Wit
 Average final scores hover around 90; a hot run with several three-or-four-face hands can push past 200.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FaceFlushSettings),
-  reducer,isTerminal,component:FaceFlushGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-face-flush-primary"]', pulses: 3 }),component:FaceFlushGame,
 };

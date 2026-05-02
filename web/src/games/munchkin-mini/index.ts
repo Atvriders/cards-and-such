@@ -15,6 +15,6 @@ export const munchkinMiniPlugin: GamePlugin<MunchkinMiniState, MunchkinMiniActio
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MunchkinMiniSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-munchkin-mini-primary"]', pulses: 3 }),
   component:MunchkinMiniGame,
 };

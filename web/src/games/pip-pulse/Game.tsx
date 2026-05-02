@@ -21,7 +21,7 @@ export function PipPulseGame({ state, dispatch, onGameOver }: GameProps<PipPulse
       {state.phase === "predict" && (
         <div className="cm-row">
           <button className="cm-btn alt" onClick={() => dispatch({ type:"predict", choice:"low" } as PipPulseAction)}>Pip ≤ 7</button>
-          <button className="cm-btn" onClick={() => dispatch({ type:"predict", choice:"high" } as PipPulseAction)}>Pip &gt; 7</button>
+          <button data-testid="hint-target-pip-pulse-primary" className="cm-btn" onClick={() => dispatch({ type:"predict", choice:"high" } as PipPulseAction)}>Pip &gt; 7</button>
         </div>
       )}
       {state.phase === "result" && (

@@ -19,7 +19,7 @@ export function EverdellWoodlandGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as EverdellWoodlandAction)}>Draw</button>
+        <button data-testid="hint-target-everdell-woodland-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as EverdellWoodlandAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

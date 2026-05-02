@@ -16,5 +16,5 @@ If your total is under 20, you score 50 minus twice the sum (so a sum of 5 score
 You play 8 rounds. There's no choice within a round; it's pure draw-and-tally. Average sums tend to land around 35, so don't be surprised if you score zero on most rounds — but when fortune deals five small cards, you'll feel like you've found money in the couch cushions!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PipPurseSettings),
-  reducer,isTerminal,component:PipPurseGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-pip-purse-primary"]', pulses: 3 }),component:PipPurseGame,
 };

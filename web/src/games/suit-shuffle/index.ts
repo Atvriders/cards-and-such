@@ -21,5 +21,5 @@ Probabilities favor mixed hands, so most rounds score the +10 base. About 30% of
 There are no decisions to make; each round is a pure draw, scored automatically. Average game scores land around 200, but a couple of three-suit rounds plus a quad will push you well past 300. Aim for the cosmic four-suit moment!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SuitShuffleSettings),
-  reducer,isTerminal,component:SuitShuffleGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-suit-shuffle-primary"]', pulses: 3 }),component:SuitShuffleGame,
 };

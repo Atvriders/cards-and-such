@@ -23,7 +23,7 @@ export function KingsCourtGame({ state, dispatch, onGameOver }: GameProps<KingsC
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as KingsCourtAction)}>Deal</button>
+        <button data-testid="hint-target-kings-court-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as KingsCourtAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

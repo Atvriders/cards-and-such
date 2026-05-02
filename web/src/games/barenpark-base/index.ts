@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { BarenparkBaseState, BarenparkBaseAction, BarenparkBaseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { BarenparkBaseGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const barenparkBasePlugin: GamePlugin<BarenparkBaseState, BarenparkBaseAc
   initialState: (seed: number, s: S) => initialState(seed, s as BarenparkBaseSettings),
   reducer,
   isTerminal,
+  hint: (state: BarenparkBaseState): HintTarget | null => {
+    const sel = tileHintSelector(state, "bpb-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: BarenparkBaseGame,
 };

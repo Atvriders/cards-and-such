@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { BlokusState, BlokusAction, BlokusSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { BlokusGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const blokusPlugin: GamePlugin<BlokusState, BlokusAction, typeof settings
   initialState: (seed: number, s: S) => initialState(seed, s as BlokusSettings),
   reducer,
   isTerminal,
+  hint: (state: BlokusState): HintTarget | null => {
+    const sel = tileHintSelector(state, "blk-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: BlokusGame,
 };

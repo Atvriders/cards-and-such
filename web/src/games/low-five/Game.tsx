@@ -19,7 +19,7 @@ export function LowFiveGame({ state, dispatch, onGameOver }: GameProps<LowFiveSt
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as LowFiveAction)}>Deal 5</button>
+        <button data-testid="hint-target-low-five-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as LowFiveAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

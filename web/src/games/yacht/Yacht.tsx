@@ -45,7 +45,7 @@ export function Yacht({ state, dispatch, onGameOver }: GameProps<YachtState, Yac
       </div>
 
       <div className="yacht-controls">
-        <button onClick={() => dispatch({ type: "roll" } as YachtAction)} disabled={!canRoll || !!terminal}>
+        <button data-testid="hint-target-yacht-roll" onClick={() => dispatch({ type: "roll" } as YachtAction)} disabled={!canRoll || !!terminal}>
           {state.rollsUsed === 0 ? "Roll Dice" : "Re-roll"}
         </button>
       </div>
@@ -62,6 +62,7 @@ export function Yacht({ state, dispatch, onGameOver }: GameProps<YachtState, Yac
               <tr key={cat} className={used ? "used" : hasRolled ? "clickable" : ""}>
                 <td>{LABELS[cat]}</td>
                 <td
+                  data-testid={`hint-target-yacht-cat-${cat}`}
                   className={used ? undefined : potential !== null ? "score-cell potential" : "score-cell"}
                   onClick={used ? undefined : () => handleScore(cat)}
                 >

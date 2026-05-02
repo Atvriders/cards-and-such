@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceStackState, DiceStackAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, calcCategory } from "./state.js";
 import { DiceStackGame } from "./Game.js";
 
 export const diceStackPlugin = {
@@ -20,5 +20,21 @@ After rolling, toggle which dice to keep, then roll again. When satisfied, click
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: DiceStackState, action: DiceStackAction) => DiceStackState,
   isTerminal,
+  hint: (state: DiceStackState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "roll" && state.rollsLeft > 0) {
+      return { selector: '[data-testid="hint-target-dice-stack-roll"]', pulses: 3 };
+    }
+    const cats = Object.keys(state.scores);
+    const unused = cats.filter((c) => state.scores[c] === null);
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = calcCategory(bestCat, state.dice);
+    for (const c of unused) {
+      const s = calcCategory(c, state.dice);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-dice-stack-cat-${bestCat}"]`, pulses: 3 };
+  },
   component: DiceStackGame,
 } as unknown as GamePlugin;

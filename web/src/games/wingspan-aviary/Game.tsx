@@ -19,7 +19,7 @@ export function WingspanAviaryGame({ state, dispatch, onGameOver }: GameProps<Wi
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as WingspanAviaryAction)}>Draw</button>
+        <button data-testid="hint-target-wingspan-aviary-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as WingspanAviaryAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

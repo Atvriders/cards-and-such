@@ -18,12 +18,12 @@ export function DiceBowlingGame({ state, dispatch, onGameOver }: GameProps<DiceB
         <div className="dbwl-row">{state.dice.map((d, i) => <div key={i} className="dbwl-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dbwl-btn" onClick={() => dispatch({ type:"roll" } as DiceBowlingAction)}>Roll</button>
+        <button data-testid="hint-target-dice-bowling-roll" className="dbwl-btn" onClick={() => dispatch({ type:"roll" } as DiceBowlingAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="dbwl-result">+{state.lastPts}</div>
-          <button className="dbwl-btn alt" onClick={() => dispatch({ type:"next" } as DiceBowlingAction)}>Next</button>
+          <button data-testid="hint-target-dice-bowling-next" className="dbwl-btn alt" onClick={() => dispatch({ type:"next" } as DiceBowlingAction)}>Next</button>
         </>
       )}
     </div>

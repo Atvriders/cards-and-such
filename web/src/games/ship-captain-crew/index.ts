@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShipCaptainCrewState, SCCAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,18 @@ Tips: if you get ship+captain+crew on the first roll and your cargo is high (10+
   initialState: (seed: number, settings: SCCSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: ShipCaptainCrewState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "roundOver") {
+      return { selector: '[data-testid="hint-target-ship-captain-crew-next"]', pulses: 3 };
+    }
+    if ((state.phase === "preRoll" || state.phase === "rolling") && state.current.rollsUsed < 3) {
+      return { selector: '[data-testid="hint-target-ship-captain-crew-roll"]', pulses: 3 };
+    }
+    if (state.phase === "rolling") {
+      return { selector: '[data-testid="hint-target-ship-captain-crew-bank"]', pulses: 3 };
+    }
+    return null;
+  },
   component: ShipCaptainCrew,
 };

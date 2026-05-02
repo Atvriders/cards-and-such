@@ -16,5 +16,5 @@ You'll do 12 draws per game. There's no choice each round — just press Draw an
 After each draw, press Next to continue. The game ends after the 12th draw and your final tally is your score. It's a friendly little game for a coffee break — no strategy, just a bit of card-flipping fun.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OddOddsSettings),
-  reducer,isTerminal,component:OddOddsGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-odd-odds-primary"]', pulses: 3 }),component:OddOddsGame,
 };

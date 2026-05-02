@@ -18,12 +18,12 @@ export function DiceFlush({ state, dispatch, onGameOver }: GameProps<DiceFlushSt
     </div>
     {!isResult&&<p style={{fontSize:"0.85rem",color:"#888"}}>Click dice to keep them, then Reroll or Score</p>}
     {!isResult&&<div style={{display:"flex",gap:"12px"}}>
-      <button className="dflsh-btn" disabled={state.rerolls>=state.maxRerolls} onClick={()=>dispatch({type:"roll"} as DiceFlushAction)}>Reroll Unkept</button>
-      <button className="dflsh-btn" style={{background:"#27ae60"}} onClick={()=>dispatch({type:"score"} as DiceFlushAction)}>Score ({pending} pts)</button>
+      <button data-testid="hint-target-dice-flush-roll" className="dflsh-btn" disabled={state.rerolls>=state.maxRerolls} onClick={()=>dispatch({type:"roll"} as DiceFlushAction)}>Reroll Unkept</button>
+      <button data-testid="hint-target-dice-flush-score" className="dflsh-btn" style={{background:"#27ae60"}} onClick={()=>dispatch({type:"score"} as DiceFlushAction)}>Score ({pending} pts)</button>
     </div>}
     {isResult&&<div>
       <p style={{fontWeight:700,fontSize:"1.3rem"}}>Round score: {state.score} pts</p>
-      <button className="dflsh-btn" onClick={()=>dispatch({type:"next"} as DiceFlushAction)}>Next Round</button>
+      <button data-testid="hint-target-dice-flush-next" className="dflsh-btn" onClick={()=>dispatch({type:"next"} as DiceFlushAction)}>Next Round</button>
     </div>}
   </div>;
 }

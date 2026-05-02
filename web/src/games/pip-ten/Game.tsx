@@ -20,7 +20,7 @@ export function PipTenGame({ state, dispatch, onGameOver }: GameProps<PipTenStat
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipTenAction)}>Deal 10</button>
+        <button data-testid="hint-target-pip-ten-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipTenAction)}>Deal 10</button>
       )}
       {state.phase === "scored" && (
         <>

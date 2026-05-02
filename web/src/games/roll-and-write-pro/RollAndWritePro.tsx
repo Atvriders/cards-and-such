@@ -45,7 +45,7 @@ export function RollAndWritePro({ state, dispatch, onGameOver }: GameProps<RollA
       </div>
 
       <div className="raw-pro-buttons">
-        <button disabled={state.rollsLeft <= 0} onClick={() => dispatch({ type: "roll" })}>
+        <button data-testid="hint-target-roll-and-write-pro-roll" disabled={state.rollsLeft <= 0} onClick={() => dispatch({ type: "roll" })}>
           Roll ({state.rollsLeft})
         </button>
       </div>
@@ -64,7 +64,7 @@ export function RollAndWritePro({ state, dispatch, onGameOver }: GameProps<RollA
               <div className="raw-pro-cat-score">
                 {locked !== null ? locked : (
                   !state.gameOver && (
-                    <button className="raw-pro-cat-btn" onClick={() => dispatch({ type: "scoreCategory", category: cat })}>
+                    <button data-testid={`hint-target-roll-and-write-pro-cat-${cat}`} className="raw-pro-cat-btn" onClick={() => dispatch({ type: "scoreCategory", category: cat })}>
                       Score
                     </button>
                   )

@@ -20,7 +20,7 @@ export function LowPairGame({ state, dispatch, onGameOver }: GameProps<LowPairSt
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as LowPairAction)}>Deal 2</button>
+        <button data-testid="hint-target-low-pair-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as LowPairAction)}>Deal 2</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -15,6 +15,6 @@ export const tinyEpicDungeonMiniPlugin: GamePlugin<TinyEpicDungeonMiniState, Tin
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TinyEpicDungeonMiniSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-tiny-epic-dungeon-mini-primary"]', pulses: 3 }),
   component:TinyEpicDungeonMiniGame,
 };

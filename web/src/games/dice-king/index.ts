@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceKingState, DiceKingAction, DiceKingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -22,5 +22,13 @@ There are no choices to make — just roll and watch the dice fall. Average sing
 Will you be crowned the Dice King? Roll on!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceKingSettings),
-  reducer,isTerminal,component:DiceKingGame,
+  reducer,isTerminal,
+  hint: (state: DiceKingState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "rolling") {
+      return { selector: '[data-testid="hint-target-dice-king-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-dice-king-next"]', pulses: 3 };
+  },
+  component:DiceKingGame,
 };

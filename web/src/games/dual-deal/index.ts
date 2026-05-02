@@ -18,5 +18,5 @@ There are 12 rounds. Without prior information, picking left or right is purely 
 The pure randomness keeps things light. Trust your gut, click left or right, and see how the cards break.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DualDealSettings),
-  reducer,isTerminal,component:DualDealGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-dual-deal-primary"]', pulses: 3 }),component:DualDealGame,
 };

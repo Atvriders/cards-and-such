@@ -15,6 +15,6 @@ export const resArcanaEssencePlugin: GamePlugin<ResArcanaEssenceState, ResArcana
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ResArcanaEssenceSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-res-arcana-essence-primary"]', pulses: 3 }),
   component:ResArcanaEssenceGame,
 };

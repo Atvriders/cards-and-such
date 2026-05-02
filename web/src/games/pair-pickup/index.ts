@@ -16,5 +16,5 @@ You play 12 draws total. The probability of getting at least one pair on any giv
 No decisions to make: just press Deal 5, watch the cards land, and see how many pairs the deck delivers. The match counter shows the breakdown each round, and after 12 draws your final score is locked in. Easy, satisfying, and randomly generous!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PairPickupSettings),
-  reducer,isTerminal,component:PairPickupGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-pair-pickup-primary"]', pulses: 3 }),component:PairPickupGame,
 };

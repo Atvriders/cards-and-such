@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { CowboyDiceState, CowboyDiceAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { CowboyDiceState, CowboyDiceAction, CowboyCategory } from "./state.js";
+import { initialState, reducer, isTerminal, ALL_COWBOY_CATEGORIES, computeCowboyScore } from "./state.js";
 import { CowboyDice } from "./CowboyDice.js";
 
 export const cowboyDiceSettings = {
@@ -32,5 +32,20 @@ Each category can only be scored once. If your dice don't match well, you can al
   initialState: (seed: number, settings: CowboyDiceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CowboyDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.rollsUsed < 3) {
+      return { selector: '[data-testid="hint-target-cowboy-dice-roll"]', pulses: 3 };
+    }
+    const unused = ALL_COWBOY_CATEGORIES.filter((c) => !(c in state.scores)) as CowboyCategory[];
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = computeCowboyScore(state.dice, bestCat);
+    for (const c of unused) {
+      const s = computeCowboyScore(state.dice, c);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-cowboy-dice-cat-${bestCat}"]`, pulses: 3 };
+  },
   component: CowboyDice,
 };

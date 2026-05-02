@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { SamuraiDiceState, SamuraiDiceAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { SamuraiDiceState, SamuraiDiceAction, SamuraiCategory } from "./state.js";
+import { initialState, reducer, isTerminal, ALL_SAMURAI_CATEGORIES, computeSamuraiScore } from "./state.js";
 import { SamuraiDice } from "./SamuraiDice.js";
 
 export const samuraiDiceSettings = {
@@ -30,5 +30,20 @@ Each category may only be scored once. If you play fewer rounds than categories,
   initialState: (seed: number, settings: SamuraiDiceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: SamuraiDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.rollsUsed < 3) {
+      return { selector: '[data-testid="hint-target-samurai-dice-roll"]', pulses: 3 };
+    }
+    const unused = ALL_SAMURAI_CATEGORIES.filter((c) => !(c in state.scores)) as SamuraiCategory[];
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = computeSamuraiScore(state.dice, bestCat);
+    for (const c of unused) {
+      const s = computeSamuraiScore(state.dice, c);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-samurai-dice-cat-${bestCat}"]`, pulses: 3 };
+  },
   component: SamuraiDice,
 };

@@ -12,7 +12,7 @@ export function SevenStreakGame({ state, dispatch, onGameOver }: GameProps<Seven
       <div className="cm-info">Draw {state.draw} / {TOTAL_DRAWS}</div>
       <div className="cm-score">{state.score} pts (Sevens: {state.sevens})</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}
-      {state.phase === "drawing" && <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as SevenStreakAction)}>Draw</button>}
+      {state.phase === "drawing" && <button data-testid="hint-target-seven-streak-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as SevenStreakAction)}>Draw</button>}
       {state.phase === "result" && <>
         <div className="cm-result">{state.hit ? "Lucky 7! +50" : "no seven"}</div>
         <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as SevenStreakAction)}>{state.draw >= TOTAL_DRAWS ? "Finish" : "Next"}</button>

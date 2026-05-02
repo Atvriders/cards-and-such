@@ -56,6 +56,7 @@ export function MiniYahtzeeGame({
       <tr key={cat} className={used ? "yahtz-used" : clickable ? "yahtz-clickable" : ""}>
         <td className="yahtz-label">{CATEGORY_LABELS[cat]}</td>
         <td
+          data-testid={`hint-target-mini-yahtzee-cat-${cat}`}
           className={`yahtz-cell ${used ? "yahtz-cell-used" : clickable ? "yahtz-cell-preview" : "yahtz-cell-blank"}`}
           {...(clickable
             ? {
@@ -96,6 +97,7 @@ export function MiniYahtzeeGame({
 
       <div className="yahtz-controls">
         <button
+          data-testid="hint-target-mini-yahtzee-roll"
           className="yahtz-btn"
           onClick={() => dispatch({ type: "roll" } as MiniYahtzeeAction)}
           disabled={!canRoll}

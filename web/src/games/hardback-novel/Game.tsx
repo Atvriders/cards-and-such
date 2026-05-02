@@ -19,7 +19,7 @@ export function HardbackNovelGame({ state, dispatch, onGameOver }: GameProps<Har
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as HardbackNovelAction)}>Draw</button>
+        <button data-testid="hint-target-hardback-novel-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as HardbackNovelAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

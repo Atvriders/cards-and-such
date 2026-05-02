@@ -23,7 +23,7 @@ export function QueensQuestGame({ state, dispatch, onGameOver }: GameProps<Queen
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as QueensQuestAction)}>Deal</button>
+        <button data-testid="hint-target-queens-quest-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as QueensQuestAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

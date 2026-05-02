@@ -16,5 +16,5 @@ A typical hand of five cards usually shows two or three of one suit, scoring 10 
 There are 8 rounds. There's no in-round choice; the cards fall as they will. The probability of a five-card flush in a freshly shuffled deck is about 1 in 500, so flushes are rare and exciting events. Average expected scores hover near 110-130; a hot run with a flush or two can push past 250.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PipFlushSettings),
-  reducer,isTerminal,component:PipFlushGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-pip-flush-primary"]', pulses: 3 }),component:PipFlushGame,
 };

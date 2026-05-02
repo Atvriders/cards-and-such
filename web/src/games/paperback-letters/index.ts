@@ -15,6 +15,6 @@ export const paperbackLettersPlugin: GamePlugin<PaperbackLettersState, Paperback
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PaperbackLettersSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-paperback-letters-primary"]', pulses: 3 }),
   component:PaperbackLettersGame,
 };

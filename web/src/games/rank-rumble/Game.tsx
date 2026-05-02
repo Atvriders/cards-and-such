@@ -20,7 +20,7 @@ export function RankRumbleGame({ state, dispatch, onGameOver }: GameProps<RankRu
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as RankRumbleAction)}>Deal 4</button>
+        <button data-testid="hint-target-rank-rumble-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as RankRumbleAction)}>Deal 4</button>
       )}
       {state.phase === "scored" && (
         <>

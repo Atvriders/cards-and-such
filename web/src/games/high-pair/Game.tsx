@@ -20,7 +20,7 @@ export function HighPairGame({ state, dispatch, onGameOver }: GameProps<HighPair
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as HighPairAction)}>Deal 2</button>
+        <button data-testid="hint-target-high-pair-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as HighPairAction)}>Deal 2</button>
       )}
       {state.phase === "scored" && (
         <>

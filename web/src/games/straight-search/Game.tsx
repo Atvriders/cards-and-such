@@ -20,7 +20,7 @@ export function StraightSearchGame({ state, dispatch, onGameOver }: GameProps<St
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as StraightSearchAction)}>Draw 5</button>
+        <button data-testid="hint-target-straight-search-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as StraightSearchAction)}>Draw 5</button>
       )}
       {state.phase === "scored" && (
         <>

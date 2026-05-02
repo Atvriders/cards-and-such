@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { BalutState, BalutAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { BalutState, BalutAction, BalutCategory } from "./state.js";
+import { initialState, reducer, isTerminal, ALL_BALUT_CATEGORIES, computeBalutScore } from "./state.js";
 import { Balut } from "./Balut.js";
 
 export const balutSettings = {
@@ -29,5 +29,20 @@ Tips: prioritise the Balut category — even scoring 0 there is possible, but th
   initialState: (seed: number, settings: BalutSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BalutState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.rollsUsed < 3) {
+      return { selector: '[data-testid="hint-target-balut-roll"]', pulses: 3 };
+    }
+    const unused = ALL_BALUT_CATEGORIES.filter((c) => !(c in state.scores)) as BalutCategory[];
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = computeBalutScore(state.dice, bestCat);
+    for (const c of unused) {
+      const s = computeBalutScore(state.dice, c);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-balut-cat-${bestCat}"]`, pulses: 3 };
+  },
   component: Balut,
 };

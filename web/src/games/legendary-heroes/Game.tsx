@@ -22,7 +22,7 @@ export function LegendaryHeroesGame({ state, dispatch, onGameOver }: GameProps<L
         </>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as LegendaryHeroesAction)}>Draw</button>
+        <button data-testid="hint-target-legendary-heroes-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as LegendaryHeroesAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

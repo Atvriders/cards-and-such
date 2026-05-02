@@ -63,17 +63,19 @@ export function CosmicWimpout({
 
       <div className="cw-controls">
         {phase === "preRoll" && !terminal && (
-          <button onClick={() => dispatch({ type: "roll" } as CosmicWimpoutAction)}>Roll 5 Dice</button>
+          <button data-testid="hint-target-cosmic-wimpout-roll" onClick={() => dispatch({ type: "roll" } as CosmicWimpoutAction)}>Roll 5 Dice</button>
         )}
         {phase === "rolled" && (
           <>
             <button
+              data-testid="hint-target-cosmic-wimpout-rollagain"
               onClick={() => dispatch({ type: "roll" } as CosmicWimpoutAction)}
               disabled={keptIndices.length === 0}
             >
               Roll Again
             </button>
             <button
+              data-testid="hint-target-cosmic-wimpout-bank"
               className="bank-btn"
               onClick={() => dispatch({ type: "bank" } as CosmicWimpoutAction)}
               disabled={turnScore === 0}
@@ -83,7 +85,7 @@ export function CosmicWimpout({
           </>
         )}
         {phase === "wimpout" && (
-          <button onClick={() => dispatch({ type: "nextTurn" } as CosmicWimpoutAction)}>Next Turn</button>
+          <button data-testid="hint-target-cosmic-wimpout-next" onClick={() => dispatch({ type: "nextTurn" } as CosmicWimpoutAction)}>Next Turn</button>
         )}
       </div>
     </div>

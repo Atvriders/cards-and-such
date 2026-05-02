@@ -14,8 +14,8 @@ export function DiceTallyGame({ state, dispatch, onGameOver }: GameProps<DiceTal
       <div className="dm-score">{state.score} pts</div>
       {state.dice.length>0 && (<div className="dm-row">{state.dice.map((d,i)=>(<div key={i} className="dm-die">{d}</div>))}</div>)}
       {state.category && <div className="dm-result">Category: {LABELS[state.category]} — +{state.lastPts}</div>}
-      {state.phase==="rolling" && <button className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceTallyAction)}>Roll 5 Dice</button>}
-      {state.phase==="scored" && <button className="dm-btn alt" onClick={()=>dispatch({type:"next"} as DiceTallyAction)}>{state.round>=TOTAL_ROUNDS?"Finish":"Next"}</button>}
+      {state.phase==="rolling" && <button data-testid="hint-target-dice-tally-roll" className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceTallyAction)}>Roll 5 Dice</button>}
+      {state.phase==="scored" && <button data-testid="hint-target-dice-tally-next" className="dm-btn alt" onClick={()=>dispatch({type:"next"} as DiceTallyAction)}>{state.round>=TOTAL_ROUNDS?"Finish":"Next"}</button>}
     </div>
   );
 }

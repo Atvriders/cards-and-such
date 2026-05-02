@@ -12,7 +12,7 @@ export function RedRiverGame({ state, dispatch, onGameOver }: GameProps<RedRiver
       <div className="cm-info">Draw {state.draw} / {TOTAL_DRAWS}</div>
       <div className="cm-score">{state.score} pts (Streak: {state.streak})</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}
-      {state.phase === "drawing" && <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as RedRiverAction)}>Draw</button>}
+      {state.phase === "drawing" && <button data-testid="hint-target-red-river-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as RedRiverAction)}>Draw</button>}
       {state.phase === "result" && <>
         <div className="cm-result">{state.streak > 0 ? `Red x${state.streak}!` : "Black — streak broken"}</div>
         <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as RedRiverAction)}>{state.draw >= TOTAL_DRAWS ? "Finish" : "Next"}</button>

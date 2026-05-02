@@ -19,7 +19,7 @@ export function CutTheDeckGame({ state, dispatch, onGameOver }: GameProps<CutThe
       )}
       {state.phase === "predict" && (
         <div className="cm-row">
-          <button className="cm-btn" onClick={() => dispatch({ type:"predict", choice:"under" } as CutTheDeckAction)}>Under 7</button>
+          <button data-testid="hint-target-cut-the-deck-primary" className="cm-btn" onClick={() => dispatch({ type:"predict", choice:"under" } as CutTheDeckAction)}>Under 7</button>
           <button className="cm-btn alt" onClick={() => dispatch({ type:"predict", choice:"over" } as CutTheDeckAction)}>Over 7</button>
         </div>
       )}

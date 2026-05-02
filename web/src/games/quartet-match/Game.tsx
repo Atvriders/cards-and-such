@@ -28,7 +28,7 @@ export function QuartetMatchGame({ state, dispatch, onGameOver }: GameProps<Quar
         })}
       </div>
       {state.phase === "selecting" && (
-        <button className="cm-btn" disabled={state.selected.length !== 4} onClick={() => dispatch({ type:"submit" } as QuartetMatchAction)}>Submit</button>
+        <button data-testid="hint-target-quartet-match-primary" className="cm-btn" disabled={state.selected.length !== 4} onClick={() => dispatch({ type:"submit" } as QuartetMatchAction)}>Submit</button>
       )}
       {state.phase === "scored" && (
         <>

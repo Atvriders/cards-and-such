@@ -16,5 +16,5 @@ The probability of any draw being a 7 is 4/52 (about 7.7%). Across 12 draws, you
 Press Draw to flip a card and Next to advance. The display shows your sevens count and running point total. The thrill is in the steady rhythm of drawing and that little jolt of joy when a 7 lands. Settle in, draw 12, and see how lucky your seed of seeds turns out to be!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SevenStreakSettings),
-  reducer,isTerminal,component:SevenStreakGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-seven-streak-primary"]', pulses: 3 }),component:SevenStreakGame,
 };

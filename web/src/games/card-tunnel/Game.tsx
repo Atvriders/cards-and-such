@@ -20,7 +20,7 @@ export function CardTunnelGame({ state, dispatch, onGameOver }: GameProps<CardTu
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTunnelAction)}>Draw</button>
+        <button data-testid="hint-target-card-tunnel-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTunnelAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

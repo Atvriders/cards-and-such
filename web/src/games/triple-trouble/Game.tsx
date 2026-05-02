@@ -19,7 +19,7 @@ export function TripleTroubleGame({ state, dispatch, onGameOver }: GameProps<Tri
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as TripleTroubleAction)}>Draw a card</button>
+        <button data-testid="hint-target-triple-trouble-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as TripleTroubleAction)}>Draw a card</button>
       )}
       {state.phase === "scored" && (
         <>

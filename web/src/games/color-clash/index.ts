@@ -18,5 +18,5 @@ Statistically, predicting red and black are equally good (each has 50% chance), 
 Six rounds means a maximum theoretical score of 300 points (six straight sweeps), but realistic scores are around 80-120 points. Easy, breezy fun!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ColorClashSettings),
-  reducer,isTerminal,component:ColorClashGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-color-clash-primary"]', pulses: 3 }),component:ColorClashGame,
 };

@@ -18,5 +18,5 @@ The expected average sum of five random cards is around 35, so most rounds will 
 There's no choice in the game — just deal and tally. Across 8 rounds, average expected scores hover around 30-50 points, with lucky games reaching 100+. Watch those Aces appear and cheer when the small cards stack in your favor!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LowFiveSettings),
-  reducer,isTerminal,component:LowFiveGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-low-five-primary"]', pulses: 3 }),component:LowFiveGame,
 };

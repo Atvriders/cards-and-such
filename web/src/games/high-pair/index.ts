@@ -18,5 +18,5 @@ The probability of any pair on two cards is roughly 1 in 17 — so most rounds y
 Press Deal to flip your cards, then Next to advance. Average scores cluster near 0-12; high rollers hit 30+.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HighPairSettings),
-  reducer,isTerminal,component:HighPairGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-high-pair-primary"]', pulses: 3 }),component:HighPairGame,
 };

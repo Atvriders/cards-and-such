@@ -31,7 +31,7 @@ export function DiceTempleGame({ state, dispatch, onGameOver }: GameProps<DiceTe
       <div className="te-dice">
         {state.dice.map((d, i) => <div key={i} className={`te-die${d === 0 ? " empty" : ""}`}>{d || "·"}</div>)}
       </div>
-      <button className="te-btn" disabled={state.rerolls >= 3} onClick={() => dispatch({ type: "roll" } as DiceTempleAction)}>Roll Dice</button>
+      <button data-testid="hint-target-dice-temple-roll" className="te-btn" disabled={state.rerolls >= 3} onClick={() => dispatch({ type: "roll" } as DiceTempleAction)}>Roll Dice</button>
       <div className="te-card">
         {CATEGORIES.map(c => {
           const claimed = state.card[c] !== undefined;
@@ -39,6 +39,7 @@ export function DiceTempleGame({ state, dispatch, onGameOver }: GameProps<DiceTe
           return (
             <button
               key={c}
+              data-testid={`hint-target-dice-temple-cat-${c}`}
               className={`te-cat${claimed ? " claimed" : ""}`}
               disabled={claimed || !rolled}
               onClick={() => dispatch({ type: "claim", cat: c } as DiceTempleAction)}

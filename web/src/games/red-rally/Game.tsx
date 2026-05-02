@@ -18,7 +18,7 @@ export function RedRallyGame({ state, dispatch, onGameOver }: GameProps<RedRally
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type: "draw" } as RedRallyAction)}>Draw</button>
+        <button data-testid="hint-target-red-rally-primary" className="cm-btn" onClick={() => dispatch({ type: "draw" } as RedRallyAction)}>Draw</button>
       )}
       {state.phase === "shown" && (
         <>

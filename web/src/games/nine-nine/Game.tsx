@@ -20,7 +20,7 @@ export function NineNineGame({ state, dispatch, onGameOver }: GameProps<NineNine
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as NineNineAction)}>Draw</button>
+        <button data-testid="hint-target-nine-nine-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as NineNineAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

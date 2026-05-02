@@ -15,6 +15,6 @@ export const everdellWoodlandPlugin: GamePlugin<EverdellWoodlandState, EverdellW
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EverdellWoodlandSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-everdell-woodland-primary"]', pulses: 3 }),
   component:EverdellWoodlandGame,
 };

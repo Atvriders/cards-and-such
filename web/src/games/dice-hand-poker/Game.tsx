@@ -25,12 +25,12 @@ export function DiceHandPokerGame({ state, dispatch, onGameOver }: GameProps<Dic
         ))}
       </div>
       {state.phase === "rolling" && state.rollsLeft > 0 && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceHandPokerAction)}>{state.rollsLeft === MAX_ROLLS ? "Roll" : "Re-roll un-held"}</button>
+        <button data-testid="hint-target-dice-hand-poker-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceHandPokerAction)}>{state.rollsLeft === MAX_ROLLS ? "Roll" : "Re-roll un-held"}</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.lastHand}: +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceHandPokerAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-dice-hand-poker-next" className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceHandPokerAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

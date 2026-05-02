@@ -20,5 +20,5 @@ But picking face occasionally is the only way to score above ~90, since you need
 Watch the cards, trust your hunch, and tap your prediction!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FaceFlipSettings),
-  reducer,isTerminal,component:FaceFlipGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-face-flip-primary"]', pulses: 3 }),component:FaceFlipGame,
 };

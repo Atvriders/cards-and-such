@@ -18,7 +18,7 @@ export function EvenEddyGame({ state, dispatch, onGameOver }: GameProps<EvenEddy
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type: "draw" } as EvenEddyAction)}>Draw</button>
+        <button data-testid="hint-target-even-eddy-primary" className="cm-btn" onClick={() => dispatch({ type: "draw" } as EvenEddyAction)}>Draw</button>
       )}
       {state.phase === "shown" && (
         <>

@@ -18,5 +18,5 @@ Probability tip: in a standard deck, there are 6 ranks above 7 (8, 9, 10, J, Q, 
 If you always pick low, expected score is around 65 points across 12 rounds. Truly lucky runs hit 100+. There's no skill ceiling — just call your direction, watch the cards, and see how the percentages land.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PipPulseSettings),
-  reducer,isTerminal,component:PipPulseGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-pip-pulse-primary"]', pulses: 3 }),component:PipPulseGame,
 };

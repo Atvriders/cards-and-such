@@ -16,5 +16,5 @@ The probability that 3 random cards share a suit is roughly 5%, so most rounds w
 A typical run lands at 0–30 points. A two-triad run is a great game; three triads is exceptional and probably means the seed loved you. Press Next between rounds to keep moving, and watch the suits stack up!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TriadTowerSettings),
-  reducer,isTerminal,component:TriadTowerGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-triad-tower-primary"]', pulses: 3 }),component:TriadTowerGame,
 };

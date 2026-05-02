@@ -60,6 +60,7 @@ export function Kismet({
       <tr key={cat} className={used ? "used" : hasRolled && !used ? "clickable" : ""}>
         <td>{CATEGORY_LABELS[cat]}</td>
         <td
+          data-testid={`hint-target-kismet-cat-${cat}`}
           className={used ? undefined : potential !== null ? "score-cell potential" : "score-cell"}
           onClick={used ? undefined : () => handleScore(cat)}
         >
@@ -85,6 +86,7 @@ export function Kismet({
 
       <div className="kismet-controls">
         <button
+          data-testid="hint-target-kismet-roll"
           onClick={() => dispatch({ type: "roll" } as KismetAction)}
           disabled={!canRoll || !!terminal}
         >

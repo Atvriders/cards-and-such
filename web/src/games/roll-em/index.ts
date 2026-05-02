@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RollEmState, RollEmAction, RollEmSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RollEm } from "./Game.js";
@@ -33,5 +33,12 @@ The bot uses a simple greedy strategy — keep any pairs, trips, or quads and re
   initialState: (seed: number, s: RollEmSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: RollEmState): HintTarget | null => {
+    if (state.gameOver) return null;
+    if (state.current.rollsLeft > 0) {
+      return { selector: '[data-testid="hint-target-roll-em-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-roll-em-end"]', pulses: 3 };
+  },
   component: RollEm,
 };

@@ -16,5 +16,5 @@ Each draw is independent (the deck is effectively infinite), so suit-distributio
 In a 12-card run, expect 1-2 rainbows on most games — that's 10-20 points. A super-lucky run might land 3 rainbows for 30 points. Press Draw to flip a card; the tracker updates immediately, and any completed rainbow lights up before resetting.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RainbowRunSettings),
-  reducer,isTerminal,component:RainbowRunGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-rainbow-run-primary"]', pulses: 3 }),component:RainbowRunGame,
 };

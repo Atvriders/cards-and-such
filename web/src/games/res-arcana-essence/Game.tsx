@@ -19,7 +19,7 @@ export function ResArcanaEssenceGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as ResArcanaEssenceAction)}>Draw</button>
+        <button data-testid="hint-target-res-arcana-essence-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as ResArcanaEssenceAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

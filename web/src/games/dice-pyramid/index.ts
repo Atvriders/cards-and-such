@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DicePyramidState, DicePyramidAction, DicePyramidSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ Score formula: 200 minus 5 times the sum, floored at zero. Plus a 10-point bonus
 You play 6 rounds. Total expected scores land near 600 with normal luck; great rolls of mostly-1s could hit 250+ in a single round and shoot the total over 1000. Press Roll, see your pyramid, take your points. A meditative roll-and-watch game.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DicePyramidSettings),
-  reducer,isTerminal,component:DicePyramidGame,
+  reducer,isTerminal,
+  hint: (state: DicePyramidState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "rolling") {
+      return { selector: '[data-testid="hint-target-dice-pyramid-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-dice-pyramid-next"]', pulses: 3 };
+  },
+  component:DicePyramidGame,
 };

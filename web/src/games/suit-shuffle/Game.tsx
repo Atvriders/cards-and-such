@@ -20,7 +20,7 @@ export function SuitShuffleGame({ state, dispatch, onGameOver }: GameProps<SuitS
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as SuitShuffleAction)}>Deal 4</button>
+        <button data-testid="hint-target-suit-shuffle-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as SuitShuffleAction)}>Deal 4</button>
       )}
       {state.phase === "scored" && (
         <>

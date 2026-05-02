@@ -28,12 +28,12 @@ export function DicePyramidGame({ state, dispatch, onGameOver }: GameProps<DiceP
         </>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type: "roll" } as DicePyramidAction)}>Roll Pyramid</button>
+        <button data-testid="hint-target-dice-pyramid-roll" className="dm-btn" onClick={() => dispatch({ type: "roll" } as DicePyramidAction)}>Roll Pyramid</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">Sum {state.sum} • Ones: {state.ones} → +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DicePyramidAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-dice-pyramid-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DicePyramidAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

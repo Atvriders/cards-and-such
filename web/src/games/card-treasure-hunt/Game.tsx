@@ -19,7 +19,7 @@ export function CardTreasureHuntGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTreasureHuntAction)}>Draw</button>
+        <button data-testid="hint-target-card-treasure-hunt-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTreasureHuntAction)}>Draw</button>
       )}
       {state.phase === "result" && (
         <>

@@ -22,7 +22,7 @@ export function MunchkinMiniGame({ state, dispatch, onGameOver }: GameProps<Munc
         </>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as MunchkinMiniAction)}>Draw</button>
+        <button data-testid="hint-target-munchkin-mini-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as MunchkinMiniAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

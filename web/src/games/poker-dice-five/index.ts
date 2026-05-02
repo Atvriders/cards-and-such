@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PokerDiceFiveState, PokerDiceFiveAction, PokerDiceFiveSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,12 @@ export const pokerDiceFivePlugin: GamePlugin<PokerDiceFiveState, PokerDiceFiveAc
   initialState: (seed: number, s: S) => initialState(seed, s as PokerDiceFiveSettings),
   reducer,
   isTerminal,
+  hint: (state: PokerDiceFiveState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "result") {
+      return { selector: '[data-testid="hint-target-poker-dice-five-next"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-poker-dice-five-roll"]', pulses: 3 };
+  },
   component: PokerDiceFiveGame,
 };

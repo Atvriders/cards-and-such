@@ -18,5 +18,5 @@ There's no skill in Eight Eaters — it's pure seeded RNG, so identical seeds re
 Click Draw, see your card, click Next, repeat. Simple, light, and just a little bit addictive.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EightEatersSettings),
-  reducer,isTerminal,component:EightEatersGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-eight-eaters-primary"]', pulses: 3 }),component:EightEatersGame,
 };

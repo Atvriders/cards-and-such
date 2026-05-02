@@ -19,7 +19,7 @@ export function ValeriaCardKingdomsGame({ state, dispatch, onGameOver }: GamePro
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as ValeriaCardKingdomsAction)}>Draw</button>
+        <button data-testid="hint-target-valeria-card-kingdoms-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as ValeriaCardKingdomsAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

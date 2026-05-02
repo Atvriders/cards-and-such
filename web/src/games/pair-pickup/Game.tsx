@@ -20,7 +20,7 @@ export function PairPickupGame({ state, dispatch, onGameOver }: GameProps<PairPi
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as PairPickupAction)}>Deal 5</button>
+        <button data-testid="hint-target-pair-pickup-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as PairPickupAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

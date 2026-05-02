@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { PatchworkBaseState, PatchworkBaseAction, PatchworkBaseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { PatchworkBaseGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const patchworkBasePlugin: GamePlugin<PatchworkBaseState, PatchworkBaseAc
   initialState: (seed: number, s: S) => initialState(seed, s as PatchworkBaseSettings),
   reducer,
   isTerminal,
+  hint: (state: PatchworkBaseState): HintTarget | null => {
+    const sel = tileHintSelector(state, "patb-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: PatchworkBaseGame,
 };

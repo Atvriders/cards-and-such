@@ -19,7 +19,7 @@ export function CardVolcanoGame({ state, dispatch, onGameOver }: GameProps<CardV
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardVolcanoAction)}>Draw</button>
+        <button data-testid="hint-target-card-volcano-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardVolcanoAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

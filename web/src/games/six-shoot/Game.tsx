@@ -22,7 +22,7 @@ export function SixShootGame({ state, dispatch, onGameOver }: GameProps<SixShoot
           <div key={i} className={`cm-card small ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>
         ))}
       </div>
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as SixShootAction)}>Draw</button>
+      <button data-testid="hint-target-six-shoot-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as SixShootAction)}>Draw</button>
     </div>
   );
 }

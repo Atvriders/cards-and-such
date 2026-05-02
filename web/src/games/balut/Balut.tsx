@@ -46,7 +46,7 @@ export function Balut({ state, dispatch, onGameOver }: GameProps<BalutState, Bal
       </div>
 
       <div className="balut-controls">
-        <button onClick={() => dispatch({ type: "roll" } as BalutAction)} disabled={!canRoll || !!terminal}>
+        <button data-testid="hint-target-balut-roll" onClick={() => dispatch({ type: "roll" } as BalutAction)} disabled={!canRoll || !!terminal}>
           {state.rollsUsed === 0 ? "Roll Dice" : "Re-roll"}
         </button>
       </div>
@@ -63,6 +63,7 @@ export function Balut({ state, dispatch, onGameOver }: GameProps<BalutState, Bal
               <tr key={cat} className={used ? "used" : hasRolled ? "clickable" : ""}>
                 <td>{LABELS[cat]}</td>
                 <td
+                  data-testid={`hint-target-balut-cat-${cat}`}
                   className={used ? undefined : potential !== null ? "score-cell potential" : "score-cell"}
                   onClick={used ? undefined : () => handleScore(cat)}
                 >

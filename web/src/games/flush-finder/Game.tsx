@@ -20,7 +20,7 @@ export function FlushFinderGame({ state, dispatch, onGameOver }: GameProps<Flush
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as FlushFinderAction)}>Draw 5</button>
+        <button data-testid="hint-target-flush-finder-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as FlushFinderAction)}>Draw 5</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -24,5 +24,5 @@ There are no decisions; each round is pure draw and tally. Average game scores c
 Round after round, watch the deck deliver its luck!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RankRumbleSettings),
-  reducer,isTerminal,component:RankRumbleGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-rank-rumble-primary"]', pulses: 3 }),component:RankRumbleGame,
 };

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { KingdominoDuelState, KingdominoDuelAction, KingdominoDuelSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { KingdominoDuelGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const kingdominoDuelPlugin: GamePlugin<KingdominoDuelState, KingdominoDue
   initialState: (seed: number, s: S) => initialState(seed, s as KingdominoDuelSettings),
   reducer,
   isTerminal,
+  hint: (state: KingdominoDuelState): HintTarget | null => {
+    const sel = tileHintSelector(state, "kdomd-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: KingdominoDuelGame,
 };

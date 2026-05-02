@@ -43,14 +43,14 @@ export function DiceTarget25({ state, dispatch, onGameOver }: GameProps<DiceTarg
       <div className="dt25-actions">
         {!isScored && (
           <>
-            <button className="dt25-btn roll" disabled={state.rollsLeft <= 0} onClick={() => dispatch({ type: "roll" } as DiceTarget25Action)}>
+            <button data-testid="hint-target-dice-target-25-roll" className="dt25-btn roll" disabled={state.rollsLeft <= 0} onClick={() => dispatch({ type: "roll" } as DiceTarget25Action)}>
               Roll ({state.rollsLeft} left)
             </button>
-            <button className="dt25-btn score" disabled={state.rollsLeft === 2} onClick={() => dispatch({ type: "score" } as DiceTarget25Action)}>Score</button>
+            <button data-testid="hint-target-dice-target-25-score" className="dt25-btn score" disabled={state.rollsLeft === 2} onClick={() => dispatch({ type: "score" } as DiceTarget25Action)}>Score</button>
           </>
         )}
         {isScored && (
-          <button className="dt25-btn next" onClick={() => dispatch({ type: "next" } as DiceTarget25Action)}>
+          <button data-testid="hint-target-dice-target-25-next" className="dt25-btn next" onClick={() => dispatch({ type: "next" } as DiceTarget25Action)}>
             {state.round >= state.maxRounds ? "Finish" : "Next"}
           </button>
         )}

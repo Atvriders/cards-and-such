@@ -18,5 +18,5 @@ There are 12 rounds. With three randomly drawn cards, the probability that the m
 Average expected scores hover around 65; consistent betters of 'No' will typically out-perform random play.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TripleDealSettings),
-  reducer,isTerminal,component:TripleDealGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-triple-deal-primary"]', pulses: 3 }),component:TripleDealGame,
 };

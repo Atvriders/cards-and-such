@@ -23,7 +23,7 @@ export function TensTallyGame({ state, dispatch, onGameOver }: GameProps<TensTal
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as TensTallyAction)}>Deal</button>
+        <button data-testid="hint-target-tens-tally-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as TensTallyAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -19,7 +19,7 @@ export function PaperbackLettersGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as PaperbackLettersAction)}>Draw</button>
+        <button data-testid="hint-target-paperback-letters-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as PaperbackLettersAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

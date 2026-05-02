@@ -53,6 +53,7 @@ export function Cameroon({
       <tr key={cat} className={used ? "used" : hasRolled && !used ? "clickable" : ""}>
         <td>{CATEGORY_LABELS[cat]}</td>
         <td
+          data-testid={`hint-target-cameroon-cat-${cat}`}
           className={used ? undefined : potential !== null ? "score-cell potential" : "score-cell"}
           onClick={used ? undefined : () => handleScore(cat)}
         >
@@ -84,6 +85,7 @@ export function Cameroon({
 
       <div className="cameroon-controls">
         <button
+          data-testid="hint-target-cameroon-roll"
           onClick={() => dispatch({ type: "roll" } as CameroonAction)}
           disabled={!canRoll || !!terminal}
         >

@@ -12,5 +12,5 @@ export const cardTrainTrackPlugin: GamePlugin<CardTrainTrackState, CardTrainTrac
   howToPlay:"Card Train Track is an 8-round card mini. You're laying ties on a fresh railroad bed. Each round draws a card representing the next tie. Red ties (hearts and diamonds) are sturdy oak and score 15 points. Black ties (spades and clubs) are rotted and score 5 points.\\n\\nThere's no choice or skill — the deck deals the ties. Press Draw to lay the next tie, see how solid it is, then Next to keep building track. With a 50/50 red/black split, the expected average score is 80 points over 8 rounds.\\n\\nLucky runs with 6+ red cards push 100+; black-card-heavy runs scrape around 50. A short, charming card mini perfect for a quick play. Watch the track stretch out into the distance and aim for a top-rank rail line. All aboard!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardTrainTrackSettings),
-  reducer,isTerminal,component:CardTrainTrackGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-card-train-track-primary"]', pulses: 3 }),component:CardTrainTrackGame,
 };

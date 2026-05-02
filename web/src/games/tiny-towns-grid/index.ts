@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { TinyTownsGridState, TinyTownsGridAction, TinyTownsGridSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { TinyTownsGridGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const tinyTownsGridPlugin: GamePlugin<TinyTownsGridState, TinyTownsGridAc
   initialState: (seed: number, s: S) => initialState(seed, s as TinyTownsGridSettings),
   reducer,
   isTerminal,
+  hint: (state: TinyTownsGridState): HintTarget | null => {
+    const sel = tileHintSelector(state, "ttg-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: TinyTownsGridGame,
 };

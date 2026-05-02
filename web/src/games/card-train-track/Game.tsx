@@ -20,7 +20,7 @@ export function CardTrainTrackGame({ state, dispatch, onGameOver }: GameProps<Ca
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTrainTrackAction)}>Lay</button>
+        <button data-testid="hint-target-card-train-track-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTrainTrackAction)}>Lay</button>
       )}
       {state.phase === "scored" && (
         <>

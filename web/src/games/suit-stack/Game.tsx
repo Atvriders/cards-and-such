@@ -22,7 +22,7 @@ export function SuitStackGame({ state, dispatch, onGameOver }: GameProps<SuitSta
       <div className="cm-row">
         {state.drawn.map((c,i) => <div key={i} className={`cm-card ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>)}
       </div>
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as SuitStackAction)}>Draw</button>
+      <button data-testid="hint-target-suit-stack-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as SuitStackAction)}>Draw</button>
     </div>
   );
 }

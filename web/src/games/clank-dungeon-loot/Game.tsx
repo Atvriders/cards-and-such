@@ -19,7 +19,7 @@ export function ClankDungeonLootGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as ClankDungeonLootAction)}>Draw</button>
+        <button data-testid="hint-target-clank-dungeon-loot-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as ClankDungeonLootAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -19,7 +19,7 @@ export function QuartetQuestGame({ state, dispatch, onGameOver }: GameProps<Quar
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as QuartetQuestAction)}>Draw a card</button>
+        <button data-testid="hint-target-quartet-quest-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as QuartetQuestAction)}>Draw a card</button>
       )}
       {state.phase === "scored" && (
         <>

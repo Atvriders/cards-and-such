@@ -1,8 +1,13 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { RollAndWriteProState, RollAndWriteProAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { RollAndWriteProState, RollAndWriteProAction, Category } from "./state.js";
+import { initialState, reducer, isTerminal, scoreCategory } from "./state.js";
 import { RollAndWritePro } from "./RollAndWritePro.js";
+
+const RAW_PRO_CATS: Category[] = [
+  "ones", "twos", "threes", "fours", "fives", "sixes",
+  "threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight", "yahtzee", "chance",
+];
 
 export const rollAndWriteProSettings = {
   rounds: {
@@ -34,5 +39,20 @@ Settings: Rounds controls game length. More rounds let you fill more scorecard r
   initialState: (seed: number, settings: RollAndWriteProSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: RollAndWriteProState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.rollsLeft > 0) {
+      return { selector: '[data-testid="hint-target-roll-and-write-pro-roll"]', pulses: 3 };
+    }
+    const unused = RAW_PRO_CATS.filter((c) => state.scores[c] === null);
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = scoreCategory(bestCat, state.dice);
+    for (const c of unused) {
+      const s = scoreCategory(c, state.dice);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-roll-and-write-pro-cat-${bestCat}"]`, pulses: 3 };
+  },
   component: RollAndWritePro,
 };

@@ -16,5 +16,5 @@ There are 10 draws per game. With a fully random deal, the probability of gettin
 Just press Draw 5, watch the cards land, and click Next to move on. The game ends after 10 draws, and your final score is the sum of every straight you found. May the deck be kind!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as StraightSearchSettings),
-  reducer,isTerminal,component:StraightSearchGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-straight-search-primary"]', pulses: 3 }),component:StraightSearchGame,
 };

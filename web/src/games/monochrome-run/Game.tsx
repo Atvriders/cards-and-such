@@ -18,7 +18,7 @@ export function MonochromeRunGame({ state, dispatch, onGameOver }: GameProps<Mon
       {state.lastCard !== null && (
         <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>
       )}
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as MonochromeRunAction)}>Draw</button>
+      <button data-testid="hint-target-monochrome-run-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as MonochromeRunAction)}>Draw</button>
     </div>
   );
 }

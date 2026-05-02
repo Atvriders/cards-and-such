@@ -15,6 +15,6 @@ export const legendaryHeroesPlugin: GamePlugin<LegendaryHeroesState, LegendaryHe
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LegendaryHeroesSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-legendary-heroes-primary"]', pulses: 3 }),
   component:LegendaryHeroesGame,
 };

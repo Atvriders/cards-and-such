@@ -21,7 +21,7 @@ export function ColorClashGame({ state, dispatch, onGameOver }: GameProps<ColorC
       )}
       {state.phase === "predict" && (
         <div className="cm-row">
-          <button className="cm-btn" style={{ background:"#c0392b" }} onClick={() => dispatch({ type:"predict", choice:"red" } as ColorClashAction)}>Red Wins</button>
+          <button data-testid="hint-target-color-clash-primary" className="cm-btn" style={{ background:"#c0392b" }} onClick={() => dispatch({ type:"predict", choice:"red" } as ColorClashAction)}>Red Wins</button>
           <button className="cm-btn alt" style={{ background:"#2c3e50" }} onClick={() => dispatch({ type:"predict", choice:"black" } as ColorClashAction)}>Black Wins</button>
         </div>
       )}

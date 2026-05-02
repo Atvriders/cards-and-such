@@ -12,10 +12,10 @@ export function SnakeEyesHuntGame({ state, dispatch, onGameOver }: GameProps<Sna
       <div className="dm-info">Roll {state.roll} / {TOTAL_ROLLS}</div>
       <div className="dm-score">{state.score} pts (Hits: {state.hits})</div>
       {state.dice && <div className="dm-row"><div className="dm-die">{state.dice[0]}</div><div className="dm-die">{state.dice[1]}</div></div>}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as SnakeEyesHuntAction)}>Roll</button>}
+      {state.phase === "rolling" && <button data-testid="hint-target-snake-eyes-hunt-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as SnakeEyesHuntAction)}>Roll</button>}
       {state.phase === "result" && <>
         <div className="dm-result">{state.dice && state.dice[0] === 1 && state.dice[1] === 1 ? "SNAKE EYES! +50" : "no snake eyes"}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as SnakeEyesHuntAction)}>{state.roll >= TOTAL_ROLLS ? "Finish" : "Next"}</button>
+        <button data-testid="hint-target-snake-eyes-hunt-next" className="dm-btn alt" onClick={() => dispatch({ type:"next" } as SnakeEyesHuntAction)}>{state.roll >= TOTAL_ROLLS ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CosmicWimpoutState, CosmicWimpoutAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,21 @@ Hot dice: if you keep all 5 dice, you can roll all 5 again for free, carrying fo
   initialState: (seed: number, settings: CosmicWimpoutSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CosmicWimpoutState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "wimpout") {
+      return { selector: '[data-testid="hint-target-cosmic-wimpout-next"]', pulses: 3 };
+    }
+    if (state.phase === "preRoll") {
+      return { selector: '[data-testid="hint-target-cosmic-wimpout-roll"]', pulses: 3 };
+    }
+    if (state.phase === "rolled") {
+      if (state.turnScore > 0 && state.keptIndices.length > 0) {
+        return { selector: '[data-testid="hint-target-cosmic-wimpout-bank"]', pulses: 3 };
+      }
+      return { selector: '[data-testid="hint-target-cosmic-wimpout-rollagain"]', pulses: 3 };
+    }
+    return null;
+  },
   component: CosmicWimpout,
 };

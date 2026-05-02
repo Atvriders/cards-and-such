@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { CragState, CragAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { CragState, CragAction, CragCategory } from "./state.js";
+import { initialState, reducer, isTerminal, CRAG_CATEGORIES, scoreCategory } from "./state.js";
 import { Crag } from "./Crag.js";
 
 export const cragSettings = {} as const;
@@ -27,5 +27,21 @@ A perfect game scoring every category optimally can reach around 300+ points. Th
   initialState: (seed: number, settings: CragSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CragState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "preRoll" || (state.phase === "rolled" && state.rollsLeft > 0)) {
+      return { selector: '[data-testid="hint-target-crag-roll"]', pulses: 3 };
+    }
+    if (state.phase !== "rolled") return null;
+    const unused = (CRAG_CATEGORIES as readonly CragCategory[]).filter((c) => state.scores[c] === undefined);
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = scoreCategory(state.dice, bestCat);
+    for (const c of unused) {
+      const s = scoreCategory(state.dice, c);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-crag-cat-${bestCat}"]`, pulses: 3 };
+  },
   component: Crag,
 };

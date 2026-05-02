@@ -16,5 +16,5 @@ A card of rank exactly 7 is a Push — neither side wins, no points are awarded 
 There are 12 rounds total. Average expected score is around 50 points; great runs can hit 80+. Press Next after each result to continue.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CutTheDeckSettings),
-  reducer,isTerminal,component:CutTheDeckGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-cut-the-deck-primary"]', pulses: 3 }),component:CutTheDeckGame,
 };

@@ -18,5 +18,5 @@ There are no choices to make — it is pure draw and tally over 8 rounds. The de
 Watch your bankroll grow with kings and aces. Pray for face card combinations and avoid the dreaded all-deuces hand. Eight rounds and you are done — let the high tide come in!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HighTideSettings),
-  reducer,isTerminal,component:HighTideGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-high-tide-primary"]', pulses: 3 }),component:HighTideGame,
 };

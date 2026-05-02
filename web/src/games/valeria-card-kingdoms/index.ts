@@ -15,6 +15,6 @@ export const valeriaCardKingdomsPlugin: GamePlugin<ValeriaCardKingdomsState, Val
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ValeriaCardKingdomsSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-valeria-card-kingdoms-primary"]', pulses: 3 }),
   component:ValeriaCardKingdomsGame,
 };

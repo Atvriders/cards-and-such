@@ -22,7 +22,7 @@ export function FluxxFantasyRulesGame({ state, dispatch, onGameOver }: GameProps
         </>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as FluxxFantasyRulesAction)}>Draw</button>
+        <button data-testid="hint-target-fluxx-fantasy-rules-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as FluxxFantasyRulesAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

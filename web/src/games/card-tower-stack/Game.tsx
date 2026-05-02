@@ -20,7 +20,7 @@ export function CardTowerStackGame({ state, dispatch, onGameOver }: GameProps<Ca
         </div>
       )}
       {state.phase === "draw" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTowerStackAction)}>Stack</button>
+        <button data-testid="hint-target-card-tower-stack-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CardTowerStackAction)}>Stack</button>
       )}
       {state.phase === "scored" && (
         <>

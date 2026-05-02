@@ -18,7 +18,7 @@ export function FourFoursGame({ state, dispatch, onGameOver }: GameProps<FourFou
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type: "draw" } as FourFoursAction)}>Draw</button>
+        <button data-testid="hint-target-four-fours-primary" className="cm-btn" onClick={() => dispatch({ type: "draw" } as FourFoursAction)}>Draw</button>
       )}
       {state.phase === "shown" && (
         <>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceHandPokerState, DiceHandPokerAction, DiceHandPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,16 @@ When you're out of rolls, your final five dice are scored as a poker hand. Five 
 Six rounds in all. Strategic decisions matter: when do you keep a strong start, and when do you gamble for a better combination? Skilled players will average around 600-900 points per game, while a hot run with multiple full houses can push well above. Roll 'em!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceHandPokerSettings),
-  reducer,isTerminal,component:DiceHandPokerGame,
+  reducer,isTerminal,
+  hint: (state: DiceHandPokerState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "scored") {
+      return { selector: '[data-testid="hint-target-dice-hand-poker-next"]', pulses: 3 };
+    }
+    if (state.rollsLeft > 0) {
+      return { selector: '[data-testid="hint-target-dice-hand-poker-roll"]', pulses: 3 };
+    }
+    return null;
+  },
+  component:DiceHandPokerGame,
 };

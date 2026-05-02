@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SnakeEyesHuntState, SnakeEyesHuntAction, SnakeEyesHuntSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ The probability of snake eyes on any roll is 1/36 (about 2.8%). Across 20 rolls,
 There's no decision — just rapid-fire rolling. Press Roll, then Next, and march through 20 attempts. The display shows your hit count and running score, so you can savor each rare double-one. Take your time, settle in, and hope the dice see you. Snake eyes never get old when they finally show up!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SnakeEyesHuntSettings),
-  reducer,isTerminal,component:SnakeEyesHuntGame,
+  reducer,isTerminal,
+  hint: (state: SnakeEyesHuntState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "rolling") {
+      return { selector: '[data-testid="hint-target-snake-eyes-hunt-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-snake-eyes-hunt-next"]', pulses: 3 };
+  },
+  component:SnakeEyesHuntGame,
 };

@@ -20,7 +20,7 @@ export function FaceFlipGame({ state, dispatch, onGameOver }: GameProps<FaceFlip
       )}
       {state.phase === "predict" && (
         <div className="cm-row">
-          <button className="cm-btn" onClick={() => dispatch({ type:"predict", choice:"face" } as FaceFlipAction)}>Face card (J/Q/K)</button>
+          <button data-testid="hint-target-face-flip-primary" className="cm-btn" onClick={() => dispatch({ type:"predict", choice:"face" } as FaceFlipAction)}>Face card (J/Q/K)</button>
           <button className="cm-btn alt" onClick={() => dispatch({ type:"predict", choice:"notface" } as FaceFlipAction)}>Not a face</button>
         </div>
       )}

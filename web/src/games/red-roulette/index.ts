@@ -16,5 +16,5 @@ There are 10 rounds in a game. Each round is independent — the deck is freshly
 After each round, press Next to continue. There's nothing to memorize, no strategy to learn — just call your color, watch the card, and see whether the cards favor you today. A game lasts about a minute. Pure roulette-style fun!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RedRouletteSettings),
-  reducer,isTerminal,component:RedRouletteGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-red-roulette-primary"]', pulses: 3 }),component:RedRouletteGame,
 };

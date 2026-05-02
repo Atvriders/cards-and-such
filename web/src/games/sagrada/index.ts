@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { SagradaState, SagradaAction, SagradaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { SagradaGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const sagradaPlugin: GamePlugin<SagradaState, SagradaAction, typeof setti
   initialState: (seed: number, s: S) => initialState(seed, s as SagradaSettings),
   reducer,
   isTerminal,
+  hint: (state: SagradaState): HintTarget | null => {
+    const sel = tileHintSelector(state, "sgrd-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SagradaGame,
 };

@@ -70,10 +70,11 @@ export function TenThousand({ state, dispatch, onGameOver }: GameProps<TenThousa
       )}
 
       <div className="ten-k-controls">
-        <button onClick={() => dispatch({ type: "roll" } as TenThousandAction)} disabled={!canRoll || !!terminal}>
+        <button data-testid="hint-target-ten-thousand-roll" onClick={() => dispatch({ type: "roll" } as TenThousandAction)} disabled={!canRoll || !!terminal}>
           Roll ({state.currentTurn.diceRemaining} dice)
         </button>
         <button
+          data-testid="hint-target-ten-thousand-setaside"
           onClick={() => {
             dispatch({ type: "setAside", indices: selected } as TenThousandAction);
             setSelected([]);
@@ -82,11 +83,11 @@ export function TenThousand({ state, dispatch, onGameOver }: GameProps<TenThousa
         >
           Set Aside
         </button>
-        <button onClick={() => dispatch({ type: "bank" } as TenThousandAction)} disabled={!canBank || !!terminal}>
+        <button data-testid="hint-target-ten-thousand-bank" onClick={() => dispatch({ type: "bank" } as TenThousandAction)} disabled={!canBank || !!terminal}>
           Bank
         </button>
         {phase === "farkled" && (
-          <button onClick={() => dispatch({ type: "nextTurn" } as TenThousandAction)} disabled={!!terminal}>
+          <button data-testid="hint-target-ten-thousand-next" onClick={() => dispatch({ type: "nextTurn" } as TenThousandAction)} disabled={!!terminal}>
             Next Turn
           </button>
         )}

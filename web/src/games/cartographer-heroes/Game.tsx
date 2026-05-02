@@ -19,7 +19,7 @@ export function CartographerHeroesGame({ state, dispatch, onGameOver }: GameProp
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as CartographerHeroesAction)}>Draw</button>
+        <button data-testid="hint-target-cartographer-heroes-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as CartographerHeroesAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

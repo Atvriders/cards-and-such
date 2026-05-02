@@ -16,5 +16,5 @@ Twelve of the 52 cards are face cards (about 23%), so the average pull will yiel
 There's no decision-making in the round — just press Pull 5 and watch fate. Press Next to advance. Want to keep score? Aim for 700+, with 800–900 being a strong run, and 1000+ a dream finish where the royals showed up in force.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RoyalRumbleSettings),
-  reducer,isTerminal,component:RoyalRumbleGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-royal-rumble-primary"]', pulses: 3 }),component:RoyalRumbleGame,
 };

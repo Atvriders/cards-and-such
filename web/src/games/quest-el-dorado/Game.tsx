@@ -19,7 +19,7 @@ export function QuestElDoradoGame({ state, dispatch, onGameOver }: GameProps<Que
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as QuestElDoradoAction)}>Draw</button>
+        <button data-testid="hint-target-quest-el-dorado-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as QuestElDoradoAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

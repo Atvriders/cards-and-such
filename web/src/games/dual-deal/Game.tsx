@@ -24,7 +24,7 @@ export function DualDealGame({ state, dispatch, onGameOver }: GameProps<DualDeal
       )}
       {state.phase === "betting" && (
         <div className="cm-row">
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", choice:"left" } as DualDealAction)}>Left Higher</button>
+          <button data-testid="hint-target-dual-deal-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", choice:"left" } as DualDealAction)}>Left Higher</button>
           <button className="cm-btn alt" onClick={() => dispatch({ type:"bet", choice:"right" } as DualDealAction)}>Right Higher</button>
         </div>
       )}

@@ -49,7 +49,7 @@ export function Generala({ state, dispatch, onGameOver }: GameProps<GeneralaStat
       </div>
 
       <div className="generala-controls">
-        <button onClick={() => dispatch({ type: "roll" } as GeneralaAction)} disabled={!canRoll || !!terminal}>
+        <button data-testid="hint-target-generala-roll" onClick={() => dispatch({ type: "roll" } as GeneralaAction)} disabled={!canRoll || !!terminal}>
           {state.rollsUsed === 0 ? "Roll Dice" : "Re-roll"}
         </button>
       </div>
@@ -68,6 +68,7 @@ export function Generala({ state, dispatch, onGameOver }: GameProps<GeneralaStat
               <tr key={cat} className={used ? "used" : hasRolled && !state.instantWin ? "clickable" : ""}>
                 <td>{LABELS[cat]}</td>
                 <td
+                  data-testid={`hint-target-generala-cat-${cat}`}
                   className={used ? undefined : potential !== null ? "score-cell potential" : "score-cell"}
                   onClick={used ? undefined : () => handleScore(cat)}
                 >

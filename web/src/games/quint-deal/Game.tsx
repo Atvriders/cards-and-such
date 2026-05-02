@@ -31,7 +31,7 @@ export function QuintDealGame({ state, dispatch, onGameOver }: GameProps<QuintDe
       {state.phase === "result" && (
         <>
           <div className="cm-result">{state.lastWin ? "Correct! +10" : "Wrong — 0"}</div>
-          <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as QuintDealAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-quint-deal-primary" className="cm-btn alt" onClick={() => dispatch({ type:"next" } as QuintDealAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

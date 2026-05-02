@@ -16,5 +16,5 @@ Each card is drawn fresh from a shuffled 52-card deck so the chance of matching 
 Just press Draw eight times. Watch the streak counter grow when the suits cooperate, and try to coax a long run out of the cards. There's nothing to choose, just lucky chains to enjoy!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SuitStackSettings),
-  reducer,isTerminal,component:SuitStackGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-suit-stack-primary"]', pulses: 3 }),component:SuitStackGame,
 };

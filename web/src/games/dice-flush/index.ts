@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceFlushState, DiceFlushAction, DiceFlushSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,16 @@ Scoring: Five of a kind = 500 pts, Four of a kind = 200 pts, Three of a kind = 8
 Strategy: if your first roll gives you a pair or three of a kind, keep those dice and reroll the rest hoping to improve. Five of a kind is rare but spectacular! Use Settings to play 5 or 10 rounds. Final score is the sum of all round scores. Can you hit five of a kind?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceFlushSettings),
-  reducer, isTerminal, component:DiceFlush,
+  reducer, isTerminal,
+  hint: (state: DiceFlushState): HintTarget | null => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "result") {
+      return { selector: '[data-testid="hint-target-dice-flush-next"]', pulses: 3 };
+    }
+    if (state.rerolls < state.maxRerolls) {
+      return { selector: '[data-testid="hint-target-dice-flush-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-dice-flush-score"]', pulses: 3 };
+  },
+  component:DiceFlush,
 };

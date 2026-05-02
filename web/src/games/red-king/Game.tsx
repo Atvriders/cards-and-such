@@ -20,7 +20,7 @@ export function RedKingGame({ state, dispatch, onGameOver }: GameProps<RedKingSt
           <div className={`cm-card ${isRed(last) ? "red" : "black"}`}>{cardName(last)}</div>
         </div>
       )}
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as RedKingAction)}>Draw</button>
+      <button data-testid="hint-target-red-king-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as RedKingAction)}>Draw</button>
     </div>
   );
 }

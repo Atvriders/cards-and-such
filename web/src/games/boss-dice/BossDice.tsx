@@ -51,17 +51,17 @@ export function BossDice({ state, dispatch, onGameOver }: GameProps<BossDiceStat
 
       {(state.phase === "preRoll" || state.phase === "rolling") && (
         <div className="boss-buttons">
-          <button className="boss-btn" onClick={() => dispatch({ type: "roll" } as BossDiceAction)} disabled={!canRoll}>
+          <button data-testid="hint-target-boss-dice-roll" className="boss-btn" onClick={() => dispatch({ type: "roll" } as BossDiceAction)} disabled={!canRoll}>
             Roll Dice
           </button>
-          <button className="boss-btn" onClick={() => dispatch({ type: "bank" } as BossDiceAction)} disabled={!canBank}>
+          <button data-testid="hint-target-boss-dice-bank" className="boss-btn" onClick={() => dispatch({ type: "bank" } as BossDiceAction)} disabled={!canBank}>
             Bank Cargo ({current.cargo})
           </button>
         </div>
       )}
 
       {state.phase === "roundOver" && (
-        <button className="boss-btn" onClick={() => dispatch({ type: "nextRound" } as BossDiceAction)}>
+        <button data-testid="hint-target-boss-dice-next" className="boss-btn" onClick={() => dispatch({ type: "nextRound" } as BossDiceAction)}>
           Next Round →
         </button>
       )}

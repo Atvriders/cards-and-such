@@ -20,7 +20,7 @@ export function PipPurseGame({ state, dispatch, onGameOver }: GameProps<PipPurse
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipPurseAction)}>Deal 5</button>
+        <button data-testid="hint-target-pip-purse-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipPurseAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

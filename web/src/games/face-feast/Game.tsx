@@ -20,7 +20,7 @@ export function FaceFeastGame({ state, dispatch, onGameOver }: GameProps<FaceFea
         </div>
       )}
       {state.phase === "ready" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as FaceFeastAction)}>Draw 1</button>
+        <button data-testid="hint-target-face-feast-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as FaceFeastAction)}>Draw 1</button>
       )}
       {state.phase === "revealed" && (
         <>

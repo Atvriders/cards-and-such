@@ -12,7 +12,7 @@ export function CardZipGame({ state, dispatch, onGameOver }: GameProps<CardZipSt
       <div className="cm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="cm-score">{state.score} pts</div>
       {state.hand.length > 0 && (<div className="cm-row">{state.hand.map((c,i)=><div key={i} className={`cm-card ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>)}</div>)}
-      {state.phase === "dealing" && <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardZipAction)}>Zip Deal</button>}
+      {state.phase === "dealing" && <button data-testid="hint-target-card-zip-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as CardZipAction)}>Zip Deal</button>}
       {state.phase === "scored" && (<><div className="cm-result">Asc pairs: {state.ascCount} - +{state.lastPts}</div><button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardZipAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { CarcassonneSouthSeasState, CarcassonneSouthSeasAction, CarcassonneSouthSeasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { CarcassonneSouthSeasGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const carcassonneSouthSeasPlugin: GamePlugin<CarcassonneSouthSeasState, C
   initialState: (seed: number, s: S) => initialState(seed, s as CarcassonneSouthSeasSettings),
   reducer,
   isTerminal,
+  hint: (state: CarcassonneSouthSeasState): HintTarget | null => {
+    const sel = tileHintSelector(state, "carcss-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: CarcassonneSouthSeasGame,
 };

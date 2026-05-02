@@ -50,7 +50,7 @@ export function DiceStackGame({
           <div className="dstck-rolls-left">
             {state.phase === "roll" ? `Rolls left: ${state.rollsLeft} — click dice to keep after rolling` : `Click dice to keep, then score a category`}
           </div>
-          <button className="dstck-roll-btn" disabled={!canRoll} onClick={() => d({ type: "roll" })}>
+          <button data-testid="hint-target-dice-stack-roll" className="dstck-roll-btn" disabled={!canRoll} onClick={() => d({ type: "roll" })}>
             Roll Dice ({state.rollsLeft} left)
           </button>
         </div>
@@ -73,6 +73,7 @@ export function DiceStackGame({
                 {scored
                   ? state.scores[cat]
                   : <button
+                    data-testid={`hint-target-dice-stack-cat-${cat}`}
                     className="dstck-sc-btn"
                     disabled={!canScore}
                     onClick={() => d({ type: "scoreCategory", category: cat })}>

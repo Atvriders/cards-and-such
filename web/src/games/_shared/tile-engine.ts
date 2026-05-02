@@ -147,3 +147,43 @@ export function tileReducer(state: TileState, action: TileAction): TileState {
 export function tileIsTerminal(s: TileState): { score: number } | null {
   return s.phase === "done" ? { score: Math.max(0, s.score) } : null;
 }
+
+/**
+ * Return the index of the empty cell that, if the next queued tile were
+ * placed there, would yield the highest adjacency contribution. Falls back
+ * to the first empty cell. Returns null only if the game is done or no
+ * empty cells remain.
+ */
+export function tileBestMoveIndex(s: TileState): number | null {
+  if (s.phase === "done") return null;
+  if (s.placed >= s.queue.length) return null;
+  const t = s.queue[s.placed];
+  if (t === undefined) return null;
+  const cells = s.cells;
+  const cfg = s.config;
+  let bestIdx: number | null = null;
+  let bestScore = -1;
+  for (let i = 0; i < cells.length; i++) {
+    if ((cells[i] ?? -1) >= 0) continue;
+    let score = 0;
+    for (const n of neighborsOf(i, cfg.gridSize)) {
+      if (cells[n] === t) score++;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestIdx = i;
+    }
+  }
+  return bestIdx;
+}
+
+/**
+ * Build a CSS selector that pulses the recommended empty cell for the next
+ * tile placement. `gridClass` is the per-game grid container class (without
+ * the leading dot), e.g. "carcb-grid". Returns null if no hint applies.
+ */
+export function tileHintSelector(s: TileState, gridClass: string): string | null {
+  const idx = tileBestMoveIndex(s);
+  if (idx === null) return null;
+  return `.${gridClass} > button:nth-child(${idx + 1})`;
+}

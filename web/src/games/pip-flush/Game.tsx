@@ -20,7 +20,7 @@ export function PipFlushGame({ state, dispatch, onGameOver }: GameProps<PipFlush
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipFlushAction)}>Deal 5</button>
+        <button data-testid="hint-target-pip-flush-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipFlushAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

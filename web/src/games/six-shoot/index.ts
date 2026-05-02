@@ -12,5 +12,5 @@ export const sixShootPlugin: GamePlugin<SixShootState, SixShootAction, typeof se
   howToPlay:"Six Shoot is a 14-draw card mini hunting sixes. Each draw pulls one random card from a 52-card deck. Every 6 revealed scores 40 points.\n\nThere are four sixes per deck, so the theoretical maximum is 160 points across the run; in practice, expect 0-120. There's no choice to make — just press Draw and watch what comes up. The game is short and luck-driven, perfect for a quick break.\n\nEach draw flips a fresh card. Sixes glow green in your tally; everything else is harmless background. Past cards appear in a small ribbon under the current card so you can track what's already been revealed.\n\nThe game ends after 14 draws and your final score is locked in. There's no penalty for missing — just no points. Pure draw, pure dice-of-the-deck variance. Try to land that elusive sixth six!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SixShootSettings),
-  reducer,isTerminal,component:SixShootGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-six-shoot-primary"]', pulses: 3 }),component:SixShootGame,
 };

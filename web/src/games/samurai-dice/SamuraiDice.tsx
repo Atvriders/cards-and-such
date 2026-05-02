@@ -53,7 +53,7 @@ export function SamuraiDice({
       </div>
 
       <div className="samurai-controls">
-        <button onClick={() => dispatch({ type: "roll" } as SamuraiDiceAction)} disabled={!canRoll}>
+        <button data-testid="hint-target-samurai-dice-roll" onClick={() => dispatch({ type: "roll" } as SamuraiDiceAction)} disabled={!canRoll}>
           {state.rollsUsed === 0 ? "Cast Dice" : `Re-roll (${3 - state.rollsUsed} left)`}
         </button>
       </div>
@@ -72,7 +72,7 @@ export function SamuraiDice({
               {already ? (
                 <span>{state.scores[cat]}</span>
               ) : canScore ? (
-                <button onClick={() => dispatch({ type: "score", category: cat } as SamuraiDiceAction)}>
+                <button data-testid={`hint-target-samurai-dice-cat-${cat}`} onClick={() => dispatch({ type: "score", category: cat } as SamuraiDiceAction)}>
                   Score {preview ?? 0}
                 </button>
               ) : (

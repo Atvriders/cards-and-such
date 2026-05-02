@@ -16,5 +16,5 @@ You'll do 12 draws per game. There's no skill choice each round — just press D
 After each draw, press Next to continue. The game ends after the 12th draw and your final tally is your score. Settle in for a friendly few minutes — this is a coffee-break diversion, not a brain-burner.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EvenEvensSettings),
-  reducer,isTerminal,component:EvenEvensGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-even-evens-primary"]', pulses: 3 }),component:EvenEvensGame,
 };

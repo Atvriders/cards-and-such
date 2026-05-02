@@ -59,7 +59,7 @@ export function CowboyDice({
       </div>
 
       <div className="cowboy-controls">
-        <button onClick={() => dispatch({ type: "roll" } as CowboyDiceAction)} disabled={!canRoll}>
+        <button data-testid="hint-target-cowboy-dice-roll" onClick={() => dispatch({ type: "roll" } as CowboyDiceAction)} disabled={!canRoll}>
           {state.rollsUsed === 0 ? "Draw Dice" : `Re-roll (${3 - state.rollsUsed} left)`}
         </button>
       </div>
@@ -85,7 +85,7 @@ export function CowboyDice({
               {already ? (
                 <span>{state.scores[cat]}</span>
               ) : canScore ? (
-                <button onClick={() => dispatch({ type: "score", category: cat } as CowboyDiceAction)}>
+                <button data-testid={`hint-target-cowboy-dice-cat-${cat}`} onClick={() => dispatch({ type: "score", category: cat } as CowboyDiceAction)}>
                   Score {preview ?? 0}
                 </button>
               ) : (

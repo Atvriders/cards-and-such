@@ -18,5 +18,5 @@ The probability of being dealt any pair from two cards is roughly 1 in 17. Most 
 Press Deal to flip your cards, then Next to advance. Average scores cluster near 0-12 points, so any non-zero finish is great.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LowPairSettings),
-  reducer,isTerminal,component:LowPairGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-low-pair-primary"]', pulses: 3 }),component:LowPairGame,
 };

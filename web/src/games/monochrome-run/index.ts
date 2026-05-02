@@ -18,5 +18,5 @@ Each card draw is independent, so a 50/50 color flip means streaks of 4 or 5 are
 Press Draw to flip a card; the streak counter updates instantly, and you can watch the run grow (or break). Game ends after 12 cards.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MonochromeRunSettings),
-  reducer,isTerminal,component:MonochromeRunGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-monochrome-run-primary"]', pulses: 3 }),component:MonochromeRunGame,
 };

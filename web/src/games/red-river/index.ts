@@ -16,5 +16,5 @@ So a single red is +10. Two reds in a row: +10 then +20 = +30 total for that pai
 Average score across 12 draws is around 80–120, but a long streak can push you well above. The game ends after 12 flips. Hit Draw, then Next, and chase the longest red river you can!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RedRiverSettings),
-  reducer,isTerminal,component:RedRiverGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-red-river-primary"]', pulses: 3 }),component:RedRiverGame,
 };

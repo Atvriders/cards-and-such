@@ -65,7 +65,7 @@ export function MedievalDice({
       </div>
 
       <div className="medieval-controls">
-        <button onClick={handleRoll} disabled={!canRoll}>
+        <button data-testid="hint-target-medieval-dice-roll" onClick={handleRoll} disabled={!canRoll}>
           {state.rollsUsed === 0 ? "Roll Dice" : `Re-roll (${3 - state.rollsUsed} left)`}
         </button>
       </div>
@@ -84,7 +84,7 @@ export function MedievalDice({
               {already ? (
                 <span>{state.scores[cat]}</span>
               ) : canScore ? (
-                <button onClick={() => handleScore(cat)}>
+                <button data-testid={`hint-target-medieval-dice-cat-${cat}`} onClick={() => handleScore(cat)}>
                   Score {preview ?? 0}
                 </button>
               ) : (

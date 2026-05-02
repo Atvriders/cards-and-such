@@ -22,7 +22,7 @@ export function RedPairPickupGame({ state, dispatch, onGameOver }: GameProps<Red
         ))}
       </div>
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as RedPairPickupAction)}>Deal</button>
+        <button data-testid="hint-target-red-pair-pickup-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as RedPairPickupAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

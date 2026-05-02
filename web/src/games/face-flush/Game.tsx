@@ -20,7 +20,7 @@ export function FaceFlushGame({ state, dispatch, onGameOver }: GameProps<FaceFlu
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as FaceFlushAction)}>Deal 5</button>
+        <button data-testid="hint-target-face-flush-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as FaceFlushAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

@@ -18,5 +18,5 @@ Probability of two cards from a fresh 52-card deck sharing a rank is 3/51 (~5.9%
 Press Deal to flip the pair; press Next to advance to the next round. Maximum theoretical score: 100 points (ten matches in a row — about a 1 in 10^12 lottery shot).`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MirrorMatchSettings),
-  reducer,isTerminal,component:MirrorMatchGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-mirror-match-primary"]', pulses: 3 }),component:MirrorMatchGame,
 };

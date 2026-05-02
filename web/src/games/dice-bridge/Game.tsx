@@ -27,8 +27,8 @@ export function DiceBridgeGame({ state, dispatch, onGameOver }: GameProps<DiceBr
         </div>
       )}
       <div className="dbrg-row">
-        <button className="dbrg-btn" onClick={() => dispatch({ type: "roll" } as DiceBridgeAction)}>Roll</button>
-        <button className="dbrg-btn alt" onClick={() => dispatch({ type: "bank" } as DiceBridgeAction)}>Bank</button>
+        <button data-testid="hint-target-dice-bridge-roll" className="dbrg-btn" onClick={() => dispatch({ type: "roll" } as DiceBridgeAction)}>Roll</button>
+        <button data-testid="hint-target-dice-bridge-bank" className="dbrg-btn alt" onClick={() => dispatch({ type: "bank" } as DiceBridgeAction)}>Bank</button>
       </div>
     </div>
   );

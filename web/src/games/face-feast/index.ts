@@ -16,5 +16,5 @@ There's no skill or choice involved: just press Draw and watch the cards come up
 After each draw, press Next to continue. The game ends after the 15th draw and your final score is your total. It's a no-stakes, no-strategy snack of a game — perfect for when you want a feast of randomness.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FaceFeastSettings),
-  reducer,isTerminal,component:FaceFeastGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-face-feast-primary"]', pulses: 3 }),component:FaceFeastGame,
 };

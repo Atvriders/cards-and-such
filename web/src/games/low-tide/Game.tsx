@@ -20,7 +20,7 @@ export function LowTideGame({ state, dispatch, onGameOver }: GameProps<LowTideSt
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as LowTideAction)}>Deal 5</button>
+        <button data-testid="hint-target-low-tide-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as LowTideAction)}>Deal 5</button>
       )}
       {state.phase === "scored" && (
         <>

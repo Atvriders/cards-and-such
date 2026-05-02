@@ -14,7 +14,7 @@ export function CardYankGame({ state, dispatch, onGameOver }: GameProps<CardYank
       <div className="cm-score">{state.score} pts</div>
       {state.phase === "scored" && <div className="cm-info">Suit: <b>{SUITS[state.targetSuit]}</b></div>}
       {state.hand.length > 0 && (<div className="cm-row">{state.hand.map((c,i)=><div key={i} className={`cm-card ${isRed(c)?"red":"black"} ${suitOf(c)===state.targetSuit?"hl":""}`}>{cardName(c)}</div>)}</div>)}
-      {state.phase === "dealing" && <button className="cm-btn" onClick={() => dispatch({ type:"yank" } as CardYankAction)}>Yank!</button>}
+      {state.phase === "dealing" && <button data-testid="hint-target-card-yank-primary" className="cm-btn" onClick={() => dispatch({ type:"yank" } as CardYankAction)}>Yank!</button>}
       {state.phase === "scored" && (<><div className="cm-result">Yanked: {state.matches} - +{state.lastPts}</div><button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as CardYankAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );

@@ -19,7 +19,7 @@ export function ValleyOfKingsTombGame({ state, dispatch, onGameOver }: GameProps
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as ValleyOfKingsTombAction)}>Draw</button>
+        <button data-testid="hint-target-valley-of-kings-tomb-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as ValleyOfKingsTombAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

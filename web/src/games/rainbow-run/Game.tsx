@@ -24,7 +24,7 @@ export function RainbowRunGame({ state, dispatch, onGameOver }: GameProps<Rainbo
       {state.lastCard !== null && (
         <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>
       )}
-      <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as RainbowRunAction)}>Draw</button>
+      <button data-testid="hint-target-rainbow-run-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as RainbowRunAction)}>Draw</button>
     </div>
   );
 }

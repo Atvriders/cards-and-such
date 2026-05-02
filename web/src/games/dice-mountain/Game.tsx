@@ -20,12 +20,12 @@ export function DiceMountainGame({ state, dispatch, onGameOver }: GameProps<Dice
         </div>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceMountainAction)}>Climb</button>
+        <button data-testid="hint-target-dice-mountain-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceMountainAction)}>Climb</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">+{state.lastDelta} altitude</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceMountainAction)}>Next</button>
+          <button data-testid="hint-target-dice-mountain-next" className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceMountainAction)}>Next</button>
         </>
       )}
     </div>

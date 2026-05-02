@@ -15,6 +15,6 @@ export const clankDungeonLootPlugin: GamePlugin<ClankDungeonLootState, ClankDung
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ClankDungeonLootSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-clank-dungeon-loot-primary"]', pulses: 3 }),
   component:ClankDungeonLootGame,
 };

@@ -15,6 +15,6 @@ export const doomlingsCatastrophePlugin: GamePlugin<DoomlingsCatastropheState, D
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DoomlingsCatastropheSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-doomlings-catastrophe-primary"]', pulses: 3 }),
   component:DoomlingsCatastropheGame,
 };

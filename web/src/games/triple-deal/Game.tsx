@@ -25,7 +25,7 @@ export function TripleDealGame({ state, dispatch, onGameOver }: GameProps<Triple
       )}
       {state.phase === "betting" && (
         <div className="cm-row">
-          <button className="cm-btn" onClick={() => dispatch({ type:"bet", choice:"yes" } as TripleDealAction)}>Yes (Between)</button>
+          <button data-testid="hint-target-triple-deal-primary" className="cm-btn" onClick={() => dispatch({ type:"bet", choice:"yes" } as TripleDealAction)}>Yes (Between)</button>
           <button className="cm-btn alt" onClick={() => dispatch({ type:"bet", choice:"no" } as TripleDealAction)}>No (Not Between)</button>
         </div>
       )}

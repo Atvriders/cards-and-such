@@ -15,6 +15,6 @@ export const fluxxFantasyRulesPlugin: GamePlugin<FluxxFantasyRulesState, FluxxFa
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FluxxFantasyRulesSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-fluxx-fantasy-rules-primary"]', pulses: 3 }),
   component:FluxxFantasyRulesGame,
 };

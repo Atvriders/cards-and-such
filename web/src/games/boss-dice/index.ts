@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BossDiceState, BossDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -39,5 +39,18 @@ Play over 3, 5, or 7 rounds. The highest cumulative cargo wins!`,
   initialState: (seed: number, settings: BossDiceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BossDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "roundOver") {
+      return { selector: '[data-testid="hint-target-boss-dice-next"]', pulses: 3 };
+    }
+    if ((state.phase === "preRoll" || state.phase === "rolling") && state.current.rollsUsed < 3) {
+      return { selector: '[data-testid="hint-target-boss-dice-roll"]', pulses: 3 };
+    }
+    if (state.phase === "rolling") {
+      return { selector: '[data-testid="hint-target-boss-dice-bank"]', pulses: 3 };
+    }
+    return null;
+  },
   component: BossDice,
 };

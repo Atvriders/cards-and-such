@@ -16,5 +16,5 @@ If your four cards form a quartet, you score points equal to the rank's value ti
 Most rounds the deal won't actually contain a quartet at all — that's part of the puzzle. Examine your hand carefully and only submit when you're sure. The pass option for a round is to submit a hand you know won't score; play five (or ten) rounds and aim for the highest total. Quick eyes beat slow ones — let's go!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as QuartetMatchSettings),
-  reducer,isTerminal,component:QuartetMatchGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-quartet-match-primary"]', pulses: 3 }),component:QuartetMatchGame,
 };

@@ -22,7 +22,7 @@ export function FridayIslandSurvivalGame({ state, dispatch, onGameOver }: GamePr
         </>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as FridayIslandSurvivalAction)}>Draw</button>
+        <button data-testid="hint-target-friday-island-survival-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as FridayIslandSurvivalAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

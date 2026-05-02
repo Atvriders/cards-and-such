@@ -23,7 +23,7 @@ export function JacksJamboreeGame({ state, dispatch, onGameOver }: GameProps<Jac
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as JacksJamboreeAction)}>Deal</button>
+        <button data-testid="hint-target-jacks-jamboree-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as JacksJamboreeAction)}>Deal</button>
       )}
       {state.phase === "scored" && (
         <>

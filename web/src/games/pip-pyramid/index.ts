@@ -16,5 +16,5 @@ Pip values: 2 through 10 are face value; J=11; Q=12; K=13; A=14 (Ace high). The 
 There are 6 rounds. Average expected score is about 240 (40 base from random ascents per round on average, plus rare full ascents). Hitting one full ascending pyramid in a game is excellent. Hitting two is a deck love letter. Press Deal Pyramid, watch the cards land, then Next to keep stacking!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PipPyramidSettings),
-  reducer,isTerminal,component:PipPyramidGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-pip-pyramid-primary"]', pulses: 3 }),component:PipPyramidGame,
 };

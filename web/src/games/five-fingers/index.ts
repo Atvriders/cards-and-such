@@ -12,5 +12,5 @@ export const fiveFingersPlugin: GamePlugin<FiveFingersState, FiveFingersAction, 
   howToPlay:"Five Fingers is a 14-draw card mini centered on the rank 5. Each draw flips a random card from a 52-card deck, and every 5 revealed scores 30 points.\n\nA standard deck has four fives, so the theoretical max is 120 points; expected scores are 0-90 depending on luck. The format is pure draw-and-reveal — no choices, just press Draw and watch the deck do its thing. The whole game lasts under a minute.\n\nPast cards stack as a thin ribbon below the latest reveal so you can replay the run visually. Fives drive your score; everything else is decorative. The game ends automatically after 14 draws.\n\nFive Fingers is a classic luck mini: nothing more, nothing less. If lady luck is on your side, you'll catch all four fives. If not, well, that's poker. Press Draw and chase those fives!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FiveFingersSettings),
-  reducer,isTerminal,component:FiveFingersGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-five-fingers-primary"]', pulses: 3 }),component:FiveFingersGame,
 };

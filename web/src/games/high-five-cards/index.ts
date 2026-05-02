@@ -18,5 +18,5 @@ The expected average sum of five random cards (Ace high) is around 40, so most r
 You play 8 rounds, all decided by chance. Watch for those Aces (14 each!), Kings, and Queens stacking up — when fortune deals you a face-card-heavy hand, you'll feel like a high roller. Average expected scores hover around 50-80 points across the full game.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HighFiveCardsSettings),
-  reducer,isTerminal,component:HighFiveCardsGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-high-five-cards-primary"]', pulses: 3 }),component:HighFiveCardsGame,
 };

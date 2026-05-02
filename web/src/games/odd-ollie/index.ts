@@ -12,5 +12,5 @@ export const oddOlliePlugin: GamePlugin<OddOllieState, OddOllieAction, typeof se
   howToPlay:"Odd Ollie is the flipside of Even Eddy: you score points whenever you draw a card with an odd pip value — 3, 5, 7, 9, Jack (11), King (13), or Ace (1). Seven ranks are 'odd,' which is 28 cards out of 52 — roughly 53.8% of the deck.\n\nYou draw 12 cards. Each odd card scores 20 points; even cards (2, 4, 6, 8, 10, Q=12) score zero. Expect around 130 points on a typical run (6-7 odds per game). The maximum is 240 points (twelve straight odd cards), but that's a freakishly lucky outcome.\n\nPress Draw, see the card, press Next. There's no skill or strategy — just enjoy the rhythm of odd-vs-even cards and chase your personal high. A simple, satisfying card mini for one-handed casual play sessions.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OddOllieSettings),
-  reducer,isTerminal,component:OddOllieGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-odd-ollie-primary"]', pulses: 3 }),component:OddOllieGame,
 };

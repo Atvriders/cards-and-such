@@ -21,7 +21,7 @@ export function OddOddsGame({ state, dispatch, onGameOver }: GameProps<OddOddsSt
         </div>
       )}
       {state.phase === "ready" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as OddOddsAction)}>Draw 2</button>
+        <button data-testid="hint-target-odd-odds-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as OddOddsAction)}>Draw 2</button>
       )}
       {state.phase === "revealed" && (
         <>

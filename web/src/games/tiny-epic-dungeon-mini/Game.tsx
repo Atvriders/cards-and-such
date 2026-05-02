@@ -19,7 +19,7 @@ export function TinyEpicDungeonMiniGame({ state, dispatch, onGameOver }: GamePro
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as TinyEpicDungeonMiniAction)}>Draw</button>
+        <button data-testid="hint-target-tiny-epic-dungeon-mini-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as TinyEpicDungeonMiniAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

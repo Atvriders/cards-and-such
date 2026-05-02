@@ -20,7 +20,7 @@ export function EightEatersGame({ state, dispatch, onGameOver }: GameProps<Eight
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as EightEatersAction)}>Draw</button>
+        <button data-testid="hint-target-eight-eaters-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as EightEatersAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>

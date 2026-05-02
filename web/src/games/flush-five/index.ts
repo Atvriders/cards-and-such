@@ -16,5 +16,5 @@ You play 8 rounds. There's no choice — just hit Deal, see what comes up, and t
 Average expected score lands around 20-40 points across 8 rounds, with lucky runs reaching 100+ when a four-of-a-suit or pair of three-of-a-suit hands lands. Watch the suits as the cards drop and savor those flush moments — they're rare, but oh so satisfying.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FlushFiveSettings),
-  reducer,isTerminal,component:FlushFiveGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-flush-five-primary"]', pulses: 3 }),component:FlushFiveGame,
 };

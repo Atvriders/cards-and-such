@@ -40,7 +40,7 @@ export function Crag({
 
       <div className="crag-controls">
         {canRoll && (
-          <button onClick={() => dispatch({ type: "roll" } as CragAction)}>
+          <button data-testid="hint-target-crag-roll" onClick={() => dispatch({ type: "roll" } as CragAction)}>
             Roll ({rollsLeft} left)
           </button>
         )}
@@ -69,6 +69,7 @@ export function Crag({
             return (
               <tr
                 key={cat}
+                data-testid={`hint-target-crag-cat-${cat}`}
                 className={`cat-row${scored ? " scored" : ""}`}
                 onClick={() => {
                   if (!scored && phase === "rolled") {

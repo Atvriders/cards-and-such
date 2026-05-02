@@ -15,6 +15,6 @@ export const wingspanAviaryPlugin: GamePlugin<WingspanAviaryState, WingspanAviar
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WingspanAviarySettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-wingspan-aviary-primary"]', pulses: 3 }),
   component:WingspanAviaryGame,
 };

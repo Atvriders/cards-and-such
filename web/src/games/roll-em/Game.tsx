@@ -51,11 +51,11 @@ export function RollEm({
       {!state.gameOver && (
         <div className="re-actions">
           {current.rollsLeft > 0 && (
-            <button className="re-btn roll-btn" onClick={() => dispatch({ type: "roll" } as RollEmAction)}>
+            <button data-testid="hint-target-roll-em-roll" className="re-btn roll-btn" onClick={() => dispatch({ type: "roll" } as RollEmAction)}>
               Roll ({current.rollsLeft} left)
             </button>
           )}
-          <button className="re-btn end-btn" onClick={() => dispatch({ type: "endTurn" } as RollEmAction)}>
+          <button data-testid="hint-target-roll-em-end" className="re-btn end-btn" onClick={() => dispatch({ type: "endTurn" } as RollEmAction)}>
             End Turn
           </button>
         </div>

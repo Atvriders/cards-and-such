@@ -19,12 +19,12 @@ export function PokerDiceFiveGame({ state, dispatch, onGameOver }: GameProps<Pok
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "roll" } as PokerDiceFiveAction)}>Roll</button>
+        <button data-testid="hint-target-poker-dice-five-roll" className="dm-btn alt" onClick={() => dispatch({ type: "roll" } as PokerDiceFiveAction)}>Roll</button>
       )}
       {state.phase === "result" && state.lastIdx !== null && (
         <>
           <div className="dm-result">{CHOICES[state.lastIdx]} — +{PAYOUTS[state.lastIdx]}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PokerDiceFiveAction)}>Next</button>
+          <button data-testid="hint-target-poker-dice-five-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PokerDiceFiveAction)}>Next</button>
         </>
       )}
     </div>

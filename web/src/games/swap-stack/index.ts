@@ -18,5 +18,5 @@ Strategy: low cards are worth swapping. With expected value of ~7 from a fresh d
 Press Keep or Swap to lock in your card; then Next to advance. Average scores hover around 60-75 points across 10 rounds.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SwapStackSettings),
-  reducer,isTerminal,component:SwapStackGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-swap-stack-primary"]', pulses: 3 }),component:SwapStackGame,
 };

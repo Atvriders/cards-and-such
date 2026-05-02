@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { MiniYahtzeeState, MiniYahtzeeAction, MiniYahtzeeSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { MiniYahtzeeState, MiniYahtzeeAction, MiniYahtzeeSettings, Category } from "./state.js";
+import { initialState, reducer, isTerminal, ALL_CATEGORIES, computeCategoryScore } from "./state.js";
 import { MiniYahtzeeGame } from "./Game.js";
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
@@ -16,5 +16,21 @@ Each turn: tap Roll to roll all unheld dice. Tap any die to hold it (turns green
 Total possible score reaches 200+ with luck. Aim to fill upper section (Ones-Sixes) for at least 63 points; chase the Yahtzee bonus on lucky early rolls. The game ends when all 13 categories are filled. Strategic placement separates novices from veterans.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniYahtzeeSettings),
-  reducer,isTerminal,component:MiniYahtzeeGame,
+  reducer,isTerminal,
+  hint: (state: MiniYahtzeeState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.rollsUsed < 3) {
+      return { selector: '[data-testid="hint-target-mini-yahtzee-roll"]', pulses: 3 };
+    }
+    const unused = ALL_CATEGORIES.filter((c) => !(c in state.scores)) as Category[];
+    if (unused.length === 0) return null;
+    let bestCat = unused[0]!;
+    let bestScore = computeCategoryScore(state.dice, bestCat);
+    for (const c of unused) {
+      const s = computeCategoryScore(state.dice, c);
+      if (s > bestScore) { bestScore = s; bestCat = c; }
+    }
+    return { selector: `[data-testid="hint-target-mini-yahtzee-cat-${bestCat}"]`, pulses: 3 };
+  },
+  component:MiniYahtzeeGame,
 };

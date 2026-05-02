@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceTarget25State, DiceTarget25Action, DiceTarget25Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,15 @@ Use Settings to choose 3 or 5 dice. Play 5 rounds per game. Max score is 250 poi
   initialState: (seed: number, settings: DiceTarget25SettingsType) => initialState(seed, settings as DiceTarget25Settings),
   reducer,
   isTerminal,
+  hint: (state: DiceTarget25State): HintTarget | null => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "scored") {
+      return { selector: '[data-testid="hint-target-dice-target-25-next"]', pulses: 3 };
+    }
+    if (state.rollsLeft > 0) {
+      return { selector: '[data-testid="hint-target-dice-target-25-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-dice-target-25-score"]', pulses: 3 };
+  },
   component: DiceTarget25,
 };

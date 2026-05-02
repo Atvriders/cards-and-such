@@ -12,7 +12,7 @@ export function TriadTowerGame({ state, dispatch, onGameOver }: GameProps<TriadT
       <div className="cm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="cm-score">{state.score} pts</div>
       {state.hand.length > 0 && <div className="cm-row">{state.hand.map((c,i) => <div key={i} className={`cm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>}
-      {state.phase === "dealing" && <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as TriadTowerAction)}>Deal 3</button>}
+      {state.phase === "dealing" && <button data-testid="hint-target-triad-tower-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as TriadTowerAction)}>Deal 3</button>}
       {state.phase === "scored" && <>
         <div className="cm-result">{state.matched ? `Same suit! +${state.lastPts}` : "No match — 0"}</div>
         <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as TriadTowerAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>

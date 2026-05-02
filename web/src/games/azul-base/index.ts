@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { AzulBaseState, AzulBaseAction, AzulBaseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { AzulBaseGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const azulBasePlugin: GamePlugin<AzulBaseState, AzulBaseAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as AzulBaseSettings),
   reducer,
   isTerminal,
+  hint: (state: AzulBaseState): HintTarget | null => {
+    const sel = tileHintSelector(state, "azulb-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: AzulBaseGame,
 };

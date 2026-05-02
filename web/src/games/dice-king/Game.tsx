@@ -20,12 +20,12 @@ export function DiceKingGame({ state, dispatch, onGameOver }: GameProps<DiceKing
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceKingAction)}>Roll 3</button>
+        <button data-testid="hint-target-dice-king-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceKingAction)}>Roll 3</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">+{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceKingAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-dice-king-next" className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceKingAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

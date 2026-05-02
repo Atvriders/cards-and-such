@@ -15,6 +15,6 @@ export const fridayIslandSurvivalPlugin: GamePlugin<FridayIslandSurvivalState, F
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FridayIslandSurvivalSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-friday-island-survival-primary"]', pulses: 3 }),
   component:FridayIslandSurvivalGame,
 };

@@ -20,7 +20,7 @@ export function MirrorMatchGame({ state, dispatch, onGameOver }: GameProps<Mirro
         </div>
       )}
       {state.phase === "dealing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as MirrorMatchAction)}>Deal 2</button>
+        <button data-testid="hint-target-mirror-match-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as MirrorMatchAction)}>Deal 2</button>
       )}
       {state.phase === "scored" && (
         <>

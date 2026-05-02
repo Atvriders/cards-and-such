@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceBridgeState, DiceBridgeAction, DiceBridgeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,10 @@ The probability of any two-die sum being 7-12 is 21/36 ≈ 58.3%. So the math sa
 You can press Bank at any time to lock in your current bridge progress and end the game. There's no penalty for banking early; it's strategy. If you've got 6 segments and 4 rolls left, banking is fine — you've already won.`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceBridgeSettings),
-  reducer, isTerminal, component: DiceBridgeGame,
+  reducer, isTerminal,
+  hint: (state: DiceBridgeState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: '[data-testid="hint-target-dice-bridge-roll"]', pulses: 3 };
+  },
+  component: DiceBridgeGame,
 };

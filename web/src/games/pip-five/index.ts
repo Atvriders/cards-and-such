@@ -16,5 +16,5 @@ Your score for the round is 30 minus twice the absolute distance from 25. So a s
 There are 8 rounds. There's no in-round choice — it's pure draw-and-tally. Average sums tend to land around 30-35 because face cards and tens cluster on the high side, so look for hands rich in small numbers. The maximum score per round is 30; a perfect game would be 240.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PipFiveSettings),
-  reducer,isTerminal,component:PipFiveGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-pip-five-primary"]', pulses: 3 }),component:PipFiveGame,
 };

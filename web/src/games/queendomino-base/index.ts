@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { QueendominoBaseState, QueendominoBaseAction, QueendominoBaseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { tileHintSelector } from "../_shared/tile-engine.js";
 import { QueendominoBaseGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +18,9 @@ export const queendominoBasePlugin: GamePlugin<QueendominoBaseState, Queendomino
   initialState: (seed: number, s: S) => initialState(seed, s as QueendominoBaseSettings),
   reducer,
   isTerminal,
+  hint: (state: QueendominoBaseState): HintTarget | null => {
+    const sel = tileHintSelector(state, "qdomb-grid");
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: QueendominoBaseGame,
 };

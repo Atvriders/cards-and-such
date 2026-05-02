@@ -12,7 +12,7 @@ export function PipPyramidGame({ state, dispatch, onGameOver }: GameProps<PipPyr
       <div className="cm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="cm-score">{state.score} pts</div>
       {state.hand.length > 0 && <div className="cm-row">{state.hand.map((c,i) => <div key={i} className={`cm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>}
-      {state.phase === "dealing" && <button className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipPyramidAction)}>Deal Pyramid</button>}
+      {state.phase === "dealing" && <button data-testid="hint-target-pip-pyramid-primary" className="cm-btn" onClick={() => dispatch({ type:"deal" } as PipPyramidAction)}>Deal Pyramid</button>}
       {state.phase === "scored" && <>
         <div className="cm-result">Jumps: {state.jumps}/4{state.ascending ? " (full ascent +50!)" : ""} — +{state.lastPts}</div>
         <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as PipPyramidAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>

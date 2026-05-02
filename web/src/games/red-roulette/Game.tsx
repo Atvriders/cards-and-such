@@ -21,7 +21,7 @@ export function RedRouletteGame({ state, dispatch, onGameOver }: GameProps<RedRo
       )}
       {state.phase === "predict" && (
         <div className="cm-row">
-          <button className="cm-btn" style={{ background:"#c0392b" }} onClick={() => dispatch({ type:"predict", choice:"red" } as RedRouletteAction)}>Red</button>
+          <button data-testid="hint-target-red-roulette-primary" className="cm-btn" style={{ background:"#c0392b" }} onClick={() => dispatch({ type:"predict", choice:"red" } as RedRouletteAction)}>Red</button>
           <button className="cm-btn" style={{ background:"#2c3e50" }} onClick={() => dispatch({ type:"predict", choice:"black" } as RedRouletteAction)}>Black</button>
         </div>
       )}

@@ -19,7 +19,7 @@ export function SwapStackGame({ state, dispatch, onGameOver }: GameProps<SwapSta
       )}
       {state.phase === "decide" && (
         <div className="cm-row">
-          <button className="cm-btn" onClick={() => dispatch({ type:"keep" } as SwapStackAction)}>Keep</button>
+          <button data-testid="hint-target-swap-stack-primary" className="cm-btn" onClick={() => dispatch({ type:"keep" } as SwapStackAction)}>Keep</button>
           <button className="cm-btn alt" onClick={() => dispatch({ type:"swap" } as SwapStackAction)}>Swap</button>
         </div>
       )}

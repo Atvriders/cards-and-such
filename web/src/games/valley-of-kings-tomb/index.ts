@@ -15,6 +15,6 @@ export const valleyOfKingsTombPlugin: GamePlugin<ValleyOfKingsTombState, ValleyO
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ValleyOfKingsTombSettings),
   reducer,
-  isTerminal,
+  isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-valley-of-kings-tomb-primary"]', pulses: 3 }),
   component:ValleyOfKingsTombGame,
 };

@@ -18,5 +18,5 @@ Smart play tip: there's no skill, only seed luck. The draws come from a determin
 The interface is simple — press Draw, see the card, then press Next to continue. Watch your nine-counter climb!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NineNineSettings),
-  reducer,isTerminal,component:NineNineGame,
+  reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-nine-nine-primary"]', pulses: 3 }),component:NineNineGame,
 };
