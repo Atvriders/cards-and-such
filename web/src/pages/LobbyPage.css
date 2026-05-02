@@ -1138,6 +1138,54 @@ button.tile {
   .lobby-picker-item:hover { transform: none; }
 }
 
+/* ---------- Mode toggle / pager / loaded indicator ---------- */
+.lobby-mode-toggle {
+  display: inline-flex;
+  gap: 2px;
+  background: var(--surface-2, rgba(148,163,184,0.12));
+  border: 1px solid var(--border, rgba(148,163,184,0.30));
+  border-radius: 999px;
+  padding: 2px;
+}
+.lobby-mode-toggle-btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--text-400);
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+.lobby-mode-toggle-btn:hover { color: var(--text); }
+.lobby-mode-toggle-btn.is-active {
+  background: var(--accent, #5b6cff);
+  color: var(--accent-fg, #fff);
+}
+
+.lobby-loaded-count {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-500);
+  padding: var(--sp-3) 0 0;
+}
+
+.lobby-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding: var(--sp-6) 0 var(--sp-3);
+}
+.lobby-pager-status {
+  font-size: 0.85rem;
+  color: var(--text-400);
+  min-width: 8ch;
+  text-align: center;
+}
+
 /* ---------- Load-more / no-results ---------- */
 .lobby-loadmore {
   display: flex;

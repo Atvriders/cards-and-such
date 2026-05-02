@@ -14,6 +14,31 @@ import "./LobbyPage.css";
 
 /** localStorage key persisting the active lobby filter chip across reloads. */
 const FILTER_STORAGE_KEY = "cards-lobby-filter";
+/** localStorage key persisting the lobby list pagination mode. */
+const LIST_MODE_STORAGE_KEY = "cards-lobby-list-mode";
+
+/**
+ * Two ways to walk the long lobby list:
+ *  - "pagination" (default): explicit Prev/Next over fixed PAGE_SIZE pages.
+ *  - "infinite":   IntersectionObserver-driven progressive append.
+ */
+type ListMode = "pagination" | "infinite";
+
+function readPersistedListMode(): ListMode {
+  try {
+    if (typeof localStorage === "undefined") return "pagination";
+    const raw = localStorage.getItem(LIST_MODE_STORAGE_KEY);
+    if (raw === "pagination" || raw === "infinite") return raw;
+  } catch { /* ignore */ }
+  return "pagination";
+}
+
+function writePersistedListMode(mode: ListMode): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(LIST_MODE_STORAGE_KEY, mode);
+  } catch { /* ignore */ }
+}
 
 /**
  * Tooltip data shared between GameCard / FamilyCard / FeaturedTile and
@@ -362,7 +387,12 @@ type LobbyEntry = FamilyEntry | GameEntry;
 export default function LobbyPage(): JSX.Element {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>(() => readPersistedFilter());
+  const [listMode, setListMode] = useState<ListMode>(() => readPersistedListMode());
+  // Infinite-scroll high-water mark (number of entries appended so far);
+  // pagination mode ignores this and slices by `page` instead.
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  // 1-based page index used in pagination mode.
+  const [page, setPage] = useState(1);
   const [openFamilyId, setOpenFamilyId] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>(() => readRatings());
   const [favSet, setFavSet] = useState<Set<string>>(() => readFavorites());
@@ -429,6 +459,11 @@ export default function LobbyPage(): JSX.Element {
   useEffect(() => {
     writePersistedFilter(filter);
   }, [filter]);
+
+  // Persist list-mode changes; rehydrates on next mount.
+  useEffect(() => {
+    writePersistedListMode(listMode);
+  }, [listMode]);
 
   // Flip favorite status for a single game id and write through to the
   // shared persistence helper, then update the in-memory set so all
@@ -603,28 +638,46 @@ export default function LobbyPage(): JSX.Element {
     return list;
   }, [allEntries, filter, deferredQuery, entryRating, favSet]);
 
-  // Reset window + close any open picker when filter or query changes.
+  // Reset window + page + close any open picker when filter or query changes.
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
+    setPage(1);
     setOpenFamilyId(null);
   }, [filter, deferredQuery]);
 
-  // Infinite-scroll sentinel: when it crosses the viewport, page in more cards.
+  // Mode flip: reset to a clean first-page state. We don't auto-scroll
+  // even if the user prefers motion — toggle is a UI mode switch, not
+  // navigation. (Reduced-motion users get the exact same behaviour.)
   useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+    setPage(1);
+  }, [listMode]);
+
+  // Infinite-scroll sentinel: when it crosses the viewport, append one
+  // more page worth of cards. Disabled in pagination mode (the sentinel
+  // node won't render, so the early-return on missing node trips first).
+  useEffect(() => {
+    if (listMode !== "infinite") return;
     const node = sentinelRef.current;
     if (!node) return;
+    // Already showing everything — nothing to observe, and we should NOT
+    // mount an observer that could keep firing as the user scrolls past
+    // the bottom.
     if (visibleCount >= filtered.length) return;
     if (typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          setVisibleCount((c) => Math.min(c + PAGE_SIZE, filtered.length));
+          setVisibleCount((c) => {
+            if (c >= filtered.length) return c;
+            return Math.min(c + PAGE_SIZE, filtered.length);
+          });
         }
       }
     }, { rootMargin: "400px 0px" });
     io.observe(node);
     return () => io.disconnect();
-  }, [filtered.length, visibleCount]);
+  }, [filtered.length, visibleCount, listMode]);
 
   // Close the picker on Escape — keyboard accessibility.
   useEffect(() => {
@@ -655,8 +708,22 @@ export default function LobbyPage(): JSX.Element {
     setAutoFamilyId(famId);
   }, [location.search, familyById, autoFamilyId]);
 
-  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
-  const hasMore = visibleCount < filtered.length;
+  // Total page count for the Prev/Next pager — 1 even when the list is
+  // empty so the controls don't render `Page 1 of 0`.
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  // Clamp page if the list shrank under us (e.g. filter changed).
+  const safePage = Math.min(page, totalPages);
+  const visible = useMemo(() => {
+    if (listMode === "infinite") return filtered.slice(0, visibleCount);
+    const start = (safePage - 1) * PAGE_SIZE;
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [filtered, visibleCount, listMode, safePage]);
+  // "More to load" is only meaningful in infinite-scroll mode — the
+  // pagination footer never short-circuits the Prev/Next controls.
+  const hasMore = listMode === "infinite" && visibleCount < filtered.length;
+  const loadedCount = listMode === "infinite"
+    ? Math.min(visibleCount, filtered.length)
+    : Math.min(safePage * PAGE_SIZE, filtered.length);
 
   // While the deferred-search recomputation is in-flight on a meaningfully
   // large query, the filtered grid would briefly stutter or flash empty.
@@ -897,6 +964,29 @@ export default function LobbyPage(): JSX.Element {
               </span>
             )}
           </h2>
+          {/* Two-state pill toggle for the list-walking strategy.
+              Persisted in localStorage; default = pagination. */}
+          <div
+            className="lobby-mode-toggle"
+            role="group"
+            aria-label="List browsing mode"
+            data-testid="lobby-mode-toggle"
+          >
+            <button
+              type="button"
+              className={`lobby-mode-toggle-btn${listMode === "pagination" ? " is-active" : ""}`}
+              aria-pressed={listMode === "pagination"}
+              onClick={() => setListMode("pagination")}
+              data-testid="lobby-mode-pagination"
+            >Pagination</button>
+            <button
+              type="button"
+              className={`lobby-mode-toggle-btn${listMode === "infinite" ? " is-active" : ""}`}
+              aria-pressed={listMode === "infinite"}
+              onClick={() => setListMode("infinite")}
+              data-testid="lobby-mode-infinite"
+            >Infinite scroll</button>
+          </div>
         </div>
 
         {filterPending ? (
@@ -971,17 +1061,54 @@ export default function LobbyPage(): JSX.Element {
                 ),
               )}
             </div>
-            {hasMore && (
-              <div className="lobby-loadmore" ref={sentinelRef}>
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={() => setVisibleCount((c) => Math.min(c + PAGE_SIZE, filtered.length))}
-                  data-testid="lobby-load-more"
+            {listMode === "infinite" ? (
+              <>
+                <div
+                  className="lobby-loaded-count"
+                  data-testid="lobby-loaded-count"
+                  aria-live="polite"
                 >
-                  Load more · {(filtered.length - visibleCount).toLocaleString()} remaining
-                </button>
-              </div>
+                  Loaded {loadedCount.toLocaleString()} of {filtered.length.toLocaleString()}
+                </div>
+                {hasMore && (
+                  <div
+                    className="lobby-loadmore"
+                    ref={sentinelRef}
+                    data-testid="lobby-sentinel"
+                  >
+                    <button
+                      type="button"
+                      className="btn"
+                      onClick={() => setVisibleCount((c) => Math.min(c + PAGE_SIZE, filtered.length))}
+                      data-testid="lobby-load-more"
+                    >
+                      Load more · {(filtered.length - visibleCount).toLocaleString()} remaining
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              totalPages > 1 && (
+                <div className="lobby-pager" data-testid="lobby-pager">
+                  <button
+                    type="button"
+                    className="btn btn-ghost"
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={safePage <= 1}
+                    data-testid="lobby-pager-prev"
+                  >Prev</button>
+                  <span className="lobby-pager-status" aria-live="polite">
+                    Page {safePage.toLocaleString()} of {totalPages.toLocaleString()}
+                  </span>
+                  <button
+                    type="button"
+                    className="btn btn-ghost"
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={safePage >= totalPages}
+                    data-testid="lobby-pager-next"
+                  >Next</button>
+                </div>
+              )
             )}
           </>
         )}
