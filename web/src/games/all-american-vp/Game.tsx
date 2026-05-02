@@ -11,7 +11,7 @@ export function AllAmericanVpGame({ state, dispatch, onGameOver }: GameProps<All
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.hand.length > 0 && <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>}
-      {state.phase === "deal" && <button className="dm-btn" onClick={() => dispatch({ type: "deal" } as AllAmericanVpAction)}>Deal</button>}
+      {state.phase === "deal" && <button className="dm-btn" data-testid="hint-target-all-american-vp-primary" onClick={() => dispatch({ type: "deal" } as AllAmericanVpAction)}>Deal</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result} — +{state.pts}</div>
         <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as AllAmericanVpAction)}>Next</button>

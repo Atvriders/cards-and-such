@@ -18,7 +18,7 @@ export function MultiHandVpTenGame({ state, dispatch, onGameOver }: GameProps<Mu
           <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as MultiHandVpTenAction)}>Play</button>}
+      {state.phase === "ready" && <button className="dm-btn" data-testid="hint-target-multi-hand-vp-ten-primary" onClick={() => dispatch({ type: "play" } as MultiHandVpTenAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
         <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as MultiHandVpTenAction)}>Next</button>

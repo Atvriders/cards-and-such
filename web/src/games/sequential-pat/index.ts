@@ -13,6 +13,6 @@ export const sequentialPatPlugin: GamePlugin<SequentialPatState, SequentialPatAc
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SequentialPatSettings),
   reducer,isTerminal,
-  hint: (state) => isTerminal(state) ? null : { selector: ".play-restart-btn", pulses: 3 },
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component:SequentialPatGame,
 };

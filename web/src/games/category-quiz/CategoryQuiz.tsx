@@ -46,6 +46,7 @@ export function CategoryQuiz({
             <button
               key={i}
               className={cls}
+              data-testid={`hint-target-quiz-answer-${i}`}
               disabled={confirmed}
               onClick={() => dispatch({ type: "select", optionIndex: i } as CategoryQuizAction)}
             >

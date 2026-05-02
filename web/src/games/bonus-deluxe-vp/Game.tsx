@@ -25,7 +25,7 @@ export function BonusDeluxeVp({ state, dispatch, onGameOver }: GameProps<BonusDe
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as BonusDeluxeVpAction)}>Deal Hand</button>}
+        {state.phase === "ready" && <button className="g-btn" data-testid="hint-target-bonus-deluxe-vp-primary" onClick={() => dispatch({ type: "deal" } as BonusDeluxeVpAction)}>Deal Hand</button>}
         {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as BonusDeluxeVpAction)}>Next Round</button>}
       </div>
     </div>

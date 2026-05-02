@@ -17,6 +17,6 @@ export const headsTailsPatPlugin: GamePlugin<SoliState, SoliAction, typeof setti
   initialState: (seed: number, s: S) => initialState(seed, s as SoliSettings),
   reducer,
   isTerminal,
-  hint: (state) => isTerminal(state) ? null : { selector: ".play-restart-btn", pulses: 3 },
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: SoliGame,
 };

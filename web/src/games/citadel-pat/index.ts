@@ -13,6 +13,6 @@ export const citadelPatPlugin: GamePlugin<CitadelPatState, CitadelPatAction, typ
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CitadelPatSettings),
   reducer,isTerminal,
-  hint: (state) => isTerminal(state) ? null : { selector: ".play-restart-btn", pulses: 3 },
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component:CitadelPatGame,
 };

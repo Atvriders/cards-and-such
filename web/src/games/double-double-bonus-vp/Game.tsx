@@ -25,7 +25,7 @@ export function DoubleDoubleBonusVp({ state, dispatch, onGameOver }: GameProps<D
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as DoubleDoubleBonusVpAction)}>Deal Hand</button>}
+        {state.phase === "ready" && <button className="g-btn" data-testid="hint-target-double-double-bonus-vp-primary" onClick={() => dispatch({ type: "deal" } as DoubleDoubleBonusVpAction)}>Deal Hand</button>}
         {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as DoubleDoubleBonusVpAction)}>Next Round</button>}
       </div>
     </div>

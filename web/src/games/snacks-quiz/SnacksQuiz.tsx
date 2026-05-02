@@ -22,7 +22,7 @@ export function SnacksQuiz({ state, dispatch, onGameOver }: GameProps<SnacksQuiz
                 if (c === entry.answer) cls += " correct";
                 else if (state.selected === i) cls += " wrong";
               }
-              return <button key={i} className={cls} disabled={state.selected !== null} onClick={() => dispatch({ type: "select", index: i })}>{c}</button>;
+              return <button key={i} className={cls} data-testid={`hint-target-quiz-answer-${i}`} disabled={state.selected !== null} onClick={() => dispatch({ type: "select", index: i })}>{c}</button>;
             })}
           </div>
           {state.selected !== null && (

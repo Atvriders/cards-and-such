@@ -39,6 +39,7 @@ export function AcronymQuiz({
                 <button
                   key={i}
                   className={cls}
+                  data-testid={`hint-target-quiz-answer-${i}`}
                   disabled={state.selected !== null}
                   onClick={() => dispatch({ type: "select", index: i } as AcronymQuizAction)}
                 >
