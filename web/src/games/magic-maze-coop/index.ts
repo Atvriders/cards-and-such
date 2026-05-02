@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MagicMazeCoopState, MagicMazeCoopAction, MagicMazeCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { MagicMazeCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { MagicMazeCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const magicMazeCoopPlugin: GamePlugin<MagicMazeCoopState, MagicMazeCoopAc
   initialState: (seed: number, s: S) => initialState(seed, s as MagicMazeCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: MagicMazeCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, MagicMazeCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: MagicMazeCoopGame,
 };
 

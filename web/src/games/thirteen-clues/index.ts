@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ThirteenCluesState, ThirteenCluesAction, ThirteenCluesSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { ThirteenClues_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { ThirteenCluesGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const thirteenCluesPlugin: GamePlugin<ThirteenCluesState, ThirteenCluesAc
   initialState: (seed: number, s: S) => initialState(seed, s as ThirteenCluesSettings),
   reducer,
   isTerminal,
+  hint: (state: ThirteenCluesState): HintTarget | null => {
+    const sel = deductionHintSelector(state, ThirteenClues_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: ThirteenCluesGame,
 };
 

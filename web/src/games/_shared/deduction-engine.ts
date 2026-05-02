@@ -115,3 +115,20 @@ export function deductionScore(state: DeductionState, cfg: DeductionConfig): { s
   const score = won ? 100 + remaining * 20 : 0;
   return { score, won };
 }
+
+/** Engine-level hint for any deduction game using DeductionView.
+ *  Strategy: when the player has not yet diversified their working guess
+ *  (e.g. all slots equal on the first turn), pulse the first slot to nudge
+ *  variation. Otherwise pulse the submit button — submitting yields
+ *  information regardless of guess content, which is the lowest-friction
+ *  path to "more entropy". Returns null when not in guess phase. */
+export function deductionHintSelector(state: DeductionState, _cfg: DeductionConfig): string | null {
+  if (state.phase !== "guess") return null;
+  const cur = state.current;
+  // If the working guess is "default" (all zeros) and we haven't guessed
+  // anything yet, ask the player to vary the slots first.
+  if (state.guesses.length === 0 && cur.length > 0 && cur.every(v => v === cur[0])) {
+    return `[data-testid="hint-target-deduction-slot-0"]`;
+  }
+  return `[data-testid="hint-target-deduction-submit"]`;
+}

@@ -59,10 +59,11 @@ export function DeductionView({ prefix, cfg, state, onSet, onSubmit, onGameOver,
             style={{ background: pegColor(v, cfg.poolSize) }}
             onClick={() => onSet(i, (v + 1) % cfg.poolSize)}
             title="Click to cycle"
+            data-testid={`hint-target-deduction-slot-${i}`}
           >{cfg.symbolLabels[v] ?? v}</button>
         ))}
       </div>
-      <button className={`${p}-submit`} type="button" onClick={onSubmit}>Submit Guess</button>
+      <button className={`${p}-submit`} type="button" onClick={onSubmit} data-testid="hint-target-deduction-submit">Submit Guess</button>
     </div>
   );
 }

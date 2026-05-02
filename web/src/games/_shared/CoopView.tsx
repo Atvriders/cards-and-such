@@ -62,6 +62,7 @@ export function CoopView({ prefix, cfg, state, onPlay, onGameOver, scoreFn, intr
             disabled={state.phase !== "choose"}
             type="button"
             title={tac.desc}
+            data-testid={`hint-target-coop-tactic-${tac.id}`}
           >
             <div className={`${p}-tactic-emoji`}>{tac.emoji}</div>
             <div className={`${p}-tactic-name`}>{tac.label}</div>

@@ -154,3 +154,34 @@ export function coopScore(
   const score = Math.max(0, base + winBonus - threatPenalty);
   return { score, victory: won };
 }
+
+/** Recommend the "next required action" for a coop game.
+ *  Heuristic: when threat is dangerously close to the breakpoint, prefer the
+ *  tactic with the largest threatPush; otherwise prefer the tactic with the
+ *  best expected effort (effort * reliability) plus a small bonus for
+ *  threatPush. Returns the chosen tactic id, or null if not in a choose phase. */
+export function coopRecommend(state: CoopState, cfg: CoopEngineConfig): string | null {
+  if (state.phase !== "choose") return null;
+  if (cfg.tactics.length === 0) return null;
+  const threatNear = state.threat >= Math.max(1, cfg.threatBreakpoint - Math.ceil(cfg.threatPerRound));
+  const score = (t: CoopTactic): number => {
+    const ev = t.effort * t.reliability;
+    const push = (t.threatPush ?? 0);
+    if (threatNear) return push * 10 + ev;
+    return ev + push * 0.5;
+  };
+  let best = cfg.tactics[0]!;
+  let bestScore = score(best);
+  for (const t of cfg.tactics) {
+    const s = score(t);
+    if (s > bestScore) { best = t; bestScore = s; }
+  }
+  return best.id;
+}
+
+/** Engine-level hint selector for any coop game using CoopView. */
+export function coopHintSelector(state: CoopState, cfg: CoopEngineConfig): string | null {
+  const id = coopRecommend(state, cfg);
+  if (!id) return null;
+  return `[data-testid="hint-target-coop-tactic-${id}"]`;
+}

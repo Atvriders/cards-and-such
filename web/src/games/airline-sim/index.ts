@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AirlineState, AirlineAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AirlineSim } from "./Game.js";
@@ -22,5 +22,10 @@ Strategy: Start with domestic routes to build cash. Invest in maintenance early 
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: AirlineState, action: AirlineAction) => AirlineState,
   isTerminal,
+  hint: (state: AirlineState): HintTarget | null => {
+    if (state.phase === "plan") return { selector: '[data-testid="hint-target-sim-run"]', pulses: 3 };
+    if (state.phase === "results") return { selector: '[data-testid="hint-target-sim-next"]', pulses: 3 };
+    return null;
+  },
   component: AirlineSim,
 } as unknown as GamePlugin;

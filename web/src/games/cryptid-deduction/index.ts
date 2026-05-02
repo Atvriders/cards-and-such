@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CryptidDeductionState, CryptidDeductionAction, CryptidDeductionSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { CryptidDeduction_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { CryptidDeductionGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const cryptidDeductionPlugin: GamePlugin<CryptidDeductionState, CryptidDe
   initialState: (seed: number, s: S) => initialState(seed, s as CryptidDeductionSettings),
   reducer,
   isTerminal,
+  hint: (state: CryptidDeductionState): HintTarget | null => {
+    const sel = deductionHintSelector(state, CryptidDeduction_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: CryptidDeductionGame,
 };
 

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PandemicInTheLabState, PandemicInTheLabAction, PandemicInTheLabSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { PandemicInTheLab_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { PandemicInTheLabGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const pandemicInTheLabPlugin: GamePlugin<PandemicInTheLabState, PandemicI
   initialState: (seed: number, s: S) => initialState(seed, s as PandemicInTheLabSettings),
   reducer,
   isTerminal,
+  hint: (state: PandemicInTheLabState): HintTarget | null => {
+    const sel = coopHintSelector(state, PandemicInTheLab_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: PandemicInTheLabGame,
 };
 

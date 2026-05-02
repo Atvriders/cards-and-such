@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HogwartsBattleCoopState, HogwartsBattleCoopAction, HogwartsBattleCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { HogwartsBattleCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { HogwartsBattleCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const hogwartsBattleCoopPlugin: GamePlugin<HogwartsBattleCoopState, Hogwa
   initialState: (seed: number, s: S) => initialState(seed, s as HogwartsBattleCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: HogwartsBattleCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, HogwartsBattleCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: HogwartsBattleCoopGame,
 };
 

@@ -70,7 +70,7 @@ export function AirlineSim({
           <div style={{ fontSize: "0.82rem", color: "#888" }}>
             {totalFlights} flights planned | Est. cost: ~${estCost.toLocaleString()}
           </div>
-          <button className="air-btn" onClick={() => d({ type: "fly" })}>Fly This Quarter!</button>
+          <button className="air-btn" data-testid="hint-target-sim-run" onClick={() => d({ type: "fly" })}>Fly This Quarter!</button>
         </div>
       )}
 
@@ -82,7 +82,7 @@ export function AirlineSim({
           <div className={`air-result-row profit ${state.lastProfit >= 0 ? "pos" : "neg"}`}>
             Profit: {state.lastProfit >= 0 ? "+" : ""}${state.lastProfit.toLocaleString()}
           </div>
-          <button className="air-btn" onClick={() => d({ type: "nextQuarter" })}>
+          <button className="air-btn" data-testid="hint-target-sim-next" onClick={() => d({ type: "nextQuarter" })}>
             {state.quarter >= TOTAL_QUARTERS ? "Final Report" : "Next Quarter →"}
           </button>
         </div>

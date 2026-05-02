@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ForbiddenIslandCoopState, ForbiddenIslandCoopAction, ForbiddenIslandCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { ForbiddenIslandCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { ForbiddenIslandCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const forbiddenIslandCoopPlugin: GamePlugin<ForbiddenIslandCoopState, For
   initialState: (seed: number, s: S) => initialState(seed, s as ForbiddenIslandCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: ForbiddenIslandCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, ForbiddenIslandCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: ForbiddenIslandCoopGame,
 };
 
