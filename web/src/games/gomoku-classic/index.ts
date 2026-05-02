@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { ConnectState, ConnectAction, ConnectSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GomokuClassicGame } from "./Game.js";
@@ -28,5 +28,19 @@ Tips: build open threes and open fours — an open four cannot be blocked at bot
   initialState: (seed: number, s: S) => initialState(seed, s as ConnectSettings),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.phase === "done" || state.turn !== "P") return null;
+    const total = state.board.length;
+    const center = Math.floor(total / 2);
+    if (state.board[center] === null) {
+      return { selector: `[data-testid="gmkcl-${center}"]`, pulses: 3 };
+    }
+    for (let i = 0; i < total; i++) {
+      if (state.board[i] === null) {
+        return { selector: `[data-testid="gmkcl-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: GomokuClassicGame,
 };

@@ -100,6 +100,7 @@ export function Morabaraba({
           <div
             key={pos}
             className={`morabaraba-point ${getPointClass(pos)}`}
+            data-testid={`morabaraba-pos-${pos}`}
             style={{ left: `${x}%`, top: `${y}%` }}
             onClick={() => handleClick(pos)}
           >

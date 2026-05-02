@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { ConnectState, ConnectAction, ConnectSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ConnectGame } from "./Game.js";
@@ -17,5 +17,15 @@ export const connectFourClassicPlugin: GamePlugin<ConnectState, ConnectAction, t
   initialState: (seed: number, s: S) => initialState(seed, s as ConnectSettings),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.phase === "done" || state.turn !== "P") return null;
+    const COLS = 7;
+    for (let c = 0; c < COLS; c++) {
+      if (state.board[c] === null) {
+        return { selector: `[data-testid="c4cl-col-${c}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: ConnectGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SantoriniState, SantoriniAction, SantoriniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Santorini } from "./Game.js";
@@ -28,5 +28,21 @@ Tip: try to build towers that benefit you while blocking the bot's access to lev
   initialState: (seed: number, s: SantoriniSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0 || state.phase === "over") return null;
+    if (state.phase === "place0") {
+      for (let i = 0; i < 25; i++) {
+        if (!state.workers.includes(i)) {
+          const row = Math.floor(i / 5), col = i % 5;
+          return { selector: `[data-testid="sant-${row}-${col}"]`, pulses: 3 };
+        }
+      }
+      return null;
+    }
+    const w = state.workers[0];
+    if (w === undefined || w < 0) return null;
+    const row = Math.floor(w / 5), col = w % 5;
+    return { selector: `[data-testid="sant-${row}-${col}"]`, pulses: 3 };
+  },
   component: Santorini,
 };

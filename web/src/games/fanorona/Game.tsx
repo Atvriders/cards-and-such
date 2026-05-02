@@ -115,6 +115,7 @@ export function Fanorona({
                 isTarget && !cell ? "target" : "",
               ].filter(Boolean).join(" ")}
               style={{ left: x - 18, top: y - 18, position: "absolute", width: 36, height: 36 }}
+              data-testid={`fano-pos-${pos}`}
               onClick={() => handleCellClick(pos)}
             >
               {cell === 0 && <span className="fanorona-piece white">●</span>}

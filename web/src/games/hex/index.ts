@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HexState, HexAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -39,5 +39,17 @@ Strategy tips: The key skill in Hex is building "bridges" — groups of stones t
   initialState: (seed: number, s: HexSettingsType) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    const size = state.grid.rows;
+    let bestRow = -1, bestCol = -1;
+    for (let row = 0; row < size && bestRow === -1; row++) {
+      for (let col = 0; col < size; col++) {
+        if (state.grid.get({ row, col }) === null) { bestRow = row; bestCol = col; break; }
+      }
+    }
+    if (bestRow < 0) return null;
+    return { selector: `[data-testid="hex-${bestRow}-${bestCol}"]`, pulses: 3 };
+  },
   component: Hex,
 };

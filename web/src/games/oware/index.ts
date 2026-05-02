@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { OwareState, OwareAction, OwareSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Oware } from "./Game.js";
@@ -22,5 +22,14 @@ Exception — Grand Slam: if a single move would capture all of an opponent's se
   initialState: (seed: number, s: OwareSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    for (let i = 0; i < 6; i++) {
+      if ((state.pits[i] ?? 0) > 0) {
+        return { selector: `[data-testid="oware-pit-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Oware,
 };

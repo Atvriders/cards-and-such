@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FanoronaState, FanoronaAction, FanoronaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Fanorona } from "./Game.js";
@@ -22,5 +22,14 @@ Non-capturing moves are only allowed when no captures are possible. The bot sear
   initialState: (seed: number, s: FanoronaSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    for (let i = 0; i < state.board.length; i++) {
+      if (state.board[i] === 0) {
+        return { selector: `[data-testid="fano-pos-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Fanorona,
 };

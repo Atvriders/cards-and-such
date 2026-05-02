@@ -44,6 +44,7 @@ export function GomokuClassicGame({
               <button
                 key={i}
                 className={cls}
+                data-testid={`gmkcl-${i}`}
                 onClick={() => dispatch({ type: "place", row: r, col: c } as ConnectAction)}
                 disabled={v !== null || state.phase === "done" || state.turn !== "P"}
                 aria-label={`r${r}c${c}`}

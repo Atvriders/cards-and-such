@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MorabarabaState, MorabarabaAction, MorabarabaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Morabaraba } from "./Game.js";
@@ -22,5 +22,22 @@ Strategy: build mills that can be opened and closed repeatedly. Protect your cow
   initialState: (seed: number, s: MorabarabaSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== "P") return null;
+    if (state.phase === "place") {
+      for (let i = 0; i < state.board.length; i++) {
+        if (state.board[i] === null) {
+          return { selector: `[data-testid="morabaraba-pos-${i}"]`, pulses: 3 };
+        }
+      }
+    } else if (state.phase === "move") {
+      for (let i = 0; i < state.board.length; i++) {
+        if (state.board[i] === "P") {
+          return { selector: `[data-testid="morabaraba-pos-${i}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: Morabaraba,
 };

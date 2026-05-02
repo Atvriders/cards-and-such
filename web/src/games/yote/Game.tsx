@@ -84,7 +84,7 @@ export function YoteGame({ state, dispatch, onGameOver }: GameProps<YoteState, Y
           const isSel = state.selected === idx;
           const isTarget = targetSet.has(idx);
           return (
-            <g key={idx} onClick={() => handleCell(idx)} style={{ cursor: isHumanTurn ? "pointer" : "default" }}>
+            <g key={idx} data-testid={`yote-pos-${idx}`} onClick={() => handleCell(idx)} style={{ cursor: isHumanTurn ? "pointer" : "default" }}>
               {isSel && <rect x={x - CELL/2 + 2} y={y - CELL/2 + 2} width={CELL - 4} height={CELL - 4} fill="#ffe88a" stroke="none" />}
               {isTarget && cell === null && <circle cx={x} cy={y} r={10} fill="#44cc44" opacity={0.8} />}
               {cell === 0 && <circle cx={x} cy={y} r={24} fill={isSel ? "#2244cc" : "#222"} stroke="#555" strokeWidth={1.5} />}

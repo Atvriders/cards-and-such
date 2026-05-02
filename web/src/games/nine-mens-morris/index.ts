@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MorrisState, MorrisAction, MorrisSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NineMensMorris } from "./Game.js";
@@ -24,5 +24,23 @@ Click empty intersections to place or move your pieces. In the moving phase, cli
   initialState: (seed: number, s: MorrisSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    const phase = state.phase[0];
+    if (phase === "placing") {
+      for (let i = 0; i < 24; i++) {
+        if (state.board[i] === null) {
+          return { selector: `[data-testid="morris-pos-${i}"]`, pulses: 3 };
+        }
+      }
+    } else {
+      for (let i = 0; i < 24; i++) {
+        if (state.board[i] === 0) {
+          return { selector: `[data-testid="morris-pos-${i}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   component: NineMensMorris,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PentagoState, PentagoAction, PentagoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Pentago } from "./Game.js";
@@ -26,5 +26,16 @@ Tips: placing near the middle of a quadrant gives you the most flexible lines. B
   initialState: (seed: number, s: PentagoSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    if (state.phase !== "place") return null;
+    for (let i = 0; i < 36; i++) {
+      if (state.board[i] === null) {
+        const row = Math.floor(i / 6), col = i % 6;
+        return { selector: `[data-testid="pent-${row}-${col}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Pentago,
 };

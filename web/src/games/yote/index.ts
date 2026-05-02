@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { YoteState, YoteAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { YoteGame } from "./Game.js";
@@ -30,5 +30,21 @@ Bot strategy: minimax at depth 2, preferring captures and maximizing stone-count
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    if (state.inHand[0] > 0) {
+      for (let i = 0; i < state.board.length; i++) {
+        if (state.board[i] === null) {
+          return { selector: `[data-testid="yote-pos-${i}"]`, pulses: 3 };
+        }
+      }
+    }
+    for (let i = 0; i < state.board.length; i++) {
+      if (state.board[i] === 0) {
+        return { selector: `[data-testid="yote-pos-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: YoteGame,
 };

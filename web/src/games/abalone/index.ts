@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AbaloneState, AbaloneAction, AbaloneSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Abalone } from "./Game.js";
@@ -35,5 +35,15 @@ Tips: keep your marbles grouped in the center for maximum pushing power. Avoid s
   initialState: (seed: number, s: AbaloneSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    for (const [key, cell] of state.board.entries()) {
+      if (cell === 0) {
+        const [q, r] = key.split(",").map(Number);
+        return { selector: `[data-testid="abal-${q}-${r}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Abalone,
 };

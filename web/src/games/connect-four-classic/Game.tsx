@@ -56,6 +56,7 @@ export function ConnectGame({
             <button
               key={`arrow-${c}`}
               className="c4cl-arrow"
+              data-testid={`c4cl-col-${c}`}
               onClick={() => drop(c)}
               disabled={state.phase !== "playing" || state.turn !== "P" || fullCols[c]}
               aria-label={`Drop in column ${c + 1}`}

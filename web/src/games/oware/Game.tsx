@@ -36,6 +36,7 @@ export function Oware({
       <div
         key={idx}
         className={`oware-pit ${canClick ? "clickable" : ""} ${state.lastSowed === idx ? "last-sowed" : ""}`}
+        data-testid={`oware-pit-${idx}`}
         onClick={() => { if (canClick) dispatch({ type: "sow", pit: idx } satisfies OwareAction); }}
       >
         <div className="oware-seeds">{seeds}</div>

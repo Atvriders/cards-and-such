@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BlokusDuoState, BlokusDuoAction, BlokusDuoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BlokusDuo } from "./Game.js";
@@ -26,5 +26,12 @@ Tips: try to cover your corner point early and branch in multiple directions. Co
   initialState: (seed: number, s: BlokusDuoSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    if (!state.hasPlaced[0]) {
+      return { selector: '[data-testid="blk-4-4"]', pulses: 3 };
+    }
+    return null;
+  },
   component: BlokusDuo,
 };

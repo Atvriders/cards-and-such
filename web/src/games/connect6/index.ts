@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Connect6State, Connect6Action, Connect6Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Connect6 } from "./Game.js";
@@ -24,5 +24,19 @@ Strategy tips: control the centre early, spread threats across multiple directio
   initialState: (seed: number, s: Connect6Settings) => initialState(seed, s),
   reducer,
   isTerminal,
+    hint: (state): HintTarget | null => {
+    if (state.winner !== null || state.turn !== 0) return null;
+    const SZ = 19;
+    const center = Math.floor(SZ * SZ / 2);
+    if (state.board[center] === null) {
+      return { selector: `[data-testid="cell-${center}"]`, pulses: 3 };
+    }
+    for (let i = 0; i < state.board.length; i++) {
+      if (state.board[i] === null) {
+        return { selector: `[data-testid="cell-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Connect6,
 };
