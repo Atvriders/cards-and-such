@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { THEMES, applyTheme, loadSavedTheme, type ThemeId } from "../themes.js";
 import { Skeleton } from "../Skeleton.js";
 import { emitSparkles } from "../Sparkles.js";
+import { useFocusTrap } from "../useFocusTrap.js";
 import { t } from "../i18n.js";
 import "./ThemePicker.css";
 
@@ -22,6 +23,11 @@ export default function ThemePicker(): JSX.Element {
   const [priming, setPriming] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  // Trap focus inside the open popover for keyboard navigation parity
+  // with other modal-style surfaces (cheat sheet, FamilyPicker, etc.).
+  useFocusTrap(popoverRef, open);
 
   // Prime the popover with a skeleton on each open so the swatch grid
   // animates in instead of slamming into place. ~120ms is short enough to
@@ -90,6 +96,8 @@ export default function ThemePicker(): JSX.Element {
           className="theme-picker-popover"
           role="dialog"
           aria-label="Background themes"
+          ref={popoverRef}
+          tabIndex={-1}
         >
           <div className="theme-picker-title">{t("theme.background")}</div>
           {priming && (

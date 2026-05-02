@@ -4,6 +4,7 @@ import { RequireAuth } from "./platform/RequireAuth.js";
 import LoginPage from "./pages/LoginPage.js";
 import "./styles/games.css";
 import LobbyPage from "./pages/LobbyPage.js";
+import CategoryPage from "./pages/CategoryPage.js";
 import PlayPage from "./pages/PlayPage.js";
 import LeaderboardPage from "./pages/LeaderboardPage.js";
 import DailyPage from "./pages/DailyPage.js";
@@ -22,6 +23,7 @@ export default function App(): JSX.Element {
       <Route path="/login" element={<LoginPage />} />
       <Route element={<RequireAuth><AppShell /></RequireAuth>}>
         <Route path="/" element={<LobbyPage />} />
+        <Route path="/category/:cat" element={<CategoryPage />} />
         <Route path="/play/:gameId" element={<PlayPage />} />
         <Route path="/play/:gameId/online" element={<PlayOnlinePage />} />
         <Route path="/play/connect-4/online/:roomId" element={<Connect4Online />} />

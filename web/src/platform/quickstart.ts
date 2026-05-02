@@ -1,5 +1,6 @@
 import { GAMES } from "../games/registry.js";
 import { readRatings } from "./StarRating.js";
+import { recordLastPlayed } from "./userdata.js";
 
 /**
  * Quick Start picker.
@@ -50,7 +51,11 @@ export function readRecentlyPlayed(): string[] {
   }
 }
 
-/** Record a game id at the head of the recently-played list. */
+/**
+ * Record a game id at the head of the recently-played list and stamp it
+ * into the `cards-last-played` map so the leaderboard's "My Ladder"
+ * relative-time column has real data to display.
+ */
 export function recordPlayed(gameId: string): void {
   try {
     if (typeof localStorage === "undefined") return;
@@ -61,6 +66,9 @@ export function recordPlayed(gameId: string): void {
   } catch {
     /* ignore — storage is best-effort */
   }
+  // Stamp last-played even if the recents write failed so the ladder still
+  // populates; recordLastPlayed swallows its own errors.
+  recordLastPlayed(gameId);
 }
 
 /** Game ids known to the registry (filters out stale ids in localStorage). */

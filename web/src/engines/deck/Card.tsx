@@ -9,6 +9,7 @@ interface Props {
   onClick?: () => void;
   draggable?: boolean;
   onDragStart?: (e: React.DragEvent) => void;
+  onDragEnd?: (e: React.DragEvent) => void;
   className?: string;
 }
 
@@ -16,7 +17,7 @@ interface Props {
 const CLICK_PIXEL_TOLERANCE = 6;
 const CLICK_TIME_TOLERANCE_MS = 500;
 
-export function Card({ card, faceDown, onClick, draggable, onDragStart, className = "" }: Props): JSX.Element {
+export function Card({ card, faceDown, onClick, draggable, onDragStart, onDragEnd, className = "" }: Props): JSX.Element {
   const downRef = useRef<{ x: number; y: number; t: number } | null>(null);
 
   const handlePointerDown = (e: React.PointerEvent): void => {
@@ -58,6 +59,7 @@ export function Card({ card, faceDown, onClick, draggable, onDragStart, classNam
         : {})}
       draggable={draggable}
       onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
       aria-label={`${rankLabel(card.rank)} of ${card.suit}`}
     >
       <div className="corner top-left">

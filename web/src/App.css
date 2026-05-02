@@ -343,6 +343,10 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
+  /* Horizontal-scroll guard: nothing should ever overflow the viewport
+     width. Scoped to `body` (not `html`) so position:sticky still works
+     on descendants. */
+  overflow-x: hidden;
   font-family: var(--font-sans);
   font-weight: var(--weight-regular);
   font-size: 15px;
@@ -400,16 +404,130 @@ a:hover { color: var(--violet); }
    Buttons that explicitly set `color` keep their own style. */
 button { color: #1a1a1a; font-family: inherit; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 12px; height: 12px; }
+/* =====================================================================
+   Themed scrollbars — dark default + light-mode variant
+   ---------------------------------------------------------------------
+   - Track is fully transparent so the scrollbar floats over the surface.
+   - Thumb is a subtle slate gradient that thickens + brightens on hover.
+   - Firefox uses `scrollbar-width: thin` + `scrollbar-color` (no gradient
+     support, so we fall back to a solid token-driven colour).
+   - The `.themed-scroll` opt-in class applies the same look to inner
+     scrollable regions (lobby grid container, picker modal, settings).
+   ===================================================================== */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.28) transparent;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-corner { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.18);
-  border: 3px solid transparent;
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.22) 0%, rgba(99, 102, 241, 0.22) 100%);
+  border: 2px solid transparent;
   background-clip: padding-box;
   border-radius: 999px;
+  transition: background var(--dur-fast) var(--ease-out-quart);
 }
-::-webkit-scrollbar-thumb:hover { background-color: rgba(148, 163, 184, 0.32); background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.45) 0%, rgba(129, 140, 248, 0.55) 100%);
+  background-clip: padding-box;
+  border-width: 1px;
+}
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, rgba(168, 183, 204, 0.55) 0%, rgba(129, 140, 248, 0.65) 100%);
+  background-clip: padding-box;
+}
+
+/* Light-mode override — softer slate over white. */
+:root[data-light] {
+  scrollbar-color: rgba(100, 116, 139, 0.32) transparent;
+}
+:root[data-light] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(100, 116, 139, 0.22) 0%, rgba(99, 102, 241, 0.20) 100%);
+  background-clip: padding-box;
+}
+:root[data-light] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(71, 85, 105, 0.42) 0%, rgba(99, 102, 241, 0.45) 100%);
+  background-clip: padding-box;
+}
+:root[data-light] ::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, rgba(51, 65, 85, 0.55) 0%, rgba(99, 102, 241, 0.55) 100%);
+  background-clip: padding-box;
+}
+
+/* Apply themed scrollbars to specific scrollable regions: lobby grid
+   container, picker modal body, and the settings page wrapper. The
+   `.themed-scroll` utility is provided so future scrollable surfaces can
+   opt in by adding the class. */
+.lobby-grid,
+.lobby-picker,
+.lobby-picker-list,
+.settings-page,
+.themed-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.28) transparent;
+}
+.lobby-grid::-webkit-scrollbar,
+.lobby-picker::-webkit-scrollbar,
+.lobby-picker-list::-webkit-scrollbar,
+.settings-page::-webkit-scrollbar,
+.themed-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.lobby-grid::-webkit-scrollbar-track,
+.lobby-picker::-webkit-scrollbar-track,
+.lobby-picker-list::-webkit-scrollbar-track,
+.settings-page::-webkit-scrollbar-track,
+.themed-scroll::-webkit-scrollbar-track { background: transparent; }
+.lobby-grid::-webkit-scrollbar-thumb,
+.lobby-picker::-webkit-scrollbar-thumb,
+.lobby-picker-list::-webkit-scrollbar-thumb,
+.settings-page::-webkit-scrollbar-thumb,
+.themed-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.22) 0%, rgba(99, 102, 241, 0.22) 100%);
+  background-clip: padding-box;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: background var(--dur-fast) var(--ease-out-quart);
+}
+.lobby-grid:hover::-webkit-scrollbar-thumb,
+.lobby-picker:hover::-webkit-scrollbar-thumb,
+.lobby-picker-list:hover::-webkit-scrollbar-thumb,
+.settings-page:hover::-webkit-scrollbar-thumb,
+.themed-scroll:hover::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.40) 0%, rgba(129, 140, 248, 0.50) 100%);
+  background-clip: padding-box;
+}
+.lobby-grid::-webkit-scrollbar-thumb:hover,
+.lobby-picker::-webkit-scrollbar-thumb:hover,
+.lobby-picker-list::-webkit-scrollbar-thumb:hover,
+.settings-page::-webkit-scrollbar-thumb:hover,
+.themed-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(168, 183, 204, 0.55) 0%, rgba(129, 140, 248, 0.60) 100%);
+  background-clip: padding-box;
+}
+
+:root[data-light] .lobby-grid,
+:root[data-light] .lobby-picker,
+:root[data-light] .lobby-picker-list,
+:root[data-light] .settings-page,
+:root[data-light] .themed-scroll {
+  scrollbar-color: rgba(100, 116, 139, 0.32) transparent;
+}
+:root[data-light] .lobby-grid::-webkit-scrollbar-thumb,
+:root[data-light] .lobby-picker::-webkit-scrollbar-thumb,
+:root[data-light] .lobby-picker-list::-webkit-scrollbar-thumb,
+:root[data-light] .settings-page::-webkit-scrollbar-thumb,
+:root[data-light] .themed-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(100, 116, 139, 0.22) 0%, rgba(99, 102, 241, 0.20) 100%);
+  background-clip: padding-box;
+}
+:root[data-light] .lobby-grid::-webkit-scrollbar-thumb:hover,
+:root[data-light] .lobby-picker::-webkit-scrollbar-thumb:hover,
+:root[data-light] .lobby-picker-list::-webkit-scrollbar-thumb:hover,
+:root[data-light] .settings-page::-webkit-scrollbar-thumb:hover,
+:root[data-light] .themed-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(71, 85, 105, 0.42) 0%, rgba(99, 102, 241, 0.45) 100%);
+  background-clip: padding-box;
+}
 
 /* =====================================================================
    Reusable button system (.btn primary/ghost/etc.) — opt-in
@@ -953,6 +1071,42 @@ button { color: #1a1a1a; font-family: inherit; }
   .cas-clicker-stage { height: 300px; }
   .cas-timer-ring    { --size: 48px; --thickness: 5px; }
   .cas-score-badge   { padding: 0.32rem 0.75rem; font-size: 0.95rem; }
+}
+
+/* =====================================================================
+   Phone breakpoint (<= 480px): tighten paddings, scale type, ensure
+   every interactive element meets the 44x44px touch-target minimum.
+   ===================================================================== */
+@media (max-width: 480px) {
+  /* Reduce shell paddings further on small phones. */
+  .trivia-wrap, .qz-wrap, .nlp-wrap,
+  .dm-wrap, .fc-wrap, .cm-wrap,
+  .sol-wrap, .rw-wrap, .race-wrap,
+  .dr-wrap, .bz-wrap, .coop-wrap, .ab-wrap, .tp-wrap,
+  .game-shell, .quiz-shell, .dice-shell, .card-shell,
+  .solitaire-shell, .arcade-shell,
+  .cas-quiz, .cas-clicker {
+    padding: var(--sp-2) var(--sp-2);
+    gap: var(--sp-2);
+  }
+  .cas-quiz-question { font-size: 0.95rem; padding: var(--sp-3); }
+
+  /* Touch-target floor: any opt-in .btn or .choice-btn meets 44px. */
+  .btn,
+  .btn-sm,
+  .choice-btn {
+    min-height: 44px;
+  }
+  .btn-sm { padding: 0.5rem 0.85rem; }
+
+  /* Body type slightly larger on phones for readability. */
+  body { font-size: 15.5px; }
+  h2 { font-size: 1.2rem; }
+  h3 { font-size: 1.02rem; }
+
+  /* Inputs hit 44px. */
+  .input,
+  .field-input { min-height: 44px; padding: 0.7rem 0.85rem; }
 }
 
 /* =====================================================================

@@ -14,6 +14,7 @@ import { OnlineNowPanel } from "./leaderboard/OnlineNowPanel.js";
 import { PageHead } from "../platform/PageHead.js";
 import { loadStats } from "../platform/stats.js";
 import { readRatings } from "../platform/StarRating.js";
+import { getLastPlayed } from "../platform/userdata.js";
 import "./LeaderboardPage.css";
 
 type Tab = "per-game" | "global" | "online" | "my-ladder";
@@ -673,17 +674,6 @@ function readBestTimes(): Record<string, number> {
   } catch { return {}; }
 }
 
-function readLastPlayedMap(): Record<string, number> {
-  try {
-    if (typeof localStorage === "undefined") return {};
-    const raw = localStorage.getItem("cards-last-played");
-    if (!raw) return {};
-    const parsed = JSON.parse(raw) as unknown;
-    if (!parsed || typeof parsed !== "object") return {};
-    return parsed as Record<string, number>;
-  } catch { return {}; }
-}
-
 function formatRelative(ms: number): string {
   if (!ms) return "—";
   const diff = Date.now() - ms;
@@ -827,7 +817,7 @@ function MyLadderPanel(): JSX.Element {
   const ladder: LadderRow[] = useMemo(() => {
     const stats = loadStats();
     const bestTimes = readBestTimes();
-    const lastPlayed = readLastPlayedMap();
+    const lastPlayed = getLastPlayed();
     const ratings = readRatings();
 
     const ids = new Set<string>([

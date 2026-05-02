@@ -205,6 +205,57 @@ export function recordDailyPlayed(stamp: string): DailyStreak {
   return next;
 }
 
+/**
+ * Per-game last-played timestamps.
+ *
+ * Persisted under `cards-last-played` as a JSON object mapping
+ * `gameId -> epoch ms`. Powers the "My Ladder" relative-time column on
+ * the leaderboard and is written every time {@link recordPlayed} runs in
+ * `platform/quickstart.ts`. Kept here next to the other user-data helpers
+ * so the export/import round-trip in {@link KNOWN_KEYS} stays the single
+ * source of truth.
+ */
+
+const LAST_PLAYED_KEY = "cards-last-played";
+
+/** Read the full `gameId -> epoch ms` map. Returns `{}` if missing/corrupt. */
+export function getLastPlayed(): Record<string, number> {
+  try {
+    if (typeof localStorage === "undefined") return {};
+    const raw = localStorage.getItem(LAST_PLAYED_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    const out: Record<string, number> = {};
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      if (typeof v === "number" && Number.isFinite(v)) out[k] = v;
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+/** Convenience: last-played epoch ms for `id`, or undefined if never played. */
+export function getLastPlayedFor(id: string): number | undefined {
+  const map = getLastPlayed();
+  const v = map[id];
+  return typeof v === "number" ? v : undefined;
+}
+
+/** Stamp `id` as played at `now` (defaults to {@link Date.now}). Best-effort. */
+export function recordLastPlayed(id: string, now: number = Date.now()): void {
+  if (!id) return;
+  try {
+    if (typeof localStorage === "undefined") return;
+    const map = getLastPlayed();
+    map[id] = now;
+    localStorage.setItem(LAST_PLAYED_KEY, JSON.stringify(map));
+  } catch {
+    /* ignore — storage is best-effort */
+  }
+}
+
 /** Trigger a browser download of the current user-data snapshot. */
 export function downloadExport(now: Date = new Date()): void {
   if (typeof document === "undefined" || typeof URL === "undefined") return;

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, Suspense } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef, Suspense } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import { Skeleton } from "../platform/Skeleton.js";
 import { GAMES } from "../games/registry.js";
@@ -16,8 +16,39 @@ import { StarRating, readRating, writeRating } from "../platform/StarRating.js";
 import { StatsPanel } from "../platform/StatsPanel.js";
 import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
 import { recordPlayed } from "../platform/quickstart.js";
+import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import "./PlayPage.css";
+
+/** Maximum number of toasts visible at once — older ones drop off. */
+const MAX_TOASTS = 3;
+/** Auto-dismiss delay for action toasts (ms). */
+const TOAST_TTL_MS = 2000;
+
+interface ActionToast {
+  id: number;
+  message: string;
+}
+
+/**
+ * Best-effort human label for a dispatched action. Reducers across plugins
+ * use a `{ type: string, ...payload }` shape, so we surface the type with
+ * any obvious payload bits. Strictly cosmetic — never inspects state.
+ */
+function describeAction(action: unknown): string | null {
+  if (!action || typeof action !== "object") return null;
+  const obj = action as Record<string, unknown>;
+  const type = typeof obj.type === "string" ? obj.type : null;
+  if (!type) return null;
+  const pretty = type
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+  // A few well-known payload keys that are safe to render.
+  const payloadBits: string[] = [];
+  if (typeof obj.pips === "number") payloadBits.push(`(${obj.pips})`);
+  if (typeof obj.value === "number" || typeof obj.value === "string") payloadBits.push(`= ${String(obj.value)}`);
+  return payloadBits.length ? `${pretty} ${payloadBits.join(" ")}` : pretty;
+}
 
 function randomSeed(): number {
   return Math.floor(Math.random() * 2 ** 31);
@@ -117,6 +148,25 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [previousBest, setPreviousBest] = useState<number | null>(null);
   const [isNewRecord, setIsNewRecord] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  // Pause is purely a presentation freeze of the elapsed counter — never
+  // touches reducer state. Persisted in a ref so re-renders keep value.
+  const [paused, setPaused] = useState(false);
+  // Action toast queue. Each push gets a monotonically increasing id so
+  // that React keys stay stable as older toasts fall off the front.
+  const [toasts, setToasts] = useState<ActionToast[]>([]);
+  const toastIdRef = useRef(0);
+  // Session metadata for the info popover.
+  const [infoOpen, setInfoOpen] = useState(false);
+  const sessionStartRef = useRef<Date | null>(null);
+  const actionCountRef = useRef(0);
+  const infoPopoverRef = useRef<HTMLDivElement | null>(null);
+  const infoButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  // Plays-this-session counter — bumped each time we transition into
+  // "playing", never written to localStorage.
+  const [sessionPlays, setSessionPlays] = useState(0);
+
+  useFocusTrap(infoPopoverRef, infoOpen);
 
   const onRate = useCallback(
     (next: number) => {
@@ -126,14 +176,15 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     [plugin.id],
   );
 
-  // Tick the in-game timer once per second while playing.
+  // Tick the in-game timer once per second while playing — pausing only
+  // freezes this counter, never the underlying reducer state.
   useEffect(() => {
-    if (phase !== "playing") return;
+    if (phase !== "playing" || paused) return;
     const id = setInterval(() => {
       setElapsed((prev) => prev + 1);
     }, 1000);
     return () => clearInterval(id);
-  }, [phase]);
+  }, [phase, paused]);
 
   const tutorialSteps = useMemo(() => tutorialFor(plugin.id), [plugin.id]);
 
@@ -189,6 +240,11 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       setIsNewRecord(false);
       setPreviousBest(null);
       setBannerDismissed(false);
+      setPaused(false);
+      setToasts([]);
+      sessionStartRef.current = new Date();
+      actionCountRef.current = 0;
+      setSessionPlays((n) => n + 1);
       setPhase("playing");
     },
     [plugin, settings],
@@ -198,13 +254,46 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     startWithSeed(seed);
   }, [seed, startWithSeed]);
 
+  /**
+   * Confirms with the user before discarding meaningful progress. A game
+   * counts as "in progress" once it has either run for >30s or accepted
+   * more than 5 user actions.
+   */
+  const confirmIfInProgress = useCallback((): boolean => {
+    if (phase !== "playing") return true;
+    const inProgress = elapsed > 30 || actionCountRef.current > 5;
+    if (!inProgress) return true;
+    if (typeof window === "undefined" || typeof window.confirm !== "function") return true;
+    return window.confirm("Lose progress?");
+  }, [phase, elapsed]);
+
   const newGame = useCallback(() => {
+    if (!confirmIfInProgress()) return;
     startWithSeed(randomSeed());
-  }, [startWithSeed]);
+  }, [startWithSeed, confirmIfInProgress]);
 
   const replay = useCallback(() => {
+    if (!confirmIfInProgress()) return;
     startWithSeed(seed);
-  }, [seed, startWithSeed]);
+  }, [seed, startWithSeed, confirmIfInProgress]);
+
+  const pushToast = useCallback((message: string) => {
+    if (!message) return;
+    const id = ++toastIdRef.current;
+    setToasts((cur) => {
+      const next = [...cur, { id, message }];
+      // Cap stack so spammy actions don't tower up the screen.
+      return next.length > MAX_TOASTS ? next.slice(next.length - MAX_TOASTS) : next;
+    });
+    window.setTimeout(() => {
+      setToasts((cur) => cur.filter((t) => t.id !== id));
+    }, TOAST_TTL_MS);
+  }, []);
+
+  const togglePause = useCallback(() => {
+    if (phase !== "playing") return;
+    setPaused((p) => !p);
+  }, [phase]);
 
   const shareSeed = useCallback(async () => {
     const origin =
@@ -249,6 +338,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
 
   const dispatch = useCallback(
     (action: unknown) => {
+      actionCountRef.current += 1;
+      const label = describeAction(action);
+      if (label) pushToast(label);
       setState((s: unknown) => {
         const next = plugin.reducer(s, action);
         const term = plugin.isTerminal(next);
@@ -271,7 +363,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         return next;
       });
     },
-    [plugin, settings, elapsed, recordBest],
+    [plugin, settings, elapsed, recordBest, pushToast],
   );
 
   const onGameOver = useCallback(
@@ -327,6 +419,41 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     return () => window.removeEventListener("keydown", onKey);
   }, [showWinBanner, startWithSeed]);
 
+  // Esc closes the info popover (taking precedence over pause toggle so
+  // the popover always wins when both are dismissable).
+  useEffect(() => {
+    if (!infoOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        setInfoOpen(false);
+        infoButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [infoOpen]);
+
+  // Esc toggles pause while the game is in progress and no other modal
+  // surface is consuming the key. We avoid binding when typing into a
+  // form field so users editing settings or seed inputs aren't surprised.
+  useEffect(() => {
+    if (phase !== "playing") return;
+    if (showWinBanner || infoOpen || helpOpen || tutorialOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName?.toLowerCase();
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+      if (target?.isContentEditable) return;
+      e.preventDefault();
+      togglePause();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [phase, showWinBanner, infoOpen, helpOpen, tutorialOpen, togglePause]);
+
   // Delegated sparkle handler — only primary action surfaces (.btn-primary,
   // .play-iconbtn) trigger a burst, so casual UI clicks stay quiet.
   const onPrimaryClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -346,16 +473,82 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       />
       <header className="play-header">
         <div className="play-header-titleblock">
-          <span className={`play-category play-category--${plugin.category}`}>{plugin.category}</span>
-          <h1>{plugin.title}</h1>
+          <div className="play-header-titlerow">
+            <span className={`play-category play-category--${plugin.category}`}>{plugin.category}</span>
+            <h1>{plugin.title}</h1>
+            <button
+              ref={infoButtonRef}
+              type="button"
+              className="play-info-btn"
+              onClick={() => setInfoOpen((v) => !v)}
+              aria-label="Session info"
+              aria-expanded={infoOpen}
+              aria-haspopup="dialog"
+              data-testid="play-info-btn"
+              title="Session info"
+            >
+              <span aria-hidden="true">i</span>
+            </button>
+            {infoOpen && (
+              <div
+                ref={infoPopoverRef}
+                className="play-info-popover"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Session info"
+                data-testid="play-info-popover"
+                tabIndex={-1}
+              >
+                <div className="play-info-popover-row">
+                  <span className="play-info-label">Seed</span>
+                  <code>{seed}</code>
+                </div>
+                <div className="play-info-popover-row">
+                  <span className="play-info-label">Started</span>
+                  <span>
+                    {sessionStartRef.current
+                      ? sessionStartRef.current.toLocaleTimeString()
+                      : "—"}
+                  </span>
+                </div>
+                <div className="play-info-popover-row">
+                  <span className="play-info-label">Plays this session</span>
+                  <span>{sessionPlays}</span>
+                </div>
+                {plugin.howToPlay && (
+                  <button
+                    type="button"
+                    className="play-info-link"
+                    onClick={() => {
+                      setInfoOpen(false);
+                      setHelpOpen(true);
+                    }}
+                  >
+                    How to play
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="play-info-close"
+                  onClick={() => {
+                    setInfoOpen(false);
+                    infoButtonRef.current?.focus();
+                  }}
+                  aria-label="Close session info"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         <div className="play-header-actions">
           {(phase === "playing" || phase === "ended") && (
             <span
-              className="play-timer"
+              className={`play-timer${paused ? " play-timer--paused" : ""}`}
               data-testid="play-timer"
-              title="Elapsed time"
-              aria-label={`Elapsed time ${formatTime(elapsed)}`}
+              title={paused ? "Paused" : "Elapsed time"}
+              aria-label={`Elapsed time ${formatTime(elapsed)}${paused ? " (paused)" : ""}`}
             >
               <span className="play-timer-current" data-testid="play-timer-current">
                 {formatTime(elapsed)}
@@ -370,6 +563,29 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 </span>
               )}
             </span>
+          )}
+          {phase === "playing" && (
+            <button
+              type="button"
+              className="play-iconbtn play-pause-btn"
+              onClick={togglePause}
+              aria-label={paused ? "Resume" : "Pause"}
+              aria-pressed={paused}
+              title={paused ? "Resume (Esc)" : "Pause (Esc)"}
+              data-tooltip={paused ? "Resume" : "Pause"}
+              data-testid="play-pause-btn"
+            >
+              {paused ? (
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M6 4l14 8-14 8z" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false">
+                  <rect x="6" y="4" width="4" height="16" rx="1" />
+                  <rect x="14" y="4" width="4" height="16" rx="1" />
+                </svg>
+              )}
+            </button>
           )}
           {phase === "playing" && showProminentSeed && (
             <span
@@ -435,6 +651,22 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               </svg>
             </button>
           )}
+          {phase === "playing" && (
+            <button
+              type="button"
+              className="play-iconbtn"
+              onClick={replay}
+              title="Restart"
+              aria-label="Restart"
+              data-tooltip="Restart"
+              data-testid="play-restart-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+            </button>
+          )}
           <Link to="/" className="play-backbtn" title="Back to lobby" aria-label="Back to lobby">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
               <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -483,7 +715,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
 
       {phase === "playing" && (
         <div className="play-with-sidebar">
-          <section className="play-panel">
+          <section className={`play-panel${paused ? " play-panel--paused" : ""}`}>
             {/* Suspense fallback shows a skeleton "loading game…" card while
                 the active plugin's component module finishes loading. Most
                 plugins are eagerly imported today, but games that use
@@ -493,8 +725,42 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             <Suspense fallback={<GameLoadingSkeleton />}>
               <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
             </Suspense>
+            {paused && (
+              <div className="play-paused-overlay" data-testid="play-paused-overlay" role="status" aria-live="polite">
+                <div className="play-paused-card">
+                  <div className="play-paused-title">Paused</div>
+                  <div className="play-paused-hint">Press <kbd>Esc</kbd> or click Resume</div>
+                  <button
+                    type="button"
+                    className="play-share-pill"
+                    onClick={togglePause}
+                  >
+                    Resume
+                  </button>
+                </div>
+              </div>
+            )}
           </section>
           <StatsPanel gameId={plugin.id} bestTime={bestTime} />
+        </div>
+      )}
+
+      {phase === "playing" && toasts.length > 0 && (
+        <div
+          className="play-toasts"
+          data-testid="play-toasts"
+          role="status"
+          aria-live="polite"
+        >
+          {toasts.map((toast, idx) => (
+            <div
+              key={toast.id}
+              className="play-toast"
+              data-testid={`play-toast-${idx}`}
+            >
+              {toast.message}
+            </div>
+          ))}
         </div>
       )}
 

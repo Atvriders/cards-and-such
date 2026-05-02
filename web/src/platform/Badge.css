@@ -1,0 +1,73 @@
+/* Tile-decoration badge — small rounded pill used to advertise game
+   metadata (NEW / POPULAR / QUICK / CHALLENGING / EDITOR'S PICK). All
+   variants share the same dimensions, font, and shadow; only the colour
+   ramp differs so they can be swapped without re-flowing layout. */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.16rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* NEW = mint */
+.badge--new {
+  background: rgba(52, 211, 153, 0.18);
+  color: #b6f3d8;
+  border-color: rgba(52, 211, 153, 0.45);
+}
+
+/* POPULAR = amber */
+.badge--popular {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fde6a8;
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+/* QUICK = cyan */
+.badge--quick {
+  background: rgba(34, 211, 238, 0.18);
+  color: #a8eaf5;
+  border-color: rgba(34, 211, 238, 0.5);
+}
+
+/* CHALLENGING = violet */
+.badge--challenging {
+  background: rgba(139, 92, 246, 0.20);
+  color: #d4c8fb;
+  border-color: rgba(139, 92, 246, 0.55);
+}
+
+/* EDITOR'S PICK = warm gradient (re-using amber palette for cohesion) */
+.badge--editors-pick {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.25),
+    rgba(236, 72, 153, 0.22)
+  );
+  color: #ffe6c2;
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+/* When a badge is positioned in the top-right corner of a tile, the
+   consumer wraps it in `.tile-badge-slot`. The slot is absolutely
+   positioned so it floats over the existing meta row without disturbing
+   layout. */
+.tile-badge-slot {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 2;
+  pointer-events: none;
+}

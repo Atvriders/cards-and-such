@@ -1,0 +1,107 @@
+/* =====================================================================
+   StarRating — 5-star widget used at game-over and on lobby tiles
+   ---------------------------------------------------------------------
+   Variants:
+     .star-rating--md   default — game-over CTA size
+     .star-rating--sm   compact — lobby tile chips
+   States:
+     .is-interactive    user can click / hover / keyboard
+     .is-readonly       static display only
+   Star fill is driven by .is-filled (vs unset) on each <button>.
+   ===================================================================== */
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--star-color, #f5b301);
+  outline: none;
+}
+
+.star-rating.is-interactive {
+  cursor: pointer;
+}
+.star-rating.is-interactive:focus-visible {
+  outline: 2px solid var(--primary, #6366f1);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.star-rating--md .star-rating-star {
+  width: 28px;
+  height: 28px;
+}
+.star-rating--sm .star-rating-star {
+  width: 14px;
+  height: 14px;
+  gap: 2px;
+}
+.star-rating--sm {
+  gap: 2px;
+  color: var(--star-color, #f5b301);
+}
+
+.star-rating-star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  opacity: 0.45;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.star-rating-star.is-filled {
+  opacity: 1;
+}
+
+.star-rating.is-interactive .star-rating-star {
+  cursor: pointer;
+}
+.star-rating.is-interactive .star-rating-star:hover,
+.star-rating.is-interactive .star-rating-star:focus-visible {
+  transform: scale(1.12);
+}
+.star-rating.is-readonly .star-rating-star {
+  cursor: default;
+}
+
+/* Wrapper used on lobby tiles for "your rating" footer. */
+.tile-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--text-muted, #a3a8c2);
+}
+.tile-rating-label {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+/* Game-over rating block */
+.end-rating {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.end-rating-prompt {
+  font-size: 0.95rem;
+  color: var(--text, #e6e8f4);
+  margin: 0;
+}
+.end-rating-thanks {
+  font-size: 0.85rem;
+  color: var(--text-muted, #a3a8c2);
+  margin: 0;
+}

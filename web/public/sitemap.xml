@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Static sitemap stub — covers the lobby, leaderboard, daily, and the
+  top ~50 evergreen games. The full 4,500+ catalog is reachable from
+  the lobby, so search engines will discover the long tail organically.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://cards.waterburp.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://cards.waterburp.com/leaderboard</loc><changefreq>hourly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/daily</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+
+  <!-- Solitaire flagships -->
+  <url><loc>https://cards.waterburp.com/play/klondike</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/freecell</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/spider</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/pyramid</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/tripeaks</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/yukon</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/canfield</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/golf</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/scorpion</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/forty-thieves</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/accordion</loc><priority>0.6</priority></url>
+  <url><loc>https://cards.waterburp.com/play/clock</loc><priority>0.6</priority></url>
+  <url><loc>https://cards.waterburp.com/play/bisley-king</loc><priority>0.6</priority></url>
+  <url><loc>https://cards.waterburp.com/play/king-albert-pat</loc><priority>0.6</priority></url>
+  <url><loc>https://cards.waterburp.com/play/vegas-klondike</loc><priority>0.6</priority></url>
+
+  <!-- Cards -->
+  <url><loc>https://cards.waterburp.com/play/hearts</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/spades</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/rummy</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/cribbage</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/blackjack</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/holdem</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/uno-like</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/euchre</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/bridge</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/canasta</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/pinochle</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/war</loc><priority>0.6</priority></url>
+  <url><loc>https://cards.waterburp.com/play/go-fish</loc><priority>0.6</priority></url>
+  <url><loc>https://cards.waterburp.com/play/crazy-eights</loc><priority>0.6</priority></url>
+
+  <!-- Dice -->
+  <url><loc>https://cards.waterburp.com/play/yahtzee</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/farkle</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/ten-thousand</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/pig</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/liar-dice</loc><priority>0.6</priority></url>
+
+  <!-- Board -->
+  <url><loc>https://cards.waterburp.com/play/chess</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/checkers</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/connect-4</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/backgammon</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/reversi</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/go</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/abalone</loc><priority>0.6</priority></url>
+  <url><loc>https://cards.waterburp.com/play/tic-tac-toe</loc><priority>0.6</priority></url>
+
+  <!-- Arcade -->
+  <url><loc>https://cards.waterburp.com/play/minesweeper</loc><priority>0.9</priority></url>
+  <url><loc>https://cards.waterburp.com/play/snake</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/breakout</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/tetris</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/wordle-mini</loc><priority>0.8</priority></url>
+  <url><loc>https://cards.waterburp.com/play/absurdle-mini</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/game-of-life</loc><priority>0.7</priority></url>
+  <url><loc>https://cards.waterburp.com/play/2048</loc><priority>0.7</priority></url>
+</urlset>

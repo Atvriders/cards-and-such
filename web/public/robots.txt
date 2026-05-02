@@ -1,0 +1,9 @@
+# Cards and Such — public game catalog
+# All crawlers welcome.
+User-agent: *
+Allow: /
+
+# Don't waste crawl budget on auth-gated routes.
+Disallow: /login
+
+Sitemap: https://cards.waterburp.com/sitemap.xml

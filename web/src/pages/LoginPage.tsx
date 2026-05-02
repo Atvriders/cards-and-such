@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../platform/stores/auth.js";
 import { UsernameSchema } from "@cards/shared";
+import { PageHead } from "../platform/PageHead.js";
 import "./LoginPage.css";
 
 export default function LoginPage(): JSX.Element {
@@ -26,6 +27,11 @@ export default function LoginPage(): JSX.Element {
 
   return (
     <div className="login-page" data-testid="login-page">
+      <PageHead
+        title="Sign in"
+        description="Sign in to Cards and Such to track your scores, climb the leaderboard, and play multiplayer."
+        canonical="https://cards.waterburp.com/login"
+      />
       <h1>Cards and Such</h1>
       <form onSubmit={submit} className="login-form">
         <label>
