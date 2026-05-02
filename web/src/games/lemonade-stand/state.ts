@@ -148,5 +148,5 @@ export function reducer(state: LemonadeState, action: LemonadeAction): LemonadeS
 export function isTerminal(state: LemonadeState): { score: number } | null {
   if (state.phase !== "done") return null;
   // Score = final money (max reasonable ~1000 cents)
-  return { score: Math.max(0, Math.min(100, Math.round((state.money / 2000) * 100))) };
+  return { score: Math.max(0, Math.min(100, Math.round((state.money / 1000) * 100))) };
 }

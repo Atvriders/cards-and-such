@@ -15,7 +15,7 @@ describe("checkGuess — redBlack", () => {
 describe("checkGuess — higherLower", () => {
   it("higher correct when card rank is higher", () => expect(checkGuess("higherLower", "higher", c(10), [c(5)])).toBe(true));
   it("lower correct when card rank is lower", () => expect(checkGuess("higherLower", "lower", c(3), [c(9)])).toBe(true));
-  it("higher wrong when card is lower", () => expect(checkGuess("higherLower", "higher", c(2, "♣"), [c(9)])).toBe(true)); // 2 maps to 2 (not ace-high here)
+  it("higher wrong when card is lower", () => expect(checkGuess("higherLower", "higher", c(2, "♣"), [c(9)])).toBe(false)); // 2 < 9
   it("Ace (rank 1) is treated as 14", () => expect(checkGuess("higherLower", "higher", c(1), [c(13)])).toBe(true));
 });
 

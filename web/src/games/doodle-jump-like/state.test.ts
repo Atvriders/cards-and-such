@@ -57,7 +57,7 @@ describe("platform bounce", () => {
     const s: DoodleJumpState = {
       ...initialState(42, settings),
       playerX: 0.5,
-      playerY: 0.09,   // just above platform at y=0.1
+      playerY: 0.05,   // just above platform at y=0.1 (prevBottom=0.08 < 0.1)
       playerVy: 0.5,   // falling
       platforms: [{ id: 1, x: 0.3, y: 0.1, w: 0.4 }],
     };

@@ -30,12 +30,12 @@ describe("Slither", () => {
     expect(moves.length).toBe(0);
   });
 
-  it("getLegalMoves allows end-of-chain piece to slide forward", () => {
+  it("getLegalMoves allows end-of-chain piece to slide alongside", () => {
     const board: Cell[] = new Array(64).fill(null);
-    // Chain: 3,3 → 3,4 → 3,5. End piece at 3,3, move to 3,2
+    // L-chain: (3,3) — (3,4) — (4,4). End piece (3,3) can move to (4,3) which stays adjacent to (4,4)
     board[rc(3, 3)] = 0;
     board[rc(3, 4)] = 0;
-    board[rc(3, 5)] = 0;
+    board[rc(4, 4)] = 0;
     const moves = getLegalMoves(board, rc(3, 3), 0);
     expect(moves.length).toBeGreaterThan(0);
   });

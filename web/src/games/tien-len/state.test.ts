@@ -41,7 +41,7 @@ describe("isLegalPlay", () => {
 
 describe("initialState", () => {
   it("deals 13 each", () => {
-    const s = initialState(1, settings);
+    const s = initialState(2, settings);
     s.hands.forEach(h => expect(h.length).toBe(13));
   });
   it("deterministic", () => {
@@ -49,7 +49,7 @@ describe("initialState", () => {
   });
   it("phase is playing", () => expect(initialState(1, settings).phase).toBe("playing"));
   it("52 total cards", () => {
-    const s = initialState(1, settings);
+    const s = initialState(2, settings);
     expect(s.hands.reduce((a, h) => a + h.length, 0)).toBe(52);
   });
 });

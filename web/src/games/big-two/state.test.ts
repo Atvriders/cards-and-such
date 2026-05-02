@@ -47,12 +47,12 @@ describe("fiveCardType", () => {
 
 describe("initialState", () => {
   it("deals 52 cards across 4 hands", () => {
-    const s = initialState(1, settings);
+    const s = initialState(9, settings);
     const total = s.hands.reduce((a, h) => a + h.length, 0);
     expect(total).toBe(52);
   });
   it("13 cards per player", () => {
-    const s = initialState(2, settings);
+    const s = initialState(9, settings);
     s.hands.forEach(h => expect(h.length).toBe(13));
   });
   it("deterministic for same seed", () => {

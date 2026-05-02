@@ -216,11 +216,11 @@ function getBotMove(state: ShobuState): BotFullMove | null {
 }
 
 export function initialState(seed: number): ShobuState {
-  // Each board: human (0) on bottom 2 rows (rows 2-3), bot (1) on top 2 rows (rows 0-1)
+  // Each board: human (0) on bottom row (row 3), bot (1) on top row (row 0)
   function makeBoard(): Cell[] {
     const b: Cell[] = new Array(16).fill(null);
-    for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) b[idxOf(r, c)] = 1; // bot top
-    for (let r = 2; r < 4; r++) for (let c = 0; c < 4; c++) b[idxOf(r, c)] = 0; // human bottom
+    for (let c = 0; c < 4; c++) b[idxOf(0, c)] = 1; // bot top row
+    for (let c = 0; c < 4; c++) b[idxOf(3, c)] = 0; // human bottom row
     return b;
   }
   return {

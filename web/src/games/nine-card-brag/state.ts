@@ -134,8 +134,8 @@ export function reducer(state: NineCardBragState, action: NineCardBragAction): N
 
   if (action.type === "toggleCard" && state.phase === "arrange") {
     const idx = action.index;
-    // Can't select if card already placed in a group
-    if (state.playerArrangement) return state; // shouldn't happen, but guard
+    // Can't select if all groups already arranged
+    if (state.playerArrangement && state.playerArrangement.length >= 3) return state;
     const alreadySel = state.selected.includes(idx);
     let newSel: number[];
     if (alreadySel) {

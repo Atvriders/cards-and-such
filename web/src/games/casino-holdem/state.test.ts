@@ -60,7 +60,7 @@ describe("CasinoHoldem dealerQualifiesCheck", () => {
 
   it("dealer does not qualify with pair of 3s", () => {
     const hole: Card[] = [makeCard(3), makeCard(3, "♥")];
-    const comm: Card[] = [makeCard(2), makeCard(7), makeCard(9), makeCard(11), makeCard(8)];
+    const comm: Card[] = [makeCard(2, "♣"), makeCard(7, "♦"), makeCard(9, "♥"), makeCard(11, "♣"), makeCard(8, "♦")];
     expect(dealerQualifiesCheck(hole, comm)).toBe(false);
   });
 });

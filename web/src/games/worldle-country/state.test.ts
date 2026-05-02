@@ -5,38 +5,35 @@ import type { WorldleCountrySettings } from "./state.js";
 const S: WorldleCountrySettings = { rounds: "5" };
 
 describe("worldle-country", () => {
-  it("creates the requested number of rounds", () => {
+  it("starts in playing status with empty guesses", () => {
     const s = initialState(1, S);
-    expect(s.rounds.length).toBeGreaterThanOrEqual(4);
-    expect(s.rounds.length).toBeLessThanOrEqual(5);
+    expect(s.status).toBe("playing");
+    expect(s.guesses.length).toBe(0);
+    expect(s.maxGuesses).toBe(5);
   });
-  it("starts in playing phase with score 0", () => {
+  it("isTerminal is null while playing", () => {
     const s = initialState(1, S);
-    expect(s.phase).toBe("playing");
-    expect(s.score).toBe(0);
-  });
-  it("submitting correct answer awards positive score", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const s2 = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
-    expect(s2.score).toBeGreaterThanOrEqual(100);
-    expect(s2.correctCount).toBeGreaterThanOrEqual(1);
-  });
-  it("submitting wrong answer does not increment score", () => {
-    const s = initialState(1, S);
-    const r = s.rounds[0]!;
-    const wrong = ((r.correct + 1) % 4) as 0 | 1 | 2 | 3;
-    const s2 = reducer(reducer(s, { type: "select", choice: wrong }), { type: "submit" });
-    expect(s2.score).toBe(0);
-  });
-  it("isTerminal is null while playing and returns score when done", () => {
-    let s = initialState(1, S);
     expect(isTerminal(s)).toBeNull();
-    while (s.phase !== "done") {
-      const r = s.rounds[s.currentIndex]!;
-      s = reducer(reducer(s, { type: "select", choice: r.correct }), { type: "submit" });
-      s = reducer(s, { type: "next" });
-    }
+  });
+  it("typing letters builds the current guess", () => {
+    let s = initialState(1, S);
+    s = reducer(s, { type: "key", ch: "f" });
+    s = reducer(s, { type: "key", ch: "r" });
+    expect(s.current).toBe("FR");
+  });
+  it("entering wrong country adds a guess", () => {
+    let s = initialState(1, S);
+    const wrong = s.answer.name === "FRANCE" ? "GERMANY" : "FRANCE";
+    for (const ch of wrong) s = reducer(s, { type: "key", ch });
+    s = reducer(s, { type: "enter" });
+    expect(s.guesses.length).toBe(1);
+    expect(s.current).toBe("");
+  });
+  it("entering the correct country wins", () => {
+    let s = initialState(1, S);
+    for (const ch of s.answer.name) s = reducer(s, { type: "key", ch });
+    s = reducer(s, { type: "enter" });
+    expect(s.status).toBe("won");
     const t = isTerminal(s);
     expect(t).not.toBeNull();
     expect(t!.score).toBeGreaterThanOrEqual(0);

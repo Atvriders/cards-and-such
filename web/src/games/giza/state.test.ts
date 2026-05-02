@@ -4,11 +4,11 @@ import { initialState, reducer, isTerminal, isAccessible } from "./state.js";
 const settings = {};
 
 describe("Giza initialState", () => {
-  it("has 27 cards in pyramids + 25 in stock", () => {
+  it("has 18 cards in pyramids + 34 in stock", () => {
     const s = initialState(42, settings);
     const pyramidCards = s.pyramids.flat(2).filter((c) => c !== null).length;
-    expect(pyramidCards).toBe(27);
-    expect(s.stock.length).toBe(25);
+    expect(pyramidCards).toBe(18);
+    expect(s.stock.length).toBe(34);
   });
 
   it("each pyramid has 3 rows of 1,2,3 cards", () => {

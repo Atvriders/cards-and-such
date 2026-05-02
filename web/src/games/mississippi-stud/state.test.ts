@@ -65,7 +65,7 @@ describe("MississippiStud fold", () => {
 
 describe("MississippiStud calcFinalPayout", () => {
   it("high-card loses (returns 0)", () => {
-    const cards = [makeCard(2), makeCard(5), makeCard(8), makeCard(11), makeCard(13)];
+    const cards = [makeCard(2, "♠"), makeCard(5, "♥"), makeCard(8, "♦"), makeCard(11, "♣"), makeCard(13, "♥")];
     expect(calcFinalPayout(cards, 30)).toBe(0);
   });
 
