@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FestivalsQuizState, FestivalsQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const festivalsQuizPlugin: GamePlugin<FestivalsQuizState, FestivalsQuizAc
   howToPlay: `Festivals Quiz takes you on a global tour of cultural celebrations, religious observances, and seasonal traditions. Each question covers a famous festival — its country, meaning, timing, or associated customs. Select the correct answer from four choices. Correct answers turn green; wrong ones turn red with the right answer revealed. Earn 10 points per correct answer. Choose 5, 10, or 15 questions in settings. Topics include Diwali, Holi, Mardi Gras, Oktoberfest, La Tomatina, Songkran, Carnival, and many others. Tips: Link festivals to their home countries — Oktoberfest is German, Songkran is Thai. Religious festivals often relate to the calendar of their parent religion. Water, lights, and fire are common festival themes.`,
   settings: festivalsQuizSettings,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
-  reducer, isTerminal, component: FestivalsQuiz,
+  reducer, isTerminal,
+  hint: (state: FestivalsQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: FestivalsQuiz,
 };

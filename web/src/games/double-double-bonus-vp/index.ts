@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DoubleDoubleBonusVpState, DoubleDoubleBonusVpAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DoubleDoubleBonusVp } from "./Game.js";
@@ -18,5 +18,6 @@ export const doubleDoubleBonusVpPlugin: GamePlugin<DoubleDoubleBonusVpState, Dou
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: DoubleDoubleBonusVpState): HintTarget | null => isTerminal(state) ? null : { selector: '[data-testid="hint-target-double-double-bonus-vp-primary"]', pulses: 3 },
   component: DoubleDoubleBonusVp,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ArchitectureQuizState, ArchitectureQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const architectureQuizPlugin: GamePlugin<ArchitectureQuizState, Architect
   howToPlay: `Architecture Quiz explores the world's most iconic buildings, architectural movements, and legendary designers. Questions ask about famous structures and their locations, architects and their signature works, and the defining features of different architectural styles. Select the correct answer from four options. Correct answers turn green; incorrect ones turn red while the right answer is revealed. Earn 10 points per correct answer. Choose 5, 10, or 15 questions in settings. Topics include Gothic, Baroque, Neoclassical, Modernist, and Bauhaus styles, plus landmarks like the Colosseum, Sagrada Familia, Eiffel Tower, and the Sydney Opera House. Tips: Match famous architects to their buildings — Gaudi to Sagrada Familia, Utzon to Sydney Opera House, Frank Lloyd Wright to Fallingwater.`,
   settings: architectureQuizSettings,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
-  reducer, isTerminal, component: ArchitectureQuiz,
+  reducer, isTerminal,
+  hint: (state: ArchitectureQuizState): HintTarget | null => !state.done ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component: ArchitectureQuiz,
 };
