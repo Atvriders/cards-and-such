@@ -48,4 +48,22 @@ describe("AppShell", () => {
     // so we just confirm the lobby is no longer rendered.
     expect(screen.queryByTestId("tile-klondike")).not.toBeInTheDocument();
   });
+
+  it("renders the Surprise button when authenticated", () => {
+    authenticate();
+    render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    expect(screen.getByTestId("surprise-btn")).toBeInTheDocument();
+  });
+
+  it("Surprise button shows a splash and then leaves the lobby", async () => {
+    authenticate();
+    const user = userEvent.setup();
+    render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    await user.click(screen.getByTestId("surprise-btn"));
+    // The splash flashes immediately on click.
+    expect(screen.getByTestId("surprise-splash")).toBeInTheDocument();
+    // After the brief delay the splash is dismissed and we navigate away.
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    expect(screen.queryByTestId("tile-klondike")).not.toBeInTheDocument();
+  });
 });

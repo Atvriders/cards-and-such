@@ -34,6 +34,7 @@ export default function AppShell(): JSX.Element {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [soundOn, setSoundOnState] = useState<boolean>(() => isSoundOn());
+  const [surpriseSplash, setSurpriseSplash] = useState<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const categoriesRef = useRef<HTMLDivElement | null>(null);
 
@@ -133,6 +134,45 @@ export default function AppShell(): JSX.Element {
     if (soundOn) playSound("button-click");
     setMobileNavOpen(false);
     navigate(`/play/${pick.gameId}?quickstart=1`);
+  };
+
+  // Mulberry32 — fast, deterministic 32-bit PRNG. Seeded by the current
+  // minute so a frantic re-click within the same minute returns the same
+  // game (anti-frustration: don't punish users who fat-fingered).
+  const mulberry32 = (seed: number): (() => number) => {
+    let a = seed >>> 0;
+    return () => {
+      a = (a + 0x6d2b79f5) >>> 0;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+
+  const onSurprise = (): void => {
+    if (GAMES.length === 0) {
+      navigate("/");
+      return;
+    }
+    const minuteSeed = Math.floor(Date.now() / 60_000);
+    const rand = mulberry32(minuteSeed);
+    const idx = Math.floor(rand() * GAMES.length);
+    const pick = GAMES[idx] ?? GAMES[0];
+    if (!pick) {
+      navigate("/");
+      return;
+    }
+    if (soundOn) playSound("button-click");
+    setMobileNavOpen(false);
+    const title = (pick as unknown as { title?: string; name?: string; id: string }).title
+      ?? (pick as unknown as { title?: string; name?: string; id: string }).name
+      ?? pick.id;
+    setSurpriseSplash(title);
+    window.setTimeout(() => {
+      setSurpriseSplash(null);
+      navigate(`/play/${pick.id}?surprise=1`);
+    }, 650);
   };
 
   const submitSearch = (e: React.FormEvent): void => {
@@ -256,6 +296,20 @@ export default function AppShell(): JSX.Element {
               <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
             </svg>
           </button>
+          <button
+            type="button"
+            className="surprise-btn"
+            aria-label="Surprise me with a random game"
+            title="Surprise!"
+            data-testid="surprise-btn"
+            onClick={onSurprise}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M20 12V8H6a2 2 0 1 1 0-4h12.5a1.5 1.5 0 1 1 0 3H12" />
+              <rect x="2" y="12" width="20" height="8" rx="1" />
+              <path d="M12 12v8" /><path d="M2 16h20" />
+            </svg>
+          </button>
           <form
             className={`header-search${searchOpen ? " is-open" : ""}`}
             onSubmit={submitSearch}
@@ -362,6 +416,22 @@ export default function AppShell(): JSX.Element {
       <ToastHost />
       <SparkleHost />
       <KeyboardCheatSheet open={cheatSheetOpen} onClose={() => setCheatSheetOpen(false)} />
+
+      {surpriseSplash ? (
+        <div
+          className="surprise-splash"
+          role="status"
+          aria-live="polite"
+          data-testid="surprise-splash"
+        >
+          <div className="surprise-splash-card">
+            <span className="surprise-splash-emoji" aria-hidden="true">🎁</span>
+            <span className="surprise-splash-text">
+              Surprise! You're playing <strong>{surpriseSplash}</strong>...
+            </span>
+          </div>
+        </div>
+      ) : null}
 
       {whatsNewOpen ? (
         <div className="modal-backdrop" role="presentation" onClick={() => setWhatsNewOpen(false)}>

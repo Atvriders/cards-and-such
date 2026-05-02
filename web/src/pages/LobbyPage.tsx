@@ -6,6 +6,8 @@ import type { GameCategory, GamePlugin } from "../platform/game-plugin/types.js"
 import { PageHead } from "../platform/PageHead.js";
 import { Skeleton } from "../platform/Skeleton.js";
 import { StarRating, readRatings } from "../platform/StarRating.js";
+import { useFocusTrap } from "../platform/useFocusTrap.js";
+import { t } from "../platform/i18n.js";
 import "./LobbyPage.css";
 
 /**
@@ -201,11 +203,11 @@ const TOP_RATED_THRESHOLD = 4;
 
 const CATEGORY_ORDER: GameCategory[] = ["solitaire", "cards", "dice", "board", "arcade"];
 const CATEGORY_LABELS: Record<GameCategory, string> = {
-  solitaire: "Solitaire",
-  cards: "Cards",
-  dice: "Dice",
-  board: "Board",
-  arcade: "Arcade",
+  solitaire: t("lobby.cat.solitaire"),
+  cards: t("lobby.cat.cards"),
+  dice: t("lobby.cat.dice"),
+  board: t("lobby.cat.board"),
+  arcade: t("lobby.cat.arcade"),
 };
 
 // Compact monochrome glyphs that sit cleanly inside the chip pills.
@@ -318,6 +320,16 @@ export default function LobbyPage(): JSX.Element {
       counts[g.category]++;
     }
     return counts;
+  }, []);
+
+  // Set of "recently added" game ids — the last NEW_GAME_WINDOW entries
+  // in registry order. We treat registry order as a proxy for added-at
+  // since the plugin shape doesn't carry a timestamp; the test suite
+  // also relies on this ordering being deterministic.
+  const newGameIds = useMemo(() => {
+    const safe = GAMES.filter((g): g is GamePlugin => g != null);
+    const tail = safe.slice(Math.max(0, safe.length - NEW_GAME_WINDOW));
+    return new Set(tail.map((g) => g.id));
   }, []);
 
   // Featured strip — pluck out a few well-known titles, fall back gracefully.
@@ -564,7 +576,7 @@ export default function LobbyPage(): JSX.Element {
       <div className="lobby-empty" data-testid="lobby-empty">
         <PageHead title="Cards and Such" exact />
         <h1>Cards and Such</h1>
-        <p>No games installed yet.</p>
+        <p>{t("lobby.empty.no_games")}</p>
       </div>
     );
   }
@@ -646,14 +658,14 @@ export default function LobbyPage(): JSX.Element {
         </div>
 
         <div className="lobby-chips" role="tablist" aria-label="Filter by category">
-          <Chip active={filter === "all"} onClick={() => setFilter("all")} count={GAMES.length} testId="chip-all">All</Chip>
+          <Chip active={filter === "all"} onClick={() => setFilter("all")} count={GAMES.length} testId="chip-all">{t("lobby.chip.all")}</Chip>
           <Chip
             active={filter === "top-rated"}
             onClick={() => setFilter("top-rated")}
             count={topRatedCount}
             testId="chip-top-rated"
             glyph="★"
-          >Top Rated</Chip>
+          >{t("lobby.chip.top_rated")}</Chip>
           {CATEGORY_ORDER.map((cat) => (
             <Chip
               key={cat}
@@ -680,6 +692,8 @@ export default function LobbyPage(): JSX.Element {
                 game={g}
                 familyId={gameIdToFamilyId.get(g.id)}
                 onOpenFamily={(famId) => setOpenFamilyId(famId)}
+                isNew={newGameIds.has(g.id)}
+                userRating={ratings[g.id] ?? 0}
               />
             ))}
           </div>
@@ -712,6 +726,7 @@ export default function LobbyPage(): JSX.Element {
           </div>
         ) : filtered.length === 0 ? (
           <div className="lobby-no-results" data-testid="lobby-no-results">
+            <ConfusedCardSvg />
             {filter === "top-rated" && !query ? (
               <p data-testid="lobby-top-rated-empty">
                 You haven't rated any games {TOP_RATED_THRESHOLD} stars or higher yet. Play a game and tap the stars at the end to fill this list.
@@ -719,7 +734,7 @@ export default function LobbyPage(): JSX.Element {
             ) : (
               <p>No games match <strong>{query}</strong>.</p>
             )}
-            <button type="button" className="btn btn-ghost" onClick={() => { setQuery(""); setFilter("all"); }}>Clear filters</button>
+            <button type="button" className="btn btn-ghost" onClick={() => { setQuery(""); setFilter("all"); }}>{t("lobby.clear_filters")}</button>
           </div>
         ) : (
           <>
@@ -730,6 +745,7 @@ export default function LobbyPage(): JSX.Element {
                     key={`game-${entry.game.id}`}
                     game={entry.game}
                     userRating={ratings[entry.game.id] ?? 0}
+                    isNew={newGameIds.has(entry.game.id)}
                   />
                 ) : (
                   <FamilyCard
@@ -747,6 +763,8 @@ export default function LobbyPage(): JSX.Element {
                         : undefined
                     }
                     userRating={entryRating(entry)}
+                    isNew={entry.members.some((m) => newGameIds.has(m.id))}
+                    members={entry.members}
                   />
                 ),
               )}
@@ -804,7 +822,15 @@ function Chip({ active, count, testId, onClick, glyph, children }: ChipProps): J
   );
 }
 
-function GameCard({ game: g, userRating = 0 }: { game: GamePlugin; userRating?: number }): JSX.Element {
+function GameCard({
+  game: g,
+  userRating = 0,
+  isNew = false,
+}: {
+  game: GamePlugin;
+  userRating?: number;
+  isNew?: boolean;
+}): JSX.Element {
   const { handlers, tooltip } = useTileTooltip(
     {
       title: g.title,
@@ -815,6 +841,7 @@ function GameCard({ game: g, userRating = 0 }: { game: GamePlugin; userRating?: 
     },
     g.id,
   );
+  const badgeKind = pickBadgeKind(g.id, isNew, userRating);
   return (
     <>
     <Link
@@ -825,6 +852,11 @@ function GameCard({ game: g, userRating = 0 }: { game: GamePlugin; userRating?: 
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
+      {badgeKind && (
+        <span className="tile-badge-slot">
+          <Badge kind={badgeKind} testId={`tile-badge-${g.id}`} />
+        </span>
+      )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
           <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
@@ -892,6 +924,51 @@ function SkeletonTile(): JSX.Element {
 }
 
 /**
+ * Inline empty-state illustration: a stylised playing card with a quizzical
+ * face, surfaced when the search/filter combination matches no entries.
+ * Decorative — exposed to assistive tech as a single label rather than
+ * exposing every path / circle individually.
+ */
+function ConfusedCardSvg(): JSX.Element {
+  return (
+    <svg
+      className="lobby-empty-svg"
+      width="120"
+      height="160"
+      viewBox="0 0 120 160"
+      role="img"
+      aria-label="A confused playing card with a question mark"
+      data-testid="lobby-empty-illustration"
+    >
+      {/* Card body */}
+      <rect x="6" y="6" width="108" height="148" rx="12" ry="12"
+        fill="var(--surface-2, #fafbff)" stroke="var(--border, #2a2f45)" strokeWidth="2" />
+      {/* Corner pip top-left */}
+      <text x="14" y="26" fontFamily="Georgia, 'Times New Roman', serif"
+        fontSize="14" fill="var(--text, #1a1d2c)">?</text>
+      {/* Corner pip bottom-right (rotated) */}
+      <g transform="rotate(180 106 134)">
+        <text x="100" y="138" fontFamily="Georgia, 'Times New Roman', serif"
+          fontSize="14" fill="var(--text, #1a1d2c)">?</text>
+      </g>
+      {/* Eyes */}
+      <circle cx="46" cy="68" r="5" fill="var(--text, #1a1d2c)" />
+      <circle cx="74" cy="68" r="5" fill="var(--text, #1a1d2c)" />
+      {/* Brow lines (puzzled) */}
+      <path d="M38 56 L52 62" stroke="var(--text, #1a1d2c)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M82 56 L68 62" stroke="var(--text, #1a1d2c)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      {/* Mouth — wavy "hmm" */}
+      <path d="M44 96 Q50 90 56 96 T68 96 T80 96"
+        stroke="var(--text, #1a1d2c)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      {/* Floating question mark */}
+      <text x="60" y="130" textAnchor="middle"
+        fontFamily="Georgia, 'Times New Roman', serif" fontWeight="bold"
+        fontSize="28" fill="var(--accent, #5b6cff)">?</text>
+    </svg>
+  );
+}
+
+/**
  * Family-card variant — looks like a regular tile but is a button (not
  * a link) and surfaces a "N variants" pill instead of a player range.
  * Click opens the FamilyPicker modal.
@@ -903,6 +980,8 @@ function FamilyCard({
   onClick,
   testIdOverride,
   userRating = 0,
+  isNew = false,
+  members,
 }: {
   family: GameFamily;
   category: GameCategory;
@@ -910,7 +989,19 @@ function FamilyCard({
   onClick: () => void;
   testIdOverride?: string;
   userRating?: number;
+  isNew?: boolean;
+  members: GamePlugin[];
 }): JSX.Element {
+  // Family badge: NEW wins outright, otherwise CHALLENGING/QUICK if any
+  // member is curated, otherwise POPULAR by best-rating threshold.
+  const memberIds = members.map((m) => m.id);
+  const familyChallenging = memberIds.some((id) => CHALLENGING_GAME_IDS.has(id));
+  const familyQuick = memberIds.some((id) => QUICK_GAME_IDS.has(id));
+  let badgeKind: BadgeKind | null = null;
+  if (isNew) badgeKind = "new";
+  else if (familyChallenging) badgeKind = "challenging";
+  else if (familyQuick) badgeKind = "quick";
+  else if (userRating >= 4) badgeKind = "popular";
   // Family tiles surface the family-level description in lieu of a per-
   // game howToPlay (the variants each have their own; the family card
   // doesn't pick a winner).
@@ -937,6 +1028,11 @@ function FamilyCard({
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
+      {badgeKind && (
+        <span className="tile-badge-slot">
+          <Badge kind={badgeKind} testId={`tile-badge-${family.id}`} />
+        </span>
+      )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[category]}`}>
           <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[category]}</span>
@@ -984,11 +1080,16 @@ function FeaturedTile({
   game: g,
   familyId,
   onOpenFamily,
+  isNew = false,
+  userRating = 0,
 }: {
   game: GamePlugin;
   familyId: string | undefined;
   onOpenFamily: (familyId: string) => void;
+  isNew?: boolean;
+  userRating?: number;
 }): JSX.Element {
+  const featuredBadge = pickBadgeKind(g.id, isNew, userRating);
   // Featured tiles get the same hover-tooltip treatment regardless of
   // whether they end up rendering as a link or a button.
   const tooltipData: TileTooltipData = familyId
@@ -1022,6 +1123,11 @@ function FeaturedTile({
       >
         <span className="tile-stripe" aria-hidden="true" />
         <span className="tile-sheen" aria-hidden="true" />
+        {featuredBadge && (
+          <span className="tile-badge-slot">
+            <Badge kind={featuredBadge} testId={`tile-badge-${familyId}`} />
+          </span>
+        )}
         <div className="tile-meta">
           <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
             <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
@@ -1049,6 +1155,11 @@ function FeaturedTile({
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
+      {featuredBadge && (
+        <span className="tile-badge-slot">
+          <Badge kind={featuredBadge} testId={`feat-tile-badge-${g.id}`} />
+        </span>
+      )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
           <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
@@ -1122,6 +1233,10 @@ function FamilyPicker({
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<PickerSort>("alpha");
   const lastPlayed = useMemo(() => readLastPlayed(), []);
+  const pickerRef = useRef<HTMLDivElement | null>(null);
+
+  // Trap Tab/Shift-Tab inside the picker dialog and restore focus on close.
+  useFocusTrap(pickerRef, true);
 
   // Filter + sort the variant list. Members come in alphabetical order
   // already; the "alpha" branch is a no-op clone, the others sort a
@@ -1160,7 +1275,7 @@ function FamilyPicker({
       data-testid={`fam-picker-${family.id}`}
       onClick={onClose}
     >
-      <div className="lobby-picker" onClick={(e) => e.stopPropagation()}>
+      <div className="lobby-picker" onClick={(e) => e.stopPropagation()} ref={pickerRef} tabIndex={-1}>
         <header className="lobby-picker-head">
           <div className="lobby-picker-head-row">
             <div>

@@ -111,6 +111,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [elapsed, setElapsed] = useState<number>(0);
   const [bestTime, setBestTime] = useState<number | null>(() => readBestTime(plugin.id));
   const [rating, setRating] = useState<number>(() => readRating(plugin.id));
+  // Snapshot of the personal-best time *before* the just-finished game was
+  // recorded — used to detect "New record!" and to render the previous best
+  // alongside the new one in the win banner.
+  const [previousBest, setPreviousBest] = useState<number | null>(null);
+  const [isNewRecord, setIsNewRecord] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
 
   const onRate = useCallback(
     (next: number) => {
@@ -180,6 +186,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       setFinalScore(null);
       setElapsed(0);
       setShowConfetti(false);
+      setIsNewRecord(false);
+      setPreviousBest(null);
+      setBannerDismissed(false);
       setPhase("playing");
     },
     [plugin, settings],
@@ -226,12 +235,14 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   }, [plugin.id, seed, setSearchParams]);
 
   const recordBest = useCallback(
-    (seconds: number) => {
+    (seconds: number): { prev: number | null; isRecord: boolean } => {
       const prev = readBestTime(plugin.id);
-      if (prev == null || seconds < prev) {
+      const isRecord = prev == null || seconds < prev;
+      if (isRecord) {
         writeBestTime(plugin.id, seconds);
         setBestTime(seconds);
       }
+      return { prev, isRecord };
     },
     [plugin.id],
   );
@@ -244,10 +255,16 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         if (term) {
           setFinalScore(term.score);
           setPhase("ended");
+          setBannerDismissed(false);
           if (term.score > 0) {
             playSound("win");
-            recordBest(elapsed);
+            const { prev, isRecord } = recordBest(elapsed);
+            setPreviousBest(prev);
+            setIsNewRecord(isRecord);
             setShowConfetti(true);
+          } else {
+            setPreviousBest(null);
+            setIsNewRecord(false);
           }
           void submitScore(plugin.id, term.score, settings as Record<string, unknown>);
         }
@@ -261,10 +278,16 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     (score: number) => {
       setFinalScore(score);
       setPhase("ended");
+      setBannerDismissed(false);
       if (score > 0) {
         playSound("win");
-        recordBest(elapsed);
+        const { prev, isRecord } = recordBest(elapsed);
+        setPreviousBest(prev);
+        setIsNewRecord(isRecord);
         setShowConfetti(true);
+      } else {
+        setPreviousBest(null);
+        setIsNewRecord(false);
       }
       void submitScore(plugin.id, score, settings as Record<string, unknown>);
     },
@@ -273,6 +296,36 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
 
   const showProminentSeed = plugin.id === "klondike" || plugin.id === "freecell" || plugin.id === "spider";
   const progress = useMemo(() => deriveProgress(state), [state]);
+
+  const isWin = phase === "ended" && finalScore !== null && finalScore > 0;
+  const showWinBanner = isWin && !bannerDismissed;
+
+  const shareToTwitter = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const origin = window.location?.origin ?? "https://cards.waterburp.com";
+    const url = `${origin}/play/${plugin.id}?seed=${seed}`;
+    const text = `I just scored ${finalScore ?? 0} on ${plugin.title} in ${formatTime(elapsed)}!${isNewRecord ? " New personal best!" : ""}`;
+    const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(intent, "_blank", "noopener,noreferrer");
+  }, [plugin.id, plugin.title, seed, finalScore, elapsed, isNewRecord]);
+
+  // Esc dismisses the win banner; Enter triggers Play Again. Listener is
+  // only active while the banner is on-screen so we don't intercept keys
+  // during normal gameplay.
+  useEffect(() => {
+    if (!showWinBanner) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setBannerDismissed(true);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        startWithSeed(randomSeed());
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showWinBanner, startWithSeed]);
 
   // Delegated sparkle handler — only primary action surfaces (.btn-primary,
   // .play-iconbtn) trigger a burst, so casual UI clicks stay quiet.
@@ -459,23 +512,117 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         />
       )}
 
+      {showWinBanner && (
+        <div
+          className="win-banner-backdrop"
+          data-testid="win-banner-backdrop"
+          onClick={() => setBannerDismissed(true)}
+          role="presentation"
+        />
+      )}
+
       {phase === "ended" && finalScore !== null && (
-        <section className="end-panel" data-testid="end-panel">
-          <h2>{t("hud.game_over")}</h2>
-          <div className="final-score">{t("hud.score")}: {finalScore}</div>
+        <section
+          className={`end-panel${isWin ? " end-panel--win" : ""}${showWinBanner ? " end-panel--banner" : ""}`}
+          data-testid="end-panel"
+          data-win={isWin ? "true" : "false"}
+          role={showWinBanner ? "dialog" : undefined}
+          aria-modal={showWinBanner ? "true" : undefined}
+          aria-label={showWinBanner ? "You won" : undefined}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {isWin ? (
+            <div className="win-banner-headline" data-testid="win-banner">
+              <span className="win-banner-emoji" aria-hidden="true">🎉</span>
+              <h2 className="win-banner-title">You won!</h2>
+              <span className="win-banner-emoji" aria-hidden="true">🎉</span>
+            </div>
+          ) : (
+            <h2>{t("hud.game_over")}</h2>
+          )}
+
+          <div
+            className={`final-score${isWin ? " final-score--win" : ""}`}
+            data-testid="final-score"
+            aria-label={`Final score ${finalScore}`}
+          >
+            {finalScore}
+          </div>
+          <div className="final-score-label">{t("hud.score")}</div>
+
+          <dl className="end-stats" data-testid="end-stats">
+            <div className="end-stats-row">
+              <dt>{t("hud.time")}</dt>
+              <dd data-testid="end-stats-time">{formatTime(elapsed)}</dd>
+            </div>
+            {isWin && (
+              <div className="end-stats-row">
+                <dt>{t("hud.best")}</dt>
+                <dd data-testid="end-stats-best">
+                  {bestTime != null ? formatTime(bestTime) : "—"}
+                  {isNewRecord && (
+                    <span className="end-stats-record" data-testid="end-stats-record">
+                      New record!
+                      {previousBest != null && (
+                        <span className="end-stats-prev"> (was {formatTime(previousBest)})</span>
+                      )}
+                    </span>
+                  )}
+                </dd>
+              </div>
+            )}
+          </dl>
+
           <div className="end-seed" data-testid="end-seed">Seed: <code>{seed}</code></div>
+
           <div className="end-actions">
-            <button onClick={newGame} className="play-again-btn" data-testid="new-game-btn">{t("hud.new_game")}</button>
-            <button onClick={replay} className="play-again-btn play-replay-btn" data-testid="replay-btn">{t("hud.replay")}</button>
             <button
+              onClick={newGame}
+              className="play-again-btn play-again-btn--big"
+              data-testid="new-game-btn"
+              autoFocus={showWinBanner}
+            >
+              {t("hud.new_game")}
+            </button>
+            <button
+              onClick={replay}
+              className="play-again-btn play-replay-btn play-again-btn--big"
+              data-testid="replay-btn"
+            >
+              {t("hud.replay")}
+            </button>
+            <Link
+              to="/"
+              className="play-share-pill end-back-btn"
+              data-testid="end-back-btn"
+            >
+              {t("nav.lobby")}
+            </Link>
+          </div>
+
+          <div className="end-share-row" data-testid="end-share-row">
+            <button
+              type="button"
+              onClick={shareToTwitter}
+              className="play-share-pill end-share-twitter"
+              data-testid="end-share-twitter"
+              aria-label="Share on Twitter"
+            >
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              Tweet
+            </button>
+            <button
+              type="button"
               onClick={() => { void shareSeed(); }}
               className="play-share-pill"
               data-testid="share-seed-end-btn"
-              type="button"
             >
-              {shareStatus === "copied" ? "Copied!" : shareStatus === "error" ? "Copy failed" : "Share Seed"}
+              {shareStatus === "copied" ? "Copied!" : shareStatus === "error" ? "Copy failed" : "Copy link"}
             </button>
           </div>
+
           <StatsPanel gameId={plugin.id} bestTime={bestTime} />
           <div className="end-rating" data-testid="end-rating">
             <p className="end-rating-prompt">Rate this game</p>
@@ -491,6 +638,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               </p>
             )}
           </div>
+
+          {showWinBanner && (
+            <p className="win-banner-hint" data-testid="win-banner-hint">
+              Press <kbd>Enter</kbd> to play again, <kbd>Esc</kbd> to dismiss
+            </p>
+          )}
         </section>
       )}
 
