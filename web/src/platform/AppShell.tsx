@@ -1042,6 +1042,42 @@ export default function AppShell(): JSX.Element {
         </div>
       </footer>
 
+      {/* Mobile bottom-nav: sticky, only visible <600px (see AppShell.css).
+          Provides the four most-traveled destinations as oversized 44×44+
+          touch targets. Hidden on desktop so the existing top-nav remains
+          authoritative. Test ids: mobile-bottom-nav + mobile-nav-<page>. */}
+      <nav
+        className="mobile-bottom-nav"
+        aria-label="Primary mobile navigation"
+        data-testid="mobile-bottom-nav"
+      >
+        <NavLink to="/" end data-testid="mobile-nav-home" aria-label="Home">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M3 11.5 12 4l9 7.5" /><path d="M5 10v10h14V10" />
+          </svg>
+          <span>Home</span>
+        </NavLink>
+        <NavLink to="/daily" data-testid="mobile-nav-daily" aria-label="Daily">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18" /><path d="M8 3v4" /><path d="M16 3v4" />
+          </svg>
+          <span>Daily</span>
+        </NavLink>
+        <NavLink to="/stats" data-testid="mobile-nav-stats" aria-label="Stats">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M4 20V10" /><path d="M12 20V4" /><path d="M20 20v-7" />
+          </svg>
+          <span>Stats</span>
+        </NavLink>
+        <NavLink to="/settings" data-testid="mobile-nav-settings" aria-label="Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z" />
+          </svg>
+          <span>Settings</span>
+        </NavLink>
+      </nav>
+
       <ToastHost />
       <SparkleHost />
       <KeyboardShortcutsModal open={shortcuts.open} onClose={shortcuts.close} />

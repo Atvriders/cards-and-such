@@ -559,3 +559,132 @@ main {
     transition: none;
   }
 }
+
+/* =====================================================================
+   Mobile shell polish
+   ---------------------------------------------------------------------
+   - Slim sticky top header on phones: collapses padding, hides the dense
+     desktop "user" cluster (sound/theme/light/sign-out) so just the brand
+     wordmark + hamburger remain. Search/quick-start are still reachable
+     from the hamburger drawer or via the bottom-nav routes.
+   - Sticky bottom-nav with four primary destinations.
+   - Safe-area insets for notch / home-indicator devices (iOS, Pixel).
+   - Bottom-nav adds extra `main` padding so its sticky bar never hides
+     the page's last row.
+   ===================================================================== */
+
+/* Bottom-nav: hidden on desktop, sticky on phones. */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  /* Slim mobile header — drop the dense action cluster (sound/theme/sign
+     out / search / etc.) and show just the brand wordmark + hamburger.
+     The hamburger drawer continues to host the full nav. */
+  .app-header {
+    padding: 0 0.75rem;
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+    /* Slimmer height to claim less of the small viewport. */
+    min-height: 52px;
+  }
+  .app-header .brand {
+    font-size: 1rem;
+    flex: 1;
+    min-width: 0;
+  }
+  /* Hide the dense desktop user cluster on phones — bottom-nav covers
+     the primary jumps; drawer still owns the rest. Quick-start remains
+     accessible via the lobby. */
+  .app-header .user {
+    display: none;
+  }
+  /* The hamburger sits to the right of the brand on mobile. */
+  .hamburger { order: 2; margin-left: auto; }
+
+  /* Sticky bottom-nav, four equal columns. */
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding: 0.4rem 0.25rem;
+    /* Honor home-indicator inset so the bar floats above it. */
+    padding-bottom: calc(0.4rem + env(safe-area-inset-bottom));
+    padding-left: max(0.25rem, env(safe-area-inset-left));
+    padding-right: max(0.25rem, env(safe-area-inset-right));
+    background: rgba(11, 13, 24, 0.92);
+    border-top: 1px solid rgba(148, 163, 184, 0.14);
+    box-shadow: 0 -8px 24px -12px rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+  .mobile-bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: 44px;
+    padding: 0.3rem 0.2rem;
+    border-radius: 0.5rem;
+    color: var(--text-400, #94a3b8);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: color 140ms ease, background 140ms ease;
+  }
+  .mobile-bottom-nav a:hover {
+    color: var(--text-100, #f1f5f9);
+    background: rgba(148, 163, 184, 0.08);
+  }
+  .mobile-bottom-nav a.active {
+    color: #c7cdfe;
+    background: rgba(129, 140, 248, 0.14);
+  }
+  .mobile-bottom-nav a svg { display: block; }
+
+  /* Push the page content above the sticky bar so the last row isn't
+     occluded. The +44px is the bar's intrinsic height; safe-area inset
+     is added so notch devices clear the home indicator too. */
+  main {
+    padding-bottom: calc(3rem + 56px + env(safe-area-inset-bottom));
+  }
+
+  /* Mirror the bottom-bar inset on the footer too so it doesn't bump
+     up against the fixed nav. */
+  .app-footer {
+    margin-bottom: calc(56px + env(safe-area-inset-bottom));
+  }
+
+  /* The mobile drawer's nav already opens beneath the slim header — keep
+     it from sliding under the bottom-nav. */
+  .app-header nav.is-open {
+    max-height: calc(100vh - 52px - 56px - env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
+}
+
+/* Light-mode bottom-nav variant. */
+:root[data-light] .mobile-bottom-nav {
+  background: rgba(255, 255, 255, 0.92);
+  border-top-color: var(--border-color, #e2e8f0);
+}
+:root[data-light] .mobile-bottom-nav a { color: #475569; }
+:root[data-light] .mobile-bottom-nav a:hover { color: #0f172a; background: rgba(15, 23, 42, 0.05); }
+:root[data-light] .mobile-bottom-nav a.active { color: #4338ca; background: rgba(99, 102, 241, 0.14); }
+
+/* Honour the existing top-bar safe-area on tablets / desktops with a notch
+   (e.g. iPad Pro in landscape). Cheap to add, no visible effect on others. */
+@media (min-width: 600px) {
+  .app-header {
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+}
