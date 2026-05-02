@@ -41,10 +41,10 @@ export function BarDiceMidnightGame({ state, dispatch, onGameOver }: GameProps<B
       </div>
       <div className="badimi-actions">
         {state.phase === "rolling" && (
-          <button className="badimi-btn primary" onClick={() => dispatch({ type: "roll" } as BarDiceMidnightAction)}>Roll</button>
+          <button className="badimi-btn primary" data-testid="hint-target-bar-dice-midnight-roll" onClick={() => dispatch({ type: "roll" } as BarDiceMidnightAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="badimi-btn alt" onClick={() => dispatch({ type: "next" } as BarDiceMidnightAction)}>Next</button>
+          <button className="badimi-btn alt" data-testid="hint-target-bar-dice-midnight-next" onClick={() => dispatch({ type: "next" } as BarDiceMidnightAction)}>Next</button>
         )}
       </div>
     </div>

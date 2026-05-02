@@ -41,10 +41,10 @@ export function DiceSpikeballGame({ state, dispatch, onGameOver }: GameProps<Dic
       </div>
       <div className="dicspi-actions">
         {state.phase === "rolling" && (
-          <button className="dicspi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceSpikeballAction)}>Roll</button>
+          <button className="dicspi-btn primary" data-testid="hint-target-dice-spikeball-roll" onClick={() => dispatch({ type: "roll" } as DiceSpikeballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dicspi-btn alt" onClick={() => dispatch({ type: "next" } as DiceSpikeballAction)}>Next</button>
+          <button className="dicspi-btn alt" data-testid="hint-target-dice-spikeball-next" onClick={() => dispatch({ type: "next" } as DiceSpikeballAction)}>Next</button>
         )}
       </div>
     </div>

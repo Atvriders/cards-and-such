@@ -41,10 +41,10 @@ export function DiceGrandPrixF1Game({ state, dispatch, onGameOver }: GameProps<D
       </div>
       <div className="digrprf1-actions">
         {state.phase === "rolling" && (
-          <button className="digrprf1-btn primary" onClick={() => dispatch({ type: "roll" } as DiceGrandPrixF1Action)}>Roll</button>
+          <button className="digrprf1-btn primary" data-testid="hint-target-dice-grand-prix-f1-roll" onClick={() => dispatch({ type: "roll" } as DiceGrandPrixF1Action)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="digrprf1-btn alt" onClick={() => dispatch({ type: "next" } as DiceGrandPrixF1Action)}>Next</button>
+          <button className="digrprf1-btn alt" data-testid="hint-target-dice-grand-prix-f1-next" onClick={() => dispatch({ type: "next" } as DiceGrandPrixF1Action)}>Next</button>
         )}
       </div>
     </div>

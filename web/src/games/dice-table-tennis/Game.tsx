@@ -41,10 +41,10 @@ export function DiceTableTennisGame({ state, dispatch, onGameOver }: GameProps<D
       </div>
       <div className="ditate-actions">
         {state.phase === "rolling" && (
-          <button className="ditate-btn primary" onClick={() => dispatch({ type: "roll" } as DiceTableTennisAction)}>Roll</button>
+          <button className="ditate-btn primary" data-testid="hint-target-dice-table-tennis-roll" onClick={() => dispatch({ type: "roll" } as DiceTableTennisAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="ditate-btn alt" onClick={() => dispatch({ type: "next" } as DiceTableTennisAction)}>Next</button>
+          <button className="ditate-btn alt" data-testid="hint-target-dice-table-tennis-next" onClick={() => dispatch({ type: "next" } as DiceTableTennisAction)}>Next</button>
         )}
       </div>
     </div>

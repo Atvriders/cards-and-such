@@ -41,10 +41,10 @@ export function Dice301DartsGame({ state, dispatch, onGameOver }: GameProps<Dice
       </div>
       <div className="di30da-actions">
         {state.phase === "rolling" && (
-          <button className="di30da-btn primary" onClick={() => dispatch({ type: "roll" } as Dice301DartsAction)}>Roll</button>
+          <button className="di30da-btn primary" data-testid="hint-target-dice-301-darts-roll" onClick={() => dispatch({ type: "roll" } as Dice301DartsAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="di30da-btn alt" onClick={() => dispatch({ type: "next" } as Dice301DartsAction)}>Next</button>
+          <button className="di30da-btn alt" data-testid="hint-target-dice-301-darts-next" onClick={() => dispatch({ type: "next" } as Dice301DartsAction)}>Next</button>
         )}
       </div>
     </div>

@@ -41,10 +41,10 @@ export function DiceSnookerMatchGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="disnma-actions">
         {state.phase === "rolling" && (
-          <button className="disnma-btn primary" onClick={() => dispatch({ type: "roll" } as DiceSnookerMatchAction)}>Roll</button>
+          <button className="disnma-btn primary" data-testid="hint-target-dice-snooker-match-roll" onClick={() => dispatch({ type: "roll" } as DiceSnookerMatchAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="disnma-btn alt" onClick={() => dispatch({ type: "next" } as DiceSnookerMatchAction)}>Next</button>
+          <button className="disnma-btn alt" data-testid="hint-target-dice-snooker-match-next" onClick={() => dispatch({ type: "next" } as DiceSnookerMatchAction)}>Next</button>
         )}
       </div>
     </div>

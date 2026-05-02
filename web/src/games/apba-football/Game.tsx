@@ -41,10 +41,10 @@ export function ApbaFootballGame({ state, dispatch, onGameOver }: GameProps<Apba
       </div>
       <div className="apbfoo-actions">
         {state.phase === "rolling" && (
-          <button className="apbfoo-btn primary" onClick={() => dispatch({ type: "roll" } as ApbaFootballAction)}>Roll</button>
+          <button className="apbfoo-btn primary" data-testid="hint-target-apba-football-roll" onClick={() => dispatch({ type: "roll" } as ApbaFootballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="apbfoo-btn alt" onClick={() => dispatch({ type: "next" } as ApbaFootballAction)}>Next</button>
+          <button className="apbfoo-btn alt" data-testid="hint-target-apba-football-next" onClick={() => dispatch({ type: "next" } as ApbaFootballAction)}>Next</button>
         )}
       </div>
     </div>

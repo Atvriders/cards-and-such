@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceFlyFishingState, DiceFlyFishingAction, DiceFlyFishingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceFlyFishingGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceFlyFishingPlugin: GamePlugin<DiceFlyFishingState, DiceFlyFishin
   initialState: (seed: number, s: S) => initialState(seed, s as DiceFlyFishingSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceFlyFishingState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-fly-fishing-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-fly-fishing-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceFlyFishingGame,
 };

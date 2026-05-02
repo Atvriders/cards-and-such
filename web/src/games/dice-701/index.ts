@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Dice701State, Dice701Action, Dice701Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Dice701Game } from "./Game.js";
@@ -17,5 +17,11 @@ export const dice701Plugin: GamePlugin<Dice701State, Dice701Action, typeof setti
   initialState: (seed: number, s: S) => initialState(seed, s as Dice701Settings),
   reducer,
   isTerminal,
+  hint: (state: Dice701State): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-701-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-701-next"]', pulses: 3 };
+    return null;
+  },
   component: Dice701Game,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceCrokinoleState, DiceCrokinoleAction, DiceCrokinoleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceCrokinoleGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceCrokinolePlugin: GamePlugin<DiceCrokinoleState, DiceCrokinoleAc
   initialState: (seed: number, s: S) => initialState(seed, s as DiceCrokinoleSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceCrokinoleState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-crokinole-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-crokinole-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceCrokinoleGame,
 };

@@ -41,10 +41,10 @@ export function DiceHalveItGame({ state, dispatch, onGameOver }: GameProps<DiceH
       </div>
       <div className="dihait-actions">
         {state.phase === "rolling" && (
-          <button className="dihait-btn primary" onClick={() => dispatch({ type: "roll" } as DiceHalveItAction)}>Roll</button>
+          <button className="dihait-btn primary" data-testid="hint-target-dice-halve-it-roll" onClick={() => dispatch({ type: "roll" } as DiceHalveItAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dihait-btn alt" onClick={() => dispatch({ type: "next" } as DiceHalveItAction)}>Next</button>
+          <button className="dihait-btn alt" data-testid="hint-target-dice-halve-it-next" onClick={() => dispatch({ type: "next" } as DiceHalveItAction)}>Next</button>
         )}
       </div>
     </div>

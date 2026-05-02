@@ -41,10 +41,10 @@ export function DiceReplayBaseballDetailGame({ state, dispatch, onGameOver }: Ga
       </div>
       <div className="direbade-actions">
         {state.phase === "rolling" && (
-          <button className="direbade-btn primary" onClick={() => dispatch({ type: "roll" } as DiceReplayBaseballDetailAction)}>Roll</button>
+          <button className="direbade-btn primary" data-testid="hint-target-dice-replay-baseball-detail-roll" onClick={() => dispatch({ type: "roll" } as DiceReplayBaseballDetailAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="direbade-btn alt" onClick={() => dispatch({ type: "next" } as DiceReplayBaseballDetailAction)}>Next</button>
+          <button className="direbade-btn alt" data-testid="hint-target-dice-replay-baseball-detail-next" onClick={() => dispatch({ type: "next" } as DiceReplayBaseballDetailAction)}>Next</button>
         )}
       </div>
     </div>

@@ -41,10 +41,10 @@ export function StratBasketballGame({ state, dispatch, onGameOver }: GameProps<S
       </div>
       <div className="strbsk-actions">
         {state.phase === "rolling" && (
-          <button className="strbsk-btn primary" onClick={() => dispatch({ type: "roll" } as StratBasketballAction)}>Roll</button>
+          <button className="strbsk-btn primary" data-testid="hint-target-strat-basketball-roll" onClick={() => dispatch({ type: "roll" } as StratBasketballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="strbsk-btn alt" onClick={() => dispatch({ type: "next" } as StratBasketballAction)}>Next</button>
+          <button className="strbsk-btn alt" data-testid="hint-target-strat-basketball-next" onClick={() => dispatch({ type: "next" } as StratBasketballAction)}>Next</button>
         )}
       </div>
     </div>

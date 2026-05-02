@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceCricketDartsState, DiceCricketDartsAction, DiceCricketDartsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceCricketDartsGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceCricketDartsPlugin: GamePlugin<DiceCricketDartsState, DiceCrick
   initialState: (seed: number, s: S) => initialState(seed, s as DiceCricketDartsSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceCricketDartsState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-cricket-darts-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-cricket-darts-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceCricketDartsGame,
 };

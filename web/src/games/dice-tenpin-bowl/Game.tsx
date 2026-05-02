@@ -41,10 +41,10 @@ export function DiceTenpinBowlGame({ state, dispatch, onGameOver }: GameProps<Di
       </div>
       <div className="ditebo-actions">
         {state.phase === "rolling" && (
-          <button className="ditebo-btn primary" onClick={() => dispatch({ type: "roll" } as DiceTenpinBowlAction)}>Roll</button>
+          <button className="ditebo-btn primary" data-testid="hint-target-dice-tenpin-bowl-roll" onClick={() => dispatch({ type: "roll" } as DiceTenpinBowlAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="ditebo-btn alt" onClick={() => dispatch({ type: "next" } as DiceTenpinBowlAction)}>Next</button>
+          <button className="ditebo-btn alt" data-testid="hint-target-dice-tenpin-bowl-next" onClick={() => dispatch({ type: "next" } as DiceTenpinBowlAction)}>Next</button>
         )}
       </div>
     </div>

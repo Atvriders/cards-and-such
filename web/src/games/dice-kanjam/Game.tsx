@@ -41,10 +41,10 @@ export function DiceKanjamGame({ state, dispatch, onGameOver }: GameProps<DiceKa
       </div>
       <div className="dickan-actions">
         {state.phase === "rolling" && (
-          <button className="dickan-btn primary" onClick={() => dispatch({ type: "roll" } as DiceKanjamAction)}>Roll</button>
+          <button className="dickan-btn primary" data-testid="hint-target-dice-kanjam-roll" onClick={() => dispatch({ type: "roll" } as DiceKanjamAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dickan-btn alt" onClick={() => dispatch({ type: "next" } as DiceKanjamAction)}>Next</button>
+          <button className="dickan-btn alt" data-testid="hint-target-dice-kanjam-next" onClick={() => dispatch({ type: "next" } as DiceKanjamAction)}>Next</button>
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceKegelnState, DiceKegelnAction, DiceKegelnSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceKegelnGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceKegelnPlugin: GamePlugin<DiceKegelnState, DiceKegelnAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as DiceKegelnSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceKegelnState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-kegeln-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-kegeln-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceKegelnGame,
 };

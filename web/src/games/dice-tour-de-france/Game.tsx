@@ -41,10 +41,10 @@ export function DiceTourDeFranceGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="ditodefr-actions">
         {state.phase === "rolling" && (
-          <button className="ditodefr-btn primary" onClick={() => dispatch({ type: "roll" } as DiceTourDeFranceAction)}>Roll</button>
+          <button className="ditodefr-btn primary" data-testid="hint-target-dice-tour-de-france-roll" onClick={() => dispatch({ type: "roll" } as DiceTourDeFranceAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="ditodefr-btn alt" onClick={() => dispatch({ type: "next" } as DiceTourDeFranceAction)}>Next</button>
+          <button className="ditodefr-btn alt" data-testid="hint-target-dice-tour-de-france-next" onClick={() => dispatch({ type: "next" } as DiceTourDeFranceAction)}>Next</button>
         )}
       </div>
     </div>

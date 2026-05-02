@@ -41,10 +41,10 @@ export function DiceCornholeGame({ state, dispatch, onGameOver }: GameProps<Dice
       </div>
       <div className="diccor-actions">
         {state.phase === "rolling" && (
-          <button className="diccor-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCornholeAction)}>Roll</button>
+          <button className="diccor-btn primary" data-testid="hint-target-dice-cornhole-roll" onClick={() => dispatch({ type: "roll" } as DiceCornholeAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diccor-btn alt" onClick={() => dispatch({ type: "next" } as DiceCornholeAction)}>Next</button>
+          <button className="diccor-btn alt" data-testid="hint-target-dice-cornhole-next" onClick={() => dispatch({ type: "next" } as DiceCornholeAction)}>Next</button>
         )}
       </div>
     </div>

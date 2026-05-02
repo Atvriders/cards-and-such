@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceWasherTossState, DiceWasherTossAction, DiceWasherTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceWasherTossGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceWasherTossPlugin: GamePlugin<DiceWasherTossState, DiceWasherTos
   initialState: (seed: number, s: S) => initialState(seed, s as DiceWasherTossSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceWasherTossState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-washer-toss-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-washer-toss-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceWasherTossGame,
 };

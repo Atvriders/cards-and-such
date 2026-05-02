@@ -41,10 +41,10 @@ export function DiceDeepSeaFishingGame({ state, dispatch, onGameOver }: GameProp
       </div>
       <div className="didesefi-actions">
         {state.phase === "rolling" && (
-          <button className="didesefi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceDeepSeaFishingAction)}>Roll</button>
+          <button className="didesefi-btn primary" data-testid="hint-target-dice-deep-sea-fishing-roll" onClick={() => dispatch({ type: "roll" } as DiceDeepSeaFishingAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="didesefi-btn alt" onClick={() => dispatch({ type: "next" } as DiceDeepSeaFishingAction)}>Next</button>
+          <button className="didesefi-btn alt" data-testid="hint-target-dice-deep-sea-fishing-next" onClick={() => dispatch({ type: "next" } as DiceDeepSeaFishingAction)}>Next</button>
         )}
       </div>
     </div>

@@ -41,10 +41,10 @@ export function DiceBaseballHighlightsGame({ state, dispatch, onGameOver }: Game
       </div>
       <div className="dibahi-actions">
         {state.phase === "rolling" && (
-          <button className="dibahi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceBaseballHighlightsAction)}>Roll</button>
+          <button className="dibahi-btn primary" data-testid="hint-target-dice-baseball-highlights-roll" onClick={() => dispatch({ type: "roll" } as DiceBaseballHighlightsAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dibahi-btn alt" onClick={() => dispatch({ type: "next" } as DiceBaseballHighlightsAction)}>Next</button>
+          <button className="dibahi-btn alt" data-testid="hint-target-dice-baseball-highlights-next" onClick={() => dispatch({ type: "next" } as DiceBaseballHighlightsAction)}>Next</button>
         )}
       </div>
     </div>

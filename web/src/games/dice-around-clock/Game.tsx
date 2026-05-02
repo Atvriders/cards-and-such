@@ -41,10 +41,10 @@ export function DiceAroundClockGame({ state, dispatch, onGameOver }: GameProps<D
       </div>
       <div className="diarcl-actions">
         {state.phase === "rolling" && (
-          <button className="diarcl-btn primary" onClick={() => dispatch({ type: "roll" } as DiceAroundClockAction)}>Roll</button>
+          <button className="diarcl-btn primary" data-testid="hint-target-dice-around-clock-roll" onClick={() => dispatch({ type: "roll" } as DiceAroundClockAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diarcl-btn alt" onClick={() => dispatch({ type: "next" } as DiceAroundClockAction)}>Next</button>
+          <button className="diarcl-btn alt" data-testid="hint-target-dice-around-clock-next" onClick={() => dispatch({ type: "next" } as DiceAroundClockAction)}>Next</button>
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceTourDeFranceState, DiceTourDeFranceAction, DiceTourDeFranceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceTourDeFranceGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceTourDeFrancePlugin: GamePlugin<DiceTourDeFranceState, DiceTourD
   initialState: (seed: number, s: S) => initialState(seed, s as DiceTourDeFranceSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceTourDeFranceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-tour-de-france-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-tour-de-france-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceTourDeFranceGame,
 };

@@ -41,10 +41,10 @@ export function DiceApbaBasketballGame({ state, dispatch, onGameOver }: GameProp
       </div>
       <div className="diapba-actions">
         {state.phase === "rolling" && (
-          <button className="diapba-btn primary" onClick={() => dispatch({ type: "roll" } as DiceApbaBasketballAction)}>Roll</button>
+          <button className="diapba-btn primary" data-testid="hint-target-dice-apba-basketball-roll" onClick={() => dispatch({ type: "roll" } as DiceApbaBasketballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diapba-btn alt" onClick={() => dispatch({ type: "next" } as DiceApbaBasketballAction)}>Next</button>
+          <button className="diapba-btn alt" data-testid="hint-target-dice-apba-basketball-next" onClick={() => dispatch({ type: "next" } as DiceApbaBasketballAction)}>Next</button>
         )}
       </div>
     </div>

@@ -41,10 +41,10 @@ export function DiceFatBoyDartsGame({ state, dispatch, onGameOver }: GameProps<D
       </div>
       <div className="difaboda-actions">
         {state.phase === "rolling" && (
-          <button className="difaboda-btn primary" onClick={() => dispatch({ type: "roll" } as DiceFatBoyDartsAction)}>Roll</button>
+          <button className="difaboda-btn primary" data-testid="hint-target-dice-fat-boy-darts-roll" onClick={() => dispatch({ type: "roll" } as DiceFatBoyDartsAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="difaboda-btn alt" onClick={() => dispatch({ type: "next" } as DiceFatBoyDartsAction)}>Next</button>
+          <button className="difaboda-btn alt" data-testid="hint-target-dice-fat-boy-darts-next" onClick={() => dispatch({ type: "next" } as DiceFatBoyDartsAction)}>Next</button>
         )}
       </div>
     </div>

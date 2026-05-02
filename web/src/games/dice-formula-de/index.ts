@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceFormulaDeState, DiceFormulaDeAction, DiceFormulaDeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceFormulaDeGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceFormulaDePlugin: GamePlugin<DiceFormulaDeState, DiceFormulaDeAc
   initialState: (seed: number, s: S) => initialState(seed, s as DiceFormulaDeSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceFormulaDeState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-formula-de-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-formula-de-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceFormulaDeGame,
 };

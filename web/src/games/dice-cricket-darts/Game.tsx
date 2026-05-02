@@ -41,10 +41,10 @@ export function DiceCricketDartsGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="dicrda-actions">
         {state.phase === "rolling" && (
-          <button className="dicrda-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCricketDartsAction)}>Roll</button>
+          <button className="dicrda-btn primary" data-testid="hint-target-dice-cricket-darts-roll" onClick={() => dispatch({ type: "roll" } as DiceCricketDartsAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dicrda-btn alt" onClick={() => dispatch({ type: "next" } as DiceCricketDartsAction)}>Next</button>
+          <button className="dicrda-btn alt" data-testid="hint-target-dice-cricket-darts-next" onClick={() => dispatch({ type: "next" } as DiceCricketDartsAction)}>Next</button>
         )}
       </div>
     </div>

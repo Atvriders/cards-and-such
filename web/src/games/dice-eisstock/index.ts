@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceEisstockState, DiceEisstockAction, DiceEisstockSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceEisstockGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceEisstockPlugin: GamePlugin<DiceEisstockState, DiceEisstockActio
   initialState: (seed: number, s: S) => initialState(seed, s as DiceEisstockSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceEisstockState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-eisstock-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-eisstock-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceEisstockGame,
 };

@@ -41,10 +41,10 @@ export function DiceMmaGame({ state, dispatch, onGameOver }: GameProps<DiceMmaSt
       </div>
       <div className="dicmma-actions">
         {state.phase === "rolling" && (
-          <button className="dicmma-btn primary" onClick={() => dispatch({ type: "roll" } as DiceMmaAction)}>Roll</button>
+          <button className="dicmma-btn primary" data-testid="hint-target-dice-mma-roll" onClick={() => dispatch({ type: "roll" } as DiceMmaAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dicmma-btn alt" onClick={() => dispatch({ type: "next" } as DiceMmaAction)}>Next</button>
+          <button className="dicmma-btn alt" data-testid="hint-target-dice-mma-next" onClick={() => dispatch({ type: "next" } as DiceMmaAction)}>Next</button>
         )}
       </div>
     </div>

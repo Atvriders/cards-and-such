@@ -41,10 +41,10 @@ export function DiceCandlepinGame({ state, dispatch, onGameOver }: GameProps<Dic
       </div>
       <div className="diccan-actions">
         {state.phase === "rolling" && (
-          <button className="diccan-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCandlepinAction)}>Roll</button>
+          <button className="diccan-btn primary" data-testid="hint-target-dice-candlepin-roll" onClick={() => dispatch({ type: "roll" } as DiceCandlepinAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diccan-btn alt" onClick={() => dispatch({ type: "next" } as DiceCandlepinAction)}>Next</button>
+          <button className="diccan-btn alt" data-testid="hint-target-dice-candlepin-next" onClick={() => dispatch({ type: "next" } as DiceCandlepinAction)}>Next</button>
         )}
       </div>
     </div>

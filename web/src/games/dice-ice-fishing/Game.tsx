@@ -41,10 +41,10 @@ export function DiceIceFishingGame({ state, dispatch, onGameOver }: GameProps<Di
       </div>
       <div className="diicfi-actions">
         {state.phase === "rolling" && (
-          <button className="diicfi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceIceFishingAction)}>Roll</button>
+          <button className="diicfi-btn primary" data-testid="hint-target-dice-ice-fishing-roll" onClick={() => dispatch({ type: "roll" } as DiceIceFishingAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diicfi-btn alt" onClick={() => dispatch({ type: "next" } as DiceIceFishingAction)}>Next</button>
+          <button className="diicfi-btn alt" data-testid="hint-target-dice-ice-fishing-next" onClick={() => dispatch({ type: "next" } as DiceIceFishingAction)}>Next</button>
         )}
       </div>
     </div>

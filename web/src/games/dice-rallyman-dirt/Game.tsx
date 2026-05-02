@@ -41,10 +41,10 @@ export function DiceRallymanDirtGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="diradi-actions">
         {state.phase === "rolling" && (
-          <button className="diradi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceRallymanDirtAction)}>Roll</button>
+          <button className="diradi-btn primary" data-testid="hint-target-dice-rallyman-dirt-roll" onClick={() => dispatch({ type: "roll" } as DiceRallymanDirtAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diradi-btn alt" onClick={() => dispatch({ type: "next" } as DiceRallymanDirtAction)}>Next</button>
+          <button className="diradi-btn alt" data-testid="hint-target-dice-rallyman-dirt-next" onClick={() => dispatch({ type: "next" } as DiceRallymanDirtAction)}>Next</button>
         )}
       </div>
     </div>

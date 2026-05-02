@@ -41,10 +41,10 @@ export function DiceCarromGame({ state, dispatch, onGameOver }: GameProps<DiceCa
       </div>
       <div className="diccar-actions">
         {state.phase === "rolling" && (
-          <button className="diccar-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCarromAction)}>Roll</button>
+          <button className="diccar-btn primary" data-testid="hint-target-dice-carrom-roll" onClick={() => dispatch({ type: "roll" } as DiceCarromAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diccar-btn alt" onClick={() => dispatch({ type: "next" } as DiceCarromAction)}>Next</button>
+          <button className="diccar-btn alt" data-testid="hint-target-dice-carrom-next" onClick={() => dispatch({ type: "next" } as DiceCarromAction)}>Next</button>
         )}
       </div>
     </div>

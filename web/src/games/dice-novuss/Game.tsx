@@ -41,10 +41,10 @@ export function DiceNovussGame({ state, dispatch, onGameOver }: GameProps<DiceNo
       </div>
       <div className="dicnov-actions">
         {state.phase === "rolling" && (
-          <button className="dicnov-btn primary" onClick={() => dispatch({ type: "roll" } as DiceNovussAction)}>Roll</button>
+          <button className="dicnov-btn primary" data-testid="hint-target-dice-novuss-roll" onClick={() => dispatch({ type: "roll" } as DiceNovussAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dicnov-btn alt" onClick={() => dispatch({ type: "next" } as DiceNovussAction)}>Next</button>
+          <button className="dicnov-btn alt" data-testid="hint-target-dice-novuss-next" onClick={() => dispatch({ type: "next" } as DiceNovussAction)}>Next</button>
         )}
       </div>
     </div>

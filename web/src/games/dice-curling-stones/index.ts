@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceCurlingStonesState, DiceCurlingStonesAction, DiceCurlingStonesSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceCurlingStonesGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceCurlingStonesPlugin: GamePlugin<DiceCurlingStonesState, DiceCur
   initialState: (seed: number, s: S) => initialState(seed, s as DiceCurlingStonesSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceCurlingStonesState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-curling-stones-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-curling-stones-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceCurlingStonesGame,
 };

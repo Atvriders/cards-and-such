@@ -41,10 +41,10 @@ export function DiceStratFootballGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="distfo-actions">
         {state.phase === "rolling" && (
-          <button className="distfo-btn primary" onClick={() => dispatch({ type: "roll" } as DiceStratFootballAction)}>Roll</button>
+          <button className="distfo-btn primary" data-testid="hint-target-dice-strat-football-roll" onClick={() => dispatch({ type: "roll" } as DiceStratFootballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="distfo-btn alt" onClick={() => dispatch({ type: "next" } as DiceStratFootballAction)}>Next</button>
+          <button className="distfo-btn alt" data-testid="hint-target-dice-strat-football-next" onClick={() => dispatch({ type: "next" } as DiceStratFootballAction)}>Next</button>
         )}
       </div>
     </div>

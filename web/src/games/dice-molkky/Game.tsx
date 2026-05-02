@@ -41,10 +41,10 @@ export function DiceMolkkyGame({ state, dispatch, onGameOver }: GameProps<DiceMo
       </div>
       <div className="dicmol-actions">
         {state.phase === "rolling" && (
-          <button className="dicmol-btn primary" onClick={() => dispatch({ type: "roll" } as DiceMolkkyAction)}>Roll</button>
+          <button className="dicmol-btn primary" data-testid="hint-target-dice-molkky-roll" onClick={() => dispatch({ type: "roll" } as DiceMolkkyAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dicmol-btn alt" onClick={() => dispatch({ type: "next" } as DiceMolkkyAction)}>Next</button>
+          <button className="dicmol-btn alt" data-testid="hint-target-dice-molkky-next" onClick={() => dispatch({ type: "next" } as DiceMolkkyAction)}>Next</button>
         )}
       </div>
     </div>

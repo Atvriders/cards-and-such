@@ -41,10 +41,10 @@ export function DiceThunderPitGame({ state, dispatch, onGameOver }: GameProps<Di
       </div>
       <div className="dithpi-actions">
         {state.phase === "rolling" && (
-          <button className="dithpi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceThunderPitAction)}>Roll</button>
+          <button className="dithpi-btn primary" data-testid="hint-target-dice-thunder-pit-roll" onClick={() => dispatch({ type: "roll" } as DiceThunderPitAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dithpi-btn alt" onClick={() => dispatch({ type: "next" } as DiceThunderPitAction)}>Next</button>
+          <button className="dithpi-btn alt" data-testid="hint-target-dice-thunder-pit-next" onClick={() => dispatch({ type: "next" } as DiceThunderPitAction)}>Next</button>
         )}
       </div>
     </div>

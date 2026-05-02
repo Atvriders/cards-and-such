@@ -41,10 +41,10 @@ export function DiceBelmontStakesGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="dibest-actions">
         {state.phase === "rolling" && (
-          <button className="dibest-btn primary" onClick={() => dispatch({ type: "roll" } as DiceBelmontStakesAction)}>Roll</button>
+          <button className="dibest-btn primary" data-testid="hint-target-dice-belmont-stakes-roll" onClick={() => dispatch({ type: "roll" } as DiceBelmontStakesAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dibest-btn alt" onClick={() => dispatch({ type: "next" } as DiceBelmontStakesAction)}>Next</button>
+          <button className="dibest-btn alt" data-testid="hint-target-dice-belmont-stakes-next" onClick={() => dispatch({ type: "next" } as DiceBelmontStakesAction)}>Next</button>
         )}
       </div>
     </div>

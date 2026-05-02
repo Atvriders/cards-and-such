@@ -41,10 +41,10 @@ export function DiceHorseRacingCardGame({ state, dispatch, onGameOver }: GamePro
       </div>
       <div className="dihoraca-actions">
         {state.phase === "rolling" && (
-          <button className="dihoraca-btn primary" onClick={() => dispatch({ type: "roll" } as DiceHorseRacingCardAction)}>Roll</button>
+          <button className="dihoraca-btn primary" data-testid="hint-target-dice-horse-racing-card-roll" onClick={() => dispatch({ type: "roll" } as DiceHorseRacingCardAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dihoraca-btn alt" onClick={() => dispatch({ type: "next" } as DiceHorseRacingCardAction)}>Next</button>
+          <button className="dihoraca-btn alt" data-testid="hint-target-dice-horse-racing-card-next" onClick={() => dispatch({ type: "next" } as DiceHorseRacingCardAction)}>Next</button>
         )}
       </div>
     </div>

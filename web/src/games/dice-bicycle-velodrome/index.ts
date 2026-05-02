@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceBicycleVelodromeState, DiceBicycleVelodromeAction, DiceBicycleVelodromeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceBicycleVelodromeGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceBicycleVelodromePlugin: GamePlugin<DiceBicycleVelodromeState, D
   initialState: (seed: number, s: S) => initialState(seed, s as DiceBicycleVelodromeSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceBicycleVelodromeState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-bicycle-velodrome-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-bicycle-velodrome-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceBicycleVelodromeGame,
 };

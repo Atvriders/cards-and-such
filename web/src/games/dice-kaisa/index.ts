@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceKaisaState, DiceKaisaAction, DiceKaisaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceKaisaGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceKaisaPlugin: GamePlugin<DiceKaisaState, DiceKaisaAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as DiceKaisaSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceKaisaState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-kaisa-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-kaisa-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceKaisaGame,
 };

@@ -41,10 +41,10 @@ export function DiceRussianPyramidGame({ state, dispatch, onGameOver }: GameProp
       </div>
       <div className="dirupy-actions">
         {state.phase === "rolling" && (
-          <button className="dirupy-btn primary" onClick={() => dispatch({ type: "roll" } as DiceRussianPyramidAction)}>Roll</button>
+          <button className="dirupy-btn primary" data-testid="hint-target-dice-russian-pyramid-roll" onClick={() => dispatch({ type: "roll" } as DiceRussianPyramidAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dirupy-btn alt" onClick={() => dispatch({ type: "next" } as DiceRussianPyramidAction)}>Next</button>
+          <button className="dirupy-btn alt" data-testid="hint-target-dice-russian-pyramid-next" onClick={() => dispatch({ type: "next" } as DiceRussianPyramidAction)}>Next</button>
         )}
       </div>
     </div>

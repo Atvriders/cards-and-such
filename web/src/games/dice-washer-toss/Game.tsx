@@ -41,10 +41,10 @@ export function DiceWasherTossGame({ state, dispatch, onGameOver }: GameProps<Di
       </div>
       <div className="diwato-actions">
         {state.phase === "rolling" && (
-          <button className="diwato-btn primary" onClick={() => dispatch({ type: "roll" } as DiceWasherTossAction)}>Roll</button>
+          <button className="diwato-btn primary" data-testid="hint-target-dice-washer-toss-roll" onClick={() => dispatch({ type: "roll" } as DiceWasherTossAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diwato-btn alt" onClick={() => dispatch({ type: "next" } as DiceWasherTossAction)}>Next</button>
+          <button className="diwato-btn alt" data-testid="hint-target-dice-washer-toss-next" onClick={() => dispatch({ type: "next" } as DiceWasherTossAction)}>Next</button>
         )}
       </div>
     </div>

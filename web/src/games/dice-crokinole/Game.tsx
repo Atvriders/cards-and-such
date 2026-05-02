@@ -41,10 +41,10 @@ export function DiceCrokinoleGame({ state, dispatch, onGameOver }: GameProps<Dic
       </div>
       <div className="diccro-actions">
         {state.phase === "rolling" && (
-          <button className="diccro-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCrokinoleAction)}>Roll</button>
+          <button className="diccro-btn primary" data-testid="hint-target-dice-crokinole-roll" onClick={() => dispatch({ type: "roll" } as DiceCrokinoleAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diccro-btn alt" onClick={() => dispatch({ type: "next" } as DiceCrokinoleAction)}>Next</button>
+          <button className="diccro-btn alt" data-testid="hint-target-dice-crokinole-next" onClick={() => dispatch({ type: "next" } as DiceCrokinoleAction)}>Next</button>
         )}
       </div>
     </div>

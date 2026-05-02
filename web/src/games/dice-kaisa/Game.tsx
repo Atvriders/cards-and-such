@@ -41,10 +41,10 @@ export function DiceKaisaGame({ state, dispatch, onGameOver }: GameProps<DiceKai
       </div>
       <div className="dickai-actions">
         {state.phase === "rolling" && (
-          <button className="dickai-btn primary" onClick={() => dispatch({ type: "roll" } as DiceKaisaAction)}>Roll</button>
+          <button className="dickai-btn primary" data-testid="hint-target-dice-kaisa-roll" onClick={() => dispatch({ type: "roll" } as DiceKaisaAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dickai-btn alt" onClick={() => dispatch({ type: "next" } as DiceKaisaAction)}>Next</button>
+          <button className="dickai-btn alt" data-testid="hint-target-dice-kaisa-next" onClick={() => dispatch({ type: "next" } as DiceKaisaAction)}>Next</button>
         )}
       </div>
     </div>

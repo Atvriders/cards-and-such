@@ -41,10 +41,10 @@ export function BocceSkillGame({ state, dispatch, onGameOver }: GameProps<BocceS
       </div>
       <div className="bocski-actions">
         {state.phase === "rolling" && (
-          <button className="bocski-btn primary" onClick={() => dispatch({ type: "roll" } as BocceSkillAction)}>Roll</button>
+          <button className="bocski-btn primary" data-testid="hint-target-bocce-skill-roll" onClick={() => dispatch({ type: "roll" } as BocceSkillAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="bocski-btn alt" onClick={() => dispatch({ type: "next" } as BocceSkillAction)}>Next</button>
+          <button className="bocski-btn alt" data-testid="hint-target-bocce-skill-next" onClick={() => dispatch({ type: "next" } as BocceSkillAction)}>Next</button>
         )}
       </div>
     </div>

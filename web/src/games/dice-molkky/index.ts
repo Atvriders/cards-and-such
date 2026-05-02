@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceMolkkyState, DiceMolkkyAction, DiceMolkkySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceMolkkyGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceMolkkyPlugin: GamePlugin<DiceMolkkyState, DiceMolkkyAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as DiceMolkkySettings),
   reducer,
   isTerminal,
+  hint: (state: DiceMolkkyState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-molkky-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-molkky-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceMolkkyGame,
 };

@@ -41,10 +41,10 @@ export function DiceGulfDartsGame({ state, dispatch, onGameOver }: GameProps<Dic
       </div>
       <div className="diguda-actions">
         {state.phase === "rolling" && (
-          <button className="diguda-btn primary" onClick={() => dispatch({ type: "roll" } as DiceGulfDartsAction)}>Roll</button>
+          <button className="diguda-btn primary" data-testid="hint-target-dice-gulf-darts-roll" onClick={() => dispatch({ type: "roll" } as DiceGulfDartsAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="diguda-btn alt" onClick={() => dispatch({ type: "next" } as DiceGulfDartsAction)}>Next</button>
+          <button className="diguda-btn alt" data-testid="hint-target-dice-gulf-darts-next" onClick={() => dispatch({ type: "next" } as DiceGulfDartsAction)}>Next</button>
         )}
       </div>
     </div>

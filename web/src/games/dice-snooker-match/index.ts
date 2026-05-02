@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceSnookerMatchState, DiceSnookerMatchAction, DiceSnookerMatchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceSnookerMatchGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceSnookerMatchPlugin: GamePlugin<DiceSnookerMatchState, DiceSnook
   initialState: (seed: number, s: S) => initialState(seed, s as DiceSnookerMatchSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceSnookerMatchState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-snooker-match-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-snooker-match-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceSnookerMatchGame,
 };

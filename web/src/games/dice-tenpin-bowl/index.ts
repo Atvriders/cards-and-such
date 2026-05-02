@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceTenpinBowlState, DiceTenpinBowlAction, DiceTenpinBowlSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceTenpinBowlGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceTenpinBowlPlugin: GamePlugin<DiceTenpinBowlState, DiceTenpinBow
   initialState: (seed: number, s: S) => initialState(seed, s as DiceTenpinBowlSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceTenpinBowlState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-tenpin-bowl-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-tenpin-bowl-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceTenpinBowlGame,
 };

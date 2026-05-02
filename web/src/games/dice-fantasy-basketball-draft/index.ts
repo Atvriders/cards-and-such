@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceFantasyBasketballDraftState, DiceFantasyBasketballDraftAction, DiceFantasyBasketballDraftSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceFantasyBasketballDraftGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceFantasyBasketballDraftPlugin: GamePlugin<DiceFantasyBasketballD
   initialState: (seed: number, s: S) => initialState(seed, s as DiceFantasyBasketballDraftSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceFantasyBasketballDraftState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-fantasy-basketball-draft-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-fantasy-basketball-draft-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceFantasyBasketballDraftGame,
 };

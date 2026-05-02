@@ -41,10 +41,10 @@ export function DicePursuePennantGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="dipupe-actions">
         {state.phase === "rolling" && (
-          <button className="dipupe-btn primary" onClick={() => dispatch({ type: "roll" } as DicePursuePennantAction)}>Roll</button>
+          <button className="dipupe-btn primary" data-testid="hint-target-dice-pursue-pennant-roll" onClick={() => dispatch({ type: "roll" } as DicePursuePennantAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dipupe-btn alt" onClick={() => dispatch({ type: "next" } as DicePursuePennantAction)}>Next</button>
+          <button className="dipupe-btn alt" data-testid="hint-target-dice-pursue-pennant-next" onClick={() => dispatch({ type: "next" } as DicePursuePennantAction)}>Next</button>
         )}
       </div>
     </div>

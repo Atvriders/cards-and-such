@@ -41,10 +41,10 @@ export function DiceStratBasketballGame({ state, dispatch, onGameOver }: GamePro
       </div>
       <div className="distba-actions">
         {state.phase === "rolling" && (
-          <button className="distba-btn primary" onClick={() => dispatch({ type: "roll" } as DiceStratBasketballAction)}>Roll</button>
+          <button className="distba-btn primary" data-testid="hint-target-dice-strat-basketball-roll" onClick={() => dispatch({ type: "roll" } as DiceStratBasketballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="distba-btn alt" onClick={() => dispatch({ type: "next" } as DiceStratBasketballAction)}>Next</button>
+          <button className="distba-btn alt" data-testid="hint-target-dice-strat-basketball-next" onClick={() => dispatch({ type: "next" } as DiceStratBasketballAction)}>Next</button>
         )}
       </div>
     </div>

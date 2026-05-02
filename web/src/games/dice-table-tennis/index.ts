@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceTableTennisState, DiceTableTennisAction, DiceTableTennisSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceTableTennisGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceTableTennisPlugin: GamePlugin<DiceTableTennisState, DiceTableTe
   initialState: (seed: number, s: S) => initialState(seed, s as DiceTableTennisSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceTableTennisState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-table-tennis-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-table-tennis-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceTableTennisGame,
 };

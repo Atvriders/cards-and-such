@@ -41,10 +41,10 @@ export function DiceKubbGame({ state, dispatch, onGameOver }: GameProps<DiceKubb
       </div>
       <div className="dickub-actions">
         {state.phase === "rolling" && (
-          <button className="dickub-btn primary" onClick={() => dispatch({ type: "roll" } as DiceKubbAction)}>Roll</button>
+          <button className="dickub-btn primary" data-testid="hint-target-dice-kubb-roll" onClick={() => dispatch({ type: "roll" } as DiceKubbAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dickub-btn alt" onClick={() => dispatch({ type: "next" } as DiceKubbAction)}>Next</button>
+          <button className="dickub-btn alt" data-testid="hint-target-dice-kubb-next" onClick={() => dispatch({ type: "next" } as DiceKubbAction)}>Next</button>
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceBoxingKoState, DiceBoxingKoAction, DiceBoxingKoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceBoxingKoGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceBoxingKoPlugin: GamePlugin<DiceBoxingKoState, DiceBoxingKoActio
   initialState: (seed: number, s: S) => initialState(seed, s as DiceBoxingKoSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceBoxingKoState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-boxing-ko-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-boxing-ko-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceBoxingKoGame,
 };

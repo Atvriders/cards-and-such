@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceRussianPyramidState, DiceRussianPyramidAction, DiceRussianPyramidSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceRussianPyramidGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceRussianPyramidPlugin: GamePlugin<DiceRussianPyramidState, DiceR
   initialState: (seed: number, s: S) => initialState(seed, s as DiceRussianPyramidSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceRussianPyramidState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-russian-pyramid-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-russian-pyramid-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceRussianPyramidGame,
 };

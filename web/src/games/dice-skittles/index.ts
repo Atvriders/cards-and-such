@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceSkittlesState, DiceSkittlesAction, DiceSkittlesSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceSkittlesGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceSkittlesPlugin: GamePlugin<DiceSkittlesState, DiceSkittlesActio
   initialState: (seed: number, s: S) => initialState(seed, s as DiceSkittlesSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceSkittlesState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-skittles-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-skittles-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceSkittlesGame,
 };

@@ -41,10 +41,10 @@ export function DiceKegelnGame({ state, dispatch, onGameOver }: GameProps<DiceKe
       </div>
       <div className="dickeg-actions">
         {state.phase === "rolling" && (
-          <button className="dickeg-btn primary" onClick={() => dispatch({ type: "roll" } as DiceKegelnAction)}>Roll</button>
+          <button className="dickeg-btn primary" data-testid="hint-target-dice-kegeln-roll" onClick={() => dispatch({ type: "roll" } as DiceKegelnAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dickeg-btn alt" onClick={() => dispatch({ type: "next" } as DiceKegelnAction)}>Next</button>
+          <button className="dickeg-btn alt" data-testid="hint-target-dice-kegeln-next" onClick={() => dispatch({ type: "next" } as DiceKegelnAction)}>Next</button>
         )}
       </div>
     </div>

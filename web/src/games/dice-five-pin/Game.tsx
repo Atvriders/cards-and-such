@@ -41,10 +41,10 @@ export function DiceFivePinGame({ state, dispatch, onGameOver }: GameProps<DiceF
       </div>
       <div className="difipi-actions">
         {state.phase === "rolling" && (
-          <button className="difipi-btn primary" onClick={() => dispatch({ type: "roll" } as DiceFivePinAction)}>Roll</button>
+          <button className="difipi-btn primary" data-testid="hint-target-dice-five-pin-roll" onClick={() => dispatch({ type: "roll" } as DiceFivePinAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="difipi-btn alt" onClick={() => dispatch({ type: "next" } as DiceFivePinAction)}>Next</button>
+          <button className="difipi-btn alt" data-testid="hint-target-dice-five-pin-next" onClick={() => dispatch({ type: "next" } as DiceFivePinAction)}>Next</button>
         )}
       </div>
     </div>

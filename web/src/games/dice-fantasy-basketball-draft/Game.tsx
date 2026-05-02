@@ -41,10 +41,10 @@ export function DiceFantasyBasketballDraftGame({ state, dispatch, onGameOver }: 
       </div>
       <div className="difbsk-actions">
         {state.phase === "rolling" && (
-          <button className="difbsk-btn primary" onClick={() => dispatch({ type: "roll" } as DiceFantasyBasketballDraftAction)}>Roll</button>
+          <button className="difbsk-btn primary" data-testid="hint-target-dice-fantasy-basketball-draft-roll" onClick={() => dispatch({ type: "roll" } as DiceFantasyBasketballDraftAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="difbsk-btn alt" onClick={() => dispatch({ type: "next" } as DiceFantasyBasketballDraftAction)}>Next</button>
+          <button className="difbsk-btn alt" data-testid="hint-target-dice-fantasy-basketball-draft-next" onClick={() => dispatch({ type: "next" } as DiceFantasyBasketballDraftAction)}>Next</button>
         )}
       </div>
     </div>

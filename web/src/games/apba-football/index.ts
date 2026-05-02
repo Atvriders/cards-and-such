@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ApbaFootballState, ApbaFootballAction, ApbaFootballSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ApbaFootballGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const apbaFootballPlugin: GamePlugin<ApbaFootballState, ApbaFootballActio
   initialState: (seed: number, s: S) => initialState(seed, s as ApbaFootballSettings),
   reducer,
   isTerminal,
+  hint: (state: ApbaFootballState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-apba-football-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-apba-football-next"]', pulses: 3 };
+    return null;
+  },
   component: ApbaFootballGame,
 };

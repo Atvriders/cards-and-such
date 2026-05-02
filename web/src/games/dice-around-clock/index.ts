@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceAroundClockState, DiceAroundClockAction, DiceAroundClockSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceAroundClockGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceAroundClockPlugin: GamePlugin<DiceAroundClockState, DiceAroundC
   initialState: (seed: number, s: S) => initialState(seed, s as DiceAroundClockSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceAroundClockState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-around-clock-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-around-clock-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceAroundClockGame,
 };

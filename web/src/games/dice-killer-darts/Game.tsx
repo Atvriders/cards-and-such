@@ -41,10 +41,10 @@ export function DiceKillerDartsGame({ state, dispatch, onGameOver }: GameProps<D
       </div>
       <div className="dikida-actions">
         {state.phase === "rolling" && (
-          <button className="dikida-btn primary" onClick={() => dispatch({ type: "roll" } as DiceKillerDartsAction)}>Roll</button>
+          <button className="dikida-btn primary" data-testid="hint-target-dice-killer-darts-roll" onClick={() => dispatch({ type: "roll" } as DiceKillerDartsAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dikida-btn alt" onClick={() => dispatch({ type: "next" } as DiceKillerDartsAction)}>Next</button>
+          <button className="dikida-btn alt" data-testid="hint-target-dice-killer-darts-next" onClick={() => dispatch({ type: "next" } as DiceKillerDartsAction)}>Next</button>
         )}
       </div>
     </div>

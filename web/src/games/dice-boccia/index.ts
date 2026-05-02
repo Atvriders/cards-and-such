@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceBocciaState, DiceBocciaAction, DiceBocciaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceBocciaGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceBocciaPlugin: GamePlugin<DiceBocciaState, DiceBocciaAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as DiceBocciaSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceBocciaState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-boccia-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-boccia-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceBocciaGame,
 };

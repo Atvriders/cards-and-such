@@ -41,10 +41,10 @@ export function BarDiceShipCaptainGame({ state, dispatch, onGameOver }: GameProp
       </div>
       <div className="badishca-actions">
         {state.phase === "rolling" && (
-          <button className="badishca-btn primary" onClick={() => dispatch({ type: "roll" } as BarDiceShipCaptainAction)}>Roll</button>
+          <button className="badishca-btn primary" data-testid="hint-target-bar-dice-ship-captain-roll" onClick={() => dispatch({ type: "roll" } as BarDiceShipCaptainAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="badishca-btn alt" onClick={() => dispatch({ type: "next" } as BarDiceShipCaptainAction)}>Next</button>
+          <button className="badishca-btn alt" data-testid="hint-target-bar-dice-ship-captain-next" onClick={() => dispatch({ type: "next" } as BarDiceShipCaptainAction)}>Next</button>
         )}
       </div>
     </div>

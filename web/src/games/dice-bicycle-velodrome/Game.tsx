@@ -41,10 +41,10 @@ export function DiceBicycleVelodromeGame({ state, dispatch, onGameOver }: GamePr
       </div>
       <div className="dibive-actions">
         {state.phase === "rolling" && (
-          <button className="dibive-btn primary" onClick={() => dispatch({ type: "roll" } as DiceBicycleVelodromeAction)}>Roll</button>
+          <button className="dibive-btn primary" data-testid="hint-target-dice-bicycle-velodrome-roll" onClick={() => dispatch({ type: "roll" } as DiceBicycleVelodromeAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dibive-btn alt" onClick={() => dispatch({ type: "next" } as DiceBicycleVelodromeAction)}>Next</button>
+          <button className="dibive-btn alt" data-testid="hint-target-dice-bicycle-velodrome-next" onClick={() => dispatch({ type: "next" } as DiceBicycleVelodromeAction)}>Next</button>
         )}
       </div>
     </div>

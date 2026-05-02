@@ -41,10 +41,10 @@ export function DiceFormulaDeGame({ state, dispatch, onGameOver }: GameProps<Dic
       </div>
       <div className="difode-actions">
         {state.phase === "rolling" && (
-          <button className="difode-btn primary" onClick={() => dispatch({ type: "roll" } as DiceFormulaDeAction)}>Roll</button>
+          <button className="difode-btn primary" data-testid="hint-target-dice-formula-de-roll" onClick={() => dispatch({ type: "roll" } as DiceFormulaDeAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="difode-btn alt" onClick={() => dispatch({ type: "next" } as DiceFormulaDeAction)}>Next</button>
+          <button className="difode-btn alt" data-testid="hint-target-dice-formula-de-next" onClick={() => dispatch({ type: "next" } as DiceFormulaDeAction)}>Next</button>
         )}
       </div>
     </div>

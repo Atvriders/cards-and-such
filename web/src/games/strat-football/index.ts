@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { StratFootballState, StratFootballAction, StratFootballSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { StratFootballGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const stratFootballPlugin: GamePlugin<StratFootballState, StratFootballAc
   initialState: (seed: number, s: S) => initialState(seed, s as StratFootballSettings),
   reducer,
   isTerminal,
+  hint: (state: StratFootballState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-strat-football-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-strat-football-next"]', pulses: 3 };
+    return null;
+  },
   component: StratFootballGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceBaseballHighlightsState, DiceBaseballHighlightsAction, DiceBaseballHighlightsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceBaseballHighlightsGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceBaseballHighlightsPlugin: GamePlugin<DiceBaseballHighlightsStat
   initialState: (seed: number, s: S) => initialState(seed, s as DiceBaseballHighlightsSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceBaseballHighlightsState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-baseball-highlights-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-baseball-highlights-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceBaseballHighlightsGame,
 };

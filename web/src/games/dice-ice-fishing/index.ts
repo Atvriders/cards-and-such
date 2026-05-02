@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceIceFishingState, DiceIceFishingAction, DiceIceFishingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiceIceFishingGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const diceIceFishingPlugin: GamePlugin<DiceIceFishingState, DiceIceFishin
   initialState: (seed: number, s: S) => initialState(seed, s as DiceIceFishingSettings),
   reducer,
   isTerminal,
+  hint: (state: DiceIceFishingState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-ice-fishing-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-ice-fishing-next"]', pulses: 3 };
+    return null;
+  },
   component: DiceIceFishingGame,
 };

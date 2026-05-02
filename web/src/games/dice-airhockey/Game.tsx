@@ -41,10 +41,10 @@ export function DiceAirhockeyGame({ state, dispatch, onGameOver }: GameProps<Dic
       </div>
       <div className="dicair-actions">
         {state.phase === "rolling" && (
-          <button className="dicair-btn primary" onClick={() => dispatch({ type: "roll" } as DiceAirhockeyAction)}>Roll</button>
+          <button className="dicair-btn primary" data-testid="hint-target-dice-airhockey-roll" onClick={() => dispatch({ type: "roll" } as DiceAirhockeyAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dicair-btn alt" onClick={() => dispatch({ type: "next" } as DiceAirhockeyAction)}>Next</button>
+          <button className="dicair-btn alt" data-testid="hint-target-dice-airhockey-next" onClick={() => dispatch({ type: "next" } as DiceAirhockeyAction)}>Next</button>
         )}
       </div>
     </div>

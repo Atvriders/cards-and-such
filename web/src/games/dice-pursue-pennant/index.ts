@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DicePursuePennantState, DicePursuePennantAction, DicePursuePennantSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DicePursuePennantGame } from "./Game.js";
@@ -17,5 +17,11 @@ export const dicePursuePennantPlugin: GamePlugin<DicePursuePennantState, DicePur
   initialState: (seed: number, s: S) => initialState(seed, s as DicePursuePennantSettings),
   reducer,
   isTerminal,
+  hint: (state: DicePursuePennantState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-pursue-pennant-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-pursue-pennant-next"]', pulses: 3 };
+    return null;
+  },
   component: DicePursuePennantGame,
 };

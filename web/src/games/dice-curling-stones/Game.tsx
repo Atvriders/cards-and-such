@@ -41,10 +41,10 @@ export function DiceCurlingStonesGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="dicust-actions">
         {state.phase === "rolling" && (
-          <button className="dicust-btn primary" onClick={() => dispatch({ type: "roll" } as DiceCurlingStonesAction)}>Roll</button>
+          <button className="dicust-btn primary" data-testid="hint-target-dice-curling-stones-roll" onClick={() => dispatch({ type: "roll" } as DiceCurlingStonesAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
-          <button className="dicust-btn alt" onClick={() => dispatch({ type: "next" } as DiceCurlingStonesAction)}>Next</button>
+          <button className="dicust-btn alt" data-testid="hint-target-dice-curling-stones-next" onClick={() => dispatch({ type: "next" } as DiceCurlingStonesAction)}>Next</button>
         )}
       </div>
     </div>
