@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "./stores/auth.js";
 import { ToastHost } from "./ui/Toast.js";
@@ -19,6 +19,7 @@ import {
   hasSeenWelcomeTutorial,
   markWelcomeTutorialSeen,
 } from "./tutorials.js";
+import { searchAll, type SearchHit } from "./search.js";
 import "./AppShell.css";
 
 const CHANGELOG: Array<{ title: string; detail: string }> = [
@@ -58,6 +59,15 @@ export default function AppShell(): JSX.Element {
   });
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const categoriesRef = useRef<HTMLDivElement | null>(null);
+  const searchFormRef = useRef<HTMLFormElement | null>(null);
+
+  // Live-preview popover state. `searchTerm` is the immediate input value;
+  // `debouncedSearch` lags by 150ms so we don't rescore on every keystroke.
+  // `searchSelected` is -1 when nothing is highlighted (Enter → /search),
+  // 0..N-1 when a row is highlighted (Enter → that row's href).
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [searchSelected, setSearchSelected] = useState(-1);
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
   // Settings → Gameplay re-opens the carousel by dispatching a custom event.
   // Listening here keeps AppShell the single mount point.
@@ -112,6 +122,59 @@ export default function AppShell(): JSX.Element {
   useEffect(() => {
     if (searchOpen) searchInputRef.current?.focus();
   }, [searchOpen]);
+
+  // Debounce the search term by 150ms before recomputing the popover hits.
+  useEffect(() => {
+    const handle = window.setTimeout(() => setDebouncedSearch(searchTerm), 150);
+    return () => window.clearTimeout(handle);
+  }, [searchTerm]);
+
+  // Compute the top-3 game preview from the shared scorer. Limit=3 caps
+  // the games group; we only render games (no families/categories) in the
+  // header popover to keep it compact.
+  const popoverHits = useMemo<SearchHit[]>(() => {
+    const trimmed = debouncedSearch.trim();
+    if (trimmed.length < 2) return [];
+    const { topMatch, games } = searchAll(trimmed, 3);
+    const list: SearchHit[] = [];
+    if (topMatch && topMatch.kind === "game") list.push(topMatch);
+    for (const g of games) {
+      if (list.length >= 3) break;
+      list.push(g);
+    }
+    return list.slice(0, 3);
+  }, [debouncedSearch]);
+
+  const showPopover = popoverOpen
+    && searchOpen
+    && debouncedSearch.trim().length >= 2;
+
+  // Reset selection whenever the result set changes.
+  useEffect(() => { setSearchSelected(-1); }, [debouncedSearch]);
+
+  // Open the popover whenever the user is actively typing 2+ chars.
+  useEffect(() => {
+    if (searchTerm.trim().length >= 2) setPopoverOpen(true);
+  }, [searchTerm]);
+
+  // Outside-click + Escape close the popover. Mirrors the categories menu.
+  useEffect(() => {
+    if (!showPopover) return;
+    const onPointer = (e: MouseEvent): void => {
+      const root = searchFormRef.current;
+      if (root && e.target instanceof Node && root.contains(e.target)) return;
+      setPopoverOpen(false);
+    };
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === "Escape") setPopoverOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer, true);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer, true);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [showPopover]);
 
   // High-score notification: poll a lightweight endpoint; gracefully no-op offline.
   useEffect(() => {
@@ -191,14 +254,60 @@ export default function AppShell(): JSX.Element {
     }, 650);
   };
 
-  const submitSearch = (e: React.FormEvent): void => {
-    e.preventDefault();
+  const goToSearchPage = (): void => {
     const q = searchTerm.trim();
-    // Submit (Enter) escalates to the dedicated /search page so users
-    // get the deeper grouped + ranked view; the lobby's inline filter
-    // remains available for in-page filtering when not pressing Enter.
+    // Submit (Enter) without a popover selection escalates to the dedicated
+    // /search page so users get the deeper grouped + ranked view; the
+    // lobby's inline filter remains available when not pressing Enter.
     navigate(q ? `/search?q=${encodeURIComponent(q)}` : "/");
     setSearchOpen(false);
+    setPopoverOpen(false);
+    setMobileNavOpen(false);
+  };
+
+  const submitSearch = (e: React.FormEvent): void => {
+    e.preventDefault();
+    // If a popover row is highlighted, navigate to it. Selection at
+    // popoverHits.length is the "See all results" row, which falls
+    // through to /search just like an unselected Enter.
+    if (showPopover && searchSelected >= 0 && searchSelected < popoverHits.length) {
+      const target = popoverHits[searchSelected];
+      if (target) {
+        navigate(target.href);
+        setSearchOpen(false);
+        setPopoverOpen(false);
+        setMobileNavOpen(false);
+        return;
+      }
+    }
+    goToSearchPage();
+  };
+
+  const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (!showPopover || popoverHits.length === 0) {
+      if (e.key === "Escape") setPopoverOpen(false);
+      return;
+    }
+    // Navigation indices: -1 = input itself (Enter → /search), 0..N-1 =
+    // game rows, N = the "See all results" footer row. ArrowUp from row 0
+    // returns to the input so the input is never "trapped".
+    const max = popoverHits.length; // inclusive upper bound (the see-all row)
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSearchSelected((s) => Math.min(s + 1, max));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSearchSelected((s) => (s <= 0 ? -1 : s - 1));
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      setPopoverOpen(false);
+    }
+  };
+
+  const onPopoverRowClick = (hit: SearchHit): void => {
+    navigate(hit.href);
+    setSearchOpen(false);
+    setPopoverOpen(false);
     setMobileNavOpen(false);
   };
 
@@ -330,9 +439,11 @@ export default function AppShell(): JSX.Element {
             </svg>
           </button>
           <form
+            ref={searchFormRef}
             className={`header-search${searchOpen ? " is-open" : ""}`}
             onSubmit={submitSearch}
             role="search"
+            style={{ position: "relative" }}
           >
             <button
               type="button"
@@ -351,8 +462,123 @@ export default function AppShell(): JSX.Element {
               placeholder="Search games..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onBlur={() => { if (!searchTerm) setSearchOpen(false); }}
+              onKeyDown={onSearchKeyDown}
+              onFocus={() => {
+                if (searchTerm.trim().length >= 2) setPopoverOpen(true);
+              }}
+              role="combobox"
+              aria-autocomplete="list"
+              aria-expanded={showPopover}
+              aria-controls="header-search-popover"
+              aria-activedescendant={
+                showPopover && searchSelected >= 0
+                  ? `header-search-row-${searchSelected}`
+                  : undefined
+              }
             />
+            {showPopover && popoverHits.length > 0 ? (
+              <div
+                id="header-search-popover"
+                role="listbox"
+                data-testid="header-search-popover"
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 0.35rem)",
+                  right: 0,
+                  zIndex: 30,
+                  minWidth: "260px",
+                  maxWidth: "320px",
+                  maxHeight: "60vh",
+                  overflowY: "auto",
+                  background: "var(--bg-surface, #1f2937)",
+                  border: "1px solid var(--border, rgba(255,255,255,0.1))",
+                  borderRadius: "0.5rem",
+                  padding: "0.3rem",
+                  boxShadow: "0 12px 28px rgba(0,0,0,0.45)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.15rem",
+                }}
+              >
+                {popoverHits.map((hit, idx) => {
+                  const selected = idx === searchSelected;
+                  return (
+                    <button
+                      key={`${hit.kind}-${hit.id}`}
+                      type="button"
+                      role="option"
+                      id={`header-search-row-${idx}`}
+                      data-testid={`header-search-row-${idx}`}
+                      aria-selected={selected}
+                      onMouseEnter={() => setSearchSelected(idx)}
+                      onClick={() => onPopoverRowClick(hit)}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: "0.1rem",
+                        padding: "0.45rem 0.6rem",
+                        borderRadius: "0.35rem",
+                        border: "none",
+                        background: selected
+                          ? "rgba(129, 140, 248, 0.18)"
+                          : "transparent",
+                        color: "inherit",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        font: "inherit",
+                      }}
+                    >
+                      <span style={{ fontWeight: 600, fontSize: "0.9rem" }}>
+                        {hit.title}
+                      </span>
+                      {hit.description ? (
+                        <span
+                          style={{
+                            fontSize: "0.75rem",
+                            opacity: 0.7,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            maxWidth: "100%",
+                          }}
+                        >
+                          {hit.description}
+                        </span>
+                      ) : null}
+                    </button>
+                  );
+                })}
+                <button
+                  type="button"
+                  role="option"
+                  id={`header-search-row-${popoverHits.length}`}
+                  data-testid="header-search-see-all"
+                  aria-selected={searchSelected === popoverHits.length}
+                  onMouseEnter={() => setSearchSelected(popoverHits.length)}
+                  onClick={goToSearchPage}
+                  style={{
+                    marginTop: "0.2rem",
+                    padding: "0.45rem 0.6rem",
+                    borderTop: "1px solid var(--border, rgba(255,255,255,0.08))",
+                    borderRadius: "0.35rem",
+                    border: "none",
+                    background:
+                      searchSelected === popoverHits.length
+                        ? "rgba(129, 140, 248, 0.18)"
+                        : "transparent",
+                    color: "inherit",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    font: "inherit",
+                    fontSize: "0.8rem",
+                    opacity: 0.85,
+                  }}
+                >
+                  See all results for &ldquo;{searchTerm.trim()}&rdquo; →
+                </button>
+              </div>
+            ) : null}
           </form>
 
           <button

@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { GAMES } from "../games/registry.js";
-import { FAMILIES } from "../games/families.js";
-import type { GameCategory, GamePlugin } from "../platform/game-plugin/types.js";
 import { PageHead } from "../platform/PageHead.js";
+import { searchAll, type SearchHit } from "../platform/search.js";
 import "./SearchPage.css";
 
 /**
@@ -12,36 +10,14 @@ import "./SearchPage.css";
  * howToPlay, family ids, and category names; groups results into
  * Top match / Games / Families / Categories; supports keyboard nav,
  * recent searches, and inline highlighting via <mark>.
+ *
+ * The scoring/grouping itself lives in `../platform/search.ts` so the
+ * AppShell's live-preview popover can share the exact same ranking.
  */
-
-type ResultKind = "game" | "family" | "category";
-
-interface SearchHit {
-  kind: ResultKind;
-  /** Stable id used for testid + dedupe (game id, family id, or category name). */
-  id: string;
-  title: string;
-  description: string;
-  /** Where this hit links. */
-  href: string;
-  /** Score — higher is better. Used for ranking + picking the top match. */
-  score: number;
-}
 
 const RECENT_KEY = "cards-recent-searches";
 const RECENT_MAX = 10;
 const SUGGESTED: ReadonlyArray<string> = ["klondike", "poker", "wordle", "dice"];
-
-const CATEGORY_ORDER: GameCategory[] = [
-  "solitaire", "cards", "dice", "board", "arcade",
-];
-const CATEGORY_LABELS: Record<GameCategory, string> = {
-  solitaire: "Solitaire",
-  cards: "Cards",
-  dice: "Dice",
-  board: "Board",
-  arcade: "Arcade",
-};
 
 function readRecent(): string[] {
   try {
@@ -59,98 +35,6 @@ function writeRecent(list: string[]): void {
   try {
     localStorage.setItem(RECENT_KEY, JSON.stringify(list.slice(0, RECENT_MAX)));
   } catch { /* storage unavailable — silently skip */ }
-}
-
-/**
- * Score a single text field against the lowercased query. Title-class
- * fields should weigh more than description-class fields — the caller
- * passes a `weight` multiplier per field.
- *
- * Scoring tiers (per field):
- *   exact match         100
- *   word-boundary start  60
- *   substring contains   30
- *   no match              0
- */
-function scoreField(text: string | undefined, q: string, weight: number): number {
-  if (!text || !q) return 0;
-  const lower = text.toLowerCase();
-  if (lower === q) return 100 * weight;
-  // Word-boundary start: matches `q` at start or after non-word char.
-  // Cheap regex; q comes from user input so we escape special chars.
-  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  if (new RegExp(`(^|[^a-z0-9])${escaped}`, "i").test(lower)) return 60 * weight;
-  if (lower.includes(q)) return 30 * weight;
-  return 0;
-}
-
-/**
- * Build the ranked hit list for `q` (already trimmed + lowercased).
- * Empty `q` returns []. Caps groups at sensible sizes so the page
- * doesn't scroll forever on a generic query like "k".
- */
-function buildHits(q: string): SearchHit[] {
-  if (!q) return [];
-  const out: SearchHit[] = [];
-  const safeGames = GAMES.filter((g): g is GamePlugin => g != null);
-
-  // Games: weighted across title (3x), category (1.5x), description (1x), howToPlay (0.5x).
-  for (const g of safeGames) {
-    const score
-      = scoreField(g.title, q, 3)
-      + scoreField(g.category, q, 1.5)
-      + scoreField(g.description, q, 1)
-      + scoreField(g.howToPlay, q, 0.5);
-    if (score > 0) {
-      out.push({
-        kind: "game",
-        id: g.id,
-        title: g.title,
-        description: g.description,
-        href: `/play/${g.id}`,
-        score,
-      });
-    }
-  }
-
-  // Families: weighted across id, label (3x), description (1x).
-  for (const fam of FAMILIES) {
-    const score
-      = scoreField(fam.id, q, 2)
-      + scoreField(fam.label, q, 3)
-      + scoreField(fam.description, q, 1);
-    if (score > 0) {
-      out.push({
-        kind: "family",
-        id: fam.id,
-        title: fam.label,
-        description: fam.description,
-        // Families don't have their own page — surface them via the
-        // lobby search so the existing FamilyPicker opens.
-        href: `/?q=${encodeURIComponent(fam.label)}`,
-        score,
-      });
-    }
-  }
-
-  // Categories: a fixed list of 5; surface them as "Show all N <cat> games".
-  for (const cat of CATEGORY_ORDER) {
-    const score = scoreField(cat, q, 4) + scoreField(CATEGORY_LABELS[cat], q, 4);
-    if (score > 0) {
-      const count = safeGames.filter((g) => g.category === cat).length;
-      out.push({
-        kind: "category",
-        id: cat,
-        title: `Show all ${count.toLocaleString()} ${CATEGORY_LABELS[cat]} games`,
-        description: `Browse the full ${CATEGORY_LABELS[cat]} catalog.`,
-        href: `/category/${cat}`,
-        score,
-      });
-    }
-  }
-
-  out.sort((a, b) => b.score - a.score);
-  return out;
 }
 
 /**
@@ -223,31 +107,12 @@ export default function SearchPage(): JSX.Element {
   }, [debounced]);
 
   const lowered = debounced.trim().toLowerCase();
-  const hits = useMemo(() => buildHits(lowered), [lowered]);
-
-  // Group hits by kind (preserve score order within each group).
-  const { topMatch, games, families, categories } = useMemo(() => {
-    const allGames = hits.filter((h) => h.kind === "game");
-    const allFamilies = hits.filter((h) => h.kind === "family");
-    const allCats = hits.filter((h) => h.kind === "category");
-    const top = hits.length > 0 ? hits[0]! : null;
-    // Drop the top match from its source group so it isn't rendered twice.
-    const games = top && top.kind === "game"
-      ? allGames.filter((g) => g.id !== top.id)
-      : allGames;
-    const families = top && top.kind === "family"
-      ? allFamilies.filter((f) => f.id !== top.id)
-      : allFamilies;
-    const categories = top && top.kind === "category"
-      ? allCats.filter((c) => c.id !== top.id)
-      : allCats;
-    return {
-      topMatch: top,
-      games: games.slice(0, 30),
-      families: families.slice(0, 12),
-      categories: categories.slice(0, 5),
-    };
-  }, [hits]);
+  // Shared scoring/grouping lives in platform/search.ts so the AppShell
+  // header popover can rank with the exact same weights.
+  const { topMatch, games, families, categories } = useMemo(
+    () => searchAll(lowered),
+    [lowered],
+  );
 
   // Flat list used for keyboard navigation — top match first, then
   // games, families, categories in display order.
