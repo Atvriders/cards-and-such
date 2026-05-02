@@ -639,8 +639,12 @@ export default function SettingsPage(): JSX.Element {
               aria-checked={theme === CUSTOM_THEME_ID}
               className={`theme-chip${theme === CUSTOM_THEME_ID ? " is-selected" : ""}`}
               onClick={() => setTheme(CUSTOM_THEME_ID)}
-              onMouseEnter={() => previewTheme(DEFAULT_THEME, customTheme.accent)}
-              onFocus={() => previewTheme(DEFAULT_THEME, customTheme.accent)}
+              onMouseEnter={() =>
+                previewTheme(DEFAULT_THEME, customTheme.accent, customTheme.bg, customTheme.surface)
+              }
+              onFocus={() =>
+                previewTheme(DEFAULT_THEME, customTheme.accent, customTheme.bg, customTheme.surface)
+              }
               onBlur={() => applySavedTheme()}
               data-testid="theme-row-custom"
               title="Custom"
@@ -657,6 +661,34 @@ export default function SettingsPage(): JSX.Element {
           </div>
           {theme === CUSTOM_THEME_ID && (
             <div className="settings-row" data-testid="theme-custom-controls">
+              <label className="settings-field-label settings-field-label--inline">
+                Background color
+                <input
+                  type="color"
+                  value={customTheme.bg}
+                  onChange={(e) => {
+                    const next = { ...customTheme, bg: e.target.value };
+                    setCustomTheme(next);
+                  }}
+                  data-testid="theme-custom-bg"
+                  aria-label="Custom background color"
+                  className="settings-color"
+                />
+              </label>
+              <label className="settings-field-label settings-field-label--inline">
+                Surface color
+                <input
+                  type="color"
+                  value={customTheme.surface}
+                  onChange={(e) => {
+                    const next = { ...customTheme, surface: e.target.value };
+                    setCustomTheme(next);
+                  }}
+                  data-testid="theme-custom-surface"
+                  aria-label="Custom surface color"
+                  className="settings-color"
+                />
+              </label>
               <label className="settings-field-label settings-field-label--inline">
                 Accent color
                 <input
