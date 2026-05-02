@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveStudPokerState, FiveStudPokerAction, FiveStudPokerSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bestFiveStud } from "./state.js";
+import { handStrength } from "../_shared/poker.js";
 import { FiveStudPokerGame } from "./Game.js";
 
 const settings = {
@@ -21,5 +22,27 @@ export const fiveStudPokerPlugin: GamePlugin<FiveStudPokerState, FiveStudPokerAc
   initialState: (seed: number, s: S) => initialState(seed, s as FiveStudPokerSettings),
   reducer,
   isTerminal,
+  hint: (state: FiveStudPokerState): HintTarget | null => {
+    if (state.done) return null;
+    if (state.street === 0) {
+      return { selector: '[data-testid="hint-target-fivestud-deal"]', pulses: 3 };
+    }
+    if (state.toAct !== "player") return null;
+    const toCall = Math.max(0, state.cpu.bet - state.player.bet);
+    let strength = 0.25;
+    if (state.player.cards.length >= 5) {
+      strength = handStrength(bestFiveStud(state.player.cards));
+    } else if (state.player.cards.length >= 2) {
+      const ranks = state.player.cards.map((c) => (c.rank === 1 ? 14 : c.rank));
+      const counts = new Map<number, number>();
+      for (const r of ranks) counts.set(r, (counts.get(r) ?? 0) + 1);
+      const mx = Math.max(0, ...counts.values());
+      strength = mx >= 3 ? 0.6 : mx === 2 ? 0.4 : 0.2 + (Math.max(...ranks) - 2) / 50;
+    }
+    if (toCall === 0) return { selector: '[data-testid="hint-target-fivestud-check"]', pulses: 3 };
+    const odds = toCall / (state.pot + toCall);
+    if (strength > odds) return { selector: '[data-testid="hint-target-fivestud-call"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-fivestud-fold"]', pulses: 3 };
+  },
   component: FiveStudPokerGame,
 };

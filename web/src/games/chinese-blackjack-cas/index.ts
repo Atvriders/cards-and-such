@@ -4,7 +4,6 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { ChineseBlackjackCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-const hint = (state: ChineseBlackjackCasState): HintTarget | null => (state.phase === "play" ? { selector: '[data-testid="hint-target-chinese-blackjack-cas-primary"]', pulses: 3 } : null);
 export const chineseBlackjackCasPlugin: GamePlugin<ChineseBlackjackCasState, ChineseBlackjackCasAction, typeof settings> = {
   id: "chinese-blackjack-cas", title: "Chinese Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
@@ -20,5 +19,5 @@ export const chineseBlackjackCasPlugin: GamePlugin<ChineseBlackjackCasState, Chi
     if (total >= 17) return { selector: '[data-testid="hint-target-chinese-blackjack-cas-stand"]', pulses: 3 };
     return { selector: '[data-testid="hint-target-chinese-blackjack-cas-hit"]', pulses: 3 };
   },
-  reducer, isTerminal, hint, component: ChineseBlackjackCasGame,
+  reducer, isTerminal, component: ChineseBlackjackCasGame,
 };

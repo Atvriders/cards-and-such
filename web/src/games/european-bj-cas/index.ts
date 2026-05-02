@@ -4,7 +4,6 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { EuropeanBjCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-const hint = (state: EuropeanBjCasState): HintTarget | null => (state.phase === "play" ? { selector: '[data-testid="hint-target-european-bj-cas-primary"]', pulses: 3 } : null);
 export const europeanBjCasPlugin: GamePlugin<EuropeanBjCasState, EuropeanBjCasAction, typeof settings> = {
   id: "european-bj-cas", title: "European Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
@@ -20,5 +19,5 @@ export const europeanBjCasPlugin: GamePlugin<EuropeanBjCasState, EuropeanBjCasAc
     if (total >= 17) return { selector: '[data-testid="hint-target-european-bj-cas-stand"]', pulses: 3 };
     return { selector: '[data-testid="hint-target-european-bj-cas-hit"]', pulses: 3 };
   },
-  reducer, isTerminal, hint, component: EuropeanBjCasGame,
+  reducer, isTerminal, component: EuropeanBjCasGame,
 };

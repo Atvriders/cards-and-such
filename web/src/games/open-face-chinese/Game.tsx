@@ -65,9 +65,9 @@ export function OpenFaceChineseGame({ state, dispatch, onGameOver }: GameProps<O
             <div className={cls("cardlabel")}>Place this card:</div>
             <div className={cls("cardbox")}><Card card={cur} /></div>
             <div className={cls("placeactions")}>
-              <button className={cls("btn")} onClick={() => dis({ type: "place", row: "top" })} disabled={!canTop}>Top</button>
-              <button className={cls("btn")} onClick={() => dis({ type: "place", row: "middle" })} disabled={!canMid}>Mid</button>
-              <button className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom" })} disabled={!canBot}>Bot</button>
+              <button data-testid="hint-target-ofc-top" className={cls("btn")} onClick={() => dis({ type: "place", row: "top" })} disabled={!canTop}>Top</button>
+              <button data-testid="hint-target-ofc-mid" className={cls("btn")} onClick={() => dis({ type: "place", row: "middle" })} disabled={!canMid}>Mid</button>
+              <button data-testid="hint-target-ofc-bot" className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom" })} disabled={!canBot}>Bot</button>
             </div>
           </>
         )}
@@ -78,14 +78,14 @@ export function OpenFaceChineseGame({ state, dispatch, onGameOver }: GameProps<O
       <div className={cls("actions")}>
         {state.phase === "scored" && (
           <>
-            <button className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "next" })}>Next Round</button>
+            <button data-testid="hint-target-ofc-deal" className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "next" })}>Next Round</button>
           </>
         )}
         {state.phase === "placing" && state.cardIdx === 0 && state.round === 0 && (
-          <button className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button data-testid="hint-target-ofc-deal" className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
         {state.phase === "placing" && state.cardIdx === 0 && state.round > 0 && state.player.top.length === 0 && (
-          <button className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "deal" })}>Deal Round {state.round + 1}</button>
+          <button data-testid="hint-target-ofc-deal" className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "deal" })}>Deal Round {state.round + 1}</button>
         )}
       </div>
 

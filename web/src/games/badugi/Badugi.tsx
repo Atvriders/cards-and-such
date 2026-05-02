@@ -100,22 +100,22 @@ export function Badugi({
 
       <div className="bg-actions">
         {(phase === "waiting" || phase === "showdown") && !terminal && (
-          <button className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
+          <button data-testid="hint-target-badugi-deal" className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
         )}
         {isBetting && playerTurn && (
           <>
-            <button className="btn-fold" onClick={() => dis({ type: "fold" })}>Fold</button>
-            {canCheck && <button className="btn-check" onClick={() => dis({ type: "check" })}>Check</button>}
-            {canCall && <button className="btn-call" onClick={() => dis({ type: "call" })}>Call ${toCall}</button>}
+            <button data-testid="hint-target-badugi-fold" className="btn-fold" onClick={() => dis({ type: "fold" })}>Fold</button>
+            {canCheck && <button data-testid="hint-target-badugi-check" className="btn-check" onClick={() => dis({ type: "check" })}>Check</button>}
+            {canCall && <button data-testid="hint-target-badugi-call" className="btn-call" onClick={() => dis({ type: "call" })}>Call ${toCall}</button>}
             {canRaise && (
-              <button className="btn-raise" onClick={() => dis({ type: "raise" })}>
+              <button data-testid="hint-target-badugi-raise" className="btn-raise" onClick={() => dis({ type: "raise" })}>
                 {toCall > 0 ? `Raise $${toCall + ante}` : `Bet $${ante}`}
               </button>
             )}
           </>
         )}
         {isDraw && (
-          <button className="btn-draw" onClick={() => dis({ type: "draw" })}>
+          <button data-testid="hint-target-badugi-draw" className="btn-draw" onClick={() => dis({ type: "draw" })}>
             {selectedToDiscard.length === 0 ? "Stand Pat" : `Draw ${selectedToDiscard.length} card${selectedToDiscard.length !== 1 ? "s" : ""}`}
           </button>
         )}

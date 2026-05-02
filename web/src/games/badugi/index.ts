@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BadugiState, BadugiAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, evaluateBadugi } from "./state.js";
 import { Badugi } from "./Badugi.js";
 
 export const badugiSettings = {
@@ -44,5 +44,24 @@ Settings: Starting Bankroll ($500/$1000/$5000), Ante Size ($10/$25/$50). The gam
   initialState: (seed: number, settings: BadugiSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BadugiState): HintTarget | null => {
+    if (state.phase === "waiting" || state.phase === "showdown") {
+      if (state.bankroll <= 0 || state.botBankroll <= 0) return null;
+      return { selector: '[data-testid="hint-target-badugi-deal"]', pulses: 3 };
+    }
+    const isBetting = state.phase === "bet1" || state.phase === "bet2" || state.phase === "bet3";
+    const isDraw = state.phase === "draw1" || state.phase === "draw2" || state.phase === "draw3";
+    if (isDraw) return { selector: '[data-testid="hint-target-badugi-draw"]', pulses: 3 };
+    if (!isBetting || !state.playerTurn) return null;
+    const toCall = Math.max(0, state.botBet - state.playerBet);
+    const r = evaluateBadugi(state.playerHand);
+    // Strength: badugi size + lowness of high card (lower = better).
+    const high = r.cards.length ? Math.max(...r.cards.map((c) => (c.rank === 1 ? 1 : c.rank))) : 14;
+    const strength = Math.min(0.95, r.size * 0.2 + Math.max(0, 13 - high) * 0.03);
+    if (toCall === 0) return { selector: '[data-testid="hint-target-badugi-check"]', pulses: 3 };
+    const odds = toCall / (state.pot + toCall);
+    if (strength > odds) return { selector: '[data-testid="hint-target-badugi-call"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-badugi-fold"]', pulses: 3 };
+  },
   component: Badugi,
 };

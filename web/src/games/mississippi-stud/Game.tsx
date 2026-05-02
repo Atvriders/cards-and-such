@@ -66,14 +66,14 @@ export function MississippiStudGame({
 
       <div className="msstud-actions">
         {(phase === "ante" || phase === "settled") && !terminal && (
-          <button className="primary" onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button data-testid="hint-target-mississippi-stud-deal" className="primary" onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
         {(phase === "third-street" || phase === "fourth-street" || phase === "fifth-street") && (
           <>
-            <button onClick={() => dis({ type: "bet", multiplier: 1 })}>Bet 1× (${ante})</button>
-            <button onClick={() => dis({ type: "bet", multiplier: 2 })} disabled={bankroll < ante * 2}>Bet 2× (${ante * 2})</button>
-            <button onClick={() => dis({ type: "bet", multiplier: 3 })} disabled={bankroll < ante * 3}>Bet 3× (${ante * 3})</button>
-            <button className="fold-btn" onClick={() => dis({ type: "fold" })}>Fold</button>
+            <button data-testid="hint-target-mississippi-stud-bet1" onClick={() => dis({ type: "bet", multiplier: 1 })}>Bet 1× (${ante})</button>
+            <button data-testid="hint-target-mississippi-stud-bet2" onClick={() => dis({ type: "bet", multiplier: 2 })} disabled={bankroll < ante * 2}>Bet 2× (${ante * 2})</button>
+            <button data-testid="hint-target-mississippi-stud-bet3" onClick={() => dis({ type: "bet", multiplier: 3 })} disabled={bankroll < ante * 3}>Bet 3× (${ante * 3})</button>
+            <button data-testid="hint-target-mississippi-stud-fold" className="fold-btn" onClick={() => dis({ type: "fold" })}>Fold</button>
           </>
         )}
         {terminal && <div className="msstud-game-over">Game Over — Final: ${terminal.score}</div>}

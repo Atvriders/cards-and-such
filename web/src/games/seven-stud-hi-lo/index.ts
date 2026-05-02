@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SevenStudHiLoState, SevenStudHiLoAction, SevenStudHiLoSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bestFive, bestLow8 } from "./state.js";
+import { handStrength } from "../_shared/poker.js";
 import { SevenStudHiLoGame } from "./Game.js";
 
 const settings = {
@@ -21,5 +22,30 @@ export const sevenStudHiLoPlugin: GamePlugin<SevenStudHiLoState, SevenStudHiLoAc
   initialState: (seed: number, s: S) => initialState(seed, s as SevenStudHiLoSettings),
   reducer,
   isTerminal,
+  hint: (state: SevenStudHiLoState): HintTarget | null => {
+    if (state.done) return null;
+    if (state.street === 0) {
+      return { selector: '[data-testid="hint-target-sevenstud-hilo-deal"]', pulses: 3 };
+    }
+    if (state.toAct !== "player") return null;
+    const toCall = Math.max(0, state.cpu.bet - state.player.bet);
+    let strength = 0.25;
+    if (state.player.cards.length >= 5) {
+      const high = handStrength(bestFive(state.player.cards));
+      const low = bestLow8(state.player.cards).ok ? 0.5 : 0;
+      strength = Math.min(0.95, Math.max(high, (high + low) / 1.5));
+    } else if (state.player.cards.length >= 3) {
+      const ranks = state.player.cards.map((c) => (c.rank === 1 ? 14 : c.rank));
+      const counts = new Map<number, number>();
+      for (const r of ranks) counts.set(r, (counts.get(r) ?? 0) + 1);
+      const mx = Math.max(0, ...counts.values());
+      const lows = state.player.cards.filter((c) => c.rank === 1 || c.rank <= 8).length;
+      strength = mx >= 3 ? 0.6 : mx === 2 ? 0.4 : 0.2 + (lows / 7) * 0.25;
+    }
+    if (toCall === 0) return { selector: '[data-testid="hint-target-sevenstud-hilo-check"]', pulses: 3 };
+    const odds = toCall / (state.pot + toCall);
+    if (strength > odds) return { selector: '[data-testid="hint-target-sevenstud-hilo-call"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-sevenstud-hilo-fold"]', pulses: 3 };
+  },
   component: SevenStudHiLoGame,
 };

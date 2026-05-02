@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PineappleOfcState, PineappleOfcAction, PineappleOfcSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PineappleOfcGame } from "./Game.js";
@@ -20,5 +20,26 @@ export const pineappleOfcPlugin: GamePlugin<PineappleOfcState, PineappleOfcActio
   initialState: (seed: number, s: S) => initialState(seed, s as PineappleOfcSettings),
   reducer,
   isTerminal,
+  hint: (state: PineappleOfcState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-pineap-ofc-deal"]', pulses: 3 };
+    if (state.phase === "initial-place" && state.hand.length === 0 && state.player.top.length === 0) {
+      return { selector: '[data-testid="hint-target-pineap-ofc-deal"]', pulses: 3 };
+    }
+    if ((state.phase === "initial-place" || state.phase === "draw-place") && state.hand.length > 0) {
+      // Suggest a row for the highest-rank pending card.
+      const ranks = state.hand.map((c) => (c.rank === 1 ? 14 : c.rank));
+      const r = Math.max(...ranks);
+      const canTop = state.player.top.length < 3;
+      const canMid = state.player.middle.length < 5;
+      const canBot = state.player.bottom.length < 5;
+      if (r >= 11 && canBot) return { selector: '[data-testid="hint-target-pineap-ofc-bot"]', pulses: 3 };
+      if (r <= 6 && canTop) return { selector: '[data-testid="hint-target-pineap-ofc-top"]', pulses: 3 };
+      if (canMid) return { selector: '[data-testid="hint-target-pineap-ofc-mid"]', pulses: 3 };
+      if (canBot) return { selector: '[data-testid="hint-target-pineap-ofc-bot"]', pulses: 3 };
+      if (canTop) return { selector: '[data-testid="hint-target-pineap-ofc-top"]', pulses: 3 };
+    }
+    return null;
+  },
   component: PineappleOfcGame,
 };

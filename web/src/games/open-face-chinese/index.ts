@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OpenFaceChineseState, OpenFaceChineseAction, OpenFaceChineseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OpenFaceChineseGame } from "./Game.js";
@@ -20,5 +20,26 @@ export const openFaceChinesePlugin: GamePlugin<OpenFaceChineseState, OpenFaceChi
   initialState: (seed: number, s: S) => initialState(seed, s as OpenFaceChineseSettings),
   reducer,
   isTerminal,
+  hint: (state: OpenFaceChineseState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-ofc-deal"]', pulses: 3 };
+    if (state.phase === "placing" && state.cardIdx === 0 && state.player.top.length === 0) {
+      return { selector: '[data-testid="hint-target-ofc-deal"]', pulses: 3 };
+    }
+    if (state.phase === "placing" && state.cardIdx < state.hand.length) {
+      const card = state.hand[state.cardIdx]!;
+      const r = card.rank === 1 ? 14 : card.rank;
+      const canTop = state.player.top.length < 3;
+      const canMid = state.player.middle.length < 5;
+      const canBot = state.player.bottom.length < 5;
+      // Heuristic: low cards go top (3-card hand bracket), high cards go bottom (strongest row).
+      if (r >= 11 && canBot) return { selector: '[data-testid="hint-target-ofc-bot"]', pulses: 3 };
+      if (r <= 6 && canTop) return { selector: '[data-testid="hint-target-ofc-top"]', pulses: 3 };
+      if (canMid) return { selector: '[data-testid="hint-target-ofc-mid"]', pulses: 3 };
+      if (canBot) return { selector: '[data-testid="hint-target-ofc-bot"]', pulses: 3 };
+      if (canTop) return { selector: '[data-testid="hint-target-ofc-top"]', pulses: 3 };
+    }
+    return null;
+  },
   component: OpenFaceChineseGame,
 };

@@ -4,7 +4,6 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { AtlanticCityBjCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-const hint = (state: AtlanticCityBjCasState): HintTarget | null => (state.phase === "play" ? { selector: '[data-testid="hint-target-atlantic-city-bj-cas-primary"]', pulses: 3 } : null);
 export const atlanticCityBjCasPlugin: GamePlugin<AtlanticCityBjCasState, AtlanticCityBjCasAction, typeof settings> = {
   id: "atlantic-city-bj-cas", title: "Atlantic City Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
@@ -20,5 +19,5 @@ export const atlanticCityBjCasPlugin: GamePlugin<AtlanticCityBjCasState, Atlanti
     if (total >= 17) return { selector: '[data-testid="hint-target-atlantic-city-bj-cas-stand"]', pulses: 3 };
     return { selector: '[data-testid="hint-target-atlantic-city-bj-cas-hit"]', pulses: 3 };
   },
-  reducer, isTerminal, hint, component: AtlanticCityBjCasGame,
+  reducer, isTerminal, component: AtlanticCityBjCasGame,
 };

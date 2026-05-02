@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShortDeckHoldemState, ShortDeckHoldemAction, ShortDeckHoldemSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bestFiveSD } from "./state.js";
+import { handStrength } from "../_shared/poker.js";
 import { ShortDeckHoldemGame } from "./Game.js";
 
 const settings = {
@@ -21,5 +22,26 @@ export const shortDeckHoldemPlugin: GamePlugin<ShortDeckHoldemState, ShortDeckHo
   initialState: (seed: number, s: S) => initialState(seed, s as ShortDeckHoldemSettings),
   reducer,
   isTerminal,
+  hint: (state: ShortDeckHoldemState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "showdown" || (state.phase === "preflop" && state.player.hole.length === 0)) {
+      return { selector: '[data-testid="hint-target-sdholdem-deal"]', pulses: 3 };
+    }
+    if (state.toAct !== "player" || state.pendingDiscard) return null;
+    const toCall = Math.max(0, state.cpu.bet - state.player.bet);
+    let strength = 0.25;
+    if (state.community.length >= 3 && state.player.hole.length === 2) {
+      strength = handStrength(bestFiveSD([...state.player.hole, ...state.community]));
+    } else if (state.player.hole.length === 2) {
+      const [a, b] = state.player.hole;
+      const ra = a!.rank === 1 ? 14 : a!.rank;
+      const rb = b!.rank === 1 ? 14 : b!.rank;
+      strength = 0.25 + (Math.max(ra, rb) - 6) / 22 + (ra === rb ? 0.18 : 0) + (a!.suit === b!.suit ? 0.05 : 0);
+    }
+    if (toCall === 0) return { selector: '[data-testid="hint-target-sdholdem-check"]', pulses: 3 };
+    const odds = toCall / (state.pot + toCall);
+    if (strength > odds) return { selector: '[data-testid="hint-target-sdholdem-call"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-sdholdem-fold"]', pulses: 3 };
+  },
   component: ShortDeckHoldemGame,
 };

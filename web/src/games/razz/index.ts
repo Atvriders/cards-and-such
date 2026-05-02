@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RazzState, RazzAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, razzRank } from "./state.js";
 import { Razz } from "./Razz.js";
 
 export const razzSettings = {
@@ -44,5 +44,28 @@ Settings: Starting Bankroll ($500/$1000/$5000), Ante Size ($5/$10/$25).`,
   initialState: (seed: number, settings: RazzSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: RazzState): HintTarget | null => {
+    if (state.phase === "waiting" || state.phase === "showdown") {
+      if (state.player.bankroll <= 0 || state.bot.bankroll <= 0) return null;
+      return { selector: '[data-testid="hint-target-razz-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "betting" || !state.playerTurn) return null;
+    const toCall = Math.max(0, state.bot.bet - state.player.bet);
+    // Razz: lower hand = better. Approximate strength as proportion of low (<=8) cards.
+    let strength = 0.3;
+    if (state.player.cards.length >= 5) {
+      const ranks = razzRank(state.player.cards);
+      // Lower ranks => higher strength.
+      const sum = ranks.reduce((a, b) => a + b, 0);
+      strength = Math.max(0.1, Math.min(0.9, 1 - sum / 50));
+    } else {
+      const lows = state.player.cards.filter((c) => c.rank === 1 || c.rank <= 7).length;
+      strength = 0.2 + (lows / Math.max(1, state.player.cards.length)) * 0.5;
+    }
+    if (toCall === 0) return { selector: '[data-testid="hint-target-razz-check"]', pulses: 3 };
+    const odds = toCall / (state.pot + toCall);
+    if (strength > odds) return { selector: '[data-testid="hint-target-razz-call"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-razz-fold"]', pulses: 3 };
+  },
   component: Razz,
 };

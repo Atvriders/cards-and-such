@@ -83,9 +83,9 @@ export function PineappleOfcGame({ state, dispatch, onGameOver }: GameProps<Pine
             </div>
             {inHand && (
               <div className={cls("placeactions")}>
-                <button className={cls("btn")} onClick={() => dis({ type: "place", row: "top", cardIndex: selectedIdx })} disabled={!canTop}>Top</button>
-                <button className={cls("btn")} onClick={() => dis({ type: "place", row: "middle", cardIndex: selectedIdx })} disabled={!canMid}>Mid</button>
-                <button className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom", cardIndex: selectedIdx })} disabled={!canBot}>Bot</button>
+                <button data-testid="hint-target-pineap-ofc-top" className={cls("btn")} onClick={() => dis({ type: "place", row: "top", cardIndex: selectedIdx })} disabled={!canTop}>Top</button>
+                <button data-testid="hint-target-pineap-ofc-mid" className={cls("btn")} onClick={() => dis({ type: "place", row: "middle", cardIndex: selectedIdx })} disabled={!canMid}>Mid</button>
+                <button data-testid="hint-target-pineap-ofc-bot" className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom", cardIndex: selectedIdx })} disabled={!canBot}>Bot</button>
               </div>
             )}
           </>
@@ -96,10 +96,10 @@ export function PineappleOfcGame({ state, dispatch, onGameOver }: GameProps<Pine
 
       <div className={cls("actions")}>
         {state.phase === "scored" && (
-          <button className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "next" })}>Next Round</button>
+          <button data-testid="hint-target-pineap-ofc-deal" className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "next" })}>Next Round</button>
         )}
         {state.phase === "initial-place" && state.player.top.length === 0 && state.player.middle.length === 0 && state.player.bottom.length === 0 && state.hand.length === 0 && (
-          <button className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button data-testid="hint-target-pineap-ofc-deal" className={`${cls("btn")} ${cls("deal")}`} onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
       </div>
 
