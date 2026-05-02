@@ -20,6 +20,7 @@ jobs:
       - run: npm -w @cards/shared run test
       - run: npm -w @cards/server run test
       - run: npm -w @cards/web run test
+      - run: npm run build
 
   e2e:
     runs-on: ubuntu-latest
