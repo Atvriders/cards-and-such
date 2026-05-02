@@ -1,9 +1,30 @@
+/*
+ * Daily Challenge page.
+ *
+ * Uses CSS custom properties so dot colors etc. theme cleanly with the rest
+ * of the app. Falls back to safe defaults when the host app doesn't define
+ * them.
+ */
+
 .daily-page {
+  --daily-accent: var(--cards-accent, #6366f1);
+  --daily-accent-strong: var(--cards-accent-strong, #4f46e5);
+  --daily-success: var(--cards-success, #22c55e);
+  --daily-warn: var(--cards-warn, #f59e0b);
+  --daily-surface: var(--cards-surface, rgba(15, 23, 42, 0.92));
+  --daily-surface-soft: var(--cards-surface-soft, rgba(30, 41, 59, 0.85));
+  --daily-border: var(--cards-border, rgba(148, 163, 184, 0.18));
+  --daily-text: var(--cards-text, #e2e8f0);
+  --daily-text-dim: var(--cards-text-dim, rgba(226, 232, 240, 0.65));
+
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 1rem 0 3rem;
+  color: var(--daily-text);
 }
+
+/* ---------- banner ---------- */
 
 .daily-banner {
   position: relative;
@@ -35,21 +56,141 @@
   background: rgba(255, 255, 255, 0.18);
   font-size: 0.8rem;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 
-.daily-streak {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+/* ---------- today's pick ---------- */
+
+.daily-pick {
+  position: relative;
+  border-radius: 18px;
+  padding: 1.4rem 1.5rem;
+  background: linear-gradient(160deg, var(--daily-surface-soft) 0%, var(--daily-surface) 100%);
+  border: 1px solid var(--daily-border);
+  box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.7);
+}
+
+.daily-pick-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--daily-text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.daily-pick-category {
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(99, 102, 241, 0.18);
+  color: #c7d2fe;
+  font-weight: 700;
+}
+
+.daily-pick-date {
+  font-variant-numeric: tabular-nums;
+}
+
+.daily-pick-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.daily-pick-desc {
+  margin: 0 0 0.9rem;
+  color: var(--daily-text-dim);
+  line-height: 1.5;
+}
+
+.daily-pick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.6rem;
+  margin: 0 0 1.1rem;
+}
+
+.daily-pick-stat {
+  border-radius: 12px;
+  padding: 0.55rem 0.8rem;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--daily-border);
+}
+
+.daily-pick-stat dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--daily-text-dim);
+  margin: 0 0 0.2rem;
+}
+
+.daily-pick-stat dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.daily-pick-seed {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.95rem;
+  color: var(--daily-text-dim);
+}
+
+.daily-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--daily-accent) 0%, var(--daily-accent-strong) 100%);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 12px 28px -14px rgba(99, 102, 241, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.daily-play-btn:hover,
+.daily-play-btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px -14px rgba(99, 102, 241, 0.9);
+}
+
+/* ---------- side cards (streak + recap) ---------- */
+
+.daily-side {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.daily-streak-card,
+.daily-recap {
+  border-radius: 16px;
+  padding: 1.1rem 1.2rem;
+  background: var(--daily-surface);
+  border: 1px solid var(--daily-border);
+}
+
+.daily-streak-head,
+.daily-recap-head {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.daily-streak-head h3,
+.daily-recap-head h3 {
+  margin: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--daily-text-dim);
 }
 
 .daily-streak-flame {
@@ -57,147 +198,146 @@
   filter: drop-shadow(0 0 6px rgba(251, 146, 60, 0.7));
 }
 
-.daily-streak-count {
-  font-size: 1.15rem;
+.daily-streak-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.daily-streak-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.daily-streak-num {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--daily-text);
+}
+
+.daily-streak-lbl {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--daily-text-dim);
+}
+
+.daily-streak-last {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--daily-text-dim);
+}
+
+.daily-streak-empty {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--daily-warn);
+}
+
+/* recap */
+
+.daily-recap-head {
+  justify-content: space-between;
+}
+
+.daily-recap-date {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+  color: var(--daily-text-dim);
+}
+
+.daily-recap-title {
+  margin: 0 0 0.6rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.daily-recap-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  margin: 0 0 0.6rem;
+}
+
+.daily-recap-stats dt {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--daily-text-dim);
+  margin: 0 0 0.15rem;
+}
+
+.daily-recap-stats dd {
+  margin: 0;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
-.daily-streak-label {
-  font-size: 0.7rem;
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
+.daily-recap-stats .dim { color: var(--daily-text-dim); }
+.daily-recap-stats .ok { color: var(--daily-success); }
+.daily-recap-stats .warn { color: var(--daily-warn); }
 
-.daily-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
-}
-
-.daily-card {
-  position: relative;
-  display: block;
+.daily-recap-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--daily-text-dim);
   text-decoration: none;
-  color: inherit;
+  border-bottom: 1px dashed var(--daily-text-dim);
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.daily-recap-link:hover,
+.daily-recap-link:focus-visible {
+  color: var(--daily-accent);
+  border-color: var(--daily-accent);
+}
+
+/* ---------- heatmap ---------- */
+
+.daily-heatmap {
   border-radius: 16px;
-  padding: 1.1rem 1.2rem;
-  background: linear-gradient(160deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  transition: transform 0.35s ease, border-color 0.25s ease, box-shadow 0.35s ease;
-  transform-style: preserve-3d;
-  perspective: 800px;
+  padding: 1rem 1.2rem 0.8rem;
+  background: var(--daily-surface);
+  border: 1px solid var(--daily-border);
 }
 
-.daily-card:hover {
-  transform: translateY(-3px) rotateX(2deg);
-  border-color: rgba(199, 210, 254, 0.5);
-  box-shadow: 0 18px 40px -22px rgba(99, 102, 241, 0.6);
-}
-
-.daily-card-medal {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  font-size: 0.95rem;
-  color: #1f1100;
-  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.6);
-}
-
-.daily-card-medal--gold {
-  background: radial-gradient(circle at 30% 30%, #fde68a 0%, #f59e0b 60%, #b45309 100%);
-}
-
-.daily-card-medal--silver {
-  background: radial-gradient(circle at 30% 30%, #f1f5f9 0%, #cbd5e1 60%, #64748b 100%);
-}
-
-.daily-card-medal--bronze {
-  background: radial-gradient(circle at 30% 30%, #fcd9b6 0%, #d97706 60%, #78350f 100%);
-}
-
-.daily-card-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin: 0 0 0.4rem;
-  letter-spacing: -0.01em;
-}
-
-.daily-card-row {
+.daily-heatmap-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: 0.35rem 0;
-  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
 }
 
-.daily-card-row dt {
-  opacity: 0.7;
-  letter-spacing: 0.03em;
-}
-
-.daily-card-row dd {
+.daily-heatmap-head h3 {
   margin: 0;
-  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--daily-text-dim);
+}
+
+.daily-heatmap-count {
+  font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
+  color: var(--daily-text-dim);
 }
 
-.daily-card-status {
-  margin-top: 0.6rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  font-weight: 700;
+.daily-heatmap-svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.daily-card-status--not-started {
-  background: rgba(148, 163, 184, 0.18);
-  color: #cbd5e1;
+.daily-heat-off {
+  fill: var(--daily-border);
+  opacity: 0.55;
 }
 
-.daily-card-status--in-progress {
-  background: rgba(59, 130, 246, 0.22);
-  color: #93c5fd;
-}
-
-.daily-card-status--completed {
-  background: rgba(34, 197, 94, 0.22);
-  color: #86efac;
-}
-
-.daily-card-difficulty {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  padding: 0.15rem 0.55rem;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.daily-card-difficulty--easy {
-  background: rgba(34, 197, 94, 0.18);
-  color: #86efac;
-}
-
-.daily-card-difficulty--medium {
-  background: rgba(251, 191, 36, 0.18);
-  color: #fcd34d;
-}
-
-.daily-card-difficulty--hard {
-  background: rgba(239, 68, 68, 0.18);
-  color: #fca5a5;
+.daily-heat-on {
+  fill: var(--daily-success);
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.6));
 }
