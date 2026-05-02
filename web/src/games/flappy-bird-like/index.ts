@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FlappyBirdState, FlappyBirdAction, FlappyBirdSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { FlappyBirdGame } from "./Game.js";
@@ -28,5 +28,24 @@ Focus on small, controlled flaps rather than big bursts. If you flap too much yo
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FlappyBirdState): HintTarget | null => {
+    if (state.over) return null;
+    // Determine target gap Y from nearest upcoming pipe (or screen midline)
+    const BIRD_X = 0.18;
+    let targetY = 0.5;
+    let bestDist = Infinity;
+    for (const p of state.pipes) {
+      if (p.x + 0.075 < BIRD_X) continue; // already passed
+      const dist = p.x - BIRD_X;
+      if (dist < bestDist) {
+        bestDist = dist;
+        targetY = p.gapY;
+      }
+    }
+    if (state.birdY > targetY) {
+      return { selector: `[data-testid="hint-target-flappy-flap"]`, pulses: 3 };
+    }
+    return { selector: `[data-testid="hint-target-flappy-canvas"]`, pulses: 3 };
+  },
   component: FlappyBirdGame,
 };

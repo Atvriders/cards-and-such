@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { SnakeState, SnakeAction } from "./state.js";
+import type { SnakeState, SnakeAction, Dir } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Snake } from "./Snake.js";
 
@@ -43,5 +43,74 @@ Tips: Plan your path ahead, especially at higher speeds. Favor looping paths tha
   initialState: (seed: number, settings: SnakeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: SnakeState): HintTarget | null => {
+    if (!state.alive || state.paused) return null;
+    const head = state.snake[0];
+    if (!head) return null;
+    const { gridSize, food, snake } = state;
+    const occupied = new Set(snake.map((c) => `${c.row},${c.col}`));
+    const wrap = state.settings.wrap;
+
+    function safeAndScore(dir: Dir): { ok: boolean; dist: number } {
+      let r = head!.row;
+      let c = head!.col;
+      if (dir === "up") r -= 1;
+      else if (dir === "down") r += 1;
+      else if (dir === "left") c -= 1;
+      else if (dir === "right") c += 1;
+      if (wrap) {
+        r = ((r % gridSize) + gridSize) % gridSize;
+        c = ((c % gridSize) + gridSize) % gridSize;
+      } else if (r < 0 || r >= gridSize || c < 0 || c >= gridSize) {
+        return { ok: false, dist: Infinity };
+      }
+      // Self-collision (ignore tail since it moves)
+      const tail = snake[snake.length - 1];
+      const key = `${r},${c}`;
+      if (occupied.has(key) && !(tail && tail.row === r && tail.col === c)) {
+        return { ok: false, dist: Infinity };
+      }
+      const dr = wrap
+        ? Math.min(Math.abs(r - food.row), gridSize - Math.abs(r - food.row))
+        : Math.abs(r - food.row);
+      const dc = wrap
+        ? Math.min(Math.abs(c - food.col), gridSize - Math.abs(c - food.col))
+        : Math.abs(c - food.col);
+      return { ok: true, dist: dr + dc };
+    }
+
+    function isOpposite(a: Dir, b: Dir): boolean {
+      return (
+        (a === "up" && b === "down") ||
+        (a === "down" && b === "up") ||
+        (a === "left" && b === "right") ||
+        (a === "right" && b === "left")
+      );
+    }
+
+    const dirs: Dir[] = ["up", "down", "left", "right"];
+    let best: Dir | null = null;
+    let bestDist = Infinity;
+    for (const d of dirs) {
+      if (isOpposite(d, state.direction)) continue;
+      const { ok, dist } = safeAndScore(d);
+      if (ok && dist < bestDist) {
+        bestDist = dist;
+        best = d;
+      }
+    }
+    if (!best) return null;
+    let r = head.row;
+    let c = head.col;
+    if (best === "up") r -= 1;
+    else if (best === "down") r += 1;
+    else if (best === "left") c -= 1;
+    else if (best === "right") c += 1;
+    if (wrap) {
+      r = ((r % gridSize) + gridSize) % gridSize;
+      c = ((c % gridSize) + gridSize) % gridSize;
+    }
+    return { selector: `[data-testid="hint-target-snake-${r}-${c}"]`, pulses: 3 };
+  },
   component: Snake,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PongState, PongAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,9 @@ Score is calculated on a win only: your final score × 50 plus the margin of vic
   initialState: (seed: number, settings: PongSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: PongState): HintTarget | null => {
+    if (state.over) return null;
+    return { selector: `[data-testid="hint-target-pong-player-paddle"]`, pulses: 3 };
+  },
   component: Pong,
 };

@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { FroggerState, FroggerAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { FroggerState, FroggerAction, Obstacle } from "./state.js";
+import { initialState, reducer, isTerminal, COLS, HOME_ROW } from "./state.js";
 import { Frogger } from "./Frogger.js";
 
 export const froggerSettings = {
@@ -32,5 +32,55 @@ Fill all five home spots to win. You start with 3 lives (or 5 on the lives setti
   initialState: (seed: number, settings: FroggerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FroggerState): HintTarget | null => {
+    if (state.over || state.won) return null;
+    const { frogRow, frogCol, obstacles } = state;
+
+    function cellHasObstacle(row: number, col: number): boolean {
+      for (const o of obstacles as readonly Obstacle[]) {
+        if (o.row !== row) continue;
+        const left = ((Math.round(o.col) % COLS) + COLS) % COLS;
+        for (let i = 0; i < o.width; i++) {
+          if ((left + i) % COLS === col) return true;
+        }
+      }
+      return false;
+    }
+
+    function isWaterRow(row: number): boolean {
+      return row === 1 || row === 2;
+    }
+
+    function safeUp(): boolean {
+      const r = frogRow - 1;
+      if (r < HOME_ROW) return false;
+      // Heading into water: must land on a log
+      if (isWaterRow(r)) return cellHasObstacle(r, frogCol);
+      // Heading into road: must NOT have a car
+      if (r === 4 || r === 5 || r === 6) return !cellHasObstacle(r, frogCol);
+      return true;
+    }
+
+    if (safeUp()) {
+      const r = Math.max(HOME_ROW, frogRow - 1);
+      return { selector: `[data-testid="hint-target-frogger-${r}-${frogCol}"]`, pulses: 3 };
+    }
+    // Lateral fallback: pulse left or right cell that is safe
+    function safeLateral(dc: number): boolean {
+      const c = frogCol + dc;
+      if (c < 0 || c >= COLS) return false;
+      if (isWaterRow(frogRow)) return cellHasObstacle(frogRow, c);
+      if (frogRow === 4 || frogRow === 5 || frogRow === 6) return !cellHasObstacle(frogRow, c);
+      return true;
+    }
+    if (safeLateral(-1)) {
+      return { selector: `[data-testid="hint-target-frogger-${frogRow}-${frogCol - 1}"]`, pulses: 3 };
+    }
+    if (safeLateral(1)) {
+      return { selector: `[data-testid="hint-target-frogger-${frogRow}-${frogCol + 1}"]`, pulses: 3 };
+    }
+    // Stay put — pulse current frog
+    return { selector: `[data-testid="hint-target-frogger-${frogRow}-${frogCol}"]`, pulses: 3 };
+  },
   component: Frogger,
 };

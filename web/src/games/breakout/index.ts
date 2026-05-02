@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BreakoutState, BreakoutAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,14 @@ Tips: Keep the ball away from the sides where it can get trapped in a fast diago
   initialState: (seed: number, settings: BreakoutSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BreakoutState): HintTarget | null => {
+    if (state.lost || state.won) return null;
+    if (!state.started) {
+      // Pulse the launch button before the game starts
+      return { selector: `[data-testid="hint-target-breakout-launch"]`, pulses: 3 };
+    }
+    // Pulse the paddle: ball direction guidance
+    return { selector: `[data-testid="hint-target-breakout-paddle"]`, pulses: 3 };
+  },
   component: Breakout,
 };

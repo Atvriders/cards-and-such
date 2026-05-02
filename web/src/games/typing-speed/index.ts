@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TypingSpeedState, TypingSpeedAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,12 @@ Tips: Keep your eyes on the reference paragraph, not the keyboard. If you make a
   initialState: (seed: number, settings: TypingSpeedSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: TypingSpeedState): HintTarget | null => {
+    if (state.ended) return null;
+    // Pulse the next-letter span (the first untyped char)
+    const idx = state.typed.length;
+    if (idx >= state.paragraph.length) return null;
+    return { selector: `[data-testid="hint-target-typing-char-${idx}"]`, pulses: 3 };
+  },
   component: TypingSpeed,
 };

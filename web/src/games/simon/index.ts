@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SimonState, SimonAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Simon } from "./Simon.js";
@@ -24,5 +24,14 @@ Tips: Rather than memorizing individual colors, try to group them in chunks of 3
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: SimonState): HintTarget | null => {
+    if (state.phase === "idle" || state.phase === "complete" || state.phase === "failed") {
+      return { selector: `[data-testid="hint-target-simon-start"]`, pulses: 3 };
+    }
+    if (state.phase !== "input") return null;
+    const expected = state.sequence[state.playerIndex];
+    if (!expected) return null;
+    return { selector: `[data-testid="hint-target-simon-${expected}"]`, pulses: 3 };
+  },
   component: Simon,
 };

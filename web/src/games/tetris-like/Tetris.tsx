@@ -156,6 +156,7 @@ export function Tetris({
                   <div
                     key={key}
                     className={cls}
+                    data-testid={r === 0 ? `hint-target-tetris-col-${c}` : undefined}
                     style={{ width: CELL, height: CELL, background: bg }}
                   />
                 );

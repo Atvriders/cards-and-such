@@ -132,6 +132,7 @@ export function Snake({
                 <div
                   key={key}
                   className={cellClass}
+                  data-testid={`hint-target-snake-${row}-${col}`}
                   style={{ width: CELL_SIZE, height: CELL_SIZE }}
                 />
               );

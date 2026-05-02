@@ -160,7 +160,11 @@ export function Pong({
         <div className="pong-center-line" />
 
         {/* Player paddle */}
-        <div className="pong-paddle" style={paddleStyle(PLAYER_X, state.playerY)} />
+        <div
+          className="pong-paddle"
+          data-testid="hint-target-pong-player-paddle"
+          style={paddleStyle(PLAYER_X, state.playerY)}
+        />
 
         {/* Bot paddle */}
         <div className="pong-paddle" style={paddleStyle(BOT_X, state.botY)} />

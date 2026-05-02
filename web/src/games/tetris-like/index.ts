@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TetrisState, TetrisAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, COLS, ROWS } from "./state.js";
 import { Tetris } from "./Tetris.js";
 
 export const tetrisSettings = {
@@ -32,5 +32,25 @@ A ghost piece shows where the current piece will land. The next piece is preview
   initialState: (seed: number, settings: TetrisSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: TetrisState): HintTarget | null => {
+    if (state.over) return null;
+    // Find column with lowest stack (highest first-filled row index)
+    let bestCol = 0;
+    let bestRow = -1;
+    for (let c = 0; c < COLS; c++) {
+      let firstFilled = ROWS;
+      for (let r = 0; r < ROWS; r++) {
+        if (state.grid[r]?.[c] != null) {
+          firstFilled = r;
+          break;
+        }
+      }
+      if (firstFilled > bestRow) {
+        bestRow = firstFilled;
+        bestCol = c;
+      }
+    }
+    return { selector: `[data-testid="hint-target-tetris-col-${bestCol}"]`, pulses: 3 };
+  },
   component: Tetris,
 };

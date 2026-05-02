@@ -117,6 +117,7 @@ export function FlappyBirdGame({
         <canvas
           ref={canvasRef}
           className="flappy-canvas"
+          data-testid="hint-target-flappy-canvas"
           width={PW}
           height={PH}
           onClick={() => dispatch({ type: "flap" } as FlappyBirdAction)}
@@ -129,7 +130,11 @@ export function FlappyBirdGame({
         )}
       </div>
       <div className="arcade-controls">
-        <button className="arcade-btn" onClick={() => dispatch({ type: "flap" } as FlappyBirdAction)}>
+        <button
+          className="arcade-btn"
+          data-testid="hint-target-flappy-flap"
+          onClick={() => dispatch({ type: "flap" } as FlappyBirdAction)}
+        >
           Flap ↑
         </button>
       </div>

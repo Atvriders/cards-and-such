@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WhackAMoleState, WhackAMoleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,20 @@ Tips: Instead of chasing moles across the board, hover your mouse near the cente
   initialState: (seed: number, settings: WhackAMoleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WhackAMoleState): HintTarget | null => {
+    if (state.ended) return null;
+    // Find the mole with the least time remaining (most urgent)
+    let bestIdx = -1;
+    let bestTime = Infinity;
+    for (let i = 0; i < state.holes.length; i++) {
+      const h = state.holes[i];
+      if (h && h.kind === "mole" && h.timeRemaining < bestTime) {
+        bestTime = h.timeRemaining;
+        bestIdx = i;
+      }
+    }
+    if (bestIdx === -1) return null;
+    return { selector: `[data-testid="hint-target-wam-${bestIdx}"]`, pulses: 3 };
+  },
   component: WhackAMole,
 };

@@ -76,7 +76,11 @@ export function TypingSpeed({
 
       <div className="ts-paragraph">
         {chars.map(({ ch, status }, i) => (
-          <span key={i} className={`ts-char ${status}`}>
+          <span
+            key={i}
+            className={`ts-char ${status}`}
+            data-testid={`hint-target-typing-char-${i}`}
+          >
             {ch}
           </span>
         ))}

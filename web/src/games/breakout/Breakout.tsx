@@ -163,6 +163,7 @@ export function Breakout({
         {/* Paddle */}
         <div
           className="breakout-paddle"
+          data-testid="hint-target-breakout-paddle"
           style={{
             left: paddleLeftPx,
             top: paddleTopPx,
@@ -224,6 +225,7 @@ export function Breakout({
         )}
         {!state.started && !terminal && (
           <button
+            data-testid="hint-target-breakout-launch"
             onClick={() => {
               lastTimeRef.current = null;
               dispatch({ type: "release" } as BreakoutAction);

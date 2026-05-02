@@ -71,6 +71,7 @@ export function Simon({
           <button
             key={color}
             className={`simon-btn ${color}${activeColor === color ? " active" : ""}`}
+            data-testid={`hint-target-simon-${color}`}
             onClick={() => dispatch({ type: "click", color })}
             disabled={inputDisabled}
             aria-label={color}
@@ -81,6 +82,7 @@ export function Simon({
       {(state.phase === "idle" || state.phase === "complete" || state.phase === "failed") && !terminal && (
         <button
           className="simon-start-btn"
+          data-testid="hint-target-simon-start"
           onClick={() => dispatch({ type: "start" })}
         >
           {state.phase === "idle" ? "Start" : state.phase === "complete" ? "Next Round" : "Play Again"}

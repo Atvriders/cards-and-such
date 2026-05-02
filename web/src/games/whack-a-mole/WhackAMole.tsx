@@ -68,6 +68,7 @@ export function WhackAMole({
           <button
             key={idx}
             className={`wam-hole ${hole.kind}`}
+            data-testid={`hint-target-wam-${idx}`}
             onClick={() => dispatch({ type: "whack", index: idx })}
             disabled={hole.kind === "empty" || !!terminal}
             aria-label={hole.kind === "mole" ? "Whack mole!" : "Empty hole"}

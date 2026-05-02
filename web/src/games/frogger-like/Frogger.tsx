@@ -127,6 +127,7 @@ export function Frogger({
               <div
                 key={key}
                 className={cls}
+                data-testid={`hint-target-frogger-${r}-${c}`}
                 style={{ width: CELL, height: CELL }}
               >
                 {isFrog && "🐸"}
