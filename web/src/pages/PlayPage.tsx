@@ -21,6 +21,7 @@ import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
 import { encodeChallenge, MAX_FRIEND_SEED } from "../platform/friendCode.js";
+import { hashStamp, todayStamp } from "./dailyPicker.js";
 import "./PlayPage.css";
 
 /** Maximum number of toasts visible at once — older ones drop off. */
@@ -89,6 +90,35 @@ function writeBestTime(gameId: string, seconds: number): void {
   }
 }
 
+/** Per-game "last used" seed cache. Stored under
+ *  `cards-last-seed:<gameId>` so re-opening the same game offers the
+ *  previously-played seed as the default. Read-only here besides the
+ *  `writeLastSeed` writer below. Best-effort — quota / private mode
+ *  errors are swallowed so a denied write never breaks gameplay. */
+const LS_LAST_SEED_PREFIX = "cards-last-seed:";
+
+function readLastSeed(gameId: string): number | null {
+  try {
+    if (typeof localStorage === "undefined") return null;
+    const raw = localStorage.getItem(`${LS_LAST_SEED_PREFIX}${gameId}`);
+    if (!raw) return null;
+    const n = Number.parseInt(raw, 10);
+    if (!Number.isFinite(n) || Number.isNaN(n) || n < 0) return null;
+    return n;
+  } catch {
+    return null;
+  }
+}
+
+function writeLastSeed(gameId: string, seed: number): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(`${LS_LAST_SEED_PREFIX}${gameId}`, String(seed));
+  } catch {
+    /* ignore */
+  }
+}
+
 function parseSeed(raw: string | null): number | null {
   if (raw == null) return null;
   const trimmed = raw.trim();
@@ -106,6 +136,15 @@ const LS_HINTS_ENABLED = "cards-hints-enabled";
 /** Tiny global counter — bumped each time the user copies a friend-mode
  *  link. Pure stats fun, no behavior keys off it. */
 const LS_FRIEND_SESSIONS = "cards-friend-sessions";
+/** Optional Settings → Gameplay toggle: when on, the Undo button label
+ *  shows the current stack depth, e.g. "Undo (3)". Default off so the
+ *  toolbar stays compact; opt-in for users who want the visual feedback. */
+const LS_SHOW_UNDO_COUNT = "cards-show-undo-count";
+
+/** Maximum number of prior states retained for undo. Pure presentation
+ *  state — never touches the reducer. Keeping this bounded means a long
+ *  session can't tower memory usage with deep state snapshots. */
+const UNDO_STACK_CAP = 20;
 
 function bumpFriendSessions(): void {
   try {
@@ -126,6 +165,19 @@ function readHintsEnabled(): boolean {
     return v === null ? true : v === "true";
   } catch {
     return true;
+  }
+}
+
+/** Read the "Show undo count" preference from Settings → Gameplay. When
+ *  enabled, the Undo button label includes the current stack depth.
+ *  Defaults to false so the toolbar stays compact for casual users. */
+function readShowUndoCount(): boolean {
+  try {
+    if (typeof localStorage === "undefined") return false;
+    const v = localStorage.getItem(LS_SHOW_UNDO_COUNT);
+    return v === "true";
+  } catch {
+    return false;
   }
 }
 
@@ -348,7 +400,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     readGameSettings(plugin.id, plugin.settings),
   );
   const [phase, setPhase] = useState<"setup" | "playing" | "ended">("setup");
-  const [seed, setSeed] = useState<number>(() => urlSeed ?? randomSeed());
+  const [seed, setSeed] = useState<number>(
+    () => urlSeed ?? readLastSeed(plugin.id) ?? randomSeed(),
+  );
   const [state, setState] = useState(() => plugin.initialState(seed, settings));
   // Snapshot of settings at the moment the current game started — used to
   // render the "Restart to apply" banner without mid-game-mutating state.
@@ -383,6 +437,15 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // Pause is purely a presentation freeze of the elapsed counter — never
   // touches reducer state. Persisted in a ref so re-renders keep value.
   const [paused, setPaused] = useState(false);
+  // Unified undo stack. Holds the last UNDO_STACK_CAP `{ state, action }`
+  // pairs so any game with a deterministic reducer gets undo "for free"
+  // — we snapshot the prior state on every dispatch and roll back via
+  // `setState(prev)`. Purely PlayPage-side presentation memory; the
+  // reducer and plugin shape are untouched.
+  const [undoStack, setUndoStack] = useState<Array<{ state: unknown; action: unknown }>>([]);
+  // Whether the Undo button label should include the current depth, e.g.
+  // "Undo (3)". Read once at mount from Settings → Gameplay; default off.
+  const showUndoCount = useMemo(() => readShowUndoCount(), []);
   // Action toast queue. Each push gets a monotonically increasing id so
   // that React keys stay stable as older toasts fall off the front.
   const [toasts, setToasts] = useState<ActionToast[]>([]);
@@ -394,6 +457,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const infoPopoverRef = useRef<HTMLDivElement | null>(null);
   const infoButtonRef = useRef<HTMLButtonElement | null>(null);
   const playPanelRef = useRef<HTMLElement | null>(null);
+  // Seed-picker popover state. The draft is held in a string so partial
+  // edits ("12", "") don't immediately reset to NaN; we parse on Apply.
+  const [seedPickerOpen, setSeedPickerOpen] = useState(false);
+  const [seedDraft, setSeedDraft] = useState<string>(() => String(seed));
+  const seedPickerRef = useRef<HTMLDivElement | null>(null);
+  const seedPickerBtnRef = useRef<HTMLButtonElement | null>(null);
 
   /**
    * Best-effort fullscreen toggle on the play panel. Browsers vary on the
@@ -435,6 +504,41 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
 
   useFocusTrap(infoPopoverRef, infoOpen);
   useFocusTrap(settingsModalRef, settingsModalOpen);
+  useFocusTrap(seedPickerRef, seedPickerOpen);
+
+  // Sync seed draft whenever the seed changes externally (URL, restart,
+  // or the user opens the picker on a fresh game) so the input always
+  // pre-fills with the current seed.
+  useEffect(() => {
+    setSeedDraft(String(seed));
+  }, [seed]);
+
+  // Esc / outside-click closes the seed picker. Bound at capture so we
+  // win against the pause-toggle keydown handler when both are active.
+  useEffect(() => {
+    if (!seedPickerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        setSeedPickerOpen(false);
+        seedPickerBtnRef.current?.focus();
+      }
+    };
+    const onDown = (e: MouseEvent) => {
+      const t = e.target as Node | null;
+      if (!t) return;
+      if (seedPickerRef.current?.contains(t)) return;
+      if (seedPickerBtnRef.current?.contains(t)) return;
+      setSeedPickerOpen(false);
+    };
+    window.addEventListener("keydown", onKey, true);
+    window.addEventListener("mousedown", onDown);
+    return () => {
+      window.removeEventListener("keydown", onKey, true);
+      window.removeEventListener("mousedown", onDown);
+    };
+  }, [seedPickerOpen]);
 
   // Persist settings under `cards-game-settings:<gameId>` whenever they
   // change. Writes are best-effort; the helper swallows quota / private
@@ -505,6 +609,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     if (phase !== "setup") return;
     recordPlayed(plugin.id);
     setState(plugin.initialState(seed, settings));
+    setUndoStack([]);
     setFinalScore(null);
     setElapsed(0);
     setShowConfetti(false);
@@ -524,8 +629,10 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const startWithSeed = useCallback(
     (nextSeed: number) => {
       recordPlayed(plugin.id);
+      writeLastSeed(plugin.id, nextSeed);
       setSeed(nextSeed);
       setState(plugin.initialState(nextSeed, settings));
+      setUndoStack([]);
       setFinalScore(null);
       setElapsed(0);
       setShowConfetti(false);
@@ -569,6 +676,29 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     if (!confirmIfInProgress()) return;
     startWithSeed(seed);
   }, [seed, startWithSeed, confirmIfInProgress]);
+
+  // Apply a seed from the picker. Bypasses the in-progress prompt because
+  // the user has explicitly opened the picker and clicked Apply — they are
+  // intentionally restarting the game.
+  const applyPickedSeed = useCallback(
+    (next: number) => {
+      const safe = Number.isFinite(next) && next >= 0 ? Math.floor(next) : randomSeed();
+      startWithSeed(safe);
+      setSeedPickerOpen(false);
+    },
+    [startWithSeed],
+  );
+
+  // Step the draft seed by ±1. Operates on the draft string only — the
+  // game doesn't restart until the user clicks Apply.
+  const stepSeed = useCallback((delta: number) => {
+    setSeedDraft((cur) => {
+      const n = Number.parseInt(cur, 10);
+      const base = Number.isFinite(n) && !Number.isNaN(n) && n >= 0 ? n : 0;
+      const next = Math.max(0, base + delta);
+      return String(next);
+    });
+  }, []);
 
   const pushToast = useCallback((message: string) => {
     if (!message) return;
@@ -714,6 +844,18 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       if (label) pushToast(label);
       setState((s: unknown) => {
         const next = plugin.reducer(s, action);
+        // Push the prior state onto the unified undo ring buffer (last
+        // UNDO_STACK_CAP). Skip when the reducer returned the same
+        // reference — those are no-ops and pushing them would let undo
+        // "stutter" without visible effect.
+        if (next !== s) {
+          setUndoStack((prev) => {
+            const appended = [...prev, { state: s, action }];
+            return appended.length > UNDO_STACK_CAP
+              ? appended.slice(appended.length - UNDO_STACK_CAP)
+              : appended;
+          });
+        }
         const term = plugin.isTerminal(next);
         if (term) {
           setFinalScore(term.score);
@@ -740,6 +882,44 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     },
     [plugin, settings, elapsed, recordBest, pushToast],
   );
+
+  /**
+   * Pop the most-recent prior state off the undo stack and roll the game
+   * back. Strictly a presentation-side operation — we never invoke the
+   * reducer, so the rollback is identical to whatever shape the reducer
+   * produced before the action being undone. Bound to the Undo button
+   * and Ctrl/Cmd+Z; both call into this single path.
+   */
+  const undo = useCallback(() => {
+    if (phase !== "playing") return;
+    setUndoStack((stack) => {
+      if (stack.length === 0) return stack;
+      const prev = stack[stack.length - 1];
+      setState(prev.state);
+      return stack.slice(0, -1);
+    });
+  }, [phase]);
+
+  // Ctrl/Cmd+Z triggers undo. We skip when focus is in a text-entry
+  // surface (settings inputs, contenteditable) so users editing fields
+  // get the browser's native text-undo, not a game rollback. We also
+  // avoid Ctrl+Shift+Z so a future redo binding stays free.
+  useEffect(() => {
+    if (phase !== "playing") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "z" && e.key !== "Z") return;
+      if (!(e.ctrlKey || e.metaKey)) return;
+      if (e.shiftKey || e.altKey) return;
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName?.toLowerCase();
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+      if (target?.isContentEditable) return;
+      e.preventDefault();
+      undo();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [phase, undo]);
 
   const onGameOver = useCallback(
     (score: number) => {
@@ -1029,6 +1209,120 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             </span>
           )}
           {phase === "playing" && (
+            <span className="play-seed-pick-wrap">
+              <button
+                ref={seedPickerBtnRef}
+                type="button"
+                className="play-iconbtn play-seed-pick-btn"
+                onClick={() => setSeedPickerOpen((v) => !v)}
+                title="Pick seed"
+                aria-label="Pick seed"
+                aria-haspopup="dialog"
+                aria-expanded={seedPickerOpen}
+                data-tooltip="Pick seed"
+                data-testid="play-seed-pick-btn"
+              >
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="2.5"></circle>
+                  <path d="M19 12a7 7 0 0 0-.1-1.2l1.7-1.3-1.5-2.6-2 .8a7 7 0 0 0-2-1.2l-.3-2.1h-3l-.3 2.1a7 7 0 0 0-2 1.2l-2-.8L6 9.5l1.7 1.3A7 7 0 0 0 7.6 12a7 7 0 0 0 .1 1.2L6 14.5l1.5 2.6 2-.8a7 7 0 0 0 2 1.2l.3 2.1h3l.3-2.1a7 7 0 0 0 2-1.2l2 .8 1.5-2.6L19 13.2A7 7 0 0 0 19 12z"></path>
+                </svg>
+              </button>
+              {seedPickerOpen && (
+                <div
+                  ref={seedPickerRef}
+                  className="play-seed-picker"
+                  role="dialog"
+                  aria-label="Pick seed"
+                  data-testid="play-seed-picker"
+                >
+                  <div className="play-seed-picker-row">
+                    <label className="play-seed-picker-label" htmlFor="play-seed-input">
+                      Seed
+                    </label>
+                    <div className="play-seed-picker-input-row">
+                      <input
+                        id="play-seed-input"
+                        className="play-seed-input"
+                        data-testid="play-seed-input"
+                        type="number"
+                        min={0}
+                        inputMode="numeric"
+                        value={seedDraft}
+                        onChange={(e) => setSeedDraft(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            const n = Number.parseInt(seedDraft, 10);
+                            applyPickedSeed(Number.isFinite(n) && !Number.isNaN(n) ? n : seed);
+                          }
+                        }}
+                      />
+                      <span className="play-seed-stepper">
+                        <button
+                          type="button"
+                          className="play-seed-step-btn"
+                          onClick={() => stepSeed(1)}
+                          aria-label="Increment seed"
+                          title="Increment seed"
+                          data-testid="play-seed-step-up"
+                        >
+                          {"▲"}
+                        </button>
+                        <button
+                          type="button"
+                          className="play-seed-step-btn"
+                          onClick={() => stepSeed(-1)}
+                          aria-label="Decrement seed"
+                          title="Decrement seed"
+                          data-testid="play-seed-step-down"
+                        >
+                          {"▼"}
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="play-seed-picker-actions">
+                    <button
+                      type="button"
+                      className="play-seed-picker-action"
+                      onClick={() => {
+                        const r = randomSeed();
+                        setSeedDraft(String(r));
+                        applyPickedSeed(r);
+                      }}
+                      data-testid="play-seed-random"
+                    >
+                      Random
+                    </button>
+                    <button
+                      type="button"
+                      className="play-seed-picker-action"
+                      onClick={() => {
+                        const ds = hashStamp(todayStamp());
+                        setSeedDraft(String(ds));
+                        applyPickedSeed(ds);
+                      }}
+                      data-testid="play-seed-daily"
+                    >
+                      Daily
+                    </button>
+                    <button
+                      type="button"
+                      className="play-seed-picker-action play-seed-picker-apply"
+                      onClick={() => {
+                        const n = Number.parseInt(seedDraft, 10);
+                        applyPickedSeed(Number.isFinite(n) && !Number.isNaN(n) ? n : seed);
+                      }}
+                      data-testid="play-seed-apply"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </div>
+              )}
+            </span>
+          )}
+          {phase === "playing" && (
             <button
               className="play-iconbtn play-share-btn"
               onClick={() => { void shareSeed(); }}
@@ -1064,6 +1358,30 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
               <span className="play-hint-btn-label">Friend</span>
+            </button>
+          )}
+          {phase === "playing" && (
+            <button
+              type="button"
+              className="play-iconbtn play-undo-btn"
+              onClick={undo}
+              disabled={undoStack.length === 0}
+              title={undoStack.length === 0 ? "Nothing to undo" : "Undo (Ctrl+Z)"}
+              aria-label={
+                showUndoCount
+                  ? `Undo, ${undoStack.length} step${undoStack.length === 1 ? "" : "s"} available`
+                  : "Undo"
+              }
+              aria-keyshortcuts="Control+Z Meta+Z"
+              data-tooltip="Undo"
+              data-testid="play-undo-btn"
+            >
+              <span aria-hidden="true" style={{ fontSize: 16, lineHeight: 1 }}>⟲</span>
+              {showUndoCount && (
+                <span className="play-hint-btn-label" data-testid="play-undo-btn-label">
+                  Undo ({undoStack.length})
+                </span>
+              )}
             </button>
           )}
           {phase === "playing" && hintsEnabled && (
