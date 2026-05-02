@@ -11,5 +11,13 @@ export const doubleAttackBjPlugin: GamePlugin<DoubleAttackBjState, DoubleAttackB
   howToPlay: "Double Attack Blackjack — Spanish deck (no 10s), BJ pays even money. Hit to draw, Stand to stop. Bust on 22+ = lose. Doubles down on first two cards. Stand on 17+. Blackjack pays 1.0:1.",
   settings,
   initialState: (seed: number, _s: S) => initialState(seed, _s as DoubleAttackBjSettings),
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-double-attack-bj-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.yourTotal;
+    if (total < 12) return { selector: '[data-testid="hint-target-double-attack-bj-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-double-attack-bj-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-double-attack-bj-hit"]', pulses: 3 };
+  },
   reducer, isTerminal, component: DoubleAttackBjGame,
 };

@@ -13,7 +13,7 @@ export function ClosedChinesePokerCasGame({ state, dispatch, onGameOver }: GameP
       <div className="dm-info">You:</div>
       <div className="dm-row">{state.you.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "see" && <div className="dm-row">
-        <button className="dm-btn" onClick={() => dispatch({ type: "play" } as ClosedChinesePokerCasAction)}>Play</button>
+        <button data-testid="hint-target-closed-chinese-poker-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as ClosedChinesePokerCasAction)}>Play</button>
         <button className="dm-btn alt" onClick={() => dispatch({ type: "fold" } as ClosedChinesePokerCasAction)}>Fold</button>
       </div>}
       {state.phase === "scored" && <>

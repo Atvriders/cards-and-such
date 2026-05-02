@@ -17,7 +17,7 @@ export function CheminDeFerCasGame({ state, dispatch, onGameOver }: GameProps<Ch
         <>
           <div className="cdf-c-info">Place your bet:</div>
           <div className="cdf-c-actions">
-            <button className="cdf-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as CheminDeFerCasAction)}>Player (20 pts)</button>
+            <button data-testid="hint-target-chemin-de-fer-cas-primary" className="cdf-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as CheminDeFerCasAction)}>Player (20 pts)</button>
             <button className="cdf-c-btn" onClick={() => dispatch({ type: "bet", on: "banker" } as CheminDeFerCasAction)}>Banker (19 pts)</button>
             <button className="cdf-c-btn alt" onClick={() => dispatch({ type: "bet", on: "tie" } as CheminDeFerCasAction)}>Tie (80 pts)</button>
           </div>

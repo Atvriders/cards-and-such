@@ -24,7 +24,7 @@ export function PontoonCasGame({ state, dispatch, onGameOver }: GameProps<Pontoo
       <div className="pon-c-info">You ({state.yourTotal}):</div>
       <div className="pon-c-row">{state.you.map((c, i) => <div key={i} className={`pon-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="pon-c-actions">
-        <button className="pon-c-btn" onClick={() => dispatch({ type: "hit" } as PontoonCasAction)}>Hit</button>
+        <button data-testid="hint-target-pontoon-cas-primary" className="pon-c-btn" onClick={() => dispatch({ type: "hit" } as PontoonCasAction)}>Hit</button>
         <button className="pon-c-btn alt" onClick={() => dispatch({ type: "stand" } as PontoonCasAction)}>Stand</button>
         {state.you.length === 2 && <button className="pon-c-btn alt" onClick={() => dispatch({ type: "double" } as PontoonCasAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="pon-c-btn alt" onClick={() => dispatch({ type: "surrender" } as PontoonCasAction)}>Surrender</button>}

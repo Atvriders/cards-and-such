@@ -20,12 +20,12 @@ export function AtlanticCityBjGame({ state, dispatch, onGameOver }: GameProps<At
       <div className="ac-bj-info">You ({state.yourTotal}):</div>
       <div className="ac-bj-row">{state.you.map((c, i) => <div key={i} className={`ac-bj-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="ac-bj-row">
-        <button className="ac-bj-btn" onClick={() => dispatch({ type: "hit" } as AtlanticCityBjAction)}>Hit</button>
-        <button className="ac-bj-btn alt" onClick={() => dispatch({ type: "stand" } as AtlanticCityBjAction)}>Stand</button>
+        <button data-testid="hint-target-atlantic-city-bj-hit" className="ac-bj-btn" onClick={() => dispatch({ type: "hit" } as AtlanticCityBjAction)}>Hit</button>
+        <button data-testid="hint-target-atlantic-city-bj-stand" className="ac-bj-btn alt" onClick={() => dispatch({ type: "stand" } as AtlanticCityBjAction)}>Stand</button>
       </div>}
       {state.phase === "scored" && <>
         <div className="ac-bj-result">{state.result} — +{state.pts}</div>
-        <button className="ac-bj-btn alt" onClick={() => dispatch({ type: "next" } as AtlanticCityBjAction)}>Next</button>
+        <button data-testid="hint-target-atlantic-city-bj-next" className="ac-bj-btn alt" onClick={() => dispatch({ type: "next" } as AtlanticCityBjAction)}>Next</button>
       </>}
     </div>
   );

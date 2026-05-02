@@ -1,9 +1,10 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ChineseBlackjackCasState, ChineseBlackjackCasAction, ChineseBlackjackCasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ChineseBlackjackCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
+const hint = (state: ChineseBlackjackCasState): HintTarget | null => (state.phase === "play" ? { selector: '[data-testid="hint-target-chinese-blackjack-cas-primary"]', pulses: 3 } : null);
 export const chineseBlackjackCasPlugin: GamePlugin<ChineseBlackjackCasState, ChineseBlackjackCasAction, typeof settings> = {
   id: "chinese-blackjack-cas", title: "Chinese Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
@@ -11,5 +12,13 @@ export const chineseBlackjackCasPlugin: GamePlugin<ChineseBlackjackCasState, Chi
   howToPlay: "Chinese Blackjack — multi-deck variant. Hit to draw, Stand to stop. Bust on 22+ = lose. Doubles down on first two cards. Stand on 17+. Blackjack pays 1.5:1.",
   settings,
   initialState: (seed: number, _s: S) => initialState(seed, _s as ChineseBlackjackCasSettings),
-  reducer, isTerminal, component: ChineseBlackjackCasGame,
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-chinese-blackjack-cas-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.yourTotal;
+    if (total < 12) return { selector: '[data-testid="hint-target-chinese-blackjack-cas-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-chinese-blackjack-cas-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-chinese-blackjack-cas-hit"]', pulses: 3 };
+  },
+  reducer, isTerminal, hint, component: ChineseBlackjackCasGame,
 };

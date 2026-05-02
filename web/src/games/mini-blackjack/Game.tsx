@@ -70,7 +70,7 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
                 value={betInput}
                 onChange={(e) => setBetInput(Math.max(MIN_BET, Math.min(state.bankroll, Number(e.target.value) || MIN_BET)))}
               />
-              <button className="bj-mini-btn primary" onClick={() => dispatch({ type: "deal", bet: betInput } as MiniBlackjackAction)}>
+              <button className="bj-mini-btn primary" data-testid="hint-target-mini-blackjack-deal" onClick={() => dispatch({ type: "deal", bet: betInput } as MiniBlackjackAction)}>
                 Deal
               </button>
             </div>
@@ -89,13 +89,13 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
       <div className="bj-mini-actions">
         {state.phase === "player" && (
           <>
-            <button className="bj-mini-btn primary" aria-label="Hit (H)" onClick={() => dispatch({ type: "hit" } as MiniBlackjackAction)}>Hit</button>
-            <button className="bj-mini-btn alt" aria-label="Stand (S)" onClick={() => dispatch({ type: "stand" } as MiniBlackjackAction)}>Stand</button>
+            <button className="bj-mini-btn primary" data-testid="hint-target-mini-blackjack-hit" aria-label="Hit (H)" onClick={() => dispatch({ type: "hit" } as MiniBlackjackAction)}>Hit</button>
+            <button className="bj-mini-btn alt" data-testid="hint-target-mini-blackjack-stand" aria-label="Stand (S)" onClick={() => dispatch({ type: "stand" } as MiniBlackjackAction)}>Stand</button>
             {canDouble && <button className="bj-mini-btn warn" aria-label="Double (D)" onClick={() => dispatch({ type: "double" } as MiniBlackjackAction)}>Double</button>}
           </>
         )}
         {state.phase === "settle" && (
-          <button className="bj-mini-btn primary" onClick={() => dispatch({ type: "next" } as MiniBlackjackAction)}>
+          <button className="bj-mini-btn primary" data-testid="hint-target-mini-blackjack-next" onClick={() => dispatch({ type: "next" } as MiniBlackjackAction)}>
             Next hand
           </button>
         )}

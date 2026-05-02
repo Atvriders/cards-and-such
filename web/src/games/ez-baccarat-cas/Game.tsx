@@ -17,7 +17,7 @@ export function EzBaccaratCasGame({ state, dispatch, onGameOver }: GameProps<EzB
         <>
           <div className="ez-b-c-info">Place your bet:</div>
           <div className="ez-b-c-actions">
-            <button className="ez-b-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as EzBaccaratCasAction)}>Player (20 pts)</button>
+            <button data-testid="hint-target-ez-baccarat-cas-primary" className="ez-b-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as EzBaccaratCasAction)}>Player (20 pts)</button>
             <button className="ez-b-c-btn" onClick={() => dispatch({ type: "bet", on: "banker" } as EzBaccaratCasAction)}>Banker (20 pts)</button>
             <button className="ez-b-c-btn alt" onClick={() => dispatch({ type: "bet", on: "tie" } as EzBaccaratCasAction)}>Tie (80 pts)</button>
           </div>

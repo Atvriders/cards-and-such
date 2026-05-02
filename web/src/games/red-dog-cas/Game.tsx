@@ -18,7 +18,7 @@ export function RedDogCasGame({ state, dispatch, onGameOver }: GameProps<RedDogC
           <div className={`rd-c-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="rd-c-btn" onClick={() => dispatch({ type: "play" } as RedDogCasAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-red-dog-cas-primary" className="rd-c-btn" onClick={() => dispatch({ type: "play" } as RedDogCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="rd-c-result">{state.result}</div>
         <button className="rd-c-btn alt" onClick={() => dispatch({ type: "next" } as RedDogCasAction)}>Next</button>

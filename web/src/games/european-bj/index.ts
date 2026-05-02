@@ -11,5 +11,13 @@ export const europeanBjPlugin: GamePlugin<EuropeanBjState, EuropeanBjAction, typ
   howToPlay: "European Blackjack — no hole card, dealer stands on soft 17. Hit to draw, Stand to stop. Bust on 22+ = lose. Doubles down on first two cards. Stand on 17+. Blackjack pays 1.5:1.",
   settings,
   initialState: (seed: number, _s: S) => initialState(seed, _s as EuropeanBjSettings),
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-european-bj-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.yourTotal;
+    if (total < 12) return { selector: '[data-testid="hint-target-european-bj-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-european-bj-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-european-bj-hit"]', pulses: 3 };
+  },
   reducer, isTerminal, component: EuropeanBjGame,
 };

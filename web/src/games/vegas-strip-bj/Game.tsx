@@ -12,12 +12,12 @@ export function VegasStripBjGame({ state, dispatch, onGameOver }: GameProps<Vega
       <div className="dm-score">{state.score} pts</div>
       <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="dm-row">
-        <button className="dm-btn" onClick={() => dispatch({ type: "hit" } as VegasStripBjAction)}>Hit</button>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "stand" } as VegasStripBjAction)}>Stand</button>
+        <button data-testid="hint-target-vegas-strip-bj-hit" className="dm-btn" onClick={() => dispatch({ type: "hit" } as VegasStripBjAction)}>Hit</button>
+        <button data-testid="hint-target-vegas-strip-bj-stand" className="dm-btn alt" onClick={() => dispatch({ type: "stand" } as VegasStripBjAction)}>Stand</button>
       </div>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as VegasStripBjAction)}>Next</button>
+        <button data-testid="hint-target-vegas-strip-bj-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as VegasStripBjAction)}>Next</button>
       </>}
     </div>
   );

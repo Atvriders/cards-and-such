@@ -12,5 +12,13 @@ export const perfectPairsBjPlugin: GamePlugin<PerfectPairsBjState, PerfectPairsB
   howToPlay: "Perfect Pairs is a Blackjack variant featuring a popular side bet. In addition to the main hand, your first two dealt cards may form a pair, paying out as follows: same rank but mixed suits scores ten points; same rank and same colour scores twenty points; identical rank and suit (a perfect pair) scores forty points.\n\nEach round you place a one-credit bet, are dealt two cards, and the dealer shows one upcard. You then hit or stand. The dealer hits on sixteen and stands on seventeen, using standard card values.\n\nTwelve rounds are played. A win on the main hand pays twelve points; a tie pays six. Any pair bonus is added on top of the main result. A side-bet pair without winning the main hand still scores the side amount. A loss with no pair pays zero.\n\nExpected score is around fifty-five to seventy points across twelve rounds; perfect-pair miracles can push above eighty in a single hand. Pair frequency: any pair lands roughly seven per cent of hands; perfect pairs only one per cent. They are rare but lucrative.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PerfectPairsBjSettings),
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-perfect-pairs-bj-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.total;
+    if (total < 12) return { selector: '[data-testid="hint-target-perfect-pairs-bj-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-perfect-pairs-bj-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-perfect-pairs-bj-hit"]', pulses: 3 };
+  },
   reducer, isTerminal, component: PerfectPairsBjGame,
 };

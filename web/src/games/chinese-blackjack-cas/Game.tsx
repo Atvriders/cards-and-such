@@ -24,14 +24,14 @@ export function ChineseBlackjackCasGame({ state, dispatch, onGameOver }: GamePro
       <div className="cn-bj-c-info">You ({state.yourTotal}):</div>
       <div className="cn-bj-c-row">{state.you.map((c, i) => <div key={i} className={`cn-bj-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="cn-bj-c-actions">
-        <button className="cn-bj-c-btn" onClick={() => dispatch({ type: "hit" } as ChineseBlackjackCasAction)}>Hit</button>
-        <button className="cn-bj-c-btn alt" onClick={() => dispatch({ type: "stand" } as ChineseBlackjackCasAction)}>Stand</button>
+        <button data-testid="hint-target-chinese-blackjack-cas-hit" data-testid="hint-target-chinese-blackjack-cas-primary" className="cn-bj-c-btn" onClick={() => dispatch({ type: "hit" } as ChineseBlackjackCasAction)}>Hit</button>
+        <button data-testid="hint-target-chinese-blackjack-cas-stand" className="cn-bj-c-btn alt" onClick={() => dispatch({ type: "stand" } as ChineseBlackjackCasAction)}>Stand</button>
         {state.you.length === 2 && <button className="cn-bj-c-btn alt" onClick={() => dispatch({ type: "double" } as ChineseBlackjackCasAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="cn-bj-c-btn alt" onClick={() => dispatch({ type: "surrender" } as ChineseBlackjackCasAction)}>Surrender</button>}
       </div>}
       {state.phase === "scored" && <>
         <div className="cn-bj-c-result">{state.result} — +{state.pts}</div>
-        <button className="cn-bj-c-btn alt" onClick={() => dispatch({ type: "next" } as ChineseBlackjackCasAction)}>Next</button>
+        <button data-testid="hint-target-chinese-blackjack-cas-next" className="cn-bj-c-btn alt" onClick={() => dispatch({ type: "next" } as ChineseBlackjackCasAction)}>Next</button>
       </>}
     </div>
   );

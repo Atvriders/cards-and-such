@@ -1,7 +1,7 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PontoonState, PontoonAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, handValue } from "./state.js";
 import { PontoonGame } from "./Game.js";
 
 export const pontoonSettings = {
@@ -44,5 +44,15 @@ Strategy: Buy aggressively on soft hands and 9-11. Aim for a Five Card Trick whe
   initialState: (seed: number, settings: Settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if (state.phase === "betting" || state.phase === "settled") {
+      return { selector: '[data-testid="hint-target-pontoon-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "player") return null;
+    const total = handValue(state.playerHand.cards).best;
+    if (total < 12) return { selector: '[data-testid="hint-target-pontoon-twist"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-pontoon-stick"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-pontoon-twist"]', pulses: 3 };
+  },
   component: PontoonGame,
 };

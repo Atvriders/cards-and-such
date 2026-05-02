@@ -24,14 +24,14 @@ export function AtlanticCityBjCasGame({ state, dispatch, onGameOver }: GameProps
       <div className="ac-bj-c-info">You ({state.yourTotal}):</div>
       <div className="ac-bj-c-row">{state.you.map((c, i) => <div key={i} className={`ac-bj-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="ac-bj-c-actions">
-        <button className="ac-bj-c-btn" onClick={() => dispatch({ type: "hit" } as AtlanticCityBjCasAction)}>Hit</button>
-        <button className="ac-bj-c-btn alt" onClick={() => dispatch({ type: "stand" } as AtlanticCityBjCasAction)}>Stand</button>
+        <button data-testid="hint-target-atlantic-city-bj-cas-hit" data-testid="hint-target-atlantic-city-bj-cas-primary" className="ac-bj-c-btn" onClick={() => dispatch({ type: "hit" } as AtlanticCityBjCasAction)}>Hit</button>
+        <button data-testid="hint-target-atlantic-city-bj-cas-stand" className="ac-bj-c-btn alt" onClick={() => dispatch({ type: "stand" } as AtlanticCityBjCasAction)}>Stand</button>
         {state.you.length === 2 && <button className="ac-bj-c-btn alt" onClick={() => dispatch({ type: "double" } as AtlanticCityBjCasAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="ac-bj-c-btn alt" onClick={() => dispatch({ type: "surrender" } as AtlanticCityBjCasAction)}>Surrender</button>}
       </div>}
       {state.phase === "scored" && <>
         <div className="ac-bj-c-result">{state.result} — +{state.pts}</div>
-        <button className="ac-bj-c-btn alt" onClick={() => dispatch({ type: "next" } as AtlanticCityBjCasAction)}>Next</button>
+        <button data-testid="hint-target-atlantic-city-bj-cas-next" className="ac-bj-c-btn alt" onClick={() => dispatch({ type: "next" } as AtlanticCityBjCasAction)}>Next</button>
       </>}
     </div>
   );

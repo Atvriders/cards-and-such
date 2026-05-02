@@ -17,7 +17,7 @@ export function MiniBaccaratCasGame({ state, dispatch, onGameOver }: GameProps<M
         <>
           <div className="mb-c-info">Place your bet:</div>
           <div className="mb-c-actions">
-            <button className="mb-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as MiniBaccaratCasAction)}>Player (20 pts)</button>
+            <button data-testid="hint-target-mini-baccarat-cas-primary" className="mb-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as MiniBaccaratCasAction)}>Player (20 pts)</button>
             <button className="mb-c-btn" onClick={() => dispatch({ type: "bet", on: "banker" } as MiniBaccaratCasAction)}>Banker (19 pts)</button>
             <button className="mb-c-btn alt" onClick={() => dispatch({ type: "bet", on: "tie" } as MiniBaccaratCasAction)}>Tie (80 pts)</button>
           </div>

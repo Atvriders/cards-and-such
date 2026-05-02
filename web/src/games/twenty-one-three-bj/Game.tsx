@@ -24,14 +24,14 @@ export function TwentyOneThreeBjGame({ state, dispatch, onGameOver }: GameProps<
       <div className="tot-bj-info">You ({state.yourTotal}):</div>
       <div className="tot-bj-row">{state.you.map((c, i) => <div key={i} className={`tot-bj-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="tot-bj-actions">
-        <button className="tot-bj-btn" onClick={() => dispatch({ type: "hit" } as TwentyOneThreeBjAction)}>Hit</button>
-        <button className="tot-bj-btn alt" onClick={() => dispatch({ type: "stand" } as TwentyOneThreeBjAction)}>Stand</button>
+        <button data-testid="hint-target-twenty-one-three-bj-hit" className="tot-bj-btn" onClick={() => dispatch({ type: "hit" } as TwentyOneThreeBjAction)}>Hit</button>
+        <button data-testid="hint-target-twenty-one-three-bj-stand" className="tot-bj-btn alt" onClick={() => dispatch({ type: "stand" } as TwentyOneThreeBjAction)}>Stand</button>
         {state.you.length === 2 && <button className="tot-bj-btn alt" onClick={() => dispatch({ type: "double" } as TwentyOneThreeBjAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="tot-bj-btn alt" onClick={() => dispatch({ type: "surrender" } as TwentyOneThreeBjAction)}>Surrender</button>}
       </div>}
       {state.phase === "scored" && <>
         <div className="tot-bj-result">{state.result} — +{state.pts}</div>
-        <button className="tot-bj-btn alt" onClick={() => dispatch({ type: "next" } as TwentyOneThreeBjAction)}>Next</button>
+        <button data-testid="hint-target-twenty-one-three-bj-next" className="tot-bj-btn alt" onClick={() => dispatch({ type: "next" } as TwentyOneThreeBjAction)}>Next</button>
       </>}
     </div>
   );

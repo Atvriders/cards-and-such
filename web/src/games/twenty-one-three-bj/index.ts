@@ -11,5 +11,13 @@ export const twentyOneThreeBjPlugin: GamePlugin<TwentyOneThreeBjState, TwentyOne
   howToPlay: "21+3 Blackjack — three-card poker side bet variant. Hit to draw, Stand to stop. Bust on 22+ = lose. Doubles down on first two cards. Stand on 17+. Blackjack pays 1.5:1.",
   settings,
   initialState: (seed: number, _s: S) => initialState(seed, _s as TwentyOneThreeBjSettings),
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-twenty-one-three-bj-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.yourTotal;
+    if (total < 12) return { selector: '[data-testid="hint-target-twenty-one-three-bj-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-twenty-one-three-bj-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-twenty-one-three-bj-hit"]', pulses: 3 };
+  },
   reducer, isTerminal, component: TwentyOneThreeBjGame,
 };

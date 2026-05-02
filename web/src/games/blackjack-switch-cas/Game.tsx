@@ -24,14 +24,14 @@ export function BlackjackSwitchCasGame({ state, dispatch, onGameOver }: GameProp
       <div className="bj-sw-c-info">You ({state.yourTotal}):</div>
       <div className="bj-sw-c-row">{state.you.map((c, i) => <div key={i} className={`bj-sw-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="bj-sw-c-actions">
-        <button className="bj-sw-c-btn" onClick={() => dispatch({ type: "hit" } as BlackjackSwitchCasAction)}>Hit</button>
-        <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "stand" } as BlackjackSwitchCasAction)}>Stand</button>
+        <button data-testid="hint-target-blackjack-switch-cas-hit" data-testid="hint-target-blackjack-switch-cas-primary" className="bj-sw-c-btn" onClick={() => dispatch({ type: "hit" } as BlackjackSwitchCasAction)}>Hit</button>
+        <button data-testid="hint-target-blackjack-switch-cas-stand" className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "stand" } as BlackjackSwitchCasAction)}>Stand</button>
         {state.you.length === 2 && <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "double" } as BlackjackSwitchCasAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "surrender" } as BlackjackSwitchCasAction)}>Surrender</button>}
       </div>}
       {state.phase === "scored" && <>
         <div className="bj-sw-c-result">{state.result} — +{state.pts}</div>
-        <button className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "next" } as BlackjackSwitchCasAction)}>Next</button>
+        <button data-testid="hint-target-blackjack-switch-cas-next" className="bj-sw-c-btn alt" onClick={() => dispatch({ type: "next" } as BlackjackSwitchCasAction)}>Next</button>
       </>}
     </div>
   );

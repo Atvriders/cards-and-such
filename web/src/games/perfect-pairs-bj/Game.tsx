@@ -12,12 +12,12 @@ export function PerfectPairsBjGame({ state, dispatch, onGameOver }: GameProps<Pe
       <div className="dm-score">{state.score} pts</div>
       <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="dm-row">
-        <button className="dm-btn" onClick={() => dispatch({ type: "hit" } as PerfectPairsBjAction)}>Hit</button>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "stand" } as PerfectPairsBjAction)}>Stand</button>
+        <button data-testid="hint-target-perfect-pairs-bj-hit" className="dm-btn" onClick={() => dispatch({ type: "hit" } as PerfectPairsBjAction)}>Hit</button>
+        <button data-testid="hint-target-perfect-pairs-bj-stand" className="dm-btn alt" onClick={() => dispatch({ type: "stand" } as PerfectPairsBjAction)}>Stand</button>
       </div>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PerfectPairsBjAction)}>Next</button>
+        <button data-testid="hint-target-perfect-pairs-bj-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PerfectPairsBjAction)}>Next</button>
       </>}
     </div>
   );

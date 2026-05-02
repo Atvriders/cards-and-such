@@ -13,7 +13,7 @@ export function TeenPattiCasGame({ state, dispatch, onGameOver }: GameProps<Teen
       <div className="tp-c-info">You:</div>
       <div className="tp-c-row">{state.you.map((c, i) => <div key={i} className={`tp-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "see" && <div className="tp-c-row">
-        <button className="tp-c-btn" onClick={() => dispatch({ type: "play" } as TeenPattiCasAction)}>Play</button>
+        <button data-testid="hint-target-teen-patti-cas-primary" className="tp-c-btn" onClick={() => dispatch({ type: "play" } as TeenPattiCasAction)}>Play</button>
         <button className="tp-c-btn alt" onClick={() => dispatch({ type: "fold" } as TeenPattiCasAction)}>Fold</button>
       </div>}
       {state.phase === "scored" && <>

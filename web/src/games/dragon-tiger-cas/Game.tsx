@@ -15,7 +15,7 @@ export function DragonTigerCasGame({ state, dispatch, onGameOver }: GameProps<Dr
         {state.middle !== null && <div className={`drt-c-card ${isRed(state.middle) ? "red" : "black"}`}>{cardName(state.middle)}</div>}
         <div className={`drt-c-card ${isRed(state.right) ? "red" : "black"}`}>{cardName(state.right)}</div>
       </div>}
-      {state.phase === "ready" && <button className="drt-c-btn" onClick={() => dispatch({ type: "play" } as DragonTigerCasAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-dragon-tiger-cas-primary" className="drt-c-btn" onClick={() => dispatch({ type: "play" } as DragonTigerCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="drt-c-result">{state.result}</div>
         <button className="drt-c-btn alt" onClick={() => dispatch({ type: "next" } as DragonTigerCasAction)}>Next</button>

@@ -18,7 +18,7 @@ export function FourCardPokerCasGame({ state, dispatch, onGameOver }: GameProps<
           <div className={`fcp-c-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="fcp-c-btn" onClick={() => dispatch({ type: "play" } as FourCardPokerCasAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-four-card-poker-cas-primary" className="fcp-c-btn" onClick={() => dispatch({ type: "play" } as FourCardPokerCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="fcp-c-result">{state.result}</div>
         <button className="fcp-c-btn alt" onClick={() => dispatch({ type: "next" } as FourCardPokerCasAction)}>Next</button>

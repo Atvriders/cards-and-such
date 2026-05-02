@@ -1,7 +1,7 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlackjackSwitchState, BlackjackSwitchAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, handValue } from "./state.js";
 import { BlackjackSwitchGame } from "./Game.js";
 
 export const blackjackSwitchSettings = {
@@ -50,5 +50,16 @@ Strategy tip: Prioritise building one very strong hand when switching — a 20 o
   initialState: (seed: number, settings: Settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if (state.phase === "betting" || state.phase === "settled") {
+      return { selector: '[data-testid="hint-target-blackjack-switch-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "player") return null;
+    const hand = state.activeHandIndex === 0 ? state.hand1 : state.hand2;
+    const total = handValue(hand.cards).best;
+    if (total < 12) return { selector: '[data-testid="hint-target-blackjack-switch-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-blackjack-switch-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-blackjack-switch-hit"]', pulses: 3 };
+  },
   component: BlackjackSwitchGame,
 };

@@ -12,5 +12,13 @@ export const atlanticCityBjPlugin: GamePlugin<AtlanticCityBjState, AtlanticCityB
   howToPlay: "Atlantic City Blackjack is the standard Blackjack rule-set used in casinos along the New Jersey shore. The dealer hits soft 17, players may double after split, and surrender is offered. The result is a slightly player-friendly variant of standard Blackjack.\n\nIn each of twelve rounds you and the dealer are dealt two cards each, with one dealer card hidden. You may hit (take more cards) or stand (end your turn). Aces count eleven (or one if you would otherwise bust); pip cards face value; faces count ten. Bust at twenty-two-or-more and you lose immediately.\n\nA standard win pays twelve points; a push pays five; a Blackjack (twenty-one on the first two cards) pays eighteen. The dealer plays automatically: hit until seventeen-or-more, stand thereafter.\n\nExpected score across twelve rounds is fifty-five to ninety. Stand on hard seventeen-or-more, hit on twelve-or-less; the standard charts apply. A single Blackjack adds eighteen to your total — keep an eye out for early aces.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AtlanticCityBjSettings),
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-atlantic-city-bj-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.yourTotal;
+    if (total < 12) return { selector: '[data-testid="hint-target-atlantic-city-bj-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-atlantic-city-bj-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-atlantic-city-bj-hit"]', pulses: 3 };
+  },
   reducer, isTerminal, component: AtlanticCityBjGame,
 };

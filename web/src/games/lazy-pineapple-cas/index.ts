@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CasState, CasAction, CasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CasGame } from "./Game.js";
@@ -6,6 +6,7 @@ import { CasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
+const hint = (state: CasState): HintTarget | null => (state.phase === "ready" ? { selector: '[data-testid="hint-target-lazy-pineapple-cas-primary"]', pulses: 3 } : null);
 export const lazyPineappleCasPlugin: GamePlugin<CasState, CasAction, typeof settings> = {
   id: "lazy-pineapple-cas",
   title: "Lazy Pineapple",
@@ -17,5 +18,5 @@ export const lazyPineappleCasPlugin: GamePlugin<CasState, CasAction, typeof sett
   initialState: (seed: number, s: S) => initialState(seed, s as CasSettings),
   reducer,
   isTerminal,
-  component: CasGame,
+  hint, component: CasGame,
 };

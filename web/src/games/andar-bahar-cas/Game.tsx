@@ -14,7 +14,7 @@ export function AndarBaharCasGame({ state, dispatch, onGameOver }: GameProps<And
       {state.phase === "bet" && <>
         <div className="abh-c-info">Choose where the match will appear:</div>
         <div className="abh-c-row">
-          <button className="abh-c-btn" onClick={() => dispatch({ type: "bet", side: "andar" } as AndarBaharCasAction)}>Andar</button>
+          <button data-testid="hint-target-andar-bahar-cas-primary" className="abh-c-btn" onClick={() => dispatch({ type: "bet", side: "andar" } as AndarBaharCasAction)}>Andar</button>
           <button className="abh-c-btn alt" onClick={() => dispatch({ type: "bet", side: "bahar" } as AndarBaharCasAction)}>Bahar</button>
         </div>
       </>}

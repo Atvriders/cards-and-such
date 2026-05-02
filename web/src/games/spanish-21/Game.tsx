@@ -58,12 +58,12 @@ export function Spanish21Game({
 
       <div className="s21-actions">
         {(phase === "betting" || phase === "settled") && !terminal && (
-          <button className="primary" onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button className="primary" data-testid="hint-target-spanish-21-deal" onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
         {phase === "player" && !playerHand.busted && (
           <>
-            <button onClick={() => dis({ type: "hit" })}>Hit</button>
-            <button onClick={() => dis({ type: "stand" })}>Stand</button>
+            <button data-testid="hint-target-spanish-21-hit" onClick={() => dis({ type: "hit" })}>Hit</button>
+            <button data-testid="hint-target-spanish-21-stand" onClick={() => dis({ type: "stand" })}>Stand</button>
             <button onClick={() => dis({ type: "double" })} disabled={!canDouble}>Double</button>
             <button className="surrender-btn" onClick={() => dis({ type: "surrender" })} disabled={!canSurrender}>Surrender</button>
           </>

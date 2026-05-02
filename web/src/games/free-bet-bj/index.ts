@@ -12,5 +12,13 @@ export const freeBetBjPlugin: GamePlugin<FreeBetBjState, FreeBetBjAction, typeof
   howToPlay: "Free Bet Blackjack is a casino variant where the house pays for your double-down on hard nines, tens, and elevens — and pays for splits on most pairs. The trade-off is that any time the dealer busts with exactly 22, all remaining player bets push instead of winning.\n\nEach round you place a one-credit bet, draw two cards, and decide to hit or stand. The dealer shows one upcard, then plays out a standard hand: hit on sixteen, stand on seventeen. Standard blackjack values apply.\n\nTwelve rounds are played. Wins pay twelve points; ties (pushes) pay six points. A bonus of ten points is awarded for any win on a hand with a free-double opportunity (i.e. an opening total of nine, ten, or eleven). A loss pays zero.\n\nExpected score across twelve rounds is around fifty points. Particularly hot runs with several free doubles can push past eighty. The variant trades the chance of a big push-on-22 against frequent free doubles, which on balance favours the player slightly compared to plain blackjack.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as FreeBetBjSettings),
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-free-bet-bj-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.total;
+    if (total < 12) return { selector: '[data-testid="hint-target-free-bet-bj-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-free-bet-bj-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-free-bet-bj-hit"]', pulses: 3 };
+  },
   reducer, isTerminal, component: FreeBetBjGame,
 };

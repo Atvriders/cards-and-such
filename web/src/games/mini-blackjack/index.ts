@@ -1,7 +1,7 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MiniBlackjackState, MiniBlackjackAction, MiniBlackjackSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, handTotal } from "./state.js";
 import { MiniBlackjackGame } from "./Game.js";
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
@@ -18,5 +18,14 @@ Scoring per round: hit exactly 21 for 30 points; finish at 18-20 for 20 points; 
 There are eight rounds total, each independent. Don't push too greedy — busting is harsh. A run that scores 100+ points is solid; pushing past 150 takes both nerve and a friendly deck. Stand on 18+ and don't tempt fate when sitting on 16!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniBlackjackSettings),
+  hint: (state) => {
+    if (state.phase === "betting") return { selector: '[data-testid="hint-target-mini-blackjack-deal"]', pulses: 3 };
+    if (state.phase === "settle") return { selector: '[data-testid="hint-target-mini-blackjack-next"]', pulses: 3 };
+    if (state.phase !== "player") return null;
+    const total = handTotal(state.player);
+    if (total < 12) return { selector: '[data-testid="hint-target-mini-blackjack-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-mini-blackjack-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-mini-blackjack-hit"]', pulses: 3 };
+  },
   reducer,isTerminal,component:MiniBlackjackGame,
 };

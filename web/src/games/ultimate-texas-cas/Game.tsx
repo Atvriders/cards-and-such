@@ -18,7 +18,7 @@ export function UltimateTexasCasGame({ state, dispatch, onGameOver }: GameProps<
           <div className={`uth-c-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="uth-c-btn" onClick={() => dispatch({ type: "play" } as UltimateTexasCasAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-ultimate-texas-cas-primary" className="uth-c-btn" onClick={() => dispatch({ type: "play" } as UltimateTexasCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="uth-c-result">{state.result}</div>
         <button className="uth-c-btn alt" onClick={() => dispatch({ type: "next" } as UltimateTexasCasAction)}>Next</button>

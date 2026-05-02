@@ -12,12 +12,12 @@ export function DoubleExposureBjGame({ state, dispatch, onGameOver }: GameProps<
       <div className="dx-bj-score">{state.score} pts</div>
       <div className="dx-bj-row">{state.hand.map((c, i) => <div key={i} className={`dx-bj-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="dx-bj-row">
-        <button className="dx-bj-btn" onClick={() => dispatch({ type: "hit" } as DoubleExposureBjAction)}>Hit</button>
-        <button className="dx-bj-btn alt" onClick={() => dispatch({ type: "stand" } as DoubleExposureBjAction)}>Stand</button>
+        <button data-testid="hint-target-double-exposure-bj-hit" className="dx-bj-btn" onClick={() => dispatch({ type: "hit" } as DoubleExposureBjAction)}>Hit</button>
+        <button data-testid="hint-target-double-exposure-bj-stand" className="dx-bj-btn alt" onClick={() => dispatch({ type: "stand" } as DoubleExposureBjAction)}>Stand</button>
       </div>}
       {state.phase === "scored" && <>
         <div className="dx-bj-result">{state.result} — +{state.pts}</div>
-        <button className="dx-bj-btn alt" onClick={() => dispatch({ type: "next" } as DoubleExposureBjAction)}>Next</button>
+        <button data-testid="hint-target-double-exposure-bj-next" className="dx-bj-btn alt" onClick={() => dispatch({ type: "next" } as DoubleExposureBjAction)}>Next</button>
       </>}
     </div>
   );

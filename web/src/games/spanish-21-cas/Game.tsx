@@ -24,7 +24,7 @@ export function Spanish21CasGame({ state, dispatch, onGameOver }: GameProps<Span
       <div className="sp21-c-info">You ({state.yourTotal}):</div>
       <div className="sp21-c-row">{state.you.map((c, i) => <div key={i} className={`sp21-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="sp21-c-actions">
-        <button className="sp21-c-btn" onClick={() => dispatch({ type: "hit" } as Spanish21CasAction)}>Hit</button>
+        <button data-testid="hint-target-spanish-21-cas-primary" className="sp21-c-btn" onClick={() => dispatch({ type: "hit" } as Spanish21CasAction)}>Hit</button>
         <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "stand" } as Spanish21CasAction)}>Stand</button>
         {state.you.length === 2 && <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "double" } as Spanish21CasAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "surrender" } as Spanish21CasAction)}>Surrender</button>}

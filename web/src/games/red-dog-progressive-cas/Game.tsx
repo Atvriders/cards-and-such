@@ -15,7 +15,7 @@ export function RedDogProgressiveCasGame({ state, dispatch, onGameOver }: GamePr
         {state.middle !== null && <div className={`rdp-c-card ${isRed(state.middle) ? "red" : "black"}`}>{cardName(state.middle)}</div>}
         <div className={`rdp-c-card ${isRed(state.right) ? "red" : "black"}`}>{cardName(state.right)}</div>
       </div>}
-      {state.phase === "ready" && <button className="rdp-c-btn" onClick={() => dispatch({ type: "play" } as RedDogProgressiveCasAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-red-dog-progressive-cas-primary" className="rdp-c-btn" onClick={() => dispatch({ type: "play" } as RedDogProgressiveCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="rdp-c-result">{state.result}</div>
         <button className="rdp-c-btn alt" onClick={() => dispatch({ type: "next" } as RedDogProgressiveCasAction)}>Next</button>

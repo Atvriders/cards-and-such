@@ -1,7 +1,7 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnteUpState, AnteUpAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, handValue } from "./state.js";
 import { AnteUpBlackjackGame } from "./Game.js";
 
 export const anteUpSettings = {
@@ -42,5 +42,15 @@ Tips: The Ante bonus is independent of the main bet — you can win the main bet
   initialState: (seed: number, settings: Settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => {
+    if (state.phase === "betting" || state.phase === "settled") {
+      return { selector: '[data-testid="hint-target-ante-up-blackjack-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "player") return null;
+    const total = handValue(state.playerHand.cards).best;
+    if (total < 12) return { selector: '[data-testid="hint-target-ante-up-blackjack-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-ante-up-blackjack-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-ante-up-blackjack-hit"]', pulses: 3 };
+  },
   component: AnteUpBlackjackGame,
 };

@@ -24,14 +24,14 @@ export function MultiHandBjGame({ state, dispatch, onGameOver }: GameProps<Multi
       <div className="mh-bj-info">You ({state.yourTotal}):</div>
       <div className="mh-bj-row">{state.you.map((c, i) => <div key={i} className={`mh-bj-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="mh-bj-actions">
-        <button className="mh-bj-btn" onClick={() => dispatch({ type: "hit" } as MultiHandBjAction)}>Hit</button>
-        <button className="mh-bj-btn alt" onClick={() => dispatch({ type: "stand" } as MultiHandBjAction)}>Stand</button>
+        <button data-testid="hint-target-multi-hand-bj-hit" className="mh-bj-btn" onClick={() => dispatch({ type: "hit" } as MultiHandBjAction)}>Hit</button>
+        <button data-testid="hint-target-multi-hand-bj-stand" className="mh-bj-btn alt" onClick={() => dispatch({ type: "stand" } as MultiHandBjAction)}>Stand</button>
         {state.you.length === 2 && <button className="mh-bj-btn alt" onClick={() => dispatch({ type: "double" } as MultiHandBjAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="mh-bj-btn alt" onClick={() => dispatch({ type: "surrender" } as MultiHandBjAction)}>Surrender</button>}
       </div>}
       {state.phase === "scored" && <>
         <div className="mh-bj-result">{state.result} — +{state.pts}</div>
-        <button className="mh-bj-btn alt" onClick={() => dispatch({ type: "next" } as MultiHandBjAction)}>Next</button>
+        <button data-testid="hint-target-multi-hand-bj-next" className="mh-bj-btn alt" onClick={() => dispatch({ type: "next" } as MultiHandBjAction)}>Next</button>
       </>}
     </div>
   );

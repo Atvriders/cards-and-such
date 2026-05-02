@@ -66,12 +66,12 @@ export function PontoonGame({
 
       <div className="pontoon-actions">
         {(phase === "betting" || phase === "settled") && !terminal && (
-          <button className="primary" onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button className="primary" data-testid="hint-target-pontoon-deal" onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
         {phase === "player" && !playerHand.busted && (
           <>
-            <button onClick={() => dis({ type: "twist" })}>Twist</button>
-            <button onClick={() => dis({ type: "stick" })} disabled={!canStick}>Stick</button>
+            <button data-testid="hint-target-pontoon-twist" onClick={() => dis({ type: "twist" })}>Twist</button>
+            <button data-testid="hint-target-pontoon-stick" onClick={() => dis({ type: "stick" })} disabled={!canStick}>Stick</button>
             <button onClick={() => dis({ type: "buy" })} disabled={!canBuy}>Buy (Double)</button>
           </>
         )}

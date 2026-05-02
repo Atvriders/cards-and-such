@@ -24,14 +24,14 @@ export function EuropeanBjGame({ state, dispatch, onGameOver }: GameProps<Europe
       <div className="eu-bj-info">You ({state.yourTotal}):</div>
       <div className="eu-bj-row">{state.you.map((c, i) => <div key={i} className={`eu-bj-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="eu-bj-actions">
-        <button className="eu-bj-btn" onClick={() => dispatch({ type: "hit" } as EuropeanBjAction)}>Hit</button>
-        <button className="eu-bj-btn alt" onClick={() => dispatch({ type: "stand" } as EuropeanBjAction)}>Stand</button>
+        <button data-testid="hint-target-european-bj-hit" className="eu-bj-btn" onClick={() => dispatch({ type: "hit" } as EuropeanBjAction)}>Hit</button>
+        <button data-testid="hint-target-european-bj-stand" className="eu-bj-btn alt" onClick={() => dispatch({ type: "stand" } as EuropeanBjAction)}>Stand</button>
         {state.you.length === 2 && <button className="eu-bj-btn alt" onClick={() => dispatch({ type: "double" } as EuropeanBjAction)}>Double</button>}
         {SURRENDER_ENABLED && state.you.length === 2 && <button className="eu-bj-btn alt" onClick={() => dispatch({ type: "surrender" } as EuropeanBjAction)}>Surrender</button>}
       </div>}
       {state.phase === "scored" && <>
         <div className="eu-bj-result">{state.result} — +{state.pts}</div>
-        <button className="eu-bj-btn alt" onClick={() => dispatch({ type: "next" } as EuropeanBjAction)}>Next</button>
+        <button data-testid="hint-target-european-bj-next" className="eu-bj-btn alt" onClick={() => dispatch({ type: "next" } as EuropeanBjAction)}>Next</button>
       </>}
     </div>
   );

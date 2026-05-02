@@ -12,5 +12,13 @@ export const vegasStripBjPlugin: GamePlugin<VegasStripBjState, VegasStripBjActio
   howToPlay: "Vegas Strip Blackjack is the casino-floor standard ruleset. The dealer stands on all seventeens (including soft 17), naturals pay three-to-two, and you may surrender on your first two cards (give up half the bet). Doubling and splitting follow normal Vegas conventions.\n\nEach round you place a one-credit bet and receive two cards; the dealer shows one upcard. You may hit, stand, or surrender. After your decision, the dealer plays out under fixed rules: hit on sixteen, stand on seventeen and over.\n\nTwelve rounds are played. A normal win pays twelve points; a natural blackjack pays eighteen (three-to-two). A tie pushes for six points. A surrender returns six points (half the bet). Standard losses pay zero.\n\nExpected score across twelve rounds is around fifty-five points; a hot run with a couple of naturals can push past eighty. The surrender option gives the player a tiny edge over no-surrender games and is the main reason this variant sits among the best blackjack rules in the casino. Stand on stiff hands when the dealer shows a low upcard.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as VegasStripBjSettings),
+  hint: (state) => {
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-vegas-strip-bj-next"]', pulses: 3 };
+    if (state.phase !== "play") return null;
+    const total = state.total;
+    if (total < 12) return { selector: '[data-testid="hint-target-vegas-strip-bj-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-vegas-strip-bj-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-vegas-strip-bj-hit"]', pulses: 3 };
+  },
   reducer, isTerminal, component: VegasStripBjGame,
 };

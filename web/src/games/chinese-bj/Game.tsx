@@ -12,12 +12,12 @@ export function ChineseBjGame({ state, dispatch, onGameOver }: GameProps<Chinese
       <div className="dm-score">{state.score} pts</div>
       <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <div className="dm-row">
-        <button className="dm-btn" onClick={() => dispatch({ type: "hit" } as ChineseBjAction)}>Hit</button>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "stand" } as ChineseBjAction)}>Stand</button>
+        <button data-testid="hint-target-chinese-bj-hit" className="dm-btn" onClick={() => dispatch({ type: "hit" } as ChineseBjAction)}>Hit</button>
+        <button data-testid="hint-target-chinese-bj-stand" className="dm-btn alt" onClick={() => dispatch({ type: "stand" } as ChineseBjAction)}>Stand</button>
       </div>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as ChineseBjAction)}>Next</button>
+        <button data-testid="hint-target-chinese-bj-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as ChineseBjAction)}>Next</button>
       </>}
     </div>
   );

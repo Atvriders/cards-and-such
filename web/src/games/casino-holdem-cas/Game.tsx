@@ -18,7 +18,7 @@ export function CasinoHoldemCasGame({ state, dispatch, onGameOver }: GameProps<C
           <div className={`ch-c-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="ch-c-btn" onClick={() => dispatch({ type: "play" } as CasinoHoldemCasAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-casino-holdem-cas-primary" className="ch-c-btn" onClick={() => dispatch({ type: "play" } as CasinoHoldemCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="ch-c-result">{state.result}</div>
         <button className="ch-c-btn alt" onClick={() => dispatch({ type: "next" } as CasinoHoldemCasAction)}>Next</button>

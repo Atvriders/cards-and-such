@@ -17,7 +17,7 @@ export function BanqueCasGame({ state, dispatch, onGameOver }: GameProps<BanqueC
         <>
           <div className="banq-c-info">Place your bet:</div>
           <div className="banq-c-actions">
-            <button className="banq-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as BanqueCasAction)}>Player (20 pts)</button>
+            <button data-testid="hint-target-banque-cas-primary" className="banq-c-btn" onClick={() => dispatch({ type: "bet", on: "player" } as BanqueCasAction)}>Player (20 pts)</button>
             <button className="banq-c-btn" onClick={() => dispatch({ type: "bet", on: "banker" } as BanqueCasAction)}>Banker (19 pts)</button>
             <button className="banq-c-btn alt" onClick={() => dispatch({ type: "bet", on: "tie" } as BanqueCasAction)}>Tie (80 pts)</button>
           </div>
