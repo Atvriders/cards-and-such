@@ -29,27 +29,65 @@ test.describe("lobby flows smoke", () => {
     await expect.poll(async () => tiles.count(), { timeout: 10_000 }).toBeGreaterThanOrEqual(100);
   });
 
-  test("favorites chip shows empty state with no stored favorites", async ({ page }) => {
+  test("favorites chip: empty state, then klondike heart round-trip", async ({ page }) => {
     await loginAs(page, "fav");
-    // No localStorage favorites have been seeded for this fresh user, so the
-    // Favorites chip — when present — should render the empty state.
-    const favChip = page
-      .getByRole("tab", { name: /favorites/i })
-      .or(page.getByRole("button", { name: /favorites/i }))
-      .first();
-    if (await favChip.count() > 0 && await favChip.isVisible().catch(() => false)) {
-      await favChip.click();
-      const empty = page
-        .getByTestId("lobby-favorites-empty")
-        .or(page.getByTestId("lobby-no-results"))
-        .or(page.getByTestId("lobby-empty"));
-      await expect(empty.first()).toBeVisible();
-    } else {
-      test.info().annotations.push({
-        type: "skip",
-        description: "Favorites chip not present in current build",
-      });
-    }
+    // W169 (c13fdfde) added the Favorites chip + per-tile heart toggle.
+    // Fresh user has no stored favorites, so the chip should land on the
+    // dedicated empty-state testid.
+    const favChip = page.getByTestId("chip-favorites");
+    await favChip.click();
+    await expect(page.getByTestId("lobby-favorites-empty")).toBeVisible();
+
+    // Bounce back to "All" so the klondike tile (and its heart toggle) is
+    // mounted and clickable.
+    await page.getByTestId("chip-all").click();
+    const klondikeHeart = page.getByTestId("tile-fav-toggle-klondike");
+    await expect(klondikeHeart).toBeVisible();
+    await klondikeHeart.click();
+    await expect(klondikeHeart).toHaveAttribute("aria-pressed", "true");
+
+    // Re-enter the Favorites chip; klondike should now be the only tile.
+    await favChip.click();
+    await expect(page.getByTestId("tile-klondike")).toBeVisible();
+    await expect(page.getByTestId("lobby-favorites-empty")).toHaveCount(0);
+
+    // Cleanup: unfavorite so the next test run starts from a clean slate.
+    // The heart on the Favorites view still carries the same testid.
+    await page.getByTestId("tile-fav-toggle-klondike").click();
+    await expect(page.getByTestId("lobby-favorites-empty")).toBeVisible();
+  });
+
+  test("welcome tutorial appears on a fresh device and Skip dismisses it", async ({ page }) => {
+    // Visit the app first so an origin is bound, then wipe localStorage and
+    // reload — guarantees the welcome carousel runs on a truly fresh slate
+    // regardless of any prior test mutating storage on this origin.
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => window.localStorage.clear());
+    await page.reload({ waitUntil: "domcontentloaded" });
+
+    // W170 added 1-indexed `tut-step-N` testids; the first card is
+    // `tut-step-1`. (The user prompt mentioned `tut-step-0` but the
+    // implementation uses 1-based indices — see Tutorial.tsx:351.)
+    const firstStep = page.getByTestId("tut-step-1");
+    await expect(firstStep).toBeVisible();
+
+    await page.getByTestId("tut-skip").click();
+    await expect(firstStep).toHaveCount(0);
+  });
+
+  test("footer shortcuts button opens kbd modal and Esc closes it", async ({ page }) => {
+    await loginAs(page, "kbd");
+    // Footer is below the fold on most viewports — scroll it into view
+    // before clicking so the click target is interactable.
+    const trigger = page.getByTestId("footer-shortcuts-btn");
+    await trigger.scrollIntoViewIfNeeded();
+    await trigger.click();
+
+    const modal = page.getByTestId("kbd-modal");
+    await expect(modal).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await expect(modal).toHaveCount(0);
   });
 
   test("submitting search 'klondike' lands on /search?q=klondike", async ({ page }) => {
