@@ -5,6 +5,7 @@ import { ACHIEVEMENTS, favoriteCategory, loadStats, resetStats } from "../platfo
 import type { Achievement, StatsState } from "../platform/stats.js";
 import { GAMES } from "../games/registry.js";
 import { downloadSvg } from "../platform/svgShare.js";
+import { useConfirm } from "../platform/ConfirmDialog.js";
 import "./StatsPage.css";
 
 const PIE_COLORS = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24", "#f472b6"];
@@ -384,6 +385,7 @@ function formatBestTime(seconds: number): string {
 }
 
 export default function StatsPage(): JSX.Element {
+  const showConfirm = useConfirm();
   const [stats, setStats] = useState<StatsState>(() => loadStats());
   const [category, setCategory] = useState<CategoryFilter>("all");
   const [range, setRange] = useState<RangeOption>(14);
@@ -513,8 +515,14 @@ export default function StatsPage(): JSX.Element {
     };
   }, [drillId, stats]);
 
-  const handleReset = (): void => {
-    if (typeof window !== "undefined" && !window.confirm("Reset all stats? This cannot be undone.")) return;
+  const handleReset = async (): Promise<void> => {
+    const ok = await showConfirm({
+      title: "Reset all stats?",
+      message: "This will clear every play count, win, best score, and history entry. This cannot be undone.",
+      confirmLabel: "Reset stats",
+      danger: true,
+    });
+    if (!ok) return;
     resetStats();
     setStats(loadStats());
     setDrillId(null);

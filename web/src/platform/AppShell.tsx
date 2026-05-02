@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./stores/auth.js";
+import { ConfirmProvider } from "./ConfirmDialog.js";
 import { ToastHost } from "./ui/Toast.js";
 import { SparkleHost } from "./Sparkles.js";
 import ThemePicker from "./ui/ThemePicker.js";
@@ -383,6 +384,7 @@ export default function AppShell(): JSX.Element {
   };
 
   return (
+    <ConfirmProvider>
     <div className="app-shell">
       {/* Skip link must be the first focusable element on the page so a
           keyboard user (or screen-reader user) can jump past the header /
@@ -930,5 +932,6 @@ export default function AppShell(): JSX.Element {
         </div>
       ) : null}
     </div>
+    </ConfirmProvider>
   );
 }

@@ -22,6 +22,7 @@ import { t } from "../platform/i18n.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
 import { encodeChallenge, MAX_FRIEND_SEED } from "../platform/friendCode.js";
 import { track } from "../platform/analytics.js";
+import { useConfirm } from "../platform/ConfirmDialog.js";
 import { hashStamp, todayStamp } from "./dailyPicker.js";
 import "./PlayPage.css";
 
@@ -394,6 +395,7 @@ export default function PlayPage(): JSX.Element {
 }
 
 function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
+  const showConfirm = useConfirm();
   const [searchParams, setSearchParams] = useSearchParams();
   const urlSeed = parseSeed(searchParams.get("seed"));
 
@@ -673,21 +675,25 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
    * counts as "in progress" once it has either run for >30s or accepted
    * more than 5 user actions.
    */
-  const confirmIfInProgress = useCallback((): boolean => {
+  const confirmIfInProgress = useCallback(async (): Promise<boolean> => {
     if (phase !== "playing") return true;
     const inProgress = elapsed > 30 || actionCountRef.current > 5;
     if (!inProgress) return true;
-    if (typeof window === "undefined" || typeof window.confirm !== "function") return true;
-    return window.confirm("Lose progress?");
-  }, [phase, elapsed]);
+    return await showConfirm({
+      title: "Lose progress?",
+      message: "You have an in-progress game. Restarting will discard your current progress.",
+      confirmLabel: "Restart",
+      danger: true,
+    });
+  }, [phase, elapsed, showConfirm]);
 
-  const newGame = useCallback(() => {
-    if (!confirmIfInProgress()) return;
+  const newGame = useCallback(async () => {
+    if (!(await confirmIfInProgress())) return;
     startWithSeed(randomSeed());
   }, [startWithSeed, confirmIfInProgress]);
 
-  const replay = useCallback(() => {
-    if (!confirmIfInProgress()) return;
+  const replay = useCallback(async () => {
+    if (!(await confirmIfInProgress())) return;
     startWithSeed(seed);
   }, [seed, startWithSeed, confirmIfInProgress]);
 
@@ -1818,7 +1824,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                   className="play-settings-restart-btn"
                   onClick={() => {
                     setSettingsModalOpen(false);
-                    replay();
+                    void replay();
                   }}
                   data-testid="play-settings-restart-now"
                 >
