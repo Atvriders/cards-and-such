@@ -1,4 +1,4 @@
-import { useEffect, useRef, type JSX } from "react";
+import { useEffect, useRef, useState, type JSX, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 /**
  * Small popover-style context menu rendered absolutely-positioned at the
@@ -11,6 +11,17 @@ import { useEffect, useRef, type JSX } from "react";
  * `position: fixed` child sized to a few items renders cleanly above the
  * grid without affecting layout. Coordinates are clamped to the viewport
  * so right-clicks near the edge don't push items off-screen.
+ *
+ * Keyboard model (WAI-ARIA Authoring Practices for `menu`):
+ *   - ArrowDown / ArrowUp   move focus to next / previous item, wrapping
+ *   - Home / End            jump to first / last item
+ *   - Enter / Space         activate the focused item
+ *   - Tab / Shift+Tab       still navigate (native button focus order)
+ *   - Escape                close without selecting
+ *
+ * A roving tabindex (only the focused item is `tabIndex=0`, others are
+ * `-1`) keeps the menu a single tab stop within the surrounding page,
+ * matching native menu behavior.
  */
 
 export interface LobbyTileMenuProps {
@@ -55,6 +66,10 @@ export function LobbyTileMenu({
   onShareWithFriend,
 }: LobbyTileMenuProps): JSX.Element {
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  // Index of the currently-focused item in the visual order. Drives the
+  // roving tabindex so the menu is a single tab stop.
+  const [focusIndex, setFocusIndex] = useState<number>(0);
 
   // Close on Escape and on any click/contextmenu outside the popover.
   useEffect(() => {
@@ -85,11 +100,14 @@ export function LobbyTileMenu({
   // Focus the first item when the menu opens so keyboard users can
   // immediately tab/arrow through it.
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const first = root.querySelector<HTMLButtonElement>("button[data-testid^='tile-menu-']");
-    first?.focus();
+    itemRefs.current[0]?.focus();
   }, []);
+
+  // Keep DOM focus in sync with the rover. Whenever focusIndex changes
+  // (arrow / Home / End), move focus to that button.
+  useEffect(() => {
+    itemRefs.current[focusIndex]?.focus();
+  }, [focusIndex]);
 
   // Clamp into viewport so a near-edge right-click still shows all items.
   const vw = typeof window !== "undefined" ? window.innerWidth : 1024;
@@ -102,6 +120,64 @@ export function LobbyTileMenu({
     onClose();
   }
 
+  // Build the menu items declaratively so navigation handlers can iterate
+  // a single source of truth. Order here is the visual / DOM order.
+  const items: Array<{ testId: string; label: string; onSelect: () => void }> = [
+    { testId: "tile-menu-play", label: "Play", onSelect: () => run(onPlay) },
+    { testId: "tile-menu-copy", label: "Copy link", onSelect: () => run(onCopyLink) },
+    {
+      testId: "tile-menu-fav",
+      label: isFavorite ? "Remove from favorites" : "Add to favorites",
+      onSelect: () => run(onToggleFavorite),
+    },
+    {
+      testId: "tile-menu-friend",
+      label: "Share with friend",
+      onSelect: () => run(onShareWithFriend),
+    },
+  ];
+
+  function handleMenuKey(e: ReactKeyboardEvent<HTMLDivElement>): void {
+    const last = items.length - 1;
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        e.stopPropagation();
+        setFocusIndex((i) => (i >= last ? 0 : i + 1));
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        e.stopPropagation();
+        setFocusIndex((i) => (i <= 0 ? last : i - 1));
+        break;
+      case "Home":
+        e.preventDefault();
+        e.stopPropagation();
+        setFocusIndex(0);
+        break;
+      case "End":
+        e.preventDefault();
+        e.stopPropagation();
+        setFocusIndex(last);
+        break;
+      case "Enter":
+      case " ":
+      case "Spacebar": {
+        // Activate the currently-focused item. Native <button> would also
+        // fire on Enter/Space, but we intercept here so the behaviour is
+        // identical regardless of which item the rover points at and so
+        // Space doesn't scroll the page.
+        e.preventDefault();
+        e.stopPropagation();
+        const target = items[focusIndex];
+        if (target) target.onSelect();
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
   return (
     <div
       ref={rootRef}
@@ -109,6 +185,7 @@ export function LobbyTileMenu({
       aria-label={`Actions for ${gameId}`}
       data-testid="tile-menu"
       className="lobby-tile-menu"
+      onKeyDown={handleMenuKey}
       style={{
         position: "fixed",
         left,
@@ -127,18 +204,20 @@ export function LobbyTileMenu({
       onClick={(e) => e.stopPropagation()}
       onContextMenu={(e) => { e.preventDefault(); e.stopPropagation(); }}
     >
-      <MenuItem testId="tile-menu-play" onSelect={() => run(onPlay)}>
-        Play
-      </MenuItem>
-      <MenuItem testId="tile-menu-copy" onSelect={() => run(onCopyLink)}>
-        Copy link
-      </MenuItem>
-      <MenuItem testId="tile-menu-fav" onSelect={() => run(onToggleFavorite)}>
-        {isFavorite ? "Remove from favorites" : "Add to favorites"}
-      </MenuItem>
-      <MenuItem testId="tile-menu-friend" onSelect={() => run(onShareWithFriend)}>
-        Share with friend
-      </MenuItem>
+      {items.map((it, i) => (
+        <MenuItem
+          key={it.testId}
+          testId={it.testId}
+          onSelect={it.onSelect}
+          tabIndex={i === focusIndex ? 0 : -1}
+          buttonRef={(el) => {
+            itemRefs.current[i] = el;
+          }}
+          onFocus={() => setFocusIndex(i)}
+        >
+          {it.label}
+        </MenuItem>
+      ))}
     </div>
   );
 }
@@ -147,15 +226,21 @@ interface MenuItemProps {
   testId: string;
   onSelect: () => void;
   children: React.ReactNode;
+  tabIndex: number;
+  buttonRef: (el: HTMLButtonElement | null) => void;
+  onFocus: () => void;
 }
 
-function MenuItem({ testId, onSelect, children }: MenuItemProps): JSX.Element {
+function MenuItem({ testId, onSelect, children, tabIndex, buttonRef, onFocus }: MenuItemProps): JSX.Element {
   return (
     <button
+      ref={buttonRef}
       type="button"
       role="menuitem"
+      tabIndex={tabIndex}
       data-testid={testId}
       onClick={onSelect}
+      onFocus={onFocus}
       style={{
         textAlign: "left",
         padding: "8px 12px",

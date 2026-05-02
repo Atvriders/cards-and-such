@@ -121,4 +121,94 @@ describe("LobbyTileMenu", () => {
     expect(onPlay).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it("uses a roving tabindex: only the focused item is tabIndex=0", async () => {
+    renderMenu();
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-play")).toHaveFocus();
+    });
+    expect(screen.getByTestId("tile-menu-play")).toHaveAttribute("tabindex", "0");
+    expect(screen.getByTestId("tile-menu-copy")).toHaveAttribute("tabindex", "-1");
+    expect(screen.getByTestId("tile-menu-fav")).toHaveAttribute("tabindex", "-1");
+    expect(screen.getByTestId("tile-menu-friend")).toHaveAttribute(
+      "tabindex",
+      "-1",
+    );
+  });
+
+  it("ArrowDown moves focus to the next item and updates the rover", async () => {
+    renderMenu();
+    const menu = screen.getByTestId("tile-menu");
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-play")).toHaveFocus();
+    });
+    fireEvent.keyDown(menu, { key: "ArrowDown" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-copy")).toHaveFocus();
+    });
+    expect(screen.getByTestId("tile-menu-copy")).toHaveAttribute("tabindex", "0");
+    expect(screen.getByTestId("tile-menu-play")).toHaveAttribute("tabindex", "-1");
+  });
+
+  it("ArrowUp from the first item wraps to the last", async () => {
+    renderMenu();
+    const menu = screen.getByTestId("tile-menu");
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-play")).toHaveFocus();
+    });
+    fireEvent.keyDown(menu, { key: "ArrowUp" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
+    });
+  });
+
+  it("ArrowDown from the last item wraps to the first", async () => {
+    renderMenu();
+    const menu = screen.getByTestId("tile-menu");
+    fireEvent.keyDown(menu, { key: "End" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
+    });
+    fireEvent.keyDown(menu, { key: "ArrowDown" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-play")).toHaveFocus();
+    });
+  });
+
+  it("Home and End jump to the first and last items", async () => {
+    renderMenu();
+    const menu = screen.getByTestId("tile-menu");
+    fireEvent.keyDown(menu, { key: "End" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
+    });
+    fireEvent.keyDown(menu, { key: "Home" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-play")).toHaveFocus();
+    });
+  });
+
+  it("Enter activates the focused item and closes the menu", async () => {
+    const { onCopyLink, onClose } = renderMenu();
+    const menu = screen.getByTestId("tile-menu");
+    fireEvent.keyDown(menu, { key: "ArrowDown" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-copy")).toHaveFocus();
+    });
+    fireEvent.keyDown(menu, { key: "Enter" });
+    expect(onCopyLink).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("Space activates the focused item", async () => {
+    const { onShareWithFriend, onClose } = renderMenu();
+    const menu = screen.getByTestId("tile-menu");
+    fireEvent.keyDown(menu, { key: "End" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
+    });
+    fireEvent.keyDown(menu, { key: " " });
+    expect(onShareWithFriend).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
 });
