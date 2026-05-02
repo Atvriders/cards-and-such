@@ -553,6 +553,10 @@ export default function LobbyPage(): JSX.Element {
   const deferredQuery = useDeferredValue(query);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const featuredRef = useRef<HTMLElement | null>(null);
+  // Roving-tabindex region: only ONE tile inside `.lobby-grid` ever has
+  // `tabindex="0"`; the rest are `-1`. Arrow keys walk the 2D layout and
+  // move focus (which migrates the `0` along with it).
+  const gridRef = useRef<HTMLDivElement | null>(null);
   // Onboarding coachmark — only render when the welcome tutorial just
   // dismissed AND the user has zero plays. The state is hydrated lazily
   // because we don't want SSR / unit-test localStorage probes to crash.
@@ -864,6 +868,88 @@ export default function LobbyPage(): JSX.Element {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [openFamilyId]);
+
+  // Roving tabindex bookkeeping: after every render that changes the set
+  // of tiles inside `.lobby-grid`, ensure exactly one tile is in the tab
+  // sequence. We default to the first tile; if focus is currently inside
+  // the grid we keep it on whichever tile owns focus (so re-renders from
+  // search keystrokes don't snatch focus back to the start).
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const tiles = grid.querySelectorAll<HTMLElement>(".tile");
+    if (tiles.length === 0) return;
+    const active = document.activeElement;
+    let activeIndex = -1;
+    tiles.forEach((tile, i) => {
+      if (tile === active) activeIndex = i;
+    });
+    const target = activeIndex >= 0 ? activeIndex : 0;
+    tiles.forEach((tile, i) => {
+      tile.tabIndex = i === target ? 0 : -1;
+    });
+  });
+
+  /**
+   * Single 2D arrow-key handler for the lobby grid. Uses
+   * `getBoundingClientRect()` to derive the column count from the first
+   * row — robust against responsive breakpoints since we always re-read
+   * the layout when a key is pressed.
+   */
+  const onGridKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const tiles = Array.from(grid.querySelectorAll<HTMLElement>(".tile"));
+    if (tiles.length === 0) return;
+    const current = tiles.findIndex((t) => t === document.activeElement);
+    if (current < 0) return; // focus isn't on a grid tile — leave the event alone
+    // Compute columns by counting tiles whose top matches the first tile's top.
+    const firstTop = tiles[0].getBoundingClientRect().top;
+    let cols = 0;
+    for (const t of tiles) {
+      // 1px tolerance for sub-pixel rounding.
+      if (Math.abs(t.getBoundingClientRect().top - firstTop) < 1) cols++;
+      else break;
+    }
+    if (cols < 1) cols = 1;
+    let next = -1;
+    switch (e.key) {
+      case "ArrowRight":
+        next = Math.min(tiles.length - 1, current + 1);
+        break;
+      case "ArrowLeft":
+        next = Math.max(0, current - 1);
+        break;
+      case "ArrowDown":
+        next = Math.min(tiles.length - 1, current + cols);
+        break;
+      case "ArrowUp":
+        next = Math.max(0, current - cols);
+        break;
+      case "Home":
+        next = 0;
+        break;
+      case "End":
+        next = tiles.length - 1;
+        break;
+      case "PageDown":
+        next = Math.min(tiles.length - 1, current + cols * 5);
+        break;
+      case "PageUp":
+        next = Math.max(0, current - cols * 5);
+        break;
+      default:
+        return;
+    }
+    if (next === current || next < 0) {
+      e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+    tiles[current].tabIndex = -1;
+    tiles[next].tabIndex = 0;
+    tiles[next].focus();
+  }, []);
 
   // -----------------------------------------------------------------
   // Onboarding coachmark — dismissal + positioning side-effects.
@@ -1292,7 +1378,7 @@ export default function LobbyPage(): JSX.Element {
           )
         ) : (
           <>
-            <div className="lobby-grid">
+            <div className="lobby-grid" ref={gridRef} onKeyDown={onGridKeyDown}>
               {visible.map((entry) =>
                 entry.kind === "game" ? (
                   <GameCard
