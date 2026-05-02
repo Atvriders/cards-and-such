@@ -11,10 +11,10 @@ export function ClassicCanastaRGame({ state, dispatch, onGameOver }: GameProps<G
       <div className="clcr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="clcr-score">{state.score} pts</div>
       <div className="clcr-row">{state.hand.map((c, i) => <div key={i} className={`clcr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="clcr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-classic-canasta-r-play" className="clcr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="clcr-result">{state.result} — +{state.pts}</div>
-        <button className="clcr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-classic-canasta-r-next" className="clcr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

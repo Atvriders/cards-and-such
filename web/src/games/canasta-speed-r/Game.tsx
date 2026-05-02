@@ -11,10 +11,10 @@ export function CanastaSpeedRGame({ state, dispatch, onGameOver }: GameProps<GSt
       <div className="cspdr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="cspdr-score">{state.score} pts</div>
       <div className="cspdr-row">{state.hand.map((c, i) => <div key={i} className={`cspdr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="cspdr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-canasta-speed-r-play" className="cspdr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="cspdr-result">{state.result} — +{state.pts}</div>
-        <button className="cspdr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-canasta-speed-r-next" className="cspdr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

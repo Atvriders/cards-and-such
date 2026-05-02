@@ -11,10 +11,10 @@ export function StraightGinRGame({ state, dispatch, onGameOver }: GameProps<Stra
       <div className="stgr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="stgr-score">{state.score} pts</div>
       <div className="stgr-row">{state.hand.map((c, i) => <div key={i} className={`stgr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="stgr-btn" onClick={() => dispatch({ type: "score" } as StraightGinRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-straight-gin-r-play" className="stgr-btn" onClick={() => dispatch({ type: "score" } as StraightGinRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="stgr-result">{state.result} — +{state.pts}</div>
-        <button className="stgr-btn alt" onClick={() => dispatch({ type: "next" } as StraightGinRAction)}>Next</button>
+        <button data-testid="hint-target-straight-gin-r-next" className="stgr-btn alt" onClick={() => dispatch({ type: "next" } as StraightGinRAction)}>Next</button>
       </>}
     </div>
   );

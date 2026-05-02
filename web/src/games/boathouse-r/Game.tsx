@@ -11,10 +11,10 @@ export function BoathouseRGame({ state, dispatch, onGameOver }: GameProps<Boatho
       <div className="bhsr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="bhsr-score">{state.score} pts</div>
       <div className="bhsr-row">{state.hand.map((c, i) => <div key={i} className={`bhsr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="bhsr-btn" onClick={() => dispatch({ type: "score" } as BoathouseRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-boathouse-r-play" className="bhsr-btn" onClick={() => dispatch({ type: "score" } as BoathouseRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="bhsr-result">{state.result} — +{state.pts}</div>
-        <button className="bhsr-btn alt" onClick={() => dispatch({ type: "next" } as BoathouseRAction)}>Next</button>
+        <button data-testid="hint-target-boathouse-r-next" className="bhsr-btn alt" onClick={() => dispatch({ type: "next" } as BoathouseRAction)}>Next</button>
       </>}
     </div>
   );

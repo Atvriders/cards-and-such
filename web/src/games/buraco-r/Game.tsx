@@ -11,10 +11,10 @@ export function BuracoRGame({ state, dispatch, onGameOver }: GameProps<BuracoRSt
       <div className="burr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="burr-score">{state.score} pts</div>
       <div className="burr-row">{state.hand.map((c, i) => <div key={i} className={`burr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="burr-btn" onClick={() => dispatch({ type: "score" } as BuracoRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-buraco-r-play" className="burr-btn" onClick={() => dispatch({ type: "score" } as BuracoRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="burr-result">{state.result} — +{state.pts}</div>
-        <button className="burr-btn alt" onClick={() => dispatch({ type: "next" } as BuracoRAction)}>Next</button>
+        <button data-testid="hint-target-buraco-r-next" className="burr-btn alt" onClick={() => dispatch({ type: "next" } as BuracoRAction)}>Next</button>
       </>}
     </div>
   );

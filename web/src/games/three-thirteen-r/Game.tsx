@@ -11,10 +11,10 @@ export function ThreeThirteenRGame({ state, dispatch, onGameOver }: GameProps<Th
       <div className="thtr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="thtr-score">{state.score} pts</div>
       <div className="thtr-row">{state.hand.map((c, i) => <div key={i} className={`thtr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="thtr-btn" onClick={() => dispatch({ type: "score" } as ThreeThirteenRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-three-thirteen-r-play" className="thtr-btn" onClick={() => dispatch({ type: "score" } as ThreeThirteenRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="thtr-result">{state.result} — +{state.pts}</div>
-        <button className="thtr-btn alt" onClick={() => dispatch({ type: "next" } as ThreeThirteenRAction)}>Next</button>
+        <button data-testid="hint-target-three-thirteen-r-next" className="thtr-btn alt" onClick={() => dispatch({ type: "next" } as ThreeThirteenRAction)}>Next</button>
       </>}
     </div>
   );

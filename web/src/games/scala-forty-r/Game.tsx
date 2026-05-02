@@ -11,10 +11,10 @@ export function ScalaFortyRGame({ state, dispatch, onGameOver }: GameProps<Scala
       <div className="sc40r-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="sc40r-score">{state.score} pts</div>
       <div className="sc40r-row">{state.hand.map((c, i) => <div key={i} className={`sc40r-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="sc40r-btn" onClick={() => dispatch({ type: "score" } as ScalaFortyRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-scala-forty-r-play" className="sc40r-btn" onClick={() => dispatch({ type: "score" } as ScalaFortyRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="sc40r-result">{state.result} — +{state.pts}</div>
-        <button className="sc40r-btn alt" onClick={() => dispatch({ type: "next" } as ScalaFortyRAction)}>Next</button>
+        <button data-testid="hint-target-scala-forty-r-next" className="sc40r-btn alt" onClick={() => dispatch({ type: "next" } as ScalaFortyRAction)}>Next</button>
       </>}
     </div>
   );

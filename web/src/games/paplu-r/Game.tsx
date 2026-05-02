@@ -11,10 +11,10 @@ export function PapluRGame({ state, dispatch, onGameOver }: GameProps<GState, ob
       <div className="ppur-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="ppur-score">{state.score} pts</div>
       <div className="ppur-row">{state.hand.map((c, i) => <div key={i} className={`ppur-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="ppur-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-paplu-r-play" className="ppur-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="ppur-result">{state.result} — +{state.pts}</div>
-        <button className="ppur-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-paplu-r-next" className="ppur-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

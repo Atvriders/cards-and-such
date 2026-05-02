@@ -11,10 +11,10 @@ export function ShanghaiRGame({ state, dispatch, onGameOver }: GameProps<Shangha
       <div className="shgr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="shgr-score">{state.score} pts</div>
       <div className="shgr-row">{state.hand.map((c, i) => <div key={i} className={`shgr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="shgr-btn" onClick={() => dispatch({ type: "score" } as ShanghaiRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-shanghai-r-play" className="shgr-btn" onClick={() => dispatch({ type: "score" } as ShanghaiRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="shgr-result">{state.result} — +{state.pts}</div>
-        <button className="shgr-btn alt" onClick={() => dispatch({ type: "next" } as ShanghaiRAction)}>Next</button>
+        <button data-testid="hint-target-shanghai-r-next" className="shgr-btn alt" onClick={() => dispatch({ type: "next" } as ShanghaiRAction)}>Next</button>
       </>}
     </div>
   );

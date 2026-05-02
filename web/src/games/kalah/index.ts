@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { KalahState, KalahAction, KalahSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Kalah } from "./Game.js";
@@ -24,5 +24,6 @@ Strategic tips: plan chains of extra turns, keep your pits filled toward the sto
   initialState: (seed: number, s: KalahSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: KalahState): HintTarget | null => state.winner === null && state.turn === 0 ? { selector: '[data-testid="store-0"]', pulses: 3 } : null,
   component: Kalah,
 };

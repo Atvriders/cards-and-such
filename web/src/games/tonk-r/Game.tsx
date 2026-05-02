@@ -11,10 +11,10 @@ export function TonkRGame({ state, dispatch, onGameOver }: GameProps<TonkRState,
       <div className="tnkr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="tnkr-score">{state.score} pts</div>
       <div className="tnkr-row">{state.hand.map((c, i) => <div key={i} className={`tnkr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="tnkr-btn" onClick={() => dispatch({ type: "score" } as TonkRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-tonk-r-play" className="tnkr-btn" onClick={() => dispatch({ type: "score" } as TonkRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="tnkr-result">{state.result} — +{state.pts}</div>
-        <button className="tnkr-btn alt" onClick={() => dispatch({ type: "next" } as TonkRAction)}>Next</button>
+        <button data-testid="hint-target-tonk-r-next" className="tnkr-btn alt" onClick={() => dispatch({ type: "next" } as TonkRAction)}>Next</button>
       </>}
     </div>
   );

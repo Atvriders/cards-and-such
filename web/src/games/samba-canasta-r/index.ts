@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SambaCanastaRState, SambaCanastaRAction, SambaCanastaRSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,12 @@ export const sambaCanastaRPlugin: GamePlugin<SambaCanastaRState, SambaCanastaRAc
   howToPlay: "Samba Canasta is a Canasta variant played with three decks where same-suit sequences (sambas) are valid melds in addition to standard rank-sets. Sequences must contain at least seven cards to score the canasta-equivalent bonus.\n\nIn this single-player drill, five rounds are played from an eleven-card hand. The engine auto-melds your hand identifying rank-sets and same-suit runs. Aces count one for value, pip cards face value, faces count ten. A run is three or more consecutive same-suit cards.\n\nA matched meld pays eighteen base plus six per extra card, so a seven-card samba pays forty-two — the bonus you'd see in the original game's structure. With no melds you receive a small consolation. Clearing your hand earns thirty bonus.\n\nExpected score across five rounds is sixty to one hundred. The deeper eleven-card hand gives you regular access to long sequences. One samba per game is realistic; two pushes you toward the high end of the band.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SambaCanastaRSettings),
-  reducer, isTerminal, component: SambaCanastaRGame,
+  reducer, isTerminal, 
+  hint: (state: SambaCanastaRState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "play") return { selector: '[data-testid="hint-target-samba-canasta-r-play"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-samba-canasta-r-next"]', pulses: 3 };
+    return null;
+  },
+  component: SambaCanastaRGame,
 };

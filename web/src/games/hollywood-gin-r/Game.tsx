@@ -11,10 +11,10 @@ export function HollywoodGinRGame({ state, dispatch, onGameOver }: GameProps<Hol
       <div className="hwgr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="hwgr-score">{state.score} pts</div>
       <div className="hwgr-row">{state.hand.map((c, i) => <div key={i} className={`hwgr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="hwgr-btn" onClick={() => dispatch({ type: "score" } as HollywoodGinRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-hollywood-gin-r-play" className="hwgr-btn" onClick={() => dispatch({ type: "score" } as HollywoodGinRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="hwgr-result">{state.result} — +{state.pts}</div>
-        <button className="hwgr-btn alt" onClick={() => dispatch({ type: "next" } as HollywoodGinRAction)}>Next</button>
+        <button data-testid="hint-target-hollywood-gin-r-next" className="hwgr-btn alt" onClick={() => dispatch({ type: "next" } as HollywoodGinRAction)}>Next</button>
       </>}
     </div>
   );

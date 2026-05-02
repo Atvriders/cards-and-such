@@ -11,10 +11,10 @@ export function PenniesHeavenRGame({ state, dispatch, onGameOver }: GameProps<Pe
       <div className="pnyr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="pnyr-score">{state.score} pts</div>
       <div className="pnyr-row">{state.hand.map((c, i) => <div key={i} className={`pnyr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="pnyr-btn" onClick={() => dispatch({ type: "score" } as PenniesHeavenRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-pennies-heaven-r-play" className="pnyr-btn" onClick={() => dispatch({ type: "score" } as PenniesHeavenRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="pnyr-result">{state.result} — +{state.pts}</div>
-        <button className="pnyr-btn alt" onClick={() => dispatch({ type: "next" } as PenniesHeavenRAction)}>Next</button>
+        <button data-testid="hint-target-pennies-heaven-r-next" className="pnyr-btn alt" onClick={() => dispatch({ type: "next" } as PenniesHeavenRAction)}>Next</button>
       </>}
     </div>
   );

@@ -11,10 +11,10 @@ export function ItalianCanastaRGame({ state, dispatch, onGameOver }: GameProps<I
       <div className="itlr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="itlr-score">{state.score} pts</div>
       <div className="itlr-row">{state.hand.map((c, i) => <div key={i} className={`itlr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="itlr-btn" onClick={() => dispatch({ type: "score" } as ItalianCanastaRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-italian-canasta-r-play" className="itlr-btn" onClick={() => dispatch({ type: "score" } as ItalianCanastaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="itlr-result">{state.result} — +{state.pts}</div>
-        <button className="itlr-btn alt" onClick={() => dispatch({ type: "next" } as ItalianCanastaRAction)}>Next</button>
+        <button data-testid="hint-target-italian-canasta-r-next" className="itlr-btn alt" onClick={() => dispatch({ type: "next" } as ItalianCanastaRAction)}>Next</button>
       </>}
     </div>
   );

@@ -11,10 +11,10 @@ export function BiribaRGame({ state, dispatch, onGameOver }: GameProps<BiribaRSt
       <div className="birr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="birr-score">{state.score} pts</div>
       <div className="birr-row">{state.hand.map((c, i) => <div key={i} className={`birr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="birr-btn" onClick={() => dispatch({ type: "score" } as BiribaRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-biriba-r-play" className="birr-btn" onClick={() => dispatch({ type: "score" } as BiribaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="birr-result">{state.result} — +{state.pts}</div>
-        <button className="birr-btn alt" onClick={() => dispatch({ type: "next" } as BiribaRAction)}>Next</button>
+        <button data-testid="hint-target-biriba-r-next" className="birr-btn alt" onClick={() => dispatch({ type: "next" } as BiribaRAction)}>Next</button>
       </>}
     </div>
   );

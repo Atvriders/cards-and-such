@@ -11,10 +11,10 @@ export function CanastaCalienteRGame({ state, dispatch, onGameOver }: GameProps<
       <div className="ccalr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="ccalr-score">{state.score} pts</div>
       <div className="ccalr-row">{state.hand.map((c, i) => <div key={i} className={`ccalr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="ccalr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-canasta-caliente-r-play" className="ccalr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="ccalr-result">{state.result} — +{state.pts}</div>
-        <button className="ccalr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-canasta-caliente-r-next" className="ccalr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

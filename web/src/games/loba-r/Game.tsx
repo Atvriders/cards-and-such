@@ -11,10 +11,10 @@ export function LobaRGame({ state, dispatch, onGameOver }: GameProps<LobaRState,
       <div className="lobr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="lobr-score">{state.score} pts</div>
       <div className="lobr-row">{state.hand.map((c, i) => <div key={i} className={`lobr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="lobr-btn" onClick={() => dispatch({ type: "score" } as LobaRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-loba-r-play" className="lobr-btn" onClick={() => dispatch({ type: "score" } as LobaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="lobr-result">{state.result} — +{state.pts}</div>
-        <button className="lobr-btn alt" onClick={() => dispatch({ type: "next" } as LobaRAction)}>Next</button>
+        <button data-testid="hint-target-loba-r-next" className="lobr-btn alt" onClick={() => dispatch({ type: "next" } as LobaRAction)}>Next</button>
       </>}
     </div>
   );

@@ -11,10 +11,10 @@ export function ChineseTenShedGame({ state, dispatch, onGameOver }: GameProps<Ch
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="dm-score">{state.score} pts</div>
       <div className="dm-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as ChineseTenShedAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-chinese-ten-shed-play" className="dm-btn" onClick={() => dispatch({ type: "play" } as ChineseTenShedAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as ChineseTenShedAction)}>Next</button>
+        <button data-testid="hint-target-chinese-ten-shed-next" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as ChineseTenShedAction)}>Next</button>
       </>}
     </div>
   );

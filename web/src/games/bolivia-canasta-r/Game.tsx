@@ -11,10 +11,10 @@ export function BoliviaCanastaRGame({ state, dispatch, onGameOver }: GameProps<B
       <div className="bolr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="bolr-score">{state.score} pts</div>
       <div className="bolr-row">{state.hand.map((c, i) => <div key={i} className={`bolr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="bolr-btn" onClick={() => dispatch({ type: "score" } as BoliviaCanastaRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-bolivia-canasta-r-play" className="bolr-btn" onClick={() => dispatch({ type: "score" } as BoliviaCanastaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="bolr-result">{state.result} — +{state.pts}</div>
-        <button className="bolr-btn alt" onClick={() => dispatch({ type: "next" } as BoliviaCanastaRAction)}>Next</button>
+        <button data-testid="hint-target-bolivia-canasta-r-next" className="bolr-btn alt" onClick={() => dispatch({ type: "next" } as BoliviaCanastaRAction)}>Next</button>
       </>}
     </div>
   );

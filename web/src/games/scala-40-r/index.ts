@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GState, GAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,12 @@ export const scala40RPlugin: GamePlugin<GState, GAction, typeof settings> = {
   howToPlay: "Scala 40 is the classic Italian rummy game traditionally requiring a forty-point opening meld before you can begin scoring. This simulator approximates the rhythm: each round you receive a nine-card hand and the engine auto-melds the best sets and runs available.\n\nA set is three or more cards of the same rank; a run (scala) is three or more consecutive same-suit cards. Each meld scores twenty base points plus five for every extra card past three. The forty-point opening idea is preserved in spirit by the bonus structure: hands with strong meld clusters reliably clear forty in a single round.\n\nDeadwood — leftover cards — count aces one, face cards ten, others their pip value. Going out (zero deadwood) adds twenty-five-point bonus. Five rounds compose a session; expected totals run sixty to one-eighty. Click 'Auto-score' to evaluate and 'Next' to deal. Scala 40 rewards seeds where face-card sets meet long same-suit runs.",
   settings,
   initialState: (seed: number, _s: S) => initialState(seed, { dummy: false }),
-  reducer, isTerminal, component: Scala40RGame,
+  reducer, isTerminal, 
+  hint: (state: GState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "play") return { selector: '[data-testid="hint-target-scala-40-r-play"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-scala-40-r-next"]', pulses: 3 };
+    return null;
+  },
+  component: Scala40RGame,
 };

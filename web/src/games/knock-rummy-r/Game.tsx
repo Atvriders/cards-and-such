@@ -11,10 +11,10 @@ export function KnockRummyRGame({ state, dispatch, onGameOver }: GameProps<Knock
       <div className="knkr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="knkr-score">{state.score} pts</div>
       <div className="knkr-row">{state.hand.map((c, i) => <div key={i} className={`knkr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="knkr-btn" onClick={() => dispatch({ type: "score" } as KnockRummyRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-knock-rummy-r-play" className="knkr-btn" onClick={() => dispatch({ type: "score" } as KnockRummyRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="knkr-result">{state.result} — +{state.pts}</div>
-        <button className="knkr-btn alt" onClick={() => dispatch({ type: "next" } as KnockRummyRAction)}>Next</button>
+        <button data-testid="hint-target-knock-rummy-r-next" className="knkr-btn alt" onClick={() => dispatch({ type: "next" } as KnockRummyRAction)}>Next</button>
       </>}
     </div>
   );

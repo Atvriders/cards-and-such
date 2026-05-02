@@ -11,10 +11,10 @@ export function IndianRGame({ state, dispatch, onGameOver }: GameProps<IndianRSt
       <div className="indr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="indr-score">{state.score} pts</div>
       <div className="indr-row">{state.hand.map((c, i) => <div key={i} className={`indr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="indr-btn" onClick={() => dispatch({ type: "score" } as IndianRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-indian-r-play" className="indr-btn" onClick={() => dispatch({ type: "score" } as IndianRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="indr-result">{state.result} — +{state.pts}</div>
-        <button className="indr-btn alt" onClick={() => dispatch({ type: "next" } as IndianRAction)}>Next</button>
+        <button data-testid="hint-target-indian-r-next" className="indr-btn alt" onClick={() => dispatch({ type: "next" } as IndianRAction)}>Next</button>
       </>}
     </div>
   );

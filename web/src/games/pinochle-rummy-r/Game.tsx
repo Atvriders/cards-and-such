@@ -11,10 +11,10 @@ export function PinochleRummyRGame({ state, dispatch, onGameOver }: GameProps<GS
       <div className="pncr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="pncr-score">{state.score} pts</div>
       <div className="pncr-row">{state.hand.map((c, i) => <div key={i} className={`pncr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="pncr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-pinochle-rummy-r-play" className="pncr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="pncr-result">{state.result} — +{state.pts}</div>
-        <button className="pncr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-pinochle-rummy-r-next" className="pncr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

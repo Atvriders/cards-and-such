@@ -11,10 +11,10 @@ export function CubanCanastaRGame({ state, dispatch, onGameOver }: GameProps<Cub
       <div className="cubr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="cubr-score">{state.score} pts</div>
       <div className="cubr-row">{state.hand.map((c, i) => <div key={i} className={`cubr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="cubr-btn" onClick={() => dispatch({ type: "score" } as CubanCanastaRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-cuban-canasta-r-play" className="cubr-btn" onClick={() => dispatch({ type: "score" } as CubanCanastaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="cubr-result">{state.result} — +{state.pts}</div>
-        <button className="cubr-btn alt" onClick={() => dispatch({ type: "next" } as CubanCanastaRAction)}>Next</button>
+        <button data-testid="hint-target-cuban-canasta-r-next" className="cubr-btn alt" onClick={() => dispatch({ type: "next" } as CubanCanastaRAction)}>Next</button>
       </>}
     </div>
   );

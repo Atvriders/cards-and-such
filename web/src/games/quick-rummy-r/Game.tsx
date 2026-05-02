@@ -11,10 +11,10 @@ export function QuickRummyRGame({ state, dispatch, onGameOver }: GameProps<GStat
       <div className="qkrr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="qkrr-score">{state.score} pts</div>
       <div className="qkrr-row">{state.hand.map((c, i) => <div key={i} className={`qkrr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="qkrr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-quick-rummy-r-play" className="qkrr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="qkrr-result">{state.result} — +{state.pts}</div>
-        <button className="qkrr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-quick-rummy-r-next" className="qkrr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

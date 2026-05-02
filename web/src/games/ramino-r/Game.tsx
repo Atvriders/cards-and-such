@@ -11,10 +11,10 @@ export function RaminoRGame({ state, dispatch, onGameOver }: GameProps<RaminoRSt
       <div className="rmnr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="rmnr-score">{state.score} pts</div>
       <div className="rmnr-row">{state.hand.map((c, i) => <div key={i} className={`rmnr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="rmnr-btn" onClick={() => dispatch({ type: "score" } as RaminoRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-ramino-r-play" className="rmnr-btn" onClick={() => dispatch({ type: "score" } as RaminoRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="rmnr-result">{state.result} — +{state.pts}</div>
-        <button className="rmnr-btn alt" onClick={() => dispatch({ type: "next" } as RaminoRAction)}>Next</button>
+        <button data-testid="hint-target-ramino-r-next" className="rmnr-btn alt" onClick={() => dispatch({ type: "next" } as RaminoRAction)}>Next</button>
       </>}
     </div>
   );

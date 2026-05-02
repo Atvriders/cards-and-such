@@ -11,10 +11,10 @@ export function PoolRummyRGame({ state, dispatch, onGameOver }: GameProps<PoolRu
       <div className="poolr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="poolr-score">{state.score} pts</div>
       <div className="poolr-row">{state.hand.map((c, i) => <div key={i} className={`poolr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="poolr-btn" onClick={() => dispatch({ type: "score" } as PoolRummyRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-pool-rummy-r-play" className="poolr-btn" onClick={() => dispatch({ type: "score" } as PoolRummyRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="poolr-result">{state.result} — +{state.pts}</div>
-        <button className="poolr-btn alt" onClick={() => dispatch({ type: "next" } as PoolRummyRAction)}>Next</button>
+        <button data-testid="hint-target-pool-rummy-r-next" className="poolr-btn alt" onClick={() => dispatch({ type: "next" } as PoolRummyRAction)}>Next</button>
       </>}
     </div>
   );

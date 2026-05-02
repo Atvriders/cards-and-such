@@ -11,10 +11,10 @@ export function RummyTilesRGame({ state, dispatch, onGameOver }: GameProps<GStat
       <div className="rtlr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="rtlr-score">{state.score} pts</div>
       <div className="rtlr-row">{state.hand.map((c, i) => <div key={i} className={`rtlr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="rtlr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-rummy-tiles-r-play" className="rtlr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="rtlr-result">{state.result} — +{state.pts}</div>
-        <button className="rtlr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-rummy-tiles-r-next" className="rtlr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

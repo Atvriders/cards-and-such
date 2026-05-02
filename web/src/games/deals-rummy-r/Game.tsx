@@ -11,10 +11,10 @@ export function DealsRummyRGame({ state, dispatch, onGameOver }: GameProps<GStat
       <div className="dlsr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dlsr-score">{state.score} pts</div>
       <div className="dlsr-row">{state.hand.map((c, i) => <div key={i} className={`dlsr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="dlsr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-deals-rummy-r-play" className="dlsr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="dlsr-result">{state.result} — +{state.pts}</div>
-        <button className="dlsr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-deals-rummy-r-next" className="dlsr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

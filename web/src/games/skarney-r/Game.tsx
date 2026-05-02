@@ -11,10 +11,10 @@ export function SkarneyRGame({ state, dispatch, onGameOver }: GameProps<GState, 
       <div className="skrr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="skrr-score">{state.score} pts</div>
       <div className="skrr-row">{state.hand.map((c, i) => <div key={i} className={`skrr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="skrr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-skarney-r-play" className="skrr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="skrr-result">{state.result} — +{state.pts}</div>
-        <button className="skrr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-skarney-r-next" className="skrr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

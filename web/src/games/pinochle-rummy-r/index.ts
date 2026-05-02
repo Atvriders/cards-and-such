@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GState, GAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,12 @@ export const pinochleRummyRPlugin: GamePlugin<GState, GAction, typeof settings> 
   howToPlay: "Pinochle Rummy fuses the meld-based scoring of pinochle with the draw-and-discard structure of rummy. While the simulator uses a standard deck for clarity, scoring favors the high-card combinations characteristic of the pinochle family. Each round you receive nine cards and the engine extracts the best sets and runs.\n\nA set is three or more cards of the same rank — particularly valuable when including face cards. A run is three or more consecutive same-suit cards; in pinochle terms, a marriage (king-queen) hidden inside a run adds extra weight. Each meld here scores twenty base plus five per extra card above three.\n\nFive rounds are played, accumulating points round by round. Deadwood (unmelded leftovers) works against bare hands; going out clean adds twenty-five. Expected totals: ninety to two hundred. Click 'Auto-score' to lock a round and 'Next' to deal again. Pinochle Rummy rewards seeds rich in J-Q-K clusters and tight suit-runs around the high end.",
   settings,
   initialState: (seed: number, _s: S) => initialState(seed, { dummy: false }),
-  reducer, isTerminal, component: PinochleRummyRGame,
+  reducer, isTerminal, 
+  hint: (state: GState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "play") return { selector: '[data-testid="hint-target-pinochle-rummy-r-play"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-pinochle-rummy-r-next"]', pulses: 3 };
+    return null;
+  },
+  component: PinochleRummyRGame,
 };

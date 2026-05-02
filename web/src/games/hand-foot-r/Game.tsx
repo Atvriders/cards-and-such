@@ -11,10 +11,10 @@ export function HandFootRGame({ state, dispatch, onGameOver }: GameProps<HandFoo
       <div className="hfr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="hfr-score">{state.score} pts</div>
       <div className="hfr-row">{state.hand.map((c, i) => <div key={i} className={`hfr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="hfr-btn" onClick={() => dispatch({ type: "score" } as HandFootRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-hand-foot-r-play" className="hfr-btn" onClick={() => dispatch({ type: "score" } as HandFootRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="hfr-result">{state.result} — +{state.pts}</div>
-        <button className="hfr-btn alt" onClick={() => dispatch({ type: "next" } as HandFootRAction)}>Next</button>
+        <button data-testid="hint-target-hand-foot-r-next" className="hfr-btn alt" onClick={() => dispatch({ type: "next" } as HandFootRAction)}>Next</button>
       </>}
     </div>
   );

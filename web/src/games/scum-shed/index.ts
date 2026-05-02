@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ScumShedState, ScumShedAction, ScumShedSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,12 @@ export const scumShedPlugin: GamePlugin<ScumShedState, ScumShedAction, typeof se
   howToPlay: "Scum is the American school-cafeteria sibling of President and Daifugo. The rules are simple: each player gets seven cards. Play begins with one player leading any card, and the other must play a strictly higher card or pass. When both players pass in succession, the trick clears and whoever played last takes the lead.\n\nThe first player to empty their hand earns the prized President title. The loser becomes the Scum and earns nothing. Six rounds are played, with the round winner scoring twenty-five points each time and the loser nothing. There are no rank-swap penalties in this two-player short version.\n\nStrategy boils down to deciding when to spend big cards and when to pass, hoping the opponent burns out a high lead. Average expected score across all six rounds is around seventy-five points; great nights pile up over a hundred. Beware of holding kings too long — the CPU will gladly out-pass you while you sit on aces.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ScumShedSettings),
-  reducer, isTerminal, component: ScumShedGame,
+  reducer, isTerminal, 
+  hint: (state: ScumShedState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-scum-shed-play"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-scum-shed-next"]', pulses: 3 };
+    return null;
+  },
+  component: ScumShedGame,
 };

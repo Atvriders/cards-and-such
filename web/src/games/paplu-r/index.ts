@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GState, GAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,12 @@ export const papluRPlugin: GamePlugin<GState, GAction, typeof settings> = {
   howToPlay: "Paplu is the North-Indian rummy game traditionally played with thirteen cards and jokers as wilds. This simulator uses a streamlined nine-card hand for faster rounds while preserving the core meld-and-score flow. Five rounds are played; each round the engine auto-melds your hand into sets and runs.\n\nA set is three or more equal ranks; a run is three or more consecutive same-suit cards. Each meld scores twenty base points plus five for every card past three. Cards remaining outside melds form deadwood — aces one, face cards ten, others pip value. Bare hands earn only a small consolation of a point or two.\n\nGoing out clean (no deadwood) adds twenty-five-point Paplu-out bonus. Across five rounds, expected totals run sixty to one-seventy. Click 'Auto-score' each round and 'Next' to deal again. Paplu rewards seeds with strong rank clusters and adjacent same-suit cards — exactly the kind of hand experienced Indian rummy players angle for.",
   settings,
   initialState: (seed: number, _s: S) => initialState(seed, { dummy: false }),
-  reducer, isTerminal, component: PapluRGame,
+  reducer, isTerminal, 
+  hint: (state: GState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "play") return { selector: '[data-testid="hint-target-paplu-r-play"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-paplu-r-next"]', pulses: 3 };
+    return null;
+  },
+  component: PapluRGame,
 };

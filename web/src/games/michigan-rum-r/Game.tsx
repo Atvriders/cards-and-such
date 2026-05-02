@@ -11,10 +11,10 @@ export function MichiganRumRGame({ state, dispatch, onGameOver }: GameProps<Mich
       <div className="mchr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="mchr-score">{state.score} pts</div>
       <div className="mchr-row">{state.hand.map((c, i) => <div key={i} className={`mchr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="mchr-btn" onClick={() => dispatch({ type: "score" } as MichiganRumRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-michigan-rum-r-play" className="mchr-btn" onClick={() => dispatch({ type: "score" } as MichiganRumRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="mchr-result">{state.result} — +{state.pts}</div>
-        <button className="mchr-btn alt" onClick={() => dispatch({ type: "next" } as MichiganRumRAction)}>Next</button>
+        <button data-testid="hint-target-michigan-rum-r-next" className="mchr-btn alt" onClick={() => dispatch({ type: "next" } as MichiganRumRAction)}>Next</button>
       </>}
     </div>
   );

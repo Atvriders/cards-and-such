@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RoundTheClockState, RoundTheClockAction, RoundTheClockSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RoundTheClock } from "./Game.js";
@@ -33,5 +33,6 @@ Score = max(100, 2000 − total throws × 10). Fewer total throws across all 21 
   initialState: (seed: number, s: RoundTheClockSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: RoundTheClockState): HintTarget | null => state.won ? null : (state.pendingThrows.length > 0 ? { selector: '[data-testid="next-turn"]', pulses: 3 } : { selector: '[data-testid="throw-darts"]', pulses: 3 }),
   component: RoundTheClock,
 };

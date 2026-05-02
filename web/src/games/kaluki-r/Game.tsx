@@ -11,10 +11,10 @@ export function KalukiRGame({ state, dispatch, onGameOver }: GameProps<KalukiRSt
       <div className="kalr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="kalr-score">{state.score} pts</div>
       <div className="kalr-row">{state.hand.map((c, i) => <div key={i} className={`kalr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="kalr-btn" onClick={() => dispatch({ type: "score" } as KalukiRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-kaluki-r-play" className="kalr-btn" onClick={() => dispatch({ type: "score" } as KalukiRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="kalr-result">{state.result} — +{state.pts}</div>
-        <button className="kalr-btn alt" onClick={() => dispatch({ type: "next" } as KalukiRAction)}>Next</button>
+        <button data-testid="hint-target-kaluki-r-next" className="kalr-btn alt" onClick={() => dispatch({ type: "next" } as KalukiRAction)}>Next</button>
       </>}
     </div>
   );

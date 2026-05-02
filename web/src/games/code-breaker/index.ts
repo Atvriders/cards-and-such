@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CodeBreakerState, CodeBreakerAction, CodeBreakerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CodeBreaker } from "./Game.js";
@@ -28,5 +28,6 @@ Strategy: treat it like Mastermind but use hints as a last resort — the score 
   initialState: (seed: number, s: CodeBreakerSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: CodeBreakerState): HintTarget | null => state.winner === null ? { selector: '[data-testid="cb-submit"]', pulses: 3 } : null,
   component: CodeBreaker,
 };

@@ -11,10 +11,10 @@ export function LiverpoolRGame({ state, dispatch, onGameOver }: GameProps<Liverp
       <div className="lvpr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="lvpr-score">{state.score} pts</div>
       <div className="lvpr-row">{state.hand.map((c, i) => <div key={i} className={`lvpr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="lvpr-btn" onClick={() => dispatch({ type: "score" } as LiverpoolRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-liverpool-r-play" className="lvpr-btn" onClick={() => dispatch({ type: "score" } as LiverpoolRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="lvpr-result">{state.result} — +{state.pts}</div>
-        <button className="lvpr-btn alt" onClick={() => dispatch({ type: "next" } as LiverpoolRAction)}>Next</button>
+        <button data-testid="hint-target-liverpool-r-next" className="lvpr-btn alt" onClick={() => dispatch({ type: "next" } as LiverpoolRAction)}>Next</button>
       </>}
     </div>
   );

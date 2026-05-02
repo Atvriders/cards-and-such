@@ -11,10 +11,10 @@ export function RoundCornerGinRGame({ state, dispatch, onGameOver }: GameProps<R
       <div className="rcgr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="rcgr-score">{state.score} pts</div>
       <div className="rcgr-row">{state.hand.map((c, i) => <div key={i} className={`rcgr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="rcgr-btn" onClick={() => dispatch({ type: "score" } as RoundCornerGinRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-round-corner-gin-r-play" className="rcgr-btn" onClick={() => dispatch({ type: "score" } as RoundCornerGinRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="rcgr-result">{state.result} — +{state.pts}</div>
-        <button className="rcgr-btn alt" onClick={() => dispatch({ type: "next" } as RoundCornerGinRAction)}>Next</button>
+        <button data-testid="hint-target-round-corner-gin-r-next" className="rcgr-btn alt" onClick={() => dispatch({ type: "next" } as RoundCornerGinRAction)}>Next</button>
       </>}
     </div>
   );

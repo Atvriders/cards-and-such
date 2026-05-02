@@ -11,10 +11,10 @@ export function CanastaJuniorRGame({ state, dispatch, onGameOver }: GameProps<GS
       <div className="cjrr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="cjrr-score">{state.score} pts</div>
       <div className="cjrr-row">{state.hand.map((c, i) => <div key={i} className={`cjrr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="cjrr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-canasta-junior-r-play" className="cjrr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="cjrr-result">{state.result} — +{state.pts}</div>
-        <button className="cjrr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
+        <button data-testid="hint-target-canasta-junior-r-next" className="cjrr-btn alt" onClick={() => dispatch({ type: "next" } as GAction)}>Next</button>
       </>}
     </div>
   );

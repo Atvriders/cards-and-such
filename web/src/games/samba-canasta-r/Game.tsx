@@ -11,10 +11,10 @@ export function SambaCanastaRGame({ state, dispatch, onGameOver }: GameProps<Sam
       <div className="smbr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="smbr-score">{state.score} pts</div>
       <div className="smbr-row">{state.hand.map((c, i) => <div key={i} className={`smbr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="smbr-btn" onClick={() => dispatch({ type: "score" } as SambaCanastaRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-samba-canasta-r-play" className="smbr-btn" onClick={() => dispatch({ type: "score" } as SambaCanastaRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="smbr-result">{state.result} — +{state.pts}</div>
-        <button className="smbr-btn alt" onClick={() => dispatch({ type: "next" } as SambaCanastaRAction)}>Next</button>
+        <button data-testid="hint-target-samba-canasta-r-next" className="smbr-btn alt" onClick={() => dispatch({ type: "next" } as SambaCanastaRAction)}>Next</button>
       </>}
     </div>
   );

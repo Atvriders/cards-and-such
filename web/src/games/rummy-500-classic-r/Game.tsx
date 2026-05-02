@@ -11,10 +11,10 @@ export function Rummy500ClassicRGame({ state, dispatch, onGameOver }: GameProps<
       <div className="r500r-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="r500r-score">{state.score} pts</div>
       <div className="r500r-row">{state.hand.map((c, i) => <div key={i} className={`r500r-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
-      {state.phase === "play" && <button className="r500r-btn" onClick={() => dispatch({ type: "score" } as Rummy500ClassicRAction)}>Auto-score</button>}
+      {state.phase === "play" && <button data-testid="hint-target-rummy-500-classic-r-play" className="r500r-btn" onClick={() => dispatch({ type: "score" } as Rummy500ClassicRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>
         <div className="r500r-result">{state.result} — +{state.pts}</div>
-        <button className="r500r-btn alt" onClick={() => dispatch({ type: "next" } as Rummy500ClassicRAction)}>Next</button>
+        <button data-testid="hint-target-rummy-500-classic-r-next" className="r500r-btn alt" onClick={() => dispatch({ type: "next" } as Rummy500ClassicRAction)}>Next</button>
       </>}
     </div>
   );
