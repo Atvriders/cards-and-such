@@ -75,6 +75,18 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+  /* With 10+ themes the popover would grow tall; cap height and scroll. */
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+.theme-picker-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.theme-picker-grid::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 3px;
 }
 
 .theme-swatch {
@@ -129,6 +141,32 @@
   max-width: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Briefly-shown skeleton swatches on every popover open. The real grid
+   stays mounted underneath (so tests, screen readers, and keyboard nav
+   still find radios) and the skeleton is overlaid on top for the short
+   priming window. Overlay positioning keeps popover height stable when
+   priming flips off. */
+.theme-picker-grid--skeleton {
+  position: absolute;
+  inset: auto 12px 12px 12px;
+  top: 38px;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: rgba(20, 22, 36, 0.94);
+  z-index: 1;
+  max-height: 320px;
+  overflow: hidden;
+}
+.theme-picker-grid.is-priming {
+  /* Real grid stays interactive but visually muted while priming. */
+  opacity: 0.001;
+}
+.theme-swatch--skeleton {
+  cursor: default;
 }
 
 @media (max-width: 640px) {
