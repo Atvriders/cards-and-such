@@ -11,13 +11,15 @@ interface Props {
   onDragStart?: (e: React.DragEvent) => void;
   onDragEnd?: (e: React.DragEvent) => void;
   className?: string;
+  /** Inline style — used for per-card CSS vars (e.g. `--card-stagger-delay`). */
+  style?: React.CSSProperties;
 }
 
 /** Threshold for treating a pointer down/up pair as a click rather than a drag. */
 const CLICK_PIXEL_TOLERANCE = 6;
 const CLICK_TIME_TOLERANCE_MS = 500;
 
-export function Card({ card, faceDown, onClick, draggable, onDragStart, onDragEnd, className = "" }: Props): JSX.Element {
+export function Card({ card, faceDown, onClick, draggable, onDragStart, onDragEnd, className = "", style }: Props): JSX.Element {
   const downRef = useRef<{ x: number; y: number; t: number } | null>(null);
 
   const handlePointerDown = (e: React.PointerEvent): void => {
@@ -42,7 +44,7 @@ export function Card({ card, faceDown, onClick, draggable, onDragStart, onDragEn
 
   if (faceDown || !card) {
     // Face-down is not draggable, so the browser's click is reliable. Keep onClick.
-    return <div className={`card face-down ${className}`} onClick={onClick} aria-label="face-down card" />;
+    return <div className={`card face-down ${className}`} onClick={onClick} aria-label="face-down card" style={style} />;
   }
 
   const color = isRed(card.suit) ? "red" : "black";
@@ -50,6 +52,7 @@ export function Card({ card, faceDown, onClick, draggable, onDragStart, onDragEn
   return (
     <div
       className={`card face-up ${color} ${className}`}
+      style={style}
       {...(onClick
         ? {
             onPointerDown: handlePointerDown,

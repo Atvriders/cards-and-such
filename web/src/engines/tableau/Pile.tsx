@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Pile as PileType } from "./types.js";
 import { Card } from "../deck/Card.js";
+import { playSound } from "../../platform/sounds.js";
 import "./Pile.css";
 
 interface Props {
@@ -43,6 +44,20 @@ export function Pile({
   const [revealedIds, setRevealedIds] = useState<Set<string>>(() => new Set());
   const [pickupId, setPickupId] = useState<string | null>(null);
 
+  // First-render flag: only emit the deal-in animation + card-deal sound on
+  // the initial mount of this pile so subsequent re-renders (drag, drop,
+  // shuffle) don't keep restarting the animation.
+  const isFirstRenderRef = useRef(true);
+  useEffect(() => {
+    if (!isFirstRenderRef.current) return;
+    isFirstRenderRef.current = false;
+    if (pile.cards.length > 0) {
+      playSound("card-deal");
+    }
+    // We intentionally only run this once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     // Compute newly-revealed cards (were face-down last render, now face-up).
     const nextFaceDown = new Set<string>();
@@ -58,6 +73,9 @@ export function Pile({
     prevFaceDownIds.current = nextFaceDown;
 
     if (newlyRevealed.length > 0) {
+      // Light snap on each face-up reveal — one tone per cascade burst so a
+      // big chain doesn't sound like a machine gun.
+      playSound("card-flip");
       setRevealedIds((prev) => {
         const next = new Set(prev);
         for (const id of newlyRevealed) next.add(id);
@@ -131,13 +149,20 @@ export function Pile({
         const indexFromTop = pile.cards.length - 1 - i;
         const isFaceUp = pile.kind !== "tableau" || i >= pile.cards.length - faceUpCount;
         const isTop = i === pile.cards.length - 1;
+        // Only apply deal-in on the very first render of the pile so cards
+        // don't keep re-animating on drag / drop / reveal re-renders.
+        const isInitialDeal = isFirstRenderRef.current;
         const cardClasses = [
           isFaceUp && onCardClick ? "clickable" : "",
           revealedIds.has(card.id) ? "card-reveal" : "",
           pickupId === card.id ? "flip-pickup" : "",
+          isInitialDeal ? "deal-in" : "",
         ]
           .filter(Boolean)
           .join(" ");
+        const cardStyle = isInitialDeal
+          ? ({ "--card-stagger-delay": `${i * 30}ms` } as React.CSSProperties)
+          : undefined;
         return (
           <div
             className={pile.kind === "tableau" ? "pile-card fanned" : "pile-card stacked"}
@@ -156,6 +181,7 @@ export function Pile({
                   ? { onClick: onTopClick }
                   : {})}
               className={cardClasses}
+              {...(cardStyle ? { style: cardStyle } : {})}
             />
           </div>
         );

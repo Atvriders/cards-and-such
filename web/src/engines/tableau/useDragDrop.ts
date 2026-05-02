@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Pile, Ruleset } from "./types.js";
 import { canMove } from "./moves.js";
+import { playSound } from "../../platform/sounds.js";
 
 export interface DragState {
   fromPile: string | null;
@@ -139,9 +140,11 @@ export function useDragDrop(opts: Options = {}): DragDrop {
             if (!ok) {
               setInvalidFlash(toPileId);
             } else {
+              playSound("card-place");
               onMove(fromPile, toPileId, count);
             }
           } else {
+            playSound("card-place");
             onMove(fromPile, toPileId, count);
           }
         }
@@ -228,11 +231,13 @@ export function useDragDrop(opts: Options = {}): DragDrop {
             ruleset,
           );
           if (ok) {
+            playSound("card-place");
             onMoveRef.current(active.fromPile, dropId, active.count);
           } else {
             setInvalidFlash(dropId);
           }
         } else {
+          playSound("card-place");
           onMoveRef.current(active.fromPile, dropId, active.count);
         }
       }

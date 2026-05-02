@@ -594,6 +594,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           setBannerDismissed(false);
           if (term.score > 0) {
             playSound("win");
+            playSound("win-fanfare");
             const { prev, isRecord } = recordBest(elapsed);
             setPreviousBest(prev);
             setIsNewRecord(isRecord);
@@ -617,6 +618,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       setBannerDismissed(false);
       if (score > 0) {
         playSound("win");
+        playSound("win-fanfare");
         const { prev, isRecord } = recordBest(elapsed);
         setPreviousBest(prev);
         setIsNewRecord(isRecord);

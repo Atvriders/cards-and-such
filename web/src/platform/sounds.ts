@@ -10,6 +10,9 @@
 export type SoundName =
   | "card-deal"
   | "card-flip"
+  | "card-place"
+  | "card-shuffle"
+  | "win-fanfare"
   | "dice-roll"
   | "button-click"
   | "win"
@@ -80,10 +83,30 @@ interface Tone {
 
 const SOUND_RECIPES: Record<SoundName, Tone[]> = {
   "card-deal": [
+    // Short whoosh — triangle sweep down with a softer tail.
     { freq: 520, to: 320, duration: 0.07, type: "triangle", gain: 0.18 },
   ],
   "card-flip": [
+    // Light snap — high-to-mid square pop.
     { freq: 880, to: 660, duration: 0.06, type: "square", gain: 0.12 },
+  ],
+  "card-place": [
+    // Soft thud — short low triangle bump.
+    { freq: 240, to: 140, duration: 0.06, type: "triangle", gain: 0.16 },
+  ],
+  "card-shuffle": [
+    // Riffle — three rapid sawtooth blips evoke flipping cards.
+    { freq: 360, to: 220, duration: 0.04, type: "sawtooth", gain: 0.10 },
+    { freq: 380, to: 240, duration: 0.04, type: "sawtooth", gain: 0.10, delay: 0.04 },
+    { freq: 340, to: 200, duration: 0.04, type: "sawtooth", gain: 0.10, delay: 0.08 },
+    { freq: 400, to: 260, duration: 0.04, type: "sawtooth", gain: 0.10, delay: 0.12 },
+  ],
+  "win-fanfare": [
+    // Short victory — C5 → E5 → G5 → C6 arpeggio with a slight gain swell.
+    { freq: 523.25, duration: 0.10, type: "triangle", gain: 0.20 }, // C5
+    { freq: 659.25, duration: 0.10, type: "triangle", gain: 0.22, delay: 0.08 }, // E5
+    { freq: 783.99, duration: 0.10, type: "triangle", gain: 0.24, delay: 0.16 }, // G5
+    { freq: 1046.5, duration: 0.22, type: "triangle", gain: 0.26, delay: 0.24 }, // C6
   ],
   "dice-roll": [
     { freq: 200, to: 140, duration: 0.05, type: "square", gain: 0.18 },
