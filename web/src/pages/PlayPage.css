@@ -1345,3 +1345,65 @@
   background: rgba(129, 140, 248, 0.18);
   border-color: rgba(129, 140, 248, 0.5);
 }
+
+/* ---------- Printable scoresheet ----------
+ *
+ * Triggered by the `play-print-btn` on the win banner — strips the
+ * surrounding app chrome (page header, app shell nav, footer, sidebars,
+ * confetti, modals, toasts) so the user prints a clean record of the
+ * final score, time, and seed on a white background. The win banner
+ * itself is repositioned in normal flow so it lays out as a single
+ * page rather than a fixed-position overlay.
+ */
+@media print {
+  body,
+  html,
+  .play-page {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .play-header,
+  .app-shell-nav,
+  .app-shell-footer,
+  .play-with-sidebar,
+  .play-toasts,
+  .play-friend-banner,
+  .play-progress-row,
+  .win-banner-backdrop,
+  .play-share-image-btn,
+  .play-print-btn,
+  .end-share-row,
+  .end-actions,
+  .end-rating,
+  .stats-panel,
+  .win-banner-hint {
+    display: none !important;
+  }
+  .end-panel,
+  .end-panel--win,
+  .end-panel--banner {
+    position: static !important;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: none !important;
+    border: 1px solid #999 !important;
+    margin: 0 auto !important;
+    padding: 1.5rem !important;
+    max-width: 640px !important;
+    animation: none !important;
+  }
+  .win-banner-title,
+  .final-score,
+  .end-stats,
+  .end-seed {
+    color: #111 !important;
+  }
+  .final-score--win {
+    background: none !important;
+    -webkit-text-fill-color: #111 !important;
+    color: #111 !important;
+  }
+  .win-banner-emoji {
+    color: #111 !important;
+  }
+}

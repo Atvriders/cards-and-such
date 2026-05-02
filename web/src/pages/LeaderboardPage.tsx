@@ -15,6 +15,7 @@ import { PageHead } from "../platform/PageHead.js";
 import { loadStats } from "../platform/stats.js";
 import { readRatings } from "../platform/StarRating.js";
 import { getLastPlayed } from "../platform/userdata.js";
+import { buildLadderSvg, downloadSvg } from "../platform/svgShare.js";
 import "./LeaderboardPage.css";
 
 type Tab = "per-game" | "global" | "online" | "my-ladder";
@@ -697,88 +698,6 @@ function formatBestTime(sec: number): string {
   const mm = Math.floor(sec / 60);
   const ss = String(Math.floor(sec % 60)).padStart(2, "0");
   return `${mm}:${ss}`;
-}
-
-function escapeXml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
-/**
- * Build a hand-written SVG of the current ladder view. We avoid html2canvas
- * (and its dependency hop) by rendering each row as native SVG rect+text,
- * which means the file is tiny, sharp at every size, and renders identically
- * outside the browser.
- */
-function buildLadderSvg(rows: LadderRow[], username: string | null): string {
-  const W = 720;
-  const PAD = 24;
-  const HEAD = 96;
-  const ROW_H = 56;
-  const FOOT = 48;
-  const visible = rows.slice(0, 20);
-  const H = HEAD + Math.max(1, visible.length) * ROW_H + FOOT;
-  const title = username ? `${username}'s Cards Ladder` : "My Cards Ladder";
-  const sub = `Top ${visible.length} games by combined score · ${new Date().toLocaleDateString()}`;
-
-  const rowSvg = visible.map((r, i) => {
-    const y = HEAD + i * ROW_H;
-    const stripe = i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.01)";
-    const medalColor = r === visible[0]
-      ? "#fde68a"
-      : i === 1 ? "#e2e8f0" : i === 2 ? "#fdba74" : "#94a3b8";
-    const stars = "★".repeat(Math.max(0, Math.min(5, Math.round(r.rating))))
-      + "☆".repeat(5 - Math.max(0, Math.min(5, Math.round(r.rating))));
-    const bestTime = formatBestTime(r.bestTimeSec);
-    const right = bestTime ? `${r.best.toLocaleString()} · ${bestTime}` : r.best.toLocaleString();
-    return [
-      `<rect x="${PAD}" y="${y}" width="${W - PAD * 2}" height="${ROW_H - 6}" rx="10" fill="${stripe}" />`,
-      `<text x="${PAD + 16}" y="${y + 26}" fill="${medalColor}" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">#${i + 1}</text>`,
-      `<text x="${PAD + 64}" y="${y + 24}" fill="#f1f5f9" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">${escapeXml(r.title)}</text>`,
-      `<text x="${PAD + 64}" y="${y + 42}" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">${escapeXml(stars)}  ·  ${formatRelative(r.lastPlayed)}  ·  ${r.played} plays</text>`,
-      `<text x="${W - PAD - 16}" y="${y + 32}" fill="#e0e3ff" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="end">${escapeXml(right)}</text>`,
-    ].join("");
-  }).join("");
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0f1729"/>
-      <stop offset="100%" stop-color="#1e1b4b"/>
-    </linearGradient>
-    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#f1f5f9"/>
-      <stop offset="100%" stop-color="#c7cdfe"/>
-    </linearGradient>
-  </defs>
-  <rect width="${W}" height="${H}" rx="20" fill="url(#bg)"/>
-  <rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="20" fill="none" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
-  <text x="${PAD}" y="44" fill="url(#title)" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="800" letter-spacing="-0.5">${escapeXml(title)}</text>
-  <text x="${PAD}" y="72" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">${escapeXml(sub)}</text>
-  ${visible.length === 0
-    ? `<text x="${W / 2}" y="${HEAD + ROW_H / 2}" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="14" text-anchor="middle">No games played yet — go set some scores!</text>`
-    : rowSvg}
-  <text x="${W - PAD}" y="${H - 18}" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="end">cards.waterburp.com</text>
-  <text x="${PAD}" y="${H - 18}" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Generated ${new Date().toISOString().slice(0, 10)}</text>
-</svg>`;
-}
-
-function downloadSvg(svg: string, filename: string): void {
-  if (typeof document === "undefined" || typeof URL === "undefined") return;
-  const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 type LadderSortMode = "score" | "rating" | "recent" | "alpha";

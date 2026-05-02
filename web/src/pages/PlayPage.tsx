@@ -18,6 +18,7 @@ import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
 import { recordPlayed } from "../platform/quickstart.js";
 import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
+import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
 import "./PlayPage.css";
 
 /** Maximum number of toasts visible at once — older ones drop off. */
@@ -653,6 +654,46 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     const text = `I just scored ${finalScore ?? 0} on ${plugin.title} in ${formatTime(elapsed)}!${isNewRecord ? " New personal best!" : ""}`;
     const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(intent, "_blank", "noopener,noreferrer");
+  }, [plugin.id, plugin.title, seed, finalScore, elapsed, isNewRecord]);
+
+  /**
+   * Trigger the browser's native print dialog. The page-level
+   * `@media print` rules in PlayPage.css strip the surrounding chrome
+   * (header, app-shell nav/footer, sidebars) so the win banner prints
+   * clean on a white background. Best-effort: missing `window.print`
+   * (jsdom, locked-down embeds) silently no-ops.
+   */
+  const printScoresheet = useCallback(() => {
+    if (typeof window === "undefined") return;
+    if (typeof window.print === "function") {
+      try {
+        window.print();
+      } catch {
+        /* user-cancel or pop-up blocker */
+      }
+    }
+  }, []);
+
+  /**
+   * Build a 1200×630 share card summarizing the final score and trigger a
+   * download as `cards-<gameid>-<timestamp>.svg`. Uses the shared
+   * `buildShareCardSvg` helper so the leaderboard ladder export and the
+   * win-screen card stay visually consistent.
+   */
+  const shareImage = useCallback(() => {
+    const lines: string[] = [
+      `Score: ${finalScore ?? 0}`,
+      `Time: ${formatTime(elapsed)}`,
+      `Seed: ${seed}`,
+    ];
+    if (isNewRecord) lines.push("New personal best!");
+    const svg = buildShareCardSvg({
+      title: plugin.title,
+      lines,
+      accent: "#c7cdfe",
+      date: new Date(),
+    });
+    downloadSvg(svg, `cards-${plugin.id}-${Date.now()}.svg`);
   }, [plugin.id, plugin.title, seed, finalScore, elapsed, isNewRecord]);
 
   // Esc dismisses the win banner; Enter triggers Play Again. Listener is
@@ -1415,6 +1456,26 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               data-testid="share-seed-end-btn"
             >
               {shareStatus === "copied" ? "Copied!" : shareStatus === "error" ? "Copy failed" : "Copy link"}
+            </button>
+            <button
+              type="button"
+              onClick={shareImage}
+              className="play-share-pill play-share-image-btn"
+              data-testid="play-share-image-btn"
+              aria-label="Download share image"
+              title="Download a 1200×630 share card"
+            >
+              Save image
+            </button>
+            <button
+              type="button"
+              onClick={printScoresheet}
+              className="play-share-pill play-print-btn"
+              data-testid="play-print-btn"
+              aria-label="Print scoresheet"
+              title="Print a clean scoresheet"
+            >
+              Print
             </button>
           </div>
 
