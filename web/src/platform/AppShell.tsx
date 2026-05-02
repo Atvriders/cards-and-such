@@ -79,6 +79,45 @@ export default function AppShell(): JSX.Element {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [searchSelected, setSearchSelected] = useState(-1);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  // Recent searches mirror SearchPage's `cards-recent-searches` key. We
+  // load lazily on focus so a fresh tab picks up writes from /search.
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const RECENT_KEY = "cards-recent-searches";
+  const SUGGESTED_QUERIES: ReadonlyArray<string> = [
+    "klondike",
+    "holdem",
+    "wordle",
+    "daily",
+    "dice",
+  ];
+
+  const readRecentSearches = (): string[] => {
+    try {
+      if (typeof localStorage === "undefined") return [];
+      const raw = localStorage.getItem(RECENT_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw) as unknown;
+      if (Array.isArray(parsed)) {
+        return parsed
+          .filter((s): s is string => typeof s === "string")
+          .slice(0, 5);
+      }
+    } catch {
+      /* corrupt — fall through */
+    }
+    return [];
+  };
+
+  const clearRecentSearches = (): void => {
+    try {
+      if (typeof localStorage !== "undefined") {
+        localStorage.removeItem(RECENT_KEY);
+      }
+    } catch {
+      /* ignore */
+    }
+    setRecentSearches([]);
+  };
 
   // Settings → Gameplay re-opens the carousel by dispatching a custom event.
   // Listening here keeps AppShell the single mount point.
@@ -190,9 +229,35 @@ export default function AppShell(): JSX.Element {
     return list.slice(0, 3);
   }, [debouncedSearch]);
 
-  const showPopover = popoverOpen
-    && searchOpen
-    && debouncedSearch.trim().length >= 2;
+  // Empty-state mode shows recents + suggestions. Triggered when the
+  // popover is open (focus) but there's no actionable query yet.
+  const isEmptyState
+    = popoverOpen && searchOpen && debouncedSearch.trim().length === 0;
+  const showPopover
+    = (popoverOpen
+      && searchOpen
+      && debouncedSearch.trim().length >= 2)
+    || isEmptyState;
+
+  // Flat list of empty-state rows for keyboard nav (recents first, then
+  // suggested). Each entry's `query` is what we set the input to and
+  // navigate `/search?q=` with.
+  const emptyStateRows = useMemo(
+    () => {
+      const rows: Array<{ kind: "recent" | "suggest"; query: string; idx: number }> = [];
+      recentSearches.forEach((q, i) =>
+        rows.push({ kind: "recent", query: q, idx: i }),
+      );
+      SUGGESTED_QUERIES.forEach((q, i) =>
+        rows.push({ kind: "suggest", query: q, idx: i }),
+      );
+      return rows;
+    },
+    // SUGGESTED_QUERIES is a stable module constant — recents are the
+    // only dynamic input.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [recentSearches],
+  );
 
   // Reset selection whenever the result set changes.
   useEffect(() => { setSearchSelected(-1); }, [debouncedSearch]);
@@ -328,7 +393,46 @@ export default function AppShell(): JSX.Element {
     goToSearchPage();
   };
 
+  const runQuery = (q: string): void => {
+    const trimmed = q.trim();
+    if (!trimmed) return;
+    setSearchTerm(trimmed);
+    setDebouncedSearch(trimmed);
+    navigate(`/search?q=${encodeURIComponent(trimmed)}`);
+    setSearchOpen(false);
+    setPopoverOpen(false);
+    setMobileNavOpen(false);
+  };
+
   const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    // Empty-state branch: arrow keys cycle through recent + suggested rows,
+    // Enter on a highlighted row navigates via /search?q=...
+    if (showPopover && isEmptyState) {
+      const total = emptyStateRows.length;
+      if (total === 0) {
+        if (e.key === "Escape") setPopoverOpen(false);
+        return;
+      }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSearchSelected((s) => Math.min(s + 1, total - 1));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSearchSelected((s) => (s <= 0 ? -1 : s - 1));
+      } else if (e.key === "Enter") {
+        if (searchSelected >= 0 && searchSelected < total) {
+          const row = emptyStateRows[searchSelected];
+          if (row) {
+            e.preventDefault();
+            runQuery(row.query);
+          }
+        }
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        setPopoverOpen(false);
+      }
+      return;
+    }
     if (!showPopover || popoverHits.length === 0) {
       if (e.key === "Escape") setPopoverOpen(false);
       return;
@@ -548,7 +652,10 @@ export default function AppShell(): JSX.Element {
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={onSearchKeyDown}
               onFocus={() => {
-                if (searchTerm.trim().length >= 2) setPopoverOpen(true);
+                // Always open on focus — the popover branches on whether
+                // there's a query (live hits) or not (recents+suggestions).
+                setRecentSearches(readRecentSearches());
+                setPopoverOpen(true);
               }}
               role="combobox"
               aria-autocomplete="list"
@@ -560,7 +667,155 @@ export default function AppShell(): JSX.Element {
                   : undefined
               }
             />
-            {showPopover && popoverHits.length > 0 ? (
+            {showPopover && isEmptyState ? (
+              <div
+                id="header-search-popover"
+                role="listbox"
+                data-testid="header-search-popover-empty"
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 0.35rem)",
+                  right: 0,
+                  zIndex: 30,
+                  minWidth: "260px",
+                  maxWidth: "320px",
+                  maxHeight: "60vh",
+                  overflowY: "auto",
+                  background: "var(--bg-surface, #1f2937)",
+                  border: "1px solid var(--border, rgba(255,255,255,0.1))",
+                  borderRadius: "0.5rem",
+                  padding: "0.3rem",
+                  boxShadow: "0 12px 28px rgba(0,0,0,0.45)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.15rem",
+                }}
+              >
+                {recentSearches.length > 0 ? (
+                  <>
+                    <div
+                      style={{
+                        fontSize: "0.7rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                        opacity: 0.6,
+                        padding: "0.4rem 0.6rem 0.2rem",
+                      }}
+                    >
+                      Recent searches
+                    </div>
+                    {recentSearches.map((q, i) => {
+                      const flatIdx = i;
+                      const selected = flatIdx === searchSelected;
+                      return (
+                        <button
+                          key={`recent-${i}`}
+                          type="button"
+                          role="option"
+                          data-testid={`header-search-recent-${i}`}
+                          aria-selected={selected}
+                          onMouseEnter={() => setSearchSelected(flatIdx)}
+                          onClick={() => runQuery(q)}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.4rem",
+                            padding: "0.4rem 0.6rem",
+                            borderRadius: "0.35rem",
+                            border: "none",
+                            background: selected
+                              ? "rgba(129, 140, 248, 0.18)"
+                              : "transparent",
+                            color: "inherit",
+                            cursor: "pointer",
+                            textAlign: "left",
+                            font: "inherit",
+                            fontSize: "0.85rem",
+                          }}
+                        >
+                          <span aria-hidden="true" style={{ opacity: 0.55 }}>↻</span>
+                          <span>{q}</span>
+                        </button>
+                      );
+                    })}
+                    <button
+                      type="button"
+                      data-testid="header-search-clear-recents"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        clearRecentSearches();
+                      }}
+                      style={{
+                        alignSelf: "flex-end",
+                        marginTop: "0.1rem",
+                        padding: "0.25rem 0.5rem",
+                        border: "none",
+                        background: "transparent",
+                        color: "inherit",
+                        cursor: "pointer",
+                        font: "inherit",
+                        fontSize: "0.7rem",
+                        opacity: 0.6,
+                        textDecoration: "underline",
+                      }}
+                    >
+                      Clear recent searches
+                    </button>
+                  </>
+                ) : null}
+                <div
+                  style={{
+                    fontSize: "0.7rem",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    opacity: 0.6,
+                    padding: "0.4rem 0.6rem 0.2rem",
+                    marginTop: recentSearches.length > 0 ? "0.2rem" : 0,
+                    borderTop:
+                      recentSearches.length > 0
+                        ? "1px solid var(--border, rgba(255,255,255,0.08))"
+                        : "none",
+                  }}
+                >
+                  Try one of these
+                </div>
+                {SUGGESTED_QUERIES.map((q, i) => {
+                  const flatIdx = recentSearches.length + i;
+                  const selected = flatIdx === searchSelected;
+                  return (
+                    <button
+                      key={`suggest-${q}`}
+                      type="button"
+                      role="option"
+                      data-testid={`header-search-suggest-${i}`}
+                      aria-selected={selected}
+                      onMouseEnter={() => setSearchSelected(flatIdx)}
+                      onClick={() => runQuery(q)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.4rem",
+                        padding: "0.4rem 0.6rem",
+                        borderRadius: "0.35rem",
+                        border: "none",
+                        background: selected
+                          ? "rgba(129, 140, 248, 0.18)"
+                          : "transparent",
+                        color: "inherit",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        font: "inherit",
+                        fontSize: "0.85rem",
+                      }}
+                    >
+                      <span aria-hidden="true" style={{ opacity: 0.55 }}>✨</span>
+                      <span>{q}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+            {showPopover && !isEmptyState && popoverHits.length > 0 ? (
               <div
                 id="header-search-popover"
                 role="listbox"
