@@ -7,6 +7,20 @@
  * prevent malicious or unrelated data from polluting localStorage.
  */
 
+/** Per-game time history key prefix. Each game's recent finish times live
+ *  under `cards-time-history:<gameId>` as an array of {@link TimeHistoryEntry}.
+ *  Cap at {@link TIME_HISTORY_LIMIT} entries — feeds the trend mini-chart in
+ *  the PlayPage info popover. */
+export const TIME_HISTORY_KEY_PREFIX = "cards-time-history:";
+/** Maximum entries retained per-game. Anything older is dropped FIFO. */
+export const TIME_HISTORY_LIMIT = 20;
+
+export interface TimeHistoryEntry {
+  ts: number;     // epoch ms when the play finished
+  time: number;   // elapsed seconds
+  score?: number; // game-specific score, when available
+}
+
 /** Keys we round-trip via export / import. Anything not on this list is ignored. */
 export const KNOWN_KEYS: readonly string[] = [
   // stats / progression
@@ -346,6 +360,91 @@ export function clearAllRatings(): void {
   try {
     if (typeof localStorage === "undefined") return;
     localStorage.removeItem("cards-ratings");
+  } catch {
+    /* ignore */
+  }
+}
+
+/* ----------------------------------------------------------------------
+ * Per-game time history
+ *
+ * Persisted under `cards-time-history:<gameId>` as a JSON array of
+ * {@link TimeHistoryEntry}. Capped at {@link TIME_HISTORY_LIMIT} entries
+ * — the PlayPage info popover renders a tiny trend chart over the most
+ * recent slice. The list is append-only (FIFO drop) and tolerates corrupt
+ * blobs by returning an empty array.
+ * -------------------------------------------------------------------- */
+
+/** Read the time-history list for `gameId`. Returns `[]` if missing/corrupt. */
+export function readTimeHistory(gameId: string): TimeHistoryEntry[] {
+  if (!gameId) return [];
+  try {
+    if (typeof localStorage === "undefined") return [];
+    const raw = localStorage.getItem(`${TIME_HISTORY_KEY_PREFIX}${gameId}`);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) return [];
+    const out: TimeHistoryEntry[] = [];
+    for (const v of parsed) {
+      if (!v || typeof v !== "object") continue;
+      const entry = v as Partial<TimeHistoryEntry>;
+      const ts = typeof entry.ts === "number" && Number.isFinite(entry.ts) ? entry.ts : null;
+      const time = typeof entry.time === "number" && Number.isFinite(entry.time) ? entry.time : null;
+      if (ts == null || time == null || time < 0) continue;
+      const e: TimeHistoryEntry = { ts, time };
+      if (typeof entry.score === "number" && Number.isFinite(entry.score)) e.score = entry.score;
+      out.push(e);
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Append a finish entry to the history for `gameId` and trim to the cap.
+ * Best-effort — silently swallows quota / private-mode errors so a denied
+ * write never breaks the recordGame flow.
+ */
+export function appendTimeHistory(
+  gameId: string,
+  time: number,
+  score?: number,
+  now: number = Date.now(),
+): TimeHistoryEntry[] {
+  if (!gameId || !Number.isFinite(time) || time < 0) return readTimeHistory(gameId);
+  const entry: TimeHistoryEntry = { ts: now, time };
+  if (typeof score === "number" && Number.isFinite(score)) entry.score = score;
+  const list = readTimeHistory(gameId);
+  list.push(entry);
+  // FIFO drop — always retain at most TIME_HISTORY_LIMIT entries.
+  const trimmed = list.length > TIME_HISTORY_LIMIT
+    ? list.slice(list.length - TIME_HISTORY_LIMIT)
+    : list;
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(`${TIME_HISTORY_KEY_PREFIX}${gameId}`, JSON.stringify(trimmed));
+    }
+  } catch {
+    /* ignore */
+  }
+  return trimmed;
+}
+
+/**
+ * Wipe every per-game time history. Iterates `localStorage` keys directly
+ * since the prefix is dynamic — no central registry of "which games have
+ * histories" exists. Used by Settings → Reset stats for completeness.
+ */
+export function clearAllTimeHistories(): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    const toRemove: string[] = [];
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(TIME_HISTORY_KEY_PREFIX)) toRemove.push(k);
+    }
+    for (const k of toRemove) localStorage.removeItem(k);
   } catch {
     /* ignore */
   }

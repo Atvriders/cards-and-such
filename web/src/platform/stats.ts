@@ -1,6 +1,7 @@
 import { GAMES } from "../games/registry.js";
 import { useToast } from "./ui/Toast.js";
 import { emitSparkles } from "./Sparkles.js";
+import { appendTimeHistory, clearAllTimeHistories } from "./userdata.js";
 
 const STORAGE_KEY = "cards-and-such:stats:v1";
 
@@ -560,7 +561,16 @@ function categoryFor(gameId: string): string {
   return plugin?.category ?? "unknown";
 }
 
-export function recordGame(gameId: string, score: number, won: boolean): StatsState {
+export function recordGame(
+  gameId: string,
+  score: number,
+  won: boolean,
+  /** Elapsed seconds for this play. When provided, appended to the
+   *  per-game time-history blob (cap 20) so the PlayPage info popover
+   *  can render a trend mini-chart. Optional to keep callers that lack
+   *  a timer (or don't care) backwards-compatible. */
+  time?: number,
+): StatsState {
   const s = loadStats();
   s.totalPlayed += 1;
   if (won) {
@@ -583,6 +593,12 @@ export function recordGame(gameId: string, score: number, won: boolean): StatsSt
 
   const day = todayKey();
   if (!s.daysPlayed.includes(day)) s.daysPlayed.push(day);
+
+  // Append to the per-game time-history blob (cap 20) when a duration
+  // was supplied. Best-effort — appendTimeHistory swallows storage errors.
+  if (typeof time === "number" && Number.isFinite(time) && time >= 0) {
+    appendTimeHistory(gameId, time, score);
+  }
 
   const newlyUnlocked: Achievement[] = [];
   for (const a of ACHIEVEMENTS) {
@@ -629,4 +645,7 @@ export function resetStats(): void {
   } catch {
     /* ignore */
   }
+  // Wipe per-game time histories too — they're a derived view of "plays"
+  // and would otherwise outlive the stats blob and confuse the trend chart.
+  clearAllTimeHistories();
 }

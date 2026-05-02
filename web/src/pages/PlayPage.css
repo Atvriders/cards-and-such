@@ -924,6 +924,42 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+/* Time-trend mini chart inside the info popover. The container hugs the
+   popover width; the SVG scales via preserveAspectRatio="none" so the
+   trend line uses every pixel of horizontal space. */
+.play-info-popover-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.play-time-chart-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.play-time-chart {
+  width: 100%;
+  height: 60px;
+  display: block;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+.play-time-chart-empty {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px dashed rgba(148, 163, 184, 0.25);
+  text-align: center;
+}
+.play-time-stats-line {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
 .play-info-link,
 .play-info-close {
   margin-top: 0.15rem;
