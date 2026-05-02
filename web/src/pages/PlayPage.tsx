@@ -14,6 +14,7 @@ import { PageHead } from "../platform/PageHead.js";
 import { StarRating, readRating, writeRating } from "../platform/StarRating.js";
 import { StatsPanel } from "../platform/StatsPanel.js";
 import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
+import { recordPlayed } from "../platform/quickstart.js";
 import "./PlayPage.css";
 
 function randomSeed(): number {
@@ -144,8 +145,34 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlSeed]);
 
+  // Quick Start: when arriving via the AppShell lightning button, skip the
+  // setup screen and drop the user straight into a fresh game. The flag is
+  // also stripped from the URL so a manual reload doesn't loop the same
+  // bypass — refreshes behave like a normal visit.
+  const quickstartFlag = searchParams.get("quickstart") === "1";
+  useEffect(() => {
+    if (!quickstartFlag) return;
+    if (phase !== "setup") return;
+    recordPlayed(plugin.id);
+    setState(plugin.initialState(seed, settings));
+    setFinalScore(null);
+    setElapsed(0);
+    setShowConfetti(false);
+    setPhase("playing");
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.delete("quickstart");
+        return next;
+      },
+      { replace: true },
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quickstartFlag]);
+
   const startWithSeed = useCallback(
     (nextSeed: number) => {
+      recordPlayed(plugin.id);
       setSeed(nextSeed);
       setState(plugin.initialState(nextSeed, settings));
       setFinalScore(null);

@@ -142,7 +142,8 @@ main {
 }
 .header-search-toggle,
 .app-header .bell,
-.app-header .sound-toggle {
+.app-header .sound-toggle,
+.app-header .quick-start-btn {
   background: transparent;
   border: 1px solid rgba(148, 163, 184, 0.20);
   color: var(--text-300, #cbd5e1);
@@ -159,9 +160,19 @@ main {
 }
 .header-search-toggle:hover,
 .app-header .bell:hover,
-.app-header .sound-toggle:hover {
+.app-header .sound-toggle:hover,
+.app-header .quick-start-btn:hover {
   background: rgba(148, 163, 184, 0.12);
   color: var(--text-100, #f1f5f9);
+}
+.app-header .quick-start-btn {
+  color: #fde68a;
+  border-color: rgba(253, 230, 138, 0.45);
+}
+.app-header .quick-start-btn:hover {
+  color: #fef3c7;
+  border-color: rgba(253, 230, 138, 0.7);
+  background: rgba(253, 230, 138, 0.12);
 }
 .app-header .sound-toggle[aria-pressed="false"] {
   color: rgba(148, 163, 184, 0.55);

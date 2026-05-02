@@ -31,4 +31,21 @@ describe("AppShell", () => {
     await user.click(screen.getByRole("button", { name: /logout/i }));
     expect(useAuth.getState().token).toBeNull();
   });
+
+  it("renders the Quick Start button when authenticated", () => {
+    authenticate();
+    render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    expect(screen.getByTestId("quick-start-btn")).toBeInTheDocument();
+  });
+
+  it("Quick Start button navigates to a play URL with quickstart=1", async () => {
+    authenticate();
+    const user = userEvent.setup();
+    render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    await user.click(screen.getByTestId("quick-start-btn"));
+    // After quickstart navigation the lobby tile is gone; the play page is
+    // mounted and the auto-start effect strips quickstart=1 from the URL,
+    // so we just confirm the lobby is no longer rendered.
+    expect(screen.queryByTestId("tile-klondike")).not.toBeInTheDocument();
+  });
 });

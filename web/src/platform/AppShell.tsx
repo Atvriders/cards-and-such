@@ -7,6 +7,7 @@ import LightModeToggle from "./ui/LightModeToggle.js";
 import { isSoundOn, setSoundOn, playSound } from "./sounds.js";
 import KeyboardCheatSheet from "./KeyboardCheatSheet.js";
 import { GAMES } from "../games/registry.js";
+import { pickQuickstart } from "./quickstart.js";
 import "./AppShell.css";
 
 const CHANGELOG: Array<{ title: string; detail: string }> = [
@@ -92,6 +93,17 @@ export default function AppShell(): JSX.Element {
     };
   }, [username]);
 
+  const onQuickStart = (): void => {
+    const pick = pickQuickstart();
+    if (!pick) {
+      navigate("/");
+      return;
+    }
+    if (soundOn) playSound("button-click");
+    setMobileNavOpen(false);
+    navigate(`/play/${pick.gameId}?quickstart=1`);
+  };
+
   const submitSearch = (e: React.FormEvent): void => {
     e.preventDefault();
     const q = searchTerm.trim();
@@ -141,6 +153,18 @@ export default function AppShell(): JSX.Element {
         </nav>
 
         <div className="user">
+          <button
+            type="button"
+            className="quick-start-btn"
+            aria-label="Quick Start a game"
+            title="Quick Start"
+            data-testid="quick-start-btn"
+            onClick={onQuickStart}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+            </svg>
+          </button>
           <form
             className={`header-search${searchOpen ? " is-open" : ""}`}
             onSubmit={submitSearch}

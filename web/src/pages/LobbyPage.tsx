@@ -313,13 +313,16 @@ export default function LobbyPage(): JSX.Element {
     const counts: Record<GameCategory, number> = {
       solitaire: 0, cards: 0, dice: 0, board: 0, arcade: 0,
     };
-    for (const g of GAMES) counts[g.category]++;
+    for (const g of GAMES) {
+      if (g == null) continue;
+      counts[g.category]++;
+    }
     return counts;
   }, []);
 
   // Featured strip — pluck out a few well-known titles, fall back gracefully.
   const featured = useMemo(() => {
-    const byId = new Map(GAMES.map((g) => [g.id, g] as const));
+    const byId = new Map(GAMES.filter((g) => g != null).map((g) => [g.id, g] as const));
     return FEATURED_IDS.map((id) => byId.get(id)).filter((g): g is GamePlugin => Boolean(g));
   }, []);
 
@@ -332,8 +335,9 @@ export default function LobbyPage(): JSX.Element {
    * "this game's title matches the query — surface its family tile."
    */
   const { entries: allEntries, gameIdToFamilyId, familyById } = useMemo(() => {
-    const allIds = GAMES.map((g) => g.id);
-    const gameById = new Map(GAMES.map((g) => [g.id, g] as const));
+    const safeGames = GAMES.filter((g): g is GamePlugin => g != null);
+    const allIds = safeGames.map((g) => g.id);
+    const gameById = new Map(safeGames.map((g) => [g.id, g] as const));
 
     // Precompute member sets for each family + a flat lookup table.
     const familyMembers = new Map<string, Set<string>>();
@@ -375,7 +379,7 @@ export default function LobbyPage(): JSX.Element {
     }
 
     // Standalone entries — games not absorbed by any family.
-    for (const g of GAMES) {
+    for (const g of safeGames) {
       if (idToFamily.has(g.id)) continue;
       entries.push({
         kind: "game",
@@ -491,13 +495,14 @@ export default function LobbyPage(): JSX.Element {
   // any variant, not just family heads.
   const surpriseMe = useCallback(() => {
     let pool: GamePlugin[];
-    if (filter === "all") pool = GAMES;
+    const allGames = GAMES.filter((g): g is GamePlugin => g != null);
+    if (filter === "all") pool = allGames;
     else if (filter === "top-rated") {
-      pool = GAMES.filter((g) => (ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD);
+      pool = allGames.filter((g) => (ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD);
     } else {
-      pool = GAMES.filter((g) => g.category === filter);
+      pool = allGames.filter((g) => g.category === filter);
     }
-    const final = pool.length > 0 ? pool : GAMES;
+    const final = pool.length > 0 ? pool : allGames;
     if (final.length === 0) return;
     const pick = final[Math.floor(Math.random() * final.length)]!;
     navigate(`/play/${pick.id}`);
@@ -507,6 +512,7 @@ export default function LobbyPage(): JSX.Element {
   const topRatedCount = useMemo(() => {
     let n = 0;
     for (const g of GAMES) {
+      if (g == null) continue;
       if ((ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD) n++;
     }
     return n;
