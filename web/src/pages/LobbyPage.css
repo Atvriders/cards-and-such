@@ -776,7 +776,12 @@ button.tile {
   color: #c7b1ff;
 }
 
-/* ---------- Family picker (modal) ---------- */
+/* ---------- Family picker (modal) ----------
+   Opened when a `.tile--family` is clicked. The modal is a flex column:
+   sticky header (title + close + search + sort), then a scrollable
+   variant list. On mobile the modal goes full-screen with safe-area
+   padding. Heavier backdrop blur than the rest of the app to deliberately
+   recede the lobby grid behind it. */
 .lobby-picker-backdrop {
   position: fixed;
   inset: 0;
@@ -785,10 +790,10 @@ button.tile {
   align-items: center;
   justify-content: center;
   padding: var(--sp-4);
-  background: rgba(5, 6, 12, 0.62);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  animation: lobby-picker-fade var(--dur-fast) var(--ease-out-quart);
+  background: rgba(5, 6, 12, 0.68);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  animation: lobby-picker-fade 200ms var(--ease-out-quart);
 }
 @keyframes lobby-picker-fade {
   from { opacity: 0; }
@@ -799,28 +804,44 @@ button.tile {
   display: flex;
   flex-direction: column;
   width: min(640px, 100%);
-  max-height: min(80vh, 720px);
-  background: linear-gradient(160deg, rgba(99, 102, 241, 0.10) 0%, var(--surface-1) 70%);
+  max-height: min(82vh, 760px);
+  background: linear-gradient(160deg, rgba(99, 102, 241, 0.12) 0%, var(--surface-1) 70%);
   border: 1px solid var(--border-strong);
   border-radius: var(--r-xl);
   box-shadow:
-    0 20px 60px -20px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 30px 80px -24px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(129, 140, 248, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
   overflow: hidden;
-  animation: lobby-picker-pop 220ms var(--ease-out-expo);
+  /* Slide-up entrance — translateY(20px) scale(0.97) → settled. */
+  animation: lobby-picker-pop 320ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 @keyframes lobby-picker-pop {
-  from { transform: translateY(8px) scale(0.98); opacity: 0; }
-  to   { transform: translateY(0) scale(1);     opacity: 1; }
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0)    scale(1);    opacity: 1; }
 }
 
+/* Sticky header: title + close on top row, search + sort below. The
+   whole header sticks while the variant list scrolls underneath. */
 .lobby-picker-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem 1.1rem 0.85rem;
+  border-bottom: 1px solid var(--border-soft);
+  background:
+    linear-gradient(180deg, rgba(20, 22, 36, 0.92) 0%, rgba(20, 22, 36, 0.82) 100%);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+.lobby-picker-head-row {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--sp-3);
-  padding: 1.1rem 1.2rem 0.9rem;
-  border-bottom: 1px solid var(--border-soft);
 }
 .lobby-picker-title {
   margin: 0 0 0.2rem;
@@ -838,6 +859,7 @@ button.tile {
   color: var(--text-400);
 }
 .lobby-picker-close {
+  flex: 0 0 auto;
   width: 32px;
   height: 32px;
   display: inline-flex;
@@ -866,10 +888,126 @@ button.tile {
   box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
+/* Search box inside the picker — pill input with leading icon and a
+   clear button when text is present. Filters the variant list by
+   case-insensitive substring against the variant title. */
+.lobby-picker-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.lobby-picker-search-icon {
+  position: absolute;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--text-400);
+  pointer-events: none;
+  transition: color var(--dur-fast) var(--ease-out-quart);
+}
+.lobby-picker-search:focus-within .lobby-picker-search-icon { color: var(--primary, #818cf8); }
+.lobby-picker-search-input {
+  flex: 1;
+  width: 100%;
+  padding: 0.55rem 2.2rem 0.55rem 2.1rem;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--text-100);
+  background: rgba(10, 12, 22, 0.72);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  outline: none;
+  transition:
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart);
+}
+.lobby-picker-search-input::placeholder { color: var(--text-500); }
+.lobby-picker-search-input:hover { border-color: var(--border-focus); }
+.lobby-picker-search-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  background: rgba(10, 12, 22, 0.92);
+}
+.lobby-picker-search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.lobby-picker-search-clear {
+  position: absolute;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-300);
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
+}
+.lobby-picker-search-clear:hover { background: var(--surface-2); color: var(--text-100); }
+
+/* Sort row: 3 small radio-style chips. Tabular numerics for the
+   counter so it doesn't twitch as the search filter narrows. */
+.lobby-picker-sort {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.lobby-picker-sort-label {
+  font-size: 0.7rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-500);
+  margin-right: 0.15rem;
+}
+.lobby-picker-sort-btn {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.005em;
+  padding: 0.3rem 0.7rem;
+  color: var(--text-300);
+  background: rgba(10, 12, 22, 0.55);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart);
+}
+.lobby-picker-sort-btn:hover {
+  color: var(--text-100);
+  border-color: var(--border-focus);
+}
+.lobby-picker-sort-btn:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.lobby-picker-sort-btn.is-active {
+  color: #ffffff;
+  background: linear-gradient(180deg, #7c83f7 0%, #5b63e9 100%);
+  border-color: rgba(99, 102, 241, 0.7);
+  box-shadow: 0 6px 14px -10px var(--primary-glow);
+}
+.lobby-picker-count {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--text-500);
+  font-variant-numeric: tabular-nums;
+}
+
 .lobby-picker-list {
   list-style: none;
   margin: 0;
-  padding: 0.5rem 0.6rem 0.7rem;
+  padding: 0.55rem 0.6rem 0.7rem;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--border-strong) transparent;
@@ -879,23 +1017,54 @@ button.tile {
   background: var(--border-strong);
   border-radius: 4px;
 }
+.lobby-picker-list > li + li { margin-top: 0.25rem; }
 
+/* Variant rows — accent stripe on the left edge that grows on hover,
+   plus a small lift. The stripe sits inside the row using the same
+   colour token as the family tiles for visual continuity. */
 .lobby-picker-item {
+  position: relative;
   display: block;
-  padding: 0.7rem 0.85rem 0.75rem;
+  padding: 0.72rem 0.85rem 0.78rem 1rem;
   border-radius: var(--r-md);
   text-decoration: none;
   color: inherit;
+  background: transparent;
   border: 1px solid transparent;
+  overflow: hidden;
   transition:
     background var(--dur-fast) var(--ease-out-quart),
     border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart),
     transform var(--dur-fast) var(--ease-out-quart);
 }
+.lobby-picker-item::before {
+  /* Accent stripe — same growth pattern as `.tile-stripe`. */
+  content: "";
+  position: absolute;
+  left: 0; top: 6px; bottom: 6px;
+  width: 3px;
+  background: linear-gradient(180deg, #818cf8 0%, #a78bfa 100%);
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transform: scaleY(0.5);
+  transform-origin: center;
+  transition:
+    opacity 220ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform 320ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+    width 220ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+}
 .lobby-picker-item:hover {
-  background: rgba(129, 140, 248, 0.08);
-  border-color: rgba(129, 140, 248, 0.32);
-  transform: translateX(2px);
+  background: rgba(129, 140, 248, 0.10);
+  border-color: rgba(129, 140, 248, 0.34);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px -12px rgba(129, 140, 248, 0.45);
+}
+.lobby-picker-item:hover::before,
+.lobby-picker-item:focus-visible::before {
+  opacity: 1;
+  transform: scaleY(1);
+  width: 4px;
 }
 .lobby-picker-item:focus-visible {
   outline: none;
@@ -920,15 +1089,53 @@ button.tile {
   overflow: hidden;
 }
 
-@media (max-width: 480px) {
-  .lobby-picker { max-height: 90vh; }
-  .lobby-picker-head { padding: 0.9rem 1rem; }
-  .lobby-picker-list { padding: 0.4rem 0.4rem 0.6rem; }
+.lobby-picker-empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-400);
+  font-size: 0.88rem;
+}
+
+/* Mobile: full-screen modal — no rounded corners, fills the viewport,
+   header padding accounts for safe-area insets so the close button
+   doesn't crash into a notch. */
+@media (max-width: 600px) {
+  .lobby-picker-backdrop {
+    padding: 0;
+    align-items: stretch;
+  }
+  .lobby-picker {
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+  }
+  .lobby-picker-head {
+    padding:
+      calc(0.85rem + env(safe-area-inset-top, 0px))
+      calc(1rem + env(safe-area-inset-right, 0px))
+      0.75rem
+      calc(1rem + env(safe-area-inset-left, 0px));
+  }
+  .lobby-picker-list {
+    padding:
+      0.5rem
+      calc(0.6rem + env(safe-area-inset-right, 0px))
+      calc(0.8rem + env(safe-area-inset-bottom, 0px))
+      calc(0.6rem + env(safe-area-inset-left, 0px));
+  }
+  .lobby-picker-search-input { font-size: 16px; /* prevent iOS zoom */ }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .lobby-picker-backdrop,
   .lobby-picker { animation: none; }
+  .lobby-picker-item { transition: none; }
+  .lobby-picker-item:hover { transform: none; }
 }
 
 /* ---------- Load-more / no-results ---------- */

@@ -765,6 +765,7 @@ export default function LobbyPage(): JSX.Element {
         <FamilyPicker
           family={openFamily.family}
           members={openFamily.members}
+          ratings={ratings}
           onClose={() => setOpenFamilyId(null)}
         />
       )}
@@ -1069,20 +1070,81 @@ function FeaturedTile({
 }
 
 /**
+ * Sort modes for the family picker. Persisted in component state only —
+ * we don't bother caching per-family in localStorage since sessions
+ * tend to be short and the default ("alpha") is the safest baseline.
+ */
+type PickerSort = "alpha" | "score" | "recent";
+
+/**
+ * Read the (optional) per-game last-play timestamp map from localStorage.
+ * The map isn't currently written by the play flow, so absent keys are
+ * treated as "never played" (timestamp 0) and the "recent" sort
+ * gracefully degrades to insertion order via a stable fallback.
+ */
+function readLastPlayed(): Record<string, number> {
+  try {
+    const raw = localStorage.getItem("cards-last-played");
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (parsed && typeof parsed === "object") return parsed as Record<string, number>;
+  } catch {
+    /* Non-JSON or storage unavailable — fall through to empty. */
+  }
+  return {};
+}
+
+/**
  * Modal-style picker that lists every variant inside a family. Members
- * are pre-sorted alphabetically by the parent. Backdrop click + Escape
- * close the picker; arrow keys are intentionally not bound to keep the
- * implementation small — `<Link>` items get native focus handling.
+ * arrive alphabetically pre-sorted by the parent; this component layers
+ * a live search filter and a 3-way sort selector on top. Backdrop click
+ * + Escape close the picker; the search input never auto-focuses on
+ * mobile (would summon the keyboard) but does on desktop where space is
+ * cheap.
  */
 function FamilyPicker({
   family,
   members,
+  ratings,
   onClose,
 }: {
   family: GameFamily;
   members: GamePlugin[];
+  ratings: Record<string, number>;
   onClose: () => void;
 }): JSX.Element {
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<PickerSort>("alpha");
+  const lastPlayed = useMemo(() => readLastPlayed(), []);
+
+  // Filter + sort the variant list. Members come in alphabetical order
+  // already; the "alpha" branch is a no-op clone, the others sort a
+  // copy with stable tie-breaking on title to avoid jitter when scores
+  // or play timestamps are tied (or all zero).
+  const view = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const filtered = q
+      ? members.filter((m) => m.title.toLowerCase().includes(q))
+      : members.slice();
+    if (sort === "alpha") return filtered;
+    if (sort === "score") {
+      return filtered.sort((a, b) => {
+        const ra = ratings[a.id] ?? 0;
+        const rb = ratings[b.id] ?? 0;
+        if (rb !== ra) return rb - ra;
+        return compareTitles(a.title, b.title);
+      });
+    }
+    // "recent" — newest play first, never-played fall to the bottom in
+    // alphabetical order so the row stays predictable.
+    return filtered.sort((a, b) => {
+      const ta = lastPlayed[a.id] ?? 0;
+      const tb = lastPlayed[b.id] ?? 0;
+      if (tb !== ta) return tb - ta;
+      return compareTitles(a.title, b.title);
+    });
+  }, [members, query, sort, ratings, lastPlayed]);
+
   return (
     <div
       className="lobby-picker-backdrop"
@@ -1094,34 +1156,82 @@ function FamilyPicker({
     >
       <div className="lobby-picker" onClick={(e) => e.stopPropagation()}>
         <header className="lobby-picker-head">
-          <div>
-            <h2 className="lobby-picker-title">{family.label}</h2>
-            <p className="lobby-picker-sub">
-              {members.length} variant{members.length === 1 ? "" : "s"} · {family.description}
-            </p>
+          <div className="lobby-picker-head-row">
+            <div>
+              <h2 className="lobby-picker-title">{family.label}</h2>
+              <p className="lobby-picker-sub">
+                {members.length} variant{members.length === 1 ? "" : "s"} · {family.description}
+              </p>
+            </div>
+            <button
+              type="button"
+              className="lobby-picker-close"
+              onClick={onClose}
+              aria-label="Close variant picker"
+            >×</button>
           </div>
-          <button
-            type="button"
-            className="lobby-picker-close"
-            onClick={onClose}
-            aria-label="Close variant picker"
-          >×</button>
+          <div className="lobby-picker-search">
+            <span className="lobby-picker-search-icon" aria-hidden="true">⌕</span>
+            <input
+              type="search"
+              className="lobby-picker-search-input"
+              placeholder={`Search ${family.label} variants…`}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              aria-label={`Search ${family.label} variants`}
+              data-testid={`fam-picker-search-${family.id}`}
+            />
+            {query && (
+              <button
+                type="button"
+                className="lobby-picker-search-clear"
+                onClick={() => setQuery("")}
+                aria-label="Clear search"
+              >×</button>
+            )}
+          </div>
+          <div className="lobby-picker-sort" role="group" aria-label="Sort variants">
+            <span className="lobby-picker-sort-label">Sort</span>
+            {([
+              ["alpha", "A–Z"],
+              ["score", "By score"],
+              ["recent", "Recent"],
+            ] as const).map(([key, label]) => (
+              <button
+                key={key}
+                type="button"
+                className={`lobby-picker-sort-btn${sort === key ? " is-active" : ""}`}
+                aria-pressed={sort === key}
+                onClick={() => setSort(key)}
+                data-testid={`fam-picker-sort-${key}`}
+              >{label}</button>
+            ))}
+            <span className="lobby-picker-count" aria-live="polite">
+              {view.length} of {members.length}
+            </span>
+          </div>
         </header>
-        <ul className="lobby-picker-list">
-          {members.map((m) => (
-            <li key={m.id}>
-              <Link
-                to={`/play/${m.id}`}
-                className="lobby-picker-item"
-                data-testid={`pick-${m.id}`}
-                onClick={onClose}
-              >
-                <div className="lobby-picker-item-title">{m.title}</div>
-                <div className="lobby-picker-item-desc">{m.description}</div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {view.length === 0 ? (
+          <div className="lobby-picker-empty">
+            No variants match “{query}”.
+          </div>
+        ) : (
+          <ul className="lobby-picker-list">
+            {view.map((m) => (
+              <li key={m.id}>
+                <Link
+                  to={`/play/${m.id}`}
+                  className="lobby-picker-item"
+                  data-testid={`pick-${m.id}`}
+                  onClick={onClose}
+                >
+                  <div className="lobby-picker-item-title">{m.title}</div>
+                  <div className="lobby-picker-item-desc">{m.description}</div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
