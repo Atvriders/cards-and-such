@@ -6,7 +6,10 @@ import { SparkleHost } from "./Sparkles.js";
 import ThemePicker from "./ui/ThemePicker.js";
 import LightModeToggle from "./ui/LightModeToggle.js";
 import { isSoundOn, setSoundOn, playSound } from "./sounds.js";
-import KeyboardCheatSheet from "./KeyboardCheatSheet.js";
+import {
+  KeyboardShortcutsModal,
+  useKeyboardShortcutsModal,
+} from "./KeyboardShortcuts.js";
 import { GAMES } from "../games/registry.js";
 import { pickQuickstart } from "./quickstart.js";
 import { t } from "./i18n.js";
@@ -29,8 +32,10 @@ export default function AppShell(): JSX.Element {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [whatsNewOpen, setWhatsNewOpen] = useState(false);
-  const [cheatSheetOpen, setCheatSheetOpen] = useState(false);
   const [hasNewHighScore, setHasNewHighScore] = useState(false);
+  // Global "?" / Shift+/ overlay listing every shortcut in the app. The hook
+  // installs its own keydown listener and skips inputs/textareas/CE surfaces.
+  const shortcuts = useKeyboardShortcutsModal();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [soundOn, setSoundOnState] = useState<boolean>(() => isSoundOn());
@@ -82,20 +87,6 @@ export default function AppShell(): JSX.Element {
   useEffect(() => {
     if (searchOpen) searchInputRef.current?.focus();
   }, [searchOpen]);
-
-  // Global "?" (Shift+/) opens the keyboard cheat sheet. Ignored while typing.
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent): void => {
-      if (e.key !== "?") return;
-      const target = e.target as HTMLElement | null;
-      const tag = target?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || target?.isContentEditable) return;
-      e.preventDefault();
-      setCheatSheetOpen((v) => !v);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
 
   // High-score notification: poll a lightweight endpoint; gracefully no-op offline.
   useEffect(() => {
@@ -391,6 +382,14 @@ export default function AppShell(): JSX.Element {
           <NavLink to="/credits">Credits</NavLink>
           <NavLink to="/settings">Settings</NavLink>
           <NavLink to="/stats">Stats</NavLink>
+          <button
+            type="button"
+            className="app-footer-shortcuts"
+            onClick={() => shortcuts.setOpen(true)}
+            data-testid="footer-shortcuts-btn"
+          >
+            Shortcuts
+          </button>
         </nav>
         <div className="app-footer-col app-footer-meta">
           <span className="app-footer-count">
@@ -415,7 +414,7 @@ export default function AppShell(): JSX.Element {
 
       <ToastHost />
       <SparkleHost />
-      <KeyboardCheatSheet open={cheatSheetOpen} onClose={() => setCheatSheetOpen(false)} />
+      <KeyboardShortcutsModal open={shortcuts.open} onClose={shortcuts.close} />
 
       {surpriseSplash ? (
         <div
