@@ -6,6 +6,7 @@ import type { Achievement, StatsState } from "../platform/stats.js";
 import { GAMES } from "../games/registry.js";
 import { downloadSvg } from "../platform/svgShare.js";
 import { useConfirm } from "../platform/ConfirmDialog.js";
+import { TIME_HISTORY_KEY_PREFIX } from "../platform/userdata.js";
 import "./StatsPage.css";
 
 const PIE_COLORS = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24", "#f472b6"];
@@ -389,6 +390,66 @@ function buildCombinedSvg(
 </svg>`;
 }
 
+/**
+ * Build a JSON blob containing the user's full stats subset — the parsed
+ * `StatsState` plus every per-game side-table (best times, ratings,
+ * favorites, time history, hints, undos). Distinct from `userdata.exportAll()`,
+ * which also bundles theme/sound/UI settings; this is purely the stats blob
+ * for power-user backups and bug-report attachments.
+ */
+interface StatsJsonExport {
+  version: 1;
+  exportedAt: string;
+  app: "cards-and-such";
+  kind: "stats";
+  stats: StatsState;
+  bestTimes: Record<string, number> | null;
+  ratings: Record<string, number> | null;
+  favorites: unknown;
+  hintsUsed: Record<string, number> | null;
+  undosUsed: Record<string, number> | null;
+  timeHistory: Record<string, unknown>;
+}
+
+function buildStatsJson(): StatsJsonExport {
+  const timeHistory: Record<string, unknown> = {};
+  if (typeof localStorage !== "undefined") {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || !k.startsWith(TIME_HISTORY_KEY_PREFIX)) continue;
+      const parsed = progressJSON<unknown>(k);
+      if (parsed != null) timeHistory[k] = parsed;
+    }
+  }
+  return {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    app: "cards-and-such",
+    kind: "stats",
+    stats: loadStats(),
+    bestTimes: progressJSON<Record<string, number>>("cards-best-times"),
+    ratings: progressJSON<Record<string, number>>("cards-ratings"),
+    favorites: progressJSON<unknown>("cards-favorites"),
+    hintsUsed: progressJSON<Record<string, number>>("cards-hints-used"),
+    undosUsed: progressJSON<Record<string, number>>("cards-undos-used"),
+    timeHistory,
+  };
+}
+
+function downloadStatsJson(filename: string): void {
+  if (typeof document === "undefined" || typeof URL === "undefined") return;
+  const json = JSON.stringify(buildStatsJson(), null, 2);
+  const blob = new Blob([json], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
 function formatRelativeTime(ms: number): string {
   const diff = Math.max(0, Date.now() - ms);
   const sec = Math.round(diff / 1000);
@@ -444,6 +505,11 @@ export default function StatsPage(): JSX.Element {
     } catch {
       /* ignore quota / private mode */
     }
+  };
+
+  const exportJson = (): void => {
+    const today = new Date().toISOString().slice(0, 10);
+    downloadStatsJson(`cards-stats-${today}.json`);
   };
 
   const fav = favoriteCategory(stats);
@@ -561,13 +627,25 @@ export default function StatsPage(): JSX.Element {
     <div className="stats-page" data-testid="stats-page">
       <div className="stats-page-head">
         <h1>Your stats</h1>
-        <button
-          type="button"
-          className="btn btn-ghost stats-export-all"
-          onClick={exportAll}
-          data-testid="stats-export-all"
-          title="Download all three charts as a single SVG"
-        >Export all charts</button>
+        <div className="stats-export-actions">
+          <button
+            type="button"
+            className="btn btn-ghost stats-export-all"
+            onClick={exportAll}
+            data-testid="stats-export-all"
+            title="Download all three charts as a single SVG"
+          >Export all charts</button>
+          <button
+            type="button"
+            className="btn btn-ghost stats-export-json"
+            onClick={exportJson}
+            data-testid="stats-export-json"
+            title="Download your full stats blob as JSON (debugging + backups)"
+          >
+            <span className="stats-export-json-badge" aria-hidden="true">JSON</span>
+            Download stats
+          </button>
+        </div>
       </div>
 
       {/* Top control row: category chips */}

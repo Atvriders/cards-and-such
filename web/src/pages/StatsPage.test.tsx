@@ -199,16 +199,19 @@ describe("StatsPage", () => {
     const line = screen.getByTestId("stats-export-line");
     const pie = screen.getByTestId("stats-export-pie");
     const all = screen.getByTestId("stats-export-all");
+    const json = screen.getByTestId("stats-export-json");
     expect(bar).toBeInTheDocument();
     expect(line).toBeInTheDocument();
     expect(pie).toBeInTheDocument();
     expect(all).toBeInTheDocument();
+    expect(json).toBeInTheDocument();
     // None of these should throw — they all funnel through downloadSvg
     // which we've stubbed via URL.createObjectURL above.
     expect(() => fireEvent.click(bar)).not.toThrow();
     expect(() => fireEvent.click(line)).not.toThrow();
     expect(() => fireEvent.click(pie)).not.toThrow();
     expect(() => fireEvent.click(all)).not.toThrow();
+    expect(() => fireEvent.click(json)).not.toThrow();
     // exportAll stamps the achievement flag.
     expect(localStorage.getItem("cards-stats-exported")).toBe("true");
   });
