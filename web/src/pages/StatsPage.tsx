@@ -42,7 +42,7 @@ function BarChart({ data, w = 320, h = 140 }: { data: BarDatum[]; w?: number; h?
   const pad = 24;
   const bw = data.length ? (w - pad * 2) / data.length : 0;
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label="Games played per category">
+    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label="Games played per category" data-testid="stats-bar-chart">
       <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="rgba(148,163,184,0.25)" />
       {data.map((d, i) => {
         const bh = ((h - pad * 2) * d.v) / max;
@@ -67,7 +67,7 @@ function LineChart({ data, w = 320, h = 140 }: { data: BarDatum[]; w?: number; h
   const pts = data.map((d, i) => [pad + i * step, h - pad - ((h - pad * 2) * d.v) / max] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label="Activity over last 14 days">
+    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label="Activity over last 14 days" data-testid="stats-line-chart">
       <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="rgba(148,163,184,0.25)" />
       <path d={path} fill="none" stroke="#60a5fa" strokeWidth="2" />
       {pts.map(([x, y], i) => (
@@ -88,7 +88,7 @@ function PieChart({ data, size = 160 }: { data: PieDatum[]; size?: number }): JS
   let acc = 0;
   return (
     <div className="stats-pie-wrap">
-      <svg viewBox={`0 0 ${size} ${size}`} className="stats-svg stats-pie" role="img" aria-label="Time per game (top 5)">
+      <svg viewBox={`0 0 ${size} ${size}`} className="stats-svg stats-pie" role="img" aria-label="Time per game (top 5)" data-testid="stats-pie-chart">
         {total === 0 ? (
           <circle cx={cx} cy={cy} r={r} fill="rgba(148,163,184,0.15)" />
         ) : data.map((d, i) => {
@@ -198,7 +198,7 @@ export default function StatsPage(): JSX.Element {
                   <div className="achievement-title">{a.title}</div>
                   <div className="achievement-desc">{a.description}</div>
                   <div className="achievement-progress" data-testid={`achievement-progress-${a.id}`}>
-                    <div className="achievement-progress-bar"><div className="achievement-progress-fill" style={{ width: `${pct}%` }} /></div>
+                    <div className="achievement-progress-bar" role="progressbar" aria-valuenow={cur} aria-valuemin={0} aria-valuemax={goal} data-pct={pct}><div className="achievement-progress-fill" style={{ width: `${pct}%` }} /></div>
                     <div className="achievement-progress-label">{cur}/{goal}</div>
                   </div>
                   <div className="achievement-status">{unlocked ? "Unlocked" : "Locked"}</div>
