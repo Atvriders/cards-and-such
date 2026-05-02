@@ -23,12 +23,14 @@ export function ApophisSoliGame(
         <button
           className="apophis-soli-auto"
           type="button"
+          data-testid="hint-target-apophis-soli-draw"
           onClick={() => dispatch({ type: "draw" } as ApophisSoliAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="apophis-soli-auto"
           type="button"
+          data-testid="hint-target-apophis-soli-redeal"
           onClick={() => dispatch({ type: "redeal" } as ApophisSoliAction)}
           disabled={state.stock.length > 0 || state.redealsRemaining <= 0}
         >Redeal</button>
@@ -39,7 +41,7 @@ export function ApophisSoliGame(
             {row.map((cell, c) => (
               <div key={c} className="apophis-soli-cell">
                 {cell && !cell.removed && (
-                  <div onClick={() => select({ kind: "pyramid", row: r, col: c })}>
+                  <div data-testid={`hint-target-apophis-soli-pyramid-${r}-${c}`} onClick={() => select({ kind: "pyramid", row: r, col: c })}>
                     <CardView card={cell.card} />
                   </div>
                 )}
@@ -50,12 +52,12 @@ export function ApophisSoliGame(
         ))}
       </div>
       <div className="apophis-soli-bottom">
-        <div className="apophis-soli-stock-pile">
+        <div className="apophis-soli-stock-pile" data-testid="hint-target-apophis-soli-stock">
           <div>Stock: {state.stock.length}</div>
         </div>
         <div className="apophis-soli-waste-pile">
           {state.waste.length > 0 && (
-            <div onClick={() => select({ kind: "waste" })}>
+            <div data-testid="hint-target-apophis-soli-waste" onClick={() => select({ kind: "waste" })}>
               <CardView card={state.waste[state.waste.length - 1]!} />
             </div>
           )}

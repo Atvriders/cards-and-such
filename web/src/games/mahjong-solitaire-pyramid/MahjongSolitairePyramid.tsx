@@ -67,6 +67,7 @@ export function MahjongSolitairePyramid({
           return (
             <button
               key={tile.id}
+              data-testid={`hint-target-mahjong-solitaire-pyramid-${tile.id}`}
               className={cls}
               style={{ left: x, top: y, zIndex: layer * 10 + (tile.selected ? 100 : 0) }}
               onClick={() => handleClick(tile.id)}

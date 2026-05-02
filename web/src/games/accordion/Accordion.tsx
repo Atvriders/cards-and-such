@@ -60,6 +60,7 @@ export function Accordion({
             <div
               key={i}
               className={`accordion-pile${isSelected ? " selected" : ""}${isTarget ? " legal-target" : ""}`}
+              data-testid={`hint-target-accordion-${i}`}
               onClick={() => handlePileClick(i)}
             >
               <Card card={topCard} faceDown={false} />

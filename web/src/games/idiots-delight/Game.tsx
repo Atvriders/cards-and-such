@@ -32,13 +32,14 @@ export function IdiotsDelightGame(
         <button
           className="idiots-delight-auto"
           type="button"
+          data-testid="hint-target-idiots-delight-deal"
           onClick={() => dispatch({ type: "deal" } as IdiotsDelightAction)}
           disabled={state.stock.length === 0 && !state.won}
         >Deal</button>
       </div>
       <div className="idiots-delight-cols">
         {state.columns.map((col, i) => (
-          <div key={i} className={"idiots-delight-col" + (sel === i ? " selected" : "")} onClick={() => click(i)}>
+          <div key={i} className={"idiots-delight-col" + (sel === i ? " selected" : "")} data-testid={`hint-target-idiots-delight-${i}`} onClick={() => click(i)}>
             {col.length > 0 && <CardView card={col[col.length - 1]!} />}
             {col.length === 0 && <div className="idiots-delight-empty" />}
             <div className="idiots-delight-cnt">{col.length}</div>

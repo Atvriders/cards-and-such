@@ -16,6 +16,7 @@ export function ZodiacPatienceGame(
         <button
           className="zodiac-patience-auto"
           type="button"
+          data-testid="hint-target-zodiac-patience-tick"
           onClick={() => dispatch({ type: "tick" } as ZodiacPatienceAction)}
           disabled={!state.held}
         >Tick</button>

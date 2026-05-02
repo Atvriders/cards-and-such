@@ -22,6 +22,7 @@ export function SimplePairsGame(
                 <div
                   key={c}
                   className={"simple-pairs-cell" + (sel ? " selected" : "")}
+                  data-testid={`hint-target-simple-pairs-${r}-${c}`}
                   onClick={() => dispatch({ type: "select", r, c } as SimplePairsAction)}
                 >
                   {cell.card && <CardView card={cell.card} />}

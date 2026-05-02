@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MahjongSolitaireState, MahjongAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, isFree } from "./state.js";
 import { MahjongSolitaireTurtle } from "./MahjongSolitaireTurtle.js";
 
 const settings = {} as const;
@@ -22,6 +22,18 @@ You win when all 144 tiles are removed. The game ends early if no matching pair 
 Scoring: win earns up to 10,000 points minus a penalty of 50 per move. If the board deadlocks, you earn partial credit proportional to tiles removed. Fewer moves and a full clear give the highest score. Tip: always prefer matches that free the most blocked tiles, especially in the centre of the stack.`,
   settings,
   initialState: (seed: number) => initialState(seed),
+  hint: (state: MahjongSolitaireState): HintTarget | null => {
+    if (state.won || state.gameOver) return null;
+    const free = state.tiles.filter((t) => !t.removed && isFree(t, state.tiles));
+    for (let i = 0; i < free.length; i++) {
+      for (let j = i + 1; j < free.length; j++) {
+        if (free[i]!.face === free[j]!.face) {
+          return { selector: `[data-testid="hint-target-mahjong-solitaire-turtle-${free[i]!.id}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: MahjongSolitaireTurtle,

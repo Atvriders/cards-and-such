@@ -25,7 +25,7 @@ export function PenguinSoliGame({ state, dispatch, onGameOver }: GameProps<Pengu
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as PenguinSoliAction)}>Keep & Score</button>
+        <button data-testid="hint-target-penguin-soli-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as PenguinSoliAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as PenguinSoliAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

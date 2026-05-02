@@ -83,8 +83,8 @@ export function Game({
                   const accessible = isAccessible(state.pyramids, pyIdx, rowIdx, colIdx);
                   const isSelected = selected?.py === pyIdx && selected?.row === rowIdx && selected?.col === colIdx;
                   return (
+                    <div key={colIdx} data-testid={`hint-target-giza-${pyIdx}-${rowIdx}-${colIdx}`}>
                     <CardEl
-                      key={colIdx}
                       card={card}
                       accessible={accessible}
                       selected={isSelected}
@@ -97,6 +97,7 @@ export function Game({
                         }
                       }}
                     />
+                    </div>
                   );
                 })}
               </div>
@@ -108,6 +109,7 @@ export function Game({
       <div className="giza-bottom">
         {/* Stock */}
         <div
+          data-testid="hint-target-giza-stock"
           className={`giza-stock${state.stock.length > 0 ? " clickable" : " empty"}`}
           onClick={() => dispatch({ type: "draw-stock" } as GizaAction)}
         >

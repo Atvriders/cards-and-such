@@ -25,7 +25,7 @@ export function WaspSoliGame({ state, dispatch, onGameOver }: GameProps<WaspSoli
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as WaspSoliAction)}>Keep & Score</button>
+        <button data-testid="hint-target-wasp-soli-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as WaspSoliAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as WaspSoliAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

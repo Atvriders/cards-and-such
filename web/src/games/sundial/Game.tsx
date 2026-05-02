@@ -16,6 +16,7 @@ export function SundialGame(
         <button
           className="sundial-auto"
           type="button"
+          data-testid="hint-target-sundial-tick"
           onClick={() => dispatch({ type: "tick" } as SundialAction)}
           disabled={!state.held}
         >Tick</button>

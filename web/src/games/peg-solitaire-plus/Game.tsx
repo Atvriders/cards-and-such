@@ -49,7 +49,7 @@ export function PegSolitairePlusGame({
           if (v === 0) return <div key={i} className="peg-sol-plus-cell invalid" />;
           const cls = `peg-sol-plus-cell ${v === 1 ? "peg" : "hole"}${selected === i ? " selected" : ""}`;
           return (
-            <div key={i} className={cls} onClick={() => handleClick(i)} />
+            <div key={i} data-testid={`hint-target-peg-solitaire-plus-${i}`} className={cls} onClick={() => handleClick(i)} />
           );
         })}
       </div>

@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AcesUpState, AcesUpAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, findDiscardable } from "./state.js";
 import { AcesUp } from "./AcesUp.js";
 
 export const acesUpSettings = {} as const;
@@ -24,6 +24,17 @@ Winning: Discard all 48 non-Ace cards, leaving exactly one Ace on top of each co
 Strategy: Prioritize emptying columns to gain mobility. When a column is empty, use it to reveal buried low cards. Avoid burying Aces deep in columns. Think ahead about which cards in the same suit block each other.`,
   settings: acesUpSettings,
   initialState: (seed) => initialState(seed, {}),
+  hint: (state: AcesUpState): HintTarget | null => {
+    if (state.won) return null;
+    const discardable = findDiscardable(state.columns);
+    if (discardable.length > 0) {
+      return { selector: '[data-testid="hint-target-aces-up-discard"]', pulses: 3 };
+    }
+    if (state.stock.length > 0) {
+      return { selector: '[data-testid="hint-target-aces-up-deal"]', pulses: 3 };
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: AcesUp,

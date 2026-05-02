@@ -25,7 +25,7 @@ export function IndianGame({ state, dispatch, onGameOver }: GameProps<IndianStat
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as IndianAction)}>Keep & Score</button>
+        <button data-testid="hint-target-indian-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as IndianAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as IndianAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

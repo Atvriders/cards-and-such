@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AccordionState, AccordionAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, legalMoves } from "./state.js";
 import { Accordion } from "./Accordion.js";
 
 export const accordionSettings = {
@@ -28,6 +28,13 @@ Winning: Compress all 52 cards into a single pile. This is rare and mostly luck-
 Strategy: Look for chain moves where one compression unlocks another. Prioritize 3-away jumps when they set up follow-up moves. Keep an eye on suits — same-suit moves are often more powerful since they apply regardless of rank. Don't always take the first available move; scan the whole row first.`,
   settings: accordionSettings,
   initialState,
+  hint: (state: AccordionState): HintTarget | null => {
+    if (state.won) return null;
+    const moves = legalMoves(state.piles, state.settings.allowJump3);
+    if (moves.length === 0) return null;
+    const m = moves[0]!;
+    return { selector: `[data-testid="hint-target-accordion-${m.from}"]`, pulses: 3 };
+  },
   reducer,
   isTerminal,
   component: Accordion,

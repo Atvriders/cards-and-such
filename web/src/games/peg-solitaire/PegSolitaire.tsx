@@ -74,6 +74,7 @@ export function PegSolitaire({
           return (
             <div
               key={idx}
+              data-testid={`hint-target-peg-solitaire-${idx}`}
               className={cls}
               onClick={() => handleClick(idx)}
               aria-label={!valid ? undefined : cell === "peg" ? "Peg" : "Empty hole"}

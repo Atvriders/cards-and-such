@@ -25,7 +25,7 @@ export function ZodiacSoliGame({ state, dispatch, onGameOver }: GameProps<Zodiac
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as ZodiacSoliAction)}>Keep & Score</button>
+        <button data-testid="hint-target-zodiac-soli-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as ZodiacSoliAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as ZodiacSoliAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

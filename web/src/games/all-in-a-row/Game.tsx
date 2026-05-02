@@ -25,7 +25,7 @@ export function AllInARowGame({ state, dispatch, onGameOver }: GameProps<AllInAR
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as AllInARowAction)}>Keep & Score</button>
+        <button data-testid="hint-target-all-in-a-row-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as AllInARowAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as AllInARowAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

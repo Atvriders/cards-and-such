@@ -32,13 +32,14 @@ export function AcesUpFiringSquadGame(
         <button
           className="aces-up-firing-squad-auto"
           type="button"
+          data-testid="hint-target-aces-up-firing-squad-deal"
           onClick={() => dispatch({ type: "deal" } as AcesUpFiringSquadAction)}
           disabled={state.stock.length === 0 && !state.won}
         >Deal</button>
       </div>
       <div className="aces-up-firing-squad-cols">
         {state.columns.map((col, i) => (
-          <div key={i} className={"aces-up-firing-squad-col" + (sel === i ? " selected" : "")} onClick={() => click(i)}>
+          <div key={i} className={"aces-up-firing-squad-col" + (sel === i ? " selected" : "")} data-testid={`hint-target-aces-up-firing-squad-${i}`} onClick={() => click(i)}>
             {col.length > 0 && <CardView card={col[col.length - 1]!} />}
             {col.length === 0 && <div className="aces-up-firing-squad-empty" />}
             <div className="aces-up-firing-squad-cnt">{col.length}</div>

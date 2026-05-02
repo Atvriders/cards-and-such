@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EuroPegSolitaireState, EuroPegAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, getLegalJumps } from "./state.js";
 import { EuroPegSolitaire } from "./EuroPegSolitaire.js";
 
 export const euroPegSettings = {
@@ -32,6 +32,16 @@ The goal is to remove as many pegs as possible. The ideal solution leaves exactl
 Scoring: 1000 points for leaving 1 peg in the center, minus 130 for each additional peg remaining, with a minimum of 50. Challenge yourself to find the perfect solution!`,
   settings: euroPegSettings,
   initialState: (seed: number, settings: EuroPegSettingsType) => initialState(seed, settings),
+  hint: (state: EuroPegSolitaireState): HintTarget | null => {
+    if (state.won) return null;
+    for (let i = 0; i < state.cells.length; i++) {
+      if (state.cells[i] !== "peg" || !state.valid[i]) continue;
+      if (getLegalJumps(state.cells, state.valid, i).length > 0) {
+        return { selector: `[data-testid="hint-target-european-peg-solitaire-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: EuroPegSolitaire,

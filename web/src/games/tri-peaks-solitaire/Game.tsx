@@ -22,12 +22,14 @@ export function TriPeaksSolitaireGame(
         <button
           className="tri-peaks-solitaire-auto"
           type="button"
+          data-testid="hint-target-tri-peaks-solitaire-draw"
           onClick={() => dispatch({ type: "draw" } as TriPeaksSolitaireAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="tri-peaks-solitaire-auto"
           type="button"
+          data-testid="hint-target-tri-peaks-solitaire-recycle"
           onClick={() => dispatch({ type: "recycle" } as TriPeaksSolitaireAction)}
           disabled={state.stock.length > 0}
         >Recycle</button>
@@ -36,7 +38,7 @@ export function TriPeaksSolitaireGame(
         {state.columns.map((col, ci) => (
           <div key={ci} className="tri-peaks-solitaire-col">
             {col.map((card, ri) => (
-              <div key={ri} className="tri-peaks-solitaire-cell" onClick={() => play(ci, ri)}>
+              <div key={ri} className="tri-peaks-solitaire-cell" data-testid={`hint-target-tri-peaks-solitaire-${ci}-${ri}`} onClick={() => play(ci, ri)}>
                 {!state.removed[ci]?.[ri] && <CardView card={card} />}
               </div>
             ))}

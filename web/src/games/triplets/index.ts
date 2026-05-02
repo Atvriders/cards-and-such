@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { TripletsState, TripletsAction } from "./state.js";
 import { TripletsGame } from "./Game.js";
@@ -24,6 +24,31 @@ Play: Click three pile tops whose values sum to exactly 15, then click "Remove T
 Tips: Plan ahead — removing one triplet may expose cards that complete another. Track which values you still need. Face cards (worth 10) pair with 5 and any 0-value… wait, there are none — so two face cards need a 15−10−10 = −5 gap, which is impossible. Three tens cannot form a valid group. Always look for mixes of high and low cards.`,
   settings,
   initialState: (seed: number) => initialState(seed),
+  hint: (state: TripletsState): HintTarget | null => {
+    if (state.won) return null;
+    const cardVal = (rank: number): number => (rank >= 10 ? 10 : rank);
+    type Top = { idx: number; val: number };
+    const tops: Top[] = [];
+    for (let i = 0; i < state.piles.length; i++) {
+      const pile = state.piles[i]!;
+      if (pile.length > 0) {
+        tops.push({ idx: i, val: cardVal(pile[pile.length - 1]!.rank as number) });
+      }
+    }
+    for (let a = 0; a < tops.length; a++) {
+      for (let b = a + 1; b < tops.length; b++) {
+        for (let c = b + 1; c < tops.length; c++) {
+          if (tops[a]!.val + tops[b]!.val + tops[c]!.val === 15) {
+            return { selector: `[data-testid="hint-target-triplets-${tops[a]!.idx}"]`, pulses: 3 };
+          }
+        }
+      }
+    }
+    if (state.stock.length > 0) {
+      return { selector: '.tri-btn:nth-of-type(2)', pulses: 3 };
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: TripletsGame,

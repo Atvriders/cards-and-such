@@ -23,12 +23,14 @@ export function TutTombGame(
         <button
           className="tut-tomb-auto"
           type="button"
+          data-testid="hint-target-tut-tomb-draw"
           onClick={() => dispatch({ type: "draw" } as TutTombAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="tut-tomb-auto"
           type="button"
+          data-testid="hint-target-tut-tomb-redeal"
           onClick={() => dispatch({ type: "redeal" } as TutTombAction)}
           disabled={state.stock.length > 0 || state.redealsRemaining <= 0}
         >Redeal</button>
@@ -39,7 +41,7 @@ export function TutTombGame(
             {row.map((cell, c) => (
               <div key={c} className="tut-tomb-cell">
                 {cell && !cell.removed && (
-                  <div onClick={() => select({ kind: "pyramid", row: r, col: c })}>
+                  <div data-testid={`hint-target-tut-tomb-pyramid-${r}-${c}`} onClick={() => select({ kind: "pyramid", row: r, col: c })}>
                     <CardView card={cell.card} />
                   </div>
                 )}
@@ -50,12 +52,12 @@ export function TutTombGame(
         ))}
       </div>
       <div className="tut-tomb-bottom">
-        <div className="tut-tomb-stock-pile">
+        <div className="tut-tomb-stock-pile" data-testid="hint-target-tut-tomb-stock">
           <div>Stock: {state.stock.length}</div>
         </div>
         <div className="tut-tomb-waste-pile">
           {state.waste.length > 0 && (
-            <div onClick={() => select({ kind: "waste" })}>
+            <div data-testid="hint-target-tut-tomb-waste" onClick={() => select({ kind: "waste" })}>
               <CardView card={state.waste[state.waste.length - 1]!} />
             </div>
           )}

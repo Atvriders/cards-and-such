@@ -25,7 +25,7 @@ export function HerringBoneGame({ state, dispatch, onGameOver }: GameProps<Herri
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as HerringBoneAction)}>Keep & Score</button>
+        <button data-testid="hint-target-herring-bone-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as HerringBoneAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as HerringBoneAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

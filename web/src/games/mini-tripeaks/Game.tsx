@@ -22,12 +22,14 @@ export function MiniTripeaksGame(
         <button
           className="mini-tripeaks-auto"
           type="button"
+          data-testid="hint-target-mini-tripeaks-draw"
           onClick={() => dispatch({ type: "draw" } as MiniTripeaksAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="mini-tripeaks-auto"
           type="button"
+          data-testid="hint-target-mini-tripeaks-recycle"
           onClick={() => dispatch({ type: "recycle" } as MiniTripeaksAction)}
           disabled={state.stock.length > 0}
         >Recycle</button>
@@ -36,7 +38,7 @@ export function MiniTripeaksGame(
         {state.columns.map((col, ci) => (
           <div key={ci} className="mini-tripeaks-col">
             {col.map((card, ri) => (
-              <div key={ri} className="mini-tripeaks-cell" onClick={() => play(ci, ri)}>
+              <div key={ri} className="mini-tripeaks-cell" data-testid={`hint-target-mini-tripeaks-${ci}-${ri}`} onClick={() => play(ci, ri)}>
                 {!state.removed[ci]?.[ri] && <CardView card={card} />}
               </div>
             ))}

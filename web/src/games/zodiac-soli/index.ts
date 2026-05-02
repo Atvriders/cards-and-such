@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ZodiacSoliState, ZodiacSoliAction, ZodiacSoliSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ZodiacSoliGame } from "./Game.js";
@@ -15,6 +15,10 @@ export const zodiacSoliPlugin: GamePlugin<ZodiacSoliState, ZodiacSoliAction, typ
   howToPlay: "Zodiac Solitaire is a ten-round seeded solitaire micro-variant inspired by Two-deck twelve-pile patience aligned to the zodiac wheel. Each round you receive a fresh five-card hand drawn from a single seeded deck. You then choose one of three actions: Keep & Score locks the hand and earns variant-flavored points (this version emphasizes twelve-rank coverage); Discard Hand abandons it for a flat one-point consolation and rolls into the next round; Swap consumes the next deck card to replace any single card in the hand without ending the round.\n\nScores compound across all ten rounds, with typical totals between forty and one hundred twenty points. The game ends automatically when ten rounds finish or the deck runs out, and the final score is rated Pass, Fair, Good, or Excellent at the standard cutoffs.\n\nZodiac arranges twelve tableau piles like the wheel of constellations. The micro-variant favors broad rank coverage — touch many ranks, like wandering the night sky. The deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay. Practice swap timing — every wasted swap costs you a future round.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ZodiacSoliSettings),
+  hint: (state: ZodiacSoliState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: `[data-testid="hint-target-zodiac-soli-keep"]`, pulses: 3 };
+  },
   reducer,
   isTerminal,
   component: ZodiacSoliGame,

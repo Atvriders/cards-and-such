@@ -22,6 +22,7 @@ export function MiniPokerSquareGame(
                 <div
                   key={c}
                   className={"mini-poker-square-cell" + (sel ? " selected" : "")}
+                  data-testid={`hint-target-mini-poker-square-${r}-${c}`}
                   onClick={() => dispatch({ type: "select", r, c } as MiniPokerSquareAction)}
                 >
                   {cell.card && <CardView card={cell.card} />}

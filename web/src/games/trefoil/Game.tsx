@@ -22,6 +22,7 @@ export function TrefoilGame(
                 <div
                   key={c}
                   className={"trefoil-cell" + (sel ? " selected" : "")}
+                  data-testid={`hint-target-trefoil-${r}-${c}`}
                   onClick={() => dispatch({ type: "select", r, c } as TrefoilAction)}
                 >
                   {cell.card && <CardView card={cell.card} />}

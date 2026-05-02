@@ -34,6 +34,7 @@ export function AccordionSolitaireGame(
           <div
             key={i}
             className={"accordion-solitaire-cell" + (sel === i ? " selected" : "")}
+            data-testid={`hint-target-accordion-solitaire-${i}`}
             onClick={() => click(i)}
           >
             <CardView card={card!} />

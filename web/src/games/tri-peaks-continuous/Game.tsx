@@ -22,12 +22,14 @@ export function TriPeaksContinuousGame(
         <button
           className="tri-peaks-continuous-auto"
           type="button"
+          data-testid="hint-target-tri-peaks-continuous-draw"
           onClick={() => dispatch({ type: "draw" } as TriPeaksContinuousAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="tri-peaks-continuous-auto"
           type="button"
+          data-testid="hint-target-tri-peaks-continuous-recycle"
           onClick={() => dispatch({ type: "recycle" } as TriPeaksContinuousAction)}
           disabled={state.stock.length > 0}
         >Recycle</button>
@@ -36,7 +38,7 @@ export function TriPeaksContinuousGame(
         {state.columns.map((col, ci) => (
           <div key={ci} className="tri-peaks-continuous-col">
             {col.map((card, ri) => (
-              <div key={ri} className="tri-peaks-continuous-cell" onClick={() => play(ci, ri)}>
+              <div key={ri} className="tri-peaks-continuous-cell" data-testid={`hint-target-tri-peaks-continuous-${ci}-${ri}`} onClick={() => play(ci, ri)}>
                 {!state.removed[ci]?.[ri] && <CardView card={card} />}
               </div>
             ))}

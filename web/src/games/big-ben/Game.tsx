@@ -16,6 +16,7 @@ export function BigBenGame(
         <button
           className="big-ben-auto"
           type="button"
+          data-testid="hint-target-big-ben-tick"
           onClick={() => dispatch({ type: "tick" } as BigBenAction)}
           disabled={!state.held}
         >Tick</button>

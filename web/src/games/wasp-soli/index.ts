@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WaspSoliState, WaspSoliAction, WaspSoliSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WaspSoliGame } from "./Game.js";
@@ -15,6 +15,10 @@ export const waspSoliPlugin: GamePlugin<WaspSoliState, WaspSoliAction, typeof se
   howToPlay: "Wasp is a ten-round seeded solitaire micro-variant inspired by Scorpion variant where all four base cards land on foundations automatically. Each round you receive a fresh five-card hand drawn from a single seeded deck. You then choose one of three actions: Keep & Score locks the hand and earns variant-flavored points (this version emphasizes aces and kings); Discard Hand abandons it for a flat one-point consolation and rolls into the next round; Swap consumes the next deck card to replace any single card in the hand without ending the round.\n\nScores compound across all ten rounds, with typical totals between forty and one hundred twenty points. The game ends automatically when ten rounds finish or the deck runs out, and the final score is rated Pass, Fair, Good, or Excellent at the standard cutoffs.\n\nWasp pre-fills foundations to make Scorpion friendlier. The micro-variant rewards aces and kings — the natural endpoints of long suited runs. The deal is fully seeded, so the same starting seed always produces an identical card sequence for fair comparison and replay. Practice swap timing — every wasted swap costs you a future round.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as WaspSoliSettings),
+  hint: (state: WaspSoliState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: `[data-testid="hint-target-wasp-soli-keep"]`, pulses: 3 };
+  },
   reducer,
   isTerminal,
   component: WaspSoliGame,

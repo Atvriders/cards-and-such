@@ -25,7 +25,7 @@ export function SultanSoliGame({ state, dispatch, onGameOver }: GameProps<Sultan
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SultanSoliAction)}>Keep & Score</button>
+        <button data-testid="hint-target-sultan-soli-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SultanSoliAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as SultanSoliAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

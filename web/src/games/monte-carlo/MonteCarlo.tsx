@@ -52,6 +52,7 @@ export function MonteCarlo({
             <div
               key={pos}
               className={`monte-carlo-cell ${colorClass}${isSelected ? " selected" : ""}`}
+              data-testid={`hint-target-monte-carlo-${pos}`}
               onClick={() => handleCellClick(pos)}
               title={`${rankLabel(card.rank)}${card.suit} — click to select`}
             >

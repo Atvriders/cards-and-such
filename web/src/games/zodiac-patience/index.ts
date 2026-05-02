@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ZodiacPatienceState, ZodiacPatienceAction, ZodiacPatienceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -15,6 +15,13 @@ export const zodiacPatiencePlugin: GamePlugin<ZodiacPatienceState, ZodiacPatienc
   howToPlay: "Twelve-zodiac slot variant of Clock Patience. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ZodiacPatienceSettings),
+  hint: (state: ZodiacPatienceState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    if (state.held) {
+      return { selector: '[data-testid="hint-target-zodiac-patience-tick"]', pulses: 3 };
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: ZodiacPatienceGame,

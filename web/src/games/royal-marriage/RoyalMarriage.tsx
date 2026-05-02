@@ -60,6 +60,7 @@ export function RoyalMarriage({
       <div className="rm-stock-area">
         <button
           className="rm-stock-btn"
+          data-testid="hint-target-royal-marriage-deal"
           disabled={state.stock.length === 0}
           onClick={() => dispatch({ type: "deal-card" } as RoyalMarriageAction)}
         >
@@ -77,6 +78,7 @@ export function RoyalMarriage({
               selectedIdx === idx ? "selected" : "",
               isSpecial(idx) ? "special" : "",
             ].join(" ")}
+            data-testid={`hint-target-royal-marriage-${idx}`}
             onClick={() => handleCardClick(idx)}
           >
             {rankLabel(card.rank)}{card.suit}

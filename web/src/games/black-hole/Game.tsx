@@ -22,12 +22,14 @@ export function BlackHoleGame(
         <button
           className="black-hole-auto"
           type="button"
+          data-testid="hint-target-black-hole-draw"
           onClick={() => dispatch({ type: "draw" } as BlackHoleAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="black-hole-auto"
           type="button"
+          data-testid="hint-target-black-hole-recycle"
           onClick={() => dispatch({ type: "recycle" } as BlackHoleAction)}
           disabled={state.stock.length > 0}
         >Recycle</button>
@@ -36,7 +38,7 @@ export function BlackHoleGame(
         {state.columns.map((col, ci) => (
           <div key={ci} className="black-hole-col">
             {col.map((card, ri) => (
-              <div key={ri} className="black-hole-cell" onClick={() => play(ci, ri)}>
+              <div key={ri} className="black-hole-cell" data-testid={`hint-target-black-hole-${ci}-${ri}`} onClick={() => play(ci, ri)}>
                 {!state.removed[ci]?.[ri] && <CardView card={card} />}
               </div>
             ))}

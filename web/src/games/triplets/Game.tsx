@@ -43,6 +43,7 @@ export function TripletsGame({
               {top ? (
                 <div
                   className={`tri-card-wrap ${isSelected ? "tri-selected" : ""}`}
+                  data-testid={`hint-target-triplets-${pileIdx}`}
                   onClick={() => handlePileClick(pileIdx)}
                 >
                   <Card card={top} />

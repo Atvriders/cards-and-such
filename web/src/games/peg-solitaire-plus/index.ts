@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PegSolitairePlusState, PegSolitairePlusAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,6 +34,26 @@ Score: a perfect solve scores 1000. If you get stuck, score is based on how few 
 Tip: Work inward from the edges. Avoid leaving isolated pegs in corners — they cannot be jumped and will end the game prematurely.`,
   settings: pegSolitairePlusSettings,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
+  hint: (state: PegSolitairePlusState): HintTarget | null => {
+    if (state.won || state.stuck) return null;
+    const { board, boardSize } = state;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] !== 1) continue;
+      const r = Math.floor(i / boardSize), c = i % boardSize;
+      for (const [dr, dc] of [[-1,0],[1,0],[0,-1],[0,1]] as [number,number][]) {
+        const mr = r + dr, mc = c + dc;
+        const er = r + 2*dr, ec = c + 2*dc;
+        if (mr < 0 || mr >= boardSize || mc < 0 || mc >= boardSize) continue;
+        if (er < 0 || er >= boardSize || ec < 0 || ec >= boardSize) continue;
+        const midIdx = mr * boardSize + mc;
+        const endIdx = er * boardSize + ec;
+        if (board[midIdx] === 1 && board[endIdx] === 2) {
+          return { selector: `[data-testid="hint-target-peg-solitaire-plus-${i}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: PegSolitairePlusGame,

@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MahjongSolitaireState, MahjongAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, isFree } from "./state.js";
 import { MahjongSolitairePyramid } from "./MahjongSolitairePyramid.js";
 
 const settings = {} as const;
@@ -22,6 +22,18 @@ You win when all tiles are removed. The game ends early if no matching pair exis
 Score: 10,000 minus 50 per move on a full clear; partial credit proportional to tiles removed otherwise. Prioritise matches that unlock the most interior tiles per move to maximise your score.`,
   settings,
   initialState: (seed: number) => initialState(seed),
+  hint: (state: MahjongSolitaireState): HintTarget | null => {
+    if (state.won || state.gameOver) return null;
+    const free = state.tiles.filter((t) => !t.removed && isFree(t, state.tiles));
+    for (let i = 0; i < free.length; i++) {
+      for (let j = i + 1; j < free.length; j++) {
+        if (free[i]!.face === free[j]!.face) {
+          return { selector: `[data-testid="hint-target-mahjong-solitaire-pyramid-${free[i]!.id}"]`, pulses: 3 };
+        }
+      }
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: MahjongSolitairePyramid,

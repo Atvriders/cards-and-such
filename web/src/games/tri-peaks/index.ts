@@ -1,6 +1,6 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TriPeaksState, TriPeaksAction } from "./state.js";
-import { initialState, reducer, isTerminal, triPeaksSettings } from "./state.js";
+import { initialState, reducer, isTerminal, triPeaksSettings, isUncovered } from "./state.js";
 import { TriPeaks } from "./TriPeaks.js";
 
 type TriPeaksSettings = SettingsOf<typeof triPeaksSettings>;
@@ -22,6 +22,31 @@ Scoring: Each card removed scores points. Chains score progressively more — th
 Tips: Look ahead before clicking — sometimes skipping a match to draw from stock sets up a longer chain. Prioritize uncovering buried peaks early so all three become accessible.`,
   settings: triPeaksSettings,
   initialState: (seed: number, settings: TriPeaksSettings) => initialState(seed, settings),
+  hint: (state: TriPeaksState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    const wv = state.currentCard.rank as number;
+    const wrap = state.settings.wrapAces;
+    const adj = (a: number, b: number): boolean => {
+      if (Math.abs(a - b) === 1) return true;
+      if (wrap && ((a === 1 && b === 13) || (a === 13 && b === 1))) return true;
+      return false;
+    };
+    for (let r = 0; r < state.pyramid.length; r++) {
+      const row = state.pyramid[r]!;
+      for (let c = 0; c < row.length; c++) {
+        const cell = row[c]!;
+        if (cell.removed) continue;
+        if (!isUncovered(state.pyramid, r, c)) continue;
+        if (adj(cell.card.rank as number, wv)) {
+          return { selector: `[data-testid="hint-target-tri-peaks-${r}-${c}"]`, pulses: 3 };
+        }
+      }
+    }
+    if (state.stock.length > 0) {
+      return { selector: '[data-testid="hint-target-tri-peaks-stock"]', pulses: 3 };
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: TriPeaks,

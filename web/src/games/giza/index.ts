@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GizaState, GizaAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, isAccessible } from "./state.js";
 import { Game } from "./Game.js";
 
 export const gizaSettings = {} as const;
@@ -26,6 +26,36 @@ Goal: Clear all three pyramids and exhaust the stock.
 Scoring: +10 for each pair removed; +15 for each card sent to a foundation.`,
   settings: gizaSettings,
   initialState: (seed: number) => initialState(seed, {}),
+  hint: (state: GizaState): HintTarget | null => {
+    if (state.won) return null;
+    type Coord = { py: number; row: number; col: number };
+    const accessible: { card: { rank: number }, coord: Coord }[] = [];
+    for (let py = 0; py < state.pyramids.length; py++) {
+      const pyr = state.pyramids[py]!;
+      for (let row = 0; row < pyr.length; row++) {
+        const r = pyr[row]!;
+        for (let col = 0; col < r.length; col++) {
+          if (!isAccessible(state.pyramids, py, row, col)) continue;
+          const card = r[col];
+          if (!card) continue;
+          accessible.push({ card: { rank: card.rank }, coord: { py, row, col } });
+        }
+      }
+    }
+    // Look for sum-13 pair
+    for (let i = 0; i < accessible.length; i++) {
+      for (let j = i + 1; j < accessible.length; j++) {
+        if (accessible[i]!.card.rank + accessible[j]!.card.rank === 13) {
+          const c = accessible[i]!.coord;
+          return { selector: `[data-testid="hint-target-giza-${c.py}-${c.row}-${c.col}"]`, pulses: 3 };
+        }
+      }
+    }
+    if (state.stock.length > 0) {
+      return { selector: `[data-testid="hint-target-giza-stock"]`, pulses: 3 };
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: Game,

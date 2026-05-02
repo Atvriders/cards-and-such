@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RoyalMarriageState, RoyalMarriageAction, RoyalMarriageSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RoyalMarriage } from "./RoyalMarriage.js";
@@ -22,6 +22,25 @@ Strategy: try to clear cards near the King early to keep him from being buried. 
 Score is based on how many cards you successfully discard between matching pairs. A perfect game scores 250 points.`,
   settings: royalMarriageSettings,
   initialState: (seed: number) => initialState(seed, {} as RoyalMarriageSettings),
+  hint: (state: RoyalMarriageState): HintTarget | null => {
+    if (state.won) return null;
+    const row = state.row;
+    for (let i = 0; i < row.length; i++) {
+      for (const gap of [2, 3]) {
+        const j = i + gap;
+        if (j >= row.length) continue;
+        const a = row[i]!;
+        const b = row[j]!;
+        if (a.suit === b.suit || a.rank === b.rank) {
+          return { selector: `[data-testid="hint-target-royal-marriage-${i}"]`, pulses: 3 };
+        }
+      }
+    }
+    if (state.stock.length > 0) {
+      return { selector: '[data-testid="hint-target-royal-marriage-deal"]', pulses: 3 };
+    }
+    return null;
+  },
   reducer,
   isTerminal,
   component: RoyalMarriage,

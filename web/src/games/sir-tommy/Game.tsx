@@ -25,7 +25,7 @@ export function SirTommyGame({ state, dispatch, onGameOver }: GameProps<SirTommy
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SirTommyAction)}>Keep & Score</button>
+        <button data-testid="hint-target-sir-tommy-keep" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SirTommyAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as SirTommyAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

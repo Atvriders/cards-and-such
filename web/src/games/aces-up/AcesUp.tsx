@@ -77,6 +77,7 @@ export function AcesUp({
       <div className="aces-up-actions">
         <button
           className="aces-up-btn"
+          data-testid="hint-target-aces-up-deal"
           disabled={state.stock.length === 0}
           onClick={() => dispatch({ type: "deal" } as AcesUpAction)}
         >
@@ -84,6 +85,7 @@ export function AcesUp({
         </button>
         <button
           className="aces-up-btn"
+          data-testid="hint-target-aces-up-discard"
           disabled={discardable.size === 0}
           onClick={() => dispatch({ type: "discard-lowers" } as AcesUpAction)}
         >

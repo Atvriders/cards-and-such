@@ -65,12 +65,11 @@ export function TriPeaks({
       const className = playable ? "playable" : "unavailable";
 
       cells.push(
-        <Card
-          key={col}
+        <div key={col} data-testid={`hint-target-tri-peaks-${row}-${col}`}><Card
           card={cell.card}
           className={className}
           {...(playable ? { onClick: () => handleCardClick(row, col) } : {})}
-        />,
+        /></div>,
       );
 
       // Add gap between peaks in row 1 (after cols 1 and 3)
@@ -103,7 +102,7 @@ export function TriPeaks({
         <div className="tri-peaks-stock-area">
           <span className="tri-peaks-area-label">Stock ({state.stock.length})</span>
           {state.stock.length > 0 ? (
-            <Card faceDown onClick={handleStockClick} />
+            <div data-testid="hint-target-tri-peaks-stock"><Card faceDown onClick={handleStockClick} /></div>
           ) : (
             <div className="tri-peaks-empty-card">empty</div>
           )}

@@ -36,6 +36,7 @@ export function AddictionSoliGame(
         <button
           className="addiction-soli-auto"
           type="button"
+          data-testid="hint-target-addiction-soli-redeal"
           onClick={() => dispatch({ type: "redeal" } as AddictionSoliAction)}
           disabled={state.redealsRemaining <= 0}
         >Redeal</button>
@@ -49,6 +50,7 @@ export function AddictionSoliGame(
                 <div
                   key={c}
                   className={"addiction-soli-cell" + (sel ? " selected" : "")}
+                  data-testid={`hint-target-addiction-soli-${r}-${c}`}
                   onClick={() => click(r, c)}
                 >
                   {cell.card ? <CardView card={cell.card} /> : <div className="addiction-soli-gap" />}
