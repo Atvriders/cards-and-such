@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnatomyQuizState, AnatomyQuizAction, AnatomyQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const anatomyQuizPlugin: GamePlugin<AnatomyQuizState, AnatomyQuizAction, 
   howToPlay:"Human Anatomy Quiz challenges you on the structure of the human body: organs, bones, muscles, the nervous system, the cardiovascular system, and more. Questions cover everything from how many bones an adult has to which organ produces insulin and where the smallest bone in the body lives.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock \u2014 fast, accurate answers earn the highest score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on.\n\nChoose 10, 20, or 30 questions in Settings. Perfect for biology students, medical school hopefuls, or anyone fascinated by the incredible machine that is the human body!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AnatomyQuizSettings),
-  reducer,isTerminal,component:AnatomyQuizGame,
+  reducer,isTerminal,
+  hint: (state: AnatomyQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:AnatomyQuizGame,
 };

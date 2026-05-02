@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BadukBoardQuizState, BadukBoardQuizAction, BadukBoardQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BadukBoardQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const badukBoardQuizPlugin: GamePlugin<BadukBoardQuizState, BadukBoardQui
   initialState: (seed: number, s: S) => initialState(seed, s as BadukBoardQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: BadukBoardQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: BadukBoardQuizGame,
 };

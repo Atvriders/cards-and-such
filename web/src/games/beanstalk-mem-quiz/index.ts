@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BeanstalkMemQuizState, BeanstalkMemQuizAction, BeanstalkMemQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const beanstalkMemQuizPlugin: GamePlugin<BeanstalkMemQuizState, Beanstalk
   howToPlay:"Beanstalk Memory Trivia is a ten-question quiz about the family card game where players plant cards in stacks and must remember which bean varieties grew where in order to harvest the right combinations later. Each round you'll be tested on the rules for planting, memorising stacks, harvesting, scoring bean-types, recommended player counts, and how Beanstalk relates to the famous Bohnanza family of games. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Beanstalk-style memory games turn the act of remembering positions into a satisfying farming theme — see how much trivia about the genre you can recall.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BeanstalkMemQuizSettings),
-  reducer,isTerminal,component:BeanstalkMemQuizGame,
+  reducer,isTerminal,
+  hint: (state: BeanstalkMemQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BeanstalkMemQuizGame,
 };

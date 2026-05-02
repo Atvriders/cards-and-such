@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BluesQuizState, BluesQuizAction, BluesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice and press Submit. Correct answers glow green; wrong answers turn re
 Choose 10, 20, or 30 questions in Settings. From crossroads legends to chitlin'-circuit heroes, dig into the deep blue!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BluesQuizSettings),
-  reducer,isTerminal,component:BluesQuizGame,
+  reducer,isTerminal,
+  hint: (state: BluesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BluesQuizGame,
 };

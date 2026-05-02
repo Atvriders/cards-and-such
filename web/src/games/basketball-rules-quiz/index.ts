@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BasketballRulesQuizState, BasketballRulesQuizAction, BasketballRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap your choice and press Submit. Right answers glow green, wrong ones turn red,
 Whether you watch the NBA, college, FIBA, or weekend pickup, this quiz will sharpen your knowledge of the rulebook!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BasketballRulesQuizSettings),
-  reducer,isTerminal,component:BasketballRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: BasketballRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BasketballRulesQuizGame,
 };

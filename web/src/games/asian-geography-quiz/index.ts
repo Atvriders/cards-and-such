@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AsianGeographyQuizState, AsianGeographyQuizAction, AsianGeographyQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const asianGeographyQuizPlugin: GamePlugin<AsianGeographyQuizState, Asian
   howToPlay:`Asian Geography Quiz tests your knowledge of the world's largest and most populous continent. Questions cover capitals from Tokyo to Tashkent, the Himalayan giants, the Caspian Sea, and the often-overlooked Central Asian Stans (Uzbekistan, Kyrgyzstan, Tajikistan).\n\nYou will be asked about Southeast Asia (Bangkok, Hanoi, Phnom Penh), South Asia (New Delhi, Dhaka, Kathmandu), East Asia (Beijing, Seoul, Pyongyang), and the Middle East fringe of Iran, Iraq, and Afghanistan.\n\nEach question has a 15-second timer. Correct answers earn 100 points plus a 10-point bonus per second remaining on the clock. Pick 10, 20, or 30 questions in Settings.\n\nIf you can name three of the five Stans without checking, you are doing well. If you can name all five plus their capitals, you are a geography champion. Prove it!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AsianGeographyQuizSettings),
-  reducer,isTerminal,component:AsianGeographyQuizGame,
+  reducer,isTerminal,
+  hint: (state: AsianGeographyQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:AsianGeographyQuizGame,
 };

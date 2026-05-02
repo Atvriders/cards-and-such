@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BaseballRulesQuizState, BaseballRulesQuizAction, BaseballRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Expect questions on field dimensions (90 feet between bases, the pitcher's mound
 Choose 10, 20, or 30 questions in Settings. Tap, Submit, Next — that's it. From the bleacher fan to the box-score nerd, this quiz will test your love of the game!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BaseballRulesQuizSettings),
-  reducer,isTerminal,component:BaseballRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: BaseballRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BaseballRulesQuizGame,
 };

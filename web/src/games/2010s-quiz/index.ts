@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TwentyTensQuizState, TwentyTensQuizAction, TwentyTensQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 15 questions in Settings. Test your memory of the era, learn something along the way, and aim for a high score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TwentyTensQuizSettings),
-  reducer,isTerminal,component:TwentyTensQuizGame,
+  reducer,isTerminal,
+  hint: (state: TwentyTensQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:TwentyTensQuizGame,
 };

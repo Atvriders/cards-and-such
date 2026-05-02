@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BhopalQuizState, BhopalQuizAction, BhopalQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const bhopalQuizPlugin: GamePlugin<BhopalQuizState, BhopalQuizAction, typ
   howToPlay:"Bhopal Disaster Quiz tests your knowledge of the world's worst industrial accident. Questions cover the December 1984 toxic gas leak from the Union Carbide plant, the deadly methyl isocyanate release, the immediate human toll on the city of Bhopal, and the long, troubled legal aftermath. You'll be asked about the Indian government response, the company's CEO Warren Anderson, the contaminated site, and the ongoing health effects on survivors and their children.\\n\\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\\n\\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on. Choose 10, 20, or 30 questions in Settings.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BhopalQuizSettings),
-  reducer,isTerminal,component:BhopalQuizGame,
+  reducer,isTerminal,
+  hint: (state: BhopalQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BhopalQuizGame,
 };

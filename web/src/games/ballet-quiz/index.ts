@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BalletQuizState, BalletQuizAction, BalletQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice and press Submit. Correct answers glow green; wrong ones turn red, 
 Choose 10, 20, or 30 questions in Settings. Whether you take class or you only know the Nutcracker holiday matinée, lace up those slippers — and let's pirouette into a great quiz!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BalletQuizSettings),
-  reducer,isTerminal,component:BalletQuizGame,
+  reducer,isTerminal,
+  hint: (state: BalletQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BalletQuizGame,
 };

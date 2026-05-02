@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AbaloneQuizState, AbaloneQuizAction, AbaloneQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AbaloneQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const abaloneQuizPlugin: GamePlugin<AbaloneQuizState, AbaloneQuizAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as AbaloneQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: AbaloneQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: AbaloneQuizGame,
 };

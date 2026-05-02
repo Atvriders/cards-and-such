@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Nineteen50sQuizState, Nineteen50sQuizAction, Nineteen50sQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 15 questions in Settings. Test your memory of the era, learn something along the way, and aim for a high score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as Nineteen50sQuizSettings),
-  reducer,isTerminal,component:Nineteen50sQuizGame,
+  reducer,isTerminal,
+  hint: (state: Nineteen50sQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:Nineteen50sQuizGame,
 };

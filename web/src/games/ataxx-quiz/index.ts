@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AtaxxQuizState, AtaxxQuizAction, AtaxxQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AtaxxQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const ataxxQuizPlugin: GamePlugin<AtaxxQuizState, AtaxxQuizAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as AtaxxQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: AtaxxQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: AtaxxQuizGame,
 };
