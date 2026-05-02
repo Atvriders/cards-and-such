@@ -21,6 +21,7 @@ import {
   setCoachmarkPending,
 } from "./tutorials.js";
 import { searchAll, type SearchHit } from "./search.js";
+import { decodeChallenge } from "./friendCode.js";
 import "./AppShell.css";
 
 const CHANGELOG: Array<{ title: string; detail: string }> = [
@@ -41,6 +42,12 @@ export default function AppShell(): JSX.Element {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [whatsNewOpen, setWhatsNewOpen] = useState(false);
+  // "Have a code?" modal — a tiny single-input dialog that decodes a
+  // friend code into a /play/<gameId>?seed=...&friend=1 URL. Opens via
+  // the nav link of the same name; auto-closes on a successful decode.
+  const [codeModalOpen, setCodeModalOpen] = useState(false);
+  const [codeInput, setCodeInput] = useState("");
+  const [codeError, setCodeError] = useState<string | null>(null);
   const [hasNewHighScore, setHasNewHighScore] = useState(false);
   // Global "?" / Shift+/ overlay listing every shortcut in the app. The hook
   // installs its own keydown listener and skips inputs/textareas/CE surfaces.
@@ -347,6 +354,21 @@ export default function AppShell(): JSX.Element {
     setMobileNavOpen(false);
   };
 
+  const submitCode = (e?: React.FormEvent): void => {
+    if (e) e.preventDefault();
+    const decoded = decodeChallenge(codeInput);
+    if (!decoded) {
+      setCodeError("That code didn't decode. Check for typos.");
+      return;
+    }
+    setCodeError(null);
+    setCodeModalOpen(false);
+    setCodeInput("");
+    navigate(
+      `/play/${decoded.gameId}?seed=${decoded.seed}&friend=1`,
+    );
+  };
+
   const dismissNotifications = (): void => {
     setHasNewHighScore(false);
     // Mark current top as seen so we don't re-flag on next poll.
@@ -454,6 +476,19 @@ export default function AppShell(): JSX.Element {
             onClick={() => { setWhatsNewOpen(true); setMobileNavOpen(false); }}
           >
             {t("nav.whats_new")}
+          </button>
+          <button
+            type="button"
+            className="whats-new-link"
+            data-testid="nav-have-a-code"
+            onClick={() => {
+              setCodeError(null);
+              setCodeInput("");
+              setCodeModalOpen(true);
+              setMobileNavOpen(false);
+            }}
+          >
+            Have a code?
           </button>
         </nav>
 
@@ -784,6 +819,88 @@ export default function AppShell(): JSX.Element {
             setWelcomeOpen(false);
           }}
         />
+      ) : null}
+
+      {codeModalOpen ? (
+        <div
+          className="modal-backdrop"
+          role="presentation"
+          onClick={() => setCodeModalOpen(false)}
+          data-testid="app-code-modal-backdrop"
+        >
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="app-code-title"
+            onClick={(e) => e.stopPropagation()}
+            style={{ minWidth: "min(360px, 90vw)" }}
+          >
+            <header>
+              <h2 id="app-code-title">Enter friend code</h2>
+              <button type="button" aria-label="Close" onClick={() => setCodeModalOpen(false)}>×</button>
+            </header>
+            <form onSubmit={submitCode} style={{ display: "flex", flexDirection: "column", gap: "0.75rem", padding: "1rem" }}>
+              <p style={{ margin: 0, fontSize: "0.85rem", opacity: 0.85 }}>
+                Paste the 6-character code your friend shared and we'll
+                drop you into the same hand.
+              </p>
+              <input
+                type="text"
+                inputMode="latin"
+                autoComplete="off"
+                autoCapitalize="characters"
+                spellCheck={false}
+                placeholder="e.g. AB12CD"
+                aria-label="Friend code"
+                data-testid="app-code-input"
+                value={codeInput}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
+                onChange={(e) => {
+                  setCodeInput(e.target.value);
+                  if (codeError) setCodeError(null);
+                }}
+                style={{
+                  padding: "0.6rem 0.7rem",
+                  font: "inherit",
+                  fontSize: "1.1rem",
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  borderRadius: "0.4rem",
+                  border: "1px solid var(--border, rgba(255,255,255,0.18))",
+                  background: "var(--bg-input, rgba(0,0,0,0.25))",
+                  color: "inherit",
+                }}
+              />
+              {codeError ? (
+                <span
+                  role="alert"
+                  data-testid="app-code-error"
+                  style={{ color: "#fca5a5", fontSize: "0.8rem" }}
+                >
+                  {codeError}
+                </span>
+              ) : null}
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.5rem" }}>
+                <button
+                  type="button"
+                  onClick={() => setCodeModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  data-testid="app-code-go"
+                  className="quick-start-btn"
+                  style={{ padding: "0.45rem 0.9rem" }}
+                >
+                  Go
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       ) : null}
 
       {whatsNewOpen ? (

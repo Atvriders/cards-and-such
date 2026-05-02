@@ -16,9 +16,11 @@ import { StarRating, readRating, writeRating } from "../platform/StarRating.js";
 import { StatsPanel } from "../platform/StatsPanel.js";
 import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
 import { recordPlayed } from "../platform/quickstart.js";
+import { appendTimeHistory, readTimeHistory, type TimeHistoryEntry } from "../platform/userdata.js";
 import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
+import { encodeChallenge, MAX_FRIEND_SEED } from "../platform/friendCode.js";
 import "./PlayPage.css";
 
 /** Maximum number of toasts visible at once — older ones drop off. */
@@ -200,6 +202,124 @@ function HowToPlayContent({ text }: { text: string }): JSX.Element {
   );
 }
 
+/**
+ * Tiny SVG line chart that visualizes the player's last-N finish times for
+ * the current game. The most-recent finish is highlighted in the accent
+ * color; earlier points use a softer hue so the eye lands on the run that
+ * just happened.
+ *
+ * Renders an inline message when fewer than two entries exist, since a
+ * single point can't form a trend. All sizing is in viewBox units so the
+ * chart stays crisp at any popover width.
+ */
+function TimeTrendChart({ history }: { history: TimeHistoryEntry[] }): JSX.Element {
+  // Defensive trim — appendTimeHistory caps at 20, but a corrupt blob or a
+  // future bump in the limit shouldn't blow the layout out.
+  const entries = history.slice(-20);
+  const n = entries.length;
+
+  // Best / Avg / Plays summary line — always shown so users get useful
+  // numbers even before a trend can be drawn. Plays counts the rendered
+  // history slice rather than the full stats blob, so it matches what the
+  // chart visualizes one-to-one.
+  const best = n > 0 ? Math.min(...entries.map((e) => e.time)) : 0;
+  const avg = n > 0 ? entries.reduce((sum, e) => sum + e.time, 0) / n : 0;
+  const formatSecs = (s: number): string => `${Math.round(s)}s`;
+
+  if (n < 2) {
+    return (
+      <div className="play-time-chart-block">
+        <div
+          className="play-time-chart-empty"
+          data-testid="play-time-chart"
+          role="img"
+          aria-label="Time trend chart"
+        >
+          Play more to see your trend
+        </div>
+        {n === 1 && (
+          <div className="play-time-stats-line" data-testid="play-time-stats-line">
+            Best: {formatSecs(best)} | Avg: {formatSecs(avg)} | Plays: {n}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Layout in viewBox units so the SVG scales cleanly. The `padX` keeps
+  // the first/last marker dots away from the edges; `padY` reserves room
+  // for the highlight ring without clipping it.
+  const W = 220;
+  const H = 60;
+  const padX = 6;
+  const padY = 8;
+  const innerW = W - padX * 2;
+  const innerH = H - padY * 2;
+
+  const times = entries.map((e) => e.time);
+  const minT = Math.min(...times);
+  const maxT = Math.max(...times);
+  // Avoid a flat-line divide-by-zero — when every play took the same time
+  // we still want a visible mid-line, so synthesize a small range.
+  const range = maxT - minT || 1;
+
+  // Map index -> x, time -> y (lower time = higher on screen, since faster
+  // is "better"; the accent dot stays visually consistent with "good").
+  const xAt = (i: number): number => padX + (n === 1 ? innerW / 2 : (i / (n - 1)) * innerW);
+  const yAt = (t: number): number => padY + innerH - ((t - minT) / range) * innerH;
+
+  const points: Array<{ x: number; y: number; e: TimeHistoryEntry }> = entries.map(
+    (e, i) => ({ x: xAt(i), y: yAt(e.time), e }),
+  );
+  const pathD = points
+    .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(2)} ${p.y.toFixed(2)}`)
+    .join(" ");
+
+  // The current run is the last entry — highlighted in the accent color.
+  const lastIdx = points.length - 1;
+
+  return (
+    <div className="play-time-chart-block">
+      <svg
+        className="play-time-chart"
+        viewBox={`0 0 ${W} ${H}`}
+        preserveAspectRatio="none"
+        data-testid="play-time-chart"
+        role="img"
+        aria-label={`Time trend over last ${n} plays`}
+      >
+        <path
+          d={pathD}
+          fill="none"
+          stroke="rgba(148, 163, 184, 0.55)"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        {points.map((p, i) => {
+          const isCurrent = i === lastIdx;
+          return (
+            <circle
+              key={i}
+              cx={p.x}
+              cy={p.y}
+              r={isCurrent ? 3.2 : 2}
+              fill={isCurrent ? "#a78bfa" : "rgba(148, 163, 184, 0.7)"}
+              stroke={isCurrent ? "#c7cdfe" : "none"}
+              strokeWidth={isCurrent ? 1.2 : 0}
+            >
+              <title>{`${formatSecs(p.e.time)}${typeof p.e.score === "number" ? ` (score ${p.e.score})` : ""}`}</title>
+            </circle>
+          );
+        })}
+      </svg>
+      <div className="play-time-stats-line" data-testid="play-time-stats-line">
+        Best: {formatSecs(best)} | Avg: {formatSecs(avg)} | Plays: {n}
+      </div>
+    </div>
+  );
+}
+
 export default function PlayPage(): JSX.Element {
   const { gameId } = useParams<{ gameId: string }>();
   const plugin = useMemo(
@@ -247,6 +367,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [showConfetti, setShowConfetti] = useState(false);
   const [elapsed, setElapsed] = useState<number>(0);
   const [bestTime, setBestTime] = useState<number | null>(() => readBestTime(plugin.id));
+  // Per-game time-trend history — last 20 finishes. Populated on every
+  // game-end via appendTimeHistory; the info popover renders a tiny SVG
+  // chart from this slice.
+  const [timeHistory, setTimeHistory] = useState<TimeHistoryEntry[]>(
+    () => readTimeHistory(plugin.id),
+  );
   const [rating, setRating] = useState<number>(() => readRating(plugin.id));
   // Snapshot of the personal-best time *before* the just-finished game was
   // recorded — used to detect "New record!" and to render the previous best
@@ -604,6 +730,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             setPreviousBest(null);
             setIsNewRecord(false);
           }
+          // Append every finish (win or zero-score loss) to the per-game
+          // history so the info popover trend chart reflects all plays.
+          setTimeHistory(appendTimeHistory(plugin.id, elapsed, term.score));
           void submitScore(plugin.id, term.score, settings as Record<string, unknown>);
         }
         return next;
@@ -628,6 +757,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         setPreviousBest(null);
         setIsNewRecord(false);
       }
+      // Append every finish to the per-game history so the info popover
+      // trend chart reflects all plays — not just personal-best winners.
+      setTimeHistory(appendTimeHistory(plugin.id, elapsed, score));
       void submitScore(plugin.id, score, settings as Record<string, unknown>);
     },
     [plugin.id, settings, elapsed, recordBest],
@@ -809,6 +941,10 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 <div className="play-info-popover-row">
                   <span className="play-info-label">Plays this session</span>
                   <span>{sessionPlays}</span>
+                </div>
+                <div className="play-info-popover-section">
+                  <span className="play-info-label">Time trend</span>
+                  <TimeTrendChart history={timeHistory} />
                 </div>
                 {plugin.howToPlay && (
                   <button
@@ -1269,6 +1405,42 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         >
           Friend mode — same seed, you both see the same hand. Take turns and
           compare scores.
+          {(() => {
+            // Compress the current {gameId, seed & 0xffff} into a 6-char
+            // friend code so it can be read aloud or texted instead of a
+            // full URL. encodeChallenge returns null when the game isn't
+            // in the dictionary; we just hide the line in that case.
+            const code = encodeChallenge({
+              gameId: plugin.id,
+              seed: seed & MAX_FRIEND_SEED,
+            });
+            if (!code) return null;
+            return (
+              <>
+                {" "}
+                Or share this code:{" "}
+                <button
+                  type="button"
+                  className="play-friend-code"
+                  data-testid="play-friend-code"
+                  title="Copy friend code"
+                  aria-label={`Copy friend code ${code}`}
+                  onClick={() => {
+                    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+                      void navigator.clipboard
+                        .writeText(code)
+                        .then(() => pushToast(`Code copied: ${code}`))
+                        .catch(() => pushToast("Could not copy code"));
+                    } else {
+                      pushToast(code);
+                    }
+                  }}
+                >
+                  <code>{code}</code>
+                </button>
+              </>
+            );
+          })()}
         </div>
       )}
 
