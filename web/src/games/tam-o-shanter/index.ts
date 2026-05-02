@@ -13,4 +13,5 @@ export const tamOShanterPlugin: GamePlugin<TamOShanterState, TamOShanterAction, 
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TamOShanterSettings),
   reducer,isTerminal,component:TamOShanterGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

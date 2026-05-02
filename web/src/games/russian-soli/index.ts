@@ -17,5 +17,6 @@ export const russianSoliPlugin: GamePlugin<RussianSoliState, RussianSoliAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as RussianSoliSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: RussianSoliGame,
 };

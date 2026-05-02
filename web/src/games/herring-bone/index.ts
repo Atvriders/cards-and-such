@@ -13,4 +13,5 @@ export const herringBonePlugin: GamePlugin<HerringBoneState, HerringBoneAction, 
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HerringBoneSettings),
   reducer,isTerminal,hint: (state: HerringBoneState): HintTarget | null => { if (state.phase === "done") return null; return { selector: `[data-testid="hint-target-herring-bone-keep"]`, pulses: 3 }; }, component:HerringBoneGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

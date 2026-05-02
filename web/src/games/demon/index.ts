@@ -26,5 +26,6 @@ Tips: the base rank governs everything — identify it immediately and plan whic
   initialState: (seed: number) => initialState(seed, {} as DemonSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Demon,
 };

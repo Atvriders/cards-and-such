@@ -28,5 +28,6 @@ Win condition: All 52 cards on the four foundations.`,
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: FourSeasons,
 };

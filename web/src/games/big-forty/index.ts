@@ -13,4 +13,5 @@ export const bigFortyPlugin: GamePlugin<BigFortyState, BigFortyAction, typeof se
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BigFortySettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-big-forty-primary"]', pulses: 3 }), component:BigFortyGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

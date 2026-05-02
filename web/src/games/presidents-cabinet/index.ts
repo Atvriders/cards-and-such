@@ -13,4 +13,5 @@ export const presidentsCabinetPlugin: GamePlugin<PresidentsCabinetState, Preside
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PresidentsCabinetSettings),
   reducer,isTerminal,component:PresidentsCabinetGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

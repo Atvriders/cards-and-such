@@ -28,5 +28,6 @@ Tips: Sequence runs on the foundations are rank-only, so any suit can continue a
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: FrogSolitaire,
 };

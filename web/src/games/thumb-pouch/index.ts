@@ -17,5 +17,6 @@ export const thumbPouchPlugin: GamePlugin<ThumbPouchState, ThumbPouchAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as ThumbPouchSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: ThumbPouchGame,
 };

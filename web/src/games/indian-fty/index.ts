@@ -13,4 +13,5 @@ export const indianFtyPlugin: GamePlugin<IndianFtyState, IndianFtyAction, typeof
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as IndianFtySettings),
   reducer,isTerminal,hint: (state: IndianFtyState): HintTarget | null => { if (state.phase === "done") return null; return { selector: `[data-testid="hint-target-indian-fty-keep"]`, pulses: 3 }; }, component:IndianFtyGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

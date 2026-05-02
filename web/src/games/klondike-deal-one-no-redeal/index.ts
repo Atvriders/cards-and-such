@@ -13,4 +13,5 @@ export const klondikeDealOneNoRedealPlugin: GamePlugin<KlondikeDealOneNoRedealSt
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as KlondikeDealOneNoRedealSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-klondike-deal-one-no-redeal-primary"]', pulses: 3 }), component:KlondikeDealOneNoRedealGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

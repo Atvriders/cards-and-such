@@ -13,4 +13,5 @@ export const doubleDeckFreecellPlugin: GamePlugin<DoubleDeckFreecellState, Doubl
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DoubleDeckFreecellSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-double-deck-freecell-primary"]', pulses: 3 }), component:DoubleDeckFreecellGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

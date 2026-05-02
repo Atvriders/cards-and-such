@@ -23,4 +23,5 @@ Clear all four columns to win and score 100 points. If no valid move remains, th
   settings,
   initialState: (seed: number, s: typeof settings) => initialState(seed, s as DecadeSolitaireSettings),
   reducer, isTerminal, component: DecadeSolitaire,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

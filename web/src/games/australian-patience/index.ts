@@ -24,5 +24,6 @@ Empty columns accept any card or sequence. Plan your foundation builds and use e
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: AustralianPatienceGame,
 };

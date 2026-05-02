@@ -28,5 +28,6 @@ Strategy is key: use the grid as a buffer for cards that are not yet playable to
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: NapoleonsTombGame,
 };

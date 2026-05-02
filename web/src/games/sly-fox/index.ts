@@ -30,5 +30,6 @@ Tips: Always check the tableau for playable cards before drawing from stock. Mul
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: SlyFox,
 };

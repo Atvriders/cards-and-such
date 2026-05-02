@@ -13,4 +13,5 @@ export const athenaPatPlugin: GamePlugin<AthenaPatState, AthenaPatAction, typeof
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AthenaPatSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-athena-pat-primary"]', pulses: 3 }), component:AthenaPatGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

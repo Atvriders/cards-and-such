@@ -31,5 +31,6 @@ Tips: Prioritize getting Aces onto the corner foundations as early as possible. 
   initialState: (seed: number, _settings: WindmillSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Windmill,
 };

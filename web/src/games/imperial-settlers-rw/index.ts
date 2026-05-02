@@ -18,5 +18,6 @@ export const imperialSettlersRwPlugin: GamePlugin<ImperialSettlersRwState, Imper
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: ImperialSettlersRw,
 };

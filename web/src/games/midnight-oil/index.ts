@@ -13,4 +13,5 @@ export const midnightOilPlugin: GamePlugin<MidnightOilState, MidnightOilAction, 
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MidnightOilSettings),
   reducer,isTerminal,component:MidnightOilGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

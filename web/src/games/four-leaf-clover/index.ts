@@ -24,5 +24,6 @@ The challenge is managing the four reserve slots wisely. You can only move one c
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: FourLeafCloverGame,
 };

@@ -13,4 +13,5 @@ export const goodMeasurePlugin: GamePlugin<GoodMeasureState, GoodMeasureAction, 
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as GoodMeasureSettings),
   reducer,isTerminal,component:GoodMeasureGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

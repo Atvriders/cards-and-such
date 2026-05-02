@@ -13,4 +13,5 @@ export const josephinePlugin: GamePlugin<JosephineState, JosephineAction, typeof
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as JosephineSettings),
   reducer,isTerminal,component:JosephineGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

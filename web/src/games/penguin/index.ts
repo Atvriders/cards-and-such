@@ -26,5 +26,6 @@ Strategy: Keep free cells available — you have seven, but they fill quickly. P
   initialState: (seed) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Penguin,
 };

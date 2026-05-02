@@ -13,4 +13,5 @@ export const pegSolitaireCardPlugin: GamePlugin<PegSolitaireCardVersionState, Pe
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PegSolitaireCardVersionSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-peg-solitaire-card-version-primary"]', pulses: 3 }), component:PegSolitaireCardVersionGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

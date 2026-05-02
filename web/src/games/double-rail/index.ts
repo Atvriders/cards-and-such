@@ -13,4 +13,5 @@ export const doubleRailPlugin: GamePlugin<DoubleRailState, DoubleRailAction, typ
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DoubleRailSettings),
   reducer,isTerminal,component:DoubleRailGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

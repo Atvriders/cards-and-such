@@ -28,5 +28,6 @@ Tips: Monitor both foundations so you don't accidentally bury a card you need fo
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Crescent,
 };

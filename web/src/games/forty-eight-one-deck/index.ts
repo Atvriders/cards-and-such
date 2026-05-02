@@ -28,5 +28,6 @@ Click a card to select it (highlighted), then click the destination pile to move
   initialState: (seed: number, _settings: FortyEightOneDeckSettings) => initialState(seed, _settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: FortyEightOneDeck,
 };

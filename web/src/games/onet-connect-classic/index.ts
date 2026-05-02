@@ -16,5 +16,6 @@ export const onetConnectClassicPlugin: GamePlugin<MahjongState, MahjongAction, t
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: OnetConnectClassicGame,
 };

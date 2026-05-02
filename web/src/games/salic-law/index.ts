@@ -26,5 +26,6 @@ Tips: Expose your non-Ace low cards quickly to start foundation sequences. The e
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: SalicLaw,
 };

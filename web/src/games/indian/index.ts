@@ -13,4 +13,5 @@ export const indianPlugin: GamePlugin<IndianState, IndianAction, typeof settings
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as IndianSettings),
   reducer,isTerminal,hint: (state: IndianState): HintTarget | null => { if (state.phase === "done") return null; return { selector: `[data-testid="hint-target-indian-keep"]`, pulses: 3 }; }, component:IndianGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

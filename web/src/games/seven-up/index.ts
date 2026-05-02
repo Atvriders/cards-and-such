@@ -26,5 +26,6 @@ Tips: Sevens are your new "Aces" — get them to the foundations early. Cards ra
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: SevenUp,
 };

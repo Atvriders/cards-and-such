@@ -13,4 +13,5 @@ export const fascinationPatiencePlugin: GamePlugin<FascinationPatienceState, Fas
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FascinationPatienceSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-fascination-patience-primary"]', pulses: 3 }), component:FascinationPatienceGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

@@ -24,5 +24,6 @@ Strategy: The eight reserve cells are your primary tool. Park cards you'll need 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: PrecedenceGame,
 };

@@ -13,4 +13,5 @@ export const allInARowPlugin: GamePlugin<AllInARowState, AllInARowAction, typeof
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AllInARowSettings),
   reducer,isTerminal,hint: (state: AllInARowState): HintTarget | null => { if (state.phase === "done") return null; return { selector: `[data-testid="hint-target-all-in-a-row-keep"]`, pulses: 3 }; }, component:AllInARowGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

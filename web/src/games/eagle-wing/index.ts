@@ -28,5 +28,6 @@ Tips: prioritize getting Aces out early. Use the reserve strategically — it pr
   initialState: (seed: number) => initialState(seed, {} as EagleWingSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: EagleWing,
 };

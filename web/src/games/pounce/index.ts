@@ -28,5 +28,6 @@ Scoring: +10 per card played to a foundation. Use Auto-move to play any obvious 
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Game,
 };

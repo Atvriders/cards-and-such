@@ -13,4 +13,5 @@ export const blindHookeySolitairePlugin: GamePlugin<BlindHookeySolitaireState, B
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BlindHookeySolitaireSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-blind-hookey-solitaire-primary"]', pulses: 3 }), component:BlindHookeySolitaireGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

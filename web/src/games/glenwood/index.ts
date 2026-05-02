@@ -13,4 +13,5 @@ export const glenwoodPlugin: GamePlugin<GlenwoodState, GlenwoodAction, typeof se
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as GlenwoodSettings),
   reducer,isTerminal,component:GlenwoodGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

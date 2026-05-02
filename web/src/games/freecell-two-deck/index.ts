@@ -13,4 +13,5 @@ export const freecellTwoDeckPlugin: GamePlugin<FreecellTwoDeckState, FreecellTwo
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FreecellTwoDeckSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-freecell-two-deck-primary"]', pulses: 3 }), component:FreecellTwoDeckGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

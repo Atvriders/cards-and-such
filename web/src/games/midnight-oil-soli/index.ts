@@ -17,5 +17,6 @@ export const midnightOilSoliPlugin: GamePlugin<MidnightOilSoliState, MidnightOil
   initialState: (seed: number, s: S) => initialState(seed, s as MidnightOilSoliSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: MidnightOilSoliGame,
 };

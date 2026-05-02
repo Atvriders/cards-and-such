@@ -29,5 +29,6 @@ Tips: Reserve slots are scarce — use them to hold cards that will soon become 
   initialState: (seed: number, settings: SultanSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: SultanOfTurkey,
 };

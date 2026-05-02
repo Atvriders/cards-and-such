@@ -13,4 +13,5 @@ export const demonPatiencePlugin: GamePlugin<DemonPatienceState, DemonPatienceAc
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DemonPatienceSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-demon-patience-primary"]', pulses: 3 }), component:DemonPatienceGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

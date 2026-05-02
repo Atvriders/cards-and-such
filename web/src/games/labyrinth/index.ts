@@ -13,4 +13,5 @@ export const labyrinthSolPlugin: GamePlugin<LabyrinthSolState, LabyrinthSolActio
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LabyrinthSolSettings),
   reducer,isTerminal,component:LabyrinthSolGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

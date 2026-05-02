@@ -13,4 +13,5 @@ export const patienceRoyalCotillionPlugin: GamePlugin<PatienceRoyalCotillionStat
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PatienceRoyalCotillionSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-patience-royal-cotillion-primary"]', pulses: 3 }), component:PatienceRoyalCotillionGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

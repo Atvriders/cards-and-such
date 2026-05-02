@@ -13,4 +13,5 @@ export const decadeSoliPlugin: GamePlugin<DecadeSoliState, DecadeSoliAction, typ
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DecadeSoliSettings),
   reducer,isTerminal,component:DecadeSoliGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

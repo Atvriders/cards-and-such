@@ -17,5 +17,6 @@ export const quiltSoliPlugin: GamePlugin<QuiltSoliState, QuiltSoliAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as QuiltSoliSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: QuiltSoliGame,
 };

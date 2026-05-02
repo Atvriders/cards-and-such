@@ -13,4 +13,5 @@ export const deucesPlugin: GamePlugin<DeucesState, DeucesAction, typeof settings
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DeucesSettings),
   reducer,isTerminal,component:DeucesGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

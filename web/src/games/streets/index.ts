@@ -13,4 +13,5 @@ export const streetsPlugin: GamePlugin<StreetsState, StreetsAction, typeof setti
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as StreetsSettings),
   reducer,isTerminal,component:StreetsGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

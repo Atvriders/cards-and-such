@@ -13,4 +13,5 @@ export const redAndBlackPlugin: GamePlugin<RedAndBlackState, RedAndBlackAction, 
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RedAndBlackSettings),
   reducer,isTerminal,component:RedAndBlackGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

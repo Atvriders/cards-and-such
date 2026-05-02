@@ -26,5 +26,6 @@ Score: 5 points per card placed on a foundation. A perfect game scores 520 point
   initialState: (seed: number) => initialState(seed, {} as ColoradoSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Colorado,
 };

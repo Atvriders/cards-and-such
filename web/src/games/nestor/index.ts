@@ -26,5 +26,6 @@ Win by removing all 26 pairs (all 52 cards).`,
   initialState: (seed: number, _settings: NestorSettings) => initialState(seed, _settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Nestor,
 };

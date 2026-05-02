@@ -17,5 +17,6 @@ export const cassettePlugin: GamePlugin<CassetteState, CassetteAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as CassetteSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: CassetteGame,
 };

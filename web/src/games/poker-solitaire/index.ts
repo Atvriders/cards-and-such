@@ -25,5 +25,6 @@ Strategy tip: rows and columns share the same cards. Placing a card in a corner 
   initialState: (seed: number, _settings: PokerSolitaireSettings) => initialState(seed, _settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: PokerSolitaire,
 };

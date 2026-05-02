@@ -13,4 +13,5 @@ export const giganticPlugin: GamePlugin<GiganticState, GiganticAction, typeof se
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as GiganticSettings),
   reducer,isTerminal,component:GiganticGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

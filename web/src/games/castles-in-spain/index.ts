@@ -13,4 +13,5 @@ export const castlesInSpainPlugin: GamePlugin<CastlesInSpainState, CastlesInSpai
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CastlesInSpainSettings),
   reducer,isTerminal,component:CastlesInSpainGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

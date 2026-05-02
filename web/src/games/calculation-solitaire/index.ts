@@ -13,4 +13,5 @@ export const calculationSolitairePlugin: GamePlugin<CalculationSolitaireState, C
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CalculationSolitaireSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-calculation-solitaire-primary"]', pulses: 3 }), component:CalculationSolitaireGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

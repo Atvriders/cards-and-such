@@ -26,5 +26,6 @@ Tips: Before dealing a new round, send as many exposed cards to foundations as p
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Peek,
 };

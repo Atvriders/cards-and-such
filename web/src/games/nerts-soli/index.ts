@@ -13,4 +13,5 @@ export const nertsSoliPlugin: GamePlugin<NertsSoliState, NertsSoliAction, typeof
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NertsSoliSettings),
   reducer,isTerminal,component:NertsSoliGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

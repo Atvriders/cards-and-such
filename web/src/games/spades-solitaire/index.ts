@@ -13,4 +13,5 @@ export const spadesSolitairePlugin: GamePlugin<SpadesSolitaireState, SpadesSolit
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SpadesSolitaireSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-spades-solitaire-primary"]', pulses: 3 }), component:SpadesSolitaireGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

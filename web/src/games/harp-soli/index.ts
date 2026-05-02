@@ -13,4 +13,5 @@ export const harpSoliPlugin: GamePlugin<HarpSoliState, HarpSoliAction, typeof se
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HarpSoliSettings),
   reducer,isTerminal,component:HarpSoliGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

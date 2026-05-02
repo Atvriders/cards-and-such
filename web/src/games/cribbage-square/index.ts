@@ -23,4 +23,5 @@ A good game scores 20+ points. An excellent game can reach 40 or more. Every car
   settings,
   initialState: (seed: number, s: typeof settings) => initialState(seed, s as CribbageSquareSettings),
   reducer, isTerminal, component: CribbageSquare,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

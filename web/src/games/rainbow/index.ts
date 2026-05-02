@@ -13,4 +13,5 @@ export const rainbowSolPlugin: GamePlugin<RainbowState, RainbowAction, typeof se
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RainbowSettings),
   reducer,isTerminal,component:RainbowGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

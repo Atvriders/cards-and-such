@@ -28,5 +28,6 @@ Tips: Use reserve cells sparingly — they fill up fast. Target low cards for as
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Tournament,
 };

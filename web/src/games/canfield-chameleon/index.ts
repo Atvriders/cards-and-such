@@ -13,4 +13,5 @@ export const canfieldChameleonPlugin: GamePlugin<CanfieldChameleonState, Canfiel
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CanfieldChameleonSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-canfield-chameleon-primary"]', pulses: 3 }), component:CanfieldChameleonGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

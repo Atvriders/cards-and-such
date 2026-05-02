@@ -24,5 +24,6 @@ Tips: Clear fans early to free up maneuvering room. Pay attention to both ascend
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Archway,
 };

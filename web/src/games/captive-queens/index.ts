@@ -13,4 +13,5 @@ export const captiveQueensPlugin: GamePlugin<CaptiveQueensState, CaptiveQueensAc
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CaptiveQueensSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-captive-queens-primary"]', pulses: 3 }), component:CaptiveQueensGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

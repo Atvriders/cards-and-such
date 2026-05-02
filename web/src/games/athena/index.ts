@@ -13,4 +13,5 @@ export const athenaPlugin: GamePlugin<AthenaState, AthenaAction, typeof settings
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AthenaSettings),
   reducer,isTerminal,hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-athena-primary"]', pulses: 3 }), component:AthenaGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

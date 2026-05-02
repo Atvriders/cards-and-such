@@ -13,4 +13,5 @@ export const limitedFortyThievesPlugin: GamePlugin<LimitedFortyThievesState, Lim
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LimitedFortyThievesSettings),
   reducer,isTerminal,component:LimitedFortyThievesGame,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

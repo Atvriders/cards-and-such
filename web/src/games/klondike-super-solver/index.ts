@@ -22,5 +22,6 @@ Despite the helpers, some deals can still stall if tableau columns become blocke
   initialState: (seed: number, _settings: KlondikeSuperSolverSettings) => initialState(seed, _settings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: KlondikeSuperSolver,
 };

@@ -26,5 +26,6 @@ Tips: prioritize uncovering Aces and low cards. Use empty fan slots wisely — t
   initialState: (seed: number) => initialState(seed, {} as IntelligenceSettings),
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: Intelligence,
 };
