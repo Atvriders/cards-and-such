@@ -17,5 +17,6 @@ export const pointSaladVegPlugin: GamePlugin<PointSaladVegState, PointSaladVegAc
   initialState: (seed: number, s: S) => initialState(seed, s as PointSaladVegSettings),
   reducer,
   isTerminal,
+  hint: (state) => state.phase === "drafting" && state.offer.length > 0 ? { selector: '[class$="-offer"] > button:first-child', pulses: 3 } : null,
   component: PointSaladVegGame,
 };

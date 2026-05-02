@@ -17,5 +17,6 @@ export const bunnyKingdomPlugin: GamePlugin<BunnyKingdomState, BunnyKingdomActio
   initialState: (seed: number, s: S) => initialState(seed, s as BunnyKingdomSettings),
   reducer,
   isTerminal,
+  hint: (state) => state.phase === "drafting" && state.offer.length > 0 ? { selector: '[class$="-offer"] > button:first-child', pulses: 3 } : null,
   component: BunnyKingdomGame,
 };

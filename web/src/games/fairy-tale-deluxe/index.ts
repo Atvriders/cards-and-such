@@ -17,5 +17,6 @@ export const fairyTaleDeluxePlugin: GamePlugin<FairyTaleDeluxeState, FairyTaleDe
   initialState: (seed: number, s: S) => initialState(seed, s as FairyTaleDeluxeSettings),
   reducer,
   isTerminal,
+  hint: (state) => state.phase === "drafting" && state.offer.length > 0 ? { selector: '[class$="-offer"] > button:first-child', pulses: 3 } : null,
   component: FairyTaleDeluxeGame,
 };
