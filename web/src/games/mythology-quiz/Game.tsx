@@ -68,6 +68,9 @@ export function MythologyQuiz({ state, dispatch, onGameOver }: GameProps<QuizSta
           {state.selected === q.correct ? "Correct! +100 pts + speed bonus" : `Wrong! Answer: ${q.choices[q.correct]}`}
         </div>
       )}
+      {isResult && q.explanation && (
+        <div className="trivia-explanation">{q.explanation}</div>
+      )}
       <div className="trivia-actions">
         {!isResult && (
           <button className="trivia-btn submit" disabled={state.selected === null}
