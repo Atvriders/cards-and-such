@@ -6,7 +6,7 @@ import { NeverHaveIEverPickGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const never_have_i_ever_pick_plugin: GamePlugin<NeverHaveIEverPickState, NeverHaveIEverPickAction, typeof settings> = {
+export const neverHaveIEverPickPlugin: GamePlugin<NeverHaveIEverPickState, NeverHaveIEverPickAction, typeof settings> = {
   id: "never-have-i-ever-pick",
   title: "Never Have I Ever",
   category: "cards",
@@ -20,4 +20,4 @@ export const never_have_i_ever_pick_plugin: GamePlugin<NeverHaveIEverPickState, 
   component: NeverHaveIEverPickGame,
 };
 
-export default never_have_i_ever_pick_plugin;
+export default neverHaveIEverPickPlugin;

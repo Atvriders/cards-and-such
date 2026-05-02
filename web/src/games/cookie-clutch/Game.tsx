@@ -32,7 +32,8 @@ export function CookieClutchGame({ state, dispatch, onGameOver }: GameProps<Cook
               className="cookieclutch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CookieClutchAction)}
-              aria-label="Cookie Clutch">🍪</button>
+              aria-label="Cookie Clutch"
+              data-tooltip="Tap to score in Cookie Clutch">🍪</button>
           );
         })}
       </div>

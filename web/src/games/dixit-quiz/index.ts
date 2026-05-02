@@ -6,7 +6,7 @@ import { DixitQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dixit_quiz_plugin: GamePlugin<DixitQuizState, DixitQuizAction, typeof settings> = {
+export const dixitQuizPlugin: GamePlugin<DixitQuizState, DixitQuizAction, typeof settings> = {
   id: "dixit-quiz",
   title: "Dixit Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const dixit_quiz_plugin: GamePlugin<DixitQuizState, DixitQuizAction, type
   component: DixitQuizGame,
 };
 
-export default dixit_quiz_plugin;
+export default dixitQuizPlugin;

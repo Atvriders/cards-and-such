@@ -68,7 +68,7 @@ export function ConsecutivePairsSudokuGame({ state, dispatch, onGameOver }: Game
         {digits.map((d) => (
           <button key={d} className="consecutivepairscopper-num" onClick={() => dispatch({ type: "enter", digit: d } as ConsecutivePairsSudokuAction)}>{d}</button>
         ))}
-        <button className="consecutivepairscopper-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as ConsecutivePairsSudokuAction)}>×</button>
+        <button className="consecutivepairscopper-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as ConsecutivePairsSudokuAction)} aria-label="Clear" data-tooltip="Clear input">×</button>
       </div>
       <div className="consecutivepairscopper-actions">
         <button className="consecutivepairscopper-btn check" onClick={() => dispatch({ type: "check" } as ConsecutivePairsSudokuAction)}>Check</button>

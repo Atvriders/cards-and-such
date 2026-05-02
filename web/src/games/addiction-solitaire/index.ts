@@ -6,7 +6,7 @@ import { AddictionSolitaireGame } from "./Game.js";
 
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const addictionSolitairePlugin: GamePlugin<AddictionSolitaireState, AddictionSolitaireAction, typeof settings> = {
+export const addictionSolPlugin: GamePlugin<AddictionSolitaireState, AddictionSolitaireAction, typeof settings> = {
   id: "addiction-solitaire",
   title: "Addiction Solitaire",
   category: "solitaire",

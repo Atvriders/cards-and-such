@@ -6,7 +6,7 @@ import { AvalonQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const avalon_quiz_plugin: GamePlugin<AvalonQuizState, AvalonQuizAction, typeof settings> = {
+export const avalonQuizPlugin: GamePlugin<AvalonQuizState, AvalonQuizAction, typeof settings> = {
   id: "avalon-quiz",
   title: "Avalon Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const avalon_quiz_plugin: GamePlugin<AvalonQuizState, AvalonQuizAction, t
   component: AvalonQuizGame,
 };
 
-export default avalon_quiz_plugin;
+export default avalonQuizPlugin;

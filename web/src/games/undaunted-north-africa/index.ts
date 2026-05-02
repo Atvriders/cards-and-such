@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const undaunted_north_africa_plugin: GamePlugin<UndauntedNorthAfricaState, UndauntedNorthAfricaAction, typeof settings> = {
+export const undauntedNorthAfricaPlugin: GamePlugin<UndauntedNorthAfricaState, UndauntedNorthAfricaAction, typeof settings> = {
   id: "undaunted-north-africa",
   title: "Undaunted: North Africa",
   category: "board",
@@ -22,4 +22,4 @@ export const undaunted_north_africa_plugin: GamePlugin<UndauntedNorthAfricaState
   component: UndauntedNorthAfricaGame,
 };
 
-export default undaunted_north_africa_plugin;
+export default undauntedNorthAfricaPlugin;

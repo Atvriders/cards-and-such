@@ -6,7 +6,7 @@ import { BarbuGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const barbPlugin: GamePlugin<BarbuState, BarbuAction, typeof settings> = {
+export const barbuPlugin: GamePlugin<BarbuState, BarbuAction, typeof settings> = {
   id: "barbu",
   title: "Barbu",
   category: "cards",

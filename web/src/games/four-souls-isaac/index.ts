@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const four_souls_isaac_plugin: GamePlugin<FourSoulsIsaacState, FourSoulsIsaacAction, typeof settings> = {
+export const fourSoulsIsaacPlugin: GamePlugin<FourSoulsIsaacState, FourSoulsIsaacAction, typeof settings> = {
   id: "four-souls-isaac",
   title: "Four Souls: Isaac",
   category: "board",
@@ -22,4 +22,4 @@ export const four_souls_isaac_plugin: GamePlugin<FourSoulsIsaacState, FourSoulsI
   component: FourSoulsIsaacGame,
 };
 
-export default four_souls_isaac_plugin;
+export default fourSoulsIsaacPlugin;

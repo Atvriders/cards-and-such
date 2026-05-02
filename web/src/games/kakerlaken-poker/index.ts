@@ -6,7 +6,7 @@ import { KakerlakenPokerGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const kakerlaken_poker_plugin: GamePlugin<KakerlakenPokerState, KakerlakenPokerAction, typeof settings> = {
+export const kakerlakenPokerPlugin: GamePlugin<KakerlakenPokerState, KakerlakenPokerAction, typeof settings> = {
   id: "kakerlaken-poker",
   title: "Kakerlaken Poker",
   category: "board",
@@ -20,4 +20,4 @@ export const kakerlaken_poker_plugin: GamePlugin<KakerlakenPokerState, Kakerlake
   component: KakerlakenPokerGame,
 };
 
-export default kakerlaken_poker_plugin;
+export default kakerlakenPokerPlugin;

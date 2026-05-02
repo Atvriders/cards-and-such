@@ -6,7 +6,7 @@ import { FourHundredGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const f400Plugin: GamePlugin<FourHundredState, FourHundredAction, typeof settings> = {
+export const fourHundredPlugin: GamePlugin<FourHundredState, FourHundredAction, typeof settings> = {
   id: "four-hundred",
   title: "Four Hundred",
   category: "cards",

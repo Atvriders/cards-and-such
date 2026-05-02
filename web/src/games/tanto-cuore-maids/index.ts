@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tanto_cuore_maids_plugin: GamePlugin<TantoCuoreMaidsState, TantoCuoreMaidsAction, typeof settings> = {
+export const tantoCuoreMaidsPlugin: GamePlugin<TantoCuoreMaidsState, TantoCuoreMaidsAction, typeof settings> = {
   id: "tanto-cuore-maids",
   title: "Tanto Cuore: Maids",
   category: "board",
@@ -22,4 +22,4 @@ export const tanto_cuore_maids_plugin: GamePlugin<TantoCuoreMaidsState, TantoCuo
   component: TantoCuoreMaidsGame,
 };
 
-export default tanto_cuore_maids_plugin;
+export default tantoCuoreMaidsPlugin;

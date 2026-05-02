@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const apothecaria_seasons_plugin: GamePlugin<ApothecariaSeasonsState, ApothecariaSeasonsAction, typeof settings> = {
+export const apothecariaSeasonsPlugin: GamePlugin<ApothecariaSeasonsState, ApothecariaSeasonsAction, typeof settings> = {
   id: "apothecaria-seasons",
   title: "Apothecaria: Seasons",
   category: "board",
@@ -22,4 +22,4 @@ export const apothecaria_seasons_plugin: GamePlugin<ApothecariaSeasonsState, Apo
   component: ApothecariaSeasonsGame,
 };
 
-export default apothecaria_seasons_plugin;
+export default apothecariaSeasonsPlugin;

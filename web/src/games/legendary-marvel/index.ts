@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const legendary_marvel_plugin: GamePlugin<LegendaryMarvelState, LegendaryMarvelAction, typeof settings> = {
+export const legendaryMarvelPlugin: GamePlugin<LegendaryMarvelState, LegendaryMarvelAction, typeof settings> = {
   id: "legendary-marvel",
   title: "Legendary: Marvel",
   category: "board",
@@ -22,4 +22,4 @@ export const legendary_marvel_plugin: GamePlugin<LegendaryMarvelState, Legendary
   component: LegendaryMarvelGame,
 };
 
-export default legendary_marvel_plugin;
+export default legendaryMarvelPlugin;

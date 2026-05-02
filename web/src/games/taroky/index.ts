@@ -6,7 +6,7 @@ import { TarokyGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tarkyPlugin: GamePlugin<TarokyState, TarokyAction, typeof settings> = {
+export const tarokyPlugin: GamePlugin<TarokyState, TarokyAction, typeof settings> = {
   id: "taroky",
   title: "Taroky",
   category: "cards",

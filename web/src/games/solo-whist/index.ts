@@ -6,7 +6,7 @@ import { SoloWhistGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const solo-whPlugin: GamePlugin<SoloWhistState, SoloWhistAction, typeof settings> = {
+export const soloWhistPlugin: GamePlugin<SoloWhistState, SoloWhistAction, typeof settings> = {
   id: "solo-whist",
   title: "Solo Whist",
   category: "cards",

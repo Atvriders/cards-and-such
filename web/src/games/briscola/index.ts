@@ -6,7 +6,7 @@ import { BriscolaGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const brisPlugin: GamePlugin<BriscolaState, BriscolaAction, typeof settings> = {
+export const briscolaPlugin: GamePlugin<BriscolaState, BriscolaAction, typeof settings> = {
   id: "briscola",
   title: "Briscola",
   category: "cards",

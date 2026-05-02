@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pandemic_iberia_plugin: GamePlugin<PandemicIberiaState, PandemicIberiaAction, typeof settings> = {
+export const pandemicIberiaPlugin: GamePlugin<PandemicIberiaState, PandemicIberiaAction, typeof settings> = {
   id: "pandemic-iberia",
   title: "Pandemic: Iberia",
   category: "board",
@@ -22,4 +22,4 @@ export const pandemic_iberia_plugin: GamePlugin<PandemicIberiaState, PandemicIbe
   component: PandemicIberiaGame,
 };
 
-export default pandemic_iberia_plugin;
+export default pandemicIberiaPlugin;

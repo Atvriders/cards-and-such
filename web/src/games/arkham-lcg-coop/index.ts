@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const arkham_lcg_coop_plugin: GamePlugin<ArkhamLcgCoopState, ArkhamLcgCoopAction, typeof settings> = {
+export const arkhamLcgCoopPlugin: GamePlugin<ArkhamLcgCoopState, ArkhamLcgCoopAction, typeof settings> = {
   id: "arkham-lcg-coop",
   title: "Arkham Horror LCG",
   category: "board",
@@ -22,4 +22,4 @@ export const arkham_lcg_coop_plugin: GamePlugin<ArkhamLcgCoopState, ArkhamLcgCoo
   component: ArkhamLcgCoopGame,
 };
 
-export default arkham_lcg_coop_plugin;
+export default arkhamLcgCoopPlugin;

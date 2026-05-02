@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { MultiHandBjGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const mh-bjPlugin: GamePlugin<MultiHandBjState, MultiHandBjAction, typeof settings> = {
+export const multiHandBjPlugin: GamePlugin<MultiHandBjState, MultiHandBjAction, typeof settings> = {
   id: "multi-hand-bj", title: "Multi-Hand Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Multi-Hand Blackjack — single-hand presentation.",

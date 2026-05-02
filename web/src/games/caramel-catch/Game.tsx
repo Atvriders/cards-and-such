@@ -32,7 +32,8 @@ export function CaramelCatchGame({ state, dispatch, onGameOver }: GameProps<Cara
               className="caramelcatch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"catch", id:p.id } as CaramelCatchAction)}
-              aria-label="target">🍯</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Caramel Catch">🍯</button>
           );
         })}
       </div>

@@ -31,7 +31,8 @@ export function BubbleBurstMiniGame({ state, dispatch, onGameOver }: GameProps<B
               className="fc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BubbleBurstMiniAction)}
-              aria-label="item">🫧</button>
+              aria-label="item"
+              data-tooltip="Tap to score in Bubble Burst Mini">🫧</button>
           );
         })}
       </div>

@@ -6,7 +6,7 @@ import { HonshuGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const honshuPlugin: GamePlugin<HonshuState, HonshuAction, typeof settings> = {
+export const honshuBasePlugin: GamePlugin<HonshuState, HonshuAction, typeof settings> = {
   id: "honshu",
   title: "Honshu",
   category: "board",

@@ -6,7 +6,7 @@ import { AwkwardGuestsGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const awkward_guests_plugin: GamePlugin<AwkwardGuestsState, AwkwardGuestsAction, typeof settings> = {
+export const awkwardGuestsPlugin: GamePlugin<AwkwardGuestsState, AwkwardGuestsAction, typeof settings> = {
   id: "awkward-guests",
   title: "Awkward Guests",
   category: "board",
@@ -20,4 +20,4 @@ export const awkward_guests_plugin: GamePlugin<AwkwardGuestsState, AwkwardGuests
   component: AwkwardGuestsGame,
 };
 
-export default awkward_guests_plugin;
+export default awkwardGuestsPlugin;

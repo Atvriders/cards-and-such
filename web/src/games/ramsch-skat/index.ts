@@ -6,7 +6,7 @@ import { RamschSkatGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const ram-sPlugin: GamePlugin<RamschSkatState, RamschSkatAction, typeof settings> = {
+export const ramschSkatPlugin: GamePlugin<RamschSkatState, RamschSkatAction, typeof settings> = {
   id: "ramsch-skat",
   title: "Ramsch (Skat)",
   category: "cards",

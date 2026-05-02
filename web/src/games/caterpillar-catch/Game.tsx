@@ -32,7 +32,8 @@ export function CaterpillarCatchGame({ state, dispatch, onGameOver }: GameProps<
               className="ctc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CaterpillarCatchAction)}
-              aria-label="caterpillar-catch">🐛</button>
+              aria-label="caterpillar-catch"
+              data-tooltip="Tap to score in Caterpillar Catch">🐛</button>
           );
         })}
       </div>

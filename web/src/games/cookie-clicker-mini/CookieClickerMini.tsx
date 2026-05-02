@@ -43,7 +43,7 @@ export function CookieClickerMini({
 
       {!state.gameOver && (
         <>
-          <button className="ccm-cookie-btn" onClick={() => dispatch({ type: "click" })}>
+          <button className="ccm-cookie-btn" onClick={() => dispatch({ type: "click" })} aria-label="Tap Cookie Clicker Mini" data-tooltip="Tap to score in Cookie Clicker Mini">
             🍪
           </button>
 

@@ -32,7 +32,8 @@ export function AcornTapGame({ state, dispatch, onGameOver }: GameProps<AcornTap
               className="acorntap-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background: "transparent", border: "none" }}
               onClick={() => dispatch({ type: "pop", id: p.id } as AcornTapAction)}
-              aria-label="target">🌰</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Acorn Tap">🌰</button>
           );
         })}
       </div>

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const forbidden_sky_coop_plugin: GamePlugin<ForbiddenSkyCoopState, ForbiddenSkyCoopAction, typeof settings> = {
+export const forbiddenSkyCoopPlugin: GamePlugin<ForbiddenSkyCoopState, ForbiddenSkyCoopAction, typeof settings> = {
   id: "forbidden-sky-coop",
   title: "Forbidden Sky",
   category: "board",
@@ -22,4 +22,4 @@ export const forbidden_sky_coop_plugin: GamePlugin<ForbiddenSkyCoopState, Forbid
   component: ForbiddenSkyCoopGame,
 };
 
-export default forbidden_sky_coop_plugin;
+export default forbiddenSkyCoopPlugin;

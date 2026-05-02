@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const lord_of_rings_lcg_plugin: GamePlugin<LordOfRingsLcgState, LordOfRingsLcgAction, typeof settings> = {
+export const lordOfRingsLcgPlugin: GamePlugin<LordOfRingsLcgState, LordOfRingsLcgAction, typeof settings> = {
   id: "lord-of-rings-lcg",
   title: "Lord of the Rings LCG",
   category: "board",
@@ -22,4 +22,4 @@ export const lord_of_rings_lcg_plugin: GamePlugin<LordOfRingsLcgState, LordOfRin
   component: LordOfRingsLcgGame,
 };
 
-export default lord_of_rings_lcg_plugin;
+export default lordOfRingsLcgPlugin;

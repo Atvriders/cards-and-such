@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const eldritch_investigator_plugin: GamePlugin<EldritchInvestigatorState, EldritchInvestigatorAction, typeof settings> = {
+export const eldritchInvestigatorPlugin: GamePlugin<EldritchInvestigatorState, EldritchInvestigatorAction, typeof settings> = {
   id: "eldritch-investigator",
   title: "Eldritch Horror: Investigator",
   category: "board",
@@ -22,4 +22,4 @@ export const eldritch_investigator_plugin: GamePlugin<EldritchInvestigatorState,
   component: EldritchInvestigatorGame,
 };
 
-export default eldritch_investigator_plugin;
+export default eldritchInvestigatorPlugin;

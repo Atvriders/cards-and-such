@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const hogwarts_battle_coop_plugin: GamePlugin<HogwartsBattleCoopState, HogwartsBattleCoopAction, typeof settings> = {
+export const hogwartsBattleCoopPlugin: GamePlugin<HogwartsBattleCoopState, HogwartsBattleCoopAction, typeof settings> = {
   id: "hogwarts-battle-coop",
   title: "Harry Potter: Hogwarts Battle",
   category: "board",
@@ -22,4 +22,4 @@ export const hogwarts_battle_coop_plugin: GamePlugin<HogwartsBattleCoopState, Ho
   component: HogwartsBattleCoopGame,
 };
 
-export default hogwarts_battle_coop_plugin;
+export default hogwartsBattleCoopPlugin;

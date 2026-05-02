@@ -6,7 +6,7 @@ import { PepperGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pepPlugin: GamePlugin<PepperState, PepperAction, typeof settings> = {
+export const pepperPlugin: GamePlugin<PepperState, PepperAction, typeof settings> = {
   id: "pepper",
   title: "Pepper",
   category: "cards",

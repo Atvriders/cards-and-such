@@ -32,7 +32,8 @@ export function BeeBashGame({ state, dispatch, onGameOver }: GameProps<BeeBashSt
               className="bee-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BeeBashAction)}
-              aria-label="bee-bash">🐝</button>
+              aria-label="bee-bash"
+              data-tooltip="Tap to score in Bee Bash">🐝</button>
           );
         })}
       </div>

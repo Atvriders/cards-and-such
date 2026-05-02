@@ -6,7 +6,7 @@ import { Code777MiniGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const code_777_mini_plugin: GamePlugin<Code777MiniState, Code777MiniAction, typeof settings> = {
+export const code777MiniPlugin: GamePlugin<Code777MiniState, Code777MiniAction, typeof settings> = {
   id: "code-777-mini",
   title: "Code 777 Mini",
   category: "board",
@@ -20,4 +20,4 @@ export const code_777_mini_plugin: GamePlugin<Code777MiniState, Code777MiniActio
   component: Code777MiniGame,
 };
 
-export default code_777_mini_plugin;
+export default code777MiniPlugin;

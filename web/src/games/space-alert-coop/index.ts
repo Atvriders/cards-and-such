@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const space_alert_coop_plugin: GamePlugin<SpaceAlertCoopState, SpaceAlertCoopAction, typeof settings> = {
+export const spaceAlertCoopPlugin: GamePlugin<SpaceAlertCoopState, SpaceAlertCoopAction, typeof settings> = {
   id: "space-alert-coop",
   title: "Space Alert",
   category: "board",
@@ -22,4 +22,4 @@ export const space_alert_coop_plugin: GamePlugin<SpaceAlertCoopState, SpaceAlert
   component: SpaceAlertCoopGame,
 };
 
-export default space_alert_coop_plugin;
+export default spaceAlertCoopPlugin;

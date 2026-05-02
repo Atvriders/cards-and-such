@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const lotr_lcg_coop_plugin: GamePlugin<LotrLcgCoopState, LotrLcgCoopAction, typeof settings> = {
+export const lotrLcgCoopPlugin: GamePlugin<LotrLcgCoopState, LotrLcgCoopAction, typeof settings> = {
   id: "lotr-lcg-coop",
   title: "LOTR LCG",
   category: "board",
@@ -22,4 +22,4 @@ export const lotr_lcg_coop_plugin: GamePlugin<LotrLcgCoopState, LotrLcgCoopActio
   component: LotrLcgCoopGame,
 };
 
-export default lotr_lcg_coop_plugin;
+export default lotrLcgCoopPlugin;

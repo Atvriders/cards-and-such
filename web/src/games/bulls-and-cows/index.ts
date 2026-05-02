@@ -6,7 +6,7 @@ import { BullsAndCowsGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const bulls_and_cows_plugin: GamePlugin<BullsAndCowsState, BullsAndCowsAction, typeof settings> = {
+export const bullsAndCowsPlugin: GamePlugin<BullsAndCowsState, BullsAndCowsAction, typeof settings> = {
   id: "bulls-and-cows",
   title: "Bulls and Cows",
   category: "board",
@@ -20,4 +20,4 @@ export const bulls_and_cows_plugin: GamePlugin<BullsAndCowsState, BullsAndCowsAc
   component: BullsAndCowsGame,
 };
 
-export default bulls_and_cows_plugin;
+export default bullsAndCowsPlugin;

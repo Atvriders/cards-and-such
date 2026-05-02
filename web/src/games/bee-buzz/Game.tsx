@@ -29,7 +29,8 @@ export function BeeBuzzGame({ state, dispatch, onGameOver }: GameProps<BeeBuzzSt
           return (
             <button key={p.id} className="fc-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
-              onClick={()=>dispatch({type:"pop",id:p.id} as BeeBuzzAction)} aria-label="bees">🐝</button>
+              onClick={()=>dispatch({type:"pop",id:p.id} as BeeBuzzAction)} aria-label="bees"
+              data-tooltip="Tap to score in Bee Buzz">🐝</button>
           );
         })}
       </div>

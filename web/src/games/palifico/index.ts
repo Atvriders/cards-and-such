@@ -6,7 +6,7 @@ import { PalificoGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const palifico_plugin: GamePlugin<PalificoState, PalificoAction, typeof settings> = {
+export const palificoPlugin: GamePlugin<PalificoState, PalificoAction, typeof settings> = {
   id: "palifico",
   title: "Palifico",
   category: "board",
@@ -20,4 +20,4 @@ export const palifico_plugin: GamePlugin<PalificoState, PalificoAction, typeof s
   component: PalificoGame,
 };
 
-export default palifico_plugin;
+export default palificoPlugin;

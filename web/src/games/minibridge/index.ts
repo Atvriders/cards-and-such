@@ -6,7 +6,7 @@ import { MiniBridgeGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mini-bPlugin: GamePlugin<MiniBridgeState, MiniBridgeAction, typeof settings> = {
+export const minibridgePlugin: GamePlugin<MiniBridgeState, MiniBridgeAction, typeof settings> = {
   id: "minibridge",
   title: "Mini Bridge",
   category: "cards",

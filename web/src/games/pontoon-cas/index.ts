@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { PontoonCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const pon-cPlugin: GamePlugin<PontoonCasState, PontoonCasAction, typeof settings> = {
+export const pontoonCasPlugin: GamePlugin<PontoonCasState, PontoonCasAction, typeof settings> = {
   id: "pontoon-cas", title: "Pontoon", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Pontoon — British BJ. Pontoon (21 on first two) pays 2:1.",

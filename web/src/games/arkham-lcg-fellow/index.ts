@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const arkham_lcg_fellow_plugin: GamePlugin<ArkhamLcgFellowState, ArkhamLcgFellowAction, typeof settings> = {
+export const arkhamLcgFellowPlugin: GamePlugin<ArkhamLcgFellowState, ArkhamLcgFellowAction, typeof settings> = {
   id: "arkham-lcg-fellow",
   title: "Arkham LCG: Fellowship",
   category: "board",
@@ -22,4 +22,4 @@ export const arkham_lcg_fellow_plugin: GamePlugin<ArkhamLcgFellowState, ArkhamLc
   component: ArkhamLcgFellowGame,
 };
 
-export default arkham_lcg_fellow_plugin;
+export default arkhamLcgFellowPlugin;

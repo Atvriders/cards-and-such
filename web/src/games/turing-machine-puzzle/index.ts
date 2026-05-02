@@ -6,7 +6,7 @@ import { TuringMachinePuzzleGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const turing_machine_puzzle_plugin: GamePlugin<TuringMachinePuzzleState, TuringMachinePuzzleAction, typeof settings> = {
+export const turingMachinePuzzlePlugin: GamePlugin<TuringMachinePuzzleState, TuringMachinePuzzleAction, typeof settings> = {
   id: "turing-machine-puzzle",
   title: "Turing Machine",
   category: "board",
@@ -20,4 +20,4 @@ export const turing_machine_puzzle_plugin: GamePlugin<TuringMachinePuzzleState, 
   component: TuringMachinePuzzleGame,
 };
 
-export default turing_machine_puzzle_plugin;
+export default turingMachinePuzzlePlugin;

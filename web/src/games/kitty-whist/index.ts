@@ -6,7 +6,7 @@ import { KittyWhistGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const kit-whPlugin: GamePlugin<KittyWhistState, KittyWhistAction, typeof settings> = {
+export const kittyWhistPlugin: GamePlugin<KittyWhistState, KittyWhistAction, typeof settings> = {
   id: "kitty-whist",
   title: "Kitty Whist",
   category: "cards",

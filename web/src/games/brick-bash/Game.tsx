@@ -31,7 +31,8 @@ export function BrickBashGame({ state, dispatch, onGameOver }: GameProps<BrickBa
               className="ck-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"hit", id:p.id } as BrickBashAction)}
-              aria-label="target">🧱</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Brick Bash">🧱</button>
           );
         })}
       </div>

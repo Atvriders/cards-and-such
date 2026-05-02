@@ -6,7 +6,7 @@ import { SecretHitlerQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const secret_hitler_quiz_plugin: GamePlugin<SecretHitlerQuizState, SecretHitlerQuizAction, typeof settings> = {
+export const secretHitlerQuizPlugin: GamePlugin<SecretHitlerQuizState, SecretHitlerQuizAction, typeof settings> = {
   id: "secret-hitler-quiz",
   title: "Secret Hitler Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const secret_hitler_quiz_plugin: GamePlugin<SecretHitlerQuizState, Secret
   component: SecretHitlerQuizGame,
 };
 
-export default secret_hitler_quiz_plugin;
+export default secretHitlerQuizPlugin;

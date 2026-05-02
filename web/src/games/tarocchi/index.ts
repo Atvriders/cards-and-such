@@ -6,7 +6,7 @@ import { TarocchiGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tarPlugin: GamePlugin<TarocchiState, TarocchiAction, typeof settings> = {
+export const tarocchiPlugin: GamePlugin<TarocchiState, TarocchiAction, typeof settings> = {
   id: "tarocchi",
   title: "Tarocchi",
   category: "cards",

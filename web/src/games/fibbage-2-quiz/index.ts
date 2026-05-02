@@ -6,7 +6,7 @@ import { Fibbage2QuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const fibbage_2_quiz_plugin: GamePlugin<Fibbage2QuizState, Fibbage2QuizAction, typeof settings> = {
+export const fibbage2QuizPlugin: GamePlugin<Fibbage2QuizState, Fibbage2QuizAction, typeof settings> = {
   id: "fibbage-2-quiz",
   title: "Fibbage 2 Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const fibbage_2_quiz_plugin: GamePlugin<Fibbage2QuizState, Fibbage2QuizAc
   component: Fibbage2QuizGame,
 };
 
-export default fibbage_2_quiz_plugin;
+export default fibbage2QuizPlugin;

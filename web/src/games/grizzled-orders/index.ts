@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const grizzled_orders_plugin: GamePlugin<GrizzledOrdersState, GrizzledOrdersAction, typeof settings> = {
+export const grizzledOrdersPlugin: GamePlugin<GrizzledOrdersState, GrizzledOrdersAction, typeof settings> = {
   id: "grizzled-orders",
   title: "The Grizzled: Orders",
   category: "board",
@@ -22,4 +22,4 @@ export const grizzled_orders_plugin: GamePlugin<GrizzledOrdersState, GrizzledOrd
   component: GrizzledOrdersGame,
 };
 
-export default grizzled_orders_plugin;
+export default grizzledOrdersPlugin;

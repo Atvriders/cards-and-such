@@ -6,7 +6,7 @@ import { KonigrufenGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const konPlugin: GamePlugin<KonigrufenState, KonigrufenAction, typeof settings> = {
+export const konigrufenPlugin: GamePlugin<KonigrufenState, KonigrufenAction, typeof settings> = {
   id: "konigrufen",
   title: "Königrufen",
   category: "cards",

@@ -6,7 +6,7 @@ import { PictionaryManQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pictionary_man_quiz_plugin: GamePlugin<PictionaryManQuizState, PictionaryManQuizAction, typeof settings> = {
+export const pictionaryManQuizPlugin: GamePlugin<PictionaryManQuizState, PictionaryManQuizAction, typeof settings> = {
   id: "pictionary-man-quiz",
   title: "Pictionary Man Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const pictionary_man_quiz_plugin: GamePlugin<PictionaryManQuizState, Pict
   component: PictionaryManQuizGame,
 };
 
-export default pictionary_man_quiz_plugin;
+export default pictionaryManQuizPlugin;

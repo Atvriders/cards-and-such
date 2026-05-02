@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const keyforge_archons_plugin: GamePlugin<KeyforgeArchonsState, KeyforgeArchonsAction, typeof settings> = {
+export const keyforgeArchonsPlugin: GamePlugin<KeyforgeArchonsState, KeyforgeArchonsAction, typeof settings> = {
   id: "keyforge-archons",
   title: "KeyForge: Archons",
   category: "board",
@@ -22,4 +22,4 @@ export const keyforge_archons_plugin: GamePlugin<KeyforgeArchonsState, KeyforgeA
   component: KeyforgeArchonsGame,
 };
 
-export default keyforge_archons_plugin;
+export default keyforgeArchonsPlugin;

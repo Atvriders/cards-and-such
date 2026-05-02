@@ -6,7 +6,7 @@ import { ParallelsGame } from "./Game.js";
 
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const parallelsPlugin: GamePlugin<ParallelsState, ParallelsAction, typeof settings> = {
+export const parallelsSolPlugin: GamePlugin<ParallelsState, ParallelsAction, typeof settings> = {
   id: "parallels",
   title: "Parallels",
   category: "solitaire",

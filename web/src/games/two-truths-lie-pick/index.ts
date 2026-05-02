@@ -6,7 +6,7 @@ import { TwoTruthsLiePickGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const two_truths_lie_pick_plugin: GamePlugin<TwoTruthsLiePickState, TwoTruthsLiePickAction, typeof settings> = {
+export const twoTruthsLiePickPlugin: GamePlugin<TwoTruthsLiePickState, TwoTruthsLiePickAction, typeof settings> = {
   id: "two-truths-lie-pick",
   title: "Two Truths and a Lie",
   category: "cards",
@@ -20,4 +20,4 @@ export const two_truths_lie_pick_plugin: GamePlugin<TwoTruthsLiePickState, TwoTr
   component: TwoTruthsLiePickGame,
 };
 
-export default two_truths_lie_pick_plugin;
+export default twoTruthsLiePickPlugin;

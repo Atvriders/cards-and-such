@@ -6,7 +6,7 @@ import { TruthOrDarePickGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const truth_or_dare_pick_plugin: GamePlugin<TruthOrDarePickState, TruthOrDarePickAction, typeof settings> = {
+export const truthOrDarePickPlugin: GamePlugin<TruthOrDarePickState, TruthOrDarePickAction, typeof settings> = {
   id: "truth-or-dare-pick",
   title: "Truth or Dare",
   category: "cards",
@@ -20,4 +20,4 @@ export const truth_or_dare_pick_plugin: GamePlugin<TruthOrDarePickState, TruthOr
   component: TruthOrDarePickGame,
 };
 
-export default truth_or_dare_pick_plugin;
+export default truthOrDarePickPlugin;

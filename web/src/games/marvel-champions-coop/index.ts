@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const marvel_champions_coop_plugin: GamePlugin<MarvelChampionsCoopState, MarvelChampionsCoopAction, typeof settings> = {
+export const marvelChampionsCoopPlugin: GamePlugin<MarvelChampionsCoopState, MarvelChampionsCoopAction, typeof settings> = {
   id: "marvel-champions-coop",
   title: "Marvel Champions",
   category: "board",
@@ -22,4 +22,4 @@ export const marvel_champions_coop_plugin: GamePlugin<MarvelChampionsCoopState, 
   component: MarvelChampionsCoopGame,
 };
 
-export default marvel_champions_coop_plugin;
+export default marvelChampionsCoopPlugin;

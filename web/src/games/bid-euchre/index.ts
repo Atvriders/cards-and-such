@@ -6,7 +6,7 @@ import { BidEuchreGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const bid-euPlugin: GamePlugin<BidEuchreState, BidEuchreAction, typeof settings> = {
+export const bidEuchrePlugin: GamePlugin<BidEuchreState, BidEuchreAction, typeof settings> = {
   id: "bid-euchre",
   title: "Bid Euchre",
   category: "cards",

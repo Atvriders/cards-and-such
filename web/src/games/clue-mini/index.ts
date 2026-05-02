@@ -6,7 +6,7 @@ import { ClueMiniGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const clue_mini_plugin: GamePlugin<ClueMiniState, ClueMiniAction, typeof settings> = {
+export const clueMiniPlugin: GamePlugin<ClueMiniState, ClueMiniAction, typeof settings> = {
   id: "clue-mini",
   title: "Clue Mini",
   category: "board",
@@ -20,4 +20,4 @@ export const clue_mini_plugin: GamePlugin<ClueMiniState, ClueMiniAction, typeof 
   component: ClueMiniGame,
 };
 
-export default clue_mini_plugin;
+export default clueMiniPlugin;

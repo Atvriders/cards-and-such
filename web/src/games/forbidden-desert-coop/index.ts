@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const forbidden_desert_coop_plugin: GamePlugin<ForbiddenDesertCoopState, ForbiddenDesertCoopAction, typeof settings> = {
+export const forbiddenDesertCoopPlugin: GamePlugin<ForbiddenDesertCoopState, ForbiddenDesertCoopAction, typeof settings> = {
   id: "forbidden-desert-coop",
   title: "Forbidden Desert",
   category: "board",
@@ -22,4 +22,4 @@ export const forbidden_desert_coop_plugin: GamePlugin<ForbiddenDesertCoopState, 
   component: ForbiddenDesertCoopGame,
 };
 
-export default forbidden_desert_coop_plugin;
+export default forbiddenDesertCoopPlugin;

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const magic_maze_pawn_plugin: GamePlugin<MagicMazePawnState, MagicMazePawnAction, typeof settings> = {
+export const magicMazePawnPlugin: GamePlugin<MagicMazePawnState, MagicMazePawnAction, typeof settings> = {
   id: "magic-maze-pawn",
   title: "Magic Maze: Pawn Mode",
   category: "board",
@@ -22,4 +22,4 @@ export const magic_maze_pawn_plugin: GamePlugin<MagicMazePawnState, MagicMazePaw
   component: MagicMazePawnGame,
 };
 
-export default magic_maze_pawn_plugin;
+export default magicMazePawnPlugin;

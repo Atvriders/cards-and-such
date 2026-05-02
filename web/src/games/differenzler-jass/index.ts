@@ -6,7 +6,7 @@ import { DifferenzlerJassGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dif-jPlugin: GamePlugin<DifferenzlerJassState, DifferenzlerJassAction, typeof settings> = {
+export const differenzlerJassPlugin: GamePlugin<DifferenzlerJassState, DifferenzlerJassAction, typeof settings> = {
   id: "differenzler-jass",
   title: "Differenzler Jass",
   category: "cards",

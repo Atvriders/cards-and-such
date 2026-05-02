@@ -61,7 +61,7 @@ export function CardSpinner({
           {state.bets.map((b, i) => (
             <span key={i} className="cs-bet-chip">
               {b.value} ({b.type})
-              <button className="cs-remove-bet" onClick={() => dispatch({ type: "removeBet", index: i } as CardSpinnerAction)}>×</button>
+              <button className="cs-remove-bet" onClick={() => dispatch({ type: "removeBet", index: i } as CardSpinnerAction)} aria-label="Clear" data-tooltip="Clear input">×</button>
             </span>
           ))}
         </div>

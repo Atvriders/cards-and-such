@@ -32,7 +32,8 @@ export function AppleTapGame({ state, dispatch, onGameOver }: GameProps<AppleTap
               className="appletap-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background: "transparent", border: "none" }}
               onClick={() => dispatch({ type: "pop", id: p.id } as AppleTapAction)}
-              aria-label="target">🍎</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Apple Tap">🍎</button>
           );
         })}
       </div>

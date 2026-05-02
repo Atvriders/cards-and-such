@@ -6,7 +6,7 @@ import { CutthroatPinochleGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cut-pinPlugin: GamePlugin<CutthroatPinochleState, CutthroatPinochleAction, typeof settings> = {
+export const cutthroatPinochlePlugin: GamePlugin<CutthroatPinochleState, CutthroatPinochleAction, typeof settings> = {
   id: "cutthroat-pinochle",
   title: "Cutthroat Pinochle",
   category: "cards",

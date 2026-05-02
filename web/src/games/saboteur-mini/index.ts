@@ -6,7 +6,7 @@ import { SaboteurMiniGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const saboteur_mini_plugin: GamePlugin<SaboteurMiniState, SaboteurMiniAction, typeof settings> = {
+export const saboteurMiniPlugin: GamePlugin<SaboteurMiniState, SaboteurMiniAction, typeof settings> = {
   id: "saboteur-mini",
   title: "Saboteur Mini",
   category: "board",
@@ -20,4 +20,4 @@ export const saboteur_mini_plugin: GamePlugin<SaboteurMiniState, SaboteurMiniAct
   component: SaboteurMiniGame,
 };
 
-export default saboteur_mini_plugin;
+export default saboteurMiniPlugin;

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dominion_adventures_plugin: GamePlugin<DominionAdventuresState, DominionAdventuresAction, typeof settings> = {
+export const dominionAdventuresPlugin: GamePlugin<DominionAdventuresState, DominionAdventuresAction, typeof settings> = {
   id: "dominion-adventures",
   title: "Dominion: Adventures",
   category: "board",
@@ -22,4 +22,4 @@ export const dominion_adventures_plugin: GamePlugin<DominionAdventuresState, Dom
   component: DominionAdventuresGame,
 };
 
-export default dominion_adventures_plugin;
+export default dominionAdventuresPlugin;

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sorcerer_city_build_plugin: GamePlugin<SorcererCityBuildState, SorcererCityBuildAction, typeof settings> = {
+export const sorcererCityBuildPlugin: GamePlugin<SorcererCityBuildState, SorcererCityBuildAction, typeof settings> = {
   id: "sorcerer-city-build",
   title: "Sorcerer City",
   category: "board",
@@ -22,4 +22,4 @@ export const sorcerer_city_build_plugin: GamePlugin<SorcererCityBuildState, Sorc
   component: SorcererCityBuildGame,
 };
 
-export default sorcerer_city_build_plugin;
+export default sorcererCityBuildPlugin;

@@ -32,7 +32,8 @@ export function BusBashGame({ state, dispatch, onGameOver }: GameProps<BusBashSt
               className="bsb-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BusBashAction)}
-              aria-label="vehicle">🚌</button>
+              aria-label="vehicle"
+              data-tooltip="Tap to score in Bus Bash">🚌</button>
           );
         })}
       </div>

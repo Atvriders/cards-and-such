@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const crew_deep_sea_coop_plugin: GamePlugin<CrewDeepSeaCoopState, CrewDeepSeaCoopAction, typeof settings> = {
+export const crewDeepSeaCoopPlugin: GamePlugin<CrewDeepSeaCoopState, CrewDeepSeaCoopAction, typeof settings> = {
   id: "crew-deep-sea-coop",
   title: "The Crew: Deep Sea",
   category: "board",
@@ -22,4 +22,4 @@ export const crew_deep_sea_coop_plugin: GamePlugin<CrewDeepSeaCoopState, CrewDee
   component: CrewDeepSeaCoopGame,
 };
 
-export default crew_deep_sea_coop_plugin;
+export default crewDeepSeaCoopPlugin;

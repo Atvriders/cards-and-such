@@ -6,7 +6,7 @@ import { JottoGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const jotto_plugin: GamePlugin<JottoState, JottoAction, typeof settings> = {
+export const jottoPlugin: GamePlugin<JottoState, JottoAction, typeof settings> = {
   id: "jotto",
   title: "Jotto",
   category: "board",
@@ -20,4 +20,4 @@ export const jotto_plugin: GamePlugin<JottoState, JottoAction, typeof settings> 
   component: JottoGame,
 };
 
-export default jotto_plugin;
+export default jottoPlugin;

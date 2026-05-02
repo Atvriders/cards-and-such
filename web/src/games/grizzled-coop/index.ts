@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const grizzled_coop_plugin: GamePlugin<GrizzledCoopState, GrizzledCoopAction, typeof settings> = {
+export const grizzledCoopPlugin: GamePlugin<GrizzledCoopState, GrizzledCoopAction, typeof settings> = {
   id: "grizzled-coop",
   title: "The Grizzled",
   category: "board",
@@ -22,4 +22,4 @@ export const grizzled_coop_plugin: GamePlugin<GrizzledCoopState, GrizzledCoopAct
   component: GrizzledCoopGame,
 };
 
-export default grizzled_coop_plugin;
+export default grizzledCoopPlugin;

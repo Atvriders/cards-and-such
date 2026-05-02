@@ -6,7 +6,7 @@ import { CockroachBluffGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cockroach_bluff_plugin: GamePlugin<CockroachBluffState, CockroachBluffAction, typeof settings> = {
+export const cockroachBluffPlugin: GamePlugin<CockroachBluffState, CockroachBluffAction, typeof settings> = {
   id: "cockroach-bluff",
   title: "Cockroach Poker",
   category: "board",
@@ -20,4 +20,4 @@ export const cockroach_bluff_plugin: GamePlugin<CockroachBluffState, CockroachBl
   component: CockroachBluffGame,
 };
 
-export default cockroach_bluff_plugin;
+export default cockroachBluffPlugin;

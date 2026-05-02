@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dungeon_lords_trap_plugin: GamePlugin<DungeonLordsTrapState, DungeonLordsTrapAction, typeof settings> = {
+export const dungeonLordsTrapPlugin: GamePlugin<DungeonLordsTrapState, DungeonLordsTrapAction, typeof settings> = {
   id: "dungeon-lords-trap",
   title: "Dungeon Lords: Trap",
   category: "board",
@@ -22,4 +22,4 @@ export const dungeon_lords_trap_plugin: GamePlugin<DungeonLordsTrapState, Dungeo
   component: DungeonLordsTrapGame,
 };
 
-export default dungeon_lords_trap_plugin;
+export default dungeonLordsTrapPlugin;

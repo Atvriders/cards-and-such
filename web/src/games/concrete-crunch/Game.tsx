@@ -31,7 +31,8 @@ export function ConcreteCrunchGame({ state, dispatch, onGameOver }: GameProps<Co
               className="ck-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"hit", id:p.id } as ConcreteCrunchAction)}
-              aria-label="target">🪨</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Concrete Crunch">🪨</button>
           );
         })}
       </div>

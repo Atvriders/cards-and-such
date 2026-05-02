@@ -31,7 +31,8 @@ export function CocoaCascadeGame({ state, dispatch, onGameOver }: GameProps<Coco
               className="cocoa-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as CocoaCascadeAction)}
-              aria-label="cocoa-cascade">🍫</button>
+              aria-label="cocoa-cascade"
+              data-tooltip="Tap to score in Cocoa Cascade">🍫</button>
           );
         })}
       </div>

@@ -43,7 +43,7 @@ export function ConnectSixGame({
               onMouseLeave={() => setHoverCol(null)}
               disabled={disabled}
               aria-label={`drop col ${c}`}
-            >
+            data-tooltip="Move down">
               ▼
             </button>
           );

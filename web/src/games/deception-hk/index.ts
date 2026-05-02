@@ -6,7 +6,7 @@ import { DeceptionHkGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const deception_hk_plugin: GamePlugin<DeceptionHkState, DeceptionHkAction, typeof settings> = {
+export const deceptionHkPlugin: GamePlugin<DeceptionHkState, DeceptionHkAction, typeof settings> = {
   id: "deception-hk",
   title: "Deception: Hong Kong",
   category: "board",
@@ -20,4 +20,4 @@ export const deception_hk_plugin: GamePlugin<DeceptionHkState, DeceptionHkAction
   component: DeceptionHkGame,
 };
 
-export default deception_hk_plugin;
+export default deceptionHkPlugin;

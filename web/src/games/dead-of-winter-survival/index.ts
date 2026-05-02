@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dead_of_winter_survival_plugin: GamePlugin<DeadOfWinterSurvivalState, DeadOfWinterSurvivalAction, typeof settings> = {
+export const deadOfWinterSurvivalPlugin: GamePlugin<DeadOfWinterSurvivalState, DeadOfWinterSurvivalAction, typeof settings> = {
   id: "dead-of-winter-survival",
   title: "Dead of Winter: Survival",
   category: "board",
@@ -22,4 +22,4 @@ export const dead_of_winter_survival_plugin: GamePlugin<DeadOfWinterSurvivalStat
   component: DeadOfWinterSurvivalGame,
 };
 
-export default dead_of_winter_survival_plugin;
+export default deadOfWinterSurvivalPlugin;

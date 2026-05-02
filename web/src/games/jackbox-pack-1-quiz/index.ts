@@ -6,7 +6,7 @@ import { JackboxPack1QuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const jackbox_pack_1_quiz_plugin: GamePlugin<JackboxPack1QuizState, JackboxPack1QuizAction, typeof settings> = {
+export const jackboxPack1QuizPlugin: GamePlugin<JackboxPack1QuizState, JackboxPack1QuizAction, typeof settings> = {
   id: "jackbox-pack-1-quiz",
   title: "Jackbox Pack 1 Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const jackbox_pack_1_quiz_plugin: GamePlugin<JackboxPack1QuizState, Jackb
   component: JackboxPack1QuizGame,
 };
 
-export default jackbox_pack_1_quiz_plugin;
+export default jackboxPack1QuizPlugin;

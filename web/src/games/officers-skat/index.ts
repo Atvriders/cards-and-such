@@ -6,7 +6,7 @@ import { OfficersSkatGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const off-sPlugin: GamePlugin<OfficersSkatState, OfficersSkatAction, typeof settings> = {
+export const officersSkatPlugin: GamePlugin<OfficersSkatState, OfficersSkatAction, typeof settings> = {
   id: "officers-skat",
   title: "Officers' Skat",
   category: "cards",

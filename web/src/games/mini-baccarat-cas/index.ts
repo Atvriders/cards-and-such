@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { MiniBaccaratCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const mb-cPlugin: GamePlugin<MiniBaccaratCasState, MiniBaccaratCasAction, typeof settings> = {
+export const miniBaccaratCasPlugin: GamePlugin<MiniBaccaratCasState, MiniBaccaratCasAction, typeof settings> = {
   id: "mini-baccarat-cas", title: "Mini Baccarat", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Mini Baccarat — bet on Player or Banker, the higher total wins.",

@@ -3,6 +3,7 @@ import { canMove, applyMove, klondikeTableauStack, foundationStack } from "../..
 import type { Ruleset } from "../../engines/tableau/types.js";
 import { newDeck, shuffle } from "../../engines/deck/index.js";
 import { mulberry32 } from "../../platform/game-plugin/useSeededRng.js";
+import { pushHistory, popHistory } from "../../platform/game-plugin/undoHistory.js";
 
 export interface KlondikeSettings {
   drawMode: "1" | "3";
@@ -15,13 +16,15 @@ export interface KlondikeState {
   movesMade: number;
   won: boolean;
   settings: KlondikeSettings;
+  history: KlondikeState[];
 }
 
 export type KlondikeAction =
   | { type: "draw" }
   | { type: "recycle" }
   | { type: "move"; fromPile: string; toPile: string; count: number }
-  | { type: "auto-move-to-foundation" };
+  | { type: "auto-move-to-foundation" }
+  | { type: "undo" };
 
 const TABLEAU_IDS = ["t1", "t2", "t3", "t4", "t5", "t6", "t7"] as const;
 const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"] as const;
@@ -81,7 +84,7 @@ export function initialState(
 
   const startScore = settings.scoringMode === "vegas" ? -52 : 0;
 
-  return { piles, score: startScore, movesMade: 0, won: false, settings };
+  return { piles, score: startScore, movesMade: 0, won: false, settings, history: [] };
 }
 
 function getPile(piles: Pile[], id: string): Pile | undefined {

@@ -6,7 +6,7 @@ import { TempelTrapGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tempel_trap_plugin: GamePlugin<TempelTrapState, TempelTrapAction, typeof settings> = {
+export const tempelTrapPlugin: GamePlugin<TempelTrapState, TempelTrapAction, typeof settings> = {
   id: "tempel-trap",
   title: "Tempel: Traps",
   category: "board",
@@ -20,4 +20,4 @@ export const tempel_trap_plugin: GamePlugin<TempelTrapState, TempelTrapAction, t
   component: TempelTrapGame,
 };
 
-export default tempel_trap_plugin;
+export default tempelTrapPlugin;

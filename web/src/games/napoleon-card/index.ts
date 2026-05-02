@@ -6,7 +6,7 @@ import { NapoleonCardGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const nap-cPlugin: GamePlugin<NapoleonCardState, NapoleonCardAction, typeof settings> = {
+export const napoleonCardPlugin: GamePlugin<NapoleonCardState, NapoleonCardAction, typeof settings> = {
   id: "napoleon-card",
   title: "Napoleon",
   category: "cards",

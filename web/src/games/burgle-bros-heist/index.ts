@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const burgle_bros_heist_plugin: GamePlugin<BurgleBrosHeistState, BurgleBrosHeistAction, typeof settings> = {
+export const burgleBrosHeistPlugin: GamePlugin<BurgleBrosHeistState, BurgleBrosHeistAction, typeof settings> = {
   id: "burgle-bros-heist",
   title: "Burgle Bros",
   category: "board",
@@ -22,4 +22,4 @@ export const burgle_bros_heist_plugin: GamePlugin<BurgleBrosHeistState, BurgleBr
   component: BurgleBrosHeistGame,
 };
 
-export default burgle_bros_heist_plugin;
+export default burgleBrosHeistPlugin;

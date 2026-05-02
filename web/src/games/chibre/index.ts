@@ -6,7 +6,7 @@ import { ChibreGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const chibPlugin: GamePlugin<ChibreState, ChibreAction, typeof settings> = {
+export const chibrePlugin: GamePlugin<ChibreState, ChibreAction, typeof settings> = {
   id: "chibre",
   title: "Chibre",
   category: "cards",

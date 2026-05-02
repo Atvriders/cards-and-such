@@ -6,7 +6,7 @@ import { ClueSuspectGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const clue_suspect_plugin: GamePlugin<ClueSuspectState, ClueSuspectAction, typeof settings> = {
+export const clueSuspectPlugin: GamePlugin<ClueSuspectState, ClueSuspectAction, typeof settings> = {
   id: "clue-suspect",
   title: "Clue: Suspect",
   category: "board",
@@ -20,4 +20,4 @@ export const clue_suspect_plugin: GamePlugin<ClueSuspectState, ClueSuspectAction
   component: ClueSuspectGame,
 };
 
-export default clue_suspect_plugin;
+export default clueSuspectPlugin;

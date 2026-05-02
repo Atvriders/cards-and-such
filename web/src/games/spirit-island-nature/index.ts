@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const spirit_island_nature_plugin: GamePlugin<SpiritIslandNatureState, SpiritIslandNatureAction, typeof settings> = {
+export const spiritIslandNaturePlugin: GamePlugin<SpiritIslandNatureState, SpiritIslandNatureAction, typeof settings> = {
   id: "spirit-island-nature",
   title: "Spirit Island: Nature Incarnate",
   category: "board",
@@ -22,4 +22,4 @@ export const spirit_island_nature_plugin: GamePlugin<SpiritIslandNatureState, Sp
   component: SpiritIslandNatureGame,
 };
 
-export default spirit_island_nature_plugin;
+export default spiritIslandNaturePlugin;

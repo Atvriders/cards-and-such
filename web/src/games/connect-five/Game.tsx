@@ -43,6 +43,7 @@ export function ConnectFiveGame({
               onMouseLeave={() => setHoverCol(null)}
               disabled={disabled}
               aria-label={`drop col ${c}`}
+              data-tooltip="Drop in this column"
             >
               ▼
             </button>

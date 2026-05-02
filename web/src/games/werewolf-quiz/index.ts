@@ -6,7 +6,7 @@ import { WerewolfQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const werewolf_quiz_plugin: GamePlugin<WerewolfQuizState, WerewolfQuizAction, typeof settings> = {
+export const werewolfQuizPlugin: GamePlugin<WerewolfQuizState, WerewolfQuizAction, typeof settings> = {
   id: "werewolf-quiz",
   title: "Werewolf Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const werewolf_quiz_plugin: GamePlugin<WerewolfQuizState, WerewolfQuizAct
   component: WerewolfQuizGame,
 };
 
-export default werewolf_quiz_plugin;
+export default werewolfQuizPlugin;

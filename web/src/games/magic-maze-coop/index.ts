@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const magic_maze_coop_plugin: GamePlugin<MagicMazeCoopState, MagicMazeCoopAction, typeof settings> = {
+export const magicMazeCoopPlugin: GamePlugin<MagicMazeCoopState, MagicMazeCoopAction, typeof settings> = {
   id: "magic-maze-coop",
   title: "Magic Maze",
   category: "board",
@@ -22,4 +22,4 @@ export const magic_maze_coop_plugin: GamePlugin<MagicMazeCoopState, MagicMazeCoo
   component: MagicMazeCoopGame,
 };
 
-export default magic_maze_coop_plugin;
+export default magicMazeCoopPlugin;

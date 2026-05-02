@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const escape_aliens_hidden_plugin: GamePlugin<EscapeAliensHiddenState, EscapeAliensHiddenAction, typeof settings> = {
+export const escapeAliensHiddenPlugin: GamePlugin<EscapeAliensHiddenState, EscapeAliensHiddenAction, typeof settings> = {
   id: "escape-aliens-hidden",
   title: "Escape: Curse of the Aliens",
   category: "board",
@@ -22,4 +22,4 @@ export const escape_aliens_hidden_plugin: GamePlugin<EscapeAliensHiddenState, Es
   component: EscapeAliensHiddenGame,
 };
 
-export default escape_aliens_hidden_plugin;
+export default escapeAliensHiddenPlugin;

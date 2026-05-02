@@ -6,7 +6,7 @@ import { TempelDeductionGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tempel_deduction_plugin: GamePlugin<TempelDeductionState, TempelDeductionAction, typeof settings> = {
+export const tempelDeductionPlugin: GamePlugin<TempelDeductionState, TempelDeductionAction, typeof settings> = {
   id: "tempel-deduction",
   title: "Tempel",
   category: "board",
@@ -20,4 +20,4 @@ export const tempel_deduction_plugin: GamePlugin<TempelDeductionState, TempelDed
   component: TempelDeductionGame,
 };
 
-export default tempel_deduction_plugin;
+export default tempelDeductionPlugin;

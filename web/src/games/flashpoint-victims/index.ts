@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const flashpoint_victims_plugin: GamePlugin<FlashpointVictimsState, FlashpointVictimsAction, typeof settings> = {
+export const flashpointVictimsPlugin: GamePlugin<FlashpointVictimsState, FlashpointVictimsAction, typeof settings> = {
   id: "flashpoint-victims",
   title: "Flash Point: Victims",
   category: "board",
@@ -22,4 +22,4 @@ export const flashpoint_victims_plugin: GamePlugin<FlashpointVictimsState, Flash
   component: FlashpointVictimsGame,
 };
 
-export default flashpoint_victims_plugin;
+export default flashpointVictimsPlugin;

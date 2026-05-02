@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const crew_distress_signal_plugin: GamePlugin<CrewDistressSignalState, CrewDistressSignalAction, typeof settings> = {
+export const crewDistressSignalPlugin: GamePlugin<CrewDistressSignalState, CrewDistressSignalAction, typeof settings> = {
   id: "crew-distress-signal",
   title: "The Crew: Distress Signal",
   category: "board",
@@ -22,4 +22,4 @@ export const crew_distress_signal_plugin: GamePlugin<CrewDistressSignalState, Cr
   component: CrewDistressSignalGame,
 };
 
-export default crew_distress_signal_plugin;
+export default crewDistressSignalPlugin;

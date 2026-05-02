@@ -6,7 +6,7 @@ import { FrenchTarotGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const fr-tarPlugin: GamePlugin<FrenchTarotState, FrenchTarotAction, typeof settings> = {
+export const frenchTarotPlugin: GamePlugin<FrenchTarotState, FrenchTarotAction, typeof settings> = {
   id: "french-tarot",
   title: "French Tarot",
   category: "cards",

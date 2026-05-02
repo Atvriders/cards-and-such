@@ -6,7 +6,7 @@ import { VoliMariasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const voli-mPlugin: GamePlugin<VoliMariasState, VoliMariasAction, typeof settings> = {
+export const voliMariasPlugin: GamePlugin<VoliMariasState, VoliMariasAction, typeof settings> = {
   id: "voli-marias",
   title: "Volí Mariáš",
   category: "cards",

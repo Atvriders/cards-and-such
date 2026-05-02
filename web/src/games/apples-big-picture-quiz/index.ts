@@ -6,7 +6,7 @@ import { ApplesBigPictureQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const apples_big_picture_quiz_plugin: GamePlugin<ApplesBigPictureQuizState, ApplesBigPictureQuizAction, typeof settings> = {
+export const applesBigPictureQuizPlugin: GamePlugin<ApplesBigPictureQuizState, ApplesBigPictureQuizAction, typeof settings> = {
   id: "apples-big-picture-quiz",
   title: "Apples Big Picture Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const apples_big_picture_quiz_plugin: GamePlugin<ApplesBigPictureQuizStat
   component: ApplesBigPictureQuizGame,
 };
 
-export default apples_big_picture_quiz_plugin;
+export default applesBigPictureQuizPlugin;

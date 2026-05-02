@@ -6,7 +6,7 @@ import { ChroniclesOfCrimeGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const chronicles_of_crime_plugin: GamePlugin<ChroniclesOfCrimeState, ChroniclesOfCrimeAction, typeof settings> = {
+export const chroniclesOfCrimePlugin: GamePlugin<ChroniclesOfCrimeState, ChroniclesOfCrimeAction, typeof settings> = {
   id: "chronicles-of-crime",
   title: "Chronicles of Crime",
   category: "board",
@@ -20,4 +20,4 @@ export const chronicles_of_crime_plugin: GamePlugin<ChroniclesOfCrimeState, Chro
   component: ChroniclesOfCrimeGame,
 };
 
-export default chronicles_of_crime_plugin;
+export default chroniclesOfCrimePlugin;

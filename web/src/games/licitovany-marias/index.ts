@@ -6,7 +6,7 @@ import { LicitovanyMariasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const lic-mPlugin: GamePlugin<LicitovanyMariasState, LicitovanyMariasAction, typeof settings> = {
+export const licitovanyMariasPlugin: GamePlugin<LicitovanyMariasState, LicitovanyMariasAction, typeof settings> = {
   id: "licitovany-marias",
   title: "Licitovaný Mariáš",
   category: "cards",

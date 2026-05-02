@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const flashpoint_rescue_coop_plugin: GamePlugin<FlashpointRescueCoopState, FlashpointRescueCoopAction, typeof settings> = {
+export const flashpointRescueCoopPlugin: GamePlugin<FlashpointRescueCoopState, FlashpointRescueCoopAction, typeof settings> = {
   id: "flashpoint-rescue-coop",
   title: "Flash Point: Fire Rescue",
   category: "board",
@@ -22,4 +22,4 @@ export const flashpoint_rescue_coop_plugin: GamePlugin<FlashpointRescueCoopState
   component: FlashpointRescueCoopGame,
 };
 
-export default flashpoint_rescue_coop_plugin;
+export default flashpointRescueCoopPlugin;

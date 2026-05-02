@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dominion_intrigue_plugin: GamePlugin<DominionIntrigueState, DominionIntrigueAction, typeof settings> = {
+export const dominionIntriguePlugin: GamePlugin<DominionIntrigueState, DominionIntrigueAction, typeof settings> = {
   id: "dominion-intrigue",
   title: "Dominion: Intrigue",
   category: "board",
@@ -22,4 +22,4 @@ export const dominion_intrigue_plugin: GamePlugin<DominionIntrigueState, Dominio
   component: DominionIntrigueGame,
 };
 
-export default dominion_intrigue_plugin;
+export default dominionIntriguePlugin;

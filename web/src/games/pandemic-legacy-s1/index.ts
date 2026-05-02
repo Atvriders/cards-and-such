@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pandemic_legacy_s1_plugin: GamePlugin<PandemicLegacyS1State, PandemicLegacyS1Action, typeof settings> = {
+export const pandemicLegacyS1Plugin: GamePlugin<PandemicLegacyS1State, PandemicLegacyS1Action, typeof settings> = {
   id: "pandemic-legacy-s1",
   title: "Pandemic Legacy S1",
   category: "board",
@@ -22,4 +22,4 @@ export const pandemic_legacy_s1_plugin: GamePlugin<PandemicLegacyS1State, Pandem
   component: PandemicLegacyS1Game,
 };
 
-export default pandemic_legacy_s1_plugin;
+export default pandemicLegacyS1Plugin;

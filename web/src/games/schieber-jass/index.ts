@@ -6,7 +6,7 @@ import { SchieberJassGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sch-jPlugin: GamePlugin<SchieberJassState, SchieberJassAction, typeof settings> = {
+export const schieberJassPlugin: GamePlugin<SchieberJassState, SchieberJassAction, typeof settings> = {
   id: "schieber-jass",
   title: "Schieber Jass",
   category: "cards",

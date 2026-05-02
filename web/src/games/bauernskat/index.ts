@@ -6,7 +6,7 @@ import { BauernSkatGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const bau-sPlugin: GamePlugin<BauernSkatState, BauernSkatAction, typeof settings> = {
+export const bauernskatPlugin: GamePlugin<BauernSkatState, BauernSkatAction, typeof settings> = {
   id: "bauernskat",
   title: "Bauernskat",
   category: "cards",

@@ -6,7 +6,7 @@ import { TelestrationsAfterDarkQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const telestrations_after_dark_quiz_plugin: GamePlugin<TelestrationsAfterDarkQuizState, TelestrationsAfterDarkQuizAction, typeof settings> = {
+export const telestrationsAfterDarkQuizPlugin: GamePlugin<TelestrationsAfterDarkQuizState, TelestrationsAfterDarkQuizAction, typeof settings> = {
   id: "telestrations-after-dark-quiz",
   title: "Telestrations: After Dark Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const telestrations_after_dark_quiz_plugin: GamePlugin<TelestrationsAfter
   component: TelestrationsAfterDarkQuizGame,
 };
 
-export default telestrations_after_dark_quiz_plugin;
+export default telestrationsAfterDarkQuizPlugin;

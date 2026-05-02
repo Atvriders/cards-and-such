@@ -6,7 +6,7 @@ import { KlaverjassenGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const klavPlugin: GamePlugin<KlaverjassenState, KlaverjassenAction, typeof settings> = {
+export const klaverjassenPlugin: GamePlugin<KlaverjassenState, KlaverjassenAction, typeof settings> = {
   id: "klaverjassen",
   title: "Klaverjassen",
   category: "cards",

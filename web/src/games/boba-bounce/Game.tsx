@@ -32,7 +32,8 @@ export function BobaBounceGame({ state, dispatch, onGameOver }: GameProps<BobaBo
               className="boba-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as BobaBounceAction)}
-              aria-label="boba-bounce">🧋</button>
+              aria-label="boba-bounce"
+              data-tooltip="Tap to score in Boba Bounce">🧋</button>
           );
         })}
       </div>

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const apothecaria_witch_plugin: GamePlugin<ApothecariaWitchState, ApothecariaWitchAction, typeof settings> = {
+export const apothecariaWitchPlugin: GamePlugin<ApothecariaWitchState, ApothecariaWitchAction, typeof settings> = {
   id: "apothecaria-witch",
   title: "Apothecaria: Witch",
   category: "board",
@@ -22,4 +22,4 @@ export const apothecaria_witch_plugin: GamePlugin<ApothecariaWitchState, Apothec
   component: ApothecariaWitchGame,
 };
 
-export default apothecaria_witch_plugin;
+export default apothecariaWitchPlugin;

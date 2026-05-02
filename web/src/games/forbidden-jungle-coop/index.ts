@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const forbidden_jungle_coop_plugin: GamePlugin<ForbiddenJungleCoopState, ForbiddenJungleCoopAction, typeof settings> = {
+export const forbiddenJungleCoopPlugin: GamePlugin<ForbiddenJungleCoopState, ForbiddenJungleCoopAction, typeof settings> = {
   id: "forbidden-jungle-coop",
   title: "Forbidden Jungle",
   category: "board",
@@ -22,4 +22,4 @@ export const forbidden_jungle_coop_plugin: GamePlugin<ForbiddenJungleCoopState, 
   component: ForbiddenJungleCoopGame,
 };
 
-export default forbidden_jungle_coop_plugin;
+export default forbiddenJungleCoopPlugin;

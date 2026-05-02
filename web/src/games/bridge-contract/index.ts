@@ -6,7 +6,7 @@ import { BridgeContractGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const br-cPlugin: GamePlugin<BridgeContractState, BridgeContractAction, typeof settings> = {
+export const bridgeContractPlugin: GamePlugin<BridgeContractState, BridgeContractAction, typeof settings> = {
   id: "bridge-contract",
   title: "Contract Bridge",
   category: "cards",

@@ -6,7 +6,7 @@ import { SpyfallTimeTravelGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const spyfall_time_travel_plugin: GamePlugin<SpyfallTimeTravelState, SpyfallTimeTravelAction, typeof settings> = {
+export const spyfallTimeTravelPlugin: GamePlugin<SpyfallTimeTravelState, SpyfallTimeTravelAction, typeof settings> = {
   id: "spyfall-time-travel",
   title: "Spyfall: Time Travel Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const spyfall_time_travel_plugin: GamePlugin<SpyfallTimeTravelState, Spyf
   component: SpyfallTimeTravelGame,
 };
 
-export default spyfall_time_travel_plugin;
+export default spyfallTimeTravelPlugin;

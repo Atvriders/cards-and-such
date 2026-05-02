@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const lotr_lcg_fellow_plugin: GamePlugin<LotrLcgFellowState, LotrLcgFellowAction, typeof settings> = {
+export const lotrLcgFellowPlugin: GamePlugin<LotrLcgFellowState, LotrLcgFellowAction, typeof settings> = {
   id: "lotr-lcg-fellow",
   title: "LOTR LCG: Fellowship",
   category: "board",
@@ -22,4 +22,4 @@ export const lotr_lcg_fellow_plugin: GamePlugin<LotrLcgFellowState, LotrLcgFello
   component: LotrLcgFellowGame,
 };
 
-export default lotr_lcg_fellow_plugin;
+export default lotrLcgFellowPlugin;

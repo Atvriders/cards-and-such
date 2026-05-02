@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { Spanish21CasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const sp21-cPlugin: GamePlugin<Spanish21CasState, Spanish21CasAction, typeof settings> = {
+export const spanish21CasPlugin: GamePlugin<Spanish21CasState, Spanish21CasAction, typeof settings> = {
   id: "spanish-21-cas", title: "Spanish 21", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Spanish 21 — no 10s in deck. Late surrender allowed.",

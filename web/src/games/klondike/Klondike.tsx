@@ -1,11 +1,13 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { KlondikeState, KlondikeAction, KlondikeSettings } from "./state.js";
 import { klondikeRuleset } from "./state.js";
 import { Pile } from "../../engines/tableau/Pile.js";
 import { useDragDrop } from "../../engines/tableau/useDragDrop.js";
-import { findAutoMove } from "../../engines/tableau/index.js";
+import { findAutoMove, canMove } from "../../engines/tableau/index.js";
 import "./Klondike.css";
+
+const PILE_ORDER = ["stock", "waste", "f1", "f2", "f3", "f4", "t1", "t2", "t3", "t4", "t5", "t6", "t7"] as const;
 
 export function Klondike({
   state,
@@ -13,8 +15,6 @@ export function Klondike({
   onGameOver,
   seed,
 }: GameProps<KlondikeState, KlondikeSettings>): JSX.Element {
-  const { onDragStart, onDragOver, onDrop } = useDragDrop();
-
   const handleMove = useCallback(
     (from: string, to: string, count: number) => {
       dispatch({ type: "move", fromPile: from, toPile: to, count } as KlondikeAction);
@@ -22,17 +22,28 @@ export function Klondike({
     [dispatch],
   );
 
+  const {
+    onDragStart,
+    onDragOver,
+    onDragEnter,
+    onDragLeave,
+    onDragEnd,
+    onDrop,
+    pileClassName,
+  } = useDragDrop({ ruleset: klondikeRuleset, piles: state.piles, onMove: handleMove });
+
+  // Keyboard cursor: which pile is highlighted, and whether a pickup is pending.
+  const [focusIdx, setFocusIdx] = useState<number>(6); // default to t1
+  const [selected, setSelected] = useState<{ pileId: string; count: number } | null>(null);
+
   const handleCardClick = useCallback(
     (pileId: string, indexFromTop: number) => {
       const pile = state.piles.find((p) => p.id === pileId);
       if (!pile) return;
-      // For non-tableau piles (waste, foundation) all cards are effectively face-up;
-      // faceUpCount is always 0 on those piles by design, so we must not use it as a gate.
       const faceUpCount =
         pile.kind === "tableau" ? (pile.faceUpCount ?? 0) : pile.cards.length;
-      // count = number of face-up cards from clicked position upward (inclusive)
       const count = indexFromTop + 1;
-      if (count > faceUpCount) return; // clicked a face-down card — shouldn't happen but guard anyway
+      if (count > faceUpCount) return;
       const target = findAutoMove(state.piles, pileId, count, klondikeRuleset);
       if (target) {
         dispatch({ type: "move", fromPile: pileId, toPile: target, count } as KlondikeAction);
@@ -55,6 +66,7 @@ export function Klondike({
     onGameOver(state.score);
   }
 
+  // Keyboard navigation: arrows to move focus, Enter to pick up / drop.
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement | null)?.tagName;
@@ -62,16 +74,81 @@ export function Klondike({
       if (e.key === "a" || e.key === "A") {
         e.preventDefault();
         dispatch({ type: "auto-move-to-foundation" } as KlondikeAction);
-      } else if (e.key === " " || e.key === "d" || e.key === "D") {
+        return;
+      }
+      if (e.key === "d" || e.key === "D") {
         e.preventDefault();
         handleStockClick();
+        return;
+      }
+      if (e.key === "Escape") {
+        setSelected(null);
+        return;
+      }
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        setFocusIdx((i) => (i + PILE_ORDER.length - 1) % PILE_ORDER.length);
+        return;
+      }
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        setFocusIdx((i) => (i + 1) % PILE_ORDER.length);
+        return;
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setFocusIdx((i) => (i >= 6 ? Math.max(0, i - 6) : 0));
+        return;
+      }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setFocusIdx((i) => (i < 6 ? Math.min(PILE_ORDER.length - 1, i + 6) : i));
+        return;
+      }
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const focusedId = PILE_ORDER[focusIdx]!;
+        if (focusedId === "stock") {
+          handleStockClick();
+          return;
+        }
+        if (!selected) {
+          // Pick up top card of focused pile.
+          const pile = state.piles.find((p) => p.id === focusedId);
+          if (!pile || pile.cards.length === 0) return;
+          const faceUp =
+            pile.kind === "tableau" ? (pile.faceUpCount ?? 0) : pile.cards.length;
+          if (faceUp <= 0) return;
+          setSelected({ pileId: focusedId, count: 1 });
+        } else {
+          // Drop selected onto focused pile (or auto-move if same pile).
+          if (selected.pileId === focusedId) {
+            const target = findAutoMove(state.piles, selected.pileId, selected.count, klondikeRuleset);
+            if (target) {
+              dispatch({ type: "move", fromPile: selected.pileId, toPile: target, count: selected.count } as KlondikeAction);
+            }
+          } else if (canMove(state.piles, { fromPile: selected.pileId, toPile: focusedId, count: selected.count }, klondikeRuleset)) {
+            dispatch({ type: "move", fromPile: selected.pileId, toPile: focusedId, count: selected.count } as KlondikeAction);
+          }
+          setSelected(null);
+        }
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [dispatch, handleStockClick]);
+  }, [dispatch, focusIdx, handleStockClick, selected, state.piles]);
 
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
+  const focusedId = PILE_ORDER[focusIdx];
+
+  const wrapClass = (id: string, base: string): string => {
+    const isFocus = focusedId === id;
+    const isSelected = selected?.pileId === id;
+    const dropClass = pileClassName(id, "", state.piles).trim();
+    return [base, isFocus ? "kbd-focus" : "", isSelected ? "kbd-selected" : "", dropClass]
+      .filter(Boolean)
+      .join(" ");
+  };
 
   return (
     <div className={`klondike${state.won ? " has-won" : ""}`}>
@@ -101,7 +178,7 @@ export function Klondike({
 
       <div className="klondike-top-row">
         <div
-          className="pile-wrapper stock-wrapper"
+          className={wrapClass("stock", "pile-wrapper stock-wrapper")}
           role="button"
           tabIndex={0}
           aria-label="Draw from stock"
@@ -111,17 +188,23 @@ export function Klondike({
           <Pile
             pile={getPile("stock")}
             onCardDragStart={onDragStart}
+            onCardDragEnd={onDragEnd}
             onDrop={(pileId) => onDrop(pileId, handleMove)}
             onDragOver={onDragOver}
+            onDragEnter={onDragEnter}
+            onDragLeave={onDragLeave}
           />
         </div>
 
-        <div className="pile-wrapper waste-wrapper">
+        <div className={wrapClass("waste", "pile-wrapper waste-wrapper")}>
           <Pile
             pile={getPile("waste")}
             onCardDragStart={onDragStart}
+            onCardDragEnd={onDragEnd}
             onDrop={(pileId) => onDrop(pileId, handleMove)}
             onDragOver={onDragOver}
+            onDragEnter={onDragEnter}
+            onDragLeave={onDragLeave}
             onCardClick={handleCardClick}
           />
         </div>
@@ -129,12 +212,15 @@ export function Klondike({
         <div className="klondike-spacer" />
 
         {["f1", "f2", "f3", "f4"].map((id) => (
-          <div key={id} className="pile-wrapper foundation-wrapper">
+          <div key={id} className={wrapClass(id, "pile-wrapper foundation-wrapper")}>
             <Pile
               pile={getPile(id)}
               onCardDragStart={onDragStart}
+              onCardDragEnd={onDragEnd}
               onDrop={(pileId) => onDrop(pileId, handleMove)}
               onDragOver={onDragOver}
+              onDragEnter={onDragEnter}
+              onDragLeave={onDragLeave}
             />
           </div>
         ))}
@@ -142,12 +228,15 @@ export function Klondike({
 
       <div className="klondike-tableau-row">
         {["t1", "t2", "t3", "t4", "t5", "t6", "t7"].map((id) => (
-          <div key={id} className="pile-wrapper">
+          <div key={id} className={wrapClass(id, "pile-wrapper")}>
             <Pile
               pile={getPile(id)}
               onCardDragStart={onDragStart}
+              onCardDragEnd={onDragEnd}
               onDrop={(pileId) => onDrop(pileId, handleMove)}
               onDragOver={onDragOver}
+              onDragEnter={onDragEnter}
+              onDragLeave={onDragLeave}
               onCardClick={handleCardClick}
             />
           </div>

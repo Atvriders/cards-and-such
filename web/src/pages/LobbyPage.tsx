@@ -8,6 +8,7 @@ import { Skeleton } from "../platform/Skeleton.js";
 import { StarRating, readRatings } from "../platform/StarRating.js";
 import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
+import { Badge, type BadgeKind } from "../platform/Badge.js";
 import "./LobbyPage.css";
 
 /**
@@ -240,6 +241,64 @@ const FEATURED_IDS = [
 ] as const;
 
 const PAGE_SIZE = 80;
+
+// How many trailing entries in the registry are treated as "recently added"
+// for the NEW badge. Registry order is the proxy since plugins lack timestamps.
+const NEW_GAME_WINDOW = 60;
+
+// Hand-picked sets that drive QUICK / CHALLENGING badges. Anything not in
+// either set gets no difficulty hint. Intentionally short — the badge is
+// meant to be rare so it stays meaningful.
+const QUICK_GAME_IDS = new Set<string>([
+  "wordle-mini",
+  "speed",
+  "war",
+  "snap",
+  "high-low",
+  "coin-flip",
+  "yacht-mini",
+  "pig-dice",
+  "ship-captain-crew",
+  "bar-dice-ship-captain",
+  "tic-tac-toe-cards",
+  "memory-pairs",
+  "klondike-1",
+]);
+
+const CHALLENGING_GAME_IDS = new Set<string>([
+  "spider",
+  "freecell",
+  "holdem",
+  "stud-7",
+  "omaha",
+  "bridge",
+  "go",
+  "chess",
+  "shogi",
+  "mahjong",
+  "skat",
+  "pinochle",
+  "canasta",
+  "hanabi",
+  "the-crew",
+]);
+
+// Order: NEW > CHALLENGING > QUICK > POPULAR (rating-based) > EDITORS-PICK.
+// Returns null when no badge should be shown.
+function pickBadgeKind(
+  gameId: string,
+  isNew: boolean,
+  userRating: number | undefined,
+): BadgeKind | null {
+  if (isNew) return "new";
+  if (CHALLENGING_GAME_IDS.has(gameId)) return "challenging";
+  if (QUICK_GAME_IDS.has(gameId)) return "quick";
+  if (typeof userRating === "number" && userRating >= TOP_RATED_THRESHOLD) {
+    return "popular";
+  }
+  if ((FEATURED_IDS as readonly string[]).includes(gameId)) return "editors-pick";
+  return null;
+}
 
 /**
  * A lobby entry is either a single un-grouped game or a family of

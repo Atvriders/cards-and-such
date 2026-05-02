@@ -59,7 +59,7 @@ export function CountryRoadMiniGame({ state, dispatch, onGameOver }: GameProps<C
         {VALUES.map((vv, i) => (
           <button key={vv} className={`countryroadmeadow-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as CountryRoadMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="countryroadmeadow-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as CountryRoadMiniAction)}>×</button>
+        <button className="countryroadmeadow-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as CountryRoadMiniAction)} aria-label="Clear" data-tooltip="Clear input">×</button>
       </div>
       <div className="countryroadmeadow-actions">
         <button className="countryroadmeadow-btn check" onClick={() => dispatch({ type: "check" } as CountryRoadMiniAction)}>Check</button>

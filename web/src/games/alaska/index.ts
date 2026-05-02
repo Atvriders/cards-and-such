@@ -6,7 +6,7 @@ import { AlaskaGame } from "./Game.js";
 
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const alaskaPlugin: GamePlugin<AlaskaState, AlaskaAction, typeof settings> = {
+export const alaskaSolPlugin: GamePlugin<AlaskaState, AlaskaAction, typeof settings> = {
   id: "alaska",
   title: "Alaska",
   category: "solitaire",

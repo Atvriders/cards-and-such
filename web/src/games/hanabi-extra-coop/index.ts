@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const hanabi_extra_coop_plugin: GamePlugin<HanabiExtraCoopState, HanabiExtraCoopAction, typeof settings> = {
+export const hanabiExtraCoopPlugin: GamePlugin<HanabiExtraCoopState, HanabiExtraCoopAction, typeof settings> = {
   id: "hanabi-extra-coop",
   title: "Hanabi: Extra",
   category: "board",
@@ -22,4 +22,4 @@ export const hanabi_extra_coop_plugin: GamePlugin<HanabiExtraCoopState, HanabiEx
   component: HanabiExtraCoopGame,
 };
 
-export default hanabi_extra_coop_plugin;
+export default hanabiExtraCoopPlugin;

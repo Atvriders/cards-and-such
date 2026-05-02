@@ -6,7 +6,7 @@ import { MysteriumVisionsGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mysterium_visions_plugin: GamePlugin<MysteriumVisionsState, MysteriumVisionsAction, typeof settings> = {
+export const mysteriumVisionsPlugin: GamePlugin<MysteriumVisionsState, MysteriumVisionsAction, typeof settings> = {
   id: "mysterium-visions",
   title: "Mysterium Visions",
   category: "board",
@@ -20,4 +20,4 @@ export const mysterium_visions_plugin: GamePlugin<MysteriumVisionsState, Mysteri
   component: MysteriumVisionsGame,
 };
 
-export default mysterium_visions_plugin;
+export default mysteriumVisionsPlugin;

@@ -6,7 +6,7 @@ import { KnockOutWhistGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const ko2-whPlugin: GamePlugin<KnockOutWhistState, KnockOutWhistAction, typeof settings> = {
+export const knockOutWhistPlugin: GamePlugin<KnockOutWhistState, KnockOutWhistAction, typeof settings> = {
   id: "knock-out-whist",
   title: "Knock Out Whist",
   category: "cards",

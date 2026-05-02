@@ -6,7 +6,7 @@ import { MariashGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const marPlugin: GamePlugin<MariashState, MariashAction, typeof settings> = {
+export const mariashPlugin: GamePlugin<MariashState, MariashAction, typeof settings> = {
   id: "mariash",
   title: "Mariáš",
   category: "cards",

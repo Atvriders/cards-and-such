@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { BanqueCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const banq-cPlugin: GamePlugin<BanqueCasState, BanqueCasAction, typeof settings> = {
+export const banqueCasPlugin: GamePlugin<BanqueCasState, BanqueCasAction, typeof settings> = {
   id: "banque-cas", title: "Baccarat Banque", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Baccarat Banque — fixed banker variant.",

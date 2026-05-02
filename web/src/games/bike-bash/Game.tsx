@@ -32,7 +32,8 @@ export function BikeBashGame({ state, dispatch, onGameOver }: GameProps<BikeBash
               className="bbs-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BikeBashAction)}
-              aria-label="vehicle">🚲</button>
+              aria-label="vehicle"
+              data-tooltip="Tap to score in Bike Bash">🚲</button>
           );
         })}
       </div>

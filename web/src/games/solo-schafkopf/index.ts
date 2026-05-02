@@ -6,7 +6,7 @@ import { SoloSchafkopfGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sol-skPlugin: GamePlugin<SoloSchafkopfState, SoloSchafkopfAction, typeof settings> = {
+export const soloSchafkopfPlugin: GamePlugin<SoloSchafkopfState, SoloSchafkopfAction, typeof settings> = {
   id: "solo-schafkopf",
   title: "Solo Schafkopf",
   category: "cards",

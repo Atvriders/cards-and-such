@@ -6,7 +6,7 @@ import { WitsWagersQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const wits_wagers_quiz_plugin: GamePlugin<WitsWagersQuizState, WitsWagersQuizAction, typeof settings> = {
+export const witsWagersQuizPlugin: GamePlugin<WitsWagersQuizState, WitsWagersQuizAction, typeof settings> = {
   id: "wits-wagers-quiz",
   title: "Wits & Wagers Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const wits_wagers_quiz_plugin: GamePlugin<WitsWagersQuizState, WitsWagers
   component: WitsWagersQuizGame,
 };
 
-export default wits_wagers_quiz_plugin;
+export default witsWagersQuizPlugin;

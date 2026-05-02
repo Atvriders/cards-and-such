@@ -32,7 +32,8 @@ export function CandyTapGame({ state, dispatch, onGameOver }: GameProps<CandyTap
               className="fc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CandyTapAction)}
-              aria-label="target">🍬</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Candy Tap">🍬</button>
           );
         })}
       </div>

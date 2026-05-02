@@ -32,7 +32,8 @@ export function ChickChaseGame({ state, dispatch, onGameOver }: GameProps<ChickC
               className="chk-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ChickChaseAction)}
-              aria-label="chick-chase">🐤</button>
+              aria-label="chick-chase"
+              data-tooltip="Tap to score in Chick Chase">🐤</button>
           );
         })}
       </div>

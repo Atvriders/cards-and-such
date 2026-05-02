@@ -32,7 +32,8 @@ export function AntAttackGame({ state, dispatch, onGameOver }: GameProps<AntAtta
               className="aa-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as AntAttackAction)}
-              aria-label="ant-attack">🐜</button>
+              aria-label="ant-attack"
+              data-tooltip="Tap to score in Ant Attack">🐜</button>
           );
         })}
       </div>

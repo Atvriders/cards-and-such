@@ -6,7 +6,7 @@ import { DeadlyDowagersGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const deadly_dowagers_plugin: GamePlugin<DeadlyDowagersState, DeadlyDowagersAction, typeof settings> = {
+export const deadlyDowagersPlugin: GamePlugin<DeadlyDowagersState, DeadlyDowagersAction, typeof settings> = {
   id: "deadly-dowagers",
   title: "Deadly Dowagers",
   category: "board",
@@ -20,4 +20,4 @@ export const deadly_dowagers_plugin: GamePlugin<DeadlyDowagersState, DeadlyDowag
   component: DeadlyDowagersGame,
 };
 
-export default deadly_dowagers_plugin;
+export default deadlyDowagersPlugin;

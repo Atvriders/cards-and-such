@@ -6,7 +6,7 @@ import { SkullBluffGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const skull_bluff_plugin: GamePlugin<SkullBluffState, SkullBluffAction, typeof settings> = {
+export const skullBluffPlugin: GamePlugin<SkullBluffState, SkullBluffAction, typeof settings> = {
   id: "skull-bluff",
   title: "Skull",
   category: "board",
@@ -20,4 +20,4 @@ export const skull_bluff_plugin: GamePlugin<SkullBluffState, SkullBluffAction, t
   component: SkullBluffGame,
 };
 
-export default skull_bluff_plugin;
+export default skullBluffPlugin;

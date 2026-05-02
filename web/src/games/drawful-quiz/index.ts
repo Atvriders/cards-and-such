@@ -6,7 +6,7 @@ import { DrawfulQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const drawful_quiz_plugin: GamePlugin<DrawfulQuizState, DrawfulQuizAction, typeof settings> = {
+export const drawfulQuizPlugin: GamePlugin<DrawfulQuizState, DrawfulQuizAction, typeof settings> = {
   id: "drawful-quiz",
   title: "Drawful Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const drawful_quiz_plugin: GamePlugin<DrawfulQuizState, DrawfulQuizAction
   component: DrawfulQuizGame,
 };
 
-export default drawful_quiz_plugin;
+export default drawfulQuizPlugin;

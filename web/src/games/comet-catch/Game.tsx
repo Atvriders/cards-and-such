@@ -31,7 +31,8 @@ export function CometCatchGame({ state, dispatch, onGameOver }: GameProps<CometC
               className="fc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CometCatchAction)}
-              aria-label="target">☄️</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Comet Catch">☄️</button>
           );
         })}
       </div>

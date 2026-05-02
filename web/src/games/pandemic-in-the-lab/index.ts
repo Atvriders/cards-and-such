@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pandemic_in_the_lab_plugin: GamePlugin<PandemicInTheLabState, PandemicInTheLabAction, typeof settings> = {
+export const pandemicInTheLabPlugin: GamePlugin<PandemicInTheLabState, PandemicInTheLabAction, typeof settings> = {
   id: "pandemic-in-the-lab",
   title: "Pandemic: In the Lab",
   category: "board",
@@ -22,4 +22,4 @@ export const pandemic_in_the_lab_plugin: GamePlugin<PandemicInTheLabState, Pande
   component: PandemicInTheLabGame,
 };
 
-export default pandemic_in_the_lab_plugin;
+export default pandemicInTheLabPlugin;

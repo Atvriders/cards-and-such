@@ -6,7 +6,7 @@ import { QuiplashQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const quiplash_quiz_plugin: GamePlugin<QuiplashQuizState, QuiplashQuizAction, typeof settings> = {
+export const quiplashQuizPlugin: GamePlugin<QuiplashQuizState, QuiplashQuizAction, typeof settings> = {
   id: "quiplash-quiz",
   title: "Quiplash Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const quiplash_quiz_plugin: GamePlugin<QuiplashQuizState, QuiplashQuizAct
   component: QuiplashQuizGame,
 };
 
-export default quiplash_quiz_plugin;
+export default quiplashQuizPlugin;

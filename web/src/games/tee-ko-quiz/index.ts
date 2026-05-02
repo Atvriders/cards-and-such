@@ -6,7 +6,7 @@ import { TeeKoQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tee_ko_quiz_plugin: GamePlugin<TeeKoQuizState, TeeKoQuizAction, typeof settings> = {
+export const teeKoQuizPlugin: GamePlugin<TeeKoQuizState, TeeKoQuizAction, typeof settings> = {
   id: "tee-ko-quiz",
   title: "Tee K.O. Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const tee_ko_quiz_plugin: GamePlugin<TeeKoQuizState, TeeKoQuizAction, typ
   component: TeeKoQuizGame,
 };
 
-export default tee_ko_quiz_plugin;
+export default teeKoQuizPlugin;

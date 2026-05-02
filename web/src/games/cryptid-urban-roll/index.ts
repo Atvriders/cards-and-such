@@ -6,7 +6,7 @@ import { CryptidUrbanRollGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cryptid_urban_roll_plugin: GamePlugin<CryptidUrbanRollState, CryptidUrbanRollAction, typeof settings> = {
+export const cryptidUrbanRollPlugin: GamePlugin<CryptidUrbanRollState, CryptidUrbanRollAction, typeof settings> = {
   id: "cryptid-urban-roll",
   title: "Cryptid: Urban Roll",
   category: "board",
@@ -20,4 +20,4 @@ export const cryptid_urban_roll_plugin: GamePlugin<CryptidUrbanRollState, Crypti
   component: CryptidUrbanRollGame,
 };
 
-export default cryptid_urban_roll_plugin;
+export default cryptidUrbanRollPlugin;

@@ -6,7 +6,7 @@ import { ClueMasterDetectiveGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const clue_master_detective_plugin: GamePlugin<ClueMasterDetectiveState, ClueMasterDetectiveAction, typeof settings> = {
+export const clueMasterDetectivePlugin: GamePlugin<ClueMasterDetectiveState, ClueMasterDetectiveAction, typeof settings> = {
   id: "clue-master-detective",
   title: "Clue: Master Detective",
   category: "board",
@@ -20,4 +20,4 @@ export const clue_master_detective_plugin: GamePlugin<ClueMasterDetectiveState, 
   component: ClueMasterDetectiveGame,
 };
 
-export default clue_master_detective_plugin;
+export default clueMasterDetectivePlugin;

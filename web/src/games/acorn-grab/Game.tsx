@@ -32,7 +32,8 @@ export function AcornGrabGame({ state, dispatch, onGameOver }: GameProps<AcornGr
               className="acg-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as AcornGrabAction)}
-              aria-label="acorn-grab">🌰</button>
+              aria-label="acorn-grab"
+              data-tooltip="Tap to score in Acorn Grab">🌰</button>
           );
         })}
       </div>

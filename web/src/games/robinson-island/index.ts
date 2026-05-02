@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const robinson_island_plugin: GamePlugin<RobinsonIslandState, RobinsonIslandAction, typeof settings> = {
+export const robinsonIslandPlugin: GamePlugin<RobinsonIslandState, RobinsonIslandAction, typeof settings> = {
   id: "robinson-island",
   title: "Robinson: Island",
   category: "board",
@@ -22,4 +22,4 @@ export const robinson_island_plugin: GamePlugin<RobinsonIslandState, RobinsonIsl
   component: RobinsonIslandGame,
 };
 
-export default robinson_island_plugin;
+export default robinsonIslandPlugin;

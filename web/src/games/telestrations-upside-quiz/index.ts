@@ -6,7 +6,7 @@ import { TelestrationsUpsideQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const telestrations_upside_quiz_plugin: GamePlugin<TelestrationsUpsideQuizState, TelestrationsUpsideQuizAction, typeof settings> = {
+export const telestrationsUpsideQuizPlugin: GamePlugin<TelestrationsUpsideQuizState, TelestrationsUpsideQuizAction, typeof settings> = {
   id: "telestrations-upside-quiz",
   title: "Telestrations: Upside Drawn Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const telestrations_upside_quiz_plugin: GamePlugin<TelestrationsUpsideQui
   component: TelestrationsUpsideQuizGame,
 };
 
-export default telestrations_upside_quiz_plugin;
+export default telestrationsUpsideQuizPlugin;

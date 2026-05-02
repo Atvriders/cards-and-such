@@ -6,7 +6,7 @@ import { CodenamesXxlGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const codenames_xxl_plugin: GamePlugin<CodenamesXxlState, CodenamesXxlAction, typeof settings> = {
+export const codenamesXxlPlugin: GamePlugin<CodenamesXxlState, CodenamesXxlAction, typeof settings> = {
   id: "codenames-xxl",
   title: "Codenames XXL",
   category: "board",
@@ -20,4 +20,4 @@ export const codenames_xxl_plugin: GamePlugin<CodenamesXxlState, CodenamesXxlAct
   component: CodenamesXxlGame,
 };
 
-export default codenames_xxl_plugin;
+export default codenamesXxlPlugin;

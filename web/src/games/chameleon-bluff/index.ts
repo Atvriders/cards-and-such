@@ -6,7 +6,7 @@ import { ChameleonBluffGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const chameleon_bluff_plugin: GamePlugin<ChameleonBluffState, ChameleonBluffAction, typeof settings> = {
+export const chameleonBluffPlugin: GamePlugin<ChameleonBluffState, ChameleonBluffAction, typeof settings> = {
   id: "chameleon-bluff",
   title: "The Chameleon",
   category: "board",
@@ -20,4 +20,4 @@ export const chameleon_bluff_plugin: GamePlugin<ChameleonBluffState, ChameleonBl
   component: ChameleonBluffGame,
 };
 
-export default chameleon_bluff_plugin;
+export default chameleonBluffPlugin;

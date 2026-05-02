@@ -6,7 +6,7 @@ import { MonikersQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const monikers_quiz_plugin: GamePlugin<MonikersQuizState, MonikersQuizAction, typeof settings> = {
+export const monikersQuizPlugin: GamePlugin<MonikersQuizState, MonikersQuizAction, typeof settings> = {
   id: "monikers-quiz",
   title: "Monikers Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const monikers_quiz_plugin: GamePlugin<MonikersQuizState, MonikersQuizAct
   component: MonikersQuizGame,
 };
 
-export default monikers_quiz_plugin;
+export default monikersQuizPlugin;

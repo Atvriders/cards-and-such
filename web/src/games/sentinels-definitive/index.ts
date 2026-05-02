@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sentinels_definitive_plugin: GamePlugin<SentinelsDefinitiveState, SentinelsDefinitiveAction, typeof settings> = {
+export const sentinelsDefinitivePlugin: GamePlugin<SentinelsDefinitiveState, SentinelsDefinitiveAction, typeof settings> = {
   id: "sentinels-definitive",
   title: "Sentinels: Definitive Edition",
   category: "board",
@@ -22,4 +22,4 @@ export const sentinels_definitive_plugin: GamePlugin<SentinelsDefinitiveState, S
   component: SentinelsDefinitiveGame,
 };
 
-export default sentinels_definitive_plugin;
+export default sentinelsDefinitivePlugin;

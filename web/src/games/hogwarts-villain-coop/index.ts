@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const hogwarts_villain_coop_plugin: GamePlugin<HogwartsVillainCoopState, HogwartsVillainCoopAction, typeof settings> = {
+export const hogwartsVillainCoopPlugin: GamePlugin<HogwartsVillainCoopState, HogwartsVillainCoopAction, typeof settings> = {
   id: "hogwarts-villain-coop",
   title: "Hogwarts Battle: Villains",
   category: "board",
@@ -22,4 +22,4 @@ export const hogwarts_villain_coop_plugin: GamePlugin<HogwartsVillainCoopState, 
   component: HogwartsVillainCoopGame,
 };
 
-export default hogwarts_villain_coop_plugin;
+export default hogwartsVillainCoopPlugin;

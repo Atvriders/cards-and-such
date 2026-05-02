@@ -6,7 +6,7 @@ import { SpyfallMiniGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const spyfall_mini_plugin: GamePlugin<SpyfallMiniState, SpyfallMiniAction, typeof settings> = {
+export const spyfallMiniPlugin: GamePlugin<SpyfallMiniState, SpyfallMiniAction, typeof settings> = {
   id: "spyfall-mini",
   title: "Spyfall Mini",
   category: "board",
@@ -20,4 +20,4 @@ export const spyfall_mini_plugin: GamePlugin<SpyfallMiniState, SpyfallMiniAction
   component: SpyfallMiniGame,
 };
 
-export default spyfall_mini_plugin;
+export default spyfallMiniPlugin;

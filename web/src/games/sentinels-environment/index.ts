@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sentinels_environment_plugin: GamePlugin<SentinelsEnvironmentState, SentinelsEnvironmentAction, typeof settings> = {
+export const sentinelsEnvironmentPlugin: GamePlugin<SentinelsEnvironmentState, SentinelsEnvironmentAction, typeof settings> = {
   id: "sentinels-environment",
   title: "Sentinels: Environment Mode",
   category: "board",
@@ -22,4 +22,4 @@ export const sentinels_environment_plugin: GamePlugin<SentinelsEnvironmentState,
   component: SentinelsEnvironmentGame,
 };
 
-export default sentinels_environment_plugin;
+export default sentinelsEnvironmentPlugin;

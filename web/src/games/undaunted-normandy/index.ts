@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const undaunted_normandy_plugin: GamePlugin<UndauntedNormandyState, UndauntedNormandyAction, typeof settings> = {
+export const undauntedNormandyPlugin: GamePlugin<UndauntedNormandyState, UndauntedNormandyAction, typeof settings> = {
   id: "undaunted-normandy",
   title: "Undaunted: Normandy",
   category: "board",
@@ -22,4 +22,4 @@ export const undaunted_normandy_plugin: GamePlugin<UndauntedNormandyState, Undau
   component: UndauntedNormandyGame,
 };
 
-export default undaunted_normandy_plugin;
+export default undauntedNormandyPlugin;

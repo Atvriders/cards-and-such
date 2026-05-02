@@ -59,7 +59,7 @@ export function BinairoMiniGame({ state, dispatch, onGameOver }: GameProps<Binai
         {VALUES.map((vv, i) => (
           <button key={vv} className={`binairobinary-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as BinairoMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="binairobinary-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as BinairoMiniAction)}>×</button>
+        <button className="binairobinary-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as BinairoMiniAction)} aria-label="Clear" data-tooltip="Clear input">×</button>
       </div>
       <div className="binairobinary-actions">
         <button className="binairobinary-btn check" onClick={() => dispatch({ type: "check" } as BinairoMiniAction)}>Check</button>

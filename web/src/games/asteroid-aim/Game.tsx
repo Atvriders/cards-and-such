@@ -32,7 +32,8 @@ export function AsteroidAimGame({ state, dispatch, onGameOver }: GameProps<Aster
               className="fc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"hit", id:p.id } as AsteroidAimAction)}
-              aria-label="asteroid-aim">☄️</button>
+              aria-label="asteroid-aim"
+              data-tooltip="Tap to score in Asteroid Aim">☄️</button>
           );
         })}
       </div>

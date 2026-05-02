@@ -6,7 +6,7 @@ import { ConceptDeductionGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const concept_deduction_plugin: GamePlugin<ConceptDeductionState, ConceptDeductionAction, typeof settings> = {
+export const conceptDeductionPlugin: GamePlugin<ConceptDeductionState, ConceptDeductionAction, typeof settings> = {
   id: "concept-deduction",
   title: "Concept",
   category: "board",
@@ -20,4 +20,4 @@ export const concept_deduction_plugin: GamePlugin<ConceptDeductionState, Concept
   component: ConceptDeductionGame,
 };
 
-export default concept_deduction_plugin;
+export default conceptDeductionPlugin;

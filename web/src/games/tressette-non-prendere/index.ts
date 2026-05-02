@@ -6,7 +6,7 @@ import { TressetteNonPrendereGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tre-npPlugin: GamePlugin<TressetteNonPrendereState, TressetteNonPrendereAction, typeof settings> = {
+export const tressetteNonPrenderePlugin: GamePlugin<TressetteNonPrendereState, TressetteNonPrendereAction, typeof settings> = {
   id: "tressette-non-prendere",
   title: "Tressette Non Prendere",
   category: "cards",

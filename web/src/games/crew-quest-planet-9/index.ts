@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const crew_quest_planet_9_plugin: GamePlugin<CrewQuestPlanet9State, CrewQuestPlanet9Action, typeof settings> = {
+export const crewQuestPlanet9Plugin: GamePlugin<CrewQuestPlanet9State, CrewQuestPlanet9Action, typeof settings> = {
   id: "crew-quest-planet-9",
   title: "The Crew: Planet Nine",
   category: "board",
@@ -22,4 +22,4 @@ export const crew_quest_planet_9_plugin: GamePlugin<CrewQuestPlanet9State, CrewQ
   component: CrewQuestPlanet9Game,
 };
 
-export default crew_quest_planet_9_plugin;
+export default crewQuestPlanet9Plugin;

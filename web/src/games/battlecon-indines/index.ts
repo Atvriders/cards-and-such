@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const battlecon_indines_plugin: GamePlugin<BattleconIndinesState, BattleconIndinesAction, typeof settings> = {
+export const battleconIndinesPlugin: GamePlugin<BattleconIndinesState, BattleconIndinesAction, typeof settings> = {
   id: "battlecon-indines",
   title: "BattleCON: Indines",
   category: "board",
@@ -22,4 +22,4 @@ export const battlecon_indines_plugin: GamePlugin<BattleconIndinesState, Battlec
   component: BattleconIndinesGame,
 };
 
-export default battlecon_indines_plugin;
+export default battleconIndinesPlugin;

@@ -6,7 +6,7 @@ import { HoneymoonBridgeGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const hm-bPlugin: GamePlugin<HoneymoonBridgeState, HoneymoonBridgeAction, typeof settings> = {
+export const honeymoonBridgePlugin: GamePlugin<HoneymoonBridgeState, HoneymoonBridgeAction, typeof settings> = {
   id: "honeymoon-bridge",
   title: "Honeymoon Bridge",
   category: "cards",

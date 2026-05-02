@@ -6,7 +6,7 @@ import { Trek12JungleGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const trek-12JunglePlugin: GamePlugin<Trek12JungleState, Trek12JungleAction, typeof settings> = {
+export const trek12JunglePlugin: GamePlugin<Trek12JungleState, Trek12JungleAction, typeof settings> = {
   id: "trek-12-jungle",
   title: "Trek 12 Jungle",
   category: "dice",

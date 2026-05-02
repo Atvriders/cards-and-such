@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const one_deck_galaxy_plugin: GamePlugin<OneDeckGalaxyState, OneDeckGalaxyAction, typeof settings> = {
+export const oneDeckGalaxyPlugin: GamePlugin<OneDeckGalaxyState, OneDeckGalaxyAction, typeof settings> = {
   id: "one-deck-galaxy",
   title: "One Deck Galaxy",
   category: "board",
@@ -22,4 +22,4 @@ export const one_deck_galaxy_plugin: GamePlugin<OneDeckGalaxyState, OneDeckGalax
   component: OneDeckGalaxyGame,
 };
 
-export default one_deck_galaxy_plugin;
+export default oneDeckGalaxyPlugin;

@@ -6,7 +6,7 @@ import { MightyGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mtyPlugin: GamePlugin<MightyState, MightyAction, typeof settings> = {
+export const mightyPlugin: GamePlugin<MightyState, MightyAction, typeof settings> = {
   id: "mighty",
   title: "Mighty",
   category: "cards",

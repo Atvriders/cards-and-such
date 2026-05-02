@@ -6,7 +6,7 @@ import { CryptidMiniGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cryptid_mini_plugin: GamePlugin<CryptidMiniState, CryptidMiniAction, typeof settings> = {
+export const cryptidMiniPlugin: GamePlugin<CryptidMiniState, CryptidMiniAction, typeof settings> = {
   id: "cryptid-mini",
   title: "Cryptid Mini",
   category: "board",
@@ -20,4 +20,4 @@ export const cryptid_mini_plugin: GamePlugin<CryptidMiniState, CryptidMiniAction
   component: CryptidMiniGame,
 };
 
-export default cryptid_mini_plugin;
+export default cryptidMiniPlugin;

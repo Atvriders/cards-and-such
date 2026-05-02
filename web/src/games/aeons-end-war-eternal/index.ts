@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const aeons_end_war_eternal_plugin: GamePlugin<AeonsEndWarEternalState, AeonsEndWarEternalAction, typeof settings> = {
+export const aeonsEndWarEternalPlugin: GamePlugin<AeonsEndWarEternalState, AeonsEndWarEternalAction, typeof settings> = {
   id: "aeons-end-war-eternal",
   title: "Aeon's End: War Eternal",
   category: "board",
@@ -22,4 +22,4 @@ export const aeons_end_war_eternal_plugin: GamePlugin<AeonsEndWarEternalState, A
   component: AeonsEndWarEternalGame,
 };
 
-export default aeons_end_war_eternal_plugin;
+export default aeonsEndWarEternalPlugin;

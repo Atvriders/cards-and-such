@@ -6,7 +6,7 @@ import { TressetteMortoGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tre-mPlugin: GamePlugin<TressetteMortoState, TressetteMortoAction, typeof settings> = {
+export const tressetteMortoPlugin: GamePlugin<TressetteMortoState, TressetteMortoAction, typeof settings> = {
   id: "tressette-morto",
   title: "Tressette Morto",
   category: "cards",

@@ -32,7 +32,8 @@ export function CoffeeCollectGame({ state, dispatch, onGameOver }: GameProps<Cof
               className="coffee-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as CoffeeCollectAction)}
-              aria-label="coffee-collect">☕</button>
+              aria-label="coffee-collect"
+              data-tooltip="Tap to score in Coffee Collect">☕</button>
           );
         })}
       </div>

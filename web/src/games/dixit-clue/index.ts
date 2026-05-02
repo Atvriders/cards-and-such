@@ -6,7 +6,7 @@ import { DixitClueGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dixit_clue_plugin: GamePlugin<DixitClueState, DixitClueAction, typeof settings> = {
+export const dixitCluePlugin: GamePlugin<DixitClueState, DixitClueAction, typeof settings> = {
   id: "dixit-clue",
   title: "Dixit Clue",
   category: "cards",
@@ -20,4 +20,4 @@ export const dixit_clue_plugin: GamePlugin<DixitClueState, DixitClueAction, type
   component: DixitClueGame,
 };
 
-export default dixit_clue_plugin;
+export default dixitCluePlugin;

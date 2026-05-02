@@ -6,7 +6,7 @@ import { RubberBridgeGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const rub-bPlugin: GamePlugin<RubberBridgeState, RubberBridgeAction, typeof settings> = {
+export const rubberBridgePlugin: GamePlugin<RubberBridgeState, RubberBridgeAction, typeof settings> = {
   id: "rubber-bridge",
   title: "Rubber Bridge",
   category: "cards",

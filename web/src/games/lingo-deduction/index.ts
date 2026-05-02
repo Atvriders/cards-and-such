@@ -6,7 +6,7 @@ import { LingoDeductionGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const lingo_deduction_plugin: GamePlugin<LingoDeductionState, LingoDeductionAction, typeof settings> = {
+export const lingoDeductionPlugin: GamePlugin<LingoDeductionState, LingoDeductionAction, typeof settings> = {
   id: "lingo-deduction",
   title: "Lingo",
   category: "board",
@@ -20,4 +20,4 @@ export const lingo_deduction_plugin: GamePlugin<LingoDeductionState, LingoDeduct
   component: LingoDeductionGame,
 };
 
-export default lingo_deduction_plugin;
+export default lingoDeductionPlugin;

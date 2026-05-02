@@ -6,7 +6,7 @@ import { UltiHungarianGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const ultiPlugin: GamePlugin<UltiHungarianState, UltiHungarianAction, typeof settings> = {
+export const ultiHungarianPlugin: GamePlugin<UltiHungarianState, UltiHungarianAction, typeof settings> = {
   id: "ulti-hungarian",
   title: "Ulti",
   category: "cards",

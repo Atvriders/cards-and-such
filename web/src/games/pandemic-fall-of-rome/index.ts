@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pandemic_fall_of_rome_plugin: GamePlugin<PandemicFallOfRomeState, PandemicFallOfRomeAction, typeof settings> = {
+export const pandemicFallOfRomePlugin: GamePlugin<PandemicFallOfRomeState, PandemicFallOfRomeAction, typeof settings> = {
   id: "pandemic-fall-of-rome",
   title: "Pandemic: Fall of Rome",
   category: "board",
@@ -22,4 +22,4 @@ export const pandemic_fall_of_rome_plugin: GamePlugin<PandemicFallOfRomeState, P
   component: PandemicFallOfRomeGame,
 };
 
-export default pandemic_fall_of_rome_plugin;
+export default pandemicFallOfRomePlugin;

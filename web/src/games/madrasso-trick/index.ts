@@ -6,7 +6,7 @@ import { MadrassoTrickGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const madrPlugin: GamePlugin<MadrassoTrickState, MadrassoTrickAction, typeof settings> = {
+export const madrassoTrickPlugin: GamePlugin<MadrassoTrickState, MadrassoTrickAction, typeof settings> = {
   id: "madrasso-trick",
   title: "Madrasso",
   category: "cards",

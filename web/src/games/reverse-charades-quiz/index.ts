@@ -6,7 +6,7 @@ import { ReverseCharadesQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const reverse_charades_quiz_plugin: GamePlugin<ReverseCharadesQuizState, ReverseCharadesQuizAction, typeof settings> = {
+export const reverseCharadesQuizPlugin: GamePlugin<ReverseCharadesQuizState, ReverseCharadesQuizAction, typeof settings> = {
   id: "reverse-charades-quiz",
   title: "Reverse Charades Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const reverse_charades_quiz_plugin: GamePlugin<ReverseCharadesQuizState, 
   component: ReverseCharadesQuizGame,
 };
 
-export default reverse_charades_quiz_plugin;
+export default reverseCharadesQuizPlugin;

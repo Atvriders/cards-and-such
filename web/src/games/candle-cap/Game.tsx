@@ -31,7 +31,8 @@ export function CandleCapGame({ state, dispatch, onGameOver }: GameProps<CandleC
               className="fc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CandleCapAction)}
-              aria-label="item">🕯️</button>
+              aria-label="item"
+              data-tooltip="Tap to score in Candle Cap">🕯️</button>
           );
         })}
       </div>

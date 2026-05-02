@@ -6,7 +6,7 @@ import { CirullaGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cirPlugin: GamePlugin<CirullaState, CirullaAction, typeof settings> = {
+export const cirullaPlugin: GamePlugin<CirullaState, CirullaAction, typeof settings> = {
   id: "cirulla",
   title: "Cirulla",
   category: "cards",

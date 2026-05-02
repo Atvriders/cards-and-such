@@ -59,7 +59,7 @@ export function AkariMiniGame({ state, dispatch, onGameOver }: GameProps<AkariMi
         {VALUES.map((vv, i) => (
           <button key={vv} className={`akariminiamber-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as AkariMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="akariminiamber-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as AkariMiniAction)}>×</button>
+        <button className="akariminiamber-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as AkariMiniAction)} aria-label="Clear" data-tooltip="Clear input">×</button>
       </div>
       <div className="akariminiamber-actions">
         <button className="akariminiamber-btn check" onClick={() => dispatch({ type: "check" } as AkariMiniAction)}>Check</button>

@@ -6,7 +6,7 @@ import { CheatBsGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cheat_bs_plugin: GamePlugin<CheatBsState, CheatBsAction, typeof settings> = {
+export const cheatBsPlugin: GamePlugin<CheatBsState, CheatBsAction, typeof settings> = {
   id: "cheat-bs",
   title: "Cheat / BS",
   category: "board",
@@ -20,4 +20,4 @@ export const cheat_bs_plugin: GamePlugin<CheatBsState, CheatBsAction, typeof set
   component: CheatBsGame,
 };
 
-export default cheat_bs_plugin;
+export default cheatBsPlugin;

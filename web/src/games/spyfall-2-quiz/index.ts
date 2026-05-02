@@ -6,7 +6,7 @@ import { Spyfall2QuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const spyfall_2_quiz_plugin: GamePlugin<Spyfall2QuizState, Spyfall2QuizAction, typeof settings> = {
+export const spyfall2QuizPlugin: GamePlugin<Spyfall2QuizState, Spyfall2QuizAction, typeof settings> = {
   id: "spyfall-2-quiz",
   title: "Spyfall 2 Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const spyfall_2_quiz_plugin: GamePlugin<Spyfall2QuizState, Spyfall2QuizAc
   component: Spyfall2QuizGame,
 };
 
-export default spyfall_2_quiz_plugin;
+export default spyfall2QuizPlugin;

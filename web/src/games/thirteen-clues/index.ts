@@ -6,7 +6,7 @@ import { ThirteenCluesGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const thirteen_clues_plugin: GamePlugin<ThirteenCluesState, ThirteenCluesAction, typeof settings> = {
+export const thirteenCluesPlugin: GamePlugin<ThirteenCluesState, ThirteenCluesAction, typeof settings> = {
   id: "thirteen-clues",
   title: "13 Clues",
   category: "board",
@@ -20,4 +20,4 @@ export const thirteen_clues_plugin: GamePlugin<ThirteenCluesState, ThirteenClues
   component: ThirteenCluesGame,
 };
 
-export default thirteen_clues_plugin;
+export default thirteenCluesPlugin;

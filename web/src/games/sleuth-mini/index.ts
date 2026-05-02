@@ -6,7 +6,7 @@ import { SleuthMiniGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sleuth_mini_plugin: GamePlugin<SleuthMiniState, SleuthMiniAction, typeof settings> = {
+export const sleuthMiniPlugin: GamePlugin<SleuthMiniState, SleuthMiniAction, typeof settings> = {
   id: "sleuth-mini",
   title: "Sleuth Mini",
   category: "board",
@@ -20,4 +20,4 @@ export const sleuth_mini_plugin: GamePlugin<SleuthMiniState, SleuthMiniAction, t
   component: SleuthMiniGame,
 };
 
-export default sleuth_mini_plugin;
+export default sleuthMiniPlugin;

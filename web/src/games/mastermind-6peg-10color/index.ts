@@ -6,7 +6,7 @@ import { Mastermind6peg10colorGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mastermind_6peg_10color_plugin: GamePlugin<Mastermind6peg10colorState, Mastermind6peg10colorAction, typeof settings> = {
+export const mastermind6peg10colorPlugin: GamePlugin<Mastermind6peg10colorState, Mastermind6peg10colorAction, typeof settings> = {
   id: "mastermind-6peg-10color",
   title: "Mastermind 6/10",
   category: "board",
@@ -20,4 +20,4 @@ export const mastermind_6peg_10color_plugin: GamePlugin<Mastermind6peg10colorSta
   component: Mastermind6peg10colorGame,
 };
 
-export default mastermind_6peg_10color_plugin;
+export default mastermind6peg10colorPlugin;

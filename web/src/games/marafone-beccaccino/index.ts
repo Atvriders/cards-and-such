@@ -6,7 +6,7 @@ import { MarafoneGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const marafPlugin: GamePlugin<MarafoneState, MarafoneAction, typeof settings> = {
+export const marafoneBeccaccinoPlugin: GamePlugin<MarafoneState, MarafoneAction, typeof settings> = {
   id: "marafone-beccaccino",
   title: "Marafone (Beccaccino)",
   category: "cards",

@@ -6,7 +6,7 @@ import { CharadesClassicQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const charades_classic_quiz_plugin: GamePlugin<CharadesClassicQuizState, CharadesClassicQuizAction, typeof settings> = {
+export const charadesClassicQuizPlugin: GamePlugin<CharadesClassicQuizState, CharadesClassicQuizAction, typeof settings> = {
   id: "charades-classic-quiz",
   title: "Charades Classic Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const charades_classic_quiz_plugin: GamePlugin<CharadesClassicQuizState, 
   component: CharadesClassicQuizGame,
 };
 
-export default charades_classic_quiz_plugin;
+export default charadesClassicQuizPlugin;

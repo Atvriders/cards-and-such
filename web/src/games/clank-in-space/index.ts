@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const clank_in_space_plugin: GamePlugin<ClankInSpaceState, ClankInSpaceAction, typeof settings> = {
+export const clankInSpacePlugin: GamePlugin<ClankInSpaceState, ClankInSpaceAction, typeof settings> = {
   id: "clank-in-space",
   title: "Clank! In! Space!",
   category: "board",
@@ -22,4 +22,4 @@ export const clank_in_space_plugin: GamePlugin<ClankInSpaceState, ClankInSpaceAc
   component: ClankInSpaceGame,
 };
 
-export default clank_in_space_plugin;
+export default clankInSpacePlugin;

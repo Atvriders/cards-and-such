@@ -6,7 +6,7 @@ import { TerziglioGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const terzPlugin: GamePlugin<TerziglioState, TerziglioAction, typeof settings> = {
+export const terziglioPlugin: GamePlugin<TerziglioState, TerziglioAction, typeof settings> = {
   id: "terziglio",
   title: "Terziglio",
   category: "cards",

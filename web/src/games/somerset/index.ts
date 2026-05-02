@@ -6,7 +6,7 @@ import { SomersetGame } from "./Game.js";
 
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const somersetPlugin: GamePlugin<SomersetState, SomersetAction, typeof settings> = {
+export const somersetSolPlugin: GamePlugin<SomersetState, SomersetAction, typeof settings> = {
   id: "somerset",
   title: "Somerset",
   category: "solitaire",

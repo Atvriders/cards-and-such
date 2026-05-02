@@ -6,7 +6,7 @@ import { DoubleDeckPinochleGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dd-pinPlugin: GamePlugin<DoubleDeckPinochleState, DoubleDeckPinochleAction, typeof settings> = {
+export const doubleDeckPinochlePlugin: GamePlugin<DoubleDeckPinochleState, DoubleDeckPinochleAction, typeof settings> = {
   id: "double-deck-pinochle",
   title: "Double-Deck Pinochle",
   category: "cards",

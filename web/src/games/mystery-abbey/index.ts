@@ -6,7 +6,7 @@ import { MysteryAbbeyGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mystery_abbey_plugin: GamePlugin<MysteryAbbeyState, MysteryAbbeyAction, typeof settings> = {
+export const mysteryAbbeyPlugin: GamePlugin<MysteryAbbeyState, MysteryAbbeyAction, typeof settings> = {
   id: "mystery-abbey",
   title: "Mystery of the Abbey",
   category: "board",
@@ -20,4 +20,4 @@ export const mystery_abbey_plugin: GamePlugin<MysteryAbbeyState, MysteryAbbeyAct
   component: MysteryAbbeyGame,
 };
 
-export default mystery_abbey_plugin;
+export default mysteryAbbeyPlugin;

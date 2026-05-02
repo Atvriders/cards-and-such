@@ -6,7 +6,7 @@ import { ResistanceQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const resistance_quiz_plugin: GamePlugin<ResistanceQuizState, ResistanceQuizAction, typeof settings> = {
+export const resistanceQuizPlugin: GamePlugin<ResistanceQuizState, ResistanceQuizAction, typeof settings> = {
   id: "resistance-quiz",
   title: "Resistance Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const resistance_quiz_plugin: GamePlugin<ResistanceQuizState, ResistanceQ
   component: ResistanceQuizGame,
 };
 
-export default resistance_quiz_plugin;
+export default resistanceQuizPlugin;

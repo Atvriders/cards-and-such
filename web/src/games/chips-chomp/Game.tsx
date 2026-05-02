@@ -32,7 +32,8 @@ export function ChipsChompGame({ state, dispatch, onGameOver }: GameProps<ChipsC
               className="chipschomp-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ChipsChompAction)}
-              aria-label="target">🍟</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Chips Chomp">🍟</button>
           );
         })}
       </div>

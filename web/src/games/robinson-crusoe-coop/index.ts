@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const robinson_crusoe_coop_plugin: GamePlugin<RobinsonCrusoeCoopState, RobinsonCrusoeCoopAction, typeof settings> = {
+export const robinsonCrusoeCoopPlugin: GamePlugin<RobinsonCrusoeCoopState, RobinsonCrusoeCoopAction, typeof settings> = {
   id: "robinson-crusoe-coop",
   title: "Robinson Crusoe",
   category: "board",
@@ -22,4 +22,4 @@ export const robinson_crusoe_coop_plugin: GamePlugin<RobinsonCrusoeCoopState, Ro
   component: RobinsonCrusoeCoopGame,
 };
 
-export default robinson_crusoe_coop_plugin;
+export default robinsonCrusoeCoopPlugin;

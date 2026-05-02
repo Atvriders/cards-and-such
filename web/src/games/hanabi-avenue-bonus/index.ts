@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const hanabi_avenue_bonus_plugin: GamePlugin<HanabiAvenueBonusState, HanabiAvenueBonusAction, typeof settings> = {
+export const hanabiAvenueBonusPlugin: GamePlugin<HanabiAvenueBonusState, HanabiAvenueBonusAction, typeof settings> = {
   id: "hanabi-avenue-bonus",
   title: "Hanabi: Avenue Bonus",
   category: "board",
@@ -22,4 +22,4 @@ export const hanabi_avenue_bonus_plugin: GamePlugin<HanabiAvenueBonusState, Hana
   component: HanabiAvenueBonusGame,
 };
 
-export default hanabi_avenue_bonus_plugin;
+export default hanabiAvenueBonusPlugin;

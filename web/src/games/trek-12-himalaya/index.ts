@@ -6,7 +6,7 @@ import { Trek12HimalayaGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const trek-12HimalayaPlugin: GamePlugin<Trek12HimalayaState, Trek12HimalayaAction, typeof settings> = {
+export const trek12HimalayaPlugin: GamePlugin<Trek12HimalayaState, Trek12HimalayaAction, typeof settings> = {
   id: "trek-12-himalaya",
   title: "Trek 12 Himalaya",
   category: "dice",

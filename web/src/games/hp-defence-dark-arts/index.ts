@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const hp_defence_dark_arts_plugin: GamePlugin<HpDefenceDarkArtsState, HpDefenceDarkArtsAction, typeof settings> = {
+export const hpDefenceDarkArtsPlugin: GamePlugin<HpDefenceDarkArtsState, HpDefenceDarkArtsAction, typeof settings> = {
   id: "hp-defence-dark-arts",
   title: "HP: Defence Against the Dark Arts",
   category: "board",
@@ -22,4 +22,4 @@ export const hp_defence_dark_arts_plugin: GamePlugin<HpDefenceDarkArtsState, HpD
   component: HpDefenceDarkArtsGame,
 };
 
-export default hp_defence_dark_arts_plugin;
+export default hpDefenceDarkArtsPlugin;

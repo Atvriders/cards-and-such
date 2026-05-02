@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const magic_maze_max_security_plugin: GamePlugin<MagicMazeMaxSecurityState, MagicMazeMaxSecurityAction, typeof settings> = {
+export const magicMazeMaxSecurityPlugin: GamePlugin<MagicMazeMaxSecurityState, MagicMazeMaxSecurityAction, typeof settings> = {
   id: "magic-maze-max-security",
   title: "Magic Maze: Max Security",
   category: "board",
@@ -22,4 +22,4 @@ export const magic_maze_max_security_plugin: GamePlugin<MagicMazeMaxSecurityStat
   component: MagicMazeMaxSecurityGame,
 };
 
-export default magic_maze_max_security_plugin;
+export default magicMazeMaxSecurityPlugin;

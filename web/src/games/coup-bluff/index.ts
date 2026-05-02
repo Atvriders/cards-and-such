@@ -6,7 +6,7 @@ import { CoupBluffGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const coup_bluff_plugin: GamePlugin<CoupBluffState, CoupBluffAction, typeof settings> = {
+export const coupBluffPlugin: GamePlugin<CoupBluffState, CoupBluffAction, typeof settings> = {
   id: "coup-bluff",
   title: "Coup: Bluff Puzzle",
   category: "board",
@@ -20,4 +20,4 @@ export const coup_bluff_plugin: GamePlugin<CoupBluffState, CoupBluffAction, type
   component: CoupBluffGame,
 };
 
-export default coup_bluff_plugin;
+export default coupBluffPlugin;

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const the_mind_coop_plugin: GamePlugin<TheMindCoopState, TheMindCoopAction, typeof settings> = {
+export const theMindCoopPlugin: GamePlugin<TheMindCoopState, TheMindCoopAction, typeof settings> = {
   id: "the-mind-coop",
   title: "The Mind",
   category: "board",
@@ -22,4 +22,4 @@ export const the_mind_coop_plugin: GamePlugin<TheMindCoopState, TheMindCoopActio
   component: TheMindCoopGame,
 };
 
-export default the_mind_coop_plugin;
+export default theMindCoopPlugin;

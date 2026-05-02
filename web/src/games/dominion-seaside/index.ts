@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dominion_seaside_plugin: GamePlugin<DominionSeasideState, DominionSeasideAction, typeof settings> = {
+export const dominionSeasidePlugin: GamePlugin<DominionSeasideState, DominionSeasideAction, typeof settings> = {
   id: "dominion-seaside",
   title: "Dominion: Seaside",
   category: "board",
@@ -22,4 +22,4 @@ export const dominion_seaside_plugin: GamePlugin<DominionSeasideState, DominionS
   component: DominionSeasideGame,
 };
 
-export default dominion_seaside_plugin;
+export default dominionSeasidePlugin;

@@ -6,7 +6,7 @@ import { CalabresellaGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const calaPlugin: GamePlugin<CalabresellaState, CalabresellaAction, typeof settings> = {
+export const calabresellaPlugin: GamePlugin<CalabresellaState, CalabresellaAction, typeof settings> = {
   id: "calabresella",
   title: "Calabresella",
   category: "cards",

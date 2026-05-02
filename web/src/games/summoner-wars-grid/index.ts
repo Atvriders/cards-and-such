@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const summoner_wars_grid_plugin: GamePlugin<SummonerWarsGridState, SummonerWarsGridAction, typeof settings> = {
+export const summonerWarsGridPlugin: GamePlugin<SummonerWarsGridState, SummonerWarsGridAction, typeof settings> = {
   id: "summoner-wars-grid",
   title: "Summoner Wars: Grid",
   category: "board",
@@ -22,4 +22,4 @@ export const summoner_wars_grid_plugin: GamePlugin<SummonerWarsGridState, Summon
   component: SummonerWarsGridGame,
 };
 
-export default summoner_wars_grid_plugin;
+export default summonerWarsGridPlugin;

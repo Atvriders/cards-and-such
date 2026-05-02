@@ -32,7 +32,8 @@ export function BagelBashGame({ state, dispatch, onGameOver }: GameProps<BagelBa
               className="bagelbash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BagelBashAction)}
-              aria-label="Bagel Bash">🥯</button>
+              aria-label="Bagel Bash"
+              data-tooltip="Tap to score in Bagel Bash">🥯</button>
           );
         })}
       </div>

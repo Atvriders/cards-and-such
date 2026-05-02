@@ -6,7 +6,7 @@ import { ApplesToApplesKidsQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const apples_to_apples_kids_quiz_plugin: GamePlugin<ApplesToApplesKidsQuizState, ApplesToApplesKidsQuizAction, typeof settings> = {
+export const applesToApplesKidsQuizPlugin: GamePlugin<ApplesToApplesKidsQuizState, ApplesToApplesKidsQuizAction, typeof settings> = {
   id: "apples-to-apples-kids-quiz",
   title: "Apples to Apples Kids Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const apples_to_apples_kids_quiz_plugin: GamePlugin<ApplesToApplesKidsQui
   component: ApplesToApplesKidsQuizGame,
 };
 
-export default apples_to_apples_kids_quiz_plugin;
+export default applesToApplesKidsQuizPlugin;

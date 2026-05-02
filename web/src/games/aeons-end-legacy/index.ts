@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const aeons_end_legacy_plugin: GamePlugin<AeonsEndLegacyState, AeonsEndLegacyAction, typeof settings> = {
+export const aeonsEndLegacyPlugin: GamePlugin<AeonsEndLegacyState, AeonsEndLegacyAction, typeof settings> = {
   id: "aeons-end-legacy",
   title: "Aeon's End Legacy",
   category: "board",
@@ -22,4 +22,4 @@ export const aeons_end_legacy_plugin: GamePlugin<AeonsEndLegacyState, AeonsEndLe
   component: AeonsEndLegacyGame,
 };
 
-export default aeons_end_legacy_plugin;
+export default aeonsEndLegacyPlugin;

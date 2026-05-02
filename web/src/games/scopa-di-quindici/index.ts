@@ -6,7 +6,7 @@ import { ScopaDiQuindiciGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sq15Plugin: GamePlugin<ScopaDiQuindiciState, ScopaDiQuindiciAction, typeof settings> = {
+export const scopaDiQuindiciPlugin: GamePlugin<ScopaDiQuindiciState, ScopaDiQuindiciAction, typeof settings> = {
   id: "scopa-di-quindici",
   title: "Scopa di Quindici",
   category: "cards",

@@ -6,7 +6,7 @@ import { PitchGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pitchPlugin: GamePlugin<PitchState, PitchAction, typeof settings> = {
+export const pitchCardPlugin: GamePlugin<PitchState, PitchAction, typeof settings> = {
   id: "pitch-card",
   title: "Pitch",
   category: "cards",

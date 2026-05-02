@@ -68,7 +68,7 @@ export function ArrowSudokuGame({ state, dispatch, onGameOver }: GameProps<Arrow
         {digits.map((d) => (
           <button key={d} className="arrowsudoku-num" onClick={() => dispatch({ type: "enter", digit: d } as ArrowSudokuAction)}>{d}</button>
         ))}
-        <button className="arrowsudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as ArrowSudokuAction)}>×</button>
+        <button className="arrowsudoku-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as ArrowSudokuAction)} aria-label="Clear" data-tooltip="Clear input">×</button>
       </div>
       <div className="arrowsudoku-actions">
         <button className="arrowsudoku-btn check" onClick={() => dispatch({ type: "check" } as ArrowSudokuAction)}>Check</button>

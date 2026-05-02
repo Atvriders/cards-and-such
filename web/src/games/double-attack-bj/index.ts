@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { DoubleAttackBjGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const da-bjPlugin: GamePlugin<DoubleAttackBjState, DoubleAttackBjAction, typeof settings> = {
+export const doubleAttackBjPlugin: GamePlugin<DoubleAttackBjState, DoubleAttackBjAction, typeof settings> = {
   id: "double-attack-bj", title: "Double Attack Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Double Attack Blackjack — Spanish deck (no 10s), BJ pays even money.",

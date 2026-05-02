@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const spirit_island_jagged_plugin: GamePlugin<SpiritIslandJaggedState, SpiritIslandJaggedAction, typeof settings> = {
+export const spiritIslandJaggedPlugin: GamePlugin<SpiritIslandJaggedState, SpiritIslandJaggedAction, typeof settings> = {
   id: "spirit-island-jagged",
   title: "Spirit Island: Jagged Earth",
   category: "board",
@@ -22,4 +22,4 @@ export const spirit_island_jagged_plugin: GamePlugin<SpiritIslandJaggedState, Sp
   component: SpiritIslandJaggedGame,
 };
 
-export default spirit_island_jagged_plugin;
+export default spiritIslandJaggedPlugin;

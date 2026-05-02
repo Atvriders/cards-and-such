@@ -6,7 +6,7 @@ import { CryptidDeductionGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const cryptid_deduction_plugin: GamePlugin<CryptidDeductionState, CryptidDeductionAction, typeof settings> = {
+export const cryptidDeductionPlugin: GamePlugin<CryptidDeductionState, CryptidDeductionAction, typeof settings> = {
   id: "cryptid-deduction",
   title: "Cryptid Deduction",
   category: "board",
@@ -20,4 +20,4 @@ export const cryptid_deduction_plugin: GamePlugin<CryptidDeductionState, Cryptid
   component: CryptidDeductionGame,
 };
 
-export default cryptid_deduction_plugin;
+export default cryptidDeductionPlugin;

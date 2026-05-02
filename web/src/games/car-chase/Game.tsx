@@ -32,7 +32,8 @@ export function CarChaseGame({ state, dispatch, onGameOver }: GameProps<CarChase
               className="ccc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CarChaseAction)}
-              aria-label="vehicle">🚗</button>
+              aria-label="vehicle"
+              data-tooltip="Tap to score in Car Chase">🚗</button>
           );
         })}
       </div>

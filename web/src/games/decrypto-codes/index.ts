@@ -6,7 +6,7 @@ import { DecryptoCodesGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const decrypto_codes_plugin: GamePlugin<DecryptoCodesState, DecryptoCodesAction, typeof settings> = {
+export const decryptoCodesPlugin: GamePlugin<DecryptoCodesState, DecryptoCodesAction, typeof settings> = {
   id: "decrypto-codes",
   title: "Decrypto Codes",
   category: "board",
@@ -20,4 +20,4 @@ export const decrypto_codes_plugin: GamePlugin<DecryptoCodesState, DecryptoCodes
   component: DecryptoCodesGame,
 };
 
-export default decrypto_codes_plugin;
+export default decryptoCodesPlugin;

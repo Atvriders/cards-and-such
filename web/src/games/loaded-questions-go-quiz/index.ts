@@ -6,7 +6,7 @@ import { LoadedQuestionsGoQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const loaded_questions_go_quiz_plugin: GamePlugin<LoadedQuestionsGoQuizState, LoadedQuestionsGoQuizAction, typeof settings> = {
+export const loadedQuestionsGoQuizPlugin: GamePlugin<LoadedQuestionsGoQuizState, LoadedQuestionsGoQuizAction, typeof settings> = {
   id: "loaded-questions-go-quiz",
   title: "Loaded Questions Go Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const loaded_questions_go_quiz_plugin: GamePlugin<LoadedQuestionsGoQuizSt
   component: LoadedQuestionsGoQuizGame,
 };
 
-export default loaded_questions_go_quiz_plugin;
+export default loadedQuestionsGoQuizPlugin;

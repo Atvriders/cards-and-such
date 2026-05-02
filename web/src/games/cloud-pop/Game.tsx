@@ -32,7 +32,8 @@ export function CloudPopGame({ state, dispatch, onGameOver }: GameProps<CloudPop
               className="fc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CloudPopAction)}
-              aria-label="target">☁️</button>
+              aria-label="target"
+              data-tooltip="Tap to score in Cloud Pop">☁️</button>
           );
         })}
       </div>

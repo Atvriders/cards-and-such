@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const aeons_end_coop_plugin: GamePlugin<AeonsEndCoopState, AeonsEndCoopAction, typeof settings> = {
+export const aeonsEndCoopPlugin: GamePlugin<AeonsEndCoopState, AeonsEndCoopAction, typeof settings> = {
   id: "aeons-end-coop",
   title: "Aeon's End Coop",
   category: "board",
@@ -22,4 +22,4 @@ export const aeons_end_coop_plugin: GamePlugin<AeonsEndCoopState, AeonsEndCoopAc
   component: AeonsEndCoopGame,
 };
 
-export default aeons_end_coop_plugin;
+export default aeonsEndCoopPlugin;

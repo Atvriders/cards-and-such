@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { EuropeanBjCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const eu-bj-cPlugin: GamePlugin<EuropeanBjCasState, EuropeanBjCasAction, typeof settings> = {
+export const europeanBjCasPlugin: GamePlugin<EuropeanBjCasState, EuropeanBjCasAction, typeof settings> = {
   id: "european-bj-cas", title: "European Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "European Blackjack — no hole card.",

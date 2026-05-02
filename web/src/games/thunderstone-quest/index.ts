@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const thunderstone_quest_plugin: GamePlugin<ThunderstoneQuestState, ThunderstoneQuestAction, typeof settings> = {
+export const thunderstoneQuestPlugin: GamePlugin<ThunderstoneQuestState, ThunderstoneQuestAction, typeof settings> = {
   id: "thunderstone-quest",
   title: "Thunderstone Quest",
   category: "board",
@@ -22,4 +22,4 @@ export const thunderstone_quest_plugin: GamePlugin<ThunderstoneQuestState, Thund
   component: ThunderstoneQuestGame,
 };
 
-export default thunderstone_quest_plugin;
+export default thunderstoneQuestPlugin;

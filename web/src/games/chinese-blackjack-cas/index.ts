@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { ChineseBlackjackCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const cn-bj-cPlugin: GamePlugin<ChineseBlackjackCasState, ChineseBlackjackCasAction, typeof settings> = {
+export const chineseBlackjackCasPlugin: GamePlugin<ChineseBlackjackCasState, ChineseBlackjackCasAction, typeof settings> = {
   id: "chinese-blackjack-cas", title: "Chinese Blackjack", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Chinese Blackjack — multi-deck variant.",

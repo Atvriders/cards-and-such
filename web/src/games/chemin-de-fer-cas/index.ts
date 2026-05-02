@@ -4,7 +4,7 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { CheminDeFerCasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const cdf-cPlugin: GamePlugin<CheminDeFerCasState, CheminDeFerCasAction, typeof settings> = {
+export const cheminDeFerCasPlugin: GamePlugin<CheminDeFerCasState, CheminDeFerCasAction, typeof settings> = {
   id: "chemin-de-fer-cas", title: "Chemin de Fer", category: "cards",
   players: { min: 1, max: 1, multiplayer: false },
   description: "Chemin de Fer — original baccarat, players take turns banking.",

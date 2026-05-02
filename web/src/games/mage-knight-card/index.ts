@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mage_knight_card_plugin: GamePlugin<MageKnightCardState, MageKnightCardAction, typeof settings> = {
+export const mageKnightCardPlugin: GamePlugin<MageKnightCardState, MageKnightCardAction, typeof settings> = {
   id: "mage-knight-card",
   title: "Mage Knight Card",
   category: "board",
@@ -22,4 +22,4 @@ export const mage_knight_card_plugin: GamePlugin<MageKnightCardState, MageKnight
   component: MageKnightCardGame,
 };
 
-export default mage_knight_card_plugin;
+export default mageKnightCardPlugin;

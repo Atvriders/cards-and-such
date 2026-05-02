@@ -6,7 +6,7 @@ import { BlackHoleGame } from "./Game.js";
 
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-export const blackHolePlugin: GamePlugin<BlackHoleState, BlackHoleAction, typeof settings> = {
+export const blackHoleSolPlugin: GamePlugin<BlackHoleState, BlackHoleAction, typeof settings> = {
   id: "black-hole",
   title: "Black Hole",
   category: "solitaire",

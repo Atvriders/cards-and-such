@@ -79,12 +79,12 @@ export function CoinCollector({
       {!state.gameOver && (
         <div className="cc-controls">
           <div className="cc-ctrl-row">
-            <button onClick={() => dispatch({ type: "move", dir: "up" } as CoinCollectorAction)}>▲</button>
+            <button onClick={() => dispatch({ type: "move", dir: "up" } as CoinCollectorAction)} aria-label="Up" data-tooltip="Move up">▲</button>
           </div>
           <div className="cc-ctrl-row">
-            <button onClick={() => dispatch({ type: "move", dir: "left" } as CoinCollectorAction)}>◀</button>
-            <button onClick={() => dispatch({ type: "move", dir: "down" } as CoinCollectorAction)}>▼</button>
-            <button onClick={() => dispatch({ type: "move", dir: "right" } as CoinCollectorAction)}>▶</button>
+            <button onClick={() => dispatch({ type: "move", dir: "left" } as CoinCollectorAction)} aria-label="Previous" data-tooltip="Previous">◀</button>
+            <button onClick={() => dispatch({ type: "move", dir: "down" } as CoinCollectorAction)} aria-label="Down" data-tooltip="Move down">▼</button>
+            <button onClick={() => dispatch({ type: "move", dir: "right" } as CoinCollectorAction)} aria-label="Next" data-tooltip="Next">▶</button>
           </div>
           <div className="cc-hint">Arrow keys / WASD</div>
         </div>

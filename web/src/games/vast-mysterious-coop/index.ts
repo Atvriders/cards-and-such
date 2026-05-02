@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const vast_mysterious_coop_plugin: GamePlugin<VastMysteriousCoopState, VastMysteriousCoopAction, typeof settings> = {
+export const vastMysteriousCoopPlugin: GamePlugin<VastMysteriousCoopState, VastMysteriousCoopAction, typeof settings> = {
   id: "vast-mysterious-coop",
   title: "Vast: Mysterious Manor",
   category: "board",
@@ -22,4 +22,4 @@ export const vast_mysterious_coop_plugin: GamePlugin<VastMysteriousCoopState, Va
   component: VastMysteriousCoopGame,
 };
 
-export default vast_mysterious_coop_plugin;
+export default vastMysteriousCoopPlugin;

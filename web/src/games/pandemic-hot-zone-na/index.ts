@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pandemic_hot_zone_na_plugin: GamePlugin<PandemicHotZoneNaState, PandemicHotZoneNaAction, typeof settings> = {
+export const pandemicHotZoneNaPlugin: GamePlugin<PandemicHotZoneNaState, PandemicHotZoneNaAction, typeof settings> = {
   id: "pandemic-hot-zone-na",
   title: "Pandemic Hot Zone N.A.",
   category: "board",
@@ -22,4 +22,4 @@ export const pandemic_hot_zone_na_plugin: GamePlugin<PandemicHotZoneNaState, Pan
   component: PandemicHotZoneNaGame,
 };
 
-export default pandemic_hot_zone_na_plugin;
+export default pandemicHotZoneNaPlugin;

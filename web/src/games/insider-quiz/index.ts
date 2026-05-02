@@ -6,7 +6,7 @@ import { InsiderQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const insider_quiz_plugin: GamePlugin<InsiderQuizState, InsiderQuizAction, typeof settings> = {
+export const insiderQuizPlugin: GamePlugin<InsiderQuizState, InsiderQuizAction, typeof settings> = {
   id: "insider-quiz",
   title: "Insider",
   category: "board",
@@ -20,4 +20,4 @@ export const insider_quiz_plugin: GamePlugin<InsiderQuizState, InsiderQuizAction
   component: InsiderQuizGame,
 };
 
-export default insider_quiz_plugin;
+export default insiderQuizPlugin;

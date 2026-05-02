@@ -32,7 +32,8 @@ export function BunnyBounceGame({ state, dispatch, onGameOver }: GameProps<Bunny
               className="bb-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BunnyBounceAction)}
-              aria-label="bunny-bounce">🐰</button>
+              aria-label="bunny-bounce"
+              data-tooltip="Tap to score in Bunny Bounce">🐰</button>
           );
         })}
       </div>

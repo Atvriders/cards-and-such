@@ -6,7 +6,7 @@ import { WouldYouRatherPickGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const would_you_rather_pick_plugin: GamePlugin<WouldYouRatherPickState, WouldYouRatherPickAction, typeof settings> = {
+export const wouldYouRatherPickPlugin: GamePlugin<WouldYouRatherPickState, WouldYouRatherPickAction, typeof settings> = {
   id: "would-you-rather-pick",
   title: "Would You Rather",
   category: "cards",
@@ -20,4 +20,4 @@ export const would_you_rather_pick_plugin: GamePlugin<WouldYouRatherPickState, W
   component: WouldYouRatherPickGame,
 };
 
-export default would_you_rather_pick_plugin;
+export default wouldYouRatherPickPlugin;

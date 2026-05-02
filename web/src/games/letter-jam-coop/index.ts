@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const letter_jam_coop_plugin: GamePlugin<LetterJamCoopState, LetterJamCoopAction, typeof settings> = {
+export const letterJamCoopPlugin: GamePlugin<LetterJamCoopState, LetterJamCoopAction, typeof settings> = {
   id: "letter-jam-coop",
   title: "Letter Jam",
   category: "board",
@@ -22,4 +22,4 @@ export const letter_jam_coop_plugin: GamePlugin<LetterJamCoopState, LetterJamCoo
   component: LetterJamCoopGame,
 };
 
-export default letter_jam_coop_plugin;
+export default letterJamCoopPlugin;

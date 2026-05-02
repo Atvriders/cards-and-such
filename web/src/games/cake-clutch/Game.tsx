@@ -31,7 +31,8 @@ export function CakeClutchGame({ state, dispatch, onGameOver }: GameProps<CakeCl
               className="fc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CakeClutchAction)}
-              aria-label="item">🍰</button>
+              aria-label="item"
+              data-tooltip="Tap to score in Cake Clutch">🍰</button>
           );
         })}
       </div>

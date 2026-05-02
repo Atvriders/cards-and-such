@@ -6,7 +6,7 @@ import { BidWhistGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const bid-whPlugin: GamePlugin<BidWhistState, BidWhistAction, typeof settings> = {
+export const bidWhistPlugin: GamePlugin<BidWhistState, BidWhistAction, typeof settings> = {
   id: "bid-whist",
   title: "Bid Whist",
   category: "cards",

@@ -6,7 +6,7 @@ import { MafiaQuizGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mafia_quiz_plugin: GamePlugin<MafiaQuizState, MafiaQuizAction, typeof settings> = {
+export const mafiaQuizPlugin: GamePlugin<MafiaQuizState, MafiaQuizAction, typeof settings> = {
   id: "mafia-quiz",
   title: "Mafia Quiz",
   category: "cards",
@@ -20,4 +20,4 @@ export const mafia_quiz_plugin: GamePlugin<MafiaQuizState, MafiaQuizAction, type
   component: MafiaQuizGame,
 };
 
-export default mafia_quiz_plugin;
+export default mafiaQuizPlugin;

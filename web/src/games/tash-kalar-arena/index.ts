@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const tash_kalar_arena_plugin: GamePlugin<TashKalarArenaState, TashKalarArenaAction, typeof settings> = {
+export const tashKalarArenaPlugin: GamePlugin<TashKalarArenaState, TashKalarArenaAction, typeof settings> = {
   id: "tash-kalar-arena",
   title: "Tash-Kalar: Arena",
   category: "board",
@@ -22,4 +22,4 @@ export const tash_kalar_arena_plugin: GamePlugin<TashKalarArenaState, TashKalarA
   component: TashKalarArenaGame,
 };
 
-export default tash_kalar_arena_plugin;
+export default tashKalarArenaPlugin;

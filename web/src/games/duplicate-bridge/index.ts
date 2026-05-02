@@ -6,7 +6,7 @@ import { DuplicateBridgeGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const dup-bPlugin: GamePlugin<DuplicateBridgeState, DuplicateBridgeAction, typeof settings> = {
+export const duplicateBridgePlugin: GamePlugin<DuplicateBridgeState, DuplicateBridgeAction, typeof settings> = {
   id: "duplicate-bridge",
   title: "Duplicate Bridge",
   category: "cards",

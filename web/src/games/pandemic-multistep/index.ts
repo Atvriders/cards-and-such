@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const pandemic_multistep_plugin: GamePlugin<PandemicMultistepState, PandemicMultistepAction, typeof settings> = {
+export const pandemicMultistepPlugin: GamePlugin<PandemicMultistepState, PandemicMultistepAction, typeof settings> = {
   id: "pandemic-multistep",
   title: "Pandemic Multi-Step",
   category: "board",
@@ -22,4 +22,4 @@ export const pandemic_multistep_plugin: GamePlugin<PandemicMultistepState, Pande
   component: PandemicMultistepGame,
 };
 
-export default pandemic_multistep_plugin;
+export default pandemicMultistepPlugin;

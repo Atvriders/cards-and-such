@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const forbidden_island_coop_plugin: GamePlugin<ForbiddenIslandCoopState, ForbiddenIslandCoopAction, typeof settings> = {
+export const forbiddenIslandCoopPlugin: GamePlugin<ForbiddenIslandCoopState, ForbiddenIslandCoopAction, typeof settings> = {
   id: "forbidden-island-coop",
   title: "Forbidden Island",
   category: "board",
@@ -22,4 +22,4 @@ export const forbidden_island_coop_plugin: GamePlugin<ForbiddenIslandCoopState, 
   component: ForbiddenIslandCoopGame,
 };
 
-export default forbidden_island_coop_plugin;
+export default forbiddenIslandCoopPlugin;

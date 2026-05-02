@@ -6,7 +6,7 @@ import { CoincheGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const coinPlugin: GamePlugin<CoincheState, CoincheAction, typeof settings> = {
+export const coinchePlugin: GamePlugin<CoincheState, CoincheAction, typeof settings> = {
   id: "coinche",
   title: "Coinche",
   category: "cards",

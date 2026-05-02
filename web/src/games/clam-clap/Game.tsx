@@ -32,7 +32,8 @@ export function ClamClapGame({ state, dispatch, onGameOver }: GameProps<ClamClap
               className="clc-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as ClamClapAction)}
-              aria-label="clam-clap">🦪</button>
+              aria-label="clam-clap"
+              data-tooltip="Tap to score in Clam Clap">🦪</button>
           );
         })}
       </div>

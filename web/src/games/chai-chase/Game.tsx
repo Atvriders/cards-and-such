@@ -32,7 +32,8 @@ export function ChaiChaseGame({ state, dispatch, onGameOver }: GameProps<ChaiCha
               className="chai-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:c.id } as ChaiChaseAction)}
-              aria-label="chai-chase">🫖</button>
+              aria-label="chai-chase"
+              data-tooltip="Tap to score in Chai Chase">🫖</button>
           );
         })}
       </div>

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const sentinels_multiverse_coop_plugin: GamePlugin<SentinelsMultiverseCoopState, SentinelsMultiverseCoopAction, typeof settings> = {
+export const sentinelsMultiverseCoopPlugin: GamePlugin<SentinelsMultiverseCoopState, SentinelsMultiverseCoopAction, typeof settings> = {
   id: "sentinels-multiverse-coop",
   title: "Sentinels of the Multiverse",
   category: "board",
@@ -22,4 +22,4 @@ export const sentinels_multiverse_coop_plugin: GamePlugin<SentinelsMultiverseCoo
   component: SentinelsMultiverseCoopGame,
 };
 
-export default sentinels_multiverse_coop_plugin;
+export default sentinelsMultiverseCoopPlugin;

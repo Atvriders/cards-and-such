@@ -6,7 +6,7 @@ import { BlackBoxMiniGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const black_box_mini_plugin: GamePlugin<BlackBoxMiniState, BlackBoxMiniAction, typeof settings> = {
+export const blackBoxMiniPlugin: GamePlugin<BlackBoxMiniState, BlackBoxMiniAction, typeof settings> = {
   id: "black-box-mini",
   title: "Black Box Mini",
   category: "board",
@@ -20,4 +20,4 @@ export const black_box_mini_plugin: GamePlugin<BlackBoxMiniState, BlackBoxMiniAc
   component: BlackBoxMiniGame,
 };
 
-export default black_box_mini_plugin;
+export default blackBoxMiniPlugin;

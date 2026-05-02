@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const aeons_end_mages_plugin: GamePlugin<AeonsEndMagesState, AeonsEndMagesAction, typeof settings> = {
+export const aeonsEndMagesPlugin: GamePlugin<AeonsEndMagesState, AeonsEndMagesAction, typeof settings> = {
   id: "aeons-end-mages",
   title: "Aeon's End: Mages",
   category: "board",
@@ -22,4 +22,4 @@ export const aeons_end_mages_plugin: GamePlugin<AeonsEndMagesState, AeonsEndMage
   component: AeonsEndMagesGame,
 };
 
-export default aeons_end_mages_plugin;
+export default aeonsEndMagesPlugin;

@@ -8,7 +8,7 @@ const settings = {
 } as const;
 type S = SettingsOf<typeof settings>;
 
-export const spirit_island_coop_plugin: GamePlugin<SpiritIslandCoopState, SpiritIslandCoopAction, typeof settings> = {
+export const spiritIslandCoopPlugin: GamePlugin<SpiritIslandCoopState, SpiritIslandCoopAction, typeof settings> = {
   id: "spirit-island-coop",
   title: "Spirit Island",
   category: "board",
@@ -22,4 +22,4 @@ export const spirit_island_coop_plugin: GamePlugin<SpiritIslandCoopState, Spirit
   component: SpiritIslandCoopGame,
 };
 
-export default spirit_island_coop_plugin;
+export default spiritIslandCoopPlugin;

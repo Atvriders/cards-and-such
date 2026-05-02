@@ -6,7 +6,7 @@ import { MastermindNoRepeatsGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-export const mastermind_no_repeats_plugin: GamePlugin<MastermindNoRepeatsState, MastermindNoRepeatsAction, typeof settings> = {
+export const mastermindNoRepeatsPlugin: GamePlugin<MastermindNoRepeatsState, MastermindNoRepeatsAction, typeof settings> = {
   id: "mastermind-no-repeats",
   title: "Mastermind No Repeats",
   category: "board",
@@ -20,4 +20,4 @@ export const mastermind_no_repeats_plugin: GamePlugin<MastermindNoRepeatsState, 
   component: MastermindNoRepeatsGame,
 };
 
-export default mastermind_no_repeats_plugin;
+export default mastermindNoRepeatsPlugin;

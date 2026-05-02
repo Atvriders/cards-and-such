@@ -47,7 +47,6 @@ export function TicTacToeCards({
                 </span>
               ) : null}
             </button>
-          </div>
           );
         })}
       </div>
@@ -56,6 +55,7 @@ export function TicTacToeCards({
           {state.result === "P" ? "Victory!" : state.result === "C" ? "Defeat" : "Tie"} — {state.score} pts
         </div>
       )}
+    </div>
     </div>
   );
 }
