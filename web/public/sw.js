@@ -1,6 +1,8 @@
 /* Cards and Such service worker — basic offline-first for static assets,
-   network-first for API/WebSocket-adjacent requests. */
-const CACHE_NAME = "cards-and-such-v1";
+   network-first for API/WebSocket-adjacent requests, with a graceful
+   navigation fallback that lets the SPA render the /offline route when
+   the network is unreachable. */
+const CACHE_NAME = "cards-and-such-v2";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -22,6 +24,13 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+/** True if the request is a top-level page navigation (HTML document). */
+function isNavigationRequest(req) {
+  if (req.mode === "navigate") return true;
+  const accept = req.headers.get("accept") || "";
+  return req.method === "GET" && accept.includes("text/html");
+}
+
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
@@ -35,6 +44,37 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname.startsWith("/api") || url.pathname.startsWith("/ws")) {
     event.respondWith(
       fetch(req).catch(() => caches.match(req).then((r) => r || Response.error())),
+    );
+    return;
+  }
+
+  // Navigation requests: try network first so users get fresh HTML, but
+  // fall back to the cached SPA shell when offline. The SPA's router
+  // will render /offline (or the requested path) once it boots.
+  if (isNavigationRequest(req)) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          // Refresh the cached shell on every successful navigation hit.
+          if (res && res.status === 200 && res.type === "basic") {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put("/index.html", clone));
+          }
+          return res;
+        })
+        .catch(async () => {
+          const cached =
+            (await caches.match(req)) ||
+            (await caches.match("/index.html")) ||
+            (await caches.match("/"));
+          return (
+            cached ||
+            new Response(
+              "<!doctype html><meta charset=utf-8><title>Offline</title><p>Offline.",
+              { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } },
+            )
+          );
+        }),
     );
     return;
   }

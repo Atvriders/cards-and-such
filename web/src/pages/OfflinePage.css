@@ -1,0 +1,151 @@
+/* OfflinePage.css — graceful "you're offline" shell with recent-games list. */
+
+.offline-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.offline-hero {
+  text-align: center;
+  margin: 0.5rem 0 1.75rem;
+}
+.offline-svg {
+  width: clamp(150px, 40vw, 220px);
+  height: auto;
+  display: block;
+  margin: 0 auto 0.4rem;
+  filter: drop-shadow(0 12px 28px rgba(99, 102, 241, 0.25));
+}
+.offline-title {
+  font-size: clamp(1.6rem, 5.2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4rem;
+  background: linear-gradient(
+    90deg,
+    #f0abfc 0%,
+    #c4b5fd 33%,
+    #93c5fd 66%,
+    #67e8f9 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.offline-tag {
+  margin: 0 auto 0.6rem;
+  max-width: 520px;
+  color: var(--text-300, #cbd5e1);
+  font-size: clamp(0.92rem, 2.2vw, 1rem);
+  line-height: 1.55;
+}
+.offline-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(15, 18, 32, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  color: var(--text-300, #cbd5e1);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.offline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #94a3b8;
+  box-shadow: 0 0 0 0 rgba(148, 163, 184, 0.5);
+}
+.offline-dot.is-online {
+  background: #4ade80;
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.18);
+}
+.offline-dot.is-offline {
+  background: #f87171;
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.18);
+}
+
+.offline-section {
+  margin: 0 0 1.4rem;
+  background: rgba(15, 18, 32, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+}
+.offline-section-title {
+  font-size: 1.05rem;
+  margin: 0 0 0.7rem;
+}
+.offline-section-hint {
+  margin: 0.6rem 0 0;
+  color: var(--text-400, #94a3b8);
+  font-size: 0.9rem;
+}
+.offline-link {
+  color: #c4b5fd;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(196, 181, 253, 0.4);
+}
+.offline-link:hover { color: #ddd6fe; border-bottom-color: rgba(221, 214, 254, 0.7); }
+
+.offline-empty {
+  margin: 0;
+  color: var(--text-400, #94a3b8);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.offline-recents {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+.offline-recent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(30, 27, 75, 0.35);
+  border: 1px solid rgba(129, 140, 248, 0.22);
+  color: #e0e3ff;
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+.offline-recent:hover {
+  border-color: rgba(129, 140, 248, 0.55);
+  background: rgba(30, 27, 75, 0.55);
+  transform: translateY(-1px);
+}
+.offline-recent-title { font-weight: 600; }
+.offline-recent-cta {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #67e8f9;
+}
+
+.offline-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-300, #cbd5e1);
+  font-size: 0.92rem;
+}
+.offline-list li { margin: 0.25rem 0; line-height: 1.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .offline-recent,
+  .offline-recent:hover {
+    transition: none;
+    transform: none;
+  }
+}

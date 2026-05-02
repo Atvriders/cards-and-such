@@ -1,0 +1,153 @@
+/* NotFoundPage.css — friendly 404 with hero, suggestions, and a search box. */
+
+.nf-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.nf-hero {
+  text-align: center;
+  margin: 0.5rem 0 1.75rem;
+}
+.nf-svg {
+  width: clamp(140px, 38vw, 200px);
+  height: auto;
+  display: block;
+  margin: 0 auto 0.6rem;
+  filter: drop-shadow(0 12px 28px rgba(99, 102, 241, 0.25));
+}
+.nf-title {
+  font-size: clamp(1.6rem, 5.2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(
+    90deg,
+    #f0abfc 0%,
+    #c4b5fd 33%,
+    #93c5fd 66%,
+    #67e8f9 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.nf-tag {
+  margin: 0 auto;
+  max-width: 520px;
+  color: var(--text-300, #cbd5e1);
+  font-size: clamp(0.92rem, 2.2vw, 1rem);
+  line-height: 1.55;
+}
+.nf-path {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 0.85em;
+  background: rgba(129, 140, 248, 0.10);
+  border: 1px solid rgba(129, 140, 248, 0.22);
+  border-radius: 5px;
+  padding: 0.05rem 0.4rem;
+  word-break: break-all;
+}
+
+.nf-section {
+  margin: 0 0 1.4rem;
+  background: rgba(15, 18, 32, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+}
+.nf-section-title {
+  font-size: 1.05rem;
+  margin: 0 0 0.7rem;
+}
+.nf-section-hint {
+  margin: 0.6rem 0 0;
+  color: var(--text-400, #94a3b8);
+  font-size: 0.9rem;
+}
+.nf-link {
+  color: #c4b5fd;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(196, 181, 253, 0.4);
+}
+.nf-link:hover { color: #ddd6fe; border-bottom-color: rgba(221, 214, 254, 0.7); }
+
+.nf-suggest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+.nf-suggest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(30, 27, 75, 0.35);
+  border: 1px solid rgba(129, 140, 248, 0.22);
+  color: #e0e3ff;
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+.nf-suggest:hover {
+  border-color: rgba(129, 140, 248, 0.55);
+  background: rgba(30, 27, 75, 0.55);
+  transform: translateY(-1px);
+}
+.nf-suggest-title {
+  font-weight: 600;
+}
+.nf-suggest-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--text-400, #94a3b8);
+}
+
+.nf-search-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.nf-search-input {
+  flex: 1 1 220px;
+  padding: 0.6rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+.nf-search-input:focus {
+  outline: none;
+  border-color: rgba(129, 140, 248, 0.7);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.18);
+}
+.nf-search-submit {
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(129, 140, 248, 0.55);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 160ms ease, transform 160ms ease;
+}
+.nf-search-submit:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.nf-search-submit:active { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-suggest,
+  .nf-suggest:hover,
+  .nf-search-submit,
+  .nf-search-submit:hover {
+    transition: none;
+    transform: none;
+  }
+}

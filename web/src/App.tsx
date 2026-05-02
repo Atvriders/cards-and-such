@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AppShell from "./platform/AppShell.js";
 import { RequireAuth } from "./platform/RequireAuth.js";
 import LoginPage from "./pages/LoginPage.js";
@@ -14,6 +14,9 @@ import PrivacyPage from "./pages/PrivacyPage.js";
 import CreditsPage from "./pages/CreditsPage.js";
 import SettingsPage from "./pages/SettingsPage.js";
 import StatsPage from "./pages/StatsPage.js";
+import SearchPage from "./pages/SearchPage.js";
+import NotFoundPage from "./pages/NotFoundPage.js";
+import OfflinePage from "./pages/OfflinePage.js";
 import Connect4Online from "./games/connect-4/Connect4Online.js";
 import UnoLikeOnline from "./games/uno-like/UnoLikeOnline.js";
 
@@ -36,8 +39,10 @@ export default function App(): JSX.Element {
         <Route path="/credits" element={<CreditsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/stats" element={<StatsPage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/offline" element={<OfflinePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

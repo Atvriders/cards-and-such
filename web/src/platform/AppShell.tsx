@@ -169,7 +169,10 @@ export default function AppShell(): JSX.Element {
   const submitSearch = (e: React.FormEvent): void => {
     e.preventDefault();
     const q = searchTerm.trim();
-    navigate(q ? `/?q=${encodeURIComponent(q)}` : "/");
+    // Submit (Enter) escalates to the dedicated /search page so users
+    // get the deeper grouped + ranked view; the lobby's inline filter
+    // remains available for in-page filtering when not pressing Enter.
+    navigate(q ? `/search?q=${encodeURIComponent(q)}` : "/");
     setSearchOpen(false);
     setMobileNavOpen(false);
   };
