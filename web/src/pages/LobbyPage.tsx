@@ -645,6 +645,60 @@ export default function LobbyPage(): JSX.Element {
       return localStorage.getItem(DRAWER_COLLAPSED_KEY) === "1";
     } catch { return false; }
   });
+  // Roving-tabindex order for the left drawer's category rows. The
+  // sequence mirrors the visual render order of `<DrawerLink>` calls
+  // below and is used by ↑/↓/Home/End to walk siblings without breaking
+  // the focus-trap or stealing Tab from the rest of the page.
+  const drawerOrder = useMemo<string[]>(
+    () => ["all", ...CATEGORY_ORDER, "favorites", "top-rated", "recently-played"],
+    [],
+  );
+  // Tab-in to the drawer should land on the currently active filter so
+  // the keyboard user starts where the visual highlight is. Subsequent
+  // ↑/↓ moves are tracked by user focus, not the `filter` state.
+  const [drawerFocusIdx, setDrawerFocusIdx] = useState<number>(0);
+  // Keep the roving tab-stop aligned with the active filter when the
+  // user changes it via chips/stat-buttons (i.e. without ever having
+  // touched the drawer). Once the drawer itself owns focus, the keydown
+  // handler reads `document.activeElement` and overrides this.
+  useEffect(() => {
+    const idx = drawerOrder.indexOf(filter);
+    if (idx >= 0) setDrawerFocusIdx(idx);
+  }, [filter, drawerOrder]);
+  const onDrawerKeyDown = useCallback((e: ReactKeyboardEvent<HTMLElement>) => {
+    const key = e.key;
+    if (
+      key !== "ArrowDown" && key !== "ArrowUp"
+      && key !== "Home" && key !== "End"
+      && key !== "Enter" && key !== " " && key !== "Spacebar"
+    ) return;
+    const nav = e.currentTarget;
+    const rows = Array.from(
+      nav.querySelectorAll<HTMLButtonElement>('[data-testid^="lobby-drawer-cat-"]'),
+    );
+    if (rows.length === 0) return;
+    const activeEl = (typeof document !== "undefined" ? document.activeElement : null) as HTMLElement | null;
+    let idx = rows.findIndex((r) => r === activeEl);
+    if (idx < 0) idx = drawerFocusIdx;
+    if (idx < 0 || idx >= rows.length) idx = 0;
+    if (key === "Enter" || key === " " || key === "Spacebar") {
+      // Activate the currently-focused row. Buttons fire `click` on
+      // Enter natively, but we preventDefault on Space so the page
+      // doesn't scroll while the drawer has focus, then synthesize the
+      // click ourselves for parity with Enter.
+      e.preventDefault();
+      rows[idx]?.click();
+      return;
+    }
+    let next = idx;
+    if (key === "ArrowDown") next = (idx + 1) % rows.length;
+    else if (key === "ArrowUp") next = (idx - 1 + rows.length) % rows.length;
+    else if (key === "Home") next = 0;
+    else if (key === "End") next = rows.length - 1;
+    e.preventDefault();
+    setDrawerFocusIdx(next);
+    rows[next]?.focus();
+  }, [drawerFocusIdx]);
   const deferredQuery = useDeferredValue(query);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const featuredRef = useRef<HTMLElement | null>(null);
@@ -1479,55 +1533,80 @@ export default function LobbyPage(): JSX.Element {
         >
           <span aria-hidden="true">{drawerCollapsed ? "›" : "‹"}</span>
         </button>
-        <nav className="lobby-drawer-nav" role="tablist" aria-label="Filter by category (drawer)">
+        <nav
+          className="lobby-drawer-nav"
+          role="tablist"
+          aria-label="Filter by category (drawer)"
+          onKeyDown={onDrawerKeyDown}
+        >
           <DrawerLink
             id="all"
             active={filter === "all"}
-            onClick={() => setFilter("all")}
+            onClick={() => {
+              setFilter("all");
+              setDrawerFocusIdx(drawerOrder.indexOf("all"));
+            }}
             glyph="◎"
             label={t("lobby.all_games")}
             count={GAMES.length}
             collapsed={drawerCollapsed}
+            tabIndex={drawerFocusIdx === drawerOrder.indexOf("all") ? 0 : -1}
           />
           {CATEGORY_ORDER.map((cat) => (
             <DrawerLink
               key={cat}
               id={cat}
               active={filter === cat}
-              onClick={() => setFilter(cat)}
+              onClick={() => {
+                setFilter(cat);
+                setDrawerFocusIdx(drawerOrder.indexOf(cat));
+              }}
               glyph={CATEGORY_GLYPHS[cat]}
               label={CATEGORY_LABELS[cat]}
               count={categoryCounts[cat]}
               collapsed={drawerCollapsed}
+              tabIndex={drawerFocusIdx === drawerOrder.indexOf(cat) ? 0 : -1}
             />
           ))}
           <div className="lobby-drawer-sep" aria-hidden="true" />
           <DrawerLink
             id="favorites"
             active={filter === "favorites"}
-            onClick={() => setFilter("favorites")}
+            onClick={() => {
+              setFilter("favorites");
+              setDrawerFocusIdx(drawerOrder.indexOf("favorites"));
+            }}
             glyph="♥"
             label={t("lobby.chip.favorites")}
             count={favSet.size}
             collapsed={drawerCollapsed}
+            tabIndex={drawerFocusIdx === drawerOrder.indexOf("favorites") ? 0 : -1}
           />
           <DrawerLink
             id="top-rated"
             active={filter === "top-rated"}
-            onClick={() => setFilter("top-rated")}
+            onClick={() => {
+              setFilter("top-rated");
+              setDrawerFocusIdx(drawerOrder.indexOf("top-rated"));
+            }}
             glyph="★"
             label={t("lobby.chip.top_rated")}
             count={topRatedCount}
             collapsed={drawerCollapsed}
+            tabIndex={drawerFocusIdx === drawerOrder.indexOf("top-rated") ? 0 : -1}
           />
           <DrawerLink
             id="recently-played"
             active={filter === "recently-played"}
-            onClick={() => setFilter("recently-played")}
+            onClick={() => {
+              setFilter("recently-played");
+              setDrawerFocusIdx(drawerOrder.indexOf("recently-played"));
+            }}
             glyph="↺"
             label={t("lobby.chip.recently_played")}
             count={recentlyPlayedCount}
             collapsed={drawerCollapsed}
+            tabIndex={drawerFocusIdx === drawerOrder.indexOf("recently-played") ? 0 : -1}
           />
         </nav>
       </aside>
@@ -1995,6 +2074,12 @@ interface DrawerLinkProps {
   label: string;
   count: number;
   collapsed: boolean;
+  /**
+   * Roving-tabindex value. Only the currently-focused drawer row is `0`;
+   * all other rows are `-1` so a single Tab lands on the drawer and ↑/↓
+   * walks within it.
+   */
+  tabIndex: number;
 }
 /**
  * Single entry in the desktop left-drawer category nav. Renders the
@@ -2002,14 +2087,18 @@ interface DrawerLinkProps {
  * label still ships in `aria-label` and a native `title` so the icon
  * row remains usable). Clicking sets the same lobby `filter` state as
  * the chip strip — they stay in sync because they read/write the same
- * piece of state.
+ * piece of state. Active row also carries `aria-current="true"` so
+ * assistive tech announces the selected category and the CSS rule on
+ * `[aria-current="true"]` paints a stronger visual highlight.
  */
-function DrawerLink({ id, active, onClick, glyph, label, count, collapsed }: DrawerLinkProps): JSX.Element {
+function DrawerLink({ id, active, onClick, glyph, label, count, collapsed, tabIndex }: DrawerLinkProps): JSX.Element {
   return (
     <button
       type="button"
       role="tab"
       aria-selected={active}
+      aria-current={active ? "true" : undefined}
+      tabIndex={tabIndex}
       className={`lobby-drawer-link${active ? " is-active" : ""}`}
       onClick={onClick}
       data-testid={`lobby-drawer-cat-${id}`}

@@ -1941,6 +1941,18 @@ button.tile {
     border-color: rgba(99, 102, 241, 0.5);
     color: #ffffff;
   }
+  /* `aria-current="true"` is the source of truth for the keyboard nav —
+     it lights up the active filter row with a left-edge accent stripe
+     even when the user hasn't moved focus into the drawer yet, so the
+     visual selection survives focus moving away. Sits above `.is-active`
+     because both are present together; the box-shadow inset paints the
+     stripe without affecting layout. */
+  .lobby-drawer-link[aria-current="true"] {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.32) 0%, rgba(56, 189, 248, 0.22) 100%);
+    border-color: rgba(99, 102, 241, 0.65);
+    color: #ffffff;
+    box-shadow: inset 3px 0 0 0 var(--accent-500, #6366f1);
+  }
   .lobby-drawer-link-glyph {
     width: 22px;
     text-align: center;

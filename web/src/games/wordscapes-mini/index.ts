@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordscapesMiniState, WordscapesMiniAction, WordscapesMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,9 @@ export const wordscapesMiniPlugin: GamePlugin<WordscapesMiniState, WordscapesMin
   initialState: (seed: number, s: S) => initialState(seed, s as WordscapesMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: WordscapesMiniState): HintTarget | null => {
+    if (state.phase === "done" || state.submitted) return null;
+    return { selector: ".word-choices button:first-child", pulses: 3 };
+  },
   component: WordscapesMiniGame,
 };

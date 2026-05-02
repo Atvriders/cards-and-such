@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordamentMiniState, WordamentMiniAction, WordamentMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,9 @@ export const wordamentMiniPlugin: GamePlugin<WordamentMiniState, WordamentMiniAc
   initialState: (seed: number, s: S) => initialState(seed, s as WordamentMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: WordamentMiniState): HintTarget | null => {
+    if (state.phase === "done" || state.submitted) return null;
+    return { selector: ".word-choices button:first-child", pulses: 3 };
+  },
   component: WordamentMiniGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GameState, GameAction, GameSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,9 @@ export const ghostWordPlugin: GamePlugin<GameState, GameAction, typeof settings>
   initialState: (seed: number, s: S) => initialState(seed, s as GameSettings),
   reducer,
   isTerminal,
+  hint: (state: GameState): HintTarget | null => {
+    if (state.phase === "done" || state.submitted) return null;
+    return { selector: ".qz-choices button:first-child", pulses: 3 };
+  },
   component: GhostWordGame,
 };
