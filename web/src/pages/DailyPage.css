@@ -341,3 +341,142 @@
   fill: var(--daily-success);
   filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.6));
 }
+
+/* ---------- play+share action row ---------- */
+
+.daily-pick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.daily-share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--daily-text);
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--daily-border);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.daily-share-btn:hover,
+.daily-share-btn:focus-visible {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: var(--daily-accent);
+  transform: translateY(-1px);
+}
+
+/* ---------- 7-day history ---------- */
+
+.daily-history {
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  background: var(--daily-surface);
+  border: 1px solid var(--daily-border);
+}
+
+.daily-history-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.daily-history-head h3 {
+  margin: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--daily-text-dim);
+}
+
+.daily-history-count {
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--daily-text-dim);
+}
+
+.daily-history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.daily-history-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid transparent;
+  font-size: 0.88rem;
+}
+
+.daily-history-row:hover {
+  border-color: var(--daily-border);
+}
+
+.daily-history-date {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--daily-text-dim);
+  font-size: 0.8rem;
+}
+
+.daily-history-game {
+  color: var(--daily-text);
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.daily-history-status {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.daily-history-status.ok { color: var(--daily-success); }
+.daily-history-status.dim { color: var(--daily-text-dim); }
+
+/* ---------- notify toggle ---------- */
+
+.daily-notify-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  background: var(--daily-surface);
+  border: 1px solid var(--daily-border);
+  font-size: 0.9rem;
+}
+
+.daily-notify-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  color: var(--daily-text);
+}
+
+.daily-notify-caveat {
+  color: var(--daily-text-dim);
+  font-size: 0.78rem;
+  font-style: italic;
+}
