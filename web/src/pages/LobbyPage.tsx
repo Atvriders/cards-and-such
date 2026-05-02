@@ -3,9 +3,173 @@ import { Link, useNavigate } from "react-router-dom";
 import { GAMES } from "../games/registry.js";
 import { FAMILIES, compareTitles, expandFamily, type GameFamily } from "../games/families.js";
 import type { GameCategory, GamePlugin } from "../platform/game-plugin/types.js";
+import { PageHead } from "../platform/PageHead.js";
+import { Skeleton } from "../platform/Skeleton.js";
+import { StarRating, readRatings } from "../platform/StarRating.js";
 import "./LobbyPage.css";
 
-type Filter = "all" | GameCategory;
+/**
+ * Tooltip data shared between GameCard / FamilyCard / FeaturedTile and
+ * the hover hook. Positioning is "right of tile if room, otherwise left"
+ * — computed once on show, never re-flowed during the mouseover.
+ */
+interface TileTooltipData {
+  title: string;
+  description: string;
+  players: string;
+  multiplayer: boolean;
+  howToPlay?: string;
+}
+
+/**
+ * First-sentence excerpt of a howToPlay blob. Empty / undefined input
+ * returns undefined so the tooltip can omit the section entirely.
+ * Caps at ~180 chars to avoid pathological one-sentence walls of text.
+ */
+function howToPlayExcerpt(text: string | undefined): string | undefined {
+  if (!text) return undefined;
+  const trimmed = text.replace(/^\s+/, "");
+  if (!trimmed) return undefined;
+  const match = trimmed.match(/^[^.!?\n]+[.!?]?/);
+  let s = match ? match[0] : trimmed;
+  if (s.length > 180) s = s.slice(0, 177).trimEnd() + "…";
+  return s.trim();
+}
+
+function playersLine(p: { min: number; max: number }): string {
+  return p.min === p.max
+    ? `${p.min} player${p.min === 1 ? "" : "s"}`
+    : `${p.min}–${p.max} players`;
+}
+
+/**
+ * Hook wired into a tile element. Encapsulates:
+ *   - 500ms hover-intent delay before showing.
+ *   - Long-press (500ms) on touch to show; tap-elsewhere to hide.
+ *   - Skip showing while the tile is being dragged or a modal is open.
+ *   - Smart placement: prefer right-of-tile, fall back to left if the
+ *     viewport doesn't have at least 280px clear on the right.
+ *
+ * Returns event-handler props that the tile spreads onto its root, and
+ * a `tooltip` value (the floating element to render) — null when hidden.
+ */
+function useTileTooltip(data: TileTooltipData, tileId: string): {
+  handlers: {
+    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => void;
+    onMouseLeave: () => void;
+    onTouchStart: (e: React.TouchEvent<HTMLElement>) => void;
+    onTouchEnd: () => void;
+    onDragStart: () => void;
+  };
+  tooltip: JSX.Element | null;
+} {
+  const [visible, setVisible] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number; side: "right" | "left" } | null>(null);
+  const showTimer = useRef<number | null>(null);
+  const targetRef = useRef<HTMLElement | null>(null);
+
+  const clearTimer = useCallback(() => {
+    if (showTimer.current !== null) {
+      window.clearTimeout(showTimer.current);
+      showTimer.current = null;
+    }
+  }, []);
+
+  const modalOpen = useCallback((): boolean => {
+    if (typeof document === "undefined") return false;
+    return document.querySelector('[role="dialog"][aria-modal="true"]') !== null;
+  }, []);
+
+  const placeNear = useCallback((el: HTMLElement) => {
+    const rect = el.getBoundingClientRect();
+    const TIP_W = 280;
+    const GUTTER = 12;
+    const fitsRight = rect.right + GUTTER + TIP_W <= window.innerWidth;
+    const side: "right" | "left" = fitsRight ? "right" : "left";
+    const left = side === "right" ? rect.right + GUTTER : Math.max(GUTTER, rect.left - TIP_W - GUTTER);
+    const top = Math.min(
+      Math.max(GUTTER, rect.top),
+      window.innerHeight - 40 - GUTTER,
+    );
+    setCoords({ top, left, side });
+  }, []);
+
+  const show = useCallback((el: HTMLElement) => {
+    if (modalOpen()) return;
+    placeNear(el);
+    setVisible(true);
+  }, [modalOpen, placeNear]);
+
+  const hide = useCallback(() => {
+    clearTimer();
+    setVisible(false);
+  }, [clearTimer]);
+
+  // Tap-elsewhere on touch devices closes the tooltip; any scroll hides.
+  useEffect(() => {
+    if (!visible) return;
+    const onDocPointer = (e: PointerEvent) => {
+      if (e.pointerType !== "touch") return;
+      const t = targetRef.current;
+      if (t && e.target instanceof Node && t.contains(e.target)) return;
+      setVisible(false);
+    };
+    const onScroll = () => setVisible(false);
+    document.addEventListener("pointerdown", onDocPointer, true);
+    window.addEventListener("scroll", onScroll, true);
+    return () => {
+      document.removeEventListener("pointerdown", onDocPointer, true);
+      window.removeEventListener("scroll", onScroll, true);
+    };
+  }, [visible]);
+
+  useEffect(() => () => clearTimer(), [clearTimer]);
+
+  const handlers = {
+    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+      const el = e.currentTarget;
+      targetRef.current = el;
+      clearTimer();
+      showTimer.current = window.setTimeout(() => show(el), 500);
+    },
+    onMouseLeave: () => hide(),
+    onTouchStart: (e: React.TouchEvent<HTMLElement>) => {
+      const el = e.currentTarget;
+      targetRef.current = el;
+      clearTimer();
+      showTimer.current = window.setTimeout(() => show(el), 500);
+    },
+    onTouchEnd: () => clearTimer(),
+    onDragStart: () => hide(),
+  };
+
+  const tooltip = visible && coords ? (
+    <div
+      className={`lobby-tooltip lobby-tooltip--${coords.side}`}
+      role="tooltip"
+      data-testid={`tile-tooltip-${tileId}`}
+      style={{ top: coords.top, left: coords.left }}
+    >
+      <div className="lobby-tooltip-title">{data.title}</div>
+      <div className="lobby-tooltip-desc">{data.description}</div>
+      <div className="lobby-tooltip-meta">
+        <span>{data.players}</span>
+        {data.multiplayer && <span className="lobby-tooltip-mp">Multiplayer</span>}
+      </div>
+      {data.howToPlay && (
+        <div className="lobby-tooltip-howto">
+          <span className="lobby-tooltip-howto-label">How to play</span>
+          <span>{data.howToPlay}</span>
+        </div>
+      )}
+    </div>
+  ) : null;
+
+  return { handlers, tooltip };
+}
+
+type Filter = "all" | "top-rated" | GameCategory;
+const TOP_RATED_THRESHOLD = 4;
 
 const CATEGORY_ORDER: GameCategory[] = ["solitaire", "cards", "dice", "board", "arcade"];
 const CATEGORY_LABELS: Record<GameCategory, string> = {
@@ -74,9 +238,44 @@ export default function LobbyPage(): JSX.Element {
   const [filter, setFilter] = useState<Filter>("all");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [openFamilyId, setOpenFamilyId] = useState<string | null>(null);
+  const [ratings, setRatings] = useState<Record<string, number>>(() => readRatings());
   const deferredQuery = useDeferredValue(query);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+
+  // Add a one-shot `is-mounted` class to the lobby root after the first
+  // paint so entrance animations only run on the initial mount of each
+  // section — subsequent re-renders (filter changes, search, infinite
+  // scroll appends) reuse the same class without re-triggering them.
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const node = rootRef.current;
+    if (!node) return;
+    // Defer to the next frame so the initial render paints in its
+    // pre-animation state, then the class flip cues the staggered
+    // entrance — avoids the "already-finished" flash from CSS that
+    // applies on the same frame as mount.
+    const raf = requestAnimationFrame(() => {
+      node.classList.add("is-mounted");
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // Refresh ratings from localStorage when the tab regains focus or a
+  // cross-tab "storage" event fires — keeps the lobby in sync after a
+  // user submits a rating in PlayPage and navigates back.
+  useEffect(() => {
+    const refresh = () => setRatings(readRatings());
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === "cards-ratings") refresh();
+    };
+    window.addEventListener("focus", refresh);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
 
   // Per-category counts (computed once over the full registry — these
   // count individual GAMES, not families: the chip count tells the user
@@ -164,11 +363,33 @@ export default function LobbyPage(): JSX.Element {
     return { entries, gameIdToFamilyId: idToFamily, familyById: familyMap };
   }, []);
 
+  // For each lobby entry, compute the best rating among its games — a
+  // family inherits the highest rating any of its variants received so
+  // the Top Rated tab promotes the family if any member is top-rated.
+  const entryRating = useCallback(
+    (e: LobbyEntry): number => {
+      if (e.kind === "game") return ratings[e.game.id] ?? 0;
+      let best = 0;
+      for (const m of e.members) {
+        const v = ratings[m.id] ?? 0;
+        if (v > best) best = v;
+      }
+      return best;
+    },
+    [ratings],
+  );
+
   // Filtered + searched list. We filter the `entries` (family-level)
   // rather than raw GAMES so a family stays as one tile.
   const filtered = useMemo(() => {
     const q = deferredQuery.trim().toLowerCase();
-    let list = filter === "all" ? allEntries : allEntries.filter((e) => e.category === filter);
+    let list: LobbyEntry[];
+    if (filter === "all") list = allEntries;
+    else if (filter === "top-rated") {
+      list = allEntries.filter((e) => entryRating(e) >= TOP_RATED_THRESHOLD);
+    } else {
+      list = allEntries.filter((e) => e.category === filter);
+    }
     if (!q) return list;
     list = list.filter((e) => {
       if (e.kind === "game") {
@@ -193,7 +414,7 @@ export default function LobbyPage(): JSX.Element {
       );
     });
     return list;
-  }, [allEntries, filter, deferredQuery]);
+  }, [allEntries, filter, deferredQuery, entryRating]);
 
   // Reset window + close any open picker when filter or query changes.
   useEffect(() => {
@@ -231,16 +452,37 @@ export default function LobbyPage(): JSX.Element {
   const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
   const hasMore = visibleCount < filtered.length;
 
+  // While the deferred-search recomputation is in-flight on a meaningfully
+  // large query, the filtered grid would briefly stutter or flash empty.
+  // Detect "useDeferredValue is still trailing the live input" and surface
+  // a skeleton grid in that window so the UI feels responsive.
+  const filterPending = query !== deferredQuery && query.trim().length >= 3;
+
   // "Surprise me" — jump to a random game in the current filtered set.
   // Uses raw GAMES (filtered by category) so a random pick can land on
   // any variant, not just family heads.
   const surpriseMe = useCallback(() => {
-    const pool = filter === "all" ? GAMES : GAMES.filter((g) => g.category === filter);
+    let pool: GamePlugin[];
+    if (filter === "all") pool = GAMES;
+    else if (filter === "top-rated") {
+      pool = GAMES.filter((g) => (ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD);
+    } else {
+      pool = GAMES.filter((g) => g.category === filter);
+    }
     const final = pool.length > 0 ? pool : GAMES;
     if (final.length === 0) return;
     const pick = final[Math.floor(Math.random() * final.length)]!;
     navigate(`/play/${pick.id}`);
-  }, [filter, navigate]);
+  }, [filter, navigate, ratings]);
+
+  // Count of distinct top-rated games (>= 4 stars) — drives the chip count.
+  const topRatedCount = useMemo(() => {
+    let n = 0;
+    for (const g of GAMES) {
+      if ((ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD) n++;
+    }
+    return n;
+  }, [ratings]);
 
   // Family ids that already appear in the featured strip — when a
   // family is featured, its main-grid tile uses a different testid
@@ -286,6 +528,7 @@ export default function LobbyPage(): JSX.Element {
   if (GAMES.length === 0) {
     return (
       <div className="lobby-empty" data-testid="lobby-empty">
+        <PageHead title="Cards and Such" exact />
         <h1>Cards and Such</h1>
         <p>No games installed yet.</p>
       </div>
@@ -293,7 +536,13 @@ export default function LobbyPage(): JSX.Element {
   }
 
   return (
-    <div className="lobby-page">
+    <div className="lobby-page" ref={rootRef}>
+      <PageHead
+        title="Cards and Such — 4500+ classic and modern games"
+        exact
+        description="Browse 4,500+ free solitaire, card, dice, board, and arcade games. Play Klondike, FreeCell, Spider, Hearts, Spades, Yahtzee, Chess, and more — instantly in your browser."
+        canonical="https://cards.waterburp.com/"
+      />
       <header className="lobby-hero">
         <div className="lobby-hero-orb lobby-hero-orb--a" aria-hidden="true" />
         <div className="lobby-hero-orb lobby-hero-orb--b" aria-hidden="true" />
@@ -364,6 +613,13 @@ export default function LobbyPage(): JSX.Element {
 
         <div className="lobby-chips" role="tablist" aria-label="Filter by category">
           <Chip active={filter === "all"} onClick={() => setFilter("all")} count={GAMES.length} testId="chip-all">All</Chip>
+          <Chip
+            active={filter === "top-rated"}
+            onClick={() => setFilter("top-rated")}
+            count={topRatedCount}
+            testId="chip-top-rated"
+            glyph="★"
+          >Top Rated</Chip>
           {CATEGORY_ORDER.map((cat) => (
             <Chip
               key={cat}
@@ -399,7 +655,11 @@ export default function LobbyPage(): JSX.Element {
       <section aria-label="All games">
         <div className="lobby-section-head">
           <h2>
-            {filter === "all" ? "All games" : CATEGORY_LABELS[filter]}
+            {filter === "all"
+              ? "All games"
+              : filter === "top-rated"
+                ? "Top Rated"
+                : CATEGORY_LABELS[filter]}
             {query && (
               <span className="lobby-section-count">
                 {" · "}
@@ -410,9 +670,21 @@ export default function LobbyPage(): JSX.Element {
           </h2>
         </div>
 
-        {filtered.length === 0 ? (
+        {filterPending ? (
+          <div className="lobby-grid" data-testid="lobby-skeleton-grid" aria-busy="true">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <SkeletonTile key={`sk-${i}`} />
+            ))}
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="lobby-no-results" data-testid="lobby-no-results">
-            <p>No games match <strong>{query}</strong>.</p>
+            {filter === "top-rated" && !query ? (
+              <p data-testid="lobby-top-rated-empty">
+                You haven't rated any games {TOP_RATED_THRESHOLD} stars or higher yet. Play a game and tap the stars at the end to fill this list.
+              </p>
+            ) : (
+              <p>No games match <strong>{query}</strong>.</p>
+            )}
             <button type="button" className="btn btn-ghost" onClick={() => { setQuery(""); setFilter("all"); }}>Clear filters</button>
           </div>
         ) : (
@@ -420,7 +692,11 @@ export default function LobbyPage(): JSX.Element {
             <div className="lobby-grid">
               {visible.map((entry) =>
                 entry.kind === "game" ? (
-                  <GameCard key={`game-${entry.game.id}`} game={entry.game} />
+                  <GameCard
+                    key={`game-${entry.game.id}`}
+                    game={entry.game}
+                    userRating={ratings[entry.game.id] ?? 0}
+                  />
                 ) : (
                   <FamilyCard
                     key={`fam-${entry.family.id}`}
@@ -436,6 +712,7 @@ export default function LobbyPage(): JSX.Element {
                         ? `grid-tile-${entry.family.id}`
                         : undefined
                     }
+                    userRating={entryRating(entry)}
                   />
                 ),
               )}
@@ -455,17 +732,6 @@ export default function LobbyPage(): JSX.Element {
           </>
         )}
       </section>
-
-      <footer className="lobby-footer" aria-label="Site footer">
-        <div className="lobby-footer-row">
-          <span className="lobby-footer-brand">Cards and Such</span>
-          <span className="lobby-footer-dot" aria-hidden="true">·</span>
-          <span>{GAMES.length.toLocaleString()} games in the catalog</span>
-        </div>
-        <div className="lobby-footer-links">
-          <Link to="/leaderboard">Leaderboard</Link>
-        </div>
-      </footer>
 
       {openFamily && (
         <FamilyPicker
@@ -503,12 +769,24 @@ function Chip({ active, count, testId, onClick, glyph, children }: ChipProps): J
   );
 }
 
-function GameCard({ game: g }: { game: GamePlugin }): JSX.Element {
+function GameCard({ game: g, userRating = 0 }: { game: GamePlugin; userRating?: number }): JSX.Element {
+  const { handlers, tooltip } = useTileTooltip(
+    {
+      title: g.title,
+      description: g.description,
+      players: playersLine(g.players),
+      multiplayer: g.players.multiplayer,
+      howToPlay: howToPlayExcerpt(g.howToPlay),
+    },
+    g.id,
+  );
   return (
+    <>
     <Link
       to={`/play/${g.id}`}
       className={`tile tile--cat-${CATEGORY_TAG[g.category]}`}
       data-testid={`tile-${g.id}`}
+      {...handlers}
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
@@ -530,6 +808,15 @@ function GameCard({ game: g }: { game: GamePlugin }): JSX.Element {
         <span className="tile-players">
           {g.players.min === g.players.max ? `${g.players.min} player${g.players.min === 1 ? "" : "s"}` : `${g.players.min}–${g.players.max} players`}
         </span>
+        {userRating > 0 && (
+          <span
+            className="tile-rating"
+            data-testid={`tile-rating-${g.id}`}
+            aria-label={`Your rating: ${userRating} of 5 stars`}
+          >
+            <StarRating value={userRating} readOnly size="sm" ariaLabel="Your rating" />
+          </span>
+        )}
         <span className="tile-cta" aria-hidden="true">
           Play
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -539,6 +826,33 @@ function GameCard({ game: g }: { game: GamePlugin }): JSX.Element {
         </span>
       </div>
     </Link>
+    {tooltip}
+    </>
+  );
+}
+
+/**
+ * A single placeholder tile shown while the deferred lobby-filter is still
+ * recomputing on a large search query. Mirrors the rough silhouette of a
+ * real GameCard (header chip, title line, two desc lines, footer) so the
+ * grid layout doesn't jump when the real tiles arrive.
+ */
+function SkeletonTile(): JSX.Element {
+  return (
+    <div className="tile tile--skeleton" aria-hidden="true" data-testid="lobby-skeleton-tile">
+      <div className="tile-meta">
+        <Skeleton variant="rect" width={72} height={20} />
+      </div>
+      <div className="tile-title"><Skeleton variant="text-line" width="70%" /></div>
+      <div className="tile-desc">
+        <Skeleton variant="text-line" width="100%" />
+        <Skeleton variant="text-line" width="55%" />
+      </div>
+      <div className="tile-foot">
+        <Skeleton variant="text-line" width={80} />
+        <Skeleton variant="text-line" width={42} />
+      </div>
+    </div>
   );
 }
 
@@ -553,14 +867,30 @@ function FamilyCard({
   memberCount,
   onClick,
   testIdOverride,
+  userRating = 0,
 }: {
   family: GameFamily;
   category: GameCategory;
   memberCount: number;
   onClick: () => void;
   testIdOverride?: string;
+  userRating?: number;
 }): JSX.Element {
+  // Family tiles surface the family-level description in lieu of a per-
+  // game howToPlay (the variants each have their own; the family card
+  // doesn't pick a winner).
+  const { handlers, tooltip } = useTileTooltip(
+    {
+      title: family.label,
+      description: family.description,
+      players: `${memberCount} variant${memberCount === 1 ? "" : "s"}`,
+      multiplayer: false,
+      howToPlay: undefined,
+    },
+    family.id,
+  );
   return (
+    <>
     <button
       type="button"
       onClick={onClick}
@@ -568,6 +898,7 @@ function FamilyCard({
       data-testid={testIdOverride ?? `tile-${family.id}`}
       aria-haspopup="dialog"
       aria-label={`${family.label} — ${memberCount} variants`}
+      {...handlers}
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
@@ -585,6 +916,15 @@ function FamilyCard({
       <div className="tile-desc">{family.description}</div>
       <div className="tile-foot">
         <span className="tile-players">Multiple variants</span>
+        {userRating > 0 && (
+          <span
+            className="tile-rating"
+            data-testid={`tile-rating-${family.id}`}
+            aria-label={`Best variant rating: ${userRating} of 5 stars`}
+          >
+            <StarRating value={userRating} readOnly size="sm" ariaLabel="Best variant rating" />
+          </span>
+        )}
         <span className="tile-cta" aria-hidden="true">
           Pick
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -593,6 +933,8 @@ function FamilyCard({
         </span>
       </div>
     </button>
+    {tooltip}
+    </>
   );
 }
 
@@ -612,19 +954,36 @@ function FeaturedTile({
   familyId: string | undefined;
   onOpenFamily: (familyId: string) => void;
 }): JSX.Element {
+  // Featured tiles get the same hover-tooltip treatment regardless of
+  // whether they end up rendering as a link or a button.
+  const tooltipData: TileTooltipData = familyId
+    ? {
+        title: g.title,
+        description: g.description,
+        players: "Multiple variants",
+        multiplayer: false,
+        howToPlay: howToPlayExcerpt(g.howToPlay),
+      }
+    : {
+        title: g.title,
+        description: g.description,
+        players: playersLine(g.players),
+        multiplayer: g.players.multiplayer,
+        howToPlay: howToPlayExcerpt(g.howToPlay),
+      };
+  const tooltipId = familyId ? familyId : `feat-${g.id}`;
+  const { handlers, tooltip } = useTileTooltip(tooltipData, tooltipId);
+
   if (familyId) {
-    // The featured id belongs to a family — open the picker rather than
-    // routing to the single variant. The canonical lobby testid is
-    // `tile-<familyId>` (e.g. `tile-klondike`) — the featured tile
-    // owns it, and the duplicate in the main grid is demoted to
-    // `grid-tile-<familyId>` to keep DOM queries unambiguous.
     return (
+      <>
       <button
         type="button"
         onClick={() => onOpenFamily(familyId)}
         className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured tile--family`}
         data-testid={`tile-${familyId}`}
         aria-haspopup="dialog"
+        {...handlers}
       >
         <span className="tile-stripe" aria-hidden="true" />
         <span className="tile-sheen" aria-hidden="true" />
@@ -641,13 +1000,17 @@ function FeaturedTile({
           <span className="tile-cta" aria-hidden="true">Pick</span>
         </div>
       </button>
+      {tooltip}
+      </>
     );
   }
   return (
+    <>
     <Link
       to={`/play/${g.id}`}
       className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured`}
       data-testid={`feat-tile-${g.id}`}
+      {...handlers}
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
@@ -672,6 +1035,8 @@ function FeaturedTile({
         <span className="tile-cta" aria-hidden="true">Play</span>
       </div>
     </Link>
+    {tooltip}
+    </>
   );
 }
 

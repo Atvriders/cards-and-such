@@ -19,8 +19,8 @@
          <div class="lobby-grid">…game cards…</div>
          <div class="lobby-loadmore">…sentinel + button…</div>
        </section>
-       <footer class="lobby-footer">…</footer>
      </div>
+     (Site-wide footer lives in AppShell.)
    Tokens used: --bg-base / --primary / --space-* / --radius-* / --sh-*
    ===================================================================== */
 
@@ -956,45 +956,6 @@ button.tile {
   color: var(--text-400);
 }
 
-/* ---------- Footer ---------- */
-.lobby-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
-  margin-top: var(--sp-12);
-  padding: var(--sp-5) var(--sp-2);
-  border-top: 1px solid var(--border-soft);
-  font-size: 0.82rem;
-  color: var(--text-500);
-}
-.lobby-footer-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-.lobby-footer-brand {
-  font-weight: var(--weight-semibold);
-  background: linear-gradient(90deg, #c7cdfe 0%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.lobby-footer-dot { color: var(--text-500); }
-.lobby-footer-links {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-.lobby-footer-links a {
-  color: var(--text-300);
-  text-decoration: none;
-  transition: color var(--dur-fast) var(--ease-out-quart);
-}
-.lobby-footer-links a:hover { color: var(--primary); }
-
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
   .lobby-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
@@ -1019,6 +980,89 @@ button.tile {
   .lobby-chip { padding: 0.36rem 0.75rem; font-size: 0.82rem; }
 }
 
+/* Skeleton placeholder tile shown while the lobby filter is recomputing. */
+.tile--skeleton {
+  pointer-events: none;
+  cursor: default;
+  /* Keep the silhouette but suppress hover interaction. */
+}
+.tile--skeleton:hover { transform: none; }
+.tile--skeleton .tile-stripe,
+.tile--skeleton .tile-sheen { display: none; }
+.tile--skeleton .tile-meta,
+.tile--skeleton .tile-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tile--skeleton .tile-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+/* ---------- Entrance animations (initial mount only) ----------
+   The lobby root gets `.is-mounted` added once via useEffect on first
+   paint. We pre-stage the animated elements as `opacity: 0` + a small
+   translate so React's first render shows the static silhouette, then
+   the class flip cues the staggered fade/slide. Subsequent re-renders
+   (filter changes, search, infinite scroll) keep the class set and
+   don't re-trigger the animations. */
+
+@keyframes lobby-tile-enter {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes lobby-tile-enter-featured {
+  from { opacity: 0; transform: translateY(-14px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);     }
+}
+@keyframes lobby-chip-enter {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* Pre-stage so the first paint shows the resting (offscreen) state.
+   When `.is-mounted` lands one frame later, the animations run. */
+.lobby-page:not(.is-mounted) .lobby-grid > .tile,
+.lobby-page:not(.is-mounted) .lobby-chips > .lobby-chip {
+  opacity: 0;
+}
+
+.lobby-page.is-mounted .lobby-grid > .tile {
+  animation: lobby-tile-enter 360ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+.lobby-page.is-mounted .lobby-grid--featured > .tile {
+  animation: lobby-tile-enter-featured 440ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+/* Stagger 50ms per tile, plateau at index 10. Each grid restarts its
+   own counter — featured strip and main grid animate independently. */
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(1)  { animation-delay:   0ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(2)  { animation-delay:  50ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(3)  { animation-delay: 100ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(4)  { animation-delay: 150ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(5)  { animation-delay: 200ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(6)  { animation-delay: 250ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(7)  { animation-delay: 300ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(8)  { animation-delay: 350ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(9)  { animation-delay: 400ms; }
+.lobby-page.is-mounted .lobby-grid > .tile:nth-child(n+10) { animation-delay: 450ms; }
+
+/* Filter chips slide in from the left, also staggered. */
+.lobby-page.is-mounted .lobby-chips > .lobby-chip {
+  animation: lobby-chip-enter 320ms var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)) both;
+}
+.lobby-page.is-mounted .lobby-chips > .lobby-chip:nth-child(1) { animation-delay:   0ms; }
+.lobby-page.is-mounted .lobby-chips > .lobby-chip:nth-child(2) { animation-delay:  40ms; }
+.lobby-page.is-mounted .lobby-chips > .lobby-chip:nth-child(3) { animation-delay:  80ms; }
+.lobby-page.is-mounted .lobby-chips > .lobby-chip:nth-child(4) { animation-delay: 120ms; }
+.lobby-page.is-mounted .lobby-chips > .lobby-chip:nth-child(5) { animation-delay: 160ms; }
+.lobby-page.is-mounted .lobby-chips > .lobby-chip:nth-child(6) { animation-delay: 200ms; }
+.lobby-page.is-mounted .lobby-chips > .lobby-chip:nth-child(n+7) { animation-delay: 240ms; }
+
 /* Respect reduced-motion: kill the more decorative animations. */
 @media (prefers-reduced-motion: reduce) {
   .lobby-hero-orb,
@@ -1029,4 +1073,98 @@ button.tile {
   .tile-sheen { animation: none !important; }
   .tile, .lobby-stat, .lobby-chip, .lobby-search-input { transition: none !important; }
   .tile:hover { transform: none; }
+
+  /* No entrance animations under reduced motion — render at rest. */
+  .lobby-page:not(.is-mounted) .lobby-grid > .tile,
+  .lobby-page:not(.is-mounted) .lobby-chips > .lobby-chip {
+    opacity: 1;
+  }
+  .lobby-page.is-mounted .lobby-grid > .tile,
+  .lobby-page.is-mounted .lobby-grid--featured > .tile,
+  .lobby-page.is-mounted .lobby-chips > .lobby-chip {
+    animation: none !important;
+  }
+}
+
+/* =====================================================================
+   Hover-tooltip — fixed-position floating panel anchored to a tile.
+   Positioning math is done in JS (right-of-tile vs left-of-tile depending
+   on viewport room); CSS handles the look + a quick fade-in. The
+   tooltip is hidden on small touch viewports until a long-press fires
+   (the JS hook only paints it after the timer).
+   ===================================================================== */
+.lobby-tooltip {
+  position: fixed;
+  width: 280px;
+  max-width: calc(100vw - 24px);
+  z-index: 60;
+  padding: var(--sp-3, 12px) var(--sp-3, 12px);
+  border-radius: var(--r-lg, 12px);
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.10));
+  background:
+    linear-gradient(160deg, rgba(99, 102, 241, 0.18) 0%, rgba(20, 22, 36, 0.92) 60%),
+    rgba(14, 16, 28, 0.96);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 24px 60px -20px rgba(0, 0, 0, 0.7);
+  color: var(--text-primary, #f5f6fb);
+  font-size: 13px;
+  line-height: 1.45;
+  pointer-events: none;
+  animation: lobby-tooltip-fade 140ms ease-out both;
+}
+@keyframes lobby-tooltip-fade {
+  from { opacity: 0; transform: translateY(2px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.lobby-tooltip-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--text-primary, #f5f6fb);
+}
+.lobby-tooltip-desc {
+  color: var(--text-secondary, rgba(245, 246, 251, 0.78));
+  margin-bottom: 8px;
+}
+.lobby-tooltip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-size: 12px;
+  color: var(--text-tertiary, rgba(245, 246, 251, 0.62));
+  margin-bottom: 8px;
+}
+.lobby-tooltip-mp {
+  color: #6ee7b7;
+  font-weight: 600;
+}
+.lobby-tooltip-howto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  color: var(--text-secondary, rgba(245, 246, 251, 0.78));
+}
+.lobby-tooltip-howto-label {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary, rgba(245, 246, 251, 0.55));
+}
+
+/* Touch-only viewports: tooltip is a long-press affordance, never a
+   hover one — block stray showings on devices without a fine pointer
+   so the visible-state in JS is the only thing that paints it. */
+@media (hover: none) and (pointer: coarse) {
+  .lobby-tooltip { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lobby-tooltip { animation: none; }
 }
