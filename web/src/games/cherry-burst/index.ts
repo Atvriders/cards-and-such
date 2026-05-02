@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CherryBurstState, CherryBurstAction, CherryBurstSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling: the more cherries you burst in 30 seconds, the higher
 Burst those cherries and rack up the points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CherryBurstSettings),
-  reducer, isTerminal, component: CherryBurstGame,
+  reducer, isTerminal,
+  hint: (state: CherryBurstState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-cherry-burst-target"]', pulses: 3 };
+  },
+  component: CherryBurstGame,
 };

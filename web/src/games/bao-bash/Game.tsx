@@ -29,7 +29,7 @@ export function BaoBashGame({ state, dispatch, onGameOver }: GameProps<BaoBashSt
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="baobash-target"
+              className="baobash-target" data-testid="hint-target-bao-bash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as BaoBashAction)}
               aria-label="target"

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CaramelCatchState, CaramelCatchAction, CaramelCatchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const caramelCatchPlugin: GamePlugin<CaramelCatchState, CaramelCatchActio
   howToPlay:"Caramel Catch is a sticky 30-second clicker arcade. Soft, golden pieces of caramel drift across six lanes of a confectioner's playfield; tap each piece as fast as you can to catch it in your basket for 10 points. Each caramel is on screen for only a few ticks before stickily slipping away.\n\nThe game ticks roughly once per second, spawning fresh caramel in random lanes. The conveyor belt of sweets keeps moving, so practice your tapping cadence and keep your eyes wide open. Every caramel you catch is 10 sweet points closer to a top score.\n\nNo strategy, just speed and accuracy. The more caramels you catch in 30 seconds, the higher your score. Average runs land near 200-300 points; sharpshooters push 500+ on hot rounds. The clock counts down in the top right; when it hits zero, your final score is locked in.\n\nGet ready, get set, catch caramels!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CaramelCatchSettings),
-  reducer,isTerminal,component:CaramelCatchGame,
+  reducer,isTerminal,
+  hint: (state: CaramelCatchState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-caramel-catch-target"]', pulses: 3 };
+  },
+  component:CaramelCatchGame,
 };

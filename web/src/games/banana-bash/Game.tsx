@@ -29,7 +29,7 @@ export function BananaBashGame({ state, dispatch, onGameOver }: GameProps<Banana
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="bananabash-target"
+              className="bananabash-target" data-testid="hint-target-banana-bash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background: "transparent", border: "none" }}
               onClick={() => dispatch({ type: "pop", id: p.id } as BananaBashAction)}
               aria-label="target"

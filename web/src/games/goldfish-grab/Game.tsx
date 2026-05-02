@@ -29,7 +29,7 @@ export function GoldfishGrabGame({ state, dispatch, onGameOver }: GameProps<Gold
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="gg-target"
+              className="gg-target" data-testid="hint-target-goldfish-grab-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as GoldfishGrabAction)}
               aria-label="goldfish-grab">🐟</button>

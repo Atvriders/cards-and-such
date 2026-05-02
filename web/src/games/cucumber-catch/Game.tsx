@@ -29,7 +29,7 @@ export function CucumberCatchGame({ state, dispatch, onGameOver }: GameProps<Cuc
           const y = 20 + ((c.ticksLeft * 23) % 70);
           return (
             <button key={c.id}
-              className="cucumbercatch-target"
+              className="cucumbercatch-target" data-testid="hint-target-cucumber-catch-target"
               style={{ left:`${x}%`, top:`${y}%`, transform:"translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"catch", id:c.id } as CucumberCatchAction)}
               aria-label="cucumber">🥒</button>

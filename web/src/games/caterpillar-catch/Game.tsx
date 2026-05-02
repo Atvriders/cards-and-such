@@ -29,7 +29,7 @@ export function CaterpillarCatchGame({ state, dispatch, onGameOver }: GameProps<
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ctc-target"
+              className="ctc-target" data-testid="hint-target-caterpillar-catch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CaterpillarCatchAction)}
               aria-label="caterpillar-catch"

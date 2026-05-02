@@ -28,7 +28,7 @@ export function BrickBashGame({ state, dispatch, onGameOver }: GameProps<BrickBa
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="ck-target"
+              className="ck-target" data-testid="hint-target-brick-bash-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"hit", id:p.id } as BrickBashAction)}
               aria-label="target"

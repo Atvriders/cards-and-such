@@ -29,7 +29,7 @@ export function CrabCatchGame({ state, dispatch, onGameOver }: GameProps<CrabCat
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="cc-target"
+              className="cc-target" data-testid="hint-target-crab-catch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CrabCatchAction)}
               aria-label="crab-catch"

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BikeBashState, BikeBashAction, BikeBashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling: the more bikes you tap in 30 seconds, the higher you s
 Pedal to the metal!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BikeBashSettings),
-  reducer,isTerminal,component:BikeBashGame,
+  reducer,isTerminal,
+  hint: (state: BikeBashState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-bike-bash-target"]', pulses: 3 };
+  },
+  component:BikeBashGame,
 };

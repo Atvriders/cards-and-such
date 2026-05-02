@@ -29,7 +29,7 @@ export function BubbleBurstArcadeGame({ state, dispatch, onGameOver }: GameProps
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="bubbleburstarcade-target"
+              className="bubbleburstarcade-target" data-testid="hint-target-bubble-burst-arcade-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background: "transparent", border: "none" }}
               onClick={() => dispatch({ type: "pop", id: p.id } as BubbleBurstArcadeAction)}
               aria-label="target"

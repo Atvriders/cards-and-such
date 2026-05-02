@@ -29,7 +29,7 @@ export function EggCatchGame({ state, dispatch, onGameOver }: GameProps<EggCatch
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="fc-target"
+              className="fc-target" data-testid="hint-target-egg-catch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as EggCatchAction)}
               aria-label="target">🥚</button>

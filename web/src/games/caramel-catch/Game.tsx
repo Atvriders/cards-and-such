@@ -29,7 +29,7 @@ export function CaramelCatchGame({ state, dispatch, onGameOver }: GameProps<Cara
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="caramelcatch-target"
+              className="caramelcatch-target" data-testid="hint-target-caramel-catch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"catch", id:p.id } as CaramelCatchAction)}
               aria-label="target"

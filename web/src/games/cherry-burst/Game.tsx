@@ -29,7 +29,7 @@ export function CherryBurstGame({ state, dispatch, onGameOver }: GameProps<Cherr
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="cherryburst-target"
+              className="cherryburst-target" data-testid="hint-target-cherry-burst-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background: "transparent", border: "none" }}
               onClick={() => dispatch({ type: "pop", id: p.id } as CherryBurstAction)}
               aria-label="target"

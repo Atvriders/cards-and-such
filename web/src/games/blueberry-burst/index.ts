@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlueberryBurstState, BlueberryBurstAction, BlueberryBurstSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There is no skill ceiling: the more blueberries you burst in 30 seconds, the hig
 Burst those berries and rack up the points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as BlueberryBurstSettings),
-  reducer, isTerminal, component: BlueberryBurstGame,
+  reducer, isTerminal,
+  hint: (state: BlueberryBurstState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-blueberry-burst-target"]', pulses: 3 };
+  },
+  component: BlueberryBurstGame,
 };

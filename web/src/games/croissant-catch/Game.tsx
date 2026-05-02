@@ -29,7 +29,7 @@ export function CroissantCatchGame({ state, dispatch, onGameOver }: GameProps<Cr
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="croissantcatch-target"
+              className="croissantcatch-target" data-testid="hint-target-croissant-catch-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)", background:"transparent", border:"none" }}
               onClick={() => dispatch({ type:"pop", id:p.id } as CroissantCatchAction)}
               aria-label="Croissant Catch">🥐</button>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BagelBashState, BagelBashAction, BagelBashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling — the more bagels you click in 30 seconds, the higher
 Get bashing before those bagels roll past you!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BagelBashSettings),
-  reducer,isTerminal,component:BagelBashGame,
+  reducer,isTerminal,
+  hint: (state: BagelBashState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-bagel-bash-target"]', pulses: 3 };
+  },
+  component:BagelBashGame,
 };

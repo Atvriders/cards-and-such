@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CroissantCatchState, CroissantCatchAction, CroissantCatchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ There's no skill ceiling — the more croissants you catch in 30 seconds, the hi
 Ne les manquez pas — don't miss them! Tap fast for a flaky-fresh top score.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CroissantCatchSettings),
-  reducer,isTerminal,component:CroissantCatchGame,
+  reducer,isTerminal,
+  hint: (state: CroissantCatchState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (!state.targets || state.targets.length === 0) return null;
+    return { selector: '[data-testid="hint-target-croissant-catch-target"]', pulses: 3 };
+  },
+  component:CroissantCatchGame,
 };

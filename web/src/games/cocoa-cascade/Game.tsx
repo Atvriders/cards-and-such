@@ -28,7 +28,7 @@ export function CocoaCascadeGame({ state, dispatch, onGameOver }: GameProps<Coco
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="cocoa-target"
+              className="cocoa-target" data-testid="hint-target-cocoa-cascade-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as CocoaCascadeAction)}
               aria-label="cocoa-cascade"

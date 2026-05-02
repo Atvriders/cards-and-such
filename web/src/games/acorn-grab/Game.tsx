@@ -29,7 +29,7 @@ export function AcornGrabGame({ state, dispatch, onGameOver }: GameProps<AcornGr
           const y = 20 + ((p.ticksLeft * 23) % 70);
           return (
             <button key={p.id}
-              className="acg-target"
+              className="acg-target" data-testid="hint-target-acorn-grab-target"
               style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
               onClick={() => dispatch({ type:"click", id:p.id } as AcornGrabAction)}
               aria-label="acorn-grab"
