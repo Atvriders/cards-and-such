@@ -22,6 +22,7 @@ import {
   setCoachmarkDone,
 } from "../platform/tutorials.js";
 import { loadStats } from "../platform/stats.js";
+import { getRecommendations } from "../games/recommend.js";
 import { track } from "../platform/analytics.js";
 import "./LobbyPage.css";
 
@@ -681,6 +682,22 @@ export default function LobbyPage(): JSX.Element {
     const byId = new Map(GAMES.filter((g) => g != null).map((g) => [g.id, g] as const));
     return FEATURED_IDS.map((id) => byId.get(id)).filter((g): g is GamePlugin => Boolean(g));
   }, []);
+
+  // Personalized recommendations — surfaced below the Featured strip
+  // once the user has a non-trivial play history (>=3 plays). The
+  // recommender is pure; we feed it the same stats / favorites / ratings
+  // signals already loaded for the rest of the lobby.
+  const stats = useMemo(() => {
+    try { return loadStats(); } catch {
+      return { totalPlayed: 0, perGame: {}, perCategory: {} } as ReturnType<typeof loadStats>;
+    }
+  }, [favSet, ratings, lastPlayed]);
+  const totalPlays = stats.totalPlayed ?? 0;
+  const recommendations = useMemo(() => {
+    if (totalPlays < 3) return [] as GamePlugin[];
+    const all = GAMES.filter((g): g is GamePlugin => g != null);
+    return getRecommendations(stats, favSet, ratings, all, { lastPlayed });
+  }, [stats, favSet, ratings, lastPlayed, totalPlays]);
 
   /**
    * Compute the canonical lobby list ONCE per registry: every game gets
@@ -1402,6 +1419,48 @@ export default function LobbyPage(): JSX.Element {
                 />
               );
             })}
+          </div>
+        </section>
+      )}
+
+      {!query && filter === "all" && recommendations.length > 0 && (
+        <section
+          className="lobby-recommended"
+          aria-label="Recommended for you"
+          data-testid="lobby-recommended"
+        >
+          <h2>
+            <span className="lobby-featured-spark" aria-hidden="true">★</span>
+            Recommended for you
+          </h2>
+          <div className="lobby-grid lobby-grid--featured">
+            {recommendations.map((g) => (
+              <Link
+                key={`rec-${g.id}`}
+                to={`/play/${g.id}`}
+                className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured`}
+                data-testid={`rec-tile-${g.id}`}
+              >
+                <span className="tile-stripe" aria-hidden="true" />
+                <span className="tile-sheen" aria-hidden="true" />
+                <div className="tile-meta">
+                  <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
+                    <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
+                    {CATEGORY_LABELS[g.category]}
+                  </span>
+                </div>
+                <div className="tile-title lobby-tile-title">{g.title}</div>
+                <div className="tile-desc">{g.description}</div>
+                <div className="tile-foot">
+                  <span className="tile-players">
+                    {g.players.min === g.players.max
+                      ? `${g.players.min} player${g.players.min === 1 ? "" : "s"}`
+                      : `${g.players.min}–${g.players.max} players`}
+                  </span>
+                  <span className="tile-cta" aria-hidden="true">Play</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
       )}
