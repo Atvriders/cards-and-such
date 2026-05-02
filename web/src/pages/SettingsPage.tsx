@@ -35,6 +35,8 @@ import {
   LS_SOUND_VOLUME,
   LS_MUTE_ON_HIDDEN,
   DEFAULT_VOLUME_PERCENT,
+  playSound,
+  type SoundName,
 } from "../platform/sounds.js";
 import {
   isMockLeaderboardEnabled,
@@ -43,6 +45,7 @@ import {
 import { useToast } from "../platform/ui/Toast.js";
 import { t } from "../platform/i18n.js";
 import { resetWelcomeTutorial, setCoachmarkPending } from "../platform/tutorials.js";
+import { track, getEvents, clearEvents, type AnalyticsEvent } from "../platform/analytics.js";
 import "./SettingsPage.css";
 
 type CardBack = "classic-blue" | "red-weave" | "plain";
@@ -199,6 +202,9 @@ export default function SettingsPage(): JSX.Element {
   const [showUndoCount, setShowUndoCount] = useState<boolean>(readShowUndoCount);
   const [mockLeaderboard, setMockLeaderboard] = useState<boolean>(isMockLeaderboardEnabled);
   const importInputRef = useRef<HTMLInputElement | null>(null);
+  // Debounce timer for the volume-preview tone. We don't want to fire one
+  // tone per drag event — wait 80ms after the last change to play.
+  const volumePreviewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function refreshFromStorage() {
     setTheme(loadSavedThemeChoice());
@@ -350,12 +356,22 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     applyLightMode(light);
   }, [light]);
+  // Skip the very first render of each setting effect — the persistence
+  // useEffects fire on mount with the values that were just *read* from
+  // storage, not user-driven changes. Only emit setting.change after the
+  // first run.
+  const settingsHydrated = useRef(false);
+  useEffect(() => {
+    settingsHydrated.current = true;
+  }, []);
   useEffect(() => {
     localStorage.setItem(LS_CARD_BACK, cardBack);
     applyCardBack(cardBack);
+    if (settingsHydrated.current) track("setting.change", { key: "cardBack", value: cardBack });
   }, [cardBack]);
   useEffect(() => {
     localStorage.setItem(LS_SOUND, String(sound));
+    if (settingsHydrated.current) track("setting.change", { key: "sound", value: sound });
   }, [sound]);
   useEffect(() => {
     localStorage.setItem(LS_VOLUME, String(volume));
@@ -366,6 +382,7 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     localStorage.setItem(LS_ANIMATIONS, animations);
     applyAnimations(animations);
+    if (settingsHydrated.current) track("setting.change", { key: "animations", value: animations });
   }, [animations]);
   useEffect(() => {
     localStorage.setItem(LS_CARD_FONT, cardFont);
@@ -631,11 +648,66 @@ export default function SettingsPage(): JSX.Element {
             max={100}
             step={1}
             value={volume}
-            onChange={(e) => setVolume(Number.parseInt(e.target.value, 10))}
+            onChange={(e) => {
+              const next = Number.parseInt(e.target.value, 10);
+              setVolume(next);
+              // Same-tab live update — sounds.ts caches the volume in module
+              // scope and the `storage` event doesn't fire in the writing tab.
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(
+                  new CustomEvent("cards:volume-change", { detail: next }),
+                );
+              }
+              // Debounced preview tone so the user can hear the new level
+              // without firing one beep per drag tick.
+              if (volumePreviewTimerRef.current) {
+                clearTimeout(volumePreviewTimerRef.current);
+              }
+              volumePreviewTimerRef.current = setTimeout(() => {
+                volumePreviewTimerRef.current = null;
+                playSound("card-place");
+              }, 80);
+            }}
             disabled={!sound}
             className="settings-range"
             data-testid="settings-volume"
+            aria-valuetext={`${volume}%`}
           />
+        </div>
+
+        <div className="settings-divider" role="presentation" />
+
+        {/* Per-SFX preview buttons — let the user audition each category.
+            Disabled when the master toggle is off so we don't surprise them
+            with sound when they've explicitly muted. */}
+        <div className="settings-field" data-testid="settings-test-sounds">
+          <div className="settings-field-label">Test sounds</div>
+          <p className="settings-hint">
+            Play a one-shot sample of each effect at the current volume.
+          </p>
+          <div className="settings-row">
+            {(
+              [
+                { id: "card-deal", label: "Card deal" },
+                { id: "card-flip", label: "Card flip" },
+                { id: "card-place", label: "Card place" },
+                { id: "card-shuffle", label: "Card shuffle" },
+                { id: "win", label: "Win" },
+                { id: "win-fanfare", label: "Win fanfare" },
+              ] as { id: SoundName; label: string }[]
+            ).map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                className="pill"
+                onClick={() => playSound(s.id)}
+                disabled={!sound}
+                data-testid={`settings-test-${s.id}`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="settings-divider" role="presentation" />

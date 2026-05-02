@@ -174,6 +174,19 @@ function attachListenersOnce(): void {
     }
   });
 
+  // Same-tab live update: the `storage` event doesn't fire in the tab that
+  // wrote the value, so SettingsPage broadcasts a CustomEvent on slider
+  // change. Honors a numeric `detail` for the new percent, otherwise
+  // re-reads localStorage.
+  window.addEventListener("cards:volume-change", (e: Event) => {
+    const detail = (e as CustomEvent<number | undefined>).detail;
+    if (typeof detail === "number" && Number.isFinite(detail)) {
+      currentVolumePercent = Math.min(100, Math.max(0, Math.round(detail)));
+    } else {
+      currentVolumePercent = readVolumePercent();
+    }
+  });
+
   if (typeof document !== "undefined") {
     hidden = document.visibilityState === "hidden";
     document.addEventListener("visibilitychange", () => {
