@@ -7,6 +7,7 @@ import { PageHead } from "../platform/PageHead.js";
 import { StarRating, readRatings } from "../platform/StarRating.js";
 import { loadStats } from "../platform/stats.js";
 import { t } from "../platform/i18n.js";
+import { CHALLENGING_GAME_IDS, QUICK_GAME_IDS } from "../platform/gameTags.js";
 import "./LobbyPage.css";
 import "./CategoryPage.css";
 
@@ -28,10 +29,9 @@ import "./CategoryPage.css";
  * Test ids: `cat-header`, `cat-featured-<id>`, `cat-game-<id>`,
  * `cat-filter-<name>`, `cat-page-<n>`.
  *
- * QUICK_GAME_IDS / CHALLENGING_GAME_IDS are file-private to LobbyPage,
- * so a small in-file copy lives below — keep this set in lockstep with
- * LobbyPage's (the lists move infrequently and refactoring the lobby
- * just for this page would balloon the diff).
+ * QUICK_GAME_IDS / CHALLENGING_GAME_IDS are imported from
+ * `platform/gameTags.ts` so this page and LobbyPage share a single
+ * source of truth for the curated difficulty sets.
  */
 
 const CATEGORIES: GameCategory[] = ["solitaire", "cards", "dice", "board", "arcade"];
@@ -68,40 +68,8 @@ const CATEGORY_BLURB: Record<GameCategory, string> = {
   arcade: "Arcade — reflex, action, and casual puzzlers for a quick burst.",
 };
 
-// In-file copies of LobbyPage's curated difficulty sets (file-private there).
-const QUICK_GAME_IDS = new Set<string>([
-  "wordle-mini",
-  "speed",
-  "war",
-  "snap",
-  "high-low",
-  "coin-flip",
-  "yacht-mini",
-  "pig-dice",
-  "ship-captain-crew",
-  "bar-dice-ship-captain",
-  "tic-tac-toe-cards",
-  "memory-pairs",
-  "klondike-1",
-]);
-
-const CHALLENGING_GAME_IDS = new Set<string>([
-  "spider",
-  "freecell",
-  "holdem",
-  "stud-7",
-  "omaha",
-  "bridge",
-  "go",
-  "chess",
-  "shogi",
-  "mahjong",
-  "skat",
-  "pinochle",
-  "canasta",
-  "hanabi",
-  "the-crew",
-]);
+// QUICK_GAME_IDS / CHALLENGING_GAME_IDS are imported from
+// `platform/gameTags.ts` and shared with LobbyPage.
 
 const TOP_RATED_THRESHOLD = 4;
 const PAGE_SIZE = 80;

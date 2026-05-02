@@ -2,6 +2,7 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState, useCallback } f
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GAMES } from "../games/registry.js";
 import { FAMILIES, compareTitles, expandFamily, type GameFamily } from "../games/families.js";
+import { getEta, getDifficulty, difficultyDots } from "../games/etaTable.js";
 import type { GameCategory, GamePlugin } from "../platform/game-plugin/types.js";
 import { PageHead } from "../platform/PageHead.js";
 import { Skeleton } from "../platform/Skeleton.js";
@@ -9,6 +10,11 @@ import { StarRating, readRatings } from "../platform/StarRating.js";
 import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { Badge, type BadgeKind } from "../platform/Badge.js";
+import {
+  CHALLENGING_GAME_IDS,
+  QUICK_GAME_IDS,
+  pickBadgeKind,
+} from "../platform/gameTags.js";
 import { readFavorites, toggleFavorite as toggleFavoritePersist } from "../platform/userdata.js";
 import { highlightMatch } from "../platform/highlight.js";
 import {
@@ -455,59 +461,10 @@ const PAGE_SIZE = 80;
 // for the NEW badge. Registry order is the proxy since plugins lack timestamps.
 const NEW_GAME_WINDOW = 60;
 
-// Hand-picked sets that drive QUICK / CHALLENGING badges. Anything not in
-// either set gets no difficulty hint. Intentionally short — the badge is
-// meant to be rare so it stays meaningful.
-const QUICK_GAME_IDS = new Set<string>([
-  "wordle-mini",
-  "speed",
-  "war",
-  "snap",
-  "high-low",
-  "coin-flip",
-  "yacht-mini",
-  "pig-dice",
-  "ship-captain-crew",
-  "bar-dice-ship-captain",
-  "tic-tac-toe-cards",
-  "memory-pairs",
-  "klondike-1",
-]);
-
-const CHALLENGING_GAME_IDS = new Set<string>([
-  "spider",
-  "freecell",
-  "holdem",
-  "stud-7",
-  "omaha",
-  "bridge",
-  "go",
-  "chess",
-  "shogi",
-  "mahjong",
-  "skat",
-  "pinochle",
-  "canasta",
-  "hanabi",
-  "the-crew",
-]);
-
-// Order: NEW > CHALLENGING > QUICK > POPULAR (rating-based) > EDITORS-PICK.
-// Returns null when no badge should be shown.
-function pickBadgeKind(
-  gameId: string,
-  isNew: boolean,
-  userRating: number | undefined,
-): BadgeKind | null {
-  if (isNew) return "new";
-  if (CHALLENGING_GAME_IDS.has(gameId)) return "challenging";
-  if (QUICK_GAME_IDS.has(gameId)) return "quick";
-  if (typeof userRating === "number" && userRating >= TOP_RATED_THRESHOLD) {
-    return "popular";
-  }
-  if ((FEATURED_IDS as readonly string[]).includes(gameId)) return "editors-pick";
-  return null;
-}
+// Curated QUICK / CHALLENGING id sets and `pickBadgeKind` live in
+// `platform/gameTags.ts` so CategoryPage can share the same data without
+// drift. The editor's-pick list and rating threshold remain lobby-local
+// and are threaded through `pickBadgeKind`'s options bag below.
 
 /**
  * A lobby entry is either a single un-grouped game or a family of
@@ -1594,6 +1551,46 @@ function HeartToggle({
   );
 }
 
+/**
+ * Tiny "at-a-glance" chip pair (estimated playtime + difficulty
+ * indicator) rendered just below the tile description. Difficulty
+ * is shown as 1-3 dots so the chip stays compact next to the time
+ * pill; on narrow viewports the dot chip collapses (CSS hides it)
+ * leaving only the eta to keep the tile from wrapping awkwardly.
+ */
+function TileMetaChips({ gameId }: { gameId: string }): JSX.Element {
+  const eta = getEta(gameId);
+  const difficulty = getDifficulty(gameId);
+  const dots = difficultyDots(difficulty);
+  const compactLabel = `${eta.mins}m`;
+  return (
+    <div className="tile-chips" aria-hidden="false">
+      <span
+        className="tile-chip tile-chip-eta"
+        data-testid={`tile-eta-${gameId}`}
+        title={`Estimated playtime: ${eta.label}`}
+      >
+        <span aria-hidden="true">⏱</span>
+        <span className="tile-chip-label">{compactLabel}</span>
+      </span>
+      <span
+        className={`tile-chip tile-chip-diff tile-chip-diff-${difficulty}`}
+        data-testid={`tile-difficulty-${gameId}`}
+        aria-label={`Difficulty: ${difficulty}`}
+        title={`Difficulty: ${difficulty}`}
+      >
+        {[1, 2, 3].map((i) => (
+          <span
+            key={i}
+            className={`tile-chip-dot${i <= dots ? " tile-chip-dot--on" : ""}`}
+            aria-hidden="true"
+          />
+        ))}
+      </span>
+    </div>
+  );
+}
+
 function GameCard({
   game: g,
   userRating = 0,
@@ -1623,7 +1620,10 @@ function GameCard({
     },
     g.id,
   );
-  const badgeKind = pickBadgeKind(g.id, isNew, userRating);
+  const badgeKind = pickBadgeKind(g.id, isNew, userRating, {
+    featuredIds: FEATURED_IDS,
+    topRatedThreshold: TOP_RATED_THRESHOLD,
+  });
   // Micro-bump: on mousedown we briefly scale the tile to 0.98 so the
   // press registers visually before the click triggers navigation. The
   // class is dropped 80ms later (or on mouseup/leave) so the scale
@@ -1684,6 +1684,7 @@ function GameCard({
           : g.title}
       </div>
       <div className="tile-desc">{g.description}</div>
+      <TileMetaChips gameId={g.id} />
       <div className="tile-foot">
         <span className="tile-players">
           {g.players.min === g.players.max ? `${g.players.min} player${g.players.min === 1 ? "" : "s"}` : `${g.players.min}–${g.players.max} players`}
@@ -1934,7 +1935,10 @@ function FeaturedTile({
   onToggleFavorite?: (id: string) => void;
   highlightQuery?: string;
 }): JSX.Element {
-  const featuredBadge = pickBadgeKind(g.id, isNew, userRating);
+  const featuredBadge = pickBadgeKind(g.id, isNew, userRating, {
+    featuredIds: FEATURED_IDS,
+    topRatedThreshold: TOP_RATED_THRESHOLD,
+  });
   // Featured tiles get the same hover-tooltip treatment regardless of
   // whether they end up rendering as a link or a button.
   const tooltipData: TileTooltipData = familyId
