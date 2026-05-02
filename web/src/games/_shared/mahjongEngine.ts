@@ -123,6 +123,27 @@ export function hasMatchingPair(tiles: MahjongTile[]): boolean {
   return false;
 }
 
+/** Find the first free tile with a matching free partner. Returns its id, or null
+ *  if no legal pair exists. Used by plugin `hint` to pulse a hint-worthy tile. */
+export function findHintTileId(state: MahjongState): number | null {
+  if (state.won || state.gameOver) return null;
+  const free = state.tiles.filter((t) => !t.removed && isFree(t, state.tiles));
+  for (let i = 0; i < free.length; i++) {
+    for (let j = i + 1; j < free.length; j++) {
+      if (free[i]!.face === free[j]!.face) return free[i]!.id;
+    }
+  }
+  return null;
+}
+
+/** Returns a hint-target object pointing at the first tile of the first
+ *  available legal pair, or null if none. Suitable for plugin `hint` field. */
+export function mahjongHint(state: MahjongState): { selector: string; pulses?: number } | null {
+  const id = findHintTileId(state);
+  if (id === null) return null;
+  return { selector: `[data-testid="hint-target-mahjong-tile-${id}"]`, pulses: 3 };
+}
+
 export function makeInitialState(layout: TilePos[], seed: number): MahjongState {
   const tiles = buildTiles(layout, seed);
   return {

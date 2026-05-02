@@ -1,5 +1,6 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MahjongState, MahjongAction } from "../_shared/mahjongEngine.js";
+import { mahjongHint } from "../_shared/mahjongEngine.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MahjongIshidoLayoutGame } from "./Game.js";
 
@@ -16,5 +17,6 @@ export const mahjongIshidoLayoutPlugin: GamePlugin<MahjongState, MahjongAction, 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: mahjongHint,
   component: MahjongIshidoLayoutGame,
 };

@@ -1,5 +1,6 @@
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MahjongState, MahjongAction } from "../_shared/mahjongEngine.js";
+import { mahjongHint } from "../_shared/mahjongEngine.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MahjongConnectGame } from "./Game.js";
 
@@ -16,5 +17,6 @@ export const mahjongConnectPlugin: GamePlugin<MahjongState, MahjongAction, typeo
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: mahjongHint,
   component: MahjongConnectGame,
 };

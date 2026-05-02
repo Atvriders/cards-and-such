@@ -90,6 +90,7 @@ export function MahjongBoard({
               onClick={() => handleClick(tile.id)}
               disabled={!free || !!terminal}
               aria-label={`${tile.face} tile`}
+              data-testid={`hint-target-mahjong-tile-${tile.id}`}
             >
               {tile.face}
             </button>
