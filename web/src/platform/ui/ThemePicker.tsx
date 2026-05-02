@@ -1,5 +1,18 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { THEMES, applyTheme, loadSavedTheme, type ThemeId } from "../themes.js";
+import {
+  THEMES,
+  applyTheme,
+  applyCustomTheme,
+  applySavedTheme,
+  loadSavedThemeChoice,
+  loadCustomTheme,
+  previewTheme,
+  CUSTOM_THEME_ID,
+  DEFAULT_THEME,
+  type ThemeId,
+  type ThemeChoice,
+  type CustomThemeConfig,
+} from "../themes.js";
 import { Skeleton } from "../Skeleton.js";
 import { emitSparkles } from "../Sparkles.js";
 import { useFocusTrap } from "../useFocusTrap.js";
@@ -10,12 +23,18 @@ import "./ThemePicker.css";
  * Header theme/background picker.
  *
  * Renders a small palette button. Clicking opens a popover grid of swatches.
- * Selecting a swatch applies the theme via `applyTheme()` (which also
- * persists to localStorage). Click-outside / Escape close the popover.
+ * Hovering a swatch temporarily applies its CSS variables to :root for a
+ * live preview (without persisting); leaving the swatch reverts to the
+ * saved theme. Selecting a swatch applies + persists via `applyTheme()`.
+ *
+ * The trailing "Custom" entry reveals a color input that drives the custom
+ * theme (persisted as `cards-bg-theme=custom` plus
+ * `cards-theme-custom={accent:"#..."}`).
  */
 export default function ThemePicker(): JSX.Element {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<ThemeId>(() => loadSavedTheme());
+  const [active, setActive] = useState<ThemeChoice>(() => loadSavedThemeChoice());
+  const [custom, setCustom] = useState<CustomThemeConfig>(() => loadCustomTheme());
   // While `priming` is true the popover renders skeleton swatches instead
   // of the real grid — gives the popover a tactile "warming up" feel
   // that matches the rest of the app's loading states. Briefly true on
@@ -39,14 +58,18 @@ export default function ThemePicker(): JSX.Element {
     return () => clearTimeout(id);
   }, [open]);
 
-  // Close on outside click / Escape.
+  // Close on outside click / Escape. Also revert any in-flight preview.
   useEffect(() => {
     if (!open) return;
     const onDocClick = (e: MouseEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+      if (!rootRef.current?.contains(e.target as Node)) {
+        applySavedTheme();
+        setOpen(false);
+      }
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        applySavedTheme();
         setOpen(false);
         buttonRef.current?.focus();
       }
@@ -66,8 +89,25 @@ export default function ThemePicker(): JSX.Element {
     buttonRef.current?.focus();
   }, []);
 
+  const selectCustom = useCallback((cfg: CustomThemeConfig) => {
+    applyCustomTheme(cfg);
+    setActive(CUSTOM_THEME_ID);
+    setCustom(cfg);
+  }, []);
+
+  // Hover-preview: temporarily apply theme variables without persisting.
+  const hoverPreview = useCallback((id: ThemeId) => {
+    previewTheme(id);
+  }, []);
+  const hoverPreviewCustom = useCallback(() => {
+    previewTheme(DEFAULT_THEME, custom.accent);
+  }, [custom.accent]);
+  const revertPreview = useCallback(() => {
+    applySavedTheme();
+  }, []);
+
   return (
-    <div ref={rootRef} className="theme-picker">
+    <div ref={rootRef} className="theme-picker" onMouseLeave={revertPreview}>
       <button
         ref={buttonRef}
         type="button"
@@ -118,24 +158,29 @@ export default function ThemePicker(): JSX.Element {
             className={`theme-picker-grid${priming ? " is-priming" : ""}`}
             role="radiogroup"
             aria-label="Background themes"
+            onMouseLeave={revertPreview}
           >
-            {THEMES.map((t) => {
-              const selected = active === t.id;
+            {THEMES.map((th) => {
+              const selected = active === th.id;
               return (
                 <button
-                  key={t.id}
+                  key={th.id}
                   type="button"
                   role="radio"
                   aria-checked={selected}
                   className={`theme-swatch${selected ? " is-selected" : ""}`}
+                  data-testid={`theme-row-${th.id}`}
+                  onMouseEnter={() => hoverPreview(th.id)}
+                  onFocus={() => hoverPreview(th.id)}
+                  onBlur={revertPreview}
                   onClick={(e) => {
                     emitSparkles(e.clientX, e.clientY);
-                    select(t.id);
+                    select(th.id);
                   }}
                 >
                   <span
                     className="theme-swatch-color"
-                    style={{ background: t.swatch }}
+                    style={{ background: th.swatch }}
                     aria-hidden="true"
                   >
                     {selected && (
@@ -151,11 +196,69 @@ export default function ThemePicker(): JSX.Element {
                       </svg>
                     )}
                   </span>
-                  <span className="theme-swatch-label">{t.label}</span>
+                  <span className="theme-swatch-label">{th.label}</span>
                 </button>
               );
             })}
+
+            {/* Custom-theme entry: same shape as the canonical swatches, but
+                clicking commits the custom theme and reveals a color input
+                so the user can dial in their accent. */}
+            <button
+              type="button"
+              role="radio"
+              aria-checked={active === CUSTOM_THEME_ID}
+              className={`theme-swatch${active === CUSTOM_THEME_ID ? " is-selected" : ""}`}
+              data-testid="theme-row-custom"
+              onMouseEnter={hoverPreviewCustom}
+              onFocus={hoverPreviewCustom}
+              onBlur={revertPreview}
+              onClick={(e) => {
+                emitSparkles(e.clientX, e.clientY);
+                selectCustom(custom);
+              }}
+            >
+              <span
+                className="theme-swatch-color theme-swatch-color--custom"
+                style={{
+                  background: `conic-gradient(from 0deg, ${custom.accent}, #f87171, #fbbf24, #34d399, #60a5fa, ${custom.accent})`,
+                }}
+                aria-hidden="true"
+              >
+                {active === CUSTOM_THEME_ID && (
+                  <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path
+                      d="M5 12l4 4 10-10"
+                      fill="none"
+                      stroke="#fff"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </span>
+              <span className="theme-swatch-label">Custom</span>
+            </button>
           </div>
+
+          {active === CUSTOM_THEME_ID && (
+            <div className="theme-picker-custom" data-testid="theme-picker-custom">
+              <label className="theme-picker-custom-label">
+                <span>Accent</span>
+                <input
+                  type="color"
+                  value={custom.accent}
+                  onChange={(e) => {
+                    const next = { ...custom, accent: e.target.value };
+                    selectCustom(next);
+                  }}
+                  data-testid="theme-custom-accent"
+                  aria-label="Custom accent color"
+                />
+              </label>
+            </div>
+          )}
         </div>
       )}
     </div>

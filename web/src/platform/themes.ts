@@ -206,10 +206,38 @@ export const THEMES: Theme[] = [
 
 export const DEFAULT_THEME: ThemeId = "midnight";
 export const STORAGE_KEY = "cards-bg-theme";
+export const CUSTOM_STORAGE_KEY = "cards-theme-custom";
+/** Sentinel id for the user-defined custom theme. Not part of THEMES. */
+export const CUSTOM_THEME_ID = "custom" as const;
+export type ThemeChoice = ThemeId | typeof CUSTOM_THEME_ID;
+
+/** Persisted shape of the user's custom theme overrides. */
+export interface CustomThemeConfig {
+  /** Primary accent color as a `#rrggbb` hex string. */
+  accent: string;
+}
+
+export const DEFAULT_CUSTOM: CustomThemeConfig = { accent: "#7c8cf8" };
 
 export function getTheme(id: ThemeId | string | null | undefined): Theme {
   const found = THEMES.find((t) => t.id === id);
   return found ?? THEMES.find((t) => t.id === DEFAULT_THEME)!;
+}
+
+/**
+ * Apply CSS variables for a theme to :root *without* persisting. Used for
+ * hover-preview in the picker so we can revert cleanly on mouseleave.
+ * If `accentOverride` is provided (used by the custom theme) it replaces the
+ * theme's built-in accent.
+ */
+export function previewTheme(id: ThemeId, accentOverride?: string): void {
+  const theme = getTheme(id);
+  const root = typeof document !== "undefined" ? document.documentElement : null;
+  if (!root) return;
+  root.style.setProperty("--theme-bg", theme.bgGradient);
+  root.style.setProperty("--theme-felt", theme.feltGradient);
+  root.style.setProperty("--theme-accent", accentOverride ?? theme.accent);
+  root.setAttribute("data-theme", theme.id);
 }
 
 /**
@@ -218,28 +246,70 @@ export function getTheme(id: ThemeId | string | null | undefined): Theme {
  * Persists the selection to localStorage.
  */
 export function applyTheme(id: ThemeId): void {
-  const theme = getTheme(id);
-  const root = typeof document !== "undefined" ? document.documentElement : null;
-  if (root) {
-    root.style.setProperty("--theme-bg", theme.bgGradient);
-    root.style.setProperty("--theme-felt", theme.feltGradient);
-    root.style.setProperty("--theme-accent", theme.accent);
-    root.setAttribute("data-theme", theme.id);
-  }
+  previewTheme(id);
   try {
     if (typeof localStorage !== "undefined") {
-      localStorage.setItem(STORAGE_KEY, theme.id);
+      localStorage.setItem(STORAGE_KEY, getTheme(id).id);
     }
   } catch {
     /* ignore storage failures (private mode, quota, SSR) */
   }
 }
 
-/** Read the saved theme (or the default) without applying. */
-export function loadSavedTheme(): ThemeId {
+/** Read the saved custom-theme JSON, falling back to DEFAULT_CUSTOM. */
+export function loadCustomTheme(): CustomThemeConfig {
+  try {
+    if (typeof localStorage !== "undefined") {
+      const raw = localStorage.getItem(CUSTOM_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Partial<CustomThemeConfig> | null;
+        if (parsed && typeof parsed.accent === "string" && /^#[0-9a-fA-F]{6}$/.test(parsed.accent)) {
+          return { accent: parsed.accent };
+        }
+      }
+    }
+  } catch {
+    /* ignore JSON / storage errors */
+  }
+  return { ...DEFAULT_CUSTOM };
+}
+
+/** Persist a custom-theme config (does not change the active theme id). */
+export function saveCustomTheme(cfg: CustomThemeConfig): void {
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CUSTOM_STORAGE_KEY, JSON.stringify(cfg));
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
+/**
+ * Apply the custom theme: uses Midnight as the base bg/felt and overrides
+ * `--theme-accent` with the user's color. v1 keeps surfaces stable so the
+ * accent change is what reads on screen. Persists `cards-bg-theme=custom`.
+ */
+export function applyCustomTheme(cfg: CustomThemeConfig): void {
+  previewTheme(DEFAULT_THEME, cfg.accent);
+  const root = typeof document !== "undefined" ? document.documentElement : null;
+  if (root) root.setAttribute("data-theme", CUSTOM_THEME_ID);
+  saveCustomTheme(cfg);
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, CUSTOM_THEME_ID);
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Read the saved theme choice (one of THEMES ids or `"custom"`). */
+export function loadSavedThemeChoice(): ThemeChoice {
   try {
     if (typeof localStorage !== "undefined") {
       const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === CUSTOM_THEME_ID) return CUSTOM_THEME_ID;
       if (saved && THEMES.some((t) => t.id === saved)) {
         return saved as ThemeId;
       }
@@ -248,4 +318,28 @@ export function loadSavedTheme(): ThemeId {
     /* ignore */
   }
   return DEFAULT_THEME;
+}
+
+/**
+ * Read the saved theme (or the default) without applying. Returns the
+ * underlying base ThemeId — if the user has selected the custom theme
+ * the base id (`DEFAULT_THEME`) is returned for back-compat with code
+ * that only knows about the canonical 10 themes.
+ */
+export function loadSavedTheme(): ThemeId {
+  const choice = loadSavedThemeChoice();
+  return choice === CUSTOM_THEME_ID ? DEFAULT_THEME : choice;
+}
+
+/**
+ * Apply whatever theme is currently saved. Handles the "custom" branch by
+ * also reading the accent JSON. Use this on app boot.
+ */
+export function applySavedTheme(): void {
+  const choice = loadSavedThemeChoice();
+  if (choice === CUSTOM_THEME_ID) {
+    applyCustomTheme(loadCustomTheme());
+  } else {
+    applyTheme(choice);
+  }
 }

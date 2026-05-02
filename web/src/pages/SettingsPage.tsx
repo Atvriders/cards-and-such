@@ -12,9 +12,17 @@ import {
 import {
   THEMES,
   applyTheme,
-  loadSavedTheme,
+  applyCustomTheme,
+  applySavedTheme,
+  loadCustomTheme,
+  loadSavedThemeChoice,
+  previewTheme,
+  CUSTOM_THEME_ID,
+  CUSTOM_STORAGE_KEY,
+  DEFAULT_CUSTOM,
   DEFAULT_THEME,
-  type ThemeId,
+  type ThemeChoice,
+  type CustomThemeConfig,
 } from "../platform/themes.js";
 import {
   applyLightMode,
@@ -45,6 +53,7 @@ const LS_BG_THEME = "cards-bg-theme";
 
 const APPEARANCE_KEYS = [
   LS_BG_THEME,
+  CUSTOM_STORAGE_KEY,
   LS_CARD_BACK,
   LIGHT_STORAGE_KEY,
   LS_CARD_FONT,
@@ -149,7 +158,8 @@ function clearKeys(keys: readonly string[]): void {
 }
 
 export default function SettingsPage(): JSX.Element {
-  const [theme, setTheme] = useState<ThemeId>(() => loadSavedTheme());
+  const [theme, setTheme] = useState<ThemeChoice>(() => loadSavedThemeChoice());
+  const [customTheme, setCustomTheme] = useState<CustomThemeConfig>(() => loadCustomTheme());
   const [light, setLight] = useState<boolean>(() =>
     typeof document === "undefined" ? loadSavedLightMode() : isLightMode(),
   );
@@ -164,7 +174,8 @@ export default function SettingsPage(): JSX.Element {
   const importInputRef = useRef<HTMLInputElement | null>(null);
 
   function refreshFromStorage() {
-    setTheme(loadSavedTheme());
+    setTheme(loadSavedThemeChoice());
+    setCustomTheme(loadCustomTheme());
     setLight(loadSavedLightMode());
     setCardBack(readCardBack());
     setCardFont(readCardFont());
@@ -177,7 +188,7 @@ export default function SettingsPage(): JSX.Element {
     applyCardBack(readCardBack());
     applyAnimations(readAnimations());
     applyCardFont(readCardFont());
-    applyTheme(loadSavedTheme());
+    applySavedTheme();
     applyLightMode(loadSavedLightMode());
   }
 
@@ -257,6 +268,7 @@ export default function SettingsPage(): JSX.Element {
   function resetAppearance() {
     clearKeys(APPEARANCE_KEYS);
     setTheme(DEFAULT_THEME);
+    setCustomTheme({ ...DEFAULT_CUSTOM });
     setCardBack("classic-blue");
     setCardFont("modern");
     setLight(loadSavedLightMode());
@@ -264,6 +276,14 @@ export default function SettingsPage(): JSX.Element {
     applyCardBack("classic-blue");
     applyCardFont("modern");
     applyLightMode(loadSavedLightMode());
+  }
+  // "Reset theme" — narrower than the section reset; only clears the bg
+  // theme + custom JSON, leaves card back / light mode / fonts alone.
+  function resetTheme() {
+    clearKeys([LS_BG_THEME, CUSTOM_STORAGE_KEY]);
+    setTheme(DEFAULT_THEME);
+    setCustomTheme({ ...DEFAULT_CUSTOM });
+    applyTheme(DEFAULT_THEME);
   }
   function resetAudio() {
     clearKeys(AUDIO_KEYS);
@@ -281,8 +301,12 @@ export default function SettingsPage(): JSX.Element {
 
   // Persist + side-effects.
   useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
+    if (theme === CUSTOM_THEME_ID) {
+      applyCustomTheme(customTheme);
+    } else {
+      applyTheme(theme);
+    }
+  }, [theme, customTheme]);
   useEffect(() => {
     applyLightMode(light);
   }, [light]);
@@ -348,8 +372,23 @@ export default function SettingsPage(): JSX.Element {
         </div>
 
         <div className="settings-field">
-          <label className="settings-field-label">Background theme</label>
-          <div className="settings-row" role="radiogroup" aria-label="Background theme">
+          <label className="settings-field-label">
+            Background theme
+            <button
+              type="button"
+              className="settings-link settings-link--inline"
+              onClick={resetTheme}
+              data-testid="theme-reset"
+            >
+              Reset theme
+            </button>
+          </label>
+          <div
+            className="settings-row"
+            role="radiogroup"
+            aria-label="Background theme"
+            onMouseLeave={() => applySavedTheme()}
+          >
             {THEMES.map((th) => (
               <button
                 key={th.id}
@@ -358,7 +397,10 @@ export default function SettingsPage(): JSX.Element {
                 aria-checked={theme === th.id}
                 className={`theme-chip${theme === th.id ? " is-selected" : ""}`}
                 onClick={() => setTheme(th.id)}
-                data-testid={`settings-theme-${th.id}`}
+                onMouseEnter={() => previewTheme(th.id)}
+                onFocus={() => previewTheme(th.id)}
+                onBlur={() => applySavedTheme()}
+                data-testid={`theme-row-${th.id}`}
                 title={th.label}
               >
                 <span
@@ -369,7 +411,46 @@ export default function SettingsPage(): JSX.Element {
                 <span className="theme-chip-label">{th.label}</span>
               </button>
             ))}
+            <button
+              type="button"
+              role="radio"
+              aria-checked={theme === CUSTOM_THEME_ID}
+              className={`theme-chip${theme === CUSTOM_THEME_ID ? " is-selected" : ""}`}
+              onClick={() => setTheme(CUSTOM_THEME_ID)}
+              onMouseEnter={() => previewTheme(DEFAULT_THEME, customTheme.accent)}
+              onFocus={() => previewTheme(DEFAULT_THEME, customTheme.accent)}
+              onBlur={() => applySavedTheme()}
+              data-testid="theme-row-custom"
+              title="Custom"
+            >
+              <span
+                className="theme-chip-swatch"
+                style={{
+                  background: `conic-gradient(from 0deg, ${customTheme.accent}, #f87171, #fbbf24, #34d399, #60a5fa, ${customTheme.accent})`,
+                }}
+                aria-hidden="true"
+              />
+              <span className="theme-chip-label">Custom</span>
+            </button>
           </div>
+          {theme === CUSTOM_THEME_ID && (
+            <div className="settings-row" data-testid="theme-custom-controls">
+              <label className="settings-field-label settings-field-label--inline">
+                Accent color
+                <input
+                  type="color"
+                  value={customTheme.accent}
+                  onChange={(e) => {
+                    const next = { ...customTheme, accent: e.target.value };
+                    setCustomTheme(next);
+                  }}
+                  data-testid="theme-custom-accent"
+                  aria-label="Custom accent color"
+                  className="settings-color"
+                />
+              </label>
+            </div>
+          )}
         </div>
 
         <div className="settings-divider" role="presentation" />

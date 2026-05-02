@@ -33,6 +33,41 @@
 .settings-link:hover {
   border-bottom-color: rgba(199, 205, 254, 0.85);
 }
+/* Inline variant: rendered next to a field label, smaller + transparent so
+   it reads as an action link rather than a section header. */
+.settings-link--inline {
+  margin-left: 0.6rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  color: #c7cdfe;
+  border-bottom: 1px solid rgba(199, 205, 254, 0.4);
+}
+.settings-link--inline:hover {
+  border-bottom-color: rgba(199, 205, 254, 0.85);
+}
+/* Native color input styled to match the surrounding controls. */
+.settings-color {
+  width: 48px;
+  height: 28px;
+  margin-left: 0.6rem;
+  padding: 0;
+  border: 1px solid rgba(148, 163, 184, 0.30);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.settings-color::-webkit-color-swatch-wrapper { padding: 2px; }
+.settings-color::-webkit-color-swatch { border: none; border-radius: 4px; }
+.settings-field-label--inline {
+  display: inline-flex;
+  align-items: center;
+}
 
 /* ----------------------------------------------------------------- Card */
 .settings-card {

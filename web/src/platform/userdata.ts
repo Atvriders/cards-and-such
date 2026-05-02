@@ -21,6 +21,7 @@ export const KNOWN_KEYS: readonly string[] = [
   "cards-daily-streak",
   // appearance / preferences
   "cards-bg-theme",
+  "cards-theme-custom",
   "cards-card-back",
   "cards-card-font",
   "cards-animations",
