@@ -1,0 +1,86 @@
+name: Bug report
+description: Report a defect or unexpected behavior in cards-and-such.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report. Please fill out the sections below so we can reproduce and triage the issue quickly.
+  - type: input
+    id: game
+    attributes:
+      label: Affected game / area
+      description: Which game or part of the app is affected? (e.g. `klondike`, `bejeweled-twist`, lobby, settings)
+      placeholder: klondike
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear and concise description of the bug.
+      placeholder: When I do X, Y happens instead of Z.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps to reproduce the behavior.
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Desktop browser
+        - Mobile browser
+        - Installed PWA
+        - Self-hosted Docker
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / OS
+      description: e.g. Chrome 124 on Windows 11, Safari 17 on iOS 18
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: App version / commit
+      description: Visible in the About panel, or the deployed image tag.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console / network logs
+      description: Paste any relevant browser console output or server logs. This will be automatically formatted as code.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I searched existing issues and discussions and did not find a duplicate.
+          required: true
+        - label: I can reproduce this on the latest `master` build.
+          required: false

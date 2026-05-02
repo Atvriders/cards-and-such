@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & ideas (Discussions)
+    url: https://github.com/Atvriders/cards-and-such/discussions
+    about: Ask questions, share builds, or float half-baked ideas. Please use Discussions instead of opening a blank issue.
+  - name: Security report
+    url: https://github.com/Atvriders/cards-and-such/security/advisories/new
+    about: Report a security vulnerability privately via GitHub Security Advisories.
