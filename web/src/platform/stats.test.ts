@@ -194,8 +194,8 @@ describe("ACHIEVEMENTS – baseline", () => {
     }
   });
 
-  it("array contains 30 new achievements (36 total)", () => {
-    expect(ACHIEVEMENTS.length).toBe(36);
+  it("array contains the expected total achievement count (44 with v44 batch)", () => {
+    expect(ACHIEVEMENTS.length).toBe(44);
   });
 });
 
@@ -279,5 +279,83 @@ describe("ACHIEVEMENTS – game families", () => {
     const s = emptyStats();
     for (const id of solitaireIds) s.perGame[id] = { played: 1, wins: 0, best: 0 };
     expect(find("five-of-a-kind").isUnlocked(s)).toBe(true);
+  });
+});
+
+describe("ACHIEVEMENTS – a11y / exploration / theme / sharing (v44)", () => {
+  it("exposes 44 entries total", () => {
+    expect(ACHIEVEMENTS.length).toBe(44);
+  });
+
+  it("theme-hopper fires after 10 distinct themes have been tried", () => {
+    const themes = ["emerald", "midnight", "ruby", "sapphire", "slate",
+      "espresso", "aurora", "sunset", "forest", "cyberpunk"];
+    localStorage.setItem("cards-themes-tried", JSON.stringify(themes));
+    expect(find("theme-hopper").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("theme-hopper does NOT fire with only 9 themes", () => {
+    localStorage.setItem("cards-themes-tried", JSON.stringify(["a", "b", "c", "d", "e", "f", "g", "h", "i"]));
+    expect(find("theme-hopper").isUnlocked(emptyStats())).toBe(false);
+  });
+
+  it("friendly fires after a friend session is recorded", () => {
+    localStorage.setItem("cards-friend-sessions", "1");
+    expect(find("friendly").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("exporter fires when the stats-exported flag is set", () => {
+    localStorage.setItem("cards-stats-exported", "true");
+    expect(find("exporter").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("importer fires when the data-imported flag is set", () => {
+    localStorage.setItem("cards-data-imported", "true");
+    expect(find("importer").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("custom-skinner fires when the active theme is custom", () => {
+    localStorage.setItem("cards-bg-theme", "custom");
+    expect(find("custom-skinner").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("accessibility-first fires when ANY a11y option is on", () => {
+    localStorage.setItem("cards-reduced-motion", "true");
+    expect(find("accessibility-first").isUnlocked(emptyStats())).toBe(true);
+    localStorage.clear();
+    localStorage.setItem("cards-large-text", "true");
+    expect(find("accessibility-first").isUnlocked(emptyStats())).toBe(true);
+    localStorage.clear();
+    localStorage.setItem("cards-high-contrast", "true");
+    expect(find("accessibility-first").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("browse-it-all fires after visiting all 5 required surfaces", () => {
+    localStorage.setItem(
+      "cards-pages-visited",
+      JSON.stringify(["lobby", "stats", "daily", "leaderboard", "search"]),
+    );
+    expect(find("browse-it-all").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("browse-it-all does NOT fire if a surface is missing", () => {
+    localStorage.setItem(
+      "cards-pages-visited",
+      JSON.stringify(["lobby", "stats", "daily", "leaderboard"]),
+    );
+    expect(find("browse-it-all").isUnlocked(emptyStats())).toBe(false);
+  });
+
+  it("search-sleuth fires after 10 distinct recent searches", () => {
+    const queries = Array.from({ length: 10 }, (_, i) => `query-${i}`);
+    localStorage.setItem("cards-recent-searches", JSON.stringify(queries));
+    expect(find("search-sleuth").isUnlocked(emptyStats())).toBe(true);
+  });
+
+  it("search-sleuth dedupes case-insensitively", () => {
+    // 10 entries but only 1 distinct query -> should NOT fire.
+    const queries = Array.from({ length: 10 }, () => "Same");
+    localStorage.setItem("cards-recent-searches", JSON.stringify(queries));
+    expect(find("search-sleuth").isUnlocked(emptyStats())).toBe(false);
   });
 });

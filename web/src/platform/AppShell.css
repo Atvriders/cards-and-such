@@ -1,5 +1,33 @@
 /* Modern app shell: glassy header, gradient brand wordmark, soft nav pills. */
 
+/* Skip-to-content link — WCAG 2.1 SC 2.4.1 ("Bypass Blocks").
+   Hidden off-screen until focused; jumps to the top of <main>. The pill
+   uses a high-contrast indigo-on-white combo (~12:1) so it stays legible
+   on every theme background, and a focus ring is preserved for users
+   running a forced-colors / high-contrast OS mode. */
+.skip-to-content {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.55rem 0.9rem;
+  background: #ffffff;
+  color: #1e1b4b;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  transform: translateY(-200%);
+  transition: transform 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid #6366f1;
+  outline-offset: 2px;
+}
+
 .app-shell {
   min-height: 100vh;
   display: grid;

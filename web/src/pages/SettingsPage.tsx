@@ -229,6 +229,15 @@ export default function SettingsPage(): JSX.Element {
         `Imported ${result.written} key${result.written === 1 ? "" : "s"}` +
           (result.skipped > 0 ? ` (${result.skipped} skipped)` : ""),
       );
+      // Stamp the import flag for the "Importer" achievement (v44). Run
+      // *after* importAll so an in-blob value can't accidentally clear it.
+      try {
+        if (typeof localStorage !== "undefined") {
+          localStorage.setItem("cards-data-imported", "true");
+        }
+      } catch {
+        /* ignore quota / private mode */
+      }
       refreshFromStorage();
     } catch (err) {
       useToast.getState().push("error", "Import failed: " + (err as Error).message);

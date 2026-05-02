@@ -107,6 +107,66 @@ function bestTimesMap(): Record<string, number> {
   return out;
 }
 
+/* ------------------------------------------------------------------
+ * Set-shaped probes for a11y / exploration / theme / sharing
+ * achievements added in v44. Each accepts both array and object
+ * shapes since callers may persist either; defensive parsing keeps
+ * a corrupt blob from blowing up `recordGame`.
+ * ------------------------------------------------------------------ */
+
+function readSetSize(key: string): number {
+  const v = readJSON<unknown>(key);
+  if (Array.isArray(v)) {
+    const seen = new Set<string>();
+    for (const x of v) if (typeof x === "string") seen.add(x);
+    return seen.size;
+  }
+  if (v && typeof v === "object") {
+    return Object.keys(v as Record<string, unknown>).length;
+  }
+  return 0;
+}
+
+function readBool(key: string): boolean {
+  try {
+    if (typeof localStorage === "undefined") return false;
+    const raw = localStorage.getItem(key);
+    if (raw == null) return false;
+    if (raw === "true" || raw === "1") return true;
+    if (raw === "false" || raw === "0") return false;
+    // Treat any non-empty JSON-truthy value as truthy (e.g. "yes").
+    return raw.trim().length > 0 && raw !== "null" && raw !== "undefined";
+  } catch {
+    return false;
+  }
+}
+
+function readString(key: string): string | null {
+  try {
+    if (typeof localStorage === "undefined") return null;
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function friendSessionsCount(): number {
+  // Stored as a number-string by PlayPage's friend-mode flow.
+  const raw = readString("cards-friend-sessions");
+  if (!raw) return 0;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function recentSearchesCount(): number {
+  const v = readJSON<unknown>("cards-recent-searches");
+  if (!Array.isArray(v)) return 0;
+  // Distinct queries — collisions intentional per spec.
+  const seen = new Set<string>();
+  for (const x of v) if (typeof x === "string") seen.add(x.trim().toLowerCase());
+  return seen.size;
+}
+
 /**
  * Sum stats across every game whose id starts with one of the given prefixes.
  * Lets a single achievement cover a family of variants (klondike-by-threes,
@@ -388,6 +448,73 @@ export const ACHIEVEMENTS: Achievement[] = [
       }
       return n >= 5;
     },
+  },
+
+  /* ---- exploration / a11y / sharing (v44) ---- */
+  {
+    id: "theme-hopper",
+    title: "Theme Hopper",
+    description: "Try every one of the 10 built-in themes.",
+    // ThemePicker writes each chosen id into `cards-themes-tried`
+    // (array of theme ids). 10 distinct entries unlocks.
+    isUnlocked: () => readSetSize("cards-themes-tried") >= 10,
+  },
+  {
+    id: "friendly",
+    title: "Friendly",
+    description: "Start a friend-mode session.",
+    isUnlocked: () => friendSessionsCount() >= 1,
+  },
+  {
+    id: "exporter",
+    title: "Exporter",
+    description: "Export your stats card.",
+    isUnlocked: () => readBool("cards-stats-exported"),
+  },
+  {
+    id: "importer",
+    title: "Importer",
+    description: "Import a settings backup.",
+    isUnlocked: () => readBool("cards-data-imported"),
+  },
+  {
+    id: "custom-skinner",
+    title: "Custom Skinner",
+    description: "Pick a custom theme accent color.",
+    isUnlocked: () => readString("cards-bg-theme") === "custom",
+  },
+  {
+    id: "accessibility-first",
+    title: "Accessibility First",
+    description: "Toggle an accessibility option (reduced motion, large text, or high contrast).",
+    isUnlocked: () =>
+      readBool("cards-reduced-motion")
+      || readBool("cards-large-text")
+      || readBool("cards-high-contrast"),
+  },
+  {
+    id: "browse-it-all",
+    title: "Browse-It-All",
+    description: "Visit the lobby, stats, daily, leaderboard, and search pages.",
+    // AppShell writes the current pathname into `cards-pages-visited` on
+    // every route mount; we look for the five core surfaces below.
+    isUnlocked: () => {
+      const v = readJSON<unknown>("cards-pages-visited");
+      const seen = new Set<string>();
+      if (Array.isArray(v)) {
+        for (const x of v) if (typeof x === "string") seen.add(x);
+      } else if (v && typeof v === "object") {
+        for (const k of Object.keys(v as Record<string, unknown>)) seen.add(k);
+      }
+      const required = ["lobby", "stats", "daily", "leaderboard", "search"];
+      return required.every((r) => seen.has(r));
+    },
+  },
+  {
+    id: "search-sleuth",
+    title: "Search Sleuth",
+    description: "Run 10 different searches.",
+    isUnlocked: () => recentSearchesCount() >= 10,
   },
 ];
 

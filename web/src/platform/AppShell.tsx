@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./stores/auth.js";
 import { ToastHost } from "./ui/Toast.js";
 import { SparkleHost } from "./Sparkles.js";
@@ -35,6 +35,7 @@ export default function AppShell(): JSX.Element {
   const username = useAuth((s) => s.username);
   const logout = useAuth((s) => s.logout);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -119,6 +120,40 @@ export default function AppShell(): JSX.Element {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Browse-It-All achievement: stamp `cards-pages-visited` with a coarse
+  // bucket name on every route mount. Buckets keep the set bounded (we
+  // don't want every /play/:id permutation to count). The five required
+  // buckets line up with the spec: lobby, stats, daily, leaderboard, search.
+  useEffect(() => {
+    try {
+      if (typeof localStorage === "undefined") return;
+      const path = location.pathname;
+      let bucket: string | null = null;
+      if (path === "/" || path === "/lobby" || path.startsWith("/category")) bucket = "lobby";
+      else if (path.startsWith("/stats")) bucket = "stats";
+      else if (path.startsWith("/daily")) bucket = "daily";
+      else if (path.startsWith("/leaderboard")) bucket = "leaderboard";
+      else if (path.startsWith("/search")) bucket = "search";
+      if (!bucket) return;
+      const raw = localStorage.getItem("cards-pages-visited");
+      let arr: string[] = [];
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw) as unknown;
+          if (Array.isArray(parsed)) arr = parsed.filter((x): x is string => typeof x === "string");
+        } catch {
+          /* corrupt — start fresh */
+        }
+      }
+      if (!arr.includes(bucket)) {
+        arr.push(bucket);
+        localStorage.setItem("cards-pages-visited", JSON.stringify(arr));
+      }
+    } catch {
+      /* ignore quota / private mode */
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     if (searchOpen) searchInputRef.current?.focus();
@@ -326,7 +361,17 @@ export default function AppShell(): JSX.Element {
 
   return (
     <div className="app-shell">
-      <header className={`app-header${scrolled ? " is-scrolled" : ""}`}>
+      {/* Skip link must be the first focusable element on the page so a
+          keyboard user (or screen-reader user) can jump past the header /
+          nav directly to <main>. The link is visually hidden until it
+          receives focus, then becomes a high-contrast pill. */}
+      <a className="skip-to-content" href="#main-content" data-testid="skip-to-content">
+        Skip to content
+      </a>
+      <header
+        className={`app-header${scrolled ? " is-scrolled" : ""}`}
+        role="banner"
+      >
         <div className="brand">Cards and Such</div>
 
         <button
@@ -339,7 +384,7 @@ export default function AppShell(): JSX.Element {
           <span /><span /><span />
         </button>
 
-        <nav className={mobileNavOpen ? "is-open" : ""}>
+        <nav className={mobileNavOpen ? "is-open" : ""} aria-label="Main">
           <NavLink to="/" end onClick={() => setMobileNavOpen(false)}>{t("nav.lobby")}</NavLink>
           <div
             ref={categoriesRef}
@@ -624,9 +669,9 @@ export default function AppShell(): JSX.Element {
         </div>
       </header>
 
-      <main><Outlet /></main>
+      <main id="main-content" tabIndex={-1}><Outlet /></main>
 
-      <footer className="app-footer" aria-label="Site footer">
+      <footer className="app-footer" role="contentinfo" aria-label="Site footer">
         <div className="app-footer-cols">
           <div
             className="app-footer-col app-footer-brand-col"

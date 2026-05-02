@@ -66,4 +66,51 @@ describe("AppShell", () => {
     await new Promise((resolve) => setTimeout(resolve, 800));
     expect(screen.queryByTestId("tile-klondike")).not.toBeInTheDocument();
   });
+
+  /* ---- v44 a11y additions ---- */
+
+  it("renders the skip-to-content link pointing at #main-content", () => {
+    authenticate();
+    render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    const skip = screen.getByTestId("skip-to-content");
+    expect(skip).toBeInTheDocument();
+    expect(skip.getAttribute("href")).toBe("#main-content");
+  });
+
+  it("exposes banner / main / contentinfo landmarks", () => {
+    authenticate();
+    const { container } = render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    // The shell-level <header> is the topmost <header role="banner">; it
+    // sits inside .app-shell, while page-local headers live deeper.
+    const shellHeader = container.querySelector(".app-shell > header[role='banner']");
+    expect(shellHeader).not.toBeNull();
+    // Main + footer are unique enough to query by role directly.
+    expect(screen.getByRole("main")).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+  });
+
+  it("labels the primary navigation as 'Main'", () => {
+    authenticate();
+    render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    const nav = screen.getByRole("navigation", { name: /^main$/i });
+    expect(nav).toBeInTheDocument();
+  });
+
+  /* ---- v44 Browse-It-All page tracking ---- */
+
+  it("stamps cards-pages-visited with 'lobby' on / mount", () => {
+    authenticate();
+    localStorage.removeItem("cards-pages-visited");
+    render(<MemoryRouter initialEntries={["/"]}><App /></MemoryRouter>);
+    const arr = JSON.parse(localStorage.getItem("cards-pages-visited") ?? "[]") as string[];
+    expect(arr).toContain("lobby");
+  });
+
+  it("stamps cards-pages-visited with 'stats' on /stats mount", () => {
+    authenticate();
+    localStorage.removeItem("cards-pages-visited");
+    render(<MemoryRouter initialEntries={["/stats"]}><App /></MemoryRouter>);
+    const arr = JSON.parse(localStorage.getItem("cards-pages-visited") ?? "[]") as string[];
+    expect(arr).toContain("stats");
+  });
 });

@@ -82,18 +82,45 @@ export default function ThemePicker(): JSX.Element {
     };
   }, [open]);
 
+  // Stamp `cards-themes-tried` whenever the user commits a theme.
+  // Powers the "Theme Hopper" achievement (try all 10 themes). We dedupe
+  // by id and tolerate corrupt blobs by starting fresh.
+  const stampTried = useCallback((id: string) => {
+    try {
+      if (typeof localStorage === "undefined") return;
+      const raw = localStorage.getItem("cards-themes-tried");
+      let arr: string[] = [];
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw) as unknown;
+          if (Array.isArray(parsed)) arr = parsed.filter((x): x is string => typeof x === "string");
+        } catch {
+          /* corrupt — start fresh */
+        }
+      }
+      if (!arr.includes(id)) {
+        arr.push(id);
+        localStorage.setItem("cards-themes-tried", JSON.stringify(arr));
+      }
+    } catch {
+      /* ignore quota / private mode */
+    }
+  }, []);
+
   const select = useCallback((id: ThemeId) => {
     applyTheme(id);
     setActive(id);
+    stampTried(id);
     setOpen(false);
     buttonRef.current?.focus();
-  }, []);
+  }, [stampTried]);
 
   const selectCustom = useCallback((cfg: CustomThemeConfig) => {
     applyCustomTheme(cfg);
     setActive(CUSTOM_THEME_ID);
     setCustom(cfg);
-  }, []);
+    stampTried(CUSTOM_THEME_ID);
+  }, [stampTried]);
 
   // Hover-preview: temporarily apply theme variables without persisting.
   const hoverPreview = useCallback((id: ThemeId) => {
