@@ -21,6 +21,7 @@ import StatsPage from "./pages/StatsPage.js";
 import SearchPage from "./pages/SearchPage.js";
 import NotFoundPage from "./pages/NotFoundPage.js";
 import OfflinePage from "./pages/OfflinePage.js";
+import ShareHandlerPage from "./pages/ShareHandlerPage.js";
 import DevErrorTestPage from "./pages/DevErrorTestPage.js";
 import Connect4Online from "./games/connect-4/Connect4Online.js";
 import UnoLikeOnline from "./games/uno-like/UnoLikeOnline.js";
@@ -46,6 +47,7 @@ export default function App(): JSX.Element {
       <RouteTransition>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/share-handler" element={<ShareHandlerPage />} />
           <Route element={<RequireAuth><AppShell /></RequireAuth>}>
             <Route path="/" element={<LobbyPage />} />
             <Route path="/category/:cat" element={<CategoryPage />} />
