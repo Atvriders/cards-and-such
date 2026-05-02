@@ -18,7 +18,7 @@ export function DiceRollCallGame({ state, dispatch, onGameOver }: GameProps<Dice
           <div className="drlc-prompt">Call your roll!</div>
           <div className="drlc-keys">
             {[1,2,3,4,5,6].map(v => (
-              <button key={v} className="drlc-key" onClick={() => dispatch({ type:"call", value:v } as DiceRollCallAction)}>{PIPS[v - 1]}</button>
+              <button data-testid="hint-target-dice-roll-call-roll" key={v} className="drlc-key" onClick={() => dispatch({ type:"call", value:v } as DiceRollCallAction)}>{PIPS[v - 1]}</button>
             ))}
           </div>
         </>

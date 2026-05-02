@@ -31,7 +31,7 @@ export function DicePipAdd({ state, dispatch, onGameOver }: GameProps<DicePipAdd
         <>
           <p style={{ color: "#555", fontSize: "0.9rem" }}>Die {state.diceIdx + 1} of 3: <strong>{currentDie}</strong> — Add or Skip?</p>
           <div className="dice-actions">
-            <button className="dice-btn bank" onClick={() => dispatch({ type: "add" } as DicePipAddAction)}>Add {currentDie}</button>
+            <button data-testid="hint-target-dice-pip-add-roll" className="dice-btn bank" onClick={() => dispatch({ type: "add" } as DicePipAddAction)}>Add {currentDie}</button>
             <button className="dice-btn" onClick={() => dispatch({ type: "skip" } as DicePipAddAction)}>Skip</button>
           </div>
         </>

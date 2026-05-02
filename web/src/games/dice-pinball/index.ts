@@ -22,5 +22,7 @@ There are 8 rounds total. Press LAUNCH to roll, then Next Round to continue. The
 Pure luck — but the multiplier suspense gives the game a satisfying pinball-machine feel. Good launching!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DicePinballSettings),
-  reducer, isTerminal, component: DicePinballGame,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-pinball-roll"]', pulses: 3 }; },
+  component: DicePinballGame,
 };

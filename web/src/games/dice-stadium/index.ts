@@ -20,5 +20,7 @@ The probability of a 3-die sum being 10+ is about 50%, and 14+ is around 16%. So
 Cheer wisely: too cautious and you leave points on the table; too bold and the crowd goes silent. Pick your level, watch the dice roll, and feel the stadium roar!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceStadiumSettings),
-  reducer,isTerminal,component:DiceStadiumGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-stadium-roll"]', pulses: 3 }; },
+  component:DiceStadiumGame,
 };

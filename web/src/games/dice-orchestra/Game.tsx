@@ -23,7 +23,7 @@ export function DiceOrchestraGame({ state, dispatch, onGameOver }: GameProps<Dic
       {state.phase === "predict" && (
         <div className="dm-row">
           {OPTIONS.map(o => (
-            <button key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceOrchestraAction)}>{o.label} (+{o.points})</button>
+            <button data-testid="hint-target-dice-orchestra-roll" key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceOrchestraAction)}>{o.label} (+{o.points})</button>
           ))}
         </div>
       )}

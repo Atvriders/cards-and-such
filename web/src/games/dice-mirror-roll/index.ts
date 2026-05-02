@@ -25,5 +25,7 @@ After your bet, the next die rolls and the result is revealed. Press Next to con
 Use Settings to choose 8, 10, or 12 rounds. Final score is shown at the end. Play it safe with higher/lower, or gamble on same for the big payoff?`,
   settings: diceMirrorRollSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceMirrorRollSettings),
-  reducer, isTerminal, component: DiceMirrorRoll,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-mirror-roll-roll"]', pulses: 3 }; },
+  component: DiceMirrorRoll,
 };

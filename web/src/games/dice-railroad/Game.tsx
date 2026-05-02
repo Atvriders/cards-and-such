@@ -36,7 +36,7 @@ export function DiceRailroadGame({ state, dispatch, onGameOver }: GameProps<Dice
       )}
       <div className="rr-log">{state.log || "Roll 2 dice. Doubles double the track and add bonus."}</div>
       {state.phase === "lay" && (
-        <button className="rr-btn" onClick={() => dispatch({ type: "lay" } as DiceRailroadAction)}>Lay Track</button>
+        <button data-testid="hint-target-dice-railroad-roll" className="rr-btn" onClick={() => dispatch({ type: "lay" } as DiceRailroadAction)}>Lay Track</button>
       )}
       {state.phase === "result" && (
         <button className="rr-btn alt" onClick={() => dispatch({ type: "next" } as DiceRailroadAction)}>Continue</button>

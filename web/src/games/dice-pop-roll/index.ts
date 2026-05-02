@@ -16,5 +16,7 @@ With three dice, rolling a pair or better happens more than half the time — so
 Start with 100 coins. Choose 8 or 12 rounds in Settings. Each pair that pops earns your bet back plus profit. Your final coin total is your score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DicePopRollSettings),
-  reducer,isTerminal,component:DicePopRollGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-pop-roll-roll"]', pulses: 3 }; },
+  component:DicePopRollGame,
 };

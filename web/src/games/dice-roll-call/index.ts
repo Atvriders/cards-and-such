@@ -22,5 +22,7 @@ The game is pure probability — you have no information about which face the di
 Tap a number 1–6 to call, then click Next after seeing the result. Sharpen your six-sided sixth sense!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceRollCallSettings),
-  reducer, isTerminal, component: DiceRollCallGame,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-roll-call-roll"]', pulses: 3 }; },
+  component: DiceRollCallGame,
 };

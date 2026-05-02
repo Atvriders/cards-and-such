@@ -12,5 +12,7 @@ export const diceMonsterMashPlugin: GamePlugin<DiceMonsterMashState, DiceMonster
   howToPlay:"Dice Monster Mash is a 10-round dice-rolling game with a doubles bonus. 👹 Each round, press Roll Dice and two dice tumble across the screen. If both faces match (doubles), you score the doubled face times 10. Otherwise, you score the simple sum of the two dice.\n\nSums of non-doubles range 3-11; doubles range 10-60 with double-six the maximum. Doubles occur 1 in 6 rounds on average, so a typical 10-round game lands around 75-95 points, but a lucky double-six round alone bags 60.\n\nPress Next after each result to continue, or Finish on the final round. Watch your running score climb in the upper right. Great for quick mini-game breaks: the whole game is over in well under a minute. Roll for those doubles!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceMonsterMashSettings),
-  reducer,isTerminal,component:DiceMonsterMashGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-monster-mash-roll"]', pulses: 3 }; },
+  component:DiceMonsterMashGame,
 };

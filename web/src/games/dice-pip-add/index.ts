@@ -27,5 +27,7 @@ The skill is in when to add and when to skip. If your total is already close to 
 Use Settings to choose 6, 8, or 10 rounds. Total score accumulates across rounds. Can you hit the target perfectly round after round?`,
   settings: dicePipAddSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DicePipAddSettings),
-  reducer, isTerminal, component: DicePipAdd,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-pip-add-roll"]', pulses: 3 }; },
+  component: DicePipAdd,
 };

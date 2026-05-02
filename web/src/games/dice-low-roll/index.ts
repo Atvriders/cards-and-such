@@ -16,5 +16,7 @@ If the total is 9 or lower, you win your bet. If 10 or higher, you lose it. Star
 The probability of rolling 9 or less with 3 dice is roughly 45%, so this bet loses slightly more often than it wins — but wins can chain together fast. Manage your bankroll well!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceLowRollSettings),
-  reducer, isTerminal, component: DiceLowRollGame,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-low-roll-roll"]', pulses: 3 }; },
+  component: DiceLowRollGame,
 };

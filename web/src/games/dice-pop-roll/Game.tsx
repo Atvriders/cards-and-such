@@ -21,7 +21,7 @@ export function DicePopRollGame({ state, dispatch, onGameOver }: GameProps<DiceP
       {state.phase === "betting" ? (
         <div className="dm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DicePopRollAction)}>Roll</button>
+          <button data-testid="hint-target-dice-pop-roll-roll" className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DicePopRollAction)}>Roll</button>
         </div>
       ) : (
         <>

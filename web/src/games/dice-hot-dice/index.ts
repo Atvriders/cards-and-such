@@ -21,5 +21,7 @@ Strategy: short rounds are safer — banking after 2 rolls captures small but re
 Test your nerve!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceHotDiceSettings),
-  reducer, isTerminal, component: DiceHotDiceGame,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-hot-dice-roll"]', pulses: 3 }; },
+  component: DiceHotDiceGame,
 };

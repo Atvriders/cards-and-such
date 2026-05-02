@@ -25,7 +25,7 @@ export function DicePinballGame({ state, dispatch, onGameOver }: GameProps<DiceP
         )}
       </div>
       {state.phase === "idle" ? (
-        <button className="dpnb-btn launch" onClick={() => dispatch({ type:"launch" } as DicePinballAction)}>LAUNCH</button>
+        <button data-testid="hint-target-dice-pinball-roll" className="dpnb-btn launch" onClick={() => dispatch({ type:"launch" } as DicePinballAction)}>LAUNCH</button>
       ) : (
         <button className="dpnb-btn next" onClick={() => dispatch({ type:"next" } as DicePinballAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next Round"}</button>
       )}

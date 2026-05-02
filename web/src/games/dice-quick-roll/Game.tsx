@@ -21,7 +21,7 @@ export function DiceQuickRollGame({ state, dispatch, onGameOver }: GameProps<Dic
       {state.phase === "betting" ? (
         <div className="dm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DiceQuickRollAction)}>Roll</button>
+          <button data-testid="hint-target-dice-quick-roll-roll" className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DiceQuickRollAction)}>Roll</button>
         </div>
       ) : (
         <>

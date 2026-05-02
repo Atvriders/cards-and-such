@@ -17,7 +17,7 @@ export function DiceMarathonGame({ state, dispatch, onGameOver }: GameProps<Dice
         {state.counts.map((c,i)=>(<div key={i} style={{ display:"flex", alignItems:"center" }}><div className="dm-tally-item">{i+1}: {c}</div><div className="dm-bar"><div className="dm-bar-fill" style={{ width:`${(c/max)*100}%` }} /></div></div>))}
       </div>
       <div className="dm-row">
-        <button className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceMarathonAction)}>Roll 1</button>
+        <button data-testid="hint-target-dice-marathon-roll" className="dm-btn" onClick={()=>dispatch({type:"roll"} as DiceMarathonAction)}>Roll 1</button>
         <button className="dm-btn alt" onClick={()=>dispatch({type:"rollAll"} as DiceMarathonAction)}>Roll All</button>
       </div>
     </div>

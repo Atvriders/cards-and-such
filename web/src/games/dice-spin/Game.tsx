@@ -21,7 +21,7 @@ export function DiceSpinGame({ state, dispatch, onGameOver }: GameProps<DiceSpin
       )}
       {state.phase === "betting" && (
         <div className="dm-row">
-          <button className="dm-btn" onClick={() => dispatch({ type:"bet", choice:"under" } as DiceSpinAction)}>Under 7 (+10)</button>
+          <button data-testid="hint-target-dice-spin-roll" className="dm-btn" onClick={() => dispatch({ type:"bet", choice:"under" } as DiceSpinAction)}>Under 7 (+10)</button>
           <button className="dm-btn alt" onClick={() => dispatch({ type:"bet", choice:"equal" } as DiceSpinAction)}>Equal 7 (+30)</button>
           <button className="dm-btn" onClick={() => dispatch({ type:"bet", choice:"over" } as DiceSpinAction)}>Over 7 (+10)</button>
         </div>

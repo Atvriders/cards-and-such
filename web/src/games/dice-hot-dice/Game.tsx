@@ -19,7 +19,7 @@ export function DiceHotDiceGame({ state, dispatch, onGameOver }: GameProps<DiceH
       )}
       {state.lastDie === 1 && state.current === 0 && <div className="dhdc-bust-msg">BUST! Round lost.</div>}
       <div className="dhdc-actions">
-        <button className="dhdc-btn roll" onClick={() => dispatch({ type:"roll" } as DiceHotDiceAction)}>Roll</button>
+        <button data-testid="hint-target-dice-hot-dice-roll" className="dhdc-btn roll" onClick={() => dispatch({ type:"roll" } as DiceHotDiceAction)}>Roll</button>
         <button className="dhdc-btn bank" disabled={state.current === 0} onClick={() => dispatch({ type:"bank" } as DiceHotDiceAction)}>Bank ({state.current})</button>
       </div>
     </div>

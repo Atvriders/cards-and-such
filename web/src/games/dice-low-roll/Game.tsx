@@ -14,7 +14,7 @@ export function DiceLowRollGame({ state, dispatch, onGameOver }: GameProps<DiceL
       {state.phase === "betting" && <>
         <p>Bet that 3 dice sum to 9 or less (Low)?</p>
         <div className="dm-bets">
-          {([5,10,20] as const).map(a => <button key={a} className="dm-bet-btn" onClick={() => dispatch({ type:"bet", amount:a } as DiceLowRollAction)}>Bet Low: {a} coins</button>)}
+          {([5,10,20] as const).map(a => <button data-testid="hint-target-dice-low-roll-roll" key={a} className="dm-bet-btn" onClick={() => dispatch({ type:"bet", amount:a } as DiceLowRollAction)}>Bet Low: {a} coins</button>)}
         </div>
       </>}
       {state.phase === "result" && state.dice && <>

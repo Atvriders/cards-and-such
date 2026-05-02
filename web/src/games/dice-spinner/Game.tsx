@@ -17,7 +17,7 @@ export function DiceSpinnerGame({ state, dispatch, onGameOver }: GameProps<DiceS
       {state.lastFace !== null && <div className="dspn-die">{state.lastFace}</div>}
       {state.phase === "betting" && (
         <div className="dspn-row">
-          <button className="dspn-btn" onClick={() => dispatch({ type:"bet", choice:"low" } as DiceSpinnerAction)}>Low (1-3)</button>
+          <button data-testid="hint-target-dice-spinner-roll" className="dspn-btn" onClick={() => dispatch({ type:"bet", choice:"low" } as DiceSpinnerAction)}>Low (1-3)</button>
           <button className="dspn-btn" onClick={() => dispatch({ type:"bet", choice:"even" } as DiceSpinnerAction)}>Even</button>
           <button className="dspn-btn" onClick={() => dispatch({ type:"bet", choice:"high" } as DiceSpinnerAction)}>High (4-6)</button>
         </div>

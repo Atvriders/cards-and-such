@@ -19,7 +19,7 @@ export function DiceShippingGame({ state, dispatch, onGameOver }: GameProps<Dice
           const sum = ship.reduce((a, b) => a + b, 0);
           const picked = state.chosen === i;
           return (
-            <button key={i} className={`dm-ship${picked ? " picked" : ""}`} disabled={state.phase !== "choosing"} onClick={() => dispatch({ type:"pick", ship:i } as DiceShippingAction)}>
+            <button data-testid="hint-target-dice-shipping-roll" key={i} className={`dm-ship${picked ? " picked" : ""}`} disabled={state.phase !== "choosing"} onClick={() => dispatch({ type:"pick", ship:i } as DiceShippingAction)}>
               <div className="dm-ship-name">Ship {i + 1}</div>
               <div className="dm-row">{ship.map((d, j) => <div key={j} className="dm-die">{d}</div>)}</div>
               <div className="dm-ship-sum">Sum: {sum}</div>

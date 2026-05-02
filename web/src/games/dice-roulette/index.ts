@@ -16,5 +16,7 @@ If your bucket matches the actual sum, you score 10 points. Two special exact-ro
 There are 10 rounds. The probability distribution of three-dice sums is bell-shaped, peaking at 10-11. Mid and High are common (each about 38%), while Low (about 12%) and Boom (about 12%) are rarer. Riskier bets pay only the same base ten unless you hit an exact-roll bonus, so smart play favors Mid or High most of the time. Average expected scores are around 35; a great game is 60+.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceRouletteSettings),
-  reducer,isTerminal,component:DiceRouletteGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-roulette-roll"]', pulses: 3 }; },
+  component:DiceRouletteGame,
 };

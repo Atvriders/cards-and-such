@@ -41,7 +41,7 @@ export function DiceLaboratoryGame({ state, dispatch, onGameOver }: GameProps<Di
       )}
       <div className="lb-log">{state.log || "Mix three dice. Match the target formula for points."}</div>
       {state.phase === "roll" && (
-        <button className="lb-btn" onClick={() => dispatch({ type: "mix" } as DiceLaboratoryAction)}>Mix</button>
+        <button data-testid="hint-target-dice-laboratory-roll" className="lb-btn" onClick={() => dispatch({ type: "mix" } as DiceLaboratoryAction)}>Mix</button>
       )}
       {state.phase === "result" && (
         <button className="lb-btn alt" onClick={() => dispatch({ type: "next" } as DiceLaboratoryAction)}>Next Experiment</button>

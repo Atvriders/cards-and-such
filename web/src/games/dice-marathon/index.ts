@@ -12,5 +12,7 @@ export const diceMarathonPlugin: GamePlugin<DiceMarathonState, DiceMarathonActio
   howToPlay:"Dice Marathon is exactly what it sounds like: roll 100 standard six-sided dice and track the distribution. Your score is the total pips (face values summed) across all rolls.\n\nThe expected mean roll is 3.5, so the expected total is 350 pips. Lucky rolls land closer to 380; unlucky runs sink to 320. There's no decision to make and no skill — just a long roll session displaying the live histogram of your distribution as it builds.\n\nPress \"Roll 1\" to add one die at a time, or \"Roll All\" to finish the marathon instantly. The histogram shows how many of each face (1-6) you've rolled, with horizontal bars scaled to the most-rolled face. By the end, all six bars should be roughly equal — the law of large numbers in action.\n\nDice Marathon is more of a statistical curiosity than a competitive challenge. Watch the variance, marvel at the distribution, and lock in whatever score the dice gods give you.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceMarathonSettings),
-  reducer,isTerminal,component:DiceMarathonGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-marathon-roll"]', pulses: 3 }; },
+  component:DiceMarathonGame,
 };

@@ -24,7 +24,7 @@ export function DiceStadiumGame({ state, dispatch, onGameOver }: GameProps<DiceS
         <>
           <div className="dstd-info">Pick a cheer:</div>
           <div className="dstd-row">
-            <button className="dstd-btn low" onClick={() => dispatch({ type:"cheer", level:"low" } as DiceStadiumAction)}>Low (sum)</button>
+            <button data-testid="hint-target-dice-stadium-roll" className="dstd-btn low" onClick={() => dispatch({ type:"cheer", level:"low" } as DiceStadiumAction)}>Low (sum)</button>
             <button className="dstd-btn mid" onClick={() => dispatch({ type:"cheer", level:"mid" } as DiceStadiumAction)}>Mid (×1.5 if sum≥10)</button>
             <button className="dstd-btn high" onClick={() => dispatch({ type:"cheer", level:"high" } as DiceStadiumAction)}>Roar (×2 if sum≥14)</button>
           </div>

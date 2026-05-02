@@ -18,5 +18,7 @@ Maximum theoretical score is around 200 (if every roll happened to feature 8 of 
 Tap, Submit, repeat. Easy rules; tricky to perfect!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DicePickupSettings),
-  reducer,isTerminal,component:DicePickupGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-pickup-roll"]', pulses: 3 }; },
+  component:DicePickupGame,
 };

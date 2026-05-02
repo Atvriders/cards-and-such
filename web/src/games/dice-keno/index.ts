@@ -16,5 +16,7 @@ Five dice are rolled. Your score is the multiset intersection between your picks
 There are 8 rounds. Spreading picks across faces is the safer base strategy; concentrating on one number is high-variance with a tiny chance of jackpot. Average expected scores hover near 50; chase a bonus or two and 100+ is in reach.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceKenoSettings),
-  reducer,isTerminal,component:DiceKenoGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-keno-roll"]', pulses: 3 }; },
+  component:DiceKenoGame,
 };

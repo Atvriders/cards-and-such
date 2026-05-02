@@ -20,5 +20,7 @@ You play 10 rounds. The expected value of each bet is roughly the same — Over 
 Average expected scores hover around 40-50 points for safe play, with bold all-Equal players sometimes hitting 90+ on lucky games. Mix it up, follow your gut, and enjoy the spin!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceSpinSettings),
-  reducer,isTerminal,component:DiceSpinGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-spin-roll"]', pulses: 3 }; },
+  component:DiceSpinGame,
 };

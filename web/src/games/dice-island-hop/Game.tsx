@@ -38,7 +38,7 @@ export function DiceIslandHopGame({ state, dispatch, onGameOver }: GameProps<Dic
       )}
       <div className="ih-log">{state.log || "Roll the surf and hop islands. Doubles award bonus."}</div>
       {state.phase === "roll" && (
-        <button className="ih-btn" onClick={() => dispatch({ type: "hop" } as DiceIslandHopAction)}>Hop</button>
+        <button data-testid="hint-target-dice-island-hop-roll" className="ih-btn" onClick={() => dispatch({ type: "hop" } as DiceIslandHopAction)}>Hop</button>
       )}
       {state.phase === "result" && (
         <button className="ih-btn alt" onClick={() => dispatch({ type: "next" } as DiceIslandHopAction)}>Continue</button>

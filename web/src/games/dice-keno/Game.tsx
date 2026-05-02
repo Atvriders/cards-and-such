@@ -22,7 +22,7 @@ export function DiceKenoGame({ state, dispatch, onGameOver }: GameProps<DiceKeno
             {state.phase === "picking" && (
               <div className="dm-row">
                 <button className="dm-btn small" disabled={state.picksTotal >= PICK_COUNT} onClick={() => dispatch({ type:"pick", face } as DiceKenoAction)}>+</button>
-                <button className="dm-btn small alt" disabled={(state.picks[face-1] || 0) <= 0} onClick={() => dispatch({ type:"unpick", face } as DiceKenoAction)}>-</button>
+                <button data-testid="hint-target-dice-keno-roll" className="dm-btn small alt" disabled={(state.picks[face-1] || 0) <= 0} onClick={() => dispatch({ type:"unpick", face } as DiceKenoAction)}>-</button>
               </div>
             )}
           </div>

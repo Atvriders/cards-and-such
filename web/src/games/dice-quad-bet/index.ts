@@ -16,5 +16,7 @@ Three dice can total 3 to 18. The median total is around 10-11, so reaching 15+ 
 Start with 100 coins. Choose 8 or 12 rounds in Settings. Your final coin total is your score.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceQuadBetSettings),
-  reducer,isTerminal,component:DiceQuadBetGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-quad-bet-roll"]', pulses: 3 }; },
+  component:DiceQuadBetGame,
 };

@@ -26,7 +26,7 @@ export function DiceMirrorRoll({ state, dispatch, onGameOver }: GameProps<DiceMi
       {!isReveal && <p style={{ color: "#555", fontSize: "0.9rem" }}>Will the next roll be higher, lower, or the same?</p>}
       {!isReveal && (
         <div className="dice-actions">
-          <button className="dice-btn bank" onClick={() => dispatch({ type: "bet", call: "higher" } as DiceMirrorRollAction)}>Higher (+25)</button>
+          <button data-testid="hint-target-dice-mirror-roll-roll" className="dice-btn bank" onClick={() => dispatch({ type: "bet", call: "higher" } as DiceMirrorRollAction)}>Higher (+25)</button>
           <button className="dice-btn" style={{ background: "#e74c3c" }} onClick={() => dispatch({ type: "bet", call: "lower" } as DiceMirrorRollAction)}>Lower (+25)</button>
           <button className="dice-btn" style={{ background: "#f39c12" }} onClick={() => dispatch({ type: "bet", call: "same" } as DiceMirrorRollAction)}>Same (+60)</button>
         </div>

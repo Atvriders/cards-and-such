@@ -31,7 +31,7 @@ export function DiceRouletteGame({ state, dispatch, onGameOver }: GameProps<Dice
       {state.dice && <div className="dm-sum">Sum: {state.sum}</div>}
       {state.phase === "betting" && (
         <div className="dm-row">
-          {buckets.map(b => <button key={b.id} className="dm-btn" onClick={() => dispatch({ type:"bet", bucket: b.id } as DiceRouletteAction)}>{b.label} ({b.range})</button>)}
+          {buckets.map(b => <button data-testid="hint-target-dice-roulette-roll" key={b.id} className="dm-btn" onClick={() => dispatch({ type:"bet", bucket: b.id } as DiceRouletteAction)}>{b.label} ({b.range})</button>)}
         </div>
       )}
       {state.phase === "result" && (

@@ -21,7 +21,7 @@ export function DiceSkipBet({ state, dispatch, onGameOver }: GameProps<DiceSkipB
           <label className="dg-label">Skip #: <select value={skip} onChange={e=>setSkip(parseInt(e.target.value))} style={{marginLeft:"4px"}}>{[1,2,3,4,5,6].map(n=><option key={n}>{n}</option>)}</select></label>
           <label className="dg-label">Bet: <input type="number" min={1} max={state.coins} value={bet} onChange={e=>setBet(Math.max(1,parseInt(e.target.value)||1))} style={{width:"55px",textAlign:"center"}}/></label>
         </div>
-        <button className="dg-btn" onClick={()=>dispatch({type:"bet",amount:bet,skip} as DiceSkipBetAction)}>Roll!</button>
+        <button data-testid="hint-target-dice-skip-bet-roll" className="dg-btn" onClick={()=>dispatch({type:"bet",amount:bet,skip} as DiceSkipBetAction)}>Roll!</button>
       </>}
       {state.phase==="result" && <button className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceSkipBetAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
     </div>

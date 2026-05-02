@@ -23,7 +23,7 @@ export function DiceMagicGame({ state, dispatch, onGameOver }: GameProps<DiceMag
       {state.phase === "predict" && (
         <div className="dm-row">
           {OPTIONS.map(o => (
-            <button key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceMagicAction)}>{o.label} (+{o.points})</button>
+            <button data-testid="hint-target-dice-magic-roll" key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceMagicAction)}>{o.label} (+{o.points})</button>
           ))}
         </div>
       )}

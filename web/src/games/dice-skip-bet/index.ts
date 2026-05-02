@@ -18,5 +18,7 @@ Choosing rarer numbers provides no statistical edge, but you can manage risk by 
 Play 10 or 20 rounds. If you hit your skip on a big bet, it will sting — so keep bet sizes reasonable!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceSkipBetSettings),
-  reducer, isTerminal, component: DiceSkipBet,
+  reducer, isTerminal, 
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-skip-bet-roll"]', pulses: 3 }; },
+  component: DiceSkipBet,
 };

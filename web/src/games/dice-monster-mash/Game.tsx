@@ -38,7 +38,7 @@ export function DiceMonsterMashGame({ state, dispatch, onGameOver }: GameProps<D
         <div className="mm-log">{state.log || "Roll three dice. Pairs +4, triples +12."}</div>
       </div>
       {state.phase === "roll" && (
-        <button className="mm-btn" onClick={() => dispatch({ type: "smash" } as DiceMonsterMashAction)}>SMASH</button>
+        <button data-testid="hint-target-dice-monster-mash-roll" className="mm-btn" onClick={() => dispatch({ type: "smash" } as DiceMonsterMashAction)}>SMASH</button>
       )}
       {state.phase === "result" && (
         <button className="mm-btn alt" onClick={() => dispatch({ type: "next" } as DiceMonsterMashAction)}>{m.hp === 0 ? "Next Foe" : "Smash Again"}</button>

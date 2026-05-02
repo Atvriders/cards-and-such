@@ -58,7 +58,7 @@ export function DiceKnightQuestGame({ state, dispatch, onGameOver }: GameProps<D
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}>
           {state.phase === "attack" && (
-            <button className="kq-btn" onClick={() => dispatch({ type: "attack" } as DiceKnightQuestAction)}>Attack</button>
+            <button data-testid="hint-target-dice-knight-quest-roll" className="kq-btn" onClick={() => dispatch({ type: "attack" } as DiceKnightQuestAction)}>Attack</button>
           )}
           {(state.phase === "result" || state.phase === "victory" || state.phase === "defeat") && (
             <button className="kq-btn alt" onClick={() => dispatch({ type: "next" } as DiceKnightQuestAction)}>

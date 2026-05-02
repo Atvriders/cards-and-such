@@ -16,5 +16,7 @@ Before each roll, set your wager. A low roll wins; a high roll loses. This game 
 Start with 100 coins. Choose 8 or 12 rounds in Settings. Your final coin total is your score.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceSlowRollSettings),
-  reducer,isTerminal,component:DiceSlowRollGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-slow-roll-roll"]', pulses: 3 }; },
+  component:DiceSlowRollGame,
 };

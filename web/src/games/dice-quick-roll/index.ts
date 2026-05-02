@@ -16,5 +16,7 @@ About 40% of rolls reach 12 or above with three dice, making this a nearly even 
 Start with 100 coins. Choose 8 or 12 rounds. Your final coin total is your score. Quick sessions, quick decisions, quick wins!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceQuickRollSettings),
-  reducer,isTerminal,component:DiceQuickRollGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-quick-roll-roll"]', pulses: 3 }; },
+  component:DiceQuickRollGame,
 };

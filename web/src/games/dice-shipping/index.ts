@@ -18,5 +18,7 @@ There are 6 rounds total, with fresh dice each round. The maximum theoretical sc
 Press a ship to lock in your pick; press Next to advance.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceShippingSettings),
-  reducer,isTerminal,component:DiceShippingGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-shipping-roll"]', pulses: 3 }; },
+  component:DiceShippingGame,
 };

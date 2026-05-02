@@ -35,7 +35,7 @@ export function DiceShrineGame({ state, dispatch, onGameOver }: GameProps<DiceSh
       )}
       <div className="sh-log">{state.log || "Roll three offerings to the deity."}</div>
       {state.phase === "roll" && (
-        <button className="sh-btn" onClick={() => dispatch({ type: "offer" } as DiceShrineAction)}>Offer</button>
+        <button data-testid="hint-target-dice-shrine-roll" className="sh-btn" onClick={() => dispatch({ type: "offer" } as DiceShrineAction)}>Offer</button>
       )}
       {state.phase === "result" && (
         <button className="sh-btn alt" onClick={() => dispatch({ type: "next" } as DiceShrineAction)}>Next</button>

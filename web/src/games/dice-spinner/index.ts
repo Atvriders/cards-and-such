@@ -18,5 +18,7 @@ Settle into a rhythm: pick a bet, watch the die spin, see the result, hit Next. 
 Light, snappy, and pure 50/50 luck — Dice Spinner is the perfect background game when you want a casual roll-and-bet flow!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceSpinnerSettings),
-  reducer,isTerminal,component:DiceSpinnerGame,
+  reducer,isTerminal,
+  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-spinner-roll"]', pulses: 3 }; },
+  component:DiceSpinnerGame,
 };

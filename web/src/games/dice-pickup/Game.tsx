@@ -16,7 +16,7 @@ export function DicePickupGame({ state, dispatch, onGameOver }: GameProps<DicePi
       <div className="dpck-score">{state.score} pts</div>
       <div className="dpck-grid">
         {state.dice.map((d, i) => (
-          <button key={i} className={`dp-die ${state.picked[i] ? "picked" : ""}`} disabled={state.phase !== "picking"} onClick={() => dispatch({ type:"pick", index:i } as DicePickupAction)}>
+          <button data-testid="hint-target-dice-pickup-roll" key={i} className={`dp-die ${state.picked[i] ? "picked" : ""}`} disabled={state.phase !== "picking"} onClick={() => dispatch({ type:"pick", index:i } as DicePickupAction)}>
             {d}
           </button>
         ))}
