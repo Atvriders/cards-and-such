@@ -1,5 +1,5 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GAMES } from "../games/registry.js";
 import { FAMILIES, compareTitles, expandFamily, type GameFamily } from "../games/families.js";
 import type { GameCategory, GamePlugin } from "../platform/game-plugin/types.js";
@@ -331,6 +331,12 @@ export default function LobbyPage(): JSX.Element {
   const deferredQuery = useDeferredValue(query);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  // Track which family id (if any) was opened via a `?family=<id>` deep
+  // link so we can stamp a marker on the picker for tests, and so that
+  // closing it can clear the URL via `navigate("/", { replace: true })`
+  // without re-opening the picker on subsequent renders.
+  const [autoFamilyId, setAutoFamilyId] = useState<string | null>(null);
 
   // Add a one-shot `is-mounted` class to the lobby root after the first
   // paint so entrance animations only run on the initial mount of each
@@ -551,6 +557,25 @@ export default function LobbyPage(): JSX.Element {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [openFamilyId]);
+
+  // Honour `/?family=<id>` deep-links from CategoryPage (and elsewhere).
+  // On mount and whenever the URL changes, look up the family by id and
+  // auto-open the picker. Unknown / missing ids are silently ignored so
+  // a stale link just lands on the regular lobby.
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const famId = params.get("family");
+    if (!famId) {
+      // URL no longer carries the param — drop the auto marker so a
+      // post-close navigate("/", { replace: true }) doesn't keep
+      // re-opening the picker.
+      if (autoFamilyId !== null) setAutoFamilyId(null);
+      return;
+    }
+    if (!familyById.has(famId)) return;
+    setOpenFamilyId(famId);
+    setAutoFamilyId(famId);
+  }, [location.search, familyById, autoFamilyId]);
 
   const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
   const hasMore = visibleCount < filtered.length;
@@ -849,7 +874,19 @@ export default function LobbyPage(): JSX.Element {
           family={openFamily.family}
           members={openFamily.members}
           ratings={ratings}
-          onClose={() => setOpenFamilyId(null)}
+          autoOpenedFamilyId={
+            autoFamilyId === openFamily.family.id ? autoFamilyId : null
+          }
+          onClose={() => {
+            setOpenFamilyId(null);
+            // If this picker was opened via `?family=<id>`, scrub the
+            // query string so a post-close refresh doesn't re-open it.
+            // `replace` so the back button still works as expected.
+            if (autoFamilyId === openFamily.family.id) {
+              setAutoFamilyId(null);
+              navigate("/", { replace: true });
+            }
+          }}
         />
       )}
     </div>
@@ -1283,11 +1320,19 @@ function FamilyPicker({
   members,
   ratings,
   onClose,
+  autoOpenedFamilyId = null,
 }: {
   family: GameFamily;
   members: GamePlugin[];
   ratings: Record<string, number>;
   onClose: () => void;
+  /**
+   * When this picker was opened via the `/?family=<id>` deep-link, this
+   * prop matches the family id; the dialog renders an extra
+   * `data-testid="lobby-auto-family-<id>"` marker so tests can verify
+   * the auto-open path. `null` for the normal click-to-open case.
+   */
+  autoOpenedFamilyId?: string | null;
 }): JSX.Element {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<PickerSort>("alpha");
@@ -1332,8 +1377,16 @@ function FamilyPicker({
       aria-modal="true"
       aria-label={`${family.label} variants`}
       data-testid={`fam-picker-${family.id}`}
+      data-auto-family={autoOpenedFamilyId === family.id ? family.id : undefined}
       onClick={onClose}
     >
+      {autoOpenedFamilyId === family.id && (
+        <span
+          hidden
+          aria-hidden="true"
+          data-testid={`lobby-auto-family-${family.id}`}
+        />
+      )}
       <div className="lobby-picker" onClick={(e) => e.stopPropagation()} ref={pickerRef} tabIndex={-1}>
         <header className="lobby-picker-head">
           <div className="lobby-picker-head-row">
