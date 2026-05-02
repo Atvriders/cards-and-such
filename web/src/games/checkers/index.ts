@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CheckersState, CheckersAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, getLegalMoves } from "./state.js";
 import { Checkers } from "./Checkers.js";
 
 export const checkersSettings = {
@@ -45,5 +45,39 @@ Tips: aim to king your pieces early. Controlling the center gives your pieces mo
   initialState: (seed: number, settings: CheckersSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CheckersState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.settings.opponent === "bot" && state.turn !== "red") return null;
+    const moves = getLegalMoves(
+      state.grid,
+      state.turn,
+      state.settings.mandatoryCapture,
+      state.mustContinueFrom,
+    );
+    if (moves.length === 0) return null;
+    // Prefer captures (most pieces taken)
+    let best = moves[0]!;
+    let bestCaps = best.captures.length;
+    for (const m of moves) {
+      if (m.captures.length > bestCaps) {
+        best = m;
+        bestCaps = m.captures.length;
+      }
+    }
+    if (bestCaps > 0) {
+      return { selector: `[data-testid="cell-${best.from.row}-${best.from.col}"]`, pulses: 3 };
+    }
+    // Otherwise prefer move toward center (closest to center column 3.5)
+    let pick = moves[0]!;
+    let pickDist = Math.abs(pick.to.col - 3.5);
+    for (const m of moves) {
+      const d = Math.abs(m.to.col - 3.5);
+      if (d < pickDist) {
+        pick = m;
+        pickDist = d;
+      }
+    }
+    return { selector: `[data-testid="cell-${pick.from.row}-${pick.from.col}"]`, pulses: 3 };
+  },
   component: Checkers,
 };

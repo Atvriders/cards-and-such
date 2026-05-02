@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BoggleState, BoggleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,14 @@ Tips: look for prefixes and suffixes like RE-, UN-, -ING, -ED, -ER. Common short
   initialState: (seed: number, settings: BoggleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BoggleState): HintTarget | null => {
+    if (state.done) return null;
+    // If a path has already started, suggest extending — pulse last selected.
+    // Otherwise just pulse the first cell to nudge starting a word.
+    const idx = state.currentPath.length > 0
+      ? state.currentPath[state.currentPath.length - 1]!
+      : 0;
+    return { selector: `[data-testid="boggle-cell-${idx}"]`, pulses: 3 };
+  },
   component: Boggle,
 };

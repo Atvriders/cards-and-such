@@ -70,6 +70,7 @@ export function Boggle({ state, dispatch, onGameOver }: GameProps<BoggleState, B
               tabIndex={done ? -1 : 0}
               aria-label={`Letter ${letter} at position ${i + 1}${isSelected ? `, selected (${pathIdx + 1})` : ""}`}
               aria-pressed={isSelected}
+              data-testid={`boggle-cell-${i}`}
               onClick={() => !done && dispatch({ type: "selectCell", index: i } as BoggleAction)}
               onKeyDown={(e) => { if (!done && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); dispatch({ type: "selectCell", index: i } as BoggleAction); } }}
             >

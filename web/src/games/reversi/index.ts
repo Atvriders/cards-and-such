@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ReversiState, ReversiAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, legalMoves, flipsFor } from "./state.js";
 import { Reversi } from "./Reversi.js";
 
 export const reversiSettings = {
@@ -34,5 +34,31 @@ Tips: corners are extremely valuable — once taken they can never be flipped. A
   initialState: (seed: number, settings: ReversiSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: ReversiState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    const legal = legalMoves(state.grid, 0);
+    if (legal.length === 0) return null;
+    const CORNERS: ReadonlyArray<readonly [number, number]> = [
+      [0, 0], [0, 7], [7, 0], [7, 7],
+    ];
+    // Prefer a corner if legal
+    for (const [r, c] of CORNERS) {
+      if (legal.some((m) => m.row === r && m.col === c)) {
+        return { selector: `[data-testid="cell-${r}-${c}"]`, pulses: 3 };
+      }
+    }
+    // Otherwise pick the move that flips most discs
+    let best = legal[0]!;
+    let bestFlips = -1;
+    for (const m of legal) {
+      const flips = flipsFor(state.grid, 0, m.row, m.col).length;
+      if (flips > bestFlips) {
+        bestFlips = flips;
+        best = m;
+      }
+    }
+    return { selector: `[data-testid="cell-${best.row}-${best.col}"]`, pulses: 3 };
+  },
   component: Reversi,
 };

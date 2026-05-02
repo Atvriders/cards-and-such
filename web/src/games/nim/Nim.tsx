@@ -42,7 +42,7 @@ export function Nim({ state, dispatch, onGameOver }: GameProps<NimState, NimSett
 
       <div className="nim-piles">
         {state.piles.map((count, i) => (
-          <div className="nim-pile" key={i}>
+          <div className="nim-pile" key={i} data-testid={`nim-pile-${i}`}>
             <div className="nim-stones">
               {Array.from({ length: count }, (_, j) => (
                 <div key={j} className="nim-stone" />

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import {
   connect4Initial,
   connect4Reduce,
@@ -126,5 +126,51 @@ Tips: control the centre column — it's part of more winning lines than any oth
   initialState: initial,
   reducer,
   isTerminal,
+  hint: (state: SPState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    // Find drop row helper
+    const dropRow = (col: number): number => {
+      for (let r = ROWS - 1; r >= 0; r--) {
+        if (state.board[r * COLS + col] === null) return r;
+      }
+      return -1;
+    };
+    // Try a winning move
+    for (let c = 0; c < COLS; c++) {
+      if (state.board[c] !== null) continue;
+      const next = connect4Reduce(state, { type: "drop", col: c }, 0);
+      if (next.winner === 0) {
+        const r = dropRow(c);
+        if (r >= 0) return { selector: `[data-testid="c4-col-${c}-row-${r}"]`, pulses: 3 };
+      }
+    }
+    // Block opponent winning move
+    for (let c = 0; c < COLS; c++) {
+      if (state.board[c] !== null) continue;
+      const hypothetical = { ...state, turn: 1 } as Connect4State;
+      const next = connect4Reduce(hypothetical, { type: "drop", col: c }, 1);
+      if (next.winner === 1) {
+        const r = dropRow(c);
+        if (r >= 0) return { selector: `[data-testid="c4-col-${c}-row-${r}"]`, pulses: 3 };
+      }
+    }
+    // Default: prefer center
+    const center = Math.floor(COLS / 2);
+    const order: number[] = [];
+    for (let off = 0; off < COLS; off++) {
+      for (const sign of [0, -1, 1]) {
+        const c = center + sign * off;
+        if (c >= 0 && c < COLS && !order.includes(c)) order.push(c);
+      }
+    }
+    for (const c of order) {
+      if (state.board[c] === null) {
+        const r = dropRow(c);
+        if (r >= 0) return { selector: `[data-testid="c4-col-${c}-row-${r}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Connect4,
 };

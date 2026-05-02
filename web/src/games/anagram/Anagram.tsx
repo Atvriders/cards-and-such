@@ -54,12 +54,16 @@ export function Anagram({
 
       {!state.won && !state.lost && (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
-          <div className="ang-input-row">
+          <div className="ang-input-row" data-testid="hint-target-anagram-input">
             {Array.from({ length: state.wordLength }, (_, i) => {
               const ch = state.currentGuess[i] ?? "";
               const isActive = i === state.currentGuess.length;
               return (
-                <div key={i} className={`ang-tile${isActive ? " active" : ""}`}>
+                <div
+                  key={i}
+                  className={`ang-tile${isActive ? " active" : ""}`}
+                  data-testid={isActive ? "hint-target-anagram-active-tile" : undefined}
+                >
                   {ch}
                 </div>
               );

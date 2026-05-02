@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GomokuState, GomokuAction, GomokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Gomoku } from "./Game.js";
@@ -31,5 +31,77 @@ Strategy tip: build threats in multiple directions simultaneously. A double-open
   initialState: (seed: number, s: GomokuSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: GomokuState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== "B") return null;
+    const grid = state.grid;
+    const size = grid.rows;
+    const dirs: ReadonlyArray<readonly [number, number]> = [[0, 1], [1, 0], [1, 1], [1, -1]];
+
+    // Count consecutive same-stones in a direction starting from a cell that
+    // we have just placed. Returns total run length (incl. center) and open-end count.
+    function evaluatePlacement(r: number, c: number, stone: "B" | "W"): { maxRun: number; openEnds: number } {
+      let bestRun = 1;
+      let bestOpens = 0;
+      for (const [dr, dc] of dirs) {
+        let run = 1;
+        let opens = 0;
+        // forward
+        let nr = r + dr, nc = c + dc;
+        while (nr >= 0 && nr < size && nc >= 0 && nc < size && grid.get({ row: nr, col: nc }) === stone) {
+          run++;
+          nr += dr; nc += dc;
+        }
+        if (nr >= 0 && nr < size && nc >= 0 && nc < size && grid.get({ row: nr, col: nc }) === null) opens++;
+        // backward
+        nr = r - dr; nc = c - dc;
+        while (nr >= 0 && nr < size && nc >= 0 && nc < size && grid.get({ row: nr, col: nc }) === stone) {
+          run++;
+          nr -= dr; nc -= dc;
+        }
+        if (nr >= 0 && nr < size && nc >= 0 && nc < size && grid.get({ row: nr, col: nc }) === null) opens++;
+
+        if (run > bestRun || (run === bestRun && opens > bestOpens)) {
+          bestRun = run;
+          bestOpens = opens;
+        }
+      }
+      return { maxRun: bestRun, openEnds: bestOpens };
+    }
+
+    const empties: Array<{ row: number; col: number }> = [];
+    for (const c of grid.coords()) {
+      if (grid.get(c) === null) empties.push({ row: c.row, col: c.col });
+    }
+    if (empties.length === 0) return null;
+
+    // 1. Win move (creates 5 in a row)
+    for (const e of empties) {
+      const { maxRun } = evaluatePlacement(e.row, e.col, "B");
+      if (maxRun >= 5) return { selector: `[data-testid="gomoku-${e.row}-${e.col}"]`, pulses: 3 };
+    }
+    // 2. Block opponent win
+    for (const e of empties) {
+      const { maxRun } = evaluatePlacement(e.row, e.col, "W");
+      if (maxRun >= 5) return { selector: `[data-testid="gomoku-${e.row}-${e.col}"]`, pulses: 3 };
+    }
+    // 3. Make own open-3
+    for (const e of empties) {
+      const { maxRun, openEnds } = evaluatePlacement(e.row, e.col, "B");
+      if (maxRun >= 3 && openEnds >= 2) return { selector: `[data-testid="gomoku-${e.row}-${e.col}"]`, pulses: 3 };
+    }
+    // 4. Block opponent open-3
+    for (const e of empties) {
+      const { maxRun, openEnds } = evaluatePlacement(e.row, e.col, "W");
+      if (maxRun >= 3 && openEnds >= 2) return { selector: `[data-testid="gomoku-${e.row}-${e.col}"]`, pulses: 3 };
+    }
+    // 5. Default: center
+    const center = Math.floor(size / 2);
+    if (grid.get({ row: center, col: center }) === null) {
+      return { selector: `[data-testid="gomoku-${center}-${center}"]`, pulses: 3 };
+    }
+    const e0 = empties[0]!;
+    return { selector: `[data-testid="gomoku-${e0.row}-${e0.col}"]`, pulses: 3 };
+  },
   component: Gomoku,
 };

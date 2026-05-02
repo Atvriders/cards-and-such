@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NimState, NimAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -42,5 +42,31 @@ Scoring: win = 100, loss = 0. The bot plays near-perfectly, so finding a win is 
   initialState: (seed: number, settings: NimSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: NimState): HintTarget | null => {
+    if (state.gameOver) return null;
+    if (state.turn !== "player") return null;
+    const piles = state.piles;
+    const xorVal = piles.reduce((acc, p) => acc ^ p, 0);
+    if (xorVal !== 0) {
+      // Find a pile we can reduce so the resulting XOR is 0.
+      for (let i = 0; i < piles.length; i++) {
+        const target = piles[i]! ^ xorVal;
+        if (target < piles[i]!) {
+          return { selector: `[data-testid="nim-pile-${i}"]`, pulses: 3 };
+        }
+      }
+    }
+    // No winning move (XOR already 0): pulse the largest non-empty pile.
+    let bestIdx = -1;
+    let bestVal = 0;
+    for (let i = 0; i < piles.length; i++) {
+      if (piles[i]! > bestVal) {
+        bestVal = piles[i]!;
+        bestIdx = i;
+      }
+    }
+    if (bestIdx < 0) return null;
+    return { selector: `[data-testid="nim-pile-${bestIdx}"]`, pulses: 3 };
+  },
   component: Nim,
 };

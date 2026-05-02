@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MancalaState, MancalaAction, MancalaSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, PLAYER0_PITS } from "./state.js";
 import { Mancala } from "./Game.js";
 
 const settings = {} as const;
@@ -24,5 +24,17 @@ The bot uses minimax search at depth 4. Winning strategy tips: prefer moves that
   initialState: (seed: number, s: MancalaSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: MancalaState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    // Rightmost non-empty pit (closest to the player's store) is a strong default.
+    for (let i = PLAYER0_PITS.length - 1; i >= 0; i--) {
+      const pit = PLAYER0_PITS[i]!;
+      if (state.board[pit]! > 0) {
+        return { selector: `[data-testid="pit-${pit}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Mancala,
 };

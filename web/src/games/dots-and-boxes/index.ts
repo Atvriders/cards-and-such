@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DotsAndBoxesState, DotsAndBoxesAction, DotsAndBoxesSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, getAllMoves, boxSides, hIdx, vIdx } from "./state.js";
 import { DotsAndBoxes } from "./Game.js";
 
 const settings = {
@@ -31,5 +31,67 @@ Strategy tip: think several moves ahead. A "double cross" — sacrificing a shor
   initialState: (seed: number, s: DotsAndBoxesSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: DotsAndBoxesState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    const moves = getAllMoves(state);
+    if (moves.length === 0) return null;
+
+    // Helper: simulate edge & count boxes that would be completed.
+    function completedCount(edge: "h" | "v", row: number, col: number): number {
+      const newH = [...state.hEdges];
+      const newV = [...state.vEdges];
+      if (edge === "h") newH[hIdx(state, row, col)] = true;
+      else newV[vIdx(state, row, col)] = true;
+      const temp = { rows: state.rows, cols: state.cols, hEdges: newH, vEdges: newV };
+      const cands: Array<[number, number]> = [];
+      if (edge === "h") {
+        if (row > 0) cands.push([row - 1, col]);
+        if (row < state.rows) cands.push([row, col]);
+      } else {
+        if (col > 0) cands.push([row, col - 1]);
+        if (col < state.cols) cands.push([row, col]);
+      }
+      let n = 0;
+      for (const [br, bc] of cands) {
+        if (br >= 0 && br < state.rows && bc >= 0 && bc < state.cols && boxSides(temp, br, bc) === 4) n++;
+      }
+      return n;
+    }
+    function createsThree(edge: "h" | "v", row: number, col: number): boolean {
+      const newH = [...state.hEdges];
+      const newV = [...state.vEdges];
+      if (edge === "h") newH[hIdx(state, row, col)] = true;
+      else newV[vIdx(state, row, col)] = true;
+      const temp = { rows: state.rows, cols: state.cols, hEdges: newH, vEdges: newV };
+      const cands: Array<[number, number]> = [];
+      if (edge === "h") {
+        if (row > 0) cands.push([row - 1, col]);
+        if (row < state.rows) cands.push([row, col]);
+      } else {
+        if (col > 0) cands.push([row, col - 1]);
+        if (col < state.cols) cands.push([row, col]);
+      }
+      return cands.some(([br, bc]) =>
+        br >= 0 && br < state.rows && bc >= 0 && bc < state.cols && boxSides(temp, br, bc) === 3
+      );
+    }
+
+    // 1. Box-completing move
+    for (const m of moves) {
+      if (completedCount(m.edge, m.row, m.col) > 0) {
+        return { selector: `[data-testid="${m.edge}-${m.row}-${m.col}"]`, pulses: 3 };
+      }
+    }
+    // 2. Safe move (does not give opp a 3-sided box)
+    for (const m of moves) {
+      if (!createsThree(m.edge, m.row, m.col)) {
+        return { selector: `[data-testid="${m.edge}-${m.row}-${m.col}"]`, pulses: 3 };
+      }
+    }
+    // 3. Forced — first move
+    const m0 = moves[0]!;
+    return { selector: `[data-testid="${m0.edge}-${m0.row}-${m0.col}"]`, pulses: 3 };
+  },
   component: DotsAndBoxes,
 };
