@@ -20,6 +20,40 @@
   --card-back-secondary: #2a2f45;
   --card-back-accent: rgba(255, 255, 255, 0.04);
 }
+/* New gallery designs (v45). The default `.card.face-down` rule below
+   builds its background from the three vars above; the per-design rules
+   following the swatch palettes below override that background entirely
+   when a design needs a unique pattern (tartan stripes, dot grid, etc.). */
+:root[data-card-back="bicycle-weave"] {
+  --card-back-primary: #3b3aa3;
+  --card-back-secondary: #5b59d9;
+  --card-back-accent: rgba(255, 255, 255, 0.10);
+}
+:root[data-card-back="solid-emerald"] {
+  --card-back-primary: #047857;
+  --card-back-secondary: #10b981;
+  --card-back-accent: rgba(255, 255, 255, 0.06);
+}
+:root[data-card-back="tartan"] {
+  --card-back-primary: #7f1d1d;
+  --card-back-secondary: #b91c1c;
+  --card-back-accent: rgba(255, 255, 255, 0.10);
+}
+:root[data-card-back="dot-grid"] {
+  --card-back-primary: #1e1b4b;
+  --card-back-secondary: #1e3a8a;
+  --card-back-accent: rgba(255, 255, 255, 0.30);
+}
+:root[data-card-back="art-deco"] {
+  --card-back-primary: #111827;
+  --card-back-secondary: #1f2937;
+  --card-back-accent: rgba(250, 204, 21, 0.55);
+}
+:root[data-card-back="holographic"] {
+  --card-back-primary: #6ee7b7;
+  --card-back-secondary: #93c5fd;
+  --card-back-accent: rgba(255, 255, 255, 0.18);
+}
 
 /* Card font preference — affects rank glyphs in corners. */
 :root[data-card-font="modern"] {
@@ -113,6 +147,103 @@
   border-radius: 6px;
   border: 1px dashed rgba(255, 255, 255, 0.18);
   pointer-events: none;
+}
+
+/* ----- Per-design face-down overrides (gallery v45) -----
+   Each block fully replaces the default woven background so the design
+   looks unique. They all reuse `--card-back-primary`/`--card-back-secondary`
+   set above, so the only thing that changes is the pattern layer. */
+
+/* Solid emerald: just a vertical gradient, no weave. */
+:root[data-card-back="solid-emerald"] .card.face-down {
+  background: linear-gradient(
+    180deg,
+    var(--card-back-secondary) 0%,
+    var(--card-back-primary) 100%
+  );
+}
+
+/* Tartan: orthogonal stripes layered over a diagonal base. */
+:root[data-card-back="tartan"] .card.face-down {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.10) 0 2px,
+      transparent 2px 10px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.18) 0 2px,
+      transparent 2px 10px
+    ),
+    linear-gradient(
+      135deg,
+      var(--card-back-primary) 0%,
+      var(--card-back-secondary) 100%
+    );
+}
+
+/* Dot grid: small radial-gradient repeated every 8px. */
+:root[data-card-back="dot-grid"] .card.face-down {
+  background:
+    radial-gradient(
+      var(--card-back-accent) 1.2px,
+      transparent 1.6px
+    )
+    0 0 / 8px 8px,
+    linear-gradient(
+      180deg,
+      var(--card-back-secondary) 0%,
+      var(--card-back-primary) 100%
+    );
+}
+
+/* Art deco: vertical gold pinstripes over a near-black base. */
+:root[data-card-back="art-deco"] .card.face-down {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--card-back-accent) 0 2px,
+      transparent 2px 8px
+    ),
+    linear-gradient(
+      180deg,
+      var(--card-back-primary) 0%,
+      var(--card-back-secondary) 100%
+    );
+}
+
+/* Holographic: animated multi-stop gradient. The keyframes pan a wide
+   gradient across a smaller card so the iridescence shifts continuously.
+   Animation is suppressed below by the existing reduced-motion + animations
+   off rules at the bottom of this file. */
+:root[data-card-back="holographic"] .card.face-down {
+  background: linear-gradient(
+    135deg,
+    #f0abfc 0%,
+    #93c5fd 25%,
+    #6ee7b7 50%,
+    #fde68a 75%,
+    #f0abfc 100%
+  );
+  background-size: 240% 240%;
+  animation: card-back-holo 6000ms linear infinite;
+}
+@keyframes card-back-holo {
+  0%   { background-position:   0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position:   0% 50%; }
+}
+:root[data-animations="reduced"] .card.face-down,
+:root[data-animations="off"] .card.face-down,
+:root[data-card-back="holographic"][data-animations="reduced"] .card.face-down,
+:root[data-card-back="holographic"][data-animations="off"] .card.face-down {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-card-back="holographic"] .card.face-down {
+    animation: none;
+  }
 }
 
 /* ----- Corners (rank + suit) ----- */

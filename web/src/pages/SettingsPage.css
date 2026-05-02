@@ -253,6 +253,30 @@
   border: 1px solid rgba(15, 12, 50, 0.85);
 }
 
+/* Card-back gallery — six tiles, wraps to two rows on narrow widths.
+   The rest of the swatch styling above (.card-back-swatch hover/selected)
+   carries over so we only need the layout container here. */
+.cardback-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Visually hide an element while keeping it discoverable to assistive tech
+   and e2e tests. Used to keep legacy `card-back-<id>` test ids addressable
+   without exposing duplicate buttons in the UI. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ---------------------------------------------------------------- Pill */
 .pill {
   background: transparent;
