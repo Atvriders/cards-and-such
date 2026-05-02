@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { InventorsQuizState, InventorsQuizAction, InventorsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const inventorsQuizPlugin: GamePlugin<InventorsQuizState, InventorsQuizAc
   howToPlay:"Famous Inventors Quiz tests your knowledge of the men and women who shaped modern life. Questions cover inventions from the printing press and steam engine to the telephone, lightbulb, internet, and beyond — naming inventors, the year of patents, country of origin, and the practical impact of breakthroughs that revolutionized work, communication and travel.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock — answer quickly to maximize your score. Wrong answers earn nothing.\n\nTap a choice, then press Submit. Correct answers glow green, wrong ones turn red, and the right answer is always revealed before you continue. Press Next to move on.\n\nChoose 10, 20, or 30 questions in Settings. From Gutenberg to Jobs, see how many of history's greatest creators you can recall before the timer runs out.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as InventorsQuizSettings),
-  reducer,isTerminal,component:InventorsQuizGame,
+  reducer,isTerminal,
+  hint: (state: InventorsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:InventorsQuizGame,
 };

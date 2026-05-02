@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { JazzQuizState, JazzQuizAction, JazzQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10, 20, or 30 questions in Settings. Whether you're a hardcore Blue Note collector or just someone who loves a good groove, Jazz Music Quiz will swing!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as JazzQuizSettings),
-  reducer,isTerminal,component:JazzQuizGame,
+  reducer,isTerminal,
+  hint: (state: JazzQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:JazzQuizGame,
 };

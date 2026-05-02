@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { track } from "./analytics.js";
 
 /**
  * Listens for `cards:sw-update-ready` (dispatched from main.tsx when a new
@@ -27,6 +28,7 @@ export function UpdateBanner(): JSX.Element | null {
         // the user explicitly said "later for THIS one"; a newer build
         // is a fresh prompt.
         setDismissed(false);
+        track("update.available");
       }
     };
     window.addEventListener("cards:sw-update-ready", onReady as EventListener);
@@ -36,6 +38,7 @@ export function UpdateBanner(): JSX.Element | null {
 
   const refresh = (): void => {
     if (!registration || !registration.waiting) return;
+    track("update.refresh");
     // Reload as soon as the new worker takes control. We attach the
     // listener BEFORE posting the message to avoid a race where
     // controllerchange fires before we're listening.

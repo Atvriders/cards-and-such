@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BreakthroughCheckersQuizState, BreakthroughCheckersQuizAction, BreakthroughCheckersQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BreakthroughCheckersQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const breakthroughCheckersQuizPlugin: GamePlugin<BreakthroughCheckersQuiz
   initialState: (seed: number, s: S) => initialState(seed, s as BreakthroughCheckersQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: BreakthroughCheckersQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: BreakthroughCheckersQuizGame,
 };

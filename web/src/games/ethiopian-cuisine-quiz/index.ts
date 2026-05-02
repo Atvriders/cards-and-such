@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { EthiopianCuisineQuizState, EthiopianCuisineQuizAction, EthiopianCuisineQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { EthiopianCuisineQuizGame } from "./Game.js";
@@ -19,5 +19,7 @@ Choose 5 or 10 questions in Settings — Settings, then Questions. The pool is r
 Eat well and quiz hard!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EthiopianCuisineQuizSettings),
-  reducer,isTerminal,component:EthiopianCuisineQuizGame,
+  reducer,isTerminal,
+  hint: (state: EthiopianCuisineQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:EthiopianCuisineQuizGame,
 };

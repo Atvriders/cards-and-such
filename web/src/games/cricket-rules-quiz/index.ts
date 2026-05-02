@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CricketRulesQuizState, CricketRulesQuizAction, CricketRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Topics include pitch dimensions (22 yards), boundary lengths, fielding restricti
 Tap, Submit, Next. Choose 10, 20, or 30 questions in Settings. Whether you follow the IPL, World Cup, or village green, sharpen your cricket IQ!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CricketRulesQuizSettings),
-  reducer,isTerminal,component:CricketRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: CricketRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:CricketRulesQuizGame,
 };

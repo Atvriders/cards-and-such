@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FootballRulesQuizState, FootballRulesQuizAction, FootballRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Topics range from the basics (yards needed for a first down, length of the field
 Tap a choice, press Submit, and Next moves you to the next question. Choose 10, 20, or 30 questions in Settings. Whether you're a die-hard tailgater or a casual Sunday viewer, sharpen your gridiron knowledge!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FootballRulesQuizSettings),
-  reducer,isTerminal,component:FootballRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: FootballRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:FootballRulesQuizGame,
 };

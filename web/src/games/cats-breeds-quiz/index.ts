@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CatsBreedsQuizState, CatsBreedsQuizAction, CatsBreedsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const catsBreedsQuizPlugin: GamePlugin<CatsBreedsQuizState, CatsBreedsQui
   howToPlay:"Cat Breeds Quiz tests your knowledge of felis catus across the globe. Questions cover the major recognized breeds — Persian, Siamese, Maine Coon, Ragdoll, Bengal, Abyssinian, Russian Blue, Sphynx, Scottish Fold, British Shorthair, Norwegian Forest, Devon Rex, Cornish Rex, Burmese, Birman, and more. You'll see questions on coat patterns (tabby, calico, tortoiseshell, colorpoint), origin countries, distinctive features (folded ears, hairlessness, polydactyly), and traditional jobs from rat-catching to royal companionship.\n\nEach question allows 15 seconds. Correct answers earn 100 base points plus 10 per second remaining; wrong answers earn nothing.\n\nTap a choice and press Submit. Correct answers turn green; wrong ones flash red and reveal the truth. Press Next to continue. Choose 10 or 20 questions in Settings. Whether you breed champion show cats or share your couch with a fluffy mystery, this quiz delivers a basket of feline knowledge.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CatsBreedsQuizSettings),
-  reducer,isTerminal,component:CatsBreedsQuizGame,
+  reducer,isTerminal,
+  hint: (state: CatsBreedsQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:CatsBreedsQuizGame,
 };

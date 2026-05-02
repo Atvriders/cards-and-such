@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ItalyCultureQuizState, ItalyCultureQuizAction, ItalyCultureQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const italyCultureQuizPlugin: GamePlugin<ItalyCultureQuizState, ItalyCult
   howToPlay:"Italy Culture Quiz tests your knowledge of la dolce vita. Questions cover Renaissance masters like Michelangelo and Leonardo, regional cuisines from Naples to Milan, opera composers including Verdi and Puccini, ancient Rome's emperors and engineering, the unification under Garibaldi, modern football, fashion houses, and the geography of its twenty regions.\n\nYou have 15 seconds per question. Correct answers earn 100 points plus 10 per second remaining; wrong answers score zero but reveal the right answer.\n\nTap a choice and press Submit. Green means correct, red means wrong. Press Next to continue.\n\nChoose 10 or 20 questions in Settings. Whether you're a tifosi rooting for Juventus, a foodie obsessed with carbonara, or an art lover who has lost themselves in the Sistine Chapel, this quiz will test how molto bene your Italian cultural literacy really is.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ItalyCultureQuizSettings),
-  reducer,isTerminal,component:ItalyCultureQuizGame,
+  reducer,isTerminal,
+  hint: (state: ItalyCultureQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ItalyCultureQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChinaHistoryQuizState, ChinaHistoryQuizAction, ChinaHistoryQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const chinaHistoryQuizPlugin: GamePlugin<ChinaHistoryQuizState, ChinaHist
   howToPlay:"Chinese History Quiz tests your knowledge of one of the world's longest continuous civilizations. Questions span the Shang and Zhou dynasties, the unification under Qin Shi Huang, the golden age of Tang and Song, the Mongol Yuan, the powerful Ming, the foreign Qing, the Republican era, and modern People's Republic. Expect questions about the Great Wall, the Forbidden City, the Silk Road, key emperors, philosophers like Confucius and Laozi, and twentieth-century leaders.\n\nYou have 15 seconds per question. Correct answers award 100 base points plus 10 points per second remaining. Wrong answers earn zero, but the correct answer is revealed.\n\nTap a choice and press Submit. Right answers glow green, wrong ones turn red. Press Next to advance.\n\nChoose 10 or 20 questions in Settings. Whether you're a history major, a fan of Three Kingdoms-era novels, or just curious about the world's most populous country, this quiz will challenge you on the depth and drama of Chinese history.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ChinaHistoryQuizSettings),
-  reducer,isTerminal,component:ChinaHistoryQuizGame,
+  reducer,isTerminal,
+  hint: (state: ChinaHistoryQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ChinaHistoryQuizGame,
 };

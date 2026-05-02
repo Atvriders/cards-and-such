@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BritishLitQuizState, BritishLitQuizAction, BritishLitQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const britishLitQuizPlugin: GamePlugin<BritishLitQuizState, BritishLitQui
   howToPlay:`British Literature Quiz spans roughly seven centuries of writing from the British Isles, starting with Chaucer's Canterbury Tales (14th century) and reaching contemporary masters like Kazuo Ishiguro and Hilary Mantel.\n\nQuestions cover Milton's Paradise Lost, the great 18th-century novelists (Defoe, Swift, Fielding, Sterne), the Brontes and Austen, Dickens and Eliot, Hardy and Forster. Modernists Woolf, Lawrence, and Joyce are well-represented, alongside dystopian giants Orwell and Huxley.\n\nYou will see questions on contemporary heavyweights too — Ian McEwan (Atonement), Salman Rushdie, Julian Barnes, A.S. Byatt, David Mitchell — and important post-war voices like Greene, Waugh, and Golding.\n\nEach question has 15 seconds; correct answers earn 100 points plus 10 per second remaining. Choose 10, 20, or 30 questions in Settings. Now grab your tea and have a go!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BritishLitQuizSettings),
-  reducer,isTerminal,component:BritishLitQuizGame,
+  reducer,isTerminal,
+  hint: (state: BritishLitQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BritishLitQuizGame,
 };

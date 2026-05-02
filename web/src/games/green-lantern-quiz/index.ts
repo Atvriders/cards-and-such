@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GreenLanternQuizState, GreenLanternQuizAction, GreenLanternQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 20 questions in Settings. In brightest day, in blackest night, no quiz shall escape your sight!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as GreenLanternQuizSettings),
-  reducer,isTerminal,component:GreenLanternQuizGame,
+  reducer,isTerminal,
+  hint: (state: GreenLanternQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:GreenLanternQuizGame,
 };

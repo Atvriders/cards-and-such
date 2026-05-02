@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HalmaQuizState, HalmaQuizAction, HalmaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HalmaQuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const halmaQuizPlugin: GamePlugin<HalmaQuizState, HalmaQuizAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as HalmaQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: HalmaQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: HalmaQuizGame,
 };

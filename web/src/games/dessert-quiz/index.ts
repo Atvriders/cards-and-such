@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DessertQuizState, DessertQuizAction, DessertQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const dessertQuizPlugin: GamePlugin<DessertQuizState, DessertQuizAction, 
   howToPlay:"Desserts Quiz tests your knowledge of the world's sweetest ending. Questions cover classic European pastries (croissant, eclair, mille-feuille, opera cake, Black Forest, sachertorte, tiramisu, panna cotta), American mainstays (apple pie, pecan pie, cheesecake, brownies, s'mores), Asian sweets (mochi, dorayaki, bingsu, halo-halo), Middle Eastern delights (baklava, kunafa, basbousa), and the molecular world of mousses, soufflés, and meringues. You'll learn the difference between custard and curd, ganache and pastry cream, and the unique techniques behind classic confections.\n\nEach question allows 15 seconds. Correct answers earn 100 base points plus 10 per second remaining; wrong answers earn nothing.\n\nTap a choice, press Submit. Correct answers light up green; wrong ones turn red and show the truth. Press Next to continue. Choose 10 or 20 questions in Settings. Whether you bake elaborate French pastries or just love a slice of grocery store cheesecake, this quiz delivers a sweet plate of dessert knowledge.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DessertQuizSettings),
-  reducer,isTerminal,component:DessertQuizGame,
+  reducer,isTerminal,
+  hint: (state: DessertQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:DessertQuizGame,
 };

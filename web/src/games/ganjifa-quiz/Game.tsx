@@ -30,7 +30,7 @@ export function GanjifaQuizGame({ state, dispatch, onGameOver }: GameProps<Ganji
           let cls = "trivia-choice";
           if (isResult) { if (i === qq.correct) cls += " correct"; else if (i === state.selected && state.selected !== qq.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as GanjifaQuizAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button key={i} className={cls} disabled={isResult} data-testid={`hint-target-quiz-answer-${i}`} onClick={() => dispatch({ type:"select", choice:i } as GanjifaQuizAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`trivia-feedback ${state.selected === qq.correct ? "correct" : "wrong"}`}>{state.selected === qq.correct ? "Correct!" : `Wrong! Answer: ${qq.choices[qq.correct]}`}</div>}

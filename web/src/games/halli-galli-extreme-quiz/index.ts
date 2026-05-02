@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HalliGalliExtremeQuizState, HalliGalliExtremeQuizAction, HalliGalliExtremeQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const halliGalliExtremeQuizPlugin: GamePlugin<HalliGalliExtremeQuizState,
   howToPlay:"Halli Galli Extreme Trivia is a ten-question quiz about the spicier follow-up to the classic Halli Galli fruit-bell slap-card game. In Halli Galli Extreme, players ring the bell when the cumulative total of any fruit type is exactly five OR a specific odd/even pattern, with new card types raising the cognitive load. Each round you'll be tested on its publisher Amigo Spiele, the new mechanics, recommended players, and how it differs from the classic version. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Halli Galli Extreme is loved for cranking the original up with stickier rules — see how much trivia about the bell-ringing brain-twister you can keep straight.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HalliGalliExtremeQuizSettings),
-  reducer,isTerminal,component:HalliGalliExtremeQuizGame,
+  reducer,isTerminal,
+  hint: (state: HalliGalliExtremeQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:HalliGalliExtremeQuizGame,
 };

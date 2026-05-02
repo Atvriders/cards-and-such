@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DragonballQuizState, DragonballQuizAction, DragonballQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 20 questions in Settings. Whether you grew up watching Toonami or you're streaming Super on a phone today, this quiz proves who has the highest power level in trivia.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DragonballQuizSettings),
-  reducer,isTerminal,component:DragonballQuizGame,
+  reducer,isTerminal,
+  hint: (state: DragonballQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:DragonballQuizGame,
 };

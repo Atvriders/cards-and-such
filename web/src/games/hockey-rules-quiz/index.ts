@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HockeyRulesQuizState, HockeyRulesQuizAction, HockeyRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Topics include rink dimensions (NHL vs. international), penalties (minor 2 minut
 Tap a choice, press Submit, then Next. Choose 10, 20, or 30 questions in Settings. Whether you're a Stanley Cup-watching hockey fan or a casual viewer who can't tell offsides from icing, this quiz will sharpen your understanding!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HockeyRulesQuizSettings),
-  reducer,isTerminal,component:HockeyRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: HockeyRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:HockeyRulesQuizGame,
 };

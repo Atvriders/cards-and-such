@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EvangelionQuizState, EvangelionQuizAction, EvangelionQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 Choose 10 or 20 questions. Get in the Eva, Shinji — and answer correctly!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EvangelionQuizSettings),
-  reducer,isTerminal,component:EvangelionQuizGame,
+  reducer,isTerminal,
+  hint: (state: EvangelionQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:EvangelionQuizGame,
 };

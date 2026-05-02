@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FluxxBaseQuizState, FluxxBaseQuizAction, FluxxBaseQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const fluxxBaseQuizPlugin: GamePlugin<FluxxBaseQuizState, FluxxBaseQuizAc
   howToPlay:"Fluxx Trivia is a ten-question quiz about Andrew Looney's classic Fluxx, the card game that begins with a single rule (Draw 1, Play 1) and warps wildly as new rule and goal cards are played. Each round you'll be tested on the four card types — Basic Rules, Goals, Keepers, Actions — its publisher Looney Labs, its many themed editions, and the iconic Creeper card type added later. Tap your answer and press Submit; a correct answer awards 100 base points plus 10 per second remaining on the 15-second timer. A wrong answer reveals the correct option and locks the round; press Next to continue. After ten questions, your final score is displayed. Fluxx is famed for being the game where the rules themselves are the cards — see how much trivia about its meta-mayhem you can keep up with.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FluxxBaseQuizSettings),
-  reducer,isTerminal,component:FluxxBaseQuizGame,
+  reducer,isTerminal,
+  hint: (state: FluxxBaseQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:FluxxBaseQuizGame,
 };

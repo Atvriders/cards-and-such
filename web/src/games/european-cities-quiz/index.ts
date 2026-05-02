@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EuropeanCitiesQuizState, EuropeanCitiesQuizAction, EuropeanCitiesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const europeanCitiesQuizPlugin: GamePlugin<EuropeanCitiesQuizState, Europ
   howToPlay:`European Cities Quiz tests your familiarity with Europe's capitals and major cities. From the storybook streets of Prague to the saunas of Helsinki and the cathedrals of Sofia, you will face four-option questions covering all of Europe's nations.\n\nEach question gives you 15 seconds. Correct answers earn 100 base points plus a 10-point speed bonus per second remaining on the clock. Wrong answers earn nothing, but you do see the right answer revealed before moving on.\n\nQuestions span Western, Northern, Southern, and Eastern Europe — including the Baltic trio, the Balkans, the Iberian peninsula, and the tiny microstates like Andorra, Liechtenstein, and Monaco.\n\nChoose 10, 20, or 30 questions. If you can keep Riga, Vilnius, and Tallinn straight, you are doing better than most travelers. Sharpen your map skills before that next Eurail trip!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EuropeanCitiesQuizSettings),
-  reducer,isTerminal,component:EuropeanCitiesQuizGame,
+  reducer,isTerminal,
+  hint: (state: EuropeanCitiesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:EuropeanCitiesQuizGame,
 };

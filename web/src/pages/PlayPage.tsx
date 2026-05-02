@@ -522,17 +522,19 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           /* ignore */
         }
       }
+      track("play.fullscreen", { gameId: plugin.id, exit: true });
       return;
     }
     if (!el) return;
     if (typeof el.requestFullscreen === "function") {
       try {
         void el.requestFullscreen();
+        track("play.fullscreen", { gameId: plugin.id, exit: false });
       } catch {
         /* ignore — user gesture or permission may have been denied */
       }
     }
-  }, []);
+  }, [plugin.id]);
 
   // Plays-this-session counter — bumped each time we transition into
   // "playing", never written to localStorage.
@@ -796,6 +798,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       return;
     }
     bumpHintsUsed(plugin.id);
+    track("play.hint", { gameId: plugin.id });
     el.classList.add("hint-pulse");
     const ms = 500 * Math.max(1, target.pulses ?? 3);
     window.setTimeout(() => {
@@ -834,6 +837,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       },
       { replace: true },
     );
+    track("friend.share", { gameId: plugin.id, copied });
     pushToast(
       copied
         ? "Link copied — share with a friend (same seed = same hand)"
@@ -964,6 +968,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       // popped — empty-stack invocations are no-ops and shouldn't inflate
       // the StatsPage drill-down. Mirror of `bumpHintsUsed` semantics.
       bumpUndosUsed(plugin.id);
+      track("play.undo", { gameId: plugin.id });
       // Snapshot the *current* state onto redoStack before rolling back so
       // a subsequent `redo()` can step forward again. We capture state via
       // the functional setState to avoid stale-closure reads.
@@ -991,6 +996,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     setRedoStack((stack) => {
       if (stack.length === 0) return stack;
       const next = stack[stack.length - 1];
+      track("play.redo", { gameId: plugin.id });
       setState((cur: unknown) => {
         setUndoStack((us) => {
           const appended = [...us, { state: cur, action: next.action }];
@@ -1002,7 +1008,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       });
       return stack.slice(0, -1);
     });
-  }, [phase]);
+  }, [phase, plugin.id]);
 
   // Ctrl/Cmd+Z triggers undo, Ctrl/Cmd+Shift+Z and Ctrl/Cmd+Y trigger redo.
   // We skip when focus is in a text-entry surface (settings inputs,
@@ -1101,11 +1107,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     if (typeof window.print === "function") {
       try {
         window.print();
+        track("play.print", { gameId: plugin.id });
       } catch {
         /* user-cancel or pop-up blocker */
       }
     }
-  }, []);
+  }, [plugin.id]);
 
   /**
    * Build a 1200×630 share card summarizing the final score and trigger a
@@ -1127,6 +1134,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       date: new Date(),
     });
     downloadSvg(svg, `cards-${plugin.id}-${Date.now()}.svg`);
+    track("play.share_image", { gameId: plugin.id });
   }, [plugin.id, plugin.title, seed, finalScore, elapsed, isNewRecord]);
 
   // Esc dismisses the win banner; Enter triggers Play Again. Listener is
@@ -1953,6 +1961,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                   title="Copy friend code"
                   aria-label={`Copy friend code ${code}`}
                   onClick={() => {
+                    track("friend.copy_code", { gameId: plugin.id });
                     if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
                       void navigator.clipboard
                         .writeText(code)

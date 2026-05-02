@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BoxingRulesQuizState, BoxingRulesQuizAction, BoxingRulesQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ You have 15 seconds per question. Correct answers earn 100 base points plus 10 p
 Choose 10 or 20 questions in Settings. Whether you're a casual fan or an aspiring referee, this quiz keeps your boxing knowledge sharp. No bell to save you!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BoxingRulesQuizSettings),
-  reducer,isTerminal,component:BoxingRulesQuizGame,
+  reducer,isTerminal,
+  hint: (state: BoxingRulesQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BoxingRulesQuizGame,
 };

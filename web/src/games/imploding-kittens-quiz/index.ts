@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ImplodingKittensQuizState, ImplodingKittensQuizAction, ImplodingKittensQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const implodingKittensQuizPlugin: GamePlugin<ImplodingKittensQuizState, I
   howToPlay:"Imploding Kittens Trivia is a ten-question quiz about the first expansion to the cult Exploding Kittens deck. Imploding Kittens adds twenty new cards plus a Cone of Shame to mark the player who must draw next, increasing the player count from five to six. Each round asks about the new card types — Reverse, Targeted Attack, Feral Cat, Alter the Future — the role of the imploding kitten card itself which can't be defused, the Cone of Shame, and how it merges with the base deck. Tap the answer you believe is correct and press Submit; a correct answer awards 100 base points plus 10 points per second left on the 15-second timer, rewarding quick recall. A wrong answer reveals the correct option and locks the round before allowing Next. After ten questions, your final score is displayed. Imploding Kittens added genuinely fresh strategy to a riot of luck-based play — see how well you remember its twists.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ImplodingKittensQuizSettings),
-  reducer,isTerminal,component:ImplodingKittensQuizGame,
+  reducer,isTerminal,
+  hint: (state: ImplodingKittensQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ImplodingKittensQuizGame,
 };

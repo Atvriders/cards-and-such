@@ -24,6 +24,7 @@ import {
 } from "./tutorials.js";
 import { searchAll, type SearchHit } from "./search.js";
 import { decodeChallenge } from "./friendCode.js";
+import { track } from "./analytics.js";
 import "./AppShell.css";
 
 const CHANGELOG: Array<{ title: string; detail: string }> = [
@@ -1067,6 +1068,7 @@ export default function AppShell(): JSX.Element {
         <WelcomeTutorial
           onComplete={() => {
             markWelcomeTutorialSeen();
+            track("tutorial.complete", { reason: "completed" });
             // Arm the lobby coachmark so the user gets a gentle nudge
             // toward the Featured strip on their next lobby visit.
             setCoachmarkPending();
@@ -1074,6 +1076,7 @@ export default function AppShell(): JSX.Element {
           }}
           onSkip={() => {
             markWelcomeTutorialSeen();
+            track("tutorial.complete", { reason: "skipped" });
             setCoachmarkPending();
             setWelcomeOpen(false);
           }}

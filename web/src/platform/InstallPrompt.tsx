@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { track } from "./analytics.js";
 
 /**
  * Captures the `beforeinstallprompt` event on supported browsers and surfaces
@@ -33,6 +34,7 @@ export function InstallPrompt(): JSX.Element | null {
       // Stop the browser's default mini-infobar so we can render our own UI.
       e.preventDefault();
       setEvt(e as BeforeInstallPromptEvent);
+      track("install.shown");
     };
     const onInstalled = (): void => {
       // After install completes, hide the banner and clear the cached event.
@@ -48,6 +50,7 @@ export function InstallPrompt(): JSX.Element | null {
 
   const dismiss = (): void => {
     setDismissed(true);
+    track("install.dismiss");
     try {
       window.localStorage.setItem(DISMISS_KEY, "1");
     } catch {
@@ -57,6 +60,7 @@ export function InstallPrompt(): JSX.Element | null {
 
   const accept = async (): Promise<void> => {
     if (!evt) return;
+    track("install.accept");
     try {
       await evt.prompt();
       await evt.userChoice;

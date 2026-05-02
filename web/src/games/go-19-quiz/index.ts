@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Go19QuizState, Go19QuizAction, Go19QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Go19QuizGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const go19QuizPlugin: GamePlugin<Go19QuizState, Go19QuizAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as Go19QuizSettings),
   reducer,
   isTerminal,
+  hint: (state: Go19QuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: Go19QuizGame,
 };

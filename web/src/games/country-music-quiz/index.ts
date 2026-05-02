@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CountryMusicQuizState, CountryMusicQuizAction, CountryMusicQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice and press Submit. Correct choices glow green; wrong choices turn re
 Choose 10, 20, or 30 questions in Settings. Whether you ride for Bakersfield, bro country, or anything in between, this quiz will show you what you really know about country!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CountryMusicQuizSettings),
-  reducer,isTerminal,component:CountryMusicQuizGame,
+  reducer,isTerminal,
+  hint: (state: CountryMusicQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:CountryMusicQuizGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BobsledQuizState, BobsledQuizAction, BobsledQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ You have 15 seconds per question. Correct answers earn 100 base points plus 10 p
 Choose 10 or 20 questions in Settings. Feel the need for speed!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BobsledQuizSettings),
-  reducer,isTerminal,component:BobsledQuizGame,
+  reducer,isTerminal,
+  hint: (state: BobsledQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BobsledQuizGame,
 };

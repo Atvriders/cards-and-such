@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ElectronicMusicQuizState, ElectronicMusicQuizAction, ElectronicMusicQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,7 @@ Tap a choice and press Submit. Correct answers glow green; wrong answers turn re
 Choose 10, 20, or 30 questions in Settings. From basement raves to festival mainstages, this quiz tests your synth-and-sampler smarts. Drop the bass!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ElectronicMusicQuizSettings),
-  reducer,isTerminal,component:ElectronicMusicQuizGame,
+  reducer,isTerminal,
+  hint: (state: ElectronicMusicQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:ElectronicMusicQuizGame,
 };

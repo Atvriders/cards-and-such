@@ -4,6 +4,7 @@ import { PageHead } from "../platform/PageHead.js";
 import { loadStats } from "../platform/stats.js";
 import { getStreak, recordDailyPlayed, type DailyStreak } from "../platform/userdata.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
+import { track } from "../platform/analytics.js";
 import {
   estimatedMinutes,
   formatDateStamp,
@@ -157,6 +158,7 @@ export default function DailyPage(): JSX.Element {
       date: new Date(),
     });
     downloadSvg(svg, `cards-daily-${today}.svg`);
+    track("daily.share", { gameId: todays.game.id });
   };
 
   return (

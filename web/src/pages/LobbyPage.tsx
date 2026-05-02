@@ -22,6 +22,7 @@ import {
   setCoachmarkDone,
 } from "../platform/tutorials.js";
 import { loadStats } from "../platform/stats.js";
+import { track } from "../platform/analytics.js";
 import "./LobbyPage.css";
 
 /**
@@ -978,6 +979,7 @@ export default function LobbyPage(): JSX.Element {
   const dismissCoachmark = useCallback(() => {
     setCoachmarkVisible(false);
     setCoachmarkDone();
+    track("coachmark.dismiss");
   }, []);
 
   useEffect(() => {

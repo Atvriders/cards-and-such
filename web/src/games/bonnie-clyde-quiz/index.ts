@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BonnieClydeQuizState, BonnieClydeQuizAction, BonnieClydeQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,7 @@ export const bonnieClydeQuizPlugin: GamePlugin<BonnieClydeQuizState, BonnieClyde
   howToPlay:"Bonnie & Clyde Quiz tests your knowledge of America's most romanticized outlaws. Bonnie Parker and Clyde Barrow rampaged across the Central United States during the Great Depression with the Barrow Gang, robbing banks, gas stations and small stores from 1932 until their deaths in a Louisiana ambush in May 1934.\n\nQuestions cover their Texas backgrounds, Clyde's juvenile arrests and prison time at Eastham, the gang including Buck Barrow, Blanche, W.D. Jones and Henry Methvin, the famous photographs published in newspapers, the lawmen who hunted them — including Frank Hamer — and the bullet-riddled 1934 V-8 Ford ambush.\n\nYou have 15 seconds per question. Each correct answer awards 100 base points plus 10 points for every second remaining on the clock. Wrong answers earn zero. Choose 10 or 20 questions in Settings.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BonnieClydeQuizSettings),
-  reducer,isTerminal,component:BonnieClydeQuizGame,
+  reducer,isTerminal,
+  hint: (state: BonnieClydeQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  component:BonnieClydeQuizGame,
 };
