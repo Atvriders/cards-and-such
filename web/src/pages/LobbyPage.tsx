@@ -24,6 +24,8 @@ import {
 import { loadStats } from "../platform/stats.js";
 import { getRecommendations } from "../games/recommend.js";
 import { track } from "../platform/analytics.js";
+import { useToast } from "../platform/ui/Toast.js";
+import { LobbyTileMenu } from "./LobbyTileMenu.js";
 import "./LobbyPage.css";
 
 /**
@@ -1896,6 +1898,100 @@ function GameCard({
   useEffect(() => () => {
     if (pressTimer.current != null) window.clearTimeout(pressTimer.current);
   }, []);
+
+  // Right-click / long-press context menu state. The menu is positioned
+  // at the cursor (or touch point) in viewport coords so the popover can
+  // anchor regardless of grid scroll. A long-press of ≥ 600 ms on touch
+  // promotes a press into a menu open while suppressing the eventual
+  // tap-navigation. The Link's onContextMenu intercepts right-clicks.
+  const navigate = useNavigate();
+  const pushToast = useToast((s) => s.push);
+  const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
+  const longPressTimer = useRef<number | null>(null);
+  const longPressFired = useRef(false);
+  const cancelLongPress = useCallback(() => {
+    if (longPressTimer.current != null) {
+      window.clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  }, []);
+  const onTileContextMenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setMenuPos({ x: e.clientX, y: e.clientY });
+  }, []);
+  const onTileTouchStart = useCallback((e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (!t) return;
+    const x = t.clientX;
+    const y = t.clientY;
+    longPressFired.current = false;
+    cancelLongPress();
+    longPressTimer.current = window.setTimeout(() => {
+      longPressFired.current = true;
+      setMenuPos({ x, y });
+    }, 600);
+  }, [cancelLongPress]);
+  const onTileTouchEnd = useCallback(() => {
+    cancelLongPress();
+  }, [cancelLongPress]);
+  const onTileTouchMove = useCallback(() => {
+    cancelLongPress();
+  }, [cancelLongPress]);
+  // If the long-press fired, the impending click on the <Link> would
+  // still navigate — swallow it so opening the menu doesn't also
+  // immediately route to /play/<id>.
+  const onTileClick = useCallback((e: React.MouseEvent) => {
+    if (longPressFired.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      longPressFired.current = false;
+    }
+  }, []);
+  useEffect(() => () => cancelLongPress(), [cancelLongPress]);
+
+  const closeMenu = useCallback(() => setMenuPos(null), []);
+  const playUrl = `${
+    typeof window !== "undefined" && window.location?.origin
+      ? window.location.origin
+      : ""
+  }/play/${g.id}`;
+  const onMenuPlay = useCallback(() => {
+    navigate(`/play/${g.id}`);
+  }, [navigate, g.id]);
+  const onMenuCopy = useCallback(async () => {
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(playUrl);
+        pushToast("success", "Link copied");
+      } else {
+        pushToast("error", "Clipboard unavailable");
+      }
+    } catch {
+      pushToast("error", "Copy failed");
+    }
+  }, [playUrl, pushToast]);
+  const onMenuFav = useCallback(() => {
+    onToggleFavorite?.(g.id);
+  }, [onToggleFavorite, g.id]);
+  const onMenuFriend = useCallback(async () => {
+    const seed = Math.floor(Math.random() * 0x7fffffff);
+    const origin =
+      typeof window !== "undefined" && window.location?.origin
+        ? window.location.origin
+        : "";
+    const url = `${origin}/play/${g.id}?seed=${seed}&friend=1`;
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        pushToast("success", "Friend link copied");
+      } else {
+        pushToast("error", "Clipboard unavailable");
+      }
+    } catch {
+      pushToast("error", "Copy failed");
+    }
+  }, [g.id, pushToast]);
+
   return (
     <div className="lobby-tile-wrap">
     <Link
@@ -1905,6 +2001,12 @@ function GameCard({
       onMouseDown={startPress}
       onMouseUp={endPress}
       onMouseLeave={endPress}
+      onContextMenu={onTileContextMenu}
+      onTouchStart={onTileTouchStart}
+      onTouchEnd={onTileTouchEnd}
+      onTouchMove={onTileTouchMove}
+      onTouchCancel={onTileTouchEnd}
+      onClick={onTileClick}
       {...handlers}
     >
       <span className="tile-stripe" aria-hidden="true" />
@@ -1957,6 +2059,20 @@ function GameCard({
     </Link>
     {onToggleFavorite && (
       <HeartToggle id={g.id} active={isFavorite} onToggle={onToggleFavorite} />
+    )}
+    {menuPos && (
+      <LobbyTileMenu
+        gameId={g.id}
+        gameTitle={g.title}
+        x={menuPos.x}
+        y={menuPos.y}
+        isFavorite={isFavorite}
+        onClose={closeMenu}
+        onPlay={onMenuPlay}
+        onCopyLink={onMenuCopy}
+        onToggleFavorite={onMenuFav}
+        onShareWithFriend={onMenuFriend}
+      />
     )}
     {tooltip}
     </div>
