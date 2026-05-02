@@ -11,6 +11,7 @@ import {
   useKeyboardShortcutsModal,
 } from "./KeyboardShortcuts.js";
 import { InstallPrompt } from "./InstallPrompt.js";
+import { UpdateBanner } from "./UpdateBanner.js";
 import { GAMES } from "../games/registry.js";
 import { pickQuickstart } from "./quickstart.js";
 import { t } from "./i18n.js";
@@ -787,6 +788,7 @@ export default function AppShell(): JSX.Element {
       <SparkleHost />
       <KeyboardShortcutsModal open={shortcuts.open} onClose={shortcuts.close} />
       <InstallPrompt />
+      <UpdateBanner />
 
       {surpriseSplash ? (
         <div

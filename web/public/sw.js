@@ -16,6 +16,15 @@ self.addEventListener("install", (event) => {
   );
 });
 
+// The page asks the waiting worker to activate immediately when the user
+// clicks "Refresh" on the update banner. Without this, the new worker
+// would sit in `waiting` until every tab using the old version closed.
+self.addEventListener("message", (event) => {
+  if (event && event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
