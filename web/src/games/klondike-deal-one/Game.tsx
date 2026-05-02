@@ -61,7 +61,7 @@ export function KlondikeDealOneGame({ state, dispatch, onGameOver }: GameProps<K
         })}
       </div>
       <div className="kd1-actions">
-        <button className="kd1-btn keep" onClick={() => dispatch({ type: "keep" } as KlondikeDealOneAction)}>
+        <button data-testid="hint-target-klondike-deal-one-primary" className="kd1-btn keep" onClick={() => dispatch({ type: "keep" } as KlondikeDealOneAction)}>
           Keep &amp; Score
         </button>
         <button className="kd1-btn disc" onClick={() => dispatch({ type: "discard", index: 0 } as KlondikeDealOneAction)}>

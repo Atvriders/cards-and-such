@@ -25,7 +25,7 @@ export function DemonPatienceGame({ state, dispatch, onGameOver }: GameProps<Dem
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as DemonPatienceAction)}>Keep & Score</button>
+        <button data-testid="hint-target-demon-patience-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as DemonPatienceAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as DemonPatienceAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

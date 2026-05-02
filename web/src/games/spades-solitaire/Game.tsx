@@ -25,7 +25,7 @@ export function SpadesSolitaireGame({ state, dispatch, onGameOver }: GameProps<S
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SpadesSolitaireAction)}>Keep & Score</button>
+        <button data-testid="hint-target-spades-solitaire-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as SpadesSolitaireAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as SpadesSolitaireAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

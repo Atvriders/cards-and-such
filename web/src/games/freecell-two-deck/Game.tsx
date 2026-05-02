@@ -25,7 +25,7 @@ export function FreecellTwoDeckGame({ state, dispatch, onGameOver }: GameProps<F
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as FreecellTwoDeckAction)}>Keep & Score</button>
+        <button data-testid="hint-target-freecell-two-deck-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as FreecellTwoDeckAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as FreecellTwoDeckAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

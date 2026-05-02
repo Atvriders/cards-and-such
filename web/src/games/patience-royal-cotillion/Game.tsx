@@ -25,7 +25,7 @@ export function PatienceRoyalCotillionGame({ state, dispatch, onGameOver }: Game
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as PatienceRoyalCotillionAction)}>Keep & Score</button>
+        <button data-testid="hint-target-patience-royal-cotillion-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as PatienceRoyalCotillionAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as PatienceRoyalCotillionAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

@@ -25,7 +25,7 @@ export function KlondikeDealOneNoRedealGame({ state, dispatch, onGameOver }: Gam
         ))}
       </div>
       <div className="sol-actions">
-        <button className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as KlondikeDealOneNoRedealAction)}>Keep & Score</button>
+        <button data-testid="hint-target-klondike-deal-one-no-redeal-primary" className="sol-btn sol-btn-keep" onClick={() => dispatch({ type: "keep" } as KlondikeDealOneNoRedealAction)}>Keep & Score</button>
         <button className="sol-btn sol-btn-disc" onClick={() => dispatch({ type: "discard", index: 0 } as KlondikeDealOneNoRedealAction)}>Discard Hand</button>
       </div>
       <div className="sol-log">

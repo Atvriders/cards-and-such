@@ -17,5 +17,5 @@ export const travelersPatiencePlugin: GamePlugin<SoliState, SoliAction, typeof s
   initialState: (seed: number, s: S) => initialState(seed, s as SoliSettings),
   reducer,
   isTerminal,
-  component: SoliGame,
+  hint: (state) => isTerminal(state) ? null : ({ selector: '[data-testid="hint-target-travelers-patience-primary"]', pulses: 3 }), component: SoliGame,
 };
