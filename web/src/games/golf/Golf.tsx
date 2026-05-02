@@ -42,7 +42,7 @@ export function Golf({
           ) : (
             <div className="golf-pile-placeholder">Empty</div>
           )}
-          <button className="golf-stock-btn" onClick={handleDraw} disabled={state.stock.length === 0}>
+          <button className="golf-stock-btn" data-testid="hint-target-golf-draw" onClick={handleDraw} disabled={state.stock.length === 0}>
             Draw
           </button>
         </div>
@@ -62,6 +62,7 @@ export function Golf({
           <div
             key={colIndex}
             className="golf-col"
+            data-testid={`hint-target-golf-col-${colIndex}`}
             onClick={() => handleColClick(colIndex)}
             title="Click top card to play it on the waste"
           >

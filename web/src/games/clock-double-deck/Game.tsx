@@ -16,6 +16,7 @@ export function ClockDoubleDeckGame(
         <button
           className="clock-double-deck-auto"
           type="button"
+          data-testid="hint-target-clock-double-deck-tick"
           onClick={() => dispatch({ type: "tick" } as ClockDoubleDeckAction)}
           disabled={!state.held}
         >Tick</button>

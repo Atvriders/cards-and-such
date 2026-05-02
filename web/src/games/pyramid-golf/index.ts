@@ -1,5 +1,5 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
+import { initialState, reducer, isTerminal, isAvailable } from "./state.js";
 import type { PyramidGolfState, PyramidGolfAction, PyramidGolfSettings } from "./state.js";
 import { PyramidGolf } from "./PyramidGolf.js";
 
@@ -26,5 +26,39 @@ When no pyramid card can be removed, draw from the stock to advance the waste to
   initialState: (seed: number, _settings: PyramidGolfSettings) => initialState(seed, _settings),
   reducer,
   isTerminal,
+  hint: (state: PyramidGolfState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    const wasteTop = state.waste[state.waste.length - 1];
+    const wRank = wasteTop ? (wasteTop.rank as number) : null;
+    for (let r = 0; r < state.pyramid.length; r++) {
+      const row = state.pyramid[r]!;
+      for (let c = 0; c < row.length; c++) {
+        const cell = row[c];
+        if (!cell || cell.removed) continue;
+        if (!isAvailable(state.pyramid, r, c)) continue;
+        if ((cell.card.rank as number) === 13) {
+          return { selector: `[data-testid="hint-target-pyramid-golf-${r}-${c}"]`, pulses: 3 };
+        }
+      }
+    }
+    if (wRank !== null) {
+      for (let r = 0; r < state.pyramid.length; r++) {
+        const row = state.pyramid[r]!;
+        for (let c = 0; c < row.length; c++) {
+          const cell = row[c];
+          if (!cell || cell.removed) continue;
+          if (!isAvailable(state.pyramid, r, c)) continue;
+          const cv = cell.card.rank as number;
+          if (cv + wRank === 13 || Math.abs(cv - wRank) === 1) {
+            return { selector: `[data-testid="hint-target-pyramid-golf-${r}-${c}"]`, pulses: 3 };
+          }
+        }
+      }
+    }
+    if (state.stock.length > 0) {
+      return { selector: '[data-testid="hint-target-pyramid-golf-draw"]', pulses: 3 };
+    }
+    return null;
+  },
   component: PyramidGolf,
 };

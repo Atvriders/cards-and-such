@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GrandfathersClockState, GrandfathersClockAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -31,5 +31,9 @@ Tips: Plan around the wrapping — a foundation near its target rank may block t
   initialState: (seed: number, settings: GrandfathersClockSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: GrandfathersClockState): HintTarget | null => {
+    if (state.won) return null;
+    return { selector: '[data-testid="hint-target-grandfathers-clock-auto"]', pulses: 3 };
+  },
   component: GrandFathersClock,
 };

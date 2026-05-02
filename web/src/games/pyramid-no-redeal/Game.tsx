@@ -23,12 +23,14 @@ export function PyramidNoRedealGame(
         <button
           className="pyramid-no-redeal-auto"
           type="button"
+          data-testid="hint-target-pyramid-no-redeal-draw"
           onClick={() => dispatch({ type: "draw" } as PyramidNoRedealAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="pyramid-no-redeal-auto"
           type="button"
+          data-testid="hint-target-pyramid-no-redeal-redeal"
           onClick={() => dispatch({ type: "redeal" } as PyramidNoRedealAction)}
           disabled={state.stock.length > 0 || state.redealsRemaining <= 0}
         >Redeal</button>
@@ -39,7 +41,7 @@ export function PyramidNoRedealGame(
             {row.map((cell, c) => (
               <div key={c} className="pyramid-no-redeal-cell">
                 {cell && !cell.removed && (
-                  <div onClick={() => select({ kind: "pyramid", row: r, col: c })}>
+                  <div data-testid={`hint-target-pyramid-no-redeal-pyramid-${r}-${c}`} onClick={() => select({ kind: "pyramid", row: r, col: c })}>
                     <CardView card={cell.card} />
                   </div>
                 )}
@@ -50,12 +52,12 @@ export function PyramidNoRedealGame(
         ))}
       </div>
       <div className="pyramid-no-redeal-bottom">
-        <div className="pyramid-no-redeal-stock-pile">
+        <div className="pyramid-no-redeal-stock-pile" data-testid="hint-target-pyramid-no-redeal-stock">
           <div>Stock: {state.stock.length}</div>
         </div>
         <div className="pyramid-no-redeal-waste-pile">
           {state.waste.length > 0 && (
-            <div onClick={() => select({ kind: "waste" })}>
+            <div data-testid="hint-target-pyramid-no-redeal-waste" onClick={() => select({ kind: "waste" })}>
               <CardView card={state.waste[state.waste.length - 1]!} />
             </div>
           )}

@@ -24,7 +24,7 @@ export function CardPyramidBuildGame({ state, dispatch, onGameOver }: GameProps<
               const card = state.pyramid[slot];
               if (card === null || card === undefined) {
                 const isCurrent = slot === state.current;
-                return <button key={slot} className={`cpb-slot ${isCurrent ? "active" : ""}`} disabled={!isCurrent} onClick={() => dispatch({ type:"place", slot } as CardPyramidBuildAction)}>{isCurrent ? "Place" : "—"}</button>;
+                return <button key={slot} className={`cpb-slot ${isCurrent ? "active" : ""}`} data-testid={isCurrent ? "hint-target-card-pyramid-build-slot" : undefined} disabled={!isCurrent} onClick={() => dispatch({ type:"place", slot } as CardPyramidBuildAction)}>{isCurrent ? "Place" : "—"}</button>;
               }
               const c = card as number;
               return <div key={slot} className={`cpb-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>;

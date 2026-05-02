@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardClockBuildState, CardClockBuildAction, CardClockBuildSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, clockSlot } from "./state.js";
 import { CardClockBuildGame } from "./Game.js";
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
@@ -18,5 +18,17 @@ Each correctly placed card earns 10 points. You may Skip any drawn card at any t
 Maximum theoretical score is 120 points — twelve perfect placements. Most runs land 60-90 because some slots fill before the matching card appears. The earlier you fill a slot, the safer your score. Quick decision-making and luck rule the day!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardClockBuildSettings),
-  reducer,isTerminal,component:CardClockBuildGame,
+  reducer,isTerminal,
+  hint: (state: CardClockBuildState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.current === null) {
+      return { selector: '[data-testid="hint-target-card-clock-build-draw"]', pulses: 3 };
+    }
+    const slot = clockSlot(state.current);
+    if (slot !== null && state.clock[slot] === null) {
+      return { selector: `[data-testid="hint-target-card-clock-build-slot-${slot}"]`, pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-card-clock-build-skip"]', pulses: 3 };
+  },
+  component:CardClockBuildGame,
 };

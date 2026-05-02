@@ -22,12 +22,14 @@ export function GolfParGame(
         <button
           className="golf-par-auto"
           type="button"
+          data-testid="hint-target-golf-par-draw"
           onClick={() => dispatch({ type: "draw" } as GolfParAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="golf-par-auto"
           type="button"
+          data-testid="hint-target-golf-par-recycle"
           onClick={() => dispatch({ type: "recycle" } as GolfParAction)}
           disabled={state.stock.length > 0}
         >Recycle</button>
@@ -36,7 +38,7 @@ export function GolfParGame(
         {state.columns.map((col, ci) => (
           <div key={ci} className="golf-par-col">
             {col.map((card, ri) => (
-              <div key={ri} className="golf-par-cell" onClick={() => play(ci, ri)}>
+              <div key={ri} className="golf-par-cell" data-testid={`hint-target-golf-par-${ci}-${ri}`} onClick={() => play(ci, ri)}>
                 {!state.removed[ci]?.[ri] && <CardView card={card} />}
               </div>
             ))}

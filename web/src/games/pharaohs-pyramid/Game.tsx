@@ -23,12 +23,14 @@ export function PharaohsPyramidGame(
         <button
           className="pharaohs-pyramid-auto"
           type="button"
+          data-testid="hint-target-pharaohs-pyramid-draw"
           onClick={() => dispatch({ type: "draw" } as PharaohsPyramidAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="pharaohs-pyramid-auto"
           type="button"
+          data-testid="hint-target-pharaohs-pyramid-redeal"
           onClick={() => dispatch({ type: "redeal" } as PharaohsPyramidAction)}
           disabled={state.stock.length > 0 || state.redealsRemaining <= 0}
         >Redeal</button>
@@ -39,7 +41,7 @@ export function PharaohsPyramidGame(
             {row.map((cell, c) => (
               <div key={c} className="pharaohs-pyramid-cell">
                 {cell && !cell.removed && (
-                  <div onClick={() => select({ kind: "pyramid", row: r, col: c })}>
+                  <div data-testid={`hint-target-pharaohs-pyramid-pyramid-${r}-${c}`} onClick={() => select({ kind: "pyramid", row: r, col: c })}>
                     <CardView card={cell.card} />
                   </div>
                 )}
@@ -50,12 +52,12 @@ export function PharaohsPyramidGame(
         ))}
       </div>
       <div className="pharaohs-pyramid-bottom">
-        <div className="pharaohs-pyramid-stock-pile">
+        <div className="pharaohs-pyramid-stock-pile" data-testid="hint-target-pharaohs-pyramid-stock">
           <div>Stock: {state.stock.length}</div>
         </div>
         <div className="pharaohs-pyramid-waste-pile">
           {state.waste.length > 0 && (
-            <div onClick={() => select({ kind: "waste" })}>
+            <div data-testid="hint-target-pharaohs-pyramid-waste" onClick={() => select({ kind: "waste" })}>
               <CardView card={state.waste[state.waste.length - 1]!} />
             </div>
           )}

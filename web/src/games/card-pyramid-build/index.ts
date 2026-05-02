@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardPyramidBuildState, CardPyramidBuildAction, CardPyramidBuildSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,10 @@ Earn a 25-point bonus if your finished pyramid has its row totals trending upwar
 Maximum score is 75. Average runs hit around 50-60. Build wisely and stack that bonus!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardPyramidBuildSettings),
-  reducer,isTerminal,component:CardPyramidBuildGame,
+  reducer,isTerminal,
+  hint: (state: CardPyramidBuildState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    return { selector: '[data-testid="hint-target-card-pyramid-build-slot"]', pulses: 3 };
+  },
+  component:CardPyramidBuildGame,
 };

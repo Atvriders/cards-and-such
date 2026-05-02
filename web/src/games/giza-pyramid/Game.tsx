@@ -23,12 +23,14 @@ export function GizaPyramidGame(
         <button
           className="giza-pyramid-auto"
           type="button"
+          data-testid="hint-target-giza-pyramid-draw"
           onClick={() => dispatch({ type: "draw" } as GizaPyramidAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="giza-pyramid-auto"
           type="button"
+          data-testid="hint-target-giza-pyramid-redeal"
           onClick={() => dispatch({ type: "redeal" } as GizaPyramidAction)}
           disabled={state.stock.length > 0 || state.redealsRemaining <= 0}
         >Redeal</button>
@@ -39,7 +41,7 @@ export function GizaPyramidGame(
             {row.map((cell, c) => (
               <div key={c} className="giza-pyramid-cell">
                 {cell && !cell.removed && (
-                  <div onClick={() => select({ kind: "pyramid", row: r, col: c })}>
+                  <div data-testid={`hint-target-giza-pyramid-pyramid-${r}-${c}`} onClick={() => select({ kind: "pyramid", row: r, col: c })}>
                     <CardView card={cell.card} />
                   </div>
                 )}
@@ -50,12 +52,12 @@ export function GizaPyramidGame(
         ))}
       </div>
       <div className="giza-pyramid-bottom">
-        <div className="giza-pyramid-stock-pile">
+        <div className="giza-pyramid-stock-pile" data-testid="hint-target-giza-pyramid-stock">
           <div>Stock: {state.stock.length}</div>
         </div>
         <div className="giza-pyramid-waste-pile">
           {state.waste.length > 0 && (
-            <div onClick={() => select({ kind: "waste" })}>
+            <div data-testid="hint-target-giza-pyramid-waste" onClick={() => select({ kind: "waste" })}>
               <CardView card={state.waste[state.waste.length - 1]!} />
             </div>
           )}

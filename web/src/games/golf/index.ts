@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GolfState, GolfAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,28 @@ Tips: Look several cards ahead — a chain of consecutive-rank cards can be clea
   initialState: (seed: number, settings: GolfSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: GolfState): HintTarget | null => {
+    if (state.won) return null;
+    const wasteTop = state.waste[state.waste.length - 1];
+    if (wasteTop) {
+      const wv = wasteTop.rank as number;
+      const wrap = state.settings.wrapAces;
+      for (let ci = 0; ci < state.tableau.length; ci++) {
+        const col = state.tableau[ci]!;
+        if (col.length === 0) continue;
+        const top = col[col.length - 1]!;
+        const cv = top.rank as number;
+        const diff = Math.abs(cv - wv);
+        const adj = diff === 1 || (wrap && diff === 12);
+        if (adj) {
+          return { selector: `[data-testid="hint-target-golf-col-${ci}"]`, pulses: 3 };
+        }
+      }
+    }
+    if (state.stock.length > 0) {
+      return { selector: '[data-testid="hint-target-golf-draw"]', pulses: 3 };
+    }
+    return null;
+  },
   component: Golf,
 };

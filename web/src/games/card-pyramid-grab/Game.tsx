@@ -28,8 +28,10 @@ export function CardPyramidGrab({ state, dispatch, onGameOver }: GameProps<CardP
             {row.map((card, ci) => {
               const isRevealed = state.revealed[ri]?.[ci] ?? false;
               const isCurrent = ri === state.currentRow;
+              const isHintTarget = isCurrent && state.selectedInRow === null && ci === 0;
               return (
                 <button key={ci} className={`cpg-card ${isRevealed ? "revealed" : ""} ${isCurrent && !isRevealed && state.selectedInRow === null ? "pickable" : ""}`}
+                  data-testid={isHintTarget ? "hint-target-card-pyramid-grab-pick" : undefined}
                   onClick={() => isCurrent && state.selectedInRow === null && dispatch({ type: "pick", col: ci } as CardPyramidGrabAction)}
                   disabled={!isCurrent || state.selectedInRow !== null}>
                   {isRevealed ? <><span>{cardName(card)}</span><small>+{cardPoints(card)}</small></> : "?"}
@@ -40,7 +42,7 @@ export function CardPyramidGrab({ state, dispatch, onGameOver }: GameProps<CardP
         ))}
       </div>
       {state.selectedInRow !== null && (
-        <button className="cpg-btn" onClick={() => dispatch({ type: "next" } as CardPyramidGrabAction)}>
+        <button className="cpg-btn" data-testid="hint-target-card-pyramid-grab-next" onClick={() => dispatch({ type: "next" } as CardPyramidGrabAction)}>
           {state.currentRow + 1 >= state.maxRows ? "Finish" : "Next Row"}
         </button>
       )}

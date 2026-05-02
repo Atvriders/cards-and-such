@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SolitaireClockState, SolitaireClockAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SolitaireClockTournament } from "./SolitaireClockTournament.js";
@@ -18,5 +18,9 @@ The game is lost if all four Kings are face up before every other pile is comple
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: SolitaireClockState): HintTarget | null => {
+    if (state.gameOver) return null;
+    return { selector: '[data-testid="hint-target-solitaire-clock-tournament-flip"]', pulses: 3 };
+  },
   component: SolitaireClockTournament,
 } as unknown as GamePlugin;

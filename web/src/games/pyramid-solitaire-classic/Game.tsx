@@ -23,12 +23,14 @@ export function PyramidSolitaireClassicGame(
         <button
           className="pyramid-solitaire-classic-auto"
           type="button"
+          data-testid="hint-target-pyramid-solitaire-classic-draw"
           onClick={() => dispatch({ type: "draw" } as PyramidSolitaireClassicAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
         <button
           className="pyramid-solitaire-classic-auto"
           type="button"
+          data-testid="hint-target-pyramid-solitaire-classic-redeal"
           onClick={() => dispatch({ type: "redeal" } as PyramidSolitaireClassicAction)}
           disabled={state.stock.length > 0 || state.redealsRemaining <= 0}
         >Redeal</button>
@@ -39,7 +41,7 @@ export function PyramidSolitaireClassicGame(
             {row.map((cell, c) => (
               <div key={c} className="pyramid-solitaire-classic-cell">
                 {cell && !cell.removed && (
-                  <div onClick={() => select({ kind: "pyramid", row: r, col: c })}>
+                  <div data-testid={`hint-target-pyramid-solitaire-classic-pyramid-${r}-${c}`} onClick={() => select({ kind: "pyramid", row: r, col: c })}>
                     <CardView card={cell.card} />
                   </div>
                 )}
@@ -50,12 +52,12 @@ export function PyramidSolitaireClassicGame(
         ))}
       </div>
       <div className="pyramid-solitaire-classic-bottom">
-        <div className="pyramid-solitaire-classic-stock-pile">
+        <div className="pyramid-solitaire-classic-stock-pile" data-testid="hint-target-pyramid-solitaire-classic-stock">
           <div>Stock: {state.stock.length}</div>
         </div>
         <div className="pyramid-solitaire-classic-waste-pile">
           {state.waste.length > 0 && (
-            <div onClick={() => select({ kind: "waste" })}>
+            <div data-testid="hint-target-pyramid-solitaire-classic-waste" onClick={() => select({ kind: "waste" })}>
               <CardView card={state.waste[state.waste.length - 1]!} />
             </div>
           )}

@@ -38,7 +38,7 @@ export function PyramidGolf({ state, dispatch, onGameOver }: GameProps<PyramidGo
                 isSel ? "selected" : "",
               ].filter(Boolean).join(" ");
               return (
-                <div key={cIdx} className={cls}>
+                <div key={cIdx} className={cls} data-testid={`hint-target-pyramid-golf-${rIdx}-${cIdx}`}>
                   {!cell.removed && avail && (
                     <CardComponent
                       card={cell.card}
@@ -66,7 +66,7 @@ export function PyramidGolf({ state, dispatch, onGameOver }: GameProps<PyramidGo
           ) : (
             <div className="pg-placeholder">Empty</div>
           )}
-          <button className="pg-btn" disabled={state.stock.length === 0} onClick={() => send({ type: "draw" })}>Draw</button>
+          <button className="pg-btn" data-testid="hint-target-pyramid-golf-draw" disabled={state.stock.length === 0} onClick={() => send({ type: "draw" })}>Draw</button>
         </div>
         <div className="pg-area">
           <span>Waste (play on this)</span>

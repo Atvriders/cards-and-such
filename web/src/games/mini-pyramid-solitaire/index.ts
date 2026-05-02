@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MiniPyramidSolitaireState, MiniPyramidSolitaireAction, MiniPyramidSolitaireSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const miniPyramidSolitairePlugin: GamePlugin<MiniPyramidSolitaireState, M
   howToPlay:"Mini Pyramid Solitaire is a compact pair-removal solitaire built on a 28-card subset. A pyramid of 21 cards is dealt face-up. Tap any card in the pyramid to remove it, scoring 15 points per card cleared. The classical pyramid rule pairs cards to a sum of 13, but in this mini you simply tap cards to lift them off the pyramid one at a time, simulating the satisfying tear-down of the structure.\n\nYou have 30 clicks to remove as many cards as possible. The faster you clear, the higher your final score. Try to plan ahead: cards near the bottom of the pyramid are easiest to grab, while the apex is reached only after layers below are cleared.\n\nAverage runs land around 200-300 points; clearing the entire pyramid maxes out at 315 points if you're efficient. A relaxed game of pace and pattern.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniPyramidSolitaireSettings),
-  reducer,isTerminal,component:MiniPyramidSolitaireGame,
+  reducer,isTerminal,
+  hint: (state: MiniPyramidSolitaireState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.layout.length === 0) return null;
+    return { selector: `[data-testid="hint-target-mini-pyramid-solitaire-${state.layout.length - 1}"]`, pulses: 3 };
+  },
+  component:MiniPyramidSolitaireGame,
 };

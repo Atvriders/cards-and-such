@@ -16,6 +16,7 @@ export function ClockPatienceGame(
         <button
           className="clock-patience-auto"
           type="button"
+          data-testid="hint-target-clock-patience-tick"
           onClick={() => dispatch({ type: "tick" } as ClockPatienceAction)}
           disabled={!state.held}
         >Tick</button>

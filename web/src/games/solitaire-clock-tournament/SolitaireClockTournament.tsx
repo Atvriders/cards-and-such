@@ -62,6 +62,7 @@ export function SolitaireClockTournament({
 
       <button
         className="ct-btn"
+        data-testid="hint-target-solitaire-clock-tournament-flip"
         onClick={() => dispatch({ type: "flip" } as SolitaireClockAction)}
         disabled={state.gameOver}
       >

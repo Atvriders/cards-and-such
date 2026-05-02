@@ -69,6 +69,7 @@ export function GrandFathersClock({
         <button
           className="auto-move-btn"
           type="button"
+          data-testid="hint-target-grandfathers-clock-auto"
           onClick={() => dispatch({ type: "auto-move-to-foundation" } as GrandfathersClockAction)}
           title="Send any cards that can move to a foundation, automatically."
           aria-label="Auto-move cards to foundations"

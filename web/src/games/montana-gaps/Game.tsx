@@ -36,6 +36,7 @@ export function MontanaGapsGame(
         <button
           className="montana-gaps-auto"
           type="button"
+          data-testid="hint-target-montana-gaps-redeal"
           onClick={() => dispatch({ type: "redeal" } as MontanaGapsAction)}
           disabled={state.redealsRemaining <= 0}
         >Redeal</button>
@@ -49,6 +50,7 @@ export function MontanaGapsGame(
                 <div
                   key={c}
                   className={"montana-gaps-cell" + (sel ? " selected" : "")}
+                  data-testid={`hint-target-montana-gaps-${r}-${c}`}
                   onClick={() => click(r, c)}
                 >
                   {cell.card ? <CardView card={cell.card} /> : <div className="montana-gaps-gap" />}

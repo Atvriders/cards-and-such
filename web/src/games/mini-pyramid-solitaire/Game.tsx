@@ -19,7 +19,7 @@ export function MiniPyramidSolitaireGame({ state, dispatch, onGameOver }: GamePr
       </div>
       <div className="sol-board">
         {state.layout.map((c, i) => (
-          <button key={i} className="sol-card" onClick={() => dispatch({ type: "remove", index: i } as MiniPyramidSolitaireAction)}>
+          <button key={i} className="sol-card" data-testid={`hint-target-mini-pyramid-solitaire-${i}`} onClick={() => dispatch({ type: "remove", index: i } as MiniPyramidSolitaireAction)}>
             {cardName(c)}
           </button>
         ))}

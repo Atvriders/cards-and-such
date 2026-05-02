@@ -36,6 +36,7 @@ export function GapsTwoDeckGame(
         <button
           className="gaps-two-deck-auto"
           type="button"
+          data-testid="hint-target-gaps-two-deck-redeal"
           onClick={() => dispatch({ type: "redeal" } as GapsTwoDeckAction)}
           disabled={state.redealsRemaining <= 0}
         >Redeal</button>
@@ -49,6 +50,7 @@ export function GapsTwoDeckGame(
                 <div
                   key={c}
                   className={"gaps-two-deck-cell" + (sel ? " selected" : "")}
+                  data-testid={`hint-target-gaps-two-deck-${r}-${c}`}
                   onClick={() => click(r, c)}
                 >
                   {cell.card ? <CardView card={cell.card} /> : <div className="gaps-two-deck-gap" />}

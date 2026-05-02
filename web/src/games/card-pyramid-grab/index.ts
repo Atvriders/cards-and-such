@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardPyramidGrabState, CardPyramidGrabAction, CardPyramidGrabSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,12 @@ Use Settings to choose a 3-row or 5-row pyramid. Your total score is the sum of 
   initialState: (seed: number, settings: CardPyramidGrabSettingsType) => initialState(seed, settings as CardPyramidGrabSettings),
   reducer,
   isTerminal,
+  hint: (state: CardPyramidGrabState): HintTarget | null => {
+    if (state.phase === "gameover") return null;
+    if (state.selectedInRow !== null) {
+      return { selector: '[data-testid="hint-target-card-pyramid-grab-next"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-card-pyramid-grab-pick"]', pulses: 3 };
+  },
   component: CardPyramidGrab,
 };
