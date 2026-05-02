@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   LeaderboardRowSchema,
@@ -12,9 +12,11 @@ import { useAuth } from "../platform/stores/auth.js";
 import { Skeleton } from "../platform/Skeleton.js";
 import { OnlineNowPanel } from "./leaderboard/OnlineNowPanel.js";
 import { PageHead } from "../platform/PageHead.js";
+import { loadStats } from "../platform/stats.js";
+import { readRatings } from "../platform/StarRating.js";
 import "./LeaderboardPage.css";
 
-type Tab = "per-game" | "global" | "online";
+type Tab = "per-game" | "global" | "online" | "my-ladder";
 type GameCategory = "solitaire" | "cards" | "dice" | "board" | "arcade";
 type CategoryFilter = "all" | GameCategory;
 type TimeRange = "all" | "today" | "week" | "month";
@@ -141,14 +143,16 @@ export default function LeaderboardPage(): JSX.Element {
         canonical="https://cards.waterburp.com/leaderboard"
       />
       <section className="leaderboard-main">
-        <h1>Leaderboard</h1>
+        <h1 tabIndex={-1}>Leaderboard</h1>
         <nav className="tabs" role="tablist">
           <button role="tab" aria-selected={tab === "per-game"} onClick={() => setTab("per-game")}>Per-game</button>
           <button role="tab" aria-selected={tab === "global"} onClick={() => setTab("global")}>Global</button>
+          <button role="tab" aria-selected={tab === "my-ladder"} onClick={() => setTab("my-ladder")}>My Ladder</button>
           <button role="tab" aria-selected={tab === "online"} onClick={() => setTab("online")}>Online now</button>
         </nav>
         {tab === "per-game" && <PerGamePanel />}
         {tab === "global" && <GlobalPanel />}
+        {tab === "my-ladder" && <MyLadderPanel />}
         {tab === "online" && <div className="online-standalone"><OnlineNowPanel /></div>}
       </section>
       {tab !== "online" && <OnlineNowPanel />}
@@ -636,5 +640,397 @@ function SkeletonRows({
         </tr>
       ))}
     </>
+  );
+}
+
+/* ============================================================
+ * My Ladder — client-only personal ranking from localStorage.
+ * Pulls best scores/times from `cards-and-such:stats:v1` and
+ * `cards-best-times`, last-played from `cards-last-played`,
+ * and star ratings from `cards-ratings`. Renders a rich row
+ * list and offers a downloadable SVG of the current view.
+ * ============================================================ */
+
+interface LadderRow {
+  id: string;
+  title: string;
+  best: number;          // raw best score from stats
+  bestTimeSec: number;   // optional best time in seconds (0 = none)
+  played: number;        // total plays
+  wins: number;
+  lastPlayed: number;    // ms epoch (0 = unknown)
+  rating: number;        // 0..5
+}
+
+function readBestTimes(): Record<string, number> {
+  try {
+    if (typeof localStorage === "undefined") return {};
+    const raw = localStorage.getItem("cards-best-times");
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object") return {};
+    return parsed as Record<string, number>;
+  } catch { return {}; }
+}
+
+function readLastPlayedMap(): Record<string, number> {
+  try {
+    if (typeof localStorage === "undefined") return {};
+    const raw = localStorage.getItem("cards-last-played");
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object") return {};
+    return parsed as Record<string, number>;
+  } catch { return {}; }
+}
+
+function formatRelative(ms: number): string {
+  if (!ms) return "—";
+  const diff = Date.now() - ms;
+  if (diff < 0) return "just now";
+  const s = Math.floor(diff / 1000);
+  if (s < 60) return `${s}s ago`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  if (d < 30) return `${d}d ago`;
+  const mo = Math.floor(d / 30);
+  if (mo < 12) return `${mo}mo ago`;
+  const y = Math.floor(d / 365);
+  return `${y}y ago`;
+}
+
+function formatBestTime(sec: number): string {
+  if (!sec || !Number.isFinite(sec) || sec <= 0) return "";
+  const mm = Math.floor(sec / 60);
+  const ss = String(Math.floor(sec % 60)).padStart(2, "0");
+  return `${mm}:${ss}`;
+}
+
+function escapeXml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+/**
+ * Build a hand-written SVG of the current ladder view. We avoid html2canvas
+ * (and its dependency hop) by rendering each row as native SVG rect+text,
+ * which means the file is tiny, sharp at every size, and renders identically
+ * outside the browser.
+ */
+function buildLadderSvg(rows: LadderRow[], username: string | null): string {
+  const W = 720;
+  const PAD = 24;
+  const HEAD = 96;
+  const ROW_H = 56;
+  const FOOT = 48;
+  const visible = rows.slice(0, 20);
+  const H = HEAD + Math.max(1, visible.length) * ROW_H + FOOT;
+  const title = username ? `${username}'s Cards Ladder` : "My Cards Ladder";
+  const sub = `Top ${visible.length} games by combined score · ${new Date().toLocaleDateString()}`;
+
+  const rowSvg = visible.map((r, i) => {
+    const y = HEAD + i * ROW_H;
+    const stripe = i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.01)";
+    const medalColor = r === visible[0]
+      ? "#fde68a"
+      : i === 1 ? "#e2e8f0" : i === 2 ? "#fdba74" : "#94a3b8";
+    const stars = "★".repeat(Math.max(0, Math.min(5, Math.round(r.rating))))
+      + "☆".repeat(5 - Math.max(0, Math.min(5, Math.round(r.rating))));
+    const bestTime = formatBestTime(r.bestTimeSec);
+    const right = bestTime ? `${r.best.toLocaleString()} · ${bestTime}` : r.best.toLocaleString();
+    return [
+      `<rect x="${PAD}" y="${y}" width="${W - PAD * 2}" height="${ROW_H - 6}" rx="10" fill="${stripe}" />`,
+      `<text x="${PAD + 16}" y="${y + 26}" fill="${medalColor}" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">#${i + 1}</text>`,
+      `<text x="${PAD + 64}" y="${y + 24}" fill="#f1f5f9" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">${escapeXml(r.title)}</text>`,
+      `<text x="${PAD + 64}" y="${y + 42}" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">${escapeXml(stars)}  ·  ${formatRelative(r.lastPlayed)}  ·  ${r.played} plays</text>`,
+      `<text x="${W - PAD - 16}" y="${y + 32}" fill="#e0e3ff" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="end">${escapeXml(right)}</text>`,
+    ].join("");
+  }).join("");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1729"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#c7cdfe"/>
+    </linearGradient>
+  </defs>
+  <rect width="${W}" height="${H}" rx="20" fill="url(#bg)"/>
+  <rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="20" fill="none" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+  <text x="${PAD}" y="44" fill="url(#title)" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="800" letter-spacing="-0.5">${escapeXml(title)}</text>
+  <text x="${PAD}" y="72" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">${escapeXml(sub)}</text>
+  ${visible.length === 0
+    ? `<text x="${W / 2}" y="${HEAD + ROW_H / 2}" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="14" text-anchor="middle">No games played yet — go set some scores!</text>`
+    : rowSvg}
+  <text x="${W - PAD}" y="${H - 18}" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11" text-anchor="end">cards.waterburp.com</text>
+  <text x="${PAD}" y="${H - 18}" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Generated ${new Date().toISOString().slice(0, 10)}</text>
+</svg>`;
+}
+
+function downloadSvg(svg: string, filename: string): void {
+  if (typeof document === "undefined" || typeof URL === "undefined") return;
+  const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+type LadderSortMode = "score" | "rating" | "recent" | "alpha";
+
+const LADDER_SORT_LABELS: Record<LadderSortMode, string> = {
+  score: "Best score",
+  rating: "Star rating",
+  recent: "Most recent",
+  alpha: "Title (A–Z)",
+};
+
+function MyLadderPanel(): JSX.Element {
+  const me = useAuth((s) => s.username);
+  const [titles, setTitles] = useState<Record<string, string>>({});
+  const [sortMode, setSortMode] = useState<LadderSortMode>("score");
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+
+  // Lazy-load the registry only when this tab mounts. The registry is huge
+  // (8000+ lines pulling in every game module), so we keep it out of the
+  // initial bundle and accept a single async tick when the user opens
+  // "My Ladder" for the first time.
+  useEffect(() => {
+    let cancelled = false;
+    void import("../games/registry.js").then((mod) => {
+      if (cancelled) return;
+      const map: Record<string, string> = {};
+      for (const g of mod.GAMES) map[g.id] = g.title;
+      setTitles(map);
+    }).catch(() => { /* registry unavailable — fall back to ids */ });
+    return () => { cancelled = true; };
+  }, []);
+
+  // Snapshot localStorage on every render. This is fine — these reads are
+  // tiny synchronous JSON parses, and we want the page to reflect the
+  // latest data right after a play session ends.
+  const ladder: LadderRow[] = useMemo(() => {
+    const stats = loadStats();
+    const bestTimes = readBestTimes();
+    const lastPlayed = readLastPlayedMap();
+    const ratings = readRatings();
+
+    const ids = new Set<string>([
+      ...Object.keys(stats.perGame),
+      ...Object.keys(bestTimes),
+      ...Object.keys(ratings),
+      ...Object.keys(lastPlayed),
+    ]);
+
+    const rows: LadderRow[] = [];
+    for (const id of ids) {
+      const s = stats.perGame[id];
+      const played = s?.played ?? 0;
+      const wins = s?.wins ?? 0;
+      const best = s?.best ?? 0;
+      const rating = ratings[id] ?? 0;
+      // Skip ids that have no signal at all (would just be noise).
+      if (played === 0 && best === 0 && rating === 0 && !bestTimes[id]) continue;
+      rows.push({
+        id,
+        title: titles[id] ?? id,
+        best,
+        bestTimeSec: bestTimes[id] ?? 0,
+        played,
+        wins,
+        lastPlayed: lastPlayed[id] ?? 0,
+        rating,
+      });
+    }
+
+    if (sortMode === "score") {
+      rows.sort((a, b) => b.best - a.best || b.played - a.played);
+    } else if (sortMode === "rating") {
+      rows.sort((a, b) => b.rating - a.rating || b.best - a.best);
+    } else if (sortMode === "recent") {
+      rows.sort((a, b) => b.lastPlayed - a.lastPlayed);
+    } else {
+      rows.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+    }
+    return rows;
+  }, [titles, sortMode]);
+
+  // Hall of Fame: top 5 by combined (rating × plays) — a simple "love score"
+  // that surfaces games the user keeps coming back to. Falls back to plays
+  // alone for unrated titles so a brand-new ladder still has a top 5.
+  const hallOfFame = useMemo(() => {
+    const scored = ladder
+      .map((r) => ({ row: r, score: (r.rating || 1) * Math.max(1, r.played) }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5)
+      .map((x) => x.row);
+    return scored;
+  }, [ladder]);
+
+  const handleShare = (): void => {
+    const svg = buildLadderSvg(ladder, me);
+    downloadSvg(svg, "cards-ladder.svg");
+    try { useToast.getState().push("success", "Ladder exported as SVG"); } catch { /* toast unavailable */ }
+  };
+
+  const empty = ladder.length === 0;
+
+  return (
+    <div className="lb-myladder">
+      <div className="lb-ladder-head">
+        <h2
+          ref={headingRef}
+          className="lb-ladder-title"
+          tabIndex={0}
+          aria-label={me ? `${me}'s personal ladder` : "Your personal ladder"}
+        >
+          {me ? `${me}'s ladder` : "Your ladder"}
+        </h2>
+        <div className="lb-ladder-actions">
+          {!empty && (
+            <label className="lb-control lb-control-inline">
+              <span>Sort</span>
+              <select
+                aria-label="ladder sort"
+                value={sortMode}
+                onChange={(e) => setSortMode(e.target.value as LadderSortMode)}
+              >
+                {(Object.keys(LADDER_SORT_LABELS) as LadderSortMode[]).map((s) => (
+                  <option key={s} value={s}>{LADDER_SORT_LABELS[s]}</option>
+                ))}
+              </select>
+            </label>
+          )}
+          <button
+            type="button"
+            className="lb-share-ladder-btn"
+            data-testid="lb-share-btn"
+            aria-label="Share my ladder as an SVG download"
+            onClick={handleShare}
+            disabled={empty}
+            title={empty ? "Play a game first to share your ladder" : "Download ladder as SVG"}
+          >
+            <span aria-hidden="true">⬇</span> Share my ladder
+          </button>
+        </div>
+      </div>
+
+      {empty ? (
+        <div className="lb-ladder-empty" data-testid="lb-empty" role="status" aria-live="polite">
+          <svg
+            className="lb-empty-art"
+            viewBox="0 0 200 140"
+            width="160"
+            height="112"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect x="20" y="84" width="40" height="48" rx="6" fill="rgba(129,140,248,0.18)" stroke="rgba(129,140,248,0.4)"/>
+            <rect x="80" y="60" width="40" height="72" rx="6" fill="rgba(129,140,248,0.28)" stroke="rgba(129,140,248,0.55)"/>
+            <rect x="140" y="38" width="40" height="94" rx="6" fill="rgba(129,140,248,0.42)" stroke="rgba(129,140,248,0.7)"/>
+            <text x="40" y="116" fill="#e0e3ff" fontFamily="Inter, system-ui, sans-serif" fontSize="14" textAnchor="middle">3</text>
+            <text x="100" y="104" fill="#e0e3ff" fontFamily="Inter, system-ui, sans-serif" fontSize="14" textAnchor="middle">2</text>
+            <text x="160" y="86" fill="#fde68a" fontFamily="Inter, system-ui, sans-serif" fontSize="16" fontWeight="700" textAnchor="middle">1</text>
+            <text x="160" y="32" fontSize="20" textAnchor="middle">★</text>
+          </svg>
+          <p className="lb-empty-title">Your ladder is empty</p>
+          <p className="lb-empty-sub">
+            <Link to="/">Play a game</Link> to see your ladder appear here.
+          </p>
+        </div>
+      ) : (
+        <>
+          {hallOfFame.length > 0 && (
+            <section className="lb-hof" aria-labelledby="lb-hof-heading">
+              <h3 id="lb-hof-heading" tabIndex={0} className="lb-hof-heading">Hall of Fame</h3>
+              <div className="lb-hof-carousel" role="list">
+                {hallOfFame.map((r, i) => (
+                  <Link
+                    key={r.id}
+                    to={`/play/${r.id}`}
+                    role="listitem"
+                    className={`lb-hof-card lb-hof-card-${i + 1}`}
+                    aria-label={`Hall of Fame #${i + 1}: ${r.title}, ${r.played} plays, ${r.rating || 0} stars`}
+                  >
+                    <span className="lb-hof-rank">#{i + 1}</span>
+                    <span className="lb-hof-title">{r.title}</span>
+                    <span className="lb-hof-meta">
+                      {"★".repeat(Math.max(0, Math.min(5, Math.round(r.rating))))}
+                      <span className="lb-hof-stars-empty">
+                        {"★".repeat(5 - Math.max(0, Math.min(5, Math.round(r.rating))))}
+                      </span>
+                    </span>
+                    <span className="lb-hof-plays">{r.played} plays</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section className="lb-ladder-list" aria-labelledby="lb-ladder-rows-heading">
+            <h3 id="lb-ladder-rows-heading" tabIndex={0} className="lb-ladder-rows-heading">
+              All games · {ladder.length}
+            </h3>
+            <ul className="lb-ladder-rows">
+              {ladder.map((r, i) => {
+                const medal = MEDALS[i + 1];
+                const bestTime = formatBestTime(r.bestTimeSec);
+                const winRate = r.played > 0 ? Math.round((r.wins / r.played) * 100) : 0;
+                const ratingRounded = Math.max(0, Math.min(5, Math.round(r.rating)));
+                return (
+                  <li
+                    key={r.id}
+                    className="lb-ladder-row"
+                    data-testid={`lb-row-${r.id}`}
+                    aria-label={`Rank ${i + 1}: ${r.title}, best score ${r.best}, played ${r.played} times, last played ${formatRelative(r.lastPlayed)}, rated ${ratingRounded} of 5 stars`}
+                  >
+                    <span className="lb-ladder-rank" aria-hidden="true">
+                      {medal ? <span className="lb-medal-icon">{medal}</span> : <span>#{i + 1}</span>}
+                    </span>
+                    <Link to={`/play/${r.id}`} className="lb-ladder-game">
+                      <span className="lb-ladder-game-title">{r.title}</span>
+                      <span className="lb-ladder-game-meta">
+                        {bestTime && <span className="lb-pill lb-pill-time">⏱ {bestTime}</span>}
+                        <span className="lb-pill">▶ {r.played}</span>
+                        {winRate > 0 && <span className="lb-pill">✓ {winRate}%</span>}
+                      </span>
+                    </Link>
+                    <span
+                      className="lb-ladder-rating"
+                      aria-hidden="true"
+                      title={ratingRounded > 0 ? `${ratingRounded}/5` : "Not rated"}
+                    >
+                      <span className="lb-rating-filled">{"★".repeat(ratingRounded)}</span>
+                      <span className="lb-rating-empty">{"★".repeat(5 - ratingRounded)}</span>
+                    </span>
+                    <span className="lb-ladder-score" aria-hidden="true">
+                      {r.best.toLocaleString()}
+                    </span>
+                    <span className="lb-ladder-when" aria-hidden="true">
+                      {formatRelative(r.lastPlayed)}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        </>
+      )}
+    </div>
   );
 }
