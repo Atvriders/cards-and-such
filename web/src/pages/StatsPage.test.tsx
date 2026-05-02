@@ -216,6 +216,31 @@ describe("StatsPage", () => {
     expect(localStorage.getItem("cards-stats-exported")).toBe("true");
   });
 
+  it("most-hinted rows render an inline sparkline per game", () => {
+    seedRichStats();
+    renderPage();
+    // seedRichStats puts klondike + spider in cards-hints-used.
+    expect(screen.getByTestId("stats-sparkline-klondike")).toBeInTheDocument();
+    expect(screen.getByTestId("stats-sparkline-spider")).toBeInTheDocument();
+  });
+
+  it("drill-down panel shows a best-times sparkline when history exists", () => {
+    seedRichStats();
+    // Seed a per-game time history so the drill-down has something to plot.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: 1, time: 90 },
+        { ts: 2, time: 80 },
+        { ts: 3, time: 70 },
+      ]),
+    );
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-drill-klondike"));
+    const panel = screen.getByTestId("stats-drill-panel");
+    expect(within(panel).getByTestId("stats-sparkline-klondike")).toBeInTheDocument();
+  });
+
   it("aggregate hint/undo cards render with localStorage values", () => {
     seedRichStats();
     renderPage();

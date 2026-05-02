@@ -81,13 +81,23 @@
 }
 .stats-most-hinted-list li {
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto auto;
   align-items: center;
   gap: 0.75rem;
   background: rgba(10, 12, 22, 0.45);
   border: 1px solid rgba(148, 163, 184, 0.10);
   border-radius: 10px;
   padding: 0.55rem 0.9rem;
+}
+/* Inline sparkline lives in StatsPage rows next to numeric values. Inherits
+ * the surrounding text color via `currentColor`, then we tint via the parent
+ * link/row color where useful (most-hinted accent matches the count). */
+.stats-sparkline {
+  color: var(--accent, #a78bfa);
+  flex: 0 0 auto;
+}
+.stats-most-hinted-list .stats-sparkline {
+  color: #fbbf24;
 }
 .stats-most-hinted-rank {
   display: inline-flex;
@@ -406,6 +416,11 @@
   justify-content: space-between;
   gap: 0.5rem;
   color: rgba(203, 213, 225, 0.8);
+}
+.stats-drill-best-time .stats-drill-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 .stats-drill-list em {
   font-style: normal;

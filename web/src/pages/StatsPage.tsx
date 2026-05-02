@@ -6,8 +6,115 @@ import type { Achievement, StatsState } from "../platform/stats.js";
 import { GAMES } from "../games/registry.js";
 import { downloadSvg } from "../platform/svgShare.js";
 import { useConfirm } from "../platform/ConfirmDialog.js";
-import { TIME_HISTORY_KEY_PREFIX } from "../platform/userdata.js";
+import { TIME_HISTORY_KEY_PREFIX, readTimeHistory } from "../platform/userdata.js";
 import "./StatsPage.css";
+
+/**
+ * Tiny inline sparkline for per-game stats rows. Renders a polyline (or a
+ * single horizontal bar when only one data point is available) using the
+ * current `--accent` CSS variable via `currentColor`. No labels, no axes —
+ * meant to fit alongside a numeric value in a row, not stand on its own.
+ *
+ * `data` is treated as ordered samples (oldest -> newest); empty arrays
+ * collapse to a flat baseline so the layout doesn't shift.
+ */
+function Sparkline({
+  data,
+  width = 60,
+  height = 16,
+  testId,
+}: {
+  data: number[];
+  width?: number;
+  height?: number;
+  testId?: string;
+}): JSX.Element {
+  const pad = 1;
+  const w = width;
+  const h = height;
+  const safe = data.filter((n) => typeof n === "number" && Number.isFinite(n));
+  if (safe.length === 0) {
+    return (
+      <svg
+        viewBox={`0 0 ${w} ${h}`}
+        width={w}
+        height={h}
+        className="stats-sparkline"
+        aria-hidden="true"
+        focusable="false"
+        data-testid={testId}
+      >
+        <line
+          x1={pad}
+          y1={h - pad}
+          x2={w - pad}
+          y2={h - pad}
+          stroke="currentColor"
+          strokeOpacity="0.25"
+          strokeWidth="1"
+        />
+      </svg>
+    );
+  }
+  const min = Math.min(...safe);
+  const max = Math.max(...safe);
+  const range = max - min || 1;
+  const innerW = w - pad * 2;
+  const innerH = h - pad * 2;
+  if (safe.length === 1) {
+    // Single sample: draw a centered horizontal bar so the cell has visual weight.
+    const y = pad + innerH / 2;
+    return (
+      <svg
+        viewBox={`0 0 ${w} ${h}`}
+        width={w}
+        height={h}
+        className="stats-sparkline"
+        aria-hidden="true"
+        focusable="false"
+        data-testid={testId}
+      >
+        <line
+          x1={pad}
+          y1={y}
+          x2={w - pad}
+          y2={y}
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+  const step = innerW / (safe.length - 1);
+  const points = safe
+    .map((v, i) => {
+      const x = pad + i * step;
+      const y = pad + innerH - ((v - min) / range) * innerH;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(" ");
+  return (
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      width={w}
+      height={h}
+      className="stats-sparkline"
+      aria-hidden="true"
+      focusable="false"
+      data-testid={testId}
+    >
+      <polyline
+        points={points}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const PIE_COLORS = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24", "#f472b6"];
 
@@ -614,6 +721,10 @@ export default function StatsPage(): JSX.Element {
     const plug = GAMES.find((g) => g.id === drillId);
     const gs = stats.perGame[drillId];
     if (!plug || !gs) return null;
+    // Pull the per-game time history (last <=20 entries, oldest -> newest)
+    // and project the `time` field for the best-times sparkline.
+    const history = readTimeHistory(drillId);
+    const times = history.map((e) => e.time).filter((t) => Number.isFinite(t) && t > 0);
     return {
       id: drillId,
       title: plug.title,
@@ -626,6 +737,7 @@ export default function StatsPage(): JSX.Element {
       rating: ratingFor(drillId),
       hintsUsed: hintsUsedFor(drillId),
       undosUsed: undosUsedFor(drillId),
+      times,
     };
   }, [drillId, stats]);
 
@@ -787,7 +899,15 @@ export default function StatsPage(): JSX.Element {
                 <li><span>Plays</span><em>{drillInfo.played}</em></li>
                 <li><span>Wins</span><em>{drillInfo.wins}</em></li>
                 <li><span>Best score</span><em>{drillInfo.best || "—"}</em></li>
-                <li><span>Best time</span><em>{drillInfo.bestTime != null ? formatBestTime(drillInfo.bestTime) : "—"}</em></li>
+                <li className="stats-drill-best-time">
+                  <span>Best time</span>
+                  <span className="stats-drill-value">
+                    {drillInfo.times.length > 0 && (
+                      <Sparkline data={drillInfo.times} testId={`stats-sparkline-${drillInfo.id}`} />
+                    )}
+                    <em>{drillInfo.bestTime != null ? formatBestTime(drillInfo.bestTime) : "—"}</em>
+                  </span>
+                </li>
                 <li><span>Last played</span><em>{drillInfo.lastPlayed != null ? formatRelativeTime(drillInfo.lastPlayed) : "—"}</em></li>
                 <li><span>Your rating</span><em>{drillInfo.rating != null ? `${drillInfo.rating.toFixed(1)}★` : "—"}</em></li>
                 <li data-testid="stats-drill-hints"><span>Hints used</span><em>{drillInfo.hintsUsed}</em></li>
@@ -820,6 +940,11 @@ export default function StatsPage(): JSX.Element {
                 <li key={row.id} data-testid={`stats-most-hinted-row-${idx}`}>
                   <span className="stats-most-hinted-rank">{idx + 1}</span>
                   <span className="stats-most-hinted-title">{row.title}</span>
+                  {/* No per-week hint history is tracked, so we render a single
+                   *  sample which the Sparkline draws as a small horizontal bar
+                   *  proportional only to the row's accent. The data-testid lets
+                   *  tests assert presence without depending on shape. */}
+                  <Sparkline data={[row.count]} testId={`stats-sparkline-${row.id}`} />
                   <span className="stats-most-hinted-count">{row.count}</span>
                   <Link to={`/play/${row.id}`} className="btn btn-ghost stats-most-hinted-play">Play</Link>
                 </li>
