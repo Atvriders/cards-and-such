@@ -390,109 +390,144 @@ main {
   main { padding: 1rem; }
 }
 
-/* Site-wide footer: three columns (brand+tagline / links / meta+GitHub). */
+/* Site-wide footer: three columns + bottom strip. */
 .app-footer {
-  margin-top: 2.5rem;
-  padding: 0.9rem 1.25rem;
+  margin-top: 3rem;
+  padding: 1.6rem 1.5rem 1rem;
   border-top: 1px solid rgba(148, 163, 184, 0.12);
   background: rgba(8, 10, 20, 0.78);
   color: var(--text-400, #94a3b8);
-  font-size: 0.82rem;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+.app-footer-cols {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 2rem;
+  align-items: flex-start;
 }
 .app-footer-col {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.app-footer-brand-col {
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1rem;
+  gap: 0.4rem;
   min-width: 0;
 }
-.app-footer-brand {
+.app-footer-col-title {
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: 0.92rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-500, #64748b);
+  margin-bottom: 0.15rem;
+}
+.app-footer-brand-col {
+  gap: 0.45rem;
+  max-width: 28rem;
+}
+.app-footer-brand {
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
   background: linear-gradient(90deg, #c7cdfe 0%, #a78bfa 50%, #34d399 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 .app-footer-tagline {
-  font-size: 0.78rem;
-  color: var(--text-500, #64748b);
-  letter-spacing: 0.01em;
+  font-size: 0.84rem;
+  color: var(--text-400, #94a3b8);
+  line-height: 1.5;
 }
-.app-footer-links {
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.25rem 0.4rem;
+.app-footer-version {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(129, 140, 248, 0.12);
+  border: 1px solid rgba(129, 140, 248, 0.30);
+  color: #c7d2fe;
 }
-.app-footer a {
+.app-footer-links a,
+.app-footer-meta a,
+.app-footer-meta .app-footer-shortcuts {
   color: var(--text-300, #cbd5e1);
   text-decoration: none;
-  padding: 0.2rem 0.55rem;
+  padding: 0.18rem 0;
   border-radius: 6px;
-  transition: background 160ms ease, color 160ms ease;
-}
-.app-footer a:hover,
-.app-footer a:focus-visible {
-  color: #fff;
-  background: rgba(148, 163, 184, 0.10);
-}
-.app-footer-meta {
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  color: var(--text-400, #94a3b8);
-}
-.app-footer-count strong {
-  color: var(--text-200, #e2e8f0);
-  font-weight: 600;
-}
-.app-footer-sep {
-  opacity: 0.45;
-  user-select: none;
-}
-.app-footer-credit {
-  font-size: 0.78rem;
-  color: var(--text-500, #64748b);
-}
-.app-footer-github {
+  transition: color 160ms ease;
+  font-size: 0.86rem;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border-radius: 999px;
-  color: var(--text-300, #cbd5e1);
+  gap: 0.4rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: fit-content;
 }
-.app-footer-github:hover,
-.app-footer-github:focus-visible {
+.app-footer-links a:hover,
+.app-footer-meta a:hover,
+.app-footer-meta .app-footer-shortcuts:hover,
+.app-footer-links a:focus-visible,
+.app-footer-meta a:focus-visible,
+.app-footer-meta .app-footer-shortcuts:focus-visible {
   color: #fff;
-  background: rgba(148, 163, 184, 0.12);
+}
+.app-footer-links a.active {
+  color: #e0e3ff;
+}
+.app-footer-github svg { flex-shrink: 0; }
+
+.app-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.08);
+  font-size: 0.76rem;
+  color: var(--text-500, #64748b);
+}
+.app-footer-bottom a {
+  color: var(--text-400, #94a3b8);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(148, 163, 184, 0.4);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.app-footer-bottom a:hover,
+.app-footer-bottom a:focus-visible {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+.app-footer-build strong {
+  color: var(--text-300, #cbd5e1);
+  font-weight: 600;
 }
 
-@media (max-width: 700px) {
-  .app-footer {
+@media (max-width: 760px) {
+  .app-footer { padding: 1.25rem 1rem 0.85rem; }
+  .app-footer-cols {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .app-footer-bottom {
+    justify-content: center;
     text-align: center;
-    gap: 0.75rem;
-    padding: 1rem 1rem;
   }
-  .app-footer-brand-col {
-    align-items: center;
-  }
-  .app-footer-links {
-    justify-content: center;
-  }
-  .app-footer-meta {
-    justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-footer-links a,
+  .app-footer-meta a,
+  .app-footer-meta .app-footer-shortcuts,
+  .app-footer-bottom a {
+    transition: none;
   }
 }

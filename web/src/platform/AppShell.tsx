@@ -372,43 +372,79 @@ export default function AppShell(): JSX.Element {
       <main><Outlet /></main>
 
       <footer className="app-footer" aria-label="Site footer">
-        <div className="app-footer-col app-footer-brand-col">
-          <span className="app-footer-brand">Cards and Such</span>
-          <span className="app-footer-tagline">Classic to modern card games</span>
+        <div className="app-footer-cols">
+          <div
+            className="app-footer-col app-footer-brand-col"
+            data-testid="footer-col-1"
+          >
+            <span className="app-footer-brand">Cards &amp; Such</span>
+            <span className="app-footer-tagline">
+              A sprawling catalog of card, dice, board, and arcade games — free
+              to play in your browser.
+            </span>
+            <span className="app-footer-version">v0.0.0</span>
+          </div>
+
+          <nav
+            className="app-footer-col app-footer-links"
+            aria-label="Site links"
+            data-testid="footer-col-2"
+          >
+            <span className="app-footer-col-title">Browse</span>
+            <NavLink to="/" end>Lobby</NavLink>
+            <NavLink to="/daily">Daily</NavLink>
+            <NavLink to="/stats">Stats</NavLink>
+            <NavLink to="/leaderboard">Leaderboard</NavLink>
+            <NavLink to="/settings">Settings</NavLink>
+            <NavLink to="/about">About</NavLink>
+          </nav>
+
+          <div
+            className="app-footer-col app-footer-meta"
+            data-testid="footer-col-3"
+          >
+            <span className="app-footer-col-title">Meta</span>
+            <button
+              type="button"
+              className="app-footer-shortcuts"
+              onClick={() => shortcuts.setOpen(true)}
+              data-testid="footer-shortcuts-btn"
+            >
+              Shortcuts
+            </button>
+            <NavLink to="/privacy">Privacy</NavLink>
+            <NavLink to="/credits">Credits</NavLink>
+            <a
+              className="app-footer-github"
+              href="https://github.com/Atvriders/cards-and-such"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View source on GitHub"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </div>
         </div>
-        <nav className="app-footer-col app-footer-links" aria-label="Site information">
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/privacy">Privacy</NavLink>
-          <NavLink to="/credits">Credits</NavLink>
-          <NavLink to="/settings">Settings</NavLink>
-          <NavLink to="/stats">Stats</NavLink>
-          <button
-            type="button"
-            className="app-footer-shortcuts"
-            onClick={() => shortcuts.setOpen(true)}
-            data-testid="footer-shortcuts-btn"
-          >
-            Shortcuts
-          </button>
-        </nav>
-        <div className="app-footer-col app-footer-meta">
-          <span className="app-footer-count">
-            <strong>{GAMES.length.toLocaleString()}</strong> games in the catalog
+
+        <div className="app-footer-bottom" data-testid="footer-bottom">
+          <span>
+            © {new Date().getFullYear()} Cards &amp; Such — built with React +
+            Vite — open source on{" "}
+            <a
+              href="https://github.com/Atvriders/cards-and-such"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
           </span>
-          <span className="app-footer-sep" aria-hidden="true">·</span>
-          <span className="app-footer-credit">Built with Claude</span>
-          <a
-            className="app-footer-github"
-            href="https://github.com/Atvriders/cards-and-such"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View source on GitHub"
-            title="GitHub"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
-            </svg>
-          </a>
+          <span className="app-footer-build">
+            Built {new Date().toISOString().slice(0, 10)} ·{" "}
+            <strong>{GAMES.length.toLocaleString()}</strong> games
+          </span>
         </div>
       </footer>
 
