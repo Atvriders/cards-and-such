@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useEffect, useMemo, useRef } from "react";
 import "./StarRating.css";
 
 export interface StarRatingProps {
@@ -32,7 +32,47 @@ export function StarRating({
   testId,
 }: StarRatingProps): JSX.Element {
   const [hover, setHover] = useState<number>(0);
+  const [saved, setSaved] = useState<boolean>(false);
+  const savedTimer = useRef<number | null>(null);
   const interactive = !readOnly && typeof onChange === "function";
+
+  // Cleanup the "Saved" toast timer on unmount so a late-fired callback
+  // doesn't try to set state on a torn-down component.
+  useEffect(() => {
+    return () => {
+      if (savedTimer.current !== null) {
+        window.clearTimeout(savedTimer.current);
+        savedTimer.current = null;
+      }
+    };
+  }, []);
+
+  /**
+   * Wraps `onChange` with a 1.5s "Saved" indicator that briefly replaces
+   * the stars in-place after the user picks a rating ≥ 1. Selecting "0"
+   * (clearing the rating by re-clicking the same star) skips the toast
+   * since there's nothing to confirm.
+   */
+  const handleChange = useCallback(
+    (next: number) => {
+      onChange?.(next);
+      if (next >= 1) {
+        if (savedTimer.current !== null) window.clearTimeout(savedTimer.current);
+        setSaved(true);
+        savedTimer.current = window.setTimeout(() => {
+          setSaved(false);
+          savedTimer.current = null;
+        }, 1500);
+      } else {
+        if (savedTimer.current !== null) {
+          window.clearTimeout(savedTimer.current);
+          savedTimer.current = null;
+        }
+        setSaved(false);
+      }
+    },
+    [onChange],
+  );
 
   const display = useMemo(() => {
     if (interactive && hover > 0) return hover;
@@ -44,23 +84,63 @@ export function StarRating({
       if (!interactive) return;
       if (e.key === "ArrowRight" || e.key === "ArrowUp") {
         e.preventDefault();
-        onChange?.(Math.min(5, (value || 0) + 1));
+        handleChange(Math.min(5, (value || 0) + 1));
       } else if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
         e.preventDefault();
-        onChange?.(Math.max(0, (value || 0) - 1));
+        handleChange(Math.max(0, (value || 0) - 1));
       } else if (e.key === "Home") {
         e.preventDefault();
-        onChange?.(1);
+        handleChange(1);
       } else if (e.key === "End") {
         e.preventDefault();
-        onChange?.(5);
+        handleChange(5);
       } else if (e.key === "0" || e.key === "Delete" || e.key === "Backspace") {
         e.preventDefault();
-        onChange?.(0);
+        handleChange(0);
       }
     },
-    [interactive, onChange, value],
+    [interactive, handleChange, value],
   );
+
+  if (saved && interactive) {
+    // The "Saved" indicator visually replaces the stars in-place for
+    // 1.5s, but we keep the same outer role + testid + keyboard wiring
+    // so callers (and tests) can keep nudging the rating with arrow
+    // keys mid-toast without having to wait for the stars to come back.
+    return (
+      <div
+        className={`star-rating star-rating--${size} star-rating--saved is-interactive`}
+        role="radiogroup"
+        aria-label={ariaLabel}
+        data-testid={testId}
+        data-value={value}
+        data-saved="true"
+        onKeyDown={onKeyDown}
+        tabIndex={0}
+      >
+        <span className="star-rating-saved" data-testid={testId ? `${testId}-saved` : undefined}>
+          <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            aria-hidden="true"
+            focusable="false"
+            className="star-rating-saved-check"
+          >
+            <path
+              d="M5 12.5l4.2 4.2L19 7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Saved
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -92,7 +172,7 @@ export function StarRating({
             onClick={() => {
               if (!interactive) return;
               // Click on the already-selected star clears the rating.
-              onChange?.(value === n ? 0 : n);
+              handleChange(value === n ? 0 : n);
             }}
             data-testid={testId ? `${testId}-star-${n}` : undefined}
           >

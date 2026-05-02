@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   KNOWN_KEYS,
+  clearAllFavorites,
+  clearAllRatings,
   downloadExport,
   exportAll,
   exportFilename,
@@ -207,6 +209,21 @@ export default function SettingsPage(): JSX.Element {
     } catch (err) {
       useToast.getState().push("error", "Import failed: " + (err as Error).message);
     }
+  }
+
+  // Per-key resets — narrower than "Clear all" but still a write, so we
+  // confirm. Both fire a toast so the empty-state isn't surprising and
+  // avoid `location.reload()` because the lobby already listens to
+  // storage events and re-pulls automatically.
+  function handleResetRatings() {
+    if (!window.confirm("Erase all your star ratings? This can't be undone.")) return;
+    clearAllRatings();
+    useToast.getState().push("success", "Cleared all ratings");
+  }
+  function handleResetFavorites() {
+    if (!window.confirm("Remove every favorited game? This can't be undone.")) return;
+    clearAllFavorites();
+    useToast.getState().push("success", "Cleared all favorites");
   }
 
   function handleClearAll() {
@@ -641,6 +658,31 @@ export default function SettingsPage(): JSX.Element {
             onChange={handleImportFile}
             data-testid="settings-import-input"
           />
+        </div>
+
+        {/* Mini-actions: narrower wipes that don't kick a full reload.
+            Useful when a user wants to start fresh with rating curation
+            but keep their stats / settings intact. */}
+        <div
+          className="settings-row settings-mini-row"
+          data-testid="settings-data-mini"
+        >
+          <button
+            type="button"
+            className="settings-mini-btn"
+            onClick={handleResetRatings}
+            data-testid="settings-reset-ratings"
+          >
+            Reset ratings only
+          </button>
+          <button
+            type="button"
+            className="settings-mini-btn"
+            onClick={handleResetFavorites}
+            data-testid="settings-reset-favorites"
+          >
+            Reset favorites only
+          </button>
         </div>
       </section>
     </div>

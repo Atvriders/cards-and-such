@@ -15,6 +15,8 @@ export const KNOWN_KEYS: readonly string[] = [
   "cards-best-times",
   "cards-last-played",
   "cards-ratings",
+  "cards-favorites",
+  "cards-lobby-filter",
   "cards-daily-completions",
   "cards-daily-streak",
   // appearance / preferences
@@ -253,6 +255,94 @@ export function recordLastPlayed(id: string, now: number = Date.now()): void {
     localStorage.setItem(LAST_PLAYED_KEY, JSON.stringify(map));
   } catch {
     /* ignore — storage is best-effort */
+  }
+}
+
+/* ----------------------------------------------------------------------
+ * Favorites
+ *
+ * Persisted under `cards-favorites` as a JSON array of game ids. The
+ * lobby surfaces a "Favorites" filter chip and each tile has a heart
+ * toggle on hover; the same map drives both. Read shape is tolerant
+ * of either an array (canonical) or `Record<string, true>` (legacy /
+ * forward-compatible) so older builds round-trip cleanly.
+ * -------------------------------------------------------------------- */
+
+const FAVORITES_KEY = "cards-favorites";
+
+/** Returns the canonical Set of favorited game ids. Empty on missing/corrupt. */
+export function readFavorites(): Set<string> {
+  try {
+    if (typeof localStorage === "undefined") return new Set();
+    const raw = localStorage.getItem(FAVORITES_KEY);
+    if (!raw) return new Set();
+    const parsed = JSON.parse(raw) as unknown;
+    if (Array.isArray(parsed)) {
+      return new Set(parsed.filter((x): x is string => typeof x === "string"));
+    }
+    if (parsed && typeof parsed === "object") {
+      const out = new Set<string>();
+      for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+        if (v) out.add(k);
+      }
+      return out;
+    }
+    return new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+/** Convenience: is `gameId` favorited? */
+export function isFavorite(gameId: string): boolean {
+  return readFavorites().has(gameId);
+}
+
+/** Persist the given Set of ids as the favorites blob. Best-effort. */
+function writeFavoritesSet(ids: Set<string>): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(ids).sort()));
+  } catch {
+    /* ignore */
+  }
+}
+
+/**
+ * Flip favorite status for `gameId` and return the new state. Used by
+ * the lobby tile heart toggle so callers don't need to coordinate the
+ * read+write themselves.
+ */
+export function toggleFavorite(gameId: string): boolean {
+  if (!gameId) return false;
+  const cur = readFavorites();
+  if (cur.has(gameId)) {
+    cur.delete(gameId);
+    writeFavoritesSet(cur);
+    return false;
+  }
+  cur.add(gameId);
+  writeFavoritesSet(cur);
+  return true;
+}
+
+/** Wipe every favorite. Used by the Settings → Data → "Reset favorites" action. */
+export function clearAllFavorites(): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.removeItem(FAVORITES_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Wipe every rating. Mirror of {@link clearAllFavorites} for the matching action. */
+export function clearAllRatings(): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.removeItem("cards-ratings");
+  } catch {
+    /* ignore */
   }
 }
 

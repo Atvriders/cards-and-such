@@ -1375,3 +1375,71 @@ button.tile {
 @media (prefers-reduced-motion: reduce) {
   .lobby-tooltip { animation: none; }
 }
+
+/* =====================================================================
+   Tile heart toggle — favorites
+   --------------------------------------------------------------------- */
+.tile-fav {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(20, 22, 36, 0.55);
+  color: #ffd9e1;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition:
+    opacity 160ms var(--ease-out-expo, ease),
+    transform 160ms var(--ease-out-expo, ease),
+    background 160ms ease,
+    color 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tile-fav:hover {
+  background: rgba(244, 114, 182, 0.25);
+}
+.tile-fav:focus-visible {
+  outline: 2px solid var(--primary, #6366f1);
+  outline-offset: 2px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.tile-fav.is-active {
+  color: #f43f5e;
+  background: rgba(244, 63, 94, 0.18);
+  opacity: 1;
+  transform: translateY(0);
+}
+.tile:hover .tile-fav,
+.tile:focus-within .tile-fav {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Touch / coarse pointers can't hover — keep the toggle visible there. */
+@media (hover: none) and (pointer: coarse) {
+  .tile-fav { opacity: 1; transform: translateY(0); }
+}
+
+.tile-fav-glyph {
+  display: inline-block;
+  animation: tile-fav-pop 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes tile-fav-pop {
+  from { transform: scale(1.3); }
+  to   { transform: scale(1);   }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile-fav-glyph { animation: none; }
+  .tile-fav { transition: none; }
+}

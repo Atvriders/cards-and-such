@@ -890,20 +890,11 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           </div>
 
           <StatsPanel gameId={plugin.id} bestTime={bestTime} />
-          <div className="end-rating" data-testid="end-rating">
-            <p className="end-rating-prompt">Rate this game</p>
-            <StarRating
-              value={rating}
-              onChange={onRate}
-              testId="end-rating-stars"
-              ariaLabel={`Rate ${plugin.title}`}
-            />
-            {rating > 0 && (
-              <p className="end-rating-thanks" data-testid="end-rating-thanks">
-                Thanks — you rated this {rating} star{rating === 1 ? "" : "s"}.
-              </p>
-            )}
-          </div>
+          <EndRatingBlock
+            rating={rating}
+            onRate={onRate}
+            title={plugin.title}
+          />
 
           {showWinBanner && (
             <p className="win-banner-hint" data-testid="win-banner-hint">
@@ -914,6 +905,77 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       )}
 
       {showConfetti && <Confetti onDone={() => setShowConfetti(false)} />}
+    </div>
+  );
+}
+
+/**
+ * "Rate this game" block on the win/end screen. New ratings show the
+ * 5-star widget; once the user has rated, we shrink to a static
+ * read-only display with an "Update" link that pops the editor back so
+ * they can tweak without losing the original value.
+ *
+ * The StarRating widget itself owns the brief "Saved" toast that fires
+ * after each commit — this component only handles the show/edit
+ * state and the prompt copy.
+ */
+function EndRatingBlock({
+  rating,
+  onRate,
+  title,
+}: {
+  rating: number;
+  onRate: (next: number) => void;
+  title: string;
+}): JSX.Element {
+  const [editing, setEditing] = useState(rating === 0);
+  // Keep the editor open after a fresh rate so the StarRating's
+  // built-in "Saved" toast can play in-place; the parent state already
+  // tracks the value, but we don't want to immediately collapse the
+  // widget on the same render that fired the change.
+  const handle = useCallback(
+    (next: number) => {
+      onRate(next);
+      // Closing on 0 (cleared) returns the user to the prompt; any
+      // ≥ 1 rating leaves the editor visible long enough for the
+      // saved-toast to surface, then the user can step away on their
+      // own — they're not forced into an extra click cycle.
+      if (next === 0) setEditing(true);
+    },
+    [onRate],
+  );
+  const showEditor = editing || rating === 0;
+  return (
+    <div className="end-rating" data-testid="end-rating">
+      <p className="end-rating-prompt">Rate this game</p>
+      {showEditor ? (
+        <StarRating
+          value={rating}
+          onChange={handle}
+          testId="end-rating-stars"
+          ariaLabel={`Rate ${title}`}
+        />
+      ) : (
+        <>
+          <StarRating
+            value={rating}
+            readOnly
+            testId="end-rating-stars-readonly"
+            ariaLabel={`Your rating for ${title}: ${rating} of 5 stars`}
+          />
+          <p className="end-rating-thanks" data-testid="end-rating-thanks">
+            You rated this {rating} star{rating === 1 ? "" : "s"}.{" "}
+            <button
+              type="button"
+              className="end-rating-update"
+              onClick={() => setEditing(true)}
+              data-testid="end-rating-update"
+            >
+              Update
+            </button>
+          </p>
+        </>
+      )}
     </div>
   );
 }

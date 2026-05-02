@@ -918,14 +918,70 @@ function Chip({ active, count, testId, onClick, glyph, children }: ChipProps): J
   );
 }
 
+/**
+ * Heart toggle that flips favorite status. Sits at top-right of every
+ * tile, fades in only on hover/focus (always visible on coarse-pointer
+ * devices), and animates the fill on each flip via a one-shot scale
+ * 1.3 → 1.0 keyframe.
+ *
+ * Stops click propagation so tapping it never navigates the parent
+ * Link, and surfaces the canonical `tile-fav-toggle-<id>` testid.
+ */
+function HeartToggle({
+  id,
+  active,
+  onToggle,
+}: {
+  id: string;
+  active: boolean;
+  onToggle: (id: string) => void;
+}): JSX.Element {
+  const [flipKey, setFlipKey] = useState(0);
+  const handle = useCallback(
+    (e: React.MouseEvent | React.KeyboardEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setFlipKey((n) => n + 1);
+      onToggle(id);
+    },
+    [id, onToggle],
+  );
+  return (
+    <button
+      type="button"
+      className={`tile-fav${active ? " is-active" : ""}`}
+      data-testid={`tile-fav-toggle-${id}`}
+      onClick={handle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") handle(e);
+      }}
+      aria-pressed={active}
+      aria-label={active ? "Remove from favorites" : "Add to favorites"}
+      title={active ? "Remove from favorites" : "Add to favorites"}
+    >
+      <span
+        key={flipKey}
+        className={`tile-fav-glyph${active ? " is-active" : ""}`}
+        aria-hidden="true"
+      >
+        {active ? "♥" : "♡"}
+      </span>
+    </button>
+  );
+}
+
 function GameCard({
   game: g,
   userRating = 0,
   isNew = false,
+  isFavorite = false,
+  onToggleFavorite,
 }: {
   game: GamePlugin;
   userRating?: number;
   isNew?: boolean;
+  isFavorite?: boolean;
+  onToggleFavorite?: (id: string) => void;
 }): JSX.Element {
   const { handlers, tooltip } = useTileTooltip(
     {
@@ -952,6 +1008,9 @@ function GameCard({
         <span className="tile-badge-slot">
           <Badge kind={badgeKind} testId={`tile-badge-${g.id}`} />
         </span>
+      )}
+      {onToggleFavorite && (
+        <HeartToggle id={g.id} active={isFavorite} onToggle={onToggleFavorite} />
       )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
@@ -1078,6 +1137,8 @@ function FamilyCard({
   userRating = 0,
   isNew = false,
   members,
+  isFavorite = false,
+  onToggleFavorite,
 }: {
   family: GameFamily;
   category: GameCategory;
@@ -1087,6 +1148,8 @@ function FamilyCard({
   userRating?: number;
   isNew?: boolean;
   members: GamePlugin[];
+  isFavorite?: boolean;
+  onToggleFavorite?: (id: string) => void;
 }): JSX.Element {
   // Family badge: NEW wins outright, otherwise CHALLENGING/QUICK if any
   // member is curated, otherwise POPULAR by best-rating threshold.
@@ -1128,6 +1191,19 @@ function FamilyCard({
         <span className="tile-badge-slot">
           <Badge kind={badgeKind} testId={`tile-badge-${family.id}`} />
         </span>
+      )}
+      {onToggleFavorite && (
+        /* Family-level heart toggles the first member; the chip
+           treatment still lights when any member is hearted, so the
+           picker remains the place to manage variants individually. */
+        <HeartToggle
+          id={family.id}
+          active={isFavorite}
+          onToggle={() => {
+            const first = members[0];
+            if (first) onToggleFavorite(first.id);
+          }}
+        />
       )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[category]}`}>
@@ -1178,12 +1254,16 @@ function FeaturedTile({
   onOpenFamily,
   isNew = false,
   userRating = 0,
+  isFavorite = false,
+  onToggleFavorite,
 }: {
   game: GamePlugin;
   familyId: string | undefined;
   onOpenFamily: (familyId: string) => void;
   isNew?: boolean;
   userRating?: number;
+  isFavorite?: boolean;
+  onToggleFavorite?: (id: string) => void;
 }): JSX.Element {
   const featuredBadge = pickBadgeKind(g.id, isNew, userRating);
   // Featured tiles get the same hover-tooltip treatment regardless of
@@ -1224,6 +1304,13 @@ function FeaturedTile({
             <Badge kind={featuredBadge} testId={`tile-badge-${familyId}`} />
           </span>
         )}
+        {onToggleFavorite && (
+          <HeartToggle
+            id={familyId}
+            active={isFavorite}
+            onToggle={() => onToggleFavorite(g.id)}
+          />
+        )}
         <div className="tile-meta">
           <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
             <span className="tile-cat-glyph" aria-hidden="true">{CATEGORY_GLYPHS[g.category]}</span>
@@ -1255,6 +1342,13 @@ function FeaturedTile({
         <span className="tile-badge-slot">
           <Badge kind={featuredBadge} testId={`feat-tile-badge-${g.id}`} />
         </span>
+      )}
+      {onToggleFavorite && (
+        <HeartToggle
+          id={`feat-${g.id}`}
+          active={isFavorite}
+          onToggle={() => onToggleFavorite(g.id)}
+        />
       )}
       <div className="tile-meta">
         <span className={`tile-cat tile-cat-${CATEGORY_TAG[g.category]}`}>
