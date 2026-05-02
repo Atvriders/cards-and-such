@@ -122,7 +122,7 @@ export function BottleSpin({
 
       <div className="bottle-spin-controls">
         {isIdle && !state.over && (
-          <button className="bspin-btn" onClick={() => dispatch({ type: "spin" } as BottleSpinAction)}>
+          <button data-testid="hint-target-bottle-spin-action" className="bspin-btn" onClick={() => dispatch({ type: "spin" } as BottleSpinAction)}>
             Spin!
           </button>
         )}

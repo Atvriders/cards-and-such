@@ -29,5 +29,6 @@ The faster the indicator moves, the harder it is to land a bullseye. React quick
   initialState: (seed: number, settings: ArrowHitSettingsType) => initialState(seed, settings as ArrowHitSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-arrow-hit-action"]', pulses: 3 }; },
   component: ArrowHit,
 };

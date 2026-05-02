@@ -83,7 +83,7 @@ export function BottleFlip({
               style={{ width: `${powerPct}%`, background: powerColor }}
             />
           </div>
-          <button className="bf-btn" onClick={() => dispatch({ type: "flip" })}>
+          <button data-testid="hint-target-bottle-flip-action" className="bf-btn" onClick={() => dispatch({ type: "flip" })}>
             Flip! ({powerPct}%)
           </button>
           <div className="bf-hint">Press Space or click when power is just right</div>

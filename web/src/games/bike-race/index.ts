@@ -34,5 +34,6 @@ Race is 500m or 1000m depending on your chosen setting. Plan your sprints for fl
   initialState: (seed: number, settings: BikeRaceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-bike-race-action"]', pulses: 3 }; },
   component: BikeRaceGame,
 };

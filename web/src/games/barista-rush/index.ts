@@ -36,5 +36,6 @@ Tip: learn the keyboard pattern for the most common combos. Many players scan th
   initialState: (seed: number, settings: BaristaRushSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-barista-rush-action"]', pulses: 3 }; },
   component: BaristaRushGame,
 };

@@ -41,7 +41,7 @@ export function Bowling9pinGame({ state, dispatch, onGameOver }: GameProps<Bowli
       </div>
       <div className="bow9pi-actions">
         {state.phase === "rolling" && (
-          <button className="bow9pi-btn primary" onClick={() => dispatch({ type: "roll" } as Bowling9pinAction)}>Roll</button>
+          <button data-testid="hint-target-bowling-9pin-action" className="bow9pi-btn primary" onClick={() => dispatch({ type: "roll" } as Bowling9pinAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="bow9pi-btn alt" onClick={() => dispatch({ type: "next" } as Bowling9pinAction)}>Next</button>

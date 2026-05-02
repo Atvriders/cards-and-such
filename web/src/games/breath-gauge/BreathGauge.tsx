@@ -111,7 +111,7 @@ export function BreathGauge({
               : `Missed at ${state.releasePercent}% — target was ${state.targetPercent}%`}
           </div>
           {!state.gameOver && (
-            <button className="bg-next-btn" onClick={() => dispatch({ type: "next" })}>
+            <button data-testid="hint-target-breath-gauge-action" className="bg-next-btn" onClick={() => dispatch({ type: "next" })}>
               Next Round
             </button>
           )}

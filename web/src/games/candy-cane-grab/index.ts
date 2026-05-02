@@ -12,5 +12,7 @@ export const candyCaneGrabPlugin: GamePlugin<CandyCaneGrabState, CandyCaneGrabAc
   howToPlay: `Candy Cane Grab has you hooking candy canes with a power-based swing. Set the angle slider and press Go! to make your grab. The closer you are to the target angle, the more candy canes you collect and the more points you earn. 10 rounds of sugary fun!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CandyCaneGrabSettings),
-  reducer, isTerminal, component: CandyCaneGrabGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-candy-cane-grab-action"]', pulses: 3 }; },
+  component: CandyCaneGrabGame,
 };

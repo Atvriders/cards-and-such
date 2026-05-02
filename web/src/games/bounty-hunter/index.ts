@@ -22,5 +22,6 @@ Your health starts at 100. Injuries deal 15–35 damage. If health reaches zero,
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: BountyHunterState, action: BountyHunterAction) => BountyHunterState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-bounty-hunter-action"]', pulses: 3 }; },
   component: BountyHunterGame,
 } as unknown as GamePlugin;

@@ -62,7 +62,7 @@ export function BikeRaceGame({ state, dispatch, onGameOver }: GameProps<BikeRace
         <div className="br-gameover">{state.won ? "You finished!" : "DNF"} — Score: {state.score}</div>
       )}
 
-      <button className="br-restart" onClick={() => dispatch({ type: "restart" })}>New Race</button>
+      <button data-testid="hint-target-bike-race-action" className="br-restart" onClick={() => dispatch({ type: "restart" })}>New Race</button>
     </div>
   );
 }

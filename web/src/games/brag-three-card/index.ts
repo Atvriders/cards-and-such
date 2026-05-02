@@ -17,5 +17,6 @@ export const bragThreeCardPlugin: GamePlugin<BragThreeCardState, BragThreeCardAc
   initialState: (seed: number, s: S) => initialState(seed, s as BragThreeCardSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-brag-three-card-action"]', pulses: 3 }; },
   component: BragThreeCardGame,
 };

@@ -37,7 +37,7 @@ export function BejeweledClassicMiniGame({ state, dispatch, onGameOver }: GamePr
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`bjcls-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-bejeweled-classic-mini-action" key={`${r}-${c}`} className={`bjcls-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as BejeweledClassicMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

@@ -17,5 +17,6 @@ export const bowling9pinPlugin: GamePlugin<Bowling9pinState, Bowling9pinAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as Bowling9pinSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-bowling-9pin-action"]', pulses: 3 }; },
   component: Bowling9pinGame,
 };

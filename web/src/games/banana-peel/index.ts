@@ -27,5 +27,7 @@ New peels spawn every two seconds. Keep your eyes moving and your clicks quick! 
 Use Settings to choose 20, 30, or 45 seconds. Final score and stats are shown at the end. Can you prevent every slip?`,
   settings: bananaPeelPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as BananaPeelSettings),
-  reducer, isTerminal, component: BananaPeel,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-banana-peel-action"]', pulses: 3 }; },
+  component: BananaPeel,
 };

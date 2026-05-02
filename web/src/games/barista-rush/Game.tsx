@@ -76,7 +76,7 @@ export function BaristaRushGame({
         <div className="br-label">Size</div>
         <div className="br-row">
           {SIZES.map(s => (
-            <button
+            <button data-testid="hint-target-barista-rush-action"
               key={s}
               className={`br-btn${state.current.size === s ? " active" : ""}`}
               onClick={() => dispatch({ type: "set-size", size: s })}

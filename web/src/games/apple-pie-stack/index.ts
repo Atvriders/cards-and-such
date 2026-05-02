@@ -12,5 +12,7 @@ export const applePieStackPlugin: GamePlugin<ApplePieStackState, ApplePieStackAc
   howToPlay: `Apple Pie Stack challenges you to stack pie slices at just the right power. Each round, set the power slider and press Go! to toss a slice. The closer your power is to the secret target, the more points you score. 10 rounds of stacking — aim for 100 points per round for a perfect game!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as ApplePieStackSettings),
-  reducer, isTerminal, component: ApplePieStackGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-apple-pie-stack-action"]', pulses: 3 }; },
+  component: ApplePieStackGame,
 };

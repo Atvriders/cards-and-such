@@ -37,7 +37,7 @@ export function ArrowHit({ state, dispatch, onGameOver }: GameProps<ArrowHitStat
       {state.phase === "shot" && (
         <div className={`ah-feedback ${state.lastHit}`}>{state.lastHit === "bull" ? `Bullseye! +${state.lastPoints}` : state.lastHit === "hit" ? `Hit! +${state.lastPoints}` : "Miss!"}</div>
       )}
-      <button className="ah-btn" onClick={() => {
+      <button data-testid="hint-target-arrow-hit-action" className="ah-btn" onClick={() => {
         if (state.phase === "aiming") dispatch({ type: "shoot" } as ArrowHitAction);
         else dispatch({ type: "tick" } as ArrowHitAction); // restart via re-render
       }}>

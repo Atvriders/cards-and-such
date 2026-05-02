@@ -29,5 +29,6 @@ Use Settings to choose 5 or 10 balloons. Your final score is the sum of all popp
   initialState: (seed: number, settings: BalloonBurstSettingsType) => initialState(seed, settings as BalloonBurstSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-balloon-burst-action"]', pulses: 3 }; },
   component: BalloonBurst,
 };

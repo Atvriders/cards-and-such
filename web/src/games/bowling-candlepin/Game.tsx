@@ -41,7 +41,7 @@ export function BowlingCandlepinGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="bowcan-actions">
         {state.phase === "rolling" && (
-          <button className="bowcan-btn primary" onClick={() => dispatch({ type: "roll" } as BowlingCandlepinAction)}>Roll</button>
+          <button data-testid="hint-target-bowling-candlepin-action" className="bowcan-btn primary" onClick={() => dispatch({ type: "roll" } as BowlingCandlepinAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="bowcan-btn alt" onClick={() => dispatch({ type: "next" } as BowlingCandlepinAction)}>Next</button>

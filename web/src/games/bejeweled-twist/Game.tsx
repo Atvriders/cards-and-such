@@ -37,7 +37,7 @@ export function BejeweledTwistGame({ state, dispatch, onGameOver }: GameProps<Be
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`bjtwst-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-bejeweled-twist-action" key={`${r}-${c}`} className={`bjtwst-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as BejeweledTwistAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

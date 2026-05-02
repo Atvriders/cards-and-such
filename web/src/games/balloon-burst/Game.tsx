@@ -41,7 +41,7 @@ export function BalloonBurst({ state, dispatch, onGameOver }: GameProps<BalloonB
       </div>
       <p className="bb-hint">{state.phase === "inflating" ? "Click the balloon to pop it!" : "Press Next"}</p>
       {(state.phase === "popped" || state.phase === "burst") && (
-        <button className="bb-btn" onClick={() => dispatch({ type: "next" } as BalloonBurstAction)}>Next Balloon</button>
+        <button data-testid="hint-target-balloon-burst-action" className="bb-btn" onClick={() => dispatch({ type: "next" } as BalloonBurstAction)}>Next Balloon</button>
       )}
       {state.phase === "inflating" && (
         <button className="bb-btn pop" onClick={() => dispatch({ type: "pop" } as BalloonBurstAction)}>POP!</button>

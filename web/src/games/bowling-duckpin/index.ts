@@ -17,5 +17,6 @@ export const bowlingDuckpinPlugin: GamePlugin<BowlingDuckpinState, BowlingDuckpi
   initialState: (seed: number, s: S) => initialState(seed, s as BowlingDuckpinSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-bowling-duckpin-action"]', pulses: 3 }; },
   component: BowlingDuckpinGame,
 };

@@ -41,7 +41,7 @@ export function ApbaBaseballGame({ state, dispatch, onGameOver }: GameProps<Apba
       </div>
       <div className="apbbas-actions">
         {state.phase === "rolling" && (
-          <button className="apbbas-btn primary" onClick={() => dispatch({ type: "roll" } as ApbaBaseballAction)}>Roll</button>
+          <button data-testid="hint-target-apba-baseball-action" className="apbbas-btn primary" onClick={() => dispatch({ type: "roll" } as ApbaBaseballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="apbbas-btn alt" onClick={() => dispatch({ type: "next" } as ApbaBaseballAction)}>Next</button>

@@ -27,5 +27,6 @@ Tips for success: Watch the power bar carefully and try to release at a consiste
   initialState: (_seed: number, _settings: BottleFlipSettingsType) => initialState(),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-bottle-flip-action"]', pulses: 3 }; },
   component: BottleFlip,
 };

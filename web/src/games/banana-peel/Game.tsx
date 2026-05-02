@@ -29,7 +29,7 @@ export function BananaPeel({ state, dispatch, onGameOver }: GameProps<BananaPeel
       <div className="banana-header"><span>{hearts.join("")}</span><span>{state.timeLeft}s</span><span>{state.score} pts</span></div>
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#f9ca24,#f0932b)" }}>
         {state.items.map(item => (
-          <button key={item.id} className="banana-btn"
+          <button data-testid="hint-target-banana-peel-action" key={item.id} className="banana-btn"
             style={{ left: `${item.x}%`, top: `${Math.min(item.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: item.id } as BananaPeelAction)}>
             {item.points >= 20 ? "🍌🍌" : "🍌"}

@@ -12,5 +12,7 @@ export const bananaSplitPlugin: GamePlugin<BananaSplitState, BananaSplitAction, 
   howToPlay: `Banana Split is a sweet arcade challenge. Each round, slide the power bar to the right position and release — the banana lands somewhere on the dessert. The closer to the ideal position, the more points you earn. 10 rounds of banana tossing — perfect aim scores 100 points per round!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as BananaSplitSettings),
-  reducer, isTerminal, component: BananaSplitGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-banana-split-action"]', pulses: 3 }; },
+  component: BananaSplitGame,
 };

@@ -41,7 +41,7 @@ export function BowlingDuckpinGame({ state, dispatch, onGameOver }: GameProps<Bo
       </div>
       <div className="bowduc-actions">
         {state.phase === "rolling" && (
-          <button className="bowduc-btn primary" onClick={() => dispatch({ type: "roll" } as BowlingDuckpinAction)}>Roll</button>
+          <button data-testid="hint-target-bowling-duckpin-action" className="bowduc-btn primary" onClick={() => dispatch({ type: "roll" } as BowlingDuckpinAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="bowduc-btn alt" onClick={() => dispatch({ type: "next" } as BowlingDuckpinAction)}>Next</button>

@@ -12,5 +12,7 @@ export const blueberryPopPlugin: GamePlugin<BlueberryPopState, BlueberryPopActio
   howToPlay: `Blueberry Pop is about precise power control. Each round a blueberry is ready to be popped into a bowl. Set your power slider and press Go! — the closer your power to the hidden target, the more points you score. Chain perfect pops for a massive score over 10 rounds!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as BlueberryPopSettings),
-  reducer, isTerminal, component: BlueberryPopGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-blueberry-pop-action"]', pulses: 3 }; },
+  component: BlueberryPopGame,
 };

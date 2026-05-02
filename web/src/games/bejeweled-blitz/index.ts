@@ -12,5 +12,7 @@ export const bejeweledBlitzPlugin: GamePlugin<BejeweledBlitzState, BejeweledBlit
   howToPlay:"Bejeweled Blitz is a 60-second match-3 sprint. The board is a six-by-six grid of colored gems. Click two adjacent gems to swap them; if the swap creates a row or column of three or more identical gems, those gems vanish and you score ten points each. New gems fall from above to refill the board, sometimes triggering chain cascades for bonus clears. The clock counts down in the top-right corner. Only valid swaps that create matches will go through; invalid swaps cancel automatically. Plan your moves carefully — a four-in-a-row clear is double the points of a three, and well-placed swaps can unleash spectacular cascading combos. Sharpshooters routinely score 400+ points by chaining matches efficiently. Watch the timer, scan for triple opportunities, and tap fast. When time runs out, your final score is locked in. Sparkle on!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BejeweledBlitzSettings),
-  reducer,isTerminal,component:BejeweledBlitzGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-bejeweled-blitz-action"]', pulses: 3 }; },
+  component:BejeweledBlitzGame,
 };

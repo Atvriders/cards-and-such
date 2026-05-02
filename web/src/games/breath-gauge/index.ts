@@ -27,5 +27,6 @@ The game trains fine motor control and mindfulness.`,
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-breath-gauge-action"]', pulses: 3 }; },
   component: BreathGauge,
 };

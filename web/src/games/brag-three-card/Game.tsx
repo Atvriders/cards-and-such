@@ -41,7 +41,7 @@ export function BragThreeCardGame({ state, dispatch, onGameOver }: GameProps<Bra
       </div>
       <div className="brthca-actions">
         {state.phase === "rolling" && (
-          <button className="brthca-btn primary" onClick={() => dispatch({ type: "roll" } as BragThreeCardAction)}>Roll</button>
+          <button data-testid="hint-target-brag-three-card-action" className="brthca-btn primary" onClick={() => dispatch({ type: "roll" } as BragThreeCardAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="brthca-btn alt" onClick={() => dispatch({ type: "next" } as BragThreeCardAction)}>Next</button>

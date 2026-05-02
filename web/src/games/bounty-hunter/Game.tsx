@@ -39,7 +39,7 @@ export function BountyHunterGame({
             </div>
           </div>
           <div className="bh-actions">
-            <button className="bh-btn bh-pursue" onClick={() => d({ type: "pursue" })}>
+            <button data-testid="hint-target-bounty-hunter-action" className="bh-btn bh-pursue" onClick={() => d({ type: "pursue" })}>
               Pursue
             </button>
             <button className="bh-btn bh-skip" onClick={() => d({ type: "skip" })}>
