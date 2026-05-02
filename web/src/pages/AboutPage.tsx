@@ -5,6 +5,14 @@ import { FAMILIES } from "../games/families.js";
 import { THEMES } from "../platform/themes.js";
 import "./AboutPage.css";
 
+// Injected at build time by Vite's `define` (see web/vite.config.ts).
+// Falls back to an empty array in dev or if the git log call fails.
+declare const __BUILD_LATEST_COMMITS__: readonly string[] | undefined;
+const LATEST_COMMITS: readonly string[] =
+  typeof __BUILD_LATEST_COMMITS__ !== "undefined" && Array.isArray(__BUILD_LATEST_COMMITS__)
+    ? __BUILD_LATEST_COMMITS__
+    : [];
+
 // Game categories — must mirror the GameCategory union in
 // `src/platform/game-plugin/types.ts`. Hard-coded here because the
 // type itself is not exported as a runtime value.
@@ -122,6 +130,26 @@ export default function AboutPage(): JSX.Element {
           <li><code>ghcr.io/atvriders/cards-and-such-web:latest</code></li>
           <li><code>ghcr.io/atvriders/cards-and-such-server:latest</code></li>
         </ul>
+      </section>
+
+      <section className="settings-section about-section" data-testid="about-whatsnew">
+        <h2>What's new</h2>
+        {LATEST_COMMITS.length === 0 ? (
+          <p className="settings-hint">Build info unavailable</p>
+        ) : (
+          <ul className="about-list about-list-mono">
+            {LATEST_COMMITS.map((line, idx) => {
+              const spaceAt = line.indexOf(" ");
+              const hash = spaceAt > 0 ? line.slice(0, spaceAt) : line;
+              const subject = spaceAt > 0 ? line.slice(spaceAt + 1) : "";
+              return (
+                <li key={`${hash}-${idx}`} data-testid={`about-whatsnew-${idx}`}>
+                  <code>{hash}</code> {subject}
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
 
       <section className="settings-section about-section">
