@@ -109,6 +109,60 @@
     0 0 14px rgba(251, 113, 133, 0.25);
 }
 
+/* Modern drag-over states: green glow on valid targets, red flash on invalid.
+   Applied as `.pile.drag-over.valid` / `.pile.drag-over.invalid` by useDragDrop.
+   The `.drag-over.valid` rule pulses subtly to draw the eye. */
+.pile.drag-over.valid {
+  outline: 2px solid rgba(52, 211, 153, 0.85);
+  outline-offset: 2px;
+  border-radius: var(--r-md, 10px);
+  box-shadow:
+    0 0 0 4px rgba(52, 211, 153, 0.18),
+    0 0 22px rgba(52, 211, 153, 0.45);
+  animation: pile-pulse-valid 1100ms cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.pile.drag-over.invalid {
+  outline: 2px solid rgba(251, 113, 133, 0.85);
+  outline-offset: 2px;
+  border-radius: var(--r-md, 10px);
+  box-shadow:
+    0 0 0 4px rgba(251, 113, 133, 0.16),
+    0 0 18px rgba(251, 113, 133, 0.40);
+  animation: pile-flash-invalid 360ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes pile-pulse-valid {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(52, 211, 153, 0.18),
+      0 0 22px rgba(52, 211, 153, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(52, 211, 153, 0.28),
+      0 0 32px rgba(52, 211, 153, 0.60);
+  }
+}
+@keyframes pile-flash-invalid {
+  0%   { background-color: rgba(251, 113, 133, 0.18); transform: translateX(0); }
+  20%  { transform: translateX(-3px); }
+  40%  { transform: translateX(3px); }
+  60%  { transform: translateX(-2px); }
+  80%  { transform: translateX(2px); }
+  100% { background-color: transparent; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pile.drag-over.valid,
+  .pile.drag-over.invalid { animation: none; }
+}
+:root[data-animations="off"] .pile.drag-over.valid,
+:root[data-animations="off"] .pile.drag-over.invalid,
+:root[data-animations="reduced"] .pile.drag-over.valid,
+:root[data-animations="reduced"] .pile.drag-over.invalid {
+  animation: none;
+}
+
 /* Keyboard focus ring on interactive piles. */
 .pile:focus-visible,
 .pile-empty:focus-visible {
@@ -116,7 +170,64 @@
   outline-offset: 3px;
 }
 
+/* Keyboard cursor + selection indicators on the pile-wrapper.
+   `kbd-focus`    — current arrow-key target (indigo ring)
+   `kbd-selected` — pile that has cards picked up via Enter (amber ring) */
+.pile-wrapper.kbd-focus {
+  outline: 2px solid rgba(99, 102, 241, 0.85);
+  outline-offset: 4px;
+  border-radius: var(--r-md, 10px);
+}
+.pile-wrapper.kbd-selected {
+  outline: 2px dashed rgba(245, 158, 11, 0.85);
+  outline-offset: 4px;
+  border-radius: var(--r-md, 10px);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.30);
+}
+.pile-wrapper.kbd-focus.kbd-selected {
+  outline-color: rgba(245, 158, 11, 0.95);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pile, .pile-empty, .pile-tableau:hover .pile-card.fanned:last-child { transition: none; transform: none; }
   .pile.is-drop-target .pile-empty, .pile.is-drop-target { transform: none; }
+}
+
+/* ----- Drag visual feedback: neighbor cards shift to indicate they'll come along.
+   When the pile contains a `.dragging` card, every fanned sibling AFTER the
+   dragged one (i.e. cards stacked on top of it, which travel together) shifts
+   slightly down/right so the user sees the "group" lift as a unit.
+   Falls back gracefully on browsers without `:has()` (no shift, no harm). */
+.pile-tableau:has(.pile-card .card.dragging) .pile-card.fanned {
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pile-tableau .pile-card:has(.card.dragging) ~ .pile-card.fanned {
+  transform: translate(3px, 4px);
+}
+/* The dragged card itself (and the wrappers above) keep their place; only
+   following siblings — the cards being carried — shift. */
+
+/* ----- Stack-glow: the whole valid-drop pile glows softly, not just the slot.
+   Applied while a drag is hovering a pile we accept. */
+.pile.drag-over.valid .pile-card .card.face-up {
+  box-shadow:
+    0 0 0 1px rgba(52, 211, 153, 0.55),
+    0 0 14px rgba(52, 211, 153, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  transition: box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pile.drag-over.valid .pile-card .card.face-down {
+  box-shadow:
+    0 0 0 1px rgba(52, 211, 153, 0.55),
+    0 0 14px rgba(52, 211, 153, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pile-tableau .pile-card:has(.card.dragging) ~ .pile-card.fanned { transform: none; }
+  .pile.drag-over.valid .pile-card .card.face-up,
+  .pile.drag-over.valid .pile-card .card.face-down { transition: none; }
+}
+:root[data-animations="off"] .pile-tableau .pile-card:has(.card.dragging) ~ .pile-card.fanned,
+:root[data-animations="reduced"] .pile-tableau .pile-card:has(.card.dragging) ~ .pile-card.fanned {
+  transform: none;
 }

@@ -2,13 +2,41 @@
    Backward-compatible: all existing class names (.card, .face-up,
    .face-down, .red, .black, .corner, .center-suit) are preserved. */
 
-.card {
-  --w: 64px;
-  --h: 90px;
-  /* Theme-tunable card-back primary (any engine can override). */
+/* Global card-back palettes — any engine that uses .face-down picks them up
+   from :root[data-card-back="..."], so changing the setting applies site-wide. */
+:root,
+:root[data-card-back="classic-blue"] {
   --card-back-primary: #3b3aa3;
   --card-back-secondary: #5b59d9;
   --card-back-accent: rgba(255, 255, 255, 0.10);
+}
+:root[data-card-back="red-weave"] {
+  --card-back-primary: #8a1f1f;
+  --card-back-secondary: #d44848;
+  --card-back-accent: rgba(255, 255, 255, 0.10);
+}
+:root[data-card-back="plain"] {
+  --card-back-primary: #1a1d2c;
+  --card-back-secondary: #2a2f45;
+  --card-back-accent: rgba(255, 255, 255, 0.04);
+}
+
+/* Card font preference — affects rank glyphs in corners. */
+:root[data-card-font="modern"] {
+  --card-rank-font: "Inter", "Inter var", ui-sans-serif, system-ui, sans-serif;
+}
+:root,
+:root[data-card-font="serif"] {
+  --card-rank-font: "Georgia", "Times New Roman", serif;
+}
+
+.card {
+  --w: 64px;
+  --h: 90px;
+  /* Per-card fallbacks: engines may still override locally. */
+  --card-back-primary: var(--card-back-primary, #3b3aa3);
+  --card-back-secondary: var(--card-back-secondary, #5b59d9);
+  --card-back-accent: var(--card-back-accent, rgba(255, 255, 255, 0.10));
   width: var(--w);
   height: var(--h);
   border-radius: 8px;
@@ -104,7 +132,7 @@
   font-size: 1.05rem;
   font-weight: 800;
   line-height: 0.95;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: var(--card-rank-font, "Georgia", "Times New Roman", serif);
   letter-spacing: 0;
 }
 .card .corner .suit         {
@@ -191,6 +219,30 @@
 }
 .card-flip-back  { transform: rotateY(180deg); }
 
+/* ----- Drag state ----- */
+/* While the user is dragging this card, dim it slightly and switch to grabbing
+   cursor — gives clear feedback that the card is "in flight". */
+.card.dragging {
+  opacity: 0.55;
+  cursor: grabbing !important;
+  filter: saturate(0.85);
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.55),
+    0 8px 18px -6px rgba(0, 0, 0, 0.55);
+  transform: scale(0.98);
+}
+.card[draggable="true"].face-up { cursor: grab; }
+.card[draggable="true"].face-up:active { cursor: grabbing; }
+
+/* Touch screens: opt the draggable cards out of the browser's native
+   pan-on-touch so the HTML5 drag gesture can start cleanly on iOS / Android
+   instead of triggering a scroll. */
+.card[draggable="true"] {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: element;
+}
+
 /* ----- Highlight states (opt-in classes) ----- */
 .card.is-selected {
   outline: 2px solid #6366f1;
@@ -218,4 +270,63 @@
   .card { transition: none; }
   .card.flip-in, .card-flip-inner, .card.is-invalid { animation: none; transition: none; }
   .card.face-up.clickable:hover, .card.face-down.clickable:hover { transform: none; }
+}
+
+/* User-selected animations preference — mirrors prefers-reduced-motion. */
+:root[data-animations="reduced"] .card,
+:root[data-animations="off"] .card {
+  transition: none;
+}
+:root[data-animations="reduced"] .card.flip-in,
+:root[data-animations="reduced"] .card-flip-inner,
+:root[data-animations="reduced"] .card.is-invalid,
+:root[data-animations="off"] .card.flip-in,
+:root[data-animations="off"] .card-flip-inner,
+:root[data-animations="off"] .card.is-invalid {
+  animation: none;
+  transition: none;
+}
+:root[data-animations="off"] .card.face-up.clickable:hover,
+:root[data-animations="off"] .card.face-down.clickable:hover {
+  transform: none;
+  box-shadow: none;
+}
+:root[data-animations="off"] *,
+:root[data-animations="off"] *::before,
+:root[data-animations="off"] *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* ----- Card reveal: 200ms flip when a tableau card is auto-exposed ----- */
+.card.card-reveal {
+  animation: card-reveal-flip 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+@keyframes card-reveal-flip {
+  from { transform: rotateY(85deg) scale(0.94); opacity: 0.2; }
+  to   { transform: rotateY(0)    scale(1);    opacity: 1; }
+}
+
+/* ----- Auto-flip-on-pickup: face-up waste card flips in on draw ----- */
+.card.flip-pickup {
+  animation: card-flip-pickup 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: left center;
+  backface-visibility: hidden;
+}
+@keyframes card-flip-pickup {
+  0%   { transform: rotateY(180deg) translateX(-6px); opacity: 0.0; }
+  40%  { opacity: 0.85; }
+  100% { transform: rotateY(0)      translateX(0);    opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card.card-reveal, .card.flip-pickup { animation: none; }
+}
+:root[data-animations="off"] .card.card-reveal,
+:root[data-animations="off"] .card.flip-pickup,
+:root[data-animations="reduced"] .card.card-reveal,
+:root[data-animations="reduced"] .card.flip-pickup {
+  animation: none;
 }
