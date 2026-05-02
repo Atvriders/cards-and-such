@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MemoryState, MemoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MemoryPairsKids } from "./Game.js";
@@ -33,5 +33,16 @@ Keep a sharp memory and you will clear the board quickly. Good luck!`,
   initialState: (seed: number, settings: MemoryPairsSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: MemoryState): HintTarget | null => {
+    if (state.locked) return null;
+    // Pulse the first face-down, unmatched card.
+    for (let i = 0; i < state.cards.length; i++) {
+      const c = state.cards[i]!;
+      if (!c.faceUp && !c.matched) {
+        return { selector: `[data-testid="hint-target-memory-pairs-kids-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: MemoryPairsKids,
 };

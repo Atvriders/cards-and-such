@@ -1,6 +1,6 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TicTacToeCardsState, TicTacToeCardsAction, TicTacToeCardsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, checkWin } from "./state.js";
 import { TicTacToeCards } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,5 +17,36 @@ export const ticTacToeCardsPlugin: GamePlugin<TicTacToeCardsState, TicTacToeCard
   initialState: (seed: number, s: S) => initialState(seed, s as TicTacToeCardsSettings),
   reducer,
   isTerminal,
+  hint: (state: TicTacToeCardsState): HintTarget | null => {
+    if (state.phase === "done" || state.turn !== "P") return null;
+    const empties: number[] = [];
+    for (let i = 0; i < 9; i++) if (state.board[i] === null) empties.push(i);
+    if (empties.length === 0) return null;
+    // First move heuristic: center.
+    if (state.pieces === 0 && empties.includes(4)) {
+      return { selector: '[data-testid="hint-target-tic-tac-toe-cards-4"]', pulses: 3 };
+    }
+    // Win
+    for (const i of empties) {
+      const b = state.board.slice();
+      b[i] = { suit: "H", rank: 0, owner: "P" };
+      if (checkWin(b).winner === "P") {
+        return { selector: `[data-testid="hint-target-tic-tac-toe-cards-${i}"]`, pulses: 3 };
+      }
+    }
+    // Block
+    for (const i of empties) {
+      const b = state.board.slice();
+      b[i] = { suit: "S", rank: 0, owner: "C" };
+      if (checkWin(b).winner === "C") {
+        return { selector: `[data-testid="hint-target-tic-tac-toe-cards-${i}"]`, pulses: 3 };
+      }
+    }
+    // Else center, then any
+    if (empties.includes(4)) {
+      return { selector: '[data-testid="hint-target-tic-tac-toe-cards-4"]', pulses: 3 };
+    }
+    return { selector: `[data-testid="hint-target-tic-tac-toe-cards-${empties[0]}"]`, pulses: 3 };
+  },
   component: TicTacToeCards,
 };

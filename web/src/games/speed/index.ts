@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpeedState } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, canPlay } from "./state.js";
 import { Speed } from "./Speed.js";
 
 export const speedSettings = {
@@ -38,5 +38,14 @@ Tips: scan both piles for options before committing. A card playable on either p
   initialState,
   reducer,
   isTerminal,
+  hint: (state: SpeedState): HintTarget | null => {
+    if (state.phase !== "playing") return null;
+    for (const card of state.hand) {
+      if (canPlay(card, state.piles[0]) || canPlay(card, state.piles[1])) {
+        return { selector: `[data-testid="hint-target-speed-hand-${card.id}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Speed,
 };

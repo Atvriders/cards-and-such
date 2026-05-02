@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { YahtzeeMiniState, YahtzeeMiniAction, YahtzeeMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,17 @@ Combo points: 5-of-a-kind = 80, 4-of-a-kind = 40, full house (3+2) = 25, 3-of-a-
 You play 6 rounds. A typical careful run lands at 90–140 points; pushing toward 200 means you nailed several combos. Hold smart and roll often!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as YahtzeeMiniSettings),
-  reducer,isTerminal,component:YahtzeeMiniGame,
+  reducer,isTerminal,
+  hint: (state: YahtzeeMiniState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "scored") {
+      return { selector: '[data-testid="hint-target-yahtzee-mini-next"]', pulses: 3 };
+    }
+    // rolling: prefer reroll while rolls remain, else score.
+    if (state.rollsLeft > 0) {
+      return { selector: '[data-testid="hint-target-yahtzee-mini-roll"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-yahtzee-mini-score"]', pulses: 3 };
+  },
+  component:YahtzeeMiniGame,
 };

@@ -106,6 +106,7 @@ export function Speed({
           {hand.map(c => (
             <div
               key={c.id}
+              data-testid={`hint-target-speed-hand-${c.id}`}
               className={`speed-card-slot${selectedCard === c.id ? " selected" : ""}${phase === "playing" ? " clickable" : ""}`}
               onClick={() => selectCard(c.id)}
             >

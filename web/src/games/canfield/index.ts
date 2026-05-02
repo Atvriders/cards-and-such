@@ -1,7 +1,8 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CanfieldState, CanfieldAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, makeRulesetPublic } from "./state.js";
+import { canMove } from "../../engines/tableau/moves.js";
 import { Canfield } from "./Canfield.js";
 
 export const canfieldSettings = {} as const;
@@ -27,5 +28,26 @@ Tips: The reserve is your main source of tableau fuel — try to expose deeper r
   initialState: (seed: number, settings: CanfieldSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CanfieldState): HintTarget | null => {
+    const ruleset = makeRulesetPublic(state.foundationStartRank);
+    const FOUNDATION_IDS = ["f1","f2","f3","f4"];
+    // Priority 1: waste -> foundation
+    for (const foundId of FOUNDATION_IDS) {
+      if (canMove(state.piles, { fromPile: "waste", toPile: foundId, count: 1 }, ruleset)) {
+        return { selector: `[data-testid="pile-waste"]`, pulses: 3 };
+      }
+    }
+    // Priority 2: stock has cards — draw.
+    const stock = state.piles.find((p) => p.id === "stock");
+    if (stock && stock.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    // Priority 3: stock empty but waste non-empty — recycle.
+    const waste = state.piles.find((p) => p.id === "waste");
+    if (waste && waste.cards.length > 0) {
+      return { selector: `[data-testid="pile-stock"]`, pulses: 3 };
+    }
+    return null;
+  },
   component: Canfield,
 };

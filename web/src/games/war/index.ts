@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type WarState, type WarAction } from "./state.js";
 import { War } from "./War.js";
 
@@ -23,5 +23,9 @@ Tips: the game is entirely deterministic — no decisions to make — so sit bac
   initialState,
   reducer,
   isTerminal,
+  hint: (state: WarState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    return { selector: '[data-testid="hint-target-war-play"]', pulses: 3 };
+  },
   component: War,
 };

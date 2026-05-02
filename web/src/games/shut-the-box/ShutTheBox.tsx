@@ -57,6 +57,7 @@ export function ShutTheBox({
           return (
             <div
               key={i}
+              data-testid={`hint-target-shut-the-box-tile-${i + 1}`}
               className={`stb-tile ${isOpen ? "open" : "closed"} ${isSelected ? "selected" : ""}`}
               onClick={() => toggleTile(i)}
             >
@@ -75,7 +76,7 @@ export function ShutTheBox({
       <div className="stb-message">{state.message}</div>
 
       {state.phase === "preRoll" && (
-        <button className="stb-btn" onClick={() => dispatch({ type: "roll" } as ShutTheBoxAction)}>
+        <button className="stb-btn" data-testid="hint-target-shut-the-box-roll" onClick={() => dispatch({ type: "roll" } as ShutTheBoxAction)}>
           Roll Dice
         </button>
       )}

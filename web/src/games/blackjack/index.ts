@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlackjackState, BlackjackAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, handValue } from "./state.js";
 import { Blackjack } from "./Blackjack.js";
 
 export const blackjackSettings = {
@@ -55,5 +55,17 @@ Tips: Basic strategy says always split Aces and 8s, never split 10s or 5s. Doubl
   initialState: (seed: number, settings: BlackjackSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BlackjackState): HintTarget | null => {
+    if (state.phase === "betting" || state.phase === "settled") {
+      return { selector: '[data-testid="hint-target-blackjack-deal"]', pulses: 3 };
+    }
+    if (state.phase !== "player") return null;
+    const hand = state.playerHands[state.activeHandIndex];
+    if (!hand) return null;
+    const total = handValue(hand.cards).best;
+    if (total < 12) return { selector: '[data-testid="hint-target-blackjack-hit"]', pulses: 3 };
+    if (total >= 17) return { selector: '[data-testid="hint-target-blackjack-stand"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-blackjack-hit"]', pulses: 3 };
+  },
   component: Blackjack,
 };

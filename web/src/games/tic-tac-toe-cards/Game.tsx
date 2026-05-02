@@ -35,6 +35,7 @@ export function TicTacToeCards({
           return (
             <button
               key={idx}
+              data-testid={`hint-target-tic-tac-toe-cards-${idx}`}
               className={`tttcards-cell ${colorClass} ${isWin ? "tttcards-cell-win" : ""}`}
               disabled={!empty || state.phase === "done"}
               onClick={() => dispatch({ type: "place", idx } as TicTacToeCardsAction)}

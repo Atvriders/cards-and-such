@@ -87,14 +87,14 @@ export function Blackjack({
 
       <div className="bj-actions">
         {(phase === "betting" || phase === "settled") && !terminal && (
-          <button className="primary" onClick={() => dis({ type: "deal" })}>
+          <button className="primary" data-testid="hint-target-blackjack-deal" onClick={() => dis({ type: "deal" })}>
             Deal
           </button>
         )}
         {phase === "player" && (
           <>
-            <button onClick={() => dis({ type: "hit" })}>Hit</button>
-            <button onClick={() => dis({ type: "stand" })}>Stand</button>
+            <button data-testid="hint-target-blackjack-hit" onClick={() => dis({ type: "hit" })}>Hit</button>
+            <button data-testid="hint-target-blackjack-stand" onClick={() => dis({ type: "stand" })}>Stand</button>
             <button onClick={() => dis({ type: "double" })} disabled={!canDouble}>
               Double
             </button>

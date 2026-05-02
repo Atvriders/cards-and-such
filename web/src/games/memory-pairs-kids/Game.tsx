@@ -23,6 +23,7 @@ export function MemoryPairsKids({ state, dispatch, onGameOver }: GameProps<Memor
           return (
             <div
               key={card.id}
+              data-testid={`hint-target-memory-pairs-kids-${i}`}
               className={cls}
               onClick={() => !card.matched && !card.faceUp && dispatch({ type: "flip", index: i } satisfies MemoryAction)}
             >

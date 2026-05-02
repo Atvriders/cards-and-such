@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShutTheBoxState, ShutTheBoxAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, validCombinations } from "./state.js";
 import { ShutTheBox } from "./ShutTheBox.js";
 
 export const shutTheBoxSettings = {
@@ -36,5 +36,23 @@ Strategy: early in the game, prefer closing multiple smaller tiles to keep your 
   initialState: (seed: number, settings: ShutTheBoxSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: ShutTheBoxState): HintTarget | null => {
+    if (state.phase === "preRoll") {
+      return { selector: '[data-testid="hint-target-shut-the-box-roll"]', pulses: 3 };
+    }
+    if (state.phase !== "chooseTiles") return null;
+    const combos = validCombinations(state.tiles, state.rollSum);
+    if (combos.length === 0) return null;
+    // Choose the combo whose max tile is highest — closing big tiles first
+    // is the standard strategy.
+    let best = combos[0]!;
+    let bestKey = Math.max(...best);
+    for (const c of combos) {
+      const k = Math.max(...c);
+      if (k > bestKey) { best = c; bestKey = k; }
+    }
+    const tile = best[best.length - 1]!; // pulse the highest tile in chosen combo
+    return { selector: `[data-testid="hint-target-shut-the-box-tile-${tile}"]`, pulses: 3 };
+  },
   component: ShutTheBox,
 };

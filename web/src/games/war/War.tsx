@@ -72,7 +72,7 @@ export function War({
       {/* Actions */}
       {!gameOver && (
         <div className="war-actions">
-          <button onClick={() => dis({ type: "play-round" })}>
+          <button data-testid="hint-target-war-play" onClick={() => dis({ type: "play-round" })}>
             Play Round
           </button>
           <button className="secondary" onClick={() => dis({ type: "auto-play" })}>

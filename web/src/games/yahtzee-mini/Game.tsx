@@ -15,12 +15,12 @@ export function YahtzeeMiniGame({ state, dispatch, onGameOver }: GameProps<Yahtz
         <button key={i} className={`dm-die small`} style={{ background: state.held[i] ? "#fffde6" : "#fff" }} onClick={() => state.phase === "rolling" && dispatch({ type:"toggle", index:i } as YahtzeeMiniAction)}>{d}{state.held[i] ? " *" : ""}</button>
       ))}</div>
       {state.phase === "rolling" && <div className="dm-row">
-        <button className="dm-btn" disabled={state.rollsLeft <= 0} onClick={() => dispatch({ type:"roll" } as YahtzeeMiniAction)}>Roll</button>
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"score" } as YahtzeeMiniAction)}>Score</button>
+        <button className="dm-btn" data-testid="hint-target-yahtzee-mini-roll" disabled={state.rollsLeft <= 0} onClick={() => dispatch({ type:"roll" } as YahtzeeMiniAction)}>Roll</button>
+        <button className="dm-btn alt" data-testid="hint-target-yahtzee-mini-score" onClick={() => dispatch({ type:"score" } as YahtzeeMiniAction)}>Score</button>
       </div>}
       {state.phase === "scored" && <>
         <div className="dm-result">+{state.lastPts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as YahtzeeMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+        <button className="dm-btn alt" data-testid="hint-target-yahtzee-mini-next" onClick={() => dispatch({ type:"next" } as YahtzeeMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

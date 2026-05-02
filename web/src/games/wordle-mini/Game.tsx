@@ -55,13 +55,20 @@ export function WordleMiniGame({ state, dispatch, onGameOver }: GameProps<Wordle
         <span className="wm-info">Guess {state.guesses.length + (state.status === "playing" ? 1 : 0)} / {state.maxGuesses}</span>
       </div>
       <div className="wm-board">
-        {rows.map((row, ri) => (
-          <div className="wm-row" key={ri}>
-            {row.letters.map((ch, ci) => (
-              <div className={`wm-tile wm-${row.tiles[ci]}`} key={ci}>{ch.trim()}</div>
-            ))}
-          </div>
-        ))}
+        {rows.map((row, ri) => {
+          const isInputRow = ri === state.guesses.length && state.status === "playing";
+          return (
+            <div
+              className="wm-row"
+              key={ri}
+              {...(isInputRow ? { "data-testid": "hint-target-wordle-mini-input" } : {})}
+            >
+              {row.letters.map((ch, ci) => (
+                <div className={`wm-tile wm-${row.tiles[ci]}`} key={ci}>{ch.trim()}</div>
+              ))}
+            </div>
+          );
+        })}
       </div>
       {state.message && <div className="wm-msg">{state.status === "lost" ? `Answer: ${state.answer}` : state.message}</div>}
       <div className="wm-keyboard">
