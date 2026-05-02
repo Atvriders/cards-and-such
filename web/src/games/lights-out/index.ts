@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LightsOutState, LightsOutAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,28 @@ Tips: Lights Out has a mathematical solution — every valid puzzle can be solve
   initialState: (seed: number, settings: LightsOutSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LightsOutState): HintTarget | null => {
+    if (state.won) return null;
+    const { size, lights } = state;
+    // "Chase the lights": find the topmost-leftmost lit cell in row > 0
+    // and pulse the cell directly below it (pressing it would turn off
+    // the light above). If only top row is lit, pulse that lit cell.
+    for (let r = 1; r < size; r++) {
+      for (let c = 0; c < size; c++) {
+        if (lights[(r - 1) * size + c]) {
+          return { selector: `[data-testid="hint-target-lights-out-${r}-${c}"]`, pulses: 3 };
+        }
+      }
+    }
+    // Top row lit — pulse the first lit cell.
+    for (let i = 0; i < lights.length; i++) {
+      if (lights[i]) {
+        const r = Math.floor(i / size);
+        const c = i % size;
+        return { selector: `[data-testid="hint-target-lights-out-${r}-${c}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: LightsOut,
 };

@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ScopaState } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, findCaptureSets, faceValue, COINS_SUIT, SETTEBELLO_RANK } from "./state.js";
 import { Scopa } from "./Scopa.js";
 
 export const scopaSettings = {} as const;
@@ -43,5 +43,39 @@ Strategy: Prioritize capturing the settebello and coins cards. Avoid building up
   initialState: (seed: number, _settings: ScopaSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: ScopaState): HintTarget | null => {
+    if (state.phase !== "player-turn" || state.playerHand.length === 0) return null;
+    // Score each hand card by best capture: longer combos preferred,
+    // settebello/coins preferred, else any capture, else lowest card.
+    let bestId: string | null = null;
+    let bestScore = -1;
+    for (const card of state.playerHand) {
+      const sets = findCaptureSets(state.table, faceValue(card.rank));
+      let score = 0;
+      if (sets.length > 0) {
+        // Prefer longest combo with valuable cards.
+        const longest = sets.reduce((a, b) => (b.length > a.length ? b : a));
+        score = 100 + longest.length * 10;
+        // Bonus for capturing the settebello or coins.
+        for (const c of longest) {
+          if (c.suit === COINS_SUIT && c.rank === SETTEBELLO_RANK) score += 50;
+          else if (c.suit === COINS_SUIT) score += 5;
+        }
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        bestId = card.id;
+      }
+    }
+    if (!bestId && state.playerHand.length > 0) {
+      // No captures — pulse the lowest face-value card to place safely.
+      const lowest = state.playerHand.reduce((lo, c) =>
+        faceValue(c.rank) < faceValue(lo.rank) ? c : lo,
+      );
+      bestId = lowest.id;
+    }
+    if (!bestId) return null;
+    return { selector: `[data-testid="hint-target-scopa-${bestId}"]`, pulses: 3 };
+  },
   component: Scopa,
 };

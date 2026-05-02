@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MinesweeperState, MinesweeperAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,41 @@ Difficulty sets the grid size and mine density: beginner is 9×9 with 10 mines, 
     initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: MinesweeperState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    // Before first move: pulse the center cell.
+    if (state.firstMove || !state.adj) {
+      const idx = Math.floor(state.rows / 2) * state.cols + Math.floor(state.cols / 2);
+      return { selector: `[data-testid="hint-target-minesweeper-${idx}"]`, pulses: 3 };
+    }
+    const adj = state.adj;
+    const cells = state.state;
+    // Find a hidden cell adjacent to a revealed 0 (guaranteed safe).
+    for (let r = 0; r < state.rows; r++) {
+      for (let c = 0; c < state.cols; c++) {
+        const i = r * state.cols + c;
+        if (cells[i] !== "hidden") continue;
+        for (let dr = -1; dr <= 1; dr++) {
+          for (let dc = -1; dc <= 1; dc++) {
+            if (dr === 0 && dc === 0) continue;
+            const nr = r + dr;
+            const nc = c + dc;
+            if (nr < 0 || nr >= state.rows || nc < 0 || nc >= state.cols) continue;
+            const ni = nr * state.cols + nc;
+            if (cells[ni] === "revealed" && adj[ni] === 0) {
+              return { selector: `[data-testid="hint-target-minesweeper-${i}"]`, pulses: 3 };
+            }
+          }
+        }
+      }
+    }
+    // Fallback: first hidden cell.
+    for (let i = 0; i < cells.length; i++) {
+      if (cells[i] === "hidden") {
+        return { selector: `[data-testid="hint-target-minesweeper-${i}"]`, pulses: 3 };
+      }
+    }
+    return null;
+  },
   component: Minesweeper,
 };

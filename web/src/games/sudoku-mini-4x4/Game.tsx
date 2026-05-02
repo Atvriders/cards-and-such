@@ -56,6 +56,7 @@ export function SudokuMini4x4Game({ state, dispatch, onGameOver }: GameProps<Sud
               return (
                 <button
                   key={c}
+                  data-testid={`hint-target-sudoku-mini-4x4-${idx}`}
                   className={`sudoku4x4kid-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as SudokuMini4x4Action)}
                 >{v === 0 ? "" : v}</button>

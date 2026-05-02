@@ -56,6 +56,7 @@ export function Clock({
           return (
             <div
               key={pileIdx}
+              data-testid={`hint-target-clock-pile-${pileIdx}`}
               className={`clock-position${isCurrent ? " current-position" : ""}`}
               style={{ left: pos.left, top: pos.top, width: 46 }}
             >
@@ -80,6 +81,7 @@ export function Clock({
 
       <button
         className="clock-flip-btn"
+        data-testid="hint-target-clock-flip"
         onClick={handleFlip}
         disabled={!hasFaceDown || state.won || state.gameOver}
       >

@@ -1,7 +1,8 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GolfSolitaireState, GolfSolitaireAction, GolfSolitaireSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { rankVal } from "../_shared/solitaire-family-engine.js";
 import { GolfSolitaireGame } from "./Game.js";
 
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
@@ -17,5 +18,30 @@ export const golfSolitairePlugin: GamePlugin<GolfSolitaireState, GolfSolitaireAc
   initialState: (seed: number, s: S) => initialState(seed, s as GolfSolitaireSettings),
   reducer,
   isTerminal,
+  hint: (state: GolfSolitaireState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    const wasteTop = state.waste[state.waste.length - 1];
+    if (wasteTop) {
+      const wv = rankVal(wasteTop);
+      // Find first column whose bottom-most non-removed card is rank ±1.
+      for (let ci = 0; ci < state.columns.length; ci++) {
+        const col = state.columns[ci]!;
+        const removed = state.removed[ci]!;
+        for (let ri = col.length - 1; ri >= 0; ri--) {
+          if (!removed[ri]) {
+            const cv = rankVal(col[ri]!);
+            if (Math.abs(cv - wv) === 1) {
+              return { selector: `[data-testid="hint-target-golf-solitaire-${ci}-${ri}"]`, pulses: 3 };
+            }
+            break;
+          }
+        }
+      }
+    }
+    if (state.stock.length > 0) {
+      return { selector: '[data-testid="hint-target-golf-solitaire-draw"]', pulses: 3 };
+    }
+    return null;
+  },
   component: GolfSolitaireGame,
 };

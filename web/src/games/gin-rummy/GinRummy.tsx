@@ -51,7 +51,7 @@ export function GinRummy({
 
       {/* Draw area */}
       <div className="ginr-area">
-        <div className="ginr-pile">
+        <div className="ginr-pile" data-testid="hint-target-gin-rummy-stock">
           Stock ({stock.length})
           {phase === "player-draw" && !stockEmpty ? (
             <Card
@@ -62,7 +62,7 @@ export function GinRummy({
             <div className="ginr-card-back" style={{ opacity: stockEmpty ? 0.2 : 0.6 }} />
           )}
         </div>
-        <div className="ginr-pile">
+        <div className="ginr-pile" data-testid="hint-target-gin-rummy-discard">
           Discard
           {topDiscard ? (
             phase === "player-draw"
@@ -82,6 +82,7 @@ export function GinRummy({
         <div className="ginr-actions">
           <button
             className="ginr-btn"
+            data-testid="hint-target-gin-rummy-knock"
             disabled={!canKnock}
             onClick={() => dispatch({ type: "knock" } as GinRummyAction)}
           >
@@ -103,8 +104,8 @@ export function GinRummy({
           })
           .map(card =>
             phase === "player-discard"
-              ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "discard", cardId: card.id } as GinRummyAction)} />
-              : <Card key={card.id} card={card} className="dim" />
+              ? <div key={card.id} data-testid={`hint-target-gin-rummy-${card.id}`}><Card card={card} onClick={() => dispatch({ type: "discard", cardId: card.id } as GinRummyAction)} /></div>
+              : <div key={card.id} data-testid={`hint-target-gin-rummy-${card.id}`}><Card card={card} className="dim" /></div>
           )}
       </div>
 

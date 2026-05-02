@@ -1,6 +1,6 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SudokuMini4x4State, SudokuMini4x4Action, SudokuMini4x4Settings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, GRID_SIZE, MAX_DIGIT, BOX_ROWS, BOX_COLS } from "./state.js";
 import { SudokuMini4x4Game } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const sudokuMini4x4Plugin: GamePlugin<SudokuMini4x4State, SudokuMini4x4Action, typeof settings> = {
@@ -14,5 +14,38 @@ export const sudokuMini4x4Plugin: GamePlugin<SudokuMini4x4State, SudokuMini4x4Ac
   initialState: (seed: number) => initialState(seed, { dummy: true } as SudokuMini4x4Settings),
   reducer,
   isTerminal,
+  hint: (state: SudokuMini4x4State): HintTarget | null => {
+    if (state.phase === "done" || state.solved) return null;
+    const cur = state.current;
+    // For each empty cell, compute candidates by row/col/box constraints.
+    let bestIdx = -1;
+    let bestCount = MAX_DIGIT + 1;
+    for (let i = 0; i < cur.length; i++) {
+      if (cur[i] !== 0) continue;
+      const r = Math.floor(i / GRID_SIZE);
+      const c = i % GRID_SIZE;
+      const used = new Set<number>();
+      for (let k = 0; k < GRID_SIZE; k++) {
+        used.add(cur[r * GRID_SIZE + k]!);
+        used.add(cur[k * GRID_SIZE + c]!);
+      }
+      const br = Math.floor(r / BOX_ROWS) * BOX_ROWS;
+      const bc = Math.floor(c / BOX_COLS) * BOX_COLS;
+      for (let dr = 0; dr < BOX_ROWS; dr++) {
+        for (let dc = 0; dc < BOX_COLS; dc++) {
+          used.add(cur[(br + dr) * GRID_SIZE + (bc + dc)]!);
+        }
+      }
+      let count = 0;
+      for (let d = 1; d <= MAX_DIGIT; d++) if (!used.has(d)) count++;
+      if (count < bestCount) {
+        bestCount = count;
+        bestIdx = i;
+        if (count === 1) break;
+      }
+    }
+    if (bestIdx < 0) return null;
+    return { selector: `[data-testid="hint-target-sudoku-mini-4x4-${bestIdx}"]`, pulses: 3 };
+  },
   component: SudokuMini4x4Game,
 };

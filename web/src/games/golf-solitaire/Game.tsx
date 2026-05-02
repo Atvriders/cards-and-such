@@ -22,6 +22,7 @@ export function GolfSolitaireGame(
         <button
           className="golf-solitaire-auto"
           type="button"
+          data-testid="hint-target-golf-solitaire-draw"
           onClick={() => dispatch({ type: "draw" } as GolfSolitaireAction)}
           disabled={state.stock.length === 0}
         >Draw</button>
@@ -36,7 +37,12 @@ export function GolfSolitaireGame(
         {state.columns.map((col, ci) => (
           <div key={ci} className="golf-solitaire-col">
             {col.map((card, ri) => (
-              <div key={ri} className="golf-solitaire-cell" onClick={() => play(ci, ri)}>
+              <div
+                key={ri}
+                className="golf-solitaire-cell"
+                data-testid={`hint-target-golf-solitaire-${ci}-${ri}`}
+                onClick={() => play(ci, ri)}
+              >
                 {!state.removed[ci]?.[ri] && <CardView card={card} />}
               </div>
             ))}

@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GinRummyState } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, detectMelds, cardValue } from "./state.js";
 import { GinRummy } from "./GinRummy.js";
 
 export const ginRummySettings = {
@@ -43,5 +43,31 @@ Controls: Click the stock or discard to draw. Click a card in your hand to disca
   initialState: (seed: number, settings: GinRummySettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: GinRummyState): HintTarget | null => {
+    if (state.phase === "done" || state.phase === "knocked") return null;
+    if (state.phase === "bot-turn") return null;
+    if (state.phase === "player-draw") {
+      // Suggest taking the discard if it would join an existing meld.
+      const top = state.discardPile[state.discardPile.length - 1];
+      if (top) {
+        const cur = detectMelds([...state.playerHand]);
+        const next = detectMelds([...state.playerHand, top]);
+        if (next.deadwoodValue + cardValue(top.rank) <= cur.deadwoodValue) {
+          return { selector: '[data-testid="hint-target-gin-rummy-discard"]', pulses: 3 };
+        }
+      }
+      return { selector: '[data-testid="hint-target-gin-rummy-stock"]', pulses: 3 };
+    }
+    // player-discard: knock if eligible, else discard the highest deadwood card.
+    const meld = detectMelds([...state.playerHand]);
+    if (meld.deadwoodValue <= 10) {
+      return { selector: '[data-testid="hint-target-gin-rummy-knock"]', pulses: 3 };
+    }
+    if (meld.deadwood.length === 0) return null;
+    const worst = meld.deadwood.reduce((hi, c) =>
+      cardValue(c.rank) > cardValue(hi.rank) ? c : hi,
+    );
+    return { selector: `[data-testid="hint-target-gin-rummy-${worst.id}"]`, pulses: 3 };
+  },
   component: GinRummy,
 };

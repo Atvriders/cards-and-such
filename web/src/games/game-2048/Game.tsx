@@ -64,10 +64,10 @@ export function Game2048Game({ state, dispatch, onGameOver }: GameProps<Game2048
         ))}
       </div>
       <div className="g2048-pad">
-        <div></div><button className="g2048-btn" onClick={() => tap("up")}>↑</button><div></div>
-        <button className="g2048-btn" onClick={() => tap("left")}>←</button>
-        <button className="g2048-btn" onClick={() => tap("down")}>↓</button>
-        <button className="g2048-btn" onClick={() => tap("right")}>→</button>
+        <div></div><button className="g2048-btn" data-testid="hint-target-game-2048-up" onClick={() => tap("up")}>↑</button><div></div>
+        <button className="g2048-btn" data-testid="hint-target-game-2048-left" onClick={() => tap("left")}>←</button>
+        <button className="g2048-btn" data-testid="hint-target-game-2048-down" onClick={() => tap("down")}>↓</button>
+        <button className="g2048-btn" data-testid="hint-target-game-2048-right" onClick={() => tap("right")}>→</button>
       </div>
       <div className="g2048-hint">Use arrow keys or WASD</div>
     </div>

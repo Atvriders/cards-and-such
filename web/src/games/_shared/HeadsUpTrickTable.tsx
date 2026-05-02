@@ -52,9 +52,13 @@ export function HeadsUpTrickTable({ state, dispatch, onGameOver, isTerminal, pre
         <div className={`${prefix}-hand`}>
           {state.hands[0]!.map(card => {
             const legal = legalIds.has(card.id);
-            return legal
-              ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id })} />
-              : <Card key={card.id} card={card} className={`${prefix}-dim`} />;
+            return (
+              <div key={card.id} data-testid={`hint-target-${prefix}-${card.id}`}>
+                {legal
+                  ? <Card card={card} onClick={() => dispatch({ type: "play", cardId: card.id })} />
+                  : <Card card={card} className={`${prefix}-dim`} />}
+              </div>
+            );
           })}
         </div>
       </div>

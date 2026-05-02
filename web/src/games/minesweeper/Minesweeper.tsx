@@ -115,6 +115,7 @@ export function Minesweeper({
           return (
             <button
               key={idx}
+              data-testid={`hint-target-minesweeper-${idx}`}
               className={className}
               onClick={() => handleCellClick(row, col)}
               onContextMenu={(e) => handleContextMenu(e, row, col)}

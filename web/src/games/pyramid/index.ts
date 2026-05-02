@@ -1,6 +1,6 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PyramidState, PyramidAction } from "./state.js";
-import { initialState, reducer, isTerminal, pyramidSettings } from "./state.js";
+import { initialState, reducer, isTerminal, pyramidSettings, isAvailablePyramid } from "./state.js";
 import { Pyramid } from "./Pyramid.js";
 
 type PyramidSettings = SettingsOf<typeof pyramidSettings>;
@@ -26,5 +26,47 @@ Tips: Work from the base of the pyramid upward to expose the apex. Keep an eye o
   initialState: (seed: number, settings: PyramidSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: PyramidState): HintTarget | null => {
+    if (state.won || state.lost) return null;
+    // Collect available pyramid cards.
+    const avail: { row: number; col: number; rank: number }[] = [];
+    for (let r = 0; r < state.pyramid.length; r++) {
+      const row = state.pyramid[r]!;
+      for (let c = 0; c < row.length; c++) {
+        if (isAvailablePyramid(state.pyramid, r, c)) {
+          const cell = row[c];
+          if (cell && !cell.removed) avail.push({ row: r, col: c, rank: cell.card.rank as number });
+        }
+      }
+    }
+    // Kings remove alone.
+    const king = avail.find(a => a.rank === 13);
+    if (king) {
+      return { selector: `[data-testid="hint-target-pyramid-${king.row}-${king.col}"]`, pulses: 3 };
+    }
+    // Pairs that sum to 13.
+    for (const a of avail) {
+      for (const b of avail) {
+        if (a === b) continue;
+        if (a.rank + b.rank === 13) {
+          return { selector: `[data-testid="hint-target-pyramid-${a.row}-${a.col}"]`, pulses: 3 };
+        }
+      }
+    }
+    // Pair with waste top.
+    const wasteTop = state.waste[state.waste.length - 1];
+    if (wasteTop) {
+      const wr = wasteTop.rank as number;
+      const match = avail.find(a => a.rank + wr === 13);
+      if (match) {
+        return { selector: `[data-testid="hint-target-pyramid-${match.row}-${match.col}"]`, pulses: 3 };
+      }
+    }
+    // Otherwise draw.
+    if (state.stock.length > 0) {
+      return { selector: '[data-testid="hint-target-pyramid-stock"]', pulses: 3 };
+    }
+    return null;
+  },
   component: Pyramid,
 };

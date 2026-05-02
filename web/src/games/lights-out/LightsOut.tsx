@@ -49,6 +49,7 @@ export function LightsOut({
             return (
               <button
                 key={`${row}-${col}`}
+                data-testid={`hint-target-lights-out-${row}-${col}`}
                 className={`lights-out-cell ${on ? "on" : "off"}`}
                 onClick={() => handlePress(row, col)}
                 aria-label={`Light ${row + 1},${col + 1} ${on ? "on" : "off"}`}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClockState, ClockAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,14 @@ Scoring: +1 per flip. The game typically ends after exactly 51 flips if you win.
   initialState: (seed: number, settings: ClockSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: ClockState): HintTarget | null => {
+    if (state.won || state.gameOver) return null;
+    const current = state.piles[state.currentPileIndex];
+    if (!current) return null;
+    const hasFaceDown = current.faceUpCount < current.cards.length;
+    if (!hasFaceDown) return null;
+    // Pulse the current pile to indicate the next flip target.
+    return { selector: `[data-testid="hint-target-clock-pile-${state.currentPileIndex}"]`, pulses: 3 };
+  },
   component: Clock,
 };

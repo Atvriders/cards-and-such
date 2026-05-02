@@ -73,6 +73,7 @@ export function Scopa({
             {playerHand.map(card => (
               <div
                 key={card.id}
+                data-testid={`hint-target-scopa-${card.id}`}
                 className={`scopa-card${card.id === selectedCardId ? " selected" : ""}${card.suit === COINS_SUIT ? " coins" : ""}`}
                 style={{ color: card.suit === "♥" || card.suit === "♦" ? "#c62828" : "#333" }}
                 onClick={() => isPlayerTurn && dispatch({ type: "select", cardId: card.id } as ScopaAction)}

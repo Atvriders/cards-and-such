@@ -97,7 +97,7 @@ export function Pyramid({
                 .join(" ");
 
               return (
-                <div key={col} className="pyramid-cell">
+                <div key={col} className="pyramid-cell" data-testid={`hint-target-pyramid-${row}-${col}`}>
                   <Card
                     card={cell.card}
                     className={className}
@@ -111,7 +111,7 @@ export function Pyramid({
       </div>
 
       <div className="pyramid-bottom">
-        <div className="pyramid-stock-area">
+        <div className="pyramid-stock-area" data-testid="hint-target-pyramid-stock">
           <span className="pyramid-area-label">Stock ({state.stock.length})</span>
           {state.stock.length > 0 ? (
             <Card faceDown onClick={handleStockClick} />
