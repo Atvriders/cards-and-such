@@ -1,5 +1,6 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback, useEffect, Suspense } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
+import { Skeleton } from "../platform/Skeleton.js";
 import { GAMES } from "../games/registry.js";
 import { SettingsForm } from "../platform/game-plugin/settings.js";
 import { defaultsOf } from "../platform/game-plugin/types.js";
@@ -9,6 +10,10 @@ import { Tutorial } from "../platform/Tutorial.js";
 import { tutorialFor, hasSeenTutorial, markTutorialSeen } from "../platform/tutorials.js";
 import { Confetti } from "../platform/Confetti.js";
 import { HowToPlayModal } from "../platform/HowToPlayModal.js";
+import { PageHead } from "../platform/PageHead.js";
+import { StarRating, readRating, writeRating } from "../platform/StarRating.js";
+import { StatsPanel } from "../platform/StatsPanel.js";
+import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
 import "./PlayPage.css";
 
 function randomSeed(): number {
@@ -77,6 +82,7 @@ export default function PlayPage(): JSX.Element {
   if (!plugin) {
     return (
       <div className="play-not-found" data-testid="game-not-found">
+        <PageHead title="Game not found" />
         <p>Unknown game: {gameId}</p>
         <Link to="/">Back to lobby</Link>
       </div>
@@ -101,6 +107,15 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [showConfetti, setShowConfetti] = useState(false);
   const [elapsed, setElapsed] = useState<number>(0);
   const [bestTime, setBestTime] = useState<number | null>(() => readBestTime(plugin.id));
+  const [rating, setRating] = useState<number>(() => readRating(plugin.id));
+
+  const onRate = useCallback(
+    (next: number) => {
+      setRating(next);
+      writeRating(plugin.id, next);
+    },
+    [plugin.id],
+  );
 
   // Tick the in-game timer once per second while playing.
   useEffect(() => {
@@ -228,9 +243,15 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   );
 
   const showProminentSeed = plugin.id === "klondike" || plugin.id === "freecell" || plugin.id === "spider";
+  const progress = useMemo(() => deriveProgress(state), [state]);
 
   return (
     <div className="play-page" data-game-id={plugin.id}>
+      <PageHead
+        title={`Play ${plugin.title}`}
+        description={`Play ${plugin.title} free online — ${plugin.description}`}
+        canonical={`https://cards.waterburp.com/play/${plugin.id}`}
+      />
       <header className="play-header">
         <div className="play-header-titleblock">
           <span className={`play-category play-category--${plugin.category}`}>{plugin.category}</span>
@@ -332,6 +353,21 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         </div>
       </header>
 
+      {phase === "playing" && progress && (
+        <div
+          className="play-progress-row"
+          data-testid="play-progress"
+          style={{ margin: "0 0 1rem" }}
+        >
+          <ProgressBar
+            value={progress.value}
+            max={progress.max}
+            label={progress.label}
+            testId="play-progress-bar"
+          />
+        </div>
+      )}
+
       {plugin.howToPlay && (
         <HowToPlayModal
           open={helpOpen}
@@ -354,9 +390,20 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       )}
 
       {phase === "playing" && (
-        <section className="play-panel">
-          <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
-        </section>
+        <div className="play-with-sidebar">
+          <section className="play-panel">
+            {/* Suspense fallback shows a skeleton "loading game…" card while
+                the active plugin's component module finishes loading. Most
+                plugins are eagerly imported today, but games that use
+                React.lazy or trigger a suspending data read still benefit
+                here, and the boundary keeps render-time fallbacks scoped
+                to the play panel rather than blanking the whole page. */}
+            <Suspense fallback={<GameLoadingSkeleton />}>
+              <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
+            </Suspense>
+          </section>
+          <StatsPanel gameId={plugin.id} bestTime={bestTime} />
+        </div>
       )}
 
       {phase === "playing" && tutorialOpen && tutorialSteps && tutorialSteps.length > 0 && (
@@ -390,10 +437,50 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               {shareStatus === "copied" ? "Copied!" : shareStatus === "error" ? "Copy failed" : "Share Seed"}
             </button>
           </div>
+          <StatsPanel gameId={plugin.id} bestTime={bestTime} />
+          <div className="end-rating" data-testid="end-rating">
+            <p className="end-rating-prompt">Rate this game</p>
+            <StarRating
+              value={rating}
+              onChange={onRate}
+              testId="end-rating-stars"
+              ariaLabel={`Rate ${plugin.title}`}
+            />
+            {rating > 0 && (
+              <p className="end-rating-thanks" data-testid="end-rating-thanks">
+                Thanks — you rated this {rating} star{rating === 1 ? "" : "s"}.
+              </p>
+            )}
+          </div>
         </section>
       )}
 
       {showConfetti && <Confetti onDone={() => setShowConfetti(false)} />}
+    </div>
+  );
+}
+
+/**
+ * Suspense fallback shown while a lazily-loaded game component is fetching.
+ *
+ * Sized to roughly mirror a real play panel — header line, status row,
+ * playfield rectangle — so the layout doesn't jump when the real game
+ * mounts. Includes a polite "Loading game…" caption for screen readers.
+ */
+function GameLoadingSkeleton(): JSX.Element {
+  return (
+    <div className="play-game-loading" data-testid="play-game-loading" role="status" aria-live="polite">
+      <div className="play-game-loading-caption">Loading game…</div>
+      <div className="play-game-loading-row">
+        <Skeleton variant="text-line" width={120} />
+        <Skeleton variant="text-line" width={64} />
+      </div>
+      <Skeleton variant="rect" width="100%" height={320} />
+      <div className="play-game-loading-row">
+        <Skeleton variant="text-line" width={80} />
+        <Skeleton variant="text-line" width={80} />
+        <Skeleton variant="text-line" width={80} />
+      </div>
     </div>
   );
 }
