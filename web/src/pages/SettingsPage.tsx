@@ -23,6 +23,7 @@ import {
 import { LS_SOUND_ON } from "../platform/sounds.js";
 import { useToast } from "../platform/ui/Toast.js";
 import { t } from "../platform/i18n.js";
+import { resetWelcomeTutorial } from "../platform/tutorials.js";
 import "./SettingsPage.css";
 
 type CardBack = "classic-blue" | "red-weave" | "plain";
@@ -560,6 +561,28 @@ export default function SettingsPage(): JSX.Element {
           <p className="settings-hint">
             Reduced/off matches the <code>prefers-reduced-motion</code> behavior.
           </p>
+        </div>
+
+        <div className="settings-divider" role="presentation" />
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Welcome tutorial</div>
+            <p className="settings-hint">
+              Re-open the four-step intro carousel.
+            </p>
+          </div>
+          <button
+            type="button"
+            className="settings-mini-btn"
+            data-testid="settings-show-tutorial"
+            onClick={() => {
+              resetWelcomeTutorial();
+              window.dispatchEvent(new CustomEvent("cards:open-welcome-tutorial"));
+            }}
+          >
+            Show again
+          </button>
         </div>
       </section>
 

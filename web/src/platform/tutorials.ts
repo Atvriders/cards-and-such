@@ -203,3 +203,35 @@ export function markTutorialSeen(gameId: string): void {
     /* ignore quota / disabled storage */
   }
 }
+
+/**
+ * The first-run welcome carousel uses a reserved key inside the same
+ * `cards-tutorial-seen` SeenMap so all tutorial-seen flags live together.
+ * The reserved key (double-underscore prefix) cannot collide with a real
+ * game id, which are slug strings.
+ */
+const WELCOME_KEY = "__welcome__";
+
+export function hasSeenWelcomeTutorial(): boolean {
+  return !!readSeen()[WELCOME_KEY];
+}
+
+export function markWelcomeTutorialSeen(): void {
+  try {
+    const map = readSeen();
+    map[WELCOME_KEY] = true;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+  } catch {
+    /* ignore quota / disabled storage */
+  }
+}
+
+export function resetWelcomeTutorial(): void {
+  try {
+    const map = readSeen();
+    delete map[WELCOME_KEY];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+  } catch {
+    /* ignore quota / disabled storage */
+  }
+}

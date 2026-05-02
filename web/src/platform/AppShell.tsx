@@ -13,6 +13,11 @@ import {
 import { GAMES } from "../games/registry.js";
 import { pickQuickstart } from "./quickstart.js";
 import { t } from "./i18n.js";
+import { WelcomeTutorial } from "./Tutorial.js";
+import {
+  hasSeenWelcomeTutorial,
+  markWelcomeTutorialSeen,
+} from "./tutorials.js";
 import "./AppShell.css";
 
 const CHANGELOG: Array<{ title: string; detail: string }> = [
@@ -40,8 +45,27 @@ export default function AppShell(): JSX.Element {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [soundOn, setSoundOnState] = useState<boolean>(() => isSoundOn());
   const [surpriseSplash, setSurpriseSplash] = useState<string | null>(null);
+  // First-run welcome carousel — opens automatically on a fresh device,
+  // and re-opens on demand via the storage signal "cards-welcome-tutorial:open".
+  const [welcomeOpen, setWelcomeOpen] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return !hasSeenWelcomeTutorial();
+    } catch {
+      return false;
+    }
+  });
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const categoriesRef = useRef<HTMLDivElement | null>(null);
+
+  // Settings → Gameplay re-opens the carousel by dispatching a custom event.
+  // Listening here keeps AppShell the single mount point.
+  useEffect(() => {
+    const onOpen = (): void => setWelcomeOpen(true);
+    window.addEventListener("cards:open-welcome-tutorial", onOpen as EventListener);
+    return () =>
+      window.removeEventListener("cards:open-welcome-tutorial", onOpen as EventListener);
+  }, []);
 
   // Close the categories dropdown on outside click / Escape.
   useEffect(() => {
@@ -469,6 +493,19 @@ export default function AppShell(): JSX.Element {
             </span>
           </div>
         </div>
+      ) : null}
+
+      {welcomeOpen ? (
+        <WelcomeTutorial
+          onComplete={() => {
+            markWelcomeTutorialSeen();
+            setWelcomeOpen(false);
+          }}
+          onSkip={() => {
+            markWelcomeTutorialSeen();
+            setWelcomeOpen(false);
+          }}
+        />
       ) : null}
 
       {whatsNewOpen ? (

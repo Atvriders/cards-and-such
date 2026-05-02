@@ -29,9 +29,9 @@
 
 .tutorial-tooltip {
   position: fixed;
-  background: #1b2230;
-  color: #f1f5f9;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--surface, #1b2230);
+  color: var(--text, #f1f5f9);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
   border-radius: 10px;
   padding: 14px 16px;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
@@ -50,7 +50,7 @@
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-muted, #94a3b8);
 }
 
 .tutorial-tooltip-title {
@@ -63,7 +63,7 @@
   margin: 0 0 12px;
   font-size: 14px;
   line-height: 1.45;
-  color: #e2e8f0;
+  color: var(--text, #e2e8f0);
 }
 
 .tutorial-tooltip-actions {
@@ -83,8 +83,8 @@
 
 .tutorial-btn-ghost {
   background: transparent;
-  color: #cbd5e1;
-  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text, #cbd5e1);
+  border-color: var(--border, rgba(255, 255, 255, 0.15));
 }
 
 .tutorial-btn-ghost:hover {
@@ -92,10 +92,240 @@
 }
 
 .tutorial-btn-primary {
-  background: #3b82f6;
-  color: white;
+  background: var(--accent, #3b82f6);
+  color: var(--accent-contrast, white);
 }
 
 .tutorial-btn-primary:hover {
-  background: #2563eb;
+  background: var(--accent-strong, #2563eb);
+}
+
+/* -------------------------------------------------------------------------
+ * Welcome carousel — first-run onboarding overlay
+ * ------------------------------------------------------------------------- */
+
+.tut-welcome-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.tut-welcome-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  pointer-events: auto;
+  animation: tut-welcome-fade-in 200ms ease-out;
+}
+
+.tut-welcome-card {
+  position: relative;
+  pointer-events: auto;
+  width: min(92vw, 420px);
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--surface, #1b2230);
+  color: var(--text, #f1f5f9);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  border-radius: 14px;
+  padding: 22px 24px 18px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  text-align: center;
+  font-family: inherit;
+  animation: tut-welcome-step-in 240ms ease-out;
+}
+
+.tut-welcome-card:focus {
+  outline: none;
+}
+
+.tut-welcome-illu {
+  width: 96px;
+  height: 96px;
+  margin: 4px auto 14px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.tut-welcome-illu svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tut-welcome-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text, #f1f5f9);
+}
+
+.tut-welcome-body {
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted, #cbd5e1);
+}
+
+.tut-welcome-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.tut-welcome-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: var(--border, rgba(255, 255, 255, 0.18));
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.tut-welcome-dot:hover {
+  background: var(--text-muted, #94a3b8);
+}
+
+.tut-welcome-dot.is-active {
+  background: var(--accent, #3b82f6);
+  transform: scale(1.25);
+}
+
+.tut-welcome-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tut-welcome-actions-spacer {
+  flex: 1;
+}
+
+.tut-welcome-btn {
+  font: inherit;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.tut-welcome-btn-ghost {
+  background: transparent;
+  color: var(--text-muted, #cbd5e1);
+  border-color: var(--border, rgba(255, 255, 255, 0.15));
+}
+
+.tut-welcome-btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text, #f1f5f9);
+}
+
+.tut-welcome-btn-ghost:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tut-welcome-btn-primary {
+  background: var(--accent, #3b82f6);
+  color: var(--accent-contrast, white);
+  border-color: var(--accent, #3b82f6);
+}
+
+.tut-welcome-btn-primary:hover {
+  background: var(--accent-strong, #2563eb);
+  border-color: var(--accent-strong, #2563eb);
+}
+
+/* Confirm-skip nested dialog ---------------------------------------------- */
+
+.tut-welcome-confirm {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  animation: tut-welcome-fade-in 160ms ease-out;
+}
+
+.tut-welcome-confirm-card {
+  width: min(86vw, 320px);
+  background: var(--surface, #1b2230);
+  color: var(--text, #f1f5f9);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  border-radius: 12px;
+  padding: 18px 20px 16px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+
+.tut-welcome-confirm-card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tut-welcome-confirm-card p {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.tut-welcome-confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+@keyframes tut-welcome-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes tut-welcome-step-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced-motion: drop the animations / dot pulse. Honors both the OS-level
+ * `prefers-reduced-motion` query and the in-app data-animations toggle
+ * (set on <html> by SettingsPage). */
+@media (prefers-reduced-motion: reduce) {
+  .tut-welcome-backdrop,
+  .tut-welcome-card,
+  .tut-welcome-confirm {
+    animation: none;
+  }
+  .tut-welcome-dot {
+    transition: none;
+  }
+  .tut-welcome-dot.is-active {
+    transform: none;
+  }
+  .tutorial-highlight {
+    animation: none;
+  }
+}
+
+:root[data-animations="reduced"] .tut-welcome-backdrop,
+:root[data-animations="reduced"] .tut-welcome-card,
+:root[data-animations="reduced"] .tut-welcome-confirm,
+:root[data-animations="off"] .tut-welcome-backdrop,
+:root[data-animations="off"] .tut-welcome-card,
+:root[data-animations="off"] .tut-welcome-confirm {
+  animation: none;
+}
+
+:root[data-animations="off"] .tutorial-highlight {
+  animation: none;
 }
