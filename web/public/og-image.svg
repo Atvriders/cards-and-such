@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a6c3f"/>
+      <stop offset="100%" stop-color="#0f4527"/>
+    </linearGradient>
+    <linearGradient id="cardBack" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2c8a55"/>
+      <stop offset="100%" stop-color="#0b3a23"/>
+    </linearGradient>
+    <pattern id="weave" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="14" height="14" fill="transparent"/>
+      <path d="M0 7 H14" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+      <path d="M7 0 V14" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- felt background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#weave)"/>
+
+  <!-- decorative back-card (left) -->
+  <g transform="translate(80 95) rotate(-6 180 220)">
+    <rect x="0" y="0" width="320" height="440" rx="24" fill="url(#cardBack)" stroke="#5b6cff" stroke-width="4"/>
+    <rect x="18" y="18" width="284" height="404" rx="16" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+    <g fill="rgba(255,255,255,0.12)">
+      <circle cx="160" cy="220" r="80"/>
+    </g>
+    <text x="160" y="240" text-anchor="middle" font-family="Georgia, serif" font-size="120" fill="#fff" opacity="0.85">♠</text>
+  </g>
+
+  <!-- foreground card (right) -->
+  <g transform="translate(360 80) rotate(4 180 220)">
+    <rect x="0" y="0" width="340" height="460" rx="26" fill="#fafafa" stroke="#5b6cff" stroke-width="4"/>
+    <text x="32" y="70" font-family="Georgia, serif" font-size="48" fill="#c0392b">A</text>
+    <text x="32" y="115" font-family="Georgia, serif" font-size="48" fill="#c0392b">♥</text>
+    <text x="170" y="270" text-anchor="middle" font-family="Georgia, serif" font-size="200" fill="#c0392b">♥</text>
+    <text x="308" y="430" text-anchor="end" font-family="Georgia, serif" font-size="48" fill="#c0392b">A</text>
+    <text x="308" y="395" text-anchor="end" font-family="Georgia, serif" font-size="48" fill="#c0392b">♥</text>
+  </g>
+
+  <!-- title block -->
+  <g transform="translate(740 180)">
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="78" fill="#fff">
+      Cards &amp; Such
+    </text>
+    <text x="0" y="58" font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="32" fill="rgba(255,255,255,0.85)">
+      4,500+ classic + modern games
+    </text>
+    <text x="0" y="120" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="22" fill="rgba(255,255,255,0.7)">
+      Solitaire · Cards · Dice · Board · Arcade
+    </text>
+    <text x="0" y="160" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="22" fill="rgba(255,255,255,0.7)">
+      Free · No install · Plays in your browser
+    </text>
+
+    <!-- domain pill -->
+    <g transform="translate(0 220)">
+      <rect x="0" y="0" width="280" height="48" rx="24" fill="rgba(0,0,0,0.35)" stroke="rgba(255,255,255,0.2)"/>
+      <text x="140" y="32" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="20" fill="#e6f7ec">
+        cards.waterburp.com
+      </text>
+    </g>
+  </g>
+</svg>

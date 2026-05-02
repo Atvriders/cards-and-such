@@ -1,9 +1,10 @@
 {
   "name": "Cards and Such",
   "short_name": "Cards",
+  "description": "Free in-browser catalog of 4,500+ solitaire, card, dice, board, and arcade games.",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#0b0b12",
+  "theme_color": "#1a6c3f",
   "background_color": "#0b0b12",
   "icons": [
     {
@@ -17,6 +18,36 @@
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daily",
+      "short_name": "Daily",
+      "description": "Today's seeded daily pick",
+      "url": "/daily",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Stats",
+      "short_name": "Stats",
+      "description": "Your play stats and achievements",
+      "url": "/stats",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Lobby",
+      "short_name": "Lobby",
+      "description": "Browse the full game catalog",
+      "url": "/",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Search",
+      "short_name": "Search",
+      "description": "Search games by name",
+      "url": "/search",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192", "type": "image/svg+xml" }]
     }
   ]
 }
