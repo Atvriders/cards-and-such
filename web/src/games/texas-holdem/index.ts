@@ -1,8 +1,53 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TexasHoldemState, TexasHoldemAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bestFiveOf } from "./state.js";
+import { rankHand, type HandClass } from "../../engines/deck/ranking.js";
 import { TexasHoldem } from "./TexasHoldem.js";
+
+const HOLDEM_CLASS_ORDER: HandClass[] = [
+  "high-card", "one-pair", "two-pair", "three-of-a-kind",
+  "straight", "flush", "full-house", "four-of-a-kind", "straight-flush",
+];
+
+function holdemHint(state: TexasHoldemState): HintTarget | null {
+  if (state.phase === "waiting" || state.phase === "showdown") {
+    if (state.bankroll <= 0 || state.botBankroll <= 0) return null;
+    return { selector: '[data-testid="hint-target-texas-holdem-deal"]', pulses: 3 };
+  }
+  if (!state.playerTurn) return null;
+  const toCall = state.botBet - state.playerBet;
+  // Compute hand strength using available cards.
+  const allCards = [...state.playerHole, ...state.community];
+  let strength = -1;
+  if (allCards.length >= 5) {
+    const five = bestFiveOf(allCards);
+    strength = HOLDEM_CLASS_ORDER.indexOf(rankHand(five).class);
+  } else if (state.playerHole.length === 2) {
+    // Pre-flop heuristic: pair, suited, or both > 10 = decent.
+    const [a, b] = state.playerHole;
+    const ra = a!.rank === 1 ? 14 : a!.rank;
+    const rb = b!.rank === 1 ? 14 : b!.rank;
+    const isPair = ra === rb;
+    const isSuited = a!.suit === b!.suit;
+    const high = Math.max(ra, rb);
+    if (isPair && ra >= 10) strength = 4;
+    else if (isPair) strength = 2;
+    else if (isSuited && high >= 12) strength = 2;
+    else if (high >= 12) strength = 1;
+    else strength = 0;
+  }
+  if (toCall === 0) {
+    return { selector: '[data-testid="hint-target-texas-holdem-check"]', pulses: 3 };
+  }
+  // Pot odds.
+  const equity = strength >= 0 ? (strength + 1) / 9 : 0.15;
+  const odds = toCall / (state.pot + toCall);
+  if (equity > odds) {
+    return { selector: '[data-testid="hint-target-texas-holdem-call"]', pulses: 3 };
+  }
+  return { selector: '[data-testid="hint-target-texas-holdem-fold"]', pulses: 3 };
+}
 
 export const texasHoldemSettings = {
   startingBankroll: {
@@ -42,5 +87,6 @@ Settings: Starting Bankroll ($500/$1000/$5000), Blind Levels (2/4, 5/10, 10/20).
   initialState: (seed: number, settings: TexasHoldemSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: holdemHint,
   component: TexasHoldem,
 };

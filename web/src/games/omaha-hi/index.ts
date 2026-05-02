@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OmahaHiState, OmahaHiAction, OmahaHiSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bestOmaha } from "./state.js";
+import { handStrength } from "../_shared/poker.js";
 import { OmahaHiGame } from "./Game.js";
 
 const settings = {
@@ -21,5 +22,29 @@ export const omahaHiPlugin: GamePlugin<OmahaHiState, OmahaHiAction, typeof setti
   initialState: (seed: number, s: S) => initialState(seed, s as OmahaHiSettings),
   reducer,
   isTerminal,
+  hint: (state: OmahaHiState): HintTarget | null => {
+    if (state.phase === "done") return null;
+    if (state.phase === "showdown" || (state.phase === "preflop" && state.player.hole.length === 0)) {
+      return { selector: '[data-testid="hint-target-omaha-hi-deal"]', pulses: 3 };
+    }
+    if (state.toAct !== "player") return null;
+    const toCall = Math.max(0, state.cpu.bet - state.player.bet);
+    let strength = 0.2;
+    if (state.community.length >= 3 && state.player.hole.length === 4) {
+      strength = handStrength(bestOmaha(state.player.hole, state.community));
+    } else if (state.player.hole.length === 4) {
+      // Pre-flop heuristic.
+      const ranks = state.player.hole.map((c) => (c.rank === 1 ? 14 : c.rank));
+      const counts = new Map<number, number>();
+      for (const r of ranks) counts.set(r, (counts.get(r) ?? 0) + 1);
+      const hasPair = [...counts.values()].some((v) => v >= 2);
+      const high = Math.max(...ranks);
+      strength = 0.2 + (high - 2) / 30 + (hasPair ? 0.12 : 0);
+    }
+    if (toCall === 0) return { selector: '[data-testid="hint-target-omaha-hi-check"]', pulses: 3 };
+    const odds = toCall / (state.pot + toCall);
+    if (strength > odds) return { selector: '[data-testid="hint-target-omaha-hi-call"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-omaha-hi-fold"]', pulses: 3 };
+  },
   component: OmahaHiGame,
 };

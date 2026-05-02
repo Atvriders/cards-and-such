@@ -86,17 +86,17 @@ export function TexasHoldem({
 
       <div className="th-actions">
         {(phase === "waiting" || phase === "showdown") && !terminal && (
-          <button className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
+          <button data-testid="hint-target-texas-holdem-deal" className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
         )}
         {isActive && playerTurn && (
           <>
-            <button className="btn-fold" onClick={() => dis({ type: "fold" })}>Fold</button>
-            {canCheck && <button className="btn-check" onClick={() => dis({ type: "check" })}>Check</button>}
+            <button data-testid="hint-target-texas-holdem-fold" className="btn-fold" onClick={() => dis({ type: "fold" })}>Fold</button>
+            {canCheck && <button data-testid="hint-target-texas-holdem-check" className="btn-check" onClick={() => dis({ type: "check" })}>Check</button>}
             {canCall && (
-              <button className="btn-call" onClick={() => dis({ type: "call" })}>Call ${toCall}</button>
+              <button data-testid="hint-target-texas-holdem-call" className="btn-call" onClick={() => dis({ type: "call" })}>Call ${toCall}</button>
             )}
             {canRaise && (
-              <button className="btn-raise" onClick={() => dis({ type: "raise" })}>
+              <button data-testid="hint-target-texas-holdem-raise" className="btn-raise" onClick={() => dis({ type: "raise" })}>
                 {toCall > 0 ? `Raise $${toCall + betAmt}` : `Bet $${betAmt}`}
               </button>
             )}

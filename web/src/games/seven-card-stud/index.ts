@@ -1,8 +1,43 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SevenCardStudState, StudAction } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, bestFiveOf } from "./state.js";
+import { rankHand, type HandClass } from "../../engines/deck/ranking.js";
 import { SevenCardStud } from "./SevenCardStud.js";
+
+const STUD_CLASS_ORDER: HandClass[] = [
+  "high-card", "one-pair", "two-pair", "three-of-a-kind",
+  "straight", "flush", "full-house", "four-of-a-kind", "straight-flush",
+];
+
+function studHint(state: SevenCardStudState): HintTarget | null {
+  if (state.phase !== "betting") {
+    if (state.player.bankroll <= 0 || state.bot.bankroll <= 0) return null;
+    return { selector: '[data-testid="hint-target-seven-card-stud-deal"]', pulses: 3 };
+  }
+  if (!state.playerTurn) return null;
+  const toCall = state.player.bet < state.bot.bet ? state.bot.bet - state.player.bet : 0;
+  let strength = -1;
+  if (state.player.cards.length >= 5) {
+    strength = STUD_CLASS_ORDER.indexOf(rankHand(bestFiveOf(state.player.cards)).class);
+  } else {
+    // Early streets: count pairs in 3-4 cards.
+    const ranks = state.player.cards.map((c) => c.rank);
+    const counts = new Map<number, number>();
+    for (const r of ranks) counts.set(r, (counts.get(r) ?? 0) + 1);
+    const maxCount = Math.max(0, ...counts.values());
+    strength = maxCount >= 3 ? 3 : maxCount === 2 ? 1 : 0;
+  }
+  if (toCall === 0) {
+    return { selector: '[data-testid="hint-target-seven-card-stud-check"]', pulses: 3 };
+  }
+  const equity = (strength + 1) / 9;
+  const odds = toCall / (state.pot + toCall);
+  if (equity > odds) {
+    return { selector: '[data-testid="hint-target-seven-card-stud-call"]', pulses: 3 };
+  }
+  return { selector: '[data-testid="hint-target-seven-card-stud-fold"]', pulses: 3 };
+}
 
 export const sevenCardStudSettings = {
   startingBankroll: {
@@ -42,5 +77,6 @@ The game continues until one player runs out of chips. Settings: Starting Bankro
   initialState: (seed: number, settings: SevenCardStudSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: studHint,
   component: SevenCardStud,
 };

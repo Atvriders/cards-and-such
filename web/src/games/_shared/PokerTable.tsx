@@ -116,7 +116,7 @@ export function PokerTable<S>(p: PokerTableProps<S>): JSX.Element {
 
       <div className={cls("actions")}>
         {((state.phase === "preflop" && state.player.hole.length === 0) || state.phase === "showdown") ? (
-          <button className={`${cls("btn")} ${cls("deal")}`} onClick={p.onDeal}>
+          <button data-testid={`hint-target-${prefix.replace(/-$/, "")}-deal`} className={`${cls("btn")} ${cls("deal")}`} onClick={p.onDeal}>
             {state.handsPlayed === 0 ? "Deal" : "Next Hand"}
           </button>
         ) : state.pendingDiscard ? (
@@ -125,9 +125,9 @@ export function PokerTable<S>(p: PokerTableProps<S>): JSX.Element {
           </div>
         ) : (
           <>
-            <button className={`${cls("btn")} ${cls("fold")}`} aria-label="Fold (F)" onClick={p.onFold} disabled={!canAct}>Fold</button>
-            <button className={cls("btn")} aria-label="Check (C)" onClick={p.onCheck} disabled={!canCheck}>Check</button>
-            <button className={cls("btn")} aria-label={`Call ${toCall > 0 ? `$${toCall}` : ""} (C)`} onClick={p.onCall} disabled={!canCall}>
+            <button data-testid={`hint-target-${prefix.replace(/-$/, "")}-fold`} className={`${cls("btn")} ${cls("fold")}`} aria-label="Fold (F)" onClick={p.onFold} disabled={!canAct}>Fold</button>
+            <button data-testid={`hint-target-${prefix.replace(/-$/, "")}-check`} className={cls("btn")} aria-label="Check (C)" onClick={p.onCheck} disabled={!canCheck}>Check</button>
+            <button data-testid={`hint-target-${prefix.replace(/-$/, "")}-call`} className={cls("btn")} aria-label={`Call ${toCall > 0 ? `$${toCall}` : ""} (C)`} onClick={p.onCall} disabled={!canCall}>
               Call {toCall > 0 ? `$${toCall}` : ""}
             </button>
             <div className={cls("raise")}>
@@ -140,7 +140,7 @@ export function PokerTable<S>(p: PokerTableProps<S>): JSX.Element {
                 onChange={(e) => setRaiseAmt(parseInt(e.target.value, 10))}
                 disabled={!canRaise}
               />
-              <button className={`${cls("btn")} ${cls("raisebtn")}`} aria-label={`Raise $${raiseAmt} (R)`} onClick={() => p.onRaise(raiseAmt)} disabled={!canRaise}>
+              <button data-testid={`hint-target-${prefix.replace(/-$/, "")}-raise`} className={`${cls("btn")} ${cls("raisebtn")}`} aria-label={`Raise $${raiseAmt} (R)`} onClick={() => p.onRaise(raiseAmt)} disabled={!canRaise}>
                 Raise ${raiseAmt}
               </button>
             </div>

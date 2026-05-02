@@ -1,5 +1,5 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import { initialState, reducer, isTerminal, type PalaceState, type PalaceAction } from "./state.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
+import { initialState, reducer, isTerminal, canPlay, activeZone, type PalaceState, type PalaceAction } from "./state.js";
 import { PalaceGame } from "./Game.js";
 
 export const palaceSettings = {
@@ -25,5 +25,34 @@ The first player to get rid of all cards — hand, face-up, and face-down — wi
   initialState,
   reducer,
   isTerminal,
+  hint: (state: PalaceState): HintTarget | null => {
+    if (state.phase === "done" || state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    const me = state.players[0];
+    if (!me) return null;
+    const zone = activeZone(me);
+    if (zone === "tableDown") {
+      // Blind: just pulse first face-down card.
+      const c = me.tableDown[0];
+      if (c) return { selector: `[data-testid="hint-target-palace-${c.id}"]`, pulses: 3 };
+      return null;
+    }
+    const source = zone === "hand" ? me.hand : me.tableUp;
+    // Prefer playing the lowest-rank legal card; reserve 2s and 10s.
+    const legal = source.filter((c) => canPlay(c, state.discardPile));
+    if (legal.length === 0) {
+      if (state.discardPile.length > 0) {
+        return { selector: '[data-testid="hint-target-palace-pickup"]', pulses: 3 };
+      }
+      return null;
+    }
+    const ranked = [...legal].sort((a, b) => {
+      // Save specials for later: rank 2 (wild) and 10 (burn) get bumped to last.
+      const score = (r: number): number => (r === 2 ? 100 : r === 10 ? 99 : r === 1 ? 14 : r);
+      return score(a.rank) - score(b.rank);
+    });
+    const choice = ranked[0]!;
+    return { selector: `[data-testid="hint-target-palace-${choice.id}"]`, pulses: 3 };
+  },
   component: PalaceGame,
 };

@@ -1,7 +1,7 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CanastaState } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { initialState, reducer, isTerminal, isWild, isValidMeld, cardPoints } from "./state.js";
 import { Canasta } from "./Canasta.js";
 
 export const canastaSettings = {
@@ -50,5 +50,47 @@ Controls: Draw from stock or click discard pile. Click cards to select, then Mel
   initialState: (seed: number, s: CanastaSettingsRaw) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: CanastaState): HintTarget | null => {
+    if (state.phase === "done" || state.phase === "bot-turn") return null;
+    if (state.phase === "player-draw") {
+      return { selector: '[data-testid="hint-target-canasta-draw-stock"]', pulses: 3 };
+    }
+    // player-meld: pulse a card that completes a 3-meld OR can lay off onto an existing meld.
+    const hand = state.hands[0] ?? [];
+    if (hand.length === 0) return null;
+    const myMelds = state.tableMelds.filter((m) => m.owner === 0);
+    // Lay-off candidate: same rank as an existing meld of mine.
+    for (const c of hand) {
+      if (isWild(c)) continue;
+      for (const m of myMelds) {
+        const naturalRank = m.cards.filter((x) => !isWild(x))[0]?.rank;
+        if (naturalRank !== undefined && c.rank === naturalRank) {
+          return { selector: `[data-testid="hint-target-canasta-${c.id}"]`, pulses: 3 };
+        }
+      }
+    }
+    // Try a 3-card meld using cards in hand (same rank, allow up to 1 wild).
+    const buckets = new Map<number, typeof hand[number][]>();
+    for (const c of hand) {
+      if (isWild(c) || c.rank === 3) continue;
+      const arr = buckets.get(c.rank) ?? [];
+      arr.push(c);
+      buckets.set(c.rank, arr);
+    }
+    const wilds = hand.filter((c) => isWild(c));
+    for (const [, group] of buckets) {
+      const trio = group.length >= 3 ? group.slice(0, 3) : (group.length >= 2 && wilds.length >= 1 ? [...group.slice(0, 2), wilds[0]!] : null);
+      if (trio && isValidMeld(trio)) {
+        return { selector: `[data-testid="hint-target-canasta-${trio[0]!.id}"]`, pulses: 3 };
+      }
+    }
+    // Fallback: highest-value non-wild card to discard.
+    const nonWilds = hand.filter((c) => !isWild(c));
+    if (nonWilds.length === 0) return null;
+    const worst = nonWilds.reduce((hi, c) =>
+      cardPoints(c.rank) > cardPoints(hi.rank) ? c : hi,
+    );
+    return { selector: `[data-testid="hint-target-canasta-${worst.id}"]`, pulses: 3 };
+  },
   component: Canasta,
 };

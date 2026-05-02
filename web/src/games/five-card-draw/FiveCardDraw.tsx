@@ -86,22 +86,22 @@ export function FiveCardDraw({
 
       <div className="fcd-actions">
         {(phase === "waiting" || phase === "showdown") && !terminal && (
-          <button className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
+          <button data-testid="hint-target-five-card-draw-deal" className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
         )}
         {isBetting && playerTurn && (
           <>
-            <button className="btn-fold" onClick={() => dis({ type: "fold" })}>Fold</button>
-            {canCheck && <button className="btn-check" onClick={() => dis({ type: "check" })}>Check</button>}
-            {canCall && <button className="btn-call" onClick={() => dis({ type: "call" })}>Call ${toCall}</button>}
+            <button data-testid="hint-target-five-card-draw-fold" className="btn-fold" onClick={() => dis({ type: "fold" })}>Fold</button>
+            {canCheck && <button data-testid="hint-target-five-card-draw-check" className="btn-check" onClick={() => dis({ type: "check" })}>Check</button>}
+            {canCall && <button data-testid="hint-target-five-card-draw-call" className="btn-call" onClick={() => dis({ type: "call" })}>Call ${toCall}</button>}
             {canRaise && (
-              <button className="btn-raise" onClick={() => dis({ type: "raise" })}>
+              <button data-testid="hint-target-five-card-draw-raise" className="btn-raise" onClick={() => dis({ type: "raise" })}>
                 {toCall > 0 ? `Raise $${toCall + ante}` : `Bet $${ante}`}
               </button>
             )}
           </>
         )}
         {isDraw && (
-          <button className="btn-draw" onClick={() => dis({ type: "draw" })}>
+          <button data-testid="hint-target-five-card-draw-draw" className="btn-draw" onClick={() => dis({ type: "draw" })}>
             Draw ({selectedToDiscard.length === 0 ? "Stand Pat" : `${selectedToDiscard.length} new card${selectedToDiscard.length !== 1 ? "s" : ""}`})
           </button>
         )}

@@ -73,14 +73,14 @@ export function Rummy500({
       {/* Draw area */}
       {!done && phase === "player-draw" && (
         <div className="rummy500-draw-area">
-          <div className="rummy500-pile">
+          <div className="rummy500-pile" data-testid="hint-target-rummy-500-draw-stock">
             Stock
             <div
               className="rummy500-card-back"
               onClick={() => dispatch({ type: "draw-stock" } as Rummy500Action)}
             />
           </div>
-          <div className="rummy500-pile">
+          <div className="rummy500-pile" data-testid="hint-target-rummy-500-draw-discard">
             Discard {topDiscard ? "" : "(empty)"}
             {topDiscard && (
               <Card
@@ -165,22 +165,25 @@ export function Rummy500({
             const selected = selectedIds.includes(card.id);
             const isLayoff = layoffCard === card.id;
             const clickable = !done && (phase === "player-meld");
-            return clickable
-              ? (
-                <Card
-                  key={card.id}
-                  card={card}
-                  className={selected || isLayoff ? "selected" : ""}
-                  onClick={() => {
-                    if (layoffCard !== null) {
-                      handleLayoffSelect(card.id);
-                    } else {
-                      toggleCard(card.id);
-                    }
-                  }}
-                />
-              )
-              : <Card key={card.id} card={card} className="dim" />;
+            return (
+              <span key={card.id} data-testid={`hint-target-rummy-500-${card.id}`}>
+                {clickable
+                  ? (
+                    <Card
+                      card={card}
+                      className={selected || isLayoff ? "selected" : ""}
+                      onClick={() => {
+                        if (layoffCard !== null) {
+                          handleLayoffSelect(card.id);
+                        } else {
+                          toggleCard(card.id);
+                        }
+                      }}
+                    />
+                  )
+                  : <Card card={card} className="dim" />}
+              </span>
+            );
           })}
       </div>
 

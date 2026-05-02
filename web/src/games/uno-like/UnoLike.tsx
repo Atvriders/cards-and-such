@@ -42,6 +42,7 @@ export function UnoLike({ state, dispatch }: GameProps<UnoLikeState & { settings
       <div className="uno-center">
         <div className="uno-discard">{renderCard(state.discardTop)}</div>
         <button
+          data-testid="hint-target-uno-like-draw"
           className="uno-draw"
           onClick={() => dispatch({ type: "draw" })}
           disabled={state.turn !== 0 || state.winner !== null}

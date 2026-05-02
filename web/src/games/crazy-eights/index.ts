@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrazyEightsState, CrazyEightsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CrazyEights } from "./CrazyEights.js";
@@ -45,5 +45,23 @@ Tips: Hold 8s in reserve and play them to deny opponents their suit. If you have
   initialState,
   reducer,
   isTerminal,
+  hint: (state: CrazyEightsState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    const hand = state.hands[0] ?? [];
+    const top = state.discardTop;
+    const suit = state.activeSuit;
+    // 1) Prefer a non-8 card matching suit or rank.
+    const match = hand.find((c) => c.rank !== 8 && (c.suit === suit || c.rank === top.rank));
+    if (match) return { selector: `[data-testid="hint-target-crazy-eights-${match.id}"]`, pulses: 3 };
+    // 2) Else play an 8 (wild).
+    const eight = hand.find((c) => c.rank === 8);
+    if (eight) return { selector: `[data-testid="hint-target-crazy-eights-${eight.id}"]`, pulses: 3 };
+    // 3) Otherwise pulse Draw or Pass.
+    if (state.pendingDraw) {
+      return { selector: '[data-testid="hint-target-crazy-eights-pass"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-crazy-eights-draw"]', pulses: 3 };
+  },
   component: CrazyEights,
 };

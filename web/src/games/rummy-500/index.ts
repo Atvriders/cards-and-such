@@ -1,7 +1,10 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Rummy500State } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import {
+  initialState, reducer, isTerminal,
+  isValidMeld, canLayOffCard, cardDeadwoodValue,
+} from "./state.js";
 import { Rummy500 } from "./Rummy500.js";
 
 export const rummy500Settings = {
@@ -51,5 +54,46 @@ Controls: During your meld phase, click cards to select them, then click "Meld" 
     initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: Rummy500State): HintTarget | null => {
+    if (state.phase === "done" || state.phase === "bot-turn") return null;
+    if (state.phase === "player-draw") {
+      // Prefer the discard if it would extend an existing meld of yours.
+      const top = state.discardPile[state.discardPile.length - 1];
+      if (top) {
+        const myMelds = state.tableMelds.filter((m) => m.owner === 0);
+        if (myMelds.some((m) => canLayOffCard(top, m))) {
+          return { selector: '[data-testid="hint-target-rummy-500-draw-discard"]', pulses: 3 };
+        }
+      }
+      return { selector: '[data-testid="hint-target-rummy-500-draw-stock"]', pulses: 3 };
+    }
+    // player-meld: pulse a hand card that fits into a layoff or completes a 3-meld.
+    const hand = state.hands[0] ?? [];
+    const myMelds = state.tableMelds.filter((m) => m.owner === 0);
+    for (const c of hand) {
+      for (const m of myMelds) {
+        if (canLayOffCard(c, m)) {
+          return { selector: `[data-testid="hint-target-rummy-500-${c.id}"]`, pulses: 3 };
+        }
+      }
+    }
+    // Try any 3-card subset that forms a valid meld.
+    for (let i = 0; i < hand.length; i++) {
+      for (let j = i + 1; j < hand.length; j++) {
+        for (let k = j + 1; k < hand.length; k++) {
+          const trio = [hand[i]!, hand[j]!, hand[k]!];
+          if (isValidMeld(trio)) {
+            return { selector: `[data-testid="hint-target-rummy-500-${trio[0]!.id}"]`, pulses: 3 };
+          }
+        }
+      }
+    }
+    // Fallback: discard the highest-value card.
+    if (hand.length === 0) return null;
+    const worst = hand.reduce((hi, c) =>
+      cardDeadwoodValue(c.rank) > cardDeadwoodValue(hi.rank) ? c : hi,
+    );
+    return { selector: `[data-testid="hint-target-rummy-500-${worst.id}"]`, pulses: 3 };
+  },
   component: Rummy500,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import {
   unoInitial, unoReduce, unoTerminal,
   type UnoLikeState, type UnoLikeAction, type UnoColor,
@@ -106,5 +106,23 @@ Tips: Save Wild Draw 4 cards for critical moments — playing them when you have
   initialState: initial,
   reducer,
   isTerminal,
+  hint: (state: SPState): HintTarget | null => {
+    if (state.winner !== null) return null;
+    if (state.turn !== 0) return null;
+    const myHand = state.hands[0] ?? [];
+    // 1) Find a non-wild legal card.
+    const nonWild = myHand.find((c) =>
+      c.card.kind !== "wild" && c.card.kind !== "wild-draw-4" && matches(c, state),
+    );
+    if (nonWild) return { selector: `[data-testid="hand-card-${nonWild.id}"]`, pulses: 3 };
+    // 2) Plain wild.
+    const wild = myHand.find((c) => c.card.kind === "wild");
+    if (wild) return { selector: `[data-testid="hand-card-${wild.id}"]`, pulses: 3 };
+    // 3) Wild Draw 4 if no plain match.
+    const wd4 = myHand.find((c) => c.card.kind === "wild-draw-4");
+    if (wd4) return { selector: `[data-testid="hand-card-${wd4.id}"]`, pulses: 3 };
+    // 4) Draw.
+    return { selector: '[data-testid="hint-target-uno-like-draw"]', pulses: 3 };
+  },
   component: UnoLike,
 };

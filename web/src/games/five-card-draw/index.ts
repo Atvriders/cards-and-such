@@ -1,8 +1,40 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveCardDrawState, DrawAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
+import { rankHand, type HandClass } from "../../engines/deck/ranking.js";
 import { FiveCardDraw } from "./FiveCardDraw.js";
+
+const FCD_CLASS_ORDER: HandClass[] = [
+  "high-card", "one-pair", "two-pair", "three-of-a-kind",
+  "straight", "flush", "full-house", "four-of-a-kind", "straight-flush",
+];
+
+function fiveCardDrawHint(state: FiveCardDrawState): HintTarget | null {
+  if (state.phase === "showdown" || state.phase === "waiting") {
+    if (state.bankroll <= 0 || state.botBankroll <= 0) return null;
+    return { selector: '[data-testid="hint-target-five-card-draw-deal"]', pulses: 3 };
+  }
+  if (state.phase === "draw") {
+    // Pulse the Draw button — selecting cards is up to the player, but the button
+    // applies whether or not they've selected anything.
+    return { selector: '[data-testid="hint-target-five-card-draw-draw"]', pulses: 3 };
+  }
+  if (!state.playerTurn) return null;
+  const toCall = state.botBet - state.playerBet;
+  const strength = state.playerHand.length === 5
+    ? FCD_CLASS_ORDER.indexOf(rankHand(state.playerHand).class)
+    : -1;
+  if (toCall === 0) {
+    return { selector: '[data-testid="hint-target-five-card-draw-check"]', pulses: 3 };
+  }
+  const equity = strength >= 0 ? (strength + 1) / 9 : 0.15;
+  const odds = toCall / (state.pot + toCall);
+  if (equity > odds) {
+    return { selector: '[data-testid="hint-target-five-card-draw-call"]', pulses: 3 };
+  }
+  return { selector: '[data-testid="hint-target-five-card-draw-fold"]', pulses: 3 };
+}
 
 export const fiveCardDrawSettings = {
   startingBankroll: {
@@ -44,5 +76,6 @@ The game ends when one player runs out of chips. Settings: Starting Bankroll ($5
   initialState: (seed: number, settings: FiveCardDrawSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: fiveCardDrawHint,
   component: FiveCardDraw,
 };

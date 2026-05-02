@@ -53,7 +53,7 @@ export function Canasta({ state, dispatch, onGameOver }: GameProps<CanastaState,
       <div className="canasta-label">Bots: {Array.from({ length: numPlayers - 1 }, (_, i) => `Bot ${i + 1}: ${hands[i + 1]?.length ?? 0}`).join(" | ")}</div>
 
       <div className="canasta-area">
-        <div className="canasta-pile">
+        <div className="canasta-pile" data-testid="hint-target-canasta-draw-stock">
           Stock ({stock.length})
           {phase === "player-draw" && stock.length > 0
             ? <Card faceDown onClick={() => dispatch({ type: "draw-stock" } as CanastaAction)} />
@@ -96,11 +96,13 @@ export function Canasta({ state, dispatch, onGameOver }: GameProps<CanastaState,
       <div>
         <div className="canasta-label">Your Hand ({playerHand.length})</div>
         <div className="canasta-hand">
-          {playerHand.map(c =>
-            phase === "player-meld"
-              ? <Card key={c.id} card={c} className={selected.includes(c.id) ? "selected" : ""} onClick={() => toggleSelect(c.id)} />
-              : <Card key={c.id} card={c} className={selected.includes(c.id) ? "selected" : ""} />
-          )}
+          {playerHand.map(c => (
+            <span key={c.id} data-testid={`hint-target-canasta-${c.id}`}>
+              {phase === "player-meld"
+                ? <Card card={c} className={selected.includes(c.id) ? "selected" : ""} onClick={() => toggleSelect(c.id)} />
+                : <Card card={c} className={selected.includes(c.id) ? "selected" : ""} />}
+            </span>
+          ))}
         </div>
       </div>
 

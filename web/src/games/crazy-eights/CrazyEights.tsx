@@ -94,8 +94,8 @@ export function CrazyEights({ state, dispatch, onGameOver }: Props): JSX.Element
           )}
         </div>
         <div className="crazy8-actions">
-          <button className="crazy8-btn primary" aria-label="Draw card (D)" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "draw" })} disabled={!isMyTurn || state.pendingDraw}>Draw</button>
-          <button className="crazy8-btn alt" aria-label="Pass turn (P)" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "pass" })} disabled={!canPass}>Pass</button>
+          <button data-testid="hint-target-crazy-eights-draw" className="crazy8-btn primary" aria-label="Draw card (D)" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "draw" })} disabled={!isMyTurn || state.pendingDraw}>Draw</button>
+          <button data-testid="hint-target-crazy-eights-pass" className="crazy8-btn alt" aria-label="Pass turn (P)" onClick={() => (dispatch as (a: CrazyEightsAction) => void)({ type: "pass" })} disabled={!canPass}>Pass</button>
         </div>
       </div>
 
@@ -107,6 +107,7 @@ export function CrazyEights({ state, dispatch, onGameOver }: Props): JSX.Element
             return (
               <div
                 key={card.id}
+                data-testid={`hint-target-crazy-eights-${card.id}`}
                 className={`crazy8-card-slot ${legal ? "legal" : "illegal"}`}
                 role="button"
                 tabIndex={isMyTurn ? 0 : -1}

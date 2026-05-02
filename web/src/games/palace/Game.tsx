@@ -84,6 +84,7 @@ export function PalaceGame({ state, dispatch, onGameOver }: GameProps<PalaceStat
           {source.map(c => (
             <button
               key={c.id}
+              data-testid={`hint-target-palace-${c.id}`}
               className={`pal-card-btn${selected.includes(c.id) ? " selected" : ""}`}
               disabled={!isPlayerTurn}
               onClick={() => toggleCard(c.id)}
@@ -110,12 +111,12 @@ export function PalaceGame({ state, dispatch, onGameOver }: GameProps<PalaceStat
             Play selected ({selected.length})
           </button>
           {playableCount === 0 && state.discardPile.length > 0 && (
-            <button className="pal-btn danger" onClick={handlePickUp}>
+            <button data-testid="hint-target-palace-pickup" className="pal-btn danger" onClick={handlePickUp}>
               Pick up pile ({state.discardPile.length})
             </button>
           )}
           {state.discardPile.length > 0 && playableCount > 0 && (
-            <button className="pal-btn danger" onClick={handlePickUp}>
+            <button data-testid="hint-target-palace-pickup" className="pal-btn danger" onClick={handlePickUp}>
               Pick up pile
             </button>
           )}
