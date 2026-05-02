@@ -1,19 +1,34 @@
-import { useMemo } from "react";
-import { ACHIEVEMENTS, favoriteCategory, loadStats } from "../platform/stats.js";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { ACHIEVEMENTS, favoriteCategory, loadStats, resetStats } from "../platform/stats.js";
 import type { Achievement, StatsState } from "../platform/stats.js";
 import { GAMES } from "../games/registry.js";
 import "./StatsPage.css";
 
 const PIE_COLORS = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24", "#f472b6"];
 
+const CATEGORY_FILTERS = [
+  { id: "all", label: "All" },
+  { id: "solitaire", label: "Solitaire" },
+  { id: "cards", label: "Cards" },
+  { id: "dice", label: "Dice" },
+  { id: "board", label: "Board" },
+  { id: "arcade", label: "Arcade" },
+] as const;
+
+type CategoryFilter = typeof CATEGORY_FILTERS[number]["id"];
+
+const RANGE_OPTIONS = [7, 14, 30, 90] as const;
+type RangeOption = typeof RANGE_OPTIONS[number];
+
 function dayKey(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-function last14Days(playedSet: Set<string>): { label: string; v: number }[] {
+function lastNDays(playedSet: Set<string>, n: number): { label: string; v: number }[] {
   const out: { label: string; v: number }[] = [];
   const today = new Date();
-  for (let i = 13; i >= 0; i--) {
+  for (let i = n - 1; i >= 0; i--) {
     const d = new Date(today);
     d.setDate(today.getDate() - i);
     out.push({ label: dayKey(d).slice(5), v: playedSet.has(dayKey(d)) ? 1 : 0 });
@@ -50,6 +65,27 @@ function ratingsCount(): number {
   const v = progressJSON<Record<string, number>>("cards-ratings");
   if (!v || typeof v !== "object") return 0;
   return Object.keys(v).length;
+}
+
+function ratingFor(id: string): number | null {
+  const v = progressJSON<Record<string, number>>("cards-ratings");
+  if (!v || typeof v !== "object") return null;
+  const r = v[id];
+  return typeof r === "number" && Number.isFinite(r) ? r : null;
+}
+
+function bestTimeFor(id: string): number | null {
+  const v = progressJSON<Record<string, number>>("cards-best-times");
+  if (!v || typeof v !== "object") return null;
+  const t = v[id];
+  return typeof t === "number" && Number.isFinite(t) && t > 0 ? t : null;
+}
+
+function lastPlayedFor(id: string): number | null {
+  const v = progressJSON<Record<string, number>>("cards-last-played");
+  if (!v || typeof v !== "object") return null;
+  const t = v[id];
+  return typeof t === "number" && Number.isFinite(t) ? t : null;
 }
 
 function streakLongest(): number {
@@ -100,8 +136,20 @@ function progressFor(a: Achievement, s: StatsState): { cur: number; goal: number
   }
 }
 
-interface BarDatum { label: string; v: number }
-function BarChart({ data, w = 320, h = 140 }: { data: BarDatum[]; w?: number; h?: number }): JSX.Element {
+interface BarDatum { label: string; v: number; id?: string }
+function BarChart({
+  data,
+  w = 320,
+  h = 140,
+  onSelect,
+  selectedId,
+}: {
+  data: BarDatum[];
+  w?: number;
+  h?: number;
+  onSelect?: (id: string) => void;
+  selectedId?: string | null;
+}): JSX.Element {
   const max = Math.max(1, ...data.map((d) => d.v));
   const pad = 24;
   const bw = data.length ? (w - pad * 2) / data.length : 0;
@@ -112,9 +160,23 @@ function BarChart({ data, w = 320, h = 140 }: { data: BarDatum[]; w?: number; h?
         const bh = ((h - pad * 2) * d.v) / max;
         const x = pad + i * bw + bw * 0.15;
         const y = h - pad - bh;
+        const active = selectedId && d.id === selectedId;
+        const clickable = !!onSelect && !!d.id;
         return (
-          <g key={d.label}>
-            <rect x={x} y={y} width={bw * 0.7} height={bh} fill="#a78bfa" rx="3" />
+          <g
+            key={d.label}
+            style={clickable ? { cursor: "pointer" } : undefined}
+            onClick={clickable ? () => onSelect?.(d.id as string) : undefined}
+            data-testid={d.id ? `stats-drill-${d.id}` : undefined}
+          >
+            <rect
+              x={x}
+              y={y}
+              width={bw * 0.7}
+              height={bh}
+              fill={active ? "#c7cdfe" : "#a78bfa"}
+              rx="3"
+            />
             <text x={x + bw * 0.35} y={h - pad + 12} fontSize="9" fill="rgba(203,213,225,0.7)" textAnchor="middle">{d.label.slice(0, 6)}</text>
             <text x={x + bw * 0.35} y={y - 3} fontSize="9" fill="#e2e8f0" textAnchor="middle">{d.v}</text>
           </g>
@@ -124,20 +186,20 @@ function BarChart({ data, w = 320, h = 140 }: { data: BarDatum[]; w?: number; h?
   );
 }
 
-function LineChart({ data, w = 320, h = 140 }: { data: BarDatum[]; w?: number; h?: number }): JSX.Element {
+function LineChart({ data, w = 320, h = 140, rangeLabel }: { data: BarDatum[]; w?: number; h?: number; rangeLabel: string }): JSX.Element {
   const max = Math.max(1, ...data.map((d) => d.v));
   const pad = 22;
   const step = data.length > 1 ? (w - pad * 2) / (data.length - 1) : 0;
   const pts = data.map((d, i) => [pad + i * step, h - pad - ((h - pad * 2) * d.v) / max] as const);
   const path = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label="Activity over last 14 days" data-testid="stats-line-chart">
+    <svg viewBox={`0 0 ${w} ${h}`} className="stats-svg" role="img" aria-label={`Activity over last ${rangeLabel}`} data-testid="stats-line-chart">
       <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="rgba(148,163,184,0.25)" />
       <path d={path} fill="none" stroke="#60a5fa" strokeWidth="2" />
       {pts.map(([x, y], i) => (
         <circle key={i} cx={x} cy={y} r="2.5" fill="#60a5fa" />
       ))}
-      <text x={pad} y={h - 4} fontSize="9" fill="rgba(203,213,225,0.6)">14d ago</text>
+      <text x={pad} y={h - 4} fontSize="9" fill="rgba(203,213,225,0.6)">{rangeLabel} ago</text>
       <text x={w - pad} y={h - 4} fontSize="9" fill="rgba(203,213,225,0.6)" textAnchor="end">today</text>
     </svg>
   );
@@ -176,29 +238,95 @@ function PieChart({ data, size = 160 }: { data: PieDatum[]; size?: number }): JS
   );
 }
 
+function formatRelativeTime(ms: number): string {
+  const diff = Math.max(0, Date.now() - ms);
+  const sec = Math.round(diff / 1000);
+  if (sec < 60) return `${sec}s ago`;
+  const min = Math.round(sec / 60);
+  if (min < 60) return `${min}m ago`;
+  const hr = Math.round(min / 60);
+  if (hr < 24) return `${hr}h ago`;
+  const day = Math.round(hr / 24);
+  if (day < 30) return `${day}d ago`;
+  const mo = Math.round(day / 30);
+  if (mo < 12) return `${mo}mo ago`;
+  return `${Math.round(mo / 12)}y ago`;
+}
+
+function formatBestTime(seconds: number): string {
+  if (seconds < 60) return `${seconds.toFixed(seconds < 10 ? 1 : 0)}s`;
+  const m = Math.floor(seconds / 60);
+  const s = Math.round(seconds % 60);
+  return `${m}m ${s}s`;
+}
+
 export default function StatsPage(): JSX.Element {
-  const stats = useMemo(() => loadStats(), []);
+  const [stats, setStats] = useState<StatsState>(() => loadStats());
+  const [category, setCategory] = useState<CategoryFilter>("all");
+  const [range, setRange] = useState<RangeOption>(14);
+  const [search, setSearch] = useState<string>("");
+  const [drillId, setDrillId] = useState<string | null>(null);
+
   const fav = favoriteCategory(stats);
+
+  const matchesCategory = (gameId: string): boolean => {
+    if (category === "all") return true;
+    const plug = GAMES.find((g) => g.id === gameId);
+    return plug?.category === category;
+  };
+
+  const filteredPerGame = useMemo(() => {
+    const out: Record<string, { played: number; wins: number; best: number }> = {};
+    for (const [id, gs] of Object.entries(stats.perGame)) {
+      if (matchesCategory(id)) out[id] = gs;
+    }
+    return out;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stats, category]);
+
+  const totalsForFilter = useMemo(() => {
+    let played = 0;
+    let wins = 0;
+    for (const gs of Object.values(filteredPerGame)) {
+      played += gs.played;
+      wins += gs.wins;
+    }
+    return { played, wins };
+  }, [filteredPerGame]);
 
   const bestPerCategory = useMemo(() => {
     const out: Record<string, { gameId: string; title: string; score: number }> = {};
     for (const [gameId, gs] of Object.entries(stats.perGame)) {
       const plugin = GAMES.find((g) => g.id === gameId);
       if (!plugin) continue;
+      if (category !== "all" && plugin.category !== category) continue;
       const cat = plugin.category;
       const cur = out[cat];
       if (!cur || gs.best > cur.score) out[cat] = { gameId, title: plugin.title, score: gs.best };
     }
     return out;
-  }, [stats]);
+  }, [stats, category]);
 
-  const categoryBarData = useMemo<BarDatum[]>(
-    () => Object.entries(stats.perCategory).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([label, v]) => ({ label, v })),
-    [stats],
-  );
-  const lineData = useMemo<BarDatum[]>(() => last14Days(new Set(stats.daysPlayed)), [stats]);
+  const categoryBarData = useMemo<BarDatum[]>(() => {
+    // Top-played games (was per-category before — now drives drill-down).
+    const entries = Object.entries(stats.perGame)
+      .filter(([id]) => matchesCategory(id))
+      .map(([id, gs]) => {
+        const plug = GAMES.find((g) => g.id === id);
+        return { id, label: plug?.title ?? id, v: gs.played };
+      })
+      .filter((d) => d.v > 0)
+      .sort((a, b) => b.v - a.v)
+      .slice(0, 8);
+    return entries;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stats, category]);
+
+  const lineData = useMemo<BarDatum[]>(() => lastNDays(new Set(stats.daysPlayed), range), [stats, range]);
+
   const topGamesPie = useMemo<PieDatum[]>(() => {
     return Object.entries(stats.perGame)
+      .filter(([id]) => matchesCategory(id))
       .map(([id, gs]) => {
         const plug = GAMES.find((g) => g.id === id);
         return { label: plug?.title ?? id, v: gs.played };
@@ -206,21 +334,89 @@ export default function StatsPage(): JSX.Element {
       .filter((d) => d.v > 0)
       .sort((a, b) => b.v - a.v)
       .slice(0, 5);
-  }, [stats]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stats, category]);
+
+  const filteredAchievements = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return ACHIEVEMENTS;
+    return ACHIEVEMENTS.filter(
+      (a) => a.title.toLowerCase().includes(q) || a.description.toLowerCase().includes(q),
+    );
+  }, [search]);
+
+  const drillInfo = useMemo(() => {
+    if (!drillId) return null;
+    const plug = GAMES.find((g) => g.id === drillId);
+    const gs = stats.perGame[drillId];
+    if (!plug || !gs) return null;
+    return {
+      id: drillId,
+      title: plug.title,
+      category: plug.category,
+      played: gs.played,
+      wins: gs.wins,
+      best: gs.best,
+      bestTime: bestTimeFor(drillId),
+      lastPlayed: lastPlayedFor(drillId),
+      rating: ratingFor(drillId),
+    };
+  }, [drillId, stats]);
+
+  const handleReset = (): void => {
+    if (typeof window !== "undefined" && !window.confirm("Reset all stats? This cannot be undone.")) return;
+    resetStats();
+    setStats(loadStats());
+    setDrillId(null);
+  };
 
   return (
     <div className="stats-page" data-testid="stats-page">
       <h1>Your Stats</h1>
 
+      {/* Top control row: category chips */}
+      <div className="stats-controls" data-testid="stats-controls">
+        <div className="lobby-chips" role="tablist" aria-label="Filter by category">
+          {CATEGORY_FILTERS.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              className={`lobby-chip${category === c.id ? " is-active" : ""}`}
+              onClick={() => setCategory(c.id)}
+              data-testid={`stats-cat-filter-${c.id}`}
+              aria-pressed={category === c.id}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <section className="stats-card-grid">
         <div className="stats-card" data-testid="stats-activity">
           <h2>Activity</h2>
           <div className="stats-summary">
-            <div className="stat-card" data-testid="stat-total-played"><div className="stat-label">Games Played</div><div className="stat-value">{stats.totalPlayed}</div></div>
-            <div className="stat-card" data-testid="stat-total-wins"><div className="stat-label">Total Wins</div><div className="stat-value">{stats.totalWins}</div></div>
+            <div className="stat-card" data-testid="stat-total-played"><div className="stat-label">Games Played</div><div className="stat-value">{category === "all" ? stats.totalPlayed : totalsForFilter.played}</div></div>
+            <div className="stat-card" data-testid="stat-total-wins"><div className="stat-label">Total Wins</div><div className="stat-value">{category === "all" ? stats.totalWins : totalsForFilter.wins}</div></div>
           </div>
-          <div className="stats-chart-label">Last 14 days</div>
-          <LineChart data={lineData} />
+          <div className="stats-range-row">
+            <div className="stats-chart-label">Last {range} days</div>
+            <div className="stats-range-toggle" role="tablist" aria-label="Activity range">
+              {RANGE_OPTIONS.map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  className={`stats-range-btn${range === n ? " is-active" : ""}`}
+                  onClick={() => setRange(n)}
+                  data-testid={`stats-range-${n}d`}
+                  aria-pressed={range === n}
+                >
+                  {n}d
+                </button>
+              ))}
+            </div>
+          </div>
+          <LineChart data={lineData} rangeLabel={`${range}d`} />
         </div>
 
         <div className="stats-card" data-testid="stats-records">
@@ -234,9 +430,37 @@ export default function StatsPage(): JSX.Element {
         </div>
 
         <div className="stats-card" data-testid="stats-categories">
-          <h2>Categories</h2>
-          <div className="stats-chart-label">Games played per category</div>
-          {categoryBarData.length === 0 ? <p className="stats-empty">No games played yet.</p> : <BarChart data={categoryBarData} />}
+          <h2>Top played</h2>
+          <div className="stats-chart-label">Click a bar to see details</div>
+          {categoryBarData.length === 0
+            ? <p className="stats-empty">No games played yet.</p>
+            : <BarChart data={categoryBarData} onSelect={(id) => setDrillId((cur) => (cur === id ? null : id))} selectedId={drillId} />}
+
+          {drillInfo && (
+            <div className="stats-drill-panel" data-testid="stats-drill-panel">
+              <div className="stats-drill-head">
+                <span className={`play-category play-category--${drillInfo.category}`}>{drillInfo.category}</span>
+                <span className="stats-drill-title">{drillInfo.title}</span>
+                <button
+                  type="button"
+                  className="stats-drill-close"
+                  onClick={() => setDrillId(null)}
+                  aria-label="Close drill-down"
+                  data-testid="stats-drill-close"
+                >×</button>
+              </div>
+              <ul className="stats-drill-list">
+                <li><span>Plays</span><em>{drillInfo.played}</em></li>
+                <li><span>Wins</span><em>{drillInfo.wins}</em></li>
+                <li><span>Best score</span><em>{drillInfo.best || "—"}</em></li>
+                <li><span>Best time</span><em>{drillInfo.bestTime != null ? formatBestTime(drillInfo.bestTime) : "—"}</em></li>
+                <li><span>Last played</span><em>{drillInfo.lastPlayed != null ? formatRelativeTime(drillInfo.lastPlayed) : "—"}</em></li>
+                <li><span>Your rating</span><em>{drillInfo.rating != null ? `${drillInfo.rating.toFixed(1)}★` : "—"}</em></li>
+              </ul>
+              <Link to={`/play/${drillInfo.id}`} className="btn btn-primary stats-drill-play" data-testid="stats-drill-play">Play</Link>
+            </div>
+          )}
+
           {Object.keys(bestPerCategory).length > 0 && (
             <ul className="stats-best-list">
               {Object.entries(bestPerCategory).map(([cat, info]) => (
@@ -252,8 +476,17 @@ export default function StatsPage(): JSX.Element {
 
         <div className="stats-card" data-testid="stats-achievements">
           <h2>Achievements</h2>
+          <input
+            type="search"
+            className="stats-search"
+            placeholder="Search achievements…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            data-testid="stats-search"
+            aria-label="Search achievements"
+          />
           <div className="achievements-grid">
-            {ACHIEVEMENTS.map((a) => {
+            {filteredAchievements.map((a) => {
               const unlocked = stats.unlocked.includes(a.id);
               const { cur, goal } = progressFor(a, stats);
               const pct = Math.round((cur / goal) * 100);
@@ -269,9 +502,22 @@ export default function StatsPage(): JSX.Element {
                 </div>
               );
             })}
+            {filteredAchievements.length === 0 && (
+              <p className="stats-empty" data-testid="stats-search-empty">No achievements match.</p>
+            )}
           </div>
         </div>
       </section>
+
+      <footer className="stats-footer">
+        <span className="stats-footer-note">Stats are stored locally in your browser.</span>
+        <button
+          type="button"
+          className="btn btn-ghost stats-reset-btn"
+          onClick={handleReset}
+          data-testid="stats-reset"
+        >Reset stats</button>
+      </footer>
     </div>
   );
 }
