@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpiritIslandCoopState, SpiritIslandCoopAction, SpiritIslandCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SpiritIslandCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { SpiritIslandCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const spiritIslandCoopPlugin: GamePlugin<SpiritIslandCoopState, SpiritIsl
   initialState: (seed: number, s: S) => initialState(seed, s as SpiritIslandCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: SpiritIslandCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, SpiritIslandCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SpiritIslandCoopGame,
 };
 

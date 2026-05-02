@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PandemicMultistepState, PandemicMultistepAction, PandemicMultistepSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { PandemicMultistep_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { PandemicMultistepGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const pandemicMultistepPlugin: GamePlugin<PandemicMultistepState, Pandemi
   initialState: (seed: number, s: S) => initialState(seed, s as PandemicMultistepSettings),
   reducer,
   isTerminal,
+  hint: (state: PandemicMultistepState): HintTarget | null => {
+    const sel = coopHintSelector(state, PandemicMultistep_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: PandemicMultistepGame,
 };
 

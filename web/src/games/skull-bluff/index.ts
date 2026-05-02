@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SkullBluffState, SkullBluffAction, SkullBluffSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SkullBluff_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { SkullBluffGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const skullBluffPlugin: GamePlugin<SkullBluffState, SkullBluffAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as SkullBluffSettings),
   reducer,
   isTerminal,
+  hint: (state: SkullBluffState): HintTarget | null => {
+    const sel = deductionHintSelector(state, SkullBluff_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SkullBluffGame,
 };
 

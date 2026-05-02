@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SummonerWarsGridState, SummonerWarsGridAction, SummonerWarsGridSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SummonerWarsGrid_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { SummonerWarsGridGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const summonerWarsGridPlugin: GamePlugin<SummonerWarsGridState, SummonerW
   initialState: (seed: number, s: S) => initialState(seed, s as SummonerWarsGridSettings),
   reducer,
   isTerminal,
+  hint: (state: SummonerWarsGridState): HintTarget | null => {
+    const sel = coopHintSelector(state, SummonerWarsGrid_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SummonerWarsGridGame,
 };
 

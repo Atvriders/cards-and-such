@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Code777MiniState, Code777MiniAction, Code777MiniSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { Code777Mini_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { Code777MiniGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const code777MiniPlugin: GamePlugin<Code777MiniState, Code777MiniAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as Code777MiniSettings),
   reducer,
   isTerminal,
+  hint: (state: Code777MiniState): HintTarget | null => {
+    const sel = deductionHintSelector(state, Code777Mini_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: Code777MiniGame,
 };
 

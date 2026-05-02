@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AeonsEndMagesState, AeonsEndMagesAction, AeonsEndMagesSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { AeonsEndMages_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { AeonsEndMagesGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const aeonsEndMagesPlugin: GamePlugin<AeonsEndMagesState, AeonsEndMagesAc
   initialState: (seed: number, s: S) => initialState(seed, s as AeonsEndMagesSettings),
   reducer,
   isTerminal,
+  hint: (state: AeonsEndMagesState): HintTarget | null => {
+    const sel = coopHintSelector(state, AeonsEndMages_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: AeonsEndMagesGame,
 };
 

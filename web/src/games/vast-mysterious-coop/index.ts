@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VastMysteriousCoopState, VastMysteriousCoopAction, VastMysteriousCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { VastMysteriousCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { VastMysteriousCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const vastMysteriousCoopPlugin: GamePlugin<VastMysteriousCoopState, VastM
   initialState: (seed: number, s: S) => initialState(seed, s as VastMysteriousCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: VastMysteriousCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, VastMysteriousCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: VastMysteriousCoopGame,
 };
 

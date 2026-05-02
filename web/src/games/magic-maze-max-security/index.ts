@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MagicMazeMaxSecurityState, MagicMazeMaxSecurityAction, MagicMazeMaxSecuritySettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { MagicMazeMaxSecurity_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { MagicMazeMaxSecurityGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const magicMazeMaxSecurityPlugin: GamePlugin<MagicMazeMaxSecurityState, M
   initialState: (seed: number, s: S) => initialState(seed, s as MagicMazeMaxSecuritySettings),
   reducer,
   isTerminal,
+  hint: (state: MagicMazeMaxSecurityState): HintTarget | null => {
+    const sel = coopHintSelector(state, MagicMazeMaxSecurity_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: MagicMazeMaxSecurityGame,
 };
 

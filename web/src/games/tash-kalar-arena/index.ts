@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TashKalarArenaState, TashKalarArenaAction, TashKalarArenaSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { TashKalarArena_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { TashKalarArenaGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const tashKalarArenaPlugin: GamePlugin<TashKalarArenaState, TashKalarAren
   initialState: (seed: number, s: S) => initialState(seed, s as TashKalarArenaSettings),
   reducer,
   isTerminal,
+  hint: (state: TashKalarArenaState): HintTarget | null => {
+    const sel = coopHintSelector(state, TashKalarArena_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: TashKalarArenaGame,
 };
 

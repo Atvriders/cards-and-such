@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MarvelChampionsCoopState, MarvelChampionsCoopAction, MarvelChampionsCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { MarvelChampionsCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { MarvelChampionsCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const marvelChampionsCoopPlugin: GamePlugin<MarvelChampionsCoopState, Mar
   initialState: (seed: number, s: S) => initialState(seed, s as MarvelChampionsCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: MarvelChampionsCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, MarvelChampionsCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: MarvelChampionsCoopGame,
 };
 

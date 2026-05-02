@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UndauntedNormandyState, UndauntedNormandyAction, UndauntedNormandySettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { UndauntedNormandy_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { UndauntedNormandyGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const undauntedNormandyPlugin: GamePlugin<UndauntedNormandyState, Undaunt
   initialState: (seed: number, s: S) => initialState(seed, s as UndauntedNormandySettings),
   reducer,
   isTerminal,
+  hint: (state: UndauntedNormandyState): HintTarget | null => {
+    const sel = coopHintSelector(state, UndauntedNormandy_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: UndauntedNormandyGame,
 };
 

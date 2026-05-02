@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BullsAndCowsState, BullsAndCowsAction, BullsAndCowsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { BullsAndCows_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { BullsAndCowsGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const bullsAndCowsPlugin: GamePlugin<BullsAndCowsState, BullsAndCowsActio
   initialState: (seed: number, s: S) => initialState(seed, s as BullsAndCowsSettings),
   reducer,
   isTerminal,
+  hint: (state: BullsAndCowsState): HintTarget | null => {
+    const sel = deductionHintSelector(state, BullsAndCows_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: BullsAndCowsGame,
 };
 

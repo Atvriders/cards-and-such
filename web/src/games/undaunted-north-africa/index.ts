@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UndauntedNorthAfricaState, UndauntedNorthAfricaAction, UndauntedNorthAfricaSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { UndauntedNorthAfrica_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { UndauntedNorthAfricaGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const undauntedNorthAfricaPlugin: GamePlugin<UndauntedNorthAfricaState, U
   initialState: (seed: number, s: S) => initialState(seed, s as UndauntedNorthAfricaSettings),
   reducer,
   isTerminal,
+  hint: (state: UndauntedNorthAfricaState): HintTarget | null => {
+    const sel = coopHintSelector(state, UndauntedNorthAfrica_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: UndauntedNorthAfricaGame,
 };
 

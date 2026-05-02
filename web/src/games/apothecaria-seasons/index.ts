@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ApothecariaSeasonsState, ApothecariaSeasonsAction, ApothecariaSeasonsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { ApothecariaSeasons_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { ApothecariaSeasonsGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const apothecariaSeasonsPlugin: GamePlugin<ApothecariaSeasonsState, Apoth
   initialState: (seed: number, s: S) => initialState(seed, s as ApothecariaSeasonsSettings),
   reducer,
   isTerminal,
+  hint: (state: ApothecariaSeasonsState): HintTarget | null => {
+    const sel = coopHintSelector(state, ApothecariaSeasons_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: ApothecariaSeasonsGame,
 };
 

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EscapeAliensHiddenState, EscapeAliensHiddenAction, EscapeAliensHiddenSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { EscapeAliensHidden_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { EscapeAliensHiddenGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const escapeAliensHiddenPlugin: GamePlugin<EscapeAliensHiddenState, Escap
   initialState: (seed: number, s: S) => initialState(seed, s as EscapeAliensHiddenSettings),
   reducer,
   isTerminal,
+  hint: (state: EscapeAliensHiddenState): HintTarget | null => {
+    const sel = coopHintSelector(state, EscapeAliensHidden_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: EscapeAliensHiddenGame,
 };
 

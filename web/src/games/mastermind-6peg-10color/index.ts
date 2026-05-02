@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Mastermind6peg10colorState, Mastermind6peg10colorAction, Mastermind6peg10colorSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { Mastermind6peg10color_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { Mastermind6peg10colorGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const mastermind6peg10colorPlugin: GamePlugin<Mastermind6peg10colorState,
   initialState: (seed: number, s: S) => initialState(seed, s as Mastermind6peg10colorSettings),
   reducer,
   isTerminal,
+  hint: (state: Mastermind6peg10colorState): HintTarget | null => {
+    const sel = deductionHintSelector(state, Mastermind6peg10color_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: Mastermind6peg10colorGame,
 };
 

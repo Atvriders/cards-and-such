@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LotrLcgCoopState, LotrLcgCoopAction, LotrLcgCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { LotrLcgCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { LotrLcgCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const lotrLcgCoopPlugin: GamePlugin<LotrLcgCoopState, LotrLcgCoopAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as LotrLcgCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: LotrLcgCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, LotrLcgCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: LotrLcgCoopGame,
 };
 

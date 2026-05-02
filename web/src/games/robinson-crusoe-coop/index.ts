@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RobinsonCrusoeCoopState, RobinsonCrusoeCoopAction, RobinsonCrusoeCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { RobinsonCrusoeCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { RobinsonCrusoeCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const robinsonCrusoeCoopPlugin: GamePlugin<RobinsonCrusoeCoopState, Robin
   initialState: (seed: number, s: S) => initialState(seed, s as RobinsonCrusoeCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: RobinsonCrusoeCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, RobinsonCrusoeCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: RobinsonCrusoeCoopGame,
 };
 

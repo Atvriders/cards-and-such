@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AeonsEndWarEternalState, AeonsEndWarEternalAction, AeonsEndWarEternalSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { AeonsEndWarEternal_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { AeonsEndWarEternalGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const aeonsEndWarEternalPlugin: GamePlugin<AeonsEndWarEternalState, Aeons
   initialState: (seed: number, s: S) => initialState(seed, s as AeonsEndWarEternalSettings),
   reducer,
   isTerminal,
+  hint: (state: AeonsEndWarEternalState): HintTarget | null => {
+    const sel = coopHintSelector(state, AeonsEndWarEternal_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: AeonsEndWarEternalGame,
 };
 

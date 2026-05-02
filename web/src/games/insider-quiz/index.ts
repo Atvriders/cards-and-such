@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { InsiderQuizState, InsiderQuizAction, InsiderQuizSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { InsiderQuiz_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { InsiderQuizGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const insiderQuizPlugin: GamePlugin<InsiderQuizState, InsiderQuizAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as InsiderQuizSettings),
   reducer,
   isTerminal,
+  hint: (state: InsiderQuizState): HintTarget | null => {
+    const sel = deductionHintSelector(state, InsiderQuiz_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: InsiderQuizGame,
 };
 

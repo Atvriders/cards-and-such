@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MastermindNoRepeatsState, MastermindNoRepeatsAction, MastermindNoRepeatsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { MastermindNoRepeats_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { MastermindNoRepeatsGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const mastermindNoRepeatsPlugin: GamePlugin<MastermindNoRepeatsState, Mas
   initialState: (seed: number, s: S) => initialState(seed, s as MastermindNoRepeatsSettings),
   reducer,
   isTerminal,
+  hint: (state: MastermindNoRepeatsState): HintTarget | null => {
+    const sel = deductionHintSelector(state, MastermindNoRepeats_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: MastermindNoRepeatsGame,
 };
 

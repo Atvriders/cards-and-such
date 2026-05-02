@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AwkwardGuestsState, AwkwardGuestsAction, AwkwardGuestsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { AwkwardGuests_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { AwkwardGuestsGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const awkwardGuestsPlugin: GamePlugin<AwkwardGuestsState, AwkwardGuestsAc
   initialState: (seed: number, s: S) => initialState(seed, s as AwkwardGuestsSettings),
   reducer,
   isTerminal,
+  hint: (state: AwkwardGuestsState): HintTarget | null => {
+    const sel = deductionHintSelector(state, AwkwardGuests_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: AwkwardGuestsGame,
 };
 

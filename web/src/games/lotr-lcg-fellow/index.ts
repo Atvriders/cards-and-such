@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LotrLcgFellowState, LotrLcgFellowAction, LotrLcgFellowSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { LotrLcgFellow_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { LotrLcgFellowGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const lotrLcgFellowPlugin: GamePlugin<LotrLcgFellowState, LotrLcgFellowAc
   initialState: (seed: number, s: S) => initialState(seed, s as LotrLcgFellowSettings),
   reducer,
   isTerminal,
+  hint: (state: LotrLcgFellowState): HintTarget | null => {
+    const sel = coopHintSelector(state, LotrLcgFellow_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: LotrLcgFellowGame,
 };
 

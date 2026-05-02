@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SentinelsEnvironmentState, SentinelsEnvironmentAction, SentinelsEnvironmentSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SentinelsEnvironment_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { SentinelsEnvironmentGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const sentinelsEnvironmentPlugin: GamePlugin<SentinelsEnvironmentState, S
   initialState: (seed: number, s: S) => initialState(seed, s as SentinelsEnvironmentSettings),
   reducer,
   isTerminal,
+  hint: (state: SentinelsEnvironmentState): HintTarget | null => {
+    const sel = coopHintSelector(state, SentinelsEnvironment_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SentinelsEnvironmentGame,
 };
 

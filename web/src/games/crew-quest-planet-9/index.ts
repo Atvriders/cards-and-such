@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrewQuestPlanet9State, CrewQuestPlanet9Action, CrewQuestPlanet9Settings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { CrewQuestPlanet9_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { CrewQuestPlanet9Game } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const crewQuestPlanet9Plugin: GamePlugin<CrewQuestPlanet9State, CrewQuest
   initialState: (seed: number, s: S) => initialState(seed, s as CrewQuestPlanet9Settings),
   reducer,
   isTerminal,
+  hint: (state: CrewQuestPlanet9State): HintTarget | null => {
+    const sel = coopHintSelector(state, CrewQuestPlanet9_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: CrewQuestPlanet9Game,
 };
 

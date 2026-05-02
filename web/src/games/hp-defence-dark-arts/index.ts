@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HpDefenceDarkArtsState, HpDefenceDarkArtsAction, HpDefenceDarkArtsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { HpDefenceDarkArts_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { HpDefenceDarkArtsGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const hpDefenceDarkArtsPlugin: GamePlugin<HpDefenceDarkArtsState, HpDefen
   initialState: (seed: number, s: S) => initialState(seed, s as HpDefenceDarkArtsSettings),
   reducer,
   isTerminal,
+  hint: (state: HpDefenceDarkArtsState): HintTarget | null => {
+    const sel = coopHintSelector(state, HpDefenceDarkArts_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: HpDefenceDarkArtsGame,
 };
 

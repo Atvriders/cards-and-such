@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ArkhamLcgCoopState, ArkhamLcgCoopAction, ArkhamLcgCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { ArkhamLcgCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { ArkhamLcgCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const arkhamLcgCoopPlugin: GamePlugin<ArkhamLcgCoopState, ArkhamLcgCoopAc
   initialState: (seed: number, s: S) => initialState(seed, s as ArkhamLcgCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: ArkhamLcgCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, ArkhamLcgCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: ArkhamLcgCoopGame,
 };
 

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MysteriumVisionsState, MysteriumVisionsAction, MysteriumVisionsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { MysteriumVisions_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { MysteriumVisionsGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const mysteriumVisionsPlugin: GamePlugin<MysteriumVisionsState, Mysterium
   initialState: (seed: number, s: S) => initialState(seed, s as MysteriumVisionsSettings),
   reducer,
   isTerminal,
+  hint: (state: MysteriumVisionsState): HintTarget | null => {
+    const sel = deductionHintSelector(state, MysteriumVisions_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: MysteriumVisionsGame,
 };
 

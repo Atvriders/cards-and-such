@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LetterJamCoopState, LetterJamCoopAction, LetterJamCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { LetterJamCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { LetterJamCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const letterJamCoopPlugin: GamePlugin<LetterJamCoopState, LetterJamCoopAc
   initialState: (seed: number, s: S) => initialState(seed, s as LetterJamCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: LetterJamCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, LetterJamCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: LetterJamCoopGame,
 };
 

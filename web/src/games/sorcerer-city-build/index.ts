@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SorcererCityBuildState, SorcererCityBuildAction, SorcererCityBuildSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SorcererCityBuild_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { SorcererCityBuildGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const sorcererCityBuildPlugin: GamePlugin<SorcererCityBuildState, Sorcere
   initialState: (seed: number, s: S) => initialState(seed, s as SorcererCityBuildSettings),
   reducer,
   isTerminal,
+  hint: (state: SorcererCityBuildState): HintTarget | null => {
+    const sel = coopHintSelector(state, SorcererCityBuild_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SorcererCityBuildGame,
 };
 

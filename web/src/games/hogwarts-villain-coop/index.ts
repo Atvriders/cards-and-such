@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HogwartsVillainCoopState, HogwartsVillainCoopAction, HogwartsVillainCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { HogwartsVillainCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { HogwartsVillainCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const hogwartsVillainCoopPlugin: GamePlugin<HogwartsVillainCoopState, Hog
   initialState: (seed: number, s: S) => initialState(seed, s as HogwartsVillainCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: HogwartsVillainCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, HogwartsVillainCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: HogwartsVillainCoopGame,
 };
 

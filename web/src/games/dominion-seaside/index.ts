@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DominionSeasideState, DominionSeasideAction, DominionSeasideSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { DominionSeaside_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { DominionSeasideGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const dominionSeasidePlugin: GamePlugin<DominionSeasideState, DominionSea
   initialState: (seed: number, s: S) => initialState(seed, s as DominionSeasideSettings),
   reducer,
   isTerminal,
+  hint: (state: DominionSeasideState): HintTarget | null => {
+    const sel = coopHintSelector(state, DominionSeaside_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: DominionSeasideGame,
 };
 

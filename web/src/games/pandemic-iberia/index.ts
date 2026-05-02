@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PandemicIberiaState, PandemicIberiaAction, PandemicIberiaSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { PandemicIberia_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { PandemicIberiaGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const pandemicIberiaPlugin: GamePlugin<PandemicIberiaState, PandemicIberi
   initialState: (seed: number, s: S) => initialState(seed, s as PandemicIberiaSettings),
   reducer,
   isTerminal,
+  hint: (state: PandemicIberiaState): HintTarget | null => {
+    const sel = coopHintSelector(state, PandemicIberia_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: PandemicIberiaGame,
 };
 

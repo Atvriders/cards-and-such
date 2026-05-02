@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PandemicLegacyS2State, PandemicLegacyS2Action, PandemicLegacyS2Settings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { PandemicLegacyS2_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { PandemicLegacyS2Game } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const pandemicLegacyS2Plugin: GamePlugin<PandemicLegacyS2State, PandemicL
   initialState: (seed: number, s: S) => initialState(seed, s as PandemicLegacyS2Settings),
   reducer,
   isTerminal,
+  hint: (state: PandemicLegacyS2State): HintTarget | null => {
+    const sel = coopHintSelector(state, PandemicLegacyS2_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: PandemicLegacyS2Game,
 };
 

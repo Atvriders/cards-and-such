@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClueMiniState, ClueMiniAction, ClueMiniSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { ClueMini_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { ClueMiniGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const clueMiniPlugin: GamePlugin<ClueMiniState, ClueMiniAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as ClueMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: ClueMiniState): HintTarget | null => {
+    const sel = deductionHintSelector(state, ClueMini_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: ClueMiniGame,
 };
 

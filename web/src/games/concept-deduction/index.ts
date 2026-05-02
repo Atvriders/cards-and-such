@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConceptDeductionState, ConceptDeductionAction, ConceptDeductionSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { ConceptDeduction_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { ConceptDeductionGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const conceptDeductionPlugin: GamePlugin<ConceptDeductionState, ConceptDe
   initialState: (seed: number, s: S) => initialState(seed, s as ConceptDeductionSettings),
   reducer,
   isTerminal,
+  hint: (state: ConceptDeductionState): HintTarget | null => {
+    const sel = deductionHintSelector(state, ConceptDeduction_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: ConceptDeductionGame,
 };
 

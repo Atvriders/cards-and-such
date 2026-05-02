@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CoupBluffState, CoupBluffAction, CoupBluffSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { CoupBluff_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { CoupBluffGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const coupBluffPlugin: GamePlugin<CoupBluffState, CoupBluffAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as CoupBluffSettings),
   reducer,
   isTerminal,
+  hint: (state: CoupBluffState): HintTarget | null => {
+    const sel = deductionHintSelector(state, CoupBluff_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: CoupBluffGame,
 };
 

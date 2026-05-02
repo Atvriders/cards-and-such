@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HanabiExtraCoopState, HanabiExtraCoopAction, HanabiExtraCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { HanabiExtraCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { HanabiExtraCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const hanabiExtraCoopPlugin: GamePlugin<HanabiExtraCoopState, HanabiExtra
   initialState: (seed: number, s: S) => initialState(seed, s as HanabiExtraCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: HanabiExtraCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, HanabiExtraCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: HanabiExtraCoopGame,
 };
 

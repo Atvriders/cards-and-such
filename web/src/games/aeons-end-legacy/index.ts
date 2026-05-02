@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AeonsEndLegacyState, AeonsEndLegacyAction, AeonsEndLegacySettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { AeonsEndLegacy_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { AeonsEndLegacyGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const aeonsEndLegacyPlugin: GamePlugin<AeonsEndLegacyState, AeonsEndLegac
   initialState: (seed: number, s: S) => initialState(seed, s as AeonsEndLegacySettings),
   reducer,
   isTerminal,
+  hint: (state: AeonsEndLegacyState): HintTarget | null => {
+    const sel = coopHintSelector(state, AeonsEndLegacy_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: AeonsEndLegacyGame,
 };
 

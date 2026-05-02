@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DeceptionHkState, DeceptionHkAction, DeceptionHkSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { DeceptionHk_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { DeceptionHkGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const deceptionHkPlugin: GamePlugin<DeceptionHkState, DeceptionHkAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as DeceptionHkSettings),
   reducer,
   isTerminal,
+  hint: (state: DeceptionHkState): HintTarget | null => {
+    const sel = deductionHintSelector(state, DeceptionHk_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: DeceptionHkGame,
 };
 

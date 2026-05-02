@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { JottoState, JottoAction, JottoSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { Jotto_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { JottoGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const jottoPlugin: GamePlugin<JottoState, JottoAction, typeof settings> =
   initialState: (seed: number, s: S) => initialState(seed, s as JottoSettings),
   reducer,
   isTerminal,
+  hint: (state: JottoState): HintTarget | null => {
+    const sel = deductionHintSelector(state, Jotto_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: JottoGame,
 };
 

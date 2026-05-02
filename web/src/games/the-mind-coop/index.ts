@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TheMindCoopState, TheMindCoopAction, TheMindCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { TheMindCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { TheMindCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const theMindCoopPlugin: GamePlugin<TheMindCoopState, TheMindCoopAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as TheMindCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: TheMindCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, TheMindCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: TheMindCoopGame,
 };
 

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FlashpointVictimsState, FlashpointVictimsAction, FlashpointVictimsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { FlashpointVictims_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { FlashpointVictimsGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const flashpointVictimsPlugin: GamePlugin<FlashpointVictimsState, Flashpo
   initialState: (seed: number, s: S) => initialState(seed, s as FlashpointVictimsSettings),
   reducer,
   isTerminal,
+  hint: (state: FlashpointVictimsState): HintTarget | null => {
+    const sel = coopHintSelector(state, FlashpointVictims_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: FlashpointVictimsGame,
 };
 

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FourSoulsIsaacState, FourSoulsIsaacAction, FourSoulsIsaacSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { FourSoulsIsaac_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { FourSoulsIsaacGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const fourSoulsIsaacPlugin: GamePlugin<FourSoulsIsaacState, FourSoulsIsaa
   initialState: (seed: number, s: S) => initialState(seed, s as FourSoulsIsaacSettings),
   reducer,
   isTerminal,
+  hint: (state: FourSoulsIsaacState): HintTarget | null => {
+    const sel = coopHintSelector(state, FourSoulsIsaac_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: FourSoulsIsaacGame,
 };
 

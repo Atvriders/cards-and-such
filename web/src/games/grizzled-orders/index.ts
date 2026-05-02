@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GrizzledOrdersState, GrizzledOrdersAction, GrizzledOrdersSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { GrizzledOrders_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { GrizzledOrdersGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const grizzledOrdersPlugin: GamePlugin<GrizzledOrdersState, GrizzledOrder
   initialState: (seed: number, s: S) => initialState(seed, s as GrizzledOrdersSettings),
   reducer,
   isTerminal,
+  hint: (state: GrizzledOrdersState): HintTarget | null => {
+    const sel = coopHintSelector(state, GrizzledOrders_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: GrizzledOrdersGame,
 };
 

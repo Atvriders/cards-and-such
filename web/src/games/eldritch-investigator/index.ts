@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EldritchInvestigatorState, EldritchInvestigatorAction, EldritchInvestigatorSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { EldritchInvestigator_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { EldritchInvestigatorGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const eldritchInvestigatorPlugin: GamePlugin<EldritchInvestigatorState, E
   initialState: (seed: number, s: S) => initialState(seed, s as EldritchInvestigatorSettings),
   reducer,
   isTerminal,
+  hint: (state: EldritchInvestigatorState): HintTarget | null => {
+    const sel = coopHintSelector(state, EldritchInvestigator_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: EldritchInvestigatorGame,
 };
 

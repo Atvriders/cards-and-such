@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpaceAlertCoopState, SpaceAlertCoopAction, SpaceAlertCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SpaceAlertCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { SpaceAlertCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const spaceAlertCoopPlugin: GamePlugin<SpaceAlertCoopState, SpaceAlertCoo
   initialState: (seed: number, s: S) => initialState(seed, s as SpaceAlertCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: SpaceAlertCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, SpaceAlertCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SpaceAlertCoopGame,
 };
 

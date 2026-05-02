@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MageKnightCardState, MageKnightCardAction, MageKnightCardSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { MageKnightCard_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { MageKnightCardGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const mageKnightCardPlugin: GamePlugin<MageKnightCardState, MageKnightCar
   initialState: (seed: number, s: S) => initialState(seed, s as MageKnightCardSettings),
   reducer,
   isTerminal,
+  hint: (state: MageKnightCardState): HintTarget | null => {
+    const sel = coopHintSelector(state, MageKnightCard_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: MageKnightCardGame,
 };
 

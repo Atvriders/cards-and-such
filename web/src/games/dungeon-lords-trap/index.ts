@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DungeonLordsTrapState, DungeonLordsTrapAction, DungeonLordsTrapSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { DungeonLordsTrap_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { DungeonLordsTrapGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const dungeonLordsTrapPlugin: GamePlugin<DungeonLordsTrapState, DungeonLo
   initialState: (seed: number, s: S) => initialState(seed, s as DungeonLordsTrapSettings),
   reducer,
   isTerminal,
+  hint: (state: DungeonLordsTrapState): HintTarget | null => {
+    const sel = coopHintSelector(state, DungeonLordsTrap_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: DungeonLordsTrapGame,
 };
 

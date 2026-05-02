@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SaboteurMiniState, SaboteurMiniAction, SaboteurMiniSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SaboteurMini_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { SaboteurMiniGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const saboteurMiniPlugin: GamePlugin<SaboteurMiniState, SaboteurMiniActio
   initialState: (seed: number, s: S) => initialState(seed, s as SaboteurMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: SaboteurMiniState): HintTarget | null => {
+    const sel = deductionHintSelector(state, SaboteurMini_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SaboteurMiniGame,
 };
 

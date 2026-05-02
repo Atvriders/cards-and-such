@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HanabiAvenueBonusState, HanabiAvenueBonusAction, HanabiAvenueBonusSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { HanabiAvenueBonus_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { HanabiAvenueBonusGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const hanabiAvenueBonusPlugin: GamePlugin<HanabiAvenueBonusState, HanabiA
   initialState: (seed: number, s: S) => initialState(seed, s as HanabiAvenueBonusSettings),
   reducer,
   isTerminal,
+  hint: (state: HanabiAvenueBonusState): HintTarget | null => {
+    const sel = coopHintSelector(state, HanabiAvenueBonus_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: HanabiAvenueBonusGame,
 };
 

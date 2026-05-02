@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CodenamesXxlState, CodenamesXxlAction, CodenamesXxlSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { CodenamesXxl_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { CodenamesXxlGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const codenamesXxlPlugin: GamePlugin<CodenamesXxlState, CodenamesXxlActio
   initialState: (seed: number, s: S) => initialState(seed, s as CodenamesXxlSettings),
   reducer,
   isTerminal,
+  hint: (state: CodenamesXxlState): HintTarget | null => {
+    const sel = deductionHintSelector(state, CodenamesXxl_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: CodenamesXxlGame,
 };
 

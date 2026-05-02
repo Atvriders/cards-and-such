@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LordOfRingsLcgState, LordOfRingsLcgAction, LordOfRingsLcgSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { LordOfRingsLcg_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { LordOfRingsLcgGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const lordOfRingsLcgPlugin: GamePlugin<LordOfRingsLcgState, LordOfRingsLc
   initialState: (seed: number, s: S) => initialState(seed, s as LordOfRingsLcgSettings),
   reducer,
   isTerminal,
+  hint: (state: LordOfRingsLcgState): HintTarget | null => {
+    const sel = coopHintSelector(state, LordOfRingsLcg_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: LordOfRingsLcgGame,
 };
 

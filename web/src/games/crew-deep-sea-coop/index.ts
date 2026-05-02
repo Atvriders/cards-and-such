@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrewDeepSeaCoopState, CrewDeepSeaCoopAction, CrewDeepSeaCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { CrewDeepSeaCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { CrewDeepSeaCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const crewDeepSeaCoopPlugin: GamePlugin<CrewDeepSeaCoopState, CrewDeepSea
   initialState: (seed: number, s: S) => initialState(seed, s as CrewDeepSeaCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: CrewDeepSeaCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, CrewDeepSeaCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: CrewDeepSeaCoopGame,
 };
 

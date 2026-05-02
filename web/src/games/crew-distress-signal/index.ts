@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrewDistressSignalState, CrewDistressSignalAction, CrewDistressSignalSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { CrewDistressSignal_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { CrewDistressSignalGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const crewDistressSignalPlugin: GamePlugin<CrewDistressSignalState, CrewD
   initialState: (seed: number, s: S) => initialState(seed, s as CrewDistressSignalSettings),
   reducer,
   isTerminal,
+  hint: (state: CrewDistressSignalState): HintTarget | null => {
+    const sel = coopHintSelector(state, CrewDistressSignal_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: CrewDistressSignalGame,
 };
 

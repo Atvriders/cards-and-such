@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SentinelsMultiverseCoopState, SentinelsMultiverseCoopAction, SentinelsMultiverseCoopSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SentinelsMultiverseCoop_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { SentinelsMultiverseCoopGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const sentinelsMultiverseCoopPlugin: GamePlugin<SentinelsMultiverseCoopSt
   initialState: (seed: number, s: S) => initialState(seed, s as SentinelsMultiverseCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: SentinelsMultiverseCoopState): HintTarget | null => {
+    const sel = coopHintSelector(state, SentinelsMultiverseCoop_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SentinelsMultiverseCoopGame,
 };
 

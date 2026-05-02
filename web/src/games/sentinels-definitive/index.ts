@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SentinelsDefinitiveState, SentinelsDefinitiveAction, SentinelsDefinitiveSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { SentinelsDefinitive_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { SentinelsDefinitiveGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const sentinelsDefinitivePlugin: GamePlugin<SentinelsDefinitiveState, Sen
   initialState: (seed: number, s: S) => initialState(seed, s as SentinelsDefinitiveSettings),
   reducer,
   isTerminal,
+  hint: (state: SentinelsDefinitiveState): HintTarget | null => {
+    const sel = coopHintSelector(state, SentinelsDefinitive_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: SentinelsDefinitiveGame,
 };
 

@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TantoCuoreMaidsState, TantoCuoreMaidsAction, TantoCuoreMaidsSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { TantoCuoreMaids_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { coopHintSelector } from "../_shared/coop-engine.js";
 import { TantoCuoreMaidsGame } from "./Game.js";
 
 const settings = {
@@ -19,6 +20,10 @@ export const tantoCuoreMaidsPlugin: GamePlugin<TantoCuoreMaidsState, TantoCuoreM
   initialState: (seed: number, s: S) => initialState(seed, s as TantoCuoreMaidsSettings),
   reducer,
   isTerminal,
+  hint: (state: TantoCuoreMaidsState): HintTarget | null => {
+    const sel = coopHintSelector(state, TantoCuoreMaids_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: TantoCuoreMaidsGame,
 };
 

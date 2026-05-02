@@ -1,6 +1,7 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PalificoState, PalificoAction, PalificoSettings } from "./state.js";
-import { initialState, reducer, isTerminal } from "./state.js";
+import { Palifico_CFG, initialState, reducer, isTerminal } from "./state.js";
+import { deductionHintSelector } from "../_shared/deduction-engine.js";
 import { PalificoGame } from "./Game.js";
 
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
@@ -17,6 +18,10 @@ export const palificoPlugin: GamePlugin<PalificoState, PalificoAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as PalificoSettings),
   reducer,
   isTerminal,
+  hint: (state: PalificoState): HintTarget | null => {
+    const sel = deductionHintSelector(state, Palifico_CFG);
+    return sel ? { selector: sel, pulses: 3 } : null;
+  },
   component: PalificoGame,
 };
 
