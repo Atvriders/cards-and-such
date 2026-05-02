@@ -15,7 +15,13 @@ import {
   QUICK_GAME_IDS,
   pickBadgeKind,
 } from "../platform/gameTags.js";
-import { readFavorites, toggleFavorite as toggleFavoritePersist, getLastPlayed } from "../platform/userdata.js";
+import {
+  readFavorites,
+  toggleFavorite as toggleFavoritePersist,
+  getLastPlayed,
+  readHiddenGames,
+  hideGame as hideGamePersist,
+} from "../platform/userdata.js";
 import { highlightMatch } from "../platform/highlight.js";
 import {
   getCoachmarkState,
@@ -387,7 +393,7 @@ function TileTooltipEngine({
   );
 }
 
-type Filter = "all" | "top-rated" | "favorites" | "recently-played" | GameCategory;
+type Filter = "all" | "top-rated" | "favorites" | "recently-played" | "hidden" | GameCategory;
 const TOP_RATED_THRESHOLD = 4;
 
 /**
@@ -405,6 +411,7 @@ function readPersistedFilter(): Filter {
       || raw === "top-rated"
       || raw === "favorites"
       || raw === "recently-played"
+      || raw === "hidden"
       || raw === "solitaire"
       || raw === "cards"
       || raw === "dice"
@@ -514,6 +521,7 @@ export default function LobbyPage(): JSX.Element {
   const [openFamilyId, setOpenFamilyId] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>(() => readRatings());
   const [favSet, setFavSet] = useState<Set<string>>(() => readFavorites());
+  const [hiddenSet, setHiddenSet] = useState<Set<string>>(() => readHiddenGames());
   const [lastPlayed, setLastPlayed] = useState<Record<string, number>>(() => {
     try { return getLastPlayed(); } catch { return {}; }
   });
@@ -604,6 +612,22 @@ export default function LobbyPage(): JSX.Element {
     };
   }, []);
 
+  // Mirror — keep the hidden-games set fresh across tabs and on focus
+  // regain so a wipe via Settings → Data → "Show hidden games" surfaces
+  // the now-visible tiles immediately.
+  useEffect(() => {
+    const refresh = () => setHiddenSet(readHiddenGames());
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === "cards-hidden-games") refresh();
+    };
+    window.addEventListener("focus", refresh);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
+
   // Mirror — keep the recently-played map fresh when refocusing the
   // lobby so the drawer's "Recently played" filter reflects the most
   // recent session even after navigating back from PlayPage.
@@ -650,6 +674,21 @@ export default function LobbyPage(): JSX.Element {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
+      return next;
+    });
+  }, []);
+
+  // Hide a single id (game or family) from every lobby filter except
+  // the dedicated "Hidden" chip. Persisted via {@link hideGamePersist}
+  // and mirrored into in-memory state so visible tiles drop out without
+  // a re-read pass.
+  const onHideGame = useCallback((id: string) => {
+    if (!id) return;
+    hideGamePersist(id);
+    setHiddenSet((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
       return next;
     });
   }, []);
@@ -807,17 +846,35 @@ export default function LobbyPage(): JSX.Element {
 
   // Filtered + searched list. We filter the `entries` (family-level)
   // rather than raw GAMES so a family stays as one tile.
+  // Predicate: is this lobby entry currently hidden?
+  // We treat a family as hidden if its family id is in the hidden set
+  // (the menu hides the family as a unit; per-variant hiding lives in
+  // the picker, not the lobby tile menu).
+  const isEntryHidden = useCallback(
+    (e: LobbyEntry): boolean =>
+      e.kind === "game"
+        ? hiddenSet.has(e.game.id)
+        : hiddenSet.has(e.family.id),
+    [hiddenSet],
+  );
+
   const filtered = useMemo(() => {
     const q = deferredQuery.trim().toLowerCase();
     let list: LobbyEntry[];
-    if (filter === "all") list = allEntries;
+    if (filter === "hidden") {
+      // Dedicated chip: surface ONLY the hidden tiles so the user can
+      // review what they've stashed (and clear via Settings).
+      list = allEntries.filter(isEntryHidden);
+    } else if (filter === "all") list = allEntries.filter((e) => !isEntryHidden(e));
     else if (filter === "top-rated") {
-      list = allEntries.filter((e) => entryRating(e) >= TOP_RATED_THRESHOLD);
+      list = allEntries.filter((e) => !isEntryHidden(e) && entryRating(e) >= TOP_RATED_THRESHOLD);
     } else if (filter === "favorites") {
       list = allEntries.filter((e) =>
-        e.kind === "game"
-          ? favSet.has(e.game.id)
-          : e.members.some((m) => favSet.has(m.id)),
+        !isEntryHidden(e) && (
+          e.kind === "game"
+            ? favSet.has(e.game.id)
+            : e.members.some((m) => favSet.has(m.id))
+        ),
       );
     } else if (filter === "recently-played") {
       // Keep only entries that have at least one member with a non-zero
@@ -833,11 +890,11 @@ export default function LobbyPage(): JSX.Element {
         return best;
       };
       list = allEntries
-        .filter((e) => stampOf(e) > 0)
+        .filter((e) => !isEntryHidden(e) && stampOf(e) > 0)
         .slice()
         .sort((a, b) => stampOf(b) - stampOf(a));
     } else {
-      list = allEntries.filter((e) => e.category === filter);
+      list = allEntries.filter((e) => !isEntryHidden(e) && e.category === filter);
     }
     if (!q) return list;
     // Each entry carries a precomputed lowercase `haystack` covering the
@@ -848,7 +905,7 @@ export default function LobbyPage(): JSX.Element {
     // category / description).
     list = list.filter((e) => e.haystack.includes(q));
     return list;
-  }, [allEntries, filter, deferredQuery, entryRating, favSet, lastPlayed]);
+  }, [allEntries, filter, deferredQuery, entryRating, favSet, lastPlayed, isEntryHidden]);
 
   // Reset window + page + close any open picker when filter or query changes.
   useEffect(() => {
@@ -1117,21 +1174,24 @@ export default function LobbyPage(): JSX.Element {
   const surpriseMe = useCallback(() => {
     let pool: GamePlugin[];
     const allGames = GAMES.filter((g): g is GamePlugin => g != null);
-    if (filter === "all") pool = allGames;
-    else if (filter === "top-rated") {
-      pool = allGames.filter((g) => (ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD);
+    if (filter === "hidden") {
+      pool = allGames.filter((g) => hiddenSet.has(g.id));
+    } else if (filter === "all") {
+      pool = allGames.filter((g) => !hiddenSet.has(g.id));
+    } else if (filter === "top-rated") {
+      pool = allGames.filter((g) => !hiddenSet.has(g.id) && (ratings[g.id] ?? 0) >= TOP_RATED_THRESHOLD);
     } else if (filter === "favorites") {
-      pool = allGames.filter((g) => favSet.has(g.id));
+      pool = allGames.filter((g) => !hiddenSet.has(g.id) && favSet.has(g.id));
     } else if (filter === "recently-played") {
-      pool = allGames.filter((g) => (lastPlayed[g.id] ?? 0) > 0);
+      pool = allGames.filter((g) => !hiddenSet.has(g.id) && (lastPlayed[g.id] ?? 0) > 0);
     } else {
-      pool = allGames.filter((g) => g.category === filter);
+      pool = allGames.filter((g) => !hiddenSet.has(g.id) && g.category === filter);
     }
     const final = pool.length > 0 ? pool : allGames;
     if (final.length === 0) return;
     const pick = final[Math.floor(Math.random() * final.length)]!;
     navigate(`/play/${pick.id}`);
-  }, [filter, navigate, ratings, favSet, lastPlayed]);
+  }, [filter, navigate, ratings, favSet, lastPlayed, hiddenSet]);
 
   // Count of distinct top-rated games (>= 4 stars) — drives the chip count.
   const topRatedCount = useMemo(() => {
@@ -1153,6 +1213,11 @@ export default function LobbyPage(): JSX.Element {
     }
     return n;
   }, [lastPlayed]);
+
+  // Count of currently-hidden ids — drives the "Hidden" chip badge.
+  // Counts each id (game or family) at face value; mixed buckets are
+  // fine since the chip is a discoverability hint, not a strict total.
+  const hiddenCount = hiddenSet.size;
 
   // Family ids that already appear in the featured strip — when a
   // family is featured, its main-grid tile uses a different testid
@@ -1376,6 +1441,13 @@ export default function LobbyPage(): JSX.Element {
             testId="chip-recently-played"
             glyph="↺"
           >{t("lobby.chip.recently_played")}</Chip>
+          <Chip
+            active={filter === "hidden"}
+            onClick={() => setFilter("hidden")}
+            count={hiddenCount}
+            testId="chip-hidden"
+            glyph="◌"
+          >Hidden</Chip>
           {CATEGORY_ORDER.map((cat) => (
             <Chip
               key={cat}
@@ -1478,7 +1550,9 @@ export default function LobbyPage(): JSX.Element {
                   ? t("lobby.chip.favorites")
                   : filter === "recently-played"
                     ? t("lobby.chip.recently_played")
-                    : CATEGORY_LABELS[filter]}
+                    : filter === "hidden"
+                      ? "Hidden"
+                      : CATEGORY_LABELS[filter]}
             {query && (
               <span className="lobby-section-count">
                 {" · "}
@@ -1559,6 +1633,7 @@ export default function LobbyPage(): JSX.Element {
                     isNew={newGameIds.has(entry.game.id)}
                     isFavorite={favSet.has(entry.game.id)}
                     onToggleFavorite={onToggleFavorite}
+                    onHideGame={onHideGame}
                     highlightQuery={deferredQuery}
                   />
                 ) : (
@@ -1958,6 +2033,7 @@ function GameCard({
   isNew = false,
   isFavorite = false,
   onToggleFavorite,
+  onHideGame,
   highlightQuery,
 }: {
   game: GamePlugin;
@@ -1965,6 +2041,7 @@ function GameCard({
   isNew?: boolean;
   isFavorite?: boolean;
   onToggleFavorite?: (id: string) => void;
+  onHideGame?: (id: string) => void;
   /**
    * If set (and at least TITLE_HIGHLIGHT_MIN_LEN chars), wrap the first
    * matching substring of the title in a `<mark>`. Mirrors SearchPage.
@@ -2102,6 +2179,10 @@ function GameCard({
       pushToast("error", "Copy failed");
     }
   }, [g.id, pushToast]);
+  const onMenuHide = useCallback(() => {
+    onHideGame?.(g.id);
+    pushToast("success", "Hidden from lobby");
+  }, [onHideGame, g.id, pushToast]);
 
   return (
     <div className="lobby-tile-wrap">
@@ -2184,6 +2265,7 @@ function GameCard({
         onCopyLink={onMenuCopy}
         onToggleFavorite={onMenuFav}
         onShareWithFriend={onMenuFriend}
+        onHide={onMenuHide}
       />
     )}
     {tooltip}

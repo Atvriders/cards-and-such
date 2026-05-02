@@ -44,6 +44,8 @@ export interface LobbyTileMenuProps {
   onToggleFavorite: () => void;
   /** Build a friend-mode URL with a fresh seed and copy it. */
   onShareWithFriend: () => void;
+  /** Hide this tile from every lobby filter except "Hidden". */
+  onHide: () => void;
 }
 
 /**
@@ -52,7 +54,7 @@ export interface LobbyTileMenuProps {
  * we'd rather nudge the menu inward 4 px than let it overflow.
  */
 const MENU_WIDTH = 200;
-const MENU_HEIGHT = 180;
+const MENU_HEIGHT = 220;
 
 export function LobbyTileMenu({
   gameId,
@@ -64,6 +66,7 @@ export function LobbyTileMenu({
   onCopyLink,
   onToggleFavorite,
   onShareWithFriend,
+  onHide,
 }: LobbyTileMenuProps): JSX.Element {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -134,6 +137,11 @@ export function LobbyTileMenu({
       testId: "tile-menu-friend",
       label: "Share with friend",
       onSelect: () => run(onShareWithFriend),
+    },
+    {
+      testId: "tile-menu-hide",
+      label: "Hide from lobby",
+      onSelect: () => run(onHide),
     },
   ];
 

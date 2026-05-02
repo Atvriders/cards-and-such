@@ -22,12 +22,14 @@ function renderMenu(
   onCopyLink: ReturnType<typeof vi.fn>;
   onToggleFavorite: ReturnType<typeof vi.fn>;
   onShareWithFriend: ReturnType<typeof vi.fn>;
+  onHide: ReturnType<typeof vi.fn>;
 } {
   const onClose = vi.fn();
   const onPlay = vi.fn();
   const onCopyLink = vi.fn();
   const onToggleFavorite = vi.fn();
   const onShareWithFriend = vi.fn();
+  const onHide = vi.fn();
   render(
     <LobbyTileMenu
       gameId="klondike"
@@ -40,21 +42,22 @@ function renderMenu(
       onCopyLink={onCopyLink}
       onToggleFavorite={onToggleFavorite}
       onShareWithFriend={onShareWithFriend}
+      onHide={onHide}
       {...overrides}
     />,
   );
-  return { onClose, onPlay, onCopyLink, onToggleFavorite, onShareWithFriend };
+  return { onClose, onPlay, onCopyLink, onToggleFavorite, onShareWithFriend, onHide };
 }
 
 describe("LobbyTileMenu", () => {
-  it("renders all four menu items with role=menuitem", () => {
+  it("renders all five menu items with role=menuitem", () => {
     renderMenu();
     const menu = screen.getByTestId("tile-menu");
     expect(menu).toHaveAttribute("role", "menu");
     expect(menu).toHaveAttribute("aria-label", "Actions for klondike");
 
     const items = screen.getAllByRole("menuitem");
-    expect(items).toHaveLength(4);
+    expect(items).toHaveLength(5);
     // Each menu item must have visible text (a11y: discernible name).
     for (const item of items) {
       expect(item.textContent?.trim().length ?? 0).toBeGreaterThan(0);
@@ -67,6 +70,16 @@ describe("LobbyTileMenu", () => {
     expect(screen.getByTestId("tile-menu-friend")).toHaveTextContent(
       "Share with friend",
     );
+    expect(screen.getByTestId("tile-menu-hide")).toHaveTextContent(
+      "Hide from lobby",
+    );
+  });
+
+  it("invoking Hide fires onHide and closes the menu", () => {
+    const { onHide, onClose } = renderMenu();
+    fireEvent.click(screen.getByTestId("tile-menu-hide"));
+    expect(onHide).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
 
   it("flips the favorite label when isFavorite=true", () => {
@@ -108,6 +121,7 @@ describe("LobbyTileMenu", () => {
       "tile-menu-copy",
       "tile-menu-fav",
       "tile-menu-friend",
+      "tile-menu-hide",
     ]);
     for (const item of items) {
       expect(item.tagName).toBe("BUTTON");
@@ -131,6 +145,10 @@ describe("LobbyTileMenu", () => {
     expect(screen.getByTestId("tile-menu-copy")).toHaveAttribute("tabindex", "-1");
     expect(screen.getByTestId("tile-menu-fav")).toHaveAttribute("tabindex", "-1");
     expect(screen.getByTestId("tile-menu-friend")).toHaveAttribute(
+      "tabindex",
+      "-1",
+    );
+    expect(screen.getByTestId("tile-menu-hide")).toHaveAttribute(
       "tabindex",
       "-1",
     );
@@ -158,7 +176,7 @@ describe("LobbyTileMenu", () => {
     });
     fireEvent.keyDown(menu, { key: "ArrowUp" });
     await waitFor(() => {
-      expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
+      expect(screen.getByTestId("tile-menu-hide")).toHaveFocus();
     });
   });
 
@@ -167,7 +185,7 @@ describe("LobbyTileMenu", () => {
     const menu = screen.getByTestId("tile-menu");
     fireEvent.keyDown(menu, { key: "End" });
     await waitFor(() => {
-      expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
+      expect(screen.getByTestId("tile-menu-hide")).toHaveFocus();
     });
     fireEvent.keyDown(menu, { key: "ArrowDown" });
     await waitFor(() => {
@@ -180,7 +198,7 @@ describe("LobbyTileMenu", () => {
     const menu = screen.getByTestId("tile-menu");
     fireEvent.keyDown(menu, { key: "End" });
     await waitFor(() => {
-      expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
+      expect(screen.getByTestId("tile-menu-hide")).toHaveFocus();
     });
     fireEvent.keyDown(menu, { key: "Home" });
     await waitFor(() => {
@@ -203,7 +221,13 @@ describe("LobbyTileMenu", () => {
   it("Space activates the focused item", async () => {
     const { onShareWithFriend, onClose } = renderMenu();
     const menu = screen.getByTestId("tile-menu");
+    // End jumps to the last item (hide); ArrowUp moves to the friend
+    // share, which is the action this case verifies Space activates.
     fireEvent.keyDown(menu, { key: "End" });
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-menu-hide")).toHaveFocus();
+    });
+    fireEvent.keyDown(menu, { key: "ArrowUp" });
     await waitFor(() => {
       expect(screen.getByTestId("tile-menu-friend")).toHaveFocus();
     });

@@ -30,6 +30,7 @@ export const KNOWN_KEYS: readonly string[] = [
   "cards-last-played",
   "cards-ratings",
   "cards-favorites",
+  "cards-hidden-games",
   "cards-lobby-filter",
   "cards-daily-completions",
   "cards-daily-streak",
@@ -365,6 +366,73 @@ export function clearAllRatings(): void {
   try {
     if (typeof localStorage === "undefined") return;
     localStorage.removeItem("cards-ratings");
+  } catch {
+    /* ignore */
+  }
+}
+
+/* ----------------------------------------------------------------------
+ * Hidden games
+ *
+ * Persisted under `cards-hidden-games` as a JSON array of game / family
+ * ids. The lobby filters these tiles out of every chip view EXCEPT the
+ * dedicated "Hidden" chip, where the user can revisit and (via Settings
+ * → Data → Show hidden games) wipe the whole set in one go. Tolerates
+ * either an array (canonical) or `Record<string, true>` (legacy /
+ * forward-compatible) on read.
+ * -------------------------------------------------------------------- */
+
+const HIDDEN_GAMES_KEY = "cards-hidden-games";
+
+/** Returns the canonical Set of hidden game / family ids. Empty on missing/corrupt. */
+export function readHiddenGames(): Set<string> {
+  try {
+    if (typeof localStorage === "undefined") return new Set();
+    const raw = localStorage.getItem(HIDDEN_GAMES_KEY);
+    if (!raw) return new Set();
+    const parsed = JSON.parse(raw) as unknown;
+    if (Array.isArray(parsed)) {
+      return new Set(parsed.filter((x): x is string => typeof x === "string"));
+    }
+    if (parsed && typeof parsed === "object") {
+      const out = new Set<string>();
+      for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+        if (v) out.add(k);
+      }
+      return out;
+    }
+    return new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function writeHiddenGamesSet(ids: Set<string>): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(HIDDEN_GAMES_KEY, JSON.stringify(Array.from(ids).sort()));
+  } catch {
+    /* ignore */
+  }
+}
+
+/**
+ * Add `gameId` to the hidden set (idempotent). Used by the lobby tile
+ * context menu's "Hide from lobby" action.
+ */
+export function hideGame(gameId: string): void {
+  if (!gameId) return;
+  const cur = readHiddenGames();
+  if (cur.has(gameId)) return;
+  cur.add(gameId);
+  writeHiddenGamesSet(cur);
+}
+
+/** Wipe every hidden id. Used by Settings → Data → "Show hidden games". */
+export function clearAllHiddenGames(): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.removeItem(HIDDEN_GAMES_KEY);
   } catch {
     /* ignore */
   }
