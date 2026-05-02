@@ -16,8 +16,8 @@ export function Dice421Game({ state, dispatch, onGameOver }: GameProps<Dice421St
       <div className="f4-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="f4-row">{state.dice.map((d, i) => <div key={i} className="f4-die">{d}</div>)}</div>}
       {state.message && <div className="f4-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="f4-btn" onClick={() => dispatch({ type:"roll" } as Dice421Action)}>Roll</button>}
-      {state.phase === "result" && <button className="f4-btn alt" onClick={() => dispatch({ type:"next" } as Dice421Action)}>Next</button>}
+      {state.phase === "roll" && <button className="f4-btn" data-testid="hint-target-dice-421-roll" onClick={() => dispatch({ type:"roll" } as Dice421Action)}>Roll</button>}
+      {state.phase === "result" && <button className="f4-btn alt" data-testid="hint-target-dice-421-next" onClick={() => dispatch({ type:"next" } as Dice421Action)}>Next</button>}
     </div>
   );
 }

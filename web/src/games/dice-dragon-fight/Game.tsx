@@ -51,13 +51,13 @@ export function DiceDragonFightGame({ state, dispatch, onGameOver }: GameProps<D
 
       {state.phase === "choose" && (
         <div className="df-actions">
-          <button className="df-btn strike" onClick={() => dispatch({ type: "act", choice: "strike" } as DiceDragonFightAction)}>Strike</button>
+          <button className="df-btn strike" data-testid="hint-target-dice-dragon-fight-roll" onClick={() => dispatch({ type: "act", choice: "strike" } as DiceDragonFightAction)}>Strike</button>
           <button className="df-btn guard" onClick={() => dispatch({ type: "act", choice: "guard" } as DiceDragonFightAction)}>Guard</button>
           <button className="df-btn focus" onClick={() => dispatch({ type: "act", choice: "focus" } as DiceDragonFightAction)}>Focus</button>
         </div>
       )}
       {state.phase === "result" && (
-        <button className="df-btn next" onClick={() => dispatch({ type: "next" } as DiceDragonFightAction)}>Next Turn</button>
+        <button className="df-btn next" data-testid="hint-target-dice-dragon-fight-next" onClick={() => dispatch({ type: "next" } as DiceDragonFightAction)}>Next Turn</button>
       )}
     </div>
   );

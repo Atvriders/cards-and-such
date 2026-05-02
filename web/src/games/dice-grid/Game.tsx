@@ -18,12 +18,12 @@ export function DiceGridGame({ state, dispatch, onGameOver }: GameProps<DiceGrid
         <div className="dx-row">{state.dice.map((d, i) => <div key={i} className="dx-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dx-btn" onClick={() => dispatch({ type:"roll" } as DiceGridAction)}>Roll</button>
+        <button className="dx-btn" data-testid="hint-target-dice-grid-roll" onClick={() => dispatch({ type:"roll" } as DiceGridAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="dx-result">+{state.lastPts}</div>
-          <button className="dx-btn alt" onClick={() => dispatch({ type:"next" } as DiceGridAction)}>Next</button>
+          <button className="dx-btn alt" data-testid="hint-target-dice-grid-next" onClick={() => dispatch({ type:"next" } as DiceGridAction)}>Next</button>
         </>
       )}
     </div>

@@ -20,12 +20,12 @@ export function DiceFarmGame({ state, dispatch, onGameOver }: GameProps<DiceFarm
         </div>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceFarmAction)}>Tend</button>
+        <button className="dm-btn" data-testid="hint-target-dice-farm-roll" onClick={() => dispatch({ type:"roll" } as DiceFarmAction)}>Tend</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">Harvest: +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceFarmAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-farm-next" onClick={() => dispatch({ type:"next" } as DiceFarmAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

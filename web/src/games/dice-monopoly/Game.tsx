@@ -12,8 +12,8 @@ export function DiceMonopolyGame({ state, dispatch, onGameOver }: GameProps<Dice
       <div className="dm-info">Turn {state.turn} / {TOTAL_TURNS} — Pos: {state.pos + 1}/{BOARD.length}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.lastRoll && <div className="dm-dice">Rolled {state.lastRoll} → square {state.pos + 1} ({state.lastValue >= 0 ? "+" : ""}{state.lastValue})</div>}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceMonopolyAction)}>Roll</button>}
-      {state.phase === "scored" && <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceMonopolyAction)}>{state.turn >= TOTAL_TURNS ? "Finish" : "Next"}</button>}
+      {state.phase === "rolling" && <button className="dm-btn" data-testid="hint-target-dice-monopoly-roll" onClick={() => dispatch({ type:"roll" } as DiceMonopolyAction)}>Roll</button>}
+      {state.phase === "scored" && <button className="dm-btn alt" data-testid="hint-target-dice-monopoly-next" onClick={() => dispatch({ type:"next" } as DiceMonopolyAction)}>{state.turn >= TOTAL_TURNS ? "Finish" : "Next"}</button>}
     </div>
   );
 }

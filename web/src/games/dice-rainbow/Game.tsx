@@ -21,12 +21,12 @@ export function DiceRainbowGame({ state, dispatch, onGameOver }: GameProps<DiceR
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceRainbowAction)}>Roll</button>
+        <button className="dm-btn" data-testid="hint-target-dice-rainbow-roll" onClick={() => dispatch({ type:"roll" } as DiceRainbowAction)}>Roll</button>
       )}
       {state.phase === "result" && (
         <>
           <div className="dm-result">{state.lastPts >= 75 ? "Rainbow! +75" : state.lastPts > 0 ? `5 unique +${state.lastPts}` : "No bonus — 0"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceRainbowAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-rainbow-next" onClick={() => dispatch({ type:"next" } as DiceRainbowAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

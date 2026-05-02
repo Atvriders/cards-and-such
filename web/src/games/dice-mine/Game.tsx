@@ -20,12 +20,12 @@ export function DiceMineGame({ state, dispatch, onGameOver }: GameProps<DiceMine
         </div>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceMineAction)}>Mine</button>
+        <button className="dm-btn" data-testid="hint-target-dice-mine-roll" onClick={() => dispatch({ type:"roll" } as DiceMineAction)}>Mine</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">Haul: +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceMineAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-mine-next" onClick={() => dispatch({ type:"next" } as DiceMineAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

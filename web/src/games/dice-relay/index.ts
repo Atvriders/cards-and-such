@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceRelayState, DiceRelayAction, DiceRelaySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ Tap Roll to roll the dice. After each result, press Continue: clear stages advan
 Roll, advance, and chase the relay!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceRelaySettings),
-  reducer,isTerminal,component:DiceRelayGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceRelayState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-relay-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-relay-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceRelayGame,
 };

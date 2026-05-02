@@ -18,12 +18,12 @@ export function DiceSpinwheelGame({ state, dispatch, onGameOver }: GameProps<Dic
         <div className="dx-row">{state.dice.map((d, i) => <div key={i} className="dx-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dx-btn" onClick={() => dispatch({ type:"roll" } as DiceSpinwheelAction)}>Roll</button>
+        <button className="dx-btn" data-testid="hint-target-dice-spinwheel-roll" onClick={() => dispatch({ type:"roll" } as DiceSpinwheelAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="dx-result">+{state.lastPts}</div>
-          <button className="dx-btn alt" onClick={() => dispatch({ type:"next" } as DiceSpinwheelAction)}>Next</button>
+          <button className="dx-btn alt" data-testid="hint-target-dice-spinwheel-next" onClick={() => dispatch({ type:"next" } as DiceSpinwheelAction)}>Next</button>
         </>
       )}
     </div>

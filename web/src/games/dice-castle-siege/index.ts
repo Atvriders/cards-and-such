@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceCastleSiegeState, DiceCastleSiegeAction, DiceCastleSiegeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,13 @@ export const diceCastleSiegePlugin: GamePlugin<DiceCastleSiegeState, DiceCastleS
   howToPlay:"Dice Castle Siege is a 10-round dice-rolling game with a doubles bonus. 🏰 Each round, press Roll Dice and two dice tumble across the screen. If both faces match (doubles), you score the doubled face times 10. Otherwise, you score the simple sum of the two dice.\n\nSums of non-doubles range 3-11; doubles range 10-60 with double-six the maximum. Doubles occur 1 in 6 rounds on average, so a typical 10-round game lands around 75-95 points, but a lucky double-six round alone bags 60.\n\nPress Next after each result to continue, or Finish on the final round. Watch your running score climb in the upper right. Great for quick mini-game breaks: the whole game is over in well under a minute. Roll for those doubles!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceCastleSiegeSettings),
-  reducer,isTerminal,component:DiceCastleSiegeGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceCastleSiegeState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "choose") return { selector: '[data-testid="hint-target-dice-castle-siege-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-castle-siege-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceCastleSiegeGame,
 };

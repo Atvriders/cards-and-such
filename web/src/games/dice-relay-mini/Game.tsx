@@ -13,11 +13,11 @@ export function DiceRelayMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — Stage {state.stage + 1} (target sum ≥ {target})</div>
       <div className="dm-score">{state.score} pts</div>
       {state.dice && <div className="dm-dice">[ {state.dice[0]}, {state.dice[1]} ] = {state.dice[0] + state.dice[1]}</div>}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceRelayMiniAction)}>Roll</button>}
+      {state.phase === "rolling" && <button className="dm-btn" data-testid="hint-target-dice-relay-mini-roll" onClick={() => dispatch({ type:"roll" } as DiceRelayMiniAction)}>Roll</button>}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.lastPts > 0 ? `+${state.lastPts} (advanced)` : "no advance"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceRelayMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-relay-mini-next" onClick={() => dispatch({ type:"next" } as DiceRelayMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

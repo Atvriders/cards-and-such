@@ -18,12 +18,12 @@ export function DiceStackMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
         <div className="dm-row"><div className="dm-die">{state.newDie}</div></div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type: "roll" } as DiceStackMiniAction)}>Roll</button>
+        <button className="dm-btn" data-testid="hint-target-dice-stack-mini-roll" onClick={() => dispatch({ type: "roll" } as DiceStackMiniAction)}>Roll</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.lastPts > 0 ? `Stacked! +${state.lastPts}` : "Broke stack — 0"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DiceStackMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-stack-mini-next" onClick={() => dispatch({ type: "next" } as DiceStackMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

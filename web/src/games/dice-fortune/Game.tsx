@@ -21,12 +21,12 @@ export function DiceFortuneGame({ state, dispatch, onGameOver }: GameProps<DiceF
         </div>
       )}
       {state.phase === "spinning" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"spin" } as DiceFortuneAction)}>Spin</button>
+        <button className="dm-btn" data-testid="hint-target-dice-fortune-roll" onClick={() => dispatch({ type:"spin" } as DiceFortuneAction)}>Spin</button>
       )}
       {state.phase === "result" && (
         <>
           <div className="dm-result">+{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceFortuneAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-fortune-next" onClick={() => dispatch({ type:"next" } as DiceFortuneAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

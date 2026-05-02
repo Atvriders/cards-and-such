@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceVortexState, DiceVortexAction, DiceVortexSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ The expected values are: x1 = 3.5, x2 ≈ 6.67, x3 ≈ 8.33 (the optimal pick), 
 Press a multiplier to lock in and roll; press Next to continue. Choose carefully — the vortex shows no mercy.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceVortexSettings),
-  reducer,isTerminal,component:DiceVortexGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceVortexState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-dice-vortex-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-vortex-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceVortexGame,
 };

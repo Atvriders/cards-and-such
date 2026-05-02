@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceCheckersState, DiceCheckersAction, DiceCheckersSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -21,5 +21,13 @@ Press Roll to throw the die, then press Next to continue. There's no skill beyon
 10 turns total. Maximum 300 points. Lock in those high rolls!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceCheckersSettings),
-  reducer,isTerminal,component:DiceCheckersGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceCheckersState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-checkers-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-checkers-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceCheckersGame,
 };

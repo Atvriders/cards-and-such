@@ -18,12 +18,12 @@ export function DiceGridironGame({ state, dispatch, onGameOver }: GameProps<Dice
         <div className="dgrd-row">{state.dice.map((d, i) => <div key={i} className="dgrd-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dgrd-btn" onClick={() => dispatch({ type:"roll" } as DiceGridironAction)}>Roll</button>
+        <button className="dgrd-btn" data-testid="hint-target-dice-gridiron-roll" onClick={() => dispatch({ type:"roll" } as DiceGridironAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="dgrd-result">+{state.lastPts}</div>
-          <button className="dgrd-btn alt" onClick={() => dispatch({ type:"next" } as DiceGridironAction)}>Next</button>
+          <button className="dgrd-btn alt" data-testid="hint-target-dice-gridiron-next" onClick={() => dispatch({ type:"next" } as DiceGridironAction)}>Next</button>
         </>
       )}
     </div>

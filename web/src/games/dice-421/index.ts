@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Dice421State, Dice421Action, Dice421Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,13 @@ export const dice421Plugin: GamePlugin<Dice421State, Dice421Action, typeof setti
   howToPlay:"421 (Quatre Cent Vingt et Un) is a French bar game where the iconic winning combo is 4-2-1 — and the sum 4+2+1 = 7 famously equals the lowest target in the system. The game has rich combo-based scoring with special legendary rolls.\n\nIn this 10-round single-roll version, you roll three dice once. The system finds the best 421 category: 4-2-1 (\"Le Four-Two-One\") = 80, 1-1-1 (\"Aces\") = 70, Trips (other 3-of-a-kind) = 60, Suite (1-2-3 or 4-5-6 or 2-3-4 etc.) = 40, 1-1-x with high x = 25 + x*5, Pair = sum × 2, otherwise sum.\n\n10 rounds total. The 4-2-1 has 6/216 probability (any order) = 1/36. A perfect run of 4-2-1s would score 800 — astronomically unlikely. Average expected score: 100-200 points.\n\nFast, French, and full of flair. Le quatre-deux-un est roi!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as Dice421Settings),
-  reducer,isTerminal,component:Dice421Game,
+  reducer,
+  isTerminal,
+  hint: (state: Dice421State): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "roll") return { selector: '[data-testid="hint-target-dice-421-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-421-next"]', pulses: 3 };
+    return null;
+  },
+  component:Dice421Game,
 };

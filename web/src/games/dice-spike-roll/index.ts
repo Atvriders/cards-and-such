@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceSpikeRollState, DiceSpikeRollAction, DiceSpikeRollSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ A normal roll scores 2-12. A pair scores 4-24. A double-six spikes to 36! Over 1
 A pair occurs 1 in 6 times; double-six occurs 1 in 36. Simple, fast, and exciting when the spikes appear!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceSpikeRollSettings),
-  reducer, isTerminal, component: DiceSpikeRollGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceSpikeRollState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "waiting") return { selector: '[data-testid="hint-target-dice-spike-roll-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-spike-roll-next"]', pulses: 3 };
+    return null;
+  },
+  component: DiceSpikeRollGame,
 };

@@ -35,12 +35,12 @@ export function DiceBullseyeGame({ state, dispatch, onGameOver }: GameProps<Dice
       {state.phase === "aim" && (
         <div className="bs-actions">
           {RINGS.map(r => (
-            <button key={r} className="bs-btn" onClick={() => dispatch({ type: "shoot", target: r } as DiceBullseyeAction)}>Aim {r}</button>
+            <button key={r} className="bs-btn" data-testid="hint-target-dice-bullseye-roll" onClick={() => dispatch({ type: "shoot", target: r } as DiceBullseyeAction)}>Aim {r}</button>
           ))}
         </div>
       )}
       {state.phase === "result" && (
-        <button className="bs-btn alt" onClick={() => dispatch({ type: "next" } as DiceBullseyeAction)}>Next Shot</button>
+        <button className="bs-btn alt" data-testid="hint-target-dice-bullseye-next" onClick={() => dispatch({ type: "next" } as DiceBullseyeAction)}>Next Shot</button>
       )}
     </div>
   );

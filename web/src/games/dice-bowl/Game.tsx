@@ -20,12 +20,12 @@ export function DiceBowlGame({ state, dispatch, onGameOver }: GameProps<DiceBowl
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceBowlAction)}>Bowl 10</button>
+        <button className="dm-btn" data-testid="hint-target-dice-bowl-roll" onClick={() => dispatch({ type:"roll" } as DiceBowlAction)}>Bowl 10</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.strike ? `STRIKE! ${state.knocked} pins +10 = ${state.pts}` : `${state.knocked} pins → +${state.pts}`}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceBowlAction)}>{state.frame >= TOTAL_FRAMES ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-bowl-next" onClick={() => dispatch({ type:"next" } as DiceBowlAction)}>{state.frame >= TOTAL_FRAMES ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

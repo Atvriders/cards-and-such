@@ -12,8 +12,8 @@ export function DiceBlockadeGame({ state, dispatch, onGameOver }: GameProps<Dice
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.you > 0 && (<div className="dm-row"><div className="dm-die">You: {state.you}</div><div className="dm-die">Opp: {state.opp}</div></div>)}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceBlockadeAction)}>Block!</button>}
-      {state.phase === "scored" && (<><div className="dm-result">{state.you>state.opp?"Blocked! +15":state.you===state.opp?"Tie +5":"Broken through"}</div><button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceBlockadeAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
+      {state.phase === "rolling" && <button className="dm-btn" data-testid="hint-target-dice-blockade-roll" onClick={() => dispatch({ type:"roll" } as DiceBlockadeAction)}>Block!</button>}
+      {state.phase === "scored" && (<><div className="dm-result">{state.you>state.opp?"Blocked! +15":state.you===state.opp?"Tie +5":"Broken through"}</div><button className="dm-btn alt" data-testid="hint-target-dice-blockade-next" onClick={() => dispatch({ type:"next" } as DiceBlockadeAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );
 }

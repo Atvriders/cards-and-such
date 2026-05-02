@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Dice100TargetState, Dice100TargetAction, Dice100TargetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,12 @@ Press Roll Die to keep going, or Stop and Bank to secure your current total. The
 Use Settings to choose 3, 5, or 7 rounds. Maximum possible score is 500/700. Can you get close to 100 every single round?`,
   settings: dice100TargetSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as Dice100TargetSettings),
-  reducer, isTerminal, component: Dice100Target,
+  reducer,
+  isTerminal,
+  hint: (state: Dice100TargetState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-100-target-roll"]', pulses: 3 };
+    return null;
+  },
+  component: Dice100Target,
 };

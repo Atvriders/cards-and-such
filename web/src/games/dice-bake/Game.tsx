@@ -13,8 +13,8 @@ export function DiceBakeGame({ state, dispatch, onGameOver }: GameProps<DiceBake
       <div className="dm-info">Beat: {state.prevSum}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="dm-row">{state.dice.map((d,i)=><div key={i} className="dm-die">{d}</div>)}</div>}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceBakeAction)}>Bake!</button>}
-      {state.phase === "scored" && (<><div className="dm-result">Sum: {state.sum} {state.lastPts>0?`(+${state.lastPts})`:"(no rise)"}</div><button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceBakeAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
+      {state.phase === "rolling" && <button className="dm-btn" data-testid="hint-target-dice-bake-roll" onClick={() => dispatch({ type:"roll" } as DiceBakeAction)}>Bake!</button>}
+      {state.phase === "scored" && (<><div className="dm-result">Sum: {state.sum} {state.lastPts>0?`(+${state.lastPts})`:"(no rise)"}</div><button className="dm-btn alt" data-testid="hint-target-dice-bake-next" onClick={() => dispatch({ type:"next" } as DiceBakeAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );
 }

@@ -19,12 +19,12 @@ export function DiceDerbyGame({ state, dispatch, onGameOver }: GameProps<DiceDer
         </div>
       )}
       {state.phase === "racing" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceDerbyAction)}>Roll 6 Dice</button>
+        <button className="dm-btn" data-testid="hint-target-dice-derby-roll" onClick={() => dispatch({ type:"roll" } as DiceDerbyAction)}>Roll 6 Dice</button>
       )}
       {state.phase === "raceDone" && (
         <>
           <div className="dm-result">{state.raceWon ? "Race won! +20 pts" : "Race over — no points"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceDerbyAction)}>Next Race</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-derby-next" onClick={() => dispatch({ type:"next" } as DiceDerbyAction)}>Next Race</button>
         </>
       )}
     </div>

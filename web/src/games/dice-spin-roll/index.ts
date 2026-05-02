@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceSpinRollState, DiceSpinRollAction, DiceSpinRollSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ Every 10 points the sum is off from the target reduces your score by 10. A 1-off
 Over 10 or 20 rounds, luck and variance determine how often you hit close to the target. Good runs build big scores quickly. Can you stay consistently close?`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceSpinRollSettings),
-  reducer, isTerminal, component: DiceSpinRollGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceSpinRollState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "waiting") return { selector: '[data-testid="hint-target-dice-spin-roll-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-spin-roll-next"]', pulses: 3 };
+    return null;
+  },
+  component: DiceSpinRollGame,
 };

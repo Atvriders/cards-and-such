@@ -20,12 +20,12 @@ export function DiceTargetGame({ state, dispatch, onGameOver }: GameProps<DiceTa
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type: "roll" } as DiceTargetAction)}>Roll 3 Dice</button>
+        <button className="dm-btn" data-testid="hint-target-dice-target-roll" onClick={() => dispatch({ type: "roll" } as DiceTargetAction)}>Roll 3 Dice</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">Sum: {state.sum} — {state.lastPts > 0 ? `+${state.lastPts}` : "0 pts"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DiceTargetAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-target-next" onClick={() => dispatch({ type: "next" } as DiceTargetAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

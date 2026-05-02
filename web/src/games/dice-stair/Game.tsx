@@ -21,12 +21,12 @@ export function DiceStairGame({ state, dispatch, onGameOver }: GameProps<DiceSta
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceStairAction)}>Roll</button>
+        <button className="dm-btn" data-testid="hint-target-dice-stair-roll" onClick={() => dispatch({ type:"roll" } as DiceStairAction)}>Roll</button>
       )}
       {state.phase === "result" && (
         <>
           <div className="dm-result">{state.lastPts > 0 ? `Stair! +${state.lastPts}` : "No stair — 0"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceStairAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-stair-next" onClick={() => dispatch({ type:"next" } as DiceStairAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

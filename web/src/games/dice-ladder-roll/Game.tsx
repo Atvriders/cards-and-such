@@ -13,13 +13,13 @@ export function DiceLadderRollGame({ state, dispatch, onGameOver }: GameProps<Di
       <div className="dm-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dm-score">{state.score} pts</span></div>
       <div className="dm-target">Streak: {state.streak} | Last: {state.lastRoll || "—"}</div>
       <p>Roll higher than the last to keep the streak!</p>
-      {state.phase === "waiting" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceLadderRollAction)}>Roll!</button>}
+      {state.phase === "waiting" && <button className="dm-btn" data-testid="hint-target-dice-ladder-roll-roll" onClick={() => dispatch({ type:"roll" } as DiceLadderRollAction)}>Roll!</button>}
       {state.phase === "result" && state.currentDie !== null && <>
         <div className="dm-dice"><div className="dm-die">{state.currentDie}</div></div>
         <div className="dm-result">
           {state.streakBroken ? `Streak broken! +0 pts` : `Beat ${state.lastRoll === state.currentDie ? 0 : state.lastRoll}! Streak ${state.streak} → +${state.lastPts} pts`}
         </div>
-        <button className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceLadderRollAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
+        <button className="dm-btn" data-testid="hint-target-dice-ladder-roll-next" onClick={() => dispatch({ type:"next" } as DiceLadderRollAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

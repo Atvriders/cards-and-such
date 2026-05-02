@@ -50,13 +50,13 @@ export function DiceCourtroomGame({ state, dispatch, onGameOver }: GameProps<Dic
       <div className="cr-log">{state.log || "Choose: present evidence, object, or give a speech."}</div>
       {state.phase === "choose" && (
         <div className="cr-actions">
-          <button className="cr-btn ev" onClick={() => dispatch({ type: "play", move: "evidence" } as DiceCourtroomAction)}>Evidence</button>
+          <button className="cr-btn ev" data-testid="hint-target-dice-courtroom-roll" onClick={() => dispatch({ type: "play", move: "evidence" } as DiceCourtroomAction)}>Evidence</button>
           <button className="cr-btn ob" onClick={() => dispatch({ type: "play", move: "objection" } as DiceCourtroomAction)}>Objection</button>
           <button className="cr-btn sp" onClick={() => dispatch({ type: "play", move: "speech" } as DiceCourtroomAction)}>Speech</button>
         </div>
       )}
       {state.phase === "result" && (
-        <button className="cr-btn next" onClick={() => dispatch({ type: "next" } as DiceCourtroomAction)}>Continue</button>
+        <button className="cr-btn next" data-testid="hint-target-dice-courtroom-next" onClick={() => dispatch({ type: "next" } as DiceCourtroomAction)}>Continue</button>
       )}
     </div>
   );

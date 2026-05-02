@@ -19,7 +19,7 @@ export function DicePaddleGame({ state, dispatch, onGameOver }: GameProps<DicePa
         <>
           <div className="dpdl-prompt">Pick your hit:</div>
           <div className="dpdl-row">
-            <button className="dpdl-btn light" onClick={() => dispatch({ type: "pick", choice: "light" } as DicePaddleAction)}>Light (+r)</button>
+            <button className="dpdl-btn light" data-testid="hint-target-dice-paddle-roll" onClick={() => dispatch({ type: "pick", choice: "light" } as DicePaddleAction)}>Light (+r)</button>
             <button className="dpdl-btn med" onClick={() => dispatch({ type: "pick", choice: "medium" } as DicePaddleAction)}>Medium (+2r if 4+)</button>
             <button className="dpdl-btn heavy" onClick={() => dispatch({ type: "pick", choice: "heavy" } as DicePaddleAction)}>Heavy (+3r if 5+, else -r)</button>
           </div>
@@ -28,7 +28,7 @@ export function DicePaddleGame({ state, dispatch, onGameOver }: GameProps<DicePa
       {state.phase === "result" && (
         <>
           <div className={`dp-feedback ${state.delta > 0 ? "ok" : state.delta < 0 ? "no" : ""}`}>{state.pick} → roll {state.roll} → {state.delta >= 0 ? `+${state.delta}` : state.delta}</div>
-          <button className="dpdl-btn alt" onClick={() => dispatch({ type: "next" } as DicePaddleAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dpdl-btn alt" data-testid="hint-target-dice-paddle-next" onClick={() => dispatch({ type: "next" } as DicePaddleAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

@@ -20,12 +20,12 @@ export function DiceQuestMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
         </div>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceQuestMiniAction)}>Roll</button>
+        <button className="dm-btn" data-testid="hint-target-dice-quest-mini-roll" onClick={() => dispatch({ type:"roll" } as DiceQuestMiniAction)}>Roll</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.lastPts > 0 ? `+${state.lastPts}` : "No points"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceQuestMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-quest-mini-next" onClick={() => dispatch({ type:"next" } as DiceQuestMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

@@ -20,12 +20,12 @@ export function DiceFlushMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type: "roll" } as DiceFlushMiniAction)}>Roll 5 Dice</button>
+        <button className="dm-btn" data-testid="hint-target-dice-flush-mini-roll" onClick={() => dispatch({ type: "roll" } as DiceFlushMiniAction)}>Roll 5 Dice</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.lastBonus} +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DiceFlushMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-flush-mini-next" onClick={() => dispatch({ type: "next" } as DiceFlushMiniAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

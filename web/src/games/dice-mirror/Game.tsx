@@ -21,12 +21,12 @@ export function DiceMirrorGame({ state, dispatch, onGameOver }: GameProps<DiceMi
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceMirrorAction)}>Roll</button>
+        <button className="dm-btn" data-testid="hint-target-dice-mirror-roll" onClick={() => dispatch({ type:"roll" } as DiceMirrorAction)}>Roll</button>
       )}
       {state.phase === "result" && (
         <>
           <div className="dm-result">{state.lastPts > 0 ? `Mirror! +${state.lastPts}` : "No mirror — 0"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceMirrorAction)}>Next</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-mirror-next" onClick={() => dispatch({ type:"next" } as DiceMirrorAction)}>Next</button>
         </>
       )}
     </div>

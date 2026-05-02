@@ -49,13 +49,13 @@ export function DiceSpaceshipGame({ state, dispatch, onGameOver }: GameProps<Dic
 
       {state.phase === "choose" && (
         <div className="ss-actions">
-          <button className="ss-btn thrust" disabled={state.fuel <= 0} onClick={() => dispatch({ type: "act", choice: "thrust" } as DiceSpaceshipAction)}>Thrust (sum)</button>
+          <button className="ss-btn thrust" disabled={state.fuel <= 0} data-testid="hint-target-dice-spaceship-roll" onClick={() => dispatch({ type: "act", choice: "thrust" } as DiceSpaceshipAction)}>Thrust (sum)</button>
           <button className="ss-btn drift" onClick={() => dispatch({ type: "act", choice: "drift" } as DiceSpaceshipAction)}>Drift (min)</button>
           <button className="ss-btn scan" onClick={() => dispatch({ type: "act", choice: "scan" } as DiceSpaceshipAction)}>Scan (max, safe)</button>
         </div>
       )}
       {state.phase === "result" && (
-        <button className="ss-btn next" onClick={() => dispatch({ type: "next" } as DiceSpaceshipAction)}>Continue</button>
+        <button className="ss-btn next" data-testid="hint-target-dice-spaceship-next" onClick={() => dispatch({ type: "next" } as DiceSpaceshipAction)}>Continue</button>
       )}
     </div>
   );

@@ -44,10 +44,10 @@ export function DicePirateGame({ state, dispatch, onGameOver }: GameProps<DicePi
       )}
       <div className="pi-log">{state.log || "Roll 3d6 — sum must beat ship's defense."}</div>
       {state.phase === "fire" && (
-        <button className="pi-btn" onClick={() => dispatch({ type: "fire" } as DicePirateAction)}>Fire All</button>
+        <button className="pi-btn" data-testid="hint-target-dice-pirate-roll" onClick={() => dispatch({ type: "fire" } as DicePirateAction)}>Fire All</button>
       )}
       {state.phase === "result" && (
-        <button className="pi-btn alt" onClick={() => dispatch({ type: "next" } as DicePirateAction)}>Continue</button>
+        <button className="pi-btn alt" data-testid="hint-target-dice-pirate-next" onClick={() => dispatch({ type: "next" } as DicePirateAction)}>Continue</button>
       )}
     </div>
   );

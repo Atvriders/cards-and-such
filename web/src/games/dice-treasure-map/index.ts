@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceTreasureMapState, DiceTreasureMapAction, DiceTreasureMapSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,13 @@ export const diceTreasureMapPlugin: GamePlugin<DiceTreasureMapState, DiceTreasur
   howToPlay:"Dice Treasure Map is a 10-round dice-rolling game where score is simply the sum of two six-sided dice. 🗺️ Each round, you press Roll Dice and two dice tumble across the screen. Add the pips: that's your round score.\n\nSums range from 2 (snake eyes) to 12 (boxcars), with 7 the most common roll. Across 10 rounds the average expected total lands near 70 points. There's no strategy — it's pure luck — but each roll has its own dramatic feel.\n\nPress Next after each result to continue, or Finish on the final round. Watch your running score climb in the upper right. Great for quick mini-game breaks: the whole game is over in well under a minute. A high score depends on the seed and a little fortune. Roll well, friends.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceTreasureMapSettings),
-  reducer,isTerminal,component:DiceTreasureMapGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceTreasureMapState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "choose") return { selector: '[data-testid="hint-target-dice-treasure-map-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-treasure-map-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceTreasureMapGame,
 };

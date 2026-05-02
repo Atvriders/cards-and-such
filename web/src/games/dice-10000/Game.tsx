@@ -16,8 +16,8 @@ export function Dice10000Game({ state, dispatch, onGameOver }: GameProps<Dice100
       <div className="dt-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="dt-row">{state.dice.map((d, i) => <div key={i} className="dt-die">{d}</div>)}</div>}
       {state.message && <div className="dt-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="dt-btn" onClick={() => dispatch({ type:"roll" } as Dice10000Action)}>Roll</button>}
-      {state.phase === "result" && <button className="dt-btn alt" onClick={() => dispatch({ type:"next" } as Dice10000Action)}>Next</button>}
+      {state.phase === "roll" && <button className="dt-btn" data-testid="hint-target-dice-10000-roll" onClick={() => dispatch({ type:"roll" } as Dice10000Action)}>Roll</button>}
+      {state.phase === "result" && <button className="dt-btn alt" data-testid="hint-target-dice-10000-next" onClick={() => dispatch({ type:"next" } as Dice10000Action)}>Next</button>}
     </div>
   );
 }

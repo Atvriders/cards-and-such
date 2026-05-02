@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceClutchState, DiceClutchAction, DiceClutchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ Average per-round sum is 7; over the first seven rounds, expect about 49 points.
 There are no decisions — just roll, watch, and pray for high numbers when the multiplier hits. The clutch is real!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceClutchSettings),
-  reducer,isTerminal,component:DiceClutchGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceClutchState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-clutch-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-clutch-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceClutchGame,
 };

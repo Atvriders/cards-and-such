@@ -28,7 +28,7 @@ export function Dice100Target({ state, dispatch, onGameOver }: GameProps<Dice100
       <div className="dice-actions">
         {state.phase === "rolling" && (
           <>
-            <button className="dice-btn" onClick={() => dispatch({ type: "roll" } as Dice100TargetAction)}>Roll Die</button>
+            <button className="dice-btn" data-testid="hint-target-dice-100-target-roll" onClick={() => dispatch({ type: "roll" } as Dice100TargetAction)}>Roll Die</button>
             {state.total > 0 && <button className="dice-btn bank" onClick={() => dispatch({ type: "stop" } as Dice100TargetAction)}>Stop & Bank</button>}
           </>
         )}

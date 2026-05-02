@@ -21,12 +21,12 @@ export function DiceSpellGame({ state, dispatch, onGameOver }: GameProps<DiceSpe
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceSpellAction)}>Roll 5</button>
+        <button className="dm-btn" data-testid="hint-target-dice-spell-roll" onClick={() => dispatch({ type:"roll" } as DiceSpellAction)}>Roll 5</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.matches} match{state.matches === 1 ? "" : "es"} → +{state.pts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceSpellAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-spell-next" onClick={() => dispatch({ type:"next" } as DiceSpellAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
       <div className="dm-info">Groups: 1=A-E, 2=F-J, 3=K-O, 4=P-T, 5=U-Y, 6=Wild</div>

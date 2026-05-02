@@ -19,7 +19,7 @@ export function DiceVortexGame({ state, dispatch, onGameOver }: GameProps<DiceVo
           <div className="dm-info">Pick a multiplier — die must roll &gt;= multiplier or bust!</div>
           <div className="dm-row">
             {[1, 2, 3, 4].map(m => (
-              <button key={m} className="dm-btn" onClick={() => dispatch({ type:"pick", multiplier: m } as DiceVortexAction)}>x{m}</button>
+              <button key={m} className="dm-btn" data-testid="hint-target-dice-vortex-roll" onClick={() => dispatch({ type:"pick", multiplier: m } as DiceVortexAction)}>x{m}</button>
             ))}
           </div>
         </>
@@ -31,7 +31,7 @@ export function DiceVortexGame({ state, dispatch, onGameOver }: GameProps<DiceVo
             <div className="dm-mult">×{state.multiplier}</div>
           </div>
           <div className="dm-result">{state.bust ? `Bust! Die (${state.die}) < x${state.multiplier} → 0` : `+${state.pts}`}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceVortexAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-vortex-next" onClick={() => dispatch({ type:"next" } as DiceVortexAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

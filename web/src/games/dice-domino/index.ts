@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceDominoState, DiceDominoAction, DiceDominoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ Probability tip: matching a single specific value with one of two dice rolls is 
 Average expected score is around 30-50 points across the 10 rounds, with lucky games hitting 100+ when those perfect matches stack up. Tap Roll, hold your breath, and hope the dominoes align!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceDominoSettings),
-  reducer,isTerminal,component:DiceDominoGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceDominoState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-dice-domino-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dice-domino-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceDominoGame,
 };

@@ -20,12 +20,12 @@ export function DiceArrowGame({ state, dispatch, onGameOver }: GameProps<DiceArr
         </div>
       )}
       {state.phase === "ready" && (
-        <button className="dm-btn" onClick={() => dispatch({ type: "shoot" } as DiceArrowAction)}>Shoot Arrow</button>
+        <button className="dm-btn" data-testid="hint-target-dice-arrow-roll" onClick={() => dispatch({ type: "shoot" } as DiceArrowAction)}>Shoot Arrow</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">Hit {TARGET_FACE} after {state.rolls.length} rolls → +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DiceArrowAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-arrow-next" onClick={() => dispatch({ type: "next" } as DiceArrowAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

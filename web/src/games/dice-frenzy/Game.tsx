@@ -20,12 +20,12 @@ export function DiceFrenzyGame({ state, dispatch, onGameOver }: GameProps<DiceFr
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceFrenzyAction)}>Roll 6</button>
+        <button className="dm-btn" data-testid="hint-target-dice-frenzy-roll" onClick={() => dispatch({ type:"roll" } as DiceFrenzyAction)}>Roll 6</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.pairs} pair{state.pairs === 1 ? "" : "s"} → +{state.pts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceFrenzyAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-frenzy-next" onClick={() => dispatch({ type:"next" } as DiceFrenzyAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

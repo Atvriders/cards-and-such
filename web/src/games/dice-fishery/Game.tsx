@@ -20,12 +20,12 @@ export function DiceFisheryGame({ state, dispatch, onGameOver }: GameProps<DiceF
         </div>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceFisheryAction)}>Cast</button>
+        <button className="dm-btn" data-testid="hint-target-dice-fishery-roll" onClick={() => dispatch({ type:"roll" } as DiceFisheryAction)}>Cast</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">Catch: +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceFisheryAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-fishery-next" onClick={() => dispatch({ type:"next" } as DiceFisheryAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

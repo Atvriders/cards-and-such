@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Dice21State, Dice21Action, Dice21Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ There are 5 rounds. Strategy is everything: when your sum is low (say 14 or unde
 Five strong rounds with no busts will land you in the 80-95 range. A perfect 21 in any round adds a juicy 71-point haul. Hit those dice — but know when to stand!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as Dice21Settings),
-  reducer,isTerminal,component:Dice21Game,
+  reducer,
+  isTerminal,
+  hint: (state: Dice21State): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-21-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-21-next"]', pulses: 3 };
+    return null;
+  },
+  component:Dice21Game,
 };

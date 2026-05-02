@@ -22,12 +22,12 @@ export function DiceClutchGame({ state, dispatch, onGameOver }: GameProps<DiceCl
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceClutchAction)}>Roll 2</button>
+        <button className="dm-btn" data-testid="hint-target-dice-clutch-roll" onClick={() => dispatch({ type:"roll" } as DiceClutchAction)}>Roll 2</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">+{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceClutchAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-clutch-next" onClick={() => dispatch({ type:"next" } as DiceClutchAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

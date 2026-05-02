@@ -20,12 +20,12 @@ export function DiceCaveGame({ state, dispatch, onGameOver }: GameProps<DiceCave
         </div>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceCaveAction)}>Roll</button>
+        <button className="dm-btn" data-testid="hint-target-dice-cave-roll" onClick={() => dispatch({ type:"roll" } as DiceCaveAction)}>Roll</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.lastPts > 0 ? `+${state.lastPts}` : "No points"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceCaveAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-cave-next" onClick={() => dispatch({ type:"next" } as DiceCaveAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

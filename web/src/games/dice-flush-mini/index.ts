@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceFlushMiniState, DiceFlushMiniAction, DiceFlushMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ Three of a kind scores +80 (110 total), four of a kind scores +150 (180 total), 
 You play 8 rounds. Average expected scores land around 280–320 (with maybe one or two three-of-a-kinds across the run). The game is purely random — press Roll, see the dice, take the bonus, press Next. A friendly Yahtzee-light five-second roll experience.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceFlushMiniSettings),
-  reducer,isTerminal,component:DiceFlushMiniGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceFlushMiniState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-flush-mini-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-flush-mini-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceFlushMiniGame,
 };

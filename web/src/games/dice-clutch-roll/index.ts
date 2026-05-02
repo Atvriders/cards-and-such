@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceClutchRollState, DiceClutchRollAction, DiceClutchRollSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ This simple mechanic makes every roll a bit better than pure three-dice rolls. Y
 Over 10 or 20 rounds, your accumulated score reflects the best of what the dice offered. Simple, satisfying, and a touch more generous than the pure roll!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceClutchRollSettings),
-  reducer, isTerminal, component: DiceClutchRollGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceClutchRollState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "waiting") return { selector: '[data-testid="hint-target-dice-clutch-roll-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-clutch-roll-next"]', pulses: 3 };
+    return null;
+  },
+  component: DiceClutchRollGame,
 };

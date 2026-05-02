@@ -41,10 +41,10 @@ export function DiceTreasureMapGame({ state, dispatch, onGameOver }: GameProps<D
       )}
       <div className="tm-log">{state.log || "Roll the dice — they pinpoint a tile to dig."}</div>
       {state.phase === "choose" && (
-        <button className="tm-btn" onClick={() => dispatch({ type: "dig" } as DiceTreasureMapAction)}>Dig</button>
+        <button className="tm-btn" data-testid="hint-target-dice-treasure-map-roll" onClick={() => dispatch({ type: "dig" } as DiceTreasureMapAction)}>Dig</button>
       )}
       {state.phase === "result" && (
-        <button className="tm-btn alt" onClick={() => dispatch({ type: "next" } as DiceTreasureMapAction)}>Continue</button>
+        <button className="tm-btn alt" data-testid="hint-target-dice-treasure-map-next" onClick={() => dispatch({ type: "next" } as DiceTreasureMapAction)}>Continue</button>
       )}
     </div>
   );

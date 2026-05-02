@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceBingoState, DiceBingoAction, DiceBingoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,12 @@ A clean game with all 25 squares marked plus all 12 lines (5 rows + 5 cols + 2 d
 Roll, mark, line — bingo!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceBingoSettings),
-  reducer,isTerminal,component:DiceBingoGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceBingoState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-bingo-roll"]', pulses: 3 };
+    return null;
+  },
+  component:DiceBingoGame,
 };

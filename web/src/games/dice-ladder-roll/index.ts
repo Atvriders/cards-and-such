@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceLadderRollState, DiceLadderRollAction, DiceLadderRollSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ If your roll is equal to or lower than the previous, the streak breaks and you s
 The first roll always scores because there's nothing to beat. Over 10 or 20 rounds, building and maintaining streaks is the key to a high score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceLadderRollSettings),
-  reducer, isTerminal, component: DiceLadderRollGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceLadderRollState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "waiting") return { selector: '[data-testid="hint-target-dice-ladder-roll-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-ladder-roll-next"]', pulses: 3 };
+    return null;
+  },
+  component: DiceLadderRollGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceBlackjackState, DiceBlackjackAction, DiceBlackjackSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ There are 8 rounds. Optimal play is something like: stand around 16-17 (when one
 Roll wisely, stand wisely, and don't get greedy.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceBlackjackSettings),
-  reducer,isTerminal,component:DiceBlackjackGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceBlackjackState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "playing") return { selector: '[data-testid="hint-target-dice-blackjack-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-blackjack-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceBlackjackGame,
 };

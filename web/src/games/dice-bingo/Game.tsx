@@ -32,7 +32,7 @@ export function DiceBingoGame({ state, dispatch, onGameOver }: GameProps<DiceBin
         })}
       </div>
       {state.phase === "rolling" && (
-        <button className="db-btn" onClick={() => dispatch({ type:"roll" } as DiceBingoAction)}>Roll</button>
+        <button className="db-btn" data-testid="hint-target-dice-bingo-roll" onClick={() => dispatch({ type:"roll" } as DiceBingoAction)}>Roll</button>
       )}
       {state.phase === "rolled" && (
         <>

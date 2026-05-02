@@ -12,13 +12,13 @@ export function DiceSpikeRollGame({ state, dispatch, onGameOver }: GameProps<Dic
     <div className="dm-wrap">
       <div className="dm-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dm-score">{state.score} pts</span></div>
       <p>Roll 2 dice — pairs double, double-6 triples!</p>
-      {state.phase === "waiting" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceSpikeRollAction)}>Roll!</button>}
+      {state.phase === "waiting" && <button className="dm-btn" data-testid="hint-target-dice-spike-roll-roll" onClick={() => dispatch({ type:"roll" } as DiceSpikeRollAction)}>Roll!</button>}
       {state.phase === "result" && state.dice && <>
         <div className="dm-dice">{state.dice.map((d,i) => <div key={i} className="dm-die">{d}</div>)}</div>
         <div className="dm-result">
           {state.lastMulti === 3 ? "SPIKE! 3x!" : state.lastMulti === 2 ? "Pair! 2x!" : "Normal"} → +{state.lastPts} pts
         </div>
-        <button className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceSpikeRollAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
+        <button className="dm-btn" data-testid="hint-target-dice-spike-roll-next" onClick={() => dispatch({ type:"next" } as DiceSpikeRollAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

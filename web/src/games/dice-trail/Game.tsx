@@ -12,8 +12,8 @@ export function DiceTrailGame({ state, dispatch, onGameOver }: GameProps<DiceTra
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="dm-row">{state.dice.map((d,i)=><div key={i} className="dm-die">{d}</div>)}</div>}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceTrailAction)}>Roll 5</button>}
-      {state.phase === "scored" && (<><div className="dm-result">Asc pairs: {state.ascCount} (+{state.lastPts})</div><button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceTrailAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
+      {state.phase === "rolling" && <button className="dm-btn" data-testid="hint-target-dice-trail-roll" onClick={() => dispatch({ type:"roll" } as DiceTrailAction)}>Roll 5</button>}
+      {state.phase === "scored" && (<><div className="dm-result">Asc pairs: {state.ascCount} (+{state.lastPts})</div><button className="dm-btn alt" data-testid="hint-target-dice-trail-next" onClick={() => dispatch({ type:"next" } as DiceTrailAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button></>)}
     </div>
   );
 }

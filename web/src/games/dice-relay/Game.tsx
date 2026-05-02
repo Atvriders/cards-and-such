@@ -25,11 +25,11 @@ export function DiceRelayGame({ state, dispatch, onGameOver }: GameProps<DiceRel
           <div className="drly-sum">= {state.lastRoll[0] + state.lastRoll[1]}</div>
         </div>
       )}
-      {state.phase === "rolling" && <button className="drly-btn" onClick={() => dispatch({ type:"roll" } as DiceRelayAction)}>Roll</button>}
+      {state.phase === "rolling" && <button className="drly-btn" data-testid="hint-target-dice-relay-roll" onClick={() => dispatch({ type:"roll" } as DiceRelayAction)}>Roll</button>}
       {state.phase === "result" && (
         <>
           <div className="drly-result">{state.lastCleared ? "Cleared! +10" : "Failed — round ends"}</div>
-          <button className="drly-btn alt" onClick={() => dispatch({ type:"next" } as DiceRelayAction)}>Continue</button>
+          <button className="drly-btn alt" data-testid="hint-target-dice-relay-next" onClick={() => dispatch({ type:"next" } as DiceRelayAction)}>Continue</button>
         </>
       )}
     </div>

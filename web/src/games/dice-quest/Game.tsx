@@ -32,12 +32,12 @@ export function DiceQuestGame({ state, dispatch, onGameOver }: GameProps<DiceQue
       {state.phase === "predict" && (
         <div className="qu-actions">
           {CHOICES.map(c => (
-            <button key={c} className={`qu-btn p-${c.toLowerCase()}`} onClick={() => dispatch({ type: "go", choice: c } as DiceQuestAction)}>{c}</button>
+            <button key={c} className={`qu-btn p-${c.toLowerCase()}`} data-testid="hint-target-dice-quest-roll" onClick={() => dispatch({ type: "go", choice: c } as DiceQuestAction)}>{c}</button>
           ))}
         </div>
       )}
       {state.phase === "result" && (
-        <button className="qu-btn next" onClick={() => dispatch({ type: "next" } as DiceQuestAction)}>Continue</button>
+        <button className="qu-btn next" data-testid="hint-target-dice-quest-next" onClick={() => dispatch({ type: "next" } as DiceQuestAction)}>Continue</button>
       )}
     </div>
   );

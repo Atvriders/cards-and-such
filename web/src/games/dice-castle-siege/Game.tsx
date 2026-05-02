@@ -52,7 +52,7 @@ export function DiceCastleSiegeGame({ state, dispatch, onGameOver }: GameProps<D
               key={w}
               className={`cs-btn ${w}`}
               disabled={state.ammo[w] <= 0}
-              onClick={() => dispatch({ type: "fire", weapon: w } as DiceCastleSiegeAction)}
+              data-testid="hint-target-dice-castle-siege-roll" onClick={() => dispatch({ type: "fire", weapon: w } as DiceCastleSiegeAction)}
             >
               <span className="cs-w-name">{LABEL[w]}</span>
               <span className="cs-w-ammo">x{state.ammo[w]}</span>
@@ -61,7 +61,7 @@ export function DiceCastleSiegeGame({ state, dispatch, onGameOver }: GameProps<D
         </div>
       )}
       {state.phase === "result" && (
-        <button className="cs-btn next" onClick={() => dispatch({ type: "next" } as DiceCastleSiegeAction)}>Continue</button>
+        <button className="cs-btn next" data-testid="hint-target-dice-castle-siege-next" onClick={() => dispatch({ type: "next" } as DiceCastleSiegeAction)}>Continue</button>
       )}
     </div>
   );

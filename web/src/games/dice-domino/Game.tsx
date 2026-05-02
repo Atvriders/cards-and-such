@@ -28,12 +28,12 @@ export function DiceDominoGame({ state, dispatch, onGameOver }: GameProps<DiceDo
         </>
       )}
       {state.phase === "ready" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceDominoAction)}>Roll 2 Dice</button>
+        <button className="dm-btn" data-testid="hint-target-dice-domino-roll" onClick={() => dispatch({ type:"roll" } as DiceDominoAction)}>Roll 2 Dice</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="dm-result">{state.lastBonus === 20 ? "Perfect match! +20" : state.lastBonus === 5 ? "Half match! +5" : "No match"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceDominoAction)}>Next</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-domino-next" onClick={() => dispatch({ type:"next" } as DiceDominoAction)}>Next</button>
         </>
       )}
     </div>

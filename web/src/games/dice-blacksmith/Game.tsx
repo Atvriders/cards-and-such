@@ -20,12 +20,12 @@ export function DiceBlacksmithGame({ state, dispatch, onGameOver }: GameProps<Di
         </div>
       )}
       {state.phase === "roll" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceBlacksmithAction)}>Forge</button>
+        <button className="dm-btn" data-testid="hint-target-dice-blacksmith-roll" onClick={() => dispatch({ type:"roll" } as DiceBlacksmithAction)}>Forge</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">Strike: +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceBlacksmithAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-blacksmith-next" onClick={() => dispatch({ type:"next" } as DiceBlacksmithAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

@@ -12,8 +12,8 @@ export function DiceCheckersGame({ state, dispatch, onGameOver }: GameProps<Dice
       <div className="dm-info">Turn {state.turn} / {TOTAL_TURNS} — Captures: {state.captures}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.lastRoll && <div className="dm-dice">Rolled {state.lastRoll} — {state.lastCapture ? "Capture!" : "Move only"}</div>}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceCheckersAction)}>Roll</button>}
-      {state.phase === "scored" && <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceCheckersAction)}>{state.turn >= TOTAL_TURNS ? "Finish" : "Next"}</button>}
+      {state.phase === "rolling" && <button className="dm-btn" data-testid="hint-target-dice-checkers-roll" onClick={() => dispatch({ type:"roll" } as DiceCheckersAction)}>Roll</button>}
+      {state.phase === "scored" && <button className="dm-btn alt" data-testid="hint-target-dice-checkers-next" onClick={() => dispatch({ type:"next" } as DiceCheckersAction)}>{state.turn >= TOTAL_TURNS ? "Finish" : "Next"}</button>}
     </div>
   );
 }

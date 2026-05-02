@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceRelayMiniState, DiceRelayMiniAction, DiceRelayMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ You only get 5 rolls total, regardless of how many stages you've conquered. So e
 Two dice on a fair roll average 7, so early stages are safer. Late stages depend on luck. Strong runs land at 60-80 points; perfect = 100.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceRelayMiniSettings),
-  reducer,isTerminal,component:DiceRelayMiniGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceRelayMiniState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-relay-mini-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-relay-mini-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceRelayMiniGame,
 };

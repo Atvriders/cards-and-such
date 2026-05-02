@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceBowlState, DiceBowlAction, DiceBowlSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ The probability of any given die landing 4-6 is 50%, so the average frame knocks
 Across 10 frames the expected score is around 50; great runs land 60+, and a single lucky strike can push the total over 70. Two strikes in one game is genuinely impressive. Press Bowl to roll, then Next to advance frames.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceBowlSettings),
-  reducer,isTerminal,component:DiceBowlGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceBowlState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-bowl-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-bowl-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceBowlGame,
 };

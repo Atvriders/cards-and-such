@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceSpellState, DiceSpellAction, DiceSpellSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ There are 10 rounds total. Words rotate from a small dictionary (DICED, WORLD, S
 Press Roll to throw the dice; press Next to advance. Bonus: rolling all 6s on any round guarantees a perfect 25-point spell.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceSpellSettings),
-  reducer,isTerminal,component:DiceSpellGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceSpellState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-spell-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-spell-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceSpellGame,
 };

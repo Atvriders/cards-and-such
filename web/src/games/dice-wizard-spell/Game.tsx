@@ -41,7 +41,7 @@ export function DiceWizardSpellGame({ state, dispatch, onGameOver }: GameProps<D
         <>
           <button
             className="ws-btn"
-            onClick={() => dispatch({ type: "roll" } as DiceWizardSpellAction)}
+            data-testid="hint-target-dice-wizard-spell-roll" onClick={() => dispatch({ type: "roll" } as DiceWizardSpellAction)}
             disabled={state.mana <= 0}
           >Channel ({state.mana} mana left)</button>
           <div className="ws-schools">
@@ -67,7 +67,7 @@ export function DiceWizardSpellGame({ state, dispatch, onGameOver }: GameProps<D
         <>
           <div className="ws-result">+{state.lastPts} pts</div>
           <div className="ws-desc">{state.lastDesc}</div>
-          <button className="ws-btn alt" onClick={() => dispatch({ type: "next" } as DiceWizardSpellAction)}>
+          <button className="ws-btn alt" data-testid="hint-target-dice-wizard-spell-next" onClick={() => dispatch({ type: "next" } as DiceWizardSpellAction)}>
             {state.round >= TOTAL_ROUNDS ? "Finish" : "Next Round"}
           </button>
         </>

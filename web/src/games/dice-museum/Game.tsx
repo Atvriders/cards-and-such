@@ -41,7 +41,7 @@ export function DiceMuseumGame({ state, dispatch, onGameOver }: GameProps<DiceMu
       )}
       <div className="mu-log">{state.log || "Roll three dice. Pick one face to add to its display case."}</div>
       {state.phase === "roll" && (
-        <button className="mu-btn" onClick={() => dispatch({ type: "roll" } as DiceMuseumAction)}>Excavate</button>
+        <button className="mu-btn" data-testid="hint-target-dice-museum-roll" onClick={() => dispatch({ type: "roll" } as DiceMuseumAction)}>Excavate</button>
       )}
       {state.phase === "claim" && state.rolls && (
         <div className="mu-actions">

@@ -20,14 +20,14 @@ export function DiceBlackjackGame({ state, dispatch, onGameOver }: GameProps<Dic
       <div className="dm-sum">Round Total: {state.total}</div>
       {state.phase === "playing" && (
         <div className="dm-row">
-          <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DiceBlackjackAction)}>Roll</button>
+          <button className="dm-btn" data-testid="hint-target-dice-blackjack-roll" onClick={() => dispatch({ type:"roll" } as DiceBlackjackAction)}>Roll</button>
           <button className="dm-btn alt" disabled={state.total === 0} onClick={() => dispatch({ type:"stand" } as DiceBlackjackAction)}>Stand</button>
         </div>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.busted ? `Bust at ${state.total} — 0` : `+${state.lastPts}`}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceBlackjackAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-blackjack-next" onClick={() => dispatch({ type:"next" } as DiceBlackjackAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

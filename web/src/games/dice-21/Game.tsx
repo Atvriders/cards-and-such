@@ -21,14 +21,14 @@ export function Dice21Game({ state, dispatch, onGameOver }: GameProps<Dice21Stat
       )}
       {state.phase === "rolling" && (
         <div className="dm-row">
-          <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as Dice21Action)}>Hit</button>
+          <button className="dm-btn" data-testid="hint-target-dice-21-roll" onClick={() => dispatch({ type:"roll" } as Dice21Action)}>Hit</button>
           <button className="dm-btn alt" disabled={state.sum === 0} onClick={() => dispatch({ type:"stand" } as Dice21Action)}>Stand ({state.sum})</button>
         </div>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.busted ? `BUSTED at ${state.sum}!` : `Scored: +${state.lastPts}`}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as Dice21Action)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dice-21-next" onClick={() => dispatch({ type:"next" } as Dice21Action)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

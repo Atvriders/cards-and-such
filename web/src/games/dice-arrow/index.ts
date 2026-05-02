@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceArrowState, DiceArrowAction, DiceArrowSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,13 @@ So a one-shot 6 scores 56 points (the maximum); two rolls scores 52; ten rolls s
 You play 10 rounds. Average expected scores land near 360; lucky runs of fast 6s can push past 500. There's no skill — just press Shoot, watch the rolls fly, and feel the satisfying snap when the 6 finally lands. Quick, repetitive, gambler's-delight fun!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceArrowSettings),
-  reducer,isTerminal,component:DiceArrowGame,
+  reducer,
+  isTerminal,
+  hint: (state: DiceArrowState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-dice-arrow-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-dice-arrow-next"]', pulses: 3 };
+    return null;
+  },
+  component:DiceArrowGame,
 };
