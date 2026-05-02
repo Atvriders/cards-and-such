@@ -1289,11 +1289,11 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 hand us `undefined`, in which case rendering the skeleton
                 directly avoids tripping React with `<undefined />`. */}
             {plugin.component ? (
-              <Suspense fallback={<GameLoadingSkeleton />}>
+              <Suspense fallback={<GameLoadingSkeleton gameTitle={plugin.title} />}>
                 <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
               </Suspense>
             ) : (
-              <GameLoadingSkeleton />
+              <GameLoadingSkeleton gameTitle={plugin.title} />
             )}
             {paused && (
               <div className="play-paused-overlay" data-testid="play-paused-overlay" role="status" aria-live="polite">
@@ -1576,10 +1576,14 @@ function EndRatingBlock({
  * Sized to roughly mirror a real play panel — header line, status row,
  * playfield rectangle — so the layout doesn't jump when the real game
  * mounts. Three card-shaped shimmer blocks evoke a fanned deck so users
- * have a visual cue beyond the polite "Loading game…" caption picked up
- * by screen readers.
+ * have a visual cue beyond the polite "Loading <gameTitle>…" caption
+ * picked up by screen readers. When `gameTitle` is supplied (always the
+ * case for routed plays — the URL gameId is resolved against the
+ * registry before this skeleton renders) we surface it so the user
+ * sees which game is being prepared rather than a generic stand-in.
  */
-function GameLoadingSkeleton(): JSX.Element {
+function GameLoadingSkeleton({ gameTitle }: { gameTitle?: string }): JSX.Element {
+  const caption = gameTitle ? `Loading ${gameTitle}…` : "Loading game…";
   return (
     <div
       className="play-game-loading"
@@ -1588,7 +1592,7 @@ function GameLoadingSkeleton(): JSX.Element {
       aria-live="polite"
       aria-busy="true"
     >
-      <div className="play-game-loading-caption">Loading game…</div>
+      <div className="play-game-loading-caption">{caption}</div>
       <div className="play-game-loading-deck" aria-hidden="true">
         <Skeleton variant="rect" className="play-game-loading-card play-game-loading-card--back" />
         <Skeleton variant="rect" className="play-game-loading-card play-game-loading-card--mid" />

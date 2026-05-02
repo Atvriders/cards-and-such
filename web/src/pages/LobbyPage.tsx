@@ -1538,12 +1538,39 @@ function GameCard({
     g.id,
   );
   const badgeKind = pickBadgeKind(g.id, isNew, userRating);
+  // Micro-bump: on mousedown we briefly scale the tile to 0.98 so the
+  // press registers visually before the click triggers navigation. The
+  // class is dropped 80ms later (or on mouseup/leave) so the scale
+  // never lingers when the user changes their mind. Pointer-down is the
+  // earliest the browser dispatches, making this feel pre-emptive
+  // rather than the usual click → blank-route gap. CSS honors
+  // prefers-reduced-motion to skip the transform entirely.
+  const [pressed, setPressed] = useState(false);
+  const pressTimer = useRef<number | null>(null);
+  const startPress = useCallback(() => {
+    setPressed(true);
+    if (pressTimer.current != null) window.clearTimeout(pressTimer.current);
+    pressTimer.current = window.setTimeout(() => setPressed(false), 80);
+  }, []);
+  const endPress = useCallback(() => {
+    if (pressTimer.current != null) {
+      window.clearTimeout(pressTimer.current);
+      pressTimer.current = null;
+    }
+    setPressed(false);
+  }, []);
+  useEffect(() => () => {
+    if (pressTimer.current != null) window.clearTimeout(pressTimer.current);
+  }, []);
   return (
     <div className="lobby-tile-wrap">
     <Link
       to={`/play/${g.id}`}
-      className={`tile tile--cat-${CATEGORY_TAG[g.category]}`}
+      className={`tile tile--cat-${CATEGORY_TAG[g.category]}${pressed ? " tile--pressed" : ""}`}
       data-testid={`tile-${g.id}`}
+      onMouseDown={startPress}
+      onMouseUp={endPress}
+      onMouseLeave={endPress}
       {...handlers}
     >
       <span className="tile-stripe" aria-hidden="true" />

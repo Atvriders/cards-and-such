@@ -1,0 +1,57 @@
+/* =====================================================================
+   RouteTransition — cross-fade hand-off between routed pages
+   ---------------------------------------------------------------------
+   Two phases run back-to-back when the location changes:
+     1. `route-transition--out`  — outgoing tree fades from 1 → 0
+     2. `route-transition--in`   — incoming tree fades from 0 → 1
+   Each phase is exactly 150ms. The "idle" steady state is fully opaque
+   so subsequent re-renders (state changes within the same route) don't
+   thrash opacity.
+
+   The fade-in is keyed off the inner wrapper mounting fresh — the route
+   key changes, React mounts a new node, and the keyframe runs once.
+   Reduced-motion users skip both phases entirely.
+   ===================================================================== */
+
+.route-transition {
+  /* Sit transparently in the layout flow — the AppShell owns spacing. */
+  display: contents;
+}
+
+.route-transition-inner {
+  /* Animate via opacity only — no transform, no layout cost. */
+  opacity: 1;
+  transition: opacity 150ms ease-out;
+  /* `display: contents` on the outer wrapper means this is the actual
+     DOM ancestor of route content. Keep it transparent so nothing
+     overlaps Hero/AppShell layouts. */
+}
+
+/* Outgoing fade — driven by parent phase class so the existing inner
+   element animates out without remounting. */
+.route-transition--out > .route-transition-inner {
+  opacity: 0;
+}
+
+/* Incoming fade — when phase flips to "in", the inner wrapper has just
+   remounted with a new key, starting at opacity 0 (via the keyframe)
+   and animating to 1. We use a keyframe rather than a CSS transition
+   because the element mounts with its final state already; transitions
+   on initial mount don't run cross-browser. */
+@keyframes route-transition-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.route-transition--in > .route-transition-inner {
+  animation: route-transition-fade-in 150ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-transition-inner,
+  .route-transition--out > .route-transition-inner,
+  .route-transition--in > .route-transition-inner {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+  }
+}

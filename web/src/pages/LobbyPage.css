@@ -493,6 +493,20 @@
     background 220ms var(--ease-out-expo);
 }
 
+/* Tile press micro-bump — applied via React state on `mousedown` and
+   cleared 80ms later (or on mouseup/leave). The shorter transition
+   makes the inward press feel snappy and pre-emptive while the wider
+   220ms ease still governs the spring-back. Honors reduced-motion. */
+.tile--pressed {
+  transform: scale(0.98);
+  transition: transform 80ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile--pressed {
+    transform: none;
+  }
+}
+
 /* Per-tile category accent — a thin coloured stripe down the left edge,
    plus a subtle glow ring that only shows on hover. */
 .tile-stripe {
