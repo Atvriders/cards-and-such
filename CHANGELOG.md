@@ -1,0 +1,33 @@
+# Changelog
+
+## 2026-05-02
+- 3723534a feat(about): What's new section from git log at build time
+- 0c3b209f feat(pwa): share_target manifest + handler route
+- ed15bbdf perf(confetti): cap particles + raf loop + reduced-motion
+- 6c25533c feat(hints): tri-peaks/accordion/wall variants
+- 46cb7856 feat(lobby): hide-tile action + hidden-games filter
+- b98941e6 feat(stats): inline sparklines on drill-down + hint rows
+- ae2114de feat(deck): card-back gallery with 6 designs
+- e81fe7a6 feat(hints): solo patience misc variants
+- d801dd63 feat(hints): more bespoke dice variants
+- 8a0c8350 feat(hints): kids/edu game hints
+- 60e81a36 feat(mobile): bottom-nav + safe-area-insets + slim header
+- cf9b8272 feat(hints): golf/pyramid/clock solitaire variants
+- 5e4c5775 feat(hints): spider-family solitaires
+- 81277610 feat(hints): physics/sport arcade hookups
+- e6cd28d5 feat(hints): more solitaire variants
+- e23c446c feat(hints): word/letter variants
+- 70cfe288 feat(hints): runner/dodger arcade variants
+- a6e6a58b feat(hints): more lane-target arcade variants
+- 448259ac feat(hints): cardmini variants follow-up
+- 208f90db feat(hints): draft-engine variants
+- c463d858 feat(hints): arcade subgenre lane-target tap hookups
+- 7b07c6c0 fix(hints): repair no-op selectors in W267/W268/W269
+- a211f388 feat(hints): bulk-adopt remaining dice games
+- ad1d4cee feat(hints): bulk-adopt video poker (-vp) variants
+- 08e48059 feat(hints): bulk-adopt -pat (patience) variants
+- 5ac555d8 feat(hints): next shared-engine batch
+- 7bf75c30 feat(hints): dicemini/cardmini/solmini hookups
+- 0a90a1eb feat(hints): clicker/tap/idle game hookups
+- 3633accc feat(hints): bulk-adopt poker/stud variants
+- b30075c5 feat(hints): bulk-adopt blackjack variants

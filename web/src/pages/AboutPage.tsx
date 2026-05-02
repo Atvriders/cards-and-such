@@ -167,7 +167,16 @@ export default function AboutPage(): JSX.Element {
           >
             GitHub
           </a>
-          .
+          . See the{" "}
+          <a
+            href="https://github.com/Atvriders/cards-and-such/blob/master/CHANGELOG.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="settings-link"
+          >
+            Changelog
+          </a>
+          {" "}for recent commits.
         </p>
       </section>
     </div>
