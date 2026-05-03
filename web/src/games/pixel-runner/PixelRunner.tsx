@@ -95,7 +95,7 @@ export function PixelRunner({
       ) : (
         <>
           <div className="pixelrunner-controls">
-            <button onClick={() => dispatch({ type: "jump" } as PixelRunnerAction)}>
+            <button data-testid="hint-target-pixel-runner-action" onClick={() => dispatch({ type: "jump" } as PixelRunnerAction)}>
               Jump
             </button>
           </div>

@@ -42,7 +42,7 @@ export function RacingStuntsGame({ state, dispatch, onGameOver }: GameProps<Raci
         <div className="rs-stunt-zone">
           <div className="rs-stunt-label">Stunt Zone!</div>
           <div className="rs-stunt-btns">
-            <button onClick={() => dispatch({ type: "stunt", stuntType: "drift" })}>Drift</button>
+            <button data-testid="hint-target-racing-stunts-action" onClick={() => dispatch({ type: "stunt", stuntType: "drift" })}>Drift</button>
             <button onClick={() => dispatch({ type: "stunt", stuntType: "jump" })}>Jump</button>
             <button onClick={() => dispatch({ type: "stunt", stuntType: "boost" })}>Boost</button>
           </div>

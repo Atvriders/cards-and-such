@@ -34,5 +34,6 @@ Strategy: Boost your speed early to build a lead. Save shells for moments when a
   initialState: (seed: number, settings: KartTournamentSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-kart-tournament-action"]', pulses: 3 }; },
   component: KartTournamentGame,
 };

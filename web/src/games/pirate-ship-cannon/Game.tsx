@@ -47,7 +47,7 @@ export function PirateShipCannonGame({ state, dispatch, onGameOver }: GameProps<
       {!isOver && (
         <>
           <div className="pc-controls-row">
-            <button onClick={() => dispatch({ type: "powerDown" })}>Power -</button>
+            <button data-testid="hint-target-pirate-ship-cannon-action" onClick={() => dispatch({ type: "powerDown" })}>Power -</button>
             <span>Power: {state.cannonPower}</span>
             <button onClick={() => dispatch({ type: "powerUp" })}>Power +</button>
           </div>

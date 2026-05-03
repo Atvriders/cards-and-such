@@ -36,5 +36,6 @@ Score is based on total slimes eliminated (capped at 100). Prioritise high-traff
   initialState: (seed: number, settings: SlimeDefenseSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-slime-defense-action"]', pulses: 3 }; },
   component: SlimeDefense,
 };

@@ -81,7 +81,7 @@ export function CastleDefender({
         </div>
       ) : (
         <div className="castle-controls">
-          <button
+          <button data-testid="hint-target-castle-defender-action"
             onClick={() => dispatch({ type: "buyArcher" } as CastleAction)}
             disabled={state.gold < archerCost}
           >

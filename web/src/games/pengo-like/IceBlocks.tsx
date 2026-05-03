@@ -168,7 +168,7 @@ export function IceBlocks({
       </div>
 
       <div className="iceblocks-controls">
-        <button onClick={() => dispatch({ type: "push" } as IceBlocksAction)}>Push Block (Space/F)</button>
+        <button data-testid="hint-target-pengo-like-action" onClick={() => dispatch({ type: "push" } as IceBlocksAction)}>Push Block (Space/F)</button>
       </div>
 
       <div className="iceblocks-hint">

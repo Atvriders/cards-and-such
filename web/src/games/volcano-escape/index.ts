@@ -36,5 +36,6 @@ Strategy: keep moving upward and avoid getting cornered. Lava drifts left and ri
   initialState: (seed: number, settings: VolcanoEscapeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-volcano-escape-action"]', pulses: 3 }; },
   component: VolcanoEscape,
 };

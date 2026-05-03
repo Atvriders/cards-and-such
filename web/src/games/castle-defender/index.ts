@@ -34,5 +34,6 @@ Later waves send more enemies with higher HP, so plan ahead. Balance buying arch
   initialState: (seed: number, settings: CastleDefenderSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-castle-defender-action"]', pulses: 3 }; },
   component: CastleDefender,
 };

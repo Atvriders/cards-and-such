@@ -155,7 +155,7 @@ export function SkeeBall({
           <input type="range" min={-100} max={100} value={Math.round(state.launchLane * 100)}
             onChange={e => dispatch({ type: "setLane", lane: parseInt(e.target.value) / 100 } as SkeeBallAction)} />
         </label>
-        <button className="skee-throw-btn"
+        <button data-testid="hint-target-skee-ball-action" className="skee-throw-btn"
           disabled={state.ballInFlight || state.over || state.ballsThrown >= state.totalBalls}
           onClick={() => dispatch({ type: "throw" } as SkeeBallAction)}>
           ROLL!

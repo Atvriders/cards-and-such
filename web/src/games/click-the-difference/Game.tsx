@@ -65,7 +65,7 @@ export function ClickTheDifferenceGame({
 
           {state.solved && (
             <button
-              type="button"
+              data-testid="hint-target-click-the-difference-action" type="button"
               className="ctd-btn ctd-btn--primary"
               onClick={() => dispatch({ type: "next" })}
             >

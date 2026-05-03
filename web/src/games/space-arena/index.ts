@@ -36,5 +36,6 @@ Score is capped at 100 (representing up to 300 kills). Survive as long as possib
   initialState: (seed: number, settings: SpaceArenaSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-space-arena-action"]', pulses: 3 }; },
   component: SpaceArena,
 };

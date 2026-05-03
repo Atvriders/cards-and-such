@@ -44,7 +44,7 @@ export function CircusJuggle({ state, dispatch, onGameOver }: GameProps<CircusJu
 
       <div className="cj-controls">
         {!state.gameOver && (
-          <button onClick={() => dispatch({ type: "tick" })}>⏩ Tick</button>
+          <button data-testid="hint-target-circus-juggle-action" onClick={() => dispatch({ type: "tick" })}>⏩ Tick</button>
         )}
         <button onClick={() => dispatch({ type: "restart" })}>New Show</button>
       </div>

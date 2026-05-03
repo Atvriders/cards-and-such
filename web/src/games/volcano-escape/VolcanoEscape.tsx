@@ -43,7 +43,7 @@ export function VolcanoEscape({ state, dispatch, onGameOver }: GameProps<Volcano
         <>
           <div className="ve-controls">
             <div className="ve-row">
-              <button onClick={() => dispatch({ type: "move", dir: "up" })}>▲</button>
+              <button data-testid="hint-target-volcano-escape-action" onClick={() => dispatch({ type: "move", dir: "up" })}>▲</button>
             </div>
             <div className="ve-row">
               <button onClick={() => dispatch({ type: "move", dir: "left" })}>◀</button>

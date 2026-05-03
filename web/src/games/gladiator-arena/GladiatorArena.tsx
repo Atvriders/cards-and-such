@@ -50,7 +50,7 @@ export function GladiatorArena({ state, dispatch, onGameOver }: GameProps<Gladia
       </div>
 
       <div className="ga-controls">
-        <button onClick={() => dispatch({ type: "strike" })} disabled={!canAct}>Strike</button>
+        <button data-testid="hint-target-gladiator-arena-action" onClick={() => dispatch({ type: "strike" })} disabled={!canAct}>Strike</button>
         <button onClick={() => dispatch({ type: "powerStrike" })} disabled={!canAct}>Power Strike</button>
         <button onClick={() => dispatch({ type: "defend" })} disabled={!canAct}>Defend</button>
         {state.actionUsed && !state.gameOver && (

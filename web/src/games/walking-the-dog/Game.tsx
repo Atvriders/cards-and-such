@@ -53,7 +53,7 @@ export function WalkingTheDogGame({
 
       {!state.gameOver && (
         <div className="wtd-actions">
-          <button onClick={() => dispatch({ type: "walk" })}>🐾 Walk</button>
+          <button data-testid="hint-target-walking-the-dog-action" onClick={() => dispatch({ type: "walk" })}>🐾 Walk</button>
           <button onClick={() => dispatch({ type: "dodge" })}>💨 Dodge</button>
           <button onClick={() => dispatch({ type: "sniff" })}>👃 Sniff</button>
         </div>

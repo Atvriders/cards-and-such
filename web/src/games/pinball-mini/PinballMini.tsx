@@ -125,7 +125,7 @@ export function PinballMini({
       {!terminal && (
         <>
           <div className="pinball-controls">
-            <button onClick={() => dispatch({ type: "paddleLeft" } as PinballAction)}>◀ Left</button>
+            <button data-testid="hint-target-pinball-mini-action" onClick={() => dispatch({ type: "paddleLeft" } as PinballAction)}>◀ Left</button>
             <button onClick={() => dispatch({ type: "paddleRight" } as PinballAction)}>Right ▶</button>
           </div>
           <div className="pinball-hint">Mouse or Arrow Keys / A-D to move paddle</div>

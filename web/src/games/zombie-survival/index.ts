@@ -36,5 +36,6 @@ Score is capped at 100. Aim for efficient kills and conserve ammo for red-eyed m
   initialState: (seed: number, settings: ZombieSurvivalSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-zombie-survival-action"]', pulses: 3 }; },
   component: ZombieSurvival,
 };

@@ -36,5 +36,6 @@ Choose short (10 steps), medium (20 steps), or long (30 steps). Longer walks off
   initialState: (seed: number, settings: WalkingTheDogSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-walking-the-dog-action"]', pulses: 3 }; },
   component: WalkingTheDogGame,
 };

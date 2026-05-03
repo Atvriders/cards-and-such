@@ -48,7 +48,7 @@ export function HeadsUp({ state, dispatch, onGameOver }: GameProps<HeadsUpState,
       <div className="hu-card">{word}</div>
       <p className="hu-hint">Hold the phone to your forehead — friends describe the word without saying it!</p>
       <div className="hu-buttons">
-        <button className="hu-btn-correct" onClick={() => dispatch({ type: "correct" } as HeadsUpAction)}>
+        <button data-testid="hint-target-heads-up-action" className="hu-btn-correct" onClick={() => dispatch({ type: "correct" } as HeadsUpAction)}>
           Got It!
         </button>
         <button className="hu-btn-skip" onClick={() => dispatch({ type: "skip" } as HeadsUpAction)}>

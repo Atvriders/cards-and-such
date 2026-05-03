@@ -48,7 +48,7 @@ export function TimeTrialGame({ state, dispatch, onGameOver }: GameProps<TimeTri
 
       {!isOver && (
         <div className="tt-controls">
-          <button onClick={() => dispatch({ type: "moveLeft" })}>Left</button>
+          <button data-testid="hint-target-time-trial-action" onClick={() => dispatch({ type: "moveLeft" })}>Left</button>
           <button onClick={() => dispatch({ type: "pass" })}>Pass Gate</button>
           <button onClick={() => dispatch({ type: "moveRight" })}>Right</button>
         </div>

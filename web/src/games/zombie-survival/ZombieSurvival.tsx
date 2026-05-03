@@ -53,7 +53,7 @@ export function ZombieSurvival({ state, dispatch, onGameOver }: GameProps<Zombie
       </div>
 
       <div className="zs-controls">
-        <button onClick={() => dispatch({ type: "moveLeft" })} disabled={state.gameOver}>◀ Left</button>
+        <button data-testid="hint-target-zombie-survival-action" onClick={() => dispatch({ type: "moveLeft" })} disabled={state.gameOver}>◀ Left</button>
         <button onClick={() => dispatch({ type: "shoot" })} disabled={state.gameOver || state.ammo === 0}>🔫 Shoot</button>
         <button onClick={() => dispatch({ type: "moveRight" })} disabled={state.gameOver}>Right ▶</button>
       </div>

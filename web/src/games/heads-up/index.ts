@@ -40,5 +40,6 @@ Great for all ages. Works especially well with larger groups where the audience 
   initialState: (seed: number, settings: HeadsUpSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-heads-up-action"]', pulses: 3 }; },
   component: HeadsUp,
 };

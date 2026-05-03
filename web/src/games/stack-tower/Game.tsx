@@ -116,7 +116,7 @@ export function StackTower({ state, dispatch }: GameProps<StackTowerState, Setti
       </div>
 
       <div className="st-controls">
-        <button onClick={() => dispatch({ type: "drop" } as StackTowerAction)}>
+        <button data-testid="hint-target-stack-tower-action" onClick={() => dispatch({ type: "drop" } as StackTowerAction)}>
           Drop Block
         </button>
       </div>

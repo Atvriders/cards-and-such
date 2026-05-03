@@ -73,7 +73,7 @@ export function KartTournamentGame({
       <div className="kart-controls">
         {state.phase === "racing" && (
           <>
-            <button className="accel" onClick={() => dispatch({ type: "drive", action: "accelerate" } as KartTournamentAction)}>
+            <button data-testid="hint-target-kart-tournament-action" className="accel" onClick={() => dispatch({ type: "drive", action: "accelerate" } as KartTournamentAction)}>
               ⚡ Accelerate
             </button>
             <button className="brake" onClick={() => dispatch({ type: "drive", action: "brake" } as KartTournamentAction)}>

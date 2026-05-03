@@ -802,6 +802,19 @@
   vertical-align: 0.06em;
   opacity: 0.9;
   pointer-events: none;
+  /* A whisper of the accent glow so the marker reads as decoration
+     against a busy title without competing with the badge slot. */
+  text-shadow: 0 0 6px color-mix(in srgb, var(--accent, #5b6cff) 35%, transparent);
+}
+/* High-contrast / forced-colors fall back to CanvasText so the
+   accent-tinted heart never disappears when the OS palette
+   collapses colours. */
+@media (forced-colors: active) {
+  .tile-fav-marker {
+    color: CanvasText;
+    text-shadow: none;
+    opacity: 1;
+  }
 }
 .tile-desc {
   font-size: 0.85rem;

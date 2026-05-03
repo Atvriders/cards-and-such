@@ -59,7 +59,7 @@ export function SlimeDefense({ state, dispatch, onGameOver }: GameProps<SlimeDef
       </div>
 
       <div className="sld-controls">
-        <button
+        <button data-testid="hint-target-slime-defense-action"
           onClick={() => dispatch({ type: "placeTrap" })}
           disabled={state.selectedLane === null || state.gold < 4 || (state.selectedLane !== null && state.traps.includes(state.selectedLane))}
         >

@@ -81,7 +81,7 @@ export function BoxerKnockout({
       <div className="boxer-score">Score: {state.score}</div>
 
       <div className="boxer-controls">
-        <button onClick={() => dispatch({ type: "punch" } as BoxerAction)}>Punch</button>
+        <button data-testid="hint-target-boxer-knockout-action" onClick={() => dispatch({ type: "punch" } as BoxerAction)}>Punch</button>
         <button onClick={() => dispatch({ type: "block" } as BoxerAction)}>Block</button>
         <button onClick={() => dispatch({ type: "dodge" } as BoxerAction)}>Dodge</button>
       </div>

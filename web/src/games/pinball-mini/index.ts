@@ -34,5 +34,6 @@ Tip: position the paddle so the ball angles toward the densest group of bumpers 
   initialState: (seed: number, settings: PinballMiniSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pinball-mini-action"]', pulses: 3 }; },
   component: PinballMini,
 };

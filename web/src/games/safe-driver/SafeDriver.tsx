@@ -56,7 +56,7 @@ export function SafeDriver({ state, dispatch, onGameOver }: GameProps<SafeDriver
       {state.gameOver && <div className="safe-driver-status over">Game Over! Distance: {state.distance}</div>}
       {!state.gameOver && (
         <div className="safe-driver-controls">
-          <button onClick={() => dispatch({ type: "left" })}>← Left</button>
+          <button data-testid="hint-target-safe-driver-action" onClick={() => dispatch({ type: "left" })}>← Left</button>
           <button onClick={() => dispatch({ type: "right" })}>Right →</button>
         </div>
       )}

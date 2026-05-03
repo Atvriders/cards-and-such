@@ -36,5 +36,6 @@ Play 5 or 8 rounds. Score is capped at 1000. Aim for Direct Hits every round for
   initialState: (seed: number, settings: PirateShipCannonSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pirate-ship-cannon-action"]', pulses: 3 }; },
   component: PirateShipCannonGame,
 };

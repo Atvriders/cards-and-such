@@ -53,7 +53,7 @@ export function SpaceArena({ state, dispatch, onGameOver }: GameProps<SpaceArena
       </div>
 
       <div className="sa-controls">
-        <button onClick={() => dispatch({ type: "moveLeft" })} disabled={state.gameOver}>◀ Left</button>
+        <button data-testid="hint-target-space-arena-action" onClick={() => dispatch({ type: "moveLeft" })} disabled={state.gameOver}>◀ Left</button>
         <button onClick={() => dispatch({ type: "shoot" })} disabled={state.gameOver}>🔵 Shoot</button>
         <button onClick={() => dispatch({ type: "shield" })} disabled={state.gameOver || state.shieldCooldown > 0}>🛡 Shield</button>
         <button onClick={() => dispatch({ type: "moveRight" })} disabled={state.gameOver}>Right ▶</button>

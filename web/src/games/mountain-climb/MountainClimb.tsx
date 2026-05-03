@@ -60,7 +60,7 @@ export function MountainClimb({ state, dispatch, onGameOver }: GameProps<Mountai
         </div>
       )}
 
-      <button onClick={() => dispatch({ type: "restart" })}>New Climb</button>
+      <button data-testid="hint-target-mountain-climb-action" onClick={() => dispatch({ type: "restart" })}>New Climb</button>
     </div>
   );
 }

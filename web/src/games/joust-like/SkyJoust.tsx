@@ -153,7 +153,7 @@ export function SkyJoust({
       </div>
 
       <div className="skyjoust-controls">
-        <button onClick={() => dispatch({ type: "move-left" } as SkyJoustAction)}>◀</button>
+        <button data-testid="hint-target-joust-like-action" onClick={() => dispatch({ type: "move-left" } as SkyJoustAction)}>◀</button>
         <button onClick={() => dispatch({ type: "flap" } as SkyJoustAction)}>Flap (Space)</button>
         <button onClick={() => dispatch({ type: "move-right" } as SkyJoustAction)}>▶</button>
       </div>

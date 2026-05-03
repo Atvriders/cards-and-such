@@ -34,5 +34,6 @@ Strategy: Throttle up before wide, tall ramps to get enough air. Ease off the th
   initialState: (seed: number, settings: MotorcycleJumpSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-motorcycle-jump-action"]', pulses: 3 }; },
   component: MotorcycleJump,
 };

@@ -22,5 +22,6 @@ Tips: Barrels are spaced out but their timing is random — watch the spawn patt
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-donkey-kong-like-action"]', pulses: 3 }; },
   component: BarrelJumper,
 };

@@ -62,7 +62,7 @@ export function AcrobatFlip({ state, dispatch, onGameOver }: GameProps<AcrobatFl
       <div className="af-controls">
         {!state.gameOver && state.quality === null && (
           <>
-            <button onClick={() => dispatch({ type: "nextFlip" })}>⏩ Spin</button>
+            <button data-testid="hint-target-acrobat-flip-action" onClick={() => dispatch({ type: "nextFlip" })}>⏩ Spin</button>
             <button onClick={() => dispatch({ type: "land" })}>🤸 Land!</button>
           </>
         )}

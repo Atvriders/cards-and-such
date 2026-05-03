@@ -147,7 +147,7 @@ export function UfoRescue({
               onMouseUp={() => {}}
               onClick={() => dispatch({ type: "moveLeft" } as UfoAction)}
             >◀</button>
-            <button
+            <button data-testid="hint-target-ufo-rescue-action"
               className={state.beamActive ? "active" : ""}
               onClick={() => dispatch({ type: "beam" } as UfoAction)}
             >

@@ -68,7 +68,7 @@ export function SwarmDefense({ state, dispatch, onGameOver }: GameProps<SwarmDef
       </div>
 
       <div className="sd-controls">
-        <button
+        <button data-testid="hint-target-swarm-defense-action"
           disabled={state.towerCol === null || state.gold < 5 || (state.towerCol !== null && state.towers.includes(state.towerCol))}
           onClick={() => dispatch({ type: "buildTower" })}
         >

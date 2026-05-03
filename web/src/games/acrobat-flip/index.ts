@@ -38,5 +38,6 @@ Tips: spin the arrow slowly towards the target and stop just before the green zo
   initialState: (seed: number, settings: AcrobatFlipSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-acrobat-flip-action"]', pulses: 3 }; },
   component: AcrobatFlip,
 };

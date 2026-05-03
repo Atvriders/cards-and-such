@@ -48,7 +48,7 @@ export function WallBounce({
           onChange={(e) => setAngle(Number(e.target.value))}
           disabled={state.gameOver}
         />
-        <button
+        <button data-testid="hint-target-wall-bounce-action"
           onClick={() => dispatch({ type: "shoot", angle } as WallBounceAction)}
           disabled={state.gameOver}
         >

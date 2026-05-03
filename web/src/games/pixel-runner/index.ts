@@ -34,5 +34,6 @@ Strategy tips: Jump the instant an obstacle enters your peripheral view at fast 
   initialState: (seed: number, settings: PixelRunnerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pixel-runner-action"]', pulses: 3 }; },
   component: PixelRunner,
 };

@@ -36,5 +36,6 @@ Strategy tip: use Defend when your HP is low or when facing a high-attack oppone
   initialState: (seed: number, settings: GladiatorArenaSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-gladiator-arena-action"]', pulses: 3 }; },
   component: GladiatorArena,
 };

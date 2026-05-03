@@ -112,7 +112,7 @@ export function MotorcycleJump({
       {!terminal && (
         <>
           <div className="moto-controls">
-            <button onClick={() => dispatch({ type: "jump" } as MotoAction)}>Jump</button>
+            <button data-testid="hint-target-motorcycle-jump-action" onClick={() => dispatch({ type: "jump" } as MotoAction)}>Jump</button>
             <button onClick={() => dispatch({ type: "throttle" } as MotoAction)}>Throttle</button>
           </div>
           <div className="moto-hint">Space/Up to jump · Right/D to throttle · Clear all ramps!</div>

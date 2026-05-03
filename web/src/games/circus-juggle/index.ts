@@ -36,5 +36,6 @@ Tips: advance ticks quickly if all items are high and uncatchable. Focus on item
   initialState: (seed: number, settings: CircusJuggleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-circus-juggle-action"]', pulses: 3 }; },
   component: CircusJuggle,
 };

@@ -100,7 +100,7 @@ export function TankBattle({
         <>
           <div className="tank-controls">
             <div />
-            <button onClick={() => dispatch({ type: "move", dx: 0, dy: -1 } as TankAction)}>▲</button>
+            <button data-testid="hint-target-tank-battle-action" onClick={() => dispatch({ type: "move", dx: 0, dy: -1 } as TankAction)}>▲</button>
             <div />
             <button onClick={() => dispatch({ type: "move", dx: -1, dy: 0 } as TankAction)}>◀</button>
             <button onClick={() => dispatch({ type: "shoot" } as TankAction)}>🔥</button>

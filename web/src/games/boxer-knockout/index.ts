@@ -36,5 +36,6 @@ Read the opponent — on Hard difficulty they block and dodge more frequently. M
   initialState: (seed: number, settings: BoxerKnockoutSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-boxer-knockout-action"]', pulses: 3 }; },
   component: BoxerKnockout,
 };

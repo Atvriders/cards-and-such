@@ -32,5 +32,6 @@ Ideal throw: power bar at about 70–85% when you release. Too low and the ball 
   initialState: (seed: number, settings: SkeeBallSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-skee-ball-action"]', pulses: 3 }; },
   component: SkeeBall,
 };
