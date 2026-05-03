@@ -62,4 +62,24 @@ describe("AboutPage", () => {
     expect(hint).toBeInTheDocument();
     expect(hint).toHaveTextContent(/Hint coverage:\s*100%/);
   });
+
+  it("renders categories, themes, and families stat tiles with expected counts", async () => {
+    const { FAMILIES } = await import("../games/families.js");
+    const { THEMES } = await import("../platform/themes.js");
+    renderPage();
+
+    const categories = screen.getByTestId("about-stat-categories");
+    expect(categories).toBeInTheDocument();
+    expect(categories).toHaveTextContent("5");
+
+    const themes = screen.getByTestId("about-stat-themes");
+    expect(themes).toBeInTheDocument();
+    expect(THEMES.length).toBeGreaterThanOrEqual(10);
+    expect(themes).toHaveTextContent(THEMES.length.toLocaleString());
+
+    const families = screen.getByTestId("about-stat-families");
+    expect(families).toBeInTheDocument();
+    expect(FAMILIES.length).toBeGreaterThanOrEqual(100);
+    expect(families).toHaveTextContent(FAMILIES.length.toLocaleString());
+  });
 });
