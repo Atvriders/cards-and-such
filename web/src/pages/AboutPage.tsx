@@ -60,68 +60,77 @@ export default function AboutPage(): JSX.Element {
     <div className="about-page settings-page" data-testid="about-page">
       <PageHead
         title="About"
-        description={`About Cards and Such — a sprawling open-source catalog of ${formatted(totalGames)}+ free in-browser solitaire, card, dice, board, and arcade games.`}
+        description={`About Cards and Such — an open-source catalog of ${formatted(totalGames)} free in-browser solitaire, card, dice, board, and arcade games.`}
       />
 
       <header className="about-hero">
+        <p className="about-eyebrow">Open source · MIT · self-hostable</p>
         <h1 className="about-hero-title">Cards &amp; Such</h1>
         <p className="about-hero-tag">
-          A sprawling open-source catalog of{" "}
+          An open-source catalog of{" "}
           <strong>{formatted(totalGames)}</strong> free, in-browser solitaire,
-          card, dice, board, and arcade games. No install. No account. No ads.
+          card, dice, board, and arcade games.
+        </p>
+        <p className="about-hero-sub">
+          No install. No account. No ads. Just play.
         </p>
       </header>
 
-      <section className="settings-section about-section">
-        <h2>What is this?</h2>
-        <p>
-          A single-page web app that bundles thousands of classic and modern
-          games into one fast, zero-friction lobby. Every game is a
-          self-contained plugin, so the catalog keeps growing without one game
-          blocking the next. Open source and self-hostable — run your own copy
-          with two Docker images.
-        </p>
-      </section>
-
-      <section className="settings-section about-section" data-testid="about-friend-mode">
-        <h2>Friend mode</h2>
-        <p>
-          🤝 Same-seed friend matches let you compare scores fairly without
-          netcode.
-        </p>
-      </section>
-
-      <section className="settings-section about-section">
-        <h2>Numbers at a glance</h2>
+      <section className="settings-section about-section about-section--numbers" aria-labelledby="about-numbers-heading">
+        <h2 id="about-numbers-heading">By the numbers</h2>
         <div className="about-stats" aria-label="Project statistics">
           <Stat name="games" value={formatted(totalGames)} label="Games" />
           <Stat name="categories" value={formatted(totalCategories)} label="Categories" />
           <Stat name="themes" value={formatted(totalThemes)} label="Themes" />
           <Stat name="families" value={formatted(totalFamilies)} label="Families" />
         </div>
+        <p className="settings-hint about-section-foot">
+          Counts are read from the live game registry at build time, so they
+          stay honest as the catalog grows.
+        </p>
+        <p className="settings-hint about-section-foot" data-testid="about-hint-coverage">
+          Hint coverage: 100% — every game has a hint button.
+        </p>
       </section>
 
-      <section className="settings-section about-section">
-        <h2>Stack</h2>
+      <section className="settings-section about-section" aria-labelledby="about-what-heading">
+        <h2 id="about-what-heading">What is this?</h2>
+        <p>
+          A single-page web app that bundles {formatted(totalGames)} classic and
+          modern games into one fast, zero-friction lobby. Every game is a
+          self-contained plugin, so the catalog keeps growing without one game
+          blocking the next.
+        </p>
+      </section>
+
+      <section className="settings-section about-section" data-testid="about-friend-mode" aria-labelledby="about-friend-heading">
+        <h2 id="about-friend-heading">Friend mode</h2>
+        <p>
+          Same-seed friend matches let you and a friend race the exact same
+          deal, then compare scores — no netcode, no signup.
+        </p>
+      </section>
+
+      <section className="settings-section about-section" aria-labelledby="about-stack-heading">
+        <h2 id="about-stack-heading">Stack</h2>
         <div className="about-chips">
           {STACK_CHIPS.map((chip) => (
             <span key={chip} className="about-chip">{chip}</span>
           ))}
         </div>
-        <p className="settings-hint">
-          The web client is a single Vite SPA with a small Node server backing
-          lobby, leaderboards, and online play. Both ship as Docker images on
-          GHCR.
+        <p className="settings-hint about-section-foot">
+          A single Vite SPA with a small Node server backing lobby,
+          leaderboards, and online play. Both ship as Docker images on GHCR.
         </p>
       </section>
 
-      <section className="settings-section about-section">
-        <h2>Self-host</h2>
+      <section className="settings-section about-section" aria-labelledby="about-selfhost-heading">
+        <h2 id="about-selfhost-heading">Self-host</h2>
         <p className="settings-hint">
-          Drop the snippet below into a <code>docker-compose.yml</code>, then run
-          {" "}<code>docker compose up -d</code>. The web UI is then available at
-          {" "}<code>http://localhost:8080</code>. Container images are
-          published to GHCR on every push to <code>master</code>.
+          Save the snippet as <code>docker-compose.yml</code>, then run
+          {" "}<code>docker compose up -d</code>. The web UI is served at
+          {" "}<code>http://localhost:8080</code>. Images are published to GHCR
+          on every push to <code>master</code>.
         </p>
         <pre className="about-code" aria-label="Docker compose example">
           <code>{COMPOSE_SNIPPET}</code>
@@ -132,42 +141,34 @@ export default function AboutPage(): JSX.Element {
         </ul>
       </section>
 
-      <section className="settings-section about-section" data-testid="about-whatsnew">
-        <h2>What's new</h2>
+      <section
+        className="settings-section about-section"
+        data-testid="about-whatsnew"
+        aria-labelledby="about-whatsnew-heading"
+      >
+        <h2 id="about-whatsnew-heading">What&rsquo;s new</h2>
+        <p className="settings-hint">
+          The five most recent commits on <code>master</code>, captured at
+          build time.
+        </p>
         {LATEST_COMMITS.length === 0 ? (
-          <p className="settings-hint">Build info unavailable</p>
+          <p className="settings-hint about-section-foot">Build info unavailable.</p>
         ) : (
-          <ul className="about-list about-list-mono">
+          <ul className="about-list about-list-mono about-whatsnew-list">
             {LATEST_COMMITS.map((line, idx) => {
               const spaceAt = line.indexOf(" ");
               const hash = spaceAt > 0 ? line.slice(0, spaceAt) : line;
               const subject = spaceAt > 0 ? line.slice(spaceAt + 1) : "";
               return (
                 <li key={`${hash}-${idx}`} data-testid={`about-whatsnew-${idx}`}>
-                  <code>{hash}</code> {subject}
+                  <code>{hash}</code> <span className="about-whatsnew-subject">{subject}</span>
                 </li>
               );
             })}
           </ul>
         )}
-      </section>
-
-      <section className="settings-section about-section">
-        <h2>Acknowledgements</h2>
-        <p>
-          Built on the shoulders of countless open-source libraries and the
-          public-domain rules of the games themselves. Full attributions live
-          on the <Link to="/credits" className="settings-link">Credits</Link>
-          {" "}page. Source on{" "}
-          <a
-            href="https://github.com/Atvriders/cards-and-such"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="settings-link"
-          >
-            GitHub
-          </a>
-          . See the{" "}
+        <p className="settings-hint about-section-foot">
+          For the full history, see the{" "}
           <a
             href="https://github.com/Atvriders/cards-and-such/blob/master/CHANGELOG.md"
             target="_blank"
@@ -176,7 +177,29 @@ export default function AboutPage(): JSX.Element {
           >
             Changelog
           </a>
-          {" "}for recent commits.
+          {" "}on GitHub.
+        </p>
+      </section>
+
+      <section className="settings-section about-section" aria-labelledby="about-ack-heading">
+        <h2 id="about-ack-heading">Acknowledgements</h2>
+        <p>
+          Built on the shoulders of countless open-source libraries and the
+          public-domain rules of the games themselves. Full attributions live
+          on the{" "}
+          <Link to="/credits" className="settings-link">Credits</Link> page.
+        </p>
+        <p className="settings-hint about-section-foot">
+          Source on{" "}
+          <a
+            href="https://github.com/Atvriders/cards-and-such"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="settings-link"
+          >
+            GitHub
+          </a>
+          {" "}— issues, PRs, and new game plugins all welcome.
         </p>
       </section>
     </div>
