@@ -2687,6 +2687,8 @@ function GameCard({
           <span
             className="tile-plays"
             data-testid={`tile-plays-${g.id}`}
+            data-count={playCount}
+            title={`You've played this ${playCount} ${playCount === 1 ? "time" : "times"}`}
             aria-label={`${playCount} ${playCount === 1 ? "play" : "plays"}`}
           >
             {playCount} {playCount === 1 ? "play" : "plays"}
