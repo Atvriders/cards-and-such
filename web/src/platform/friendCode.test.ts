@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   encodeChallenge,
   decodeChallenge,
@@ -110,5 +110,38 @@ describe("friendCode", () => {
     const spaced = `  ${lowered.split("").join(" \t ")}\n`;
     expect(decodeChallenge(spaced)).toEqual({ gameId: "klondike", seed: 4242 });
     expect(isValidFriendCode(spaced)).toBe(true);
+  });
+
+  it("returns null when a game's registry index is >= 256 (8-bit dictionary overflow)", async () => {
+    // Build a fake registry whose target gameId sits past the 8-bit slot.
+    // We re-import friendCode through vi.doMock so the production GAMES
+    // array is left untouched for sibling tests.
+    vi.resetModules();
+    const sentinel = { id: "overflow-sentinel" } as { id: string };
+    const fakeGames = new Array(0x100).fill({ id: "filler" });
+    fakeGames.push(sentinel); // index 0x100 == 256, just past the limit.
+    vi.doMock("../games/registry.js", () => ({ GAMES: fakeGames }));
+    const mod = await import("./friendCode.js");
+    expect(mod.encodeChallenge({ gameId: "overflow-sentinel", seed: 1 })).toBeNull();
+    // A game still inside the 8-bit window should encode successfully.
+    fakeGames[0] = { id: "in-range" };
+    expect(mod.encodeChallenge({ gameId: "in-range", seed: 1 })).not.toBeNull();
+    vi.doUnmock("../games/registry.js");
+    vi.resetModules();
+  });
+
+  it("truncates seeds with bits above 16 yet stays deterministic across calls", () => {
+    // Two seeds that share their low 16 bits but differ in the high bits
+    // must produce the same friend code (deterministic truncation).
+    const lowBits = 0xbeef;
+    const a = encodeChallenge({ gameId: "klondike", seed: lowBits });
+    const b = encodeChallenge({ gameId: "klondike", seed: 0x70000 | lowBits });
+    const c = encodeChallenge({ gameId: "klondike", seed: 0x12340000 | lowBits });
+    expect(a).not.toBeNull();
+    expect(b).toBe(a);
+    expect(c).toBe(a);
+    // And the round-trip recovers exactly the low 16 bits, not the original.
+    const decoded = decodeChallenge(a as string);
+    expect(decoded).toEqual({ gameId: "klondike", seed: lowBits });
   });
 });
