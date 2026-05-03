@@ -15,9 +15,11 @@
  * Uses `vi.hoisted` so the mocked registry can reference the fixture
  * plugin (vi.mock factories run before module-level const initialisers,
  * so a plain const at top-level would be a TDZ violation). Fake timers
- * are installed AFTER mounting so the start-up effects (initialState,
- * plugin import) commit normally before the timer tick is owned by
- * vitest.
+ * are installed BEFORE mounting (with `shouldAdvanceTime: true` so the
+ * start-up effects still get scheduled and resolve) — otherwise the
+ * 1Hz tick interval would be registered against the REAL clock and
+ * `advanceTimersByTime` would silently observe nothing, which is the
+ * exact W639 false-pass the tightened assertion below now guards.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent, cleanup, act } from "@testing-library/react";
@@ -101,24 +103,31 @@ describe("PlayPage pause / resume (W578 / W164)", () => {
   });
 
   it("Escape pauses (outside modals) and freezes the elapsed timer", async () => {
+    // Install fake timers BEFORE mount so the 1Hz tick `setInterval` the
+    // playing-phase `useEffect` schedules is owned by vitest's fake clock.
+    // `shouldAdvanceTime: true` lets the real wall-clock progress so
+    // start-up microtasks (plugin import, initialState commit, the
+    // start-game click handler) still resolve — without it, the tree
+    // would never reach the playing phase.
+    vi.useFakeTimers({ shouldAdvanceTime: true });
     await mountAndStart();
 
     const pauseBtn = screen.getByTestId("play-pause-btn");
     expect(pauseBtn.getAttribute("aria-pressed")).toBe("false");
 
-    // Switch to fake timers AFTER the React tree is committed to playing
-    // mode — installing them earlier would freeze the start-phase effects.
-    vi.useFakeTimers();
-
-    // Advance the timer ~3s while still playing — the elapsed counter
-    // should tick up so the freeze assertion below has something concrete
-    // to compare against.
-    act(() => {
+    // Advance the timer exactly 3s while still playing — the 1Hz tick
+    // effect must increment `elapsed` from 0 → 3, and `formatTime` pads
+    // to "MM:SS", so the rendered counter must read precisely "00:03".
+    // Using exact equality (instead of the W639 `not.toBe("0:00")` which
+    // false-passed because the actual format is "00:00") catches both a
+    // stuck timer AND any drift in the format. `await act(async)` flushes
+    // the queued setState callbacks the interval scheduled.
+    await act(async () => {
       vi.advanceTimersByTime(3000);
     });
     const timer = screen.getByTestId("play-timer-current");
     const elapsedBeforePause = timer.textContent ?? "";
-    expect(elapsedBeforePause).not.toBe("0:00");
+    expect(elapsedBeforePause).toBe("00:03");
 
     // Escape while focus is on document.body (not an input / textarea /
     // contenteditable) should hit the pause-toggle handler.
