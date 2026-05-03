@@ -13,10 +13,10 @@ export function HyperTurboTournamentGame({ state, dispatch, onGameOver }: GamePr
       {state.hand.length > 0 && (
         <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       )}
-      {state.phase === "deal" && <button className="dm-btn" onClick={() => dispatch({ type: "deal" } as HyperTurboTournamentAction)}>Deal {CARDS_PER_HAND} cards</button>}
+      {state.phase === "deal" && <button className="dm-btn" data-testid="hint-target-hyper-turbo-tournament-deal" onClick={() => dispatch({ type: "deal" } as HyperTurboTournamentAction)}>Deal {CARDS_PER_HAND} cards</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.rank} — +{state.rankPts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as HyperTurboTournamentAction)}>Next</button>
+        <button className="dm-btn alt" data-testid="hint-target-hyper-turbo-tournament-next" onClick={() => dispatch({ type: "next" } as HyperTurboTournamentAction)}>Next</button>
       </>}
     </div>
   );

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HorseMixState, HorseMixAction, HorseMixSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const horseMixPlugin: GamePlugin<HorseMixState, HorseMixAction, typeof se
   howToPlay:"HORSE Mix Solo simulates the legendary mixed game rotation: Hold'em, Omaha Hi-Lo, Razz, 7-Card Stud, 8-or-Better. In live play the variant rotates each orbit. Here, press Deal each round to receive six random cards from a 52-card deck — a compromise width across the five formats.\n\nHand values: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nTen rounds. The variant rotation in live HORSE keeps pros honest — you must master five games. Here the rotation is abstracted into one consistent six-card deal each round, but the eclectic range of sub-game scoring expectations is mirrored by the medium-width pool.\n\nPress Next between rounds and try multiple seeds for a true HORSE marathon experience.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HorseMixSettings),
-  reducer,isTerminal,component:HorseMixGame,
+  reducer, isTerminal,   hint: (state: HorseMixState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-horse-mix-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-horse-mix-next"]', pulses: 3 };
+    return null;
+  },
+  component:HorseMixGame,
 };

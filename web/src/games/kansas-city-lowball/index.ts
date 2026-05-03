@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KansasCityLowballState, KansasCityLowballAction, KansasCityLowballSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const kansasCityLowballPlugin: GamePlugin<KansasCityLowballState, KansasC
   howToPlay:"Kansas City Lowball Solo simulates the 2-7 single-draw lowball format where the lowest hand wins and the ace always plays high. Press Deal each round to receive five cards and the engine scores the lowness of your hand.\n\nLowball scoring: the engine picks the BEST five-card hand minimizing pair count and rank totals. Lowest possible hand 2-3-4-5-7 unsuited scores top points. Hand values invert: stronger high-poker hands score lower. There are nine rounds — nine fresh lowball deals.\n\nKansas City lowball is the original lowball: ace high, and 2-3-4-5-7 unsuited is the nuts. Straights and flushes count as high hands and hurt your low. Here, the score reflects how 'low' your draw came out — premium lows accumulate big numbers. Press Next to chase the best low across nine rounds!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as KansasCityLowballSettings),
-  reducer,isTerminal,component:KansasCityLowballGame,
+  reducer, isTerminal,   hint: (state: KansasCityLowballState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-kansas-city-lowball-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-kansas-city-lowball-next"]', pulses: 3 };
+    return null;
+  },
+  component:KansasCityLowballGame,
 };

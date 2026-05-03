@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HeadsUpSngState, HeadsUpSngAction, HeadsUpSngSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const headsUpSngPlugin: GamePlugin<HeadsUpSngState, HeadsUpSngAction, typ
   howToPlay:"Heads-Up SnG Solo is a fast solo deal simulating the heads-up Sit & Go format. In live Heads-Up SnG, two players battle until one busts — short, brutal, position-dependent. Here, press Deal each round to receive seven cards and the best five-card poker hand is scored.\n\nHand values: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nOnly four rounds — a tight, high-pressure session. Live Heads-Up SnGs are over in 30-60 minutes; the abbreviated round count here mirrors that brevity.\n\nPress Next between rounds and try multiple seeds to test your variance.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HeadsUpSngSettings),
-  reducer,isTerminal,component:HeadsUpSngGame,
+  reducer, isTerminal,   hint: (state: HeadsUpSngState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-heads-up-sng-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-heads-up-sng-next"]', pulses: 3 };
+    return null;
+  },
+  component:HeadsUpSngGame,
 };

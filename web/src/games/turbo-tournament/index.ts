@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TurboTournamentState, TurboTournamentAction, TurboTournamentSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const turboTournamentPlugin: GamePlugin<TurboTournamentState, TurboTourna
   howToPlay:"Turbo Tournament Solo simulates the fast-blind format where blinds rise every five to ten minutes, forcing aggression and short-stack play. Press Deal each round to receive seven cards and the engine evaluates the best five-card hand from your draw.\n\nHand values: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200. Eight rounds total — each rapid like a turbo blind level.\n\nIn turbo play the math changes: stack-to-pot ratios shrink fast and shove-or-fold dominates the late stages. Here, each deal is one turbo level — quick and decisive. Premium hands carry massive scoring weight. Press Next quickly between rounds to keep the pace alive!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TurboTournamentSettings),
-  reducer,isTerminal,component:TurboTournamentGame,
+  reducer, isTerminal,   hint: (state: TurboTournamentState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-turbo-tournament-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-turbo-tournament-next"]', pulses: 3 };
+    return null;
+  },
+  component:TurboTournamentGame,
 };
