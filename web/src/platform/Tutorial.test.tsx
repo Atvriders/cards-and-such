@@ -1,6 +1,19 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { WelcomeTutorial, DEFAULT_WELCOME_STEPS } from "./Tutorial.js";
+import { hasSeenWelcomeTutorial, markWelcomeTutorialSeen } from "./tutorials.js";
+
+// SettingsPage transitively imports the platform sounds module which boots
+// Web Audio in jsdom; mock it so the page mounts cleanly inside this suite.
+vi.mock("./sounds.js", async () => {
+  const actual = await vi.importActual<typeof import("./sounds.js")>(
+    "./sounds.js",
+  );
+  return { ...actual, playSound: vi.fn() };
+});
+
+import SettingsPage from "../pages/SettingsPage.js";
 
 /**
  * Smoke coverage for the first-run welcome carousel: 4 steps, dot navigation,
@@ -89,5 +102,96 @@ describe("WelcomeTutorial", () => {
     fireEvent.click(screen.getByTestId("tut-next"));
     fireEvent.click(screen.getByTestId("tut-backdrop"));
     expect(onSkip).toHaveBeenCalledTimes(1);
+  });
+
+  // --------------------------------------------------------------------
+  // ArrowRight / ArrowLeft drive the carousel without touching the mouse,
+  // mirroring Enter (advance) and the Back button. Logic lives in
+  // Tutorial.tsx; this guards the keyboard contract from regressing.
+  // --------------------------------------------------------------------
+  it("ArrowRight advances and ArrowLeft goes back", () => {
+    const onComplete = vi.fn();
+    const onSkip = vi.fn();
+    render(<WelcomeTutorial onComplete={onComplete} onSkip={onSkip} />);
+
+    expect(screen.getByTestId("tut-step-1")).toBeTruthy();
+
+    // Two Right presses → step 3.
+    act(() => {
+      fireEvent.keyDown(window, { key: "ArrowRight" });
+    });
+    expect(screen.getByTestId("tut-step-2")).toBeTruthy();
+    act(() => {
+      fireEvent.keyDown(window, { key: "ArrowRight" });
+    });
+    expect(screen.getByTestId("tut-step-3")).toBeTruthy();
+
+    // One Left press → back to step 2.
+    act(() => {
+      fireEvent.keyDown(window, { key: "ArrowLeft" });
+    });
+    expect(screen.getByTestId("tut-step-2")).toBeTruthy();
+
+    // Arrows must not complete or skip the carousel on their own.
+    expect(onComplete).not.toHaveBeenCalled();
+    expect(onSkip).not.toHaveBeenCalled();
+  });
+});
+
+// ----------------------------------------------------------------------
+// Settings → "Show coachmarks" reset clears `cards-tutorial-seen` and
+// re-shows the welcome tutorial. SettingsPage is rendered behind a
+// MemoryRouter (it uses <Link>); we then click the production
+// `settings-show-coachmarks` button and assert the storage + custom-event
+// contract that AppShell relies on to re-open the carousel.
+// ----------------------------------------------------------------------
+describe("Settings → Show coachmarks reset", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // jsdom does not implement matchMedia. SettingsPage probes it during
+    // mount for its mobile-accordion check, so stub a desktop response.
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockImplementation(() => ({
+        matches: false,
+        media: "",
+        onchange: null,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+  });
+
+  it("clears cards-tutorial-seen and dispatches the open event", async () => {
+    // Pre-seed the welcome-seen flag so we can observe it being cleared.
+    markWelcomeTutorialSeen();
+    expect(hasSeenWelcomeTutorial()).toBe(true);
+
+    // Mirror AppShell's listener so we can assert the open event fires.
+    const onOpen = vi.fn();
+    window.addEventListener(
+      "cards:open-welcome-tutorial",
+      onOpen as EventListener,
+    );
+
+    render(
+      <MemoryRouter>
+        <SettingsPage />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByTestId("settings-show-coachmarks"));
+
+    expect(hasSeenWelcomeTutorial()).toBe(false);
+    expect(onOpen).toHaveBeenCalledTimes(1);
+
+    window.removeEventListener(
+      "cards:open-welcome-tutorial",
+      onOpen as EventListener,
+    );
   });
 });

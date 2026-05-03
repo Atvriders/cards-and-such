@@ -1279,6 +1279,11 @@ export default function SettingsPage(): JSX.Element {
             data-testid="settings-show-coachmarks"
             onClick={() => {
               setCoachmarkPending();
+              // Also clear the welcome-tutorial-seen flag and re-open the
+              // first-run carousel so this single control re-arms every
+              // onboarding hint at once.
+              resetWelcomeTutorial();
+              window.dispatchEvent(new CustomEvent("cards:open-welcome-tutorial"));
             }}
           >
             Show again
