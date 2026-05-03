@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, cleanup } from "@testing-library/react";
 import { Confetti } from "./Confetti.js";
 
@@ -47,5 +47,47 @@ describe("Confetti viewport-scaled particle count (W299)", () => {
     setViewportWidth(1440);
     const { container } = render(<Confetti />);
     expect(countParticles(container)).toBe(80);
+  });
+});
+
+/**
+ * W648 a11y: when the user has `prefers-reduced-motion: reduce` the component
+ * must short-circuit — render nothing and call `onDone` immediately so the
+ * caller's post-celebration flow proceeds without animation.
+ */
+describe("Confetti reduced-motion short-circuit (W648)", () => {
+  const originalMatchMedia = window.matchMedia;
+
+  afterEach(() => {
+    cleanup();
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: originalMatchMedia,
+    });
+  });
+
+  it("returns null and calls onDone immediately when reduced motion is preferred", () => {
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: (query: string) => ({
+        matches: query === "(prefers-reduced-motion: reduce)",
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }),
+    });
+
+    const onDone = vi.fn();
+    const { container } = render(<Confetti onDone={onDone} />);
+
+    expect(container.querySelector('[data-testid="confetti"]')).toBeNull();
+    expect(container.firstChild).toBeNull();
+    expect(onDone).toHaveBeenCalledTimes(1);
   });
 });
