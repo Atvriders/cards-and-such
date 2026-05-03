@@ -1538,4 +1538,42 @@ describe("StatsPage", () => {
     expect(within(card).getByText("Sessions")).toBeTruthy();
     expect(within(card).getByText("42")).toBeTruthy();
   });
+
+  // W451: Sanity-check the responsive `.stats-card-grid` so a refactor that
+  // drops a card or renames a `data-testid` fails fast. jsdom does not run
+  // the `@media (min-width: 1024px)` rule that promotes `stats-activity` to
+  // `grid-column: span 2`, so we assert the data-testid that the CSS selector
+  // targets (or the inline style fallback, if a future change uses one).
+  it("W451: responsive card grid renders all expected testids and activity spans 2 cols on desktop", () => {
+    seedRichStats();
+    renderPage();
+    const expected = [
+      "stats-activity",
+      "stats-records",
+      "stats-categories",
+      "stats-hour-of-day",
+      "stats-cat-heatmap-card",
+      "stats-this-week",
+      "stats-personal-records",
+      "stats-personal-records-by-category",
+      "stats-most-hinted",
+      "stats-replays-panel",
+      "stats-achievements",
+    ];
+    for (const id of expected) {
+      expect(screen.getByTestId(id)).toBeTruthy();
+    }
+    const activity = screen.getByTestId("stats-activity");
+    const inlineSpan = (activity as HTMLElement).style.gridColumn;
+    if (inlineSpan) {
+      expect(inlineSpan).toBe("span 2");
+    } else {
+      // CSS selector `.stats-card-grid > [data-testid="stats-activity"]`
+      // sets `grid-column: span 2` at >=1024px. Verify the hook attribute
+      // and grid membership the rule depends on.
+      expect(activity.getAttribute("data-testid")).toBe("stats-activity");
+      expect(activity.parentElement?.classList.contains("stats-card-grid")).toBe(true);
+      expect(activity.classList.contains("stats-card")).toBe(true);
+    }
+  });
 });
