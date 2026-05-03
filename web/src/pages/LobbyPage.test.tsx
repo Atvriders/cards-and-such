@@ -1055,9 +1055,14 @@ describe("LobbyPage — list-mode toggle pagination/infinite (W183/W582)", () =>
     expect(screen.getByTestId("lobby-sentinel")).toBeInTheDocument();
     expect(screen.getByTestId("lobby-loaded-count")).toBeInTheDocument();
     // Prev/Next pagination controls are gone — the two modes are
-    // mutually exclusive in the rendered DOM.
+    // mutually exclusive in the rendered DOM. We also pin that the
+    // pagination toggle button itself remains mounted (the toggle
+    // group never collapses on a flip — only the FOOTER affordances
+    // swap), so a second click can return the user to pagination
+    // mode without a remount.
     expect(screen.queryByTestId("lobby-pager")).not.toBeInTheDocument();
     expect(screen.queryByTestId("lobby-pager-prev")).not.toBeInTheDocument();
     expect(screen.queryByTestId("lobby-pager-next")).not.toBeInTheDocument();
+    expect(screen.getByTestId("lobby-mode-pagination")).toBeInTheDocument();
   });
 });
