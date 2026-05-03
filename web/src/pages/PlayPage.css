@@ -66,6 +66,43 @@
   gap: 0.5rem;
 }
 
+/* Toolbar groups split the header-actions into two visual clusters:
+   - .play-toolbar-primary  → high-frequency in-game actions
+                              (undo / redo / hint / restart). Always visible.
+   - .play-toolbar-secondary → lower-frequency actions
+                              (share / friend / help / settings / setup /
+                              fullscreen). Inline on desktop; collapsed
+                              behind a ••• overflow toggle on mobile.
+   The groups are themselves flex rows so each cluster gets its own gap
+   without bleeding into the other. A subtle separator hairline between
+   them gives the eye a visual anchor without a hard divider element. */
+.play-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.play-toolbar-primary {
+  position: relative;
+}
+.play-toolbar-primary::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 22px;
+  margin-left: 0.25rem;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(148, 163, 184, 0.25),
+    transparent
+  );
+}
+/* Overflow toggle is desktop-hidden — the secondary group is rendered
+   inline alongside the primary on tablet/desktop. */
+.play-overflow-btn {
+  display: none;
+}
+
 /* Round icon-only buttons (help, settings) */
 .play-iconbtn {
   display: inline-flex;
@@ -1483,12 +1520,69 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 0.2rem;
+    /* The overflow-menu popover anchors to its toggle, so we need a
+       positioning context that doesn't get clipped by the scroll strip.
+       The popover itself uses position: fixed so the parent overflow is
+       irrelevant to its rendering. */
+    position: relative;
   }
   .play-header-actions::-webkit-scrollbar {
     display: none;
   }
   .play-header-actions > * {
     flex-shrink: 0;
+  }
+  /* On phones, drop the cosmetic separator — the inline scroll line
+     is already a strong enough horizontal cue. */
+  .play-toolbar-primary::after {
+    display: none;
+  }
+  /* Reveal the ••• toggle and collapse the secondary group into a
+     dropdown anchored to the right of the header-actions strip. */
+  .play-overflow-btn {
+    display: inline-flex;
+  }
+  .play-toolbar-secondary {
+    position: fixed;
+    top: auto;
+    right: 0.75rem;
+    /* Slight below-the-header offset; absolute positioning would clip
+       inside the scroll strip, so we use fixed and rely on the Esc /
+       outside-click handler to dismiss. */
+    margin-top: 0.4rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+    padding: 0.6rem;
+    border-radius: 14px;
+    background: rgba(15, 17, 28, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: 0 14px 40px -16px rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 50;
+    min-width: 180px;
+  }
+  .play-toolbar-secondary[data-overflow-open="false"] {
+    display: none;
+  }
+  .play-toolbar-secondary[data-overflow-open="true"] {
+    display: flex;
+  }
+  /* Inside the dropdown, buttons stretch to full width and surface their
+     tooltip text as a label so users have more than the icon to scan. */
+  .play-toolbar-secondary .play-iconbtn {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    justify-content: flex-start;
+    padding: 0 0.75rem;
+    gap: 0.6rem;
+  }
+  .play-toolbar-secondary .play-iconbtn::after {
+    content: attr(data-tooltip);
+    font-size: 0.85rem;
+    color: inherit;
   }
 }
 

@@ -587,6 +587,15 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [seedDraft, setSeedDraft] = useState<string>(() => String(seed));
   const seedPickerRef = useRef<HTMLDivElement | null>(null);
   const seedPickerBtnRef = useRef<HTMLButtonElement | null>(null);
+  // Mobile-only overflow menu (•••) state. Holds the "secondary" toolbar
+  // group (info, share-seed, share-friend, fullscreen, settings) which is
+  // hidden behind a single button on narrow viewports so the primary
+  // controls (undo/redo/hint/restart) stay reachable without horizontal
+  // scrolling. On desktop CSS forces the group open and hides the toggle,
+  // so this state is only consulted at mobile widths.
+  const [overflowOpen, setOverflowOpen] = useState(false);
+  const overflowBtnRef = useRef<HTMLButtonElement | null>(null);
+  const overflowMenuRef = useRef<HTMLDivElement | null>(null);
 
   /**
    * Best-effort fullscreen toggle on the play panel. Browsers vary on the
@@ -674,6 +683,33 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       window.removeEventListener("mousedown", onDown);
     };
   }, [seedPickerOpen]);
+
+  // Esc / outside-click closes the mobile overflow menu. Mirrors the
+  // seed-picker pattern so the same UX expectations apply.
+  useEffect(() => {
+    if (!overflowOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        setOverflowOpen(false);
+        overflowBtnRef.current?.focus();
+      }
+    };
+    const onDown = (e: MouseEvent) => {
+      const t = e.target as Node | null;
+      if (!t) return;
+      if (overflowMenuRef.current?.contains(t)) return;
+      if (overflowBtnRef.current?.contains(t)) return;
+      setOverflowOpen(false);
+    };
+    window.addEventListener("keydown", onKey, true);
+    window.addEventListener("mousedown", onDown);
+    return () => {
+      window.removeEventListener("keydown", onKey, true);
+      window.removeEventListener("mousedown", onDown);
+    };
+  }, [overflowOpen]);
 
   // Persist settings under `cards-game-settings:<gameId>` whenever they
   // change. Writes are best-effort; the helper swallows quota / private
@@ -1906,44 +1942,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               )}
             </span>
           )}
-          {phase === "playing" && (
-            <button
-              className="play-iconbtn play-share-btn"
-              onClick={() => { void shareSeed(); }}
-              title={shareStatus === "copied" ? "Seed URL copied!" : "Share seed"}
-              aria-label="Share seed"
-              data-tooltip={shareStatus === "copied" ? "Copied!" : "Share seed"}
-              data-testid="share-seed-btn"
-              type="button"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <circle cx="18" cy="5" r="3"></circle>
-                <circle cx="6" cy="12" r="3"></circle>
-                <circle cx="18" cy="19" r="3"></circle>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-              </svg>
-            </button>
-          )}
-          {phase === "playing" && plugin.players.multiplayer && (
-            <button
-              type="button"
-              className="play-iconbtn play-friend-btn"
-              onClick={() => { void shareFriendLink(); }}
-              title="Play with a friend (copies seeded link)"
-              aria-label="Play with a friend"
-              data-tooltip="Play with a friend"
-              data-testid="play-friend-btn"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-              <span className="play-hint-btn-label">Friend</span>
-            </button>
-          )}
+          {/* Primary toolbar group: high-frequency in-game actions
+              (undo / redo / hint / restart). Always visible — both desktop
+              and mobile — because these are the controls players reach for
+              every move. Restart lives here too so a quick reset is one
+              tap away on phones. */}
+          <div className="play-toolbar-group play-toolbar-primary" data-testid="play-toolbar-primary">
           {phase === "playing" && (
             <button
               type="button"
@@ -2021,6 +2025,90 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               <span className="play-hint-btn-label">
                 {hintCooldownEnabled && hintCooldown > 0 ? `${hintCooldown}s` : "Hint"}
               </span>
+            </button>
+          )}
+          {phase === "playing" && (
+            <button
+              type="button"
+              className="play-iconbtn"
+              onClick={replay}
+              title="Restart"
+              aria-label="Restart"
+              data-tooltip="Restart"
+              data-testid="play-restart-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+            </button>
+          )}
+          </div>
+          {/* Mobile-only overflow toggle. CSS hides the button on viewports
+              ≥ 600px and forces the secondary group open inline; below that
+              the button reveals the secondary group as a small popover. */}
+          {phase === "playing" && (
+            <button
+              ref={overflowBtnRef}
+              type="button"
+              className="play-iconbtn play-overflow-btn"
+              onClick={() => setOverflowOpen((v) => !v)}
+              aria-label="More actions"
+              aria-haspopup="menu"
+              aria-expanded={overflowOpen}
+              data-tooltip="More"
+              data-testid="play-overflow-btn"
+            >
+              <span aria-hidden="true" style={{ fontSize: 18, lineHeight: 1, letterSpacing: 1 }}>•••</span>
+            </button>
+          )}
+          {/* Secondary toolbar group: lower-frequency actions
+              (share / friend / help / settings / setup / fullscreen) that
+              players reach for occasionally. Collapsed behind the ••• menu
+              on phones; rendered inline on tablet/desktop. */}
+          <div
+            ref={overflowMenuRef}
+            className="play-toolbar-group play-toolbar-secondary"
+            data-testid="play-toolbar-secondary"
+            data-overflow-open={overflowOpen ? "true" : "false"}
+            role="menu"
+          >
+          {phase === "playing" && (
+            <button
+              className="play-iconbtn play-share-btn"
+              onClick={() => { void shareSeed(); }}
+              title={shareStatus === "copied" ? "Seed URL copied!" : "Share seed"}
+              aria-label="Share seed"
+              data-tooltip={shareStatus === "copied" ? "Copied!" : "Share seed"}
+              data-testid="share-seed-btn"
+              type="button"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </button>
+          )}
+          {phase === "playing" && plugin.players.multiplayer && (
+            <button
+              type="button"
+              className="play-iconbtn play-friend-btn"
+              onClick={() => { void shareFriendLink(); }}
+              title="Play with a friend (copies seeded link)"
+              aria-label="Play with a friend"
+              data-tooltip="Play with a friend"
+              data-testid="play-friend-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span className="play-hint-btn-label">Friend</span>
             </button>
           )}
           {(plugin.howToPlay || tutorialSteps) && phase === "playing" && (
@@ -2103,22 +2191,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               </svg>
             </button>
           )}
-          {phase === "playing" && (
-            <button
-              type="button"
-              className="play-iconbtn"
-              onClick={replay}
-              title="Restart"
-              aria-label="Restart"
-              data-tooltip="Restart"
-              data-testid="play-restart-btn"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <polyline points="23 4 23 10 17 10"></polyline>
-                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-              </svg>
-            </button>
-          )}
+          </div>
           <Link to="/" className="play-backbtn" title="Back to lobby" aria-label="Back to lobby">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
               <line x1="19" y1="12" x2="5" y2="12"></line>
