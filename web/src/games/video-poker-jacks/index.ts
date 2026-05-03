@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VideoPokerJacksState, VideoPokerJacksAction, VideoPokerJacksSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -13,4 +13,10 @@ export const videoPokerJacksPlugin: GamePlugin<VideoPokerJacksState, VideoPokerJ
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as VideoPokerJacksSettings),
   reducer, isTerminal, component: VideoPokerJacksGame,
+  hint: (state: VideoPokerJacksState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-video-poker-jacks-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-video-poker-jacks-next"]', pulses: 3 };
+    return null;
+  },
 };

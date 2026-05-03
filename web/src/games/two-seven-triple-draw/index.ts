@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TwoSevenTripleDrawState, TwoSevenTripleDrawAction, TwoSevenTripleDrawSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -13,4 +13,10 @@ export const twoSevenTripleDrawPlugin: GamePlugin<TwoSevenTripleDrawState, TwoSe
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TwoSevenTripleDrawSettings),
   reducer,isTerminal,component:TwoSevenTripleDrawGame,
+  hint: (state: TwoSevenTripleDrawState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-two-seven-triple-draw-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-two-seven-triple-draw-next"]', pulses: 3 };
+    return null;
+  },
 };

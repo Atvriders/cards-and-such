@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RebuyTournamentState, RebuyTournamentAction, RebuyTournamentSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -13,4 +13,10 @@ export const rebuyTournamentPlugin: GamePlugin<RebuyTournamentState, RebuyTourna
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RebuyTournamentSettings),
   reducer,isTerminal,component:RebuyTournamentGame,
+  hint: (state: RebuyTournamentState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-rebuy-tournament-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-rebuy-tournament-next"]', pulses: 3 };
+    return null;
+  },
 };

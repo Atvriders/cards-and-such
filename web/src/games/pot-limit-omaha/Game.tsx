@@ -13,10 +13,10 @@ export function PotLimitOmahaGame({ state, dispatch, onGameOver }: GameProps<Pot
       {state.hand.length > 0 && (
         <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       )}
-      {state.phase === "deal" && <button className="dm-btn" onClick={() => dispatch({ type: "deal" } as PotLimitOmahaAction)}>Deal {CARDS_PER_HAND} cards</button>}
+      {state.phase === "deal" && <button className="dm-btn" data-testid="hint-target-pot-limit-omaha-deal" onClick={() => dispatch({ type: "deal" } as PotLimitOmahaAction)}>Deal {CARDS_PER_HAND} cards</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.rank} — +{state.rankPts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PotLimitOmahaAction)}>Next</button>
+        <button className="dm-btn alt" data-testid="hint-target-pot-limit-omaha-next" onClick={() => dispatch({ type: "next" } as PotLimitOmahaAction)}>Next</button>
       </>}
     </div>
   );

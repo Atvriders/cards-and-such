@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ManilaPokerState, ManilaPokerAction, ManilaPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -13,4 +13,10 @@ export const manilaPokerPlugin: GamePlugin<ManilaPokerState, ManilaPokerAction, 
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ManilaPokerSettings),
   reducer,isTerminal,component:ManilaPokerGame,
+  hint: (state: ManilaPokerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-manila-poker-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-manila-poker-next"]', pulses: 3 };
+    return null;
+  },
 };

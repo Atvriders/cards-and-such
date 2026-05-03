@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BombPotState, BombPotAction, BombPotSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -13,4 +13,10 @@ export const bombPotPlugin: GamePlugin<BombPotState, BombPotAction, typeof setti
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BombPotSettings),
   reducer,isTerminal,component:BombPotGame,
+  hint: (state: BombPotState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-bomb-pot-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-bomb-pot-next"]', pulses: 3 };
+    return null;
+  },
 };
